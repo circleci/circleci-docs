@@ -4,14 +4,13 @@ title: CircleCI REST API
 last_updated: Aug 23, 2012
 
 ---
+{% assign api_data = site.data.api_data %}
 
 <h2 id="intro">The CircleCI API</h2>
 
 The CircleCI API is a RESTy, fully-featured API that allows you to do almost anything in CircleCI.
 You can access all information and trigger all actions.
 The only thing we don't provide access to is billing functions, which must be done from the CircleCI web UI.
-
---- TODO: Custom filter or something for this ---
 
 ## Summary
 
@@ -179,19 +178,20 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 
 ## User
 
-{{ api_data.me | api-endpoint }}
+{{ api_data.me | api_endpoint }}
+
 
 ## Projects
 
-{{ api_data.projects | api-endpoint }}
+{{ api_data.projects | api_endpoint }}
 
 <h2 id="recent-builds">Recent Builds Across All Projects</h2>
 
-{{ api_data.recent_builds | api-endpoint }}
+{{ api_data.recent_builds | api_endpoint }}
 
 <h2 id="recent-builds-project">Recent Builds For a Single Project</h2>
 
-{{ api_data.project | api-endpoint }}
+{{ api_data.project | api_endpoint }}
 
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 
@@ -204,76 +204,76 @@ The branch name should be url-encoded.
 
 <span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks](/docs/configuration#notify), in which case this object is the value to a key named 'payload'.
 
-{{ api_data.build | api-endpoint }}
+{{ api_data.build | api_endpoint }}
 
 <h2 id="build-artifacts">Artifacts of a Build</h2>
 
-{{ api_data.artifacts | api-endpoint }}
+{{ api_data.artifacts | api_endpoint }}
 
 <h2 id="retry-build">Retry a Build</h2>
 
-{{ api_data.retry_build | api-endpoint }}
+{{ api_data.retry_build | api_endpoint }}
 
 You can retry a build with ssh by swapping "retry" with "ssh":
 `https://circleci.com/api/v1/project/:username/:project/:build_num/ssh`
 
 <h2 id="add-user-ssh">Add User to Build</h2>
 
-{{ api_data.add_user_ssh | api-endpoint }}
+{{ api_data.add_user_ssh | api_endpoint }}
 
 <h2 id="cancel-build">Cancel a Build</h2>
 
-{{ api_data.cancel_build | api-endpoint }}
+{{ api_data.cancel_build | api_endpoint }}
 
 <h2 id="new-build">Trigger a new Build</h2>
 
 <span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds](/docs/parameterized-builds)
 
-{{ api_data.project_branch | api-endpoint }}
+{{ api_data.project_branch | api_endpoint }}
 
 <h2 id="clear-cache">Clear Cache</h2>
 
-{{ api_data.project_build_cache | api-endpoint}}
+{{ api_data.project_build_cache | api_endpoint}}
 
 <h2 id="list-environment-variables">List Environment Variables</h2>
 
-{{ api_data.list_environment_variables | api-endpoint}}
+{{ api_data.list_environment_variables | api_endpoint}}
 
 <h2 id="add-environment-variable">Add Environment Variables</h2>
 
-{{ api_data.add_environment_variable | api-endpoint}}
+{{ api_data.add_environment_variable | api_endpoint}}
 
 <h2 id="get-environment-variable">Get Single Environment Variable</h2>
 
-{{ api_data.get_environment_variable | api-endpoint}}
+{{ api_data.get_environment_variable | api_endpoint}}
 
 <h2 id="delete-environment-variable">Delete Environment Variables</h2>
 
-{{ api_data.delete_environment_variable | api-endpoint}}
+{{ api_data.delete_environment_variable | api_endpoint}}
 
 <h2 id="list-checkout-keys">List Checkout Keys</h2>
 
-{{ api_data.list_checkout_keys | api-endpoint}}
+{{ api_data.list_checkout_keys | api_endpoint}}
 
 <h2 id="new-checkout-key">New Checkout Key</h2>
 
-{{ api_data.new_checkout_key | api-endpoint}}
+{{ api_data.new_checkout_key | api_endpoint}}
 
 <h2 id="get-checkout-key">Get Checkout Key</h2>
 
-{{ api_data.get_checkout_key | api-endpoint}}
+{{ api_data.get_checkout_key | api_endpoint}}
 
 <h2 id="delete-checkout-key">Delete Checkout Key</h2>
 
-{{ api_data.delete_checkout_key | api-endpoint}}
+{{ api_data.delete_checkout_key | api_endpoint}}
 
 
 ## Test Metadata
 
-{{ api_data.test_metadata | api-endpoint }}
+{{ api_data.test_metadata | api_endpoint }}
 
 <span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata](/docs/test-metadata)
 
 ## SSH Keys
 
-{{ api_data.ssh_key | api-endpoint }}
+{{ api_data.ssh_key | api_endpoint }}
