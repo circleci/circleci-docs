@@ -19,3 +19,12 @@ github_username:  jekyll
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      layout: "default"
