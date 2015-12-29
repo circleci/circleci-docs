@@ -4,6 +4,7 @@ title: Install a custom version of Elasticsearch
 last_updated: March 10, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 CircleCI supports a large number of
 [services](/docs/environment#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:

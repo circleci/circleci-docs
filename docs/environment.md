@@ -4,6 +4,7 @@ title: Test environment
 last_updated: Apr 7, 2015
 
 ---
+{% assign versions = site.data.versions %}
 
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.
 In the future, we plan to allow as much of this to be configurable as possible.

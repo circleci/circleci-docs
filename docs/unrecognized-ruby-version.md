@@ -4,6 +4,7 @@ title: CircleCI does not recognize the Ruby version
 last_updated: Feb 3, 2013
 
 ---
+{% assign versions = site.data.versions %}
 
 We infer your Ruby version from your `.rvmrc` file, `.ruby-version` file, or Gemfile.
 You can also specify it in your [circle.yml](/docs/configuration#ruby-version)

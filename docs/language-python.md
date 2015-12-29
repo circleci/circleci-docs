@@ -5,6 +5,7 @@ short_title: Python
 last_updated: March 12, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 CircleCI works well for Python projects.
 We run automatic inference on each build to determine your dependencies and test commands.

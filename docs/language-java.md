@@ -5,6 +5,7 @@ short_title: Java
 last_updated: April 21, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 Circle supports building Java applications using most common JDKs and build tools.
 Before each build, we look at your repository and infer commands to run, so most

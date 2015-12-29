@@ -2,8 +2,8 @@
 
 title: Configuring CircleCI
 last_updated: August 1, 2014
-
 ---
+{% assign versions = site.data.versions %}
 
 CircleCI automatically infers your settings from your code, so CircleCI's normal processing works just fine in most circumstances.
 When it doesn't, the `circle.yml` file makes it easy to tell CircleCI what you need.

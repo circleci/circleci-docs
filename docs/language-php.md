@@ -5,6 +5,7 @@ short_title: PHP
 last_updated: March 12, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 Circle works seamlessly with all the tools and package managersthat
 help PHP developers test and deploy their code. We can generally infer

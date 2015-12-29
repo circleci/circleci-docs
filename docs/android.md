@@ -4,6 +4,7 @@ title: Test Android applications
 short_title: Android
 
 ---
+{% assign versions = site.data.versions %}
 
 # Android on CircleCI
 

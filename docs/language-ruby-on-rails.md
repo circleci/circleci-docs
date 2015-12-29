@@ -5,6 +5,7 @@ short_title: Ruby/Rails
 last_updated: March 12, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 CircleCI makes Rails testing simple. During each build, Circle looks at your code,
 infers your build environment, and runs your tests.

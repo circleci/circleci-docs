@@ -5,6 +5,7 @@ short_title: Node.js
 last_updated: February 13, 2015
 
 ---
+{% assign versions = site.data.versions %}
 
 Circle has great support for Node.js applications.
 We inspect your code before each build to infer your settings, dependencies, and test steps.

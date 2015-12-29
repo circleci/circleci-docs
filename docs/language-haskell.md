@@ -5,6 +5,7 @@ short_title: Haskell
 last_updated: April 17, 2014
 
 ---
+{% assign versions = site.data.versions %}
 
 Circle supports building Haskell applications with GHC and Cabal. Before each
 build we look at your repository and infer commands to run, so most

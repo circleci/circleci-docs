@@ -4,6 +4,7 @@ title: Test with Sphinx
 last_updated: Apr 7, 2015
 
 ---
+{% assign versions = site.data.versions %}
 
 If your tests require a running Sphinx server you will need to configure and
 start Sphinx before they run in CircleCI.
