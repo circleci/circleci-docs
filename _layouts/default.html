@@ -1,20 +1,56 @@
+---
+---
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="CircleCI" name="apple-mobile-web-app-title">
+    <meta content="{{ page.description }}" name="description">
+    <title>{{ page.title }}</title>
 
-  {% include head.html %}
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html',''}}">
+    <link href="{{ site.baseurl }}/outer/assets/img/favicon.ico" rel="icon" type="image/png">
+    <!-- Imported, compiled, and minified CSS -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/outer/assets/components/font-awesome/css/font-awesome.min.css">
+<!--    {% if page.style %}
+      {% for stylesheet in page.style %}
+        <link rel="stylesheet"
+              href="{{ site.assets }}css/pages/{{ stylesheet }}.css">
+      {% endfor %}
+    {% else %}
+      <link rel="stylesheet"
+            href="{{ site.assets }}css/pages/site.css">
+    {% endif %}
+      {% include mixpanel.html %} -->
+<link rel="stylesheet" href="{{ site.baseurl }}/outer/assets/css/pages/page-documentation.css">
 
+  </head>
   <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
+    {% include tag-manager.html %}
+    <div class="outer">
+      {% include nav.html %}
+      {% if page.subnav %}
+        {% include subnav-{{ page.subnav }}.html %}
+      {% endif %}
+      <div class="main-body">
         {{ content }}
+        {% include footer.html %}
       </div>
     </div>
 
-    {% include footer.html %}
-
+<!--    <script src="{{ site.assets }}build/js/site.min.js"></script>
+    {% if page.script %}
+      {% for javascript in page.script %}
+        <script src="{{ site.assets }}build/js/{{ javascript }}.min.js"></script>
+      {% endfor %}
+    {% endif %}
+    <script type="text/javascript">
+      var circleEnvironment = "{{ site.env }}"
+    </script> -->
+    <!--script src="https://circleci.com/outer/assets/build/js/site.min.js"></script-->
   </body>
-
 </html>
