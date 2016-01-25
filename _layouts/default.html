@@ -16,18 +16,8 @@
     <link href="{{ site.baseurl }}/outer/assets/img/favicon.ico" rel="icon" type="image/png">
     <!-- Imported, compiled, and minified CSS -->
     <link rel="stylesheet" href="{{ site.baseurl }}/outer/assets/components/font-awesome/css/font-awesome.min.css">
-<!--    {% if page.style %}
-      {% for stylesheet in page.style %}
-        <link rel="stylesheet"
-              href="{{ site.assets }}css/pages/{{ stylesheet }}.css">
-      {% endfor %}
-    {% else %}
-      <link rel="stylesheet"
-            href="{{ site.assets }}css/pages/site.css">
-    {% endif %}
-      {% include mixpanel.html %} -->
-<link rel="stylesheet" href="{{ site.baseurl }}/outer/assets/css/pages/page-documentation.css">
-
+      <link rel="stylesheet" href="{{ site.assets }}css/pages/site.css">
+    {% include mixpanel.html %}
   </head>
   <body>
     {% include tag-manager.html %}
@@ -42,7 +32,7 @@
       </div>
     </div>
 
-<!--    <script src="{{ site.assets }}build/js/site.min.js"></script>
+    <script src="{{ site.assets }}build/js/site.min.js"></script>
     {% if page.script %}
       {% for javascript in page.script %}
         <script src="{{ site.assets }}build/js/{{ javascript }}.min.js"></script>
@@ -50,7 +40,6 @@
     {% endif %}
     <script type="text/javascript">
       var circleEnvironment = "{{ site.env }}"
-    </script> -->
-    <!--script src="https://circleci.com/outer/assets/build/js/site.min.js"></script-->
+    </script>
   </body>
 </html>

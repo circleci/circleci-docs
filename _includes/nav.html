@@ -35,10 +35,29 @@
           </ul>
         </li>
         <li class="{% if page.nav-hl == 'pricing' %}active{% endif %}"><a href="{{site.baseurl}}/pricing/" class="menu-item">Pricing</a></li>
-        <li><a href="{{site.baseurl}}/docs/" class="menu-item">Documentation</a></li>
-        <li><a href="https://discuss.circleci.com/" class="menu-item">Discuss</a></li>
-        <li class="{% if page.nav-hl == 'about' %}active{% endif %}"><a href="{{site.baseurl}}/about/" class="menu-item">About Us</a></li>
-        <li><a href="http://blog.circleci.com" class="menu-item">Blog</a></li>
+        <li class="{% if page.nav-hl == 'customers' %}active{% endif %}"><a href="{{site.baseurl}}/customers/" class="menu-item">Customers</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="{{site.baseurl}}/docs/" class="sub menu-item">Documentation</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="https://discuss.circleci.com/" class="sub menu-item">Community</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown {% if page.nav-hl == 'about' %}active{% endif %}">
+          <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="{{site.baseurl}}/about/" class="sub menu-item">About Us</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="http://blog.circleci.com" class="sub menu-item">Blog</a>
+            </li>
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="https://circleci.com/login" title="Log In with Github" class="login login-link menu-item">Log In</a></li>
