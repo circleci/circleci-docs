@@ -2,22 +2,164 @@
 layout: default
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+<div class="docs page">
+<div class="content">
+<div class="container-fluid article-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <article>
+        <form class="doc-search">
+          <input autocomplete="off" class="form-control" id="searchQuery" name=
+          "query" placeholder="What can we help you find?" type="text">
+        </form>
+        <div>
+          <div class="front-page">
+            <h2>Featured Docs</h2>
+            <div class="front-page-features">
+              <a class="front-page-feature" href="/docs/getting-started">
+                <div class="logo"></div>
+                <h3>Getting Started</h3>
+                <p>Everything you need to know to get up and running with CircleCI.</p>
+              </a>
+              <a class="front-page-feature" href=
+                 "/docs/test-metadata">
+                <div class="logo"></div>
+                <h3>Insights</h3>
+                <p>Learn how to let CircleCI understand and provide deep insights
+                  into your builds.</p>
+              </a>
+              <a class="front-page-feature" href="/docs/docker">
+                <div class="logo"></div>
+                <h3>Docker</h3>
+                <p>Learn how to build, test, and deploy Docker-based applications
+                  and services from CircleCI to AWS, Google Cloud, and other
+                  hosts.</p>
+              </a>
+              <a class="front-page-feature" href="/docs/ios">
+                <div class="logo"></div>
+                <h3>Mobile</h3>
+                <p>Find out how to build and test iOS and Android apps on
+                  CircleCI, as well as how to deploy them to beta users with tools
+                  like TestFlight and HockeyApp.</p>
+              </a>
+            </div>
+            <h2>All Categories</h2>
+            <div class="front-page-categories">
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-gettingstarted" src=
+                "https://dev.circlehost:4443/img/outer/docs/gettingstarted.svg">
+                <h3>Getting Started</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/getting-started">Getting started with
+                    CircleCI</a>
+                  </li>
+                  <li>
+                    <a href="/docs/gettingstarted"><em>5 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-languages" src=
+                "https://dev.circlehost:4443/img/outer/docs/languages.svg">
+                <h3>Languages</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/language-ruby-on-rails">Continuous
+                    Integration and Continuous Deployment with Ruby/Rails</a>
+                  </li>
+                  <li>
+                    <a href="/docs/languages"><em>6 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-mobile" src=
+                "https://dev.circlehost:4443/img/outer/docs/mobile.svg">
+                <h3>Mobile Platforms</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/android">Test Android applications</a>
+                  </li>
+                  <li>
+                    <a href="/docs/mobile"><em>1 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-how-to" src=
+                "https://dev.circlehost:4443/img/outer/docs/how-to.svg">
+                <h3>How-To</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/installing-custom-software">Install custom
+                    software</a>
+                  </li>
+                  <li>
+                    <a href="/docs/how-to"><em>18 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-troubleshooting" src=
+                "https://dev.circlehost:4443/img/outer/docs/troubleshooting.svg">
+                <h3>Troubleshooting</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/troubleshooting-guide">Troubleshooting
+                    guide</a>
+                  </li>
+                  <li>
+                    <a href="/docs/troubleshooting"><em>12 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-reference" src=
+                "https://dev.circlehost:4443/img/outer/docs/reference.svg">
+                <h3>Reference</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/configuration">Configuring CircleCI</a>
+                  </li>
+                  <li>
+                    <a href="/docs/reference"><em>10 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-parallelism" src=
+                "https://dev.circlehost:4443/img/outer/docs/parallelism.svg">
+                <h3>Parallelism</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/setting-up-parallelism">Setting up
+                    parallelism</a>
+                  </li>
+                  <li>
+                    <a href="/docs/parallelism"><em>3 more</em></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="front-page-category">
+                <img class="logo" id="doc-image-privacy-security" src=
+                "https://dev.circlehost:4443/img/outer/docs/privacy-security.svg">
+                <h3>Privacy and Security</h3>
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/docs/github-privacy">Github integration</a>
+                  </li>
+                  <li>
+                    <a href="/docs/privacy-security"><em>1 more</em></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+</div>
 </div>
