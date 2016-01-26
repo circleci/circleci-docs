@@ -2,6 +2,8 @@
 
 title: Test with Sphinx
 last_updated: Apr 7, 2015
+tags:
+  - sphinx
 
 ---
 {% assign versions = site.data.versions %}

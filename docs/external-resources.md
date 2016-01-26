@@ -2,6 +2,8 @@
 
 title: Use resources which are not in your repository
 last_updated: Feb 2, 2012
+tags:
+  - how-to
 
 ---
 

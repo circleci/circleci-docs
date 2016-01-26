@@ -3,6 +3,8 @@
 title: Frequently Asked Questions
 short_title: FAQ
 last_updated: February 23, 2015
+tags:
+  - getting-started
 
 ---
 

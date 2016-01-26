@@ -2,6 +2,9 @@
 
 title: Getting started with CircleCI
 last_updated: April 29, 2013
+layout: doc
+tags:
+  - getting-started
 
 ---
 

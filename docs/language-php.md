@@ -3,6 +3,9 @@
 title: Continuous Integration and Continuous Deployment with PHP
 short_title: PHP
 last_updated: March 12, 2014
+tags:
+  - php
+  - language-guides
 
 ---
 {% assign versions = site.data.versions %}

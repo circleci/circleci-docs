@@ -2,6 +2,7 @@
 
 title: CircleCI REST API
 last_updated: Aug 23, 2012
+layout: doc
 
 ---
 {% assign api_data = site.data.api_data %}

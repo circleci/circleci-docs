@@ -3,6 +3,8 @@
 title: Generating code coverage metrics
 short_title: Code Coverage
 last_updated: Sep 12, 2013
+tags:
+  - how-to
 
 ---
 

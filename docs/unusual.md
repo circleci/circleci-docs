@@ -2,6 +2,8 @@
 
 title: Can I test projects with unusual requirements?
 last_updated: April 29, 2013
+tags:
+  - getting-started
 
 ---
 

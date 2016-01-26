@@ -2,6 +2,7 @@
 
 title: Adding read/write deployment key
 last_updated: Jul 23, 2015
+layout: doc
 
 ---
 

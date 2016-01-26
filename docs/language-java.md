@@ -3,6 +3,9 @@
 title: Continuous Integration and Continuous Deployment with Java
 short_title: Java
 last_updated: April 21, 2014
+tags:
+  - java
+  - language-guides
 
 ---
 {% assign versions = site.data.versions %}

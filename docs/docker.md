@@ -2,6 +2,8 @@
 
 title: Continuous Integration and Delivery with Docker
 last_updated: December 8, 2014
+tags:
+  - docker
 
 ---
 

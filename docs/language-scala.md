@@ -3,6 +3,10 @@
 title: Continuous Integration and Continuous Deployment with Scala
 short_title: Scala
 last_updated: Mar 3, 2015
+layout: doc
+tags:
+  - scala
+  - language-guides
 
 ---
 

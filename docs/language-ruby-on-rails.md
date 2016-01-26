@@ -3,6 +3,9 @@
 title: Continuous Integration and Continuous Deployment with Ruby/Rails
 short_title: Ruby/Rails
 last_updated: March 12, 2014
+tags:
+  - ruby
+  - language-guides
 
 ---
 {% assign versions = site.data.versions %}

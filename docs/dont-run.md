@@ -2,6 +2,8 @@
 
 title: Skip code which should not run on your CI server
 last_updated: Feb 2, 2013
+tags:
+  - how-to
 
 ---
 

@@ -2,6 +2,8 @@
 
 title: Manual build setup
 last_updated: April 29, 2013
+tags:
+  - getting-started
 
 ---
 
