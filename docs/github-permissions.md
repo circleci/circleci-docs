@@ -2,6 +2,9 @@
 
 title: Why does CircleCI need all those permissions?
 layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

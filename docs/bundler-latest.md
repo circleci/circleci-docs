@@ -2,6 +2,9 @@
 
 title: Do you need the latest version of Bundler?
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

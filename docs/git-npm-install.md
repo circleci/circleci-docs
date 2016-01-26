@@ -2,6 +2,9 @@
 
 title: Git errors during npm install
 layout: doc
+tags:
+  - troubleshooting
+  - nodejs
 
 ---
 

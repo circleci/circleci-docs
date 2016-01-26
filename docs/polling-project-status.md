@@ -2,6 +2,8 @@
 
 title: Polling project status using CCMenu, CCTray, etc.
 layout: doc
+tags:
+  - reference
 
 ---
 

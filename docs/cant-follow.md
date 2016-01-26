@@ -2,6 +2,9 @@
 
 title: Why can I not follow a project?
 layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

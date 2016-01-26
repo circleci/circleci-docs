@@ -4,6 +4,7 @@ title: Configuring CircleCI
 layout: doc
 tags:
   - getting-started
+  - reference
 
 ---
 {% assign versions = site.data.versions %}

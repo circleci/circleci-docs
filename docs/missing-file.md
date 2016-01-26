@@ -2,6 +2,9 @@
 
 title: An important file is missing from your repository
 layout: doc
+tags:
+  - troubleshooting
+  - filesystem
 
 ---
 

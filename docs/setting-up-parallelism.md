@@ -4,6 +4,7 @@ title: Setting up parallelism
 layout: doc
 tags:
   - getting-started
+  - parallelism
 
 ---
 

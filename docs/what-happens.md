@@ -2,6 +2,9 @@
 
 title: What happens when you add a project?
 layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

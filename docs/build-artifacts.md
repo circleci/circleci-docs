@@ -2,6 +2,8 @@
 
 title: Build artifacts
 layout: doc
+tags:
+  - reference
 
 ---
 

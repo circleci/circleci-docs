@@ -2,6 +2,8 @@
 
 title: Does parallelism really work?
 layout: doc
+tags:
+  - parallelism
 
 ---
 

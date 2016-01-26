@@ -2,6 +2,9 @@
 
 title: GitHub security and SSH keys
 layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

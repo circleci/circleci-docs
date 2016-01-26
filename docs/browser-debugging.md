@@ -2,6 +2,9 @@
 
 title: Interacting with the browser on CircleCI's VM
 layout: doc
+tags:
+  - troubleshooting
+  - browsers
 
 ---
 

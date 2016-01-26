@@ -2,6 +2,9 @@
 
 title: Git errors during pip install
 layout: doc
+tags:
+  - troubleshooting
+  - python
 
 ---
 

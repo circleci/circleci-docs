@@ -2,6 +2,9 @@
 
 title: Git errors during a bundle install
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

@@ -2,6 +2,8 @@
 
 title: Does Circle look at my code?
 layout: doc
+tags:
+  - privacy-security
 
 ---
 

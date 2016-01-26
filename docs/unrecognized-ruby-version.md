@@ -2,6 +2,9 @@
 
 title: CircleCI does not recognize the Ruby version
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 {% assign versions = site.data.versions %}

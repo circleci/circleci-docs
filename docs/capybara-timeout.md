@@ -2,6 +2,9 @@
 
 title: "unable to obtain stable firefox connection in 60 seconds"
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

@@ -2,6 +2,9 @@
 
 title: Time-based results are a few seconds off
 layout: doc
+tags:
+  - troubleshooting
+  - time-and-date
 
 ---
 

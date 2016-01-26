@@ -2,6 +2,9 @@
 
 title: "java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite"
 layout: doc
+tags:
+  - troubleshooting
+  - clojure
 
 ---
 

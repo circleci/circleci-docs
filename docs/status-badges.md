@@ -2,6 +2,8 @@
 
 title: Embeddable status badges
 layout: doc
+tags:
+  - reference
 
 ---
 

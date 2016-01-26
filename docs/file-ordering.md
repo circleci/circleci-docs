@@ -2,6 +2,8 @@
 
 title: File-ordering bugs on Linux systems
 layout: doc
+tags:
+  - troubleshooting
 
 ---
 

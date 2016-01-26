@@ -2,6 +2,8 @@
 
 title: CircleCI REST API
 layout: doc
+tags:
+  - reference
 
 ---
 {% assign api_data = site.data.api_data %}

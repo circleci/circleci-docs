@@ -2,6 +2,9 @@
 
 title: Rake giving ActionFailed errors
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

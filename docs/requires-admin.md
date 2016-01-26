@@ -2,6 +2,9 @@
 
 title: CircleCI requires Admin permissions
 layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

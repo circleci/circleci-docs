@@ -2,6 +2,9 @@
 
 title: rake db:schema:load fails
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

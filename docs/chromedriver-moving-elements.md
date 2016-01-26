@@ -2,6 +2,10 @@
 
 title: ChromeDriver raises an 'Element is not clickable' exception
 layout: doc
+tags:
+  - troubleshooting
+  - browsers
+
 
 ---
 

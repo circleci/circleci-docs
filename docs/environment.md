@@ -2,6 +2,8 @@
 
 title: Test environment
 layout: doc
+tags:
+  - reference
 
 ---
 {% assign versions = site.data.versions %}

@@ -2,6 +2,8 @@
 
 title: Environment variables
 layout: doc
+tags:
+  - reference
 
 ---
 

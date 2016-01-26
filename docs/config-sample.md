@@ -2,6 +2,8 @@
 
 title: Sample circle.yml file
 layout: doc
+tags:
+  - reference
 
 ---
 

@@ -2,6 +2,9 @@
 
 title: RSpec is failing but CircleCI reports my tests have passed
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

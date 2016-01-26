@@ -2,6 +2,9 @@
 
 title: CircleCI is running the Ruby commands not present in the config
 layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

@@ -2,6 +2,8 @@
 
 title: How cache works
 layout: doc
+tags:
+  - reference
 
 ---
 
