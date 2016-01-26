@@ -1,6 +1,7 @@
 ---
 
 title: Permissions and access during deployment
+layout: doc
 
 ---
 

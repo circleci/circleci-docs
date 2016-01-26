@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Delivery with Docker
+layout: doc
 tags:
   - docker
 

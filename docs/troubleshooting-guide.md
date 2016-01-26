@@ -1,6 +1,7 @@
 ---
 
 title: Troubleshooting guide
+layout: doc
 short_title: Troubleshooting guide
 
 ---

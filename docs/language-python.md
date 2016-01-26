@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Python
+layout: doc
 short_title: Python
 
 ---

@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Deployment with Ninefold
+layout: doc
 tags:
   - how-to
 

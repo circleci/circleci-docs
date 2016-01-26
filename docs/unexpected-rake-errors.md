@@ -1,6 +1,7 @@
 ---
 
 title: Rake giving ActionFailed errors
+layout: doc
 
 ---
 

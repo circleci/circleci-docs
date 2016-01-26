@@ -1,6 +1,7 @@
 ---
 
 title: Test with Sphinx
+layout: doc
 tags:
   - sphinx
 

@@ -1,6 +1,7 @@
 ---
 
 title: A directory is missing from your repository
+layout: doc
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 
 title: Time-based results are a few seconds off
+layout: doc
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with PHP
+layout: doc
 short_title: PHP
 tags:
   - php

@@ -1,6 +1,7 @@
 ---
 
 title: Parameterized Builds
+layout: doc
 
 ---
 

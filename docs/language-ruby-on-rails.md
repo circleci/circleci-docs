@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Ruby/Rails
+layout: doc
 short_title: Ruby/Rails
 tags:
   - ruby

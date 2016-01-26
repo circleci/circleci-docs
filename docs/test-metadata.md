@@ -1,6 +1,7 @@
 ---
 
 title: Collecting test metadata
+layout: doc
 
 ---
 

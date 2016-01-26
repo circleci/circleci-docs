@@ -1,6 +1,7 @@
 ---
 
 title: Nightly Builds
+layout: doc
 tags:
   - how-to
 

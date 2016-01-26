@@ -1,6 +1,7 @@
 ---
 
 title: Generating code coverage metrics
+layout: doc
 short_title: Code Coverage
 tags:
   - how-to

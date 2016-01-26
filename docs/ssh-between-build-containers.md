@@ -1,6 +1,7 @@
 ---
 
 title: SSH between build containers
+layout: doc
 
 ---
 

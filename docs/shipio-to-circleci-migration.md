@@ -1,6 +1,7 @@
 ---
 
 title: Ship.io to CircleCI Migration
+layout: doc
 short_title: Ship.io
 
 ---

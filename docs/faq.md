@@ -1,6 +1,7 @@
 ---
 
 title: Frequently Asked Questions
+layout: doc
 short_title: FAQ
 tags:
   - getting-started

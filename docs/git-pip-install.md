@@ -1,6 +1,7 @@
 ---
 
 title: Git errors during pip install
+layout: doc
 
 ---
 

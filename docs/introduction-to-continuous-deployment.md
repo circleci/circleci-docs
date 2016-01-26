@@ -1,6 +1,7 @@
 ---
 
 title: Introduction to Continuous Deployment
+layout: doc
 
 ---
 

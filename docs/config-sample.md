@@ -1,6 +1,7 @@
 ---
 
 title: Sample circle.yml file
+layout: doc
 
 ---
 

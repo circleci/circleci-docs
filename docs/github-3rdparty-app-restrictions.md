@@ -1,6 +1,7 @@
 ---
 
 title: Re-enabling CircleCI after enabling third-party application restrictions for a GitHub organization
+layout: doc
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 
 title: How-To
+layout: doc
 children:
   - installing-custom-software
   - background-process

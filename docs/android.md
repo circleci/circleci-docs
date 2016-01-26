@@ -1,8 +1,8 @@
 ---
 
 title: Test Android applications
-short_title: Android
 layout: doc
+short_title: Android
 
 ---
 {% assign versions = site.data.versions %}

@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Java
+layout: doc
 short_title: Java
 tags:
   - java

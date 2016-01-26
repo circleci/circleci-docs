@@ -1,6 +1,7 @@
 ---
 
 title: Composer hitting GitHub API rate limits
+layout: doc
 
 ---
 

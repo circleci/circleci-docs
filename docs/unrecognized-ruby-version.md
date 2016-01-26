@@ -1,6 +1,7 @@
 ---
 
 title: CircleCI does not recognize the Ruby version
+layout: doc
 
 ---
 {% assign versions = site.data.versions %}

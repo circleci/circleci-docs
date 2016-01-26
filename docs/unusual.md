@@ -1,6 +1,7 @@
 ---
 
 title: Can I test projects with unusual requirements?
+layout: doc
 tags:
   - getting-started
 

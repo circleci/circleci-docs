@@ -1,6 +1,7 @@
 ---
 
 title: Test with Sauce Labs
+layout: doc
 tags:
   - how-to
 

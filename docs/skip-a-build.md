@@ -1,6 +1,7 @@
 ---
 
 title: Skip a build
+layout: doc
 tags:
   - how-to
 

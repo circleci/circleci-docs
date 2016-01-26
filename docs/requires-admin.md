@@ -1,6 +1,7 @@
 ---
 
 title: CircleCI requires Admin permissions
+layout: doc
 
 ---
 

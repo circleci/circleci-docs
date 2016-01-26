@@ -1,6 +1,7 @@
 ---
 
 title: Adding memcached with pecl on CircleCI
+layout: doc
 
 ---
 

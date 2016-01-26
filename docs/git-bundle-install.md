@@ -1,6 +1,7 @@
 ---
 
 title: Git errors during a bundle install
+layout: doc
 
 ---
 

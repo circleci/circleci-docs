@@ -1,6 +1,7 @@
 ---
 
 title: The Ruby debugger gem won't build
+layout: doc
 
 ---
 

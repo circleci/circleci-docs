@@ -1,6 +1,7 @@
 ---
 
 title: Manually setting up parallelism
+layout: doc
 
 ---
 

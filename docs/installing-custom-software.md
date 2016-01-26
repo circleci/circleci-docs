@@ -1,6 +1,7 @@
 ---
 
 title: Install custom software
+layout: doc
 tags:
   - how-to
 

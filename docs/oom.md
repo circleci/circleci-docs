@@ -1,6 +1,7 @@
 ---
 
 title: Your build hit the 4G memory limit
+layout: doc
 
 ---
 

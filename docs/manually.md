@@ -1,6 +1,7 @@
 ---
 
 title: Manual build setup
+layout: doc
 tags:
   - getting-started
 

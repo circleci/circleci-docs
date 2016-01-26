@@ -1,6 +1,7 @@
 ---
 
 title: Skip code which should not run on your CI server
+layout: doc
 tags:
   - how-to
 

@@ -1,6 +1,7 @@
 ---
 
 title: Environment variables
+layout: doc
 
 ---
 

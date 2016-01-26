@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Node.js
+layout: doc
 short_title: Node.js
 tags:
   - nodejs

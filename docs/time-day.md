@@ -1,6 +1,7 @@
 ---
 
 title: Time-based results are one day off
+layout: doc
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 
 title: Reference
+layout: doc
 children:
   - configuration
   - config-sample

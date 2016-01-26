@@ -1,6 +1,7 @@
 ---
 
 title: Start background processes from circle.yml
+layout: doc
 tags:
   - how-to
 

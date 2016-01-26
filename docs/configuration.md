@@ -1,6 +1,7 @@
 ---
 
 title: Configuring CircleCI
+layout: doc
 tags:
   - getting-started
 

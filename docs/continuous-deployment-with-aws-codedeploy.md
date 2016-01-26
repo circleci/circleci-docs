@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Deployment with AWS CodeDeploy
+layout: doc
 tags:
   - how-to
 

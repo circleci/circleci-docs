@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Deployment with Heroku
+layout: doc
 tags:
   - how-to
 

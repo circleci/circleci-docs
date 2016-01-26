@@ -1,8 +1,8 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Scala
-short_title: Scala
 layout: doc
+short_title: Scala
 tags:
   - scala
   - language-guides

@@ -1,6 +1,7 @@
 ---
 
 title: Pushing packages to packagecloud
+layout: doc
 tags:
   - how-to
 

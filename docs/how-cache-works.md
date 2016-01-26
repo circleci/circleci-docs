@@ -1,6 +1,7 @@
 ---
 
 title: How cache works
+layout: doc
 
 ---
 

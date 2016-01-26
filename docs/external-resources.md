@@ -1,6 +1,7 @@
 ---
 
 title: Use resources which are not in your repository
+layout: doc
 tags:
   - how-to
 

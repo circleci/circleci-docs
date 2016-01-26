@@ -1,6 +1,7 @@
 ---
 
 title: Why does CircleCI need all those permissions?
+layout: doc
 
 ---
 

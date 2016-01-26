@@ -1,6 +1,7 @@
 ---
 
 title: GitHub security and SSH keys
+layout: doc
 
 ---
 

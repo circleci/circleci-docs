@@ -1,6 +1,7 @@
 ---
 
 title: Test with Solr
+layout: doc
 tags:
   - how-to
 

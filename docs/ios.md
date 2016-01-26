@@ -1,6 +1,7 @@
 ---
 
 title: Test iOS applications
+layout: doc
 short_title: iOS
 
 ---

@@ -1,6 +1,7 @@
 ---
 
 title: Does Circle look at my code?
+layout: doc
 
 ---
 

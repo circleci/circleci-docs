@@ -1,6 +1,7 @@
 ---
 
 title: Continuous Deployment to IBM Bluemix and Pivotal Web Service
+layout: doc
 tags:
   - how-to
 
