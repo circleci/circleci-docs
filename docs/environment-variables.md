@@ -1,7 +1,6 @@
 ---
 
 title: Environment variables
-last_updated: Apr 13, 2015
 
 ---
 

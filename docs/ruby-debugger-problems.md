@@ -1,7 +1,6 @@
 ---
 
 title: The Ruby debugger gem won't build
-last_updated: Dec 20, 2013
 
 ---
 

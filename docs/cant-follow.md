@@ -1,7 +1,6 @@
 ---
 
 title: Why can I not follow a project?
-last_updated: Feb 2, 2013
 layout: doc
 
 ---

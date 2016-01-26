@@ -1,7 +1,6 @@
 ---
 
 title: GitHub security and SSH keys
-last_updated: May 1, 2013
 
 ---
 

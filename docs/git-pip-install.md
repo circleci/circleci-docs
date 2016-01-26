@@ -1,7 +1,6 @@
 ---
 
 title: Git errors during pip install
-last_updated: Feb 3, 2013
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 
 title: Your build hit the 4G memory limit
-last_updated: Feb 25, 2014
 
 ---
 

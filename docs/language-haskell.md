@@ -2,7 +2,6 @@
 
 title: Continuous Integration and Continuous Deployment with Haskell
 short_title: Haskell
-last_updated: April 17, 2014
 tags:
   - haskell
   - language-guides

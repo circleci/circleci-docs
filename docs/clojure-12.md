@@ -1,7 +1,6 @@
 ---
 
 title: "java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite"
-last_updated: Feb 2, 2013
 layout: doc
 
 ---

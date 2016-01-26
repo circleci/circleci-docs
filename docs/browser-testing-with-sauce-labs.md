@@ -1,7 +1,6 @@
 ---
 
 title: Test with Sauce Labs
-last_updated: July 28, 2014
 tags:
   - how-to
 

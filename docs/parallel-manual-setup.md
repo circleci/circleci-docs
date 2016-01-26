@@ -1,7 +1,6 @@
 ---
 
 title: Manually setting up parallelism
-last_updated: Feb 2, 2013
 
 ---
 

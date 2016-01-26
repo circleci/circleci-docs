@@ -1,7 +1,6 @@
 ---
 
 title: Install custom software
-last_updated: May 2, 2013
 tags:
   - how-to
 

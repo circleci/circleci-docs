@@ -1,7 +1,6 @@
 ---
 
 title: Does Circle look at my code?
-last_updated: Feb 2, 2013
 
 ---
 

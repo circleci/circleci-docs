@@ -1,7 +1,6 @@
 ---
 
 title: Unexpected Timeouts During `cabal test`
-last_updated:
 layout: doc
 
 ---

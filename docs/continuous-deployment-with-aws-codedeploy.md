@@ -1,7 +1,6 @@
 ---
 
 title: Continuous Deployment with AWS CodeDeploy
-last_updated: September 29, 2014
 tags:
   - how-to
 

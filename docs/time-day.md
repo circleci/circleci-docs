@@ -1,7 +1,6 @@
 ---
 
 title: Time-based results are one day off
-last_updated: Feb 3, 2013
 
 ---
 

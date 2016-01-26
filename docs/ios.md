@@ -2,7 +2,6 @@
 
 title: Test iOS applications
 short_title: iOS
-last_updated: August 28, 2015
 
 ---
 

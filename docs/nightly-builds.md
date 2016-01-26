@@ -1,7 +1,6 @@
 ---
 
 title: Nightly Builds
-last_updated: May 22, 2014
 tags:
   - how-to
 

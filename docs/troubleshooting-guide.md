@@ -2,7 +2,6 @@
 
 title: Troubleshooting guide
 short_title: Troubleshooting guide
-last_updated: February 26, 2015
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 
 title: Setting up parallelism
-last_updated: Nov 21, 2014
 tags:
   - getting-started
 

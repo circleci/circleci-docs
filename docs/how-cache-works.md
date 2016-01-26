@@ -1,7 +1,6 @@
 ---
 
 title: How cache works
-last_updated: Jun 25, 2015
 
 ---
 

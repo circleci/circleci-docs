@@ -1,7 +1,6 @@
 ---
 
 title: Parameterized Builds
-last_updated: May 22, 2014
 
 ---
 

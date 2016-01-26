@@ -1,7 +1,6 @@
 ---
 
 title: Sample circle.yml file
-last_updated: May 2, 2013
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 
 title: Introduction to Continuous Deployment
-last_updated: March 12, 2014
 
 ---
 

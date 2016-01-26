@@ -1,7 +1,6 @@
 ---
 
 title: Rake giving ActionFailed errors
-last_updated: Feb 3, 2013
 
 ---
 

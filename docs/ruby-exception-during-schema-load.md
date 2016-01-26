@@ -1,7 +1,6 @@
 ---
 
 title: rake db:schema:load fails
-last_updated: Feb 3, 2013
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 
 title: Configuring CircleCI
-last_updated: August 1, 2014
 tags:
   - getting-started
 

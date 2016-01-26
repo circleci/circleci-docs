@@ -1,7 +1,6 @@
 ---
 
 title: CircleCI REST API
-last_updated: Aug 23, 2012
 layout: doc
 
 ---
