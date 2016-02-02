@@ -2,6 +2,7 @@
 
 title: Configuring CircleCI
 layout: doc
+popularity: 10
 tags:
   - getting-started
   - reference

@@ -3,6 +3,7 @@
 title: Continuous Integration and Continuous Deployment with Node.js
 layout: doc
 short_title: Node.js
+popularity: 5
 tags:
   - nodejs
   - language-guides

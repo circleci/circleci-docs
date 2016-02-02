@@ -2,6 +2,7 @@
 
 title: CircleCI REST API
 layout: doc
+popularity: 1
 tags:
   - reference
 

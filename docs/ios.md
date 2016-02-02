@@ -3,6 +3,7 @@
 title: Test iOS applications
 layout: doc
 short_title: iOS
+popularity: 4
 tags:
   - mobile
 

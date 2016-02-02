@@ -2,6 +2,7 @@
 
 title: Continuous Integration and Delivery with Docker
 layout: doc
+popularity: 9
 tags:
   - docker
   - how-to

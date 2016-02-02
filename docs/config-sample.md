@@ -2,6 +2,7 @@
 
 title: Sample circle.yml file
 layout: doc
+popularity: 6
 tags:
   - reference
 

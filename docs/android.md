@@ -3,6 +3,7 @@
 title: Test Android applications
 layout: doc
 short_title: Android
+popularity: 2
 tags:
   - mobile
 

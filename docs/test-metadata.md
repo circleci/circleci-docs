@@ -2,6 +2,7 @@
 
 title: Collecting test metadata
 layout: doc
+popularity: 3
 
 ---
 
