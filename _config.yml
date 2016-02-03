@@ -22,6 +22,10 @@ markdown: kramdown
 kramdown:
   input: GFM
 
+sass:
+  sass_dir: outer/assets/css
+
+
 defaults:
   -
     scope:

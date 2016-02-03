@@ -1,3 +1,5 @@
+/* Note that this should be generated from the circleci.com project */
+
 @charset "UTF-8";
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
@@ -5208,65 +5210,6 @@ i.ico {
     resize: none; }
     .product-page.contact .contact-us .message:valid, .product-page.contact .contact-us .message:focus {
       height: 12em; }
-
-.docs {
-  padding: 0;
-  line-height: 1.5; }
-  .docs .tag-category {
-    color: #898989; }
-  .docs .tag {
-    padding: 3px 6px;
-    font-size: 90%;
-    color: #337AB7;
-    background-color: rgba(51, 122, 183, 0.1);
-    border-radius: 4px;
-    border: 1px solid #337AB7;
-    white-space: nowrap; }
-  .docs .search {
-    background-color: #fbfbfb;
-    border-bottom: 1px solid #eeeeee; }
-    .docs .search label {
-      text-align: right; }
-  .docs .articles-query {
-    color: #212121; }
-  .docs .article-list {
-    list-style: none;
-    padding-left: 0; }
-    .docs .article-list li {
-      margin: 20px 0; }
-  .docs .doc-search {
-    margin: 40px 0;
-    position: relative; }
-    .docs .doc-search input {
-      width: 100%;
-      margin: 0;
-      font-size: 16px;
-      color: #343434; }
-    .docs .doc-search .typeahead {
-      top: 50px !important;
-      left: 35px !important;
-      right: 35px !important; }
-      .docs .doc-search .typeahead a {
-        padding-left: 10px; }
-  .docs h1 {
-    margin: 10px 0; }
-  .docs article {
-    color: #555555; }
-    .docs article h2 > a, .docs article h3 > a, .docs article h4 > a, .docs article h5 > a, .docs article h6 > a {
-      color: #212121;
-      text-decoration: none; }
-    .docs article .markdown li {
-      margin: 10px 0; }
-    .docs article .markdown pre {
-      margin: 30px 0; }
-    .docs article .markdown p {
-      margin-bottom: 20px; }
-    .docs article .markdown iframe {
-      margin-bottom: 20px; }
-  .docs img {
-    max-width: 100%; }
-  .docs .embed-responsive {
-    margin-bottom: 10px; }
 
 .product-page.customers .hero-logo {
   max-width: 350px; }
