@@ -1,7 +1,10 @@
 ---
 
 title: Git errors during a bundle install
-last_updated: Feb 3, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

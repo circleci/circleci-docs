@@ -1,7 +1,10 @@
 ---
 
 title: An important file is missing from your repository
-last_updated: Feb 3, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - filesystem
 
 ---
 

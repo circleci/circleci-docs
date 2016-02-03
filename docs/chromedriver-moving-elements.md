@@ -1,7 +1,11 @@
 ---
 
 title: ChromeDriver raises an 'Element is not clickable' exception
-last_updated: Aug 7, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - browsers
+
 
 ---
 

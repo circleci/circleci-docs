@@ -1,7 +1,10 @@
 ---
 
 title: CircleCI is running the Ruby commands not present in the config
-last_updated: Feb 3, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

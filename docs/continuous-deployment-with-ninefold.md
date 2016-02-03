@@ -1,7 +1,9 @@
 ---
 
 title: Continuous Deployment with Ninefold
-last_updated: October 14, 2014
+layout: doc
+tags:
+  - how-to
 
 ---
 

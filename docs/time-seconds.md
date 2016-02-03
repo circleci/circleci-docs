@@ -1,7 +1,10 @@
 ---
 
 title: Time-based results are a few seconds off
-last_updated: Feb 3, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - time-and-date
 
 ---
 

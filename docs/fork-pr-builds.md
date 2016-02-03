@@ -1,8 +1,10 @@
 ---
 
 title: Building Pull Requests from forks
+layout: doc
 short_title: Fork PR Builds
-last_updated: April 2, 2015
+tags:
+  - reference
 
 ---
 

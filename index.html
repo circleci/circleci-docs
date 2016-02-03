@@ -2,22 +2,27 @@
 layout: default
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+<div class="docs">
+  <div class="search">
+    <div class="container">
+      {% include doc-search.html %}
+    </div>
+  </div> <!-- /.search -->
+  <div class="container">
+    <h2>Popular Docs</h2>
+    <ul class="article-list">
+      {% assign pages = site.pages | sort:"popularity" | reverse %}
+      {% for page in pages limit:10 %}
+        <li>
+            <h4>{{ page.title }}</h4>
+            <p>{{ page.content | strip_liquid | markdownify | strip_html | truncate:250 }}</p>
+            {% for tag in page.tags %}
+              <span class="tag">{{ tag }}</span>
+            {% endfor %}
+            {% unless forloop.last %}
+              <hr>
+            {% endunless %}
+        </li>
+        {% endfor %}
+  </div> <!-- /.container -->
+</div> <!-- /.docs -->

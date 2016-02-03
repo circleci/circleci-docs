@@ -1,6 +1,9 @@
 ---
 
 title: SSH access to builds
+layout: doc
+tags:
+  - troubleshooting
 
 ---
 

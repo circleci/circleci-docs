@@ -1,7 +1,7 @@
 ---
 
 title: Install a custom version of Elasticsearch
-last_updated: March 10, 2014
+layout: doc
 
 ---
 {% assign versions = site.data.versions %}

@@ -1,6 +1,7 @@
 ---
 
 title: Parallelism
+layout: doc
 children:
   - setting-up-parallelism
   - how-parallelism-works

@@ -1,7 +1,14 @@
 ---
 
 title: Continuous Deployment to Google App Engine
-last_updated: July 19, 2013
+layout: doc
+tags:
+  - deployment
+  - google-cloud-platform
+  - how-to
+  - python
+  - java
+  - ruby
 
 ---
 

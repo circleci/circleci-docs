@@ -1,6 +1,7 @@
 ---
 
 title: Languages
+layout: doc
 children:
   - language-ruby-on-rails
   - language-python

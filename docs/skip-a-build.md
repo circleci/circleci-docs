@@ -1,7 +1,9 @@
 ---
 
 title: Skip a build
-last_updated: Feb 2, 2013
+layout: doc
+tags:
+  - how-to
 
 ---
 

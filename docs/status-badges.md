@@ -1,7 +1,9 @@
 ---
 
 title: Embeddable status badges
-last_updated: July 30, 2014
+layout: doc
+tags:
+  - reference
 
 ---
 

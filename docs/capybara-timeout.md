@@ -1,7 +1,10 @@
 ---
 
 title: "unable to obtain stable firefox connection in 60 seconds"
-last_updated: Feb 2, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

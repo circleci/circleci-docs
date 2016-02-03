@@ -1,7 +1,10 @@
 ---
 
 title: What happens when you add a project?
-last_updated: May 2, 2013
+layout: doc
+tags:
+  - github
+  - privacy-security
 
 ---
 

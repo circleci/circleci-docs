@@ -1,6 +1,7 @@
 ---
 
 title: Github integration
+layout: doc
 children:
   - github-3rdparty-app-restrictions
   - cant-follow

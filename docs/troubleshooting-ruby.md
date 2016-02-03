@@ -1,6 +1,7 @@
 ---
 
 title: Troubleshooting Ruby
+layout: doc
 short_title: Ruby
 children:
   - bundler-latest

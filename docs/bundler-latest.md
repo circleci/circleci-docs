@@ -1,7 +1,10 @@
 ---
 
 title: Do you need the latest version of Bundler?
-last_updated: Feb 3, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

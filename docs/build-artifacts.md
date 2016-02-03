@@ -1,7 +1,9 @@
 ---
 
 title: Build artifacts
-last_updated: August 1, 2014
+layout: doc
+tags:
+  - reference
 
 ---
 

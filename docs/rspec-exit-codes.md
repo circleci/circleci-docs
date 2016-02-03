@@ -1,7 +1,10 @@
 ---
 
 title: RSpec is failing but CircleCI reports my tests have passed
-last_updated: Dec 20, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - ruby
 
 ---
 

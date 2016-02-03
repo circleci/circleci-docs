@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<div class="docs container-fluid">
+  <div class="row">
+    <nav class="col-sm-3">
+      <h2>Related Docs</h2>
+      {% for tag in page.tags %}
+        <p>More docs tagged "{{ tag }}":</p>
+        <ul>
+          {% for p in site.pages %}
+            {% for t in p.tags %}
+              {% if t == tag and p.title != page.title %}
+                <li>{{ p.title }}</li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </nav>
+    <article class="col-sm-9">
+      <h1>{{ page.title }}</h1>
+      {{ content }}
+    </article>
+</div>

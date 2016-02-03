@@ -1,8 +1,11 @@
 ---
 
 title: Test iOS applications
+layout: doc
 short_title: iOS
-last_updated: August 28, 2015
+popularity: 4
+tags:
+  - mobile
 
 ---
 

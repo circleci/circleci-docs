@@ -1,0 +1,18 @@
+#! /bin/bash
+
+cp ../circleci.com/_layouts/default.html ./_layouts/
+cp ../circleci.com/_layouts/page.html ./_layouts/
+cp ../circleci.com/_includes/tag-manager.html ./_includes/
+cp ../circleci.com/_includes/nav.html ./_includes/
+cp ../circleci.com/_includes/footer.html ./_includes/
+cp ../circleci.com/_includes/mixpanel.html ./_includes/
+
+cp ../circleci.com/outer/assets/components/font-awesome/css/font-awesome.min.css \
+  ./outer/assets/components/font-awesome/css/
+cp ../circleci.com/outer/assets/components/font-awesome/fonts/* \
+  ./outer/assets/components/font-awesome/fonts/
+
+cp ../circleci.com/outer/assets/fonts/* ./outer/assets/fonts/
+
+cp ../circleci.com/_site/outer/assets/css/pages/site.css \
+  ./outer/assets/css/pages/site.css
