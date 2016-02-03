@@ -10,6 +10,7 @@ layout: default
   </div> <!-- /.search -->
   <div class="container">
     <h2>Popular Docs</h2>
+            <p>{{ site.pages | dump_manifest }}</p>
     <ul class="article-list">
       {% assign docs = site.docs | sort:"popularity" | reverse %}
       {% for doc in docs limit:10 %}
