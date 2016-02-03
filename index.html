@@ -11,12 +11,12 @@ layout: default
   <div class="container">
     <h2>Popular Docs</h2>
     <ul class="article-list">
-      {% assign pages = site.pages | sort:"popularity" | reverse %}
-      {% for page in pages limit:10 %}
+      {% assign docs = site.docs | sort:"popularity" | reverse %}
+      {% for doc in docs limit:10 %}
         <li>
-            <h4>{{ page.title }}</h4>
-            <p>{{ page.content | strip_liquid | markdownify | strip_html | truncate:250 }}</p>
-            {% for tag in page.tags %}
+            <h4>{{ doc.title }}</h4>
+            <p>{{ doc.excerpt }}</p>
+            {% for tag in doc.tags %}
               <span class="tag">{{ tag }}</span>
             {% endfor %}
             {% unless forloop.last %}

@@ -6,6 +6,7 @@ popularity: 10
 tags:
   - getting-started
   - reference
+excerpt_separator: <!--more-->
 
 ---
 {% assign versions = site.data.versions %}
@@ -14,6 +15,8 @@ CircleCI automatically infers your settings from your code, so CircleCI's normal
 When it doesn't, the `circle.yml` file makes it easy to tell CircleCI what you need.
 This is a simple YAML file where you spell out any tweaks required for your web app.
 You place the file in your git repo's root directory and CircleCI reads the file each time it runs a build.
+
+<!--more-->
 
 If you want a quick look at how to set up your `circle.yml`
 file, check out our [sample file](/docs/config-sample).
