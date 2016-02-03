@@ -1,27 +1,40 @@
+require 'json'
 require 'liquid'
-
 require_relative '../_plugins/dump_manifest'
 
 class Dumper
   extend DumpManifestFilter
 end
 
-class TestPage
-  def to_liquid
-    {"layout"=>"page",
-     "title"=>"About",
-     "permalink"=>"/about/",
-     "dir"=>"/about/",
-     "name"=>"about.md",
-     "path"=>"about.md",
-     "url"=>"/about/",
-     "content"=>"This is some really long content.\n## With markdown\nOMG. This is so long. Also it has {{ liquid }} in it. And it just keeps going and going."}
+class TestExcerpt
+  def to_s
+    "Foo bar"
+  end
+end
+
+class TestDoc
+  def data
+    {"draft"=>false,
+     "categories"=>[],
+     "layout"=>"doc",
+     "title"=>"Test Android applications",
+     "short_title"=>"Android",
+     "popularity"=>2,
+     "tags"=>["mobile"],
+     "slug"=>"android",
+     "ext"=>".md",
+     "excerpt"=>TestExcerpt.new}
+  end
+end
 
 RSpec.describe DumpManifestFilter do
-  it "dump abridged page manifest" do
-#{"layout"=>"page", "title"=>"About", "permalink"=>"/about/", "dir"=>"/about/", "name"=>"about.md", "path"=>"about.md", "url"=>"/about/"}
-    test_page = Jekyll::Page.new
-    test_page['layout'] = 'page'
-    expect(Dumper.dump_manifest([test_page])).to eq('foo')
+  it "should select keys from data and jsonify" do
+    expected = [{"title"=>"Test Android applications",
+                 "popularity"=>2,
+                 "tags"=>["mobile"],
+                 "slug"=>"android",
+                 "excerpt"=>"Foo bar"}]
+    result = Dumper.dump_manifest([TestDoc.new])
+    expect(JSON.parse(result)).to eq(expected)
   end
 end

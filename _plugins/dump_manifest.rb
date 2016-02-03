@@ -1,16 +1,13 @@
 require 'jekyll'
-
-require_relative '../_plugins/strip_liquid'
+require 'json'
 
 module DumpManifestFilter
-  class Filterer
-    extend StripLiquidFilter
-    extend Jekyll::Filters
+  def data_to_manifest_entry(d)
+    d.select{ |k,v| ['title', 'slug', 'tags', 'excerpt', 'popularity'].include? k }
   end
-  def dump_manifest(input)
-    page_hash = input[0].to_liquid
-    page_hash.delete('content')
-    puts page_hash
+  def dump_manifest(docs)
+    filtered = docs.map{ |d| data_to_manifest_entry d.data }
+    JSON.generate(filtered)
   end
 end
 

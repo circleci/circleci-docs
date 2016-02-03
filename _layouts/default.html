@@ -38,8 +38,9 @@
         <script src="{{ site.assets }}build/js/{{ javascript }}.min.js"></script>
       {% endfor %}
     {% endif %}
-    <script type="text/javascript">
-      var circleEnvironment = "{{ site.env }}"
+    <script>
+      window.circleEnvironment = {{ site.env }}
+      window.docManifest = {{ site.docs | dump_manifest }}
     </script>
   </body>
 </html>
