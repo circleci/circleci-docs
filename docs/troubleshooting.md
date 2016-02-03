@@ -1,6 +1,7 @@
 ---
 
 title: Troubleshooting
+layout: doc
 children:
   - troubleshooting-guide
   - ssh-build

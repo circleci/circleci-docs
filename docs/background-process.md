@@ -1,7 +1,9 @@
 ---
 
 title: Start background processes from circle.yml
-last_updated: Feb 5, 2014
+layout: doc
+tags:
+  - how-to
 
 ---
 

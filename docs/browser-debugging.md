@@ -1,7 +1,10 @@
 ---
 
 title: Interacting with the browser on CircleCI's VM
-last_updated: October 20, 2014
+layout: doc
+tags:
+  - troubleshooting
+  - browsers
 
 ---
 

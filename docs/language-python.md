@@ -1,8 +1,8 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Python
+layout: doc
 short_title: Python
-last_updated: March 12, 2014
 
 ---
 {% assign versions = site.data.versions %}

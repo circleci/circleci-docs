@@ -1,7 +1,10 @@
 ---
 
 title: Test environment
-last_updated: Apr 7, 2015
+layout: doc
+popularity: 8
+tags:
+  - reference
 
 ---
 {% assign versions = site.data.versions %}

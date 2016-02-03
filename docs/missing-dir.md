@@ -1,7 +1,7 @@
 ---
 
 title: A directory is missing from your repository
-last_updated: Feb 3, 2013
+layout: doc
 
 ---
 

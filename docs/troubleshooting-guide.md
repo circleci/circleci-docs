@@ -1,8 +1,10 @@
 ---
 
 title: Troubleshooting guide
+layout: doc
 short_title: Troubleshooting guide
-last_updated: February 26, 2015
+tags:
+  - troubleshooting
 
 ---
 

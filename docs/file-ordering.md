@@ -1,7 +1,9 @@
 ---
 
 title: File-ordering bugs on Linux systems
-last_updated: Feb 2, 2013
+layout: doc
+tags:
+  - troubleshooting
 
 ---
 

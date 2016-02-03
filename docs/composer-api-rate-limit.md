@@ -1,7 +1,7 @@
 ---
 
 title: Composer hitting GitHub API rate limits
-last_updated: May 23, 2013
+layout: doc
 
 ---
 

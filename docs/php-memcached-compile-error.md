@@ -1,7 +1,10 @@
 ---
 
 title: Adding memcached with pecl on CircleCI
-last_updated: May 23, 2013
+layout: doc
+tags:
+  - troubleshooting
+  - php
 
 ---
 

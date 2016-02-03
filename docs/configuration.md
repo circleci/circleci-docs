@@ -1,7 +1,12 @@
 ---
 
 title: Configuring CircleCI
-last_updated: August 1, 2014
+layout: doc
+popularity: 10
+tags:
+  - getting-started
+  - reference
+
 ---
 {% assign versions = site.data.versions %}
 

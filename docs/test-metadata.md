@@ -1,7 +1,8 @@
 ---
 
 title: Collecting test metadata
-last_updated: Feb 17, 2015
+layout: doc
+popularity: 3
 
 ---
 

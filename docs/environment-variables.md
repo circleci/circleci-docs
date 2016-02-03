@@ -1,7 +1,10 @@
 ---
 
 title: Environment variables
-last_updated: Apr 13, 2015
+layout: doc
+popularity: 7
+tags:
+  - reference
 
 ---
 

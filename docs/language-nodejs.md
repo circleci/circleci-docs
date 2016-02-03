@@ -1,8 +1,12 @@
 ---
 
 title: Continuous Integration and Continuous Deployment with Node.js
+layout: doc
 short_title: Node.js
-last_updated: February 13, 2015
+popularity: 5
+tags:
+  - nodejs
+  - language-guides
 
 ---
 {% assign versions = site.data.versions %}

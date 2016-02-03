@@ -1,7 +1,9 @@
 ---
 
 title: Continuous Deployment with Heroku
-last_updated: May 7, 2013
+layout: doc
+tags:
+  - how-to
 
 ---
 

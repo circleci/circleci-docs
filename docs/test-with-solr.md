@@ -1,7 +1,9 @@
 ---
 
 title: Test with Solr
-last_updated: Jul 23, 2013
+layout: doc
+tags:
+  - how-to
 
 ---
 {% assign versions = site.data.versions %}

@@ -1,0 +1,129 @@
+---
+---
+
+@import 'pages/site';
+
+$black:                #000000;
+$blacken:              #080808;
+$grayDarkest:          #131313;
+$grayDarker:           #212121;
+$grayDark:             #343434;
+$gray:                 #555555;
+$grayLight:            #898989;
+$grayLighter:          #cccccc;
+$grayLightest:         #eeeeee;
+$whiten:               #fbfbfb;
+$white:                #ffffff;
+
+$border-radius-base:        4px;
+$blue:                                                 #337AB7; // #007196
+
+.docs {
+  padding: 0;
+
+  line-height: 1.5;
+
+  // Home page / search
+
+  .tag-category {
+    color: $grayLight;
+  }
+
+  .tag {
+    padding: 3px 6px;
+    font-size: 90%;
+    color: $blue;
+    background-color: rgba($blue, 0.1);
+    border-radius: $border-radius-base;
+    border: 1px solid $blue;
+    white-space: nowrap;
+  }
+
+  .search {
+    background-color: #fbfbfb;
+    border-bottom: 1px solid #eeeeee;
+    label {
+      text-align: right;
+    }
+  }
+
+  .articles-query {
+      color: $grayDarker;
+  }
+
+  .article-list {
+    list-style: none;
+    padding-left: 0;
+    li {
+      margin: 20px 0;
+    }
+  }
+
+  $searchLeftPadding: 45px;
+
+  .doc-search {
+    $inputWidth: 100%;
+    $dropdownPadding: 10px;
+
+    margin: 40px 0;
+    position: relative;
+
+    input {
+      width: $inputWidth;
+      margin: 0;
+      font-size: 16px;
+      color: $grayDark;
+    }
+
+    .typeahead {
+      // overriding default typeahead style directly on element
+      top: 50px !important;
+      left: $searchLeftPadding - $dropdownPadding !important;
+      right: $searchLeftPadding - $dropdownPadding !important;;
+      a {
+        padding-left: $dropdownPadding;
+      }
+    }
+  }
+
+
+
+  // Content
+
+  h1 {
+    margin: 10px 0;
+  }
+
+  article {
+    color: $gray;
+
+    h2 > a, h3 > a, h4 > a, h5 > a, h6 > a {
+      color: $grayDarker;
+      text-decoration: none;
+    }
+
+    .markdown {
+      li {
+        margin: 10px 0;
+      }
+      pre {
+        margin: 30px 0;
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
+      iframe {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .embed-responsive {
+    margin-bottom: 10px;
+  }
+}

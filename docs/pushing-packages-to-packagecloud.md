@@ -1,7 +1,9 @@
 ---
 
 title: Pushing packages to packagecloud
-last_updated: November 4, 2014
+layout: doc
+tags:
+  - how-to
 
 ---
 

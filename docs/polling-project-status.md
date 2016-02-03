@@ -1,7 +1,9 @@
 ---
 
 title: Polling project status using CCMenu, CCTray, etc.
-last_updated: Feb 2, 2013
+layout: doc
+tags:
+  - reference
 
 ---
 
