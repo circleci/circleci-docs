@@ -10,7 +10,10 @@ cp ../circleci.com/_includes/mixpanel.html ./_includes/
 cp ../circleci.com/outer/assets/components/font-awesome/css/font-awesome.min.css \
   ./outer/assets/components/font-awesome/css/
 cp ../circleci.com/outer/assets/components/font-awesome/fonts/* \
-  ./outer/assets/components/font-awesome/fonts/
+   ./outer/assets/components/font-awesome/fonts/
+cp ../circleci.com/outer/assets/components/unslider/dist/css/* \
+  ./outer/assets/components/unslider/dist/css/
+
 
 cp ../circleci.com/outer/assets/fonts/* ./outer/assets/fonts/
 

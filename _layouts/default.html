@@ -31,13 +31,6 @@
         {% include footer.html %}
       </div>
     </div>
-
-    <script src="{{ site.assets }}build/js/site.min.js"></script>
-    {% if page.script %}
-      {% for javascript in page.script %}
-        <script src="{{ site.assets }}build/js/{{ javascript }}.min.js"></script>
-      {% endfor %}
-    {% endif %}
     <script>
       window.circleEnvironment = {{ site.env }}
       window.docManifest = {{ site.docs | dump_manifest }}
