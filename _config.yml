@@ -17,21 +17,21 @@ url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: jekyllrb
 github_username:  jekyll
 assets: '/outer/assets/'
-# Build settings
+exclude:
+  - node_modules
+  - js
+  - webpack.config.js
+  - 'Gemfile*'
+  - '*.json'
+  - '*.yml'
+keep_files:
+  - dist
 markdown: kramdown
 kramdown:
   input: GFM
 
 sass:
   sass_dir: outer/assets/css
-
-
-defaults:
-  -
-    scope:
-      path: "" # empty string for all files
-    values:
-      layout: "default"
 
 collections:
   docs:
