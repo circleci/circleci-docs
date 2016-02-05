@@ -39,10 +39,9 @@ var SearchInput = React.createClass(
 var SearchResult = React.createClass(
   {
     render: function () {
-      var doc = this.props.doc,
-          tags = doc.tags.map(function (tag) {
-        return (<span key={doc.slug + '-' + tag}><span className="tag">{tag}</span> </span>);
-      });
+      var tags = this.props.doc.tags.map(function (tag) {
+        return (<span key={this.props.doc.slug + '-' + tag}><span className="tag">{tag}</span> </span>);
+      }, this);
       var maybeHr;
       if (this.props.last) {
         maybeHr = '';
@@ -103,16 +102,17 @@ var DocSearch = React.createClass(
       });
     },
     render: function () {
-      var filterTags = this.state.tags,
-         results = this.props.manifest.filter(function (doc) {
-        return filterTags.every(function (filterTag) {
+      var results = this.props.manifest.filter(function (doc) {
+        return this.state.tags.every(function (filterTag) {
           return doc.tags.indexOf(filterTag) >= 0;
         });
-      });
+      }, this);
       return (
-        <div className="search">
-          <div className="container">
-            <SearchInput handleTagClick={this.handleTagClick} filters={this.state} />
+        <div>
+          <div className="search">
+            <div className="container">
+              <SearchInput handleTagClick={this.handleTagClick} filters={this.state} />
+            </div>
           </div>
           <div className="container">
             <SearchResults results={results}/>
