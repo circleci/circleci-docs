@@ -6,35 +6,33 @@ class Dumper
   extend DumpManifestFilter
 end
 
-class TestExcerpt
-  def to_s
-    "Foo bar"
+RSpec.describe 'dump_manifest_spec' do
+  before(:each) do
+    @data = {"draft"=>false,
+            "categories"=>[],
+            "layout"=>"doc",
+            "title"=>"Test Android applications",
+            "short_title"=>"Android",
+            "popularity"=>2,
+            "tags"=>["mobile"],
+            "slug"=>"android",
+            "ext"=>".md",
+            "excerpt"=> instance_double('Jekyll::Excerpt', :to_s => 'Foo <span>bar</span> baz')}
+    @doc = instance_double('Jekyll::Document', :data => @data)
   end
-end
-
-class TestDoc
-  def data
-    {"draft"=>false,
-     "categories"=>[],
-     "layout"=>"doc",
-     "title"=>"Test Android applications",
-     "short_title"=>"Android",
-     "popularity"=>2,
-     "tags"=>["mobile"],
-     "slug"=>"android",
-     "ext"=>".md",
-     "excerpt"=>TestExcerpt.new}
+  it 'should select keys from data' do
+    expect(DumpManifestFilter.data_to_manifest_entry(@data).keys).to contain_exactly('title', 'slug', 'tags', 'excerpt', 'popularity')
   end
-end
-
-RSpec.describe DumpManifestFilter do
-  it "should select keys from data and jsonify" do
+  it 'should strip html' do
+    expect(DumpManifestFilter.data_to_manifest_entry(@data)['excerpt']).to eq('Foo bar baz')
+  end
+  it 'should jsonify' do
     expected = [{"title"=>"Test Android applications",
                  "popularity"=>2,
                  "tags"=>["mobile"],
                  "slug"=>"android",
-                 "excerpt"=>"Foo bar"}]
-    result = Dumper.dump_manifest([TestDoc.new])
+                 "excerpt"=>"Foo bar baz"}]
+    result = Dumper.dump_manifest([@doc])
     expect(JSON.parse(result)).to eq(expected)
   end
 end

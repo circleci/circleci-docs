@@ -29,6 +29,9 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     mercenary (0.3.5)
+    mini_portile2 (2.0.0)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     octopress-autoprefixer (2.0.0)
       autoprefixer-rails
       jekyll (~> 3.0)
@@ -58,6 +61,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   jekyll (= 3.1.1)
+  nokogiri
   octopress-autoprefixer
   rspec
 

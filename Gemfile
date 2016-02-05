@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'jekyll', '3.1.1'
 gem 'octopress-autoprefixer'
 gem 'rspec'
+gem 'nokogiri'
 
 group :jekyll_plugins do
   gem 'dotenv'
