@@ -22,7 +22,7 @@ exclude:
   - js
   - webpack.config.js
   - 'Gemfile*'
-  - '*.json'
+  - package.json
   - '*.yml'
 keep_files:
   - dist

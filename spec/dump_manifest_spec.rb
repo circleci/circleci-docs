@@ -6,7 +6,7 @@ class Dumper
   extend DumpManifestFilter
 end
 
-RSpec.describe 'dump_manifest_spec' do
+RSpec.describe 'dump_manifest' do
   before(:each) do
     @data = {"draft"=>false,
             "categories"=>[],
