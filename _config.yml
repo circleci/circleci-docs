@@ -18,6 +18,7 @@ twitter_username: jekyllrb
 github_username:  jekyll
 assets: '/outer/assets/'
 exclude:
+  - vendor
   - node_modules
   - js
   - webpack.config.js
