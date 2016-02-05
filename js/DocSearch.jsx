@@ -19,7 +19,7 @@ var SearchInput = React.createClass(
           <div className="form-group">
             <label className="col-sm-2 control-label" htmlFor="search">Search by keyword:</label>
             <div className="col-sm-10">
-              <input className="form-control" id="search" placeholder="Search..." type="text" onChange={this.props.handleTextChange} />
+              <input className="form-control" id="search" placeholder="Search..." type="text" onChange={this.props.handleTextChange} autoComplete="off" />
             </div>
           </div>
           <div className="form-group">
@@ -110,7 +110,7 @@ var scoreComparator = function (a, b) {
 };
 
 var lunrSearch = function (idx, query) {
-  idx.search(query).reduce(function(prev, curr) {
+  return idx.search(query).reduce(function(prev, curr) {
     prev[curr.ref] = curr.score;
     return prev;
   }, {})
