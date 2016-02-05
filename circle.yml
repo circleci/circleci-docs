@@ -1,0 +1,10 @@
+dependencies:
+  post:
+    - bundle exec jekyll build
+    - webpack
+    - bin/generate-search-idx
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync _site s3://circle-production-docs --delete
