@@ -31,10 +31,10 @@
         {% include footer.html %}
       </div>
     </div>
-    <script type="text/javascript" src="dist/bundle.js"></script>
     <script>
       window.circleEnvironment = {{ site.env }}
       window.docManifest = {{ site.docs | dump_manifest }}
     </script>
+    <script type="text/javascript" src="dist/bundle.js"></script>
   </body>
 </html>

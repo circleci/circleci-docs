@@ -3,27 +3,5 @@ layout: default
 ---
 
 <div class="docs">
-  <div class="search">
-    <div class="container">
-      {% include doc-search.html %}
-    </div>
-  </div> <!-- /.search -->
-  <div class="container">
-    <h2>Popular Docs</h2>
-    <div id="example"></div>
-    <ul class="article-list">
-      {% assign docs = site.docs | sort:"popularity" | reverse %}
-      {% for doc in docs limit:10 %}
-        <li>
-            <h4>{{ doc.title }}</h4>
-            <p>{{ doc.excerpt }}</p>
-            {% for tag in doc.tags %}
-              <span class="tag">{{ tag }}</span>
-            {% endfor %}
-            {% unless forloop.last %}
-              <hr>
-            {% endunless %}
-        </li>
-        {% endfor %}
-  </div> <!-- /.container -->
+  <div id="DocSearch"></div>
 </div> <!-- /.docs -->
