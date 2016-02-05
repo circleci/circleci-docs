@@ -19,7 +19,7 @@ var SearchInput = React.createClass(
           <div className="form-group">
             <label className="col-sm-2 control-label" htmlFor="search">Search by keyword:</label>
             <div className="col-sm-10">
-              <input className="form-control" id="search" placeholder="Search..." type="text" onChange={this.props.handleTextChange} autoComplete="off" />
+              <input className="form-control" id="search" placeholder="Search..." type="text" onChange={this.props.handleTextChange} value={this.props.filters.query} autoComplete="off" />
             </div>
           </div>
           <div className="form-group">
