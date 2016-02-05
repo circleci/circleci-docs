@@ -1,0 +1,16 @@
+#! /usr/bin/env node
+
+fs = require('fs');
+lunr = require('lunr');
+
+var docs = JSON.parse(fs.readFileSync('_site/content.json'));
+
+var idx = lunr(function () {
+  this.field('title', {boost: 10});
+  this.field('output');
+  this.ref('slug');
+});
+
+docs.forEach(function (doc) { idx.add(doc); });
+
+fs.writeFileSync('_site/dist/idx.json', JSON.stringify(idx));
