@@ -85,12 +85,26 @@ var filtersFromHash = function (hash) {
   }
 }
 
+var hashFromFilters = function (filters) {
+  var q = encodeURIComponent(filters.query),
+      t = encodeURIComponent(filters.tags.join(',')),
+      params = [];
+  if (q) {
+    params.push('q=' + q);
+  }
+  if (t) {
+    params.push('t=' + t);
+  }
+  return '#' + params.join('&');
+}
+
 var DocSearch = React.createClass(
   {
     getInitialState: function () {
       return filtersFromHash(window.location.hash);
     },
-    handleTagClick: function (tag) {
+    handleTagClick: function (tag, e) {
+      e.preventDefault();
       this.setState(function (state, props) {
         var tagIndex = state.tags.indexOf(tag);
         if (tagIndex < 0) {
@@ -100,6 +114,9 @@ var DocSearch = React.createClass(
         }
         return {tags: state.tags};
       });
+    },
+    componentDidUpdate: function (props, state) {
+      history.pushState(null, null, hashFromFilters(this.state));
     },
     render: function () {
       var results = this.props.manifest.filter(function (doc) {
