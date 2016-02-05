@@ -32,11 +32,24 @@ $blue:                                                 #337AB7; // #007196
   .tag {
     padding: 3px 6px;
     font-size: 90%;
+    color: $gray;
+    background-color: rgba($gray, 0.1);
+    border-radius: $border-radius-base;
+    border: 1px solid $gray;
+    white-space: nowrap;
+    &:link,
+    &:active,
+    &:hover,
+    &:visited,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .tag.active {
     color: $blue;
     background-color: rgba($blue, 0.1);
-    border-radius: $border-radius-base;
-    border: 1px solid $blue;
-    white-space: nowrap;
+    border-color: $blue;
   }
 
   .search {
