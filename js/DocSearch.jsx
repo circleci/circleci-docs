@@ -1,3 +1,4 @@
+var lunr = require('lunr');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -18,7 +19,7 @@ var SearchInput = React.createClass(
           <div className="form-group">
             <label className="col-sm-2 control-label" htmlFor="search">Search by keyword:</label>
             <div className="col-sm-10">
-              <input className="form-control" id="search" placeholder="Search..." type="text" />
+              <input className="form-control" id="search" placeholder="Search..." type="text" onChange={this.props.handleTextChange} />
             </div>
           </div>
           <div className="form-group">
@@ -98,6 +99,40 @@ var hashFromFilters = function (filters) {
   return '#' + params.join('&');
 }
 
+var scoreComparator = function (a, b) {
+  if (a.score < b.score) {
+    return 1;
+  }
+  if (a.score > b.score) {
+    return -1;
+  }
+  return 0;
+};
+
+var lunrSearch = function (idx, query) {
+  idx.search(query).reduce(function(prev, curr) {
+    prev[curr.ref] = curr.score;
+    return prev;
+  }, {})
+};
+
+var filterByQuery = function (results, searchResults) {
+  return results.map(function (doc) {
+    doc.score = searchResults[doc.slug];
+    return doc;
+  }).filter(function (doc) {
+    return doc.score;
+  }).sort(scoreComparator);
+};
+
+var filterByTags = function (results, tags) {
+  return results.filter(function (doc) {
+    return tags.every(function (filterTag) {
+      return doc.tags.indexOf(filterTag) >= 0;
+    });
+  });
+};
+
 var DocSearch = React.createClass(
   {
     getInitialState: function () {
@@ -115,20 +150,27 @@ var DocSearch = React.createClass(
         return {tags: state.tags};
       });
     },
+    handleTextChange: function (e) {
+      this.setState({query: e.target.value });
+    },
     componentDidUpdate: function (props, state) {
       history.pushState(null, null, hashFromFilters(this.state));
     },
     render: function () {
-      var results = this.props.manifest.filter(function (doc) {
-        return this.state.tags.every(function (filterTag) {
-          return doc.tags.indexOf(filterTag) >= 0;
-        });
-      }, this);
+      var idx = this.props.provided.docSearchIndex,
+          tags = this.state.tags,
+          query = this.state.query,
+          searchResults = idx && query ? lunrSearch(idx, query) : null,
+          results = this.props.provided.docManifest;
+      results = filterByTags(results, tags);
+      if (searchResults) {
+        results = filterByQuery(results, searchResults);
+      }
       return (
         <div>
           <div className="search">
             <div className="container">
-              <SearchInput handleTagClick={this.handleTagClick} filters={this.state} />
+              <SearchInput handleTagClick={this.handleTagClick} handleTextChange={this.handleTextChange} filters={this.state} />
             </div>
           </div>
           <div className="container">
@@ -141,6 +183,15 @@ var DocSearch = React.createClass(
 );
 
 ReactDOM.render(
-  <DocSearch manifest={window.docManifest} />,
+  <DocSearch provided={window.provided} />,
   document.getElementById('DocSearch')
 );
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', encodeURI('/dist/idx.json'));
+xhr.onload = function() {
+    if (xhr.status === 200) {
+      window.provided.docSearchIndex = lunr.Index.load(JSON.parse(xhr.responseText));
+    }
+};
+xhr.send();

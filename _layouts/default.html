@@ -33,7 +33,8 @@
     </div>
     <script>
       window.circleEnvironment = {{ site.env }}
-      window.docManifest = {{ site.docs | dump_manifest }}
+      window.provided = {};
+      window.provided.docManifest = {{ site.docs | dump_manifest }}
     </script>
     <script type="text/javascript" src="dist/bundle.js"></script>
   </body>
