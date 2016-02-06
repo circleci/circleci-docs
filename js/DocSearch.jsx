@@ -182,7 +182,7 @@ var DocSearch = React.createClass(
   }
 );
 
-ReactDOM.render(
+var app = ReactDOM.render(
   <DocSearch provided={window.provided} />,
   document.getElementById('DocSearch')
 );
@@ -192,6 +192,7 @@ xhr.open('GET', encodeURI('/dist/idx.json'));
 xhr.onload = function() {
     if (xhr.status === 200) {
       window.provided.docSearchIndex = lunr.Index.load(JSON.parse(xhr.responseText));
+      app.forceUpdate();
     }
 };
 xhr.send();
