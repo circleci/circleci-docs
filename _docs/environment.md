@@ -14,7 +14,7 @@ In the future, we plan to allow as much of this to be configurable as possible.
 Please [contact us](mailto:sayhi@circleci.com) if some part of our environment is not suitable for you, and we will try to come up with a workaround.
 
 If any version is not listed here, SSH into our build boxes to check it manually (and [contact us](mailto:sayhi@circleci.com)
-so we can update this doc.
+so we can update this doc).
 
 ## Base
 
