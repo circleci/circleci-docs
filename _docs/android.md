@@ -92,14 +92,14 @@ Starting the android emulator can be an involved process and, unfortunately, can
 a few minutes. You can start the emulator and wait for it to finish with something like
 the following:
 
-```
+<pre>
 test:
   pre:
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
         parallel: true
     - circle-android wait-for-boot
-```
+</pre>
 
 `circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
 There's also a corresponding `circleci-android21`; alternatively, you can
