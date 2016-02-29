@@ -17,12 +17,12 @@ Generally, pretty much what you'd expect if you were implementing this yourself:
 *   Our inference algorithms look through your dependencies, Gemfile, libraries, and code to figure out how to run your tests.
     For example, we might find that you have a standard Rails project using Postgres specifications and features, so we'll run:
 
-    ```
+<pre>
 bundle install
 bundle exec rake db:schema:load
 bundle exec rspec spec
 bundle exec cucumber
-```
+</pre>
 
 *   We run your tests on a clean virtual machine every time.
 This means that:

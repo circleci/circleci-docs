@@ -53,11 +53,11 @@ If that is the case for you, you can
 limit the JVM’s usage of memory by declaring the limits in the
 `JAVA_OPTS` environment variable, like this:
 
-```
+<pre>
 machine:
   environment:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-```
+</pre>
 
 Note that you might want to use larger numbers depending on the other
 processes running during your build. Check the contents of your
@@ -71,11 +71,11 @@ so for Android builds you should limit the JVM’s heap by adding the
 `$GRADLE_OPTS` variable with the following contents to your
 `circle.yml` file:
 
-```
+<pre>
 machine:
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-```
+</pre>
 
 If your tests actually need more than 4GB of RAM, please
 [contact us](mailto:sayhi@circleci.com).

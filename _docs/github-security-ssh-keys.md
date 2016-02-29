@@ -64,12 +64,12 @@ Here are common errors that indicate you need to add a user key.
 
 **Python**: During the `pip install` step:
 
-```
+<pre>
 ERROR: Repository not found.
-```
+</pre>
 
 **Ruby**: During the `bundle install` step:
 
-```
+<pre>
 Permission denied (publickey).
-```
+</pre>

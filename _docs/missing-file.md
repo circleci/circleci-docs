@@ -15,10 +15,10 @@ If you wish to remove important files from your repository, you should add a rou
 `config/app.yml.ci`.
 You can then copy it to its correct place with some simple commands:
 
-```
+<pre>
 checkout:
   post:
     - cp config/app.yml.ci config/app.yml
-```
+</pre>
 
 For a `database.yml` file, it's even simpler - just include it without the important settings like production and staging database keys.

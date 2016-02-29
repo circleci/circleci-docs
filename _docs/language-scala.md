@@ -34,7 +34,7 @@ If you would like to use a different version of sbt for your builds, we
 suggest upgrading it manually. Here is an example of installing the
 version `0.13.7` of sbt by downloading a binary from Bintray:
 
-```
+<pre>
 dependencies:
   pre:
     - wget -q https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
@@ -42,11 +42,11 @@ dependencies:
   cache_directories:
     - "~/.ivy2"
     - "~/.sbt"
-```
+</pre>
 
 Another option would be to use the `jar`s provided by Typesafe:
 
-```
+<pre>
 machine:
   environment:
     SBT_VERSION: 0.13.7
@@ -63,7 +63,7 @@ dependencies:
     - chmod u+x $HOME/bin/sbt
     - which sbt
     - sbt sbt-version
-```
+</pre>
 
 ### Dependencies & Tests
 

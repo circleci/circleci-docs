@@ -13,9 +13,9 @@ credentials for the other containers running the build.
 The containers are indexed starting at 0, so to SSH into container 7
 from any other container you can do:
 
-```
+<pre>
 ssh node6
-```
+</pre>
 
 ### Uses
 

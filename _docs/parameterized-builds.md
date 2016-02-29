@@ -34,31 +34,31 @@ Builds are triggered by POSTing to [the trigger new build API](/docs/api#new-bui
 A POST with an empty body will trigger a new build of the named branch.
 You can include build parameters by sending a JSON body with `Content-type: application/json`:
 
-```
+<pre>
 {
   "build_parameters": {
     "param1": "value1",
     "param2": 500
   }
 }
-```
+</pre>
 
 E.g. using `curl`
 
-```
+<pre>
 curl \
   --header "Content-Type: application/json" \
   --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
   --request POST \
   https://circleci.com/api/v1/project/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
-```
+</pre>
 
 The build will see the environment variables:
 
-```
+<pre>
 export param1="value1"
 export param2="500"
-```
+</pre>
 
 ### Constraints
 
@@ -75,7 +75,7 @@ Aside from the usual constraints for environment variables there aren't any rest
 
 E.g. if you passed the parameters:
 
-```
+<pre>
 {
   "build_parameters": {
     "foo": "bar",
@@ -84,16 +84,16 @@ E.g. if you passed the parameters:
     "list": ["a", "list", "of", "strings"]
   }
 }
-```
+</pre>
 
 Then your build will see the environment variables:
 
-```
+<pre>
 export foo="bar"
 export baz="5"
 export qux="{\"quux\": 1}"
 export list="[\"a\", \"list\", \"of\", \"strings\"]"
-```
+</pre>
 
 Build parameters are exported as environment variables inside the build's containers and can be used by scripts/programs and commands in `circle.yml`.
 

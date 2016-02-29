@@ -29,15 +29,15 @@ and configure your test suite to add code coverage.
 
 In your Gemfile, add the `simplecov` gem:
 
-```
+<pre>
 gem 'simplecov', :require => false, :group => :test
-```
+</pre>
 
 In `test/test_helper.rb`, `spec/spec_helper.rb`,
 Cucumber's `env.rb`,
 or in your test suite's startup hooks, initialize `SimpleCov`.
 
-```
+<pre>
 require 'simplecov'
 
 # save to CircleCI's artifacts directory if we're on CircleCI
@@ -47,7 +47,7 @@ if ENV['CIRCLE_ARTIFACTS']
 end
 
 SimpleCov.start
-```
+</pre>
 
 The [simplecov README](https://github.com/colszowka/simplecov#getting-started) has more details.
 

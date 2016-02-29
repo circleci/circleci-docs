@@ -21,11 +21,11 @@ We have
 [many versions of Python](/docs/environment#python)
 pre-installed. If you don't want to use the default, you can specify your Python version from your circle.yml:
 
-```
+<pre>
 machine:
   python:
     version: pypy-2.2.1
-```
+</pre>
 
 Please [contact us](mailto:sayhi@circleci.com)
 if other versions of Python would be of use to you.
@@ -43,10 +43,11 @@ when we find a `setup.py` file.
 You can also
 [add custom dependencies commands from your `circle.yml`, for example:](/docs/configuration#dependencies)
 
-```
+<pre>
 dependencies:
   pre:
-    - pip install PIL --allow-external PIL --allow-unverified PIL```
+    - pip install PIL --allow-external PIL --allow-unverified PIL
+</pre>
 
 ### Databases
 
@@ -64,11 +65,11 @@ If you are using Django, then Circle will run `manage.py test`.
 You can [add custom test commands](/docs/configuration#test)
 from your `circle.yml`:
 
-```
+<pre>
 test:
   override:
     - ./my_testing_script.sh
-```
+</pre>
 
 We can automatically parallelize both standard python tests run with nose and
 django tests.  However, the mechanisms to collect the tests only see
@@ -80,13 +81,13 @@ CircleCI has [first-class support for deployment](/docs/configuration#deployment
 with Fabric or Paver.
 To set up deployment after green builds, you can add commands to the deployment section of your `circle.yml`:
 
-```
+<pre>
 deployment:
   production:
     branch: master
     commands:
       - fab deploy
-```
+</pre>
 
 ### Troubleshooting for Python
 

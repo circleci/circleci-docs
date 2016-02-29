@@ -15,19 +15,19 @@ Sphinx {{ versions.sphinx }} is installed on your build system. It will need
 to be configured with your `sphinx.conf`, and started via
 [circle.yml](/docs/configuration).  Here's an example of how to do so:
 
-```
+<pre>
 database:
   post:
     - sudo cp path/to/your/sphinx.conf /etc/sphinxsearch/sphinx.conf
     - sudo sed -i -e 's,START=no,START=yes,' /etc/default/sphinxsearch
     - service sphinxsearch start
-```
+</pre>
 
 In your data source configuration in your test `sphinx.conf` you can use the
 MySQL or PostgreSQL servers already in place on the build system. For example,
 for MySQL:
 
-```
+<pre>
 source src1
 {
   type     = mysql
@@ -39,7 +39,7 @@ source src1
   sql_port = 3306
 
   ...
-```
+</pre>
 
 Please [contact us](mailto:sayhi@circleci.com) and let us know if you're using
 Sphinx this way! Your feedback helps us keep our documentation up to date, and

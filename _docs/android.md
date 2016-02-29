@@ -143,11 +143,11 @@ you can use the `deployment` section of your `circle.yml` to publish the
 `apk` to the desired channel. We suggest reading the channel from
 a property in the plugin configuration like this:
 
-```
+<pre>
 play {
   track = "${track}"
 }
-```
+</pre>
 This will allow you to specify different deployment channels right in
 the `circle.yml`:
 

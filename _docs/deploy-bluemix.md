@@ -18,7 +18,7 @@ and username, and modify 3 sections in circle.yml.
 
 Here's a minimal example circle.yml configuration:
 
-```
+<pre>
 dependencies:
   pre:
     - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
@@ -37,7 +37,7 @@ deployment:
     branch: master
     commands:
       - cf push
-```
+</pre>
 
 ## Details
 
@@ -48,13 +48,13 @@ First, you have to **install the 'cf' tool on your build VM.**
 This example [circle.yml](/docs/configuration)
 fragment installs the latest version of the 'cf' utility:
 
-```
+<pre>
 dependencies:
   pre:
     - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
     - sudo dpkg -i cf-cli_amd64.deb
     - cf -v
-```
+</pre>
 
 ### Configure 'cf' with your Bluemix credentials
 
@@ -65,14 +65,14 @@ For the sake of convenience, we'll assume you store your Bluemix user there too;
 
 We'll configure 'cf' in our post test section of our circle.yml like:
 
-```
+<pre>
 test:
   post:
     - cf api https://api.ng.bluemix.net
     - cf auth $BLUEMIX_USER $BLUEMIX_PASSWORD
     - cf target -o $BLUEMIX_USER -s dev
     - cf a
-```
+</pre>
 
 ### Configure Deployment to Bluemix
 
@@ -84,13 +84,13 @@ in general if your needs are more complex than what's shown here.
 For the sake of this example, let's deploy the master branch to
 Bluemix every time the tests are green.
 
-```
+<pre>
 deployment:
   production:
     branch: master
     commands:
       - cf push
-```
+</pre>
 
 ### Deploying to Pivotal Web Service
 
@@ -99,13 +99,13 @@ change the names of the variables where the credentials are stored to
 `$PWS_USER` and `$PWS_PASSWORD`, the configuration in the `test: post`
 section will look like this:
 
-```
+<pre>
 test:
   post:
     - cf api https://api.run.pivotal.io
     - cf auth $PWS_USER $PWS_PASSWORD
     - cf target -o $PWS_USER -s dev
     - cf a
-```
+</pre>
 
 The rest of the steps don’t need to be changed.

@@ -10,7 +10,7 @@ tags:
 
 When your tests run, during the `pip install` step, you might see something like this:
 
-```
+<pre>
 Obtaining somerepo from git+ssh://git@github.com/someorg/somerepo.git#egg=somerepo (from -r requirements.txt (line 23))
 Cloning ssh://git@github.com/someorg/somerepo.git to ./venv/src/somerepo
 Complete output from command /usr/bin/git clone -q ssh://git@github.com/someorg/somerepo.git /home/ubuntu/someorg/venv/src/somerepo:
@@ -20,19 +20,19 @@ Command /usr/bin/git clone -q ssh://git@github.com/someorg/somerepo.git /home/ub
 Storing complete log in /home/ubuntu/.pip/pip.log
 ERROR: Repository not found.
 fatal: The remote end hung up unexpectedly
-```
+</pre>
 
 This happens because you have a git repository listed as a dependency in your requirement.txt file:
 
-```
+<pre>
 git+git://github.com/someorg/somerepo.git
-```
+</pre>
 
 If the repository is public, just change the dependency to use a `http` url:
 
-```
+<pre>
 git+http://github.com/someorg/somerepo.git
-```
+</pre>
 
 If the repository is private, you will need to enable user keys
 from your project's ** Project settings > Checkout SSH keys**

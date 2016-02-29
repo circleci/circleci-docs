@@ -58,13 +58,13 @@ Specify the app using the
 `appname`
 key.
 
-```
+<pre>
 deployment:
   staging:
     branch: master
     heroku:
       appname: foo-bar-123
-```
+</pre>
 
 You can now use the `git push` command.
 Upon a successful build, we'll automatically deploy to the app in the section that matches the push, should there be one.

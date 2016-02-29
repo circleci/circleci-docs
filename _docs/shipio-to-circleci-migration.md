@@ -33,11 +33,11 @@ You can set environment variables through the **Project Settings > Environment V
 ### Use Xcode 7
 Include a `circle.yml` file in the repo's root directory with the following contents:
 
-```
+<pre>
 machine:
   xcode:
     version: "7.0"
-```
+</pre>
 
 ### Pick a scheme
 CircleCI will automatically detect your shared scheme. If you have more than one shared scheme in your repo, you can specify the name of the scheme you would like to use to run your tests using the `XCODE_SCHEME` environment variable.
@@ -78,7 +78,7 @@ In order to start the Android Emulator you will need to add some configuration s
 
 Below is a sample circle.yml file taken from an [excellent blog post](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/) written by someone who has an extensively configured Android project on CircleCI.
 
-```
+<pre>
 general:
   artifacts:
     -/home/ubuntu/**repo_name**/build/outputs/reports/**testFolderName**/connected
@@ -109,16 +109,18 @@ test:
   override:
     - (echo "Running JUnit tests!")
     - (./gradlew connectedAndroidTest)
-```
+</pre>
+
 ### Run scripts
 You can specify which scripts to run in your [circle.yml](https://circleci.com/docs/configuration).
 The following .yml snippit would trigger script.sh to run during each build.
 
-```
+<pre>
 machine:
   pre:
     - ./script.sh
-```
+</pre>
+
 Phew, that was a lot!
 Questions, comments, concerns?
 Please don't hesitate to give our [support team](mailto:sayhi@circleci.com) a shout should you have any difficulties!

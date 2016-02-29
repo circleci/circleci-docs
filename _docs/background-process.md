@@ -12,23 +12,23 @@ Starting a background process from [circle.yml](/docs/configuration)
 is entirely possible, but it is not done by adding `&`
 to the end of your command line. Instead, you set the background flag on the command.  For example:
 
-```
+<pre>
 machine:
   post:
     - ./daemon:
           background: true
-```
+</pre>
 
 If your server takes more than a moment to start, it might be worth adding a
 `sleep` to prevent problems when the tests start:
 
-```
+<pre>
 machine:
   post:
     - ./daemon:
           background: true
     - sleep 5
-```
+</pre>
 
 Or better yet, block at the start of your test suite until the
 connection is available.  This speeds up your tests by starting them

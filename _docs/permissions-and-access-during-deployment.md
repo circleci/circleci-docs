@@ -15,8 +15,8 @@ If you leave the **Hostname** field blank, the key will be used for all hosts.
 ### Under the hood
 The ssh private keys that you add from the page are stored under the `~/.ssh` directory for the build user in the container. We also add entries to `~/.ssh/config` to specify which key is used to access which host. For example, if you add a key with the hostname `prod-server`, then `~/.ssh/id_prod-server` will be automatically created and `~/.ssh/config` will have an entry that looks like:
 
-```
+<pre>
 Host prod-server
 IdentitiesOnly yes
 IdentityFile /home/ubuntu/.ssh/id_prod-server
-```
+</pre>

@@ -20,23 +20,23 @@ customize it to your heart's content!
 
 For example, to install smalltalk, add this to your `circle.yml`:
 
-```
+<pre>
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install gnu-smalltalk
-```
+</pre>
 
 If you need to use a specific version of Redis that isn't provided by
 `apt-get`, you can download and compile the needed version into your
 home directory:
 
-```
+<pre>
 dependencies:
   pre:
     - wget http://redis.googlecode.com/files/redis-2.4.18.tar.gz
     - tar xvzf redis-2.4.18.tar.gz
     - cd redis-2.4.18 && make
-```
+</pre>
 
 ### Caching
 
@@ -47,11 +47,11 @@ You can add arbitrary directories to this cache, allowing you to avoid the overh
 Tell CircleCI to save a cached copy using the
 [`cache_directories` setting, in your `circle.yml` file](/docs/configuration#cache-directories).
 
-```
+<pre>
 dependencies:
   cache_directories:
     - redis-2.4.18   # relative to the build directory
-```
+</pre>
 
 ### Avoid recompiles
 
@@ -60,25 +60,25 @@ If the software is already present, no need to build it.
 You should test that your cache is there by including a
 `test` command in the dependencies section in your `circle.yml` file.
 
-```
+<pre>
 dependencies:
   cache_directories:
     - redis-2.4.18
   pre:
     - if [[ ! -e redis-2.4.18/src/redis-server ]]; then wget http://redis.googlecode.com/files/redis-2.4.18.tar.gz && tar xzf redis-2.4.18.tar.gz && cd redis-2.4.18 && make; fi
-```
+</pre>
 
 Or, a little more cleanly:
 
-```
+<pre>
 dependencies:
   pre:
     - bash ./install-redis-2.4.18.sh
-```
+</pre>
 
 where `install-redis-2.4.18.sh` is a file checked into your repository, like the following:
 
-```
+<pre>
 set -x
 set -e
 if [ ! -e redis-2.4.18/src/redis-server ]; then
@@ -87,4 +87,4 @@ if [ ! -e redis-2.4.18/src/redis-server ]; then
   cd redis-2.4.18
   make;
 fi
-```
+</pre>

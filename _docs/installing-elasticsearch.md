@@ -9,22 +9,22 @@ layout: doc
 CircleCI supports a large number of
 [services](/docs/environment#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:
 
-```
+<pre>
 machine:
   services:
     - elasticsearch
-```
+</pre>
 
 The default version of elasticsearch is {{ versions.elasticsearch }}.
 If you need a custom version, you can download and start it from your build. To install 1.0.1, add the following to your circle.yml:
 
-```
+<pre>
 dependencies:
   post:
     - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.0.1.tar.gz
     - tar -xvf elasticsearch-1.0.1.tar.gz
     - elasticsearch-1.0.1/bin/elasticsearch: {background: true}
-```
+</pre>
 
 <span class='label label-info'>Note:</span>
 remember to remove elasticsearch from machine.services if you install it manually.
@@ -33,7 +33,7 @@ remember to remove elasticsearch from machine.services if you install it manuall
 
 It's easy to install a plugin from a url, just add a command to install the plugin before you start elasticsearch:
 
-```
+<pre>
 dependencies:
   post:
     - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.0.1.tar.gz
@@ -42,8 +42,7 @@ dependencies:
     - elasticsearch-1.0.1/bin/plugin --url https://example.com/plugin.zip --install example-plugin
 
     - elasticsearch-1.0.1/bin/elasticsearch: {background: true}
-
-```
+</pre>
 
 ### Caching
 
@@ -55,11 +54,11 @@ Tell CircleCI to save a cached copy using the
 [`cache_directories` settings in your `circle.yml` file](/docs/configuration#cache-directories).
 Then check for the directory before you download elasticsearch:
 
-```
+<pre>
 dependencies:
   cache_directories:
     - elasticsearch-1.0.1 # relative to the build directory
   post:
     - if [[ ! -e elasticsearch-1.0.1 ]]; then wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.0.1.tar.gz && tar -xvf elasticsearch-1.0.1.tar.gz; fi
     - elasticsearch-1.0.1/bin/elasticsearch: {background: true}
-```
+</pre>

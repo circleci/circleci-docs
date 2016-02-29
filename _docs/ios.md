@@ -38,11 +38,11 @@ By default, CircleCI will build your project with Xcode 6.4. You can select 7.0 
 by specifying the version in a [circle.yml file](/docs/configuration) in the root of your
 repo. For example, for 7.1, add the following:
 
-```
+<pre>
 machine:
   xcode:
     version: "7.1"
-```
+</pre>
 
 ## Shared Schemes
 Your scheme (what you select in the dropdown next to the run/stop buttons in
@@ -102,7 +102,7 @@ workspace, project and scheme. In some cases, you may need to override the
 inferred test commands. The following command is representative of how CircleCI
 will build an iOS project:
 
-```
+<pre>
 test:
   override:
     - xctool
@@ -117,12 +117,12 @@ test:
       -workspace MyWorkspace.xcworkspace
       -scheme "My Scheme"
       build build-tests run-tests
-```
+</pre>
 
 In some situations you might also want to build with `xcodebuild` directly. A
 typical `xcodebuild` command line should look like this:
 
-```
+<pre>
 test:
   override:
     - set -o pipefail &&
@@ -137,7 +137,7 @@ test:
         clean build test |
       tee $CIRCLE_ARTIFACTS/xcode_raw.log |
       xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
-```
+</pre>
 
 
 
@@ -166,14 +166,15 @@ custom packages yourself (see below).
 ###Custom packages
 [Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install`
 to add nearly any dependency required in your build VM. Here's an example:
-```
+
+<pre>
 dependencies:
   pre:
     - brew install cowsay
 test:
   override:
     - cowsay Hi!
-```
+</pre>
 
 You can also use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
@@ -184,7 +185,7 @@ by editing your `circle.yml` file. You will need to set the terminal ouput to
 UTF-8, and use `sudo` to install the gem. The example below will install
 CocoaPods version 0.39.0.
 
-```
+<pre>
 machine:
   environment:
     # CocoaPods versions greater than 0.34 require
@@ -197,7 +198,7 @@ dependencies:
     # between different versions of CocoaPods.
     - pod setup
     - pod install
-```
+</pre>
 
 ##Code signing and deployment
 You can build a signed app and deploy to various destinations using the customization options
@@ -247,7 +248,7 @@ location is always `$TMPDIR/com.apple.dt.XCTest-status/`.
 
 The log file will contain the following output:
 
-```
+<pre>
 Initializing test infrastructure.
 Creating the connection.
 Listening for proxy connection request from the test bundle (all platforms)
@@ -261,7 +262,7 @@ Waiting for test process to check in..., will wait up to 120s
 Adding console adaptor for test process.
 Test operation failure: Unable to run app in Simulator
 _finishWithError:Error Domain=IDEUnitTestsOperationsObserverErrorDomain Code=3 "Unable to run app in Simulator" UserInfo=0x7fbb496f1c00 {NSLocalizedDescription=Unable to run app in Simulator} didCancel: 1
-```
+</pre>
 
 We have found the taking the recommended action (re-trying the test) is not
 effective. Instead, we have had good success working around this bug in the

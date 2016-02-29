@@ -53,9 +53,9 @@ propagate the previous exit status, or throw exceptions. Do you have any
 You can use this pattern to preserve non-zero exit codes if you do need to
 call `exit` from your `at_exit` blocks:
 
-```
+<pre>
 at_exit do
   new_exit_status = cleanup_code arg1, arg2
   exit new_exit_status unless $!
 end
-```
+</pre>

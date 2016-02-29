@@ -11,12 +11,12 @@ only produces output as each test suite completes, so it may be necessary
 to
 [set a higher timeout for commands that run it:](/docs/configuration#modifiers)
 
-```
+<pre>
 test:
   override:
     - cabal test:
         timeout: 300
-```
+</pre>
 
 Note that inferred `cabal test` commands are already set to time
 out only after 10 minutes without output, so this is only necessary if

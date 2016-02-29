@@ -15,7 +15,7 @@ step, there is usually a straightforward fix.
 
 Usually, this error looks like
 
-```
+<pre>
 ** Invoke db:create (first_time)
 ** Invoke db:load_config (first_time)
 ** Execute db:load_config
@@ -36,7 +36,7 @@ SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
        AND a.attnum > 0 AND NOT a.attisdropped
      ORDER BY a.attnum
 /home/ubuntu/FooBar/vendor/bundle/ruby/1.9.1/gems/activerecord-3.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:1151:in `async_exec'
-```
+</pre>
 
 ## Understanding ActiveRecord Introspection
 
@@ -66,7 +66,7 @@ should decrease!
 
 If you have this problem, how do you figure out what line is responsible? By reading the stacktrace!
 
-```
+<pre>
 .../activerecord-3.2.6/lib/active_record/connection_adapters/postgresql_adapter.rb:1151:in `async_exec'
 
   .../activerecord-3.2.6/lib/active_record/base.rb:482:in `initialize'
@@ -84,7 +84,7 @@ config/environment.rb:5:in `<top (required)>'
   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
 
   vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'</div>
-```
+</pre>
 
 Here, we can see that `config/environment.rb` loads, which then
 requires `spec/factories.rb` which load,

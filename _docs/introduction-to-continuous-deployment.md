@@ -26,7 +26,7 @@ The following example will run the `deploy-to-production.sh`
 script when the tests pass on the master branch and run the
 `deploy-to-staging.sh` script when the tests pass on the staging branch.
 
-```
+<pre>
 deployment:
   production: # just a label; label names are completely up to you
     branch: master
@@ -36,28 +36,30 @@ deployment:
     branch: staging
     commands:
       - ./deploy-to-staging.sh
-```
+</pre>
 
 #### Regular Expressions
 You can also use regular expressions in the `branch` property.
 
 One example is to deploy branches matching a prefix, e.g. "feature-":
-```
+
+<pre>
 deployment:
   development:
     branch: /feature-.*/  # branches starting with "feature-"
     commands:
       - ./deploy-feature-branch
-```
+</pre>
 
 You could also run deployments for everything but the master branch:
-```
+
+<pre>
 deployment:
   development:
     branch: /^((?!master).)*$/  # not the master branch
     commands:
       - ./deploy-development
-```
+</pre>
 
 
 
@@ -75,23 +77,23 @@ private servers or to EC2, Rackspace, and other cloud hosting providers.
 
 You can use your existing Capistrano recipes, for example:
 
-```
+<pre>
 deployment:
   production:
     branch: master
     commands:
       - bundle exec cap production deploy
-```
+</pre>
 
 Here's an example using Fabric:
 
-```
+<pre>
 deployment:
   production:
     branch: master
     commands:
       - fab deploy
-```
+</pre>
 
 ### Deploy to a PaaS
 

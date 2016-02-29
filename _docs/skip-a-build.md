@@ -16,7 +16,7 @@ You can use the handy retry button on the build page if you decide that you want
 
 If Daniel pushes his last two commits now, CircleCI won't run tests for that push:
 
-```
+<pre>
 $ git log origin/master..HEAD
 
 commit 63ce74221ff899955dd6258020d6cb9accede893
@@ -30,6 +30,6 @@ Author: Daniel Woelfel <daniel@circleci.com>
 Date:   Wed Jan 23 16:30:24 2013 -0800
 
     add "Skip a build" doc
-```
+</pre>
 
 Note that if the commits were in the opposite order, then the push would have been built. Currently `[ci skip]` does not support fork PRs.

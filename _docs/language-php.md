@@ -21,11 +21,11 @@ Circle supports more than a dozen [versions of PHP,](/docs/environment#php)
 and uses `{{ versions.default_php }}` as the default. You can set a custom
 version of PHP in the machine section of your circle.yml:
 
-```
+<pre>
 machine:
   php:
     version: 5.5.11
-```
+</pre>
 
 Please [contact us](mailto:sayhi@circleci.com)
 if you need a different version; we'll be happy to install it for you.
@@ -40,19 +40,19 @@ you have to include [dependency commands](/docs/configuration#dependencies)
 in your `circle.yml` file.
 The following example shows how to install the MongoDB extension using `pecl`.
 
-```
+<pre>
 dependencies:
   pre:
     - pecl install mongo
-```
+</pre>
 
 You can also edit your PHP configuration from your `circle.yml`. For example, if you have a custom configuration file checked in to your repo, then you could do:
 
-```
+<pre>
 dependencies:
   pre:
     - cp config/custom.ini ~/.phpenv/versions/$(phpenv global)/etc/conf.d/
-```
+</pre>
 
 <span class='label label-info'>Note:</span>
 `phpenv global` returns the PHP version that has been
@@ -61,11 +61,11 @@ specified in your `circle.yml` file.
 Here's another example showing how you could adjust PHP settings in
 a `.ini` file.
 
-```
+<pre>
 dependencies:
   pre:
     - echo "memory_limit = 64M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
-```
+</pre>
 
 <span class='label label-info'>Note:</span>
 you'll have to specify your PHP version in your `circle.yml` in order to edit PHP's configuration files.
@@ -90,7 +90,7 @@ Then enable the site with `a2ensite` and restart Apache.
 An example configuration that sets up Apache to serve the PHP site from
 `/home/ubuntu/MY-PROJECT/server-root` is:
 
-```
+<pre>
 Listen 8080
 
 <VirtualHost *:8080>
@@ -102,7 +102,7 @@ Listen 8080
     SetHandler application/x-httpd-php
   </FilesMatch>
 </VirtualHost>
-```
+</pre>
 
 Replace `MY-SITE` in with the name of your site configuration
 file and `PHP_VERSION` with the version of PHP you configured
@@ -110,23 +110,23 @@ in your `circle.yml`.
 
 Then enable your site and restart Apache by adding the following to your `circle.yml`
 
-```
+<pre>
 dependencies:
   post:
     - cp ~/MY-PROJECT/MY-SITE /etc/apache2/sites-available
     - a2ensite MY-SITE
     - sudo service apache2 restart
-```
+</pre>
 
 ### Testing
 
 Circle always runs your tests on a fresh machine. If we find a `phpunit.xml` file in your repo, then we'll run `phpunit` for you. You can add custom test commands to the test section of your `circle.yml`:
 
-```
+<pre>
 test:
   override:
     - ./my_testing_script.sh
-```
+</pre>
 
 <h3 id="xdebug">Enable Xdebug</h3>
 
@@ -134,11 +134,11 @@ Xdebug is installed for all versions of PHP, but is disabled (for performance re
 default. It is simple to enable this tool by adding the following to your
 `circle.yml` file:
 
-```
+<pre>
 dependencies:
   pre:
     - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
-```
+</pre>
 
 ### Deployment
 

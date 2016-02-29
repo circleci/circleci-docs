@@ -21,9 +21,9 @@ Username:
 
 To get around this, tell composer to use git to fetch dependencies instead:
 
-```
+<pre>
 composer install --prefer-source --no-interaction
-```
+</pre>
 
 ### API rate limits and custom repositories
 
