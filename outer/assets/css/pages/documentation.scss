@@ -16,11 +16,32 @@ $whiten:               #fbfbfb;
 $white:                #ffffff;
 
 $border-radius-base:        4px;
-$blue:                                                 #337AB7; // #007196
+$blue:                 #337AB7; // #007196
+
+// Pixel value used to responsively scale all typography. Applied to the `<html>` element.
+$font-size-root:             16px;
+$font-size-base:             $font-size-root; // ~16px
+
+$font-size-h1:            floor(($font-size-base * 2.4)); // ~38px
+$font-size-h2:            floor(($font-size-base * 1.5)); // ~24px
+$font-size-h3:            ceil(($font-size-base * 1.25)); // ~20px
+$font-size-h4:            ceil(($font-size-base * 1.25)); // ~20px
+$font-size-h5:            $font-size-base;
+$font-size-h6:            ceil(($font-size-base * 0.75)); // ~12px
+
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
+h5, .h5 { font-size: $font-size-h5; }
+h6, .h6 { font-size: $font-size-h6; }
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height:                1.5;
+$line-height-base:           1.5;
 
 .docs {
-  padding: 0;
-  line-height: 1.5;
+  padding: 40px 0;
 
   // Home page / search
 
