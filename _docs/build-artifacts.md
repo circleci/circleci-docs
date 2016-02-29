@@ -1,6 +1,6 @@
 ---
 
-title: Build artifacts
+title: Build Artifacts
 layout: doc
 tags:
   - reference
@@ -15,8 +15,8 @@ read-only `$CIRCLE_ARTIFACTS`
 [environment variable](/docs/environment-variables).
 
 If you prefer, you can also
-[configure directories and files whose contents will](/docs/configuration#artifacts)
-be saved.
+[configure directories and files](/docs/configuration#artifacts)
+whose contents will be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.
 

@@ -5,7 +5,6 @@ layout: doc
 tags:
   - troubleshooting
   - clojure
-
 ---
 
 This is caused by using jars that were AOT compiled against

@@ -1,11 +1,10 @@
 ---
 
-title: Generating code coverage metrics
+title: Generating Code Coverage Metrics
 layout: doc
 short_title: Code Coverage
 tags:
   - how-to
-
 ---
 
 Code Coverage tells you how much of your application is tested.

@@ -1,11 +1,10 @@
 ---
 
-title: Do you need the latest version of Bundler?
+title: Do you Need the Latest Version of Bundler?
 layout: doc
 tags:
   - troubleshooting
   - ruby
-
 ---
 
 CircleCI typically tracks the latest stable version of bundler.

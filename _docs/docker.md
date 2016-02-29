@@ -24,11 +24,11 @@ first.
 To use Docker on CircleCI, simply add Docker as a required service in your
 `circle.yml` file like this:
 
-```
+<pre>
 machine:
   services:
     - docker
-```
+</pre>
 
 You will then be able to use the `docker` command throughout your
 `circle.yml` file. Note that you don't need to use `sudo`
@@ -45,7 +45,7 @@ Here is an example of a `circle.yml`
 file that builds the standard ElasticSearch Docker image and deploys it to
 Docker Hub:
 
-```
+<pre>
 machine:
   services:
     - docker
@@ -66,7 +66,7 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push circleci/elasticsearch
-```
+</pre>
 
 For a complete example of building and deploying a Docker image to a
 registry, see the [circleci/docker-elasticsearch](https://github.com/circleci/docker-elasticsearch)

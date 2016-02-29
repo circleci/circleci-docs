@@ -1,11 +1,10 @@
 ---
 
-title: Why can I not follow a project?
+title: Why Can I not Follow a Project?
 layout: doc
 tags:
   - github
   - privacy-security
-
 ---
 
 GitHub requires admin permissions to add an SSH key to a

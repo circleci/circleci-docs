@@ -17,7 +17,7 @@ then you can use Sauce Labs in the usual way without worrying about Sauce Connec
 This example `circle.yml` file demonstrates how to run browser tests through Sauce Labs
 against a test server running within a CircleCI build container.
 
-```
+<pre>
 dependencies:
   post:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
@@ -31,7 +31,7 @@ test:
         background: true
     - sleep 60
     - nosetests
-```
+</pre>
 
 To see the complete example project that goes along with this example, see
 [circleci/sauce-connect](https://github.com/circleci/sauce-connect)

@@ -12,13 +12,13 @@ tags:
 Watch these videos for a step-by-step walkthrough of setting up a continuous delivery
 pipeline with CircleCI and Heroku:
 
-#### Part 1: Green builds and red builds
+#### Part 1: Green Builds and Red Builds
 
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/Hfs_1yuWDf4?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
 </div>
 
-#### Part 2: Multiple environments
+#### Part 2: Multiple Environments
 
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/YtvKVfjKGWw?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
@@ -27,7 +27,7 @@ pipeline with CircleCI and Heroku:
 You can also look at the GitHub repo used in the above videos
 [here.](https://github.com/circleci/heroku-cd)
 
-## Heroku setup
+## Heroku Setup
 
 You must supply or confirm some authentication settings before Heroku deployment.
 CircleCI dividies this setup work into three steps.
@@ -73,11 +73,11 @@ Upon a successful build, we'll automatically deploy to the app in the section th
 using different keys for each one. Heroku enforces a rate-limit of 75 git
 requests per hour per key.
 
-<h2 id="pre-or-post">Heroku with pre- or post-deployment steps</h2>
+<h2 id="pre-or-post">Heroku With Pre- or Post-Deployment Steps</h2>
 
 If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax.
 
-```
+<pre>
 deployment:
   production:
     branch: production
@@ -86,11 +86,11 @@ deployment:
       - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app foo-bar-123:
           timeout: 400 # if your deploys take a long time
-```
+</pre>
 
 Note the 'git fetch --unshallow' command; we do shallow clones by default, which can't always push to heroku.
 
-<h2 id="maintenance-mode">Heroku's maintenance mode</h2>
+<h2 id="maintenance-mode">Heroku's Maintenance Mode</h2>
 
 When you are pushing new code that requires a database migration, your app will not be available.
 To be  polite, you might want to treat your users to more than an enigmatic error page.
@@ -109,7 +109,7 @@ To ensure that no background jobs are processed during migration, scale down all
 Here is how to tweak the `deployment`
 section of your `circle.yml` file to employ these commands.
 
-```
+<pre>
 deployment:
   staging:
     commands:
@@ -119,7 +119,7 @@ deployment:
       - heroku run rake db:migrate --app foo-bar-123
       - heroku scale worker=x --app foo-bar-123
       - heroku maintenance:off --app foo-bar-123
-```
+</pre>
 
 ### Custom maintenance page
 
@@ -128,7 +128,7 @@ Should you wish, you can create a
 [custom](http://devcenter.heroku.com/articles/error-pages#customize-pages)
 service unavailable page for your app.
 
-<h2 id="migrations">Heroku and database migrations</h2>
+<h2 id="migrations">Heroku and Database Migrations</h2>
 
 After pushing new code, you may wish to run your database migration.
 **Migration times will vary between apps because of data size and structure.**
@@ -142,7 +142,7 @@ command to
 [capture a snapshot](http://devcenter.heroku.com/articles/migrate-heroku-postgres-with-pgbackups#capture-source-snapshot)
 so that you can easily revert the database back to its previous state.
 
-### Migration guides
+### Migration Guides
 
 Here are migration-related articles that you might find useful.
 
@@ -150,7 +150,7 @@ Here are migration-related articles that you might find useful.
 *   [node.js](http://github.com/nearinfinity/node-db-migrate#readme)
 *   [Django (Python web framework)](http://djangopro.com/2011/01/django-database-migration-tool-south-explained)
 
-<h2 id="caches">Clearing caches after a deployment</h2>
+<h2 id="caches">Clearing Caches After a Deployment</h2>
 
 If you are using a caching add-on,
 it is likely that you want to clear your caches after a deploy to avoid using out-of-date and possibly corrupt documents and/or data.
@@ -163,7 +163,7 @@ MemCachier supports a `Flush` command that clears your entire cache.
 You might want to write a standalone script that uses the memcache client to call
 `Flush` and run the script at deployment.
 
-### Related articles
+### Related Articles
 
 Here are related articles that you might find useful.
 
