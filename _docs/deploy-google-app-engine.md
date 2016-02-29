@@ -29,12 +29,12 @@ This example [circle.yml](/docs/configuration)
 fragment installs version 1.5.1 of the Python Google App Engine SDK. Modify it to
 download the SDK you need:
 
-```
+<pre>
 dependencies:
   pre:
     - curl -o $HOME/google_appengine_1.9.13.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.13.zip
     - unzip -q -d $HOME $HOME/google_appengine_1.9.13.zip
-```
+</pre>
 
 ## Configure Deployment to Google App Engine
 
@@ -52,37 +52,37 @@ the same thing:
 
 Using [appcfg.py update](https://developers.google.com/appengine/docs/python/gettingstarted/uploading):
 
-```
+<pre>
 deployment:
   appengine:
     branch: master
     commands:
       - echo $APPENGINE_PASSWORD | $HOME/google_appengine/appcfg.py update --email=$APPENGINE_EMAIL --passin .
-```
+</pre>
 
 ### Java
 
 Using [appcfg.sh update](https://developers.google.com/appengine/docs/java/tools/uploadinganapp):
 
-```
+<pre>
 deployment:
   appengine:
     branch: master
     commands:
       - echo $APPENGINE_PASSWORD | $HOME/appengine-java-sdk/bin/appcfg.sh update --email=$APPENGINE_EMAIL --passin .
-```
+</pre>
 
 ### Go
 
 Using [appcfg.py update](https://developers.google.com/appengine/docs/go/tools/uploadinganapp):
 
-```
+<pre>
 deployment:
   appengine:
     branch: master
     commands:
       - echo $APPENGINE_PASSWORD | $HOME/google_appengine/appcfg.py update --email=$APPENGINE_EMAIL --passin .
-```
+</pre>
 
 ### Credentials
 

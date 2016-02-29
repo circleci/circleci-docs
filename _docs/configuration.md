@@ -28,7 +28,7 @@ If you find yourself repeatedly consulting this guide, please
 We'll try to make it easier for you.
 
 
-<h2 id="phases">File structure and content</h2>
+<h2 id="phases">File Structure and Content</h2>
 
 The `circle.yml` file is made up of six primary sections.
 Each section represents a _phase_ of running your tests:
@@ -37,7 +37,7 @@ Each section represents a _phase_ of running your tests:
 *   **checkout**: checking out and cloning your git repo
 *   **dependencies**: setting up your project's language-specific dependencies
 *   **database**: preparing the databases for your tests
-*   **test**: running your tests
+*   **test**: running your testsƒ
 *   **deployment**: deploying your code to your web servers
 
 The `circle.yml`
@@ -64,9 +64,9 @@ Each command is run in a separate shell.
 As such, they do not share an environment with their predecessors, so be aware that
 `export foo=bar` in particular does not work.
 If you'd like to set an environment variable globally, you can specify them in the
-[Machine configuration](#machine) section, described below.
+[Machine Configuration](#machine) section, described below.
 
-#### Modifiers
+### Modifiers
 
 You can tweak individual commands by adding a modifier.
 Allowed modifiers are:
@@ -194,7 +194,7 @@ Hostnames [must be well formed](http://en.wikipedia.org/wiki/Hostname#Restrictio
 CircleCI will only accept hostnames that contain alpha-numeric characters,
 hyphens (-) and dots (.).
 
-### Ruby version
+### Ruby Version
 
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
 We use the Ruby version you specify in your `.rvmrc`, your
@@ -243,7 +243,7 @@ The default version of Java is `oraclejdk7`.
 See [supported Java versions](/docs/environment#java)
 for a complete list.
 
-### PHP version
+### PHP Version
 
 CircleCI uses [php-build](https://github.com/CHH/php-build)
 and [phpenv](https://github.com/CHH/phpenv)
@@ -258,7 +258,7 @@ machine:
 
 See [supported PHP versions](/docs/environment#php) for a complete list.
 
-### Python version
+### Python Version
 
 CircleCI uses [pyenv](https://github.com/yyuu/pyenv)
 to manage Python versions.
@@ -285,7 +285,7 @@ machine:
     version: 7.8.3
 ```
 
-### Other languages
+### Other Languages
 
 Our [test environment](/docs/environment) document has more configuration information about
 [other languages](/docs/environment#other) including [Python](/docs/environment#python),
@@ -318,7 +318,7 @@ machine:
 The `checkout` section is usually pretty vanilla, but we include examples of common things you might need to put in the section.
 Because we don't read `circle.yml` until after the checkout phase, only `post` is supported in this section.
 
-####  Example: using git submodules
+####  Example: Using Git Submodules
 
 ```
 checkout:
@@ -344,7 +344,7 @@ CircleCI automatically runs commands to fetch such dependencies.
 You can use `override`, `pre`, and/or `post` to modify `dependencies` commands.
 Here are examples of common tweaks you might make in the `dependencies` section.
 
-####  Example: using npm and Node.js
+####  Example: Using NPM and Node.js
 
 ```
 dependencies:
@@ -361,7 +361,7 @@ dependencies:
     - gem install bundler --pre
 ```
 
-### Bundler flags
+### Bundler Flags
 
 If your project includes bundler (the dependency management program for Ruby), you can include
 `without` to list dependency groups to be excluded from bundle install.
@@ -436,7 +436,7 @@ test:
           RAILS_ENV: test
 ```
 
-####  Example: running phpunit on a special directory
+####  Example: Running Phpunit on a Special Directory
 
 
 ```
@@ -585,31 +585,31 @@ Specify the app you'd like to
 `git push` to under `appname`.
 Upon a successful build, we'll automatically deploy to the app in the section that matches the push, if there is one.
 
-```
+<pre>
 deployment:
   staging:
     branch: master
     heroku:
       appname: foo-bar-123
-```
+</pre>
 
 Setting up our deployment to Heroku requires one extra step.
 Due to Heroku's architecture and security model, we need to deploy as a particular user.
 A member of your project, possibly you, will need to register as that user.
 CircleCI's UI enables you to do this on your project's **Project Settings > Heroku settings** page.
 
-### Heroku with pre or post-deployment steps
+### Heroku With Pre or Post-Deployment Steps
 
 If you want to deploy to Heroku and also run commands before or after the deploy, you must use the 'normal' deployment syntax.
 
-```
+<pre>
 deployment:
     production:
       branch: production
       commands:
         - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
         - heroku run rake db:migrate --app foo-bar-123
-```
+</pre>
 
 <h2 id="notify">Notifications</h2>
 
@@ -685,7 +685,7 @@ it leads to problems when that untested code gets merged.
 `circle.yml` is per-branch configuration file, and the branch ignore list in one branch will
 only affect that branch and no other one.
 
-<h2 id="build-dir">Specifying build directory</h2>
+<h2 id="build-dir">Specifying Build Directory</h2>
 
 Circle runs all commands on the repository root, by default.  However, if
 you store your application code in a subdirectory instead of the root, you
@@ -699,25 +699,25 @@ general:
 
 Circle will run its inference as well as all build commands from that directory.
 
-<h2 id="artifacts">Specifying custom artifacts directories and files</h2>
+<h2 id="artifacts">Specifying Custom Artifacts Directories and Files</h2>
 
 You can specify extra directories and files to be
 [saved as artifacts](/docs/build-artifacts):
 
-```
+<pre>
 general:
   artifacts:
     - "selenium/screenshots" # relative to the build directory
     - "~/simplecov" # relative to the user's home directory
     - "test.txt" # a single file, relative to the build directory
-```
+</pre>
 
-<h2 id="experimental">Experimental configuration</h2>
+<h2 id="experimental">Experimental Configuration</h2>
 
 Our **experimental** section is a way of giving early previews of new configuration
 options we are considering adding. These settings are liable to change without notice.
 
-<h3 id="per-branch-notifications">Per branch build notification in chat channels</h3>
+<h3 id="Per-Branch-Notifications">Per Branch Build Notification in Chat Channels</h3>
 
 The only experimental setting available at this time is a black- and white-list mechanism
 for chat channel build notifications based on the branch name.
@@ -769,7 +769,7 @@ experimental:
 
 a branch named "feature-1" will send a notification, but "feature.experiment-1" will not.
 
-<h2 id="help">Need anything else?</h2>
+<h2 id="help">Need Anything Else?</h2>
 
 We are adding support for configuring every part of your build.
 If you need to tweak something that isn't currently supported, please

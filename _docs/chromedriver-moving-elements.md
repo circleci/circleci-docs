@@ -1,12 +1,10 @@
 ---
 
-title: ChromeDriver raises an 'Element is not clickable' exception
+title: ChromeDriver Raises an 'Element is Not Clickable' Exception
 layout: doc
 tags:
   - troubleshooting
   - browsers
-
-
 ---
 
 This can be caused by the small delay between ChromeDriver determining the

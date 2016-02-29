@@ -7,11 +7,12 @@ tags:
   - browsers
 
 ---
+## Integration Tests
 
 Integration tests can be hard to debug, especially when they're running on a remote machine.
 There are four good ways to debug browser tests on CircleCI.
 
-## Screenshots and artifacts
+## Screenshots and Artifacts 
 
 At the end of a build on CircleCI, we will gather up all [build artifacts](/docs/build-artifacts)
 and make them available from your build. This allows you to save screenshots as part of your build,
@@ -61,7 +62,7 @@ example.
 
 ## Interact with the browser over VNC
 
-### Spawning your own X Server
+## Spawning your own X Server
 
 VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless -- there is nothing to interact with.
 

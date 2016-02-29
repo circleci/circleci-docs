@@ -143,7 +143,8 @@ $ curl https://circleci.com/api/v1/me?circle-token=:token
 ```
 
 3.  You should see a response like the following:
-    ```
+
+<pre>
 {
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
@@ -153,7 +154,7 @@ $ curl https://circleci.com/api/v1/me?circle-token=:token
   "admin" : true,
   "login" : "pbiggar"
 }
-```
+</pre>
 
 <h2 id="calling">Making calls</h2>
 
@@ -182,7 +183,6 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 ## User
 
 {{ api_data.me | api_endpoint }}
-
 
 ## Projects
 
@@ -270,7 +270,6 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ api_data.delete_checkout_key | api_endpoint}}
 
-
 ## Test Metadata
 
 {{ api_data.test_metadata | api_endpoint }}
@@ -280,3 +279,4 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 ## SSH Keys
 
 {{ api_data.ssh_key | api_endpoint }}
+

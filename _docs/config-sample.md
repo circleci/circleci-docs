@@ -17,7 +17,7 @@ You don't have to include any section you don't need.
 
 <h2 id="sample">The sample</h2>
 
-```
+<pre>
 ## Customize the test machine
 machine:
 
@@ -91,4 +91,4 @@ notify:
   webhooks:
     # A list of hashes representing hooks. Only the url field is supported.
     - url: https://someurl.com/hooks/circle
-```
+</pre>

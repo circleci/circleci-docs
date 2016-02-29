@@ -1,6 +1,6 @@
 ---
 
-title: Test Android applications
+title: Test Android Applications
 layout: doc
 short_title: Android
 popularity: 2
@@ -10,63 +10,54 @@ tags:
 ---
 {% assign versions = site.data.versions %}
 
-# Android on CircleCI
+## Android on CircleCI
 
 CircleCI supports building and testing Android applications.
 
-### Dependencies
+## Dependencies
 
 The SDK is already installed on the VM at `/usr/local/android-sdk-linux`. We export
 this path as `$ANDROID_HOME`.
 
-We have the following SDK packages preinstalled:
+## Preinstalled SDK Packages:
 
-{{ versions.android_sdk_packages | code-list}}
+  * {{ versions.android_sdk_packages | code-list}}
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
-
 ```
 dependencies:
   pre:
     - echo y | android update sdk --no-ui --all --filter "package-name"
 ```
-
 We also preinstall the Android NDK; it can be found at `$ANDROID_NDK`.
-
 `./gradlew dependencies` will also be run automatically if you have a
 Gradle wrapper checked in to the root of your repository.
 
-### Building Android Projects Manually
+## Building Android Projects Manually
 
 If you only want to build your project you can create a debug build with
-
 ```
 test:
   override:
     - ./gradlew assembleDebug
 ```
-
 or build a release `.apk` and save it to [artifacts](build-artifacts) with
-
 ```
 test:
   override:
     - ./gradlew assembleRelease
     - cp -r project-name/build/outputs $CIRCLE_ARTIFACTS
 ```
-
 If you start the emulator, you can install your APK on it with something lik
 the following:
-
 ```
 test:
   override:
     - adb install path/to/build.apk
 ```
 
-
-#### Disable Pre-Dexing to Improve Build Performance
+## Disable Pre-Dexing to Improve Build Performance
 
 By default the Gradle android plugin pre-dexes dependencies,
 converting their Java bytecode into Android bytecode. This speeds up
@@ -81,12 +72,12 @@ CircleCI.
 
 [disable-pre-dexing]: http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance
 
-### Testing Android Projects
+## Testing Android Projects
 
 Firstly: if you have a Gradle wrapper in the root of your repository,
 we'll automatically run `./gradlew test`.
 
-<h4 id="emulator">Starting the Android Emulator</h3>
+<h4 id="emulator">Starting the Android Emulator</h4>
 
 Starting the android emulator can be an involved process and, unfortunately, can take
 a few minutes. You can start the emulator and wait for it to finish with something like
@@ -101,7 +92,7 @@ test:
     - circle-android wait-for-boot
 </pre>
 
-`circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
+ 'circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
 There's also a corresponding `circleci-android21`; alternatively, you can
 [can create your own][create-avd] if these don't suit your purposes.
 
@@ -119,7 +110,7 @@ this [here][starting-emulator].
 [starting-emulator]:https://devmaze.wordpress.com/2011/12/12/starting-and-stopping-android-emulators/
 
 
-#### Running Tests Against the Emulator
+### Running Tests Against the Emulator
 
 The standard way to run tests in the Android emulator is with
 something like `./gradlew connectedAndroidTest`.
@@ -136,13 +127,13 @@ order to prevent failing commands from being understood as passing.
 [fb-adb]:https://github.com/facebook/fb-adb
 
 
-#### Test Metadata
+### Test Metadata
 
 Many test suites for Android produce JUnit XML output. After running your tests,
 you can copy that output to `$CIRCLE_TEST_REPORTS` so that CircleCI will display
 the individual test results.
 
-#### Deploying to Google Play Store
+### Deploying to Google Play Store
 
 There are a few plugins for Gradle that allow you to push your `apk` to
 Google Play Store with a simple Gradle command, for example [this plugin](https://github.com/Triple-T/gradle-play-publisher).
@@ -160,7 +151,7 @@ play {
 This will allow you to specify different deployment channels right in
 the `circle.yml`:
 
-```
+<pre>
 deployment:
   production: # just a label; label names are completely up to you
     branch: master
@@ -172,11 +163,11 @@ deployment:
     commands:
       - ./gradlew publishApkRelease
         -Dorg.gradle.project.track=beta
-```
+</pre>
 
 ### Sample circle.yml
 
-```
+<pre>
 test:
   override:
     # start the emulator
@@ -191,7 +182,7 @@ test:
     - cp -r my-project/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
     - cp -r my-project/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
-```
+</pre>
 
 Please don't hesitate to [contact us](mailto:sayhi@circleci.com)
 if you have any questions at all about how to best test Android on

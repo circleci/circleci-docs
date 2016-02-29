@@ -6,6 +6,7 @@ tags:
   - how-to
 
 ---
+## Background Process
 
 Starting a background process from [circle.yml](/docs/configuration)
 is entirely possible, but it is not done by adding `&`

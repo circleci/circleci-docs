@@ -1,11 +1,10 @@
 ---
 
-title: "unable to obtain stable firefox connection in 60 seconds"
+title: "Unable to Obtain Stable Firefox Connection in 60 Seconds"
 layout: doc
 tags:
   - troubleshooting
   - ruby
-
 ---
 
 This is an issue with the selenium-webdriver gem.
