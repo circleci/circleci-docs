@@ -37,7 +37,7 @@ Each section represents a _phase_ of running your tests:
 *   **checkout**: checking out and cloning your git repo
 *   **dependencies**: setting up your project's language-specific dependencies
 *   **database**: preparing the databases for your tests
-*   **test**: running your testsƒ
+*   **test**: running your tests
 *   **deployment**: deploying your code to your web servers
 
 The `circle.yml`
