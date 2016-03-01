@@ -15,7 +15,7 @@ article attempts to address several of the most popular uses for Docker on Circl
 but it is not an exhaustive list. Please [contact us](mailto:sayhi@circleci.com)
 if you have questions about uses of Docker that are not covered here. (Note that this article assumes some knowledge of Docker. If you are just getting started
 with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
-first.
+first.)
 
 ##Basic usage
 
