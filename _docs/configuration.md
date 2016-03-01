@@ -343,7 +343,7 @@ CircleCI automatically runs commands to fetch such dependencies.
 You can use `override`, `pre`, and/or `post` to modify `dependencies` commands.
 Here are examples of common tweaks you might make in the `dependencies` section.
 
-####  Example: Using NPM and Node.js
+####  Example: Using npm and Node.js
 
 <pre>
 dependencies:
