@@ -30,11 +30,11 @@ whichever we think is best for your project.
 
 You can manually set your Ruby version from your `circle.yml`:
 
-```
+<pre>
 machine:
   ruby:
     version: rbx-2.2.6
-```
+</pre>
 
 Our [test environment doc](/docs/environment)
 covers more details about language versions and tools; it also explains how Circle
@@ -47,11 +47,11 @@ gems are automatically cached between builds to save time downloading dependenci
 You can add additional project dependencies from the
 [dependencies section of your circle.yml](/docs/configuration#dependencies):
 
-```
+<pre>
 dependencies:
   post:
     - bundle exec rake assets:precompile
-```
+</pre>
 
 ### Databases
 
@@ -71,11 +71,11 @@ using Test::Unit, RSpec, Cucumber, Spinach, Jasmine, or Konacha.
 You can also add additional commands from the
 [test section of your circle.yml](/docs/configuration#test):
 
-```
+<pre>
 test:
   post:
     - bundle exec rake test:custom
-```
+</pre>
 
 ### Testing in Parallel
 

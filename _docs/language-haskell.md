@@ -27,11 +27,11 @@ available. We use `{{ versions.ghc }}`
 as the default; if you'd like a particular version, you
 can specify it in your `circle.yml`:
 
-```
+<pre>
 machine:
   ghc:
     version: 7.8.3
-```
+</pre>
 
 ### Dependencies & Tests
 
@@ -42,11 +42,11 @@ the `override`, `pre`, and `post` properties in the
 [dependencies](/docs/configuration#dependencies)
 and [test](/docs/configuration#test) sections.
 
-```
+<pre>
 test:
   post:
     - cabal bench
-```
+</pre>
 
 Circle can [cache directories](/docs/configuration#cache-directories)
 in between builds to avoid unnecessary work. If you use Cabal, our inferred
@@ -61,11 +61,11 @@ Circle supports saving and uploading arbitrary
 If you'd like to automatically generate documentation with Haddock,
 you can put something like this in your `circle.yml`:
 
-```
+<pre>
 test:
   post:
     - cabal haddock --builddir=$CIRCLE_ARTIFACTS
-```
+</pre>
 
 ### Troubleshooting
 

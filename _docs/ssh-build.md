@@ -65,15 +65,15 @@ these things:
 Github makes it very easy to test that your keys are setup as expected.
 Just run:
 
-```
+<pre>
 $ ssh git@github.com
-```
+</pre>
 
 and you should see:
 
-```
+<pre>
 Hi :username! You've successfully authenticated...
-```
+</pre>
 
 If you _don't_ see output like that, you need to start by
 [troubleshooting your ssh keys with github](https://help.github.com/articles/error-permission-denied-publickey).
@@ -84,9 +84,9 @@ If you have multiple github accounts, double-check that you are
 authenticated as the right one! Again, using github's ssh service,
 run ssh git@github.com and look at the output:
 
-```
+<pre>
 Hi :username! You've successfully authenticated...
-```
+</pre>
 
 In order to ssh to a circle build, the username must be one which has
 access to the project being built!
@@ -105,17 +105,17 @@ several reasons, depending on your ssh configuration.)
 Figure out which key is being offered to github that authenticates you, by
 running:
 
-```
+<pre>
 $ ssh -v git@github.com
-```
+</pre>
 
 In the output, look for a sequence like this:
 
-```
+<pre>
 debug1: Offering RSA public key: /Users/me/.ssh/id_rsa_github
 <...>
 debug1: Authentication succeeded (publickey).
-```
+</pre>
 
 This sequence indicates that the key /Users/me/.ssh/id_rsa_github is the one which
 github accepted.
@@ -123,9 +123,9 @@ github accepted.
 Next, run the ssh command for your circle build, but add the -v flag.
 In the output, look for one or more lines like this:
 
-```
+<pre>
 debug1: Offering RSA public key: ...
-```
+</pre>
 
 Make sure that the key which github accepted (in our
 example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
@@ -133,9 +133,9 @@ example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
 If it was not offered, you can specify it via the -i command-line
 argument to ssh. For example:
 
-```
+<pre>
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
-```
+</pre>
 
 ##### Nope, still broken
 

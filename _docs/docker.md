@@ -13,22 +13,20 @@ CircleCI currently offers beta support for running Docker within build container
 Docker is an extremely flexible tool that supports many different use cases. This
 article attempts to address several of the most popular uses for Docker on CircleCI,
 but it is not an exhaustive list. Please [contact us](mailto:sayhi@circleci.com)
-if you have questions about uses of Docker that are not covered here.
-
-Note that this article assumes some knowledge of Docker. If you are just getting started
+if you have questions about uses of Docker that are not covered here. (Note that this article assumes some knowledge of Docker. If you are just getting started
 with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
-first.
+first.)
 
-###Basic usage
+##Basic usage
 
 To use Docker on CircleCI, simply add Docker as a required service in your
 `circle.yml` file like this:
 
-```
+<pre>
 machine:
   services:
     - docker
-```
+</pre>
 
 You will then be able to use the `docker` command throughout your
 `circle.yml` file. Note that you don't need to use `sudo`
@@ -45,7 +43,7 @@ Here is an example of a `circle.yml`
 file that builds the standard ElasticSearch Docker image and deploys it to
 Docker Hub:
 
-```
+<pre>
 machine:
   services:
     - docker
@@ -66,7 +64,7 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push circleci/elasticsearch
-```
+</pre>
 
 For a complete example of building and deploying a Docker image to a
 registry, see the [circleci/docker-elasticsearch](https://github.com/circleci/docker-elasticsearch)
@@ -100,7 +98,7 @@ does the following:
     by referencing the tag
 6.  Updates the Elastic Beanstalk environment to use the new version
 
-```
+<pre>
 # circle.yml
 machine:
   python:
@@ -124,18 +122,18 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - ./deploy.sh $CIRCLE_SHA1
-```
+</pre>
 
-```
+<pre>
 # deploy.sh
 #! /bin/bash
 
 SHA1=$1
 
-# Deploy image to Docker Hub
+## Deploy image to Docker Hub
 docker push circleci/hello:$SHA1
 
-# Create new Elastic Beanstalk version
+## Create new Elastic Beanstalk version
 EB_BUCKET=hello-bucket
 DOCKERRUN_FILE=$SHA1-Dockerrun.aws.json
 sed "s/<TAG>/$SHA1/" < Dockerrun.aws.json.template > $DOCKERRUN_FILE
@@ -143,10 +141,10 @@ aws s3 cp $DOCKERRUN_FILE s3://$EB_BUCKET/$DOCKERRUN_FILE
 aws elasticbeanstalk create-application-version --application-name hello \
   --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$DOCKERRUN_FILE
 
-# Update Elastic Beanstalk environment to new version
+## Update Elastic Beanstalk Environment to New Version
 aws elasticbeanstalk update-environment --environment-name hello-env \
     --version-label $SHA1
-```
+</pre>
 
 Note that Elastic Beanstalk
 also allows you to deploy a Dockerfile and associated source code instead of a built image,
@@ -181,7 +179,7 @@ the following steps:
 6.  Triggers a rolling update of the pods managed by the Kubernetes controller
     to ensure that the latest image is running on all of them
 
-```
+<pre>
 # circle.yml
 machine:
   services:
@@ -206,9 +204,9 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $EXTERNAL_REGISTRY_ENDPOINT
       - envsubst < .kubernetes_auth.template > ~/.kubernetes_auth
       - ./deploy.sh
-```
+</pre>
 
-```
+<pre>
 # deploy.sh
 #!/bin/bash
 
@@ -227,7 +225,7 @@ $KUBE_CMD -c rails-controller.json \
 
 # Roll over Kubernetes pods
 $KUBE_CMD rollingupdate railscontroller
-```
+</pre>
 
 This example assumes that you have already launched a Kubernetes cluster
 using something like the `cluster/kube-up.sh` script in the Kubernetes
@@ -255,11 +253,11 @@ your test environment on CircleCI, so if you want to run all of your tests
 within a Docker container, then you can simply run the container with the
 commands necessary to execute your tests, like this:
 
-```
+<pre>
 test:
   override:
     - docker run myimage bundle exec rake test
-```
+</pre>
 
 You can also start a container running in detached mode with an exposed
 port serving your app as in the other examples above. You can then run
@@ -279,9 +277,9 @@ CircleCI.
 If you try to run `docker exec` in our containers, you'll see an error like
 the following:
 
-```
+<pre>
 Unsupported: Exec is not supported by the lxc driver
-```
+</pre>
 
 `docker exec` won't work in our containers because we use the LXC driver
 for Docker and `docker exec` for the LXC driver hasn't been implemented.
@@ -290,9 +288,9 @@ To work around this, you can the following command, customized for
 your container name and the command you want to run, using LXC
 directly:
 
-````
+<pre>
 sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' $MY_CONTAINER_NAME)" -- bash -c $MY_COMMAND
-````
+</pre>
 
 ### Caching Docker layers
 
@@ -317,7 +315,7 @@ of data across the different filesystems.
 We're working to find a solution to the problem. In the meantime, one workaround
 is to use docker load/save. Here is a minimal example to get your started:
 
-```
+<pre>
 dependencies:
   cache_directories:
     - "~/docker"
@@ -326,7 +324,7 @@ dependencies:
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - docker build -t circleci/elasticsearch .
     - mkdir -p ~/docker; docker save circleci/elasticsearch > ~/docker/image.tar
-```
+</pre>
 
 ###Some known caching issues
 
@@ -355,7 +353,7 @@ simplest way to ensure that is to have the services listen on `0.0.0.0`.
 For example, the following configuration will ensure that Postgres is
 available to `docker0`:
 
-```
+<pre>
 test:
   pre:
     - sudo bash -c "echo \"listen_addresses = '*'\" >>
@@ -363,6 +361,6 @@ test:
     - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
       /etc/postgresql/9.4/main/pg_hba.conf"
     - sudo /etc/init.d/postgresql restart
-```
+</pre>
 
 The similar approach would be required for any other service.

@@ -12,7 +12,7 @@ When your tests run, during the
 `npm install`
 step, you might see something like this:
 
-```
+<pre>
 npm ERR! git clone ssh://git@github.com/someuser/somerepo.git Cloning into bare repository '/home/ubuntu/.npm/_git-remotes/ssh-git-github-com-creativelive-shared-git-01234abc'...
 npm ERR! git clone ssh://git@github.com/someuser/somerepo.git
 npm ERR! git clone ssh://git@github.com/someuser/somerepo.git ERROR: Repository not found.
@@ -34,20 +34,20 @@ npm ERR! If you need help, you may report this log at:
 npm ERR!     <http://github.com/isaacs/npm/issues>
 npm ERR! or email it to:
 npm ERR!     <npm-@googlegroups.com>
-```
+</pre>
 
 This happens because you have a git repository listed as a dependency in your package.json file:
 
-```
+<pre>
 "somepackage": "git://github.com/someorg/somerepo.git"
-```
+</pre>
 
 If the repository is public, just change the dependency to use a
 `http` url:
 
-```
+<pre>
 "somepackage": "https://github.com/someorg/somerepo"
-```
+</pre>
 
 If the repository is private, you will need to enable user keys
 from your project's **Project settings > Checkout SSH keys**

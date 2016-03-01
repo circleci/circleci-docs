@@ -26,11 +26,11 @@ pre-installed.
 We use `{{ versions.default_node }}`
 as our default version. If you'd like a specific version, then you can specify it in your circle.yml:
 
-```
+<pre>
 machine:
   node:
     version: 0.10.22
-```
+</pre>
 
 ### Dependencies
 
@@ -39,11 +39,11 @@ all of your project's dependencies.
 If needed, you can add custom dependencies commands from your circle.yml.
 For example, you can override our default command to pass a special flag to `npm`:
 
-```
+<pre>
 dependencies:
   override:
     - npm install --dev
-```
+</pre>
 
 ### npm authentication
 
@@ -53,7 +53,7 @@ dependencies, you could store the `npm` credentials in the
 variables](https://circleci.com/docs/environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git)
 and then use the following script to perform the authentication:
 
-```
+<pre>
 #!/bin/bash
 set -o nounset
 set -o errexit
@@ -63,7 +63,7 @@ $NPM_USERNAME
 $NPM_PASSWORD
 $NPM_EMAIL
 !
-```
+</pre>
 
 ### Databases
 
@@ -79,11 +79,11 @@ We also run your Mocha tests as well as run any `test` targets in Cakefiles or M
 You can [add additional test commands](/docs/configuration#test)
 from your circle.yml. For example, you could run a custom `test.sh` script:
 
-```
+<pre>
 test:
   post:
     - ./test.sh
-```
+</pre>
 
 ### Deployment
 

@@ -11,7 +11,7 @@ tags:
 Sometimes in Rails projects you can see Rake throw ActionFailed errors
 which simply do not make sense. For example:
 
-```
+<pre>
 ** Invoke ts:start (first_time)
 ** Invoke environment
 ** Execute ts:start
@@ -28,7 +28,7 @@ export RACK_ENV="test"
 bundle exec rake db:create db:schema:load ts:configure ts:index ts:start
 --trace
  returned exit code 1
-```
+</pre>
 
 If you are using `Test::Unit`, it may be the problem.
 
@@ -56,7 +56,7 @@ post](http://www.jonathanleighton.com/articles/2012/stop-test-unit-autorun/)—
 monkey-patching `Test::Unit` to disable this behavior. You can
 add the following code to your Rakefile, under the `test` task:
 
-```
+<pre>
 # Rakefile
 require 'test/unit'
 
@@ -71,4 +71,4 @@ class FooTest < Test::Unit::TestCase
 end
 
 Test::Unit::Runner.new.run(ARGV)
-```
+</pre>

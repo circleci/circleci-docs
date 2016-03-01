@@ -13,16 +13,16 @@ To fix this, simply add the directory to your repository.
 Git doesn't allow you to add directories to it, but the standard idiom is instead to add a file called
 `.gitkeep` within the directory. So this should solve your problem:
 
-```
+<pre>
 $ touch log/.gitkeep
 $ git add log/.gitkeep
 $ git commit
-```
+</pre>
 
 If this solution is unacceptable (perhaps you symlink your log directory in production), you can also add a post-checkout command to create the direction:
 
-```
+<pre>
 checkout:
   post:
     - mkdir -p log
-```
+</pre>

@@ -4,7 +4,6 @@ title: Continuous Deployment with AWS CodeDeploy
 layout: doc
 tags:
   - how-to
-
 ---
 
 ## Getting Started with CodeDeploy on CircleCI
@@ -13,7 +12,7 @@ AWS CodeDeploy is a deployment system that enables developers to automate the
 deployment of applications to EC2 instances, and to update the applications as
 required.
 
-### AWS infrastructure
+### AWS Infrastructure
 The first step to continuous deployment with CodeDeploy is setting up your EC2
 instances, tagging them so you can define deployment groups, installing the
 CodeDeploy agent on your hosts and setting up trust-roles so that CodeDeploy
@@ -24,7 +23,7 @@ the process.
 [getting started with CodeDeploy guide]: http://docs.aws.amazon.com/en_us/console/codedeploy/applications-user-guide
 
 
-### CodeDeploy application
+### CodeDeploy Application
 A CodeDeploy application is a collection of settings about where your
 application can be deployed, how many instances can be deployed to at once,
 what should be considered a failed deploy, and information on the trust-role to
@@ -73,7 +72,7 @@ application][].
 CircleCI will automatically create new application revisions, upload them to
 S3, and both trigger and watch deployments when you get a green build.
 
-### Step 1: Create an IAM user for CircleCI to use
+### Step 1: Create an IAM User for CircleCI to Use
 You should create an [IAM user][] to use solely for builds on
 CircleCI, that way you have control over exactly which of your resources can be
 accessed by code running as part of your build.
@@ -84,7 +83,7 @@ user, you'll need these later.
 For deploying with CodeDeploy your IAM user needs to be able to access S3 and
 CodeDeploy at a minimum.
 
-#### S3 IAM policy
+### S3 IAM Policy
 CircleCI needs to be able to upload application revisions to your S3 bucket.
 Permissions can be scoped down to the common-prefix you use for application
 revision keys if you don't want to give access to the entire bucket.
@@ -108,7 +107,7 @@ key starts with `my-app`.
     }
 
 
-#### CodeDeploy IAM policy
+### CodeDeploy IAM Policy
 CircleCI also needs to be able to create application revisions, trigger
 deployments and get deployment status. If your application is called `my-app`
 and your account ID is `80398EXAMPLE` then the following policy snippet gives
@@ -165,7 +164,7 @@ configurations, check out the [CodeDeploy IAM docs][] for more information.
 [CodeDeploy IAM docs]: http://docs.aws.amazon.com/codedeploy/latest/userguide/access-permissions.html
 
 
-### Step 2: Configure CircleCI to use your new IAM user
+#### Step 2: Configure CircleCI to Use Your New IAM User
 Go to your project's **Project Settings > AWS keys** page, enter your IAM
 user's Access Key ID and Secret Access Key and hit "Save AWS keys".
 Your AWS keys are stored encrypted but it's important to note that they need to
@@ -175,7 +174,7 @@ This is another important reason to use IAM to limit the resources the keys
 can access!
 
 
-### Step 3: (Optional) Configure packaging and revision storage
+#### Step 3: (Optional) Configure Packaging and Revision Storage
 CircleCI needs some additional information to be able to package up your app
 and register new revisions:
 1. The directory in your repo to package up. This is relative to your repo's
@@ -198,7 +197,7 @@ main benefit is that you will have a simpler [circle.yml][] file.
 You can also skip this step and configure everything in your [circle.yml][]
 
 
-### Step 4: Configure deployment parameters
+#### Step 4: Configure Deployment Parameters
 Configure your CodeDeploy deployment using the `codedeploy` block in
 [circle.yml][]. At a minimum you need to tell CircleCI which application to
 deploy and which deployment group the selected branch should be deployed to.
@@ -306,7 +305,7 @@ If you'd rather use a versioned bucket just use a fixed string for the key
 pattern and we'll use the object's versioning info instead.
 
 
-## Pre- and post-deployment steps
+## Pre- and Post-Deployment Steps
 Unlike other deployment options you don't need to specify pre- or
 post-deployment steps in your `circle.yml`.
 
@@ -315,5 +314,5 @@ lifecycle scripts. As a result you can start/stop services, run database
 migrations, install dependencies etc. across all your instances in a consistent
 manner.
 
-[substitution variables]: #key-patterns
+[substitution variables]: #key-Patterns
 [circle.yml]: /docs/configuration#deployment

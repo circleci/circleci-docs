@@ -22,7 +22,7 @@ We're very interested in what you create with build parameters and would love to
 You've a straight-forward `circle.yml` for your project `example-corp/project-foo`.
 It just sets a Python version and deploys to your staging Heroku app.
 
-```
+<pre>
 machine:
   python:
     version: 2.7.6
@@ -32,7 +32,7 @@ deployment:
     branch: master
     heroku:
       appname: staging-dawn-435
-```
+</pre>
 
 But sometimes you need to run a nightly build.
 You have a large functional test suite that takes too long to run for a quick edit/test cycle during development.
@@ -40,7 +40,7 @@ These tests should be run once a day at least.
 
 Creating a conditional step is easy; `circle.yml` commands are just shell commands and build parameters are just environment variables:
 
-```
+<pre>
 machine:
   python:
     version: 2.7.6
@@ -57,14 +57,14 @@ deployment:
     branch: master
     heroku:
       appname: staging-dawn-435
-```
+</pre>
 
 `./bin/run-functional-tests.sh` is only run if `RUN_NIGHTLY_BUILD` is set (`-n` means non-zero length).
 Rather than hard-code the target app we use another build-parameter to specify the target for the functional test script in `FUNCTIONAL_TEST_TARGET`.
 
 Now, create a simple script to trigger a build:
 
-```
+<pre>
 #!/bin/bash
 
 _project=$1
@@ -87,21 +87,22 @@ curl \
 --header "Content-Type: application/json" \
 --data "${post_data}" \
 --request POST ${trigger_build_url}
-```
+
+</pre>
 
 This triggers a new build of master, passing in the parameters `RUN_NIGHTLY_BUILD` and `FUNCTIONAL_TEST_TARGET`.
 
 The final step to make this a nightly build is to invoke this script in a scheduled job as:
 
-```
+<pre>
 trigger_nightly_build.sh example-corp/project-foo master ${CIRCLE_TOKEN}
-```
+</pre>
 
 E.g. if you use `cron` you can set a new job to run every night as your user by running `crontab -e` and adding:
 
-```
+<pre>
 30 0 * * * /bin/bash /home/ubuntu/bin/trigger_nightly_build.sh example-corp/project-foo master $(cat /home/ubuntu/.circle_token) 2>&1 | /usr/bin/logger
-```
+</pre>
 
 This runs the trigger_nightly_build.sh script at 30 minutes past midnight (check your server time!).
 It reads the CircleCI API token from `/home/ubuntu/.circle_token` and sends any output from the script to syslog via `logger`.

@@ -1,6 +1,6 @@
 ---
 
-title: Composer hitting GitHub API rate limits
+title: Composer Hitting GitHub API Rate Limits
 layout: doc
 
 ---
@@ -12,18 +12,18 @@ Composer uses the GitHub API to download dependencies.
 Unfortunately, GitHub has strict API rate limits, which can cause your builds to fail when fetching dependencies.
 This causes an error that looks like this:
 
-```
+<pre>
 Could not fetch https://api.github.com/repos/username/repo/v1.2.3, enter your GitHub credentials to go over the API rate limit
 The credentials will be swapped for an OAuth token stored in /home/ubuntu/.composer/config.json, your password will not be stored
 To revoke access to this token you can visit https://github.com/settings/applications
 Username:
-```
+</pre>
 
 To get around this, tell composer to use git to fetch dependencies instead:
 
-```
+<pre>
 composer install --prefer-source --no-interaction
-```
+</pre>
 
 ### API rate limits and custom repositories
 

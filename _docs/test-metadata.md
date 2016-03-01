@@ -20,16 +20,18 @@ you'll need to do some configuration to to enable the formatters:
 For RSpec:
 
 Add this to your gemfile:
-```
+
+<pre>
 gem 'rspec_junit_formatter', '0.2.2'
-```
+</pre>
 
 For Minitest:
 
 Add this to your gemfile:
-```
+
+<pre>
 gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
-```
+</pre>
 
 For Django:
 
@@ -58,40 +60,40 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 For custom Cucumber steps, you should generate a file using the JSON formatter that ends
 with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml](/docs/configuration) might be:
 
-```
+<pre>
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - bundle exec cucumber --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
-```
+</pre>
 
 
 ### RSpec
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
-```
+<pre>
 gem 'rspec_junit_formatter', '0.2.2'
-```
+</pre>
 
 And modify your test command to this:
 
-````
+<pre>
 test:
   override:
     - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
-````
+</pre>
 
 ### PHPUnit
 
 For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml](/docs/configuration) might be:
 
-```
+<pre>
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
-```
+</pre>
 
 ### Java JUnit results with Maven Surefire Plugin
 
@@ -102,12 +104,12 @@ to generate test reports in XML format. CircleCI makes it easy to collect these
 reports. You just need to add the followng to the `circle.yml` file in your
 project.
 
-```
+<pre>
 test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-```
+</pre>
 
 ### test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).

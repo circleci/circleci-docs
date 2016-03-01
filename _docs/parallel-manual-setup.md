@@ -28,7 +28,7 @@ Parallelizing test runners that accept file names is straightforward!  The `file
 can list paths to the test files, and CircleCI will run the test runners with different test files in each node.
 For example, to parallelize an rspec command, you can set the following:
 
-```
+<pre>
 test:
   override:
     - bundle exec rspec:
@@ -36,7 +36,7 @@ test:
         files:
           - spec/unit/sample.rb   # can be a direct path to file
           - spec/**/*.rb          # or a glob (ruby globs)
-```
+</pre>
 
 In this example, we will run `bundle exec rspec` in all nodes appended with
 roughly `1/N` of the files on each VM.
@@ -72,12 +72,12 @@ and
 `npm test`
 in parallel, you can use a bash case statement:
 
-```
+<pre>
 test:
   override:
     - case $CIRCLE_NODE_INDEX in 0) rake spec ;; 1) npm test ;; esac:
         parallel: true
-```
+</pre>
 
 Note the final colon, and
 `parallel: true`
@@ -102,7 +102,7 @@ sure that the [test metadata](https://circleci.com/docs/test-metadata)
 is collected properly. For example, you would modify the initial RSpec
 command like this to include the RSpec Junit formatter:
 
-```
+<pre>
 test:
   override:
     - bundle exec rspec --format RspecJunitFormatter --out $CIRCLE_TEST_REPORTS/rspec.xml:
@@ -110,13 +110,13 @@ test:
         files:
           - spec/unit/sample.rb   # can be a direct path to file
           - spec/**/*.rb          # or a glob (ruby globs)
-```
+</pre>
 
 The same principle applies to Cucumber tests—to enable automatic test
 balancing when you manually specify the Cucumber command you would
 include the following in your `circle.yml`:
 
-```
+<pre>
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber:
@@ -125,13 +125,13 @@ test:
         parallel: true
         files:
           - spec/feature/*.feature
-```
+</pre>
 
 <h3 id="manual-balancing">Balancing</h3>
 
 A more powerful version evenly splits all test files across N nodes. We recommend you write a script that does something like:
 
-```
+<pre>
 #!/bin/bash
 
 i=0
@@ -145,7 +145,7 @@ for testfile in $(find ./test -name "*.py" | sort); do
 done
 
 test-runner ${files[@]}
-```
+</pre>
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
 

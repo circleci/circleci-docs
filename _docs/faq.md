@@ -14,7 +14,9 @@ tags:
 Currently we only support authentication with GitHub, sorry about that.
 
 ### I can’t give CircleCI the access to all my private repositories.
+
 ### What do I do?
+
 GitHub has only recently added the fine-grained permissions options, and
 we are still working on supporting them.
 
@@ -23,7 +25,9 @@ user on GitHub with a limited set of permissions and use that account to
 perform the builds on CircleCI.
 
 ### I updated my email address on GitHub, and it does not show up on
+
 ### CircleCI
+
 We refresh GitHub information once a day to stay within GitHub’s API
 limits, so check your profile page later – it will be right there.
 
@@ -34,6 +38,7 @@ Absolutely. In this case the builds will run one at a time, one after
 another.
 
 ### How do I stop CircleCI from building a project?
+
 If you get everyone who follows the project on CircleCI to unfollow it, we
 will automatically stop building it.
 
@@ -46,11 +51,14 @@ functionality is in the works. Keep an eye on our
 this feature is available.
 
 ## Dependencies
+
 ### How do I use postgres 9.3?
+
 PostgreSQL 9.3 is currently not shipped with our build containers by
 default, but you can install it manually by adding the following to your
 `circle.yml`:
-```
+
+<pre>
 dependencies:
   pre:
     - sudo service postgresql stop && sudo apt-get remove -y
@@ -64,13 +72,14 @@ dependencies:
     - sudo -u postgres createuser ubuntu -d --superuser
     - createdb circle_test
     - createdb ubuntu
-```
+</pre>
 
 ### How do I use mysql 5.6?
 MySQL 5.6 is not in our build containers yet, but you can install it
 manually as well by putting the next inctructions into your
 `circle.yml`:
-```
+
+<pre>
 dependencies:
   pre:
     - sudo apt-add-repository -y 'deb
@@ -78,9 +87,10 @@ dependencies:
       main'
     - sudo apt-get update; sudo DEBIAN_FRONTEND=noninteractive apt-get
       install -y mysql-server-5.6
-```
+</pre>
 
 ### How do I use Docker 1.5
+
 Running Docker 1.5 in our environment requires custom patches, and we
 need to test the patched version thoroughly before making it available
 in our containers. Keep an eye on our
@@ -88,6 +98,8 @@ in our containers. Keep an eye on our
 Docker 1.5 starts shipping with our build containers by default.
 
 ## Projects
+
 ### How can I delete my project?
+
 You just need to unfollow the project in the project setting page. Once the last follower has stopped following the project, CircleCI will stop building.
 Please [contact us](mailto:sayhi@circleci.com) us if you want to purge the project data from our database.

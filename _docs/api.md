@@ -138,12 +138,13 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
     [view it in your browser](/api/v1/me)
     or call the API using `curl`:
 
-    ```
+<pre>
 $ curl https://circleci.com/api/v1/me?circle-token=:token
-```
+</pre>
 
 3.  You should see a response like the following:
-    ```
+
+<pre>
 {
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
@@ -153,7 +154,7 @@ $ curl https://circleci.com/api/v1/me?circle-token=:token
   "admin" : true,
   "login" : "pbiggar"
 }
-```
+</pre>
 
 <h2 id="calling">Making calls</h2>
 
@@ -165,9 +166,9 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
 To authenticate, add an API token using your [account dashboard](/account/api). To use the API token, add it to the
 `circle-token` query param, like so:
 
-```
+<pre>
 curl https://circleci.com/api/v1/me?circle-token=:token
-```
+</pre>
 
 ## Accept header
 
@@ -175,14 +176,13 @@ If you specify no accept header, we'll return human-readable JSON with comments.
 If you prefer to receive compact JSON with no whitespace or comments, add the `"application/json" Accept header`.
 Using `curl`:
 
-```
+<pre>
 curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/json"
-```
+</pre>
 
 ## User
 
 {{ api_data.me | api_endpoint }}
-
 
 ## Projects
 
@@ -199,7 +199,7 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 
 You can narrow the builds to a single branch by appending /tree/:branch to the url:
-`https://circleci.com/api/v1/project/:username/:project/tree/:branch`
+<pre>https://circleci.com/api/v1/project/:username/:project/tree/:branch</pre>
 
 The branch name should be url-encoded.
 
@@ -218,7 +218,7 @@ The branch name should be url-encoded.
 {{ api_data.retry_build | api_endpoint }}
 
 You can retry a build with ssh by swapping "retry" with "ssh":
-`https://circleci.com/api/v1/project/:username/:project/:build_num/ssh`
+<pre> https://circleci.com/api/v1/project/:username/:project/:build_num/ssh </pre>
 
 <h2 id="add-user-ssh">Add User to Build</h2>
 
@@ -270,7 +270,6 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ api_data.delete_checkout_key | api_endpoint}}
 
-
 ## Test Metadata
 
 {{ api_data.test_metadata | api_endpoint }}
@@ -280,3 +279,4 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 ## SSH Keys
 
 {{ api_data.ssh_key | api_endpoint }}
+

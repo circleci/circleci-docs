@@ -12,12 +12,12 @@ Time-zones are fickle masters, and time-based code frequently only works in the 
 Your code is probably tested in local time on your development machine, while CircleCI is in UTC.
 If that's the case, you may end up with test failures looking like this:
 
-```
+<pre>
 1) 1-day trial should be 1 day long
    Failure/Error: @trial.expiration.should == 14.day.from_now.to_date
    expected: Fri, 28 May 2012
         got: Sat, 29 May 2012 (using ==)
-```
+</pre>
 
 Fortunately, it's easy to [change CircleCI's timezone](/docs/configuration#timezone)
 to match yours.

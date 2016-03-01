@@ -218,9 +218,9 @@ means you cannot read UI environment variables during the `machine: pre`.
 You can set environment variables per-command as well.
 You can use standard bash syntax in your commands:
 
-```
+<pre>
 RAILS_ENV=test bundle exec rake test
-```
+</pre>
 
 You can also use [the environment modifier](/docs/configuration#modifiers) in your
 `circle.yml` file.

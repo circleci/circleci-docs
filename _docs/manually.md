@@ -20,10 +20,10 @@ This is easy to fix: add a file named `circle.yml` on the project repo pointing 
 CircleCI will run your tests from that subdirectory.  For example, to set the build directory to `api`
 sub-directory, you can use the following `circle.yml`
 
-```
+<pre>
 general:
   build_dir: api
-```
+</pre>
 
 <h2 id="yml">The circle.yml file</h2>
 
@@ -78,21 +78,21 @@ CircleCI will check out your code from your GitHub repository.
 Currently, we don't check out submodules.
 If your project requires that, add the appropriate commands.
 
-```
+<pre>
 checkout:
   post:
     - git submodule sync
     - git submodule update --init
-```
+</pre>
 
 If you have any files in your repositories that need to be moved, now is a good time.
 Here is an example of how to do that.
 
-```
+<pre>
 checkout:
   post:
     - cp ./ci-server/config.yml ./app-server/config.yml
-```
+</pre>
 
 <h2 id="dependencies">Setting up your dependencies</h2>
 
@@ -102,11 +102,11 @@ CircleCI also supports PHP's Composer.
 When needed, you can modify which dependencies-related commands are run using `override`,
 `pre`, and/or `post` here.
 
-```
+<pre>
 dependencies:
   post:
     - python ./install-packages
-```
+</pre>
 
 <h2 id="databases">Setting up your test databases</h2>
 
@@ -118,31 +118,31 @@ If you use MySQL or Postgres, you can use the `circle_test`
 database and the `ubuntu` user rather than creating the database yourself.
 No password is required for any database.
 
-```
+<pre>
 database:
   override:
     - mysql -u ubuntu circle_test < my-database-setup.sql
-```
+</pre>
 
 <h2 id="tests">Running your tests</h2>
 
 Now that everything is prepared, add your test commands to the
 `circle.yml` file so that you can run your tests.
 
-```
+<pre>
 test:
   override:
     - php ./test-suite/run.php --unit-tests
-```
+</pre>
 
 Depending on the structure of your tests, you may need to start your application server first.
 
-```
+<pre>
 test:
   override:
     - php ./app/run-server.php --daemon
     - php ./test-suite/run.php --unit-tests
-```
+</pre>
 
 You should be good to go. Happy testing!
 

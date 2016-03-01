@@ -44,18 +44,18 @@ E.g.:
 
 In your Gemfile:
 
-```
+<pre>
 gem "debugger", :groups => [:development]
-```
+</pre>
 
 And in your `circle.yml`
 
-```
+<pre>
 dependencies:
   bundler:
     without:
       - development
-```
+</pre>
 
 This won't work if you've specifically required debugger in your application
 code, in that case you'll have to use one of the

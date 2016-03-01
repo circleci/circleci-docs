@@ -51,8 +51,8 @@ feel that’s what you need, you can just remove the necessary parts of
 the cache anywhere in your `circle.yml`’s `dependencies` section,
 before the cache is saved:
 
-```
+<pre>
 dependencies:
   post:
     - rm -r ~/.gradle
-```
+</pre>

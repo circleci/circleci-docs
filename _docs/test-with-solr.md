@@ -29,7 +29,7 @@ is installed on your build system. It will need to be configured with your
 schema.xml, and booted via [circle.yml](/docs/configuration).
 Here's an example of how to do so:
 
-```
+<pre>
 database:
   post:
     - cp -R /opt/solr-4.3.1 $HOME/solr
@@ -37,7 +37,7 @@ database:
     # optional: - cp config/solrconfig.xml $HOME/solr/example/solr/collection1/conf
     - cd $HOME/solr/example; java -jar start.jar >> $HOME/solr.log:
         background: true
-```
+</pre>
 
 This configuration does three things. You may need to fine-tune the exact commands
 to match your needs, but they should:

@@ -35,13 +35,13 @@ then `bunny.rb` might rely on code loaded by
 If you run `bunny.rb` first, the code it needs won't have been loaded.
 Here's a fine example of this, extracted from customer tests:
 
-```
+<pre>
 Failure/Error: token = ApiTokenGenerator.generate(@user.id)
   NameError:
     uninitialized constant ApiTokenGenerator::Seed
     # ./vendor/bundle/ruby/1.9.1/gems/rake-0.9.2.2/lib/rake/ext/module.rb:36:in `const_missing'
     # ./app/controllers/api_token_generator.rb:5:in `generate'
-```
+</pre>
 
 This particular error can be fixed by ensuring that `ApiTokenGenerator::Seed`
 has been declared before it is used, typically by adding a `require`
@@ -49,11 +49,11 @@ call to `api_token_generator.rb`.
 
 Another manifestation of this bug in Rails looks like this:
 
-```
+<pre>
 /home/ubuntu/circle/app/models/action.rb:1:in `<top (required)>': superclass mismatch for class Action (TypeError)
 from /home/ubuntu/circle/vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `require'
 from /home/ubuntu/circle/vendor/bundle/ruby/1.9.1/gems/activesupport-3.2.6/lib/active_support/dependencies.rb:251:in `block in require'
-```
+</pre>
 
 This usually happens when a model and another class have the same name.
 When the model is initialized first, everything works, because the second use simply reopens the class.

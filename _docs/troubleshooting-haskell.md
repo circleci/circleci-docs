@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting Haskell
 layout: doc
 short_title: Haskell
@@ -8,6 +7,4 @@ children:
 tags:
   - troubleshooting
   - haskell
-
-
 ---

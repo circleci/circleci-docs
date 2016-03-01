@@ -258,11 +258,11 @@ detect and enable them automatically, but in case
 we fail (or don't have inference in your language), you can
 enable them by adding to your circle.yml:
 
-```
+<pre>
 machine:
   services:
     - cassandra
-```
+</pre>
 
 The list of services that can be enabled this way is
 
@@ -297,7 +297,7 @@ We have the following versions of GCC and G++ as well as some other build tools 
 
 To switch GCC and GCC++ versions, you can add the following in circle.yml:
 
-```
+<pre>
 # To use GCC and G++ 4.9
 machine:
   pre:
@@ -305,4 +305,4 @@ machine:
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 10
     - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 20
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
-```
+</pre>

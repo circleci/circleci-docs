@@ -12,10 +12,10 @@ You can simply create a dedicated branch in your repo named "production" and set
 this branch. When you get a green build on CircleCI, you can deploy it to Ninefold using an entry like
 the following in the "deployment" section of your `circle.yml` file:
 
-```yaml
+<pre>
 deployment:
   production:
     branch: master
     commands:
       - git push origin master:production
-```
+</pre>
