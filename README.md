@@ -14,6 +14,10 @@ With [Bundler](http://bundler.io/):
 
     bundle install
 
+And if you need to work on the JS:
+
+    npm install
+
 ### How to run a development server
 
     bundle exec jekyll s -IDw
