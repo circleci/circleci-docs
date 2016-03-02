@@ -20,7 +20,7 @@ whose contents will be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.
 
-![](asset://img/docs/artifacts.png)
+![]({{site.assets}}/img/docs/artifacts.png)
 
 You'll find links to the artifacts at the top of the build page. You can also consume them via our [API](/docs/api#build-artifacts).
 
