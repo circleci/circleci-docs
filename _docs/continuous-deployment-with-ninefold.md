@@ -13,7 +13,6 @@ this branch. When you get a green build on CircleCI, you can deploy it to Ninefo
 the following in the "deployment" section of your `circle.yml` file:
 
 <pre>
-yaml
 deployment:
   production:
     branch: master

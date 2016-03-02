@@ -37,7 +37,7 @@ Each section represents a _phase_ of running your tests:
 *   **checkout**: checking out and cloning your git repo
 *   **dependencies**: setting up your project's language-specific dependencies
 *   **database**: preparing the databases for your tests
-*   **test**: running your testsƒ
+*   **test**: running your tests
 *   **deployment**: deploying your code to your web servers
 
 The `circle.yml`
@@ -343,7 +343,7 @@ CircleCI automatically runs commands to fetch such dependencies.
 You can use `override`, `pre`, and/or `post` to modify `dependencies` commands.
 Here are examples of common tweaks you might make in the `dependencies` section.
 
-####  Example: Using NPM and Node.js
+####  Example: Using npm and Node.js
 
 <pre>
 dependencies:

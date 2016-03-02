@@ -92,7 +92,7 @@ test:
     - circle-android wait-for-boot
 </pre>
 
- 'circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
+ `circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
 There's also a corresponding `circleci-android21`; alternatively, you can
 [can create your own][create-avd] if these don't suit your purposes.
 
