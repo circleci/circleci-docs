@@ -23,7 +23,7 @@ CircleCI will upload coverage results and make them visible as part of your buil
 
 #### Ruby
 
-In Ruby 1.9, you add the
+In Ruby 1.9+, you add the
 [simplecov gem](https://github.com/colszowka/simplecov)
 and configure your test suite to add code coverage.
 
