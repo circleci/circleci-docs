@@ -4,3 +4,4 @@ _site
 /node_modules/
 bin/
 .bundle
+.DS_Store
