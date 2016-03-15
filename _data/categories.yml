@@ -1,0 +1,31 @@
+- name: "Getting Started"
+  slug: getting-started
+  index: gettingstarted
+
+- name: "Languages"
+  slug: languages
+  index: languages
+
+- name: "Mobile Platforms"
+  slug: mobile-platforms
+  index: mobile
+
+- name: "How-To"
+  slug: how-to
+  index: how-to
+
+- name: "Troubleshooting"
+  slug: troubleshooting
+  index: troubleshooting
+
+- name: "Reference"
+  slug: reference
+  index: reference
+
+- name: "Parallelism"
+  slug: parallelism
+  index: parallelism
+
+- name: "Privacy and Security"
+  slug: privacy-and-security
+  index: privacy-security

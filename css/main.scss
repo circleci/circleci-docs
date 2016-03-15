@@ -1,0 +1,91 @@
+---
+---
+
+// Colors for EVERYTHING (alphabetical)
+$body-text-color: #555;
+$heading-color: #333;
+$nav-bg-color: #FBFBFB;
+$nav-border-color: #CCC;
+
+
+// General
+body{
+	color: $body-text-color;
+}
+	div.main-body{
+		overflow: auto;
+	}
+
+
+// Navigation Sidebar
+nav.sidebar{
+	float: left;
+	border-right: 1px solid $nav-border-color;
+	background-color: $nav-bg-color;
+	padding: 30px 20px 20px;
+	width: 25%;
+	height: 100%;
+
+	a{
+		display: block;
+		padding: 5px 10px;
+		font-size: 0.875rem;
+	}
+		&> ul > li > a{
+			padding: 14px 10px;
+			color: $heading-color;
+			font-size: 1.125rem;
+		}
+
+		li.active > a{
+			font-weight: bold;
+		}
+}
+
+
+// Search bar
+#site-search{
+	padding-bottom: 30px;
+
+	input{
+		margin: 0;
+	}
+}
+	#search-results{
+		position: absolute;
+		top: 54%;
+		right: 10%;
+		left: 10%;
+	}
+
+
+// Article
+div.article-container{
+	float: left;
+	padding: 30px 43px 0;
+	width: 75%;
+}
+	div.article-container h1{
+		font-size: 2.25rem;
+	}
+
+
+// Homepage
+div.category-section{
+	float: left;
+	padding: 15px 10px 20px;
+	width: 50%;
+	text-align: center;
+	
+	.logo{
+		width: 60px;
+	}
+
+	h2{
+		font-size: 1.5rem;
+	}
+
+	li a{
+		font-size: 0.875rem;
+	}
+}

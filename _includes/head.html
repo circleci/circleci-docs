@@ -1,0 +1,18 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+
+	<!-- below are vetted -->
+
+	<!-- Global CircleCI assets pulled from CDN  -->
+	<link href="https://dsd6xx3mp5v89.cloudfront.net/img/favicon.ico" rel="icon" type="image/png" />
+	<link rel="stylesheet" href="https://dsd6xx3mp5v89.cloudfront.net/css/pages/site.css" />
+	<link rel="stylesheet" href="https://dsd6xx3mp5v89.cloudfront.net/components/font-awesome/css/font-awesome.min.css" />
+	<!-- End  -->
+	<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
+</head>

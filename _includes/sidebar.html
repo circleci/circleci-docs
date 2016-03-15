@@ -1,0 +1,25 @@
+<nav class="sidebar">
+	<ul class="list-unstyled">
+	{% for category in site.data.categories %}
+		<li><a href="{{ site.baseurl }}/{{ category.index }}">{{ category.name }}</a>
+			<ul class="list-unstyled">
+			{% for doc in site.docs %}
+			{% if (doc.categories contains category.slug) and (doc.slug != category.index) %}
+				{% if doc.short-title %}
+					{% assign title = doc.short-title %}
+				{% else %}
+					{% assign title = doc.title %}
+				{% endif %}
+
+				{% if doc.children %}
+					{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
+				{% endif %}
+
+				<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+			{% endif %}
+			{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+	</ul>
+</nav>
