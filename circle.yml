@@ -3,7 +3,7 @@ dependencies:
     - jekyll build
 test:
   post:
-  	- htmlproofer ./_site
+    - htmlproofer ./_site
 deployment:
   prod:
     branch: master

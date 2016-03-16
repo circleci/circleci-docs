@@ -89,7 +89,7 @@ to help out.
 CircleCI's automatic commands cover a lot of common test patterns, and you can customize your build
 as needed to satisfy almost any iOS build and test strategy.
 
-###XCTest-based tools
+### XCTest-based tools
 In addition to standard `XCTestCase` tests, CircleCI will automatically run tests
 written in any other tool that builds on top of XCTest and is configured to run
 via the "test" build action. The following test tools are known to work well on CircleCI
@@ -99,7 +99,7 @@ via the "test" build action. The following test tools are known to work well on 
 * [Kiwi](https://github.com/kiwi-bdd/Kiwi)
 * [KIF](https://github.com/kif-framework/KIF)
 
-###Other tools
+### Other tools
 Popular iOS testing tools like [Appium](http://appium.io/) and [Frank](http://www.testingwithfrank.com/) should also
 work normally, though they will need to be installed and called using custom commands.
 See [customizing your build](#customizing-your-build) for more info.
@@ -195,7 +195,7 @@ You can also use the Environment Variables section to add all the
 secrets that your build needs, as the content of the variables is stored
 securely.
 
-###Configuration file
+### Configuration file
 The most flexible means to customize your build is to add a `circle.yml` file to your project,
 which allows you to run arbitrary bash commands instead of or in addition to the inferred commands
 at various points in the build process. See the [configuration doc](/docs/configuration) for
@@ -204,9 +204,10 @@ a number of options discussed in that doc will not work for OS X builds.
 Please see the [the Constraints section](#constraints-on-os-x-based-builds) for the
 exact commands that are not supported.
 
-###Custom packages
+### Custom packages
 [Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install`
 to add nearly any dependency required in your build VM. Here's an example:
+
 ```
 dependencies:
   pre:
@@ -218,7 +219,7 @@ test:
 
 You can also use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
-###Using custom versions of Cocoapods and other Ruby gems
+### Using custom versions of Cocoapods and other Ruby gems
 
 To make sure the version of Cocoapods that you use locally is also used
 in your CircleCI builds, we suggest creating a Gemfile in your iOS
@@ -240,7 +241,7 @@ If you have any other gems specified in your Gemfile, we will
 automatically install and cache those as well during the `bundle
 install` step.
 
-##Deployment
+## Deployment
 
 Once you have a signed app you are on the homeward stretch. Distributing
 the app is easy. One popular way to distribute your app is using `shenzhen`.
@@ -251,7 +252,7 @@ Shenzhen supports many distribution services, including:
 * [Beta by Crashlytics](http://try.crashlytics.com/beta/)
 * [TestFairy](https://testfairy.com/)
 
-###Hockey App
+### Hockey App
 
 Log in to Hockey app and create a new API token on the [Tokens page](
 https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at
@@ -278,17 +279,17 @@ deployment:
           --repository-url   "$CIRCLE_REPOSITORY_URL"
 ```
 
-###Beta By Crashlytics
+### Beta By Crashlytics
 
 First, we need to get some credentials. Log in to Fabric.io and visit
 your organization's settings page.
 
-![](asset://img/outer/docs/fabric-org-settings-page.png)
+![]({{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
 Click on your organisation (CircleCI in the image above), and click on
 the API key and Build Secret links to reveal the items.
 
-![](asset://img/outer/docs/fabric-api-creds-page.png)
+![]({{ site.baseurl }}/assests/img/docs/fabric-api-creds-page.png)
 
 On CircleCI, navigate to your App's Project Settings page, and under
 Environment Variables add 2 new items named `CRASHLYTICS_API_KEY` and
@@ -309,7 +310,7 @@ deployment:
           --build_secret "$CRASHLYTICS_SECRET"
 ```
 
-###TestFairy
+### TestFairy
 
 To set up your app on TestFairy first visit the preferences page in the
 TestFairy dashboard and navigate to the API Key section. Copy your API
@@ -330,7 +331,7 @@ deployment:
           --comment "CircleCI build $CIRCLE_BUILD_URL"
 ```
 
-##Common issues
+## Common issues
 
 A series of simulator-related issues are known to happen on some
 projects. Here are the most frequent of those:
@@ -391,12 +392,12 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
 * **Errors while installing code signing certificates.** Please check out [the Troubleshooting
   section](/docs/ios-code-signing#troubleshooting) of the code signing doc.
 
-###A note on code-generating tools
+### A note on code-generating tools
 Many iOS app developers use tools that generate substantial amounts of code. In such
 cases CircleCI's inference may not correctly detect the Xcode workspace, project, or
 scheme. Instead, you can specify these through [environment variables](#environment-variables).
 
-###Constraints on OS X-based builds
+### Constraints on OS X-based builds
 There are a few features normally available on CircleCI's standard
 Linux containers that are not available for OS X builds at the moment:
 
@@ -411,7 +412,7 @@ Linux containers that are not available for OS X builds at the moment:
 
 Please see the [customizing your build](#customizing-your-build) section for alternatives.
 
-##A sample `circle.yml`
+## A sample `circle.yml`
 The following configuration will use all the default dependency steps
 but will override the test steps with the specified commands.
 The code signing will be performed with our built-in mechanism,
@@ -457,4 +458,3 @@ deployment:
             --api_token    "$CRASHLYTICS_API_KEY"
             --build_secret "$CRASHLYTICS_SECRET"
 ```
-

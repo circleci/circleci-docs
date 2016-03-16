@@ -119,7 +119,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
   POST: /user/ssh-key
 </dt>
 <dd>
-  Adds a CircleCI key to your Github User account.
+  Adds a CircleCI key to your GitHub User account.
 </dd>
 <dt>
   POST: /user/heroku-key
@@ -141,6 +141,7 @@ $ curl https://circleci.com/api/v1/me?circle-token=:token
 ```
 
 3.  You should see a response like the following:
+
     ```
 {
   "user_key_fingerprint" : null,

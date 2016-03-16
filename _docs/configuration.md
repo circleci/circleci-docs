@@ -530,7 +530,7 @@ of the tag you created, we will run the build and the deployment
 section that matches.
 
 [Cutting a release on
-Github](https://help.github.com/articles/creating-releases/) creates a
+GitHub](https://help.github.com/articles/creating-releases/) creates a
 tag and follows the same rules.
 
 *Note:* Right now only annotated tags are supported. Pushing a

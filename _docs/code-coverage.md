@@ -94,7 +94,7 @@ you can see beautifully rendered HTML in the UI.
 You can easily send coverage results from CircleCI to a number of external
 code quality services:
 
-###Coveralls
+### Coveralls
 
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
@@ -104,7 +104,7 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
 
-###Code Climate
+### Code Climate
 
 If you're a Code Climate customer, follow the instructions under
 **Repo Settings -> Test Coverage**
@@ -115,7 +115,7 @@ You'll need to add your `CODECLIMATE_REPO_TOKEN` to your CircleCI
 Code Climate does not currently support CircleCI's parallelization.
 [Contact us](mailto:sayhi@circleci.com) if you'd like to use this.
 
-###PullReview
+### PullReview
 
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
 to configure the appropriate coverage

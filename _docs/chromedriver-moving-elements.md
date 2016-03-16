@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: ChromeDriver raises an 'Element is not clickable' exception]
+title: ChromeDriver raises an 'Element is not clickable' exception
 last_updated: Aug 7, 2013
 ---
 

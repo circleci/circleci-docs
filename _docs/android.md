@@ -6,7 +6,7 @@ categories: [mobile-platforms]
 ---
 
 
-# Android on CircleCI
+## Android on CircleCI
 
 CircleCI supports building and testing Android applications.
 
@@ -82,7 +82,7 @@ CircleCI.
 Firstly: if you have a Gradle wrapper in the root of your repository,
 we'll automatically run `./gradlew test`.
 
-<h4 id="emulator">Starting the Android Emulator</h3>
+#### Starting the Android Emulator
 
 Starting the android emulator can be an involved process and, unfortunately, can take
 a few minutes. You can start the emulator and wait for it to finish with something like
@@ -153,6 +153,7 @@ play {
   track = "${track}"
 }
 ```
+
 This will allow you to specify different deployment channels right in
 the `circle.yml`:
 

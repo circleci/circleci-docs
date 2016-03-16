@@ -16,8 +16,7 @@ CircleCI is a very different product from Jenkins with a lot of different concep
 
 <li>**Copy-paste your commands from “Execute Shell”:** If you really want to simply duplicate your project exactly as it is in Jenkins, then you can add a file called `circle.yml` to the root of your project with the following content:
 
-
-<pre>
+```
 dependencies:
   override:
     - echo "Add any bash commands you want here"
@@ -26,8 +25,7 @@ test:
   override:
     - echo "More arbitrary bash"
     - echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
-</pre>
-
+```
 
   Some programs and utilities are [pre-installed on CircleCI](/docs/environment), but anything else required by your build must be installed in the `dependencies` section. Your project’s dependencies will be [cached](/docs/how-cache-works) for the next build, so that they only need to be fully downloaded and installed once.</li>
 
@@ -58,11 +56,11 @@ If you install CircleCI Enterprise on your own hardware, the divide between the 
 
 Jenkins is extremely widespread because it has been around since nearly the beginning of CI. This means that its UI was originally developed in a very different landscape of web technology, and it is still fairly dated. Each page load generally needs to be rendered completely by the server, making the navigation experience a bit sluggish. The UI can also be impacted by any number of installed plugins.
 
-![](asset://img/outer/docs/jenkins-ui.png)
+![]({{ site.baseurl }}/assets/img/docs/jenkins-ui.png)
 
 CircleCI is a single-page web app that makes heavy use of AJAX, HTML5, and other newer technologies to make the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves it’s UI. It was technically overhauled in mid-2014 to run on ClojureScript and React and visually revamped in late 2015. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.
 
-![](asset://img/outer/docs/circle-ui.png)
+![]({{ site.baseurl }}/assets/img/docs/circle-ui.png)
 
 ### Plugins
 

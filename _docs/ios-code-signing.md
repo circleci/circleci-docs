@@ -103,11 +103,11 @@ You can now upload the `.p12` file to your project on CircleCI in
 `Project Settings` > `iOS Code Signing`. When your build runs this `p12`
 file will be added to the `circle` keychain automatically.
 
-![The code signing section in the project settings](asset://img/outer/docs/code-signing-settings-section.png)
+![The code signing section in the project settings]({{ site.baseurl }}/assets/img/docs/code-signing-settings-section.png)
 
-![The code signing welcome screen](asset://img/outer/docs/code-signing-splash-screen.png)
+![The code signing welcome screen]({{ site.baseurl }}/assets/img/docs/code-signing-splash-screen.png)
 
-![Uploaded key on the code signing page](asset://img/outer/docs/code-signing-key-uploaded.png)
+![Uploaded key on the code signing page]({{ site.baseurl }}/assets/img/docs/code-signing-key-uploaded.png)
 
 ### 3. Create A Provisioning Profile
 
@@ -221,7 +221,7 @@ Credentials" step of the build on CircleCI. This is listed under
 "machine". Expand the output and you should see output like the
 following:
 
-![The output of the code signing step that ran correctly](asset://img/outer/docs/code-signing-correct-step-output.png)
+![The output of the code signing step that ran correctly]({{ site.baseurl }}/assets/img/docs/code-signing-correct-step-output.png)
 
 In this example there is one valid code-signing identity, `"iPhone
 Distribution: UTAH STREET LABS INC (GL92ZZ6423)"`. The goal is to pass
@@ -308,4 +308,3 @@ circle.keychain (the public key in the provisioning profile should match
 the private key in the P12 file).
 1. We call `security find-identity -p codesigning` to list the keychains
    in the build output.
-

@@ -12,6 +12,7 @@ last_updated: February 23, 2015
 Currently we only support authentication with GitHub, sorry about that.
 
 ### I can’t give CircleCI the access to all my private repositories.
+
 ### What do I do?
 GitHub has only recently added the fine-grained permissions options, and
 we are still working on supporting them.
@@ -21,6 +22,7 @@ user on GitHub with a limited set of permissions and use that account to
 perform the builds on CircleCI.
 
 ### I updated my email address on GitHub, and it does not show up on
+
 ### CircleCI
 We refresh GitHub information once a day to stay within GitHub’s API
 limits, so check your profile page later – it will be right there.
@@ -44,10 +46,12 @@ functionality is in the works. Keep an eye on our
 this feature is available.
 
 ## Dependencies
+
 ### How do I use postgres 9.3?
 PostgreSQL 9.3 is currently not shipped with our build containers by
 default, but you can install it manually by adding the following to your
 `circle.yml`:
+
 ```
 dependencies:
   pre:
@@ -68,6 +72,7 @@ dependencies:
 MySQL 5.6 is not in our build containers yet, but you can install it
 manually as well by putting the next inctructions into your
 `circle.yml`:
+
 ```
 dependencies:
   pre:
@@ -86,6 +91,7 @@ in our containers. Keep an eye on our
 Docker 1.5 starts shipping with our build containers by default.
 
 ## Projects
+
 ### How can I delete my project?
 You just need to unfollow the project in the project setting page. Once the last follower has stopped following the project, CircleCI will stop building.
 Please [contact us](mailto:sayhi@circleci.com) us if you want to purge the project data from our database.

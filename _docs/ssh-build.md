@@ -27,7 +27,7 @@ build that has already finished, click the 'with ssh' button alongside
 In either case, host and port information will be available in the 'Debug via
 SSH tab':
 
-![]({{ site.baseurl }}/assests/img/docs/ssh-build-details.png)
+![]({{ site.baseurl }}/assets/img/docs/ssh-build-details.png)
 
 Now you can ssh to the running build (using the same ssh key
 that you use for GitHub) to perform whatever troubleshooting
@@ -59,7 +59,7 @@ these things:
 
 ##### Ensure that you can authenticate with github
 
-Github makes it very easy to test that your keys are setup as expected.
+GitHub makes it very easy to test that your keys are setup as expected.
 Just run:
 
 ```

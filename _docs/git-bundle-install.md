@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Git errors during a bundle install
 last_updated: Feb 3, 2013
---
+---
 
 When your tests run, during the `bundle install` step, you might see something like this:
 
