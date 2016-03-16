@@ -65,8 +65,14 @@ div.article-container{
 	padding: 30px 43px 0;
 	width: 75%;
 }
-	div.article-container h1{
-		font-size: 2.25rem;
+	article{
+		h1{
+			font-size: 2.25rem;
+		}
+
+		img{
+			max-width: 100%;
+		}
 	}
 
 
