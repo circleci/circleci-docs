@@ -1,0 +1,11 @@
+dependencies:
+  post:
+    - jekyll build
+test:
+  post:
+  	- htmlproofer ./_site
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync _site s3://circle-production-docs --delete
