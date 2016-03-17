@@ -8,7 +8,7 @@ jQuery(function(){
 	});
 
 	// Download the data from the JSON file we generated
-	window.data = $.getJSON('/docs/search_data.json');
+	window.data = $.getJSON('assets/js/search-index.json');
 
 	// Wait for the data to load and add it to lunr
 	window.data.then(function(loaded_data){

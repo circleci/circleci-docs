@@ -2,6 +2,8 @@
 
 function rebuild {
 	vagrant ssh -c "pkill -f jekyll"
+	# Below helps with a VirtualBox bug (https://www.virtualbox.org/ticket/9069)
+	vagrant ssh -c "sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
 	start
 }
 
@@ -16,7 +18,7 @@ function start {
 	fi
 	#vagrant ssh -c 'cd /vagrant; jekyll serve --detach --host=0.0.0.0'
 	#vagrant ssh -c "jekyll serve -s /vagrant -d /vagrant/_site --host=0.0.0.0 > /dev/null 2>&1 &"
-	vagrant ssh -c "nohup jekyll serve -s /vagrant -d /vagrant/_site --host 0.0.0.0 --detach"
+	vagrant ssh -c "nohup jekyll serve -s /vagrant/jekyll -d /vagrant/jekyll/_site --host 0.0.0.0 --detach"
 }
 
 function stop {

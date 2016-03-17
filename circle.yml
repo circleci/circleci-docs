@@ -1,6 +1,6 @@
 dependencies:
   post:
-    - bundle exec jekyll build
+    - bundle exec jekyll build -s jekyll -d jekyll/_site
 test:
   post:
     - htmlproofer ./_site
