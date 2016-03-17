@@ -1,7 +1,7 @@
 <nav class="sidebar">
 	<ul class="list-unstyled">
 	{% for category in site.data.categories %}
-		<li><a href="{{ site.baseurl }}/{{ category.index }}">{{ category.name }}</a>
+		<li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
 			<ul class="list-unstyled">
 			{% for doc in site.docs %}
 			{% if (doc.categories contains category.slug) and (doc.slug != category.index) %}
