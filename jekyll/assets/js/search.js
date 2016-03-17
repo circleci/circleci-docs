@@ -1,3 +1,6 @@
+---
+---
+
 jQuery(function(){
 	// Initalize lunr with fields it will search on. Title has 
 	// a boost of 10 to indicate matches on it are more important.
@@ -8,7 +11,7 @@ jQuery(function(){
 	});
 
 	// Download the data from the JSON file we generated
-	window.data = $.getJSON('assets/js/search-index.json');
+	window.data = $.getJSON('{{ site.baseurl }}/assets/js/search-index.json');
 
 	// Wait for the data to load and add it to lunr
 	window.data.then(function(loaded_data){
@@ -22,22 +25,26 @@ jQuery(function(){
 	// Event when the form is submitted
 	$("#site-search input").keyup(function(){
 		event.preventDefault();
+
 		var query = $("#site-search input").val(); // Get the value for the text field
-		/*if(query.length < 3){
+		var $search_results = $("#search-results");
+
+		if(query.length < 3){
+			$search_results.toggle(false);
 			return;
-		}*/
+		}
+
 		var results = window.idx.search(query); // Get lunr to perform a search
-		display_search_results(results); // Hand the results off to be displayed
+		display_search_results(results, $search_results); // Hand the results off to be displayed
 	});
 
-	function display_search_results(results) {
-		var $search_results = $("#search-results");
+	function display_search_results(results, $search_results) {
 		// Wait for data to load
 		window.data.then(function(loaded_data) {
 			// Are there any results?
 			if (results.length) {
 				$search_results.empty(); // Clear any old results
-				$search_results.toggle();
+				$search_results.toggle(true);
 				// Iterate over the results
 				results.forEach(function(result) {
 					var item = loaded_data[result.ref];
@@ -46,6 +53,8 @@ jQuery(function(){
 					// Add it to the results
 					$search_results.append(appendString);
 				});
+			}else{
+				$search_results.toggle(false);
 			}
 		});
 	}

@@ -15,7 +15,7 @@ kramdown:
 collections:
   docs:
     output: true
-    permalink: /:path
+    permalink: /:path/
 
 twitter_username: circleci
 github_username:  circleci
