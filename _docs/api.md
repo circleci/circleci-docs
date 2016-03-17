@@ -184,15 +184,15 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 
 ## Projects
 
-{{ api_data.projects | api-endpoint }}
+{{ api.projects | api-endpoint }}
 
 <h2 id="recent-builds">Recent Builds Across All Projects</h2>
 
-{{ api_data.recent_builds | api-endpoint }}
+{{ api.recent_builds | api-endpoint }}
 
 <h2 id="recent-builds-project">Recent Builds For a Single Project</h2>
 
-{{ api_data.project | api-endpoint }}
+{{ api.project | api-endpoint }}
 
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 

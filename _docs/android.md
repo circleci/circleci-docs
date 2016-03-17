@@ -17,7 +17,15 @@ this path as `$ANDROID_HOME`.
 
 We have the following SDK packages preinstalled:
 
-{{ versions.android_sdk_packages | code-list}} 
+{% for version in site.data.versions.android_sdk_packages %}
+- `{{ version }}`
+{% endfor %}
+
+<ul>
+{% for version in site.data.versions.android_sdk_packages %}
+	<li>**{{ version }}**</li>
+{% endfor %}
+</ul>
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:

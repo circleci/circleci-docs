@@ -119,7 +119,9 @@ versions. Below are the versions of Ruby that we pre-install; you can specify ve
 You can
 [choose the exact version you need directly, from the following list:](/docs/configuration#ruby-version)
 
-{{ versions.ruby_versions | code-list }}
+{% for version in site.data.versions.ruby_versions %}
+- `{{ version }}`
+{% endfor %}
 
 By default we use `Ruby {{ versions.default_ruby }}`
 unless we detect that you need Ruby 1.8.7, in which case we'll use
@@ -143,7 +145,9 @@ will install instantly, so it's easy to use any Node version.
 
 Below are the versions of Node.js that we pre-install; you can specify versions not listed here (supported by NVM) in your circle.yml file and we will install them as part of the build - this will add to your build time, however, if you let us know the version you are using we will update the VM accordingly.
 
-{{ versions.node_versions | code-list }}
+{% for version in site.data.versions.node_versions %}
+- `{{ version }}`
+{% endfor %}
 
 If you do not specify a version, we use `{{ versions.default_node }}`.
 
@@ -156,7 +160,9 @@ Packages can be installed using `pip {{ versions.pip }}` and
 
 Below are the versions of Python that we pre-install; you can specify versions not listed here (supported by pyenv) in your circle.yml file and we will install them as part of the build - this will add to your build time, however, if you let us know the version you are using we will update the VM accordingly.
 
-{{ versions.python_versions | code-list }}
+{% for version in site.data.versions.python_versions %}
+- `{{ version }}`
+{% endfor %}
 
 Please [contact us](mailto:sayhi@circleci.com) if other versions of Python would be useful to you.
 
@@ -168,7 +174,9 @@ Packages can be installed using `composer`, `pear`, and `pecl`.
 
 Supported versions are:
 
-{{ versions.php_versions | code-list }}
+{% for version in site.data.versions.php_versions %}
+- `{{ version }}`
+{% endfor %}
 
 Are you using a version of PHP that isn't included in this list?
 If so, please [contact us](mailto:sayhi@circleci.com).
@@ -177,7 +185,9 @@ If so, please [contact us](mailto:sayhi@circleci.com).
 
 CircleCI has the following languages and tools installed:
 
-{{ versions.java_packages | code-list }}
+{% for version in site.data.versions.java_packages %}
+- `{{ version }}`
+{% endfor %}
 
 *   `ant {{ versions.ant }}`
 *   `maven {{ versions.maven }}`
@@ -199,7 +209,9 @@ You can specify the following JVM versions in your `circle.yml` file:
 
 We track <a>http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/</a> for recent Scala releases:
 
-{{ versions.scala_versions | code-list }}
+{% for version in site.data.versions.scala_versions %}
+- `{{ version }}`
+{% endfor %}
 
 We also install some release candidate and beta versions (see the above URL for the complete list).
 
@@ -216,7 +228,9 @@ let us know if you need anything else installed to run your JVM language of choi
 
 We have the following versions of GHC and tools installed:
 
-{{ versions.ghc_versions | code-list }}
+{% for version in site.data.versions.ghc_versions %}
+- `{{ version }}`
+{% endfor %}
 *   `cabal-install-1.18`
 *   `happy-1.19.3`
 *   `alex-3.1.3`
@@ -288,7 +302,9 @@ Following integration tools are pre-installed.
 
 We have the following versions of GCC and G++ as well as some other build tools installed:
 
-{{versions.gcc_g_plusx2_versions | code-list}}
+{% for version in site.data.versions.gcc_g_plusx2_versions %}
+- `{{ version }}`
+{% endfor %}
 *   `build-essential`  ({{ versions.build_essential }})
 
 To switch GCC and GCC++ versions, you can add the following in circle.yml:
