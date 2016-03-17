@@ -180,19 +180,19 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 
 ## User
 
-{{ api_data.me | api-endpoint }}
+{{ site.data.api.me | api_endpoint }}
 
 ## Projects
 
-{{ api.projects | api-endpoint }}
+{{ site.data.api.projects | api_endpoint }}
 
 <h2 id="recent-builds">Recent Builds Across All Projects</h2>
 
-{{ api.recent_builds | api-endpoint }}
+{{ site.data.api.recent_builds | api_endpoint }}
 
 <h2 id="recent-builds-project">Recent Builds For a Single Project</h2>
 
-{{ api.project | api-endpoint }}
+{{ site.data.api.project | api_endpoint }}
 
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 
@@ -205,76 +205,76 @@ The branch name should be url-encoded.
 
 <span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks](/docs/configuration#notify), in which case this object is the value to a key named 'payload'.
 
-{{ api_data.build | api-endpoint }}
+{{ site.data.api.build | api_endpoint }}
 
 <h2 id="build-artifacts">Artifacts of a Build</h2>
 
-{{ api_data.artifacts | api-endpoint }}
+{{ site.data.api.artifacts | api_endpoint }}
 
 <h2 id="retry-build">Retry a Build</h2>
 
-{{ api_data.retry_build | api-endpoint }}
+{{ site.data.api.retry_build | api_endpoint }}
 
 You can retry a build with ssh by swapping "retry" with "ssh":
 `https://circleci.com/api/v1/project/:username/:project/:build_num/ssh`
 
 <h2 id="add-user-ssh">Add User to Build</h2>
 
-{{ api_data.add_user_ssh | api-endpoint }}
+{{ site.data.api.add_user_ssh | api_endpoint }}
 
 <h2 id="cancel-build">Cancel a Build</h2>
 
-{{ api_data.cancel_build | api-endpoint }}
+{{ site.data.api.cancel_build | api_endpoint }}
 
 <h2 id="new-build">Trigger a new Build</h2>
 
 <span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds](/docs/parameterized-builds)
 
-{{ api_data.project_branch | api-endpoint }}
+{{ site.data.api.project_branch | api_endpoint }}
 
 <h2 id="clear-cache">Clear Cache</h2>
 
-{{ api_data.project_build_cache | api-endpoint}}
+{{ site.data.api.project_build_cache | api_endpoint}}
 
 <h2 id="list-environment-variables">List Environment Variables</h2>
 
-{{ api_data.list_environment_variables | api-endpoint}}
+{{ site.data.api.list_environment_variables | api_endpoint}}
 
 <h2 id="add-environment-variable">Add Environment Variables</h2>
 
-{{ api_data.add_environment_variable | api-endpoint}}
+{{ site.data.api.add_environment_variable | api_endpoint}}
 
 <h2 id="get-environment-variable">Get Single Environment Variable</h2>
 
-{{ api_data.get_environment_variable | api-endpoint}}
+{{ site.data.api.get_environment_variable | api_endpoint}}
 
 <h2 id="delete-environment-variable">Delete Environment Variables</h2>
 
-{{ api_data.delete_environment_variable | api-endpoint}}
+{{ site.data.api.delete_environment_variable | api_endpoint}}
 
 <h2 id="list-checkout-keys">List Checkout Keys</h2>
 
-{{ api_data.list_checkout_keys | api-endpoint}}
+{{ site.data.api.list_checkout_keys | api_endpoint}}
 
 <h2 id="new-checkout-key">New Checkout Key</h2>
 
-{{ api_data.new_checkout_key | api-endpoint}}
+{{ site.data.api.new_checkout_key | api_endpoint}}
 
 <h2 id="get-checkout-key">Get Checkout Key</h2>
 
-{{ api_data.get_checkout_key | api-endpoint}}
+{{ site.data.api.get_checkout_key | api_endpoint}}
 
 <h2 id="delete-checkout-key">Delete Checkout Key</h2>
 
-{{ api_data.delete_checkout_key | api-endpoint}}
+{{ site.data.api.delete_checkout_key | api_endpoint}}
 
 
 ## Test Metadata
 
-{{ api_data.test_metadata | api-endpoint }}
+{{ site.data.api.test_metadata | api_endpoint }}
 
 <span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata](/docs/test-metadata)
 
 ## SSH Keys
 
-{{ api_data.ssh_key | api-endpoint }}
+{{ site.data.api.ssh_key | api_endpoint }}
