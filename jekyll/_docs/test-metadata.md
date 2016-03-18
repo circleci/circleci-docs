@@ -1,9 +1,8 @@
-<!--
-
+---
+layout: classic-docs
 title: Collecting test metadata
 last_updated: Feb 17, 2015
-
--->
+---
 
 CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
 We'll use the test metadata to give you better insight into your build. For our
@@ -19,6 +18,7 @@ you'll need to do some configuration to to enable the formatters:
 For RSpec:
 
 Add this to your gemfile:
+
 ```
 gem 'rspec_junit_formatter', '0.2.2'
 ```
@@ -26,6 +26,7 @@ gem 'rspec_junit_formatter', '0.2.2'
 For Minitest:
 
 Add this to your gemfile:
+
 ```
 gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
 ```
@@ -47,7 +48,7 @@ timing information.
 
 If you have a custom test step that produces JUnit XML output - most test runners support this in some form - you can write the XML
 files to the `$CIRCLE_TEST_REPORTS` directory.  We'll automatically store the files in your
-[build artifacts](/docs/build-artifacts) and parse the XML.
+[build artifacts]({{ site.baseurl }}/build-artifacts) and parse the XML.
 
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
@@ -55,7 +56,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 ### Cucumber
 
 For custom Cucumber steps, you should generate a file using the JSON formatter that ends
-with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml](/docs/configuration) might be:
+with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration) might be:
 
 ```
 test:
@@ -67,7 +68,7 @@ test:
 
 ### PHPUnit
 
-For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml](/docs/configuration) might be:
+For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration) might be:
 
 ```
 test:
@@ -113,4 +114,4 @@ You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert C
 
 ## API
 
-You can access test metadata for a build from the [API](/docs/api#test-metadata).
+You can access test metadata for a build from the [API]({{ site.baseurl }}/api#test-metadata).

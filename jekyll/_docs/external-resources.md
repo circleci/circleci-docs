@@ -3,7 +3,7 @@ layout: classic-docs
 title: Use resources which are not in your repository
 categories: [how-to]
 last_updated: Feb 2, 2012
---
+---
 
 There are a number of techniques to do this:
 

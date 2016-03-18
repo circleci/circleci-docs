@@ -71,7 +71,7 @@ In the meantime, add your coverage library of choice. Options include:
     for C or C++.
 
 Configure your library to save results in the directory specified by the CIRCLE_ARTIFACTS environment variable.
-Alternatively, add a [test.post command]({{ site.baseurl }}/configuration#tests)
+Alternatively, add a [test.post command]({{ site.baseurl }}/configuration#test)
 to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts).
 
 ### Seeing the results in the CircleCI UI

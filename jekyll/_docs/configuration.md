@@ -13,7 +13,7 @@ You place the file in your git repo's root directory and CircleCI reads the file
 If you want a quick look at how to set up your `circle.yml`
 file, check out our [sample file](/docs/config-sample).
 
-Should you have a test failure, our [troubleshooting section](/docs/troubleshooting)
+Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting)
 can likely tell you the best way to solve the problem.
 If you find yourself repeatedly consulting this guide, please
 [contact us](mailto:sayhi@circleci.com) and let us know what you're working on.
@@ -68,12 +68,12 @@ Allowed modifiers are:
 *   **environment**: a hash creating a list of environment variables set for this command
     (see [Machine configuration](#machine) for this modifier's properties when used in the `machine` section of the file)
 *   **parallel**: (only used with commands in the `test` section)
-    if you have [ manually set up parallelism](/docs/parallel-manual-setup), set this to true to run a command across all VMs
+    if you have [ manually set up parallelism]({{ site.baseurl }}/parallel-manual-setup), set this to true to run a command across all VMs
 *   **files**:
     The files identified by the file list (or globs) will be appended to the
     command arguments. The files will be distributed across all containers
     running the build. Check
-    [manual parallelism setup document](/docs/parallel-manual-setup#auto-splitting) for more details.
+    [manual parallelism setup document]({{ site.baseurl }}/parallel-manual-setup#auto-balancing) for more details.
 *   **background**: when "true", runs a command in the background.  It is similar to ending a shell command with '&amp;', but works correctly over ssh.  Useful for starting servers, which your tests will connect to.
 
 Note that YAML is very strict about indentation each time you add a new property.

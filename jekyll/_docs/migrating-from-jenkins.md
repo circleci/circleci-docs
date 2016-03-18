@@ -96,7 +96,7 @@ Talking about containerization in build systems can be complicated because arbit
   CircleCI runs all Linux builds in dedicated containers, which are destroyed immediately after use (OSX builds run in single-use VMs). This creates a fresh environment for every build, preventing unwanted cruft from getting into builds. One-off environments also promote a disposable mindset that ensures all dependencies are documented in code and prevents “snowflake” build servers.
 
 
-  If you run builds on your own hardware with [CircleCI Enterprise](/enterprise), running all builds in containers allows you to heavily utilize the hardware available to run builds.
+  If you run builds on your own hardware with [CircleCI Enterprise](https://circleci.com/enterprise/), running all builds in containers allows you to heavily utilize the hardware available to run builds.
 
 ### Parallelism
 

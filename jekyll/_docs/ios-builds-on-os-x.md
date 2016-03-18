@@ -289,7 +289,7 @@ your organization's settings page.
 Click on your organisation (CircleCI in the image above), and click on
 the API key and Build Secret links to reveal the items.
 
-![]({{ site.baseurl }}/assests/img/docs/fabric-api-creds-page.png)
+![]({{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
 On CircleCI, navigate to your App's Project Settings page, and under
 Environment Variables add 2 new items named `CRASHLYTICS_API_KEY` and

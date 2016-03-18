@@ -163,7 +163,7 @@ machine:
 We recommend using [Fastlane Gym](https://github.com/fastlane/gym) to
 build a signed app. `gym` is pre-installed on our containers, so it's
 easy to set up. The first step is to add a new [deployment
-command](https://circleci.com/docs/configuration#deployment) in your
+command]({{ site.baseurl }}/configuration#deployment) in your
 `circle.yml` file.
 
 ```
@@ -180,7 +180,7 @@ deployment:
 ```
 
 You should take a few minutes to read [the documentation on deployments
-using CircleCI]((https://circleci.com/docs/configuration#deployment) ).
+using CircleCI]({{ site.baseurl }}/configuration#deployment).
 The deployment stanza above instructs CircleCI to run the `gym` command
 on each successful build of the `master` branch. The `beta_distribution`
 is just a name for the deployment. You can use any name here.

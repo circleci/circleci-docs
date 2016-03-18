@@ -1,9 +1,8 @@
-<!--
-
+---
+layout: classic-docs
 title: Introduction to Continuous Deployment
 last_updated: March 12, 2014
-
--->
+---
 
 Circle enables you to automatically deploy after green builds.
 We have customers deploying to PaaSes such as Heroku, Engine Yard,
@@ -17,7 +16,7 @@ Continuous Deployment easy.
 ### Deployment syntax
 
 Tell Circle about your deployment requirements in the `deployment`
-section of your [circle.yml](/docs/configuration) file.
+section of your [circle.yml]({{ site.baseurl }}/configuration) file.
 Within this section, you can can define custom deployment steps for each
 branch, directing Circle to use specific deployment tools or custom scripts.
 Deployment commands are triggered only after a successful build.
@@ -42,6 +41,7 @@ deployment:
 You can also use regular expressions in the `branch` property.
 
 One example is to deploy branches matching a prefix, e.g. "feature-":
+
 ```
 deployment:
   development:
@@ -51,6 +51,7 @@ deployment:
 ```
 
 You could also run deployments for everything but the master branch:
+
 ```
 deployment:
   development:
@@ -96,8 +97,8 @@ deployment:
 ### Deploy to a PaaS
 
 Circle has customers deploying to Heroku, Engine Yard, Google App Engine, Elastic Beanstalk, Dot Cloud, Nodejistu and other PaaSes. We have detailed instructions on deployment to
-[Heroku](/docs/continuous-deployment-with-heroku),
-[Google App Engine](/docs/deploy-google-app-engine)
-and [Bluemix](/docs/deploy-bluemix).
+[Heroku]({{ site.baseurl }}/continuous-deployment-with-heroku),
+[Google App Engine]({{ site.baseurl }}/deploy-google-app-engine)
+and [Bluemix]({{ site.baseurl }}/deploy-bluemix).
 If you'd like help setting up your deployment, please
 [contact us](mailto:sayhi@circleci.com).
