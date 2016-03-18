@@ -19,7 +19,7 @@ For iOS projects, please [contact support](mailto:sayhi@circleci.com) with the n
 You can easily migrate your Android projects from Ship.io to CircleCI in a few simple steps.
 
 1. Add your project on the [Add Projects page](https://circleci.com/add-projects). 
-2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started](https://circleci.com/docs/getting-started) documentation. 
+2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started]({{ site.baseurl }}/getting-started) documentation. 
 3. Check out the [Testing Android on CircleCI]({{ site.baseurl }}/android) documentation.
 
 
@@ -125,7 +125,7 @@ Please don't hesitate to give our [support team](mailto:sayhi@circleci.com) a sh
 
 [Configuring custom AVDs](https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine)
 
-[Getting Started on CircleCI]({{ site.base }}/getting-started)
+[Getting Started on CircleCI]({{ site.baseurl }}/getting-started)
 
 [An excellent CircleCI and Android Gradle how-to](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/)
 
