@@ -5,13 +5,13 @@ categories: [how-to]
 last_updated: May 22, 2014
 ---
 
-The [experimental Parameterized Build API](/docs/parameterized-builds)
-allows you to trigger a build using the [CircleCI API](/docs/api#new-build)
+The [experimental Parameterized Build API]({{ site.baseurl }}/parameterized-builds)
+allows you to trigger a build using the [CircleCI API]({{ site.baseurl }}/api#new-build)
 and inject environment variables into the build environment.
 
 You can customize your `circle.yml` to take different actions, such as running a much more extensive test suite, when certain build parameters are present.
 
-[Parameterized builds](/docs/parameterized-builds) are still an experimental feature.
+[Parameterized builds]({{ site.baseurl }}/parameterized-builds) are still an experimental feature.
 We're very interested in what you create with build parameters and would love to get your
 [feedback](mailto:sayhi@circleci.com) on using them.
 

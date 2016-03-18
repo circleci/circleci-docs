@@ -46,7 +46,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
   GET: /project/:username/:project/:build_num
 </dt>
 <dd>
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks](/docs/configuration#notify), in which case this object is the value to a key named 'payload'.
+  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
   GET: /project/:username/:project/:build_num/artifacts
@@ -76,7 +76,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
   POST: /project/:username/:project/tree/:branch
 </dt>
 <dd>
-  Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API](/docs/parameterized-builds).
+  Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API]({{ site.baseurl }}/parameterized-builds).
 </dd>
 <dt>
   POST: /project/:username/:project/ssh-key
@@ -203,7 +203,7 @@ The branch name should be url-encoded.
 
 <h2 id="build">Single Build</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks](/docs/configuration#notify), in which case this object is the value to a key named 'payload'.
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration#notify), in which case this object is the value to a key named 'payload'.
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -228,7 +228,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build">Trigger a new Build</h2>
 
-<span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds](/docs/parameterized-builds)
+<span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds]({{ site.baseurl }}/parameterized-builds)
 
 {{ site.data.api.project_branch | api_endpoint }}
 
@@ -273,7 +273,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata](/docs/test-metadata)
+<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]({{ site.baseurl }}/test-metadata)
 
 ## SSH Keys
 

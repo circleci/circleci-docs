@@ -21,4 +21,4 @@ runners, including RSpec, Cucumber, minitest, Django, Nose, and more.  For the m
 
 However, if our
 inferred parallel test commands don't work, or if you want to do custom test splitting,
-see [our doc on manually setting up parallelism](/docs/parallel-manual-setup).
+see [our doc on manually setting up parallelism]({{ site.baseurl }}/parallel-manual-setup).

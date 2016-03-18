@@ -1,31 +1,39 @@
 - name: "Getting Started"
   slug: getting-started
   index: gettingstarted
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/gettingstarted.svg"
 
 - name: "Languages"
   slug: languages
   index: languages
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/languages.svg"
 
 - name: "Mobile Platforms"
   slug: mobile-platforms
   index: mobile
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/mobile.svg"
 
 - name: "How-To"
   slug: how-to
   index: how-to
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/how-to.svg"
 
 - name: "Troubleshooting"
   slug: troubleshooting
   index: troubleshooting
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/troubleshooting.svg"
 
 - name: "Reference"
   slug: reference
   index: reference
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/reference.svg"
 
 - name: "Parallelism"
   slug: parallelism
   index: parallelism
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/parallelism.svg"
 
 - name: "Privacy and Security"
   slug: privacy-and-security
   index: privacy-security
+  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/privacy-security.svg"

@@ -7,7 +7,8 @@ dependencies:
     - bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 test:
   post:
-    - bundle exec htmlproofer jekyll/_site --allow-hash-href --disable-external
+    # --empty-alt-ignore is temporary
+    - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --disable-external --empty-alt-ignore
 deployment:
   prod:
     branch: master

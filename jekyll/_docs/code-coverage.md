@@ -15,7 +15,7 @@ or using partners.
 ## See coverage in CircleCI
 
 It's straightforward to see simple coverage results from your build.
-Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory](/docs/build-artifacts).
+Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]({{ site.baseurl }}/build-artifacts).
 CircleCI will upload coverage results and make them visible as part of your build.
 
 ### Adding and configuring a coverage library
@@ -71,8 +71,8 @@ In the meantime, add your coverage library of choice. Options include:
     for C or C++.
 
 Configure your library to save results in the directory specified by the CIRCLE_ARTIFACTS environment variable.
-Alternatively, add a [test.post command](/docs/configuration#tests)
-to copy your artifacts into the [artifacts directory](/docs/build-artifacts).
+Alternatively, add a [test.post command]({{ site.baseurl }}/configuration#tests)
+to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts).
 
 ### Seeing the results in the CircleCI UI
 
@@ -120,7 +120,7 @@ Code Climate does not currently support CircleCI's parallelization.
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
 to configure the appropriate coverage
 reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
-[environment variables](/docs/environment-variables).
+[environment variables]({{ site.baseurl }}/environment-variables).
 
 ## Under construction
 

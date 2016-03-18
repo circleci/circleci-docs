@@ -21,12 +21,6 @@ We have the following SDK packages preinstalled:
 - `{{ version }}`
 {% endfor %}
 
-<ul>
-{% for version in site.data.versions.android_sdk_packages %}
-	<li>**{{ version }}**</li>
-{% endfor %}
-</ul>
-
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
 
@@ -51,7 +45,7 @@ test:
     - ./gradlew assembleDebug
 ```
 
-or build a release `.apk` and save it to [artifacts](build-artifacts) with
+or build a release `.apk` and save it to [artifacts]({{ site.baseurl }}/build-artifacts) with
 
 ```
 test:
