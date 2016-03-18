@@ -521,8 +521,7 @@ ssh_key:
   description: "Creates an ssh key that will be used to access the external system identified by the hostname parameter for SSH key-based authentication."
   method: "POST"
   body: '{"hostname":"hostname","private_key":"RSA private key"}'
-  response: |
-    ""
+  response: " "
 
 project_post:
   url: "/api/v1/project/:username/:project"
@@ -543,8 +542,7 @@ project_post:
       "failed": null,
       "infrastructure_fail": false,
       "canceled": false,
-      "all_commit_details": [
-        {
+      "all_commit_details": [{
           "author_name": "Allen Rohner",
           "commit": "f1baeb913288519dd9a942499cef2873f5b1c2bf",
           "author_login": "arohner",
@@ -557,8 +555,7 @@ project_post:
           "committer_email": "arohner@gmail.com",
           "author_email": "arohner@gmail.com",
           "subject": "Merge pull request #15 from circleci/minor-version-bump"
-        }
-      ],
+        }],
       "previous": {
         "build_num": 53,
         "status": "success",
@@ -606,4 +603,4 @@ project_post:
       "username": "circleci",
       "vcs_url": "https://github.com/circleci/mongofinil",
       "timedout": false
-  }
+    }
