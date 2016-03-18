@@ -533,9 +533,6 @@ section that matches.
 GitHub](https://help.github.com/articles/creating-releases/) creates a
 tag and follows the same rules.
 
-*Note:* Right now only annotated tags are supported. Pushing a
-lightweight tag will _not_ trigger a build.
-
 In the below example, pushing a tag named `release-v1.05` would
 trigger a build & deployment.  Pushing a tag `qa-9502` would not
 trigger a build.

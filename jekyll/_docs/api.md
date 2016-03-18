@@ -228,6 +228,10 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build">Trigger a new Build</h2>
 
+{{ site.data.api.project_post | api_endpoint }}
+
+<h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
+
 <span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds]({{ site.baseurl }}/parameterized-builds)
 
 {{ site.data.api.project_branch | api_endpoint }}

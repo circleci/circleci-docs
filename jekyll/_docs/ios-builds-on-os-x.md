@@ -105,9 +105,9 @@ work normally, though they will need to be installed and called using custom com
 See [customizing your build](#customizing-your-build) for more info.
 
 ## Code signing
-[Fastlane](https://fastlane.tools/) and [Shenzhen](http://nomad-cli.com/#shenzhen)
-are pre-installed on the container image. These are the tools that we suggest that
-you use to build a signed iOS app and distribute to your beta-testers.
+[fastlane](https://fastlane.tools/) and [Shenzhen](http://nomad-cli.com/#shenzhen)
+are pre-installed on the container image. It is recommended to use fastlane to 
+build, sign and distribute your iOS app to beta-testers.
 
 The fastest way to get code signing working on CircleCI is to follow
 these steps:

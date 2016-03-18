@@ -1,9 +1,8 @@
-<!--
-
+---
+layout: classic-docs
 title: Ship.io to CircleCI Migration
 short_title: Ship.io
-
--->
+---
 
 Coming from Ship.io? You've come to the right place, we'll help you get started. 
 
@@ -21,13 +20,13 @@ You can easily migrate your Android projects from Ship.io to CircleCI in a few s
 
 1. Add your project on the [Add Projects page](https://circleci.com/add-projects). 
 2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started](https://circleci.com/docs/getting-started) documentation. 
-3. Check out the [Testing Android on CircleCI](https://circleci.com/docs/android) documentation.
+3. Check out the [Testing Android on CircleCI]({{ site.baseurl }}/android) documentation.
 
 
 ## iOS FAQ: How do I...
 
 ### Set environment variables
-You can set environment variables through the **Project Settings > Environment Variables** page of your project, or through [circle.yml](https://circleci.com/docs/configuration#environment).
+You can set environment variables through the **Project Settings > Environment Variables** page of your project, or through [circle.yml]({{ site.baseurl }}/configuration#environment).
 
 ### Use Xcode 7
 Include a `circle.yml` file in the repo's root directory with the following contents:
@@ -45,19 +44,19 @@ CircleCI will automatically detect your shared scheme. If you have more than one
 CircleCI will detect your workspace. If you have more than one workspace, you can specify the path to your `.xcworkspace` file relative to the git repository root using the `XC_WORKSPACE` environment variable.
 
 ### Run scripts
-Make sure any scripts that you want to run are included in your repository. You can run your script using a bash command (e.g. `./example_script.sh`) configured in our UI (through **Project Settings > Dependency/Test Commands**) or in a [circle.yml](https://circleci.com/docs/configuration) file.
+Make sure any scripts that you want to run are included in your repository. You can run your script using a bash command (e.g. `./example_script.sh`) configured in our UI (through **Project Settings > Dependency/Test Commands**) or in a [circle.yml]({{ site.baseurl }}/configuration) file.
 
 ### Configure build notifications
 You can configure build notifications using the "Notifications" section of your Project Settings. Email notifications can be configured from the [Account page](https://circleci.com/account).
 
 ### Customize the build commands
-You can add to or override our inferred commands through your Project Settings or through a [circle.yml file](https://circleci.com/docs/configuration).
+You can add to or override our inferred commands through your Project Settings or through a [circle.yml file]({{ site.baseurl }}/configuration).
 
 ### Deploy my app
-We recommend using [Fastlane](https://medium.com/mitoo-insider/how-to-set-up-continuous-delivery-for-ios-with-fastlane-and-circleci-c7dae19df2ed). 
+We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-continuous-delivery-for-ios-with-fastlane-and-circleci-c7dae19df2ed). 
 
 ### Get more help
-* [iOS build docs](https://circleci.com/docs/ios)
+* [OS X build docs](https://circleci.com/docs/ios-builds-on-os-x)
 * [discuss.circleci.com](https://discuss.circleci.com/c/mobile)
 * [CircleCI Support](mailto:sayhi@circleci.com)
 
@@ -126,13 +125,13 @@ Please don't hesitate to give our [support team](mailto:sayhi@circleci.com) a sh
 
 [Configuring custom AVDs](https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine)
 
-[Getting Started on CircleCI](https://circleci.com/docs/getting-started)
+[Getting Started on CircleCI]({{ site.base }}/getting-started)
 
 [An excellent CircleCI and Android Gradle how-to](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/)
 
-[Debugging Android applications on CircleCI](https://circleci.com/docs/oom#out-of-memory-errors-in-android-builds)
-[CircleCI & Android 101](https://circleci.com/docs/android)
+[Debugging Android applications on CircleCI]({{ site.baseurl }}/oom#out-of-memory-errors-in-android-builds)
+[CircleCI & Android 101]({{ site.baseurl }}/android)
 
-[CircleCI Docs](https://circleci.com/docs)
+[CircleCI Docs]({{ site.baseurl }}/)
 
-[Discuss.circleci.com](http://discuss.circleci.com/)
+[Discuss.circleci.com](https://discuss.circleci.com/)

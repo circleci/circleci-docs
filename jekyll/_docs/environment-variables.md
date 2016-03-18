@@ -2,7 +2,6 @@
 layout: classic-docs
 title: Environment variables
 categories: [reference]
-last_updated: Apr 13, 2015
 ---
 
 We export a number of environment variables during each build, which you may find
@@ -49,7 +48,13 @@ We publish the details of the currently running build in these variables:
     `CIRCLE_BRANCH`
   </dt>
   <dd>
-    The name of the branch being tested, e.g. 'master'.
+    The name of the Git branch being tested, e.g. 'master', if the build is running for a branch.
+  </dd>
+  <dt>
+  	`CIRCLE_TAG`
+  </dt>
+  <dd>
+  	The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]({{ site.baseurl }}/configuration#tags).
   </dd>
   <dt>
     `CIRCLE_SHA1`
