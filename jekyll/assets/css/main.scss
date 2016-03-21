@@ -16,15 +16,16 @@ body{
 		overflow: auto;
 	}
 
+div.main-body{
+	display: flex;
+}
 
 // Navigation Sidebar
 nav.sidebar{
-	float: left;
 	border-right: 1px solid $nav-border-color;
 	background-color: $nav-bg-color;
 	padding: 30px 20px 20px;
 	width: 25%;
-	height: 100%;
 
 	a{
 		display: block;
