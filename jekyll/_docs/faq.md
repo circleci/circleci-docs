@@ -45,6 +45,17 @@ functionality is in the works. Keep an eye on our
 [changelog](https://circleci.com/changelog) to be notified as soon as
 this feature is available.
 
+## Discover CircleCI's Public IP addresses
+
+Currently CircleCI runs on multiple AWS Regions and utilitizes many different
+servers to perform the builds. As such there isn't a single IP, or even a small
+range of IPs, that could be used to help identify that an incoming request is
+from a build of your project.
+
+Even if the IP range was known it would not be safe to trust the IP address as
+we have thousands of builds running at any one time so multiple project's 
+builds could all be making requests from the same IP address.
+
 ## Dependencies
 
 ### How do I use postgres 9.3?
