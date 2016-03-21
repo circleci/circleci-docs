@@ -27,9 +27,9 @@ general:
 
 From here, we'll assume that you're manually setting up your tests.
 
-The first thing to do is to add an empty `circle.yml`
-file to the root directory of your repository.
-We recommend adding this on a branch the first time so you don't piss off your colleagues.
+The first thing to do is to add an empty `circle.yml` file to the root 
+directory of your repository. We recommend adding this upfront on a branch to 
+keep you and your colleagues on the same page.
 
 We have provided a
 [full reference for the `circle.yml` file](/docs/configuration)

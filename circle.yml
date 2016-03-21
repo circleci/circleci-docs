@@ -8,7 +8,7 @@ dependencies:
 test:
   post:
     # --empty-alt-ignore is temporary
-    - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore
+    - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt
 deployment:
   prod:
     branch: master

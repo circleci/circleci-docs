@@ -1,9 +1,8 @@
-<!--
-
+---
+layout: classic-docs
 title: Install a custom version of Elasticsearch
 last_updated: March 10, 2014
-
--->
+---
 
 CircleCI supports a large number of
 [services](/docs/environment#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:
@@ -28,7 +27,7 @@ dependencies:
 <span class='label label-info'>Note:</span>
 remember to remove elasticsearch from machine.services if you install it manually.
 
-### Install an Elasticsearch plugin
+## Install an Elasticsearch plugin
 
 It's easy to install a plugin from a url, just add a command to install the plugin before you start elasticsearch:
 
@@ -44,7 +43,7 @@ dependencies:
 
 ```
 
-### Caching
+## Caching
 
 Downloading Elasticsearch can take time, making your build longer.
 To reduce the time spent installing dependencies, CircleCI can cache them between builds.
