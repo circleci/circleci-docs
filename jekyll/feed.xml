@@ -11,17 +11,16 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    {% for doc in site.docs limit:10 %}
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
+        <title>{{ doc.title | xml_escape }}</title>
+        <description>{{ doc.content | xml_escape }}</description>
+        <link>{{ doc.url | prepend: site.baseurl | prepend: site.url }}</link>
+        <guid isPermaLink="true">{{ doc.url | prepend: site.baseurl | prepend: site.url }}</guid>
+        {% for tag in doc.tags %}
         <category>{{ tag | xml_escape }}</category>
         {% endfor %}
-        {% for cat in post.categories %}
+        {% for cat in doc.categories %}
         <category>{{ cat | xml_escape }}</category>
         {% endfor %}
       </item>
