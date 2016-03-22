@@ -21,6 +21,10 @@ div.main-body{
 }
 
 // Navigation Sidebar
+#nav-button{
+	display: none;
+}
+
 nav.sidebar{
 	border-right: 1px solid $nav-border-color;
 	background-color: $nav-bg-color;
@@ -82,21 +86,28 @@ div.article-container{
 
 
 // Homepage
-div.category-section{
-	float: left;
-	padding: 15px 10px 20px;
-	width: 50%;
-	text-align: center;
+body.homepage{
 	
-	.logo{
-		width: 60px;
+	article{
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
 	}
 
-	h2{
-		font-size: 1.5rem;
-	}
-
-	li a{
-		font-size: 0.875rem;
+	div.category-section{
+		padding: 15px 10px 20px;
+		width: 50%;
+		text-align: center;
+		.logo{
+			width: 60px;
+		}
+	
+		h2{
+			font-size: 1.5rem;
+		}
+	
+		li a{
+			font-size: 0.875rem;
+		}
 	}
 }

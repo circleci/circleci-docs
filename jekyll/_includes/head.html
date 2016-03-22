@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="https://dsd6xx3mp5v89.cloudfront.net/css/pages/site.css" />
 	<link rel="stylesheet" href="https://dsd6xx3mp5v89.cloudfront.net/components/font-awesome/css/font-awesome.min.css" />
 	<!-- End  -->
-	<link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}">
+	<link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}" />
+	<link rel='stylesheet' href="{{ "/assets/css/mobile.css" | prepend: site.baseurl }}" media="screen and (max-width: 800px)" />
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
 </head>
