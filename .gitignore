@@ -1,4 +1,5 @@
 _site
+_staging_site
 .sass-cache
 .jekyll-metadata
 .vagrant/

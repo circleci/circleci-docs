@@ -7,8 +7,9 @@ dependencies:
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
     # https://github.com/jekyll/jekyll/issues/4713
-    - bundle exec jekyll build -s jekyll -d jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
+    - bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
+    - bundle exec jekyll build --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
 test:
   post:
     # --empty-alt-ignore is temporary
@@ -17,4 +18,5 @@ deployment:
   prod:
     branch: master
     commands:
+      - aws s3 sync jekyll/_staging_site/docs s3://static-staging.circleci.com/docs/ --delete
       - aws s3 sync jekyll/_site s3://circle-production-docs --delete
