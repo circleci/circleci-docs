@@ -8,10 +8,28 @@ request, please feel free to contribute by following the instructions below.
 Otherwise, you can always open an 
 [Issue](https://github.com/circleci/circleci-docs/issues) on this project.
 
-## How to Contribute
+## Setup
 
-The easiest way to get going is to use Vagrant. To get a local copy of 
-circleci.com/docs/ up and running you can run the following commands:
+The easiest way to get going is to use Vagrant. This gives you a clean 
+environment with all the right versions of everything we need. 
+[Vagrant Setup](#vagrant-setup) can be found below.
+
+If you already have a Ruby environment you like, you can 
+[run everything directly](#bare-setup) on your machine as well.
+
+
+### Vagrant Setup
+
+#### Prerequisites
+If you're going the Vagrant route, the following software need to be installed:
+
+- Git - system version should be fine
+- [Vagrant](https://www.vagrantup.com/downloads.html) - download from website, apt-get, or brew.
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - best to use version 5.0+. Another Vagrant Provider such as Docker could be used instead but VirtualBox is the default.
+
+#### First Run
+To get a local copy of circleci.com/docs/ up and running you can run the 
+following commands:
 
 ```
 git clone https://github.com/circleci/circleci-docs.git
@@ -22,16 +40,6 @@ cd circleci-docs
 Jekyll will automatically start in the VM and can be viewed in your browser at 
 http://localhost:4040/docs/
 
-### Prerequisites
-
-If you're going the Vagrant route, the following software need to be installed:
-
-- Git - system version should be fine
-- [Vagrant](https://www.vagrantup.com/downloads.html) - 
-- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - best to use version 5.0+. Another Vagrant Provider such as Docker could be used instead but VirtualBox is default.
-
-### First Run
-
 The first time you run `./jctl start`, Vagrant will provision the entire VM for 
 you based on what's in `bootstrap.sh`. It'll then run Jekyll for you. The whole 
 process can take a few minutes but it's a one time deal.
@@ -39,13 +47,49 @@ process can take a few minutes but it's a one time deal.
 Once this is complete, Vagrant starts forwarding port 4040 for you. You can 
 simply view the docs at http://localhost:4040/docs/ .
 
-###  Editing Docs
+####  Editing Docs
 
-All of the docs can be found in the `_docs` directory. You can make any changes 
-that you need there then run `./jctl rebuild` to have Jekyll rebuild the site. 
-How to use **jctl** can be found below. You could also run `vagrant ssh` and 
-enter the VM directly. By default, the repo will be at `/vagrant`. From there 
-you could run `jekyll server` with whatever flags you would like.
+All of the docs can be found in the `jekyll/_docs` directory. You can make any 
+changes that you need there, then run `./jctl rebuild` to have Jekyll rebuild 
+the site. How to use [**jctl**](#jekyll-controller-jctl) can be found below.
+
+As an alternative to using JCTL, you can log into the VM directly to interact 
+with Jekyll. Run `vagrant ssh` to enter the VM directly. `cd /vagrant/jekyll` 
+will take you to where the repository files are in the VM. From there you could 
+run standard Jekyll commands such as `jekyll server` with whatever flags you 
+would like.
+
+### Bare Setup
+
+#### Prerequisites
+Going the bare route, the following software need to be installed:
+
+- Git - system version should be fine
+- Ruby - the version of Ruby currently being used with this project will be noted in the Gemfile. If you need to manage multiple Ruby versions, we recommend RVM though there are similar solutions you can use.
+- [Jekyll](https://jekyllrb.com/) - Jekyll version 3.
+- [HTMLProofer](https://github.com/gjtorikian/html-proofer) - HTMLProofer is used for testing links, images, and the HTML. The docs site needs to pass the build and test to be deployed. You can use HTMLProofer to test things before you send changes up to GitHub.
+
+You're welcome to also use Bundler to install the Gems needed. If you are using RVM (or similar), just make sure they all play nice together.
+
+#### First Run
+To get a local copy of circleci.com/docs/ up and running you can run the 
+following commands:
+
+```
+git clone https://github.com/circleci/circleci-docs.git
+cd circleci-docs/jekyll
+jekyll serve
+```
+
+Jekyll will build the site and start a web server. It can be viewed in your 
+browser at [](http://localhost:4000/docs/). To stop Jekyll and regain controll 
+of your terminal, just type `CTRL-C`.
+
+####  Editing Docs
+
+All of the docs can be found in the `jekyll/_docs` directory. You can make any 
+changes that you need there, then re-run `jekyll serve` to have Jekyll rebuild 
+and serve the site.
 
 ## Jekyll Controller (JTCL)
 
@@ -55,3 +99,18 @@ This is a Bash wrapper script to talk to Jekyll & Vagrant.
 - rebuild: Tells Jekyll to rebuild the site.
 - stop: Shuts down the entire VM (vagrant halt), including Jekyll.
 - restart: Restarts the Vagrant machine. Basically an alias of stop then start.
+
+## Jekyll Commands
+
+`jekyll build` - this tells Jekyll to generate the static files for the site, 
+and place them in the `jekyll/_site` directory. It does not serve the files.
+
+`jekyll serve` - this first runs `jekyll build`, then starts up an included 
+mini webserver to serve the files from the `'jekyll_site` directory. Listens to 
+localhost:4000 by default.
+
+`jekyll serve --detach` - this serves the site as before, but runs in the 
+background so that you can still use the same terminal window. Jekyll will tell 
+you which process ID belongs to it before it goes so you can use that to kill 
+it when you want to stop Jekyll. `kill -9 P_ID`. If you lose the ID, you can 
+run `pkill -f jekyll` to stop all Jekyll instances.
