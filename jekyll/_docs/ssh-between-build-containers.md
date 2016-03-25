@@ -2,6 +2,7 @@
 layout: classic-docs
 title: SSH between build containers
 categories: [parallelism]
+description: SSH between build containers
 last_updated: Apr 22, 2015
 ---
 

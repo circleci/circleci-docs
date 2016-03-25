@@ -2,6 +2,7 @@
 layout: classic-docs
 title: File-ordering bugs on Linux systems
 categories: [troubleshooting]
+description: Dealing with file-ordering bugs on Linux systems
 last_updated: Feb 2, 2013
 ---
 

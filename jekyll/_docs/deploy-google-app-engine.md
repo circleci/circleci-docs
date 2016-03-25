@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Continuous Deployment to Google App Engine
 categories: [how-to]
+description: Continuous Deployment to Google App Engine
 last_updated: July 19, 2013
 ---
 

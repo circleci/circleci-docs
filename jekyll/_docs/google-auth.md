@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Authentication with Google Cloud Platform
 categories: [how-to]
+description: Authentication with Google Cloud Platform
 ---
 
 Before using the `gcloud` command line tool to deploy your app to Google Cloud Platform, you'll need to authenticate it in order to give it the correct permissions. In order to do this, you'll need to create a [JSON Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount). This Service Account can then be encoded in base64 and added as a CircleCI environment variable. Your build script can then decode the JSON file and it use to authenticate the gcloud tool, which can then be used to deploy and interact with your project.

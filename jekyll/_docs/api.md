@@ -3,6 +3,7 @@ layout: classic-docs
 title: CircleCI REST API
 categories: [reference]
 last_updated: Aug 23, 2012
+description: Using circleci rest api  
 ---
 
 <h2 id="intro">The CircleCI API</h2>
@@ -46,7 +47,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
   GET: /project/:username/:project/:build_num
 </dt>
 <dd>
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration#notify), in which case this object is the value to a key named 'payload'.
+  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration/#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
   GET: /project/:username/:project/:build_num/artifacts
@@ -203,7 +204,7 @@ The branch name should be url-encoded.
 
 <h2 id="build">Single Build</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration#notify), in which case this object is the value to a key named 'payload'.
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration/#notify), in which case this object is the value to a key named 'payload'.
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -232,7 +233,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds]({{ site.baseurl }}/parameterized-builds)
+<span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds]({{ site.baseurl }}/parameterized-builds/)
 
 {{ site.data.api.project_branch | api_endpoint }}
 
@@ -277,7 +278,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]({{ site.baseurl }}/test-metadata)
+<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]({{ site.baseurl }}/test-metadata/)
 
 ## SSH Keys
 

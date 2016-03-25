@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Manual build setup
 categories: [getting-started]
+description: Manual build setup
 last_updated: April 29, 2013
 ---
 
@@ -66,7 +67,7 @@ If you need anything else installed, please [contact us](mailto:sayhi@circleci.c
 and CircleCI support should be able to accommodate you.
 Be aware that for security reasons, we don't provide root access.
 
-The [machine section](/docs/configuration#machine)
+The [machine section](/docs/configuration/#machine)
 of the `circle.yml` file is the place where you can tweak common settings, such as timezone, language version used, and
 `/etc/hosts` contents.
 
@@ -108,7 +109,7 @@ dependencies:
 
 <h2 id="databases">Setting up your test databases</h2>
 
-We have already installed [most databases that you'll need](/docs/environment#databases)
+We have already installed [most databases that you'll need](/docs/environment/#databases)
 on our virtual machine.
 
 At this point, you'll want to create your database, load it with your schema, and (possibly) preload it with data.

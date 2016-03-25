@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Test with Solr
 categories: [how-to]
+description: How to test with Solr
 last_updated: Jul 23, 2013
 ---
 

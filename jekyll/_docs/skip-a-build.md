@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Skip a build
 categories: [how-to]
+description: How to skip a build
 ---
 
 CircleCI supports the `[ci skip]` or `[skip ci]` standard for ignoring builds.

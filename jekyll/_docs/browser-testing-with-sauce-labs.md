@@ -3,6 +3,7 @@ layout: classic-docs
 title: Test with Sauce Labs
 categories: [how-to]
 last_updated: July 28, 2014
+description: How to test Sauce Labs on Circleci
 ---
 
 You can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs'

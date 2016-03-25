@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Permissions and access during deployment
 categories: [reference]
+description: Permissions and access during deployment
 last_updated: May 7, 2015
 ---
 

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Test Android Applications
 short-title: Android
 categories: [mobile-platforms]
+description: Testing android applications on circleci
 ---
 
 
@@ -45,7 +46,7 @@ test:
     - ./gradlew assembleDebug
 ```
 
-or build a release `.apk` and save it to [artifacts]({{ site.baseurl }}/build-artifacts) with
+or build a release `.apk` and save it to [artifacts]({{ site.baseurl }}/build-artifacts/) with
 
 ```
 test:

@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Do you need the latest version of Bundler?
 last_updated: Feb 3, 2013
+description: Latest versions of bundler
 ---
 
 CircleCI typically tracks the latest stable version of bundler.

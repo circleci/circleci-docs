@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Interacting with the browser on CircleCI's VM"
 last_updated: "October 20, 2014"
+description: How to interacting with a browser on Circleci's vm
 ---
 
 Integration tests can be hard to debug, especially when they're running on a remote machine.
@@ -15,7 +16,7 @@ and then view them when the build finishes.
 
 Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and supported by most test suites:
 
-*   [Manually, using Selenium directly](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
+*   [Manually, using Selenium directly](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp/#remotewebdriver)
 *   [Automaticaly on failure, using Cucumber](https://github.com/mattheworiordan/capybara-screenshot)
 *   [Automaticaly on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
 

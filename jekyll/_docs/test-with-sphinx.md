@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Test with Sphinx
 categories: [how-to]
+description: How to test with Sphinx
 last_updated: Apr 7, 2015
 ---
 

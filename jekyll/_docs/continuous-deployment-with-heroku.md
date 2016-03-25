@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Continuous Deployment with Heroku
 categories: [how-to]
+description: Continuous Deployment with Heroku
 last_updated: May 7, 2013
 ---
 
@@ -123,7 +124,7 @@ deployment:
 
 As previously mentioned, Heroku displays a default "Application Offline for Maintenance" HTML page telling users that an application is currently unavailable and to check back later.
 Should you wish, you can create a
-[custom](http://devcenter.heroku.com/articles/error-pages#customize-pages)
+[custom](http://devcenter.heroku.com/articles/error-pages#/customize-pages)
 service unavailable page for your app.
 
 <h2 id="migrations">Heroku and database migrations</h2>
@@ -137,7 +138,7 @@ CircleCI supports such command-driven database migrations as well as database mi
 
 Before migrating, Heroku recommends that you use the `heroku pgbackups`
 command to
-[capture a snapshot](http://devcenter.heroku.com/articles/migrate-heroku-postgres-with-pgbackups#capture-source-snapshot)
+[capture a snapshot](http://devcenter.heroku.com/articles/migrate-heroku-postgres-with-pgbackups/#capture-source-snapshot)
 so that you can easily revert the database back to its previous state.
 
 ### Migration guides
@@ -145,7 +146,7 @@ so that you can easily revert the database back to its previous state.
 Here are migration-related articles that you might find useful.
 
 *   [Rails](http://guides.rubyonrails.org/migrations.html)
-*   [node.js](http://github.com/nearinfinity/node-db-migrate#readme)
+*   [node.js](http://github.com/nearinfinity/node-db-migrate/#readme)
 *   [Django (Python web framework)](http://djangopro.com/2011/01/django-database-migration-tool-south-explained)
 
 <h2 id="caches">Clearing caches after a deployment</h2>
@@ -165,6 +166,6 @@ You might want to write a standalone script that uses the memcache client to cal
 
 Here are related articles that you might find useful.
 
-*   [Memcachier documentation](http://devcenter.heroku.com/articles/memcachier#getting-started)
+*   [Memcachier documentation](http://devcenter.heroku.com/articles/memcachier/#getting-started)
 *   [Redis documentation](http://redis.io/documentation)
 *   [Django's cache framework documentation](http://docs.djangoproject.com/en/1.5/topics/cache)

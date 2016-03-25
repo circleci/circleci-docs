@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: RSpec is failing but CircleCI reports my tests have passed
+description: What is happening when RSpec is failing but CircleCI reports my tests have passed 
 last_updated: Dec 20, 2013
 ---
 

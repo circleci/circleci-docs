@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Install custom software
 categories: [how-to]
+description: How to install custom software
 last_updated: May 2, 2013
 ---
 
@@ -43,7 +44,7 @@ To reduce the time spent installing dependencies, CircleCI will cache them betwe
 You can add arbitrary directories to this cache, allowing you to avoid the overhead of building your custom software during the build.
 
 Tell CircleCI to save a cached copy using the
-[`cache_directories` setting, in your `circle.yml` file](/docs/configuration#cache-directories).
+[`cache_directories` setting, in your `circle.yml` file](/docs/configuration/#cache-directories).
 
 ```
 dependencies:

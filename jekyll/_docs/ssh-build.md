@@ -2,6 +2,7 @@
 layout: classic-docs
 title: SSH access to builds
 categories: [troubleshooting]
+description: SSH access to builds
 ---
 
 Often the best way to troubleshoot problems is to ssh into a

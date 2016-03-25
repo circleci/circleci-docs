@@ -3,6 +3,7 @@ layout: classic-docs
 title: Set up code signing for iOS projects
 short-title: iOS code signing
 categories: [how-to]
+description: Setting up code signing for iOS projects
 last_updated: March 2nd, 2016
 ---
 
@@ -74,7 +75,7 @@ gem install fastlane
 
 The tools take a few minutes to install, so a little patience is
 required. For more information check out the [Fastlane installation
-guide](https://github.com/fastlane/fastlane/blob/master/docs/Guide.md#fastlane)
+guide](https://github.com/fastlane/fastlane/blob/master/docs/Guide.md/#fastlane)
 
 ### 2. Create and Upload a Code Signing Certificate
 
@@ -103,11 +104,11 @@ You can now upload the `.p12` file to your project on CircleCI in
 `Project Settings` > `iOS Code Signing`. When your build runs this `p12`
 file will be added to the `circle` keychain automatically.
 
-![The code signing section in the project settings]({{ site.baseurl }}/assets/img/docs/code-signing-settings-section.png)
+![The code signing section in the project settings]({{ site.baseurl }}/assets/img/docs/code-signing-settings-section.png/)
 
-![The code signing welcome screen]({{ site.baseurl }}/assets/img/docs/code-signing-splash-screen.png)
+![The code signing welcome screen]({{ site.baseurl }}/assets/img/docs/code-signing-splash-screen.png/)
 
-![Uploaded key on the code signing page]({{ site.baseurl }}/assets/img/docs/code-signing-key-uploaded.png)
+![Uploaded key on the code signing page]({{ site.baseurl }}/assets/img/docs/code-signing-key-uploaded.png/)
 
 ### 3. Create A Provisioning Profile
 
@@ -163,7 +164,7 @@ machine:
 We recommend using [Fastlane Gym](https://github.com/fastlane/gym) to
 build a signed app. `gym` is pre-installed on our containers, so it's
 easy to set up. The first step is to add a new [deployment
-command]({{ site.baseurl }}/configuration#deployment) in your
+command]({{ site.baseurl }}/configuration/#deployment) in your
 `circle.yml` file.
 
 ```
@@ -180,7 +181,7 @@ deployment:
 ```
 
 You should take a few minutes to read [the documentation on deployments
-using CircleCI]({{ site.baseurl }}/configuration#deployment).
+using CircleCI]({{ site.baseurl }}/configuration/#deployment).
 The deployment stanza above instructs CircleCI to run the `gym` command
 on each successful build of the `master` branch. The `beta_distribution`
 is just a name for the deployment. You can use any name here.
@@ -221,7 +222,7 @@ Credentials" step of the build on CircleCI. This is listed under
 "machine". Expand the output and you should see output like the
 following:
 
-![The output of the code signing step that ran correctly]({{ site.baseurl }}/assets/img/docs/code-signing-correct-step-output.png)
+![The output of the code signing step that ran correctly]({{ site.baseurl }}/assets/img/docs/code-signing-correct-step-output.png/)
 
 In this example there is one valid code-signing identity, `"iPhone
 Distribution: UTAH STREET LABS INC (GL92ZZ6423)"`. The goal is to pass

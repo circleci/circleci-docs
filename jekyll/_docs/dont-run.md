@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Skip code which should not run on your CI server
 categories: [how-to]
+description: Skip code which should not run on your CI server
 last_updated: Feb 2, 2013
 ---
 

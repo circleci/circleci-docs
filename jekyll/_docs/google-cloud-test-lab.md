@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Testing with Google Cloud Test Lab
 categories: [how-to]
+description: Testing with Google Cloud Test Lab
 ---
 
 This guide is based off of commands in Google Cloud Test Lab that are currently

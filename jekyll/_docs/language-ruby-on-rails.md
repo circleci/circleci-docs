@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Integration and Continuous Deployment with Ruby/Rails
 short-title: Ruby/Rails
 categories: [languages]
+description: Continuous Integration and Continuous Deployment with Ruby/Rails
 last_updated: March 12, 2014
 ---
 
@@ -19,7 +20,7 @@ checked into your repo's root directory.
 ### Version
 
 We use [RVM](https://rvm.io/) to provide access to a wide variety of
-[Ruby versions](/docs/environment#languages).
+[Ruby versions](/docs/environment/#languages).
 The default version of Ruby is either
 {{ versions.default_ruby }} or {{ versions.old_ruby }},
 whichever we think is best for your project.
@@ -41,7 +42,7 @@ works with testing tools that require a browser.
 If Circle detects a Gemfile, we automatically run `bundle install`. Your
 gems are automatically cached between builds to save time downloading dependencies.
 You can add additional project dependencies from the
-[dependencies section of your circle.yml](/docs/configuration#dependencies):
+[dependencies section of your circle.yml](/docs/configuration/#dependencies):
 
 ```
 dependencies:
@@ -55,17 +56,17 @@ Circle manages all your database requirements,
 such as running your `rake` commands for creating, loading,
 and migrating your database.
 We have pre-installed more than a dozen
-[databases and queues](/docs/environment#databases),
+[databases and queues](/docs/environment/#databases),
 including PostgreSQL, MySQL, and MongoDB.
 You can add custom database commands from the
-[database section of your circle.yml](/docs/configuration#database).
+[database section of your circle.yml](/docs/configuration/#database).
 
 ### Testing
 
 Circle will automatically infer your test commands if you're
 using Test::Unit, RSpec, Cucumber, Spinach, Jasmine, or Konacha.
 You can also add additional commands from the
-[test section of your circle.yml](/docs/configuration#test):
+[test section of your circle.yml](/docs/configuration/#test):
 
 ```
 test:
@@ -87,7 +88,7 @@ For other testing libraries, we have instructions for [manually setting up paral
 
 Circle offers first-class support for deployment to your staging and production environments.
 When your build is green, Circle will run the commands from the
-[deployment section of your circle.yml](/docs/configuration#deployment).
+[deployment section of your circle.yml](/docs/configuration/#deployment).
 
 You can find more detailed instructions in the
 [Continuous Deployment doc](/docs/introduction-to-continuous-deployment).

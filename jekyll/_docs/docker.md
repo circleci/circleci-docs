@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Continuous Integration and Delivery with Docker
 categories: [how-to]
+description: Continuous Integration and Delivery with Docker
 last_updated: December 8, 2014
 ---
 
@@ -330,7 +331,7 @@ dependencies:
 when checking for cached ADD commands, as discussed
 [here](https://github.com/docker/docker/issues/7387). One workaround until Docker
 adds more options is to
-[set file modification times to the commit time](https://git.wiki.kernel.org/index.php/ExampleScripts#Setting_the_timestamps_of_the_files_to_the_commit_timestamp_of_the_commit_which_last_touched_them).
+[set file modification times to the commit time](https://git.wiki.kernel.org/index.php/ExampleScripts/#Setting_the_timestamps_of_the_files_to_the_commit_timestamp_of_the_commit_which_last_touched_them).
 
 2. Make sure you tag the image you use in the FROM command in your Dockerfile, even if it
 is the default "latest" tag (e.g. use `FROM dockerfile/java:latest` instead of just

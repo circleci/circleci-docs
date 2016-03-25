@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Does parallelism really work?
 categories: [parallelism]
+description: A look at parallelism
 last_updated: Feb 2, 2013
 ---
 

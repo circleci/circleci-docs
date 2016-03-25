@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Environment variables
 categories: [reference]
+description: How to work with environment variables
 ---
 
 We export a number of environment variables during each build, which you may find
@@ -54,7 +55,7 @@ We publish the details of the currently running build in these variables:
   	`CIRCLE_TAG`
   </dt>
   <dd>
-  	The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]({{ site.baseurl }}/configuration#tags).
+  	The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]({{ site.baseurl }}/configuration/#tags).
   </dd>
   <dt>
     `CIRCLE_SHA1`
@@ -211,7 +212,7 @@ The only gotcha is that each command runs in its own shell, so just adding an
 #### Setting environment variables for all commands using circle.yml
 
 You can set environment variables in your `circle.yml` file, that
-[will be set for every command](/docs/configuration#environment).
+[will be set for every command](/docs/configuration/#environment).
 
 #### Setting environment variables for all commands without adding them to git
 
@@ -236,5 +237,5 @@ You can use standard bash syntax in your commands:
 RAILS_ENV=test bundle exec rake test
 ```
 
-You can also use [the environment modifier](/docs/configuration#modifiers) in your
+You can also use [the environment modifier](/docs/configuration/#modifiers) in your
 `circle.yml` file.

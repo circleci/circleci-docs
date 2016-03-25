@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Sample circle.yml file
 categories: [reference]
+description: Making a circle.yml file
 last_updated: May 2, 2013
 ---
 

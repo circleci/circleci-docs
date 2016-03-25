@@ -3,6 +3,7 @@ layout: classic-docs-parent
 title: Troubleshooting Ruby
 short-title: Ruby
 categories: [troubleshooting]
+description: Troubleshooting Ruby
 children:
   - bundler-latest
   - rspec-exit-codes

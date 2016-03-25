@@ -3,6 +3,7 @@ layout: classic-docs
 title: Building Pull Requests from forks
 short-title: Fork PR Builds
 categories: [reference]
+description: How to build Pull Requests from forks
 last_updated: April 2, 2015
 ---
 

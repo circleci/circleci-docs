@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Integration and Continuous Deployment with Python
 short-title: Python
 categories: [languages]
+description: Continuous Integration and Continuous Deployment with Python
 last_updated: March 12, 2014
 ---
 
@@ -17,7 +18,7 @@ When Circle detects Python, we automatically use `virtualenv`
 to create an isolated Python environment using Python `{{ versions.default_python }}`.
 
 We have
-[many versions of Python](/docs/environment#python)
+[many versions of Python](/docs/environment/#python)
 pre-installed. If you don't want to use the default, you can specify your Python version from your circle.yml:
 
 ```
@@ -40,7 +41,7 @@ when we find a `requirements.txt`, or `distutils`
 when we find a `setup.py` file.
 
 You can also
-[add custom dependencies commands from your `circle.yml`, for example:](/docs/configuration#dependencies)
+[add custom dependencies commands from your `circle.yml`, for example:](/docs/configuration/#dependencies)
 
 ```
 dependencies:
@@ -50,9 +51,9 @@ dependencies:
 ### Databases
 
 Circle has pre-installed more than a dozen
-[databases and queues](/docs/environment#databases),
+[databases and queues](/docs/environment/#databases),
 including PostgreSQL and MySQL. If needed, you can
-[manually set up your test database](/docs/manually#dependencies)
+[manually set up your test database](/docs/manually/#dependencies)
 from your `circle.yml`.
 
 ### Testing
@@ -60,7 +61,7 @@ from your `circle.yml`.
 CircleCI automatically runs `tox` when we find a `tox.ini` file,
 and runs `nosetests` when we find a `unittest.py` file.
 If you are using Django, then Circle will run `manage.py test`.
-You can [add custom test commands](/docs/configuration#test)
+You can [add custom test commands](/docs/configuration/#test)
 from your `circle.yml`:
 
 ```
@@ -75,7 +76,7 @@ class-style tests, not bare-function nose-style tests.
 
 ### Deployment
 
-CircleCI has [first-class support for deployment](/docs/configuration#deployment)
+CircleCI has [first-class support for deployment](/docs/configuration/#deployment)
 with Fabric or Paver.
 To set up deployment after green builds, you can add commands to the deployment section of your `circle.yml`:
 

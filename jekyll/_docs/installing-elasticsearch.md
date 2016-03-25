@@ -1,11 +1,12 @@
 ---
 layout: classic-docs
 title: Install a custom version of Elasticsearch
+description: Installing a custom version of Elasticsearch
 last_updated: March 10, 2014
 ---
 
 CircleCI supports a large number of
-[services](/docs/environment#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:
+[services](/docs/environment/#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:
 
 ```
 machine:
@@ -50,7 +51,7 @@ To reduce the time spent installing dependencies, CircleCI can cache them betwee
 You can add arbitrary directories to the cache, allowing you to avoid the overhead of building your custom software during the build.
 
 Tell CircleCI to save a cached copy using the
-[`cache_directories` settings in your `circle.yml` file](/docs/configuration#cache-directories).
+[`cache_directories` settings in your `circle.yml` file](/docs/configuration/#cache-directories).
 Then check for the directory before you download elasticsearch:
 
 ```

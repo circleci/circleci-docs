@@ -2,6 +2,7 @@
 layout: classic-docs
 title: How cache works
 categories: [reference]
+description: How the cache works
 last_updated: Jun 25, 2015
 ---
 

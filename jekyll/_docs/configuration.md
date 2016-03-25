@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Configuring CircleCI
 categories: [getting-started,reference]
+description: How to configure CircleCI
 last_updated: August 1, 2014
 ---
 
@@ -13,7 +14,7 @@ You place the file in your git repo's root directory and CircleCI reads the file
 If you want a quick look at how to set up your `circle.yml`
 file, check out our [sample file](/docs/config-sample).
 
-Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting)
+Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting/)
 can likely tell you the best way to solve the problem.
 If you find yourself repeatedly consulting this guide, please
 [contact us](mailto:sayhi@circleci.com) and let us know what you're working on.
@@ -66,14 +67,14 @@ Allowed modifiers are:
 *   **timeout**: if a command runs this many seconds without output, kill it (default:600s)
 *   **pwd**: run commands using this value as the current working directory (default: the checkout directory named for your project, except in the `machine` and `checkout/pre` sections, where it defaults to `$HOME`.)
 *   **environment**: a hash creating a list of environment variables set for this command
-    (see [Machine configuration](#machine) for this modifier's properties when used in the `machine` section of the file)
+    (see [Machine configuration](/#machine) for this modifier's properties when used in the `machine` section of the file)
 *   **parallel**: (only used with commands in the `test` section)
-    if you have [ manually set up parallelism]({{ site.baseurl }}/parallel-manual-setup), set this to true to run a command across all VMs
+    if you have [ manually set up parallelism]({{ site.baseurl }}/parallel-manual-setup/), set this to true to run a command across all VMs
 *   **files**:
     The files identified by the file list (or globs) will be appended to the
     command arguments. The files will be distributed across all containers
     running the build. Check
-    [manual parallelism setup document]({{ site.baseurl }}/parallel-manual-setup#auto-balancing) for more details.
+    [manual parallelism setup document]({{ site.baseurl }}/parallel-manual-setup/#auto-balancing) for more details.
 *   **background**: when "true", runs a command in the background.  It is similar to ending a shell command with '&amp;', but works correctly over ssh.  Useful for starting servers, which your tests will connect to.
 
 Note that YAML is very strict about indentation each time you add a new property.
@@ -182,7 +183,7 @@ machine:
 ```
 
 CircleCI will automatically update the `/etc/hosts` file with these values.
-Hostnames [must be well formed](http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names).
+Hostnames [must be well formed](http://en.wikipedia.org/wiki/Hostname/#Restrictions_on_valid_host_names).
 CircleCI will only accept hostnames that contain alpha-numeric characters,
 hyphens (-) and dots (.).
 
@@ -202,13 +203,13 @@ machine:
     version: 1.9.3-p0-falcon
 ```
 
-The complete list of supported Ruby versions is found [here](/docs/environment#ruby).
+The complete list of supported Ruby versions is found [here](/docs/environment/#ruby).
 
 <h3 id="node-version">Node.js version</h3>
 
 CircleCI uses [NVM](https://github.com/creationix/nvm)
 to manage Node versions. See
-[supported Node versions](/docs/environment#nodejs)
+[supported Node versions](/docs/environment/#nodejs)
 for a complete list. If you do not specify a version, CircleCI uses
 `{{ versions.default_node }}`.
 
@@ -232,7 +233,7 @@ machine:
 ```
 
 The default version of Java is `oraclejdk7`.
-See [supported Java versions](/docs/environment#java)
+See [supported Java versions](/docs/environment/#java)
 for a complete list.
 
 ### PHP version
@@ -248,7 +249,7 @@ machine:
     version: 5.4.5
 ```
 
-See [supported PHP versions](/docs/environment#php) for a complete list.
+See [supported PHP versions](/docs/environment/#php) for a complete list.
 
 ### Python version
 
@@ -262,13 +263,13 @@ machine:
     version: 2.7.5
 ```
 
-See [supported Python versions](/docs/environment#python)
+See [supported Python versions](/docs/environment/#python)
 for a complete list.
 
 ### GHC version
 
 You can choose from a
-[number of available GHC versions](/docs/environment#haskell)
+[number of available GHC versions](/docs/environment/#haskell)
 in your `circle.yml`:
 
 ```
@@ -280,13 +281,13 @@ machine:
 ### Other languages
 
 Our [test environment](/docs/environment) document has more configuration information about
-[other languages](/docs/environment#other) including [Python](/docs/environment#python),
-[Clojure](/docs/environment#clojure), [C/C++](/docs/environment#other),
-[Golang](/docs/environment#other) and [Erlang](/docs/environment#other).
+[other languages](/docs/environment#other) including [Python](/docs/environment/#python),
+[Clojure](/docs/environment#clojure), [C/C++](/docs/environment/#other),
+[Golang](/docs/environment#other) and [Erlang](/docs/environment/#other).
 
 <h3 id="services">Databases and other services</h3>
 
-CircleCI supports a large number of [databases and other services](/docs/environment#databases).
+CircleCI supports a large number of [databases and other services](/docs/environment/#databases).
 Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB.
 
 You can enable other databases and services from the `services` section:
@@ -387,7 +388,7 @@ Caches are private, and are not shared with other projects.
 
 Your web framework typically includes commands to create your database, install your schema, and run your migrations.
 You can use `override`, `pre`, and/or `post` to modify `database` commands.
-See [Setting up your test database](/docs/manually#databases) for more information.
+See [Setting up your test database](/docs/manually/#databases) for more information.
 
 If our inferred `database.yml` isn't working for you, you may need to `override` our setup commands (as shown in the following example).
 If that is the case, please [contact us](mailto:sayhi@circleci.com)
@@ -438,7 +439,7 @@ test:
 ```
 
 CircleCI also supports the use of `minitest_globs`
-(a list of file globs, using [Ruby's Dir.glob syntax](http://ruby-doc.org/core-2.0/Dir.html#glob-method))
+(a list of file globs, using [Ruby's Dir.glob syntax](http://ruby-doc.org/core-2.0/Dir.html/#glob-method))
 that can list the file globs to be used during testing.
 
 By default, when testing in parallel, CircleCI runs all tests in the test/unit, test/integration, and
@@ -622,7 +623,7 @@ notify:
 ```
 
 The JSON packet is identical to the result of the
-[Build API](/docs/api#build)
+[Build API](/docs/api/#build)
 call for the same build, except that it is wrapped in a "payload" key:
 
 ```

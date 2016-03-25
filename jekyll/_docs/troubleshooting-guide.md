@@ -3,6 +3,7 @@ layout: classic-docs
 title: Troubleshooting guide
 short-title: Troubleshooting guide
 categories: [troubleshooting]
+description: Troubleshooting guide
 last_updated: February 26, 2015
 ---
 
@@ -14,7 +15,7 @@ compilation of the ones we see most frequently:
 - Different language version. Make sure that you are using the same
   version of the language on CircleCI and locally. Check out
   [this documentation
-  page](https://circleci.com/docs/configuration#ruby-version) for more
+  page](https://circleci.com/docs/configuration/#ruby-version) for more
   details.
 - Different versions of packages you rely on. Try explicitly specifying
   the versions for the packages you are using in your build in your
@@ -25,7 +26,7 @@ compilation of the ones we see most frequently:
   modules, which in combination with unset machine timezone can deliver
   unexpected test failures. You can find an example for setting the
   timezone for your machine [in this doc
-  section](https://circleci.com/docs/configuration#machine).
+  section](https://circleci.com/docs/configuration/#machine).
 - File ordering. Some filesystems maintain an ordered file structure for
   every directory, which means that all the files are read in a
   consistent order every time. The filesystem in our build containers in

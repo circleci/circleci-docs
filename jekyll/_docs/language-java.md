@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Integration and Continuous Deployment with Java
 short-title: Java
 categories: [languages]
+description: Continuous Integration and Continuous Deployment with Java
 last_updated: April 21, 2014
 ---
 
@@ -14,7 +15,7 @@ with a [circle.yml](/docs/configuration) file.
 
 ### Version
 
-Circle has [several versions of the Oracle JDK](/docs/environment#java)
+Circle has [several versions of the Oracle JDK](/docs/environment/#java)
 available. We use `{{ versions.default_java_version }}`
 as the default; if you'd like a particular version, you can specify it in your `circle.yml`
 
@@ -71,5 +72,5 @@ Depending on your build tooling, we will infer different commands:
 
 You can easily customize inferred build commands in your `circle.yml`
 by setting the `override`, `pre`, `post` in the
-[dependencies](/docs/configuration#dependencies) and
-[test](/docs/configuration#test) sections.
+[dependencies](/docs/configuration/#dependencies) and
+[test](/docs/configuration/#test) sections.
