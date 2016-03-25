@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Ship.io to CircleCI Migration
 short_title: Ship.io
-description:Ship.io to CircleCI Migration
+description: "Ship.io to CircleCI Migration"
 ---
 
 Coming from Ship.io? You've come to the right place, we'll help you get started. 
