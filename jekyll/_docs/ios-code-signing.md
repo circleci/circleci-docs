@@ -75,7 +75,7 @@ gem install fastlane
 
 The tools take a few minutes to install, so a little patience is
 required. For more information check out the [Fastlane installation
-guide](https://github.com/fastlane/fastlane/blob/master/docs/Guide.md/#fastlane)
+documentation](https://github.com/fastlane/fastlane/#installation)
 
 ### 2. Create and Upload a Code Signing Certificate
 
