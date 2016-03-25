@@ -2,6 +2,7 @@
 layout: classic-docs-parent
 title: GitHub integration
 categories: [privacy-and-security]
+description: GitHub integration
 children:
   - github-3rdparty-app-restrictions
   - cant-follow

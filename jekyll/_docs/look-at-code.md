@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Does Circle look at my code?
 categories: [privacy-and-security]
+description: Circle security policy issues
 last_updated: Feb 2, 2013
 ---
 

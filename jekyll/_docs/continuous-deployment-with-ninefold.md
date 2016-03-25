@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Continuous Deployment with Ninefold
 categories: [how-to]
+description: Continuous Deployment with Ninefold
 last_updated: October 14, 2014
 ---
 

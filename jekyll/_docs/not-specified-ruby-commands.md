@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: CircleCI is running the Ruby commands not present in the config
+description: CircleCI is running the Ruby commands not present in the config
 last_updated: Feb 3, 2013
 ---
 

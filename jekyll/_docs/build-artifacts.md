@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Build artifacts
 categories: [reference]
+description: Dealing with build artifacts
 last_updated: August 1, 2014
 ---
 
@@ -13,14 +14,14 @@ read-only `$CIRCLE_ARTIFACTS`
 [environment variable](/docs/environment-variables).
 
 If you prefer, you can also
-[configure directories and files whose contents will](/docs/configuration#artifacts)
+[configure directories and files whose contents will](/docs/configuration/#artifacts)
 be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.
 
 ![]({{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-You'll find links to the artifacts at the top of the build page. You can also consume them via our [API](/docs/api#build-artifacts).
+You'll find links to the artifacts at the top of the build page. You can also consume them via our [API](/docs/api/#build-artifacts).
 
 That's all there is to it!
 

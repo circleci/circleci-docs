@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: GitHub security and SSH keys
+description: GitHub security and SSH keys
 last_updated: May 1, 2013
 ---
 

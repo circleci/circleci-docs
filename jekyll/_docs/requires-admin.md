@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: CircleCI requires Admin permissions
+description: CircleCI admin permissions
 last_updated: Feb 3, 2013
 ---
 

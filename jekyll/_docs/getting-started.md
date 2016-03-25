@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Getting Started with CircleCI
 categories: [getting-started]
+description: Getting Started with CircleCI
 last_updated: April 29, 2013
 ---
 
@@ -19,7 +20,7 @@ If you do, your tests will be up and running in a flash.
 Add
 your [first project](https://circleci.com/dashboard/) now!
 
-(**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens))
+(**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens/))
 
 ### When the magic doesn't work?
 
@@ -30,7 +31,7 @@ Here are some common issues and where you can find their fixes.
 *   If we didn't run an important step or omitted some tests,
     [add a `circle.yml` file](/docs/configuration)
     to tweak your test run.
-*   If we didn't infer anything, you can [set up your project manually]({{ site.baseurl }}/manually).
+*   If we didn't infer anything, you can [set up your project manually]({{ site.baseurl }}/manually/).
 *   Sometimes, your tests will fail on our server even though they work locally.
     Read our list of [common problems](/docs/troubleshooting) and their solutions.
 

@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: Adding memcached with pecl on CircleCI
+description: Adding memcached with pecl on CircleCI
 last_updated: May 23, 2013
 ---
 

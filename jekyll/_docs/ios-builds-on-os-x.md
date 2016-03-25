@@ -3,6 +3,7 @@ layout: classic-docs
 title: Test iOS applications on OS X
 short-title: iOS builds on OS X
 categories: [mobile-platforms]
+description: Testing iOS applications on OS X
 last_updated: March 2nd, 2016
 ---
 
@@ -70,7 +71,7 @@ machine:
 
 CircleCI will automatically detect if your project is using [CocoaPods](http://cocoapods.org/)
 to manage dependencies. If you are using CocoaPods, then we recommend that you
-check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control).
+check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html/#should-i-ignore-the-pods-directory-in-source-control).
 This will ensure that you have a deterministic, reproducable build.
 
 If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
@@ -80,7 +81,7 @@ If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
 We cannot handle all setups automatically, so for some projects you might need
 to invoke CocoaPods manually with some custom configuration. To do this you will
 need to override the `dependencies` section of your `circle.yml` file.
-See our [documentation on overriding build phases for more information on this.](/docs/configuration#phases).
+See our [documentation on overriding build phases for more information on this.](/docs/configuration/#phases).
 If you need more help please reach out to our support team who are always happy
 to help out.
 
@@ -177,7 +178,7 @@ test:
 ### Environment variables
 You can customize the behavior of CircleCI's automatic build commands by setting
 the following environment variables in a `circle.yml` file or at
-**Project Settings > Environment Variables** (see [here](/docs/environment-variables#custom) for more info
+**Project Settings > Environment Variables** (see [here](/docs/environment-variables/#custom) for more info
 about environment variables):
 
 * `XCODE_WORKSPACE` - The path to your `.xcworkspace` file relative to the git repository root
@@ -188,7 +189,7 @@ about environment variables):
 precedence over project.
 
 If more than one scheme is present, then you should specify the
-`XCODE_SCHEME` [environment variable](/docs/environment-variables#custom).
+`XCODE_SCHEME` [environment variable](/docs/environment-variables/#custom).
 Otherwise a scheme will be chosen arbitrarily.
 
 You can also use the Environment Variables section to add all the
@@ -390,7 +391,7 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
   Sometimes the issue would only be present with one of these tools but not the other.
 
 * **Errors while installing code signing certificates.** Please check out [the Troubleshooting
-  section](/docs/ios-code-signing#troubleshooting) of the code signing doc.
+  section](/docs/ios-code-signing/#troubleshooting) of the code signing doc.
 
 ### A note on code-generating tools
 Many iOS app developers use tools that generate substantial amounts of code. In such

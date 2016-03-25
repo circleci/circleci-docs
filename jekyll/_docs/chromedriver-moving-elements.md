@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: ChromeDriver raises an 'Element is not clickable' exception
+description: Element no clickable issue
 last_updated: Aug 7, 2013
 ---
 
@@ -15,5 +16,5 @@ This behaviour is due to the ChromeDriver implementation (there is an
 tracking a fix in ChromeDriver itself).
 
 You can use
-[explicit waits](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#explicit-and-implicit-waits-reference)
+[explicit waits](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp/#explicit-and-implicit-waits-reference)
 along with a custom expected condition to wait until an element has stopped moving before clicking.

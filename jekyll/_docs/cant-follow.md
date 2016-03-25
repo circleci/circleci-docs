@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Why can I not follow a project?
 last_updated: Feb 2, 2013
+description: Trouble following projects
 ---
 
 GitHub requires admin permissions to add an SSH key to a

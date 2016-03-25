@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Polling project status using CCMenu, CCTray, etc.
 categories: [reference]
+description: Polling project status using CCMenu, CCTray, etc.
 last_updated: Feb 2, 2013
 ---
 

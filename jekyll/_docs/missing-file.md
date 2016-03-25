@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: An important file is missing from your repository
+description: What to do when an important file is missing from your repository
 last_updated: Feb 3, 2013
 ---
 

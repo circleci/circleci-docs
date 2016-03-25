@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: Composer hitting GitHub API rate limits
+description: GitHub API rate limits as composer
 last_updated: May 23, 2013
 ---
 

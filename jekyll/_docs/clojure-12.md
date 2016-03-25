@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: "java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite"
+description: Dealing with java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite
 last_updated: Feb 2, 2013
 ---
 

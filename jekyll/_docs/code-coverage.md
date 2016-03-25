@@ -3,6 +3,7 @@ layout: classic-docs
 title: Generating code coverage metrics
 short-title: Code Coverage
 categories: [how-to]
+description: Generating code coverage metrics
 last_updated: Sep 12, 2013
 ---
 
@@ -15,7 +16,7 @@ or using partners.
 ## See coverage in CircleCI
 
 It's straightforward to see simple coverage results from your build.
-Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]({{ site.baseurl }}/build-artifacts).
+Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]({{ site.baseurl }}/build-artifacts/).
 CircleCI will upload coverage results and make them visible as part of your build.
 
 ### Adding and configuring a coverage library
@@ -48,7 +49,7 @@ end
 SimpleCov.start
 ```
 
-The [simplecov README](https://github.com/colszowka/simplecov#getting-started) has more details.
+The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
 
 #### Python, Node, Java, PHP, etc
 
@@ -71,8 +72,8 @@ In the meantime, add your coverage library of choice. Options include:
     for C or C++.
 
 Configure your library to save results in the directory specified by the CIRCLE_ARTIFACTS environment variable.
-Alternatively, add a [test.post command]({{ site.baseurl }}/configuration#test)
-to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts).
+Alternatively, add a [test.post command]({{ site.baseurl }}/configuration/#test)
+to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts/).
 
 ### Seeing the results in the CircleCI UI
 
@@ -82,7 +83,7 @@ tab on the build page:
 ![]({{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
-[CircleCI API](https://circleci.com/docs/api#build-artifacts).
+[CircleCI API](https://circleci.com/docs/api/#build-artifacts).
 
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
@@ -99,7 +100,7 @@ code quality services:
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables](https://circleci.com/docs/environment-variables).
+[environment variables](https://circleci.com/docs/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.

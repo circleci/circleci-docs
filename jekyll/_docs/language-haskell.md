@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Integration and Continuous Deployment with Haskell
 short-title: Haskell
 categories: [languages]
+description: Continuous Integration and Continuous Deployment with Haskell
 last_updated: April 17, 2014
 ---
 
@@ -18,7 +19,7 @@ checked into the root of your repository.
 ### Version
 
 Circle has
-[several versions of GHC](/docs/environment#haskell)
+[several versions of GHC](/docs/environment/#haskell)
 available. We use `{{ versions.ghc }}`
 as the default; if you'd like a particular version, you
 can specify it in your `circle.yml`:
@@ -35,8 +36,8 @@ If we find a Cabal file at the root of your repository, we install your
 dependencies and run `cabal build` and `cabal test`.
 You can customize this easily in your `circle.yml` by setting
 the `override`, `pre`, and `post` properties in the
-[dependencies](/docs/configuration#dependencies)
-and [test](/docs/configuration#test) sections.
+[dependencies](/docs/configuration/#dependencies)
+and [test](/docs/configuration/#test) sections.
 
 ```
 test:
@@ -44,7 +45,7 @@ test:
     - cabal bench
 ```
 
-Circle can [cache directories](/docs/configuration#cache-directories)
+Circle can [cache directories](/docs/configuration/#cache-directories)
 in between builds to avoid unnecessary work. If you use Cabal, our inferred
 commands build your project in a Cabal sandbox and cache the sandbox.
 This helps your build run as quickly as possible.

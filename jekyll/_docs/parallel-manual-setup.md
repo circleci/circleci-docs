@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Manually setting up parallelism
 categories: [parallelism]
+description: Manually setting up parallelism
 last_updated: Feb 2, 2013
 ---
 

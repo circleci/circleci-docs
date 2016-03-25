@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: A directory is missing from your repository
+description: What to do when a directory is missing from a repo
 last_updated: Feb 3, 2013
 ---
 

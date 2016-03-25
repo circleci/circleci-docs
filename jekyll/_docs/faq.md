@@ -3,6 +3,7 @@ layout: classic-docs
 title: Frequently Asked Questions
 short-title: FAQ
 categories: [getting-started]
+description: Frequently Asked Questions
 last_updated: February 23, 2015
 ---
 

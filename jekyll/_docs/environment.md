@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Test environment
 categories: [reference]
+description: Test environment 
 last_updated: Apr 7, 2015
 ---
 
@@ -117,7 +118,7 @@ We use RVM to give you access to a wide variety of Ruby
 versions. Below are the versions of Ruby that we pre-install; you can specify versions not listed here (supported by RVM) in your circle.yml file and we will install them as part of the build - this will add to your build time, however, if you let us know the version you are using we will update the VM accordingly.
 
 You can
-[choose the exact version you need directly, from the following list:](/docs/configuration#ruby-version)
+[choose the exact version you need directly, from the following list:](/docs/configuration/#ruby-version)
 
 {% for version in site.data.versions.ruby_versions %}
 - `{{ version }}`
@@ -154,7 +155,7 @@ If you do not specify a version, we use `{{ versions.default_node }}`.
 ### Python
 
 We use `python {{ versions.python }}` by default, although you can
-[control the version in your circle.yml file](/docs/configuration#python-version).
+[control the version in your circle.yml file](/docs/configuration/#python-version).
 Packages can be installed using `pip {{ versions.pip }}` and
 `virtualenv {{ versions.virtualenv }}`.
 
@@ -169,7 +170,7 @@ Please [contact us](mailto:sayhi@circleci.com) if other versions of Python would
 ### PHP
 
 We use `php {{ versions.php }}`, by default, although you can
-[control the version in your circle.yml file](/docs/configuration#php-version).
+[control the version in your circle.yml file](/docs/configuration/#php-version).
 Packages can be installed using `composer`, `pear`, and `pecl`.
 
 Supported versions are:
@@ -235,7 +236,7 @@ We have the following versions of GHC and tools installed:
 *   `happy-1.19.3`
 *   `alex-3.1.3`
 
-You can [specify which GHC version](/docs/configuration#ghc-version)
+You can [specify which GHC version](/docs/configuration/#ghc-version)
 you'd like in your `circle.yml`.
 
 <h3 id="other">Other languages</h3>
