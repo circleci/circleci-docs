@@ -4,11 +4,15 @@ machine:
 dependencies:
   post:
     # https://github.com/jekyll/jekyll/issues/4122
-    - bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
+    #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
+
+    # https://github.com/jekyll/jekyll/issues/4713
+    - bundle exec jekyll build -s jekyll -d jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
+    - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
 test:
   post:
     # --empty-alt-ignore is temporary
-    - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt
+    - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
 deployment:
   prod:
     branch: master
