@@ -67,7 +67,7 @@ Allowed modifiers are:
 *   **timeout**: if a command runs this many seconds without output, kill it (default:600s)
 *   **pwd**: run commands using this value as the current working directory (default: the checkout directory named for your project, except in the `machine` and `checkout/pre` sections, where it defaults to `$HOME`.)
 *   **environment**: a hash creating a list of environment variables set for this command
-    (see [Machine configuration](/#machine) for this modifier's properties when used in the `machine` section of the file)
+    (see [Machine configuration](#machine) for this modifier's properties when used in the `machine` section of the file)
 *   **parallel**: (only used with commands in the `test` section)
     if you have [ manually set up parallelism]({{ site.baseurl }}/parallel-manual-setup/), set this to true to run a command across all VMs
 *   **files**:
