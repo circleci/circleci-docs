@@ -9,13 +9,12 @@ Otherwise, you can always open an
 [Issue](https://github.com/circleci/circleci-docs/issues) on this project.
 
 ## Setup
+There are two good ways to run a development server locally:
 
-The easiest way to get going is to use Vagrant. This gives you a clean 
+1. **[Use Vagrant](#vagrant-setup)**. The easiest way to get going is to use Vagrant. This gives you a clean 
 environment with all the right versions of everything we need. 
-[Vagrant Setup](#vagrant-setup) can be found below.
 
-If you already have a Ruby environment you like, you can 
-[run everything directly](#bare-setup) on your machine as well.
+2. [Use your existing Ruby environment](#bare-setup). If you already have a Ruby environment you like (eg: you have rvm set up and feel comfortable using it) and feel comfortable installing dependencies with bundler and such, you can run it directly on your machine.
 
 
 ### Vagrant Setup
@@ -24,12 +23,13 @@ If you already have a Ruby environment you like, you can
 If you're going the Vagrant route, the following software need to be installed:
 
 - Git - system version should be fine
-- [Vagrant](https://www.vagrantup.com/downloads.html) - download from website, apt-get, or brew.
-- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - best to use version 5.0+. Another Vagrant Provider such as Docker could be used instead but VirtualBox is the default.
+- Vagrant - [download directly](https://www.vagrantup.com/downloads.html), use apt-get (`sudo apt-get install vagrant`), or use brew (`brew cask install vagrant`).
+- VirtualBox - [download directly](https://www.virtualbox.org/wiki/Downloads), use apt-get (`sudo apt-get install virtualbox`), or use brew (`brew cask install virtualbox`). Best to use version 5.0+. Another Vagrant Provider such as Docker could be used instead but VirtualBox is the default.
 
 #### First Run
 To get a local copy of circleci.com/docs/ up and running you can run the 
-following commands:
+following commands (NOTE: The first time you run `./jctl start`, Vagrant will provision the entire VM for 
+you based on what's in `bootstrap.sh`. It'll then run Jekyll for you. The whole process can take a few minutes, but it's a one-time deal.):
 
 ```
 git clone https://github.com/circleci/circleci-docs.git
@@ -37,14 +37,7 @@ cd circleci-docs
 ./jctl start
 ```
 
-Jekyll will automatically start in the VM and can be viewed in your browser at 
-http://localhost:4040/docs/
-
-The first time you run `./jctl start`, Vagrant will provision the entire VM for 
-you based on what's in `bootstrap.sh`. It'll then run Jekyll for you. The whole 
-process can take a few minutes but it's a one time deal.
-
-Once this is complete, Vagrant starts forwarding port 4040 for you. You can 
+Once this is complete, Jekyll will automatically start in the VM. Vagrant starts forwarding port 4040 for you. You can 
 simply view the docs at http://localhost:4040/docs/ .
 
 ####  Editing Docs
