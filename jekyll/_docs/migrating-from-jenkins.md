@@ -9,7 +9,7 @@ Jenkins is a very popular open-source CI tool, so many users that are new to Cir
 
 ## Quick Start
 
-CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD (see [High-Level Differences]({{ site.baseurl }}/migrating-from-jenkins/#high-level-differences/) below), but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. If you just want to jump in and get started, try one of these three options:
+CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD (see [High-Level Differences]({{ site.baseurl }}/migrating-from-jenkins/#high-level-differences) below), but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. If you just want to jump in and get started, try one of these three options:
 
 
 <ol>
