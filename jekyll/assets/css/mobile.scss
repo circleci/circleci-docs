@@ -53,3 +53,11 @@ nav.sidebar{
 div.article-container{
 	width: 100%;
 }
+
+// Really small mobile, think iPhone 5 or earlier
+@media screen and (max-width: 500px){
+	
+	body.homepage div.category-section{
+		width: 100%;
+	}
+}
