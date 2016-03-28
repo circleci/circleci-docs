@@ -154,7 +154,7 @@ Here are migration-related articles that you might find useful.
 If you are using a caching add-on,
 it is likely that you want to clear your caches after a deploy to avoid using out-of-date and possibly corrupt documents and/or data.
 Heroku does not clear caching by default, but you can install an
-[add-on](http://addons.heroku.com/#caching) that assists with cache management.
+[add-on](https://elements.heroku.com/addons#caching) that assists with cache management.
 
 Add-ons include settings, such as expiration time settings for clearing cache pages,
 as well as commands that can assist with such housekeeping.
@@ -168,4 +168,4 @@ Here are related articles that you might find useful.
 
 *   [Memcachier documentation](http://devcenter.heroku.com/articles/memcachier/#getting-started)
 *   [Redis documentation](http://redis.io/documentation)
-*   [Django's cache framework documentation](http://docs.djangoproject.com/en/1.5/topics/cache)
+*   [Django's cache framework documentation](http://docs.djangoproject.com/en/1.9/topics/cache)

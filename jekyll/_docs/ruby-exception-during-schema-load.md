@@ -91,5 +91,5 @@ a way that spec/factories.rb isn't loaded unless tests are
 actually run.
 
 The idiomatic way to do this is by putting that code in
-[initializer files](http://guides.rubyonrails.org/configuring.html/#using-initializer-files),
+[initializer files](http://guides.rubyonrails.org/configuring.html#using-initializer-files),
 which are only run once the complete application is loaded.

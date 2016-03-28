@@ -3,7 +3,6 @@ layout: classic-docs
 title: Continuous Integration and Delivery with Docker
 categories: [how-to]
 description: Continuous Integration and Delivery with Docker
-last_updated: December 8, 2014
 ---
 
 CircleCI currently offers beta support for running Docker within build containers.
@@ -331,7 +330,7 @@ dependencies:
 when checking for cached ADD commands, as discussed
 [here](https://github.com/docker/docker/issues/7387). One workaround until Docker
 adds more options is to
-[set file modification times to the commit time](https://git.wiki.kernel.org/index.php/ExampleScripts/#Setting_the_timestamps_of_the_files_to_the_commit_timestamp_of_the_commit_which_last_touched_them).
+[set file modification times to the commit time](https://git.wiki.kernel.org/index.php/ExampleScripts#Setting_the_timestamps_of_the_files_to_the_commit_timestamp_of_the_commit_which_last_touched_them).
 
 2. Make sure you tag the image you use in the FROM command in your Dockerfile, even if it
 is the default "latest" tag (e.g. use `FROM dockerfile/java:latest` instead of just
@@ -345,7 +344,7 @@ other tags will be re-pulled on every build if a tag is not specified in the FRO
 
 You can connect to services outside your docker container (like our
 pre-installed databases) by using the [docker0 ethernet bridge
-device](https://docs.docker.com/articles/networking/). Just make sure
+device](https://docs.docker.com/engine/userguide/networking/dockernetworks/). Just make sure
 that the outside services are listening for connections on `docker0`—the
 simplest way to ensure that is to have the services listen on `0.0.0.0`.
 
