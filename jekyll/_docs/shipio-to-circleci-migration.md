@@ -124,7 +124,7 @@ Please don't hesitate to give our [support team](mailto:sayhi@circleci.com) a sh
 
 ### Additional resources 
 
-[Configuring custom AVDs](https://developer.android.com/tools/devices/managing-avds-cmdline.html/#AVDCmdLine)
+[Configuring custom AVDs](https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine)
 
 [Getting Started on CircleCI]({{ site.baseurl }}/getting-started/)
 

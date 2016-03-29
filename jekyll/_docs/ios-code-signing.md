@@ -36,7 +36,7 @@ With these 2 files, and an Xcode project the goal is to produce 2 files:
 The `.ipa` file is the application file that can be distributed to your
 testers using a service such as
 [Crashlytics Beta](http://try.crashlytics.com/beta/)
-or [Hockey App](https://hockeyapp.net/).
+or [Hockey App](http://hockeyapp.net).
 The debug symbols file will be used by your distribution service of choice
 to produce call-stacks helping you to debug any crashes in your app that
 testers encounter.

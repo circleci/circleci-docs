@@ -69,9 +69,9 @@ machine:
 
 ### CocoaPods
 
-CircleCI will automatically detect if your project is using [CocoaPods](http://cocoapods.org/)
+CircleCI will automatically detect if your project is using [CocoaPods](https://cocoapods.org)
 to manage dependencies. If you are using CocoaPods, then we recommend that you
-check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html/#should-i-ignore-the-pods-directory-in-source-control).
+check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control).
 This will ensure that you have a deterministic, reproducable build.
 
 If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
@@ -96,7 +96,7 @@ written in any other tool that builds on top of XCTest and is configured to run
 via the "test" build action. The following test tools are known to work well on CircleCI
 (though many others should work just fine):
 
-* [XCTest](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/Introduction/Introduction.html)
+* [XCTest](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html)
 * [Kiwi](https://github.com/kiwi-bdd/Kiwi)
 * [KIF](https://github.com/kif-framework/KIF)
 
@@ -106,7 +106,7 @@ work normally, though they will need to be installed and called using custom com
 See [customizing your build](#customizing-your-build) for more info.
 
 ## Code signing
-[fastlane](https://fastlane.tools/) and [Shenzhen](http://nomad-cli.com/#shenzhen)
+[fastlane](https://fastlane.tools) and [Shenzhen](http://nomad-cli.com/#shenzhen)
 are pre-installed on the container image. It is recommended to use fastlane to 
 build, sign and distribute your iOS app to beta-testers.
 

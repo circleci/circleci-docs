@@ -183,7 +183,7 @@ machine:
 ```
 
 CircleCI will automatically update the `/etc/hosts` file with these values.
-Hostnames [must be well formed](http://en.wikipedia.org/wiki/Hostname/#Restrictions_on_valid_host_names).
+Hostnames [must be well formed](http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names).
 CircleCI will only accept hostnames that contain alpha-numeric characters,
 hyphens (-) and dots (.).
 
@@ -439,7 +439,7 @@ test:
 ```
 
 CircleCI also supports the use of `minitest_globs`
-(a list of file globs, using [Ruby's Dir.glob syntax](http://ruby-doc.org/core-2.0/Dir.html/#glob-method))
+(a list of file globs, using [Ruby's Dir.glob syntax](http://ruby-doc.org/core-2.0/Dir.html#glob-method))
 that can list the file globs to be used during testing.
 
 By default, when testing in parallel, CircleCI runs all tests in the test/unit, test/integration, and
