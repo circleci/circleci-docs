@@ -2,7 +2,9 @@
 <html>
 {% include head.html %}
 <body class="{% if page.path == "index.html" %}homepage{% endif %}">
-{% include google-tag-manager.html %}
+{% if jekyll.environment == "production" %}
+	{% include google-tag-manager.html %}
+{% endif %}
 <div class="outer">
 	{% include global-nav.html %}
 	<div class="main-body">
