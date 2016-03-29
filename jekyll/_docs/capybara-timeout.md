@@ -14,9 +14,9 @@ possible to the [latest version](http://rubygems.org/gems/selenium-webdriver).
 
 ## Unable to upgrade?
 
-If you are unable to upgrade to the newest version of `selenium-webdriver` you will need to downgrade firefox in order for the two to be compatible.
+If you are unable to upgrade to the newest version of `selenium-webdriver` you will need to downgrade Firefox in order for the two to be compatible.
 
-First, you will need to figure out which exact version of firefox is compatible for you. The [CHANGELOG](https://github.com/SeleniumHQ/selenium/blob/master/rb/CHANGES) is a good start.
+First, you will need to figure out which exact version of Firefox is compatible for you. The [CHANGELOG](https://github.com/SeleniumHQ/selenium/blob/master/rb/CHANGES) is a good start.
 
 Essentially, you will need to replace the `firefox` command on the server to go to the old version.
 
