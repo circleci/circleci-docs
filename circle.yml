@@ -7,7 +7,7 @@ dependencies:
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
     # https://github.com/jekyll/jekyll/issues/4713
-    - bundle exec JEKYLL_ENV=production jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
+    - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
     - bundle exec jekyll build --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
 test:
