@@ -150,5 +150,5 @@ You should be good to go. Happy testing!
 If your tests fail and you need to fix something, CircleCI has a
 [list of common problems and their solutions](/docs/troubleshooting)
 that can help you debug many issues.
-You might also like to know that we allow you to SSH in during your builds.
+You might also like to know that we allow you to [SSH in during your builds]({{ site.baseurl }}/ssh-build/).
 This lets you check out how CircleCI works and facilitates nimble and efficient debugging.

@@ -225,6 +225,27 @@ artifacts:
       }
     ]
 
+artifacts_latest:
+  url: "/api/v1/project/:username/:project/latest/artifacts"
+  description: "List the artifacts produced by the latest build on a given branch."
+  method: "GET"
+  params:
+    - {name: "branch", description: "The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.", example: ":branch"}
+    - {name: "filter", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\". Defaults to \"completed\".", example: ":filter"}
+  response: |
+    [{
+      node_index: 0,
+      path: "/tmp/circle-artifacts.NHQxLku/cherry-pie.png",
+      pretty_path: "$CIRCLE_ARTIFACTS/cherry-pie.png",
+      url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/cherry-pie.png"
+    },
+    {
+      node_index: 0,
+      path: "/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png",
+      pretty_path: "$CIRCLE_ARTIFACTS/rhubarb-pie.png",
+      url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png"
+    }]
+
 retry_build:
   url: "/api/v1/project/:username/:project/:build_num/retry"
   description: "Retries the build, returns a summary of the new build."
@@ -530,9 +551,14 @@ project_post:
   params:
     - {name: "revision", description: "The specific revision to build.  Default is null and the head of the branch is used. Cannot be used with tag parameter.", example: "f1baeb913288519dd9a942499cef2873f5b1c2bf"}
     - {name: "tag", description: "The tag to build. Default is null. Cannot be used with revision parameter.", example: "f1baeb913288519dd9a942499cef2873f5b1c2bf"}
+    - {name: "parallel", description: "The number of containers to use to run the build.  Default is null and the project default is used.", example: 4}
+    - {name: "build_parameters", description: "Additional environment variables to inject into the build environment.  A map of names to values.", example: "{\"JAVA_OPTS\": \"+Xms128m\"}"}
   body: |
     {
       "tag": "v0.1" // optional
+      "parallel": 2, //optional, default null
+      "build_parameters": { // optional
+      "RUN_EXTRA_TESTS": "true"
     }
   response: |
     {
