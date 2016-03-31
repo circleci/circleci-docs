@@ -107,3 +107,14 @@ background so that you can still use the same terminal window. Jekyll will tell
 you which process ID belongs to it before it goes so you can use that to kill 
 it when you want to stop Jekyll. `kill -9 P_ID`. If you lose the ID, you can 
 run `pkill -f jekyll` to stop all Jekyll instances.
+
+## License Information
+
+Documentation (guides, references, and associated images) is licensed as 
+Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full 
+license can be found 
+[here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the 
+human-readable summary [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+Everything in this repository not covered above is licensed under the 
+[included MIT license](LICENSE).
