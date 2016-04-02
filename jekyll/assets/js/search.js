@@ -22,6 +22,10 @@ jQuery(function(){
 		});
 	});
 
+	$("#site-search").submit(function(){
+		event.preventDefault(); // disable submitting by clicking enter
+	});
+
 	// Event when the form is submitted
 	$("#site-search input").keyup(function(){
 		event.preventDefault();
