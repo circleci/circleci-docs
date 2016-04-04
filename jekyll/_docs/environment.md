@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Test environment
+title: Test Environment
 categories: [reference]
-description: Test environment 
-last_updated: Apr 7, 2015
+description: Test environment
+changefreq: "weekly"
 ---
 
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.
