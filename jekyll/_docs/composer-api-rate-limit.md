@@ -35,4 +35,5 @@ Committing your `composer.lock` is also a best practise, even if you don't have
 this problem. It means your local environment, CircleCI, and your production 
 environment all use the exact same versions of your dependencies. This adds 
 extra confidence to your tests; you're testing exactly the same code that you 
-deploy to production.
+deploy to production. We recommend it for end applications. It's not 
+recommended to commit `composer.lock` if you're building a library.
