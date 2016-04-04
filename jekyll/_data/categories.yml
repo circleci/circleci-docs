@@ -8,6 +8,11 @@
   index: languages
   icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/languages.svg"
 
+- name: "Build Images"
+  slug: build-images
+  index: build-images
+  icon: "https://d3r49iyjzglexf.cloudfront.net/feature-icons/feature-scale-f5e28dbede9a46e2937be920fa52a26d9c54229775949929d68861102682f196.svg"
+
 - name: "Mobile Platforms"
   slug: mobile-platforms
   index: mobile
