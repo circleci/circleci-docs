@@ -1,6 +1,7 @@
 <a href="#" id="nav-button">NAV</a>
 <nav class="sidebar">
 	<ul class="list-unstyled">
+	{% capture sidebar %}
 	{% for category in site.data.categories %}
 		<li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
 			<ul class="list-unstyled">
@@ -22,5 +23,7 @@
 			</ul>
 		</li>
 	{% endfor %}
+	{% endcapture %}
+	{{ sidebar | strip_newlines }}
 	</ul>
 </nav>
