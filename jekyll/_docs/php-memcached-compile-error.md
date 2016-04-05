@@ -25,7 +25,8 @@ ERROR: `make' failed
 The solution is to install an older version of memcached:
 
 ```
-pecl install -f memcached-2.0.1
+- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libmemcached10
+- yes | pecl install -f memcached-2.1.0
 ```
 
 See
