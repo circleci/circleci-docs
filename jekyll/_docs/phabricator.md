@@ -11,6 +11,9 @@ that facilitate code review, browsing and auditing source code, tracking bugs an
 managing software projects, in addition to other functionality. Using CircleCI with
 Phabricator allows you to ensure code quality.
 
+**Note:** the CircleCI integration is available in the Phabricator release *2016 Week 13*
+and newer.
+
 ## Configuring Phabricator to build diffs on CircleCI
 
 There are a few steps required to run builds for every Phabricator diff that is pushed.
