@@ -1,44 +1,44 @@
 - name: "Getting Started"
   slug: getting-started
   index: gettingstarted
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/gettingstarted.svg"
+  icon: "/docs/assets/img/icons/gettingstarted.svg"
 
 - name: "Languages"
   slug: languages
   index: languages
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/languages.svg"
+  icon: "/docs/assets/img/icons/languages.svg"
 
 - name: "Build Images"
   slug: build-images
   index: build-images
-  icon: "https://d3r49iyjzglexf.cloudfront.net/feature-icons/feature-scale-f5e28dbede9a46e2937be920fa52a26d9c54229775949929d68861102682f196.svg"
+  icon: "/docs/assets/img/icons/build-images.svg"
 
 - name: "Mobile Platforms"
   slug: mobile-platforms
   index: mobile
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/mobile.svg"
+  icon: "/docs/assets/img/icons/mobile.svg"
 
 - name: "How-To"
   slug: how-to
   index: how-to
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/how-to.svg"
+  icon: "/docs/assets/img/icons/how-to.svg"
 
 - name: "Troubleshooting"
   slug: troubleshooting
   index: troubleshooting
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/troubleshooting.svg"
+  icon: "/docs/assets/img/icons/troubleshooting.svg"
 
 - name: "Reference"
   slug: reference
   index: reference
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/reference.svg"
+  icon: "/docs/assets/img/icons/reference.svg"
 
 - name: "Parallelism"
   slug: parallelism
   index: parallelism
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/parallelism.svg"
+  icon: "/docs/assets/img/icons/parallelism.svg"
 
 - name: "Privacy and Security"
   slug: privacy-and-security
   index: privacy-security
-  icon: "https://dmmj3mmt94rvw.cloudfront.net/img/outer/docs/privacy-security.svg"
+  icon: "/docs/assets/img/icons/privacy-security.svg"
