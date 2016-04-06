@@ -298,6 +298,7 @@ machine:
     - cassandra
     - elasticsearch
     - rabbitmq-server
+    - redis
     - riak
     - beanstalkd
     - couchbase-server
