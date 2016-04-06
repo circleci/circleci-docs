@@ -25,7 +25,7 @@ versions installed:
 - Facebook xctool 0.2.8
 - CocoaPods 0.39.0
 - xcpretty 0.2.2
-- fastlane 1.64.0
+- fastlane 1.66.0
 - carthage 0.15.0
 - shenzhen 0.14.2
 
