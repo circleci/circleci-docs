@@ -92,12 +92,12 @@ across all nodes equally.
 <h3 id="auto-balancing">Automatic balancing with manual parallel setup</h3>
 
 With some of the inferred test commands we [automatically
-balance](http://blog.circleci.com/announcing-automatic-test-balancing/)
+balance](https://circleci.com/blog/announcing-automatic-test-balancing/)
 the tests so that the total execution time is minimised.
 
 If you are overriding the default test command as explained above and
 still want the tests to be automatically balanced, you’ll need to make
-sure that the [test metadata](https://circleci.com/docs/test-metadata)
+sure that the [test metadata](https://circleci.com/docs/test-metadata/)
 is collected properly. For example, you would modify the initial RSpec
 command like this to include the RSpec Junit formatter:
 
