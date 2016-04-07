@@ -192,8 +192,8 @@ hyphens (-) and dots (.).
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
 We use the Ruby version you specify in your `.rvmrc`, your
 `.ruby-version` file, or your Gemfile.
-If you don't have one of these files, we'll use Ruby `{{ versions.default_ruby }}`
-or `{{ versions.old_ruby }}`, whichever we think is better.
+If you don't have one of these files, we'll use Ruby `{{ site.data.versions.default_ruby }}`
+or `{{ site.data.versions.old_ruby }}`, whichever we think is better.
 If you use a different Ruby version let CircleCI know by including that information in the
 `machine` section. Here's an example of how you do that.
 
@@ -211,7 +211,7 @@ CircleCI uses [NVM](https://github.com/creationix/nvm)
 to manage Node versions. See
 [supported Node versions](/docs/environment/#nodejs)
 for a complete list. If you do not specify a version, CircleCI uses
-`{{ versions.default_node }}`.
+`{{ site.data.versions.default_node }}`.
 
 Here's an example of how to set the version of Node.js to be used for
 your tests.

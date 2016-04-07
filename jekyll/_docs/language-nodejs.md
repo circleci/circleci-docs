@@ -4,7 +4,6 @@ title: Continuous Integration and Continuous Deployment with Node.js
 short-title: Node.js
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Node.js
-last_updated: February 13, 2015
 ---
 
 Circle has great support for Node.js applications.
@@ -19,7 +18,7 @@ commands that will run after a green build.
 
 Circle has [several Node versions]({{ site.baseurl }}/environment/#nodejs)
 pre-installed.
-We use `{{ versions.default_node }}`
+We use `{{ site.data.versions.default_node }}`
 as our default version. If you'd like a specific version, then you can specify it in your circle.yml:
 
 ```

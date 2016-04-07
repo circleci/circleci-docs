@@ -23,9 +23,9 @@ Some specifics:
 *   `Username: ubuntu`
 *   `Ubuntu 12.04 (precise)`
 *   `Kernel version: 3.2`
-*   `git {{ versions.git }}`
-*   `gcc {{ versions.default_gcc }}`
-*   `g++ {{ versions.default_g_plusx2 }}`
+*   `git {{ site.data.versions.git }}`
+*   `gcc {{ site.data.versions.default_gcc }}`
+*   `g++ {{ site.data.versions.default_g_plusx2 }}`
 *   `GNU make 3.81`
 
 <h2 id="env-vars">Environmental Variables</h2>
@@ -89,14 +89,14 @@ Naturally, this is not recommended in principle, but it can occasionally be usef
 CircleCI runs graphical programs in a virtual framebuffer, using xvfb.
 This means programs like Selenium, Capybara, Jasmine, and other testing tools which require a browser will work perfectly, just like they do when you use them locally.
 You do not need to do anything special to set this up.
-We have `phantomjs {{ versions.phantomjs }}`, `casperjs {{ versions.casperjs }}`
+We have `phantomjs {{ site.data.versions.phantomjs }}`, `casperjs {{ site.data.versions.casperjs }}`
 and `libwebkit (2.2.1-1ubuntu4)` pre-installed, for Capybara and other headless browser interfaces.
 
 Xvfb runs on port 99, and the appropriate `DISPLAY` environment variable has already been set.
 
 Selenium-based tests are able to use Chrome stable channel (Chrome
-{{ versions.Chrome }} with chromedriver {{ versions.chromedriver }}), and
-Firefox {{ versions.Firefox }}. Chromedriver 23.0 is also available as
+{{ site.data.versions.Chrome }} with chromedriver {{ site.data.versions.chromedriver }}), and
+Firefox {{ site.data.versions.Firefox }}. Chromedriver 23.0 is also available as
 `chromedriver23`
 
 <span class='label label-info'>Help</span>
@@ -106,9 +106,9 @@ Firefox {{ versions.Firefox }}. Chromedriver 23.0 is also available as
 
 We're using a build of Docker which is patched to work in the CircleCI build environment.
 
-The current version is `{{ versions.docker }}`.
+The current version is `{{ site.data.versions.docker }}`.
 
-We also pre-install Docker Compose `{{ versions.docker_compose }}`.
+We also pre-install Docker Compose `{{ site.data.versions.docker_compose }}`.
 
 ## Languages
 
@@ -124,18 +124,18 @@ You can
 - `{{ version }}`
 {% endfor %}
 
-By default we use `Ruby {{ versions.default_ruby }}`
+By default we use `Ruby {{ site.data.versions.default_ruby }}`
 unless we detect that you need Ruby 1.8.7, in which case we'll use
-`{{ versions.old_ruby }}`.
+`{{ site.data.versions.old_ruby }}`.
 This is installed via RVM (stable).
 
 We also have a number of Ruby commands pre-installed if you need to use them directly. They use Ruby
-`{{ versions.default_ruby }}`.
+`{{ site.data.versions.default_ruby }}`.
 
-*   `bundler {{ versions.bundler }}`
-*   `cucumber {{ versions.cucumber }}`
-*   `rspec {{ versions.rspec }}`
-*   `rake {{ versions.rake }}`
+*   `bundler {{ site.data.versions.bundler }}`
+*   `cucumber {{ site.data.versions.cucumber }}`
+*   `rspec {{ site.data.versions.rspec }}`
+*   `rake {{ site.data.versions.rake }}`
 
 ### node.js
 
@@ -150,14 +150,14 @@ Below are the versions of Node.js that we pre-install; you can specify versions 
 - `{{ version }}`
 {% endfor %}
 
-If you do not specify a version, we use `{{ versions.default_node }}`.
+If you do not specify a version, we use `{{ site.data.versions.default_node }}`.
 
 ### Python
 
-We use `python {{ versions.python }}` by default, although you can
+We use `python {{ site.data.versions.python }}` by default, although you can
 [control the version in your circle.yml file](/docs/configuration/#python-version).
-Packages can be installed using `pip {{ versions.pip }}` and
-`virtualenv {{ versions.virtualenv }}`.
+Packages can be installed using `pip {{ site.data.versions.pip }}` and
+`virtualenv {{ site.data.versions.virtualenv }}`.
 
 Below are the versions of Python that we pre-install; you can specify versions not listed here (supported by pyenv) in your circle.yml file and we will install them as part of the build - this will add to your build time, however, if you let us know the version you are using we will update the VM accordingly.
 
@@ -169,7 +169,7 @@ Please [contact us](mailto:sayhi@circleci.com) if other versions of Python would
 
 ### PHP
 
-We use `php {{ versions.php }}`, by default, although you can
+We use `php {{ site.data.versions.php }}`, by default, although you can
 [control the version in your circle.yml file](/docs/configuration/#php-version).
 Packages can be installed using `composer`, `pear`, and `pecl`.
 
@@ -190,10 +190,10 @@ CircleCI has the following languages and tools installed:
 - `{{ version }}`
 {% endfor %}
 
-*   `ant {{ versions.ant }}`
-*   `maven {{ versions.maven }}`
-*   `gradle {{ versions.gradle }}`
-*   `play {{ versions.play }}`
+*   `ant {{ site.data.versions.ant }}`
+*   `maven {{ site.data.versions.maven }}`
+*   `gradle {{ site.data.versions.gradle }}`
+*   `play {{ site.data.versions.play }}`
 
 You can specify the following JVM versions in your `circle.yml` file:
 
@@ -218,7 +218,7 @@ We also install some release candidate and beta versions (see the above URL for 
 
 ### Clojure
 
-We use `lein {{ versions.lein }}`
+We use `lein {{ site.data.versions.lein }}`
 
 You should specify your Clojure version in your `project.clj` file.
 
@@ -243,21 +243,21 @@ you'd like in your `circle.yml`.
 
 We currently have a number of packages installed to help you test your backend applications, including:
 
-*   `golang {{ versions.golang }}`
-*   `erlang {{ versions.erlang }}`
+*   `golang {{ site.data.versions.golang }}`
+*   `erlang {{ site.data.versions.erlang }}`
 
 <h2 id="databases">Databases and Services</h2>
 
 We have the following services automatically set up and running for your tests:
 
-*   `couchdb` ({{ versions.couchdb }})
-*   `memcached` ({{ versions.memcached }})
-*   `mongodb` ({{ versions.mongodb }})
-*   `mysql` ({{ versions.mysql }})
-*   `postgresql` ({{ versions.postgresql }} with postgis 2.0 extensions)
-*   `rabbitmq` ({{ versions.rabbitmq }})
-*   `redis` ({{ versions.redis }})
-*   `zookeeper` ({{ versions.zookeeper }})
+*   `couchdb` ({{ site.data.versions.couchdb }})
+*   `memcached` ({{ site.data.versions.memcached }})
+*   `mongodb` ({{ site.data.versions.mongodb }})
+*   `mysql` ({{ site.data.versions.mysql }})
+*   `postgresql` ({{ site.data.versions.postgresql }} with postgis 2.0 extensions)
+*   `rabbitmq` ({{ site.data.versions.rabbitmq }})
+*   `redis` ({{ site.data.versions.redis }})
+*   `zookeeper` ({{ site.data.versions.zookeeper }})
 
 Both `postgresql` and `mysql` are set up to use the `ubuntu`
 user, have a database called `circle_test` available, and don't require any password.
@@ -277,27 +277,27 @@ machine:
 
 The list of services that can be enabled this way is
 
-*   `beanstalkd` ({{ versions.beanstalkd }})
-*   `cassandra` ({{ versions.cassandra }})
-*   `couchbase-server` ({{ versions.couchbase }})
-*   `elasticsearch` ({{ versions.elasticsearch }})
-*   `neo4j` ({{ versions.neo4j }})
-*   `riak` ({{ versions.riak }})
+*   `beanstalkd` ({{ site.data.versions.beanstalkd }})
+*   `cassandra` ({{ site.data.versions.cassandra }})
+*   `couchbase-server` ({{ site.data.versions.couchbase }})
+*   `elasticsearch` ({{ site.data.versions.elasticsearch }})
+*   `neo4j` ({{ site.data.versions.neo4j }})
+*   `riak` ({{ site.data.versions.riak }})
 
 In addition to all the databases and services listed above there are two
 further services which require special handling. See the documentation for
 each of them if you need them to support your tests.
 
-*   `solr` ({{ versions.solr }}) - [Test with Solr](/docs/test-with-solr)
-*   `sphinx` ({{ versions.sphinx }}) - [Test with Sphinx](/docs/test-with-sphinx)
+*   `solr` ({{ site.data.versions.solr }}) - [Test with Solr](/docs/test-with-solr)
+*   `sphinx` ({{ site.data.versions.sphinx }}) - [Test with Sphinx](/docs/test-with-sphinx)
 
 ## Integration Tools
 
 Following integration tools are pre-installed.
 
-*   `heroku/heroku-toolbelt` ({{ versions.heroku }})
-*   `awscli` ({{ versions.awscli }})
-*   `gcloud` ({{ versions.gcloud }})
+*   `heroku/heroku-toolbelt` ({{ site.data.versions.heroku }})
+*   `awscli` ({{ site.data.versions.awscli }})
+*   `gcloud` ({{ site.data.versions.gcloud }})
 
 ## Build Toolchain
 
@@ -306,7 +306,7 @@ We have the following versions of GCC and G++ as well as some other build tools 
 {% for version in site.data.versions.gcc_g_plusx2_versions %}
 - `{{ version }}`
 {% endfor %}
-*   `build-essential`  ({{ versions.build_essential }})
+*   `build-essential`  ({{ site.data.versions.build_essential }})
 
 To switch GCC and GCC++ versions, you can add the following in circle.yml:
 

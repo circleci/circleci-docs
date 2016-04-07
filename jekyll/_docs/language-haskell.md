@@ -20,7 +20,7 @@ checked into the root of your repository.
 
 Circle has
 [several versions of GHC](/docs/environment/#haskell)
-available. We use `{{ versions.ghc }}`
+available. We use `{{ site.data.versions.ghc }}`
 as the default; if you'd like a particular version, you
 can specify it in your `circle.yml`:
 

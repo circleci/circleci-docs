@@ -4,7 +4,6 @@ title: Continuous Integration and Continuous Deployment with Ruby/Rails
 short-title: Ruby/Rails
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Ruby/Rails
-last_updated: March 12, 2014
 ---
 
 CircleCI makes Rails testing simple. During each build, Circle looks at your code,
@@ -22,7 +21,7 @@ checked into your repo's root directory.
 We use [RVM](https://rvm.io/) to provide access to a wide variety of
 [Ruby versions](/docs/environment/#languages).
 The default version of Ruby is either
-{{ versions.default_ruby }} or {{ versions.old_ruby }},
+{{ site.data.versions.default_ruby }} or {{ site.data.versions.old_ruby }},
 whichever we think is best for your project.
 
 You can manually set your Ruby version from your `circle.yml`:

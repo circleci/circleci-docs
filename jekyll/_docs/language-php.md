@@ -15,7 +15,7 @@ configuration via a `circle.yml` checked into your repo's root directory.
 ### Version
 
 Circle supports more than a dozen [versions of PHP,](/docs/environment/#php)
-and uses `{{ versions.default_php }}` as the default. You can set a custom
+and uses `{{ site.data.versions.default_php }}` as the default. You can set a custom
 version of PHP in the machine section of your circle.yml:
 
 ```
