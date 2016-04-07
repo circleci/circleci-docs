@@ -15,7 +15,7 @@ If we don't infer all of your settings, you can also add custom configuration to
 ### Version
 
 When Circle detects Python, we automatically use `virtualenv`
-to create an isolated Python environment using Python `{{ versions.default_python }}`.
+to create an isolated Python environment using Python `{{ site.data.versions.default_python }}`.
 
 We have
 [many versions of Python](/docs/environment/#python)

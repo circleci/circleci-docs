@@ -22,7 +22,7 @@ so that we can extend our inference to make it work automatically!
 
 ## The Hard Way
 
-Even if we aren't able to do things automatically, `solr {{ versions.solr }}`
+Even if we aren't able to do things automatically, `solr {{ site.data.versions.solr }}`
 is installed on your build system. It will need to be configured with your
 schema.xml, and booted via [circle.yml](/docs/configuration).
 Here's an example of how to do so:

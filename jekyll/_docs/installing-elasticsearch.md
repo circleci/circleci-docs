@@ -2,7 +2,6 @@
 layout: classic-docs
 title: Install a custom version of Elasticsearch
 description: Installing a custom version of Elasticsearch
-last_updated: March 10, 2014
 ---
 
 CircleCI supports a large number of
@@ -14,7 +13,7 @@ machine:
     - elasticsearch
 ```
 
-The default version of elasticsearch is {{ versions.elasticsearch }}.
+The default version of elasticsearch is {{ site.data.versions.elasticsearch }}.
 If you need a custom version, you can download and start it from your build. To install 1.0.1, add the following to your circle.yml:
 
 ```

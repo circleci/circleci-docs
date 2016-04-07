@@ -4,7 +4,6 @@ title: Continuous Integration and Continuous Deployment with Java
 short-title: Java
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Java
-last_updated: April 21, 2014
 ---
 
 Circle supports building Java applications using most common JDKs and build tools.
@@ -16,7 +15,7 @@ with a [circle.yml](/docs/configuration) file.
 ### Version
 
 Circle has [several versions of the Oracle JDK](/docs/environment/#java)
-available. We use `{{ versions.default_java_version }}`
+available. We use `{{ site.data.versions.default_java_version }}`
 as the default; if you'd like a particular version, you can specify it in your `circle.yml`
 
 ### Dependencies & Tests
