@@ -125,6 +125,9 @@ test:
     - ./my_testing_script.sh
 ```
 
+If you want CircleCI to show a test summary of your build see 
+[Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
+
 <h3 id="xdebug">Enable Xdebug</h3>
 
 Xdebug is installed for all versions of PHP, but is disabled (for performance reasons) by
