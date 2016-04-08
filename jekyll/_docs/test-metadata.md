@@ -56,14 +56,22 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 
 ### Cucumber
 
-For custom Cucumber steps, you should generate a file using the JSON formatter that ends
-with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
+For custom Cucumber steps, you should generate a file using the JSON formatter that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
 ```
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
     - bundle exec cucumber --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+```
+
+Note that `cucumber` allows for mulitple `--format` items to be present so you can do:
+
+```
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+    - bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
 
