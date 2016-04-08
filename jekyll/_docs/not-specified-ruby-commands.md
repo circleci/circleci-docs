@@ -2,14 +2,13 @@
 layout: classic-docs
 title: CircleCI is running the Ruby commands not present in the config
 description: CircleCI is running the Ruby commands not present in the config
-last_updated: Feb 3, 2013
 ---
 
 CircleCI infers your test settings from the code in your repository, typically looking at the packages you use.
 Most problems occur when there is some error in how the packages are specified.
 
 If you require custom commands, it obviously won't be possible for CircleCI to infer them correctly.
-In that case, you can [specify your commands](/docs/configuration)
+In that case, you can [specify your commands]({{site.baseurl}}/configuration/)
 using a `circle.yml` file.
 
 If you feel we should have inferred your commands correctly, your project may diverge slightly from what we expect.

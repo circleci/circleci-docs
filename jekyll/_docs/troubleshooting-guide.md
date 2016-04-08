@@ -4,7 +4,6 @@ title: Troubleshooting guide
 short-title: Troubleshooting guide
 categories: [troubleshooting]
 description: Troubleshooting guide
-last_updated: February 26, 2015
 ---
 
 ### The build passes locally but fails on CircleCI
@@ -15,28 +14,28 @@ compilation of the ones we see most frequently:
 - Different language version. Make sure that you are using the same
   version of the language on CircleCI and locally. Check out
   [this documentation
-  page](https://circleci.com/docs/configuration/#ruby-version) for more
+  page]({{site.baseurl}}/configuration/#ruby-version) for more
   details.
 - Different versions of packages you rely on. Try explicitly specifying
   the versions for the packages you are using in your build in your
   `circle.yml`. See [the doc on installing custom
-  software](https://circleci.com/docs/installing-custom-software) for more
+  software]({{site.baseurl}}/installing-custom-software/) for more
   information on how to accomplish that.
 - Timezones. Some testing frameworks may have not timezone-aware
   modules, which in combination with unset machine timezone can deliver
   unexpected test failures. You can find an example for setting the
   timezone for your machine [in this doc
-  section](https://circleci.com/docs/configuration/#machine).
+  section]({{site.baseurl}}/configuration/#machine).
 - File ordering. Some filesystems maintain an ordered file structure for
   every directory, which means that all the files are read in a
   consistent order every time. The filesystem in our build containers in
   _not_ one of those. Therefore if your tests rely on a
   certain autoload order, for example, this could be a reason they fail on
   CircleCI and pass locally. See [this documentation
-  page](https://circleci.com/docs/file-ordering) for more detals/
+  page]({{site.baseurl}}/file-ordering/) for more detals/
 - Out Of Memory errors. If a process in your build container uses too
   much memory, it can be killed by Linux’s OOM
-  killer. Check out [this document](https://circleci.com/docs/oom) to
+  killer. Check out [this document]({{site.baseurl}}/oom/) to
   see how to deal with such errors.
 - Dependencies. Applications like Elasticsearch and PostgreSQL
   can take more time to spin up on CircleCI than they do on your local
@@ -51,7 +50,7 @@ compilation of the ones we see most frequently:
 ### None of these is the reason?
 You could SSH into your build container to debug interactively,
 while the build is still running. Consult [this guide on using SSH
-access](https://circleci.com/docs/ssh-build) to learn more.
+access]({{site.baseurl}}/ssh-build/) to learn more.
 
 Please feel free to suggest additional points for this list by [emailing
 us](mailto:sayhi@circleci.com).

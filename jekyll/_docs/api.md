@@ -77,7 +77,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
   POST: /project/:username/:project/tree/:branch
 </dt>
 <dd>
-  Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API]({{ site.baseurl }}/parameterized-builds).
+  Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API]({{ site.baseurl }}/parameterized-builds/).
 </dd>
 <dt>
   POST: /project/:username/:project/ssh-key

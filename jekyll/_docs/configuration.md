@@ -3,7 +3,6 @@ layout: classic-docs
 title: Configuring CircleCI
 categories: [getting-started,reference]
 description: How to configure CircleCI
-last_updated: August 1, 2014
 ---
 
 CircleCI automatically infers your settings from your code, so CircleCI's normal processing works just fine in most circumstances.
@@ -12,7 +11,7 @@ This is a simple YAML file where you spell out any tweaks required for your web 
 You place the file in your git repo's root directory and CircleCI reads the file each time it runs a build.
 
 If you want a quick look at how to set up your `circle.yml`
-file, check out our [sample file](/docs/config-sample).
+file, check out our [sample file]({{site.baseurl}}/config-sample/).
 
 Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting/)
 can likely tell you the best way to solve the problem.
@@ -149,7 +148,7 @@ machine:
 ```
 
 If you don't want to use this method, there are
-[a number of other options](/docs/environment-variables).
+[a number of other options]({{site.baseurl}}/environment-variables/).
 
 ### Timezone
 
@@ -203,13 +202,13 @@ machine:
     version: 1.9.3-p0-falcon
 ```
 
-The complete list of supported Ruby versions is found [here](/docs/environment/#ruby).
+The complete list of supported Ruby versions is found [here]({{site.baseurl}}/environment/#ruby).
 
 <h3 id="node-version">Node.js version</h3>
 
 CircleCI uses [NVM](https://github.com/creationix/nvm)
 to manage Node versions. See
-[supported Node versions](/docs/environment/#nodejs)
+[supported Node versions]({{site.baseurl}}/environment/#nodejs)
 for a complete list. If you do not specify a version, CircleCI uses
 `{{ site.data.versions.default_node }}`.
 
@@ -233,7 +232,7 @@ machine:
 ```
 
 The default version of Java is `oraclejdk7`.
-See [supported Java versions](/docs/environment/#java)
+See [supported Java versions]({{site.baseurl}}/environment/#java)
 for a complete list.
 
 ### PHP version
@@ -249,7 +248,7 @@ machine:
     version: 5.4.5
 ```
 
-See [supported PHP versions](/docs/environment/#php) for a complete list.
+See [supported PHP versions]({{site.baseurl}}/environment/#php) for a complete list.
 
 ### Python version
 
@@ -263,13 +262,13 @@ machine:
     version: 2.7.5
 ```
 
-See [supported Python versions](/docs/environment/#python)
+See [supported Python versions]({{site.baseurl}}/environment/#python)
 for a complete list.
 
 ### GHC version
 
 You can choose from a
-[number of available GHC versions](/docs/environment/#haskell)
+[number of available GHC versions]({{site.baseurl}}/environment/#haskell)
 in your `circle.yml`:
 
 ```
@@ -280,14 +279,14 @@ machine:
 
 ### Other languages
 
-Our [test environment](/docs/environment) document has more configuration information about
-[other languages](/docs/environment#other) including [Python](/docs/environment/#python),
-[Clojure](/docs/environment#clojure), [C/C++](/docs/environment/#other),
-[Golang](/docs/environment#other) and [Erlang](/docs/environment/#other).
+Our [test environment]({{site.baseurl}}/environment/) document has more configuration information about
+[other languages]({{site.baseurl}}/environment/#other) including [Python]({{site.baseurl}}/environment/#python),
+[Clojure]({{site.baseurl}}/environment/#clojure), [C/C++]({{site.baseurl}}/environment/#other),
+[Golang]({{site.baseurl}}/environment/#other) and [Erlang]({{site.baseurl}}/environment/#other).
 
 <h3 id="services">Databases and other services</h3>
 
-CircleCI supports a large number of [databases and other services](/docs/environment/#databases).
+CircleCI supports a large number of [databases and other services]({{site.baseurl}}/environment/#databases).
 Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB.
 
 You can enable other databases and services from the `services` section:
@@ -389,7 +388,7 @@ Caches are private, and are not shared with other projects.
 
 Your web framework typically includes commands to create your database, install your schema, and run your migrations.
 You can use `override`, `pre`, and/or `post` to modify `database` commands.
-See [Setting up your test database](/docs/manually/#databases) for more information.
+See [Setting up your test database]({{site.baseurl}}/manually/#databases) for more information.
 
 If our inferred `database.yml` isn't working for you, you may need to `override` our setup commands (as shown in the following example).
 If that is the case, please [contact us](mailto:sayhi@circleci.com)
@@ -624,7 +623,7 @@ notify:
 ```
 
 The JSON packet is identical to the result of the
-[Build API](/docs/api/#build)
+[Build API]({{site.baseurl}}/api/#build)
 call for the same build, except that it is wrapped in a "payload" key:
 
 ```
@@ -697,7 +696,7 @@ Circle will run its inference as well as all build commands from that directory.
 
 You can specify directories and files (in addition to the default
 `$CIRCLE_ARTIFACTS` directory) to be
-[saved as artifacts](/docs/build-artifacts):
+[saved as artifacts]({{site.baseurl}}/build-artifacts/):
 
 ```
 general:

@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Continuous Integration and Continuous Deployment with Node.js
-short-title: Node.js
+title: "Continuous Integration and Continuous Deployment with Node.js"
+short-title: "Node.js"
 categories: [languages]
-description: Continuous Integration and Continuous Deployment with Node.js
+description: "Continuous Integration and Continuous Deployment with Node.js"
 ---
 
 Circle has great support for Node.js applications.
@@ -45,7 +45,7 @@ dependencies:
 If you need to authenticate with `npm` before downloading the
 dependencies, you could store the `npm` credentials in the
 [secure environment
-variables](https://circleci.com/docs/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)
+variables]({{site.baseurl}}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)
 and then use the following script to perform the authentication:
 
 ```

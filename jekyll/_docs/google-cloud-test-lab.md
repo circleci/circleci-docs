@@ -15,7 +15,7 @@ following steps:
 1. **Set up gcloud**. Follow the instructions from
 [Using Cloud Test Lab from the Command Line](https://developers.google.com/cloud-test-lab/command-line)
 to create a Google Cloud project, request access to the Cloud Test Lab Beta
-program, and configure your local Google Cloud SDK environment. It's preinstalled on CircleCI, but you'll probably want to have it locally too.
+program, and configure your local Google Cloud SDK environment. It's pre-installed on CircleCI, but you'll probably want to have it locally too.
 2. **Create a service account**. Using a service account causes gcloud to treat the user as a program, instead of treating the user as a person. This avoids checks for spam and prevents the account from being blocked or prompted for captchas. To create and activate a service account, follow the instructions for using the
 [gcloud auth activate-service-account command](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account).
 3. **Enable required APIs**. After logging in using the service account: In the
@@ -26,7 +26,7 @@ then click **Enable API** on the on the overview page for that API.
 
 ## Set up Your Repository With CircleCI
 If you're not yet a CircleCI user, you can follow our
-[Getting Started](https://circleci.com/docs/getting-started) guide to quickly
+[Getting Started]({{ site.baseurl }}/getting-started/) guide to quickly
 get set up. For the purpose of this guide we'll be using the [Notepad example
 Android app](https://github.com/circleci/android-cloud-test-lab).
 
@@ -38,9 +38,10 @@ smart for security.
 
 Instead we'll utilize an environment variable set in CircleCI's GUI for
 authorization. Instructions on how to do this can be found
-[here](https://circleci.com/docs/google-auth).
+[here]({{ site.baseurl }}/google-auth/).
 
 ### circle.yml
+
 ```
 dependencies:
   pre:

@@ -10,11 +10,11 @@ Circle supports building Java applications using most common JDKs and build tool
 Before each build, we look at your repository and infer commands to run, so most
 setups should work automatically.
 If your project has special requirements, you can augment or override inferred commands
-with a [circle.yml](/docs/configuration) file.
+with a [circle.yml]({{ site.baseurl }}/configuration/) file.
 
 ### Version
 
-Circle has [several versions of the Oracle JDK](/docs/environment/#java)
+Circle has [several versions of the Oracle JDK]({{ site.baseurl }}/environment/#java)
 available. We use `{{ site.data.versions.default_java_version }}`
 as the default; if you'd like a particular version, you can specify it in your `circle.yml`
 
@@ -71,5 +71,5 @@ Depending on your build tooling, we will infer different commands:
 
 You can easily customize inferred build commands in your `circle.yml`
 by setting the `override`, `pre`, `post` in the
-[dependencies](/docs/configuration/#dependencies) and
-[test](/docs/configuration/#test) sections.
+[dependencies]({{ site.baseurl }}/configuration/#dependencies) and
+[test]({{ site.baseurl }}/configuration/#test) sections.

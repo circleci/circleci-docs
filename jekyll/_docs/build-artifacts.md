@@ -3,7 +3,6 @@ layout: classic-docs
 title: Build artifacts
 categories: [reference]
 description: Dealing with build artifacts
-last_updated: August 1, 2014
 ---
 
 If your build produces persistent artifacts such as screenshots, coverage reports, or
@@ -11,10 +10,10 @@ deployment tarballs, we can automatically save and link them for you.
 
 Before each build, we create an empty directory and export its path in the
 read-only `$CIRCLE_ARTIFACTS`
-[environment variable](/docs/environment-variables).
+[environment variable]({{site.baseurl}}/environment-variables/).
 
 If you prefer, you can also
-[configure directories and files whose contents will](/docs/configuration/#artifacts)
+[configure directories and files whose contents will]({{site.baseurl}}/configuration/#artifacts)
 be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.

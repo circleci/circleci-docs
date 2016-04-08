@@ -9,7 +9,7 @@ description: Continuous Integration and Continuous Deployment with Python
 CircleCI works well for Python projects. We run automatic inference on each 
 build to determine your dependencies and test commands. If we don't infer all 
 of your settings, you can also add custom configuration to a
-[circle.yml](/docs/configuration) file checked into your repo's root directory.
+[circle.yml]({{ site.baseurl }}/configuration/) file checked into your repo's root directory.
 
 ## Version
 
@@ -17,7 +17,7 @@ When Circle detects Python, we automatically use `virtualenv` to create an
 isolated Python environment using Python 
 `{{ site.data.versions.default_python }}`.
 
-We have [many versions of Python](/docs/environment/#python) pre-installed. If 
+We have [many versions of Python]({{ site.baseurl }}/environment/#python) pre-installed. If 
 you don't want to use the default, you can specify your Python version in `circle.yml`:
 
 ```
@@ -37,7 +37,7 @@ This can be useful if we didn't automatically detect that you're using Python.
 
 Circle automatically installs your dependencies using either `pip` when we find 
 a `requirements.txt`, or `distutils` when we find a `setup.py` file. You can 
-also [add custom dependencies](/docs/configuration/#dependencies) commands from 
+also [add custom dependencies]({{ site.baseurl }}/configuration/#dependencies) commands from 
 your `circle.yml`, for example:
 
 ```
@@ -49,9 +49,9 @@ dependencies:
 ## Databases
 
 Circle has pre-installed more than a dozen 
-[databases and queues](/docs/environment/#databases), including PostgreSQL and 
+[databases and queues]({{ site.baseurl }}/environment/#databases), including PostgreSQL and 
 MySQL. If needed, you can 
-[manually set up your test database](/docs/manually/#dependencies) from your 
+[manually set up your test database]({{ site.baseurl }}/manually/#dependencies) from your 
 `circle.yml`.
 
 ## Testing
@@ -59,7 +59,7 @@ MySQL. If needed, you can
 CircleCI automatically runs `tox` when we find a `tox.ini` file, and runs 
 `nosetests` when we find a `unittest.py` file. If you are using Django, then 
 Circle will run `manage.py test`. You can 
-[add custom test commands](/docs/configuration/#test) from your `circle.yml`:
+[add custom test commands]({{ site.baseurl }}/configuration/#test) from your `circle.yml`:
 
 ```
 test:
@@ -73,7 +73,7 @@ tests, not bare-function nose-style tests.
 
 ## Deployment
 
-CircleCI has [first-class support for deployment](/docs/configuration/#deployment)
+CircleCI has [first-class support for deployment]({{ site.baseurl }}/configuration/#deployment)
 with Fabric or Paver. To set up deployment after green builds, you can add 
 commands to the deployment section of your `circle.yml`:
 
@@ -87,10 +87,10 @@ deployment:
 
 ## Troubleshooting for Python
 
-Problems? Check out our [Python troubleshooting](/docs/troubleshooting-python)
+Problems? Check out our [Python troubleshooting]({{ site.baseurl }}/troubleshooting-python/)
 information:
 
-* [Git errors during pip install](/docs/git-pip-install)
+* [Git errors during pip install]({{ site.baseurl }}/git-pip-install/)
 
 If you are still having trouble, please [contact us](mailto:sayhi@circleci.com)
 and we will be happy to help.
