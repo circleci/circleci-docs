@@ -4,7 +4,6 @@ title: Continuous Integration and Continuous Deployment with PHP
 short-title: PHP
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with PHP
-last_updated: March 12, 2014
 ---
 
 Circle works seamlessly with all the tools and package managersthat
@@ -14,7 +13,7 @@ configuration via a `circle.yml` checked into your repo's root directory.
 
 ### Version
 
-Circle supports more than a dozen [versions of PHP,](/docs/environment/#php)
+Circle supports more than a dozen [versions of PHP,]({{site.baseurl}}/environment/#php)
 and uses `{{ site.data.versions.default_php }}` as the default. You can set a custom
 version of PHP in the machine section of your circle.yml:
 
@@ -33,7 +32,7 @@ Circle has the composer, pear, and pecl package managers installed.
 If we find a composer.json file, then we'll automatically run `composer install`.
 
 To install your dependencies with either `pear` or `pecl`,
-you have to include [dependency commands](/docs/configuration/#dependencies)
+you have to include [dependency commands]({{site.baseurl}}/configuration/#dependencies)
 in your `circle.yml` file.
 The following example shows how to install the MongoDB extension using `pecl`.
 
@@ -70,9 +69,9 @@ you'll have to specify your PHP version in your `circle.yml` in order to edit PH
 ### Databases
 
 We have pre-installed more than a dozen
-[databases and queues](/docs/environment/#databases),
+[databases and queues]({{site.baseurl}}/environment/#databases),
 including PostgreSQL and MySQL. If needed, you have the option of
-[manually setting up your test database](/docs/manually/#dependencies).
+[manually setting up your test database]({{site.baseurl}}/manually/#dependencies).
 
 <h3 id="php-apache">Using the Apache Webserver</h3>
 
@@ -142,18 +141,18 @@ dependencies:
 
 ### Deployment
 
-Circle offers first-class support for [deployment](/docs/configuration/#deployment).
+Circle offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
 When a build is green, Circle will deploy your project as directed
 in your `circle.yml` file. We can deploy to PaaS providers as well as to
 physical servers under your control.
 
 ### Troubleshooting for PHP
 
-If you run into problems, check out our [PHP troubleshooting](/docs/troubleshooting-php)
+If you run into problems, check out our [PHP troubleshooting]({{site.baseurl}}/troubleshooting-php/)
 write-ups about these issues:
 
-*   [Adding memcached with pecl on CircleCI](/docs/php-memcached-compile-error)
-*   [Composer hitting GitHub API rate limits](/docs/composer-api-rate-limit)
+*   [Adding memcached with pecl on CircleCI]({{site.baseurl}}/php-memcached-compile-error/)
+*   [Composer hitting GitHub API rate limits]({{site.baseurl}}/composer-api-rate-limit/)
 
 If you are still having trouble, please
 [contact us](mailto:sayhi@circleci.com)

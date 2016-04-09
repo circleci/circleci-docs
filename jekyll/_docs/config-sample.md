@@ -2,11 +2,10 @@
 layout: classic-docs
 title: Sample circle.yml file
 categories: [reference]
-description: Making a circle.yml file
-last_updated: May 2, 2013
+description: "Making a circle.yml file"
 ---
 
-In our [configuration document](/docs/configuration) we list everything that can go into a
+In our [configuration document]({{site.baseurl}}/configuration/) we list everything that can go into a
 `circle.yml` file. Here we provide one complete sample file.
 
 **Note that you probably don't need to include every section or setting here.**

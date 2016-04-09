@@ -4,7 +4,6 @@ title: Continuous Integration and Continuous Deployment with Scala
 short-title: Scala
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Scala
-last_updated: Mar 3, 2015
 ---
 
 Circle supports building Scala applications with `sbt`. Before each
@@ -12,18 +11,18 @@ build we look at your repository and infer commands to run, so most
 setups should work automatically.
 
 If you'd like something specific that's not being inferred,
-[you can say so](/docs/configuration) with
-[a configuration file](/docs/config-sample)
+[you can say so]({{ site.baseurl }}/configuration/) with
+[a configuration file]({{ site.baseurl }}/config-sample/)
 checked into the root of your repository.
 
 ### Version
 
-Circle has [several versions of Scala](/docs/environment/#scala)
+Circle has [several versions of Scala]({{ site.baseurl }}/environment/#scala)
 available.
 
 You can specify the JVM version you want to run Scala on top of by
 following
-[the steps described in the Java doc](https://circleci.com/docs/configuration/#java-version).
+[the steps described in the Java doc]({{ site.baseurl }}/configuration/#java-version).
 
 ### Using a custom version of sbt
 
@@ -65,7 +64,7 @@ dependencies:
 
 ### Dependencies & Tests
 
-Circle can [cache directories](/docs/configuration/#cache-directories)
+Circle can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
 in between builds to avoid unnecessary work.
 
 By default, when we detect a Scala project, we will run `sbt

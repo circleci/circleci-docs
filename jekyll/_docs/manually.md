@@ -3,7 +3,6 @@ layout: classic-docs
 title: Manual build setup
 categories: [getting-started]
 description: Manual build setup
-last_updated: April 29, 2013
 ---
 
 CircleCI is designed to set up most tests automatically because we infer your settings from your code.
@@ -33,7 +32,7 @@ directory of your repository. We recommend adding this upfront on a branch to
 keep you and your colleagues on the same page.
 
 We have provided a
-[full reference for the `circle.yml` file](/docs/configuration)
+[full reference for the `circle.yml` file]({{site.baseurl}}/configuration/)
 but you won't need that for now&mdash;
 we'll guide you through a simple setup and you can check out the comprehensive docs later.
 
@@ -53,7 +52,7 @@ Normally, these commands are inferred by CircleCI, but if you are reading this, 
 `circle.yml` file.
 You can modify which&mdash;and in what order&mdash;commands are run by adding `override`,
 `pre`, and/or `post` when needed.
-Take a look at the aforementioned [reference guide](/docs/configuration)
+Take a look at the aforementioned [reference guide]({{ site.baseurl }}/configuration/)
 should you want to learn more details.
 
 Failing commands (those with a non-zero exit code) will cause the whole build to fail, and you'll receive a notification.
@@ -62,12 +61,12 @@ Failing commands (those with a non-zero exit code) will cause the whole build to
 
 For the most part, there is nothing that you have to add to configure the test machine.
 We have already installed the most common libraries, languages, browsers, and databases that you'll need.
-See [the CircleCI environment](/docs/environment) for a comprehensive list of what we have installed.
+See [the CircleCI environment]({{ site.baseurl }}/environment/) for a comprehensive list of what we have installed.
 If you need anything else installed, please [contact us](mailto:sayhi@circleci.com)
 and CircleCI support should be able to accommodate you.
 Be aware that for security reasons, we don't provide root access.
 
-The [machine section](/docs/configuration/#machine)
+The [machine section]({{ site.baseurl }}/configuration/#machine)
 of the `circle.yml` file is the place where you can tweak common settings, such as timezone, language version used, and
 `/etc/hosts` contents.
 
@@ -109,7 +108,7 @@ dependencies:
 
 <h2 id="databases">Setting up your test databases</h2>
 
-We have already installed [most databases that you'll need](/docs/environment/#databases)
+We have already installed [most databases that you'll need]({{ site.baseurl }}/environment/#databases)
 on our virtual machine.
 
 At this point, you'll want to create your database, load it with your schema, and (possibly) preload it with data.
@@ -148,7 +147,7 @@ You should be good to go. Happy testing!
 <h2 id="next">Next steps</h2>
 
 If your tests fail and you need to fix something, CircleCI has a
-[list of common problems and their solutions](/docs/troubleshooting)
+[list of common problems and their solutions]({{ site.baseurl }}/troubleshooting/)
 that can help you debug many issues.
 You might also like to know that we allow you to [SSH in during your builds]({{ site.baseurl }}/ssh-build/).
 This lets you check out how CircleCI works and facilitates nimble and efficient debugging.

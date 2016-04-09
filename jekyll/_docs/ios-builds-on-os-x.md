@@ -4,7 +4,6 @@ title: Test iOS applications on OS X
 short-title: iOS builds on OS X
 categories: [mobile-platforms]
 description: Testing iOS applications on OS X
-last_updated: March 2nd, 2016
 ---
 
 CircleCI now offers support for building and testing iOS and OS X projects.
@@ -58,7 +57,7 @@ customization options.
 ## Xcode Version
 
 By default, CircleCI will build your project with Xcode 7.0. You can select 7.1, 7.2 or 7.3.
-by specifying the version in a [circle.yml file](/docs/configuration) in the root of your
+by specifying the version in a [circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
 repo. For example, for 7.2, add the following:
 
 ```
@@ -81,7 +80,7 @@ If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
 We cannot handle all setups automatically, so for some projects you might need
 to invoke CocoaPods manually with some custom configuration. To do this you will
 need to override the `dependencies` section of your `circle.yml` file.
-See our [documentation on overriding build phases for more information on this.](/docs/configuration/#phases).
+See our [documentation on overriding build phases for more information on this.]({{ site.baseurl }}/configuration/#phases).
 If you need more help please reach out to our support team who are always happy
 to help out.
 
@@ -120,7 +119,7 @@ these steps:
    to match your code-signing identity, ie `"iPhone Distribution: Acme Inc."`.
 1. Build with `gym` and deploy with `ipa`.
 
-Please check out the [code signing doc](/docs/ios-code-signing) for more
+Please check out the [code signing doc]({{ site.baseurl }}/ios-code-signing/) for more
 details about setting up code signing, and the [deployment](#deployment)
 section for examples of deployment setups.
 
@@ -178,7 +177,7 @@ test:
 ### Environment variables
 You can customize the behavior of CircleCI's automatic build commands by setting
 the following environment variables in a `circle.yml` file or at
-**Project Settings > Environment Variables** (see [here](/docs/environment-variables/#custom) for more info
+**Project Settings > Environment Variables** (see [here]({{ site.baseurl }}/environment-variables/#custom) for more info
 about environment variables):
 
 * `XCODE_WORKSPACE` - The path to your `.xcworkspace` file relative to the git repository root
@@ -189,7 +188,7 @@ about environment variables):
 precedence over project.
 
 If more than one scheme is present, then you should specify the
-`XCODE_SCHEME` [environment variable](/docs/environment-variables/#custom).
+`XCODE_SCHEME` [environment variable]({{ site.baseurl }}/environment-variables/#custom).
 Otherwise a scheme will be chosen arbitrarily.
 
 You can also use the Environment Variables section to add all the
@@ -199,7 +198,7 @@ securely.
 ### Configuration file
 The most flexible means to customize your build is to add a `circle.yml` file to your project,
 which allows you to run arbitrary bash commands instead of or in addition to the inferred commands
-at various points in the build process. See the [configuration doc](/docs/configuration) for
+at various points in the build process. See the [configuration doc]({{ site.baseurl }}/configuration/) for
 a detailed discussion of the structure of the `circle.yml` file. Note, however, that
 a number of options discussed in that doc will not work for OS X builds.
 Please see the [the Constraints section](#constraints-on-os-x-based-builds) for the
@@ -391,7 +390,7 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
   Sometimes the issue would only be present with one of these tools but not the other.
 
 * **Errors while installing code signing certificates.** Please check out [the Troubleshooting
-  section](/docs/ios-code-signing/#troubleshooting) of the code signing doc.
+  section]({{ site.baseurl }}/ios-code-signing/#troubleshooting) of the code signing doc.
 
 ### A note on code-generating tools
 Many iOS app developers use tools that generate substantial amounts of code. In such
@@ -405,11 +404,11 @@ Linux containers that are not available for OS X builds at the moment:
 * It is not possible yet to SSH into build containers
 * Parallelism is not supported
 * While the general `circle.yml` file structure will be honored in OS X-based builds
-[configuration options](/docs/configuration), the following sections of
+[configuration options]({{ site.baseurl }}/configuration/), the following sections of
 `circle.yml` will not work correctly:
   * `machine: services`
   * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc](/docs/configuration)
+    in the [Configuration doc]({{ site.baseurl }}/configuration/)
 
 Please see the [customizing your build](#customizing-your-build) section for alternatives.
 

@@ -4,7 +4,6 @@ title: Generating code coverage metrics
 short-title: Code Coverage
 categories: [how-to]
 description: Generating code coverage metrics
-last_updated: Sep 12, 2013
 ---
 
 Code Coverage tells you how much of your application is tested.
@@ -83,7 +82,7 @@ tab on the build page:
 ![]({{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
-[CircleCI API](https://circleci.com/docs/api/#build-artifacts).
+[CircleCI API]({{site.baseurl}}/api/#build-artifacts).
 
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
@@ -100,7 +99,7 @@ code quality services:
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables](https://circleci.com/docs/environment-variables/).
+[environment variables]({{site.baseurl}}/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
@@ -111,7 +110,7 @@ If you're a Code Climate customer, follow the instructions under
 **Repo Settings -> Test Coverage**
 from your repo on the Code Climate site.
 You'll need to add your `CODECLIMATE_REPO_TOKEN` to your CircleCI
-[environment variables](https://circleci.com/docs/environment-variables).
+[environment variables]({{site.baseurl}}/environment-variables/).
 
 Code Climate does not currently support CircleCI's parallelization.
 [Contact us](mailto:sayhi@circleci.com) if you'd like to use this.
@@ -121,7 +120,7 @@ Code Climate does not currently support CircleCI's parallelization.
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
 to configure the appropriate coverage
 reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
-[environment variables]({{ site.baseurl }}/environment-variables).
+[environment variables]({{ site.baseurl }}/environment-variables/).
 
 ## Under construction
 

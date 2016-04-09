@@ -57,7 +57,7 @@ You can add to or override our inferred commands through your Project Settings o
 We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-continuous-delivery-for-ios-with-fastlane-and-circleci-c7dae19df2ed). 
 
 ### Get more help
-* [OS X build docs](https://circleci.com/docs/ios-builds-on-os-x)
+* [OS X build docs]({{ site.baseurl }}/ios-builds-on-os-x/)
 * [discuss.circleci.com](https://discuss.circleci.com/c/mobile)
 * [CircleCI Support](mailto:sayhi@circleci.com)
 
@@ -73,7 +73,7 @@ Email notifications can be configured from the [Account page](https://circleci.c
 If you have a Gradle Wrapper in the root of your repository, CircleCI will automatically run ./gradlew test.
 
 ### Use the Android Emulator
-In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml](https://circleci.com/docs/configuration). 
+In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml]({{site.baseurl}}/configuration/). 
 
 Below is a sample circle.yml file taken from an [excellent blog post](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/) written by someone who has an extensively configured Android project on CircleCI.
 
@@ -110,7 +110,7 @@ test:
     - (./gradlew connectedAndroidTest)
 ```
 ### Run scripts
-You can specify which scripts to run in your [circle.yml](https://circleci.com/docs/configuration).
+You can specify which scripts to run in your [circle.yml]({{site.baseurl}}/configuration/).
 The following .yml snippit would trigger script.sh to run during each build. 
 
 ```

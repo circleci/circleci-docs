@@ -3,7 +3,6 @@ layout: classic-docs
 title: Getting Started with CircleCI
 categories: [getting-started]
 description: Getting Started with CircleCI
-last_updated: April 29, 2013
 ---
 
 Setting up CircleCI usually takes only three mouse clicks:
@@ -29,11 +28,11 @@ Sometimes your tests will fail, CircleCI won't infer your custom setup, or our i
 Here are some common issues and where you can find their fixes.
 
 *   If we didn't run an important step or omitted some tests,
-    [add a `circle.yml` file](/docs/configuration)
+    [add a `circle.yml` file]({{ site.baseurl }}/configuration/)
     to tweak your test run.
 *   If we didn't infer anything, you can [set up your project manually]({{ site.baseurl }}/manually/).
 *   Sometimes, your tests will fail on our server even though they work locally.
-    Read our list of [common problems](/docs/troubleshooting) and their solutions.
+    Read our list of [common problems]({{ site.baseurl }}/troubleshooting/) and their solutions.
 
 ## What next?
 

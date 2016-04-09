@@ -3,7 +3,6 @@ layout: classic-docs
 title: Manually setting up parallelism
 categories: [parallelism]
 description: Manually setting up parallelism
-last_updated: Feb 2, 2013
 ---
 
 If you want the benefits of parallel testing, and you're not
@@ -97,7 +96,7 @@ the tests so that the total execution time is minimised.
 
 If you are overriding the default test command as explained above and
 still want the tests to be automatically balanced, you’ll need to make
-sure that the [test metadata](https://circleci.com/docs/test-metadata/)
+sure that the [test metadata]({{site.baseurl}}/test-metadata/)
 is collected properly. For example, you would modify the initial RSpec
 command like this to include the RSpec Junit formatter:
 

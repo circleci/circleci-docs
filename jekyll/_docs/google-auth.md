@@ -37,4 +37,4 @@ This decodes the secret into a file named client-secret.json. Next, authenticate
 
 ## Security Considerations
 
-If you add the Service Account to your CircleCI environment, that environment now contains credentials which if compromised could compromise your project. One danger is that someone submits a PR to your project that changes the CircleCI build to print your credentials or otherwise use the gcloud tool to do malicious actions. Fortunately, by default CircleCI does not provide UI configured environment variables to Pull Requests. You can read more about this topic [here](https://circleci.com/docs/fork-pr-builds).
+If you add the Service Account to your CircleCI environment, that environment now contains credentials which if compromised could compromise your project. One danger is that someone submits a PR to your project that changes the CircleCI build to print your credentials or otherwise use the gcloud tool to do malicious actions. Fortunately, by default CircleCI does not provide UI configured environment variables to Pull Requests. You can read more about this topic [here]({{site.baseurl}}/fork-pr-builds/).
