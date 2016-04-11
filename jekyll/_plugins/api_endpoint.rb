@@ -10,7 +10,7 @@ module Jekyll
   <h4>Example call</h4>
   <pre><code>#{api_curl(endpoint)}</code></pre>
   <h4>Example response</h4>
-  <pre><code>#{endpoint['response']}</code></pre>
+  #{response_output(endpoint['response'])}
   #{try_it(endpoint)}
 </div>
 """
@@ -18,6 +18,14 @@ module Jekyll
     end
 
     private
+
+    def response_output(resp)
+      if resp.to_s.strip.empty?
+        '[no response expected]'
+      else
+        "<pre><code>#{resp}</code></pre>"
+      end
+    end
 
     def curl_args_padded(endpoint)
       args = []
