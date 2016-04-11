@@ -17,11 +17,9 @@ checked into the root of your repository.
 
 ### Version
 
-Circle has
-[several versions of GHC]({{ site.baseurl }}/environment/#haskell)
-available. We use `{{ site.data.versions.ghc }}`
-as the default; if you'd like a particular version, you
-can specify it in your `circle.yml`:
+We have many versions of GHC pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#haskell).
+
+If you'd like a particular version, you can specify it in your `circle.yml`:
 
 ```
 machine:

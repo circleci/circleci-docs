@@ -17,8 +17,7 @@ checked into the root of your repository.
 
 ### Version
 
-Circle has [several versions of Scala]({{ site.baseurl }}/environment/#scala)
-available.
+We pre-install [several versions of Scala on Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise/#scala).
 
 You can specify the JVM version you want to run Scala on top of by
 following

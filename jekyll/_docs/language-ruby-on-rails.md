@@ -18,13 +18,9 @@ checked into your repo's root directory.
 
 ### Version
 
-We use [RVM](https://rvm.io/) to provide access to a wide variety of
-[Ruby versions]({{site.baseurl}}/environment/#languages).
-The default version of Ruby is either
-{{ site.data.versions.default_ruby }} or {{ site.data.versions.old_ruby }},
-whichever we think is best for your project.
+We have many versions of Ruby pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#ruby) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#ruby) build images.
 
-You can manually set your Ruby version from your `circle.yml`:
+If you don't want to use the default, you can specify your version in `circle.yml`:
 
 ```
 machine:
@@ -32,7 +28,7 @@ machine:
     version: rbx-2.2.6
 ```
 
-Our [test environment doc]({{site.baseurl}}/environment/)
+Our [test environment doc]({{site.baseurl}}/language-ruby-on-rails//)
 covers more details about language versions and tools; it also explains how Circle
 works with testing tools that require a browser.
 
@@ -54,8 +50,7 @@ dependencies:
 Circle manages all your database requirements,
 such as running your `rake` commands for creating, loading,
 and migrating your database.
-We have pre-installed more than a dozen
-[databases and queues]({{site.baseurl}}/environment/#databases),
+We have pre-installed more than a dozen databases and queues,
 including PostgreSQL, MySQL, and MongoDB.
 You can add custom database commands from the
 [database section of your circle.yml]({{site.baseurl}}/configuration/#database).

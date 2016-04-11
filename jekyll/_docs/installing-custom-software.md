@@ -5,8 +5,7 @@ categories: [how-to]
 description: How to install custom software
 ---
 
-The CircleCI environment provides the libraries, languages, and databases needed for most development work
-(check out the [comprehensive list)]({{ site.baseurl }}/environment/).
+The CircleCI environment provides the libraries, languages, and databases needed for most development work.
 However, if you need to install a particular version of software&mdash;to match your production systems or to test backward compatibility, for example&mdash;or add custom code, CircleCI makes it easy to set up your environment to meet your testing needs.
 
 ## Installing via circle.yml

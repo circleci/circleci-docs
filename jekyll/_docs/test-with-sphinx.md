@@ -8,7 +8,7 @@ description: How to test with Sphinx
 If your tests require a running Sphinx server you will need to configure and
 start Sphinx before they run in CircleCI.
 
-Sphinx {{ site.data.versions.sphinx }} is installed on your build system. It will need
+Sphinx {{ site.data.precise.versions.sphinx }} is installed on your build system. It will need
 to be configured with your `sphinx.conf`, and started via
 [circle.yml]({{ site.baseurl }}/configuration/).  Here's an example of how to do so:
 

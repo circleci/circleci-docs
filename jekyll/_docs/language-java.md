@@ -14,9 +14,18 @@ with a [circle.yml]({{ site.baseurl }}/configuration/) file.
 
 ### Version
 
-Circle has [several versions of the Oracle JDK]({{ site.baseurl }}/environment/#java)
-available. We use `{{ site.data.versions.default_java_version }}`
-as the default; if you'd like a particular version, you can specify it in your `circle.yml`
+We have several versions of JDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#java) an `openjdk-8` on [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#java) build images.
+
+If you’d like a particular version, you can specify it in your circle.yml.
+
+**Note:**
+Specifying JDK version only works on Ubuntu 12.04 build image as only `openjdk-8` is pre-installed on Ubuntu 14.04 build image.
+
+```
+machine:
+  java:
+  version: openjdk7
+```
 
 ### Dependencies & Tests
 

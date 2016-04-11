@@ -6,19 +6,18 @@ categories: [languages]
 description: Continuous Integration and Continuous Deployment with Python
 ---
 
-CircleCI works well for Python projects. We run automatic inference on each 
-build to determine your dependencies and test commands. If we don't infer all 
+CircleCI works well for Python projects. We run automatic inference on each
+build to determine your dependencies and test commands. If we don't infer all
 of your settings, you can also add custom configuration to a
 [circle.yml]({{ site.baseurl }}/configuration/) file checked into your repo's root directory.
 
 ## Version
 
-When Circle detects Python, we automatically use `virtualenv` to create an 
-isolated Python environment using Python 
-`{{ site.data.versions.default_python }}`.
+When Circle detects Python, we automatically use `virtualenv` to create an isolated Python environment.
 
-We have [many versions of Python]({{ site.baseurl }}/environment/#python) pre-installed. If 
-you don't want to use the default, you can specify your Python version in `circle.yml`:
+We have many versions of Python pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#python) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#python) build images.
+
+If you don't want to use the default, you can specify your version in `circle.yml`:
 
 ```
 machine:
@@ -26,7 +25,7 @@ machine:
     version: pypy-2.2.1
 ```
 
-Please [contact us](mailto:sayhi@circleci.com) if other versions of Python 
+Please [contact us](mailto:sayhi@circleci.com) if other versions of Python
 would be of use to you.
 
 <span class='label label-info'>Note:</span>
@@ -35,9 +34,9 @@ This can be useful if we didn't automatically detect that you're using Python.
 
 ## Package managers and dependencies
 
-Circle automatically installs your dependencies using either `pip` when we find 
-a `requirements.txt`, or `distutils` when we find a `setup.py` file. You can 
-also [add custom dependencies]({{ site.baseurl }}/configuration/#dependencies) commands from 
+Circle automatically installs your dependencies using either `pip` when we find
+a `requirements.txt`, or `distutils` when we find a `setup.py` file. You can
+also [add custom dependencies]({{ site.baseurl }}/configuration/#dependencies) commands from
 your `circle.yml`, for example:
 
 ```
@@ -48,17 +47,16 @@ dependencies:
 
 ## Databases
 
-Circle has pre-installed more than a dozen 
-[databases and queues]({{ site.baseurl }}/environment/#databases), including PostgreSQL and 
-MySQL. If needed, you can 
-[manually set up your test database]({{ site.baseurl }}/manually/#dependencies) from your 
+Circle has pre-installed more than a dozen databases and queues, including PostgreSQL and
+MySQL. If needed, you can
+[manually set up your test database]({{ site.baseurl }}/manually/#dependencies) from your
 `circle.yml`.
 
 ## Testing
 
-CircleCI automatically runs `tox` when we find a `tox.ini` file, and runs 
-`nosetests` when we find a `unittest.py` file. If you are using Django, then 
-Circle will run `manage.py test`. You can 
+CircleCI automatically runs `tox` when we find a `tox.ini` file, and runs
+`nosetests` when we find a `unittest.py` file. If you are using Django, then
+Circle will run `manage.py test`. You can
 [add custom test commands]({{ site.baseurl }}/configuration/#test) from your `circle.yml`:
 
 ```
@@ -67,14 +65,14 @@ test:
     - ./my_testing_script.sh
 ```
 
-We can automatically parallelize both standard Python tests run with nose and 
-Django tests. However, the mechanisms to collect the tests only see class-style 
+We can automatically parallelize both standard Python tests run with nose and
+Django tests. However, the mechanisms to collect the tests only see class-style
 tests, not bare-function nose-style tests.
 
 ## Deployment
 
 CircleCI has [first-class support for deployment]({{ site.baseurl }}/configuration/#deployment)
-with Fabric or Paver. To set up deployment after green builds, you can add 
+with Fabric or Paver. To set up deployment after green builds, you can add
 commands to the deployment section of your `circle.yml`:
 
 ```

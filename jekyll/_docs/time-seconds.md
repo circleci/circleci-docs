@@ -20,5 +20,5 @@ this is very possibly a bug with CircleCI.
 
 Another cause of this bug is a rendering problem.
 CircleCI may not use the same exact browser as you use locally (this, of course, is a good thing), so it may catch a rendering bug that you don't.
-Check out [CircleCI's program versions](/docs/environment/#browsers)
-to see if this is the case.
+
+Check out [Ubuntu 12.04 build image]({{site.baseurl}}/build-image-precise) and [Ubuntu 14.04 build image]({{site.baseurl}}/build-image-trusty) to find out what browser versions are installed.
