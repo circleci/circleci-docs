@@ -7,7 +7,7 @@ last_updated: Feb 3, 2013
 
 While one-day variations are your responsibility, differences of a second or so are probably bugs in your CI server, and should not happen on CircleCI.
 
-This sort of bugs happen on slow computers running time-sensitive tests.
+These sort of bugs happen on slow computers running time-sensitive tests.
 Even if you don't explicitly have time-sensitive tests, Selenium and other browser-based tests often rely on implicit timeouts.
 For example, if some button hasn't appeared in 3 seconds, tests start to fail.
 
