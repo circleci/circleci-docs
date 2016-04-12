@@ -353,4 +353,17 @@ test:
     - sudo /etc/init.d/postgresql restart
 ```
 
+Then, to connect to Postgres, you could add the IP of `docker0` into the hosts file
+on the container:
+
+```
+test:
+  pre:
+    ...
+  override:
+    - docker run --docker run --add-host dockerhost:`/sbin/ip route|awk '/docker0/ { print  $9}'` ... :
+        environment:
+          DATABASE_HOST=dockerhost
+```
+
 The similar approach would be required for any other service.
