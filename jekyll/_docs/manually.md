@@ -27,8 +27,8 @@ general:
 
 From here, we'll assume that you're manually setting up your tests.
 
-The first thing to do is to add an empty `circle.yml` file to the root 
-directory of your repository. We recommend adding this upfront on a branch to 
+The first thing to do is to add an empty `circle.yml` file to the root
+directory of your repository. We recommend adding this upfront on a branch to
 keep you and your colleagues on the same page.
 
 We have provided a
@@ -61,7 +61,7 @@ Failing commands (those with a non-zero exit code) will cause the whole build to
 
 For the most part, there is nothing that you have to add to configure the test machine.
 We have already installed the most common libraries, languages, browsers, and databases that you'll need.
-See [the CircleCI environment]({{ site.baseurl }}/environment/) for a comprehensive list of what we have installed.
+See [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty) build image pages for a comprehensive list of what we have installed.
 If you need anything else installed, please [contact us](mailto:sayhi@circleci.com)
 and CircleCI support should be able to accommodate you.
 Be aware that for security reasons, we don't provide root access.
@@ -107,9 +107,6 @@ dependencies:
 ```
 
 <h2 id="databases">Setting up your test databases</h2>
-
-We have already installed [most databases that you'll need]({{ site.baseurl }}/environment/#databases)
-on our virtual machine.
 
 At this point, you'll want to create your database, load it with your schema, and (possibly) preload it with data.
 If you use MySQL or Postgres, you can use the `circle_test`

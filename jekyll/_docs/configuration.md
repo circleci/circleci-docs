@@ -191,8 +191,8 @@ hyphens (-) and dots (.).
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
 We use the Ruby version you specify in your `.rvmrc`, your
 `.ruby-version` file, or your Gemfile.
-If you don't have one of these files, we'll use Ruby `{{ site.data.versions.default_ruby }}`
-or `{{ site.data.versions.old_ruby }}`, whichever we think is better.
+If you don't have one of these files, we'll use default version of Ruby. Please check out [Ubuntu 12.04]({{site.baseurl}}/build-image-precise/#ruby) and [Ubuntu 14.04]({{site.baseurl}}/build-image-trusty/#ruby) pages to find out which version is the default.
+
 If you use a different Ruby version let CircleCI know by including that information in the
 `machine` section. Here's an example of how you do that.
 
@@ -202,15 +202,13 @@ machine:
     version: 1.9.3-p0-falcon
 ```
 
-The complete list of supported Ruby versions is found [here]({{site.baseurl}}/environment/#ruby).
+You can find more details about supported versions [here]({{site.baseurl}}/language-ruby-on-rails/#version).
 
 <h3 id="node-version">Node.js version</h3>
 
-CircleCI uses [NVM](https://github.com/creationix/nvm)
-to manage Node versions. See
-[supported Node versions]({{site.baseurl}}/environment/#nodejs)
-for a complete list. If you do not specify a version, CircleCI uses
-`{{ site.data.versions.default_node }}`.
+CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
+
+You can find more details about supported versions [here]({{site.baseurl}}/language-nodejs/#version).
 
 Here's an example of how to set the version of Node.js to be used for
 your tests.
@@ -231,9 +229,7 @@ machine:
     version: openjdk7
 ```
 
-The default version of Java is `oraclejdk7`.
-See [supported Java versions]({{site.baseurl}}/environment/#java)
-for a complete list.
+You can find more details about supported versions [here]({{site.baseurl}}/language-java/#version).
 
 ### PHP version
 
@@ -248,7 +244,7 @@ machine:
     version: 5.4.5
 ```
 
-See [supported PHP versions]({{site.baseurl}}/environment/#php) for a complete list.
+You can find more details about supported versions [here]({{site.baseurl}}/language-php/#version).
 
 ### Python version
 
@@ -262,31 +258,29 @@ machine:
     version: 2.7.5
 ```
 
-See [supported Python versions]({{site.baseurl}}/environment/#python)
-for a complete list.
+You can find more details about supported versions [here]({{site.baseurl}}/language-python/#version).
 
 ### GHC version
-
-You can choose from a
-[number of available GHC versions]({{site.baseurl}}/environment/#haskell)
-in your `circle.yml`:
 
 ```
 machine:
   ghc:
-    version: 7.8.3
+  version: 7.8.3
 ```
+
+You can find more details about supported versions [here]({{site.baseurl}}/language-scala/#version).
 
 ### Other languages
 
-Our [test environment]({{site.baseurl}}/environment/) document has more configuration information about
-[other languages]({{site.baseurl}}/environment/#other) including [Python]({{site.baseurl}}/environment/#python),
-[Clojure]({{site.baseurl}}/environment/#clojure), [C/C++]({{site.baseurl}}/environment/#other),
-[Golang]({{site.baseurl}}/environment/#other) and [Erlang]({{site.baseurl}}/environment/#other).
+We also support other languages including Clojure, C/C++, Golang, and Erlang.
+
+Pre-installed versions are different depending on which build image you are using.
+
+Please check out [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise) and [Ubuntu 14.04 build image]({{ site.baseurl }}/build-image-trusty) to find out what versions are supported.
 
 <h3 id="services">Databases and other services</h3>
 
-CircleCI supports a large number of [databases and other services]({{site.baseurl}}/environment/#databases).
+CircleCI supports a large number of databases and other services.
 Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB.
 
 You can enable other databases and services from the `services` section:

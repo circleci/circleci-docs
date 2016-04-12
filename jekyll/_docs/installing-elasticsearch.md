@@ -4,8 +4,7 @@ title: Install a custom version of Elasticsearch
 description: Installing a custom version of Elasticsearch
 ---
 
-CircleCI supports a large number of
-[services](/docs/environment/#databases) which can be enabled from a circle.yml file checked into your repo's root directory. To enable Elasticsearch, add the following to your circle.yml:
+To enable Elasticsearch, add the following to your circle.yml:
 
 ```
 machine:
@@ -13,7 +12,7 @@ machine:
     - elasticsearch
 ```
 
-The default version of elasticsearch is {{ site.data.versions.elasticsearch }}.
+The default version of elasticsearch is {{ site.data.precise.versions.elasticsearch }}.
 If you need a custom version, you can download and start it from your build. To install 1.0.1, add the following to your circle.yml:
 
 ```

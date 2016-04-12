@@ -13,9 +13,9 @@ configuration via a `circle.yml` checked into your repo's root directory.
 
 ### Version
 
-Circle supports more than a dozen [versions of PHP,]({{site.baseurl}}/environment/#php)
-and uses `{{ site.data.versions.default_php }}` as the default. You can set a custom
-version of PHP in the machine section of your circle.yml:
+We have many versions of PHP pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#php) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#php) build images.
+
+If you don't want to use the default, you can specify your version in `circle.yml`:
 
 ```
 machine:
@@ -68,8 +68,7 @@ you'll have to specify your PHP version in your `circle.yml` in order to edit PH
 
 ### Databases
 
-We have pre-installed more than a dozen
-[databases and queues]({{site.baseurl}}/environment/#databases),
+We have pre-installed more than a dozen databases and queues,
 including PostgreSQL and MySQL. If needed, you have the option of
 [manually setting up your test database]({{site.baseurl}}/manually/#dependencies).
 
@@ -124,7 +123,7 @@ test:
     - ./my_testing_script.sh
 ```
 
-If you want CircleCI to show a test summary of your build see 
+If you want CircleCI to show a test summary of your build see
 [Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
 
 <h3 id="xdebug">Enable Xdebug</h3>

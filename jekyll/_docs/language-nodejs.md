@@ -16,10 +16,9 @@ commands that will run after a green build.
 
 ### Version
 
-Circle has [several Node versions]({{ site.baseurl }}/environment/#nodejs)
-pre-installed.
-We use `{{ site.data.versions.default_node }}`
-as our default version. If you'd like a specific version, then you can specify it in your circle.yml:
+We have many versions of NodeJS pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#nodejs) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#nodejs) build images.
+
+If you don't want to use the default, you can specify your version in `circle.yml`:
 
 ```
 machine:
@@ -62,7 +61,7 @@ $NPM_EMAIL
 
 ### Databases
 
-We have pre-installed more than a dozen [databases and queues]({{ site.baseurl }}/environment/#databases),
+We have pre-installed more than a dozen databases and queues,
 including PostgreSQL and MySQL. If needed, you can
 [manually set up your test database]({{ site.baseurl }}/manually/#dependencies) from your circle.yml.
 

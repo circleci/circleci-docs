@@ -1,0 +1,102 @@
+firefox: "44.0"
+chrome: "48.0.2564.97"
+chromedriver: "2.12.301324"
+phantomjs: "2.1.1"
+qt: "5.2.1"
+
+default_ruby: "2.2.4"
+ruby_versions:
+  - "2.0.0-p647"
+  - "2.1.7"
+  - "2.1.8"
+  - "2.2.3"
+  - "2.2.4"
+  - "2.3.0"
+
+default_nodejs: "4.2.6"
+nodejs_versions:
+  - "v0.12.9"
+  - "v4.0.0"
+  - "v4.1.2"
+  - "v4.2.6"
+  - "v4.3.0"
+  - "v5.0.0"
+  - "v5.1.1"
+  - "v5.2.0"
+  - "v5.3.0"
+  - "v5.4.1"
+  - "v5.5.0"
+  - "v5.6.0"
+  - "v5.7.0"
+
+default_python: "2.7.11"
+python_versions:
+  - "2.7.10"
+  - "2.7.11"
+  - "3.1.4"
+  - "3.1.5"
+  - "3.2.5"
+  - "3.2.6"
+  - "3.3.5"
+  - "3.3.6"
+  - "3.4.3"
+  - "3.4.4"
+  - "3.5.0"
+  - "3.5.1"
+  - "pypy-1.9"
+  - "pypy-2.6.1"
+  - "pypy-4.0.1"
+
+default_php: "5.6.17"
+php_versions:
+  - "5.5.31"
+  - "5.5.32"
+  - "5.6.17"
+  - "5.6.18"
+  - "7.0.2"
+  - "7.0.3"
+
+golang: '1.6'
+
+default_java_package: "openjdk-8"
+default_java_version: "1.8.0.40"
+
+gradle: "1.10"
+scala_versions:
+  - "0.13.5"
+  - "0.13.6"
+  - "0.13.7"
+  - "0.13.8"
+  - "0.13.9"
+
+postgresql: "9.4.5"
+mysql: "5.6.28"
+mongodb: "3.0.7"
+riak: "2.1.3"
+cassandra: "3.4"
+redis: "2.8.4"
+memcached: "14.14"
+elasticsearch: "1.7.2"
+beanstalkd: "1.9.2"
+neo4j: "2.3.2"
+rabbitmq: "3.2.44"
+
+git: "2.7.4"
+
+gcc: "4.8"
+g_plusx2: "4.8"
+
+build_essential: "11.6"
+
+android_sdk_packages:
+  - "platform-tools"
+  - "android-23"
+  - "android-22"
+  - "sys-img-armeabi-v7a-android-23"
+  - "sys-img-armeabi-v7a-android-22"
+
+heroku: "3.42.44"
+awscli: "1.10.1t"
+gcloud: "103.0.0"
+docker: "1.9.1"
+docker_compose: "1.5.2"

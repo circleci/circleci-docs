@@ -16,11 +16,7 @@ CircleCI supports building and testing Android applications.
 The SDK is already installed on the VM at `/usr/local/android-sdk-linux`. We export
 this path as `$ANDROID_HOME`.
 
-We have the following SDK packages preinstalled:
-
-{% for version in site.data.versions.android_sdk_packages %}
-- `{{ version }}`
-{% endfor %}
+We have many versions of the Android SDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android-sdk) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android-sdk) build images.
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
@@ -30,6 +26,9 @@ dependencies:
   pre:
     - echo y | android update sdk --no-ui --all --filter "package-name"
 ```
+
+**Note:**
+Only install one package at a time, as `echo y` will only work for one license. If you don't do it this way, android will give you an error message but won't fail and your build continues. This is undesirable since it makes debugging very difficult.
 
 We also preinstall the Android NDK; it can be found at `$ANDROID_NDK`.
 
@@ -101,8 +100,8 @@ test:
 ```
 
 `circleci-android22` is an AVD preinstalled on the machine for Android 22 on the ARM V7 EABI.
-There's also a corresponding `circleci-android21`; alternatively, you can 
-[can create your own][create-avd] if these don't suit your purposes.
+There's also a corresponding `circleci-android21`; alternatively, you can
+[create your own][create-avd] if these don't suit your purposes.
 
 [create-avd]: https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine
 
