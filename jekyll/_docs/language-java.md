@@ -24,7 +24,7 @@ Specifying JDK version only works on Ubuntu 12.04 build image as only `openjdk-8
 ```
 machine:
   java:
-  version: openjdk7
+    version: oraclejdk8
 ```
 
 ### Dependencies & Tests
