@@ -284,7 +284,6 @@ phantomjs: "1.9.8"
 
 android_sdk_packages:
   - "platform-tools"
-  - "build-tools-23.0.2"
   - "build-tools-23.0.1"
   - "build-tools-22.0.1"
   - "build-tools-21.1.2"
