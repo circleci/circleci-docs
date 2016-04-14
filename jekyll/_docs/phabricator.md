@@ -35,9 +35,10 @@ click **Create Build Step**.
 should have a format of a Git remote, for example `git@github.com:circleci/frontend.git` or
 `https://github.com/circleci/frontend`. Arcanist will push to this remote from your local machine,
 so choose the same authentication method you generally use for the project.
-1. In **Herald**, create a rule for **differential revisions**, choose the condition you would like
-to trigger builds on (or just leave it as *Always*), and then select the **Run build plans** action.
-Click **Save rule**.
+1. In **Herald**, create a new rule for **Differential Revisions**. On the next screen, choose the
+option to make it a **Global** rule. Then choose the condition you would like to trigger builds on
+(or just leave it as *Always*), and then select the **Run build plans** action and enter the plan
+you want to run. Click **Save Rule**.
 
 ### Testing the configuration
 
