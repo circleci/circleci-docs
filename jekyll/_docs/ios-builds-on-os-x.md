@@ -34,6 +34,14 @@ After enabling the OS X builds for your project, you will need to share
 the scheme that is going to be built on CircleCI so that we run the
 correct build actions. Here is how to share an existing scheme in Xcode:
 
+1. Choose Product > Scheme > Manage Schemes.
+2. Select the Shared option for the scheme to share, and click Close.
+3. Choose Source Control > Commit.
+4. Select the Shared Data folder.
+5. Enter your commit message in the text field.
+6. Select the "Push to remote" option (if your project is managed with Git).
+7. Click the Commit Files button.
+
 After doing this you will have a new `.xcscheme` file located in the
 `xcshareddata/xcschemes` folder under your Xcode project. You will need to
 commit this file to your git repository so that CircleCI can access it.
@@ -106,7 +114,7 @@ See [customizing your build](#customizing-your-build) for more info.
 
 ## Code signing
 [fastlane](https://fastlane.tools) and [Shenzhen](http://nomad-cli.com/#shenzhen)
-are pre-installed on the container image. It is recommended to use fastlane to 
+are pre-installed on the container image. It is recommended to use fastlane to
 build, sign and distribute your iOS app to beta-testers.
 
 The fastest way to get code signing working on CircleCI is to follow
