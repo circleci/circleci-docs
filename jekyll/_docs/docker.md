@@ -354,3 +354,10 @@ test:
 ```
 
 The similar approach would be required for any other service.
+
+You can add a link (called `db` in the example) to the host like this:
+
+```
+  override:
+    - docker run --add-host db:$(ip addr show docker0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1) web bundle exec rspec
+```
