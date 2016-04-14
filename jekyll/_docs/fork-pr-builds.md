@@ -96,6 +96,6 @@ In the event that you *want* these four categories of configuration to be made a
 to run fork PR builds for private repositories, you need to affirmatively enable it because of these
 security issues.
 
-There is a per-project flag (in Project settings > Build Settings > Advance Settings > Project fork pull requests)
+There is a per-project flag (in Project settings > Build Settings > Advanced Settings > Project fork pull requests)
 which will cause us to run builds of all fork pull requests without suppressing any of the sensitive
 information listed above.
