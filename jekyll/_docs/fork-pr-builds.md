@@ -21,8 +21,8 @@ from otherdev/yourproject under yourorg/yourproject on CircleCI, with some restr
 outlined below.
 
 If yourorg/yourproject is private, we *will not* automatically run builds against pull requests
-from the fork. You can explicitly allow fork PR builds using the advance feature setting on
-yourorg/yourproject at Project settings > Build Settings > Advance Settings > Project, but it will expose
+from the fork. You can explicitly allow fork PR builds using the advanced feature setting on
+_your-org_/_your-project_ at Project settings > Build Settings > Advanced Settings > Project, but it will expose
 sensitive information to the fork developers.
 
 <span class='label label-info'>Note:</span> If otherdev/yourproject is explicitly configured to
