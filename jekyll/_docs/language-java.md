@@ -14,12 +14,9 @@ with a [circle.yml]({{ site.baseurl }}/configuration/) file.
 
 ### Version
 
-We have several versions of JDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#java) an `oraclejdk8` on [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#java) build images.
+We have several versions of JDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#java) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#java) build images.
 
 If you’d like a particular version, you can specify it in your circle.yml.
-
-**Note:**
-Specifying JDK version only works on Ubuntu 12.04 build image as only `oraclejdk8` is pre-installed on Ubuntu 14.04 build image.
 
 ```
 machine:
