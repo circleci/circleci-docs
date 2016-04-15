@@ -58,8 +58,11 @@ php_versions:
 
 golang: '1.6'
 
-default_java_package: "openjdk-8"
-default_java_version: "1.8.0.40"
+default_java_version: "oraclejdk8"
+java_versions:
+  - "oraclejdk8"
+  - "openjdk8"
+  - "openjdk7"
 
 gradle: "1.10"
 scala_versions:
