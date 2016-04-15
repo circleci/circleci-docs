@@ -54,9 +54,13 @@ Pre-installed versions:
 
 ### Java
 
-JDK: `{{ site.data.trusty.versions.default_java_package }}`
+Default: `{{ site.data.trusty.versions.default_java_version }}`
 
-Version: `{{ site.data.trusty.versions.default_java_version }}`
+Pre-installed versions:
+
+{% for version in site.data.trusty.versions.java_versions %}
+- `{{ version }}`
+{% endfor %}
 
 ### Go
 
