@@ -2,7 +2,7 @@
 ---
 
 jQuery(function(){
-	// Initalize lunr with fields it will search on. Title has 
+	// Initalize lunr with fields it will search on. Title has
 	// a boost of 10 to indicate matches on it are more important.
 	window.idx = lunr(function () {
 		this.field('id');
@@ -22,12 +22,12 @@ jQuery(function(){
 		});
 	});
 
-	$("#site-search").submit(function(){
+	$("#site-search").submit(function(event){
 		event.preventDefault(); // disable submitting by clicking enter
 	});
 
 	// Event when the form is submitted
-	$("#site-search input").keyup(function(){
+	$("#site-search input").keyup(function(event){
 		event.preventDefault();
 
 		var query = $("#site-search input").val(); // Get the value for the text field
