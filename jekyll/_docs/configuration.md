@@ -276,7 +276,7 @@ We also support other languages including Clojure, C/C++, Golang, and Erlang.
 
 Pre-installed versions are different depending on which build image you are using.
 
-Please check out [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise) and [Ubuntu 14.04 build image]({{ site.baseurl }}/build-image-trusty) to find out what versions are supported.
+Please check out [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise/) and [Ubuntu 14.04 build image]({{ site.baseurl }}/build-image-trusty/) to find out what versions are supported.
 
 <h3 id="services">Databases and other services</h3>
 

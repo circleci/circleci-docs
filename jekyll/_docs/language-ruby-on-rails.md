@@ -28,7 +28,7 @@ machine:
     version: rbx-2.2.6
 ```
 
-Our [test environment doc]({{site.baseurl}}/language-ruby-on-rails//)
+Our [test environment doc]({{site.baseurl}}/language-ruby-on-rails/)
 covers more details about language versions and tools; it also explains how Circle
 works with testing tools that require a browser.
 
