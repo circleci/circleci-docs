@@ -114,6 +114,10 @@ The total number of nodes across which the current test is running.
 
 The index (0-based) of the current node.
 
+`CIRCLE_BUILD_IMAGE`
+
+The build image this build runs on.
+
 ## Other
 
 There are quite a few other environment variables set. Here are some of
@@ -160,7 +164,7 @@ It's important to note that environment variables configured through
 the UI are exported during the `machine` section of the build.  This
 means you cannot read UI environment variables during the `machine: pre`.
 
-### Per-command environment variables
+## Per-command environment variables
 
 You can set environment variables per-command as well.
 You can use standard bash syntax in your commands:
