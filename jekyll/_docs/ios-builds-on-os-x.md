@@ -66,12 +66,12 @@ customization options.
 
 By default, CircleCI will build your project with Xcode 7.0. You can select 7.1, 7.2 or 7.3.
 by specifying the version in a [circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
-repo. For example, for 7.2, add the following:
+repo. For example, for 7.3, add the following:
 
 ```
 machine:
   xcode:
-    version: 7.2
+    version: 7.3
 ```
 
 ### CocoaPods
@@ -136,34 +136,14 @@ While CircleCI's inferred commands will handle many common testing patterns, you
 also have a lot of flexibility to customize what happens in your build.
 
 ### Build Commands
-CircleCI runs tests from the command line with the [`xctool`](https://github.com/facebook/xctool)
-command by default. We have found that `xctool` is more stable when testing with
-the iOS simulator than using `xcodebuild` directly.
+CircleCI runs tests from the command line with the [`xcodebuild`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html)
+command by default. This is a tool developed by Apple, and we find it to be the most
+stable and functional option for building and testing your OS X project.
 
 CircleCI will try to automatically build your iOS project by infering the
 workspace, project and scheme. In some cases, you may need to override the
 inferred test commands. The following command is representative of how CircleCI
 will build an iOS project:
-
-```
-test:
-  override:
-    - xctool
-      -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      PROVISIONING_PROFILE=
-      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
-      -sdk iphonesimulator
-      -workspace MyWorkspace.xcworkspace
-      -scheme "My Scheme"
-      build build-tests run-tests
-```
-
-In some situations you might also want to build with `xcodebuild` directly. A
-typical `xcodebuild` command line should look like this:
 
 ```
 test:
@@ -180,6 +160,27 @@ test:
         clean build test |
       tee $CIRCLE_ARTIFACTS/xcode_raw.log |
       xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
+```
+
+In some situations you might also want to build with [`xctool`](https://github.com/facebook/xctool),
+an alternative build tool. Please mind that some of the `xcodebuild` functionality might not be
+supported by `xctool`. Here is an example of an `xctool` build command:
+
+```
+test:
+  override:
+    - xctool
+      -reporter pretty
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      PROVISIONING_PROFILE=
+      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
+      -sdk iphonesimulator
+      -workspace MyWorkspace.xcworkspace
+      -scheme "My Scheme"
+      build build-tests run-tests
 ```
 
 ### Environment variables
@@ -442,18 +443,18 @@ machine:
 
 test:
   override:
-    - xctool
-      -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
-      CODE_SIGNING_REQUIRED=NO # no need to do code signing at this point
-      CODE_SIGN_IDENTITY=      # as it will be done in the deployment step
-      PROVISIONING_PROFILE=
-      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
-      -sdk iphonesimulator
-      -workspace MyWorkspace.xcworkspace # your workspace name
-      -scheme "My Scheme" # your scheme name
-      build build-tests run-tests
+    - set -o pipefail &&
+      xcodebuild
+        CODE_SIGNING_REQUIRED=NO # no need to do code signing at this point
+        CODE_SIGN_IDENTITY=      # as it will be done in the deployment step
+        PROVISIONING_PROFILE=
+        -sdk iphonesimulator
+        -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
+        -workspace MyWorkspace.xcworkspace
+        -scheme "My Scheme"
+        clean build test |
+      tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+      xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
 
 deployment:
   beta_distribution: # just a label, can be anything
