@@ -39,14 +39,14 @@ gcloud tool is usually the foundational piece for interacting with these
 environments. For compute engine, you can use:
 
 ```
-gcloud compute copy-files <artifact> <instance_name:path_to_artifact>
+sudo /opt/google-cloud-sdk/bin/gcloud compute copy-files <artifact> <instance_name:path_to_artifact>
 ```
 
 to copy artifacts to your instance. For Container Engine, the gcloud command can download the kubectl command
 
 ```
-gcloud --quiet components update kubectl
-gcloud container clusters get-credentials <your-cluster>
+sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update kubectl
+sudo /opt/google-cloud-sdk/bin/gcloud container clusters get-credentials <your-cluster>
 ```
 
 which can then be used to interact with your Kubernetes cluster.
