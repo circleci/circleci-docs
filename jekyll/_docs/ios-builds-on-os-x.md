@@ -137,7 +137,7 @@ also have a lot of flexibility to customize what happens in your build.
 
 ### Build Commands
 CircleCI runs tests from the command line with the [`xcodebuild`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html)
-command by default. This is a tool developed by Apple, and we found it to be the most
+command by default. This is a tool developed by Apple, and we find it to be the most
 stable and functional option for building and testing your OS X project.
 
 CircleCI will try to automatically build your iOS project by infering the
