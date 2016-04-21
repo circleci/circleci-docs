@@ -12,13 +12,14 @@ the [Overview Page](https://developers.google.com/cloud-test-lab/overview).
 ## Prerequisites
 Before you can use Cloud Test Lab with CircleCI, you need to complete the
 following steps:
+
 1. **Set up gcloud**. Follow the instructions from
 [Using Cloud Test Lab from the Command Line](https://developers.google.com/cloud-test-lab/command-line)
 to create a Google Cloud project, request access to the Cloud Test Lab Beta
 program, and configure your local Google Cloud SDK environment. It's pre-installed on CircleCI, but you'll probably want to have it locally too.
-2. **Create a service account**. Using a service account causes gcloud to treat the user as a program, instead of treating the user as a person. This avoids checks for spam and prevents the account from being blocked or prompted for captchas. To create and activate a service account, follow the instructions for using the
+1. **Create a service account**. Using a service account causes gcloud to treat the user as a program, instead of treating the user as a person. This avoids checks for spam and prevents the account from being blocked or prompted for captchas. To create and activate a service account, follow the instructions for using the
 [gcloud auth activate-service-account command](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account).
-3. **Enable required APIs**. After logging in using the service account: In the
+1. **Enable required APIs**. After logging in using the service account: In the
 [Google Developers Console](https://console.developers.google.com/), enable the
 **Google Cloud Testing API** and **Cloud Tool Results API**. To enable these
 APIs, type these API names into the search box at the top of the console, and
