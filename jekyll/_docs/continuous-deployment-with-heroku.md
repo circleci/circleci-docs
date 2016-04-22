@@ -94,7 +94,7 @@ Note the 'git fetch --unshallow' command; we do shallow clones by default, which
 When you are pushing new code that requires a database migration, your app will not be available.
 To be  polite, you might want to treat your users to more than an enigmatic error page.
 
-Heroku's offers a built-in maintenance mode when you need to disable an app for some period of time.
+Heroku offers a built-in maintenance mode when you need to disable an app for some period of time.
 This mode blocks all HTTP requests and displays a generic HTML page telling users that service is unavailable because of maintenance (more about customizing this 503 error message page below).
 
 You enable maintenance mode with the `heroku maintenance:on` command.
