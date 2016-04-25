@@ -270,6 +270,18 @@ Please don't hesitate to [contact us](mailto:sayhi@circleci.com)
 if you have any questions at all about how to best utilize Docker on
 CircleCI.
 
+> If you need to access Circle CI services, such as mysql or redis, be sure to pass the `--net=host` flag when you run your container. This will allow you to access these services via `localhost` from within your containers.
+
+```
+machine:
+  services:
+    - mysql
+  ...
+  test:
+    override:
+      - docker run --net=host myimage bundle exec rake test
+```
+
 ### Docker Exec
 
 If you try to run `docker exec` in our containers, you'll see an error like
