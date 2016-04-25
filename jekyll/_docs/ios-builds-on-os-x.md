@@ -445,8 +445,8 @@ test:
   override:
     - set -o pipefail &&
       xcodebuild
-        CODE_SIGNING_REQUIRED=NO # no need to do code signing at this point
-        CODE_SIGN_IDENTITY=      # as it will be done in the deployment step
+        CODE_SIGNING_REQUIRED=NO
+        CODE_SIGN_IDENTITY=
         PROVISIONING_PROFILE=
         -sdk iphonesimulator
         -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
