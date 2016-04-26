@@ -286,9 +286,9 @@ To work around this, you can the following command, customized for
 your container name and the command you want to run, using LXC
 directly:
 
-````
+```
 sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' $MY_CONTAINER_NAME)" -- bash -c $MY_COMMAND
-````
+```
 
 ### Caching Docker layers
 
