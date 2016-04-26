@@ -41,23 +41,8 @@ dependencies:
 
 ### npm authentication
 
-If you need to authenticate with `npm` before downloading the
-dependencies, you could store the `npm` credentials in the
-[secure environment
-variables]({{site.baseurl}}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)
-and then use the following script to perform the authentication:
-
-```
-#!/bin/bash
-set -o nounset
-set -o errexit
-
-npm login <<!
-$NPM_USERNAME
-$NPM_PASSWORD
-$NPM_EMAIL
-!
-```
+If you need to authenticate with `npm` before downloading dependencies, 
+instructions are available [here]({{site.baseurl}}/npm-login/).
 
 ### Databases
 
