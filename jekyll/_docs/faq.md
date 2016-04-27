@@ -43,7 +43,7 @@ will automatically stop building it.
 ### Can I send HipChat / Slack / IRC notifications for specific branches only?
 We don’t currently offer this kind of selective notifications, but the
 functionality is in the works. Keep an eye on our
-[changelog](https://circleci.com/changelog) to be notified as soon as
+[changelog](https://circleci.com/changelog/) to be notified as soon as
 this feature is available.
 
 ## Discover CircleCI's Public IP addresses
@@ -99,7 +99,7 @@ dependencies:
 Running Docker 1.5 in our environment requires custom patches, and we
 need to test the patched version thoroughly before making it available
 in our containers. Keep an eye on our
-[changelog](https://circleci.com/changelog) to be notified as soon as
+[changelog](https://circleci.com/changelog/) to be notified as soon as
 Docker 1.5 starts shipping with our build containers by default.
 
 ## Projects
