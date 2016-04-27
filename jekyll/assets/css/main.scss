@@ -71,7 +71,31 @@ div.article-container{
 	padding: 30px 43px 0;
 	width: 75%;
 }
-	article{
+	article{	
+		h2,
+		h3,
+		h4,
+		h5,
+		h6{
+			// &:hover{
+			//	color: black;
+			//	font-weight: 500;
+			//}
+
+			a{
+				padding-left: 5px;
+
+				&:hover{
+					text-decoration: none;
+				}
+			}
+
+			i.fa-link{
+				display: none;
+				font-size: smaller;
+			}
+		}
+
 		h1{
 			font-size: 2.25rem;
 		}
