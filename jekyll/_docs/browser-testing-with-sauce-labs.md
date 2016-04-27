@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Test with Sauce Labs
 categories: [how-to]
-last_updated: July 28, 2014
+last_updated: April 26, 2016
 description: How to test Sauce Labs on Circleci
 ---
 
@@ -16,7 +16,7 @@ then you can use Sauce Labs in the usual way without worrying about Sauce Connec
 This example `circle.yml` file demonstrates how to run browser tests through Sauce Labs
 against a test server running within a CircleCI build container.
 
-```
+```yml
 dependencies:
   post:
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
@@ -24,12 +24,18 @@ dependencies:
 
 test:
   override:
-    - cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY:
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
         background: true
+    # Wait for tunnel to be ready
+    - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
     - python -m hello.hello_app:
         background: true
-    - sleep 60
+    # Wait for app to be ready
+    - curl --retry 10 --retry-delay 2 -v http://localhost:5000
+    # Run selenium tests
     - nosetests
+  post:
+    - killall --wait sc  # wait for Sauce Connect to close the tunnel
 ```
 
 To see the complete example project that goes along with this example, see
