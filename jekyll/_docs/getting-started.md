@@ -17,7 +17,7 @@ The reason it's so easy is that we automatically infer your settings from your c
 We expect you to have a project that roughly follows best practices for your platform.
 If you do, your tests will be up and running in a flash.
 Add
-your [first project](https://circleci.com/dashboard/) now!
+your [first project](https://circleci.com/dashboard) now!
 
 (**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens/))
 
@@ -48,4 +48,4 @@ One of the best things about CircleCI's design is that you have your own account
 
 No matter if you commit to a project only once a month or if a project is just getting started, adding it to CircleCI will help keep it on track.
 Add projects from the
-[dashboard](https://circleci.com/dashboard/).
+[dashboard](https://circleci.com/dashboard).
