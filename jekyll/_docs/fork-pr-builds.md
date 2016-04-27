@@ -44,7 +44,7 @@ There are 5 kinds of configuration data that we would normally use in a build wh
 for builds triggered by pull requests from forks:
 
 1. **Environment variables configured via the web UI**
-   (configured in Project settings > Tweaks > Environment variables)
+   (configured in Project settings > Build Settings > Environment variables)
 
    Non-sensitive environment variables for your project can be set
    in circle.yml; values configured via the web UI are stored encrypted at rest and
