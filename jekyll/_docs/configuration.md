@@ -514,6 +514,11 @@ deployment:
       - ./deploy_master.sh
 ```
 
+***Note*** The `deployment` section doesn't support sub-sections such as `pre` 
+that you might find elsewhere in `circle.yml`. If you get a strange error such 
+as "commands must be a list" when in the `deployment` section, this is likely 
+the issue.
+
 ### Tags
 
 In addition to deploying based on `branch`, you can deploy based on tags.
