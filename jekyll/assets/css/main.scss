@@ -77,11 +77,6 @@ div.article-container{
 		h4,
 		h5,
 		h6{
-			// &:hover{
-			//	color: black;
-			//	font-weight: 500;
-			//}
-
 			a{
 				padding-left: 5px;
 
@@ -93,6 +88,15 @@ div.article-container{
 			i.fa-link{
 				display: none;
 				font-size: smaller;
+			}
+
+			// prevent anchor links from being under the global nav
+			&[id]:before{
+				display: block;
+				content: " ";
+				margin-top: -71px;
+				height: 71px;
+				visibility: hidden;
 			}
 		}
 
