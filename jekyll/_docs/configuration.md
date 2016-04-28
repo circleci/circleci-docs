@@ -546,6 +546,7 @@ deployment:
       - ./deploy_master.sh
 ```
 
+***Note:*** change `owner` from `circleci` to the username or organization that the repo belongs to or your build won't run.
 
 Similar to the `branch` property, the `tag` property can be an exact
 string or regex.  It can also be a list of exact matches or regexes.
