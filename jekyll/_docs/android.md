@@ -24,6 +24,7 @@ installed, you can install it as part of your build with:
 ```
 dependencies:
   pre:
+    - echo y | android update sdk --no-ui --all --filter "tools"
     - echo y | android update sdk --no-ui --all --filter "package-name"
 ```
 
