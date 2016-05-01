@@ -17,7 +17,7 @@ Go to **Project Settings > Parallelism** to adjust the settings.
 When you use CircleCI's parallelization, we run your code on multiple separate VMs.
 To use parallelism, you make your test runner run only a subset of tests on each VM.
 There are two mechanisms for splitting tests among nodes:  Using the `files`
-configuration modifier - a very simply and straightforward way for most use cases, and
+configuration modifier - a very simple and straightforward way for most use cases, and
 using parallelism environment variables - aimed for the more complex scenarios.
 
 ## Using configuration `files` modifier
