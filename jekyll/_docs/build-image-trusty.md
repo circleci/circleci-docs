@@ -220,8 +220,32 @@ machine:
     - beanstalkd
 ```
 
-### Android SDK
+## Android
 
-{% for version in site.data.trusty.versions.android_sdk_packages %}
+### SDK Tools
+
+Version: `{{ site.data.trusty.versions.android_sdk_tool }}`
+
+### SDK Platforms
+
+{% for version in site.data.trusty.versions.android_sdk_platforms %}
+- `{{ version }}`
+{% endfor %}
+
+### SDK Build Tools
+
+{% for version in site.data.trusty.versions.android_sdk_build_tools %}
+- `{{ version }}`
+{% endfor %}
+
+### Emulator Images
+
+{% for version in site.data.trusty.versions.android_sdk_emulator_images %}
+- `{{ version }}`
+{% endfor %}
+
+### Google APIs
+
+{% for version in site.data.trusty.versions.android_sdk_google_apis %}
 - `{{ version }}`
 {% endfor %}
