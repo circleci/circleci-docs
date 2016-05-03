@@ -2,5 +2,5 @@
 layout: classic-category
 title: Languages
 categories: [languages]
-description: Languages
+description: "Supported programming languages on CircleCI."
 ---

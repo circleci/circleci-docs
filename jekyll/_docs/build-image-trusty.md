@@ -2,7 +2,6 @@
 layout: classic-docs
 title: Ubuntu 14.04 (Trusty)
 categories: [build-images]
-last_updated: Feb 5, 2014
 description: Ubuntu 14.04 (Trusty)
 ---
 
