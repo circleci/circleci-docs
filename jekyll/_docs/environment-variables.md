@@ -75,7 +75,7 @@ If this build is part of only one pull request, its URL will be populated here. 
 
 `CIRCLE_ARTIFACTS`
 
-The directory whose contents are automatically saved as [build artifacts](/docs/build-artifacts).
+The directory whose contents are automatically saved as [build artifacts](/docs/build-artifacts/).
 
 `CIRCLE_USERNAME`
 
@@ -83,7 +83,7 @@ The GitHub login of the user who either pushed the code to GitHub or triggered t
 
 `CIRCLE_TEST_REPORTS`
 
-The directory whose contents are automatically processed as [JUnit test metadata](/docs/test-metadata).
+The directory whose contents are automatically processed as [JUnit test metadata](/docs/test-metadata/).
 
 Building pull requests that come from forks
 
@@ -104,7 +104,7 @@ The number of the pull request this build forms part of.
 
 ## Parallelism
 
-These variables are available for [manually setting up parallelism](/docs/parallel-manual-setup):
+These variables are available for [manually setting up parallelism](/docs/parallel-manual-setup/):
 
 `CIRCLE_NODE_TOTAL`
 
