@@ -138,7 +138,11 @@ We also have a number of Ruby commands pre-installed if you need to use them dir
 *   `rspec {{ site.data.precise.versions.rspec }}`
 *   `rake {{ site.data.precise.versions.rake }}`
 
-### node.js
+### Go
+
+Version: `{{ site.data.precise.versions.golang }}`
+
+### Node.js
 
 We use NVM to provide access to a wide range of node versions.
 We currently have a small set of Node versions installed, but any version of Node that you specify in your
