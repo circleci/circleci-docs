@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: Collecting test metadata
+categories: [how-to]
 description: Collecting test metadata 
 last_updated: Feb 17, 2015
 ---
