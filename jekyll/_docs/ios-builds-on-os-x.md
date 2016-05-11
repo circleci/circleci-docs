@@ -20,12 +20,12 @@ versions installed:
   - 7.0 Build version 7A218
   - 7.1.1 Build version 7B1005
   - 7.2.1 Build version 7C1002
-  - 7.3 Build version 7D162j
-- Facebook xctool 0.2.8
+  - 7.3.1 Build version 7D1014
+- Facebook xctool 0.2.9
 - CocoaPods 0.39.0
 - xcpretty 0.2.2
-- fastlane 1.66.0
-- carthage 0.15.0
+- fastlane 1.84.0
+- carthage 0.16.2
 - shenzhen 0.14.2
 
 ## Basic setup
@@ -436,7 +436,7 @@ general:
 
 machine:
   xcode:
-    version: "7.2"
+    version: "7.3"
   environment:
     # please specify your code signing identity name here
     GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
