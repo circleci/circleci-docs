@@ -2,8 +2,7 @@
 layout: classic-docs
 title: Collecting test metadata
 categories: [how-to]
-description: Collecting test metadata 
-last_updated: Feb 17, 2015
+description: Collecting test metadata
 ---
 
 CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
@@ -63,7 +62,7 @@ For custom Cucumber steps, you should generate a file using the JSON formatter t
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - bundle exec cucumber --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+    - bundle exec cucumber --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
 ```
 
 Note that `cucumber` allows for mulitple `--format` items to be present so you can do:
