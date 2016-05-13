@@ -98,11 +98,9 @@ code quality services:
 If you're a [Codecov](https://codecov.io?src=circleci-docs) customer, integration with CircleCI can be as easy as
 
 ```yaml
-deployment:
-  coverage:
-    branch: /.*/
-    commands:
-      - bash <(curl -s https://codecov.io/bash)
+test:
+  post:
+    - bash <(curl -s https://codecov.io/bash)
 ```
 > No upload token is requires for open source repositories on GitHub.
 
