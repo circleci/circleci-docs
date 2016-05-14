@@ -102,7 +102,7 @@ test:
   post:
     - bash <(curl -s https://codecov.io/bash)
 ```
-> No upload token is requires for open source repositories on GitHub.
+> No upload token is required for open source repositories.
 
 Codecov's Bash uploader detects all coverage reports from all
 languages and details for the CircleCI build to create a single,
