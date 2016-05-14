@@ -59,7 +59,7 @@ be added to `circle.keychain`.
 
 ### 1. Install Fastlane tools locally
 This guide assumes that you are developing on a Mac running OS X. The
-first step is to install the Fastlane tools13. If you are using the
+first step is to install the Fastlane tools. If you are using the
 system Ruby, you can install using
 
 ```
