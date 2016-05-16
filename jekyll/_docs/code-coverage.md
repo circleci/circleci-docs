@@ -94,6 +94,24 @@ you can see beautifully rendered HTML in the UI.
 You can easily send coverage results from CircleCI to a number of external
 code quality services:
 
+### Codecov
+If you're a [Codecov](https://codecov.io?src=circleci-docs) customer, integration with CircleCI can be as easy as
+
+```yaml
+test:
+  post:
+    - bash <(curl -s https://codecov.io/bash)
+```
+> No upload token is required for open source repositories.
+
+Codecov's Bash uploader detects all coverage reports from all
+languages and details for the CircleCI build to create a single,
+cohesive coverage report. Codecov will automatically handle the
+merging of coverage stats in parallel builds.
+
+For more information find an example of your language here:
+https://github.com/codecov?query=example
+
 ### Coveralls
 
 If you're a Coveralls customer, follow
