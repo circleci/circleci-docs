@@ -59,7 +59,7 @@ be added to `circle.keychain`.
 
 ### 1. Install Fastlane tools locally
 This guide assumes that you are developing on a Mac running OS X. The
-first step is to install the Fastlane tools13. If you are using the
+first step is to install the Fastlane tools. If you are using the
 system Ruby, you can install using
 
 ```
@@ -98,7 +98,7 @@ this will be different for each project.
 
 The `.certSigningRequest` and `.cer` files are not needed to sign your
 app using CircleCI. You can delete these files if you have no need for
-them. The `.p12` file is the private ket for your code-signing identity.
+them. The `.p12` file is the private key for your code-signing identity.
 
 You can now upload the `.p12` file to your project on CircleCI in
 `Project Settings` > `iOS Code Signing`. When your build runs this `p12`
