@@ -9,85 +9,97 @@ You can run your Linux builds on Ubuntu 14.04 Trusty (default is Ubuntu 12.04). 
 
 Please note that you need to trigger a build by pushing commits to GitHub (instead of rebuilding) to apply the new setting.
 
+## Base
+
+Our base image uses Ubuntu 14.04, with the addition of many packages commonly used in web development.
+
+### Build Image
+
+Version: `{{ site.data.trusty.versions.summary.build-image }}`
+
+### Git
+
+Version: `{{ site.data.trusty.versions.summary.git }}`
+
 ## Programming Languages
 
 ### Python
 
-Default: `{{ site.data.trusty.versions.default_python }}`
+Default: `{{ site.data.trusty.versions.summary.python.default }}`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.python_versions %}
+{% for version in site.data.trusty.versions.summary.python.all %}
 - `{{ version }}`
 {% endfor %}
 
 ### PHP
 
-Default: `{{ site.data.trusty.versions.default_php }}`
+Default: `{{ site.data.trusty.versions.summary.php.default }}`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.php_versions %}
+{% for version in site.data.trusty.versions.summary.php.all %}
 - `{{ version }}`
 {% endfor %}
 
 ### Ruby
 
-Default: `{{ site.data.trusty.versions.default_ruby }}`
+Default: `{{ site.data.trusty.versions.summary.ruby.default }}`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.ruby_versions %}
+{% for version in site.data.trusty.versions.summary.ruby.all %}
 - `{{ version }}`
 {% endfor %}
 
 ### Nodejs
 
-Default: `{{ site.data.trusty.versions.default_nodejs }}`
+Default: `{{ site.data.trusty.versions.summary.nodejs.default }}`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.nodejs_versions %}
+{% for version in site.data.trusty.versions.summary.nodejs.all %}
 - `{{ version }}`
 {% endfor %}
 
 ### Java
 
-Default: `{{ site.data.trusty.versions.default_java_version }}`
+Default: `{{ site.data.trusty.versions.summary.java.default }}`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.java_versions %}
+{% for version in site.data.trusty.versions.summary.java.all %}
 - `{{ version }}`
 {% endfor %}
 
 ### Go
 
-Version: `{{ site.data.trusty.versions.golang }}`
+Version: `{{ site.data.trusty.versions.summary.go }}`
 
 ## Databases
 
 ### MySQL
 
-Version: `{{ site.data.trusty.versions.mysql }}`
+Version: `{{ site.data.trusty.versions.summary.mysql }}`
 
 Started by default: `true`
 
 ### PostgreSQL
 
-Version: `{{ site.data.trusty.versions.postgresql }}`
+Version: `{{ site.data.trusty.versions.summary.psql }}`
 
 Started by default: `true`
 
 ### MongoDB
 
-Version: `{{ site.data.trusty.versions.mongodb }}`
+Version: `{{ site.data.trusty.versions.summary.mongod }}`
 
 Started by default: `true`
 
 ### Redis
 
-Version: `{{ site.data.trusty.versions.redis }}`
+Version: `{{ site.data.trusty.versions.summary.redis }}`
 
 Started by default: `false`
 
@@ -99,7 +111,7 @@ machine:
 
 ### Elasticsearch
 
-Version: `{{ site.data.trusty.versions.elasticsearch }}`
+Version: `{{ site.data.trusty.versions.summary.elasticsearch }}`
 
 Started by default: `false`
 
@@ -111,7 +123,7 @@ machine:
 
 ### Neo4j
 
-Version: `{{ site.data.trusty.versions.neo4j }}`
+Version: `{{ site.data.trusty.versions.all.neo4j }}`
 
 Started by default: `false`
 
@@ -123,7 +135,7 @@ machine:
 
 ### Cassandra
 
-Version: `{{ site.data.trusty.versions.cassandra }}`
+Version: `{{ site.data.trusty.versions.summary.cassandra }}`
 
 Started by default: `false`
 
@@ -135,7 +147,7 @@ machine:
 
 ### Riak
 
-Version: `{{ site.data.trusty.versions.riak }}`
+Version: `{{ site.data.trusty.versions.all.riak }}`
 
 Started by default: `false`
 
@@ -149,7 +161,7 @@ machine:
 
 ### docker-engine
 
-Version: `{{ site.data.trusty.versions.docker }}`
+Version: `{{ site.data.trusty.versions.summary.docker }}`
 
 Started by default: `false`
 
@@ -161,33 +173,33 @@ machine:
 
 ### docker-compose
 
-Version: `{{ site.data.trusty.versions.docker_compose }}`
+Version: `{{ site.data.trusty.versions.summary.docker-compose }}`
 
 ## Browsers
 
 ### Firefox
 
-Version: `{{ site.data.trusty.versions.firefox }}`
+Version: `{{ site.data.trusty.versions.summary.firefox }}`
 
 ### Chrome
 
-Version: `{{ site.data.trusty.versions.chrome }}`
+Version: `{{ site.data.trusty.versions.summary.google-chrome }}`
 
 ### PhantomJS
 
-Version: `{{ site.data.trusty.versions.phantomjs }}`
+Version: `{{ site.data.trusty.versions.summary.phantomjs }}`
 
 ## Misc
 
 ### Qt
 
-Version: `{{ site.data.trusty.versions.qt }}`
+Version: `{{ site.data.trusty.versions.all.qtbase5-dev-tools }}`
 
 ### Memcached
 
 Started by default: `false`
 
-Version: `{{ site.data.trusty.versions.memcached }}`
+Version: `{{ site.data.trusty.versions.all.memcached }}`
 
 ```
 machine:
@@ -197,7 +209,7 @@ machine:
 
 ### RabbitMQ
 
-Version: `{{ site.data.trusty.versions.rabbitmq }}`
+Version: `{{ site.data.trusty.versions.all.rabbitmq-server }}`
 
 Started by default: `false`
 
@@ -209,7 +221,7 @@ machine:
 
 ### Beanstalkd
 
-Version: `{{ site.data.trusty.versions.beanstalkd }}`
+Version: `{{ site.data.trusty.versions.summary.beanstalkd }}`
 
 Started by default: `false`
 
@@ -223,28 +235,48 @@ machine:
 
 ### SDK Tools
 
-Version: `{{ site.data.trusty.versions.android_sdk_tool }}`
+Version: `{{ site.data.trusty.versions.summary.android.build-tool }}`
 
 ### SDK Platforms
 
-{% for version in site.data.trusty.versions.android_sdk_platforms %}
+{% for version in site.data.trusty.versions.summary.android.platforms %}
 - `{{ version }}`
 {% endfor %}
 
 ### SDK Build Tools
 
-{% for version in site.data.trusty.versions.android_sdk_build_tools %}
+{% for version in site.data.trusty.versions.summary.android.build-tools %}
 - `{{ version }}`
 {% endfor %}
 
 ### Emulator Images
 
-{% for version in site.data.trusty.versions.android_sdk_emulator_images %}
+{% for version in site.data.trusty.versions.summary.android.emulator-images %}
 - `{{ version }}`
 {% endfor %}
 
-### Google APIs
+### Add-Ons (Google APIs)
 
-{% for version in site.data.trusty.versions.android_sdk_google_apis %}
+{% for version in site.data.trusty.versions.summary.android.add-ons %}
+- `{{ version }}`
+{% endfor %}
+
+### Android Extra
+
+{% for version in site.data.trusty.versions.summary.android.android-extra %}
+- `{{ version }}`
+{% endfor %}
+
+### Google Extra
+
+{% for version in site.data.trusty.versions.summary.android.google-extra %}
+- `{{ version }}`
+{% endfor %}
+
+## dpkg -l
+
+The following is the output of `dpkg -l` from the latest build image.
+
+{% for version in site.data.trusty.versions.all %}
 - `{{ version }}`
 {% endfor %}
