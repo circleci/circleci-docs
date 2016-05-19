@@ -1,17 +1,17 @@
-firefox: "44.0"
-chrome: "48.0.2564.97"
-chromedriver: "2.12.301324"
+firefox: "46.0"
+chrome: "50.0.2661.102"
+chromedriver: "2.21.371461"
 phantomjs: "2.1.1"
 qt: "5.2.1"
 
 default_ruby: "2.2.4"
 ruby_versions:
-  - "2.0.0-p647"
-  - "2.1.7"
   - "2.1.8"
-  - "2.2.3"
+  - "2.1.9"
   - "2.2.4"
+  - "2.2.5"
   - "2.3.0"
+  - "2.3.1"
 
 default_nodejs: "4.2.6"
 nodejs_versions:
@@ -28,6 +28,7 @@ nodejs_versions:
   - "v5.5.0"
   - "v5.6.0"
   - "v5.7.0"
+  - "v6.1.0"
 
 default_python: "2.7.11"
 python_versions:
@@ -53,10 +54,10 @@ php_versions:
   - "5.5.32"
   - "5.6.17"
   - "5.6.18"
-  - "7.0.2"
   - "7.0.3"
+  - "7.0.4"
 
-golang: '1.6'
+golang: '1.6.2'
 
 default_java_version: "oraclejdk8"
 java_versions:
