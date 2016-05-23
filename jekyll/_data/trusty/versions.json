@@ -1,6 +1,6 @@
 {
   "summary": {
-    "build-image": "trusty-552-350152c",
+    "build-image": "trusty-569-5b00f58",
     "google-chrome": "50.0.2661.102",
     "chromedriver": "2.21.371461",
     "firefox": "46.0.1",
