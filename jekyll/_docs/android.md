@@ -131,6 +131,11 @@ around this: `fb-adb shell` *does* correctly report exit codes. You
 should prefer `fb-adb shell` over `adb shell` in CircleCI builds in
 order to prevent failing commands from being understood as passing.
 
+Some useful `fb-adb shell` commands are:
+- `fb-adb shell input keyevent 82` to unlock the emulator
+- `fb-adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
+  to take a screenshot of the emulator and store it as a build artifact.
+
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
 [fb-adb]:https://github.com/facebook/fb-adb
 
