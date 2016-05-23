@@ -139,6 +139,9 @@ Some useful `fb-adb shell` commands are:
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
 [fb-adb]:https://github.com/facebook/fb-adb
 
+### Gradle output formatting
+
+The standard formatting gradle uses when printing to STDOUT can look quite messy and confusing when reviewing your CircleCI builds. To neaten up the output, add `--console=plain` to your gradle commands. So, for example, `./gradlew dependencies` would become `./gradlew dependencies --console=plain`.
 
 #### Test Metadata
 
