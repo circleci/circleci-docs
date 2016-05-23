@@ -3,7 +3,7 @@ layout: classic-docs
 title: Test Android Applications
 short-title: Android
 categories: [mobile-platforms]
-description: Testing android applications on circleci
+description: Testing Android applications on CircleCI
 ---
 
 
@@ -24,12 +24,14 @@ installed, you can install it as part of your build with:
 ```
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "tools"
     - echo y | android update sdk --no-ui --all --filter "package-name"
 ```
 
 **Note:**
-Only install one package at a time, as `echo y` will only work for one license. If you don't do it this way, android will give you an error message but won't fail and your build continues. This is undesirable since it makes debugging very difficult.
+Only install one package at a time, as `echo y` will only work for one license. 
+If you don't do it this way, Android will give you an error message but won't 
+fail and your build continues. This is undesirable since it makes debugging 
+very difficult.
 
 We also preinstall the Android NDK; it can be found at `$ANDROID_NDK`.
 
@@ -55,7 +57,7 @@ test:
     - cp -r project-name/build/outputs $CIRCLE_ARTIFACTS
 ```
 
-If you start the emulator, you can install your APK on it with something lik
+If you start the emulator, you can install your APK on it with something like 
 the following:
 
 ```
