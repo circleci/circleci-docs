@@ -7,7 +7,6 @@ dependencies:
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
     # We want to expose the version file to public for the reusability
-    - mkdir jekyll/environments
     - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
 
     # https://github.com/jekyll/jekyll/issues/4713
