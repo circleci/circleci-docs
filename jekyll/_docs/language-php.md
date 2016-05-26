@@ -137,7 +137,14 @@ dependencies:
   pre:
     - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
 ```
+If your Build Environment is switched to [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#php) add the following to your
+`circle.yml` file:
 
+```
+dependencies:
+  pre:
+    - sed -i 's/^;//' /opt/circleci/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+```
 ### Deployment
 
 Circle offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
