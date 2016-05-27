@@ -192,7 +192,7 @@ If so, please [contact us](mailto:sayhi@circleci.com).
 CircleCI has the following languages and tools installed:
 
 {% for version in site.data.precise.versions.java_packages %}
-- `{{ version }}`
+- `{{ version.package }}`
 {% endfor %}
 
 *   `ant {{ site.data.precise.versions.ant }}`
