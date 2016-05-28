@@ -25,6 +25,15 @@ machine:
     version: pypy-2.2.1
 ```
 
+If you need to use multiple Python versions simultaneously, you can make them available as follows:
+
+```
+machine:
+  post:
+    - pyenv global 2.7.9 3.4.2
+```
+These will be available as python2.7 and python3.4
+
 Please [contact us](mailto:sayhi@circleci.com) if other versions of Python
 would be of use to you.
 
