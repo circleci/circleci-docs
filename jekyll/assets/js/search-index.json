@@ -2,11 +2,12 @@
 layout: null
 ---
 {
-	{% for doc in site.docs  %}
+	{% for doc in site.docs %}
 		"{{ doc.url | slugify }}":{
 			"title": "{{ doc.title | xml_escape }}",
-			"url": "{{ doc.url | xml_escape }}",
+			"searchable-url": "{{ doc.url | xml_escape }}",
 			"categories": "{{ doc.categories | join: ',' | xml_escape }}",
+			"url": "{{ site.baseurl  }}{{ doc.url | xml_escape }}",
 			"content": {{ doc.content | strip_html | strip_newlines | jsonify }}
 		}
 		{% unless forloop.last %},{% endunless %}
