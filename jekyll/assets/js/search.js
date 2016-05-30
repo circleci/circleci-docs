@@ -6,8 +6,10 @@ jQuery(function(){
 	// a boost of 10 to indicate matches on it are more important.
 	window.idx = lunr(function () {
 		this.field('id');
-		this.field('title', { boost: 10 });
-		this.field('category');
+		this.field('title', { boost: 20 });
+		this.field('category', { boost: 10 });
+		this.field('url', { boost: 5 });
+		this.field('content');
 	});
 
 	// Download the data from the JSON file we generated
@@ -58,7 +60,8 @@ jQuery(function(){
 					$search_results.append(appendString);
 				});
 			}else{
-				$search_results.toggle(false);
+				$search_results.empty();
+				$search_results.append('<li><span>No results found</span></li>');
 			}
 		});
 	}
