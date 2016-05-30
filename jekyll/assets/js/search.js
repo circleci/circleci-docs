@@ -8,7 +8,7 @@ jQuery(function(){
 		this.field('id');
 		this.field('title', { boost: 20 });
 		this.field('category', { boost: 10 });
-		this.field('url', { boost: 5 });
+		this.field('searchable-url', { boost: 5 });
 		this.field('content');
 	});
 
