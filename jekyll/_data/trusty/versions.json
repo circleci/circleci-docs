@@ -5,7 +5,7 @@
     "chromedriver": "2.21.371461",
     "firefox": "46.0.1",
     "mongod": "3.0.7",
-    "psql": "9.5.3",
+    "psql": "9.4.8",
     "mysqld": "5.6.30",
     "ruby": {
       "default": "2.2.4p230",
