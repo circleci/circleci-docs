@@ -12,27 +12,24 @@ Jenkins is a very popular open-source CI tool, so many users that are new to Cir
 CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD (see [High-Level Differences]({{ site.baseurl }}/migrating-from-jenkins/#high-level-differences) below), but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. If you just want to jump in and get started, try one of these three options:
 
 
-<ol>
-<li>**Inference:** Follow your project on CircleCI [link to instructions] and run a build without any custom configuration. CircleCI infers what build and test steps need to be run based on your project’s structure, so everything may work just fine automatically. If the inferred steps mostly work, then you can just add a couple [tweaks]({{ site.baseurl }}/configuration/).</li>
+1. **Inference:** Follow your project on CircleCI [link to instructions] and run a build without any custom configuration. CircleCI infers what build and test steps need to be run based on your project’s structure, so everything may work just fine automatically. If the inferred steps mostly work, then you can just add a couple [tweaks]({{ site.baseurl }}/configuration/). 
 
-<li>**Copy-paste your commands from “Execute Shell”:** If you really want to simply duplicate your project exactly as it is in Jenkins, then you can add a file called `circle.yml` to the root of your project with the following content:
+2. **Copy-paste your commands from “Execute Shell”:** If you really want to simply duplicate your project exactly as it is in Jenkins, then you can add a file called `circle.yml` to the root of your project with the following content:
+    <pre>
+    dependencies:
+      override:
+        - echo "Add any bash commands you want here"
+        - echo "Perform any dependency steps required by your build"
+    test:
+      override:
+        - echo "More arbitrary bash"
+        - echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
+    </pre>
 
-```
-dependencies:
-  override:
-    - echo "Add any bash commands you want here"
-    - echo "Perform any dependency steps required by your build"
-test:
-  override:
-    - echo "More arbitrary bash"
-    - echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
-```
+    Some programs and utilities are [pre-installed on CircleCI]({{ site.baseurl }}/environment/), but anything else required by your build must be installed in the `dependencies` section. Your project’s dependencies will be [cached]({{ site.baseurl }}/how-cache-works) for the next build, so that they only need to be fully downloaded and installed once.
 
-  Some programs and utilities are [pre-installed on CircleCI]({{ site.baseurl }}/environment/), but anything else required by your build must be installed in the `dependencies` section. Your project’s dependencies will be [cached]({{ site.baseurl }}/how-cache-works) for the next build, so that they only need to be fully downloaded and installed once.</li>
+3. **Manual configuration:** If CircleCI’s inference doesn’t work for your project, or if you were using other plugins or options than “Execute Shell” in Jenkins to run your build steps, then you may need to manually port your build from Jenkins. This is usually pretty simple as documented [here]({{ site.baseurl }}/manually/).
 
-
-<li>**Manual configuration:** If CircleCI’s inference doesn’t work for your project, or if you were using other plugins or options than “Execute Shell” in Jenkins to run your build steps, then you may need to manually port your build from Jenkins. This is usually pretty simple as documented [here]({{ site.baseurl }}/manually/).</li>
-</ol>
 
 
 ## High-Level Differences
