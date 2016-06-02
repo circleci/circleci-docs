@@ -81,7 +81,7 @@ Version: `{{ site.data.trusty.versions.summary.go }}`
 
 ### MySQL
 
-Version: `{{ site.data.trusty.versions.summary.mysql }}`
+Version: `{{ site.data.trusty.versions.summary.mysqld }}`
 
 Started by default: `true`
 
