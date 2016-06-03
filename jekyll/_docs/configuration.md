@@ -80,11 +80,12 @@ Note that YAML is very strict about indentation each time you add a new property
 For that reason, modifiers must be indented one level from their command.
 In the following example, we treat the `bundle install`
 command as a key, with `timeout`, `environment`, and `pwd` as the command's hash values.
+This means you will need to add a colon to the end of the command for it to parse correctly.
 
 {% highlight yaml %}
 dependencies:
   override:
-    - bundle install:
+    - bundle install: # note the colon here
         timeout: 240
         environment:
           foo: bar
