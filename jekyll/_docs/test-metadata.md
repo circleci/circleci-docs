@@ -54,7 +54,16 @@ files to the `$CIRCLE_TEST_REPORTS` directory.  We'll automatically store the fi
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
 
-### Cucumber
+### Custom runner examples
+* [Cucumber](#cucumber)
+* [Maven Surefire](#maven-surefire-plugin-for-java-junit-results)
+* [Mocha](#mocha-for-nodejs)
+* [PHPUnit](#phpunit)
+* [RSpec](#rspec)
+* [test2junit](#test2junit-for-clojure-tests)
+
+
+#### Cucumber
 
 For custom Cucumber steps, you should generate a file using the JSON formatter that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
@@ -74,35 +83,7 @@ test:
     - bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
-
-### PHPUnit
-
-For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
-
-```
-test:
-  override:
-    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
-    - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
-```
-
-### RSpec
-
-To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
-
-```
-gem 'rspec_junit_formatter', '0.2.2'
-```
-
-And modify your test command to this:
-
-````
-test:
-  override:
-    - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
-````
-
-### Java JUnit results with Maven Surefire Plugin
+#### Maven Surefire Plugin for Java JUnit results
 
 If you are building a [Gradle](https://gradle.org/) or
 [Maven](http://maven.apache.org/) based project, you are more than likely using
@@ -118,7 +99,50 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 ```
 
-### test2junit for Clojure tests
+#### Mocha for Node.js
+
+To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
+
+A working circle.yml section for testing might look like this:
+
+```
+test:
+  override:
+    - mocha test --reporter mocha-junit-reporter:
+        environment:
+          MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+```
+
+
+
+#### PHPUnit
+
+For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
+
+```
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+    - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
+```
+
+#### RSpec
+
+To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
+
+```
+gem 'rspec_junit_formatter', '0.2.2'
+```
+
+And modify your test command to this:
+
+````
+test:
+  override:
+    - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
+````
+
+#### test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
 
 ## API
