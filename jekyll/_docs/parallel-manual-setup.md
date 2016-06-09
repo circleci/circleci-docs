@@ -132,17 +132,14 @@ A more powerful version evenly splits all test files across N nodes. We recommen
 ```
 #!/bin/bash
 
-i=0
-files=()
-for testfile in $(find ./test -name "*.py" | sort); do
-  if [ $(($i % $CIRCLE_NODE_TOTAL)) -eq $CIRCLE_NODE_INDEX ]
-  then
-    files+=" $testfile"
-  fi
-  ((i=i+1))
-done
+testfiles=$(find ./test -name '*.py' | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
 
-test-runner ${files[@]}
+if [ -z "$testfiles" ]
+then
+    echo "more parallelism than tests"
+else
+    test-runner $testfiles
+fi
 ```
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
