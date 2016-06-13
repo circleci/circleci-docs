@@ -410,7 +410,6 @@ scheme. Instead, you can specify these through [environment variables](#environm
 There are a few features normally available on CircleCI's standard
 Linux containers that are not available for OS X builds at the moment:
 
-* It is not possible yet to SSH into build containers
 * Parallelism is not supported
 * While the general `circle.yml` file structure will be honored in OS X-based builds
 [configuration options]({{ site.baseurl }}/configuration/), the following sections of
