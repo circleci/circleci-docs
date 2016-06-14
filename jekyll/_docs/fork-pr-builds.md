@@ -92,7 +92,7 @@ check out your code for a private repository.
 
 ### Unsafe fork PR builds
 
-In the event that you *want* these four categories of configuration to be made available, or you need
+In the event that you *want* these five categories of configuration to be made available, or you need
 to run fork PR builds for private repositories, you need to affirmatively enable it because of these
 security issues.
 

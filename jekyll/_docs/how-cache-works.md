@@ -55,3 +55,7 @@ dependencies:
   post:
     - rm -r ~/.gradle
 ```
+
+### Caching under parallel builds
+
+The cache is collected from the first container only (container with the index 0). On the next build, the previously collected cache from the node 0 is distributed across all the machines in the parallel build.

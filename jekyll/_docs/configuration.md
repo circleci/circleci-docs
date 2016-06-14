@@ -80,11 +80,12 @@ Note that YAML is very strict about indentation each time you add a new property
 For that reason, modifiers must be indented one level from their command.
 In the following example, we treat the `bundle install`
 command as a key, with `timeout`, `environment`, and `pwd` as the command's hash values.
+This means you will need to add a colon to the end of the command for it to parse correctly.
 
 {% highlight yaml %}
 dependencies:
   override:
-    - bundle install:
+    - bundle install: # note the colon here
         timeout: 240
         environment:
           foo: bar
@@ -514,6 +515,11 @@ deployment:
       - ./deploy_master.sh
 ```
 
+***Note*** The `deployment` section doesn't support sub-sections such as `pre` 
+that you might find elsewhere in `circle.yml`. If you get a strange error such 
+as "commands must be a list" when in the `deployment` section, this is likely 
+the issue.
+
 ### Tags
 
 In addition to deploying based on `branch`, you can deploy based on tags.
@@ -541,6 +547,7 @@ deployment:
       - ./deploy_master.sh
 ```
 
+***Note:*** change `owner` from `circleci` to the username or organization that the repo belongs to or your build won't run.
 
 Similar to the `branch` property, the `tag` property can be an exact
 string or regex.  It can also be a list of exact matches or regexes.

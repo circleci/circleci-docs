@@ -3,17 +3,16 @@ layout: classic-docs
 title: Embeddable status badges
 categories: [reference]
 description: Embeddable status badges
-last_updated: July 30, 2014
 ---
 
 We provide project and branch status images, which you can embed anywhere you want: a GitHub
 README, a dashboard, or anywhere else you can imagine!
 
 Here's our current build status:
-![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)</img>
+![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
 
 The status images are also available in "shield" style:
-![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)</img>
+![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
 
 In the project settings for each of your repositories, there's a "Status Badges" section that can generate code for Markdown, rst, etc.  Or if you want to tweak them manually, how they work is straightforward:
 

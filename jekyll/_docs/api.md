@@ -2,21 +2,19 @@
 layout: classic-docs
 title: CircleCI REST API
 categories: [reference]
-last_updated: Aug 23, 2012
 description: Using circleci rest api  
 ---
 
-<h2 id="intro">The CircleCI API</h2>
+## The CircleCI API {#intro}
 
-The CircleCI API is a RESTy, fully-featured API that allows you to do almost anything in CircleCI.
-You can access all information and trigger all actions.
-The only thing we don't provide access to is billing functions, which must be done from the CircleCI web UI.
-
-<!-- TODO: Custom filter or something for this -->
+The CircleCI API is a RESTful, fully-featured API that allows you to do almost 
+anything in CircleCI. You can access all information and trigger all actions. 
+The only thing we don't provide access to is billing functions, which must be 
+done from the CircleCI web UI.
 
 ## Summary
 
-All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
+All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
 
 <dl>
 <dt>
@@ -76,7 +74,7 @@ All Circle API endpoints begin with `"https://circleci.com/api/v1/"`.
 <dt>
   POST: /project/:username/:project/tree/:branch
 </dt>
-<dd>
+<dd markdown="1">
   Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API]({{ site.baseurl }}/parameterized-builds/).
 </dd>
 <dt>
