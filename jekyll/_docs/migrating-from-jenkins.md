@@ -26,7 +26,7 @@ CircleCI is a very different product from Jenkins with a lot of different concep
         - echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
     </pre>
 
-    Some programs and utilities are [pre-installed on CircleCI]({{ site.baseurl }}/environment/), but anything else required by your build must be installed in the `dependencies` section. Your project’s dependencies will be [cached]({{ site.baseurl }}/how-cache-works) for the next build, so that they only need to be fully downloaded and installed once.
+    Some programs and utilities are [pre-installed on CircleCI]({{ site.baseurl }}/environment/), but anything else required by your build must be installed in the `dependencies` section. Your project’s dependencies will be [cached]({{ site.baseurl }}/how-cache-works/) for the next build, so that they only need to be fully downloaded and installed once.
 
 3. **Manual configuration:** If CircleCI’s inference doesn’t work for your project, or if you were using other plugins or options than “Execute Shell” in Jenkins to run your build steps, then you may need to manually port your build from Jenkins. This is usually pretty simple as documented [here]({{ site.baseurl }}/manually/).
 
