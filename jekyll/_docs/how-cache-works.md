@@ -13,9 +13,7 @@ builds, therefore making the builds run faster.
 
 There are two collections of directories which are cached.
 
-1. The directories which you specify in the `dependencies: cache_directories`
-   section of your `circle.yml`
-2. The directories used by the following languages and dependency managers:
+1. The directories used by the following languages and dependency managers:
 
    - Bower
    - Bundler
@@ -28,6 +26,18 @@ There are two collections of directories which are cached.
    - NPM
    - Play
    - Virtualenv
+
+2. The directories which you specify in the `dependencies: cache_directories`
+   section of your `circle.yml`, like so:
+
+```
+dependencies:
+  # we automatically cache and restore many dependencies between
+  # builds. If you need to, you can add custom paths to cache:
+  cache_directories:
+    - "custom_1"   # relative to the build directory
+    - "~/custom_2" # relative to the user's home directory
+```
 
 ### Per-branch cache
 
