@@ -17,11 +17,11 @@ following steps:
 [Using Cloud Test Lab from the Command Line](https://developers.google.com/cloud-test-lab/command-line)
 to create a Google Cloud project, request access to the Cloud Test Lab Beta
 program, and configure your local Google Cloud SDK environment. It's pre-installed on CircleCI, but you'll probably want to have it locally too.
-1. **Create a service account**. Using a service account causes gcloud to treat the user as a program, instead of treating the user as a person. This avoids checks for spam and prevents the account from being blocked or prompted for captchas. To create and activate a service account, follow the instructions for using the
-[gcloud auth activate-service-account command](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account).
-1. **Enable required APIs**. After logging in using the service account: In the
+1. **Create a service account**. Using a service account causes gcloud to treat the user as a program, instead of treating the user as a person. This avoids checks for spam and prevents the account from being blocked or prompted for captchas. Service accounts are created via the Cloud Console ([doc](https://cloud.google.com/iam/docs/service-accounts)). To activate a service account, follow the instructions for using the
+[`gcloud auth activate-service-account` command](https://cloud.google.com/sdk/gcloud/reference/auth/activate-service-account).
+1. **Enable required APIs**. In the
 [Google Developers Console](https://console.developers.google.com/), enable the
-**Google Cloud Testing API** and **Cloud Tool Results API**. To enable these
+**Google Cloud Testing API** and **Cloud Tool Results API** for the project under test. To enable these
 APIs, type these API names into the search box at the top of the console, and
 then click **Enable API** on the on the overview page for that API.
 
