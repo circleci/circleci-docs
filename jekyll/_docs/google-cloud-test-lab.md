@@ -51,7 +51,7 @@ dependencies:
     - ./gradlew :app:assembleDebug -PdisablePreDex
     - ./gradlew :app:assembleDebugTest -PdisablePreDex
     - echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/client-secret.json
-    - sudo /opt/google-cloud-sdk/bin/gcloud config set project circle-ctl-test
+    - sudo /opt/google-cloud-sdk/bin/gcloud config set project <PROJECT-ID>
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
     - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account <ACCOUNT> --key-file ${HOME}/client-secret.json
