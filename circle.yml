@@ -6,6 +6,9 @@ dependencies:
     # https://github.com/jekyll/jekyll/issues/4122
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
+    # We want to expose the version file to public for the reusability
+    - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
+
     # https://github.com/jekyll/jekyll/issues/4713
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi

@@ -132,12 +132,17 @@ This is installed via RVM (stable).
 We also have a number of Ruby commands pre-installed if you need to use them directly. They use Ruby
 `{{ site.data.precise.versions.default_ruby }}`.
 
+*   `gem {{ site.data.precise.versions.gem }}`
 *   `bundler {{ site.data.precise.versions.bundler }}`
 *   `cucumber {{ site.data.precise.versions.cucumber }}`
 *   `rspec {{ site.data.precise.versions.rspec }}`
 *   `rake {{ site.data.precise.versions.rake }}`
 
-### node.js
+### Go
+
+Version: `{{ site.data.precise.versions.golang }}`
+
+### Node.js
 
 We use NVM to provide access to a wide range of node versions.
 We currently have a small set of Node versions installed, but any version of Node that you specify in your
@@ -187,7 +192,7 @@ If so, please [contact us](mailto:sayhi@circleci.com).
 CircleCI has the following languages and tools installed:
 
 {% for version in site.data.precise.versions.java_packages %}
-- `{{ version }}`
+- `{{ version.package }}`
 {% endfor %}
 
 *   `ant {{ site.data.precise.versions.ant }}`
@@ -320,10 +325,32 @@ machine:
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
 ```
 
-## Android SDK
+## Android
 
-We have the following SDK packages pre-installed:
+### SDK Tool
 
-{% for version in site.data.precise.versions.android_sdk_packages %}
+Version: `{{ site.data.precise.versions.android_sdk_tool }}`
+
+### SDK Platform
+
+{% for version in site.data.precise.versions.android_sdk_platforms %}
+- `{{ version }}`
+{% endfor %}
+
+### Build Tools
+
+{% for version in site.data.precise.versions.android_sdk_build_tools %}
+- `{{ version }}`
+{% endfor %}
+
+### Emulator Images
+
+{% for version in site.data.precise.versions.android_sdk_emulator_images %}
+- `{{ version }}`
+{% endfor %}
+
+### Google APIs
+
+{% for version in site.data.precise.versions.android_sdk_google_apis %}
 - `{{ version }}`
 {% endfor %}

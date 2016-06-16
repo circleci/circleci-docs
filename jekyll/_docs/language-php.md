@@ -6,12 +6,16 @@ categories: [languages]
 description: Continuous Integration and Continuous Deployment with PHP
 ---
 
-Circle works seamlessly with all the tools and package managersthat
+CircleCI works seamlessly with all the tools and package managers that 
 help PHP developers test and deploy their code. We can generally infer
 most of your dependencies and test commands, but we also provide custom
-configuration via a `circle.yml` checked into your repo's root directory.
+configuration via a `circle.yml` file checked into your repo's root directory. 
+The examples here referring to PHP filepaths are for the Ubuntu 14.04 and newer 
+images. This image is not default but can be choosen in Project Settings -> 
+Build Environment. For Ubuntu 12.04, replace `/opt/circleci/php` with 
+`~/.phpenv/versions` in the examples.
 
-### Version
+## Version
 
 We have many versions of PHP pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#php) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#php) build images.
 
@@ -20,13 +24,13 @@ If you don't want to use the default, you can specify your version in `circle.ym
 ```
 machine:
   php:
-    version: 5.5.11
+    version: 7.0.4
 ```
 
 Please [contact us](mailto:sayhi@circleci.com)
 if you need a different version; we'll be happy to install it for you.
 
-### Dependencies
+## Dependencies
 
 Circle has the composer, pear, and pecl package managers installed.
 If we find a composer.json file, then we'll automatically run `composer install`.
@@ -47,7 +51,7 @@ You can also edit your PHP configuration from your `circle.yml`. For example, if
 ```
 dependencies:
   pre:
-    - cp config/custom.ini ~/.phpenv/versions/$(phpenv global)/etc/conf.d/
+    - cp config/custom.ini /opt/circleci/php/$(phpenv global)/etc/conf.d/
 ```
 
 <span class='label label-info'>Note:</span>
@@ -60,7 +64,7 @@ a `.ini` file.
 ```
 dependencies:
   pre:
-    - echo "memory_limit = 64M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - echo "memory_limit = 64M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 ```
 
 <span class='label label-info'>Note:</span>
@@ -72,7 +76,7 @@ We have pre-installed more than a dozen databases and queues,
 including PostgreSQL and MySQL. If needed, you have the option of
 [manually setting up your test database]({{site.baseurl}}/manually/#dependencies).
 
-<h3 id="php-apache">Using the Apache Webserver</h3>
+## Using the Apache Webserver {#php-apache}
 
 Apache2 is already installed on CircleCI containers but it needs to be
 configured to host your PHP application.
@@ -89,7 +93,7 @@ An example configuration that sets up Apache to serve the PHP site from
 Listen 8080
 
 <VirtualHost *:8080>
-  LoadModule php5_module /home/ubuntu/.phpenv/versions/PHP_VERSION/libexec/apache2/libphp5.so
+  LoadModule php5_module /opt/circleci/php/PHP_VERSION/libexec/apache2/libphp5.so
 
   DocumentRoot /home/ubuntu/MY-PROJECT/server-root
   ServerName host.example.com
@@ -113,7 +117,7 @@ dependencies:
     - sudo service apache2 restart
 ```
 
-### Testing
+## Testing
 
 Circle always runs your tests on a fresh machine. If we find a `phpunit.xml` file in your repo, then we'll run `phpunit` for you. You can add custom test commands to the test section of your `circle.yml`:
 
@@ -126,7 +130,7 @@ test:
 If you want CircleCI to show a test summary of your build see
 [Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
 
-<h3 id="xdebug">Enable Xdebug</h3>
+## Enable Xdebug {#xdebug}
 
 Xdebug is installed for all versions of PHP, but is disabled (for performance reasons) by
 default. It is simple to enable this tool by adding the following to your
@@ -135,17 +139,17 @@ default. It is simple to enable this tool by adding the following to your
 ```
 dependencies:
   pre:
-    - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+    - sed -i 's/^;//' /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
 ```
 
-### Deployment
+## Deployment
 
 Circle offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
 When a build is green, Circle will deploy your project as directed
 in your `circle.yml` file. We can deploy to PaaS providers as well as to
 physical servers under your control.
 
-### Troubleshooting for PHP
+## Troubleshooting for PHP
 
 If you run into problems, check out our [PHP troubleshooting]({{site.baseurl}}/troubleshooting-php/)
 write-ups about these issues:

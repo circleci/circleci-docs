@@ -3,7 +3,7 @@ layout: classic-docs
 title: Test Android Applications
 short-title: Android
 categories: [mobile-platforms]
-description: Testing android applications on circleci
+description: Testing Android applications on CircleCI
 ---
 
 
@@ -16,7 +16,7 @@ CircleCI supports building and testing Android applications.
 The SDK is already installed on the VM at `/usr/local/android-sdk-linux`. We export
 this path as `$ANDROID_HOME`.
 
-We have many versions of the Android SDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android-sdk) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android-sdk) build images.
+We have many versions of the Android SDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android) build images.
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
@@ -28,7 +28,10 @@ dependencies:
 ```
 
 **Note:**
-Only install one package at a time, as `echo y` will only work for one license. If you don't do it this way, android will give you an error message but won't fail and your build continues. This is undesirable since it makes debugging very difficult.
+Only install one package at a time, as `echo y` will only work for one license. 
+If you don't do it this way, Android will give you an error message but won't 
+fail and your build continues. This is undesirable since it makes debugging 
+very difficult.
 
 We also preinstall the Android NDK; it can be found at `$ANDROID_NDK`.
 
@@ -54,7 +57,7 @@ test:
     - cp -r project-name/build/outputs $CIRCLE_ARTIFACTS
 ```
 
-If you start the emulator, you can install your APK on it with something lik
+If you start the emulator, you can install your APK on it with something like 
 the following:
 
 ```
@@ -130,9 +133,18 @@ around this: `fb-adb shell` *does* correctly report exit codes. You
 should prefer `fb-adb shell` over `adb shell` in CircleCI builds in
 order to prevent failing commands from being understood as passing.
 
+Some useful `fb-adb shell` commands are:
+
+- `fb-adb shell input keyevent 82` to unlock the emulator
+- `fb-adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
+  to take a screenshot of the emulator and store it as a build artifact.
+
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
 [fb-adb]:https://github.com/facebook/fb-adb
 
+### Gradle output formatting
+
+The standard formatting gradle uses when printing to STDOUT can look quite messy and confusing when reviewing your CircleCI builds. To neaten up the output, add `--console=plain` to your gradle commands. So, for example, `./gradlew dependencies` would become `./gradlew dependencies --console=plain`.
 
 #### Test Metadata
 

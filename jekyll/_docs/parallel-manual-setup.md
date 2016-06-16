@@ -17,7 +17,7 @@ Go to **Project Settings > Parallelism** to adjust the settings.
 When you use CircleCI's parallelization, we run your code on multiple separate VMs.
 To use parallelism, you make your test runner run only a subset of tests on each VM.
 There are two mechanisms for splitting tests among nodes:  Using the `files`
-configuration modifier - a very simply and straightforward way for most use cases, and
+configuration modifier - a very simple and straightforward way for most use cases, and
 using parallelism environment variables - aimed for the more complex scenarios.
 
 ## Using configuration `files` modifier
@@ -132,17 +132,14 @@ A more powerful version evenly splits all test files across N nodes. We recommen
 ```
 #!/bin/bash
 
-i=0
-files=()
-for testfile in $(find ./test -name "*.py" | sort); do
-  if [ $(($i % $CIRCLE_NODE_TOTAL)) -eq $CIRCLE_NODE_INDEX ]
-  then
-    files+=" $testfile"
-  fi
-  ((i=i+1))
-done
+testfiles=$(find ./test -name '*.py' | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
 
-test-runner ${files[@]}
+if [ -z "$testfiles" ]
+then
+    echo "more parallelism than tests"
+else
+    test-runner $testfiles
+fi
 ```
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
