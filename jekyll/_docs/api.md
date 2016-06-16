@@ -210,7 +210,7 @@ The branch name should be url-encoded.
 
 {{ site.data.api.artifacts | api_endpoint }}
 
-<h2 id="build-artifacts">Artifacts of the latest Build</h2>
+<h2 id="build-artifacts-latest">Artifacts of the latest Build</h2>
 
 {{ site.data.api.artifacts_latest | api_endpoint }}
 
