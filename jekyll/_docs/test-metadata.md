@@ -7,8 +7,9 @@ description: Collecting test metadata
 
 CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
 We'll use the test metadata to give you better insight into your build. For our
-inferred steps that use parallelism, we'll use the timing information to get you
-better test splits and finish your builds faster.
+inferred steps that use parallelism, we'll always use the timing information to get you
+better test splits and finish your builds faster. You can also take advantage
+of this runtime-based test splitting in custom steps if you follow [these steps]({{site.baseurl}}/test-metadata/#using-the-files-modifier).
 
 ## Automatic test metadata collection
 
@@ -120,6 +121,16 @@ test:
 
 ### test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
+
+## Using the `files` modifier
+
+If you are collecting test metadata for a custom build step as documented above, you can
+still use runtime-based test splitting with the `files` [modifier]({{site.baseurl}}/configuration/#modifiers).
+This modifier lets will pass a list of filename arguments to the end of your custom command
+which can be used by your test runner to run a subset of test files on each build node.
+If the "file" attribute is populated in the junit-formatted XML metadata for these
+tests, then their runtime data will be used with the `files` modifier to pass a time-weighted
+list of filename args on each build node, ensuring an optimal split of test files across containers.
 
 ## API
 
