@@ -26,7 +26,7 @@ machine:
 
 ### Dependencies & Tests
 
-Circle supports ant, play, gradle, and maven out of the box.
+Circle supports Apache Ant, Play Framework, Gradle, and Apache Maven out of the box.
 Depending on your build tooling, we will infer different commands:
 
 <table class='table'>
@@ -75,7 +75,4 @@ Depending on your build tooling, we will infer different commands:
   </tbody>
 </table>
 
-You can easily customize inferred build commands in your `circle.yml`
-by setting the `override`, `pre`, `post` in the
-[dependencies]({{ site.baseurl }}/configuration/#dependencies) and
-[test]({{ site.baseurl }}/configuration/#test) sections.
+You can easily customize inferred build commands in your `circle.yml` by setting the `override`, `pre`, `post` in the [dependencies]({{ site.baseurl }}/configuration/#dependencies) and [test]({{ site.baseurl }}/configuration/#test) sections.
