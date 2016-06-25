@@ -36,6 +36,9 @@ test:
           - spec/**/*.rb          # or a glob (ruby globs)
 ```
 
+**Note:**
+The `**` pattern matches multiple directory layers with Ruby globs. You can test glob patterns locally with e.g. `ruby -e "puts Dir.glob('**/*.py')"`.
+
 In this example, we will run `bundle exec rspec` in all nodes appended with
 roughly `1/N` of the files on each VM.
 
