@@ -16,7 +16,7 @@ signing support, you would need to do the following:
 2. Add your provisioning profile (`.mobileprovision`) file to your repo.
 3. Set `GYM_CODE_SIGNING_IDENTITY` to match your code-signing identity, i.e.
 `iPhone Distribution: Acme Inc.`.
-4. Build with `gym` and deploy with `ipa`.
+4. Build with [gym](https://fastlane.tools/gym) and deploy with [fastlane](https://fastlane.tools/fastlane).
 
 ## Background: Code Signing Process
 
@@ -198,6 +198,29 @@ deployment:
      commands:
        - gym --scheme "App" --workspace "App.xcworkspace"
 ```
+
+### 6. Distribute the `.ipa` file to your beta testers
+
+Using [fastlane](https://fastlane.tools/fastlane) you can easily distribute the binary to your beta testers right after generating it. If you don't have `fastlane` set up for your project yet, run `fastlane init`.
+
+All you have to add to your `Fastfile`:
+
+```ruby
+lane :beta do
+  sigh
+  gym
+  
+  # You can use any beta testing service below:
+  pilot # (TestFlight)
+  crashlytics
+  hockey
+  s3
+  deploygate
+  ...
+end
+```
+
+`fastlane` will automatically pass on information about the `.ipa` file from `gym` to the beta testing service of your choice, so you don't have to manually provide a path to the `.ipa` and `.dsym` file. 
 
 ## Troubleshooting
 
