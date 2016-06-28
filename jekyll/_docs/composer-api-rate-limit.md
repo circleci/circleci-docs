@@ -31,7 +31,7 @@ repository. You can avoid this version discovery if you commit your
 `composer.lock` into your repo. That tells Composer exactly which package 
 versions to fetch from the custom repository.
 
-Committing your `composer.lock` is also a best practise, even if you don't have 
+Committing your `composer.lock` is also a best practice, even if you don't have 
 this problem. It means your local environment, CircleCI, and your production 
 environment all use the exact same versions of your dependencies. This adds 
 extra confidence to your tests; you're testing exactly the same code that you 
