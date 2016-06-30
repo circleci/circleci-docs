@@ -57,10 +57,10 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 ### Custom runner examples
 * [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
 * [Maven Surefire]({{ site.baseurl }}/test-metadata/#maven-surefire-plugin-for-java-junit-results)
-* [Mocha]({{site.baseurl}}/test-metadata/#mocha)
+* [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
 * [PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit)
 * [RSpec]({{ site.baseurl }}/test-metadata/#rspec)
-* [test2junit]({{ site.baseurl }}}/test-metadata/#test2junit-for-clojure-tests)
+* [test2junit]({{ site.baseurl }}/test-metadata/#test2junit-for-clojure-tests)
 
 
 #### <a name="cucumber"></a>Cucumber
