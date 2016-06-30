@@ -63,7 +63,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [test2junit]({{ site.baseurl }}}/test-metadata/#test2junit-for-clojure-tests)
 
 
-#### <a name="cucumber"></a> Cucumber
+#### <a name="cucumber"></a>Cucumber
 
 For custom Cucumber steps, you should generate a file using the JSON formatter that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
@@ -83,7 +83,7 @@ test:
     - bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
-#### <a name="maven-surefire-plugin-for-java-junit-results"></a> Maven Surefire Plugin for Java JUnit results
+#### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
 
 If you are building a [Gradle](https://gradle.org/) or
 [Maven](http://maven.apache.org/) based project, you are more than likely using
@@ -115,7 +115,7 @@ test:
 
 
 
-#### <a name="phpunit"></a> PHPUnit
+#### <a name="phpunit"></a>PHPUnit
 
 For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
@@ -126,7 +126,7 @@ test:
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
 ```
 
-#### <a name="rspec"></a> RSpec
+#### <a name="rspec"></a>RSpec
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -142,7 +142,7 @@ test:
     - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
 ````
 
-#### <a name="test2junit-for-clojure-tests"></a> test2junit for Clojure tests
+#### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
 
 ## API
