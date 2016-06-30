@@ -99,7 +99,7 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 ```
 
-#### <a name-"mochajs"></a> Mocha for Node.js
+#### <a name-"mochajs"></a>Mocha for Node.js
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
 
