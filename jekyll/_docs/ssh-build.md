@@ -93,6 +93,10 @@ If you're authenticating as the wrong user, you can probably resolve this
 by offering a different ssh key with `ssh -i`. See the next section if
 you need a hand figuring out which key is being offered.
 
+##### Ensure your build started after you added key to github
+
+You won't be able to log in to builds that started before you added your key to github. Even if those builds are still waiting for you to ssh. You have to restart the build.
+
 ##### Ensure that you're offering the correct key to circle
 
 If you've verified that you can authenticate with github as the correct
