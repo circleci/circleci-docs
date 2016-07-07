@@ -55,7 +55,16 @@ files to the `$CIRCLE_TEST_REPORTS` directory.  We'll automatically store the fi
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
 
-### Cucumber
+### Custom runner examples
+* [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
+* [Maven Surefire]({{ site.baseurl }}/test-metadata/#maven-surefire-plugin-for-java-junit-results)
+* [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
+* [PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit)
+* [RSpec]({{ site.baseurl }}/test-metadata/#rspec)
+* [test2junit]({{ site.baseurl }}/test-metadata/#test2junit-for-clojure-tests)
+
+
+#### <a name="cucumber"></a>Cucumber
 
 For custom Cucumber steps, you should generate a file using the JSON formatter that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
@@ -75,8 +84,39 @@ test:
     - bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
+#### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
 
-### PHPUnit
+If you are building a [Gradle](https://gradle.org/) or
+[Maven](http://maven.apache.org/) based project, you are more than likely using
+the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
+to generate test reports in XML format. CircleCI makes it easy to collect these
+reports. You just need to add the followng to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
+project.
+
+```
+test:
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+```
+
+#### <a name="mochajs"></a>Mocha for Node.js
+
+To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
+
+A working [circle.yml]({{ site.baseurl }}/configuration/) section for testing might look like this:
+
+```
+test:
+  override:
+    - mocha test --reporter mocha-junit-reporter:
+        environment:
+          MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+```
+
+
+
+#### <a name="phpunit"></a>PHPUnit
 
 For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
@@ -87,7 +127,7 @@ test:
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
 ```
 
-### RSpec
+#### <a name="rspec"></a>RSpec
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -103,23 +143,7 @@ test:
     - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
 ````
 
-### Java JUnit results with Maven Surefire Plugin
-
-If you are building a [Gradle](https://gradle.org/) or
-[Maven](http://maven.apache.org/) based project, you are more than likely using
-the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
-to generate test reports in XML format. CircleCI makes it easy to collect these
-reports. You just need to add the followng to the `circle.yml` file in your
-project.
-
-```
-test:
-  post:
-    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-```
-
-### test2junit for Clojure tests
+#### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
 
 ## Using the `files` modifier
