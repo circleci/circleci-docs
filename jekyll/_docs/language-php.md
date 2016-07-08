@@ -1,3 +1,4 @@
+
 ---
 layout: classic-docs
 title: Continuous Integration and Continuous Deployment with PHP
@@ -139,7 +140,7 @@ default. It is simple to enable this tool by adding the following to your
 ```
 dependencies:
   pre:
-    - sed -i 's/^;//' /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+    - sed -i 's/^;//' /opt/circleci/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
 ```
 
 ## Deployment
