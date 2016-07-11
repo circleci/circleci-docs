@@ -108,6 +108,7 @@ can use them during the deployment phase.
 dependencies:
   pre:
     #...
+    - sudo service docker start
     - docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
     - docker tag us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 us.gcr.io/${PROJECT_NAME}/hello:latest
 ```
