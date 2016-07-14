@@ -135,9 +135,50 @@ order to prevent failing commands from being understood as passing.
 
 Some useful `fb-adb shell` commands are:
 
-- `fb-adb shell input keyevent 82` to unlock the emulator
 - `fb-adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
   to take a screenshot of the emulator and store it as a build artifact.
+- `fb-adb shell input keyevent 82` to unlock the emulator, but see the
+  next paragraph
+
+
+Whilst the above command can be used to unlock the emulator, the emulator
+could lock if it takes a long time to build the tests. A more thorough
+way of unlocking the emulator is to add the following code to the `setUp`
+junit method of the test class:
+
+```java
+package com.mypackage.espressoTest;
+
+import android.view.WindowManager;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+@RunWith(AndroidJUnit4.class)
+class TestClass {
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+            MainActivity.class);
+
+    @Before
+    public void setUp() {
+        MainActivity activity = mActivityRule.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
+    }
+}
+```
+
+This will wake up the device and try to unlock the screen. If there is a password/pattern lock on the device, then `MainActivity` will get launched on top of the lock screen instead of unlocking the device (how cool is that?).
 
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
 [fb-adb]:https://github.com/facebook/fb-adb
