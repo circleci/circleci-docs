@@ -33,7 +33,7 @@ You can also use `latest` in place of `:build_num` together with query parameter
 For example:
 
 ```
-https://circleci.com/api/v1/project/circleci/mongofinil/latest/artifacts/0/$CIRCLE_ARTIFACTS/cherry-pie.png?branch=master&filter=failed
+https://circleci.com/api/v1/project/circleci/mongofinil/63/artifacts/0/$CIRCLE_ARTIFACTS/hello.txt
 ```
 
 That's all there is to it!
