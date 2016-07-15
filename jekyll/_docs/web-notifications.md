@@ -6,7 +6,7 @@ categories: [reference]
 description: How to activate web notifications for build results
 ---
 
-# Turning On Build Notifications
+## Turning On Build Notifications
 
 Go to your [CircleCI account settings](https://circleci.com/account). If you've
 not yet granted Circle CI permission to send you web notifications, you should see
@@ -19,7 +19,7 @@ screen below. Make sure you click "Allow".
 
 ![]({{ site.baseurl }}/assets/img/docs/notification-allowing.png)
 
-# Turning Notifications Permissions Back On
+## Turning Notifications Permissions Back On
 
 If you've previously denied CircleCI permission to send you web notifications
 then you'll need to turn those permissions on in your browser, as CircleCI can't
