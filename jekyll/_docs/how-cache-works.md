@@ -48,7 +48,7 @@ GitHub (normally `master`) will be used. If there is no cache for
 
 ### Clearing the cache
 
-![]({{ site.baseurl }}/assets/img/docs/ssh-build-button-rebuild.png)
+![]({{ site.baseurl }}/assets/img/docs/cache-build-button-rebuild.png)
 
 The _Rebuild without cache_ button in the UI will disable the cache for
 a single build so that you could debug any problems caused by your
