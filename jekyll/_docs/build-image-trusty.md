@@ -63,15 +63,24 @@ Pre-installed versions:
 - `{{ version }}`
 {% endfor %}
 
+<!--
+Kludge ahead! circle.yml expects abbreviated version name e.g. openjdk8 but
+the actual name on build image is different e.g. openjdk-8-jre.
+Since there is no reliable way to map the name that circle.yml expects and the name
+actually installed correctly, we hardcode versions here.
+-->
+
 ### Java
 
-Default: `{{ site.data.trusty.versions.summary.java.default }}`
+Default: `oraclejdk8`
 
 Pre-installed versions:
 
-{% for version in site.data.trusty.versions.summary.java.all %}
-- `{{ version }}`
-{% endfor %}
+- `oraclejdk8`
+
+- `openjdk8`
+
+- `openjdk7`
 
 ### Go
 
