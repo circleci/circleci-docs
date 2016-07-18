@@ -228,11 +228,11 @@ test:
 
 You can also use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
-### Using custom versions of Cocoapods and other Ruby gems
+### Using custom versions of CocoaPods and other Ruby gems
 
-To make sure the version of Cocoapods that you use locally is also used
+To make sure the version of CocoaPods that you use locally is also used
 in your CircleCI builds, we suggest creating a Gemfile in your iOS
-project and adding the Cocoapods version to it:
+project and adding the CocoaPods version to it:
 
 ```
 source 'https://rubygems.org'
@@ -241,7 +241,7 @@ gem 'cocoapods', '= 0.39.0'
 ```
 
 If we detect a Gemfile in your project we’ll run `bundle install` and
-will then invoke Cocoapods with `bundle exec` prepended to the command.
+will then invoke CocoaPods with `bundle exec` prepended to the command.
 
 Please mind that, if overriding the `dependencies` step, you will need
 to manually add the `bundle install` step to your config.
