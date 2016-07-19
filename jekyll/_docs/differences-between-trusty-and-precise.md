@@ -1,17 +1,18 @@
 ---
 layout: classic-docs
-title: Notable differences between 14.04 vs 12.04
+title: Notable differences between Ubuntu 14.04 and Ubuntu 12.04
+short-title: Differences between Ubuntu 14.04 and 12.04
 categories: [build-images]
-description: Notable differences between 14.04 and 12.04
+description: "Notable differences between Ubuntu 14.04 and Ubuntu 12.04 CircleCI build images."
 ---
 
-Here are notable differences between Ubuntu 14.04 Trusty and Ubutnu 12.04 Precise build images.
+Here are notable differences between Ubuntu 14.04 Trusty and Ubuntu 12.04 Precise build images.
 
 ## Different installation path for Ruby, Python, Nodejs, and PHP
 
-On 12.04, the versions of these languages are installed under the installation path imposed by version manager tool such as RVM and NVM. Normally, this is somewhere under `/home/ubutnu`.
+On 12.04, the versions of these languages are installed under the installation path imposed by the version manager tool such as RVM and NVM. Normally, this is somewhere under `/home/ubuntu`.
 
-On 14.04, we preinstall versions of these languages under `/opt/circleci/<language>`. Here is how the installation path for Ruby looks like.
+On 14.04, we pre-install versions of these languages under `/opt/circleci/<language>`. Here is what the installation path for Ruby looks like:
 
 ```
 ubuntu@box1225:~$ ls -ls /opt/circleci/ruby
@@ -37,10 +38,10 @@ bin       docs          gem-cache  help     lib           man      README     sc
 config    environments  gems       hooks    LICENSE       patches  RELEASE    src      VERSION
 ```
 
-There are two intentions that we changed the installation path on Ubuntu 14.04 build image.
+There are two intentions to why we changed the installation path on Ubuntu 14.04 build image.
 
 - Making directory language installation paths consistent
-- Making `/home/ubuntu` to be clean and dedicated for storing your codes to be built
+- Making `/home/ubuntu` to be clean and dedicated for storing your code to be built
 
 ## Less services are started by default
 
@@ -58,14 +59,14 @@ On 14.04, both tools and creation process of build image are public. Namely, the
 The shell scripts are called by a command `circleci-install` in the main [Dockerfile](https://github.com/circleci/image-builder/blob/master/Dockerfile).
 Whenever we make a new build image, we run a [image-builder build](https://circleci.com/gh/circleci/image-builder) that builds a Docker image and push to our [DockerHub](https://hub.docker.com/r/circleci/build-image/tags/) repository.
 
-[circleci/package-builder](https://github.com/circleci/package-builder) builds different versions of Ruby, Python, Nodejs, and PHP and creates debian packages that are easy to install on image-builder. These packages are then pushed to our [PackageCloud](https://packagecloud.io/circleci/trusty) repository by [package-builder build](https://circleci.com/gh/circleci/package-builder).
+[circleci/package-builder](https://github.com/circleci/package-builder) builds different versions of Ruby, Python, Nodejs, and PHP and creates Debian packages that are easy to install on image-builder. These packages are then pushed to our [PackageCloud](https://packagecloud.io/circleci/trusty) repository by [package-builder build](https://circleci.com/gh/circleci/package-builder).
 
 ## Installing missing version is easier (at least a little bit)
 
-The installation shell scripts of image-builder is installed under `/opt/circleci-provision-scripts` on Ubuntu 14.04 build iamge. This means you can use the same scripts that image-builder is using to
+The installation shell scripts of image-builder is installed under `/opt/circleci-provision-scripts` on Ubuntu 14.04 build image. This means you can use the same scripts that image-builder is using to
 install missing versions on the fly in your build.
 
-For example, if you need to use Ruby 2.2.2 which is not preinstalled, you can put the following into your circle.yml.
+For example, if you need to use Ruby 2.2.2 which is not pre-installed, you can put the following into your `circle.yml`.
 
 ```
 machine:
