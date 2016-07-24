@@ -354,3 +354,11 @@ Version: `{{ site.data.precise.versions.android_sdk_tool }}`
 {% for version in site.data.precise.versions.android_sdk_google_apis %}
 - `{{ version }}`
 {% endfor %}
+
+## dpkg -l
+
+The following is the output of `dpkg -l` from the latest build image.
+
+{% for version in site.data.precise.versions.dpkg-l %}
+- `{{ version }}`
+{% endfor %}
