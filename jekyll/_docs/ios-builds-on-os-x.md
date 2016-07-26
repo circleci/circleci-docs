@@ -281,6 +281,7 @@ deployment:
     commands:
       - gym
       - ipa distribute:hockeyapp
+          --file             /Users/distiller/<yourprojectname>/<yourappname>.ipa
           --token            "$HOCKEY_APP_TOKEN"
           --notes            "CircleCI build $CIRCLE_BUILD_NUM"
           --commit-sha       "$CIRCLE_SHA1"
