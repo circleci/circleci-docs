@@ -24,7 +24,6 @@ We refresh GitHub information once a day to stay within GitHub’s API
 limits, so check your profile page later – it will be right there.
 
 ## Billing & Plans
-
 ### Can I build more than one project if I only have one container?
 Absolutely. In this case the builds will run one at a time, one after
 another.
@@ -34,7 +33,6 @@ If you get everyone who follows the project on CircleCI to unfollow it, we
 will automatically stop building it.
 
 ## Integrations
-
 ### Can I send HipChat / Slack / IRC notifications for specific branches only?
 We don’t currently offer this kind of selective notifications, but the
 functionality is in the works. Keep an eye on our
@@ -42,7 +40,6 @@ functionality is in the works. Keep an eye on our
 this feature is available.
 
 ## Discover CircleCI's Public IP addresses
-
 Currently CircleCI runs on multiple AWS Regions and utilizes many different
 servers to perform the builds. As such there isn't a single IP, or even a small
 range of IPs, that could be used to help identify that an incoming request is
@@ -53,7 +50,6 @@ we have thousands of builds running at any one time so multiple project's
 builds could all be making requests from the same IP address.
 
 ## Projects
-
 ### How can I delete my project?
 You just need to unfollow the project in the project setting page. Once the last follower has stopped following the project, CircleCI will stop building.
 Please [contact us](mailto:sayhi@circleci.com) us if you want to purge the project data from our database.
