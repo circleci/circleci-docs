@@ -9,11 +9,9 @@ description: Frequently Asked Questions
 ## Authentication
 
 ### Do you support BitBucket or GitLab?
-Currently we only support authentication with GitHub, sorry about that.
+Currently we support authentication with GitHub and Bitbucket. We do look at feature requests on [discuss](https://discuss.circleci.com/) if you want to voice your concern!
 
-### I can’t give CircleCI the access to all my private repositories.
-
-### What do I do?
+### I can’t give CircleCI the access to all my private repositories. What do I do?
 GitHub has only recently added the fine-grained permissions options, and
 we are still working on supporting them.
 
@@ -21,15 +19,12 @@ In the meantime, the suggested workaround is to create an additional
 user on GitHub with a limited set of permissions and use that account to
 perform the builds on CircleCI.
 
-### I updated my email address on GitHub, and it does not show up on
-
-### CircleCI
+### I updated my email address on GitHub, and it does not show up on CircleCI
 We refresh GitHub information once a day to stay within GitHub’s API
 limits, so check your profile page later – it will be right there.
 
 ## Billing & Plans
-
-### Can I build more than one project if I only have one container?
+Can I build more than one project if I only have one container?
 Absolutely. In this case the builds will run one at a time, one after
 another.
 
