@@ -187,7 +187,7 @@ If you prefer to receive compact JSON with no whitespace or comments, add the `"
 Using `curl`:
 
 ```
-curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/json"
+curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
 ```
 
 ## User
@@ -209,7 +209,7 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 
 You can narrow the builds to a single branch by appending /tree/:branch to the url:
-`https://circleci.com/api/v1/project/:username/:project/tree/:branch`
+`https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch`
 
 The branch name should be url-encoded.
 
@@ -232,7 +232,7 @@ The branch name should be url-encoded.
 {{ site.data.api.retry_build | api_endpoint }}
 
 You can retry a build with ssh by swapping "retry" with "ssh":
-`https://circleci.com/api/v1/project/:username/:project/:build_num/ssh`
+`https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh`
 
 <h2 id="add-user-ssh">Add User to Build</h2>
 
