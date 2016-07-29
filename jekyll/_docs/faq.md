@@ -9,7 +9,7 @@ description: Frequently Asked Questions
 ## Authentication
 
 ### Do you support BitBucket or GitLab?
-Currently we support authentication with GitHub and Bitbucket. We do look at feature requests on [Discuss](https://discuss.circleci.com/) if you want to voice your concern!
+Currently we support authentication with GitHub and Bitbucket. We do look at feature requests on [Discuss](https://discuss.circleci.com/) if you want to support other version control systems.
 
 ### I can’t give CircleCI the access to all my private repositories. What do I do?
 GitHub has only recently added the fine-grained permissions options, and
