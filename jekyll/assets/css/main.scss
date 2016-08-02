@@ -121,7 +121,17 @@ div.article-container{
 		}
 
 		img{
+			margin: 15px 0;
 			max-width: 100%;
+		}
+
+		span.align-center{
+			display: block;
+			text-align: center;
+
+			img{
+				max-width: 90%;
+			}
 		}
 
 		.embed-responsive{
@@ -135,6 +145,13 @@ div.article-container{
 			text-align: center;
 			font-size: smaller;
 		}
+	}
+
+div.align-center{
+}
+	div.align-center img{
+		max-width: 90%;
+		text-align: center;
 	}
 
 
