@@ -84,7 +84,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   Create an ssh key used to access external systems that require SSH key-based authentication
 </dd>
 <dt>
-  GET: /project/::vcs-type/:username/:project/checkout-key
+  GET: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
   Lists checkout keys.
