@@ -132,11 +132,11 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
 2.  To test it,
-    [View it in your browser](https://circleci.com/api/v1/me)
+    [View it in your browser](https://circleci.com/api/v1.1/me)
     or call the API using `curl`:
 
     ```
-$ curl https://circleci.com/api/v1/me?circle-token=:token
+$ curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
 
 3.  You should see a response like the following:
@@ -156,7 +156,7 @@ $ curl https://circleci.com/api/v1/me?circle-token=:token
 <h2 id="calling">Making calls</h2>
 
 All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
-All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
+All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 ## Authentication
 
@@ -164,10 +164,9 @@ To authenticate, add an API token using your [account dashboard](https://circlec
 `circle-token` query param, like so:
 
 ```
-curl https://circleci.com/api/v1/me?circle-token=:token
+curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
-##
-Version Control System (:vcs-type)
+## Version Control System (:vcs-type)
 
 New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCi what version control system type your project uses. Current choices are 'github' or 'bitbucket'. The command for recent builds for a project would be formatted like so:
 
@@ -175,8 +174,7 @@ New with v1.1 of the api, for endpoints under /project you will now need to tell
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 ```
 
-##
-F/OSS
+## F/OSS
 
 If you have a Free / Open Source Software ([F/OSS](https://www.gnu.org/philosophy/free-sw.html)) project, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
