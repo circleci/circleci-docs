@@ -18,9 +18,9 @@ Docs.
 
 <span class="align-center">![]({{site.baseurl}}/assets/img/docs/aws-permissions.png)</span>
 
-It is suggested to create a new [IAM][iam-link] user specifically for CircleCI 
-for security reasons. You can also authenticate with `awscli` using other 
-support methods such as environment variables, "profile" files, etc.
+Create a new [IAM][iam-link] user specifically for CircleCI. This is best 
+practice for security purposes. You can also authenticate with `awscli` using 
+other support methods such as environment variables, "profile" files, etc.
 
 ## Deployment
 
