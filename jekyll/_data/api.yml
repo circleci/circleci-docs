@@ -1,6 +1,6 @@
 me:
   try_it: true
-  url: "/api/v1/me"
+  url: "/api/v1.1/me"
   description: "Provides information about the signed in user."
   method: "GET"
   response: |
@@ -11,7 +11,7 @@ me:
 
 projects:
   try_it: true
-  url: "/api/v1/projects"
+  url: "/api/v1.1/projects"
   description: "List of all the projects you're following on CircleCI, with build information organized by branch."
   method: "GET"
   response: |
@@ -53,7 +53,7 @@ projects:
     }, ... ]
 
 project:
-  url: "/api/v1/project/:username/:project"
+  url: "/api/v1.1/project/:vcs-type/:username/:project"
   description: "Build summary for each of the last 30 builds for a single git repo."
   method: "GET"
   params:
@@ -90,7 +90,7 @@ project:
 
 recent_builds:
   try_it: true
-  url: "/api/v1/recent-builds"
+  url: "/api/v1.1/recent-builds"
   description: "Build summary for each of the last 30 recent builds, ordered by build_num."
   method: "GET"
   params:
@@ -126,7 +126,7 @@ recent_builds:
       }, ... ]
 
 build:
-  url: "/api/v1/project/:username/:project/:build_num"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num"
   description: "Full details for a single build. The response includes all of the fields from the build summary."
   method: "GET"
   response: |
@@ -206,7 +206,7 @@ build:
     }
 
 artifacts:
-  url: "/api/v1/project/:username/:project/:build_num/artifacts"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts"
   description: "List the artifacts produced by a given build."
   method: "GET"
   response: |
@@ -226,7 +226,7 @@ artifacts:
     ]
 
 artifacts_latest:
-  url: "/api/v1/project/:username/:project/latest/artifacts"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts"
   description: "List the artifacts produced by the latest build on a given branch."
   method: "GET"
   params:
@@ -247,7 +247,7 @@ artifacts_latest:
     }]
 
 retry_build:
-  url: "/api/v1/project/:username/:project/:build_num/retry"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry"
   description: "Retries the build, returns a summary of the new build."
   method: "POST"
   response: |
@@ -280,7 +280,7 @@ retry_build:
     }
 
 cancel_build:
-  url: "/api/v1/project/:username/:project/:build_num/cancel"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/cancel"
   description: "Cancels the build, returns a summary of the build."
   method: "POST"
   response: |
@@ -316,7 +316,7 @@ cancel_build:
 
 add_user_ssh:
   try_it: false
-  url: "/api/v1/project/:username/:project/:build_num/ssh-users"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users"
   method: "POST"
   description: |
     Only available when using a user API token.  If the current user has
@@ -326,7 +326,7 @@ add_user_ssh:
   response: '{... the build data ... }'
 
 project_branch:
-  url: "/api/v1/project/:username/:project/tree/:branch"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/tree/:branch"
   description: "Triggers a new build, returns a summary of the build."
   method: "POST"
   params:
@@ -414,7 +414,7 @@ project_branch:
     }
 
 project_build_cache:
-  url: "/api/v1/project/:username/:project/build-cache"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/build-cache"
   description: "Clears the cache for a project"
   method: "DELETE"
   response: |
@@ -432,14 +432,14 @@ project_build_cache:
 
 list_environment_variables:
   try_it: false
-  url: "/api/v1/project/:username/:project/envvar"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/envvar"
   method: "GET"
   description: "Lists the environment variables for :project"
   response: '[{"name":"foo","value":"xxxx"}]'
 
 add_environment_variable:
   try_it: false
-  url: "/api/v1/project/:username/:project/envvar"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/envvar"
   method: "POST"
   description: "Creates a new environment variable"
   body: '{"name":"foo", "value":"bar"}'
@@ -447,21 +447,21 @@ add_environment_variable:
 
 get_environment_variable:
   try_it: false
-  url: "/api/v1/project/:username/:project/envvar/:name"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/envvar/:name"
   method: "GET"
   description: "Gets the hidden value of environment variable :name"
   response: '{"name":"foo","value":"xxxx"}'
 
 delete_environment_variable:
   try_it: false
-  url: "/api/v1/project/:username/:project/envvar/:name"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/envvar/:name"
   method: "DELETE"
   description: "Deletes the environment variable named ':name'"
   response: '{"message":"ok"}'
 
 list_checkout_keys:
   try_it: false
-  url: "/api/v1/project/:username/:project/checkout-key"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key"
   method: "GET"
   description: "Lists the checkout keys for :project"
   response: |
@@ -474,7 +474,7 @@ list_checkout_keys:
 
 new_checkout_key:
   try_it: false
-  url: "/api/v1/project/:username/:project/checkout-key"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key"
   method: "POST"
   description: "Creates a new checkout key. Only usable with a user API token."
   body: '{"type":"github-user-key"}'
@@ -491,7 +491,7 @@ new_checkout_key:
 
 get_checkout_key:
   try_it: false
-  url: "/api/v1/project/:username/:project/checkout-key/:fingerprint"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint"
   method: "GET"
   description: "Gets the checkout key"
   response: |
@@ -505,14 +505,14 @@ get_checkout_key:
 
 delete_checkout_key:
   try_it: false
-  url: "/api/v1/project/:username/:project/checkout-key/:fingerprint"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint"
   method: "DELETE"
   description: "Deletes the checkout key"
   response: '{"message":"ok"}'
 
 test_metadata:
   try_it: false
-  url: "/api/v1/project/:username/:project/:build_num/tests"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/tests"
   description: "Provides test metadata for a build"
   method: "GET"
   response: |
@@ -538,14 +538,14 @@ test_metadata:
 
 
 ssh_key:
-  url: "/api/v1/project/:username/:project/ssh-key"
+  url: "/api/v1.1/project/:vcs-type/:username/:project/ssh-key"
   description: "Creates an ssh key that will be used to access the external system identified by the hostname parameter for SSH key-based authentication."
   method: "POST"
   body: '{"hostname":"hostname","private_key":"RSA private key"}'
   response: " "
 
 project_post:
-  url: "/api/v1/project/:username/:project"
+  url: "/api/v1.1/project/:vcs-type/:username/:project"
   description: "Triggers a new build, returns a summary of the build."
   method: "POST"
   params:

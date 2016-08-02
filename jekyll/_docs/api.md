@@ -14,7 +14,7 @@ done from the CircleCI web UI.
 
 ## Summary
 
-All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
+All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 <dl>
 <dt>
@@ -30,7 +30,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
   List of all the projects you're following on CircleCI, with build information organized by branch.
 </dd>
 <dt>
-  GET: /project/:username/:project
+  GET: /project/:vcs-type/:username/:project
 </dt>
 <dd>
   Build summary for each of the last 30 builds for a single git repo.
@@ -42,74 +42,74 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1/"`.
   Build summary for each of the last 30 recent builds, ordered by build_num.
 </dd>
 <dt>
-  GET: /project/:username/:project/:build_num
+  GET: /project/:vcs-type/:username/:project/:build_num
 </dt>
 <dd>
   Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration/#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
-  GET: /project/:username/:project/:build_num/artifacts
+  GET: /project/:vcs-type/:username/:project/:build_num/artifacts
 </dt>
 <dd>
   List the artifacts produced by a given build.
 </dd>
 <dt>
-  POST: /project/:username/:project/:build_num/retry
+  POST: /project/:vcs-type/:username/:project/:build_num/retry
 </dt>
 <dd>
   Retries the build, returns a summary of the new build.
 </dd>
 <dt>
-  POST: /project/:username/:project/:build_num/cancel
+  POST: /project/:vcs-type/:username/:project/:build_num/cancel
 </dt>
 <dd>
   Cancels the build, returns a summary of the build.
 </dd>
 <dt>
-  POST: /project/:username/:project/:build_num/ssh-users
+  POST: /project/:vcs-type/:username/:project/:build_num/ssh-users
 </dt>
 <dd>
   Adds a user to the build's SSH permissions.
 </dd>
 <dt>
-  POST: /project/:username/:project/tree/:branch
+  POST: /project/:vcs-type/:username/:project/tree/:branch
 </dt>
 <dd markdown="1">
   Triggers a new build, returns a summary of the build. [Optional build parameters can be set using an experimental API]({{ site.baseurl }}/parameterized-builds/).
 </dd>
 <dt>
-  POST: /project/:username/:project/ssh-key
+  POST: /project/:vcs-type/:username/:project/ssh-key
 </dt>
 <dd>
   Create an ssh key used to access external systems that require SSH key-based authentication
 </dd>
 <dt>
-  GET: /project/:username/:project/checkout-key
+  GET: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
   Lists checkout keys.
 </dd>
 <dt>
-  POST: /project/:username/:project/checkout-key
+  POST: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
   Create a new checkout key.
 </dd>
 <dt>
-  GET: /project/:username/:project/checkout-key/:fingerprint
+  GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>
   Get a checkout key.
 </dd>
 <dt>
-  DELETE: /project/:username/:project/checkout-key/:fingerprint
+  DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>
   Delete a checkout key.
 </dd>
 
 <dt>
-  DELETE: /project/:username/:project/build-cache
+  DELETE: /project/:vcs-type/:username/:project/build-cache
 </dt>
 <dd>
   Clears the cache for a project.
@@ -166,6 +166,19 @@ To authenticate, add an API token using your [account dashboard](https://circlec
 ```
 curl https://circleci.com/api/v1/me?circle-token=:token
 ```
+##
+Version Control System (:vcs-type)
+
+New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCi what version control system type your project uses. Current choices are 'github' or 'bitbucket'. The command for recent builds for a project would be formatted like so:
+
+```
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
+```
+
+##
+F/OSS
+
+If you have a Free / Open Source Software ([F/OSS](https://www.gnu.org/philosophy/free-sw.html)) project, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
 ## Accept header
 
@@ -174,7 +187,7 @@ If you prefer to receive compact JSON with no whitespace or comments, add the `"
 Using `curl`:
 
 ```
-curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/json"
+curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
 ```
 
 ## User
@@ -196,7 +209,7 @@ curl https://circleci.com/api/v1/me?circle-token=:token -H "Accept: application/
 <h2 id="recent-builds-project-branch">Recent Builds For a Project Branch</h2>
 
 You can narrow the builds to a single branch by appending /tree/:branch to the url:
-`https://circleci.com/api/v1/project/:username/:project/tree/:branch`
+`https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch`
 
 The branch name should be url-encoded.
 
@@ -219,7 +232,7 @@ The branch name should be url-encoded.
 {{ site.data.api.retry_build | api_endpoint }}
 
 You can retry a build with ssh by swapping "retry" with "ssh":
-`https://circleci.com/api/v1/project/:username/:project/:build_num/ssh`
+`https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh`
 
 <h2 id="add-user-ssh">Add User to Build</h2>
 
