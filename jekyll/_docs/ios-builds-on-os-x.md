@@ -28,6 +28,47 @@ versions installed:
 - carthage 0.16.2
 - shenzhen 0.14.2
 
+## Simulator UUIDs
+
+When targeting a specific iOS simulator with the `-destination` flag, we suggest that you use one of these UUIDs instead of a combination of `-destination 'platform= , name='`.
+
+```
+distiller-build-8:~ distiller$ xcrun instruments -s
+Known Devices:
+distiller-build-1 (2) [564D9991-8876-86A0-7497-2C2D8B529CBD]
+Apple TV 1080p (9.2) [CFB6004F-16F9-49B4-A117-CAFBCC0CE7CB] (Simulator)
+iPad 2 (8.4) [A4276BA9-2D38-434D-A063-A1A7DC399235] (Simulator)
+iPad 2 (9.0) [2F39BEF2-E92D-498C-B2D9-29366BD8F732] (Simulator)
+iPad 2 (9.3) [101B434D-924B-4C7E-B8C1-ED8B376BF7CA] (Simulator)
+iPad Air (8.4) [AD005E41-F7E6-4C5F-B3B1-6C980E834739] (Simulator)
+iPad Air (9.0) [42D87249-99F2-4BC1-9180-317D268C46F7] (Simulator)
+iPad Air (9.3) [72F9B9E8-DC05-4450-B030-407D4B0968D9] (Simulator)
+iPad Air 2 (9.0) [6E2B1E19-6466-4328-917C-16019130FDE8] (Simulator)
+iPad Air 2 (9.3) [A141F49D-F20A-49B3-ACBF-A97F9FFB9B89] (Simulator)
+iPad Retina (8.4) [399AEF36-5560-4C4A-AE61-03F0A81555D0] (Simulator)
+iPad Retina (9.0) [A1EC86BA-49AB-414B-9C27-2D0F26A34A81] (Simulator)
+iPad Retina (9.3) [A70FE3C7-756F-44BF-BE46-68663FAE2EE3] (Simulator)
+iPhone 4s (8.4) [F2E9EEAB-9FCE-4109-A40F-3DD79627C985] (Simulator)
+iPhone 4s (9.0) [5EF3DECC-3E8F-41A0-B2CF-DC384A66E12E] (Simulator)
+iPhone 4s (9.3) [8538CCCC-80FB-4B6B-9281-222771C38FEB] (Simulator)
+iPhone 5 (8.4) [C5C8EA0E-F5A8-4AF8-BBAA-385B61026A5E] (Simulator)
+iPhone 5 (9.0) [24F6F5A0-343E-4C64-9F4C-B50D88F5E99E] (Simulator)
+iPhone 5 (9.3) [075FB8BA-F088-4A16-89CF-4EA36BC25E7A] (Simulator)
+iPhone 5s (8.4) [45BFA4E8-C0A9-4A04-9CD0-4449FE4CF40B] (Simulator)
+iPhone 5s (9.0) [49DAC9E5-C129-497D-853E-D93BC4BB8A10] (Simulator)
+iPhone 5s (9.3) [3011ED5C-C63A-42E6-9D91-82A39DE4AD06] (Simulator)
+iPhone 6 (8.4) [65AAA024-64D5-40B9-A122-8872E3F52EC4] (Simulator)
+iPhone 6 (9.0) [53600017-30F1-428A-A16A-25C6CEDBD849] (Simulator)
+iPhone 6 (9.3) [547B1B63-3F66-4E5B-8001-F78F2F1CDEA7] (Simulator)
+iPhone 6 Plus (8.4) [DFB14113-4697-4E2D-AD3F-B4FBA4B62969] (Simulator)
+iPhone 6 Plus (9.0) [321D1CF5-2514-4897-8B09-C133602F6DB5] (Simulator)
+iPhone 6 Plus (9.3) [C63728B8-89B5-4FFB-8B6E-174A2F85B47F] (Simulator)
+iPhone 6s (9.0) [763DC427-F2C5-4AA4-989F-2CA944FA8F04] (Simulator)
+iPhone 6s (9.3) [E8DD285C-51EE-4DB5-B326-7E927686EC36] (Simulator)
+iPhone 6s Plus (9.0) [011805C3-BB7A-4785-A313-D7AD2AF6DE49] (Simulator)
+iPhone 6s Plus (9.3) [019CFBB0-0086-44A7-AA41-D39182D9CE01] (Simulator)
+```
+
 ## Basic setup
 
 After enabling the OS X builds for your project, you will need to share
