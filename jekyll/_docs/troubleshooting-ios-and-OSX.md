@@ -26,4 +26,4 @@ dependencies:
 
 This will launch the simulator just like it would if you'd hit `CMD + R` on your machine in Xcode, and once your tests are supposed to start the iOS simulator is immediately available.
 
-A full list of UUIDs for iOS simulators is available [here]({{site.baseurl}}/docs/ios-builds-on-os-x/).
+A full list of UUIDs for iOS simulators is available [here]({{site.baseurl}}ios-builds-on-os-x/).
