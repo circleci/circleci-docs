@@ -5,9 +5,6 @@ description: Parameterized Builds
 last_updated: May 22, 2014
 ---
 
-The Parameterized Build API is currently available as an early-access preview.
-The API and functionality may change based on what we learn from your feedback.
-
 The Parameterized Build API allows you to trigger a build using the
 [CircleCI API]({{ site.baseurl }}/api/)
 and inject environment variables which are made available within the containers that run the build.
@@ -21,9 +18,7 @@ For instance, you may have a build with a deploy step to a staging environment:
 
 Build parameters allow you to use your functional test build against different targets on each run.
 
-The current implementation is intentionally basic, the idea is to find out what you build and how you would like to build it so we can iterate quickly before stabilizing the API.
-As such, either the API or how parameters are exposed during a build could change during the early-access period.
-We'll communicate any changes before rolling them out.
+The current implementation is intentionally basic, we welcome feedback if there is added functionality you would like to see.
 
 Note: all the examples use `bash` and `curl` but there is nothing to stop you using your favourite HTTP library in your language of choice.
 
@@ -101,7 +96,3 @@ Build parameters are exported as environment variables inside the build's contai
 
 We've put together a [how to]({{ site.baseurl }}/nightly-builds/)
 showing how to use build parameters in `circle.yml` so you can trigger nightly builds.
-
-Obviously this is just one example of what you could do.
-We're very interested in what you create with parameterized builds and would love to get your
-[feedback](mailto:sayhi@circleci.com).
