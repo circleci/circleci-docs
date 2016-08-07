@@ -598,11 +598,11 @@ If you want to deploy to Heroku and also run commands before or after the deploy
 
 ```
 deployment:
-    production:
-      branch: production
-      commands:
-        - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
-        - heroku run rake db:migrate --app foo-bar-123
+  production:
+    branch: production
+    commands:
+      - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app foo-bar-123
 ```
 
 <h2 id="notify">Notifications</h2>
