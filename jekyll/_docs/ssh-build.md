@@ -31,7 +31,7 @@ SSH tab':
 ![]({{ site.baseurl }}/assets/img/docs/ssh-build-details.png)
 
 Now you can ssh to the running build (using the same ssh key
-that you use for GitHub) to perform whatever troubleshooting
+that you use for GitHub or Bitbucket) to perform whatever troubleshooting
 you need to.
 
 **Your build commands will run as usual, with the exception of deployment**,
@@ -58,13 +58,19 @@ to perform them. Thus, you'll see more than one 'Enable SSH' and
 If you run into permission troubles trying to ssh to your build, try
 these things:
 
-##### Ensure that you can authenticate with GitHub
+##### Ensure that you can authenticate with GitHub/Bitbucket
 
-GitHub makes it very easy to test that your keys are setup as expected.
-Just run:
+A single command can be used to test that your keys are setup as expected. For 
+GitHub run:
 
 ```
 $ ssh git@github.com
+```
+
+or for Bitbucket run:
+
+```
+ssh -Tv git@bitbucket.org
 ```
 
 and you should see:
@@ -73,18 +79,20 @@ and you should see:
 Hi :username! You've successfully authenticated...
 ```
 
+for GitHub or for Bitbucket:
+
+```
+logged in as :username.
+```
+
 If you _don't_ see output like that, you need to start by
-[troubleshooting your ssh keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey).
+[troubleshooting your ssh keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)/
+[troubleshooting your ssh keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
 
 ##### Ensure that you're authenticating as the correct user
 
-If you have multiple GitHub accounts, double-check that you are
-authenticated as the right one! Again, using GitHub's SSH service,
-run ssh git@github.com and look at the output:
-
-```
-Hi :username! You've successfully authenticated...
-```
+If you have multiple accounts, double-check that you are
+authenticated as the right one!
 
 In order to SSH into a CircleCI build, the username must be one which has
 access to the project being built!
@@ -93,13 +101,13 @@ If you're authenticating as the wrong user, you can probably resolve this
 by offering a different ssh key with `ssh -i`. See the next section if
 you need a hand figuring out which key is being offered.
 
-##### Ensure your build started after you added key to GitHub
+##### Ensure your build started after you added key
 
-You won't be able to log in to builds that started before you added your key to GitHub. Even if those builds are still waiting for you to ssh. You have to restart the build.
+You won't be able to log in to builds that started before you added your key to GitHub/Bitbucket. Even if those builds are still waiting for you to ssh. You have to restart the build.
 
 ##### Ensure that you're offering the correct key to CircleCI
 
-If you've verified that you can authenticate with GitHub as the correct
+If you've verified that you can authenticate as the correct
 user, but you're still getting "Permission denied" from CircleCI, you
 may be offering the wrong credentials to us. (This can happen for
 several reasons, depending on your ssh configuration.)
@@ -109,6 +117,10 @@ running:
 
 ```
 $ ssh -v git@github.com
+
+# or
+
+$ ssh -v git@bitbucket.com
 ```
 
 In the output, look for a sequence like this:
