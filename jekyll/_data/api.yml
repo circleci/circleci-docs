@@ -605,7 +605,7 @@ project_post:
       "committer_date": "2014-04-17T08:41:40Z",
       "start_time": null,
       "stop_time": null,
-      "lifecycle": "not_running", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+      "lifecycle": "not_running",
       "user": {
         "email": "arohner@gmail.com",
         "name": "Allen Rohner",
