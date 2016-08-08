@@ -12,7 +12,7 @@ to preinstalled support for Amazon's [awscli][awscli-link].
 ## Authentication
 
 The easiest way to authenticate `awscli` is to set the *Access Key ID* and 
-*Sceret Access Key* in your Project's Settings page on CircleCI. Here you can 
+*Secret Access Key* in your Project's Settings page on CircleCI. Here you can 
 see an image of what the page looks like and where the navigation link is for CircleCI 
 Docs.
 
