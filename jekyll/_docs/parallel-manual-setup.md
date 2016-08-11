@@ -151,5 +151,5 @@ This script partitions the test files into N equally sized buckets, and calls "t
 
 If you set this up for a library or framework that we should be
 able to infer automatically, please
-[contact us](mailto:sayhi@circleci.com).
+[contact us](mailto:support@circleci.com).
 We are always interested in adding support for more languages and frameworks.
