@@ -57,4 +57,4 @@ If you're using CCMenu, you may have to append `&ccmenu=cc.xml`
 (or anything that ends with xml) to the end of your url.
 
 If you run into trouble configuring these, or are using a different tool not on this list,
-please [contact us](mailto:sayhi@circleci.com).
+please [contact us](mailto:support@circleci.com).
