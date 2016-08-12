@@ -34,7 +34,7 @@ machine:
 ```
 These will be available as python2.7 and python3.4
 
-Please [contact us](mailto:sayhi@circleci.com) if other versions of Python
+Please [contact us](mailto:support@circleci.com) if other versions of Python
 would be of use to you.
 
 <span class='label label-info'>Note:</span>
@@ -110,5 +110,5 @@ information:
 
 * [Git errors during pip install]({{ site.baseurl }}/git-pip-install/)
 
-If you are still having trouble, please [contact us](mailto:sayhi@circleci.com)
+If you are still having trouble, please [contact us](mailto:support@circleci.com)
 and we will be happy to help.

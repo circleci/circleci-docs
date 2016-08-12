@@ -9,7 +9,7 @@ Coming from Ship.io? You've come to the right place, we'll help you get started.
 
 ## Getting Started with iOS
 
-For iOS projects, please [contact support](mailto:sayhi@circleci.com) with the name of your GitHub user or organization for access to the iOS build system. Once you've been enabled,
+For iOS projects, please [contact support](mailto:support@circleci.com) with the name of your GitHub user or organization for access to the iOS build system. Once you've been enabled,
 
 1. Add your project on the [Add Projects page](https://circleci.com/add-projects).
 2. Turn on the "Build iOS project" setting through the **Project Settings > Build Settings > Build Environment** page of your your project.
@@ -59,7 +59,7 @@ We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-con
 ### Get more help
 * [OS X build docs]({{ site.baseurl }}/ios-builds-on-os-x/)
 * [discuss.circleci.com](https://discuss.circleci.com/c/mobile)
-* [CircleCI Support](mailto:sayhi@circleci.com)
+* [CircleCI Support](mailto:support@circleci.com)
 
 ## Android FAQ: How do I...
 
@@ -120,7 +120,7 @@ machine:
 ```
 Phew, that was a lot!
 Questions, comments, concerns?
-Please don't hesitate to give our [support team](mailto:sayhi@circleci.com) a shout should you have any difficulties!
+Please don't hesitate to give our [support team](mailto:support@circleci.com) a shout should you have any difficulties!
 
 ### Additional resources
 

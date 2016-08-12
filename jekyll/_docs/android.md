@@ -245,6 +245,6 @@ test:
     - cp -r my-project/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 ```
 
-Please don't hesitate to [contact us](mailto:sayhi@circleci.com)
+Please don't hesitate to [contact us](mailto:support@circleci.com)
 if you have any questions at all about how to best test Android on
 CircleCI.

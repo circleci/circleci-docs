@@ -16,7 +16,7 @@ using ruby and the sunspot_solr gem, we'll run
 
 If you're using a library or module with similar functionality (i.e. one
 that provides a bundled solr, and a wrapper for booting it), please
-[contact us](mailto:sayhi@circleci.com)
+[contact us](mailto:support@circleci.com)
 so that we can extend our inference to make it work automatically!
 
 ## The Hard Way
@@ -49,6 +49,6 @@ into place.
 Solr, when started this way, will be running under `http://localhost:8983/solr/`,
 and logging to `$HOME/solr.log`.
 
-Please [contact us](mailto:sayhi@circleci.com)
+Please [contact us](mailto:support@circleci.com)
 and let us know if you're using solr this way! Your feedback helps us keep our
 documentation up to date, and our services as useable as possible.

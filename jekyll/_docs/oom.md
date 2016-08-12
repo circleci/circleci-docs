@@ -77,4 +77,4 @@ machine:
 ```
 
 If your tests actually need more than 4GB of RAM, please
-[contact us](mailto:sayhi@circleci.com).
+[contact us](mailto:support@circleci.com).

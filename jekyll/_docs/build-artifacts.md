@@ -38,5 +38,5 @@ https://circleci.com/api/v1/project/circleci/mongofinil/63/artifacts/0/$CIRCLE_A
 
 That's all there is to it!
 
-Feel free to [contact us](mailto:sayhi@circleci.com)
+Feel free to [contact us](mailto:support@circleci.com)
 if you have any questions or feedback!

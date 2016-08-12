@@ -68,5 +68,5 @@ documentation has information about the following issues:
 
 *  [Unexpected Timeouts During `cabal test`]({{ site.baseurl }}/cabal-test-timeout/)
 
-If you have any further trouble, please [contact us](mailto:sayhi@circleci.com).
+If you have any further trouble, please [contact us](mailto:support@circleci.com).
 We'll be happy to help!

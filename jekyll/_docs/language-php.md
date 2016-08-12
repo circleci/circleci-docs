@@ -27,7 +27,7 @@ machine:
     version: 7.0.4
 ```
 
-Please [contact us](mailto:sayhi@circleci.com)
+Please [contact us](mailto:support@circleci.com)
 if you need a different version; we'll be happy to install it for you.
 
 ## Dependencies
@@ -158,5 +158,5 @@ write-ups about these issues:
 *   [Composer hitting GitHub API rate limits]({{site.baseurl}}/composer-api-rate-limit/)
 
 If you are still having trouble, please
-[contact us](mailto:sayhi@circleci.com)
+[contact us](mailto:support@circleci.com)
 and we will be happy to help.

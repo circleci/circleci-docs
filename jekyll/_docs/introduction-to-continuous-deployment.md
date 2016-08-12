@@ -102,4 +102,4 @@ Circle has customers deploying to Heroku, Engine Yard, Google App Engine, Elasti
 [Google App Engine]({{ site.baseurl }}/deploy-google-app-engine/)
 and [Bluemix]({{ site.baseurl }}/deploy-bluemix/).
 If you'd like help setting up your deployment, please
-[contact us](mailto:sayhi@circleci.com).
+[contact us](mailto:support@circleci.com).

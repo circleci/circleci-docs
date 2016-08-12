@@ -8,7 +8,7 @@ description: Continuous Integration and Delivery with Docker
 CircleCI currently offers beta support for running Docker within build containers.
 Docker is an extremely flexible tool that supports many different use cases. This
 article attempts to address several of the most popular uses for Docker on CircleCI,
-but it is not an exhaustive list. Please [contact us](mailto:sayhi@circleci.com)
+but it is not an exhaustive list. Please [contact us](mailto:support@circleci.com)
 if you have questions about uses of Docker that are not covered here.
 
 Note that this article assumes some knowledge of Docker. If you are just getting started
@@ -266,7 +266,7 @@ test parallelization when running tests within a Docker container. So
 if you have a lot of unit tests that take a long time to execute, then
 you may want to run them outside of the container and only do certain
 integration tests against the built Docker image.
-Please don't hesitate to [contact us](mailto:sayhi@circleci.com)
+Please don't hesitate to [contact us](mailto:support@circleci.com)
 if you have any questions at all about how to best utilize Docker on
 CircleCI.
 

@@ -132,7 +132,7 @@ You'll need to add your `CODECLIMATE_REPO_TOKEN` to your CircleCI
 [environment variables]({{site.baseurl}}/environment-variables/).
 
 Code Climate does not currently support CircleCI's parallelization.
-[Contact us](mailto:sayhi@circleci.com) if you'd like to use this.
+[Contact us](mailto:support@circleci.com) if you'd like to use this.
 
 ### PullReview
 
@@ -145,5 +145,5 @@ reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
 
 Code coverage is an area where our support is evolving.
 We'd love to have your feedback about how we could support it better.
-[Let us know](mailto:sayhi@circleci.com)
+[Let us know](mailto:support@circleci.com)
 how you're using it, how you'd like to use it, and what we could do better!

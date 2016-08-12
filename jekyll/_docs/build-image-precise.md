@@ -8,9 +8,9 @@ changefreq: "weekly"
 
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.
 In the future, we plan to allow as much of this to be configurable as possible.
-Please [contact us](mailto:sayhi@circleci.com) if some part of our environment is not suitable for you, and we will try to come up with a workaround.
+Please [contact us](mailto:support@circleci.com) if some part of our environment is not suitable for you, and we will try to come up with a workaround.
 
-If any version is not listed here, SSH into our build boxes to check it manually (and [contact us](mailto:sayhi@circleci.com)
+If any version is not listed here, SSH into our build boxes to check it manually (and [contact us](mailto:support@circleci.com)
 so we can update this doc.
 
 ## Base
@@ -170,7 +170,7 @@ Below are the versions of Python that we pre-install; you can specify versions n
 - `{{ version }}`
 {% endfor %}
 
-Please [contact us](mailto:sayhi@circleci.com) if other versions of Python would be useful to you.
+Please [contact us](mailto:support@circleci.com) if other versions of Python would be useful to you.
 
 ### PHP
 
@@ -185,7 +185,7 @@ Supported versions are:
 {% endfor %}
 
 Are you using a version of PHP that isn't included in this list?
-If so, please [contact us](mailto:sayhi@circleci.com).
+If so, please [contact us](mailto:support@circleci.com).
 
 <h3 id="java">Java (and JVM based languages)</h3>
 
@@ -227,7 +227,7 @@ We use `lein {{ site.data.precise.versions.lein }}`
 
 You should specify your Clojure version in your `project.clj` file.
 
-Other JVM-based languages should also work. please [contact us](mailto:sayhi@circleci.com)
+Other JVM-based languages should also work. please [contact us](mailto:support@circleci.com)
 let us know if you need anything else installed to run your JVM language of choice.
 
 ### Haskell

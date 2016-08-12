@@ -53,4 +53,4 @@ while the build is still running. Consult [this guide on using SSH
 access]({{site.baseurl}}/ssh-build/) to learn more.
 
 Please feel free to suggest additional points for this list by [emailing
-us](mailto:sayhi@circleci.com).
+us](mailto:support@circleci.com).
