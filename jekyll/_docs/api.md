@@ -45,7 +45,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   GET: /project/:vcs-type/:username/:project/:build_num
 </dt>
 <dd>
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/configuration/#notify), in which case this object is the value to a key named 'payload'.
+  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]({{ site.baseurl }}/docs/configuration#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project/:build_num/artifacts
