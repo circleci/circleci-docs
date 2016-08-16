@@ -60,22 +60,3 @@ The shell scripts are called by a command `circleci-install` in the main [Docker
 Whenever we make a new build image, we run a [image-builder build](https://circleci.com/gh/circleci/image-builder) that builds a Docker image and push to our [DockerHub](https://hub.docker.com/r/circleci/build-image/tags/) repository.
 
 [circleci/package-builder](https://github.com/circleci/package-builder) builds different versions of Ruby, Python, Nodejs, and PHP and creates Debian packages that are easy to install on image-builder. These packages are then pushed to our [PackageCloud](https://packagecloud.io/circleci/trusty) repository by [package-builder build](https://circleci.com/gh/circleci/package-builder).
-
-## Installing missing version is easier (at least a little bit)
-
-The installation shell scripts of image-builder is installed under `/opt/circleci-provision-scripts` on Ubuntu 14.04 build image. This means you can use the same scripts that image-builder is using to
-install missing versions on the fly in your build.
-
-For example, if you need to use Ruby 2.2.2 which is not pre-installed, you can put the following into your `circle.yml`.
-
-```
-machine:
-  pre:
-    - sudo USE_PRECOMPILE=true circleci-install ruby 2.2.2
-
-  ruby:
-    version: 2.2.2
-```
-
-Please note that we run `circleci-install` command in machine:pre section instead of dependency section because the version needs to be installed before CircleCI parses ruby:version.
-You can see what versions are available by looking at our [PackageCloud](https://packagecloud.io/circleci/trusty) repository.
