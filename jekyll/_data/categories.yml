@@ -42,8 +42,3 @@
   slug: privacy-and-security
   index: privacy-security
   icon: "/docs/assets/img/icons/privacy-security.svg"
-
-- name: "Enterprise"
-  slug: enterprise
-  index: enterprise
-  icon: "/docs/assets/img/icons/build-images.svg"
