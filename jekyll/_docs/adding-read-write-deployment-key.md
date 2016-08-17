@@ -4,7 +4,7 @@ title: Adding read/write deployment key
 description: What to know when adding read/write deployment keys
 ---
 
-When you add a new project on CircleCI, we will create a deployment key in the repository on GitHub. The deployment key is read-only, so CircleCI cannot push to your repository with the key. This is good from the security standpoint of view. However, sometimes you may want push to the repository from builds and you cannot do this with a read-only deployment key. You can manually add a read/write deployment key with the following steps.
+When you add a new project on CircleCI, we will create a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. We'll use GitHub in the following examples. The deployment key is read-only, so CircleCI cannot push to your repository with the key. This is good from the security standpoint of view. However, sometimes you may want push to the repository from builds and you cannot do this with a read-only deployment key. You can manually add a read/write deployment key with the following steps.
 
 
 Suppose your GitHub repository is `https://github.com/you/test-repo` and the project on CircleCI is `https://circleci.com/gh/you/test-repo`.
