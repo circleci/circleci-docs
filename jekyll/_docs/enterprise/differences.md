@@ -31,8 +31,7 @@ image that builds run in. By default, almost all of the software
 <a href="https://circleci.com/docs/environment">listed here</a>
 is available, except for more limited pre-installed versions of the following languages:
 {% include versions.html %}
-You can find a complete list of packages pre-installed by default
-[here]({{site.baseurl}}/assets/versions.txt).
+You can find a complete list of packages pre-installed by default <a href="/docs/assets/versions.txt">here</a>.
 </li></ul>
 
 - **Limitations:** Currently, CircleCI Enterprise installs can only run one Linux
