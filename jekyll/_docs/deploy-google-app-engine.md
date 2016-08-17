@@ -12,20 +12,20 @@ for all Google Cloud Platform deployments. Please see the general [Google Cloud 
 
 Once you're finished following the above instructions on authentication linked to above, App Engine projects can be deployed using the gcloud command as follows:
 
-    gcloud -q preview app deploy app.yaml --promote --version=staging
+    gcloud -q app deploy app.yaml --promote --version=staging
 
 Note that while the gcloud command can be used to interact with your App Engine project, it does not include the App Engine SDK, which you may want if you are running local unit tests. It can be downloaded separately by doing the following:
 
 ```
-curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
-unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+curl -o $HOME/google_appengine_1.9.40.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.40.zip
+unzip -q -d $HOME $HOME/google_appengine_1.9.40.zip
 ```
 
 ## Google Managed VMs
 
 Managed VMs projects are deployed similarly to App Engine:
 
-    gcloud -q preview app deploy app.yaml --promote --version=staging
+    gcloud -q app deploy app.yaml --promote --version=staging
 
 # Reference Repo
 
