@@ -20,10 +20,3 @@ collections:
 
 twitter_username: circleci
 github_username:  circleci
-
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      hide: false

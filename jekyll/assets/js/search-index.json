@@ -3,7 +3,6 @@ layout: null
 ---
 {
 	{% for doc in site.docs %}
-	{% unless doc.hide == true %}
 		"{{ doc.url | slugify }}":{
 			"title": "{{ doc.title | xml_escape }}",
 			"searchable-url": "{{ doc.url | xml_escape }}",
@@ -12,6 +11,5 @@ layout: null
 			"content": {{ doc.content | strip_html | strip_newlines | jsonify }}
 		}
 		{% unless forloop.last %},{% endunless %}
-	{% endunless %}
 	{% endfor %}
 }
