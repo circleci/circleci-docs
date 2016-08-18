@@ -72,7 +72,7 @@ For custom Cucumber steps, you should generate a file using the JSON formatter t
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - bundle exec cucumber --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
+    - bundle exec cucumber --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
 Note that `cucumber` allows for mulitple `--format` items to be present so you can do:
