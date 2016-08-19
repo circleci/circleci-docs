@@ -88,8 +88,8 @@ You should replace the values of these three variables for your specific project
 ```
 dependencies:
   pre:
-    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
-    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update kubectl
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0 kubectl
     - echo $GCLOUD_SERVICE_KEY | base64 --decode -i > ${HOME}/gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_NAME
