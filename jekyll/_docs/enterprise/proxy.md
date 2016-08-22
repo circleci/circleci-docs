@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: Setting up HTTP Proxies
-category: [enterprise]
+category: [resources]
 order: 4
 description: "How to get CircleCI Enterprise to use a HTTP proxy."
 hide: true

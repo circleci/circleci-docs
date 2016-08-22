@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "CircleCI Enterprise Installation Overview"
-category: [enterprise]
+category: [installation]
 order: 1
 description: "High-level overview of the CircleCI Enterprise Installation process."
 ---

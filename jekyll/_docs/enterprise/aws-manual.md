@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Manual AWS Installation"
-category: [enterprise]
+category: [resources]
 order: 3
 description: "How to install CircleCI Enterprise manually on Amazon Web Services (AWS)."
 ---

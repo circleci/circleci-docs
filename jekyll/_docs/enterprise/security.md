@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Security on CircleCI Enterprise"
-category: [enterprises]
+category: [resources]
 order: 6
 description: "Explanations of how CircleCI Enterprise is kept secure."
 ---

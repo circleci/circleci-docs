@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "On Premise Stock Ubuntu"
-category: [enterprise]
+category: [resources]
 order: 4
 description: "Using a custom Root Certificate Authority (CA) with CircleCI Enterprise."
 hide: true

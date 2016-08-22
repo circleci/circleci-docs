@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Differences from circleci.com"
-category: [enterprise]
+category: [documentation]
 order: 1
 description: "Here are the differences between CircleCI.com and CircleCI Enterprise."
 ---
