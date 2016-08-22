@@ -240,6 +240,20 @@ machine:
     - beanstalkd
 ```
 
+## Integration Tools
+
+### gcloud
+
+Version: `{{ site.data.trusty.versions.summary.gcloud }}`
+
+### awscli
+
+Version: `{{ site.data.trusty.versions.summary.aws-cli }}`
+
+### heroku/heroku-toolbelt
+
+Version: `{{ site.data.trusty.versions.summary.heroku-toolbelt }}`
+
 ## Android
 
 ### SDK Tools
