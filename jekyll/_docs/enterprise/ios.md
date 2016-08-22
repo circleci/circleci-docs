@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Building iOS with CircleCI Enterprise"
-category: [enterprise]
+category: [resources]
 order: 4
 description: "iOS Overview in CircleCI Enterprise."
 hide: true

@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Open Source Acknowledgments"
-category: [enterprise]
+category: [resources]
 order: 4.2
 description: "List and acknowledgements for open-source projects and libraries that are used in CircleCI Enterprise."
 ---

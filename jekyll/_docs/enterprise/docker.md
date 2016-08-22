@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Using Docker with CircleCI Enterprise"
-category: [enterprise]
+category: [resources]
 order: 4
 description: "Docker Usage and Caveats on CircleCI Enterprise."
 hide: true

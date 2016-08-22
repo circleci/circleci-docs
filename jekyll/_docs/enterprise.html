@@ -3,10 +3,10 @@ layout: classic-docs
 ---
 
 {% for category in site.data.categories %}
-{% if category.slug != "installation" and category.slug != "resources" and category.slug != "documentation" and category.slug != "enterprise" %}
+{% if category.slug == "installation" or category.slug == "resources" or category.slug == "documentation" %}
 <div class="category-section">
-	<img src="{{ category.icon }}" class="logo" alt="Category Icon" />
-	<h2>{{ category.name }}</h2>
+<!-- 	<img src="{{ category.icon }}" class="../logo" alt="Category Icon" />
+ -->	<h2>{{ category.name }}</h2>
 	<ul class="list-unstyled">
 	{% assign docs_found = 0 %}
 	{% for doc in site.docs %}
@@ -24,7 +24,7 @@ layout: classic-docs
 
 	{% if docs_found > 3 %}
 		{% assign more = docs_found | minus: 3 %}
-		<li><em><a href="{{ site.baseurl }}/{{ category.index }}/">{{ more }} more</a></em></li>
+		<li><em><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ more }} more</a></em></li>
 	{% endif %}
 	</ul>
 </div>

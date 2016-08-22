@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Changelog"
-category: [enterprise]
+category: [resources]
 order: 10
 description: "CircleCI Enterprise Changelog. These changes don't apply to CircleCI.com."
 ---

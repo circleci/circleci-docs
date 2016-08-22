@@ -47,3 +47,19 @@
   slug: enterprise
   index: enterprise
   icon: "/docs/assets/img/icons/build-images.svg"
+
+- name: "Installation"
+  slug: installation
+  index: installation
+  icon: "/docs/assets/img/icons/build-images.svg"
+
+- name: "User Documentation"
+  slug: documentation
+  index: documentation
+  icon: "/docs/assets/img/icons/build-images.svg"
+
+- name: "Resources"
+  slug: resources
+  index: resources
+  icon: "/docs/assets/img/icons/build-images.svg"
+

@@ -1,8 +1,8 @@
 ---
 layout: enterprise
 title: "Installing CircleCI on stock Ubuntu"
-category: [enterprise]
-order: 4
+category: [installation]
+order: 3
 description: "How to install CircleCI Enterprise on any generic Ubuntu machine."
 ---
 

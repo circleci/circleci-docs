@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "CloudWatch Monitoring"
-category: [enterprise]
+category: [resources]
 order: 4.0
 description: "How to enable and monitor CloudWatch for CircleCI Enteprise."
 ---

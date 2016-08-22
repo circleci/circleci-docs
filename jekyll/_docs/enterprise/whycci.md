@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Why Choose CircleCI?"
-category: [enterprise]
+category: [resources]
 order: 0
 description: "Reasons why you would want to choose CircleCI."
 ---

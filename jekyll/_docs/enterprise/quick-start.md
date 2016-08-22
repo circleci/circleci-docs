@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Quick Start"
-category: [enterprise]
+category: [documentation]
 order: 1
 description: "A light overview on how to get started with CircleCI Enterprise."
 ---
