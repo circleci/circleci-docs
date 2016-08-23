@@ -85,7 +85,7 @@ The GitHub login of the user who either pushed the code to GitHub or triggered t
 
 The directory whose contents are automatically processed as [JUnit test metadata](/docs/test-metadata/).
 
-Building pull requests that come from forks
+### Building pull requests that come from forks
 
 When the build is a part of a pull request from a fork, these variables
 will be available:
