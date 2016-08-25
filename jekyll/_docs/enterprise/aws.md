@@ -34,9 +34,7 @@ bin/terraform apply</pre>
       <li>Create a GitHub developer application at <code>&lt;github base url&gt;/settings/applications/new</code>, set the callback URL to <code>&lt;circleci enterprise base url&gt;/auth/github</code>, and input the key and secret back in the settings page</li>
       <li>Either upload a valid SSL cert with intermediate certificates and key, or disable SSL (you can always add it later)</li>
       <li>Save and start the app (all other default settings are fine for now). You will be redirected to the System Console Dashboard,
-          where you should soon see an indication that the app has started like this:
-
-             <img src="{{site.baseurl}}/assets/img/docs/started.png" alt="Look For 'Open'" width="150" style="margin: 10px; margin-left: 200px">
+          where you should soon see an indication that the app has started like this: <br /> <img src="{{site.baseurl}}/assets/img/docs/started.png" alt="Look For 'Open'" width="150" style="margin: 10px; margin-left: 200px">
 	  </li>
     </ol>
   </li>

@@ -5,7 +5,7 @@
 
 
 	{% if page.url contains "enterprise" %}
-			<p>Looking for non-enterprise docs? Click Below!<a href="{{ site.baseurl }}/">CircleCi.com Docs</a></p>
+			<p>Looking for non-enterprise docs? <a href="{{ site.baseurl }}/">CircleCi.com Docs</a></p>
 		{% for category in site.data.categories %}
 			{% if category.slug == "installation" or category.slug == "resources" or category.slug == "documentation" %}
 				<li><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ category.name }}</a>
