@@ -2,9 +2,9 @@
 layout: enterprise
 title: Setting up HTTP Proxies
 category: [resources]
-order: 4
+order: 0
 description: "How to get CircleCI Enterprise to use a HTTP proxy."
-hide: true
+visible: 0
 ---
 
 This document specifies the different components involved in potentially configuring CCIE to use HTTP proxy:
