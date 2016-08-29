@@ -130,16 +130,18 @@ test:
 If you want CircleCI to show a test summary of your build see
 [Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
 
-## Enable Xdebug {#xdebug}
+## Disable Xdebug {#xdebug}
 
-Xdebug is installed for all versions of PHP, but is disabled (for performance reasons) by
-default. It is simple to enable this tool by adding the following to your
-`circle.yml` file:
+Xdebug is installed for all versions of PHP, and is enabled by default on our 14.04 build image.
+
+During the dependencies stage of PHP builds our inference runs `composer install` if required. This command is run without Xdebug to improve performance.
+
+If you would like to completely disable Xdebug you can add the following to your `circle.yml` file:
 
 ```
 dependencies:
   pre:
-    - sed -i 's/^;//' /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+    - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
 ```
 
 ## Deployment
