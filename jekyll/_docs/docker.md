@@ -49,7 +49,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t circleci/elasticsearch .
+    - docker build --rm=false -t circleci/elasticsearch .
 
 test:
   override:
