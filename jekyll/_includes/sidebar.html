@@ -5,7 +5,7 @@
 
 
 	{% if page.url contains "enterprise" %}
-			<p>Looking for non-enterprise docs? <a href="{{ site.baseurl }}/">CircleCi.com Docs</a></p>
+			<p>Looking for non-enterprise docs? <a href="{{ site.baseurl }}/">CircleCI.com Docs</a></p>
 		{% for category in site.data.categories %}
 			{% if category.slug == "installation" or category.slug == "resources" or category.slug == "documentation" %}
 				<li><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ category.name }}</a>
@@ -31,7 +31,7 @@
 			{% endif %}
 		{% endfor %}
 	{% else %}
-	<p>Looking for Enterprise docs? <a href="{{ site.baseurl }}/enterprise">CircleCi Enterprise Docs</a></p>
+	<p>Looking for Enterprise docs? <a href="{{ site.baseurl }}/enterprise">CircleCI Enterprise Docs</a></p>
 	{% for category in site.data.categories %}
 		{% if category.slug != "installation" and category.slug != "resources" and category.slug != "documentation" and category.slug != "enterprise" %}
 
