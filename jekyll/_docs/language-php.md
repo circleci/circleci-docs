@@ -134,9 +134,15 @@ If you want CircleCI to show a test summary of your build see
 
 Xdebug is installed for all versions of PHP, and is enabled by default on our 14.04 build image.
 
-During the dependencies stage of PHP builds our inference runs `composer install` if required. This command is run without Xdebug to improve performance.
+During the dependencies stage of PHP builds our inference runs `composer install` if required. In the build output you may see:
 
-If you would like to completely disable Xdebug you can add the following to your `circle.yml` file:
+```
+You are running composer with xdebug enabled. This has a major impact on runtime performance.
+```
+
+Since this is a CI environment and many of your dependencies will be cached, the performance hit is not major and you can safely ignore the warning.
+
+If you would like to completely disable Xdebug on 14.04 you can add the following to your `circle.yml` file:
 
 ```
 dependencies:
