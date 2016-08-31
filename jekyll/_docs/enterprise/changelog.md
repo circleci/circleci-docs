@@ -8,6 +8,17 @@ description: "CircleCI Enterprise Changelog. These changes don't apply to Circle
 
 **NOTE:** The following are changes specific to CircleCI Enterprise. For general changes to CircleCI see our [public Changelog](https://circleci.com/changelog/).
 
+### 2016-08-12: Release 1.45.1:
+* Fix for an issue that was causing builds to fail that were triggered by users with a github account but no circleci account.
+Note: we are shifting our versioning to better reflect the current release semantically.
+
+### 2016-08-11: Release 0.2.45
+* PR-only builds - We have added functionality to only run builds when a pull request is open. To enable this functionality you can navigate to “Advanced Settings” for your project and enable the “Only build pull requests” option.
+* Chrome notifications - see [the docs](https://circleci.com/docs/web-notifications/)
+* Fixed a bug where builds triggered by people who don't have seats in CircleCI Enterprise were not running. They now should run as before.
+* Some UI changes to make updating data in the web interface more consistent.
+* Reliability improvements by changing retry logic in various places.
+
 ### 2016-07-26: Release 0.2.44
 
 Bug fix: We've fixed a bug that "--branch" option was missing when "--single-branch" is used.
