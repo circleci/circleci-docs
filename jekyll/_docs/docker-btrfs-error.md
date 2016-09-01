@@ -18,5 +18,5 @@ have permission to remove btrfs subvolumes, resulting in the error.
 Please see [this](https://github.com/docker/docker/issues/9939) issue 
 for more details.
 
-Normally, this is red-herring and doesn't affect your builds, so you can simply 
+Normally, this is a red-herring and doesn't affect your builds, so you can simply 
 ignore it.
