@@ -28,7 +28,7 @@ compilation of the ones we see most frequently:
   section]({{site.baseurl}}/configuration/#machine).
 - File ordering. Some filesystems maintain an ordered file structure for
   every directory, which means that all the files are read in a
-  consistent order every time. The filesystem in our build containers in
+  consistent order every time. The filesystem in our build containers is
   _not_ one of those. Therefore if your tests rely on a
   certain autoload order, for example, this could be a reason they fail on
   CircleCI and pass locally. See [this documentation
