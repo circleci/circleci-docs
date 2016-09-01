@@ -32,7 +32,7 @@ compilation of the ones we see most frequently:
   _not_ one of those. Therefore if your tests rely on a
   certain autoload order, for example, this could be a reason they fail on
   CircleCI and pass locally. See [this documentation
-  page]({{site.baseurl}}/file-ordering/) for more detals/
+  page]({{site.baseurl}}/file-ordering/) for more details.
 - Out Of Memory errors. If a process in your build container uses too
   much memory, it can be killed by Linux’s OOM
   killer. Check out [this document]({{site.baseurl}}/oom/) to
