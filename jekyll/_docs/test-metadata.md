@@ -58,6 +58,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 ### Custom runner examples
 * [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
 * [Maven Surefire]({{ site.baseurl }}/test-metadata/#maven-surefire-plugin-for-java-junit-results)
+* [Gradle]({{ site.baseurl }}/test-metadata/#gradle-junit-results)
 * [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
 * [PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit)
 * [RSpec]({{ site.baseurl }}/test-metadata/#rspec)
@@ -86,11 +87,11 @@ test:
 
 #### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
 
-If you are building a [Gradle](https://gradle.org/) or
-[Maven](http://maven.apache.org/) based project, you are more than likely using
-the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
+If you are building a [Maven](http://maven.apache.org/) based project,
+you are more than likely using the
+[Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
 to generate test reports in XML format. CircleCI makes it easy to collect these
-reports. You just need to add the followng to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
+reports. You just need to add the following to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
 project.
 
 ```
@@ -98,6 +99,20 @@ test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+```
+
+#### <a name="gradle-junit-results"></a>Gradle JUnit Test results
+
+If you are building a Java or Groovy based project with [Gradle](https://gradle.org/),
+test reports are automatically generated in XML format. CircleCI makes it easy to collect these
+reports. You just need to add the following to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
+project.
+
+```
+test:
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
