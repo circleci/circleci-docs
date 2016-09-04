@@ -166,7 +166,7 @@ means you cannot read UI environment variables during the `machine: pre`.
 
 ## Keeping encrypted environment variables in source code
 
-If you prefer to keep your sensetive environment variables checked into
+If you prefer to keep your sensitive environment variables checked into
 git, but encrypted, you can follow the process outlined at
 [circleci/encrypted-files](https://github.com/circleci/encrypted-files).
 
