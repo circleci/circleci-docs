@@ -43,7 +43,7 @@ There are two intentions to why we changed the installation path on Ubuntu 14.04
 - Making directory language installation paths consistent
 - Making `/home/ubuntu` to be clean and dedicated for storing your code to be built
 
-## Less services are started by default
+## Fewer services are started by default
 
 On 12.04, many services are started by default. While this is good because you don't have to think about which services you need to start for your builds, running unnecessary services is a waste of memory in containers.
 
