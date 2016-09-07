@@ -52,6 +52,74 @@ projects:
       }
     }, ... ]
 
+follow:
+  try_it: false
+  url: "/api/v1.1/project/:vcs-type/:username/:project/follow"
+  description: "Follow a new project. CircleCI will then monitor the project for automatic building of commits."
+  method: "POST"
+  response: |
+    {
+      "followed" : true,
+      "first_build" : {
+        "compare" : null,
+        "previous_successful_build" : null,
+        "build_parameters" : null,
+        "oss" : true,
+        "committer_date" : null,
+        "body" : null,
+        "usage_queued_at" : "2016-09-07T13:48:10.825Z",
+        "fail_reason" : null,
+        "retry_of" : null,
+        "reponame" : "testing-circleci",
+        "ssh_users" : [ ],
+        "build_url" : "https://circleci.com/gh/circleci/mongofinil/1",
+        "parallel" : 1,
+        "failed" : null,
+        "branch" : "master",
+        "username" : "circleci",
+        "author_date" : null,
+        "why" : "first-build",
+        "user" : {
+          "is_user" : true,
+          "login" : "circleci",
+          "avatar_url" : "https://avatars.githubusercontent.com/u/6017470?v=3",
+          "name" : "CircleCI",
+          "vcs_type" : "github",
+          "id" : 10101010
+        },
+        "vcs_revision" : "b2b5def65bf54091dde02ebb39ef3c54de3ff049",
+        "vcs_tag" : null,
+        "build_num" : 1,
+        "infrastructure_fail" : false,
+        "committer_email" : null,
+        "previous" : null,
+        "status" : "not_running",
+        "committer_name" : null,
+        "retries" : null,
+        "subject" : null,
+        "vcs_type" : "github",
+        "timedout" : false,
+        "dont_build" : null,
+        "lifecycle" : "not_running",
+        "no_dependency_cache" : false,
+        "stop_time" : null,
+        "ssh_disabled" : false,
+        "build_time_millis" : null,
+        "circle_yml" : null,
+        "messages" : [ ],
+        "is_first_green_build" : false,
+        "job_name" : null,
+        "start_time" : null,
+        "canceler" : null,
+        "outcome" : null,
+        "vcs_url" : "https://github.com/circleci/mongofinil",
+        "author_name" : null,
+        "node" : null,
+        "canceled" : false,
+        "author_email" : null
+      }
+    }
+
 project:
   url: "/api/v1.1/project/:vcs-type/:username/:project"
   description: "Build summary for each of the last 30 builds for a single git repo."

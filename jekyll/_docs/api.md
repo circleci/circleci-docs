@@ -2,7 +2,7 @@
 layout: classic-docs
 title: CircleCI REST API
 categories: [reference]
-description: Using circleci rest api  
+description: Using the CircleCI API
 ---
 
 ## The CircleCI API {#intro}
@@ -28,6 +28,12 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 </dt>
 <dd>
   List of all the projects you're following on CircleCI, with build information organized by branch.
+</dd>
+<dt>
+  POST: /project/:vcs-type/:username/:project/follow
+</dt>
+<dd>
+  Follow a new project on CircleCI.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project
@@ -201,6 +207,10 @@ curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: applicatio
 ## Projects
 
 {{ site.data.api.projects | api_endpoint }}
+
+<h2 id="follow-project">Follow a New Project on CircleCI</h2>
+
+{{ site.data.api.follow | api_endpoint }}
 
 <h2 id="recent-builds">Recent Builds Across All Projects</h2>
 
