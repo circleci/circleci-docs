@@ -25,16 +25,16 @@ following
 
 ### Using a custom version of sbt
 
-The latest version of sbt currently supported by CircleCI is `0.13.1`.
+The latest version of sbt currently supported by CircleCI is `0.13.9`.
 If you would like to use a different version of sbt for your builds, we
 suggest upgrading it manually. Here is an example of installing the
-version `0.13.7` of sbt by downloading a binary from Bintray:
+version `0.13.12` of sbt by downloading a binary from Bintray:
 
 ```
 dependencies:
   pre:
-    - wget -q https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
-    - sudo dpkg -i sbt-0.13.7.deb
+    - wget -q https://dl.bintray.com/sbt/debian/sbt-0.13.12.deb
+    - sudo dpkg -i sbt-0.13.12.deb
   cache_directories:
     - "~/.ivy2"
     - "~/.sbt"
@@ -45,7 +45,7 @@ Another option would be to use the `jar`s provided by Typesafe:
 ```
 machine:
   environment:
-    SBT_VERSION: 0.13.7
+    SBT_VERSION: 0.13.12
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled
 -XX:MaxPermSize=256M"
 dependencies:

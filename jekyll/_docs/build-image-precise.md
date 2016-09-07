@@ -213,13 +213,13 @@ You can specify the following JVM versions in your `circle.yml` file:
 
 ### Scala
 
-We track <a>http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/</a> for recent Scala releases:
+The latest version of Scala available on 12.04 is:
 
 {% for version in site.data.precise.versions.scala_versions %}
 - `{{ version }}`
 {% endfor %}
 
-We also install some release candidate and beta versions (see the above URL for the complete list).
+You can find the version available on our [14.04 buld image here](https://circleci.com/docs/build-image-trusty/).
 
 ### Clojure
 
