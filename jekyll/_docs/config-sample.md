@@ -52,7 +52,9 @@ dependencies:
   override:
     - bundle install: # note ':' here
         timeout: 180 # fail if command has no output for 3 minutes
-
+        # IMPORTANT NOTE: ^^ the timeout modifier above must be
+        # double indented (four spaces) from the previous line
+  
   # we automatically cache and restore many dependencies between
   # builds. If you need to, you can add custom paths to cache:
   cache_directories:
