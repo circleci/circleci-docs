@@ -80,13 +80,15 @@ Note that YAML is very strict about indentation each time you add a new property
 For that reason, modifiers must be indented one level from their command.
 In the following example, we treat the `bundle install`
 command as a key, with `timeout`, `environment`, and `pwd` as the command's hash values.
-This means you will need to add a colon to the end of the command for it to parse correctly.
+This means you will need to **add a colon** to the end of the command for it to parse correctly.
+
+**Important note:** modifiers are **double indented**, so **four spaces** instead of two. (This is probably the cause if you get an error like `Syntax Error while parsing circle.yml: mapping values are not allowed here...`)
 
 {% highlight yaml %}
 dependencies:
   override:
     - bundle install: # note the colon here
-        timeout: 240
+        timeout: 240 # note the double indentation (four spaces) here
         environment:
           foo: bar
           foo2: bar2
