@@ -81,6 +81,33 @@ machine:
     - sudo container=yes docker daemon: { background: true }
 ```
 
+### Sharing Docker Socket
+
+In CircleCI Enterprise, it's possible to bind-mount a Docker socket from the underlying host into the build containers so that they can all share a single long-running daemon for improved performance. It should be equivalent to the cache performance you see on Jenkins.
+
+**NOTE**: The primary drawback here is security-related. Giving builds access to the Docker daemon on the host is basically equivalent to giving them root access to the machine. The same is true on Jenkins, but CircleCI's default nested Docker approach, while it has performance issues, does provide a layer of security.
+
+To setup a long-running docker daemon on a builder machine, you can start it with userdata like this:
+
+```
+#!/bin/bash
+curl -sSL https://get.docker.com | bash
+sudo chmod 777 /var/run/docker.sock
+curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
+    SERVICES_PRIVATE_IP=X.X.X.X \
+    CIRCLE_SECRET_PASSPHRASE=xxxx \
+    CIRCLE_SHARED_DOCKER_ENGINE=true \
+    CIRCLE_CONTAINER_IMAGE_URI="CIRCLE_CONTAINER_IMAGE_ID=circleci-trusty-container_0.0.575" \
+    bash
+```
+
+There are also a couple small differences to use this daemon within builds:
+
+1. Set `DOCKER_HOST="unix:///tmp/docker.sock"`
+2. Don't enter "docker" in the "services" section of circle.yml (no need to start the service as it's already running on the host)
+
+You should then see improved performance between builds!
+
 ### Adjusting Builder Networking
 
 You can adjust which subnets containers use by setting the following enviroment variables:
