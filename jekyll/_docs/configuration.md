@@ -42,7 +42,7 @@ previews of configuration changes under consideration.
 The sections contain lists of bash commands.  If you don't specify
 commands, CircleCI infers them from your code.  Commands are run in
 the order they appear in the file; all test commands are run to
-completion, but a non-zero exit code during setup will cause the
+completion, but a non-zero exit code during the setup sections (`machine:, checkout:, dependencies:, database:`) will cause the
 build to fail early.  You can modify which&mdash;and
 when&mdash;commands are run by adding `override`,
 `pre` and/or `post` to adjust CircleCI's
