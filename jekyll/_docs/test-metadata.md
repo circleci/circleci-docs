@@ -17,7 +17,7 @@ If you're using our inferred test steps for Ruby or Python then we'll
 automatically collect test metadata, though for RSpec, Minitest, and Django
 you'll need to do some configuration to to enable the formatters:
 
-For RSpec:
+### For RSpec:
 
 Add this to your gemfile:
 
@@ -25,7 +25,7 @@ Add this to your gemfile:
 gem 'rspec_junit_formatter'
 ```
 
-For Minitest:
+### For Minitest:
 
 Add this to your gemfile:
 
@@ -33,7 +33,7 @@ Add this to your gemfile:
 gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
 ```
 
-For Django:
+### For Django:
 
 Configure your tests to run using the
 [django-nose](https://github.com/django-nose/django-nose) test runner.  We'll
@@ -48,12 +48,16 @@ timing information.
 
 ## Metadata collection in custom test steps
 
-If you have a custom test step that produces JUnit XML output - most test runners support this in some form - you can write the XML
-files to the `$CIRCLE_TEST_REPORTS` directory.  We'll automatically store the files in your
-[build artifacts]({{ site.baseurl }}/build-artifacts/) and parse the XML.
+If you have a custom test step that produces JUnit XML output - most test
+runners support this in some form - you can write the XML files to a
+subdirectory under `$CIRCLE_TEST_REPORTS`.
+
+We'll automatically store the files in your [build artifacts]({{ site.baseurl }}/build-artifacts/) and parse the XML.
 
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
+
+**Note**: It's important to write to a subdirectory of `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
 
 ### Custom runner examples
 * [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
