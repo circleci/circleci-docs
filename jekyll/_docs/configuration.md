@@ -291,6 +291,9 @@ You can enable other databases and services from the `services` section:
 ```
 machine:
   services:
+    - mysql
+    - mongodb
+    - postgresql
     - cassandra
     - elasticsearch
     - rabbitmq-server
