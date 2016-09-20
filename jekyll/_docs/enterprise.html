@@ -11,7 +11,7 @@ layout: classic-docs
 	{% assign docs_found = 0 %}
 	{% assign sorted = (site.docs | sort: 'order') %}
 	{% for doc in sorted %}
-		{% if (doc.categories contains category.slug) and (doc.slug != category.index) and (doc.visible == 1)  %}
+		{% if doc.categories contains category.slug and doc.slug != category.index and doc.visible == 1  %}
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if docs_found < 4 %}
 					{% if doc.short-title %}
