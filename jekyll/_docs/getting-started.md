@@ -8,7 +8,7 @@ description: Getting Started with CircleCI
 Setting up CircleCI usually takes only three mouse clicks:
 
 1.  Sign up with CircleCI.
-2.  Give CircleCI permission to access GitHub on your behalf.
+2.  Give CircleCI permission to access GitHub or Bitbucket on your behalf.
 3.  Click on a project.
 
 It really is that easy for about 90 percent of our users.
@@ -40,7 +40,7 @@ Here are some common issues and where you can find their fixes.
 
 Testing is no fun if you're the only one playing.
 To add your colleagues, simply ask them to join CircleCI.
-We use GitHub permissions for all projects, so if they have access to your project on GitHub, they'll have access on CircleCI, too.
+We use GitHub or Bitbucket permissions for all projects, so if they have access to your project on GitHub or Bitbucket, they'll have access on CircleCI, too.
 
 One of the best things about CircleCI's design is that you have your own account, which in turn enables CircleCI to send you personalized emails only for the branches you use.
 

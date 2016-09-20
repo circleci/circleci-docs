@@ -7,7 +7,7 @@ description: Ubuntu 14.04 (Trusty)
 
 You can run your Linux builds on Ubuntu 14.04 Trusty (default is Ubuntu 12.04). You can switch to Trusty from "Project Settings" -> "Build Environment" of your project.
 
-Please note that you need to trigger a build by pushing commits to GitHub (instead of rebuilding) to apply the new setting.
+Please note that you need to trigger a build by pushing commits to GitHub or Bitbucket (instead of rebuilding) to apply the new setting.
 
 ## Base
 

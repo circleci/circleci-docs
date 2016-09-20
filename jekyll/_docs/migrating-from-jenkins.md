@@ -38,7 +38,7 @@ In addition to differences in the basics of running builds on Jenkins and Circle
 
 ### Build configuration
 
-Jenkins projects are generally configured in the Jenkins web UI and their settings are stored on the filesystem of the Jenkins server. This makes it difficult to share configuration information within a team or organization. Cloning a GitHub repository doesn’t copy the information stored in Jenkins. Settings living on the Jenkins server also make regular backup of all Jenkins servers extra important.
+Jenkins projects are generally configured in the Jenkins web UI and their settings are stored on the filesystem of the Jenkins server. This makes it difficult to share configuration information within a team or organization. Cloning a GitHub or Bitbucket repository doesn’t copy the information stored in Jenkins. Settings living on the Jenkins server also make regular backup of all Jenkins servers extra important.
 
 Almost all configuration of CircleCI builds is stored in a file called `circle.yml` that goes in the root of each project. Treating CI configuration like any other source code makes it easier to back up and share. Just a few project settings, like secrets, that shouldn’t go in source are stored (encrypted) on CircleCI.
 
@@ -64,8 +64,7 @@ CircleCI is a single-page web app that makes heavy use of AJAX, HTML5, and other
 
 You’ve almost certainly worked with plugins if you’ve used Jenkins. These plugins are Java-based like Jenkins itself and a bit complicated. They interface with any of several hundred possible extension points in Jenkins and can generate web views using JSP-style tags and views. You also have to use plugins to do almost anything with Jenkins. Even checking out a Git repository requires a plugin.
 
-All core CI functionality is built into CircleCI. Features such as checking out source from GitHub,
-running builds and tests with your favorite tools, parsing test output, and storing artifacts are first-class and plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple snippets of bash in appropriate places.
+All core CI functionality is built into CircleCI. Features such as checking out source from GitHub or Bitbucket, running builds and tests with your favorite tools, parsing test output, and storing artifacts are first-class and plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple snippets of bash in appropriate places.
 
 ### Distributed builds
 

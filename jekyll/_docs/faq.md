@@ -18,7 +18,7 @@ Our **[status page](http://status.circleci.com/)** gives information on current 
 
 ## Authentication
 
-### Do you support BitBucket or GitLab?
+### Do you support Bitbucket or GitLab?
 
 Currently we support authentication with GitHub and Bitbucket. Please vote on relevant [Feature Request](https://discuss.circleci.com/c/feature-request) if you want to show support for other version control systems.
 

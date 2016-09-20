@@ -43,7 +43,7 @@ dependencies:
 
 Each branch of your project will have a separate cache. If it is the
 very first build for a branch, the cache from the default branch on
-GitHub (normally `master`) will be used. If there is no cache for
+GitHub or Bitbucket (normally `master`) will be used. If there is no cache for
 `master`, the cache from other branches will be used.
 
 ### Clearing the cache
