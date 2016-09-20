@@ -99,3 +99,7 @@ security issues.
 There is a per-project flag (in Project settings > Build Settings > Advanced Settings > Project fork pull requests)
 which will cause us to run builds of all fork pull requests without suppressing any of the sensitive
 information listed above.
+
+### Note
+
+CircleCI currently does not support this feature for Bitbucket repositories. 

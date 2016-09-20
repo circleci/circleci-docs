@@ -303,7 +303,7 @@ machine:
 
 ```
 
-<h2 id="checkout">Code checkout from GitHub</h2>
+<h2 id="checkout">Code checkout from GitHub or Bitbucket</h2>
 
 The `checkout` section is usually pretty vanilla, but we include examples of common things you might need to put in the section.
 Because we don't read `circle.yml` until after the checkout phase, only `post` is supported in this section.
