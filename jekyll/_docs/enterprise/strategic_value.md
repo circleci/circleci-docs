@@ -4,7 +4,7 @@ title: "Strategic Value of CircleCI"
 category: [resources]
 order: 0
 description: "These are the strategic value points on what CircleCI Enterprise provides to customers."
-visible: 0
+hide: true
 ---
 
 ## Maximizing Throughput at Any Scale

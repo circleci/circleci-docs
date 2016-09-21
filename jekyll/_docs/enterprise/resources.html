@@ -12,7 +12,7 @@ description: "Resources"
 	{% assign docs_found = 0 %}
 	{% assign sorted = (site.docs | sort: 'order') %}
 	{% for doc in sorted %}
-		{% if doc.categories contains category.slug and doc.slug != category.index and doc.visible == 1  %}
+		{% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true  %}
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if doc.short-title %}
 				<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.short-title }}</a></li>

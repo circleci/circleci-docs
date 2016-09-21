@@ -4,7 +4,7 @@ title: "Why Choose CircleCI?"
 category: [resources]
 order: 0
 description: "Reasons why you would want to choose CircleCI."
-visible: 0
+hide: true
 ---
 
 Get your green builds pushed safely and securely with the industry’s most powerful and loved software delivery platform. Here’s why we should be a part of your team:
