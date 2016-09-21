@@ -6,3 +6,4 @@ _staging_site/
 .DS_Store
 .bundle/
 .ruby-version
+hugo/public
