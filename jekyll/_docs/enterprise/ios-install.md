@@ -4,7 +4,7 @@ title: "iOS Install"
 category: [resources]
 order: 0
 description: "Adding OS X and iOS support to your CircleCI Enterprise installation."
-visible: 0
+hide: true
 ---
 
 ## What we need

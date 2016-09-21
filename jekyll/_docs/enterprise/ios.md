@@ -4,7 +4,7 @@ title: "Building iOS with CircleCI Enterprise"
 category: [resources]
 order: 4
 description: "iOS Overview in CircleCI Enterprise."
-visible: 0
+hide: true
 ---
 
 CircleCI Enterprise currently supports iOS testing via our Mac Fleet. In order to enable iOS testing, your fleet will include a new "iOS Manager" box which connects to our iOS Fleet, and remotely executes commands on Mac hardware. Once setup, iOS projects will be auto-detected, and all builds will be directed to the mac containers. 
