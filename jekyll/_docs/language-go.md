@@ -82,7 +82,7 @@ machine:
     # GOROOT is not set by default
     GOROOT: ""
     PATH: "/usr/local/go/bin:/usr/local/go_workspace/bin:~/.go_workspace/bin:${PATH}"
-    GOPATH: "~/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
+    GOPATH: "${HOME}/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
 ```
 
 Every project built on CircleCI has a standard [CircleCI environment][env-doc] 
