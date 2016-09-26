@@ -323,7 +323,7 @@ dependencies:
 
   override:
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker build -t circleci/elasticsearch .
+    - docker build -t circleci/elasticsearch --rm=false .
     - mkdir -p ~/docker; docker save circleci/elasticsearch > ~/docker/image.tar
 ```
 
@@ -334,6 +334,9 @@ specify. This will create significant performance problems because the save/load
 described above only caches
 the image layers (and thus tags) that you specify in the `docker save` command, so
 other tags will be re-pulled on every build if a tag is not specified in the FROM command.
+
+The `rm=false` flag is required for docker version `>0.9.0` in order to ensure
+intermediate layers are saved in the build.
 
 ### Connecting to services outside of the container
 
