@@ -145,6 +145,10 @@ You can of course set your own environment variables, too!
 The only gotcha is that each command runs in its own shell, so just adding an
 `export FOO=bar` command won't work.
 
+All commands and data on CircleCI's VMs can be accessed by any of your colleagues&mdash;we run your arbitrary code, so it is not possible to secure.
+Take this into account before adding important credentials that some colleagues do not have access to.
+Similarly, **if your CircleCI project is public, don't put any sensitive information/credentials into CircleCI**, as environment variables or otherwise.
+
 ## Setting environment variables for all commands using circle.yml
 
 You can set environment variables in your `circle.yml` file, that
@@ -156,9 +160,6 @@ Occasionally, you'll need to add an API key or some other secret as
 an environment variable.  You might not want to add the value to your
 git history.  Instead, you can add environment variables using the
 **Project settings &gt; Environment Variables** page of your project.
-
-All commands and data on CircleCI's VMs can be accessed by any of your colleagues&mdash;we run your arbitrary code, so it is not possible to secure.
-Take this into account before adding important credentials that some colleagues do not have access to.
 
 It's important to note that environment variables configured through
 the UI are exported during the `machine` section of the build.  This
