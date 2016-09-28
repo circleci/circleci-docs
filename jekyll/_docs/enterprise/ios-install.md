@@ -7,7 +7,7 @@ description: "Adding OS X and iOS support to your CircleCI Enterprise installati
 hide: true
 ---
 
-### What we need
+## What we need
 
 CircleCI will require:
 
