@@ -205,13 +205,12 @@ machine:
     version: 1.9.3-p0-falcon
 ```
 
-You can find more details about supported versions [here]({{site.baseurl}}/language-ruby-on-rails/#version).
-
 <h3 id="node-version">Node.js version</h3>
 
-CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
-
-You can find more details about supported versions [here]({{site.baseurl}}/language-nodejs/#version).
+CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions. 
+Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs) 
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages 
+respectively.
 
 Here's an example of how to set the version of Node.js to be used for
 your tests.
@@ -232,14 +231,14 @@ machine:
     version: openjdk7
 ```
 
-You can find more details about supported versions [here]({{site.baseurl}}/language-java/#version).
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java) 
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#java).
 
 ### PHP version
 
-CircleCI uses [php-build](https://github.com/CHH/php-build)
-and [phpenv](https://github.com/CHH/phpenv)
-to manage PHP versions.
-Here's an example of how to set the version of PHP used for your tests.
+CircleCI uses [php-build](https://github.com/CHH/php-build) and 
+[phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an 
+example of how to set the version of PHP used for your tests:
 
 ```
 machine:
@@ -247,7 +246,8 @@ machine:
     version: 5.4.5
 ```
 
-You can find more details about supported versions [here]({{site.baseurl}}/language-php/#version).
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php) 
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#php).
 
 ### Python version
 
@@ -261,7 +261,8 @@ machine:
     version: 2.7.5
 ```
 
-You can find more details about supported versions [here]({{site.baseurl}}/language-python/#version).
+You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python) 
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#python).
 
 ### GHC version
 
