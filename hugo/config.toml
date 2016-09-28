@@ -2,3 +2,7 @@ baseurl = "/docs/"
 languageCode = "en-us"
 title = "CircleCI Docs"
 theme = "circleci-docs-2016"
+SectionPagesMenu = "sectionMenu"
+
+[taxonomies]
+category = "categories"
