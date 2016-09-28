@@ -64,6 +64,10 @@ deployment:
       - docker push circleci/elasticsearch
 ```
 
+Intermediate images [aren't handled well in the CircleCI container]({{site.baseurl}}/docker-btrfs-error/) 
+so using `--rm=false` with Docker build prevents a bunch of annoying (but not 
+serious) errors.
+
 For a complete example of building and deploying a Docker image to a
 registry, see the [circleci/docker-elasticsearch](https://github.com/circleci/docker-elasticsearch)
 example project on GitHub.
@@ -107,7 +111,7 @@ machine:
 dependencies:
   pre:
     - pip install awscli
-    - docker build -t circleci/hello:$CIRCLE_SHA1 .
+    - docker build --rm=false -t circleci/hello:$CIRCLE_SHA1 .
 
 test:
   post:
@@ -188,7 +192,7 @@ dependencies:
     - ~/kubernetes
   pre:
     - ./ensure-kubernetes-installed.sh
-    - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/hello:$CIRCLE_SHA1 .
+    - docker build --rm=false -t $EXTERNAL_REGISTRY_ENDPOINT/hello:$CIRCLE_SHA1 .
 
 test:
   post:
@@ -323,7 +327,7 @@ dependencies:
 
   override:
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker build -t circleci/elasticsearch .
+    - docker build --rm=false -t circleci/elasticsearch .
     - mkdir -p ~/docker; docker save circleci/elasticsearch > ~/docker/image.tar
 ```
 

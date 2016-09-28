@@ -19,4 +19,5 @@ Please see [this](https://github.com/docker/docker/issues/9939) issue
 for more details.
 
 Normally, this is a red-herring and doesn't affect your builds, so you can simply 
-ignore it.
+ignore it. You can add the `--rm=false` flag to `docker build` to avoid seeing 
+this issue.
