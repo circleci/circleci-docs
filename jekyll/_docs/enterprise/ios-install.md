@@ -7,7 +7,7 @@ description: "Adding OS X and iOS support to your CircleCI Enterprise installati
 hide: true
 ---
 
-## What we need
+### What we need
 
 CircleCI will require:
 
@@ -84,7 +84,9 @@ user=>
       (clj-keyczar.crypt/with-crypter (:keyset-crypt (circle.secrets/secrets))
         (circle-util.ssh-keys/encrypt-keypair
          {:public-key (slurp path-to-public-key)
-          :private-key (slurp path-to-private-key)}))]
+          :private-key (slurp path-to-private-key)}))
+          fleet "osx"]
+          
 
   (circle.backend.model.esxi-vm/run-migrations!) ;; Safe to run multiple times
   (circle.backend.model.esxi-vm/create-esxi-box
@@ -92,7 +94,8 @@ user=>
    encrypted-keypair
    encrypted-keypair
    host-ip-address
-   guest-ip-address)
+   guest-ip-address
+   fleet)
   (circle.model.settings/set! {
                                :xcode-supported-versions supported-versions
                                :run-inference-daemon true
