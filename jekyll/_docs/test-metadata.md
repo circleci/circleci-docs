@@ -162,6 +162,25 @@ test:
     - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
 ````
 
+### <a name="minitest"></a> Minitest
+
+To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
+
+```
+gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
+```
+
+And modify your test command to this:
+
+````
+test:
+  override:
+    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS":
+      parallel: true
+      files:
+        - test/**/*_test.rb
+````
+
 #### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
 
