@@ -158,7 +158,7 @@ If you don't want to use this method, there are
 The machine's time zone is UTC by default.
 You use `timezone`
 to adjust to the same time zone as your _production_ server.
-Changing the time to your _development_ machine's time zone is **asking for trouble**.
+Changing the time to your _development_ machine's time zone is **problematic**.
 
 This modifier tells CircleCI to
 overwrite `/etc/timezone`
