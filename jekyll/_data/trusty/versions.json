@@ -1,8 +1,8 @@
 {
   "summary": {
-    "build-image": "trusty-690-0b20901",
+    "build-image": "trusty-692-1323f09",
     "google-chrome": "53.0.2785.101",
-    "chromedriver": "2.23.409687",
+    "chromedriver": "2.24.417424",
     "firefox": "47.0.1",
     "mongod": "3.0.7",
     "psql": "9.5.4",
@@ -135,8 +135,8 @@
     "docker": "1.9.1",
     "docker-compose": "1.5.2",
     "heroku-toolbelt": "3.43.12",
-    "gcloud": "128.0.0",
-    "aws-cli": "1.11.0",
+    "gcloud": "129.0.0",
+    "aws-cli": "1.11.1",
     "android": {
       "build-tool": "24.4.1",
       "build-tools": [
