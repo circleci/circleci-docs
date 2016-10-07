@@ -57,12 +57,14 @@ Specify the app using the
 `appname`
 key.
 
+**Note:** the Heroku `appname` must not include upper case characters.
+
 ```
 deployment:
   staging:
     branch: master
     heroku:
-      appname: foo-bar-123
+      appname: foo-bar-123 # appname must not include upper-case characters
 ```
 
 You can now use the `git push` command.
