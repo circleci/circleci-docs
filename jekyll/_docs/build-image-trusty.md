@@ -190,9 +190,13 @@ Version: `{{ site.data.trusty.versions.summary.docker-compose }}`
 
 Version: `{{ site.data.trusty.versions.summary.firefox }}`
 
-### Chrome
+### Google Chrome
 
 Version: `{{ site.data.trusty.versions.summary.google-chrome }}`
+
+### ChromeDriver
+
+Version: `{{ site.data.trusty.versions.summary.chromedriver }}`
 
 ### PhantomJS
 
