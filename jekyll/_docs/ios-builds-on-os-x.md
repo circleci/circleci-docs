@@ -15,17 +15,17 @@ Projects page](https://circleci.com/add-projects).
 The OS X container that CircleCI uses to build has the following software
 versions installed:
 
-- OS X 10.11.3 (15D21) Darwin 15.3.0
+- OS X 10.11.6 (15G1004)
 - Xcode:
-  - 7.0 Build version 7A218
-  - 7.1.1 Build version 7B1005
+  - 7.0.1 Build version 7A1001
   - 7.2.1 Build version 7C1002
   - 7.3.1 Build version 7D1014
+  - 8.0 Build version 8A218a
 - Facebook xctool 0.2.9
-- CocoaPods 0.39.0
+- CocoaPods 1.0.1
 - xcpretty 0.2.2
-- fastlane 1.84.0
-- carthage 0.16.2
+- fastlane 1.101.0
+- carthage 0.17.2
 - shenzhen 0.14.2
 
 ## Simulator UUIDs
@@ -33,40 +33,44 @@ versions installed:
 When targeting a specific iOS simulator with the `-destination` flag, we suggest that you use one of these UUIDs instead of a combination of `-destination 'platform= , name='`.
 
 ```
-distiller-build-8:~ distiller$ xcrun instruments -s
-Known Devices:
-distiller-build-1 (2) [564D9991-8876-86A0-7497-2C2D8B529CBD]
-Apple TV 1080p (9.2) [CFB6004F-16F9-49B4-A117-CAFBCC0CE7CB] (Simulator)
+Apple TV 1080p (10.0) [48B0E1AB-F5EB-40FB-9372-A16B93349B12] (Simulator)
 iPad 2 (8.4) [A4276BA9-2D38-434D-A063-A1A7DC399235] (Simulator)
 iPad 2 (9.0) [2F39BEF2-E92D-498C-B2D9-29366BD8F732] (Simulator)
-iPad 2 (9.3) [101B434D-924B-4C7E-B8C1-ED8B376BF7CA] (Simulator)
+iPad Air (10.0) [B9257F59-88B3-421D-B1F2-2BD92F0858D0] (Simulator)
 iPad Air (8.4) [AD005E41-F7E6-4C5F-B3B1-6C980E834739] (Simulator)
 iPad Air (9.0) [42D87249-99F2-4BC1-9180-317D268C46F7] (Simulator)
-iPad Air (9.3) [72F9B9E8-DC05-4450-B030-407D4B0968D9] (Simulator)
+iPad Air 2 (10.0) [AC291080-8EFE-4095-8C55-B1E952EFFC36] (Simulator)
 iPad Air 2 (9.0) [6E2B1E19-6466-4328-917C-16019130FDE8] (Simulator)
-iPad Air 2 (9.3) [A141F49D-F20A-49B3-ACBF-A97F9FFB9B89] (Simulator)
+iPad Pro (12.9 inch) (10.0) [BF8D8AD2-6A96-4A62-8059-A836738BB873] (Simulator)
+iPad Pro (9.7 inch) (10.0) [F9C94E2A-F080-4AB0-93D6-A41135919D8E] (Simulator)
+iPad Retina (10.0) [D56EBD40-B853-4D56-B482-D4C40E69A3FC] (Simulator)
 iPad Retina (8.4) [399AEF36-5560-4C4A-AE61-03F0A81555D0] (Simulator)
 iPad Retina (9.0) [A1EC86BA-49AB-414B-9C27-2D0F26A34A81] (Simulator)
-iPad Retina (9.3) [A70FE3C7-756F-44BF-BE46-68663FAE2EE3] (Simulator)
 iPhone 4s (8.4) [F2E9EEAB-9FCE-4109-A40F-3DD79627C985] (Simulator)
 iPhone 4s (9.0) [5EF3DECC-3E8F-41A0-B2CF-DC384A66E12E] (Simulator)
-iPhone 4s (9.3) [8538CCCC-80FB-4B6B-9281-222771C38FEB] (Simulator)
+iPhone 5 (10.0) [85D8FE66-1208-4478-811C-7BD1AA3B33CA] (Simulator)
 iPhone 5 (8.4) [C5C8EA0E-F5A8-4AF8-BBAA-385B61026A5E] (Simulator)
 iPhone 5 (9.0) [24F6F5A0-343E-4C64-9F4C-B50D88F5E99E] (Simulator)
-iPhone 5 (9.3) [075FB8BA-F088-4A16-89CF-4EA36BC25E7A] (Simulator)
+iPhone 5s (10.0) [1FB033A8-440D-45F3-B95D-03E4E38B51DF] (Simulator)
 iPhone 5s (8.4) [45BFA4E8-C0A9-4A04-9CD0-4449FE4CF40B] (Simulator)
 iPhone 5s (9.0) [49DAC9E5-C129-497D-853E-D93BC4BB8A10] (Simulator)
-iPhone 5s (9.3) [3011ED5C-C63A-42E6-9D91-82A39DE4AD06] (Simulator)
+iPhone 6 (10.0) [33D34EBA-703E-4A82-8838-BE75171492E1] (Simulator)
+iPhone 6 (10.0) + Apple Watch - 38mm (3.0) [AB222C53-93E0-4D82-A6E0-00BABE11C87F] (Simulator)
 iPhone 6 (8.4) [65AAA024-64D5-40B9-A122-8872E3F52EC4] (Simulator)
 iPhone 6 (9.0) [53600017-30F1-428A-A16A-25C6CEDBD849] (Simulator)
-iPhone 6 (9.3) [547B1B63-3F66-4E5B-8001-F78F2F1CDEA7] (Simulator)
+iPhone 6 Plus (10.0) [5525775C-A351-4986-9BF4-144A84E253AA] (Simulator)
+iPhone 6 Plus (10.0) + Apple Watch - 42mm (3.0) [0E10CE3B-532C-4AC9-9F14-13387F90C4A0] (Simulator)
 iPhone 6 Plus (8.4) [DFB14113-4697-4E2D-AD3F-B4FBA4B62969] (Simulator)
 iPhone 6 Plus (9.0) [321D1CF5-2514-4897-8B09-C133602F6DB5] (Simulator)
-iPhone 6 Plus (9.3) [C63728B8-89B5-4FFB-8B6E-174A2F85B47F] (Simulator)
+iPhone 6s (10.0) [F08BA729-6AD2-42DF-A210-34DC8D990011] (Simulator)
 iPhone 6s (9.0) [763DC427-F2C5-4AA4-989F-2CA944FA8F04] (Simulator)
-iPhone 6s (9.3) [E8DD285C-51EE-4DB5-B326-7E927686EC36] (Simulator)
+iPhone 6s Plus (10.0) [A310FC97-435A-4026-AF85-F1216F856BA5] (Simulator)
 iPhone 6s Plus (9.0) [011805C3-BB7A-4785-A313-D7AD2AF6DE49] (Simulator)
-iPhone 6s Plus (9.3) [019CFBB0-0086-44A7-AA41-D39182D9CE01] (Simulator)
+iPhone 7 (10.0) [2D96E690-BFB5-44D5-8B22-31D9C57EDADF] (Simulator)
+iPhone 7 (10.0) + Apple Watch Series 2 - 38mm (3.0) [23990084-6F01-4978-86AD-7CEBD9C32E21] (Simulator)
+iPhone 7 Plus (10.0) [D4155E82-B930-450B-AFC7-F4800669EC65] (Simulator)
+iPhone 7 Plus (10.0) + Apple Watch Series 2 - 42mm (3.0) [EEC8A3AB-A636-4C88-97E7-36C035947432] (Simulator)
+iPhone SE (10.0) [84A11478-B7D4-4968-A626-E27CE7372148] (Simulator)
 ```
 
 ## Basic setup
@@ -105,14 +109,14 @@ customization options.
 
 ## Xcode Version
 
-By default, CircleCI will build your project with Xcode 7.0. You can select 7.1, 7.2 or 7.3.
+By default, CircleCI will build your project with Xcode 7.0. You can select 7.2, 7.3 or 8.0.
 by specifying the version in a [circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
-repo. For example, for 7.3, add the following:
+repo. For example, for 8.0, add the following:
 
 ```
 machine:
   xcode:
-    version: 7.3
+    version: 8.0
 ```
 
 ### CocoaPods
@@ -390,10 +394,10 @@ projects. Here are the most frequent of those:
 * **Xcode version is not available.** We install
   a few [different versions](#software-versions) of Xcode in the build
   image and keep those updated with the latest point releases. Therefore
-  to use the latest Xcode 7.1, for example, which is `7.1.1`, it is
-  sufficient to specify `7.1` in your `circle.yml`. If a newer point
-  release of 7.1 comes out, we will make that one available under the same
-  `7.1` version on CircleCI.
+  to use the latest Xcode 7.3, for example, which is `7.3.1`, it is
+  sufficient to specify `7.3` in your `circle.yml`. If a newer point
+  release of 7.3 comes out, we will make that one available under the same
+  `7.3` version on CircleCI.
 
 * **Dependency version mismatches.** If you see that the version of the
   dependencies used in the build are not the expected ones, please try
