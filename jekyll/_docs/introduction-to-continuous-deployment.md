@@ -56,7 +56,7 @@ You could also run deployments for everything but the master branch:
 ```
 deployment:
   development:
-    branch: /^((?!master).)*$/  # not the master branch
+    branch: /^(?!master$).*$/  # not the master branch
     commands:
       - ./deploy-development
 ```
