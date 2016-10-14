@@ -27,8 +27,8 @@ To setup CircleCI, please have the following handy:
 
 ### Installation Steps
 
-Once you have all of the prerequisites in place, you can [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/). We are currently beta testing CircleCI on non-AWS environments. Please reach out to <enterprise@circleci.com> if you would like access.
+Once you have all of the prerequisites in place, you can either [follow the detailed
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for non-AWS environments running Ubuntu]({{site.baseurl}}/enterprise/on-prem/). For other environments, contact us at <enterprise@circleci.com> for a guided installation. 
 
 
 ## Architecture
