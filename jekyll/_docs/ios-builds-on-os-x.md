@@ -421,7 +421,7 @@ projects. Here are the most frequent of those:
   failing with errors similar to this:
 
 * **Can't add my project as OS X build.** If you are trying to add an OS X
-  project from the ["add-project"](/add-project) page, but you don't see your
+  project from the ["add-project"](https://circleci.com/add-projects) page, but you don't see your
   project under the "OS X" tab, you can first add your project as a "Linux"
   build — and then switch it to an "OS X" build by going to the "Project
   Settings" page, then on the "Build Environment" page you will see the "Build
