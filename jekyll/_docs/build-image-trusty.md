@@ -17,6 +17,8 @@ Our base image uses Ubuntu 14.04, with the addition of many packages commonly us
 
 Version: `{{ site.data.trusty.versions.summary.build-image }}`
 
+We also push the image to [Docker Hub](https://hub.docker.com/r/circleci/build-image/tags/).
+
 ### Git
 
 Version: `{{ site.data.trusty.versions.summary.git }}`
