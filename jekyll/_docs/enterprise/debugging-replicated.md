@@ -1,12 +1,12 @@
 ---
 layout: enterprise
-title: "Debugging"
+title: "Debugging Replicated"
 category: [resources]
 order: 4.05
 description: "Tips for debugging CircleCI Enterprise."
 ---
 
-This document covers debugging various parts of CircleCI Enterprise.
+This document covers debugging Replicate on CircleCI Enterprise.
 
 ## Replicated
 
