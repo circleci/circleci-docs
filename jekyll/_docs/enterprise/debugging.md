@@ -34,9 +34,9 @@ Please check if the file exists and if not, please create the file manually. The
 }
 ```
 
-### Restarting replicated and the CircleCI app
+### Restarting Replicated and the CircleCI app
 
-Please try restarting replicated services. You can do this by running the following commands on the service box.
+Please try restarting Replicated services. You can do this by running the following commands on the service box.
 
 ```
 sudo restart replicated-ui
@@ -46,9 +46,9 @@ sudo restart replicated-agent
 
 Then, go to your services box admin (i.e.: https://YOUR-CCIE-INSTALL:8800) and try restarting with "Stop Now" and "Start Now".
 
-### Trying to login replicated
+### Trying to login Replicated
 
-Please try to login to replicated. You can do this by running the following commands on the service box. You will only be asked to enter password, which is the same one used to unlock the admin (i.e.: https://YOUR-CCIE-INSTALL:8800).
+Please try to login to Replicated. You can do this by running the following commands on the service box. You will only be asked to enter password, which is the same one used to unlock the admin (i.e.: https://YOUR-CCIE-INSTALL:8800).
 
 ```
 replicated login
@@ -60,7 +60,7 @@ If you could login, then please run the following command too and give us the ou
 sudo replicated apps
 ```
 
-You are getting Error: `request returned Unauthorized for API route`.. error probably because you are not logged into replicated, so please check if you are still getting the error after successful login.
+You are getting Error: `request returned Unauthorized for API route`.. error probably because you are not logged into Replicated, so please check if you are still getting the error after successful login.
 
 ### Output of docker ps
 
