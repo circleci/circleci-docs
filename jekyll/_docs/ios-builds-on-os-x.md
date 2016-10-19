@@ -10,6 +10,11 @@ CircleCI now offers support for building and testing iOS and OS X projects.
 You can select an OS X project you would like to build on the [Add
 Projects page](https://circleci.com/add-projects).
 
+If you're unable to find your project in the "OS X" tab, it may be listed as a
+"Linux" project. After adding your project as a "Linux" build, you can change
+it to an OS X build by enabling the "Build OS X project" option under the
+"Project Settings" > "Build Environment" page.
+
 ## Software Versions
 
 The OS X container that CircleCI uses to build has the following software
@@ -414,6 +419,13 @@ projects. Here are the most frequent of those:
 
 * **Timeout waiting for simulator.** If you see your test command
   failing with errors similar to this:
+
+* **Can't add my project as OS X build.** If you are trying to add an OS X
+  project from the ["add-project"](https://circleci.com/add-projects) page, but you don't see your
+  project under the "OS X" tab, you can first add your project as a "Linux"
+  build — and then switch it to an "OS X" build by going to the "Project
+  Settings" page, then on the "Build Environment" page you will see the "Build
+  OS X project" option.
 
 ```
 iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1
