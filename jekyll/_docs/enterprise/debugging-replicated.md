@@ -26,7 +26,7 @@ replicated -version
 
 This error may occur when using the CLI tool.
 
-Please check if the file exists and if not, please create the file manually. The file content must look like the following.
+Please check if the file exists and if not, please create the file manually. The file content must look like the following:
 
 ```
 {
@@ -36,7 +36,7 @@ Please check if the file exists and if not, please create the file manually. The
 
 ### Restarting Replicated and the CircleCI app
 
-Please try restarting Replicated services. You can do this by running the following commands on the service box.
+Please try restarting Replicated services. You can do this by running the following commands on the service box:
 
 ```
 sudo restart replicated-ui
@@ -44,7 +44,7 @@ sudo restart replicated
 sudo restart replicated-agent
 ```
 
-Then, go to your services box admin (i.e.: https://YOUR-CCIE-INSTALL:8800) and try restarting with "Stop Now" and "Start Now".
+Then, go to your services box admin (i.e. https://YOUR-CCIE-INSTALL:8800) and try restarting with "Stop Now" and "Start Now".
 
 ### Trying to login Replicated
 
