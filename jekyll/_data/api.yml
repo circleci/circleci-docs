@@ -281,15 +281,15 @@ artifacts:
     [
       {
         node_index: 0,
-        path: "/tmp/circle-artifacts.NHQxLku/cherry-pie.png",
-        pretty_path: "$CIRCLE_ARTIFACTS/cherry-pie.png",
-        url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/cherry-pie.png"
+        path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
+        pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
+        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
       },
       {
         node_index: 0,
-        path: "/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png",
-        pretty_path: "$CIRCLE_ARTIFACTS/rhubarb-pie.png",
-        url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png"
+        path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+        pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/bakingrhubarb-pie.png"
       }
     ]
 
@@ -303,15 +303,15 @@ artifacts_latest:
   response: |
     [{
       node_index: 0,
-      path: "/tmp/circle-artifacts.NHQxLku/cherry-pie.png",
-      pretty_path: "$CIRCLE_ARTIFACTS/cherry-pie.png",
-      url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/cherry-pie.png"
+      path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
+      pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
+      url: "https://circleci.com/gh/circleci/tsting/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
     },
     {
       node_index: 0,
-      path: "/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png",
-      pretty_path: "$CIRCLE_ARTIFACTS/rhubarb-pie.png",
-      url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png"
+      path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+      pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+      url: "https://circleci.com/gh/circleci/testing/22/artifacts/0//home/ubuntu/circleci-testing/baking/rhubarb-pie.png"
     }]
 
 retry_build:
