@@ -287,8 +287,8 @@ artifacts:
       },
       {
         node_index: 0,
-        path: "home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-        pretty_path: "home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+        path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
+        pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
         url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/bakingrhubarb-pie.png"
       }
     ]
@@ -304,7 +304,7 @@ artifacts_latest:
     [{
       node_index: 0,
       path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-      pretty_path: "home/ubuntu/circleci-testing/baking/cherry-pie.png",
+      pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
       url: "https://circleci.com/gh/circleci/tsting/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
     },
     {
