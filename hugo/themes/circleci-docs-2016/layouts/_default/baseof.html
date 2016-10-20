@@ -9,8 +9,16 @@
 </head>
 <body class="{{ if .IsHome }}home{{ end }}">
 {{ partial "header" . }}
-{{ block "main" . }}
-{{ end }}
+<div id="page">
+	<aside id="sidebar">
+		{{ block "sidebar" . }}
+		{{ end }}
+	</aside>
+	<article>
+		{{ block "main" . }}
+		{{ end }}
+	</article>
+</div>
 {{ partial "footer-js" . }}
 {{ partial "global-footer" . }}
 </body>

@@ -1,3 +1,15 @@
+{{ define "sidebar" }}
+{{ if ne .Params.categories nil }}
+<div class="cat-back">
+	<i class="fa fa-angle-left"></i><a class="active" href="">{{ .Params.categories }}</a>
+</div>
+{{ end }}
+{{ .Title }}
+{{ .TableOfContents }}
+{{ partial "category-card" . }}
+{{ end }}
+
 {{ define "main" }}
+<h1>{{ .Title }}</h1>
 {{ .Content }}
 {{ end }}

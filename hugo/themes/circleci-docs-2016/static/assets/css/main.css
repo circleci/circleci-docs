@@ -1,1 +1,90 @@
-#hi{}
+/***** Layout *****/
+#primary-header{
+	border-top: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	background-color: #FBFBFB;
+	height: 120px;
+	line-height: 120px;
+}
+	#primary-header h2{
+		display: inline-block;
+		margin: 0 25px;
+		text-transform: capitalize;
+	}
+
+	#primary-header form{
+		display: inline-block;
+		width: 50%;
+	}
+		#primary-header form input{
+		}
+
+#secondary-header{
+	text-align: center;
+}
+	#secondary-header ul{
+		display: inline-block;
+		margin: 0;
+		border-bottom: 1px solid #DDDDDD;
+		padding: 0;
+	}
+		#secondary-header li{
+			float: left;
+			padding: 5px 15px;
+			list-style-type: none;
+		}
+
+#page{
+	display: flex;
+	padding: 20px 25px;
+}
+	#sidebar{
+		width: 25%;
+	}
+		#TableOfContents ul{
+			padding: 0 0 0 20px;
+			list-style-type: none;
+		}
+			#TableOfContents > ul{
+				margin-top: 15px;
+				border-left: 2px solid #31AFA6;
+				padding: 0;
+			}
+	
+	article{
+		border: 1px solid #DDDDDD;
+		border-radius: 10px;
+		padding: 15px 25px;
+		width: 75%
+	}
+/*** End Layout ***/
+
+
+/***** Typography *****/
+a{
+	color: #343434;
+}
+	a.active{
+		color: #337AB7;
+	}
+
+#secondary-header a{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#sidebar div.cat-back{
+	line-height: 25px;
+	font-size: 16px;
+	font-weight: bold;
+}
+	#sidebar div.cat-back i{
+		margin-right: 10px;
+		color: #DDDDDD;
+		font-size: 20px;
+	}
+
+#TableOfContents a{
+	font-size: 16px;
+}
+/*** End Typegraphy ***/
