@@ -21,7 +21,7 @@ dependencies:
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_staging.yml --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
 
     # Hugo build
-    - hugo -v -s hugo -d hugo/gen/staging-site
+    - hugo -v -s hugo -d gen/staging-site
 
 test:
   post:
