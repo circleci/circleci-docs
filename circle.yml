@@ -1,8 +1,14 @@
 machine:
   environment:
     NOKOGIRI_USE_SYSTEM_LIBRARIES: true # speeds up installation of html-proofer
+
 dependencies:
+  pre:
+    - scripts/install-hugo.sh
+  cache_directories:
+    - ~/bin
   post:
+    # Jekyll build
     # https://github.com/jekyll/jekyll/issues/4122
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
@@ -13,13 +19,18 @@ dependencies:
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_staging.yml --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
+
+    # Hugo build
+    - hugo -v -s hugo -d hugo/gen/staging-site
+
 test:
   post:
     # --empty-alt-ignore is temporary
     - bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
+
 deployment:
   prod:
     branch: master
     commands:
-      - aws s3 sync jekyll/_staging_site/docs s3://static-staging.circleci.com/docs/ --delete
+      - aws s3 sync hugo/gen/staging-site s3://static-staging.circleci.com/docs/ --delete
       - aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
