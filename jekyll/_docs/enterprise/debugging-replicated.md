@@ -62,6 +62,10 @@ sudo replicated apps
 
 You are getting Error: `request returned Unauthorized for API route`.. error probably because you are not logged into Replicated, so please check if you are still getting the error after successful login.
 
+### Replicated logs
+
+You can find Replicated logs under `/var/log/replicated`.
+
 ### Output of docker ps
 
 Replicated starts many Docker containers to run CCIE, so it may be useful to check what containers are running.
