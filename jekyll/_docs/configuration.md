@@ -7,7 +7,7 @@ description: How to configure CircleCI
 
 CircleCI automatically infers your settings from your code, so CircleCI's normal processing works just fine in most circumstances.
 When it doesn't, the `circle.yml` file makes it easy to tell CircleCI what you need.
-This is a simple YAML file where you spell out any tweaks required for your web app.
+This is a simple YAML file where you spell out any tweaks required for your app.
 You place the file in your git repo's root directory and CircleCI reads the file each time it runs a build.
 
 If you want a quick look at how to set up your `circle.yml`
