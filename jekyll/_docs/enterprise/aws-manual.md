@@ -104,16 +104,16 @@ To start a box:  Start a new instance with the appropriate region-specific AMI:
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-c7c838a6
-ap-northeast-2     | ami-b477bcda
-ap-southeast-1     | ami-5775a734
-ap-southeast-2     | ami-654e6506
-eu-central-1       | ami-3401ea5b
-eu-west-1          | ami-2237ad51
-sa-east-1          | ami-8360f5ef
-us-east-1          | ami-564df541
-us-west-1          | ami-0b4a0d6b
-us-west-2          | ami-b1a667d1
+ap-northeast-1     | ami-59389e38
+ap-northeast-2     | ami-a2e236cc
+ap-southeast-1     | ami-a80fa9cb
+ap-southeast-2     | ami-53241930
+eu-central-1       | ami-5a59a035
+eu-west-1          | ami-e0c78993
+sa-east-1          | ami-3832af54
+us-east-1          | ami-d0396bc7
+us-west-1          | ami-76226916
+us-west-2          | ami-938420f3
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
