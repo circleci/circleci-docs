@@ -13,7 +13,9 @@ dependencies:
     #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
 
     # We want to expose the version file to public for the reusability
-    - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
+    - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json # Remove trusty.json. It's the same as ubuntu-14.04-XXL.json
+    - cp jekyll/_data/trusty/versions-ubuntu-14.04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
+    - cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
 
     # https://github.com/jekyll/jekyll/issues/4713
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
