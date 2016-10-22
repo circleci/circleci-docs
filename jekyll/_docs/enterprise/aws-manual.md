@@ -114,10 +114,6 @@ sa-east-1          | ami-3832af54
 us-east-1          | ami-d0396bc7
 us-west-1          | ami-76226916
 us-west-2          | ami-938420f3
-
-# These AMIs are not maintained by CircleCI, but contain a patched version of stock ubuntu. 
-gov-west-1 = “ami-34df6755”
-cn-north-1 = “ami-92f622ff”
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
