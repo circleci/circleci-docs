@@ -62,9 +62,6 @@ Failing commands (those with a non-zero exit code) will cause the whole build to
 For the most part, there is nothing that you have to add to configure the test machine.
 We have already installed the most common libraries, languages, browsers, and databases that you'll need.
 See [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/) build image pages for a comprehensive list of what we have installed.
-If you need anything else installed, please [contact us](mailto:support@circleci.com)
-and CircleCI support should be able to accommodate you.
-Be aware that for security reasons, we don't provide root access.
 
 The [machine section]({{ site.baseurl }}/configuration/#machine)
 of the `circle.yml` file is the place where you can tweak common settings, such as timezone, language version used, and
