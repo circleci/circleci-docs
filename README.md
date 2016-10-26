@@ -74,7 +74,7 @@ jekyll serve
 ```
 
 Jekyll will build the site and start a web server. It can be viewed in your 
-browser at <http://localhost:4000/docs/>. To stop Jekyll and regain controll 
+browser at <http://localhost:4000/docs/>. To stop Jekyll and regain control 
 of your terminal, just type `CTRL-C`.
 
 ####  Editing Docs
@@ -87,24 +87,24 @@ and serve the site.
 
 This is a Bash wrapper script to talk to Jekyll & Vagrant.
 
-- start: Starts Jekyll. Is Vagrant isn't running, starts Vagrant as well.
+- start: Starts Jekyll. If Vagrant isn't running, starts Vagrant as well.
 - rebuild: Tells Jekyll to rebuild the site.
-- stop: Shuts down the entire VM (vagrant halt), including Jekyll.
+- stop: Shuts down the entire VM (`vagrant halt`), including Jekyll.
 - restart: Restarts the Vagrant machine. Basically an alias of stop then start.
 
 ## Jekyll Commands
 
-`jekyll build` - this tells Jekyll to generate the static files for the site, 
+`jekyll build`: this tells Jekyll to generate the static files for the site, 
 and place them in the `jekyll/_site` directory. It does not serve the files.
 
-`jekyll serve` - this first runs `jekyll build`, then starts up an included 
+`jekyll serve`: this first runs `jekyll build`, then starts up an included 
 mini webserver to serve the files from the `'jekyll_site` directory. Listens to 
 localhost:4000 by default.
 
-`jekyll serve --detach` - this serves the site as before, but runs in the 
+`jekyll serve --detach`: this serves the site as before, but runs in the 
 background so that you can still use the same terminal window. Jekyll will tell 
-you which process ID belongs to it before it goes so you can use that to kill 
-it when you want to stop Jekyll. `kill -9 P_ID`. If you lose the ID, you can 
+you which process ID belongs to it so you can use that to kill the process when
+you want to stop Jekyll: `kill -9 P_ID`. If you lose the PID, you can 
 run `pkill -f jekyll` to stop all Jekyll instances.
 
 ## License Information
