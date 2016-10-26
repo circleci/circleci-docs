@@ -42,28 +42,29 @@ then view the docs at <http://localhost:4040/docs/>.
 
 All of the docs can be found in the `jekyll/_docs` directory. You can make any 
 changes that you need there, then run `./jctl rebuild` to have Jekyll rebuild 
-the site. How to use [**jctl**](#jekyll-controller-jctl) can be found below.
+the site. Instructions for how to use [**jctl**](#jekyll-controller-jctl) can
+be found below.
 
 As an alternative to using JCTL, you can log into the VM directly to interact 
 with Jekyll. Run `vagrant ssh` to enter the VM directly. `cd /vagrant/jekyll` 
-will take you to where the repository files are in the VM. From there you could 
+will take you to where the repository files are in the VM. From there you can 
 run standard Jekyll commands such as `jekyll server` with whatever flags you 
 would like.
 
 ### Bare Setup
 
 #### Prerequisites
-Going the bare route, the following software need to be installed:
+Going the bare route, the following software needs to be installed:
 
-- Git - system version should be fine
-- Ruby - the version of Ruby currently being used with this project will be noted in the Gemfile. If you need to manage multiple Ruby versions, we recommend RVM though there are similar solutions you can use.
-- [Jekyll](https://jekyllrb.com/) - Jekyll version 3.
-- [HTMLProofer](https://github.com/gjtorikian/html-proofer) - HTMLProofer is used for testing links, images, and the HTML. The docs site needs to pass the build and test to be deployed. You can use HTMLProofer to test things before you send changes up to GitHub.
+- Git: system version should be fine
+- Ruby: the version of Ruby currently being used with this project will be noted in the Gemfile. If you need to manage multiple Ruby versions, we recommend RVM, though there are similar solutions you can use.
+- [Jekyll](https://jekyllrb.com/): Jekyll version 3.
+- [HTMLProofer](https://github.com/gjtorikian/html-proofer): HTMLProofer is used for testing links, images, and HTML. The docs site needs to pass the build and tests to be deployed. You can use HTMLProofer to test things before you send changes up to GitHub.
 
-You're welcome to also use Bundler to install the Gems needed. If you are using RVM (or similar), just make sure they all play nice together.
+You're welcome to also use Bundler to install the Gems needed. If you are using RVM (or similar), just make sure they all play nicely together.
 
 #### First Run
-To get a local copy of circleci.com/docs/ up and running you can run the 
+To get a local copy of <circleci.com/docs/> up and running, you can run the 
 following commands:
 
 ```
