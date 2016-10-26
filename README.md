@@ -74,7 +74,7 @@ jekyll serve
 ```
 
 Jekyll will build the site and start a web server. It can be viewed in your 
-browser at [](http://localhost:4000/docs/). To stop Jekyll and regain controll 
+browser at <http://localhost:4000/docs/>. To stop Jekyll and regain controll 
 of your terminal, just type `CTRL-C`.
 
 ####  Editing Docs
