@@ -36,7 +36,7 @@ cd circleci-docs
 ```
 
 Once this is complete, Jekyll will automatically start in the VM. Vagrant starts forwarding port 4040 for you. You can 
-simply view the docs at http://localhost:4040/docs/ .
+then view the docs at <http://localhost:4040/docs/>.
 
 ####  Editing Docs
 
@@ -82,7 +82,7 @@ All of the docs can be found in the `jekyll/_docs` directory. You can make any
 changes that you need there, then re-run `jekyll serve` to have Jekyll rebuild 
 and serve the site.
 
-## Jekyll Controller (JTCL)
+## Jekyll Controller (JCTL)
 
 This is a Bash wrapper script to talk to Jekyll & Vagrant.
 
