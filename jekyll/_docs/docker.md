@@ -304,8 +304,6 @@ test:
     - cp /var/test-output/* $CIRCLE_TEST_REPORTS
 ```
 
-docker version && sudo stop docker && curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0 && sudo start docker && docker version
-
 ### Docker Exec
 
 If you try to run `docker exec` in our containers, you'll see an error like
