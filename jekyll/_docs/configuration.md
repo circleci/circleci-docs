@@ -285,7 +285,7 @@ Please check out [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-preci
 <h3 id="services">Databases and other services</h3>
 
 CircleCI supports a large number of databases and other services.
-Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB.
+Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis (not started by default on Ubuntu 14.04) and MongoDB.
 
 You can enable other databases and services from the `services` section:
 
