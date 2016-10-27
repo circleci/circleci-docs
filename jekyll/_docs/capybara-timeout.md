@@ -27,7 +27,7 @@ dependencies:
   pre:
     - mkdir ../firefox-20
     - wget -O firefox-20.0.tar.bz2 'https://archive.mozilla.org/pub/firefox/releases/20.0/linux-x86_64/en-US/firefox-20.0.tar.bz2';tar xjf firefox-20.0.tar.bz2;firefox_cmd=`which firefox`;sudo rm -f $firefox_cmd;sudo ln -s `pwd`/firefox/firefox $firefox_cmd:
-      pwd: ../firefox-20
+        pwd: ../firefox-20
 ```
 
 You will need to replace the version here with your compatible version. [Browse the releases](https://archive.mozilla.org/pub/firefox/releases/) to get your URL.
