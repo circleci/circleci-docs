@@ -183,3 +183,5 @@ RAILS_ENV=test bundle exec rake test
 
 You can also use [the environment modifier](/docs/configuration/#modifiers) in your
 `circle.yml` file.
+
+**Note:** We don't parse any environment variables in the `webhooks` section of `circle.yml`.
