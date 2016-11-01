@@ -4,7 +4,7 @@
 
   var pageCategory = "docs";
   // slice off the slashes on either end
-  var pageName     = {{ page.url | jsonify }}.slice(1, -1);
+  var pageName     = {{ page.url | jsonify }}.slice(1, -1) || "default";
 
   var properties = {
     "title"      : {{ page["title"] | jsonify }},
