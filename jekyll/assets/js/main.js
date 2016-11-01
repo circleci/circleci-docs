@@ -20,8 +20,6 @@ $( document ).ready(function() {
 	});
 
 	$.getJSON("/api/v1/me").done(function (userData) {
-		$(document.body).addClass('loggedin');
 		analytics.identify(userData['analytics_id']);
-		window.userData = userData;
 	});
 });
