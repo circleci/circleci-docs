@@ -18,4 +18,8 @@ $( document ).ready(function() {
 	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
 		$(this).find("i").toggle();
 	});
+
+	$.getJSON("/api/v1/me").done(function (userData) {
+		analytics.identify(userData['analytics_id']);
+	});
 });
