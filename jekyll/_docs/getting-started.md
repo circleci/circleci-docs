@@ -19,8 +19,6 @@ If you do, your tests will be up and running in a flash.
 Add
 your [first project](https://circleci.com/dashboard) now!
 
-(**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens/))
-
 ### When the magic doesn't work?
 
 Of course, life is not always sunshine and daisies.
@@ -44,8 +42,15 @@ We use GitHub or Bitbucket permissions for all projects, so if they have access 
 
 One of the best things about CircleCI's design is that you have your own account, which in turn enables CircleCI to send you personalized emails only for the branches you use.
 
-### Add more projects
+### Add and follow more projects
 
-No matter if you commit to a project only once a month or if a project is just getting started, adding it to CircleCI will help keep it on track.
-Add projects from the
-[dashboard](https://circleci.com/dashboard).
+No matter if you commit to a project only once a month or if a project is just getting started, adding it to CircleCI will help keep it on track. 
+
+Adding a project refers to the first time the project is setup on CircleCI.
+(**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens/))
+Add projects from [add projects](https://circleci.com/add-projects).
+
+Following a project subscribes you to email notifications and adds the project into your dashboard's project/branch picker. CircleCI users that push to a new project get automatically followed to the project. You can control which projects you follow (including following projects that you do not push to!) from [add projects](https://circleci.com/add-projects).
+
+
+
