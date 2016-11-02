@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Interacting with the browser on CircleCI's VM"
-description: "How to interacting with a browser on Circleci's vm"
+description: "How to interact with a browser on CircleCI's VM"
 ---
 
 Integration tests can be hard to debug, especially when they're running on a remote machine.
@@ -16,15 +16,15 @@ and then view them when the build finishes.
 Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and supported by most test suites:
 
 *   [Manually, using Selenium directly](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
-*   [Automaticaly on failure, using Cucumber](https://github.com/mattheworiordan/capybara-screenshot)
-*   [Automaticaly on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
+*   [Automatically on failure, using Cucumber](https://github.com/mattheworiordan/capybara-screenshot)
+*   [Automatically on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
 
 To make this work with build artifacts, you need to save the screenshot to the
 `$CIRCLE_ARTIFACTS` directory.
 
 ## Using a browser on your dev machine to access HTTP server on CircleCI
 
-If you are running a test that runs a HTTP server on CircleCI, sometimes it can
+If you are running a test that runs an HTTP server on CircleCI, sometimes it can
 be helpful to use a browser running on your local machine to debug why a
 particular test is failing. Setting this up is easy with an SSH-enabled
 build.
@@ -39,8 +39,8 @@ ssh -p 64625 ubuntu@54.221.135.43
 We want to add port-forwarding to the command, which we do with the `-L` flag.
 We want to specify a local port and remote port. In this example we will forward
 requests to `http://localhost:8080` to port `3000` on the CircleCI container.
-This would be useful if your build runs a debug Ruby on Rails app, which listens
-on port 3000 for example.
+This would be useful, for instance, if your build runs a debug Ruby on Rails app, which listens
+on port 3000.
 
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 8080:localhost:3000
@@ -48,9 +48,9 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 8080:localhost:3000
 
 You can now open your browser on your local machine and navigate to
 `http://localhost:8080` and this will send requests directly to the server
-running on port `3000` on the CircleCI container. You can now manually start the
-test server on the CircleCI container if it is not aleady running, and you
-should be able to access from the browser on you development machine.
+running on port `3000` on the CircleCI container. You can also manually start the
+test server on the CircleCI container (if it is not already running), and you
+should be able to access the running test server from the browser on your development machine.
 
 This is a very easy way to debug things when setting up Selenium tests, for
 example.
@@ -59,9 +59,9 @@ example.
 
 ### Spawning your own X Server
 
-VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless -- there is nothing to interact with.
+VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless &mdash; there is nothing to interact with.
 
-Before you start, make sure you have a VNC viewer installed. If you're using OSX, I recommend
+Before you start, make sure you have a VNC viewer installed. If you're using OSX, we recommend
 [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
@@ -72,7 +72,7 @@ to a CircleCI VM. When you connect to the machine, add the -L flag and forward t
 daniel@mymac$ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 
-You should be connected to the Circle VM, now start the VNC server:
+You should be connected to the Circle VM. Now start the VNC server:
 
 ```
 ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24
@@ -80,7 +80,7 @@ ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24
 
 Enter the password `password` when it prompts you for a password. Your connection is secured with SSH, so there is no need for a strong password. You do need to enter a password to start the VNC server.
 
-Start your VNC viewer and connect to `localhost:5902`, enter the password you entered when it prompts you for a password. You should see a display containing a terminal window. You can ignore any warnings about an insecure or unencrypted connection. Your connection is secured through the SSH tunnel.
+Start your VNC viewer and connect to `localhost:5902`. Enter the password you entered when it prompts you for a password. You should see a display containing a terminal window. You can ignore any warnings about an insecure or unencrypted connection. Your connection is secured through the SSH tunnel.
 
 Next, make sure to run:
 
@@ -92,7 +92,7 @@ to ensure that windows open in the VNC server, rather than the default headless 
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser &mdash; it's as if the tests were running on your local machine!
 
-### Sharing Circle's X Server
+### Sharing CircleCI's X Server
 
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use x11vnc to attach a VNC server to X.
 
@@ -114,9 +114,9 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 ## X11 forwarding over SSH
 
-CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC -- you can interact with the browser running on CircleCI from your local machine.
+CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-Before you start, make sure you have an X Window System on your computer. If you're using OSX, I recommend
+Before you start, make sure you have an X Window System on your computer. If you're using OSX, we recommend
 [XQuartz](http://xquartz.macosforge.org/landing/).
 
 With X set up on your system, [start an SSH build]({{site.baseurl}}/ssh-build/)
@@ -127,7 +127,8 @@ daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
 
 This will start an SSH session with X11 forwarding enabled.
-To connect your VM's display to your machine, set the display environment variable to localhost:10.0
+
+To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
 
 ```
 ubuntu@box10$ export DISPLAY=localhost:10.0
@@ -139,14 +140,14 @@ Check that everything is working by starting xclock.
 ubuntu@box10$ xclock
 ```
 
-You can kill xclock with Ctrl+c after it appears on your desktop.
+You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser &mdash; it's as if the tests were running on your local machine!
 
 ### VNC Viewer Recommendations
 
 Some of our customers have had some VNC clients perform poorly and
-others perform well.  Particuarly, on OS X RealVNC produces a better
+others perform well.  Particuarly, on OS X, RealVNC produces a better
 image than Chicken of the VNC.
 
 If you have had a good or bad experience with a VNC viewer,
