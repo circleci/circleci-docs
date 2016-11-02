@@ -147,6 +147,10 @@ fi
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
 
+### Test suite split with knapsack gem
+
+You can parallelize tests for RSpec, Cucumber, Minitest, Spinach and Turnip with [knapsack gem](https://github.com/ArturT/knapsack). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. Knapsack gem has [built in support for CircleCI](https://github.com/ArturT/knapsack#info-for-circleci-users).
+
 ## Contact Us
 
 If you set this up for a library or framework that we should be
