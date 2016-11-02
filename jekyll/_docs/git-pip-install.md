@@ -32,5 +32,5 @@ git+http://github.com/someorg/somerepo.git
 ```
 
 If the repository is private, you will need to enable user keys
-from your project's ** Project settings > Checkout SSH keys**
+from your project's **Project settings > Checkout SSH keys**
 page.
