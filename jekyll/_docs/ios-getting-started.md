@@ -92,7 +92,7 @@ You will then be asked for a **certificate export password**. This is not requir
 
 #### Adding your certificate
 
-Go to your project page on CircleCI, and open the **Project Settings**, then go to **iOS Code Signing** in the **Permissions** section.
+Go to your project page on CircleCI, and open the **Project Settings**, then go to **OS X Code Signing** in the **Permissions** section.
 
 ![The CircleCI Project Settings, iOS Code Signing page]({{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-code-signing-menu.png)
 
@@ -101,8 +101,6 @@ Then click **Upload Key**, and enter the details for your certificate, including
 ![The CircleCI Certificate Details]({{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-certificate-details.png)
 
 Then select the `.p12` file you wish to upload and click upload.
-
-![The CircleCI Certificate Uploader]({{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-certificate-uploader.png)
 
 The uploaded p12 certificates will be installed into `circle.keychain` as part of your build setup. The password for this keychain is `circle` and it is unlocked for the duration of the build.
 
