@@ -6,7 +6,7 @@ categories: [mobile-platforms]
 description: Testing iOS applications on CircleCI
 ---
 
-To get your build running on CircleCI, you first need to [add your project to CircleCI](). When you've done this, GitHub/Bitbucket will start notifying us of changes to your repository so that we may perform builds.
+To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). When you've done this, GitHub/Bitbucket will start notifying us of changes to your repository so that we may perform builds.
 
 By default, we will build projects on Linux so need to enable macOS for your project. You can do this by going to **Project Settings** -> **Build Environment** and enabling the **Build OS X Project** setting.
 
@@ -114,7 +114,7 @@ To use your provisioning profile with your CircleCI builds, you need to commit t
 
 Although our inference will work for many cases, some teams may want to customise their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
 
-If you wish to see a more detailed guide to the format, you can take a look at our [configuration sample](https://circleci.com/docs/config-sample/).
+If you wish to see a more detailed guide to the format, you can take a look at our [configuration sample]({{ site.baseurl }}/config-sample/).
 
 ### Machine Configuration
 
