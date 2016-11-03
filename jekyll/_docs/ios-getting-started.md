@@ -6,9 +6,9 @@ categories: [mobile-platforms]
 description: Testing iOS applications on CircleCI
 ---
 
-To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). When you've done this, GitHub/Bitbucket will start notifying us of changes to your repository so that we may perform builds.
+To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.
 
-By default, we will build projects on Linux so need to enable macOS for your project. You can do this by going to **Project Settings** -> **Build Environment** and enabling the **Build OS X Project** setting.
+By default, we build projects on Linux, so you’ll need to enable macOS for your project. You can do this by going to **Project Settings** -> **Build Environment** and enabling the **Build OS X Project** setting.
 
 ![Build Environment Settings]({{ site.baseurl }}/assets/img/docs/ios-getting-started-build-env.png)
 
@@ -16,17 +16,15 @@ By default, we will build projects on Linux so need to enable macOS for your pro
 
 When we run your project on macOS, we check for and validate the presence of:
 
-- an Xcode workspace or project
-- with at least one shared shared scheme
+- an Xcode workspace/project
+- with at least one shared scheme
 - and that the selected scheme has a test action
 
 ### Sharing Schemes
 
-If you don't already have a shared scheme you can do this in Xcode. 
+If you don't already have a shared scheme, you can do this in Xcode.
 
-Firstly, open your Xcode project or workspace.
-
-Then use the scheme selector to open the **Manage Schemes** dialogue.
+First, open your Xcode workspace or project. Then, use the scheme selector to open the **Manage Schemes** dialogue.
 
 ![Xcode Scheme Selector]({{ site.baseurl }}/assets/img/docs/ios-getting-started-scheme-selector.png)
 
@@ -34,7 +32,7 @@ In the manage schemes dialog, select the scheme you wish to build, and ensure th
 
 ![Manage Schemes Dialogue]({{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 
-Then commit and push the schemes.
+Finally, commit and push the schemes.
 
 ## Builds
 
@@ -42,11 +40,11 @@ Builds are broken up into three main phases: **Dependencies**, **Test**, and **D
 
 ### Dependencies
 
-The dependencies phase of your project is where we install any [Ruby Gems](https://rubygems.org), [CocoaPods](https://cocoapods.org), [Node Modules](https://npmjs.org), and other packages necessary for your build.
+This phase is for installing any [Ruby Gems](https://rubygems.org), [CocoaPods](https://cocoapods.org), [Node Modules](https://npmjs.org), and/or other packages your build needs.
 
 ### Tests
 
-The test phase of your project is where we build and test your project.
+This phase is for building and testing your project.
 
 For iOS projects, we will generate a command to build and test your project using the `xcodebuild` command line tool. The command we generate is similar to:
 
@@ -70,7 +68,8 @@ If your project uses [React Native](https://facebook.github.io/react-native/), w
 ### Code Signing
 
 We can automatically inject your code signing certificates and unlock the keychain for your build.
-To get code signing working for your iOS app using our automated code signing support, you would need to do the following:
+
+To use our automated code signing support for your iOS app, perform the following steps:
 
 #### Export your certificates (p12)
 
@@ -78,17 +77,16 @@ Open **Keychain Access.app**, and select **My Certificates** in the menu on the 
 
 ![Keychain Access.app with the keychain that contains the keys, and My Certificates selected]({{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-access-my-certificates.png)
 
-
 You should then be able to see a certificate with **iPhone Developer:** or **iPhone Distribution:**
 Select the certificate, then select **File -> Export Items** from the macOS Menu Bar.
 
 ![The Keychain Access.app file menu with Export Items in a hover state]({{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-file-menu.png)
 
-Ensure that the file format is **Personal Information Exchange (.p12)**. If the option is not available, It is likely that you did not also select the private key when you selected the certificate.
+Ensure that the file format is **Personal Information Exchange (.p12)**. If the option is not available, you probably forgot to select the private key when you selected the certificate.
 
 ![The Keychain Access.app Export dialogue]({{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-export-dialogue.png)
 
-You will then be asked for a **certificate export password**. This is not required but we recommend using a strong password.
+You will then be asked for a **certificate export password**. This is not required, but we do recommend it.
 
 #### Adding your certificate
 
@@ -96,13 +94,13 @@ Go to your project page on CircleCI, and open the **Project Settings**, then go 
 
 ![The CircleCI Project Settings, iOS Code Signing page]({{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-code-signing-menu.png)
 
-Then click **Upload Key**, and enter the details for your certificate, including the password you used when exporting the .p12
+Click **Upload Key** and enter the details for your certificate, including the password you used when exporting the .p12.
 
 ![The CircleCI Certificate Details]({{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-certificate-details.png)
 
-Then select the `.p12` file you wish to upload and click upload.
+Select the `.p12` file you wish to upload and click upload.
 
-The uploaded p12 certificates will be installed into `circle.keychain` as part of your build setup. The password for this keychain is `circle` and it is unlocked for the duration of the build.
+The uploaded p12 certificates will be installed into `circle.keychain` as part of your build setup. The password for this keychain is `circle`, and it is unlocked for the duration of the build.
 
 This keychain is also added to the Xcode search path, so any credentials stored here will be available to Xcode.
 
@@ -114,13 +112,13 @@ To use your provisioning profile with your CircleCI builds, you need to commit t
 
 Although our inference will work for many cases, some teams may want to customise their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
 
-If you wish to see a more detailed guide to the format, you can take a look at our [configuration sample]({{ site.baseurl }}/config-sample/).
+If you wish to see a more detailed guide to the format, take a look at our [configuration sample]({{ site.baseurl }}/config-sample/).
 
 ### Machine Configuration
 
-Sometimes you might want to pin your build to either an older version of Xcode or use a beta. You can do this by configuring a machine section in your `circle.yml`.
+Sometimes you’ll want to pin your build to either an older version of Xcode or a version in beta. You can do this by configuring a `machine` section in your `circle.yml`.
 
-To do so, you add a root level `machine` section to the document, with a nested Xcode and version section like so:
+To do so, add a root level `machine` section to the document with a nested Xcode and version section:
 
 ```
 machine:
@@ -130,7 +128,7 @@ machine:
 
 ### Dependencies
 
-If you have dependencies from homebrew, or wish to have more control over dependency installation you can override our commands like so:
+If you have dependencies from homebrew or wish to have more control over dependency installation, you can override our commands:
 
 ```
 dependencies:
@@ -139,7 +137,7 @@ dependencies:
     - swiftenv install 3.0
 ```
 
-The dependencies section also lets you run commands before or after our inferred commands have been run, for example:
+The dependencies section also lets you run commands before or after our inferred commands:
 
 ```
 dependencies:
@@ -151,7 +149,7 @@ dependencies:
 
 ### Tests
 
-If you wish to override your test build phase, you can override our inferred commands with a test override. Every command here will be ran regardless of previous failures.
+If you wish to override your test build phase, you can override our inferred commands with a test override. Every command here will be run regardless of previous failures.
 
 ```
 test:
@@ -161,7 +159,7 @@ test:
 
 ### Deployment
 
-If you wish to deploy your application with CircleCI, we recommend using [Gym](https://github.com/fastlane/fastlane/tree/master/gym), and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools).
+If you wish to deploy your application with CircleCI, we recommend using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools).
 
 Deployments can be defined by specifying an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
 
