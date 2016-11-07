@@ -163,7 +163,6 @@ You'll need to add your `CODECLIMATE_REPO_TOKEN` to your CircleCI
 [environment variables]({{site.baseurl}}/environment-variables/).
 
 Code Climate does not currently support CircleCI's parallelization.
-[Contact us](mailto:support@circleci.com) if you'd like to use this.
 
 ### PullReview
 
