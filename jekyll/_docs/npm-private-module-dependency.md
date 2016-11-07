@@ -10,15 +10,23 @@ To install a private npm module as a dependency, some form of authentication
 needs to be done. There's two ways to do this:
 
 * **Using `npm login`**. This is the most common way, but needs a fancy command 
-to get it working in a CI environment. You can find instructions for this [here][1].
-*  **Using npm tokens**. Newer versions of npm support tokens. The official npm 
-docs covers tokens [here][2]. The summary version is that when `npm login` is 
-used on your local machine, a token is generated and saved in the corresponding 
-`.npmrc` for that module/project. If you go this route, you'll want to find 
-that token in the file (format is 00000000-0000-0000-0000-000000000000) and set 
-it as the environment variable (envar) `NPM_TOKEN`. See 
-[private environment variables][3] for more information. Then replace the token 
-in `.npmrc` with the envar.
+  to get it working in a CI environment. You can find instructions for this [here][1].
+
+* **Using npm tokens**. Newer versions of npm support tokens. The official npm 
+  docs covers tokens [here][2]. The summary version is that when `npm login` is 
+  used on your local machine, a token is generated and saved in the corresponding 
+  `.npmrc` for that module/project.
+
+  To configure CircleCI to use this token, find token in the `.npmrc` file
+  (format is 00000000-0000-0000-0000-000000000000) and set it as a [private
+  environment variables][3] `NPM_TOKEN`. Finally, add a script to inject this
+  configuration into the container’s `~/.npmrc` file.
+
+  ```
+  dependencies:
+    pre:
+      - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  ```
 
 ## Alternate Registries
 
