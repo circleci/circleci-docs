@@ -50,6 +50,37 @@ SimpleCov.start
 
 The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
 
+#### Scala
+
+In Scala 2.x you can use the [sbt-coverage](https://github.com/scoverage/sbt-scoverage) plugin.
+
+Add the plugin to `project/plugins.sbt`.
+
+```scala
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.3.5")
+```
+
+Enable coverage in `circle.yml` with `sbt coverage test`. If you're building artifacts you may want to split running tests with coverage and producing the output assembly.
+
+```
+dependencies:
+  override:
+    - echo "Skipping sbt test:compile, will compile during test coverage."
+test:
+  override:
+    - sbt coverage test
+    - sbt 'set test in assembly := {}' assembly
+```
+
+Produce the coverage report and gather coverage artifacts.
+
+```
+test:
+  post:
+    - sbt coverageReport
+    - find target -name scoverage-report -exec cp -r {} $CIRCLE_ARTIFACTS \;
+```
+
 #### Python, Node, Java, PHP, etc
 
 We're working on a guide for other languages.
@@ -95,7 +126,7 @@ You can easily send coverage results from CircleCI to a number of external
 code quality services:
 
 ### Codecov
-If you're a [Codecov](https://codecov.io?src=circleci-docs) customer, 
+If you're a [Codecov](https://codecov.io?src=circleci-docs) customer,
 integration with CircleCI can be as easy as
 
 ```yaml
