@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Continuous Integration and Continuous Deployment with Go(Golang)
-short-title: Go(Golang)
+title: Continuous Integration and Continuous Deployment with Go (Golang)
+short-title: Go (Golang)
 categories: [languages]
-description: "Continuous Integration and Continuous Deployment with Go(Golang)."
+description: "Continuous Integration and Continuous Deployment with Go (Golang)."
 ---
 
 CircleCI has built-in support to compile, test, and deploy Go applications. We 
@@ -14,11 +14,13 @@ root directory.
 
 ## Version
 
-The pre-installed version of Go can vary depending on which image your build is 
-using:
+The pre-installed version of Go depends on which image your build is using:
 
-- [Ubuntu 14.04][trusty-doc] - go{{ site.data.trusty.versions.golang }}
-- [Ubuntu 12.04][precise-doc] - go{{ site.data.precise.versions.golang }}
+- [Ubuntu 14.04][trusty-doc] - Go v{{ site.data.trusty.versions.summary.go }}
+- [Ubuntu 12.04][precise-doc] - Go v{{ site.data.precise.versions.golang }}
+
+Unlike some other languages on CircleCI, you would not specify the Go version 
+in the machine section of `circle.yml`.
 
 ## Dependencies
 
