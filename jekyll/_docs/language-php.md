@@ -112,8 +112,8 @@ Then enable your site and restart Apache by adding the following to your `circle
 ```
 dependencies:
   post:
-    - cp ~/MY-PROJECT/MY-SITE /etc/apache2/sites-available
-    - a2ensite MY-SITE
+    - sudo cp ~/MY-PROJECT/MY-SITE /etc/apache2/sites-available
+    - sudo a2ensite MY-SITE
     - sudo service apache2 restart
 ```
 
