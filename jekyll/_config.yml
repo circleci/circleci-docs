@@ -27,5 +27,6 @@ defaults:
       path: ""
     values:
       hide: false
+      section: cci1
 
 segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
