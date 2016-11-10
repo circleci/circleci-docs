@@ -52,34 +52,38 @@ The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) 
 
 #### Scala
 
-In Scala 2.x you can use the [sbt-coverage](https://github.com/scoverage/sbt-scoverage) plugin.
+In Scala 2 you can use the [sbt-scoverage](https://github.com/scoverage/sbt-scoverage) plugin.
 
 Add the plugin to `project/plugins.sbt`.
 
 ```scala
-addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.3.5")
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 ```
 
-Enable coverage in `circle.yml` with `sbt coverage test`. If you're building artifacts you may want to split running tests with coverage and producing the output assembly.
+For a simple project, enable coverage in `circle.yml` with `sbt coverage test:compile`.
 
 ```
 dependencies:
   override:
-    - echo "Skipping sbt test:compile, will compile during test coverage."
+    - sbt coverage test:compile
+```
+
+Run tests with `sbt coverage test` and produce a coverage report with `sbt coverageReport`.
+
+```
 test:
   override:
     - sbt coverage test
-    - sbt 'set test in assembly := {}' assembly
-```
-
-Produce the coverage report and gather coverage artifacts.
-
-```
-test:
-  post:
     - sbt coverageReport
-    - find target -name scoverage-report -exec cp -r {} $CIRCLE_ARTIFACTS \;
+  post:
+    - mkdir -p $CIRCLE_ARTIFACTS/scala-2.10
+    - mv target/scala-2.10/coverage-report  $CIRCLE_ARTIFACTS/scala-2.10/coverage-report
+    - mv target/scala-2.10/scoverage-report $CIRCLE_ARTIFACTS/scala-2.10/scoverage-report
 ```
+
+See [gslowikowski/sbt-simple-circleci-test](https://github.com/gslowikowski/sbt-simple-circleci-test) for a complete example.
+
+For multimodule projects, run tests against multiple Scala versions with `sbt coverage +test` and aggregate reports with `sbt coverageAggregate`. See [gslowikowski/sbt-multimodule-circleci-test](https://github.com/gslowikowski/sbt-multimodule-circleci-test) for a complete example.
 
 #### Python, Node, Java, PHP, etc
 
