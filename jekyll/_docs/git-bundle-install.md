@@ -17,14 +17,14 @@ fatal: The remote end hung up unexpectedly
 This happens because you have a git repository listed as a dependency in your Gemfile:
 
 ```
-gem "rails", :git => "git://github.com/rails/rails.git"
+gem "rails", :github => "rails/rails"
 ```
 
 If the repository is public, just change the dependency to use a
 `https` url:
 
 ```
-gem "rails", :git => "https://github.com/rails/rails"
+gem "rails", :github => "rails/rails"
 ```
 
 If the repository is private, you will need to enable user keys
