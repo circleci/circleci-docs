@@ -2,64 +2,83 @@
   slug: getting-started
   index: gettingstarted
   icon: "/docs/assets/img/icons/gettingstarted.svg"
+  section: cci1
 
 - name: "Build Images"
   slug: build-images
   index: build-images
   icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci1
 
 - name: "Languages"
   slug: languages
   index: languages
   icon: "/docs/assets/img/icons/languages.svg"
+  section: cci1
 
 - name: "Mobile Platforms"
   slug: mobile-platforms
   index: mobile
   icon: "/docs/assets/img/icons/mobile.svg"
+  section: cci1
 
 - name: "How-To"
   slug: how-to
   index: how-to
   icon: "/docs/assets/img/icons/how-to.svg"
+  section: cci1
 
 - name: "Troubleshooting"
   slug: troubleshooting
   index: troubleshooting
   icon: "/docs/assets/img/icons/troubleshooting.svg"
+  section: cci1
 
 - name: "Reference"
   slug: reference
   index: reference
   icon: "/docs/assets/img/icons/reference.svg"
+  section: cci1
 
 - name: "Parallelism"
   slug: parallelism
   index: parallelism
   icon: "/docs/assets/img/icons/parallelism.svg"
+  section: cci1
 
 - name: "Privacy and Security"
   slug: privacy-and-security
   index: privacy-security
   icon: "/docs/assets/img/icons/privacy-security.svg"
+  section: cci1
 
 - name: "Enterprise"
   slug: enterprise
   index: enterprise
   icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci1
 
 - name: "Installation"
   slug: installation
   index: installation
   icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci1
 
 - name: "User Documentation"
   slug: documentation
   index: documentation
   icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci1
 
 - name: "Resources"
   slug: resources
   index: resources
   icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci1
 
+# CCI2 Categories
+- name: "Getting Started"
+  slug: "getting-started"
+  index: getting-started
+  icon: "/docs/assets/img/icons/build-images.svg"
+  section: cci2
