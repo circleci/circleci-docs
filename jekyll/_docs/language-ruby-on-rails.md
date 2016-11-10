@@ -103,6 +103,3 @@ documentation has information about the following issues and problems:
 *   [CircleCI is running the Ruby commands not specified in the config]({{site.baseurl}}/not-specified-ruby-commands/)
 *   [CircleCI uses the wrong Ruby
     version]({{site.baseurl}}/unrecognized-ruby-version/)
-
-If you are still having trouble, please [contact us](mailto:support@circleci.com)
-and we will be happy to help.

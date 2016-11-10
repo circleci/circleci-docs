@@ -15,10 +15,6 @@ file, check out our [sample file]({{site.baseurl}}/config-sample/).
 
 Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting/)
 can likely tell you the best way to solve the problem.
-If you find yourself repeatedly consulting this guide, please
-[contact us](mailto:support@circleci.com) and let us know what you're working on.
-We'll try to make it easier for you.
-
 
 <h2 id="phases">File structure and content</h2>
 
@@ -389,8 +385,6 @@ You can use `override`, `pre`, and/or `post` to modify `database` commands.
 See [Setting up your test database]({{site.baseurl}}/manually/#databases) for more information.
 
 If our inferred `database.yml` isn't working for you, you may need to `override` our setup commands (as shown in the following example).
-If that is the case, please [contact us](mailto:support@circleci.com)
-and let Circle know so that we can improve our inference.
 
 ```
 database:
@@ -778,9 +772,3 @@ experimental:
 
 a branch named "feature-1" will send a notification, but "feature.experiment-1" will not.
 
-<h2 id="help">Need anything else?</h2>
-
-We are adding support for configuring every part of your build.
-If you need to tweak something that isn't currently supported, please
-[contact us](mailto:support@circleci.com)
-and we'll figure out how to make it happen.
