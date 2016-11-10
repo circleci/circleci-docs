@@ -27,9 +27,6 @@ machine:
     version: 7.0.4
 ```
 
-Please [contact us](mailto:support@circleci.com)
-if you need a different version; we'll be happy to install it for you.
-
 ## Dependencies
 
 Circle has the composer, pear, and pecl package managers installed.
@@ -165,6 +162,3 @@ write-ups about these issues:
 *   [Adding memcached with pecl on CircleCI]({{site.baseurl}}/php-memcached-compile-error/)
 *   [Composer hitting GitHub API rate limits]({{site.baseurl}}/composer-api-rate-limit/)
 
-If you are still having trouble, please
-[contact us](mailto:support@circleci.com)
-and we will be happy to help.
