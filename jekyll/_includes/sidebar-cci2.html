@@ -1,10 +1,12 @@
 <a href="#" id="nav-button">NAV</a>
 <nav class="sidebar">
+	<h3>CircleCI 2.0 Docs</h3>
+	<hr />
 	<ul class="list-unstyled">
 	{% capture sidebar %}
 	{% for category in site.data.categories %}
 		{% if category.section == "cci2" %}
-			<li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
+			<li><a href="{{ site.baseurl }}/cci2/{{ category.index }}/">{{ category.name }}</a>
 				<ul class="list-unstyled">
 				{% for doc in site.docs %}
 					{% if doc.categories contains category.slug and doc.slug != category.index and doc.section == "cci2" %}

@@ -2,10 +2,16 @@
 layout: classic-docs
 ---
 {% assign sorted = (site.docs | sort: 'order') %}
-{% assign category = page.categories[0] %}
+
+{% for cat in site.data.categories %}
+	{% if cat.slug == page.categories[0] and cat.section == page.section %}
+		{% assign category = cat %}
+	{% endif %}
+{% endfor %}
+
 <ul class="list-unstyled">
 {% for doc in sorted %}
-	{% if doc.categories contains category and doc.slug != page.slug and doc.hide != true %}
+	{% if doc.categories contains category.slug and doc.slug != page.slug and doc.hide != true and doc.section == category.section %}
 		<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
 	{% endif %}
 {% endfor %}
