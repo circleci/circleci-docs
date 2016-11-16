@@ -76,15 +76,21 @@ actually installed correctly, we hardcode versions here.
 
 ### Java
 
-Default: `oraclejdk8`
+Default: `oraclejdk7`
 
 Pre-installed versions:
 
 - `oraclejdk8`
 
+- `oraclejdk7`
+
+- `oraclejdk6`
+
 - `openjdk8`
 
 - `openjdk7`
+
+- `openjdk6`
 
 ### Go
 
