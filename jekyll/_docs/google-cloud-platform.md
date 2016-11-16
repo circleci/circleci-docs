@@ -20,9 +20,9 @@ Fortunately, it comes pre-installed on CircleCI.
 
 ### Python 2.7
 
-In order to use the `gcloud` program you will need to activate Python 2.7.
+In order to use the `gcloud` program, you will need to activate Python 2.7.
 
-For example, if your tests require Python version 3.5 you can specify the version required by `gcloud` in your `circle.yml` like so:
+For example, if your tests require Python 3.5, you can specify the version required by `gcloud` in your `circle.yml`:
 
 ```
 deployment:
