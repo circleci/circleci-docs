@@ -98,7 +98,8 @@ install your own version of Go, make sure to set the location in `GOROOT`.
 CircleCI places all projects in the `ubuntu` user's home directory as 
 `/home/ubuntu/<REPO_NAME>`. To work with Go's expected directory structure, a 
 symlink is placed to your project's directory at 
-`/home/ubuntu/.go_project/src/github.com/<USER>/<REPO_NAME>`.
+`/home/ubuntu/.go_project/src/github.com/<USER>/<REPO_NAME>` (this happens
+at `dependencies` stage, unless that section is overridden).
 
 Project dependencies are placed in their own workspace. For example, if we 
 imported a package called 'calculator' from the Acme company, it would be 
