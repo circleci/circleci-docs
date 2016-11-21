@@ -19,7 +19,7 @@ function start {
 
 	# Building and serving is done separate to provide more feedback. nohup blocks errors.
 	echo "Building with jekyll..."
-	vagrant ssh -c "jekyll build -s /vagrant/jekyll -d /vagrant/jekyll/_site"
+	vagrant ssh -c "jekyll build --incremental -s /vagrant/jekyll -d /vagrant/jekyll/_site"
 	echo "Site built, now starting the server in the background..."
 	vagrant ssh -c "nohup jekyll serve --skip-initial-build -s /vagrant/jekyll -d /vagrant/jekyll/_site --host 0.0.0.0 --detach"
 	echo "Site should now be available in your browser at http://localhost:4040/docs/"
