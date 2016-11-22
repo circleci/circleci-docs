@@ -22,7 +22,7 @@ dependencies:
     - tar -xvf elasticsearch-1.0.1.tar.gz
     - elasticsearch-1.0.1/bin/elasticsearch: {background: true}
     # Make sure that Elasticsearch is up before running tests:
-    - sleep 10 && curl --retry 10 --retry-delay 5 -v http://127.0.0.1:9200/
+    - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 ```
 
 <span class='label label-info'>Note:</span>
@@ -59,5 +59,5 @@ dependencies:
   post:
     - if [[ ! -e elasticsearch-1.0.1 ]]; then wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.0.1.tar.gz && tar -xvf elasticsearch-1.0.1.tar.gz; fi
     - elasticsearch-1.0.1/bin/elasticsearch: {background: true}
-    - sleep 10 && curl --retry 10 --retry-delay 5 -v http://127.0.0.1:9200/
+    - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 ```
