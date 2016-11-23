@@ -108,6 +108,22 @@ There are also a couple small differences to use this daemon within builds:
 
 You should then see improved performance between builds!
 
+####Sharing Docker Socket with Docker Based Install
+If you aren't using Ubuntu, you are most likely using a Docker based install. If you'd like to share your Docker socket, do what is noted below:
+
+1. You may need to run `chmod 777 /var/run/docker.sock` on the build host to give containers permission to use the daemon
+2. Start the builder process with:
+
+```
+curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
+    SERVICES_PRIVATE_IP=X.X.X.X \
+    CIRCLE_SECRET_PASSPHRASE=xxxx \
+    CIRCLE_DOCKER_RUN_ARGUMENTS="-v /var/run/docker.sock:/var/run/docker.sock" \
+    bash
+```
+
+Then inside of a build, you can just use docker as usual. You do not need to specify it under the "services" section in circle.yml, because no container-local docker daemon services needs to be started.
+
 ### Adjusting Builder Networking
 
 You can adjust which subnets containers use by setting the following enviroment variables:
