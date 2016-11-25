@@ -4,14 +4,10 @@ machine:
 
 dependencies:
   pre:
-    - scripts/install-hugo.sh
+    #- scripts/install-hugo.sh
   cache_directories:
     - ~/bin
   post:
-    # Jekyll build
-    # https://github.com/jekyll/jekyll/issues/4122
-    #- bundle exec jekyll build -s jekyll -d jekyll/_site/docs/
-
     # We want to expose the version file to public for the reusability
     - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json # Remove trusty.json. It's the same as ubuntu-14.04-XXL.json
     - cp jekyll/_data/trusty/versions-ubuntu-14.04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
@@ -21,10 +17,10 @@ dependencies:
     # https://github.com/jekyll/jekyll/issues/4713
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
-    - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_staging.yml --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
+    #- JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_staging.yml --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
 
     # Hugo build
-    - hugo -v -s hugo -d gen/staging-site
+    # - hugo -v -s hugo -d gen/staging-site
 
 test:
   post:
@@ -35,5 +31,5 @@ deployment:
   prod:
     branch: master
     commands:
-      - aws s3 sync hugo/gen/staging-site s3://static-staging.circleci.com/docs/ --delete
+      #- aws s3 sync hugo/gen/staging-site s3://static-staging.circleci.com/docs/ --delete
       - aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
