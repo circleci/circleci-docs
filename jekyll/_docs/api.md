@@ -172,7 +172,7 @@ To authenticate, add an API token using your [account dashboard](https://circlec
 ```
 curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
-Alternatively you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command, like so:
+Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command, like so:
 
 ```
 curl -u <circle-token>: https://circleci.com/api/...
