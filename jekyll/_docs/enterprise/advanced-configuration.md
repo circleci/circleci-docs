@@ -8,9 +8,9 @@ hide: false
 ---
 
 
-#Advanced Configuration 
+# Advanced Configuration 
 
-##Proxy Support
+## Proxy Support
 
 
 ### Getting Started
@@ -22,7 +22,7 @@ In an ideal case, traffic to S3 will not be proxied, and instead be added to the
 Everything here must be done **before** installing CircleCI on fresh vm's/instances.
 
 
-###EC2 Proxies
+### EC2 Proxies
 If you are setting up your proxy through Amazon, please read this before preceeding: http://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html
 
 You should also avoid proxying internal requests, especially for the services box. Run `export NO_PROXY=<services_box_ip>` to add it to the `NO_PROXY` rules.
@@ -56,7 +56,7 @@ EOF
 ) | sudo tee -a /etc/environment
 $ sudo service replicated stop; sudo service replicated-agent stop; sudo service replicated-agent start; sudo service replicated start
 ```
-###Installing CircleCI Services 
+### Installing CircleCI Services 
 
 ```
 $ curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services.sh
@@ -78,11 +78,11 @@ This one is a bit easier - it has few moving parts:
 - CircleCI JVM.  This makes plenty of connections:
   - Internal call that should be excluded from http proxy — presumably this happens by default:
     - Any connections to other builders and/or Services box
-    -  connections to GitHub Enterprise
+    - Connections to GitHub Enterprise.
   - Other calls:
     - Amazon EC2 metadata (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) .  This **should not** be proxied.  If it is, then the machine will be misconfigured.
     - Amazon S3 traffic — note S3 discussion above
-    - Amazon EC2 API - EC2 API traffic may need to be proxied.  You would note lots of failures (timeout failures) in logs if the proxy setting is misconfigured, but it will not block CCIE functioning
+    - Amazon EC2 API - EC2 API traffic may need to be proxied.  You would note lots of failures (timeout failures) in logs if the proxy setting is misconfigured, but it will not block CCIE functioning.
 
 ### On Builder boxes Launch Configuration - change it to add the /etc/environment modification
 
@@ -108,9 +108,5 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     SERVICES_PRIVATE_IP=10.0.1.238 bash
 ```
 
-###Installing CircleCI Builder
-This really depends on what type of distro you are installing CircleCI on, but the above instructions cover a basic kind of install
-
-
- 
-
+### Installing CircleCI Builder
+This really depends on what type of distro you are installing CircleCI on, but the above instructions cover a basic kind of install.
