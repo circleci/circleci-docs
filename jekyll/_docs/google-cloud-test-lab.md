@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: Testing with Google Cloud Test Lab
+title: Testing with Firebase Test Lab
 categories: [how-to]
-description: Testing with Google Cloud Test Lab
+description: Testing with Firebase Test Lab
 ---
 
-This guide is based off of commands in Google Cloud Test Lab that are currently
-in beta. You can always check for any changes to the official documentation at
+This guide is based off of commands in Firebase Test Lab. 
+You can always check for any changes to the official documentation at
 the [Overview Page](https://developers.google.com/cloud-test-lab/overview).
 
 ## Prerequisites
