@@ -19,7 +19,7 @@ machine:
     PATH: "${PATH}:${HOME}/.yarn/bin"
 ```
 
-We've set the Yarn version here to reduce the number of moving parts in the build. Although the Yarn install script sets its `PATH`, when we're potentially running from cache, we have to explicitly add `~/.yarn/bin/`.
+We've set the Yarn version here to reduce the number of moving parts in the build. Although the Yarn install script sets its `PATH`, running from cache requires adding `~/.yarn/bin/` explicitly.
 
 ## Installing Yarn
 
@@ -35,12 +35,12 @@ dependencies:
     - ~/.yarn-cache
 ```
 
-Here, the Yarn install script is run if and only if:
+Here, the Yarn install script runs if and only if:
 
 * Yarn isn't already installed.
 * The installed version of Yarn doesn't match the specified version in the machine section.
 
-`~/.yarn` is specified as a cached directory for Yarn itself. `~/.yarn-cache` is specific as a cached directory for Yarn packages.
+**`~/.yarn`** is specified as a cached directory for **Yarn itself**. **`~/.yarn-cache`** is specific as a cached directory for **Yarn packages**.
 
 ## Override CircleCI's Inferred Commands
 
