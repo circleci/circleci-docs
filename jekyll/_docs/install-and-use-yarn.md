@@ -8,7 +8,7 @@ description: "How to modify `circle.yml` in order to install and use Yarn on Cir
 
 <img src="{{site.baseurl}}/assets/img/logos/yarn-logo.svg" style="display:block;margin:15px auto;width:40%;min-width:320px;" alt="Yarn Logo" />
 
-[Yarn][yarn-site] is an open-source package manager for JavaScript. Both Yarn itself as well as the packages it installs can be cached on CircleCI. This can potentially speed up builds but more importantly can remove network connectivity as a source of problems.
+[Yarn][yarn-site] is an open-source package manager for JavaScript. CircleCI can cache both Yarn and the packages it installs. This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
 
 ## Setup
 
@@ -19,9 +19,7 @@ machine:
     PATH: "${PATH}:${HOME}/.yarn/bin"
 ```
 
-The Yarn install script seen later can be used without a version. That will download the latest stable version of Yarn. Here a Yarn version is set in order to reduce the number of variables in a build.
-
-`~/.yarn/bin/` is added to the PATH as well. The Yarn install script also builds the path however in the scenario where we're running from cache, this is needed.
+We've set the Yarn version here to reduce the number of moving parts in the build. Although the Yarn install script sets its `PATH`, when we're potentially running from cache, we have to explicitly add `~/.yarn/bin/`.
 
 ## Installing Yarn
 
@@ -37,7 +35,7 @@ dependencies:
     - ~/.yarn-cache
 ```
 
-Here in the `dependencies` section, Yarn is installed via an install script if and only if:
+Here, the Yarn install script is run if and only if:
 
 * Yarn isn't already installed.
 * The installed version of Yarn doesn't match the specified version in the machine section.
@@ -55,11 +53,9 @@ test:
     - yarn test
 ```
 
-When CircleCI detects a JavaScript based project, certain commands can be run such as `npm install` or `npm test`. To use Yarn instead, we override both the `dependencies` and `test` section.
+When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of NPM, we override both the `dependencies` and `test` sections.
 
 ## Full Example
-
-Here is the full example `circle.yml` file:
 
 ```
 machine:
