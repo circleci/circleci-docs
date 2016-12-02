@@ -109,8 +109,8 @@ When using Docker, we recommend that you ensure that use production-ready Docker
 Here is a complete list of commands to provision a builder machine:
 
 ```
-$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-0.3.sh
-$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.3.sh
+$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-docker.sh
+$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-docker.sh
 $ sudo bash ./provision-builder.sh
 # How to specify the docker storage driver will vary by distro. You may instead
 # need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
