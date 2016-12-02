@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "AWS"
-category: [enterprise]
+category: [installation]
 order: 2
 description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
 ---
