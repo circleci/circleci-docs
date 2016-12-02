@@ -11,24 +11,10 @@ This article provides a platform-independant overview of CircleCI Enterprise. Ci
 We are constantly working on making the installation process as smooth as possible and expanding the administrative tooling.  We appreciate your feedback on ways to make CircleCI Enterprise easier and more valuable for you and your team, so please contact us at <enterprise-support@circleci.com> with any suggestions.
 
 
-## Prerequisites
-
-To setup CircleCI, please have the following handy:
-
-* Domain name and associated DNS Records: GitHub requires applications to register their domains and authentication paths.  For the purposes of this document, we will use `https://circleci.example.com/`
-
-* GitHub application client id/secret info: CircleCI must be registered with
-  GitHub as an app.  You can create a new app by visiting <http://github-enterprise.example.com/applications/new> to create an app that you own, or
-<http://github-enterprise.example.com/organizations/exampple-org/settings/applications/new> to create an app owned by an organization (in this case `example-org`).
-  The authorization callback should use the url set earlier followed with
-  /auth/github (eg. `https://circleci.example.com/auth/github`).
-
-* SSL Key and Certificate for the domain: To secure the domain and enable GitHub enterprise webhooks, the service must be secured with SSL. The server requires an appropriate SSL private key and chained certificate files.
-
 ### Installation Steps
 
 Once you have all of the prerequisites in place, you can either [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for non-AWS environments running Ubuntu]({{site.baseurl}}/enterprise/on-prem/). For other environments, contact us at <enterprise@circleci.com> for a guided installation. 
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install) . For other environments, contact us at <enterprise@circleci.com> for a guided installation. 
 
 
 ## Architecture

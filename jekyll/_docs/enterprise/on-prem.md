@@ -1,9 +1,9 @@
 ---
 layout: enterprise
-title: "Installing CircleCI on stock Ubuntu"
+title: "Advanced CircleCI Install "
 category: [installation]
 order: 3
-description: "How to install CircleCI Enterprise on any generic Ubuntu machine."
+description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
 The following step-by-step instructions will guide you through the process of
@@ -40,9 +40,8 @@ For test installations, you may punt on this step until you spin up the machines
 
 CircleCI Enterpise installation requires provisioning two types of machines:
 
-* Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.
+* Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance. 
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
-
 
 Both boxes need to be Trusty 14.04 and can run on any hypervisor.
 
@@ -52,8 +51,14 @@ The services box is recommended to have at least 4 CPUs, 8GB RAM, and ~30GB of d
 
 If you are configuring network security, please ensure you whitelist the following:
 
-* whitelist ports 22, 80, 443, 8800 (used for system administration) to potential users
-* whitelist all traffic for builder boxes
+
+| Source                      | Ports                   | Use                    |
+|-----------------------------|-------------------------|------------------------|
+| End Users                   | 80, 443                 | HTTP/HTTPS Traffic     |
+| Administrators              | 22                      | SSH                    |
+| Administrators              | 8800                    | Admin Console          |
+| Builder Boxes               | all traffic / all ports | Internal Communication |
+| Github (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
@@ -75,12 +80,22 @@ Picking the CPU/RAM combination is mostly dependant on your specific build requi
 
 Picking the right CPU/RAM combination can be an art and is specific to your build demands.
 
+If you are configuring network security, please ensure you whitelist the following:
+
+| Source                           | Ports                   | Use                                                            |
+|----------------------------------|-------------------------|----------------------------------------------------------------|
+| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/ssh-build) |
+| Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
+| Administrators                   | 22                      | SSH                                                            |
+| Services Box                     | all traffic / all ports | Internal Communication                                         |
+| Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
+
 #### A. On Ubuntu 14.04
 
 To kick off the process, ssh into the builder machine and run the following:
 
 ```bash
-$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder.sh
+$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-lxc.sh
 $ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh
 $ sudo bash ./provision-builder.sh
 $ sudo \
@@ -104,41 +119,7 @@ After ~20 minutes or so, you will have a fully running instance.  A fully operat
 
 *NOTE*: The defualt container image is currently hosted on S3 US East.  Your download speed may vary depending on where your machines are.  Upcoming releases will use an CDN to manage the container image.
 
-#### B. Non-Ubuntu distros (BETA)
-
-While the commands required to intialize the services machine are the same regardless of the distro you use, there are a couple different steps required
-to start up a non-Ubuntu builder machine. The main requirement for non-Ubuntu installs is that the kernel supports Docker.  Our installation scripts will automatically install Docker if it's not installed already.  You can use the same installation and provision scripts as above.
-
-Notable difference compared to our Ubuntu Trusty support:
-
-* We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
-* The container image is fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  Ubuntu Trusty images are much faster to download, as they are downloaded from the closest AWS S3 region
-* Using Docker within builds isn't currently supported.
-* No second volume is required.
-* By default, specific CPUs are not tied to specific build containers.
-
-
-When using Docker, we recommend that you ensure that use production-ready Docker configuration.  In particular, use the `overlay`, `btrfs`, or `zfs` filesystems.  In particular, `devicemapper` storage engine is known to have problems in production environment, which you can some about in [Docker devicemapper documentation](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/).  If you are using `devicemapper`, we recommend that you either change Docker configuration to use `overlay` or use `direct-lvm` configuration of `device-mapper`.
-
-Here is a complete list of commands to provision a non-Ubuntu builder machine on CentOS/RedHat:
-
-```
-$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder.sh
-$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh
-$ sudo bash ./provision-builder.sh
-# How to specify the docker storage driver will vary by distro. You may instead
-# need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
-$ sudo sed -i 's/docker daemon/docker daemon --storage-driver=overlay/' \
-   /usr/lib/systemd/system/docker.service \
-   && sudo systemctl daemon-reload && sudo service docker restart
-$ sudo \
-  SERVICES_PRIVATE_IP=<private ip address of services box> \
-  CIRCLE_SECRET_PASSPHRASE=<passphrase entered on system console (services box port 8800) settings> \
-  bash ./init-builder.sh
-```
-
 ## Advanced configuration
-
 
 ### Cloud Object Storage
 
