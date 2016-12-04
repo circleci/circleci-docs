@@ -157,12 +157,11 @@
         "addon-google_apis-google-23"
       ],
       "android-extra": [
-        "m2repository",
-        "support"
+        "Android Support Repository v31.0.0"
       ],
       "google-extra": [
         "google_play_services",
-        "m2repository"
+        "Google Repository"
       ]
     }
   },
