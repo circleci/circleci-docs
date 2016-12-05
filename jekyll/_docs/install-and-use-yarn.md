@@ -55,6 +55,16 @@ test:
 
 When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of NPM, we override both the `dependencies` and `test` sections.
 
+## Note When Using Ubuntu 12.04
+
+This doc was written with CircleCI's Ubuntu 14.04 image in mind. If you are using Ubuntu 12.04, a newer version of NodeJS needs to be specified in `circle.yml` in order for Yarn to work. This can be done with the following:
+
+```
+machine:
+  node:
+    version: 5.0.0
+```
+
 ## Full Example
 
 ```
