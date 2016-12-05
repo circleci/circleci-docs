@@ -7,12 +7,9 @@ description: "How to install CircleCI Enterprise on any generic machine"
 ---
 
 The following step-by-step instructions will guide you through the process of
-installing CircleCI Enterprise on any Ubuntu machine.  If you have any
+installing CircleCI Enterprise on any Docker Supported Machine.  If you have any
 questions as you go through these steps, please contact
 <enterprise-support@circleci.com>.
-
-The installation instructions are work-in-progress at the minute and we are
-continuously involving them.  We love your feedback - keep sending it our way!
 
 ## Prerequisites
 
