@@ -14,7 +14,7 @@ We are constantly working on making the installation process as smooth as possib
 ### Installation Steps
 
 Once you have all of the prerequisites in place, you can either [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install) . For other environments, contact us at <enterprise@circleci.com> for a guided installation. 
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install). 
 
 
 ## Architecture
