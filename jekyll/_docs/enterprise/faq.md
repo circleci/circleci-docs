@@ -2,7 +2,7 @@
 layout: enterprise
 title: FAQ
 category: [resources]
-order: 4
+order: 2
 description: "CircleCI Frequently Asked Questions (FAQs)."
 published: true
 ---
