@@ -128,7 +128,7 @@ version CircleCI has installed.
 ```
 machine:
   pre:
-    - curl -k -L -o phantomjs.tar.bz2 http://phantomjs.googlecode.com/files/phantomjs-1.8.2-linux-x86_64.tar.bz2
+    - curl -k -L -o phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
     - tar -jxf phantomjs.tar.bz2
 ```
 
