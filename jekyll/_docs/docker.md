@@ -292,6 +292,7 @@ sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" $MY_CONTAINER_NAME)" -- 
 ```
 {% endraw %}
 
+Note that these commands are run inside the container's root directory, so you may have to `cd` into your docker working directory first.
 
 ### Caching Docker layers
 
