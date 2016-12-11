@@ -80,7 +80,7 @@ quantities of memory.  We recommend
 [disabling pre-dexing][disable-pre-dexing] for Android builds on
 CircleCI.
 
-[disable-pre-dexing]: http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance
+[disable-pre-dexing]: http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/
 
 ### Testing Android Projects
 
