@@ -13,12 +13,13 @@ For a rough idea of what a `circle.yml` looks like, check out our [sample file](
 
 <h2 id="phases">File Structure and Content</h2>
 
-The `circle.yml` file has six primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
+The `circle.yml` file has seven primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
 
 - **`machine`**: adjust the behavior of the virtual machine (VM)
 - **`checkout`**: checkout and clone code from a repository
 - **`dependencies`**: install your project's language-specific dependencies
 - **`database`**: prepare a database for tests
+- **`compile`**: compile your project
 - **`test`**: run your tests
 - **`deployment`**: deploy your code to your web servers
 
@@ -33,7 +34,7 @@ Each command is run in a separate shell, which means they do not share environme
 
 On completion, each command will return an exit code: 0 is a success, and any other number is a failure.
 
-If a command fails during any of the setup sections (`machine`, `checkout`, `dependencies`, `database`), the entire build will fail early. If a command fails in the `test` section, the build will continue to run.
+If a command fails during any of the setup sections (`machine`, `checkout`, `dependencies`, `database`, `compile`), the entire build will fail early. If a command fails in the `test` section, the build will continue to run.
 
 You can specify when to run custom commands relative to CircleCI's inferred commands using three special keys:
 
@@ -387,6 +388,16 @@ FYI, you have the option of pointing to the location of your stored database con
 machine:
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+```
+
+<h2 id="compile">Custom Compile Commands</h2>
+
+You can customize your project's build in the `compile` section of `circle.yml`. Below is an example of using `compile` to verbosely build a Middleman site:
+
+```yaml
+compile:
+  override:
+    - bundle exec middleman build --verbose
 ```
 
 <h2 id="test">Running your tests</h2>
