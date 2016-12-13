@@ -18,13 +18,14 @@ can likely tell you the best way to solve the problem.
 
 <h2 id="phases">File structure and content</h2>
 
-The `circle.yml` file is made up of six primary sections.
+The `circle.yml` file is made up of seven primary sections.
 Each section represents a _phase_ of running your tests:
 
 *   **machine**: adjusting the VM to your preferences and requirements
 *   **checkout**: checking out and cloning your git repo
 *   **dependencies**: setting up your project's language-specific dependencies
 *   **database**: preparing the databases for your tests
+*   **compile**: compiling your project
 *   **test**: running your tests
 *   **deployment**: deploying your code to your web servers
 
@@ -38,7 +39,7 @@ previews of configuration changes under consideration.
 The sections contain lists of bash commands.  If you don't specify
 commands, CircleCI infers them from your code.  Commands are run in
 the order they appear in the file; all test commands are run to
-completion, but a non-zero exit code during the setup sections (`machine:, checkout:, dependencies:, database:`) will cause the
+completion, but a non-zero exit code during the setup sections (`machine:, checkout:, dependencies:, database:, compile:`) will cause the
 build to fail early.  You can modify which&mdash;and
 when&mdash;commands are run by adding `override`,
 `pre` and/or `post` to adjust CircleCI's
@@ -400,6 +401,18 @@ FYI, you have the option of pointing to the location of your stored database con
 machine:
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+```
+
+<h2 id="compile">Custom compile commands</h2>
+
+You can customize your project's build via the `compile:` section in your `config.yml`, should the inferred commands don't work for you.
+
+####  Example: building a Middleman site verbosely
+
+```
+compile:
+  override:
+    - bundle exec middleman build --verbose
 ```
 
 <h2 id="test">Running your tests</h2>
