@@ -15,17 +15,17 @@ For a rough idea of what a `circle.yml` looks like, check out our [sample file](
 
 The `circle.yml` file has six primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
 
-- **machine**: adjust the behavior of the virtual machine (VM)
-- **checkout**: checkout and clone code from a repository
-- **dependencies**: install your project's language-specific dependencies
-- **database**: prepare a database for tests
-- **test**: run your tests
-- **deployment**: deploy your code to your web servers
+- **`machine`**: adjust the behavior of the virtual machine (VM)
+- **`checkout`**: checkout and clone code from a repository
+- **`dependencies`**: install your project's language-specific dependencies
+- **`database`**: prepare a database for tests
+- **`test`**: run your tests
+- **`deployment`**: deploy your code to your web servers
 
 A `circle.yml` can also contain 2 optional sections that are not linked to specific phases:
 
-- **general**: use for broader build-related configuration
-- **experimental**: test out features that are currently in development
+- **`general`**: use for broader build-related configuration
+- **`experimental`**: test out features that are currently in development
 
 Each section contains lists of bash commands, which are run in the order they appear in the file.
 
