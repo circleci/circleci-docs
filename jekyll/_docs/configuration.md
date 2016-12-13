@@ -7,9 +7,9 @@ description: How to configure CircleCI
 
 CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
 
-If you _do_ need to tweak settings, though, you can do so in a `circle.yml` file located in your project's root directory. If a `circle.yml` exists, CircleCI will read it each time it runs a build.
+If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory. If this file exists, CircleCI will read it each time it runs a build.
 
-For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/).
+For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
 
 <h2 id="phases">File structure and content</h2>
 
