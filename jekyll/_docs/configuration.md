@@ -5,16 +5,11 @@ categories: [getting-started,reference]
 description: How to configure CircleCI
 ---
 
-CircleCI automatically infers your settings from your code, so CircleCI's normal processing works just fine in most circumstances.
-When it doesn't, the `circle.yml` file makes it easy to tell CircleCI what you need.
-This is a simple YAML file where you spell out any tweaks required for your app.
-You place the file in your git repo's root directory and CircleCI reads the file each time it runs a build.
+CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
 
-If you want a quick look at how to set up your `circle.yml`
-file, check out our [sample file]({{site.baseurl}}/config-sample/).
+If you _do_ need to tweak settings, though, you can do so in a `circle.yml` file located in your project's root directory. If a `circle.yml` exists, CircleCI will read it each time it runs a build.
 
-Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting/)
-can likely tell you the best way to solve the problem.
+For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/).
 
 <h2 id="phases">File structure and content</h2>
 
@@ -203,9 +198,9 @@ machine:
 
 <h3 id="node-version">Node.js version</h3>
 
-CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions. 
-Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs) 
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages 
+CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
+Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs)
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages
 respectively.
 
 Here's an example of how to set the version of Node.js to be used for
@@ -227,13 +222,13 @@ machine:
     version: openjdk7
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java) 
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#java).
 
 ### PHP version
 
-CircleCI uses [php-build](https://github.com/CHH/php-build) and 
-[phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an 
+CircleCI uses [php-build](https://github.com/CHH/php-build) and
+[phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an
 example of how to set the version of PHP used for your tests:
 
 ```
@@ -242,7 +237,7 @@ machine:
     version: 5.4.5
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php) 
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#php).
 
 ### Python version
@@ -257,7 +252,7 @@ machine:
     version: 2.7.5
 ```
 
-You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python) 
+You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#python).
 
 ### GHC version
@@ -512,9 +507,9 @@ deployment:
       - ./deploy_master.sh
 ```
 
-***Note*** The `deployment` section doesn't support sub-sections such as `pre` 
-that you might find elsewhere in `circle.yml`. If you get a strange error such 
-as "commands must be a list" when in the `deployment` section, this is likely 
+***Note*** The `deployment` section doesn't support sub-sections such as `pre`
+that you might find elsewhere in `circle.yml`. If you get a strange error such
+as "commands must be a list" when in the `deployment` section, this is likely
 the issue.
 
 ### Tags
