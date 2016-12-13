@@ -88,7 +88,7 @@ If you are configuring network security, please ensure you whitelist the followi
 | Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
 
 
-#### CircleCI Builder Installtion
+#### CircleCI Builder Installation
 
 The main requirement for this install is that the kernel supports Docker.  Our installation scripts will automatically install Docker if it's not installed already. 
 
@@ -96,7 +96,7 @@ Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}
 
 * We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
 * The container image is fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  Ubuntu Trusty images are much faster to download, as they are downloaded from the closest AWS S3 region
-* Using Docker within builds isn't currently supported.
+* Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/config/#sharing-docker-socket-with-docker-based-install)
 * No second volume is required.
 * By default, specific CPUs are not tied to specific build containers.
 
