@@ -27,7 +27,7 @@ A `circle.yml` can also contain 2 optional sections that are not linked to speci
 - **`general`**: use for broader build-related configuration
 - **`experimental`**: test out features that are currently in development
 
-Each section contains lists of bash commands, which are run in the order they appear in the file.
+Each section consists of settings and/or bash commands, which are run in the order they appear in the file.
 
 Each command is run in a separate shell, which means they do not share environments with preceding commands. This means that something like `export foo=bar` will not work. If you want to set global environment variables, specify them in the [`machine`](#machine) section.
 
