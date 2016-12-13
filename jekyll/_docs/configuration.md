@@ -11,43 +11,35 @@ If you _do_ need to tweak settings, you can create a `circle.yml` in your projec
 
 For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
 
-<h2 id="phases">File structure and content</h2>
+<h2 id="phases">File Structure and Content</h2>
 
-The `circle.yml` file is made up of six primary sections.
-Each section represents a _phase_ of running your tests:
+The `circle.yml` file has six primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
 
-*   **machine**: adjusting the VM to your preferences and requirements
-*   **checkout**: checking out and cloning your git repo
-*   **dependencies**: setting up your project's language-specific dependencies
-*   **database**: preparing the databases for your tests
-*   **test**: running your tests
-*   **deployment**: deploying your code to your web servers
+- **machine**: adjust the behavior of the virtual machine (VM)
+- **checkout**: checkout and clone code from a repository
+- **dependencies**: install your project's language-specific dependencies
+- **database**: prepare a database for tests
+- **test**: run your tests
+- **deployment**: deploy your code to your web servers
 
-The `circle.yml`
-file contains another **general** section for general build-related configurations
-that are not related to a specific phase, and an **experimental** section for early access
-previews of configuration changes under consideration.
+A `circle.yml` can also contain 2 optional sections that are not linked to specific phases:
 
-**Remember**: most projects won't need to specify anything for many of the phases.
+- **general**: use for broader build-related configuration
+- **experimental**: test out features that are currently in development
 
-The sections contain lists of bash commands.  If you don't specify
-commands, CircleCI infers them from your code.  Commands are run in
-the order they appear in the file; all test commands are run to
-completion, but a non-zero exit code during the setup sections (`machine:, checkout:, dependencies:, database:`) will cause the
-build to fail early.  You can modify which&mdash;and
-when&mdash;commands are run by adding `override`,
-`pre` and/or `post` to adjust CircleCI's
-inferred commands.  Here's how it works:
+Each section contains lists of bash commands, which are run in the order they appear in the file.
 
-*   **pre**: commands run before CircleCI's inferred commands
-*   **override**: commands run instead of CircleCI's inferred commands
-*   **post**:  commands run after CircleCI's inferred commands
+Each command is run in a separate shell, which means they do not share environments with preceding commands. This means that something like `export foo=bar` will not work. If you want to set global environment variables, specify them in the [`machine`](#machine) section.
 
-Each command is run in a separate shell.
-As such, they do not share an environment with their predecessors, so be aware that
-`export foo=bar` in particular does not work.
-If you'd like to set an environment variable globally, you can specify them in the
-[Machine configuration](#machine) section, described below.
+On completion, each command will return an exit code: 0 is a success, and any other number is a failure.
+
+If a command fails during any of the setup sections (`machine`, `checkout`, `dependencies`, `database`), the entire build will fail early. If a command fails in the `test` section, the build will continue to run.
+
+You can specify when to run custom commands relative to CircleCI's inferred commands using three special keys:
+
+- **`pre`**: run _before_ inferred commands
+- **`override`**: run _instead of_ inferred commands
+- **`post`**: run _after_ inferred commands
 
 #### Modifiers
 
