@@ -15,7 +15,7 @@ The easiest way to get started is by using Vagrant, which gives you a clean envi
 - VirtualBox: [download directly](https://www.virtualbox.org/wiki/Downloads), `brew cask install virtualbox`, or `sudo apt-get install virtualbox`
 
 #### First Run
-To get a local copy of <circleci.com/docs/>, run the following commands:
+To get a local copy of <https://circleci.com/docs/>, run the following commands:
 
 ```bash
 git clone https://github.com/circleci/circleci-docs.git
@@ -43,7 +43,7 @@ If you already have a stable Ruby environment and feel comfortable installing de
 You're also welcome to use Bundler to install required gems. If you are using RVM (or similar), make sure they all play nicely together.
 
 #### First Run
-To get a local copy of <circleci.com/docs/>, run the following commands:
+To get a local copy of <https://circleci.com/docs/>, run the following commands:
 
 ```bash
 git clone https://github.com/circleci/circleci-docs.git
@@ -54,7 +54,7 @@ jekyll serve
 Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>.
 
 ####  Editing Docs
-All docs can be found in the `jekyll/_docs` directory. Make changes there, then re-run `jekyll serve` to have Jekyll rebuild 
+All docs can be found in the `jekyll/_docs` directory. Make changes there, then re-run `jekyll serve` to have Jekyll rebuild
 and serve the site.
 
 ## Jekyll Controller (`jctl`)
@@ -63,18 +63,18 @@ This is a Bash wrapper script to talk to Jekyll & Vagrant.
 - `start`: starts Jekyll; will also start Vagrant, if not already running
 - `rebuild`: rebuilds the site
 - `stop`: shuts down entire VM (including Jekyll)
-- `restart`: `jekyll stop && jekyll start`
+- `restart`: `./jctl stop && ./jctl start`
 
 ## Jekyll Commands
 `jekyll build`: generates static files for the site in the `jekyll/_site` directory
 
-`jekyll serve`: runs `jekyll build`, then starts an included mini webserver to serve files from `'jekyll/_site`; listens to 
+`jekyll serve`: runs `jekyll build`, then starts an included mini webserver to serve files from `'jekyll/_site`; listens to
 localhost:4000 by default
 
 `jekyll serve --detach`: this serves the site as before, but runs in the background so you can use the same terminal window. Jekyll will display its process ID, so you can use that to kill the process when you want to stop Jekyll. If you lose the PID, you can run `pkill -f jekyll` to kill all Jekyll instances.
 
 ## License Information
-Documentation (guides, references, and associated images) is licensed as Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full license can be found [here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the 
+Documentation (guides, references, and associated images) is licensed as Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full license can be found [here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the
 human-readable summary [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Everything in this repository not covered above is licensed under the [included MIT license](LICENSE).
