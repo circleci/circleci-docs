@@ -15,8 +15,8 @@ description: "How to modify `circle.yml` in order to install and use Yarn on Cir
 ```
 machine:
   environment:
-    YARN_VERSION: 0.17.8
-    PATH: "${PATH}:${HOME}/.yarn/bin"
+    YARN_VERSION: 0.18.0
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 ```
 
 We've set the Yarn version here to reduce the number of moving parts in the build. Although the Yarn install script sets its `PATH`, running from cache requires adding `~/.yarn/bin/` explicitly.
@@ -32,7 +32,7 @@ dependencies:
       fi
   cache_directories:
     - ~/.yarn
-    - ~/.yarn-cache
+    - ~/.cache/yarn
 ```
 
 Here, the Yarn install script runs if and only if:
@@ -70,8 +70,8 @@ machine:
 ```
 machine:
   environment:
-    YARN_VERSION: 0.17.8
-    PATH: "${PATH}:${HOME}/.yarn/bin"
+    YARN_VERSION: 0.18.0
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
 dependencies:
   pre:
@@ -86,7 +86,7 @@ dependencies:
     - yarn install
   cache_directories:
     - ~/.yarn
-    - ~/.yarn-cache
+    - ~/.cache/yarn
 
 test:
   override:
