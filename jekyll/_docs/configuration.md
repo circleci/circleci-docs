@@ -5,54 +5,42 @@ categories: [getting-started,reference]
 description: How to configure CircleCI
 ---
 
-CircleCI automatically infers your settings from your code, so CircleCI's normal processing works just fine in most circumstances.
-When it doesn't, the `circle.yml` file makes it easy to tell CircleCI what you need.
-This is a simple YAML file where you spell out any tweaks required for your app.
-You place the file in your git repo's root directory and CircleCI reads the file each time it runs a build.
+CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
 
-If you want a quick look at how to set up your `circle.yml`
-file, check out our [sample file]({{site.baseurl}}/config-sample/).
+If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory. If this file exists, CircleCI will read it each time it runs a build.
 
-Should you have a test failure, our [troubleshooting section]({{ site.baseurl }}/troubleshooting/)
-can likely tell you the best way to solve the problem.
+For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
 
-<h2 id="phases">File structure and content</h2>
+<h2 id="phases">File Structure and Content</h2>
 
-The `circle.yml` file is made up of six primary sections.
-Each section represents a _phase_ of running your tests:
+The `circle.yml` file has seven primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
 
-*   **machine**: adjusting the VM to your preferences and requirements
-*   **checkout**: checking out and cloning your git repo
-*   **dependencies**: setting up your project's language-specific dependencies
-*   **database**: preparing the databases for your tests
-*   **test**: running your tests
-*   **deployment**: deploying your code to your web servers
+- **`machine`**: adjust the behavior of the virtual machine (VM)
+- **`checkout`**: checkout and clone code from a repository
+- **`dependencies`**: install your project's language-specific dependencies
+- **`database`**: prepare a database for tests
+- **`compile`**: compile your project
+- **`test`**: run your tests
+- **`deployment`**: deploy your code to your web servers
 
-The `circle.yml`
-file contains another **general** section for general build-related configurations
-that are not related to a specific phase, and an **experimental** section for early access
-previews of configuration changes under consideration.
+A `circle.yml` can also contain 2 optional sections that are not linked to specific phases:
 
-**Remember**: most projects won't need to specify anything for many of the phases.
+- **`general`**: use for broader build-related configuration
+- **`experimental`**: test out features that are currently in development
 
-The sections contain lists of bash commands.  If you don't specify
-commands, CircleCI infers them from your code.  Commands are run in
-the order they appear in the file; all test commands are run to
-completion, but a non-zero exit code during the setup sections (`machine:, checkout:, dependencies:, database:`) will cause the
-build to fail early.  You can modify which&mdash;and
-when&mdash;commands are run by adding `override`,
-`pre` and/or `post` to adjust CircleCI's
-inferred commands.  Here's how it works:
+Each section consists of settings and/or Bash commands, which are run in the order they appear in the file.
 
-*   **pre**: commands run before CircleCI's inferred commands
-*   **override**: commands run instead of CircleCI's inferred commands
-*   **post**:  commands run after CircleCI's inferred commands
+Each command is run in a separate shell, which means they do not share environments with preceding commands. This means that something like `export foo=bar` will not work. If you want to set global environment variables, specify them in the [`machine`](#machine) section.
 
-Each command is run in a separate shell.
-As such, they do not share an environment with their predecessors, so be aware that
-`export foo=bar` in particular does not work.
-If you'd like to set an environment variable globally, you can specify them in the
-[Machine configuration](#machine) section, described below.
+On completion, each command will return an exit code: 0 is a success, and any other number is a failure.
+
+If a command fails during any of the setup sections (`machine`, `checkout`, `dependencies`, `database`, `compile`), the entire build will fail early. If a command fails in the `test` section, the build will continue to run.
+
+You can specify when to run custom commands relative to CircleCI's inferred commands using three special keys:
+
+- **`pre`**: run _before_ inferred commands
+- **`override`**: run _instead of_ inferred commands
+- **`post`**: run _after_ inferred commands
 
 #### Modifiers
 
@@ -203,9 +191,9 @@ machine:
 
 <h3 id="node-version">Node.js version</h3>
 
-CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions. 
-Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs) 
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages 
+CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
+Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs)
+and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages
 respectively.
 
 Here's an example of how to set the version of Node.js to be used for
@@ -227,13 +215,13 @@ machine:
     version: openjdk7
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java) 
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#java).
 
 ### PHP version
 
-CircleCI uses [php-build](https://github.com/CHH/php-build) and 
-[phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an 
+CircleCI uses [php-build](https://github.com/CHH/php-build) and
+[phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an
 example of how to set the version of PHP used for your tests:
 
 ```
@@ -242,7 +230,7 @@ machine:
     version: 5.4.5
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php) 
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#php).
 
 ### Python version
@@ -257,7 +245,7 @@ machine:
     version: 2.7.5
 ```
 
-You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python) 
+You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python)
 and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#python).
 
 ### GHC version
@@ -402,6 +390,16 @@ machine:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
 ```
 
+<h2 id="compile">Custom Compile Commands</h2>
+
+You can customize your project's build in the `compile` section of `circle.yml`. Below is an example of using `compile` to verbosely build a Middleman site:
+
+```yaml
+compile:
+  override:
+    - bundle exec middleman build --verbose
+```
+
 <h2 id="test">Running your tests</h2>
 
 The most important part of testing is actually running the tests!
@@ -512,9 +510,9 @@ deployment:
       - ./deploy_master.sh
 ```
 
-***Note*** The `deployment` section doesn't support sub-sections such as `pre` 
-that you might find elsewhere in `circle.yml`. If you get a strange error such 
-as "commands must be a list" when in the `deployment` section, this is likely 
+***Note*** The `deployment` section doesn't support sub-sections such as `pre`
+that you might find elsewhere in `circle.yml`. If you get a strange error such
+as "commands must be a list" when in the `deployment` section, this is likely
 the issue.
 
 ### Tags
