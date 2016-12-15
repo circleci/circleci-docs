@@ -70,7 +70,7 @@ Please follow the steps suggested by the script.  Once the scripts finish provis
 Your initial builder machine is recommended to have:
 
 * 6 CPUs and 10GB of RAM to start 2 containers.
-* One root volume of at least 50GB.  Preferably, the second volume is a local SSD disk, but a block device would do.
+* One root volume of at least 50GB. 
 
 Picking the CPU/RAM combination is mostly dependant on your specific build requirements.  Builders run in containers, each with dedicated 2 CPUs and 4GB RAM by default, and we leave 2 CPUs for our own internal processing.  For example, 6 CPUs and 10GB of RAM defaults to supporting 2 containers/builds concurrently.
 
