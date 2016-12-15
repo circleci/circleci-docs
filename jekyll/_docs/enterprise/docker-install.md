@@ -40,7 +40,6 @@ CircleCI Enterpise installation requires provisioning two types of machines:
 * Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance. 
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
 
-Both boxes need to be Trusty 14.04 and can run on any hypervisor.
 
 ### 1. Services instance
 
@@ -95,7 +94,7 @@ The main requirement for this install is that the kernel supports Docker.  Our i
 Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}/enterprise/on-prem/) are:
 
 * We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
-* The container image is fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  Ubuntu Trusty images are much faster to download, as they are downloaded from the closest AWS S3 region
+* The container image is always fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  
 * Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/config/#sharing-docker-socket-with-docker-based-install)
 * No second volume is required.
 * By default, specific CPUs are not tied to specific build containers.
