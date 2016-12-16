@@ -40,7 +40,6 @@ CircleCI Enterpise installation requires provisioning two types of machines:
 * Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance. 
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
 
-Both boxes need to be Trusty 14.04 and can run on any hypervisor.
 
 ### 1. Services instance
 
@@ -71,7 +70,7 @@ Please follow the steps suggested by the script.  Once the scripts finish provis
 Your initial builder machine is recommended to have:
 
 * 6 CPUs and 10GB of RAM to start 2 containers.
-* One root volume of at least 50GB.  Preferably, the second volume is a local SSD disk, but a block device would do.
+* One root volume of at least 50GB. 
 
 Picking the CPU/RAM combination is mostly dependant on your specific build requirements.  Builders run in containers, each with dedicated 2 CPUs and 4GB RAM by default, and we leave 2 CPUs for our own internal processing.  For example, 6 CPUs and 10GB of RAM defaults to supporting 2 containers/builds concurrently.
 
@@ -95,7 +94,7 @@ The main requirement for this install is that the kernel supports Docker.  Our i
 Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}/enterprise/on-prem/) are:
 
 * We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
-* The container image is fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  Ubuntu Trusty images are much faster to download, as they are downloaded from the closest AWS S3 region
+* The container image is always fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  
 * Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/config/#sharing-docker-socket-with-docker-based-install)
 * No second volume is required.
 * By default, specific CPUs are not tied to specific build containers.
