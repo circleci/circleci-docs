@@ -15,7 +15,7 @@ description: "How to modify `circle.yml` in order to install and use Yarn on Cir
 ```
 machine:
   environment:
-    YARN_VERSION: 0.18.0
+    YARN_VERSION: 0.18.1
     PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 ```
 
@@ -70,7 +70,7 @@ machine:
 ```
 machine:
   environment:
-    YARN_VERSION: 0.18.0
+    YARN_VERSION: 0.18.1
     PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
 dependencies:
