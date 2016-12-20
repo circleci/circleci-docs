@@ -26,7 +26,7 @@ dependencies:
 ```
 
 <span class='label label-info'>Note:</span>
-remember to remove elasticsearch from [`machine: services:`]({{site.baseurl}}/configuration/#services/) if you install it manually.
+remember to remove elasticsearch from [`machine: services:`]({{site.baseurl}}/configuration/#services) if you install it manually.
 
 ## Install an Elasticsearch plugin
 
