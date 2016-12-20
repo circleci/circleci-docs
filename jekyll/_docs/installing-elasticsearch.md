@@ -12,7 +12,7 @@ machine:
     - elasticsearch
 ```
 
-The default version of Elasticsearch is {{ site.data.precise.versions.elasticsearch }}.
+The default version of Elasticsearch is {{ site.data.trusty.versions.elasticsearch }}.
 If you need a custom version, you can download and start it from your build. To install 2.4.3, add the following to your `circle.yml`:
 
 ```
@@ -26,7 +26,7 @@ dependencies:
 ```
 
 <span class='label label-info'>Note:</span>
-remember to remove elasticsearch from [`machine: services:`]({{site.baseurl}}configuration/#services/) if you install it manually.
+remember to remove elasticsearch from [`machine: services:`]({{site.baseurl}}/configuration/#services/) if you install it manually.
 
 ## Install an Elasticsearch plugin
 
