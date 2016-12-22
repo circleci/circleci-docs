@@ -40,7 +40,7 @@ Here, the Yarn install script runs if and only if:
 * Yarn isn't already installed.
 * The installed version of Yarn doesn't match the specified version in the machine section.
 
-**`~/.yarn`** is specified as a cached directory for **Yarn itself**. **`~/.yarn-cache`** is specific as a cached directory for **Yarn packages**.
+**`~/.yarn`** is specified as a cached directory for **Yarn itself**. **`~/.cache/yarn`** is specific as a cached directory for **Yarn packages**.
 
 ## Override CircleCI's Inferred Commands
 
