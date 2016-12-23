@@ -124,7 +124,7 @@ The `configure_aws_cli` function sets our default AWS region and output type.
 There's actually three more bits of information that we set for the CLI however 
 you won't find it in the repo due to privacy reasons. We set the environment 
 variables `AWS_ACCOUNT_ID`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`. 
-The latter to variables will be automatically picked up by the CLI and used to 
+The latter two variables will be automatically picked up by the CLI and used to 
 grant us access to our AWS resources. The account ID will be used as a prefix 
 for our private Docker repository URL.
 
