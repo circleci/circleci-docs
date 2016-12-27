@@ -270,6 +270,18 @@ if you have a lot of unit tests that take a long time to execute, then
 you may want to run them outside of the container and only do certain
 integration tests against the built Docker image.
 
+> If you need to access Circle CI services, such as mysql or redis, be sure to pass the `--net=host` flag when you run your container. This will allow you to access these services via `localhost` from within your containers.
+
+```
+machine:
+  services:
+    - mysql
+  ...
+  test:
+    override:
+      - docker run --net=host myimage bundle exec rake test
+```
+
 ### Docker Exec
 
 If you try to run `docker exec` in our containers, you'll see an error like
