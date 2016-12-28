@@ -25,12 +25,24 @@ If you don't want to use the default, you can specify your version in `circle.ym
 ```
 machine:
   ruby:
-    version: rbx-2.2.6
+    version: 2.4.0
 ```
 
-Our [test environment doc]({{site.baseurl}}/language-ruby-on-rails/)
-covers more details about language versions and tools; it also explains how Circle
-works with testing tools that require a browser.
+In the current version of CircleCI, we use `rvm` to manage and install different versions of Ruby. This has a couple of side-effects that users should be aware of.
+
+First, if the version specified in `circle.yml` isn't available then rvm will try to install it for you. If RVM cannot find a pre-compiled binary from the available mirrors, then it will download and compiled from source. Since, fetching the binary each time from a number of possible mirrors can often fail due to network instability; we highly recommend to cache this file. Please see the following guide on discuss in order to [cache a pre-compiled Ruby binary](https://discuss.circleci.com/t/caching-compiled-rubies-with-rvm/3636) and improve build performance and reliability.
+
+Second, whenever the build changes into your project directory, RVM will try to read either `.rvmrc` or `.ruby-version` via the `cd` auto hook. In order to avoid this, and the aforementioned behavior, we recommend to remove these files by doing:
+
+```
+rm $CIRCLE_PROJECT_REPONAME/.ruby-version
+```
+
+Last, you can configure RVM to not install versions of Ruby that don't exist on the system by doing:
+
+```
+echo 'export rvm_install_on_use_flag=0' >> /home/ubuntu/.rvmrc
+```
 
 ### Dependencies
 
