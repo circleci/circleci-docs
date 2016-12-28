@@ -1,9 +1,7 @@
 _site/
-_staging_site/
 .sass-cache/
 .jekyll-metadata
 .vagrant/
 .DS_Store
 .bundle/
 .ruby-version
-hugo/public
