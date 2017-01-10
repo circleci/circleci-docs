@@ -95,8 +95,8 @@ If you are configuring network security, please ensure you whitelist the followi
 To kick off the process, ssh into the builder machine and run the following:
 
 ```bash
-$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-lxc-2016-12-05.sh
-$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-lxc-2016-12-05.sh
+$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder.sh
+$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh
 $ sudo bash ./provision-builder.sh
 $ sudo \
   SERVICES_PRIVATE_IP=<private ip address of services box> \

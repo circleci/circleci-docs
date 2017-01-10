@@ -121,7 +121,7 @@ These AMIs are public and are marked as community AMIs.
 SSH into the box as `ubuntu` user with the appropriate ssh key you set for the instance, and run
 
 ```
-curl https://s3.amazonaws.com/circleci-enterprise/init-builder-lxc-2016-12-05.sh | \
+curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
   SERVICES_PRIVATE_IP=<private ip address of services box> \
   CIRCLE_SECRET_PASSPHRASE=<passphrase entered on system console (services box port 8800) settings> \
   bash

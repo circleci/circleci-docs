@@ -93,6 +93,7 @@ The main requirement for this install is that the kernel supports Docker.  Our i
 
 Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}/enterprise/on-prem/) are:
 
+* Currently only installs on non Ubuntu 14.04 images.
 * We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
 * The container image is always fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.  
 * Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/config/#sharing-docker-socket-with-docker-based-install)
@@ -105,8 +106,8 @@ When using Docker, we recommend that you ensure that use production-ready Docker
 Here is a complete list of commands to provision a builder machine:
 
 ```
-$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-docker-2016-12-05.sh
-$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-docker-2016-12-05.sh
+$ curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder.sh
+$ curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh
 $ sudo bash ./provision-builder.sh
 # How to specify the docker storage driver will vary by distro. You may instead
 # need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
