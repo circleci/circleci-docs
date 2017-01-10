@@ -140,7 +140,7 @@ In AWS EC2, to start from a snapshot, you would need to convert the snapshot to 
 ```bash
 $ aws ec2 register-image --name "CircleCI-restore-$(date '+%s')"  --description "CircleCI Services Box restored from snapshot-id $SNAPSHOT_ID" --architecture x86_64 --root-device-name '/dev/sda1' --block-device-mappings "[{\"DeviceName\": \"/dev/sda1\", \"Ebs\": {\"SnapshotId\": \"$SNAPSHOT_ID\"}}]"
 {
-    "ImageId": "ami-45a54125"
+    "ImageId": "ami-<ami-id>"
 }
 ```
 
