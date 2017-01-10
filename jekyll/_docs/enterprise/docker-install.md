@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "Non-AWS"
+title: "Docker-Based Install"
 category: [installation]
-order: 3
+order: 2
 description: "How to install CircleCI Enterprise on any generic machine"
 ---
 

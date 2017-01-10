@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "AWS"
+title: "AWS AMI Install"
 category: [installation]
-order: 2
+order: 3
 description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
 ---
 
