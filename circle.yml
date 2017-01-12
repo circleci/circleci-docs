@@ -9,7 +9,7 @@ dependencies:
     # We want to expose the version file to public for the reusability
     - cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json # Remove trusty.json. It's the same as ubuntu-14.04-XXL.json
     - cp jekyll/_data/trusty/versions-ubuntu-14.04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
-    - ./update-latest-version-files.sh ubuntu-1404-XL
+    - cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
     - cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XXL-upstart.json
 
     # https://github.com/jekyll/jekyll/issues/4713
