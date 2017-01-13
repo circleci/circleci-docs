@@ -63,7 +63,7 @@ If you are configuring network security, please ensure you whitelist the followi
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
 ```bash
-$ curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services.sh
+$ curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services-2.0.sh
 $ sudo bash init-services.sh
 ```
 
