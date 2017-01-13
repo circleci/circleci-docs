@@ -6,7 +6,7 @@ categories: [getting-started]
 description: "An introduction to Continuous Integration, Continuous Deployment, and how CircleCI can help."
 ---
 
-Typically CircleCI is used to do [Continuous Integration][wiki-ci] and Continuous Deployment. 
+CircleCI acts as a platform for both [Continuous Integration][wiki-ci] and Continuous Deployment.
 
 ## Continuous Integration 
 
@@ -14,13 +14,13 @@ The general idea is to test all changes that you are making to your code base. Y
 
 * [Unit Tests][wiki-unittest]
 * [Integration Tests][wiki-inttest]
-* [Functional Tests][wiki-functest] (also known as End to End tests) 
+* [Functional Tests][wiki-functest] (also known as End-to-End tests) 
 
-[Software Testing][wiki-codetest] in general is a huge topic with tons of concepts. The way that you write tests varies depending on what language and framework you are using.
+In general, [Software Testing][wiki-codetest] is a huge topic with tons of concepts. The way that you write tests varies depending on what language and framework you are using.
 
 ## Continuous Deployment 
 
-If your tests pass, then you can deploy your code to development, staging, production, etc... The specific way that you do this depends on what type of infrastructure you are deploying too. Some examples:
+If your tests pass, then you can deploy your code to development, staging, production, or other environments. The way you do this will depend on the infrastructure you are deploying too. Some examples:
 
 * [AWS CodeDeploy][doc-awscd]
 * [AWS EC2 Container Service (ECS)][doc-awsecs]
@@ -29,9 +29,11 @@ If your tests pass, then you can deploy your code to development, staging, produ
 * [Heroku][doc-heroku]
 * [Deploy Using SSH][doc-sshdeploy]
 
-## How does CircleCI help you 
+## CircleCI's Role
 
-Now that we have a basic context of what CI and CD is, we can talk about how CircleCI fits into this picture. CircleCI integrates with your version control system (either GitHub or Bitbucket) and automatically runs a series of steps every time that we detect a change to your repository (when you push commits or a PR is opened). 
+Now that we have some context on CI and CD, we can discuss how CircleCI fits into this flow.
+
+CircleCI integrates with your version control system (GitHub/Bitbucket) and automatically runs a series of steps every time a change is detected in the repository (i.e. when you push commits or open a PR).
 
 A CircleCI build consists of a series of steps which are generally:
 
@@ -39,7 +41,7 @@ A CircleCI build consists of a series of steps which are generally:
 * Testing
 * Deployment 
 
-We have some inference that can detect these automatically if you are using best practices for standard projects. You can also configure each of these phases [manually][doc-manually]. 
+If you are using best practices for your project, CircleCI will infer settings automatically. You can also configure each phase [manually][doc-manually].
 
 
 
