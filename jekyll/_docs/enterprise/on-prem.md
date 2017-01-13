@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "Advanced CircleCI Install "
+title: "Advanced Options "
 category: [installation]
-order: 3
+order: 5
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
