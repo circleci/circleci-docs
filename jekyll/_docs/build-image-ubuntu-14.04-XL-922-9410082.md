@@ -6,9 +6,9 @@ description: ubuntu-14.04-XL-922-9410082
 changefreq: "weekly"
 ---
 
-***Please note that we are planning to make the image depreciated on CircleCI 2.0 in the future.***
+***Please note that we are planning to make the image deprecated on CircleCI 2.0 in the future.***
 
-The idea of monolithic build image doesn't fix the idea of CircleCI 2.0 quite well and we are currently
+The idea of monolithic build image doesn't fit the idea of CircleCI 2.0 quite well and we are currently
 working on providing alternatives. We'll keep the image in the meantime but will not be support it eventually.
 
 ### Build Image
