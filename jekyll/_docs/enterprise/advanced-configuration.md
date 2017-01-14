@@ -110,3 +110,115 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
 
 ### Installing CircleCI Builder
 This really depends on what type of distro you are installing CircleCI on, but the above instructions cover a basic kind of install.
+
+
+##GPU Install Instructions 
+
+This is only supported in our newest release ( 1.47.0 +). If you need help upgraging, please reachout to enterprise-support@circleci.com
+
+First
+
+`wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb`
+
+next while the above runs
+
+```
+sudo apt-get install -y linux-image-extra-`uname -r` linux-headers-`uname -r` linux-image-`uname -r`
+```
+
+then once both finish
+
+```
+sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
+sudo apt-get update
+;;installing cuda breaks the circle.jar because it changes the java version. This is hanldled by the update-alternatives step 
+sudo apt-get --yes --force-yes install cuda
+```
+
+after
+
+try without this but with the exact same steps
+
+
+
+
+type in `nvidia-smi` ( this will initialize the nvidia drivers to be visiable to the lxc container ) and press enter
+`sudo modprobe nvidia-uvm`
+
+
+next
+`curl -o ./provision-builder.sh https://s3.amazonaws.com/circleci-enterprise/provision-builder-lxc-2016-12-05.sh`
+
+sudo bash ./provision-builder.sh
+
+then 
+
+`sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_73/bin/java`
+
+
+For the next step copy and paste the following lxc configurations into lxc_config.txt
+
+----Below is the final version and the one that should be posted into a circle argument./pasted into the file
+
+```
+lxc.cgroup.devices.allow = c 195:* rwm
+lxc.cgroup.devices.allow = c 250:* rwm
+lxc.mount.entry = /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+lxc.mount.entry = /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+lxc.mount.entry = /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
+```
+
+then run the following command
+
+`CIRCLE_LXC_RUN_ARGUMENTS="$(cat lxc_config.txt)"`
+
+run `echo "$CIRCLE_LXC_RUN_ARGUMENTS"` to ensure that you outputs looks like like 
+
+```
+lxc.cgroup.devices.allow = c 195:* rwm
+lxc.cgroup.devices.allow = c 250:* rwm
+lxc.mount.entry = /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+lxc.mount.entry = /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+lxc.mount.entry = /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
+```
+
+ next
+
+in the script.
+
+`curl -o ./init-builder.sh https://s3.amazonaws.com/circleci-enterprise/init-builder-lxc-2016-12-05.sh`
+
+make the builder join
+
+```
+sudo -E \
+  SERVICES_PRIVATE_IP=<priviate ip> \
+  CIRCLE_SECRET_PASSPHRASE=<secret passphrase> \
+  CIRCLE_BUILD_VOLUMES="<stuff>" \
+  CIRCLE_CONTAINER_IMAGE_ID="circleci-trusty-container_0.0.575" \
+  bash ./init-builder.sh
+```
+
+then 
+
+the above settings will only take affect after the containers are initlized with the default configs, so run a couple of builds to make sure
+that you are indeed importing the nvidia settings. 
+
+In your circle.yml/image you'll want to do the following 
+
+    - wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
+    - sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
+    - sudo apt-get update
+    - sudo apt-get --yes --force-yes install cuda
+
+   this will install the driver without making kernel changes 
+
+Then in your circle.yml test section, you'll need to add 
+
+    - export PATH=/usr/local/cuda-8.0/bin:$PATH
+    - export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+
+
+See here for a working sample project
+
+    https://github.com/GERey/Sample-GPU-Project
