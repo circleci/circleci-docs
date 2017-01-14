@@ -15,8 +15,8 @@ description: "How to modify `circle.yml` in order to install and use Yarn on Cir
 ```
 machine:
   environment:
-    YARN_VERSION: 0.17.8
-    PATH: "${PATH}:${HOME}/.yarn/bin"
+    YARN_VERSION: 0.18.1
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 ```
 
 We've set the Yarn version here to reduce the number of moving parts in the build. Although the Yarn install script sets its `PATH`, running from cache requires adding `~/.yarn/bin/` explicitly.
@@ -32,7 +32,7 @@ dependencies:
       fi
   cache_directories:
     - ~/.yarn
-    - ~/.yarn-cache
+    - ~/.cache/yarn
 ```
 
 Here, the Yarn install script runs if and only if:
@@ -40,7 +40,7 @@ Here, the Yarn install script runs if and only if:
 * Yarn isn't already installed.
 * The installed version of Yarn doesn't match the specified version in the machine section.
 
-**`~/.yarn`** is specified as a cached directory for **Yarn itself**. **`~/.yarn-cache`** is specific as a cached directory for **Yarn packages**.
+**`~/.yarn`** is specified as a cached directory for **Yarn itself**. **`~/.cache/yarn`** is specific as a cached directory for **Yarn packages**.
 
 ## Override CircleCI's Inferred Commands
 
@@ -55,13 +55,23 @@ test:
 
 When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of NPM, we override both the `dependencies` and `test` sections.
 
+## Ubuntu 12.04 Compatibility
+
+This doc assumes you are using CircleCI's Ubuntu 14.04 image. If you are using Ubuntu 12.04, you will need to specify a newer version of NodeJS in `circle.yml`:
+
+```
+machine:
+  node:
+    version: 5.0.0
+```
+
 ## Full Example
 
 ```
 machine:
   environment:
-    YARN_VERSION: 0.17.8
-    PATH: "${PATH}:${HOME}/.yarn/bin"
+    YARN_VERSION: 0.18.1
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
 dependencies:
   pre:
@@ -76,7 +86,7 @@ dependencies:
     - yarn install
   cache_directories:
     - ~/.yarn
-    - ~/.yarn-cache
+    - ~/.cache/yarn
 
 test:
   override:

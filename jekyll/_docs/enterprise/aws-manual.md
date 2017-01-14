@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "Manual AWS Installation"
-category: [resources]
-order: 3
+title: "AWS Manual Install"
+category: [installation]
+order: 4
 description: "How to install CircleCI Enterprise manually on Amazon Web Services (AWS)."
 ---
 
@@ -74,16 +74,17 @@ Start one of the following AMIs (for the appropriate AWS region), with an approp
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-f6c26297
-ap-northeast-2     | ami-b917c3d7
-ap-southeast-1     | ami-ced475ad
-ap-southeast-2     | ami-5fe7da3c
-eu-central-1       | ami-678c7408
-eu-west-1          | ami-3dd9904e
-sa-east-1          | ami-a5de42c9
-us-east-1          | ami-610a5676
-us-west-1          | ami-c87b30a8
-us-west-2          | ami-1ae4437a
+ap-northeast-1     | ami-bd4133da
+ap-northeast-2     | ami-1b70a675
+ap-southeast-1     | ami-f808a09b
+ap-southeast-2     | ami-d1f7f2b2
+eu-central-1       | ami-6713de08
+eu-west-1          | ami-d70e26a4
+sa-east-1          | ami-8c9802e0
+us-east-1          | ami-b6b455a0
+us-east-2          | ami-c86144ad
+us-west-1          | ami-3c194a5c
+us-west-2          | ami-13df6d73
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
@@ -104,16 +105,17 @@ To start a box:  Start a new instance with the appropriate region-specific AMI:
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-59389e38
-ap-northeast-2     | ami-a2e236cc
-ap-southeast-1     | ami-a80fa9cb
-ap-southeast-2     | ami-53241930
-eu-central-1       | ami-5a59a035
-eu-west-1          | ami-e0c78993
-sa-east-1          | ami-3832af54
-us-east-1          | ami-d0396bc7
-us-west-1          | ami-76226916
-us-west-2          | ami-938420f3
+ap-northeast-1     | ami-07f09d60
+ap-northeast-2     | ami-90588ffe
+ap-southeast-1     | ami-4f54f82c
+ap-southeast-2     | ami-040c3467
+eu-central-1       | ami-3465a35b
+eu-west-1          | ami-d70421a4
+sa-east-1          | ami-2e6bf242
+us-east-1          | ami-e68f89f1
+us-east-2          | ami-2f60454a
+us-west-1          | ami-901c4af0
+us-west-2          | ami-0c57fc6c
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.

@@ -175,10 +175,10 @@ And modify your test command to this:
 ````
 test:
   override:
-    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS":
-      parallel: true
-      files:
-        - test/**/*_test.rb
+    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+        parallel: true
+        files:
+          - test/**/*_test.rb
 ````
 
 #### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests

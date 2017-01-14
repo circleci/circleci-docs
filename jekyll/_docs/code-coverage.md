@@ -160,11 +160,9 @@ parallel builds.
 
 ### Code Climate
 
-If you're a Code Climate customer, follow the instructions under
-**Repo Settings -> Test Coverage**
-from your repo on the Code Climate site.
-You'll need to add your `CODECLIMATE_REPO_TOKEN` to your CircleCI
-[environment variables]({{site.baseurl}}/environment-variables/).
+1. In the Code Climate UI, go to your repo and then navigate to **Settings -> Test Coverage**.
+2. Grab your test reporter token and add it to your CircleCI [environment variables]({{site.baseurl}}/environment-variables/) as `CODECLIMATE_REPO_TOKEN`.
+3. Follow the [Code Climate documentation](https://docs.codeclimate.com/docs/setting-up-test-coverage#section-how-to) for your specific language or framework.
 
 Code Climate does not currently support CircleCI's parallelization.
 

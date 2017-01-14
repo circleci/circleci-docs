@@ -18,6 +18,19 @@ The [Google Cloud SDK](https://cloud.google.com/sdk/), or the gcloud tool, is
 the command line tool that can be used to deploy to any Google Cloud product. 
 Fortunately, it comes pre-installed on CircleCI.
 
+### Python 2.7
+
+In order to use the `gcloud` program, you will need to activate Python 2.7.
+
+For example, if your tests require Python 3.5, you can specify the version required by `gcloud` in your `circle.yml`:
+
+```
+deployment:
+  production:
+    pre:
+      - pyenv global 2.7.12
+```
+
 ### Service Account Authentication
 
 You'll need to use a GCP Service Account to authenticate the `gcloud` tool 

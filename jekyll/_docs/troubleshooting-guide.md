@@ -29,9 +29,8 @@ compilation of the ones we see most frequently:
 - File ordering. Some filesystems maintain an ordered file structure for
   every directory, which means that all the files are read in a
   consistent order every time. The filesystem in our build containers is
-  _not_ one of those. Therefore if your tests rely on a
-  certain autoload order, for example, this could be a reason they fail on
-  CircleCI and pass locally. See [this documentation
+  _not_ one of those. Therefore, if your tests rely on a certain autoload order,
+  they may fail on CircleCI and pass locally. See [this documentation
   page]({{site.baseurl}}/file-ordering/) for more details.
 - Out Of Memory errors. If a process in your build container uses too
   much memory, it can be killed by Linux’s OOM
@@ -47,8 +46,8 @@ compilation of the ones we see most frequently:
   suspect this, it might be a good idea to check the status pages of the
   services you rely on.
 
-### None of these is the reason?
-You could SSH into your build container to debug interactively,
+### If none of these is the reason
+You can SSH into your build container to debug interactively
 while the build is still running. Consult [this guide on using SSH
 access]({{site.baseurl}}/ssh-build/) to learn more.
 

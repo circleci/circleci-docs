@@ -19,7 +19,7 @@ $ git add log/.gitkeep
 $ git commit
 ```
 
-If this solution is unacceptable (perhaps you symlink your log directory in production), you can also add a post-checkout command to create the direction:
+If this solution is unacceptable (perhaps you symlink your log directory in production), you can also add a post-checkout command to create the directory:
 
 ```
 checkout:

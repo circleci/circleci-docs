@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "AWS"
+title: "AWS AMI Install"
 category: [installation]
-order: 2
+order: 3
 description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
 ---
 
@@ -86,3 +86,4 @@ Using Circle CI Enterprise
 If no instances appear in the list, then the first builder is still starting. If there is a builder instance in the list but its state is "starting-up", then it is still downloading the build container image and starting its first build containers. Once this is all done, the first build should begin immediately. If there are no updates after about 15 minutes (remember to click the "refresh" button occasionally), please contact <a href="mailto:enterprise-support@circleci.com">CircleCI Enterprise support</a>.</li>
     </ol>
   </li>
+
