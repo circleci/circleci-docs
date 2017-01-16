@@ -21,9 +21,10 @@ A way to mitigate this is to launch the iOS simulator as a part of your dependen
 ```
 dependencies:
   pre:
-    - xcrun instruments -w 'E8DD285C-51EE-4DB5-B326-7E927686EC36' || true 
+  - xcrun instruments -w "iPhone 7 (10.1)" || true
 ```
 
 This will launch the simulator just like it would if you'd hit `CMD + R` on your machine in Xcode, and once your tests are supposed to start the iOS simulator is immediately available.
 
-A full list of UUIDs for iOS simulators is available [here]({{site.baseurl}}/ios-builds-on-os-x/).
+You can find the full list of simulators that are available in our OS X
+image [here]({{site.baseurl}}/ios-builds-on-os-x/#available-simulators).
