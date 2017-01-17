@@ -32,7 +32,7 @@ dependencies:
       fi
   cache_directories:
     - ~/.yarn
-    - ~/.cache/yarn
+    - ~/.yarn-cache
 ```
 
 Here, the Yarn install script runs if and only if:
@@ -86,7 +86,7 @@ dependencies:
     - yarn install
   cache_directories:
     - ~/.yarn
-    - ~/.cache/yarn
+    - ~/.yarn-cache
 
 test:
   override:
