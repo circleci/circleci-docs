@@ -6,10 +6,12 @@ description: Collecting test metadata
 ---
 
 CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
+
 We'll use the test metadata to give you better insight into your build. For our
 inferred steps that use parallelism, we'll always use the timing information to get you
-better test splits and finish your builds faster. You can also take advantage
-of this runtime-based test splitting in custom steps if you follow [these steps]({{site.baseurl}}/test-metadata/#using-the-files-modifier).
+better test splits and finish your builds faster.
+
+You can also take advantage of this runtime-based test splitting in custom steps if you follow [these steps]({{site.baseurl}}/test-metadata/#using-the-files-modifier).
 
 ## Automatic test metadata collection
 
@@ -30,7 +32,7 @@ gem 'rspec_junit_formatter'
 Add this to your gemfile:
 
 ```
-gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
+gem 'minitest-ci'
 ```
 
 ### For Django:
@@ -39,7 +41,7 @@ Configure your tests to run using the
 [django-nose](https://github.com/django-nose/django-nose) test runner.  We'll
 do the rest automatically.
 
-Or if you'd rather use another django test runner, and it's capable of
+Or if you'd rather use another django test runner that is capable of
 producing XUnit XML files, configure it to output them to the
 `$CIRCLE_TEST_REPORTS/django` directory (you'll have to create the django
 directory if your runner doesn't create the destination directory
@@ -50,14 +52,14 @@ timing information.
 
 If you have a custom test step that produces JUnit XML output - most test
 runners support this in some form - you can write the XML files to a
-subdirectory under `$CIRCLE_TEST_REPORTS`.
+subdirectory under `$CIRCLE_TEST_REPORTS` (for example `$CIRCLE_TEST_REPORTS/reports`).
 
 We'll automatically store the files in your [build artifacts]({{ site.baseurl }}/build-artifacts/) and parse the XML.
 
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
 
-**Note**: It's important to write to a subdirectory of `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
+**Note**: It's important to write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
 
 ### Custom runner examples
 * [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
@@ -71,7 +73,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 
 #### <a name="cucumber"></a>Cucumber
 
-For custom Cucumber steps, you should generate a file using the JSON formatter that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
+For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
 
 ```
 test:
@@ -80,7 +82,7 @@ test:
     - bundle exec cucumber --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
 ```
 
-Note that `cucumber` allows for mulitple `--format` items to be present so you can do:
+Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory. For example:
 
 ```
 test:
@@ -151,7 +153,7 @@ test:
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
 ```
-gem 'rspec_junit_formatter', '0.2.2'
+gem 'rspec_junit_formatter'
 ```
 
 And modify your test command to this:
@@ -167,7 +169,7 @@ test:
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
 ```
-gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
+gem 'minitest-ci'
 ```
 
 And modify your test command to this:
@@ -181,8 +183,10 @@ test:
           - test/**/*_test.rb
 ````
 
+See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
+
 #### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
-You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies).
+You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 ## Using the `files` modifier
 
