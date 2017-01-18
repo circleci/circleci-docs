@@ -14,6 +14,8 @@ description: "How to use the Yarn package manager on CircleCI."
 
 ## Setup
 
+When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections.
+
 ```yaml
 dependencies:
   override:
@@ -23,7 +25,7 @@ test:
     - yarn test
 ```
 
-When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections.
+Overriding the `dependencies` phase means that the `node_modules/.bin` directory doesn't get added to `PATH`. We add it in the `machine` phase.
 
 ```yaml
 machine:
@@ -31,17 +33,15 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 ```
 
-Overriding the `dependencies` phase means that the `node_modules/.bin` directory doesn't get added to `PATH`. We add it in the `machine` phase.
-
 ## Cache
+
+Yarn stores packages for caching in `~/.cache/yarn`. This is specified as a cache directory to CircleCI and will be cached after the `dependencies` phase completes.
 
 ```yaml
 dependencies:
   cache_directories:
     - ~/.cache/yarn
 ```
-
-Yarn stores packages for caching in `~/.cache/yarn`. This is specified as a cache directory to CircleCI and will be cached after the `dependencies` phase completes.
 
 ## Full Example
 
