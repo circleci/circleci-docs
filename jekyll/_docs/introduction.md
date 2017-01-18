@@ -20,7 +20,7 @@ In general, [Software Testing][wiki-codetest] is a huge topic with tons of conce
 
 ## Continuous Deployment 
 
-If your tests pass, then you can deploy your code to development, staging, production, or other environments. The way you do this will depend on the infrastructure you are deploying too. Some examples:
+If your tests pass, then you can deploy your code to development, staging, production, or other environments. The way you do this will depend on the infrastructure you are deploying to. Some examples:
 
 * [AWS CodeDeploy][doc-awscd]
 * [AWS EC2 Container Service (ECS)][doc-awsecs]
@@ -33,7 +33,7 @@ If your tests pass, then you can deploy your code to development, staging, produ
 
 Now that we have some context on CI and CD, we can discuss how CircleCI fits into this flow.
 
-CircleCI integrates with your version control system (GitHub/Bitbucket) and automatically runs a series of steps every time a change is detected in the repository (i.e. when you push commits or open a PR).
+CircleCI integrates with your version control system (GitHub/Bitbucket) and automatically runs a series of steps every time a change is detected in the repository (e.g., when you push commits or open a PR).
 
 A CircleCI build consists of a series of steps which are generally:
 
