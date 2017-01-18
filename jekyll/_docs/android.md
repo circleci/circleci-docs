@@ -33,8 +33,6 @@ If you don't do it this way, Android will give you an error message but won't
 fail and your build continues. This is undesirable since it makes debugging 
 very difficult.
 
-We also preinstall the Android NDK; it can be found at `$ANDROID_NDK`.
-
 `./gradlew dependencies` will also be run automatically if you have a
 Gradle wrapper checked in to the root of your repository.
 
