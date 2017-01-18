@@ -8,7 +8,7 @@ changefreq: "weekly"
 
 The default image is Ubuntu 14.04 (Trusty), but you can always change the image directly by going to 'Project Settings' -> 'Build Environment'.
 
-Please note that you need to trigger a build by pushing commits to GitHub or 
+Please note that you need to trigger a build by pushing commits to GitHub or
 Bitbucket (instead of rebuilding) to apply the new setting.
 
 ## Base
@@ -66,6 +66,10 @@ Pre-installed versions:
 {% for version in site.data.trusty.versions.summary.nodejs.all %}
 - `{{ version }}`
 {% endfor %}
+
+### Yarn
+
+Version: `{{ site.data.trusty.versions.summary.nodejs.yarn }}`
 
 <!--
 Kludge ahead! circle.yml expects abbreviated version name e.g. openjdk8 but
