@@ -94,15 +94,20 @@ a few minutes. You can start the emulator and wait for it to finish with somethi
 the following:
 
 ```
+# Disable emulator audio
+machine:
+  environment:
+    QEMU_AUDIO_DRV: none
+
 test:
   pre:
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    - emulator -avd circleci-android24 -no-window:
         background: true
         parallel: true
     - circle-android wait-for-boot
 ```
 
-`circleci-android23` is an AVD preinstalled on the machine for Android 23 on the ARM V7 EABI.
+`circleci-android24` is an AVD preinstalled on the machine for Android 24 on the ARM V7 EABI.
 There's also a corresponding `circleci-android22`; alternatively, you can
 [create your own][create-avd] if these don't suit your purposes.
 
@@ -232,7 +237,7 @@ deployment:
 test:
   override:
     # start the emulator
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    - emulator -avd circleci-android24 -no-window:
         background: true
         parallel: true
     # wait for it to have booted
