@@ -1,8 +1,8 @@
 ---
 layout: enterprise
 title: "Single-Box Install"
-category: [installation]
-order: 1
+category: [documentation]
+order: 0
 description: "How to install CircleCI Enterprise on a single VM"
 ---
 

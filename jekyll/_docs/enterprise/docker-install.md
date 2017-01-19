@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "Docker-Based Install"
+title: "Install on Other Platforms"
 category: [installation]
-order: 2
+order: 4
 description: "How to install CircleCI Enterprise on any generic machine"
 ---
 

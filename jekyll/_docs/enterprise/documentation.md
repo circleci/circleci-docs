@@ -1,8 +1,6 @@
 ---
 layout: classic-category
-title: User Documentation
+title: Getting Started
 categories: [documentation]
-description: " User Documentation"
+description: "Getting Started"
 ---
-
-

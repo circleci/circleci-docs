@@ -6,8 +6,6 @@ order: 1
 description: "Here are the differences between CircleCI.com and CircleCI Enterprise."
 ---
 
-## Differences from circleci.com
-
 Below is a list of some of the most significant differences between CircleCI Enterprise
 and circleci.com. You'll want to keep these differences in mind if you are coming
 to CircleCI Enterprise after using circleci.com, or if you are using circleci.com

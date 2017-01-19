@@ -1,7 +1,6 @@
 ---
 layout: classic-category
-title: Installation
+title: Clustered Installation
 categories: [installation]
 description: "Installation Guide"
 ---
-

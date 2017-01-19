@@ -1,8 +1,8 @@
 ---
 layout: enterprise
-title: "AWS AMI Install"
+title: "Automated AWS Install"
 category: [installation]
-order: 3
+order: 2
 description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
 ---
 
@@ -13,16 +13,16 @@ Prerequisites
 
 * AWS Access Key
 * AWS Secret Key
-* AWS Region 
+* AWS Region
 	* For example: "us-west-2"
 * AWS VPC ID
-	* Ensure that your VPC has the setting [enableDNSSupport](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) 
+	* Ensure that your VPC has the setting [enableDNSSupport](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)
 	set to true
 	* Instructions if you have a [Private Subnet]({{site.baseurl}}/enterprise/aws-private-subnet/)
 * AWS Subnet ID
 * AWS S3 Bucket Name
 * Services Instance Type
-	* The type of aws resource for our CircleCI service 
+	* The type of aws resource for our CircleCI service
 * Builder Instance Type
 	* The type of aws resource for our CircleCI builder
 * Circle CI License .rli file.
@@ -31,14 +31,14 @@ Step One: Setup Terraform
 ==================
 
 If you prefer to do this process manually or with different tools please see the [Manual Aws Instructions]({{site.baseurl}}/enterprise/aws-manual/)
-  
-  
+
+
 Download the following repo: `git clone https://github.com/circleci/enterprise-setup ccie && cd ccie`
 
 
-Open `terraform.tfvars` in your favorite text editor and input the 
-prerequities stated above in the required fields. 
- 
+Open `terraform.tfvars` in your favorite text editor and input the
+prerequities stated above in the required fields.
+
 For Linux/Windows
 ------------------
 Please install <a href="https://www.terraform.io/downloads.html">Terraform</a> yourself on Linux/Windows. Then run the command below.
@@ -73,8 +73,8 @@ Configure Circle Ci Enterprise
       </li>
 
    <img src="{{site.baseurl}}/assets/img/docs/started.png" alt="Look For 'Open'" width="150" style="margin: 10px; margin-left: 200px">
-  
-Using Circle CI Enterprise 
+
+Using Circle CI Enterprise
 ==================
 
   <li>Try it out!
@@ -86,4 +86,3 @@ Using Circle CI Enterprise
 If no instances appear in the list, then the first builder is still starting. If there is a builder instance in the list but its state is "starting-up", then it is still downloading the build container image and starting its first build containers. Once this is all done, the first build should begin immediately. If there are no updates after about 15 minutes (remember to click the "refresh" button occasionally), please contact <a href="mailto:enterprise-support@circleci.com">CircleCI Enterprise support</a>.</li>
     </ol>
   </li>
-

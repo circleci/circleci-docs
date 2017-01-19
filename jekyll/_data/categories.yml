@@ -58,15 +58,15 @@
   icon: "/docs/assets/img/icons/build-images.svg"
   section: cci1
 
-- name: "Installation"
-  slug: installation
-  index: installation
+- name: "Getting Started"
+  slug: documentation
+  index: documentation
   icon: "/docs/assets/img/icons/build-images.svg"
   section: cci1
 
-- name: "User Documentation"
-  slug: documentation
-  index: documentation
+- name: "Clustered Installation"
+  slug: installation
+  index: installation
   icon: "/docs/assets/img/icons/build-images.svg"
   section: cci1
 
