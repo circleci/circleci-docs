@@ -15,7 +15,7 @@ hide: false
 
 ### Getting Started
 
-For the purposes of this demo and to follow the examples, we assume that we have an unauthenticated http proxy at `10.0.0.33:3128` and the services box is at `10.0.1.238`. We use `ghe.example.com` as our github enterprise host.
+Lets assume that we have an unauthenticated http proxy at `10.0.0.33:3128` and the services box is at `10.0.1.238`. We use `ghe.example.com` as our github enterprise host.
 
 In an ideal case, traffic to S3 will not be proxied, and instead be added to the NO_PROXY rules (to bypass it out add `s3.amazonaws.com,*.s3.amazonaws.com`  to `NO_PROXY`)
 
