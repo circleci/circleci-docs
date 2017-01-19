@@ -78,4 +78,4 @@ should be open to administrators, ports 80 and 443 should be open to all users, 
 
 2. Install Replicated, the tool used to package and distribute CircleCI Enterprise: `curl https://get.replicated.com/docker | sudo bash`. (Note: Make sure Docker is not using the device mapper storage driver. You can check this by running `sudo docker info | grep "Storage Driver"`.)
 
-3. Visit port 8800 on machine in a web browser and complete the guided install process.
+3. Visit port 8800 on the machine in a web browser and complete the guided install process.
