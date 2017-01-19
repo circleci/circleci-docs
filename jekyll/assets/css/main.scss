@@ -78,7 +78,7 @@ div.article-container{
 	padding: 30px 43px 0;
 	width: 75%;
 }
-	article{	
+	article{
 		h2,
 		h3,
 		h4,
@@ -112,12 +112,12 @@ div.article-container{
 		}
 
 		h2{
-			font-size: 2rem;
+			font-size: 1.7rem;
 		}
 
 		h3{
 			margin-top: 10px;
-			font-size: 1.5rem;
+			font-size: 1.4rem;
 		}
 
 		h4{
@@ -164,7 +164,7 @@ p {
 
 // Homepage
 body.homepage{
-	
+
 	article{
 		display: flex;
 		flex-wrap: wrap;
@@ -178,13 +178,18 @@ body.homepage{
 		.logo{
 			width: 60px;
 		}
-	
+
 		h2{
 			font-size: 1.5rem;
 		}
-	
+
 		li a{
 			font-size: 0.875rem;
 		}
 	}
+}
+
+code {
+  padding: 2px;
+  font-size: 75%;
 }
