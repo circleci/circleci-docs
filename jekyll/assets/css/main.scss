@@ -18,6 +18,7 @@ body{
 
 div.main-body{
 	display: flex;
+	min-height: 550px;
 }
 
 // Navigation Sidebar
@@ -30,6 +31,15 @@ nav.sidebar{
 	background-color: $nav-bg-color;
 	padding: 30px 20px 20px;
 	width: 25%;
+
+	h3{
+		margin: 0;
+		text-align: center;
+	}
+
+	hr{
+		margin-top: 0;
+	}
 
 	a{
 		display: block;
