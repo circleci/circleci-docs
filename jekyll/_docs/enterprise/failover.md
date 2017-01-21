@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Failover and Backup"
 category: [advanced-config]
 order: 4.0

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Export/Import Project Settings"
 category: [resources]
 order: 0

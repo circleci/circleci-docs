@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Advanced Options "
 category: [installation]
 order: 5

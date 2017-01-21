@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Private Subnets on AWS"
 category: [advanced-config]
 order: 3

@@ -1,6 +1,7 @@
 ---
 redirect: "https://circleci.com/enterprise/changelog/"
 layout: enterprise
+section: enterprise
 title: "Changelog"
 category: [resources]
 order: 10

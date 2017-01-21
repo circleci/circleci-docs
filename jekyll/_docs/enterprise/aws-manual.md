@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Manual AWS Install"
 category: [installation]
 order: 3

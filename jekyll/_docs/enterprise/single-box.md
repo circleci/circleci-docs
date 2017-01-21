@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Single-Box Install"
 category: [documentation]
 order: 0

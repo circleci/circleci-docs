@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Strategic Value of CircleCI"
 category: [resources]
 order: 0

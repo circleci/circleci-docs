@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Install on Other Platforms"
 category: [installation]
 order: 4

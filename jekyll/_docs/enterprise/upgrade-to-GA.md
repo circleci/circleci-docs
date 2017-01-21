@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Upgrading to GA"
 category: [resources]
 order: 0

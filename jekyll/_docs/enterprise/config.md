@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Builder Configuration Options"
 category: [advanced-config]
 order: 4.1

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Using Centralized Logging"
 category: [advanced-config]
 order: 4.0

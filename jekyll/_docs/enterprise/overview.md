@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Clustered Installation Overview"
 category: [installation]
 order: 1

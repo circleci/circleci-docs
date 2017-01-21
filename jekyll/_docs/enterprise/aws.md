@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Automated AWS Install"
 category: [installation]
 order: 2

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Security on CircleCI Enterprise"
 category: [advanced-config]
 order: 0

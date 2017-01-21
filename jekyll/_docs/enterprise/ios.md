@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Building iOS with CircleCI Enterprise"
 category: [resources]
 order: 4

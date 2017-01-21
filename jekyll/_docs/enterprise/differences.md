@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Differences from circleci.com"
 category: [documentation]
 order: 1

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "CloudWatch Monitoring"
 category: [advanced-config]
 order: 4.0

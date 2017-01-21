@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "User Quick Start"
 category: [documentation]
 order: 1

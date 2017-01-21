@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Custom Root CA"
 category: [resources]
 order: 4

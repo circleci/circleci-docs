@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Using Docker with CircleCI Enterprise"
 category: [resources]
 order: 4

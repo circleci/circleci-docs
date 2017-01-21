@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Debugging Replicated"
 category: [troubleshooting]
 order: 1

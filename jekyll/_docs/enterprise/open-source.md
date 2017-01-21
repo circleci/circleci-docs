@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Open Source Acknowledgments"
 category: [resources]
 order: 4.2

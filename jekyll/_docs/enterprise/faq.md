@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: FAQ
 category: [resources]
 order: 2
