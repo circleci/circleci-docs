@@ -1,8 +1,8 @@
 ---
 layout: enterprise
 title: "Debugging Replicated"
-category: [resources]
-order: 4.05
+category: [troubleshooting]
+order: 1
 description: "Tips for debugging CircleCI Enterprise."
 ---
 
@@ -86,4 +86,3 @@ ac2faa662bbe        <service-box-ip>:9874/tutum-logrotate:latest                
 ```
 
 Providing us with the output of `sudo docker ps` in service box will be helpful in diagnosing the problem.
-

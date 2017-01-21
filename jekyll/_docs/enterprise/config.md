@@ -1,7 +1,7 @@
 ---
 layout: enterprise
-title: "Configuration Options"
-category: [resources]
+title: "Builder Configuration Options"
+category: [advanced-config]
 order: 4.1
 description: "Configuring the CircleCI Enterprise installation."
 ---

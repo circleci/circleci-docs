@@ -52,29 +52,31 @@
   icon: "/docs/assets/img/icons/privacy-security.svg"
   section: cci1
 
-- name: "Enterprise"
-  slug: enterprise
-  index: enterprise
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci1
-
 - name: "Getting Started"
   slug: documentation
   index: documentation
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci1
+  section: enterprise
 
 - name: "Clustered Installation"
   slug: installation
   index: installation
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci1
+  section: enterprise
 
 - name: "Resources"
   slug: resources
   index: resources
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci1
+  section: enterprise
+
+- name: "Advanced Configuration"
+  slug: advanced-config
+  index: advanced-config
+  section: enterprise
+
+- name: "Troubleshooting"
+  slug: troubleshooting
+  index: troubleshooting
+  section: enterprise
+
 
 # CCI2 Categories
 - name: "Getting Started"

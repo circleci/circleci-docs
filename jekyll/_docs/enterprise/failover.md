@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 title: "Failover and Backup"
-category: [resources]
+category: [advanced-config]
 order: 4.0
 description: "This document covers preparing for and recovering from catastrophic events that bring down your instance of CircleCI Enterprise."
 ---
@@ -38,11 +38,11 @@ In broad strokes, you can use CloudWatch to monitor the health of the app.  In p
 
 * Service instance health metrics: e.g. CPU/RAM usage, free disk space usage, etc.  Anything that indicates the server is down or out of capacity signals a problem.  The solution might be a simple rebooting of machine, scale up the machine, or recovering from a backup.
 
-* Entire fleet statistics: With our CloudWatch integration we publish general 
-cluster health and build capacity. The 
-[CloudWatch document]({{site.baseurl}}/enterprise/cloudwatch/) specifies the 
-metrics that should be monitored.  Unexpected values may point to networking or 
-builder issues.  Those can be handled by examining your networking, AWS setup, 
+* Entire fleet statistics: With our CloudWatch integration we publish general
+cluster health and build capacity. The
+[CloudWatch document]({{site.baseurl}}/enterprise/cloudwatch/) specifies the
+metrics that should be monitored.  Unexpected values may point to networking or
+builder issues.  Those can be handled by examining your networking, AWS setup,
 individual builder health, and Services box behavior.
 
 The proper response depends on the failure.  In the cases where the Services Box is
@@ -191,7 +191,7 @@ Once the service is up, builders will discover the new Service and you should be
 
 ## 3. Discovery and Re-association of Builders
 
-For Services box discovery we currently rely on the private IP address of the Services box, and builders are configured with the private IP of the Services box at startup.  AWS allows setting a private IP address when launching a machine, as part of network configuration.  Keeping the same IP address has many nice advantages: simplifies DNS configuration, avoids reconfiguration, and ensures that only a single Services box is in operation at any given time.  If using the AWS CLI RunInstance command for starting from backup, use the  [`--private-ip-address` option](http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) to set the primary private IP address.  
+For Services box discovery we currently rely on the private IP address of the Services box, and builders are configured with the private IP of the Services box at startup.  AWS allows setting a private IP address when launching a machine, as part of network configuration.  Keeping the same IP address has many nice advantages: simplifies DNS configuration, avoids reconfiguration, and ensures that only a single Services box is in operation at any given time.  If using the AWS CLI RunInstance command for starting from backup, use the  [`--private-ip-address` option](http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html) to set the primary private IP address.
 
 Also, you can use the [secondary IP address](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/MultipleIP.html) `allow-reassociation` feature, so the newly designated Services box will have the private IP address.
 

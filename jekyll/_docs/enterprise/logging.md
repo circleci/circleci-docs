@@ -1,7 +1,7 @@
 ---
 layout: enterprise
-title: "Using Centralized Logging to Collect CircleCI Enterprise logs"
-category: [resources]
+title: "Using Centralized Logging"
+category: [advanced-config]
 order: 4.0
 description: "How to use centralized logging with CircleCI Enterprise."
 ---
