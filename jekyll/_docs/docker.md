@@ -16,7 +16,7 @@ first.
 
 ### Basic usage
 
-To use Docker on CircleCI, simply add Docker as a required service in your
+CircleCI pre-installs Docker Engine v{{ site.data.trusty.versions.summary.docker }} in the default build image, Ubuntu 14.04 "Trusty". To enable it, simply add Docker as a required service in your
 `circle.yml` file like this:
 
 ```
