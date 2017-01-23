@@ -57,6 +57,11 @@ step is to decode it in your build script and use it to authenticate the
 echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
 ```
 
+To use certain services such as Google Cloud Datastore, you will need to set the environment variable
+__$GOOGLE_APPLICATION_CREDENTIALS__ to __${HOME}/gcloud-service-key.json__
+
+To do so click on Builds - __[Choose your project]__ - Environment Variables - Add Variable
+
 This decodes the secret into a file named `gcloud-service-key.json`. Next, 
 authenticate the `gcloud` command with that account. Updating first is a good 
 best-practice, and don't forget to set your project:
