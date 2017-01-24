@@ -12,6 +12,16 @@ of tens or hundreds of build machines. However, it is often useful
 in trials and small installations to run the whole system on a single
 VM. See the instructions for your installation environment below.
 
+## Prerequisites
+
+The single-box installation is designed to be as easy as possible to install in
+any environment. There are just a few firm requirements:
+
+- You must use **GitHub.com or GitHub Enterprise**
+  for version control, and the CircleCI Enterprise machine and the GitHub machines
+  must be able to reach each other on the network.
+- The machine running CircleCI Enterprise must have outbound internet access.
+  ([Contact us](mailto:trial-support@circleci.com) for help if you use a proxy.)
 
 ## On AWS
 
