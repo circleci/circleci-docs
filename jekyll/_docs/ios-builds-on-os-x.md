@@ -162,9 +162,8 @@ build, sign and distribute your iOS app to beta-testers.
 The fastest way to get code signing working on CircleCI is to follow
 these steps:
 
-1. Upload your `.P12` file in **Project Settings > iOS Code Signing**.
-1. Add your provisioning profile  (`.mobileprovision`) file to your
-   repo.
+1. Upload your provisioning profile (`.mobileprovision`) and private key (`.p12`)
+   files in **Project Settings > iOS Code Signing**.
 1. Set `GYM_CODE_SIGNING_IDENTITY` environment variable
    to match your code-signing identity, ie `"iPhone Distribution: Acme Inc."`.
 1. Build with `gym` and deploy with `ipa`.

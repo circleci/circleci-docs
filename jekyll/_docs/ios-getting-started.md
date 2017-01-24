@@ -106,7 +106,7 @@ This keychain is also added to the Xcode search path, so any credentials stored 
 
 #### Using your provisioning profile
 
-To use your provisioning profile with your CircleCI builds, you need to commit the `.mobileprovision` file to your repository. Your provisioning profiles will automatically be added to the `circle.keychain` at the start of the build.
+To use your provisioning profile with your CircleCI builds, you need to upload the `.mobileprovision` file on the **Project Settings** > **OS X Code Signing** page. Any provisioning profiles will automatically be added to the `circle.keychain` at the start of the build.
 
 ## Customising your build
 

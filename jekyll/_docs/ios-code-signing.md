@@ -12,11 +12,11 @@ last_updated: March 2nd, 2016
 To get code signing working for your iOS app using our automated code
 signing support, you would need to do the following:
 
-1. Upload your `.P12` file in **Project Settings > iOS Code Signing**.
-2. Add your provisioning profile (`.mobileprovision`) file to your repo.
-3. Set `GYM_CODE_SIGNING_IDENTITY` to match your code-signing identity, i.e.
+1. Upload your provisioning profile (`.mobileprovision`) and private key (`.p12`)
+   files in **Project Settings > iOS Code Signing**.
+1. Set `GYM_CODE_SIGNING_IDENTITY` to match your code-signing identity, i.e.
 `iPhone Distribution: Acme Inc.`.
-4. Build with [gym](https://fastlane.tools/gym) and deploy with [fastlane](https://fastlane.tools/fastlane).
+1. Build with [gym](https://fastlane.tools/gym) and deploy with [fastlane](https://fastlane.tools/fastlane).
 
 ## Background: Code Signing Process
 
@@ -44,18 +44,17 @@ testers encounter.
 ### OS X circle Keychain
 When signing an app, Xcode will look in any
 [keychains](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/security.1.html)
-on the machine to find the necessary credentials.
+on the machine to find the necessary code-signing credentials. CircleCI
+creates a keychain containing any code-signing credentials that you have
+uploaded in Project Settings automatically, so you should not have to
+interact with the keychain in most circumstances.
 
-When you build on CircleCI, a new keychain named `circle.keychain` is
-created. The password for this keychain is `circle`. This keychain is
-unlocked for the duration of the build, and it is added to the default
-search path, so any credentials stored in this keychain are available to
-Xcode.
-
-Any P12 certificates that you upload to CircleCI in Project Settings
-will be added to `circle.keychain` before your build begins. Any
-Provisioning Profiles files that are found in your repository will also
-be added to `circle.keychain`.
+The keychain that CircleCI creates is named `circle.keychain`, and the
+password is `circle`. This keychain is unlocked for the duration of the
+build, and it is added to the default search path. Any P12 certificates
+or provisioning profiles that you have uploaded are added to this keychain
+before your build begins. Any futher credentials that you add to this
+keychain will be available to Xcode.
 
 ### 1. Install Fastlane tools locally
 This guide assumes that you are developing on a Mac running OS X. The
@@ -84,7 +83,7 @@ Fastlane tool. Open a terminal in the root of the repository and run the
 following commands:
 
     $ mkdir certificates
-    $ cert --output_path certificates
+    $ fastlane cert --output_path certificates
 
 This will create 3 files in the `certificates` directly, all named after
 the certificate. In my case the certificate is named `NK5Z971JCM` but
@@ -100,9 +99,15 @@ The `.certSigningRequest` and `.cer` files are not needed to sign your
 app using CircleCI. You can delete these files if you have no need for
 them. The `.p12` file is the private key for your code-signing identity.
 
-You can now upload the `.p12` file to your project on CircleCI in
-`Project Settings` > `iOS Code Signing`. When your build runs this `p12`
-file will be added to the `circle` keychain automatically.
+Now use the `sigh` tool to create a new provisioning profile.
+
+    $ fastlane sigh --output_path certificates
+
+This will create a provisioning profile (a file with the `.mobileprovision`
+extension) in the `certificates` directory.
+
+You can now upload the `.p12` and `.mobileprovision` files to your project on CircleCI in
+`Project Settings` > `iOS Code Signing`.
 
 ![The code signing section in the project settings]({{ site.baseurl }}/assets/img/docs/code-signing-settings-section.png)
 
@@ -110,21 +115,7 @@ file will be added to the `circle` keychain automatically.
 
 ![Uploaded key on the code signing page]({{ site.baseurl }}/assets/img/docs/code-signing-key-uploaded.png)
 
-### 3. Create A Provisioning Profile
-
-Use the `sigh` tool to create a new provisioning profile.
-
-    $ sigh
-
-This will create a provisioning profile (a file with the
-`.mobileprovision` extension) in the root of your repository. You can
-move this file to any folder that you like, and then add the file to
-your repository.
-
-During the build on CircleCI the provisioning profile will be found and
-installed for use by Xcode.
-
-### 4. Find Your Code Signing Identity name
+### 3. Find Your Code Signing Identity name
 
 One your local machine run the following command to list the current
 code-signing identities installed on your machine.
@@ -136,13 +127,11 @@ You should see output like the following:
 ```
 Policy: Code Signing
   Matching identities
-  1) 0620A954DE3B589E378435B38B8D87B6C0436BB0 "iPhone Distribution: Acme
-Inc. (GL31ZZ3256)"
+  1) 0620A954DE3B589E378435B38B8D87B6C0436BB0 "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
      1 identities found
 
   Valid identities only
-  1) 0620A954DE3B589E378435B38B8D87B6C0436BB0 "iPhone Distribution: Acme
-Inc. (GL31ZZ3256)"
+  1) 0620A954DE3B589E378435B38B8D87B6C0436BB0 "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
      1 valid identities found
 ```
 
@@ -155,11 +144,10 @@ during the build:
 ```
 machine:
   environment:
-    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc.
-(GL31ZZ3256)"
+    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
 ```
 
-### 5. Sign Your App on CircleCI
+### 4. Sign Your App on CircleCI
 
 We recommend using [Fastlane Gym](https://github.com/fastlane/gym) to
 build a signed app. `gym` is pre-installed on our containers, so it's
@@ -170,26 +158,28 @@ command]({{ site.baseurl }}/configuration/#deployment) in your
 ```
 machine:
   environment:
-    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc.
-(GL31ZZ3256)"
+    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
 
 deployment:
   beta_distribution:
     branch: master
      commands:
-       - gym
+       - fastlane gym
 ```
 
 You should take a few minutes to read [the documentation on deployments
 using CircleCI]({{ site.baseurl }}/configuration/#deployment).
-The deployment stanza above instructs CircleCI to run the `gym` command
-on each successful build of the `master` branch. The `beta_distribution`
+The deployment stanza above instructs CircleCI to run the `fastlane gym`
+command on each successful build of the `master` branch. The `beta_distribution`
 is just a name for the deployment. You can use any name here.
 
-You might need to pass additional parameters to `gym` to specify exactly
-which configuration to build, but in most cases these are not necessary.
-You should run `gym` locally specifying `GYM_CODE_SIGNING_IDENTITY ` or
-`--codesigning_identity` until you get a signed app.
+You might need to pass additional parameters to `fastlane gym` to specify
+exactly which configuration to build, but in most cases these are not
+necessary. If you are having problems building a signed app, you can run
+the `fastlane gym` command locally specifying `GYM_CODE_SIGNING_IDENTITY ` or
+`--codesigning_identity` (and any other options that are necessary) until you
+manage to generate a signed app locally. You can then edit the command in your
+`circle.yml` file as necessary.
 
 ```
 deployment:
@@ -199,9 +189,11 @@ deployment:
        - gym --scheme "App" --workspace "App.xcworkspace"
 ```
 
-### 6. Distribute the `.ipa` file to your beta testers
+### 5. Distribute the `.ipa` file to your beta testers
 
-Using [fastlane](https://fastlane.tools/fastlane) you can easily distribute the binary to your beta testers right after generating it. If you don't have `fastlane` set up for your project yet, run `fastlane init`.
+Using [fastlane](https://fastlane.tools/fastlane) you can easily distribute the
+binary to your beta testers right after generating it. If you don't have
+`fastlane` set up for your project yet, run `fastlane init`.
 
 All you have to add to your `Fastfile`:
 
@@ -220,7 +212,9 @@ lane :beta do
 end
 ```
 
-`fastlane` will automatically pass on information about the `.ipa` file from `gym` to the beta testing service of your choice, so you don't have to manually provide a path to the `.ipa` and `.dsym` file. 
+`fastlane` will automatically pass on information about the `.ipa` file from
+`gym` to the beta testing service of your choice, so you don't have to manually
+provide a path to the `.ipa` and `.dsym` file. 
 
 ## Troubleshooting
 
@@ -256,8 +250,7 @@ string in your `circle.yml` like this:
 ```
 machine:
   environment:
-    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc.
-(GL31ZZ3256)"
+    GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
 ```
 
 Or that you pass this string to `gym` with the `--codesigning_identity`
