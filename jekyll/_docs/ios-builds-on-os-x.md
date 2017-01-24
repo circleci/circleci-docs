@@ -512,7 +512,7 @@ deployment:
     branch: master
       commands:
         # this will build the ipa file
-        - gym --scheme "App" --workspace "App.xcworkspace"
+        - fastlane gym --scheme "App" --workspace "App.xcworkspace"
         - ipa distribute:crashlytics
             --crashlytics_path Crashlytics.framework
             --api_token    "$CRASHLYTICS_API_KEY"
