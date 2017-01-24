@@ -270,6 +270,36 @@ if you have a lot of unit tests that take a long time to execute, then
 you may want to run them outside of the container and only do certain
 integration tests against the built Docker image.
 
+#### Benefitting from test summaries:
+
+In order to view test summaries, you will need to utilize the docker "volumes" feature, which requires version docker 1.10 or greater (the default is 1.9 for ubuntu 14.04). To utilize docker 1.10 as a replacement, use the following:
+```
+machine:
+  pre:
+    - docker version && sudo stop docker && curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0 && sudo start docker && docker version
+```
+A common problem, however, when using version docker 1.10 is that the layering hierararchy is not preserved across pulls, even when using the save/load caching mechanisms described above. ([Docker](Link.TK) and [CircleCI](Link.TK) are both aware of this limitation.) As a workaround, you can use the default docker version to build your images and then upgrade to docker v.1.10 as the last step of your dependency script. For example:
+```
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+      # Pull the latest cache, build the new image, then re-upload the new cache
+    - docker pull myimage:circle-cache || true
+    - docker build -t myimage .
+    - docker tag myimage myimage:circle-cache && docker push myimage:circle-cache    
+      # Stop docker, upgrade it, and then restart
+    - docker version && sudo stop docker && curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0 && sudo start docker && docker version
+    - mkdir /var/test-output
+
+test:
+  override:
+    - docker run -v /var/test-output:/var/test-output myimage nosetests . tests -v --exe --with-coverage --with-xunit --xunit-file=/var/test-output/test-summary.xml
+    - cp /var/test-output/* $CIRCLE_TEST_REPORTS
+```
+
 ### Docker Exec
 
 If you try to run `docker exec` in our containers, you'll see an error like
