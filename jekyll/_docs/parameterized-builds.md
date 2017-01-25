@@ -45,7 +45,7 @@ curl \
   --header "Content-Type: application/json" \
   --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
   --request POST \
-  https://circleci.com/api/v1/project/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
+  https://circleci.com/api/v1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
 ```
 
 The build will see the environment variables:
