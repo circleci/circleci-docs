@@ -6,17 +6,14 @@ categories: [mobile-platforms]
 description: Testing Android applications on CircleCI
 ---
 
-
-## Android on CircleCI
-
 CircleCI supports building and testing Android applications.
 
-### Dependencies
+## Dependencies
 
 The SDK is already installed on the VM at `/usr/local/android-sdk-linux`. We export
 this path as `$ANDROID_HOME`.
 
-We have many versions of the Android SDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android) build images.
+We have many versions of the Android SDK pre-installed on [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android) and [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android) build images.
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
@@ -36,7 +33,7 @@ very difficult.
 `./gradlew dependencies` will also be run automatically if you have a
 Gradle wrapper checked in to the root of your repository.
 
-### Building Android Projects Manually
+## Building Android Projects Manually
 
 If you only want to build your project you can create a debug build with
 
@@ -65,7 +62,7 @@ test:
 ```
 
 
-#### Disable Pre-Dexing to Improve Build Performance
+### Disable Pre-Dexing to Improve Build Performance
 
 By default the Gradle android plugin pre-dexes dependencies,
 converting their Java bytecode into Android bytecode. This speeds up
@@ -80,12 +77,12 @@ CircleCI.
 
 [disable-pre-dexing]: http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/
 
-### Testing Android Projects
+## Testing Android Projects
 
 Firstly: if you have a Gradle wrapper in the root of your repository,
 we'll automatically run `./gradlew test`.
 
-#### Starting the Android Emulator
+### Starting the Android Emulator
 
 Starting the android emulator can be an involved process and, unfortunately, can take
 a few minutes. You can start the emulator and wait for it to finish with something like
@@ -123,7 +120,7 @@ this [here][starting-emulator].
 [starting-emulator]:https://devmaze.wordpress.com/2011/12/12/starting-and-stopping-android-emulators/
 
 
-#### Running Tests Against the Emulator
+### Running Tests Against the Emulator
 
 The standard way to run tests in the Android emulator is with
 something like `./gradlew connectedAndroidTest`.
@@ -186,17 +183,17 @@ This will wake up the device and try to unlock the screen. If there is a passwor
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
 [fb-adb]:https://github.com/facebook/fb-adb
 
-### Gradle output formatting
+## Gradle output formatting
 
 The standard formatting gradle uses when printing to STDOUT can look quite messy and confusing when reviewing your CircleCI builds. To neaten up the output, add `--console=plain` to your gradle commands. So, for example, `./gradlew dependencies` would become `./gradlew dependencies --console=plain`.
 
-#### Test Metadata
+### Test Metadata
 
 Many test suites for Android produce JUnit XML output. After running your tests,
 you can copy that output to `$CIRCLE_TEST_REPORTS` so that CircleCI will display
 the individual test results.
 
-#### Deploying to Google Play Store
+### Deploying to Google Play Store
 
 There are a few plugins for Gradle that allow you to push your `apk` to
 Google Play Store with a simple Gradle command, for example [this plugin](https://github.com/Triple-T/gradle-play-publisher).
@@ -229,7 +226,7 @@ deployment:
         -Dorg.gradle.project.track=beta
 ```
 
-### Sample circle.yml
+## Sample circle.yml
 
 ```
 test:
@@ -247,4 +244,3 @@ test:
     # copy the test results to the test results directory.
     - cp -r my-project/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
 ```
-
