@@ -14,5 +14,5 @@ or using a custom CA root, you can select the
 You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines
 (replacing `insecure-ghe.example.com` below with the host of your GitHub Enterprise instance).
 
-See [this doc]({{site.baseurl}}/enterprise/config/) for details on setting builder machine
+See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine
 environment variables.
