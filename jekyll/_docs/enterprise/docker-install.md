@@ -59,7 +59,9 @@ If you are configuring network security, please ensure you whitelist the followi
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
 ```
-curl -sSL https://get.replicated.com/docker | sudo sh
+curl -sSL https://get.replicated.com/docker > install.sh
+sudo chmod +x install.sh
+sudo ./install.sh
 ```
 
 Once the script finishes provisioning, you should navigate to <public-ip-address : 8800 > to finish the installation.
