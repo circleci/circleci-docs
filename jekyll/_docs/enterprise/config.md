@@ -18,14 +18,6 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     bash
 ```
 
-### Supported Builder Instance Types
-CircleCI currently only supports instance types with attached SSD storage. EBS-only volumes (**C4** / **M4**) will not work. The number of containers per machine below assume the defualt container size of 2CPU/4G. If you want to change those defaults, please see below.
-
-* **M3**: The `m3.2xlarge` is a good choice if you only need a couple containers, as it is usually cheaper than comprable `c3` or `r3` instances. But the `m3.2xlarge` can only fit **3 containers**, and there are no larger `m3` instances. If you plan to use a larger fleet, we recommend `c3` instances.
-* **C3**: The `c3` family is a less expensive choice for larger fleets. Since the `c3` instances have less memory than the `r3` instances, the number of containers we can fit on a machine is memory bound. The `c3.4xlarge` can fit **6 containers**, and the `c3.8xlarge` can fit **14 containers**.
-* **R3 (recommended)**: The `r3` family is a great choice if you're using memory intensive builds. They are especially good if you plan to increase the default memory allocation for each container. Because of noisy neighbor problems and resource contention, the excess memory of the `r3` family can can also sometimes speed up your builds without changing the default container allocation. The number of containers we can fit on an `r3` is CPU bound. Thus, we will put **3 containers** on an `r3.2slarge`, **7 containers** on an `r3.4xlarge`, and **15 containers** on an `r3.8xlarge`.
-
-
 ### Adjusting Build Container Power
 
 You can, optionally, adjust the CPU and memory used by your build containers using the following build configuration variables. Our default containers have 2 CPUs and 4G of memory:
