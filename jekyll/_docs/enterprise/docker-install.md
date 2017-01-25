@@ -62,7 +62,7 @@ Once the machine is up, you can ssh in as root (or ubuntu) and run the following
 curl -sSL https://get.replicated.com/docker | sudo sh
 ```
 
-Once the script finishes provisioning, you should navigate to <machine-public-ip-address:8800> to finish the installation.
+Once the script finishes provisioning, you should navigate to <public-ip-address : 8800 > to finish the installation.
 
 ### 2. Builder instances
 
