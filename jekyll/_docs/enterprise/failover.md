@@ -5,6 +5,7 @@ title: "Failover and Backup"
 category: [advanced-config]
 order: 4.0
 description: "This document covers preparing for and recovering from catastrophic events that bring down your instance of CircleCI Enterprise."
+published: false
 ---
 
 This document covers preparing for and recovering from catastrophic events that bring down your instance of CircleCI Enterprise.
