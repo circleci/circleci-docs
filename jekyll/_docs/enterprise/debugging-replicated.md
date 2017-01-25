@@ -7,10 +7,6 @@ order: 1
 description: "Tips for debugging CircleCI Enterprise."
 ---
 
-This document covers debugging Replicate on CircleCI Enterprise.
-
-## Replicated
-
 As you may know, we use [Replicated](https://www.replicated.com/) to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI Enterprise.
 
 If you're experiencing any issues with Replicated, here are a few ways to debug it.
