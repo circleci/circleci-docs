@@ -42,7 +42,7 @@
 			<li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
 				<ul class="list-unstyled">
 				{% for doc in site.docs %}
-					{% if doc.categories contains category.slug and doc.slug != category.index and doc.section == "cci1" %}
+					{% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true and doc.section == "cci1" %}
 						{% if doc.short-title %}
 							{% assign title = doc.short-title %}
 						{% else %}
