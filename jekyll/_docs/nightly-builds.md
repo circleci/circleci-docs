@@ -3,7 +3,6 @@ layout: classic-docs
 title: Nightly Builds
 categories: [how-to]
 description: Nightly Builds
-last_updated: May 22, 2014
 ---
 
 The [Parameterized Build API]({{ site.baseurl }}/parameterized-builds/)
@@ -17,7 +16,7 @@ You can customize your `circle.yml` to take different actions, such as running a
 You've a straight-forward `circle.yml` for your project `example-corp/project-foo`.
 It just sets a Python version and deploys to your staging Heroku app.
 
-```
+```yaml
 machine:
   python:
     version: 2.7.6
@@ -35,7 +34,7 @@ These tests should be run once a day at least.
 
 Creating a conditional step is easy; `circle.yml` commands are just shell commands and build parameters are just environment variables:
 
-```
+```yaml
 machine:
   python:
     version: 2.7.6
@@ -66,7 +65,7 @@ _project=$1
 _branch=$2
 _circle_token=$3
 
-trigger_build_url=https://circleci.com/api/v1/project/${_project}/tree/${_branch}?circle-token=${_circle_token}
+trigger_build_url=https://circleci.com/api/v1.1/project/github/${_project}/tree/${_branch}?circle-token=${_circle_token}
 
 post_data=$(cat <<EOF
 {
