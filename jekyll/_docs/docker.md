@@ -5,18 +5,14 @@ categories: [how-to]
 description: Continuous Integration and Delivery with Docker
 ---
 
-CircleCI currently offers beta support for running Docker within build containers.
-Docker is an extremely flexible tool that supports many different use cases. This
-article attempts to address several of the most popular uses for Docker on CircleCI,
-but it is not an exhaustive list. 
+CircleCI currently offers beta support for running Docker within build containers. Docker is an extremely flexible tool that supports many different use cases. This article attempts to address several of the most popular uses for Docker on CircleCI, but it is not an exhaustive list. 
 
-Note that this article assumes some knowledge of Docker. If you are just getting started
-with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
+Note that this article assumes some knowledge of Docker. If you are just getting started with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
 first.
 
-### Basic usage
+## Basic usage
 
-To use Docker on CircleCI, simply add Docker as a required service in your
+CircleCI pre-installs Docker Engine v{{ site.data.trusty.versions.summary.docker }} in the default build image, Ubuntu 14.04 "Trusty". To enable it, simply add Docker as a required service in your
 `circle.yml` file like this:
 
 ```
@@ -29,7 +25,7 @@ You will then be able to use the `docker` command throughout your
 `circle.yml` file. Note that you don't need to use `sudo`
 to use the command on CircleCI.
 
-### Deployment to a Docker registry
+## Deployment to a Docker registry
 
 One key use of Docker on CircleCI is to use Docker to build base images to deploy to a
 registry like [Docker Hub.](https://hub.docker.com/)
@@ -71,7 +67,7 @@ For a complete example of building and deploying a Docker image to a
 registry, see the [circleci/docker-elasticsearch](https://github.com/circleci/docker-elasticsearch)
 example project on GitHub.
 
-### Application deployment
+## Application deployment
 
 Another very important use case for Docker containers is "Dockerizing"
 applications for deployment purposes. There are countless languages
@@ -79,7 +75,7 @@ and technologies that can be deployed this way to a number of hosts that
 support Docker containers, but just a couple of examples are provided below
 for AWS Elastic Beanstalk and Google Compute Engine with Kubernetes.
 
-#### AWS Elastic Beanstalk
+### AWS Elastic Beanstalk
 
 The example below demonstrates building and
 testing a Dockerized Rails app and deploying the built image to
@@ -157,7 +153,7 @@ To see the complete source code for the application from this example,
 see [circleci/docker-hello](https://github.com/circleci/docker-hello)
 on GitHub.
 
-#### Google Compute Engine and Kubernetes
+### Google Compute Engine and Kubernetes
 
 This example shows how to build and deploy a Dockerized application
 to [Google Compute Engine](https://cloud.google.com/products/compute-engine/)
@@ -246,7 +242,7 @@ To see the complete example project using Google Compute Engine and Kubernetes,
 see [circleci/docker-hello-google](https://github.com/circleci/docker-hello-google)
 for the project source.
 
-### Running tests in a container
+## Running tests in a container
 
 Another use case for Docker on CircleCI is running tests inside of or against
 a Docker container. All of the usual Docker commands are available within
@@ -270,7 +266,7 @@ if you have a lot of unit tests that take a long time to execute, then
 you may want to run them outside of the container and only do certain
 integration tests against the built Docker image.
 
-### Docker Exec
+## Docker Exec
 
 If you try to run `docker exec` in our containers, you'll see an error like
 the following:
@@ -294,7 +290,7 @@ sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" $MY_CONTAINER_NAME)" -- 
 
 Note that these commands are run inside the container's root directory, so you may have to `cd` into your docker working directory first.
 
-### Caching Docker layers
+## Caching Docker layers
 
 Docker images aren't cached automatically. At the moment, we have no good
 method to cache them although we are trying to find a technical solution.
@@ -336,7 +332,7 @@ described above only caches
 the image layers (and thus tags) that you specify in the `docker save` command, so
 other tags will be re-pulled on every build if a tag is not specified in the FROM command.
 
-### Connecting to services outside of the container
+## Connecting to services outside of the container
 
 You can connect to services outside your docker container (like our
 pre-installed databases) by using the [docker0 ethernet bridge
