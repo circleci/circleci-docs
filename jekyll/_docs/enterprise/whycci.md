@@ -38,7 +38,7 @@ Get your green builds pushed safely and securely with the industry’s most powe
 ## Knowledgeable Support
 * More than support, CircleCI is part of your team. All our support staff are developers, including active rotation from our product engineers. Our support staff is around the globe, so trusted help is available 24/7.
 * Active [community forums](https://discuss.circleci.com/) provide access to other developers with similar environments.
-* Premium support packages and our partner network are available when you need extra help.
+* [Premium support](https://circleci.com/support/premium-support/) packages and our partner network are available when you need extra help.
 
 
 
