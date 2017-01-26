@@ -2,7 +2,7 @@
 layout: enterprise
 title: "CircleCI Enterprise Installation Overview"
 category: [installation]
-order: 1
+order: 0
 description: "High-level overview of the CircleCI Enterprise Installation process."
 ---
 
@@ -14,7 +14,7 @@ We are constantly working on making the installation process as smooth as possib
 ### Installation Steps
 
 Once you have all of the prerequisites in place, you can either [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install). 
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install).
 
 
 ## Architecture
