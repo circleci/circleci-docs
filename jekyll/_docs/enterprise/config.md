@@ -1,8 +1,9 @@
 ---
 layout: enterprise
-title: "Configuration Options"
-category: [resources]
-order: 4.1
+section: enterprise
+title: "LXC-based Builder Configuration"
+category: [advanced-config]
+order: 6
 description: "Configuring the CircleCI Enterprise installation."
 ---
 
@@ -16,14 +17,6 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     CIRCLE_CONFIG_OPTION_2=<value> \
     bash
 ```
-
-### Supported Builder Instance Types
-CircleCI currently only supports instance types with attached SSD storage. EBS-only volumes (**C4** / **M4**) will not work. The number of containers per machine below assume the defualt container size of 2CPU/4G. If you want to change those defaults, please see below.
-
-* **M3**: The `m3.2xlarge` is a good choice if you only need a couple containers, as it is usually cheaper than comprable `c3` or `r3` instances. But the `m3.2xlarge` can only fit **3 containers**, and there are no larger `m3` instances. If you plan to use a larger fleet, we recommend `c3` instances.
-* **C3**: The `c3` family is a less expensive choice for larger fleets. Since the `c3` instances have less memory than the `r3` instances, the number of containers we can fit on a machine is memory bound. The `c3.4xlarge` can fit **6 containers**, and the `c3.8xlarge` can fit **14 containers**.
-* **R3 (recommended)**: The `r3` family is a great choice if you're using memory intensive builds. They are especially good if you plan to increase the default memory allocation for each container. Because of noisy neighbor problems and resource contention, the excess memory of the `r3` family can can also sometimes speed up your builds without changing the default container allocation. The number of containers we can fit on an `r3` is CPU bound. Thus, we will put **3 containers** on an `r3.2slarge`, **7 containers** on an `r3.4xlarge`, and **15 containers** on an `r3.8xlarge`.
-
 
 ### Adjusting Build Container Power
 
@@ -108,21 +101,6 @@ There are also a couple small differences to use this daemon within builds:
 
 You should then see improved performance between builds!
 
-#### Sharing Docker Socket with Docker Based Install
-If you aren't using Ubuntu, you are most likely using a Docker based install. If you'd like to share your Docker socket, do what is noted below:
-
-1. You may need to run `chmod 777 /var/run/docker.sock` on the build host to give containers permission to use the daemon.
-2. Start the builder process with:
-
-```
-curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
-    SERVICES_PRIVATE_IP=X.X.X.X \
-    CIRCLE_SECRET_PASSPHRASE=xxxx \
-    CIRCLE_DOCKER_RUN_ARGUMENTS="-v /var/run/docker.sock:/var/run/docker.sock" \
-    bash
-```
-
-Then inside of a build, you can just use Docker as usual. You do not need to specify it under the "services" section in circle.yml, because no container-local Docker daemon services needs to be started.
 
 ### Adjusting Builder Networking
 

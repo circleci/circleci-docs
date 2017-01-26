@@ -7,58 +7,52 @@
 	{% if page.url contains "enterprise" %}
 			<p>Looking for non-enterprise docs? <a href="{{ site.baseurl }}/">CircleCI.com Docs</a></p>
 		{% for category in site.data.categories %}
-		{% if category.section == "cci1" %}
-			{% if category.slug == "installation" or category.slug == "resources" or category.slug == "documentation" %}
-				<li><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ category.name }}</a>
-					<ul class="list-unstyled">
-					{% assign sorted = (site.docs | sort: 'order') %}
-					{% for doc in sorted %}
-						{% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true and doc.section == "cci1" %}
-							{% if doc.short-title %}
-								{% assign title = doc.short-title %}
-							{% else %}
-								{% assign title = doc.title %}
-							{% endif %}
+		{% if category.section == "enterprise" %}
+                        <li><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ category.name }}</a>
+                                <ul class="list-unstyled">
+                                {% assign sorted = (site.docs | sort: 'order') %}
+                                {% for doc in sorted %}
+                                        {% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true and doc.section == "enterprise" %}
+                                                {% if doc.short-title %}
+                                                        {% assign title = doc.short-title %}
+                                                {% else %}
+                                                        {% assign title = doc.title %}
+                                                {% endif %}
 
-							{% if doc.children %}
-								{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
-							{% endif %}
+                                                {% if doc.children %}
+                                                        {% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
+                                                {% endif %}
 
-							<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
-						{% endif %}
-					{% endfor %}
-					</ul>
-				</li>
-			{% endif %}
+                                                <li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+                                        {% endif %}
+                                {% endfor %}
+                                </ul>
+                        </li>
 		{% endif %}
 		{% endfor %}
 	{% else %}
 	<p>Looking for Enterprise docs? <a href="{{ site.baseurl }}/enterprise">CircleCI Enterprise Docs</a></p>
 	{% for category in site.data.categories %}
 	{% if category.section == "cci1" %}
-		{% if category.slug != "installation" and category.slug != "resources" and category.slug != "documentation" and category.slug != "enterprise" %}
+                <li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
+                        <ul class="list-unstyled">
+                        {% for doc in site.docs %}
+                                {% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true and doc.section == "cci1" %}
+                                        {% if doc.short-title %}
+                                                {% assign title = doc.short-title %}
+                                        {% else %}
+                                                {% assign title = doc.title %}
+                                        {% endif %}
 
+                                        {% if doc.children %}
+                                                {% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
+                                        {% endif %}
 
-			<li><a href="{{ site.baseurl }}/{{ category.index }}/">{{ category.name }}</a>
-				<ul class="list-unstyled">
-				{% for doc in site.docs %}
-					{% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true and doc.section == "cci1" %}
-						{% if doc.short-title %}
-							{% assign title = doc.short-title %}
-						{% else %}
-							{% assign title = doc.title %}
-						{% endif %}
-
-						{% if doc.children %}
-							{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
-						{% endif %}
-
-						<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
-					{% endif %}
-				{% endfor %}
-				</ul>
-			</li>
-		{% endif %}
+                                        <li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+                                {% endif %}
+                        {% endfor %}
+                        </ul>
+                </li>
 	{% endif %}
 	{% endfor %}
 	{% endif %}

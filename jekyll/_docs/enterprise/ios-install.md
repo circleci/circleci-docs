@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "iOS Install"
 category: [resources]
 order: 0

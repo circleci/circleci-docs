@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: Setting up HTTP Proxies
 category: [resources]
 order: 0

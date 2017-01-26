@@ -1,14 +1,11 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Debugging Replicated"
-category: [resources]
-order: 4.05
+category: [troubleshooting]
+order: 1
 description: "Tips for debugging CircleCI Enterprise."
 ---
-
-This document covers debugging Replicate on CircleCI Enterprise.
-
-## Replicated
 
 As you may know, we use [Replicated](https://www.replicated.com/) to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI Enterprise.
 
@@ -86,4 +83,3 @@ ac2faa662bbe        <service-box-ip>:9874/tutum-logrotate:latest                
 ```
 
 Providing us with the output of `sudo docker ps` in service box will be helpful in diagnosing the problem.
-

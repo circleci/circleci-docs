@@ -1,18 +1,18 @@
 ---
 layout: enterprise
-title: "Advanced Options "
-category: [installation]
+section: enterprise
+title: "LXC-based Installation"
+category: [advanced-config]
 order: 5
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
 The following step-by-step instructions will guide you through the process of
-installing CircleCI Enterprise on any Ubuntu machine.  If you have any
-questions as you go through these steps, please contact
-<enterprise-support@circleci.com>.
+installing CircleCI Enterprise LXC-based installation.  Note that this is now
+considered an advanced install option. New clustered installations should
+generally use the [Docker-based install option]({{site.baseurl}}/enterprise/docker-install/). If you have any
+questions, please contact <enterprise-support@circleci.com>.
 
-The installation instructions are work-in-progress at the minute and we are
-continuously involving them.  We love your feedback - keep sending it our way!
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ For test installations, you may punt on this step until you spin up the machines
 
 CircleCI Enterpise installation requires provisioning two types of machines:
 
-* Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance. 
+* Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
 
 Both boxes need to be Trusty 14.04 and can run on any hypervisor.

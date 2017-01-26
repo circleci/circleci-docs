@@ -1,6 +1,7 @@
 ---
 layout: enterprise
-title: "CircleCI Enterprise Installation Overview"
+section: enterprise
+title: "Clustered Installation Overview"
 category: [installation]
 order: 1
 description: "High-level overview of the CircleCI Enterprise Installation process."
@@ -14,7 +15,7 @@ We are constantly working on making the installation process as smooth as possib
 ### Installation Steps
 
 Once you have all of the prerequisites in place, you can either [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install). 
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install).
 
 
 ## Architecture
@@ -26,7 +27,7 @@ At a high level, CircleCI Enteprise has two kinds of instances that it needs in 
 #### The Services Box
 ---
 
-The first is a services box which contains the CircleCI frontend and all internal resources we use to store data and run the service. This machine should not be restarted, and should be backed up regularly using our [backup and restore process]({{site.baseurl}}/enterprise/failover/). You should have DNS resolution point to this machine's IP.
+The first is a services box which contains the CircleCI frontend and all internal resources we use to store data and run the service. This machine should not be restarted, and should be backed up regularly using VM snapshots at a minimum. You should have DNS resolution point to this machine's IP.
 
 | Source                      | Ports                   | Use                    |
 |-----------------------------|-------------------------|------------------------|

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Security on CircleCI Enterprise"
 category: [resources]
 order: 0
@@ -10,7 +11,7 @@ description: "Explanations of how CircleCI Enterprise is kept secure."
 As a self-hosted product, most security considerations with CircleCI Enterprise are under your control and are addressed with common practices that you likely already have in place to protect your network or private cloud. This document outlines security features built into CircleCI Enterprise and enumerates the integration points with other services to help you have a full understanding of where your data and code are when passing through our systems.
 
 ### Encrypted Communications
-CircleCI Enterprise uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI Enterprise without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems. 
+CircleCI Enterprise uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI Enterprise without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
 
 ### Your Code/Data and CircleCI Enterprise
 The nature of CircleCI Enterprise is that our software has access to your code and whatever data that code interacts with. All builds on CircleCI run in sandbox (specifically, an LXC container) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build container pulls code via git over SSH. Your particular test suite or build configuration may call out to external services or integration points within your network, and the response from such calls will be pulled into your build and used by your code at your discretion. After a build is complete the container that ran the build is destroyed and rebuilt. All environment variables you store inside CircleCI are encrypted at rest and sent to your build containers using SSH.

@@ -1,5 +1,6 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Why Choose CircleCI?"
 category: [resources]
 order: 0

@@ -1,7 +1,8 @@
 ---
 layout: enterprise
+section: enterprise
 title: "Private Subnets on AWS"
-category: [resources]
+category: [advanced-config]
 order: 3
 description: "Information on private subnets in AWS."
 ---

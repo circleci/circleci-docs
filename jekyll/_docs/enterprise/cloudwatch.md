@@ -1,13 +1,14 @@
 ---
 layout: enterprise
+section: enterprise
 title: "CloudWatch Monitoring"
-category: [resources]
+category: [advanced-config]
 order: 4.0
 description: "How to enable and monitor CloudWatch for CircleCI Enteprise."
 ---
 
 
-_NOTE: CloudWatch does not currently work to monitor OS X containers_ 
+_NOTE: CloudWatch does not currently work to monitor OS X containers_
 
 
 ## Enabling

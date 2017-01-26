@@ -1,8 +1,9 @@
 ---
 layout: enterprise
-title: "Docker-Based Install"
+section: enterprise
+title: "Install on Other Platforms"
 category: [installation]
-order: 2
+order: 4
 description: "How to install CircleCI Enterprise on any generic machine"
 ---
 
@@ -89,7 +90,7 @@ Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}
 
 * We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
 * The container image is always fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.
-* Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/config/#sharing-docker-socket-with-docker-based-install)
+* Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/docker-builder-config/#sharing-the-docker-socket)
 * No second volume is required.
 * By default, specific CPUs are not tied to specific build containers.
 
