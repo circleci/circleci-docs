@@ -30,7 +30,7 @@ machine:
 
 In the current version of CircleCI, we use RVM to manage and install different versions of Ruby. This has a couple of side-effects:
 
-First, if the version specified in `circle.yml` isn't available then `rvm` will try to install it. If RVM cannot find a pre-compiled binary from available mirrors, it will download and compiled from source. Since fetching the binary from several possible mirrors is prone to failure caused by unstable networks, we highly recommend caching this file. To do this, please read our Discuss guide on how to [cache a pre-compiled Ruby binary](https://discuss.circleci.com/t/caching-compiled-rubies-with-rvm/3636) to improve build performance/reliability.
+First, if the version specified in `circle.yml` isn't available then `rvm` will try to install it. If RVM cannot find a pre-compiled binary from available mirrors, it will download and compiled from source. Since fetching the binary from several possible mirrors is prone to failure caused by unstable networks, we highly recommend caching this file. To do this, please read our guide on how to [cache a pre-compiled Ruby binary]({{site.baseurl}}/rvm-cache-ruby-binaries/) to improve build performance/reliability.
 
 Second, whenever the build changes into your project directory, RVM will try to read either `.rvmrc` or `.ruby-version` via the `cd` auto hook. To avoid this and the aforementioned behavior, we recommend removing these files by running:
 

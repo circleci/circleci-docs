@@ -14,4 +14,5 @@ children:
   - not-specified-ruby-commands
   - unrecognized-ruby-version
   - unexpected-rake-errors
+  - rvm-cache-ruby-binaries
 ---
