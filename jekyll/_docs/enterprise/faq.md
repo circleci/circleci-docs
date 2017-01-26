@@ -35,8 +35,7 @@ $ ifconfig eth0 | grep "inet addr"
 
 First, you need to change your passphrase from the system console (services box port 8800) settings page and restart your app.
 
-Then, you need to update `CIRCLE_SECRET_PASSPHRASE` in the init script that you are using to add builder boxes to your fleet. If you are
-using AWS ASG to manage your builder boxes, you can update the environment variable in the [ASG configuration]({{ site.baseurl }}/enterprise/faq/#can-i-use-aws-auto-scaling-groups-to-manage-my-builder-boxes).
+Then, you need to update `CIRCLE_SECRET_PASSPHRASE` in the init script that you are using to add builder boxes to your fleet.
 
 Now new builder boxes joining the fleet will use the new passphrase. Existing builder boxes with old passphrase also continue functioning without any real problems but we recommend rolling these box as soon as you can
 just in order to use the consistent passphrase in your fleet.

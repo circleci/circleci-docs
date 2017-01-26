@@ -27,7 +27,7 @@ At a high level, CircleCI Enteprise has two kinds of instances that it needs in 
 #### The Services Box
 ---
 
-The first is a services box which contains the CircleCI frontend and all internal resources we use to store data and run the service. This machine should not be restarted, and should be backed up regularly using our [backup and restore process]({{site.baseurl}}/enterprise/failover/). You should have DNS resolution point to this machine's IP.
+The first is a services box which contains the CircleCI frontend and all internal resources we use to store data and run the service. This machine should not be restarted, and should be backed up regularly using VM snapshots at a minimum. You should have DNS resolution point to this machine's IP.
 
 | Source                      | Ports                   | Use                    |
 |-----------------------------|-------------------------|------------------------|
