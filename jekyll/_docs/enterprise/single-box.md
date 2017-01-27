@@ -76,7 +76,7 @@ easy with our pre-made AMI.
 You will also need to open ports 64535-65535 to let developers optionally SSH into builds.</li>
 
 <li>Go to the public (or private) IP address or hostname for the VM once launched and complete the rest of the guided install process.
-(Note: Final startup of the app can sometime as the "circleci/build-image" Docker image is downloaded.)</li>
+(Note: Final startup of the app can take some time as the "circleci/build-image" Docker image is downloaded.)</li>
 </ol>
 
 ## On Other Platforms
