@@ -129,7 +129,7 @@ You may also want to run commands directly with `adb shell`, after
 installing your APK on the emulator. Note however that `adb shell`
 [does not correctly forward exit codes][adb-shell-bug]. Some commands are:
 
-- `adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
+- `adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
   to take a screenshot of the emulator and store it as a build artifact.
 - `adb shell input keyevent 82` to unlock the emulator, but see the
   next paragraph
