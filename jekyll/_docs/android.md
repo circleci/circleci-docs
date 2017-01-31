@@ -127,17 +127,11 @@ something like `./gradlew connectedAndroidTest`.
 
 You may also want to run commands directly with `adb shell`, after
 installing your APK on the emulator. Note however that `adb shell`
-[does not correctly forward exit codes][adb-shell-bug]. We provide
-Facebook's [`fb-adb`][fb-adb] tool on our container images to work
-around this: `fb-adb shell` *does* correctly report exit codes. You
-should prefer `fb-adb shell` over `adb shell` in CircleCI builds in
-order to prevent failing commands from being understood as passing.
+[does not correctly forward exit codes][adb-shell-bug]. Some commands are:
 
-Some useful `fb-adb shell` commands are:
-
-- `fb-adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
+- `adb rcmd screencap -p > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
   to take a screenshot of the emulator and store it as a build artifact.
-- `fb-adb shell input keyevent 82` to unlock the emulator, but see the
+- `adb shell input keyevent 82` to unlock the emulator, but see the
   next paragraph
 
 
@@ -181,7 +175,6 @@ class TestClass {
 This will wake up the device and try to unlock the screen. If there is a password/pattern lock on the device, then `MainActivity` will get launched on top of the lock screen instead of unlocking the device (how cool is that?).
 
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
-[fb-adb]:https://github.com/facebook/fb-adb
 
 ## Gradle output formatting
 
