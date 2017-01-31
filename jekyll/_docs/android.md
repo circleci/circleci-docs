@@ -175,7 +175,6 @@ class TestClass {
 This will wake up the device and try to unlock the screen. If there is a password/pattern lock on the device, then `MainActivity` will get launched on top of the lock screen instead of unlocking the device (how cool is that?).
 
 [adb-shell-bug]: https://code.google.com/p/android/issues/detail?id=3254
-[fb-adb]:https://github.com/facebook/fb-adb
 
 ## Gradle output formatting
 
