@@ -17,9 +17,11 @@ The status images are also available in "shield" style:
 In the project settings for each of your repositories, there's a "Status Badges" section that can generate code for Markdown, rst, etc.  Or if you want to tweak them manually, how they work is straightforward:
 
 You can use a simple image URL like this to see the status of your project's default branch:
-`https://circleci.com/gh/:owner/:repo.png?circle-token=:circle-token`
 
-`https://circleci.com/gh/:owner/:repo.svg?style=shield&circle-token=:circle-token`
+- `https://circleci.com/gh/:owner/:repo.png?circle-token=:circle-token`
+  - Gives: ![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
+- `https://circleci.com/gh/:owner/:repo.svg?style=shield&circle-token=:circle-token`
+  - Gives: ![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
 
 For example:
 `circleci/mongofinil` [badge](https://circleci.com/gh/circleci/mongofinil.png?circle-token=b14acf911433d315298235b0c2fbf7b2670a92a8)
