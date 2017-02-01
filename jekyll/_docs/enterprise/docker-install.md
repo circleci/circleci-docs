@@ -36,6 +36,13 @@ For test installations, you may punt on this step until you spin up the machines
 
 ## Installation
 
+**SECURITY NOTE:** If you are using these instructions on EC2 VMs, then
+all builds will have access to the IAM privileges associated with their instance profiles. Please do not
+give any inappropriate privileges to your instances. It is possible to block
+this access with iptables rules in a production setup. Please [contact us](mailto:trial-support@circleci.com)
+if you have questions.
+
+
 CircleCI Enterpise installation requires provisioning two types of machines:
 
 * Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.

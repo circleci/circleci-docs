@@ -28,6 +28,11 @@ any environment. There are just a few firm requirements:
 Installing CircleCI Enterpise on a single EC2 VM is extremely quick and
 easy with our pre-made AMI.
 
+**SECURITY NOTE:** All builds that run on this machine will have access
+to the IAM privileges associated with its instance profile. Please do not
+give any inappropriate privileges to your instance. It is possible to block
+this access with iptables rules in a production setup. Please [contact us](mailto:trial-support@circleci.com)
+if you have questions.
 
 <ol>
 <li>Find the AMI for your region (make sure to use an instance type with at least 8G of RAM):<br>
