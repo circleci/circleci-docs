@@ -37,8 +37,7 @@ publish new versions of your package in a consistent and predictable way.
     deployment:
       npm:
         tag: /v[0-9]+(\.[0-9]+)*/
-        owner:
-       commands:
+        commands:
           - npm publish
     ```
 
