@@ -314,6 +314,10 @@ Version: `{{ site.data.trusty.versions.summary.android.build-tool }}`
 - `{{ version }}`
 {% endfor %}
 
+## Yarn
+
+Version: `{{ site.data.trusty.versions.summary.yarn }}`
+
 ## dpkg -l
 
 The following is the output of `dpkg -l` from the latest build image.
