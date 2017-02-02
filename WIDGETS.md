@@ -2,7 +2,7 @@
 
 Many documentation pages will have widgets. These are discrete page elements that provide advanced functionality within Markdown.
 
-The widgets available in CircleCI.com/docs/. are:
+The widgets available in CircleCI.com/docs/ are:
 
 ## OS Version Matrix
 
