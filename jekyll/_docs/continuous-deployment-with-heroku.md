@@ -3,7 +3,6 @@ layout: classic-docs
 title: Continuous Deployment with Heroku
 categories: [how-to]
 description: Continuous Deployment with Heroku
-last_updated: May 7, 2013
 ---
 
 ## Quick start videos
@@ -76,13 +75,25 @@ requests per hour per key.
 
 <h2 id="pre-or-post">Heroku with pre- or post-deployment steps</h2>
 
-If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax.
+If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax together with the Heroku CLI (pre-installed). This method does not pull in your Heroku creds that was set in the CircleCI UI. Instead, you'll need to set your Heroku API key via standard [private environment variables][doc-priv-envars]. In the following example, we set `HEROKU_EMAIL` and `HEROKU_PASSWORD` as private environment variables where `HEROKU_PASSWORD` is your Heroku API token.
 
-```
+[doc-priv-envars]: https://circleci.com/docs/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git
+
+```yaml
 deployment:
   production:
     branch: production
     commands:
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_PASSWORD
+        machine git.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_PASSWORD
+        EOF
+      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
       - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app foo-bar-123:
@@ -110,10 +121,20 @@ To ensure that no background jobs are processed during migration, scale down all
 Here is how to tweak the `deployment`
 section of your `circle.yml` file to employ these commands.
 
-```
+```yaml
 deployment:
   staging:
     commands:
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_PASSWORD
+        machine git.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_PASSWORD
+        EOF
+      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - heroku maintenance:on --app foo-bar-123
       - heroku scale worker=0 --app foo-bar-123
       - git push git@heroku.com:foo-bar-123.git $CIRCLE_SHA1:refs/heads/master
