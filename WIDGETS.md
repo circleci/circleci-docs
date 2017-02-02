@@ -1,22 +1,24 @@
 # CircleCI Docs: Widgets
 
-Many documentation pages will have some sort of widget. These are discrete page elements that provide some advanced functionality within the Markdown with little effort.
+Many documentation pages will have widgets. These are discrete page elements that provide advanced functionality within Markdown.
 
-Here are widgets available within CircleCI.com/docs/.
+The widgets available in CircleCI.com/docs/. are:
 
 ## OS Version Matrix
 
 ![OS Version Matrix Widget Screenshot](img/widget-os-matrix.png)
 
-This widget is used to display which version, if any, of a specific software is available on a specific CircleCI supported operating system (OS). This applies to CircleCI 1.0 only.
+Use this widget to display which version (if any) of some software is available on a given operating system (OS) supported by CircleCI. This only applies to CircleCI 1.0.
 
-Version numbers can be passed as a string or from Jekyll datafiles. Here's an example:
+Version numbers can be passed as either strings or from Jekyll datafiles.
 
 ```
 {% include os-matrix.html trusty=site.data.trusty.versions.summary.docker precise="v1.7.1" macos="n/a" %}
 ```
 
-If an OS doesn't have that software, you can pass "n/a" or better yet, leave the variable out completely. For example, if we had a software that was Ubuntu 14.04 "Trusty" only, we could do:
+If an OS doesn’t support some software, there’s no need to pass any variable at all.
+
+For example, if we had software that was only compatible with Ubuntu 14.04 “Trusty”, we would write:
 
 ```
 {% include os-matrix.html trusty=site.data.trusty.versions.summary.docker %}
