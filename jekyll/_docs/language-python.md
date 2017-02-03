@@ -67,8 +67,8 @@ CircleCI automatically runs test commands when certain files are detected:
 
 - `tox` when `tox.ini` is found
 - `nosetest` when `unittest.py` is found
-- `manage.py test` when it contains a testing section
-- `setup.py test` when it contains a testing section
+- `manage.py test` when `manage.py` contains a testing section
+- `setup.py test` when `setup.py` contains a testing section
 
 Be aware that if you are testing a framework that has generated static assets, i.e. CSS files
 that are created using SASS, you will need to trigger their generation. For example, with Django
