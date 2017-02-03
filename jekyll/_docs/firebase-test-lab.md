@@ -64,6 +64,19 @@ then set up gcloud. Here we recreate the .json key, tell gcloud which project
 we're working on, install the beta commands, and authenticate to our project.
 Make sure to set your own project name where appropriate.
 
+By default the Gradle android plugin pre-dexes dependencies,
+converting their Java bytecode into Android bytecode. This speeds up
+development greatly since gradle only needs to do incremental dexing
+as you change code.
+
+Because CircleCI always runs clean builds this pre-dexing has no
+benefit; in fact it makes compilation slower and can also use large
+quantities of memory.  We recommend
+[disabling pre-dexing][disable-pre-dexing] for Android builds on
+CircleCI.
+
+[disable-pre-dexing]: http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/
+
 ```
 test:
   override:
