@@ -343,21 +343,6 @@ device](https://docs.docker.com/engine/userguide/networking/dockernetworks/). Ju
 that the outside services are listening for connections on `docker0`—the
 simplest way to ensure that is to have the services listen on `0.0.0.0`.
 
-For example, the following configuration will ensure that Postgres is
-available to `docker0`:
-
-```
-test:
-  pre:
-    - sudo bash -c "echo \"listen_addresses = '*'\" >>
-      /etc/postgresql/9.4/main/postgresql.conf"
-    - sudo bash -c "echo \"host all all 0.0.0.0/0 trust\" >>
-      /etc/postgresql/9.4/main/pg_hba.conf"
-    - sudo /etc/init.d/postgresql restart
-```
-
-The similar approach would be required for any other service.
-
 You can add a link (called `db` in the example) to the host like this:
 
 ```
