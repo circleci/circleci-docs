@@ -41,7 +41,7 @@ The debug symbols file will be used by your distribution service of choice
 to produce call-stacks helping you to debug any crashes in your app that
 testers encounter.
 
-### OS X CircleCI Keychain
+### OS X circle Keychain
 When signing an app, Xcode will look in any
 [keychains](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/security.1.html)
 on the machine to find the necessary code-signing credentials. CircleCI
