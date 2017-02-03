@@ -15,6 +15,7 @@ dependencies:
     # https://github.com/jekyll/jekyll/issues/4713
     - JEKYLL_ENV=production bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
     - if grep -qi "error" $CIRCLE_ARTIFACTS/build-results.txt; then exit 2; fi
+    - bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_staging.yml --source jekyll --destination jekyll/_staging_site/docs/ --future --drafts --unpublished
 
 test:
   post:
@@ -25,3 +26,7 @@ deployment:
     branch: master
     commands:
       - aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+  staging:
+    branch: cci2-docs
+    commands:
+      - rsync -va --delete jekyll/_staging_site/docs staticweb@web02.revidian.net:www/cci.feliciano.tech/public_html
