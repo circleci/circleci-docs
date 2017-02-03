@@ -6,7 +6,7 @@ categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Node.js"
 ---
 
-Circle has great support for Node.js applications.
+CircleCI has great support for Node.js applications.
 We inspect your code before each build to infer your settings, dependencies, and test steps.
 
 If your project has any special requirements, you can augment or override our
@@ -28,7 +28,7 @@ machine:
 
 ### Dependencies
 
-If Circle finds a `package.json`, we automatically run `npm install` to fetch
+If CircleCI finds a `package.json`, we automatically run `npm install` to fetch
 all of your project's dependencies.
 If needed, you can add custom dependencies commands from your circle.yml.
 For example, you can override our default command to pass a special flag to `npm`:
@@ -52,7 +52,7 @@ including PostgreSQL and MySQL. If needed, you can
 
 ### Testing
 
-Circle will run `npm test` when you specify a test script in `package.json`.
+CircleCI will run `npm test` when you specify a test script in `package.json`.
 We also run your Mocha tests as well as run any `test` targets in Cakefiles or Makefiles.
 
 You can [add additional test commands]({{ site.baseurl }}/configuration/#test)
@@ -66,8 +66,8 @@ test:
 
 ### Deployment
 
-Circle offers first-class support for [deployment]({{ site.baseurl }}/configuration/#deployment).
-When a build is green, Circle will deploy your project as directed
+CircleCI offers first-class support for [deployment]({{ site.baseurl }}/configuration/#deployment).
+When a build is green, CircleCI will deploy your project as directed
 in your `circle.yml` file.
 We can deploy to Nodejitsu and other PaaSes as well as to
 physical servers under your control.

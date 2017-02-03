@@ -6,7 +6,7 @@ categories: [languages]
 description: Continuous Integration and Continuous Deployment with Haskell
 ---
 
-Circle supports building Haskell applications with GHC and Cabal. Before each
+CircleCI supports building Haskell applications with GHC and Cabal. Before each
 build we look at your repository and infer commands to run, so most
 setups should work automatically.
 
@@ -42,14 +42,14 @@ test:
     - cabal bench
 ```
 
-Circle can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
+CircleCI can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
 in between builds to avoid unnecessary work. If you use Cabal, our inferred
 commands build your project in a Cabal sandbox and cache the sandbox.
 This helps your build run as quickly as possible.
 
 ### Artifacts
 
-Circle supports saving and uploading arbitrary
+CircleCI supports saving and uploading arbitrary
 [build artifacts]({{ site.baseurl }}/build-artifacts/).
 
 If you'd like to automatically generate documentation with Haddock,

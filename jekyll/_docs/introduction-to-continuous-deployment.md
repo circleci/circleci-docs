@@ -2,24 +2,23 @@
 layout: classic-docs
 title: Introduction to Continuous Deployment
 description: Introduction to Continuous Deployment
-last_updated: March 12, 2014
 ---
 
-Circle enables you to automatically deploy after green builds.
-We have customers deploying to PaaSes such as Heroku, Engine Yard,
+CircleCI enables you to automatically deploy after green builds.
+We have customers deploying to PaaS's such as Heroku, Engine Yard,
 Google App Engine and Bluemix, hosted cloud servers (like EC2 and Rackspace),
 and to private and colo servers&mdash;even behind firewalls.
 Some use tools like Capistrano, Fabric, and Paver.
 
-However you want to deploy your code, Circle makes
+However you want to deploy your code, CircleCI makes
 Continuous Deployment easy.
 
-### Deployment syntax
+## Deployment Syntax
 
-Tell Circle about your deployment requirements in the `deployment`
+Tell CircleCI about your deployment requirements in the `deployment`
 section of your [circle.yml]({{ site.baseurl }}/configuration/) file.
 Within this section, you can can define custom deployment steps for each
-branch, directing Circle to use specific deployment tools or custom scripts.
+branch, directing CircleCI to use specific deployment tools or custom scripts.
 Deployment commands are triggered only after a successful build.
 
 The following example will run the `deploy-to-production.sh`
@@ -61,13 +60,11 @@ deployment:
       - ./deploy-development
 ```
 
-
-
-### Deploy over SSH
+## Deploy over SSH
 
 First you need to upload your SSH keys from your project's
-**Project Settings > SSH keys** page in the Circle UI.
-Circle will automatically add them to the `ssh-agent`,
+**Project Settings > SSH keys** page in the CircleCI UI.
+CircleCI will automatically add them to the `ssh-agent`,
 so they are available for forwarding.
 
 You can list commands or include bash scripts for SSH deployment in the
@@ -95,9 +92,9 @@ deployment:
       - fab deploy
 ```
 
-### Deploy to a PaaS
+## Deploy to a PaaS
 
-Circle has customers deploying to Heroku, Engine Yard, Google App Engine, Elastic Beanstalk, Dot Cloud, Nodejistu and other PaaSes. We have detailed instructions on deployment to
+CircleCI has customers deploying to Heroku, Engine Yard, Google App Engine, Elastic Beanstalk, Dot Cloud, Nodejistu and other PaaSes. We have detailed instructions on deployment to
 [Heroku]({{ site.baseurl }}/continuous-deployment-with-heroku/),
 [Google App Engine]({{ site.baseurl }}/deploy-google-app-engine/)
 and [Bluemix]({{ site.baseurl }}/deploy-bluemix/).
