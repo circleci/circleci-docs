@@ -163,7 +163,7 @@ git history.  Instead, you can add environment variables using the
 
 It's important to note that environment variables configured through
 the UI are exported during the `machine` section of the build.  This
-means you cannot read UI environment variables during the `machine: pre`.
+means you cannot read UI environment variables during the `machine: pre`. Another note, the value of these variables won't be readable in the UI after setting them nor can you edit it. If you need to change its value, you should delete the current variable and add it again with the new value.
 
 ## Keeping encrypted environment variables in source code
 
