@@ -63,9 +63,12 @@ MySQL. If needed, you can
 
 ## Testing
 
-CircleCI automatically runs `tox` when we find a `tox.ini` file, and runs
-`nosetests` when we find a `unittest.py` file. If you are using Django, then
-Circle will run `manage.py test`.
+CircleCI automatically runs test commands when certain files are detected:
+
+- `tox` when `tox.ini` is found
+- `nosetest` when `unittest.py` is found
+- `manage.py test` when `manage.py` contains a testing section
+- `setup.py test` when `setup.py` contains a testing section
 
 Be aware that if you are testing a framework that has generated static assets, i.e. CSS files
 that are created using SASS, you will need to trigger their generation. For example, with Django
