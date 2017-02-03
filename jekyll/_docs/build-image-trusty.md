@@ -8,8 +8,7 @@ changefreq: "weekly"
 
 The default image is Ubuntu 14.04 (Trusty), but you can always change the image directly by going to 'Project Settings' -> 'Build Environment'.
 
-Please note that you need to trigger a build by pushing commits to GitHub or
-Bitbucket (instead of rebuilding) to apply the new setting.
+To apply the new setting, you will need to trigger a build by pushing commits to GitHub or Bitbucket (instead of rebuilding).
 
 ## Base
 
