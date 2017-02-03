@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
 title: "Continuous deployment with npm"
-short-title: "npm publish from CircleCI"
-description: "How to configure CircleCI to publish packages to npm automatically"
+description: "How to configure CircleCI to publish packages to npmjs.org automatically"
 ---
 
-Publishing to npm from CircleCI makes it easy for project collaborators to
-publish new versions of your package in a consistent and predictable way.
+Setting up CircleCI to publish packages to the npm registry makes it easy
+for project collaborators to release new package versions in a consistent
+and predictable way.
 
 1.  Obtain the npm authToken for the account that you wish to use to publish
     the package.
@@ -20,7 +20,7 @@ publish new versions of your package in a consistent and predictable way.
 
     In this case, the authToken is `00000000-0000-0000-0000-000000000000`.
 
-2.  Go to your project settings, and set the `NPM_TOKEN` variable to the
+2.  Go to your [project settings]({{site.baseurl}}environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git), and set the `NPM_TOKEN` variable to the
     obtained authToken.
 
 3.  Configure CircleCI to add the authToken to `~/.npmrc`:
@@ -53,6 +53,5 @@ publish new versions of your package in a consistent and predictable way.
 
     ```
     git push --follow-tags
-    ```
-
+    ``` 
 6.  If tests passed, CircleCI will publish the package to npm automatically.
