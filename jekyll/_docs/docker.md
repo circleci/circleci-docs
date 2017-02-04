@@ -10,10 +10,9 @@ CircleCI currently offers beta support for running Docker within build container
 Note that this article assumes some knowledge of Docker. If you are just getting started with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
 first.
 
-## Basic usage
+## Basic Usage
 
-CircleCI pre-installs Docker Engine v{{ site.data.trusty.versions.summary.docker }} in the default build image, Ubuntu 14.04 "Trusty". To enable it, simply add Docker as a required service in your
-`circle.yml` file like this:
+CircleCI pre-installs Docker Engine in the Linux build images. To enable it, simply add Docker as a required service in your `circle.yml` file like this:
 
 ```
 machine:
@@ -24,6 +23,10 @@ machine:
 You will then be able to use the `docker` command throughout your
 `circle.yml` file. Note that you don't need to use `sudo`
 to use the command on CircleCI.
+
+### Version Support
+
+{% include os-matrix.html trusty=site.data.trusty.versions.summary.docker precise=site.data.precise.versions.docker %}
 
 ## Deployment to a Docker registry
 
