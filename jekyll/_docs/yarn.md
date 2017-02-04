@@ -12,6 +12,10 @@ description: "How to use the Yarn package manager on CircleCI."
 
 [yarn-site]: https://yarnpkg.com/
 
+## Version Support
+
+{% include os-matrix.html trusty=site.data.trusty.versions.summary.nodejs.yarn %}
+
 ## Setup
 
 When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections.
