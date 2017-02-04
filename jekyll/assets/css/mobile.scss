@@ -65,3 +65,12 @@ div.article-container{
 		width: 100%;
 	}
 }
+
+@media (max-width: 600px) {
+	.os-matrix p{
+		display: block;
+		border-left: none;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
