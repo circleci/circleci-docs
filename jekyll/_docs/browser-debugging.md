@@ -72,7 +72,7 @@ to a CircleCI VM. When you connect to the machine, add the -L flag and forward t
 daniel@mymac$ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 
-You should be connected to the Circle VM. Now start the VNC server:
+You should be connected to the CircleCI VM. Now start the VNC server:
 
 ```
 ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24

@@ -657,7 +657,7 @@ general:
 ```
 
 You may also whitelist branches, so only whitelisted branches will trigger a build.
-This example limit builds in circle to `master` and `feature-.*` branches:
+This example limits builds in CircleCI to `master` and `feature-.*` branches:
 
 ```
 general:
@@ -676,7 +676,7 @@ only affect that branch and no other one.
 
 <h2 id="build-dir">Specifying build directory</h2>
 
-Circle runs all commands on the repository root, by default.  However, if
+CircleCI runs all commands on the repository root, by default.  However, if
 you store your application code in a subdirectory instead of the root, you
 can specify the build directory in circle.yml.  For example, to set the build
 directory to `api` sub-directory, you can use the following configuration:
@@ -686,7 +686,7 @@ general:
   build_dir: api
 ```
 
-Circle will run its inference as well as all build commands from that directory.
+CircleCI will run its inference as well as all build commands from that directory.
 
 <h2 id="artifacts">Specifying custom artifacts directories and files</h2>
 

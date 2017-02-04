@@ -13,7 +13,7 @@ of your settings, you can also add custom configuration to a
 
 ## Version
 
-When Circle detects Python, we automatically use `virtualenv` to create an isolated Python environment.
+When CircleCI detects Python, we automatically use `virtualenv` to create an isolated Python environment.
 
 We have many versions of Python pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#python) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#python) build images.
 
@@ -38,12 +38,12 @@ Please [contact us](mailto:support@circleci.com) if other versions of Python
 would be of use to you.
 
 <span class='label label-info'>Note:</span>
-Circle will set up `virtualenv` if you specify your Python version in your `circle.yml`.
+CircleCI will set up `virtualenv` if you specify your Python version in your `circle.yml`.
 This can be useful if we didn't automatically detect that you're using Python.
 
 ## Package managers and dependencies
 
-Circle automatically installs your dependencies using either `pip` when we find
+CircleCI automatically installs your dependencies using either `pip` when we find
 a `requirements.txt`, or `distutils` when we find a `setup.py` file. You can
 also [add custom dependencies]({{ site.baseurl }}/configuration/#dependencies) commands from
 your `circle.yml`, for example:
@@ -56,7 +56,7 @@ dependencies:
 
 ## Databases
 
-Circle has pre-installed more than a dozen databases and queues, including PostgreSQL and
+CircleCI has pre-installed more than a dozen databases and queues, including PostgreSQL and
 MySQL. If needed, you can
 [manually set up your test database]({{ site.baseurl }}/manually/#dependencies) from your
 `circle.yml`.

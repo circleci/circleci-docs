@@ -6,7 +6,7 @@ categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Ruby/Rails"
 ---
 
-CircleCI makes Rails testing simple. During each build, Circle looks at your code,
+CircleCI makes Rails testing simple. During each build, CircleCI looks at your code,
 infers your build environment, and runs your tests.
 The majority of the time, this just works&mdash;and works well.
 Of course, it helps if your project adheres to standard practices
@@ -46,7 +46,7 @@ echo 'export rvm_install_on_use_flag=0' >> /home/ubuntu/.rvmrc
 
 ### Dependencies
 
-If Circle detects a Gemfile, we automatically run `bundle install`. Your
+If CircleCI detects a Gemfile, we automatically run `bundle install`. Your
 gems are automatically cached between builds to save time downloading dependencies.
 You can add additional project dependencies from the
 [dependencies section of your circle.yml]({{site.baseurl}}/configuration/#dependencies):
@@ -61,7 +61,7 @@ The default inferred step for Bundler is `bundle check || bundle install`. For r
 
 ### Databases
 
-Circle manages all your database requirements,
+CircleCI manages all your database requirements,
 such as running your `rake` commands for creating, loading,
 and migrating your database.
 We have pre-installed more than a dozen databases and queues,
@@ -71,7 +71,7 @@ You can add custom database commands from the
 
 ### Testing
 
-Circle will automatically infer your test commands if you're
+CircleCI will automatically infer your test commands if you're
 using Test::Unit, RSpec, Cucumber, Spinach, Jasmine, or Konacha.
 You can also add additional commands from the
 [test section of your circle.yml]({{site.baseurl}}/configuration/#test):
@@ -84,18 +84,18 @@ test:
 
 ### Testing in Parallel
 
-Should you need faster testing, Circle can automatically split your
+Should you need faster testing, CircleCI can automatically split your
 tests and run them in parallel across multiple machines.
 You can enable parallelism on your project's **Project Settings > Parallelism**
-page in the Circle UI.
+page in the CircleCI UI.
 
-Circle can automatically split tests for RSpec, Cucumber, and Test::Unit.
+CircleCI can automatically split tests for RSpec, Cucumber, and Test::Unit.
 For other testing libraries, we have instructions for [manually setting up parallelism]({{site.baseurl}}/parallel-manual-setup/).
 
 ### Deployment
 
-Circle offers first-class support for deployment to your staging and production environments.
-When your build is green, Circle will run the commands from the
+CircleCI offers first-class support for deployment to your staging and production environments.
+When your build is green, CircleCI will run the commands from the
 [deployment section of your circle.yml]({{site.baseurl}}/configuration/#deployment).
 
 You can find more detailed instructions in the

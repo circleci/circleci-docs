@@ -6,7 +6,7 @@ categories: [languages]
 description: Continuous Integration and Continuous Deployment with Scala
 ---
 
-Circle supports building Scala applications with `sbt`. Before each
+CircleCI supports building Scala applications with `sbt`. Before each
 build we look at your repository and infer commands to run, so most
 setups should work automatically.
 
@@ -63,7 +63,7 @@ dependencies:
 
 ### Dependencies & Tests
 
-Circle can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
+CircleCI can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
 in between builds to avoid unnecessary work.
 
 By default, when we detect a Scala project, we will run `sbt

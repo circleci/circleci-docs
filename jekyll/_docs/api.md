@@ -182,7 +182,7 @@ curl -u <circle-token>: https://circleci.com/api/...
 
 ## Version Control System (:vcs-type)
 
-New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCi what version control system type your project uses. Current choices are 'github' or 'bitbucket'. The command for recent builds for a project would be formatted like so:
+New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCI what version control system type your project uses. Current choices are 'github' or 'bitbucket'. The command for recent builds for a project would be formatted like so:
 
 ```
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch

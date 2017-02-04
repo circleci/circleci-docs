@@ -6,7 +6,7 @@ categories: [languages]
 description: Continuous Integration and Continuous Deployment with Java
 ---
 
-Circle supports building Java applications using most common JDKs and build tools.
+CircleCI supports building Java applications using most common JDKs and build tools.
 Before each build, we look at your repository and infer commands to run, so most
 setups should work automatically.
 If your project has special requirements, you can augment or override inferred commands
@@ -26,7 +26,7 @@ machine:
 
 ### Dependencies & Tests
 
-Circle supports Apache Ant, Play Framework, Gradle, and Apache Maven out of the box.
+CircleCI supports Apache Ant, Play Framework, Gradle, and Apache Maven out of the box.
 Depending on your build tooling, we will infer different commands:
 
 <table class='table'>

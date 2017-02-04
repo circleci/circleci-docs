@@ -29,7 +29,7 @@ machine:
 
 ## Dependencies
 
-Circle has the composer, pear, and pecl package managers installed.
+CircleCI has the composer, pear, and pecl package managers installed.
 If we find a composer.json file, then we'll automatically run `composer install`.
 
 To install your dependencies with either `pear` or `pecl`,
@@ -116,7 +116,7 @@ dependencies:
 
 ## Testing
 
-Circle always runs your tests on a fresh machine. If we find a `phpunit.xml` file in your repo, then we'll run `phpunit` for you. You can add custom test commands to the test section of your `circle.yml`:
+CircleCI always runs your tests on a fresh machine. If we find a `phpunit.xml` file in your repo, then we'll run `phpunit` for you. You can add custom test commands to the test section of your `circle.yml`:
 
 ```
 test:
@@ -149,8 +149,8 @@ dependencies:
 
 ## Deployment
 
-Circle offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
-When a build is green, Circle will deploy your project as directed
+CircleCI offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
+When a build is green, CircleCI will deploy your project as directed
 in your `circle.yml` file. We can deploy to PaaS providers as well as to
 physical servers under your control.
 
