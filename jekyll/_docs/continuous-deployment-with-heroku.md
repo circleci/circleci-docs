@@ -10,13 +10,13 @@ description: Continuous Deployment with Heroku
 Watch these videos for a step-by-step walkthrough of setting up a continuous delivery
 pipeline with CircleCI and Heroku:
 
-#### Part 1: Green builds and red builds
+### Part 1: Green builds and red builds
 
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/Hfs_1yuWDf4?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
 </div>
 
-#### Part 2: Multiple environments
+### Part 2: Multiple Environments
 
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/YtvKVfjKGWw?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
@@ -25,10 +25,10 @@ pipeline with CircleCI and Heroku:
 You can also look at the GitHub repo used in the above videos
 [here.](https://github.com/circleci/heroku-cd)
 
-## Heroku setup
+## Heroku Setup
 
 You must supply or confirm some authentication settings before Heroku deployment.
-CircleCI dividies this setup work into three steps.
+CircleCI divides this setup work into three steps.
 
 **Note**: Heroku authenticates using the API key set in your Heroku dashboard **Account** page;
 this API key must be set before proceeding.
@@ -75,7 +75,7 @@ requests per hour per key.
 
 <h2 id="pre-or-post">Heroku with pre- or post-deployment steps</h2>
 
-If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax together with the Heroku CLI (pre-installed). This method does not pull in your Heroku creds that was set in the CircleCI UI. Instead, you'll need to set your Heroku API key via standard [private environment variables][doc-priv-envars]. In the following example, we set `HEROKU_EMAIL` and `HEROKU_PASSWORD` as private environment variables where `HEROKU_PASSWORD` is your Heroku API token.
+If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax together with the Heroku CLI (pre-installed). This method does not pull in your Heroku creds that was set in the CircleCI UI. Instead, you'll need to set your Heroku API key via standard [private environment variables][doc-priv-envars]. In the following example, we set `HEROKU_EMAIL` and `HEROKU_TOKEN` as private environment variables.
 
 [doc-priv-envars]: https://circleci.com/docs/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git
 
@@ -88,10 +88,10 @@ deployment:
         cat >~/.netrc <<EOF
         machine api.heroku.com
           login $HEROKU_EMAIL
-          password $HEROKU_PASSWORD
+          password $HEROKU_TOKEN
         machine git.heroku.com
           login $HEROKU_EMAIL
-          password $HEROKU_PASSWORD
+          password $HEROKU_TOKEN
         EOF
       - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
       - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
@@ -100,7 +100,7 @@ deployment:
           timeout: 400 # if your deploys take a long time
 ```
 
-Note the 'git fetch --unshallow' command; we do shallow clones by default, which can't always push to heroku.
+Note the 'git fetch --unshallow' command; we do shallow clones by default, which can't always push to Heroku.
 
 <h2 id="maintenance-mode">Heroku's maintenance mode</h2>
 
