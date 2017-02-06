@@ -5,9 +5,9 @@ categories: [reference]
 description: "How caching works on CircleCI 1.0"
 ---
 
-When discussing cache on CircleCI, majority of the time it's dependency cache that is being referred to. Dependency cache saves the state of your dependencies between builds, therefore making them run faster.
+When we talk about caching on CircleCI, we're usually talking about the dependency cache. Dependency caching saves the state of your dependencies between builds, therefore making them run faster.
 
-## What is Cached?
+## What Is Cached?
 
 There are two collections of directories which are cached.
 
@@ -51,14 +51,14 @@ GitHub or Bitbucket (normally `master`) will be used. If there is no cache for
 ![]({{ site.baseurl }}/assets/img/docs/cache-build-button-rebuild.png)
 
 The _Rebuild without cache_ button in the UI will disable the cache for
-a single build so that you could debug any problems caused by your
+a single build so you can debug any problems caused by your
 dependencies.
 
-If such rebuild successfully passes the dependency phase, it will save
+If that rebuild successfully passes the dependency phase, it will save
 a new cache which will be used by future builds.
 
-Normally you will not have to clear the cache permanently, but if you
-feel that’s what you need, you can just remove the necessary parts of
+You shouldn't generally need to clear the cache permanently, but if you'd
+like to do so, you can just remove the necessary parts of
 the cache anywhere in your `circle.yml`’s `dependencies` section,
 before the cache is saved:
 
@@ -70,8 +70,8 @@ dependencies:
 
 ## Caching in Parallel Builds
 
-The cache is collected from the first container only (container with the index 0). On the next build, the previously collected cache from the node 0 is distributed across all the machines in the parallel build.
+The cache is collected from the first container only (the container with index 0). On the next build, the previously collected cache from container 0 is distributed across all machines in the parallel build.
 
 ## Git Cache
 
-There's another type of caching that CircleCI does. This is to cache the Git repository of your project. This features allows for speedier `git clones` of your project. Control of this cache isn't user accessible and shouldn't need to be. In rare scenarios, you can contact support if something seems to be wrong with your source cache. This is typically the case when certain files are in your repo that shouldn't be.
+There's another type of caching that CircleCI does. This is to cache the Git repository of your project. This feature allows for speedier `git clone`s of your project. Control of this cache isn't user accessible and shouldn't need to be. In rare scenarios, if something seems to be wrong with your source cache (for example, certain files are in your repo that shouldn't be), please contact support.
