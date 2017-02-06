@@ -40,7 +40,17 @@ dependencies:
 Cache is saved **after** the `dependencies: override` phase and **before** the
 `test` phase. This means that the directory (or directories) you'd like to
 cache must exist after `dependencies: override`, so if the desired cache
-directory hasn't been created automatically, you'll need to create it manually.
+directory hasn't been created automatically, you'll need to create it manually,
+like this:
+
+```yaml
+dependencies:
+  override:
+    - mkdir ~/my_cache_dir
+    # now add files and directories to the above directory
+  cache_directories:
+    - "~/my_cache_dir
+ ```
 
 ## Per-branch Cache
 
