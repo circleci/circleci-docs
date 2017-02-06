@@ -49,7 +49,7 @@ dependencies:
     - mkdir ~/my_cache_dir
     # now add files and directories to the above directory
   cache_directories:
-    - "~/my_cache_dir
+    - "~/my_cache_dir"
  ```
 
 ## Per-branch Cache
