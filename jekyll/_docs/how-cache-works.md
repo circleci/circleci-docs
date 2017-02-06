@@ -5,7 +5,7 @@ categories: [reference]
 description: "How caching works on CircleCI 1.0"
 ---
 
-When we talk about caching on CircleCI, we're usually talking about the dependency cache. Dependency caching saves the state of your dependencies between builds, therefore making them run faster.
+When we talk about caching on CircleCI, we're usually talking about the dependency cache. Dependency caching saves the state of your dependencies between builds, thereby making them run faster.
 
 ## What Is Cached?
 
@@ -37,7 +37,10 @@ dependencies:
     - "~/custom_2" # relative to the user's home directory
 ```
 
-Cache is saved **after** the `dependencies` phase and **before** the `test` phase.
+Cache is saved **after** the `dependencies: override` phase and **before** the
+`test` phase. This means that the directory (or directories) you'd like to
+cache must exist after `dependencies: override`, so if the desired cache
+directory hasn't been created automatically, you'll need to create it manually.
 
 ## Per-branch Cache
 
