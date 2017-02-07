@@ -57,6 +57,9 @@ EOF
 ) | sudo tee -a /etc/environment
 3.) sudo service replicated stop; sudo service replicated-agent stop; sudo service replicated-agent start; sudo service replicated start
 ```
+####Corporate Proxies
+In some enviroments you might not have access to a `NO_PROXY` equivalent outside your network. In that case feel free to put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY`and instead only add machines on the internal network to `NO_PROXY` such as the services, and builder box. 
+
 ### Installing CircleCI Services 
 
 ```
@@ -91,7 +94,8 @@ If for any reason you can't access the page the CircleCI Replicated console, but
 
 ### Setup Builder Proxy Support
 
-- Quick note. If you are using AWS you'll have to add the below to your builder's launch configuration. These instructions should be added to /etc/environment.
+- Quick note. If you are using AWS terraform install you'll have to add the below to your builder's launch configuration. These instructions should be added to /etc/environment.
+- One more note. If you are using docker builders, please refer to [Docker Http Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy).
 
 ```
 #!/bin/bash
