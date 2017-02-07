@@ -50,7 +50,7 @@ dependencies:
     # now add files and directories to the above directory
   cache_directories:
     - "~/my_cache_dir"
- ```
+```
 
 ## Per-branch Cache
 
