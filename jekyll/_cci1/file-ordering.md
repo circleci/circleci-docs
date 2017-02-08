@@ -14,10 +14,10 @@ Fortunately, if you understand your code base and your tests, fixing your tests 
 Many tests libraries, including RSpec, load all the test files in a certain directory, and then run them.
 This means that not only will tests be run in a different order than you're used to locally, but also that different parts of your application will be loaded in a different order.
 
-On OSX, directory contents are always ordered the same, due to OSX's HFS+ file system.
+On macOS, directory contents are always ordered the same, due to macOS' HFS+ file system.
 On Linux machines however, directory contents do not have a defined order.
 
-This means that repeated runs on OSX systems will have the same order, but
+This means that repeated runs on macOS systems will have the same order, but
 that repeated runs on Linux systems may not. This explains why a revision's tests will sometimes fail on CircleCI, only to pass when retried.
 
 ## Why these tests fail

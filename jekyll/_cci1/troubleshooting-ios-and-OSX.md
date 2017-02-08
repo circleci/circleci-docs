@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: Troubleshooting iOS and OSX builds
-short-title: iOS & OSX troubleshooting
+title: Troubleshooting iOS and macOS builds
+short-title: iOS & macOS troubleshooting
 categories: [troubleshooting]
-description: Common problems with iOS and OSX builds
+description: Common problems with iOS and macOS builds
 ---
 
 
 
-There are common problems you might run into during the initial setup of your CI/CD setup with CircleCI or even issues that only occur when your project has grown to a certain size. 
+There are common problems you might run into during the initial setup of your CI/CD setup with CircleCI or even issues that only occur when your project has grown to a certain size.
 
 
 ## Xcode Toolchain errors

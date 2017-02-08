@@ -17,58 +17,7 @@ it to an OS X build by enabling the "Build OS X project" option under the
 
 ## Software Versions
 
-The OS X container that CircleCI uses to build has the following software
-versions installed:
-
-- OS X 10.11.6 (15G1004)
-- Xcode:
-  - 7.0 Build version 7A220
-  - 7.1 Build version 7B91b
-  - 7.2 Build version 7C68
-  - 7.3 Build version 7D175
-  - 8.0 Build version 8A218a
-  - 8.1 Build version 8B62
-  - 8.2 Build version 8C1002
-- Facebook xctool 0.2.9
-- CocoaPods 1.1.1
-- xcpretty 0.2.4
-- fastlane 1.110.0
-- carthage 0.18.1
-- shenzhen 0.14.2
-
-## Available simulators
-
-We pre-install the simulators with the following device names and OS
-versions in the OS X build image:
-
-- Apple TV 1080p (9.2, 10.0)
-- Apple Watch - 38mm (3.0, 3.1)
-- Apple Watch - 42mm (3.0, 3.1)
-- iPad 2 (8.4, 9.0, 9.2, 9.3)
-- iPad Air (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPad Retina (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPad Pro (9.7 inch) (10.0, 10.1, 10.2)
-- iPad Pro (12.9 inch) (10.0, 10.1, 10.2)
-- iPhone 4s (8.4, 9.0, 9.2, 9.3)
-- iPhone 5 (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 5s (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 6 (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 6 Plus (8.4, 9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 6s (9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 6s Plus (9.0, 9.2, 9.3, 10.0, 10.1, 10.2)
-- iPhone 7 (10.0, 10.1, 10.2)
-- iPhone 7 Plus (10.0, 10.1, 10.2)
-- iPhone SE (10.0, 10.1, 10.2)
-- Device pairs:
-  - iPhone 7 (10.0) + Apple Watch Series 2 - 38mm (3.0)
-  - iPhone 7 Plus (10.0) + Apple Watch Series 2 - 42mm (3.0)
-  - iPhone 7 (10.2) + Apple Watch Series 2 - 38mm (3.1)
-  - iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1)
-
-Please note that the simulators will only be available if the selected
-Xcode version supports them. For example, simulators with iOS 10.2 can
-only be used with Xcode 8.2 and above.
-
+We maintain a [manifest of the software installed on our macOS image on GitHub](https://circleci.github.io/macos-image-tests/).
 
 ## Basic setup
 
@@ -106,15 +55,18 @@ customization options.
 
 ## Xcode Version
 
-By default, CircleCI will build your project with Xcode 7.0. You can select 7.2, 7.3 or 8.0.
-by specifying the version in a [circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
-repo. For example, for 8.0, add the following:
+By default, CircleCI will build your project with Xcode 7.0. You can select a
+newer version of Xcode by specifying the major and minor version in a
+[circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
+repository. For example, for 8.2.1, add the following:
 
 ```
 machine:
   xcode:
-    version: 8.0
+    version: 8.2
 ```
+
+A list of the [versions of Xcode that we have available is located on GitHub](circleci.github.io/macos-image-tests/).
 
 ### CocoaPods
 

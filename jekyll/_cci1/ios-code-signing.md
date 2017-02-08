@@ -201,7 +201,7 @@ All you have to add to your `Fastfile`:
 lane :beta do
   sigh
   gym
-  
+
   # You can use any beta testing service below:
   pilot # (TestFlight)
   crashlytics
@@ -214,7 +214,7 @@ end
 
 `fastlane` will automatically pass on information about the `.ipa` file from
 `gym` to the beta testing service of your choice, so you don't have to manually
-provide a path to the `.ipa` and `.dsym` file. 
+provide a path to the `.ipa` and `.dsym` file.
 
 ## Troubleshooting
 
@@ -310,7 +310,7 @@ doing something like the following:
 
 ### What Does "Install Code Signing Credentials" Do?
 
-The "Install Code Signing Credentials" step of OSX builds is where we
+The "Install Code Signing Credentials" step of macOS builds is where we
 prepare the container for code-signing before your builds runs.
 
 1. We create a new keychain called `circle.keychain` with password

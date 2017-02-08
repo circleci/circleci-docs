@@ -12,7 +12,7 @@ Jenkins is a very popular open-source CI tool, so many users that are new to Cir
 CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD (see [High-Level Differences]({{ site.baseurl }}/migrating-from-jenkins/#high-level-differences) below), but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. If you just want to jump in and get started, try one of these three options:
 
 
-1. **Inference:** Follow your project on CircleCI [link to instructions] and run a build without any custom configuration. CircleCI infers what build and test steps need to be run based on your project’s structure, so everything may work just fine automatically. If the inferred steps mostly work, then you can just add a couple [tweaks]({{ site.baseurl }}/configuration/). 
+1. **Inference:** Follow your project on CircleCI [link to instructions] and run a build without any custom configuration. CircleCI infers what build and test steps need to be run based on your project’s structure, so everything may work just fine automatically. If the inferred steps mostly work, then you can just add a couple [tweaks]({{ site.baseurl }}/configuration/).
 
 2. **Copy-paste your commands from “Execute Shell”:** If you really want to simply duplicate your project exactly as it is in Jenkins, then you can add a file called `circle.yml` to the root of your project with the following content:
     <pre>
@@ -90,7 +90,7 @@ Talking about containerization in build systems can be complicated because arbit
   Jenkins normally runs your build in an ordinary directory on the build server, which can cause lots of issues with dependencies, files, and other state gathering on the server over time. There are plugins that offer alternatives, but they must be manually installed.
 
 
-  CircleCI runs all Linux builds in dedicated containers, which are destroyed immediately after use (OSX builds run in single-use VMs). This creates a fresh environment for every build, preventing unwanted cruft from getting into builds. One-off environments also promote a disposable mindset that ensures all dependencies are documented in code and prevents “snowflake” build servers.
+  CircleCI runs all Linux builds in dedicated containers, which are destroyed immediately after use (macOS builds run in single-use VMs). This creates a fresh environment for every build, preventing unwanted cruft from getting into builds. One-off environments also promote a disposable mindset that ensures all dependencies are documented in code and prevents “snowflake” build servers.
 
 
   If you run builds on your own hardware with [CircleCI Enterprise](https://circleci.com/enterprise/), running all builds in containers allows you to heavily utilize the hardware available to run builds.

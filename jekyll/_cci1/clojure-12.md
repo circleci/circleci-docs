@@ -10,7 +10,7 @@ This is caused by using jars that were AOT compiled against
 offender is clojure-contrib, which is not compatible with
 Clojure 1.3+.
 
-If this works on your (OSX) machine but fails on CircleCI, it also
+If this works on your (macOS) machine but fails on CircleCI, it also
 means you are running two different clojure versions at the same
 time.
 
