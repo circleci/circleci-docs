@@ -1,86 +1,82 @@
-- name: "Getting Started"
+## Here's how Categories work in CircleCI Docs
+#
+# - section: cci2                # mandatory - corresponds to the Jekyll collection this category is for
+#   slug: getting-started        # mandatory - lower-case, no spaces, unique within section, filename of the category's page: `_collection/<slug>.md`
+#   name: "Getting Started"      # mandatory - human version of category slug, how the category name is displayed on the website
+#   index: gettingstarted        # optional - alternate to slug for category page, filename of the category's page: `_collection/<index>.md`, exclusively for cci1 docs
+#   icon: "gettingstarted.svg"   # optional - filename for icon, located at `/assets/img/icons/<icon>`. Used for cci1 docs exclusively
+
+##
+# CircleCI 1.0 Docs
+##
+- section: cci1
   slug: getting-started
+  name: "Getting Started"
   index: gettingstarted
-  icon: "/docs/assets/img/icons/gettingstarted.svg"
-  section: cci1
+  icon: "gettingstarted.svg"
 
-- name: "Build Images"
+- section: cci1
   slug: build-images
-  index: build-images
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci1
+  name: "Build Images"
+  icon: "build-images.svg"
 
-- name: "Languages"
+- section: cci1
   slug: languages
-  index: languages
-  icon: "/docs/assets/img/icons/languages.svg"
-  section: cci1
+  name: "Languages"
+  icon: "languages.svg"
 
-- name: "Mobile Platforms"
+- section: cci1
   slug: mobile-platforms
+  name: "Mobile Platforms"
   index: mobile
-  icon: "/docs/assets/img/icons/mobile.svg"
-  section: cci1
+  icon: "mobile.svg"
 
-- name: "How-To"
+- section: cci1
   slug: how-to
-  index: how-to
-  icon: "/docs/assets/img/icons/how-to.svg"
-  section: cci1
+  name: "How-To"
+  icon: "how-to.svg"
 
-- name: "Troubleshooting"
+- section: cci1
   slug: troubleshooting
-  index: troubleshooting
-  icon: "/docs/assets/img/icons/troubleshooting.svg"
-  section: cci1
+  name: "Troubleshooting"
+  icon: "troubleshooting.svg"
 
-- name: "Reference"
+- section: cci1
   slug: reference
-  index: reference
-  icon: "/docs/assets/img/icons/reference.svg"
-  section: cci1
+  name: "Reference"
+  icon: "reference.svg"
 
-- name: "Parallelism"
+- section: cci1
   slug: parallelism
-  index: parallelism
-  icon: "/docs/assets/img/icons/parallelism.svg"
-  section: cci1
+  name: "Parallelism"
+  icon: "parallelism.svg"
 
-- name: "Privacy and Security"
+- section: cci1
   slug: privacy-and-security
+  name: "Privacy and Security"
   index: privacy-security
-  icon: "/docs/assets/img/icons/privacy-security.svg"
-  section: cci1
+  icon: "privacy-security.svg"
 
-- name: "Getting Started"
+
+##
+# CircleCI Enterprise  Docs
+##
+- section: ccie
   slug: documentation
-  index: documentation
-  section: enterprise
+  name: "Getting Started"
 
-- name: "Clustered Installation"
+- section: ccie
   slug: installation
-  index: installation
-  section: enterprise
+  name: "Clustered Installation"
 
-- name: "Resources"
+- section: ccie
   slug: resources
-  index: resources
-  section: enterprise
+  name: "Resources"
 
-- name: "Advanced Configuration"
+- section: ccie
   slug: advanced-config
-  index: advanced-config
-  section: enterprise
+  name: "Advanced Configuration"
 
-- name: "Troubleshooting"
+- section: ccie
   slug: troubleshooting
-  index: troubleshooting
-  section: enterprise
-
-
-# CCI2 Categories
-- name: "Getting Started"
-  slug: "getting-started"
-  index: getting-started
-  icon: "/docs/assets/img/icons/build-images.svg"
-  section: cci2
+  name: "Troubleshooting"
