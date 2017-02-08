@@ -3,7 +3,7 @@ layout: enterprise-cat
 ---
 
 {% for category in site.data.categories %}
-{% if category.section == "enterprise"  %}
+{% if category.section == "ccie"  %}
 <div class="category-section">
 <!-- 	<img src="{{ category.icon }}" class="../logo" alt="Category Icon" />
  -->	<h2>{{ category.name }}</h2>
@@ -11,7 +11,7 @@ layout: enterprise-cat
 	{% assign docs_found = 0 %}
 	{% assign sorted = site.docs | sort: 'order' %}
 	{% for doc in sorted %}
-		{% if doc.categories contains category.slug and doc.slug != category.index and doc.hide != true  and doc.section == "enterprise" %}
+		{% if doc.categories contains category.slug and doc.slug != category.slug and doc.hide != true  and doc.section == "enterprise" %}
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if docs_found < 4 %}
 					{% if doc.short-title %}
@@ -25,7 +25,7 @@ layout: enterprise-cat
 
 	{% if docs_found > 3 %}
 		{% assign more = docs_found | minus: 3 %}
-		<li><em><a href="{{ site.baseurl }}/enterprise/{{ category.index }}/">{{ more }} more</a></em></li>
+		<li><em><a href="{{ site.baseurl }}/enterprise/{{ category.slug }}/">{{ more }} more</a></em></li>
 	{% endif %}
 	</ul>
 </div>

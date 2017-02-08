@@ -1,0 +1,12 @@
+---
+layout: classic-docs
+---
+{% assign category = page.categories[0] %}
+{% assign sortedDocs = site.documents | where:"collection",page.collection | sort: 'order' %}
+<ul class="list-unstyled">
+{% for doc in sortedDocs %}
+	{% if doc.categories contains category and doc.slug != page.slug and doc.hide != true %}
+		<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
+	{% endif %}
+{% endfor %}
+</ul>
