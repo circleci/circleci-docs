@@ -66,12 +66,13 @@ If you are configuring network security, please ensure you whitelist the followi
 
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
-```bash
-$ curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services-2.0.sh
-$ sudo bash init-services.sh
+```
+curl -sSL https://get.replicated.com/docker > install.sh
+sudo chmod +x install.sh
+sudo ./install.sh
 ```
 
-Please follow the steps suggested by the script.  Once the scripts finish provisioning, you should go to the System Console at port 8800 to configure the instance with GitHub.
+Once the script finishes provisioning, you should navigate to <public-ip-address : 8800 > to finish the installation.
 
 ### 2. Builder instances
 
