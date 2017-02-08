@@ -18,6 +18,7 @@ function start {
 	fi
 
 	# Building and serving is done separate to provide more feedback. nohup blocks errors.
+	vagrant ssh -c "rm -rf /vagrant/jekyll/_site"
 	echo "Building with jekyll..."
 	vagrant ssh -c "jekyll build --incremental -s /vagrant/jekyll -d /vagrant/jekyll/_site"
 	echo "Site built, now starting the server in the background..."
