@@ -15,6 +15,5 @@ To apply the new setting, you will need to trigger a build by pushing commits to
 
 ## Software
 
-We maintain a [manifest of the software installed on our macOS images on GitHub](https://circleci.github.io/macos-image-tests/).
-
+We maintain a [manifest of the software installed on our macOS images on GitHub]({{ site.macos_manifest_url }}).
 

@@ -8,7 +8,7 @@ description: "How to enable and monitor CloudWatch for CircleCI Enteprise."
 ---
 
 
-_NOTE: CloudWatch does not currently work to monitor OS X containers_
+_NOTE: CloudWatch does not currently work to monitor macOS containers_
 
 
 ## Enabling

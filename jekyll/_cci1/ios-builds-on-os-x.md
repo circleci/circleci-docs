@@ -1,27 +1,27 @@
 ---
 layout: classic-docs
-title: Test iOS applications on OS X
-short-title: iOS builds on OS X
+title: Test iOS applications on macOS
+short-title: iOS builds on macOS
 categories: [mobile-platforms]
-description: Testing iOS applications on OS X
+description: Testing iOS applications on macOS
 ---
 
-CircleCI now offers support for building and testing iOS and OS X projects.
-You can select an OS X project you would like to build on the [Add
+CircleCI offers support for building and testing iOS and macOS projects.
+You can select a macOS project you would like to build on the [Add
 Projects page](https://circleci.com/add-projects).
 
 If you're unable to find your project in the "OS X" tab, it may be listed as a
 "Linux" project. After adding your project as a "Linux" build, you can change
-it to an OS X build by enabling the "Build OS X project" option under the
+it to an macOS build by enabling the "Build OS X project" option under the
 "Project Settings" > "Build Environment" page.
 
 ## Software Versions
 
-We maintain a [manifest of the software installed on our macOS image on GitHub](https://circleci.github.io/macos-image-tests/).
+We maintain a [manifest of the software installed on our macOS image on GitHub]({{ site.macos_manifest_url }}.
 
 ## Basic setup
 
-After enabling the OS X builds for your project, you will need to share
+After enabling macOS builds for your project, you will need to share
 the scheme that is going to be built on CircleCI so that we run the
 correct build actions. Here is how to share an existing scheme in Xcode:
 
@@ -66,7 +66,7 @@ machine:
     version: 8.2
 ```
 
-A list of the [versions of Xcode that we have available is located on GitHub](circleci.github.io/macos-image-tests/).
+A list of the [versions of Xcode that we have available is located on GitHub]({{ site.macos_manifest_url }}).
 
 ### CocoaPods
 
@@ -131,7 +131,7 @@ also have a lot of flexibility to customize what happens in your build.
 ### Build Commands
 CircleCI runs tests from the command line with the [`xcodebuild`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html)
 command by default. This is a tool developed by Apple, and we find it to be the most
-stable and functional option for building and testing your OS X project.
+stable and functional option for building and testing your macOS project.
 
 CircleCI will try to automatically build your iOS project by infering the
 workspace, project and scheme. In some cases, you may need to override the
@@ -156,7 +156,7 @@ test:
 ```
 
 The destination can be selected from the simulators [pre-installed in our
-build image](#available-simulators).
+build image]({{ site.macos_manifest_url }}).
 
 In some situations you might also want to build with [`xctool`](https://github.com/facebook/xctool),
 an alternative build tool. Please mind that some of the `xcodebuild` functionality might not be
@@ -205,8 +205,8 @@ The most flexible means to customize your build is to add a `circle.yml` file to
 which allows you to run arbitrary bash commands instead of or in addition to the inferred commands
 at various points in the build process. See the [configuration doc]({{ site.baseurl }}/configuration/) for
 a detailed discussion of the structure of the `circle.yml` file. Note, however, that
-a number of options discussed in that doc will not work for OS X builds.
-Please see the [the Constraints section](#constraints-on-os-x-based-builds) for the
+a number of options discussed in that doc will not work for macOS builds.
+Please see the [the Constraints section](#Constraints-on-macos-based-builds) for the
 exact commands that are not supported.
 
 ### Custom packages
@@ -366,7 +366,7 @@ projects. Here are the most frequent of those:
 * **Timeout waiting for simulator.** If you see your test command
   failing with errors similar to this:
 
-* **Can't add my project as OS X build.** If you are trying to add an OS X
+* **Can't add my project as macOS build.** If you are trying to add an macOS
   project from the ["add-project"](https://circleci.com/add-projects) page, but you don't see your
   project under the "OS X" tab, you can first add your project as a "Linux"
   build — and then switch it to an "OS X" build by going to the "Project
@@ -410,12 +410,12 @@ Many iOS app developers use tools that generate substantial amounts of code. In 
 cases CircleCI's inference may not correctly detect the Xcode workspace, project, or
 scheme. Instead, you can specify these through [environment variables](#environment-variables).
 
-### Constraints on OS X-based builds
+### Constraints on macOS-based builds
 There are a few features normally available on CircleCI's standard
-Linux containers that are not available for OS X builds at the moment:
+Linux containers that are not available for macOS builds at the moment:
 
 * Parallelism is not supported
-* While the general `circle.yml` file structure will be honored in OS X-based builds
+* While the general `circle.yml` file structure will be honored in macOS-based builds
 [configuration options]({{ site.baseurl }}/configuration/), the following sections of
 `circle.yml` will not work correctly:
   * `machine: services`

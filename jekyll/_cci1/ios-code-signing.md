@@ -41,7 +41,7 @@ The debug symbols file will be used by your distribution service of choice
 to produce call-stacks helping you to debug any crashes in your app that
 testers encounter.
 
-### OS X circle Keychain
+### macOS circle Keychain
 When signing an app, Xcode will look in any
 [keychains](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/security.1.html)
 on the machine to find the necessary code-signing credentials. CircleCI
@@ -57,7 +57,7 @@ before your build begins. Any futher credentials that you add to this
 keychain will be available to Xcode.
 
 ### 1. Install Fastlane tools locally
-This guide assumes that you are developing on a Mac running OS X. The
+This guide assumes that you are developing on a Mac running macOS. The
 first step is to install the Fastlane tools. If you are using the
 system Ruby, you can install using
 

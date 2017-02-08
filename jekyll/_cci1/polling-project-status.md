@@ -38,7 +38,7 @@ tokens are very powerful, so only do that in a trusted environment!
 Here are some of the desktop tools we support through this standard:
 
 *   [CCMenu](http://ccmenu.sourceforge.net/):
-an OS X menu bar plugin.
+an macOS menu bar plugin.
 
 *   [BuildNotify](https://bitbucket.org/Anay/buildnotify/wiki/Home):
 a GNU/Linux system tray plugin.

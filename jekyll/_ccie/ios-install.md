@@ -4,7 +4,7 @@ section: enterprise
 title: "iOS Install"
 category: [resources]
 order: 0
-description: "Adding OS X and iOS support to your CircleCI Enterprise installation."
+description: "Adding macOS and iOS support to your CircleCI Enterprise installation."
 hide: true
 ---
 
@@ -74,7 +74,7 @@ user=>
 (let [;; User configuration
       host-ip-address  "XX.XX.XX.XX" ;; The host  ip address CircleCI provides
       guest-ip-address "XX.XX.XX.XX" ;; The guest ip address CircleCI provides
-      supported-versions "X.X,X.X" ;; list of Xcode versions on your OS X fleet
+      supported-versions "X.X,X.X" ;; list of Xcode versions on your macOS fleet
 
       path-to-public-key "/home/ubuntu/XXXXXX"
       path-to-private-key "/home/ubuntu/XXXXXX"
@@ -87,7 +87,7 @@ user=>
          {:public-key (slurp path-to-public-key)
           :private-key (slurp path-to-private-key)}))
           fleet "osx"]
-          
+
 
   (circle.backend.model.esxi-vm/run-migrations!) ;; Safe to run multiple times
   (circle.backend.model.esxi-vm/create-esxi-box

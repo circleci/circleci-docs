@@ -26,5 +26,5 @@ dependencies:
 
 This will launch the simulator just like it would if you'd hit `CMD + R` on your machine in Xcode, and once your tests are supposed to start the iOS simulator is immediately available.
 
-You can find the full list of simulators that are available in our OS X
-image [here]({{site.baseurl}}/ios-builds-on-os-x/#available-simulators).
+You can find the full list of simulators that are available in our macOS
+image [here]({{ site.macos_manifest_url }}).
