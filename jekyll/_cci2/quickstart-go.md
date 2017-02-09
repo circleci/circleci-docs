@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Quickstart Guide: Go"
 short-title: "Go"
-categories: [language-guides]
+categories: [quickstart-guides]
 ---
 
 This guide should help get you started with a Go project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.
