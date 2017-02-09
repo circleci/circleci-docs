@@ -101,3 +101,8 @@ This runs the trigger_nightly_build.sh script at 30 minutes past midnight (check
 It reads the CircleCI API token from `/home/ubuntu/.circle_token` and sends any output from the script to syslog via `logger`.
 
 Note the use of full paths for all binaries, cronjobs aren't run with your normal environment so it's a good idea to always specify full paths.
+
+### Alternative serverless.com approach
+
+If you are into serverless.com then following is a simple alternative to seeing up things on cron:
+https://github.com/godfreyhobbs/circleci-cron-serverless
