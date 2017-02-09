@@ -3,15 +3,14 @@
 	<ul class="list-unstyled">
 	{% capture sidebar %}
 
-
-	{% if page.url contains "enterprise" %}
+	{% if page.collection == "ccie" %}
 			<p>Looking for non-enterprise docs? <a href="{{ site.baseurl }}/">CircleCI.com Docs</a></p>
 		{% for category in site.data.categories %}
 		{% if category.section == "ccie" %}
                         <li><a href="{{ site.baseurl }}/enterprise/{{ category.slug }}/">{{ category.name }}</a>
                                 <ul class="list-unstyled">
-                                {% assign sorted = (site.docs | sort: 'order') %}
-                                {% for doc in sorted %}
+								{% assign sortedDocs = site.documents | where:"collection",page.collection | sort: 'order' %}
+                                {% for doc in sortedDocs %}
                                         {% if doc.categories contains category.slug and doc.slug != category.slug and doc.hide != true and doc.section == "enterprise" %}
                                                 {% if doc.short-title %}
                                                         {% assign title = doc.short-title %}

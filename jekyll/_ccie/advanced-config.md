@@ -1,5 +1,5 @@
 ---
-layout: classic-category
+layout: category-page
 section: enterprise
 title: Advanced Configuration
 categories: [advanced-config]

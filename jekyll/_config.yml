@@ -17,6 +17,10 @@ collections:
   docs:
     output: true
     permalink: /:path/
+  ccie:
+    output: true
+    permalink: /enterprise/:path/
+    prefix: enterprise
 
 twitter_username: circleci
 github_username:  circleci
