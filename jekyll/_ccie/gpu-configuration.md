@@ -7,7 +7,7 @@ order: 6
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
-#GPU Install Instructions 
+## GPU Install Instructions 
 
 The following steps are the same whether you have an LXC based builder or a Docker based builder. They diverge later on.
 
@@ -15,7 +15,10 @@ The following steps are the same whether you have an LXC based builder or a Dock
 
 
 
-2.)```sudo apt-get install -y linux-image-extra-`uname -r` linux-headers-`uname -r` linux-image-`uname -r`
+2.)
+
+```
+sudo apt-get install -y linux-image-extra-`uname -r` linux-headers-`uname -r` linux-image-`uname -r`
 ```
 
 
@@ -29,7 +32,7 @@ sudo apt-get update
 sudo apt-get --yes --force-yes install cuda
 ```
 
-##Docker
+### Docker
 
 1.) Using our image builder, add this to the dockerfile of the image you wish to build
 
@@ -112,7 +115,7 @@ In your GPU Circle Project add the following under your enviroment variables
 
 Name: `PATH`
 
-Key: ` /usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH`
+Key: `/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH`
 
 Name: `LD_LIBRARY_PATH` 
 
@@ -130,7 +133,7 @@ See here for a working sample project
     https://github.com/GERey/Sample-GPU-Project
     
     
-##LXC
+### LXC
 
 This is only supported in releases after ( 1.47.0 +). If you need help upgraging, please reachout to enterprise-support@circleci.com
 
@@ -188,7 +191,7 @@ sudo -E \
 
 
 
-10.) In your circle.yml/image you'll want to do the following 
+11.) In your circle.yml/image you'll want to do the following 
 
     - wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
     - sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
