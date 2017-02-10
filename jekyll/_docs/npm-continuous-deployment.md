@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
-title: "Continuous deployment with npm"
-description: "How to configure CircleCI to publish packages to npmjs.org automatically"
+title: "Continuous Deployment with npm"
+description: "How to configure CircleCI to publish packages to npmjs.org automatically."
 ---
 
-Setting up CircleCI to publish packages to the npm registry makes it easy
-for project collaborators to release new package versions in a consistent
-and predictable way.
+Setting up CircleCI to publish packages to the npm registry makes it easy for project collaborators to release new package versions in a consistent and predictable way.
 
-1.  Obtain the npm authToken for the account that you wish to use to publish
-    the package.
+1.  Obtain the npm authToken for the account that you wish to use to publish the package.
 
     You can do that by logging in to npm (`npm login`). This will save the
     authToken to the `~/.npmrc` file. Look for the following line:
@@ -41,8 +38,7 @@ and predictable way.
           - npm publish
     ```
 
-5.  When you want to publish a new version to npm, run `npm version` to create
-    a new version:
+5.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
     ```
     npm version 10.0.1
