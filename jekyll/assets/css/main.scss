@@ -56,24 +56,12 @@ nav.sidebar{
 		margin: 0;
 		padding: 0 1em;
 	}
-}
-	#search-results{
-		position: absolute;
-		top: 54%;
-		right: 10%;
-		left: 10%;
+
+	.algolia-autocomplete {
+		width: 100%;
 	}
-		#search-results li span{
-			padding: 3px 20px;
-		}
-		#search-results li div{
-			padding: 3px 20px;
-			font-size: 0.8em;
-		}
-// Algolia fix
-.algolia-autocomplete {
-	width: 100%;
 }
+
 
 // Article
 div.article-container{
