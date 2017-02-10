@@ -131,7 +131,7 @@ installing your APK on the emulator. Note however that `adb shell`
 
 - `adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $CIRCLE_ARTIFACTS/screen-$(date +"%T").png`
   to take a screenshot of the emulator and store it as a build artifact.
-- `adb shell input keyevent 82` to unlock the emulator, but see the
+- `adb shell input touchscreen swipe 370 735 371 735` to unlock the emulator, but see the
   next paragraph
 
 
