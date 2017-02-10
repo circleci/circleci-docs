@@ -2,7 +2,7 @@
 layout: null
 ---
 {
-	{% for doc in site.docs %}
+	{% for doc in site.cci1 %}
 	{% unless doc.hide == true %}
 		"{{ doc.url | slugify }}":{
 			"title": "{{ doc.title | xml_escape }}",

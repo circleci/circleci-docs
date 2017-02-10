@@ -11,7 +11,7 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for doc in site.docs limit:10 %}
+    {% for doc in site.cci1 limit:10 %}
       <item>
         <title>{{ doc.title | xml_escape }}</title>
         <description>{{ doc.content | xml_escape }}</description>
