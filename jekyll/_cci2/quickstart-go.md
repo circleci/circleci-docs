@@ -9,6 +9,8 @@ This guide should help get you started with a Go project on CircleCI 2.0. This w
 
 If you want to follow along, fork our [example Go app](https://github.com/circleci/cci-demo-go) and add the project through CircleCI. Once you’ve done that, create an empty `.circleci/config.yml` in your project’s root.
 
+Enough talk, let’s get started!
+
 ---
 
 We always start with the version.
