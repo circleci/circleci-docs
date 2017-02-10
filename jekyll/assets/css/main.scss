@@ -70,7 +70,10 @@ nav.sidebar{
 			padding: 3px 20px;
 			font-size: 0.8em;
 		}
-
+// Algolia fix
+.algolia-autocomplete {
+	width: 100%;
+}
 
 // Article
 div.article-container{
