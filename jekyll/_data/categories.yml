@@ -94,13 +94,9 @@
   name: "Configuring CircleCI"
 
 - section: cci2
-  slug: language-guides
-  name: "Language Guides"
+  slug: quickstart-guides
+  name: "Quickstart Guides"
 
 - section: cci2
-  slug: integrations
-  name: "Integrations"
-
-- section: cci2 
   slug: reference
   name: "Reference"
