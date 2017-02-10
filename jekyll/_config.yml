@@ -15,12 +15,17 @@ kramdown:
 
 collections:
   cci1:
+    name: "1.0 Docs"
     output: true
     permalink: /:path/
+    prefix: ""
+    selectorName: "1.0"
   ccie:
+    name: "Enterprise Docs"
     output: true
     permalink: /enterprise/:path/
-    prefix: enterprise
+    prefix: "/enterprise"
+    selectorName: "Enterprise"
 
 twitter_username: circleci
 github_username:  circleci
