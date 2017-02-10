@@ -70,10 +70,12 @@ You could install NPM, but we’re going to use Yarn for reasons that are outsid
 
 Let's restore the Yarn package cache if it's available.
 
+{% raw %}
 ```yaml
       - cache-restore:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
+{% endraw %}
 
 Install both Yarn and Python dependencies.
 
@@ -87,12 +89,14 @@ Install both Yarn and Python dependencies.
 
 Specify where to save that Yarn cache.
 
+{% raw %}
 ```yaml
       - cache-save:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "/home/ubuntu/.yarn-cache"
 ```
+{% endraw %}
 
 Run our tests.
 
@@ -118,6 +122,7 @@ Finally, let's specify where those test results are actually located.
 
 And we're done! Let's see what the whole `circle.yml` looks like now:
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -160,6 +165,7 @@ jobs:
       - test_results_store:
           path: "test-reports/"
 ```
+{% endraw %}
 
 Nice! You just set up CircleCI for a Flask app. Check out our project’s corresponding build on CircleCI [here](https://circleci.com/gh/circleci/cci-demo-flask).
 
