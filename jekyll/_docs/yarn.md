@@ -8,7 +8,7 @@ description: "How to use the Yarn package manager on CircleCI."
 
 <img src="{{site.baseurl}}/assets/img/logos/yarn-logo.svg" style="display:block;margin:15px auto;width:40%;min-width:320px;" alt="Yarn Logo" />
 
-[Yarn][yarn-site] is an open-source package manager for JavaScript. Yarn is pre-installed on CircleCI and the packages it installs can be cached. This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
+[Yarn][yarn-site] is an open-source package manager for JavaScript. Yarn is pre-installed on CircleCI's Ubuntu 14.04 base image and the packages it installs can be cached. This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
 
 [yarn-site]: https://yarnpkg.com/
 
@@ -18,7 +18,7 @@ description: "How to use the Yarn package manager on CircleCI."
 
 ## Setup
 
-When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections.
+When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections. Make sure your project is configured to use the Ubuntu 14.04 base image otherwise yarn will not be available.
 
 ```yaml
 dependencies:
