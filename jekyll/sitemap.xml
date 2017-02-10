@@ -2,7 +2,7 @@
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{% for doc in site.docs %}
+{% for doc in site.cci1 %}
 	{% unless doc.deprecated %}
 		<url>
 			<loc>{{ doc.url | prepend: site.baseurl | prepend: site.url }}</loc>

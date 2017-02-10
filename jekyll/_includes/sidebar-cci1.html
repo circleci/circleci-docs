@@ -40,7 +40,7 @@
 		{% endif %}
                 <li><a href="{{ site.baseurl }}/{{ catFile }}/">{{ category.name }}</a>
                         <ul class="list-unstyled">
-                        {% for doc in site.docs %}
+                        {% for doc in site.cci1 %}
                                 {% if doc.categories contains category.slug and doc.slug != catFile and doc.hide != true and doc.section == "cci1" %}
                                         {% if doc.short-title %}
                                                 {% assign title = doc.short-title %}

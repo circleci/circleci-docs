@@ -14,7 +14,7 @@ kramdown:
   input: GFM
 
 collections:
-  docs:
+  cci1:
     output: true
     permalink: /:path/
   ccie:
