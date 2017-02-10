@@ -4,7 +4,7 @@ layout: classic-docs
 
 <ul class="list-unstyled">
 {% for child in page.children %}
-	{% for doc in site.docs %}
+	{% for doc in site.cci1 %}
 		{% if child == doc.slug %}
 			<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
 		{% endif %}
