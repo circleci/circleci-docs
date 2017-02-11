@@ -66,6 +66,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [Maven Surefire]({{ site.baseurl }}/test-metadata/#maven-surefire-plugin-for-java-junit-results)
 * [Gradle]({{ site.baseurl }}/test-metadata/#gradle-junit-results)
 * [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
+* [Ava]({{site.baseurl}}/test-metadata/#ava)
 * [PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit)
 * [RSpec]({{ site.baseurl }}/test-metadata/#rspec)
 * [test2junit]({{ site.baseurl }}/test-metadata/#test2junit-for-clojure-tests)
@@ -133,6 +134,21 @@ test:
     - mocha test --reporter mocha-junit-reporter:
         environment:
           MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+```
+
+
+
+#### <a name="ava"></a>Ava for Node.js
+
+To output junit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit) 
+
+A working [circle.yml]({{ site.baseurl }}/configuration/) section for testing might look like this:
+
+```
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/reports
+    - ava --tap | tap-xunit > $CIRCLE_TEST_REPORTS/reports/ava.xml
 ```
 
 
