@@ -4,7 +4,7 @@
 	Section: 
 	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
 	{% for collection in site.collections %}
-	{% if collection.label == "posts" %}{% continue %}{% endif %}
+	{% if collection.label == "posts" or collection.selectorName == false %}{% continue %}{% endif %}
 		<option value="{{ site.baseurl }}{{ collection.prefix }}/" {% if collection.label == section.label %}selected{% endif %}>{{ collection.selectorName }}</option>
 	{% endfor %}
 	</select>
