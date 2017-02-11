@@ -26,6 +26,12 @@ collections:
     permalink: /enterprise/:path/
     prefix: "/enterprise"
     selectorName: "Enterprise"
+  cci2:
+    name: "2.0 Docs"
+    output: true
+    permalink: /2.0/:path/
+    prefix: "/2.0"
+    selectorName: false
 
 twitter_username: circleci
 github_username:  circleci

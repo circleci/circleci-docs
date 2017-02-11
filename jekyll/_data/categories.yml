@@ -80,3 +80,23 @@
 - section: ccie
   slug: troubleshooting
   name: "Troubleshooting"
+
+
+##
+# CircleCI 2.0 Docs
+##
+- section: cci2
+  slug: getting-started
+  name: "Getting Started"
+
+- section: cci2
+  slug: configuring-circleci
+  name: "Configuring CircleCI"
+
+- section: cci2
+  slug: quickstart-guides
+  name: "Quickstart Guides"
+
+- section: cci2
+  slug: reference
+  name: "Reference"
