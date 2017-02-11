@@ -140,11 +140,14 @@ test:
 
 #### <a name="ava"></a>Ava for Node.js
 
-To output junit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit) 
+To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
 A working [circle.yml]({{ site.baseurl }}/configuration/) section for testing might look like this:
 
 ```
+dependencies:
+  override:
+    - yarn add ava tap-xunit --dev # or you could use npm
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/reports
