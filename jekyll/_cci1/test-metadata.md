@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Collecting test metadata
 categories: [how-to]
-description: Collecting test metadata
+description: "Collecting test metadata"
 ---
 
 CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
