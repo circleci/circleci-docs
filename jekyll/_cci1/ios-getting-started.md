@@ -14,11 +14,13 @@ By default, we build projects on Linux, so you’ll need to enable macOS for you
 
 ## Assumptions and prerequisites
 
-When we run your project on macOS, we check for and validate the presence of:
+For our infererence to test your Xcode project, we check for and validate the presence of:
 
 - an Xcode workspace/project
 - with at least one shared scheme
 - and that the selected scheme has a test action
+
+If none of these are present, then we will not infer any Xcode related `test` commands for your project.
 
 ### Sharing Schemes
 
