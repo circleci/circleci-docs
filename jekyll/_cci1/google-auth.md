@@ -54,7 +54,7 @@ step is to decode it in your build script and use it to authenticate the
 `gcloud` tool. Here is an example of how to do that:
 
 ```
-echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
 ```
 
 To use certain services such as Google Cloud Datastore, you will need to set the environment variable
