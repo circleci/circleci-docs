@@ -1,0 +1,26 @@
+We use GitHub's labels to organize work on docs.
+
+Each issue will have 2 labels: Status & Type.
+
+## Status
+Status labels give information about how work is progressing on a given issue. The status labels we use are:
+
+Status: Abandoned
+Status: Available
+Status: Blocked
+Status: Completed
+Status: In Progress
+Status: On Hold
+Status: Review Needed
+Status: Revision Needed
+
+## Type
+Type labels give information about the kind of issue:
+
+Type: Enhancement
+Type: Inaccuracy
+Type: Question
+Type: Structure
+Type: Typo
+
+To create our label system, we borrowed liberally from this article about [sane GitHub labels](https://medium.com/@dave_lunny/sane-github-labels-c5d2e6004b63#.c2sqrwkkg).
