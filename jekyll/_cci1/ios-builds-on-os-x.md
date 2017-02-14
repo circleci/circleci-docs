@@ -17,7 +17,7 @@ it to an macOS build by enabling the "Build OS X project" option under the
 
 ## Software Versions
 
-We maintain a [manifest of the software installed on our macOS image on GitHub]({{ site.macos_manifest_url }}.
+We maintain a [manifest of the software installed on our macOS image on GitHub]({{ site.macos_manifest_url }}).
 
 ## Basic setup
 
