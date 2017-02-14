@@ -29,9 +29,9 @@ other credentials.
 
 ## Adding the Service Account to the CircleCI environment
 
-Once the Service Account is created, the next step is to add it as an 
-environment variable to your CircleCI environment. First, you'll need to encode 
-it in base64 format. To do so, on Linux or OS X, type:
+Once the Service Account is created, the next step is to add it as an
+environment variable to your CircleCI environment. First, you'll need to encode
+it in base64 format. To do so, on Linux or macOS, type:
 
 ```
 base64 <your-service-account.json>

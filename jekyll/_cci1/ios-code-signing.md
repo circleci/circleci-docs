@@ -41,7 +41,7 @@ The debug symbols file will be used by your distribution service of choice
 to produce call-stacks helping you to debug any crashes in your app that
 testers encounter.
 
-### OS X circle Keychain
+### macOS circle Keychain
 When signing an app, Xcode will look in any
 [keychains](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/security.1.html)
 on the machine to find the necessary code-signing credentials. CircleCI
@@ -57,7 +57,7 @@ before your build begins. Any futher credentials that you add to this
 keychain will be available to Xcode.
 
 ### 1. Install Fastlane tools locally
-This guide assumes that you are developing on a Mac running OS X. The
+This guide assumes that you are developing on a Mac running macOS. The
 first step is to install the Fastlane tools. If you are using the
 system Ruby, you can install using
 
@@ -201,7 +201,7 @@ All you have to add to your `Fastfile`:
 lane :beta do
   sigh
   gym
-  
+
   # You can use any beta testing service below:
   pilot # (TestFlight)
   crashlytics
@@ -214,7 +214,7 @@ end
 
 `fastlane` will automatically pass on information about the `.ipa` file from
 `gym` to the beta testing service of your choice, so you don't have to manually
-provide a path to the `.ipa` and `.dsym` file. 
+provide a path to the `.ipa` and `.dsym` file.
 
 ## Troubleshooting
 
@@ -310,7 +310,7 @@ doing something like the following:
 
 ### What Does "Install Code Signing Credentials" Do?
 
-The "Install Code Signing Credentials" step of OSX builds is where we
+The "Install Code Signing Credentials" step of macOS builds is where we
 prepare the container for code-signing before your builds runs.
 
 1. We create a new keychain called `circle.keychain` with password

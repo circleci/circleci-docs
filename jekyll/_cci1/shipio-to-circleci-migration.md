@@ -57,7 +57,7 @@ You can add to or override our inferred commands through your Project Settings o
 We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-continuous-delivery-for-ios-with-fastlane-and-circleci-c7dae19df2ed).
 
 ### Get more help
-* [OS X build docs]({{ site.baseurl }}/ios-builds-on-os-x/)
+* [macOS build docs]({{ site.baseurl }}/ios-builds-on-os-x/)
 * [discuss.circleci.com](https://discuss.circleci.com/c/mobile)
 * [CircleCI Support](mailto:support@circleci.com)
 

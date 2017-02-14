@@ -61,7 +61,7 @@ example.
 
 VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless &mdash; there is nothing to interact with.
 
-Before you start, make sure you have a VNC viewer installed. If you're using OSX, we recommend
+Before you start, make sure you have a VNC viewer installed. If you're using macOS, we recommend
 [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
@@ -116,7 +116,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-Before you start, make sure you have an X Window System on your computer. If you're using OSX, we recommend
+Before you start, make sure you have an X Window System on your computer. If you're using macOS, we recommend
 [XQuartz](http://xquartz.macosforge.org/landing/).
 
 With X set up on your system, [start an SSH build]({{site.baseurl}}/ssh-build/)
@@ -147,7 +147,7 @@ Now you can run your integration tests from the command line and watch the brows
 ### VNC Viewer Recommendations
 
 Some of our customers have had some VNC clients perform poorly and
-others perform well.  Particuarly, on OS X, RealVNC produces a better
+others perform well.  Particuarly, on macOS, RealVNC produces a better
 image than Chicken of the VNC.
 
 If you have had a good or bad experience with a VNC viewer,

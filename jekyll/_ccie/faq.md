@@ -51,6 +51,6 @@ SSH into the builder box you are ready to shutdown and run:
 $ echo '(circle.backend.system/graceful-shutdown)` | lein repl :connect 6005
 ```
 
-#### Can I run iOS/OS X builds like on circleci.com?
+#### Can I run iOS/macOS builds like on circleci.com?
 
-We currently provide limited, early access for iOS builds on CircleCI Enterprise that run on our own cloud of OS X machines. Contact <enterprise-support@circleci.com> for more information.
+We currently provide limited, early access for iOS builds on CircleCI Enterprise that run on our own cloud of macOS machines. Contact <enterprise-support@circleci.com> for more information.
