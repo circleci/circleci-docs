@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "CircleCI 2.0 FAQ"
 short-title: "FAQ"
-categories: [configuring-circleci]
+categories: [getting-started]
 ---
 
 ## FAQ
