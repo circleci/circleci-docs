@@ -49,10 +49,6 @@ This is a perfect question to ask in support! We are iterating on these commands
 
 In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
 
-### Why can’t I use `docker-compose.yml` configuration?
-
-No good reason... but tighter integration with docker-compose.yml is coming!
-
 ### Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
 
 This error message comes from Picard running a `cd` to your `workDir`, which is normally created by the `checkout` step. You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you will have to create it with `mkdir -p`.
