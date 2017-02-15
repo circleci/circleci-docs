@@ -5,6 +5,12 @@ short-title: "FAQ"
 categories: [getting-started]
 ---
 
+## Does CircleCI 2.0 run inference commands?
+
+No, CircleCI 2.0 does not infer anything from your project.
+
+This means that no commands are run automatically. Don’t assume that a particular library/package is available unless it is bundled with the Docker image you are using.
+
 ## Can I use CircleCI 2.0 without creating base images?
 
 Yes, you can use* one of ours!
@@ -36,10 +42,6 @@ steps:
     shell: /bin/bash # Bad :(
     command: rvm --version # This will get "bash: rvm: command not found" error
 ```
-
-### Does CircleCI 2.0 still run inference commands?
-
-No. Currently, commands inferred by scanning the code for known projects aren't supported. Do not assume a certain command has run, or a certain library/package is available unless it comes installed in the Docker image you are using.
 
 ### How can I express built-in functionalities like ruby versions?
 
