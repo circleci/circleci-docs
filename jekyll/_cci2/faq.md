@@ -1,21 +1,27 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0 FAQ"
+title: "Frequently Asked Questions"
 short-title: "FAQ"
 categories: [getting-started]
 ---
 
-## FAQ
+## Can I use CircleCI 2.0 without creating base images?
 
-### Can I start using CircleCI 2.0 without creating base images?
+Yes, you can use* one of ours!
 
-Yes! You can use the `circleci/build-image:ubuntu-14.04-XL-922-9410082` image. This image matches the content of the Ubuntu Trusty 14.04 image we use in our web app. The image is pretty large, though (currently ~17.5GB uncompressed), so it's less ideal for local testing. Please see [here](https://circleci.com/docs/build-images-2-0/) for a list of languages and tools included in the image.
+The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
 
-The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided through the Docker composing mechanism.
+The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
+
+Here’s a [list of languages and tools](https://circleci.com/docs/build-images-2-0/) included in the image.
+
+\* For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
+
+## The `latest` tag
 
 **Please do not use the `latest` tag.** Instead, see how we recommend [specifying image versions](#what-is-the-recommended-way-to-specify-image-versions).
 
-Also, please note that we are planning to deprecate the image for CircleCI 2.0. The idea of a monolithic build image doesn't fit well with the idea of CircleCI 2.0, and we are currently working on providing alternatives. Until then, we'll continue supporting the image.
+## Running bash in login shell mode when using shell steps
 
 One final note: when you use shell steps, we recommend running bash in login shell mode. Images rely heavily on “rc” files, but running `shell: /bin/bash` will invoke bash in a non-interactive mode which won’t load "rc" files.
 
