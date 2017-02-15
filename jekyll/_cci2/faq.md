@@ -43,10 +43,6 @@ steps:
     command: rvm --version # This will get "bash: rvm: command not found" error
 ```
 
-### How can I express built-in functionalities like ruby versions?
-
-This is a perfect question to ask in support! We are iterating on these commands and envision that common ones will be turned into extension/plugin invocations (e.g. parallel rspec test execution). This may, in turn, may deprecate some configuration (e.g. custom images negate the need to use `RVM`/`pyenv`).
-
 In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
 
 ### Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
