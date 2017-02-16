@@ -37,13 +37,11 @@ You can override this behavior with a `pwd` attribute on your `type: shell` step
 
 Builds often freeze due to syntax errors in `circle.yml`. Cancel build and check your `circle.yml` for proper indents and ensure that all stages/steps have the required keys.
 
-### I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
+## I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
-At this moment, we don't provide a way to invalidate cached Docker images. Instead, we encourage you to use image tags.
+We don’t currently provide a way to invalidate cached Docker images. One way around this is to use image tags.
 
-For example, say you're running a build on `my-image:123`, and the image is cached in our infrastructure. You update `my-image` and want to use that new image in the next build.
-
-To do this, you can use a different tag, like `my-image:456`, and specify that image in your `circle.yml`.
+If you’re running a build on `my-image:123` and you update the image, you can use a new tag to force a cache refresh. In this example, you could change the tag to `my-image:456` and choose that image in `circle.yml`.
 
 ### What is the recommended way to specify image versions?
 
