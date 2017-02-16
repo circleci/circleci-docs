@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Environment variables
+title: Environment Variables
 categories: [reference]
 description: How to work with environment variables
 ---
@@ -20,6 +20,8 @@ true
 `CI`
 
 true
+
+We use Bash, which follows the POSIX naming convention for environment variables. Basically, uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character should be a letter.
 
 ## Build Details
 
