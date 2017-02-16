@@ -50,7 +50,7 @@ You _can_, but please don’t. The `latest` tag is mutable and doesn’t always 
 
 The `latest` tag is the most infamous example, but other mutable tags like `master`, have the same problem. You can read more about the issue [here](http://container-solutions.com/docker-latest-confusion/).
 
-Instead, we recommend choosing a specific tag. This guarantees that you are using the same version of the container image. You can read more about specifying image versions [here](#what-is-the-recommended-way-to-specify-image-versions).
+Instead, we recommend choosing a specific tag. This guarantees that you are using the same version of the container image.
 
 ## I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
