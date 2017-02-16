@@ -39,10 +39,14 @@ Inference is the following:
 ```
 dependencies:
   override:
+	- mkdir -p ~/.go_project/src/github.com/${CIRCLE_PROJECT_USERNAME}
+	- ln -s ${HOME}/${CIRCLE_PROJECT_REPONAME} ${HOME}/.go_project/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
     # './...' is a relative pattern which means all subdirectories
     - go get -t -d -v ./...
     - go build -v
 ```
+
+`github.com` would be replaced with `bitbucket.com` if you were using Bitbucket.
 
 ## Databases
 
