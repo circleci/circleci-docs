@@ -23,9 +23,15 @@ Here’s a [list of languages and tools](https://circleci.com/docs/build-images-
 
 \*For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
 
-## The `latest` tag
+## Can I use the `latest` tag when specifying image versions?
 
-**Please do not use the `latest` tag.** Instead, see how we recommend [specifying image versions](#what-is-the-recommended-way-to-specify-image-versions).
+You _can_, but please don’t. Instead, see how we recommend [specifying image versions](#what-is-the-recommended-way-to-specify-image-versions).
+
+## Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
+
+You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` for the `type: shell` command. Since
+
+This error message comes from CircleCI 2.0 running a `cd` to your `workDir`, which is normally created by the `checkout` step. You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you will have to create it with `mkdir -p`.
 
 ## Running bash in login shell mode when using shell steps
 
@@ -44,10 +50,6 @@ steps:
 ```
 
 In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
-
-### Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
-
-This error message comes from Picard running a `cd` to your `workDir`, which is normally created by the `checkout` step. You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you will have to create it with `mkdir -p`.
 
 ### My project is running on CircleCI 2.0, but the build appears to be frozen. What happened?
 
