@@ -25,7 +25,11 @@ Here’s a [list of languages and tools](https://circleci.com/docs/build-images-
 
 ## Can I use the `latest` tag when specifying image versions?
 
-You _can_, but please don’t. Instead, see how we recommend [specifying image versions](#what-is-the-recommended-way-to-specify-image-versions).
+You _can_, but please don’t. The `latest` tag is a mutable tag and doesn’t always refer to a consistent image SHA. CircleCI runs on a fleet of machines, so the mutable tag could be cached improperly. In that case, re-running a build wouldn’t be deterministic.
+
+The `latest` tag is the most infamous example, but other mutable tags like `master`, have the same problem. You can read more about the issue [here](http://container-solutions.com/docker-latest-confusion/).
+
+Instead, we recommend choosing a specific tag. This guarantees that you are using the same version of the container image. You can read more about specifying image versions [here](#what-is-the-recommended-way-to-specify-image-versions).
 
 ## Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
 
@@ -42,17 +46,6 @@ Builds often freeze due to syntax errors in `circle.yml`. Cancel build and check
 We don’t currently provide a way to invalidate cached Docker images. One way around this is to use image tags.
 
 If you’re running a build on `my-image:123` and you update the image, you can use a new tag to force a cache refresh. In this example, you could change the tag to `my-image:456` and choose that image in `circle.yml`.
-
-### What is the recommended way to specify image versions?
-
-Generally, it's a bad idea to use the `latest` tag of a Docker image in any case. Using a specific tag guarantees that you are using the same version of the container image.
-
-More broadly, we advise against using mutable tags because they don’t reliably refer to the same image SHA. `latest` is the most common example, but users have run into issues with branch name tags like `master`.  One thing to keep in mind is that CircleCI runs on a fleet of machines.  A mutable tag can be cached differently by different machines, so that re-running a build might cause it to run on different images.
-
-For more information on why we don't recommend `latest`, check out these blog posts:
-
-http://container-solutions.com/docker-latest-confusion/
-https://medium.com/@mccode/the-misunderstood-docker-tag-latest-af3babfd6375#.vqq49cw67
 
 ### How do Docker image names work? Where do they come from?
 
