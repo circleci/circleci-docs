@@ -51,7 +51,9 @@ The GitHub/Bitbucket username of the user who triggered the build.
 
 ### CIRCLE_JOB
 
-The type of job.
+The current job’s type.
+
+Possible values include: `build`
 
 ### CIRCLE_COMPARE_URL
 
