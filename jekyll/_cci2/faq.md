@@ -29,9 +29,9 @@ You _can_, but please don’t. Instead, see how we recommend [specifying image v
 
 ## Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
 
-You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` for the `type: shell` command. Since
+You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` for the `type: shell` command. Since `workDir` is normally created by the `checkout` step, CircleCI won’t be able to find it.
 
-This error message comes from CircleCI 2.0 running a `cd` to your `workDir`, which is normally created by the `checkout` step. You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you will have to create it with `mkdir -p`.
+You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you’ll need to create it with `mkdir -p`.
 
 ## Running bash in login shell mode when using shell steps
 
