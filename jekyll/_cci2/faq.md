@@ -33,27 +33,9 @@ You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` fo
 
 You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you’ll need to create it with `mkdir -p`.
 
-## Running bash in login shell mode when using shell steps
+## My project is running on CircleCI 2.0, but the build is frozen!
 
-One final note: when you use shell steps, we recommend running bash in login shell mode. Images rely heavily on “rc” files, but running `shell: /bin/bash` will invoke bash in a non-interactive mode which won’t load "rc" files.
-
-```
-steps:
-  - type: shell
-    shell: /bin/bash --login # Good! :)
-    command: rvm --version
-
-steps:
-  - type: shell
-    shell: /bin/bash # Bad :(
-    command: rvm --version # This will get "bash: rvm: command not found" error
-```
-
-In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
-
-### My project is running on CircleCI 2.0, but the build appears to be frozen. What happened?
-
-Cancel the build and double check the syntax of `circle.yml`. There's a strong possibility that there's an error. Check for proper indents and make sure that all stages and steps have the required keys.
+Builds often freeze due to syntax errors in `circle.yml`. Cancel build and check your `circle.yml` for proper indents and ensure that all stages/steps have the required keys.
 
 ### I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
@@ -89,9 +71,24 @@ For public images on Docker Hub created by users including yourself, you can pul
 myUsername/couchdb:1.6.1
 ```
 
-### My company is currently using CircleCI Enterprise, can we use CircleCI 2.0 right now?
 
-CircleCI 2.0 features will be available behind your firewall after our launch on CircleCI.com. To be on the beta list for CircleCI Enterprise 2.0 please contact <mailto:enterprise@circleci.com>.
+## Running bash in login shell mode when using shell steps
+
+One final note: when you use shell steps, we recommend running bash in login shell mode. Images rely heavily on “rc” files, but running `shell: /bin/bash` will invoke bash in a non-interactive mode which won’t load "rc" files.
+
+```
+steps:
+  - type: shell
+    shell: /bin/bash --login # Good! :)
+    command: rvm --version
+
+steps:
+  - type: shell
+    shell: /bin/bash # Bad :(
+    command: rvm --version # This will get "bash: rvm: command not found" error
+```
+
+In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
 
 
 
