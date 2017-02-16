@@ -6,7 +6,12 @@ layout: classic-docs
 <ul class="list-unstyled">
 {% for doc in sortedDocs %}
 	{% if doc.categories contains category and doc.slug != page.slug and doc.hide != true %}
-		<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
+		{% if doc.short-title %}
+			{% assign docTitle = doc.short-title %}
+		{% else %}
+			{% assign docTitle = doc.title %}
+		{% endif %}
+		<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ docTitle }}</a></li>
 	{% endif %}
 {% endfor %}
 </ul>
