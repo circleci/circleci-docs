@@ -64,23 +64,5 @@ You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` fo
 
 You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you’ll need to create it with `mkdir -p`.
 
-## Running bash in login shell mode when using shell steps
-
-One final note: when you use shell steps, we recommend running bash in login shell mode. Images rely heavily on “rc” files, but running `shell: /bin/bash` will invoke bash in a non-interactive mode which won’t load "rc" files.
-
-```
-steps:
-  - type: shell
-    shell: /bin/bash --login # Good! :)
-    command: rvm --version
-
-steps:
-  - type: shell
-    shell: /bin/bash # Bad :(
-    command: rvm --version # This will get "bash: rvm: command not found" error
-```
-
-In the short term, we’ll be using equivalent shell commands and will post equivalent snippets as we receive requests.
-
 [docker-hub]: https://hub.docker.com
 [docker-library]: https://hub.docker.com/explore/
