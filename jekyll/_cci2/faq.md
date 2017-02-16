@@ -55,10 +55,6 @@ In the short term, we’ll be using equivalent shell commands and will post equi
 
 Cancel the build and double check the syntax of `circle.yml`. There's a strong possibility that there's an error. Check for proper indents and make sure that all stages and steps have the required keys.
 
-### Why isn't "Rebuild with SSH" working?
-
-SSH builds aren't yet supported.
-
 ### I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
 At this moment, we don't provide a way to invalidate cached Docker images. Instead, we encourage you to use image tags.
