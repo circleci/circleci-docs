@@ -2,7 +2,9 @@
 
 Thank you for your interest in contributing. Getting started is fairly simple.
 
-## Add or fix a doc
+**Note: Please do not submit a Pull Request to add a new doc. We are not accepting new docs at this moment. Pull Request for clarifications, spelling & grammar, fixes, and other maintenance are still welcomed.**
+
+## Fix a doc
 [Fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone your fork to your local machine, work on your contribution in a branch, 
 and when ready, [open a Pull Request](https://help.github.com/articles/creating-a-pull-request/) 
 with us.
