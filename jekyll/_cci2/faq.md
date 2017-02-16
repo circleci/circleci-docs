@@ -9,7 +9,7 @@ categories: [getting-started]
 
 No, CircleCI 2.0 does not infer anything from your project.
 
-This means that no commands are run automatically. Don’t assume that a particular library/package is available unless it is bundled with the Docker image you are using.
+This means that no commands are run automatically. Don’t assume that a particular library/package is available unless it is bundled with the Docker image you are using!
 
 ## Can I use CircleCI 2.0 without creating base images?
 
@@ -21,7 +21,7 @@ The image defaults to running actions as the `ubuntu` user and is designed to wo
 
 Here’s a [list of languages and tools](https://circleci.com/docs/build-images-2-0/) included in the image.
 
-\* For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
+\*For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
 
 ## The `latest` tag
 
