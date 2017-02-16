@@ -217,6 +217,12 @@ If the "file" attribute is populated in the junit-formatted XML metadata for the
 tests, then their runtime data will be used with the `files` modifier to pass a time-weighted
 list of filename args on each build node, ensuring an optimal split of test files across containers.
 
+## Merging test suites together
+
+If you have multiple JUnit test reports from running more than one test suite or runner, you can merge them together using the third-party NodeJS CLI tool, [junit-merge](https://www.npmjs.com/package/junit-merge).
+
+This tool can combine the reports into a single file that our test summery system can parse and give you correct test totals.
+
 ## API
 
 You can access test metadata for a build from the [API]({{ site.baseurl }}/api/#test-metadata).
