@@ -281,7 +281,7 @@ Unsupported: Exec is not supported by the lxc driver
 `docker exec` won't work in our containers because we use the LXC driver
 for Docker and `docker exec` for the LXC driver hasn't been implemented.
 
-To work around this, you can the following command, customized for
+To work around this, you can use the following command, customized for
 your container name and the command you want to run, using LXC
 directly:
 
