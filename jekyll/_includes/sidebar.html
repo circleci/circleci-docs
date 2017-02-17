@@ -3,7 +3,7 @@
 <nav class="sidebar">
 	Section: 
 	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
-		<option value="/docs/">Docs Home</option>
+		<option value="{{ site.baseurl }}">Docs Home</option>
 		{% for collection in site.collections %}
 		{% if collection.label == "posts" or collection.selectorName == false %}{% continue %}{% endif %}
 		<option value="{{ site.baseurl }}{{ collection.prefix }}/" {% if collection.label == section.label %}selected{% endif %}>{{ collection.selectorName }}</option>
