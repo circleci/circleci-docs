@@ -34,7 +34,7 @@ permalink: /1.0/index.html
 
 	{% if docs_found > 3 %}
 		{% assign more = docs_found | minus: 3 %}
-		<li><em><a href="{{ site.baseurl }}/{{ catFile }}/">{{ more }} more</a></em></li>
+		<li><em><a href="{{ site.baseurl }}/1.0/{{ catFile }}/">{{ more }} more</a></em></li>
 	{% endif %}
 	</ul>
 </div>
