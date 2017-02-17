@@ -8,7 +8,7 @@ CircleCI infers your test settings from the code in your repository, typically l
 Most problems occur when there is some error in how the packages are specified.
 
 If you require custom commands, it obviously won't be possible for CircleCI to infer them correctly.
-In that case, you can [specify your commands]({{site.baseurl}}/configuration/)
+In that case, you can [specify your commands]( {{ site.baseurl }}/1.0/configuration/)
 using a `circle.yml` file.
 
 If you feel we should have inferred your commands correctly, your project may diverge slightly from what we expect.

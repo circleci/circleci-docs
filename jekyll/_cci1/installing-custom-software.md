@@ -10,7 +10,7 @@ However, if you need to install a particular version of software&mdash;to match 
 
 ## Installing via circle.yml
 
-You can use your [circle.yml]({{ site.baseurl }}/configuration/) file to run
+You can use your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file to run
 arbitrary commands against your build environment. You have root
 access to your environment via `sudo`, so you should be able to
 customize it to your heart's content!
@@ -42,7 +42,7 @@ To reduce the time spent installing dependencies, CircleCI will cache them betwe
 You can add arbitrary directories to this cache, allowing you to avoid the overhead of building your custom software during the build.
 
 Tell CircleCI to save a cached copy using the
-[`cache_directories` setting, in your `circle.yml` file]({{ site.baseurl }}/configuration/#cache-directories).
+[`cache_directories` setting, in your `circle.yml` file]( {{ site.baseurl }}/1.0/configuration/#cache-directories).
 
 ```
 dependencies:

@@ -15,7 +15,7 @@ or using partners.
 ## See coverage in CircleCI
 
 It's straightforward to see simple coverage results from your build.
-Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]({{ site.baseurl }}/build-artifacts/).
+Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]( {{ site.baseurl }}/1.0/build-artifacts/).
 CircleCI will upload coverage results and make them visible as part of your build.
 
 ### Adding and configuring a coverage library
@@ -106,23 +106,23 @@ In the meantime, add your coverage library of choice. Options include:
     for C or C++.
 
 Configure your library to save results in the directory specified by the CIRCLE_ARTIFACTS environment variable.
-Alternatively, add a [test.post command]({{ site.baseurl }}/configuration/#test)
-to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts/).
+Alternatively, add a [test.post command]( {{ site.baseurl }}/1.0/configuration/#test)
+to copy your artifacts into the [artifacts directory]( {{ site.baseurl }}/1.0/build-artifacts/).
 
 ### Seeing the results in the CircleCI UI
 
 We will upload your coverage files, which will allow you view them from the "Artifacts"
 tab on the build page:
 
-![]({{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
+![](  {{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
-[CircleCI API]({{site.baseurl}}/api/#build-artifacts).
+[CircleCI API]( {{ site.baseurl }}/1.0/api/#build-artifacts).
 
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
 
-![]({{ site.baseurl }}/assets/img/docs/coverage_example.png)
+![](  {{ site.baseurl }}/assets/img/docs/coverage_example.png)
 
 ## Using a Code Coverage service
 
@@ -153,7 +153,7 @@ For more information find an example of your language here:
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]({{site.baseurl}}/environment-variables/).
+[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
@@ -161,7 +161,7 @@ parallel builds.
 ### Code Climate
 
 1. In the Code Climate UI, go to your repo and then navigate to **Settings -> Test Coverage**.
-2. Grab your test reporter token and add it to your CircleCI [environment variables]({{site.baseurl}}/environment-variables/) as `CODECLIMATE_REPO_TOKEN`.
+2. Grab your test reporter token and add it to your CircleCI [environment variables]( {{ site.baseurl }}/1.0/environment-variables/) as `CODECLIMATE_REPO_TOKEN`.
 3. Follow the [Code Climate documentation](https://docs.codeclimate.com/docs/setting-up-test-coverage#section-how-to) for your specific language or framework.
 
 Code Climate does not currently support CircleCI's parallelization.
@@ -171,7 +171,7 @@ Code Climate does not currently support CircleCI's parallelization.
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
 to configure the appropriate coverage
 reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
-[environment variables]({{ site.baseurl }}/environment-variables/).
+[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 ## Under construction
 

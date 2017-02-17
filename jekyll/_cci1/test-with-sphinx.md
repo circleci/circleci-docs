@@ -10,7 +10,7 @@ start Sphinx before they run in CircleCI.
 
 Sphinx {{ site.data.precise.versions.sphinx }} is installed on your build system. It will need
 to be configured with your `sphinx.conf`, and started via
-[circle.yml]({{ site.baseurl }}/configuration/).  Here's an example of how to do so:
+[circle.yml]( {{ site.baseurl }}/1.0/configuration/).  Here's an example of how to do so:
 
 ```
 database:

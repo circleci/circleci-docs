@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body class="{% if page.path == "index.html" %}homepage{% endif %}">
+<body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
 	{% include google-tag-manager.html %}
 {% endif %}
@@ -14,10 +14,11 @@
 				<input type="text" autocomplete="off" placeholder="What can we help you find?" name="query" class="form-control" />
 				<ul id="search-results" class="list-unstyled dropdown-menu"></ul>
 			</form>
+			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 			<article>
-				<h1>{{ page.title }}</h1>
+				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1>{{ page.title }}</h1>{% endif %}
 				{{ content }}
-				{% if page.path != "index.html" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+				{% if page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
 					{% include doc-footer.html %}
 				{% endif %}
 			</article>

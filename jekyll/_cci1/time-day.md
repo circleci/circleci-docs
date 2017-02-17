@@ -17,7 +17,7 @@ If that's the case, you may end up with test failures looking like this:
         got: Sat, 29 May 2012 (using ==)
 ```
 
-Fortunately, it's easy to [change CircleCI's timezone](/docs/configuration/#timezone)
+Fortunately, it's easy to [change CircleCI's timezone](/docs/1.0/configuration/#timezone)
 to match yours.
 
 When making this change, it might be a good time to check what time zone your server is in.
@@ -32,4 +32,4 @@ A common problem is that one part of the time interval you're measuring will be 
 This leads to a 2 hour window in which your tests might fail.
 
 One nice solution is to just try again, preferably at a different time of day.
-Try to avoid midnight in both your local timezone, and the time zone that CircleCI uses (UTC unless you [changed](/docs/configuration/#timezone) it).
+Try to avoid midnight in both your local timezone, and the time zone that CircleCI uses (UTC unless you [changed](/docs/1.0/configuration/#timezone) it).

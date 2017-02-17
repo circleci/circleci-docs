@@ -50,10 +50,10 @@ If you are using best practices for your project, CircleCI will infer settings a
 [wiki-inttest]: https://en.wikipedia.org/wiki/Integration_testing
 [wiki-functest]: https://en.wikipedia.org/wiki/Functional_testing
 [wiki-codetest]: https://en.wikipedia.org/wiki/Software_testing
-[doc-awscd]: {{site.baseurl}}/continuous-deployment-with-aws-codedeploy/
-[doc-awsecs]: {{site.baseurl}}/continuous-deployment-with-aws-ec2-container-service/
-[doc-awss3]: {{site.baseurl}}/continuous-deployment-with-amazon-s3/
-[doc-gke]: {{site.baseurl}}/continuous-deployment-with-google-container-engine/
-[doc-heroku]: {{site.baseurl}}/continuous-deployment-with-heroku/
-[doc-sshdeploy]: {{site.baseurl}}/introduction-to-continuous-deployment/#deploy-over-ssh
-[doc-manually]: {{site.baseurl}}/manually/
+[doc-awscd]:  {{ site.baseurl }}/1.0/continuous-deployment-with-aws-codedeploy/
+[doc-awsecs]:  {{ site.baseurl }}/1.0/continuous-deployment-with-aws-ec2-container-service/
+[doc-awss3]:  {{ site.baseurl }}/1.0/continuous-deployment-with-amazon-s3/
+[doc-gke]:  {{ site.baseurl }}/1.0/continuous-deployment-with-google-container-engine/
+[doc-heroku]:  {{ site.baseurl }}/1.0/continuous-deployment-with-heroku/
+[doc-sshdeploy]:  {{ site.baseurl }}/1.0/introduction-to-continuous-deployment/#deploy-over-ssh
+[doc-manually]:  {{ site.baseurl }}/1.0/manually/
