@@ -85,6 +85,6 @@ topic [here][fork-pr-builds].
 
 
 [JSON Service Account]: https://developers.google.com/identity/protocols/OAuth2ServiceAccount
-[CircleCI environment variable]: {{ site.baseurl }}/environment-variables/
+[CircleCI environment variable]:  {{ site.baseurl }}/1.0/environment-variables/
 [certutil]: http://stackoverflow.com/questions/16945780/decoding-base64-in-batch
-[fork-pr-builds]: {{ site.baseurl }}/fork-pr-builds/
+[fork-pr-builds]:  {{ site.baseurl }}/1.0/fork-pr-builds/

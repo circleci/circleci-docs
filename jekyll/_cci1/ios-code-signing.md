@@ -109,11 +109,11 @@ extension) in the `certificates` directory.
 You can now upload the `.p12` and `.mobileprovision` files to your project on CircleCI in
 `Project Settings` > `iOS Code Signing`.
 
-![The code signing section in the project settings]({{ site.baseurl }}/assets/img/docs/code-signing-settings-section.png)
+![The code signing section in the project settings]( {{ site.baseurl }}/1.0/assets/img/docs/code-signing-settings-section.png)
 
-![The code signing welcome screen]({{ site.baseurl }}/assets/img/docs/code-signing-splash-screen.png)
+![The code signing welcome screen]( {{ site.baseurl }}/1.0/assets/img/docs/code-signing-splash-screen.png)
 
-![Uploaded key on the code signing page]({{ site.baseurl }}/assets/img/docs/code-signing-key-uploaded.png)
+![Uploaded key on the code signing page]( {{ site.baseurl }}/1.0/assets/img/docs/code-signing-key-uploaded.png)
 
 ### 3. Find Your Code Signing Identity name
 
@@ -152,7 +152,7 @@ machine:
 We recommend using [Fastlane Gym](https://github.com/fastlane/gym) to
 build a signed app. `gym` is pre-installed on our containers, so it's
 easy to set up. The first step is to add a new [deployment
-command]({{ site.baseurl }}/configuration/#deployment) in your
+command]( {{ site.baseurl }}/1.0/configuration/#deployment) in your
 `circle.yml` file.
 
 ```
@@ -168,7 +168,7 @@ deployment:
 ```
 
 You should take a few minutes to read [the documentation on deployments
-using CircleCI]({{ site.baseurl }}/configuration/#deployment).
+using CircleCI]( {{ site.baseurl }}/1.0/configuration/#deployment).
 The deployment stanza above instructs CircleCI to run the `fastlane gym`
 command on each successful build of the `master` branch. The `beta_distribution`
 is just a name for the deployment. You can use any name here.
@@ -239,7 +239,7 @@ Credentials" step of the build on CircleCI. This is listed under
 "machine". Expand the output and you should see output like the
 following:
 
-![The output of the code signing step that ran correctly]({{ site.baseurl }}/assets/img/docs/code-signing-correct-step-output.png)
+![The output of the code signing step that ran correctly]( {{ site.baseurl }}/1.0/assets/img/docs/code-signing-correct-step-output.png)
 
 In this example there is one valid code-signing identity, `"iPhone
 Distribution: UTAH STREET LABS INC (GL92ZZ6423)"`. The goal is to pass

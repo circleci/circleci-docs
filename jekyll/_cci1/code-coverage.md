@@ -15,7 +15,7 @@ or using partners.
 ## See coverage in CircleCI
 
 It's straightforward to see simple coverage results from your build.
-Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]({{ site.baseurl }}/build-artifacts/).
+Simply add a coverage library to your project, and configure it to write the results out to CircleCI's [artifacts directory]( {{ site.baseurl }}/1.0/build-artifacts/).
 CircleCI will upload coverage results and make them visible as part of your build.
 
 ### Adding and configuring a coverage library
@@ -106,15 +106,15 @@ In the meantime, add your coverage library of choice. Options include:
     for C or C++.
 
 Configure your library to save results in the directory specified by the CIRCLE_ARTIFACTS environment variable.
-Alternatively, add a [test.post command]({{ site.baseurl }}/configuration/#test)
-to copy your artifacts into the [artifacts directory]({{ site.baseurl }}/build-artifacts/).
+Alternatively, add a [test.post command]( {{ site.baseurl }}/1.0/configuration/#test)
+to copy your artifacts into the [artifacts directory]( {{ site.baseurl }}/1.0/build-artifacts/).
 
 ### Seeing the results in the CircleCI UI
 
 We will upload your coverage files, which will allow you view them from the "Artifacts"
 tab on the build page:
 
-![]({{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
+![]( {{ site.baseurl }}/1.0/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
 [CircleCI API]({{site.baseurl}}/api/#build-artifacts).
@@ -122,7 +122,7 @@ You can also get them via the
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
 
-![]({{ site.baseurl }}/assets/img/docs/coverage_example.png)
+![]( {{ site.baseurl }}/1.0/assets/img/docs/coverage_example.png)
 
 ## Using a Code Coverage service
 
@@ -171,7 +171,7 @@ Code Climate does not currently support CircleCI's parallelization.
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
 to configure the appropriate coverage
 reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
-[environment variables]({{ site.baseurl }}/environment-variables/).
+[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 ## Under construction
 

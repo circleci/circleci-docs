@@ -17,7 +17,7 @@ Build Environment. For Ubuntu 12.04, replace `/opt/circleci/php` with
 
 ## Version
 
-We have many versions of PHP pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#php) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#php) build images.
+We have many versions of PHP pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#php) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#php) build images.
 
 If you don't want to use the default, you can specify your version in `circle.yml`:
 
@@ -125,7 +125,7 @@ test:
 ```
 
 If you want CircleCI to show a test summary of your build see
-[Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
+[Metadata collection in custom test steps for PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit).
 
 ## Disable Xdebug {#xdebug}
 

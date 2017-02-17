@@ -61,7 +61,7 @@ GitHub or Bitbucket (normally `master`) will be used. If there is no cache for
 
 ## Clearing Cache
 
-![]({{ site.baseurl }}/assets/img/docs/cache-build-button-rebuild.png)
+![]( {{ site.baseurl }}/1.0/assets/img/docs/cache-build-button-rebuild.png)
 
 The _Rebuild without cache_ button in the UI will disable the cache for
 a single build so you can debug any problems caused by your

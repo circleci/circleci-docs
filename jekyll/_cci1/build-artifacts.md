@@ -18,9 +18,9 @@ be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.
 
-![]({{ site.baseurl }}/assets/img/docs/artifacts.png)
+![]( {{ site.baseurl }}/1.0/assets/img/docs/artifacts.png)
 
-You'll find links to the artifacts at the top of the build page. You can also consume them via our [API]({{ site.baseurl }}/api/#build-artifacts).
+You'll find links to the artifacts at the top of the build page. You can also consume them via our [API]( {{ site.baseurl }}/1.0/api/#build-artifacts).
 
 You can also access your artifacts in your browser with the following url:
 

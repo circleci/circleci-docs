@@ -54,7 +54,7 @@ If you have a custom test step that produces JUnit XML output - most test
 runners support this in some form - you can write the XML files to a
 subdirectory under `$CIRCLE_TEST_REPORTS` (for example `$CIRCLE_TEST_REPORTS/reports`).
 
-We'll automatically store the files in your [build artifacts]({{ site.baseurl }}/build-artifacts/) and parse the XML.
+We'll automatically store the files in your [build artifacts]( {{ site.baseurl }}/1.0/build-artifacts/) and parse the XML.
 
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
@@ -62,19 +62,19 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 **Note**: It's important to write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
 
 ### Custom runner examples
-* [Cucumber]({{ site.baseurl }}/test-metadata/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/test-metadata/#maven-surefire-plugin-for-java-junit-results)
-* [Gradle]({{ site.baseurl }}/test-metadata/#gradle-junit-results)
+* [Cucumber]( {{ site.baseurl }}/1.0/test-metadata/#cucumber)
+* [Maven Surefire]( {{ site.baseurl }}/1.0/test-metadata/#maven-surefire-plugin-for-java-junit-results)
+* [Gradle]( {{ site.baseurl }}/1.0/test-metadata/#gradle-junit-results)
 * [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
 * [Ava]({{site.baseurl}}/test-metadata/#ava)
-* [PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit)
-* [RSpec]({{ site.baseurl }}/test-metadata/#rspec)
-* [test2junit]({{ site.baseurl }}/test-metadata/#test2junit-for-clojure-tests)
+* [PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit)
+* [RSpec]( {{ site.baseurl }}/1.0/test-metadata/#rspec)
+* [test2junit]( {{ site.baseurl }}/1.0/test-metadata/#test2junit-for-clojure-tests)
 
 
 #### <a name="cucumber"></a>Cucumber
 
-For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
+For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
 
 ```
 test:
@@ -98,7 +98,7 @@ If you are building a [Maven](http://maven.apache.org/) based project,
 you are more than likely using the
 [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
 to generate test reports in XML format. CircleCI makes it easy to collect these
-reports. You just need to add the following to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
+reports. You just need to add the following to the [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file in your
 project.
 
 ```
@@ -112,7 +112,7 @@ test:
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/),
 test reports are automatically generated in XML format. CircleCI makes it easy to collect these
-reports. You just need to add the following to the [circle.yml]({{ site.baseurl }}/configuration/) file in your
+reports. You just need to add the following to the [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file in your
 project.
 
 ```
@@ -126,7 +126,7 @@ test:
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
 
-A working [circle.yml]({{ site.baseurl }}/configuration/) section for testing might look like this:
+A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) section for testing might look like this:
 
 ```
 test:
@@ -142,7 +142,7 @@ test:
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
-A working [circle.yml]({{ site.baseurl }}/configuration/) section for testing might look like this:
+A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) section for testing might look like this:
 
 ```
 dependencies:
@@ -158,7 +158,7 @@ test:
 
 #### <a name="phpunit"></a>PHPUnit
 
-For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]({{ site.baseurl }}/configuration/) might be:
+For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
 
 ```
 test:
@@ -225,4 +225,4 @@ This tool can combine the reports into a single file that our test summery syste
 
 ## API
 
-You can access test metadata for a build from the [API]({{ site.baseurl }}/api/#test-metadata).
+You can access test metadata for a build from the [API]( {{ site.baseurl }}/1.0/api/#test-metadata).

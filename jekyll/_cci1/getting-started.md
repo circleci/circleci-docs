@@ -26,11 +26,11 @@ Sometimes your tests will fail, CircleCI won't infer your custom setup, or our i
 Here are some common issues and where you can find their fixes.
 
 *   If we didn't run an important step or omitted some tests,
-    [add a `circle.yml` file]({{ site.baseurl }}/configuration/)
+    [add a `circle.yml` file]( {{ site.baseurl }}/1.0/configuration/)
     to tweak your test run.
-*   If we didn't infer anything, you can [set up your project manually]({{ site.baseurl }}/manually/).
+*   If we didn't infer anything, you can [set up your project manually]( {{ site.baseurl }}/1.0/manually/).
 *   Sometimes, your tests will fail on our server even though they work locally.
-    Read our list of [common problems]({{ site.baseurl }}/troubleshooting/) and their solutions.
+    Read our list of [common problems]( {{ site.baseurl }}/1.0/troubleshooting/) and their solutions.
 
 ## What next?
 
@@ -47,7 +47,7 @@ One of the best things about CircleCI's design is that you have your own account
 No matter if you commit to a project only once a month or if a project is just getting started, adding it to CircleCI will help keep it on track. 
 
 Adding a project refers to the first time the project is setup on CircleCI.
-(**Related: &nbsp;**[What happens when you add a project?]({{ site.baseurl }}/what-happens/))
+(**Related: &nbsp;**[What happens when you add a project?]( {{ site.baseurl }}/1.0/what-happens/))
 Add projects from [add projects](https://circleci.com/add-projects).
 
 Following a project subscribes you to email notifications and adds the project into your dashboard's project/branch picker. CircleCI users that push to a new project get automatically followed to the project. You can control which projects you follow (including following projects that you do not push to!) from [add projects](https://circleci.com/add-projects).

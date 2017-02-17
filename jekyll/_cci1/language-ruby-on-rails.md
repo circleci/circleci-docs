@@ -18,7 +18,7 @@ checked into your repo's root directory.
 
 ### Version
 
-We have many versions of Ruby pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#ruby) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#ruby) build images.
+We have many versions of Ruby pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#ruby) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#ruby) build images.
 
 If you don't want to use the default, you can specify your version in `circle.yml`:
 
