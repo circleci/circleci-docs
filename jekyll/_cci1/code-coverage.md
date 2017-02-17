@@ -114,7 +114,7 @@ to copy your artifacts into the [artifacts directory]( {{ site.baseurl }}/1.0/bu
 We will upload your coverage files, which will allow you view them from the "Artifacts"
 tab on the build page:
 
-![]( {{ site.baseurl }}/1.0/assets/img/docs/artifacts_listing.png)
+![](  {{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
 [CircleCI API]( {{ site.baseurl }}/1.0/api/#build-artifacts).
@@ -122,7 +122,7 @@ You can also get them via the
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
 
-![]( {{ site.baseurl }}/1.0/assets/img/docs/coverage_example.png)
+![](  {{ site.baseurl }}/assets/img/docs/coverage_example.png)
 
 ## Using a Code Coverage service
 

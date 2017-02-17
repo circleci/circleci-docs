@@ -15,7 +15,7 @@ permalink: /1.0/index.html
 {% endif %}
 
 <div class="category-section">
-	<img src=" {{ site.baseurl }}/1.0/assets/img/icons/{{ category.icon }}" class="logo" alt="Category Icon" />
+	<img src="  {{ site.baseurl }}/assets/img/icons/{{ category.icon }}" class="logo" alt="Category Icon" />
 	<h2>{{ category.name }}</h2>
 	<ul class="list-unstyled">
 	{% assign docs_found = 0 %}
@@ -24,9 +24,9 @@ permalink: /1.0/index.html
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if docs_found < 4 %}
 				{% if doc.short-title %}
-					<li class="{% if page.path contains doc.url %}active{% endif %}"><a href=" {{ site.baseurl }}/1.0{{ doc.url }}">{{ doc.short-title }}</a></li>
+					<li class="{% if page.path contains doc.url %}active{% endif %}"><a href=" {{ site.baseurl }}{{ doc.url }}">{{ doc.short-title }}</a></li>
 				{% else %}
-					<li><a href=" {{ site.baseurl }}/1.0{{ doc.url }}">{{ doc.title }}</a></li>
+					<li><a href=" {{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
 				{% endif %}
 			{% endif %}
 		{% endif %}
@@ -34,7 +34,7 @@ permalink: /1.0/index.html
 
 	{% if docs_found > 3 %}
 		{% assign more = docs_found | minus: 3 %}
-		<li><em><a href=" {{ site.baseurl }}/1.0/{{ catFile }}/">{{ more }} more</a></em></li>
+		<li><em><a href=" {{ site.baseurl }}/{{ catFile }}/">{{ more }} more</a></em></li>
 	{% endif %}
 	</ul>
 </div>

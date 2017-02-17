@@ -27,7 +27,7 @@ tab on the build page. This contains information that should help you
 debug your build.
 
 If `memory-usage.txt` does not include enough information, you can SSH
-into your build. Use the [SSH button](/docs/ssh-build/)
+into your build. Use the [SSH button](/docs/1.0/ssh-build/)
 to ssh into a running build and run `top`.
 
 Hit `Shift + M` to sort by memory usage and watch what process is using

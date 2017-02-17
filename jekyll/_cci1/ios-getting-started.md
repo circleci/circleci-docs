@@ -10,7 +10,7 @@ To get your build running on CircleCI, you first need to [add your project to Ci
 
 By default, we build projects on Linux, so you’ll need to enable macOS for your project. You can do this by going to **Project Settings** -> **Build Environment** and enabling the **Build OS X Project** setting.
 
-![Build Environment Settings]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-build-env.png)
+![Build Environment Settings](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-build-env.png)
 
 ## Assumptions and prerequisites
 
@@ -28,11 +28,11 @@ If you don't already have a shared scheme, you can do this in Xcode.
 
 First, open your Xcode workspace or project. Then, use the scheme selector to open the **Manage Schemes** dialogue.
 
-![Xcode Scheme Selector]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-scheme-selector.png)
+![Xcode Scheme Selector](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-scheme-selector.png)
 
 In the manage schemes dialog, select the scheme you wish to build, and ensure that the **Shared** checkbox is enabled.
 
-![Manage Schemes Dialogue]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-manage-schemes.png)
+![Manage Schemes Dialogue](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 
 Finally, commit and push the schemes.
 
@@ -77,16 +77,16 @@ To use our automated code signing support for your iOS app, perform the followin
 
 Open **Keychain Access.app**, and select **My Certificates** in the menu on the left hand side.
 
-![Keychain Access.app with the keychain that contains the keys, and My Certificates selected]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-keychain-access-my-certificates.png)
+![Keychain Access.app with the keychain that contains the keys, and My Certificates selected](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-access-my-certificates.png)
 
 You should then be able to see a certificate with **iPhone Developer:** or **iPhone Distribution:**
 Select the certificate, then select **File -> Export Items** from the macOS Menu Bar.
 
-![The Keychain Access.app file menu with Export Items in a hover state]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-keychain-file-menu.png)
+![The Keychain Access.app file menu with Export Items in a hover state](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-file-menu.png)
 
 Ensure that the file format is **Personal Information Exchange (.p12)**. If the option is not available, you probably forgot to select the private key when you selected the certificate.
 
-![The Keychain Access.app Export dialogue]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-keychain-export-dialogue.png)
+![The Keychain Access.app Export dialogue](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-keychain-export-dialogue.png)
 
 You will then be asked for a **certificate export password**. This is not required, but we do recommend it.
 
@@ -94,11 +94,11 @@ You will then be asked for a **certificate export password**. This is not requir
 
 Go to your project page on CircleCI, and open the **Project Settings**, then go to **OS X Code Signing** in the **Permissions** section.
 
-![The CircleCI Project Settings, iOS Code Signing page]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-cci-code-signing-menu.png)
+![The CircleCI Project Settings, iOS Code Signing page](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-code-signing-menu.png)
 
 Click **Upload Key** and enter the details for your certificate, including the password you used when exporting the .p12.
 
-![The CircleCI Certificate Details]( {{ site.baseurl }}/1.0/assets/img/docs/ios-getting-started-cci-certificate-details.png)
+![The CircleCI Certificate Details](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-cci-certificate-details.png)
 
 Select the `.p12` file you wish to upload and click upload.
 

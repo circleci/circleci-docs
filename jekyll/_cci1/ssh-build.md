@@ -17,18 +17,18 @@ to create a new build or ssh to an existing one.
 To enable SSH access for a running build, go to the 'Debug via SSH' tab and
 click the 'Enable SSH for this build' button.
 
-![]( {{ site.baseurl }}/1.0/assets/img/docs/ssh-build-button-current.png)
+![](  {{ site.baseurl }}/assets/img/docs/ssh-build-button-current.png)
 
 To start a fresh build with SSH enabled, for example if you want to debug a
 build that has already finished, click the 'with ssh' button alongside
 'Rebuild':
 
-![]( {{ site.baseurl }}/1.0/assets/img/docs/ssh-build-button-rebuild.png)
+![](  {{ site.baseurl }}/assets/img/docs/ssh-build-button-rebuild.png)
 
 In either case, host and port information will be available in the 'Debug via
 SSH tab':
 
-![]( {{ site.baseurl }}/1.0/assets/img/docs/ssh-build-details.png)
+![](  {{ site.baseurl }}/assets/img/docs/ssh-build-details.png)
 
 Now you can ssh to the running build (using the same ssh key
 that you use for GitHub or Bitbucket) to perform whatever troubleshooting
