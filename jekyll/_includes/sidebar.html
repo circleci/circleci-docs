@@ -3,12 +3,14 @@
 <nav class="sidebar">
 	Section: 
 	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
-	{% for collection in site.collections %}
-	{% if collection.label == "posts" or collection.selectorName == false %}{% continue %}{% endif %}
+		<option value="/docs/">Docs Home</option>
+		{% for collection in site.collections %}
+		{% if collection.label == "posts" or collection.selectorName == false %}{% continue %}{% endif %}
 		<option value="{{ site.baseurl }}{{ collection.prefix }}/" {% if collection.label == section.label %}selected{% endif %}>{{ collection.selectorName }}</option>
-	{% endfor %}
+		{% endfor %}
 	</select>
 	<hr />
+	{% if page.page-type != "homepage" %}
 	<ul class="list-unstyled">
 	{% capture sidebar %}
 	<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }} Index Page</a></li>
@@ -42,4 +44,5 @@
 	{% endcapture %}
 	{{ sidebar | strip_newlines }}
 	</ul>
+	{% endif %}
 </nav>
