@@ -35,14 +35,14 @@ deployment:
 
 You'll need to use a GCP Service Account to authenticate the `gcloud` tool 
 before deploying your project. See more detail on this in the 
-[gcloud authentication doc]( {{ site.baseurl }}/1.0/google-auth/). You can also see 
+[gcloud authentication doc]({{ site.baseurl }}/google-auth/). You can also see 
 a complete, working example in the 
 [sample App Engine project](https://github.com/GoogleCloudPlatform/continuous-deployment-circle).
 
 ## Google App Engine and Managed VMs
 
 To deploy to Google App Engine, see the 
-[complete doc]( {{ site.baseurl }}/1.0/deploy-google-app-engine/) or the 
+[complete doc]({{ site.baseurl }}/deploy-google-app-engine/) or the 
 [sample project](https://github.com/GoogleCloudPlatform/continuous-deployment-circle).
 
 ## Google Compute Engine And Google Container Engine

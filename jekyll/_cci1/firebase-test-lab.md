@@ -27,7 +27,7 @@ then click **Enable API** on the on the overview page for that API.
 
 ## Set up Your Repository With CircleCI
 If you're not yet a CircleCI user, you can follow our
-[Getting Started]( {{ site.baseurl }}/1.0/getting-started/) guide to quickly
+[Getting Started]({{ site.baseurl }}/getting-started/) guide to quickly
 get set up. For the purpose of this guide we'll be using the [Notepad example
 Android app](https://github.com/circleci/android-cloud-test-lab).
 
@@ -39,7 +39,7 @@ smart for security.
 
 Instead we'll utilize an environment variable set in CircleCI's GUI for
 authorization. Instructions on how to do this can be found
-[here]( {{ site.baseurl }}/1.0/google-auth/).
+[here]({{ site.baseurl }}/google-auth/).
 
 ### circle.yml
 

@@ -26,7 +26,7 @@ Some specifics:
 
 <h2 id="env-vars">Environmental Variables</h2>
 
-See [this doc]( {{ site.baseurl }}/1.0/environment-variables/) for a thorough list of all available environment variables. Here are some of the most
+See [this doc]({{site.baseurl}}/environment-variables/) for a thorough list of all available environment variables. Here are some of the most
 useful ones:
 <dl>
 <dt>
@@ -96,7 +96,7 @@ Firefox {{ site.data.precise.versions.Firefox }}. Chromedriver 23.0 is also avai
 `chromedriver23`
 
 <span class='label label-info'>Help</span>
-[Check out our browser debugging docs.]( {{ site.baseurl }}/1.0/troubleshooting-browsers/)
+[Check out our browser debugging docs.]({{site.baseurl}}/troubleshooting-browsers/)
 
 ## Docker
 
@@ -114,7 +114,7 @@ We use RVM to give you access to a wide variety of Ruby
 versions. Below are the versions of Ruby that we pre-install; you can specify versions not listed here (supported by RVM) in your circle.yml file and we will install them as part of the build - this will add to your build time, however, if you let us know the version you are using we will update the VM accordingly.
 
 You can
-[choose the exact version you need directly, from the following list:]( {{ site.baseurl }}/1.0/configuration/#ruby-version)
+[choose the exact version you need directly, from the following list:]({{site.baseurl}}/configuration/#ruby-version)
 
 {% for version in site.data.precise.versions.ruby_versions %}
 - `{{ version }}`
@@ -156,7 +156,7 @@ If you do not specify a version, we use `{{ site.data.precise.versions.default_n
 ### Python
 
 We use `python {{ site.data.precise.versions.python }}` by default, although you can
-[control the version in your circle.yml file]( {{ site.baseurl }}/1.0/configuration/#python-version).
+[control the version in your circle.yml file]({{site.baseurl}}/configuration/#python-version).
 Packages can be installed using `pip {{ site.data.precise.versions.pip }}` and
 `virtualenv {{ site.data.precise.versions.virtualenv }}`.
 
@@ -170,7 +170,7 @@ Below are the versions of Python that we pre-install; you can specify versions n
 ### PHP
 
 We use `php {{ site.data.precise.versions.php }}`, by default, although you can
-[control the version in your circle.yml file]( {{ site.baseurl }}/1.0/configuration/#php-version).
+[control the version in your circle.yml file]({{site.baseurl}}/configuration/#php-version).
 Packages can be installed using `composer`, `pear`, and `pecl`.
 
 Supported versions are:
@@ -230,7 +230,7 @@ We have the following versions of GHC and tools installed:
 *   `happy-1.19.3`
 *   `alex-3.1.3`
 
-You can [specify which GHC version]( {{ site.baseurl }}/1.0/configuration/#ghc-version)
+You can [specify which GHC version]({{site.baseurl}}/configuration/#ghc-version)
 you'd like in your `circle.yml`.
 
 <h3 id="other">Other languages</h3>
@@ -282,8 +282,8 @@ In addition to all the databases and services listed above there are two
 further services which require special handling. See the documentation for
 each of them if you need them to support your tests.
 
-*   `solr` ({{ site.data.precise.versions.solr }}) - [Test with Solr]( {{ site.baseurl }}/1.0/test-with-solr/)
-*   `sphinx` ({{ site.data.precise.versions.sphinx }}) - [Test with Sphinx]( {{ site.baseurl }}/1.0/test-with-sphinx/)
+*   `solr` ({{ site.data.precise.versions.solr }}) - [Test with Solr]({{site.baseurl}}/test-with-solr/)
+*   `sphinx` ({{ site.data.precise.versions.sphinx }}) - [Test with Sphinx]({{site.baseurl}}/test-with-sphinx/)
 
 ## Integration Tools
 

@@ -12,7 +12,7 @@ description: How to push packages to packagecloud
 To push packages to packagecloud from CircleCI you must:
 
   - Set an environment variable named `PACKAGECLOUD_TOKEN` on the **Project settings > Environment variables** page.  The value must match your packagecloud API access token. Visit your [API token settings page](https://packagecloud.io/api_token) on packagecloud to get your API token.
-  - Create a [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file which installs the package_cloud gem and pushes the package to the [OS and version of your choice](https://packagecloud.io/docs/#os_distro_version).
+  - Create a [circle.yml]({{ site.baseurl }}/configuration/) file which installs the package_cloud gem and pushes the package to the [OS and version of your choice](https://packagecloud.io/docs/#os_distro_version).
 For more info on your API access token, please refer to the API Tokens section in [API docs](https://packagecloud.io/docs/api/#api_tokens).
 
 ```

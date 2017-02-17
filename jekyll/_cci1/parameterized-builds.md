@@ -5,7 +5,7 @@ description: Parameterized Builds
 ---
 
 The Parameterized Build API allows you to trigger a build using the
-[CircleCI API]( {{ site.baseurl }}/1.0/api/)
+[CircleCI API]({{ site.baseurl }}/api/)
 and inject environment variables which are made available within the containers that run the build.
 
 These environment variables can then be used to influence the steps that are run during the build.
@@ -23,7 +23,7 @@ Note: all the examples use `bash` and `curl` but there is nothing to stop you us
 
 <h3 id="detail">Triggering Parameterized Builds</h3>
 
-Builds are triggered by POSTing to [the trigger new build API]( {{ site.baseurl }}/1.0/api/#new-build).
+Builds are triggered by POSTing to [the trigger new build API]({{ site.baseurl }}/api/#new-build).
 
 A POST with an empty body will trigger a new build of the named branch.
 You can include build parameters by sending a JSON body with `Content-type: application/json`:
@@ -93,5 +93,5 @@ Build parameters are exported as environment variables inside the build's contai
 
 ### Example
 
-We've put together a [how to]( {{ site.baseurl }}/1.0/nightly-builds/)
+We've put together a [how to]({{ site.baseurl }}/nightly-builds/)
 showing how to use build parameters in `circle.yml` so you can trigger nightly builds.

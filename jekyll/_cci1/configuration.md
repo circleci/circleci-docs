@@ -9,7 +9,7 @@ CircleCI automatically infers settings from your code, so it's possible you won'
 
 If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory. If this file exists, CircleCI will read it each time it runs a build.
 
-For a rough idea of what a `circle.yml` looks like, check out our [sample file]( {{ site.baseurl }}/1.0/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
+For a rough idea of what a `circle.yml` looks like, check out our [sample file]({{site.baseurl}}/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
 
 <h2 id="phases">File Structure and Content</h2>
 
@@ -52,12 +52,12 @@ Allowed modifiers are:
 *   **environment**: a hash creating a list of environment variables set for this command
     (see [Machine configuration](#machine) for this modifier's properties when used in the `machine` section of the file)
 *   **parallel**: (only used with commands in the `test` section)
-    if you have [ manually set up parallelism]( {{ site.baseurl }}/1.0/parallel-manual-setup/), set this to true to run a command across all VMs
+    if you have [ manually set up parallelism]({{ site.baseurl }}/parallel-manual-setup/), set this to true to run a command across all VMs
 *   **files**:
     The files identified by the file list (or globs) will be appended to the
     command arguments. The files will be distributed across all containers
     running the build. Check
-    [manual parallelism setup document]( {{ site.baseurl }}/1.0/parallel-manual-setup/#auto-balancing) for more details.
+    [manual parallelism setup document]({{ site.baseurl }}/parallel-manual-setup/#auto-balancing) for more details.
 *   **background**: when "true", runs a command in the background.  It is similar to ending a shell command with '&amp;', but works correctly over ssh.  Useful for starting servers, which your tests will connect to.
 
 Note that YAML is very strict about indentation each time you add a new property.
@@ -135,7 +135,7 @@ machine:
 ```
 
 If you don't want to use this method, there are
-[a number of other options]( {{ site.baseurl }}/1.0/environment-variables/).
+[a number of other options]({{site.baseurl}}/environment-variables/).
 
 ### Timezone
 
@@ -178,7 +178,7 @@ hyphens (-) and dots (.).
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
 We use the Ruby version you specify in your `.rvmrc`, your
 `.ruby-version` file, or your Gemfile.
-If you don't have one of these files, we'll use default version of Ruby. Please check out [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#ruby) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#ruby) pages to find out which version is the default.
+If you don't have one of these files, we'll use default version of Ruby. Please check out [Ubuntu 12.04]({{site.baseurl}}/build-image-precise/#ruby) and [Ubuntu 14.04]({{site.baseurl}}/build-image-trusty/#ruby) pages to find out which version is the default.
 
 If you use a different Ruby version let CircleCI know by including that information in the
 `machine` section. Here's an example of how you do that.
@@ -256,7 +256,7 @@ machine:
   version: 7.8.3
 ```
 
-You can find more details about supported versions [here]( {{ site.baseurl }}/1.0/language-scala/#version).
+You can find more details about supported versions [here]({{site.baseurl}}/language-scala/#version).
 
 ### Other languages
 
@@ -264,7 +264,7 @@ We also support other languages including Clojure, C/C++, Golang, and Erlang.
 
 Pre-installed versions are different depending on which build image you are using.
 
-Please check out [Ubuntu 12.04 build image]( {{ site.baseurl }}/1.0/build-image-precise/) and [Ubuntu 14.04 build image]( {{ site.baseurl }}/1.0/build-image-trusty/) to find out what versions are supported.
+Please check out [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise/) and [Ubuntu 14.04 build image]({{ site.baseurl }}/build-image-trusty/) to find out what versions are supported.
 
 <h3 id="services">Databases and other services</h3>
 
@@ -370,7 +370,7 @@ Caches are private, and are not shared with other projects.
 
 Your web framework typically includes commands to create your database, install your schema, and run your migrations.
 You can use `override`, `pre`, and/or `post` to modify `database` commands.
-See [Setting up your test database]( {{ site.baseurl }}/1.0/manually/#databases) for more information.
+See [Setting up your test database]({{site.baseurl}}/manually/#databases) for more information.
 
 If our inferred `database.yml` isn't working for you, you may need to `override` our setup commands (as shown in the following example).
 
@@ -619,7 +619,7 @@ notify:
 ```
 
 The JSON packet is identical to the result of the
-[Build API]( {{ site.baseurl }}/1.0/api/#build)
+[Build API]({{site.baseurl}}/api/#build)
 call for the same build, except that it is wrapped in a "payload" key:
 
 ```
@@ -692,7 +692,7 @@ CircleCI will run its inference as well as all build commands from that director
 
 You can specify directories and files (in addition to the default
 `$CIRCLE_ARTIFACTS` directory) to be
-[saved as artifacts]( {{ site.baseurl }}/1.0/build-artifacts/):
+[saved as artifacts]({{site.baseurl}}/build-artifacts/):
 
 ```
 general:

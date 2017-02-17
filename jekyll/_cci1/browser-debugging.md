@@ -9,7 +9,7 @@ There are four good ways to debug browser tests on CircleCI.
 
 ## Screenshots and artifacts
 
-At the end of a build on CircleCI, we will gather up all [build artifacts]( {{ site.baseurl }}/1.0/build-artifacts/)
+At the end of a build on CircleCI, we will gather up all [build artifacts]({{site.baseurl}}/build-artifacts/)
 and make them available from your build. This allows you to save screenshots as part of your build,
 and then view them when the build finishes.
 
@@ -65,7 +65,7 @@ Before you start, make sure you have a VNC viewer installed. If you're using mac
 [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-First, [start an SSH build]( {{ site.baseurl }}/1.0/ssh-build/)
+First, [start an SSH build]({{site.baseurl}}/ssh-build/)
 to a CircleCI VM. When you connect to the machine, add the -L flag and forward the remote port 5901 to the local port 5902:
 
 ```
@@ -106,7 +106,7 @@ dependencies:
         background: true
 ```
 
-Now when you [start an SSH build]( {{ site.baseurl }}/1.0/ssh-build/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+Now when you [start an SSH build]({{site.baseurl}}/ssh-build/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 
 ```
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
@@ -119,7 +119,7 @@ CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC
 Before you start, make sure you have an X Window System on your computer. If you're using macOS, we recommend
 [XQuartz](http://xquartz.macosforge.org/landing/).
 
-With X set up on your system, [start an SSH build]( {{ site.baseurl }}/1.0/ssh-build/)
+With X set up on your system, [start an SSH build]({{site.baseurl}}/ssh-build/)
 to a CircleCI VM, using the `-X` flag to set up forwarding:
 
 ```
@@ -156,4 +156,4 @@ other customers.
 
 ## Troubleshooting
 
-If you find that VNC or X11 disconnects unexpectedly, your build container may be running out of memory. See [our guide to memory limits]( {{ site.baseurl }}/1.0/oom/) to learn more.
+If you find that VNC or X11 disconnects unexpectedly, your build container may be running out of memory. See [our guide to memory limits]({{site.baseurl}}/oom/) to learn more.

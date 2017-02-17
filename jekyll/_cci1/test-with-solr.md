@@ -18,7 +18,7 @@ using ruby and the sunspot_solr gem, we'll run
 
 Even if we aren't able to do things automatically, `solr {{ site.data.precise.versions.solr }}`
 is installed on your build system. It will need to be configured with your
-schema.xml, and booted via [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
+schema.xml, and booted via [circle.yml]({{ site.baseurl }}/configuration/).
 Here's an example of how to do so:
 
 ```
@@ -39,7 +39,7 @@ to match your needs, but they should:
 2.  Copy your configuration (`schema.xml` at least, and `solrconfig.xml` if you need it)
 into place.
 
-3.  Launch solr as a [background process]( {{ site.baseurl }}/1.0/background-process/).
+3.  Launch solr as a [background process]({{ site.baseurl }}/background-process/).
 
 Solr, when started this way, will be running under `http://localhost:8983/solr/`,
 and logging to `$HOME/solr.log`.

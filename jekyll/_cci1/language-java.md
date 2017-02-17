@@ -10,11 +10,11 @@ CircleCI supports building Java applications using most common JDKs and build to
 Before each build, we look at your repository and infer commands to run, so most
 setups should work automatically.
 If your project has special requirements, you can augment or override inferred commands
-with a [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file.
+with a [circle.yml]({{ site.baseurl }}/configuration/) file.
 
 ### Version
 
-We have several versions of JDK pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#java) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#java) build images.
+We have several versions of JDK pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#java) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#java) build images.
 
 If you’d like a particular version, you can specify it in your circle.yml.
 
@@ -75,4 +75,4 @@ Depending on your build tooling, we will infer different commands:
   </tbody>
 </table>
 
-You can easily customize inferred build commands in your `circle.yml` by setting the `override`, `pre`, `post` in the [dependencies]( {{ site.baseurl }}/1.0/configuration/#dependencies) and [test]( {{ site.baseurl }}/1.0/configuration/#test) sections.
+You can easily customize inferred build commands in your `circle.yml` by setting the `override`, `pre`, `post` in the [dependencies]({{ site.baseurl }}/configuration/#dependencies) and [test]({{ site.baseurl }}/configuration/#test) sections.

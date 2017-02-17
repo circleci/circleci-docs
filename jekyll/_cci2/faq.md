@@ -25,7 +25,7 @@ The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same conten
 
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-images-2-0/) included in the image.
+Here’s a [list of languages and tools]({{site.baseurl}}/build-images-2-0/) included in the image.
 
 \*For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
 

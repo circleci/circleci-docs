@@ -16,7 +16,7 @@ The easiest way to authenticate `awscli` is to set the *Access Key ID* and
 see an image of what the page looks like and where the navigation link is for CircleCI 
 Docs.
 
-<span class="align-center">![](  {{ site.baseurl }}/assets/img/docs/aws-permissions.png)</span>
+<span class="align-center">![]({{site.baseurl}}/assets/img/docs/aws-permissions.png)</span>
 
 Create a new [IAM][iam-link] user specifically for CircleCI. This is best 
 practice for security purposes. You can also authenticate with `awscli` using 

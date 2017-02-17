@@ -17,7 +17,7 @@ Build Environment. For Ubuntu 12.04, replace `/opt/circleci/php` with
 
 ## Version
 
-We have many versions of PHP pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#php) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#php) build images.
+We have many versions of PHP pre-installed on [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#php) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#php) build images.
 
 If you don't want to use the default, you can specify your version in `circle.yml`:
 
@@ -33,7 +33,7 @@ CircleCI has the composer, pear, and pecl package managers installed.
 If we find a composer.json file, then we'll automatically run `composer install`.
 
 To install your dependencies with either `pear` or `pecl`,
-you have to include [dependency commands]( {{ site.baseurl }}/1.0/configuration/#dependencies)
+you have to include [dependency commands]({{site.baseurl}}/configuration/#dependencies)
 in your `circle.yml` file.
 The following example shows how to install the MongoDB extension using `pecl`.
 
@@ -71,7 +71,7 @@ you'll have to specify your PHP version in your `circle.yml` in order to edit PH
 
 We have pre-installed more than a dozen databases and queues,
 including PostgreSQL and MySQL. If needed, you have the option of
-[manually setting up your test database]( {{ site.baseurl }}/1.0/manually/#dependencies).
+[manually setting up your test database]({{site.baseurl}}/manually/#dependencies).
 
 ## Using the Apache Webserver {#php-apache}
 
@@ -125,7 +125,7 @@ test:
 ```
 
 If you want CircleCI to show a test summary of your build see
-[Metadata collection in custom test steps for PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit).
+[Metadata collection in custom test steps for PHPUnit]({{ site.baseurl }}/test-metadata/#phpunit).
 
 ## Disable Xdebug {#xdebug}
 
@@ -149,16 +149,16 @@ dependencies:
 
 ## Deployment
 
-CircleCI offers first-class support for [deployment]( {{ site.baseurl }}/1.0/configuration/#deployment).
+CircleCI offers first-class support for [deployment]({{site.baseurl}}/configuration/#deployment).
 When a build is green, CircleCI will deploy your project as directed
 in your `circle.yml` file. We can deploy to PaaS providers as well as to
 physical servers under your control.
 
 ## Troubleshooting for PHP
 
-If you run into problems, check out our [PHP troubleshooting]( {{ site.baseurl }}/1.0/troubleshooting-php/)
+If you run into problems, check out our [PHP troubleshooting]({{site.baseurl}}/troubleshooting-php/)
 write-ups about these issues:
 
-*   [Adding memcached with pecl on CircleCI]( {{ site.baseurl }}/1.0/php-memcached-compile-error/)
-*   [Composer hitting GitHub API rate limits]( {{ site.baseurl }}/1.0/composer-api-rate-limit/)
+*   [Adding memcached with pecl on CircleCI]({{site.baseurl}}/php-memcached-compile-error/)
+*   [Composer hitting GitHub API rate limits]({{site.baseurl}}/composer-api-rate-limit/)
 

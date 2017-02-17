@@ -6,4 +6,4 @@ description: Test environment
 changefreq: "weekly"
 ---
 
-The contents on this page were split and moved to [Ubuntu 12.04 build image]( {{ site.baseurl }}/1.0/build-image-precise/) and [Ubuntu 14.04 build image]( {{ site.baseurl }}/1.0/build-image-trusty/) pages.
+The contents on this page were split and moved to [Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise/) and [Ubuntu 14.04 build image]({{ site.baseurl }}/build-image-trusty/) pages.

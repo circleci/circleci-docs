@@ -315,4 +315,4 @@ migrations, install dependencies etc. across all your instances in a consistent
 manner.
 
 [substitution variables]: #key-patterns
-[circle.yml]: /docs/1.0/configuration/#deployment
+[circle.yml]: /docs/configuration/#deployment

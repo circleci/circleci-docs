@@ -11,17 +11,17 @@ build we look at your repository and infer commands to run, so most
 setups should work automatically.
 
 If you'd like something specific that's not being inferred,
-[you can say so]( {{ site.baseurl }}/1.0/configuration/) with
-[a configuration file]( {{ site.baseurl }}/1.0/config-sample/)
+[you can say so]({{ site.baseurl }}/configuration/) with
+[a configuration file]({{ site.baseurl }}/config-sample/)
 checked into the root of your repository.
 
 ### Version
 
-We pre-install [several versions of Scala on Ubuntu 12.04 build image]( {{ site.baseurl }}/1.0/build-image-precise/#scala).
+We pre-install [several versions of Scala on Ubuntu 12.04 build image]({{ site.baseurl }}/build-image-precise/#scala).
 
 You can specify the JVM version you want to run Scala on top of by
 following
-[the steps described in the Java doc]( {{ site.baseurl }}/1.0/configuration/#java-version).
+[the steps described in the Java doc]({{ site.baseurl }}/configuration/#java-version).
 
 ### Using a custom version of sbt
 
@@ -63,7 +63,7 @@ dependencies:
 
 ### Dependencies & Tests
 
-CircleCI can [cache directories]( {{ site.baseurl }}/1.0/configuration/#cache-directories)
+CircleCI can [cache directories]({{ site.baseurl }}/configuration/#cache-directories)
 in between builds to avoid unnecessary work.
 
 By default, when we detect a Scala project, we will run `sbt

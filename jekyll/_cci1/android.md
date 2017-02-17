@@ -13,7 +13,7 @@ CircleCI supports building and testing Android applications.
 The SDK is already installed on the VM at `/usr/local/android-sdk-linux`. We export
 this path as `$ANDROID_HOME`.
 
-We have many versions of the Android SDK pre-installed on [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#android) and [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#android) build images.
+We have many versions of the Android SDK pre-installed on [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/#android) and [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/#android) build images.
 
 If there's an SDK package that's not here that you would like
 installed, you can install it as part of your build with:
@@ -43,7 +43,7 @@ test:
     - ./gradlew assembleDebug
 ```
 
-or build a release `.apk` and save it to [artifacts]( {{ site.baseurl }}/1.0/build-artifacts/) with
+or build a release `.apk` and save it to [artifacts]({{ site.baseurl }}/build-artifacts/) with
 
 ```
 test:
