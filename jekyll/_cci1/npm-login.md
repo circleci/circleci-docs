@@ -33,5 +33,5 @@ dependencies:
 ```
 
 
-[1]:  {{ site.baseurl }}/1.0/configuration/#environment
-[2]:  {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git
+[1]: {{ site.baseurl }}/configuration/#environment
+[2]: {{ site.baseurl }}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git

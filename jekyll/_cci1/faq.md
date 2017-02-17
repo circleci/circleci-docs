@@ -27,7 +27,7 @@ Currently we support authentication with GitHub and Bitbucket. Please vote on re
 GitHub has only recently added the fine-grained permissions options, and
 we are still working on supporting them.
 
-In the meantime, the [suggested workaround]( {{ site.baseurl }}/1.0/github-security-ssh-keys/) is to create an additional user on GitHub with a limited set of permissions and use that account to
+In the meantime, the [suggested workaround]({{site.baseurl}}/github-security-ssh-keys/) is to create an additional user on GitHub with a limited set of permissions and use that account to
 perform the builds on CircleCI.
 
 ### I updated my email address on GitHub, and it does not show up on CircleCI
@@ -55,7 +55,7 @@ CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications; you 
 
 ### Can I send Slack / HipChat / IRC notifications for specific branches only?
 
-There is [experimental support for per branch chat notifications]( {{ site.baseurl }}/1.0/configuration/#per-branch-notifications). 
+There is [experimental support for per branch chat notifications]({{site.baseurl}}/configuration/#per-branch-notifications). 
 
 ## Discover CircleCI's Public IP addresses
 

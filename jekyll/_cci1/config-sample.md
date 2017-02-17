@@ -5,7 +5,7 @@ categories: [reference]
 description: "Making a circle.yml file"
 ---
 
-In our [configuration document]( {{ site.baseurl }}/1.0/configuration/) we list everything that can go into a
+In our [configuration document]({{site.baseurl}}/configuration/) we list everything that can go into a
 `circle.yml` file. Here we provide one complete sample file.
 
 **Note that you probably don't need to include every section or setting here.**

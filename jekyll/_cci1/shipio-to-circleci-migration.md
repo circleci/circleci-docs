@@ -20,14 +20,14 @@ For iOS projects, please [contact support](mailto:support@circleci.com) with the
 You can easily migrate your Android projects from Ship.io to CircleCI in a few simple steps.
 
 1. Add your project on the [Add Projects page](https://circleci.com/add-projects).
-2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started]( {{ site.baseurl }}/1.0/getting-started/) documentation.
-3. Check out the [Testing Android on CircleCI]( {{ site.baseurl }}/1.0/android/) documentation.
+2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started]({{ site.baseurl }}/getting-started/) documentation.
+3. Check out the [Testing Android on CircleCI]({{ site.baseurl }}/android/) documentation.
 
 
 ## iOS FAQ: How do I...
 
 ### Set environment variables
-You can set environment variables through the **Project Settings > Environment Variables** page of your project, or through [circle.yml]( {{ site.baseurl }}/1.0/configuration/#environment).
+You can set environment variables through the **Project Settings > Environment Variables** page of your project, or through [circle.yml]({{ site.baseurl }}/configuration/#environment).
 
 ### Use Xcode 7
 Include a `circle.yml` file in the repo's root directory with the following contents:
@@ -45,19 +45,19 @@ CircleCI will automatically detect your shared scheme. If you have more than one
 CircleCI will detect your workspace. If you have more than one workspace, you can specify the path to your `.xcworkspace` file relative to the git repository root using the `XC_WORKSPACE` environment variable.
 
 ### Run scripts
-Make sure any scripts that you want to run are included in your repository. You can run your script using a bash command (e.g. `./example_script.sh`) configured in our UI (through **Project Settings > Dependency/Test Commands**) or in a [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file.
+Make sure any scripts that you want to run are included in your repository. You can run your script using a bash command (e.g. `./example_script.sh`) configured in our UI (through **Project Settings > Dependency/Test Commands**) or in a [circle.yml]({{ site.baseurl }}/configuration/) file.
 
 ### Configure build notifications
 You can configure build notifications using the "Notifications" section of your Project Settings. Email notifications can be configured from the [Account page](https://circleci.com/account).
 
 ### Customize the build commands
-You can add to or override our inferred commands through your Project Settings or through a [circle.yml file]( {{ site.baseurl }}/1.0/configuration/).
+You can add to or override our inferred commands through your Project Settings or through a [circle.yml file]({{ site.baseurl }}/configuration/).
 
 ### Deploy my app
 We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-continuous-delivery-for-ios-with-fastlane-and-circleci-c7dae19df2ed).
 
 ### Get more help
-* [macOS build docs]( {{ site.baseurl }}/1.0/ios-builds-on-os-x/)
+* [macOS build docs]({{ site.baseurl }}/ios-builds-on-os-x/)
 * [discuss.circleci.com](https://discuss.circleci.com/c/mobile)
 * [CircleCI Support](mailto:support@circleci.com)
 
@@ -73,7 +73,7 @@ Email notifications can be configured from the [Account page](https://circleci.c
 If you have a Gradle Wrapper in the root of your repository, CircleCI will automatically run ./gradlew test.
 
 ### Use the Android Emulator
-In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
+In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml]({{site.baseurl}}/configuration/).
 
 Below is a sample circle.yml file taken from an [excellent blog post](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/) written by someone who has an extensively configured Android project on CircleCI.
 
@@ -110,7 +110,7 @@ test:
     - (./gradlew connectedAndroidTest)
 ```
 ### Run scripts
-You can specify which scripts to run in your [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
+You can specify which scripts to run in your [circle.yml]({{site.baseurl}}/configuration/).
 The following .yml snippit would trigger script.sh to run during each build.
 
 ```
@@ -126,13 +126,13 @@ Please don't hesitate to give our [support team](mailto:support@circleci.com) a 
 
 [Configuring custom AVDs](https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine)
 
-[Getting Started on CircleCI]( {{ site.baseurl }}/1.0/getting-started/)
+[Getting Started on CircleCI]({{ site.baseurl }}/getting-started/)
 
 [An excellent CircleCI and Android Gradle how-to](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/)
 
-[Debugging Android applications on CircleCI]( {{ site.baseurl }}/1.0/oom/#out-of-memory-errors-in-android-builds)
-[CircleCI & Android 101]( {{ site.baseurl }}/1.0/android/)
+[Debugging Android applications on CircleCI]({{ site.baseurl }}/oom/#out-of-memory-errors-in-android-builds)
+[CircleCI & Android 101]({{ site.baseurl }}/android/)
 
-[CircleCI Docs]( {{ site.baseurl }}/1.0/)
+[CircleCI Docs]({{ site.baseurl }}/)
 
 [Discuss.circleci.com](https://discuss.circleci.com/)

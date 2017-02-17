@@ -17,7 +17,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
     In this case, the authToken is `00000000-0000-0000-0000-000000000000`.
 
-2.  Go to your [project settings]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git), and set the `NPM_TOKEN` variable to the
+2.  Go to your [project settings]({{ site.baseurl }}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git), and set the `NPM_TOKEN` variable to the
     obtained authToken.
 
 3.  Configure CircleCI to add the authToken to `~/.npmrc`:

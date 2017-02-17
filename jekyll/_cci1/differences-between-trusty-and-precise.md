@@ -47,7 +47,7 @@ There are two intentions to why we changed the installation path on Ubuntu 14.04
 
 On 12.04, many services are started by default. While this is good because you don't have to think about which services you need to start for your builds, running unnecessary services is a waste of memory in containers.
 
-On 14.04, only popular services are started by default. To see the list of services started by default, please take a look at [Ubuntu 14.04 build image doc]( {{ site.baseurl }}/1.0/build-image-trusty).
+On 14.04, only popular services are started by default. To see the list of services started by default, please take a look at [Ubuntu 14.04 build image doc]({{site.baseurl}}/build-image-trusty).
 
 ## How we build the image is public
 

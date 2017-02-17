@@ -36,7 +36,7 @@ this API key must be set before proceeding.
 **Step 1:**
 Enter the API key (if not autofilled) and click **Save**.
 
-![](  {{ site.baseurl }}/assets/img/docs/heroku-step1.png)
+![]({{ site.baseurl }}/assets/img/docs/heroku-step1.png)
 
 If this key has already been added to your **Project Settings > Heroku settings** page,
 CircleCI maintains security by displaying a shorten version of the existing API key
@@ -49,7 +49,7 @@ A member of your project&mdash;possibly you&mdash;needs to register as that user
 Click the button to set the registered person as the Heroku deploy user
 and to associate a Heroku SSH key with the deploy user's account.
 
-![](  {{ site.baseurl }}/assets/img/docs/heroku-step2.png)
+![]({{ site.baseurl }}/assets/img/docs/heroku-step2.png)
 
 **Step 3:**
 Specify the app using the

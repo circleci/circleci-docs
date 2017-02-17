@@ -41,7 +41,7 @@ The name of the Git branch being tested, e.g. 'master', if the build is running 
 
 `CIRCLE_TAG`
 
-The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]( {{ site.baseurl }}/1.0/configuration/#tags).
+The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]({{ site.baseurl }}/configuration/#tags).
 
 `CIRCLE_SHA1`
 
@@ -77,7 +77,7 @@ If this build is part of only one pull request, its URL will be populated here. 
 
 `CIRCLE_ARTIFACTS`
 
-The directory whose contents are automatically saved as [build artifacts](/docs/1.0/build-artifacts/).
+The directory whose contents are automatically saved as [build artifacts](/docs/build-artifacts/).
 
 `CIRCLE_USERNAME`
 
@@ -85,7 +85,7 @@ The GitHub login of the user who either pushed the code to GitHub or triggered t
 
 `CIRCLE_TEST_REPORTS`
 
-The directory whose contents are automatically processed as [JUnit test metadata](/docs/1.0/test-metadata/).
+The directory whose contents are automatically processed as [JUnit test metadata](/docs/test-metadata/).
 
 ### Building pull requests that come from forks
 
@@ -106,7 +106,7 @@ The number of the pull request this build forms part of.
 
 ## Parallelism
 
-These variables are available for [manually setting up parallelism](/docs/1.0/parallel-manual-setup/):
+These variables are available for [manually setting up parallelism](/docs/parallel-manual-setup/):
 
 `CIRCLE_NODE_TOTAL`
 
@@ -154,7 +154,7 @@ Similarly, **if your CircleCI project is public, don't put any sensitive informa
 ## Setting environment variables for all commands using circle.yml
 
 You can set environment variables in your `circle.yml` file, that
-[will be set for every command](/docs/1.0/configuration/#environment).
+[will be set for every command](/docs/configuration/#environment).
 
 ## Setting environment variables for all commands without adding them to git
 
@@ -183,7 +183,7 @@ You can use standard bash syntax in your commands:
 RAILS_ENV=test bundle exec rake test
 ```
 
-You can also use [the environment modifier](/docs/1.0/configuration/#modifiers) in your
+You can also use [the environment modifier](/docs/configuration/#modifiers) in your
 `circle.yml` file.
 
 **Note:** We don't parse any environment variables in the `webhooks` section of `circle.yml`.

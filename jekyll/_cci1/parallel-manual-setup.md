@@ -99,7 +99,7 @@ the tests so that the total execution time is minimised.
 
 If you are overriding the default test command as explained above and
 still want the tests to be automatically balanced, you’ll need to make
-sure that the [test metadata]( {{ site.baseurl }}/1.0/test-metadata/)
+sure that the [test metadata]({{site.baseurl}}/test-metadata/)
 is collected properly. For example, you would modify the initial RSpec
 command like this to include the RSpec Junit formatter:
 

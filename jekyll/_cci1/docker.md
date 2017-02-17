@@ -62,7 +62,7 @@ deployment:
       - docker push circleci/elasticsearch
 ```
 
-Intermediate images [aren't handled well in the CircleCI container]( {{ site.baseurl }}/1.0/docker-btrfs-error/) 
+Intermediate images [aren't handled well in the CircleCI container]({{site.baseurl}}/docker-btrfs-error/) 
 so using `--rm=false` with Docker build prevents a bunch of annoying (but not 
 serious) errors.
 

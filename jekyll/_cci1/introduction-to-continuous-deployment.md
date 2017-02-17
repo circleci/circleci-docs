@@ -16,7 +16,7 @@ Continuous Deployment easy.
 ## Deployment Syntax
 
 Tell CircleCI about your deployment requirements in the `deployment`
-section of your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file.
+section of your [circle.yml]({{ site.baseurl }}/configuration/) file.
 Within this section, you can can define custom deployment steps for each
 branch, directing CircleCI to use specific deployment tools or custom scripts.
 Deployment commands are triggered only after a successful build.
@@ -95,7 +95,7 @@ deployment:
 ## Deploy to a PaaS
 
 CircleCI has customers deploying to Heroku, Engine Yard, Google App Engine, Elastic Beanstalk, Dot Cloud, Nodejistu and other PaaSes. We have detailed instructions on deployment to
-[Heroku]( {{ site.baseurl }}/1.0/continuous-deployment-with-heroku/),
-[Google App Engine]( {{ site.baseurl }}/1.0/deploy-google-app-engine/)
-and [Bluemix]( {{ site.baseurl }}/1.0/deploy-bluemix/).
+[Heroku]({{ site.baseurl }}/continuous-deployment-with-heroku/),
+[Google App Engine]({{ site.baseurl }}/deploy-google-app-engine/)
+and [Bluemix]({{ site.baseurl }}/deploy-bluemix/).
 
