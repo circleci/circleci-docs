@@ -117,7 +117,7 @@ tab on the build page:
 ![]( {{ site.baseurl }}/1.0/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
-[CircleCI API]({{site.baseurl}}/api/#build-artifacts).
+[CircleCI API]( {{ site.baseurl }}/1.0/api/#build-artifacts).
 
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
@@ -153,7 +153,7 @@ For more information find an example of your language here:
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]({{site.baseurl}}/environment-variables/).
+[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
@@ -161,7 +161,7 @@ parallel builds.
 ### Code Climate
 
 1. In the Code Climate UI, go to your repo and then navigate to **Settings -> Test Coverage**.
-2. Grab your test reporter token and add it to your CircleCI [environment variables]({{site.baseurl}}/environment-variables/) as `CODECLIMATE_REPO_TOKEN`.
+2. Grab your test reporter token and add it to your CircleCI [environment variables]( {{ site.baseurl }}/1.0/environment-variables/) as `CODECLIMATE_REPO_TOKEN`.
 3. Follow the [Code Climate documentation](https://docs.codeclimate.com/docs/setting-up-test-coverage#section-how-to) for your specific language or framework.
 
 Code Climate does not currently support CircleCI's parallelization.

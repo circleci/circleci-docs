@@ -11,7 +11,7 @@ to use the [Cloud Foundry command line tool 'cf'](https://github.com/cloudfoundr
 
 ## Quickstart
 
-To deploy to Bluemix from CircleCI you will need to [set your Bluemix password]({{site.baseurl}}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git) 
+To deploy to Bluemix from CircleCI you will need to [set your Bluemix password]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git) 
 and username, and modify 3 sections in circle.yml. 
 
 Here's a minimal example circle.yml configuration:
@@ -43,7 +43,7 @@ deployment:
 
 First, you have to **install the 'cf' tool on your build VM.**
 
-This example [circle.yml]({{site.baseurl}}/configuration/)
+This example [circle.yml]( {{ site.baseurl }}/1.0/configuration/)
 fragment installs the latest version of the 'cf' utility:
 
 ```
@@ -58,7 +58,7 @@ dependencies:
 
 You should store your Bluemix password in an environment variables, which you can
 manage through the web UI as described
-[in this document]({{site.baseurl}}/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git).
+[in this document]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git).
 For the sake of convenience, we'll assume you store your Bluemix user there too; in BLUEMIX_PASSWORD and BLUEMIX_USER respectively.
 
 We'll configure 'cf' in our post test section of our circle.yml like:
@@ -76,7 +76,7 @@ test:
 
 With the cli installed and configured, next you need to **configure continuous deployment.**
 You may want to read up on configuring
-[continuous deployment with circle.yml]({{site.baseurl}}/configuration/#deployment)
+[continuous deployment with circle.yml]( {{ site.baseurl }}/1.0/configuration/#deployment)
 in general if your needs are more complex than what's shown here.
 
 For the sake of this example, let's deploy the master branch to

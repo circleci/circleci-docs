@@ -10,10 +10,10 @@ deployment tarballs, we can automatically save and link them for you.
 
 Before each build, we create an empty directory and export its path in the
 read-only `$CIRCLE_ARTIFACTS`
-[environment variable]({{site.baseurl}}/environment-variables/).
+[environment variable]( {{ site.baseurl }}/1.0/environment-variables/).
 
 If you prefer, you can also
-[configure directories and files whose contents will]({{site.baseurl}}/configuration/#artifacts)
+[configure directories and files whose contents will]( {{ site.baseurl }}/1.0/configuration/#artifacts)
 be saved.
 
 After the build finishes, everything in these directories is saved and linked to the build.

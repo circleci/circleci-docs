@@ -42,7 +42,7 @@ dependencies:
 ### npm authentication
 
 If you need to authenticate with `npm` before downloading dependencies, 
-instructions are available [here]({{site.baseurl}}/npm-login/).
+instructions are available [here]( {{ site.baseurl }}/1.0/npm-login/).
 
 ### Databases
 

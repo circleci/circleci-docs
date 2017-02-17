@@ -33,8 +33,8 @@ If we find a Cabal file at the root of your repository, we install your
 dependencies and run `cabal build` and `cabal test`.
 You can customize this easily in your `circle.yml` by setting
 the `override`, `pre`, and `post` properties in the
-[dependencies]({{site.baseurl}}/configuration/#dependencies)
-and [test]({{site.baseurl}}/configuration/#test) sections.
+[dependencies]( {{ site.baseurl }}/1.0/configuration/#dependencies)
+and [test]( {{ site.baseurl }}/1.0/configuration/#test) sections.
 
 ```
 test:

@@ -73,7 +73,7 @@ Email notifications can be configured from the [Account page](https://circleci.c
 If you have a Gradle Wrapper in the root of your repository, CircleCI will automatically run ./gradlew test.
 
 ### Use the Android Emulator
-In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml]({{site.baseurl}}/configuration/).
+In order to start the Android Emulator you will need to add some configuration settings to your [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
 
 Below is a sample circle.yml file taken from an [excellent blog post](http://blog.originate.com/blog/2015/03/22/android-and-ci-and-gradle-a-how-to/) written by someone who has an extensively configured Android project on CircleCI.
 
@@ -110,7 +110,7 @@ test:
     - (./gradlew connectedAndroidTest)
 ```
 ### Run scripts
-You can specify which scripts to run in your [circle.yml]({{site.baseurl}}/configuration/).
+You can specify which scripts to run in your [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
 The following .yml snippit would trigger script.sh to run during each build.
 
 ```

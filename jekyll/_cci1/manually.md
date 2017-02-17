@@ -32,7 +32,7 @@ directory of your repository. We recommend adding this upfront on a branch to
 keep you and your colleagues on the same page.
 
 We have provided a
-[full reference for the `circle.yml` file]({{site.baseurl}}/configuration/)
+[full reference for the `circle.yml` file]( {{ site.baseurl }}/1.0/configuration/)
 but you won't need that for now&mdash;
 we'll guide you through a simple setup and you can check out the comprehensive docs later.
 

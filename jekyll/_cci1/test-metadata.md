@@ -11,7 +11,7 @@ We'll use the test metadata to give you better insight into your build. For our
 inferred steps that use parallelism, we'll always use the timing information to get you
 better test splits and finish your builds faster.
 
-You can also take advantage of this runtime-based test splitting in custom steps if you follow [these steps]({{site.baseurl}}/test-metadata/#using-the-files-modifier).
+You can also take advantage of this runtime-based test splitting in custom steps if you follow [these steps]( {{ site.baseurl }}/1.0/test-metadata/#using-the-files-modifier).
 
 ## Automatic test metadata collection
 
@@ -65,8 +65,8 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [Cucumber]( {{ site.baseurl }}/1.0/test-metadata/#cucumber)
 * [Maven Surefire]( {{ site.baseurl }}/1.0/test-metadata/#maven-surefire-plugin-for-java-junit-results)
 * [Gradle]( {{ site.baseurl }}/1.0/test-metadata/#gradle-junit-results)
-* [Mocha]({{site.baseurl}}/test-metadata/#mochajs)
-* [Ava]({{site.baseurl}}/test-metadata/#ava)
+* [Mocha]( {{ site.baseurl }}/1.0/test-metadata/#mochajs)
+* [Ava]( {{ site.baseurl }}/1.0/test-metadata/#ava)
 * [PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit)
 * [RSpec]( {{ site.baseurl }}/1.0/test-metadata/#rspec)
 * [test2junit]( {{ site.baseurl }}/1.0/test-metadata/#test2junit-for-clojure-tests)
@@ -210,7 +210,7 @@ You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert C
 ## Using the `files` modifier
 
 If you are collecting test metadata for a custom build step as documented above, you can
-still use runtime-based test splitting with the `files` [modifier]({{site.baseurl}}/configuration/#modifiers).
+still use runtime-based test splitting with the `files` [modifier]( {{ site.baseurl }}/1.0/configuration/#modifiers).
 This modifier lets will pass a list of filename arguments to the end of your custom command
 which can be used by your test runner to run a subset of test files on each build node.
 If the "file" attribute is populated in the junit-formatted XML metadata for these
