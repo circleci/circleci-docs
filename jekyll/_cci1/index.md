@@ -26,7 +26,7 @@ permalink: /1.0/index.html
 				{% if doc.short-title %}
 					<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.short-title }}</a></li>
 				{% else %}
-					<li><a href=" {{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
+					<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.title }}</a></li>
 				{% endif %}
 			{% endif %}
 		{% endif %}
