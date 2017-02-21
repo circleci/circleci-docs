@@ -24,7 +24,7 @@ layout: classic-docs
 
 	{% if docs_found > 3 %}
 		{% assign more = docs_found | minus: 3 %}
-		<li><em><a href="{{ site.baseurl }}/{{ collection.prefix}}/{{ category.slug }}/">{{ more }} more</a></em></li>
+		<li><em><a href="{{ site.baseurl }}{{ collection.prefix}}/{{ category.slug }}/">{{ more }} more</a></em></li>
 	{% endif %}
 	</ul>
 </div>
