@@ -106,11 +106,11 @@ downloaded to `/home/ubuntu/.go_workspace/src/github.com/acme/calculator`.
 
 
 
-[config-doc]: {{ site.baseurl }}/configuration/
-[precise-doc]: {{ site.baseurl }}/build-image-precise/#go
-[trusty-doc]: {{ site.baseurl }}/build-image-trusty/#go
-[config-doc-dep]: {{ site.baseurl }}/configuration/#dependencies
-[db-doc]: {{ site.baseurl }}/manually/#dependencies
-[config-doc-test]: {{ site.baseurl }}/configuration/#test
-[config-doc-deploy]: {{ site.baseurl }}/configuration/#deployment
-[env-doc]: {{ site.baseurl }}/environment/
+[config-doc]:  {{ site.baseurl }}/1.0/configuration/
+[precise-doc]:  {{ site.baseurl }}/1.0/build-image-precise/#go
+[trusty-doc]:  {{ site.baseurl }}/1.0/build-image-trusty/#go
+[config-doc-dep]:  {{ site.baseurl }}/1.0/configuration/#dependencies
+[db-doc]:  {{ site.baseurl }}/1.0/manually/#dependencies
+[config-doc-test]:  {{ site.baseurl }}/1.0/configuration/#test
+[config-doc-deploy]:  {{ site.baseurl }}/1.0/configuration/#deployment
+[env-doc]:  {{ site.baseurl }}/1.0/environment/

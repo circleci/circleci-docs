@@ -6,7 +6,7 @@ description: Continuous Deployment to Google App Engine
 ---
 
 Note that there are a few common dependencies like the `gcloud` command line tool and Service Account authentication that are required
-for all Google Cloud Platform deployments. Please see the general [Google Cloud Platform doc]({{site.baseurl}}/google-cloud-platform/) for more info.
+for all Google Cloud Platform deployments. Please see the general [Google Cloud Platform doc]( {{ site.baseurl }}/1.0/google-cloud-platform/) for more info.
 
 ## App Engine
 

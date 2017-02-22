@@ -57,7 +57,7 @@ customization options.
 
 By default, CircleCI will build your project with Xcode 7.0. You can select a
 newer version of Xcode by specifying the major and minor version in a
-[circle.yml file]({{ site.baseurl }}/configuration/) in the root of your
+[circle.yml file]( {{ site.baseurl }}/1.0/configuration/) in the root of your
 repository. For example, for 8.2.1, add the following:
 
 ```
@@ -82,7 +82,7 @@ If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
 We cannot handle all setups automatically, so for some projects you might need
 to invoke CocoaPods manually with some custom configuration. To do this you will
 need to override the `dependencies` section of your `circle.yml` file.
-See our [documentation on overriding build phases for more information on this.]({{ site.baseurl }}/configuration/#phases).
+See our [documentation on overriding build phases for more information on this.]( {{ site.baseurl }}/1.0/configuration/#phases).
 If you need more help please reach out to our support team who are always happy
 to help out.
 
@@ -120,7 +120,7 @@ these steps:
    to match your code-signing identity, ie `"iPhone Distribution: Acme Inc."`.
 1. Build with `gym` and deploy with `ipa`.
 
-Please check out the [code signing doc]({{ site.baseurl }}/ios-code-signing/) for more
+Please check out the [code signing doc]( {{ site.baseurl }}/1.0/ios-code-signing/) for more
 details about setting up code signing, and the [deployment](#deployment)
 section for examples of deployment setups.
 
@@ -182,7 +182,7 @@ test:
 ### Environment variables
 You can customize the behavior of CircleCI's automatic build commands by setting
 the following environment variables in a `circle.yml` file or at
-**Project Settings > Environment Variables** (see [here]({{ site.baseurl }}/environment-variables/#custom) for more info
+**Project Settings > Environment Variables** (see [here]( {{ site.baseurl }}/1.0/environment-variables/#custom) for more info
 about environment variables):
 
 * `XCODE_WORKSPACE` - The path to your `.xcworkspace` file relative to the git repository root
@@ -193,7 +193,7 @@ about environment variables):
 precedence over project.
 
 If more than one scheme is present, then you should specify the
-`XCODE_SCHEME` [environment variable]({{ site.baseurl }}/environment-variables/#custom).
+`XCODE_SCHEME` [environment variable]( {{ site.baseurl }}/1.0/environment-variables/#custom).
 Otherwise a scheme will be chosen arbitrarily.
 
 You can also use the Environment Variables section to add all the
@@ -203,7 +203,7 @@ securely.
 ### Configuration file
 The most flexible means to customize your build is to add a `circle.yml` file to your project,
 which allows you to run arbitrary bash commands instead of or in addition to the inferred commands
-at various points in the build process. See the [configuration doc]({{ site.baseurl }}/configuration/) for
+at various points in the build process. See the [configuration doc]( {{ site.baseurl }}/1.0/configuration/) for
 a detailed discussion of the structure of the `circle.yml` file. Note, however, that
 a number of options discussed in that doc will not work for macOS builds.
 Please see the [the Constraints section](#Constraints-on-macos-based-builds) for the
@@ -290,12 +290,12 @@ deployment:
 First, we need to get some credentials. Log in to Fabric.io and visit
 your organization's settings page.
 
-![]({{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
+![](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
 Click on your organisation (CircleCI in the image above), and click on
 the API key and Build Secret links to reveal the items.
 
-![]({{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
+![](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
 On CircleCI, navigate to your App's Project Settings page, and under
 Environment Variables add 2 new items named `CRASHLYTICS_API_KEY` and
@@ -403,7 +403,7 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
   Sometimes the issue would only be present with one of these tools but not the other.
 
 * **Errors while installing code signing certificates.** Please check out [the Troubleshooting
-  section]({{ site.baseurl }}/ios-code-signing/#troubleshooting) of the code signing doc.
+  section]( {{ site.baseurl }}/1.0/ios-code-signing/#troubleshooting) of the code signing doc.
 
 ### A note on code-generating tools
 Many iOS app developers use tools that generate substantial amounts of code. In such
@@ -416,11 +416,11 @@ Linux containers that are not available for macOS builds at the moment:
 
 * Parallelism is not supported
 * While the general `circle.yml` file structure will be honored in macOS-based builds
-[configuration options]({{ site.baseurl }}/configuration/), the following sections of
+[configuration options]( {{ site.baseurl }}/1.0/configuration/), the following sections of
 `circle.yml` will not work correctly:
   * `machine: services`
   * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc]({{ site.baseurl }}/configuration/)
+    in the [Configuration doc]( {{ site.baseurl }}/1.0/configuration/)
 
 Please see the [customizing your build](#customizing-your-build) section for alternatives.
 

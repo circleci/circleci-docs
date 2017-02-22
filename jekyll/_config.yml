@@ -18,8 +18,8 @@ collections:
   cci1:
     name: "1.0 Docs"
     output: true
-    permalink: /:path/
-    prefix: ""
+    permalink: /1.0/:path/
+    prefix: "/1.0"
     selectorName: "1.0"
   ccie:
     name: "Enterprise Docs"
