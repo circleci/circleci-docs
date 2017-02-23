@@ -22,4 +22,32 @@ $( document ).ready(function() {
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);
 	});
+
+    // Initialize navgoco sidebar menus with default options
+    $("#mysidebar").navgoco({
+      caretHtml: '',
+      accordion: false,
+      openClass: 'active', // open
+      save: true,
+      cookie: {
+        name: 'navgoco',
+        expires: false,
+        path: '/'
+      },
+      slide: {
+        duration: 400,
+        easing: 'swing'
+      }
+    });
+
+    $("#collapseAll").click(function(e) {
+      e.preventDefault();
+      $("#mysidebar").navgoco('toggle', false);
+    });
+
+    $("#expandAll").click(function(e) {
+      e.preventDefault();
+      $("#mysidebar").navgoco('toggle', true);
+    });
+    // End navgoco sidebar menu options
 });

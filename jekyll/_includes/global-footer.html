@@ -51,36 +51,4 @@
   <script src="{{ "/assets/js/site.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
   <script src="{{ "/assets/js/jquery.cookie.min.js" | prepend: site.baseurl }}" type="text/javascript" ></script>
   <script src="{{ "/assets/js/jquery.navgoco.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            // Initialize navgoco with default options
-            $("#mysidebar").navgoco({
-                caretHtml: '',
-                accordion: false,
-                openClass: 'active', // open
-                save: true,
-                cookie: {
-                    name: 'navgoco',
-                    expires: false,
-                    path: '/'
-                },
-                slide: {
-                    duration: 400,
-                    easing: 'swing'
-                }
-            });
-
-           $("#collapseAll").click(function(e) {
-            e.preventDefault();
-            $("#mysidebar").navgoco('toggle', false);
-            });
-
-          $("#expandAll").click(function(e) {
-            e.preventDefault();
-            $("#mysidebar").navgoco('toggle', true);
-            });
-
-        });
-
-    </script>
 </footer>
