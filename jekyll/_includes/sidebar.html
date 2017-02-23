@@ -11,7 +11,7 @@
 	</select>
 	<hr />
 	{% if page.page-type != "homepage" %}
-	<ul class="list-unstyled">
+	<ul id="mysidebar" class="nav">
 	{% capture sidebar %}
 	<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }} Index Page</a></li>
 	{% assign cats = site.data.categories | where:"section",section.label %}
@@ -21,8 +21,8 @@
 		{% else %}
 			{% assign catPage = cat.slug %}
 		{% endif %}
-		<li><a href="{{ site.baseurl }}{{ section.prefix }}/{{ catPage }}/">{{ cat.name }}</a>
-		<ul class="list-unstyled">
+		<li><a href="#">{{ cat.name }}</a>
+		<ul>
 		{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
 		{% for doc in sortedDocs %}
 			{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
@@ -35,7 +35,7 @@
 				{% if doc.children %}
 					{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
 				{% endif %}
-				<li class="{% if page.path contains doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+				<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
 			{% endif %}
 		{% endfor %}
 		</ul>
