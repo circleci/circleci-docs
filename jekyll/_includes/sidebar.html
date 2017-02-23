@@ -14,6 +14,7 @@
 	<ul id="mysidebar" class="nav">
 	{% capture sidebar %}
 	<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }} Index Page</a></li>
+    <p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
 	{% assign cats = site.data.categories | where:"section",section.label %}
 	{% for cat in cats %}
 		{% if cat.index %}
