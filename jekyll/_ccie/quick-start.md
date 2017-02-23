@@ -52,7 +52,7 @@ covers the basics of adding a <code>circle.yml</code> file:</p>
 
 
 - **SSH debugging:** CircleCI makes it easy for any developer to SSH into builds for their projects.
-You can find instructions for this in the [SSH build documentation]({{site.baseurl}}/ssh-build/).
+You can find instructions for this in the [SSH build documentation]({{site.baseurl}}/1.0/ssh-build/).
 Note that in CircleCI Enterprise, SSH access to builds may require connecting to a VPN, using a bastion
 host, or following other special instructions specific to your installation. Consult your CircleCI
 administrator if you are unable to access builds via SSH.
@@ -63,9 +63,9 @@ containers are strongly isolated from each other using LXC (very similar to Dock
 common errors that occur in other parallel test runners like unintentional sharing of files and databases.
 Many common test runners like nose and RSpec can be automatically run in parallel with CircleCI's inferred
 test commands. In these cases, test run time data can also be collected to ensure that tests are split up
-optimally. You can read about how to ensure tests are auto-balanced [here]({{site.baseurl}}/test-metadata/).
+optimally. You can read about how to ensure tests are auto-balanced [here]({{site.baseurl}}/1.0/test-metadata/).
 
 - **`sudo`, `apt-get`, and more:** Unlike other CI servers that require you to work with an administrator
 to install any custom packages, CircleCI Enterprise let's you install almost anything you need
 right from your `circle.yml` file. You can find some examples of installing custom software this way
-[here]({{site.baseurl}}/installing-custom-software/).
+[here]({{site.baseurl}}/1.0/installing-custom-software/).

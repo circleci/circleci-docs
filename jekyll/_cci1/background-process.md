@@ -5,7 +5,7 @@ categories: [how-to]
 description: "How to start a background process from circle.yml"
 ---
 
-Starting a background process from [circle.yml]({{site.baseurl}}/configuration/)
+Starting a background process from [circle.yml]( {{ site.baseurl }}/1.0/configuration/)
 is entirely possible, but it is not done by adding `&`
 to the end of your command line. Instead, you set the background flag on the command.  For example:
 

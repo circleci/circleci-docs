@@ -32,7 +32,7 @@ directory of your repository. We recommend adding this upfront on a branch to
 keep you and your colleagues on the same page.
 
 We have provided a
-[full reference for the `circle.yml` file]({{site.baseurl}}/configuration/)
+[full reference for the `circle.yml` file]( {{ site.baseurl }}/1.0/configuration/)
 but you won't need that for now&mdash;
 we'll guide you through a simple setup and you can check out the comprehensive docs later.
 
@@ -52,7 +52,7 @@ Normally, these commands are inferred by CircleCI, but if you are reading this, 
 `circle.yml` file.
 You can modify which&mdash;and in what order&mdash;commands are run by adding `override`,
 `pre`, and/or `post` when needed.
-Take a look at the aforementioned [reference guide]({{ site.baseurl }}/configuration/)
+Take a look at the aforementioned [reference guide]( {{ site.baseurl }}/1.0/configuration/)
 should you want to learn more details.
 
 Failing commands (those with a non-zero exit code) will cause the whole build to fail, and you'll receive a notification.
@@ -61,9 +61,9 @@ Failing commands (those with a non-zero exit code) will cause the whole build to
 
 For the most part, there is nothing that you have to add to configure the test machine.
 We have already installed the most common libraries, languages, browsers, and databases that you'll need.
-See [Ubuntu 12.04]({{ site.baseurl }}/build-image-precise/) and [Ubuntu 14.04]({{ site.baseurl }}/build-image-trusty/) build image pages for a comprehensive list of what we have installed.
+See [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/) build image pages for a comprehensive list of what we have installed.
 
-The [machine section]({{ site.baseurl }}/configuration/#machine)
+The [machine section]( {{ site.baseurl }}/1.0/configuration/#machine)
 of the `circle.yml` file is the place where you can tweak common settings, such as timezone, language version used, and
 `/etc/hosts` contents.
 
@@ -141,7 +141,7 @@ You should be good to go. Happy testing!
 <h2 id="next">Next steps</h2>
 
 If your tests fail and you need to fix something, CircleCI has a
-[list of common problems and their solutions]({{ site.baseurl }}/troubleshooting/)
+[list of common problems and their solutions]( {{ site.baseurl }}/1.0/troubleshooting/)
 that can help you debug many issues.
-You might also like to know that we allow you to [SSH in during your builds]({{ site.baseurl }}/ssh-build/).
+You might also like to know that we allow you to [SSH in during your builds]( {{ site.baseurl }}/1.0/ssh-build/).
 This lets you check out how CircleCI works and facilitates nimble and efficient debugging.

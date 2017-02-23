@@ -26,7 +26,7 @@ dependencies:
 ```
 
 <span class='label label-info'>Note:</span>
-remember to remove elasticsearch from [`machine: services:`]({{site.baseurl}}/configuration/#services) if you install it manually.
+remember to remove elasticsearch from [`machine: services:`]( {{ site.baseurl }}/1.0/configuration/#services) if you install it manually.
 
 ## Install an Elasticsearch plugin
 
@@ -49,7 +49,7 @@ To reduce the time spent installing dependencies, CircleCI can cache them betwee
 You can add arbitrary directories to the cache, allowing you to avoid the overhead of building your custom software during the build.
 
 Tell CircleCI to save a cached copy using the
-[`cache_directories` settings in your `circle.yml` file](/docs/configuration/#cache-directories).
+[`cache_directories` settings in your `circle.yml` file](/docs/1.0/configuration/#cache-directories).
 Then check for the directory before you download Elasticsearch:
 
 ```

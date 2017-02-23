@@ -55,6 +55,6 @@ install path/to/module` for elsewhere in the file system.
 * **Git**. You can always rely on a Git repository like this `npm install git://github.com/acme/private-module.git`
 
 
-[1]: {{ site.baseurl }}/npm-login/ 
+[1]:  {{ site.baseurl }}/1.0/npm-login/ 
 [2]: https://docs.npmjs.com/private-modules/ci-server-config
-[3]: {{ site.baseurl }}/configuration/#environment
+[3]:  {{ site.baseurl }}/1.0/configuration/#environment
