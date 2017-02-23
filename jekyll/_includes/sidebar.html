@@ -35,7 +35,7 @@
 				{% if doc.children %}
 					{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
 				{% endif %}
-				<li><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+				<li class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
 			{% endif %}
 		{% endfor %}
 		</ul>
