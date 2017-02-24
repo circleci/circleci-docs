@@ -87,7 +87,7 @@ If you are configuring network security, please ensure you whitelist the followi
 
 | Source                           | Ports                   | Use                                                            |
 |----------------------------------|-------------------------|----------------------------------------------------------------|
-| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/ssh-build) |
+| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/1.0/ssh-build/) |
 | Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
@@ -96,7 +96,7 @@ If you are configuring network security, please ensure you whitelist the followi
 
 Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}/enterprise/on-prem/) are:
 
-* We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/build-image-trusty/
+* We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/1.0/build-image-trusty/
 * The container image is always fetched from DockerHub.  Launching new builders will be much slower depending on your connection to DockerHub.
 * Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/docker-builder-config/#sharing-the-docker-socket)
 * No second volume is required.
