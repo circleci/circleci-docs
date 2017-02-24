@@ -40,9 +40,9 @@ file. CircleCI doesn't require a <code>circle.yml</code> file to build your proj
 only CircleCI's inferred steps will run based on the structure of your project. However you can use
 a <code>circle.yml</code> file to override or add to the inferred commands.
 You can find extensive documentation about the structure of this file and available
-options in the <a href="https://circleci.com/docs/configuration">circleci.com configuration documentation</a>.
+options in the <a href="https://circleci.com/docs/1.0/configuration/">circleci.com configuration documentation</a>.
 If you are coming to CircleCI from Jenkins, you may also find the
-<a href="https://circleci.com/docs/migrating-from-jenkins">Jenkins migration guide</a> helpful. Storing
+<a href="https://circleci.com/docs/1.0/migrating-from-jenkins/">Jenkins migration guide</a> helpful. Storing
 configuration in code is a great way of both tracking configuration versions and keeping
 everything durably backed up independently of the CI server itself. Here's another video that
 covers the basics of adding a <code>circle.yml</code> file:</p>
