@@ -77,7 +77,7 @@ requests per hour per key.
 
 If you'd like to run commands before or after deploying to Heroku, you'll have to use the 'normal' `deployment` syntax together with the Heroku CLI (pre-installed). This method does not pull in your Heroku creds that is set in the CircleCI UI. Instead, you'll need to set your Heroku API key via standard [private environment variables][doc-priv-envars]. In the following example, we set `HEROKU_EMAIL` and `HEROKU_TOKEN` as private environment variables.
 
-[doc-priv-envars]: https://circleci.com/docs/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git
+[doc-priv-envars]: https://circleci.com/docs/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git
 
 ```yaml
 deployment:
