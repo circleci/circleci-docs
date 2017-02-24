@@ -20,7 +20,7 @@ Our **[status page](https://status.circleci.com/)** gives information on current
 
 ### Do you support Bitbucket or GitLab?
 
-Currently we support authentication with GitHub and Bitbucket. Please vote on relevant [Feature Request](https://discuss.circleci.com/c/feature-request) if you want to show support for other version control systems.
+Currently we support authentication with GitHub and Bitbucket. Please vote on relevant [Feature Request](https://discuss.circleci.com/c/feature-requests) if you want to show support for other version control systems.
 
 ### I can’t give CircleCI the access to all my private repositories. What do I do?
 
