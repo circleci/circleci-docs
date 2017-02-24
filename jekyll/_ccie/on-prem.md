@@ -84,7 +84,7 @@ If you are configuring network security, please ensure you whitelist the followi
 
 | Source                           | Ports                   | Use                                                            |
 |----------------------------------|-------------------------|----------------------------------------------------------------|
-| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/ssh-build) |
+| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/1.0/ssh-build/) |
 | Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
