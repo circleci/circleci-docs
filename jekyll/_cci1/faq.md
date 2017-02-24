@@ -14,7 +14,7 @@ You can **subscribe by email, RSS or JSON**. **[Follow these instructions](https
 
 You may also like to follow our **[changelog](https://circleci.com/changelog/)** to see what has been released.
 
-Our **[status page](http://status.circleci.com/)** gives information on current system status, outages and past incidents.
+Our **[status page](https://status.circleci.com/)** gives information on current system status, outages and past incidents.
 
 ## Authentication
 
