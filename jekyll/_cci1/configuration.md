@@ -192,8 +192,8 @@ machine:
 <h3 id="node-version">Node.js version</h3>
 
 CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
-Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#nodejs)
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#nodejs) pages
+Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/1.0/build-image-trusty/#nodejs)
+and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#nodejs) pages
 respectively.
 
 Here's an example of how to set the version of Node.js to be used for
@@ -215,8 +215,8 @@ machine:
     version: openjdk7
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#java)
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#java).
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/1.0/build-image-trusty/#java)
+and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#java).
 
 ### PHP version
 
@@ -230,8 +230,8 @@ machine:
     version: 5.4.5
 ```
 
-You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#php)
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#php).
+You can find more details about supported versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/1.0/build-image-trusty/#php)
+and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#php).
 
 ### Python version
 
@@ -245,8 +245,8 @@ machine:
     version: 2.7.5
 ```
 
-You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/build-image-trusty/#python)
-and [Ubuntu 12.04](https://circleci.com/docs/build-image-precise/#python).
+You can find more details about pre-installed versions for [Ubuntu 14.04 (default)](https://circleci.com/docs/1.0/build-image-trusty/#python)
+and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#python).
 
 ### GHC version
 
