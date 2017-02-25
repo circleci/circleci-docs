@@ -14,7 +14,7 @@ to CircleCI Enterprise after using circleci.com, or if you are using circleci.co
 while working with your Enterprise installation.
 
 - **Getting help:** If you are still having trouble after referring to this guide,
-[the circleci.com docs](https://circleci.com/docs), and the
+[the circleci.com docs](https://circleci.com/docs/), and the
 [support forum](https://discuss.circleci.com), you can of course contact support
 for more help. The best way to do this is to click the question mark ("?") in the
 bottom-right corner of your CircleCI Enterprise web UI. You CircleCI administrator can
@@ -27,7 +27,7 @@ If you're still not sure what to do, you can always reach out to
 the one on circleci.com, but it's a little bit smaller to optimize the boot time of
 builder machines. Additionally, CircleCI Enterprise administrators can customize the
 image that builds run in. By default, almost all of the software
-<a href="https://circleci.com/docs/environment">listed here</a>
+<a href="https://circleci.com/docs/1.0/environment/">listed here</a>
 is available, except for more limited pre-installed versions of the following languages:
 {% include versions.html %}
 You can find a complete list of packages pre-installed by default <a href="/docs/assets/versions.txt">here</a>.
