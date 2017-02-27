@@ -41,17 +41,17 @@ By default, it’s assumed that the items being split are filenames and should b
 ### Controlling splits
 Items can be split by `name`, `filesize` (for filepaths), or `timings` (when run on CircleCI).
 
-#### name
+#### **name**
 This is the default and splits items alphabetically.
 
 `picard tests glob "**/*.go" | picard tests split`
 
-#### filesize
+#### **filesize**
 When the items are filepaths, this option will weight the split by filesize.
 
 `picard tests glob "**/*.go" | picard tests split --split-by=filesize`
 
-#### timings
+#### **timings**
 This split type uses historical timing data to weight the split. CircleCI automatically makes timing data from previous runs available inside your container in a default location so the CLI tool can discover them (`/.circleci-task-data/circle-test-results/`).
 
 When splitting by `timings`, the tool will assume it’s splitting filenames. If you’re splitting classnames, you’ll need to specify that with the `--timings-type` flag.
