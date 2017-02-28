@@ -5,27 +5,45 @@ short-title: "Configuration"
 categories: [getting-started]
 ---
 
-This article assumes you’ve already whitelisted your project to use 2.0. If you haven’t done that, then please reach out to your customer success manager.
+Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
 
-Once whitelisted, you can configure `circle.yml` with 2.0 configuration. This allows you to test 2.0 builds on a separate branch, leaving regular builds unaffected and running on the existing CircleCI infrastructure.
+This file is _extremely_ flexible, so it’s not realistic to list every possible thing you can put in here. Instead, we’ll create a sample `config.yml` file and explain the sections along the way.
 
-Currently, we’re in the process of solidifying a more extensible configuration mechanism. We’re treating the current version of 2.0 as a sketch to test a few ideas, but we plan on iterating rapidly. Because 2.0 is still in beta, we’ll help users author configuration files as needed.
+# **version**
 
-## Using `circle.yml` to configure a build
-
-2.0 uses a completely different `circle.yml` format than the one used by CircleCI Classic. We’ve versioned all 2.0 configuration, so `circle.yml` must contain a version field. The current alpha version is `2`.
+The first thing you’ll put in `config.yml` is the _version_ you’re using. We’ll be using this field to issue warnings about breaking changes or deprecation.
 
 ```yaml
-  version: 2
+version: 2.0
 ```
+
+# **jobs**
+
+The rest of `config.yml` will be comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that run in sequential order.
+
+So what does a job look like?
+
+```
+version: 2.0
+jobs:
+  build:
+    working_directory: ~/canary-python
+    docker:
+      - image: golang:1.7.0
+    environment:
+      - FOO: "bar"
+    steps:
+      - checkout
+      - run: make test
+```
+
+Here we have a `build` job that
 
 Eventually, 2.0 will support multiple backend executors. For now, though, only the `docker` executor is supported, which you can specify by adding:
 
 ```yaml
   executorType: docker
 ```
-
-2.0 is designed to facilitate a future pipelines implementation, so builds are organized into stages. Each stage contains a list of steps to run during that stage.
 
 ### Pod (build images)
 
