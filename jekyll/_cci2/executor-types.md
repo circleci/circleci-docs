@@ -30,7 +30,7 @@ jobs:
       - checkout
       - run:
           name: Install Docker Client
-        command: |
+          command: |
             echo "test"
             curl -L -o /tmp/docker.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.6.tgz
             tar -xz -C /tmp -f /tmp/docker.tgz
