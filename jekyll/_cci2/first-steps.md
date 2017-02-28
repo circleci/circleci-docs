@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Getting Started with CircleCI"
-short-title: "First Steps"
+title: "Getting Started with CircleCI 2.0"
+short-title: "Getting Started with CircleCI 2.0"
 categories: [getting-started]
 order: 1
 ---

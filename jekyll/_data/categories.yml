@@ -91,7 +91,7 @@
 
 - section: cci2
   slug: configuring-circleci
-  name: "Configuring CircleCI"
+  name: "Configuring CircleCI 2.0"
 
 - section: cci2
   slug: quickstart-guides
