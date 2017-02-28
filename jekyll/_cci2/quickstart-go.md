@@ -33,14 +33,14 @@ jobs:
 
 This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
 
-Directly beneath `working_directory`, we’ll specify container images for this build’s `pod`. A pod is a group of combined containers that is treated as a single container.
+Directly beneath `working_directory`, we’ll specify container images for this build under `docker`.
 
 ```yaml
 version: 2
 jobs:
   build:
     working_directory: /go/src/github.com/circleci/cci-demo-go
-    pod:
+    docker:
       - image: golang:1.6.2
 ```
 
@@ -51,7 +51,7 @@ version: 2
 jobs:
   build:
     working_directory: /go/src/github.com/circleci/cci-demo-go
-    pod:
+    docker:
       - image: golang:1.6.2
       - image: postgres:9.4.1
         environment:
@@ -61,29 +61,28 @@ jobs:
 
 Now we need to add several `steps` within the `build` stage.
 
-Because of how strict Go is about its workspace, we’ll need to checkout the working directory we defined earlier.
+The `checkout` step will default to the `working_directory` we have already defined.
 
 ```yaml
 version: 2
 jobs:
   build:
     working_directory: /go/src/github.com/circleci/cci-demo-go
-    pod:
+    docker:
       - image: golang:1.6.2
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: service_test
     steps:
-      - checkout:
-        path: /go/src/github.com/circleci/cci-demo-go
+      - checkout
 ```
 
 Next, we install the Go implementation of the JUnit reporting tool. We'll also create a directory for test results.
 
 ```yaml
 ...
-      - shell:
+      - run:
           name: "Install JUnit reporter & Setup Test Path"
           command: |
             go get github.com/jstemmer/go-junit-report
@@ -95,7 +94,7 @@ Now we have to actually run our tests.
 To do that, we need to set an environment variable for our database's URL. Then, we'll download packages needed for testing without installing them. Once we've completed those actions, we can run our tests.
 
 ```yaml
-      - shell:
+      - run:
           environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5432/service_test?sslmode=disable"
           command: |
@@ -107,32 +106,31 @@ To do that, we need to set an environment variable for our database's URL. Then,
 Finally, let's specify a path to store the results of the tests.
 
 ```yaml
-      - test-results-store:
+      - store_test_results:
           path: /tmp/test-results
 ```
 
-And we're done! Let's see what the whole `config.yml` looks like now:
+And we're done! Let's see what the whole `circle.yml` looks like now:
 
 ```yaml
 version: 2
 jobs:
   build:
     working_directory: /go/src/github.com/circleci/cci-demo-go
-    pod:
+    docker:
       - image: golang:1.6.2
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: service_test
     steps:
-      - checkout:
-          path: /go/src/github.com/circleci/cci-demo-go
-      - shell:
+      - checkout
+      - run:
           name: "Install JUnit & Setup Test Path"
           command: |
             go get github.com/jstemmer/go-junit-report
             mkdir -p /tmp/test-results
-      - shell:
+      - run:
           environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5432/service_test?sslmode=disable"
           command: |
@@ -140,11 +138,10 @@ jobs:
             go get -t -d -v ./...
             export DATABASE_URL="postgres://ubuntu@localhost:5432/service_test?sslmode=disable"
             go test -v -race ./... | go-junit-report > /tmp/test-results/unit-tests.xml
-      - test_results_store:
+      - store_test_results:
           path: /tmp/test-results
 ```
 
 Nice! You just set up CircleCI for a Go app. Check out our project’s corresponding build on CircleCI [here](https://circleci.com/gh/circleci/cci-demo-go).
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
-

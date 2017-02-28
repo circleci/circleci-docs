@@ -22,30 +22,23 @@ version: 2
 
 Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy (BTD) process. Our sample app only needs a `build` job, so everything else is going to live under that key.
 
-We also need to specify container images for this build's _pod_. A pod is a group of combined containers that is treated as a single container.
+We also need to specify container images for this build in `docker`.
 
 We'll need to tell the Flask app to run in `testing` mode by setting it in `environment`, as well as where to find the database (DB). This is a special local URL linked to an additional Docker container.
 
 ```yaml
 jobs:
   build:
-    pod:
+    docker:
       - image: python:3.5
         environment:
           FLASK_CONFIG: testing
           DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
 ```
 
-We'll also create a container for PostgreSQL, along with 2 environment variables for initializing the database.
+We'll also create a container for PostgreSQL, along with 3 environment variables for initializing the database.
 
 ```yaml
-jobs:
-  build:
-    pod:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: postgres:9.5.5
         environment:
           POSTGRES_USER: ubuntu
@@ -60,7 +53,8 @@ You could install NPM, but we’re going to use Yarn for reasons that are outsid
 ```yaml
 ...
     steps:
-      - shell:
+      - checkout
+      - run:
           name: Install Yarn
           command: |
             apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
@@ -73,7 +67,7 @@ Let's restore the Yarn package cache if it's available.
 
 {% raw %}
 ```yaml
-      - cache-restore:
+      - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
 {% endraw %}
@@ -81,18 +75,16 @@ Let's restore the Yarn package cache if it's available.
 Install both Yarn and Python dependencies.
 
 ```yaml
-      - shell:
+      - run:
           name: Install Dependencies
-          command: |
-            yarn
-            pip install -r requirements.txt
+          command: yarn && pip install -r requirements.txt
 ```
 
 Specify where to save that Yarn cache.
 
 {% raw %}
 ```yaml
-      - cache-save:
+      - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "/home/ubuntu/.yarn-cache"
@@ -102,7 +94,7 @@ Specify where to save that Yarn cache.
 Run our tests.
 
 ```yaml
-      - shell
+      - run
           name: Run Tests
           command: python manage.py test --coverage
 ```
@@ -110,14 +102,14 @@ Run our tests.
 Store test results as an artifact.
 
 ```yaml
-      - artifacts-store:
+      - store_artifacts:
           path: test-reports/coverage
 ```
 
 Finally, let's specify where those test results are actually located.
 
 ```yaml
-      - test-results-store:
+      - store_test_results:
           path: "test-reports/"
 ```
 
@@ -128,7 +120,7 @@ And we're done! Let's see what the whole `circle.yml` looks like now:
 version: 2
 jobs:
   build:
-    pod:
+    docker:
       - image: python:3.5
         environment:
           FLASK_CONFIG: testing
@@ -138,32 +130,33 @@ jobs:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
+    working_directory: /home/ubuntu/cci-demo-flask
     steps:
-      - shell:
+      - checkout
+      - run:
           name: Install Yarn
           command: |
-            apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
+            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
             echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
             apt-get update -qq
-            apt-get install -y -qq yarn
-      - cache_restore:
+            apt-get install -y -qq nodejs yarn
+      - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - shell:
+      - run:
           name: Install Dependencies
-          command: |
-            yarn
-            pip install -r requirements.txt
-      - cache_save:
+          command: yarn && pip install -r requirements.txt
+      - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "/home/ubuntu/.yarn-cache"
-      - shell:
+      - run:
           name: Run Tests
           command: python manage.py test --coverage
-      - artifacts_store:
+      - store_artifacts:
           path: test-reports/coverage
           destination: reports
-      - test_results_store:
+      - store_test_results:
           path: "test-reports/"
 ```
 {% endraw %}
