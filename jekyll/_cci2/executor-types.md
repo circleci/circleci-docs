@@ -9,7 +9,7 @@ There are 2 different executor types to choose from when using CircleCI: `docker
 
 This guide will discuss these Reasons so you can choose the right executor for your project. Note that neither method will work if you’re running builds locally using `circleci-builder`.
 
-# Option 1: `docker` (Run in a Container)
+## Option 1: `docker` (Run in a Container)
 
 We strongly recommend using the `docker` executor. This option allows you to use Docker directly, which usually results in faster startup times and allows you to specify a custom image.
 
@@ -48,9 +48,9 @@ jobs:
             docker run hello-world
 ```
 
-For a working example of an app using Docker Engine, check out our **sample Rails project** [here](https://github.com/circleci/cci-demo-rails).
+For a working example of an app using Docker Engine, check out our [sample Rails project](https://github.com/circleci/cci-demo-rails).
 
-## Limitations
+### Limitations
 
 Using the `docker` executor and the `setup_docker_engine` step requires a remote Docker Engine instance running on our infrastructure. This produces a few limitations:
 
@@ -64,17 +64,17 @@ Using the `docker` executor and the `setup_docker_engine` step requires a remote
 
 - Any ports exposed in your Dockerfile will not be accessible from the build.
 
-### Accessing Exposed Ports
+#### Accessing Exposed Ports
 
 If you do need to access ports exposed by your Dockerfile, then there are a couple ways to do that:
 
-#### Use `docker exec`
+**Use `docker exec`**
 
 ```
 $ docker exec railsapp curl -sSL http://localhost:3000 | grep "New Todo List"
 ```
 
-#### Use a Custom Docker Network
+**Use a custom Docker network**
 
 ```
 $ docker network create test-net
@@ -85,7 +85,7 @@ Any container started within `test-net` will be able to access any exposed ports
 
 If any of these limitations are blockers for you, then we recommend using the `machine` executor.
 
-# Option 2: `machine` (Run in CircleCI Virtual Machine)
+## Option 2: `machine` (Run in CircleCI Virtual Machine)
 
 If you want to play with volumes, use `docker-compose`, run tests in their own containers or want to test schedulers, then we recommend using the `machine` executor.
 
