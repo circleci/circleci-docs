@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Managing Parallelism with the 2.0 Tests CLI"
 short-title: "Managing Parallelism"
 categories: [configuring-circleci]
+order: 3
 ---
 
 The `picard` CLI tool is inserted into the primary build container.

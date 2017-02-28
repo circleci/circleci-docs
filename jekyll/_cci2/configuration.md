@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Configuring CircleCI 2.0"
 short-title: "Configuring CircleCI 2.0"
 categories: [configuring-circleci]
+order: 1
 ---
 
 This article assumes you’ve already whitelisted your project to use 2.0. If you haven’t done that, then please reach out to your customer success manager.

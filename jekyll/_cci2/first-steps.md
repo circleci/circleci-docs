@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Getting Started with CircleCI"
 short-title: "First Steps"
 categories: [getting-started]
+order: 1
 ---
 
 Before you can start running builds on CircleCI, you’ll need to allow CircleCI to access your code. Depending on whether your code is hosted on GitHub or Bitbucket, [authorize CircleCI](https://circleci.com/signup/) to access your code.

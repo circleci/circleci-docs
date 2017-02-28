@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Quickstart Guide: Ruby"
 short-title: "Ruby"
 categories: [quickstart-guides]
+order: 5
 ---
 
 This guide should help get you started with a Ruby project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.
