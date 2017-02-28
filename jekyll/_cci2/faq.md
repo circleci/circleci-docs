@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Frequently Asked Questions"
 short-title: "FAQ"
 categories: [getting-started]
+order: 2
 ---
 
 ## Does CircleCI 2.0 run inference commands?
