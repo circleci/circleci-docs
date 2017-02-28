@@ -1,25 +1,25 @@
 ---
 layout: classic-docs
-title: "Getting Started: Configuration"
-short-title: "Configuration"
-categories: [getting-started]
+title: "Configuration Overview"
+short-title: "Overview"
+categories: [configuring-circleci]
 ---
 
 Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
 
 This file is _extremely_ flexible, so it’s not realistic to list every possible thing you can put in here. Instead, we’ll create a sample `config.yml` file and explain the sections along the way.
 
-# **version**
+## **version**
 
-The first thing you’ll put in `config.yml` is the _version_ you’re using. We’ll be using this field to issue warnings about breaking changes or deprecation.
+The first thing you’ll put in `config.yml` is the _version_ you’re using. We use this field to issue warnings about breaking changes or deprecation.
 
 ```yaml
 version: 2.0
 ```
 
-# **jobs**
+## **jobs**
 
-The rest of `config.yml` will be comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that run in sequential order.
+The rest of `config.yml` is comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that run in sequential order.
 
 So what does a job look like?
 
@@ -27,7 +27,6 @@ So what does a job look like?
 version: 2.0
 jobs:
   build:
-    working_directory: ~/canary-python
     docker:
       - image: golang:1.7.0
     environment:
@@ -35,23 +34,48 @@ jobs:
     steps:
       - checkout
       - run: make test
+    working_directory: ~/canary-python
 ```
 
-Here we have a `build` job that
+The job in this case is named “build”, and the value is a map of additional information about that job. CircleCI uses the job’s name in other contexts, so it **must** form a unique tuple in combination with the repository’s URI.
 
-Eventually, 2.0 will support multiple backend executors. For now, though, only the `docker` executor is supported, which you can specify by adding:
+The map for each job accepts the following:
 
-```yaml
-  executorType: docker
-```
+### **name** (string)
 
-### Pod (build images)
+The name the UI uses for the job.
 
-Next, specify the container images that should be composed together in your build's pod. A "pod" is a group of combined containers that is treated as a single container. The pod concept is very similar to [Kubernetes'](http://kubernetes.io/docs/user-guide/pods/#resource-sharing-and-communication).
+If you don’t specify a name, the UI will default to the map’s key (“build” in this case).
 
-By using the network services provided by pods, you can keep your base image small and flexible.
+### **docker** or **machine** (map)
 
-The build will run in the first container listed in the `containerInfo` section, so that image must either have all tools required by the build steps, or you must explicitly install them through additional build steps.
+Options for either the Docker or machine [executor](#executors).
+
+`docker` and `machine` are mutually exclusive, but you must choose one of them. If you’re not sure which executor to pick, read more about the differences between the executor types [here](#choosing-an-executor-type).
+
+### **steps** (list)
+
+A list of steps to be performed for this job. This and the executor are the only required keys.
+
+### **parallelism** (integer)
+
+Number of parallel instances of this job to run.
+
+The default is 1. If you choose a number N > 1, then N independent executors will be set up to each run the job’s steps in parallel. Certain parallelism-aware steps can opt out of this and run on a single executor.
+
+### **environment** (map)
+
+A map of environment variable names and values.
+
+In our example job, we export the `$FOO` environment variable with a value of `"bar"`.
+
+### **working_directory** (string)
+
+A directory in which to run the steps. The default depends on the [executor](#executors) you’re using.
+
+The default `working_directory` will not exist for steps that run before the `checkout` step, _unless_ the working directory is created manually by a step. We strongly recommend setting this instead of relying on the default.
+
+## Executors
 
 You can specify image versions from DockerHub using image tags, like `golang` and `mongo` below. Or you can specify image versions using a SHA, like `redis` below.
 
