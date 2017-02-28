@@ -5,9 +5,11 @@ short-title: "First Steps"
 categories: [getting-started]
 ---
 
-Before you can start running builds on CircleCI, you’ll need to link your code to CircleCI. Depending on whether your code is hosted on GitHub or Bitbucket, head to https://circleci.com/signup/ and authorize the appropriate version control system (VCS).
+Before you can start running builds on CircleCI, you’ll need to allow CircleCI to access your code. Depending on whether your code is hosted on GitHub or Bitbucket, [authorize CircleCI](https://circleci.com/signup/) to access your code.
 
-After authorizing a VCS, you’ll be redirected to your CircleCI Dashboard, which will be empty since you haven’t added any projects yet.
+After authorizing a version control system (VCS), you’ll be redirected to your CircleCI Dashboard, which will be empty since you haven’t added any projects yet.
+
+## Adding Projects
 
 Click “PROJECTS” in the lefthand sidebar and select one of your organizations. Then, click “Build project” next to the project you’d like to start building on CircleCI.
 
@@ -35,5 +37,3 @@ You’ll automatically follow any new project that you push to, but you can also
 Now that you’ve integrated with a VCS and added one of your projects, you’ll need to create a `.circleci/config.yml` file to tell CircleCI what to do during each build.
 
 If you’re itching to get building, then check out one of our quickstart guides for popular languages/frameworks.
-
-If you’d like to dive deeper, then head over to our Configuring CircleCI for a more complete explanation of each section.
