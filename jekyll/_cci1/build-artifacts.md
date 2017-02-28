@@ -28,7 +28,9 @@ You can also access your artifacts in your browser with the following url:
 https://circleci.com/api/v1/project/:org/:repo/:build_num/artifacts/:container-index/path/to/artifact
 ```
 
-You can also use `latest` in place of `:build_num` together with query parameters `branch` and `filter` to access the artifact from the latest build on a branch. `filter` can have a value of `completed`, `successful`, or `failed` and defaults to `completed`.
+**Note:** This URL is only accessible if you are logged into CircleCI with an account that has permissions to view / edit the project.
+
+You can use `latest` in place of `:build_num` together with query parameters `branch` and `filter` to access the artifact from the latest build on a branch. `filter` can have a value of `completed`, `successful`, or `failed` and defaults to `completed`.
 
 For example:
 
