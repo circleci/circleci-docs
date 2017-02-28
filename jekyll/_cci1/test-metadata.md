@@ -221,7 +221,7 @@ list of filename args on each build node, ensuring an optimal split of test file
 
 If you have multiple JUnit test reports from running more than one test suite or runner, you can merge them together using the third-party NodeJS CLI tool, [junit-merge](https://www.npmjs.com/package/junit-merge).
 
-This tool can combine the reports into a single file that our test summery system can parse and give you correct test totals.
+This tool can combine the reports into a single file that our test summary system can parse and give you correct test totals.
 
 ## API
 
