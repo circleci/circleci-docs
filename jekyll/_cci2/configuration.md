@@ -208,21 +208,21 @@ Fields:
 * `paths`: a list of directories which should be added to the cache
 * `key`: a unique identifier for this cache
     * if `key` is already present in the cache, it will not be recreated
-    * the key may contain a template that will be replaced by runtime values. To insert a runtime value, use the syntax: `"text-{{ .Branch }}"`
+    * the key may contain a template that will be replaced by runtime values. To insert a runtime value, use the syntax: `"text-<< .Branch >>"`
 
 Valid runtime values:
-  - `{{ .Branch }}`: the VCS branch currently being built
-  - `{{ .BuildNum }}`: the CircleCI build number for this build
-  - `{{ .Revision }}`: the VCS revision currently being built
-  - `{{ .CheckoutKey }}`: the SSH key used to checkout the repo
-  - `{{ .Environment.variableName }}`: the environment variable `variableName`
-  - `{{ checksum "filename" }}`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache-restore` and `cache-save`, otherwise the cache will be saved under a cache key different than the one used at `cache-restore` time.
-  - `{{ epoch }}`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache-restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
+  - `<< .Branch >>`: the VCS branch currently being built
+  - `<< .BuildNum >>`: the CircleCI build number for this build
+  - `<< .Revision >>`: the VCS revision currently being built
+  - `<< .CheckoutKey >>`: the SSH key used to checkout the repo
+  - `<< .Environment.variableName >>`: the environment variable `variableName`
+  - `<< checksum "filename" >>`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache-restore` and `cache-save`, otherwise the cache will be saved under a cache key different than the one used at `cache-restore` time.
+  - `<< epoch >>`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache-restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
 
 Example:
 ```yaml
           - type: cache-save
-            key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}
+            key: projectname-<< .Branch >>-<< checksum "project.clj" >>
             paths:
               - /home/ubuntu/.m2
 ```
@@ -247,19 +247,19 @@ Example:
 ```yaml
           - type: cache-restore
             keys:
-              - projectname-{{ .Branch }}-{{ checksum "project.clj" }}
+              - projectname-<< .Branch >>-<< checksum "project.clj" >>
               # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
               - projectname-
             
           # Repeat builds will restore from this step as it will produce the newest cache
           - type: cache-save
-            key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}-{{ epoch }}
+            key: projectname-<< .Branch >>-<< checksum "project.clj" >>-<< epoch >>
             paths:
               - /foo
           
           # This step will only save on the first build, then be skipped on subsequent builds.
           - type: cache-save
-            key:  projectname-{{ .Branch }}-{{ checksum "project.clj" }}
+            key:  projectname-<< .Branch >>-<< checksum "project.clj" >>
             paths:
               - /foo
 
