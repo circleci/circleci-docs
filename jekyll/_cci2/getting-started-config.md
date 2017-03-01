@@ -51,11 +51,11 @@ If you don’t specify a name, the UI will default to the map’s key (“build�
 
 Options for either the Docker or machine [executor](#executors).
 
-`docker` and `machine` are mutually exclusive, and you must choose one of them. If you’re not sure which executor to pick, read about the [differences](#choosing-an-executor-type).
+`docker` and `machine` are mutually exclusive, and you must choose one of them. If you’re not sure which executor to pick, you can [read about the differences](#choosing-an-executor-type).
 
 ### **steps** (list)
 
-A list of steps to be performed for this job. This and the executor are the only required keys.
+A list of [steps](#steps) to be performed for this job. This and the executor are the only required keys.
 
 ### **parallelism** (integer)
 
@@ -75,7 +75,7 @@ A directory in which to run the steps. The default depends on the [executor](#ex
 
 The default `working_directory` will not exist for steps that run before the `checkout` step, _unless_ the working directory is created manually by a step. We strongly recommend setting this instead of relying on the default.
 
-## Executor
+## Executors
 
 An _executor_ is roughly “a place where job steps occur.” Remember that you must choose between `docker` or `machine`.
 
@@ -133,11 +133,11 @@ If you’re not using Docker, you can use the `machine` executor to have a full 
 
 To use the `machine` executor, set the `machine` key to `true`.
 
-This executor defaults `working_directory` to a direcotry in `/tmp` named after the repository.
+This executor defaults `working_directory` to a directory in `/tmp` named after the repository.
+
+## Steps
 
 ###############################################################
-
-### Step Types
 
 #### `shell`
 Used for invoking all command-line programs. Shell commands are executed using non-login shells, so you must explicitly source any dotfiles as part of the command. All environment variables set in the CircleCI UI are implicitly added to the command's environment.
