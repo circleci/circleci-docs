@@ -12,7 +12,7 @@ CircleCI 2.0 is a powerful tool. While it is in Beta you should be comfortable w
 
 ## Getting Started Articles for Beta users
 
-- [First Steps](docs/2.0/first-steps/)
+- [First Steps](/docs/2.0/first-steps/)
 - [FAQ](/docs/2.0/faq/)
 - [Configuring CircleCI 2.0](/docs/2.0/configuration/)
 - [Exceutor Types](/docs/2.0/executor-types/)
