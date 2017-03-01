@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuration Overview"
-short-title: "Overview"
-categories: [configuring-circleci]
+title: "Built-in Steps for Jobs"
+short-title: "Built-in Steps"
+categories: [getting-started]
 ---
 
 ## Built-in Steps

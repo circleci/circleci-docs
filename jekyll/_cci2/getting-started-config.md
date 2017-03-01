@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuration Overview"
-short-title: "Overview"
-categories: [configuring-circleci]
+title: "Configuring CircleCI"
+short-title: "Configuration as Code"
+categories: [getting-started]
 ---
 
 Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
