@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Quickstart Guide: Ruby"
 short-title: "Ruby"
 categories: [quickstart-guides]

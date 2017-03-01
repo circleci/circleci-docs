@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Frequently Asked Questions"
 short-title: "FAQ"
 categories: [getting-started]

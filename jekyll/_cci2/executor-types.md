@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
 categories: [configuring-circleci]

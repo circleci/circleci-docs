@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Quickstart Guide: Go"
 short-title: "Go"
 categories: [quickstart-guides]
