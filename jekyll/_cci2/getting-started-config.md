@@ -17,7 +17,7 @@ The first thing you’ll put in `config.yml` is the _version_ you’re using. We
 version: 2
 ```
 
-## **jobs**
+## Jobs
 
 The rest of `config.yml` is comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that run in sequential order.
 
@@ -75,11 +75,11 @@ A directory in which to run the steps. The default depends on the [executor](#ex
 
 The default `working_directory` will not exist for steps that run before the `checkout` step, _unless_ the working directory is created manually by a step. We strongly recommend setting this instead of relying on the default.
 
-## Executors
+## Executor
 
 An _executor_ is roughly “a place where job steps occur.” Remember that you must choose between `docker` or `machine`.
 
-### **docker**
+### Docker
 
 CircleCI will build the necessary environment by launching as many Docker containers as you need. Here’s an example:
 
@@ -111,7 +111,7 @@ The name of a custom Docker image to use. This is the only required key in the m
 
 You can specify image versions from DockerHub using image tags, like `ubuntu` and `mongo`. Or you can specify image versions using a SHA, like `redis`.
 
-#### **command** (string || list of strings)
+#### **command** (string _or_ list of strings)
 
 The command used as pid 1 when launching the container.
 
@@ -126,6 +126,14 @@ The user to run the command as.
 A map of environment variable names and values.
 
 These environment settings apply to all commands run in this container, not just the initial `command`. Additionally, this local `environment` has higher precedence over the `environment` key specified at the `job` level.
+
+### Machine
+
+If you’re not using Docker, you can use the `machine` executor to have a full virtual machine to yourself.
+
+To use the `machine` executor, set the `machine` key to `true`.
+
+This executor defaults `working_directory` to a direcotry in `/tmp` named after the repository.
 
 ###############################################################
 
