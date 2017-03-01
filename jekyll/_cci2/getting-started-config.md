@@ -14,7 +14,7 @@ This file is _extremely_ flexible, so it’s not realistic to list every possibl
 The first thing you’ll put in `config.yml` is the _version_ you’re using. We use this field to issue warnings about breaking changes or deprecation.
 
 ```yaml
-version: 2.0
+version: 2
 ```
 
 ## **jobs**
@@ -24,13 +24,13 @@ The rest of `config.yml` is comprised of several _jobs_. In turn, a job is compr
 So what does a job look like?
 
 ```
-version: 2.0
+version: 2
 jobs:
   build:
     docker:
       - image: golang:1.7.0
     environment:
-      - FOO: "bar"
+      FOO: "bar"
     steps:
       - checkout
       - run: make test
@@ -51,7 +51,7 @@ If you don’t specify a name, the UI will default to the map’s key (“build�
 
 Options for either the Docker or machine [executor](#executors).
 
-`docker` and `machine` are mutually exclusive, but you must choose one of them. If you’re not sure which executor to pick, read more about the differences between the executor types [here](#choosing-an-executor-type).
+`docker` and `machine` are mutually exclusive, and you must choose one of them. If you’re not sure which executor to pick, read about the [differences](#choosing-an-executor-type).
 
 ### **steps** (list)
 
@@ -77,79 +77,57 @@ The default `working_directory` will not exist for steps that run before the `ch
 
 ## Executors
 
-You can specify image versions from DockerHub using image tags, like `golang` and `mongo` below. Or you can specify image versions using a SHA, like `redis` below.
+An _executor_ is roughly “a place where job steps occur.” Remember that you must choose between `docker` or `machine`.
 
-```yaml
-    containerInfo:
-      - image: golang:1.6.2
-      - image: mongo:2.6.8
-        cmd: ["mongod", "--smallfiles"]
-      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-```
+### **docker**
 
-The build steps will execute on the first container, which is `golang:1.6.2` here. Thanks to the pod, you can access the `mongod` service via `127.0.0.1:27017` inside the `golang` container, even though `mongo` is a separate image.
-
-Not shown above (but possible!) are setting environment variables, configuring the command to use when launching the container, and/or specifying a user to run the command as.
-
-### `workDir`
-Each stage requires you to set the `workDir` key, which is used as the default working directory for that stage's steps. The most common `workDir` (and default behavior in CircleCI 1.0) is to use a directory named after the project in the user's home directory.
-
-```yaml
-workDir: ~/<my-project-name>
-```
-
-Note that `workDir` is actually created in the filesystem during the `checkout` step (covered below). If you want to create your own working directory, you'll need to add a shell step and set `pwd`:
-
-```yaml
-- type: shell
-  name: Initialize Working Directory
-  pwd: /
-  command: |
-    mkdir /my/working/directory
-```
-
-Without `pwd`, the step will fail because it will use the default working directory _created_ by this step. With `pwd`, the step uses the root of the filesystem as the working directory so it can _create_ the default working directory. Phew!
-
-### `environment`
-If you want to declare global environment variables, you have two options:
-
-You can list them under the `environment` key. Observe this contrived example:
+CircleCI will build the necessary environment by launching as many Docker containers as you need. Here’s an example:
 
 ```yaml
 version: 2
-executorType: docker
-containerInfo:
-  - image: python:2.7.12
-stages:
+jobs:
   build:
-    workDir: ~/canary-python
-    environment:
-      - FOO: "bar"
-    steps:
-      - type: checkout
-      - type: shell
-        command: echo "When I say Foo... You say $FOO"
+    docker:
+      - image: ubuntu:14.04
+        command: ["/bin/bash"]
+      - image: mongo:2.6.8
+        command: [mongod, --smallfiles]
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+      - image: rabbitmq:3.5.4
+    working_directory: ~/my-project
+  ...
 ```
 
-Or, if you're worried about putting sensitive information in `circle.yml`, you can add environment variables through the CircleCI UI in your project's settings.
+The value of `docker` is a list of maps that list _which_ images to use and (in some cases) _how_ to use those images.
 
-Please note that if you nest an `environment` key within a particular step, it will be scoped to that step only and will _not_ be global.
+`docker` accepts maps with the following:
 
-### `parallel`
-Stages can optionally set a level of parallelism using `parallel`. The environment variables `CIRCLE_NODE_INDEX` and `CIRCLE_NODE_TOTAL` will be set to the appropriate values in each container.
+#### **image** (string)
 
-Currently, the only supported stages are `build` and `deploy`, which both allow regular "shell" steps, along with a small number of special steps.
+The name of a custom Docker image to use. This is the only required key in the map.
 
-```yaml
-    stages:
-      build:
-        parallel: 5
-        workDir: /path/to/checkout/source
-        steps:
-          - ...
-```
+You can specify image versions from DockerHub using image tags, like `ubuntu` and `mongo`. Or you can specify image versions using a SHA, like `redis`.
 
-All steps must have a `type` key. The valid types are listed below.
+#### **command** (string || list of strings)
+
+The command used as pid 1 when launching the container.
+
+In order to avoid parsing ambiguities, `command` can also be a list of strings, as shown above.
+
+#### **user** (string)
+
+The user to run the command as.
+
+#### **environment** (map)
+
+A map of environment variable names and values.
+
+These environment settings apply to all commands run in this container, not just the initial `command`. Additionally, this local `environment` has higher precedence over the `environment` key specified at the `job` level.
+
+###############################################################
 
 ### Step Types
 
