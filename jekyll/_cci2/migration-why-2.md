@@ -6,37 +6,32 @@ categories: [migrating-from-1-2]
 order: 1
 ---
 
-While CircleCI 1.0 is a very powerful CI/CD platform, it has some limitations for the way teams build software today. CircleCI 2.0 has been built from the groud up to meet the needs of modern container based workflows and addresses the issues you may have found limiting in 1.0.
-
-This document explains some of the limitations of 1.0 and how they are addressed in 2.0. If 1.0 is not meeting your needs due to one of these issues then we recommend you give 2.0 a try.
+While CircleCI 1.0 is a powerful CI/CD platform, it has some current limitations that make building software harder than it needs to be. This document explains some of those limitations and how they are addressed in CircleCI 2.0.
 
 ## Native Docker Support
 
-Although there is Docker support in CircleCI 1.0, the versions of Docker that you can use are old and we can't support all of Docker's functionality.
+Although 1.0 does support Docker, it’s limited to older versions that don’t have access to Docker’s latest features.
 
-This is because 1.0 use LXC as a base container with BTRFS as a file system. Recent versions of Docker do not run properly in this environment and many features are unavailable.
+This is because 1.0 uses LXC as a base container with a BTRFS file system. Recent versions of Docker don’t run properly in this environment, which means users can’t access Docker’s full featureset on 1.0.
 
-In 2.0, when your job needs to use Docker, we will run your job on a dedicated VM so that you have access to all Docker's features.
+In 2.0, if your job uses Docker, we’ll run your job on a dedicated VM so you can access all of Docker’s features.
 
 ## Flexible Job Configuration
 
-CircleCI 1.0 infers your project type and automatically runs the most suitable test and build commands for you.
+1.0 infers your project type and automatically runs the most suitable test and build commands. Running builds are divided into well-defined steps that are performed in order. For example, 1.0 always saves your dependency cache before running tests.
 
-We run your builds in well-defined steps. For example, we always save dependency cache before running test commands.
+While this configuration can be powerful, there are some drawbacks. Maybe you want to disable inference. Or maybe you need to save the dependency cache _after_ running tests since the tests themselves create _more_ dependencies.
 
-Although this is very powerful, there are some drawbacks: sometimes you may want to disable inference. Or you may want to save the dependency cache after tests run because
-some other dependencies are created during the tests.
-
-In 2.0, job steps are small parts. You can use these parts to compose your job as you wish. This gives you great flexibility to run things that way you want.
+In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want it.
 
 To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) section.
 
 ## Custom Build Image
 
-In 1.0, you have to use a build image that CircleCI provides. In Linux builds, there are two images that you can use: Ubuntu 12.04 and 14.04. While many languages and tools are pre-installed in these images, it's frustrating if you need a version of a service or dependency that isn't preinstalled.
+In 1.0, you’re restricted to the build image CircleCI provides. In Linux builds, there are 2 images you can use: Ubuntu 12.04 and 14.04. While these images come with many languages and tools pre-installed, it’s frustrating if you need a version of a service or dependency that isn’t included.
 
-For example, you may want to use a different version of MySQL from the one installed in the images. Installing it will add complexity and time to your builds.
+Maybe you want to use a different version of MySQL than the one included in either of these images. Installing that adds time and complexity to your builds.
 
-In 2.0, we support almost all public Docker images. You can create a custom image and run jobs on it. You can even use multiple images, say MySQL 5.7 and Redis 3.2, and run jobs on the images as if it's a single image.
+In 2.0, we support almost all public Docker images. You can also create a custom image and run jobs on that. You can even compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
 
 To learn more, please see [Pod]( {{ site.baseurl }}/2.0/configuration/#pod-build-images) section.
