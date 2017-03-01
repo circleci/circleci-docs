@@ -23,7 +23,7 @@ The rest of `config.yml` is comprised of several _jobs_. In turn, a job is compr
 
 So what does a job look like? At minimum, a job must have an executor and a list of steps. It can also have a few other values:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -89,6 +89,7 @@ CircleCI will build the necessary environment by launching as many Docker contai
 version: 2
 jobs:
   build:
+    working_directory: ~/my-project
     docker:
       - image: ubuntu:14.04
         command: ["/bin/bash"]
@@ -99,7 +100,6 @@ jobs:
           POSTGRES_USER: root
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
       - image: rabbitmq:3.5.4
-    working_directory: ~/my-project
   ...
 ```
 
@@ -141,10 +141,67 @@ This executor defaults `working_directory` to a directory in `/tmp` named after 
 
 As we mentioned earlier, each job is comprised of several _steps_. The `steps` key should be a list of single key/value pair maps. The key indicates the _type_ of step, while the value can either be a configuration map or simply a string. Behold:
 
-```
+```yaml
 jobs:
   build:
-    working_dire
+    steps:
+      - run:
+        name: run tests
+        command: make test
+```
+
+Here, we have a single step with an associated configuration map. Its type is `run`, its name is “run tests”, and the command is `make test`.
+
+Similar to a job, the UI uses the `name` attribute for display purposes. If no `name` is provided, the step implementation will try to use some sensible default.
+
+If the value of the step invocation key is a string, then the step implementation may implement default behavior. This means we can reduce our example further:
+
+```yaml
+jobs:
+  build:
+    steps:
+      - run: make test
+```
+
+This is functionally the same as the above example, except the step will use the command as the name of the step.
+
+A final shorthand is to just use a string instead of the entire step map:
+
+```yaml
+jobs:
+  build:
+    steps:
+      - checkout
+```
+
+This is the equivalent of an empty map under the `checkout` key.
+
+So the optional configuration map for a step invocation is:
+
+### **name** (string)
+
+The name the UI uses for the step.
+
+### **no_output_timeout** (integer)
+
+Number of seconds of inactivity allowed before the step times out and fails. Default is 600.
+
+### **absolute_timeout** (integer)
+
+Number of seconds a step may take overall before it times out and fails.
+
+### **background** (boolean)
+
+Whether or not this step run in the background. Default is false.
+
+A step with `background` set will allow the job to immediately move to the next step. A failure of a backgrounded step will halt the build and cause it to fail.
+
+If `background` conflicts with a steps definition, an error will be thrown.
+
+### **working_directory** (string)
+
+The directory to run this step in. Overrides the job-level `working_directory` value.
+
 
 ###############################################################
 
