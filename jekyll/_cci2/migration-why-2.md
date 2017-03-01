@@ -1,7 +1,7 @@
 ---
 layout: classic-docs2
-title: "Why migrating to 2.0?"
-short-title: "Why migrating to 2.0?"
+title: "Why Migrate to CircleCI 2.0?"
+short-title: "Why Migrate to 2.0?"
 categories: [migrating-from-1-2]
 order: 1
 ---
