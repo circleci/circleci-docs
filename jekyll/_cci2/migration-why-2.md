@@ -29,7 +29,7 @@ some of dependencies are created during the tests.
 
 In 2.0, build steps are small parts. You can use these parts to compose your build as you wish. In this way, you will gain the great flexibility to define your build.
 
-To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/2.0/configuration) section.
+To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) section.
 
 ## Custom Build Image
 
@@ -37,6 +37,6 @@ In 1.0, you have to use build image that CircleCI provides. In Linux builds, the
 
 For example, you may want to use a different version of MySQL from the one installed in the images.
 
-In 2.0, we support almost all public Docker images. You can also create a custom image and run builds on the image. You can even use multiple image, say MySQL 5.7 and Redis 3.2 images, and run builds on the images as if it's a single image.
+In 2.0, we support almost all public Docker images. You can also create a custom image and run builds on it. You can even use multiple images, say MySQL 5.7 and Redis 3.2, and run builds on the images as if it's a single image.
 
-To learn more, please see [Pod]( {{ site.baseurl }}/2.0/2.0/configuration/#pod-build-images) section.
+To learn more, please see [Pod]( {{ site.baseurl }}/2.0/configuration/#pod-build-images) section.
