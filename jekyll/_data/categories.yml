@@ -85,18 +85,75 @@
 ##
 # CircleCI 2.0 Docs
 ##
+
+- section: cci2
+  slug: what-is-circleci
+  name: "What Is CircleCI?"
+
 - section: cci2
   slug: getting-started
   name: "Getting Started"
 
 - section: cci2
-  slug: configuring-circleci
-  name: "Configuring CircleCI 2.0"
+  slug: migrating-from-1-2
+  name: "Migrating from 1.0 to 2.0"
 
 - section: cci2
-  slug: quickstart-guides
-  name: "Quickstart Guides"
+  slug: configuring-jobs
+  name: "Configuring Jobs"
 
 - section: cci2
-  slug: reference
-  name: "Reference"
+  slug: managing-dependencies
+  name: "Managing Dependencies"
+
+- section: cci2
+  slug: docker
+  name: "Docker"
+
+- section: cci2
+  slug: language-guides
+  name: "Language Guides"
+
+- section: cci2
+  slug: databases
+  name: "Databases"
+
+- section: cci2
+  slug: example-projects
+  name: "Example Projects"
+
+- section: cci2
+  slug: browser-testing
+  name: "Browser Testing"
+
+- section: cci2
+  slug: making-jobs-faster
+  name: "Making Jobs Faster"
+
+- section: cci2
+  slug: troubleshooting-and-debugging
+  name: "Troubleshooting and Debugging"
+
+- section: cci2
+  slug: deployments-and-uploads
+  name: "Deployments and Uploads"
+
+- section: cci2
+  slug: job-info-and-insights
+  name: "Job Info and Insights"
+
+- section: cci2
+  slug: integrations-and-notifications
+  name: "Integrations and Notifications"
+
+- section: cci2
+  slug: accounts-billing-and-security
+  name: "Accounts, Billing and Security"
+
+- section: cci2
+  slug: api
+  name: "API"
+
+- section: cci2
+  slug: help-and-support
+  name: "Help and Support"

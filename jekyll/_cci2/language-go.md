@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Quickstart Guide: Go"
+title: "Language Guide: Go"
 short-title: "Go"
-categories: [quickstart-guides]
+categories: [language-guides]
 order: 1
 ---
 

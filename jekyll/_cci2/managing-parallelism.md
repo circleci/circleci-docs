@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Managing Parallelism with the 2.0 Tests CLI"
 short-title: "Managing Parallelism"
-categories: [configuring-circleci]
+categories: [configuring-jobs]
 order: 3
 ---
 

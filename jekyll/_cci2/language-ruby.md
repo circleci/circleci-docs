@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Quickstart Guide: Ruby"
+title: "Language Guide: Ruby"
 short-title: "Ruby"
-categories: [quickstart-guides]
+categories: [language-guides]
 order: 5
 ---
 
