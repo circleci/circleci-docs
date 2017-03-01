@@ -59,7 +59,7 @@ The default `working_directory` depends on the [executor](#executors) you’re u
 
 Options for either the Docker or machine [executor](#executors).
 
-`docker` and `machine` are mutually exclusive, and you must choose one of them. If you’re not sure which executor to pick, you can [read about the differences](#choosing-an-executor-type).
+`docker` and `machine` are mutually exclusive, and you must choose one of them.
 
 ### **steps** (list)
 
