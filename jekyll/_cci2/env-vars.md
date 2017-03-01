@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "CircleCI 2.0 Environment Variables"
 short-title: "Environment Variables"
 categories: [reference]

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Quickstart Guide: PHP"
 short-title: "PHP"
 categories: [quickstart-guides]

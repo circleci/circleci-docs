@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Quickstart Guide: JavaScript"
 short-title: "JavaScript"
 categories: [quickstart-guides]

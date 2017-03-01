@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Getting Started with CircleCI 2.0"
 short-title: "Getting Started with CircleCI 2.0"
 categories: [getting-started]
