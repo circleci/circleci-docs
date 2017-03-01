@@ -37,8 +37,7 @@
 }
 
 .nav li > a:hover {
-    background-color: #333333;
-    color: #fff;
+    color: #7f7f7f;
 }
 
 .nav li > a > span:after {
@@ -48,13 +47,18 @@
     content: '\25b4';
 }
 
-.nav a:hover, .nav li.active > a {
-    background-color: #333333;
-    color: #f5f5f5;
+.nav a:hover {
+    color: #7f7f7f;
+}
+
+.nav li.active > a {
+    color: #000000;
 }
 
 .nav > li.active > a  {
-    background-color: #229922;
+    background-color: #eeeeee;
+    color: #000000;
+    font-weight: bolder;
 }
 
 .nav li a {
