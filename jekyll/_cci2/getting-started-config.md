@@ -39,15 +39,15 @@ jobs:
 
 The job in this case is named “build”, and the value is a map of additional information about that job. CircleCI uses the job’s name in other contexts, so it **must** form a unique tuple in combination with the repository’s URI.
 
-The map for each job accepts the following:
+The map for each job accepts the following (optional in brackets):
 
-### **name** (string)
+### **[name]** (string)
 
 The name the UI uses for the job.
 
 If you don’t specify a name, the UI will default to the map’s key (“build” in this case).
 
-### **working_directory** (string)
+### **[working_directory]** (string)
 
 A directory in which to execute a job’s steps. It only applies to the first container since that’s where the steps are being executed.
 
@@ -65,13 +65,13 @@ Options for either the Docker or machine [executor](#executors).
 
 A list of [steps](#steps) to be performed for this job.
 
-### **parallelism** (integer)
+### **[parallelism]** (integer)
 
 Number of parallel instances of this job to run.
 
 The default is 1. If you choose a number N > 1, then N independent executors will be set up to each run the job’s steps in parallel. Certain parallelism-aware steps can opt out of this and run on a single executor.
 
-### **environment** (map)
+### **[environment]** (map)
 
 A map of environment variable names and values.
 
@@ -105,25 +105,25 @@ jobs:
 
 The value of `docker` is a list of maps that list _which_ images to use and (in some cases) _how_ to use those images.
 
-`docker` accepts maps with the following:
+`docker` accepts maps with the following (optional in brackets):
 
 #### **image** (string)
 
-The name of a custom Docker image to use. This is the only required key in the map.
+The name of a custom Docker image to use.
 
 You can specify image versions from DockerHub using image tags, like `ubuntu` and `mongo`. Or you can specify image versions using a SHA, like `redis`.
 
-#### **command** (string _or_ list of strings)
+#### **[command]** (string _or_ list of strings)
 
 The command used as pid 1 when launching the container.
 
 In order to avoid parsing ambiguities, `command` can also be a list of strings, as shown above.
 
-#### **user** (string)
+#### **[user]** (string)
 
 The user to run the command as.
 
-#### **environment** (map)
+#### **[environment]** (map)
 
 A map of environment variable names and values.
 
@@ -178,19 +178,19 @@ This is the equivalent of an empty map under the `checkout` key.
 
 So the optional configuration map for a step invocation is:
 
-### **name** (string)
+### **[name]** (string)
 
 The name the UI uses for the step.
 
-### **no_output_timeout** (integer)
+### **[no_output_timeout]** (integer)
 
 Number of seconds of inactivity allowed before the step times out and fails. Default is 600.
 
-### **absolute_timeout** (integer)
+### **[absolute_timeout]** (integer)
 
 Number of seconds a step may take overall before it times out and fails.
 
-### **background** (boolean)
+### **[background]** (boolean)
 
 Whether or not this step run in the background. Default is false.
 
@@ -198,7 +198,7 @@ A step with `background` set will allow the job to immediately move to the next 
 
 If `background` conflicts with a steps definition, an error will be thrown.
 
-### **working_directory** (string)
+### **[working_directory]** (string)
 
 The directory to run this step in. Overrides the job-level `working_directory` value.
 
