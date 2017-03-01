@@ -28,7 +28,7 @@ In each job, we have the option of specifying a `working_directory`. In this sam
 version: 2
 jobs:
   build:
-    working_directory: /home/ubuntu/cci-demo-rails
+    working_directory: ~/cci-demo-rails
 ```
 
 This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
@@ -39,7 +39,7 @@ Directly beneath `working_directory`, we can specify container images for the bu
 version: 2
 jobs:
   build:
-    working_directory: /home/ubuntu/cci-demo-rails
+    working_directory: ~/cci-demo-rails
     docker:
       - image: ruby:2.3
 ```
@@ -55,7 +55,7 @@ In our second step, we install NodeJS because Docker’s Ruby image doesn’t in
 ```yaml
 version: 2
 jobs:
-  working_directory: /home/ubuntu/cci-demo-rails
+  working_directory: ~/cci-demo-rails
   build:
     docker:
       - image: ruby:2.3
@@ -107,7 +107,7 @@ jobs:
   build:
     docker:
       - image: ruby:2.3
-    working_directory: /home/ubuntu/cci-demo-rails
+    working_directory: ~/cci-demo-rails
     steps:
       - checkout
       - run:

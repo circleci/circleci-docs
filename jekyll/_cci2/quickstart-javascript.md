@@ -58,7 +58,7 @@ jobs:
     steps:
       - run:
           name: Pre-Dependencies
-          command: mkdir /home/ubuntu/cci-demo-react/artifacts
+          command: mkdir ~/cci-demo-react/artifacts
 ```
 
 Next, let's install our dependencies. In CircleCI Classic, we would have done this in a separate `dependencies` stage.
@@ -82,7 +82,7 @@ Remember when we created a directory for our artifacts? CircleCI won't unless we
 
 ```yaml
       - store_artifacts:
-          path: /home/ubuntu/cci-demo-react/artifacts
+          path: ~/cci-demo-react/artifacts
 ```
 
 We also want to deploy our app to Heroku, so we'll do that with another step after adding the SSH keys needed for deploy. Because 2.0 doesn't yet have built-in commands to deploy by branch, we use a Bash conditional to determine if the current branch is appropriate.
@@ -114,7 +114,7 @@ jobs:
       - checkout
       - run:
           name: Pre-Dependencies
-          command: mkdir -p /home/ubuntu/cci-demo-react/artifacts
+          command: mkdir -p ~/cci-demo-react/artifacts
       - run:
           name: Install Dependencies
           command: npm install
@@ -122,7 +122,7 @@ jobs:
           name: NPM Test
           command: npm test
       - store_artifacts:
-          path: /home/ubuntu/cci-demo-react/artifacts
+          path: ~/cci-demo-react/artifacts
       - add_ssh_keys
       - deploy:
           command: |
