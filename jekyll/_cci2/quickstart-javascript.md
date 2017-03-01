@@ -41,7 +41,7 @@ jobs:
   build:
     working_directory: ~/cci-demo-react
     docker:
-      image: node:7.4.0
+      - image: node:7.4.0
 ```
 
 Now we’ll add several `steps` within the `build` stage.
@@ -54,18 +54,18 @@ jobs:
   build:
     working_directory: ~/cci-demo-react
     docker:
-      image: node:7.4.0
+      - image: node:7.4.0
     steps:
-      - shell:
-        name: Pre-Dependencies
-        command: mkdir ~/artifacts
+      - run:
+          name: Pre-Dependencies
+          command: mkdir ~/cci-demo-react/artifacts
 ```
 
 Next, let's install our dependencies. In CircleCI Classic, we would have done this in a separate `dependencies` stage.
 
 ```yaml
 ...
-      - shell:
+      - run:
           name: Dependencies
           command: npm install
 ```
@@ -73,7 +73,7 @@ Next, let's install our dependencies. In CircleCI Classic, we would have done th
 Next, we run our tests. Like dependencies, this would have been run in a separate `test` stage in CircleCI Classic.
 
 ```yaml
-      - shell:
+      - run:
           name: NPM Test
           command: npm test
 ```
@@ -81,15 +81,16 @@ Next, we run our tests. Like dependencies, this would have been run in a separat
 Remember when we created a directory for our artifacts? CircleCI won't unless we tell it where to look.
 
 ```yaml
-      - artifacts_store:
-          path: ~/artifacts
+      - store_artifacts:
+          path: ~/cci-demo-react/artifacts
 ```
 
-We also want to deploy our app to Heroku, so we'll do that with another step. Because 2.0 doesn't have built-in commands to deploy by branch, we use a Bash conditional to determine if the current branch is appropriate.
+We also want to deploy our app to Heroku, so we'll do that with another step after adding the SSH keys needed for deploy. Because 2.0 doesn't yet have built-in commands to deploy by branch, we use a Bash conditional to determine if the current branch is appropriate.
 
 If it is the right branch, we'll add the SSH key fingerprint directly. Note the git commands as well.
 
 ```yaml
+      - add_ssh_keys
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -106,25 +107,28 @@ And we're done! Let's see what the whole `circle.yml` looks like now:
 version: 2
 jobs:
   build:
-    working_directory: ~/cci-demo-react
     docker:
-      image: node:7.4.0
+      - image: node:7.4.0
+    working_directory: ~/cci-demo-react
     steps:
-      - shell:
+      - checkout
+      - run:
           name: Pre-Dependencies
-          command: mkdir ~/artifacts
-      - shell:
+          command: mkdir -p ~/cci-demo-react/artifacts
+      - run:
           name: Install Dependencies
           command: npm install
-      - shell:
+      - run:
           name: NPM Test
           command: npm test
-      - artifacts_store:
-          path: ~/artifacts
+      - store_artifacts:
+          path: ~/cci-demo-react/artifacts
+      - add_ssh_keys
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               # Install Heroku fingerprint
+              mkdir -p ~/.ssh
               echo 'heroku.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAu8erSx6jh+8ztsfHwkNeFr/SZaSOcvoa8AyMpaerGIPZDB2TKNgNkMSYTLYGDK2ivsqXopo2W7dpQRBIVF80q9mNXy5tbt1WE04gbOBB26Wn2hF4bk3Tu+BNMFbvMjPbkVlC2hcFuQJdH4T2i/dtauyTpJbD/6ExHR9XYVhdhdMs0JsjP/Q5FNoWh2ff9YbZVpDQSTPvusUp4liLjPfa/i0t+2LpNCeWy8Y+V9gUlDWiyYwrfMVI0UwNCZZKHs1Unpc11/4HLitQRtvuk0Ot5qwwBxbmtvCDKZvj1aFBid71/mYdGRPYZMIxq1zgP1acePC1zfTG/lvuQ7d0Pe0kaw==' >> ~/.ssh/known_hosts
 
               git config --global push.default simple

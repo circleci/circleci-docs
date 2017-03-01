@@ -41,14 +41,16 @@ jobs:
   build:
     working_directory: ~/cci-demo-rails
     docker:
-      image: ruby:2.4.0
+      - image: ruby:2.3
 ```
 
 Normally, you’d also specify a database (DB) image here, but our app is using SQLite. SQLite is _so_ light that Rails will install it during setup, which means we don’t need to specify a DB image.
 
 Now we’ll add several `steps` within the `build` stage.
 
-In our first step, we install NodeJS because Docker’s Ruby image doesn’t include it. This command will also install any tools/headers required to build native gems.
+First we check out the codebase.
+
+In our second step, we install NodeJS because Docker’s Ruby image doesn’t include it. This command will also install any tools/headers required to build native gems.
 
 ```yaml
 version: 2
@@ -56,9 +58,10 @@ jobs:
   working_directory: ~/cci-demo-rails
   build:
     docker:
-      image: ruby:2.4.0
+      - image: ruby:2.3
     steps:
-      - shell:
+      - checkout
+      - run:
           name: Install System Dependencies
           command: apt-get update -qq && apt-get install -y build-essential nodejs
 ```
@@ -67,7 +70,7 @@ Now we have to install our actual dependencies for the project.
 
 ```yaml
 ...
-      - shell:
+      - run:
           name: Install Ruby Dependencies
           command: bundle install
 ```
@@ -75,7 +78,7 @@ Now we have to install our actual dependencies for the project.
 Next, set up the DB.
 
 ```yaml
-      - shell:
+      - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
 ```
@@ -83,7 +86,7 @@ Next, set up the DB.
 Run our migrations.
 
 ```yaml
-      - shell:
+      - run:
           name: DB Migrations
           command: bundle exec rake db:migrate
 ```
@@ -91,7 +94,7 @@ Run our migrations.
 Finally, run our tests.
 
 ```yaml
-      - shell:
+      - run:
           name: Run Tests
           command: bundle exec rake test
 ```
@@ -102,23 +105,24 @@ And we're done! Let's see the whole `config.yml`:
 version: 2
 jobs:
   build:
-    working_directory: ~/cci-demo-rails
     docker:
-      image: ruby:2.4.0
+      - image: ruby:2.3
+    working_directory: ~/cci-demo-rails
     steps:
-      - shell:
+      - checkout
+      - run:
           name: Install System Dependencies
           command: apt-get update -qq && apt-get install -y build-essential nodejs
-      - shell:
+      - run:
           name: Install Ruby Dependencies
           command: bundle install
-      - shell:
+      - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
-      - shell:
+      - run:
           name: DB Migrations
           command: bundle exec rake db:migrate
-      - shell:
+      - run:
           name: Run Tests
           command: bundle exec rake test
 ```

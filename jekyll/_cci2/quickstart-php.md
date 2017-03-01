@@ -33,7 +33,7 @@ jobs:
 
 This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
 
-Directly beneath `working_directory`, we’ll specify container images for this build’s pod. A pod is a group of combined containers that is treated as a single container.
+Directly beneath `working_directory`, we’ll specify container images for this build in `docker`.
 
 We'll pull in the 7.0-apache image from the official PHP repository on Docker Hub along with MariaDB. Both images have their own `environment` settings.
 
@@ -41,7 +41,7 @@ We'll pull in the 7.0-apache image from the official PHP repository on Docker Hu
 jobs:
   build:
     working_directory: /var/www/html
-    pod:
+    docker:
       - image: php:7.0-apache
         environment:
           APP_ENV: local
@@ -81,19 +81,18 @@ Next, we'll add `steps` to the job. Normally, we’d check out our project's cod
 jobs:
   build:
     working_directory: /var/www/html
-    pod:
+    docker:
       ...
     steps:
-      - shell:
+      - run:
           name: Install System Packages
           command: apt-get update && apt-get -y install git unzip zlib1g-dev
 ```
 
-Now we can actually check out our code, which we’ll put in the working directory we specified earlier.
+Now we can actually check out our code, which will go in the working directory we specified earlier.
 
 ```yaml
-      - checkout:
-          path: /var/www/html
+      - checkout
 ```
 
 Next, we're going to run a pre-installed script called `docker-php-ext-install`. This script comes from the Docker image and was designed to install PHP extensions for anything that isn't available by default.
@@ -101,7 +100,7 @@ Next, we're going to run a pre-installed script called `docker-php-ext-install`.
 We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. Normally, we'd use the `RUN` command in a `Dockerfile`, but in this case, we have to run it manually:
 
 ```yaml
-      - shell:
+      - run:
           name: Install PHP Extensions
           command: docker-php-ext-install pdo pdo_mysql zip
 ```
@@ -109,7 +108,7 @@ We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. No
 We're going to be using Composer to install project dependencies, so let's install that next. Forgive the verbosity, but these are the official install instructions.
 
 ```yaml
-      - shell:
+      - run:
           name: Install Composer
           command: |
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -121,7 +120,7 @@ We're going to be using Composer to install project dependencies, so let's insta
 Now that Composer has been installed, let's use it to install the project's dependencies, located in `composer.json`.
 
 ```yaml
-      - shell:
+      - run:
           name: Install Project Dependencies
           command: php composer.phar install
 ```
@@ -129,7 +128,7 @@ Now that Composer has been installed, let's use it to install the project's depe
 Next, let's initialize required database (DB) tables and seed it with initial data.
 
 ```yaml
-      - shell:
+      - run:
           name: Initialize Database
           command: |
             php artisan migrate:refresh
@@ -139,7 +138,7 @@ Next, let's initialize required database (DB) tables and seed it with initial da
 Finally, let's run our tests using PHPUnit.
 
 ```yaml
-      - shell:
+      - run:
           name: Run Tests
           command: vendor/bin/phpunit
 ```
@@ -150,8 +149,7 @@ And we're done! Let's see what the whole `circle.yml` looks like now:
 version: 2
 jobs:
   build:
-    working_directory: /var/www/html
-    pod:
+    docker:
       - image: php:7.0-apache
         environment:
           APP_ENV: local
@@ -169,29 +167,31 @@ jobs:
         environment:
           MYSQL_DATABASE: testdb
           MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
     steps:
-      - shell:
+      - run:
           name: Install System Packages
           command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - shell:
+      - checkout
+      - run:
           name: Install PHP Extensions
           command: docker-php-ext-install pdo pdo_mysql zip
-      - shell:
+      - run:
           name: Install Composer
           command: |
             php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
             php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
-      - shell:
+      - run:
           name: Install Project Dependencies
           command: php composer.phar install
-      - shell:
+      - run:
           name: Initialize Database
           command: |
             php artisan migrate:refresh
             php artisan db:seed
-      - shell:
+      - run:
           name: Run Tests
           command: vendor/bin/phpunit
 ```
