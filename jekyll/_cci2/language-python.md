@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Quickstart Guide: Python"
+title: "Language Guide: Python"
 short-title: "Python"
-categories: [quickstart-guides]
+categories: [language-guides]
 order: 4
 ---
 

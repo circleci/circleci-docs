@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Configuring CircleCI 2.0"
 short-title: "Configuring CircleCI 2.0"
-categories: [configuring-circleci]
+categories: [configuring-jobs]
 order: 1
 ---
 

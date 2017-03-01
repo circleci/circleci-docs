@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Quickstart Guide: JavaScript"
+title: "Language Guide: JavaScript"
 short-title: "JavaScript"
-categories: [quickstart-guides]
+categories: [language-guides]
 order: 2
 ---
 

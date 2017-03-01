@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
-categories: [configuring-circleci]
+categories: [configuring-jobs]
 order: 2
 ---
 
