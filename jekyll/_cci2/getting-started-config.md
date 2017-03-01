@@ -19,14 +19,15 @@ version: 2
 
 ## Jobs
 
-The rest of `config.yml` is comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that run in sequential order.
+The rest of `config.yml` is comprised of several _jobs_. In turn, a job is comprised of several _steps_, which are commands that execute in the first specified container.
 
-So what does a job look like?
+So what does a job look like? At minimum, a job must have an executor and a list of steps. It can also have a few other values:
 
 ```
 version: 2
 jobs:
   build:
+    working_directory: ~/canary-python
     docker:
       - image: golang:1.7.0
     environment:
@@ -34,7 +35,6 @@ jobs:
     steps:
       - checkout
       - run: make test
-    working_directory: ~/canary-python
 ```
 
 The job in this case is named “build”, and the value is a map of additional information about that job. CircleCI uses the job’s name in other contexts, so it **must** form a unique tuple in combination with the repository’s URI.
@@ -47,6 +47,14 @@ The name the UI uses for the job.
 
 If you don’t specify a name, the UI will default to the map’s key (“build” in this case).
 
+### **working_directory** (string)
+
+A directory in which to execute a job’s steps. It only applies to the first container since that’s where the steps are being executed.
+
+This is the working directory for the job’s steps, which means this only applies to the first container.
+
+The default `working_directory` depends on the [executor](#executors) you’re using. Note also that the default will not exist for steps that run before the `checkout` step, _unless_ a step directly creates a working directory.
+
 ### **docker** or **machine** (map)
 
 Options for either the Docker or machine [executor](#executors).
@@ -55,7 +63,7 @@ Options for either the Docker or machine [executor](#executors).
 
 ### **steps** (list)
 
-A list of [steps](#steps) to be performed for this job. This and the executor are the only required keys.
+A list of [steps](#steps) to be performed for this job.
 
 ### **parallelism** (integer)
 
@@ -68,12 +76,6 @@ The default is 1. If you choose a number N > 1, then N independent executors wil
 A map of environment variable names and values.
 
 In our example job, we export the `$FOO` environment variable with a value of `"bar"`.
-
-### **working_directory** (string)
-
-A directory in which to run the steps. The default depends on the [executor](#executors) you’re using.
-
-The default `working_directory` will not exist for steps that run before the `checkout` step, _unless_ the working directory is created manually by a step. We strongly recommend setting this instead of relying on the default.
 
 ## Executors
 
@@ -136,6 +138,13 @@ To use the `machine` executor, set the `machine` key to `true`.
 This executor defaults `working_directory` to a directory in `/tmp` named after the repository.
 
 ## Steps
+
+As we mentioned earlier, each job is comprised of several _steps_. The `steps` key should be a list of single key/value pair maps. The key indicates the _type_ of step, while the value can either be a configuration map or simply a string. Behold:
+
+```
+jobs:
+  build:
+    working_dire
 
 ###############################################################
 
