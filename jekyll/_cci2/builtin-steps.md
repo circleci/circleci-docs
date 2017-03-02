@@ -3,6 +3,7 @@ layout: classic-docs2
 title: "Built-in Steps for Jobs"
 short-title: "Built-in Steps"
 categories: [getting-started]
+order: 40
 ---
 
 ## Built-in Steps
