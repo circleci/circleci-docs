@@ -7,14 +7,17 @@
     margin: 0 0 0 18px;
 }
 
-.nav {
+/* This is commented out because it's causing issues with our theme.*/
+/*.nav {
     padding: 4px;
     margin: 0px;
-}
+}*/
 
-.nav > li {
+/* This is commented out because it's causing issues with our theme.*/
+/*.nav > li {
     margin: 4px 0;
 }
+*/
 
 .nav > li li {
     margin: 2px 0;
