@@ -16,9 +16,9 @@ We strongly recommend using the `docker` executor. This option allows you to use
 
 To use Docker’s features, you’ll need Docker Engine 1.12+ installed. You can do that by picking an image that already has Docker Engine or installing it yourself.
 
-You’ll also need to add a special step called `setup-docker-engine` before you can run any Docker commands.
+You’ll also need to add a special step called `setup_docker_engine` before you can run any Docker commands.
 
-Below is a sample `config.yml` that uses the `docker` executor, installs Docker Engine, and runs `setup_docker_engine`:
+Below is a sample `.circleci/config.yml` that uses the `docker` executor, installs Docker Engine, and runs `setup_docker_engine`:
 
 ```yaml
 version: 2.0

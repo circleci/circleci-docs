@@ -44,7 +44,7 @@ jobs:
       - image: node:7.4.0
 ```
 
-Now we’ll add several `steps` within the `build` stage.
+Now we’ll add several `steps` within the `build` job.
 
 One difference between CircleCI Classic and 2.0 is that 2.0 doesn’t automatically make an artifacts directory. Let’s do that now.
 

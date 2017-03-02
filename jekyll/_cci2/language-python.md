@@ -46,7 +46,7 @@ We'll also create a container for PostgreSQL, along with 3 environment variables
           POSTGRES_PASSWORD: ""
 ```
 
-Now we need to add several `steps` within the `build` stage.
+Now we need to add several `steps` within the `build` job.
 
 You could install NPM, but we’re going to use Yarn for reasons that are outside the scope of this document.
 
