@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: classic-docs2
 title: "Built-in Steps for Jobs"
 short-title: "Built-in Steps"
 categories: [getting-started]
@@ -45,7 +45,7 @@ environment:
 ```
 
 #### `checkout`
-Special step used to check out source code to the configured `path`. This is interpreted within the build as `git clone <my-project-vcs-url> <path>`.
+Special step used to check out source code to the configured `path`. This is interpreted within the job as `git clone <my-project-vcs-url> <path>`.
 
 Fields:
 
@@ -109,7 +109,7 @@ There can be multiple `artifacts-store` steps in a stage. Using a unique prefix 
 
 #### `cache-save`
 
-Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later builds can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
+Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later jobs can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
 
 Fields:
 
@@ -120,7 +120,7 @@ Fields:
 
 Valid runtime values:
   - `<< .Branch >>`: the VCS branch currently being built
-  - `<< .BuildNum >>`: the CircleCI build number for this build
+  - `<< .BuildNum >>`: the CircleCI build number for this job
   - `<< .Revision >>`: the VCS revision currently being built
   - `<< .CheckoutKey >>`: the SSH key used to checkout the repo
   - `<< .Environment.variableName >>`: the environment variable `variableName`
@@ -159,13 +159,13 @@ Example:
               # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
               - projectname-
 
-          # Repeat builds will restore from this step as it will produce the newest cache
+          # Repeat jobs will restore from this step as it will produce the newest cache
           - type: cache-save
             key: projectname-<< .Branch >>-<< checksum "project.clj" >>-<< epoch >>
             paths:
               - /foo
 
-          # This step will only save on the first build, then be skipped on subsequent builds.
+          # This step will only save first time the jobs is run, then be skipped on subsequent runs.
           - type: cache-save
             key:  projectname-<< .Branch >>-<< checksum "project.clj" >>
             paths:
@@ -194,7 +194,7 @@ Special step used to deploy artifacts.
 
 `deploy` uses the same fields as `shell`. Config may have more than one `deploy` step.
 
-In a `parallel` build, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
+In a `parallel` job, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
 ```yaml
           - type: deploy
