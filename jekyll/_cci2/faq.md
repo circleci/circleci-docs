@@ -14,9 +14,9 @@ This means that no commands are run automatically. Don’t assume that a particu
 
 ## My project is running on CircleCI 2.0, but the build is frozen!
 
-Builds often freeze due to syntax errors in `circle.yml`.
+Builds often freeze due to syntax errors in `config.yml`.
 
-Cancel the build, check your `circle.yml` for proper indents, and ensure that all stages/steps have the required keys.
+Cancel the build, check your `config.yml` for proper indents, and ensure that all jobs and steps have the required keys.
 
 ## Can I use CircleCI 2.0 without creating base images?
 
@@ -57,7 +57,7 @@ Instead, we recommend choosing a specific tag. This guarantees that you are usin
 
 We don’t currently provide a way to invalidate cached Docker images. One way around this is to use image tags.
 
-If you’re running a build on `my-image:123` and you update the image, you can use a new tag to force a cache refresh. In this example, you could change the tag to `my-image:456` and choose that image in `circle.yml`.
+If you’re running a build on `my-image:123` and you update the image, you can use a new tag to force a cache refresh. In this example, you could change the tag to `my-image:456` and choose that image in `config.yml`.
 
 ## Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
 

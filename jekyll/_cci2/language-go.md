@@ -59,7 +59,7 @@ jobs:
           POSTGRES_DB: service_test
 ```
 
-Now we need to add several `steps` within the `build` stage.
+Now we need to add several `steps` within the `build` job.
 
 The `checkout` step will default to the `working_directory` we have already defined.
 

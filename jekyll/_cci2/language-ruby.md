@@ -46,7 +46,7 @@ jobs:
 
 Normally, you’d also specify a database (DB) image here, but our app is using SQLite. SQLite is _so_ light that Rails will install it during setup, which means we don’t need to specify a DB image.
 
-Now we’ll add several `steps` within the `build` stage.
+Now we’ll add several `steps` within the `build` job.
 
 First we check out the codebase.
 
