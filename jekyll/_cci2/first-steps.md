@@ -36,4 +36,4 @@ You can see and edit your notiication settings [here](https://circleci.com/accou
 
 Now that you’ve integrated with a VCS and added one of your projects, you’ll need to create a `.circleci/config.yml` file to tell CircleCI what to do during each build.
 
-If you’re itching to get building, then check out one of our quickstart guides for popular languages/frameworks.
+The quickest way to get started right now is to [read on of our language guides](/docs/2.0/language-guides).

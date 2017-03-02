@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Frequently Asked Questions"
 short-title: "FAQ"
-categories: [getting-started]
-order: 2
+categories: [getting-started, migrating-from-1-2]
+order: 50
 ---
 
 ## Does CircleCI 2.0 run inference commands?

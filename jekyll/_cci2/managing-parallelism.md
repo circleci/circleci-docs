@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Managing Parallelism with the 2.0 Tests CLI"
 short-title: "Managing Parallelism"
-categories: [configuring-jobs]
-order: 3
+categories: [configuring-jobs, making-jobs-faster]
+order: 30
 ---
 
 One of the most powerful features of CircleCI is the ability to run your tests in parallel. You can manage this parallelism by using a CLI tool called `picard`, which can be accessed from the primary build container.
