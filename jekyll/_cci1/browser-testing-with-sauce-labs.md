@@ -9,7 +9,7 @@ description: How to test Sauce Labs on Circleci
 You can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs'
 secure tunnel, [Sauce Connect](https://docs.saucelabs.com/reference/sauce-connect/).
 Sauce Connect allows you to run a test server within the CircleCI build container
-and expose it it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you
+and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you
 run your browser tests after deploying to a publicly accessible staging environment,
 then you can use Sauce Labs in the usual way without worrying about Sauce Connect.
 
