@@ -1,7 +1,8 @@
 We use GitHub's labels to organize work on docs. Each issue has 3 labels: Status, Type & Priority.
 
 ## Status
-Status labels give information about how work is progressing on an issue:
+
+Status labels tell us how work on an issue is progressing:
 
 - Available: open for development
 - Blocked: dependency preventing progress
@@ -12,17 +13,18 @@ Status labels give information about how work is progressing on an issue:
 - Wontfix: closed & unresolved
 
 ## Type
-Type labels give information about the kind of issue:
+
+Type labels tell us about the kind of issue:
 
 - Bug: technical problem
-- Copyedit: accuracy, clarity, consistency
-- Draft: brand new documentation
-- Feature: technical enhancement
-- Proofreading: typos, repeated words, spelling, punctuation, formatting
-- Question: request for information; route to Discuss
-- Substantive: structure, language, style, presentation
+- Design: visual changes
+- Draft: new documentation
+- Edit: changes to existing docs
+- Feature: new functionality
+- Maintenance: refactor & reorganize
 
 ## Priority
+
 Priority labels tell us how important an issue is:
 
 - High: today
