@@ -1,12 +1,12 @@
 ---
 layout: classic-docs2
-title: "Configuration Mapping"
-short-title: "Configuration Mapping"
+title: "Configuration Equivalents"
+short-title: "Configuration Equivalents"
 categories: [migrating-from-1-2]
-order: 2
+order: 20
 ---
 
-CircleCI 2.0 introduces a completely new syntax in circle.yml. This page will help you convert your 1.0 circle.yml to 2.0 syntax.
+CircleCI 2.0 introduces a completely new syntax in `circle.yml`. This article will help you convert your 1.0 `circle.yml` to 2.0 syntax.
 
 
 ## Machine
