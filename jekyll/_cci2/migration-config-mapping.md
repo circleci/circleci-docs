@@ -6,7 +6,7 @@ categories: [migrating-from-1-2]
 order: 2
 ---
 
-CircleCI 2.0 introduces a completely new syntax in circle.yml. This page will help you converting your existing circle.yml to 2.0 style.
+CircleCI 2.0 introduces a completely new syntax in circle.yml. This page will help you convert your 1.0 circle.yml to 2.0 syntax.
 
 
 ## Machine
@@ -276,6 +276,8 @@ deployment:
 
 **2.0**
 
-We don't currently support automatic deployment, so your deployment is boiled down to the sequence of
-deployment commands. Deployment is a very complex topic, so we are not covering in this page.
-We are currently working on creating better deployment docs.
+Automatic deployment via integrations that you might have used on CircleCI 1.0 (such as Heroku above) are not currently supported in 2.0.
+
+You can write your own `deploy` manual steps as shown in the `deploy` sections of the `circle.yml` [configuration example here](/docs/2.0/configuration/).
+
+We're working on creating more comprehensive deployment documentation for 2.0.
