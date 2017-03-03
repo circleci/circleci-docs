@@ -190,7 +190,7 @@ jobs:
 ```
 {% endraw %}
 
-**(1)** To learn more about available cache, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) page.
+**(1)** To learn more about available options for cache prefixes, please see the [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) page.
 
 ## Database
 
