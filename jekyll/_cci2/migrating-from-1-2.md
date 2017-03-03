@@ -26,19 +26,19 @@ In 2.0, if your job uses Docker, we’ll run your job on a dedicated VM so you c
 
 While this configuration can be powerful, there are some drawbacks. Maybe you want to disable inference. Or maybe you need to save the dependency cache _after_ running tests since the tests themselves create _more_ dependencies.
 
-In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want it.
+In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want.
 
-To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) section.
+To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
 
 ### Custom Build Image
 
 In 1.0, you’re restricted to the build image CircleCI provides. In Linux builds, there are 2 images you can use: Ubuntu 12.04 and 14.04. While these images come with many languages and tools pre-installed, it’s frustrating if you need a version of a service or dependency that isn’t included.
 
-Maybe you want to use a different version of MySQL than the one included in either of these images. Installing that adds time and complexity to your builds.
+Maybe you want to use a different version of MySQL than the one included in either default image. Installing another version adds time and complexity to your builds.
 
 In 2.0, we support almost all public Docker images. You can also create a custom image and run jobs on that. You can even compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
 
-To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration/#job-images) section.
+To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration/#job-images).
 
 ----
 
