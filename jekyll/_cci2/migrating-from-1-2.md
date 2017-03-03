@@ -6,7 +6,7 @@ categories: [getting-started]
 order: 15
 ---
 
-**[Click here for Configuration Equibalents](#configuration-equivalents)**
+**[Click here for Configuration Equivalents](#configuration-equivalents)**
 
 ## Why Migrate from CircleCI 1.0 to 2.0?
 
