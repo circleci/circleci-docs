@@ -7,7 +7,6 @@ description: Troubleshooting Ruby
 children:
   - bundler-latest
   - rspec-exit-codes
-  - ruby-debugger-problems
   - capybara-timeout
   - git-bundle-install
   - ruby-exception-during-schema-load
