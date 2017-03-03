@@ -28,11 +28,11 @@ Eventually, 2.0 will support multiple backend executors. For now, though, only t
 
 2.0 is designed to facilitate a future pipelines implementation, so builds are organized into stages. Each stage contains a list of steps to run during that stage.
 
-### Pod (build images)
+### Job images
 
-Next, specify the container images that should be composed together in your build's pod. A "pod" is a group of combined containers that is treated as a single container. The pod concept is very similar to [Kubernetes'](http://kubernetes.io/docs/user-guide/pods/#resource-sharing-and-communication).
+Next, specify the container images that should be composed together in your job. In this way you create a group of combined containers that is treated as a single container. The concept is very similar to [Kubernetes pods'](http://kubernetes.io/docs/user-guide/pods/#resource-sharing-and-communication).
 
-By using the network services provided by pods, you can keep your base image small and flexible.
+By using the network services provided by container groups, you can keep your base image small and flexible.
 
 The build will run in the first container listed in the `containerInfo` section, so that image must either have all tools required by the build steps, or you must explicitly install them through additional build steps.
 
@@ -46,7 +46,7 @@ You can specify image versions from DockerHub using image tags, like `golang` an
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-The build steps will execute on the first container, which is `golang:1.6.2` here. Thanks to the pod, you can access the `mongod` service via `127.0.0.1:27017` inside the `golang` container, even though `mongo` is a separate image.
+The build steps will execute on the first container, which is `golang:1.6.2` here. Thanks to the container group, you can access the `mongod` service via `127.0.0.1:27017` inside the `golang` container, even though `mongo` is a separate image.
 
 Not shown above (but possible!) are setting environment variables, configuring the command to use when launching the container, and/or specifying a user to run the command as.
 

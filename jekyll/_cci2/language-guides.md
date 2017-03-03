@@ -1,6 +1,6 @@
 ---
 layout: category-page
 title: Language Guides
-categories: [language-guides]
+categories: [languages-and-tools]
 description: Language Guides
 ---

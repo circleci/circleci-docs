@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: Python"
 short-title: "Python"
-categories: [language-guides]
+categories: [languages-and-tools]
 order: 4
 ---
 
