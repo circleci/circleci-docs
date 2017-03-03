@@ -108,7 +108,6 @@ documentation has information about the following issues and problems:
 
 *   [Do you need the latest version of Bundler?]( {{ site.baseurl }}/1.0/bundler-latest/)
 *   [RSpec is failing but CircleCI reports my tests have passed]( {{ site.baseurl }}/1.0/rspec-exit-codes/)
-*   [The Ruby debugger gem won't build]( {{ site.baseurl }}/1.0/ruby-debugger-problems/)
 *   ["unable to obtain stable firefox connection in 60 seconds"]( {{ site.baseurl }}/1.0/capybara-timeout/)
 *   [Git errors during a bundle install]( {{ site.baseurl }}/1.0/git-bundle-install/)
 *   [rake db:schema:load fails]( {{ site.baseurl }}/1.0/ruby-exception-during-schema-load/)
