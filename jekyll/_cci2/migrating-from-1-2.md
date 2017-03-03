@@ -30,7 +30,7 @@ In 2.0, jobs are broken into granular steps. You can compose these steps within 
 
 To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) section.
 
-## #Custom Build Image
+## Custom Build Image
 
 In 1.0, you’re restricted to the build image CircleCI provides. In Linux builds, there are 2 images you can use: Ubuntu 12.04 and 14.04. While these images come with many languages and tools pre-installed, it’s frustrating if you need a version of a service or dependency that isn’t included.
 
