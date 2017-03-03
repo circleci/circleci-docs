@@ -3,7 +3,7 @@ layout: classic-docs2
 title: "Managing Dependencies"
 short-title: "Managing Dependencies"
 categories: [configuring-jobs]
-order: 80
+order: 50
 ---
 
 ## Specifying Versions

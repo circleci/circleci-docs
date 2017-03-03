@@ -3,6 +3,7 @@ layout: classic-docs2
 title: "CircleCI 2.0 Environment Variables"
 short-title: "Environment Variables"
 categories: [configuring-jobs]
+order: 3
 ---
 
 **CI**
