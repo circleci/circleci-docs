@@ -16,7 +16,7 @@ CircleCI 2.0 is a powerful tool. While it is in Beta you should be comfortable w
 - [FAQ](/docs/2.0/faq/)
 - [Configuring CircleCI 2.0](/docs/2.0/configuration/)
 - [Exceutor Types](/docs/2.0/executor-types/)
-- [Managing Parallelism](/docs/2.0/managing-parallelism/)
+- [Managing Parallelism](/docs/2.0/parallelism-faster-jobs/)
 - [Language Guides for Go, JavaScript, PHP, Python, Ruby](/docs/2.0/languages-and-tools)
 
 We'll update this page as more articles are added during Beta.
