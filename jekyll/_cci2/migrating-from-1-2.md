@@ -158,9 +158,7 @@ jobs:
       - run: git submodule sync && git submodule update --init # use submodules
 ```
 
-## Dependency
-
-### Override
+## Dependency/Database/Test
 
 **1.0**
 
@@ -169,9 +167,20 @@ dependencies:
   override:
     - bundle install --path vendor/bundle:
         timeout: 180
+
+database:
+  override:
+    - cp config/database.yml.ci config/database.yml
+    - bundle exec rake db:create db:schema:load
+
+test:
+  override:
+    - bundle exec rspec
 ```
 
 **2.0**
+
+In 2.0, `dependency`, `database`, and `test` sections are simply translated into the sequence of 'run' steps.
 
 ```
 version: 2
@@ -181,13 +190,32 @@ jobs:
     docker:
       - image: ruby:2.3
 
-    # You need to install dependencies that your project requires by yourself.
-    # Therefore, there is nothing to override in 2.0.
-    # Currently, the timeout for no output is hardcoded to 600 secs.
+      # You can chose any DB that you want to use in 2.0
+      # The postgres image requires POSTGRES_USER env var
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
     steps:
       - checkout
+
+      # You need to install dependencies that your project requires by yourself.
+      # Therefore, there is nothing to override in 2.0.
+      # Currently, the timeout for no output is hardcoded to 600 secs.
       - run: bundle install --path vendor/bundle
+
+      # Database is not created automatically in 2.0.
+      # Following is an example of setting up test DB in PostgreSQL
+      - run: sudo -u root createuser -h localhost --superuser ubuntu
+      - run: sudo createdb -h localhost test_db
+      - run: bundle exec rake db:create db:schema:load
+
+      # You can use any test commands you want to run in 2.0
+      - run: bundle exec rspec
+
 ```
+
+## Caching
 
 ### Cache Directories
 
@@ -221,7 +249,7 @@ jobs:
 
      # Caching is fully customizable in 2.0.
      # (1) There are many available keys that you can use as a cache prefix
-     - type: cache-save
+     - save-cache:
         key: dependency-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
@@ -229,76 +257,6 @@ jobs:
 {% endraw %}
 
 **(1)** To learn more about available options for cache prefixes, please see the [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) page.
-
-## Database
-
-### Override
-
-**1.0**
-
-```
-# 1.0
-database:
-  override:
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:create db:schema:load
-```
-
-**2.0**
-
-```
-version: 2
-jobs:
-  build:
-    working_directory: /root/my-project
-    docker:
-      - image: ruby:2.3
-
-      # You can chose any DB that you want to use in 2.0
-      # The postgres image requires POSTGRES_USER env var
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-    steps:
-      - checkout
-
-      # Database is not created automatically in 2.0.
-      # Following is an example of setting up test DB in PostgreSQL
-      - run: sudo -u root createuser -h localhost --superuser ubuntu
-      - run: sudo createdb -h localhost test_db
-      - run: bundle exec rake db:create db:schema:load
-```
-
-## Test
-
-### Override
-
-
-**1.0**
-
-```
-test:
-  override:
-    - bundle exec rspec
-```
-
-**2.0**
-
-```
-version: 2
-jobs:
-  build:
-    working_directory: /root/my-project
-    docker:
-      - image: ruby:2.3
-
-    # You can use any test commands you want to use in 2.0
-    # so there is nothing to override. Just use 'run' step with your test command
-    steps:
-      - checkout
-      - run: bundle exec rspec
-```
 
 ## Deployment
 
