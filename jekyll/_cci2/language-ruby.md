@@ -42,9 +42,12 @@ jobs:
     working_directory: ~/cci-demo-rails
     docker:
       - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
 ```
 
-Normally, you’d also specify a database (DB) image here, but our app is using SQLite. SQLite is _so_ light that Rails will install it during setup, which means we don’t need to specify a DB image.
+We use two Docker images here: ruby:2.3 as a primary build image and postgres:9.4.1 for database image because we use PostgreSQL in this demo project.
 
 Now we’ll add several `steps` within the `build` job.
 
@@ -59,6 +62,10 @@ jobs:
   build:
     docker:
       - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
     steps:
       - checkout
       - run:
@@ -107,6 +114,10 @@ jobs:
   build:
     docker:
       - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
     working_directory: ~/cci-demo-rails
     steps:
       - checkout
