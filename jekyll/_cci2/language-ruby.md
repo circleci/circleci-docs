@@ -47,7 +47,7 @@ jobs:
           POSTGRES_USER: root
 ```
 
-We use two Docker images here: ruby:2.3 as a primary build image and postgres:9.4.1 for database image because we use PostgreSQL in this demo project.
+We use 2 Docker images here: `ruby:2.3` as the primary build image and `postgres:9.4.1` as the database image.
 
 Now we’ll add several `steps` within the `build` job.
 
