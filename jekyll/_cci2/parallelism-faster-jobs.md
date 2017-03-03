@@ -1,14 +1,27 @@
 ---
 layout: classic-docs2
-title: "Managing Parallelism with the 2.0 Tests CLI"
-short-title: "Managing Parallelism"
-categories: [configuring-jobs, making-jobs-faster]
-order: 30
+title: "Parallelism with the 2.0 Tests CLI"
+short-title: "Parallelism for Faster Jobs"
+categories: [configuring-jobs]
+order: 70
 ---
 
-One of the most powerful features of CircleCI is the ability to run your tests in parallel. You can manage this parallelism by using a CLI tool called `picard`, which can be accessed from the primary build container.
+One of the most powerful features of CircleCI is the ability to run your tests in parallel. In CircleCI 2.0 you manage this parallelism with a CLI tool called `picard`. We inject this agent into the primary job container so the `picard` command is always available in container `0`.
 
 Access help by running `picard tests help` or see below for descriptions of your options.
+
+- This tool is available on circleci.com and within the [local CircleCI builder](/docs/2.0/local-builds/).
+- You can specify multiple globs.  This is pretty common for test suites in 1.0.  For example: `picard tests glob "tests/unit/*.java" "tests/functional/*.java"`
+- As you migrate from 1.0 to 2.0, it's worthwhile to manually check that your globs pick up exactly what you want and nothing else.  `picard tests glob` scans the filesystem based on the globs you pass it and returns plain text in Bash.  So you can do check your glob results by adding a line like the following:
+        
+```
+- type: shell
+  command: |
+  # Print all files in one line
+  echo $(picard tests glob "foo/**/*" "bar/**/*")
+  # Print one file per line
+  picard tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
+```
 
 ## Commands
 

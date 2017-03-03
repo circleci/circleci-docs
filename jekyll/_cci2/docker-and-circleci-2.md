@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Docker and CircleCI 2.0"
 short-title: "Docker and CircleCI 2.0"
-categories: [docker]
-order: 10
+categories: [getting-started]
+order: 80
 ---
 
 **Note:** We will be adding to this document during the Beta phase of CircleCI 2.0.
