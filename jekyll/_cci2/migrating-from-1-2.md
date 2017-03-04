@@ -44,7 +44,7 @@ To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration/#jo
 
 # Configuration Equivalents
 
-CircleCI 2.0 introduces a completely new syntax in `circle.yml`. This article will help you convert your 1.0 `circle.yml` to 2.0 syntax.
+CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This article will help you convert your 1.0 `circle.yml` to 2.0 syntax.
 
 
 ## Machine
@@ -54,7 +54,6 @@ CircleCI 2.0 introduces a completely new syntax in `circle.yml`. This article wi
 **1.0**
 
 ```
-# 1.0
 machine:
   environment:
     FOO: foo
@@ -93,7 +92,7 @@ jobs:
   build:
     working_directory: /tmp
 
-    # You can use any public Docker images in 2.0, so using ruby:2.3 Docker image is a 2.0 way
+    # In 2.0, we specify our Ruby version by using a public Docker image
     docker:
       - image: ruby:2.3
 ```
@@ -124,8 +123,6 @@ jobs:
 
 ## Checkout
 
-### Custom Checkout
-
 **1.0**
 
 ```
@@ -143,17 +140,13 @@ version: 2
 jobs:
   build:
     working_directory: /root/my-project
-
-    # We are using phusion/baseimage because it's small yet handy enough for the purpose of this document
     docker:
       - image: phusion/baseimage
-
     steps:
-      # Make sure you have git in your image. Otherwise the next checkout step will fail.
+      # Ensure your image has git, otherwise the checkout step will fail
       - run: apt-get -qq update; apt-get -y install git
 
-      # The timing when you checkout is not hardcoded anymore in 2.0.
-      # You can do that at anytime you want.
+      # Checkout timing is no longer hardcoded, so this step can occur anywhere
       - checkout
       - run: git submodule sync && git submodule update --init # use submodules
 ```
@@ -180,7 +173,7 @@ test:
 
 **2.0**
 
-In 2.0, `dependency`, `database`, and `test` sections are simply translated into the sequence of 'run' steps.
+The `dependency`, `database`, and `test` sections are translated into a sequence of 'run' steps.
 
 ```
 version: 2
@@ -190,8 +183,7 @@ jobs:
     docker:
       - image: ruby:2.3
 
-      # You can chose any DB that you want to use in 2.0
-      # The postgres image requires POSTGRES_USER env var
+      # You can use any DB here, but postgres requires the POSTGRES_USER environment variable
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: root
@@ -199,18 +191,17 @@ jobs:
     steps:
       - checkout
 
-      # You need to install dependencies that your project requires by yourself.
-      # Therefore, there is nothing to override in 2.0.
-      # Currently, the timeout for no output is hardcoded to 600 secs.
+      # There’s no inference in 2.0, which means there’s nothing to override
+      # You’ll need to manually install your project’s dependencies
+      # The current timeout for no output is hardcoded to 600 seconds
       - run: bundle install --path vendor/bundle
 
-      # Database is not created automatically in 2.0.
-      # Following is an example of setting up test DB in PostgreSQL
+      # The DB is not automatically created in 2.0, so we manually set up a test DB
       - run: sudo -u root createuser -h localhost --superuser ubuntu
       - run: sudo createdb -h localhost test_db
       - run: bundle exec rake db:create db:schema:load
 
-      # You can use any test commands you want to run in 2.0
+      # Run any test commands
       - run: bundle exec rspec
 
 ```
@@ -235,7 +226,6 @@ dependencies:
 
 {% raw %}
 ```
-# 2.0
 version: 2
 jobs:
   build:
@@ -247,8 +237,7 @@ jobs:
       - checkout
       - run: bundle install --path vendor/bundle
 
-     # Caching is fully customizable in 2.0.
-     # (1) There are many available keys that you can use as a cache prefix
+     # Caching is fully customizable in 2.0
      - save-cache:
         key: dependency-cache-{{ checksum "Gemfile.lock" }}
         paths:
@@ -256,7 +245,7 @@ jobs:
 ```
 {% endraw %}
 
-**(1)** To learn more about available options for cache prefixes, please see the [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration) page.
+There are lots of cache prefix options. Read about them in [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
 
 ## Deployment
 
@@ -272,8 +261,6 @@ deployment:
 
 **2.0**
 
-Automatic deployment via integrations that you might have used on CircleCI 1.0 (such as Heroku above) are not currently supported in 2.0.
+Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
 
-You can write your own `deploy` manual steps as shown in the `deploy` sections of the `circle.yml` [configuration example here](/docs/2.0/configuration/).
-
-We're working on creating more comprehensive deployment documentation for 2.0.
+You can write your own manual `deploy` steps as shown in the `deploy` section of the `config.yml` [configuration example here](/docs/2.0/configuration/).
