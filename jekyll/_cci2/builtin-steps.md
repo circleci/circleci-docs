@@ -54,43 +54,46 @@ Fields (optional in brackets):
 
 Checkout directory. Default: job’s `working_directory`.
 
-#### `add-ssh-keys`
-Special step that adds SSH keys configured in the project's UI to the container.
+### **[add_ssh_keys]**
 
-Fields:
+Special step that adds SSH keys configured in the project’s UI to the container.
 
-* `[fingerprints]`: list of fingerprints corresponding to the keys to be added
-    * default: all keys added
+Fields (optional in brackets):
+
+#### **[fingerprints]** (list of strings)
+
+List of fingerprints corresponding to the keys to be added. Default: all keys added.
 
 ```yaml
-          - type: add-ssh-keys
-            fingerprints:
-              - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+- add_ssh_keys
+    fingerprints:
+      - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-To use an ssh-agent, you'll need to explicitly start one up:
+To use an ssh-agent, you’ll need to explicitly start one up:
+
 ```yaml
-          - type: shell
-            name: Start ssh-agent
-            command: |
-              ssh-agent -s > ~/.ssh_agent_conf
-              source ~/.ssh_agent_conf
+- run:
+  name: Start ssh-agent
+  command: |
+    ssh-agent -s > ~/.ssh_agent_conf
+    source ~/.ssh_agent_conf
 
-              for _k in $(ls ${HOME}/.ssh/id_*); do
-                ssh-add ${_k} || true
-              done
+    for _k in $(ls ${HOME}/.ssh/id_*); do
+      ssh-add ${_k} || true
+    done
 ```
 
-Then, load the ssh configuration in shell steps that require an ssh-agent:
+Then, load the ssh configuration in steps that require an ssh-agent:
+
 ```yaml
-          - type: shell
-            name: run my special ssh command
-            command: |
-              source ~/.ssh_agent_conf
+- run:
+  name: run my special ssh command
+  command: |
+    source ~/.ssh_agent_conf
 
-              my-command-that-uses-ssh
+    my-command-that-uses-ssh
 ```
-
 
 #### `artifacts-store`
 Special step used to store artifacts.
