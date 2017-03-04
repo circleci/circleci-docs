@@ -44,14 +44,15 @@ Represents whether command should be run in the background. Default: false
     FOO: "bar"
 ```
 
-#### `checkout`
-Special step used to check out source code to the configured `path`. This is interpreted within the job as `git clone <my-project-vcs-url> <path>`.
+### **checkout**
 
-Fields:
+Special step used to check out source code to the configured `path`. This is interpreted within the build as `git clone <my-project-vcs-url> <path>`.
 
-* `[path]`: checkout directory
-    * default: `workDir`
+Fields (optional in brackets):
 
+#### **[path]** (string)
+
+Checkout directory. Default: job’s `working_directory`.
 
 #### `add-ssh-keys`
 Special step that adds SSH keys configured in the project's UI to the container.
