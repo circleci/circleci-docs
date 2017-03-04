@@ -54,7 +54,7 @@ Fields (optional in brackets):
 
 Checkout directory. Default: job’s `working_directory`.
 
-### **[add_ssh_keys]**
+### **add_ssh_keys**
 
 Special step that adds SSH keys configured in the project’s UI to the container.
 
@@ -95,20 +95,26 @@ Then, load the ssh configuration in steps that require an ssh-agent:
     my-command-that-uses-ssh
 ```
 
-#### `artifacts-store`
+### **store_artifacts**
+
 Special step used to store artifacts.
 
-Fields:
+Fields (optional in brackets):
 
-* `path`: directory in the main container to save as build artifacts
-* `destination`: prefix added to the artifact paths in the artifacts API
+#### **path** (string)
 
-There can be multiple `artifacts-store` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
+Directory in the main container to save build artifacts.
+
+#### **destination** (string)
+
+Prefix added to the artifact paths in the artifacts API.
+
+There can be multiple `store_artifacts` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
 
 ```yaml
-          - type: artifacts-store
-            path: /code/test-results
-            destination: prefix
+- store_artifacts:
+  path: /code/test-results
+  destination: prefix
 ```
 
 #### `cache-save`
