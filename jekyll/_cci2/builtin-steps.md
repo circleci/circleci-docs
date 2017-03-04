@@ -29,20 +29,19 @@ The name the UI uses for the step.
 The path used to invoke the command. Default: `/bin/bash`
 
 #### **[environment]** (string)
-* `[environment]`: additional environmental variables, locally scoped to command
-    * must be a YAML map
-* `[background]`: boolean representing whether command should be run in the background
-    * default: `false`
-* `[pwd]`: absolute path to working directory
-    * defaults to the stage’s `workDir`
-    * if named path does not exist, errors thrown
+
+Additional environment variables, locally scoped to command. Must be a YAML map.
+
+#### **[background]** (boolean)
+
+Represents whether command should be run in the background. Default: false
 
 ```yaml
-- type: shell
-command: bundle check || bundle install
-shell: /bin/bash
-environment:
-  FOO: "bar"
+- run:
+  command: bundle check || bundle install
+  shell: /bin/bash
+  environment:
+    FOO: "bar"
 ```
 
 #### `checkout`
