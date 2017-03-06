@@ -1,10 +1,12 @@
 ---
 layout: classic-docs2
-title: "Built-in Job Step Types"
-short-title: "Built-in Job Step Types"
-categories: [getting-started]
-order: 40
+title: "Job Steps"
+short-title: "Job Steps"
+categories: [configuring-jobs]
+order: 2
 ---
+
+**TODO: Add orientation and context.**
 
 ## **run**
 
