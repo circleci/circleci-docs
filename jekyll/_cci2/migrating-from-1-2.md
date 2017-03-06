@@ -245,7 +245,9 @@ jobs:
 ```
 {% endraw %}
 
-There are lots of cache prefix options. Read about them in [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
+Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
+
+Read about them in [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
 
 ## Deployment
 
