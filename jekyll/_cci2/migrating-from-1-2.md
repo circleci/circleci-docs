@@ -238,7 +238,7 @@ jobs:
       - run: bundle install --path vendor/bundle
 
      # Caching is fully customizable in 2.0
-     - save-cache:
+     - save_cache:
         key: dependency-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
