@@ -99,7 +99,7 @@ Then, load the ssh configuration in steps that require an ssh-agent:
 
 Special step used to store artifacts.
 
-Fields (optional in brackets):
+Fields:
 
 #### **path** (string)
 
@@ -117,32 +117,65 @@ There can be multiple `store_artifacts` steps in a stage. Using a unique prefix 
   destination: prefix
 ```
 
-#### `cache-save`
+### **save_cache**
 
-Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later jobs can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
+Step used to create a dependency or source cache. By specifying a cache key to save to, later jobs will be able to restore from that key.
+
+The key determines when the cache is invalidated, and these fields will let you build a new cache when certain events or times occur.
 
 Fields:
 
-* `paths`: a list of directories which should be added to the cache
-* `key`: a unique identifier for this cache
-    * if `key` is already present in the cache, it will not be recreated
-    * the key may contain a template that will be replaced by runtime values. To insert a runtime value, use the syntax: `"text-<< .Branch >>"`
+#### **paths** (list of strings)
 
-Valid runtime values:
-  - `<< .Branch >>`: the VCS branch currently being built
-  - `<< .BuildNum >>`: the CircleCI build number for this job
-  - `<< .Revision >>`: the VCS revision currently being built
-  - `<< .CheckoutKey >>`: the SSH key used to checkout the repo
-  - `<< .Environment.variableName >>`: the environment variable `variableName`
-  - `<< checksum "filename" >>`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache-restore` and `cache-save`, otherwise the cache will be saved under a cache key different than the one used at `cache-restore` time.
-  - `<< epoch >>`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache-restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
+List of directories that should be added to the cache.
 
-Example:
+#### **key** (string)
+
+Unique identifier for this cache. If `key is already present in the cache, it won’t be recreated.
+
+The key can contain a template that will be replaced by runtime values. To insert a value, use the syntax: `text-<< .Branch >>`.
+
+Below is a list of valid runtime values:
+
+##### `<< .Branch >>`
+
+VCS branch currently being built.
+
+##### `<< .BuildNum >>`
+
+CircleCI build number for this job.
+
+##### `<< .Revision >>`
+
+VCS revision currently being built.
+
+##### `<< .CheckoutKey >>`
+
+SSH key used to checkout the repo.
+
+##### `<< .Environment.variableName >>`:
+
+Environment variable `variableName`.
+
+##### `<< checksum "filename" >>`
+
+A base64-encoded SHA256 hash of the filename's contents.
+
+The file you pick should be committed in your repo. Good candidates are dependency manifests like `package.json`. It’s important that this file doesn’t change between `restore_cache` and `save_cache`, or the cache will be saved under a different key than the one used for `restore_cache`.
+
+##### `<< epoch >>`
+
+Current time in seconds since Unix epoch.
+
+Use this in the last position of your key, as `restore_cache` performs prefix matching when looking up cache keys.
+
+For example, a cache restore step looking for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter since it’s a more recent timestamp.
+
 ```yaml
-          - type: cache-save
-            key: projectname-<< .Branch >>-<< checksum "project.clj" >>
-            paths:
-              - /home/ubuntu/.m2
+- type: save_cache
+  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
+  paths:
+    - /home/ubuntu/.m2
 ```
 
 #### `cache-restore`
