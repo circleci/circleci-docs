@@ -178,42 +178,33 @@ For example, a cache restore step looking for `foo-bar-` will match both `foo-ba
     - /home/ubuntu/.m2
 ```
 
-#### `cache-restore`
+### **restore_cache**
+
 Step used to restore a dependency cache (if present).
 
 Fields (at least one required):
 
-  * `key`: a single cache key to restore.
-  * `keys`: a list of cache keys which should be restored. Use this if you want to specify fallback caches, like "use a cache from this branch, or master on a cache-miss".
+#### **key** (string)
 
-If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
+A single cache key to restore.
+
+#### **keys** (list of strings)
+
+A list of cache keys that should be restored.
+
+Use this if you want to specify backup caches to use in case of a cache miss (“use a cache from branch X or master”).
+
+If `key` and `keys` are both given, `key` will be checked before `keys`.
 
 When CircleCI has a choice of multiple keys, the cache will be restored from the first one matching an existing cache.  If no key has a cache that exists, the step will be skipped with a warning. A path is not required here because the cache will be restored to the location where it was originally saved.
 
-A key is searched against existing keys as a prefix.  When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
+A key is searched against existing keys as a prefix. When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
 For more information on key formatting, see the `key` section of `cache-save` above.
 
-Example:
 ```yaml
-          - type: cache-restore
-            keys:
-              - projectname-<< .Branch >>-<< checksum "project.clj" >>
-              # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
-              - projectname-
-
-          # Repeat jobs will restore from this step as it will produce the newest cache
-          - type: cache-save
-            key: projectname-<< .Branch >>-<< checksum "project.clj" >>-<< epoch >>
-            paths:
-              - /foo
-
-          # This step will only save first time the jobs is run, then be skipped on subsequent runs.
-          - type: cache-save
-            key:  projectname-<< .Branch >>-<< checksum "project.clj" >>
-            paths:
-              - /foo
-
+- restore_cache:
+  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
 
 #### `test-results-store`
