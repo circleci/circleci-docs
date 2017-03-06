@@ -1,18 +1,23 @@
-## Here's how Categories work in CircleCI Docs
-#
-# - section: cci2                # mandatory - corresponds to the Jekyll collection this category is for
-#   slug: getting-started        # mandatory - lower-case, no spaces, unique within section, filename of the category's page: `_collection/<slug>.md`
-#   name: "Getting Started"      # mandatory - human version of category slug, how the category name is displayed on the website
-#   index: gettingstarted        # optional - alternate to slug for category page, filename of the category's page: `_collection/<index>.md`, exclusively for cci1 docs
-#   icon: "gettingstarted.svg"   # optional - filename for icon, located at `/assets/img/icons/<icon>`. Used for cci1 docs exclusively
-
-##
 # CircleCI 1.0 Docs
-##
+
+# REQUIRED
+# corresponds to Jekyll collection
 - section: cci1
+  # REQUIRED
+  # filename of category's page: "_collection/<slug>.md"
+  # lowercase, no spaces, unique within section
   slug: getting-started
+  # REQUIRED
+  # human-readable slug / display name for website
   name: "Getting Started"
+  # OPTIONAL
+  # filename of category
+  # alternate for category slug, "_collection/<index>.md"
+  # used only in cci1 docs
   index: gettingstarted
+  # OPTIONAL
+  # filename for icon, located at "/assets/img/icons/<icon>"
+  # used only in cci1 docs
   icon: "gettingstarted.svg"
 
 - section: cci1
@@ -58,9 +63,7 @@
   icon: "privacy-security.svg"
 
 
-##
 # CircleCI Enterprise  Docs
-##
 - section: ccie
   slug: documentation
   name: "Getting Started"
@@ -82,14 +85,7 @@
   name: "Troubleshooting"
 
 
-##
 # CircleCI 2.0 Docs
-##
-
-- section: cci2
-  slug: what-is-circleci
-  name: "What Is CircleCI?"
-
 - section: cci2
   slug: getting-started
   name: "Getting Started"
