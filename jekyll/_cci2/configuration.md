@@ -184,7 +184,7 @@ Then, load the ssh configuration in shell steps that require an ssh-agent:
 ```
 
 
-#### `artifacts-store`
+#### `artifacts_store`
 Special step used to store artifacts.
 
 Fields:
@@ -192,15 +192,15 @@ Fields:
 * `path`: directory in the main container to save as build artifacts
 * `destination`: prefix added to the artifact paths in the artifacts API
 
-There can be multiple `artifacts-store` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
+There can be multiple `artifacts_store` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
 
 ```yaml
-          - type: artifacts-store
+          - type: artifacts_store
             path: /code/test-results
             destination: prefix
 ```
 
-#### `cache-save`
+#### `cache_save`
 
 Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later builds can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
 
@@ -217,18 +217,18 @@ Valid runtime values:
   - `<< .Revision >>`: the VCS revision currently being built
   - `<< .CheckoutKey >>`: the SSH key used to checkout the repo
   - `<< .Environment.variableName >>`: the environment variable `variableName`
-  - `<< checksum "filename" >>`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache-restore` and `cache-save`, otherwise the cache will be saved under a cache key different than the one used at `cache-restore` time.
-  - `<< epoch >>`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache-restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
+  - `<< checksum "filename" >>`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache_restore` and `cache_save`, otherwise the cache will be saved under a cache key different than the one used at `cache_restore` time.
+  - `<< epoch >>`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache_restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
 
 Example:
 ```yaml
-          - type: cache-save
+          - type: cache_save
             key: projectname-<< .Branch >>-<< checksum "project.clj" >>
             paths:
               - /home/ubuntu/.m2
 ```
 
-#### `cache-restore`
+#### `cache_restore`
 Step used to restore a dependency cache (if present).
 
 Fields (at least one required):
@@ -242,31 +242,31 @@ When CircleCI has a choice of multiple keys, the cache will be restored from the
 
 A key is searched against existing keys as a prefix.  When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
-For more information on key formatting, see the `key` section of `cache-save` above.
+For more information on key formatting, see the `key` section of `cache_save` above.
 
 Example:
 ```yaml
-          - type: cache-restore
+          - type: cache_restore
             keys:
               - projectname-<< .Branch >>-<< checksum "project.clj" >>
               # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
               - projectname-
             
           # Repeat builds will restore from this step as it will produce the newest cache
-          - type: cache-save
+          - type: cache_save
             key: projectname-<< .Branch >>-<< checksum "project.clj" >>-<< epoch >>
             paths:
               - /foo
           
           # This step will only save on the first build, then be skipped on subsequent builds.
-          - type: cache-save
+          - type: cache_save
             key:  projectname-<< .Branch >>-<< checksum "project.clj" >>
             paths:
               - /foo
 
 ```
 
-#### `test-results-store`
+#### `test_results_store`
 
 Special step used to upload test results.
 
@@ -277,7 +277,7 @@ Fields:
 The directory layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
 
 ```yaml
-          - type: test-results-store
+          - type: test_results_store
             path: /tmp/test-results
 ```
 
@@ -373,11 +373,11 @@ stages:
           fi
 
       # Save artifacts
-      - type: artifacts-store
+      - type: artifacts_store
         path: /tmp/artifacts
         destination: build
 
       # Upload test results
-      - type: test-results-store
+      - type: test_results_store
         path: /tmp/test-results
 ```
