@@ -16,9 +16,9 @@ We strongly recommend using the `docker` executor. This option allows you to use
 
 To use Docker’s features, you’ll need Docker Engine 1.12+ installed. You can do that by picking an image that already has Docker Engine or installing it yourself.
 
-You’ll also need to add a special step called `setup-docker-engine` before you can run any Docker commands.
+You’ll also need to add a special step called `setup_docker_engine` before you can run any Docker commands.
 
-Below is a sample `.circleci/config.yml` that uses the `docker` executor, installs Docker Engine, and runs `setup-docker-engine`:
+Below is a sample `.circleci/config.yml` that uses the `docker` executor, installs Docker Engine, and runs `setup_docker_engine`:
 
 ```yaml
 version: 2.0
@@ -40,7 +40,7 @@ jobs:
             curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
             chmod +x  /usr/bin/docker-compose
 
-      - setup-docker-engine
+      - setup_docker_engine
       - run:
           name: Verify Docker Works
           command: |
@@ -53,7 +53,7 @@ For a working example of an app using Docker Engine, check out our [sample Rails
 
 ### Limitations
 
-Using the `docker` executor and the `setup-docker-engine` step requires a remote Docker Engine instance running on our infrastructure. This produces a few limitations:
+Using the `docker` executor and the `setup_docker_engine` step requires a remote Docker Engine instance running on our infrastructure. This produces a few limitations:
 
 - Any image specified within the `docker` executor must be from a public register.
 
