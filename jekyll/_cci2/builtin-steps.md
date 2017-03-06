@@ -1,14 +1,12 @@
 ---
 layout: classic-docs2
-title: "Built-in Steps for Jobs"
-short-title: "Built-in Steps"
+title: "Built-in Job Step Types"
+short-title: "Built-in Job Step Types"
 categories: [getting-started]
 order: 40
 ---
 
-## Built-in Steps
-
-### **run**
+## **run**
 
 Used for invoking all command-line programs.
 
@@ -16,276 +14,224 @@ Run commands are executed using non-login shells by default, so you must explici
 
 Fields (optional in brackets):
 
-#### **command** (string)
+### **command** (string)
 
 Command to run via the shell.
 
-#### **[name]** (string)
+### **[name]** (string)
 
 The name the UI uses for the step.
 
-#### **[shell]** (string)
+### **[shell]** (string)
 
 The path used to invoke the command. Default: `/bin/bash`
 
-#### **[environment]** (string)
-* `[environment]`: additional environmental variables, locally scoped to command
-    * must be a YAML map
-* `[background]`: boolean representing whether command should be run in the background
-    * default: `false`
-* `[pwd]`: absolute path to working directory
-    * defaults to the stage’s `workDir`
-    * if named path does not exist, errors thrown
+### **[environment]** (string)
+
+Additional environment variables, locally scoped to command. Must be a YAML map.
+
+### **[background]** (boolean)
+
+Represents whether command should be run in the background. Default: false
 
 ```yaml
-- type: shell
-command: bundle check || bundle install
-shell: /bin/bash
-environment:
-  FOO: "bar"
+- run:
+  command: bundle check || bundle install
+  shell: /bin/bash
+  environment:
+    FOO: "bar"
 ```
 
-#### `checkout`
-Special step used to check out source code to the configured `path`. This is interpreted within the job as `git clone <my-project-vcs-url> <path>`.
+## **checkout**
 
-Fields:
+Special step used to check out source code to the configured `path`. This is interpreted within the build as `git clone <my-project-vcs-url> <path>`.
 
-* `[path]`: checkout directory
-    * default: `workDir`
+Fields (optional in brackets):
 
+### **[path]** (string)
 
-#### `add_ssh_keys`
-Special step that adds SSH keys configured in the project's UI to the container.
+Checkout directory. Default: job’s `working_directory`.
 
-Fields:
+## **add_ssh_keys**
 
-* `[fingerprints]`: list of fingerprints corresponding to the keys to be added
-    * default: all keys added
+Special step that adds SSH keys configured in the project’s UI to the container.
+
+Fields (optional in brackets):
+
+### **[fingerprints]** (list of strings)
+
+List of fingerprints corresponding to the keys to be added. Default: all keys added.
 
 ```yaml
-          - type: add_ssh_keys
-            fingerprints:
-              - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+- add_ssh_keys
+    fingerprints:
+      - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-To use an ssh-agent, you'll need to explicitly start one up:
+To use an ssh-agent, you’ll need to explicitly start one up:
+
 ```yaml
-          - type: shell
-            name: Start ssh-agent
-            command: |
-              ssh-agent -s > ~/.ssh_agent_conf
-              source ~/.ssh_agent_conf
+- run:
+  name: Start ssh-agent
+  command: |
+    ssh-agent -s > ~/.ssh_agent_conf
+    source ~/.ssh_agent_conf
 
-              for _k in $(ls ${HOME}/.ssh/id_*); do
-                ssh-add ${_k} || true
-              done
+    for _k in $(ls ${HOME}/.ssh/id_*); do
+      ssh-add ${_k} || true
+    done
 ```
 
-Then, load the ssh configuration in shell steps that require an ssh-agent:
+Then, load the ssh configuration in steps that require an ssh-agent:
+
 ```yaml
-          - type: shell
-            name: run my special ssh command
-            command: |
-              source ~/.ssh_agent_conf
+- run:
+  name: run my special ssh command
+  command: |
+    source ~/.ssh_agent_conf
 
-              my-command-that-uses-ssh
+    my-command-that-uses-ssh
 ```
 
+## **store_artifacts**
 
-#### `artifacts_store`
 Special step used to store artifacts.
 
 Fields:
 
-* `path`: directory in the main container to save as build artifacts
-* `destination`: prefix added to the artifact paths in the artifacts API
+### **path** (string)
 
-There can be multiple `artifacts_store` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
+Directory in the main container to save build artifacts.
+
+### **destination** (string)
+
+Prefix added to the artifact paths in the artifacts API.
+
+There can be multiple `store_artifacts` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
 
 ```yaml
-          - type: artifacts_store
-            path: /code/test-results
-            destination: prefix
+- store_artifacts:
+  path: /code/test-results
+  destination: prefix
 ```
 
-#### `cache_save`
+## **save_cache**
 
-Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later jobs can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
+Step used to create a dependency or source cache. By specifying a cache key to save to, later jobs will be able to restore from that key.
+
+The key determines when the cache is invalidated, and these fields will let you build a new cache when certain events or times occur.
 
 Fields:
 
-* `paths`: a list of directories which should be added to the cache
-* `key`: a unique identifier for this cache
-    * if `key` is already present in the cache, it will not be recreated
-    * the key may contain a template that will be replaced by runtime values. To insert a runtime value, use the syntax: `"text-<< .Branch >>"`
+### **paths** (list of strings)
 
-Valid runtime values:
-  - `<< .Branch >>`: the VCS branch currently being built
-  - `<< .BuildNum >>`: the CircleCI build number for this job
-  - `<< .Revision >>`: the VCS revision currently being built
-  - `<< .CheckoutKey >>`: the SSH key used to checkout the repo
-  - `<< .Environment.variableName >>`: the environment variable `variableName`
-  - `<< checksum "filename" >>`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache_restore` and `cache_save`, otherwise the cache will be saved under a cache key different than the one used at `cache_restore` time.
-  - `<< epoch >>`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache_restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
+List of directories that should be added to the cache.
 
-Example:
+### **key** (string)
+
+Unique identifier for this cache. If `key is already present in the cache, it won’t be recreated.
+
+The key can contain a template that will be replaced by runtime values. To insert a value, use the syntax: `text-<< .Branch >>`.
+
+Below is a list of valid runtime values:
+
+#### `<< .Branch >>`
+
+VCS branch currently being built.
+
+#### `<< .BuildNum >>`
+
+CircleCI build number for this job.
+
+#### `<< .Revision >>`
+
+VCS revision currently being built.
+
+#### `<< .CheckoutKey >>`
+
+SSH key used to checkout the repo.
+
+#### `<< .Environment.variableName >>`:
+
+Environment variable `variableName`.
+
+#### `<< checksum "filename" >>`
+
+A base64-encoded SHA256 hash of the filename's contents.
+
+The file you pick should be committed in your repo. Good candidates are dependency manifests like `package.json`. It’s important that this file doesn’t change between `restore_cache` and `save_cache`, or the cache will be saved under a different key than the one used for `restore_cache`.
+
+#### `<< epoch >>`
+
+Current time in seconds since Unix epoch.
+
+Use this in the last position of your key, as `restore_cache` performs prefix matching when looking up cache keys.
+
+For example, a cache restore step looking for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter since it’s a more recent timestamp.
+
 ```yaml
-          - type: cache_save
-            key: projectname-<< .Branch >>-<< checksum "project.clj" >>
-            paths:
-              - /home/ubuntu/.m2
+- type: save_cache
+  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
+  paths:
+    - /home/ubuntu/.m2
 ```
 
-#### `cache_restore`
+## **restore_cache**
+
 Step used to restore a dependency cache (if present).
 
 Fields (at least one required):
 
-  * `key`: a single cache key to restore.
-  * `keys`: a list of cache keys which should be restored. Use this if you want to specify fallback caches, like "use a cache from this branch, or master on a cache-miss".
+### **key** (string)
 
-If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
+A single cache key to restore.
+
+### **keys** (list of strings)
+
+A list of cache keys that should be restored.
+
+Use this if you want to specify backup caches to use in case of a cache miss (“use a cache from branch X or master”).
+
+If `key` and `keys` are both given, `key` will be checked before `keys`.
 
 When CircleCI has a choice of multiple keys, the cache will be restored from the first one matching an existing cache.  If no key has a cache that exists, the step will be skipped with a warning. A path is not required here because the cache will be restored to the location where it was originally saved.
 
-A key is searched against existing keys as a prefix.  When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
+A key is searched against existing keys as a prefix. When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
 For more information on key formatting, see the `key` section of `cache_save` above.
 
-Example:
 ```yaml
-          - type: cache_restore
-            keys:
-              - projectname-<< .Branch >>-<< checksum "project.clj" >>
-              # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
-              - projectname-
-
-          # Repeat jobs will restore from this step as it will produce the newest cache
-          - type: cache_save
-            key: projectname-<< .Branch >>-<< checksum "project.clj" >>-<< epoch >>
-            paths:
-              - /foo
-
-          # This step will only save first time the jobs is run, then be skipped on subsequent runs.
-          - type: cache_save
-            key:  projectname-<< .Branch >>-<< checksum "project.clj" >>
-            paths:
-              - /foo
-
+- restore_cache:
+  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
 
-#### `test_results_store`
+## **store_test_results**
 
 Special step used to upload test results.
 
 Fields:
 
-* `path`: directory containing JUnit XML or Cucumber JSON test metadata files
+### **path** (string)
 
-The directory layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
+Directory containing JUnit XML or Cucumber JSON test metadata files.
+
+The directory’s layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
 
 ```yaml
-          - type: test_results_store
-            path: /tmp/test-results
+- store_test_reults:
+  path: /tmp/test-results
 ```
 
-#### `deploy`
+### **deploy**
 
 Special step used to deploy artifacts.
 
-`deploy` uses the same fields as `shell`. Config may have more than one `deploy` step.
+`deploy` uses the same fields as `run`. `config.yml` may have more than one `deploy` step.
 
-In a `parallel` job, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-
-```yaml
-          - type: deploy
-            shell: /bin/sh
-            command: ansible-playbook site.yml
-```
-
-### Putting it all together
+In a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
 ```yaml
-version: 2
-executorType: docker
-containerInfo:
-  - image: ubuntu:14.04
-    cmd: ["/bin/bash"] # specify if image does not already have Command set
-  - image: mongo:2.6.8
-    cmd: [mongod, --smallfiles]
-  - image: postgres:9.4.1
-    # some containers require setting environment variables
-    env:
-      - POSTGRES_USER=root
-  - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-  - image: rabbitmq:3.5.4
-stages:
-  build:
-    workDir: ~/my-project
-    steps:
-      - type: checkout
-      # Add an entry to /etc/hosts
-      - type: shell
-        shell: /bin/bash
-        command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
-      # Create Postgres users and database
-      # Note the YAML heredoc '|' for nicer formatting
-      - type: shell
-        shell: /bin/bash
-        command: |
-          sudo -u root createuser -h localhost --superuser ubuntu &&
-          sudo createdb -h localhost test_db
-      # Run tests with larger command
-      - type: shell
-        shell: /bin/bash
-        command: |
-            set -exu
-            mkdir -p /tmp/test-results
-            TESTFILES=$(find ./test -name 'test_*.clj' | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
-            if [ -z "${TESTFILES}" ]
-            then
-                echo "misconfigured parallelism"
-                exit 1
-            else
-                run-tests.sh ${TESTFILES}
-                cp out/tests/*.xml /tmp/test-results/
-            fi
-
-        environment:
-          SSH_TARGET: "localhost"
-          TEST_ENV: "linux"
-
-      # Create deployable artifacts
-      - type: shell
-        shell: /bin/bash
-        command: |
-          set -exu
-          mkdir -p /tmp/artifacts
-          create_jars.sh ${CIRCLE_BUILD_NUM}
-          cp *.jar /tmp/artifacts
-
-      # Deploy staging
-      - type: deploy
-        shell: /bin/bash
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "staging" ];
-            then ansible-playbook site.yml -i staging;
-          fi
-
-      # Deploy production
-      - type: deploy
-        shell: /bin/bash
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ];
-            then ansible-playbook site.yml -i production;
-          fi
-
-      # Save artifacts
-      - type: artifacts_store
-        path: /tmp/artifacts
-        destination: build
-
-      # Upload test results
-      - type: test_results_store
-        path: /tmp/test-results
+- type: deploy
+  shell: /bin/sh
+  command: ansible-playbook site.yml
 ```
