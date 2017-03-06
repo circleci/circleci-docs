@@ -75,3 +75,19 @@ The GitHub/Bitbucket repository name in which the pull request was made.
 **CIRCLE_PR_USERNAME** (_only available in forked PR builds_)
 
 The GitHub/Bitbucket username of the user who created the pull request.
+
+**CIRCLE_PULL_REQUESTS**
+
+Comma-separated list of pull requests this build is a part of.
+
+**CIRCLE_PULL_REQUEST**
+
+If this build is part of only one pull request, its URL will be populated here. If there was more than one pull request, it will contain one of the pull request URLs (picked randomly).
+
+**CI_PULL_REQUESTS**
+
+Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0
+
+**CI_PULL_REQUEST**
+
+Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0
