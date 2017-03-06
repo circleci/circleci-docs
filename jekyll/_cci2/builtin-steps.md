@@ -207,19 +207,21 @@ For more information on key formatting, see the `key` section of `cache-save` ab
   key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
 
-#### `test-results-store`
+### **store_test_results**
 
 Special step used to upload test results.
 
 Fields:
 
-* `path`: directory containing JUnit XML or Cucumber JSON test metadata files
+#### **path** (string)
 
-The directory layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
+Directory containing JUnit XML or Cucumber JSON test metadata files.
+
+The directory’s layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
 
 ```yaml
-          - type: test-results-store
-            path: /tmp/test-results
+- store_test_reults:
+  path: /tmp/test-results
 ```
 
 #### `deploy`
