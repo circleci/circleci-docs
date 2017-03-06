@@ -64,6 +64,7 @@ jobs:
       - image: ruby:2.3
       - image: postgres:9.4.1
         environment:
+          # POSTGRES_USER env var will set the default superuser in the image
           POSTGRES_USER: root
 
     steps:
@@ -76,7 +77,6 @@ jobs:
 Now we have to install our actual dependencies for the project.
 
 ```yaml
-...
       - run:
           name: Install Ruby Dependencies
           command: bundle install
@@ -88,6 +88,16 @@ Next, set up the DB.
       - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
+```
+
+Rails will read `config/database.yml` and create a test DB automatically with `db:create` task. Ensure that `POSTGRES_USER` env var matches a username specified in your `database.yml`.
+
+**(Optional)** If you want to create a DB manually, you can do with `createdb` command. We are installing postgresql package because we need `createdb` command.
+
+```yaml
+      - run: |
+        apt-get update -qq; apt-get install -y postgresql
+        createdb -h localhost my_test_db
 ```
 
 Run our migrations.
