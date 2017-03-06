@@ -156,12 +156,11 @@ test:
 ```
 
 
-
 #### <a name="eslint"></a>ESLint
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
-A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) section for testing might look like this:
+A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) `test` section might look like this:
 
 ```
 test:
@@ -169,7 +168,6 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/reports
     - eslint ./src/ --format junit --output-file $CIRCLE_TEST_REPORTS/reports/eslint.xml
 ```
-
 
 
 #### <a name="phpunit"></a>PHPUnit
