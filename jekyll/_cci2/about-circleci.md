@@ -1,7 +1,7 @@
 ---
 layout: classic-docs2
-title: "What is CircleCI?"
-short-title: "What is CircleCI?"
+title: "About CircleCI"
+short-title: "About CircleCI"
 categories: [getting-started]
 order: 1
 ---
