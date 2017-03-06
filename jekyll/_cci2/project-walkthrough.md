@@ -1,10 +1,13 @@
 ---
 layout: classic-docs2
-title: "Basic Configuration"
-short-title: "Basic Configuration"
+title: "Project Walkthrough"
+short-title: "Project Walkthrough"
 categories: [getting-started]
 order: 25
 ---
+
+**TODO: Rewrite as a full project walkthrough tutorial**
+
 
 Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
 

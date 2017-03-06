@@ -3,7 +3,7 @@ layout: classic-docs2
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
 categories: [configuring-jobs]
-order: 2
+order: 7
 ---
 
 There are 2 different executor types to choose from when using CircleCI: `docker` and `machine`. Both allow you to use the `docker` and `docker-compose` commands, but there are Reasons why you’d pick one executor over the other.

@@ -28,7 +28,7 @@ While this configuration can be powerful, there are some drawbacks. Maybe you wa
 
 In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want.
 
-To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
+To learn more, please see [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration-reference/).
 
 ### Custom Build Image
 
@@ -38,7 +38,7 @@ Maybe you want to use a different version of MySQL than the one included in eith
 
 In 2.0, we support almost all public Docker images. You can also create a custom image and run jobs on that. You can even compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
 
-To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration/#job-images).
+To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration-reference/#job-images).
 
 ----
 
@@ -247,7 +247,7 @@ jobs:
 
 Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
 
-Read about them in [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration).
+Read about them in [Configuring CircleCI 2.0]( {{ site.baseurl }}/2.0/configuration-reference/).
 
 ## Deployment
 
@@ -265,4 +265,4 @@ deployment:
 
 Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
 
-You can write your own manual `deploy` steps as shown in the `deploy` section of the `config.yml` [configuration example here](/docs/2.0/configuration/).
+You can write your own manual `deploy` steps as shown in the `deploy` section of the `config.yml` [configuration example here](/docs/2.0/configuration-reference/).
