@@ -1,14 +1,12 @@
 ---
 layout: classic-docs2
-title: "Built-in Steps for Jobs"
-short-title: "Built-in Steps"
+title: "Built-in Job Step Types"
+short-title: "Built-in Job Step Types"
 categories: [getting-started]
 order: 40
 ---
 
-## Built-in Steps
-
-### **run**
+## **run**
 
 Used for invoking all command-line programs.
 
@@ -16,23 +14,23 @@ Run commands are executed using non-login shells by default, so you must explici
 
 Fields (optional in brackets):
 
-#### **command** (string)
+### **command** (string)
 
 Command to run via the shell.
 
-#### **[name]** (string)
+### **[name]** (string)
 
 The name the UI uses for the step.
 
-#### **[shell]** (string)
+### **[shell]** (string)
 
 The path used to invoke the command. Default: `/bin/bash`
 
-#### **[environment]** (string)
+### **[environment]** (string)
 
 Additional environment variables, locally scoped to command. Must be a YAML map.
 
-#### **[background]** (boolean)
+### **[background]** (boolean)
 
 Represents whether command should be run in the background. Default: false
 
@@ -44,23 +42,23 @@ Represents whether command should be run in the background. Default: false
     FOO: "bar"
 ```
 
-### **checkout**
+## **checkout**
 
 Special step used to check out source code to the configured `path`. This is interpreted within the build as `git clone <my-project-vcs-url> <path>`.
 
 Fields (optional in brackets):
 
-#### **[path]** (string)
+### **[path]** (string)
 
 Checkout directory. Default: job’s `working_directory`.
 
-### **add_ssh_keys**
+## **add_ssh_keys**
 
 Special step that adds SSH keys configured in the project’s UI to the container.
 
 Fields (optional in brackets):
 
-#### **[fingerprints]** (list of strings)
+### **[fingerprints]** (list of strings)
 
 List of fingerprints corresponding to the keys to be added. Default: all keys added.
 
@@ -95,17 +93,17 @@ Then, load the ssh configuration in steps that require an ssh-agent:
     my-command-that-uses-ssh
 ```
 
-### **store_artifacts**
+## **store_artifacts**
 
 Special step used to store artifacts.
 
 Fields:
 
-#### **path** (string)
+### **path** (string)
 
 Directory in the main container to save build artifacts.
 
-#### **destination** (string)
+### **destination** (string)
 
 Prefix added to the artifact paths in the artifacts API.
 
@@ -117,7 +115,7 @@ There can be multiple `store_artifacts` steps in a stage. Using a unique prefix 
   destination: prefix
 ```
 
-### **save_cache**
+## **save_cache**
 
 Step used to create a dependency or source cache. By specifying a cache key to save to, later jobs will be able to restore from that key.
 
@@ -125,11 +123,11 @@ The key determines when the cache is invalidated, and these fields will let you 
 
 Fields:
 
-#### **paths** (list of strings)
+### **paths** (list of strings)
 
 List of directories that should be added to the cache.
 
-#### **key** (string)
+### **key** (string)
 
 Unique identifier for this cache. If `key is already present in the cache, it won’t be recreated.
 
@@ -137,33 +135,33 @@ The key can contain a template that will be replaced by runtime values. To inser
 
 Below is a list of valid runtime values:
 
-##### `<< .Branch >>`
+#### `<< .Branch >>`
 
 VCS branch currently being built.
 
-##### `<< .BuildNum >>`
+#### `<< .BuildNum >>`
 
 CircleCI build number for this job.
 
-##### `<< .Revision >>`
+#### `<< .Revision >>`
 
 VCS revision currently being built.
 
-##### `<< .CheckoutKey >>`
+#### `<< .CheckoutKey >>`
 
 SSH key used to checkout the repo.
 
-##### `<< .Environment.variableName >>`:
+#### `<< .Environment.variableName >>`:
 
 Environment variable `variableName`.
 
-##### `<< checksum "filename" >>`
+#### `<< checksum "filename" >>`
 
 A base64-encoded SHA256 hash of the filename's contents.
 
 The file you pick should be committed in your repo. Good candidates are dependency manifests like `package.json`. It’s important that this file doesn’t change between `restore_cache` and `save_cache`, or the cache will be saved under a different key than the one used for `restore_cache`.
 
-##### `<< epoch >>`
+#### `<< epoch >>`
 
 Current time in seconds since Unix epoch.
 
@@ -178,17 +176,17 @@ For example, a cache restore step looking for `foo-bar-` will match both `foo-ba
     - /home/ubuntu/.m2
 ```
 
-### **restore_cache**
+## **restore_cache**
 
 Step used to restore a dependency cache (if present).
 
 Fields (at least one required):
 
-#### **key** (string)
+### **key** (string)
 
 A single cache key to restore.
 
-#### **keys** (list of strings)
+### **keys** (list of strings)
 
 A list of cache keys that should be restored.
 
@@ -207,13 +205,13 @@ For more information on key formatting, see the `key` section of `cache-save` ab
   key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
 
-### **store_test_results**
+## **store_test_results**
 
 Special step used to upload test results.
 
 Fields:
 
-#### **path** (string)
+### **path** (string)
 
 Directory containing JUnit XML or Cucumber JSON test metadata files.
 
