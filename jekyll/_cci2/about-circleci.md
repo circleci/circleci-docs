@@ -39,7 +39,7 @@ If your tests pass, you can deploy your code to different environments, like dev
 
 ## Next Steps
 
-Set up an account and link a project by following these [first steps]({{ site.baseurl }}/2.0/first-steps), then learn about [basic configuration]({{ site.baseurl }}/2.0/getting-started-config).
+Set up an account and link a project by following these [first steps]({{ site.baseurl }}/2.0/first-steps), then check out our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough).
 
 [wiki-ci]: https://en.wikipedia.org/wiki/Continuous_integration
 [wiki-unittest]: https://en.wikipedia.org/wiki/Unit_testing
