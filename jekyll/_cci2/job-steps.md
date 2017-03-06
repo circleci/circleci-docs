@@ -1,7 +1,7 @@
 ---
 layout: classic-docs2
-title: "Configuration Reference"
-short-title: "Configuration Reference"
+title: "Job Steps"
+short-title: "Job Steps"
 categories: [configuring-jobs]
 order: 2
 ---
