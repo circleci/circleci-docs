@@ -38,7 +38,7 @@ Maybe you want to use a different version of MySQL than the one included in eith
 
 In 2.0, we support almost all public Docker images. You can also create a custom image and run jobs on that. You can even compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
 
-To learn more, please see [job images]( {{ site.baseurl }}/2.0/configuration-reference/#job-images).
+To learn more, please see the [Project Walkthrough]( {{ site.baseurl }}/2.0/project-walkthrough/).
 
 ----
 
