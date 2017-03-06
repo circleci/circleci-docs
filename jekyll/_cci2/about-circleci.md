@@ -14,11 +14,9 @@ Our hosted solution is available at <https://circleci.com/>, or you can run [Cir
 
 Continuous integration is a development practice where you regularly test all changes made to your codebase.
 
-Several times a day, developers push code to a shared repository. The code is then verified by an automated build and test tool, like CircleCI.
+Several times a day, developers push code to a shared repository. The code is then verified by an automated build and test tool. CircleCI integrates with your version control system (GitHub/Bitbucket) and automatically runs a series of steps every time a commit is pushed.
 
-CircleCI integrates with your version control system (GitHub/Bitbucket) and automatically runs a series of steps every time a commit is pushed.
-
-Integrating regularly means that you detect errors early. Since each change is usually small, it’s much easier to find the code that introduced a problem.
+Integrating regularly helps detect errors early. Since each change is usually small, it’s much easier to find the code that introduced a problem.
 
 You’ll likely write several types of tests:
 
@@ -26,11 +24,11 @@ You’ll likely write several types of tests:
 * [Integration Tests][wiki-inttest]
 * [Functional Tests][wiki-functest] (or End-to-End tests)
 
-[Software Testing][wiki-codetest] covers a broad range of techniques, processes and tools. The way that you write tests varies depending on the language and framework you are using.
+[Software Testing][wiki-codetest] covers a broad range of techniques, processes and tools. The way you write tests varies depending on the language and framework you are using.
 
 ## Continuous Deployment
 
-If your tests pass, you can deploy your code to different environments, like development, staging, or production. How you do this will depend on the infrastructure you are deploying to. Some examples:
+If your tests pass, you can deploy your code to different environments, like development, staging, or production. How you do that will depend on the infrastructure you’re deploying to. Some examples:
 
 * [AWS CodeDeploy][doc-awscd]
 * [AWS EC2 Container Service (ECS)][doc-awsecs]
