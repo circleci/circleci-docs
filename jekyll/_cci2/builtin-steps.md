@@ -224,103 +224,16 @@ The directory’s layout should match the [classic CircleCI test metadata direct
   path: /tmp/test-results
 ```
 
-#### `deploy`
+### **deploy**
 
 Special step used to deploy artifacts.
 
-`deploy` uses the same fields as `shell`. Config may have more than one `deploy` step.
+`deploy` uses the same fields as `run`. `config.yml` may have more than one `deploy` step.
 
-In a `parallel` job, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-
-```yaml
-          - type: deploy
-            shell: /bin/sh
-            command: ansible-playbook site.yml
-```
-
-### Putting it all together
+In a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
 ```yaml
-version: 2
-executorType: docker
-containerInfo:
-  - image: ubuntu:14.04
-    cmd: ["/bin/bash"] # specify if image does not already have Command set
-  - image: mongo:2.6.8
-    cmd: [mongod, --smallfiles]
-  - image: postgres:9.4.1
-    # some containers require setting environment variables
-    env:
-      - POSTGRES_USER=root
-  - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-  - image: rabbitmq:3.5.4
-stages:
-  build:
-    workDir: ~/my-project
-    steps:
-      - type: checkout
-      # Add an entry to /etc/hosts
-      - type: shell
-        shell: /bin/bash
-        command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
-      # Create Postgres users and database
-      # Note the YAML heredoc '|' for nicer formatting
-      - type: shell
-        shell: /bin/bash
-        command: |
-          sudo -u root createuser -h localhost --superuser ubuntu &&
-          sudo createdb -h localhost test_db
-      # Run tests with larger command
-      - type: shell
-        shell: /bin/bash
-        command: |
-            set -exu
-            mkdir -p /tmp/test-results
-            TESTFILES=$(find ./test -name 'test_*.clj' | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
-            if [ -z "${TESTFILES}" ]
-            then
-                echo "misconfigured parallelism"
-                exit 1
-            else
-                run-tests.sh ${TESTFILES}
-                cp out/tests/*.xml /tmp/test-results/
-            fi
-
-        environment:
-          SSH_TARGET: "localhost"
-          TEST_ENV: "linux"
-
-      # Create deployable artifacts
-      - type: shell
-        shell: /bin/bash
-        command: |
-          set -exu
-          mkdir -p /tmp/artifacts
-          create_jars.sh ${CIRCLE_BUILD_NUM}
-          cp *.jar /tmp/artifacts
-
-      # Deploy staging
-      - type: deploy
-        shell: /bin/bash
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "staging" ];
-            then ansible-playbook site.yml -i staging;
-          fi
-
-      # Deploy production
-      - type: deploy
-        shell: /bin/bash
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ];
-            then ansible-playbook site.yml -i production;
-          fi
-
-      # Save artifacts
-      - type: artifacts-store
-        path: /tmp/artifacts
-        destination: build
-
-      # Upload test results
-      - type: test-results-store
-        path: /tmp/test-results
+- type: deploy
+  shell: /bin/sh
+  command: ansible-playbook site.yml
 ```
