@@ -67,6 +67,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [Gradle]( {{ site.baseurl }}/1.0/test-metadata/#gradle-junit-results)
 * [Mocha]( {{ site.baseurl }}/1.0/test-metadata/#mochajs)
 * [Ava]( {{ site.baseurl }}/1.0/test-metadata/#ava)
+* [ESLint]( {{ site.baseurl }}/1.0/test-metadata/#eslint)
 * [PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit)
 * [RSpec]( {{ site.baseurl }}/1.0/test-metadata/#rspec)
 * [test2junit]( {{ site.baseurl }}/1.0/test-metadata/#test2junit-for-clojure-tests)
@@ -155,6 +156,19 @@ test:
     - ava --tap | tap-xunit > $CIRCLE_TEST_REPORTS/reports/ava.xml
 ```
 
+
+#### <a name="eslint"></a>ESLint
+
+To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
+
+A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) `test` section might look like this:
+
+```
+test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/reports
+    - eslint ./src/ --format junit --output-file $CIRCLE_TEST_REPORTS/reports/eslint.xml
+```
 
 
 #### <a name="phpunit"></a>PHPUnit
