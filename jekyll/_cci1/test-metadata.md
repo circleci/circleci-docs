@@ -70,6 +70,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [PHPUnit]( {{ site.baseurl }}/1.0/test-metadata/#phpunit)
 * [RSpec]( {{ site.baseurl }}/1.0/test-metadata/#rspec)
 * [test2junit]( {{ site.baseurl }}/1.0/test-metadata/#test2junit-for-clojure-tests)
+* [Karma]( {{ site.baseurl }}/1.0/test-metadata/#karma)
 
 
 #### <a name="cucumber"></a>Cucumber
@@ -206,6 +207,36 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 #### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
+
+#### <a name="karma"></a>Karma
+
+To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
+
+A working [circle.yml]( {{site.baseurl }}/1.0/configuration/) `test` section might look like this:
+
+```yaml
+test:
+  override:
+    - karma start ./karma.conf.js:
+        environment:
+          JUNIT_REPORT_PATH: $CIRCLE_TEST_REPORTS/junit/
+          JUNIT_REPORT_NAME: test-results.xml
+```
+
+```javascript
+// karma.conf.js
+
+// additional config...
+
+reporters: ['junit'],
+
+junitReporter: {
+  outputDir: process.env.JUNIT_REPORT_PATH, 
+  outputFile: process.env.JUNIT_REPORT_NAME,
+  useBrowserName: false
+},
+// additional config...
+```
 
 ## Using the `files` modifier
 
