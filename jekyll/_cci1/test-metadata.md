@@ -210,9 +210,9 @@ You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert C
 
 #### <a name="karma"></a>Karma
 
-To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)
+To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
-A working [circle.yml]( {{ site.baseurl }}/1.0/configuration/) section for testing might look like this:
+A working [circle.yml]( {{site.baseurl }}/1.0/configuration/) `test` section might look like this:
 
 ```yaml
 test:
