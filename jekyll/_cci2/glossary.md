@@ -6,18 +6,14 @@ categories: [configuring-jobs]
 order: 5000
 ---
 
-### Executor
+### **executor**
+Defines an underlying technology to run a build. Can be `docker` or `machine`. [Learn more]({{ site.baseurl }}/2.0/executor-types).
 
-Defines an underlying technology used for running a build. Might be `docker` or `machine`. [Detailed information]({{ site.baseurl }}/2.0/executor-types)
+### **job space**
+All the containers (VMs) running by an [executor](#executor) for a current job
 
-### Job Space
-
-All the containers (VMs) running by an Executor for a current Job
-
-### Main Container
-
+### **main container**
 A place where build commands executes for Docker Executor (first image listed in config)
 
-### Remote Docker
-
-Feature enabling building, running and pushing images into Docker Regestries within a Docker [Executor](#executor). [Detailed information]({{ site.baseurl }}/2.0/remote-docker)
+### **Remote Docker**
+Feature enabling building, running and pushing images into Docker Registries within a Docker [executor](#executor). [Learn more]({{ site.baseurl }}/2.0/remote-docker).
