@@ -8,7 +8,6 @@ order: 25
 
 **TODO: Rewrite as a full project walkthrough tutorial**
 
-
 Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
 
 This file is _extremely_ flexible, so it’s not realistic to list every possible thing you can put in here. Instead, we’ll create a sample `config.yml` file and explain the sections along the way.
@@ -145,7 +144,7 @@ This executor defaults `working_directory` to a directory in `/tmp` named after 
 
 ## Steps
 
-As we mentioned earlier, each job is comprised of several _steps_. The `steps` key should be a list of single key/value pair maps. The key indicates the _type_ of step, while the value can either be a configuration map or simply a string. Behold:
+As we mentioned earlier, each job is comprised of several _steps_. The `steps` key is a list of single key/value pair maps. The key indicates the _type_ of step, while the value can either be a configuration map or simply a string. Behold:
 
 ```yaml
 jobs:
