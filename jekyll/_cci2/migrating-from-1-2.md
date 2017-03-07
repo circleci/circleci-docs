@@ -28,7 +28,7 @@ While this configuration can be powerful, there are some drawbacks. Maybe you wa
 
 In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want.
 
-To learn more, please see [Configuring Job Steps]( {{ site.baseurl }}/2.0/job-steps/).
+To learn more, please see [Configuring Job Steps]( {{ site.baseurl }}/2.0/configuration-reference/#job-steps/).
 
 ### Custom Build Image
 
@@ -247,7 +247,7 @@ jobs:
 
 Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
 
-Read about them in [Job Steps]( {{ site.baseurl }}/2.0/job-steps/).
+Read about them in [Configuring Job Steps]( {{ site.baseurl }}/2.0/configuration-reference/#job-steps/).
 
 ## Deployment
 
@@ -265,4 +265,4 @@ deployment:
 
 Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
 
-You can write your own manual `deploy` steps as shown in the `deploy` section of the `config.yml` [configuration example here](/docs/2.0/job-steps/).
+You can write your own manual `deploy` steps as shown in the `deploy` section of the `config.yml` [configuration example here](/docs/2.0/configuration-reference/#job-steps/).
