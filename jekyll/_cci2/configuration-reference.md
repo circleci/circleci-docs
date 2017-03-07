@@ -1,12 +1,16 @@
 ---
 layout: classic-docs2
-title: "Job Steps"
-short-title: "Job Steps"
+title: "Configuration Reference"
+short-title: "Configuration Reference"
 categories: [configuring-jobs]
-order: 2
+order: 2000
 ---
 
-**TODO: Add orientation and context.**
+**TODO: Add orientation and context. This docs is full reference for config spec.**
+
+**TODO: Add missing config info.**
+
+## Job Steps
 
 ## **run**
 
