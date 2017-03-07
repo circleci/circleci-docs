@@ -23,12 +23,12 @@ jobs:
       - setup_docker_engine
 ```
 
-When `setup_docker_engine` executes, a remote environment will be created, and your current [main container]({{ site.baseurl }}/2.0/glossary#main-container) will be configured to work within it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_docker_engine` executes, a remote environment will be created, and your current [main container][main-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-## Example
-Here's the example of config for building and pushing Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker) :
+### Example
+Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker):
 
-``` YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -37,19 +37,19 @@ jobs:
     working_directory: /go/src/github.com/circleci/cci-demo-docker
     steps:
       - checkout
-
-      # ... Test and build app steps ...
+      # ... steps for building/testing app ...
 
       - setup_docker_engine
 
-      # Your build image should already have Docker (recommended) or you can install it during a build
+      # use a build image that already has Docker (recommended)
+      # or install it during a build like we do here
       - run: |
           set -ex
           curl -L -o /tmp/docker-1.12.3.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.3.tgz
           tar -xz -C /tmp -f /tmp/docker-1.12.3.tgz
           mv /tmp/docker/* /usr/bin
 
-      # Building and pushing Docker image
+      # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t cci-demo-docker:$TAG .
@@ -57,11 +57,12 @@ jobs:
           docker push circleci/cci-demo-docker:$TAG
 ```
 
-To give a little perspective what is happening during execution of this build:
- * all commands are executed in your [main container]({{ site.baseurl }}/2.0/glossary#main-container)
- * once `setup_docker_engine` is called new remote environment is created and your main container is configured to use it
- * all docker-related commands are executed in your main container too, but building/pushing images and running containers is happening in remote docker engine
- * we are using [project environment variables](TBD) to store credentials for Docker Hub
+Let’s break down what’s happening during this build’s execution:
+
+- All commands are executed in the [main container][main-container].
+- Once `setup_docker_engine` is called, a new remote environment is created, and your main container is configured to use it.
+- All docker-related commands are executed in your main container, too, but building/pushing images and running containers happens in the remote Docker Engine.
+- We use project environment variables to store credentials for Docker Hub.
 
 ## Separation of environments
 
@@ -122,3 +123,5 @@ TBD
 ## Docker Layers Caching
 
 TBD
+
+[main-container]: {{ site.baseurl }}/2.0/glossary#main-container
