@@ -4,6 +4,5 @@ title: "Deployments and Uploads"
 short-title: "Deployments and Uploads"
 categories: [configuring-jobs]
 order: 98
+published: false
 ---
-
-TODO: Information on Deployments and Uploads for 2.0 is coming soon.

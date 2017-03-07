@@ -6,8 +6,6 @@ categories: [getting-started]
 order: 25
 ---
 
-**TODO: Rewrite as a full project walkthrough tutorial**
-
 Configuration for CircleCI is contained in a single file: `.circleci/config.yml`. This file is committed to your project’s repository along with the rest of your source code.
 
 This file is _extremely_ flexible, so it’s not realistic to list every possible thing you can put in here. Instead, we’ll create a sample `config.yml` file and explain the sections along the way.
