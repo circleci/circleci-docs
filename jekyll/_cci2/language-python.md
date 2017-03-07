@@ -113,7 +113,7 @@ Finally, let's specify where those test results are actually located.
           path: "test-reports/"
 ```
 
-And we're done! Let's see what the whole `circle.yml` looks like now:
+And we're done! Let's see what the whole `config.yml` looks like now:
 
 {% raw %}
 ```yaml

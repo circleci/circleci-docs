@@ -101,7 +101,7 @@ If it is the right branch, we'll add the SSH key fingerprint directly. Note the 
             fi
 ```
 
-And we're done! Let's see what the whole `circle.yml` looks like now:
+And we're done! Let's see what the whole `config.yml` looks like now:
 
 ```yaml
 version: 2
