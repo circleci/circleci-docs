@@ -12,21 +12,21 @@ For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-type
 To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands
 
 ## Configuration
-If your build requires executing any `docker` or `docker-compose` commands you need to add a special step into your `.circleci/config.yml`:
+If your build requires `docker` or `docker-compose` commands, you’ll need to add a special step into your `.circleci/config.yml`:
 
-``` YAML
+```yaml
 jobs:
   build:
     steps:
-      # ... steps for building and testing your application...
-
+      # ...
+      # steps for building and testing your application
+      # ...
       - setup_docker_engine
 ```
 
-During execution of this step special remote environment will be created and your current [main container]({{ site.baseurl }}/2.0/glossary#main-container) will be configured to work with it. After that you may use any docker-related commands and it'll be safely executed in this new environment.
+When `setup_docker_engine` executes, a remote environment will be created, and your current [main container]({{ site.baseurl }}/2.0/glossary#main-container) will be configured to work within it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 ## Example
-
 Here's the example of config for building and pushing Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker) :
 
 ``` YAML
