@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: Erlang"
 short-title: "Erlang"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 1
 ---
 

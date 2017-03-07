@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: JavaScript"
 short-title: "JavaScript"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 3
 ---
 

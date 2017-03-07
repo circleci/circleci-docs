@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: Ruby"
 short-title: "Ruby"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 6
 ---
 

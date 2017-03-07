@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: PHP"
 short-title: "PHP"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 4
 ---
 

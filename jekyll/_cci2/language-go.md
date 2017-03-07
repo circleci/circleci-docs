@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "Language Guide: Go"
 short-title: "Go"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 2
 ---
 
