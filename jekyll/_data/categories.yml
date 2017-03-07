@@ -98,18 +98,18 @@
   slug: languages-and-tools
   name: "Languages and Tools"
 
-- section: cci2
-  slug: example-projects
-  name: "Example Projects"
+# - section: cci2
+#   slug: example-projects
+#   name: "Example Projects"
 
-- section: cci2
-  slug: troubleshooting-and-debugging
-  name: "Troubleshooting and Debugging"
+# - section: cci2
+#   slug: troubleshooting-and-debugging
+#   name: "Troubleshooting and Debugging"
 
-- section: cci2
-  slug: api
-  name: "API"
+# - section: cci2
+#   slug: api
+#   name: "API"
 
-- section: cci2
-  slug: help-and-support
-  name: "Help and Support"
+# - section: cci2
+#   slug: help-and-support
+#   name: "Help and Support"
