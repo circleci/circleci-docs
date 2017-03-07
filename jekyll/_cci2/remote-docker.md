@@ -8,7 +8,7 @@ order: 8
 
 ## Overview
 
-For security reasons [Docker Executor](executor-types.md#docker) does not allow building Docker images within a [job space](glossary.md#job-space). To enable customers to build, run and publish new images we've introduced a special feature which for each build creates a remote and fully isolated environment configured to execute Docker commands.
+For security reasons [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) does not allow building Docker images within a [job space]({{ site.baseurl }}/2.0/glossary#job-space). To enable customers to build, run and publish new images we've introduced a special feature which for each build creates a remote and fully isolated environment configured to execute Docker commands.
 
 ## Configuration
 
@@ -23,7 +23,7 @@ jobs:
       - setup_docker_engine
 ```
 
-During execution of this step special remote environment will be created and your current [main container](glossary.md#main-container) will be configured to work with it. After that you may use any docker-related commands and it'll be safely executed in this new environment.
+During execution of this step special remote environment will be created and your current [main container]({{ site.baseurl }}/2.0/glossary#main-container) will be configured to work with it. After that you may use any docker-related commands and it'll be safely executed in this new environment.
 
 ## Example
 
@@ -59,14 +59,14 @@ jobs:
 ```
 
 To give a little perspective what is happening during execution of this build:
- * all commands are executed in your [main container](glossary.md#main-container)
+ * all commands are executed in your [main container]({{ site.baseurl }}/2.0/glossary#main-container)
  * once `setup_docker_engine` is called new remote environment is created and your main container is configured to use it
  * all docker-related commands are executed in your main container too, but building/pushing images and running containers is happening in remote docker engine
  * we are using [project environment variables](TBD) to store credentials for Docker Hub
 
 ## Separation of environments
 
-Since [job space](glossary.md#job-space) and [remote docker](glossary.md#remote-docker) are two separated environments there's one caveat. Containers, running in your job space, cannot directly communicate with containers, running in remote docker. A few practical examples and ways work around:
+Since [job space]({{ site.baseurl }}/2.0/glossary#job-space) and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are two separated environments there's one caveat. Containers, running in your job space, cannot directly communicate with containers, running in remote docker. A few practical examples and ways work around:
 
  * It's not possible to start service in remote docker and ping it directly from a main container and vice versa. To solve it you need to interact with a service from remote docker as well through the same container:
  
