@@ -6,117 +6,120 @@ categories: [configuring-jobs]
 order: 7
 ---
 
-There are 2 different executor types to choose from when using CircleCI: `docker` and `machine`. Both allow you to use the `docker` and `docker-compose` commands, but there are Reasons why you’d pick one executor over the other.
+An executor defines an underlying technology to run your build. Currently, we provide two options: `docker` and `machine`.
 
-This guide will discuss these Reasons so you can choose the right executor for your project. Note that neither method will work if you’re running builds locally using `circleci-builder`.
+Like any set of choices, there are tradeoffs to using one over the other. Here’s a basic comparison:
 
-## Option 1: `docker` (Run in a Container)
+ Executor | `docker` | `machine`
+----------|----------|----------
+ Start time | Instant | 30-60 sec
+ Clean environment | Yes | Yes
+ Custom images | Yes | No
+ Build Docker images | Yes (1) | Yes
+ Full control over build environment | No | Yes
+{: class="table table-striped"}
 
-We strongly recommend using the `docker` executor. This option allows you to use Docker directly, which usually results in faster startup times and allows you to specify a custom image.
+(1) With [Remote Docker][remote-docker].
 
-To use Docker’s features, you’ll need Docker Engine 1.12+ installed. You can do that by picking an image that already has Docker Engine or installing it yourself.
+## Docker Executor
+When you choose the `docker` executor, your build will run in a Docker container. You can specify the container image in `.circleci/config.yml`:
 
-You’ll also need to add a special step called `setup_docker_engine` before you can run any Docker commands.
-
-Below is a sample `.circleci/config.yml` that uses the `docker` executor, installs Docker Engine, and runs `setup_docker_engine`:
-
-```yaml
-version: 2.0
+``` yaml
 jobs:
   build:
-    working_directory: ~/my-project
     docker:
-      - image: golang:1.7
-    steps:
-      - checkout
-      - run:
-          name: Install Docker Client
-          command: |
-            echo "test"
-            curl -L -o /tmp/docker.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.6.tgz
-            tar -xz -C /tmp -f /tmp/docker.tgz
-            mv /tmp/docker/docker* /usr/bin/
-
-            curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
-            chmod +x  /usr/bin/docker-compose
-
-      - setup_docker_engine
-      - run:
-          name: Verify Docker Works
-          command: |
-            docker --version
-            docker-compose --version
-            docker run hello-world
+      - image: alpine:3.4
 ```
 
-For a working example of an app using Docker Engine, check out our [sample Rails project](https://github.com/circleci/cci-demo-rails).
+### You Should Use The Docker Executor If...
+- you have a self-sufficient application
+- you have an application that requires additional services to be tested
+- your application is distributed as a Docker Image (requires using [Remote Docker][remote-docker]
+- you want to use `docker-compose` (requires using [Remote Docker][remote-docker])
+
+### Specifying Images
+Only public images on Docker Hub and Docker Registry are supported. If you want to work with private images/registries, please refer to [Remote Docker][remote-docker]
+
+Images for the Docker build system can be specified in a few ways:
+
+#### Public Images on Docker Hub
+  - `name:tag`
+    - `alpine:3.4`
+  - `name@digest`
+    - `redis@sha256:54057dd7e125ca41...`
+
+#### Public Docker Registries
+  - `image_full_url:tag`
+    - `gcr.io/google-containers/busybox:1.24`
+  - `image_full_url@digest`
+    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+
+### Multiple Images
+It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [main container]( {{ site.baseurl }}/2.0/glossary#main-container).
+
+``` yaml
+jobs:
+  build:
+    docker:
+     - image: alpine:3.4
+
+     - image: mongo:2.6.8
+       command: [mongod, --smallfiles]
+
+    steps:
+      # command will execute in alpine container
+      # and can access mongo on localhost
+      - run: telnet localhost 27017
+```
+
+In a multi-image configuration build, steps are executed in the first container listed (main container).
+
+More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0/configuration-reference).
+
+### Advantages
+- Fastest way to start a build
+- Use any custom image for a build environment
+- Built-in image caching
+- Build, run, and publish Docker images via [Remote Docker][remote-docker]
 
 ### Limitations
+- Not always sufficient for complex build environments requiring low-level work with the network/kernel/etc.
+- Requires some work to migrate legacy CircleCI configuration
 
-Using the `docker` executor and the `setup_docker_engine` step requires a remote Docker Engine instance running on our infrastructure. This produces a few limitations:
+### Best Practices
 
-- Any image specified within the `docker` executor must be from a public register.
+#### Avoid Mutable Tags
+We strongly discourage using mutable tags like `latest` or `1`. Mutable tags often lead to unexpected changes in your build environment.
 
-- Files from your build space can’t be directly mounted to a volume.
+We also can’t guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
-- On our platform, Docker doesn’t support Linux user IDs greater than 65536.
+Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...`.
 
-- user IDs: Docker does not support Linux user IDs greater than 65536 and will display the following error for invalid images: "Error fetching image ... Error: No such image".
+#### Use Custom Images
+Instead of using a base image and installing additional tools during a build’s execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements.
 
-- Any ports exposed in your Dockerfile will not be accessible from the build.
-
-#### Accessing Exposed Ports
-
-If you do need to access ports exposed by your Dockerfile, then there are a couple ways to do that:
-
-**Use `docker exec`**
-
-```
-$ docker exec railsapp curl -sSL http://localhost:3000 | grep "New Todo List"
-```
-
-**Use a custom Docker network**
-
-```
-$ docker network create test-net
-$ docker run --network=test-net --name=my-app <container_under_test>
-```
-
-Any container started within `test-net` will be able to access any exposed ports of `my-app`.
-
-If any of these limitations are blockers for you, then we recommend using the `machine` executor.
-
-## Option 2: `machine` (Run in CircleCI Virtual Machine)
-
-If you want to play with volumes, use `docker-compose`, run tests in their own containers or want to test schedulers, then we recommend using the `machine` executor.
-
-This method spins up a virtual machine that will run everything locally. You won’t be able to control the base image, but you’ll have access to all of Docker’s features. This gives you (virtually) complete control of Docker, similar to a local machine setup.
-
-The `machine` executor also supports private Docker images. Before pulling private images, run `docker login` along with private environment variables to login to the registry.
-
-Here's a sample `config.yml`:
+## Machine Executor
+When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true in `.circleci/config.yml`:
 
 ```yaml
-version: 2
 jobs:
   build:
-    machine:
-      enabled: true
-    working_directory: ~/my-project
-    steps:
-      - checkout
-      - run:
-          name: Verify Docker Works
-          command: |
-            docker --version
-            docker-compose --version
-            docker run hello-world
+    machine: true
 ```
 
-The image used with the `machine` executor is fairly sparse. You’ll have:
+The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
 
-- Git
-- Docker
-- Docker Compose
+### You Should Use The Machine Executor If...
 
-...and that’s about it. You’ll need to install anything else you might need. With great build flexibility comes great setup.
+- your application requires full access to OS resources
+
+### Advantages
+- Gives full control over build environment
+- Somewhat easier to migrate legacy CircleCI configuration
+- Built-in capabilities for building, running, and pushing Docker images
+
+### Limitations
+- Takes additional time to create VM
+- Only the default image is supported; your build may require additional provisioning.
+
+[remote-docker]: {{ site.baseurl }}/2.0/remote-docker
