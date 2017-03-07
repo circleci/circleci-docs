@@ -6,7 +6,7 @@ categories: [languages-and-tools]
 order: 4
 ---
 
-This guide should help get you started with a Python project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you're just looking for a sample `config.yml` file, then just skip to the end.
+This guide will help get you started with a Python project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you're just looking for a sample `config.yml` file, then just skip to the end.
 
 If you want to follow along, fork our [example Flask app](https://github.com/circleci/cci-demo-flask) and add the project through CircleCI. Once you’ve done that, create an empty `.circleci/config.yml` in your project’s root.
 
