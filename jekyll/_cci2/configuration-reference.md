@@ -6,10 +6,6 @@ categories: [configuring-jobs]
 order: 2000
 ---
 
-**TODO: Add orientation and context. This docs is full reference for config spec.**
-
-**TODO: Add missing config info.**
-
 ## Job Steps
 
 ## **run**

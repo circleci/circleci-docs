@@ -4,6 +4,5 @@ title: "Job Information and Insights"
 short-title: "Job Information and Insights"
 categories: [configuring-jobs]
 order: 95
+published: false
 ---
-
-TODO: Information on CircleCI UI and Insights is coming soon.
