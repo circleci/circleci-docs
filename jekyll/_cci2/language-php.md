@@ -143,7 +143,7 @@ Finally, let's run our tests using PHPUnit.
           command: vendor/bin/phpunit
 ```
 
-And we're done! Let's see what the whole `circle.yml` looks like now:
+And we're done! Let's see what the whole `config.yml` looks like now:
 
 ```yaml
 version: 2

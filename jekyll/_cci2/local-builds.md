@@ -10,13 +10,13 @@ order: 90
 
 CircleCI 2.0's CLI reproduces the CircleCI build environment locally and runs builds as if they are running in CircleCI. The tool enables better debugging and faster configuration.
 
-### 1. Getting a working `circle.yml` configuration
+### 1. Getting a working `config.yml` configuration
 
-Getting the syntax correct for your `circle.yml` file can take a bit of effort. Instead of having to push a commit and build on CircleCI to test this, local builds allow you to experiment locally.
+Getting the syntax correct for your `config.yml` file can take a bit of effort. Instead of having to push a commit and build on CircleCI to test this, local builds allow you to experiment locally.
 
 **Note:** local builds don't require that you commit changes to Git. The local build will build what's currently on your file system. So you can iterate quickly by making changes to files and rerunning your local build.
 
-**Note 2:** local builds do not cache dependencies. So you may want to comment out dependency sections to speed things up while testing YAML syntax locally. Or use the `--config` flag to specify a local specific `circle.yml` that doesn't pull in large dependencies.
+**Note 2:** local builds do not cache dependencies. So you may want to comment out dependency sections to speed things up while testing YAML syntax locally. Or use the `--config` flag to specify a local specific `config.yml` that doesn't pull in large dependencies.
 
 ### 2. Troubleshooting container configurations
 

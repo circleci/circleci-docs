@@ -110,7 +110,7 @@ Finally, let's specify a path to store the results of the tests.
           path: /tmp/test-results
 ```
 
-And we're done! Let's see what the whole `circle.yml` looks like now:
+And we're done! Let's see what the whole `config.yml` looks like now:
 
 ```yaml
 version: 2

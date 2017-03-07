@@ -44,7 +44,7 @@ To learn more, please see the [Project Walkthrough]( {{ site.baseurl }}/2.0/proj
 
 # Configuration Equivalents
 
-CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This article will help you convert your 1.0 `circle.yml` to 2.0 syntax.
+CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This article will help you convert your 1.0 `circle.yml` to a 2.0 `config.yml`.
 
 
 ## Machine
