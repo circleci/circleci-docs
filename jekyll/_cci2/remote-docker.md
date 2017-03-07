@@ -7,11 +7,11 @@ order: 8
 ---
 
 ## Overview
+For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) doesn’t allow building Docker images within a [job space]({{ site.baseurl }}/2.0/glossary#job-space).
 
-For security reasons [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) does not allow building Docker images within a [job space]({{ site.baseurl }}/2.0/glossary#job-space). To enable customers to build, run and publish new images we've introduced a special feature which for each build creates a remote and fully isolated environment configured to execute Docker commands.
+To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands
 
 ## Configuration
-
 If your build requires executing any `docker` or `docker-compose` commands you need to add a special step into your `.circleci/config.yml`:
 
 ``` YAML
@@ -69,16 +69,16 @@ To give a little perspective what is happening during execution of this build:
 Since [job space]({{ site.baseurl }}/2.0/glossary#job-space) and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are two separated environments there's one caveat. Containers, running in your job space, cannot directly communicate with containers, running in remote docker. A few practical examples and ways work around:
 
  * It's not possible to start service in remote docker and ping it directly from a main container and vice versa. To solve it you need to interact with a service from remote docker as well through the same container:
- 
+
    ``` YAML
    # Starting our service and validating it's running
    - run: |
        docker run -d --name my-app my-app
        docker exec my-app curl --retry 10 http://localhost:8080
    ```
-  
+
    Another way of doing this is to use another container running in the same network with the target one:
-   
+
    ``` YAML
    - run: |
        docker run -d --name my-app my-app
@@ -86,7 +86,7 @@ Since [job space]({{ site.baseurl }}/2.0/glossary#job-space) and [remote docker]
    ```
 
  * It's not possible to mount folder from build container into container in isolated docker and vise versa.
- 
+
    TBD
 
 ## Using private images and Docker registries
