@@ -87,11 +87,12 @@ A different way to do this is to use another container running in the same netwo
 
  It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
 
-## Using private images and Docker registries
+## Private Images and Docker Registries
+Using private images isn’t directly supported by the Docker Executor. However, you _can_ use the Remote Docker Environment.
 
-Using private images is not possible for Docker Executor per se. However it's possible to use Remote Docker Environment. For example your application requires proprietary DB for testing:
+If your application requires a proprietary DB for testing, for example:
 
-``` YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -102,24 +103,17 @@ jobs:
       - checkout
       - setup_docker_engine
 
-      # Starting proprietary DB using private Docker image
+      # start proprietary DB using private Docker image
       - run: |
           docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
           docker run -d --name db company/proprietery-db:1.2.3
 
-      # Building and testing our application
+      # build and test application
       - run: |
           docker build -t my-app .
           # assuming that our app expects to have DB on localhost
           docker run --network container:db my-app test
 ```
 
-## Using `docker-compose`
-
-TBD
-
-## Docker Layers Caching
-
-TBD
-
+[job-space]: {{ site.baseurl }}/2.0/glossary#job-space
 [main-container]: {{ site.baseurl }}/2.0/glossary#main-container
