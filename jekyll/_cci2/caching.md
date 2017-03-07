@@ -6,7 +6,7 @@ categories: [configuring-jobs]
 order: 1000
 ---
 
-Caching is one of the most effective ways to reduce build times, but it can also be subtle. This article will outline some strategies you can use to increase caching effectiveness in CircleCI.
+Caching is one of the most effective ways to reduce job times, but it can also be subtle. This article will outline some strategies you can use to increase caching effectiveness in CircleCI.
 
 ## Partial Cache Restores
 
@@ -45,7 +45,7 @@ For example, if you have dependencies for Node v6 on an upgrade branch, but your
 
 ## Multiple Caches
 
-Instead of trying to increase the probability of a partial cache hit, you could lower the cost of a cache miss by splitting your build across multiple caches.
+Instead of trying to increase the probability of a partial cache hit, you could lower the cost of a cache miss by splitting your job across multiple caches.
 
 Specifying multiple `restore_cache` steps with different keys shrinks each cache, reducing the performance hit of a cache miss.
 
@@ -59,8 +59,8 @@ Obviously, don’t cache everything, but _do_ keep an eye out for costly steps l
 
 ## Source Caching
 
-Source caching is particularly useful when you run into rate-limiting on GitHub. It’s possible on CircleCI, but it’s also usually slower than pulling from GitHub.
+Source caching is useful when you run into rate-limiting with your VCS hosting provider (e.g. GitHub). It is possible to cache your source using CircleCI, but it’s often slower than pulling from GitHub.
 
-Source caching works best for smaller repos, when the pull is less than 30 seconds. In this case, you could spend 5 seconds in exchange for a simpler config.yml.
+Source caching can save a bit of time for smaller repos, when the pull is less than 30 seconds. The tradeoff is that you'll have a more complex `config.yml` to manage the source caching, and you'll only be saving a few seconds.
 
-For larger repos, this is less ideal: in those cases, it would take 30 seconds to clone from GitHub, 2 minutes to restore from S3, and another 2 minutes to save everything to S3 for next time.
+For larger repos, source caching will not speed up your jobs. In cases where it takes 30 seconds ormore to clone from GitHub, the same source can take 2 minutes to restore from the cache stored on S3, and another 2 minutes to save everything to S3 for next time. So for large repos we don't recommend source caching, unless you're being rate-limited.
