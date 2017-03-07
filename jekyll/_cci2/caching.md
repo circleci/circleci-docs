@@ -59,8 +59,8 @@ Obviously, don’t cache everything, but _do_ keep an eye out for costly steps l
 
 ## Source Caching
 
-Source caching is useful when you run into rate-limiting with your VCS hosting provider (e.g. GitHub). It is possible to cache your source using CircleCI, but it’s often slower than pulling from GitHub.
+Source caching is useful when you run into rate-limiting with your VCS hosting provider (e.g. GitHub). Although it's possible to cache your source using CircleCI, it’s often slower than pulling from GitHub.
 
 Source caching can save a bit of time for smaller repos, when the pull is less than 30 seconds. The tradeoff is that you'll have a more complex `config.yml` to manage the source caching, and you'll only be saving a few seconds.
 
-For larger repos, source caching will not speed up your jobs. In cases where it takes 30 seconds ormore to clone from GitHub, the same source can take 2 minutes to restore from the cache stored on S3, and another 2 minutes to save everything to S3 for next time. So for large repos we don't recommend source caching, unless you're being rate-limited.
+For larger repos, source caching will not speed up your jobs. In cases where it takes 30 seconds or more to clone from GitHub, the same source can take 2 minutes to restore from the cache stored on S3, and another 2 minutes to save everything to S3 for next time. So for large repos we don't recommend source caching, unless you're being rate-limited.
