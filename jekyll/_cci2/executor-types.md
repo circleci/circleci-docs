@@ -6,11 +6,9 @@ categories: [configuring-jobs]
 order: 7
 ---
 
-Executor defines an underlying technology to be used for running your build. Currently we provide two options:
- * `docker`
- * `machine`
+An executor defines an underlying technology to run your build. Currently, we provide two options: `docker` and `machine`.
 
-Each of them has different abilities and some specifics. Here's a basic comparison:
+Like any set of choices, there are tradeoffs to using one over the other. Here’s a basic comparison:
 
  Executor | `docker` | `machine`
 ----------|----------|----------
@@ -18,7 +16,7 @@ Each of them has different abilities and some specifics. Here's a basic comparis
  Clean environment | Yes | Yes
  Custom images | Yes | No
  Build Docker images | Yes (1) | Yes
- Full controll over build environment | No | Yes
+ Full control over build environment | No | Yes
 {: class="table table-striped"}
 
 (1) With [Remote Docker]( {{ site.baseurl }}/2.0/remote-docker)
