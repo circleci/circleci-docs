@@ -38,10 +38,10 @@ Represents whether command should be run in the background. Default: false
 
 ```yaml
 - run:
-  command: bundle check || bundle install
-  shell: /bin/bash
-  environment:
-    FOO: "bar"
+    command: bundle check || bundle install
+    shell: /bin/bash
+    environment:
+      FOO: "bar"
 ```
 
 ## **checkout**
@@ -74,25 +74,25 @@ To use an ssh-agent, you’ll need to explicitly start one up:
 
 ```yaml
 - run:
-  name: Start ssh-agent
-  command: |
-    ssh-agent -s > ~/.ssh_agent_conf
-    source ~/.ssh_agent_conf
+    name: Start ssh-agent
+    command: |
+      ssh-agent -s > ~/.ssh_agent_conf
+      source ~/.ssh_agent_conf
 
-    for _k in $(ls ${HOME}/.ssh/id_*); do
-      ssh-add ${_k} || true
-    done
+      for _k in $(ls ${HOME}/.ssh/id_*); do
+        ssh-add ${_k} || true
+      done
 ```
 
 Then, load the ssh configuration in steps that require an ssh-agent:
 
 ```yaml
 - run:
-  name: run my special ssh command
-  command: |
-    source ~/.ssh_agent_conf
+    name: run my special ssh command
+    command: |
+      source ~/.ssh_agent_conf
 
-    my-command-that-uses-ssh
+      my-command-that-uses-ssh
 ```
 
 ## **store_artifacts**
