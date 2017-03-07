@@ -18,9 +18,8 @@ If your build requires `docker` or `docker-compose` commands, you’ll need to a
 jobs:
   build:
     steps:
-      # ...
-      # steps for building and testing your application
-      # ...
+      # ... steps for building/testing app ...
+
       - setup_docker_engine
 ```
 
