@@ -152,8 +152,8 @@ jobs:
   build:
     steps:
       - run:
-        name: run tests
-        command: make test
+          name: run tests
+          command: make test
 ```
 
 Here, we have a single step with an associated configuration map. Its type is `run`, its name is “run tests”, and the command is `make test`.
