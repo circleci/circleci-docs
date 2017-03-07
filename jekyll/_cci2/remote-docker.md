@@ -7,7 +7,7 @@ order: 8
 ---
 
 ## Overview
-For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) doesn’t allow building Docker images within a [job space]({{ site.baseurl }}/2.0/glossary#job-space).
+For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
 
 To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands
 
@@ -64,30 +64,28 @@ Let’s break down what’s happening during this build’s execution:
 - All docker-related commands are executed in your main container, too, but building/pushing images and running containers happens in the remote Docker Engine.
 - We use project environment variables to store credentials for Docker Hub.
 
-## Separation of environments
+## Separation of Environments
+Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
-Since [job space]({{ site.baseurl }}/2.0/glossary#job-space) and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are two separated environments there's one caveat. Containers, running in your job space, cannot directly communicate with containers, running in remote docker. A few practical examples and ways work around:
+### Examples and Workarounds
+It’s impossible to start a service in remote docker and ping it directly from a main container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
 
- * It's not possible to start service in remote docker and ping it directly from a main container and vice versa. To solve it you need to interact with a service from remote docker as well through the same container:
+```yaml
+# start service and check that it’s running
+- run: |
+    docker run -d --name my-app my-app
+    docker exec my-app curl --retry 10 http://localhost:8080
+```
 
-   ``` YAML
-   # Starting our service and validating it's running
-   - run: |
-       docker run -d --name my-app my-app
-       docker exec my-app curl --retry 10 http://localhost:8080
-   ```
+A different way to do this is to use another container running in the same network as the target container:
 
-   Another way of doing this is to use another container running in the same network with the target one:
+```yaml
+- run: |
+    docker run -d --name my-app my-app
+    docker run --network container:my-app appropriate/curl --retry 10 http://localhost:8080
+```
 
-   ``` YAML
-   - run: |
-       docker run -d --name my-app my-app
-       docker run --network container:my-app appropriate/curl --retry 10 http://localhost:8080
-   ```
-
- * It's not possible to mount folder from build container into container in isolated docker and vise versa.
-
-   TBD
+ It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
 
 ## Using private images and Docker registries
 
