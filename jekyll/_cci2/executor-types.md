@@ -23,19 +23,47 @@ Like any set of choices, there are tradeoffs to using one over the other. Here�
 
 ## Docker Executor
 
-### Overview
-A build is running in a Docker container. Image for a container is specified in a config file:
+When you choose the `docker` executor, your build will run in a Docker container. You can specify the container image in `.circleci/config.yml`:
 
-``` YAML
+``` yaml
 jobs:
   build:
     docker:
       - image: alpine:3.4
 ```
 
-It's possible to specify many images. In this case all of them will be running in a common network and all the ports they expose will be available on `localhost` from a [main container]( {{ site.baseurl }}/2.0/glossary#main-container).
+### You Should Use The Docker Executor If...
 
-``` YAML
+- you have a self-sufficient application
+- you have an application that requires additional services to be tested
+- your application is distributed as a Docker Image (requires using [Remote Docker][remote-docker]
+- you want to use `docker-compose` (requires using [Remote Docker][remote-docker])
+
+### Specifying Images
+
+Only public images on Docker Hub and Docker Registry are supported. If you want to work with private images/registries, please refer to [Remote Docker][remote-docker]
+
+Images for the Docker build system can be specified in a few ways:
+
+#### Public Images on Docker Hub
+
+  - `name:tag`
+    - `alpine:3.4`
+  - `name@digest`
+    - `redis@sha256:54057dd7e125ca41...`
+
+#### Public Docker Registries
+
+  - `image_full_url:tag`
+    - `gcr.io/google-containers/busybox:1.24`
+  - `image_full_url@digest`
+    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+
+### Multiple Images
+
+It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [main container]( {{ site.baseurl }}/2.0/glossary#main-container).
+
+``` yaml
 jobs:
   build:
     docker:
@@ -45,46 +73,40 @@ jobs:
        command: [mongod, --smallfiles]
 
     steps:
-      - run: telnet localhost 27017 # command is executed in alpine container and can access
-                                    # mongo on localhost
+      # command will execute in alpine container
+      # and can access mongo on localhost
+      - run: telnet localhost 27017
 ```
 
-In case of a multi-image docker configuration build steps are executed in the first container listed (Main Container).
+In a multi-image configuration build, steps are executed in the first container listed (main container).
 
-Images for docker build system might be specified in a few ways:
- * `name:tag` or `name@digest` of the public image on Docker Hub:
-   * `alpine:3.4`
-   * `redis@sha256:54057dd7e125ca41...`
-
- * `image_full_url:tag` or `image_full_url@digest` of the public image on any public Docker Registry:
-   * `gcr.io/google-containers/busybox:1.24`
-   * `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
-
-
-Only public images and public Docker Registries are supported (read about [Remote Docker]( {{ site.baseurl }}/2.0/remote-docker) to find out how to work with private images/registries).
-
-Read more about other available options for [Docker Executor]( {{ site.baseurl }}/2.0/configuration-reference).
-
-### Typical use cases
-* You have a self-sufficient application
-* You have an application that requires additional services to be tested
-* Your application is distributed as a Docker Image (requires using [Remote Docker]({{ site.baseurl }}/2.0/remote-docker))
-* You want to use `docker-compose` (requires using [Remote Docker]({{ site.baseurl }}/2.0/remote-docker))
+More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0/configuration-reference).
 
 ### Advantages
-* The fastest way to start a build
-* Using any custom images for build environment
-* Built-in image caching
-* Building/running/publishing Docker images via [Remote Docker]( {{ site.baseurl }}/2.0/remote-docker)
+
+- Fastest way to start a build
+- Use any custom image for a build environment
+- Built-in image caching
+- Build, run, and publish Docker images via [Remote Docker][remote-docker]
 
 ### Limitations
-* Might be insufficient for complex build environments (low-level work with network, kernel, etc)
-* Might require some work to migrate current, not Docker oriented, CI config/script
 
-### Best practises
-* **We strongly encourage to avoid using mutable tags** (like `latest`, `1`, etc) because it'll lead to unexpected changes in your build environment. Also we don't guaranty that mutable tag will return up-to-date version of an image (`alpine:latest` might return stale month old cache). Instead we recommend to use precise versions of images (`redis:3.2.7`) or digests (`redis@sha256:95f0c9434f37db0a4f...`).
+- Not always sufficient for complex build environments requiring low-level work with the network/kernel/etc.
+- Requires some work to migrate legacy CI configuration
 
-* Build your own, specific for your build needs, images instead of using some base image and installing additional tools during build execution. It'll significantly reduce your build time. Read more about [how to create a Docker image](TBD).
+### Best Practices
+
+#### Avoid Mutable Tags
+
+We strongly discourage using mutable tags like `latest` or `1`. Mutable tags often lead to unexpected changes in your build environment.
+
+We also can’t guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
+
+Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...`.
+
+#### Use Custom Images
+
+Instead of using a base image and installing additional tools during a build’s execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements.
 
 ## Machine Executor
 
@@ -110,3 +132,5 @@ VM will be running Ubuntu 14.04 with [additional tools installed](TBD). It's no 
 ### Limitations
 * Takes additional time to create VM
 * Only default image supported (might require additional provisionning for build needs)
+
+[remote-docker]: {{ site.baseurl }}/2.0/remote-docker
