@@ -84,7 +84,7 @@ More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0
 
 ### Limitations
 - Not always sufficient for complex build environments requiring low-level work with the network/kernel/etc.
-- Requires some work to migrate legacy CI configuration
+- Requires some work to migrate legacy CircleCI configuration
 
 ### Best Practices
 
@@ -99,28 +99,27 @@ Instead, we recommend using precise image versions or digests, like `redis:3.2.7
 Instead of using a base image and installing additional tools during a build’s execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements.
 
 ## Machine Executor
+When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true in `.circleci/config.yml`:
 
-### Overview
-A build will be runned in a dedicate, ephemeral Virtual Machine (VM) with a full control over it.
-
-``` YAML
+```yaml
 jobs:
   build:
     machine: true
 ```
 
-VM will be running Ubuntu 14.04 with [additional tools installed](TBD). It's no possible to specify other images.
+The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
 
-### Typical use cases
-* Your application requires full access to OS resources
+### You Should Use The Machine Executor If...
+
+- your application requires full access to OS resources
 
 ### Advantages
-* Gives full controll over build environment
-* Might be easy to migrate current CI scripts
-* Built-in capabilities for building/running/pushing Docker images
+- Gives full control over build environment
+- Somewhat easier to migrate legacy CircleCI configuration
+- Built-in capabilities for building, running, and pushing Docker images
 
 ### Limitations
-* Takes additional time to create VM
-* Only default image supported (might require additional provisionning for build needs)
+- Takes additional time to create VM
+- Only the default image is supported; your build may require additional provisioning.
 
 [remote-docker]: {{ site.baseurl }}/2.0/remote-docker
