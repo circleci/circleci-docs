@@ -1,26 +1,66 @@
 ---
 layout: classic-docs2
-title: "Caching"
+title: "Caching in CircleCI"
 short-title: "Caching"
-categories: []
+categories: [configuring-jobs]
 order: 1000
 ---
 
-- Caching strategies: Caching is really really subtle.  Using these tactics will make a big difference in cache performance:
-  - Partial cache restores are usually what you want: partial cache-hits are preferable to zero cache-hits.  At least 80% of the time, it's better for to get X% of your dependencies from an older cache, rather than 0% from a cache-miss and re-install all dependencies.
-    - cache-restore prefix matching, latest first: Our docs mention this with the `{{ epoch }}` key-component, but it applies to any and all key-components.  If you use `{{ Branch }}` or `{{ checksum "filename" }}`, without those, your job is more likely to cache-hit.
-    - restore with "keys" not "key": for cache-restore, using "keys" with multiple candidates gives a higher chance of partial cache-hits.
-      - our cache restore strategy on 1.0 was to use something like [ mycache-{{ .Branch }}, mycache-master ]
-      - when restoring against multiple keys, start with more specific keys and go broader.  Example: [ mycache-{{ .Branch }}-{{ checksum "package.json" }}, mycache-{{ .Branch }} ]
-  - Be aware of caching risks: Cache restoring can create confusing failures.  Broadening your cache-restore scope to a wider history increases this risk.
-    - This might happen if, for example, you have a dependency cache with old dependency versions on another branch.  Perhaps you have dependencies for Node v6 on an upgrade branch, and your other branches are on Node v5.  A cache-restore that searches other branches might restore incompatible dependencies.
+Caching is one of the most effective ways to reduce build times, but it can also be subtle. This article will outline some strategies you can use to increase caching effectiveness in CircleCI.
 
-2.0 offers more flexibility than 1.0:
-- each build can restore from multiple caches (you can have multiple cache-restore steps with different keys).  You can lower the cost of a cache-miss by shrinking the size of each cache.  While onboarding early customers, we routinely split caches into their language type (Npm, pip, bundler, etc).
-  - this comes with the cost that you need to learn how each dependency manager works: where it stores its files, how it upgrades, and how it checks dependencies
-- cache compiled steps where it makes sense: Scala and Elixir users have costly compilation steps.  Some Rails users compile their frontend assets in their build.
-  - This is technically possible on 1.0, but taking Rails as an example, assets are built into the project directory.  The order of 1.0 build operations was fixed.  Caching happened after the machine phase and before the test phase.  Some users found this unintuitive, while others just found it too restricting: what if you only want to build assets after a successful test run?
+## Partial Cache Restores
 
-- source caching is possible, but usually slower than pulling from Github.  We use S3 for caching, and file lookups and transfers are slower than Github clones for our large customers.  It's faster for small repos, when the pull is less than 30 seconds.  One might want a simpler circle.yml than save 5 seconds.  For large repos, it's 3-5x slower (30 seconds to clone from github, 2 minutes to restore from s3, 2 minutes to save to s3 for next time).
-  - The one case you will want source caching is when you face rate-limiting from Github.  You'll know if you need this, as you have run into this problem on 1.0.  For the majority of users, this shouldn't be a concern.
+In most cases, partial cache hits are preferable to zero cache hits. If you get a cache miss, you’ll have to reinstall all your dependencies, which can result in a significant performance hit.
 
+The alternative, then, is to get a good chunk of your dependencies from an older cache instead of starting from scratch. Here are a few specific ways you can do that:
+
+### Use Epoch Wisely
+
+When defining a unique identifier for the cache, be careful about overusing `<< epoch >>`. If you limit yourself to `<< .Branch >>` or `<< checksum "filename" >>`, you’ll increase the odds of a job hitting the cache.
+
+### Define Multiple Keys for Cache Restores
+
+Having multiple key candidates for restoring a cache increases the odds of a partial cache hit. Instead of:
+
+```yaml
+- restore_cache:
+  key: projectname-<< .Branch >>
+```
+
+try:
+
+```yaml
+- restore_cache:
+  keys:
+    - projectname-<< .Branch >>-<< checksum "package.json" >>
+    - projectname-<< .Branch >>
+    - projectname-master
+```
+
+Note that the keys become less specific as we move through the list.
+
+Be careful not to go overboard with multiple key candidates! Broadening your `restore_cache` scope to a wider history increases the risk of confusing failures.
+
+For example, if you have dependencies for Node v6 on an upgrade branch, but your other branches are still on Node v5, a `restore_cache` step that searches other branches might restore incompatible dependencies.
+
+## Multiple Caches
+
+Instead of trying to increase the probability of a partial cache hit, you could lower the cost of a cache miss by splitting your build across multiple caches.
+
+Specifying multiple `restore_cache` steps with different keys shrinks each cache, reducing the performance hit of a cache miss.
+
+At CircleCI, we routinely split caches by language type (npm, pip, bundler, etc.). However, this also means that you’d need to learn how each dependency manager works: where it stores its files, how it upgrades, and how it checks dependencies.
+
+## Cache Expensive Steps
+
+Certain languages and frameworks have more expensive steps that can and should be cached. Scala and Elixir are two examples where caching the compilation steps will be especially effective. Rails developers, too, would notice a performance boost from caching frontend assets.
+
+Obviously, don’t cache everything, but _do_ keep an eye out for costly steps like compilation.
+
+## Source Caching
+
+Source caching is particularly useful when you run into rate-limiting on GitHub. It’s possible on CircleCI, but it’s also usually slower than pulling from GitHub.
+
+Source caching works best for smaller repos, when the pull is less than 30 seconds. In this case, you could spend 5 seconds in exchange for a simpler config.yml.
+
+For larger repos, this is less ideal: in those cases, it would take 30 seconds to clone from GitHub, 2 minutes to restore from S3, and another 2 minutes to save everything to S3 for next time.
