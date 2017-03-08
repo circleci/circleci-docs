@@ -153,22 +153,21 @@ jobs:
 ```
 dependencies:
   override:
-    - bundle install --path vendor/bundle:
+    - dependecy-install-command:
         timeout: 180
 
 database:
   override:
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:create db:schema:load
+    - setup-db-command
 
 test:
   override:
-    - bundle exec rspec
+    - test-command
 ```
 
 **2.0**
 
-The `dependency`, `database`, and `test` sections are translated into a sequence of 'run' steps.
+The `dependency`, `database`, and `test` sections are translated into a sequence of `run` steps. To learn more about `run` steps, please checkout [this]({{ site.baseurl }}/2.0/configuration-reference/#run) page.
 
 ```
 version: 2
@@ -176,29 +175,34 @@ jobs:
   build:
     working_directory: /root/my-project
     docker:
-      - image: ruby:2.3
 
-      # You can use any DB here, but postgres requires the POSTGRES_USER environment variable
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
+      # In 2.0, you can use multiple different images and group them as a 'Pod'.
+      # Because Docker containers normally don't include DBs, you need to bring
+      # a build image that serves as DB container in your build.
+      - image: primary-build-image
+      - image: db-image-1
+      - image: db-image-2
 
     steps:
       - checkout
 
-      # There’s no inference in 2.0, which means there’s nothing to override
-      # You’ll need to manually install your project’s dependencies
+      # There’s no inference in 2.0, which means there’s nothing to override.
+      # You’ll need to manually install your project’s dependencies.
       # The current timeout for no output is hardcoded to 600 seconds
-      - run: bundle install --path vendor/bundle
+      - run:
+          name: Install Dependencies
+          command: dependency-install-command
 
       # The DB is not automatically created in 2.0, so we manually set up a test DB
-      - run: sudo -u root createuser -h localhost --superuser ubuntu
-      - run: sudo createdb -h localhost test_db
-      - run: bundle exec rake db:create db:schema:load
+      - run:
+          name: Create Test DB
+          command: setup-db-command
 
-      # Run any test commands
-      - run: bundle exec rspec
-
+      # Again, there is no inference in 2.0, so nothing to override here, either.
+      # Just use any test commands.
+      - run:
+          name: Run Tests
+          command: test-command
 ```
 
 ## Caching
