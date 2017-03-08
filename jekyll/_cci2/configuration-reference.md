@@ -113,8 +113,8 @@ There can be multiple `store_artifacts` steps in a stage. Using a unique prefix 
 
 ```yaml
 - store_artifacts:
-  path: /code/test-results
-  destination: prefix
+    path: /code/test-results
+    destination: prefix
 ```
 
 ## **save_cache**
@@ -172,10 +172,10 @@ Use this in the last position of your key, as `restore_cache` performs prefix ma
 For example, a cache restore step looking for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter since it’s a more recent timestamp.
 
 ```yaml
-- type: save_cache
-  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
-  paths:
-    - /home/ubuntu/.m2
+- save_cache:
+    key: projectname-<< .Branch >>-<< checksum "project.clj" >>
+    paths:
+      - /home/ubuntu/.m2
 ```
 
 ## **restore_cache**
@@ -204,7 +204,7 @@ For more information on key formatting, see the `key` section of `cache_save` ab
 
 ```yaml
 - restore_cache:
-  key: projectname-<< .Branch >>-<< checksum "project.clj" >>
+    key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
 
 ## **store_test_results**
@@ -221,7 +221,7 @@ The directory’s layout should match the [classic CircleCI test metadata direct
 
 ```yaml
 - store_test_reults:
-  path: /tmp/test-results
+    path: /tmp/test-results
 ```
 
 ### **deploy**
