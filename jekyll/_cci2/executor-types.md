@@ -99,7 +99,7 @@ Instead, we recommend using precise image versions or digests, like `redis:3.2.7
 Instead of using a base image and installing additional tools during a build’s execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements.
 
 ## Machine Executor
-When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true in `.circleci/config.yml`:
+When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
 
 ```yaml
 jobs:
