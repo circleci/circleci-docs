@@ -16,26 +16,29 @@ The alternative, then, is to get a good chunk of your dependencies from an older
 
 ### Use Epoch Wisely
 
-When defining a unique identifier for the cache, be careful about overusing `<< epoch >>`. If you limit yourself to `<< .Branch >>` or `<< checksum "filename" >>`, you’ll increase the odds of a job hitting the cache.
+When defining a unique identifier for the cache, be careful about overusing {% raw %}`{{ epoch }}`{% endraw %}. If you limit yourself to {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of a job hitting the cache.
 
 ### Define Multiple Keys for Cache Restores
 
 Having multiple key candidates for restoring a cache increases the odds of a partial cache hit. Instead of:
 
+{% raw %}
 ```YAML
 - restore_cache:
-  key: projectname-<< .Branch >>
+    key: projectname-{{ .Branch }}
 ```
+{% endraw %}
 
 try:
-
+{% raw %}
 ```YAML
 - restore_cache:
-  keys:
-    - projectname-<< .Branch >>-<< checksum "package.json" >>
-    - projectname-<< .Branch >>
-    - projectname-master
+    keys:
+      - projectname-{{ .Branch }}-{{ checksum "package.json" }}
+      - projectname-{{ .Branch }}
+      - projectname-master
 ```
+{% endraw %}
 
 Note that the keys become less specific as we move through the list.
 
