@@ -14,6 +14,8 @@ Enough talk, let’s get started!
 
 ---
 
+## Config Walkthrough
+
 We always start with the version.
 
 ```YAML
