@@ -16,7 +16,7 @@ Enough talk, let's get started!
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -24,7 +24,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll use Apache's default DocumentRoot so its vhost can serve the PHP project.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -37,7 +37,7 @@ Directly beneath `working_directory`, we’ll specify container images for this 
 
 We'll pull in the 7.0-apache image from the official PHP repository on Docker Hub along with MariaDB. Both images have their own `environment` settings.
 
-```yaml
+```YAML
 jobs:
   build:
     working_directory: /var/www/html
@@ -77,7 +77,7 @@ This sets a (horrible) root password so we can access the DB.
 
 Next, we'll add `steps` to the job. Normally, we’d check out our project's code first, but the Docker image we chose doesn’t include Git. Since we need to install Git anyway, we'll also install other system/distribution packages that we'll need.
 
-```yaml
+```YAML
 jobs:
   build:
     working_directory: /var/www/html
@@ -91,7 +91,7 @@ jobs:
 
 Now we can actually check out our code, which will go in the working directory we specified earlier.
 
-```yaml
+```YAML
       - checkout
 ```
 
@@ -99,7 +99,7 @@ Next, we're going to run a pre-installed script called `docker-php-ext-install`.
 
 We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. Normally, we'd use the `RUN` command in a `Dockerfile`, but in this case, we have to run it manually:
 
-```yaml
+```YAML
       - run:
           name: Install PHP Extensions
           command: docker-php-ext-install pdo pdo_mysql zip
@@ -107,7 +107,7 @@ We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. No
 
 We're going to be using Composer to install project dependencies, so let's install that next. Forgive the verbosity, but these are the official install instructions.
 
-```yaml
+```YAML
       - run:
           name: Install Composer
           command: |
@@ -119,7 +119,7 @@ We're going to be using Composer to install project dependencies, so let's insta
 
 Now that Composer has been installed, let's use it to install the project's dependencies, located in `composer.json`.
 
-```yaml
+```YAML
       - run:
           name: Install Project Dependencies
           command: php composer.phar install
@@ -127,7 +127,7 @@ Now that Composer has been installed, let's use it to install the project's depe
 
 Next, let's initialize required database (DB) tables and seed it with initial data.
 
-```yaml
+```YAML
       - run:
           name: Initialize Database
           command: |
@@ -137,7 +137,7 @@ Next, let's initialize required database (DB) tables and seed it with initial da
 
 Finally, let's run our tests using PHPUnit.
 
-```yaml
+```YAML
       - run:
           name: Run Tests
           command: vendor/bin/phpunit
@@ -145,7 +145,7 @@ Finally, let's run our tests using PHPUnit.
 
 And we're done! Let's see what the whole `config.yml` looks like now:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:

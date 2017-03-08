@@ -16,7 +16,7 @@ This file is _extremely_ flexible, so it’s not realistic to list every possibl
 
 The first thing you’ll put in `config.yml` is the _version_ you’re using. We use this field to issue warnings about breaking changes or deprecation.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -26,7 +26,7 @@ The rest of `config.yml` is comprised of several _jobs_. In turn, a job is compr
 
 So what does a job look like? At minimum, a job must have an executor and a list of steps. It can also have a few other values:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -88,7 +88,7 @@ An _executor_ is roughly “a place where job steps occur.” Remember that you 
 
 CircleCI will build the necessary environment by launching as many Docker containers as you need. Here’s an example:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -144,7 +144,7 @@ This executor defaults `working_directory` to a directory in `/tmp` named after 
 
 As we mentioned earlier, each job is comprised of several _steps_. The `steps` key is a list of single key/value pair maps. The key indicates the _type_ of step, while the value can either be a configuration map or simply a string. Behold:
 
-```yaml
+```YAML
 jobs:
   build:
     steps:
@@ -159,7 +159,7 @@ Similar to a job, the UI uses the `name` attribute for display purposes. If no `
 
 If the value of the step invocation key is a string, then the step implementation may implement default behavior. This means we can reduce our example further:
 
-```yaml
+```YAML
 jobs:
   build:
     steps:
@@ -170,7 +170,7 @@ This is functionally the same as the above example, except the step will use the
 
 A final shorthand is to just use a string instead of the entire step map:
 
-```yaml
+```YAML
 jobs:
   build:
     steps:

@@ -24,7 +24,7 @@ Like any set of choices, there are tradeoffs to using one over the other. Here�
 ## Docker Executor
 When you choose the `docker` executor, your build will run in a Docker container. You can specify the container image in `.circleci/config.yml`:
 
-``` yaml
+```YAML
 jobs:
   build:
     docker:
@@ -57,7 +57,7 @@ Images for the Docker build system can be specified in a few ways:
 ### Multiple Images
 It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [main container]( {{ site.baseurl }}/2.0/glossary#main-container).
 
-``` yaml
+```YAML
 jobs:
   build:
     docker:
@@ -101,7 +101,7 @@ Instead of using a base image and installing additional tools during a build’s
 ## Machine Executor
 When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
 
-```yaml
+```YAML
 jobs:
   build:
     machine: true

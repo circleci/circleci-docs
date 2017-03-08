@@ -16,7 +16,7 @@ Enough talk, let’s get started!
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -24,7 +24,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -35,7 +35,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we can specify container images for the build under a `docker` key.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -48,7 +48,7 @@ Now we’ll add several `steps` within the `build` job.
 
 One difference between CircleCI Classic and 2.0 is that 2.0 doesn’t automatically make an artifacts directory. Let’s do that now.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -63,7 +63,7 @@ jobs:
 
 Next, let's install our dependencies. In CircleCI Classic, we would have done this in a separate `dependencies` stage.
 
-```yaml
+```YAML
 ...
       - run:
           name: Dependencies
@@ -72,7 +72,7 @@ Next, let's install our dependencies. In CircleCI Classic, we would have done th
 
 Next, we run our tests. Like dependencies, this would have been run in a separate `test` stage in CircleCI Classic.
 
-```yaml
+```YAML
       - run:
           name: NPM Test
           command: npm test
@@ -80,7 +80,7 @@ Next, we run our tests. Like dependencies, this would have been run in a separat
 
 Remember when we created a directory for our artifacts? CircleCI won't unless we tell it where to look.
 
-```yaml
+```YAML
       - store_artifacts:
           path: ~/cci-demo-react/artifacts
 ```
@@ -89,7 +89,7 @@ We also want to deploy our app to Heroku, so we'll do that with another step aft
 
 If it is the right branch, we'll add the SSH key fingerprint directly. Note the git commands as well.
 
-```yaml
+```YAML
       - add_ssh_keys
       - deploy:
           command: |
@@ -103,7 +103,7 @@ If it is the right branch, we'll add the SSH key fingerprint directly. Note the 
 
 And we're done! Let's see what the whole `config.yml` looks like now:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:

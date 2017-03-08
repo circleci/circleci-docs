@@ -34,7 +34,7 @@ To use the CircleCI CLI, you’ll need to install and configure Docker. Please f
 ## Installation
 To install the CLI, run:
 
-```bash
+```Bash
 curl -o /usr/local/bin/circleci-builder https://circle-downloads.s3.amazonaws.com/releases/circleci-builder/circleci-builder-beta && chmod +x /usr/local/bin/circleci-builder
 ```
 
@@ -43,7 +43,7 @@ curl -o /usr/local/bin/circleci-builder https://circle-downloads.s3.amazonaws.co
 ## Usage
 Calling `circleci-builder` without any options displays usage information:
 
-```bash
+```Bash
 $ circleci-builder
 The build agent to be used in Picard.
 

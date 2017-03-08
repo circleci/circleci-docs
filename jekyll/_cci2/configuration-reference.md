@@ -36,7 +36,7 @@ Additional environment variables, locally scoped to command. Must be a YAML map.
 
 Represents whether command should be run in the background. Default: false
 
-```yaml
+```YAML
 - run:
     command: bundle check || bundle install
     shell: /bin/bash
@@ -64,7 +64,7 @@ Fields (optional in brackets):
 
 List of fingerprints corresponding to the keys to be added. Default: all keys added.
 
-```yaml
+```YAML
 - add_ssh_keys
     fingerprints:
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
@@ -72,7 +72,7 @@ List of fingerprints corresponding to the keys to be added. Default: all keys ad
 
 To use an ssh-agent, you’ll need to explicitly start one up:
 
-```yaml
+```YAML
 - run:
     name: Start ssh-agent
     command: |
@@ -86,7 +86,7 @@ To use an ssh-agent, you’ll need to explicitly start one up:
 
 Then, load the ssh configuration in steps that require an ssh-agent:
 
-```yaml
+```YAML
 - run:
     name: run my special ssh command
     command: |
@@ -111,7 +111,7 @@ Prefix added to the artifact paths in the artifacts API.
 
 There can be multiple `store_artifacts` steps in a stage. Using a unique prefix for each step prevents them from overwriting files.
 
-```yaml
+```YAML
 - store_artifacts:
     path: /code/test-results
     destination: prefix
@@ -171,7 +171,7 @@ Use this in the last position of your key, as `restore_cache` performs prefix ma
 
 For example, a cache restore step looking for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter since it’s a more recent timestamp.
 
-```yaml
+```YAML
 - save_cache:
     key: projectname-<< .Branch >>-<< checksum "project.clj" >>
     paths:
@@ -202,7 +202,7 @@ A key is searched against existing keys as a prefix. When there are multiple mat
 
 For more information on key formatting, see the `key` section of `cache_save` above.
 
-```yaml
+```YAML
 - restore_cache:
     key: projectname-<< .Branch >>-<< checksum "project.clj" >>
 ```
@@ -219,7 +219,7 @@ Directory containing JUnit XML or Cucumber JSON test metadata files.
 
 The directory’s layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
 
-```yaml
+```YAML
 - store_test_reults:
     path: /tmp/test-results
 ```
@@ -232,7 +232,7 @@ Special step used to deploy artifacts.
 
 In a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-```yaml
+```YAML
 - type: deploy
   shell: /bin/sh
   command: ansible-playbook site.yml

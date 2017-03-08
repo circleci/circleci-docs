@@ -14,7 +14,7 @@ To help users build, run, and publish new images, we’ve introduced a special f
 ## Configuration
 If your build requires `docker` or `docker-compose` commands, you’ll need to add a special step into your `.circleci/config.yml`:
 
-```yaml
+```YAML
 jobs:
   build:
     steps:
@@ -28,7 +28,7 @@ When `setup_docker_engine` executes, a remote environment will be created, and y
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker):
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -70,7 +70,7 @@ Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glos
 ### Examples and Workarounds
 It’s impossible to start a service in remote docker and ping it directly from a main container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
 
-```yaml
+```YAML
 # start service and check that it’s running
 - run: |
     docker run -d --name my-app my-app
@@ -79,7 +79,7 @@ It’s impossible to start a service in remote docker and ping it directly from 
 
 A different way to do this is to use another container running in the same network as the target container:
 
-```yaml
+```YAML
 - run: |
     docker run -d --name my-app my-app
     docker run --network container:my-app appropriate/curl --retry 10 http://localhost:8080
@@ -92,7 +92,7 @@ Using private images isn’t directly supported by the Docker Executor. However,
 
 If your application requires a proprietary DB for testing, for example:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:

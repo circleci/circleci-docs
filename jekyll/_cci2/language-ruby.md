@@ -16,7 +16,7 @@ Enough talk, let’s get started!
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -24,7 +24,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -35,7 +35,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we can specify container images for the build under a `docker` key.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -55,7 +55,7 @@ First we check out the codebase.
 
 In our second step, we install NodeJS because Docker’s Ruby image doesn’t include it. This command will also install any tools/headers required to build native gems.
 
-```yaml
+```YAML
 version: 2
 jobs:
   working_directory: ~/cci-demo-rails
@@ -76,7 +76,7 @@ jobs:
 
 Now we have to install our actual dependencies for the project.
 
-```yaml
+```YAML
       - run:
           name: Install Ruby Dependencies
           command: bundle install
@@ -84,7 +84,7 @@ Now we have to install our actual dependencies for the project.
 
 Next, set up the DB.
 
-```yaml
+```YAML
       - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
@@ -94,7 +94,7 @@ Rails will read `config/database.yml` and create a test DB automatically with `d
 
 **(Optional)** If you want to create a DB manually, you can do with `createdb` command. We are installing postgresql package because we need `createdb` command.
 
-```yaml
+```YAML
       - run: |
         apt-get update -qq; apt-get install -y postgresql
         createdb -h localhost my_test_db
@@ -102,7 +102,7 @@ Rails will read `config/database.yml` and create a test DB automatically with `d
 
 Run our migrations.
 
-```yaml
+```YAML
       - run:
           name: DB Migrations
           command: bundle exec rake db:migrate
@@ -110,7 +110,7 @@ Run our migrations.
 
 Finally, run our tests.
 
-```yaml
+```YAML
       - run:
           name: Run Tests
           command: bundle exec rake test
@@ -118,7 +118,7 @@ Finally, run our tests.
 
 And we're done! Let's see the whole `config.yml`:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:

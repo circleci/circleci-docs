@@ -8,7 +8,7 @@ order: 1
 
 You can use the following `.circleci/config.yml` to start building Phoenix apps. See below for an explanation of each step.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -36,7 +36,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -47,7 +47,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we can specify container images for the build under a `docker` key.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -65,7 +65,7 @@ Now we’ll add several `steps` within the `build` job.
 
 We’ll do 3 things: checkout the codebase, install missing dependencies, and create the storage for the repo:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:

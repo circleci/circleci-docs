@@ -16,7 +16,7 @@ Enough talk, let’s get started!
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -24,7 +24,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. Go is very strict about the structure of the [Go Workspace](https://golang.org/doc/code.html#Workspaces), so we’ll need to specify a path that satisfies those requirements.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -35,7 +35,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we’ll specify container images for this build under `docker`.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -46,7 +46,7 @@ jobs:
 
 We'll also create a container for PostgreSQL, along with 2 environment variables for initializing the database.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -63,7 +63,7 @@ Now we need to add several `steps` within the `build` job.
 
 The `checkout` step will default to the `working_directory` we have already defined.
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
@@ -80,7 +80,7 @@ jobs:
 
 Next, we install the Go implementation of the JUnit reporting tool. We'll also create a directory for test results.
 
-```yaml
+```YAML
 ...
       - run:
           name: "Install JUnit reporter & Setup Test Path"
@@ -93,7 +93,7 @@ Now we have to actually run our tests.
 
 To do that, we need to set an environment variable for our database's URL. Then, we'll download packages needed for testing without installing them. Once we've completed those actions, we can run our tests.
 
-```yaml
+```YAML
       - run:
           environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5432/service_test?sslmode=disable"
@@ -105,14 +105,14 @@ To do that, we need to set an environment variable for our database's URL. Then,
 
 Finally, let's specify a path to store the results of the tests.
 
-```yaml
+```YAML
       - store_test_results:
           path: /tmp/test-results
 ```
 
 And we're done! Let's see what the whole `config.yml` looks like now:
 
-```yaml
+```YAML
 version: 2
 jobs:
   build:
