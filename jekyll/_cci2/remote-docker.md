@@ -61,7 +61,7 @@ Let’s break down what’s happening during this build’s execution:
 
 - All commands are executed in the [main container][main-container].
 - Once `setup_docker_engine` is called, a new remote environment is created, and your main container is configured to use it.
-- All docker-related commands are executed in your main container, too, but building/pushing images and running containers happens in the remote Docker Engine.
+- All docker-related commands are also executed in your main container, but building/pushing images and running containers happens in the remote Docker Engine.
 - We use project environment variables to store credentials for Docker Hub.
 
 ## Separation of Environments
