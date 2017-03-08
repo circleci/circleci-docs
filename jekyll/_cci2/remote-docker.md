@@ -67,7 +67,7 @@ Let’s break down what’s happening during this build’s execution:
 ## Separation of Environments
 Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
-### Examples and Workarounds
+### Starting Services
 It’s impossible to start a service in remote docker and ping it directly from a main container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
 
 ```YAML
@@ -85,7 +85,8 @@ A different way to do this is to use another container running in the same netwo
     docker run --network container:my-app appropriate/curl --retry 10 http://localhost:8080
 ```
 
- It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
+### Mounting Folders
+It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
 
 ## Private Images and Docker Registries
 Using private images isn’t directly supported by the Docker Executor. However, you _can_ use the Remote Docker Environment.
