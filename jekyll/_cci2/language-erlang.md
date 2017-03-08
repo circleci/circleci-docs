@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Language Guide: Erlang"
+title: "Demo App: Erlang"
 short-title: "Erlang"
-categories: [language-guides]
+categories: [demo-apps]
 order: 1
 ---
 

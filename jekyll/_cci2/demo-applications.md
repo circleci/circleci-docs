@@ -1,7 +1,7 @@
 ---
 layout: classic-docs2
-title: "Demo Applications"
-short-title: "CircleCI Demo Applications"
+title: "CircleCI Demo Applications"
+short-title: "Demo Applications"
 categories: [language-guides]
 order: 100
 ---
