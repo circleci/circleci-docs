@@ -1,6 +1,6 @@
 ---
 layout: classic-docs2
-title: "Local Jobs"
+title: "Running Jobs Locally"
 short-title: "Running Jobs Locally"
 categories: [configuring-jobs]
 order: 3
