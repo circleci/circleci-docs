@@ -1,12 +1,12 @@
 ---
 layout: classic-docs2
-title: "Local Builds"
-short-title: "Local CircleCI Builder"
+title: "Local Jobs"
+short-title: "Running Jobs Locally"
 categories: [configuring-jobs]
 order: 3
 ---
 
-CircleCI’s CLI reproduces the CircleCI build environment locally and runs jobs as if they were running in CircleCI. The tool enables better debugging and faster configuration.
+The **CircleCI CLI** reproduces the CircleCI environment locally and runs jobs as if they were running on CircleCI. The tool enables better debugging and faster configuration.
 
 ## Common Use Cases
 
@@ -18,15 +18,15 @@ Note that local builds don’t cache dependencies. You may want to comment out d
 
 ### Troubleshooting Container Configurations
 
-Jobs have several containers that need to “talk” to each other. If you have a PostgreSQL container, it can take some effort to ensure your job can connect and create the relevant database with correct permissions on the correct port. Or you might be using a pre-built container, but you’re unsure if it has all the services you need or if they're running in the way you hope.
+Jobs have several containers that need to “talk” to each other. If you have a PostgreSQL container, you can quickly try different settings to ensure your job can connect and create the relevant database with correct permissions on the correct port. Or you might be using a pre-built container, but you’re unsure if it has all the services you need, or if they're running in the way you hope.
 
-Local builds allow you to quickly retry configurations such as connecting on different ports or with different users.
+Local jobs allow you to quickly retry configurations such as connecting on different ports or with different users.
 
 ### Testing a New Project
 
 Imagine you’re a new developer on a team. It could take some time to figure out how to build and test an application.
 
-If the project has been configured to run on CircleCI, you can clone the repo, install the local build tool and simply run `circleci-cli build`. This is a great way to get set up quickly with the same environment as your team.
+If the project has been configured to run on CircleCI, you can clone the repo, install the CircleCI CLI and run `circleci-cli build`. This is a great way to get set up quickly with the same environment as your team.
 
 ## Requirements
 
@@ -68,6 +68,9 @@ Use 'circleci [command] --help' for more information about a command.
 ```
 
 ## Updating
+
 The CLI tool automatically checks for updates and will prompt you if one is available.
 
-For a more detailed guide on how to use the CircleCI CLI, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs).
+## Using the CircleCI CLI non-locally
+
+The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs) to see how you use the tool to manage paralellism in a remoted hosted environment.

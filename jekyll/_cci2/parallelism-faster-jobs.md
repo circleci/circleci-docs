@@ -10,7 +10,7 @@ One of the most powerful features of CircleCI is the ability to run your tests i
 
 Access help by running `circleci tests help` or see below for descriptions of your options.
 
-- This tool is available on circleci.com and within the [local CircleCI builder](/docs/2.0/local-builds/).
+- This tool is available on circleci.com and within the [local CircleCI CLI](/docs/2.0/local-jobs/).
 - You can specify multiple globs.  This is pretty common for test suites in 1.0.  For example: `circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
 - As you migrate from 1.0 to 2.0, it's worthwhile to manually check that your globs pick up exactly what you want and nothing else.  `circleci tests glob` scans the filesystem based on the globs you pass it and returns plain text in Bash.  So you can do check your glob results by adding a line like the following:
 
