@@ -5,7 +5,7 @@
 {% for doc in site.cci1 %}
 	{% unless doc.deprecated %}
 		<url>
-			<loc>{{ doc.url | prepend: site.baseurl | prepend: site.url }}</loc>
+			<loc>{{ doc.url | prepend: site.baseurl | prepend: site.url | uri_escape }}</loc>
 			<changefreq>{% if doc.changefreq %}{{ doc.changefreq }}{% else %}monthly{% endif %}</changefreq>
 			<lastmod>2016-04-04T14:00:00-07:00</lastmod>
 		</url>
