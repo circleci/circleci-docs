@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Glossary"
 short-title: "Glossary"
-categories: [configuring-jobs]
-order: 5000
+categories: [reference]
+order: 2
 ---
 
 ### **executor**

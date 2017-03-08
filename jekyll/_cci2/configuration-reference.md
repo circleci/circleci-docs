@@ -1,9 +1,9 @@
 ---
 layout: classic-docs2
 title: "Configuration Reference"
-short-title: "Configuration Reference"
-categories: [configuring-jobs]
-order: 2000
+short-title: "Configuration"
+categories: [reference]
+order: 0
 ---
 
 This document is a reference for `.circleci/config.yml` and lists the built-in job steps available to you.
