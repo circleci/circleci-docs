@@ -12,9 +12,9 @@ The **CircleCI CLI** reproduces the CircleCI environment locally and runs jobs a
 
 ### Debugging Configuration Syntax
 
-Getting the syntax correct for your `config.yml` file can take some effort. Instead of having to push a commit and run a job on CircleCI to test this, local builds allow you to experiment locally since they only build what’s currently on your file system.
+Getting the syntax correct for your `config.yml` file can take a few iterations. Instead of having to push a commit and run a job on CircleCI to test this, local builds allow you to experiment locally since they only build what’s currently on your file system.
 
-Note that local builds don’t cache dependencies. You may want to comment out dependency sections if you’re testing YAML syntax. Or use the `--config` flag to specify a local `config.yml` that doesn’t pull in large dependencies.
+Note that local jobs don’t cache dependencies. You may want to comment out dependency sections if you’re testing YAML syntax. Or use the `--config` flag to specify a local `config.yml` that doesn’t pull in large dependencies.
 
 ### Troubleshooting Container Configurations
 
@@ -73,4 +73,4 @@ The CLI tool automatically checks for updates and will prompt you if one is avai
 
 ## Using the CircleCI CLI non-locally
 
-The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs) to see how you use the tool to manage paralellism in a remoted hosted environment.
+The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs) to see how you use the tool to manage paralellism in a remote hosted environment.
