@@ -47,11 +47,7 @@ myUsername/couchdb:1.6.1
 
 ## Can I use the `latest` tag when specifying image versions?
 
-You _can_, but please don’t. The `latest` tag is mutable and doesn’t always refer to a consistent image SHA. CircleCI runs on a fleet of machines, so a mutable tag could be improperly cached. In that case, re-running a build wouldn’t be deterministic.
-
-The `latest` tag is the most infamous example, but other mutable tags like `master`, have the same problem. You can read more about the issue [here](http://container-solutions.com/docker-latest-confusion/).
-
-Instead, we recommend choosing a specific tag. This guarantees that you are using the same version of the container image.
+We highly recommend that you don’t. Read more about why we think you should [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types/#avoid-mutable-tags)
 
 ## I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
