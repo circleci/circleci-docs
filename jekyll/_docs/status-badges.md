@@ -8,20 +8,20 @@ description: Embeddable status badges
 We provide project and branch status images, which you can embed anywhere you want: a GitHub
 README, a dashboard, or anywhere else you can imagine!
 
-Here's our current build status:
-![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
+Here's our current build status for Docs:
+![](https://circleci.com/gh/circleci/circleci-docs.png?circle-token=3d22f822bead5ecf008da1504089977332c1a50a)
 
 The status images are also available in "shield" style:
-![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
+![](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield&circle-token=3d22f822bead5ecf008da1504089977332c1a50a)
 
 In the project settings for each of your repositories, there's a "Status Badges" section that can generate code for Markdown, rst, etc.  Or if you want to tweak them manually, how they work is straightforward:
 
 You can use a simple image URL like this to see the status of your project's default branch:
 
 - `https://circleci.com/gh/:owner/:repo.png?circle-token=:circle-token`
-  - Gives: ![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
+  - Gives: ![](https://circleci.com/gh/circleci/circleci-docs.png?circle-token=3d22f822bead5ecf008da1504089977332c1a50a)
 - `https://circleci.com/gh/:owner/:repo.svg?style=shield&circle-token=:circle-token`
-  - Gives: ![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
+  - Gives: ![](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield&circle-token=3d22f822bead5ecf008da1504089977332c1a50a)
 
 For example:
 `circleci/mongofinil` [badge](https://circleci.com/gh/circleci/mongofinil.png?circle-token=b14acf911433d315298235b0c2fbf7b2670a92a8)
