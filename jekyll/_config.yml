@@ -32,7 +32,7 @@ collections:
     output: true
     permalink: /2.0/:path/
     prefix: "/2.0"
-    selectorName: false
+    selectorName: "2.0"
 
 twitter_username: circleci
 github_username:  circleci
