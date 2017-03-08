@@ -98,6 +98,10 @@
   slug: configuring-jobs
   name: "Configuring Jobs"
 
+- section: cci2
+  slug: reference
+  name: "Reference"
+
 # - section: cci2
 #   slug: troubleshooting-and-debugging
 #   name: "Troubleshooting and Debugging"
