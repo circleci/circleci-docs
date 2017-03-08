@@ -33,7 +33,7 @@ jobs:
 
 ### Why Use The Docker Executor?
 - your application is self-sufficient
-- your application requires additional serves to be tested
+- your application requires additional services to be tested
 - your application is distributed as a Docker Image (requires using [Remote Docker][remote-docker]
 - you want to use `docker-compose` (requires using [Remote Docker][remote-docker])
 
