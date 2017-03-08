@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Demo App: JavaScript"
+title: "Language Guide: JavaScript"
 short-title: "JavaScript"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 4
 ---
 

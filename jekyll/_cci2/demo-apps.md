@@ -2,7 +2,7 @@
 layout: classic-docs2
 title: "CircleCI Demo Applications"
 short-title: "Demo App Index"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 0
 ---
 

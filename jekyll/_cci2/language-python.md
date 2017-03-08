@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Demo App: Python"
+title: "Language Guide: Python"
 short-title: "Python"
-categories: [languages-and-tools]
+categories: [language-guides]
 order: 6
 ---
 
