@@ -16,7 +16,7 @@ This means that no commands are run automatically. Don’t assume that a particu
 
 Builds often freeze due to syntax errors in `config.yml`.
 
-Cancel the build, check your `config.yml` for proper indents, and ensure that all jobs and steps have the required keys.
+Cancel the build, check your `config.yml` for proper indentation, and ensure that all jobs and steps have the required keys.
 
 ## Can I use CircleCI 2.0 without creating base images?
 
@@ -58,12 +58,6 @@ Instead, we recommend choosing a specific tag. This guarantees that you are usin
 We don’t currently provide a way to invalidate cached Docker images. One way around this is to use image tags.
 
 If you’re running a build on `my-image:123` and you update the image, you can use a new tag to force a cache refresh. In this example, you could change the tag to `my-image:456` and choose that image in `config.yml`.
-
-## Why do I see `fork/exec /bin/bash: no such file or directory` when I try to run a `type: shell` command before `checkout`?
-
-You’re seeing this because CircleCI 2.0 is trying to `cd` to your `workDir` for the `type: shell` command. Since `workDir` is normally created by the `checkout` step, CircleCI won’t be able to find it.
-
-You can override this behavior with a `pwd` attribute on your `type: shell` step. If your command expects `workDir` to exist, then you’ll need to create it with `mkdir -p`.
 
 [docker-hub]: https://hub.docker.com
 [docker-library]: https://hub.docker.com/explore/
