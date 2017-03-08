@@ -29,9 +29,11 @@ Imagine you’re a new developer on a team. It could take some time to figure ou
 If the project has been configured to run on CircleCI, you can clone the repo, install the local build tool and simply run `circleci-builder build`. This is a great way to get set up quickly with the same environment as your team.
 
 ## Requirements
+
 To use the CircleCI CLI, you’ll need to install and configure Docker. Please follow the [docker installation instructions](https://docs.docker.com/engine/installation/).
 
 ## Installation
+
 To install the CLI, run:
 
 ```Bash
@@ -41,15 +43,16 @@ curl -o /usr/local/bin/circleci-builder https://circle-downloads.s3.amazonaws.co
 (If the current user doesn't have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.)
 
 ## Usage
+
 Calling `circleci-builder` without any options displays usage information:
 
 ```Bash
 $ circleci-builder
-The build agent to be used in Picard.
+The build agent to be used in circleci.
 
 Usage:
-  picard [flags]
-  picard [command]
+  circleci [flags]
+  circleci [command]
 
 Available Commands:
   build       run a full build locally
@@ -57,11 +60,11 @@ Available Commands:
   version     output version info
 
 Flags:
-  -c, --config string   config file (default is $HOME/.picard/agent.toml)
+  -c, --config string   config file (default is $HOME/.circleci/agent.toml)
       --taskId string   TaskID
       --verbose         emit verbose logging output
 
-Use 'picard [command] --help' for more information about a command.
+Use 'circleci [command] --help' for more information about a command.
 ```
 
 ## Updating
