@@ -2,13 +2,20 @@
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{% for doc in site.cci1 %}
-	{% unless doc.deprecated %}
+	<url>
+		<loc>{{ "/" | prepend: site.baseurl | prepend: site.url }}</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+{% for section in site.collections %}
+	{% if section.label == "posts" or section.selectorName == false %}{% continue %}{% endif %}
+	{% assign docs = site.documents | where:"collection",section.label %}
+	{% for doc in docs %}
+		{% unless doc.hide %}
 		<url>
 			<loc>{{ doc.url | prepend: site.baseurl | prepend: site.url | uri_escape }}</loc>
 			<changefreq>{% if doc.changefreq %}{{ doc.changefreq }}{% else %}monthly{% endif %}</changefreq>
-			<lastmod>2016-04-04T14:00:00-07:00</lastmod>
 		</url>
-	{% endunless %}
+		{% endunless %}
+	{% endfor %}
 {% endfor %}
 </urlset>
