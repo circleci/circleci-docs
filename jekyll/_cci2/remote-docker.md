@@ -3,7 +3,7 @@ layout: classic-docs2
 title: "Docker and CircleCI 2.0"
 short-title: "Docker and CircleCI 2.0"
 categories: [configuring-jobs]
-order: 8
+order: 1
 ---
 
 ## Overview

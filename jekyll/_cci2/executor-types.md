@@ -3,7 +3,7 @@ layout: classic-docs2
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
 categories: [configuring-jobs]
-order: 7
+order: 0
 ---
 
 An executor defines an underlying technology to run your build. Currently, we provide two options: `docker` and `machine`.
