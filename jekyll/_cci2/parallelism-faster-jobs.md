@@ -1,6 +1,6 @@
 ---
 layout: classic-docs2
-title: "Parallelism with the 2.0 Tests CLI"
+title: "Parallelism with CircleCI CLI"
 short-title: "Parallelism for Faster Jobs"
 categories: [configuring-jobs]
 order: 4
