@@ -91,8 +91,8 @@
   name: "Getting Started"
 
 - section: cci2
-  slug: demo-apps
-  name: "Demo Applications"
+  slug: language-guides
+  name: "Language Guides"
 
 - section: cci2
   slug: configuring-jobs

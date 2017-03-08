@@ -1,9 +1,9 @@
 ---
 layout: classic-docs2
 title: "CircleCI Demo Applications"
-short-title: "Demo Applications"
+short-title: "Demo App Index"
 categories: [language-guides]
-order: 100
+order: 0
 ---
 
 We’ve created several demo applications for various languages, so you can learn by example.
