@@ -28,4 +28,4 @@ Now that you’ve integrated with a VCS and added one of your projects, you’ll
 
 Head to our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough) for a sample `config.yml` and explanation of each component of the file.
 
-Or, if you have a specific language in mind, check out our [demo applications]({{ site.baseurl }}/2.0/demo-applications).
+Or, if you have a specific language in mind, check out our [demo applications]({{ site.baseurl }}/2.0/demo-apps).
