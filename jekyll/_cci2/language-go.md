@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Demo App: Go"
 short-title: "Go"
-categories: [demo-apps]
-order: 2
+categories: [languages-and-tools]
+order: 3
 ---
 
 This guide will help get you started with a Go project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.

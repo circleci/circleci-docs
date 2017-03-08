@@ -2,8 +2,8 @@
 layout: classic-docs2
 title: "Demo App: Erlang"
 short-title: "Erlang"
-categories: [demo-apps]
-order: 1
+categories: [languages-and-tools]
+order: 2
 ---
 
 You can use the following `.circleci/config.yml` to start building Phoenix apps. See below for an explanation of each step.
