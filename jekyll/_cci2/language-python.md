@@ -16,7 +16,7 @@ Enough talk, let's get started!
 
 We always start with the version.
 
-```yaml
+```YAML
 version: 2
 ```
 
@@ -26,7 +26,7 @@ We also need to specify container images for this build in `docker`.
 
 We'll need to tell the Flask app to run in `testing` mode by setting it in `environment`, as well as where to find the database (DB). This is a special local URL linked to an additional Docker container.
 
-```yaml
+```YAML
 jobs:
   build:
     docker:
@@ -38,7 +38,7 @@ jobs:
 
 We'll also create a container for PostgreSQL, along with 3 environment variables for initializing the database.
 
-```yaml
+```YAML
       - image: postgres:9.5.5
         environment:
           POSTGRES_USER: ubuntu
@@ -50,7 +50,7 @@ Now we need to add several `steps` within the `build` job.
 
 You could install NPM, but we’re going to use Yarn for reasons that are outside the scope of this document.
 
-```yaml
+```YAML
 ...
     steps:
       - checkout
@@ -66,7 +66,7 @@ You could install NPM, but we’re going to use Yarn for reasons that are outsid
 Let's restore the Yarn package cache if it's available.
 
 {% raw %}
-```yaml
+```YAML
       - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
@@ -74,7 +74,7 @@ Let's restore the Yarn package cache if it's available.
 
 Install both Yarn and Python dependencies.
 
-```yaml
+```YAML
       - run:
           name: Install Dependencies
           command: yarn && pip install -r requirements.txt
@@ -83,7 +83,7 @@ Install both Yarn and Python dependencies.
 Specify where to save that Yarn cache.
 
 {% raw %}
-```yaml
+```YAML
       - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
@@ -93,7 +93,7 @@ Specify where to save that Yarn cache.
 
 Run our tests.
 
-```yaml
+```YAML
       - run
           name: Run Tests
           command: python manage.py test --coverage
@@ -101,14 +101,14 @@ Run our tests.
 
 Store test results as an artifact.
 
-```yaml
+```YAML
       - store_artifacts:
           path: test-reports/coverage
 ```
 
 Finally, let's specify where those test results are actually located.
 
-```yaml
+```YAML
       - store_test_results:
           path: "test-reports/"
 ```
@@ -116,7 +116,7 @@ Finally, let's specify where those test results are actually located.
 And we're done! Let's see what the whole `config.yml` looks like now:
 
 {% raw %}
-```yaml
+```YAML
 version: 2
 jobs:
   build:

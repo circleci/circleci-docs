@@ -14,7 +14,7 @@ Access help by running `picard tests help` or see below for descriptions of your
 - You can specify multiple globs.  This is pretty common for test suites in 1.0.  For example: `picard tests glob "tests/unit/*.java" "tests/functional/*.java"`
 - As you migrate from 1.0 to 2.0, it's worthwhile to manually check that your globs pick up exactly what you want and nothing else.  `picard tests glob` scans the filesystem based on the globs you pass it and returns plain text in Bash.  So you can do check your glob results by adding a line like the following:
 
-```
+```YAML
 - type: shell
   command: |
   # Print all files in one line

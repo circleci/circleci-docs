@@ -48,7 +48,7 @@ CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This 
 
 **1.0**
 
-```
+```YAML
 machine:
   environment:
     FOO: foo
@@ -57,7 +57,7 @@ machine:
 
 **2.0**
 
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -73,7 +73,7 @@ jobs:
 
 **1.0**
 
-```
+```YAML
 machine:
   ruby:
     version: 2.3
@@ -81,7 +81,7 @@ machine:
 
 **2.0**
 
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -96,7 +96,7 @@ jobs:
 
 **1.0**
 
-```
+```YAML
 machine:
   hosts:
     circlehost: 127.0.0.1
@@ -104,7 +104,7 @@ machine:
 
 **2.0**
 
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -120,7 +120,7 @@ jobs:
 
 **1.0**
 
-```
+```YAML
 # 1.0
 checkout:
   post:
@@ -130,7 +130,7 @@ checkout:
 
 **2.0**
 
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -150,7 +150,7 @@ jobs:
 
 **1.0**
 
-```
+```YAML
 dependencies:
   override:
     - dependecy-install-command:
@@ -169,7 +169,7 @@ test:
 
 The `dependency`, `database`, and `test` sections are translated into a sequence of `run` steps. To learn more about `run` steps, please checkout [this]({{ site.baseurl }}/2.0/configuration-reference/#run) page.
 
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -211,7 +211,7 @@ jobs:
 
 **1.0**
 
-```
+```YAML
 dependencies:
   override:
     - bundle install --path vendor/bundle:
@@ -224,7 +224,7 @@ dependencies:
 **2.0**
 
 {% raw %}
-```
+```YAML
 version: 2
 jobs:
   build:
@@ -252,7 +252,7 @@ Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuratio
 
 **1.0**
 
-```
+```YAML
 deployment:
   staging:
     branch: master

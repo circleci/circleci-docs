@@ -34,14 +34,14 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
 
-```
+```YAML
 golang:1.7.1
 redis:3.0.7
 ```
 
 For public images on Docker Hub, you can pull the image by prefixing the account/team username:
 
-```
+```YAML
 myUsername/couchdb:1.6.1
 ```
 

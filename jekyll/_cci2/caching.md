@@ -22,14 +22,14 @@ When defining a unique identifier for the cache, be careful about overusing `<< 
 
 Having multiple key candidates for restoring a cache increases the odds of a partial cache hit. Instead of:
 
-```yaml
+```YAML
 - restore_cache:
   key: projectname-<< .Branch >>
 ```
 
 try:
 
-```yaml
+```YAML
 - restore_cache:
   keys:
     - projectname-<< .Branch >>-<< checksum "package.json" >>
