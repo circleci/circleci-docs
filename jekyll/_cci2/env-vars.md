@@ -91,3 +91,11 @@ Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 
 **CI_PULL_REQUEST**
 
 Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0
+
+**CIRCLE_PROJECT_USERNAME**
+
+The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123
+
+**CIRCLE_PROJECT_REPONAME**
+
+The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123
