@@ -26,9 +26,9 @@ Each job is an item in the `jobs` list. Each job consists of a job's name as a k
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker | Y (1) | List | Options for docker executor (conflicts with `machine`)
-machine | Y (1) | Map | Options for machine executor (conflicts with `docker`)
-steps | Y | List | A list of steps to be performed
+docker | Y (1) | List | Options for [docker executor](#docker-executor)
+machine | Y (1) | Map | Options for [machine executor](#machine-executor)
+steps | Y | List | A list of [steps](#steps) to be performed
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables
 working_directory | N | String | What directory to run the steps in (default: depends on executor)
@@ -57,20 +57,49 @@ jobs:
 
 ## Executors
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Set the `docker` key to a list of maps:
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types).
 
-KEY | REQUIRED? | TYPE | DESCRIPTION
+### Docker executor
+Configured by `docker` key which takes a list of maps:
+
+Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The name of a custom docker image to use
-command | N | String | The command used as pid 1 when launching the container
+entrypoint | N | String or List | The command used as executable when launching the container
+command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
 user | N | String | Which user to run the command as
 environment | N | Map | A map of environment variable names and values
+{: class="table table-striped"}
 
-In order to avoid parsing ambiguities, `command` can also be a list of strings. The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
+`entrypoint` overrides default entrypoint from Dockerfile.
 
-You can specify image versions from DockerHub using image tags, like `golang` and `mongo` below. Or you can specify image versions using a SHA, like `redis` below.
+`command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint provided here and in image Dockerfile).
 
-If you would rather avoid using docker, you can use the `machine` executor to have a full virtual machine to yourself.
+For [primary container]({{ site.baseurl }}/2.0/glossary#primary-container) (listed first in the list) if no `command` specified then `command` and image entrypoint will be ignored, to avoid errors caused by entrypoint executable consuming significant resources or exiting preliminary.
+
+The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
+
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to DockerHub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types#specifying-images)
+
+Example:
+
+``` YAML
+jobs:
+  build:
+    docker:
+      - image: alpine:3.5 # primary container
+        environment:
+          ENV: CI
+
+      - image: mongo:2.6.8
+        command: [--smallfiles]
+
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
+      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+```
 
 KEY | REQUIRED? | TYPE | DESCRIPTION
 ----|-----------|------|------------
@@ -294,13 +323,13 @@ Example:
               - projectname-{{ .Branch }}-{{ checksum "project.clj" }}
               # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
               - projectname-
-            
+
           # Repeat builds will restore from this step as it will produce the newest cache
           - type: cache-save
             key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}-{{ epoch }}
             paths:
               - /foo
-          
+
           # This step will only save on the first build, then be skipped on subsequent builds.
           - type: cache-save
             key:  projectname-{{ .Branch }}-{{ checksum "project.clj" }}
