@@ -10,31 +10,6 @@ If you can't contribute but still want to report a problem, open an [Issue](http
 ## Local Development
 There are two ways to run a local development server: [with Vagrant](#with-vagrant) or [without Vagrant](#without-vagrant).
 
-### With Vagrant
-The easiest way to get started is by using Vagrant, which gives you a clean environment with all necessary dependencies.
-
-#### Prerequisites
-- Vagrant: [download directly](https://www.vagrantup.com/downloads.html), `brew cask install vagrant`, or `sudo apt-get install vagrant`
-- VirtualBox: [download directly](https://www.virtualbox.org/wiki/Downloads), `brew cask install virtualbox`, or `sudo apt-get install virtualbox`
-
-#### First Run
-To get a local copy of <https://circleci.com/docs/>, run the following commands:
-
-```bash
-git clone https://github.com/circleci/circleci-docs.git
-cd circleci-docs
-./jctl start
-```
-
-The first time you run `./jctl start`, Vagrant will provision the entire VM based on the contents of `boostrap.sh`. This process can take a few minutes, but it's a one-time deal.
-
-Once this is complete, Jekyll will automatically start in the VM. Vagrant will then begin forwarding port 4040, and you'll be able to view the docs at <http://localhost:4040/docs/>.
-
-####  Editing Docs
-All docs can be found in the `jekyll/_docs` directory. Make changes there, then run `./jctl rebuild` to have Jekyll rebuild the site. For more detailed instructions on using `jctl`, see [below](#jekyll-controller-jctl).
-
-As an alternative to `jctl`, you can log into the VM directly to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
-
 ### Without Vagrant
 If you already have a stable Ruby environment and feel comfortable installing dependencies, you can run the server directly on your machine.
 
@@ -57,16 +32,7 @@ jekyll serve
 Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>.
 
 ####  Editing Docs
-All docs can be found in the `jekyll/_docs` directory. Make changes there, then re-run `jekyll serve` to have Jekyll rebuild
-and serve the site.
-
-## Jekyll Controller (`jctl`)
-This is a Bash wrapper script to talk to Jekyll & Vagrant.
-
-- `start`: starts Jekyll; will also start Vagrant, if not already running
-- `rebuild`: rebuilds the site
-- `stop`: shuts down entire VM (including Jekyll)
-- `restart`: `./jctl stop && ./jctl start`
+Please see the `CONTRIBUTING.md` file in this repository for information on working on the documentation.
 
 ## Jekyll Commands
 `jekyll build`: generates static files for the site in the `jekyll/_site` directory
@@ -75,6 +41,39 @@ This is a Bash wrapper script to talk to Jekyll & Vagrant.
 localhost:4000 by default
 
 `jekyll serve --detach`: this serves the site as before, but runs in the background so you can use the same terminal window. Jekyll will display its process ID, so you can use that to kill the process when you want to stop Jekyll. If you lose the PID, you can run `pkill -f jekyll` to kill all Jekyll instances.
+
+### With Vagrant
+The easiest way to get started is by using Vagrant, which gives you a clean environment with all necessary dependencies.
+
+#### Prerequisites
+- Vagrant: [download directly](https://www.vagrantup.com/downloads.html), `brew cask install vagrant`, or `sudo apt-get install vagrant`
+- VirtualBox: [download directly](https://www.virtualbox.org/wiki/Downloads), `brew cask install virtualbox`, or `sudo apt-get install virtualbox`
+
+#### First Run
+To get a local copy of <https://circleci.com/docs/>, run the following commands:
+
+```bash
+git clone https://github.com/circleci/circleci-docs.git
+cd circleci-docs
+./jctl start
+```
+
+The first time you run `./jctl start`, Vagrant will provision the entire VM based on the contents of `boostrap.sh`. This process can take a few minutes, but it's a one-time deal.
+
+Once this is complete, Jekyll will automatically start in the VM. Vagrant will then begin forwarding port 4040, and you'll be able to view the docs at <http://localhost:4040/docs/>.
+
+####  Editing Docs
+Please see the `CONTRIBUTING.md` file in this repository for information on working on the documentation. When running in vagrant, if you make changes, run `./jctl rebuild` to have Jekyll rebuild the site. For more detailed instructions on using `jctl`, see [below](#jekyll-controller-jctl).
+
+As an alternative to `jctl`, you can log into the VM directly to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
+
+## Jekyll Controller (`jctl`)
+This is a Bash wrapper script to talk to Jekyll & Vagrant.
+
+- `start`: starts Jekyll; will also start Vagrant, if not already running
+- `rebuild`: rebuilds the site
+- `stop`: shuts down entire VM (including Jekyll)
+- `restart`: `./jctl stop && ./jctl start`
 
 ## License Information
 Documentation (guides, references, and associated images) is licensed as Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full license can be found [here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the
