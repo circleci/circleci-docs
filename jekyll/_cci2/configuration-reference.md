@@ -6,7 +6,7 @@ categories: [configuring-jobs]
 order: 2000
 ---
 
-## Job Steps
+This document is a reference for `.circleci/config.yml` and lists the built-in job steps available to you.
 
 ## **run**
 
