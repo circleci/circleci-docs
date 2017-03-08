@@ -1,7 +1,7 @@
 ---
 layout: classic-docs2
-title: "Docker and CircleCI 2.0"
-short-title: "Docker and CircleCI 2.0"
+title: "Building Docker Images on CircleCI 2.0"
+short-title: "Building Docker Images"
 categories: [configuring-jobs]
 order: 1
 ---

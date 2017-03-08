@@ -200,7 +200,7 @@ When CircleCI has a choice of multiple keys, the cache will be restored from the
 
 A key is searched against existing keys as a prefix. When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
-For more information on key formatting, see the `key` section of `cache_save` above.
+For more information on key formatting, see the `key` section of `save_cache` above.
 
 ```YAML
 - restore_cache:

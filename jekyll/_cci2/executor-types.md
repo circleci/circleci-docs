@@ -19,7 +19,7 @@ Like any set of choices, there are tradeoffs to using one over the other. Hereâ€
  Full control over build environment | No | Yes
 {: class="table table-striped"}
 
-(1) With [Remote Docker][remote-docker].
+(1) With [Remote Docker][building-docker-images].
 
 ## Docker Executor
 When you choose the `docker` executor, your build will run in a Docker container. You can specify the container image in `.circleci/config.yml`:
@@ -34,11 +34,11 @@ jobs:
 ### Why Use The Docker Executor?
 - your application is self-sufficient
 - your application requires additional services to be tested
-- your application is distributed as a Docker Image (requires using [Remote Docker][remote-docker]
-- you want to use `docker-compose` (requires using [Remote Docker][remote-docker])
+- your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
+- you want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
 
 ### Specifying Images
-Only public images on Docker Hub and Docker Registry are supported. If you want to work with private images/registries, please refer to [Remote Docker][remote-docker]
+Only public images on Docker Hub and Docker Registry are supported. If you want to work with private images/registries, please refer to [Remote Docker][building-docker-images].
 
 Images for the Docker build system can be specified in a few ways:
 
@@ -80,7 +80,7 @@ More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0
 - Fastest way to start a build
 - Use any custom image for a build environment
 - Built-in image caching
-- Build, run, and publish Docker images via [Remote Docker][remote-docker]
+- Build, run, and publish Docker images via [Remote Docker][building-docker-images]
 
 ### Limitations
 - Not always sufficient for complex build environments requiring low-level work with the network/kernel/etc.
@@ -121,4 +121,4 @@ The VM will run Ubuntu 14.04 with a few additional tools installed. It isnâ€™t p
 - Takes additional time to create VM
 - Only the default image is supported; your build may require additional provisioning.
 
-[remote-docker]: {{ site.baseurl }}/2.0/remote-docker
+[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images

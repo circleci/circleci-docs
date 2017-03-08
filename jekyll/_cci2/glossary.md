@@ -16,4 +16,4 @@ All the containers (VMs) running by an [executor](#executor) for a current job.
 A place where build commands executes for Docker Executor (first image listed in config).
 
 ### **Remote Docker**
-Feature enabling building, running and pushing images into Docker Registries within a Docker [executor](#executor). [Learn more]({{ site.baseurl }}/2.0/remote-docker).
+Feature enabling building, running and pushing images into Docker Registries within a Docker [executor](#executor). [Learn more]({{ site.baseurl }}/2.0/building-docker-images).
