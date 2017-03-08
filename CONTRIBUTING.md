@@ -2,9 +2,10 @@
 
 Thank you for your interest in contributing to the CircleCI documentation.
 
-**Note (February 2017): We are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0
-will continue to be improved, but will go into maintenance mode in the coming monnths. If you're considering contributing
-a completely new article, we encourage you to wait until the 2.0 documentation is established.**
+**Note (March 2017): We are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0
+will continue to be improved, but will go into maintenance mode in the coming months. If you're considering contributing
+a completely new article, we encourage you to contribute to the 2.0 documentation found online at 
+[https://circleci.com/docs/2.0/](https://circleci.com/docs/2.0/) or in this repo in `/jekyll/_cci2/`.**
 
 **Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
 
@@ -52,14 +53,8 @@ Make sure to use `classic-docs2` layout for 2.0 docs. The list of categories can
 
 The docs site includes Bootstrap 3 JS and CSS so you can take advantage of Bootstrap alert boxes and the like.
 
-**TODO** show how to do this in markdown - write HTML within a div.
-
 ### Terminology
 
 #### 'Jobs' not 'Builds'
 
-In 2.0, we refer to 1.0 “builds” as “jobs”.  This will become more important as workflows are introduced.
-
-#### Pods Are Not a Thing
-
-For a while, we referred to a group of Docker images composed together as a “pod”. We don‘t do that anymore. Now just say “a group of images treated as a single image” or something similar.
+In 2.0, we refer to 1.0 “builds” as “jobs” because each job in 2.0 runs in a separate container.
