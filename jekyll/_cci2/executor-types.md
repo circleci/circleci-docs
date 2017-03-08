@@ -31,9 +31,9 @@ jobs:
       - image: alpine:3.4
 ```
 
-### You Should Use The Docker Executor If...
-- you have a self-sufficient application
-- you have an application that requires additional services to be tested
+### Why Use The Docker Executor?
+- your application is self-sufficient
+- your application requires additional services to be tested
 - your application is distributed as a Docker Image (requires using [Remote Docker][remote-docker]
 - you want to use `docker-compose` (requires using [Remote Docker][remote-docker])
 
@@ -109,8 +109,7 @@ jobs:
 
 The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
 
-### You Should Use The Machine Executor If...
-
+### Why Use the Machine Executor?
 - your application requires full access to OS resources
 
 ### Advantages
