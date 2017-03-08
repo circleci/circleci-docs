@@ -91,16 +91,12 @@
   name: "Getting Started"
 
 - section: cci2
-  slug: configuring-jobs
-  name: "Configuring Jobs"
+  slug: demo-apps
+  name: "Demo Applications"
 
 - section: cci2
-  slug: languages-and-tools
-  name: "Languages and Tools"
-
-# - section: cci2
-#   slug: example-projects
-#   name: "Example Projects"
+  slug: configuring-jobs
+  name: "Configuring Jobs"
 
 # - section: cci2
 #   slug: troubleshooting-and-debugging

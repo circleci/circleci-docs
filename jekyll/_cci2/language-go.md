@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Language Guide: Go"
+title: "Demo App: Go"
 short-title: "Go"
-categories: [languages-and-tools]
+categories: [demo-apps]
 order: 2
 ---
 

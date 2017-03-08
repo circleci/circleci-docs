@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Language Guide: PHP"
+title: "Demo App: PHP"
 short-title: "PHP"
-categories: [languages-and-tools]
+categories: [demo-apps]
 order: 4
 ---
 

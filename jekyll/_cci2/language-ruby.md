@@ -1,8 +1,8 @@
 ---
 layout: classic-docs2
-title: "Language Guide: Ruby"
+title: "Demo App: Ruby"
 short-title: "Ruby"
-categories: [languages-and-tools]
+categories: [demo-apps]
 order: 6
 ---
 
