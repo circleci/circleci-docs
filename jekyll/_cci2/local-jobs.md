@@ -26,7 +26,7 @@ Local jobs allow you to quickly retry configurations such as connecting on diffe
 
 Imagine you’re a new developer on a team. It could take some time to figure out how to build and test an application.
 
-If the project has been configured to run on CircleCI, you can clone the repo, install the CircleCI CLI and run `circleci-cli build`. This is a great way to get set up quickly with the same environment as your team.
+If the project has been configured to run on CircleCI, you can clone the repo, install the CircleCI CLI and run `circleci build`. This is a great way to get set up quickly with the same environment as your team.
 
 ## Requirements
 
@@ -37,18 +37,18 @@ To use the CircleCI CLI, you’ll need to install and configure Docker. Please f
 To install the CLI, run:
 
 ```Bash
-curl -o /usr/local/bin/circleci-cli https://circle-downloads.s3.amazonaws.com/releases/circleci-builder/circleci-builder-beta && chmod +x /usr/local/bin/circleci-cli
+curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
 (If the current user doesn't have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.)
 
 ## Usage
 
-Calling `circleci-cli` without any options displays usage information:
+Calling `circleci` without any options displays usage information:
 
 ```Bash
-$ circleci-cli
-The CLI tool to be used in circleci.
+$ circleci
+The CLI tool to be used in CircleCI.
 
 Usage:
   circleci [flags]
