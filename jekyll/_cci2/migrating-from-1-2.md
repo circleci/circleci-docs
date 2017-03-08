@@ -153,21 +153,21 @@ jobs:
 ```
 dependencies:
   override:
-    - <dependecy-install-command>:
+    - dependecy-install-command:
         timeout: 180
 
 database:
   override:
-    - <setup-db-command>
+    - setup-db-command
 
 test:
   override:
-    - <test-command>
+    - test-command
 ```
 
 **2.0**
 
-The `dependency`, `database`, and `test` sections are translated into a sequence of 'run' steps.
+The `dependency`, `database`, and `test` sections are translated into a sequence of `run` steps. To learn more about `run` steps, please checkout [this]({{ site.baseurl }}/2.0/configuration-reference/#run) page.
 
 ```
 version: 2
@@ -179,9 +179,9 @@ jobs:
       # In 2.0, you can use multiple different images and group them as a 'Pod'.
       # Because Docker containers normally don't include DBs, you need to bring
       # a build image that serves as DB container in your build.
-      - image: <primary-build-image>
-      - image: <db-image-1>
-      - image: <db-image-2>
+      - image: primary-build-image
+      - image: db-image-1
+      - image: db-image-2
 
     steps:
       - checkout
@@ -189,14 +189,20 @@ jobs:
       # There’s no inference in 2.0, which means there’s nothing to override.
       # You’ll need to manually install your project’s dependencies.
       # The current timeout for no output is hardcoded to 600 seconds
-      - run: <dependency-install-command>
+      - run:
+          name: Install Dependencies
+          command: dependency-install-command
 
       # The DB is not automatically created in 2.0, so we manually set up a test DB
-      - run: <setup-db-command>
+      - run:
+          name: Create Test DB
+          command: setup-db-command
 
       # Again, there is no inference in 2.0, so nothing to override here, either.
       # Just use any test commands.
-      - run: <test-command>
+      - run:
+          name: Run Tests
+          command: test-command
 ```
 
 ## Caching
