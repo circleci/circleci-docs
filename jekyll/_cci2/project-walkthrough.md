@@ -246,7 +246,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
           name: Install Dependencies
           command: pip install -r requirements/dev.txt
@@ -255,7 +255,7 @@ jobs:
           name: Locate site Packages
           command: python -c "import site; print(site.getsitepackages())"
       - save_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
           paths:
             - "~/.cache/pip"
             - "/usr/local/lib/python3.6/site-packages"
