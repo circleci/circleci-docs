@@ -11,19 +11,19 @@ a completely new article, we encourage you to contribute to the 2.0 documentatio
 
 ## Fix or improve an article
 
-For minor changes you can edit the source Markdown file directly on GitHub. The GitHub UI makes it simple to create a
+For minor changes, you can edit the source Markdown file directly on GitHub. The GitHub UI makes it simple to create a
 Pull Request from the edit screen.
 
-The bottom of every article on https://circleci.com/docs/ has a link direct to the source file on GitHub.
+The bottom of every article on https://circleci.com/docs/ has a direct link to the source file on GitHub.
 
 For more extensive editing, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box),
-clone your fork to your local machine, work on your contribution in a branch, and when ready, 
-[open a Pull Request](https://help.github.com/articles/creating-a-pull-request/).
+clone your fork to your local machine, work on your contribution in a branch, and 
+[open a Pull Request](https://help.github.com/articles/creating-a-pull-request/) when ready for review.
 
 ## Make a suggestion or leave feedback
 
 We welcome your feedback and suggestions. Please [open a GitHub Issue](https://github.com/circleci/circleci-docs/issues) 
-on this repository. There you can let us know what needs fixing or suggest content for new documantation.
+on this repository. There you can let us know what needs fixing or suggest content for new documentation.
 
 ---
 
@@ -45,7 +45,7 @@ order: 10
 ---
 ```
 
-Make sure to use `classic-docs2` layout for 2.0 docs. The list of categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml)
+Make sure to use `classic-docs2` layout for 2.0 docs. The list of categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml).
 
 `order` specifies the menu order. You may need to adjust other doc menu orders to get your doc to show in the correct place within its section. (Best practice is to use multiples of 10 - then it's easy to put a new doc between two others).
 
