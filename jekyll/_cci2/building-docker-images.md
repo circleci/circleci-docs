@@ -23,7 +23,7 @@ jobs:
       - setup_docker_engine
 ```
 
-When `setup_docker_engine` executes, a remote environment will be created, and your current [main container][main-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_docker_engine` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker):
@@ -59,16 +59,16 @@ jobs:
 
 Let’s break down what’s happening during this build’s execution:
 
-- All commands are executed in the [main container][main-container].
-- Once `setup_docker_engine` is called, a new remote environment is created, and your main container is configured to use it.
-- All docker-related commands are also executed in your main container, but building/pushing images and running containers happens in the remote Docker Engine.
+- All commands are executed in the [primary container][primary-container].
+- Once `setup_docker_engine` is called, a new remote environment is created, and your primary container is configured to use it.
+- All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 - We use project environment variables to store credentials for Docker Hub.
 
 ## Separation of Environments
 Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
 ### Starting Services
-It’s impossible to start a service in remote docker and ping it directly from a main container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
+It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
 
 ```YAML
 # start service and check that it’s running
@@ -117,4 +117,4 @@ jobs:
 ```
 
 [job-space]: {{ site.baseurl }}/2.0/glossary#job-space
-[main-container]: {{ site.baseurl }}/2.0/glossary#main-container
+[primary-container]: {{ site.baseurl }}/2.0/glossary#primary-container
