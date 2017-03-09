@@ -1,14 +1,14 @@
 ---
 layout: classic-docs2
-title: "Language Guide: Erlang"
-short-title: "Erlang"
+title: "Language Guide: Elixir"
+short-title: "Elixir"
 categories: [language-guides]
 order: 2
 ---
 
 ## Overview
 
-This guide will help you get started with a Phoenix project on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+This guide will help you get started with an Elixir web application using Phoenix on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
 
