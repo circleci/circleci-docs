@@ -6,7 +6,13 @@ categories: [language-guides]
 order: 2
 ---
 
-You can use the following `.circleci/config.yml` to start building Phoenix apps. See below for an explanation of each step.
+## Overview
+
+This guide will help you get started with a Phoenix project on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+
+Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+
+## Sample Configuration
 
 ```YAML
 version: 2
