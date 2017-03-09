@@ -6,13 +6,54 @@ categories: [language-guides]
 order: 4
 ---
 
-This guide will help get you started with a JavaScript project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.
+## Overview
 
-If you want to follow along, fork our [example React app](https://github.com/circleci/cci-demo-react) and add the project through CircleCI. Once you’ve done that, create an empty `.circleci/config.yml` in your project’s root.
+This guide will help you get started with a JavaScript project on CircleCI. If you’re in a rush, just copy the sample configuration below into `.circleci/config.yml` in your project’s root directory and start building.
 
-Enough talk, let’s get started!
+Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
 
----
+## Sample Configuration
+
+```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:7.4.0
+    working_directory: ~/cci-demo-react
+    steps:
+      - checkout
+      - run:
+          name: Pre-Dependencies
+          command: mkdir -p ~/cci-demo-react/artifacts
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: NPM Test
+          command: npm test
+      - store_artifacts:
+          path: ~/cci-demo-react/artifacts
+      - add_ssh_keys
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              # Install Heroku fingerprint
+              mkdir -p ~/.ssh
+              echo 'heroku.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAu8erSx6jh+8ztsfHwkNeFr/SZaSOcvoa8AyMpaerGIPZDB2TKNgNkMSYTLYGDK2ivsqXopo2W7dpQRBIVF80q9mNXy5tbt1WE04gbOBB26Wn2hF4bk3Tu+BNMFbvMjPbkVlC2hcFuQJdH4T2i/dtauyTpJbD/6ExHR9XYVhdhdMs0JsjP/Q5FNoWh2ff9YbZVpDQSTPvusUp4liLjPfa/i0t+2LpNCeWy8Y+V9gUlDWiyYwrfMVI0UwNCZZKHs1Unpc11/4HLitQRtvuk0Ot5qwwBxbmtvCDKZvj1aFBid71/mYdGRPYZMIxq1zgP1acePC1zfTG/lvuQ7d0Pe0kaw==' >> ~/.ssh/known_hosts
+
+              git config --global push.default simple
+              git push -f git@heroku.com:cci-demo-react.git
+            fi
+```
+
+## Get the Code
+
+The configuration above is from a demo React app, which you can access at [https://github.com/circleci/cci-demo-react](https://github.com/circleci/cci-demo-react).
+
+Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
+
+Now we’re ready to build a `config.yml` from scratch.
 
 ## Config Walkthrough
 
@@ -66,15 +107,39 @@ jobs:
 Next, let's install our dependencies. In CircleCI Classic, we would have done this in a separate `dependencies` stage.
 
 ```YAML
-...
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:7.4.0
+    working_directory: ~/cci-demo-react
+    steps:
+      - checkout
       - run:
-          name: Dependencies
+          name: Pre-Dependencies
+          command: mkdir -p ~/cci-demo-react/artifacts
+      - run:
+          name: Install Dependencies
           command: npm install
 ```
 
 Next, we run our tests. Like dependencies, this would have been run in a separate `test` stage in CircleCI Classic.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:7.4.0
+    working_directory: ~/cci-demo-react
+    steps:
+      - checkout
+      - run:
+          name: Pre-Dependencies
+          command: mkdir -p ~/cci-demo-react/artifacts
+      - run:
+          name: Install Dependencies
+          command: npm install
       - run:
           name: NPM Test
           command: npm test
@@ -83,6 +148,23 @@ Next, we run our tests. Like dependencies, this would have been run in a separat
 Remember when we created a directory for our artifacts? CircleCI won't unless we tell it where to look.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:7.4.0
+    working_directory: ~/cci-demo-react
+    steps:
+      - checkout
+      - run:
+          name: Pre-Dependencies
+          command: mkdir -p ~/cci-demo-react/artifacts
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: NPM Test
+          command: npm test
       - store_artifacts:
           path: ~/cci-demo-react/artifacts
 ```
@@ -90,20 +172,6 @@ Remember when we created a directory for our artifacts? CircleCI won't unless we
 We also want to deploy our app to Heroku, so we'll do that with another step after adding the SSH keys needed for deploy. Because 2.0 doesn't yet have built-in commands to deploy by branch, we use a Bash conditional to determine if the current branch is appropriate.
 
 If it is the right branch, we'll add the SSH key fingerprint directly. Note the git commands as well.
-
-```YAML
-      - add_ssh_keys
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo 'heroku.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAu8erSx6jh+8ztsfHwkNeFr/SZaSOcvoa8AyMpaerGIPZDB2TKNgNkMSYTLYGDK2ivsqXopo2W7dpQRBIVF80q9mNXy5tbt1WE04gbOBB26Wn2hF4bk3Tu+BNMFbvMjPbkVlC2hcFuQJdH4T2i/dtauyTpJbD/6ExHR9XYVhdhdMs0JsjP/Q5FNoWh2ff9YbZVpDQSTPvusUp4liLjPfa/i0t+2LpNCeWy8Y+V9gUlDWiyYwrfMVI0UwNCZZKHs1Unpc11/4HLitQRtvuk0Ot5qwwBxbmtvCDKZvj1aFBid71/mYdGRPYZMIxq1zgP1acePC1zfTG/lvuQ7d0Pe0kaw==' >> ~/.ssh/known_hosts
-
-              git config --global push.default simple
-              git push -f git@heroku.com:cci-demo-react.git
-            fi
-```
-
-And we're done! Let's see what the whole `config.yml` looks like now:
 
 ```YAML
 version: 2
@@ -138,6 +206,6 @@ jobs:
             fi
 ```
 
-Nice! You just set up CircleCI for a React app. Check out our project’s corresponding build on CircleCI [here](https://circleci.com/gh/circleci/cci-demo-react).
+Nice! You just set up CircleCI for a React app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-react).
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
