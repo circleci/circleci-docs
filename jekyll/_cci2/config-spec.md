@@ -101,13 +101,23 @@ jobs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-KEY | REQUIRED? | TYPE | DESCRIPTION
+### Machine executor
+Configured by `machine` key which takes a map:
+
+Key | Required | Type | Description
 ----|-----------|------|------------
 enabled | Y | Boolean | This must be true in order to enable the `machine` executor.
+{: class="table table-striped"}
 
 As a shorthand you can set the `machine` key to `true`.
 
-This executor defaults `working_directory` to a directory in `/tmp` named after the repository.
+Example:
+
+``` YAML
+jobs:
+  build:
+    machine: true
+```
 
 <a name="steps" />
 ## `steps`
