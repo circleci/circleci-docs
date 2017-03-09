@@ -52,19 +52,20 @@ The CLI tool to be used in CircleCI.
 
 Usage:
   circleci [flags]
-  circleci [command]a
+  circleci [command]
 
 Available Commands:
   build       run a full build locally
+  config      validate and update configuration files
   tests       collect and split files with tests
   version     output version info
 
 Flags:
-  -c, --config string   config file (default is $HOME/.circleci/agent.toml)
+  -c, --config string   config file (default is .circleci/config.yml)
       --taskId string   TaskID
       --verbose         emit verbose logging output
 
-Use 'circleci [command] --help' for more information about a command.
+Use "circleci [command] --help" for more information about a command.
 ```
 
 ## Updating
