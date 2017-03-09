@@ -119,10 +119,9 @@ jobs:
     machine: true
 ```
 
-<a name="steps" />
 ## `steps`
 
-The `steps` setting in a job should be a list of single key/value pair maps, the key to which indicates the step type. The value from the pair may be either a configuration map or a string. For example, using a map:
+The `steps` setting in a job should be a list of single key/value pairs, the key to which indicates the step type. The value may be either a configuration map or a string (depends on a step). For example, using a map:
 
 ```
 jobs:
@@ -132,13 +131,13 @@ jobs:
       - FOO: "bar"
     steps:
       - run:
-          name: run tests
+          name: Running tests
           command: make test
 ```
 
-Here, the `name` attribute is used by the UI for display purposes. In the absence of a `name` attribute, some sensible default MAY be filled in by the step implementation. The semantics of `command` are defined by the step.
+Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific for `run` step and defines command to execute.
 
-If the value of the step invocation key is a string, a step MAY implement default behaviour. This enables us to reduce the example further:
+Some steps may implement a shorthand semantic. For example:
 
 ```
 jobs:
@@ -147,13 +146,9 @@ jobs:
       - run: make test
 ```
 
-Applying our rules:
+Here `run` step allows us to just specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
 
-1. There is one key, which we treat as a reference to a step type `run`.
-2. The value associated with a key is not a map, but a string, which is interpreted by the builtin `run` step as being the value of `command`, `run`'s only required configuration attribute.
-3. The absence of a `name` attribute results in the `run` step using the value of `command` to fill in `name`.
-
-Another shorthand is to simply use a string instead of the whole step map:
+Another shorthand, which is possible for some steps, is to simply use step name as string instead of key/value pair:
 
 ```
 jobs:
@@ -162,29 +157,29 @@ jobs:
       - checkout
 ```
 
-This is the equivalent of an empty map under the `checkout` key.
+In this case `checkout` step will checkout project source code into job [`working_directory`](#jobs).
 
-This gives us:
+In general all steps can be describe as:
 
-KEY | REQUIRED? | TYPE | DESCRIPTION
+Key | Required | Type | Description
 ----|-----------|------|------------
-&lt;step-type> | Y | Map, or String | A configuration map for the step or some string whose semantics are defined by the step.
+&lt;step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
+{: class="table table-striped"}
 
 The optional configuration map for a step invocation:
 
-KEY | REQUIRED? | TYPE | DESCRIPTION
+Key | Required | Type | Description
 ----|-----------|------|------------
-name | N | String | Title of the step to be shown in the Circle UI
-no_output_timeout | N | Integer | Number of seconds of silence allowed before the step times out and fails (default: 600)
-absolute_timeout | N | Integer | Number of seconds a step may take overall before it times out and fails (default: ??)
+name | N | String | Title of the step to be shown in the CircleCI UI (default: depends on step)
 background | N | Boolean | Whether or not this step should run in the background (default: false)
-working_directory | N | String | What directory to run this step in
+working_directory | N | String | What directory to run this step in (default: job [`working_directory`](#jobs))
+{: class="table table-striped"}
 
-...along with any other configuration attributes with semantics defined by the step.
+...along with any other configuration attributes specific for particular step (see [below](#built-in-steps)).
 
 Note that setting `working_directory` will only affect this step, not the ones following it.
 
-Attempts to set `background` in conflict with a steps definition will result in error. A step with `background` set will allow the job to proceed to the next step immediately. A failure of a backgrounded step will cause the entire build to halt and fail.
+Attempts to set `background` in conflict with a steps definition will result in error. A step with `background` set will allow the job to proceed to the next step immediately.
 
 ### Built-in steps
 
