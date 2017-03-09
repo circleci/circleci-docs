@@ -113,3 +113,8 @@
 # - section: cci2
 #   slug: help-and-support
 #   name: "Help and Support"
+
+# CircleCI API Docs
+- section: api
+  slug: reference
+  name: "API Reference"

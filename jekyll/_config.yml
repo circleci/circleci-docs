@@ -33,6 +33,12 @@ collections:
     permalink: /2.0/:path/
     prefix: "/2.0"
     selectorName: "2.0"
+  api:
+    name: "API Docs"
+    output: true
+    permalink: /api/:path/
+    prefix: "/api"
+    selectorName: "API"
 
 twitter_username: circleci
 github_username:  circleci
