@@ -74,3 +74,23 @@ The CLI tool automatically checks for updates and will prompt you if one is avai
 ## Using the CircleCI CLI non-locally
 
 The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs) to see how you use the tool to manage paralellism in a remote hosted environment.
+
+## Limitations
+
+Although running jobs locally with `circleci` is very helpful, there are some limitations.
+
+#### Machine Executor
+
+You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run it's jobs.
+
+#### Caching
+
+Currently caching is not supported in local jobs. When you have either `save_cache` or `restore_cache` step in your config, `circleci` skip the steps with warnings.
+
+#### Relative Path for working_directory
+
+Using a relative path for `working_directory` is not supported in local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exists.
+
+This happens because `circleci` mounts the current directory to `working_directory` in order to skip the checkout step but Docker that doesn't allow the container path to be relative in volume. See [here](https://github.com/docker/docker/issues/4830) for more details.
+
+The workaround is updating `working_directory` to use an absolute path.
