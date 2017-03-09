@@ -55,7 +55,7 @@ Images for the Docker build system can be specified in a few ways:
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
 ### Multiple Images
-It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [main container]( {{ site.baseurl }}/2.0/glossary#main-container).
+It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [primary container]( {{ site.baseurl }}/2.0/glossary#primary-container).
 
 ```YAML
 jobs:
