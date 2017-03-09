@@ -7,7 +7,6 @@
 	{% if page.redirect %}<meta http-equiv="refresh" content="0; url={{ page.redirect }}">{% endif %}
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl }}">
 	<link href="https://d3r49iyjzglexf.cloudfront.net/favicon-066b37ff00f0f968b903c13ae88b5573b62665aea8fbe91bb61c55dfa9446523.ico" rel="icon" type="image/png" />
 	<link rel="stylesheet" href="{{ "/assets/css/site.css" | prepend: site.baseurl }}" />
     <link rel="stylesheet" href="{{ "/assets/css/syntax.css" | prepend: site.baseurl }}" />
