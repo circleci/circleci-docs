@@ -156,6 +156,11 @@ p {
 // Homepage
 body.homepage{
 
+  .article-container{
+	  padding: 30px 70px 0;
+	  width: 100%;
+  }
+
 	article{
 		display: flex;
 		flex-wrap: wrap;
