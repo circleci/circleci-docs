@@ -8,11 +8,11 @@ order: 25
 
 ## Introduction
 
-This tutorial will teach you important concepts about using CircleCI. Whether you’re new to the platform or a longtime user, you’ll benefit from reading through this walkthrough.
+This tutorial will teach you important concepts about using CircleCI. We recommend it to all CircleCI users whether you are new to the platform or if you have experience using CircleCI 1.0.
 
-You’ll learn how to build, test, and deploy a working web application* using CircleCI. This application is general enough that it should be relevant no matter what language/stack you’re using.
+You will learn how to build, test and deploy and application using CircleCI. The application is a working web application and will be **relevant to you no matter what language or stack you are using**.
 
-*Note: CircleCI 2.0 does not currently support build iOS and Android applications. Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
+**Note: CircleCI 2.0 does not currently support build iOS and Android applications. Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
 
 ## The Demo App - 'Circulate'
 
@@ -93,7 +93,7 @@ jobs:
       - run: echo "hello world"
 ```
 
-The above config has one job we've called 'build'. **Every config file must have a job called 'build'**. This is the only job that will be automatically picked up and run by CircleCI.
+The above config has one job we've called 'build'. **Every config file must have a job called 'build'**. This is the only job that will be automatically picked up and run by CircleCI. 
 
 We then set some configuration values for the 'build' job. First we specify a working directory with `working_directory` where commands will be executed.
 
