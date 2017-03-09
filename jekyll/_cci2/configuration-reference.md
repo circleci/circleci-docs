@@ -220,7 +220,7 @@ Directory containing JUnit XML or Cucumber JSON test metadata files.
 The directory’s layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
 
 ```YAML
-- store_test_reults:
+- store_test_results:
     path: /tmp/test-results
 ```
 
