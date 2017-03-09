@@ -60,6 +60,11 @@ nav.sidebar{
 	.algolia-autocomplete {
 		width: 100%;
 	}
+
+	.algolia-autocomplete.algolia-autocomplete-right .ds-dropdown-menu {
+		left: 0 !important;
+		right: none !important;
+	}
 }
 
 
