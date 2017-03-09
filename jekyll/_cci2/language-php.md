@@ -6,11 +6,72 @@ categories: [language-guides]
 order: 5
 ---
 
-This guide will help get you started with a PHP project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.
+## Overview
 
-If you want to follow along, fork our [example Lumen app](https://github.com/circleci/cci-demo-lumen) and add the project through CircleCI. Once you’ve done that, create an empty `.circleci/config.yml` in your project’s root.
+This guide will help you get started with a PHP project on CircleCI. If you’re in a rush, just copy the sample configuration below into `.circleci/config.yml` in your project’s root directory and start building.
 
-Enough talk, let's get started!
+Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+
+## Sample Configuration
+
+```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - checkout
+      - run:
+          name: Install PHP Extensions
+          command: docker-php-ext-install pdo pdo_mysql zip
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+      - run:
+          name: Install Project Dependencies
+          command: php composer.phar install
+      - run:
+          name: Initialize Database
+          command: |
+            php artisan migrate:refresh
+            php artisan db:seed
+      - run:
+          name: Run Tests
+          command: vendor/bin/phpunit
+```
+
+## Get the Code
+
+The configuration above is from a demo Go app, which you can access at [https://github.com/circleci/cci-demo-lumen](https://github.com/circleci/cci-demo-lumen).
+
+Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
+
+Now we’re ready to build a `config.yml` from scratch.
 
 ---
 
@@ -94,6 +155,32 @@ jobs:
 Now we can actually check out our code, which will go in the working directory we specified earlier.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
       - checkout
 ```
 
@@ -102,6 +189,33 @@ Next, we're going to run a pre-installed script called `docker-php-ext-install`.
 We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. Normally, we'd use the `RUN` command in a `Dockerfile`, but in this case, we have to run it manually:
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - checkout
       - run:
           name: Install PHP Extensions
           command: docker-php-ext-install pdo pdo_mysql zip
@@ -110,6 +224,36 @@ We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. No
 We're going to be using Composer to install project dependencies, so let's install that next. Forgive the verbosity, but these are the official install instructions.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - checkout
+      - run:
+          name: Install PHP Extensions
+          command: docker-php-ext-install pdo pdo_mysql zip
       - run:
           name: Install Composer
           command: |
@@ -122,6 +266,43 @@ We're going to be using Composer to install project dependencies, so let's insta
 Now that Composer has been installed, let's use it to install the project's dependencies, located in `composer.json`.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - checkout
+      - run:
+          name: Install PHP Extensions
+          command: docker-php-ext-install pdo pdo_mysql zip
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
       - run:
           name: Install Project Dependencies
           command: php composer.phar install
@@ -130,6 +311,46 @@ Now that Composer has been installed, let's use it to install the project's depe
 Next, let's initialize required database (DB) tables and seed it with initial data.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: php:7.0-apache
+        environment:
+          APP_ENV: local
+          APP_DEBUG: true
+          APP_KEY: kjcndjjksddwdwdw
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: testdb
+          DB_USERNAME: root
+          DB_PASSWORD: password
+          CACHE_DRIVER: memcached
+          QUEUE_DRIVER: sync
+      - image: mariadb:5.5
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: /var/www/html
+    steps:
+      - run:
+          name: Install System Packages
+          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - checkout
+      - run:
+          name: Install PHP Extensions
+          command: docker-php-ext-install pdo pdo_mysql zip
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
+      - run:
+          name: Install Project Dependencies
+          command: php composer.phar install
       - run:
           name: Initialize Database
           command: |
@@ -138,14 +359,6 @@ Next, let's initialize required database (DB) tables and seed it with initial da
 ```
 
 Finally, let's run our tests using PHPUnit.
-
-```YAML
-      - run:
-          name: Run Tests
-          command: vendor/bin/phpunit
-```
-
-And we're done! Let's see what the whole `config.yml` looks like now:
 
 ```YAML
 version: 2
@@ -198,6 +411,6 @@ jobs:
           command: vendor/bin/phpunit
 ```
 
-Nice! You just set up CircleCI for a Lumen app. Check out our project’s corresponding build on CircleCI [here](https://circleci.com/gh/circleci/cci-demo-php).
+Nice! You just set up CircleCI for a Lumen app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-lumen).
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
