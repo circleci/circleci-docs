@@ -29,16 +29,16 @@ Key | Required | Type | Description
 docker | Y (1) | List | Options for [docker executor](#docker-executor)
 machine | Y (1) | Map | Options for [machine executor](#machine-executor)
 steps | Y | List | A list of [steps](#steps) to be performed
+working_directory | Y | String | What directory to run the steps in (default: depends on executor)
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables
-working_directory | N | String | What directory to run the steps in (default: depends on executor)
 {: class="table table-striped"}
 
 (1) exactly one of them should be specified. It is an error to set more than one.
 
 If `parallelism` is set to N > 1, then N independent executors will be set up to each run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs).
 
-`working_directory` will be created automatically if it doesn't exist. It is strongly recommended to set `working_directory` and not rely on the default.
+`working_directory` will be created automatically if it doesn't exist.
 
 Example:
 ``` YAML
