@@ -6,7 +6,13 @@ categories: [language-guides]
 order: 2
 ---
 
-You can use the following `.circleci/config.yml` to start building Phoenix apps. See below for an explanation of each step.
+## Overview
+
+This guide will help you get started with a Phoenix project on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+
+Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+
+## Sample Configuration
 
 ```YAML
 version: 2
@@ -23,6 +29,10 @@ jobs:
       - run: mix deps.get
       - run: mix ecto.create
 ```
+
+## Get the Code
+
+Coming soon...
 
 ## Config Walkthrough
 
@@ -49,9 +59,7 @@ Directly beneath `working_directory`, we can specify container images for the bu
 
 ```YAML
 version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-phoenix
+...
     docker:
       - image: trenpixster/elixir:1.3.2
       - image: postgres:9.4.1
@@ -66,15 +74,7 @@ Now we’ll add several `steps` within the `build` job.
 We’ll do 3 things: checkout the codebase, install missing dependencies, and create the storage for the repo:
 
 ```YAML
-version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-phoenix
-    docker:
-      - image: trenpixster/elixir:1.3.2
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: ubuntu
+...
     steps:
       - checkout
       - run: mix deps.get
