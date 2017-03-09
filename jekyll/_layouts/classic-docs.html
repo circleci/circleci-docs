@@ -8,7 +8,7 @@
 <div class="outer">
 	{% include global-nav.html %}
 	<div class="main-body">
-		{% include sidebar.html %}
+		{% unless page.url == "/" %}{% include sidebar.html %}{% endunless %}
 		<div class="article-container docs">
 			<form id="site-search" class="doc-search" action="">
 				<input id="cci-search" name="search" type="search" placeholder="What can we help you find?" class="form-control" />
