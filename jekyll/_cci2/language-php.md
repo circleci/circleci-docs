@@ -88,7 +88,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll use Apache's default DocumentRoot so its vhost can serve the PHP project.
 
 ```YAML
-version: 2
+...
 jobs:
   build:
     working_directory: /var/www/html
@@ -101,9 +101,7 @@ Directly beneath `working_directory`, we’ll specify container images for this 
 We'll pull in the 7.0-apache image from the official PHP repository on Docker Hub along with MariaDB. Both images have their own `environment` settings.
 
 ```YAML
-jobs:
-  build:
-    working_directory: /var/www/html
+...
     docker:
       - image: php:7.0-apache
         environment:
@@ -141,11 +139,7 @@ This sets a (horrible) root password so we can access the DB.
 Next, we'll add `steps` to the job. Normally, we’d check out our project's code first, but the Docker image we chose doesn’t include Git. Since we need to install Git anyway, we'll also install other system/distribution packages that we'll need.
 
 ```YAML
-jobs:
-  build:
-    working_directory: /var/www/html
-    docker:
-      ...
+...
     steps:
       - run:
           name: Install System Packages
@@ -155,32 +149,7 @@ jobs:
 Now we can actually check out our code, which will go in the working directory we specified earlier.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+...
       - checkout
 ```
 
@@ -189,33 +158,7 @@ Next, we're going to run a pre-installed script called `docker-php-ext-install`.
 We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. Normally, we'd use the `RUN` command in a `Dockerfile`, but in this case, we have to run it manually:
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - checkout
+...
       - run:
           name: Install PHP Extensions
           command: docker-php-ext-install pdo pdo_mysql zip
@@ -224,36 +167,7 @@ jobs:
 We're going to be using Composer to install project dependencies, so let's install that next. Forgive the verbosity, but these are the official install instructions.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - checkout
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
+...
       - run:
           name: Install Composer
           command: |
@@ -266,43 +180,7 @@ jobs:
 Now that Composer has been installed, let's use it to install the project's dependencies, located in `composer.json`.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - checkout
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
-      - run:
-          name: Install Composer
-          command: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php');"
+...
       - run:
           name: Install Project Dependencies
           command: php composer.phar install
@@ -311,46 +189,7 @@ jobs:
 Next, let's initialize required database (DB) tables and seed it with initial data.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - checkout
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
-      - run:
-          name: Install Composer
-          command: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php');"
-      - run:
-          name: Install Project Dependencies
-          command: php composer.phar install
+...
       - run:
           name: Initialize Database
           command: |
@@ -361,51 +200,7 @@ jobs:
 Finally, let's run our tests using PHPUnit.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: php:7.0-apache
-        environment:
-          APP_ENV: local
-          APP_DEBUG: true
-          APP_KEY: kjcndjjksddwdwdw
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testdb
-          DB_USERNAME: root
-          DB_PASSWORD: password
-          CACHE_DRIVER: memcached
-          QUEUE_DRIVER: sync
-      - image: mariadb:5.5
-        environment:
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: password
-    working_directory: /var/www/html
-    steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
-      - checkout
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
-      - run:
-          name: Install Composer
-          command: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php');"
-      - run:
-          name: Install Project Dependencies
-          command: php composer.phar install
-      - run:
-          name: Initialize Database
-          command: |
-            php artisan migrate:refresh
-            php artisan db:seed
+...
       - run:
           name: Run Tests
           command: vendor/bin/phpunit

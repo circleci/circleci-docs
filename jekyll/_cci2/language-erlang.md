@@ -55,9 +55,7 @@ Directly beneath `working_directory`, we can specify container images for the bu
 
 ```YAML
 version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-phoenix
+...
     docker:
       - image: trenpixster/elixir:1.3.2
       - image: postgres:9.4.1
@@ -72,15 +70,7 @@ Now we’ll add several `steps` within the `build` job.
 We’ll do 3 things: checkout the codebase, install missing dependencies, and create the storage for the repo:
 
 ```YAML
-version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-phoenix
-    docker:
-      - image: trenpixster/elixir:1.3.2
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: ubuntu
+...
     steps:
       - checkout
       - run: mix deps.get

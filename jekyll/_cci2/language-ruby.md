@@ -67,7 +67,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
 ```YAML
-version: 2
+...
 jobs:
   build:
     working_directory: ~/cci-demo-rails
@@ -78,10 +78,7 @@ This path will be used as the default working directory for the rest of the `job
 Directly beneath `working_directory`, we can specify container images for the build under a `docker` key.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-rails
+...
     docker:
       - image: ruby:2.3
       - image: postgres:9.4.1
@@ -98,17 +95,7 @@ First we check out the codebase.
 In our second step, we install NodeJS because Docker’s Ruby image doesn’t include it. This command will also install any tools/headers required to build native gems.
 
 ```YAML
-version: 2
-jobs:
-  working_directory: ~/cci-demo-rails
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          # POSTGRES_USER env var will set the default superuser in the image
-          POSTGRES_USER: root
-
+...
     steps:
       - checkout
       - run:
@@ -119,21 +106,7 @@ jobs:
 Now we have to install our actual dependencies for the project.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-    working_directory: ~/cci-demo-rails
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
+...
       - run:
           name: Install Ruby Dependencies
           command: bundle install
@@ -142,24 +115,7 @@ jobs:
 Next, set up the DB.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-    working_directory: ~/cci-demo-rails
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
-      - run:
-          name: Install Ruby Dependencies
-          command: bundle install
+...
       - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
@@ -178,27 +134,7 @@ Rails will read `config/database.yml` and create a test DB automatically with `d
 Run our migrations.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-    working_directory: ~/cci-demo-rails
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
-      - run:
-          name: Install Ruby Dependencies
-          command: bundle install
-      - run:
-          name: Create DB
-          command: bundle exec rake db:create db:schema:load --trace
+...
       - run:
           name: DB Migrations
           command: bundle exec rake db:migrate
@@ -207,30 +143,7 @@ jobs:
 Finally, run our tests.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-    working_directory: ~/cci-demo-rails
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
-      - run:
-          name: Install Ruby Dependencies
-          command: bundle install
-      - run:
-          name: Create DB
-          command: bundle exec rake db:create db:schema:load --trace
-      - run:
-          name: DB Migrations
-          command: bundle exec rake db:migrate
+...
       - run:
           name: Run Tests
           command: bundle exec rake test

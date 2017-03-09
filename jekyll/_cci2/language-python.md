@@ -85,6 +85,7 @@ We also need to specify container images for this build in `docker`.
 We'll need to tell the Flask app to run in `testing` mode by setting it in `environment`, as well as where to find the database (DB). This is a special local URL linked to an additional Docker container.
 
 ```YAML
+...
 jobs:
   build:
     docker:
@@ -97,14 +98,7 @@ jobs:
 We'll also create a container for PostgreSQL, along with 3 environment variables for initializing the database.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+...
       - image: postgres:9.5.5
         environment:
           POSTGRES_USER: ubuntu
@@ -112,25 +106,19 @@ jobs:
           POSTGRES_PASSWORD: ""
 ```
 
+In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+
+```YAML
+...
+    working_directory: /home/ubuntu/cci-demo-flask
+```
+
 Now we need to add several `steps` within the `build` job.
 
 You could install NPM, but we’re going to use Yarn for reasons that are outside the scope of this document.
 
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
+...
     steps:
       - checkout
       - run:
@@ -147,30 +135,7 @@ Let's restore the Yarn package cache if it's available.
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
+...
       - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
@@ -180,32 +145,7 @@ Install both Yarn and Python dependencies.
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
+...
       - run:
           name: Install Dependencies
           command: yarn && pip install -r requirements.txt
@@ -215,35 +155,7 @@ jobs:
 Specify where to save that Yarn cache.
 
 {% raw %}
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
+...
       - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
@@ -255,39 +167,7 @@ Run our tests.
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
-      - save_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - "/home/ubuntu/.yarn-cache"
+...
       - run:
           name: Run Tests
           command: python manage.py test --coverage
@@ -298,42 +178,7 @@ Store test results as an artifact.
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
-      - save_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - "/home/ubuntu/.yarn-cache"
-      - run:
-          name: Run Tests
-          command: python manage.py test --coverage
+...
       - store_artifacts:
           path: test-reports/coverage
           destination: reports
@@ -343,46 +188,7 @@ jobs:
 Finally, let's specify where those test results are actually located.
 
 {% raw %}
-```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.5
-        environment:
-          FLASK_CONFIG: testing
-          DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.5.5
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
-    working_directory: /home/ubuntu/cci-demo-flask
-    steps:
-      - checkout
-      - run:
-          name: Install Yarn
-          command: |
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
-            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
-            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
-      - save_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - "/home/ubuntu/.yarn-cache"
-      - run:
-          name: Run Tests
-          command: python manage.py test --coverage
-      - store_artifacts:
-          path: test-reports/coverage
-          destination: reports
+...
       - store_test_results:
           path: "test-reports/"
 ```
