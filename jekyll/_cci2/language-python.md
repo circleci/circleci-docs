@@ -178,6 +178,7 @@ jobs:
 
 Install both Yarn and Python dependencies.
 
+{% raw %}
 ```YAML
 version: 2
 jobs:
@@ -209,6 +210,7 @@ jobs:
           name: Install Dependencies
           command: yarn && pip install -r requirements.txt
 ```
+{% endraw %}
 
 Specify where to save that Yarn cache.
 
@@ -251,6 +253,7 @@ jobs:
 
 Run our tests.
 
+{% raw %}
 ```YAML
 version: 2
 jobs:
@@ -289,9 +292,11 @@ jobs:
           name: Run Tests
           command: python manage.py test --coverage
 ```
+{% endraw %}
 
 Store test results as an artifact.
 
+{% raw %}
 ```YAML
 version: 2
 jobs:
@@ -333,9 +338,11 @@ jobs:
           path: test-reports/coverage
           destination: reports
 ```
+{% endraw %}
 
 Finally, let's specify where those test results are actually located.
 
+{% raw %}
 ```YAML
 version: 2
 jobs:
@@ -379,6 +386,7 @@ jobs:
       - store_test_results:
           path: "test-reports/"
 ```
+{% endraw %}
 
 Nice! You just set up CircleCI for a Flask app. Nice! Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-flask).
 
