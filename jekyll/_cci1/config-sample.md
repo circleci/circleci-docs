@@ -34,7 +34,7 @@ machine:
   # Add some environment variables
   environment:
     CIRCLE_ENV: test
-    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
 
 ## Customize checkout
 checkout:
