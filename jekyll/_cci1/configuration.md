@@ -387,7 +387,7 @@ FYI, you have the option of pointing to the location of your stored database con
 ```
 machine:
   environment:
-    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
 ```
 
 <h2 id="compile">Custom Compile Commands</h2>
