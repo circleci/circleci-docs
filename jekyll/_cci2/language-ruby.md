@@ -6,11 +6,51 @@ categories: [language-guides]
 order: 7
 ---
 
-This guide will help get you started with a Ruby project on CircleCI 2.0. This walkthrough will be pretty thorough and will explain why we need each piece of configuration. If you’re just looking for a sample `config.yml` file, then just skip to the end.
+## Overview
 
-If you want to follow along, fork our [example Rails app](https://github.com/circleci/cci-demo-rails) and add the project through CircleCI. Once you've done that, create an empty `.circleci/config.yml` in your project’s root.
+This guide will help you get started with a Ruby project on CircleCI. If you’re in a rush, just copy the sample configuration below into `.circleci/config.yml` in your project’s root directory and start building.
 
-Enough talk, let’s get started!
+Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+
+## Sample Configuration
+
+```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
+    working_directory: ~/cci-demo-rails
+    steps:
+      - checkout
+      - run:
+          name: Install System Dependencies
+          command: apt-get update -qq && apt-get install -y build-essential nodejs
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle install
+      - run:
+          name: Create DB
+          command: bundle exec rake db:create db:schema:load --trace
+      - run:
+          name: DB Migrations
+          command: bundle exec rake db:migrate
+      - run:
+          name: Run Tests
+          command: bundle exec rake test
+```
+
+## Get the Code
+
+The configuration above is from a demo Go app, which you can access at [https://github.com/circleci/cci-demo-rails](https://github.com/circleci/cci-demo-rails).
+
+Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
+
+Now we’re ready to build a `config.yml` from scratch.
 
 ---
 
@@ -79,6 +119,21 @@ jobs:
 Now we have to install our actual dependencies for the project.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
+    working_directory: ~/cci-demo-rails
+    steps:
+      - checkout
+      - run:
+          name: Install System Dependencies
+          command: apt-get update -qq && apt-get install -y build-essential nodejs
       - run:
           name: Install Ruby Dependencies
           command: bundle install
@@ -87,6 +142,24 @@ Now we have to install our actual dependencies for the project.
 Next, set up the DB.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
+    working_directory: ~/cci-demo-rails
+    steps:
+      - checkout
+      - run:
+          name: Install System Dependencies
+          command: apt-get update -qq && apt-get install -y build-essential nodejs
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle install
       - run:
           name: Create DB
           command: bundle exec rake db:create db:schema:load --trace
@@ -94,7 +167,7 @@ Next, set up the DB.
 
 Rails will read `config/database.yml` and create a test DB automatically with `db:create` task. Ensure that `POSTGRES_USER` env var matches a username specified in your `database.yml`.
 
-**(Optional)** If you want to create a DB manually, you can do with `createdb` command. We are installing postgresql package because we need `createdb` command.
+**(Optional)** If you want to create a DB manually, you can do so with `createdb` command. We are installing the postgresql package because we need the `createdb` command.
 
 ```YAML
       - run: |
@@ -105,20 +178,33 @@ Rails will read `config/database.yml` and create a test DB automatically with `d
 Run our migrations.
 
 ```YAML
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.3
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root
+
+    working_directory: ~/cci-demo-rails
+    steps:
+      - checkout
+      - run:
+          name: Install System Dependencies
+          command: apt-get update -qq && apt-get install -y build-essential nodejs
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle install
+      - run:
+          name: Create DB
+          command: bundle exec rake db:create db:schema:load --trace
       - run:
           name: DB Migrations
           command: bundle exec rake db:migrate
 ```
 
 Finally, run our tests.
-
-```YAML
-      - run:
-          name: Run Tests
-          command: bundle exec rake test
-```
-
-And we're done! Let's see the whole `config.yml`:
 
 ```YAML
 version: 2
@@ -148,8 +234,9 @@ jobs:
       - run:
           name: Run Tests
           command: bundle exec rake test
+
 ```
 
-Nice! You just set up CircleCI for a Rails app. Check out our project’s corresponding build on CircleCI [here](https://circleci.com/gh/circleci/cci-demo-rails).
+Nice! You just set up CircleCI for a Rails app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-rails).
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
