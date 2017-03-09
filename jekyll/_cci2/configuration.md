@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "CircleCI 2.0"
 redirect: /docs/2.0/
 ---

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Language Guide: JavaScript"
 short-title: "JavaScript"
 categories: [language-guides]

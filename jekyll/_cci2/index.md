@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Welcome to CircleCI 2.0"
 permalink: /2.0/index.html
 ---

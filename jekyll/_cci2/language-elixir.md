@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Language Guide: Elixir"
 short-title: "Elixir"
 categories: [language-guides]

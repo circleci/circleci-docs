@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Running Jobs Locally"
 short-title: "Running Jobs Locally"
 categories: [configuring-jobs]

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Job Information and Insights"
 short-title: "Job Information and Insights"
 categories: [configuring-jobs]

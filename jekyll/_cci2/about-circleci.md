@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "About CircleCI"
 short-title: "About CircleCI"
 categories: [getting-started]
