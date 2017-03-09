@@ -104,13 +104,14 @@ When you choose the `machine` executor, your build will run in a dedicated, ephe
 ```YAML
 jobs:
   build:
-    machine: true
+    machine:
+      enabled: true
 ```
 
 The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
 
 ### Why Use the Machine Executor?
-- your application requires full access to OS resources
+- Your application requires full access to OS resources
 
 ### Advantages
 - Gives full control over build environment
