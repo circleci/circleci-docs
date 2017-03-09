@@ -20,12 +20,12 @@ Language | Framework | GitHub Repo Name
 [Ruby] | Rails | [cci-demo-rails]
 {: class="table"}
 
-[Elixir]: {{ site.baseurl }}/2.0/language-elixir
-[Go]: {{ site.baseurl }}/2.0/language-go
-[JavaScript]: {{ site.baseurl }}/2.0/language-javascript
-[PHP]: {{ site.baseurl }}/2.0/language-php
-[Python]: {{ site.baseurl }}/2.0/language-python
-[Ruby]: {{ site.baseurl }}/2.0/language-ruby
+[Elixir]: {{ site.baseurl }}/2.0/language-elixir/
+[Go]: {{ site.baseurl }}/2.0/language-go/
+[JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
+[PHP]: {{ site.baseurl }}/2.0/language-php/
+[Python]: {{ site.baseurl }}/2.0/language-python/
+[Ruby]: {{ site.baseurl }}/2.0/language-ruby/
 
 [cci-demo-go]: https://github.com/circleci/cci-demo-go
 [cci-demo-react]: https://github.com/circleci/cci-demo-react

@@ -55,7 +55,7 @@ Images for the Docker build system can be specified in a few ways:
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
 ### Multiple Images
-It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [primary container]( {{ site.baseurl }}/2.0/glossary#primary-container).
+It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [primary container]( {{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```YAML
 jobs:
@@ -74,7 +74,7 @@ jobs:
 
 In a multi-image configuration build, steps are executed in the first container listed (main container).
 
-More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0/configuration-reference).
+More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0/configuration-reference/).
 
 ### Advantages
 - Fastest way to start a build
@@ -122,4 +122,4 @@ The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t p
 - Takes additional time to create VM
 - Only the default image is supported; your build may require additional provisioning.
 
-[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images
+[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/

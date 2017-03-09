@@ -96,4 +96,4 @@ We plan to remove this limitation in a future update.
 
 ## Using the CircleCI CLI non-locally
 
-The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs) to see how you use the tool to manage paralellism in a remote hosted environment.
+The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) to see how you use the tool to manage paralellism in a remote hosted environment.

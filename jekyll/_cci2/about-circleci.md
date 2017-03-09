@@ -39,7 +39,7 @@ If your tests pass, you can deploy your code to different environments, like dev
 
 ## Next Steps
 
-Set up an account and link a project by following these [first steps]({{ site.baseurl }}/2.0/first-steps), then check out our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough).
+Set up an account and link a project by following these [first steps]({{ site.baseurl }}/2.0/first-steps/), then check out our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/).
 
 [wiki-ci]: https://en.wikipedia.org/wiki/Continuous_integration
 [wiki-unittest]: https://en.wikipedia.org/wiki/Unit_testing
@@ -52,4 +52,4 @@ Set up an account and link a project by following these [first steps]({{ site.ba
 [doc-gke]:  {{ site.baseurl }}/1.0/continuous-deployment-with-google-container-engine/
 [doc-heroku]:  {{ site.baseurl }}/1.0/continuous-deployment-with-heroku/
 [doc-sshdeploy]:  {{ site.baseurl }}/1.0/introduction-to-continuous-deployment/#deploy-over-ssh
-[first-steps]: {{ site.baseurl }}/2.0/first-steps
+[first-steps]: {{ site.baseurl }}/2.0/first-steps/

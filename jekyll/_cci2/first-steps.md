@@ -26,6 +26,6 @@ You’ll automatically follow any new project that you push to, but you can also
 
 Now that you’ve integrated with a VCS and added one of your projects, you’ll need to create a `.circleci/config.yml` file to tell CircleCI what to do during each build.
 
-Head to our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough) for a sample `config.yml` and explanation of each component of the file.
+Head to our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample `config.yml` and explanation of each component of the file.
 
-Or, if you have a specific language in mind, check out our [demo applications]({{ site.baseurl }}/2.0/demo-apps).
+Or, if you have a specific language in mind, check out our [demo applications]({{ site.baseurl }}/2.0/demo-apps/).
