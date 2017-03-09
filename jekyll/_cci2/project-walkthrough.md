@@ -8,31 +8,31 @@ order: 25
 
 ## Introduction
 
-This tutorial will teach you important concepts about using CircleCI. We recommend it to all CircleCI users whether you are new to the platform or if you have experience using CircleCI 1.0.
+This tutorial will teach you important concepts about using CircleCI. We recommend it to all CircleCI users whether you are new to the platform or have experience using CircleCI 1.0.
 
-You will learn how to build, test and deploy and application using CircleCI. The application is a working web application and will be **relevant to you no matter what language or stack you are using**.
+You will learn how to build, test and deploy an application using CircleCI. The application is a working web application and will be **relevant to you no matter what language or stack you are using**.
 
 **Note: CircleCI 2.0 does not currently support build iOS and Android applications. Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
 
 ## The Demo App - 'Circulate'
 
-'Circulate' is a 'social blogging' web application similar to Twitter. Users can create accounts, make posts, follow users and comment on posts. You can *circulate* your thoughts and ideas :-) Here's a screen-shot of it in use:
+'Circulate' is a 'social blogging' web application similar to Twitter. Users can create accounts, make posts, follow users and comment on posts. You can *circulate* your thoughts and ideas :-) Here's a screenshot of it in use:
 
 ![]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
 
-The source for the application is here: [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough)
+The source for the application is here: [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough).
 
 **Original Author Credit:** This is based on Miguel Grinberg's excellent [Flasky](https://github.com/miguelgrinberg/flasky) application.
 
-The application uses Python and Flask for the back-end. The concepts for building on CircleCI are the same for Ruby / Rails, JavaScript and Node, and other stacks - so please stay with us, even if you don't use Python.
+The application uses Python and Flask for the back-end. The concepts for building on CircleCI are the same for Ruby / Rails, JavaScript and Node, and other stacks -- so please stay with us, even if you don't use Python.
 
-PostgreSQL is used for the database - you'll learn how to run tests on CircleCI with this. If you're using MySQL or another database the concepts are similar.
+PostgreSQL is used for the database -- you'll learn how to run tests on CircleCI with this. If you're using MySQL or another database, the concepts are similar.
 
 You'll learn how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment.
 
-Finally we'll deploy the application to Heroku and discuss other deployment options.
+Finally, we'll deploy the application to Heroku and discuss other deployment options.
 
-## Upload Your Project to GitHub or BitbBucket
+## Upload Your Project to GitHub or BitBucket
 
 To use CircleCI your code must be available on GitHub or BitBucket. You can use private or public repositories.
 
@@ -57,27 +57,27 @@ version: 2
 
 This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to build the project on CircleCI 1.0.
 
-**There is no 'inference' on CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex it added 'magic' that was hard to debug.
+**There is no 'inference' on CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
 
 ## Add the Project to CircleCI
 
 Now log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate the project and click the green 'Build Project' button.
 
-You must be and administrator / owner of the project on GitHub or BitBucket in order to start building it.
+You must be an administrator / owner of the project on GitHub or BitBucket in order to start building it.
 
 ## Your First Build
 
-As soon as you click 'Build Project' we will run a build. The first one will fail since we didn't add a complete `config.yml`:
+As soon as you click 'Build Project', we will run a build. The first one will fail since we didn't add a complete `config.yml`:
 
 ![First build]({{ site.baseurl }}/assets/img/docs/walkthrough1.png)
 
 ## Adding a Job
 
 <div class="alert alert-info" role="alert">
-<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide we'll cover essential elements to get you up and running.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for is available here</a>.
+<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll cover essential elements to get you up and running.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for is available here</a>.
 </div>
 
-`config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container - the 'primary container'.
+`config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container -- the 'primary container'.
 
 Here's a minimal example for our demo project. We'll explain the steps below:
 
@@ -93,21 +93,21 @@ jobs:
       - run: echo "hello world"
 ```
 
-The above config has one job we've called 'build'. **Every config file must have a job called 'build'**. This is the only job that will be automatically picked up and run by CircleCI. 
+The above config has one job we've called 'build'. **Every config file must have a job called 'build'**. This is the only job that will be automatically picked up and run by CircleCI.
 
-We then set some configuration values for the 'build' job. First we specify a working directory with `working_directory` where commands will be executed.
+We then set some configuration values for the 'build' job. First, we specify a working directory with `working_directory` where commands will be executed.
 
-Next we specify the 'executor' as `docker`. While getting started, you should always use `docker` as shown above. [Read more about executor types](/docs/2.0/executor-types/).
+Next, we specify the 'executor' as `docker`. While getting started, you should always use `docker` as shown above. [Read more about executor types](/docs/2.0/executor-types/).
 
-Now we choose a Docker image for our 'primary container'. This can be any publicly available Docker image. The best way to get started is to use an officially maintained image from Docker Hub for the language you are using. Above we're using the `python:3.6.0` image. You can [explore official images here](https://hub.docker.com/explore/)
+Now we choose a Docker image for our 'primary container'. This can be any publicly available Docker image. The best way to get started is to use an officially maintained image from Docker Hub for the language you are using. Above we're using the `python:3.6.0` image. You can [explore official images here](https://hub.docker.com/explore/).
 
 <div class="alert alert-warning" role="alert">
 <strong>Note:</strong> If you choose a lightweight image, such as an 'alpine' based image, it may not have essential tools installed such as Git that you will need to checkout your code or get your job running. You will need to take some extra steps to add those tools if you do this. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about solving this on Discuss</a>.
 </div>
 
-With a primary container specified, we can create the first 'steps' for our job. The first step checks out our code from GitHub with the special `checkout` step. Then we `run` a command. This can be any valid 'bash' command. To get started we're just going to `echo` a greeting to stdout.
+With a primary container specified, we can create the first 'steps' for our job. The first step checks out our code from GitHub with the special `checkout` step. Then we `run` a command. This can be any valid 'bash' command. To get started, we're just going to `echo` a greeting to stdout.
 
-With the above in `config.yml` we can commit and push our code. CircleCI will automatically run the job and we get our first green build!
+With the above in `config.yml`, we can commit and push our code. CircleCI will automatically run the job, and we’ll get our first green build!
 
 ![]({{ site.baseurl }}/assets/img/docs/walkthrough2.png)
 
@@ -117,7 +117,7 @@ CircleCI has started our primary container, checked out our code, and run our 'H
 
 <div class="alert alert-info" role="alert">
 <h3>The CircleCI CLI</h3>
-<p>You may be wondering how this all managed to run just by pulling a standard image from Docker hub. The magic happens with a tool called <code>circleci</code> CLI. We inject this agent into the primary build container to enable jobs to run. You can find out more about this and even install it locally by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
+<p>You may be wondering how this all managed to run just by pulling a standard image from Docker hub. The magic happens with a tool called the CircleCI CLI. We inject this agent into the primary build container to enable jobs to run. You can find out more about this and even install it locally by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
 </p>
 </div>
 
@@ -156,11 +156,11 @@ We've added quite a few things. Let's go through them:
 
 ### Environment Variables
 
-For any 'image' we can set environment variables with `environment`. You can see we've set env vars for our app to use the correct configuration for testing and to connect to the database container.
+For any 'image', we can set environment variables with `environment`. You can see we've set env vars for our app to use the correct configuration for testing and to connect to the database container.
 
 ### Database Image
 
-We're using PostgreSQL 9.6.2. As before we select an official image from Docker Hub. By setting three environment variables we make a test database available for our app.
+We're using PostgreSQL 9.6.2. As before, we select an official image from Docker Hub. By setting three environment variables, we make a test database available for our app.
 
 <div class="alert alert-info" role="alert">
 <strong>Note:</strong> We'll have more details on using a range of databases with CircleCI 2.0 on this documentation site very soon. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about the database you are using on Discuss</a>.
@@ -183,7 +183,7 @@ Current images for Firefox and Chrome are available on Docker Hub:
 
 ## Cache Dependencies
 
-To speed up our builds we should cache our dependencies. This is very flexible on CircleCI 2.0. Here are the steps we're adding to `config.yml`:
+To speed up our builds, we should cache our dependencies. This is very flexible on CircleCI 2.0. Here are the steps we're adding to `config.yml`:
 
 ```YAML
     steps:
@@ -209,15 +209,15 @@ Let's go from the bottom up:
 - `save_cache` does what you'd expect. You have control over the granularity of what to save.
   - Here we're saving cache for this project on the current branch only with `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`.
   - We then let CircleCI know to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`
-  - finally we specify the paths we want to cache. For Python pip dependencies we've listed where the files are stored.
-- `run: ...Locate site Packages` - this section is a temporary addition and helped us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things on 2.0. Currently `ssh` for jobs is not enabled. Since we can't inspect the container directly, we're echoing out the location via a Python command run from the Shell. You can apply this principle widely in CircleCI.
-- working upwards, the next _new_ section is `restore_cache` - this does what you'd expect based on the setting we explained in `save_cache`.
+  - Finally, we specify the paths we want to cache. For Python pip dependencies, we've listed where the files are stored.
+- `run: ...Locate site Packages` - this section is a temporary addition and helps us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things on 2.0. Currently `ssh` for jobs is not enabled. Since we can't inspect the container directly, we're echoing out the location via a Python command run from the Shell. You can apply this principle widely in CircleCI.
+- Working upwards, the next _new_ section is `restore_cache` - this does what you'd expect based on the setting we explained in `save_cache`.
 
-Caching is a subtle art and we're only scratching the surface here. To get the best performance for your needs, please read [Caching](https://circleci.com/docs/2.0/caching/) and see the [caching config reference](https://circleci.com/docs/2.0/configuration-reference/#savecache)
+Caching is a subtle art, and we're only scratching the surface here. To get the best performance for your needs, please read [Caching](https://circleci.com/docs/2.0/caching/) and see the [caching config reference](https://circleci.com/docs/2.0/configuration-reference/#savecache)
 
 ## Run Tests
 
-Finally we're ready to run our tests by adding:
+Finally, we're ready to run our tests by adding:
 
 ```YAML
       - run:
