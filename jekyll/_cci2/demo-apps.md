@@ -12,7 +12,7 @@ Each language listed below has an associated guide and public repository on GitH
 
 Language | Framework | GitHub Repo Name
 ---------|-----------|-----------------
-[Erlang] | Phoenix | (coming soon)
+[Elixir] | Phoenix | (coming soon)
 [Go] | Go | [cci-demo-go]
 [JavaScript] | React | [cci-demo-react]
 [PHP] | Lumen | [cci-demo-lumen]
@@ -20,7 +20,7 @@ Language | Framework | GitHub Repo Name
 [Ruby] | Rails | [cci-demo-rails]
 {: class="table"}
 
-[Erlang]: {{ site.baseurl }}/2.0/language-erlang
+[Elixir]: {{ site.baseurl }}/2.0/language-elixir
 [Go]: {{ site.baseurl }}/2.0/language-go
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript
 [PHP]: {{ site.baseurl }}/2.0/language-php
