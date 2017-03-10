@@ -97,6 +97,10 @@ Instead, we recommend using precise image versions or digests, like `redis:3.2.7
 #### Use Custom Images
 If you find yourself incurring undo increases in your run times due to installing additional tools during execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements, so the container will have such tools pre-loaded.
 
+<hr>
+
+{% include beta-premium-feature.html feature='Machine Executor'%}
+
 ## Machine Executor
 When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
 
