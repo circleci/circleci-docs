@@ -189,23 +189,90 @@ In the future you will be able to refer to external steps, but for now you are l
 
 Used for invoking all command-line programs. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-Fields (optional in brackets):
+Configuration map:
 
-* `command`: command to run via the shell
-* `[name]`: name given to step in  CircleCI UI
-* `[shell]`: path to use to invoke command
-    * default: `/bin/bash`
-* `[environment]`: additional environmental variables, locally scoped to command
-    * must be a YAML map
-* `[background]`: boolean representing whether command should be run in the background
-    * default: `false`
+Key | Required | Type | Description
+----|-----------|------|------------
+command | Y | String | Command to run via the shell
+name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`)
+shell | N | String | Shell to use for execution command (default: `/bin/bash -e` or `/bin/sh -e` if `bash` is not available)
+environment | N | Map | Additional environmental variables, locally scoped to command
+background | N | Boolean | Whether or not this step should run in the background (default: false)
+working_directory | N | String | What directory to run this step in (default: job [`working_directory`](#jobs))
+{: class="table table-striped"}
 
-```yaml
-          - run:
-              command: bundle check || bundle install
-              shell: /bin/bash
-              environment:
-                FOO: "bar"
+It's possible to specify multi-line `command`:
+
+``` YAML
+- run:
+    command: |
+      echo Running test
+      mkdir -p /tmp/test-results
+      make test
+```
+
+Note that default `shell` has `-e` option which makes command to:
+> Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
+
+So if in previous example `mkdir` failed to create a dir and returned a non-zero status then command execution will be terminated and whole step will be marked as failed. If a desired behaviour is opposite, then you need to add `set +e` or override default `shell`:
+``` YAML
+- run:
+    command: |
+      echo Running test
+      set +e
+      mkdir -p /tmp/test-results
+      make test
+
+- run:
+    shell: /bin/sh
+    command: |
+      echo Running test
+      set +e
+      mkdir -p /tmp/test-results
+      make test
+```
+
+In general we recommend to use `-e` option (default) because it shows errors in intermediate commands and simplify debugging in case of job failure.
+
+The `background` attribute allows to have command executed in background. In this case job execution will immediately proceed to a next step. Running command in background might be necessary in some cases, for instance, to run Selenium tests you'll need to have X virtual framebuffer running:
+
+``` YAML
+- run:
+    name: Running X virtual framebuffer
+    command: Xvfb :99 -screen 0 1280x1024x24
+    background: true
+
+- run: make test
+```
+
+`run` step has a very convenient shorthand syntax:
+
+``` YAML
+- run: make test
+
+# shorthanded command can also have multiple lines
+- run: |
+    mkdir -p /tmp/test-results
+    make test
+```
+In this case `command` is specified just right after step type and the rest of attributes have their default values.
+
+Complete example:
+``` YAML
+- run:
+    name: Testing application
+    command: make test
+    shell: /bin/bash
+    working_directory: ~/my-app
+    environment:
+      FOO: "bar"
+
+- run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
+- run: |
+    sudo -u root createuser -h localhost --superuser ubuntu &&
+    sudo createdb -h localhost test_db
+
 ```
 
 #### `checkout`
