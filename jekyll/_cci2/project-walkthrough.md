@@ -63,7 +63,7 @@ When you click 'Build Project', we’ll run a build. The first one will fail sin
 
 Note that you must be an administrator or owner of the project in order to start building it.
 
-## Adding a Job
+## Add a Job
 
 <div class="alert alert-info" role="alert">
 <strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll only be covering pieces essential to getting started.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for <code>config.yml</code> is available here</a>.
@@ -119,11 +119,9 @@ With the above in `config.yml`, we can commit and push our code. CircleCI will a
 
 <div class="alert alert-info" role="alert">
 <h3>The CircleCI CLI</h3>
-<p>You may be wondering how this all ran, just by pulling a standard image from Docker hub. The magic is made possible with a tool called the CircleCI CLI. We inject this agent into the primary build container to enable jobs to run. You can find out more about this, and even install it locally, by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
+<p>You may be wondering how all this happened just by pulling a standard image from Docker Hub. The magic is made possible with a tool called the CircleCI CLI. We inject this agent into the primary container to enable jobs to run. You can learn more about the CircleCI CLI (and even how to install it locally), by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
 </p>
 </div>
-
-Now we need to install and configure our dependencies and run some tests.
 
 ## Install and Configure Dependencies
 
