@@ -8,11 +8,9 @@ order: 25
 
 ## Introduction
 
-This tutorial will teach you important concepts about using CircleCI. We recommend it to all CircleCI users whether you are new to the platform or have experience using CircleCI 1.0.
+This tutorial will show you how to build, test, and deploy a web application using CircleCI. Whether you're new to the platform or a long-time user, we think you'll find the information here helpful.
 
-You will learn how to build, test and deploy an application using CircleCI. The application is a working web application and will be **relevant to you no matter what language or stack you are using**.
-
-**Note: CircleCI 2.0 does not currently support building iOS and Android applications.** Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
+If you're a mobile developer, please note that CircleCI 2.0 doesn’t yet support building iOS/Android apps. Until then, please refer to our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
 
 ## The Demo App - 'Circulate'
 
