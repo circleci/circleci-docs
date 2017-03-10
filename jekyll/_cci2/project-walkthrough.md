@@ -55,9 +55,9 @@ This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to buil
 
 ## Add the Project to CircleCI
 
-Now log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate the project and click the green 'Build Project' button.
+Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate your project and click the green 'Build Project' button.
 
-You must be an administrator / owner of the project on GitHub or BitBucket in order to start building it.
+Note that you must be an administrator / owner of the project in order to start building it.
 
 ## Your First Build
 
