@@ -166,20 +166,7 @@ Key | Required | Type | Description
 &lt;step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
 {: class="table table-striped"}
 
-The optional configuration map for a step invocation:
-
-Key | Required | Type | Description
-----|-----------|------|------------
-name | N | String | Title of the step to be shown in the CircleCI UI (default: depends on step)
-background | N | Boolean | Whether or not this step should run in the background (default: false)
-working_directory | N | String | What directory to run this step in (default: job [`working_directory`](#jobs))
-{: class="table table-striped"}
-
-...along with any other configuration attributes specific for particular step (see [below](#built-in-steps)).
-
-Note that setting `working_directory` will only affect this step, not the ones following it.
-
-Attempts to set `background` in conflict with a steps definition will result in error. A step with `background` set will allow the job to proceed to the next step immediately.
+Configuration map is specific for each step and described [below](#built-in-steps).
 
 ### Built-in steps
 
