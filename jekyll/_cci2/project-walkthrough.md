@@ -125,7 +125,7 @@ With the above in `config.yml`, we can commit and push our code. CircleCI will a
 
 ## Install and Configure Dependencies
 
-Here's the next version of our `config.yml`:
+Now that we've specified a `build` job, let's add some more configuration:
 
 ```YAML
 version: 2
@@ -150,9 +150,9 @@ jobs:
           command: pip install -r requirements/dev.txt
 ```
 
-If you're following along, you can add that to your project, commit and push to GitHub. The build should run and install all your dependencies.
+If you're following along, update your `config.yml`, commit and push to GitHub. The build should run and install all your dependencies.
 
-We've added quite a few things. Let's go through them:
+We've added quite a lot, so let's go through everything in more detail:
 
 ### Environment Variables
 
