@@ -298,6 +298,53 @@ Step has a shorthand:
 
 In this case step type is just a string with no additional attribures
 
+#### `save_cache`
+
+Genereates and stores a cache of dependencies or source code. Later builds can restore this cache (using [`restrore_cache` step](#restore_cache)). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
+
+Configuration map:
+
+Key | Required | Type | Description
+----|-----------|------|------------
+paths | Y | List | List of directories which should be added to the cache
+key | Y | String | Unique identifier for this cache
+{: class="table table-striped"}
+
+Cache for specific `key` is immutable a cannot be changed. If cache for given `key` is already exist it won't be modiffied and job execution will proceed to a next step.
+
+In order to build a new cache depending on some changes in your application or environment, `key` value may contains special templates:
+
+Template | Description
+----|----------
+{% raw %}`{{ .Branch }}`{% endraw %} | the VCS branch currently being built
+{% raw %}`{{ .BuildNum }}`{% endraw %} | the CircleCI build number for this build
+{% raw %}`{{ .Revision }}`{% endraw %} | the VCS revision currently being built
+{% raw %}`{{ .CheckoutKey }}`{% endraw %} | the SSH key used to checkout the repo
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | the environment variable `variableName`
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | a base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
+{% raw %}`{{ epoch }}`{% endraw %} | the current time in seconds since the unix epoch.
+{: class="table table-striped"}
+
+During step execution template will be replaced by runtime values and resulted string will be cache key.
+
+Template examples:
+ * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
+ * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every build will generate separate cache
+
+While chosing suitable templates for you cache `key` keep in mind that cache saving is not a free operation, because it will take some time to upload cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
+
+Complete example:
+
+{% raw %}
+``` YAML
+- save_cache:
+    key: projectname-{{ checksum "project.clj" }}
+    paths:
+      - /home/ubuntu/.m2
+```
+{% endraw %}
+
 #### `add_ssh_keys`
 
 Special step that adds SSH keys configured in the project's UI to the container.
@@ -353,35 +400,6 @@ There can be multiple `artifacts-store` steps in a job. Using a unique prefix fo
           - store_artifacts:
               path: /code/test-results
               destination: prefix
-```
-
-#### `save_cache`
-
-Step used to create a dependency or source cache.  You specify a cache key that this will save to.  Later builds can restore from this key.  The key determines when the cache is invalidated, and these fields will let you build a new cache according to certain events and times.
-
-Fields:
-
-* `paths`: a list of directories which should be added to the cache
-* `key`: a unique identifier for this cache
-    * if `key` is already present in the cache, it will not be recreated
-    * the key may contain a template that will be replaced by runtime values. To insert a runtime value, use the syntax: `"text-{{ .Branch }}"`
-
-Valid runtime values:
-  - `{{ .Branch }}`: the VCS branch currently being built
-  - `{{ .BuildNum }}`: the CircleCI build number for this build
-  - `{{ .Revision }}`: the VCS revision currently being built
-  - `{{ .CheckoutKey }}`: the SSH key used to checkout the repo
-  - `{{ .Environment.variableName }}`: the environment variable `variableName`
-  - `{{ checksum "filename" }}`: a base64 encoded SHA256 hash of the given filename's contents.  This should be a file committed in your repo.  Good candidates are dependency manifests, such as `package.json`.  It's important that this file does not change between `cache-restore` and `cache-save`, otherwise the cache will be saved under a cache key different than the one used at `cache-restore` time.
-  - `{{ epoch }}`: the current time in seconds since the unix epoch.  Use this in the last position of your key, as `cache-restore` performs prefix matching when looking up cache keys.  So a cache restore step searching for `foo-bar-` will match both `foo-bar-123` and `foo-bar-456`, but will choose the latter, since it's a newer timestamp.
-
-Example:
-
-```yaml
-          - save_cache:
-              key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}
-              paths:
-                - /home/ubuntu/.m2
 ```
 
 #### `restore_cache`
