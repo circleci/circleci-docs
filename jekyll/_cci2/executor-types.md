@@ -5,6 +5,7 @@ short-title: "Executor Types"
 categories: [configuring-jobs]
 order: 0
 ---
+[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
 An executor defines an underlying technology to run your build. Currently, we provide two options: `docker` and `machine`.
 
