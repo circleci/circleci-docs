@@ -266,9 +266,9 @@ jobs:
 
 If you're following along - you can add all of this, commit and push to watch CircleCI run your tests and give you a green build.
 
-## Collectin Artifacts
+## Storing Artifacts
 
-Our tests produce reports. You may want to generate other build artifacts that you'd like to store such as compiled assets or screenshots. To do that, we'll add the following to the end of `config.yml`:
+Our tests produce report files that we would like to access. You may want to generate other build artifacts that you'd like to store such as compiled assets or screenshots. To do that, we'll add the following to the end of `config.yml`:
 
 ```YAML
       - store_artifacts:
@@ -276,7 +276,7 @@ Our tests produce reports. You may want to generate other build artifacts that y
           destination: tr1
 ```
 
-The `store_artifacts` step is a special step. The path is a directory relative to the project root where the files are store. The `destination` specifies a 'prefix' that we've chosen to be unique in case another step in the job produces artifacts in a directory with the same name.
+The `store_artifacts` step is a special step. The path is a directory relative to the project root where the files are store. The `destination` specifies a 'prefix' that we've chosen to be unique in case another step in the job produces artifacts in a directory with the same name. CircleCI will collect and upload your artifacts to S3 for storage.
 
 When the build completes you can find the artifacts via the CircleCI UI:
 
