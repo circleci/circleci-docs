@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Glossary"
 short-title: "Glossary"
 categories: [reference]

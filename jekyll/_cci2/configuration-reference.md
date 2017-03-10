@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Configuration Reference"
 short-title: "Configuration"
 categories: [reference]

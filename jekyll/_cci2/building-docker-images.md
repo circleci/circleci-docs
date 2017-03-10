@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Building Docker Images on CircleCI 2.0"
 short-title: "Building Docker Images"
 categories: [configuring-jobs]

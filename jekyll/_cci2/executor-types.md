@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
 categories: [configuring-jobs]

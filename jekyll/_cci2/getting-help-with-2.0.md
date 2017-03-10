@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Help and Support for 2.0"
 short-title: "Help and Support for 2.0"
 categories: [troubleshooting-and-debugging, help-and-support]

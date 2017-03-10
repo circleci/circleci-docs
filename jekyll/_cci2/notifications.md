@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Notifications"
 short-title: "Notifications"
 categories: [configuring-jobs]

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Caching in CircleCI"
 short-title: "Caching"
 categories: [configuring-jobs]

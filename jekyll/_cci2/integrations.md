@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Integrations"
 short-title: "Integrations"
 categories: [configuring-jobs]

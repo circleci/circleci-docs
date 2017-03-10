@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "CircleCI Demo Applications"
 short-title: "Demo App Index"
 categories: [language-guides]

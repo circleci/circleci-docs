@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Parallelism with CircleCI CLI"
 short-title: "Parallelism for Faster Jobs"
 categories: [configuring-jobs]

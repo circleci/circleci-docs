@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Project Walkthrough"
 short-title: "Project Walkthrough"
 categories: [getting-started]

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Deployments and Uploads"
 short-title: "Deployments and Uploads"
 categories: [configuring-jobs]

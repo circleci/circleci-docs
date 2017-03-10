@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Migrating from 1.0 to 2.0"
 short-title: "Migrating from 1.0 to 2.0"
 categories: [getting-started]

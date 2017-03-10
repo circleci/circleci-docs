@@ -1,5 +1,5 @@
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Language Guide: Go"
 short-title: "Go"
 categories: [language-guides]

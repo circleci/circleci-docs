@@ -5,7 +5,7 @@ Thank you for your interest in contributing to the CircleCI documentation.
 **Note (March 2017): We are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0
 will continue to be improved, but will go into maintenance mode in the coming months. If you're considering contributing
 a completely new article, we encourage you to contribute to the 2.0 documentation found online at 
-[https://circleci.com/docs/2.0/](https://circleci.com/docs/2.0/) or in this repo in `/jekyll/_cci2/`.**
+<https://circleci.com/docs/2.0/> or in this repo in `/jekyll/_cci2/`.**
 
 **Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
 
@@ -37,7 +37,7 @@ The frontmatter should look like:
 
 ```
 ---
-layout: classic-docs2
+layout: classic-docs
 title: "Your Doc Title"
 short-title: "Short Title"
 categories: [category-slug]
@@ -45,7 +45,7 @@ order: 10
 ---
 ```
 
-Make sure to use `classic-docs2` layout for 2.0 docs. The list of categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml).
+The list of categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml).
 
 `order` specifies the menu order. You may need to adjust other doc menu orders to get your doc to show in the correct place within its section. (Best practice is to use multiples of 10 - then it's easy to put a new doc between two others).
 
