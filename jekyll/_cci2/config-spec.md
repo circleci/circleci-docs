@@ -441,6 +441,22 @@ There can be multiple `artifacts-store` steps in a job. Using a unique prefix fo
     destination: prefix
 ```
 
+#### `store_test_results`
+
+Special step used to upload test results to be stored in artifacts and shown in UI.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadata files
+{: class="table table-striped"}
+
+The directory layout should match the [classic CircleCI test metadata directory layout]({{ site.baseurl }}/1.0/test-metadata/#metadata-collection-in-custom-test-steps).
+
+``` YAML
+- test-results-store:
+    path: /tmp/test-results
+```
+
 #### `add_ssh_keys`
 
 Special step that adds SSH keys configured in the project's UI to the container.
@@ -478,21 +494,6 @@ Then, load the ssh configuration in run steps that require an ssh-agent:
                 source ~/.ssh_agent_conf
 
                 my-command-that-uses-ssh
-```
-
-#### `store_test_results`
-
-Special step used to upload test results.
-
-Fields:
-
-* `path`: directory containing JUnit XML or Cucumber JSON test metadata files
-
-The directory layout should match the [classic CircleCI test metadata directory layout](https://circleci.com/docs/test-metadata/#metadata-collection-in-custom-test-steps).
-
-```yaml
-          - test-results-store:
-              path: /tmp/test-results
 ```
 
 ### Putting it all together
