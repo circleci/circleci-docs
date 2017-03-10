@@ -83,7 +83,7 @@ More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0
 - Build, run, and publish Docker images via [Remote Docker][building-docker-images]
 
 ### Limitations
-- Limited by what is possible from withing a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes checkout the `machine` executor below.
+- Limited by what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes checkout the `machine` executor below.
 
 ### Best Practices
 
