@@ -285,6 +285,7 @@ Step has a shorthand:
 
 In this case step type is just a string with no additional attributes
 
+<a name="save_cache"/>
 #### **`save_cache`**
 
 Generates and stores a cache of dependencies or source code. Later builds can restore this cache (using [`restore_cache` step](#restore_cache)). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
@@ -336,6 +337,7 @@ While choosing suitable templates for you cache `key` keep in mind that cache sa
 ```
 {% endraw %}
 
+<a name="restore_cache"/>
 #### **`restore_cache`**
 
 Restores a dependency cache for given key. Cache need to be saved first for this key using [`save_cache` step](#save_cache). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
