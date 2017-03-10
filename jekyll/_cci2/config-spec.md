@@ -461,39 +461,40 @@ The directory layout should match the [classic CircleCI test metadata directory 
 
 Special step that adds SSH keys configured in the project's UI to the container.
 
-Fields:
+Key | Required | Type | Description
+----|-----------|------|------------
+fingerprints | N | List | List of fingerprints corresponding to the keys to be added (default: all keys added)
+{: class="table table-striped"}
 
-* `[fingerprints]`: list of fingerprints corresponding to the keys to be added
-    * default: all keys added
-
-```yaml
-          - add-ssh-keys:
-              fingerprints:
-                - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+``` YAML
+- add-ssh-keys:
+    fingerprints:
+      - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
 To use an ssh-agent, you'll need to explicitly start one up:
 
-```yaml
-          - run:
-              name: Start ssh-agent
-              command: |
-                ssh-agent -s > ~/.ssh_agent_conf
-                source ~/.ssh_agent_conf
+``` YAML
+- run:
+    name: Start ssh-agent
+    command: |
+      ssh-agent -s > ~/.ssh_agent_conf
+      source ~/.ssh_agent_conf
 
-                for _k in $(ls ${HOME}/.ssh/id_*); do
-                  ssh-add ${_k} || true
-                done
+      for _k in $(ls ${HOME}/.ssh/id_*); do
+        ssh-add ${_k} || true
+      done
 ```
 
 Then, load the ssh configuration in run steps that require an ssh-agent:
-```yaml
-          - run:
-              name: run my special ssh command
-              command: |
-                source ~/.ssh_agent_conf
 
-                my-command-that-uses-ssh
+``` YAML
+- run:
+  name: run my special ssh command
+  command: |
+    source ~/.ssh_agent_conf
+
+    my-command-that-uses-ssh
 ```
 
 ### Putting it all together
