@@ -53,17 +53,15 @@ version: 2
 
 This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to build the project on CircleCI 1.0.
 
-## Add the Project to CircleCI
+## Add Project and Start Building
 
 Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate your project and click the green 'Build Project' button.
 
-Note that you must be an administrator / owner of the project in order to start building it.
-
-## Your First Build
-
-As soon as you click 'Build Project', we will run a build. The first one will fail since we didn't add a complete `config.yml`:
+When you click 'Build Project', we’ll run a build. The first one will fail since our `config.yml` isn't valid:
 
 ![First build]({{ site.baseurl }}/assets/img/docs/walkthrough1.png)
+
+Note that you must be an administrator or owner of the project in order to start building it.
 
 ## Adding a Job
 
