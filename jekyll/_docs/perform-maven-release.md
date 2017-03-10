@@ -103,3 +103,4 @@ Within the JSON body, adjust these fields as needed for this particular release 
 * `RELEASE` : a non-SNAPSHOT version that you want to release
 * `NEXT` : the next development version to set in the POM and should
   end with "-SNAPSHOT"
+
