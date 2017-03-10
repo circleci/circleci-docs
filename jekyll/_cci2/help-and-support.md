@@ -27,5 +27,3 @@ When you're done, click 'Submit support request', and one of our support enginee
 ## Premium Support
 
 If you know you're going to need a rapid response to problems, then check out our [Premium Support](https://circleci.com/support/premium-support/). You can skip the line for support requests, get critical issues escalated, and access early features of CircleCI.
-
-It's expensive, but hey: so is a breaking build, right?
