@@ -421,6 +421,26 @@ In general `deploy` step behaves just like `run` with one exception - in a build
     command: ansible-playbook site.yml
 ```
 
+#### `store_artifacts`
+
+Step to storing artifacts (for example logs, binaries, etc) to be available in UI or via API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts)
+
+Configuration map:
+
+Key | Required | Type | Description
+----|-----------|------|------------
+path | Y | String | Directory in the primary container to save as build artifacts
+destination | Y | Prefix added to the artifact paths in the artifacts API
+{: class="table table-striped"}
+
+There can be multiple `artifacts-store` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
+
+``` YAML
+- store_artifacts:
+    path: /code/test-results
+    destination: prefix
+```
+
 #### `add_ssh_keys`
 
 Special step that adds SSH keys configured in the project's UI to the container.
@@ -458,24 +478,6 @@ Then, load the ssh configuration in run steps that require an ssh-agent:
                 source ~/.ssh_agent_conf
 
                 my-command-that-uses-ssh
-```
-
-
-#### `store_artifacts`
-
-Special step used to store artifacts.
-
-Fields:
-
-* `path`: directory in the main container to save as build artifacts
-* `destination`: prefix added to the artifact paths in the artifacts API
-
-There can be multiple `artifacts-store` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
-
-```yaml
-          - store_artifacts:
-              path: /code/test-results
-              destination: prefix
 ```
 
 #### `store_test_results`
