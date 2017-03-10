@@ -156,7 +156,11 @@ We've added quite a lot, so let's go through everything in more detail:
 
 ### Environment Variables
 
-For any 'image', we can set environment variables with `environment`. You can see we've set env vars for our app to use the correct configuration for testing and to connect to the database container.
+For any 'image', we can set environment variables with `environment`. In our example, we've set variables for testing and connecting to the database container.
+
+If any of these variables have the same name as variables you create in the CircleCI web application, the ones in `config.yml` will take precedence.
+
+Similarly, environment variables defined in a `step` will take precedence over the ones at the image level.
 
 ### Database Image
 
