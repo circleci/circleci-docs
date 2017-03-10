@@ -183,13 +183,15 @@ Current images for Firefox and Chrome are available on Docker Hub:
 
 ## Cache Dependencies
 
-To speed up our builds, we should cache our dependencies. This is very flexible on CircleCI 2.0. Here are the steps we're adding to `config.yml`:
+To speed up our builds, we should cache our dependencies:
 
+{% raw %}
 ```YAML
+...
     steps:
       - checkout
       - restore_cache:
-          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Dependencies
           command: pip install -r requirements/dev.txt
@@ -198,20 +200,32 @@ To speed up our builds, we should cache our dependencies. This is very flexible 
           name: Locate site Packages
           command: python -c "import site; print(site.getsitepackages())"
       - save_cache:
-          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" {% raw %}}}
           paths:
             - "~/.cache/pip"
             - "/usr/local/lib/python3.6/site-packages"
 ```
+{% endraw %}
 
-Let's go from the bottom up:
+From the bottom up:
 
-- `save_cache` does what you'd expect. You have control over the granularity of what to save.
-  - Here we're saving cache for this project on the current branch only with `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`.
-  - We then let CircleCI know to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`
-  - Finally, we specify the paths we want to cache. For Python pip dependencies, we've listed where the files are stored.
-- `run: ...Locate site Packages` - this section is a temporary addition and helps us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things on 2.0. Currently `ssh` for jobs is not enabled. Since we can't inspect the container directly, we're echoing out the location via a Python command run from the Shell. You can apply this principle widely in CircleCI.
-- Working upwards, the next _new_ section is `restore_cache` - this does what you'd expect based on the setting we explained in `save_cache`.
+### save_cache
+
+Here, we're only saving the cache for this project on the current branch with `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`.
+
+Then, we let CircleCI know how to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. Finally, we specify the paths we want to cache, which in this case are where our Python pip dependencies are stored.
+
+### run: ...Locate site Packages
+
+This section is temporary and helps us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things in CircleCI.
+
+Currently, `ssh` for jobs is not enabled. Since we can't inspect the container directly, we're echoing out the location via a Python command run from the Shell. You can widely apply this tactic in CircleCI.
+
+### restore_cache
+
+This restores the cache using a format similar to that used in the `save_cache` step.
+
+---
 
 Caching is a subtle art, and we're only scratching the surface here. To get the best performance for your needs, please read [Caching](https://circleci.com/docs/2.0/caching/) and see the [caching config reference](https://circleci.com/docs/2.0/configuration-reference/#savecache)
 
