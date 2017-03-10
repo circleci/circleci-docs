@@ -170,15 +170,11 @@ We're using PostgreSQL 9.6.2. As before, we select an official image from Docker
 <strong>Note:</strong> We'll soon have more details on using other databases with CircleCI. In the meantime, you can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about the database you are using on Discuss</a>.
 </div>
 
-### Browser tests with Selenium
+### Browser Tests with Selenium
 
-Our app uses webdriver to run tests via Selenium on Chrome. A great way to do this on CircleCI 2.0 is to use the `selenium/standalone` images. All we need to do is add:
+Our app uses WebDriver to run tests via Selenium on Chrome. A great way to do this on CircleCI 2.0 is to use the `selenium/standalone` image, as we've done in the example above.
 
-```YAML
-  - image: selenium/standalone-chrome:3.1.0
-```
-
-Your tests should now run just as they do locally if you're set up for webdriver / selenium testing.
+Your tests should now run the same way they would locally if you're set up for Selenium testing.
 
 Current images for Firefox and Chrome are available on Docker Hub:
 
