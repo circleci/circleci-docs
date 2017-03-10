@@ -7,7 +7,7 @@ order: 1
 ---
 
 ## Overview
-For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
+For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
 
 To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands
 
@@ -65,7 +65,7 @@ Let’s break down what’s happening during this build’s execution:
 - We use project environment variables to store credentials for Docker Hub.
 
 ## Separation of Environments
-Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
+Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
 ### Starting Services
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
@@ -116,5 +116,5 @@ jobs:
           docker run --network container:db my-app test
 ```
 
-[job-space]: {{ site.baseurl }}/2.0/glossary#job-space
-[primary-container]: {{ site.baseurl }}/2.0/glossary#primary-container
+[job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
+[primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
