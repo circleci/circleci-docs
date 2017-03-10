@@ -8,6 +8,18 @@ order: 0
 
 This document is a reference for `.circleci/config.yml` and lists the built-in job steps available to you.
 
+## Table of contents
+
+These are the built-in job steps available to you.
+- [run](#run)
+- [checkout](#checkout)
+- [add_ssh_keys](#add_ssh_keys)
+- [store_artifacts](#store_artifacts)
+- [save_cache](#save_cache)
+- [restore_cache](#restore_cache)
+- [store_test_results](#store_test_results)
+- [save_cache](#save_cache)
+
 ## **run**
 
 Used for invoking all command-line programs.
