@@ -473,7 +473,7 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-To use an ssh-agent, you'll need to explicitly start one up:
+For some advanced cases like SSH forwarding you will need to start `ssh-agent` yourself:
 
 ``` YAML
 - run:
@@ -487,15 +487,14 @@ To use an ssh-agent, you'll need to explicitly start one up:
       done
 ```
 
-Then, load the ssh configuration in run steps that require an ssh-agent:
+Then `source` the ssh configuration in `run` steps that require an ssh-agent:
 
 ``` YAML
 - run:
-  name: run my special ssh command
-  command: |
-    source ~/.ssh_agent_conf
-
-    my-command-that-uses-ssh
+    name: run my special ssh command
+    command: |
+      source ~/.ssh_agent_conf
+      my-command-that-uses-ssh
 ```
 
 ### Putting it all together
