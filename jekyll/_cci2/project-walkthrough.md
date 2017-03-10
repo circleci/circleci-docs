@@ -14,15 +14,15 @@ If you're a mobile developer, please note that CircleCI 2.0 doesn’t yet suppor
 
 ## The Demo App - 'Circulate'
 
-'Circulate' is a 'social blogging' web application similar to Twitter. Users can create accounts, make posts, follow users and comment on posts. You can *circulate* your thoughts and ideas :-) Here's a screenshot of it in use:
+'Circulate' is a 'social blogging' Twitter-like web application based on Miguel Grinberg's excellent [Flasky](https://github.com/miguelgrinberg/flasky) application. Users can create accounts, make posts, follow users and comment on posts. You can *circulate* your thoughts and ideas :-)
 
 ![Circulate demo app screenshot]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
 
 The source for the application is here: [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough).
 
-**Original Author Credit:** This is based on Miguel Grinberg's excellent [Flasky](https://github.com/miguelgrinberg/flasky) application.
+### The Stack
 
-The application uses Python and Flask for the back-end. The concepts for building on CircleCI are the same for Ruby / Rails, JavaScript / Node, and other stacks -- so please stay with us, even if you don't use Python.
+While the application uses Python and Flask for the backend, concepts for building on CircleCI are the same for Ruby / Rails, JavaScript / Node, and other stacks -- so please stay with us even if you don't use Python.
 
 PostgreSQL is used for the database -- you'll learn how to run tests on CircleCI with this. If you're using MySQL or another database, the concepts are similar.
 
