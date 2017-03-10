@@ -286,7 +286,7 @@ Key | Required | Type | Description
 path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
 {: class="table table-striped"}
 
-If `path` is alredy exists and:
+If `path` is already exists and:
  * a git repo - step will not clone whole repo but just pull origin
  * NOT a git repo - step will fail.
 
@@ -296,11 +296,11 @@ Step has a shorthand:
 - checkout
 ```
 
-In this case step type is just a string with no additional attribures
+In this case step type is just a string with no additional attributes
 
 #### `save_cache`
 
-Genereates and stores a cache of dependencies or source code. Later builds can restore this cache (using [`restrore_cache` step](#restore_cache)). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
+Generates and stores a cache of dependencies or source code. Later builds can restore this cache (using [`restore_cache` step](#restore_cache)). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
 
 Configuration map:
 
@@ -310,7 +310,7 @@ paths | Y | List | List of directories which should be added to the cache
 key | Y | String | Unique identifier for this cache
 {: class="table table-striped"}
 
-Cache for specific `key` is immutable a cannot be changed. If cache for given `key` is already exist it won't be modiffied and job execution will proceed to a next step.
+Cache for specific `key` is immutable a cannot be changed. If cache for given `key` is already exist it won't be modified and job execution will proceed to a next step.
 
 In order to build a new cache depending on some changes in your application or environment, `key` value may contains special templates:
 
@@ -332,9 +332,9 @@ Template examples:
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every build will generate separate cache
 
-While chosing suitable templates for you cache `key` keep in mind that cache saving is not a free operation, because it will take some time to upload cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
+While choosing suitable templates for you cache `key` keep in mind that cache saving is not a free operation, because it will take some time to upload cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
 
-Tip: Given the immutability of caches, it might be hepful to start all your cache keys with a version prefix `v1-...`. That way you will be able to regenerate all your caches just by incrementing version in this prefix.
+Tip: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `v1-...`. That way you will be able to regenerate all your caches just by incrementing version in this prefix.
 
 Complete example:
 
