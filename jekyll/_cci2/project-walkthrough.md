@@ -40,20 +40,18 @@ To use CircleCI, your code must be available on GitHub or BitBucket, in either a
 
 ## Create CircleCI config file
 
-To make sure our project runs on CircleCI 2.0, we need to create a configuration file.
+To make sure our project runs on CircleCI 2.0, we need to create a configuration file:
 
 - create a directory called `.circleci`
 - create a file in this directory called `config.yml`
 
-Add the following to `config.yml`:
+Then, add the following line to `config.yml`.
 
 ```YAML
 version: 2
 ```
 
 This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to build the project on CircleCI 1.0.
-
-**There is no 'inference' on CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
 
 ## Add the Project to CircleCI
 
@@ -74,6 +72,8 @@ As soon as you click 'Build Project', we will run a build. The first one will fa
 </div>
 
 `config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container -- the 'primary container'.
+
+**There is no 'inference' on CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
 
 Here's a minimal example for our demo project. We'll explain the steps below:
 
