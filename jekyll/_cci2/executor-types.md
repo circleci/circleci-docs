@@ -83,8 +83,7 @@ More details on the Docker Executor are available [here]( {{ site.baseurl }}/2.0
 - Build, run, and publish Docker images via [Remote Docker][building-docker-images]
 
 ### Limitations
-- Not always sufficient for complex build environments requiring low-level work with the network/kernel/etc.
-- Requires some work to migrate legacy CircleCI configuration
+- Limited by what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes checkout the `machine` executor below.
 
 ### Best Practices
 
@@ -96,7 +95,11 @@ We also can’t guarantee that mutable tags will return an up-to-date version of
 Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...`.
 
 #### Use Custom Images
-Instead of using a base image and installing additional tools during a build’s execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements.
+If you find yourself incurring undo increases in your run times due to installing additional tools during execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the build’s requirements, so the container will have such tools pre-loaded.
+
+<hr>
+
+{% include beta-premium-feature.html feature='Machine Executor'%}
 
 ## Machine Executor
 When you choose the `machine` executor, your build will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
@@ -115,11 +118,8 @@ The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t p
 
 ### Advantages
 - Gives full control over build environment
-- Somewhat easier to migrate legacy CircleCI configuration
-- Built-in capabilities for building, running, and pushing Docker images
 
 ### Limitations
 - Takes additional time to create VM
 - Only the default image is supported; your build may require additional provisioning.
 
-[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
