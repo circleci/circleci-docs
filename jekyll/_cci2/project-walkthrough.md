@@ -164,10 +164,10 @@ Similarly, environment variables defined in a `step` will take precedence over t
 
 ### Database Image
 
-We're using PostgreSQL 9.6.2. As before, we select an official image from Docker Hub. By setting three environment variables, we make a test database available for our app.
+We're using PostgreSQL 9.6.2. As before, we select an official image from Docker Hub. By setting 3 environment variables, we make a test database available for our app.
 
 <div class="alert alert-info" role="alert">
-<strong>Note:</strong> We'll have more details on using a range of databases with CircleCI 2.0 on this documentation site very soon. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about the database you are using on Discuss</a>.
+<strong>Note:</strong> We'll soon have more details on using other databases with CircleCI. In the meantime, you can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about the database you are using on Discuss</a>.
 </div>
 
 ### Browser tests with Selenium
