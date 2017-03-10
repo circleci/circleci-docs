@@ -266,15 +266,46 @@ jobs:
 
 If you're following along - you can add all of this, commit and push to watch CircleCI run your tests and give you a green build.
 
+## Collectin Artifacts
+
+Our tests produce reports. You may want to generate other build artifacts that you'd like to store such as compiled assets or screenshots. To do that, we'll add the following to the end of `config.yml`:
+
+```YAML
+      - store_artifacts:
+          path: test-reports/
+          destination: tr1
+```
+
+The `store_artifacts` step is a special step. The path is a directory relative to the project root where the files are store. The `destination` specifies a 'prefix' that we've chosen to be unique in case another step in the job produces artifacts in a directory with the same name.
+
+When the build completes you can find the artifacts via the CircleCI UI:
+
+![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough3.png)
+
+## Test timing, JUnit XML reporting
+
+It would be helpful to get test timing results. Our test suite has already been configured to output results in the JUnit XML format. We can CircleCI to analyse the files by adding the following to `config.yml`:
+
+```YAML
+      - store_test_results:
+          path: test-reports/
+```
+
+The path for the result files is relative to the root of the project. (In our example we're using the same directory as we used to store artifacts - but this wouldn't always be the case.)
+
+When the build completes, CircleCI will analyse your test timings and summarise them on the `Test Summary` tab:
+
+![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough4.png)
+
 ## Deployment
 
-**Note: 2017-03-09:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about deploying your application.
+**Note: 2017-03-10:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about deploying your application.
 
 For now, here's a [guide on Discuss](https://discuss.circleci.com/t/deploying-examples/8093)
 
 ## Make the Job Faster with Prallelism
 
-**Note: 2017-03-09:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about testing your application in parallel.
+**Note: 2017-03-10:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about testing your application in parallel.
 
 A key feature is the ability to run your jobs in parallel on many containers to speed up large test suites. [This article](https://circleci.com/docs/2.0/parallelism-faster-jobs/) will help you get started.
 
