@@ -277,12 +277,26 @@ Complete example:
 
 #### `checkout`
 
-Special step used to check out source code to the configured `path`. This is interpreted within the build as `git clone <my-project-vcs-url> <path>`.
+Special step used to check out source code to the configured `path`.
 
-Fields:
+Configuration map:
 
-* `[path]`: checkout directory
-    * defaults to the job's `working_directory`
+Key | Required | Type | Description
+----|-----------|------|------------
+path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
+{: class="table table-striped"}
+
+If `path` is alredy exists and:
+ * a git repo - step will not clone whole repo but just pull origin
+ * NOT a git repo - step will fail.
+
+Step has a shorthand:
+
+``` YAML
+- checkout
+```
+
+In this case step type is just a string with no additional attribures
 
 #### `add_ssh_keys`
 
