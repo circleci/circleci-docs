@@ -190,7 +190,7 @@ background | N | Boolean | Whether or not this step should run in the background
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
 {: class="table table-striped"}
 
-Each `run` declaration represents a new shell. It's possible to specify a multi-line `command` that will all be run in the same shell:
+Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
 ``` YAML
 - run:
@@ -200,10 +200,10 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-Note that default `shell` has `-e` option which causes commands to:
+Note that our default `shell` has the `-e` option, which causes commands to:
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution will be terminated, and the whole step will be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
+So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
 ``` YAML
 - run:
     command: |
@@ -299,7 +299,7 @@ paths | Y | List | List of directories which should be added to the cache
 key | Y | String | Unique identifier for this cache
 {: class="table table-striped"}
 
-The cache for specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for given `key` is already exists it won't be modified, and job execution will proceed to the next step._
+The cache for a specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step._
 
 When storing a new cache, `key` value may contains special templated values for your convenience:
 
@@ -314,14 +314,14 @@ Template | Description
 {% raw %}`{{ epoch }}`{% endraw %} | the current time in seconds since the unix epoch.
 {: class="table table-striped"}
 
-During step execution, the templates above will be replaced by runtime values and using the resultant string as the `key`.
+During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
 
 Template examples:
  * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every build will generate separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every build.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
@@ -408,7 +408,7 @@ A path is not required here because the cache will be restored to the location f
 
 Special step for deploying artifacts.
 
-`deploy` uses the same configuration map and semantic as [`run`](#run) step. Jobs may have more than one `deploy` step.
+`deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
 
 In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
