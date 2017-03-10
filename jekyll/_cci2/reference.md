@@ -1,8 +1,5 @@
 ---
-layout: classic-docs2
+layout: category-page
 title: "Reference"
+categories: [reference]
 ---
-
-## [Configuration]({{ site.baseurl }}/2.0/configuration-reference/)
-## [Environment Variables]({{ site.baseurl }}/2.0/env-vars/)
-## [Glossary]({{ site.baseurl }}/2.0/glossary/)
