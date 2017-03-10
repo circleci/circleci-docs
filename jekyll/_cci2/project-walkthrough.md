@@ -66,14 +66,14 @@ Note that you must be an administrator or owner of the project in order to start
 ## Adding a Job
 
 <div class="alert alert-info" role="alert">
-<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll cover essential elements to get you up and running.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for <code>config.yml</code> is available here</a>.
+<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll only be covering pieces essential to getting started.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for <code>config.yml</code> is available here</a>.
 </div>
 
 `config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container -- the 'primary container'.
 
-**There is no 'inference' on CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
+**There is no 'inference' in CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
 
-Here's a minimal example for our demo project. We'll explain the steps below:
+Here's a minimal example for our demo project:
 
 ```YAML
 version: 2
@@ -87,27 +87,35 @@ jobs:
       - run: echo "hello world"
 ```
 
-The above config has one job we've called 'build'. **Every config file must have a job called 'build'**. This is the only job that will be automatically picked up and run by CircleCI.
+In the example above, all configuration lives under a job called `build`. **Every config file must have a 'build' job**. This is the only job that will be automatically picked up and run by CircleCI.
 
-We then set some configuration values for the 'build' job. First, we specify a working directory with `working_directory` where commands will be executed.
+### Inside a 'Build' Job
 
-Next, we specify the 'executor' as `docker`. While getting started, you should always use `docker` as shown above. [Read more about executor types](/docs/2.0/executor-types/).
+First, we specify a working directory where commands will be executed.
 
-Now we choose a Docker image for our 'primary container'. This can be any publicly available Docker image. The best way to get started is to use an officially maintained image from Docker Hub for the language you are using. Above we're using the `python:3.6.0` image. You can [explore official images here](https://hub.docker.com/explore/).
+Next, we have to choose an 'executor', the underlying technology that's running your build. While getting started, we recommend using the `docker` executor. [Read more about executor types and their tradeoffs here](/docs/2.0/executor-types).
 
-Private images are supported but there are some requirements you will need to meet. [Read more about using private images here](/docs/2.0/building-docker-images/#private-images-and-docker-registries). While getting started we recommend using public images.
+#### Specify an Image
+
+Because we chose the `docker` executor, we have to specify a Docker image as our 'primary container'. The image you choose can be any public Docker image. Private images are supported, but [some additional setup is required](/docs/2.0/building-docker-images/#private-images-and-docker-registries).
+
+The best way to get started is to use one of [Docker's official images on Docker Hub](https://hub.docker.com/explore/) for the language you’re using. In our example, we're using the `python:3.6.0` image.
 
 <div class="alert alert-warning" role="alert">
-<strong>Note:</strong> If you choose a lightweight image, such as an 'alpine' based image, it may not have essential tools installed, such as Git, that you will need to checkout your code, or get your job running. You will need to take some extra steps to add those tools if you do this. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about  this on Discuss</a>.
+<strong>Note:</strong> If you choose a lightweight image, it may not have essential tools like Git installed. You'll need to take some extra steps to add those tools so you can checkout your code and get your job running. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about this on Discuss</a>.
 </div>
 
-With a primary container specified, we can create the first 'steps' for our job. The first step checks out our code from GitHub with the special `checkout` step. Then we `run` a command. This can be any valid 'bash' command. To get started, we're just going to `echo` a greeting to stdout.
+#### Specify Steps
 
-With the above in `config.yml`, we can commit and push our code. CircleCI will automatically run the job, and we’ll get our first green build!
+With our primary container specified, we can create the first 'steps' for our job. Steps are a series of commands that run sequentially on the primary container.
+
+The first step checks out our code from GitHub with the special `checkout` step. Then we `run` a command, which can be any valid `bash` command. To get started, we're just going to `echo` a greeting to stdout.
+
+### Commit and Push
+
+With the above in `config.yml`, we can commit and push our code. CircleCI will automatically run the `build` job, check out our code, and echo "Hello World", giving us our first green build!
 
 ![First passing build]({{ site.baseurl }}/assets/img/docs/walkthrough2.png)
-
-CircleCI has started our primary container, checked out our code, and run our 'Hello World' command.
 
 <div class="alert alert-info" role="alert">
 <h3>The CircleCI CLI</h3>
