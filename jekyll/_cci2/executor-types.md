@@ -29,7 +29,7 @@ When you choose the `docker` executor, your build will run in a Docker container
 jobs:
   build:
     docker:
-      - image: alpine:3.4
+      - image: buildpack-deps:trusty
 ```
 
 ### Why Use The Docker Executor?
@@ -62,15 +62,17 @@ It’s also possible to specify multiple images. When you do this, all container
 jobs:
   build:
     docker:
-     - image: alpine:3.4
+     - image: buildpack-deps:trusty
 
      - image: mongo:2.6.8
        command: [mongod, --smallfiles]
 
+    working_directory: ~/
+
     steps:
-      # command will execute in alpine container
+      # command will execute in trusty container
       # and can access mongo on localhost
-      - run: telnet localhost 27017
+      - run: sleep 5 && nc -vz localhost 27017
 ```
 
 In a multi-image configuration build, steps are executed in the first container listed (main container).

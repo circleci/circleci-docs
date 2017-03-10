@@ -45,7 +45,7 @@ Example:
 jobs:
   build:
     docker:
-      - alpine:3.5
+      - buildpack-deps:trusty
     environment:
       - FOO: "bar"
     parallelism: 3
@@ -87,7 +87,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: alpine:3.5 # primary container
+      - image: buildpack-deps:trusty # primary container
         environment:
           ENV: CI
 
