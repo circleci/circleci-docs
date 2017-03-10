@@ -499,69 +499,70 @@ Then, load the ssh configuration in run steps that require an ssh-agent:
 
 ### Putting it all together
 
-```yaml
+{% raw %}
+``` YAML
 version: 2
 jobs:
   build:
-<<<<<<< variant A
-    workDir: ~/my-project
->>>>>>> variant B
     docker:
       - image: ubuntu:14.04
-        command: ["/bin/bash"] # specify if image does not already have Command set
+
       - image: mongo:2.6.8
         command: [mongod, --smallfiles]
+
       - image: postgres:9.4.1
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: root
+
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+
       - image: rabbitmq:3.5.4
-    working_directory: /home/ubuntu/my-project
-======= end
+
+    environment:
+      TEST_REPORTS: /tmp/test-reports
+
+    working_directory: ~/my-project
+
     steps:
       - checkout
-      # Add an entry to /etc/hosts
-      - run:
-          shell: /bin/bash
-          command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
+      - run: command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
       # Create Postgres users and database
       # Note the YAML heredoc '|' for nicer formatting
+      - run: |
+          sudo -u root createuser -h localhost --superuser ubuntu &&
+          sudo createdb -h localhost test_db
+
+      - restore_cache:
+          keys:
+            - v1-my-project-{{ checksum "project.clj" }}
+            - v1-my-project-
+
       - run:
-          shell: /bin/bash
-          command: |
-            sudo -u root createuser -h localhost --superuser ubuntu &&
-            sudo createdb -h localhost test_db
-      # Run tests with larger command
-      - run:
-          shell: /bin/bash
-          command: |
-              set -exu
-              mkdir -p /tmp/test-results
-              TESTFILES=$(find ./test -name 'test_*.clj' | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
-              if [ -z "${TESTFILES}" ]
-              then
-                  echo "misconfigured parallelism"
-                  exit 1
-              else
-                  run-tests.sh ${TESTFILES}
-                  cp out/tests/*.xml /tmp/test-results/
-              fi
           environment:
             SSH_TARGET: "localhost"
             TEST_ENV: "linux"
-
-      # Create deployable artifacts
-      - run:
           command: |
-            set -exu
-            mkdir -p /tmp/artifacts
-            create_jars.sh ${CIRCLE_BUILD_NUM}
-            cp *.jar /tmp/artifacts
+            set -xu
+            mkdir -p ${TEST_REPORTS}
+            run-tests.sh
+            cp out/tests/*.xml ${TEST_REPORTS}
+
+      - run: |
+          set -xu
+          mkdir -p /tmp/artifacts
+          create_jars.sh ${CIRCLE_BUILD_NUM}
+          cp *.jar /tmp/artifacts
+
+      - save_cache:
+          key: v1-my-project-{{ checksum "project.clj" }}
+          paths:
+            - ~/.m2
 
       # Deploy staging
       - deploy:
-          shell: /bin/bash
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ];
               then ansible-playbook site.yml -i staging;
@@ -569,7 +570,6 @@ jobs:
 
       # Deploy production
       - deploy:
-          shell: /bin/bash
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
               then ansible-playbook site.yml -i production;
@@ -584,3 +584,4 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
+{% endraw %}
