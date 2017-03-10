@@ -334,14 +334,77 @@ Template examples:
 
 While chosing suitable templates for you cache `key` keep in mind that cache saving is not a free operation, because it will take some time to upload cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
 
+Tip: Given the immutability of caches, it might be hepful to start all your cache keys with a version prefix `v1-...`. That way you will be able to regenerate all your caches just by incrementing version in this prefix.
+
 Complete example:
 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: projectname-{{ checksum "project.clj" }}
+    key: v1-myapp-{{ checksum "project.clj" }}
     paths:
       - /home/ubuntu/.m2
+```
+{% endraw %}
+
+#### `restore_cache`
+
+Restores a dependency cache for given key. Cache need to be saved first for this key using [`save_cache` step](#save_cache). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
+
+Configuration map:
+
+Key | Required | Type | Description
+----|-----------|------|------------
+key | Y (1) | String | Single cache key to restore
+keys | Y (1) | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored.
+{: class="table table-striped"}
+
+(1) at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
+
+A key is searched against existing keys as a prefix. When there are multiple matches, the **most recent match** will be used, even if there is a more precise match. For example:
+
+``` YAML
+steps:
+  - save_cache:
+      key: v1-myapp-cache
+      paths:
+        - ~/d1
+
+  - save_cache:
+      key: v1-myapp-cache-new
+      paths:
+        - ~/d2
+
+  - run: rm -f ~/d1 ~/d2
+
+  - restore_cache:
+      key: v1-myapp-cache
+```
+
+In this case cache `v1-myapp-cache-new` will be restored because it's the most recent match with `v1-myapp-cache` prefix even if the first key (`v1-myapp-cache`) has exact match.
+
+For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
+
+When CircleCI has a choice of multiple keys, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+
+A path is not required here because the cache will be restored to the location where it was originally saved.
+
+Complete example:
+{% raw %}
+``` YAML
+- restore_cache:
+    keys:
+      - v1-myapp-{{ checksum "project.clj" }}
+      # if cache for exact version of `project.clj` is not present then load any most recent one
+      - v1-myapp-
+
+# ... Steps building and testing your application ...
+
+# cache will be saved only once for each version of `project.clj`
+- save_cache:
+    key: v1-myapp-{{ checksum "project.clj" }}
+    paths:
+      - /foo
 ```
 {% endraw %}
 
@@ -400,50 +463,6 @@ There can be multiple `artifacts-store` steps in a job. Using a unique prefix fo
           - store_artifacts:
               path: /code/test-results
               destination: prefix
-```
-
-#### `restore_cache`
-
-Step used to restore a dependency cache (if present).
-
-Fields (at least one required):
-
-  * `key`: a single cache key to restore.
-  * `keys`: a list of cache keys which should be restored. Use this if you want to specify fallback caches, like "use a cache from this branch, or master on a cache-miss".
-
-If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
-
-When CircleCI has a choice of multiple keys, the cache will be restored from the first one matching an existing cache.  If no key has a cache that exists, the step will be skipped with a warning. A path is not required here because the cache will be restored to the location where it was originally saved.
-
-A key is searched against existing keys as a prefix.  When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
-
-For more information on key formatting, see the `key` section of `save_cache` above.
-
-Example:
-```yaml
-<<<<<<< variant A
-          - type: cache-restore
-            keys:
-              - projectname-{{ .Branch }}-{{ checksum "project.clj" }}
-              # Providing keys in decreasing specificity means it's more likely a new cache can be built from an existing one.
-              - projectname-
-
-          # Repeat builds will restore from this step as it will produce the newest cache
-          - type: cache-save
-            key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}-{{ epoch }}
-            paths:
-              - /foo
-
-          # This step will only save on the first build, then be skipped on subsequent builds.
-          - type: cache-save
-            key:  projectname-{{ .Branch }}-{{ checksum "project.clj" }}
-            paths:
-              - /foo
-
->>>>>>> variant B
-          - restore_cache:
-              key: projectname-{{ .Branch }}-{{ checksum "project.clj" }}
-======= end
 ```
 
 #### `store_test_results`
