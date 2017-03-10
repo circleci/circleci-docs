@@ -30,11 +30,9 @@ You'll learn how to run unit tests and integration tests with Selenium and Chrom
 
 Finally, we'll deploy the application to Heroku and discuss other deployment options.
 
-## Upload Your Project to GitHub or BitBucket
+## Upload Your Code
 
-To use CircleCI your code must be available on GitHub or BitBucket. You can use private or public repositories.
-
-In this walkthrough we'll use GitHub.
+To use CircleCI, your code must be available on GitHub or BitBucket, in either a private or public repository. We'll be using GitHub for this walkthrough.
 
 <div class="alert alert-info" role="alert">
 <strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/circleci/cci-demo-walkthrough">cci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
