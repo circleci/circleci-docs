@@ -20,7 +20,7 @@ jobs | Y | List | A list of jobs, see the definition for a job
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
-## `jobs`
+## **`jobs`**
 
 Each job is an item in the `jobs` list. Each job consists of a job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map  has the following attributes:
 
@@ -119,7 +119,7 @@ jobs:
     machine: true
 ```
 
-## `steps`
+## **`steps`**
 
 The `steps` setting in a job should be a list of single key/value pairs, the key to which indicates the step type. The value may be either a configuration map or a string (depends on a step). For example, using a map:
 
@@ -172,11 +172,11 @@ Configuration map is specific for each step and described [below](#built-in-step
 
 In the future you will be able to refer to external steps, but for now you are limited to these built-in predefined steps.
 
-#### `run`
+#### **`run`**
 
 Used for invoking all command-line programs. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-Configuration map:
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -244,7 +244,7 @@ The `background` attribute allows to have command executed in background. In thi
 ```
 In this case `command` is specified just right after step type and the rest of attributes have their default values.
 
-Complete example:
+##### **Complete example**
 ``` YAML
 - run:
     name: Testing application
@@ -262,11 +262,11 @@ Complete example:
 
 ```
 
-#### `checkout`
+#### **`checkout`**
 
 Special step used to check out source code to the configured `path`.
 
-Configuration map:
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -285,11 +285,11 @@ Step has a shorthand:
 
 In this case step type is just a string with no additional attributes
 
-#### `save_cache`
+#### **`save_cache`**
 
 Generates and stores a cache of dependencies or source code. Later builds can restore this cache (using [`restore_cache` step](#restore_cache)). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
 
-Configuration map:
+**Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -321,9 +321,11 @@ Template examples:
 
 While choosing suitable templates for you cache `key` keep in mind that cache saving is not a free operation, because it will take some time to upload cache to our storage. So it make sense to have a `key` that generates new cache only if something actually changed and avoid generating a new one every build.
 
-Tip: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `v1-...`. That way you will be able to regenerate all your caches just by incrementing version in this prefix.
+<div class="alert alert-info" role="alert">
+<b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing version in this prefix.
+</div>
 
-Complete example:
+##### **Complete example**
 
 {% raw %}
 ``` YAML
@@ -334,11 +336,11 @@ Complete example:
 ```
 {% endraw %}
 
-#### `restore_cache`
+#### **`restore_cache`**
 
 Restores a dependency cache for given key. Cache need to be saved first for this key using [`save_cache` step](#save_cache). Learn more about caching [in a separate article]({{ site.baseurl }}/2.0/caching).
 
-Configuration map:
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -376,7 +378,7 @@ When CircleCI has a choice of multiple keys, the cache will be restored from the
 
 A path is not required here because the cache will be restored to the location where it was originally saved.
 
-Complete example:
+##### **Complete example**
 {% raw %}
 ``` YAML
 - restore_cache:
@@ -395,7 +397,7 @@ Complete example:
 ```
 {% endraw %}
 
-#### `deploy`
+#### **`deploy`**
 
 Special step for deploying artifacts.
 
@@ -403,16 +405,18 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
+##### **Example**
+
 ``` YAML
 - deploy:
     command: ansible-playbook site.yml
 ```
 
-#### `store_artifacts`
+#### **`store_artifacts`**
 
 Step to storing artifacts (for example logs, binaries, etc) to be available in UI or via API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts)
 
-Configuration map:
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -422,15 +426,19 @@ destination | Y | Prefix added to the artifact paths in the artifacts API
 
 There can be multiple `artifacts-store` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
+##### **Example**
+
 ``` YAML
 - store_artifacts:
     path: /code/test-results
     destination: prefix
 ```
 
-#### `store_test_results`
+#### **`store_test_results`**
 
 Special step used to upload test results to be stored in artifacts and shown in UI.
+
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -439,14 +447,18 @@ path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadat
 
 The directory layout should match the [classic CircleCI test metadata directory layout]({{ site.baseurl }}/1.0/test-metadata/#metadata-collection-in-custom-test-steps).
 
+##### **Example**
+
 ``` YAML
 - test-results-store:
     path: /tmp/test-results
 ```
 
-#### `add_ssh_keys`
+#### **`add_ssh_keys`**
 
 Special step that adds SSH keys configured in the project's UI to the container.
+
+##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
