@@ -408,6 +408,19 @@ Complete example:
 ```
 {% endraw %}
 
+#### `deploy`
+
+Special step for deploying artifacts.
+
+`deploy` uses the same configuration map and semantic as [`run`](#run) step. Job may have more than one `deploy` step.
+
+In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
+
+``` YAML
+- deploy:
+    command: ansible-playbook site.yml
+```
+
 #### `add_ssh_keys`
 
 Special step that adds SSH keys configured in the project's UI to the container.
@@ -478,20 +491,6 @@ The directory layout should match the [classic CircleCI test metadata directory 
 ```yaml
           - test-results-store:
               path: /tmp/test-results
-```
-
-#### `deploy`
-
-Special step used to deploy artifacts.
-
-`deploy` uses the same fields as [`run`](#run). Config may have more than one `deploy` step.
-
-In a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-
-```yaml
-          - deploy:
-              shell: /bin/sh
-              command: ansible-playbook site.yml
 ```
 
 ### Putting it all together
