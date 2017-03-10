@@ -12,19 +12,19 @@ This tutorial will teach you important concepts about using CircleCI. We recomme
 
 You will learn how to build, test and deploy an application using CircleCI. The application is a working web application and will be **relevant to you no matter what language or stack you are using**.
 
-**Note: CircleCI 2.0 does not currently support build iOS and Android applications. Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
+**Note: CircleCI 2.0 does not currently support building iOS and Android applications.** Mobile developers should check our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
 
 ## The Demo App - 'Circulate'
 
 'Circulate' is a 'social blogging' web application similar to Twitter. Users can create accounts, make posts, follow users and comment on posts. You can *circulate* your thoughts and ideas :-) Here's a screenshot of it in use:
 
-![]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
+![Circulate demo app screenshot]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
 
 The source for the application is here: [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough).
 
 **Original Author Credit:** This is based on Miguel Grinberg's excellent [Flasky](https://github.com/miguelgrinberg/flasky) application.
 
-The application uses Python and Flask for the back-end. The concepts for building on CircleCI are the same for Ruby / Rails, JavaScript and Node, and other stacks -- so please stay with us, even if you don't use Python.
+The application uses Python and Flask for the back-end. The concepts for building on CircleCI are the same for Ruby / Rails, JavaScript / Node, and other stacks -- so please stay with us, even if you don't use Python.
 
 PostgreSQL is used for the database -- you'll learn how to run tests on CircleCI with this. If you're using MySQL or another database, the concepts are similar.
 
@@ -74,7 +74,7 @@ As soon as you click 'Build Project', we will run a build. The first one will fa
 ## Adding a Job
 
 <div class="alert alert-info" role="alert">
-<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll cover essential elements to get you up and running.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for is available here</a>.
+<strong>Tip:</strong> The <code>config.yml</code> file is flexible and powerful. In this guide, we'll cover essential elements to get you up and running.<br /><a class="alert-link" href="/docs/2.0/configuration-reference/">Full reference documentation for <code>config.yml</code> is available here</a>.
 </div>
 
 `config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container -- the 'primary container'.
@@ -101,23 +101,23 @@ Next, we specify the 'executor' as `docker`. While getting started, you should a
 
 Now we choose a Docker image for our 'primary container'. This can be any publicly available Docker image. The best way to get started is to use an officially maintained image from Docker Hub for the language you are using. Above we're using the `python:3.6.0` image. You can [explore official images here](https://hub.docker.com/explore/).
 
+Private images are supported but there are some requirements you will need to meet. [Read more about using private images here](/docs/2.0/building-docker-images/#private-images-and-docker-registries). While getting started we recommend using public images.
+
 <div class="alert alert-warning" role="alert">
-<strong>Note:</strong> If you choose a lightweight image, such as an 'alpine' based image, it may not have essential tools installed such as Git that you will need to checkout your code or get your job running. You will need to take some extra steps to add those tools if you do this. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about solving this on Discuss</a>.
+<strong>Note:</strong> If you choose a lightweight image, such as an 'alpine' based image, it may not have essential tools installed, such as Git, that you will need to checkout your code, or get your job running. You will need to take some extra steps to add those tools if you do this. You can <a href="https://discuss.circleci.com/c/circleci-2-0" class="alert-link">find solutions and ask questions about  this on Discuss</a>.
 </div>
 
 With a primary container specified, we can create the first 'steps' for our job. The first step checks out our code from GitHub with the special `checkout` step. Then we `run` a command. This can be any valid 'bash' command. To get started, we're just going to `echo` a greeting to stdout.
 
 With the above in `config.yml`, we can commit and push our code. CircleCI will automatically run the job, and we’ll get our first green build!
 
-![]({{ site.baseurl }}/assets/img/docs/walkthrough2.png)
+![First passing build]({{ site.baseurl }}/assets/img/docs/walkthrough2.png)
 
 CircleCI has started our primary container, checked out our code, and run our 'Hello World' command.
 
-
-
 <div class="alert alert-info" role="alert">
 <h3>The CircleCI CLI</h3>
-<p>You may be wondering how this all managed to run just by pulling a standard image from Docker hub. The magic happens with a tool called the CircleCI CLI. We inject this agent into the primary build container to enable jobs to run. You can find out more about this and even install it locally by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
+<p>You may be wondering how this all ran, just by pulling a standard image from Docker hub. The magic is made possible with a tool called the CircleCI CLI. We inject this agent into the primary build container to enable jobs to run. You can find out more about this, and even install it locally, by reading <a class="alert-link" href="/docs/2.0/local-jobs/">Running Jobs Locally</a>.
 </p>
 </div>
 
@@ -150,7 +150,7 @@ jobs:
           command: pip install -r requirements/dev.txt
 ```
 
-If you're following along, you can now add that to your project, commit and push to GitHub. The build should run and install all your dependencies.
+If you're following along, you can add that to your project, commit and push to GitHub. The build should run and install all your dependencies.
 
 We've added quite a few things. Let's go through them:
 
@@ -170,8 +170,8 @@ We're using PostgreSQL 9.6.2. As before, we select an official image from Docker
 
 Our app uses webdriver to run tests via Selenium on Chrome. A great way to do this on CircleCI 2.0 is to use the `selenium/standalone` images. All we need to do is add:
 
-```
-- image: selenium/standalone-chrome:3.1.0
+```YAML
+  - image: selenium/standalone-chrome:3.1.0
 ```
 
 Your tests should now run just as they do locally if you're set up for webdriver / selenium testing.
