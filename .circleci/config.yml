@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2.3.3
+    working_directory: /home/ubuntu/circleci-docs/
+    environment:
+      - JEKYLL_ENV=production
+      - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+      - GENERATED_SITE_PATH=jekyll/_site/docs/
+    steps:
+      - checkout
+      # - run: echo $JEKYLL_ENV
+      # - run: pwd
+      # - run: ls -al
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
+      - store_artifacts: 
+          path: $GENERATED_SITE_PATH
+          
+
