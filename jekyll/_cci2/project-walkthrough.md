@@ -297,18 +297,19 @@ When the build completes you can find the artifacts via the CircleCI UI:
 
 ![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough3.png)
 
-## Test timing, JUnit XML reporting
+## Store Test Results
 
-It would be helpful to get test timing results. Our test suite has already been configured to output results in the JUnit XML format. We can CircleCI to analyse the files by adding the following to `config.yml`:
+It would be helpful to get test timing results. Our test suite has already been configured to output results in the JUnit XML format. We can use CircleCI to analyze the files by adding the following to `config.yml`:
 
 ```YAML
+...
       - store_test_results:
           path: test-reports/
 ```
 
-The path for the result files is relative to the root of the project. (In our example we're using the same directory as we used to store artifacts - but this wouldn't always be the case.)
+The path for the result files is relative to the root of the project. In our example we're using the same directory as we used to store artifacts - but this doesn't have to be the case.
 
-When the build completes, CircleCI will analyse your test timings and summarise them on the `Test Summary` tab:
+When the build completes, CircleCI will analyze your test timings and summarize them on the `Test Summary` tab:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough4.png)
 
