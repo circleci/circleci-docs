@@ -16,6 +16,7 @@ jobs:
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
       - store_artifacts: 
-          path: $GENERATED_SITE_PATH
+          # really wish this could use $GENERATED_SITE_PATH
+          path: jekyll/_site/docs/
           destination: circleci-docs
 
