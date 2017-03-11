@@ -13,10 +13,19 @@ jobs:
       # - run: echo $JEKYLL_ENV
       # - run: pwd
       # - run: ls -al
+      - run: echo $CIRCLE_ARTIFACTS
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
-      - store_artifacts: 
-          # really wish this could use $GENERATED_SITE_PATH
-          path: jekyll/_site/docs/
-          destination: circleci-docs
+      # - store_artifacts: 
+      #     # really wish this could use $GENERATED_SITE_PATH
+      #     path: jekyll/_site/docs/
+      #     destination: circleci-docs
+      - run: gem install ffi
+      - run: bundle exec htmlproofer @GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
 
+
+  # test:
+  #   docker:
+  #     image: ruby:2.3.3
+  #   working_directory: /home/ubuntu/circleci-docs/
+  #   steps:
