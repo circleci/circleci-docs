@@ -20,7 +20,7 @@ jobs:
       #     # really wish this could use $GENERATED_SITE_PATH
       #     path: jekyll/_site/docs/
       #     destination: circleci-docs
-      - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore --verbose | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
+      - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
 
 
   # test:
