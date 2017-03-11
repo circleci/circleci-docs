@@ -319,7 +319,7 @@ When the build completes, CircleCI will analyze your test timings and summarize 
 
 For now, here's a [guide on Discuss](https://discuss.circleci.com/t/deploying-examples/8093)
 
-## Make the Job Faster with Prallelism
+## Make the Job Faster with Parallelism
 
 **Note: 2017-03-10:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about testing your application in parallel.
 
