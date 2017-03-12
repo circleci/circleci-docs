@@ -173,7 +173,7 @@ test:
 
 #### <a name="phpunit"></a>PHPUnit
 
-For PHPUnit tests, you should generate a file using the `--log-junit` comment line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
+For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
 
 ```
 test:
