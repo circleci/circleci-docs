@@ -6,7 +6,7 @@ description: Nightly Builds
 ---
 
 The [Parameterized Build API]( {{ site.baseurl }}/1.0/parameterized-builds/)
-allows you to trigger a build using the [CircleCI API]( {{ site.baseurl }}/1.0/api/#new-build)
+allows you to trigger a build using the [CircleCI API]( {{ site.baseurl }}/api/v1-reference/#new-build)
 and inject environment variables into the build environment. Typically a server in your own infrastructure or 3rd party service would be used to trigger these builds.
 
 You can customize your `circle.yml` to take different actions, such as running a much more extensive test suite, when certain build parameters are present.

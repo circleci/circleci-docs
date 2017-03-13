@@ -270,4 +270,4 @@ This tool can combine the reports into a single file that our test summary syste
 
 ## API
 
-You can access test metadata for a build from the [API]( {{ site.baseurl }}/1.0/api/#test-metadata).
+You can access test metadata for a build from the [API]( {{ site.baseurl }}/api/v1-reference/#test-metadata).

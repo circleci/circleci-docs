@@ -23,7 +23,7 @@ Note: all the examples use `bash` and `curl` but there is nothing to stop you us
 
 <h3 id="detail">Triggering Parameterized Builds</h3>
 
-Builds are triggered by POSTing to [the trigger new build API]( {{ site.baseurl }}/1.0/api/#new-build).
+Builds are triggered by POSTing to [the trigger new build API]( {{ site.baseurl }}/api/v1-reference/#new-build).
 
 A POST with an empty body will trigger a new build of the named branch.
 You can include build parameters by sending a JSON body with `Content-type: application/json`:

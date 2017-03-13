@@ -619,7 +619,7 @@ notify:
 ```
 
 The JSON packet is identical to the result of the
-[Build API]( {{ site.baseurl }}/1.0/api/#build)
+[Build API]( {{ site.baseurl }}/api/v1-reference/#build)
 call for the same build, except that it is wrapped in a "payload" key:
 
 ```
