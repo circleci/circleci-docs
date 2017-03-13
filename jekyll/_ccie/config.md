@@ -90,7 +90,7 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     SERVICES_PRIVATE_IP=X.X.X.X \
     CIRCLE_SECRET_PASSPHRASE=xxxx \
     CIRCLE_SHARED_DOCKER_ENGINE=true \
-    CIRCLE_CONTAINER_IMAGE_URI="CIRCLE_CONTAINER_IMAGE_ID=circleci-trusty-container_0.0.575" \
+    CIRCLE_CONTAINER_IMAGE_ID=ubuntu-14.04-dot-com-XXL-927-41cd8fe \
     bash
 ```
 
