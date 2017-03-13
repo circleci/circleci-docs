@@ -16,7 +16,7 @@ commands that will run after a green build.
 
 ### Version
 
-We have many versions of NodeJS pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#nodejs) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#nodejs) build images.
+We have many versions of NodeJS pre-installed on [Ubuntu 12.04]( {{ site.baseurl }}/1.0/build-image-precise/#nodejs) and [Ubuntu 14.04]( {{ site.baseurl }}/1.0/build-image-trusty/#nodejs) build images. If a non-pre-installed version is specified, CircleCI will download and use that version.
 
 If you don't want to use the default, you can specify your version in `circle.yml`:
 
