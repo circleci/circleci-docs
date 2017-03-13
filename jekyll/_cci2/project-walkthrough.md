@@ -6,6 +6,9 @@ categories: [getting-started]
 order: 25
 ---
 
+* Contents
+{:toc}
+
 ## Introduction
 
 This tutorial will show you how to build, test, and deploy a web application using CircleCI. Whether you're new to the platform or a long-time user, we think you'll find the information here helpful.
