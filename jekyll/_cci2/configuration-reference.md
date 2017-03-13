@@ -117,7 +117,7 @@ Example:
 ``` YAML
 jobs:
   build:
-    machine: 
+    machine:
       enabled: true
 ```
 
@@ -176,7 +176,7 @@ In the future you will be able to refer to external and custom step types, but f
 
 #### **`run`**
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command. 
+Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
 ##### **Configuration map**
 
@@ -353,9 +353,9 @@ keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to res
 
 <sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
 
-A key is searched against existing keys as a prefix. 
+A key is searched against existing keys as a prefix.
 
-NOTE: _When there are multiple matches, the **most recent match** will be used, even if there is a more precise match._ 
+NOTE: _When there are multiple matches, the **most recent match** will be used, even if there is a more precise match._
 
 For example:
 
@@ -432,7 +432,7 @@ path | Y | String | Directory in the primary container to save as build artifact
 destination | Y | Prefix added to the artifact paths in the artifacts API
 {: class="table table-striped"}
 
-There can be multiple `artifacts-store` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
+There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
 ##### **Example**
 
