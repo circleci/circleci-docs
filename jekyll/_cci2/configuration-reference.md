@@ -416,7 +416,10 @@ In general `deploy` step behaves just like `run` with one exception - in a build
 
 ``` YAML
 - deploy:
-    command: ansible-playbook site.yml
+    command: |
+      if [ "${CIRCLE_BRANCH}" == "master" ]; then
+        ansible-playbook site.yml
+      fi
 ```
 
 #### **`store_artifacts`**
