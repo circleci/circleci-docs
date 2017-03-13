@@ -13,7 +13,7 @@ order: 25
 
 This tutorial will show you how to build, test, and deploy a web application using CircleCI. Whether you're new to the platform or a long-time user, we think you'll find the information here helpful.
 
-If you're a mobile developer, please note that CircleCI 2.0 doesn’t yet support building iOS/Android apps. Until then, please refer to our documentation for [mobile on 1.0](https://circleci.com/docs/1.0/mobile/).
+If you're a mobile developer, please note that CircleCI 2.0 doesn’t yet support building iOS/Android apps. Until then, please refer to our documentation for [mobile on 1.0]({{ site.baseurl }}/1.0/mobile/).
 
 ## The Demo App - 'Circulate'
 
@@ -58,7 +58,7 @@ This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to buil
 
 ## Add Project and Start Building
 
-Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate your project and click the green 'Build Project' button.
+Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects/)' screen. Locate your project and click the green 'Build Project' button.
 
 When you click 'Build Project', we’ll run a build. The first one will fail since our `config.yml` isn't valid:
 
@@ -96,7 +96,7 @@ In the example above, all configuration lives under a job called `build`. **Ever
 
 First, we specify a working directory where commands will be executed.
 
-Next, we have to choose an 'executor', the underlying technology that's running your build. While getting started, we recommend using the `docker` executor. [Read more about executor types and their tradeoffs here](/docs/2.0/executor-types).
+Next, we have to choose an 'executor', the underlying technology that's running your build. While getting started, we recommend using the `docker` executor. [Read more about executor types and their tradeoffs here]({{ site.baseurl }}/2.0/executor-types/).
 
 #### Specify an Image
 

@@ -36,7 +36,7 @@ environment | N | Map | A map of environment variable names and valuables (NOTE:
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
 
@@ -57,7 +57,7 @@ jobs:
 
 ## Executors
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types).
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 ### Docker executor
 Configured by `docker` key which takes a list of maps:
@@ -75,11 +75,11 @@ environment | N | Map | A map of environment variable names and values
 
 `command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
 
-For [primary container]({{ site.baseurl }}/2.0/glossary#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting preliminary.
+For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting preliminary.
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to DockerHub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types#specifying-images).
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to DockerHub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types/#specifying-images).
 
 Example:
 
@@ -289,7 +289,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 <a name="save_cache"/>
 #### **`save_cache`**
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can restore this cache (using a [`restore_cache` step](#restore_cache)). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching).
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can restore this cache (using a [`restore_cache` step](#restore_cache)). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 **Configuration map**
 
@@ -341,7 +341,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <a name="restore_cache"/>
 #### **`restore_cache`**
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching).
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 ##### **Configuration map**
 
@@ -425,7 +425,7 @@ In general `deploy` step behaves just like `run` with one exception - in a build
 #### **`store_artifacts`**
 
 <!-- TODO: replace the 1.0 link here with a 2.0 link -->
-Step to store artifacts (for example logs, binaries, etc) to be available in the web UI or via the API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts)
+Step to store artifacts (for example logs, binaries, etc) to be available in the web UI or via the API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts/)
 
 ##### **Configuration map**
 
