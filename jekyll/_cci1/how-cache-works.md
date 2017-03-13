@@ -45,7 +45,7 @@ like this:
 
 ```yaml
 dependencies:
-  override:
+  pre:
     - mkdir ~/my_cache_dir
     # now add files and directories to the above directory
   cache_directories:
