@@ -58,7 +58,7 @@ This tells CircleCI to use CircleCI 2.0. Without this, CircleCI will try to buil
 
 ## Add Project and Start Building
 
-Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects/)' screen. Locate your project and click the green 'Build Project' button.
+Log into CircleCI ([create an account](https://circleci.com/signup/) if you haven't already) and go to the '[Add Projects](https://circleci.com/add-projects)' screen. Locate your project and click the green 'Build Project' button.
 
 When you click 'Build Project', we’ll run a build. The first one will fail since our `config.yml` isn't valid:
 
