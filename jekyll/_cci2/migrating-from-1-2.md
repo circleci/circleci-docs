@@ -113,7 +113,7 @@ jobs:
       - image: busybox
 
     steps:
-      - run: echo 127.0.0.1 circlehost | tee -a /etc/host
+      - run: echo 127.0.0.1 circlehost | tee -a /etc/hosts
 ```
 
 ## Checkout
