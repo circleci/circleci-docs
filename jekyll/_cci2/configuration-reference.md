@@ -458,7 +458,7 @@ The directory layout should match the [classic CircleCI test metadata directory 
 ##### **Example**
 
 ``` YAML
-- test-results-store:
+- store_test_results:
     path: /tmp/test-results
 ```
 
