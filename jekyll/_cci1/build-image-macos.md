@@ -11,7 +11,7 @@ To change a project from building on Linux to building on macOS you can go to
 'Project Settings' -> 'Build Environment', and enable the 'Build OS X project'
 setting.
 
-To apply the new setting, you will need to trigger a build by pushing commits to GitHub or Bitbucket (instead of rebuilding).
+**NOTE: To apply the new setting, you will need to trigger a build by pushing commits to GitHub or Bitbucket (instead of rebuilding).**
 
 ## Software
 
