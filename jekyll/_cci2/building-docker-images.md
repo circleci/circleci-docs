@@ -33,13 +33,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.6.4
+      - image: golang:1.6.4   # (1)
     working_directory: /go/src/github.com/circleci/cci-demo-docker
     steps:
       - checkout
       # ... steps for building/testing app ...
 
-      - setup_docker_engine
+      - setup_docker_engine   # (2)
 
       # use a build image that already has Docker (recommended)
       # or install it during a build like we do here
@@ -52,22 +52,22 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t cci-demo-docker:$TAG .
-          docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+          docker build -t cci-demo-docker:$TAG .                          # (3)
+          docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS   # (4)
           docker push circleci/cci-demo-docker:$TAG
 ```
 
 Let’s break down what’s happening during this build’s execution:
 
-- All commands are executed in the [primary container][primary-container].
-- Once `setup_docker_engine` is called, a new remote environment is created, and your primary container is configured to use it.
-- All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-- We use project environment variables to store credentials for Docker Hub.
+1. All commands are executed in the [primary container][primary-container].
+2. Once `setup_docker_engine` is called, a new remote environment is created, and your primary container is configured to use it.
+3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
+4. We use project environment variables to store credentials for Docker Hub.
 
 ## Separation of Environments
 Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
-### Starting Services
+### Accessing Services
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
 
 ```YAML
@@ -89,7 +89,7 @@ A different way to do this is to use another container running in the same netwo
 It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
 
 ## Private Images and Docker Registries
-Using private images isn’t directly supported by the Docker Executor. However, you _can_ use the Remote Docker Environment.
+Using private images isn’t directly supported by the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor). However, you _can_ use the Remote Docker Environment.
 
 If your application requires a proprietary DB for testing, for example:
 
