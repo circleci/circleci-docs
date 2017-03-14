@@ -8,9 +8,7 @@ order: 50
 
 ## Does CircleCI 2.0 run inference commands?
 
-No, CircleCI 2.0 does not infer anything from your project.
-
-This means that no commands are run automatically. Don’t assume that a particular library/package is available unless it is bundled with the Docker image you are using!
+Currently, CircleCI 2.0 doesn't infer anything from your project, but we have plans to replace our inference system before moving out of Beta. Until then, you'll need to manually configure all jobs.
 
 ## My project is running on CircleCI 2.0, but the build is frozen!
 
