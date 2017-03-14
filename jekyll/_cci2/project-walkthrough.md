@@ -74,7 +74,7 @@ Note that you must be an administrator or owner of the project in order to start
 
 `config.yml` is comprised of several **jobs**. In turn, a job is comprised of several **steps**, which are commands that execute in the first specified container -- the 'primary container'.
 
-**There is no 'inference' in CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug.
+**We haven't yet replaced our 'inference' system in CircleCI 2.0.** On CircleCI 1.0, if we didn't detect a configuration file, we 'inferred' things about your project and tried to build it. This was great for getting projects up and running quickly, but as things got more complex, it added 'magic' that was hard to debug. We're actively working on making this more effective, but until then you'll need to manually configure all jobs.
 
 Here's a minimal example for our demo project:
 
