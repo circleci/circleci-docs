@@ -45,7 +45,7 @@ For testing purposes, most applications and libraries require five to six standa
 *   Set up your test dependencies
 *   Set up your test databases
 *   Run your tests
-*   (Optionally) deploy your code
+*   (Optionally) [deploy your code]({{ site.baseurl }}/1.0/configuration/#deployment)
 
 Each phase consists of a list of bash commands.
 Normally, these commands are inferred by CircleCI, but if you are reading this, you will likely be manually adding some commands to the
