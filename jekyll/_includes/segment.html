@@ -12,7 +12,7 @@
     "short-title": {{ page["short-title"] | jsonify }},
     "categories" : {{ page["categories"] | jsonify }},
     "description": {{ page["description"] | jsonify }},
-    "collection": {{ page.collection | jsonify }}
+    "collection": {{ page["collection"] | jsonify }}
   };
 
   analytics.page(pageCategory, pageName, properties);
