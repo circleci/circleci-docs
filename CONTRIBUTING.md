@@ -25,6 +25,24 @@ clone your fork to your local machine, work on your contribution in a branch, an
 We welcome your feedback and suggestions. Please [open a GitHub Issue](https://github.com/circleci/circleci-docs/issues) 
 on this repository. There you can let us know what needs fixing or suggest content for new documentation.
 
+## How To Add a Table of Contents
+
+If your article has many sections, you can add a Table of Contents like this:
+
+```
+* TOC
+{:toc}
+```
+
+The `* TOC` line will not display. Heading levels specified in the article will be rendered as an unordered list.
+
+To exclude a heading from the TOC do this:
+
+```
+# Not in the TOC
+{:.no_toc}
+```
+
 ---
 
 ## How To Write 2.0 Docs
