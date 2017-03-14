@@ -68,7 +68,7 @@ Let’s break down what’s happening during this build’s execution:
 Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
 
 ### Accessing Services
-It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a a service from remote docker, as well as through the same container:
+It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```YAML
 # start service and check that it’s running
