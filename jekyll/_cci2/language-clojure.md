@@ -22,6 +22,7 @@ That last one is not a strict requirement, (you can require devs to install it b
 
 ## Sample Configuration
 
+{% raw %}
 ```YAML
 version: 2
 jobs:
@@ -46,6 +47,7 @@ jobs:
           path: target/cci-demo-clojure.jar
           destination: uberjar
 ```
+{% endraw %}
 
 ## Get the Code
 
@@ -97,6 +99,7 @@ Then `bin/lein do test, uberjar` runs the actual tests, and if they succeed, it 
 
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
+{% raw %}
 ```YAML
 ...
     steps:
@@ -114,6 +117,7 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
           path: target/cci-demo-clojure.jar
           destination: uberjar
 ```
+{% endraw %}
 
 Nice! You just set up CircleCI for a Clojure app.
 
