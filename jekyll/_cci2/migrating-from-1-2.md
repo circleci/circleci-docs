@@ -186,8 +186,8 @@ jobs:
     steps:
       - checkout
 
-      # There’s no inference in 2.0, which means there’s nothing to override.
-      # You’ll need to manually install your project’s dependencies.
+      # We're still building our new inference system for 2.0, but until then, there’s nothing to override.
+      # For now, you'll need to manually install your project’s dependencies.
       # The current timeout for no output is hardcoded to 600 seconds
       - run:
           name: Install Dependencies
@@ -198,7 +198,7 @@ jobs:
           name: Create Test DB
           command: setup-db-command
 
-      # Again, there is no inference in 2.0, so nothing to override here, either.
+      # Again, no inference in 2.0 yet, so nothing to override here, either.
       # Just use any test commands.
       - run:
           name: Run Tests
