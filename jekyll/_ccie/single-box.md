@@ -25,7 +25,7 @@ any environment. There are just a few firm requirements:
 
 ## On AWS
 
-Installing CircleCI Enterpise on a single EC2 VM is extremely quick and
+Installing CircleCI Enterprise on a single EC2 VM is extremely quick and
 easy with our pre-made AMI.
 
 **SECURITY NOTE:** All builds that run on this machine will have access
