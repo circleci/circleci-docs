@@ -8,7 +8,7 @@ last_updated: Feb 2, 2013
 
 If you would prefer to poll the status of your projects' builds, rather than rely on
 notifications, CircleCI offers an implementation of the
-[Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard),
+[Multiple Project Summary Reporting Standard](https://github.com/erikdoe/ccmenu/wiki/Multiple-Project-Summary-Reporting-Standard),
 which is the format (originally from CruiseControl) consumed by common CI monitoring tools.
 
 ### Configuration
