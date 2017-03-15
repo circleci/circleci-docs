@@ -41,19 +41,22 @@ jobs:
 
       - setup_docker_engine   # (2)
 
-      # use a build image that already has Docker (recommended)
+      # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
-      - run: |
-          set -ex
-          curl -L -o /tmp/docker-1.12.3.tgz https://get.docker.com/builds/Linux/x86_64/docker-1.12.3.tgz
-          tar -xz -C /tmp -f /tmp/docker-1.12.3.tgz
-          mv /tmp/docker/* /usr/bin
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
 
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t cci-demo-docker:$TAG .                          # (3)
-          docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS   # (4)
+          docker build -t circleci/cci-demo-docker:$TAG .      # (3)
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
           docker push circleci/cci-demo-docker:$TAG
 ```
 
@@ -74,7 +77,7 @@ It’s impossible to start a service in remote docker and ping it directly from 
 # start service and check that it’s running
 - run: |
     docker run -d --name my-app my-app
-    docker exec my-app curl --retry 10 http://localhost:8080
+    docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
 ```
 
 A different way to do this is to use another container running in the same network as the target container:
@@ -82,7 +85,7 @@ A different way to do this is to use another container running in the same netwo
 ```YAML
 - run: |
     docker run -d --name my-app my-app
-    docker run --network container:my-app appropriate/curl --retry 10 http://localhost:8080
+    docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
 ```
 
 ### Mounting Folders
@@ -106,7 +109,7 @@ jobs:
 
       # start proprietary DB using private Docker image
       - run: |
-          docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker run -d --name db company/proprietery-db:1.2.3
 
       # build and test application
