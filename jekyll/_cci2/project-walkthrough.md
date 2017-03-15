@@ -310,7 +310,7 @@ It would be helpful to get test timing results. Our test suite has already been 
           path: test-reports/
 ```
 
-The path for the result files is relative to the root of the project. In our example we're using the same directory as we used to store artifacts - but this doesn't have to be the case.
+The path for the result files is relative to the root of the project. In our example, we're using the same directory as we used to store artifacts - but this doesn't have to be the case.
 
 When the build completes, CircleCI will analyze your test timings and summarize them on the `Test Summary` tab:
 
@@ -318,23 +318,25 @@ When the build completes, CircleCI will analyze your test timings and summarize 
 
 ## Deployment
 
-We're going to deploy our application to Heroku. You can use the same principles for deploying to other targets.
+We're going to deploy our application to Heroku, but the same principles apply when deploying to other targets.
 
-### Preparing the app for Heroku
+### Prepare App for Heroku
 
-Our app already has configuration settings for running on Heroku. Take a look at `config.py` and `manage.py` to see how this is done. This lets the app know to run with production settings, run migrations for the PostgreSQL database and to use SSL when on Heroku.
+Our app is already configured to run on Heroku with `config.py` and `manage.py`. These 2 files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
-Other files that are necessary for Heroku are: 
+Other files required by Heroku are:
 
-- `Procfile` tells Heroku how to run our app
-- `runtime.txt` tells Heroku that we want to use Python 3.6.0 (not the default 2.7.13)
-- `requirements.txt` we're adding a requirements file to the root of our project so that Heroku can detect our Python application and install dependencies
+- `Procfile`: tells Heroku how to run our app
+- `runtime.txt`: tells Heroku to use Python 3.6.0 instead of the default (2.7.13)
+- `requirements.txt`: when this is present, Heroku will automatically install our Python dependencies
 
-**Consult the Heroku documentation to get your own app set up for their environment.**
+**Consult the [Heroku documentation](https://devcenter.heroku.com/start) to configure your own app for their environment.**
 
-### Create the app on Heroku and deploy manually
+### Create Heroku App and Manually Deploy
 
-Before we get CircleCI to deploy our app we should create it and make sure it works by deploying manually. Install the Heroku CLI locally and log into your account to run commands similar to the ones below (replace `cci-demo-walkthrough` with a unique name for your app):
+Before deploying through CircleCI, we'll create it and confirm it works by manually deploying.
+
+Install the Heroku CLI locally and log into your account. The commands you'll run should be fairly similar to the example below, though you'll need to replace `cci-demo-walkthrough` with your app's unique name.
 
 ```
 heroku create cci-demo-walkthrough
@@ -347,32 +349,26 @@ heroku restart
 
 Your app should now be running on Heroku. You can see the example app here: <https://cci-demo-walkthrough.herokuapp.com/>
 
-### Set up CircleCI to deploy to Heroku
+### Deploy Through CircleCI
 
-We need to get Heroku installed and authorized for our account on CircleCI.
+We need to install and authorize Heroku for our CircleCI account.
 
 <div class="alert alert-info" role="alert">
-<p>The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently support on CircleCI 2.0. If you add keys and configuration to those sections of the UI they will have no effect on 2.0.
+<p>The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Adding keys and configuration through the UI will have no effect on 2.0.
 </p>
 </div>
 
-1. Add Environment Variables for your Heroku login email and API key to the CircleCI UI:
+Add environment variables for your Heroku API key and login email to the CircleCI UI:
 
 ![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
 
-2. Create an SSH key to to allow connecting to the Heroku Git server from CircleCI. Create a key pair locally with `ssh-keygen`. We recommend creating an SSH key specifically for deploying this app from CircleCI.
+Using `ssh-keygen`, create an SSH key to enable connecting to the Heroku Git server from CircleCI. We recommend creating an SSH key specifically for deploying this app from CircleCI.
 
-3. Add the private key via the CircleCI UI 'SSH Permissions' screen. Use a hostname of `git.heroku.com`:
+Add the private key via the CircleCI UI 'SSH Permissions' screen with a hostname of `git.heroku.com`. Paste the private key into the input as shown above. Make a note of the 'Fingerprint' for the private key - you'll need this later.
 
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
+Finally, add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
 
-Paste the private key into the input area as shown above.
-
-When you've done that you'll see a 'Fingerprint' for the private key - you'll need this later.
-
-4. Add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
-
-5. Now we'll create a shell file in the `.circleci` folder called `setup-heroku.sh` and add the following:
+Now, create a `setup-heroku.sh` file in the `.circleci` folder and add the following:
 
 ```
 #!/bin/bash
@@ -392,13 +388,14 @@ When you've done that you'll see a 'Fingerprint' for the private key - you'll ne
   EOF
 ```
 
-**Make sure to replace `cci-demo-walkthrhough` in the above file for your own app.**
+**Make sure to replace `cci-demo-walkthrough` with your own app's name.**
 
-This file will run on CircleCI and configures everything Heroku needs to deploy your app. The second part of it creates a `.netrc` file and populates it with the API key and login details we set in the CircleCI UI earlier.
+This file will run on CircleCI and configures everything Heroku needs to deploy your app. The second part creates a `.netrc` file and populates it with the API key and login details we set earlier in the CircleCI UI.
 
-6. Finally we'll update `config.yml` to run the deployment when a build on the Master branch passes all tests:
+Finally, update `config.yml` to deploy when a build on `master` passes all tests:
 
 ```
+...
       - run:
           name: setup Heroku
           command: bash .circleci/setup-heroku.sh
@@ -415,11 +412,11 @@ This file will run on CircleCI and configures everything Heroku needs to deploy 
             fi
 ```
 
-First we run our `setup-heroku.sh` script.
+First, we run our `setup-heroku.sh` script.
 
-Then we add the SSH key we installed via the UI earlier. **Make sure to update the fingerprint to your own key's fingerprint.**
+Then, we add the SSH key we installed earlier. **Make sure to update the fingerprint to your own key's fingerprint.**
 
-The 'deploy' section is a special section where we run our deployment commands. Here we check to see if we're on the 'master' branch via the `${CIRCLE_BRANCH}` environment variable and then run our Heroku deployment commands if that's the case.
+The `deploy` section is a special section where we run our deployment commands. Here, we check if we're on `master` using the `${CIRCLE_BRANCH}` environment variable. If we are, we run our Heroku deployment commands.
 
 Congratulations! Your app will now update on Heroku whenever you have a successful build on the master branch.
 
