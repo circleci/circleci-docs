@@ -5,7 +5,7 @@ categories: [how-to]
 description: "Collecting test metadata"
 ---
 
-CircleCI can collect test metadata from JUnit XML files and Cucumber JSON files.
+CircleCI can collect test metadata from JUnit XML files.
 
 We'll use the test metadata to give you better insight into your build. For our
 inferred steps that use parallelism, we'll always use the timing information to get you
@@ -245,7 +245,7 @@ test:
 reporters: ['junit'],
 
 junitReporter: {
-  outputDir: process.env.JUNIT_REPORT_PATH, 
+  outputDir: process.env.JUNIT_REPORT_PATH,
   outputFile: process.env.JUNIT_REPORT_NAME,
   useBrowserName: false
 },
