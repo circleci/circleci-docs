@@ -310,7 +310,7 @@ It would be helpful to get test timing results. Our test suite has already been 
           path: test-reports/
 ```
 
-The path for the result files is relative to the root of the project. In our example we're using the same directory as we used to store artifacts - but this doesn't have to be the case.
+The path for the result files is relative to the root of the project. In our example, we're using the same directory as we used to store artifacts - but this doesn't have to be the case.
 
 When the build completes, CircleCI will analyze your test timings and summarize them on the `Test Summary` tab:
 
@@ -318,13 +318,111 @@ When the build completes, CircleCI will analyze your test timings and summarize 
 
 ## Deployment
 
-**Note: 2017-03-10:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about deploying your application.
+We're going to deploy our application to Heroku, but the same principles apply when deploying to other targets.
 
-For now, here's a [guide on Discuss](https://discuss.circleci.com/t/deploying-examples/8093)
+### Prepare App for Heroku
+
+Our app is already configured to run on Heroku with `config.py` and `manage.py`. These 2 files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
+
+Other files required by Heroku are:
+
+- `Procfile`: tells Heroku how to run our app
+- `runtime.txt`: tells Heroku to use Python 3.6.0 instead of the default (2.7.13)
+- `requirements.txt`: when this is present, Heroku will automatically install our Python dependencies
+
+**Consult the [Heroku documentation](https://devcenter.heroku.com/start) to configure your own app for their environment.**
+
+### Create Heroku App and Manually Deploy
+
+Before deploying through CircleCI, we'll create it and confirm it works by manually deploying.
+
+Install the Heroku CLI locally and log into your account. The commands you'll run should be fairly similar to the example below, though you'll need to replace `cci-demo-walkthrough` with your app's unique name.
+
+```
+heroku create cci-demo-walkthrough
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set FLASK_CONFIG=heroku
+git push heroku master
+heroku run python manage.py deploy
+heroku restart
+```
+
+Your app should now be running on Heroku. You can see the example app here: <https://cci-demo-walkthrough.herokuapp.com/>
+
+### Deploy Through CircleCI
+
+We need to install and authorize Heroku for our CircleCI account.
+
+<div class="alert alert-info" role="alert">
+<p>The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Adding keys and configuration through the UI will have no effect on 2.0.
+</p>
+</div>
+
+Add environment variables for your Heroku API key and login email to the CircleCI UI:
+
+![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
+
+Using `ssh-keygen`, create an SSH key to enable connecting to the Heroku Git server from CircleCI. We recommend creating an SSH key specifically for deploying this app from CircleCI.
+
+Add the private key via the CircleCI UI 'SSH Permissions' screen with a hostname of `git.heroku.com`. Paste the private key into the input as shown above. Make a note of the 'Fingerprint' for the private key - you'll need this later.
+
+Finally, add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
+
+Now, create a `setup-heroku.sh` file in the `.circleci` folder and add the following:
+
+```
+#!/bin/bash
+  git remote add heroku https://git.heroku.com/cci-demo-walkthrough.git
+  wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
+  mkdir -p /usr/local/lib /usr/local/bin
+  tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+  ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+
+  cat > ~/.netrc << EOF
+  machine api.heroku.com
+    login $HEROKU_LOGIN
+    password $HEROKU_API_KEY
+  machine git.heroku.com
+    login $HEROKU_LOGIN
+    password $HEROKU_API_KEY
+  EOF
+```
+
+**Make sure to replace `cci-demo-walkthrough` with your own app's name.**
+
+This file will run on CircleCI and configures everything Heroku needs to deploy your app. The second part creates a `.netrc` file and populates it with the API key and login details we set earlier in the CircleCI UI.
+
+Finally, update `config.yml` to deploy when a build on `master` passes all tests:
+
+```
+...
+      - run:
+          name: setup Heroku
+          command: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+      - deploy:
+          name: Deploy Master to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git push heroku master
+              heroku run python manage.py deploy
+              heroku restart
+            fi
+```
+
+First, we run our `setup-heroku.sh` script.
+
+Then, we add the SSH key we installed earlier. **Make sure to update the fingerprint to your own key's fingerprint.**
+
+The `deploy` section is a special section where we run our deployment commands. Here, we check if we're on `master` using the `${CIRCLE_BRANCH}` environment variable. If we are, we run our Heroku deployment commands.
+
+Congratulations! Your app will now update on Heroku whenever you have a successful build on the master branch.
+
+Now we just need to make a commit and push to CircleCI to see our app build, test and deploy. Here's the first passing build with deployment for our demo app: <https://circleci.com/gh/circleci/cci-demo-walkthrough/6>
 
 ## Make the Job Faster with Parallelism
-
-**Note: 2017-03-10:** We're in the process of updating this guide with new configuration syntax for CircleCI 2.0. Please check back in the next 24 hours to read about testing your application in parallel.
 
 A key feature is the ability to run your jobs in parallel on many containers to speed up large test suites. [This article](https://circleci.com/docs/2.0/parallelism-faster-jobs/) will help you get started.
 
