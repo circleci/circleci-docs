@@ -117,7 +117,7 @@ tab on the build page:
 ![](  {{ site.baseurl }}/assets/img/docs/artifacts_listing.png)
 
 You can also get them via the
-[CircleCI API]( {{ site.baseurl }}/1.0/api/#build-artifacts).
+[CircleCI API]( {{ site.baseurl }}/api/v1-reference/#build-artifacts).
 
 And then of course, by viewing the generated HTML,
 you can see beautifully rendered HTML in the UI.
