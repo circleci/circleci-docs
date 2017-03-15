@@ -88,8 +88,6 @@ user=>
           :private-key (slurp path-to-private-key)}))
           fleet "osx"]
 
-
-  (circle.backend.model.esxi-vm/run-migrations!) ;; Safe to run multiple times
   (circle.backend.model.esxi-vm/create-esxi-box
    num-vms
    encrypted-keypair
