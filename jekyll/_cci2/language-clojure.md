@@ -14,7 +14,7 @@ Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a det
 
 We're going to make a few assumptions here:
 
-* You're using `clojure.test` with Leiningen's built-in `test` task. But if you use another testing tool, you can just adjust the last step to run a different `lein` task.
+* You're using `clojure.test` with Leiningen's built-in `test` task. But if you use another testing tool, you can just adjust that step to run a different `lein` task.
 * Your application can be distributed as an all-in-one uberjar.
 * You have the [bin/lein shell script](https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein) checked into your project's repository, ensuring everyone is operating with the same version of [Leiningen](https://leiningen.org).
 
@@ -89,6 +89,13 @@ version: 2
 
 We use the [official OpenJDK images](https://hub.docker.com/_/openjdk/) tagged to version `8`.
 
+Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case.
+
+```YAML
+    environment:
+      LEIN_ROOT=nbd
+```
+
 Now we’ll add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
@@ -120,5 +127,12 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 {% endraw %}
 
 Nice! You just set up CircleCI for a Clojure app.
+
+## Detailed Examples
+
+This app illustrates the simplest possible setup for a Clojure web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
+
+* [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml), a site which configures disposable virtual machines for remote collaboration (uses PostgreSQL, continuously deployed to Heroku)
+* [Clojars](https://github.com/technomancy/clojars-web/blob/circleci/.circleci/config.yml), the community library repository for Clojure
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
