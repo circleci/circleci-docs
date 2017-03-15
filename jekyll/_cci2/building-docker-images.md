@@ -9,7 +9,7 @@ order: 1
 ## Overview
 For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
 
-To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands
+To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands.
 
 ## Configuration
 If your build requires `docker` or `docker-compose` commands, you’ll need to add a special step into your `.circleci/config.yml`:
