@@ -39,3 +39,27 @@ Currently, `store_artifacts` requires 2 fields: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
   - `destination` is the artifact name. You will see these names instead of plain file names when viewing artifacts in your browser. This field is currently mandatory, but we've received feedback from Beta users that this should be optional. We'll be revisiting this during the rest of the Beta.
+
+## Accessing Artifacts via API
+
+You can consume artifacts via our [API]( {{ site.baseurl }}/api/v1-reference/#build-artifacts).
+
+You can also access your artifacts in your browser with the following URL:
+
+```
+https://circleci.com/api/v1.1/project/:vcs-type/:org/:repo/:build_num/artifacts/:container-index/path/to/artifact
+```
+
+**Note:** This URL is only accessible if you are logged into CircleCI with an account that has permissions to view / edit the project.
+
+`:vcs-type` is either `github` or `bitbucket`. You can use `latest` in place of `:build_num` together with query parameters `branch` and `filter` to access the artifact from the latest build on a branch. `filter` can have a value of `completed`, `successful`, or `failed` and defaults to `completed`.
+
+For example:
+
+```
+https://circleci.com/api/v1.1/project/github/circleci/mongofinil/63/artifacts/0/$CIRCLE_ARTIFACTS/hello.txt
+```
+
+Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
+
+Artifacts are designed to be useful around the time of the build. We don't recommend relying on them as a software distribution mechanism with long term future guarantees.
