@@ -60,6 +60,4 @@ For example:
 https://circleci.com/api/v1.1/project/github/circleci/mongofinil/63/artifacts/0/$CIRCLE_ARTIFACTS/hello.txt
 ```
 
-Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
-
 Artifacts are designed to be useful around the time of the build. We don't recommend relying on them as a software distribution mechanism with long term future guarantees.
