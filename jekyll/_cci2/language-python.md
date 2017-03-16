@@ -155,6 +155,7 @@ Install both Yarn and Python dependencies.
 Specify where to save that Yarn cache.
 
 {% raw %}
+```YAML
 ...
       - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -188,6 +189,7 @@ Store test results as an artifact.
 Finally, let's specify where those test results are actually located.
 
 {% raw %}
+```YAML
 ...
       - store_test_results:
           path: "test-reports/"
