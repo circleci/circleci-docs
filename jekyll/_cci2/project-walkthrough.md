@@ -354,17 +354,20 @@ Your app should now be running on Heroku. You can see the example app here: <htt
 We need to install and authorize Heroku for our CircleCI account.
 
 <div class="alert alert-info" role="alert">
-<p>The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Adding keys and configuration through the UI will have no effect on 2.0.
-</p>
+<p>**Note:** The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Keys and configuration added to the 'Heroku Deployment' and 'AWS CodeDeploy' screens are not available to your jobs. You **can** use values set on the 'Environment Variables' and 'SSH Permissions' screens. We'll use those to store secrets we need for deploymnets.</p>
 </div>
 
 Add environment variables for your Heroku API key and login email to the CircleCI UI:
 
 ![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
 
-Using `ssh-keygen`, create an SSH key to enable connecting to the Heroku Git server from CircleCI. We recommend creating an SSH key specifically for deploying this app from CircleCI.
+Using `ssh-keygen`, create an SSH key, without a passphrase, to enable connecting to the Heroku Git server from CircleCI. We recommend creating an SSH key specifically for deploying this app from CircleCI.
 
-Add the private key via the CircleCI UI 'SSH Permissions' screen with a hostname of `git.heroku.com`. Paste the private key into the input as shown above. Make a note of the 'Fingerprint' for the private key - you'll need this later.
+Add the private key via the CircleCI UI 'SSH Permissions' screen with a hostname of `git.heroku.com`:
+
+![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough6.png)
+
+Paste the private key into the input as shown above. Make a note of the 'Fingerprint' for the private key - you'll need this later.
 
 Finally, add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
 
