@@ -100,7 +100,7 @@ Next, we have to choose an 'executor', the underlying technology that's running 
 
 #### Specify an Image
 
-Because we chose the `docker` executor, we have to specify a Docker image as our 'primary container'. The image you choose can be any public Docker image. Private images are supported, but [some additional setup is required](/docs/2.0/building-docker-images/#private-images-and-docker-registries).
+Because we chose the `docker` executor, we have to specify a Docker image as our 'primary container'. The image you choose can be any public Docker image. Private images are supported, but [some additional setup is required](/docs/2.0/private-images).
 
 The best way to get started is to use one of [Docker's official images on Docker Hub](https://hub.docker.com/explore/) for the language you’re using. In our example, we're using the `python:3.6.0` image.
 
