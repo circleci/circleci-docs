@@ -22,7 +22,9 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`jobs`**
 
-Each job is an item in the `jobs` list. Each job consists of a job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map  has the following attributes:
+Each job is an item in the `jobs` list. `build` is the default job and is required in every `config.yml`. This is the only job that will be automatically picked up and run by CircleCI.
+
+Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
 Key | Required | Type | Description
 ----|-----------|------|------------

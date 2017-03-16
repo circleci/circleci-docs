@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Deployments"
 short-title: "Deployments"
 categories: [configuring-jobs]
-order: 98
+order: 6
 ---
 
 There are 2 standard ways to deploy in 2.0:
@@ -83,7 +83,9 @@ jobs:
             fi
 ```
 
-The above example shows how to trigger a `deploy` job for the deployment. Here, we're triggering the job by calling the CircleCI REST API with `curl`. The `deploy` job will then do the actual deployment.
+The above example shows how to trigger a `deploy` job for the deployment. Here, we're triggering the job by calling the CircleCI REST API with `curl`. The `deploy` job will then do the actual deployment. We have to manually trigger this `deploy` job because `build` is the only job CircleCI currently runs automatically.
+
+To learn more about jobs, check out our [documentation]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
 
 A few notes about this example:
 
