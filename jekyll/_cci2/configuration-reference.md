@@ -477,7 +477,7 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
 {: class="table table-striped"}
 
 ``` YAML
-- add-ssh-keys:
+- add_ssh_keys:
     fingerprints:
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
