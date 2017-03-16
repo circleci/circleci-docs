@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Deployments"
 short-title: "Deployments"
 categories: [configuring-jobs]
-order: 6
+order: 7
 ---
 
 There are 2 standard ways to deploy in 2.0:
