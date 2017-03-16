@@ -10,7 +10,7 @@ You can define jobs in your config other than `build`.
 
 ## Defining Jobs
 
-You can define as many jobs as you wish in your config. You can also name your jobs as you like.
+`build` isn't the only job allowed in `config.yml`. You can define any number of jobs and name them whatever you'd like.
 
 ```
 version: 2
@@ -35,13 +35,11 @@ jobs:
       .....
 ```
 
-Each job can have a different set of configurations. To illustrate this, we use `docker` executor in `build` job and `machine` executor in `deploy_staging` and `deploy_production` jobs in the example above.
+Each job can be configured differently. To illustrate this, we use the `docker` executor in the `build` job and `machine` executor in the other jobs, `deploy_staging` and `deploy_production`.
 
 ## Triggering Jobs
 
-`build` job is the default job and the only one that CircleCI runs automatically. In other words, CircleCI won't run `deploying_staging` and `deploy_production` when you push.
-
-Currently, the only way to run these jobs is calling API like the following.
+The `build` job is the default and the only one CircleCI runs automatically. You'll need to explicitly run any other jobs you've added. Currently, the only way to do that is to use the CircleCI API:
 
 ```YAML
 curl -u ${CIRCLE_API_TOKEN}: \
@@ -49,7 +47,7 @@ curl -u ${CIRCLE_API_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
 ```
 
-The above example shows how to trigger a `deploy_production` job by using `curl`.
+The above example shows how to trigger our `deploy_production` job by using `curl`.
 
 A few notes about this example:
 
