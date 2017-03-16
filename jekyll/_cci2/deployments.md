@@ -6,9 +6,12 @@ categories: [configuring-jobs]
 order: 98
 ---
 
-There are two standard ways to do deployment in 2.0: using a [deploy]({{ site.baseurl }}/2.0/configuration-reference/#deploy) step and triggering a deploy job.
+There are 2 standard ways to deploy in 2.0:
 
-## Using a Deploy Step
+- use a [deploy step][deploy-step]
+- trigger a deploy job
+
+## Use a Deploy Step
 
 ```YAML
 version: 2
@@ -27,9 +30,9 @@ jobs:
             fi
 ```
 
-The above is an example of configuring your job to do deployment by using a `deploy` step with some pseudo commands.
+The above example shows how to configure your job to deploy using a `deploy` step with some pseudo commands.
 
-The most important part to be stressed in the example is that we are checking whether the current branch is `master` branch.
+The most important piece of this example is that we're checking whether the current branch is the `master` branch.
 
 ```
 command: |
@@ -38,11 +41,11 @@ command: |
   fi
 ```
 
-Without this checking, `<your-deploy-commands>` will be executed every time this job is triggered.
+Without this check, `<your-deploy-commands>` will be executed every time this job is triggered.
 
-To learn more about `deploy` step, please checkout our [doc]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+To learn more about the `deploy` step, please check out our [documentation][deploy-step].
 
-## Triggering a Deploy Job
+## Trigger a Deploy Job
 
 ```YAML
 version: 2
@@ -80,14 +83,18 @@ jobs:
             fi
 ```
 
-The above is an example of triggering a deploy job to do the deployment. In this example, we are triggering a `deploy` job by calling CircleCI REST API with curl. The `deploy` job then will do the actual deployment.
+The above example shows how to trigger a `deploy` job for the deployment. Here, we're triggering the job by calling the CircleCI REST API with `curl`. The `deploy` job will then do the actual deployment.
 
-You may get puzzled at the first glance of this example: *why do I need to define a `deploy` job and trigger it if I can do the actual deployment in the `deploy` step of the `build` job?*
+A few notes about this example:
 
-This deployment pattern is useful when you want to use a different executor type in the `deploy` job. In our example, we are using a machine executor with `machine:true` in order to push a new Docker image which is not possible in `docker` executor. Please checkout our [doc]({{ site.baseurl }}/2.0/executor-types/) to learn more about the differences between the executors.
+- `CIRCLE_API_TOKEN` should be the API token from your project's setting page.
+- `<vcs-type>/<org>/<repo>` should be replaced with your own VCS and org/repo names; at time of writing, `<vcs-types>` must be either `github` or `bitbucket`.
+- `my-image` should have `curl` pre-installed
 
-Finally, there are a few things to be noted in the example:
+It might seem strange that you need to define a `deploy` job and trigger it if you can do the actual deployment in the `deploy` step of the `build` job.
 
-- You need to get an API token and store it in `CIRCLE_API_TOKEN` environment variable from the project setting page.
-- You need to replace `<vcs-type>/<org>/<repo>` with your own. **Please note that `<vc-types>` part is either `github` or `bitbucket` as of the writing of this page.**
-- Your image, `my-image` in this case, must have `curl` pre-installed.
+But this deployment pattern is useful when you want to use a different executor type in the `deploy` job. In our example, we're using a machine executor with `machine: true` to push a new Docker image; this isn't possible with the `docker` executor.
+
+To learn more about the different executor types, check out our [documentation]({{ site.baseurl }}/2.0/executor-types/).
+
+[deploy-step]: {{ site.baseurl }}/2.0/configuration-reference/#deploy
