@@ -354,7 +354,7 @@ Your app should now be running on Heroku. You can see the example app here: <htt
 We need to install and authorize Heroku for our CircleCI account.
 
 <div class="alert alert-info" role="alert">
-<p>**Note:** The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Keys and configuration added to the 'Heroku Deployment' and 'AWS CodeDeploy' screens are not available to your jobs. You **can** use values set on the 'Environment Variables' and 'SSH Permissions' screens. We'll use those to store secrets we need for deploymnets.</p>
+<p><strong>Note:</strong> The built-in support for Heroku and AWS deployments via the CircleCI UI is not currently supported on CircleCI 2.0. Keys and configuration added to the 'Heroku Deployment' and 'AWS CodeDeploy' screens are not available to your jobs. You <strong>can</strong> use values set on the 'Environment Variables' and 'SSH Permissions' screens. We'll use those to store secrets we need for deploymnets.</p>
 </div>
 
 Add environment variables for your Heroku API key and login email to the CircleCI UI:
