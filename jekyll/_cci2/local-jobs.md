@@ -78,7 +78,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 ### Machine Executor
 
-You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run it's jobs.
+You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
 ### Caching
 
