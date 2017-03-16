@@ -2,8 +2,8 @@
 layout: classic-docs
 title: "Building Docker Images on CircleCI 2.0"
 short-title: "Building Docker Images"
-categories: [configuring-jobs]
-order: 1
+categories: [docker]
+order: 0
 ---
 
 ## Overview
@@ -91,33 +91,7 @@ A different way to do this is to use another container running in the same netwo
 ### Mounting Folders
 It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
 
-## Private Images and Docker Registries
-Using private images isn’t directly supported by the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor). However, you _can_ use the Remote Docker Environment.
-
-If your application requires a proprietary DB for testing, for example:
-
-```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: docker:1.13.1-git
-    working_directory: ~/my_app
-    steps:
-      - checkout
-      - setup_docker_engine
-
-      # start proprietary DB using private Docker image
-      - run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker run -d --name db company/proprietery-db:1.2.3
-
-      # build and test application
-      - run: |
-          docker build -t my-app .
-          # assuming that our app expects to have DB on localhost
-          docker run --network container:db my-app test
-```
+If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container

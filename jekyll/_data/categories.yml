@@ -99,6 +99,10 @@
   name: "Configuring Jobs"
 
 - section: cci2
+  slug: docker
+  name: "Using Docker"
+
+- section: cci2
   slug: reference
   name: "Reference"
 
