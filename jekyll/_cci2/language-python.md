@@ -143,18 +143,17 @@ Let's restore the Yarn package cache if it's available.
 
 Install both Yarn and Python dependencies.
 
-{% raw %}
 ```YAML
 ...
       - run:
           name: Install Dependencies
           command: yarn && pip install -r requirements.txt
 ```
-{% endraw %}
 
 Specify where to save that Yarn cache.
 
 {% raw %}
+```YAML
 ...
       - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -165,34 +164,29 @@ Specify where to save that Yarn cache.
 
 Run our tests.
 
-{% raw %}
 ```YAML
 ...
       - run:
           name: Run Tests
           command: python manage.py test --coverage
 ```
-{% endraw %}
 
 Store test results as an artifact.
 
-{% raw %}
 ```YAML
 ...
       - store_artifacts:
           path: test-reports/coverage
           destination: reports
 ```
-{% endraw %}
 
 Finally, let's specify where those test results are actually located.
 
-{% raw %}
+```YAML
 ...
       - store_test_results:
           path: "test-reports/"
 ```
-{% endraw %}
 
 Nice! You just set up CircleCI for a Flask app. Nice! Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-flask).
 
