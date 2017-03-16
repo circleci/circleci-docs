@@ -83,7 +83,7 @@ jobs:
             fi
 ```
 
-The above example shows how to trigger a `deploy` job for the deployment. Here, we're triggering the job by calling the CircleCI REST API with `curl`. The `deploy` job will then do the actual deployment.
+The above example shows how to trigger a `deploy` job for the deployment. Here, we're triggering the job by calling the CircleCI REST API with `curl`. The `deploy` job will then do the actual deployment. We have to manually trigger the `deploy` job because currently CircleCI only runs `build` job automatically. Please check out out [documentation]({{ site.baseurl }}/2.0/configuration-reference/#jobs) to learn more about jobs.
 
 A few notes about this example:
 
