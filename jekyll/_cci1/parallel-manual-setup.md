@@ -16,11 +16,11 @@ Go to **Project Settings > Parallelism** to adjust the settings.
 
 When you use CircleCI's parallelization, we run your code on multiple separate VMs.
 To use parallelism, you make your test runner run only a subset of tests on each VM.
-There are two mechanisms for splitting tests among nodes:  Using the `files`
-configuration modifier - a very simple and straightforward way for most use cases, and
-using parallelism environment variables - aimed for the more complex scenarios.
+There are two mechanisms for splitting tests among nodes: using the `files`
+configuration modifier (a very simple and straightforward way for most use cases), or
+using parallelism environment variables (aimed for  more complex scenarios).
 
-## Using configuration `files` modifier
+## Using the `files` configuration modifier
 
 Parallelizing test runners that accept file names is straightforward!  The `files` modifier
 can list paths to the test files, and CircleCI will run the test runners with different test files in each node.
@@ -40,7 +40,7 @@ test:
 The `**` pattern matches multiple directory layers with Ruby globs. You can test glob patterns locally with e.g. `ruby -e "puts Dir.glob('**/*.py')"`.
 
 In this example, we will run `bundle exec rspec` in all nodes appended with
-roughly `1/N` of the files on each VM.
+roughly `1/N` of the files on each VM (where N is the number of nodes).
 
 By default, the file arguments will be appended to the end of the command.
 
@@ -50,18 +50,16 @@ For more control over parallelism, we use environment variables to denote the nu
 
 <dl>
   <dt>
-    `CIRCLE_NODE_TOTAL`
+    CIRCLE_NODE_TOTAL
   </dt>
   <dd>
     is the total number of parallel VMs being used to run your tests on each push.
   </dd>
   <dt>
-    `CIRCLE_NODE_INDEX`
+    CIRCLE_NODE_INDEX
   </dt>
   <dd>
-    is the index of the particular VM.
-    `CIRCLE_NODE_INDEX`
-    is indexed from zero.
+    is the index of the particular VM. CIRCLE_NODE_INDEX is indexed from zero.
   </dd>
 </dl>
 
@@ -80,12 +78,11 @@ test:
         parallel: true
 ```
 
-Note the final colon, and
-`parallel: true`
-on the next line.
+Note the final colon, and `parallel: true` (double-indented) on the next line.
+
 This is a command modifier which tells CircleCI that the command should be run in parallel on all test machines. It defaults to true for commands in the machine, checkout, dependencies and database build phases, and it defaults to false for commands in the test phases.
 
-Please note that since we do not support parallel deployment, specifying 'parallel:true' in the deployment phase will cause an error.
+Please note that since we do not support parallel deployment, specifying `parallel: true` in the deployment phase will cause an error.
 
 Obviously, this is slightly limited because it's hard-coded to
 only work with two nodes, and the test time might not balance
@@ -93,7 +90,7 @@ across all nodes equally.
 
 <h3 id="auto-balancing">Automatic balancing with manual parallel setup</h3>
 
-With some of the inferred test commands we [automatically
+With some of the inferred test commands, we [automatically
 balance](https://circleci.com/blog/announcing-automatic-test-balancing/)
 the tests so that the total execution time is minimised.
 
@@ -113,8 +110,8 @@ test:
           - spec/**/*.rb          # or a glob (ruby globs)
 ```
 
-The same principle applies to Cucumber tests—to enable automatic test
-balancing when you manually specify the Cucumber command you would
+The same principle applies to Cucumber tests — to enable automatic test
+balancing when you manually specify the Cucumber command, you would
 include the following in your `circle.yml`:
 
 ```
