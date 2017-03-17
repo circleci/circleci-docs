@@ -39,3 +39,7 @@ Currently, `store_artifacts` requires 2 fields: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
   - `destination` is the artifact name. You will see these names instead of plain file names when viewing artifacts in your browser. This field is currently mandatory, but we've received feedback from Beta users that this should be optional. We'll be revisiting this during the rest of the Beta.
+
+## Accessing Artifacts via API
+
+You can consume artifacts via our [API]( {{ site.baseurl }}/api/v1-reference/#build-artifacts).
