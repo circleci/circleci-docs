@@ -18,7 +18,7 @@ description: "How to use the Yarn package manager on CircleCI."
 
 ## Setup
 
-When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections.
+When CircleCI detects a JavaScript project, certain commands (like `npm install` or `npm test`) might be run. To use Yarn instead of npm, we override both the `dependencies` and `test` sections which prevents npm and other inferred commands from running.
 
 ```yaml
 dependencies:
