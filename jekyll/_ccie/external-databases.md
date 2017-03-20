@@ -26,30 +26,29 @@ CircleCI Enterprise relies on the use of MongoDB and Postgresql. By default, the
 **NOTE:** You should already have the external MongoDB and Postgresql databases created and configured.  You will need this information to generate the URI files in the steps below.
 
 Example URI's:
-```
-mongodb://your_db_username:secure_password_here@12.34.56.78:27017
 
-postgres://your_db_username:secure_password_here@12.34.56.78:5432
-```
+  ```
+  mongodb://your_db_username:secure_password_here@12.34.56.78:27017
+
+  postgres://your_db_username:secure_password_here@12.34.56.78:5432
+  ```
 
 1. Visit the dashboard (services_ip_or_domain:8800) and stop Circle using the `Stop Now` button.
 1. Return to the services host terminal and create the following file: `/etc/circle-installation-customizations`
 1. Open the file above with your favorite text editor and paste the following.  You may need to make adjustments to the URI based on your database configurations:
-```
-# Mongo DB
 
-        MONGO_URI=REPLACE_THIS_WITH_MONGO_URI
-        POSTGRES_URI=REPLACE_THIS_WITH_POSTGRES_URI
+    ```
+    MONGO_URI=REPLACE_THIS_WITH_MONGO_URI
+    POSTGRES_URI=REPLACE_THIS_WITH_POSTGRES_URI
 
-        export CIRCLE_SECRETS_MONGODB_MAIN_URI=$MONGO_URI/circle_ghe?authSource=admin
-        export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI=$MONGO_URI/circle_ghe?authSource=admin
-        export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI=$MONGO_URI/build_state_dev_ghe?authSource=admin
-        export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI=$MONGO_URI/containers_dev_ghe?authSource=admin
-        export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI=$MONGO_URI/remote_containers_dev_ghe?authSource=admin
+    export CIRCLE_SECRETS_MONGODB_MAIN_URI=$MONGO_URI/circle_ghe?authSource=admin
+    export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI=$MONGO_URI/circle_ghe?authSource=admin
+    export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI=$MONGO_URI/build_state_dev_ghe?authSource=admin
+    export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI=$MONGO_URI/containers_dev_ghe?authSource=admin
+    export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI=$MONGO_URI/remote_containers_dev_ghe?authSource=admin
+    export CIRCLE_SECRETS_POSTGRES_MAIN_URI=$POSTGRES_URI/circle
+    ```
 
-# Postgres DB
-export CIRCLE_SECRETS_POSTGRES_MAIN_URI=$POSTGRES_URI/circle
-```
 1. Access the dashboard once again and start Circle using `Start Now` button.  After a few moments, the dashboard should report as `Started`
 
 ## Troubleshooting
