@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Building Custom Image for Docker Executor"
-short-title: "Building Custom Image"
+title: "Building Custom Images for Docker Executor"
+short-title: "Building Custom Images"
 categories: [configuring-jobs]
 order: 30
 ---
