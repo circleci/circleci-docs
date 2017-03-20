@@ -200,6 +200,30 @@ You can also use the Environment Variables section to add all the
 secrets that your build needs, as the content of the variables is stored
 securely.
 
+### Pre-starting the simulator
+
+You might want to pre-start the iOS simulator before building your
+application to make sure that the simulatori s booted in time.
+Doing that generally reduces the number of simulator
+timeouts that customers observe in their builds.
+
+To pre-start the simulator you can add the following to your
+`circle.yml`, assuming that you are running your tests on an iPhone 7
+simulator with iOS 10.2:
+
+```
+dependencies:
+  pre:
+    - xcrun instruments -w "iPhone 7 (10.2) [" || true
+```
+
+Note: the `[` here is necessary to uniquely identify the iPhone 7
+simulator, as the phone + watch simulator is also present in the build
+image:
+
+* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator;
+* `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
+
 ### Configuration file
 The most flexible means to customize your build is to add a `circle.yml` file to your project,
 which allows you to run arbitrary bash commands instead of or in addition to the inferred commands
