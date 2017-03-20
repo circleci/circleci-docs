@@ -7,7 +7,9 @@ order: 5
 
 {% include beta-premium-feature.html%}
 
-If your application is distributed as a Docker image you probably know that the Docker image consists of layers and most of the time only the top layers are being changed. So if your image has many layers you may want to reuse unchanged layers and significantly reduce image build times. By default [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide caching for layers, but it can be enabled with a special option:
+If your application is distributed as a Docker image, you probably know that this image consists of layers. In addition, it's usually the top layers that end up changing.
+
+If this is the case, you might want to reuse the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
 
 ``` YAML
 - setup_docker_engine:
@@ -15,10 +17,22 @@ If your application is distributed as a Docker image you probably know that the 
     exclusive: true   # default - true
 ```
 
-Please note, that this feature requires your project to be whitelisted. Please reach out to your support representative in order to enable it.
+## **`reusable`**
 
-With `reusable: true` CircleCI will try to reuse your previous Remote Docker Environment, so all the layers you built in previous job(s) will be there. We try to reuse the previous environment on a best effort basis. This means that in some cases your job may find itself in a clean environment even if your config specifies `reusable: true`.
+With `reusable: true`, CircleCI will try to reuse your Remote Docker Environment; every layer you built in a previous job will be accessible there. We do our best to reuse the previous environment when we can, but in some cases your job may find itself in a clean environment, even if you've specified `reusable: true`.
 
-If you run many parallel jobs for the same project (the same or different branches), and each of them are requesting a reusable environment, none of them will be blocked and all will be provided with a Remove Docker Environment (but probably not all of them will have cached layers). Please note that this feature is in Beta right now and we might change this behaviour later.
+If you run many parallel jobs for the same project, and each job requests a reusble environment, all of them will be provided with a Remote Docker Environment. However, not all of them will have cached layers, although this behavior is subject to change over the course of the Beta.
 
-The second option `exclusive` indicates whether you want to allow simultaneous running of parallel jobs in the same Remote Docker Environment. If it's enabled (`exclusive: true`) your job is guaranteed to have an exclusive Remote Docker Environment not shared with any other job. Disabling it (`exclusive: false`) allows parallel jobs of the same project to share one Remote Docker Environment. This way you can reduce the chances of getting a Remote Docker without cache. You need to be cautious and make sure that your project is resilient to concurrent operations in Docker Engine. For instance, if you build images with mutable tags (like `latest`) then a shared Docker environment might be a bad idea. With `exclusive: false` we will allow only two parallel jobs to use the same Docker environment. As notes above, this feature is currently in Beta and we might change the behaviour. We'll keep this documet up-to-date with the current functionality.
+## **`exclusive`**
+
+The second option (`exclusive`) indicates whether you want to allow parallel jobs to run simultaneously in the same Remote Docker Environment.
+
+If you specify `exclusive: true`, your job is guaranteed to have an exclusive Remote Docker Environment that other jobs can't access.
+
+If you specify `exclusive: false`, a project's parallel jobs will be able to share the same Remote Docker Environment. This method lets you reduce the chances of receiving a Remote Docker Environment without a cache. If you choose this option, ensure that your project can handle concurrent operations in Docker Engine.
+
+For example, if you build images with mutable tags like `latest`, then a shared Docker environment could be a bad idea. With `exclusive: false`, we only allow 2 parallel jobs to use the same Docker environment.
+
+<div class="alert alert-info" role="alert">
+<strong>Note:</strong> This feature only works with whitelisted projects. Please contact your support representative to enable layer caching.
+</div>
