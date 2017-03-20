@@ -33,7 +33,7 @@ jobs:
 ```
 
 ### Multiple Images
-It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [primary container]( {{ site.baseurl }}/2.0/glossary/#primary-container).
+It’s also possible to specify multiple images. When you do this, all containers will run in a common network. Every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```YAML
 jobs:
@@ -98,7 +98,7 @@ We also can’t guarantee that mutable tags will return an up-to-date version of
 Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...`.
 
 #### Use Custom Images
-If you find yourself incurring undo increases in your run times due to installing additional tools during execution, we recommend [making custom images](https://docs.docker.com/engine/getstarted/step_four/) that meet the job’s requirements, so the container will have such tools pre-loaded.
+If you find yourself incurring undo increases in your run times due to installing additional tools during execution, we recommend [making custom images]({{ site.baseurl }}/2.0/custom-images/) that meet the job’s requirements, so the container will have such tools pre-loaded.
 
 <hr>
 

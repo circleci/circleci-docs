@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Caching in CircleCI"
 short-title: "Caching"
 categories: [configuring-jobs]
-order: 2
+order: 20
 ---
 
 Caching is one of the most effective ways to reduce job times, but it can also be subtle. This article will outline some strategies you can use to increase caching effectiveness in CircleCI.
