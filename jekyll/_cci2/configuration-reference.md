@@ -34,6 +34,7 @@ steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in (default: depends on executor)
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
+branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -52,6 +53,10 @@ jobs:
       - FOO: "bar"
     parallelism: 3
     working_directory: ~/my-app
+    branches:
+      only:
+        - master
+        - /rc-.*/
     steps:
       - run: make test
       - run: make
@@ -122,6 +127,42 @@ jobs:
     machine:
       enabled: true
 ```
+
+## **`branches`**
+
+Defines rules for whitelisting/blacklisting execution of some branches.
+
+### Configuration map
+
+Key | Required | Type | Description
+----|-----------|------|------------
+only | N | List | List of branches that only will be executed
+ignore | N | List | List of branches to ignore
+{: class="table table-striped"}
+
+Both `only` and `ignore` lists can have full names and regular expressions. For example:
+
+``` YAML
+branches:
+  only:
+    - master
+    - /rc-.*/
+```
+
+In this case only "master" branch and branches matching regex "rc-.*" will be executed.
+
+``` YAML
+branches:
+  ignore:
+    - develop
+    - /feature-.*/
+```
+
+In this example all the branches will be executed except "develop" and branches matching regex "feature-.*".
+
+If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
+
+A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
 ## **`steps`**
 
@@ -536,6 +577,11 @@ jobs:
       TEST_REPORTS: /tmp/test-reports
 
     working_directory: ~/my-project
+
+    branches:
+      ignore:
+        - develop
+        - /feature-.*/
 
     steps:
       - checkout
