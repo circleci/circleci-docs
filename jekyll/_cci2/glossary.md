@@ -16,7 +16,7 @@ All the containers (VMs) being run by an [executor](#executor) for the current j
 
 ### primary container
 
-The first image listed in `config.yml`. This is where build commands are executed for jobs using the Docker executor .
+The first image listed in `config.yml`. This is where commands are executed for jobs using the Docker executor.
 
 ### remote Docker
 
