@@ -190,6 +190,7 @@ shell | N | String | Shell to use for execution command (default: `/bin/bash -e`
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
+no_output_timeout | N | String | Elasped time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
 {: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
@@ -255,6 +256,7 @@ In this case, `command` and `name` become the string value of `run`, and the res
     command: make test
     shell: /bin/bash
     working_directory: ~/my-app
+    no_output_timeout: 30m
     environment:
       FOO: "bar"
 
