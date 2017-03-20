@@ -135,7 +135,7 @@ new image. The following snippets walk through the process. The full
 [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
 
 ```
-sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
+sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
 ```
 
 Typically when you push a Docker image to a registry, you use the `docker push`
