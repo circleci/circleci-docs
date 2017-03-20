@@ -116,8 +116,7 @@ Key | Required | Type | Description
 enabled | Y | Boolean | This must be true in order to enable the `machine` executor.
 {: class="table table-striped"}
 
-<!-- as of mar 10 2017 this next line is reported as not working, so commenting it out -->
-<!-- As a shorthand you can set the `machine` key to `true`. -->
+As a shorthand you can set the `machine` key to `true`.
 
 Example:
 
@@ -126,6 +125,12 @@ jobs:
   build:
     machine:
       enabled: true
+
+# or just
+
+jobs:
+  build:
+    machine: true
 ```
 
 ## **`branches`**

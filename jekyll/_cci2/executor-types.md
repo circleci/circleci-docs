@@ -110,8 +110,7 @@ When you choose the `machine` executor, your job will run in a dedicated, epheme
 ```YAML
 jobs:
   build:
-    machine:
-      enabled: true
+    machine: true
 ```
 
 The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
