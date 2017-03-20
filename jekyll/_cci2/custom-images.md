@@ -8,8 +8,8 @@ order: 30
 
 CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. The benefits of doing this are:
 
-1. Faster job execution because you can include all tools you require, eliminating the need to install them on each job run
-2. A more concise and and easier to maintain CircleCI `config.yml` file
+1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
+2. A more concise and easier to maintain CircleCI `config.yml` file
 
 In this document we will give a walkthrough how to create a custom image. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so we'll mostly describe this case. But you can easily apply this knowledge to create images for supporting containers as well.
 
@@ -27,7 +27,7 @@ Docker has a special format for describing images and conventionally this file i
 
 First of all you need to choose a base image. In general it makes sense to use a image with your main language/framework as a base images. [Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks. We recommend starting with an [officially supported image](https://hub.docker.com/explore/).
 
-Once you've chosen abase image you can start writing a `Dockerfile` to extend it:
+Once you've chosen a base image you can start writing a `Dockerfile` to extend it:
 
 ``` Dockerfile
 FROM golang:1.8.0
