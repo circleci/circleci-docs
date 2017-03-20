@@ -116,7 +116,7 @@ Key | Required | Type | Description
 enabled | Y | Boolean | This must be true in order to enable the `machine` executor.
 {: class="table table-striped"}
 
-As a shorthand you can set the `machine` key to `true`.
+As a shorthand, you can set the `machine` key to `true`.
 
 Example:
 
@@ -249,12 +249,12 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-##### **Shell options**
-**Note** that our default `shell` has a few options enabled by default.
+##### **Default shell options**
+
+Our default `shell` has a few options enabled by default:
 
 **`-e` option**
 
-Causes commands to:
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
 So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
@@ -283,13 +283,13 @@ For example:
 - run: make test | tee test-output.log
 ```
 
-If `make test` fails `-o pipefail` option will cause whole step to fail. Without `-o pipefail` step will always stay successful because the result of whole pipeline will be determined by the last command (`tee test-output.log`) which will always return zero status regardless of `make test`.
+If `make test` fails, the `-o pipefail` option will cause the whole step to fail. Without `-o pipefail`, the step will always run successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which will always return a zero status.
 
-Note that even if `make test` fails the rest of pipeline will be execute.
+Note that even if `make test` fails the rest of pipeline will be executed.
 
-If you want to avoid this behaviour you can specify `set +o pipefail` in command or override whole `shell` (see example above).
+If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
 
-In general we recommend using the `-eo pipefail` options (on by default) because it shows errors in intermediate commands and simplifies debugging in case of job failure. For convenience we output used shell with all active options for each `run` step in UI.
+In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
 ##### **Background command**
 The `background` attribute allows for executing commands in the background. In this case, job execution will immediately proceed to the next step rather than waiting for the command to return. While debugging background commands is more difficult, running commands in the background might be necessary in some cases. For instance, to run Selenium tests you may need to have X virtual framebuffer running:
