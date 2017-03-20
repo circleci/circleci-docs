@@ -16,11 +16,23 @@ Go to **Project Settings > Parallelism** to adjust the settings.
 
 When you use CircleCI's parallelization, we run your code on multiple separate VMs.
 To use parallelism, you make your test runner run only a subset of tests on each VM.
+
 There are two mechanisms for splitting tests among nodes: using the `files`
 configuration modifier (a very simple and straightforward way for most use cases), or
-using parallelism environment variables (aimed for  more complex scenarios).
+using parallelism environment variables (aimed at more complex scenarios).
 
-## Using the `files` configuration modifier
+Either way, there are a few things to keep in mind:
+* `test` and `deploy` sections in your `circle.yml` are single-node only by
+  default and will only run on node 0. However, you can override `test` sections
+  per command (add `:` to the end of each command you'd like to parallelize, then
+  add a double-indented `parallel: true` below that). Alas, no parallel deploys.
+
+* Inferred `test` commands will automatically parallelize.
+
+* Currently, commands that only run in node 0 will erroneously show up in the
+  UI as running on all nodes.
+
+<h3>Using the `files` configuration modifier</h3>
 
 Parallelizing test runners that accept file names is straightforward!  The `files` modifier
 can list paths to the test files, and CircleCI will run the test runners with different test files in each node.
@@ -44,7 +56,7 @@ roughly `1/N` of the files on each VM (where N is the number of nodes).
 
 By default, the file arguments will be appended to the end of the command.
 
-<h2 id="env-splitting">Using environment variables</h2>
+<h3 id="env-splitting">Using environment variables</h3>
 
 For more control over parallelism, we use environment variables to denote the number of VMs and to identify each one, and you can access these from your test runner:
 
@@ -144,7 +156,7 @@ fi
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
 
-### Test suite split with knapsack gem
+<h3>Test suite split with knapsack gem</h3>
 
 You can parallelize tests for RSpec, Cucumber, Minitest, Spinach and Turnip with [knapsack gem](https://github.com/ArturT/knapsack). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. Knapsack gem has [built in support for CircleCI](https://github.com/ArturT/knapsack#info-for-circleci-users).
 
