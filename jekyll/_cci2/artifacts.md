@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Uploading Build Artifacts"
 short-title: "Uploading Build Artifacts"
 categories: [configuring-jobs]
-order: 6
+order: 60
 ---
 
 Sometimes, you'll want to upload artifacts created during builds so you can view them later. The following is an example of how to do that:

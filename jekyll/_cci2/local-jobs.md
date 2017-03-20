@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Running Jobs Locally"
 short-title: "Running Jobs Locally"
 categories: [configuring-jobs]
-order: 3
+order: 30
 ---
 
 The **CircleCI CLI** reproduces the CircleCI environment locally and runs jobs as if they were running on CircleCI. The tool enables better debugging and faster configuration.

@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Parallelism with CircleCI CLI"
 short-title: "Parallelism for Faster Jobs"
 categories: [configuring-jobs]
-order: 4
+order: 50
 ---
 
 One of the most powerful features of CircleCI is the ability to run your tests in parallel. In CircleCI 2.0 you manage this parallelism with a CLI tool called `circleci`. We inject this agent into the primary job container so the `circleci` command is always available in container `0`.

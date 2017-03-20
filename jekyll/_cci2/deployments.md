@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Deployments"
 short-title: "Deployments"
 categories: [configuring-jobs]
-order: 7
+order: 70
 ---
 
 The following example shows how to add the `deploy` step to your `config.yml` to set up conditional deployment for your application.

@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Defining Multiple Jobs"
 short-title: "Defining Multiple Jobs"
 categories: [configuring-jobs]
-order: 98
+order: 80
 ---
 
 You can define jobs in your config other than `build`.
