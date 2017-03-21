@@ -20,7 +20,7 @@ permalink: /1.0/index.html
 	<ul class="list-unstyled">
 	{% assign docs_found = 0 %}
 	{% for doc in site.cci1 %}
-		{% if doc.categories contains category.slug and doc.slug != catFile and doc.hide != True and doc.section == "cci1" %}
+		{% if doc.categories contains category.slug and doc.slug != catFile and doc.hide != true %}
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if docs_found < 4 %}
 				{% if doc.short-title %}
