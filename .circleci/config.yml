@@ -15,7 +15,7 @@ jobs:
       - LC_CTYPE="en_US.UTF-8"
     steps:
       - checkout
-      - run: apt-get update && apt-get installe locales
+      - run: apt-get update && apt-get install locales
       - run: locale-gen en_US.UTF-8
       - run: mkdir -p $JOB_RESULTS_PATH
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
