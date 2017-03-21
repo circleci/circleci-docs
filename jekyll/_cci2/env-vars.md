@@ -92,6 +92,10 @@ Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 
 
 Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0
 
+**CIRCLE_TAG**
+
+The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]( {{ site.baseurl }}/1.0/configuration/#tags).
+
 **CIRCLE_PROJECT_USERNAME**
 
 The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123
