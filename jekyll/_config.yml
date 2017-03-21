@@ -49,13 +49,6 @@ defaults:
       path: ""
     values:
       hide: false
-      section: cci1
       search: true
-  -
-    scope:
-      path: ""
-      type: cci2
-    values:
-      search: false
 
 segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
