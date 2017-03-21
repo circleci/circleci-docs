@@ -24,7 +24,7 @@ In order to use `docker-compose`, you'll need to have it in your [primary contai
 To activate the Remote Docker Environment, you need use [this special step]({{ site.baseurl }}/2.0/building-docker-images):
 
 ``` YAML
-- setup_remote_docker
+- setup_docker_engine
 ```
 
 After that, you can use `docker-compose` as usual. You can build images:

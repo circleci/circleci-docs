@@ -12,7 +12,7 @@ If your application is distributed as a Docker image, you probably know that thi
 If this is the case, you might want to reuse the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
 
 ``` YAML
-- setup_remote_docker:
+- setup_docker_engine:
     reusable: true    # default - false
     exclusive: true   # default - true
 ```
