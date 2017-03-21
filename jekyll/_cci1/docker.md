@@ -7,7 +7,7 @@ description: Continuous Integration and Delivery with Docker
 
 **CircleCI 2.0 is now in Beta with native Docker support. Please see the [Beta access page](https://circleci.com/beta-access/) and the [2.0 Documentation](https://circleci.com/docs/2.0/).**
 
-CircleCI 1.0 offers support for running Docker within build containers. Support for Docker on CircleCI 1.0 is limited to Docker up to version 1.9 and has several limitations. **If you're starting a new project that uses Docker we strongly recommend using CircleCI 2.0. This documentation is for customers using Docker for existing projects on CircleCI 1.0.**
+CircleCI 1.0 offers support for running Docker within build containers. Support for Docker on CircleCI 1.0 is limited to Docker up to version 1.9 and has several limitations. **If you're starting a new project that uses Docker,we strongly recommend using CircleCI 2.0. This documentation is for customers using Docker for existing projects on CircleCI 1.0.**
 
 ---
 
@@ -66,8 +66,8 @@ deployment:
       - docker push circleci/elasticsearch
 ```
 
-Intermediate images [aren't handled well in the CircleCI container]( {{ site.baseurl }}/1.0/docker-btrfs-error/) 
-so using `--rm=false` with Docker build prevents a bunch of annoying (but not 
+Intermediate images [aren't handled well in the CircleCI container]( {{ site.baseurl }}/1.0/docker-btrfs-error/)
+so using `--rm=false` with Docker build prevents a bunch of annoying (but not
 serious) errors.
 
 For a complete example of building and deploying a Docker image to a
