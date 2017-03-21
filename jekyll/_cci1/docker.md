@@ -5,12 +5,16 @@ categories: [how-to]
 description: Continuous Integration and Delivery with Docker
 ---
 
-CircleCI currently offers beta support for running Docker within build containers. Docker is an extremely flexible tool that supports many different use cases. This article attempts to address several of the most popular uses for Docker on CircleCI, but it is not an exhaustive list. 
+**CircleCI 2.0 is now in Beta with native Docker support. Please see the [Beta access page](https://circleci.com/beta-access/) and the [2.0 Documentation](https://circleci.com/docs/2.0/).**
+
+CircleCI 1.0 offers support for running Docker within build containers. Support for Docker on CircleCI 1.0 is limited to Docker up to version 1.9 and has several limitations. **If you're starting a new project that uses Docker we strongly recommend using CircleCI 2.0. This documentation is for customers using Docker for existing projects on CircleCI 1.0.**
+
+---
+
+## Using Docker on CircleCI 1.0
 
 Note that this article assumes some knowledge of Docker. If you are just getting started with Docker, then take a look at the [Docker docs](http://docs.docker.com/userguide/)
 first.
-
-## Basic Usage
 
 CircleCI pre-installs Docker Engine in the Linux build images. To enable it, simply add Docker as a required service in your `circle.yml` file like this:
 
