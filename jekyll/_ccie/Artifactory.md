@@ -4,12 +4,12 @@
 
 Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
 
-We figure we use this space to highlight some sample projects that will show you how to best leverage using CircleCI and Artifactory together. 
+We'll use this space to highlight some sample projects showing how to best leverage CircleCI and Artifactory together.
 
-It is super important for you to have created your Repository before starting this example, otherwise CircleCI will have nowhere to store your dependencies.
+Ensure that you've created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
 ## JFrog CLI
-If you want to use the JFrog CLI you can install it by adding the following to your circle.yml.
+If you want to use the JFrog CLI, you can install it by adding the following to your `circle.yml` :
 
 ```
 dependencies:
@@ -18,7 +18,7 @@ dependencies:
 
 ```
 
-Now we need to configure jfrog to use our credentials in a secure way. We configure the client to use our artifactory_url, along with our username and apikey. These can be entered under `Project Settings->Environment Variables`
+Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`
 
 ```
     - ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY
