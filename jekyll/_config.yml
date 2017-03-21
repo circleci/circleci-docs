@@ -10,6 +10,7 @@ baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 macos_manifest_url: https://circleci.github.io/macos-image-tests/
 
+encoding: utf-8
 markdown: kramdown
 kramdown:
   input: GFM
