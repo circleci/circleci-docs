@@ -14,8 +14,8 @@ jobs:
       - LC_ALL="en_US.UTF-8"
       - LC_CTYPE="en_US.UTF-8"
     steps:
-      - run: mkdir -p $JOB_RESULTS_PATH
       - checkout
+      - run: mkdir -p $JOB_RESULTS_PATH
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
