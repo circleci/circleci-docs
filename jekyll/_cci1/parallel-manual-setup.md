@@ -12,7 +12,7 @@ you've overridden our test commands, you'll still be able to set up parallelism 
 To begin with, you'll need to turn on parallelism from your project's settings page.
 Go to **Project Settings > Parallelism** to adjust the settings.
 
-<h2 id="files-splitting">Splitting your test suite</h2>
+## Splitting your test suite
 
 When you use CircleCI's parallelization, we run your code on multiple separate VMs.
 To use parallelism, you make your test runner run only a subset of tests on each VM.
@@ -22,17 +22,16 @@ configuration modifier (a very simple and straightforward way for most use cases
 using parallelism environment variables (aimed at more complex scenarios).
 
 Either way, there are a few things to keep in mind:
-* `test` and `deploy` sections in your `circle.yml` are single-node only by
+
+- `test` and `deploy` sections in your `circle.yml` are single-node only by
   default and will only run on node 0. However, you can override `test` sections
   per command (add `:` to the end of each command you'd like to parallelize, then
-  add a double-indented `parallel: true` below that). Alas, no parallel deploys.
-
-* Inferred `test` commands will automatically parallelize.
-
-* Currently, commands that only run in node 0 will erroneously show up in the
+  add a double-indented `parallel: true` below that).
+- Inferred `test` commands will automatically parallelize.
+- Currently, commands that only run in node 0 will erroneously show up in the
   UI as running on all nodes.
 
-<h3>Using the `files` configuration modifier</h3>
+### Using the `files` configuration modifier
 
 Parallelizing test runners that accept file names is straightforward!  The `files` modifier
 can list paths to the test files, and CircleCI will run the test runners with different test files in each node.
@@ -48,7 +47,7 @@ test:
           - spec/**/*.rb          # or a glob (ruby globs)
 ```
 
-**Note:**
+**Note:**  
 The `**` pattern matches multiple directory layers with Ruby globs. You can test glob patterns locally with e.g. `ruby -e "puts Dir.glob('**/*.py')"`.
 
 In this example, we will run `bundle exec rspec` in all nodes appended with
@@ -56,7 +55,7 @@ roughly `1/N` of the files on each VM (where N is the number of nodes).
 
 By default, the file arguments will be appended to the end of the command.
 
-<h3 id="env-splitting">Using environment variables</h3>
+### Using environment variables
 
 For more control over parallelism, we use environment variables to denote the number of VMs and to identify each one, and you can access these from your test runner:
 
@@ -75,13 +74,9 @@ For more control over parallelism, we use environment variables to denote the nu
   </dd>
 </dl>
 
-<h3 id="simple-example">A simple example</h3>
+### A simple example
 
-If you want to run the two commands
-`rake spec`
-and
-`npm test`
-in parallel, you can use a bash case statement:
+If you want to run the two commands `rake spec` and `npm test` in parallel, you can use a bash case statement:
 
 ```
 test:
@@ -100,7 +95,7 @@ Obviously, this is slightly limited because it's hard-coded to
 only work with two nodes, and the test time might not balance
 across all nodes equally.
 
-<h3 id="auto-balancing">Automatic balancing with manual parallel setup</h3>
+### Automatic balancing with manual parallel setup
 
 With some of the inferred test commands, we [automatically
 balance](https://circleci.com/blog/announcing-automatic-test-balancing/)
@@ -137,7 +132,7 @@ test:
           - spec/feature/*.feature
 ```
 
-<h3 id="manual-balancing">Balancing</h3>
+### Balancing
 
 A more powerful version evenly splits all test files across N nodes. We recommend you write a script that does something like:
 
@@ -156,7 +151,7 @@ fi
 
 This script partitions the test files into N equally sized buckets, and calls "test-runner" on the bucket for this machine. Note that you will still need to include `parallel: true` in `circle.yml` with this script.
 
-<h3>Test suite split with knapsack gem</h3>
+### Test suite split with knapsack gem
 
 You can parallelize tests for RSpec, Cucumber, Minitest, Spinach and Turnip with [knapsack gem](https://github.com/ArturT/knapsack). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. Knapsack gem has [built in support for CircleCI](https://github.com/ArturT/knapsack#info-for-circleci-users).
 
