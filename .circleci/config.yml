@@ -8,23 +8,19 @@ jobs:
       - JEKYLL_ENV=production
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       - GENERATED_SITE_PATH=jekyll/_site/docs/
+      - JOB_RESULTS_PATH=__run-results/
+      - LANG="en_US.UTF-8"
+      - LANGUAGE="en_US.UTF-8"
+      - LC_ALL="en_US.UTF-8"
+      - LC_CTYPE="en_US.UTF-8"
     steps:
+      - run: mkdir -p $JOB_RESULTS_PATH
       - checkout
-      # - run: echo $JEKYLL_ENV
-      # - run: pwd
-      # - run: ls -al
-      - run: echo $CIRCLE_ARTIFACTS
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $CIRCLE_ARTIFACTS/build-results.txt
-      # - store_artifacts: 
-      #     # really wish this could use $GENERATED_SITE_PATH
-      #     path: jekyll/_site/docs/
-      #     destination: circleci-docs
-      - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $CIRCLE_ARTIFACTS/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
-
-
-  # test:
-  #   docker:
-  #     image: ruby:2.3.3
-  #   working_directory: /home/ubuntu/circleci-docs/
-  #   steps:
+      - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+      - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt; exit ${PIPESTATUS[0]}
+      - store_artifacts: 
+          # really wish this could use $GENERATED_SITE_PATH
+          path: jekyll/_site/docs/
+          path: __run-results/
+          destination: circleci-docs
