@@ -58,4 +58,4 @@ compile:
     - ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM
 ``` 
 
-The sample project is found [here](https://github.com/GERey/circleci-generic-artifactory). Stay tuned for language specific examples.
+Stay tuned for language specific examples.
