@@ -15,11 +15,9 @@ Status labels tell us how work on an issue is progressing:
 Type labels tell us about the kind of issue:
 
 - Bug: technical problem
-- Design: visual changes
 - Draft: new doc
 - Edit: improve copy
 - Feature: new functionality
-- Inaccuracy: incorrect documentation
 - Maintenance: refactor or reorganize
 
 ## Priority
