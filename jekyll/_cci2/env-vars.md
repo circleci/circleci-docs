@@ -22,7 +22,7 @@ Has a value of `true` on our platform.
 
 The name of the Git branch currently being built.
 
-**CIRCLECI_NODE_TOTAL**
+**CIRCLE_NODE_TOTAL**
 
 An integer representing the number of total build instances.
 
