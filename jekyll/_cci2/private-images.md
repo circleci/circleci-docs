@@ -19,7 +19,7 @@ jobs:
     working_directory: ~/my_app
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_docker_engine
 
       # start proprietary DB using private Docker image
       - run: |
