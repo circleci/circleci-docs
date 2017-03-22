@@ -49,9 +49,9 @@ To exclude a heading from the TOC do this:
 
 New articles for CircleCI can be added to the [jekyll/_cci2](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2) directory in this repo.
 
-### Frontmatter
+### Front Matter
 
-The frontmatter should look like:
+The front matter should look like:
 
 ```
 ---
