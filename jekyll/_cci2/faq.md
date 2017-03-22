@@ -55,3 +55,13 @@ If you’re running a build on `my-image:123` and you update the image, you can 
 
 [docker-hub]: https://hub.docker.com
 [docker-library]: https://hub.docker.com/explore/
+
+## Git isn't installed on my primary image but the checkout still ran
+
+If you see this message in the 'Checkout Code' stage of your build:
+
+```
+Warning: Git is not installed in the image. Falling back to CircleCI's native git client but this is still an experiment feature. We highly recommend using an image that has official Git installed.
+```
+
+It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. This should be a reliable fall-back, but if you notice unusual behaviour, please reach out to support or let us know on [Discuss](https://discuss.circleci.com)
