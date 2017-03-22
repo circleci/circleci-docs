@@ -23,25 +23,25 @@ Open a terminal window and follow these steps to set up your local development e
 
 1. Install Xcode:
 
-`xcode-select --install`
+    `xcode-select --install`
 
 2. Install Homebrew, a macOS package manager:
 
-`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+    `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 3. Install Vagrant:
 
-`brew cask install vagrant`
+    `brew cask install vagrant`
 
 4. Install VirtualBox:
 
-`brew cask install virtualbox`
+    `brew cask install virtualbox`
 
 5. Fork the `circleci-docs` repo on GitHub:
 
 6. Clone your fork of the `circleci-docs` repo:
 
-`git clone https://github.com/<my_github_username>/circleci-docs.git`
+    `git clone https://github.com/<my_github_username>/circleci-docs.git`
 
 7. `cd` into `circleci-docs` and start Jekyll by running `./jctl start`. The first time you run this command, Vagrant will provision the entire VM based on the contents of `boostrap.sh`. This process can take a few minutes, but it's a one-time deal.
 
@@ -93,21 +93,21 @@ All docs live in folders named after the version of CircleCI. The only two you n
 
 1. Create a branch and switch to it:
 
-`git checkout -b <branch-name>`
+    `git checkout -b <branch-name>`
 
 2. Add or modify the Markdown files in these directories according to the style guide outlined in `CONTRIBUTING.md` in this repository. Rebuild the site when you want to check your work with:
 
-`./jctl rebuild`
+    `./jctl rebuild`
 
 For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
 
 3. When you're happy with your changes, commit them with a message summarizing what you did:
 
-`git commit -a -m "commit message"
+    `git commit -a -m "commit message"
 
 4. Push your branch up:
 
-`git push origin <branch-name>`
+    `git push origin <branch-name>`
 
 ### Submitting a Pull Request
 
