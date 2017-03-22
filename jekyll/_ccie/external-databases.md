@@ -17,9 +17,29 @@ CircleCI Enterprise requires MongoDB and PostgreSQL. By default, these services 
 1. SSH into the Services host
 2. Download and run the backup script using the command below. This will backup both the MongoDB and PostgreSQL databases. This could take a while depending on the amount of data currently stored.
    ```shell
-   curl PATH_TO_SCRIPT | bash
+   curl -kL goo.gl/OHxS4x | sudo bash
    ```
 3. Once the backup process is complete, you'll find the files located in the `/backup` directory.
+
+## Restoring the Databases
+**Note:** The process to restore the databases may vary based on your database setup.  Please use the following sections as a loose guide.
+
+#### Restoring MongoDB
+1. Untar the mongo backup file using:
+    ```
+    tar zxvf mongodump_X_X_X_X_X.tar.gz
+    ```
+1. Use `mongorestore` to restore the database:
+    ```
+    sudo mongorestore -u your_db_username -p your_db_password /PATH/TO/mongo_dump_raw
+    ```
+
+#### Restoring Postgresql
+1. Login to your Postgresql server as the user you plan on using for CircleCI Enterprise.  This user should have administrative access to the database.
+1. Restore the database using the following command:
+    ```
+    pg_restore -v -C /PATH/TO/pgdump_X_X_X_X_X.sql
+    ```
 
 ## Configuring the Services host
 
