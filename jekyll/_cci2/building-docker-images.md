@@ -20,10 +20,10 @@ jobs:
     steps:
       # ... steps for building/testing app ...
 
-      - setup_docker_engine
+      - setup_remote_docker
 ```
 
-When `setup_docker_engine` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker):
@@ -39,7 +39,7 @@ jobs:
       - checkout
       # ... steps for building/testing app ...
 
-      - setup_docker_engine   # (2)
+      - setup_remote_docker   # (2)
 
       # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
@@ -63,7 +63,7 @@ jobs:
 Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the [primary container][primary-container].
-2. Once `setup_docker_engine` is called, a new remote environment is created, and your primary container is configured to use it.
+2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it.
 3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 4. We use project environment variables to store credentials for Docker Hub.
 
