@@ -8,7 +8,7 @@ This is the public repository for <https://circleci.com/docs/>, a static website
 If you can't contribute but still want to report a problem, open an [Issue](https://github.com/circleci/circleci-docs/issues) on this project. If you have a question or need help debugging a problem, **do not submit an issue**. Instead, please head to [CircleCI Discuss](https://discuss.circleci.com/) where our support team will help you out.
 
 ## Local Development
-There are two ways to run a local development server: [Run With Vagrant](#run-with-vagrant) or [Run Without Vagrant](#run-without-vagrant).
+There are two ways to run a local development server: [With Vagrant](#run-with-vagrant) or [Without Vagrant](#run-without-vagrant).
 
 ### Run With Vagrant
 The easiest way to get started is by using Vagrant because it gives you a clean environment with all of the necessary dependencies.
@@ -17,47 +17,35 @@ The easiest way to get started is by using Vagrant because it gives you a clean 
 - Vagrant: [download directly](https://www.vagrantup.com/downloads.html), `brew cask install vagrant`, or `sudo apt-get install vagrant`
 - VirtualBox: [download directly](https://www.virtualbox.org/wiki/Downloads), `brew cask install virtualbox`, or `sudo apt-get install virtualbox`
 
-#### macOS Environment Setup Steps Using Brew
+#### macOS Setup
 
-Use the following command-line procedure to set up your local development environment with Vagrant and Brew on macOS.
+Open a terminal window and follow these steps to set up your local development environment with Vagrant and Brew.
 
-1. Open a terminal window and run the following command to install Xcode:
+1. Install Xcode:
 
-`xcode-select --install`
+    `xcode-select --install`
 
-A dialog box appears, press Continue. Xcode should install in a few minutes. 
+2. Install Homebrew, a macOS package manager:
 
-2. Install Homebrew, a macOS package manager.
+    `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+3. Install Vagrant:
 
-Type your password to complete the installation.
+    `brew cask install vagrant`
 
-3. Install Vagrant.
+4. Install VirtualBox:
 
-`brew cask install vagrant`
+    `brew cask install virtualbox`
 
-Type your password to complete the installation.
+5. Fork the `circleci-docs` repo on GitHub:
 
-4. Install VirtualBox.
+6. Clone your fork of the `circleci-docs` repo:
 
-`brew cask install virtualbox`
+    `git clone https://github.com/<my_github_username>/circleci-docs.git`
 
-Type your password to complete the installation.
+7. `cd` into `circleci-docs` and start Jekyll by running `./jctl start`. The first time you run this command, Vagrant will provision the entire VM based on the contents of `boostrap.sh`. This process can take a few minutes, but it's a one-time deal.
 
-5. Fork the `circleci-docs` repo on GitHub.
-
-6. Clone your fork of the `circleci-docs` repo.
-
-`git clone https://github.com/<my_github_username>/circleci-docs.git`
-
-7. Change to the `circleci-docs` directory and start Jekyll. The first time you run `./jctl start`, Vagrant will provision the entire VM based on the contents of `boostrap.sh`. This process can take a few minutes, but it's a one-time deal.
-
-`cd circleci-docs`
-
-`./jctl start`
-
-After successful completion, Jekyll will automatically start in the VM. Vagrant will then begin forwarding port 4040, and you'll be able to view the complete documentation site at <http://localhost:4040/docs/>. 
+After successful completion, Jekyll will automatically start in the VM. Vagrant will then begin forwarding port 4040, and you'll be able to view the complete documentation site at <http://localhost:4040/docs/>.
 
 #### Jekyll Controller Commands
 
@@ -68,13 +56,13 @@ The Jekyll Controller (`jctl`) is a bash wrapper script that talks to Jekyll & V
 - `./jctl stop`: Shuts down entire VM (including Jekyll)
 - `./jctl restart`: Stops and then starts the VM `./jctl stop && ./jctl start`
 
-Note: As an alternative to `jctl`, you can log into the VM directly to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
+As an alternative to `jctl`, you can log directly into the VM to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
 
 ### Run Without Vagrant
 If you already have a stable Ruby environment and feel comfortable installing dependencies, you can run the server directly on your machine.
 
 #### Prerequisites
-- Ruby: See this project's Gemfile for the version of Ruby currently being used with this project. We recommend RVM for managing multiple Ruby versions, but there are other options available.
+- Ruby: See this project's Gemfile for the version of Ruby currently being used. We recommend RVM for managing multiple Ruby versions, but there are other options available.
 - [Jekyll](https://jekyllrb.com/): Jekyll 3 transforms Markdown files.
 - [HTMLProofer](https://github.com/gjtorikian/html-proofer): Used for testing links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
 
@@ -101,43 +89,29 @@ localhost:4000 by default.
 
 ### Editing Docs
 
-Use this procedure to add or modify the CircleCI docs and make a pull request from your local clone.
+All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
 
-1. To see the list of the Markdown files for CircleCI v2.0, change to the `jekyll/_cci2` directory and type `ls`.
+1. Create a branch and switch to it:
 
-`cd jekyll/_cci2`
+    `git checkout -b <branch-name>`
 
-`ls`
+2. Add or modify the Markdown files in these directories according to the style guide outlined in `CONTRIBUTING.md` in this repository. Rebuild the site when you want to check your work with:
 
-See the `CONTRIBUTING.md` file in this repository for documentation style tips. 
-
-2. Add or modify the Markdown files and rebuild the site to check your work. 
-
-`./jctl rebuild`
+    `./jctl rebuild`
 
 For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
 
-3. Create a branch and switch to it.
+3. When you're happy with your changes, commit them with a message summarizing what you did:
 
-`git branch <branch-name>`
+    `git commit -a -m "commit message"
 
-`git checkout <branch-name>`
+4. Push your branch up:
 
-4. Stage and commit your changes.
+    `git push origin <branch-name>`
 
-`git commit -a -m "commit message"`
+### Submitting a Pull Request
 
-5. Download GitHub Desktop from <https://desktop.github.com/> if you haven’t already and open it. 
-
-6. To add your local repository, click the + button, select Add, and choose the `<my-github-username>/circleci-docs` folder. 
-
-The `<my-github_username>/circleci-docs` repo appears under GitHub in the left pane.
-
-7. Click `<my-github_username>/circleci-docs` to see the committed changes in your branch.
-
-8. Click the Pull Request button, add a description, and click Send Pull Request to submit your changes for review.
-
-You will get a notification when a reviewer responds to your request and after the changes are merged.
+Create a pull request by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
 ## License Information
 Documentation (guides, references, and associated images) is licensed as Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full license can be found [here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the
