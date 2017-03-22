@@ -53,3 +53,42 @@ A few notes about this example:
 
 - `CIRCLE_API_TOKEN` should be the API token from your project's setting page.
 - `<vcs-type>/<org>/<repo>` should be replaced with your own VCS and org/repo names; at time of writing, `<vcs-types>` must be either `github` or `bitbucket`.
+
+## Conditionally triggering jobs
+Building off of the previous example, suppose you want to build docker images with `setup_remote_docker` only when you'll deploy. You can use a config such as the following:
+
+```YAML
+  build:
+    docker:
+      - image: ruby:2.4.0
+        environment:
+          - LANG: C.UTF-8
+    working_directory: /my-project
+    parallelism: 2
+    steps:
+      - checkout
+
+      - run:
+          name: Tests
+          command: |
+            echo "run some tests"
+
+      - deploy:
+          name: conditionally run a deploy job
+          command: |
+            # replace this with your build/deploy check (i.e. current branch is "release")
+            if [[ true ]]; then
+              curl --user ${CIRCLE_API_TOKEN}: \
+                --data build_parameters[CIRCLE_JOB]=deploy_docker \
+                --data revision=$CIRCLE_SHA1 \
+                https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
+            fi
+
+  deploy_docker:
+    docker:
+      - image: ruby:2.4.0
+    working_directory: /
+    steps:
+      - setup_remote_docker
+      - run: echo "deploy section running"
+```
