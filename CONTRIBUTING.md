@@ -1,5 +1,29 @@
 # Contributing to CircleCI Docs
 
+All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
+
+1. Create a branch and switch to it:
+
+    `git checkout -b <branch-name>`
+
+2. Add or modify the Markdown files in these directories according to the style guide outlined in `CONTRIBUTING.md` in this repository. Rebuild the site when you want to check your work with:
+
+    `./jctl rebuild`
+
+For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
+
+3. When you're happy with your changes, commit them with a message summarizing what you did:
+
+    `git commit -a -m "commit message"
+
+4. Push your branch up:
+
+    `git push origin <branch-name>`
+
+### Submitting a Pull Request
+
+Create a pull request by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+
 Thank you for your interest in contributing to the CircleCI documentation.
 
 **Note (March 2017): We are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0
