@@ -86,7 +86,7 @@ version: 2
 
 Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy (BTD) process. Our sample app only needs a `build` job, so everything else is going to live under that key.
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll use Apache's default DocumentRoot so its vhost can serve the PHP project.
+In each job, we have specify a `working_directory`. In this sample config, we’ll use Apache's default DocumentRoot so its vhost can serve the PHP project.
 
 ```YAML
 ...

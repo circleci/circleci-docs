@@ -106,7 +106,7 @@ We'll also create a container for PostgreSQL, along with 3 environment variables
           POSTGRES_PASSWORD: ""
 ```
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+In each job, we specify a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
 ```YAML
 ...

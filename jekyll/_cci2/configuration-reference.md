@@ -31,7 +31,7 @@ Key | Required | Type | Description
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker-executor)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine-executor)
 steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | Y | String | What directory to run the steps in (default: depends on executor)
+working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)

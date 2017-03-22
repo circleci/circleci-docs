@@ -101,7 +101,7 @@ version: 2
 
 Next, we have a `jobs` key. Every config file must have a ‘build’ job. This is the only job that will be automatically picked up and run by CircleCI.
 
-In the job, we have the option of specifying a `working_directory`. Go is very strict about the structure of the [Go Workspace](https://golang.org/doc/code.html#Workspaces), so we’ll need to specify a path that satisfies those requirements.
+In the job, we specify a `working_directory`. Go is very strict about the structure of the [Go Workspace](https://golang.org/doc/code.html#Workspaces), so we’ll need to specify a path that satisfies those requirements.
 
 ```YAML
 version: 2
