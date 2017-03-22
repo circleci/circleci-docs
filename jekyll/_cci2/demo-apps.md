@@ -12,6 +12,7 @@ Each language listed below has an associated guide and public repository on GitH
 
 Language | Framework | GitHub Repo Name
 ---------|-----------|-----------------
+[Clojure] | Clojure | [cci-demo-clojure]
 [Elixir] | Phoenix | (coming soon)
 [Go] | Go | [cci-demo-go]
 [JavaScript] | React | [cci-demo-react]
@@ -20,6 +21,7 @@ Language | Framework | GitHub Repo Name
 [Ruby] | Rails | [cci-demo-rails]
 {: class="table"}
 
+[Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
 [Go]: {{ site.baseurl }}/2.0/language-go/
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
@@ -27,6 +29,7 @@ Language | Framework | GitHub Repo Name
 [Python]: {{ site.baseurl }}/2.0/language-python/
 [Ruby]: {{ site.baseurl }}/2.0/language-ruby/
 
+[cci-demo-clojure]: https://github.com/circleci/cci-demo-clojure
 [cci-demo-go]: https://github.com/circleci/cci-demo-go
 [cci-demo-react]: https://github.com/circleci/cci-demo-react
 [cci-demo-lumen]: https://github.com/circleci/cci-demo-lumen
