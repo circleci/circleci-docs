@@ -1,12 +1,34 @@
+Thank you for your interest in contributing to the CircleCI documentation.
+
+**As of March 2017, we are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0 will continue to be improved, but will go into maintenance mode in the coming months. If you're considering contributing a completely new article, we encourage you to contribute to the 2.0 documentation found at <https://circleci.com/docs/2.0/> or in this repo in `/jekyll/_cci2/`.**
+
 # Contributing to CircleCI Docs
 
-All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
+There are a couple of ways to contribute to our documentation. For suggestions and feedback, please [open an issue](#open-an-issue). For edits or new articles, please [submit a pull request](#submit-a-pull-request).
+
+## Open an Issue
+
+If a doc is unclear or incorrect, you can open an issue by clicking **Open an issue about this page**, located at the bottom of each article. In the issue's text, please let us know what needs fixing or suggest changes.
+
+## Submit a Pull Request
+
+**Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
+
+For minor changes like typos, you can click **Suggest an edit to this page**, located at the bottom of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
+
+For larger edits or new articles, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your local machine, then follow the [README](README.md) to set up your local environment.
+
+Come back here when you're ready to start editing!
+
+### Editing Docs Locally
+
+All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
 
 1. Create a branch and switch to it:
 
     `git checkout -b <branch-name>`
 
-2. Add or modify the Markdown files in these directories according to the style guide outlined in `CONTRIBUTING.md` in this repository. Rebuild the site when you want to check your work with:
+2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below. Rebuild the site when you want to check your work with:
 
     `./jctl rebuild`
 
@@ -22,32 +44,7 @@ For more detailed instructions on using `jctl`, see [Jekyll Controller Commands]
 
 ### Submitting a Pull Request
 
-Create a pull request by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
-
-Thank you for your interest in contributing to the CircleCI documentation.
-
-**Note (March 2017): We are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0
-will continue to be improved, but will go into maintenance mode in the coming months. If you're considering contributing
-a completely new article, we encourage you to contribute to the 2.0 documentation found online at 
-<https://circleci.com/docs/2.0/> or in this repo in `/jekyll/_cci2/`.**
-
-**Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
-
-## Fix or improve an article
-
-For minor changes, you can edit the source Markdown file directly on GitHub. The GitHub UI makes it simple to create a
-Pull Request from the edit screen.
-
-The bottom of every article on https://circleci.com/docs/ has a direct link to the source file on GitHub.
-
-For more extensive editing, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box),
-clone your fork to your local machine, work on your contribution in a branch, and 
-[open a Pull Request](https://help.github.com/articles/creating-a-pull-request/) when ready for review.
-
-## Make a suggestion or leave feedback
-
-We welcome your feedback and suggestions. Please [open a GitHub Issue](https://github.com/circleci/circleci-docs/issues) 
-on this repository. There you can let us know what needs fixing or suggest content for new documentation.
+Create a pull request from your fork by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
 ## How To Add a Table of Contents
 
