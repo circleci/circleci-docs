@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Frequently Asked Questions FAQ"
+title: "Frequently Asked Questions (FAQ)"
 short-title: "FAQ"
 categories: [getting-started]
 order: 50
@@ -16,7 +16,7 @@ order: 50
 
 ## Can I build Windows applications?
 
-We do not support building and testing Microsoft Windows applications.
+We do not yet support building and testing Microsoft Windows applications.
 
 ## Does CircleCI 2.0 run inference commands?
 
