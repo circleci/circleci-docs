@@ -64,4 +64,13 @@ If you see this message in the 'Checkout Code' stage of your build:
 Warning: Git is not installed in the image. Falling back to CircleCI's native git client but this is still an experiment feature. We highly recommend using an image that has official Git installed.
 ```
 
-It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. This should be a reliable fall-back, but if you notice unusual behaviour, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
+It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. Although this should be a reliable fall-back, currently there is one limitation: checking out with [source caching]({{site.baseurl}}/2.0/caching/#source-caching) is not supported yet. When go-git is used and source cache is detected, you will see the following error in the step.
+
+```
+Error: source cache is detected but currently not supported by CircleCI's native Git client.
+```
+
+When you see the error and if you want to keep using source caching, please use an image that has Git installed.
+
+
+If you notice other unusual behaviors, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
