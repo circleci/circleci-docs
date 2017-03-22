@@ -13,7 +13,9 @@ order: 25
 
 This tutorial will show you how to build, test, and deploy a web application using CircleCI. Whether you're new to the platform or a long-time user, we think you'll find the information here helpful.
 
-If you're a mobile developer, please note that CircleCI 2.0 doesn’t yet support building iOS/Android apps. Until then, please refer to our documentation for [mobile on 1.0]({{ site.baseurl }}/1.0/mobile/).
+## What kind of applications can I build on CircleCI?
+
+CircleCI is a very flexible platform so you should be able to adapt this tutorial for building almost any kind of application that will run on Linux. Please [see the FAQ for more details about building on iOS and Android]({{ site.baseurl }}/2.0/faq/).
 
 ## The Demo App - 'Circulate'
 
