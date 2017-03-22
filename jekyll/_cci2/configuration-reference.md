@@ -8,6 +8,12 @@ order: 0
 
 This document is a reference for `.circleci/config.yml` which describes jobs and steps to build/test/deploy your project. The presence of this file indicates that you want to use the 2.0 infrastructure. This allows you to test 2.0 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
+## Table of Contents
+{:.no_toc}
+
+* TOC
+{:toc}
+
 The `config.yml` file has the following format:
 
 ## Root
