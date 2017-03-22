@@ -54,6 +54,10 @@ We don't have a lot of rules, but we do try to be consistent with the ones we ha
 
 Since the emphasis in docs is on prose, we prefer [markdown](https://daringfireball.net/projects/markdown/syntax) over plain HTML.
 
+### Bootstrap
+
+The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
+
 ### Adding New Articles
 
 New articles can be added to the [jekyll/_cci2](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2) directory in this repo.
@@ -98,6 +102,6 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 {:.no_toc}
 ```
 
-### Bootstrap
+### Bold and Terms
 
-The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
+Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
