@@ -64,4 +64,4 @@ If you see this message in the 'Checkout Code' stage of your build:
 Warning: Git is not installed in the image. Falling back to CircleCI's native git client but this is still an experiment feature. We highly recommend using an image that has official Git installed.
 ```
 
-It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. This should be a reliable fall-back, but if you notice unusual behaviour, please reach out to support or let us know on [Discuss](https://discuss.circleci.com).
+It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. This should be a reliable fall-back, but if you notice unusual behaviour, please reach out to support or let us know on [Discuss](c/circleci-2-0/support).
