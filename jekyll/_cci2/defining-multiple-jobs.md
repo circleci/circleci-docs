@@ -55,7 +55,8 @@ A few notes about this example:
 - `<vcs-type>/<org>/<repo>` should be replaced with your own VCS and org/repo names; at time of writing, `<vcs-types>` must be either `github` or `bitbucket`.
 
 ## Conditionally triggering jobs
-Building off of the previous example, suppose you want to build docker images with `setup_remote_docker` only when you'll deploy. You can use a config such as the following:
+
+Building on the previous example, suppose you want to build docker images with `setup_remote_docker` only when for builds that should be deployed. You can use a config such as the following:
 
 ```YAML
   build:
@@ -92,3 +93,9 @@ Building off of the previous example, suppose you want to build docker images wi
       - setup_remote_docker
       - run: echo "deploy section running"
 ```
+
+**Notes on the above example:**
+
+- Using the `deploy` step in the build job is important so that you don't trigger N builds, where N is your parallelism level.
+- We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
+- **This approach is a temporary workaround for the current features available during Beta.** Soon we'll be adding a much more elegant way to manage multiple jobs.
