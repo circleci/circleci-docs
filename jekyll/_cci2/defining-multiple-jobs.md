@@ -56,7 +56,7 @@ A few notes about this example:
 
 ## Conditionally triggering jobs
 
-Building on the previous example, suppose you want to build docker images with `setup_remote_docker` only when for builds that should be deployed. You can use a config such as the following:
+Building on the previous example, suppose you want to build docker images with `setup_remote_docker` only for builds that should be deployed. You can use a config such as the following:
 
 ```YAML
   build:
