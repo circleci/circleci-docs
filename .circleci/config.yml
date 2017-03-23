@@ -12,28 +12,28 @@ jobs:
       - LC_ALL="C.UTF-8"
     steps:
       - run:
-        name: Install essential packages
-        command: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base
+          name: Install essential packages
+          command: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base
       - checkout
       - run:
-        name: Install Ruby dependencies
-        command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run:
-        name: Create results directory
-        command: mkdir -p $JOB_RESULTS_PATH
+          name: Create results directory
+          command: mkdir -p $JOB_RESULTS_PATH
       - run:
-        name: Expose version files
-        command: |
-          cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
-          cp jekyll/_data/trusty/versions-ubuntu-14.04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
-          cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
-          cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XXL-upstart.json
+          name: Expose version files
+          command: |
+            cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
+            cp jekyll/_data/trusty/versions-ubuntu-14.04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
+            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
+            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XXL-upstart.json
       - run:
-        name: Build the Jekyll site
-        command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+          name: Build the Jekyll site
+          command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
-        name: Test with HTMLproofer
-        command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          name: Test with HTMLproofer
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
       - store_artifacts: 
           path: jekyll/_site/docs/
           destination: circleci-docs
