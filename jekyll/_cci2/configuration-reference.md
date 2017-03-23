@@ -356,8 +356,6 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ```
 
-
-<a name="save_cache"/>
 #### **`save_cache`**
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can restore this cache (using a [`restore_cache` step](#restore_cache)). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
