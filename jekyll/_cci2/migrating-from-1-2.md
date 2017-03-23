@@ -264,4 +264,4 @@ deployment:
 
 Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
 
-You can write your own manual `deploy` steps as shown in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+You can write your own manual `deploy` steps as shown in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploysdsd).
