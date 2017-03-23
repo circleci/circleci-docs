@@ -2,15 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ruby:2.3.3-alpine
+      - image: ruby:2.3.3
     working_directory: /home/ubuntu/circleci-docs/
     environment:
       - JEKYLL_ENV=production
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       - GENERATED_SITE_PATH=jekyll/_site/docs/
       - JOB_RESULTS_PATH=run-results/
-      - LANG="C.UTF-8"
-      - LC_ALL="C.UTF-8"
     steps:
       - run: apk update && apk add git openssh-client libxml2-dev libxslt libc6-compat
       - checkout
