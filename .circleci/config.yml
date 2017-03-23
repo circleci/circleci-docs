@@ -49,3 +49,9 @@ jobs:
       - store_artifacts: 
           path: run-results/
           destination: run-results
+      - deploy:
+          name: Deploy to S3 if tests pass
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "Deploying"
+            fi
