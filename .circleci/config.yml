@@ -7,7 +7,7 @@ jobs:
     environment:
       - JEKYLL_ENV=production
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-      - GENERATED_SITE_PATH=jekyll/_site/
+      - GENERATED_SITE_PATH=jekyll/_site
       - JOB_RESULTS_PATH=run-results/
       - LANG="C.UTF-8"
       - LC_ALL="C.UTF-8"
