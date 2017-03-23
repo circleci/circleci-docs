@@ -1,10 +1,22 @@
 ---
 layout: classic-docs
-title: "Frequently Asked Questions"
+title: "Frequently Asked Questions (FAQ)"
 short-title: "FAQ"
 categories: [getting-started]
 order: 50
 ---
+
+## What kind of applications can I build on CircleCI?
+
+**Linux:** CircleCI is a very flexible platform so you should be able to **build almost any kind of application that will run on Linux**. It doesn't have to be a web application!
+
+**Android:** Although Android is not officially supported on 2.0 at this time, you can build Android apps on the 2.0 platform, [this post](https://discuss.circleci.com/t/thank-you-and-android-build-example/11298) has an excellent example of a customer successfully building Android on 2.0. **Note that this example does not use the emulator so it's not affected by the incompatibility between Docker and the Android emulator.** We will explain ways to run the Android emulator in future 2.0 documentation updates. Full documentation for building Android apps on 2.0 is coming soon. 
+
+**iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
+
+## Can I build Windows applications?
+
+We do not yet support building and testing Microsoft Windows applications.
 
 ## Does CircleCI 2.0 run inference commands?
 
