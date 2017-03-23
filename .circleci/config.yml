@@ -9,6 +9,8 @@ jobs:
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       - GENERATED_SITE_PATH=jekyll/_site/docs/
       - JOB_RESULTS_PATH=run-results/
+      - LANG="C.UTF-8"
+      - LC_ALL="C.UTF-8"
     steps:
       - checkout
       - run: mkdir -p $JOB_RESULTS_PATH
