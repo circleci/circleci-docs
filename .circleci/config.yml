@@ -16,12 +16,12 @@ jobs:
           command: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base
       - checkout
       - restore_cache:
-          key: circleci-docs-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
-          key: circleci-docs-{{ checksum "Gemfile.lock" {% raw %}}}
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" {% raw %}}}
           paths:
             - "vendor/bundle"
       - run:
