@@ -37,8 +37,8 @@ Each job consists of the job's name as a key and a map as a value. A name should
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker-executor)
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine-executor)
+docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
+machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -362,6 +362,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ```
 
+<a name="save_cache"/>
 #### **`save_cache`**
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
@@ -411,6 +412,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 ```
 {% endraw %}
 
+<a name="restore_cache"/>
 #### **`restore_cache`**
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
