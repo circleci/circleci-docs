@@ -2,6 +2,5 @@ source 'https://rubygems.org'
 
 ruby '2.3.3'
 
-gem 'pkg-config', "~> 1.1.7"
 gem 'jekyll', "~> 3.4.0"
 gem 'html-proofer', "~> 3.5.0"
