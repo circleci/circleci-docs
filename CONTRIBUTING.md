@@ -52,7 +52,7 @@ We don't have a lot of rules, but we do try to be consistent with the ones we ha
 
 ### Markdown
 
-Since the emphasis in docs is on prose, we prefer [markdown](https://daringfireball.net/projects/markdown/syntax) over plain HTML.
+Since the emphasis in docs is on prose, we prefer [markdown](http://commonmark.org/help/) over plain HTML.
 
 ### Bootstrap
 
