@@ -50,8 +50,8 @@ jobs:
           path: run-results/
           destination: run-results
       - deploy:
-          name: Deploy to S3 if tests pass
+          name: Deploy to S3 if tests pass and branch is Master
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "Deploying"
+              aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
             fi
