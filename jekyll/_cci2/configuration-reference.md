@@ -407,7 +407,6 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 ```
 {% endraw %}
 
-<a name="restore_cache"/>
 #### **`restore_cache`**
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).

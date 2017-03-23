@@ -246,7 +246,7 @@ jobs:
 
 Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
 
-Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#savecache).
+Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#save_cache).
 
 ## Deployment
 
