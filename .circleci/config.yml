@@ -3,26 +3,24 @@ jobs:
   build:
     docker:
       - image: ruby:2.3.3-alpine
-    working_directory: ~/circleci-docs
+    working_directory: /root/circleci-docs
     environment:
       - JEKYLL_ENV=production
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-      - GENERATED_SITE_PATH=jekyll/_site
       - JOB_RESULTS_PATH=run-results
       - LANG="C.UTF-8"
       - LC_ALL="C.UTF-8"
     steps:
+      - run: pwd
       - run: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base
       - checkout
       - run: mkdir -p $JOB_RESULTS_PATH
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
-      - run: bundle exec htmlproofer $GENERATED_SITE_PATH --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+      - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+      - run: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
       - store_artifacts: 
-          # really wish this could use $GENERATED_SITE_PATH
           path: jekyll/_site/docs/
           destination: circleci-docs
       - store_artifacts: 
-          # really wish this could use $GENERATED_SITE_PATH
           path: run-results/
           destination: run-results
