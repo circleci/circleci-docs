@@ -13,7 +13,7 @@ jobs:
     steps:
       - run:
           name: Install essential packages
-          command: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base
+          command: apk update && apk add git openssh-client libxml2-dev libxslt-dev build-base awscli
       - checkout
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
