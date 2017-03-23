@@ -8,14 +8,23 @@ order: 0
 
 This document is a reference for `.circleci/config.yml` which describes jobs and steps to build/test/deploy your project. The presence of this file indicates that you want to use the 2.0 infrastructure. This allows you to test 2.0 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
-The `config.yml` file has the following format:
+You can see a complete `config.yml` in our [full example](#full-example).
 
-## Root
+---
+
+## Table of Contents
+{:.no_toc}
+
+* TOC
+{:toc}
+
+---
+
+## **`version`**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 version | Y | String | Should currently be `2`
-jobs | Y | List | A list of jobs, see the definition for a job
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -28,8 +37,8 @@ Each job consists of the job's name as a key and a map as a value. A name should
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker-executor)
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine-executor)
+docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
+machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -62,11 +71,13 @@ jobs:
       - run: make
 ```
 
-## Executors
+### **`docker`** | **`machine`** (_executor_)
 
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
-### Docker executor
+#### `docker`
+{:.no_toc}
+
 Configured by `docker` key which takes a list of maps:
 
 Key | Required | Type | Description
@@ -108,7 +119,9 @@ jobs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-### Machine executor
+#### **`machine`**
+{:.no_toc}
+
 Configured by using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
@@ -133,11 +146,9 @@ jobs:
     machine: true
 ```
 
-## **`branches`**
+### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches.
-
-### Configuration map
+Defines rules for whitelisting/blacklisting execution of some branches. Takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -169,7 +180,7 @@ If both `ignore` and `only` are present in config, only `ignore` will be taken i
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
-## **`steps`**
+### **`steps`**
 
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
@@ -216,17 +227,11 @@ Key | Required | Type | Description
 &lt;step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
 {: class="table table-striped"}
 
-Configuration map is specific for each step and described [below](#built-in-steps).
-
-### Built-in steps
-
-In the future you will be able to refer to external and custom step types, but for now you are limited to these built-in predefined steps.
+Each built-in step is described in detail below.
 
 #### **`run`**
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
-
-##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -249,11 +254,11 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-##### **Default shell options**
+##### _Default shell options_
 
 Our default `shell` has a few options enabled by default:
 
-**`-e` option**
+`-e`
 
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
@@ -274,7 +279,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
       make test
 ```
 
-**`-o pipefail` option**
+`-o`
 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
@@ -291,7 +296,8 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
-##### **Background command**
+##### _Background commands_
+
 The `background` attribute allows for executing commands in the background. In this case, job execution will immediately proceed to the next step rather than waiting for the command to return. While debugging background commands is more difficult, running commands in the background might be necessary in some cases. For instance, to run Selenium tests you may need to have X virtual framebuffer running:
 
 ``` YAML
@@ -303,7 +309,8 @@ The `background` attribute allows for executing commands in the background. In t
 - run: make test
 ```
 
-##### **Shorthand syntax**
+##### _Shorthand syntax_
+
 `run` has a very convenient shorthand syntax:
 
 ``` YAML
@@ -316,7 +323,8 @@ The `background` attribute allows for executing commands in the background. In t
 ```
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
-##### **Complete example of `run` **
+##### _Example_
+
 ``` YAML
 - run:
     name: Testing application
@@ -339,8 +347,6 @@ In this case, `command` and `name` become the string value of `run`, and the res
 
 Special step used to check out source code to the configured `path` (defaults to the `working_directory`).
 
-##### **Configuration map**
-
 Key | Required | Type | Description
 ----|-----------|------|------------
 path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
@@ -356,13 +362,10 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ```
 
-
 <a name="save_cache"/>
 #### **`save_cache`**
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can restore this cache (using a [`restore_cache` step](#restore_cache)). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
-
-**Configuration map**
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -372,7 +375,7 @@ key | Y | String | Unique identifier for this cache
 
 The cache for a specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step._
 
-When storing a new cache, `key` value may contains special templated values for your convenience:
+When storing a new cache, the `key` value may contain special templated values for your convenience:
 
 Template | Description
 ----|----------
@@ -398,7 +401,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 </div>
 
-##### **Complete example**
+##### _Example_
 
 {% raw %}
 ``` YAML
@@ -413,8 +416,6 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 #### **`restore_cache`**
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
-
-##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -456,7 +457,8 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-##### **Complete example**
+##### _Example_
+
 {% raw %}
 ``` YAML
 - restore_cache:
@@ -483,7 +485,7 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-##### **Example**
+##### _Example_
 
 ``` YAML
 - deploy:
@@ -498,8 +500,6 @@ In general `deploy` step behaves just like `run` with one exception - in a build
 <!-- TODO: replace the 1.0 link here with a 2.0 link -->
 Step to store artifacts (for example logs, binaries, etc) to be available in the web UI or via the API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts/)
 
-##### **Configuration map**
-
 Key | Required | Type | Description
 ----|-----------|------|------------
 path | Y | String | Directory in the primary container to save as build artifacts
@@ -508,7 +508,7 @@ destination | Y | Prefix added to the artifact paths in the artifacts API
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-##### **Example**
+##### _Example_
 
 ``` YAML
 - store_artifacts:
@@ -520,8 +520,6 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Special step used to upload test results to be stored in artifacts and shown in the web UI.
 
-##### **Configuration map**
-
 Key | Required | Type | Description
 ----|-----------|------|------------
 path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadata files
@@ -529,7 +527,7 @@ path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadat
 
 The directory layout should match the [classic CircleCI test metadata directory layout]({{ site.baseurl }}/1.0/test-metadata/#metadata-collection-in-custom-test-steps).
 
-##### **Example**
+##### _Example_
 
 ``` YAML
 - store_test_results:
@@ -539,8 +537,6 @@ The directory layout should match the [classic CircleCI test metadata directory 
 #### **`add_ssh_keys`**
 
 Special step that adds SSH keys configured in the project's UI to the container.
-
-##### **Configuration map**
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -577,7 +573,8 @@ Then `source` the ssh configuration in `run` steps that require an ssh-agent:
       my-command-that-uses-ssh
 ```
 
-### Putting it all together
+## _Full Example_
+{:.no_toc}
 
 {% raw %}
 ``` YAML
