@@ -3,12 +3,12 @@ jobs:
   build:
     docker:
       - image: ruby:2.3.3-alpine
-    working_directory: /home/ubuntu/circleci-docs/
+    working_directory: ~/circleci-docs
     environment:
       - JEKYLL_ENV=production
       - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       - GENERATED_SITE_PATH=jekyll/_site
-      - JOB_RESULTS_PATH=run-results/
+      - JOB_RESULTS_PATH=run-results
       - LANG="C.UTF-8"
       - LC_ALL="C.UTF-8"
     steps:
