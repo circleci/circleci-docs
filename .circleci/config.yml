@@ -14,6 +14,7 @@ jobs:
     steps:
       - run: apk update && apk add alpine-sdk git openssh-client libxml2-dev libxslt libc6-compat
       - checkout
+      - run: gem install pkg-config -v "~> 1.1.7"
       - run: mkdir -p $JOB_RESULTS_PATH
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination $GENERATED_SITE_PATH 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
