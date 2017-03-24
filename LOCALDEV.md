@@ -16,10 +16,10 @@ To get a local copy of our docs, run the following commands:
 ```bash
 git clone https://github.com/circleci/circleci-docs.git
 cd circleci-docs/jekyll
-jekyll serve
+jekyll serve -Iw
 ```
 
-Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>.
+Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>. `-w` tells Jekyll to watch for changes and rebuild, while `-I` enables an incremental rebuild to speed things up.
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 

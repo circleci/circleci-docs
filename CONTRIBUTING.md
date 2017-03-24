@@ -28,9 +28,11 @@ All docs live in folders named after the version of CircleCI. The only two you n
 
     `git checkout -b <branch-name>`
 
-2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below. Rebuild the site when you want to check your work with:
+2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below.
 
-    `./jctl rebuild`
+If you installed Jekyll and ran `jekyll serve -Iw`, then the server should watch for changes and automatically rebuild.
+
+If you're using Vagrant, then rebuild the site using `./jctl rebuild`.
 
 For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
 
