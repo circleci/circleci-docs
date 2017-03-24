@@ -37,18 +37,6 @@ Builds often freeze due to syntax errors in `config.yml`.
 
 Cancel the build, check your `config.yml` for proper indentation, and ensure that all jobs and steps have the required keys.
 
-## Can I use CircleCI 2.0 without creating base images?
-
-Yes, you can use* one of ours!
-
-The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
-
-The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
-
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
-
-\*For now. The idea of a monolithic build image doesn’t fit well with the ethos of CircleCI 2.0, so we will eventually deprecate it.
-
 ## How do Docker image names work? Where do they come from?
 
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
