@@ -32,9 +32,7 @@ All docs live in folders named after the version of CircleCI. The only two you n
 
 If you installed Jekyll and ran `jekyll serve -Iw`, then the server should watch for changes and automatically rebuild.
 
-If you're using Vagrant, then rebuild the site using `./jctl rebuild`.
-
-For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
+If you're using Vagrant, then rebuild the site using `./jctl rebuild`. For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
 
 3. When you're happy with your changes, commit them with a message summarizing what you did:
 
