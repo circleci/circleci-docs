@@ -1,6 +1,6 @@
 There are two ways to run a local development server: [install Jekyll](#install-jekyll) or [use Vagrant](#use-vagrant).
 
-## Install Jekyll
+# Install Jekyll
 
 If you already have a stable Ruby environment and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
 
@@ -10,7 +10,7 @@ We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofe
 
 You're also welcome to use [Bundler](http://bundler.io/) to install these gems.
 
-### First Run
+## First Run
 To get a local copy of our docs, run the following commands:
 
 ```bash
@@ -23,15 +23,15 @@ Jekyll will build the site and start a web server, which can be viewed in your b
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 
-## Use Vagrant
+# Use Vagrant
 
 If you don't want to install Jekyll, you can use Vagrant to set up a clean environment with all of the project's necessary dependencies.
 
-### Prerequisites
+## Prerequisites
 - Vagrant: [download directly](https://www.vagrantup.com/downloads.html), `brew cask install vagrant`, or `sudo apt-get install vagrant`
 - VirtualBox: [download directly](https://www.virtualbox.org/wiki/Downloads), `brew cask install virtualbox`, or `sudo apt-get install virtualbox`
 
-### macOS Setup
+## macOS Setup
 
 Open a terminal window and follow these steps to set up your local development environment with Vagrant and Brew.
 
@@ -72,6 +72,6 @@ The Jekyll Controller (`jctl`) is a bash wrapper script that talks to Jekyll & V
 
 As an alternative to `jctl`, you can log directly into the VM to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
 
-## Editing Docs
+# Editing Docs
 
 Now that you have a working local environment, please follow our [Contributing Guide](CONTRIBUTING.md) to make and submit changes.
