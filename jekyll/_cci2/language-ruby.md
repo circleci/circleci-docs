@@ -46,7 +46,7 @@ jobs:
 
 ## Get the Code
 
-The configuration above is from a demo Go app, which you can access at [https://github.com/circleci/cci-demo-rails](https://github.com/circleci/cci-demo-rails).
+The configuration above is from a demo Ruby on Rails app, which you can access at [https://github.com/circleci/cci-demo-rails](https://github.com/circleci/cci-demo-rails).
 
 Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
 
