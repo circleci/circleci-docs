@@ -6,7 +6,7 @@ categories: [docker]
 order: 2
 ---
 
-If you use `docker-compose`, you can use it in CircleCI 2.0 as well using the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images). We've prepared an [example project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) to demonstrate it.
+If you use `docker-compose`, you can use it in CircleCI 2.0 as well using the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/). We've prepared an [example project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) to demonstrate it.
 
 You can use the [full config file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. Here, we'll just cover the relevant parts.
 
@@ -21,7 +21,7 @@ In order to use `docker-compose`, you'll need to have it in your [primary contai
       chmod +x /usr/local/bin/docker-compose
 ```
 
-To activate the Remote Docker Environment, you need use [this special step]({{ site.baseurl }}/2.0/building-docker-images):
+To activate the Remote Docker Environment, you need use [this special step]({{ site.baseurl }}/2.0/building-docker-images/):
 
 ``` YAML
 - setup_remote_docker

@@ -6,7 +6,7 @@ categories: [docker]
 order: 1
 ---
 
-Using private images isn’t directly supported by the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor). However, you _can_ use the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images).
+Using private images isn’t directly supported by the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor). However, you _can_ use the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/).
 
 If your application requires a proprietary DB for testing, for example:
 
