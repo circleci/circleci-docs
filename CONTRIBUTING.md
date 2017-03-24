@@ -16,7 +16,7 @@ If a doc is unclear or incorrect, you can open an issue by clicking **Open an is
 
 For minor changes like typos, you can click **Suggest an edit to this page**, located at the bottom of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
 
-For larger edits or new articles, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your local machine, then follow the [README](README.md) to set up your local environment.
+For larger edits or new articles, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your machine, then follow [LOCALDEV](LOCALDEV.md) to set up your local environment.
 
 Come back here when you're ready to start editing!
 
