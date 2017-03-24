@@ -73,7 +73,7 @@ jobs:
 
 ### **`docker`** | **`machine`** (_executor_)
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {:.no_toc}
@@ -93,7 +93,7 @@ environment | N | Map | A map of environment variable names and values
 
 `command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
 
-For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting preliminary.
+For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting preliminary. At this time all `steps` run in the primary container only.
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
@@ -122,7 +122,7 @@ jobs:
 #### **`machine`**
 {:.no_toc}
 
-Configured by using the `machine` key, which takes a map:
+The usage of the [machine executor]({{ site.baseurl }}/2.0/executor-types/#machine-executor) is configured by using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
