@@ -1,3 +1,5 @@
+# Using Jekyll for Local Development
+
 If you already have a stable Ruby environment and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
 
 Check out the [Gemfile](Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
@@ -19,6 +21,6 @@ Jekyll will build the site and start a web server, which can be viewed in your b
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 
-# Editing Docs
+## Editing Docs
 
 Now that you have a working local environment, please follow our [Contributing Guide](CONTRIBUTING.md) to make and submit changes.

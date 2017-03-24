@@ -1,3 +1,5 @@
+# Using Vagrant for Local Development
+
 If you don't want to install Jekyll, you can use Vagrant to set up a clean environment with all of the project's necessary dependencies.
 
 ## Prerequisites
@@ -45,6 +47,6 @@ The Jekyll Controller (`jctl`) is a bash wrapper script that talks to Jekyll & V
 
 As an alternative to `jctl`, you can log directly into the VM to interact with Jekyll. Run `vagrant ssh` to enter the VM, then `cd /vagrant/jekyll` to access the repository's files. From there, you can run standard Jekyll commands with any preferred options.
 
-# Editing Docs
+## Editing Docs
 
 Now that you have a working local environment, please follow our [Contributing Guide](CONTRIBUTING.md) to make and submit changes.
