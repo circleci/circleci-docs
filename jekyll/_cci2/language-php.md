@@ -68,7 +68,7 @@ jobs:
 
 ## Get the Code
 
-The configuration above is from a demo Go app, which you can access at [https://github.com/circleci/cci-demo-lumen](https://github.com/circleci/cci-demo-lumen).
+The configuration above is from a demo PHP/Lumen app, which you can access at [https://github.com/circleci/cci-demo-lumen](https://github.com/circleci/cci-demo-lumen).
 
 Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
 

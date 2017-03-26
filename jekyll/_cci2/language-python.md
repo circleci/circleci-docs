@@ -62,7 +62,7 @@ jobs:
 
 ## Get the Code
 
-The configuration above is from a demo Go app, which you can access at [https://github.com/circleci/cci-demo-flask](https://github.com/circleci/cci-demo-flask).
+The configuration above is from a demo Python/flask app, which you can access at [https://github.com/circleci/cci-demo-flask](https://github.com/circleci/cci-demo-flask).
 
 Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
 
