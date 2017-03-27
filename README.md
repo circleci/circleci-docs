@@ -6,7 +6,7 @@ For minor changes like typos, you can click **Suggest an edit to this page**, lo
 
 For larger edits or new articles, you'll want to set up a local environment for editing. You'll need to [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your machine, then choose how to set up your local environment.
 
-If you already have a stable Ruby environment and feel comfortable installing dependencies, follow our [Jekyll guide](README-Jekyll). Otherwise, you can follow our [Vagrant guide](README-Vagrant) to set up a clean environment with all the project's neccessary dependencies.
+If you already have a stable Ruby environment and feel comfortable installing dependencies, follow our [Jekyll guide](README-Jekyll.md). Otherwise, you can follow our [Vagrant guide](README-Vagrant.md) to set up a clean environment with all the project's neccessary dependencies.
 
 If you have a question or need help debugging, please head to [CircleCI Discuss](https://discuss.circleci.com/) where our support team will help you out.
 
