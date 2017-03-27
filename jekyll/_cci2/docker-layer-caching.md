@@ -2,10 +2,15 @@
 layout: classic-docs
 title: "Docker Layer Caching"
 short-title: "Docker Layer Caching"
+categories: [docker]
 order: 5
 ---
 
 {% include beta-premium-feature.html%}
+
+<div class="alert alert-info" role="alert">
+<strong>Note:</strong> This feature only works with whitelisted projects. Please contact your support representative to enable layer caching.
+</div>
 
 If your application is distributed as a Docker image, you probably know that this image consists of layers. In addition, it's usually the top layers that end up changing.
 
@@ -32,7 +37,3 @@ If you specify `exclusive: true`, your job is guaranteed to have an exclusive Re
 If you specify `exclusive: false`, a project's parallel jobs will be able to share the same Remote Docker Environment. This method lets you reduce the chances of receiving a Remote Docker Environment without a cache. If you choose this option, ensure that your project can handle concurrent operations in Docker Engine.
 
 For example, if you build images with mutable tags like `latest`, then a shared Docker environment could be a bad idea. With `exclusive: false`, we only allow 2 parallel jobs to use the same Docker environment.
-
-<div class="alert alert-info" role="alert">
-<strong>Note:</strong> This feature only works with whitelisted projects. Please contact your support representative to enable layer caching.
-</div>
