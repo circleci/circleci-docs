@@ -39,8 +39,8 @@ jobs:
       - run: bin/lein deps
       - save_cache:
           paths:
-            - $HOME/.m2
-            - $HOME/.lein
+            - ~/.m2
+            - ~/.lein
           key: {{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
@@ -116,8 +116,8 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
       - run: bin/lein deps
       - save_cache:
           paths:
-            - $HOME/.m2
-            - $HOME/.lein
+            - ~/.m2
+            - ~/.lein
           key: {{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
