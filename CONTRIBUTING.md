@@ -14,7 +14,7 @@ If a doc is unclear or incorrect, you can open an issue by clicking **Open an is
 
 **Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
 
-For minor changes like typos, you can click **Suggest an edit to this page**, located at the bottom of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
+For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
 
 For larger edits or new articles, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your local machine, then follow the [README](README.md) to set up your local environment.
 
@@ -50,6 +50,8 @@ Create a pull request from your fork by following [GitHub's guide](https://help.
 
 We don't have a lot of rules, but we do try to be consistent with the ones we have. Please follow these guidelines as best you can!
 
+For basic technical writing style tips, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
+
 ### Markdown
 
 Since the emphasis in docs is on prose, we prefer [markdown](http://commonmark.org/help/) over plain HTML.
@@ -84,7 +86,7 @@ The list of available categories can be found in [categories.yml](https://github
 
 ### Headings & Tables of Contents
 
-Jekyll will automatically convert your article's title into an h1 heading, so we recommend using h2s and smaller when structuring your article.
+Jekyll will automatically convert your article's title into a level one heading (#), so we recommend using level two (##), level three (###) and level four (####) headings when structuring your article.
 
 If your article gets too long, you can add a table of contents with the reference name "toc":
 
