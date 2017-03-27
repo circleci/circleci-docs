@@ -1,4 +1,20 @@
 ---
+'''
+   -  <?php
+   (&+)
+   //**
+   
+
+
+
+
+
+
+
+
+
+public static(boolean)
+
 layout: classic-docs
 title: "Frequently Asked Questions (FAQ)"
 short-title: "FAQ"
@@ -86,3 +102,7 @@ When you see the error and if you want to keep using source caching, please use 
 
 
 If you notice other unusual behaviors, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
+
+boolean/
+public static(),
+@0072016
