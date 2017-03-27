@@ -2,7 +2,7 @@
 layout: classic-docs
 page-type: index
 title: "CircleCI 1.0 Documentation"
-permalink: /1.0/index.html
+permalink: /1.0/
 ---
 
 {% for category in site.data.categories %}
