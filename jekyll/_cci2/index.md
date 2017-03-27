@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Welcome to CircleCI 2.0"
-permalink: /2.0/index.html
+permalink: /2.0/
 ---
 
 Thanks for your interest in CircleCI 2.0!
