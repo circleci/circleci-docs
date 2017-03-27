@@ -16,7 +16,9 @@ If a doc is unclear or incorrect, you can open an issue by clicking **Open an is
 
 For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
 
-For larger edits or new articles, [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your local machine, then follow the [README](README.md) to set up your local environment.
+For larger edits or new articles, you'll want to set up a local environment for editing. You'll need to [fork this repository](https://github.com/circleci/circleci-docs#fork-destination-box), clone the fork to your machine, then choose how to set up your local environment.
+
+If you already have a stable Ruby environment and feel comfortable installing dependencies, follow our [Jekyll guide](README-Jekyll). Otherwise, you can follow our [Vagrant guide](README-Vagrant) to set up a clean environment with all the project's neccessary dependencies.
 
 Come back here when you're ready to start editing!
 
@@ -28,11 +30,11 @@ All docs live in folders named after the version of CircleCI. The only two you n
 
     `git checkout -b <branch-name>`
 
-2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below. Rebuild the site when you want to check your work with:
+2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below.
 
-    `./jctl rebuild`
+If you installed Jekyll and ran `jekyll serve -Iw`, then the server should watch for changes and automatically rebuild.
 
-For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
+If you're using Vagrant, then rebuild the site using `./jctl rebuild`. For more detailed instructions on using `jctl`, see [Jekyll Controller Commands](#jekyll-controller-commands).
 
 3. When you're happy with your changes, commit them with a message summarizing what you did:
 
