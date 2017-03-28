@@ -163,8 +163,8 @@ machine:
 deployment:
   beta_distribution:
     branch: master
-     commands:
-       - fastlane gym
+    commands:
+      - fastlane gym
 ```
 
 You should take a few minutes to read [the documentation on deployments
@@ -185,8 +185,8 @@ manage to generate a signed app locally. You can then edit the command in your
 deployment:
   beta_distribution:
     branch: master
-     commands:
-       - gym --scheme "App" --workspace "App.xcworkspace"
+    commands:
+      - gym --scheme "App" --workspace "App.xcworkspace"
 ```
 
 ### 5. Distribute the `.ipa` file to your beta testers
