@@ -1,7 +1,8 @@
 ---
 layout: classic-docs
 title: "Building Docker Images on CircleCI 2.0"
-short-title: "Building Docker Images"
+short-title: "How to build Docker images and access remote services"
+description: ""
 categories: [docker]
 order: 0
 ---

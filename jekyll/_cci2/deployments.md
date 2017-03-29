@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Deployments"
 short-title: "Deployments"
+description: "How to set up conditional deployment"
 categories: [configuring-jobs]
 order: 70
 ---

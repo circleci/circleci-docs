@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: "Welcome to CircleCI 2.0"
+description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
 

@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Help and Support"
 short-title: "Help and Support"
+description: "A list of possible support options"
 categories: [reference]
 order: 3
 ---

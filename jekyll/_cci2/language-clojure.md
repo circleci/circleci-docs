@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Clojure"
 short-title: "Clojure"
+description: "Overview and sample config for a Clojure project"
 categories: [language-guides]
 order: 2
 ---

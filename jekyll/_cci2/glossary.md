@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Glossary"
 short-title: "Glossary"
+description: "Glossary for terms used within CircleCI"
 categories: [reference]
 order: 2
 ---

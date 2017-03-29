@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Running Jobs Locally"
 short-title: "Running Jobs Locally"
+description: "Why and how to run local jobs"
 categories: [configuring-jobs]
 order: 30
 ---

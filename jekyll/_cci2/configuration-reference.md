@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Configuration Reference"
 short-title: "Configuration"
+description: "Reference for .circleci/config.yml"
 categories: [reference]
 order: 0
 ---

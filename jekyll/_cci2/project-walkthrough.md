@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Project Walkthrough"
 short-title: "Project Walkthrough"
+description: "Tutorial and sample config for a Flask project in CircleCI 2.0"
 categories: [getting-started]
 order: 25
 ---
@@ -393,7 +394,7 @@ Now, create a `setup-heroku.sh` file in the `.circleci` folder and add the follo
     login $HEROKU_LOGIN
     password $HEROKU_API_KEY
   EOF
-  
+
   # Add heroku.com to the list of known hosts
   ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 ```

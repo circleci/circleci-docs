@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Caching in CircleCI"
 short-title: "Caching"
+description: "Caching strategies to increase build speeds"
 categories: [configuring-jobs]
 order: 20
 ---

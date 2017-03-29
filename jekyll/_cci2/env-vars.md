@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "CircleCI 2.0 Environment Variables"
 short-title: "Environment Variables"
+description: "A list of supported environment variables in CircleCI 2.0"
 categories: [reference]
 order: 1
 ---

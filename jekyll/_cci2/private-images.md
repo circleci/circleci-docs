@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Using Private Images and Docker Registries"
 short-title: "Using Private Images"
+description: "How to use private images with the Remote Docker Environment"
 categories: [docker]
 order: 1
 ---

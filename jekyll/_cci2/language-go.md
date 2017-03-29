@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Go"
 short-title: "Go"
+description: "Overview and sample config for a Go project"
 categories: [language-guides]
 order: 3
 ---

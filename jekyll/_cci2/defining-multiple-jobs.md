@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Defining Multiple Jobs"
 short-title: "Defining Multiple Jobs"
+description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
 ---

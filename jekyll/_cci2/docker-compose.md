@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Using docker-compose"
 short-title: "Using docker-compose"
+description: "How to enable docker-compose in your primary container"
 categories: [docker]
 order: 2
 ---
