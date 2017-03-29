@@ -89,7 +89,7 @@ A different way to do this is to use another container running in the same netwo
 ```
 
 ### Mounting Folders
-It's not possible to mount a folder from your job space into a container in Remote Docker (and vice versa). But you can use `docker cp` command to transfer files between these two environments. For example, you want to start a container in Remote Docker and you want to use config file from your source code for that:
+It's not possible to mount a folder from your job space into a container in Remote Docker (and vice versa). But you can use `docker cp` command to transfer files between these two environments. For example, you want to start a container in Remote Docker and you want to use a config file from your source code for that:
 
 ``` YAML
 - run: |
@@ -101,7 +101,8 @@ It's not possible to mount a folder from your job space into a container in Remo
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-The same way, if you application produces some artifacts need to be stored, you can copy them from Remote Docker:
+In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
+
 ``` YAML
 - run: |
     # starting container with our application
