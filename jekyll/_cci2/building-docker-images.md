@@ -89,7 +89,30 @@ A different way to do this is to use another container running in the same netwo
 ```
 
 ### Mounting Folders
-It's not possible to mount a folder from the build container into an isolated Docker container (and vice versa).
+It's not possible to mount a folder from your job space into a container in Remote Docker (and vice versa). But you can use `docker cp` command to transfer files between these two environments. For example, you want to start a container in Remote Docker and you want to use a config file from your source code for that:
+
+``` YAML
+- run: |
+    # creating dummy container which will hold a volume with config
+    docker create -v /cfg --name configs alpine:3.4 /bin/true
+    # copying config file into this volume
+    docker cp path/in/your/source/code/app_config.yml configs:/cfg
+    # starting application container using this volume
+    docker run --volumes-from configs app-image:1.2.3
+```
+
+In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
+
+``` YAML
+- run: |
+    # starting container with our application
+    # make sure you're not using `--rm` option otherwise container will be killed after finish
+    docker run --name app app-image:1.2.3
+
+- run: |
+    # once application container finishes we can copy artifacts directly from it
+    docker cp app:/output /path/in/your/job/space
+```
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
