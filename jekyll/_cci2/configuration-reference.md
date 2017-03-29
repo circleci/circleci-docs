@@ -664,6 +664,6 @@ jobs:
 
       # Upload test results
       - store_test_results:
-          path: /tmp/test-results
+          path: /tmp/test-reports
 ```
 {% endraw %}
