@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Elixir"
 short-title: "Elixir"
+description: "Overview and sample config for an Elixir project"
 categories: [language-guides]
 order: 2
 ---

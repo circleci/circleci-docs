@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Python"
 short-title: "Python"
+description: "Overview and sample config for a Python project"
 categories: [language-guides]
 order: 6
 ---

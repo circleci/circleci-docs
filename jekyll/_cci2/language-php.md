@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: PHP"
 short-title: "PHP"
+description: "Overview and sample config for a PHP project"
 categories: [language-guides]
 order: 5
 ---

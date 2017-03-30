@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "About CircleCI"
 short-title: "About CircleCI"
+description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
 order: 1
 ---

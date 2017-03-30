@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Docker Layer Caching"
 short-title: "Docker Layer Caching"
+description: "How to reuse unchanged cache layers to reduce build time"
 categories: [docker]
 order: 5
 ---

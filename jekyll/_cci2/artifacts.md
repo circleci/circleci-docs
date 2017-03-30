@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Uploading Build Artifacts"
 short-title: "Uploading Build Artifacts"
+description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 60
 ---

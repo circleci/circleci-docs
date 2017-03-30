@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Choosing an Executor Type"
 short-title: "Executor Types"
+description: "Overviews of the docker and machine executor types"
 categories: [configuring-jobs]
 order: 0
 ---

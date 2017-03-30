@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Parallelism with CircleCI CLI"
 short-title: "Parallelism for Faster Jobs"
+description: "How to run tests in parallel"
 categories: [configuring-jobs]
 order: 50
 ---

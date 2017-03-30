@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Ruby"
 short-title: "Ruby"
+description: "Overview and sample config for a Ruby project"
 categories: [language-guides]
 order: 7
 ---

@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Language Guide: JavaScript"
 short-title: "JavaScript"
+description: "Overview and sample config for a JavaScript project"
 categories: [language-guides]
 order: 4
 ---
