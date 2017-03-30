@@ -503,7 +503,7 @@ Step to store artifacts (for example logs, binaries, etc) to be available in the
 Key | Required | Type | Description
 ----|-----------|------|------------
 path | Y | String | Directory in the primary container to save as build artifacts
-destination | Y | Prefix added to the artifact paths in the artifacts API
+destination | N | Prefix added to the artifact paths in the artifacts API
 {: class="table table-striped"}
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
