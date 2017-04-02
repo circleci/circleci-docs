@@ -29,6 +29,7 @@ jobs:
       - checkout
       - run: mix deps.get
       - run: mix ecto.create
+      - run: mix test
 ```
 
 ## Get the Code
@@ -72,7 +73,7 @@ We use 2 Docker images here: `trenpixster/elixir:1.3.2` as the primary build ima
 
 Now we’ll add several `steps` within the `build` job.
 
-We’ll do 3 things: checkout the codebase, install missing dependencies, and create the storage for the repo:
+We’ll do 4 things: checkout the codebase, install missing dependencies, create the storage for the repo, and finally run the tests:
 
 ```YAML
 ...
@@ -80,6 +81,7 @@ We’ll do 3 things: checkout the codebase, install missing dependencies, and cr
       - checkout
       - run: mix deps.get
       - run: mix ecto.create
+      - run: mix test
 ```
 
 Nice! You just set up CircleCI for a Phoenix app.
