@@ -156,6 +156,6 @@ This script partitions the test files into N equally sized buckets, and calls "t
 You can parallelize tests for RSpec, Cucumber, Minitest, Spinach and Turnip with [knapsack gem](https://github.com/ArturT/knapsack). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. Knapsack gem has [built in support for CircleCI](https://github.com/ArturT/knapsack#info-for-circleci-users).
 
 
-### Travis-CI like build matrix
+### Build matrix support
 
-There is also a community project called [circleci-matrix](https://github.com/michaelcontento/circleci-matrix) which can be used to replicate Travis-CI's [build matrix](https://docs.travis-ci.com/user/customizing-the-build/#Build-Matrix) behaviour on CircleCI. Please head over to their [documentation for more details](https://github.com/michaelcontento/circleci-matrix)
+CircleCI 1.0 does not have native support for build matrices. However, there is a community project **not** maintained by CircleCI called [circleci-matrix](https://github.com/michaelcontento/circleci-matrix) which can be used to produce build matrix behaviour on CircleCI. Please see their [documentation for more details](https://github.com/michaelcontento/circleci-matrix). Note that in CircleCI 2.0 you can use parallel jobs to accomplish build matrix behaviors.
