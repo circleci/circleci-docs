@@ -1,10 +1,14 @@
 ---
 layout: classic-docs
-title: "Configuring AWS CLI"
-short-title: "Configuring AWS CLI"
-categories: [configuring-jobs]
-order: 90
+title: "Deployment Integrations"
+short-title: "Deployment Integrations"
+categories: [deploying]
+order: 1
 ---
+
+## AWS
+
+### Configuring AWS CLI
 
 You can add your AWS credentials from **Project Settings > AWS Permissions** page.
 

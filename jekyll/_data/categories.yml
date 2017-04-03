@@ -103,6 +103,10 @@
   name: "Using Docker"
 
 - section: cci2
+  slug: deploying
+  name: "Deploying"
+
+- section: cci2
   slug: reference
   name: "Reference"
 
