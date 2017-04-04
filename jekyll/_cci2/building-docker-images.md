@@ -3,11 +3,13 @@ layout: classic-docs
 title: "Building Docker Images on CircleCI 2.0"
 short-title: "Building Docker Images"
 description: "How to build Docker images and access remote services"
-categories: [docker]
-order: 0
+categories: [deploying]
+order: 20
 ---
 
 ## Overview
+As part of your build you might want to build Docker images for deploying elsewhere or for further testing. This document explains how to do that on CircleCI 2.0.
+
 For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
 
 To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands.
