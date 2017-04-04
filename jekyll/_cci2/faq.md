@@ -7,6 +7,14 @@ categories: [getting-started]
 order: 50
 ---
 
+## Can I try out CircleCI 2.0 and still use 1.0?
+
+Yes. If you're not sure if you're ready to go all-in on 2.0 and need time to get the configuration running correctly, you can try it out while still building on 1.0.
+
+Create a new branch and add 2.0 configuration as described in this documentation (you'll need a `.circleci/config.yml` file - it's OK to leave the 1.0 `circle.yml`). Now when you push the branch with 2.0 config, it will build on CircleCI 2.0. The rest of your project will continue to build on CircleCI 1.0.
+
+If you switch completely to 2.0 and then decide to go back to 1.0, all you need to do is remove the 2.0 config and replace it with 1.0 config.
+
 ## What kind of applications can I build on CircleCI?
 
 **Linux:** CircleCI is a very flexible platform so you should be able to **build almost any kind of application that will run on Linux**. It doesn't have to be a web application!
