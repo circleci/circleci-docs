@@ -1,6 +1,72 @@
 ---
 ---
 
+// compiles an object of parameters relevant for analytics event tracking.
+// takes an optional DOM element and uses additional information if present.
+window.analyticsTrackProps = function (el) {
+  var trackOpts = {
+    path:      document.location.pathname,
+    url:       document.location.href,
+    referrer:  document.referrer,
+    title:     document.title
+  };
+
+  var userLogin = window.userData && window.userData['login'];
+  if (userLogin) {
+    trackOpts['user'] = userLogin;
+  }
+
+  if (el) {
+    var text = $.trim($(el).text());
+    if (text) {
+      trackOpts['cta_text'] = text;
+    }
+  }
+
+  return trackOpts;
+};
+
+// amplitude.getSessionId wrapper with reference guard
+var getSessionId = function () {
+  if (!window.amplitude || !amplitude.getSessionId) {
+    return -1;
+  }
+  return amplitude.getSessionId();
+};
+
+var setCookieMinutes = function (name, value, path, expiration) {
+  // expiration is set in minutes
+  var date = new Date();
+  date.setMinutes(date.getMinutes() + expiration);
+  date = date.toUTCString();
+
+  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
+};
+
+// analytics.track wrapper
+var trackEvent = function (name, properties, options, callback) {
+  if (!window.analytics) {
+    return;
+  }
+
+  analytics.track(name, properties, options, function () {
+    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
+    if (callback) {
+      callback();
+    }
+  });
+};
+
+// analytics tracking for CTA button clicks
+jQuery(document).ready(function($) {
+  $("[data-analytics-action]").click(function (e) {
+    var action = $(this).data('analytics-action');
+    if (!action) { return; }
+    trackEvent(action, analyticsTrackProps(this));
+  });
+});
+
+
 $( document ).ready(function() {
 
 	// Allow navigation to slide open and close on small devices

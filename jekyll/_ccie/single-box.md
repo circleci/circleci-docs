@@ -72,7 +72,7 @@ if you have questions.
   <option value="us-west-1">us-west-1</option>
   <option value="us-west-2">us-west-2</option>
   </select>
-  <a id="ami-go" href="" class="btn btn-success" target="_blank">Go!</a>
+  <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">Go!</a>
 
 <script>amiUpdateSelect();</script>
 </li>
