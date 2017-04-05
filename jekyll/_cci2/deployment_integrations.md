@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Deployment Integrations"
 short-title: "Deployment Integrations"
 categories: [deploying]
-order: 1
+order: 10
 ---
 
 In the CircleCI 'Project Settings' page you will see a section called 'Continuous Deployment':
