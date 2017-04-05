@@ -90,7 +90,7 @@ An example configuration that sets up Apache to serve the PHP site from
 Listen 8080
 
 <VirtualHost *:8080>
-  LoadModule php5_module /opt/circleci/php/PHP_VERSION/libexec/apache2/libphp5.so
+  LoadModule php5_module /opt/circleci/php/PHP_VERSION/usr/lib/apache2/modules/libphp5.so 
 
   DocumentRoot /home/ubuntu/MY-PROJECT/server-root
   ServerName host.example.com
