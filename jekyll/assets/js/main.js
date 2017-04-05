@@ -17,23 +17,30 @@ window.analyticsTrackProps = function (el) {
   }
 
   if (el) {
-    var location = $(el).data('analytics-location');
-    if (location) {
-      trackOpts['page_location'] = location;
-    }
-
     var text = $.trim($(el).text());
     if (text) {
       trackOpts['cta_text'] = text;
     }
-
-    var vcsType = $(el).data('analytics-vcs-type');
-    if (vcsType) {
-      trackOpts['vcs-type'] = vcsType;
-    }
   }
 
   return trackOpts;
+};
+
+// amplitude.getSessionId wrapper with reference guard
+var getSessionId = function () {
+  if (!window.amplitude || !amplitude.getSessionId) {
+    return -1;
+  }
+  return amplitude.getSessionId();
+};
+
+var setCookieMinutes = function (name, value, path, expiration) {
+  // expiration is set in minutes
+  var date = new Date();
+  date.setMinutes(date.getMinutes() + expiration);
+  date = date.toUTCString();
+
+  document.cookie = name + "=" + value + "; path=" + path + "; expires=" + date;
 };
 
 // analytics.track wrapper
