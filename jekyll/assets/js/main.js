@@ -1,6 +1,65 @@
 ---
 ---
 
+// compiles an object of parameters relevant for analytics event tracking.
+// takes an optional DOM element and uses additional information if present.
+window.analyticsTrackProps = function (el) {
+  var trackOpts = {
+    path:      document.location.pathname,
+    url:       document.location.href,
+    referrer:  document.referrer,
+    title:     document.title
+  };
+
+  var userLogin = window.userData && window.userData['login'];
+  if (userLogin) {
+    trackOpts['user'] = userLogin;
+  }
+
+  if (el) {
+    var location = $(el).data('analytics-location');
+    if (location) {
+      trackOpts['page_location'] = location;
+    }
+
+    var text = $.trim($(el).text());
+    if (text) {
+      trackOpts['cta_text'] = text;
+    }
+
+    var vcsType = $(el).data('analytics-vcs-type');
+    if (vcsType) {
+      trackOpts['vcs-type'] = vcsType;
+    }
+  }
+
+  return trackOpts;
+};
+
+// analytics.track wrapper
+var trackEvent = function (name, properties, options, callback) {
+  if (!window.analytics) {
+    return;
+  }
+
+  analytics.track(name, properties, options, function () {
+    setCookieMinutes("amplitude-session-id", getSessionId(), '/', 30);
+    if (callback) {
+      callback();
+    }
+  });
+};
+
+// analytics tracking for CTA button clicks
+jQuery(document).ready(function($) {
+  $("[data-analytics-action]").click(function (e) {
+    var action = $(this).data('analytics-action');
+    if (!action) { return; }
+    trackEvent(action, analyticsTrackProps(this));
+  });
+});
+
+
 $( document ).ready(function() {
 
 	// Allow navigation to slide open and close on small devices
