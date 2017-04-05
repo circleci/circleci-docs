@@ -12,7 +12,7 @@ hide: true
 
 Some installation environments use internal root certificate authorities for encrypting
 and establishing trust between servers.  If using a root certificate, you may need to
-imported and mark it as a trusted certificate at CircleCI Enterprise instances.
+import and mark it as a trusted certificate at CircleCI Enterprise instances.
 CircleCI will respect such trust when communicating with GitHub and webhook api calls.
 
 
