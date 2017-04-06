@@ -73,7 +73,7 @@ A list of the [versions of Xcode that we have available is located on GitHub]({{
 CircleCI will automatically detect if your project is using [CocoaPods](https://cocoapods.org)
 to manage dependencies. If you are using CocoaPods, then we recommend that you
 check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control).
-This will ensure that you have a deterministic, reproducable build.
+This will ensure that you have a deterministic, reproducible build.
 
 If CircleCI finds a `Podfile` and the `Pods` directory is not present (or empty)
  then we will run `pod install` to install the necessary dependencies in the
@@ -133,7 +133,7 @@ CircleCI runs tests from the command line with the [`xcodebuild`](https://develo
 command by default. This is a tool developed by Apple, and we find it to be the most
 stable and functional option for building and testing your macOS project.
 
-CircleCI will try to automatically build your iOS project by infering the
+CircleCI will try to automatically build your iOS project by inferring the
 workspace, project and scheme. In some cases, you may need to override the
 inferred test commands. The following command is representative of how CircleCI
 will build an iOS project:
@@ -203,7 +203,7 @@ securely.
 ### Pre-starting the simulator
 
 You might want to pre-start the iOS simulator before building your
-application to make sure that the simulatori s booted in time.
+application to make sure that the simulator is booted in time.
 Doing that generally reduces the number of simulator
 timeouts that customers observe in their builds.
 
