@@ -145,7 +145,7 @@ once. Our new image is now available in GCR for all our GCP infrastructure to
 access.
 
 ```
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+sudo chown -R ubuntu:ubuntu ~/.kube
 ```
 
 Since we used `gcloud` as root (via sudo), the newly installed `kubectl` binary
