@@ -24,6 +24,12 @@ We also push the image to [Docker Hub](https://hub.docker.com/r/circleci/build-i
 
 Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.git }}`
 
+### Git LFS
+
+Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.git-lfs }}`
+
+**Note:** `GIT_LFS_SKIP_SMUDGE` environment variable is set to `1`, so you need to manually run `git lfs pull` to checkout LFS files.
+
 ## Programming Languages
 
 ### Python
@@ -49,6 +55,12 @@ Pre-installed versions:
 ### Ruby
 
 Default: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.ruby.default }}`
+
+Gem: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.ruby.gem }}`
+
+Bundler: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.ruby.bundler }}`
+
+RVM: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.ruby.rvm }}`
 
 Pre-installed versions:
 
@@ -98,6 +110,20 @@ Pre-installed versions:
 ### Go
 
 Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.go }}`
+
+### Haskell
+
+Alex: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.haskell.alex }}`
+
+Cabal: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.haskell.cabal }}`
+
+Happy: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.haskell.happy }}`
+
+Stack: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.haskell.stack }}`
+
+### Clojure
+
+Leiningen: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.clojure.lein }}`
 
 ## Databases
 
