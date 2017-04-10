@@ -31,7 +31,7 @@ test:
     - python -m hello.hello_app:
         background: true
     # Wait for app to be ready
-    - curl --retry 10 --retry-delay 2 -v http://localhost:5000
+    - wget --retry-connrefused --no-check-certificate -T 30 http://localhost:5000
     # Run selenium tests
     - nosetests
   post:
