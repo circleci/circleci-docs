@@ -58,7 +58,7 @@ var trackEvent = function (name, properties, options, callback) {
 };
 
 // analytics tracking for CTA button clicks
-jQuery(document).ready(function($) {
+$(document).ready(function() {
   $("[data-analytics-action]").click(function (e) {
     var action = $(this).data('analytics-action');
     if (!action) { return; }
