@@ -9,10 +9,10 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 macos_manifest_url: https://circleci.github.io/macos-image-tests/
-# note that this _can_ be an array if we ever need more
-external_json: 
-  - data: circleci_images
-    json: https://s3.amazonaws.com/circle-downloads/playground/bundle-images-manifest.json
+# note that this _is_ an array if we need to add more
+external_json:
+  - name: circleci_images
+    url: https://s3.amazonaws.com/circle-downloads/playground/bundle-images-manifest.json
 
 markdown: kramdown
 kramdown:
