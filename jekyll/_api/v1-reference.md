@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: CircleCI API v1.x Reference
+title: CircleCI API v1.1 Reference
 categories: [reference]
 description: Using the CircleCI API
 ---
@@ -9,6 +9,8 @@ The CircleCI API is a RESTful, fully-featured API that allows you to do almost
 anything in CircleCI. You can access all information and trigger all actions. 
 The only thing we don't provide access to is billing functions, which must be 
 done from the CircleCI web UI.
+
+CircleCI 1.0 and 2.0 are supported by API version `1.1`.
 
 ## Summary
 
