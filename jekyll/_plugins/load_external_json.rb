@@ -5,7 +5,7 @@ module LoadExternalJSON
     safe true
     priority :highest
     def generate(site)
-      if config = site.config['external_json']
+      if config = site.config['external_json_to_data']
         config.each do |source|
           site.data[source['name']] = JSON.load(open(source['url']))
           if source['cache']
