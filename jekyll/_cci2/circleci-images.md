@@ -27,7 +27,7 @@ NOTE: We strongly recommend that you lock your image to a particular tag to avoi
 
 ## Available Images
 {% for image in images %}
-* [{{ image[1].name }}](#{{ image[1].name | slugify}})
+* [{{ image[1].name }}](#{{ image[1].name | kramdown_idify }})
 {% endfor %}
 
 <hr>
