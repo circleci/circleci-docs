@@ -39,13 +39,9 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
     working_directory: /var/www/html
     steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - run: apt-get update && apt-get -y install git unzip zlib1g-dev
       - checkout
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
+      - run: docker-php-ext-install pdo pdo_mysql zip
       - run:
           name: Install Composer
           command: |
@@ -54,17 +50,13 @@ jobs:
             php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('composer-setup.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
             php composer-setup.php && \
             php -r "unlink('composer-setup.php');"
-      - run:
-          name: Install Project Dependencies
-          command: php composer.phar install
+      - run: php composer.phar install
       - run:
           name: Initialize Database
           command: |
             php artisan migrate:refresh
             php artisan db:seed
-      - run:
-          name: Run Tests
-          command: vendor/bin/phpunit
+      - run: vendor/bin/phpunit
 ```
 
 ## Get the Code
@@ -143,9 +135,7 @@ Next, we'll add `steps` to the job. Normally, we’d check out our project's cod
 ```YAML
 ...
     steps:
-      - run:
-          name: Install System Packages
-          command: apt-get update && apt-get -y install git unzip zlib1g-dev
+      - run: apt-get update && apt-get -y install git unzip zlib1g-dev
 ```
 
 Now we can actually check out our code, which will go in the working directory we specified earlier.
@@ -161,9 +151,7 @@ We'll be using it to get ZIP support for Composer and PHP talking to MariaDB. No
 
 ```YAML
 ...
-      - run:
-          name: Install PHP Extensions
-          command: docker-php-ext-install pdo pdo_mysql zip
+      - run: docker-php-ext-install pdo pdo_mysql zip
 ```
 
 We're going to be using Composer to install project dependencies, so let's install that next. Forgive the verbosity, but these are the official install instructions.
@@ -183,9 +171,7 @@ Now that Composer has been installed, let's use it to install the project's depe
 
 ```YAML
 ...
-      - run:
-          name: Install Project Dependencies
-          command: php composer.phar install
+      - run: php composer.phar install
 ```
 
 Next, let's initialize required database (DB) tables and seed it with initial data.
@@ -203,9 +189,7 @@ Finally, let's run our tests using PHPUnit.
 
 ```YAML
 ...
-      - run:
-          name: Run Tests
-          command: vendor/bin/phpunit
+      - run: vendor/bin/phpunit
 ```
 
 Nice! You just set up CircleCI for a Lumen app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-lumen).
