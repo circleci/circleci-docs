@@ -153,9 +153,7 @@ jobs:
       - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements/dev.txt
+      - run: pip install -r requirements/dev.txt
 ```
 
 If you're following along, update your `config.yml`, commit and push to GitHub. The build should run and install all your dependencies.
@@ -200,9 +198,7 @@ To speed up our builds, we should cache our dependencies:
       - checkout
       - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements/dev.txt
+      - run: pip install -r requirements/dev.txt
       - run:
           # this can be removed
           name: Locate site Packages
@@ -223,7 +219,7 @@ Here, we're only saving the cache for this project on the current branch with `{
 
 Then, we let CircleCI know how to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. Finally, we specify the paths we want to cache, which in this case are where our Python pip dependencies are stored.
 
-### run: ...Locate site Packages
+### Locate site Packages
 
 This section is temporary and helps us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things in CircleCI.
 
@@ -242,9 +238,7 @@ Caching is a subtle art, and we're only scratching the surface here. To get the 
 Finally, we're ready to run our tests by adding:
 
 ```YAML
-      - run:
-          name: Run Tests
-          command: python manage.py test
+      - run: python manage.py test
 ```
 
 `config.yml` at this stage should look like this:
@@ -269,9 +263,7 @@ jobs:
       - checkout
       - restore_cache:
           key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements/dev.txt
+      - run: pip install -r requirements/dev.txt
       - run:
           # this can be removed
           name: Locate site Packages
@@ -281,9 +273,7 @@ jobs:
           paths:
             - "~/.cache/pip"
             - "/usr/local/lib/python3.6/site-packages"
-      - run:
-          name: Run Tests
-          command: python manage.py test
+      - run: command: python manage.py test
 ```
 
 If you're following along - you can add all of this, commit and push to watch CircleCI run your tests and give you a green build.
@@ -407,9 +397,7 @@ Finally, update `config.yml` to deploy when a build on `master` passes all tests
 
 ```
 ...
-      - run:
-          name: setup Heroku
-          command: bash .circleci/setup-heroku.sh
+      - run: bash .circleci/setup-heroku.sh
       - add_ssh_keys:
           fingerprints:
             - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
