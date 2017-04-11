@@ -25,8 +25,6 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 **Note that this example does not use the emulator, so it's not affected by incompatibility with Docker.**
 
-Full documentation, including ways to run the Android emulator, is coming soon.
-
 **Windows:** We do not yet support building and testing Windows applications.
 
 ## Does CircleCI 2.0 run inference commands?
