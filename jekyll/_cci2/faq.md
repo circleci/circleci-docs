@@ -15,17 +15,19 @@ Create a new branch and add 2.0 configuration as described [here](https://circle
 
 If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `config.yml` file.
 
-## What kind of applications can I build on CircleCI?
+## What operating systems does CircleCI support?
 
-**Linux:** CircleCI is a very flexible platform so you should be able to **build almost any kind of application that will run on Linux**. It doesn't have to be a web application!
-
-**Android:** Although Android is not officially supported on 2.0 at this time, you can build Android apps on the 2.0 platform, [this post](https://discuss.circleci.com/t/thank-you-and-android-build-example/11298) has an excellent example of a customer successfully building Android on 2.0. **Note that this example does not use the emulator so it's not affected by the incompatibility between Docker and the Android emulator.** We will explain ways to run the Android emulator in future 2.0 documentation updates. Full documentation for building Android apps on 2.0 is coming soon.
+**Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These don't have to be web applications!
 
 **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
 
-## Can I build Windows applications?
+**Android:** There is currently no official support for Android on CircleCI 2.0, but users have still been able to build Android apps on 2.0. [This post](https://discuss.circleci.com/t/thank-you-and-android-build-example/11298) is an excellent example of one our users successfully building an Android app on 2.0.
 
-We do not yet support building and testing Microsoft Windows applications.
+**Note that this example does not use the emulator, so it's not affected by incompatibility with Docker.**
+
+Full documentation, including ways to run the Android emulator, is coming soon.
+
+**Windows:** We do not yet support building and testing Windows applications.
 
 ## Does CircleCI 2.0 run inference commands?
 
