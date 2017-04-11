@@ -13,7 +13,7 @@ Yep! If you're not ready to fully commit to 2.0, you can easily try it while sti
 
 Create a new branch and add 2.0 configuration as described [here](https://circleci.com/docs/2.0/project-walkthrough/). When you push the branch with 2.0 configuration, your project will build on CircleCI 2.0. All other branches will continue building on CircleCI 1.0.
 
-If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `config.yml` file.
+If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file.
 
 ## What operating systems does CircleCI support?
 
@@ -68,7 +68,7 @@ myUsername/couchdb:1.6.1
 
 ## Can I use the `latest` tag when specifying image versions?
 
-We highly recommend that you don’t. Read more about why we think you should [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types/#avoid-mutable-tags)
+We highly recommend that you don’t. For more context, read about why we think you should [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types/#avoid-mutable-tags).
 
 ## I updated my Docker image, but my build is using a cached image. How can I invalidate the old image?
 
@@ -79,7 +79,7 @@ If you’re running a build on `my-image:123` and you update the image, you can 
 [docker-hub]: https://hub.docker.com
 [docker-library]: https://hub.docker.com/explore/
 
-## Git isn't installed on my primary image but the checkout still ran
+## Git isn't installed on my primary image. Why did the checkout run?
 
 If you see this message in the 'Checkout Code' stage of your build:
 
@@ -87,22 +87,21 @@ If you see this message in the 'Checkout Code' stage of your build:
 Warning: Git is not installed in the image. Falling back to CircleCI's native git client but this is still an experiment feature. We highly recommend using an image that has official Git installed.
 ```
 
-It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. Although this should be a reliable fall-back, currently there is one limitation: checking out with [source caching]({{site.baseurl}}/2.0/caching/#source-caching) is not supported yet. When go-git is used and source cache is detected, you will see the following error in the step.
+It means that we've made use of [go-git](https://github.com/src-d/go-git) to do the checkout for you. Although this should be a reliable fall-back, there is currently one limitation: checking out with [source caching]({{site.baseurl}}/2.0/caching/#source-caching) is not supported yet. When go-git is used and a source cache is detected, you'll see the following error in the step:
 
 ```
 Error: source cache is detected but currently not supported by CircleCI's native Git client.
 ```
 
-When you see the error and if you want to keep using source caching, please use an image that has Git installed.
+If you see the error and you'd like to keep using source caching, please use an image that has Git installed.
 
-
-If you notice other unusual behaviors, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
+If you notice any other unusual behavior, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
 
 ## How can I set the timezone in Docker images?
 
-You can set the timezone in Docker images with the `TZ` environment variable. The value should be something like: `TZ="/usr/share/zoneinfo/America/Los_Angeles"`. A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+You can set the timezone in Docker images with the `TZ` environment variable. In your `.circleci/config.yml`, it would look like:
 
-In your `.circleci/config.yml` it would look like:
+A sample `.circleci/config.yml` with a defined `TZ` variable would look like this:
 
 ```
 version: 2
@@ -118,4 +117,6 @@ jobs:
       TZ: "/usr/share/zoneinfo/America/Los_Angeles"
 ```
 
-Note that in the above example we are setting the timezone for both the primary image and an additional mySQL image.
+In this example, we're setting the timezone for both the primary image and an additional mySQL image.
+
+A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
