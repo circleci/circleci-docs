@@ -58,11 +58,15 @@ var trackEvent = function (name, properties, options, callback) {
 };
 
 // analytics tracking for CTA button clicks
-$(document).ready(function() {
-  $("[data-analytics-action]").click(function (e) {
-    var action = $(this).data('analytics-action');
-    if (!action) { return; }
-    trackEvent(action, analyticsTrackProps(this));
+window.addEventListener('load', function () {
+  var buttons = Array.from(document.querySelectorAll('[data-analytics-action]'));
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var action = this.getAttribute('data-analytics-action');
+      if (!action) { return; }
+      trackEvent(action, analyticsTrackProps(this));
+    });
   });
 });
 
