@@ -45,6 +45,37 @@ CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This 
 
 ## Machine
 
+### Timezone
+
+**1.0**
+
+```YAML
+machine:
+  timezone: Europe/Dublin
+```
+
+**2.0**
+
+You can set the timezone in Docker images with the `TZ` environment variable. The value should be something like: `TZ="/usr/share/zoneinfo/America/Los_Angeles"`. A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+In your `.circleci/config.yml` it would look like:
+
+```
+version: 2
+jobs:
+  build:
+    docker:
+      - image: your/primary-image:version
+      - image: mysql:5.7
+        environment:
+           TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+    working_directory: ~/your-dir
+    environment:
+      TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+```
+
+Note that in the above example we are setting the timezone for both the primary image and an additional mySQL image.
+
 ### Global Environment Variables
 
 **1.0**
