@@ -48,10 +48,9 @@ jobs:
 
       - run: mkdir -p $TEST_RESULTS
 
-      # This should be in custom primary image, here is just for the sake of explanation
-      - run:
-          name: Install JUnit
-          command: go get github.com/jstemmer/go-junit-report
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation.
+      - run: go get github.com/jstemmer/go-junit-report
 
       - run:
           name: Run unit tests
@@ -62,9 +61,7 @@ jobs:
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
 
-      - run:
-          name: Build service
-          command: make
+      - run: make
 
       - run:
           name: Start service
@@ -149,9 +146,7 @@ Next we create a directory for collecting test results
 And install the Go implementation of the JUnit reporting tool. This is another good candidate to be preinstalled in primary container.
 
 ```YAML
-      - run:
-        name: Install JUnit
-        command: go get github.com/jstemmer/go-junit-report
+      - run: go get github.com/jstemmer/go-junit-report
 ```
 
 Both containers (primary and postgres) start simultaneously, however Postgres may require some time to get ready and if our tests start before that - job will fail. So it's a good practice to wait until dependent services are ready. Here we have only Postgres, so we have this step:
@@ -200,9 +195,7 @@ make test | tee ${TEST_RESULTS}/go-test.out
 Now then we know that our unit tests succeeded we can start our service and validate it's running.
 
 ``` YAML
-      - run:
-          name: Build service
-          command: make
+      - run: make
 
       - run:
           name: Start service

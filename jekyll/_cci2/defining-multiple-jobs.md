@@ -70,10 +70,7 @@ Building on the previous example, suppose you want to build docker images with `
     steps:
       - checkout
 
-      - run:
-          name: Tests
-          command: |
-            echo "run some tests"
+      - run: echo "run some tests"
 
       - deploy:
           name: conditionally run a deploy job

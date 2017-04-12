@@ -43,16 +43,12 @@ jobs:
             apt-get install -y -qq nodejs yarn
       - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
+      - run: yarn && pip install -r requirements.txt
       - save_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - "/home/ubuntu/.yarn-cache"
-      - run:
-          name: Run Tests
-          command: python manage.py test --coverage
+      - run: python manage.py test --coverage
       - store_artifacts:
           path: test-reports/coverage
           destination: reports
@@ -146,9 +142,7 @@ Install both Yarn and Python dependencies.
 
 ```YAML
 ...
-      - run:
-          name: Install Dependencies
-          command: yarn && pip install -r requirements.txt
+      - run: yarn && pip install -r requirements.txt
 ```
 
 Specify where to save that Yarn cache.
@@ -167,9 +161,7 @@ Run our tests.
 
 ```YAML
 ...
-      - run:
-          name: Run Tests
-          command: python manage.py test --coverage
+      - run: python manage.py test --coverage
 ```
 
 Store test results as an artifact.

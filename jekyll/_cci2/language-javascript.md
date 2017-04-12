@@ -24,15 +24,9 @@ jobs:
     working_directory: ~/cci-demo-react
     steps:
       - checkout
-      - run:
-          name: Pre-Dependencies
-          command: mkdir -p ~/cci-demo-react/artifacts
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: NPM Test
-          command: npm test
+      - run: mkdir -p ~/cci-demo-react/artifacts
+      - run: npm install
+      - run: npm test
       - store_artifacts:
           path: ~/cci-demo-react/artifacts
       - add_ssh_keys
@@ -93,27 +87,21 @@ One difference between CircleCI Classic and 2.0 is that 2.0 doesn’t automatica
 ...
     steps:
       - checkout
-      - run:
-          name: Pre-Dependencies
-          command: mkdir ~/cci-demo-react/artifacts
+      - run: mkdir ~/cci-demo-react/artifacts
 ```
 
 Next, let's install our dependencies. In CircleCI Classic, we would have done this in a separate `dependencies` stage.
 
 ```YAML
 ...
-      - run:
-          name: Install Dependencies
-          command: npm install
+      - run: npm install
 ```
 
 Next, we run our tests. Like dependencies, this would have been run in a separate `test` stage in CircleCI Classic.
 
 ```YAML
 ...
-      - run:
-          name: NPM Test
-          command: npm test
+      - run: npm test
 ```
 
 Remember when we created a directory for our artifacts? CircleCI won't unless we tell it where to look.

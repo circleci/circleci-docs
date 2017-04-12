@@ -28,21 +28,11 @@ jobs:
     working_directory: ~/cci-demo-rails
     steps:
       - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
-      - run:
-          name: Install Ruby Dependencies
-          command: bundle install
-      - run:
-          name: Create DB
-          command: bundle exec rake db:create db:schema:load --trace
-      - run:
-          name: DB Migrations
-          command: bundle exec rake db:migrate
-      - run:
-          name: Run Tests
-          command: bundle exec rake test
+      - run: apt-get update -qq && apt-get install -y build-essential nodejs
+      - run: bundle install
+      - run: bundle exec rake db:create db:schema:load --trace
+      - run: bundle exec rake db:migrate
+      - run: bundle exec rake test
 ```
 
 ## Get the Code
@@ -99,27 +89,21 @@ In our second step, we install NodeJS because Docker’s Ruby image doesn’t in
 ...
     steps:
       - checkout
-      - run:
-          name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential nodejs
+      - run: apt-get update -qq && apt-get install -y build-essential nodejs
 ```
 
 Now we have to install our actual dependencies for the project.
 
 ```YAML
 ...
-      - run:
-          name: Install Ruby Dependencies
-          command: bundle install
+      - run: bundle install
 ```
 
 Next, set up the DB.
 
 ```YAML
 ...
-      - run:
-          name: Create DB
-          command: bundle exec rake db:create db:schema:load --trace
+      - run: bundle exec rake db:create db:schema:load --trace
 ```
 
 Rails will read `config/database.yml` and create a test DB automatically with `db:create` task. Ensure that `POSTGRES_USER` env var matches a username specified in your `database.yml`.
@@ -136,19 +120,14 @@ Run our migrations.
 
 ```YAML
 ...
-      - run:
-          name: DB Migrations
-          command: bundle exec rake db:migrate
+      - run: bundle exec rake db:migrate
 ```
 
 Finally, run our tests.
 
 ```YAML
 ...
-      - run:
-          name: Run Tests
-          command: bundle exec rake test
-
+      - run: bundle exec rake test
 ```
 
 Nice! You just set up CircleCI for a Rails app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-rails).
