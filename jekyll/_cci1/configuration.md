@@ -127,7 +127,7 @@ You set environment variables for **all commands** in the build by adding
 Remember that CircleCI uses a new shell for every command; as previously mentioned
 `export foo=bar` won't work. Instead, you must include something like this.
 
-```
+```YAML
 machine:
   environment:
     foo: bar
@@ -139,21 +139,25 @@ If you don't want to use this method, there are
 
 ### Timezone
 
-The machine's time zone is UTC by default.
-You use `timezone`
-to adjust to the same time zone as your _production_ server.
-Changing the time to your _development_ machine's time zone is **problematic**.
+The machine's time zone is UTC by default. You use `timezone` to adjust to the same time zone as your _production_ server. Changing the time to your _development_ machine's time zone is **problematic**.
 
-This modifier tells CircleCI to
-overwrite `/etc/timezone`
-and then restart all databases and services that rely on it.
-This modifier supports any time zone listed in the IANA time zone database.
-You can find this by looking in `/usr/share/zoneinfo/`
-on your Unix machine or in the **TZ** column in
+Here's an example:
+
+```YAML
+machine:
+  timezone: Europe/Dublin
+```
+
+You can see the results in the build output:
+
+![Setting timezone]( {{ site.baseurl }}/assets/img/docs/timzone-set.png)
+
+
+This modifier tells CircleCI to overwrite `/etc/timezone` and then restart all databases and services that rely on it. `timezone` supports any time zone listed in the IANA time zone database.
+You can find this by looking in `/usr/share/zoneinfo/` on your Unix machine or in the **TZ** column in
 [Wikipedia's list of TZ database time zones](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-Be aware that some developers, especially those that collaborate across different time zones, do use UTC on their production servers.
-This alternative can avoid horrific Daylight Saving Time (DST) bugs.
+Be aware that some developers, especially those that collaborate across different time zones, do use UTC on their production servers. This alternative can avoid Daylight Saving Time (DST) bugs.
 
 ### Hosts
 
