@@ -26,6 +26,9 @@ NOTE: We strongly recommend that you lock your image to a particular tag to avoi
 
 
 ## Available Images
+
+**Note:** The 'language' images would usually be used as your 'primary' container. The 'database' images are best used as a secondary 'service' container.
+
 {% for image in images %}
 * [{{ image[1].name }}](#{{ image[1].name | kramdown_generate_id }})
 {% endfor %}
