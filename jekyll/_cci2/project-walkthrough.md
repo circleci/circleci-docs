@@ -191,39 +191,35 @@ Current images for Firefox and Chrome are available on Docker Hub:
 
 To speed up our builds, we should cache our dependencies:
 
-{% raw %}
 ```YAML
 ...
     steps:
       - checkout
-      - restore_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
-      - run: pip install -r requirements/dev.txt
+       - restore_cache:
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
-          # this can be removed
-          name: Locate site Packages
-          command: python -c "import site; print(site.getsitepackages())"
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
       - save_cache:
-          key: projectname-{{ .Branch }}-{{ checksum "requirements/dev.txt" {% raw %}}}
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
           paths:
-            - "~/.cache/pip"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "venv"
 ```
-{% endraw %}
 
 From the bottom up:
 
 ### save_cache
 
-Here, we're only saving the cache for this project on the current branch with `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`.
+Here, we're giving the cache a key name of `deps1` and then only saving the cache for this project on the current branch with `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`.
 
-Then, we let CircleCI know how to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. Finally, we specify the paths we want to cache, which in this case are where our Python pip dependencies are stored.
+Then, we tell CircleCI to save a new cache if the checksum for our requirements file changes: `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. Finally, we specify the paths we want to cache, which in this case are where our Python pip dependencies are stored. This is in a folder called `venv`, a virtualenv where we installed our Python environment.
 
-### Locate site Packages
+### Install Python dependencies in a virtualenv
 
-This section is temporary and helps us locate where our Python dependencies are being saved. We're including this as it illustrates a useful way to test things in CircleCI.
-
-Currently, `ssh` for jobs is not enabled. Since we can't inspect the container directly, we're echoing out the location via a Python command run from the Shell. You can widely apply this tactic in CircleCI.
+In the middle step we create and activate a virtualenv where we install our Python dependencies. (For versions of Python >= 3.3 this is built-in. For earlier versions of Python, please consult the documentation.) For other languages, we recommend using your dependencey manager of choice to manage dependencies consistently across environments.
 
 ### restore_cache
 
@@ -238,8 +234,13 @@ Caching is a subtle art, and we're only scratching the surface here. To get the 
 Finally, we're ready to run our tests by adding:
 
 ```YAML
-      - run: python manage.py test
+      - run:
+          command: |
+            . venv/bin/activate
+            python manage.py test
 ```
+
+This activates our virtualenv to make sure we're in the Python environment we created earlier. It's importat to note that each 'step' runs in a new shell, so the virtualenv that was activated in the dependencies installation step is no longer available. The final line runs our tests.
 
 `config.yml` at this stage should look like this:
 
@@ -262,21 +263,24 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
-      - run: pip install -r requirements/dev.txt
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
-          # this can be removed
-          name: Locate site Packages
-          command: python -c "import site; print(site.getsitepackages())"
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
       - save_cache:
-          key: projectname-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
           paths:
-            - "~/.cache/pip"
-            - "/usr/local/lib/python3.6/site-packages"
-      - run: command: python manage.py test
+            - "venv"
+      - run:
+          command: |
+            . venv/bin/activate
+            python manage.py test
 ```
 
-If you're following along - you can add all of this, commit and push to watch CircleCI run your tests and give you a green build.
+If you're following along - you can add all of this, commit and push to watch CircleCI run your tests and get a green build.
 
 ## Store Artifacts
 
