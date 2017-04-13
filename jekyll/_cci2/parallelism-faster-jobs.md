@@ -85,6 +85,8 @@ When running on CircleCI, these values will be automatically picked up from envi
 
 The following libraries have built-in support for the CircleCI environment variables:
 
+{% include third-party-info.html app='Knapsack'%}
+
 * [Knapsack](https://github.com/ArturT/knapsack) - deterministic test suite split
 
     A ruby gem for that will automatically divide your tests between parallel CI nodes, as well as making sure each job runs in comparable time. Supports RSpec, Cucumber, Minitest, Spinach and Turnip.
