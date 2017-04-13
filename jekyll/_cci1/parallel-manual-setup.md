@@ -1,7 +1,6 @@
 ---
 layout: classic-docs
 title: Manually setting up parallelism
-categories: [parallelism]
 description: Manually setting up parallelism
 ---
 
@@ -153,9 +152,13 @@ This script partitions the test files into N equally sized buckets, and calls "t
 
 ### Test suite split with knapsack gem
 
+{% include third-party-info.html app='Knapsack'%}
+
 You can parallelize tests for RSpec, Cucumber, Minitest, Spinach and Turnip with [knapsack gem](https://github.com/ArturT/knapsack). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. Knapsack gem has [built in support for CircleCI](https://github.com/ArturT/knapsack#info-for-circleci-users).
 
 
 ### Build matrix support
+
+{% include third-party-info.html app='circleci-matrix'%}
 
 CircleCI 1.0 does not have native support for build matrices. However, there is a community project **not** maintained by CircleCI called [circleci-matrix](https://github.com/michaelcontento/circleci-matrix) which can be used to produce build matrix behaviour on CircleCI. Please see their [documentation for more details](https://github.com/michaelcontento/circleci-matrix). Note that in CircleCI 2.0 you can use parallel jobs to accomplish build matrix behaviors.
