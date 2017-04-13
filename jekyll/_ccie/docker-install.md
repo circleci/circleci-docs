@@ -116,7 +116,10 @@ $ sudo sed -i 's/docker daemon/docker daemon --storage-driver=overlay/' \
    && sudo systemctl daemon-reload && sudo service docker restart
 # Pre-pulling the build image is optional, but makes it easier to follow progress
 $ sudo docker pull circleci/build-image:trusty-0.0.441
-$ sudo docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
+$ sudo docker run -d -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock \
+    # Specify container image version
+    # You can always see the latest at https://circleci.com/docs/1.0/build-image-trusty/#build-image
+    -e CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4" \
     -e CIRCLE_SECRET_PASSPHRASE=<your passphrase> \
     -e SERVICES_PRIVATE_IP=<private ip address of services box>  \
     -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \ # Only necessary outside of ec2
