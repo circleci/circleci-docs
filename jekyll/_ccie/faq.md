@@ -43,13 +43,13 @@ just in order to use the consistent passphrase in your fleet.
 
 #### How can I gracefully shutdown an instance
 
-<!-- TODO: Document API call -->
-
-SSH into the builder box you are ready to shutdown and run:
+Just run:
 
 ```
-$ echo '(circle.backend.system/graceful-shutdown)` | lein repl :connect 6005
+curl -k -X POST "https://<builder ip>/api/v1/admin/system/shutdown?circle-token=$TOKEN&unstoppable=true"
 ```
+
+Make sure you use an admin token. You can use the one at `/etc/circle-bot/.circle-bot-token` on the services box.
 
 #### Can I run iOS/macOS builds like on circleci.com?
 
