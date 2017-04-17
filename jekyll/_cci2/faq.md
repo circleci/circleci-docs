@@ -91,7 +91,7 @@ It means that we've made use of [go-git](https://github.com/src-d/go-git) to do 
 Error: source cache is detected but currently not supported by CircleCI's native Git client.
 ```
 
-If you see the error and you'd like to keep using source caching, please use an image that has Git installed.
+If you see the error and you'd like to keep using source caching, please use an image that has git and ssh installed.
 
 If you notice any other unusual behavior, please reach out to support or let us know on [Discuss](https://discuss.circleci.com/c/circleci-2-0/support).
 

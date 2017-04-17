@@ -170,8 +170,8 @@ jobs:
     docker:
       - image: phusion/baseimage
     steps:
-      # Ensure your image has git, otherwise the checkout step will fail
-      - run: apt-get -qq update; apt-get -y install git
+      # Ensure your image has git and ssh (required by git to clone via SSH) so that CircleCI can clone your repo
+      - run: apt-get -qq update; apt-get -y install git openssh-client
 
       # Checkout timing is no longer hardcoded, so this step can occur anywhere
       - checkout
