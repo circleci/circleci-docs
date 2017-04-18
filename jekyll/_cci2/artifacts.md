@@ -37,7 +37,7 @@ Using the `store_artifacts` step, we upload 2 build artifacts: a file (`/tmp/art
 Currently, `store_artifacts` takes 2 fields: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
-  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API.
+  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. (default: the directory of the file specified in `path`)
 
 ## Accessing Artifacts via API
 
