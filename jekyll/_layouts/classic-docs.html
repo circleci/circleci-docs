@@ -11,7 +11,7 @@
 		{% unless page.url == "/" %}{% include sidebar.html %}{% endunless %}
 		<div class="article-container docs">
 			<form id="site-search" class="doc-search" action="">
-				<input id="cci-search" name="search" type="search" placeholder="What can we help you find?" class="form-control" />
+				<input id="cci-search" name="search" type="search" placeholder="Search CircleCI {% if page.collection == 'cci1' %}1.0 {% elsif page.collection == 'cci2' %}2.0 {% elsif page.collection == 'ccie' %}Enterprise {% elsif page.collection == 'api' %}API {% else %}{% endif %}docs" class="form-control" />
 			</form>
 			{% if page.collection == "cci2" %}{% include beta-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
@@ -32,6 +32,7 @@
 		apiKey: '851a2eaa13614d164b36370fba830a78',
 		indexName: 'circleci',
 		inputSelector: '#cci-search',
+		algoliaOptions: { 'facetFilters': ["version:{% if page.collection == 'cci1' %}1.0{% elsif page.collection == 'cci2' %}2.0{% elsif page.collection == 'ccie' %}enterprise{% elsif page.collection == 'api' %}api{% else %}{% endif %}"] },
 		debug: {% if jekyll.environment == "production" %}false{% else %}true{% endif %} // Set debug to true if you want to inspect the dropdown
 	});
 	</script>
