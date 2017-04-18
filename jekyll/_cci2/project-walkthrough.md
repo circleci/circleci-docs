@@ -38,7 +38,7 @@ Finally, we'll deploy the application to Heroku and discuss other deployment opt
 
 ## Upload Your Code
 
-To use CircleCI, your code must be available on GitHub or BitBucket, in either a private or public repository. We'll be assuming GitHub for this walkthrough, but the same flow applies to BitBucket as well.
+To use CircleCI, your code must be available on GitHub or Bitbucket, in either a private or public repository. We'll be assuming GitHub for this walkthrough, but the same flow applies to Bitbucket as well.
 
 <div class="alert alert-info" role="alert">
 <strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/circleci/cci-demo-walkthrough">cci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
@@ -219,7 +219,7 @@ Then, we tell CircleCI to save a new cache if the checksum for our requirements 
 
 ### Install Python dependencies in a virtualenv
 
-In the middle step we create and activate a virtualenv where we install our Python dependencies. (For versions of Python >= 3.3 this is built-in. For earlier versions of Python, please consult the documentation.) For other languages, we recommend using your dependencey manager of choice to manage dependencies consistently across environments.
+In the middle step we create and activate a virtualenv where we install our Python dependencies. (For versions of Python >= 3.3 this is built-in. For earlier versions of Python, please consult the documentation.) For other languages, we recommend using your dependency manager of choice to manage dependencies consistently across environments.
 
 ### restore_cache
 
@@ -240,7 +240,7 @@ Finally, we're ready to run our tests by adding:
             python manage.py test
 ```
 
-This activates our virtualenv to make sure we're in the Python environment we created earlier. It's importat to note that each 'step' runs in a new shell, so the virtualenv that was activated in the dependencies installation step is no longer available. The final line runs our tests.
+This activates our virtualenv to make sure we're in the Python environment we created earlier. It's important to note that each 'step' runs in a new shell, so the virtualenv that was activated in the dependencies installation step is no longer available. The final line runs our tests.
 
 `config.yml` at this stage should look like this:
 
