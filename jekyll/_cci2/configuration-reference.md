@@ -243,6 +243,7 @@ environment | N | Map | Additional environmental variables, locally scoped to co
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
 no_output_timeout | N | String | Elasped time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
+when | N | String | When to run step and takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
