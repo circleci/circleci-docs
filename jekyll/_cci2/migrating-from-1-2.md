@@ -297,3 +297,5 @@ deployment:
 Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
 
 You can write your own manual `deploy` steps as shown in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+
+If you **add SSH keys** via the CircleCI UI 'Project Settings > SSH Permissions' screen for deployment with 2.0, you must **explicitly add them to your job with: `- add_ssh_keys`** in `.circleci/config.yml`. See [Configuration Refrence add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#addsshkeys). The documentation also explains how to activate `ssh-agent` so that you can `ssh-add` your keys for tools that require them to be available via an agent.
