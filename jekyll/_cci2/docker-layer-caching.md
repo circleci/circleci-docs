@@ -10,7 +10,7 @@ order: 5
 {% include beta-premium-feature.html%}
 
 <div class="alert alert-info" role="alert">
-<strong>Note:</strong> This feature only works with whitelisted projects. Please contact your support representative to enable layer caching.
+<strong>Note:</strong> This feature only works with whitelisted projects. To get it enabled, please contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI).
 </div>
 
 If your application is distributed as a Docker image, you probably know that this image consists of layers. In addition, it's usually the top layers that end up changing.
