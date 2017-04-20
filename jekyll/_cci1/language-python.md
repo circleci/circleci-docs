@@ -30,7 +30,7 @@ If you need to use multiple Python versions simultaneously, you can make them av
 ```
 machine:
   post:
-    - pyenv global 2.7.9 3.4.2
+    - pyenv global 2.7.12 3.4.4
 ```
 These will be available as python2.7 and python3.4
 
