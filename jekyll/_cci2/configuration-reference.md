@@ -538,7 +538,7 @@ The directory layout should match the [classic CircleCI test metadata directory 
 
 #### **`add_ssh_keys`**
 
-Special step that adds SSH keys configured in the project's UI to the container.
+Special step that adds SSH keys configured in the project's UI to the container, and configure ssh to use them.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -551,29 +551,8 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-For some advanced cases like SSH forwarding you will need to start `ssh-agent` yourself:
+Note that CircleCI 2.0 builds are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
 
-``` YAML
-- run:
-    name: Start ssh-agent
-    command: |
-      ssh-agent -s > ~/.ssh_agent_conf
-      source ~/.ssh_agent_conf
-
-      for _k in $(ls ${HOME}/.ssh/id_*); do
-        ssh-add ${_k} || true
-      done
-```
-
-Then `source` the ssh configuration in `run` steps that require an ssh-agent:
-
-``` YAML
-- run:
-    name: run my special ssh command
-    command: |
-      source ~/.ssh_agent_conf
-      my-command-that-uses-ssh
-```
 
 ## _Full Example_
 {:.no_toc}
