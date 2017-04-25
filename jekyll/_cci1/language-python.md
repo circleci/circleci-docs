@@ -66,7 +66,7 @@ MySQL. If needed, you can
 CircleCI automatically runs test commands when certain files are detected:
 
 - `tox` when `tox.ini` is found
-- `nosetest` when `unittest.py` is found
+- `nosetests` when `unittest.py` is found
 - `manage.py test` when `manage.py` contains a testing section
 - `setup.py test` when `setup.py` contains a testing section
 
