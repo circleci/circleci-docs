@@ -58,7 +58,7 @@ machine:
     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
 ```
 
-Note that you might want to use larger numbers depending on the other
+Note that you might want to use different numbers depending on the other
 processes running during your build. Check the contents of your
 `memory-usage.txt` for the memory usage of the rest of the processes and
 adjust the parameters accordingly.
