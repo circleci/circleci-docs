@@ -4,6 +4,7 @@ title: Frequently Asked Questions
 short-title: FAQ
 categories: [getting-started]
 description: Frequently Asked Questions
+order: 60
 ---
 
 ## How do I subscribe to CircleCI announcements and get updates about new features and changes?
