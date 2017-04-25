@@ -3,6 +3,7 @@ layout: classic-docs
 title: Configuring CircleCI
 categories: [getting-started,reference]
 description: How to configure CircleCI
+order: 30
 ---
 
 CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.

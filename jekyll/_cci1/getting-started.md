@@ -3,13 +3,14 @@ layout: classic-docs
 title: Getting Started with CircleCI
 categories: [getting-started]
 description: Getting Started with CircleCI
+order: 20
 ---
 
 Setting up CircleCI usually takes only three mouse clicks:
 
-1.  Sign up with CircleCI.
-2.  Give CircleCI permission to access GitHub or Bitbucket on your behalf.
-3.  Click on a project.
+1.  [Sign up with CircleCI](https://circleci.com/signup/)
+2.  Give CircleCI permission to access GitHub or Bitbucket on your behalf
+3.  Click on a project
 
 It really is that easy for about 90 percent of our users.
 
