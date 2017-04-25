@@ -7,7 +7,7 @@ categories: [docker]
 order: 5
 ---
 
-{% include beta-premium-feature.html%}
+{% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
 <div class="alert alert-info" role="alert">
 <strong>Note:</strong> This feature only works with whitelisted projects. To get it enabled, please contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI).
