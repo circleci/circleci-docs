@@ -16,8 +16,10 @@ body{
 		overflow: auto;
 	}
 
-div.main-body{
+div.main-body {
 	display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 // Navigation Sidebar
@@ -27,7 +29,6 @@ div.main-body{
 
 nav.sidebar{
 	border-right: 1px solid $nav-border-color;
-	background-color: $nav-bg-color;
 	padding: 30px 20px 20px;
 	width: 25%;
 
