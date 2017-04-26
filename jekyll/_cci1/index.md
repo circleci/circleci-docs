@@ -19,7 +19,8 @@ permalink: /1.0/
 	<h2>{{ category.name }}</h2>
 	<ul class="list-unstyled">
 	{% assign docs_found = 0 %}
-	{% for doc in site.cci1 %}
+	{% assign sortedDocs = site.cci1 | sort: 'order' %}
+	{% for doc in sortedDocs %}
 		{% if doc.categories contains category.slug and doc.slug != catFile and doc.hide != true %}
 			{% assign docs_found = docs_found | plus: 1 %}
 			{% if docs_found < 4 %}
