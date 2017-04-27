@@ -6,6 +6,10 @@ description: Ubuntu 12.04 (Precise)
 changefreq: "weekly"
 ---
 
+<div class="alert alert-warning">
+  <strong>Warning: </strong>Ubuntu 12.04 is approaching End-of-Life (EOL) by it's maintainer Canonical. We strongly suggest switching to Ubuntu 14.04. Read our announcement <a class="alert-link" href="https://circleci.com/blog/ubuntu-12-04-precise-build-image-end-of-life-warning/">here</a>.
+</div>
+
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.
 In the future, we plan to allow as much of this to be configurable as possible.
 
