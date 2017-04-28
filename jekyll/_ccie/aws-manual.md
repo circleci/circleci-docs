@@ -75,17 +75,17 @@ Start one of the following AMIs (for the appropriate AWS region), with an approp
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-19d5f77e
-ap-northeast-2     | ami-e1cc1e8f
-ap-southeast-1     | ami-1b1ba578
-ap-southeast-2     | ami-83b9b7e0
-eu-central-1       | ami-61db090e
-eu-west-1          | ami-42b08a24
-sa-east-1          | ami-45a2c029
-us-east-1          | ami-1371fc05
-us-east-2          | ami-dd83a7b8
-us-west-1          | ami-29062349
-us-west-2          | ami-15920175
+ap-northeast-1     | ami-23fcc944
+ap-northeast-2     | ami-6f6cbe01
+ap-southeast-1     | ami-7949f21a
+ap-southeast-2     | ami-23fff740
+eu-central-1       | ami-e55a868a
+eu-west-1          | ami-995053ff
+sa-east-1          | ami-59d6bb35
+us-east-1          | ami-edf793fb
+us-east-2          | ami-2c2c0b49
+us-west-1          | ami-0e50776e
+us-west-2          | ami-d43fa1b4
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
