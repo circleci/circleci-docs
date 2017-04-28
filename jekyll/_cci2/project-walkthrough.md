@@ -195,7 +195,7 @@ To speed up our builds, we should cache our dependencies:
 ...
     steps:
       - checkout
-       - restore_cache:
+      - restore_cache:
           key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
           name: Install Python deps in a venv
