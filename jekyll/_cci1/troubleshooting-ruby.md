@@ -6,12 +6,13 @@ categories: [troubleshooting]
 description: Troubleshooting Ruby
 children:
   - bundler-latest
-  - rspec-exit-codes
-  - capybara-timeout
   - git-bundle-install
-  - ruby-exception-during-schema-load
+  - failed-build-gem-native-extension
+  - capybara-timeout
+  - rspec-exit-codes
   - not-specified-ruby-commands
+  - ruby-exception-during-schema-load
+  - rvm-cache-ruby-binaries
   - unrecognized-ruby-version
   - unexpected-rake-errors
-  - rvm-cache-ruby-binaries
 ---
