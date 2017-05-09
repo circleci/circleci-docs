@@ -19,18 +19,6 @@ First, make sure you have the CLI tool for Replicated installed:
 replicated -version
 ```
 
-### "Config file /etc/replicated.conf not found."
-
-This error may occur when using the CLI tool.
-
-Please check if the file exists and if not, please create the file manually. The file content must look like the following:
-
-```
-{
-        "ReleaseChannel": "stable"
-}
-```
-
 ### Restarting Replicated and the CircleCI app
 
 Please try restarting Replicated services. You can do this by running the following commands on the service box:
