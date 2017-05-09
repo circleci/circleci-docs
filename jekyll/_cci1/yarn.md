@@ -14,7 +14,7 @@ description: "How to use the Yarn package manager on CircleCI."
 
 ## Version Support
 
-{% include os-matrix.html trusty=site.data.trusty.versions.summary.nodejs.yarn %}
+{% include os-matrix.html trusty=site.data.trusty.versions-ubuntu-14_04-XXL.summary.nodejs.yarn %}
 
 ## Setup
 
