@@ -16,7 +16,7 @@ root directory.
 
 The pre-installed version of Go depends on which image your build is using:
 
-{% include os-matrix.html trusty=site.data.trusty.versions.summary.go precise=site.data.precise.versions.golang %}
+{% include os-matrix.html trusty=site.data.trusty.versions-ubuntu-14_04-XXL.summary.go precise=site.data.precise.versions.golang %}
 
 Unlike some other languages on CircleCI, you would not specify the Go version 
 in the machine section of `circle.yml`.

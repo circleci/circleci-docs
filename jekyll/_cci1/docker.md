@@ -30,7 +30,7 @@ to use the command on CircleCI.
 
 ### Version Support
 
-{% include os-matrix.html trusty=site.data.trusty.versions.summary.docker precise=site.data.precise.versions.docker %}
+{% include os-matrix.html trusty=site.data.trusty.versions-ubuntu-14_04-XXL.summary.docker precise=site.data.precise.versions.docker %}
 
 ## Deployment to a Docker registry
 
