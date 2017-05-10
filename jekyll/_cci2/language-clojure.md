@@ -19,7 +19,7 @@ We're going to make a few assumptions here:
 * Your application can be distributed as an all-in-one uberjar.
 * You have the [bin/lein shell script](https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein) checked into your project's repository, ensuring everyone is operating with the same version of [Leiningen](https://leiningen.org).
 
-That last one is not a strict requirement, (you can require devs to install it by hand and use a container image that has it preinstalled) but it makes things a bit smoother.
+That last one is not a strict requirement, (you can require devs to install it by hand and use a container image that has it preinstalled) but it makes things a bit smoother. If you prefer to use a container that includes Leiningen already, replace `bin/lein` with `lein`.
 
 ## Sample Configuration
 
@@ -36,13 +36,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
           path: target/cci-demo-clojure.jar
@@ -113,13 +113,13 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
     steps:
       - checkout
       - restore_cache:
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
           path: target/cci-demo-clojure.jar
