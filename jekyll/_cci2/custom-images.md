@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Building Custom Images for Docker Executor"
 short-title: "Building Custom Images"
 description: "Why and how to create custom Docker images"
-categories: [configuring-jobs]
+categories: [docker]
 order: 30
 ---
 
