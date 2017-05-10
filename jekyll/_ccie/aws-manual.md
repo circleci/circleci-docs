@@ -75,17 +75,17 @@ Start one of the following AMIs (for the appropriate AWS region), with an approp
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-23fcc944
-ap-northeast-2     | ami-6f6cbe01
-ap-southeast-1     | ami-7949f21a
-ap-southeast-2     | ami-23fff740
-eu-central-1       | ami-e55a868a
-eu-west-1          | ami-995053ff
-sa-east-1          | ami-59d6bb35
-us-east-1          | ami-edf793fb
-us-east-2          | ami-2c2c0b49
-us-west-1          | ami-0e50776e
-us-west-2          | ami-d43fa1b4
+ap-northeast-1     | ami-32e6d455
+ap-northeast-2     | ami-2cef3242
+ap-southeast-1     | ami-7f22a71c
+ap-southeast-2     | ami-21111b42
+eu-central-1       | ami-7a2ef015
+eu-west-1          | ami-ac1a14ca
+sa-east-1          | ami-70026d1c
+us-east-1          | ami-cb6f1add
+us-east-2          | ami-57c7e032
+us-west-1          | ami-4fc8ee2f
+us-west-2          | ami-c24a2fa2
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
@@ -106,17 +106,17 @@ To start a box:  Start a new instance with the appropriate region-specific AMI:
 
 Region             | AMI
 -----------------  |-------------
-ap-northeast-1     | ami-38d8fa5f
-ap-northeast-2     | ami-5ff22031
-ap-southeast-1     | ami-381aa45b
-ap-southeast-2     | ami-76bab415
-eu-central-1       | ami-46d50729
-eu-west-1          | ami-c8b288ae
-sa-east-1          | ami-af5c3ec3
-us-east-1          | ami-4d75f85b
-us-east-2          | ami-b78ca8d2
-us-west-1          | ami-8d0124ed
-us-west-2          | ami-feef7c9e
+ap-northeast-1     | ami-eeffcd89
+ap-northeast-2     | ami-8eec31e0
+ap-southeast-1     | ami-5823a63b
+ap-southeast-2     | ami-7c12181f
+eu-central-1       | ami-0f32ec60
+eu-west-1          | ami-821a14e4
+sa-east-1          | ami-3a026d56
+us-east-1          | ami-7d71046b
+us-east-2          | ami-eec5e28b
+us-west-1          | ami-45c8ee25
+us-west-2          | ami-18492c78
 {: class="table table-striped"}
 
 These AMIs are public and are marked as community AMIs.
