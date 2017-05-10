@@ -36,13 +36,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
           path: target/cci-demo-clojure.jar
@@ -113,13 +113,13 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
     steps:
       - checkout
       - restore_cache:
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
-          key: {{ checksum "project.clj" }}
+          key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: bin/lein do test, uberjar
       - store_artifacts:
           path: target/cci-demo-clojure.jar
