@@ -103,7 +103,7 @@ Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}
 * By default, specific CPUs are not tied to specific build containers.
 
 
-When using Docker, we recommend that you ensure that use production-ready Docker configuration.  In particular, use the `overlay`, `btrfs`, or `zfs` filesystems.  In particular, `devicemapper` storage engine is known to have problems in production environment, some of which you can read about in [Docker devicemapper documentation](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/).  If you are using `devicemapper`, we recommend that you either change Docker configuration to use `overlay` or use `direct-lvm` configuration of `device-mapper`.
+When using Docker, we recommend that you ensure you're using a production-ready Docker configuration.  Use the `overlay`, `btrfs`, or `zfs` filesystems.  In particular, the `devicemapper` storage engine is known to have problems in production environments, some of which you can read about in the [Docker devicemapper documentation](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/).  If you are using `devicemapper`, we recommend that you either change your Docker configuration to use `overlay` or use `direct-lvm` configuration of `device-mapper`.
 
 Here is a complete list of commands to provision a builder machine:
 
