@@ -39,17 +39,17 @@ if you have questions.
 
   <script>
   var amiIds = {
-  "ap-northeast-1": "ami-bd4133da",
-  "ap-northeast-2": "ami-1b70a675",
-  "ap-southeast-1": "ami-f808a09b",
-  "ap-southeast-2": "ami-d1f7f2b2",
-  "eu-central-1": "ami-6713de08",
-  "eu-west-1": "ami-d70e26a4",
-  "sa-east-1": "ami-8c9802e0",
-  "us-east-1": "ami-b6b455a0",
-  "us-east-2": "ami-c86144ad",
-  "us-west-1": "ami-3c194a5c",
-  "us-west-2": "ami-13df6d73"
+  "ap-northeast-1": "ami-32e6d455",
+  "ap-northeast-2": "ami-2cef3242",
+  "ap-southeast-1": "ami-7f22a71c",
+  "ap-southeast-2": "ami-21111b42",
+  "eu-central-1": "ami-7a2ef015",
+  "eu-west-1": "ami-ac1a14ca",
+  "sa-east-1": "ami-70026d1c",
+  "us-east-1": "ami-cb6f1add",
+  "us-east-2": "ami-57c7e032",
+  "us-west-1": "ami-4fc8ee2f",
+  "us-west-2": "ami-c24a2fa2"
   };
 
   var amiUpdateSelect = function() {
