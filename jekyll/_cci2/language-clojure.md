@@ -32,7 +32,8 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      LEIN_ROOT=nbd
+      JVM_OPTS: -Xmx3200m
+      LEIN_ROOT: nbd
     steps:
       - checkout
       - restore_cache:
@@ -90,11 +91,14 @@ version: 2
 
 We use the [official OpenJDK images](https://hub.docker.com/_/openjdk/) tagged to version `8`.
 
-Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case.
+We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database, queue, etc, be sure to factor them in when you allocate memory for the main JVM heap.
+
+Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case. 
 
 ```YAML
     environment:
-      LEIN_ROOT=nbd
+      JVM_OPTS: -Xmx3200m
+      LEIN_ROOT: nbd
 ```
 
 Now we’ll add several `steps` within the `build` job.
