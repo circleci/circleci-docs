@@ -101,11 +101,10 @@ Instead, we recommend using precise image versions or digests, like `redis:3.2.7
 #### Use Custom Images
 If you find yourself incurring undue increases in your run times due to installing additional tools during execution, we recommend [making custom images]({{ site.baseurl }}/2.0/custom-images/) that meet the job’s requirements, so the container will have such tools pre-loaded.
 
-<hr>
-
-{% include beta-premium-feature.html feature='Machine Executor'%}
-
 ## Machine Executor
+
+**Potential Premium Feature Notice: During the CircleCI 2.0 Beta we are providing early access, for no additional charge, to features (including Machine Executor) that may be available for additional fees after the Beta. We welcome your [feedback](https://discuss.circleci.com/c/circleci-2-0/feedback) on this and all other aspects of CircleCI 2.0.**
+
 When you choose the `machine` executor, your job will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
 
 ```YAML
