@@ -278,7 +278,7 @@ jobs:
 
 Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
 
-Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#savecache).
+Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#save_cache).
 
 ## Deployment
 
@@ -294,8 +294,8 @@ deployment:
 
 **2.0**
 
-Currently, 2.0 doesn’t support automatic deployment via integrations (like the above Heroku example).
+Currently, 2.0 doesn't support automatic deployment via integrations (like the above Heroku example).
 
 You can write your own manual `deploy` steps as shown in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
-If you **add SSH keys** via the CircleCI UI 'Project Settings > SSH Permissions' screen for deployment with 2.0, you must **explicitly add them to your job with: `- add_ssh_keys`** in `.circleci/config.yml`. See [Configuration Refrence add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#addsshkeys). The documentation also explains how to activate `ssh-agent` so that you can `ssh-add` your keys for tools that require them to be available via an agent.
+If you **add SSH keys** via the CircleCI UI 'Project Settings > SSH Permissions' screen for deployment with 2.0, you must **explicitly add them to your job with: `- add_ssh_keys`** in `.circleci/config.yml`. See [Configuration Reference add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys). The documentation also explains how to activate `ssh-agent` so that you can `ssh-add` your keys for tools that require them to be available via an agent.

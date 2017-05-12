@@ -121,4 +121,4 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 ## Why am I getting "Enter passphrase for key '/root/.ssh/id_rsa'" on 2.0?
 
-If you are getting this error: `Enter passphrase for key '/root/.ssh/id_rsa':` it's likely because you need to explicitly add SSH keys added via the 'SSH Permissions' screen with `- add_ssh_keys` in `.circleci/config.yml`. See [Configuration Refrence add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#addsshkeys) for more details.
+If you are getting this error: `Enter passphrase for key '/root/.ssh/id_rsa':` it's likely because you need to explicitly add SSH keys added via the 'SSH Permissions' screen with `- add_ssh_keys` in `.circleci/config.yml`. See [Configuration Reference add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for more details.
