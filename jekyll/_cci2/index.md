@@ -1,24 +1,49 @@
 ---
 layout: classic-docs
-title: "Welcome to CircleCI 2.0"
+title: "2.0 Docs (Beta)"
 description: "Landing page for CircleCI 2.0"
-permalink: /2.0/
+permalink: /2.0 Docs (Beta)/
 ---
 
-Thanks for your interest in CircleCI 2.0!
+Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many improvements for performance, default Docker setup, and customization. 
 
-We are currently in Beta, so lots will be changing here. We LOVE it when you make suggestions (or, even better, make pull requests on the <a href="{{ site.gh_url }}">open source repo</a> that powers these docs) that address any errors or shortcomings you find here.
+## Programming Language Support
 
-## If you're completely new to CircleCI...
+Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications and Docker images for primary container use, as follows: 
 
-Read about [what we do]({{ site.baseurl }}/2.0/about-circleci/) and follow up with your [first steps]({{ site.baseurl }}/2.0/first-steps/).
+- Clojure 1.8 and later, see https://github.com/circleci/cci-demo-clojure and https://hub.docker.com/r/circleci/clojure
+- Go 1.7 and later, see https://github.com/circleci/cci-demo-go and https://hub.docker.com/r/circleci/golang
+- Node.js 4 and later, see https://github.com/circleci/cci-demo-react and https://hub.docker.com/r/circleci/node
+- PHP 5 and later, see https://github.com/circleci/cci-demo-lumen and https://hub.docker.com/r/circleci/php
+- Python 2 and later, see https://github.com/circleci/cci-demo-flask and https://hub.docker.com/r/circleci/python
+- Ruby 2 and later, see https://github.com/circleci/cci-demo-rails and https://hub.docker.com/r/circleci/ruby 
 
-## If you're familiar with CircleCI...
+In addition, CircleCI provides Docker database images for use as a secondary service container:
 
-Check out the major changes in 2.0 and learn how to [migrate from 1.0]({{ site.baseurl }}/2.0/migrating-from-1-2/).
+- MongoDB 3 and later, see https://hub.docker.com/r/circleci/mongo
+- MySQL 5 and later, see https://hub.docker.com/r/circleci/mysql
+- PostgreSQL 9 and later, see https://hub.docker.com/r/circleci/postgres
 
-Do you just want to see working configuration for a [sample project]({{ site.baseurl }}/2.0/project-walkthrough/)? Or maybe you have a [specific language or framework]({{ site.baseurl }}/2.0/demo-apps/) in mind? Wherever you start, we’re thrilled to have you here.
+Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, Javascript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more. 
 
-Happy building!
+## 2.0 Performance Improvements
+
+- Infrastructure upgrades resulting in significant performance improvements that reduce overall time to build, test, and deploy for all platforms at scale. Refer to the [CircleCI Pricing](https://circleci.com/pricing/) page for build container pricing or to contact a sales representative. 
+
+- Caching of images, source code, dependencies, custom caches, and save/restore points throughout jobs for increased speed. See [Caching in CircleCI]({{ site.baseurl }}/2.0/caching/) for details.
+
+## 2.0 Docker Support
+
+- Implementation of first-class Docker support for nearly all public Docker images, layer caching, compose, public or private registries, and runtime metrics. See [Using Docker Compose]({{ site.baseurl }}/2.0/docker-compose/) for the steps.
+
+- *CircleCI Images* on Dockerhub that include pre-installed dependencies, test tools, Git and SSH to save you time getting started with the most popular languages and databases. See the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) document for an overview of the available images and how to add them to the 'config.yml' file.
+
+## 2.0 Customization 
+
+- Ability to create custom images or compose multiple images together to minimize build failures related to unexpected image updates. See [Building Custom Images for Docker Executor]({{ site.baseurl }}/2.0/custom-images/) for instructions.
+
+- Configuration of compute and memory to fit business needs, increasing the CPU and RAM limits for premium users. 
+
+We’re thrilled to have you here. Happy building!
 
 _The CircleCI Team_
