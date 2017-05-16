@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "2.0 Docs (Beta)"
 description: "Landing page for CircleCI 2.0"
-permalink: /2.0 Docs (Beta)/
+permalink: /2.0/
 ---
 
 Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many improvements for performance, default Docker setup, and customization. 
