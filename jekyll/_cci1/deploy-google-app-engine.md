@@ -14,6 +14,15 @@ Once you're finished following the above instructions on authentication linked t
 
     gcloud -q app deploy app.yaml --promote --version=staging
 
+This will deploy everything in the current folder, including artifacts created during the testing phase.
+If that behavior is not expected, consider clean up the folder after testing, by specifying in `circle.yml` as follows:
+
+```
+test:
+  post:
+    - git reset --hard; git clean -d -x -f
+```
+
 Note that while the gcloud command can be used to interact with your App Engine project, it does not include the App Engine SDK, which you may want if you are running local unit tests. It can be downloaded separately by doing the following:
 
 ```
