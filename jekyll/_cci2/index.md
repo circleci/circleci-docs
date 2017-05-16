@@ -28,7 +28,7 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 
 ## 2.0 Performance Improvements
 
-- Infrastructure upgrades resulting in significant performance improvements that reduce overall time to build, test, and deploy for all platforms at scale. Refer to the [CircleCI Pricing](https://circleci.com/pricing/) page for build container pricing or to contact a sales representative. 
+- Infrastructure upgrades resulting in significant performance improvements that reduce overall time to build, test, and deploy for all platforms at scale. [Join the CircleCI 2.0 Beta](https://circleci.com/beta-access/) to access the latest features. 
 
 - Caching of images, source code, dependencies, custom caches, and save/restore points throughout jobs for increased speed. See [Caching in CircleCI]({{ site.baseurl }}/2.0/caching/) for details.
 
