@@ -5,7 +5,7 @@ description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
 
-Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many improvements for performance, default Docker setup, and customization. 
+Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many improvements for faster performance and greater control. 
 
 ## Programming Language Support
 
@@ -26,23 +26,21 @@ In addition, CircleCI provides Docker database images for use as a secondary ser
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, Javascript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more. 
 
-## 2.0 Performance Improvements
+## Faster Performance with 2.0
 
 - Infrastructure upgrades resulting in significant performance improvements that reduce overall time to build, test, and deploy for all platforms at scale. [Join the CircleCI 2.0 Beta](https://circleci.com/beta-access/) to access the latest features. 
 
 - Caching of images, source code, dependencies, custom caches, and save/restore points throughout jobs for increased speed. See [Caching in CircleCI]({{ site.baseurl }}/2.0/caching/) for details.
 
-## 2.0 Docker Support
+## Greater Control with 2.0
 
 - Implementation of first-class Docker support for nearly all public Docker images, layer caching, compose, public or private registries, and runtime metrics. See [Using Docker Compose]({{ site.baseurl }}/2.0/docker-compose/) for the steps.
 
-- *CircleCI Images* on Dockerhub that include pre-installed dependencies, test tools, Git and SSH to save you time getting started with the most popular languages and databases. See the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) document for an overview of the available images and how to add them to the 'config.yml' file.
-
-## 2.0 Customization 
+- Availability of *CircleCI Images* on Dockerhub that include pre-installed dependencies, test tools, Git, and SSH to save  time getting started with the most popular languages and databases. See the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) document for an overview of the available images and how to add them to the `config.yml` file. 
 
 - Ability to create custom images or compose multiple images together to minimize build failures related to unexpected image updates. See [Building Custom Images for Docker Executor]({{ site.baseurl }}/2.0/custom-images/) for instructions.
 
-- Configuration of compute and memory to fit business needs, increasing the CPU and RAM limits for premium users. 
+- Increased flexibility of CPU and RAM limits for premium users. 
 
 We’re thrilled to have you here. Happy building!
 
