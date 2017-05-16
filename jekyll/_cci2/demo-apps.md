@@ -30,7 +30,7 @@ Language | Framework | GitHub Repo Name
 [Python]: {{ site.baseurl }}/2.0/language-python/
 [Ruby]: {{ site.baseurl }}/2.0/language-ruby/
 
-[cci-demo-clojure]: https://github.com/circleci/cci-demo-clojure
+[cci-demo-clojure]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
 [cci-demo-go]: https://github.com/circleci/cci-demo-go
 [cci-demo-react]: https://github.com/circleci/cci-demo-react
 [cci-demo-lumen]: https://github.com/circleci/cci-demo-lumen
