@@ -4,12 +4,12 @@ module Jekyll
       if endpoint
       """<div>
   <p>#{endpoint['description']}</p>
-  <h4>Method</h4>
+  <h2>Method</h2>
   <p>#{endpoint['method']}</p>
   #{params(endpoint['params'])}
-  <h4>Example call</h4>
+  <h2>Example call</h2>
   <pre><code>#{api_curl(endpoint)}</code></pre>
-  <h4>Example response</h4>
+  <h2>Example response</h2>
   #{response_output(endpoint['response'])}
   #{try_it(endpoint)}
 </div>
