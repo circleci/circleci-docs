@@ -17,8 +17,8 @@ CircleCI 1.0 and 2.0 are supported by API version `1.1`.
 All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 <dl>
-<dt>
-  GET: /me
+<dt markdown="1">
+  [GET: /me]({{ site.baseurl }}/api/me/)
 </dt>
 <dd>
   Provides information about the signed in user.
@@ -205,6 +205,8 @@ curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: applicatio
 ## User
 
 {{ site.data.api.me | api_endpoint }}
+
+
 
 ## Projects
 
