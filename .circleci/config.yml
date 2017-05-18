@@ -1,0 +1,57 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.3.3
+    working_directory: ~/circleci-docs
+    environment:
+      - JEKYLL_ENV=production
+      - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+      - JOB_RESULTS_PATH=run-results
+    steps:
+      - checkout
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install essential packages for awscli
+          command: sudo apt-get update && sudo apt-get install python-dev
+      - run:
+          name: Install awscli
+          command: wget https://bootstrap.pypa.io/get-pip.py && sudo python get-pip.py && pip install --upgrade --user awscli
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - "vendor/bundle"
+      - run:
+          name: Create results directory
+          command: mkdir -p $JOB_RESULTS_PATH
+      - run:
+          name: Expose version files
+          command: |
+            # cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
+            cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
+            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
+            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XXL-upstart.json
+      - run:
+          name: Build the Jekyll site
+          command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+      - run:
+          name: Test with HTMLproofer
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+      - store_artifacts: 
+          path: jekyll/_site/docs/
+          destination: circleci-docs
+      - store_artifacts: 
+          path: run-results/
+          destination: run-results
+      - deploy:
+          name: Deploy to S3 if tests pass and branch is Master
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+            else
+              echo "Not master branch so not deploying"
+            fi

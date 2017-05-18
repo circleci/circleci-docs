@@ -1,4 +1,6 @@
 _site/
+run-results/
+jekyll/environments/
 .sass-cache/
 .jekyll-metadata
 .vagrant/
