@@ -170,4 +170,4 @@ Finally, let's specify a path to store the results of the tests.
 
 Success! You just set up CircleCI 2.0 for a Go app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go) to see how this looks when building on CircleCI.
 
-If you have any questions about the specifics of testing your Go applicatio, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+If you have any questions about the specifics of testing your Go application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
