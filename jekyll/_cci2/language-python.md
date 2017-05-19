@@ -15,8 +15,8 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 We maintain a reference Python Django project to show how to build Django on CircleCI 2.0:
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-python-django"> target="_blank">Demo Python Django Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django"> target="_blank">Demo Python Django Project building on CircleCI</a>
+- <a href="https://github.com/CircleCI-Public/circleci-demo-python-django" target="_blank">Demo Python Django Project on GitHub</a>
+- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django" target="_blank">Demo Python Django Project building on CircleCI</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 
