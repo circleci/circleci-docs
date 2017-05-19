@@ -22,7 +22,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 ## Alternative: Python Flask demo reference project
 
-The [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) uses a Flask application: <https://github.com/CircleCI-Public/cci-demo-python-flask>
+The [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) uses a Flask application: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
 
 ## Pre-built CircleCI Docker images
 

@@ -29,7 +29,7 @@ jobs:
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 ### Example
-Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/cci-demo-docker):
+Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
 ```YAML
 version: 2
@@ -37,7 +37,7 @@ jobs:
   build:
     docker:
       - image: golang:1.6.4   # (1)
-    working_directory: /go/src/github.com/circleci/cci-demo-docker
+    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -58,9 +58,9 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t circleci/cci-demo-docker:$TAG .      # (3)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (3)
           docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
-          docker push circleci/cci-demo-docker:$TAG
+          docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
 Let’s break down what’s happening during this build’s execution:

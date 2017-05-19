@@ -24,7 +24,7 @@ CircleCI is a very flexible platform so you should be able to adapt this tutoria
 
 ![Circulate demo app screenshot]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
 
-The source for the application is here: [cci-demo-python-flask](https://github.com/CircleCI-Public/cci-demo-python-flask).
+The source for the application is here: [circleci-demo-python-flask](https://github.com/CircleCI-Public/circleci-demo-python-flask).
 
 ### The Stack
 
@@ -41,7 +41,7 @@ Finally, we'll deploy the application to Heroku and discuss other deployment opt
 To use CircleCI, your code must be available on GitHub or Bitbucket, in either a private or public repository. We'll be assuming GitHub for this walkthrough, but the same flow applies to Bitbucket as well.
 
 <div class="alert alert-info" role="alert">
-<strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/CircleCI-Public/cci-demo-python-flask">cci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
+<strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/CircleCI-Public/circleci-demo-python-flask">circleci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
 </div>
 
 ## Create CircleCI config file
@@ -335,7 +335,7 @@ Other files required by Heroku are:
 
 Before deploying through CircleCI, we'll create it and confirm it works by manually deploying.
 
-Install the Heroku CLI locally and log into your account. The commands you'll run should be fairly similar to the example below, though you'll need to replace `cci-demo-walkthrough` with your app's unique name.
+Install the Heroku CLI locally and log into your account. The commands you'll run should be fairly similar to the example below, though you'll need to replace `circleci-demo-python-flask` with your app's unique name.
 
 ```
 heroku create cci-demo-walkthrough
@@ -393,7 +393,7 @@ Now, create a `setup-heroku.sh` file in the `.circleci` folder and add the follo
   ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 ```
 
-**Make sure to replace `cci-demo-walkthrough` with your own app's name.**
+**Make sure to replace `circleci-demo-python-flask` with your own app's name.**
 
 This file will run on CircleCI and configures everything Heroku needs to deploy your app. The second part creates a `.netrc` file and populates it with the API key and login details we set earlier in the CircleCI UI.
 
@@ -423,7 +423,7 @@ The `deploy` section is a special section where we run our deployment commands. 
 
 Congratulations! Your app will now update on Heroku whenever you have a successful build on the master branch.
 
-Now we just need to make a commit and push to CircleCI to see our app build, test and deploy. Here's the first passing build with deployment for our demo app: <https://circleci.com/gh/circleci/cci-demo-walkthrough/6>
+Now we just need to make a commit and push to CircleCI to see our app build, test and deploy. Here's the first passing build with deployment for our demo app: <https://circleci.com/gh/circleci/circleci-demo-python-flask/6>
 
 ## Make the Job Faster with Parallelism
 
