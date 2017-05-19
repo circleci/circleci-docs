@@ -36,7 +36,7 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 
 - Implementation of first-class Docker support for nearly all public Docker images, layer caching, compose, public or private registries, and runtime metrics. See [Using Docker Compose]({{ site.baseurl }}/2.0/docker-compose/) for the steps.
 
-- Availability of *CircleCI Images* on Dockerhub that include pre-installed dependencies, test tools, Git, and SSH to save  time getting started with the most popular languages and databases. See the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) document for an overview of the available images and how to add them to the `config.yml` file. 
+- Availability of *CircleCI Images* on Docker Hub that include pre-installed dependencies, test tools, Git, and SSH to save  time getting started with the most popular languages and databases. See the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) document for an overview of the available images and how to add them to the `config.yml` file. 
 
 - Ability to create custom images or compose multiple images together to minimize build failures related to unexpected image updates. See [Building Custom Images for Docker Executor]({{ site.baseurl }}/2.0/custom-images/) for instructions.
 
