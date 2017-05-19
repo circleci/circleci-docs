@@ -127,11 +127,11 @@ jobs:
     environment:
        BASH_ENV: ~/.bashrc
   steps:
-    run: echo "export PATH=/path/to/foo/bin:$PATH" > ~/.bashrc
+    run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
     run: some_program_inside_of /path/to/foo/bin
 ```
 
-In this example, we've added `/path/to/foo/bin` to the `$PATH` which will get evaluated when a command is executed. You can image that `some_program_inside_of` is an executable within that path, and we don't need to refer to it by the full path name.
+In this example, we've added `/path/to/foo/bin` to the `$PATH` which will get evaluated when a command is executed. You can imagine that `some_program_inside_of` is an executable within that path, and we don't need to refer to it by the full path name.
 
 
 ### Languages
