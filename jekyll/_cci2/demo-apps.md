@@ -13,13 +13,14 @@ Each language listed below has an associated guide and public repository on GitH
 
 Language | Framework | GitHub Repo Name
 ---------|-----------|-----------------
-[Clojure] | Clojure | [cci-demo-clojure]
+[Clojure] | Luminus | [circleci-demo-clojure-luminus]
 [Elixir] | Phoenix | (coming soon)
-[Go] | Go | [cci-demo-go]
-[JavaScript] | React | [cci-demo-react]
-[PHP] | Lumen | [cci-demo-lumen]
-[Python] | Flask | [cci-demo-flask]
-[Ruby] | Rails | [cci-demo-rails]
+[Go] | Go | [circleci-demo-go]
+[JavaScript] | React | [circleci-demo-javascript-express]
+[PHP] | Laravel | [circleci-demo-php-laravel]
+[Python] | Django | [circleci-demo-python-django]
+[Python] | Flask | [circleci-demo-python-flask]
+[Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table"}
 
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
@@ -28,11 +29,12 @@ Language | Framework | GitHub Repo Name
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
 [Python]: {{ site.baseurl }}/2.0/language-python/
-[Ruby]: {{ site.baseurl }}/2.0/language-ruby/
+[Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
 
-[cci-demo-clojure]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
-[cci-demo-go]: https://github.com/circleci/cci-demo-go
-[cci-demo-react]: https://github.com/circleci/cci-demo-react
-[cci-demo-lumen]: https://github.com/circleci/cci-demo-lumen
-[cci-demo-flask]: https://github.com/circleci/cci-demo-flask
-[cci-demo-rails]: https://github.com/circleci/cci-demo-rails
+[circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
+[circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
+[circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
+[circleci-demo-php-laravel]: https://github.com/CircleCI-Public/circleci-demo-php-laravel
+[circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-flask
+[circleci-demo-python-flask]: https://github.com/CircleCI-Public/circleci-demo-python-flask
+[circleci-demo-ruby-rails]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails

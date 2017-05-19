@@ -15,8 +15,8 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 We maintain a reference JavaScript NodeJS project to show how to build Django on CircleCI 2.0:
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express"> target="_blank">Demo JavaScript Node Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express"> target="_blank">Demo JavaScript Node Project building on CircleCI</a>
+- <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
+- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project building on CircleCI</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Node projects.
 

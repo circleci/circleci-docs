@@ -15,8 +15,8 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel"> target="_blank">Demo PHP Laravel Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel"> target="_blank">Demo PHP Laravel Project building on CircleCI</a>
+- <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project on GitHub</a>
+- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project building on CircleCI</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 

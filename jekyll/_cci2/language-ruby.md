@@ -15,8 +15,8 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 We maintain a reference Ruby on Rails project to show how to build Ruby on CircleCI 2.0:
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails"> target="_blank">Demo Ruby on Rails Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails"> target="_blank">Demo Ruby on Rails Project building on CircleCI</a>
+- <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails" target="_blank">Demo Ruby on Rails Project on GitHub</a>
+- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails" target="_blank">Demo Ruby on Rails Project building on CircleCI</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 
