@@ -24,7 +24,7 @@ CircleCI is a very flexible platform so you should be able to adapt this tutoria
 
 ![Circulate demo app screenshot]({{ site.baseurl }}/assets/img/docs/walkthrough0.png)
 
-The source for the application is here: [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough).
+The source for the application is here: [cci-demo-python-flask](https://github.com/CircleCI-Public/cci-demo-python-flask).
 
 ### The Stack
 
@@ -41,7 +41,7 @@ Finally, we'll deploy the application to Heroku and discuss other deployment opt
 To use CircleCI, your code must be available on GitHub or Bitbucket, in either a private or public repository. We'll be assuming GitHub for this walkthrough, but the same flow applies to Bitbucket as well.
 
 <div class="alert alert-info" role="alert">
-<strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/circleci/cci-demo-walkthrough">cci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
+<strong>Tip:</strong> If you're following along and want to use the code, you should fork and clone the <a class="alert-link" href="https://github.com/CircleCI-Public/cci-demo-python-flask">cci-demo-walkthrough</a> project. On your local machine, delete the <code>.circleci</code> directory and make a commit. You now have a clean project ready to start configuring for use with CircleCI.
 </div>
 
 ## Create CircleCI config file
