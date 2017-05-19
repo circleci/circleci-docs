@@ -57,6 +57,6 @@ On 14.04, both tools and creation process of build image are public. Namely, the
 
 [circleci/image-builder](https://github.com/circleci/image-builder) is a collection of shell scripts that installs many tools and software in a way that works the best on CircleCI.
 The shell scripts are called by a command `circleci-install` in the main [Dockerfile](https://github.com/circleci/image-builder/blob/master/Dockerfile).
-Whenever we make a new build image, we run a [image-builder build](https://circleci.com/gh/circleci/image-builder) that builds a Docker image and push to our [DockerHub](https://hub.docker.com/r/circleci/build-image/tags/) repository.
+Whenever we make a new build image, we run a [image-builder build](https://circleci.com/gh/circleci/image-builder) that builds a Docker image and push to our [Docker Hub](https://hub.docker.com/r/circleci/build-image/tags/) repository.
 
 [circleci/package-builder](https://github.com/circleci/package-builder) builds different versions of Ruby, Python, Nodejs, and PHP and creates Debian packages that are easy to install on image-builder. These packages are then pushed to our [PackageCloud](https://packagecloud.io/circleci/trusty) repository by [package-builder build](https://circleci.com/gh/circleci/package-builder).

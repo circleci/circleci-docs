@@ -15,9 +15,9 @@ For many of them we also have the following variants, which can be used by addin
 * `-{{ variant[0] }}`: {{ variant[1] }}
 {% endfor %}
 
-All of the following images are published in the [CircleCI org on Dockerhub](https://hub.docker.com/r/circleci/). 
+All of the following images are published in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). 
 
-NOTE: We strongly recommend that you lock your image to a particular tag to avoid unwanted changes (the available tags for each image are listed below and available on each images Dockerhub page). If you choose to use the `latest` tag the image may change unexpectedly and create surprising results.
+NOTE: We strongly recommend that you lock your image to a particular tag to avoid unwanted changes (the available tags for each image are listed below and available on each images Docker Hub page). If you choose to use the `latest` tag the image may change unexpectedly and create surprising results.
 
 <!-- TODO: Sort this -->
 {% assign images = site.data.circleci_images.images %}
@@ -38,7 +38,7 @@ NOTE: We strongly recommend that you lock your image to a particular tag to avoi
 {% for image in images %}
 ### {{ image[1].name }} 
 **Usage:** Add the following under `docker:` in your config.yml:  
-`image: {{ image[1].image }}:[TAG]`  (<small>[Dockerhub page]({{image[1].info-url}})</small>)  
+`image: {{ image[1].image }}:[TAG]`  (<small>[Docker Hub page]({{image[1].info-url}})</small>)  
 **Available Tags:**
 {% for tag in image[1].tags %}
 * {{tag}}
