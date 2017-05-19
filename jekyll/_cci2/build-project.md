@@ -7,17 +7,15 @@ categories: [getting-started]
 order: 4
 ---
 
-## Build a Project 
-
 This document describes how to configure your project to run on CircleCI 2.0. 
 
-### Prerequisites
+## Prerequisites
 
 - Complete the steps in the [Join Beta & Sign Up]({{ site.baseurl }}/2.0/first-steps/) document. 
 - Install Docker, see [the Docker store](https://store.docker.com/search?offering=community&type=edition) for a free download  compatible with your operating system. 
 - Download a build image for your language, see [the CircleCI repo on hub.docker.com](https://hub.docker.com/u/circleci/).
 
-### Steps
+## Steps
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
