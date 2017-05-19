@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Clojure"
 short-title: "Clojure"
-description: "Overview and sample config for a Clojure project"
+description: "Building and Testing with Clojure on CircleCI 2.0"
 categories: [language-guides]
 order: 2
 ---

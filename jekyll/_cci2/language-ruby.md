@@ -2,134 +2,46 @@
 layout: classic-docs
 title: "Language Guide: Ruby"
 short-title: "Ruby"
-description: "Overview and sample config for a Ruby project"
+description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
 order: 7
 ---
 
-## Overview
+## New to CircleCI 2.0?
 
-This guide will help you get started with a Ruby project on CircleCI. If you’re in a rush, just copy the sample configuration below into `.circleci/config.yml` in your project’s root directory and start building.
+If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
-Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+## Quickstart: demo Ruby on Rails reference project
 
-## Sample Configuration
+We maintain a reference Ruby on Rails project to show how to build Ruby on CircleCI 2.0:
 
-```YAML
-version: 2
-jobs:
-  build:
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
+- <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails"> target="_blank">Demo Ruby on Rails Project on GitHub</a>
+- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails"> target="_blank">Demo Ruby on Rails Project building on CircleCI</a>
 
-    working_directory: ~/cci-demo-rails
-    steps:
-      - checkout
-      - run: apt-get update -qq && apt-get install -y build-essential nodejs
-      - run: bundle install
-      - run: bundle exec rake db:create db:schema:load --trace
-      - run: bundle exec rake db:migrate
-      - run: bundle exec rake test
-```
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 
-## Get the Code
+## Pre-built CircleCI Docker images
 
-The configuration above is from a demo Ruby on Rails app, which you can access at [https://github.com/circleci/cci-demo-rails](https://github.com/circleci/cci-demo-rails).
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>. The demo project uses an official CircleCI image.
 
-Fork the project and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+Database images for use as a secondary 'service' container are also available.
 
-Now we’re ready to build a `config.yml` from scratch.
+## Build the demo Ruby on Rails project yourself
+
+A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+
+1. Fork the project on GitHub to your own account
+2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked
+3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 ---
 
 ## Config Walkthrough
 
-We always start with the version.
+Details of the configuration steps will be updated soon. Please see the `.circleci/config.yml` file in the demo project to get started.
 
-```YAML
-version: 2
-```
+---
 
-Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
+Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails) to see how this looks when building on CircleCI.
 
-In each job, we specify a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
-
-```YAML
-...
-jobs:
-  build:
-    working_directory: ~/cci-demo-rails
-```
-
-This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
-
-Directly beneath `working_directory`, we can specify container images for the build under a `docker` key.
-
-```YAML
-...
-    docker:
-      - image: ruby:2.3
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-```
-
-We use 2 Docker images here: `ruby:2.3` as the primary build image and `postgres:9.4.1` as the database image.
-
-Now we’ll add several `steps` within the `build` job.
-
-First we check out the codebase.
-
-In our second step, we install NodeJS because Docker’s Ruby image doesn’t include it. This command will also install any tools/headers required to build native gems.
-
-```YAML
-...
-    steps:
-      - checkout
-      - run: apt-get update -qq && apt-get install -y build-essential nodejs
-```
-
-Now we have to install our actual dependencies for the project.
-
-```YAML
-...
-      - run: bundle install
-```
-
-Next, set up the DB.
-
-```YAML
-...
-      - run: bundle exec rake db:create db:schema:load --trace
-```
-
-Rails will read `config/database.yml` and create a test DB automatically with `db:create` task. Ensure that `POSTGRES_USER` env var matches a username specified in your `database.yml`.
-
-**(Optional)** If you want to create a DB manually, you can do so with `createdb` command. We are installing the postgresql package because we need the `createdb` command.
-
-```YAML
-      - run: |
-        apt-get update -qq; apt-get install -y postgresql
-        createdb -h localhost my_test_db
-```
-
-Run our migrations.
-
-```YAML
-...
-      - run: bundle exec rake db:migrate
-```
-
-Finally, run our tests.
-
-```YAML
-...
-      - run: bundle exec rake test
-```
-
-Nice! You just set up CircleCI for a Rails app. Check out our [project’s build page](https://circleci.com/gh/circleci/cci-demo-rails).
-
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+If you have any questions about the specifics of testing your Ruby application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
