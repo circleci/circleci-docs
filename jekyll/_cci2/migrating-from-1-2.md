@@ -101,6 +101,39 @@ jobs:
        BAR: bar
 ```
 
+### Modifying `$PATH`
+
+**1.0**
+
+```YAML
+machine:
+  environment:
+    PATH: "/path/to/foo/bin:$PATH"
+```
+
+**2.0**
+
+In 2.0, interpolating variables into the environment is not yet supported.
+
+As a workaround, you have to add it to your `.bashrc` then make sure your command shell loads it. We can also make sure it is loaded automatically by changing `$BASH_ENV` like so.
+
+```YAML
+version: 2
+jobs:
+  build:
+    working_directory: /tmp
+    docker:
+      - image: buildpack-deps:jessie
+    environment:
+       BASH_ENV: ~/.bashrc
+  steps:
+    run: echo "export PATH=/path/to/foo/bin:$PATH" > ~/.bashrc
+    run: some_program_inside_of /path/to/foo/bin
+```
+
+In this example, we've added `/path/to/foo/bin` to the `$PATH` which will get evaluated when a command is executed. You can image that `some_program_inside_of` is an executable within that path, and we don't need to refer to it by the full path name.
+
+
 ### Languages
 
 **1.0**
