@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Go"
 short-title: "Go"
-description: "Overview and sample config for a Go project"
+description: "Building and Testing with Go (Golang) on CircleCI 2.0"
 categories: [language-guides]
 order: 3
 ---
