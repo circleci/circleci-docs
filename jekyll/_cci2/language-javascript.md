@@ -46,7 +46,7 @@ jobs:
 
 The configuration above is from a demo React app, which you can access at [https://github.com/circleci/cci-demo-react](https://github.com/circleci/cci-demo-react).
 
-Fork the project and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
+Fork the project and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
 Now we’re ready to build a `config.yml` from scratch.
 
