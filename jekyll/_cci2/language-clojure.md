@@ -55,7 +55,7 @@ jobs:
 
 The configuration above is from a demo Clojure app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-clojure-luminus](https://github.com/CircleCI-Public/circleci-demo-clojure-luminus).
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Then, [add the project]({{ site.baseurl }}/2.0/first-steps/#adding-projects) through CircleCI. Finally, delete everything in `.circleci/config.yml`.
+If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
 Now we’re ready to build a `config.yml` from scratch.
 
