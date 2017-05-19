@@ -22,7 +22,7 @@ CircleCI deployment environment is required to have the following:
 
 * Ubuntu Trusty 14.04 instances.  To import the instances into your environment, you can import the image from [Ubuntu Cloud releases](https://cloud-images.ubuntu.com/releases/14.04.4/release/) or plain [Ubuntu ISOs](http://releases.ubuntu.com/14.04/).  Your probably need the appropriate image named `ubuntu-14.04-server-cloudimg-amd64` for your private cloud environment.
 * Access to GitHub Enterprise instance.  If running in separate networks, ensure that GitHub Enterprise and CircleCI Enterprise server are whitelisted in the firewall, or VPN connections are setup.
-* For ideal setup, CircleCI builders require a second volume, preferrably local SSD volumes.  This speeds up build runs with maximum effectiveness.
+* For ideal setup, CircleCI builders require a second volume, preferably local SSD volumes.  This speeds up build runs with maximum effectiveness.
 
 ### 2. GitHub App Client ID/Secret
 
@@ -38,7 +38,7 @@ For test installations, you may punt on this step until you spin up the machines
 
 ## Installation
 
-CircleCI Enterpise installation requires provisioning two types of machines:
+CircleCI Enterprise installation requires provisioning two types of machines:
 
 * Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
@@ -58,7 +58,7 @@ If you are configuring network security, please ensure you whitelist the followi
 | Administrators              | 22                      | SSH                    |
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
-| Github (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+| GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 
@@ -192,7 +192,7 @@ If your network is setup differently, you can set the following environment vari
 
 ### No second volume for builders
 
-We strongly recommend using second volumes, preferrably backed by SSD disks, for running builds.  If your cloud installation doesn't support attaching second volumes - we can use loopback devices backed by sparse files:
+We strongly recommend using second volumes, preferably backed by SSD disks, for running builds.  If your cloud installation doesn't support attaching second volumes - we can use loopback devices backed by sparse files:
 
 ```bash
 $ sudo truncate -s 80G /tmp/sparse-file.img
