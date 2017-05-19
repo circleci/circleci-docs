@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: “Build a Project”
-short-title: “Build a Project”
-description: “First project build on CircleCI 2.0"
+title: "Build a Project"
+short-title: "Build a Project"
+description: "First project build on CircleCI 2.0"
 categories: [getting-started]
 order: 4
 ---
@@ -37,10 +37,10 @@ jobs:
 
 The image defines the execution environment for your build. The steps check out the code in the project directory and run the `echo` command.
 
-3. Commit and push the changes.
+3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0 and a 2.0 icon appears on the Builds page.
 
 4. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to your project.
 
-CircleCI checks out your code, prints "Hello World", and posts a green build! If the build fails, you are notified in email of the failure with a log of the failing command, exit code, and output.
+CircleCI checks out your code, prints "Hello World", and posts a green build to the Builds page! If the build fails, you are notified in email of the failure with a log of the failing command, exit code, and output.
 
 
