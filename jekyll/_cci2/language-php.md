@@ -174,15 +174,13 @@ Now that Composer has been installed, let's use it to install the project's depe
       - run: php composer.phar install
 ```
 
-Next, let's initialize required database (DB) tables and seed it with initial data.
+Next, let's initialize required database tables and seed it with initial data (assuming we're using Laravel).
 
 ```YAML
 ...
       - run:
           name: Initialize Database
-          command: |
-            php artisan migrate:refresh
-            php artisan db:seed
+          command: php artisan migrate --seed --force
 ```
 
 Finally, let's run our tests using PHPUnit.
