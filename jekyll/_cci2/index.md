@@ -11,12 +11,12 @@ Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many imp
 
 Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications and Docker images for primary container use, as follows: 
 
-- **Clojure 1.8 and later**, see <https://github.com/circleci/cci-demo-clojure> and <https://hub.docker.com/r/circleci/clojure>
-- **Go 1.7 and later**, see <https://github.com/circleci/cci-demo-go> and <https://hub.docker.com/r/circleci/golang>
-- **Node.js 4 and later**, see <https://github.com/circleci/cci-demo-react> and <https://hub.docker.com/r/circleci/node>
-- **PHP 5 and later**, see <https://github.com/circleci/cci-demo-lumen> and <https://hub.docker.com/r/circleci/php>
-- **Python 2 and later**, see <https://github.com/circleci/cci-demo-flask> and <https://hub.docker.com/r/circleci/python>
-- **Ruby 2 and later**, see <https://github.com/circleci/cci-demo-rails> and <https://hub.docker.com/r/circleci/ruby> 
+- **Clojure 1.8 and later**, see <https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> and <https://hub.docker.com/r/circleci/clojure>
+- **Go 1.7 and later**, see <https://github.com/CircleCI-Public/circleci-demo-go> and <https://hub.docker.com/r/circleci/golang>
+- **Node.js 4 and later**, see <https://github.com/CircleCI-Public/circleci-demo-javascript-express> and <https://hub.docker.com/r/circleci/node>
+- **PHP 5 and later**, see <https://github.com/CircleCI-Public/circleci-demo-php-laravel> and <https://hub.docker.com/r/circleci/php>
+- **Python 2 and later**, see <https://github.com/CircleCI-Public/cci-demo-python-flask> or <https://github.com/CircleCI-Public/circleci-demo-python-django> and <https://hub.docker.com/r/circleci/python>
+- **Ruby 2 and later**, see <https://github.com/CircleCI-Public/circleci-demo-ruby-rails> and <https://hub.docker.com/r/circleci/ruby> 
 
 In addition, CircleCI provides Docker database images for use as a secondary service container:
 
