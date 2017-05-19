@@ -62,7 +62,7 @@ If you are configuring network security, please ensure you whitelist the followi
 | Administrators              | 22                      | SSH                    |
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
-| Github (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+| GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 
 Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
 

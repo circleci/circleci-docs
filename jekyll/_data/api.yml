@@ -492,7 +492,7 @@ project_build_cache:
 
 "user/ssh-key":
   method: "POST"
-  description: "Adds a CircleCI key to your Github User account."
+  description: "Adds a CircleCI key to your GitHub User account."
 
 "user/heroku-key":
   method: "POST"

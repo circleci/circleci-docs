@@ -7,7 +7,7 @@ order: 1
 description: "High-level overview of the CircleCI Enterprise Installation process."
 ---
 
-This article provides a platform-independant overview of CircleCI Enterprise. CircleCI Enterprise matches the experience of <https://circleci.com> but runs behind your organization's firewall, allowing your code, builds, and production hosts to be inaccessible outside of your network.
+This article provides a platform-independent overview of CircleCI Enterprise. CircleCI Enterprise matches the experience of <https://circleci.com> but runs behind your organization's firewall, allowing your code, builds, and production hosts to be inaccessible outside of your network.
 
 We are constantly working on making the installation process as smooth as possible and expanding the administrative tooling.  We appreciate your feedback on ways to make CircleCI Enterprise easier and more valuable for you and your team, so please contact us at <enterprise-support@circleci.com> with any suggestions.
 
@@ -15,12 +15,12 @@ We are constantly working on making the installation process as smooth as possib
 ### Installation Steps
 
 Once you have all of the prerequisites in place, you can either [follow the detailed
-installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for enviroments not on AWS]({{site.baseurl}}/enterprise/docker-install/).
+installation steps for AWS]({{site.baseurl}}/enterprise/aws/), or [for environments not on AWS]({{site.baseurl}}/enterprise/docker-install/).
 
 
 ## Architecture
 
-At a high level, CircleCI Enteprise has two kinds of instances that it needs in order to run: the services box and builder boxes.
+At a high level, CircleCI Enterprise has two kinds of instances that it needs in order to run: the services box and builder boxes.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/enterprise-network-diagram.png)
 
@@ -35,7 +35,7 @@ The first is a services box which contains the CircleCI frontend and all interna
 | Administrators              | 22                      | SSH                    |
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
-| Github (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+| GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 
 #### The Builder Boxes
 ---
@@ -50,7 +50,7 @@ Our Builder Boxes handle running your builds, and store no state themselves. Eac
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
 | Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
 
-#### Github
+#### GitHub
 ---
 
 | Source        | Ports   | Use          |

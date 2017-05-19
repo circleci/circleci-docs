@@ -20,7 +20,7 @@ Once on the GA version, future updates to the newest release are simple to perfo
 Briefly, in two ways:
 
 1. iOS builds will be down for approximately 10 minutes, up to an hour if there are any errors in reconnecting. 
-2. This upgrade does not preserve user / project follow settings, so your end users will need to log back into the system once it is up and running and re-follow the projects the care about. All UI settings and configuration for those projects will be preserved (including environent variables). So once an admin of a particular Github Org refollows the project on CircleCI, the webhooks will reconnect and builds will start right where they left off. This can be done before killing the old installation, resulting in 0 downtime.
+2. This upgrade does not preserve user / project follow settings, so your end users will need to log back into the system once it is up and running and re-follow the projects the care about. All UI settings and configuration for those projects will be preserved (including environment variables). So once an admin of a particular GitHub Org refollows the project on CircleCI, the webhooks will reconnect and builds will start right where they left off. This can be done before killing the old installation, resulting in 0 downtime.
 
 ### Step 1. Preserving your settings
 
@@ -30,7 +30,7 @@ If you have iOS, you will also need access to the public/private key pair and IP
 
 ### Step 2. Setting up your new CircleCI
 
-Next you'll want to setup a new installation of CircleCI, following the doc here: <https://enterprise-docs.circleci.com/getting-started/aws/>. In order to prevent downtime, we recommend setting up a new Github Application as well. 
+Next you'll want to setup a new installation of CircleCI, following the doc here: <https://enterprise-docs.circleci.com/getting-started/aws/>. In order to prevent downtime, we recommend setting up a new GitHub Application as well. 
 
 If you have any iOS resources, you'll also want to launch an iOS builder (Step 1 of the iOS install process: <https://enterprise-docs.circleci.com/ios-install/>
 
@@ -39,7 +39,7 @@ If you have any iOS resources, you'll also want to launch an iOS builder (Step 1
 There are two things you need to do to get your new CircleCI back up and running:
 
 1. Import the settings you exported in step 1: <https://enterprise-docs.circleci.com/resources/export-import-projects/>.
-2. Migrate repos over. Have an admin for each project refollow the repo with the new CirclCI, so that the webhooks are reattached. Once they follow it on the new CircleCI, both installtions will be submitting commit statuses. If you would like to prevent this, you can delete the webhook for the old CircleCI installation manually. ***If you do not want to deal with the possibility of the two CircleCI installtions overwriting each other's commit statuses, you can perfomr this step after shutting down your old installation, but that will result in brief downtime***
+2. Migrate repos over. Have an admin for each project refollow the repo with the new CircleCI, so that the webhooks are reattached. Once they follow it on the new CircleCI, both installations will be submitting commit statuses. If you would like to prevent this, you can delete the webhook for the old CircleCI installation manually. ***If you do not want to deal with the possibility of the two CircleCI installtions overwriting each other's commit statuses, you can perfomr this step after shutting down your old installation, but that will result in brief downtime***
 
 ### Step 4. [DOWNTIME] Destroy the old CircleCI and finish the iOS installation
 
