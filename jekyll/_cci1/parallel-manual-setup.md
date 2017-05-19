@@ -109,7 +109,7 @@ command like this to include the RSpec Junit formatter:
 ```
 test:
   override:
-    - bundle exec rspec --format RspecJunitFormatter --out $CIRCLE_TEST_REPORTS/rspec.xml:
+    - bundle exec rspec --format progress --format RspecJunitFormatter --out $CIRCLE_TEST_REPORTS/rspec.xml:
         parallel: true
         files:
           - spec/unit/sample.rb   # can be a direct path to file
