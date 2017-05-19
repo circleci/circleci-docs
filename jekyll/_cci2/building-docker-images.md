@@ -29,7 +29,7 @@ jobs:
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 ### Example
-Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/circleci/cci-demo-docker):
+Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/cci-demo-docker):
 
 ```YAML
 version: 2
