@@ -57,6 +57,10 @@ follow:
   url: "/api/v1.1/project/:vcs-type/:username/:project/follow"
   description: "Follow a new project. CircleCI will then monitor the project for automatic building of commits."
   method: "POST"
+  params:
+    - {name: "vcs-type", description: "The version control system being utilized by the project. See <a href='https://circleci.com/docs/api/v1-reference/#version-control-system-vcs-type'><b>:vcs-type</b></a>."}
+    - {name: "username", description: "The API returns builds starting from this offset, defaults to 0.", example: 5}
+    - {name: "project", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\", \"running\", or defaults to no filter.", example: "completed"}
   response: |
     {
       "followed" : true,

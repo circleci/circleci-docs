@@ -96,25 +96,25 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 ### Projects
 <dl>
-<dt>
-  GET: /projects
+<dt markdown="1">
+  [GET: /projects]({{ site.baseurl }}/api/projects)
 </dt>
 <dd>
   List of all the projects you're following on CircleCI, with build information organized by branch.
 </dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/follow
+<dt markdown="1">
+  [POST: /project/:vcs-type/:username/:project/follow]({{ site.baseurl }}/api/follow)
 </dt>
 <dd>
   Follow a new project on CircleCI.
 </dd>
-<dt>
+<dt markdown="1">
   GET: /project/:vcs-type/:username/:project
 </dt>
 <dd>
   Build summary for each of the last 30 builds for a single git repo.
 </dd>
-<dt>
+<dt markdown="1">
   GET: /recent-builds
 </dt>
 <dd>
