@@ -4,7 +4,7 @@ title: "Language Guide: Python"
 short-title: "Python"
 description: "Building and Testing with Python on CircleCI 2.0"
 categories: [language-guides]
-order: 6
+order: 7
 ---
 
 ## New to CircleCI 2.0?

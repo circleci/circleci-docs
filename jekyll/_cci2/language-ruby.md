@@ -4,7 +4,7 @@ title: "Language Guide: Ruby"
 short-title: "Ruby"
 description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
-order: 7
+order: 8
 ---
 
 ## New to CircleCI 2.0?

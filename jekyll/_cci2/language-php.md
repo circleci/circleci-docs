@@ -4,7 +4,7 @@ title: "Language Guide: PHP"
 short-title: "PHP"
 description: "Building and Testing with PHP on CircleCI 2.0"
 categories: [language-guides]
-order: 5
+order: 6
 ---
 
 ## New to CircleCI 2.0?
