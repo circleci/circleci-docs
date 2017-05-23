@@ -89,6 +89,10 @@
 - section: cci2
   slug: getting-started
   name: "Getting Started"
+  
+- section: cci2
+  slug: migration
+  name: "Migration"
 
 - section: cci2
   slug: language-guides
