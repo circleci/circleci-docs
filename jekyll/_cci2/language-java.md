@@ -46,7 +46,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}-{{ epoch }}
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn package
       
