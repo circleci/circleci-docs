@@ -4,7 +4,7 @@ title: "Language Guide: JavaScript"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and NodeJS on CircleCI 2.0"
 categories: [language-guides]
-order: 4
+order: 5
 ---
 
 ## New to CircleCI 2.0?

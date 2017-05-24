@@ -13,6 +13,7 @@ Code that builds on Linux will generally build on CircleCI 2.0. For some languag
 
 - **Clojure 1.8 and later**, see <https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> and <https://hub.docker.com/r/circleci/clojure>
 - **Go 1.7 and later**, see <https://github.com/CircleCI-Public/circleci-demo-go> and <https://hub.docker.com/r/circleci/golang>
+- **Java 8 and later**, see <https://github.com/CircleCI-Public/circleci-demo-java-spring> and <https://hub.docker.com/r/circleci/openjdk>
 - **Node.js 4 and later**, see <https://github.com/CircleCI-Public/circleci-demo-javascript-express> and <https://hub.docker.com/r/circleci/node>
 - **PHP 5 and later**, see <https://github.com/CircleCI-Public/circleci-demo-php-laravel> and <https://hub.docker.com/r/circleci/php>
 - **Python 2 and later**, see <https://github.com/CircleCI-Public/cci-demo-python-flask> or <https://github.com/CircleCI-Public/circleci-demo-python-django> and <https://hub.docker.com/r/circleci/python>
