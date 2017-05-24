@@ -27,4 +27,4 @@ To start running builds on CircleCI 2.0 Beta, complete the following steps:
 
 7. Click the Authorize Application or equivalent button.
 
-The CircleCI Builds Dashboard appears. You are ready to configure CircleCI for your project. See the Build a Project doc to configure your first simple 2.0 build.
+The CircleCI Builds Dashboard appears. You are ready to configure CircleCI for your project. See the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to configure your first simple 2.0 build.
