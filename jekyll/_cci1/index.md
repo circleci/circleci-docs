@@ -20,13 +20,13 @@ For example, after a software repository on GitHub or Bitbucket is authorized an
 For some language versions, CircleCI provides demo applications, as follows:  
 
 - **Go 1.5.3**, see the [Golang Guide]({{ site.baseurl }}/1.0/language-go/)
-- **Haskell 7.4 and later**, see the [Haskell Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-haskell/)
-- **Java JDK6 and later**, see the [Java Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-java/)
-- **Node.js all versions**, see the [Node Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-nodejs/)
-- **PHP 5 and later**, see the [PHP Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-php/)
-- **Python 2.6.6 and later**, see the [Python Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-python/)
-- **Ruby 1.8 and later**, see the [Ruby/Rails Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/language-ruby-on-rails/) 
-- **Scala 0.13.11 and later**, see the [Scala Guide]({{ site.baseurl }} https://circleci.com/docs/1.0/scala/)
+- **Haskell 7.4 and later**, see the [Haskell Guide]({{ site.baseurl }}/1.0/language-haskell/)
+- **Java JDK6 and later**, see the [Java Guide]({{ site.baseurl }}/1.0/language-java/)
+- **Node.js all versions**, see the [Node Guide]({{ site.baseurl }}/1.0/language-nodejs/)
+- **PHP 5 and later**, see the [PHP Guide]({{ site.baseurl }}/1.0/language-php/)
+- **Python 2.6.6 and later**, see the [Python Guide]({{ site.baseurl }}/1.0/language-python/)
+- **Ruby 1.8 and later**, see the [Ruby/Rails Guide]({{ site.baseurl }}/1.0/language-ruby-on-rails/) 
+- **Scala 0.13.11 and later**, see the [Scala Guide]({{ site.baseurl }}/1.0/scala/)
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Groovy, Haxe, Javascript, Perl, Rust, Scala and many more.
 
