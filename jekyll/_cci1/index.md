@@ -26,7 +26,7 @@ For some language versions, CircleCI provides demo applications, as follows:
 - **PHP 5 and later**, see the [PHP Guide]({{ site.baseurl }}/1.0/language-php/)
 - **Python 2.6.6 and later**, see the [Python Guide]({{ site.baseurl }}/1.0/language-python/)
 - **Ruby 1.8 and later**, see the [Ruby/Rails Guide]({{ site.baseurl }}/1.0/language-ruby-on-rails/) 
-- **Scala 0.13.11 and later**, see the [Scala Guide]({{ site.baseurl }}/1.0/scala/)
+- **Scala 0.13.11 and later**, see the [Scala Guide]({{ site.baseurl }}/1.0/language-scala/)
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Groovy, Haxe, Javascript, Perl, Rust, Scala and many more.
 
