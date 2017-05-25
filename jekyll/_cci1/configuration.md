@@ -5,6 +5,8 @@ categories: [getting-started,reference]
 description: How to configure CircleCI
 order: 30
 ---
+* Contents
+{:toc}
 
 CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
 
