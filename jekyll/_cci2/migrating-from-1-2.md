@@ -9,7 +9,7 @@ order: 15
 
 CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will help you search and replace your 1.0 keys with 2.0 keys.
 
-## Prerequisites
+## Steps to Configure Required 2.0 Keys
 
 1. Copy your existing `circle.yml` file into a new directory called `.circle` at the root of your project repository.
 
@@ -17,35 +17,40 @@ CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will he
 
 3. Add `version: 2` to the top of the `.circle/config.yml` file.
 
-4. If your configuration in cludes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`. Otherwise, add the following two lines to your `config.yml` file, after the verison line.
-
+4. Add the following two lines to your `config.yml` file, after the verison line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`.
      ```
      jobs:
        build:
      ```
+5. Add the language and version to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
+     ```
+       ruby:
+         version: 2.3
+     ```
+     Replace with the following two lines:
+     ```
+         docker:
+           - image: ruby:2.3
+     ```
+     Or
 
-## Search and Replace Keys
-
-- Add the language and version to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version, replace the language and version associated with your application, for example:
-
-```
-  ruby:
-    version: 2.3
-```
-
-Replace with the following two lines:
-
-```
-    docker:
-      - image: ruby:2.3
-```
-
-Or
-
-```
+     ```
     machine: true
-```
+     ```
+6. Nest `checkout:` under `steps:` by search and replacing
+     ```
+     checkout:
+       post:
+     ```
+     With the following:
+     ```
+         steps:
+           - checkout
+           - run:
+     ```
+7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
+## Search and Replace Deprecated 2.0 Keys
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 
@@ -82,20 +87,6 @@ With an appropriate `run` Step, for example:
       - run: echo 127.0.0.1 circlehost | tee -a /etc/hosts
 ```
 
-- Nest `checkout:` under `steps:` by search and replacing
-
-```
-checkout:
-  post:
-```
-
-With the following:
-
-```
-    steps:
-      - checkout
-      - run:
-```
 
 - Search and replace the `dependencies:`, `database`, or `test` and `override:` lines, for example:
 
@@ -137,6 +128,6 @@ With the following, nested under `steps:` and customizing for your application a
      - deploy:
 ```
 
-**Note:** Currently, 2.0 Beta does not include integration support. To write your own manual `deploy` steps, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+**Note:** Currently, 2.0 Beta does not include continuous deployment support. To write your own manual `deploy` steps, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
-- Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. Fix up any issues and commit the updated `.circle/config.yml` file. CircleCI automatically starts a test run on CircleCI 2.0 with a 2.0 icon on the builds page for that run.
+- Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes. Fix up any issues and commit the updated `.circle/config.yml` file. CircleCI automatically starts a test run on CircleCI 2.0 with a 2.0 icon on the builds page for that run.
