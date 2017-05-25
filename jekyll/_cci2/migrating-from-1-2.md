@@ -17,28 +17,35 @@ CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will he
 
 3. Add `version: 2` to the top of the `.circle/config.yml` file.
 
-4. Replace `machine:` with the following two lines, nesting all of the following sections under `build`:
+4. If your configuration in cludes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`. Otherwise, add the following two lines to your `config.yml` file, after the verison line.
 
-```
-jobs:
-  build:
-```
+     ```
+     jobs:
+       build:
+     ```
 
 ## Search and Replace Keys
 
-- Replace the language and version associated with your application, for example:
+- Add the language and version to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version, replace the language and version associated with your application, for example:
 
 ```
   ruby:
     version: 2.3
 ```
 
-With the following two lines:
+Replace with the following two lines:
 
 ```
     docker:
       - image: ruby:2.3
 ```
+
+Or
+
+```
+    machine: true
+```
+
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 
