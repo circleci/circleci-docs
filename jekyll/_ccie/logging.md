@@ -85,7 +85,7 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
 
 You may then configure `syslog` to forward logging to a centralized rsyslog server, or you can configure a local logging agent to monitor the syslog rather than monitor files.
 
-The Services box uses Docker.  You can customize tbe Docker daemon to route logs to your desired supported destination.  For more details see the [Docker documentation on logging drivers](https://docs.docker.com/engine/reference/logging/overview/).
+The Services box uses Docker.  You can customize the Docker daemon to route logs to your desired supported destination.  For more details see the [Docker documentation on logging drivers](https://docs.docker.com/engine/reference/logging/overview/).
 
 While syslog support is quite popular, we find most users prefer file-based
 agent configuration.  Many tools default to file-based logging, and _using the
