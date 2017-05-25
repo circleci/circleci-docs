@@ -30,7 +30,7 @@ sudo docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
     circleci/builder-base:some-version
 ```
 
-#### Sharing the Docker Socket
+### Sharing the Docker Socket
 
 **NOTE**: The primary drawback here is security-related. Giving builds access to the Docker daemon on the host is basically equivalent to giving them root access to the machine. Another option is to use dedicated remote docker hosts exposed to builds via TCP sockets.
 
