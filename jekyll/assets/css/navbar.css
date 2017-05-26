@@ -1,0 +1,200 @@
+.nav-toggle.two {
+  display: none;
+  background: #161616;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  top: 0;
+  color: #ffffff;
+  height: 70px; }
+  .nav-toggle.two .dashboard-link {
+    display: none; }
+  .nav-toggle.two .widescreen .logo {
+    position: absolute;
+    height: 35px;
+    top: 18px; }
+  .nav-toggle.two .widescreen a {
+    color: inherit;
+    text-decoration: none; }
+    .nav-toggle.two .widescreen a:hover {
+      color: #32C984; }
+  .nav-toggle.two .widescreen .main-nav {
+    list-style: none;
+    position: absolute;
+    font-size: 14px; }
+    .nav-toggle.two .widescreen .main-nav > .nav-item {
+      display: inline-block;
+      cursor: pointer; }
+      .nav-toggle.two .widescreen .main-nav > .nav-item:hover .submenu {
+        display: block; }
+    .nav-toggle.two .widescreen .main-nav.left-links {
+      left: 92px;
+      top: 24.5px;
+      font-weight: 700; }
+      .nav-toggle.two .widescreen .main-nav.left-links > .nav-item {
+        padding: 0 14px 0 14px; }
+    .nav-toggle.two .widescreen .main-nav.right-links {
+      right: 0;
+      top: 10px;
+      z-index: 0; }
+      .nav-toggle.two .widescreen .main-nav.right-links .btn, .nav-toggle.two .widescreen .main-nav.right-links .btn-sm, .nav-toggle.two .widescreen .main-nav.right-links .btn-cta, .nav-toggle.two .widescreen .main-nav.right-links form .morphing-button button[type=submit], form .morphing-button .nav-toggle.two .widescreen .main-nav.right-links button[type=submit] {
+        margin-bottom: 5px; }
+      .nav-toggle.two .widescreen .main-nav.right-links > .nav-item.default-item {
+        padding: 0 6px; }
+      .nav-toggle.two .widescreen .main-nav.right-links > .nav-item.divider-left {
+        padding: 8px 18px;
+        border-left: 1px solid #555555;
+        margin-left: 8px; }
+  .nav-toggle.two .widescreen .submenu {
+    display: none;
+    position: absolute; }
+    .nav-toggle.two .widescreen .submenu .subnav {
+      margin-top: 20px;
+      background: #ffffff;
+      color: #161616;
+      padding: 4px 16px 10px 15px;
+      border-radius: 2px;
+      box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.2);
+      font-weight: 400;
+      min-width: 175px; }
+      .nav-toggle.two .widescreen .submenu .subnav::before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 15px;
+        left: 28px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #ffffff; }
+      .nav-toggle.two .widescreen .submenu .subnav .subnav-item {
+        display: block;
+        padding: 5px 2px;
+        margin: 4px 0;
+        width: 100%; }
+        .nav-toggle.two .widescreen .submenu .subnav .subnav-item.border-bottom {
+          border-bottom: 1px solid #cccccc; }
+        .nav-toggle.two .widescreen .submenu .subnav .subnav-item:hover {
+          color: #32C984; }
+  .nav-toggle.two .narrowscreen {
+    display: none; }
+    .nav-toggle.two .narrowscreen .navbar-toggle {
+      position: absolute;
+      top: 13px;
+      left: 10px;
+      display: none;
+      display: block;
+      border: none;
+      background: transparent !important;
+      background: #000000; }
+      .nav-toggle.two .narrowscreen .navbar-toggle:hover {
+        background: transparent !important; }
+      .nav-toggle.two .narrowscreen .navbar-toggle .icon-bar {
+        width: 22px;
+        -webkit-transition: all .2s;
+                transition: all .2s;
+        background: #ffffff; }
+      .nav-toggle.two .narrowscreen .navbar-toggle .top-bar {
+        -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+        -webkit-transform-origin: 10% 10%;
+            -ms-transform-origin: 10% 10%;
+                transform-origin: 10% 10%; }
+      .nav-toggle.two .narrowscreen .navbar-toggle .middle-bar {
+        opacity: 0; }
+      .nav-toggle.two .narrowscreen .navbar-toggle .bottom-bar {
+        -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+        -webkit-transform-origin: 10% 90%;
+            -ms-transform-origin: 10% 90%;
+                transform-origin: 10% 90%; }
+      .nav-toggle.two .narrowscreen .navbar-toggle.collapsed .top-bar {
+        -webkit-transform: rotate(0);
+            -ms-transform: rotate(0);
+                transform: rotate(0); }
+      .nav-toggle.two .narrowscreen .navbar-toggle.collapsed .middle-bar {
+        opacity: 1; }
+      .nav-toggle.two .narrowscreen .navbar-toggle.collapsed .bottom-bar {
+        -webkit-transform: rotate(0);
+            -ms-transform: rotate(0);
+                transform: rotate(0); }
+    .nav-toggle.two .narrowscreen .logo {
+      height: 35px;
+      position: absolute;
+      display: block;
+      left: 0;
+      right: 0;
+      margin: 20px auto; }
+    .nav-toggle.two .narrowscreen .login {
+      position: absolute;
+      right: 10px;
+      top: 24px; }
+      .nav-toggle.two .narrowscreen .login a {
+        color: #ffffff;
+        font-weight: 400; }
+    .nav-toggle.two .narrowscreen .navbar-toggle.collapsed ~ .dropdown-menu2 {
+      display: none; }
+    .nav-toggle.two .narrowscreen .dropdown-menu2 {
+      position: absolute;
+      width: 100%;
+      list-style: none;
+      top: 65px;
+      left: 0px;
+      padding: 0 12px 12px 12px;
+      background: #161616; }
+      .nav-toggle.two .narrowscreen .dropdown-menu2 > .border-bottom {
+        border-bottom: 1px solid #555555; }
+      .nav-toggle.two .narrowscreen .dropdown-menu2 li {
+        color: inherit;
+        width: 100%;
+        padding: 14px 0;
+        cursor: pointer;
+        font-weight: 600; }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li a:not(.btn):not(.btn-sm):not(.btn-cta) {
+          color: inherit;
+          padding: 0;
+          font-weight: inherit;
+          text-decoration: none; }
+          .nav-toggle.two .narrowscreen .dropdown-menu2 li a:not(.btn):not(.btn-sm):not(.btn-cta):hover {
+            background: #161616;
+            color: #32C984; }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn, .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn-sm, .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn-cta, .nav-toggle.two .narrowscreen .dropdown-menu2 li form .morphing-button button[type=submit], form .morphing-button .nav-toggle.two .narrowscreen .dropdown-menu2 li button[type=submit] {
+          color: #ffffff;
+          font-weight: 600; }
+          .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn:hover, .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn-sm:hover, .nav-toggle.two .narrowscreen .dropdown-menu2 li .btn-cta:hover, .nav-toggle.two .narrowscreen .dropdown-menu2 li form .morphing-button button[type=submit]:hover, form .morphing-button .nav-toggle.two .narrowscreen .dropdown-menu2 li button[type=submit]:hover {
+            background: #32C984; }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li.arrow > .subnav {
+          list-style: none;
+          padding: 0;
+          margin-top: 15px;
+          opacity: .8; }
+          .nav-toggle.two .narrowscreen .dropdown-menu2 li.arrow > .subnav .subnav-item {
+            padding-left: 0;
+            font-weight: 500; }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li.arrow.collapsed .subnav {
+          display: none; }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li.arrow.collapsed .fa-angle-right {
+          -webkit-transform: rotate(90deg);
+              -ms-transform: rotate(90deg);
+                  transform: rotate(90deg); }
+        .nav-toggle.two .narrowscreen .dropdown-menu2 li.arrow .fa-angle-right {
+          position: absolute;
+          right: 15px;
+          color: #04aa51;
+          font-size: 20px;
+          -webkit-transform: rotate(-90deg);
+              -ms-transform: rotate(-90deg);
+                  transform: rotate(-90deg); }
+  @media screen and (max-width: 992px) {
+    .nav-toggle.two {
+      position: absolute;
+    }
+    .nav-toggle.two .widescreen {
+      display: none; }
+    .nav-toggle.two .narrowscreen {
+      display: block; } }
+
+.loggedin .nav-toggle.two .visitor-item {
+  display: none; }
