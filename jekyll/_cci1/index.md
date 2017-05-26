@@ -17,18 +17,18 @@ For example, after a software repository on GitHub or Bitbucket is authorized an
 
 ## Programming Language Support
 
-For some language versions, CircleCI provides demo applications, as follows:  
+CircleCI 1.0 supports the use of any language version that is installable on Ubuntu 14.04. Additional versions may be installed at runtime, see the [Ubuntu 14.04 Trusty doc]({{ site.baseurl }}/1.0/build-image-trusty/#programming-languages) for the defaults. For some language versions, CircleCI provides demo applications, as follows:  
 
 - **Go 1.5.3**, see the [Golang Guide]({{ site.baseurl }}/1.0/language-go/)
 - **Haskell 7.4 and later**, see the [Haskell Guide]({{ site.baseurl }}/1.0/language-haskell/)
 - **Java JDK6 and later**, see the [Java Guide]({{ site.baseurl }}/1.0/language-java/)
 - **Node.js all versions**, see the [Node Guide]({{ site.baseurl }}/1.0/language-nodejs/)
 - **PHP 5 and later**, see the [PHP Guide]({{ site.baseurl }}/1.0/language-php/)
-- **Python 2.6.6 and later**, see the [Python Guide]({{ site.baseurl }}/1.0/language-python/)
+- **Python 2.x or 3.x**, see the [Python Guide]({{ site.baseurl }}/1.0/language-python/)
 - **Ruby 1.8 and later**, see the [Ruby/Rails Guide]({{ site.baseurl }}/1.0/language-ruby-on-rails/) 
 - **Scala 0.13.11 and later**, see the [Scala Guide]({{ site.baseurl }}/1.0/language-scala/)
 
-Build projects in C, C#, C++, Clojure, Elixir, Erlang, Groovy, Haxe, Javascript, Perl, Rust, Scala and many more.
+CircleCI works with projects written in C, C#, C++, Clojure, Elixir, Erlang, Groovy, Haxe, Javascript, Perl, Rust, Scala and many more!
 
 ## Continuous Deployment 
 
