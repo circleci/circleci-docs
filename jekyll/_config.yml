@@ -45,6 +45,8 @@ collections:
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
+  glossary: 
+    name: "Glossary"
 
 twitter_username: circleci
 github_username:  circleci
