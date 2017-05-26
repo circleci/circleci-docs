@@ -30,12 +30,7 @@ CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will he
      Replace with the following two lines:
      ```
          docker:
-           - image: ruby:2.3
-     ```
-     Or
-
-     ```
-    machine: true
+           - image: circleci/ruby:2.3
      ```
 6. Nest `checkout:` under `steps:` by search and replacing
      ```
