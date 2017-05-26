@@ -13,9 +13,8 @@ order: 1
 ## Why Migrate from CircleCI 1.0 to 2.0?
 
 - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
-- In 2.0, Jobs are broken into Steps. You compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
-- 2.0 Jobs support almost all public Docker images. You can also create a custom image and run jobs on it or compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
-- If your job uses Docker, CircleCI runs your job on a dedicated VM so you can access all of Docker’s features. 
+- In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
+- 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
 ## Can I try CircleCI 2.0 while still using 1.0?
 
