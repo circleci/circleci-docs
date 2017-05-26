@@ -73,7 +73,7 @@
           {% unless page.hide_auth_buttons %}
             <li><a href="https://circleci.com/vcs-authorize/" title="Log into CircleCI" data-hj-masked class="login login-link menu-item">Log In</a></li>
             <li>
-              <a href="{{ page.signup_link | default: '/signup/' }}"
+              <a href="https://circleci.com/signup/"
                 class="signup-link btn btn-success navbar-btn menu-item {% if page.nav-hl == 'signup' %}active{% endif %}"
                 data-analytics-action="{{ site.analytics.events.signup_clicked }}"
                 data-analytics-location="nav">
@@ -94,7 +94,7 @@
       <div class="col-md-12">
 
         <div class="widescreen">
-          <a href="/"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
+          <a href="https://circleci.com/"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
 
           <ul class="left-links main-nav">
             <li class="nav-item"><a href="#">Features</a>
