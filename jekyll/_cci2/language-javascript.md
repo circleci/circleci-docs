@@ -22,7 +22,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 ## Pre-built CircleCI Docker images
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 
