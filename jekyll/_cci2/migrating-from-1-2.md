@@ -11,11 +11,11 @@ CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will he
 
 ## Steps to Configure Required 2.0 Keys
 
-1. Copy your existing `circle.yml` file into a new directory called `.circle` at the root of your project repository.
+1. Copy your existing `circle.yml` file into a new directory called `.circleci` at the root of your project repository.
 
-2. Rename `.circle/circle.yml` to `.circle/config.yml`.
+2. Rename `.circleci/circle.yml` to `.circleci/config.yml`.
 
-3. Add `version: 2` to the top of the `.circle/config.yml` file.
+3. Add `version: 2` to the top of the `.circleci/config.yml` file.
 
 4. Add the following two lines to your `config.yml` file, after the verison line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`.
      ```
