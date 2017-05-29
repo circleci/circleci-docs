@@ -13,7 +13,7 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 ## Quickstart: demo JavaScript NodeJS reference project
 
-We maintain a reference JavaScript NodeJS project to show how to build Django on CircleCI 2.0:
+We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project building on CircleCI</a>
