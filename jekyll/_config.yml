@@ -21,6 +21,7 @@ kramdown:
   input: GFM
 
 collections:
+  _glossary:
   cci1:
     name: "1.0 Docs"
     output: true
@@ -45,11 +46,9 @@ collections:
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
-  glossary: 
-    name: "Glossary"
 
 twitter_username: circleci
-github_username:  circleci
+github_username: circleci
 
 defaults:
   -

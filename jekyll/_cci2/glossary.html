@@ -7,9 +7,9 @@ categories: [reference]
 order: 2
 ---
 
-{% for term in site.glossary %}
-    <h3 id="{{ term.term | slugify }}">{{ term.term }}  </h3>
-    {{ term.content | markdownify }}    
+{% for term in site._glossary %}
+    <h3 id="{{ term.term | slugify }}">{{ term.term }}</h3>
+    {{ term.output }}
 {% endfor %}
 
 
