@@ -17,7 +17,7 @@ The following sections walk through how Jobs and Steps are configured for this a
 
 ## Basic Setup 
 
-The `.circle/config.yml` is comprised of several Jobs for this application. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
+The `.circleci/config.yml` is comprised of several Jobs for this application. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
@@ -184,7 +184,7 @@ Notes on the added keys:
 <p><strong>Note:</strong> CircleCI 2.0 Beta does not yet support seamlessly integrated Heroku and AWS deployments. Keys and configuration added to the Heroku Deployment and AWS CodeDeploy pages in CircleCI are currently not available to 2.0 jobs.</p>
 </div>
 
-The demo `.circle/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:` and `deploy:` keys to automatically deploy when a build on `master` passes all tests:
+The demo `.circleci/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:` and `deploy:` keys to automatically deploy when a build on `master` passes all tests:
 
 ```
 version: 2
