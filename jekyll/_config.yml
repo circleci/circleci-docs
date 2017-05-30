@@ -21,33 +21,41 @@ kramdown:
   input: GFM
 
 collections:
+  # this is named with an underscore because it needs to be processed
+  # before the collections that render the actual pages.
+  # jekyll is processing in alpha order...
+  _glossary:
   cci1:
     name: "1.0 Docs"
+    site_section: true
     output: true
     permalink: /1.0/:path/
     prefix: "/1.0"
     selectorName: "1.0"
   ccie:
     name: "Enterprise Docs"
+    site_section: true
     output: true
     permalink: /enterprise/:path/
     prefix: "/enterprise"
     selectorName: "Enterprise"
   cci2:
     name: "2.0 Docs"
+    site_section: true
     output: true
     permalink: /2.0/:path/
     prefix: "/2.0"
     selectorName: "2.0"
   api:
     name: "API Docs"
+    site_section: true
     output: true
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
 
 twitter_username: circleci
-github_username:  circleci
+github_username: circleci
 
 defaults:
   -

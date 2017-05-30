@@ -5,7 +5,7 @@
 	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
 		<option value="{{ site.baseurl }}/">Docs Home</option>
 		{% for collection in site.collections %}
-		{% if collection.label == "posts" or collection.selectorName == false %}{% continue %}{% endif %}
+		{% unless collection.site_section %}{% continue %}{% endunless %}
 		<option value="{{ site.baseurl }}{{ collection.prefix }}/" {% if collection.label == section.label %}selected{% endif %}>{{ collection.selectorName }}</option>
 		{% endfor %}
 	</select>
