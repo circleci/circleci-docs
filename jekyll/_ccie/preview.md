@@ -12,7 +12,7 @@ hide: true
 
 CircleCI 2.0 is our new infrastructure that provides a number of new valuable options for your development teams, including:
 * New configuration paradigm with any number of jobs and workflows to orchestrate them. 
-* Customer images for execution on a per-job basis.
+* Custom images for execution on a per-job basis.
 * Fine-grained performance with ustom caching & per-job CPU/memory allocation.
 
 Starting in Q2 2017 we will be offering a preview release to an expanding set of customers. To participate, contact your Account Executive.
