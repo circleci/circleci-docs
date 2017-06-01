@@ -17,7 +17,7 @@ it to an macOS build by enabling the "Build OS X project" option under the
 
 ## Software Versions
 
-We maintain a [manifest of the software installed on our macOS image on GitHub]({{ site.macos_manifest_url }}).
+We maintain a [manifest of the software installed on our OSX and macOS build images](/docs/1.0/build-images-macos/#software).
 
 ## Basic setup
 
@@ -66,7 +66,7 @@ machine:
     version: 8.2
 ```
 
-A list of the [versions of Xcode that we have available is located on GitHub]({{ site.macos_manifest_url }}).
+You can find a list of available versions of Xcode [on the macOS build images page](/docs/1.0/build-images-macos/#software).
 
 ### CocoaPods
 
@@ -156,7 +156,7 @@ test:
 ```
 
 The destination can be selected from the simulators [pre-installed in our
-build image]({{ site.macos_manifest_url }}).
+build images](/docs/1.0/build-images-macos/#software).
 
 In some situations you might also want to build with [`xctool`](https://github.com/facebook/xctool),
 an alternative build tool. Please mind that some of the `xcodebuild` functionality might not be
