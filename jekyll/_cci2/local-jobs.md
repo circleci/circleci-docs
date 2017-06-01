@@ -7,6 +7,8 @@ categories: [configuring-jobs]
 order: 30
 ---
 
+{% include beta-premium-feature.html %}
+
 The **CircleCI CLI** reproduces the CircleCI environment locally and runs jobs as if they were running on CircleCI. The tool enables better debugging and faster configuration.
 
 ## Common Use Cases
