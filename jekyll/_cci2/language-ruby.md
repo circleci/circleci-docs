@@ -4,7 +4,7 @@ title: "Language Guide: Ruby"
 short-title: "Ruby"
 description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
-order: 7
+order: 8
 ---
 
 ## Overview
@@ -210,6 +210,7 @@ For more on `circleci tests glob` and `circleci tests split` commands, please re
 Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails) to see how this looks when building on CircleCI.
 
 If you have any questions about the specifics of testing your Ruby application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+<<<<<<< HEAD
 
 ## Detailed Examples
 
@@ -221,3 +222,5 @@ If you have any questions, head over to our [community forum](https://discuss.ci
 
 [fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork
 [rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
+=======
+>>>>>>> 0a1ca328fba96955abbc77e465bddc6c3fe5ac5d

@@ -16,6 +16,7 @@ Language | Framework | GitHub Repo Name
 [Clojure] | Luminus | [circleci-demo-clojure-luminus]
 [Elixir] | Phoenix | (coming soon)
 [Go] | Go | [circleci-demo-go]
+[Java] | Spring | [circleci-demo-java-spring]
 [JavaScript] | React | [circleci-demo-javascript-express]
 [PHP] | Laravel | [circleci-demo-php-laravel]
 [Python] | Django | [circleci-demo-python-django]
@@ -26,6 +27,7 @@ Language | Framework | GitHub Repo Name
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
 [Go]: {{ site.baseurl }}/2.0/language-go/
+[Java]: {{ site.baseurl }}/2.0/language-java/
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
 [Python]: {{ site.baseurl }}/2.0/language-python/
@@ -33,6 +35,7 @@ Language | Framework | GitHub Repo Name
 
 [circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
 [circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
+[circleci-demo-java-spring]: https://github.com/CircleCI-Public/circleci-demo-java-spring
 [circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
 [circleci-demo-php-laravel]: https://github.com/CircleCI-Public/circleci-demo-php-laravel
 [circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-flask

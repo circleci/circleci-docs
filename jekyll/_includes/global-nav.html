@@ -1,81 +1,190 @@
-<nav class="navbar navbar-fixed-top">
+<nav class="navbar navbar-fixed-top nav-toggle">
   <div class="container">
     <div class="navbar-header">
+      {% unless page.hide_nav %}
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-navigation" aria-expanded="false" aria-controls="#mobile-navigation">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar top-bar"></span>
         <span class="icon-bar middle-bar"></span>
         <span class="icon-bar bottom-bar"></span>
       </button>
-      <a id="logo" class="navbar-brand" href="https://circleci.com">
+      {% endunless %}
+      <a id="logo" class="navbar-brand" href="https://circleci.com/">
         <svg x="0px" y="0px" viewBox="0 0 393 100" height="25"><circle cx="48.5" cy="50" r="11.9"></circle><path d="M48.5,39.3c5.9,0,10.7,4.8,10.7,10.7s-4.8,10.7-10.7,10.7S37.8,55.9,37.8,50S42.6,39.3,48.5,39.3z M48.5,5 C27.6,5,9.9,19.3,5,38.8c-0.1,0.2-0.1,0.4-0.1,0.5c0,1.2,1,2.2,2.2,2.2h18.2c0.9,0,1.6-0.5,2-1.3v-0.1C31,32,39.1,26.4,48.6,26.4 c13,0,23.5,10.5,23.5,23.6S61.6,73.6,48.5,73.6c-9.4,0-17.6-5.6-21.4-13.7v-0.1c-0.4-0.7-1.1-1.3-2-1.3H7.1c-1.2,0-2.2,1-2.2,2.2 c0,0.2,0,0.4,0.1,0.5C9.9,80.7,27.6,95,48.5,95c24.8,0,45-20.2,45-45S73.4,5,48.5,5z M173.1,18.6c0,2.5-2,4.5-4.5,4.5 c-2.5,0-4.5-2-4.5-4.5s2-4.5,4.5-4.5C171.1,14.1,173.1,16.1,173.1,18.6z M171.9,71.3V27.6h-6.8v43.7c0,0.6,0.5,1.1,1.1,1.1h4.5 C171.5,72.4,171.9,72,171.9,71.3z M381.4,11.8c-3.7,0-6.8,3.1-6.8,6.8s3.1,6.8,6.8,6.8s6.8-3.1,6.8-6.8 C388.1,14.8,385,11.8,381.4,11.8z M386.9,27.6v43.7c0,0.6-0.5,1.1-1.1,1.1h-9c-0.6,0-1.1-0.5-1.1-1.1V27.6H386.9z M201.2,26.4 c-6.8,0.4-12.2,3.6-15.8,8.6v-6.3c0-0.6-0.5-1.1-1.1-1.1h-4.5c-0.6,0-1.1,0.5-1.1,1.1l0,0v42.7c0,0.6,0.5,1.1,1.1,1.1h4.5 c0.6,0,1.1-0.5,1.1-1.1V50c0-8.9,6.9-16.2,15.8-16.8c0.6,0,1.1-0.5,1.1-1.1v-4.5C202.3,27,201.8,26.5,201.2,26.4z M261.2,12.9h-4.5 c-0.6,0-1.1,0.5-1.1,1.1v57.2c0,0.6,0.5,1.1,1.1,1.1h4.5c0.6,0,1.1-0.5,1.1-1.1V14.1C262.3,13.5,261.8,12.9,261.2,12.9z M157.4,59 h-5.2c-0.4,0-0.7,0.2-0.9,0.5c-3.1,4.5-8.1,7.4-13.9,7.4c-9.3,0-16.8-7.6-16.8-16.8s7.6-16.8,16.8-16.8c5.9,0,10.9,3,13.9,7.4 c0.2,0.3,0.5,0.5,0.9,0.5h5.2c0.6,0,1.1-0.5,1.1-1.1c0-0.2-0.1-0.4-0.1-0.5c-3.9-7.6-11.9-13-21.1-13c-13,0-23.5,10.5-23.5,23.6 s10.5,23.6,23.6,23.6c9.2,0,17.2-5.3,21.1-13c0.1-0.2,0.1-0.4,0.1-0.5C158.5,59.5,158,59,157.4,59z M247.7,59h-5.2 c-0.4,0-0.7,0.2-0.9,0.5c-3.1,4.5-8.1,7.4-14,7.4c-9.3,0-16.8-7.6-16.8-16.8s7.6-16.8,16.8-16.8c5.9,0,10.9,3,14,7.4 c0.2,0.3,0.5,0.5,0.9,0.5h5.2c0.6,0,1.1-0.5,1.1-1.1c0-0.2,0-0.4-0.1-0.5c-3.9-7.6-11.9-13-21.1-13c-13,0-23.6,10.5-23.6,23.6 s10.5,23.6,23.6,23.6c9.2,0,17.2-5.3,21.1-13c0.1-0.2,0.1-0.4,0.1-0.5C248.8,59.5,248.3,59,247.7,59z M368.5,55.8 c-0.2-0.1-0.4-0.2-0.5-0.2l0,0h-9.7l0,0c-0.4,0-0.7,0.2-1,0.5c-2.2,3.7-6.1,6.2-10.7,6.2c-6.8,0-12.3-5.5-12.3-12.3 s5.5-12.3,12.3-12.3c4.6,0,8.6,2.5,10.7,6.2c0.2,0.4,0.5,0.5,1,0.5l0,0h9.7l0,0c0.2,0,0.4-0.1,0.5-0.2c0.5-0.3,0.6-0.8,0.5-1.3 c-3-9.5-12-16.5-22.5-16.5C333.5,26.4,323,37,323,50s10.5,23.6,23.6,23.6c10.5,0,19.4-6.9,22.5-16.5C369.1,56.6,368.9,56,368.5,55.8 z M292.6,26.4C279.6,26.4,269,37,269,50s10.5,23.6,23.6,23.6c9.2,0,17.2-5.3,21.1-13c0.1-0.2,0.1-0.4,0.1-0.5c0-0.6-0.5-1.1-1.1-1.1 h-5.2c-0.4,0-0.7,0.2-0.9,0.5c-3.1,4.5-8.1,7.4-13.9,7.4c-8.6,0-15.6-6.4-16.6-14.6H315c0.6,0,1.1-0.5,1.1-1.1c0-0.4,0-0.8,0-1.2 C316.2,37,305.6,26.4,292.6,26.4z M276.4,45.5c2-7.1,8.5-12.3,16.2-12.3c7.7,0,14.2,5.2,16.2,12.3H276.4z"></path></svg>
       </a>
-	{% unless page.hide_auth_buttons %}
-	  <a href="https://circleci.com/signup/" class="mobile-nav signup" data-analytics-action="signup-clicked" data-analytics-location="nav">Sign Up</a>
-	{% endunless %}
-	</div>
-    <div class="navbar-collapse collapse" id="mobile-navigation" aria-expanded="false">
-      <ul class="nav navbar-nav">
-        <li class="dropdown {% if page.nav-hl == 'features' %}active{% endif %}">
-          <a href="https://circleci.com/features/" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Features <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown-menu animated slideInDown">
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/features/" class="sub menu-item">Features</a>
+      {% unless page.hide_auth_buttons %}
+        <a href="https://circleci.com/vcs-authorize/"  data-hj-masked class="mobile-nav signup">Log In</a>
+        <a href="https://circleci.com/dashboard" class="dashboard-link mobile-nav">Go to app</a>
+      {% endunless %}
+    </div>
+    {% unless page.hide_nav %}
+      <div class="navbar-collapse collapse" id="mobile-navigation" aria-expanded="false">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle menu-item highlight mobile-only" href="https://circleci.com/signup/" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign Up for Free</a>
+          </li>
+          <li class="dropdown {% if page.nav-hl == 'features' %}active{% endif %}">
+            <a href="https://circleci.com/features/" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Features <i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu animated slideInDown">
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/features/" class="sub menu-item">Features</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/integrations/" class="sub menu-item">Integrations</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/mobile/" class="sub menu-item">Mobile</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/integrations/docker/" class="sub menu-item">Docker</a>
+              </li>
+            </ul>
+          </li>
+          <li class="{% if page.nav-hl == 'enterprise' %}active{% endif %}"><a href="https://circleci.com/enterprise/" class="menu-item">Enterprise</a></li>
+          <li class="{% if page.nav-hl == 'pricing' %}active{% endif %}"><a href="https://circleci.com/pricing/" class="menu-item">Pricing</a></li>
+          <li class="{% if page.nav-hl == 'customers' %}active{% endif %}"><a href="https://circleci.com/customers/" class="menu-item">Customers</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu animated slideInDown">
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/docs/" class="sub menu-item">Documentation</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://discuss.circleci.com/" target="_blank" class="sub menu-item">Community</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/support/premium-support/" class="sub menu-item">Premium Support</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown {% if page.nav-hl == 'more' %}active{% endif %}">
+            <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu animated slideInDown">
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/about/" class="sub menu-item">About Us</a>
+              </li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="https://circleci.com/blog/" class="sub menu-item">Blog</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% unless page.hide_auth_buttons %}
+            <li><a href="https://circleci.com/vcs-authorize/" title="Log into CircleCI" data-hj-masked class="login login-link menu-item">Log In</a></li>
+            <li>
+              <a href="https://circleci.com/signup/"
+                class="signup-link btn btn-success navbar-btn menu-item {% if page.nav-hl == 'signup' %}active{% endif %}"
+                data-analytics-action="{{ site.analytics.events.signup_clicked }}"
+                data-analytics-location="nav">
+                Sign Up
+              </a>
             </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/integrations/" class="sub menu-item">Integrations</a>
-            </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/mobile/" class="sub menu-item">Mobile</a>
-            </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/integrations/docker/" class="sub menu-item">Docker</a>
-            </li>
-          </ul>
-        </li>
-        <li class="{% if page.nav-hl == 'enterprise' %}active{% endif %}"><a href="https://circleci.com/enterprise/" class="menu-item">Enterprise</a></li>
-        <li class="{% if page.nav-hl == 'pricing' %}active{% endif %}"><a href="https://circleci.com/pricing/" class="menu-item">Pricing</a></li>
-        <li class="{% if page.nav-hl == 'customers' %}active{% endif %}"><a href="https://circleci.com/customers/" class="menu-item">Customers</a></li>
-        <li class="dropdown active">
-          <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown-menu animated slideInDown">
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="{{ site.baseurl }}/" class="sub menu-item">Documentation</a>
-            </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://discuss.circleci.com/" target="_blank" class="sub menu-item">Community</a>
-            </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/support/premium-support/" class="sub menu-item">Premium Support</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown {% if page.nav-hl == 'more' %}active{% endif %}">
-          <a href="#" class="dropdown-toggle menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <i class="fa fa-caret-down"></i></a>
-          <ul class="dropdown-menu animated slideInDown">
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/about/" class="sub menu-item">About Us</a>
-            </li>
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" href="https://circleci.com/blog/" class="sub menu-item">Blog</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-	  	{% unless page.hide_auth_buttons %}
-        <li><a href="https://circleci.com/vcs-authorize/" title="Log In with GitHub" class="login login-link menu-item">Log In</a></li>
-		<li>
-			<a href="https://circleci.com/signup/"
-				class="signup-link btn btn-success navbar-btn menu-item {% if page.nav-hl == 'signup' %}active{% endif %}"
-				data-analytics-action="signup-clicked"
-				data-analytics-location="nav">
-				Sign Up
-			</a>
-		</li>
-		{% endunless %}
-        <li><a href="https://circleci.com/dashboard" class="dashboard-link">Go to app</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+          {% endunless %}
+          <li><a href="https://circleci.com/dashboard" class="dashboard-link">Go to app</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    {% endunless %}
   </div><!-- /.container -->
+</nav>
+
+<nav class="nav-toggle two">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="widescreen">
+          <a href="https://circleci.com/"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
+
+          <ul class="left-links main-nav">
+            <li class="nav-item"><a href="#">Features</a>
+              <div class="submenu">
+                <ul class="subnav">
+                  <li class="subnav-item"><a href="https://circleci.com/features/">Overview</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/integrations/">Integrations</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/mobile/">Mobile</a></li>
+                </ul>
+              </div>
+            </li>
+            
+            <li class="nav-item"><a href="https://circleci.com/pricing/">Pricing</a></li>
+            <li class="nav-item"><a href="https://circleci.com/enterprise/">Enterprise</a></li>
+            <li class="nav-item"><a href="https://circleci.com/docs/">Docs</a></li>
+            <li class="nav-item"><a href="https://circleci.com/customers/">Customers</a></li>
+          </ul>
+        
+          <ul class="right-links main-nav">
+            <li class="default-item nav-item"><a href="https://circleci.com/about/">Company</a>
+              <div class="submenu">  
+                <ul class="subnav">
+                  <li class="subnav-item"><a href="https://circleci.com/about/">About Us</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/about/team/">Team</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/jobs/">Jobs</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/contact/">Contact Us</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/blog/">Blog</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/press/">Press</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="default-item nav-item">Support
+              <div class="submenu">
+                <ul class="subnav">
+                  <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/support/premium-support/">Premium Support</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="divider-left nav-item visitor-item"><a href="https://circleci.com/vcs-authorize/">Log in</a></li>
+            <li class="btn nav-item visitor-item"><a href="https://circleci.com/signup/">Sign up</a></li>
+            <li class="dashboard-link divider-left"><a href="https://circleci.com/dashboard">Go to app</a></li>
+          </ul>
+        </div>
+
+        <div class="narrowscreen">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-navigation" aria-expanded="false" aria-controls="#mobile-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+          <img class="logo" src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" alt="CircleCI Home">
+          <span class="login">
+            <a href="https://circleci.com/vcs-authorize/" data-hj-masked class="mobile-nav signup visitor-item">Log in</a>
+            <a href="https://circleci.com/dashboard" class="dashboard-link mobile-nav">Go to app</a>
+          </span>
+
+          <ul class="dropdown-menu2">
+            <li><a href="https://circleci.com/signup/" class="btn">Sign up for free</a></li>
+            <li class="arrow collapsed border-bottom"><i class="fa fa-angle-right" aria-hidden="true"></i>Features
+              <ul class="subnav">
+                <li class="subnav-item"><a href="https://circleci.com/features/">Overview</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/integrations/">Integrations</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/mobile/">Mobile</a></li>
+              </ul>
+            </li>
+            <li class="border-bottom"><a href="https://circleci.com/enterprise/">Enterprise</a></li>
+            <li class="border-bottom"><a href="https://circleci.com/pricing/">Pricing</a></li>
+            <li class="border-bottom"><a href="https://circleci.com/docs/">Docs</a></li>
+            <li class="border-bottom"><a href="https://circleci.com/customers/">Customers</a></li>
+            <li class="arrow collapsed border-bottom"><i class="fa fa-angle-right" aria-hidden="true"></i>Company
+              <ul class="subnav">
+                <li class="subnav-item"><a href="https://circleci.com/about/">About CircleCI</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/about/team/">Team</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/jobs/">Jobs</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/contact/">Contact Us</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/blog/">Blog</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/press/">Press</a></li>
+              </ul>
+            </li>
+            <li class="arrow collapsed"><i class="fa fa-angle-right" aria-hidden="true"></i>Support
+              <ul class="subnav">
+                <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/support/premium-support/">Premium Support</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

@@ -26,4 +26,4 @@ The **Access Key ID** and **Secret Access Key** that you entered will be automat
 
 The built-in Heroku integration via the CircleCI UI is not implemented for CircleCI 2.0.
 
-You can deploy to Heroku manually by setting environment variables. There is a full example in the [Project Walkthrough]( {{ site.baseurl }}/2.0/project-walkthrough/#deployment).
+You can deploy to Heroku manually by setting environment variables. There is a full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/).

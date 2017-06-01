@@ -84,6 +84,10 @@ You will also need to open ports 64535-65535 to let developers optionally SSH in
 (Note: Final startup of the app can take some time as the "circleci/build-image" Docker image is downloaded.)</li>
 </ol>
 
+<p style="font-size: 20px; text-align: center"><strong>A short video walkthrough of the entire install process on AWS:</strong></p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
+
 ## On Other Platforms
 
 It is also possible to install a trial of CircleCI Enterprise on a single VM on other cloud providers,

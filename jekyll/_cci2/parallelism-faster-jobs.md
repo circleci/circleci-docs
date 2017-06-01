@@ -78,6 +78,7 @@ When splitting by `timings`, the tool will assume it’s splitting filenames. If
 #### Additional flags
 - `--index`: set the container index for this invocation of `circleci tests split`
 - `--total`: set the total number of containers to consider
+- `--show-counts`: print test file or test class counts to stderr (default false).  Useful for debugging unexpected balance issues.
 
 When running on CircleCI, these values will be automatically picked up from environment variables.
 

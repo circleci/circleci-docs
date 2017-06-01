@@ -278,20 +278,17 @@ artifacts:
   description: "List the artifacts produced by a given build."
   method: "GET"
   response: |
-    [
-      {
-        node_index: 0,
-        path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-        pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
-      },
-      {
-        node_index: 0,
-        path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-        pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/bakingrhubarb-pie.png"
-      }
-    ]
+    [ {
+      "path" : "raw-test-output/go-test-report.xml",
+      "pretty_path" : "raw-test-output/go-test-report.xml",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+    }, {
+      "path" : "raw-test-output/go-test.out",
+      "pretty_path" : "raw-test-output/go-test.out",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+    } ]
 
 artifacts_latest:
   url: "/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts"
@@ -301,18 +298,17 @@ artifacts_latest:
     - {name: "branch", description: "The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.", example: ":branch"}
     - {name: "filter", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\". Defaults to \"completed\".", example: ":filter"}
   response: |
-    [{
-      node_index: 0,
-      path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-      pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-      url: "https://circleci.com/gh/circleci/tsting/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
-    },
-    {
-      node_index: 0,
-      path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-      pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-      url: "https://circleci.com/gh/circleci/testing/22/artifacts/0//home/ubuntu/circleci-testing/baking/rhubarb-pie.png"
-    }]
+    [ {
+      "path" : "raw-test-output/go-test-report.xml",
+      "pretty_path" : "raw-test-output/go-test-report.xml",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+    }, {
+      "path" : "raw-test-output/go-test.out",
+      "pretty_path" : "raw-test-output/go-test.out",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+    } ]
 
 retry_build:
   url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry"

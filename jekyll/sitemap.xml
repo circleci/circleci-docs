@@ -7,7 +7,7 @@
 		<changefreq>monthly</changefreq>
 	</url>
 {% for section in site.collections %}
-	{% if section.label == "posts" or section.selectorName == false %}{% continue %}{% endif %}
+	{% unless section.site_section  %}{% continue %}{% endunless %}
 	{% assign docs = site.documents | where:"collection",section.label %}
 	{% for doc in docs %}
 		{% unless doc.hide %}

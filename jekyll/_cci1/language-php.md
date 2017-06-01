@@ -97,6 +97,8 @@ Listen 8080
   <FilesMatch \.php$>
     SetHandler application/x-httpd-php
   </FilesMatch>
+  
+  # Other directives here
 </VirtualHost>
 ```
 

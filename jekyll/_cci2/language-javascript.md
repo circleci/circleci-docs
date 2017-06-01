@@ -4,7 +4,7 @@ title: "Language Guide: JavaScript"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and NodeJS on CircleCI 2.0"
 categories: [language-guides]
-order: 4
+order: 5
 ---
 
 ## New to CircleCI 2.0?
@@ -13,7 +13,7 @@ If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{
 
 ## Quickstart: demo JavaScript NodeJS reference project
 
-We maintain a reference JavaScript NodeJS project to show how to build Django on CircleCI 2.0:
+We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project building on CircleCI</a>
@@ -22,7 +22,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 ## Pre-built CircleCI Docker images
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 

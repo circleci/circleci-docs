@@ -239,6 +239,11 @@ The branch name should be url-encoded.
 
 {{ site.data.api.artifacts | api_endpoint }}
 
+**Notes:**
+
+- the value of `path` is relative to the project root (the `working_directory`)
+- `pretty_path` returns the same value as `path`. It is included in the response for backwards compatibility
+
 <h2 id="download-artifact">Download an artifact file</h2>
 
 You can download an individual artifact file via the API by appending a query string to its URL:
@@ -252,6 +257,11 @@ https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/fil
 <h2 id="build-artifacts-latest">Artifacts of the latest Build</h2>
 
 {{ site.data.api.artifacts_latest | api_endpoint }}
+
+**Notes:**
+
+- the value of `path` is relative to the project root (the `working_directory`)
+- `pretty_path` returns the same value as `path`. It is included in the response for backwards compatibility
 
 <h2 id="retry-build">Retry a Build</h2>
 

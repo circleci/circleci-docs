@@ -7,6 +7,9 @@ description: Frequently Asked Questions
 order: 60
 ---
 
+* Contents
+{:toc}
+
 ## How do I subscribe to CircleCI announcements and get updates about new features and changes?
 
 We recommend that **all customers subscribe to the '[Announcements](https://discuss.circleci.com/c/announcements)' category** on our forums. You will get advance notice of important changes and new features.

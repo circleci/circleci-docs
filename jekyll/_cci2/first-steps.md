@@ -1,32 +1,30 @@
 ---
 layout: classic-docs
-title: "First Steps with CircleCI"
-short-title: "First Steps"
-description: "First steps for using CircleCI"
+title: "Join Beta and Sign Up"
+short-title: "Join Beta and Sign Up"
+description: "First step for using CircleCI"
 categories: [getting-started]
 order: 2
 ---
 
-Before you can start running builds on CircleCI, you’ll need to allow CircleCI to access your code. Depending on whether you’re using GitHub or Bitbucket, [authorize CircleCI](https://circleci.com/signup/) to access your code.
+To start running builds on CircleCI 2.0 Beta, complete the following steps:
 
-After authorizing a version control system (VCS), you’ll be redirected to your CircleCI Dashboard, which will be empty since you haven’t added any projects yet.
+1. Click Join The Beta on the [Beta Access](https://circleci.com/beta-access/) page.
 
-## Adding Projects
+2. Fill in all of the fields in the Get Started form:
+- First and Last Name
+- Email address
+- GitHub or Bitbucket radio button
+- GitHub or Bitbucket org name
 
-Click “PROJECTS” in the lefthand sidebar and select one of your organizations. Then, click “Build project” next to the project you’d like to start building on CircleCI.
+3. Click Submit to have CircleCI add your information to the Beta. If you are already using CircleCI 1.0, go to the Build a Project doc to learn about adding the `.circleci/config.yml` file that enables 2.0 builds. If you are new to CircleCI, continue with Sign Up.
 
-## Following Projects
+4. Click the [Sign Up](https://circleci.com/signup/) button.
 
-Maybe someone else in your GitHub/Bitbucket organization linked a project to CircleCI. In that case, you’ll want to follow that project.
+5. Click one of the Start buttons on the page to begin the process of allowing CircleCI to access your code on GitHub or Bitbucket.
 
-Following a project subscribes you to email notifications and adds the project to your dashboard’s project/branch picker.
+6. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
 
-You’ll automatically follow any new project that you push to, but you can also manually follow a project by clicking “PROJECTS” in the lefthand sidebar, clicking on your organization, and then clicking the “Follow project” button next to the project you’d like to follow.
+7. Click the Authorize Application or equivalent button.
 
-# Next Steps
-
-Now that you’ve integrated with a VCS and added one of your projects, you’ll need to create a `.circleci/config.yml` file to tell CircleCI what to do during each build.
-
-Head to our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample `config.yml` and explanation of each component of the file.
-
-Or, if you have a specific language in mind, check out our [demo applications]({{ site.baseurl }}/2.0/demo-apps/).
+The CircleCI Builds Dashboard appears. You are ready to configure CircleCI for your project. See the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to configure your first simple 2.0 build.

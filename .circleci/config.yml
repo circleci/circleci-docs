@@ -33,8 +33,6 @@ jobs:
           command: |
             # cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
-            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XL.json
-            cp jekyll/_data/trusty/versions-ubuntu-14.04-XL.json jekyll/environments/ubuntu-14.04-XXL-upstart.json
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
