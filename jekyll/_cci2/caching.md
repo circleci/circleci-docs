@@ -68,3 +68,7 @@ Source caching is useful when you run into rate-limiting with your VCS hosting p
 Source caching can save a bit of time for smaller repos, when the pull is less than 30 seconds. The tradeoff is that you'll have a more complex `config.yml` to manage the source caching, and you'll only be saving a few seconds.
 
 For larger repos, source caching will not speed up your jobs. In cases where it takes 30 seconds or more to clone from GitHub, the same source can take 2 minutes to restore from the cache stored on S3, and another 2 minutes to save everything to S3 for next time. So for large repos we don't recommend source caching, unless you're being rate-limited.
+
+Some customers ask us why is it faster to checkout from Github than pull their cached source, which we host on S3 in the same AWS region as most build machines.
+
+Compared to S3, Github is faster for read/write performance.  It's tempting to expect S3 to be faster for read performance to the same region.  But, it was designed with a certain balance for cost, read/write performance, and storage capacity.  Their focus is on nearly unlimited storage capacity.  Github, on the other hand, tunes their service for better read/write performance at the expense of very limited storage capacity.
