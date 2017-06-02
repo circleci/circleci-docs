@@ -39,7 +39,7 @@ The currently available Xcode versions are:
 
 ## Software
 
-We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby
+We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby, etc.
 
 * [macOS 10.12 (Sierra) (Xcode version 8.3) ](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-105/index.html).
 * [OSX 10.11 (El Capitan) (Xcode versions 7.0 – 8.2.1)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/null/index.html).
