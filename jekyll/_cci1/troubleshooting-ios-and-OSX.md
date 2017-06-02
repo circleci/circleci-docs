@@ -29,4 +29,4 @@ machine in Xcode, and once your tests are supposed to start the iOS simulator is
 immediately available.
 
 We maintain a [full list of simulators that are available in our macOS and OSX
-build images](/docs/1.0/build-images-macos/#software).
+build images](/docs/1.0/build-image-macos/#selecting-xcode-version-and-operating-system).

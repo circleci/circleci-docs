@@ -17,7 +17,7 @@ it to an macOS build by enabling the "Build OS X project" option under the
 
 ## Software Versions
 
-We maintain a [manifest of the software installed on our OSX and macOS build images](/docs/1.0/build-images-macos/#software).
+We maintain a [manifest of the software installed on our OSX and macOS build images](/docs/1.0/build-image-macos/#software).
 
 ## Basic setup
 
@@ -55,10 +55,12 @@ customization options.
 
 ## Xcode Version
 
-By default, CircleCI will build your project with Xcode 7.0. You can select a
-newer version of Xcode by specifying the major and minor version in a
-[circle.yml file]( {{ site.baseurl }}/1.0/configuration/) in the root of your
-repository. For example, for 8.2.1, add the following:
+By default, CircleCI will build your project with Xcode 7.0 on OSX 10.11 You can
+select a specific version of Xcode by specifying the major and minor version in
+a [circle.yml file]( {{ site.baseurl }}/1.0/configuration/) in the root of your
+repository. [Full details including a list of available versions of Xcode are on
+the macOS build images page](/docs/1.0/build-image-macos/#selecting-xcode-version-and-operating-system). For
+example, for 8.2.1, add the following:
 
 ```
 machine:
@@ -66,7 +68,6 @@ machine:
     version: 8.2
 ```
 
-You can find a list of available versions of Xcode [on the macOS build images page](/docs/1.0/build-images-macos/#software).
 
 ### CocoaPods
 
@@ -156,7 +157,7 @@ test:
 ```
 
 The destination can be selected from the simulators [pre-installed in our
-build images](/docs/1.0/build-images-macos/#software).
+build images](/docs/1.0/build-image-macos/#software).
 
 In some situations you might also want to build with [`xctool`](https://github.com/facebook/xctool),
 an alternative build tool. Please mind that some of the `xcodebuild` functionality might not be
