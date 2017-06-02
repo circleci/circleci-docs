@@ -19,7 +19,6 @@ The following step-by-step instructions will guide you through the process of in
 	set to true
 	* Instructions if you have a [Private Subnet]({{site.baseurl}}/enterprise/aws-private-subnet/)
 * AWS Subnet ID
-* AWS S3 Bucket Name
 * CircleCI License file (.rli)
 
 ## Setup Terraform
