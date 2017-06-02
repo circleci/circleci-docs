@@ -24,7 +24,9 @@ dependencies:
   - xcrun instruments -w "iPhone 7 (10.1)" || true
 ```
 
-This will launch the simulator just like it would if you'd hit `CMD + R` on your machine in Xcode, and once your tests are supposed to start the iOS simulator is immediately available.
+This will launch the simulator just like it would if you'd hit `CMD + R` on your
+machine in Xcode, and once your tests are supposed to start the iOS simulator is
+immediately available.
 
-You can find the full list of simulators that are available in our macOS
-image [here]({{ site.macos_manifest_url }}).
+We maintain a [full list of simulators that are available in our macOS and OSX
+build images](/docs/1.0/build-image-macos/#selecting-xcode-version-and-operating-system).
