@@ -11,7 +11,7 @@ We’ve created several demo applications for various languages, so you can lear
 
 Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
 
-Language | Framework | GitHub Repo Name
+Language Guide | Framework | GitHub Repo Name
 ---------|-----------|-----------------
 [Clojure] | Luminus | [circleci-demo-clojure-luminus]
 [Elixir] | Phoenix | (coming soon)
