@@ -26,21 +26,25 @@ Our **[status page](https://status.circleci.com/)** gives information on current
 
 Currently we support authentication with GitHub and Bitbucket. Please vote on relevant [Feature Request](https://discuss.circleci.com/c/feature-requests) if you want to show support for other version control systems.
 
-### I can’t give CircleCI the access to all my private repositories. What do I do?
-
-CircleCI recently added support for fine-grained GitHub permissions options. To limit CircleCI from accessing your private repositories, select Public Repos Only from the Start with Github menu on the Sign Up page. 
-
-### What if I dont want to include so many orgs? 
-
+### What if I don’t want to include so many orgs when I am authorizing CircleCI?
+ 
 You can change the org access using OAuth App Restrictions on Github, see the [GitHub Help OAuth documentation](https://help.github.com/articles/about-oauth-app-access-restrictions/oauth) for instructions.
-
-### How does the Public Repos Only option work on CircleCI?
-
-The Public Repos Only option on the GitHub Start button for signup uses scopes to specify access for the CircleCI app (either public or private). See https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-scopes-for-oauth-apps/ for details about how the scopes work.
-
+ 
+### I can’t give CircleCI the access to all my private repositories. What do I do?
+ 
+CircleCI recently added support for more fine-grained GitHub permissions options. 
+To limit CircleCI from accessing your private repositories, select Public Repos Only from the Start with Github menu on the Sign Up page and on every subsequent login.
+ 
+CircleCI does not yet support limiting access to only public Bitbucket repositories.
+ 
+### How does the GitHub Public Repos Only option work on CircleCI?
+ 
+The Public Repos Only option uses *scopes* to specify access for the CircleCI app. CircleCI uses the `repo` scope by default which includes public and private repository access. CircleCI requests the `public_repo` scope for access to only public repos. See https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-scopes-for-oauth-apps/ for more details about the GitHub scopes implementation and use.
+ 
 ### Is there a way for me to limit access if I have already provided it?
-
-There is no option to limit access to only public repositories if you have already provided access to your private repos. However, if you created a separate account for this purpose previously, you can now sign up with the priviledged account without providing access to private GitHub repositories by selecting Public Repos Only from the drop-down menu on the GitHub Start button. 
+ 
+Yes, limit access by logging out of the CircleCI app and logging back in with the Public Repos Only option.
+If you created a separate account for this purpose previously, you can now sign up using the privileged account without providing access to private GitHub repositories by selecting Public Repos Only from the drop-down menu on the GitHub Start button.
 
 ### I updated my email address on GitHub, and it does not show up on CircleCI
 
