@@ -109,3 +109,5 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 
 
+[docker-hub]: https://hub.docker.com
+[docker-library]: https://hub.docker.com/explore/
