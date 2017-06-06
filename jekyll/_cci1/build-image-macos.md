@@ -28,7 +28,9 @@ You should specify the version of Xcode that you would like to build by specifyi
 
 The currently available Xcode versions are:
 
+* `9.0`: Xcode 9.0 Beta 1 (Build 9M136h)
 * `8.3`: Xcode 8.3.2 (Build 8E2002)
+* `8.3.2`: Xcode 8.3.2 (Build 8E2002)
 * `8.3.1`: Xcode 8.3.1 (Build 8E1000a)
 * `8.2`: Xcode 8.2.1 (Build 8C1002)
 * `8.1`: Xcode 8.1 (Build 8B62)
@@ -42,9 +44,10 @@ The currently available Xcode versions are:
 
 We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby, etc.
 
-* [macOS 10.12 (Sierra) (Xcode version 8.3.2) ](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-105/index.html).
-* [macOS 10.12 (Sierra) (Xcode version 8.3.1) ](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-104/index.html).
-* [OSX 10.11 (El Capitan) (Xcode versions 7.0 – 8.2.1)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/null/index.html).
+* [Xcode version 9.0 Beta 1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-127/index.html).
+* [Xcode version 8.3.2 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-105/index.html).
+* [Xcode version 8.3.1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-104/index.html).
+* [Xcode versions 7.0 – 8.2.1 (OSX 10.11 El Capitan)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/null/index.html).
 
 If you do not have a `circle.yml` file, or you do not specify a version of Xcode, then your project will build with Xcode 7.0 on OSX 10.11.
 
