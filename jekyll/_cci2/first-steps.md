@@ -21,7 +21,7 @@ To start running builds on CircleCI 2.0 Beta, complete the following steps:
 
 4. Click the [Sign Up](https://circleci.com/signup/) button.
 
-5. Click one of the Start buttons on the page to begin the process of allowing CircleCI to access your code on GitHub or Bitbucket.
+5. Click one of the Start buttons on the page to begin the process of allowing CircleCI to access your code on GitHub or Bitbucket. To limit CircleCI from accessing your private GitHub repositories, select Public Repos Only from the Start with Github menu when you sign up and on every subsequent login.
 
 6. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
 
