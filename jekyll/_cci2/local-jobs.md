@@ -77,6 +77,10 @@ The CLI tool automatically checks for updates and will prompt you if one is avai
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
+### Setting Environment Variables
+
+We don't yet have an ideal solution for setting environment variables for local builds, but there is a workaround. Define which variables you want to export in a file within your repository (don't commit it - just have it in the directory). Then set BASH_ENV to that filename in your `.cirecleci/config.yml` file. The file will be automatically sourced on each command as long as BASH_ENV is correct.
+
 ### Machine Executor
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
@@ -87,11 +91,9 @@ Caching is not currently supported in local jobs. When you have either a `save_c
 
 ### Relative Path for working_directory
 
-Using a relative path for `working_directory` is not currently supported in local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exists.
+The `working_directory:` key in your `.cirecleci/config.yml` file must not use a relative path for local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exits. To workaround this problem, change the value of the  `working_directory:` key in your `.cirecleci/config.yml` file to use an absolute path.
 
 This happens because `circleci` mounts the current directory to `working_directory` in order to skip the checkout step, but Docker doesn't allow the container path to be relative for a volume. See [here](https://github.com/docker/docker/issues/4830) for more details.
-
-The workaround is updating `working_directory` to use an absolute path.
 
 We plan to remove this limitation in a future update.
 
