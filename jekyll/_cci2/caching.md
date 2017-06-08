@@ -18,12 +18,12 @@ Thing you might choose to include:
 
 Your dependencies are the libraries and tools your project needs to build, test and deploy. The source is the version controlled source code for your project.
 
-We will cover [dependency caching]() in detail since it where the biggest performance gains are and has more variables and options. [Source caching]() is covered at the end of the document.
+We will cover [dependency caching](#dependency-caching) in detail since this is where the biggest performance gains are and there are many variables and options. [Source caching](#source-caching) is covered at the end of the document.
 
-**Note:** On CircleCI 2.0 the Docker images you use for you jobs are automatically cached on our infrastructure where possible. This document is about manually caching dependencies and source code.
+**Note:** On CircleCI 2.0 the Docker images you use for your jobs are automatically cached on our infrastructure where possible. This document is about manually caching dependencies and source code.
 
 ---
-# Caching Dependencies
+# <a name="dependency-caching"></a>Dependency Caching
  
 CircleCI 2.0 has more advanced caching strategies available than CircleCI 1.0. We've removed automatic caching to give you finer control. The extra control and power requires that you be explicit about what you cache and how you cache it. You'll learn how to do that in this section.
 
@@ -157,7 +157,7 @@ Certain languages and frameworks have more expensive steps that can and should b
 Don’t cache everything, but _do_ keep an eye out for costly steps like compilation.
 
 ---
-# Source Caching
+# <a name="source-caching"></a>Source Caching
 
 Source caching is useful when you run into rate-limiting with your VCS hosting provider (e.g. GitHub). Although it's possible to cache your source using CircleCI, it’s often slower than pulling from GitHub.
 
