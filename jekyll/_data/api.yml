@@ -498,8 +498,8 @@ list_environment_variables:
   try_it: false
   url: "/api/v1.1/project/:vcs-type/:username/:project/envvar"
   method: "GET"
-  description: "Lists the environment variables for :project"
-  response: '[{"name":"foo","value":"xxxx"}]'
+  description: "Returns four 'x' characters plus the last four ASCII characters of the value, consistent with the display of environment variable values in the CircleCI website."
+  response: '[{"name":"foo","value":"xxxx1234"}]'
 
 add_environment_variable:
   try_it: false
