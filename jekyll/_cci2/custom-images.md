@@ -107,7 +107,7 @@ In order to let CircleCI use your custom image you need to place it in a public 
 
 ### Public or private images?
 
-Please note that in order to use an image with our [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor) you'll have to have a public repository. If you want to keep your image private please [read about using private images and repositories]({{ site.baseurl }}/2.0/private-images/).
+Please note that in order to use an image with our [Docker Executor]({{ site.baseurl }}/2.0/executor-types) you'll have to have a public repository. If you want to keep your image private please [read about using private images and repositories]({{ site.baseurl }}/2.0/private-images/).
 
 ### Using different Docker registries
 
@@ -127,7 +127,7 @@ In this case we are using `-t` key to specify the name and tag of our new image:
 
 - `circleci` - our account in Docker Hub
 - `cci-demo-docker-primary` - repository name
-- `0.0.1` - tag (version) of the image. Always update the tag if you change something in a `Dockerfile` otherwise you might have unpredictable results ([read more]({{ site.baseurl }}/2.0/executor-types/#avoid-mutable-tags))
+- `0.0.1` - tag (version) of the image. Always update the tag if you change something in a `Dockerfile` otherwise you might have unpredictable results ([read more]({{ site.baseurl }}/2.0/executor-types))
 
 ### Pushing the image to the registry
 
