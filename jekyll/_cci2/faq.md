@@ -81,7 +81,7 @@ myUsername/couchdb:1.6.1
 
 ## Can I use the `latest` tag when specifying image versions?
 
-We highly recommend that you don’t. For more context, read about why we think you should [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types/#avoid-mutable-tags).
+We highly recommend that you don’t. For more context, read about why we think you should [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types).
 
 ## How can I set the timezone in Docker images?
 
