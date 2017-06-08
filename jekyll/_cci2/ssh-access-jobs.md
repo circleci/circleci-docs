@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: "SSH Access to Jobs"
-short-title: "SSH Access to Jobs"
+title: "Debugging Jobs Over SSH"
+short-title: "Debugging Jobs Over SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"
 categories: [configuring-jobs]
-order: 40
+order: 70
 ---
 
 Often the best way to troubleshoot problems is to SSH into a build container and inspect 
@@ -12,29 +12,24 @@ things like log files, running processes, and directory paths.
 
 CircleCI 2.0 gives you the option to access all jobs via SSH.
 
-To start a build with SSH enabled, select the 'Rebuild with SSH' option from
+1. To start a build with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
-
 ![Rebuild with SSH](  {{ site.baseurl }}/assets/img/docs/rebuild-ssh-dropdown.png)
 
-To see the connection details, expand the 'Enable SSH' section in the build output where you will see the SSH command needed to connect:
-
-![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/57f50e26ec245d0373c4265ec4375641553bdbdb_1_690x295.png)
-
-The details are displayed again in the 'Wait for SSH' section at the end of the job:
-
+2. To see the connection details, expand the 'Enable SSH' section in the build output where you will see the SSH command needed to connect:
+![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/57f50e26ec245d0373c4265ec4375641553bdbdb_1_690x295.png)	
 ![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/514e8aec3e8017dac8e8d401d22432026b473161_1_690x281.png)
 
-Now you can SSH to the running build (using the same SSH key
+     The details are displayed again in the 'Wait for SSH' section at the end of the job.
+
+3. SSH to the running build (using the same SSH key
 that you use for GitHub or Bitbucket) to perform whatever troubleshooting
 you need to.
 
 The build VM will remain available for **30 minutes after the build finishes running**
 and then automatically shut down. (Or you can cancel it.)
 
-## Parallelism and SSH Builds
-
-If your build has parallel steps, we launch more than one VM
+**Note**: If your build has parallel steps, CircleCI launches more than one VM
 to perform them. Thus, you'll see more than one 'Enable SSH' and
 'Wait for SSH' section in the build output.
 
@@ -125,13 +120,9 @@ debug1: Offering RSA public key: ...
 Make sure that the key which GitHub accepted (in our
 example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
 
-If it was not offered, you can specify it via the -i command-line
+If it was not offered, you can specify it via the `-i` command-line
 argument to SSH. For example:
 
 ```
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 ```
-
-### Nope, still broken
-
-Please [contact us](mailto:support@circleci.com) with details of what you tried and our support team will assist you.
