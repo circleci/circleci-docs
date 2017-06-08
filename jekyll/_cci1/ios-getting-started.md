@@ -14,7 +14,7 @@ By default, we build projects on Linux, so you’ll need to enable macOS for you
 
 ## Assumptions and prerequisites
 
-For our infererence to test your Xcode project, we check for and validate the presence of:
+For our inference to test your Xcode project, we check for and validate the presence of:
 
 - an Xcode workspace/project
 - with at least one shared scheme
