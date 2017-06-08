@@ -100,7 +100,7 @@ For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (lis
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types/#specifying-images).
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
 Example:
 
@@ -125,7 +125,7 @@ jobs:
 #### **`machine`**
 {:.no_toc}
 
-The usage of the [machine executor]({{ site.baseurl }}/2.0/executor-types/#machine-executor) is configured by using the `machine` key, which takes a map:
+The usage of the [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
