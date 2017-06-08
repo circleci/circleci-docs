@@ -7,7 +7,7 @@ categories: [migration]
 order: 15
 ---
 
-CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will help you search and replace your 1.0 keys with 2.0 keys.
+CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`) and it adds new required keys for which values must be defined. If you already have a `circle.yml` file, this article will help you add the new required keys and values and then search and replace your 1.0 keys with 2.0 keys. If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
 ## Steps to Configure Required 2.0 Keys
 
@@ -17,7 +17,7 @@ CircleCI 2.0 introduces new keys in `.circleci/config.yml`. This article will he
 
 3. Add `version: 2` to the top of the `.circleci/config.yml` file.
 
-4. Add the following two lines to your `config.yml` file, after the verison line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`.
+4. Add the following two lines to your `config.yml` file, after the version line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`.
      ```
      jobs:
        build:
