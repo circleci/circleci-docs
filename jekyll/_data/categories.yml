@@ -95,12 +95,16 @@
   name: "Migration"
 
 - section: cci2
-  slug: language-guides
-  name: "Language Guides"
+  slug: virtualization
+  name: "Virtualization"
 
 - section: cci2
   slug: configuring-jobs
-  name: "Configuring Jobs"
+  name: "Configuration"
+
+- section: cci2
+  slug: language-guides
+  name: "Language Guides"
 
 - section: cci2
   slug: docker
