@@ -1,77 +1,49 @@
 ---
 layout: classic-docs
-title: "Running Jobs Locally"
-short-title: "Running Jobs Locally"
-description: "Why and how to run local jobs"
+title: “Using the CircleCI Command Line Interface (CLI)“
+short-title: "Using the CircleCI Command Line Interface (CLI)"
+description: “How to run local jobs with the CLI“
 categories: [configuring-jobs]
-order: 30
+order: 10
 ---
 
-The **CircleCI CLI** reproduces the CircleCI environment locally and runs jobs as if they were running on CircleCI. The tool enables better debugging and faster configuration.
+The following sections describe useful tools for validating and debugging your configuration.
 
-## Common Use Cases
+## CircleCI Command Line Interface (CLI) Overview
 
-### Debugging Configuration Syntax
+The `circleci` commands enable you to reproduce the CircleCI environment locally and run jobs as if they were running on the hosted application for more efficient debugging and configuration in the initial setup phase. 
 
-Getting the syntax correct for your `config.yml` file can take a few iterations. Instead of having to push a commit and run a job on CircleCI to test this, local builds allow you to experiment locally since they only build what’s currently on your file system.
+You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
 
-Note that local jobs don’t cache dependencies. You may want to comment out dependency sections if you’re testing YAML syntax. Or use the `--config` flag to specify a local `config.yml` that doesn’t pull in large dependencies.
+### Installing the CLI Locally 
 
-### Troubleshooting Container Configurations
+1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/engine/installation/).
 
-Jobs have several containers that need to “talk” to each other. If you have a PostgreSQL container, you can quickly try different settings to ensure your job can connect and create the relevant database with correct permissions on the correct port. Or you might be using a pre-built container, but you’re unsure if it has all the services you need, or if they're running in the way you hope.
+2. To install the CLI, run the following command:
 
-Local jobs allow you to quickly retry configurations such as connecting on different ports or with different users.
-
-### Testing a New Project
-
-Imagine you’re a new developer on a team. It could take some time to figure out how to build and test an application.
-
-If the project has been configured to run on CircleCI, you can clone the repo, install the CircleCI CLI and run `circleci build`. This is a great way to get set up quickly with the same environment as your team.
-
-## Requirements
-
-To use the CircleCI CLI, you’ll need to install and configure Docker. Please follow the [docker installation instructions](https://docs.docker.com/engine/installation/).
-
-## Installation
-
-To install the CLI, run:
-
-```Bash
-curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
+```
+$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
-(If the current user doesn't have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.)
+The CLI is downloaded to the `/usr/local/bin/circleci` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available. 
 
-## Usage
+### Validating 2.0 YAML Syntax
 
-Calling `circleci` without any options displays usage information:
-
-```Bash
-$ circleci
-The CLI tool to be used in CircleCI.
-
-Usage:
-  circleci [flags]
-  circleci [command]
-
-Available Commands:
-  build       run a full build locally
-  config      validate and update configuration files
-  tests       collect and split files with tests
-  version     output version info
-
-Flags:
-  -c, --config string   config file (default is .circleci/config.yml)
-      --taskId string   TaskID
-      --verbose         emit verbose logging output
-
-Use "circleci [command] --help" for more information about a command.
+1. Type `circleci` with one of six available commands (`build`, `config`, `help`, `step`, `tests`, and `version`) followed by a valid flag. For example:
 ```
+$ circleci config validate -c .circleci/config.yml
+```
+The config validate command checks your local config.yml file for syntax errors.
 
-## Updating
+**Note**: Local jobs don’t cache dependencies. You may want to comment out dependency sections if you are testing YAML syntax. Or, as in this example, use the `-c` flag to specify a local `config.yml` file that doesn’t pull in large dependencies.
 
-The CLI tool automatically checks for updates and will prompt you if one is available.
+### Troubleshooting Container Configurations Locally
+
+Test locally to quickly retry configurations such as connecting on different ports or with different users. Jobs often have several containers that need to “talk” to each other. For example, you might want to locally test that a job can connect and create the relevant database with correct permissions on the correct port for a PostgreSQL container. Or you might be using a pre-built container, but you’re unsure if it has all the services you need, or if they're running in the way you hope.
+
+### Cloning and Building an Environment Locally
+
+If a project has been configured to run on CircleCI, you can simply clone the repo and run the `circleci build` command to get set up quickly with the same environment as your team.
 
 ## Limitations
 
@@ -99,4 +71,4 @@ We plan to remove this limitation in a future update.
 
 ## Using the CircleCI CLI non-locally
 
-The CircleCI CLI is available in all CircleCI environments. For example, check out [Parallelism for Faster Jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) to see how you use the tool to manage paralellism in a remote hosted environment.
+The CircleCI CLI is available in all CircleCI environments. For example, check out [Merging and Splitting Tests]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for examples of using `circleci` commands in your `config.yml` file with a  remote hosted environment.
