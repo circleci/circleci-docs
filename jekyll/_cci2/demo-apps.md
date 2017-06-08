@@ -14,7 +14,7 @@ Each language listed below has an associated guide and public repository on GitH
 Language Guide | Framework | GitHub Repo Name
 ---------|-----------|-----------------
 [Clojure] | Luminus | [circleci-demo-clojure-luminus]
-[Elixir] | Phoenix | (coming soon)
+[Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
 [Go] | Go | [circleci-demo-go]
 [Java] | Spring | [circleci-demo-java-spring]
 [JavaScript] | React | [circleci-demo-javascript-express]
