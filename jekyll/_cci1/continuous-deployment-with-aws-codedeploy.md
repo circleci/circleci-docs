@@ -111,7 +111,7 @@ key starts with `my-app`.
 CircleCI also needs to be able to create application revisions, trigger
 deployments and get deployment status. If your application is called `my-app`
 and your account ID is `80398EXAMPLE` then the following policy snippet gives
-us sufficient accesss:
+us sufficient access:
 
     {
       "Version": "2012-10-17",
