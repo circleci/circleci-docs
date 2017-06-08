@@ -1,11 +1,29 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0 Environment Variables"
-short-title: "Environment Variables"
+title: "Using CircleCI Environment Variables"
+short-title: "Using CircleCI Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
-categories: [reference]
-order: 1
+categories: [configuring-jobs]
+order: 40
 ---
+
+CircleCI exports the environment variables in this document during each build, which are
+useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:
+
+`CIRCLECI`
+
+true
+
+`CI`
+
+true
+
+CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character must be a letter.
+
+## Build Details
+
+CircleCI publishes the details of the currently running build in this list of variables:
+
 
 **CI**
 
