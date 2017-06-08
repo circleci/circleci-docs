@@ -317,7 +317,7 @@ your organization's settings page.
 
 ![](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
-Click on your organisation (CircleCI in the image above), and click on
+Click on your organization (CircleCI in the image above), and click on
 the API key and Build Secret links to reveal the items.
 
 ![](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)

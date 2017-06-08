@@ -53,7 +53,7 @@ The keychain that CircleCI creates is named `circle.keychain`, and the
 password is `circle`. This keychain is unlocked for the duration of the
 build, and it is added to the default search path. Any P12 certificates
 or provisioning profiles that you have uploaded are added to this keychain
-before your build begins. Any futher credentials that you add to this
+before your build begins. Any further credentials that you add to this
 keychain will be available to Xcode.
 
 ### 1. Install Fastlane tools locally

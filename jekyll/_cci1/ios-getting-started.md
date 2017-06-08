@@ -14,7 +14,7 @@ By default, we build projects on Linux, so you’ll need to enable macOS for you
 
 ## Assumptions and prerequisites
 
-For our infererence to test your Xcode project, we check for and validate the presence of:
+For our inference to test your Xcode project, we check for and validate the presence of:
 
 - an Xcode workspace/project
 - with at least one shared scheme
@@ -110,9 +110,9 @@ This keychain is also added to the Xcode search path, so any credentials stored 
 
 To use your provisioning profile with your CircleCI builds, you need to upload the `.mobileprovision` file on the **Project Settings** > **OS X Code Signing** page. Any provisioning profiles will automatically be added to the `circle.keychain` at the start of the build.
 
-## Customising your build
+## Customizing your build
 
-Although our inference will work for many cases, some teams may want to customise their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
+Although our inference will work for many cases, some teams may want to customize their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
 
 If you wish to see a more detailed guide to the format, take a look at our [configuration sample]( {{ site.baseurl }}/1.0/config-sample/).
 

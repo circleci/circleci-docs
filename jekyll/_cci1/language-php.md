@@ -11,7 +11,7 @@ help PHP developers test and deploy their code. We can generally infer
 most of your dependencies and test commands, but we also provide custom
 configuration via a `circle.yml` file checked into your repo's root directory. 
 The examples here referring to PHP filepaths are for the Ubuntu 14.04 and newer 
-images. This image is not default but can be choosen in Project Settings -> 
+images. This image is not default but can be chosen in Project Settings -> 
 Build Environment. For Ubuntu 12.04, replace `/opt/circleci/php` with 
 `~/.phpenv/versions` in the examples.
 
