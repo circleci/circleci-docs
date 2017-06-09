@@ -13,7 +13,7 @@ For developers testing and deploying their code with CircleCI Enterprise, the
 experience extremely similar to using circleci.com, so much of the information in the
 [docs](https://circleci.com/docs/) and [support forum](https://discuss.circleci.com)
 for circleci.com are applicable. There are a few potentially
-confusing differences between CircleCI Enterpise and circleci.com though, so this guide
+confusing differences between CircleCI Enterprise and circleci.com though, so this guide
 provides a starting point specifically for users of Enterprise.
 
 Let's quickly cover a few of the first things you might want to try on CircleCI Enterprise. If you
