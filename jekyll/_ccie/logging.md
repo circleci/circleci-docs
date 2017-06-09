@@ -72,7 +72,7 @@ We are looking into providing first class support to integrate with Amazon Cloud
 
 ## Integrating with Syslog
 
-CirclecI Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it out of the box.  You can configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
+CircleCI Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it out of the box.  You can configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
 
 ```
 #!/bin/bash
