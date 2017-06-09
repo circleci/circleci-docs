@@ -14,7 +14,7 @@ There are common problems you might run into during the initial setup of your CI
 ## Xcode Toolchain errors
 
 ### xcodebuild exit code 65
-There are plenty of reasons why exit code 65 could be thrown, as it is a general error returned for bad user input. Sometimes that is not the case though, since all your builds run in a container your builds also have to share system resources with other builds. Exit code 65 is mostly the issue of a lack of enough CPU power to launch the iOS simulator in time for the test to run once xcodebuild'S `test` action is called, and the tests simply time out.
+There are plenty of reasons why exit code 65 could be thrown, as it is a general error returned for bad user input. Sometimes that is not the case though, since all your builds run in a container your builds also have to share system resources with other builds. Exit code 65 is mostly the issue of a lack of enough CPU power to launch the iOS simulator in time for the test to run once xcodebuild's `test` action is called, and the tests simply time out.
 A way to mitigate this is to launch the iOS simulator as a part of your dependencies block in your CircleCI configuration file.
 
 
