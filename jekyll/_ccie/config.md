@@ -104,7 +104,7 @@ You should then see improved performance between builds!
 
 ### Adjusting Builder Networking
 
-You can adjust which subnets containers use by setting the following enviroment variables:
+You can adjust which subnets containers use by setting the following environment variables:
 
 * `CIRCLE_CONTAINERS_SUBNET` - the subnet all containers will share, in CIDR notation.
 * `CIRCLE_CONTAINERS_SUBNET_MASK_LENGTH` - the size of the netmask for
