@@ -43,7 +43,7 @@ this access with iptables rules in a production setup. Please [contact us](mailt
 if you have questions.
 
 
-CircleCI Enterpise installation requires provisioning two types of machines:
+CircleCI Enterprise installation requires provisioning two types of machines:
 
 * Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.
 * A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
