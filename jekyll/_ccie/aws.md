@@ -23,7 +23,7 @@ The following step-by-step instructions will guide you through the process of in
 
 ## Setup Terraform
 
-(If you prefer to do this process manually or with different tools please see the [Manual Aws Instructions]({{site.baseurl}}/enterprise/aws-manual/).)
+(If you prefer to do this process manually or with different tools please see the [Manual AWS Instructions]({{site.baseurl}}/enterprise/aws-manual/).)
 
 1. Download the setup repo: `git clone https://github.com/circleci/enterprise-setup ccie && cd ccie`
 1. Open `terraform.tfvars` in your favorite text editor and input the
