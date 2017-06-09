@@ -34,6 +34,7 @@ Language Guide | Framework | GitHub Repo Name
 [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
 
 [circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
+[circleci-demo-elixir-phoenix]: https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix
 [circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
 [circleci-demo-java-spring]: https://github.com/CircleCI-Public/circleci-demo-java-spring
 [circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
