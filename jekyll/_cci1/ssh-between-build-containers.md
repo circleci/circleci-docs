@@ -19,5 +19,5 @@ ssh node6
 ### Uses
 
 You can use this feature if you want to manually
-collect metadata, synchronise a certain operation across the fleet, or
+collect metadata, synchronize a certain operation across the fleet, or
 just transfer arbitrary data between parallel build containers.
