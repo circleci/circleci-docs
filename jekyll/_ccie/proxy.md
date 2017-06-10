@@ -20,7 +20,7 @@ The proxy instructions must be done **before** installing CircleCI on fresh vm's
 
 
 ### EC2 Proxies
-If you are setting up your proxy through Amazon, please read this before preceeding: http://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html
+If you are setting up your proxy through Amazon, please read this before proceeding: http://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html
 
 You should also avoid proxying internal requests, especially for the services box. Run `export NO_PROXY=<services_box_ip>` to add it to the `NO_PROXY` rules.
 
@@ -58,7 +58,7 @@ EOF
 3.) sudo service replicated stop; sudo service replicated-agent stop; sudo service replicated-agent start; sudo service replicated start
 ```
 ####Corporate Proxies
-In some enviroments you might not have access to a `NO_PROXY` equivalent outside your network. In that case feel free to put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY`and instead only add machines on the internal network to `NO_PROXY` such as the services, and builder box. 
+In some environments you might not have access to a `NO_PROXY` equivalent outside your network. In that case feel free to put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY`and instead only add machines on the internal network to `NO_PROXY` such as the services, and builder box. 
 
 ### Installing CircleCI Services 
 
@@ -67,7 +67,7 @@ In some enviroments you might not have access to a `NO_PROXY` equivalent outside
 2.) sudo -E bash init-services.sh
 ```
 
-Note that this differs from the regular installation instructions by including the `-E` command with `sudo`. This allows the script to have access to the enviroment variables you exported above.
+Note that this differs from the regular installation instructions by including the `-E` command with `sudo`. This allows the script to have access to the environment variables you exported above.
 
 Also note that when the instructions ask you if you use a proxy, they will also prompt you for the address. It is **very important** that you input the proxy in the following format `<protocol>://<ip>:<port>`. If you are missing any part of that, then apt-get won't work correctly and the packages won't download. 
 
@@ -78,7 +78,7 @@ If for any reason you can't access the page the CircleCI Replicated console, but
 
 - External Network Calls
   - We use scripts to download initialization scripts, along with jars from Amazon S3. 
-    - `Curl` respects enviroment settings, but if you have whitelisted traffic from Amazon S3 you shouldn't have any problems.
+    - `Curl` respects environment settings, but if you have whitelisted traffic from Amazon S3 you shouldn't have any problems.
   - `awscli` tool to download container from S3. The same rules of `curl` apply here (i.e. dependent on S3 traffic and environment variable)
   
 

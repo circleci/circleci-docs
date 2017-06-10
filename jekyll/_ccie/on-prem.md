@@ -117,13 +117,13 @@ After ~20 minutes or so, you will have a fully running instance.  A fully operat
 * Few directories at `/mnt`, namely `/mnt/tmp`, `/mnt/slave-image`, `/mnt/box1`
 * Process log files at `/var/log/circle-builder/circle.log` without any exceptions.
 
-*NOTE*: The defualt container image is currently hosted on S3 US East.  Your download speed may vary depending on where your machines are.  Upcoming releases will use an CDN to manage the container image.
+*NOTE*: The default container image is currently hosted on S3 US East.  Your download speed may vary depending on where your machines are.  Upcoming releases will use an CDN to manage the container image.
 
 ## Advanced configuration
 
 ### Cloud Object Storage
 
-CircleCI Enterprise can optionally use cloud storage providers for storing large files and build related artifacts.  Using external object storage eases management and operationing of CircleCI (e.g. avoid filling disks in services box) and allows for faster builds.
+CircleCI Enterprise can optionally use cloud storage providers for storing large files and build related artifacts.  Using external object storage eases management and the operation of CircleCI (e.g. avoid filling disks in services box) and allows for faster builds.
 
 We currently support AWS S3, Google Cloud Storage, and Microsoft Azure.  If you have Swift/Ceph in house, or any other Object Storage, let us know.
 
@@ -156,7 +156,7 @@ The System Console Settings page will have fields for the AWS access key and sec
 
 #### b. Google Storage
 
-When running inside Google Cloud, we can use instance authentication (remember to permit instances to make Google Cloud API calls).  If running outside, you must export a Serivce Credentials file.  You can create a "Service account key" at https://console.cloud.google.com/apis/credentials, and choose JSON file format.
+When running inside Google Cloud, we can use instance authentication (remember to permit instances to make Google Cloud API calls).  If running outside, you must export a Service Credentials file.  You can create a "Service account key" at https://console.cloud.google.com/apis/credentials, and choose JSON file format.
 
 With credentials files, CircleCI will automatically create a Standard bucket in United States location.  You can create a bucket with a different configuration in the Google Console at: https://console.cloud.google.com/storage/browser .
 
