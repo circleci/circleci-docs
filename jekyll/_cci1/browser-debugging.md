@@ -147,7 +147,7 @@ Now you can run your integration tests from the command line and watch the brows
 ### VNC Viewer Recommendations
 
 Some of our customers have had some VNC clients perform poorly and
-others perform well.  Particuarly, on macOS, RealVNC produces a better
+others perform well.  Particularly, on macOS, RealVNC produces a better
 image than Chicken of the VNC.
 
 If you have had a good or bad experience with a VNC viewer,
