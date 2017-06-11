@@ -12,7 +12,7 @@ machine:
     - elasticsearch
 ```
 
-The default version of Elasticsearch is {{ site.data.trusty.versions.summary.elasticsearch }}.
+The default version of Elasticsearch is {{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.elasticsearch }}.
 If you need a custom version, you can download and start it from your build. To install 2.4.3, add the following to your `circle.yml`:
 
 ```
