@@ -40,6 +40,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
+shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -238,7 +239,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 command | Y | String | Command to run via the shell
 name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`)
-shell | N | String | Shell to use for execution command (default: `/bin/bash -e` or `/bin/sh -e` if `bash` is not available)
+shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
