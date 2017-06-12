@@ -216,6 +216,7 @@ If you have any questions about the specifics of testing your Ruby application, 
 This app illustrates the simplest possible setup for a Ruby on Rails web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open source discussion platform.
+* [Sinatra](https://github.com/CircleCI/Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
