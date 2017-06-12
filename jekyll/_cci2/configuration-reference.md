@@ -555,6 +555,31 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
 
 Note that CircleCI 2.0 builds are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
 
+## **`workflows`**
+
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+version | Y | String | Should currently be 2
+name | N | String | Title of the workflow to be shown in the CircleCI UI
+jobs | Y | List | A list of jobs to run with their dependencies
+requires | N | List | A list of jobs that must succeed for the job to start
+branches | N | Map | A map defining rules for execution on specific branches
+only | N | String | A branch name
+{: class="table table-striped"}
+
+``` 
+workflows:
+  version: 2
+
+  build_test_deploy:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
+```
 
 ## _Full Example_
 {:.no_toc}
