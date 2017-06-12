@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Building Custom Docker Images"
 short-title: "Building Custom Docker Images"
 description: "How to build Docker images and access remote services"
-categories: [virtualization]
+categories: [deploying]
 order: 30
 ---
 
