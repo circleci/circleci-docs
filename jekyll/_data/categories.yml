@@ -114,9 +114,9 @@
   slug: language-guides
   name: "Language Guides"
 
-- section: cci2
-  slug: docker
-  name: "Using Docker"
+#- section: cci2
+#  slug: docker
+#  name: "Using Docker"
 
 - section: cci2
   slug: deploying
