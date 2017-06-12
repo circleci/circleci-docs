@@ -17,7 +17,7 @@ To start running builds on CircleCI 2.0 Beta, complete the following steps:
 - GitHub or Bitbucket radio button
 - GitHub or Bitbucket org name
 
-3. Click Submit to have CircleCI add your information to the Beta. If you are already using CircleCI 1.0, go to the Build a Project doc to learn about adding the `.circleci/config.yml` file that enables 2.0 builds. If you are new to CircleCI, continue with Sign Up.
+3. Click Submit to have CircleCI add your information to the Beta. If you are already using CircleCI 1.0, go to the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to learn about adding the `.circleci/config.yml` file that enables 2.0 builds. If you are new to CircleCI, continue with Sign Up.
 
 4. Click the [Sign Up](https://circleci.com/signup/) button.
 
