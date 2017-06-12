@@ -95,8 +95,8 @@
   name: "Migration"
 
 - section: cci2
-  slug: virtualization
-  name: "Virtualization"
+  slug: containerization
+  name: "Containerization"
 
 - section: cci2
   slug: configuring-jobs
@@ -112,7 +112,7 @@
 
 - section: cci2
   slug: deploying
-  name: "Deploying"
+  name: "Deployment"
 
 - section: cci2
   slug: reference
