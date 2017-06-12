@@ -3,7 +3,7 @@ layout: classic-docs
 title: “Using the CircleCI Command Line Interface (CLI)“
 short-title: "Using the CircleCI Command Line Interface (CLI)"
 description: “How to run local jobs with the CLI“
-categories: [configuring-jobs]
+categories: [troubleshooting]
 order: 10
 ---
 
