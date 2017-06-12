@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Configuring Test Machine Images"
-short-title: "Configuring Test Machine Images"
+title: "Specifying Container Images"
+short-title: "Specifying Container Images"
 description: "Overviews of the docker and machine executor types"
-categories: [virtualization]
+categories: [containerization]
 order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This version of CircleCI enables you to configure test machines to use a Docker Image instead of using the full Linux OS. This change increases performance by building only what is required for your application, but it means selecting a new image in your `.circleci/config.yml` file as follows: 
+This version of CircleCI enables you to use Docker Images instead of using the full Linux OS container. This change increases performance by building only what is required for your application, and it requires selecting an image in your `.circleci/config.yml` file, for example: 
 ```
 jobs:
   build:
@@ -102,7 +102,7 @@ jobs:
     machine: true
 ```
 
-The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images.
+The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
 
 ### When To Use the Machine Executor?
 - Your application requires full access to OS resources
