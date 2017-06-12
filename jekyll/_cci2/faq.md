@@ -109,17 +109,18 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 ## Workflows
 
-### Can I use API with Workflows?
+### Can I use the API with Workflows?
 Not yet, but we are working on that functionality.
  
-### Can I run Auto-cancel feature with Workflows?
+### Can I run the Auto-cancel feature with Workflows?
 Not yet, but we are working on that functionality.
  
-### Can I use this with CircleCI 1.0?
+### Can I use Workflows with CircleCI 1.0?
  
 This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
  
-### Can I use this with CircleCI Enterprise?
+### Can I use Workflows with CircleCI Enterprise?
+
 This feature is currently only available for users of the hosted CircleCI application.
  
 ### How many jobs can I run at one time?
@@ -127,17 +128,16 @@ The number of containers in your plan determines the number of jobs that may be 
 Using Workflow config you can run multiple jobs at once or sequentially. You can fan-out (run multiple jobs at once) or fan-in (wait for all the jobs to complete before executing the dependent job).
  
 ### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
-We are currently working on that functionality.
+Yes, we are currently working on that functionality.
  
 ### Is it possible to split the `config.yml` into different files?
-It is not yet supported.
+Splitting `config.yml` into multiple files is not yet supported.
  
 ### Can I build only the jobs that changed?
 No.
  
 ### Can I build fork PR’s using Workflows?
-We don’t support fork PR’s yet.
-
+We do not support fork PR’s yet.
 
 
 [docker-hub]: https://hub.docker.com
