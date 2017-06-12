@@ -1,11 +1,12 @@
 ---
 layout: classic-docs
-title: "Caching For Faster Jobs"
-short-title: "Caching"
-description: "Caching strategies to increase build speeds"
+title: "Caching Dependencies and Source Code"
+short-title: "Caching Dependencies and Source Code"
+description: "Caching Dependencies and Source Code"
 categories: [configuring-jobs]
-order: 20
+order: 50
 ---
+
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. To get the best performance can take a bit of planning and fine tuning. There is an art to effective caching. This document gives you strategies to optimise caching to speed up your jobs.
 

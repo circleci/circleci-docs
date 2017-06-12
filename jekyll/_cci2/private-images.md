@@ -1,17 +1,17 @@
 ---
 layout: classic-docs
-title: "Using Private Images and Docker Registries"
+title: "Using Private Images"
 short-title: "Using Private Images"
 description: "How to use private images with the Remote Docker Environment"
-categories: [docker]
-order: 1
+categories: [virtualization]
+order: 50
 ---
 
-Using private images isn’t directly supported by the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor). However, you _can_ use the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/).
+To use private images, you must activate the Remote Docker Environment with the `setup_remote_docker` step in your `config.yml` file.
 
-If your application requires a proprietary DB for testing, for example:
+The following is an example of an application that requires a private image called `proprietary-db` for testing:
 
-```YAML
+```
 version: 2
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       # start proprietary DB using private Docker image
       - run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker run -d --name db company/proprietery-db:1.2.3
+          docker run -d --name db company/proprietary-db:1.2.3
 
       # build and test application
       - run: |
@@ -34,4 +34,4 @@ jobs:
           docker run --network container:db my-app test
 ```
 
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+

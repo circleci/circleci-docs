@@ -95,12 +95,16 @@
   name: "Migration"
 
 - section: cci2
-  slug: language-guides
-  name: "Language Guides"
+  slug: containerization
+  name: "Containerization"
 
 - section: cci2
   slug: configuring-jobs
-  name: "Configuring Jobs"
+  name: "Configuration"
+
+- section: cci2
+  slug: language-guides
+  name: "Language Guides"
 
 - section: cci2
   slug: docker
@@ -108,7 +112,7 @@
 
 - section: cci2
   slug: deploying
-  name: "Deploying"
+  name: "Deployment"
 
 - section: cci2
   slug: reference

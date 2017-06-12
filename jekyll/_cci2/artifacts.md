@@ -4,7 +4,7 @@ title: "Uploading Build Artifacts"
 short-title: "Uploading Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
-order: 60
+order: 70
 ---
 
 Sometimes, you'll want to upload artifacts created during builds so you can view them later. The following is an example of how to do that:

@@ -1,19 +1,18 @@
 ---
 layout: classic-docs
-title: "Using docker-compose"
-short-title: "Using docker-compose"
+title: "Installing and Using docker-compose"
+short-title: "Installing and Using docker-compose"
 description: "How to enable docker-compose in your primary container"
-categories: [docker]
-order: 2
+categories: [deploying]
+order: 40
 ---
 
-If you use `docker-compose`, you can use it in CircleCI 2.0 as well using the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/). We've prepared an [example project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) to demonstrate it.
+To use `docker-compose`, you must install it in your [primary container][primary-container] using one of the following methods:
 
-You can use the [full config file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. Here, we'll just cover the relevant parts.
+- Pre-install it in your custom image by using the instructions in [Building Custom Docker Images]({{ site.baseurl }}/2.0/building-docker-images/).
+- Install it during the job execution with the Remote Docker Environment activated by adding the following to your `config.yml` file:
 
-In order to use `docker-compose`, you'll need to have it in your [primary container][primary-container]. You can either pre-install it in your custom image (recommended) or install it during the job's execution:
-
-``` YAML
+``` 
 - run:
     name: Install Docker Compose
     command: |
@@ -22,25 +21,25 @@ In order to use `docker-compose`, you'll need to have it in your [primary contai
       chmod +x /usr/local/bin/docker-compose
 ```
 
-To activate the Remote Docker Environment, you need use [this special step]({{ site.baseurl }}/2.0/building-docker-images/):
+Then, to activate the Remote Docker Environment, you must add the `setup_remote_docker` step:
 
-``` YAML
+```
 - setup_remote_docker
 ```
 
-After that, you can use `docker-compose` as usual. You can build images:
+This enables you to add `docker-compose` commands to build images:
 
-``` YAML
+``` 
 docker-compose build
 ```
 
-Or run the whole system:
+Or to run the whole system:
 
-``` YAML
+``` 
 docker-compose up -d
 ```
 
-In our example, we start the whole system, then verify that it's running and responding to requests:
+In the following example, the whole system starts, then verifies it is running and responding to requests:
 
 ``` YAML
       - run:
@@ -52,8 +51,8 @@ In our example, we start the whole system, then verify that it's running and res
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-Note that, to interact with a running service, we don't just `curl` it from the [primary-container][primary-container], but instead use docker and a container running in the service's network. This is because your primary container and Remote Docker live in [separate environments]({{ site.baseurl }}/2.0/building-docker-images/#separation-of-environments) and can't communicate directly.
+**Note**: To interact with a running service, use docker and a container running in the service's network. This is because your primary container and Remote Docker live in separate environments and can't communicate directly.
 
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. 
 
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
