@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Enabling Docker Layer Caching"
 short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers to reduce build time"
-categories: [configuration]
+categories: [configuring-jobs]
 order: 45
 ---
 
