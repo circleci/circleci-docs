@@ -101,10 +101,14 @@
 - section: cci2
   slug: configuring-jobs
   name: "Configuration"
+
+- section: cci2
+  slug: optimization
+  name: "Optimization"
   
 - section: cci2
   slug: troubleshooting
-  name: "troubleshooting"
+  name: "Troubleshooting"
 
 - section: cci2
   slug: language-guides
