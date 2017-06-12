@@ -15,9 +15,15 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
 ```
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. **Note:** If you want to work with private images/registries, please refer to [Remote Docker][building-docker-images].  
+To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
 
-Docker Images may be specified in two ways, by referring to the image name and version tag on Docker Hub or by using the URL to an image in a registry:
+Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
+
+### Public Convenience Images on Docker Hub
+  - `name:tag`
+    - `circleci/node:7.10-browsers`
+  - `name@digest`
+    - `redis@sha256:34057dd7e135ca41...`
 
 ### Public Images on Docker Hub
   - `name:tag`
@@ -30,6 +36,8 @@ Docker Images may be specified in two ways, by referring to the image name and v
     - `gcr.io/google-containers/busybox:1.24`
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+
+Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Remote Docker][building-docker-images].
 
 ### Docker and Machine Comparison
 
