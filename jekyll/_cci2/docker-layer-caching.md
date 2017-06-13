@@ -4,7 +4,7 @@ title: "Enabling Docker Layer Caching"
 short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers to reduce build time"
 categories: [optimization]
-order: 45
+order: 70
 ---
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
