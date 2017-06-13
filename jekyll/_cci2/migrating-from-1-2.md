@@ -53,17 +53,17 @@ Optionally configure workflows, using the following instructions:
 
 2. To persist a job artifact, add the `persist_to_workspace:` key at the end of the job, under `steps:`. Then, to get the saved artifact for use by another job, add the `attach_workspace:` key with a nested `at:` key defined as the directory where the artifact was saved.
  
-3. Add `workflows:` and the version lines to the *end* of the master `.circle/config.yml` file. **Note:** The Workflows section of the `config.yml` file is not nested in the config and may appear at the end of the file. The `version:2` key in the Workflows section of the file is in addition to the `version:` key at the top of the `config.yml` file during Beta. 
+3. Add lines for `workflows:`, `version: 2` and *<workflow_name>* at the *end* of the master `.circle/config.yml` file, replacing *<workflow_name>* with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta. 
      ```
      workflows:
-       version:2
+       version: 2
        <workflow_name>:
      ```  
 4. Add a line for the `jobs:` key under <workflow_name> and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
  
      ```
      workflows:
-       version:2
+       version: 2
        <workflow_name>:
            jobs:
              - build
