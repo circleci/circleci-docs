@@ -112,7 +112,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 ### Can I use the API with Workflows?
 Not yet, but we are working on that functionality.
  
-### Can I run the Auto-cancel feature with Workflows?
+### Can I use the Auto-cancel feature with Workflows?
 Not yet, but we are working on that functionality.
  
 ### Can I use Workflows with CircleCI 1.0?
