@@ -183,7 +183,7 @@ jobs:
           at: /tmp/workspace
 
       - run: |
-          if [[ `cat workspace/echo-output` == "Hello, world!" ]]; then
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
             echo "It worked!";
           else
             echo "Nope!"; exit 1
