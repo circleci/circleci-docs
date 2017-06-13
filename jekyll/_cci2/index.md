@@ -11,7 +11,7 @@ Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many imp
 
 Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications with YAML file templates and instructions: 
 
-- **Clojure 1.8 and later**, see the [Clojure Language Guide]({{ site.baseurl }}/2.0/language-clojure/)
+- **Clojure 1.2.0 and later**, see the [Clojure Language Guide]({{ site.baseurl }}/2.0/language-clojure/)
 - **Elixir 1.2 and later**, see the [Elixir Language Guide]({{ site.baseurl }}/2.0/language-elixir/)
 - **Go 1.7 and later**, see the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/)
 - **Java 8 and later**, see the [Java Language Guide]({{ site.baseurl }}/2.0/language-java/)

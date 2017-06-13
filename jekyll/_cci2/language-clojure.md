@@ -15,11 +15,10 @@ Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a det
 
 We're going to make a few assumptions here:
 
-* You're using `clojure.test` with Leiningen's built-in `test` task. But if you use another testing tool, you can just adjust that step to run a different `lein` task.
+* You're using `clojure.test` with Leiningen's built-in `test` task.
 * Your application can be distributed as an all-in-one uberjar.
-* You have the [bin/lein shell script](https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein) checked into your project's repository, ensuring everyone is operating with the same version of [Leiningen](https://leiningen.org).
 
-That last one is not a strict requirement, (you can require devs to install it by hand and use a container image that has it preinstalled) but it makes things a bit smoother. If you prefer to use a container that includes Leiningen already, replace `bin/lein` with `lein`.
+If you use another testing tool, you can just adjust that step to run a different `lein` task.
 
 ## Sample Configuration
 
@@ -30,23 +29,22 @@ jobs:
   build:
     working_directory: ~/cci-demo-clojure
     docker:
-      - image: openjdk:8
+      - image: circleci/clojure:lein-2.7.1
     environment:
-      JVM_OPTS: -Xmx3200m
       LEIN_ROOT: nbd
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - restore_cache:
           key: cci-demo-clojure-{{ checksum "project.clj" }}
-      - run: bin/lein deps
+      - run: lein deps
       - save_cache:
           paths:
             - ~/.m2
-            - ~/.lein
           key: cci-demo-clojure-{{ checksum "project.clj" }}
-      - run: bin/lein do test, uberjar
+      - run: lein do test, uberjar
       - store_artifacts:
-          path: target/cci-demo-clojure.jar
+          path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
 ```
 {% endraw %}
@@ -86,10 +84,10 @@ Directly beneath `working_directory`, we can specify container images under a `d
 version: 2
 ...
     docker:
-      - image: openjdk:8
+      - image: circleci/clojure:lein-2.7.1
 ```
 
-We use the [official OpenJDK images](https://hub.docker.com/_/openjdk/) tagged to version `8`.
+We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
 
 We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database, queue, etc, be sure to factor them in when you allocate memory for the main JVM heap.
 
@@ -105,9 +103,9 @@ Now we’ll add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
 
-Next we pull down the cache, if present. If this is your first run, or if you've changed `project.clj`, this won't do anything. We run `bin/lein deps` next to pull down the project's dependencies. Normally you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
+Next we pull down the cache, if present. If this is your first run, or if you've changed `project.clj`, this won't do anything. We run `lein deps` next to pull down the project's dependencies. Normally you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
 
-Then `bin/lein do test, uberjar` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
+Then `lein do test, uberjar` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
 
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
@@ -118,13 +116,13 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
       - checkout
       - restore_cache:
           key: cci-demo-clojure-{{ checksum "project.clj" }}
-      - run: bin/lein deps
+      - run: lein deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
           key: cci-demo-clojure-{{ checksum "project.clj" }}
-      - run: bin/lein do test, uberjar
+      - run: lein do test, uberjar
       - store_artifacts:
           path: target/cci-demo-clojure.jar
           destination: uberjar
