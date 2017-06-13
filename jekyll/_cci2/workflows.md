@@ -132,7 +132,7 @@ The following `config.yml` snippet is an example of a workflow configured for br
 
 ```
 workflows:
-  version:2
+  version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
