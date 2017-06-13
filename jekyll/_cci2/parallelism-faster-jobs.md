@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Merging and Splitting Tests"
 short-title: "Merging and Splitting Tests"
 description: "How to run tests in parallel"
-categories: [configuring-jobs]
+categories: [optimization]
 order: 60
 ---
 

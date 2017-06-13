@@ -3,8 +3,8 @@ layout: classic-docs
 title: "Debugging Jobs Over SSH"
 short-title: "Debugging Jobs Over SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"
-categories: [configuring-jobs]
-order: 70
+categories: [troubleshooting]
+order: 20
 ---
 
 Often the best way to troubleshoot problems is to SSH into a build container and inspect 

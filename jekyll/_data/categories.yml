@@ -103,12 +103,20 @@
   name: "Configuration"
 
 - section: cci2
+  slug: optimization
+  name: "Optimization"
+  
+- section: cci2
+  slug: troubleshooting
+  name: "Troubleshooting"
+
+- section: cci2
   slug: language-guides
   name: "Language Guides"
 
-- section: cci2
-  slug: docker
-  name: "Using Docker"
+#- section: cci2
+#  slug: docker
+#  name: "Using Docker"
 
 - section: cci2
   slug: deploying

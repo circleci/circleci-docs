@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Building Custom Images for Docker Executor"
-short-title: "Building Custom Images"
+title: "Using Custom-Built Docker Images"
+short-title: "Using Custom-Built Docker Images"
 description: "Why and how to create custom Docker images"
-categories: [docker]
+categories: [containerization]
 order: 30
 ---
 

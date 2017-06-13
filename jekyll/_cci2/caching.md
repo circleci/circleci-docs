@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Caching Dependencies and Source Code"
 short-title: "Caching Dependencies and Source Code"
 description: "Caching Dependencies and Source Code"
-categories: [configuring-jobs]
+categories: [optimization]
 order: 50
 ---
 

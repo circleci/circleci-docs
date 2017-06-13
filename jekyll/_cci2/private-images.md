@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Using Private Images"
 short-title: "Using Private Images"
 description: "How to use private images with the Remote Docker Environment"
-categories: [virtualization]
+categories: [containerization]
 order: 50
 ---
 
