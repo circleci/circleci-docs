@@ -45,6 +45,39 @@ CircleCI 2.0 introduces the requirement that you create a configuration file (`.
      ```
 7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
+## Steps to Configure Workflows
+
+Optionally configure workflows, using the following instructions:
+
+1. To use the Workflows feature for job orchestration, first split your build job into multiple jobs, each with a unique name.
+
+2. To persist a job artifact, add the `persist_to_workspace:<directory>` key at the end of the job, under `steps:`. Then, to get the saved artifact for use by another job, add the `attach_workspace:` key with a nested `at:<directory>` key, ideally  defined as the directory where the artifact was saved.
+ 
+3. Add lines for `workflows:`, `version: 2` and *<workflow_name>* at the *end* of the master `.circle/config.yml` file, replacing *<workflow_name>* with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta. 
+     ```
+     workflows:
+       version: 2
+       <workflow_name>:
+     ```  
+4. Add a line for the `jobs:` key under <workflow_name> and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
+ 
+     ```
+     workflows:
+       version: 2
+       <workflow_name>:
+           jobs:
+             - build
+             - test
+     ```  
+5. For Jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of Jobs that must succeed for it to start. If you were using a `curl` command to start a Job, Workflows enable you to remove the command and start the job by using Workflows with the `requires:` key.
+ 
+     ```
+        - <job_name>
+	  requires:
+	     - <job_name>
+     ```
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes.
+
 ## Search and Replace Deprecated 2.0 Keys
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:

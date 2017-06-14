@@ -11,7 +11,7 @@ This document describes how to configure your project to run on CircleCI 2.0.
 
 ## Prerequisites
 
-- Complete the steps in the [Join Beta & Sign Up]({{ site.baseurl }}/2.0/first-steps/) document.  
+- If this will be your very first CircleCI project, complete the steps in the [Sign Up & Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) document.  
 
 ## Steps
 

@@ -34,7 +34,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`jobs`**
 
-Each job is an item in the `jobs` list. `build` is the default job and is required in every `config.yml`. This is the only job that will be automatically picked up and run by CircleCI.
+Each job is an item in the `jobs` list. `build` is the default job and is required in every `config.yml`. This is the only job that will be automatically picked up and run by CircleCI. However, if you configure Workflows, a job named `build` is not required. See the [Workflows]({{ site.baseurl }}/2.0/workflows) documentation for detailed information.
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
@@ -555,6 +555,73 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
 
 Note that CircleCI 2.0 builds are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
 
+## **`workflows`**
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. 
+
+### **`version`**
+The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+version | Y | String | Should currently be `2`
+{: class="table table-striped"}
+
+### **`jobs`**
+A job can have the keys `requires` and `filters`.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+jobs | Y | List | A list of jobs to run with their dependencies
+{: class="table table-striped"}
+
+#### **`requires`**
+Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name. 
+
+Key | Required | Type | Description
+----|-----------|------|------------
+requires | N | List | A list of jobs that must succeed for the job to start
+{: class="table table-striped"}
+
+#### **`filters`**
+Filters can have the key `branches`.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+filters | N | Map | A map defining rules for execution on specific branches
+{: class="table table-striped"}
+
+##### **`branches`**
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+- Any branches that match `only` will run the job.
+- Any branches that match `ignore` will not run the job.
+- If neither `only` nor `ignore` are specified then all branches will run the job.
+- If both `only` and `ignore` are specified the `only` overrides `ignore`.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+branches | N | Map | A map defining rules for execution on specific branches
+only | N | String | A branch name
+ignore | N | String | A branch name
+{: class="table table-striped"}
+
+##### *Example*
+
+``` 
+workflows:
+  version: 2
+
+  build_test_deploy:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
+          filters:
+            branches:
+              only: master
+```
+
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
 ## _Full Example_
 {:.no_toc}
