@@ -53,7 +53,7 @@ jobs:
       - run: <command>
   test3:
     steps:
-- run: <command>
+      - run: <command>
 workflows:
   version: 2
   build_and_test:
