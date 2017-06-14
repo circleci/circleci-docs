@@ -77,11 +77,23 @@ Optionally configure workflows, using the following instructions:
 5. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
  
      ```
-        - <job_name>
-	  requires:
-	     - <job_name>
+      - <job_name>
+          requires:
+            - <job_name>
      ```
-6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes.
+6. For jobs which must run on a particular branch, add the `filters:` key with a nested `branches` and `only` key. For jobs which must not run on a particular branch, add the `filters:` key with a nested `branches` and `ignore` key.
+ 
+     ```
+     - <job_name>
+         filters:
+           branches:
+             only: master
+     - <job_name>
+         filters:
+           branches:
+             ignore: master
+     ```     
+7. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Search and Replace Deprecated 2.0 Keys
 
