@@ -34,29 +34,29 @@ The basic Workflows configuration runs all jobs in parallel. That is, jobs liste
 
 ![Parallel Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/parallel_jobs.png) 
 
-To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with four parallel jobs. It is defined by using the `workflows:` key named `build-and-test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
+To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with four parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
 ```
 version: 2
-    jobs:
-      build:
-        working_directory: ~/<project root directory>
-        docker:
-          - image: circleci/<language>:<version TAG>
-        steps:
-          - checkout
-      test1:
-        steps:
-          - run: <command>
-      test2:
-        steps:
-          - run: <command>
-      test3:
-        steps:
-	  - run: <command>
+jobs:
+  build:
+    working_directory: ~/<project root directory>
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+  test1:
+    steps:
+      - run: <command>
+  test2:
+    steps:
+      - run: <command>
+  test3:
+    steps:
+- run: <command>
 workflows:
   version: 2
-  build-and-test:
+  build_and_test:
     jobs:
       - build
       - test1
