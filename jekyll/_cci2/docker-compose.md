@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Installing and Using docker-compose"
 short-title: "Installing and Using docker-compose"
 description: "How to enable docker-compose in your primary container"
-categories: [deploying]
+categories: [containerization]
 order: 40
 ---
 
