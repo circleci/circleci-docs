@@ -7,7 +7,7 @@ categories: [migration]
 order: 15
 ---
 
-CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`) and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to change your parallelism setting to `1` to prevent duplication of job runs.
+CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`) and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
 
 If you already have a `circle.yml` file, this article will help you add the new required keys and values and then search and replace your 1.0 keys with 2.0 keys. If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
