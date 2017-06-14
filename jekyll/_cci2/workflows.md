@@ -7,11 +7,11 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-This section describes the Workflows feature and provides examples for parallel, sequential, fan-in, fan-out, and branch-level workflows. To enable Workflows, you must first split the single job in your `config.yml` file into multiple jobs, if you have not already done so. Job names must be unique within a `config.yml` file. 
+This section describes the Workflows feature and provides examples for parallel, sequential, fan-in, fan-out, and branch-level workflows. To enable Workflows, you must first split the single job in your CircleCI 2.0 `config.yml` file into multiple jobs with unique names, if you have not already done so. Job names must be unique within a `config.yml` file. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for instructions.
  
 ## Overview
 
-A workflow is a set of rules for defining a collection of jobs and their run order. The Workflows feature is designed with a flexible algorithm to support very complex job scheduling and orchestration using a simple set of new configuration keys. Consider configuring workflows if you need to meet any of the following requirements:
+A workflow is a set of rules for defining a collection of jobs and their run order. The Workflows feature is designed with a flexible algorithm to support very complex job scheduling and orchestration using a simple set of new configuration keys. Consider configuring Workflows if you need to meet any of the following requirements:
  
 - Run and troubleshoot jobs independently
 - Fan-out to run multiple jobs in parallel for testing various versions  
@@ -34,9 +34,26 @@ The basic Workflows configuration runs all jobs in parallel. That is, jobs liste
 
 ![Parallel Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/parallel_jobs.png) 
 
-To run a set of parallel jobs, add a new `workflows:` section to the end of your existing configuration file with the version and a unique name for the workflow. The following `.circleci/config.yml` file snippet shows an example workflow with four parallel jobs. It is defined by using the `workflows:` key named `build-and-test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
+To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with four parallel jobs. It is defined by using the `workflows:` key named `build-and-test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
 ```
+version: 2
+    jobs:
+      build:
+        working_directory: ~/<project root directory>
+        docker:
+          - image: circleci/<language>:<version TAG>
+        steps:
+          - checkout
+      test1:
+        steps:
+          - run: <command>
+      test2:
+        steps:
+          - run: <command>
+      test3:
+        steps:
+	  - run: <command>
 workflows:
   version: 2
   build-and-test:
@@ -49,7 +66,7 @@ workflows:
 
 ## Sequential Job Execution Example
 
-The following example shows a workflow with four sequential jobs. The jobs run according to configured  requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram. 
+The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram. 
 
 ![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequntial_workflow.png)
 
@@ -73,8 +90,6 @@ workflows:
 ```
 
 The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
- 
-The Workflows feature also enables you to limit the job execution to a branch with the `filters` key. See the Branch-Level Job Execution section for instructions.
  
 ## Running a Workflow from a Failed Job
 
@@ -121,7 +136,8 @@ workflows:
             - acceptance_test_3
             - acceptance_test_4
 ```
- 
+In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
+
 ## Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. 
 
@@ -148,9 +164,11 @@ workflows:
               only: pre-prod
 ```
 
+In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job.
+
 ## Using Workspaces to Share Artifacts Among Jobs
 
-Workflows that include jobs running on multiple branches may require artifacts to be shared using workspaces. Workspace are also useful for projects in which compiled artifacts are used by test containers. For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled artifacts into the workspace enables the test containers to use the compiled Scala from the build job.
+Workflows that include jobs running on multiple branches may require artifacts to be shared using workspaces. Workspaces are also useful for projects in which compiled artifacts are used by test containers. For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled artifacts into the workspace enables the test containers to use the compiled Scala from the build job.
 
 To persist an artifact from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key where the value is a directory inside the project’s working directory. Artifacts of the job will be saved to this directory until the job is rerun and new artifacts are created.
 
