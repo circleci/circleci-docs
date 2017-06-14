@@ -84,10 +84,9 @@ It is possible to rerun a job that failed in the middle of a workflow and contin
 
 To rerun a workflow from the failed job:
 
-1. From the Builds page, select the project name. 
-2. Click the Workflows icon to display workflows for your project.  
-3. Select a workflow from the list to see all jobs in the workflow. 
-4. Click Rerun and select from failed to rerun the job and continue the workflow. 
+1. Click the Workflows icon and select a project to display workflows.  
+2. Select a workflow from the list to see all jobs in the workflow. 
+3. Click Rerun and select from failed to rerun the job and continue the workflow. 
 
 ## Fan-Out/Fan-In Workflow Example
 	
