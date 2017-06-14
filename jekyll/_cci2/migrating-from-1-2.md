@@ -9,7 +9,10 @@ order: 15
 
 CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
 
-If you already have a `circle.yml` file, this article will help you add the new required keys and values and then search and replace your 1.0 keys with 2.0 keys. If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
+If you already have a `circle.yml` file, this article will help you make a copy your exisiting file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
+
+* Contents
+{:toc}
 
 ## Steps to Configure Required 2.0 Keys
 
@@ -55,7 +58,7 @@ Optionally configure workflows, using the following instructions:
 
 2. To persist a job artifact, add the `persist_to_workspace:<directory>` key at the end of the job, under `steps:`. Then, to get the saved artifact for use by another job, add the `attach_workspace:` key with a nested `at:<directory>` key, ideally  defined as the directory where the artifact was saved.
  
-3. Add lines for `workflows:`, `version: 2` and *<workflow_name>* at the *end* of the master `.circle/config.yml` file, replacing *<workflow_name>* with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta. 
+3. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta.  
      ```
      workflows:
        version: 2
