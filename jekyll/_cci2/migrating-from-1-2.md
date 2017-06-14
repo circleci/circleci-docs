@@ -64,7 +64,7 @@ Optionally configure workflows, using the following instructions:
        version: 2
        <workflow_name>:
      ```  
-4. Add a line for the `jobs:` key under <workflow_name> and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
+4. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
  
      ```
      workflows:
@@ -74,7 +74,7 @@ Optionally configure workflows, using the following instructions:
              - build
              - test
      ```  
-5. For Jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of Jobs that must succeed for it to start. If you were using a `curl` command to start a Job, Workflows enable you to remove the command and start the job by using Workflows with the `requires:` key.
+5. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
  
      ```
         - <job_name>
