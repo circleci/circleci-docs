@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
 title: Permissions and access during deployment
-categories: [reference]
+categories: [integrations]
 description: Permissions and access during deployment
 last_updated: May 7, 2015
+order: 1
 ---
 
 Sometimes you need to access external systems that require SSH key-based authentication during your build. Such case includes accessing your production server for deployment or pulling dependencies from private VCS.
