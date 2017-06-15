@@ -21,46 +21,54 @@
   icon: "gettingstarted.svg"
 
 - section: cci1
+  slug: migration
+  name: "Migration"
+
+- section: cci1
   slug: build-images
-  name: "Build Images"
+  name: "Build Environments"
   icon: "build-images.svg"
-
+  
 - section: cci1
-  slug: languages
-  name: "Languages"
-  icon: "languages.svg"
-
+  slug: configuration
+  name: "Configuration"  
+  
 - section: cci1
-  slug: mobile-platforms
-  name: "Mobile Platforms"
-  index: mobile
-  icon: "mobile.svg"
+  slug: parallelism
+  name: "Optimization"
+  icon: "parallelism.svg"
+
+#- section: cci1
+#  slug: mobile-platforms
+#  name: "Mobile Platforms"
+#  index: mobile
+#  icon: "mobile.svg"
 
 - section: cci1
   slug: how-to
-  name: "How-To"
+  name: "Integrations"
   icon: "how-to.svg"
-
+  
 - section: cci1
-  slug: troubleshooting
-  name: "Troubleshooting"
-  icon: "troubleshooting.svg"
+  slug: languages
+  name: "Language Guides"
+  icon: "languages.svg"  
 
 - section: cci1
   slug: reference
   name: "Reference"
   icon: "reference.svg"
-
+  
 - section: cci1
-  slug: parallelism
-  name: "Parallelism"
-  icon: "parallelism.svg"
+  slug: troubleshooting
+  name: "Troubleshooting"
+  icon: "troubleshooting.svg"  
 
-- section: cci1
-  slug: privacy-and-security
-  name: "Privacy and Security"
-  index: privacy-security
-  icon: "privacy-security.svg"
+#- section: cci1
+#  slug: privacy-and-security
+#  name: "Privacy and Security"
+#  index: privacy-security
+#  icon: "privacy-security.svg"
 
 
 # CircleCI Enterprise  Docs
