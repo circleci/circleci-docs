@@ -1,8 +1,9 @@
 ---
 layout: classic-docs
-title: Start background processes from circle.yml
-categories: [how-to]
+title: Starting Background Processes
+categories: [configuration]
 description: "How to start a background process from circle.yml"
+order: 50
 ---
 
 Starting a background process from [circle.yml]( {{ site.baseurl }}/1.0/configuration/)
