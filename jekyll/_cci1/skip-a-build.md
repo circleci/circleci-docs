@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Skip a build
-categories: [how-to]
+title: Skipping a build
+categories: [configuration]
 description: How to skip a build
 ---
 
