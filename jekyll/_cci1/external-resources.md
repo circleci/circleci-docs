@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Use resources which are not in your repository
-categories: [how-to]
+title: Using Resources External to Your Repository
+categories: [configuration]
 description: How to use resources not in your repository
 last_updated: Feb 2, 2012
 ---
