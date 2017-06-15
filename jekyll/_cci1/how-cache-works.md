@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: How Cache Works
-categories: [reference]
+title: Caching in CircleCI
+categories: [optimization]
 description: "How caching works on CircleCI 1.0"
 ---
 
