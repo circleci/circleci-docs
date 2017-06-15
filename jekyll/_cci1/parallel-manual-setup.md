@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Manually setting up parallelism
+title: Manually Setting Up Parallelism
 description: Manually setting up parallelism
 category: parallelism
 ---
