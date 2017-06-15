@@ -18,7 +18,7 @@ Code that builds on Linux will generally build on CircleCI 2.0. For some languag
 - **Node.js 4 and later**, see the [JavaScript Language Guide]({{ site.baseurl }}/2.0/language-javascript/)
 - **PHP 5 and later**, see the [PHP Language Guide]({{ site.baseurl }}/2.0/language-php/)
 - **Python 2 and later**, see the [Python Language Guide]({{ site.baseurl }}/2.0/language-python/)
-- **Ruby 2 and later**, see the [Ruby and Rails]({{ site.baseurl }}/2.0/language-ruby/) 
+- **Ruby 2 and later**, see the [Ruby and Rails Guide]({{ site.baseurl }}/2.0/language-ruby/) 
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, Javascript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more. 
 
