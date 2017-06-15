@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Permissions and access during deployment
-categories: [integrations]
+categories: [how-to]
 description: Permissions and access during deployment
 last_updated: May 7, 2015
 order: 1
