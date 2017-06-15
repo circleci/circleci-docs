@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Manually setting up parallelism
 description: Manually setting up parallelism
+category: parallelism
 ---
 
 If you want the benefits of parallel testing, and you're not
