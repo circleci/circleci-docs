@@ -96,7 +96,7 @@ version: 2
       - image: circleci/openjdk:8-jdk-browsers
 ```
 
-We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/circleci/openjdk/) tagged to version `8-jdk-browsers` which includes browsers for performing end-to-end testing.
+We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `8-jdk-browsers` which includes browsers for performing end-to-end testing.
 
 Now we’ll add several `steps` within the `build` job.
 
