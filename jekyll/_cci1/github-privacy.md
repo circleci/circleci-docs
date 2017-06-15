@@ -1,12 +1,12 @@
 ---
 layout: classic-docs-parent
-title: GitHub integration
-categories: [privacy-and-security]
+title: GitHub Integration
+categories: [migration]
 description: GitHub integration
 children:
-  - github-3rdparty-app-restrictions
-  - cant-follow
-  - github-permissions
-  - github-security-ssh-keys
   - what-happens
+  - github-security-ssh-keys
+  - github-permissions
+  - cant-follow
+  - github-3rdparty-app-restrictions
 ---
