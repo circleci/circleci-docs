@@ -121,7 +121,7 @@ This feature only exists on CircleCI 2.0. In order to use Workflows, you must fi
  
 ### Can I use Workflows with CircleCI Enterprise?
 
-This feature is currently only available for users of the hosted CircleCI application.
+Workflows will soon be available in CircleCI Enterprise as part of our roll-out of or 2.0 system for Enterprise. Contact your account manager if you'd like to get on the list for early previews.
  
 ### How many jobs can I run at one time?
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
