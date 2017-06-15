@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Environment Variables
-categories: [reference]
+title: Using CircleCI Environment Variables
+categories: [configuration]
 description: How to work with environment variables
 ---
 
