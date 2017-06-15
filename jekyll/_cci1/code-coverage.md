@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Generating code coverage metrics
-short-title: Code Coverage
-categories: [how-to]
+title: Generating Code Coverage Metrics
+short-title: Generating Code Coverage Metrics
+categories: [configuration]
 description: Generating code coverage metrics
+order: 30
 ---
 
 Code Coverage tells you how much of your application is tested.
