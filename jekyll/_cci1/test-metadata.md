@@ -1,22 +1,22 @@
 ---
 layout: classic-docs
-title: Collecting test metadata
-categories: [how-to]
+title: Collecting Test Metadata
+categories: [configuration]
 description: "Collecting test metadata"
 ---
 
 CircleCI can collect test metadata from JUnit XML files.
 
-We'll use the test metadata to give you better insight into your build. For our
-inferred steps that use parallelism, we'll always use the timing information to get you
+CircleCI uses the test metadata to give you better insight into your build. For the 
+inferred steps that use parallelism, CircleCI always uses the timing information to get you
 better test splits and finish your builds faster.
 
 You can also take advantage of this runtime-based test splitting in custom steps if you follow [these steps]( {{ site.baseurl }}/1.0/test-metadata/#using-the-files-modifier).
 
 ## Automatic test metadata collection
 
-If you're using our inferred test steps for Ruby or Python then we'll
-automatically collect test metadata, though for RSpec, Minitest, and Django
+If you're using inferred test steps for Ruby or Python then CircleCI
+automatically collects test metadata, though for RSpec, Minitest, and Django
 you'll need to do some configuration to to enable the formatters:
 
 ### For RSpec:
