@@ -76,7 +76,7 @@ version: 2
 
 Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+In each job, we must specify a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
 ```YAML
 version: 2
