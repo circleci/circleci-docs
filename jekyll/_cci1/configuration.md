@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI 1.0
+title: Configuring CircleCI 
 categories: [configuration]
 description: How to configure CircleCI
 order: 20
