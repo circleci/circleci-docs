@@ -22,12 +22,22 @@ If you are using a clustered install with Docker-based builder machines as docum
 variables like this:
 
 ```
-sudo docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
+$ curl -sSL https://get.docker.com | sh
+# How to specify the docker storage driver will vary by distro. You may instead
+# need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
+$ sudo sed -i 's/docker daemon/docker daemon --storage-driver=overlay/' \
+   /usr/lib/systemd/system/docker.service \
+   && sudo systemctl daemon-reload && sudo service docker restart
+# Pre-pulling the build image is optional, but makes it easier to follow progress
+# You can always see the latest at https://circleci.com/docs/1.0/build-image-trusty/#build-image
+$ sudo docker pull circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4
+$ sudo docker run -d -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock \
+    -e CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4" \
     -e CIRCLE_SECRET_PASSPHRASE=<your passphrase> \
     -e SERVICES_PRIVATE_IP=<private ip address of services box>  \
-    -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \
+    -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \ # Only necessary outside of ec2
     -e CIRCLE_OPTION_A=foo \
-    circleci/builder-base:some-version
+    circleci/builder-base:1.1
 ```
 
 ### Sharing the Docker Socket
