@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Skipping a build
-categories: [configuration]
+categories: [configuration-tasks]
 description: How to skip a build
 ---
 
