@@ -4,6 +4,7 @@ section: enterprise
 title: "LXC-based Installation"
 category: [advanced-config]
 order: 5
+hide: true
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
