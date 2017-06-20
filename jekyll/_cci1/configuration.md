@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Configuring CircleCI 
-categories: [configuration]
+categories: [configuration-tasks]
 description: How to configure CircleCI
 order: 20
 ---
