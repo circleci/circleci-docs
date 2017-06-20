@@ -7,7 +7,7 @@ categories: [containerization]
 order: 20
 ---
 
-As a convenience, CircleCI maintains a number of Docker Images for popular languages with additional tooling that is useful when running your tests. All of the following images are published in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). 
+As a convenience, CircleCI maintains a number of Docker Images for popular languages with additional tooling that is useful when running your tests. All of the following images are published in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/), the Dockerfiles and other source code is available in the [repository on GitHub](https://github.com/circleci/circleci-images). 
 
 
 
