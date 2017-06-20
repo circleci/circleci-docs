@@ -1,8 +1,9 @@
 ---
 layout: classic-docs
 title: Collecting Test Metadata
-categories: [configuration]
+categories: [configuration-tasks]
 description: "Collecting test metadata"
+order: 45
 ---
 
 CircleCI can collect test metadata from JUnit XML files.
