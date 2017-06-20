@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
 title: Overview
-categories: [configuration]
+categories: [configuration-tasks]
 description: Overview of manual build setup
-order: 10
+order: 1
 ---
  
 CircleCI is designed to set up most tests automatically because we infer your settings from your code.
