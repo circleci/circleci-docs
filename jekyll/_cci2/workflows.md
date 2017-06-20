@@ -164,7 +164,7 @@ workflows:
               only: pre-prod
 ```
 
-In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job.
+In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job.
 
 ## Using Workspaces to Share Artifacts Among Jobs
 
@@ -224,3 +224,5 @@ workflows:
 - For details about the `workflows:` key requirements, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Writing Jobs with Steps document.
 
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ.
+
+-For demonstration apps configured with workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
