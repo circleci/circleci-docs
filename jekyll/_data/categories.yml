@@ -30,7 +30,7 @@
   icon: "build-images.svg"
   
 - section: cci1
-  slug: configuration
+  slug: configuration-tasks
   name: "Configuration"  
   
 - section: cci1
