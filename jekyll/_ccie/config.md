@@ -4,6 +4,7 @@ section: enterprise
 title: "LXC-based Builder Configuration"
 category: [advanced-config]
 order: 6
+hide: true
 description: "Configuring the CircleCI Enterprise installation."
 ---
 
