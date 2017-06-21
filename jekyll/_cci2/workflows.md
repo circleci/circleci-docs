@@ -168,11 +168,15 @@ In the example, `filters` is set with the `branches` key and the `only` key with
 
 ## Using Workspaces to Share Artifacts Among Jobs
 
-Workflows that include jobs running on multiple branches may require artifacts to be shared using workspaces. Workspaces are also useful for projects in which compiled artifacts are used by test containers. For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled artifacts into the workspace enables the test containers to use the compiled Scala from the build job.
+Use workspaces to pass along data unique to this run and are needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
 
-To persist an artifact from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key where the value is a directory inside the project’s working directory. Artifacts of the job will be saved to this directory until the job is rerun and new artifacts are created.
+For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job. 
 
-Configure a job to get a saved artifact by configuring the `attach_workspace` key where the value of the `at:` option is the directory defined in the `persist_to_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
+A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
+
+To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key where the value is a directory inside the project’s working directory. Data from the job will be saved to this directory until the job is rerun and new data is created.
+
+Configure a job to get saved data by configuring the `attach_workspace` key where the value of the `at:` option is the directory defined in the `persist_to_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
  
 ```
 defaults: &defaults
