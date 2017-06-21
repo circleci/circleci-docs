@@ -40,7 +40,23 @@ We set the services box to have termination protection in AWS. We also write to 
 
 #### "How do I backup CircleCI?"
 
-As of 1.48.0 we've enabled you to take snapshots right in the management console. Just click on `Start Snapshot` in the dashboard to start your process. If you want to restore from a snapshot; you'll need to start the install process over again. When you go to input the license, under the license button you'll see `restore from Snapshot` and you can take your backup file and restore it.
+As of 1.48.0 we've enabled you to take snapshots right in the management console, and follow the steps below:
+
+1: On the management console, https://services_ip:8800, create a snapshot
+
+2: After it completes, backup the full snapshots directory `/var/lib/replicated/snapshots`, including the json file, to something safe.
+
+3: Take down the services box and rebuild it, but do not run the setup wizard yet.
+
+4: Copy the snapshots directory to the services box. I recomend `/home/ubuntu/ so to avoid permissions issues.
+
+5: Run the startup. When it asks for the licence, instead click `restore from a snapshot` 
+
+6: Enter the path ie: `/home/ubuntu/snapshots` and click browse.
+
+7: Select the snapshot and choose restore.
+
+8: Restore the full snapshot and that will return your licence, console passphrase and databases.
 
 #### "How do I upgrade builder instances"
 
