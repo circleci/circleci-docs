@@ -93,6 +93,8 @@ user | N | String | Which user to run the command as
 environment | N | Map | A map of environment variable names and values
 {: class="table table-striped"}
 
+The first `image` listed in the file defines the primary container image where all steps will run. 
+
 `entrypoint` overrides default entrypoint from Dockerfile.
 
 `command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
