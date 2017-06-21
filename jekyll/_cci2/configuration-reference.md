@@ -571,6 +571,9 @@ at | Y | String | Directory containing temporary files
     at: /tmp/file-name
 ```
 
+A job has one implicit workspace when it runs in a workflow (although using it is optional). In the fan-in case, workspaces of upstream jobs are merged. **Note**: Name conflicts will cause error currently. When a job finishes, its workspace is frozen and cannot be changed. The same workspace is used if a downstream job is rerun. Consider a workflow of J1 -> J2 -> J3
+Any rerun of J2 will see the same workspace as the original run. Use workspaces to pass along data unique to this run and which are needed for downstream jobs.
+
 Note the following distinctions between Artifacts, Workspaces, and Caches:
 
 | Type      | lifetime        | Use                      | Example |
