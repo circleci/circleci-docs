@@ -116,6 +116,9 @@ With the following to load it into your shell:
 ```
     environment:
        BASH_ENV: ~/.bashrc
+    steps:
+      run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      run: some_program_inside_bin
 ```
 
 - Search and replace the `hosts:` key, for example:
