@@ -21,7 +21,7 @@ true
 
 true
 
-We use Bash, which follows the POSIX naming convention for environment variables. Basically, uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character should be a letter.
+We use Bash, which follows the POSIX naming convention for environment variables. Basically, uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character should be a letter. Variable names are case-sensitive.
 
 ## Build Details
 
