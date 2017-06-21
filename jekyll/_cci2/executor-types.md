@@ -8,15 +8,35 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This version of CircleCI enables you to use Docker Images instead of using the full Linux OS container. This change increases performance by building only what is required for your application, and it requires selecting an image in your `.circleci/config.yml` file, for example: 
+This version of CircleCI enables you to use Docker Images instead of using the full Linux OS container. This change increases performance by building only what is required for your application. This change requires selecting an image in your `.circleci/config.yml` file that defines the primary container image where all steps run, for example: 
 ```
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
 ```
-To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
+In this example, all steps run in this first listed image. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
 
+### Using Multiple Docker Images
+It is possible to specify multiple images. In a multi-image configuration job, all steps are executed in the **first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+
+```
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run.
+     - image: buildpack-deps:trusty
+    # Secondary container image on common network. 
+     - image: mongo:2.6.8
+       command: [mongod, --smallfiles]
+
+    working_directory: ~/
+
+    steps:
+      # command will execute in trusty container
+      # and can access mongo on localhost
+      - run: sleep 5 && nc -vz localhost 27017
+```
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
 ### Public Convenience Images on Docker Hub
@@ -73,30 +93,7 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 - If you experience increases in your run times due to installing additional tools during execution, we recommend using the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements.
 
-### Using Multiple Docker Images
-It is possible to specify multiple images. When you do so, all containers run in a common network. Every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
-
-```
-jobs:
-  build:
-    docker:
-     - image: buildpack-deps:trusty
-
-     - image: mongo:2.6.8
-       command: [mongod, --smallfiles]
-
-    working_directory: ~/
-
-    steps:
-      # command will execute in trusty container
-      # and can access mongo on localhost
-      - run: sleep 5 && nc -vz localhost 27017
-```
-
-In a multi-image configuration job, steps are executed in the first container listed.
-
 More details on the Docker Executor are available [here]({{ site.baseurl }}/2.0/configuration-reference/).
-
 
 ## Machine Executor
 
