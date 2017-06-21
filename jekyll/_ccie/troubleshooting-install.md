@@ -27,8 +27,8 @@ in `/etc/circle-installation-customizations` for it to work. You also won't need
 
 Yes! You can do this by adding this to a file called `/etc/circle-installation-customizations`:
 
-`export CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4"`
-That'll give you the same image that is currently used on circleci.com, but you can replace the URI image with anything that is currently pulled unto the machine or exists in dockerhub. 
+`export CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:latest"`
+That'll give you the same image that is currently used on circleci.com, but you can replace the URI image with anything that is currently pulled unto the machine or exists in dockerhub. This works with [custom images](https://github.com/circleci/image-builder) as well. 
 
 #### "Why isn't CircleCI using HTTPS?"
 
@@ -36,7 +36,7 @@ While we create a self-signed cert when starting up, that certificate only appli
 
 #### "Why doesn't terraform destroy every resource"
 
-We set the services box to have termination protection in AWS. We also write to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the circleci.tf file. 
+We set the services box to have termination protection in AWS. We also write to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the circleci.tf file. You'll also need to empty the s3 bucket that was created as part of the terraform install.'
 
 #### "How do I backup CircleCI?"
 
