@@ -575,7 +575,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 
 | Type      | lifetime        | Use                      | Example |
 |-----------|-----------------|------------------------------------|---------
-| Artifacts | Months to years | Preserve long-term artifacts. |  Linked list in the Artifacts tab of the Build details under the `tmp/circle-artifacts.<hash>/container`   or similar directory.   |
+| Artifacts | Months          | Preserve long-term artifacts. |  Available in the Artifacts tab of the Build details under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
 | Workspaces | Duration of workflow        | Move temporary files around for use by jobs run later in the workflow. | The `persist_to_workspace: <directory>` key under jobs, refer to the file with `attach_workspace: at: <directory>`.    |
 | Caches    | Months          | Store dependency or source code data in fast memory for quick retrieval.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
