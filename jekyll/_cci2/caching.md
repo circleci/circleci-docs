@@ -13,6 +13,8 @@ This document describes the manual caching available, the costs and benefits of 
 
 ## Overview
 
+A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but in the case of a cache miss or zero cache restore the job will still run successfully, for example, by caching Npm, Gem, or Maven package  directories.
+
 Caching is a balance between reliability (not using an out-of-date or inappropriate cache) and getting maximum performance (using a full cache for every build).
 
 In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability. 
@@ -23,9 +25,13 @@ The dependencies that are most important to cache during a job are the libraries
 
 Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client and gzip preinstalled.  
 
+## Writing to the Cache
+ 
+Cache is written in chronological order. Consider a workflow of Job1 -> Job2 -> Job3. If Job1 and Job3 write to the same cache key, a rerun of Job2 may use the changes written by Job3 because Job2 ran last. That is, any job that runs inside a project will always use the latest write. For example, when you increment versions of a Gem package, the `~/.gem` contains both the old and new versions and the cache is made more useful by the addition of data.
+
 ## Restoring Cache
 
-To decide how to save your cache, it is useful to first understand that CircleCI selects what will be restored in the order in which they are listed in the special `restore_cache` step. As caches become less specific going down the list in the following example, there is greater likelihood that the dependencies they contain are different from those that the current job requires. When your dependency tool runs (for example, `npm install`) it will discover out-of-date dependencies and install those the current job specifies. This is also referred to as *partial cache* restore. 
+To decide how to save your cache, it is useful to first understand that CircleCI selects what will be restored in the order in which they are listed in the special `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. As caches become less specific going down the list in the following example, there is greater likelihood that the dependencies they contain are different from those that the current job requires. When your dependency tool runs (for example, `npm install`) it will discover out-of-date dependencies and install those the current job specifies. This is also referred to as *partial cache* restore. 
 
 Here's an example of a `restore_cache` step with two keys:
 
