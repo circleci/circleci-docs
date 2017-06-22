@@ -116,7 +116,7 @@ workflows:
   version: 2
   build_accept_deploy:
     jobs:
-      - build:
+      - build
       - acceptance_test_1:
           requires:
             - build
