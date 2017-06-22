@@ -1,15 +1,16 @@
 ---
 layout: classic-docs
-title: "Enabling Web Notifications"
-short-title: "Enabling Web Notifications"
+title: "Enabling Web and Email Notifications"
+short-title: "Enabling Web and Email Notifications"
 categories: [configuring-jobs]
 order: 100
 published: true
 ---
+Use the [Notifications](https://circleci.com/account/notifications) page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
 
 ## Enabling Web Notifications
 
-1. Go to your [CircleCI account settings](https://circleci.com/account). The link to turn on permissions is at the bottom in the Web Notifications section as shown in the screenshot:
+1. Go to your [CircleCI user settings](https://circleci.com/account/notifications). The link to turn on permissions is at the bottom in the Web Notifications section as shown in the screenshot:
 
 ![](  {{ site.baseurl }}/assets/img/docs/notification-default-message.png)
 
