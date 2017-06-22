@@ -25,9 +25,13 @@ in `/etc/circle-installation-customizations` for it to work. You also won't need
 
 #### Can I use a custom image in single box mode?
 
-Yes! You can do this by adding this to a file called `/etc/circle-installation-customizations`:
+Yes! You can do this by adding the below export to a file called `/etc/circle-installation-customizations`:
 
-`export CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:`{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.build-image }}`"`
+
+```
+export CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.build-image }}"
+```
+
 That'll give you the same image that is currently used on circleci.com, but you can replace the URI image with anything that is currently pulled unto the machine or exists in dockerhub. This works with [custom images](https://github.com/circleci/image-builder) as well. 
 
 #### "Why isn't CircleCI using HTTPS?"
