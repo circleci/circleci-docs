@@ -1,38 +1,21 @@
 ---
 layout: classic-docs
-title: "Caching Dependencies and Source Code"
-short-title: "Caching Dependencies and Source Code"
-description: "Caching Dependencies and Source Code"
+title: "Caching Dependencies"
+short-title: "Caching Dependencies"
+description: "Caching Dependencies"
 categories: [optimization]
 order: 50
 ---
 
+Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 provides enables more advanced strategies and finer control. 
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. To get the best performance can take a bit of planning and fine tuning. There is an art to effective caching. This document gives you strategies to optimise caching to speed up your jobs.
+This document describes the manual caching available, the costs and benefits of a chosen strategies, and tips for using and avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on infrastructure where possible. 
 
-## Types of cache
+## <a name="dependency-caching"></a>Basic Example of Dependency Caching
 
-Thing you might choose to include:
+The extra control and power in 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Writing Jobs and Steps document for the specific keys and requirements.
 
-- Dependencies
-- Source code
-
-Your dependencies are the libraries and tools your project needs to build, test and deploy. The source is the version controlled source code for your project.
-
-We will cover [dependency caching](#dependency-caching) in detail since this is where the biggest performance gains are and there are many variables and options. [Source caching](#source-caching) is covered at the end of the document.
-
-**Note:** On CircleCI 2.0 the Docker images you use for your jobs are automatically cached on our infrastructure where possible. This document is about manually caching dependencies and source code.
-
----
-# <a name="dependency-caching"></a>Dependency Caching
- 
-CircleCI 2.0 has more advanced caching strategies available than CircleCI 1.0. We've removed automatic caching to give you finer control. The extra control and power requires that you be explicit about what you cache and how you cache it. You'll learn how to do that in this section.
-
-If you're looking for a quick reference, the [cache configuration options](https://circleci.com/docs/2.0/configuration-reference/#save_cache) are documented in the main Configuration article.
-
-## Minimal `save_cache` example
-
-To save a cache of a file or directory you add the following as a step to a job in you `.circleci/config.yml`:
+To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
 ```
 - save_cache:
@@ -44,21 +27,19 @@ To save a cache of a file or directory you add the following as a step to a job 
 
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-## What dependencies should I cache?
+## Caching Libraries 
 
-The dependencies that are good to cache during a job are things like the libraries that your project depends on. For example - the libraries the are installed with `pip` in Python or `npm` for Node.js.
+The dependencies that are important to cache during a job are the libraries that your project depends on. For example, cache the libraries the are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and demo projects for the specifics for your stack: <https://circleci.com/docs/2.0/demo-apps/>.
 
-The Docker image(s) you use for your jobs will usually have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client and gzip preinstalled. So these types of tools that are not explicitly required for your project are good candidates for being stored on the Docker image.
-
-## How do I know what the path is for my dependencies?
-
-The various language dependency managers (e.g. `npm` or `pip`) each have their own paths where dependencies are installed. See our Language guides and demo projects for the specifics for your stack: <https://circleci.com/docs/2.0/demo-apps/>
+Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-build by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client and gzip preinstalled.  
 
 ## Using cache keys and template values to control what is cached and restored
 
-This section is where you will learn about the art of caching. We say this because caching is a balance between getting maximum performance (using a full cache for every build) and reliability (not using an out-of-date or inappropriate cache).
+This section describes using cache keys and template values to control what is cached and restored. Caching is a balance between reliability (not using an out-of-date or inappropriate cache) and getting maximum performance (using a full cache for every build).
 
-The way you decide on when a cache will be save or restored is to use a key which is tied an aspect of your project.
+In general it is safer to preserve reliability than to risk a corrupted build or build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability. 
+
+The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
 
 When storing a new cache, the `key` value may contain special template values:
 
@@ -68,8 +49,8 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | the CircleCI build number for this build
 {% raw %}`{{ .Revision }}`{% endraw %} | the VCS revision currently being built
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | the environment variable `variableName`
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | a base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
-{% raw %}`{{ epoch }}`{% endraw %} | the current time in seconds since the unix epoch.
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | a base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
+{% raw %}`{{ epoch }}`{% endraw %} | the number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or Unix epoch.
 {: class="table table-striped"}
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
