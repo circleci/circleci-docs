@@ -30,6 +30,7 @@ The currently available Xcode versions are:
 
 * `9.0`: Xcode 9.0 Beta 1 (Build 9M136h)
 * `8.3`: Xcode 8.3.2 (Build 8E2002)
+* `8.3.3`: Xcode 8.3.3 (Build 8E3004b)
 * `8.3.2`: Xcode 8.3.2 (Build 8E2002)
 * `8.3.1`: Xcode 8.3.1 (Build 8E1000a)
 * `8.2`: Xcode 8.2.1 (Build 8C1002)
@@ -45,6 +46,7 @@ The currently available Xcode versions are:
 We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby, etc.
 
 * [Xcode version 9.0 Beta 1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-127/index.html).
+* [Xcode version 8.3.3 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html).
 * [Xcode version 8.3.2 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-105/index.html).
 * [Xcode version 8.3.1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-104/index.html).
 * [Xcode versions 7.0 – 8.2.1 (OSX 10.11 El Capitan)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/null/index.html).
