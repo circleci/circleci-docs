@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Getting started with iOS builds
-short-title: iOS Getting Started
-categories: [mobile-platforms]
-description: Testing iOS applications on CircleCI
+title: Setting Up iOS Applications on CircleCI
+short-title: Setting Up iOS applications on CircleCI
+categories: [configuration-tasks]
+description: Setting Up iOS applications on CircleCI
+order: 70
 ---
 
 To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.

@@ -1,10 +1,11 @@
 ---
 layout: classic-docs
-title: Set up code signing for iOS projects
+title: Setting Up Code Signing for iOS Projects
 short-title: iOS code signing
-categories: [how-to]
+categories: [configuration-tasks]
 description: Setting up code signing for iOS projects
 last_updated: March 2nd, 2016
+order: 72
 ---
 
 ## Quick start guide

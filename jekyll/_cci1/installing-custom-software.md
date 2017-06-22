@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Install custom software
-categories: [how-to]
+title: Customizing Build Environments
+categories: [build-images]
 description: How to install custom software
 ---
 

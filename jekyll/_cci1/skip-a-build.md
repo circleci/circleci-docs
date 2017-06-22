@@ -1,8 +1,9 @@
 ---
 layout: classic-docs
-title: Skip a build
-categories: [how-to]
+title: Skipping a build
+categories: [configuration-tasks]
 description: How to skip a build
+order: 65
 ---
 
 CircleCI supports the `[ci skip]` or `[skip ci]` standard for ignoring builds.

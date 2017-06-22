@@ -1,18 +1,12 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI
-categories: [getting-started,reference]
+title: Configuring CircleCI 
+categories: [configuration-tasks]
 description: How to configure CircleCI
-order: 30
+order: 20
 ---
-* Contents
-{:toc}
 
-CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
-
-If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory. If this file exists, CircleCI will read it each time it runs a build.
-
-For a rough idea of what a `circle.yml` looks like, check out our [sample file]( {{ site.baseurl }}/1.0/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
+CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration. If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory and CircleCI will read it each time it runs a build. Use the following sections to set up your `circle.yml` file.
 
 <h2 id="phases">File Structure and Content</h2>
 

@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Test iOS applications on macOS
-short-title: iOS builds on macOS
-categories: [mobile-platforms]
+title: Testing iOS Applications on macOS
+short-title: Testing iOS Applications on macOS
+categories: [configuration-tasks]
 description: Testing iOS applications on macOS
+order: 71
 ---
 
 CircleCI offers support for building and testing iOS and macOS projects.

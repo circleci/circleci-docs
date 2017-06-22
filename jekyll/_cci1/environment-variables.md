@@ -1,8 +1,9 @@
 ---
 layout: classic-docs
-title: Environment Variables
-categories: [reference]
+title: Using CircleCI Environment Variables
+categories: [configuration-tasks]
 description: How to work with environment variables
+order: 30
 ---
 
 We export a number of environment variables during each build, which you may find

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Migrating from Jenkins to CircleCI
-categories: [how-to]
+categories: [migration]
 description: Migrating from Jenkins to CircleCI
 ---
 

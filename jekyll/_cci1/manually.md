@@ -1,16 +1,17 @@
 ---
 layout: classic-docs
-title: Manual build setup
-categories: [getting-started]
-description: Manual build setup
-order: 40
+title: Overview
+categories: [configuration-tasks]
+description: Overview of manual build setup
+order: 1
 ---
-
-* Contents
-{:toc}
  
 CircleCI is designed to set up most tests automatically because we infer your settings from your code.
 However, if you have an unusual setup or work in a framework that has no idiomatic way to set up your project, you'll need to set it up manually.
+
+* Contents
+{:toc}
+
 Fortunately, this is a pretty straightforward procedure.
 If you follow this guide, you should be running your tests in 20 minutes or less.
 
