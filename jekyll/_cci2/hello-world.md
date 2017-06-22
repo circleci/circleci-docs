@@ -29,7 +29,7 @@ This document describes how to configure your project to run on CircleCI 2.0.
           - checkout
           - run: echo "hello world"
     ```
-The first image listed defines the execution environment for your build. So, this first image is where your 2.0 build will run because it is used for the primary container. The steps check out the code in the project directory and run the `echo` command.
+The first image listed defines the execution environment for your build. The primary container, where your 2.0 build commands run, is created from this image. The steps check out the code in the project directory and run the `echo` command.
 
 3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0, and a 2.0 icon appears on the Builds page.
     ![First Green Build Screenshot]({{ site.baseurl }}/assets/img/docs/green_build.png)
