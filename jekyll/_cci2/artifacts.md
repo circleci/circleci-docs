@@ -6,6 +6,12 @@ description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 70
 ---
+If your build produces persistent artifacts such as screenshots, coverage reports, or
+deployment tarballs, CircleCI can automatically save and link them for you.
+
+Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
+
+Artifacts are designed to be useful around the time of the build. We don't recommend relying on them as a software distribution mechanism with long term future guarantees.
 
 Sometimes, you'll want to upload artifacts created during builds so you can view them later. The following is an example of how to do that:
 
@@ -40,6 +46,3 @@ Currently, `store_artifacts` takes 2 fields: `path` and `destination`.
   - `path` is a path to the file or directory to be uploaded as artifacts.
   - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. (default: the directory of the file specified in `path`)
 
-## Accessing Artifacts via API
-
-You can consume artifacts via our [API]( {{ site.baseurl }}/api/v1-reference/#build-artifacts).

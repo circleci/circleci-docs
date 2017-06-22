@@ -56,7 +56,7 @@ Optionally configure workflows, using the following instructions:
 
 1. To use the Workflows feature for job orchestration, first split your build job into multiple jobs, each with a unique name.
 
-2. To persist a job artifact, add the `persist_to_workspace:<directory>` key at the end of the job, under `steps:`. Then, to get the saved artifact for use by another job, add the `attach_workspace:` key with a nested `at:<directory>` key, ideally  defined as the directory where the artifact was saved.
+2. To persist a temporary file to a location between jobs, add the `persist_to_workspace:<directory>` key, under `steps:`. Then, to get the saved temporary file for use by another job, add the `attach_workspace:` key with a nested `at:<directory>` key, ideally defined as the directory where the artifact was saved.
  
 3. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta.  
      ```
