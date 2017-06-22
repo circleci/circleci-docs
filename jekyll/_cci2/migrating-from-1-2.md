@@ -37,7 +37,7 @@ If you already have a `circle.yml` file, this article will help you make a copy 
          docker:
            - image: circleci/ruby:2.3
      ```
-     This first image in the list runs on the primary container where your build is run.
+     The primary container is an instance of the first list image listed. Your build commands run in this container.
 6. Nest `checkout:` under `steps:` by search and replacing
      ```
      checkout:
