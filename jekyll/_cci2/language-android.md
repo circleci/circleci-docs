@@ -76,7 +76,7 @@ Directly beneath `working_directory`, we can specify container images under a `d
       - image: circleci/android:api-25-alpha
 ```
 
-We use the [CircleCI-provided Android image](https://circleci.com/docs/2.0/circleci-images/#android) with the `api-25-alpha` tag.
+We use the CircleCI-provided Android imag with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
 
 Now we’ll add several `steps` within the `build` job.
 
@@ -89,5 +89,24 @@ Then `./gradlew lint test` runs the unit tests, and runs the built in linting to
 We then upload the build reports as build artifacts, and we upload the test metadata (XML) for CircleCI to process.
 
 Nice! You just set up CircleCI for an Android app.
+
+## Docker Images
+
+CircleCI provides a set of [Docker](https://www.docker.com/) [images for building Android apps](https://hub.docker.com/r/circleci/android/) on CircleCI 2.0.
+
+The [Dockerfiles are open-source, and available on GitHub](https://github.com/circleci/circleci-images/tree/master/android). Our image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+
+
+### Customizing the Images
+
+We welcome any feedback, PRs, comments and suggestions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has the tools needed to build most apps. We do not plan to provide every tool that you might need. If you want to add customiztion to the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/#base-image).
+
+### API Levels
+
+We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in your build, you should select `circleci/android:api-24-alpha`.
+
+### Alpha Tag
+
+Our Android Docker images are currently tagged with the suffix `-alpha`. This is to indicate the images are currently under development and might change in backwards incompatible ways from week to week.
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
