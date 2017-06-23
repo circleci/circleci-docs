@@ -76,7 +76,7 @@ Directly beneath `working_directory`, we can specify container images under a `d
       - image: circleci/android:api-25-alpha
 ```
 
-We use the CircleCI-provided Android imag with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
+We use the CircleCI-provided Android image with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
 
 Now we’ll add several `steps` within the `build` job.
 
@@ -95,7 +95,6 @@ Nice! You just set up CircleCI for an Android app.
 CircleCI provides a set of [Docker](https://www.docker.com/) [images for building Android apps](https://hub.docker.com/r/circleci/android/) on CircleCI 2.0.
 
 The [Dockerfiles are open-source, and available on GitHub](https://github.com/circleci/circleci-images/tree/master/android). Our image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
-
 
 ### Customizing the Images
 
