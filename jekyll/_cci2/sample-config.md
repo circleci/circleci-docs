@@ -27,8 +27,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
+    # The primary container is an instance of the first list image listed. Your build commands run in this container.
     docker:
       - image: circleci/node:4.8.2
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.   
       - image: mongo:3.4.4
     steps:
       - checkout
