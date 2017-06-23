@@ -9,11 +9,13 @@ order: 70
 If your build produces persistent artifacts such as screenshots, coverage reports, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
-Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
+![]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+
+Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
 
 Artifacts are designed to be useful around the time of the build. We don't recommend relying on them as a software distribution mechanism with long term future guarantees.
 
-Sometimes, you'll want to upload artifacts created during builds so you can view them later. The following is an example of how to do that:
+To upload artifacts created during builds so you can view them later, use the following example:
 
 ```YAML
 version: 2
@@ -39,10 +41,10 @@ jobs:
           path: /tmp/artifacts
 ```
 
-Using the `store_artifacts` step, we upload 2 build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). Once the artifacts are successfully uploaded, you can view them in the **Artifacts** tab of the build page in your browser. There is no limit on the  number of `store_artifacts` steps a job can have.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
 
-Currently, `store_artifacts` takes 2 fields: `path` and `destination`.
+Currently, `store_artifacts` has two keys: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
-  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. (default: the directory of the file specified in `path`)
+  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the deafult.
 
