@@ -47,4 +47,31 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
   - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the deafult.
+  
+## Download All Artifacts for a Build on CircleCI  
+
+Use the following procedure to download your artifacts with a bash script.
+
+1. Create an API token in the application by going to [User Settings > API Tokens](https://circleci.com/account/api).
+
+2. Click Create New Token, add a name in the dialog box and click Add API Token.
+
+3. Copy the token string that appears in the table.
+
+4. CD to a directory where you would like the artifacts files to be downloaded and run the following command, copying in the token from Step 3:
+
+```export CIRCLE_TOKEN='?circle-token=:your_token'
+
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
+
+<artifacts.txt xargs -P4 -I % wget %$CIRCLE_TOKEN
+```
+
+Note 1: Replace all the variables above that start with a : with real values for your project (don't include the colon).
+
+Note 2: :vcs-type will be github or bitbucket.
+
+Note 3: In the example, the `xargs` command runs four processes to download files in parallel. You can adjust this value to your needs.
+
+Explanation: The line beginning curl fetches all the artifacts details for a build, pipes this through the `grep` command to extract just the URLs. The results are saved to a file artifacts.txt. Then, `xargs` reads in that file and downloads each artifact file to the current directory.  
 
