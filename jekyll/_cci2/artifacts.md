@@ -50,7 +50,7 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
   
 ## Download All Artifacts for a Build on CircleCI  
 
-Use the following procedure to download your artifacts with a bash script.
+Use the following procedure to download your artifacts with `curl`.
 
 1. Create an API token in the application by going to [User Settings > API Tokens](https://circleci.com/account/api).
 
