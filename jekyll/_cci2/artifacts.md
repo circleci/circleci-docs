@@ -46,7 +46,7 @@ The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
   - `path` is a path to the file or directory to be uploaded as artifacts.
-  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the deafult.
+  - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
   
 ## Download All Artifacts for a Build on CircleCI  
 
@@ -54,7 +54,7 @@ Use the following procedure to download your artifacts with `curl`.
 
 1. Create an API token in the application by going to [User Settings > API Tokens](https://circleci.com/account/api).
 
-2. Click Create New Token, add a name in the dialog box and click Add API Token.
+2. Click Create New Token, add a name in the dialog box and click Add API Token. Name tokens to help you remember where they are used.
 
 3. Copy the token string that appears in the table.
 
