@@ -111,11 +111,9 @@ Optionally configure workflows, using the following instructions:
     PATH: "/path/to/foo/bin:$PATH"
 ```
 
-With the following to load it into your shell:
+With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
 
 ```
-    environment:
-       BASH_ENV: ~/.bashrc
     steps:
       run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
       run: some_program_inside_bin
