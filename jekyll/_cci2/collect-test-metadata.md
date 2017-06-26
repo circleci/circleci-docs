@@ -42,7 +42,7 @@ Write the XML files to a subdirectory under `$CIRCLE_TEST_REPORTS` (for example 
 
 CircleCI automatically stores the files in your [build artifacts]( {{ site.baseurl }}/1.0/build-artifacts/) and parses the XML. You can configure the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`. For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
 
-**Note**: CircleCI looks for test reports in `$CIRCLE_TEST_REPORTS`, so your test runner must to write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
+**Note**: CircleCI looks for test reports in `$CIRCLE_TEST_REPORTS`, so your test runner must write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
 
 ### Custom runner examples
 
