@@ -6,7 +6,7 @@ categories: [migration]
 Order: 60
 ---
 
-This document provides an overview of the process of checking out your code from GitHub or Bitbucket and running your configuration. After you add a project to CircleCI CircleCI adds the following GitHub or Bitbucket settings to your project using the permissions you gave CircleCI when you signed up:
+This document provides an overview of the process of checking out your code from GitHub or Bitbucket and running your configuration. After you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up::
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
 - A **service hook** that is used to notify CircleCI when you push to GitHub or Bitbucket.
 
@@ -24,9 +24,15 @@ jobs:
         bundle exec cucumber
 ```
         
-CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the test are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard) or get status when CircleCI sends you a notification email after the job finishes.
+CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard) or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
 
-## Authorizing Multiple GitHub Repositories for Testing
+![Status Badge After Commit]({{ site.baseurl }}/assets/img/docs/status_badge.png)
+
+Integrated status also appears on the pull request screen, to show that all tests have passed:
+
+![Status Badge After PR]({{ site.baseurl }}/assets/img/docs/status_check.png)
+
+## Enable Your Project to Check Out Additional Private Repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a GitHub user key has access to _all_ of your GitHub repositories.
 
@@ -92,7 +98,7 @@ The first two permissions require write-permission to a repo.
 
 ## How to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization
 
-Go to https://github.com/settings/connections/applications/78a2ba87f071c28e65bb and in the "Organization access" section either:
+Go to [GttHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
 
 * "Request access" if you are not an admin for the organization in question (an admin will have to approve the request) or
 * "Grant access" if you are an admin
