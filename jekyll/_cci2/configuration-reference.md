@@ -248,7 +248,7 @@ environment | N | Map | Additional environmental variables, locally scoped to co
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
 no_output_timeout | N | String | Elasped time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
-when | N | String | When to run step and takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
@@ -330,6 +330,29 @@ The `background` attribute allows for executing commands in the background. In t
 ```
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
+##### The `when` Attribute
+
+By default, CircleCI will execute build steps one at a time, in the order that
+they are defined in `config.yml`, until a step fails (returns a non-zero exit
+code). After a command fails, no further build steps will be executed.
+
+Adding the `when` attribute to a build step allows you to override this default
+behaviour, and selectively run or skip steps depending on the status of the build.
+
+The default value of `on_success` means that the step will run only if all of the
+previous steps have been succesful (returned exit code 0).
+
+A value of `always` means that the step will run regardless of the exit status of
+previous steps. This is useful if you have a task that you want to run regardles
+of whether the build is successful or not. For example, you might have a build
+step that needs to upload logs or code-coverage data somewhere.
+
+A value of `on_fail` means that the step will run only if one of the preceding
+steps has failed (returns a non-zero exit code). It is common to use `on_fail`
+if you want to store some diagnostic data to help debug test failures, or to run
+custom notifications about the failure, such as sending emails or triggering
+alerts in chatrooms.
+
 ##### _Example_
 
 ``` YAML
@@ -347,6 +370,11 @@ In this case, `command` and `name` become the string value of `run`, and the res
 - run: |
     sudo -u root createuser -h localhost --superuser ubuntu &&
     sudo createdb -h localhost test_db
+
+- run:
+    name: Upload Failed Tests
+    command: curl --data fail_tests.log http://example.com/error_logs
+    when: on_fail
 
 ```
 
