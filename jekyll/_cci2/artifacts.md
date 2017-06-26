@@ -103,7 +103,7 @@ The `ulimit -c unlimited` removes the file size limit on core dump files. With t
 
 Finally, the core dump files are stored to the artifacts service with `store_artifacts` in the `/tmp/core_dumps` directory.
 
-![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core-dumps.png)
+![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
 When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the build summary.
 
