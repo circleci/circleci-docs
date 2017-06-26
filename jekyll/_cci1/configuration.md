@@ -558,6 +558,7 @@ pattern:
 
 `v1`, `v1.2`, and `v1.2.3` (and so on) all match.
 
+To build on any tag, use the following regex: `/.*?/`
 
 ### SSH Keys
 
