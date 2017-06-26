@@ -8,17 +8,17 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This version of CircleCI enables you to use Docker Images instead of using the full Linux OS container. This change increases performance by building only what is required for your application. This change requires selecting an image in your `.circleci/config.yml` file that defines the primary container image where all steps run, for example: 
+This version of CircleCI enables you to use Docker Images optimized for your needs. This increases performance by building only what is required for your application. You specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
 ```
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
 ```
-In this example, all steps run in this first listed image. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
+In this example, all steps run in the container created by the first listed image. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
 
 ### Using Multiple Docker Images
-It is possible to specify multiple images. In a multi-image configuration job, all steps are executed in the **first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+You can specify multiple images for your job. This is most commonly done when you need to use a database for your tests. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```
 jobs:
