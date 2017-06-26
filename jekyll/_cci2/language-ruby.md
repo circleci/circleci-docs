@@ -126,7 +126,7 @@ version: 2
 
 We use the [official Ruby images](https://hub.docker.com/_/ruby/) tagged to version `2.4.1` and with additional packages installed for NodeJS.
 
-We've also specified the [official Postges image](https://hub.docker.com/_/postgres/) for use as our database container.
+We've also specified the [official Postgres image](https://hub.docker.com/_/postgres/) for use as our database container.
 
 Now we’ll add several `steps` within the `build` job.
 
