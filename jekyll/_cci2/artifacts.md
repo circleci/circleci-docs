@@ -54,20 +54,20 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 1. Create a `Makefile` with the following lines:
 
-```
-all:
-  gcc -o dump main.c
-```
+     ```
+     all:
+       gcc -o dump main.c
+     ```
 
 2. Create a `config.yml` file with the following lines.
 
-```C
-#include <stdlib.h>
-
-int main(int argc, char **argv) {
-    abort();
-}
-```
+     ```C
+     #include <stdlib.h>
+     
+     int main(int argc, char **argv) {
+         abort();
+     }
+     ```
 
 3. Run `make` and `./dump` on the generated program to print `Aborted (core dumped)`!
 
@@ -77,7 +77,6 @@ Following is a full `config.yml` that compiles the example C abort program, and 
 
 ```YAML
 version: 2.0
-
 jobs:
   build:
     docker:
