@@ -11,11 +11,11 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB file size limit per file as they are uploaded by `curl`.
+Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
 
-Artifacts are designed to be useful around the time of the build. We don't recommend relying on them as a software distribution mechanism with long term future guarantees.
+Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
-To upload artifacts created during builds so you can view them later, use the following example:
+To upload artifacts created during builds, use the following example:
 
 ```YAML
 version: 2
@@ -50,24 +50,24 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
 
 ## Uploading Core Files
 
-This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging on CircleCI 2.0. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
+This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
 1. Create a `Makefile` with the following lines:
 
-```
-all:
-  gcc -o dump main.c
-```
+     ```
+     all:
+       gcc -o dump main.c
+     ```
 
 2. Create a `config.yml` file with the following lines.
 
-```C
-#include <stdlib.h>
-
-int main(int argc, char **argv) {
-    abort();
-}
-```
+     ```C
+     #include <stdlib.h>
+     
+     int main(int argc, char **argv) {
+         abort();
+     }
+     ```
 
 3. Run `make` and `./dump` on the generated program to print `Aborted (core dumped)`!
 
@@ -77,7 +77,6 @@ Following is a full `config.yml` that compiles the example C abort program, and 
 
 ```YAML
 version: 2.0
-
 jobs:
   build:
     docker:
@@ -119,7 +118,8 @@ Use the following procedure to download your artifacts with `curl`.
 
 4. CD to a directory where you would like the artifacts files to be downloaded and run the following command, copying in the token from Step 3:
 
-```export CIRCLE_TOKEN='?circle-token=:your_token'
+```
+export CIRCLE_TOKEN='?circle-token=:your_token'
 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
 
@@ -130,6 +130,6 @@ Note 1: Replace all the variables above that start with a : with real values for
 
 Note 2: :vcs-type will be github or bitbucket.
 
-Note 3: In the example, the `xargs` command runs four processes to download files in parallel. You can adjust this value to your needs.
+Note 3: In the example, the `xargs` command runs four processes to download files in parallel. Adjust this value to your needs.
 
-Explanation: The line beginning curl fetches all the artifacts details for a build, pipes this through the `grep` command to extract just the URLs. The results are saved to a file artifacts.txt. Then, `xargs` reads in that file and downloads each artifact file to the current directory.  
+Explanation: The line beginning with `curl` fetches all the artifacts details for a build and pipes it through the `grep` command to extract just the URLs. The results are saved to the `artifacts.txt` file. Then, `xargs` reads the file and downloads each artifact to the current directory.  
