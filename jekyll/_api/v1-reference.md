@@ -109,7 +109,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   Follow a new project on CircleCI.
 </dd>
 <dt markdown="1">
-  GET: /project/:vcs-type/:username/:project
+  [GET: /project/:vcs-type/:username/:project]({{ site.baseurl }}/api/project)
 </dt>
 <dd>
   Build summary for each of the last 30 builds for a single git repo.
@@ -120,67 +120,67 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 <dd>
   Build summary for each of the last 30 recent builds, ordered by build_num.
 </dd>
-<dt>
+<dt markdown="1">
   GET: /project/:vcs-type/:username/:project/:build_num
 </dt>
 <dd markdown="1">
   Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
 </dd>
-<dt>
+<dt markdown="1">
   GET: /project/:vcs-type/:username/:project/:build_num/artifacts
 </dt>
 <dd>
   List the artifacts produced by a given build.
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/:build_num/retry
 </dt>
 <dd>
   Retries the build, returns a summary of the new build.
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/:build_num/cancel
 </dt>
 <dd>
   Cancels the build, returns a summary of the build.
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/:build_num/ssh-users
 </dt>
 <dd>
   Adds a user to the build's SSH permissions.
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/tree/:branch
 </dt>
 <dd markdown="1">
   Triggers a new build, returns a summary of the build. [Optional build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/).
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/ssh-key
 </dt>
 <dd>
   Create an ssh key used to access external systems that require SSH key-based authentication
 </dd>
-<dt>
+<dt markdown="1">
   GET: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
   Lists checkout keys.
 </dd>
-<dt>
+<dt markdown="1">
   POST: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
   Create a new checkout key.
 </dd>
-<dt>
+<dt markdown="1">
   GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>
   Get a checkout key.
 </dd>
-<dt>
+<dt markdown="1">
   DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>

@@ -59,8 +59,8 @@ follow:
   method: "POST"
   params:
     - {name: "vcs-type", description: "The version control system being utilized by the project. See <a href='https://circleci.com/docs/api/v1-reference/#version-control-system-vcs-type'><b>:vcs-type</b></a>."}
-    - {name: "username", description: "The API returns builds starting from this offset, defaults to 0.", example: 5}
-    - {name: "project", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\", \"running\", or defaults to no filter.", example: "completed"}
+    - {name: "username", description: "The username/organization name that owns the project.", example: 5}
+    - {name: "project", description: "The name of the project to be followed", example: "completed"}
   response: |
     {
       "followed" : true,
@@ -129,6 +129,9 @@ project:
   description: "Build summary for each of the last 30 builds for a single git repo."
   method: "GET"
   params:
+    - {name: "vcs-type", description: "The version control system being utilized by the project. See <a href='https://circleci.com/docs/api/v1-reference/#version-control-system-vcs-type'><b>:vcs-type</b></a>."}
+    - {name: "username", description: "The username/organization name that owns the project.", example: 5}
+    - {name: "project", description: "The name of the project to be followed", example: "completed"}
     - {name: "limit", description: "The number of builds to return. Maximum 100, defaults to 30.", example: 20}
     - {name: "offset", description: "The API returns builds starting from this offset, defaults to 0.", example: 5}
     - {name: "filter", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\", \"running\", or defaults to no filter.", example: "completed"}
@@ -201,6 +204,11 @@ build:
   url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num"
   description: "Full details for a single build. The response includes all of the fields from the build summary."
   method: "GET"
+  params:
+    - {name: "vcs-type", description: "The version control system being utilized by the project. See <a href='https://circleci.com/docs/api/v1-reference/#version-control-system-vcs-type'><b>:vcs-type</b></a>."}
+    - {name: "username", description: "The username/organization name that owns the project.", example: 5}
+    - {name: "project", description: "The name of the project to be followed", example: "completed"}
+    - {name: "build_num", description: "The specified build to get details on"}
   response: |
     {
       "vcs_url" : "https://github.com/circleci/mongofinil",
