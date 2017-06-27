@@ -103,6 +103,77 @@ Template | Description
 
 **Note:** When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. But, there are tradeoffs as described in the following section.
 
+### Full Example of Saving and Restoring Cache
+
+The following example demostrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
+
+```docker:
+  - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test
+  - image: circleci/mysql:5.6
+
+steps:
+  - checkout
+  - run: cp config/{database_circleci,database}.yml
+
+  # Run bundler
+  # Load installed gems from cache if possible, bundle install then save cache
+  # Multiple caches are used to increase the chance of a cache hit
+  - restore_cache:
+      keys:
+        - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - gem-cache-{{ .Branch }}
+        - gem-cache
+  - run: bundle install --path vendor/bundle
+  - save_cache:
+      key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+  - save_cache:
+      key: gem-cache-{{ .Branch }}
+      paths:
+        - vendor/bundle
+  - save_cache:
+      key: gem-cache
+      paths:
+        - vendor/bundle
+
+  - run: bundle exec rubocop
+  - run: bundle exec rake db:create db:schema:load --trace
+  - run: bundle exec rake factory_girl:lint
+
+  # Precompile assets
+  # Load assets from cache if possible, precompile assets then save cache
+  # Multiple caches are used to increase the chance of a cache hit
+  - restore_cache:
+      keys:
+        - asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
+        - asset-cache-{{ .Branch }}
+        - asset-cache
+  - run: bundle exec rake assets:precompile
+  - save_cache:
+      key: asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
+      paths:
+        - public/assets
+        - tmp/cache/assets/sprockets
+  - save_cache:
+      key: asset-cache-{{ .Branch }}
+      paths:
+        - public/assets
+        - tmp/cache/assets/sprockets
+  - save_cache:
+      key: asset-cache
+      paths:
+        - public/assets
+        - tmp/cache/assets/sprockets
+
+
+  - run: bundle exec rspec
+  - run: bundle exec cucumber
+  ```
+
 ## Caching Strategy Tradeoffs 
 
 In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance.  One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
