@@ -51,6 +51,7 @@ dependencies:
   cache_directories:
     - "~/my_cache_dir"
 ```
+Also, make sure that the directory you are trying to cache is not a part of your repository (i.e. files in this directory are not tracked).
 
 ## Per-branch Cache
 
