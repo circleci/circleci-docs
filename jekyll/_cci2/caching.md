@@ -186,7 +186,7 @@ Listing multiple keys for restoring a cache increases the odds of a partial cach
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) may be a useful cache key.
 
-An alternative is to do `ls -laR > your-deps-dir > deps_checksum` and reference it with {% raw %}{{ checksum "package.json" }}{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR > venv > python_deps_checksum`.
+An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
 
 ### Using Multiple Caches For Different Languages
 
