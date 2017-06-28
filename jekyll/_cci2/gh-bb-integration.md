@@ -41,7 +41,7 @@ Provide CircleCI with a GitHub user key on your project's
 CircleCI creates and associates this new SSH key with your GitHub user account
 for access to all your repositories.
 
-### <h2 id="security">User key security</h2>
+<h2 id="security">User key security</h2>
 
 CircleCI will never make your SSH keys public.
 
