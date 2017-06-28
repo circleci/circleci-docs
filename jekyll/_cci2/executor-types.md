@@ -8,7 +8,7 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This version of CircleCI enables you to use Docker Images optimized for your needs. This increases performance by building only what is required for your application. You specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
+This version of CircleCI enables you to use Docker Images optimized for your needs. This increases performance by building only what is required for your application. Specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
 ```
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
 In this example, all steps run in the container created by the first listed image. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags.    
 
 ### Using Multiple Docker Images
-You can specify multiple images for your job. This is most commonly done when you need to use a database for your tests. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```
 jobs:
@@ -89,15 +89,15 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 ### Docker Image Best Practices
 
-- We strongly discourage using mutable tags like `latest` or `1` as the image version in your `config.yml file`. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago. Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples.
+- Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago. Instead, we recommend using precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples.
 
-- If you experience increases in your run times due to installing additional tools during execution, we recommend using the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements.
+- If you experience increases in your run times due to installing additional tools during execution, it is best practice to use the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements. 
 
 More details on the Docker Executor are available [here]({{ site.baseurl }}/2.0/configuration-reference/).
 
 ## Machine Executor
 
-**Potential Premium Feature Notice: During the CircleCI 2.0 Beta we are providing early access, for no additional charge, to features (including Machine Executor) that may be available for additional fees after the Beta. We welcome your [feedback](https://discuss.circleci.com/c/circleci-2-0/feedback) on this and all other aspects of CircleCI 2.0.**
+**Potential Premium Feature Notice: Machine Executor may be available for additional fees in a future pricing update. We welcome your [feedback](https://discuss.circleci.com/c/circleci-2-0/feedback) on this and all other aspects of CircleCI 2.0.**
 
 When you choose the `machine` key, your job will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
 
