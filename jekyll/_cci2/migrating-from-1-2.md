@@ -175,6 +175,6 @@ With the following, nested under `steps:` and customizing for your application a
      - deploy:
 ```
 
-**Note:** Currently, 2.0 Beta does not include continuous deployment support. To write your own manual `deploy` steps, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+**Note:** Currently, CircleCI 2.0 does not include continuous deployment support. To write your own manual `deploy` steps, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
 - Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes. Fix up any issues and commit the updated `.circleci/config.yml` file. CircleCI automatically starts a test run on CircleCI 2.0 with a 2.0 icon on the builds page for that run.
