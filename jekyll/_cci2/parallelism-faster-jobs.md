@@ -96,3 +96,16 @@ The following libraries have built-in support for the CircleCI environment varia
 # create a bottleneck on the CI node
 - run: bundle exec rake knapsack_pro:queue:rspec
 ```
+
+### Restricting a step to run on only one container
+
+If a step in the build should only run in one of the containers (e.g. build a new docker image, deploy), then you can restrict the step by adding the following check:
+```
+run:
+	name: COMMAND_DESCRIPTION
+	command: |
+		if [[ $CIRCLE_NODE_INDEX = 0 ]]; then
+			YOUR_COMMAND_HERE
+		fi
+```
+
