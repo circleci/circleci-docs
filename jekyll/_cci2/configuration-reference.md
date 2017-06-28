@@ -553,7 +553,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 #### **`store_test_results`**
 
-Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**.
+Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**. This feature is **not** compatible with Workflows.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
