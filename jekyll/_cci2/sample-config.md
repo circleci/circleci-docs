@@ -1,15 +1,15 @@
 ---
 layout: classic-docs
-title: "Sample 2.0 `config.yml` File"
-short-title: "Sample 2.0 `config.yml` File"
-description: "Sample 2.0 `config.yml` File"
+title: "Sample 2.0 config.yml File"
+short-title: "Sample 2.0 config.yml File"
+description: "Sample 2.0 config.yml File"
 categories: [migration]
 order: 2
 ---
 
-The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. New keys for `jobs:` and `steps:` enable greater control and provide a framework for status on each phase of a run to report more frequent feedback.
+The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
 
-The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, and new keys that are nested inside Steps. 
+The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows. 
 
 ## Jobs Overview
 
@@ -46,6 +46,8 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - .node_modules
+  test:
+    steps:
       - run:
           name: test
           command: npm test
@@ -60,5 +62,17 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: test-results.xml
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
 {% endraw %}
+This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, fan-in, and fan-out workflows.
