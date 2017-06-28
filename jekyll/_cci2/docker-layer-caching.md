@@ -27,7 +27,7 @@ If this is the case, you might want to reuse the unchanged layers to significant
 
 With `reusable: true`, CircleCI will try to reuse your Remote Docker Environment; every layer you built in a previous job will be accessible there. We do our best to reuse the previous environment when we can, but in some cases your job may find itself in a clean environment, even if you've specified `reusable: true`.
 
-If you run many parallel jobs for the same project, and each job requests a reusble environment, all of them will be provided with a Remote Docker Environment. However, not all of them will have cached layers, although this behavior is subject to change over the course of the Beta.
+If you run many parallel jobs for the same project, and each job requests a reusable environment, all of them will be provided with a Remote Docker Environment. However, not all of them will have cached layers, although this behavior is subject to change over the course of the Beta.
 
 ## **`exclusive`**
 
