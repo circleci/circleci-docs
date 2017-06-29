@@ -1,13 +1,17 @@
 ---
 layout: classic-docs
-title: "Using CircleCI Environment Variables"
-short-title: "Using CircleCI Environment Variables"
+title: "Using Environment Variables"
+short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
 categories: [configuring-jobs]
 order: 40
 ---
 
-CircleCI exports the environment variables in this document during each build, which are
+To add environment variables to your build, use the Environment Variables page of your Build > Project > Settings in the CircleCI application. You can add individual variables or import from another project. To define environment variables in your configuration, use the `environment` key in your `.circleci/config.yml` file, see the [docker/machine executor](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details.
+
+## CircleCI Environment Variables
+
+CircleCI exports the environment variables in this section during each build, which are
 useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:
 
 `CIRCLECI`
