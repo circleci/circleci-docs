@@ -54,7 +54,7 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
 
 ## Does CircleCI 2.0 run inference commands?
 
-CircleCI 2.0 does not infer anything from your project and you must configure all jobs in the `config.yml` file.
+CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
 ## Can I use CircleCI 2.0 without creating base images?
 
