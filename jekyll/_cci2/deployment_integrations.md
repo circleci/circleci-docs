@@ -47,3 +47,8 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
 The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0.
 
 However, it is possible to deploy to Heroku manually by setting environment variables. Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for instructions.
+
+## Azure
+
+To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
+
