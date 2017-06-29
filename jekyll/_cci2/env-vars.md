@@ -33,7 +33,7 @@ Has a value of `true` on our platform.
 
 **CIRCLECI**
 
-Represents whether the current environment is a CircleCI environment
+Represents whether the current environment is a CircleCI environment.
 
 Has a value of `true` on our platform.
 
@@ -73,7 +73,7 @@ The GitHub/Bitbucket username of the user who triggered the build.
 
 The current job’s type.
 
-Possible values include: `build`
+Possible values include: `build`.
 
 **CIRCLE_COMPARE_URL**
 
@@ -105,11 +105,11 @@ If this build is part of only one pull request, its URL will be populated here. 
 
 **CI_PULL_REQUESTS**
 
-Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0
+Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0.
 
 **CI_PULL_REQUEST**
 
-Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0
+Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0.
 
 **CIRCLE_TAG**
 
@@ -117,8 +117,8 @@ The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is run
 
 **CIRCLE_PROJECT_USERNAME**
 
-The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123
+The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123.
 
 **CIRCLE_PROJECT_REPONAME**
 
-The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123
+The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123.
