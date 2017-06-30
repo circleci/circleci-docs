@@ -100,7 +100,7 @@ The first two permissions require write-permission to a repo.
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
 
-1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits.
+1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits. If you invite a collaborator, but they do not appear in the Team page in CircleCI, you can refresh this  by clicking on the Resync with GitHub button from the Organization page.
 
 2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects), click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
 
