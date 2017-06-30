@@ -96,6 +96,16 @@ CircleCI requests permissions as required by the
 
 The first two permissions require write-permission to a repo.
 
+## Permissions for Team Accounts
+
+This section provides an overview of the possible team and individual account choices available to meet various business needs:
+
+1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits.
+
+2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects), click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
+
+3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
+
 ## How to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization
 
 Go to [GttHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
@@ -114,3 +124,27 @@ Now OAuth tokens will, by default, not have access to organization data when thi
 You can enable third party access restrictions by visiting the organization settings page on GitHub, and clicking "Setup application access restrictions" button in the "Third-party application access policy" section.
 
 If you enable these restrictions on an organization for which CircleCI has been running builds then we will stop receiving push event hooks from GitHub (thus not building new pushes), and API calls will be denied (causing, for instance, re-builds of old builds to fail the source checkout.) To get CircleCI working again you have to grant access to the CircleCI application.
+
+The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
+
+## Adding Read/Write Deployment Keys to GitHub or Bitbucket
+
+When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. The deployment key is read-only, to prevent CircleCI from pushing to your repository. However, sometimes you may want push to the repository from your builds and you cannot do this with a read-only deployment key. It ispossible to  manually add a read/write deployment key with the following steps.
+
+In this example, the GitHub repository is `https://github.com/you/test-repo` and the project on CircleCI is `https://circleci.com/gh/you/test-repo`.
+
+1. Create a ssh key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/)
+  Note: when asked "Enter passphrase (empty for no passphrase)", do ***not*** enter a passphrase.
+2. Go to `https://github.com/you/test-repo/settings/keys` on GitHub and click **Add deploy key**. Enter any title in the **Title** field, then copy and paste the public key you just created. Make sure to check **Allow write access**, then click **Add key**.
+3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
+4. In you config.yml, you can refer to the key with the following:
+```
+steps:
+  - add-ssh-keys:
+      fingerprints:
+        - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+That's it! Now, when you push to your GitHub repository from a job run, the read/write key that you added will be used.
+
+
+

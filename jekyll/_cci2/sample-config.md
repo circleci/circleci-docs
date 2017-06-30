@@ -60,8 +60,7 @@ jobs:
       - store_artifacts:
           path: coverage
           prefix: coverage
-      - store_test_results:
-          path: test-results.xml
+      
 workflows:
   version: 2
   build_and_test:

@@ -113,7 +113,11 @@
 - section: cci2
   slug: optimization
   name: "Optimization"
-  
+
+- section: cci2
+  slug: deploying
+  name: "Deployment"
+
 - section: cci2
   slug: troubleshooting
   name: "Troubleshooting"
@@ -125,10 +129,6 @@
 #- section: cci2
 #  slug: docker
 #  name: "Using Docker"
-
-- section: cci2
-  slug: deploying
-  name: "Deployment"
 
 - section: cci2
   slug: reference
