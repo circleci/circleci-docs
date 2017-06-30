@@ -19,6 +19,8 @@ Following are required for successful trial installation:
 - Machines running CircleCI Enterprise and GitHub must be able to reach each other on the network.
 - CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [Contact us](mailto:trial-support@circleci.com) for instructions.
 
+## Steps for Installation
+
 1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. 
 
 2. Open ports 22 and 8800 to administrators, open ports 80 and 443 to all users, and optionally open ports 64535-65535 to developers to SSH into builds.
@@ -27,7 +29,7 @@ Following are required for successful trial installation:
 
 4. Visit port 8800 on the machine in a web browser to complete the guided installation process.
 
-5. After completing the SSL certificate, license upload, admin password, hostname configuration, GitHub OAuth registration, and protocol settings the application will start up. 
+5. Complete the SSL certificate, license upload, admin password, hostname configuration, GitHub OAuth registration, and protocol settings to begin application start up. 
 
 6. Open the CircleCI Enterprise app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
 
