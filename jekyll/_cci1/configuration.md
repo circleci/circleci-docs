@@ -496,6 +496,8 @@ deployment:
       - ./deploy_feature.sh
 ```
 
+To deploy on any branch, use the following regex: `/.*?/`
+
 You can also optionally specify a repository _owner_ in any deployment subsection.
 This can be useful if you have multiple forks of the project, but only one should be
 deployed. For example, a deployment subsection like this will only deploy if the project
@@ -558,6 +560,7 @@ pattern:
 
 `v1`, `v1.2`, and `v1.2.3` (and so on) all match.
 
+To deploy on any tag, use the following regex: `/.*?/`
 
 ### SSH Keys
 
