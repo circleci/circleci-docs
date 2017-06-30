@@ -6,7 +6,7 @@ categories: [migration]
 Order: 60
 ---
 
-This document provides an overview of the process of checking out your code from GitHub or Bitbucket and running your configuration. After you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up::
+This document provides an overview of the process of checking out your code from GitHub or Bitbucket, running your configuration, and using permissions. After you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
 - A **service hook** that is used to notify CircleCI when you push to GitHub or Bitbucket.
 
@@ -113,9 +113,7 @@ Go to [GttHub Settings](https://github.com/settings/connections/applications/78a
 * "Request access" if you are not an admin for the organization in question (an admin will have to approve the request) or
 * "Grant access" if you are an admin
 
-Once access is granted, CircleCI should behave normally again.
-
-### Background information
+After access is granted, CircleCI should behave normally again.
 
 GitHub recently added the ability to approve [third party application access on a per-organization level](https://help.github.com/articles/about-third-party-application-restrictions/). Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API with whatever permissions were granted during the OAuth flow.
 
