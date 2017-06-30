@@ -7,18 +7,16 @@ categories: [configuring-jobs]
 order: 25
 ---
 
-This document describes database configuration and defaults using PostgreSQL and Rails examples.
+This document describes database configuration and defaults using PostgreSQL and Rails examples.In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+
+1.	DATABASE_URL environment variable, if set
+2.	The test section configuration for the appropriate environment in config.yml (usually `test` for your test suite)
 
 The default user, port, test database for PostgreSQL 9.6 are as follows:
 
 `postgres://ubuntu:@127.0.0.1:5432/circle_test`
 
 **Note:** For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
-
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
-
-1.	DATABASE_URL environment variable, if set
-2.	The test section configuration for the appropriate environment in config.yml (usually `test` for your test suite)
 
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
@@ -81,7 +79,7 @@ To work around this, consider overwriting the existing user with a new user and 
 
 ## Using Dockerize
 
-Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start started before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
+Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
 ```
@@ -241,15 +239,16 @@ jobs:
         path: /tmp/test-results
 ```
 
-An alternative is to build your own image by extending the current image, installing the needed  packages, committing, and pushing it to Docker Hub or the registry of your choosing.
+An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
 
 ## Postgres Image Optimization
 The `circleci/postgres` Docker image uses regular persistent storage on disk. Using `tmpfs` may make tests run faster and may use fewer resources. To create a Dockerfile for your own project and potentially reduce the duration of tests, consider adding the following line to the pre-built image.
 
+```
 Dockerfile:
 FROM circleci/postgres
 ENV PGDATA /dev/shm/pgdata/data
-
+```
 
 
 
