@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: GiHub and Bitbucket Integration
-description: GiHub and Bitbucket Integration
+title: GitHub and Bitbucket Integration
+description: GitHub and Bitbucket Integration
 categories: [migration]
 Order: 60
 ---
