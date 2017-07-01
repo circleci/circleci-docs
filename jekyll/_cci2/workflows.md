@@ -17,8 +17,9 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
 - Fan-out to run multiple jobs in parallel for testing various versions  
 - Fan-in for deployment to separate platforms with automated triggers 
 - Branch-level job execution with artifact sharing
+- Manual job approval to control deployments to separate environments
 
-For example, you might want to run acceptance tests independently from integration tests and deployment. Use workflows to orchestrate parts of your build and to increase your ability to respond to failures. Scheduled jobs appear in the Workflows tab of the CircleCI app, so you have an integrated view of the status of every individual workflow as shown in the following screenshot. 
+For example, you might want to run acceptance tests independently from integration tests and use a manual approval process for deployment. Use workflows to orchestrate parts of your build, increase your ability to respond to failures, and control deployment. Scheduled jobs appear in the Workflows tab of the CircleCI app, so you have an integrated view of the status of every individual workflow as shown in the following screenshot. 
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_landing.png)
 
@@ -90,6 +91,36 @@ workflows:
 ```
 
 The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
+
+## Holding a Workflow for a Manual Approval
+
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+
+```
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          requires:
+            - test1
+      - test3:
+         type: approval
+         requires:
+           - test1
+           - test2
+      - deploy:
+          requires:
+            - test3
+```
+
+In this example, the `deploy:` job will not run until you click the Approve button on the `test3` job in the Workflows page of the CircleCI app. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In ths example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `test3` job must be `type: approval` and the `deploy` job must require `test3`.
+
+![Approved Jobs in OnHold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
  
 ## Running a Workflow from a Failed Job
 
