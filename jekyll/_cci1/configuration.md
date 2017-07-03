@@ -571,6 +571,8 @@ Add and then submit the one or more SSH keys needed
 for deploying to your machines. If you leave the **Hostname** field blank,
 the private key will be used for all hosts.
 
+*Please note that added keys will need to have an empty passphrase, as CircleCI does not have the ability to decrypt and use them otherwise.*
+
 <h3 id="heroku-extra">Heroku</h3>
 
 CircleCI also has first-class support for deploying to Heroku.
