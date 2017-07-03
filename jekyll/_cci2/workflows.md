@@ -68,7 +68,7 @@ workflows:
 
 The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram. 
 
-![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequntial_workflow.png)
+![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
 The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
 

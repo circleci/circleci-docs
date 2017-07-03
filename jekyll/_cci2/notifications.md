@@ -15,7 +15,7 @@ Use the [Notifications](https://circleci.com/account/notifications) page of the 
 
 2. Click the link to turn on permissions. Your browser will ask you to confirm that you want to allow notifications from CircleCI. 
 
-3. Click Allow as shown in the screeshot example.
+3. Click Allow as shown in the screenshot example.
 ![](  {{ site.baseurl }}/assets/img/docs/notification-allowing.png)
 
 4. Select the radio button to show notifications for completed builds. **Note:** To select the radio button, you may need to reload the page. 
