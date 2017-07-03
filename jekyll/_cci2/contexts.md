@@ -29,7 +29,11 @@ workflows:
 ```
 
 ## Environment Variables in Contexts
-Contexts have a set of environment variables defined as name/value pairs. When a job is run with a Context the environment variables of the Context are injected at runtime, overwriting any project-level environment variables that had been set in the Project Settings. However, environment variables defined in the job configuration itself will overwrite those of the Context.
+Contexts have a set of environment variables defined as name/value pairs. When a job is run with a Context the environment variables of the Context are injected at runtime. The order of precedence is important to remember when working with environment variables that might overlap in name. Following is the order, with later injection always taking precedence when the steps of your job run:
+1. Project-level environment variables set on the Project Settings page.
+2. Context environment variables (assuming the user has access to the Context).
+3. Environment variables set in your config YAML with the `environment` key of a job definition.
+4. Environment variables declared inside a shell command in a `run` step of a job.
 
 ## Creating and Editing Contexts
 You can manage your organization's Contexts from the Organization Settings page. 
