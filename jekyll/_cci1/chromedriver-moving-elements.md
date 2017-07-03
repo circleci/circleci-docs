@@ -8,7 +8,7 @@ last_updated: Aug 7, 2013
 This can be caused by the small delay between ChromeDriver determining the
 location of an element to click and actually clicking on the element. If the
 element is moving (for instance because another element has loaded and caused
-the page to reflow) it is no longer at the coordinates that ChomeDriver
+the page to reflow) it is no longer at the coordinates that ChromeDriver
 captured and it tries to click in the wrong place, causing this error.
 
 This behaviour is due to the ChromeDriver implementation (there is an

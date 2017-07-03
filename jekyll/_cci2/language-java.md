@@ -106,7 +106,7 @@ Next we pull down the cache, if present. If this is your first run, or if you've
 
 Then `mvn package` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
 
-Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dahsboard. 
+Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
 
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 

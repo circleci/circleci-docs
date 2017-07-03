@@ -39,7 +39,7 @@ If you have any iOS resources, you'll also want to launch an iOS builder (Step 1
 There are two things you need to do to get your new CircleCI back up and running:
 
 1. Import the settings you exported in step 1: <https://enterprise-docs.circleci.com/resources/export-import-projects/>.
-2. Migrate repos over. Have an admin for each project refollow the repo with the new CircleCI, so that the webhooks are reattached. Once they follow it on the new CircleCI, both installations will be submitting commit statuses. If you would like to prevent this, you can delete the webhook for the old CircleCI installation manually. ***If you do not want to deal with the possibility of the two CircleCI installtions overwriting each other's commit statuses, you can perfomr this step after shutting down your old installation, but that will result in brief downtime***
+2. Migrate repos over. Have an admin for each project refollow the repo with the new CircleCI, so that the webhooks are reattached. Once they follow it on the new CircleCI, both installations will be submitting commit statuses. If you would like to prevent this, you can delete the webhook for the old CircleCI installation manually. ***If you do not want to deal with the possibility of the two CircleCI installations overwriting each other's commit statuses, you can perform this step after shutting down your old installation, but that will result in brief downtime***
 
 ### Step 4. [DOWNTIME] Destroy the old CircleCI and finish the iOS installation
 

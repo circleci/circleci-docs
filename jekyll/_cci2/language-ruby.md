@@ -198,7 +198,7 @@ steps:
 
 You can see we've specified 2 formatters for our RSpec test suite:
 
-* `RspecJunitFormatter` for outputing JUnit style test results
+* `RspecJunitFormatter` for outputting JUnit style test results
 * `progress` for displaying running build output
 
 We've also added `--profile` which reports the slowest examples of each run.

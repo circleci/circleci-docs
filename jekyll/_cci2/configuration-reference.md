@@ -247,7 +247,7 @@ shell | N | String | Shell to use for execution command (default: See [Default S
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
-no_output_timeout | N | String | Elasped time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
+no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
@@ -340,10 +340,10 @@ Adding the `when` attribute to a build step allows you to override this default
 behaviour, and selectively run or skip steps depending on the status of the build.
 
 The default value of `on_success` means that the step will run only if all of the
-previous steps have been succesful (returned exit code 0).
+previous steps have been successful (returned exit code 0).
 
 A value of `always` means that the step will run regardless of the exit status of
-previous steps. This is useful if you have a task that you want to run regardles
+previous steps. This is useful if you have a task that you want to run regardless
 of whether the build is successful or not. For example, you might have a build
 step that needs to upload logs or code-coverage data somewhere.
 

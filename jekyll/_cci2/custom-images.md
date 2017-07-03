@@ -268,8 +268,8 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 CMD [ "node" ]
 ```
 
-Both Dockerfiles use the same base image `buildpack-deps:jessie`. This is excellent becuase it is possible to combine them and install Python to get `awscli`.
-Remove the associated files before commiting the Docker image to install by using `apt`. It is possible to install everything and remove those files afterward, but do not run `apt-get update` more than once. Any custom repos are added beforehand.
+Both Dockerfiles use the same base image `buildpack-deps:jessie`. This is excellent because it is possible to combine them and install Python to get `awscli`.
+Remove the associated files before committing the Docker image to install by using `apt`. It is possible to install everything and remove those files afterward, but do not run `apt-get update` more than once. Any custom repos are added beforehand.
 The Ruby image comes with git pre-installed so there's no reason to reinstall it. Finally, add sudo, python2.7, and postgresql-9.5 to the list installation list. Then, install yarn with npm.
 
 ```
