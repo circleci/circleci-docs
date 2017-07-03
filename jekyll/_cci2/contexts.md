@@ -14,10 +14,10 @@ order: 41
 ## Contexts Overview
 Contexts provide centrally managed, secured resources for use in jobs. They are primarily used for sharing environment variables across projects.
 
-Contexts are associated with your Organization and can be requested in [Workflows](workflows) configuration. If the person running the workflow has access to the requested context for a given job, the resources of the requested context will be used to run the job.
+Contexts are associated with your Organization and can be requested in [Workflows](../workflows/) configuration. If the person running the workflow has access to the requested context for a given job, the resources of the requested context will be used to run the job.
 
 ## Using a Context
-Contexts are requested as part of [workflows configuration](workflows) using a sub-key of the job invocation. For instance, to use the `org-global` Context while running the job `run-tests` your Workflow configuration would look something like:
+Contexts are requested as part of [workflows configuration](../workflows/) using a sub-key of the job invocation. For instance, to use the `org-global` Context while running the job `run-tests` your Workflow configuration would look something like:
 
 ```
 workflows:
