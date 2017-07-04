@@ -38,17 +38,17 @@ ssh -p 64625 ubuntu@54.221.135.43
 
 We want to add port-forwarding to the command, which we do with the `-L` flag.
 We want to specify a local port and remote port. In this example we will forward
-requests to `http://localhost:8080` to port `3000` on the CircleCI container.
+requests to `http://localhost:3000` to port `8080` on the CircleCI container.
 This would be useful, for instance, if your build runs a debug Ruby on Rails app, which listens
-on port 3000.
+on port 8080.
 
 ```
-ssh -p 64625 ubuntu@54.221.135.43 -L 8080:localhost:3000
+ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
 
 You can now open your browser on your local machine and navigate to
-`http://localhost:8080` and this will send requests directly to the server
-running on port `3000` on the CircleCI container. You can also manually start the
+`http://localhost:3000` and this will send requests directly to the server
+running on port `8080` on the CircleCI container. You can also manually start the
 test server on the CircleCI container (if it is not already running), and you
 should be able to access the running test server from the browser on your development machine.
 
