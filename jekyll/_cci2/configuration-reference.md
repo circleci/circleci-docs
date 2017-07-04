@@ -406,6 +406,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 paths | Y | List | List of directories which should be added to the cache
 key | Y | String | Unique identifier for this cache
+when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
 The cache for a specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step._
