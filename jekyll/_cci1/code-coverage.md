@@ -166,7 +166,6 @@ If you’re a Code Climate user, follow their guide on [Configuring Test Coverag
 * [troubleshooting tips](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-troubleshooting),
 * and a sample [.circle.yml](https://docs.codeclimate.com/v1.0/docs/circle-ci-test-coverage-example).
 
-
 ### PullReview
 
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
