@@ -161,9 +161,10 @@ parallel builds.
 
 ### Code Climate
 
-If you’re a Code Climate user, follow their guide on [setting up test coverage](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage). On that page you'll find an [Overview](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-overview) of their test reporter as well as links to [Parallel tests](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-parallel-tests-and-multiple-test-suites) support and [Troubleshooting](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-troubleshooting).
-
-Additionally, check out an example of how to implement Code Climate with your `.circle.yml` [here](https://docs.codeclimate.com/v1.0/docs/circle-ci-test-coverage-example).
+If you’re a Code Climate user, follow their guide on [Configuring Test Coverage](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage). In that guide you'll find: 
+* links to [parallel tests support](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-parallel-tests-and-multiple-test-suites) setup,
+* [troubleshooting tips](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-troubleshooting),
+* and a sample [.circle.yml](https://docs.codeclimate.com/v1.0/docs/circle-ci-test-coverage-example).
 
 ### PullReview
 
