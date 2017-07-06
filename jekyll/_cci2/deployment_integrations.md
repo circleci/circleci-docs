@@ -6,8 +6,33 @@ categories: [deploying]
 order: 10
 ---
 
+## Available Deployment Targets
 
-## Conditional Deployment 
+You can deploy to any service you choose with CircleCI 2.0. By adding commands to `.circleci/config.yml` and setting secrets on the 'Project Settings > Environment Variables' screen, you have a lot of flexibility. For deployment targets other than those listed in 'Deployment Integrations' below, please see the '<a href="#other-deployments">Other Deployments</a>' section.
+
+## Deployment Integrations
+
+**Note:** Currently (during Beta), the CircleCI 'Project Settings' UI has a section titled 'Continuous Deployment':
+
+![Deployment Integrations]({{ site.baseurl }}/assets/img/docs/deployment-integrations.png)
+
+### AWS Deployment
+
+1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
+
+2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
+
+The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+
+### Heroku
+
+ **The Heroku deployment section applies to CircleCI 1.0 only.**
+
+To deploy to Heroku manually refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/#appendix).
+
+## Other Deployments
+
+Common deployment targets for CircleCI 2.0 customers include Azure, Google (App Engine, Container Engine and Cloud) and many others. The configuration section is powerful and flexible.
 
 Add the `deploy` step to your `config.yml` to set up conditional deployment for your application. The following example uses a bash command to check that the current branch is the `master` branch before running any deploy commands. Without this check, `<your-deploy-commands>` would be executed every time this job is triggered. It is also possible to create a separate job for deploy for this purpose, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for instructions.
 
@@ -28,27 +53,10 @@ jobs:
             fi
 ```
 
-To learn more about the `deploy` step, please check out our [documentation]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+To learn more about the `deploy` step, please see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
-## AWS Deployment
 
-The CircleCI Project > Settings page contains a Continuous Deployment section with AWS, Heroku, and Other Deployments listed  as shown in the following image:
-
-![Deployment Integrations]({{ site.baseurl }}/assets/img/docs/deployment-integrations.png)
-
-1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
-
-2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
-
-The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
-
-## Heroku
-
-The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0.
-
-However, it is possible to deploy to Heroku manually by setting environment variables. Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for instructions.
-
-## Azure
+### Notes for Azure
 
 To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
 
