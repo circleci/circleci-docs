@@ -107,7 +107,8 @@ Template | Description
 
 The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
 
-```docker:
+```YAML
+docker:
   - image: customimage/ruby:2.3-node-phantomjs-0.0.1
     environment:
       RAILS_ENV: test
