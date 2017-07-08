@@ -11,7 +11,7 @@ If you are already a CircleCI 1.0 user, go to [Hello World]({{ site.baseurl }}/2
 
 ## Steps
 
-To run your very first CircleCI build on the CircleCI 2.0 Beta platform, complete the following steps:
+To run your very first CircleCI build on the CircleCI 2.0 platform, complete the following steps:
 
 1. Click the [Sign Up](https://circleci.com/signup/) button.
 
