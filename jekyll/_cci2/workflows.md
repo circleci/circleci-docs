@@ -224,9 +224,7 @@ jobs:
       - run: echo "Hello, world!" > workspace/echo-output
 
       - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
+          paths: /tmp/workspace    
 
   downstream:
     <<: *defaults
