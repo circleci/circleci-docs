@@ -14,7 +14,7 @@ This guide will help you get started with an Android application on CircleCI.
 There are some assumptions made in this guide:
 
 - We assume that your Android project is built with `gradle` (this is the default for projects created with [Android Studio](https://developer.android.com/studio).
-- We assume that your project is located in the root of your `git` respository, with the application located in a subfolder named `app`.
+- We assume that your project is located in the root of your `git` repository, with the application located in a subfolder named `app`.
 
 ## Sample Configuration
 
@@ -98,7 +98,7 @@ The [Dockerfiles are open-source, and available on GitHub](https://github.com/ci
 
 ### Customizing the Images
 
-We welcome any feedback, PRs, comments and suggestions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has the tools needed to build most apps. We do not plan to provide every tool that you might need. If you want to add customiztion to the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/#base-image).
+We welcome any feedback, PRs, comments and suggestions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has the tools needed to build most apps. We do not plan to provide every tool that you might need. If you want to add customization to the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/#base-image).
 
 ### API Levels
 

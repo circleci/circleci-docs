@@ -12,7 +12,7 @@ hide: true
 
 CircleCI will require:
 
-* New public SSH Key that we add to the machine to allow access. The private key must NOT be password proctected.
+* New public SSH Key that we add to the machine to allow access. The private key must NOT be password protected.
 
 CircleCI will provide:
 

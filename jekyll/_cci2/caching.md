@@ -105,7 +105,7 @@ Template | Description
 
 ### Full Example of Saving and Restoring Cache
 
-The following example demostrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
+The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
 
 ```docker:
   - image: customimage/ruby:2.3-node-phantomjs-0.0.1

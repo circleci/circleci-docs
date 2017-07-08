@@ -274,7 +274,7 @@ heroku restart
 
 The example app is available here: <https://cci-demo-walkthrough.herokuapp.com/>
 
-Deployment with CircleCI 2.0 Beta requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for the Heroku API key and login email must be added to the CircleCI UI:
+Deployment with CircleCI 2.0 requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for the Heroku API key and login email must be added to the CircleCI UI:
 
 ![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
 

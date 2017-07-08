@@ -48,6 +48,7 @@ working_directory | Y | String | What directory to run the steps in. (previously
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -55,6 +56,15 @@ branches | N | Map | A map defining rules for whitelisting/blacklisting executio
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
+
+Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used.
+
+Class | CPU | RAM
+----|-----------|------
+small | 1.0 | 1GB
+medium | 2.0 | 4GB
+large | 4.0 | 8GB
+xlarge | 8.0 | 16GB
 
 Example:
 ``` YAML
@@ -65,6 +75,7 @@ jobs:
     environment:
       - FOO: "bar"
     parallelism: 3
+    resource_class: large
     working_directory: ~/my-app
     branches:
       only:
@@ -247,7 +258,7 @@ shell | N | String | Shell to use for execution command (default: See [Default S
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | What directory to run this step in (default:  [`working_directory`](#jobs) of the job)
-no_output_timeout | N | String | Elasped time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
+no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
@@ -340,10 +351,10 @@ Adding the `when` attribute to a build step allows you to override this default
 behaviour, and selectively run or skip steps depending on the status of the build.
 
 The default value of `on_success` means that the step will run only if all of the
-previous steps have been succesful (returned exit code 0).
+previous steps have been successful (returned exit code 0).
 
 A value of `always` means that the step will run regardless of the exit status of
-previous steps. This is useful if you have a task that you want to run regardles
+previous steps. This is useful if you have a task that you want to run regardless
 of whether the build is successful or not. For example, you might have a build
 step that needs to upload logs or code-coverage data somewhere.
 
@@ -406,6 +417,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 paths | Y | List | List of directories which should be added to the cache
 key | Y | String | Unique identifier for this cache
+when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
 The cache for a specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step._
@@ -553,7 +565,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 #### **`store_test_results`**
 
-Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**.
+Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**. This key is **not** supported with Workflows.
 
 Key | Required | Type | Description
 ----|-----------|------|------------

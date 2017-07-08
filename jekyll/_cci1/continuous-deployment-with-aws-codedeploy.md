@@ -38,7 +38,7 @@ application revision.
 
 The [AppSpec][] file lives in your repo and tells CodeDeploy which files from
 your application to deploy, where to deploy them, and also allows you specify
-lifecyle scripts to be run at different stages during the deployment. You can
+lifecycle scripts to be run at different stages during the deployment. You can
 use these lifecycle scripts to stop your service before a new version is
 deployed, run database migrations, install dependencies etc.
 
