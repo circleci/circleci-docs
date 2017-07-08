@@ -47,6 +47,10 @@ jobs:
           paths:
             - .node_modules
   test:
+    working_directory: ~/mern-starter
+    docker:
+      - image: circleci/node:4.8.2  
+      - image: mongo:3.4.4
     steps:
       - run:
           name: test
