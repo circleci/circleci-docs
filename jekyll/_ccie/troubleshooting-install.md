@@ -52,7 +52,7 @@ As of 1.48.0 we've enabled you to take snapshots right in the management console
 
 3: Take down the services box and rebuild it, but do not run the setup wizard yet.
 
-4: Copy the snapshots directory to the services box. I recomend `/home/ubuntu/ so to avoid permissions issues.
+4: Copy the snapshots directory to the services box. I recommend `/home/ubuntu/ so to avoid permissions issues.
 
 5: Run the startup. When it asks for the licence, instead click `restore from a snapshot` 
 
@@ -64,7 +64,7 @@ As of 1.48.0 we've enabled you to take snapshots right in the management console
 
 #### "How do I upgrade builder instances"
 
-The builder instances take their binaries directly from the services box when they initilize. Thus in order to update the builder boxes you'll need update the services box first, then create a new builder fleet ( or roll the builder fleet using an autoscaling group). During this start-up phase the builders will take the new update from the services machines, and things will be up-to-date.
+The builder instances take their binaries directly from the services box when they initialize. Thus in order to update the builder boxes you'll need update the services box first, then create a new builder fleet ( or roll the builder fleet using an autoscaling group). During this start-up phase the builders will take the new update from the services machines, and things will be up-to-date.
 
 
 #### "Do the builders store any state?"

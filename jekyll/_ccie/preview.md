@@ -13,7 +13,7 @@ hide: true
 CircleCI 2.0 is our new infrastructure that provides a number of new valuable options for your development teams, including:
 * New configuration paradigm with any number of jobs and workflows to orchestrate them. 
 * Custom images for execution on a per-job basis.
-* Fine-grained performance with ustom caching & per-job CPU/memory allocation.
+* Fine-grained performance with custom caching & per-job CPU/memory allocation.
 
 Starting in Q2 2017 we will be offering a preview release to an expanding set of customers. To participate, contact your Account Executive.
 
@@ -29,7 +29,7 @@ A handful of customers will be participating in our Alpha release, with the expe
 * No "machine" executor for running jobs inside VMs or doing a remote Docker host - Full Docker features can be achieved using privileged containers in your worker fleet and setting up a shared Docker on the hosts.
 
 ## Phase 2: "Beta"
-An expanded set of customers will be invited in waves to try CircleCI 2.0 features in their existing installation of CircleCI, with the expecation that they will provide feedback directly to CircleCI about their experience operating the new infrastructure and any issues their teams encounter when making the transition to the new configuration. The Beta will have the following constraints:
+An expanded set of customers will be invited in waves to try CircleCI 2.0 features in their existing installation of CircleCI, with the expectation that they will provide feedback directly to CircleCI about their experience operating the new infrastructure and any issues their teams encounter when making the transition to the new configuration. The Beta will have the following constraints:
 * Only available on AWS.
 * Requires teams to build a new CircleCI 2.0 configuration in their repositories. 
 * Admin-led opt-in on a per-project basis -- teams will not automatically get 2.0 functionality in the Beta.

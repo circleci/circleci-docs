@@ -5,7 +5,8 @@ short-title: "Deployment Integrations"
 categories: [deploying]
 order: 10
 ---
-This document describes using the `deploy` step with example instructions for AWS, Azure, and Heroku deployment.
+
+Deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. This document describes using the `deploy` step with example instructions for AWS, Azure, and Heroku deployment.  
 
 Add the `deploy` step to your `config.yml` to set up conditional deployment for your application. The following example uses a bash command to check that the current branch is the `master` branch before running any deploy commands. Without this check, `<your-deploy-commands>` would be executed every time this job is triggered. It is also possible to create a separate job for deploy for this purpose, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for instructions.
 
@@ -48,7 +49,9 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
             fi
 ```            
 
-## Azure
+To learn more about the `deploy` step, please see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+
+### Notes for Azure
 
 To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
 

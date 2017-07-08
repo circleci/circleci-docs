@@ -4,7 +4,7 @@ section: enterprise
 title: "CloudWatch Monitoring"
 category: [advanced-config]
 order: 4.0
-description: "How to enable and monitor CloudWatch for CircleCI Enteprise."
+description: "How to enable and monitor CloudWatch for CircleCI Enterprise."
 ---
 
 
