@@ -49,10 +49,6 @@ If a project has been configured to run on CircleCI, you can simply clone the re
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
-### Setting Environment Variables
-
-We don't yet have an ideal solution for setting environment variables for local builds, but there is a workaround. Define which variables you want to export in a file within your repository (don't commit it - just have it in the directory). Then set BASH_ENV to that filename in your `.cirecleci/config.yml` file. The file will be automatically sourced on each command as long as BASH_ENV is correct.
-
 ### Machine Executor
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
