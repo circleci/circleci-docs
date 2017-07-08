@@ -49,16 +49,16 @@ CircleCI automatically stores the files in your [build artifacts]( {{ site.baseu
 
 This section provides the following test runner examples: 
 
-* [Cucumber]( {{ site.baseurl }}/2.0/collect-test-metadata/#cucumber)
-* [Maven Surefire]( {{ site.baseurl }}/2.0/collect-test-metadata/#maven-surefire-plugin-for-java-junit-results)
-* [Gradle]( {{ site.baseurl }}/2.0/collect-test-metadata/#gradle-junit-results)
-* [Mocha]( {{ site.baseurl }}/2.0/collect-test-metadata/#mochajs)
-* [Ava]( {{ site.baseurl }}/2.0/collect-test-metadata/#ava)
-* [ESLint]( {{ site.baseurl }}/2.0/collect-test-metadata/#eslint)
-* [PHPUnit]( {{ site.baseurl }}/2.0/collect-test-metadata/#phpunit)
-* [RSpec]( {{ site.baseurl }}/2.0/collect-test-metadata/#rspec)
-* [test2junit]( {{ site.baseurl }}/2.0/collect-test-metadata/#test2junit-for-clojure-tests)
-* [Karma]( {{ site.baseurl }}/2.0/collect-test-metadata/#karma)
+* [Cucumber]( {{ site.baseurl }}/2.0/collect-test-data/#cucumber)
+* [Maven Surefire]( {{ site.baseurl }}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+* [Gradle]( {{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-results)
+* [Mocha]( {{ site.baseurl }}/2.0/collect-test-data/#mochajs)
+* [Ava]( {{ site.baseurl }}/2.0/collect-test-data/#ava)
+* [ESLint]( {{ site.baseurl }}/2.0/collect-test-data/#eslint)
+* [PHPUnit]( {{ site.baseurl }}/2.0/collect-test-data/#phpunit)
+* [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
+* [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
+* [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
 
 
 #### <a name="cucumber"></a>Cucumber
