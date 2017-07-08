@@ -48,7 +48,7 @@ working_directory | Y | String | What directory to run the steps in. (previously
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a build.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with `docker` key.)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -61,10 +61,10 @@ Following are possible resource classes. If `resource_class` is not specified or
 
 Class | CPU | RAM
 ----|-----------|------
-small | 1.0 | 1024MB
-medium | 2.0 | 4096MB
-large | 4.0 | 1024MB
-xlarge | 8.0 | 16384MB
+small | 1.0 | 1GB
+medium | 2.0 | 4GB
+large | 4.0 | 8GB
+xlarge | 8.0 | 16GB
 
 Example:
 ``` YAML
