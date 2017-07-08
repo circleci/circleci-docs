@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: GiHub and Bitbucket Integration
-description: GiHub and Bitbucket Integration
+title: GitHub and Bitbucket Integration
+description: GitHub and Bitbucket Integration
 categories: [migration]
 Order: 60
 ---
 
-This document provides an overview of the process of checking out your code from GitHub or Bitbucket and running your configuration. After you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up::
+This document provides an overview of the process of checking out your code from GitHub or Bitbucket, running your configuration, and using permissions. After you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
 - A **service hook** that is used to notify CircleCI when you push to GitHub or Bitbucket.
 
@@ -100,7 +100,7 @@ The first two permissions require write-permission to a repo.
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
 
-1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits.
+1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits. If you invite a collaborator, but they do not appear in the Team page in CircleCI, you can refresh this  by clicking on the Resync with GitHub button from the Organization page.
 
 2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects), click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
 
@@ -113,9 +113,7 @@ Go to [GttHub Settings](https://github.com/settings/connections/applications/78a
 * "Request access" if you are not an admin for the organization in question (an admin will have to approve the request) or
 * "Grant access" if you are an admin
 
-Once access is granted, CircleCI should behave normally again.
-
-### Background information
+After access is granted, CircleCI should behave normally again.
 
 GitHub recently added the ability to approve [third party application access on a per-organization level](https://help.github.com/articles/about-third-party-application-restrictions/). Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API with whatever permissions were granted during the OAuth flow.
 
