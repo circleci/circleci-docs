@@ -13,7 +13,6 @@
 			<form id="site-search" class="doc-search" action="">
 				<input id="cci-search" name="search" type="search" placeholder="Search CircleCI {% if page.collection == 'cci1' %}1.0 {% elsif page.collection == 'cci2' %}2.0 {% elsif page.collection == 'ccie' %}Enterprise {% elsif page.collection == 'api' %}API {% else %}{% endif %}docs" class="form-control" />
 			</form>
-			{% if page.collection == "cci2" %}{% include beta-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1>{{ page.title }}</h1>{% endif %}
