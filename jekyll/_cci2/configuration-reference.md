@@ -48,6 +48,7 @@ working_directory | Y | String | What directory to run the steps in. (previously
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -55,6 +56,15 @@ branches | N | Map | A map defining rules for whitelisting/blacklisting executio
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
+
+Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used.
+
+Class | CPU | RAM
+----|-----------|------
+small | 1.0 | 1GB
+medium | 2.0 | 4GB
+large | 4.0 | 8GB
+xlarge | 8.0 | 16GB
 
 Example:
 ``` YAML
@@ -65,6 +75,7 @@ jobs:
     environment:
       - FOO: "bar"
     parallelism: 3
+    resource_class: large
     working_directory: ~/my-app
     branches:
       only:
