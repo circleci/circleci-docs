@@ -4,7 +4,7 @@ title: "Configuring Databases"
 short-title: "Configuring Databases"
 description: "Example of Configuring PostgreSQL"
 categories: [configuring-jobs]
-order: 25
+order: 35
 ---
 
 This document describes database configuration and defaults using PostgreSQL and Rails examples. In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
