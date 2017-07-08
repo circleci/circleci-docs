@@ -34,12 +34,12 @@ The `deploy` step is for deploying artifacts. In a run with parallelism, `deploy
 1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
 
 2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
-
 The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
 3. Add a `deploy` step to your config.yml file that refers to the specific AWS service, in this example it is S3:
 
-```- deploy:
+```
+      - deploy:
           name: Deploy to S3 if tests pass and branch is Master
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -51,7 +51,7 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
 
 To learn more about the `deploy` step, please see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
-### Notes for Azure
+### Azure
 
 To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
 
