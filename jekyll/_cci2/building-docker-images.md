@@ -65,6 +65,21 @@ Let’s break down what’s happening during this build’s execution:
 3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 4. We use project environment variables to store credentials for Docker Hub.
 
+## Docker version
+
+If your build requires a specific docker image, you can set it as an `image` attribute:
+
+```YAML
+      - setup_remote_docker:
+          version: 17.05.0-ce
+```
+
+The currently supported versions are:
+
+* `17.03.0-ce` (default)
+* `17.05.0-ce`
+* `17.06.0-ce`
+
 ## Separation of Environments
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker or Machine containers cannot directly communicate with the containers running in remote docker.
 
