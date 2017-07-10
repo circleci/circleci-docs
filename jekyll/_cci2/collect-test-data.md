@@ -7,7 +7,7 @@ description: "Collecting test metadata"
 order: 34
 ---
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the  $CIRCLE_TEST_REPORTS environment variable. 
+CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. **Note:** This step is not supported with Workflows. To see test result as artifacts, upload them using the `store_artifacts` step. 
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of   [Insights](https://circleci.com/build-insights) in the application to identify flaky tests and isolate recurring issues.  
 
@@ -39,11 +39,11 @@ automatically.
 
 ## Metadata collection in custom test steps
 
-Write the XML files to a subdirectory under `$CIRCLE_TEST_REPORTS` (for example `$CIRCLE_TEST_REPORTS/reports`) if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form.
-
-CircleCI automatically stores the files in your [build artifacts]( {{ site.baseurl }}/1.0/build-artifacts/) and parses the XML. You can configure the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`. For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
-
-**Note**: CircleCI looks for test reports in `$CIRCLE_TEST_REPORTS`, so your test runner must write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
+Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
+```
+- store_test_results:
+    path: /tmp/test-results
+```
 
 ### Custom runner examples
 
@@ -63,22 +63,32 @@ This section provides the following test runner examples:
 
 #### <a name="cucumber"></a>Cucumber
 
-For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
+For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
+
+```
+    steps:
+    - run: |
+        mkdir -p /cucumber 
+        bundle exec cucumber --format junit --out /cucumber/junit.xml
+      - store_test_results:
+          path: /cucumber
+      - store_artifacts:
+          path: /cucumber
+```
+
+The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the Builds page in the application.
+
+Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
 ```
     steps:
       - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-          bundle exec cucumber --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
-```
-
-Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory. For example:
-
-```
-    steps:
-      - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-          bundle exec cucumber pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
+          mkdir -p /cucumber
+          bundle exec cucumber pretty --format json --out /cucumber/tests.cucumber
+      - store_test_results:
+          path: /cucumber
+      - store_artifacts:
+          path: /cucumber          
 ```
 
 #### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
@@ -92,8 +102,12 @@ project.
 ```
     steps:
       - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/junit/
-          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+          mkdir -p /junit/
+          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} /junit/ \;
+      - store_test_results:
+          path: /junit
+      - store_artifacts:
+          path: /junit          
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test results
@@ -106,8 +120,12 @@ project.
 ```
     steps:
       - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/junit/
-          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+          mkdir -p /junit/
+          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} /junit/ \;
+      - store_test_results:
+          path: /junit
+      - store_artifacts:
+          path: /junit          
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
@@ -120,7 +138,11 @@ A working `.circleci/config.yml` section for testing might look like this:
     steps:
       - run: mocha test --reporter mocha-junit-reporter:
     environment:
-          MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+          MOCHA_FILE: /junit/test-results.xml
+      - store_test_results:
+          path: /junit
+      - store_artifacts:
+          path: /junit          
 ```
 
 #### <a name="ava"></a>Ava for Node.js
@@ -133,8 +155,12 @@ A working `.circleci/config.yml` section for testing might look like the followi
     steps: 
       - run: |
           yarn add ava tap-xunit --dev # or you could use npm
-          mkdir -p $CIRCLE_TEST_REPORTS/reports
-          ava --tap | tap-xunit > $CIRCLE_TEST_REPORTS/reports/ava.xml
+          mkdir -p /reports
+          ava --tap | tap-xunit > /reports/ava.xml
+      - store_test_results:
+          path: /reports
+      - store_artifacts:
+          path: /reports          
 ```
 
 
@@ -147,20 +173,28 @@ A working `.circleci/config.yml` test section might look like this:
 ```
     steps:
       - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/reports
-          eslint ./src/ --format junit --output-file $CIRCLE_TEST_REPORTS/reports/eslint.xml
+          mkdir -p /reports
+          eslint ./src/ --format junit --output-file /reports/eslint.xml
+      - store_test_results:
+          path: /reports
+      - store_artifacts:
+          path: /reports          
 ```
 
 
 #### <a name="phpunit"></a>PHPUnit
 
-For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your `.circleci/config.yml` might be:
+For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory.  Your `.circleci/config.yml` might be:
 
 ```
     steps:
       - run: |
-          mkdir -p $CIRCLE_TEST_REPORTS/phpunit
-          phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
+          mkdir -p /phpunit
+          phpunit --log-junit /phpunit/junit.xml tests
+      - store_test_results:
+          path: /phpunit
+      - store_artifacts:
+          path: /phpunit          
 ```
 
 #### <a name="rspec"></a>RSpec
@@ -176,7 +210,7 @@ And modify your test command to this:
 ````
     steps:
       - run:
-          command: bundle exec rspec --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec.xml
+          command: bundle exec rspec --format progress --format RspecJunitFormatter -o /rspec/rspec.xml
 ````
 
 ### <a name="minitest"></a> Minitest
@@ -192,7 +226,7 @@ And modify your test command to this:
 ````
     steps:
       - run:
-          command: bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+          command: bundle exec rake test TESTOPTS="--ci-dir=/reports":
 ````
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
@@ -211,8 +245,12 @@ A working `.circleci/config.yml` section might look like this:
       - run:
           command: karma start ./karma.conf.js:
           environment:
-            JUNIT_REPORT_PATH: $CIRCLE_TEST_REPORTS/junit/
+            JUNIT_REPORT_PATH: /junit/
             JUNIT_REPORT_NAME: test-results.xml
+      - store_test_results:
+          path: /junit
+      - store_artifacts:
+          path: /junit            
 ```
 
 ```javascript
@@ -239,4 +277,4 @@ This tool can combine the reports into a single file that our test summary syste
 
 ## API
 
-You can access test metadata for a build from the [API]( {{ site.baseurl }}/api/v1-reference/#test-metadata).
+To access test metadata for a run from the API, refer to the [test-metadata API documentation]( {{ site.baseurl }}/api/v1-reference/#test-metadata).
