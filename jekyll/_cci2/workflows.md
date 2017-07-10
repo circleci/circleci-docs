@@ -224,12 +224,17 @@ jobs:
       - run: echo "Hello, world!" > workspace/echo-output
 
       - persist_to_workspace:
-          paths: /tmp/workspace    
+          # Must be relative path from working_directory
+          root: workspace
+	  # Must be relative path from root
+          paths:
+            - echo-output
 
   downstream:
     <<: *defaults
     steps:
       - attach_workspace:
+          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
 
       - run: |
