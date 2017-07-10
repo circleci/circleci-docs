@@ -7,7 +7,16 @@ categories: [optimization]
 order: 50
 ---
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. 
+Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
+
+{% raw %}
+```		
+		restore_cache:
+		  keys:
+		    - m2-{{ checksum pom.xml }}
+		    - m2- # used if checksum fails
+```
+{% endraw %}
 
 This document describes the manual caching available, the costs and benefits of a chosen strategies, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
 
@@ -33,7 +42,7 @@ Cache is written in chronological order. Consider a workflow of Job1 -> Job2 -> 
 
 To decide how to save your cache, it is useful to first understand that CircleCI selects what will be restored in the order in which they are listed in the special `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. As caches become less specific going down the list in the following example, there is greater likelihood that the dependencies they contain are different from those that the current job requires. When your dependency tool runs (for example, `npm install`) it will discover out-of-date dependencies and install those the current job specifies. This is also referred to as *partial cache* restore. 
 
-Here's an example of a `restore_cache` step with two keys:
+Here's another example of a `restore_cache` step with two keys:
 
 {% raw %}
 ```YAML
@@ -107,6 +116,7 @@ Template | Description
 
 The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
 
+{% raw %}
 ```YAML
 docker:
   - image: customimage/ruby:2.3-node-phantomjs-0.0.1
@@ -174,6 +184,7 @@ steps:
   - run: bundle exec rspec
   - run: bundle exec cucumber
   ```
+{% endraw %}
 
 ## Caching Strategy Tradeoffs 
 
