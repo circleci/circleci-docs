@@ -6,7 +6,14 @@ categories: [deploying]
 order: 10
 ---
 
-Deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. This document describes using the `deploy` step with example instructions for AWS, Azure, and Heroku deployment.  
+This document describes using the `deploy` step with example instructions in the following sections:
+
+* TOC
+{:toc}
+
+## Deployment Overview 
+
+It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
 Add the `deploy` step to your `config.yml` to set up conditional deployment for your application. The following example uses a bash command to check that the current branch is the `master` branch before running any deploy commands. Without this check, `<your-deploy-commands>` would be executed every time this job is triggered. It is also possible to create a separate job for deploy for this purpose, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for instructions.
 
@@ -118,5 +125,4 @@ Notes on the added keys:
 - The `deploy` section checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands with every successful build on the master branch. 
 
 Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for additional details.
-
 
