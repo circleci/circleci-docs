@@ -143,7 +143,8 @@ The usage of the [machine executor]({{ site.baseurl }}/2.0/executor-types) is co
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-enabled | Y | Boolean | This must be true in order to enable the `machine` executor.
+enabled | N | Boolean | This must be true in order to enable the `machine` executor.  Is required if no other value is specified
+image | N | String | The image to use (default: `circleci/classic:latest`)
 {: class="table table-striped"}
 
 As a shorthand, you can set the `machine` key to `true`.
@@ -162,6 +163,22 @@ jobs:
   build:
     machine: true
 ```
+
+CircleCI supports multiple machine images that can be specified in `image` field:
+
+* `circleci/classic:latest` (default) - an Ubuntu Trusty-based image with Docker `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are announced at least a week in advance.
+* `circleci/classic:edge` - an Ubuntu Trusty-based image with Docker `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually.
+
+So you can set the following to use Docker `17.06.0-ce`:
+
+```YAML
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+```
+
+*Coming soon*: Capability to pin the image version and documentation of the actual content of each released image.
 
 ### **`branches`**
 
