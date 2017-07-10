@@ -118,7 +118,7 @@ workflows:
             - hold
 ```
 
-In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In ths example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
+In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In this example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
 
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
  
