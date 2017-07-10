@@ -7,7 +7,7 @@ categories: [containerization]
 order: 30
 ---
 
-This document describes how to create and use customer Docker images with CircleCI in the following sections:
+This document describes how to create and use custom Docker images with CircleCI in the following sections:
 
 * TOC
 {:toc}
