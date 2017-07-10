@@ -7,7 +7,63 @@ categories: [configuring-jobs]
 order: 40
 ---
 
-To add environment variables to your build, use the Environment Variables page of your Build > Project > Settings in the CircleCI application. You can add individual variables or import from another project. To define environment variables in your configuration, use the `environment` key in your `.circleci/config.yml` file, see the [docker/machine executor](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details.
+This document describes using environment variables in CircleCI by adding them in the app, by adding them to your `config.yml` file or by using the API. The complete list of CircleCI environment variables and their descriptions is also provided below.
+
+## Adding Enviroment Variables 
+
+To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project. 
+
+To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
+
+```
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: postgres:9.6
+      # Environment variable for all commands executed in the primary container
+        environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+    workDir: /root/workflows-conductor
+    steps:
+      - checkout
+      
+      - run: lein javac
+
+      - run: lein deps
+
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
+
+```
+version: 2
+jobs:
+  build:
+    working_directory: ~/circulate
+    docker:
+      - image: python:3.6.0
+       # Environment variable for all commands executed in the primary container
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: postgres:9.6.2
+       # Environment variable for all commands executed in the secondary container
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+```          
+
+See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
 
 ## Injecting Environment Variables with the API
 
