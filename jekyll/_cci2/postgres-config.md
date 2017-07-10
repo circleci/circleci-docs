@@ -7,7 +7,13 @@ categories: [configuring-jobs]
 order: 35
 ---
 
-This document describes database configuration and defaults using PostgreSQL and Rails examples. In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+This document describes database configuration and defaults using PostgreSQL and Rails in the following sections:
+
+* TOC
+{:toc}
+
+## Database Environment Configuration Overview
+In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
 1.	DATABASE_URL environment variable, if set
 2.	The test section configuration for the appropriate environment in config.yml (usually `test` for your test suite)
@@ -62,7 +68,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
        - run: echo ‘/usr/lib/postgresql/9.6/bin/:$PATH’ >> $BASH_ENV
 ```
 
-## Passwordless Login
+## Configuring Passwordless Login
 The default PostgreSQL configuration is set up to always ask the user for a password, unless using `sudo`. However, the default user has no password, so you essentially cannot log in without using `sudo`.
 
 To work around this, consider overwriting the existing user with a new user and a password and create your own database, for example:
@@ -188,7 +194,7 @@ jobs:
           command: bin/rails test
 ```
 
-## Example CircleCI Configuration Rails App With structure.sql 
+## Example CircleCI Configuration for a Rails App With structure.sql 
 
 If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access. 
 
@@ -241,7 +247,7 @@ jobs:
 
 An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
 
-## Postgres Image Optimization
+## Optimizing Postgres Images 
 The `circleci/postgres` Docker image uses regular persistent storage on disk. Using `tmpfs` may make tests run faster and may use fewer resources. To create a Dockerfile for your own project and potentially reduce the duration of tests, consider adding the following line to the pre-built image.
 
 ```
