@@ -7,7 +7,13 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-This section describes the Workflows feature and provides examples for parallel, sequential, fan-in, fan-out, and branch-level workflows. To enable Workflows, you must first split the single job in your CircleCI 2.0 `config.yml` file into multiple jobs with unique names, if you have not already done so. Job names must be unique within a `config.yml` file. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for instructions.
+This document describes the Workflows feature and provides details and examples in the following sections:
+
+* TOC
+{:toc}
+
+
+To enable Workflows, you must first split the single job in your CircleCI 2.0 `config.yml` file into multiple jobs with unique names, if you have not already done so. Job names must be unique within a `config.yml` file. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for instructions.
  
 ## Overview
 
@@ -197,7 +203,7 @@ workflows:
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job.
 
-## Using Workspaces to Share Artifacts Among Jobs
+## Using Workspaces to Share Data Among Jobs
 
 Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
 
@@ -256,6 +262,8 @@ workflows:
 ```
 
 ## See Also
+
+{:.no_toc}
 
 - For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document. 
 
