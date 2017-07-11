@@ -2,12 +2,15 @@
 layout: classic-docs
 title: "Using Google Container Engine"
 short-title: "Using Google Container Engine"
-categories: [deploying]
-description: "Setting up continuous deployment with Google Cloud Platform's Container Engine with CircleCI 2.0."
+categories: [containerization]
+description: "Setting up Google Cloud Platform's Container Engine with CircleCI 2.0."
 order: 60
 ---
 
-In order to use Google Cloud, you will need to ensure that the [Google Cloud SDK](https://cloud.google.com/sdk/) is installed on your primary container.
+In order to use Google Cloud, you will need to ensure that the [Google Cloud SDK](https://cloud.google.com/sdk/) is installed on your primary container as described in the following sections:
+
+* TOC
+{:toc}
 
 ## Prerequisites
 
@@ -72,6 +75,4 @@ gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
 
-## Deploying
 
-By ensuring that the Google Cloud SDK is installed in your primary container, `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands. Though the use of Kubernetes is a large subject outside of the scope of this document, [the CircleCI 1.0 documentation on deployment to GKE](https://circleci.com/docs/1.0/continuous-deployment-with-google-container-engine/#deploysh) has helpful examples that should get you started on simple deployments, and there are [numerous freely-available online resources](https://circleci.com/docs/1.0/continuous-deployment-with-google-container-engine/#how-to-setup-the-project-and-cluster) to guide you along the way.

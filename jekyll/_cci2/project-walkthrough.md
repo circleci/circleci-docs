@@ -114,7 +114,7 @@ jobs:
 
 The following describes the detail of the added key values:
 
-- The `restore_cache:` key is named `deps1` and it restores the cache on the current branch by using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. Then, CircleCI restores a new cache if the checksum for the requirements file changes by using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`.
+- The `restore_cache:` key is named `deps1` and it restores the cache on the current branch by using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. If the checksum for the requirements file has not changed, then CircleCI restores the existing cache by using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`.
 
 - The `run:` key creates and activates a virtual environment in which to install the Python dependencies.
 

@@ -544,8 +544,7 @@ In general `deploy` step behaves just like `run` with one exception - in a build
 
 #### **`store_artifacts`**
 
-<!-- TODO: replace the 1.0 link here with a 2.0 link -->
-Step to store artifacts (for example logs, binaries, etc) to be available in the web UI or via the API. Learn more about [artifacts]({{ site.baseurl }}/1.0/build-artifacts/)
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the   [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -587,14 +586,17 @@ Special step used to persist a temporary file to be used by another job in the w
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-paths | Y | String | Directory containing temporary files
+root | Y | String | Relative from working_directory
+paths | Y | List | Directory containing temporary files, either absolute path or relative from root
 {: class="table table-striped"}
 
 ##### _Example_
 
 ``` YAML
 - persist_to_workspace:
-    paths: /tmp/file-name
+    root: workspace
+    paths: 
+      - /tmp/file-name
 ```
 
 #### **`attach_workspace`**

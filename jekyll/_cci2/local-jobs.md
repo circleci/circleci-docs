@@ -7,7 +7,10 @@ categories: [troubleshooting]
 order: 10
 ---
 
-The following sections describe useful tools for validating and debugging your configuration.
+The following sections describe useful tools for validating and debugging your configuration:
+
+* TOC
+{:toc}
 
 ## CircleCI Command Line Interface (CLI) Overview
 
