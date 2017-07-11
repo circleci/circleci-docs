@@ -1,11 +1,11 @@
 ---
 layout: classic-docs
-title: "2.0 Docs (Beta)"
+title: "2.0 Docs"
 description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
 
-Welcome to CircleCI 2.0 Beta! The Beta release of CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CircleCI, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci) for how it works and then use the [Hello World]({{ site.baseurl }}/2.0/hello-world) doc to start your first project build.
+Welcome to CircleCI 2.0! CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CircleCI, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci) for how it works and then use the [Hello World]({{ site.baseurl }}/2.0/hello-world) doc to start your first project build.
 
 ## Programming Language Support
 
@@ -24,7 +24,7 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 
 ## Features
 
-CircleCI 2.0 includes infrastructure upgrades for faster performance that reduce overall time to build, test, and deploy for all platforms at scale. See the [Migration FAQ]({{ site.baseurl }}/2.0/faq/) for answers to common questions about the Beta.
+CircleCI 2.0 includes infrastructure upgrades for faster performance that reduce overall time to build, test, and deploy for all platforms at scale. See the [Migration FAQ]({{ site.baseurl }}/2.0/faq/) for answers to common questions.
 
 CircleCI 2.0 gives you greater control with new configuration keys in 2.0 enable you to break up monolithic builds into separate Jobs and Steps. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for information about the new keys, then head over to the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
