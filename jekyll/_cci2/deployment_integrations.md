@@ -58,7 +58,7 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
 
 To learn more about the `deploy` step, please see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
 
-### Azure
+## Azure
 
 To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
 
@@ -167,6 +167,6 @@ kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"c
 ```
 
 The full `deploy.sh` file is available on
-[GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh.
+[GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
 
 
