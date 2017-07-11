@@ -59,7 +59,7 @@ Optionally configure workflows, using the following instructions:
 
 2. To persist a temporary file to a location between jobs, add the `persist_to_workspace:<directory>` key, under `steps:`. Then, to get the saved temporary file for use by another job, add the `attach_workspace:` key with a nested `at:<directory>` key, ideally defined as the directory where the artifact was saved.
  
-3. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file during Beta.  
+3. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
      ```
      workflows:
        version: 2
@@ -177,9 +177,9 @@ With the following, nested under `steps:` and customizing for your application a
 
 **Notes on Deployment:**
 
-- See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy) for valid syntax for setting up Deploymnets on CircleCI 2.0
-- Please read the [Deployment Integrations]({{ site.baseurl }}/2.0/deployment_integrations/) page for the current status of built-in deployment integration for CircleCI 2.0.
+- See the [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
+- Please read the [Deployment Integrations]({{ site.baseurl }}/2.0/deployment_integrations/) doc for examples of deployment integration for CircleCI 2.0.
 
 ## Validate YAML
 
-When you have all the sections in `.circleci/config.yml` we recommend that you validate your YAML syntax using a tool such as <http://codebeautify.org/yaml-validator>. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI UI.
+When you have all the sections in `.circleci/config.yml` we recommend that you validate your YAML syntax using a tool such as <http://codebeautify.org/yaml-validator>. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
