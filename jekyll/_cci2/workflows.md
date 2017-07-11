@@ -33,8 +33,6 @@ Select the Failed workflow to see the status of each job as shown in the next sc
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
-**Note**: The workflows user interface is subject to change during the Beta and does not reflect the final version of the user experience for this feature. It is a work in progress and we welcome your feedback!
-
 ## Parallel Job Execution Example
 
 The basic Workflows configuration runs all jobs in parallel. That is, jobs listed in the `workflows` section without additional keys will run at the same time. The blue icons indicate the Running status.
