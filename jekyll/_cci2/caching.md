@@ -27,8 +27,6 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. Autom
 
 This document describes the manual caching available, the costs and benefits of a chosen strategies, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
 
-## Overview
-
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but in the case of a cache miss or zero cache restore the job will still run successfully, for example, by caching Npm, Gem, or Maven package  directories.
 
 Caching is a balance between reliability (not using an out-of-date or inappropriate cache) and getting maximum performance (using a full cache for every build).
