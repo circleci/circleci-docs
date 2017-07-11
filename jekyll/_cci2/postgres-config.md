@@ -43,20 +43,17 @@ jobs:
         - POSTGRES_USER=ubuntu
         - POSTGRES_DB=db_name
     steps:
-      - type: checkout
-      - type: shell
-        name: Install System Dependencies
+      - checkout
+      - name: Install System Dependencies
         command: apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev nodejs rake
-      - type: shell
-        name: Install Ruby Dependencies
+      - name: Install Ruby Dependencies
         command: bundle install
-      - type: shell
-        name: Set up DB
+      - name: Set up DB
+        command: |
+          bundle exec rake db:create db:schema:load --trace
+          bundle exec rake db:migrate
         environment:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
-        command: |
-          bundle exec rake db:create db:schema:load --trace &&
-          bundle exec rake db:migrate
 ```
 
 ## Using Binaries
@@ -92,13 +89,13 @@ Following is an example of how to do this in your CircleCI `config.yml` file:
 version: 2.0
 jobs:
   build:
+    working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
       - image: postgres:9.6.2-alpine
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test
-    workDir: /your/workdir
     steps:
       - checkout
       - run:
@@ -149,33 +146,37 @@ jobs:
     steps:
       - checkout
 
-      - type: cache-restore
-        name: Restore bundle cache
-        key: myapp-bundle-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          name: Restore bundle cache
+          keys:
+            - myapp-bundle-{{ checksum "Gemfile.lock" }}
+            - myapp-bundle-
 
-      - type: cache-restore
-        name: Restore yarn cache
-        key: myapp-yarn-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          name: Restore yarn cache
+          keys:
+            - myapp-yarn-{{ checksum "yarn.lock" }}
+            - myapp-yarn-
 
       - run:
           name: Bundle Install
-          command: bin/bundle install --path vendor/bundle
+          command: bin/bundle check --path vendor/bundle ||  bin/bundle install --path vendor/bundle --jobs 4 --retry 3
 
       - run:
           name: Yarn Install
           command: yarn install
 
-      - type: cache-save
-        name: Store bundle cache
-        key: myapp-bundle-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      - save_cache:
+          name: Store bundle cache
+          key: myapp-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
-      - type: cache-save
-        name: Store yarn cache
-        key: myapp-yarn-{{ checksum "yarn.lock" }}
-        paths:
-          - ~/.yarn-cache
+      - save_cache:
+          name: Store yarn cache
+          key: myapp-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.yarn-cache
 
       - run:
           name: Rubocop
@@ -195,9 +196,12 @@ jobs:
 ```
 {% endraw %}
 
-## Example CircleCI Configuration for a Rails App With structure.sql 
+## Example CircleCI Configuration for a Rails App With structure.sql
 
-If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access. 
+If you are migrating a Rails app configured with a `structure.sql` file make
+sure that `psql` is installed in your PATH and has the proper permissions, as
+follows, because the circleci/ruby:2.4.1-node image does not have psql installed
+by default and uses `pg` gem for database access.
 
 {% raw %}
 ```
@@ -219,38 +223,49 @@ jobs:
       - checkout
 
       # Restore bundle cache
-      - type: cache-restore
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
 
       # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
+      - run:
+          name: Install dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+
       - run: sudo apt install postgresql-client
 
       # Store bundle cache
-      - type: cache-save
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:structure:load
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
 
-      # Run rspec in parallel
-      - type: shell
-        command: |
-          bin/rails test
+      - run:
+          name: Parallel RSpec
+          command: bin/rails test
 
       # Save artifacts
-      - type: store_test_results
-        path: /tmp/test-results
+      - store_test_results:
+          path: /tmp/test-results
 ```
 {% endraw %}
 
-An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
+An alternative is to build your own image by extending the current image,
+installing the needed packages, committing, and pushing it to Docker Hub or the
+registry of your choosing.
 
-## Optimizing Postgres Images 
-The `circleci/postgres` Docker image uses regular persistent storage on disk. Using `tmpfs` may make tests run faster and may use fewer resources. To create a Dockerfile for your own project and potentially reduce the duration of tests, consider adding the following line to the pre-built image.
+## Optimizing Postgres Images
+The `circleci/postgres` Docker image uses regular persistent storage on disk.
+Using `tmpfs` may make tests run faster and may use fewer resources. To create
+a Dockerfile for your own project and potentially reduce the duration of tests,
+consider adding the following line to the pre-built image.
 
 ```
 Dockerfile:
