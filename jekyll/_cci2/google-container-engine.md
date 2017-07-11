@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: "Google Container Engine"
-short-title: "Google Container Engine"
+title: "Using Google Container Engine"
+short-title: "Using Google Container Engine"
 categories: [containerization]
 description: "Setting up Google Cloud Platform's Container Engine with CircleCI 2.0."
-order: 30
+order: 60
 ---
 
 In order to use Google Cloud, you will need to ensure that the [Google Cloud SDK](https://cloud.google.com/sdk/) is installed on your primary container as described in the following sections:
