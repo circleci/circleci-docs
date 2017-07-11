@@ -7,10 +7,14 @@ categories: [deploying]
 order: 30
 ---
 
-This document explains how to build Docker images for deploying elsewhere or for further testing. To do so, you must use a special key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands.
+This document explains how to build Docker images for deploying elsewhere or for further testing in the following sections:
 
-## Configuration
-If your build requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+* TOC
+{:toc}
+
+## Overview
+
+To build Docker images for deplyment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your build requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```YAML
 jobs:
