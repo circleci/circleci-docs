@@ -14,18 +14,29 @@ This document describes the manual caching available, the costs and benefits of 
 
 ## Overview
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
+---
+layout: classic-docs
+title: "Caching Dependencies"
+short-title: "Caching Dependencies"
+description: "Caching Dependencies"
+categories: [optimization]
+order: 50
+---
 
-Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
+Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
 ```		
-- restore_cache:
-    keys:
-      - m2-{{ checksum pom.xml }}
-      - m2- # used if checksum fails
+		restore_cache:
+		  keys:
+		    - m2-{{ checksum pom.xml }}
+		    - m2- # used if checksum fails
 ```
 {% endraw %}
+
+This document describes the manual caching available, the costs and benefits of a chosen strategies, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
+
+## Overview
 
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but in the case of a cache miss or zero cache restore the job will still run successfully, for example, by caching Npm, Gem, or Maven package  directories.
 
@@ -65,7 +76,9 @@ Here's another example of a `restore_cache` step with two keys:
 
 If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example.   
 
-**Tip:** Caches are immutable so it is useful to start all your cache keys with a version prefix, for example `v1-...`. This enables you to regenerate all of your caches by incrementing the version in this prefix.
+<div class="alert alert-info" role="alert">
+<b>Tip:</b> Caches are immutable so it is useful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This enables you to regenerate all of your caches by incrementing the version in this prefix.
+</div>
 
 For example:
 
