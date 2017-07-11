@@ -34,7 +34,11 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`jobs`**
 
-Each job is an item in the `jobs` list. `build` is the default job and is required in every `config.yml`. This is the only job that will be automatically picked up and run by CircleCI. However, if you configure Workflows, a job named `build` is not required. See the [Workflows]({{ site.baseurl }}/2.0/workflows) documentation for detailed information.
+Each job is an item in the `jobs` list. 
+
+### **`build`**
+
+THe `build` job is the default job and is required in every `config.yml`. This is the only job that will be automatically picked up and run by CircleCI. However, if you configure Workflows, a job named `build` is not required. See the [Workflows]({{ site.baseurl }}/2.0/workflows) documentation for detailed information.
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
@@ -86,7 +90,7 @@ jobs:
       - run: make
 ```
 
-### **`docker`** | **`machine`** (_executor_)
+#### **`docker`** | **`machine`** (_executor_)
 
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
@@ -178,7 +182,7 @@ jobs:
       image: circleci/classic:edge
 ```
 
-### **`branches`**
+#### **`branches`**
 
 Defines rules for whitelisting/blacklisting execution of some branches. Takes a map:
 
@@ -212,7 +216,7 @@ If both `ignore` and `only` are present in config, only `ignore` will be taken i
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
-### **`steps`**
+#### **`steps`**
 
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
@@ -261,7 +265,7 @@ Key | Required | Type | Description
 
 Each built-in step is described in detail below.
 
-#### **`run`**
+##### **`run`**
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
@@ -404,7 +408,7 @@ alerts in chatrooms.
 
 ```
 
-#### **`checkout`**
+##### **`checkout`**
 
 Special step used to check out source code to the configured `path` (defaults to the `working_directory`).
 
@@ -424,7 +428,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 ```
 
 <a name="save_cache"/>
-#### **`save_cache`**
+##### **`save_cache`**
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
@@ -463,7 +467,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 </div>
 
-##### _Example_
+###### _Example_
 
 {% raw %}
 ``` YAML
@@ -475,7 +479,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% endraw %}
 
 <a name="restore_cache"/>
-#### **`restore_cache`**
+##### **`restore_cache`**
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
@@ -519,7 +523,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-##### _Example_
+###### _Example_
 
 {% raw %}
 ``` YAML
@@ -539,7 +543,7 @@ A path is not required here because the cache will be restored to the location f
 ```
 {% endraw %}
 
-#### **`deploy`**
+##### **`deploy`**
 
 Special step for deploying artifacts.
 
@@ -547,7 +551,7 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-##### _Example_
+###### _Example_
 
 ``` YAML
 - deploy:
@@ -557,7 +561,7 @@ In general `deploy` step behaves just like `run` with one exception - in a build
       fi
 ```
 
-#### **`store_artifacts`**
+##### **`store_artifacts`**
 
 Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the   [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
@@ -569,7 +573,7 @@ destination | N | String | Prefix added to the artifact paths in the artifacts A
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-##### _Example_
+###### _Example_
 
 ``` YAML
 - store_artifacts:
@@ -577,7 +581,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
     destination: prefix
 ```
 
-#### **`store_test_results`**
+##### **`store_test_results`**
 
 Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**. This key is **not** supported with Workflows.
 
@@ -588,14 +592,14 @@ path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadat
 
 The directory layout should match the [classic CircleCI test metadata directory layout]({{ site.baseurl }}/1.0/test-metadata/#metadata-collection-in-custom-test-steps).
 
-##### _Example_
+###### _Example_
 
 ``` YAML
 - store_test_results:
     path: /tmp/test-results
 ```
 
-#### **`persist_to_workspace`**
+##### **`persist_to_workspace`**
 
 Special step used to persist a temporary file to be used by another job in the workflow. 
 
@@ -605,7 +609,7 @@ root | Y | String | Relative from working_directory
 paths | Y | List | Directory containing temporary files, either absolute path or relative from root
 {: class="table table-striped"}
 
-##### _Example_
+###### _Example_
 
 ``` YAML
 - persist_to_workspace:
@@ -614,7 +618,7 @@ paths | Y | List | Directory containing temporary files, either absolute path or
       - /tmp/file-name
 ```
 
-#### **`attach_workspace`**
+##### **`attach_workspace`**
 
 Special step used to attach a temporary file generated by another job in the workflow. 
 
@@ -623,7 +627,7 @@ Key | Required | Type | Description
 at | Y | String | Directory containing temporary files
 {: class="table table-striped"}
 
-##### _Example_
+###### _Example_
 
 ``` YAML
 - attach_workspace:
@@ -643,7 +647,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 {: class="table table-striped"}
 
 
-#### **`add_ssh_keys`**
+##### **`add_ssh_keys`**
 
 Special step that adds SSH keys configured in the project's UI to the container, and configure ssh to use them.
 
@@ -671,7 +675,7 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
-### **`jobs`**
+#### **`jobs`**
 A job can have the keys `requires` and `filters`.
 
 Key | Required | Type | Description
@@ -679,7 +683,11 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
-#### **`requires`**
+##### **`build`**
+
+A unique name for your job.
+
+###### **`requires`**
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name. 
 
 Key | Required | Type | Description
@@ -687,7 +695,7 @@ Key | Required | Type | Description
 requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
-#### **`filters`**
+###### **`filters`**
 Filters can have the key `branches`.
 
 Key | Required | Type | Description
@@ -695,7 +703,7 @@ Key | Required | Type | Description
 filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
-##### **`branches`**
+####### **`branches`**
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -709,7 +717,7 @@ only | N | String | A branch name
 ignore | N | String | A branch name
 {: class="table table-striped"}
 
-##### *Example*
+###### *Example*
 
 ``` 
 workflows:
