@@ -7,6 +7,12 @@ categories: [optimization]
 order: 60
 ---
 
+This document describes how to run tests in parallel in the following sections:
+
+* TOC
+{:toc}
+
+## Overview
 One of the most powerful features of CircleCI is the ability to run your tests in parallel. This section describes how to use `circleci` commands in your `config.yml` file to merge and split tests with the hosted CircleCI CLI for faster builds. See [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#jobs) for information about setting the `parallelism` key in your configuration file. 
 
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
