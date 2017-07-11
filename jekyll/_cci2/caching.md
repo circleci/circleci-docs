@@ -65,9 +65,7 @@ Here's another example of a `restore_cache` step with two keys:
 
 If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example.   
 
-<div class="alert alert-info" role="alert">
-<b>Tip:</b> Caches are immutable so it is useful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This enables you to regenerate all of your caches by incrementing the version in this prefix.
-</div>
+**Tip:** Caches are immutable so it is useful to start all your cache keys with a version prefix, for example `v1-...`. This enables you to regenerate all of your caches by incrementing the version in this prefix.
 
 For example:
 
