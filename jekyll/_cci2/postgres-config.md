@@ -129,7 +129,7 @@ It is possible to apply the same principle for the following databases:
 ## PostgreSQL CircleCI Configuration Example
 Following is a simple example `.circleci/config.yml` file configured for Ruby and Postgres.
 
-
+{% raw %}
 ```
 version: 2
 jobs:
@@ -193,12 +193,13 @@ jobs:
           name: Run tests
           command: bin/rails test
 ```
+{% endraw %}
 
 ## Example CircleCI Configuration for a Rails App With structure.sql 
 
 If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access. 
 
-
+{% raw %}
 ```
 version: 2
 jobs:
@@ -244,6 +245,7 @@ jobs:
       - type: store_test_results
         path: /tmp/test-results
 ```
+{% endraw %}
 
 An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
 
