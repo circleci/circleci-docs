@@ -7,9 +7,6 @@ categories: [optimization]
 order: 50
 ---
 
-* TOC
-{:toc}
-
 Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
