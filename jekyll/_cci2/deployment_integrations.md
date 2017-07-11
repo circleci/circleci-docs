@@ -6,7 +6,14 @@ categories: [deploying]
 order: 10
 ---
 
-Deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. This document describes using the `deploy` step with example instructions for AWS, Azure, and Heroku deployment.  
+This document describes using the `deploy` step with example instructions in the following sections:
+
+* TOC
+{:toc}
+
+## Deployment Overview 
+
+It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
 Add the `deploy` step to your `config.yml` to set up conditional deployment for your application. The following example uses a bash command to check that the current branch is the `master` branch before running any deploy commands. Without this check, `<your-deploy-commands>` would be executed every time this job is triggered. It is also possible to create a separate job for deploy for this purpose, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for instructions.
 
@@ -118,5 +125,48 @@ Notes on the added keys:
 - The `deploy` section checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands with every successful build on the master branch. 
 
 Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for additional details.
+
+## Google Cloud
+
+Ensure that the Google Cloud SDK is installed in your primary container so that `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands. In the following example, if the build passes and the current branch was the master branch, CircleCI 
+runs `deploy.sh` to do the actual deployment work.
+
+```
+     - deploy:
+         name: Deploy Master to GKE
+         command: |
+           if [ "${CIRCLE_BRANCH}" == "master" ]; then
+             ./deploy.sh
+           fi
+```
+
+The deployment script pushes the newly created
+Docker image out to the registry, then updates the K8s deployment to use the
+new image with a `gcloud` command to handle authentication and push the image all at
+once: 
+
+```
+sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
+```
+
+The new image is now available in GCR for the GCP infrastructure to
+access. Then, change permissions:
+
+```
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+```
+
+Finally, utilize the patch subcommand of `kubectl` to find the line that specifies the image to use for our container,
+and replaces it with the image tag of the image just built. The K8s deployment
+then intelligently upgrades the cluster by shutting down old containers and
+starting up-to-date ones.
+
+```
+kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+
+```
+
+The full `deploy.sh` file is available on
+[GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh.
 
 

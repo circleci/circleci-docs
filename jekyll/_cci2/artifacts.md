@@ -1,11 +1,19 @@
 ---
 layout: classic-docs
-title: "Uploading Build Artifacts"
-short-title: "Uploading Build Artifacts"
+title: "Storing and Accessing Build Artifacts"
+short-title: "Storing and Accessing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 70
 ---
+
+This document describes how to work with Artifacts in the following sections:
+
+* TOC
+{:toc}
+
+## Artifacts Overview
+
 If your build produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
@@ -14,6 +22,8 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
 
 Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+
+## Uploading Artifacts
 
 To upload artifacts created during builds, use the following example:
 
@@ -70,8 +80,6 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
      ```
 
 3. Run `make` and `./dump` on the generated program to print `Aborted (core dumped)`!
-
-### Configuration
 
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 

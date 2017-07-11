@@ -7,11 +7,16 @@ categories: [configuring-jobs]
 order: 40
 ---
 
-This document describes using environment variables in CircleCI by adding them in the app, by adding them to your `config.yml` file or by using the API. The complete list of CircleCI environment variables and their descriptions is also provided below.
+This document describes using environment variables in CircleCI in the following sections:
 
-## Adding Enviroment Variables 
+* TOC
+{:toc}
+
+## Adding Enviroment Variables in the App
 
 To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project. 
+
+## Adding Enviroment Variables in the config.yml File
 
 To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
 
@@ -130,7 +135,7 @@ export param2="500"
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
 
-## CircleCI Environment Variables
+## CircleCI Environment Variable Descriptions
 
 CircleCI exports the environment variables in this section during each build, which are
 useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:

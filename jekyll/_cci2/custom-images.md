@@ -7,6 +7,12 @@ categories: [containerization]
 order: 30
 ---
 
+This document describes how to create and use custom Docker images with CircleCI in the following sections:
+
+* TOC
+{:toc}
+
+## Custom Image Overview
 CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
 
 1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
@@ -14,19 +20,13 @@ CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the
 
 In this document we will give a walkthrough of how to create a custom image. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
-## Requirements
+## Prerequisites
 
-As a prerequisite you'll need to have Docker installed. Please follow the [official Docker guide](https://docs.docker.com/engine/installation/).
+As a prerequisite you'll need to have Docker installed. Please follow the [official Docker guide](https://docs.docker.com/engine/installation/). If you are unfamiliar with Docker, we recommend reading Docker's [getting started guide](https://docs.docker.com/engine/getstarted/).
 
-If you are unfamiliar with Docker, we recommend reading Docker's [getting started guide](https://docs.docker.com/engine/getstarted/).
+## Choosing a Base Image and Creating a Dockerfile
 
-## Dockerfile
-
-Docker has a special format for describing images and conventionally this file is named `Dockerfile`. We recommend keeping this file together with your project source code in `.circleci/images` folder. For instance, in [our Docker demo project](https://github.com/circleci/cci-demo-docker) we put the `Dockerfile` for the primary container into [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
-
-## Base image
-
-First of all you need to choose a base image. In general it makes sense to use a image with your main language/framework as a base images. [Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks. We recommend starting with an [officially supported image](https://hub.docker.com/explore/).
+Use an image with your main language/framework as a base image. [Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks. We recommend starting with an [officially supported image](https://hub.docker.com/explore/). Docker has a special format for describing images and conventionally this file is named `Dockerfile`. We recommend keeping this file together with your project source code in the `.circleci/images` folder. For example, in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
 
 After choosing a base image, start writing a `Dockerfile` to extend the base image using `FROM` as in the following example:
 
@@ -34,9 +34,7 @@ After choosing a base image, start writing a `Dockerfile` to extend the base ima
 FROM golang:1.8.0
 ```
 
-Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from  `golang:1.8.0` because the project is using Go. Read more about the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from).
-
-## Additional tools
+Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from  `golang:1.8.0` because the project is using Go. See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) DOcker documentation for more information.
 
 Add the tools required for your job by using the `RUN` command:
 
@@ -56,7 +54,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 Read more about [`RUN` command](https://docs.docker.com/engine/reference/builder/#run).
 
-## Required tools
+## Adding Required and Custom Tools or Files
 
 There are a few tools a custom image needs to have in order to be used as a primary image in CircleCI:
 
@@ -68,8 +66,6 @@ There are a few tools a custom image needs to have in order to be used as a prim
 
 Ensure that these tools are present in your custom image. You might not need to install all of them, if the base image you choose has some of them pre-installed.
 
-## Custom tools or files
-
 To add custom files or tools not present in package managers, use the `ADD` command:
 
 ``` Dockerfile
@@ -80,7 +76,7 @@ In this case we copy `custom_tool` into the `/usr/bin/` directory of an image. *
 
 ## Building the image
 
-After all of the required tools are specified in the `Dockerfile` it is possible to  build the image.
+After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
 ``` Shell
 $ docker build <path-to-dockerfile>
@@ -97,19 +93,16 @@ Read more about [`docker build` command](https://docs.docker.com/engine/referenc
 
 Congratulations, you've just built your first image! Now we need to store it somewhere to make it available for CircleCI.
 
-## Storing images in a Docker Registry
+## Storing Images in a Docker Registry
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
-### Public or private images?
-
 **Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/2.0/executor-types) you must have a public repository. If you want to keep your image private refer to the [Using Private Images and Repositories]({{ site.baseurl }}/2.0/private-images/) document for instructions.
-
-### Using different Docker registries
 
 The example uses Docker Hub, but it is possible to use different registries if you prefer. Adapt the example based on the registry you are using.
 
-### Preparing the image for the registry
+### Preparing the Image for the Registry
+{:.no_toc}
 
 Log in to Docker Hub with your account and create a new repository on the [add repository](https://hub.docker.com/add/repository/) page. It is best practice to use a pattern similar to `<project-name>-<container-name>` for a repository name (for example, `cci-demo-docker-primary`).
 
@@ -126,6 +119,7 @@ The `-t` key specifies the name and tag of the new image:
 - `0.0.1` - tag (version) of the image. Always update the tag if you change something in a `Dockerfile` otherwise you might have unpredictable results.
 
 ### Pushing the image to the registry
+{:.no_toc}
 
 Push the image to Docker Hub:
 
@@ -136,7 +130,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 **Note:** First, we use `docker login` to authenticate in Docker Hub. If you use a registry other than Docker Hub, refer to the related documentation about how to push images to that registry.
 
-## Using your image on CircleCI
+## Using Your Image on CircleCI
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
@@ -151,6 +145,7 @@ jobs:
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
 ## Detailed Custom Dockerfile Example for Ruby
+
 This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally. 
 
 The example starts with the [Ruby 2.1](https://hub.docker.com/_/ruby/) image. However, instead of using FROM ruby:2.1 as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the [2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10).
@@ -231,7 +226,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 CMD [ "irb" ]
 ```
 
-Great! This will create a Ruby 2.1 image. Next, we need to install node modules, `awscli`, and PostgreSQL 9.5 using the node:7.4 Dockerfile:
+This will create a Ruby 2.1 image. Next, install node modules, `awscli`, and PostgreSQL 9.5 using the node:7.4 Dockerfile:
 
 ```
 FROM buildpack-deps:jessie
@@ -412,5 +407,5 @@ docker commit 6cd398c7b61d username/ruby-node:0.1
 docker push username/ruby-node:0.1
 ```
 
-Success! To use your custom image, reference ruby-node/bar:0.1 in your `.circleci/config.yml` image key and your primary container will run it.
+To use the custom image, reference ruby-node/bar:0.1 in your `.circleci/config.yml` image key and your primary container will run it.
 It is worth it to commit your Dockerfile using a gist and link to it from Docker Hub to avoid losing your configuration.
