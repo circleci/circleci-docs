@@ -167,7 +167,7 @@ jobs:
 CircleCI supports multiple machine images that can be specified in `image` field:
 
 * `circleci/classic:latest` (default) - an Ubuntu Trusty-based image with Docker `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are announced at least a week in advance.
-* `circleci/classic:edge` - an Ubuntu Trusty-based image with Docker `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually.
+* `circleci/classic:edge` - an Ubuntu Trusty-based image with Docker `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
 
 So you can set the following to use Docker `17.06.0-ce`:
 
@@ -177,8 +177,6 @@ jobs:
     machine:
       image: circleci/classic:edge
 ```
-
-*Coming soon*: Capability to pin the image version and documentation of the actual content of each released image.
 
 ### **`branches`**
 
