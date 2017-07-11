@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Container ID XXX cannot be mapped to a host ID"
+title: "Debugging Container ID Cannot Be Mapped to Host ID Error"
 short-title: "Container ID XXX cannot be mapped to a host ID"
 description: "Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container"
 categories: [troubleshooting]
@@ -39,7 +39,7 @@ The Linux kernel maps the container's UID 0 to non-privileged UID such as UID 65
 ### How Docker and CircleCI use userns
 
 CircleCI runs Docker containers with userns enabled in order to run customers' containers securely.
-When Docker starts a container, Docker pull an image and extract image layers form the image. If a layer contains files created with UID/GID outside the remapping range that CircleCI configured on the host machine, say UID 1000000, Docker cannot remap the UID/GID and fails to start the container. This is what's exactly what's happening in the error you see at the top of this document.
+When Docker starts a container, Docker pulls an image and extract image layers form the image. If a layer contains files created with UID/GID outside the remapping range that CircleCI configured on the host machine, say UID 1000000, Docker cannot remap the UID/GID and fails to start the container. This is exactly what's happening in the error you see at the top of this document.
 
 ### What should I do?
 
