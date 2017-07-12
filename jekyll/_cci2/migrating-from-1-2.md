@@ -37,8 +37,15 @@ If you already have a `circle.yml` file, this article will help you make a copy 
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first list image listed. Your build commands run in this container.
-6. Nest `checkout:` under `steps:` by search and replacing
+     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job.
+6. The 'working_directory:' is required for each job. Add `working_directory:` nested under the `jobs:` key where the value is the root directory of your project:
+
+     ```
+     jobs:
+       working_directory: ~/<project root directory>
+     ```  
+       
+7. The `checkout:` step is required. Nest `checkout:` under `steps:` by search and replacing
      ```
      checkout:
        post:
@@ -49,7 +56,7 @@ If you already have a `circle.yml` file, this article will help you make a copy 
            - checkout
            - run:
      ```
-7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
+8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
 ## Steps to Configure Workflows
 
