@@ -220,7 +220,7 @@ A second example is a project with a `build` job that builds a jar and saves it 
 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key where the value is a directory inside the project’s working directory. Data from the job will be saved to this directory until the job is rerun and new data is created.
 
-Configure a job to get saved data by configuring the `attach_workspace` key where the value of the `at:` option is the directory defined in the `persist_to_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
+Configure a job to get saved data by configuring the `attach_workspace` key where the value of the `at:` option is the directory defined in the `persist_to_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
  
 ```
 defaults: &defaults
