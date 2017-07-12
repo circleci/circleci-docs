@@ -5,9 +5,11 @@ short-title: "Using Contexts"
 description: "Secured, cross-project resources"
 categories: [configuring-jobs]
 order: 41
+hide: true
 ---
 
-**NOTE:** As of July 2017 Contexts are launched in their MVP state. Some future features of Contexts are called out below as "Coming Soon". We encourage your feedback either on [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908) or in the Pull Request for this document.
+
+**NOTE:** Contexts are a feature under development. This document is being released early to give you a preview and solicit feedback. We encourage your feedback either on [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908) or in the Pull Request for this document.
 
 <hr>
 
