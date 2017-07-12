@@ -45,7 +45,7 @@ If you already have a `circle.yml` file, this article will help you make a copy 
        working_directory: ~/<project root directory>
      ```  
        
-7. The `checkout:` step is required. Nest `checkout:` under `steps:` by search and replacing
+7. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` by search and replacing
      ```
      checkout:
        post:
