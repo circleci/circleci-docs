@@ -51,7 +51,7 @@ steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
-branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
+branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
 
@@ -184,7 +184,7 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches. Takes a map:
+Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your 'config.yml' file. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
