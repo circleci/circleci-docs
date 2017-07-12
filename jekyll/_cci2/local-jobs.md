@@ -60,6 +60,10 @@ You cannot use the machine executor in local jobs. This is because the machine e
 
 Caching is not currently supported in local jobs. When you have either a `save_cache` or `restore_cache` step in your config, `circleci` will skip them and display a warning.
 
+### Environment Variables
+
+For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information.
+
 ### Relative Path for working_directory
 
 The `working_directory:` key in your `.cirecleci/config.yml` file must not use a relative path for local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exits. To workaround this problem, change the value of the  `working_directory:` key in your `.cirecleci/config.yml` file to use an absolute path.
