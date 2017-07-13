@@ -51,7 +51,7 @@ steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | Y | String | What directory to run the steps in. (previously called `workDir`).
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
-branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches (default: all whitelisted)
+branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
 
@@ -184,7 +184,7 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches. Takes a map:
+Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your 'config.yml' file. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -696,7 +696,7 @@ requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
 ###### **`filters`**
-Filters can have the key `branches`.
+Filters can have the key `branches`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -704,7 +704,8 @@ filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
 ####### **`branches`**
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings. 
+
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
