@@ -17,12 +17,11 @@ This document describes how to configure your project to run on CircleCI 2.0.
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
-2. Create a `config.yml` file in the `.circleci` directory with the following lines, replacing `<project root directory>` with your project directory and `<language>:<version TAG>` with your programming language and version number. See the [CircleCI Images doc]({{ site.baseurl }}/2.0/circleci-images/) for a complete list of languages and versions.
+2. Create a `config.yml` file in the `.circleci` directory with the following lines, replacing `<language>:<version TAG>` with your programming language and version number. See the [CircleCI Images doc]({{ site.baseurl }}/2.0/circleci-images/) for a complete list of languages and versions.
     ```
    version: 2
    jobs:
       build:
-        working_directory: ~/<project root directory>
         docker:
           - image: circleci/<language>:<version TAG>
         steps:
