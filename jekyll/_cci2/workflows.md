@@ -183,7 +183,7 @@ workflows:
 In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
 
 ## Branch-Level Job Execution
-The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. 
+The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 ![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png) 
 
