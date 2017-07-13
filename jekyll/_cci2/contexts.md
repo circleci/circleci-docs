@@ -16,7 +16,7 @@ hide: true
 ## Contexts Overview
 Contexts provide centrally managed, secured resources for use in jobs. They are currently primarily used for sharing environment variables across projects.
 
-_**Coming Soon:** We will be adding new capabilities to Contexts such the ability to route jobs to certain workers, share encrypted files like certificates across jobs, and new kinds of security rules for who can execute jobs in a Context. What capabilities would you like to see? Let us know in [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908)_
+_**Coming Soon:** We will be adding new capabilities to Contexts such the ability to route jobs to certain workers, share encrypted files like certificates across jobs, and new kinds of security rules for who can execute jobs in a Context. What capabilities would you like to see? Let us know in [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908)._
 
 Contexts are associated with your Organization and can be requested in [Workflows](../workflows/) configuration. If the person running the workflow has access to the requested context for a given job, the resources of the requested context will be used to run the job.
 
