@@ -696,7 +696,7 @@ requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
 ###### **`filters`**
-Filters can have the key `branches`.
+Filters can have the key `branches`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -704,7 +704,8 @@ filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
 ####### **`branches`**
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings. 
+
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
