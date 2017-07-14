@@ -14,7 +14,7 @@ This document describes using environment variables in CircleCI in the following
 
 ## Adding Enviroment Variables in the App
 
-To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project. 
+To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project.
 
 ## Adding Enviroment Variables in the config.yml File
 
@@ -34,7 +34,7 @@ jobs:
     workDir: /root/workflows-conductor
     steps:
       - checkout
-      
+
       - run: lein javac
 
       - run: lein deps
@@ -66,7 +66,7 @@ jobs:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-```          
+```
 
 See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
 
@@ -202,6 +202,10 @@ The GitHub/Bitbucket username of the user who triggered the build.
 **CIRCLE_JOB**
 
 The current job’s type.
+
+**CIRCLE_WORKING_DIRECTORY**
+
+The `working_directory` for the current the job.
 
 Possible values include: `build`.
 
