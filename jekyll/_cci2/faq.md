@@ -28,9 +28,9 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 - **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **Android:** There is currently no official support for Android on CircleCI 2.0, but users have still been able to build Android apps on 2.0. [This post](https://discuss.circleci.com/t/thank-you-and-android-build-example/11298) is an excellent example of one our users successfully building an Android app on 2.0. **Note that this example does not use the emulator, so it is not affected by incompatibility with Docker.**
+- **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
 
 - **Windows:** We do not yet support building and testing Windows applications.
 

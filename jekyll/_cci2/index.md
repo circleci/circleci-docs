@@ -11,6 +11,7 @@ Welcome to CircleCI 2.0! The release of CircleCI 2.0 includes many improvements 
 
 Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications with YAML file templates and instructions: 
 
+- **Android**, see [Android Language Guide]({{ site.baseurl }}/2.0/language-android/)
 - **Clojure 1.2.0 and later**, see the [Clojure Language Guide]({{ site.baseurl }}/2.0/language-clojure/)
 - **Elixir 1.2 and later**, see the [Elixir Language Guide]({{ site.baseurl }}/2.0/language-elixir/)
 - **Go 1.7 and later**, see the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/)
