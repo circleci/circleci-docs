@@ -61,15 +61,6 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 
 `working_directory` will be created automatically if it doesn't exist.
 
-Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used.
-
-Class | CPU | RAM
-----|-----------|------
-small | 1.0 | 1GB
-medium | 2.0 | 4GB
-large | 4.0 | 8GB
-xlarge | 8.0 | 16GB
-
 Example:
 ``` YAML
 jobs:
@@ -215,6 +206,18 @@ In this example all the branches will be executed except "develop" and branches 
 If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
+
+#### **resource_class**
+
+Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used. **Note**: The `resource_class` key is only available for use with the `docker` executor for paid accounts and is subject to change in a future pricing update.
+
+Class | CPU       | RAM
+------|-----------|------
+small | 1.0 | 2GB
+medium | 2.0 | 4GB
+large | 3.0 | 6GB
+xlarge | 4.0 | 8GB
+2xlarge | 8.0 | 16GB
 
 #### **`steps`**
 
