@@ -20,4 +20,6 @@ CircleCI can also be configured to deploy code to various environments, includin
 * AWS S3
 * Google Container Engine (GKE)
 * Heroku
-* SSH
+
+Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
+

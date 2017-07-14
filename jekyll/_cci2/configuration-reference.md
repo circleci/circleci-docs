@@ -605,17 +605,18 @@ Special step used to persist a temporary file to be used by another job in the w
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-root | Y | String | Relative from working_directory
-paths | Y | List | Directory containing temporary files, either absolute path or relative from root
+root | Y | String | Either an absolute path or a path relative to `working_directory`
+paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
 {: class="table table-striped"}
 
 ###### _Example_
 
 ``` YAML
 - persist_to_workspace:
-    root: workspace
-    paths:
-      - /tmp/file-name
+    root: /tmp/workspace
+    paths: 
+      - target/application.jar
+      - build/*
 ```
 
 ##### **`attach_workspace`**
@@ -714,8 +715,8 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 Key | Required | Type | Description
 ----|-----------|------|------------
 branches | N | Map | A map defining rules for execution on specific branches
-only | N | String | A branch name
-ignore | N | String | A branch name
+only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
 ###### *Example*
