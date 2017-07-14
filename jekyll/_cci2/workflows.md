@@ -197,7 +197,9 @@ workflows:
       - test_dev:
           filters:
             branches:
-              only: dev
+              only:
+                - dev
+                - /user-.*/
       - test_stage:
           filters:
             branches:
@@ -205,7 +207,7 @@ workflows:
       - test_pre-prod:
           filters:
             branches:
-              only: pre-prod
+              only: /pre-prod(?:-.+)?$/
 ```
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job.
