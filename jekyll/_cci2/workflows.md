@@ -45,28 +45,27 @@ To run a set of parallel jobs, add a new `workflows:` section to the end of your
 version: 2
 jobs:
   build:
-    working_directory: ~/<project root directory>
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
   test1:
-    working_directory: ~/<project root directory>
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
+      - checkout
       - run: <command>
   test2:
-    working_directory: ~/<project root directory>
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
+      - checkout
       - run: <command>
   test3:
-    working_directory: ~/<project root directory>
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
+      - checkout
       - run: <command>
 workflows:
   version: 2
@@ -77,6 +76,7 @@ workflows:
       - test2
       - test3
 ```
+See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
 ## Sequential Job Execution Example
 
@@ -104,6 +104,8 @@ workflows:
 ```
 
 The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
+
+See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
 ## Holding a Workflow for a Manual Approval
 
@@ -182,6 +184,8 @@ workflows:
 ```
 In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
 
+See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) for a full example.
+
 ## Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
@@ -210,7 +214,7 @@ workflows:
               only: /pre-prod(?:-.+)?$/
 ```
 
-In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job.
+In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
 ## Using Workspaces to Share Data Among Jobs
 
