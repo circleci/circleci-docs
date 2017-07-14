@@ -209,15 +209,14 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **resource_class**
 
-Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used. **Note**: The `resource_class` key is only available for use with the `docker` executor for paid accounts and is subject to change in a future pricing update.
+Following are the possible resource classes. If `resource_class` is not specified or an invalid class is specified, the default resource class of `medium` will be used. **Note**: The `resource_class` key is only available for use with the `docker` executor for paid accounts and is subject to change in a future pricing update. If you need additional size options, contact the CircleCI accounts team at cs@circleci.com.
 
 Class | CPU       | RAM
 ------|-----------|------
 small | 1.0 | 2GB
 medium | 2.0 | 4GB
-large | 3.0 | 6GB
-xlarge | 4.0 | 8GB
-2xlarge | 8.0 | 16GB
+large | 4.0 | 8GB
+xlarge | 8.0 | 16GB
 
 #### **`steps`**
 
