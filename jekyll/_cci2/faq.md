@@ -28,7 +28,7 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 - **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language/android/) for instructions.
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
 - **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
 
