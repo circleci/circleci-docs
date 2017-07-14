@@ -28,7 +28,7 @@ You can also run `circleci` commands in your `config.yml` file for jobs that use
 $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
-The CLI is downloaded to the `/usr/local/bin/circleci` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available. 
+The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available. 
 
 ### Validating 2.0 YAML Syntax
 
