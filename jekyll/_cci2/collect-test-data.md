@@ -65,7 +65,7 @@ This section provides the following test runner examples:
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
 
-```
+```yaml
     steps:
     - run: |
         mkdir -p /cucumber 
@@ -80,7 +80,7 @@ The `path:` is a directory relative to the project’s root directory where the 
 
 Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
-```
+```yaml
     steps:
       - run: |
           mkdir -p /cucumber
@@ -134,11 +134,15 @@ To output junit tests with the Mocha test runner you can use [mocha-junit-report
 
 A working `.circleci/config.yml` section for testing might look like this:
 
-```
+```yaml
     steps:
-      - run: mocha test --reporter mocha-junit-reporter:
-    environment:
-          MOCHA_FILE: /junit/test-results.xml
+      - checkout
+      - run: npm install
+      - run: mkdir junit
+      - run: 
+          command: mocha test --reporter mocha-junit-reporter
+          environment:
+            MOCHA_FILE: junit/test-results.xml
       - store_test_results:
           path: /junit
       - store_artifacts:
@@ -209,8 +213,12 @@ And modify your test command to this:
 
 ````
     steps:
-      - run:
-          command: bundle exec rspec --format progress --format RspecJunitFormatter -o /rspec/rspec.xml
+      - checkout
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - run: mkdir rspec
+      - run: bundle exec rspec --format progress --format RspecJunitFormatter -o rspec/rspec.xml
+      - store_test_results:
+          path: rspec
 ````
 
 ### <a name="minitest"></a> Minitest
@@ -225,8 +233,12 @@ And modify your test command to this:
 
 ````
     steps:
-      - run:
-          command: bundle exec rake test TESTOPTS="--ci-dir=/reports":
+      - checkout
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - run: mkdir reports
+      - run: bundle exec rake test TESTOPTS="--ci-dir=./reports":
+      - store_test_results:
+          path: reports
 ````
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
@@ -242,15 +254,18 @@ A working `.circleci/config.yml` section might look like this:
 
 ```yaml
     steps:
+      - checkout
+      - run: npm install
+      - run: mkdir junit
       - run:
           command: karma start ./karma.conf.js:
           environment:
-            JUNIT_REPORT_PATH: /junit/
+            JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
       - store_test_results:
           path: /junit
       - store_artifacts:
-          path: /junit            
+          path: ./junit
 ```
 
 ```javascript
