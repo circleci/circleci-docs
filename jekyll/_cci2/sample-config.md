@@ -13,7 +13,7 @@ The following sections provide a sample `.circleci/config.yml` with an overview 
 
 ## Jobs Overview
 
-Jobs are a collection of Steps. In 2.0, the `machine:` key is nested under `jobs:`. The `docker:` and `image:` keys are new and replace the `dependencies:` and `database:` keys in 1.0. This change enables continued use of previously configured `machine` executor runs and adds the ability to reference any public Docker image in your `config.yml` file. 
+Jobs are a collection of Steps. In 2.0, the `machine` key is nested under `jobs`. The `docker:` and `image:` keys are new and replace the `dependencies:` and `database:` keys in 1.0. This change enables continued use of previously configured `machine` executor runs and adds the ability to reference any public Docker image in your `config.yml` file. 
 
 ## Steps Overview
 
