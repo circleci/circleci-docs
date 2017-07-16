@@ -683,7 +683,7 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
-#### **`jobs`**
+### **`jobs`**
 A job can have the keys `requires` and `filters`.
 
 Key | Required | Type | Description
@@ -691,11 +691,11 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
-##### **`build`**
+#### **`build`**
 
 A unique name for your job.
 
-###### **`requires`**
+##### **`requires`**
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
 
 Key | Required | Type | Description
@@ -703,7 +703,7 @@ Key | Required | Type | Description
 requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
-###### **`filters`**
+##### **`filters`**
 Filters can have the key `branches`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
@@ -711,7 +711,7 @@ Key | Required | Type | Description
 filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
-####### **`branches`**
+###### **`branches`**
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 
 - Any branches that match `only` will run the job.
@@ -726,7 +726,7 @@ only | N | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
-###### *Example*
+##### *Example*
 
 ```
 workflows:
