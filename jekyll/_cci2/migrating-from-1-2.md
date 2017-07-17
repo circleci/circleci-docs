@@ -132,7 +132,7 @@ With an appropriate `run` Step, for example:
 
 ```
     steps:
-      - run: echo 127.0.0.1 circlehost | tee -a /etc/hosts
+      - run: echo 127.0.0.1 circlehost | sudo tee -a /etc/hosts
 ```
 
 
