@@ -49,6 +49,11 @@ If you are an image maintainer, you need to look for which file has high UID/GID
 
 Here is one way to find such a file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid).
 
+First, grab the high UID/GID value from `container id XXX cannot be mapped to a host id` error message in CircleCI.
+For example, the value is `1000000` in the error message you see at the top of this document.
+
+Second, start the container and look for which files get the high value. There are multiple ways to do this, but one way is using `find` command. Note that the following example only works with BSD/GNU `find` command. If BSD/GNU `find` is not installed in your container, you may need to use different commands.
+
 ```
 # Start a shell inside the container
 $ docker run -it circleci/doc-highid sh
