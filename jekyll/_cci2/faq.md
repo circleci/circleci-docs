@@ -30,7 +30,7 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 - **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [iOS on 1.0]({{ site.baseurl }}/1.0/mobile/) until 2.0 support is available.
+- **iOS:** Building iOS apps is not yet supported on CircleCI 2.0. Please refer to our documentation for [Getting Started with iOS on 1.0]({{ site.baseurl }}/1.0/ios-getting-started/) until 2.0 support is available.
 
 - **Windows:** We do not yet support building and testing Windows applications.
 
