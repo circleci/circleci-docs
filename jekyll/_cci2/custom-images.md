@@ -34,7 +34,7 @@ After choosing a base image, start writing a `Dockerfile` to extend the base ima
 FROM golang:1.8.0
 ```
 
-Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from  `golang:1.8.0` because the project is using Go. See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) DOcker documentation for more information.
+Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from  `golang:1.8.0` because the project is using Go. See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) Docker documentation for more information.
 
 Add the tools required for your job by using the `RUN` command:
 
