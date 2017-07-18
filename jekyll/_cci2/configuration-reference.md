@@ -451,7 +451,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | the CircleCI build number for this build
 {% raw %}`{{ .Revision }}`{% endraw %} | the VCS revision currently being built
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | the SSH key used to checkout the repo
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | the environment variable `variableName`
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName`, supports any environment  variable supplied by CircleCI, **not** any arbitrary environment variable.
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | a base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | the current time in seconds since the unix epoch.
 {: class="table table-striped"}
