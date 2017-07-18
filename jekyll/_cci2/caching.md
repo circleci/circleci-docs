@@ -10,15 +10,16 @@ order: 50
 Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
-```		
-		restore_cache:
-		  keys:
-		    - m2-{{ checksum pom.xml }}
-		    - m2- # used if checksum fails
+```YAML
+    steps:
+      -restore_cache:
+         keys:
+           - m2-{{ checksum pom.xml }}
+           - m2- # used if checksum fails
 ```
 {% endraw %}
 
-This document describes the manual caching available, the costs and benefits of a chosen strategies, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
+This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
 
 ## Overview
 
@@ -32,7 +33,7 @@ In general it is safer to preserve reliability than to risk a corrupted build or
 
 The dependencies that are most important to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and demo projects for the specifics for your stack: <https://circleci.com/docs/2.0/demo-apps/>.
 
-Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client and gzip preinstalled.  
+Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client, and gzip preinstalled.  
 
 ## Writing to the Cache
  
@@ -46,13 +47,14 @@ Here's another example of a `restore_cache` step with two keys:
 
 {% raw %}
 ```YAML
-- restore_cache:
-    keys:
-      # Find a cache corresponding to this specific package.json checksum
-      # when this file is changed, this key will fail
-      - v1-npm-deps-{{ checksum "package.json" }}
-      # Find the most recent cache used from any branch
-      - v1-npm-deps
+    steps:
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package.json checksum
+            # when this file is changed, this key will fail
+            - v1-npm-deps-{{ checksum "package.json" }}
+            # Find the most recent cache used from any branch
+            - v1-npm-deps
 ```
 {% endraw %}
 
@@ -76,12 +78,13 @@ The extra control and power in CircleCI 2.0 manual dependency caching requires t
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
-```
-- save_cache:
-    key: my-cache
-    paths:
-      - my-file.txt
-      - my-project/my-dependencies-directory
+```YAML
+    steps:
+      - save_cache:
+          key: my-cache
+          paths:
+            - my-file.txt
+            - my-project/my-dependencies-directory
 ```
 
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
@@ -118,71 +121,71 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 
 {% raw %}
 ```YAML
-docker:
-  - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-    environment:
-      RAILS_ENV: test
-      RACK_ENV: test
-  - image: circleci/mysql:5.6
+    docker:
+      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+      - image: circleci/mysql:5.6
 
-steps:
-  - checkout
-  - run: cp config/{database_circleci,database}.yml
+    steps:
+      - checkout
+      - run: cp config/{database_circleci,database}.yml
 
-  # Run bundler
-  # Load installed gems from cache if possible, bundle install then save cache
-  # Multiple caches are used to increase the chance of a cache hit
-  - restore_cache:
-      keys:
-        - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - gem-cache-{{ .Branch }}
-        - gem-cache
-  - run: bundle install --path vendor/bundle
-  - save_cache:
-      key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      paths:
-        - vendor/bundle
-  - save_cache:
-      key: gem-cache-{{ .Branch }}
-      paths:
-        - vendor/bundle
-  - save_cache:
-      key: gem-cache
-      paths:
-        - vendor/bundle
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+      - restore_cache:
+          keys:
+            - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Branch }}
+            - gem-cache
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ .Branch }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          key: gem-cache
+          paths:
+            - vendor/bundle
 
-  - run: bundle exec rubocop
-  - run: bundle exec rake db:create db:schema:load --trace
-  - run: bundle exec rake factory_girl:lint
+      - run: bundle exec rubocop
+      - run: bundle exec rake db:create db:schema:load --trace
+      - run: bundle exec rake factory_girl:lint
 
-  # Precompile assets
-  # Load assets from cache if possible, precompile assets then save cache
-  # Multiple caches are used to increase the chance of a cache hit
-  - restore_cache:
-      keys:
-        - asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
-        - asset-cache-{{ .Branch }}
-        - asset-cache
-  - run: bundle exec rake assets:precompile
-  - save_cache:
-      key: asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
-      paths:
-        - public/assets
-        - tmp/cache/assets/sprockets
-  - save_cache:
-      key: asset-cache-{{ .Branch }}
-      paths:
-        - public/assets
-        - tmp/cache/assets/sprockets
-  - save_cache:
-      key: asset-cache
-      paths:
-        - public/assets
-        - tmp/cache/assets/sprockets
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+      - restore_cache:
+          keys:
+            - asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
+            - asset-cache-{{ .Branch }}
+            - asset-cache
+      - run: bundle exec rake assets:precompile
+      - save_cache:
+          key: asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
+          paths:
+            - public/assets
+            - tmp/cache/assets/sprockets
+      - save_cache:
+          key: asset-cache-{{ .Branch }}
+          paths:
+            - public/assets
+            - tmp/cache/assets/sprockets
+      - save_cache:
+          key: asset-cache
+          paths:
+            - public/assets
+            - tmp/cache/assets/sprockets
 
 
-  - run: bundle exec rspec
-  - run: bundle exec cucumber
+      - run: bundle exec rspec
+      - run: bundle exec cucumber
   ```
 {% endraw %}
 
