@@ -11,5 +11,5 @@ If you have implemented workflows on a branch in your GitHub repository, but the
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled may prevent the status from showing as completed in GitHub because CircleCI posts statuses to Github with a key that includes the job by name in chronological order.
+Having the `ci/circleci` checkbox enabled may prevent the status from showing as completed in GitHub because CircleCI posts statuses to Github with a key that includes the job by name.
 
