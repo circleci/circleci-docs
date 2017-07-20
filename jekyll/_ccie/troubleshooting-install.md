@@ -15,7 +15,7 @@ This means that the GitHub Enterprise server is not returning the intermediate S
 
 #### Docker isn't working?
 
-Please see the instructions here to get docker working: https://circleci.com/docs/enterprise/docker-builder-config/#sharing-the-docker-socket . 
+Please see [these instructions](https://circleci.com/docs/enterprise/docker-builder-config/#sharing-the-docker-socket) to use Docker.
 
 If you are using single-box mode, note that you'll have to have
 
