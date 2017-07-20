@@ -91,7 +91,7 @@ actually installed correctly, we hardcode versions here.
 
 ### Java
 
-Default: `oraclejdk7`
+Default: `oraclejdk8`
 
 Pre-installed versions:
 
