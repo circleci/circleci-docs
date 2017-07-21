@@ -13,9 +13,9 @@ order: 70
 <strong>Note:</strong> This feature only works with whitelisted projects. To get it enabled, please contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI).
 </div>
 
-If your application is distributed as a Docker image, the image consists of layers that generally change more frequently at the top of the `Dockerfile`.
+If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
-When this is the case, you might want to reuse the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
+Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
 
 ``` YAML
 - setup_remote_docker:
