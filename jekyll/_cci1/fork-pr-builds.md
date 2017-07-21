@@ -6,7 +6,7 @@ categories: [reference]
 description: How to build Pull Requests from forks
 ---
 
-CircleCI has the ability to build pull request from forked repositories. This setting can be found within a project's setting page **Settings > Build Settings > Advanced Settings > Build forked pull requests**. Projects initially built on CircleCI that are public will have this setting "On" by default, private projects will have it "Off". 
+CircleCI has the ability to build pull request from forked repositories. This setting can be found within a project's setting page **Settings > Build Settings > Advanced Settings > Build forked pull requests**. Projects initially built on CircleCI will have this setting "Off" by default.
 
 ## Security Implications
 
