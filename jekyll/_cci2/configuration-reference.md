@@ -207,9 +207,9 @@ If both `ignore` and `only` are present in config, only `ignore` will be taken i
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
-#### **resource_class**
+#### **`resource_class`**
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. **Note**: The `resource_class` key is only available for use with the `docker` executor for paid accounts and is subject to change in a future pricing update. If you need additional size options, contact the CircleCI accounts team at cs@circleci.com.
+It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. Paid accounts may request this feature from their Customer Success Manager, non-paid users may request to get started by sending email to support@circleci.com.
 
 Class | CPU       | RAM
 ------|-----------|------
