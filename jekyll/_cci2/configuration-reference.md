@@ -38,7 +38,7 @@ Each job is an item in the `jobs` list.
 
 ### **`build`**
 
-The `build` job is the default job and is the only job that will be automatically picked up and run by CircleCI. However, if you configure Workflows, a job named `build` is not required. See the [Workflows]({{ site.baseurl }}/2.0/workflows) documentation for detailed information.
+The build job is the default job and is required if you are not using Workflows. If you are using Workflows, a job named build is optional. See the [Workflows]({{ site.baseurl }}/2.0/workflows/) documentation for detailed information.
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
