@@ -1,41 +1,39 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Single-Box Install"
+title: "Try CircleCI Enterprise"
 category: [documentation]
 order: 0
 description: "How to install CircleCI Enterprise on a single VM"
 ---
 
-CircleCI Enterprise is a scalable CI/CD tool that supports clusters
-of tens or hundreds of build machines. However, it is often useful
-in trials and small installations to run the whole system on a single
-VM. See the instructions for your installation environment below.
+CircleCI Enterprise is a scalable CI/CD platform that supports clusters
+of tens or hundreds of build machines. This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
+
+* TOC
+{:toc}
 
 ## Prerequisites
 
-The single-box installation is designed to be as easy as possible to install in
-any environment. There are just a few firm requirements:
+The following requirements must be met for successful trial installation:
 
-- You must use **GitHub.com or GitHub Enterprise**
-  for version control, and the CircleCI Enterprise machine and the GitHub machines
-  must be able to reach each other on the network.
-- The machine running CircleCI Enterprise must have outbound internet access.
-  ([Contact us](mailto:trial-support@circleci.com) for help if you use a proxy.)
+- [Sign-up](https://circleci.com/enterprise-trial-install/) to recieve a trial license file.
+- Use **GitHub.com or GitHub Enterprise** for version control.
+- Machines running CircleCI Enterprise and GitHub must be able to reach each other on the network.
+- CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [Contact us](mailto:trial-support@circleci.com) for instructions.
 
-## On AWS
+## Steps for Installation on AWS EC2 
 
-Installing CircleCI Enterprise on a single EC2 VM is extremely quick and
-easy with our pre-made AMI.
+Use this procedure to install CircleCI Enterprise on a single EC2 VM by using the pre-made Amazon Machine Image (AMI) which is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
 
-**SECURITY NOTE:** All builds that run on this machine will have access
-to the IAM privileges associated with its instance profile. Please do not
+**Note:** All builds that run on the installed machine will have access
+to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
 give any inappropriate privileges to your instance. It is possible to block
-this access with iptables rules in a production setup. Please [contact us](mailto:trial-support@circleci.com)
-if you have questions.
+this access with `iptables` rules in a production setup, [contact support](mailto:trial-support@circleci.com)
+for specific instructions.
 
 <ol>
-<li>Find the AMI for your region (make sure to use an instance type with at least 8G of RAM):<br>
+<li>Find the Amazon Machine Image with at least 8G of RAM in your region from the following list:<br>
 
   <script>
   var amiIds = {
@@ -77,25 +75,47 @@ if you have questions.
 <script>amiUpdateSelect();</script>
 </li>
 
-<li>Make sure that ports 22,80,443, and 8800 are open when you get to the "Configure Security Group" step.
-You will also need to open ports 64535-65535 to let developers optionally SSH into builds.</li>
+<li>During the Configure Security Group step, open ports 22, 80, 443, and 8800.
+</li>
 
-<li>Go to the public (or private) IP address or hostname for the VM once launched and complete the rest of the guided install process.
-(Note: Final startup of the app can take some time as the "circleci/build-image" Docker image is downloaded.)</li>
+<li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535.
+</li>
+
+<li>After the VM is lauched, go to the public or private IP address or hostname for the VM to complete the rest of the guided installation process.
+</li> 
+
+<li>Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames, enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+</li>
+
+<li>Open the CircleCI Enterprise app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
+</li>
 </ol>
 
-<p style="font-size: 20px; text-align: center"><strong>A short video walkthrough of the entire install process on AWS:</strong></p>
+### AWS Installation Video Tutorial
+
+<p style="font-size: 20px; text-align: center">Following is a short video walkthrough of the entire install process on AWS:</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
 
-## On Other Platforms
 
-It is also possible to install a trial of CircleCI Enterprise on a single VM on other cloud providers,
-like GCE or Azure, as well as private datacenters using VMware or OpenStack.
+## Steps for Installation on Cloud Storage Providers Other Than AWS
 
-1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker. Ports 22 and 8800
-should be open to administrators, ports 80 and 443 should be open to all users, and ports 64535-65535 need to be open for developers to optionally SSH into builds.
+1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. 
 
-2. Install Replicated, the tool used to package and distribute CircleCI Enterprise: `curl https://get.replicated.com/docker | sudo bash`. (Note: Make sure Docker is not using the device mapper storage driver. You can check this by running `sudo docker info | grep "Storage Driver"`.)
+2. Open ports 22 and 8800 to administrators, open ports 80 and 443 to all users, and optionally open ports 64535-65535 to developers to SSH into builds.
 
-3. Visit port 8800 on the machine in a web browser and complete the guided install process.
+3. Install Replicated, the tool used to package and distribute CircleCI Enterprise, by running the  `curl https://get.replicated.com/docker | sudo bash` command. **Note:** Docker must not use the device mapper storage driver. Check this by running `sudo docker info | grep "Storage Driver"`.)
+
+4. Visit port 8800 on the machine in a web browser to complete the guided installation process.
+
+5. Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames,  enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+
+6. Open the CircleCI Enterprise app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
+
+
+
+
+
+
+
+
