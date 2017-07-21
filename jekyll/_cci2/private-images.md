@@ -57,3 +57,4 @@ jobs:
           docker build -t my-app .
           # assuming that our app expects to have DB on localhost
           docker run --network container:db my-app test
+```          
