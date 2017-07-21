@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Building Custom Docker Images"
-short-title: "Building Custom Docker Images"
+title: "Running Docker Commands"
+short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"
-categories: [deploying]
-order: 30
+categories: [configuring-jobs]
+order: 55
 ---
 
-This document explains how to build Docker images for deploying elsewhere or for further testing in the following sections:
+This document explains how to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers in the following sections:
 
 * TOC
 {:toc}
