@@ -98,7 +98,7 @@ for specific instructions.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
 
 
-## Steps for Installation on Cloud Storage Providers Other Than AWS
+## Installation in a Data Center or Cloud Provider Other Than AWS  
 
 1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. 
 
