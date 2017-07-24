@@ -85,6 +85,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
       - run: |
           mkdir -p /cucumber
           bundle exec cucumber pretty --format json --out /cucumber/tests.cucumber
+          when: always
       - store_test_results:
           path: /cucumber
       - store_artifacts:
@@ -104,6 +105,7 @@ project.
       - run: |
           mkdir -p /junit/
           find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} /junit/ \;
+          when: always
       - store_test_results:
           path: /junit
       - store_artifacts:
@@ -122,6 +124,7 @@ project.
       - run: |
           mkdir -p /junit/
           find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} /junit/ \;
+          when: always
       - store_test_results:
           path: /junit
       - store_artifacts:
@@ -143,6 +146,7 @@ A working `.circleci/config.yml` section for testing might look like this:
           command: mocha test --reporter mocha-junit-reporter
           environment:
             MOCHA_FILE: junit/test-results.xml
+          when: always
       - store_test_results:
           path: /junit
       - store_artifacts:
@@ -161,6 +165,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
           yarn add ava tap-xunit --dev # or you could use npm
           mkdir -p /reports
           ava --tap | tap-xunit > /reports/ava.xml
+          when: always
       - store_test_results:
           path: /reports
       - store_artifacts:
@@ -179,6 +184,7 @@ A working `.circleci/config.yml` test section might look like this:
       - run: |
           mkdir -p /reports
           eslint ./src/ --format junit --output-file /reports/eslint.xml
+          when: always
       - store_test_results:
           path: /reports
       - store_artifacts:
@@ -195,6 +201,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
       - run: |
           mkdir -p /phpunit
           phpunit --log-junit /phpunit/junit.xml tests
+          when: always
       - store_test_results:
           path: /phpunit
       - store_artifacts:
@@ -216,7 +223,9 @@ And modify your test command to this:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: mkdir rspec
-      - run: bundle exec rspec --format progress --format RspecJunitFormatter -o rspec/rspec.xml
+      - run: |
+          bundle exec rspec --format progress --format RspecJunitFormatter -o rspec/rspec.xml
+          when: always 
       - store_test_results:
           path: rspec
 ````
@@ -236,7 +245,9 @@ And modify your test command to this:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: mkdir reports
-      - run: bundle exec rake test TESTOPTS="--ci-dir=./reports":
+      - run: 
+          bundle exec rake test TESTOPTS="--ci-dir=./reports":
+          when: always
       - store_test_results:
           path: reports
 ````
@@ -262,6 +273,7 @@ A working `.circleci/config.yml` section might look like this:
           environment:
             JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
+          when: always  
       - store_test_results:
           path: /junit
       - store_artifacts:
