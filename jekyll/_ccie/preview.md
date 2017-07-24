@@ -38,7 +38,7 @@ Later this year, all customers with CircleCI Enterprise installed will be able t
 Once you have received a Preview license from your account team, the following instructions will help you set up your trial installation.
 
 ## Installation with Terraform
-* Fill vars in `terraform.tfvars` file in https://github.com/circleci/enterprise-setup/tree/ccie2
+* Fill vars in `terraform.tfvars` file in <https://github.com/circleci/enterprise-setup/tree/ccie2>
 * Apply Terraform scripts (`terraform apply`)
 * Go to provided URL at the end of Terraform output and follow instruction
 * Enter your license
