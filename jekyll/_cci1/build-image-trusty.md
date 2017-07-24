@@ -293,10 +293,6 @@ Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.gcloud }}`
 
 Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.aws-cli }}`
 
-### heroku/heroku-toolbelt
-
-Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.heroku-toolbelt }}`
-
 ## Android
 
 ### SDK Tools
