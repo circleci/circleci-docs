@@ -215,6 +215,7 @@ Class | CPU       | RAM
 ------|-----------|------
 small | 1.0 | 2GB
 medium | 2.0 | 4GB
+medium+ | 3.0 | 6GB
 large | 4.0 | 8GB
 xlarge | 8.0 | 16GB
 
