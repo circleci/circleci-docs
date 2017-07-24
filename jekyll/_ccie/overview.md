@@ -12,11 +12,11 @@ This article provides an overview of CircleCI Enterprise architecture in the fol
 * TOC
 {:toc}
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The CircleCI Enterprise solution is installable inside your private cloud or data center and is free to try for two weeks. CircleCI automates build, test, and deployment of software.
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The CircleCI Enterprise solution is installable inside your private cloud or data center and is free to try for a limited time. CircleCI automates build, test, and deployment of software.
 
 ## Basic Features
 
-After a software repository in GitHub Enterprise is added as a project to the CircleCI Enterprise application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, HipChat, Campfire, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
+After a software repository in GitHub or GitHub Enterprise is added as a project to the CircleCI Enterprise application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, HipChat, Campfire, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may also be configured to deploy code to various environments, including the following:
 
@@ -32,21 +32,18 @@ Contact us at <enterprise-support@circleci.com> to request a trial license.
 
 ## Build Environments
 
-CircleCI Enterprise installations may run a single Linux or MacOS
-image for builds. Users of your CircleCI Enterprise installation must use this single contianer image for all of their builds and may **not** choose between Precise and Trusty build container images, or custom built
-images, for example. 
-
-**Note:** If your CircleCI Enterprise installation is not open to the internet, you may
-need to connect to a VPN or take other special steps to access the CircleCI application or SSH builds.
-These steps will vary depending on your network setup.
+By default, CircleCI Enterprise comes with a general-purpose image based on Ubuntu 14.04 (Trusty). It is possible to customize this image if necessary. 
 
 ## Architecture
 
-CircleCI Enterprise requires two types of instances to run: service and builder instances. The service type is a single instance that contains the CircleCI application and the resources that store data and run protocols. Any number of builder instances execute your jobs as defined by the plan for your CircleCI account. Both instance types must access your instance of GitHub Enterprise on the network as illustrated in the following architecture diagram. 
+CircleCI Enterprise consists of two primary components: Services and Builders. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Builder instances execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/enterprise-network-diagram.png)
 
-The machine on which the Service instance runs must not be restarted and must be backed up using VM snapshots at a minimum. DNS resolution must point to the IP address of the machine on which the service instance is installed. The following table describes the ports used for traffic on the Service instance:
+The machine on which the Services run can be backed up using built-in VM snapshotting. Note that for high-availability configurations you can externalize the data storage by running your own Postgres and Mongo clusters, in which case the backups can be done using standard tooling for those databases. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+
+
+The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with Postgres and Mongo for high availability and then use standard tooling for database backups. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
 | Source                      | Ports                   | Use                    |
 |-----------------------------|-------------------------|------------------------|
@@ -57,7 +54,7 @@ The machine on which the Service instance runs must not be restarted and must be
 | GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 
 
-The machines on which Builder instances run may be restarted by using the `circle-shutdown` command to gracefully shutdown. The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough builder machines running to handle all of the builds, track the queued builds and increase the Builder instance machines as needed to balance the load.
+The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds and increase the Builder instance machines as needed to balance the load.
 
 Each machine on which the Builders are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
 
@@ -69,8 +66,8 @@ Each machine on which the Builders are installed reserves two CPUs and 4GB of me
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
 | Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
 
-CircleCI Enterprise uses GitHub Enterprise credentials for
-authentication which, in turn, may use LDAP, SAML, or SSH for access. The following table describes the ports used on machines running GitHub to communicate with the Services and Builder instances.
+CircleCI Enterprise uses GitHub or GitHub Enterprise credentials for
+authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, CircleCI will inherit the authentication  supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Builder instances.
 
 | Source        | Ports   | Use          |
 |---------------|---------|--------------|
