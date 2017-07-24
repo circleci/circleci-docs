@@ -52,7 +52,7 @@ working_directory | N | String | In which directory to run the steps. (default: 
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a build. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -364,19 +364,19 @@ In this case, `command` and `name` become the string value of `run`, and the res
 
 ##### The `when` Attribute
 
-By default, CircleCI will execute build steps one at a time, in the order that
+By default, CircleCI will execute job steps one at a time, in the order that
 they are defined in `config.yml`, until a step fails (returns a non-zero exit
-code). After a command fails, no further build steps will be executed.
+code). After a command fails, no further job steps will be executed.
 
-Adding the `when` attribute to a build step allows you to override this default
-behaviour, and selectively run or skip steps depending on the status of the build.
+Adding the `when` attribute to a job step allows you to override this default
+behaviour, and selectively run or skip steps depending on the status of the job.
 
 The default value of `on_success` means that the step will run only if all of the
 previous steps have been successful (returned exit code 0).
 
 A value of `always` means that the step will run regardless of the exit status of
 previous steps. This is useful if you have a task that you want to run regardless
-of whether the build is successful or not. For example, you might have a build
+of whether the previous steps are successful or not. For example, you might have a job
 step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding
@@ -432,7 +432,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 <a name="save_cache"/>
 ##### **`save_cache`**
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later builds can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -461,9 +461,9 @@ During step execution, the templates above will be replaced by runtime values an
 Template examples:
  * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
- * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every build will generate separate cache
+ * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every build.
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
@@ -551,7 +551,7 @@ Special step for deploying artifacts.
 
 `deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
 
-In general `deploy` step behaves just like `run` with one exception - in a build with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
+In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
 ###### _Example_
 
@@ -569,7 +569,7 @@ Step to store artifacts (for example logs, binaries, etc) to be available in the
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-path | Y | String | Directory in the primary container to save as build artifacts
+path | Y | String | Directory in the primary container to save as job artifacts
 destination | N | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
 {: class="table table-striped"}
 
@@ -670,7 +670,7 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-Note that CircleCI 2.0 builds are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
+Note that CircleCI 2.0 jobs are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
 
 ## **`workflows`**
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
