@@ -142,13 +142,13 @@ Once you have received a Preview license from your account team, the following i
 
 ### 1.0 Builders
 
-No changes, the same process as for the CCIE 1.0 (https://circleci.com/docs/enterprise/aws-manual/)
+No changes, the same process as for the CCIE 1.0 <https://circleci.com/docs/enterprise/aws-manual/>
 
 ### 2.0 Builders
 
 #### Cluster Mode
 
-* Terraform script: https://github.com/circleci/enterprise-setup/blob/ccie2/nomad/nomad-cluster.tf
+* Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>
 * Instance Type: At least `m4.xlarge` (better `m4.4xlarge`)
 
 
