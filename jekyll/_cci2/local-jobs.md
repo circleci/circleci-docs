@@ -48,6 +48,18 @@ Test locally to quickly retry configurations such as connecting on different por
 
 If a project has been configured to run on CircleCI, you can simply clone the repo and run the `circleci build` command to get set up quickly with the same environment as your team.
 
+### Using a specific checkout key for a local build
+
+You can use a specific Git checkout key for your local build with `circleci build --checkout-key string`.  The default key  is "~/.ssh/id_rsa" on your local system.
+
+### Updating the tool
+
+You can update your local build tool with `circleci update`.
+
+### Checking for available options
+
+As we update the local tool regularly, there may be options for a command that aren't documented here.  You can check for these options with `circleci help <command>`.
+
 ## Limitations
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
