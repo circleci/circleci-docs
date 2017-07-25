@@ -38,7 +38,7 @@ Later this year, all customers with CircleCI Enterprise installed will be able t
 Once you have received a Preview license from your account team, the following instructions will help you set up your trial installation.
 
 ## Installation with Terraform
-* Clone the [https://github.com/circleci/enterprise-setup](Enterprise Setup) repository. 
+* Clone the [Enterprise Setup](https://github.com/circleci/enterprise-setup) repository.
 * Checkout the `ccie2` branch with `git fetch && git checkout ccie2`
 * Run `make init` to copy `terraform.tfvars.template` to `terraform.tfvars`.
 * Fill out the required variables in `terraform.tfvars`, you can view the [README](https://github.com/circleci/enterprise-setup/blob/ccie2/README.md) for the full list of variables. Be sure to set `enable_nomad=1` in order to use docker builders. 
