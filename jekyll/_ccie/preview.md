@@ -38,7 +38,10 @@ Later this year, all customers with CircleCI Enterprise installed will be able t
 Once you have received a Preview license from your account team, the following instructions will help you set up your trial installation.
 
 ## Installation with Terraform
-* Fill vars in `terraform.tfvars` file in <https://github.com/circleci/enterprise-setup/tree/ccie2>
+* Clone the [Enterprise Setup](https://github.com/circleci/enterprise-setup) repository.
+* Checkout the `ccie2` branch with `git fetch && git checkout ccie2`
+* Run `make init` to copy `terraform.tfvars.template` to `terraform.tfvars`.
+* Fill out the required variables in `terraform.tfvars`, you can view the [README](https://github.com/circleci/enterprise-setup/blob/ccie2/README.md) for the full list of variables. Be sure to set `enable_nomad=1` in order to use docker builders. 
 * Apply Terraform scripts (`terraform apply`)
 * Go to provided URL at the end of Terraform output and follow instruction
 * Enter your license
@@ -115,6 +118,9 @@ Once you have received a Preview license from your account team, the following i
      }
      ```
    * region/subnet/sercurity group will be filled automatically
+* Initial Startup
+  * From the main replicated dashboard, click on start to start the application. It will take a few minutes to download all of the necesary docker containers. If you run into an issue where replicted reports that `Failure reported from operator: no such image` just click on start again and it should continue. 
+  * Once the app has started, you can log into CircleCI and start running 2.0 builds!
 
 ## Manual installation
 
