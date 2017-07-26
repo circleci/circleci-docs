@@ -105,9 +105,9 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
 
      ```
      - run: bash .circleci/setup-heroku.sh
-           - add_ssh_keys:
-               fingerprints:
-                 - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+     - add_ssh_keys:
+         fingerprints:
+           - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
      - deploy:
          name: Deploy Master to Heroku
          command: |
