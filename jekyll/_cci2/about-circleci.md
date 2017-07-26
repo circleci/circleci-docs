@@ -23,3 +23,44 @@ CircleCI can also be configured to deploy code to various environments, includin
 
 Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
 
+## Customer Use Cases
+
+The following section outlines two examples of real-world CircleCI usage. See the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI.
+
+### Coinbase
+Coinbase runs CircleCI Enterprise behind their firewall for security and reliability. The [Coinbase case study report](https://circleci.com/customers/coinbase/) reveals that using CircleCI reduced their average time from merge to deploy in half, reduced operations time spent on continuous integration maintenance from 50% of one person's time to less than one hour per week, and increased developer throughput by 20%. 
+
+### SONY 
+Sony Japan continuously deploys microservices built with Go and Docker in minutes using the CircleCI hosted application as described in the [SONY case study report](https://circleci.com/customers/sony/). The NG-Core services are written in Go, packaged into Docker containers, pushed to Docker Hub, then deployed to AWS Elastic Beanstalk. In detail, the process looks like this:
+
+1. The developer commits and pushes to GitHub
+2. CircleCI receives a hook from GitHub, triggering a build
+3. CircleCI pulls down the latest code, compiles the Go binaries, and creates a deployable image with docker build
+4. Unit and integration tests are run, including some tests that use the final Docker image
+5. The Docker image is pushed to Docker Hub, and a new deployment is triggered on Elastic Beanstalk
+6. A final live system test is run after the deployment
+
+The entire build and test processes each run about 5 minutes, and when deployments are triggered they run about an additional 10 minutes. The NG-Core team started development using this process in May of 2014, has been in production since January 2015, and they are extremely happy with the setup.
+
+Refer to the following set of case studies for the hosted CircleCI application, as follows:
+- [How **Fanatics** Team Efficiency Increased by 3x with CircleCI](https://circleci.com/customers/fanatics/)
+- [CircleCI Enables **Cruise Automation** (Subsidiary of GM) to Run Many More Simulations](https://circleci.com/customers/cruise/)
+- [**Shopify** has 130 Engineers Merging 300 Pull Requests and Deploying 100 Times a Week with CircleCI](https://circleci.com/customers/shopify/)
+
+## Free Trial Options
+
+CircleCI provides a free trial with the following options to meet your requirements:
+
+- **Hosted application**: See [Signup and Try CircleCI](https://circleci.com/docs/2.0/first-steps/) to get started with the hosted application.
+- **Installation behind your firewall**: Refer to [Try CircleCI Enterprise](https://circleci.com/docs/enterprise/single-box/) for the Enterprise Trial instructions.
+
+
+
+
+
+
+
+
+
+
+
