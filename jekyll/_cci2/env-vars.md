@@ -70,6 +70,16 @@ jobs:
 
 See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
 
+## Interpolating Enviroment Variables to set other Environment Variables
+
+If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.  As an example, you could add an entry to the `$PATH` as follows:
+
+```
+    steps:
+      run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
+      run: some_program_in_foo_bin
+```
+
 ## Injecting Environment Variables with the API
 
 Build parameters are environment variables, therefore their names have to meet the following restrictions:
