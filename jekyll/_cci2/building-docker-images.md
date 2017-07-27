@@ -84,6 +84,8 @@ The currently supported versions are:
 * `17.05.0-ce`
 * `17.06.0-ce`
 
+If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`.
+
 ## Separation of Environments
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker or Machine containers cannot directly communicate with the containers running in remote docker.
 
