@@ -1,6 +1,6 @@
 {
   "summary": {
-    "build-image": "ubuntu-14.04-XXL-1234-2e60376",
+    "build-image": "ubuntu-14.04-XXL-1239-04cfc8d",
     "google-chrome": "54.0.2840.100",
     "chromedriver": "2.27.440175",
     "firefox": "47.0.1",
