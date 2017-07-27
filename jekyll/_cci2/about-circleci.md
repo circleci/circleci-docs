@@ -25,7 +25,7 @@ Other cloud service deployments can be easily scripted using SSH or by installin
 
 ## Customer Use Cases
 
-The following section outlines two examples of real-world CircleCI usage. See the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI.
+The following section outlines two examples of real-world CircleCI usage. 
 
 ### Coinbase
 Coinbase runs CircleCI Enterprise behind their firewall for security and reliability. The [Coinbase case study report](https://circleci.com/customers/coinbase/) reveals that using CircleCI reduced their average time from merge to deploy in half, reduced operations time spent on continuous integration maintenance from 50% of one person's time to less than one hour per week, and increased developer throughput by 20%. 
@@ -42,14 +42,15 @@ Sony Japan continuously deploys microservices built with Go and Docker in minute
 
 The entire build and test processes each run about 5 minutes, and when deployments are triggered they run about an additional 10 minutes. The NG-Core team started development using this process in May of 2014, has been in production since January 2015, and they are extremely happy with the setup.
 
-Refer to the following set of case studies for the hosted CircleCI application, as follows:
+See the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI, including the following:
+
 - [How **Fanatics** Team Efficiency Increased by 3x with CircleCI](https://circleci.com/customers/fanatics/)
 - [CircleCI Enables **Cruise Automation** (Subsidiary of GM) to Run Many More Simulations](https://circleci.com/customers/cruise/)
 - [**Shopify** has 130 Engineers Merging 300 Pull Requests and Deploying 100 Times a Week with CircleCI](https://circleci.com/customers/shopify/)
 
 ## Free Trial Options
 
-CircleCI provides a free trial with the following options to meet your requirements:
+CircleCI provides a free trial with the following options:
 
 - **Hosted application**: See [Signup and Try CircleCI](https://circleci.com/docs/2.0/first-steps/) to get started with the hosted application.
 - **Installation behind your firewall**: Refer to [Try CircleCI Enterprise](https://circleci.com/docs/enterprise/single-box/) for the Enterprise Trial instructions.
