@@ -50,7 +50,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - .node_modules
+            - node_modules
   test:
     docker:
       - image: circleci/node:4.8.2  
