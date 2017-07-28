@@ -253,8 +253,6 @@ workflows:
               ignore: /.*/
 ```
 
-Final example of a simple 3-job workflow where
-
 The following example runs the `build` and `test` jobs for all branches and only `config-test.*` tags. The `deploy` only runs for `config-test.*` tags.
 
 ```
