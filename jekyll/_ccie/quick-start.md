@@ -20,12 +20,12 @@ To add a project, you must have a GitHub or GitHub Enterprise account.
 
 Complete the following steps to set up a project on CircleCI Enterprise.
 
-1. Click the Open link on the https://localhost:8800/dashboard page, or navigate to the IP address for the CircleCI application as installed by your administrator. The Welcome page appears with a Get Started button. ![CircleCI Enterprise Welcome]({{ site.baseurl }}/assets/img/docs/ccie_welcome.png)
+1. Navigate to the IP address in your browser for the CircleCI application as installed by your administrator. The Welcome page appears with a Get Started button. ![CircleCI Enterprise Welcome]({{ site.baseurl }}/assets/img/docs/ccie_welcome.png)
 2. Click the Get Started button on the Welcome to CircleCI page. If you are not already logged into GitHub, the Sign in to GitHub to continue to Local CCIE Enterprise page appears. ![CircleCI Enterprise Login]({{ site.baseurl }}/assets/img/docs/ccie_login.png)
 3. Enter your GitHub login credentials and click the Sign in button followed by your Two-factor authentication if appropriate. The CircleCI application appears with a Getting Started section. ![CircleCI Enterprise Get Started]({{ site.baseurl }}/assets/img/docs/ccie_follow_build.png)
-4. Click the Follow and Build button to start building your projects and get email notifications of success or failure. The Builds page appears with your first project in the Running state. ![CircleCI Enterprise Running Build]({{ site.baseurl }}/assets/img/docs/ccie_builds_running.png)
+4. Select or deselect projects from the list and click the Follow and Build button to start building your projects. The Builds page appears with your first project in the Running state. ![CircleCI Enterprise Running Build]({{ site.baseurl }}/assets/img/docs/ccie_builds_running.png)
 5. To view the real-time build console and details, click the link to your build from the Builds page. The details page for your build appears. The Build Timing tab is shown in the following screenshot. Notice the red section of the timeline indicates where it failed. ![CircleCI Enterprise Build Timing]({{ site.baseurl }}/assets/img/docs/ccie_build_timing.png)
-6. Click the red section or scroll down to see the consol error for the failure. ![CircleCI Enterprise Build Fail]({{ site.baseurl }}/assets/img/docs/ccie_build_failure.png)
+6. Click the red section or scroll down to see the console error for the failure. ![CircleCI Enterprise Build Fail]({{ site.baseurl }}/assets/img/docs/ccie_build_failure.png)
 
 Now that your project is set up, every time you commit to your repo, CircleCI will run a new build. **Note:** It is possible to skip a build by including the keyword `[ci skip]` in your commit description to skip the build, see the [Skip a Build  documentation]({{site.baseurl}}/1.0/skip-a-build/).
 
@@ -70,7 +70,7 @@ multiple threads or processes, CircleCI allows you to run multiple containers wi
 containers are strongly isolated from each other using Linux Containers (LXC) which are very similar to Docker containers. Strong isolation eliminate many
 common errors that occur in other parallel test runners, for example, unintentional sharing of files and databases.
 
-Many common test runners like `nose` and `RSpec` run automatically and in parallel accroding to the test commands that  CircleCI infers from your project. In these cases, test run time data can also be collected to ensure that tests are split up
+Many common test runners like `nose` and `RSpec` run automatically and in parallel according to the test commands that  CircleCI infers from your project. In these cases, test runtime data can also be collected to ensure that tests are split up
 optimally. You can read about how to ensure tests are auto-balanced in the [Collecting Test Metadata document for CircleCI 1.0]({{site.baseurl}}/1.0/test-metadata/).
 
 ### Installing Custom Packages
