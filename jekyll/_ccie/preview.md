@@ -37,6 +37,59 @@ Later this year, all customers with CircleCI Enterprise installed will be able t
 # Installation of the Preview
 Once you have received a Preview license from your account team, the following instructions will help you set up your trial installation.
 
+## Preparing to Install: Readiness Checklist
+* Access to spin up AWS resources, at least two boxes, one for the main services and one for your first set of workers. We recommend 8 CPUs and 32GB of RAM for the main services box.
+* AWS instances will need outbound access in order to pull docker containers and verify your license.
+* See below for necessary ports you'll need to have open.
+* If you have network proxies that will be in the mix, please talk with us before attempting the installation, as there may be special considerations.
+* Please have the following policy in place that the CircleCI terraform file needs (talk with us if this policy is a concern):
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::circleci-*",
+                "arn:aws:s3:::circleci-*/*",
+                "arn:aws:s3:::*"
+            ]
+        },
+        {
+            "Action": [
+                "autoscaling:*",
+                "sqs:*",
+                "iam:*",
+                "ec2:StartInstances",
+                "ec2:RunInstances",
+                "ec2:Describe*",
+                "ec2:CreateTags",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkAcls",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "cloudwatch:*",
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+```
+
 ## Installation with Terraform
 * Clone the [Enterprise Setup](https://github.com/circleci/enterprise-setup) repository.
 * Checkout the `ccie2` branch with `git fetch && git checkout ccie2`
@@ -125,7 +178,6 @@ Once you have received a Preview license from your account team, the following i
 ## Manual installation
 
 ### Service-box instance
-
 * Type: At least `m4.xlarge` (better `m4.2xlarge`).
 * Storage: 100 GB, General Purpose SSD
 * Security groups:
@@ -141,13 +193,9 @@ Once you have received a Preview license from your account team, the following i
 
 
 ### 1.0 Builders
-
 No changes, the same process as for the CCIE 1.0 <https://circleci.com/docs/enterprise/aws-manual/>
 
 ### 2.0 Builders
-
-#### Cluster Mode
-
 * Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>
 * Instance Type: At least `m4.xlarge` (better `m4.4xlarge`)
 
