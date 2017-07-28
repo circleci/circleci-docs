@@ -18,6 +18,8 @@ The `circleci` commands enable you to reproduce the CircleCI environment locally
 
 You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
 
+**Note:** It is not possible to run Workflows with the CLI.
+
 ### Installing the CLI Locally 
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/engine/installation/).
