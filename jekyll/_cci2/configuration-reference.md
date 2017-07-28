@@ -161,10 +161,10 @@ jobs:
 
 CircleCI supports multiple machine images that can be specified in `image` field:
 
-* `circleci/classic:latest` (default) - an Ubuntu Trusty-based image with Docker `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are announced at least a week in advance.
-* `circleci/classic:edge` - an Ubuntu Trusty-based image with Docker `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
+* `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are announced at least a week in advance.
+* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
 
-So you can set the following to use Docker `17.06.0-ce`:
+So you can set the following to use an Ubuntu version `14.04` image with Docker `17.06.0-ce`:
 
 ```YAML
 jobs:
