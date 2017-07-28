@@ -70,7 +70,7 @@ jobs:
 
 See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
 
-## Interpolating Enviroment Variables to set other Environment Variables
+## Interpolating Enviroment Variables to Set Other Environment Variables
 
 If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.  As an example, you could add an entry to the `$PATH` as follows:
 
@@ -211,13 +211,11 @@ The GitHub/Bitbucket username of the user who triggered the build.
 
 **CIRCLE_JOB**
 
-The current job’s type.
+The current job’s name.
 
 **CIRCLE_WORKING_DIRECTORY**
 
 The `working_directory` for the current the job.
-
-Possible values include: `build`.
 
 **CIRCLE_COMPARE_URL**
 
