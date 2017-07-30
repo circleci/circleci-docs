@@ -12,7 +12,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. Autom
 {% raw %}
 ```YAML
     steps:
-      -restore_cache:
+      - restore_cache:
          keys:
            - m2-{{ checksum pom.xml }}
            - m2- # used if checksum fails
