@@ -80,7 +80,7 @@ For security reasons, encrypted environment variables configured in the UI will 
 
 ### Relative Path for working_directory
 
-The `working_directory:` key in your `.cirecleci/config.yml` file must not use a relative path for local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exits. To workaround this problem, change the value of the  `working_directory:` key in your `.cirecleci/config.yml` file to use an absolute path.
+The `working_directory:` key in your `.circleci/config.yml` file must not use a relative path for local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exits. To workaround this problem, change the value of the  `working_directory:` key in your `.circleci/config.yml` file to use an absolute path.
 
 This happens because `circleci` mounts the current directory to `working_directory` in order to skip the checkout step, but Docker doesn't allow the container path to be relative for a volume. See [here](https://github.com/docker/docker/issues/4830) for more details.
 
