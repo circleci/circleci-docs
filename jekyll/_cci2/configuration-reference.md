@@ -97,6 +97,7 @@ entrypoint | N | String or List | The command used as executable when launching 
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
 user | N | String | Which user to run the command as
 environment | N | Map | A map of environment variable names and values
+auth | N | Map | Authentication info for private images
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
@@ -129,6 +130,18 @@ jobs:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+```
+
+If you are using a private image, you can specify the username/password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
+
+```YAML
+jobs:
+  build:
+    docker:
+      - image: acme-private/private-image:321
+        auth:
+          username: mydockerhub-user  # can specify string literal values
+          password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
 ```
 
 #### **`machine`**
