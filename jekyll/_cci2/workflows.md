@@ -107,6 +107,38 @@ The dependencies are defined by setting the `requires:` key as shown. The `deplo
 
 See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
+## Job Contexts Example
+
+The following example shows a workflow with four sequential jobs that use shared environment variables. 
+
+The following `config.yml` snippet is an example of a sequntial job workflow configured to use the resources defined in the `org-global` context:
+
+```
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+          context: org-global
+      - test1:
+          requires:
+            - build
+	  context: org-global  
+      - test2:
+          requires:
+            - test1
+	  context: org-global  
+      - deploy:
+          requires:
+            - test2	
+	  context: org-global  
+```
+
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. All jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
+
+See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
+
+
 ## Holding a Workflow for a Manual Approval
 
 Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
