@@ -5,12 +5,15 @@ categories: [reference]
 description: Using the CircleCI API
 ---
 
-The CircleCI API is a RESTful, fully-featured API that allows you to do almost 
-anything in CircleCI. You can access all information and trigger all actions. 
-The only thing we don't provide access to is billing functions, which must be 
-done from the CircleCI web UI.
+The CircleCI API is a RESTful, fully-featured API that allows you to access all information and trigger all actions in CircleCI with the following exceptions: 
 
-CircleCI 1.0 and 2.0 are supported by API version `1.1`.
+- Access to billing functions, which must be completed from the CircleCI application.
+- Triggering workflows
+
+CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
+
+* TOC
+{:toc}
 
 ## Summary
 
