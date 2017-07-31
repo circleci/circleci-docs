@@ -20,8 +20,8 @@ To add a project, you must have a GitHub or GitHub Enterprise account.
 
 Complete the following steps to set up a project on CircleCI Enterprise.
 
-1. Navigate to the IP address in your browser for the CircleCI application as installed by your administrator. The Welcome page appears with a Get Started button. ![CircleCI Enterprise Welcome]({{ site.baseurl }}/assets/img/docs/ccie_welcome.png)
-2. Click the Get Started button on the Welcome to CircleCI page. If you are not already logged into GitHub, the Sign in to GitHub to continue to Local CCIE Enterprise page appears. ![CircleCI Enterprise Login]({{ site.baseurl }}/assets/img/docs/ccie_login.png)
+1. Navigate to the IP address in your browser for the CircleCI application as installed by your administrator. The Welcome page appears with a Get Started button. 
+2. Click the Get Started button on the Welcome to CircleCI page. If you are not already logged into GitHub, the Sign in to GitHub to continue to Local CCIE Enterprise page appears. 
 3. Enter your GitHub login credentials and click the Sign in button followed by your Two-factor authentication if appropriate. The CircleCI application appears with a Getting Started section. ![CircleCI Enterprise Get Started]({{ site.baseurl }}/assets/img/docs/ccie_follow_build.png)
 4. Select or deselect projects from the list and click the Follow and Build button to start building your projects. The Builds page appears with your first project in the Running state. ![CircleCI Enterprise Running Build]({{ site.baseurl }}/assets/img/docs/ccie_builds_running.png)
 5. To view the real-time build console and details, click the link to your build from the Builds page. The details page for your build appears. The Build Timing tab is shown in the following screenshot. Notice the red section of the timeline indicates where it failed. ![CircleCI Enterprise Build Timing]({{ site.baseurl }}/assets/img/docs/ccie_build_timing.png)

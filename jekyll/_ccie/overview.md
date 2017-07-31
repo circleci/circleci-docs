@@ -42,8 +42,10 @@ CircleCI Enterprise consists of two primary components: Services and Builders. S
 
 The machine on which the Services run can be backed up using built-in VM snapshotting. Note that for high-availability configurations you can externalize the data storage by running your own Postgres and Mongo clusters, in which case the backups can be done using standard tooling for those databases. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
+### Services 
 
 The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with Postgres and Mongo for high availability and then use standard tooling for database backups. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+
 
 | Source                      | Ports                   | Use                    |
 |-----------------------------|-------------------------|------------------------|
@@ -52,11 +54,13 @@ The machine on which the Service instance runs must not be restarted and may be 
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
 | GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+{: class="table table-striped"}
 
-
+### Builders
 The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds and increase the Builder instance machines as needed to balance the load.
 
 Each machine on which the Builders are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
+
 
 | Source                           | Ports                   | Use                                                            |
 |----------------------------------|-------------------------|----------------------------------------------------------------|
@@ -65,9 +69,12 @@ Each machine on which the Builders are installed reserves two CPUs and 4GB of me
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
 | Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
+{: class="table table-striped"}
 
+### GitHub
 CircleCI Enterprise uses GitHub or GitHub Enterprise credentials for
 authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, CircleCI will inherit the authentication  supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Builder instances.
+
 
 | Source        | Ports   | Use          |
 |---------------|---------|--------------|
@@ -75,7 +82,7 @@ authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, C
 | Services   | 80, 443 | API Access   |
 | Builder  | 22      | Git Access   |
 | Builder  | 80, 443 | API Access   |
-
+{: class="table table-striped"}
 
 
 
