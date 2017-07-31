@@ -10,9 +10,7 @@ order: 41
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
 
 ## Overview
-Contexts are created on the Settings page of the CircleCI application, in the Organization section as shown in the following screenshot. After a context is set in the application it may be configured in the workflows section of the `config.yml` file for a project.
-
-![Contexts Screeshot]({{ site.baseurl }}/assets/img/docs/contexts.png)
+Contexts are created on the Settings page of the CircleCI application, in the Organization section. After a context is set in the application it may be configured in the workflows section of the `config.yml` file for a project.
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. The default context name is `org-default` and the default rule allows access to all projects in the org.
 
