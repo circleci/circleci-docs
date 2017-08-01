@@ -158,7 +158,7 @@ It is assumed that users of the initial high-availability offering will use RDS 
 
 Making the services box automatically recover from failure means replacing it with an ASG of a single member, where the associated userdata entirely specifies how to install and configure Replicated and connect to the external databases.
 
-A working example of this can be found at [https://github.com/circleci/enterprise-setup/compare/ha-test](https://github.com/circleci/enterprise-setup/compare/ha-test). Note in particular the userdata for the services box launch configuration: 
+A working example of this can be found at [https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf](https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf). Note in particular the userdata for the services box launch configuration: 
 
 ```
 #!/bin/bash
