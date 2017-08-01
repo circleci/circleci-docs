@@ -52,7 +52,7 @@ sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
 
 #### Restoring PostgreSQL 
 
-1. Use `psql` to restor the database 
+1. Use `psql` to restore the database 
 ```
 psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI.sql
 ```
