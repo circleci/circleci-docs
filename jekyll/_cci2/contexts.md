@@ -36,6 +36,6 @@ workflows:
 **Note:** Environment variables are considered in a specific order, as follows:
 1. Project-level environment variables set on the Project Settings page.
 2. Context environment variables (assuming the user has access to the Context).
-3. Environment variables set in the `config.yml` file with the `environment` key of a job definition.
-4. Environment variables declared inside a shell command in a `run` step of a job.
+3. Environment variables set with the `environment` key of a `run` step.
+4. Environment variables declared inside a shell command in a `run` step, for example `FOO= bar make install`.
 
