@@ -698,7 +698,7 @@ version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
 ### **`jobs`**
-A job can have the keys `requires`, `filters`, and `contexts`.
+A job can have the keys `requires`, `filters`, and `context`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
