@@ -276,5 +276,5 @@ It can take several minutes for CircleCI to start. However, if it seems to be st
 You can gain more insight by checking the logs on the main CircleCI app container with the following command:
 
 ```
-docker logs frontend
+docker logs -f frontend
 ```
