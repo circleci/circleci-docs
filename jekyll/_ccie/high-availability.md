@@ -31,9 +31,9 @@ This document outlines the elements necessary to set up a high-availability Circ
 3. Make sure that no other Mongo or PostgreSQL containers are running. You can see all of the containers that are running with `docker ps`. 
 4. Download and run the export script using the commands below. This will export both the MongoDB and PostgreSQL databases. This could take a while depending on the amount of data that is currently stored. 
 ```shell
-wget https://s3.amazonaws.com/release-team/scripts/circleci-database-backup
-chmod +x circleci-database-backup
-./circleci-database-backup
+wget https://s3.amazonaws.com/release-team/scripts/circleci-database-export
+chmod +x circleci-database-export
+./circleci-database-export
 ```
 5. Once the backup process is complete, you will find a tarball in the directory where you ran the script. 
 
