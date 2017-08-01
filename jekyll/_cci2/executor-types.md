@@ -115,7 +115,7 @@ jobs:
     machine: true
 ```
 
-The VM will run Ubuntu 14.04 with a few additional tools installed. It isn’t possible to specify other images. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
+[You can specify one of two images for the VM](https://circleci.com/docs/2.0/configuration-reference/#machine), both running Ubuntu 14.04: a `circleci/classic:latest` (default) image with Docker version `17.03.0-ce`, or a `circleci/classic:edge` image with Docker Version `17.06.0-ce`, both with common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
 
 ### When To Use the Machine Executor?
 - Your application requires full access to OS resources.
