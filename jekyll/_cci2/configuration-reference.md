@@ -756,7 +756,14 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 ###### **`tags`**
-Tags can have the keys `only` and `ignore`. CircleCI will not run jobs for tags unless they are specified under your workflows job configuration. **Note:** This is different than how Git branches work. If a job does not recognize the branch pushed, the job runs. If a job does not recognize a tag push, the job is skipped. You need to add tag filters under all the jobs which you would like to run as part of Git tag.   
+CircleCI treats tag and branch filters differently when deciding **whether a job should run**
+
+1. For an branch push unaffected by any filters, we run the job.
+2. For an tag push unaffected by any filters, we skip the job.
+
+(2) means that in order for a job to run as a part of a tag push, it must have some kind of `filters` -> `tags` section, the same condition applies to all its transitively dependent jobs.
+
+Tags can have the keys `only` and `ignore` keys.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.

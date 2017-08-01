@@ -217,7 +217,17 @@ workflows:
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
 ## Git Tag Job Execution
-Git tags must be declared in each job and in the workflow. CircleCI will not run a job for a Git tag unless some kind of `tags` filter is specified. The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
+
+CircleCI treats tag and branch filters differently when deciding **whether a job should run**
+
+1. For an branch push unaffected by any filters, we run the job.
+2. For an tag push unaffected by any filters, we skip the job.
+
+(2) means that in order for a job to run as a part of a tag push, it must have some kind of `filters` -> `tags` section, the same condition applies to all its transitively dependent jobs.
+
+
+
+The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
 
 ```
 workflows:
