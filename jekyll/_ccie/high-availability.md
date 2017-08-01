@@ -15,7 +15,7 @@ description: "Configuring High Availability for CircleCI Enterprise"
 5. [High Availibility Configuration](#high-availability-configuration)
 6. [Troubleshooting](#troubleshooting)
 
-## Overivew
+## Overview
 
 This document outlines the elements necessary to set up a high-availability CircleCI Enterprise installation. At a high level, this requires an auto-recovering "services box", for which we recommend using an AWS ASG (Auto Scaling Group) of one member, and external MongoDB and PostgreSQL databases to handle the persistent state. The sections below step through each of these elements in detail.
 
