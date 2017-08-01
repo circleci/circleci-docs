@@ -119,7 +119,6 @@ workflows:
   build-test-and-deploy:
     jobs:
       - build
-          context: org-global
       - test1:
           requires:
             - build
@@ -130,11 +129,10 @@ workflows:
 	  context: org-global  
       - deploy:
           requires:
-            - test2	
-	  context: org-global  
+            - test2	  
 ```
 
-The environment variables are defined by setting the `context` key as shown to the default name `org-global`. All jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
 
 See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
