@@ -717,8 +717,23 @@ Key | Required | Type | Description
 requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
+##### **`type`**
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
+
+```
+      - hold:
+          type: approval
+          requires:
+            - test1
+            - test2
+      - deploy:
+          requires:
+            - hold
+```
+**Note:** The `hold` job must not exist in the main configuration.
+
 ##### **`filters`**
-Filters can have the key `branches`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -731,7 +746,7 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
-- If both `only` and `ignore` are specified the `only` overrides `ignore`.
+- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -740,6 +755,22 @@ only | N | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
+###### **`tags`**
+Tags can have the keys `only` and `ignore`. CircleCI will not run jobs for tags unless they are specified under your workflows job configuration. **Note:** This is different than how Git branches work. If a job does not recognize the branch pushed, the job runs. If a job does not recognize a tag push, the job is skipped. You need to add tag filters under all the jobs which you would like to run as part of Git tag.   
+
+- Any tags that match `only` will run the job.
+- Any tags that match `ignore` will not run the job.
+- If neither `only` nor `ignore` are specified then the job is skipped for all tags.
+- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+tags | N | Map | A map defining rules for execution on specific tags
+only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
+ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
+{: class="table table-striped"}
+
+
 ##### *Example*
 
 ```
@@ -747,7 +778,7 @@ workflows:
   version: 2
 
   build_test_deploy:
-    jobs:
+    jobs:
       - flow
       - downstream:
           requires:

@@ -13,3 +13,5 @@ If you have implemented workflows on a branch in your GitHub repository, but the
 
 Having the `ci/circleci` checkbox enabled may prevent the status from showing as completed in GitHub because CircleCI posts statuses to Github with a key that includes the job by name.
 
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for examples and conceptual information.
+

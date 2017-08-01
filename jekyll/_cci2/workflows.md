@@ -216,6 +216,69 @@ workflows:
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
+## Git Tag Job Execution
+Git tags must be declared in each job and in the workflow. CircleCI will not run a job for a Git tag unless some kind of `tags` filter is specified. The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
+
+```
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - build:
+          filters:
+            tags:
+              ignore: /testing-.*/
+```
+
+The following example runs the `build` job for all branches, and all tags and runs the `deploy` job for **no** branches, and all tags starting with `config-test`. **Note:** The build job must have `filters` and `tags` keys or it will **not** build for any tag. In this case, the `deploy` job will not run because its `build` dependency is not satisfiable.
+
+```
+workflows:
+  version: 2
+  build-n-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /config-test.*/
+            branches:
+              ignore: /.*/
+```
+
+The following example runs the `build` and `test` jobs for all branches and only `config-test.*` tags. The `deploy` only runs for `config-test.*` tags.
+
+```
+workflows:
+  version: 2
+  build-n-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /config-test.*/
+      - test:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /config-test.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /config-test.*/
+            branches:
+              ignore: /.*/
+
+```
+
 ## Using Workspaces to Share Data Among Jobs
 
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
