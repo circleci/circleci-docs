@@ -756,12 +756,12 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 ###### **`tags`**
-CircleCI treats tag and branch filters differently when deciding **whether a job should run**
+CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
-1. For an branch push unaffected by any filters, we run the job.
-2. For an tag push unaffected by any filters, we skip the job.
+1. For a branch push unaffected by any filters, CircleCI runs the job.
+2. For a tag push unaffected by any filters, CircleCI skips the job.
 
-(2) means that in order for a job to run as a part of a tag push, it must have some kind of `filters` -> `tags` section, the same condition applies to all its transitively dependent jobs.
+Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. Refer to the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution) section of the Orchestrating Workflows document for more examples.
 
 Tags can have the keys `only` and `ignore` keys.
 
