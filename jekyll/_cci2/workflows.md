@@ -238,7 +238,10 @@ workflows:
               ignore: /testing-.*/
 ```
 
-The following example runs the `build` job for all branches, and all tags and runs the `deploy` job for **no** branches, and all tags starting with `config-test`. **Note:** The build job must have `filters` and `tags` keys or it will **not** build for any tag. In this case, the `deploy` job will not run because its `build` dependency is not satisfiable.
+The following example runs 
+
+1. `build` job for all branches, and all tags.
+2. `deploy` job for **no** branches, and all tags starting with `config-test`.
 
 ```
 workflows:
@@ -259,7 +262,10 @@ workflows:
               ignore: /.*/
 ```
 
-The following example runs the `build` and `test` jobs for all branches and only `config-test.*` tags. The `deploy` only runs for `config-test.*` tags.
+The following example runs
+
+1. `build` and `test` jobs for all branches and only `config-test.*` tags.
+2. `deploy` only for `config-test.*` tags.
 
 ```
 workflows:
