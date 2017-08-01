@@ -1,6 +1,6 @@
 ---
 layout: enterprise
-title: "CircleCI Enterprise High Availability"
+title: "High Availability"
 category: [advanced-config]
 order: 8
 description: "Configuring High Availability for CircleCI Enterprise"
