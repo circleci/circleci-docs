@@ -1,27 +1,33 @@
 ---
 layout: classic-docs
-title: "CircleCI Contexts"
+title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
 categories: [configuring-jobs]
 order: 41
-hide: true
 ---
 
+This document describes creating and using contexts in CircleCI in the following sections:
 
-**NOTE:** Contexts are a feature under development. This document is being released early to give you a preview and solicit feedback. We encourage your feedback either on [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908) or in a Pull Request for this document.
+* TOC
+{:toc}
 
-<hr>
+Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
 
-## Contexts Overview
-Contexts provide centrally managed, secured resources for use in jobs. They are currently primarily used for sharing environment variables across projects.
+## Overview
+Contexts are created on the Settings page of the CircleCI application, in the Organization section. After a context is set in the application it may be configured in the workflows section of the `config.yml` file for a project.
 
-_**Coming Soon:** We will be adding new capabilities to Contexts such the ability to route jobs to certain workers, share encrypted files like certificates across jobs, and new kinds of security rules for who can execute jobs in a Context. What capabilities would you like to see? Let us know in [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908)._
-
-Contexts are associated with your Organization and can be requested in [Workflows](../workflows/) configuration. If the person running the workflow has access to the requested context for a given job, the resources of the requested context will be used to run the job.
+To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. The default context name is `org-default` and the default rule allows access to all projects in the org.
 
 ## Using a Context
-Contexts are requested as part of [workflows configuration](../workflows/) using a sub-key of the job invocation. For instance, to use the `org-global` Context while running the job `run-tests` your Workflow configuration would look something like:
+
+1. Navigate to the Settings > Contexts page in the CircleCI application. The Create a Context button appears.
+
+2. Click the Create Contexts button. The default name and rules appear with an Add a Resource button.
+
+3. Click the Add a Resource button and fill in the variable name and value. Click the Add Variable button to save it.
+
+4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the 'org-global' context.
 
 ```
 workflows:
@@ -32,21 +38,13 @@ workflows:
             context: org-global
 ```
 
-## Environment Variables in Contexts
-Contexts have a set of environment variables defined as name/value pairs. When a job is run with a Context the environment variables of the Context are injected at runtime. The order of precedence is important to remember when working with environment variables that might overlap in name. Following is the order, with later injection always taking precedence when the steps of your job run:
+**Note:** Environment variables are considered in a specific order, as follows:
 1. Project-level environment variables set on the Project Settings page.
 2. Context environment variables (assuming the user has access to the Context).
-3. Environment variables set in your config YAML with the `environment` key of a job definition.
-4. Environment variables declared inside a shell command in a `run` step of a job.
+3. Environment variables set with the `environment` key of a `run` step.
+4. Environment variables declared inside a shell command in a `run` step, for example `FOO= bar make install`.
 
-## Creating and Editing Contexts
-You can manage your organization's Contexts from the Organization Settings page. 
+## Send Feedback on Contexts
 
-To create a new context hit the "Add Context" button from the Contexts page.
+We're interested in your feedback on how Contexts can evolve. Read more about our proposed roadmap and offer suggestions in the [contexts discussion](https://discuss.circleci.com/t/contexts-feedback/13908).
 
-You can edit existing Contexts by clicking them in the list on the Context page.
-
-## Context Security
-By default, a Context is available to all projects within the organization where the Context was created. 
-
-_**Coming Soon**: we will soon be adding the ability to add additional security rules to Contexts, including allowing only people who belong to a particular Group to use the Context. We encourage feedback on coming enhancements to Context in [our Discuss forum](https://discuss.circleci.com/t/contexts-feedback/13908)._

@@ -698,7 +698,7 @@ version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
 ### **`jobs`**
-A job can have the keys `requires` and `filters`.
+A job can have the keys `requires`, `filters`, and `context`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -715,6 +715,15 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 Key | Required | Type | Description
 ----|-----------|------|------------
 requires | N | List | A list of jobs that must succeed for the job to start
+{: class="table table-striped"}
+
+
+##### **`contexts`**
+Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/workflows) document for adding a context in the application settings.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+context | N | String | The name of the context. The default name is `org-global`.
 {: class="table table-striped"}
 
 ##### **`type`**
