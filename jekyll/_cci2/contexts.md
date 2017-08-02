@@ -1,11 +1,16 @@
 ---
 layout: classic-docs
-title: "CircleCI Contexts"
+title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
 categories: [configuring-jobs]
 order: 41
 ---
+
+This document describes creating and using contexts in CircleCI in the following sections:
+
+* TOC
+{:toc}
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
 
@@ -38,4 +43,8 @@ workflows:
 2. Context environment variables (assuming the user has access to the Context).
 3. Environment variables set with the `environment` key of a `run` step.
 4. Environment variables declared inside a shell command in a `run` step, for example `FOO= bar make install`.
+
+## Send Feedback on Contexts
+
+We're interested in your feedback on how Contexts can evolve. Read more about our proposed roadmap and offer suggestions in the [contexts discussion](https://discuss.circleci.com/t/contexts-feedback/13908).
 
