@@ -66,7 +66,7 @@ Example:
 jobs:
   build:
     docker:
-      - buildpack-deps:trusty
+      - image: buildpack-deps:trusty
     environment:
       - FOO: "bar"
     parallelism: 3
