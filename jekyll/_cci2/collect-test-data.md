@@ -119,16 +119,18 @@ test reports are automatically generated in XML format. CircleCI makes it easy t
 reports. Add the following to the `.circleci/config.yml` file in your
 project.
 
-```
+```yaml
     steps:
-      - run: |
-          mkdir -p /junit/
-          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} /junit/ \;
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
           when: always
       - store_test_results:
-          path: /junit
+          path: ~/junit
       - store_artifacts:
-          path: /junit          
+          path: ~/junit         
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
