@@ -14,7 +14,7 @@ This document describes how to set up and customize testing for an iOS applicati
 
 ## Overview
 
-CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI OSX and macOS build images in the [Using a macOS Build Image](/docs/1.0/build-image-macos/#software) document.
+CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI OSX and macOS build images in the Using a macOS Build Image document.
 
 ## Getting Started
 
@@ -87,7 +87,6 @@ using the "test" build action. The following test tools are known to work well o
 ### Other tools
 Popular iOS testing tools like [Appium](http://appium.io/) and [Frank](http://www.testingwithfrank.com/) should also
 work normally, though they will need to be installed and called using custom commands.
-See [customizing your build](#customizing-your-build) for more info.
 
 ## Code signing
 [fastlane](https://fastlane.tools) and [Shenzhen](http://nomad-cli.com/#shenzhen)
@@ -103,11 +102,7 @@ these steps:
    to match your code-signing identity, ie `"iPhone Distribution: Acme Inc."`.
 1. Build with `gym` and deploy with `ipa`.
 
-Please check out the [code signing doc]( {{ site.baseurl }}/1.0/ios-code-signing/) for more
-details about setting up code signing, and the [deployment](#deployment)
-section for examples of deployment setups.
-
-## Customizing your build
+## Customizing Your Build
 You have complete flexibility to customize what runs in your build. CircleCI runs tests from the command line with the [`xcodebuild`](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html)
 command by default. This is a tool developed by Apple that is a 
 stable and functional option for building and testing your macOS project.
@@ -353,7 +348,7 @@ A series of simulator-related issues are known to happen on some
 projects. Here are the most frequent of those:
 
 * **Xcode version is not available.** We install
-  a few [different versions](#software-versions) of Xcode in the build
+  a few different versions of Xcode in the build
   image and keep those updated with the latest point releases. Therefore
   to use the latest Xcode 7.3, for example, which is `7.3.1`, it is
   sufficient to specify `7.3` in your `config.yml`. If a newer point
@@ -409,14 +404,14 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
 
 * **Inconsistent timeouts during test runs.** If you are seeing your UI
   tests time out in some of the builds, please try using both the raw
-  `xcodebuild` command and the `xctool` command command we suggest [here](#build-commands).
+  `xcodebuild` command and the `xctool` command.
   Sometimes the issue would only be present with one of these tools but not the other.
 
 * **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
 
 * **Many iOS app developers use tools that generate substantial amounts of code.** In such
 cases CircleCI may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through [environment variables](#environment-variables).
+scheme. Instead, you can specify these through environment variables.
 
 ### Constraints on macOS-Based Builds
 There are a few features normally available on CircleCI's standard
