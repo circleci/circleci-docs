@@ -67,13 +67,16 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
 
 ```yaml
     steps:
-    - run: |
-        mkdir -p /cucumber 
-        bundle exec cucumber --format junit --out /cucumber/junit.xml
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p /cucumber 
+            bundle exec cucumber --format junit --out /cucumber/junit.xml
+          when: always
       - store_test_results:
-          path: /cucumber
+          path: ~/cucumber
       - store_artifacts:
-          path: /cucumber
+          path: ~/cucumber 
 ```
 
 The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the Builds page in the application.
@@ -82,14 +85,16 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 
 ```yaml
     steps:
-      - run: |
-          mkdir -p /cucumber
-          bundle exec cucumber pretty --format json --out /cucumber/tests.cucumber
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p /cucumber 
+            bundle exec cucumber pretty --format json --out /cucumber/tests.cucumber
           when: always
       - store_test_results:
-          path: /cucumber
+          path: ~/cucumber
       - store_artifacts:
-          path: /cucumber          
+          path: ~/cucumber      
 ```
 
 #### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
@@ -100,16 +105,18 @@ to generate test reports in XML format. CircleCI makes it easy to collect these
 reports. Add the following to the `.circleci/config.yml` file in your
 project.
 
-```
+```yaml
     steps:
-      - run: |
-          mkdir -p /junit/
-          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} /junit/ \;
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p /junit/ 
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} /junit/ \;
           when: always
       - store_test_results:
-          path: /junit
+          path: ~/junit
       - store_artifacts:
-          path: /junit          
+          path: ~/junit         
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test results
@@ -163,10 +170,11 @@ A working `.circleci/config.yml` section for testing might look like the followi
 
 ```
     steps: 
-      - run: |
-          yarn add ava tap-xunit --dev # or you could use npm
-          mkdir -p /reports
-          ava --tap | tap-xunit > /reports/ava.xml
+      - run:
+          command: |
+            yarn add ava tap-xunit --dev # or you could use npm
+            mkdir -p /reports
+            ava --tap | tap-xunit > /reports/ava.xml
           when: always
       - store_test_results:
           path: /reports
@@ -183,9 +191,10 @@ A working `.circleci/config.yml` test section might look like this:
 
 ```
     steps:
-      - run: |
-          mkdir -p /reports
-          eslint ./src/ --format junit --output-file /reports/eslint.xml
+      - run: 
+          command: |
+            mkdir -p /reports
+            eslint ./src/ --format junit --output-file /reports/eslint.xml
           when: always
       - store_test_results:
           path: /reports
@@ -200,9 +209,10 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
 
 ```
     steps:
-      - run: |
-          mkdir -p /phpunit
-          phpunit --log-junit /phpunit/junit.xml tests
+      - run: 
+          command: |
+            mkdir -p /phpunit
+            phpunit --log-junit /phpunit/junit.xml tests
           when: always
       - store_test_results:
           path: /phpunit
@@ -225,8 +235,8 @@ And modify your test command to this:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: mkdir rspec
-      - run: |
-          bundle exec rspec --format progress --format RspecJunitFormatter -o rspec/rspec.xml
+      - run: 
+          command: bundle exec rspec --format progress --format RspecJunitFormatter -o rspec/rspec.xml
           when: always 
       - store_test_results:
           path: rspec
@@ -248,7 +258,7 @@ And modify your test command to this:
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: mkdir reports
       - run: 
-          bundle exec rake test TESTOPTS="--ci-dir=./reports":
+          command: bundle exec rake test TESTOPTS="--ci-dir=./reports":
           when: always
       - store_test_results:
           path: reports
