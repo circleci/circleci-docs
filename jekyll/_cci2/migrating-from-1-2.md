@@ -7,12 +7,18 @@ categories: [migration]
 order: 15
 ---
 
-CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
+This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
-If you already have a `circle.yml` file, this article will help you make a copy your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
+If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
 * Contents
 {:toc}
+
+## Overview
+
+CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
+
+If you already have a `circle.yml` file, the following sections describe how to make a copy your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. 
 
 ## Steps to Configure Required 2.0 Keys
 
@@ -22,12 +28,12 @@ If you already have a `circle.yml` file, this article will help you make a copy 
 
 3. Add `version: 2` to the top of the `.circleci/config.yml` file.
 
-4. Add the following two lines to your `config.yml` file, after the version line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the following sections under `build`.
+4. Add the following two lines to your `config.yml` file, after the version line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the sections of the old config file under `build`.
      ```
      jobs:
        build:
      ```
-5. Add the language and version to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
+5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
      ```
        ruby:
          version: 2.3
@@ -37,7 +43,7 @@ If you already have a `circle.yml` file, this article will help you make a copy 
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job.
+     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job. 
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```
@@ -50,6 +56,8 @@ If you already have a `circle.yml` file, this article will help you make a copy 
            - checkout
            - run:
      ```
+If you do not have a `checkout` step, you must add this step to your `config.yml` file.
+
 7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
 ## Steps to Configure Workflows
@@ -93,7 +101,7 @@ Optionally configure workflows, using the following instructions:
            branches:
              ignore: master
      ```     
-6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check the changes.
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed. 
 
 ## Search and Replace Deprecated 2.0 Keys
 
@@ -115,8 +123,8 @@ With the following to load it into your shell (the file $BASH_ENV already exists
 
 ```
     steps:
-      run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
-      run: some_program_inside_bin
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: some_program_inside_bin
 ```
 
 - Search and replace the `hosts:` key, for example:
@@ -181,4 +189,10 @@ With the following, nested under `steps:` and customizing for your application a
 
 ## Validate YAML
 
-When you have all the sections in `.circleci/config.yml` we recommend that you validate your YAML syntax using a tool such as <http://codebeautify.org/yaml-validator>. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
+When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
+
+## Next Steps
+
+- Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
+- Refer to the [Writing Jobs With Steps]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
+
