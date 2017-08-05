@@ -46,6 +46,7 @@ jobs:
           path: run-results/
           destination: run-results
   deploy:
+      - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
 
