@@ -22,7 +22,7 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
 - Run and troubleshoot jobs independently
 - Fan-out to run multiple jobs in parallel for testing various versions  
 - Fan-in for deployment to separate platforms with automated triggers 
-- Support branch-level job execution with artifact sharing
+- Support branch-level and Git tag job execution
 - Enable manual job approval to control deployments to separate environments
 
 For example, you might want to run acceptance tests independently from integration tests and use a manual approval process for deployment. Use workflows to orchestrate parts of your build, increase your ability to respond to failures, and control deployment. Scheduled jobs appear in the Workflows tab of the CircleCI app, so you have an integrated view of the status of every individual workflow as shown in the following screenshot. 
