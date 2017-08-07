@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. This document describes the Workflows feature and provides example configurations in the following sections:
+To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
