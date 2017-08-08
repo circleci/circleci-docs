@@ -14,13 +14,13 @@ This document describes the Workflows feature and provides details and examples 
 
 
 To enable Workflows, you must first split the single job in your CircleCI 2.0 `config.yml` file into multiple jobs with unique names, if you have not already done so. Job names must be unique within a `config.yml` file. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for instructions.
- 
+ 
 ## Overview
 
 A workflow is a set of rules for defining a collection of jobs and their run order. The Workflows feature is designed with a flexible algorithm to support very complex job scheduling and orchestration using a simple set of new configuration keys. Consider configuring Workflows if you need to meet any of the following requirements:
- 
+ 
 - Run and troubleshoot jobs independently
-- Fan-out to run multiple jobs in parallel for testing various versions  
+- Fan-out to run multiple jobs in parallel for testing various versions  
 - Fan-in for deployment to separate platforms with automated triggers 
 - Support branch-level and Git tag job execution
 - Enable manual job approval to control deployments to separate environments
@@ -37,7 +37,7 @@ Select the Failed workflow to see the status of each job as shown in the next sc
 
 The basic Workflows configuration runs all jobs in parallel. That is, jobs listed in the `workflows` section without additional keys will run at the same time. The blue icons indicate the Running status.
 
-![Parallel Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/parallel_jobs.png) 
+![Parallel Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/parallel_jobs.png) 
 
 To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with four parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
@@ -88,19 +88,19 @@ The following `config.yml` snippet is an example of a workflow configured for se
 
 ```
 workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - build
-      - test1:
-          requires:
-            - build
-      - test2:
-          requires:
-            - test1
-      - deploy:
-          requires:
-            - test2	
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          requires:
+            - test1
+      - deploy:
+          requires:
+            - test2	
 ```
 
 The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
@@ -165,13 +165,13 @@ workflows:
 
 In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In this example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
 
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
- 
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
+ 
 ## Running a Workflow from a Failed Job
 
 It is possible to rerun a job that failed in the middle of a workflow and continue the rest of the workflow using the Rerun button on the Workflows page of the CircleCI application.
 
-![Rerunning a Workflow from a Failed Job]({{ site.baseurl }}/assets/img/docs/restart_from_failed.png) 
+![Rerunning a Workflow from a Failed Job]({{ site.baseurl }}/assets/img/docs/restart_from_failed.png) 
 
 To rerun a workflow from the failed job:
 
@@ -183,34 +183,34 @@ To rerun a workflow from the failed job:
 	
 The illustrated example workflow runs a common build Job, then fans-out to run a set of acceptance test Jobs in parallel, and finally fans-in to run a common deploy Job.
 
-![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png) 
+![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png) 
 
 The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
 
-``` 
+``` 
 workflows:
-  version: 2
-  build_accept_deploy:
-    jobs:
-      - build
-      - acceptance_test_1:
-          requires:
-            - build
-      - acceptance_test_2:
-          requires:
-            - build
-      - acceptance_test_3:
-          requires:
-            - build
-      - acceptance_test_4:
-          requires:
-            - build          
-      - deploy:
-          requires:
-            - acceptance_test_1
-            - acceptance_test_2
-            - acceptance_test_3
-            - acceptance_test_4
+  version: 2
+  build_accept_deploy:
+    jobs:
+      - build
+      - acceptance_test_1:
+          requires:
+            - build
+      - acceptance_test_2:
+          requires:
+            - build
+      - acceptance_test_3:
+          requires:
+            - build
+      - acceptance_test_4:
+          requires:
+            - build          
+      - deploy:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+            - acceptance_test_4
 ```
 In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
 
@@ -219,29 +219,29 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 ## Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
-![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png) 
+![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png) 
 
 The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
 ```
 workflows:
-  version: 2
-  dev_stage_pre-prod:
-    jobs:
-      - test_dev:
-          filters:
-            branches:
-              only:
+  version: 2
+  dev_stage_pre-prod:
+    jobs:
+      - test_dev:
+          filters:
+            branches:
+              only:
                 - dev
                 - /user-.*/
-      - test_stage:
-          filters:
-            branches:
-              only: stage
-      - test_pre-prod:
-          filters:
-            branches:
-              only: /pre-prod(?:-.+)?$/
+      - test_stage:
+          filters:
+            branches:
+              only: stage
+      - test_pre-prod:
+          filters:
+            branches:
+              only: /pre-prod(?:-.+)?$/
 ```
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
@@ -337,51 +337,51 @@ A second example is a project with a `build` job that builds a jar and saves it 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace and made available for subsequent jobs (and re-runs of the workflow) to use. 
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
- 
+ 
 ```
 defaults: &defaults
-  working_directory: /tmp
-  docker:
-    - image: buildpack-deps:jessie
+  working_directory: /tmp
+  docker:
+    - image: buildpack-deps:jessie
 
 version: 2
 jobs:
-  flow:
-    <<: *defaults
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
+  flow:
+    <<: *defaults
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
 
-      - persist_to_workspace:
+      - persist_to_workspace:
           # Must be relative path from working_directory
           root: workspace
-	  # Must be relative path from root
+          # Must be relative path from root
           paths:
             - echo-output
 
-  downstream:
-    <<: *defaults
-    steps:
-      - attach_workspace:
+  downstream:
+    <<: *defaults
+    steps:
+      - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
+          at: /tmp/workspace
 
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
 
 workflows:
-  version: 2
+  version: 2
 
-  btd:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
+  btd:
+    jobs:
+      - flow
+      - downstream:
+          requires:
+            - flow
 ```
 
 **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
