@@ -34,11 +34,19 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`jobs`**
 
-Each job is an item in the `jobs` list.
+A build is comprised of 1 or more named jobs. These jobs are specified in the
+`jobs` map. The name of the job is the key in the map, and the value is a map
+describing the job.
 
-### **`build`**
+If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), then you are
+free to name your jobs however you please.
 
-The build job is the default job and is required if you are not using Workflows. If you are using Workflows, a job named build is optional. See the [Workflows]({{ site.baseurl }}/2.0/workflows/) documentation for detailed information.
+If you are not using workflows, then the `jobs` map must contain a job named
+`build`. The `build` job is the default entry-point for a build triggered by a
+push to your VCS provider. You can include other named jobs, which can triggered
+to run using the API.
+
+### ** Jobs **
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
@@ -631,7 +639,7 @@ paths | Y | List | Glob identifying file(s), or a non-glob path to a directory t
 ``` YAML
 - persist_to_workspace:
     root: /tmp/workspace
-    paths: 
+    paths:
       - target/application.jar
       - build/*
 ```
@@ -654,7 +662,7 @@ at | Y | String | Directory to attach the workspace to.
 
 Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their fileystem using the `attach_workspace` step.
-The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it. 
+The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it.
 
 When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
 
