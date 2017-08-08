@@ -9,7 +9,9 @@ order: 80
  
 ## Starting Jobs With the API
  
-This document describes how to initiate jobs using the CircleCI API. The following example initiates a `deploy_production` job by using `curl`.
+This document describes how to initiate jobs using the CircleCI API. **Note:** It is not yet possible to run Workflows with the API.
+
+The following example initiates a `deploy_production` job by using `curl`.
 
 ```YAML
 curl -u ${CIRCLE_API_TOKEN}: \
