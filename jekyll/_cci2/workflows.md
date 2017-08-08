@@ -7,135 +7,24 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-This document describes the Workflows feature and provides details and examples in the following sections:
+To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
-
-
-To enable Workflows, you must first split the single job in your CircleCI 2.0 `config.yml` file into multiple jobs with unique names, if you have not already done so. Job names must be unique within a `config.yml` file. See [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) for instructions.
  
 ## Overview
 
-A workflow is a set of rules for defining a collection of jobs and their run order. The Workflows feature is designed with a flexible algorithm to support very complex job scheduling and orchestration using a simple set of new configuration keys. Consider configuring Workflows if you need to meet any of the following requirements:
+A workflow is a set of rules for defining a collection of jobs and their run order that shortens the feedback loop. The Workflows feature supports very complex job orchestration using a simple set of new configuration keys with a powerful user interface to help you resolve failures sooner, for example:
  
-- Run and troubleshoot jobs independently
-- Fan-out to run multiple jobs in parallel for testing various versions  
-- Fan-in for deployment to separate platforms with automated triggers 
-- Support branch-level and Git tag job execution
-- Enable manual job approval to control deployments to separate environments
+- Run and troubleshoot jobs independently with fast status feedback as each job runs
+- Fan-out to run multiple jobs in parallel for efficient testing of versions  
+- Fan-in for deployment to separate platforms with increased speed
 
-For example, you might want to run acceptance tests independently from integration tests and use a manual approval process for deployment. Use workflows to orchestrate parts of your build, increase your ability to respond to failures, and control deployment. Scheduled jobs appear in the Workflows tab of the CircleCI app, so you have an integrated view of the status of every individual workflow as shown in the following screenshot. 
+## Rerunning a Workflow from a Failed Job
 
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_landing.png)
-
-Select the Failed workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From beginning to restart a failed workflow or select From failed to restart a failed job.
+When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs *after* the failure will run, saving time and resources.
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
-
-## Parallel Job Execution Example
-
-The basic Workflows configuration runs all jobs in parallel. That is, jobs listed in the `workflows` section without additional keys will run at the same time. The blue icons indicate the Running status.
-
-![Parallel Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/parallel_jobs.png) 
-
-To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with four parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-  test1:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run: <command>
-  test2:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run: <command>
-  test3:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run: <command>
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test1
-      - test2
-      - test3
-```
-See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
-
-## Sequential Job Execution Example
-
-The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram. 
-
-![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
-
-The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
-
-```
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - build
-      - test1:
-          requires:
-            - build
-      - test2:
-          requires:
-            - test1
-      - deploy:
-          requires:
-            - test2	
-```
-
-The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
-
-See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
-
-## Job Contexts Example
-
-The following example shows a workflow with four sequential jobs that use shared environment variables. 
-
-The following `config.yml` snippet is an example of a sequntial job workflow configured to use the resources defined in the `org-global` context:
-
-```
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
-      - build
-      - test1:
-          requires:
-            - build
-	  context: org-global  
-      - test2:
-          requires:
-            - test1
-	  context: org-global  
-      - deploy:
-          requires:
-            - test2	  
-```
-
-The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
-
-See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
-
 
 ## Holding a Workflow for a Manual Approval
 
@@ -166,20 +55,65 @@ workflows:
 In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In this example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
 
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
- 
-## Running a Workflow from a Failed Job
 
-It is possible to rerun a job that failed in the middle of a workflow and continue the rest of the workflow using the Rerun button on the Workflows page of the CircleCI application.
+## Workflows Configuration Examples
 
-![Rerunning a Workflow from a Failed Job]({{ site.baseurl }}/assets/img/docs/restart_from_failed.png) 
+To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
-To rerun a workflow from the failed job:
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
-1. Click the Workflows icon and select a project to display workflows.  
-2. Select a workflow from the list to see all jobs in the workflow. 
-3. Click Rerun and select from failed to rerun the job and continue the workflow. 
+### Sequential Job Execution Example
 
-## Fan-Out/Fan-In Workflow Example
+The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram. 
+
+![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
+
+The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
+
+```
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          requires:
+            - test1
+      - deploy:
+          requires:
+            - test2	
+```
+
+The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
+
+See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
+
+### Fan-Out/Fan-In Workflow Example
 	
 The illustrated example workflow runs a common build Job, then fans-out to run a set of acceptance test Jobs in parallel, and finally fans-in to run a common deploy Job.
 
@@ -216,7 +150,40 @@ In this example, as soon as the `build` job finishes successfully, all four acce
 
 See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) for a full example.
 
-## Branch-Level Job Execution
+## Using Contexts and Filtering in Your Workflows
+
+The following sections provide example for using Contexts and filters to manage job execution.
+
+### Using Job Contexts to Share Environment Variables
+
+The following example shows a workflow with four sequential jobs that use shared environment variables. 
+
+The following `config.yml` snippet is an example of a sequntial job workflow configured to use the resources defined in the `org-global` context:
+
+```
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+	  context: org-global  
+      - test2:
+          requires:
+            - test1
+	  context: org-global  
+      - deploy:
+          requires:
+            - test2	  
+```
+
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
+
+See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
+
+### Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 ![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png) 
@@ -246,7 +213,7 @@ workflows:
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
-## Git Tag Job Execution
+### Git Tag Job Execution
 
 CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
