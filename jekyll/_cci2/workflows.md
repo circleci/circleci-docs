@@ -232,7 +232,7 @@ workflows:
       - build:
           filters:
             tags:
-              ignore: /testing-.*/
+              ignore: /^testing-.*/
 ```
 
 The following example runs 
@@ -254,7 +254,7 @@ workflows:
             - test
           filters:
             tags:
-              only: /config-test.*/
+              only: /^config-test.*/
             branches:
               ignore: /.*/
 ```
@@ -272,19 +272,19 @@ workflows:
       - build:
           filters:
             tags:
-              only: /config-test.*/
+              only: /^config-test.*/
       - test:
           requires:
             - build
           filters:
             tags:
-              only: /config-test.*/
+              only: /^config-test.*/
       - deploy:
           requires:
             - test
           filters:
             tags:
-              only: /config-test.*/
+              only: /^config-test.*/
             branches:
               ignore: /.*/
 
