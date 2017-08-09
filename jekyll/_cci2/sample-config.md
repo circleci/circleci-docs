@@ -94,6 +94,8 @@ This example shows a sequential workflow with the `test` job configured to run o
 ## Sample Configuration with Fan-in/Fan-out Workflow
 Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
+Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+
 {% raw %}
 ```
 version: 2.0
@@ -218,15 +220,12 @@ workflows:
             - checkout_code
       - rake_test:
           requires:
-            - checkout_code
             - bundle_dependencies
       - precompile_assets:
           requires:
-            - checkout_code
             - bundle_dependencies
       - deploy:
           requires:
-            - checkout_code
             - rake_test
             - precompile_assets
 ```
