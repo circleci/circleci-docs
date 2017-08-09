@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
 title: Setting up parallelism
-categories: [getting-started,parallelism]
+categories: [parallelism]
 description: Setting up parallelism
-order: 50
+order: 20
 ---
 
 This guide assumes you already have a green build without parallelism. If you haven't set up your project yet, check out [getting started guide]({{ site.baseurl }}/1.0/getting-started/).

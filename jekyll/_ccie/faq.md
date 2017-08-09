@@ -23,7 +23,7 @@ SSH into into the services box, and run the following:
 
 ```
 $ # To get the passphrase
-$ grep PASSPHRASE /etc/circle/generated
+$ circleci get-secret-token
 CIRCLE_SECRET_PASSPHRASE=xxxxxxxxxxxxxxxxxxxx
 $
 $ # To get private ip address

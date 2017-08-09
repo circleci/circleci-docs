@@ -7,7 +7,6 @@ $heading-color: #333;
 $nav-bg-color: #FBFBFB;
 $nav-border-color: #CCC;
 
-
 // General
 body{
 	color: $body-text-color;
@@ -221,6 +220,11 @@ code {
 			margin-right: 5px;
 			font-weight: bold;
 		}
+
+.alert-danger a{
+	color: #843534;
+	font-weight: bold;
+}
 /***** End - Widgets **********************************************************/
 //
 //*****************************************************************************/

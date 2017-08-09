@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: How to activate web notifications for build results
-short-title: Web notifications for builds
-categories: [reference]
+title: Activating Web Notifications for Build Results
+short-title: Activating Web Notifications
+categories: [configuration-tasks]
 description: How to activate web notifications for build results
+order: 40
 ---
 
 ## Turning On Build Notifications

@@ -3,11 +3,11 @@ layout: classic-docs
 title: Ubuntu 12.04 (Precise)
 categories: [build-images]
 description: Ubuntu 12.04 (Precise)
-changefreq: "weekly"
+changefreq: "yearly"
 ---
 
-<div class="alert alert-warning">
-  <strong>Warning: </strong>Ubuntu 12.04 is approaching End-of-Life (EOL) by it's maintainer Canonical. We strongly suggest switching to Ubuntu 14.04. Read our announcement <a class="alert-link" href="https://circleci.com/blog/ubuntu-12-04-precise-build-image-end-of-life-warning/">here</a>.
+<div class="alert alert-danger" markdown="1">
+  <strong>Warning: </strong>Ubuntu 12.04 has been End-of-Life'd (EOL) by it's maintainer Canonical. Neither Canonical nor CircleCI are maintaining this image. We strongly suggest switching to CircleCI 2.0, or at the very least the [Ubuntu 14.04 image](https://circleci.com/docs/1.0/build-image-trusty/) for CircleCI 1.0. Read our announcement [here](https://circleci.com/blog/ubuntu-12-04-precise-build-image-end-of-life-warning/).
 </div>
 
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.

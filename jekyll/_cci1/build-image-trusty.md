@@ -91,7 +91,7 @@ actually installed correctly, we hardcode versions here.
 
 ### Java
 
-Default: `oraclejdk7`
+Default: `oraclejdk8`
 
 Pre-installed versions:
 
@@ -292,10 +292,6 @@ Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.gcloud }}`
 ### awscli
 
 Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.aws-cli }}`
-
-### heroku/heroku-toolbelt
-
-Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.heroku-toolbelt }}`
 
 ## Android
 

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: How Cache Works
-categories: [reference]
+title: Caching in CircleCI
+categories: [optimization]
 description: "How caching works on CircleCI 1.0"
 ---
 
@@ -51,6 +51,7 @@ dependencies:
   cache_directories:
     - "~/my_cache_dir"
 ```
+Also, make sure that the directory you are trying to cache is not a part of your repository (i.e. files in this directory are not tracked).
 
 ## Per-branch Cache
 

@@ -23,10 +23,11 @@ machine:
   java:
     version: openjdk7
 ```
+Available tools may differ between build image versions, see [Differences Between Trusty and Precise]({{ site.baseurl }}/1.0/differences-between-trusty-and-precise) for more information.
 
 ### Dependencies & Tests
 
-CircleCI supports Apache Ant, Play Framework, Gradle, and Apache Maven out of the box.
+CircleCI supports Apache Ant, Play Framework, Gradle, and Apache Maven out of the box. **Note**: Play Framework is not  installed on Ubuntu 14.04 instances, only on 12.04 instances. 
 Depending on your build tooling, we will infer different commands:
 
 <table class='table'>

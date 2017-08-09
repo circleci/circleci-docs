@@ -128,7 +128,7 @@ Now we run our tests. To do that, we need to set an environment variable for our
             make test | tee ${TEST_RESULTS}/go-test.out
 ```
 
-Our project uses `make` for building and testing (you can see `Makefile` [here](https://github.com/CircleCI-Public/circleci-demo-go/blob/master/Makefile)), so we can just run `make test`. In order to collect test results and upload them later (read more about [test results]({{ site.baseurl }}/2.0/project-walkthrough/#store-test-results)) we're using `go-junit-report`:
+Our project uses `make` for building and testing (you can see `Makefile` [here](https://github.com/CircleCI-Public/circleci-demo-go/blob/master/Makefile)), so we can just run `make test`. In order to collect test results and upload them later (read more about test results in the [Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/)) we're using `go-junit-report`:
 
 ``` YAML
 make test | go-junit-report > ${TEST_RESULTS}/go-test-report.xml

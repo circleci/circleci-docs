@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Getting started with iOS builds
-short-title: iOS Getting Started
-categories: [mobile-platforms]
-description: Testing iOS applications on CircleCI
+title: Setting Up iOS Applications on CircleCI
+short-title: Setting Up iOS applications on CircleCI
+categories: [configuration-tasks]
+description: Setting Up iOS applications on CircleCI
+order: 70
 ---
 
 To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.
@@ -14,7 +15,7 @@ By default, we build projects on Linux, so you’ll need to enable macOS for you
 
 ## Assumptions and prerequisites
 
-For our infererence to test your Xcode project, we check for and validate the presence of:
+For our inference to test your Xcode project, we check for and validate the presence of:
 
 - an Xcode workspace/project
 - with at least one shared scheme
@@ -110,9 +111,9 @@ This keychain is also added to the Xcode search path, so any credentials stored 
 
 To use your provisioning profile with your CircleCI builds, you need to upload the `.mobileprovision` file on the **Project Settings** > **OS X Code Signing** page. Any provisioning profiles will automatically be added to the `circle.keychain` at the start of the build.
 
-## Customising your build
+## Customizing your build
 
-Although our inference will work for many cases, some teams may want to customise their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
+Although our inference will work for many cases, some teams may want to customize their build process to use custom tools or run their own scripts. This is done using the `circle.yml` file.
 
 If you wish to see a more detailed guide to the format, take a look at our [configuration sample]( {{ site.baseurl }}/1.0/config-sample/).
 

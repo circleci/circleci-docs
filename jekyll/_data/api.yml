@@ -278,20 +278,17 @@ artifacts:
   description: "List the artifacts produced by a given build."
   method: "GET"
   response: |
-    [
-      {
-        node_index: 0,
-        path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-        pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
-      },
-      {
-        node_index: 0,
-        path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-        pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-        url: "https://circleci.com/gh/circleci/testing/22/artifacts/0/home/ubuntu/circleci-testing/bakingrhubarb-pie.png"
-      }
-    ]
+    [ {
+      "path" : "raw-test-output/go-test-report.xml",
+      "pretty_path" : "raw-test-output/go-test-report.xml",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+    }, {
+      "path" : "raw-test-output/go-test.out",
+      "pretty_path" : "raw-test-output/go-test.out",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+    } ]
 
 artifacts_latest:
   url: "/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts"
@@ -301,18 +298,17 @@ artifacts_latest:
     - {name: "branch", description: "The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.", example: ":branch"}
     - {name: "filter", description: "Restricts which builds are returned. Set to \"completed\", \"successful\", \"failed\". Defaults to \"completed\".", example: ":filter"}
   response: |
-    [{
-      node_index: 0,
-      path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-      pretty_path: "/home/ubuntu/circleci-testing/baking/cherry-pie.png",
-      url: "https://circleci.com/gh/circleci/tsting/22/artifacts/0/home/ubuntu/circleci-testing/baking/cherry-pie.png"
-    },
-    {
-      node_index: 0,
-      path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-      pretty_path: "/home/ubuntu/circleci-testing/baking/rhubarb-pie.png",
-      url: "https://circleci.com/gh/circleci/testing/22/artifacts/0//home/ubuntu/circleci-testing/baking/rhubarb-pie.png"
-    }]
+    [ {
+      "path" : "raw-test-output/go-test-report.xml",
+      "pretty_path" : "raw-test-output/go-test-report.xml",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+    }, {
+      "path" : "raw-test-output/go-test.out",
+      "pretty_path" : "raw-test-output/go-test.out",
+      "node_index" : 0,
+      "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+    } ]
 
 retry_build:
   url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry"
@@ -502,8 +498,8 @@ list_environment_variables:
   try_it: false
   url: "/api/v1.1/project/:vcs-type/:username/:project/envvar"
   method: "GET"
-  description: "Lists the environment variables for :project"
-  response: '[{"name":"foo","value":"xxxx"}]'
+  description: "Returns four 'x' characters plus the last four ASCII characters of the value, consistent with the display of environment variable values in the CircleCI website."
+  response: '[{"name":"foo","value":"xxxx1234"}]'
 
 add_environment_variable:
   try_it: false
@@ -619,7 +615,7 @@ project_post:
   params:
     - {name: "revision", description: "The specific revision to build.  Default is null and the head of the branch is used. Cannot be used with tag parameter.", example: "f1baeb913288519dd9a942499cef2873f5b1c2bf"}
     - {name: "tag", description: "The tag to build. Default is null. Cannot be used with revision parameter.", example: "f1baeb913288519dd9a942499cef2873f5b1c2bf"}
-    - {name: "parallel", description: "The number of containers to use to run the build.  Default is null and the project default is used.", example: 4}
+    - {name: "parallel", description: "The number of containers to use to run the build.  Default is null and the project default is used.  This parameter is ignored for builds running on our 2.0 infrastructure.", example: 4}
     - {name: "build_parameters", description: "Additional environment variables to inject into the build environment.  A map of names to values.", example: "{\"JAVA_OPTS\": \"+Xms128m\"}"}
   body: |
     {

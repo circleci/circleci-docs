@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Use resources which are not in your repository
-categories: [how-to]
+title: Using Resources External to Your Repository
+categories: [configuration-tasks]
 description: How to use resources not in your repository
 last_updated: Feb 2, 2012
+order: 57
 ---
 
 There are a number of techniques to do this:

@@ -57,7 +57,7 @@ dependencies:
     - bundle exec rake assets:precompile
 ```
 
-The default inferred step for Bundler is `bundle check || bundle install`. For reasons, we use `check` prior to `install` in order to skip unnecessary steps inherited from the `bundle install` command when all depedencies are cached or otherwise already installed and available on the system.
+The default inferred step for Bundler is `bundle check || bundle install`. For reasons, we use `check` prior to `install` in order to skip unnecessary steps inherited from the `bundle install` command when all dependencies are cached or otherwise already installed and available on the system.
 
 ### Databases
 

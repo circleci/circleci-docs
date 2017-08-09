@@ -38,7 +38,7 @@ application revision.
 
 The [AppSpec][] file lives in your repo and tells CodeDeploy which files from
 your application to deploy, where to deploy them, and also allows you specify
-lifecyle scripts to be run at different stages during the deployment. You can
+lifecycle scripts to be run at different stages during the deployment. You can
 use these lifecycle scripts to stop your service before a new version is
 deployed, run database migrations, install dependencies etc.
 
@@ -111,7 +111,7 @@ key starts with `my-app`.
 CircleCI also needs to be able to create application revisions, trigger
 deployments and get deployment status. If your application is called `my-app`
 and your account ID is `80398EXAMPLE` then the following policy snippet gives
-us sufficient accesss:
+us sufficient access:
 
     {
       "Version": "2012-10-17",

@@ -5,12 +5,15 @@ categories: [reference]
 description: Using the CircleCI API
 ---
 
-The CircleCI API is a RESTful, fully-featured API that allows you to do almost 
-anything in CircleCI. You can access all information and trigger all actions. 
-The only thing we don't provide access to is billing functions, which must be 
-done from the CircleCI web UI.
+The CircleCI API is a RESTful, fully-featured API that allows you to access all information and trigger all actions in CircleCI. **Note:** The following limitations exist: 
 
-CircleCI 1.0 and 2.0 are supported by API version `1.1`.
+- Access to billing functions is only available from the CircleCI application.
+- Triggering workflows is not yet supported in the API.
+
+CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
+
+* TOC
+{:toc}
 
 ## Summary
 
@@ -239,6 +242,11 @@ The branch name should be url-encoded.
 
 {{ site.data.api.artifacts | api_endpoint }}
 
+**Notes:**
+
+- the value of `path` is relative to the project root (the `working_directory`)
+- `pretty_path` returns the same value as `path`. It is included in the response for backwards compatibility
+
 <h2 id="download-artifact">Download an artifact file</h2>
 
 You can download an individual artifact file via the API by appending a query string to its URL:
@@ -252,6 +260,11 @@ https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/fil
 <h2 id="build-artifacts-latest">Artifacts of the latest Build</h2>
 
 {{ site.data.api.artifacts_latest | api_endpoint }}
+
+**Notes:**
+
+- the value of `path` is relative to the project root (the `working_directory`)
+- `pretty_path` returns the same value as `path`. It is included in the response for backwards compatibility
 
 <h2 id="retry-build">Retry a Build</h2>
 

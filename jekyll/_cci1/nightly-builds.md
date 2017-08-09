@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Nightly Builds
-categories: [how-to]
+categories: [reference]
 description: Nightly Builds
 ---
 

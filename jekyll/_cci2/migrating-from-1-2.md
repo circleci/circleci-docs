@@ -3,332 +3,196 @@ layout: classic-docs
 title: "Migrating from 1.0 to 2.0"
 short-title: "Migrating from 1.0 to 2.0"
 description: "Why and how to migrate from CircleCI 1.0 to 2.0"
-categories: [getting-started]
+categories: [migration]
 order: 15
 ---
 
-**[Click here for Configuration Equivalents](#configuration-equivalents)**
+This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
-## Why Migrate from CircleCI 1.0 to 2.0?
-While CircleCI 1.0 is a powerful CI/CD platform, it has some current limitations that make building software harder than it needs to be. This document explains some of those limitations and how they are addressed in CircleCI 2.0.
+If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
-### Native Docker Support
-Although 1.0 does support Docker, it’s limited to older versions that don’t have access to Docker’s latest features.
+* Contents
+{:toc}
 
-This is because 1.0 uses LXC as a base container with a BTRFS file system. Recent versions of Docker don’t run properly in this environment, which means users can’t access Docker’s full featureset on 1.0.
+## Overview
 
-In 2.0, if your job uses Docker, we’ll run your job on a dedicated VM so you can access all of Docker’s features.
+CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
 
-### Flexible Job Configuration
-1.0 infers your project type and automatically runs the most suitable test and build commands. Running builds are divided into well-defined steps that are performed in order. For example, 1.0 always saves your dependency cache before running tests.
+If you already have a `circle.yml` file, the following sections describe how to make a copy your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. 
 
-While this configuration can be powerful, there are some drawbacks. Maybe you want to disable inference. Or maybe you need to save the dependency cache _after_ running tests since the tests themselves create _more_ dependencies.
+## Steps to Configure Required 2.0 Keys
 
-In 2.0, jobs are broken into granular steps. You can compose these steps within a job at your discretion. This gives you greater flexibility to run your build the way you want.
+1. Copy your existing `circle.yml` file into a new directory called `.circleci` at the root of your project repository.
 
-To learn more, please see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/).
+2. Rename `.circleci/circle.yml` to `.circleci/config.yml`.
 
-### Custom Build Image
-In 1.0, you’re restricted to the build image CircleCI provides. In Linux builds, there are 2 images you can use: Ubuntu 12.04 and 14.04. While these images come with many languages and tools pre-installed, it’s frustrating if you need a version of a service or dependency that isn’t included.
+3. Add `version: 2` to the top of the `.circleci/config.yml` file.
 
-Maybe you want to use a different version of MySQL than the one included in either default image. Installing another version adds time and complexity to your builds.
+4. Add the following two lines to your `config.yml` file, after the version line. If your configuration includes `machine:`, replace `machine:` with the following two lines, nesting all of the sections of the old config file under `build`.
+     ```
+     jobs:
+       build:
+     ```
+5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
+     ```
+       ruby:
+         version: 2.3
+     ```
+     Replace with the following two lines:
+     ```
+         docker:
+           - image: circleci/ruby:2.3
+     ```
+     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job. 
 
-In 2.0, we support almost all public Docker images. You can also create a custom image and run jobs on that. You can even compose multiple images together (like MySQL 5.7 + Redis 3.2) and run jobs on them as if they were a single image.
+6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
+     ```
+     checkout:
+       post:
+     ```
+     With the following:
+     ```
+         steps:
+           - checkout
+           - run:
+     ```
+If you do not have a `checkout` step, you must add this step to your `config.yml` file.
 
-To learn more, please see the [Project Walkthrough]( {{ site.baseurl }}/2.0/project-walkthrough/).
+7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
-----
+## Steps to Configure Workflows
 
-# Configuration Equivalents
-CircleCI 2.0 introduces a completely new syntax in `.circleci/config.yml`. This article will help you convert your 1.0 `circle.yml` to a 2.0 `config.yml`.
+To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
+1. To use the Workflows feature, split your build job into multiple jobs, each with a unique name. It might make sense to start by just splitting out a deploy job to prevent you from having to re-run the entire build when only the deployment fails.
+ 
+2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
+     ```
+     workflows:
+       version: 2
+       <workflow_name>:
+     ```  
+3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
+ 
+     ```
+     workflows:
+       version: 2
+       <workflow_name>:
+           jobs:
+             - build
+             - test
+     ```  
+4. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
+ 
+     ```
+      - <job_name>:
+          requires:
+            - <job_name>
+     ```
+5. For jobs which must run on a particular branch, add the `filters:` key with a nested `branches` and `only` key. For jobs which must not run on a particular branch, add the `filters:` key with a nested `branches` and `ignore` key. **Note:** Workflows will ignore job-level branching, so if you have configured job-level branching and then add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+ 
+     ```
+     - <job_name>:
+         filters:
+           branches:
+             only: master
+     - <job_name>:
+         filters:
+           branches:
+             ignore: master
+     ```     
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed. 
 
-## Machine
+## Search and Replace Deprecated 2.0 Keys
 
-### Timezone
+- If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 
-**1.0**
-
-```YAML
-machine:
-  timezone: Europe/Dublin
 ```
-
-**2.0**
-
-You can set the timezone in Docker images with the `TZ` environment variable. The value should be something like: `TZ="/usr/share/zoneinfo/America/Los_Angeles"`. A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
-In your `.circleci/config.yml` it would look like:
-
-```
-version: 2
-jobs:
-  build:
-    docker:
-      - image: your/primary-image:version
-      - image: mysql:5.7
-        environment:
-           TZ: "/usr/share/zoneinfo/America/Los_Angeles"
-    working_directory: ~/your-dir
     environment:
       TZ: "/usr/share/zoneinfo/America/Los_Angeles"
 ```
 
-Note that in the above example we are setting the timezone for both the primary image and an additional mySQL image.
+- If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
 
-### Global Environment Variables
-
-**1.0**
-
-```YAML
-machine:
-  environment:
-    FOO: foo
-    BAR: bar
 ```
-
-**2.0**
-
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /tmp
-    docker:
-      - image: busybox
     environment:
-       FOO: foo
-       BAR: bar
-```
-
-### Modifying `$PATH`
-
-**1.0**
-
-```YAML
-machine:
-  environment:
     PATH: "/path/to/foo/bin:$PATH"
 ```
 
-**2.0**
+With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
 
-In 2.0, interpolating variables into the environment is not yet supported.
-
-As a workaround, you have to add it to your `.bashrc` then make sure your command shell loads it. We can also make sure it is loaded automatically by changing `$BASH_ENV` like so.
-
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /tmp
-    docker:
-      - image: buildpack-deps:jessie
-    environment:
-       BASH_ENV: ~/.bashrc
-  steps:
-    run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-    run: some_program_inside_of /path/to/foo/bin
+```
+    steps:
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: some_program_inside_bin
 ```
 
-In this example, we've added `/path/to/foo/bin` to the `$PATH` which will get evaluated when a command is executed. You can imagine that `some_program_inside_of` is an executable within that path, and we don't need to refer to it by the full path name.
+- Search and replace the `hosts:` key, for example:
 
-
-### Languages
-
-**1.0**
-
-```YAML
-machine:
-  ruby:
-    version: 2.3
-```
-
-**2.0**
-
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /tmp
-
-    # In 2.0, we specify our Ruby version by using a public Docker image
-    docker:
-      - image: ruby:2.3
-```
-
-### Hosts
-
-**1.0**
-
-```YAML
-machine:
-  hosts:
+```  
+hosts:
     circlehost: 127.0.0.1
 ```
 
-**2.0**
+With an appropriate `run` Step, for example:
 
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /tmp
-    docker:
-      - image: busybox
-
+```
     steps:
-      - run: echo 127.0.0.1 circlehost | tee -a /etc/hosts
+      - run: echo 127.0.0.1 circlehost | sudo tee -a /etc/hosts
 ```
 
-## Checkout
 
-**1.0**
+- Search and replace the `dependencies:`, `database`, or `test` and `override:` lines, for example:
 
-```YAML
-# 1.0
-checkout:
-  post:
-    - git submodule sync
-    - git submodule update --init # use submodules
 ```
-
-**2.0**
-
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /root/my-project
-    docker:
-      - image: phusion/baseimage
-    steps:
-      # Ensure your image has git and ssh (required by git to clone via SSH) so that CircleCI can clone your repo
-      - run: apt-get -qq update; apt-get -y install git openssh-client
-
-      # Checkout timing is no longer hardcoded, so this step can occur anywhere
-      - checkout
-      - run: git submodule sync && git submodule update --init # use submodules
-```
-
-## Dependency/Database/Test
-
-**1.0**
-
-```YAML
 dependencies:
   override:
-    - dependecy-install-command:
-        timeout: 180
-
-database:
-  override:
-    - setup-db-command
-
-test:
-  override:
-    - test-command
+    - <installed-dependency>
 ```
 
-**2.0**
+Is replaced with:
 
-The `dependency`, `database`, and `test` sections are translated into a sequence of `run` steps. To learn more about `run` steps, please checkout [this]({{ site.baseurl }}/2.0/configuration-reference/#run) page.
-
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /root/my-project
-    docker:
-
-      # In 2.0, you can use multiple different images and group them as a 'Pod'.
-      # Because Docker containers normally don't include DBs, you need to bring
-      # a build image that serves as DB container in your build.
-      - image: primary-build-image
-      - image: db-image-1
-      - image: db-image-2
-
-    steps:
-      - checkout
-
-      # We're still building our new inference system for 2.0, but until then, there’s nothing to override.
-      # For now, you'll need to manually install your project’s dependencies.
-      # The current timeout for no output is hardcoded to 600 seconds
+```
       - run:
-          name: Install Dependencies
-          command: dependency-install-command
-
-      # The DB is not automatically created in 2.0, so we manually set up a test DB
-      - run:
-          name: Create Test DB
-          command: setup-db-command
-
-      # Again, no inference in 2.0 yet, so nothing to override here, either.
-      # Just use any test commands.
-      - run:
-          name: Run Tests
-          command: test-command
+          name: <name>
+          command: <installed-dependency>
 ```
 
-## Caching
+- Search and replace the `cache_directories:` key:
 
-### Cache Directories
-
-**1.0**
-
-```YAML
-dependencies:
-  override:
-    - bundle install --path vendor/bundle:
-        timeout: 180
-
+```
   cache_directories:
     - "vendor/bundle"
 ```
 
-**2.0**
+With the following, nested under `steps:` and customizing for your application as appropriate:
 
-{% raw %}
-```YAML
-version: 2
-jobs:
-  build:
-    working_directory: /root/my-project
-    docker:
-      - image: ruby:2.3
-
-    steps:
-      - checkout
-      - run: bundle install --path vendor/bundle
-
-     # Caching is fully customizable in 2.0
+```
      - save_cache:
-        key: dependency-cache-{{ checksum "Gemfile.lock" }}
+        key: dependency-cache
         paths:
           - vendor/bundle
 ```
-{% endraw %}
 
-Please note that you need to have a restore cache step by yourself in 2.0. There are also lots of cache prefix options available.
+- Add a `restore_cache:` key nested under `steps:`.
 
-Read about them in [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#save_cache).
+- Search and replace `deployment:` with the following, nested under `steps`:
 
-## Deployment
-
-**1.0**
-
-```YAML
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: foo-bar-123
+```
+     - deploy:
 ```
 
-**2.0**
+**Notes on Deployment:**
 
-Currently, 2.0 doesn't support automatic deployment via integrations (like the above Heroku example).
+- See the [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
+- Please read the [Deployment Integrations]({{ site.baseurl }}/2.0/deployment_integrations/) doc for examples of deployment integration for CircleCI 2.0.
 
-You can write your own manual `deploy` steps as shown in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+## Validate YAML
 
-If you **add SSH keys** via the CircleCI UI 'Project Settings > SSH Permissions' screen for deployment with 2.0, you must **explicitly add them to your job with: `- add_ssh_keys`** in `.circleci/config.yml`. See [Configuration Reference add SSH keys]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys). The documentation also explains how to activate `ssh-agent` so that you can `ssh-add` your keys for tools that require them to be available via an agent.
+When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
+
+## Next Steps
+
+- Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
+- Refer to the [Writing Jobs With Steps]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
+

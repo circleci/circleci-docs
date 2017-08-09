@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI
-categories: [getting-started,reference]
+title: Configuring CircleCI 
+categories: [configuration-tasks]
 description: How to configure CircleCI
-order: 30
+order: 20
 ---
 
-CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration.
-
-If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory. If this file exists, CircleCI will read it each time it runs a build.
-
-For a rough idea of what a `circle.yml` looks like, check out our [sample file]( {{ site.baseurl }}/1.0/config-sample/). Otherwise, read on for a more detailed look at each piece of a `circle.yml` file.
+CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration. If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory and CircleCI will read it each time it runs a build. Use the following sections to set up your `circle.yml` file.
 
 <h2 id="phases">File Structure and Content</h2>
 
@@ -500,6 +496,8 @@ deployment:
       - ./deploy_feature.sh
 ```
 
+To deploy on any branch, use the following regex: `/.*?/`
+
 You can also optionally specify a repository _owner_ in any deployment subsection.
 This can be useful if you have multiple forks of the project, but only one should be
 deployed. For example, a deployment subsection like this will only deploy if the project
@@ -562,6 +560,7 @@ pattern:
 
 `v1`, `v1.2`, and `v1.2.3` (and so on) all match.
 
+To deploy on any tag, use the following regex: `/.*?/`
 
 ### SSH Keys
 
@@ -571,6 +570,8 @@ CircleCI's UI enables you to do this on your project's **Project Settings > SSH 
 Add and then submit the one or more SSH keys needed
 for deploying to your machines. If you leave the **Hostname** field blank,
 the private key will be used for all hosts.
+
+*Please note that added keys will need to have an empty passphrase, as CircleCI does not have the ability to decrypt and use them otherwise.*
 
 <h3 id="heroku-extra">Heroku</h3>
 

@@ -1,9 +1,10 @@
 ---
 layout: classic-docs
-title: Test iOS applications on macOS
-short-title: iOS builds on macOS
-categories: [mobile-platforms]
+title: Testing iOS Applications on macOS
+short-title: Testing iOS Applications on macOS
+categories: [configuration-tasks]
 description: Testing iOS applications on macOS
+order: 71
 ---
 
 CircleCI offers support for building and testing iOS and macOS projects.
@@ -17,7 +18,7 @@ it to an macOS build by enabling the "Build OS X project" option under the
 
 ## Software Versions
 
-We maintain a [manifest of the software installed on our macOS image on GitHub]({{ site.macos_manifest_url }}).
+We maintain a [manifest of the software installed on our OSX and macOS build images](/docs/1.0/build-image-macos/#software).
 
 ## Basic setup
 
@@ -55,10 +56,12 @@ customization options.
 
 ## Xcode Version
 
-By default, CircleCI will build your project with Xcode 7.0. You can select a
-newer version of Xcode by specifying the major and minor version in a
-[circle.yml file]( {{ site.baseurl }}/1.0/configuration/) in the root of your
-repository. For example, for 8.2.1, add the following:
+By default, CircleCI will build your project with Xcode 7.0 on OSX 10.11 You can
+select a specific version of Xcode by specifying the major and minor version in
+a [circle.yml file]( {{ site.baseurl }}/1.0/configuration/) in the root of your
+repository. [Full details including a list of available versions of Xcode are on
+the macOS build images page](/docs/1.0/build-image-macos/#selecting-xcode-version-and-operating-system). For
+example, for 8.2.1, add the following:
 
 ```
 machine:
@@ -66,7 +69,6 @@ machine:
     version: 8.2
 ```
 
-A list of the [versions of Xcode that we have available is located on GitHub]({{ site.macos_manifest_url }}).
 
 ### CocoaPods
 
@@ -156,7 +158,7 @@ test:
 ```
 
 The destination can be selected from the simulators [pre-installed in our
-build image]({{ site.macos_manifest_url }}).
+build images](/docs/1.0/build-image-macos/#software).
 
 In some situations you might also want to build with [`xctool`](https://github.com/facebook/xctool),
 an alternative build tool. Please mind that some of the `xcodebuild` functionality might not be
@@ -316,7 +318,7 @@ your organization's settings page.
 
 ![](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
-Click on your organisation (CircleCI in the image above), and click on
+Click on your organization (CircleCI in the image above), and click on
 the API key and Build Secret links to reveal the items.
 
 ![](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)

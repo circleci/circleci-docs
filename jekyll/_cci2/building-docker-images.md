@@ -1,21 +1,20 @@
 ---
 layout: classic-docs
-title: "Building Docker Images on CircleCI 2.0"
-short-title: "Building Docker Images"
+title: "Running Docker Commands"
+short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"
-categories: [deploying]
-order: 20
+categories: [configuring-jobs]
+order: 55
 ---
 
+This document explains how to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers in the following sections:
+
+* TOC
+{:toc}
+
 ## Overview
-As part of your build you might want to build Docker images for deploying elsewhere or for further testing. This document explains how to do that on CircleCI 2.0.
 
-For security reasons, the [Docker Executor]({{ site.baseurl }}/2.0/executor-types/#docker-executor) doesn’t allow building Docker images within a [job space][job-space].
-
-To help users build, run, and publish new images, we’ve introduced a special feature which creates a separate environment for each build. This environment is remote, fully-isolated and has been configured to execute Docker commands.
-
-## Configuration
-If your build requires `docker` or `docker-compose` commands, you’ll need to add a special step into your `.circleci/config.yml`:
+To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your build requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```YAML
 jobs:
@@ -70,8 +69,25 @@ Let’s break down what’s happening during this build’s execution:
 3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 4. We use project environment variables to store credentials for Docker Hub.
 
+## Docker version
+
+If your build requires a specific docker image, you can set it as an `image` attribute:
+
+```YAML
+      - setup_remote_docker:
+          version: 17.05.0-ce
+```
+
+The currently supported versions are:
+
+* `17.03.0-ce` (default)
+* `17.05.0-ce`
+* `17.06.0-ce`
+
+If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`.
+
 ## Separation of Environments
-Since the [job space][job-space] and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) are separated environments, there's one caveat: containers running in your job space can’t directly communicate with containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker or Machine containers cannot directly communicate with the containers running in remote docker.
 
 ### Accessing Services
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
@@ -116,8 +132,6 @@ In the same way, if your application produces some artifacts that need to be sto
     # once application container finishes we can copy artifacts directly from it
     docker cp app:/output /path/in/your/job/space
 ```
-
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container

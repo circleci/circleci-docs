@@ -4,7 +4,7 @@ title: "Language Guide: Python"
 short-title: "Python"
 description: "Building and Testing with Python on CircleCI 2.0"
 categories: [language-guides]
-order: 6
+order: 7
 ---
 
 ## New to CircleCI 2.0?
@@ -37,11 +37,10 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 1. Fork the project on GitHub to your own account
 2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
----
 
 ## Config Walkthrough
 
-We always start with the version.
+We always start with the version:
 
 ```YAML
 version: 2
@@ -66,7 +65,7 @@ jobs:
 
 Now we need to add several `steps` within the `build` job:
 
-
+{% raw %}
 ```YAML
     steps:
       - checkout
@@ -89,6 +88,7 @@ Now we need to add several `steps` within the `build` job:
           path: test-reports/
           destination: tr1
 ```
+{% endraw %}
 
 You can learn more about each of these steps in our [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/)
 

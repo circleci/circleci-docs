@@ -1,11 +1,173 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0 Environment Variables"
-short-title: "Environment Variables"
+title: "Using Environment Variables"
+short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
-categories: [reference]
-order: 1
+categories: [configuring-jobs]
+order: 40
 ---
+
+This document describes using environment variables in CircleCI in the following sections:
+
+* TOC
+{:toc}
+
+## Adding Enviroment Variables in the App
+
+To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project.
+
+### Adding Global Environment Variables
+
+To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+
+## Adding Enviroment Variables in the config.yml File
+
+To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
+
+```
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: postgres:9.6
+      # Environment variable for all commands executed in the primary container
+        environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+    workDir: /root/workflows-conductor
+    steps:
+      - checkout
+
+      - run: lein javac
+
+      - run: lein deps
+
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
+
+```
+version: 2
+jobs:
+  build:
+    working_directory: ~/circulate
+    docker:
+      - image: python:3.6.0
+       # Environment variable for all commands executed in the primary container
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: postgres:9.6.2
+       # Environment variable for all commands executed in the secondary container
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+```
+
+See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
+
+## Interpolating Enviroment Variables to Set Other Environment Variables
+
+If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.  As an example, you could add an entry to the `$PATH` as follows:
+
+```
+    steps:
+      run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
+      run: some_program_in_foo_bin
+```
+
+## Injecting Environment Variables with the API
+
+Build parameters are environment variables, therefore their names have to meet the following restrictions:
+
+- They must contain only ASCII letters, digits and the underscore character.
+- They must not begin with a number.
+- They must contain at least one character.
+
+Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are  treated as simple strings. The order that build parameters are loaded in is not guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
+
+For example, when you pass the parameters:
+
+```
+{
+  "build_parameters": {
+    "foo": "bar",
+    "baz": 5,
+    "qux": {"quux": 1},
+    "list": ["a", "list", "of", "strings"]
+  }
+}
+```
+
+Your build will see the environment variables:
+
+```
+export foo="bar"
+export baz="5"
+export qux="{\"quux\": 1}"
+export list="[\"a\", \"list\", \"of\", \"strings\"]"
+```
+
+Build parameters are exported as environment variables inside the build's containers and can be used by scripts/programs and commands in `circle.yml`. The injected environment variables may be used to influence the steps that are run during the build.
+
+You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
+
+```
+{
+  "build_parameters": {
+    "param1": "value1",
+    "param2": 500
+  }
+}
+```
+
+For example using `curl`
+
+```
+curl \
+  --header "Content-Type: application/json" \
+  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
+  --request POST \
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
+```
+
+The build will see the environment variables:
+
+```
+export param1="value1"
+export param2="500"
+```
+
+Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
+
+
+## CircleCI Environment Variable Descriptions
+
+CircleCI exports the environment variables in this section during each build, which are
+useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:
+
+`CIRCLECI`
+
+true
+
+`CI`
+
+true
+
+CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character must be a letter.
+
+## Build Details
+
+CircleCI publishes the details of the currently running build in this list of variables:
+
 
 **CI**
 
@@ -15,7 +177,7 @@ Has a value of `true` on our platform.
 
 **CIRCLECI**
 
-Represents whether the current environment is a CircleCI environment
+Represents whether the current environment is a CircleCI environment.
 
 Has a value of `true` on our platform.
 
@@ -53,9 +215,11 @@ The GitHub/Bitbucket username of the user who triggered the build.
 
 **CIRCLE_JOB**
 
-The current job’s type.
+The current job’s name.
 
-Possible values include: `build`
+**CIRCLE_WORKING_DIRECTORY**
+
+The `working_directory` for the current the job.
 
 **CIRCLE_COMPARE_URL**
 
@@ -87,20 +251,20 @@ If this build is part of only one pull request, its URL will be populated here. 
 
 **CI_PULL_REQUESTS**
 
-Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0
+Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0.
 
 **CI_PULL_REQUEST**
 
-Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0
+Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0.
 
 **CIRCLE_TAG**
 
-The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running [for a tag]( {{ site.baseurl }}/1.0/configuration/#tags).
+The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running for a tag. See the [CircleCI 1.0 documentation of tags]( {{ site.baseurl }}/1.0/configuration/#tags) for more information.
 
 **CIRCLE_PROJECT_USERNAME**
 
-The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123
+The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123.
 
 **CIRCLE_PROJECT_REPONAME**
 
-The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123
+The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123.

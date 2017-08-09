@@ -111,7 +111,7 @@ ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs:${LIBRARY_PATH}
 
 6.) 
 
-In your GPU Circle Project add the following under your enviroment variables
+In your GPU Circle Project add the following under your environment variables
 
 Name: `PATH`
 
@@ -135,7 +135,7 @@ See here for a working sample project
     
 ### LXC
 
-This is only supported in releases after ( 1.47.0 +). If you need help upgraging, please reachout to enterprise-support@circleci.com
+This is only supported in releases after ( 1.47.0 +). If you need help upgrading, please reach out to enterprise-support@circleci.com
 
 
 

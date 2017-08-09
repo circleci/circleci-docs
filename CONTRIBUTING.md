@@ -22,7 +22,7 @@ Come back here when you're ready to start editing!
 
 ### Editing Docs Locally
 
-All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
+All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
 
 1. Create a branch and switch to it:
 

@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Test Android Applications
 short-title: Android
-categories: [mobile-platforms]
+categories: [build-images]
 description: Testing Android applications on CircleCI
 ---
 
