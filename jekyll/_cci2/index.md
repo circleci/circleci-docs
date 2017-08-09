@@ -37,7 +37,7 @@ The CircleCI 2.0 platform includes significant performance, stability, and relia
 
 - **Debugging with SSH and CLI**:  Perform local job runs, configuration validation and log in to a build with SSH for access to log files and to debug running processes. See [Using the CLI documentation](https://circleci.com/docs/2.0/local-jobs/) to learn about running local jobs and refer to [Debugging Jobs over SSH](https://circleci.com/docs/2.0/ssh-access-jobs/) for SSH instructions.
 
-- **Parallelism**: Automatic provisioning of containers as they are freed without waiting for other jobs to finish. See the [Parallel Job Execution documentation](https://circleci.com/docs/2.0/workflows/#parallel-job-execution-example) for examples.
+- **Parallelism**: Automatic provisioning of containers as they are freed without waiting for other jobs to finish. See the [Parallel Job Execution documentation]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#nav-button) for examples.
 
 - **Advanced Caching**: Speed up builds by caching files from run to run using keys that are easy to control with granular caching options for cache save and restore points throughout your jobs. Cache any files from run to run using keys you can control, see the [Caching Dependencies documentation](https://circleci.com/docs/2.0/caching/) for strategies and steps.
 
