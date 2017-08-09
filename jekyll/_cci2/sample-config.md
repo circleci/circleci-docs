@@ -40,12 +40,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: update-npm
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: install-npm-wee
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -58,10 +58,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: test
+          name: Test
           command: npm test
       - run:
-          name: code-coverage
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
