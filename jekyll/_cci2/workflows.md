@@ -320,7 +320,7 @@ jobs:
       - run: echo "Hello, world!" > workspace/echo-output
 
       - persist_to_workspace:
-          # Must be relative path from working_directory
+          # Must be an absolute path, or relative path from working_directory
           root: workspace
 	  # Must be relative path from root
           paths:
