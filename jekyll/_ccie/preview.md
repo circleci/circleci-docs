@@ -287,4 +287,17 @@ No changes, the same process as for the CCIE 1.0 <https://circleci.com/docs/ente
      | TCP      | 32768-61000| 0.0.0.0 |
 
 
+## Upgrading MongoDB
 
+CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database or moving from preview3 to a newer version of the preview you can use the following steps to upgrade your Mongo database. 
+
+1. Stop CircleCI from the replicated console. 
+2. SSH into the Services Box.
+3. Download and exectute the Mongo upgrade script.
+```
+wget https://s3.amazonaws.com/release-team/scripts/upgrade-mongo
+chmod +x upgrade-mongo
+./upgrade-mongo
+```
+
+You can now start CircleCI from the replicated console and you will be using Mongo 3.2.11.
