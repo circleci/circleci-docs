@@ -26,36 +26,6 @@ When you use workflows to orchestrate parts of your build, you increase your abi
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
-## Holding a Workflow for a Manual Approval
-
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
-
-```
-workflows:
-  version: 2
-  build-test-and-approval-deploy:
-    jobs:
-      - build
-      - test1:
-          requires:
-            - build
-      - test2:
-          requires:
-            - test1
-      - hold:
-         type: approval
-         requires:
-           - test1
-           - test2
-      - deploy:
-          requires:
-            - hold
-```
-
-In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the next job or jobs which require it will start. In this example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
-
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
-
 ## Workflows Configuration Examples
 
 To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
@@ -149,6 +119,35 @@ workflows:
 In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
 
 See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) for a full example.
+
+## Holding a Workflow for a Manual Approval
+
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+
+```
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          requires:
+            - test1
+      - hold:
+         type: approval
+         requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
+```
+
+In this example, the `deploy:` job will not run until you click the Approve button on the `hold` job in the Workflows page of the CircleCI app. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the button. After you approve the job with `type: approval`, the jobs which require the approval job will start.  In this example, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`.
+
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png) 
 
 ## Using Contexts and Filtering in Your Workflows
 
