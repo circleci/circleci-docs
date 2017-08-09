@@ -26,7 +26,7 @@ See the [Executor Overview]({{ site.baseurl }}/2.0/executor-types/#machine-execu
 
 ## Steps Overview
 
-Steps are a collection of executable commands. The `step:` key replaces the 1.0 `compile:`, `test:`, and `deployment:` keys. Within `steps:`, the `checkout:` key is still required and a new key for `run:` enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, new keys for `save_cache:`, `restore_cache:`,  `deploy:`, `store_artifacts:`, and `store_test_results:` are nested under Steps. 
+Steps are a collection of executable commands which are run during a job. The `step:` key replaces the 1.0 `compile:`, `test:`, and `deployment:` keys. Within `steps:`, the `checkout:` key is still required and a new key for `run:` enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, new keys for `save_cache:`, `restore_cache:`,  `deploy:`, `store_artifacts:`, and `store_test_results:` are nested under Steps.
 
 ## Sample Configuration with Sequential Workflow
 
