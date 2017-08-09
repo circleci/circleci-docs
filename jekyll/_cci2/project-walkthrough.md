@@ -41,10 +41,39 @@ jobs:
 - Image is a public Docker image for Python 3.6.0 in this demo. 
 - Steps starting with a required `checkout` Step and followed by `run:` keys that execute commands sequentially on the primary container.
 
+## Service containers
+
+If the job requires services such as databases they can be run as additional containers by listing more `image:`s in the `docker:` stanza.
+
+Docker images are typically configured using environment variables, if these are necessary a set of environment variables to be passed to the container can be supplied:
+
+```
+version 2
+jobs:
+  build:
+    working_directory: ~/circulate
+    docker:
+      - image: python:3.6.0
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: postgres:9.6.2
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+      - image: selenium/standalone-chrome:3.1.0
+```
+
+The environment variables for the *primary container* set some config specific to the Flask framework and set a database URL that references a database run in the `postgres:9.6.2` service container. Note that the PostgreSQL database is available at `localhost`.
+
+The `postgres:9.6.2` service container is configured with a user called `ubuntu` with an empty password, and a database called `circle_test`.
+
+The `selenium/standalone-chrome:3.1.0` container is used to run tests using Selenium on Chrome, it isn't passed any configuration via environment variables.
 
 ## Installing Dependencies
 
-Next, the file defines required dependencies in the `environment` key for each Image and in the run Step as follows:
+Next the job installs Python dependencies into the *primary container* by running `pip install`. Depedencies are installed into the *primary container* by running regular Steps executing shell commands:
 
 ```
 version: 2
@@ -64,19 +93,26 @@ jobs:
       - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
-      - run: pip install -r requirements/dev.txt
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
 ```
 
-These variables define the following new dependencies:
+An environment variable defined in a `run:` key will override image-level variables, e.g.:
 
-- Testing and connecting to the PostgreSQL 9.6.2 database container, using a public Docker image.
-- Three environment variables to make a test database available for the application.
-- The `selenium/standalone-chrome:3.1.0` image to run tests using Selenium on Chrome.
-- An environment variable defined in a `run:` key that overrides the image-level variable.
+```
+      - run:
+          command: echo ${FLASK_CONFIG}
+          environment:
+            FLASK_CONFIG: staging
+```
 
 ## Caching Dependencies
 
-To speed up the builds, the demo configuration defines `restore_cache`, a virtual environment for storing the pip dependencies, and `save_cache`:
+To speed up the builds, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
 ```
 version: 2
@@ -96,8 +132,6 @@ jobs:
       - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
-      - run: pip install -r requirements/dev.txt
-    steps:
       - restore_cache:
           key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
@@ -114,12 +148,11 @@ jobs:
 
 The following describes the detail of the added key values:
 
-- The `restore_cache:` key is named `deps1` and it restores the cache on the current branch by using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. If the checksum for the requirements file has not changed, then CircleCI restores the existing cache by using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`.
+- The `restore_cache:` step searches for a cache with a key that matches the key template. The template begins with `deps1-` and embeds the current branch name using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. The checksum for the `requirements.txt` file is also embedded into the key template using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. CircleCI restores the most recent cache that matches the template, in this case the branch the cache was saved on and the checksum of the `requirements.txt` file used to create the cached virtualenv must match.
 
-- The `run:` key creates and activates a virtual environment in which to install the Python dependencies.
+- The `run:` step named `Install Python deps in a venv` creates and activates a virtual environment in which to install the Python dependencies, as before.
 
-- The `save_cache:` key is named `deps1` and it saves the project cache on the current branch by using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. Then, CircleCI saves a new cache if the checksum for the requirements file changes by using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. Finally, the path that is to be to cached is specified as `venv`.
-
+- The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements.txt` changes.
 
 ## Running Tests
 
