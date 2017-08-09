@@ -56,6 +56,21 @@ If you already have a `circle.yml` file, the following sections describe how to 
            - checkout
            - run:
      ```
+
+     For example:
+     ```
+     checkout:
+      post:
+        - mkdir -p /tmp/test-data
+        - echo "foo" > /tmp/test-data/foo
+     ```
+     becomes
+     ```
+         steps:
+           - checkout
+           - run: mkdir -p /tmp/test-data
+           - run: echo "foo" > /tmp/test-data/foo
+     ```
 If you do not have a `checkout` step, you must add this step to your `config.yml` file.
 
 7. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
