@@ -42,7 +42,7 @@ workflows:
 1. Project-level environment variables set on the Project Settings page.
 2. Context environment variables (assuming the user has access to the Context).
 3. Environment variables set with the `environment` key of a `run` step.
-4. Environment variables declared inside a shell command in a `run` step, for example `FOO= bar make install`.
+4. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
 
 ## Send Feedback on Contexts
 
