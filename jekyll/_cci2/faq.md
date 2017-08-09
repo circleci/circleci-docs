@@ -43,14 +43,11 @@ In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is wh
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
     steps:
+      - run: "Add any bash command you want here"
       - run:
-        command: "Add any bash commands you want here"
-    test:
-      - run:
-        command: |
-          "More arbitrary multi-line bash"
-        command: |
-          "Probably copy-pasted from 'Execute Shell' on Jenkins"
+          command: |
+            echo "Arbitrary multi-line bash"
+            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
 
 ## Does CircleCI 2.0 run inference commands?
 
