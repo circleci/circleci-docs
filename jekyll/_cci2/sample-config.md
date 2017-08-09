@@ -16,7 +16,13 @@ The following sections provide a sample `.circleci/config.yml` with an overview 
 
 ## Jobs Overview
 
-Jobs are a collection of Steps. In 2.0, the `machine` key is nested under `jobs`. The `docker:` and `image:` keys are new and replace the `dependencies:` and `database:` keys in 1.0. This change enables continued use of previously configured `machine` executor runs and adds the ability to reference any public Docker image in your `config.yml` file. 
+Jobs are a collection of Steps. All of the steps in the job are executed in a single unit which consumes a CircleCI container from your plan while it's running.
+
+In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases.
+
+When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start and replace the `machine: services:` stanza from 1.0 configuration.  Any public Docker images can be used with the `docker` executor.
+
+See the [Executor Overview]({{ site.baseurl }}/2.0/executor-types/#machine-executor-overview) for more information about the available executors.
 
 ## Steps Overview
 
