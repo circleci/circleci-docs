@@ -353,7 +353,6 @@ workflows:
 **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
 
 ## See Also
-{:.no_toc}
 
 - For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document. 
 
@@ -362,3 +361,5 @@ workflows:
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ.
 
 - For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
+
+- For troubleshooting a workflow with Waiting for Status in Guthub, see [Workflows]({{ site.baseurl }}/2.0/workflows-waiting-status)
