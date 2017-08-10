@@ -44,6 +44,15 @@ If you installed Jekyll with Docker or ran `jekyll serve -Iw`, then the server s
 
 Create a pull request from your fork by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
+In order to help those watching for new modifications and additions to the documentation, it is suggested that your pull request title be descriptive enough to help those watching the repository get a general idea of what is being changed and why. Adding a description with more information&mdash;if necessary&mdash;is a bonus!
+
+| Original Pull Request Title | Better Title                                                               |
+|-----------------------------|----------------------------------------------------------------------------|
+| _Updating file.md_          | _Indicating support for environment variables in context paths_            |
+| _Sidebar changes_           | _Moving Deployment to its own navigation section for better organization_  |
+
+For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
+
 ## Style Guide
 
 We don't have a lot of rules, but we do try to be consistent with the ones we have. Please follow these guidelines as best you can!
