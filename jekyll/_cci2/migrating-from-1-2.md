@@ -16,7 +16,7 @@ If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` Fi
 
 ## Overview
 
-CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** If you configure multiple jobs, it is important to have parallelism set to `1` to prevent duplication of job runs.
+CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** Parallelism in 2.0 can only be set in `.circleci/config.yml`, the parallelism setting from the UI is ignored.
 
 If you already have a `circle.yml` file, the following sections describe how to make a copy your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. 
 
@@ -55,6 +55,21 @@ If you already have a `circle.yml` file, the following sections describe how to 
          steps:
            - checkout
            - run:
+     ```
+
+     For example:
+     ```
+     checkout:
+      post:
+        - mkdir -p /tmp/test-data
+        - echo "foo" > /tmp/test-data/foo
+     ```
+     becomes
+     ```
+         steps:
+           - checkout
+           - run: mkdir -p /tmp/test-data
+           - run: echo "foo" > /tmp/test-data/foo
      ```
 If you do not have a `checkout` step, you must add this step to your `config.yml` file.
 
