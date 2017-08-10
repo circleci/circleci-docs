@@ -34,7 +34,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`jobs`**
 
-A run is comprised of 1 or more named jobs. These jobs are specified in the
+A run is comprised of one or more named jobs. Jobs are specified in the
 `jobs` map. The name of the job is the key in the map, and the value is a map
 describing the job.
 
