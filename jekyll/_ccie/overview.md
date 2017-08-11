@@ -7,7 +7,7 @@ order: 1
 description: "High-level overview of the CircleCI Enterprise."
 ---
 
-This article provides an overview of CircleCI Enterprise architecture in the following sections:
+This article provides an overview of CircleCI Enterprise features, environments, and architecture in the following sections:
 
 * TOC
 {:toc}
@@ -39,8 +39,6 @@ By default, CircleCI Enterprise comes with a general-purpose image based on Ubun
 CircleCI Enterprise consists of two primary components: Services and Builders. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Builder instances execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/enterprise-network-diagram.png)
-
-The machine on which the Services run can be backed up using built-in VM snapshotting. Note that for high-availability configurations you can externalize the data storage by running your own Postgres and Mongo clusters, in which case the backups can be done using standard tooling for those databases. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
 ### Services 
 
