@@ -316,7 +316,11 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
 
 ##### _Default shell options_
 
-Our default `shell` has a few options enabled by default:
+The default value for the `shell` option is either `/bin/bash -eo pipefail` or
+`/bin/sh -eo pipefail`, depending on whether `/bin/bash` is present or not in
+the build container. The default shell is not a login shell (`--login` or `-l`
+are not specified by default). Descriptions of the `-eo pipefail` options are
+given below.
 
 `-e`
 
