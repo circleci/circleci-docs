@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Installing CircleCI on Linux with Replicated"
+title: "Installing CircleCI on Linux Hardware with Replicated"
 category: [installation]
 order: 4
 description: "How to install CircleCI Enterprise on any generic machine"
@@ -9,6 +9,9 @@ description: "How to install CircleCI Enterprise on any generic machine"
 
 Use the following step-by-step instructions to complete the process of
 installing CircleCI on any server running a Linux distribution that supports Docker.  
+
+* TOC
+{:toc}
 
 ## Installation Overview
 
