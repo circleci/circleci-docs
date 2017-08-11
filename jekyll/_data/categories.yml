@@ -78,20 +78,19 @@
 
 - section: ccie
   slug: installation
-  name: "Clustered Installation"
-
-- section: ccie
-  slug: resources
-  name: "Resources"
+  name: "Installation"
 
 - section: ccie
   slug: advanced-config
-  name: "Advanced Configuration"
+  name: "Configuration"
 
 - section: ccie
   slug: troubleshooting
   name: "Troubleshooting"
 
+- section: ccie
+  slug: resources
+  name: "Reference"
 
 # CircleCI 2.0 Docs
 - section: cci2
