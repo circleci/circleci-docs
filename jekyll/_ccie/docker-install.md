@@ -1,59 +1,54 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Install on Other Platforms"
+title: "Installing CircleCI on Linux with Replicated"
 category: [installation]
 order: 4
 description: "How to install CircleCI Enterprise on any generic machine"
 ---
 
-The following step-by-step instructions will guide you through the process of
-installing CircleCI Enterprise on any Docker Supported Machine.  If you have any
-questions as you go through these steps, please contact
-<enterprise-support@circleci.com>.
+Use the following step-by-step instructions to complete the process of
+installing CircleCI on any server running a Linux distribution that supports Docker.  
+
+## Installation Overview
+
+CircleCI installation requires provisioning two types of machines:
+
+* Services instance - An instance with at least 4 CPUs, 8GB RAM, and 30GB of disk space that is always-on and is used as the web server.  The GitHub App domain name needs to map to this instance.
+* Builders - A minimum of one Builder with six CPUs and 10GB RAM and one root volume of at least 50GB, with the ability to provision as many Builders as required for your workload. One Builder with six CPUs and 10GB RAM supports a maximum of two containers.
+
+The following limitations apply for this installation option:
+
+* The container image is always fetched from Docker Hub.  The speed of launching new builders depends on the speed of your  connection to Docker Hub.
+* Using Docker within builds is only supported as documented in the [Sharing the Docker Socket]({{site.baseurl}}/enterprise/docker-builder-config/#sharing-the-docker-socket) section of the Docker-based Build Configuration document.
+* It is best practice to use a production-ready Docker configuration with the `overlay`, `btrfs`, or `zfs` filesystem. 
+* If you are using `devicemapper`, it is best practice to change your Docker configuration to use `overlay` or use a `direct-lvm` configuration of `devicemapper`. See the [Docker devicemapper documentation](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/) for more information about problems in production environments.
 
 ## Prerequisites
 
-### 1. Deployment environment specifics
+Ensure the following prerequisites are met before beginning the installation.
 
-CircleCI deployment environment is required to have the following:
+* CircleCI License file (.rli) is available.
+* Hardware has support for a distribution of Linux with Docker, this procedure uses Ubuntu Trusty which is documented at https://circleci.com/docs/1.0/build-image-trusty/.
+* Services and Builders instances have network access to the GitHub or GitHub Enterprise instance.  If running in separate networks, ensure that the GitHub or GitHub Enterprise and the CircleCI server are whitelisted in the firewall, or VPN connections are set up.
+* CircleCI is registered with GitHub as an app, as described the following steps:
 
-* Distro that Docker supports.
-* Access to GitHub Enterprise instance.  If running in separate networks, ensure that GitHub Enterprise and CircleCI Enterprise server are whitelisted in the firewall, or VPN connections are setup.
+1. Log into GitHub or GitHub Enterprise.
+2. Go to the applications page under your organization's settings and click [Register New Application](https://github.com/settings/applications/new).
+3. Enter the desired installation URL as the application URL.
+4. Enter `http(s)://{CircleCI Enterprise domain Here}/auth/github` as the Authorization callback URL. **Note:** The `http(s)` protocol must match the protocol you choose in CircleCI.
 
-### 2. GitHub App Client ID/Secret
+For test installations, it is possible to complete Step 4 after installation using the auto-assigned domain name for the Services instance. 
 
-CircleCI must be registered with GitHub as an app:
+**SECURITY NOTE:** If you use these instructions on EC2 VMs, 
+all builds will have access to the IAM privileges associated with their instance profiles. Do not
+give inappropriate privileges to your instances. It is possible to block
+this access with `iptables` rules in a production setup. If you have any
+questions as you go through these steps, please contact <enterprise-support@circleci.com>.
 
-* Log into GitHub (Enterprise)
-* Visit the applications page under your organization's settings and click ["Register New Application"](https://github.com/settings/applications/new).
+## Installation Steps
 
-* Enter the desired installation URL as the application URL
-* Enter `http(s)://{CircleCI Enterprise domain Here}/auth/github` as the Authorization callback URL.
-	* It is extremely important that the `http(s)` protocol match the protocol you choose in CircleCI.
-
-For test installations, you may punt on this step until you spin up the machines and use auto-assigned domain name for the Services Box here.  Once you setup everything, you can change it later.
-
-## Installation
-
-**SECURITY NOTE:** If you are using these instructions on EC2 VMs, then
-all builds will have access to the IAM privileges associated with their instance profiles. Please do not
-give any inappropriate privileges to your instances. It is possible to block
-this access with iptables rules in a production setup. Please [contact us](mailto:trial-support@circleci.com)
-if you have questions.
-
-
-CircleCI Enterprise installation requires provisioning two types of machines:
-
-* Services box - an instance that is always-on and used as the web server.  The GitHub App domain name needs to map to this instance.
-* A pool of builder machines.  You can have a least one for normal operations, but you can provision as many builders as your scale demands.
-
-
-### 1. Services instance
-
-The services box is recommended to have at least 4 CPUs, 8GB RAM, and ~30GB of disk space.  Your installation may require more.
-
-If you are configuring network security, please ensure you whitelist the following:
+1. Whitelist ports on the Services instance as follows:
 
 
 | Source                      | Ports                   | Use                    |
@@ -63,8 +58,9 @@ If you are configuring network security, please ensure you whitelist the followi
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
 | GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+{: class="table table-striped"}
 
-Once the machine is up, you can ssh in as root (or ubuntu) and run the following:
+2. Log in to the Services instance using ssh as the `root` or `ubuntu` user and run the following command:
 
 ```
 curl -sSL https://get.replicated.com/docker > install.sh
@@ -72,18 +68,9 @@ sudo chmod +x install.sh
 sudo ./install.sh
 ```
 
-Once the script finishes provisioning, you should navigate to <public-ip-address : 8800 > to finish the installation.
+3. After the script finishes provisioning the Services, navigate to <public-ip-address : 8800 > to finish the installation of the Services instance by completing the forms in the application.
 
-### 2. Builder instances
-
-Your initial builder machine is recommended to have:
-
-* 6 CPUs and 10GB of RAM to start 2 containers.
-* One root volume of at least 50GB.
-
-Picking the CPU/RAM combination is mostly dependant on your specific build requirements.  Builders run in containers, each with dedicated 2 CPUs and 4GB RAM by default, and we leave 2 CPUs for our own internal processing.  For example, 6 CPUs and 10GB of RAM defaults to supporting 2 containers/builds concurrently.
-
-If you are configuring network security, please ensure you whitelist the following:
+4. Whitelist ports on the Builders instance as follows:
 
 | Source                           | Ports                   | Use                                                            |
 |----------------------------------|-------------------------|----------------------------------------------------------------|
@@ -91,21 +78,10 @@ If you are configuring network security, please ensure you whitelist the followi
 | Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
-| Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
+| Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         
+{: class="table table-striped"}
 
-
-Notable differences compared to our [Advanced LXC Installation]({{site.baseurl}}/enterprise/on-prem/) are:
-
-* We default to using Ubuntu Trusty container image which is documented at https://circleci.com/docs/1.0/build-image-trusty/
-* The container image is always fetched from Docker Hub.  Launching new builders will be much slower depending on your connection to Docker Hub.
-* Using Docker within builds isn't currently supported without sharing a [Docker Socket]({{site.baseurl}}/enterprise/docker-builder-config/#sharing-the-docker-socket)
-* No second volume is required.
-* By default, specific CPUs are not tied to specific build containers.
-
-
-When using Docker, we recommend that you ensure you're using a production-ready Docker configuration.  Use the `overlay`, `btrfs`, or `zfs` filesystems.  In particular, the `devicemapper` storage engine is known to have problems in production environments, some of which you can read about in the [Docker devicemapper documentation](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/).  If you are using `devicemapper`, we recommend that you either change your Docker configuration to use `overlay` or use `direct-lvm` configuration of `devicemapper`.
-
-Here is a complete list of commands to provision a builder machine:
+5. Log in to the Builders instance using ssh as the `root` or `ubuntu` user and run the following command:
 
 ```
 $ curl -sSL https://get.docker.com | sh
@@ -124,3 +100,18 @@ $ sudo docker run -d -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock \
     -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \ # Only necessary outside of ec2
     circleci/builder-base:1.1
 ```
+
+## Next Steps for Getting Started
+
+1. Click the Open link in the dashboard to go to the CircleCI Enterprise app. The Starting page appears for a few minutes  as the CircleCI application is booting up, then automatically redirects to the homepage.
+1. Sign up or sign in by clicking the Get Started button and then add a project using the [Setting Up Projects]({{site.baseurl}}/enterprise/quick-start/).
+
+## Troubleshooting
+
+Check the Fleet State by clicking the wrench icon on the sidebar navigation of CircleCI and select Fleet State.
+- If no instances appear in the list, then the first builder is still starting. The first build may remain queued while the build containers start.
+- If there is a builder instance in the list but its state is "starting-up", then it is still downloading the build container image and starting its first build containers.
+
+After the build containers start and complete downloading of images, the first build should begin immediately.
+
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI Enterprise support](mailto:enterprise-support@circleci.com) for assistance.
