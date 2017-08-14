@@ -54,55 +54,55 @@ questions as you go through these steps, please contact <enterprise-support@circ
 1. Whitelist ports on the Services instance as follows:
 
 
-| Source                      | Ports                   | Use                    |
-|-----------------------------|-------------------------|------------------------|
-| End Users                   | 80, 443                 | HTTP/HTTPS Traffic     |
-| Administrators              | 22                      | SSH                    |
-| Administrators              | 8800                    | Admin Console          |
-| Builder Boxes               | all traffic / all ports | Internal Communication |
-| GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
-{: class="table table-striped"}
+     | Source                      | Ports                   | Use                    |
+     |-----------------------------|-------------------------|------------------------|
+     | End Users                   | 80, 443                 | HTTP/HTTPS Traffic     |
+     | Administrators              | 22                      | SSH                    |
+     | Administrators              | 8800                    | Admin Console          |
+     | Builder Boxes               | all traffic / all ports | Internal Communication |
+     | GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
+     {: class="table table-striped"}
 
 2. Log in to the Services instance using ssh as the `root` or `ubuntu` user and run the following command:
 
-```
-curl -sSL https://get.replicated.com/docker > install.sh
-sudo chmod +x install.sh
-sudo ./install.sh
-```
+     ```
+     curl -sSL https://get.replicated.com/docker > install.sh
+     sudo chmod +x install.sh
+     sudo ./install.sh
+     ```
 
 3. After the script finishes provisioning the Services, navigate to <public-ip-address : 8800 > to finish the installation of the Services instance by completing the forms in the application.
 
 4. Whitelist ports on the Builders instance as follows:
 
-| Source                           | Ports                   | Use                                                            |
-|----------------------------------|-------------------------|----------------------------------------------------------------|
-| End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/1.0/ssh-build/) |
-| Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
-| Administrators                   | 22                      | SSH                                                            |
-| Services Box                     | all traffic / all ports | Internal Communication                                         |
-| Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         
-{: class="table table-striped"}
+     | Source                           | Ports                   | Use    |                                                               
+     |----------------------------------|-------------------------|---------------------------------------------------|
+     | End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/1.0     /ssh-build/) |
+     | Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)  |
+     | Administrators                   | 22                      | SSH                |                                            
+     | Services Box                     | all traffic / all ports | Internal Communication      |                                   
+     | Builder Boxes (including itself) | all traffic / all ports | Internal Communication         |                                
+     {: class="table table-striped"}
 
 5. Log in to the Builders instance using ssh as the `root` or `ubuntu` user and run the following command:
 
-```
-$ curl -sSL https://get.docker.com | sh
-# How to specify the docker storage driver will vary by distro. You may instead
-# need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
-$ sudo sed -i 's/docker daemon/docker daemon --storage-driver=overlay/' \
-   /usr/lib/systemd/system/docker.service \
-   && sudo systemctl daemon-reload && sudo service docker restart
-# Pre-pulling the build image is optional, but makes it easier to follow progress
-# You can always see the latest at https://circleci.com/docs/1.0/build-image-trusty/#build-image
-$ sudo docker pull circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4
-$ sudo docker run -d -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock \
-    -e CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4" \
-    -e CIRCLE_SECRET_PASSPHRASE=<your passphrase> \
-    -e SERVICES_PRIVATE_IP=<private ip address of services box>  \
-    -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \ # Only necessary outside of ec2
-    circleci/builder-base:1.1
-```
+     ```
+     $ curl -sSL https://get.docker.com | sh
+     # How to specify the docker storage driver will vary by distro. You may instead
+     # need to edit /usr/lib/docker-storage-setup/docker-storage-setup or another config file.
+     $ sudo sed -i 's/docker daemon/docker daemon --storage-driver=overlay/' \
+        /usr/lib/systemd/system/docker.service \
+        && sudo systemctl daemon-reload && sudo service docker restart
+     # Pre-pulling the build image is optional, but makes it easier to follow progress
+     # You can always see the latest at https://circleci.com/docs/1.0/build-image-trusty/#build-image
+     $ sudo docker pull circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4
+     $ sudo docker run -d -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock \
+         -e CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:ubuntu-14.04-XXL-1167-271bbe4" \
+         -e CIRCLE_SECRET_PASSPHRASE=<your passphrase> \
+         -e SERVICES_PRIVATE_IP=<private ip address of services box>  \
+         -e CIRCLE_PRIVATE_IP=<private ip address of this machine> \ # Only necessary outside of ec2
+         circleci/builder-base:1.1
+     ```
 
 ## Next Steps for Getting Started
 

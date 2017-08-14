@@ -82,20 +82,20 @@ This procedure uses the `awscli` to enable CircleCI-installed AWS instances acce
 
 3. To install the Services component, using a `c4.2xlarge` or `c4.4xlarge` instance with an EBS root volume of 30 GB, start one of the following public CircleCI Amazon Machine Images (community AMIs) for the appropriate AWS region:
 
-Region             | AMI
------------------  |-------------
-ap-northeast-1     | ami-32e6d455
-ap-northeast-2     | ami-2cef3242
-ap-southeast-1     | ami-7f22a71c
-ap-southeast-2     | ami-21111b42
-eu-central-1       | ami-7a2ef015
-eu-west-1          | ami-ac1a14ca
-sa-east-1          | ami-70026d1c
-us-east-1          | ami-cb6f1add
-us-east-2          | ami-57c7e032
-us-west-1          | ami-4fc8ee2f
-us-west-2          | ami-c24a2fa2
-{: class="table table-striped"}
+     Region             | AMI
+     -----------------  |-------------
+     ap-northeast-1     | ami-32e6d455
+     ap-northeast-2     | ami-2cef3242
+     ap-southeast-1     | ami-7f22a71c
+     ap-southeast-2     | ami-21111b42
+     eu-central-1       | ami-7a2ef015
+     eu-west-1          | ami-ac1a14ca
+     sa-east-1          | ami-70026d1c
+     us-east-1          | ami-cb6f1add
+     us-east-2          | ami-57c7e032
+     us-west-1          | ami-4fc8ee2f
+     us-west-2          | ami-c24a2fa2
+     {: class="table table-striped"}
 
 
 4. Place the services box in a security group with the following attributes:
@@ -105,20 +105,20 @@ us-west-2          | ami-c24a2fa2
 
 5. To install the Builders cluster, using an `r3.8xlarge` or `r3.4xlarge`, start one of the following public CircleCI AMIs for each Builder (the number you start depends on the number of concurrent runs you want) in the appropriate AWS region. {#builder} **Note:**  CircleCI allocates 4GB per build container by default, consider using spot instances as Builder components.
 
-Region             | AMI
------------------  |-------------
-ap-northeast-1     | ami-eeffcd89
-ap-northeast-2     | ami-8eec31e0
-ap-southeast-1     | ami-5823a63b
-ap-southeast-2     | ami-7c12181f
-eu-central-1       | ami-0f32ec60
-eu-west-1          | ami-821a14e4
-sa-east-1          | ami-3a026d56
-us-east-1          | ami-7d71046b
-us-east-2          | ami-eec5e28b
-us-west-1          | ami-45c8ee25
-us-west-2          | ami-18492c78
-{: class="table table-striped"}
+     Region             | AMI
+     -----------------  |-------------
+     ap-northeast-1     | ami-eeffcd89
+     ap-northeast-2     | ami-8eec31e0
+     ap-southeast-1     | ami-5823a63b
+     ap-southeast-2     | ami-7c12181f
+     eu-central-1       | ami-0f32ec60
+     eu-west-1          | ami-821a14e4
+     sa-east-1          | ami-3a026d56
+     us-east-1          | ami-7d71046b
+     us-east-2          | ami-eec5e28b
+     us-west-1          | ami-45c8ee25
+     us-west-2          | ami-18492c78
+     {: class="table table-striped"}
 
 
 6. Place the Builder instaces in a security group with the following attributes:
