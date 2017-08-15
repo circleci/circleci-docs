@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 section: enterprise
-title: "GPU Builder Installation"
+title: "Installing GPU Builders"
 category: [installation]
 order: 6
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
