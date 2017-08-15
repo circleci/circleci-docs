@@ -13,7 +13,7 @@ This document will describe how to back up your CircleCI Enterprise application 
 
 The primary, recommended mechanism for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the services box (the machine that serves up the end-user-facing CircleCI UI).
 
-**NOTE:** If you are running CircleCI Enterprise in an [HA configuration]({{site.baseurl}}/enterprise/high-availability/), then you will need to use standard backup mechanisms for the external datastores. See the [HA documentation]({{site.baseurl}}/enterprise/high-availability/#mongodb-backups) for more discussion.
+**Note:** If you are running CircleCI Enterprise in an HA configuration, you must use standard backup mechanisms for the external datastores. See the [High Availability]({{site.baseurl}}/enterprise/high-availability/) document for more information.
 
 These backups can be performed without downtime as long the underlying virtual disk supports such an operation (this is true with AWS EBS for example). There is a small risk (that varies by filesystem/distro) that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/enterprise/high-availability/) may be the best solution.
 
