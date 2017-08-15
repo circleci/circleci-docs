@@ -232,7 +232,7 @@ It is possible to configure CPU and RAM resources for each job as described in t
 
 Class       | CPU       | RAM
 ------------|-----------|------
-small       | 1.0 | 1GB
+small       | 1.0 | 2GB
 medium (default) | 2.0 | 4GB
 medium+     | 3.0 | 6GB
 large       | 4.0 | 8GB
