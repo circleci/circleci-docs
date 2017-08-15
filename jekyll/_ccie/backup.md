@@ -1,13 +1,16 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Backing Up CircleCI Enterprise"
+title: "Backing up CircleCI Enterprise"
 category: [advanced-config]
 order: 8
 description: "How to regularly back up CircleCI Enterprise"
 ---
 
-This document will describe how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of the VM containing all of your persistent CircleCI data (the services box).
+This document will describe how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of the VM containing all of your persistent CircleCI data (the services box) in the following sections:
+
+* TOC 
+{:toc}
 
 ## Backing up DB data
 
