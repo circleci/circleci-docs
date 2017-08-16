@@ -27,7 +27,7 @@ To use environment variables set on the Contexts page, the person running the wo
 
 3. Click the Add a Resource button and fill in the variable name and value. Click the Add Variable button to save it.
 
-4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the 'org-global' context.
+4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
 
 ```
 workflows:
@@ -37,6 +37,8 @@ workflows:
       - run-tests:
             context: org-global
 ```
+
+To rerun a job and use the context, it must be rerun from the Workflows page of the CircleCI application. Jobs invoked using the Rebuild button on the Builds page will **not** use the context defined in the workflow. 
 
 **Note:** Environment variables are considered in a specific order, as follows:
 1. Project-level environment variables set on the Project Settings page.
