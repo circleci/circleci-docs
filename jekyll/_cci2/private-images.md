@@ -7,7 +7,17 @@ categories: [containerization]
 order: 50
 ---
 
-To use private images, you must activate the Remote Docker Environment with the `setup_remote_docker` step in your `config.yml` file.
+To use private images, specify the username and password in the `auth` field.  To protect the password, create an Environment Variable in the CircleCI Project Settings page and then reference it:
+
+```YAML
+jobs:
+  build:
+    docker:
+      - image: acme-private/private-image:321
+        auth:
+          username: mydockerhub-user  # can specify string literal values
+          password: $DOCKERHUB_PASSWORD  # or project environment variable reference
+```
 
 The following is an example of an application that requires a private image called `proprietary-db` for testing:
 
@@ -20,7 +30,6 @@ jobs:
     working_directory: ~/my_app
     steps:
       - checkout
-      - setup_remote_docker
 
       # start proprietary DB using private Docker image
       - run: |
