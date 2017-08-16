@@ -31,7 +31,7 @@ To determine the size required for your workload, provision two CPUs for process
 It is possible to install the Enterprise CircleCI solution in either of the following configurations:
 
 - A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services Manually]({{ site.baseurl }}/enterprise/aws-manual/) or [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/enterprise/aws/) for instructions.
-- Two Services machines for HA with one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/enterprise/high-availability/) for instructions.
+- A single Services machine with four database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/enterprise/high-availability/) for instructions.
 
 ## Customer Use Cases 
 
