@@ -1,15 +1,20 @@
 ---
 layout: enterprise
 section: enterprise
-title: "GPU Builder Installation"
-category: [advanced-config]
+title: "Installing GPU Builders"
+category: [installation]
 order: 6
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
-## GPU Install Instructions 
+This document list the various commands you can use to install GPUs that may be accessed by containers running in your fleet in the following sections:
 
-The following steps are the same whether you have an LXC based builder or a Docker based builder. They diverge later on.
+* TOC 
+{:toc}
+
+## Steps
+
+Complete the following steps on an LXC-based builder or a Docker-based builder. 
 
 1.)`wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb`
 
@@ -33,6 +38,8 @@ sudo apt-get --yes --force-yes install cuda
 ```
 
 ### Docker
+
+Complete the following steps for Doccker-based builders, for LXC-based builders, skip to the next section.
 
 1.) Using our image builder, add this to the dockerfile of the image you wish to build
 
@@ -135,8 +142,7 @@ See here for a working sample project
     
 ### LXC
 
-This is only supported in releases after ( 1.47.0 +). If you need help upgrading, please reach out to enterprise-support@circleci.com
-
+Complete the following steps on an LXC-based builder running a release after ( 1.47.0 +). Contact <enterprise-support@circleci.com> for upgrade assistance.
 
 
 1.) Run `nvidia-smi` 
@@ -191,19 +197,19 @@ sudo -E \
 
 
 
-11.) In your circle.yml/image you'll want to do the following 
+11.) In your circle.yml/image run the following commands to install the driver without making kernel changes:
 
     - wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
     - sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
     - sudo apt-get update
     - sudo apt-get --yes --force-yes install cuda
 
-   this will install the driver without making kernel changes 
+## Update the Test Section     
 
-Then in your circle.yml test section, you'll need to add 
+Finally, in your circle.yml test section, add the following:
 
     - export PATH=/usr/local/cuda-8.0/bin:$PATH
     - export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
 
     
-Now you'll have GPU access in your products!
+GPU access is made available to your projects.

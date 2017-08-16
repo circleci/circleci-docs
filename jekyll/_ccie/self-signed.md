@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 section: enterprise
-title: Self-Signed SSL Certificates
+title: Using Self-Signed SSL Certificates
 category: [advanced-config]
 order: 4.5
 published: true

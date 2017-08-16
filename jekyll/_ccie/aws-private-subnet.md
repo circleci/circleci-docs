@@ -1,10 +1,10 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Private Subnets on AWS"
+title: "Using Private Subnets on AWS"
 category: [advanced-config]
 order: 3
-description: "Information on private subnets in AWS."
+description: "Information on private subnets in AWS"
 ---
 
 Private subnets on AWS are supported, but please make sure to use the following settings:

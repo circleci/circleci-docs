@@ -1,7 +1,7 @@
 ---
 layout: enterprise
 section: enterprise
-title: "Docker-based Builder Configuration"
+title: "Setting Builder Machine Environment Variables"
 category: [advanced-config]
 order: 0
 ---
