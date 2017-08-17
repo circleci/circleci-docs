@@ -124,7 +124,8 @@ Both the MongoDB and PostgreSQL databases are exported.
 
 1. Untar the exported database files.
 
-     ```tar xf $EXPORT_FILE
+     ```
+     tar xf $EXPORT_FILE
      ```
 
 1. On the Services machine where you ran the export script, use the following `mongorestore` command to restore the database replacing the variables with the circle-admin user credentials and the location of the new MongoDB hosts.
