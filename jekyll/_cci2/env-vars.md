@@ -12,7 +12,7 @@ This document describes using environment variables in CircleCI in the following
 * TOC
 {:toc}
 
-## Adding Enviroment Variables in the App
+## Adding Environment Variables in the App
 
 To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project.
 
@@ -20,7 +20,7 @@ To add keys or secret environment variables to your private project, use the Env
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
-## Adding Enviroment Variables in the config.yml File
+## Adding Environment Variables in the config.yml File
 
 To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
 
@@ -74,7 +74,7 @@ jobs:
 
 See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
 
-## Interpolating Enviroment Variables to Set Other Environment Variables
+## Interpolating Environment Variables to Set Other Environment Variables
 
 If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.  As an example, you could add an entry to the `$PATH` as follows:
 
