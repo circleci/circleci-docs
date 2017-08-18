@@ -1,73 +1,28 @@
 ---
 layout: enterprise
-title: "High Availability"
-category: [advanced-config]
+title: "Adding External Database Hosts for High Availability"
+category: [installation]
 order: 8
 description: "Configuring High Availability for CircleCI Enterprise"
 ---
 
-## Contents 
+This document describes how to to set up a highly available CircleCI Enterprise installation in the following sections:
 
-1. [Overview](#overview)
-2. [Exporting Existing Databases](#exporting-existing-databases)
-3. [Administering MongoDB](#administering-mongodb)
-4. [Administering PostgreSQL](#administering-postgresql)
-5. [High Availibility Configuration](#high-availability-configuration)
-6. [Troubleshooting](#troubleshooting)
+* TOC
+{:toc}
 
 ## Overview
 
-This document outlines the elements necessary to set up a high-availability CircleCI Enterprise installation. At a high level, this requires an auto-recovering "services box", for which we recommend using an AWS ASG (Auto Scaling Group) of one member, and external MongoDB and PostgreSQL databases to handle the persistent state. The sections below step through each of these elements in detail.
+The steps in this document assume you have an existing CircleCI Enterprise Services machine and Builders in use. To configure your existing CircleCI enterprise solution for high availability, you must export the databases currently in use on the Services machine to new AWS instances. This procedure uses three instances for the MongoDB replica set and a new AWS instance ASG (Auto Scaling Group) for PostgreSQL.
 
+After completing these procedures, the security, maintenance, and backups required for the external databases will require knowledge of MongoDB and PostgreSQL sufficient for your organization to own this responsibility and perform all related tasks. The benefit of completing this configuration is the ability to replicate your CircleCI data and to automate recovery from a single database instance failure without downtime or loss of services. 
 
-## Exporting Existing Databases
+## MongoDB Instance Requirements
 
-**Disclaimer:** Please note that, while CircleCI Enterprise supports the use of external databases, the maintenance, availability, and security of the database servers are the responsibility of your organization. 
-
-**Note:** This process will require downtime. Please schedule an outage window with your team. 
-
-1. Log into the Replicated console located at HTTPS://<YOUR_CIRCLE_URL>:8800/dashboard and select "Stop" to shut down the CircleCI application. 
-2. SSH into the services box and switch to the root user with `sudo su`
-3. Make sure that no other Mongo or PostgreSQL containers are running. You can see all of the containers that are running with `docker ps`. 
-4. Download and run the export script using the commands below. This will export both the MongoDB and PostgreSQL databases. This could take a while depending on the amount of data that is currently stored. 
-```shell
-wget https://s3.amazonaws.com/release-team/scripts/circleci-database-export
-chmod +x circleci-database-export
-./circleci-database-export
-```
-5. Once the backup process is complete, you will find a tarball in the directory where you ran the script. 
-
-### Restoring the Databases 
-
-**Note:** The process to restore the datbases may vary based on your database configuration. Please use the following sections as general guidelines. 
-
-Please run the following commands from the services box where you ran the backup scripts. This will ensure that the services box is able to communicate with your external database servers. You should untar the export files from the previous step before attempting to restore. `tar xf $EXPORT_FILE`. 
-
-#### Restoring MongoDB
-
-1. Use `mongorestore` to restore the database
-```
-sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
-```
-
-#### Restoring PostgreSQL 
-
-1. Use `psql` to restore the database 
-```
-psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI.sql
-```
-
-## Administering MongoDB
-
-This section provides a sample configuration for external Mongo databases with CircleCI.
-
-CircleCI supports MongoDB version 3.2.x (currently 3.2.11) and uses WiredTiger 3.2 as the backend storage engine for the production SaaS application. 
-
-To maximize performance, use hosts with more memory for MongoDB. Ideally size server RAM to fit all data  and indexes that will be accessed regularly. The r3 series is a good option for high memory within the AWS fleet.
-
-Use mounted EBS volumes for MongoDB data, for example, Provisioned IOPs volumes at 10k-20k IOPs adjusted for your individual load. Configure each host the same way regardless of whether it is initially the primary or a secondary to avoid degradation when roles change.
-
-Consider using TLS for all communication with MongoDB, for example, between clients and MongoDB and between members of the MongoDB replica set. It is also possible to use an internally generated CA to create certificates and to deploy the root certificate to all clients and MongoDB instances.
+CircleCI supports MongoDB version 3.2.x (currently 3.2.11) and uses WiredTiger 3.2 as the backend storage engine. Consider the following when setting up your external database hosts:
+- To maximize performance, use hosts with more memory for MongoDB. Ideally size server RAM to fit all data and indexes that will be accessed regularly. The AWS R3 series is a good option for high memory within the AWS fleet.
+- Use mounted EBS volumes for MongoDB data, for example, provision IOPs volumes at 10k-20k IOPs adjusted for your individual load. Configure each host the same way regardless of whether it is initially the primary or a secondary to avoid degradation when roles change.
+- Consider using TLS for all communication with MongoDB, for example, between clients and MongoDB and between members of the MongoDB replica set. It is also possible to use an internally generated CA to create certificates and to deploy the root certificate to all clients and MongoDB instances.
 
 Following is a template for the configuration on each host in the replica set:
 
@@ -104,9 +59,9 @@ net:
 
 ### Setting Up the MongoDB hosts
 
-If you are brand new to MongoDB we suggest reviewing the [MongoDB on the AWS Cloud](https://docs.aws.amazon.com/quickstart/latest/mongodb/welcome.html) documentation which includes a ready to deploy CloudFormation configuration for you to use. 
+If you are brand new to MongoDB, see the [MongoDB on the AWS Cloud](https://docs.aws.amazon.com/quickstart/latest/mongodb/welcome.html) documentation which includes a ready to deploy CloudFormation configuration for you to use. 
 
-1. Write the respective .pem SSL certificate file from above to each host in the location used in your config.
+1. Write the respective `.pem` SSL certificate file from above to each host in the location used in your configuration.
 2. Add all three hosts to DNS.
 3. On the host which will become the initial PRIMARY do the following: 
     * Comment out the SSL, auth, and replication sections in the configuration and restart.
@@ -124,7 +79,7 @@ If you are brand new to MongoDB we suggest reviewing the [MongoDB on the AWS Clo
     * Exit the client, uncomment the configuration, and restart.
     * Reconnect to client as circle-admin and run the rs.initiate() command.
 	
-    **Note:** If you are using AWS and the first hostname resolves to something that is AWS-internal and your PRIMARY adopts that as its name, you must rename your host before extending the replica set by following the instructions [here](https://docs.mongodb.com/v3.2/tutorial/change-hostnames-in-a-replica-set/#change-all-hostnames-at-the-same-time).
+    **Note:** If you are using AWS and the first hostname resolves to something that is AWS-internal and your PRIMARY adopts that as its name, you must rename your host before extending the replica set by following the instructions [Change All Hostnames in a Replica Set](https://docs.mongodb.com/v3.2/tutorial/change-hostnames-in-a-replica-set/#change-all-hostnames-at-the-same-time) article.
 
 6. To add the remaining two hosts to the replica set, issue the following commands: 
     ```
@@ -141,24 +96,54 @@ If you are brand new to MongoDB we suggest reviewing the [MongoDB on the AWS Clo
                              { role: "readWrite", db: "containers_dev_ghe" } ] })
     ```
 
-### MongoDB Backups
+## Setting up PostgreSQL Hosts
 
-This section describes how to backup data mounted on EBS volumes.
+It is best practice to set up PostgreSQL using Amazon Relational Database Service (Amazon RDS) with multi Availability Zone (multi-AZ) mode for automated backups and failover. Refer to the [Amazon RDS Multi-AZ Deployments](https://aws.amazon.com/rds/details/multi-az/) documentation for details.
 
-1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **NOTE:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
-2. Use the AWS console or CLI to generate and complete a snapshot.
-3. To rejoin the replica set as a SECONDARY, restart the mongodb  process with `sudo service mongod start`.
-4. The SECONDARY begins serving traffic after replication catches up. 
+## Exporting Existing Databases
 
-## Administering PostgreSQL
+**Note:** This process will require downtime. Please schedule an outage window with CircleCI users. 
 
-It is assumed that users of the initial high-availability offering will use RDS on AWS, with multi-AZ mode and automated backups. Please let us know if any additional information is required for configuring and maintaining Postgres.
+1. Log in to the Replicated console located at https://<YOUR_CIRCLE_URL>:8800/dashboard and select Stop to shut down the CircleCI application. 
+2. SSH in to the Services machine and switch to the `root` user with the `sudo su` command.
+3. Confirm that all MongoDB and PostgreSQL containers have stopped by listing all running containers with the `docker ps` command. 
+4. Download and run the export script using the commands below. The duration of the export operation depends on the amount of stored data.
+     ```shell
+     wget https://s3.amazonaws.com/release-team/scripts/circleci-database-export
+     chmod +x circleci-database-export
+     ./circleci-database-export
+     ```
+Both the MongoDB and PostgreSQL databases are exported. 
+5. After the backup process is complete, a `.tar` file appears in the directory where you ran the script. 
 
-## High Availability Configuration
+## Restoring the Databases on the New Hosts
 
-Making the services box automatically recover from failure means replacing it with an ASG of a single member, where the associated userdata entirely specifies how to install and configure Replicated and connect to the external databases.
+**Note:** The process to restore the databases may vary based on your database configuration. Use the following sections as general guidelines. This process ensures that the Services machine is able to communicate with your external database servers. 
 
-A working example of this can be found at [https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf](https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf). Note in particular the userdata for the services box launch configuration: 
+### Restoring MongoDB and PostgreSQL
+
+1. Untar the exported database files.
+
+     ```
+     tar xf $EXPORT_FILE
+     ```
+
+1. On the Services machine where you ran the export script, use the following `mongorestore` command to restore the database replacing the variables with the circle-admin user credentials and the location of the new MongoDB hosts.
+     ```
+     sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
+     ```
+
+1. On the Services machine where you ran the export script, use the following `psql` command to restore the database replacing the variables with the approrpiate user credentials and the name of the PostgreSQL database.
+
+     ```
+     psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI.sql
+     ```
+
+## Configuring Automatic Recovery
+
+To enable the Services machine to automatically recover from failure, replace it with an AWS Auto Scaling Group (ASG) containing a single member. Then, configure the associated userdata for this member to specify how to install and configure Replicated and connect to the external databases as shown in the following file snippets.
+
+Refer to the [https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf](https://github.com/circleci/enterprise-setup/blob/ha-test/circleci.tf) for a complete example. The userdata for the Services machine launch configuration describes the set of files in the following sections. 
 
 ```
 #!/bin/bash
@@ -178,9 +163,7 @@ startup() {
 time startup
 ``` 
 
-The contents of the files pulled from S3 are as follows: 
-
-circle-installation-customizations:
+Following is the content of the `circle-installation-customizations` file:
 ```
 # Note that connection strings below should be modified as necessary
 
@@ -195,7 +178,7 @@ export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe
 export CIRCLE_SECRETS_POSTGRES_MAIN_URI='postgres://circle:<password>@<hostname>:5432/circle'
 ```
 
-replicated.conf:
+Following is the content of the `replicated.conf` file:
 ```
 {
   "DaemonAuthenticationType": "password",
@@ -210,7 +193,7 @@ replicated.conf:
 }
 ```
 
-settings.conf:
+Following is the content of the `settings.conf` file:
 ```
 {
  "hostname": {
@@ -250,22 +233,14 @@ settings.conf:
 }
 ```
 
-Note that you can dump the contents of settings.conf from an existing CircleCI installation by running `replicated app <app id> settings` on the services box. 
+It is also possible to retrieve the contents of `settings.conf` from an existing CircleCI installation by running `replicated app <app id> settings` on the Services machine. The `license.rli` is the CircleCI Enterprise license file. 
 
-license.rli is the CircleCI Enterprise license file. 
+### Troubleshooting
 
-## Troubleshooting
+* The various configuration files must be added to the Services machine before Replicated is installed. It may be possible to speed up the initial boot time by pre-pulling the CircleCI docker containers and adding them into the AMI. 
+* The Replicated installation process will automatically pull the latest stable CircleCI release. To prevent inadvertantly upgrading CircleCI, it is possible for your versions to be pinned by CircleCI on the license service. 
 
-### Known Issues
-
-* The various config files must be dropped in place on the host before Replicated is installed, so Replicated needs to be installed on demand. It may be possible to speed up the initial boot time by pre-pulling the CircleCI docker containers and baking them into the AMI. 
-* The Replicated installation process will automatically pull the latest stable CircleCI release. To prevent inadvertantly upgrading CircleCI, it is possible for customer versions to be pinned by CircleCI on the license service. The ability to specify a specific version client-side is coming soon from Replicated. 
-
-### Other Possible Issues
-
-#### The Dashboard is stuck on `Waiting for app to report ready...`
-
-It can take several minutes for CircleCI to start. However, if it seems to be stuck, it's typically the result of an issue with the URI for either MongoDB or PostgreSQL. Some examples include:
+It can take several minutes for CircleCI to start. However, if it seems to be stuck, check the URI for either MongoDB or PostgreSQL. Some examples of common issues related to the URI include:
 
 * A network issue between one of your database server(s) and the Services host
 * A malformed URI
@@ -273,8 +248,18 @@ It can take several minutes for CircleCI to start. However, if it seems to be st
 * Improper configuration settings for the database
 * The database refusing connections from outside sources and restricted to localhost
 	
-You can gain more insight by checking the logs on the main CircleCI app container with the following command:
+Additionally, check the logs on the main CircleCI app container with the following command:
 
 ```
 docker logs -f frontend
 ```
+
+## Backing Up MongoDB 
+
+Regularly backup data mounted on EBS volumes using the following steps:
+
+1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **NOTE:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
+2. Use the AWS console or CLI to generate and complete a snapshot.
+3. To rejoin the replica set as a SECONDARY, restart the mongodb  process with `sudo service mongod start`.
+4. The SECONDARY begins serving traffic after replication catches up. 
+
