@@ -5,6 +5,7 @@ title: Using Self-Signed SSL Certificates
 category: [advanced-config]
 order: 4.5
 published: true
+hide: true
 ---
 
 By default, all machines in a CircleCI Enterprise installation verify SSL
