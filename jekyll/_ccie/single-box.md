@@ -75,16 +75,34 @@ for specific instructions.
 <script>amiUpdateSelect();</script>
 </li>
 
-<li>During the Configure Security Group step, open ports 22, 80, 443, and 8800.
+<li>During the Configure Security Group step, open port 22 for SSH, 80 for HTTP, 443 for HTTPS, and 8800 for Custom TCP.
 </li>
 
-<li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535.
+<li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 </li>
 
-<li>After the VM is lauched, go to the public or private IP address or hostname for the VM to complete the rest of the guided installation process.
+<li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process.
 </li> 
 
-<li>Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames, enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+<li>Choose an SSL certificate option. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
+or using a custom CA root, select the "HTTPS (with self-signed certificate)" option in the System Console at port 8800.
+You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines replacing `insecure-ghe.example.com` with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+</li>
+
+<li>
+Upload the license file and set the admin password.
+</li>
+<li>
+Register CircleCI as a new OAuth application in GitHub at <https://github.com/settings/applications/new> using the IP address of the AWS instance from Step 4 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+</li>
+<li>
+Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
+</li>
+<li>
+Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
+</li>
+<li>
+Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
 </li>
 
 <li>Open the CircleCI Enterprise app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
