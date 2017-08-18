@@ -67,10 +67,15 @@ prerequisites stated above in the required fields.
 	- **OSX:** Run the `bin/terraform apply` command and follow the prompts.
 1. Go to the URL output from Terraform and click Get Started.
 1. Trust the temporary SSL cert.
-1. Use a new or exisiting self-signed certificate.
+1. Use a new or exisiting self-signed certificate. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
+or using a custom CA root, select the "HTTPS (with self-signed certificate)" option in the System Console at port 8800.
+You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines replacing `insecure-ghe.example.com` with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
 1. Upload your CircleCI license.
 1. Secure the console with a password.
-1. Complete the settings form.
+1. Register CircleCI as a new OAuth application in GitHub at <https://github.com/settings/applications/new> using the IP address of the AWS instance for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+1. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
+1. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
+1. Agree to the license agreement. 
 1. Save and start the CircleCI application. The System Console Dashboard appears with an indication that the app has started as shown in the following image.
 
 <img src="{{site.baseurl}}/assets/img/docs/started.png" alt="Look For 'Open'" width="150" style="margin: 10px; margin-left: 200px">
