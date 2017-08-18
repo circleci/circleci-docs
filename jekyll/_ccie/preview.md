@@ -79,6 +79,7 @@ Once you have received a Preview license from your account team, the following i
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
                 "cloudwatch:*",
+                "autoscaling:DescribeAutoScalingGroups",
                 "iam:GetUser"
             ],
             "Resource": [
