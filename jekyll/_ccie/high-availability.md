@@ -237,7 +237,7 @@ It is also possible to retrieve the contents of `settings.conf` from an existing
 
 ### Troubleshooting
 
-* The various configuration files must be added to the ASG host before Replicated is installed. It may be possible to speed up the initial boot time by pre-pulling the CircleCI docker containers and adding them into the AMI. 
+* The various configuration files must be added to the Services machine before Replicated is installed. It may be possible to speed up the initial boot time by pre-pulling the CircleCI docker containers and adding them into the AMI. 
 * The Replicated installation process will automatically pull the latest stable CircleCI release. To prevent inadvertantly upgrading CircleCI, it is possible for your versions to be pinned by CircleCI on the license service. 
 
 It can take several minutes for CircleCI to start. However, if it seems to be stuck, check the URI for either MongoDB or PostgreSQL. Some examples of common issues related to the URI include:
