@@ -8,7 +8,7 @@ description: "Pre-release access to CircleCI 2.0 functionality behind your firew
 hide: true
 ---
 
-CircleCI 2.0 is new infrastructure that provides the following improvements:
+CircleCI 2.0 provides new infrastructure that includes the following improvements:
 * New configuration paradigm with any number of jobs and workflows to orchestrate them. 
 * Custom images for execution on a per-job basis.
 * Fine-grained performance with custom caching and per-job CPU or memory allocation.
@@ -16,7 +16,7 @@ CircleCI 2.0 is new infrastructure that provides the following improvements:
 To participate in the preview release, contact your Account team.
 
 ## Private Preview Limitations 
-Set up a trial of the new platform with the expectation that it will update frequently (daily releases) and that you will be asekd to provide regular feedback on the installation process, the performance profile of your installation, and any other issues that arise.
+Set up a trial of the new platform with the expectation that it will update frequently (daily releases) and that you will be asked to provide regular feedback on the installation process, the performance profile of your installation, and any other issues that arise.
 
 The 2.0 preview release has the following constraints:
 
@@ -34,7 +34,7 @@ Later this year, when General Availability (GA) is announced, all customers with
 After you have received a Preview license from your account team, use the following instructions to set up your trial installation.
 
 ## Prerequisites
-Hava available the following information and policies before starting the Preview Release installation:
+Have available the following information and policies before starting the Preview Release installation:
 
 * If you use network proxies, contact your Account team before attempting to install the Preview Release.
 * Access to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services.
@@ -132,7 +132,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-9. Configure the vm-service as follows. The AWS User needs to have the following permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions. The region/subnet/sercurity group will be filled automatically.
+9. Configure the vm-service as follows. The AWS User needs to have the following permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions. The region/subnet/security group will be filled automatically.
      ``` JSON
      {
          "Version": "2012-10-17",
@@ -167,7 +167,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-10. From the main replicated dashboard, click Start to start the application. It will take a few minutes to download all of the necesary docker containers. If Replicted reports that `Failure reported from operator: no such image` click Start again and it should continue. 
+10. From the Management Console, click Start to start the application. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue. 
 11. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Manual Installation
@@ -230,7 +230,7 @@ Have available the following resources before beginning manual installation of t
          ]
      }
      ```
-6. Configure the vm-service. AWS User need to have this permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions.
+6. Configure the vm-service. The AWS user needs to have these permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions.
      ``` JSON
      {
          "Version": "2012-10-17",
@@ -276,7 +276,7 @@ Have available the following resources before beginning manual installation of t
 
 ## Upgrading MongoDB
 
-CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database, for example, your existing 1.0 install or any Preview version from `Preview3` or older, you must use the following steps to upgrade your Mongo database. 
+CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database from your existing 1.0 installation or any Preview version from `Preview3` or older, you must use the following steps to upgrade your Mongo database:
 
 1. Stop CircleCI from the Replicated console. 
 2. SSH into the Services instance.
