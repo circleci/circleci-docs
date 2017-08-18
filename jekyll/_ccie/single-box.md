@@ -85,15 +85,15 @@ for specific instructions.
 </li> 
 
 <li>Choose an SSL certificate option. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
-or using a custom CA root, select the "HTTPS (with self-signed certificate)" option in the System Console at port 8800.
-You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines replacing `insecure-ghe.example.com` with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
+You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
 </li>
 
 <li>
 Upload the license file and set the admin password.
 </li>
 <li>
-Register CircleCI as a new OAuth application in GitHub at <https://github.com/settings/applications/new> using the IP address of the AWS instance from Step 4 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+Register CircleCI as a new OAuth application in GitHub.com at <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 4 for the Homepage URL and using <code>http(s)://AWS instance IP address/auth/github</code> as the Authorization callback URL. Click the Register Application button.
 </li>
 <li>
 Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
