@@ -49,35 +49,15 @@ jobs:
       # Get the code from the VCS provider.
       - checkout
 
-      # Restore all cached files.
-      - restore_cache:
-          keys:
-          - v1-gems-{{ checksum "Gemfile.lock" }}
-          # Fall back to using the latest cache if no exact match is found.
-          - v1-gems-
-
-      # Install dependencies.
-      - run:
-          name: Bundle install
-          command: bundle check || bundle install
-          environment:
-            BUNDLE_JOBS: 4
-            BUNDLE_RETRY: 3
-            BUNDLE_PATH: vendor/bundle
-
-      - save_cache:
-          key: v1-gems-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
+      # Install CocoaPods.
       - run:
           name: Install CocoaPods
-          command: bundle exec pod install
+          command: pod install
 
       # Run tests.
       - run:
           name: Run tests
-          command: bundle exec fastlane scan
+          command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
@@ -86,7 +66,7 @@ jobs:
       # and save the same XML files under test-results folder
       # in the Artifacts tab.
       - store_test_results:
-          path: test_output/report.junit
+          path: test_output/report.xml
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
@@ -110,7 +90,7 @@ jobs:
       # Build the release version of the app.
       - run:
           name: Build IPA
-          command: bundle exec fastlane gym
+          command: fastlane gym
 
       # Store the IPA file in the build artifacts
       - store_artifacts:
@@ -120,7 +100,7 @@ jobs:
       # Deploy!
       - run:
           name: Deploy to App Store
-          command: bundle exec fastlane spaceship
+          command: fastlane spaceship
 
 workflows:
   version: 2
