@@ -139,9 +139,8 @@ gem 'cocoapods'
 
 ### Credentials for code signing via Fastlane Match
 
-For 2.0 we are deprecating our automated code signing support and
-instead recommend using Fastlane Match to manage code signing
-certificates in your iOS projects.
+For 2.0 we don't support automated code signing, and instead we recommend
+using Fastlane Match to manage code signing certificates in your iOS projects.
 
 It is best to set up code signing once you have a successful `build` job
 in your iOS project on CircleCI.
