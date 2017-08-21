@@ -196,8 +196,7 @@ jobs:
 ```
 
 You can see all the available step types in [this doc]({{ site.baseurl }}/2.0/configuration-reference/).
-Please mind that not all build steps might be available in the macOS
-builds.
+Please bear in mind that Docker support is not available in the macOS builds.
 
 ### Checking out the project code
 
