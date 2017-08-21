@@ -248,7 +248,8 @@ beyond `checksum`.
 
 ### Running tests
 
-We recommend using Fastlane Scan to run your tests:
+We recommend using [Fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan)
+to run your tests:
 
 ```
 jobs:
