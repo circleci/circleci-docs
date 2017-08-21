@@ -154,8 +154,8 @@ permissions to access your certificates repo on GitHub. You can do that
 by going to your CircleCI Project Settings -> Checkout SSH Keys -> Add
 User Key -> Authorize with GitHub.
 
-Please mind that this will allow CircleCI access to _all_ of your
-private repos.
+Please bear in mind that this will allow CircleCI access to _all_ of
+your private repos.
 
 Once you have configured the User Key in the project settings, CircleCI
 will be able to fetch the certificates from GitHub.
