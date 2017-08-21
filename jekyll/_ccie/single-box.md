@@ -20,7 +20,7 @@ The following requirements must be met for successful trial installation:
 - [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI Enterprise and GitHub must be able to reach each other on the network.
-- CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [contact us](mailto:trial-support@circleci.com) for instructions.
+- CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [contact us](mailto:trial-support@circleci.com) or see the [Setting up HTTP Proxies]({{site.baseurl}}/enterprise/proxy/) document for instructions.
 
 ## Steps for Installation on AWS EC2 
 
