@@ -145,7 +145,7 @@ using Fastlane Match to manage code signing certificates in your iOS projects.
 It is best to set up code signing once you have a successful `build` job
 in your iOS project on CircleCI.
 
-Check out the Fastlane Match [getting started guide](https://github.com/fastlane/fastlane/tree/master/match#usage)
+Check out the Fastlane Match [getting started guide](https://codesigning.guide/)
 for the exact steps for setting up a Match repo and storing your
 certificates in it.
 
