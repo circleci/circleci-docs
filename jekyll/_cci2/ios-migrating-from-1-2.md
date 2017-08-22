@@ -19,14 +19,18 @@ project from CircleCI 1.0 to 2.0.
 With the release of CircleCI 2.0 for macOS, your iOS projects can now
 benefit from the improvements in our 2.0 platform, including:
 
-* Workflows: Orchestrate jobs and steps with great flexibility using a
-  simple set of new keys in your configuration.
+* [Workflows](https://circleci.com/docs/2.0/workflows/): Orchestrate
+  jobs and steps with great flexibility using a simple set of new keys
+  in your configuration. Increase the development speed through faster
+  feedback, shorter reruns, and more efficient use of resources.
 
-* Advanced caching: Speed up builds by caching files from run to run
-  using keys that are easy to control with granular caching options for
-  cache save and restore points throughout your jobs. Cache any files
-  from run to run using keys you can control.
+* (Advanced caching)[https://circleci.com/docs/2.0/caching/]: Speed up
+  builds by caching files from run to run using keys that are easy to
+  control with granular caching options for cache save and restore
+  points throughout your jobs. Cache any files from run to run using
+  keys you can control.
 
+## Example 2.0 iOS Project Configuration
 ## Full example of the configuration
 
 This sample configuration file should work for most iOS projects on
