@@ -24,7 +24,7 @@ These instructions assume an unauthenticated HTTP proxy at `10.0.0.33:3128`, a S
 
 The Service machine has many components that need to make network calls, as follows:
 
-- **External Network Calls** - Replicated is a vendor service that we use for the Management Console of CircleCI. CircleCI  requires Replicated to make an outside call to validate the license. Replicated also downloads docker, installs it on the local machine, and uses a Docker container to create and configure S3 buckets.
+- **External Network Calls** - Replicated is a vendor service that we use for the Management Console of CircleCI. CircleCI  requires Replicated to make an outside call to validate the license, check for updates, and download upgrades. Replicated also downloads docker, installs it on the local machine, and uses a Docker container to create and configure S3 buckets.
    
 - **Internal Network calls**  
   - If S3 traffic requires going through an HTTP proxy, CircleCI must pass proxy settings into the container.
