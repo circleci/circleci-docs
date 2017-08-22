@@ -7,7 +7,7 @@ order: 8
 description: "How to regularly back up CircleCI Enterprise"
 ---
 
-This document describes how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of the Services machine VM that contains CircleCI data in the following sections:
+This document describes how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of CircleCI data attached to the Services machine:
 
 * TOC 
 {:toc}
@@ -16,11 +16,11 @@ This document describes how to back up your CircleCI Enterprise application so t
 
 ## Backing up the Database
 
-The best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/enterprise/high-availability/) may be the best solution.
+If you have **not** configured CircleCI for HA, the best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/enterprise/high-availability/) may be the best solution.
 
 ## Backing up Object Storage
 
-Build artifacts, output, and caches are generally stored in object storage services like AWS S3. These services are considered highly redundant and unnecessary to backup for backup or recovery purposes. An exception is if your instance is setup to store large objects locally on the Services machine, either directly on-disk or on an NFS volume. In this case, you must separately back these files up and ensure they are mounted back to the same location on restore.
+Build artifacts, output, and caches are generally stored in object storage services like AWS S3. These services are considered highly redundant and are unlikely to require separate backup. An exception is if your instance is setup to store large objects locally on the Services machine, either directly on-disk or on an NFS volume. In this case, you must separately back these files up and ensure they are mounted back to the same location on restore.
 
 ## Snapshotting on AWS EBS
 
