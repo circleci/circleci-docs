@@ -31,7 +31,6 @@ benefit from the improvements in our 2.0 platform, including:
   keys you can control.
 
 ## Example 2.0 iOS Project Configuration
-## Full example of the configuration
 
 This sample configuration file should work for most iOS projects on
 CircleCI 2.0:
@@ -164,8 +163,8 @@ permissions to access your certificates repo on GitHub. You can do that
 by going to your CircleCI Project Settings -> Checkout SSH Keys -> Add
 User Key -> Authorize with GitHub.
 
-Please bear in mind that this will allow CircleCI access to _all_ of
-your private repos.
+*Warning*: Please bear in mind that adding a user key will allow
+CircleCI access to _all_ of your private repos.
 
 Once you have configured the User Key in the project settings, CircleCI
 will be able to fetch the certificates from GitHub.
@@ -174,8 +173,8 @@ will be able to fetch the certificates from GitHub.
 
 ### Job Name and Xcode Version
 
-In the 2.0 config file the first few lines specify the name of the job
-we will be running for you, and the Xcode version to use:
+In the 2.0 `.circleci/config.yml` file the first few lines specify the
+name of the job and the Xcode version to use:
 
 ```
 version: 2
