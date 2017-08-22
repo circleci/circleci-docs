@@ -113,7 +113,7 @@ This section provides an overview of the possible team and individual account ch
 
 ## How to Re-enable CircleCI for a GitHub Organization
 
-This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GttHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
+This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
 
 * "Request access" if you are not an admin for the organization in question (an admin will have to approve the request) or
 * "Grant access" if you are an admin
