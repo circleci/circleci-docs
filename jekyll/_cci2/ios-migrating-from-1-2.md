@@ -4,7 +4,7 @@ title: "Migrating Your iOS Project From 1.0 to 2.0"
 short-title: "Migrating your iOS project from 1.0 to 2.0"
 description: "How to migrate your iOS project from CircleCI 1.0 to 2.0"
 categories: [migration]
-published: false
+hide: true
 order: 16
 ---
 
@@ -24,7 +24,7 @@ benefit from the improvements in the CircleCI 2.0 platform, including:
   in your configuration. Increase the development speed through faster
   feedback, shorter reruns, and more efficient use of resources.
 
-* (Advanced caching)[https://circleci.com/docs/2.0/caching/]: Speed up
+* [Advanced caching](https://circleci.com/docs/2.0/caching/): Speed up
   builds by caching files from run to run using keys that are easy to
   control with granular caching options for cache save and restore
   points throughout your jobs. Cache any files from run to run using
@@ -125,7 +125,7 @@ workflows:
 ## Best Practices
 
 To ensure a consistent build experience, it is best practice to add a
-Gemfile and setting up code signing with the help of Fastlane Match
+Gemfile and set up code signing with the help of Fastlane Match
 before you push a 2.0 `.circle/config.yml` file to your CircleCI iOS
 project.
 
@@ -148,28 +148,28 @@ gem 'cocoapods'
 
 ### Setting up Code Signing With Fastlane Match
 
-For 2.0 we don't support automated code signing, and instead we recommend
-using Fastlane Match to manage code signing certificates in your iOS projects.
+CircleCI 2.0 does not support automated code signing, use Fastlane Match to manage code signing certificates in your iOS projects.
 
-It is best to set up code signing once you have a successful `build` job
+It is best to set up code signing after you have a successful `build` job
 in your iOS project on CircleCI.
 
 Check out the Fastlane Match [getting started guide](https://codesigning.guide/)
 for the exact steps for setting up a Match repo and storing your
 certificates in it.
 
-Once your certificates are uploaded, you'll need to grant CircleCI
-permissions to access your certificates repo on GitHub. You can do that
-by going to your CircleCI Project Settings -> Checkout SSH Keys -> Add
+After your certificates are uploaded, grant CircleCI
+permissions to access your certificates repo on GitHub by going to your CircleCI Project Settings -> Checkout SSH Keys -> Add
 User Key -> Authorize with GitHub.
 
 *Warning*: Please bear in mind that adding a user key will allow
 CircleCI access to _all_ of your private repos.
 
-Once you have configured the User Key in the project settings, CircleCI
+After you have configured the User Key in the project settings, CircleCI
 will be able to fetch the certificates from GitHub.
 
 ## Creating the 2.0 Configuration File
+
+The following sections provide examples of 2.0 configuration syntax for an iOS project.
 
 ### Job Name and Xcode Version
 
@@ -191,7 +191,7 @@ jobs:
 ...
 ```
 
-### Build steps key
+### Build Steps Key
 
 The top-level `steps` key contains all the build steps that will be run
 for a particular job:
@@ -205,7 +205,7 @@ jobs:
 ```
 
 You can see all the available step types in [this doc]({{ site.baseurl }}/2.0/configuration-reference/).
-Please bear in mind that Docker support is not available in the macOS builds.
+**Note:** Docker support is not available in the macOS builds.
 
 ### Checking out the project code
 
@@ -295,7 +295,7 @@ jobs:
 
 ### Storing Artifacts, Test Results, and Diagnostic Files
 
-In 2.0 CircleCI doesn't automatically collect artifacts in your builds,
+CircleCI 2.0 does not automatically collect artifacts in your builds,
 so if your build is generating files that you would like to access with
 the CircleCI application later on, you must explicitly collect those
 files with the `store_artifacts` step.
@@ -329,8 +329,8 @@ Find more details about these steps in the
 
 ### Deployment via Workflows
 
-With the availability of Workflows in 2.0, it is best practice
-extracting all the commands related to the deployment of the app into
+With the availability of Workflows in 2.0, it is best practice to
+extract all the commands related to the deployment of the app into
 its own job:
 
 ```
