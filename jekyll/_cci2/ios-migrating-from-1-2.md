@@ -224,6 +224,7 @@ In CircleCI 2.0, cache save and cache restore are based on a _cache
 key_. Here is how you can cache the Ruby gems based on the content of
 `Gemfile.lock`:
 
+{% raw %}
 ```
 jobs:
   build-and-deploy:
@@ -242,13 +243,14 @@ jobs:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
             # This is the path where all the gems will be installed, and
-            # which we will later cache.
+            # which CircleCI will later cache.
             BUNDLE_PATH: vendor/bundle
       - save_cache:
           key: v1-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 ```
+{% endraw %}
 
 Every time your Gemfile.lock changes, a new cache will be created.
 Please check out [this doc]({{ site.baseurl }}/2.0/caching/) for
