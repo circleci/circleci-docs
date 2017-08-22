@@ -125,17 +125,19 @@ workflows:
 
 ## Best Practices
 
-To ensure a consistent build experience, we recommend adding a Gemfile
-and setting up code signing with the help of Fastlane Match before you
-push a 2.0 config to your CircleCI iOS project.
+To ensure a consistent build experience, it is best practice to add a
+Gemfile and setting up code signing with the help of Fastlane Match
+before you push a 2.0 `.circle/config.yml` file to your CircleCI iOS
+project.
 
 ### Gemfile
 
 We suggest that you add a Gemfile to your iOS project if you don't have
-one already. This will ensure that recent versions of Fastlane and
-CocoaPods are available in your build.
+one already. Checking in a Gemfile and using Bundler to install and run
+gems ensures that recent versions of Fastlane and CocoaPods are
+available in your build.
 
-A sample Gemfile could look like this:
+Following is a sample Gemfile:
 
 ```
 # Gemfile
