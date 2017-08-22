@@ -259,8 +259,9 @@ beyond `checksum`.
 
 ### Running Tests
 
-We recommend using [Fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan)
-to run your tests:
+It is possible to use [Fastlane
+Scan](https://github.com/fastlane/fastlane/tree/master/scan) to run your
+tests as follows:
 
 ```
 jobs:
@@ -299,17 +300,11 @@ so if your build is generating files that you would like to access with
 the CircleCI application later on, you must explicitly collect those
 files with the `store_artifacts` step.
 
-In 2.0 we don't automatically collect artifacts in your builds anymore,
-so if your build is generating files that you would like to access via
-the UI later on, you'll need to explicitly collect those files via the
-`store_artifacts` step.
+To view XML test results in the CircleCI application, add a
+`store_test_results` step in your `.circleci/config.yml` file.
 
-The same is true for the XML test results: for us to be able to show
-them in the UI, you'll need to add a `store_test_results` step into your
-config.
-
-If you would like to save any kind of logs into the artifacts, you'll
-need to add that to the config too, for example like this:
+To save logs as artifacts, use the `store_artifacts` step as shown in
+the following example:
 
 ```
 jobs:
@@ -328,14 +323,15 @@ jobs:
           destination: scan-logs
 ```
 
-You will find more details about these steps in the
+Find more details about these steps in the
 [Artifacts doc]({{ site.baseurl}}/2.0/artifacts/) and the
 [Test Metadata doc]({{ site.baseurl}}/2.0/collect-test-data/).
 
 ### Deployment via Workflows
 
-With the availability of Workflows in 2.0, we suggest extracting all the
-commands related to the deployment of the app into its own job:
+With the availability of Workflows in 2.0, it is best practice
+extracting all the commands related to the deployment of the app into
+its own job:
 
 ```
 jobs:
@@ -369,12 +365,13 @@ jobs:
           command: bundle exec fastlane spaceship
 ```
 
-In the deployment job we also specify an Xcode version, and then add the
-commands that will produce the release version of the app, store it in
-the artifacts, and submit it to App Store.
+The previous example deployment job specifies an Xcode version, adds
+command to produce the release version, stores it as an artifact, and
+submits it to the App Store.
 
-We will also need to add a Workflows section into the config to specify
-the conditions when we should run a deployment step:
+The following snippet adds a Workflows section to the
+`.circleci/config.yml` file to specify the conditions that run the
+deployment job:
 
 ```
 version: 2
@@ -393,9 +390,9 @@ workflows:
               only: master
 ```
 
-In this example, we're going to run the `build-and-test` job on every
-push to the repository, and the `deploy` job will only run on `master`
-branch once the `build-and-test` job has finished and is successful.
+In the previous example, CircleCI runs the `build-and-test` job on every
+push to the repository, and the deploy job will only run on the master
+branch after the `build-and-test` job has finished and is successful.
 
-Please check out [this doc]({{ site.baseurl }}/2.0/workflows/) for more
-examples of using Workflows.
+Refer to the [Orchestrating Workflows doc]({{ site.baseurl }}/2.0/workflows/)
+for more examples of using Workflows.
