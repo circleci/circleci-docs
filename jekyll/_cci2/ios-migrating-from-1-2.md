@@ -17,7 +17,7 @@ project from CircleCI 1.0 to 2.0.
 ## Overview
 
 With the release of CircleCI 2.0 for macOS, your iOS projects can now
-benefit from the improvements in our 2.0 platform, including:
+benefit from the improvements in the CircleCI 2.0 platform, including:
 
 * [Workflows](https://circleci.com/docs/2.0/workflows/): Orchestrate
   jobs and steps with great flexibility using a simple set of new keys
