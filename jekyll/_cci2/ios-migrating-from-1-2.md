@@ -123,7 +123,7 @@ workflows:
               only: master
 ```
 
-## Before you begin
+## Best Practices
 
 To ensure a consistent build experience, we recommend adding a Gemfile
 and setting up code signing with the help of Fastlane Match before you
@@ -145,7 +145,7 @@ gem 'fastlane'
 gem 'cocoapods'
 ```
 
-### Credentials for code signing via Fastlane Match
+### Setting up Code Signing With Fastlane Match
 
 For 2.0 we don't support automated code signing, and instead we recommend
 using Fastlane Match to manage code signing certificates in your iOS projects.
@@ -168,9 +168,9 @@ your private repos.
 Once you have configured the User Key in the project settings, CircleCI
 will be able to fetch the certificates from GitHub.
 
-## Copying your build commands to the 2.0 config file
+## Creating the 2.0 Configuration File
 
-### Job name and Xcode version
+### Job Name and Xcode Version
 
 In the 2.0 config file the first few lines specify the name of the job
 we will be running for you, and the Xcode version to use:
@@ -217,7 +217,7 @@ jobs:
       - checkout
 ```
 
-### Caching Ruby gems installed via Bundler
+### Caching Ruby Gems Installed With Bundler
 
 In CircleCI 2.0, cache save and cache restore are based on a _cache
 key_. Here is how you can cache the Ruby gems based on the content of
@@ -254,7 +254,7 @@ Please check out [this doc]({{ site.baseurl }}/2.0/caching/) for
 more information about cache keys and other available key options
 beyond `checksum`.
 
-### Running tests
+### Running Tests
 
 We recommend using [Fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan)
 to run your tests:
@@ -289,7 +289,12 @@ jobs:
             make test
 ```
 
-### Storing artifacts, test results and diagnostic files
+### Storing Artifacts, Test Results, and Diagnostic Files
+
+In 2.0 CircleCI doesn't automatically collect artifacts in your builds,
+so if your build is generating files that you would like to access with
+the CircleCI application later on, you must explicitly collect those
+files with the `store_artifacts` step.
 
 In 2.0 we don't automatically collect artifacts in your builds anymore,
 so if your build is generating files that you would like to access via
