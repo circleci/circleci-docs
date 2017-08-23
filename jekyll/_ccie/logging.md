@@ -4,32 +4,35 @@ section: enterprise
 title: "Using Centralized Logging"
 category: [advanced-config]
 order: 4.0
-description: "How to use centralized logging with CircleCI Enterprise."
+description: "How to use centralized logging with CircleCI."
 ---
 
 Collecting and centralizing logs is an essential component of monitoring.  The
-logs provide audit trails as well as debugging information for infrastructural
+logs provide audit trails as well as debugging information for infrastructure
 failures.  This document describes how you can integrate CircleCI Enterprise
-with your logging solution.
+with your logging solution in the following sections:
 
-## Logging appliances, e.g. Logstash/Splunk/etc
+* TOC
+{:toc}
 
-Most logging appliances (e.g. [Logstash](https://www.elastic.co/products/logstash),
+## Installing Logging Appliance Agents
+
+CircleCI Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in 
+`/var/lib/docker/containers/**/*-json.log`.
+
+Logging appliances generally require
+installation of a custom agent on each machine and configuration that collects logs and
+forwards them to a service, for example [Logstash](https://www.elastic.co/products/logstash),
 [Splunk](http://www.splunk.com/), [Graylog](https://www.graylog.org/), and
-[Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring)), require
-installing a custom agent on each box and configuring it to collect logs and
-forward it to the service.
+[Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 
-CircleCI Enterprise builder boxes use common conventions for where to store logs, with all logs stored in `/var/log/**/*.log` (except for Docker, which stores logs in:
-`/var/lib/docker/containers/**/*-json.log`).
-
-Configuring the agents are highly specific to the environment, the
-authentication mechanisms, and centralized logging server service discovery
+Configure the agent according to the environment, the
+authentication mechanisms, and centralized logging service discovery
 mechanism.  You can reuse your current practices for setting up the agent and
 configuration.
 
-Assuming you are using our Terraform/CloudFormation templates, you can modify
-the launch configuration to add the hook to install the agent and run it:
+If you are using CircleCI Terraform/CloudFormation templates, you can modify
+the launch configuration to add the hook to install the agent and run it as follows:
 
 ```
 #!/usr/bin/bash
@@ -66,13 +69,11 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     bash
 ```
 
-If you are using an orchestration tool, e.g. Chef/Puppet/SaltStack, you can apply the appropriate recipe/cookbook to the builder instances.
+If you are using an orchestration tool, for example Chef, Puppet, or SaltStack, it is possible to apply the appropriate recipe or cookbook to the builder instances.
 
-We are looking into providing first class support to integrate with Amazon CloudWatch Logs and Logstash. Please let us know if you are interested in having that integration.
+## Integrating With Syslog
 
-## Integrating with Syslog
-
-CircleCI Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it out of the box.  You can configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
+CircleCI Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it seamlessly.  Configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
 
 ```
 #!/bin/bash
@@ -83,12 +84,11 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
     bash
 ```
 
-You may then configure `syslog` to forward logging to a centralized rsyslog server, or you can configure a local logging agent to monitor the syslog rather than monitor files.
+Then, configure `syslog` to forward logging to a centralized `rsyslog` server, or configure a local logging agent to monitor the `syslog` rather than monitor files.
 
-The Services box uses Docker.  You can customize the Docker daemon to route logs to your desired supported destination.  For more details see the [Docker documentation on logging drivers](https://docs.docker.com/engine/reference/logging/overview/).
+The Services machine uses Docker.  It is possible to customize the Docker daemon to route logs to your desired supported destination,  see the [Docker documentation on logging drivers](https://docs.docker.com/engine/reference/logging/overview/) for details.
 
-While syslog support is quite popular, we find most users prefer file-based
-agent configuration.  Many tools default to file-based logging, and _using the
+**Note:** Many tools default to file-based logging, and _using the
 syslog facility as the only mode of logging may accidentally ignore important
-logging info_.  Configuring custom agents to watch all of `/var/log/**/*` will end up
-capturing most logging files including syslog.
+logging info_.  Configuring custom agents to watch all of `/var/log/**/*` will result in
+capturing most logging files including `syslog`.
