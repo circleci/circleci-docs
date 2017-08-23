@@ -83,6 +83,7 @@ The currently supported versions are:
 * `17.03.0-ce` (default)
 * `17.05.0-ce`
 * `17.06.0-ce`
+* `17.06.1-ce`
 
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`.
 
