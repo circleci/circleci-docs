@@ -76,7 +76,7 @@ workflows:
             - test1
       - deploy:
           requires:
-            - test2	
+            - test2
 ```
 
 The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
@@ -168,14 +168,14 @@ workflows:
       - test1:
           requires:
             - build
-	  context: org-global  
+    context: org-global  
       - test2:
           requires:
             - test1
-	  context: org-global  
+    context: org-global  
       - deploy:
           requires:
-            - test2	  
+            - test2
 ```
 
 The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
@@ -321,7 +321,7 @@ jobs:
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
           root: workspace
-	  # Must be relative path from root
+          # Must be relative path from root
           paths:
             - echo-output
 
