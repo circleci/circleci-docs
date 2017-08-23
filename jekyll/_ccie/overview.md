@@ -38,7 +38,7 @@ By default, CircleCI Enterprise comes with a general-purpose image based on Ubun
 
 CircleCI Enterprise consists of two primary components: Services and Builders. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Builder instances execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
-![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/enterprise-network-diagram.png)
+![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/ccie_arch.png)
 
 ### Services 
 
