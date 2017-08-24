@@ -288,4 +288,17 @@ CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage
      ./upgrade-mongo
      ```
 
-Start CircleCI from the Replicated console and it will be running Mongo 3.2.11.
+## Upgrading PostgreSQL
+
+CircleCI Enterprise 2.0 runs PostgreSQL 9.5. If you are upgrading an existing database from your 1.0 installation or any Preview from `Preview 7` or older, you must use the following steps to upgrade your PostgreSQL database: 
+
+1. Stop CircleCI from the Replicated Console. 
+2. SSH into the Services Instance. 
+3. Download and execute the PostgreSQL upgrade script. 
+    ```
+    wget https://s3.amazonaws.com/release-team/scripts/upgrade-postgres
+    chmod +x upgrade-postgres
+    ./upgrade-postgres
+    ```
+
+You can now start CircleCI from the replicated console and you will be running Mongo 3.2.11 and Postgres 9.5. 
