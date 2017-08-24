@@ -178,18 +178,23 @@ jobs:
     machine: true
 ```
 
-CircleCI supports multiple machine images that can be specified in `image` field:
+CircleCI supports multiple machine images that can be specified in the `image` field:
 
-* `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are announced at least a week in advance.
-* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
+* `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance.
+* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.1-ce` along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
+* `circleci/classic:201703-01` is docker 17.03.0-ce
+* `circleci/classic:201707-01` is docker 17.06.0-ce
+* `circleci/classic:201708-01` is docker 17.06.1-ce
 
-So you can set the following to use an Ubuntu version `14.04` image with Docker `17.06.0-ce`:
+You can use one of the `year-month` versioned images to pin the version used by your jobs. Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
+
+**Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce`:
 
 ```YAML
 jobs:
   build:
     machine:
-      image: circleci/classic:edge
+      image: circleci/classic:201708-01
 ```
 
 #### **`branches`**
