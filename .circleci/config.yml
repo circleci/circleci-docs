@@ -45,14 +45,14 @@ jobs:
             - docs
   deploy:
     docker:
-      - image: python:2.7
+      - image: circleci/python:2.7
     working_directory: ~/circleci-docs  
     steps:
       - attach_workspace:
           at: ~/circleci-docs/jekyll/_site 
       - run:
           name: Install awscli
-          command: pip install awscli
+          command: sudo pip install awscli
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
