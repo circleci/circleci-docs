@@ -13,12 +13,6 @@ jobs:
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
-          name: Install essential packages for awscli
-          command: sudo apt-get update && sudo apt-get install python-dev
-      - run:
-          name: Install awscli
-          command: wget https://bootstrap.pypa.io/get-pip.py && sudo python get-pip.py && sudo pip install awscli
-      - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
