@@ -51,7 +51,7 @@ jobs:
             - docs
   deploy:
     docker:
-      - image: circleci/python:2.7
+      - image: python:2.7
     working_directory: ~/circleci-docs  
     steps:
       - attach_workspace:
