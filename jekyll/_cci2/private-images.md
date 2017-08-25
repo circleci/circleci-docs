@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using Private Images"
 short-title: "Using Private Images"
-description: "How to use private images with the Remote Docker Environment"
+description: "How to use private images"
 categories: [containerization]
 order: 50
 ---
@@ -19,6 +19,14 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 ```
 
+You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io)—make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
+
+```
+- image: quay.io/project/image:tag
+  auth:
+    username: $QUAY_USERNAME
+    password: $QUAY_PASSWORD
+```
 
 Alternatively, you can utilize the `machine` executor to achieve the same thing:
 
