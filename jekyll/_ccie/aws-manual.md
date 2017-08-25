@@ -80,7 +80,7 @@ This procedure uses the `awscli` to enable CircleCI-installed AWS instances acce
      [.. Save the generated access key and secret for use in installation process..]
      ```
 
-3. To install the Services component, using a `c4.2xlarge` or `c4.4xlarge` instance with an EBS root volume of 30 GB, start one of the following public CircleCI Amazon Machine Images (community AMIs) for the appropriate AWS region:
+3. To install the Services component, using a `c4.2xlarge` or `c4.4xlarge` instance with an EBS root volume of 100 GB, start one of the following public CircleCI Amazon Machine Images (community AMIs) for the appropriate AWS region:
 
      Region             | AMI
      -----------------  |-------------
