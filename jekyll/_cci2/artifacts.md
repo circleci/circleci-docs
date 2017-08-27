@@ -69,7 +69,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
        gcc -o dump main.c
      ```
 
-2. Create a `config.yml` file with the following lines.
+2. Create a `main.c` file with the following lines.
 
      ```C
      #include <stdlib.h>
