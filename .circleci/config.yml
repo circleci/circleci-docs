@@ -55,7 +55,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+          command: #aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
 
 workflows:
   version: 2
@@ -65,6 +65,6 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only: master
+          #filters:
+          #  branches:
+          #    only: master
