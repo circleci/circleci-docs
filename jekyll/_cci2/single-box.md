@@ -1,9 +1,8 @@
 ---
-layout: enterprise
-section: enterprise
+layout: classic-docs
 title: "CircleCI Trial Installation"
 category: [administration]
-order: 0
+order: 3
 description: "How to install CircleCI on a single VM"
 ---
 
