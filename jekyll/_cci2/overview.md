@@ -10,7 +10,14 @@ This article provides an overview of CircleCI 2.0 installation, features, enviro
 * TOC
 {:toc}
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. Refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get started with the hosted application.
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. 
+
+CircleCI 2.0 provides new infrastructure that includes the following improvements:
+* New configuration with any number of jobs and workflows to orchestrate them. 
+* Custom images for execution on a per-job basis.
+* Fine-grained performance with custom caching and per-job CPU or memory allocation. 
+
+Refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get started with the hosted application.
 
 ## Trial Installation Requirements
 
