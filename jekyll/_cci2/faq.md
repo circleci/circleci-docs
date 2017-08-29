@@ -63,6 +63,10 @@ The image defaults to running actions as the `ubuntu` user and is designed to wo
 
 Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
 
+## Is CircleCI 2.0 available to enterprise clients?
+
+No, unfortunately CircleCI 2.0 is not currently available to enterprise clients.
+
 ## How do Docker image names work? Where do they come from?
 
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
