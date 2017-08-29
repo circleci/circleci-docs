@@ -59,7 +59,3 @@ jobs:
 3. Start a new build by pushing a new commit to GitHub or Bitbucket. 
 
 **Note:** Rebuilding a previous build will *not* use the new setting, you must push a new commit.
-
-
-
-
