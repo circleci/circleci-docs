@@ -69,23 +69,23 @@ The built-in Heroku integration through the CircleCI UI is not implemented for C
 1. Create a script to set up Heroku similar to this example `setup-heroku.sh` file in the `.circleci` folder:
      ```
      #!/bin/bash
-       git remote add heroku https://git.heroku.com/cci-demo-walkthrough.git
-       wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-       mkdir -p /usr/local/lib /usr/local/bin
-       tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-       ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+     git remote add heroku https://git.heroku.com/cci-demo-walkthrough.git
+     wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
+     mkdir -p /usr/local/lib /usr/local/bin
+     tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+     ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
      
-       cat > ~/.netrc << EOF
-       machine api.heroku.com
-         login $HEROKU_LOGIN
-         password $HEROKU_API_KEY
-       machine git.heroku.com
-         login $HEROKU_LOGIN
-         password $HEROKU_API_KEY
-       EOF
+     cat > ~/.netrc << EOF
+     machine api.heroku.com
+       login $HEROKU_LOGIN
+       password $HEROKU_API_KEY
+     machine git.heroku.com
+       login $HEROKU_LOGIN
+       password $HEROKU_API_KEY
+     EOF
 
-       # Add heroku.com to the list of known hosts
-       ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
+     # Add heroku.com to the list of known hosts
+     ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
      ```
 This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
 
