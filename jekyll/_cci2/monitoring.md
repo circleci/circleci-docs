@@ -21,11 +21,18 @@ with entries like `export CIRCLE_OPTION_A=foo` to set environment variables.
 
 ## Monitoring 
 
-To enable Cloudwatch support, check and add `cloudwatch:*` to the IAM policy permission.  Installations completed after November, 2015 will have it enabled by default.  Prior installations may require modifications.  The actual mechanism for change depends on how it was installed, for example using Terraform/CloudFormation or manually.  Refer to the best practice IAM policy at <https://enterprise-docs.circleci.com/assets/aws/circleci-iam-policy.json>.
-
-You can enable the setting by going to: Replicated Admin > Settings > Monitoring > Enable Cloudwatch. **Note:** CloudWatch does **not** support monitoring of macOS containers.
+Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Enable Cloudwatch. **Note:** CloudWatch does **not** support monitoring of macOS containers.
 
 CloudWatch already monitors the health and basic checks for the EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of containers per container if CPU or memory become a bottleneck.
+
+There is a [blog post series](https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/)
+ wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
+
+1. In general, size your build cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time, it is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+
+2. Create an Auto Scaling group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. Scaling up during the weekday normal working hours and back down at night is the best practice to keep queue times down during peak development without over provisioning at night when traffic is low. Looking at millions of builds over time, a bell curve during normal working hour emerges for most data sets.
+
+This is in contrast to auto scaling throughout the day based on traffic fluctuations because modeling revealed that boot times are actually too long to prevent queuing in real time. Use [Amazon's Step Policy](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html) instructions to set this up along with Cloudwatch Alarms.
 
 ## Health Monitoring Metrics
 
@@ -33,7 +40,7 @@ CloudWatch integration enables the following custom metrics for health monitorin
 
  * `ContainersReserved` gives you a view of usage over time for capacity planning and budget estimation.
  * `ContainersLeaked` should be 0 or close to 0, an increase indicates a potential infrastructure issue.
- * `ContainersAvailable` is used for Auto Scaling.  If the value is too high, you can shut some machines down, if the value is too low, you can start up machines.
+ * `ContainersAvailable` is used for Auto Scaling.  If the value is too high, consider shutting some machines down, if the value is too low, consider starting up machines.
 
  * `circle.run-queue.builds` and `circle.run-queue.containers` expresses the degree to which the system is under-provisioned  and number of queued builds that are not running.  Ideally, the ASG will account for this as well.  Values that are too high may indicate an outage or incident.
 
