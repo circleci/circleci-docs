@@ -98,7 +98,7 @@ If you are brand new to MongoDB, see the [MongoDB on the AWS Cloud](https://docs
 
 ## Setting up PostgreSQL Hosts
 
-It is best practice to set up PostgreSQL using Amazon Relational Database Service (Amazon RDS) with multi Availability Zone (multi-AZ) mode for automated backups and failover. Refer to the [Amazon RDS Multi-AZ Deployments](https://aws.amazon.com/rds/details/multi-az/) documentation for details.
+It is best practice to set up PostgreSQL 9.5 or later using Amazon Relational Database Service (Amazon RDS) with multi Availability Zone (multi-AZ) mode for automated backups and failover. Refer to the [Amazon RDS Multi-AZ Deployments](https://aws.amazon.com/rds/details/multi-az/) documentation for details.
 
 ## Exporting Existing Databases
 
