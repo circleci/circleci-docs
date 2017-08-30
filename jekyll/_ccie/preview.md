@@ -285,7 +285,7 @@ CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage
      ```
      wget https://s3.amazonaws.com/release-team/scripts/upgrade-mongo
      chmod +x upgrade-mongo
-     ./upgrade-mongo
+     sudo ./upgrade-mongo
      ```
 
 ## Upgrading PostgreSQL
@@ -298,7 +298,7 @@ CircleCI Enterprise 2.0 runs PostgreSQL 9.5. If you are upgrading an existing da
     ```
     wget https://s3.amazonaws.com/release-team/scripts/upgrade-postgres
     chmod +x upgrade-postgres
-    ./upgrade-postgres
+    sudo ./upgrade-postgres
     ```
 
 You can now start CircleCI from the replicated console and you will be running Mongo 3.2.11 and Postgres 9.5. 
