@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Administrator’s Overview"
 category: [administration]
 order: 1
-description: "High-level overview of the CircleCI Installation process."
+description: "High-level overview of the CircleCI installation process."
 ---
 This article provides an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
 
@@ -21,11 +21,11 @@ Refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get 
 
 ## Trial Installation Requirements
 
-- A VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. Must have network connectivity to the GitHub or GitHub Enterprise instance and outbound internet access (proxy server is supported by request to CircleCI customer service).  
+- A VM with at least 32GB RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. Must have network connectivity to the GitHub or GitHub Enterprise instance and outbound internet access (proxy server is supported by request to CircleCI customer service).  
 
 OR
 
-- An Amazon EC2 VM instance with at least 8G of RAM, outbound internet access, and network connectivity to the GitHub or GitHub Enterprise instance.
+- An Amazon EC2 VM instance with at least 32G RAM, outbound internet access, and network connectivity to the GitHub or GitHub Enterprise instance.
 
 See the [CircleCI Trial Installation]({{ site.baseurl }}/enterprise/single-box/) document for trial installation instructions and links to the machine images.
 
@@ -36,14 +36,14 @@ See the [CircleCI Trial Installation]({{ site.baseurl }}/enterprise/single-box/)
 - The Builders instance must have six CPUs or GPUs and 10GB RAM and a root volume of at least 50GB.
 - Both instances must have network access to a GitHub or Github Enterprise instance. 
 
-To determine the size required for your workload, provision two CPUs for processing plus two CPUs and 4GB of memory for each container. For example, six CPUs and 10GB of RAM supports two containers concurrently because the default container size is two CPUs with 4GB. 
+To determine the size required for your workload using the default `medium` resource class, provision two CPUs for processing plus two CPUs and 4GB of memory for each container. For example, six CPUs and 10GB of RAM supports two containers concurrently because the default container size is two CPUs with 4GB. Refer to the [Resource Class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class/) documentation for information about the available CPU and RAM per class and to plan instance sizes for `large` and `xlarge` workloads. 
 
 ### Production Installation Options
 
 It is possible to install CircleCI 2.0 in either of the following configurations:
 
 - A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services Manually]({{ site.baseurl }}/enterprise/aws-manual/) or [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/enterprise/aws/) for instructions.
-- A single Services machine with four database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/enterprise/high-availability/) for instructions.
+- A single Services machine with multiple database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/enterprise/high-availability/) for instructions.
 
 ## Customer Use Cases 
 
@@ -59,7 +59,7 @@ Refer to the [CircleCI Customers page](https://circleci.com/customers/) for the 
 
 After a software repository in GitHub or GitHub Enterprise is added as a project to the CircleCI application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, HipChat, Campfire, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
 
-CircleCI may also be configured to deploy code to various environments, including the following:
+CircleCI may also be configured to deploy code to all major platforms, including the following:
 
 - AWS CodeDeploy
 - AWS EC2 Container Service (ECS)
@@ -69,11 +69,11 @@ CircleCI may also be configured to deploy code to various environments, includin
 
 Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
 
-Contact us at <enterprise-support@circleci.com> to request a trial license.
+Contact us at [Support](mailto:enterprise-support@circleci.com) to request a trial license.
 
 ## Build Environments
 
-By default, CircleCI comes with a general-purpose image based on Ubuntu 14.04 (Trusty). It is possible to customize this image if necessary. 
+By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `/circleci/config.yml` file. 
 
 ## Architecture
 
@@ -83,7 +83,7 @@ CircleCI consists of two primary components: Services and Builders. Services run
 
 ### Services 
 
-The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/enterprise/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
 
 | Source                      | Ports                   | Use                    |
@@ -104,7 +104,7 @@ Each machine on which the Builders are installed reserves two CPUs and 4GB of me
 | Source                           | Ports                   | Use                                                            |
 |----------------------------------|-------------------------|----------------------------------------------------------------|
 | End Users                        | 64535-65535             | [SSH into builds feature](https://circleci.com/docs/2.0/ssh-access-jobs/) |
-| Administrators                   | 80, 443                 | CircleCI API Access (graceful shutdown, etc)                   |
+| Administrators                   | 80 or 443                 | CircleCI API Access (graceful shutdown, etc)                   |
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
 | Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
