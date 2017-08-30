@@ -53,73 +53,26 @@ New builder boxes joining the fleet will use the new passphrase. Existing builde
 curl -k -X POST "https://<builder ip>/api/v1/admin/system/shutdown?circle-token=$TOKEN&unstoppable=true"
 ```
 
-#### Is it possible to run iOS/macOS builds on CircleCI Enterprise?
+#### Is it possible to run iOS/macOS builds on CircleCI?
 
-We currently provide limited, early access for iOS builds on CircleCI that run on our own cloud of macOS machines. Contact <enterprise-support@circleci.com> to make a request for this fleet.
+Support for running your own macOS builders is coming soon. Contact your account team to express interest in getting on the early access list.
 
 #### Why is Test GitHub Authentication failing?
 
 This means that the GitHub Enterprise server is not returning the intermediate SSL certificates. Check your GitHub Enterprise instance with <https://www.ssllabs.com/ssltest/analyze.html> - it may report some missing intermediate certs. You can use tools like <https://whatsmychaincert.com/> to get the full certificate chain for your server.
 
+#### How can I use HTTPS to access CircleCI?
 
-#### Docker isn't working?
-
-Please see [these instructions](https://circleci.com/docs/2.0/docker-builder-config/#sharing-the-docker-socket) to use Docker.
-
-If you are using single-box mode, note that you'll have to have
-
-`export CIRCLE_DOCKER_RUN_ARGUMENTS="-v /var/run/docker.sock:/var/run/docker.sock"`
-
-in `/etc/circle-installation-customizations` for it to work. You also won't need to have docker specified in the `config.yml` as the container will have access to the docker socket in the background. That should get docker working in single-box mode.
-
-#### Can I use a custom image in single box mode?
-
-Yes, you can do this by adding the below export to a file called `/etc/circle-installation-customizations`:
-
-
-```
-export CIRCLE_CONTAINER_IMAGE_URI="docker://circleci/build-image:{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.build-image }}"
-```
-
-That will give you the same image that is currently used on circleci.com, but you can replace the URI image with anything that is currently pulled unto the machine or exists in dockerhub. This works with [custom images](https://github.com/circleci/image-builder) as well. 
-
-#### Why isn't CircleCI using HTTPS?
-
-While we create a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to give us certificates to use under the `Privacy` section of the settings in the management console.
+While CircleCI creates a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
 
 #### Why doesn't terraform destroy every resource?
 
 We set the services box to have termination protection in AWS. We also write to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the circleci.tf file. You'll also need to empty the s3 bucket that was created as part of the terraform install.'
 
-#### How do I backup CircleCI?
-
-As of 1.48.0 you can take snapshots right in the management console, and follow the steps below:
-
-1: On the management console, https://services_ip:8800, create a snapshot
-
-2: After it completes, backup the full snapshots directory `/var/lib/replicated/snapshots`, including the json file, to something safe.
-
-3: Take down the services box and rebuild it, but do not run the setup wizard yet.
-
-4: Copy the snapshots directory to the services box. I recommend `/home/ubuntu/ so to avoid permissions issues.
-
-5: Run the startup. When it asks for the licence, instead click `restore from a snapshot`. 
-
-6: Enter the path, for example, `/home/ubuntu/snapshots` and click browse.
-
-7: Select the snapshot and choose restore.
-
-8: Restore the full snapshot and that will return your licence, console passphrase and databases.
-
-#### How do I upgrade builder instances?
-
-The builder instances take their binaries directly from the services box when they initialize. Thus in order to update the builder boxes you'll need update the services box first, then create a new builder fleet (or roll the builder fleet using an autoscaling group). During this start-up phase the builders will take the new update from the services machines, and things will be up-to-date.
-
 
 #### Do the builders store any state?
 
-They can be torn down without worry as they don't persist any data. The builders will cache docker images if you've shared the docker socket.
-
+They can be torn down without worry as they don't persist any data. 
 
 
 #### How do I verify TLS settings are failing?
