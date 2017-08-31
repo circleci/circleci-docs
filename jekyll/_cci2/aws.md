@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Installing CircleCI 2.0 on Amazon Web Services with Terraform"
 category: [administration]
 order: 10
-description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
+description: "How to install CircleCI on Amazon Web Services (AWS)."
 ---
 
 This document provides step-by-step instructions for installing CircleCI 2.0 on Amazon Web Services (AWS) with Terraform in the following sections:
@@ -328,11 +328,11 @@ Have available the following resources before beginning manual installation of C
 - Whitelist all traffic from/to builder boxes and service box
 - Whitelist ports 22, 80, 443, 64535-65535 for users.  The high ports are used for the SSH feature, so that users can `ssh` into the build containers.
 
-7. To start the installation, use the following Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>. It should take 5-15 minutes for the machine to be fully ready to take builds.
+7. To start the installation, use the following [Terraform script](https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf). It should take 5-15 minutes for the machine to be fully ready to take builds.
 
 ## Upgrading MongoDB
 
-CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database from your existing 1.0 installation or any Preview version from `Preview3` or older, you must use the following steps to upgrade your Mongo database:
+CircleCI 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database from your existing 1.0 installation or any Preview version from `Preview3` or older, you must use the following steps to upgrade your Mongo database:
 
 1. Stop CircleCI from the Replicated console. 
 2. SSH into the Services instance.
@@ -345,7 +345,7 @@ CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage
 
 ## Upgrading PostgreSQL
 
-CircleCI Enterprise 2.0 runs PostgreSQL 9.5. If you are upgrading an existing database from your 1.0 installation or any Preview from `Preview 7` or older, you must use the following steps to upgrade your PostgreSQL database: 
+CircleCI 2.0 runs PostgreSQL 9.5. If you are upgrading an existing database from your 1.0 installation or any Preview from `Preview 7` or older, you must use the following steps to upgrade your PostgreSQL database: 
 
 1. Stop CircleCI from the Replicated Console. 
 2. SSH into the Services Instance. 
@@ -360,7 +360,7 @@ You can now start CircleCI from the replicated console and you will be running M
 
 ## Next Steps for Getting Started
 
-1. Click the Open link in the dashboard to go to the CircleCI Enterprise app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage. 
+1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage. 
 1. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
 1. Add a project using the [Setting Up Projects]({{site.baseurl}}/enterprise/quick-start/) document.
 
@@ -372,7 +372,7 @@ Check the Fleet State by clicking the wrench icon on the sidebar navigation of C
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI Enterprise support](mailto:enterprise-support@circleci.com) for assistance.
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](mailto:enterprise-support@circleci.com) for assistance.
 
 
 
