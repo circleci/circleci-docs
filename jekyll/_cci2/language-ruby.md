@@ -39,25 +39,28 @@ Database images for use as a secondary 'service' container are also available.
 version: 2
 jobs:
   build:
+    parallelism: 3
     working_directory: ~/circleci-demo-ruby-rails
     docker:
       - image: circleci/ruby:2.4.1-node
+        environment:
+          RAILS_ENV: test
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - checkout
 
       # Restore bundle cache
-      - type: cache-restore
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
 
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
 
       # Store bundle cache
-      - type: cache-save
-        key: rails-demo-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       # Database setup
       - run: bundle exec rake db:create
@@ -68,14 +71,13 @@ jobs:
         command: |
           bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
+                            --out test_results/rspec.xml \
                             --format progress \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      # Save artifacts
-      - type: store_test_results
-        path: /tmp/test-results
-
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
 ```
 {% endraw %}
 
@@ -109,6 +111,7 @@ In each job, we have the option of specifying a `working_directory`. In this sam
 version: 2
 jobs:
   build:
+    parallelism: 3
     working_directory: ~/circleci-demo-ruby-rails
 ```
 
@@ -121,6 +124,8 @@ version: 2
 # ...
     docker:
       - image: circleci/ruby:2.4.1-node
+        environment:
+          RAILS_ENV: test
       - image: circleci/postgres:9.4.12-alpine
 ```
 
@@ -146,17 +151,17 @@ steps:
   # ...
 
   # Restore bundle cache
-  - type: cache-restore
-    key: rails-demo-{{ checksum "Gemfile.lock" }}
+  - restore_cache:
+      key: rails-demo-{{ checksum "Gemfile.lock" }}
 
   # Bundle install dependencies
   - run: bundle install --path vendor/bundle
 
   # Store bundle cache
-  - type: cache-save
-    key: rails-demo-{{ checksum "Gemfile.lock" }}
-    paths:
-      - vendor/bundle
+  - save_cache:
+      key: rails-demo-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
 ```
 
 Now we can setup our test database we'll use during the build.
@@ -187,12 +192,12 @@ steps:
       bundle exec rspec --profile 10 \
                         --format RspecJunitFormatter \
                         --format progress \
-                        --out /tmp/test-results/rspec.xml \
+                        --out test_results/rspec.xml \
                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
-  # Save artifacts
-  - type: store_test_results
-    path: /tmp/test-results
+    
+  # Save test results for timing analysis
+  - store_test_results:
+      path: test_results
 ```
 {% endraw %}
 
