@@ -7,7 +7,7 @@ permalink: /2.0/
 
 Welcome to CircleCI 2.0! The release of CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CircleCI, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci/) for how it works and then use the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to start your first project build. Refer to the [Sample 2.0 config.yml File]({{ site.baseurl }}/2.0/sample-config/) to try out multiple jobs with workflow orchestration, then head over to the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
-If you are an Administrator, see the [2.0 Administrator’s Overview]({{ site.baseurl }}/2.0/overview/) document to get started and refer to the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document for installation instructions.
+If you are an Administrator, see the [2.0 Administrator’s Overview]({{ site.baseurl }}/enterprise/overview/) document to get started and refer to the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/enterprise/aws/) document for installation instructions.
 
 ## Programming Language Support
 
