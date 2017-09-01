@@ -10,6 +10,18 @@ order: 1
 * Contents
 {:toc}
 
+## What are the differences between CircleCI’s hosting options?
+
+- **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
+
+- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage  upgrades as new versions are released.
+
+## Why did you change the name from CircleCI Enterprise? 
+
+The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for  customers and for CircleCI employees. 
+
+CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+
 ## Why Migrate from CircleCI 1.0 to 2.0?
 
 - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
