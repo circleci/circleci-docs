@@ -75,6 +75,13 @@ machine:
   environment:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 ```
+## Out of memory errors in OCaml/Reason builds
+
+The main tool for configuring space use in OCaml is the space overhead parameter (OCAMLRUNPARAM's `o`)
+
+Add `export OCAMLRUNPARAM="o=20"` before running your program to limit your memory use.
+
+Unlike Java, you don't specify a maximum heap size but instead a relative overhead: `o=80` (the default) means that the heap is allowed to grow to the amount of live data in your program + 80%. 
 
 If your tests actually need more than 4GB of RAM, please
 [contact us](mailto:support@circleci.com).
