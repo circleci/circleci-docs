@@ -185,6 +185,7 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 * `circleci/classic:201703-01` is docker 17.03.0-ce
 * `circleci/classic:201707-01` is docker 17.06.0-ce
 * `circleci/classic:201708-01` is docker 17.06.1-ce
+* `circleci/classic:201709-01` is docker 17.07.0-ce
 
 You can use one of the `year-month` versioned images to pin the version used by your jobs. Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
 
