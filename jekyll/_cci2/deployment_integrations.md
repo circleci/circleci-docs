@@ -169,4 +169,37 @@ kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"c
 The full `deploy.sh` file is available on
 [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
 
+## Firebase
+
+Add firebase-tools to the project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
+
+```
+npm install --save-dev firebase-tools
+```
+
+Generate a Firebase CLI token using the following command:
+
+```
+firebase login:ci
+```
+
+Add the generated token to the CircleCI project's environment variables as $FIREBASE_DEPLOY_TOKEN.
+
+Add the below to the project's config.yml file
+
+```
+     - deploy:
+         name: Deploy Master to Firebase
+         command: |
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+          fi
+```
+
+If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to config.yml:
+
+
+```
+   -run: cd functions && npm install
+```
 
