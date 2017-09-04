@@ -7,11 +7,11 @@ categories: [troubleshooting]
 order: 1
 ---
 
-If you have implemented workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to reset. For example, if you choose to protect your branches, you may need to deselect the status keys you expect from CircleCI, as follows:
+If you have implemented workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled may prevent the status from showing as completed in GitHub because CircleCI posts statuses to Github with a key that includes the job by name.
+Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for examples and conceptual information.
 
