@@ -15,7 +15,7 @@ This document describes setting enviornment variables for installed Builders, me
 Several aspects of CircleCI Builder behavior can be customized by passing
 environment variables into the builder process. 
 
-If you are using the [trial]({{site.baseurl}}/enterprise/single-box/) installation
+If you are using the [trial]({{site.baseurl}}/2.0/single-box/) installation
 option on a single VM, then you can create a file called `/etc/circle-installation-customizations`
 with entries like `export CIRCLE_OPTION_A=foo` to set environment variables.
 
