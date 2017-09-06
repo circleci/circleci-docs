@@ -21,7 +21,7 @@ If you have CircleCI Enterprise installed you may access CircleCI 2.0 features o
 
 Install the following automated infrastructure provisioning software:
 
-* Terraform, see the [Download Terraform](https://www.terraform.io/downloads.html) web site for links to packages for your architecture. To install CircleCI without using Terraform, refer to the [Installing CircleCI 2.0 on AWS Manually]({{site.baseurl}}/2.0/aws-manual/).
+* Terraform, see the [Download Terraform](https://www.terraform.io/downloads.html) web site for links to packages for your architecture.
 
 Have the following information available before beginning the installation procedure:
 

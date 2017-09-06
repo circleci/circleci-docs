@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Installing CircleCI 2.0 on Amazon Web Services Manually"
 category: [administration]
 order: 11
+hide: true
 description: "How to install CircleCI on Amazon Web Services (AWS) manually."
 ---
 
