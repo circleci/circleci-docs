@@ -36,7 +36,7 @@ See the [CircleCI Trial Installation]({{ site.baseurl }}/enterprise/single-box/)
 - The Builders instance must have six CPUs or GPUs and 10GB RAM and a root volume of at least 50GB.
 - Both instances must have network access to a GitHub or Github Enterprise instance. 
 
-To determine the size required for your workload using the default `medium` resource class, provision two CPUs for processing plus two CPUs and 4GB of memory for each container. For example, six CPUs and 10GB of RAM supports two containers concurrently because the default container size is two CPUs with 4GB. Refer to the [Resource Class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class/) documentation for information about the available CPU and RAM per class and to plan instance sizes for `large` and `xlarge` workloads. 
+To determine the size required for your workload using the default `medium` resource class, provision two CPUs for processing plus two CPUs and 4GB of memory for each container. For example, six CPUs and 10GB of RAM supports two containers concurrently because the default container size is two CPUs with 4GB. Refer to the Resource Class section of the Writing Jobs with Steps document for information about the available CPU and RAM per class and to plan instance sizes for `large` and `xlarge` workloads. 
 
 ### Production Installation Options
 
