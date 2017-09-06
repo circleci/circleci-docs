@@ -29,7 +29,9 @@ Build Agent is a Go program written by CircleCI that executes steps in a job and
 
 This section will give you the basic guide of operating a Nomad cluster in your installation.
 
-You can use Nomad CLI in both Nomad servers and clients but we recommend running the following commands in this section from one of your Nomad clients.
+### Nomad CLI
+
+Nomad CLI is installed in the Service Box. It is pre-configured to talk to your Nomad cluster, so you can just use `nomad` command to run the following commands in this section.
 
 ### Checking the Jobs Status
 
