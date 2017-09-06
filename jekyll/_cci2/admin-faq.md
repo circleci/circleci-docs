@@ -12,7 +12,7 @@ published: true
 
 #### Can I monitor available build containers?
 
-Yes, refer to the Introduction to Nomad Cluster Operation document for details. Refer to the [CloudWatch Monitoring]({{site.baseurl}}/enterprise/cloudwatch/) document for how to enable additional container monitoring for AWS.
+Yes, refer to the Introduction to Nomad Cluster Operation document for details. Refer to the [Administrative Variables, Monitoring, and Logging]({{site.baseurl}}/2.0/monitoring/) document for how to enable additional container monitoring for AWS.
 
 #### How do I provision admin users?
 
