@@ -1,7 +1,7 @@
 {% assign section = site.collections | where:"label",page.collection | first %}
-<a href="#" id="nav-button">NAV</a>
+<a href="#" id="nav-button">Menu</a>
 <nav class="sidebar">
-	Section: 
+	Section:
 	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
 		<option value="{{ site.baseurl }}/">Docs Home</option>
 		{% for collection in site.collections %}
@@ -15,6 +15,12 @@
 	{% capture sidebar %}
 	<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }} Index Page</a></li>
     <p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
+
+{% if page.collection == "cci2" %}
+ <ul class="left-links main-nav">
+  <li class="nav-item"><a href=""><h3>Users & Developers</h3></a>
+ 	 <div class="submenu">
+		 {% endif %}
 	{% assign cats = site.data.categories | where:"section",section.label %}
 	{% for cat in cats %}
 		{% if cat.index %}
@@ -22,8 +28,10 @@
 		{% else %}
 			{% assign catPage = cat.slug %}
 		{% endif %}
-		<li><a href="#">{{ cat.name }}</a>
-		<ul>
+
+				 <ul>
+		       <li><a href="#">{{ cat.name }}</a>
+					<ul>
 		{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
 		{% for doc in sortedDocs %}
 			{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
@@ -46,4 +54,27 @@
 	{{ sidebar | strip_newlines }}
 	</ul>
 	{% endif %}
+	{% if page.collection == "cci2" %}
+</div>
+	<ul class="left-links main-nav">
+		<li class="nav-item"><a href="#"><h3>System Administrators<h3></a>
+			<div class="submenu">
+				<ul>
+					<li><a href="{{ site.baseurl }}/2.0/overview/">Administrator's Overview</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/single-box/">CircleCI 2.0 Trial Installation</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/admin-faq/">Administration FAQ</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/security/">Security Features</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/aws/">Installing CircleCI 2.0 on Amazon Web Services with Terraform</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/aws-manual/">Installing CircleCI 2.0 on AWS Manually</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/high-availabiility/">Configuring High Availability</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/monitoring/">Administrative Variables, Monitoring, and Logging</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/nomad/">Introduction to Nomad Cluster Operation</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/proxy/">Setting up HTTP Proxies</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/backup/">Backing up CircleCI Data</a></li>
+					<li><a href="{{ site.baseurl }}/2.0/open-source/">Open Source Acknowledgments</a></li>
+				</ul>
+			</div>
+		</li>
+</ul>
+{% endif %}
 </nav>
