@@ -27,6 +27,8 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
+*Note: `setup_remote_docker` is not curently compatible with the `machine` executor.*
+
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
@@ -89,7 +91,7 @@ The currently supported versions are:
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`.
 
 ## Separation of Environments
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker or Machine containers cannot directly communicate with the containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
 
 ### Accessing Services
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
