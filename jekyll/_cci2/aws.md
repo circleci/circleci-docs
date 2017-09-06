@@ -14,7 +14,7 @@ This document provides step-by-step instructions for installing CircleCI 2.0 on 
 If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your [CircleCI account representative](mailto:cs@circleci.com) for assistance with upgrading.
 
 **Notes:** 
-- CircleCI 2.0 is only available on AWS. This installation only supports AWS instance types with attached SSD storage (M3, C3, or R3). EBS-only volumes (C4 or M4) will not work with an installation managed by Terraform. 
+- CircleCI 2.0 is only available on AWS.  
 - Teams may create a new CircleCI 2.0 `.circleci/config.yml` file in their repositories to add new 2.0 projects incrementally while continuing to build 1.0 projects which use a `circle.yml` configuration file.
 
 ## Prerequisites
