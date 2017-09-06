@@ -12,7 +12,7 @@ published: true
 
 #### Can I monitor available build containers?
 
-Yes, basic reporting on the state of your build fleet is available in the CircleCI Admin application. Refer to the  [CloudWatch Monitoring]({{site.baseurl}}/enterprise/cloudwatch/) document for how to enable additional container monitoring for AWS.
+Yes, refer to the Introduction to Nomad Cluster Operation document for details. Refer to the [CloudWatch Monitoring]({{site.baseurl}}/enterprise/cloudwatch/) document for how to enable additional container monitoring for AWS.
 
 #### How do I provision admin users?
 
@@ -45,13 +45,7 @@ New builder boxes joining the fleet will use the new passphrase. Existing builde
 
 #### How can I gracefully shutdown a Builder instance?
 
-1. Get an admin token from `/etc/circle-bot/.circle-bot-token` on the services box.
-
-2. Run the following command, replacing *builder IP* with the IP address of the builder you want to shutdown and using the token from Step 1:
-
-```
-curl -k -X POST "https://<builder ip>/api/v1/admin/system/shutdown?circle-token=$TOKEN&unstoppable=true"
-```
+Refer to the Introduction to Nomad Cluster Operation document for details.
 
 #### Is it possible to run iOS/macOS builds on CircleCI?
 
