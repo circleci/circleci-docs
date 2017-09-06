@@ -65,6 +65,7 @@ prerequisites stated above in the required fields.
 1. Launch the Terraform stack:
 	- **Linux or Windows:** Run the `terraform apply` command from the repo root.
 	- **OSX:** Run the `bin/terraform apply` command and follow the prompts.
+	- *Note: you may need to run `terraform init` first to install the Terraform plugin for AWS.*d
 1. Go to the URL output from Terraform and click Get Started.
 1. Trust the temporary SSL cert.
 1. Use a new or exisiting self-signed certificate. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
