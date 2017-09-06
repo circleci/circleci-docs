@@ -174,7 +174,7 @@ Have available the following information and policies before starting the Previe
 
 1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage. 
 1. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
-1. Add a project using the [Setting Up Projects]({{site.baseurl}}/enterprise/quick-start/) document.
+1. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
 
 ## Troubleshooting
 

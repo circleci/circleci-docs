@@ -5,7 +5,7 @@ category: [administration]
 order: 1
 description: "High-level overview of the CircleCI installation process."
 ---
-This article provides an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
+This article provides System Administrator's with an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
 
 * TOC
 {:toc}
@@ -17,7 +17,7 @@ CircleCI 2.0 provides new infrastructure that includes the following improvement
 * Custom images for execution on a per-job basis.
 * Fine-grained performance with custom caching and per-job CPU or memory allocation. 
 
-Refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get started with the hosted application.
+If you are a user or developer, refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get started with the hosted application.
 
 ## Trial Installation Requirements
 
@@ -27,7 +27,7 @@ OR
 
 - An Amazon EC2 VM instance with at least 32G RAM, outbound internet access, and network connectivity to the GitHub or GitHub Enterprise instance.
 
-See the [CircleCI Trial Installation]({{ site.baseurl }}/enterprise/single-box/) document for trial installation instructions and links to the machine images.
+See the [CircleCI Trial Installation]({{ site.baseurl }}/2.0/single-box/) document for trial installation instructions and links to the machine images.
 
 ## Production Installation Requirements
 
@@ -42,8 +42,8 @@ To determine the size required for your workload using the default `medium` reso
 
 It is possible to install CircleCI 2.0 in either of the following configurations:
 
-- A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services Manually]({{ site.baseurl }}/enterprise/aws-manual/) or [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/enterprise/aws/) for instructions.
-- A single Services machine with multiple database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/enterprise/high-availability/) for instructions.
+- A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services Manually]({{ site.baseurl }}/2.0/aws-manual/) or [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) for instructions.
+- A single Services machine with multiple database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/2.0/high-availability/) for instructions.
 
 ## Customer Use Cases 
 
@@ -83,7 +83,7 @@ CircleCI consists of two primary components: Services and Builders. Services run
 
 ### Services 
 
-The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/enterprise/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+The machine on which the Service instance runs must not be restarted and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/2.0/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
 
 | Source                      | Ports                   | Use                    |

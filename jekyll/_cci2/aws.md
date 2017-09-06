@@ -21,7 +21,7 @@ If you have CircleCI Enterprise installed you may access CircleCI 2.0 features o
 
 Install the following automated infrastructure provisioning software:
 
-* Terraform, see the [Download Terraform](https://www.terraform.io/downloads.html) web site for links to packages for your architecture. To install CircleCI without using Terraform, refer to the [Manual AWS Installation]({{site.baseurl}}/enterprise/aws-manual/).
+* Terraform, see the [Download Terraform](https://www.terraform.io/downloads.html) web site for links to packages for your architecture. To install CircleCI without using Terraform, refer to the [Installing CircleCI 2.0 on AWS Manually]({{site.baseurl}}/2.0/aws-manual/).
 
 Have the following information available before beginning the installation procedure:
 
@@ -117,7 +117,7 @@ Have available the following information and policies before starting the Previe
 
 Use the following procedure to install with Terraform, skip to the next section for manual installation steps.
 
-1. Clone the [Enterprise Setup](https://github.com/circleci/enterprise-setup) repository.
+1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository.
 2. Checkout the `ccie2` branch with `git fetch && git checkout ccie2`.
 3. Run `make init` to copy `terraform.tfvars.template` to `terraform.tfvars`.
 4. Go to the provided URL at the end of Terraform output and follow the instructions.
