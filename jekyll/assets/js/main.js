@@ -109,6 +109,10 @@ $( document ).ready(function() {
         easing: 'swing'
       }
     });
+    // By default, open everything. 
+    // This is a brute force approach to fix things being collapsed by default
+    // TODO: make this more elegant
+    $("#mysidebar").navgoco('toggle', true);  
 
     $("#collapseAll").click(function(e) {
       e.preventDefault();
