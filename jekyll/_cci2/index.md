@@ -7,6 +7,8 @@ permalink: /2.0/
 
 Welcome to CircleCI 2.0! The release of CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CircleCI, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci/) for how it works and then use the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to start your first project build. Refer to the [Sample 2.0 config.yml File]({{ site.baseurl }}/2.0/sample-config/) to try out multiple jobs with workflow orchestration, then head over to the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
+If you are an Administrator, see the [2.0 Administrator’s Overview]({{ site.baseurl }}/enterprise/overview/) document to get started and refer to the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/enterprise/aws/) document for installation instructions.
+
 ## Programming Language Support
 
 Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications with YAML file templates and instructions: 
@@ -40,6 +42,8 @@ The CircleCI 2.0 platform includes significant performance, stability, and relia
 - **Parallelism**: Automatic provisioning of containers as they are freed without waiting for other jobs to finish. See the [Parallel Job Execution documentation]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#nav-button) for examples.
 
 - **Advanced Caching**: Speed up builds by caching files from run to run using keys that are easy to control with granular caching options for cache save and restore points throughout your jobs. Cache any files from run to run using keys you can control, see the [Caching Dependencies documentation](https://circleci.com/docs/2.0/caching/) for strategies and steps.
+
+- **Contexts**: Contexts enable you to share environment variables across projects within an organization. Developers can configure jobs to run in the org-wide context with a single line in their workflows configuration, see [Using Contexts]({{ site.baseurl }}/2.0/contexts) for details.
 
 We’re thrilled to have you here. Happy building!
 
