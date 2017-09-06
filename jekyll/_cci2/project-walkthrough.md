@@ -11,13 +11,13 @@ order: 3
 {:toc}
 
 
-The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database. The source for the demo application is at [cci-demo-walkthrough](https://github.com/circleci/cci-demo-walkthrough).
+The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database. The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
 
 The following sections walk through how Jobs and Steps are configured for this application, how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment, and how to deploy the demo application to Heroku.
 
 ## Basic Setup 
 
-The `.circleci/config.yml` is comprised of several Jobs for this application. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
+The `.circleci/config.yml` file may be comprised of several Jobs. In this example we have one Job called `build`. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
@@ -25,20 +25,17 @@ Following is a minimal example for our demo project with all configuration neste
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
     steps:
       - checkout
       - run: pip install -r requirements/dev.txt
 ```
 
-**Note:** Every `config.yml` file must have a job named `build` that includes the following:
+**Note:** Every `.circleci/config.yml` file must have a job named `build` that includes the following:
 
-
-- Working directory where commands will be executed.
 - Executor of the underlying technology, defined as `docker` in this example.
-- Image is a public Docker image for Python 3.6.0 in this demo. 
+- Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing. 
 - Steps starting with a required `checkout` Step and followed by `run:` keys that execute commands sequentially on the primary container.
 
 ## Service containers
@@ -51,25 +48,21 @@ Docker images are typically configured using environment variables, if these are
 version 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.1.0
 ```
 
-The environment variables for the *primary container* set some config specific to the Flask framework and set a database URL that references a database run in the `postgres:9.6.2` service container. Note that the PostgreSQL database is available at `localhost`.
+The environment variables for the *primary container* set some config specific to the Flask framework and set a database URL that references a database run in the `circleci/postgres:9.6.5-alpine-ram` service container. Note that the PostgreSQL database is available at `localhost`.
 
-The `postgres:9.6.2` service container is configured with a user called `ubuntu` with an empty password, and a database called `circle_test`.
-
-The `selenium/standalone-chrome:3.1.0` container is used to run tests using Selenium on Chrome, it isn't passed any configuration via environment variables.
+The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `ubuntu` with an empty password, and a database called `circle_test`.
 
 ## Installing Dependencies
 
@@ -79,18 +72,16 @@ Next the job installs Python dependencies into the *primary container* by runnin
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
       - run:
@@ -118,18 +109,16 @@ To speed up the builds, the demo configuration places the Python virtualenv into
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
       - restore_cache:
@@ -154,6 +143,38 @@ The following describes the detail of the added key values:
 
 - The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements.txt` changes.
 
+## Install and run Selenium to automate browser testing
+
+The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
+
+```
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.2-stretch-browsers
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6.5-alpine-ram
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: |
+            java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
 ## Running Tests
 
 In the demo application, tests run in the virtual Python environment through a new `run:` key. Then, the reports and results are stored by using `store_artifacts` and `store_test_results`.
@@ -162,20 +183,28 @@ In the demo application, tests run in the virtual Python environment through a n
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: |
+            java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
       - restore_cache:
           key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
       - run:
@@ -205,11 +234,11 @@ Notes on the added keys:
 - The `store_artifacts` step is a special step. The `path:` is a directory relative to the project’s `root` directory where the files are stored. The `destination:` specifies a prefix chosen to be unique in the event that another step in the job produces artifacts in a directory with the same name. CircleCI collects and uploads the artifacts to S3 for storage.
 - When the build completes, artifacts appear in the CircleCI Artifacts tab:
 
-![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough3.png)
+![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough7.png)
 
 - The path for the results files is relative to the `root` directory of the project. The demo application uses the same directory used to store artifacts, but this is not required. When the build completes, CircleCI analyzes the test timings and summarizes them on the Test Summary tab:
 
-![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough4.png)
+![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
 ## Deploying to Heroku
 
@@ -223,18 +252,16 @@ The demo `.circleci/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
+      - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.1.0
     steps:
       - checkout
       - restore_cache:
@@ -278,13 +305,11 @@ Notes on the added keys:
 - The `add_ssh_keys:` adds an installed SSH key with a unique fingerprint.
 - The `deploy` section is a special section that runs deployment commands. It checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands in the following Appendix section.
 
-Woo woo! The app will now update on Heroku with every successful build on the master branch. Here's the first passing build with deployment for the demo app: <https://circleci.com/gh/circleci/cci-demo-walkthrough/6>
+The app will now update on Heroku with every successful build on the master branch. Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
 
-## Appendix
+## Additional configuration for Heroku
 
-This section describes manual setup for deployment of the demo application to Heroku on CircleCI 2.0.
-
-The demo application is configured to run on Heroku with `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
+The demo application is configured to run on Heroku with settings provided `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
 Other files required by Heroku are:
 
@@ -297,7 +322,7 @@ Other files required by Heroku are:
 The following commands would be used to manually build the app on Heroku for this demo before actual deployment.
 
 ```
-heroku create cci-demo-walkthrough
+heroku create circleci-demo-python-flask # change this to a unique name
 heroku addons:create heroku-postgresql:hobby-dev
 heroku config:set FLASK_CONFIG=heroku
 git push heroku master
@@ -305,15 +330,15 @@ heroku run python manage.py deploy
 heroku restart
 ```
 
-The example app is available here: <https://cci-demo-walkthrough.herokuapp.com/>
+The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-Deployment with CircleCI 2.0 requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for the Heroku API key and login email must be added to the CircleCI UI:
+Deployment with CircleCI 2.0 requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for your Heroku API key and login email must be added to the CircleCI UI:
 
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
+![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough9.png)
 
 Creation of a new SSH key, without a passphrase, enables connecting to the Heroku Git server from CircleCI. The private key is added through the CircleCI UI SSH Permissions page with a hostname of `git.heroku.com` as follows:
 
-![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough6.png)
+![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough10.png)
 
 The private key is pasted into the input as shown above. A note is made of the Fingerprint for the private key for later reference. The public key is added to Heroku on the <https://dashboard.heroku.com/account> screen.
 
@@ -321,11 +346,11 @@ The `setup-heroku.sh` file in the `.circleci` folder includes the following:
 
 ```
 #!/bin/bash
-  git remote add heroku https://git.heroku.com/cci-demo-walkthrough.git
+  git remote add heroku https://git.heroku.com/circleci-demo-python-flask.git
   wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-  mkdir -p /usr/local/lib /usr/local/bin
-  tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-  ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+  sudo mkdir -p /usr/local/lib /usr/local/bin
+  sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+  sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
   cat > ~/.netrc << EOF
   machine api.heroku.com
@@ -340,6 +365,6 @@ The `setup-heroku.sh` file in the `.circleci` folder includes the following:
   ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
 ```
 
-This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
+This file runs on CircleCI and configures everything Heroku needs to deploy the app. `sudo` is required because commands are run by the `ubuntu` user by default in the primary container provided by CircleCI. ¦¦The second part creates a `.netrc` file and populates it with the API key and login details set previously.
 
-
+**Note:** If you fork this demo project so you can try it out for yourself, make sure to rename the Heroku project setting so that it can deploy to Heroku without clashing with the namespace used in this tutorial.
