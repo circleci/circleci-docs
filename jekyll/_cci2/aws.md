@@ -64,7 +64,7 @@ Have available the following information and policies before starting the Previe
 * If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
 * Access to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services.
 * AWS instances must have outbound access to pull docker containers and to verify your license.
-* It is best practice to use an instance profile for authentication. However, IAM authentication for the AWS administrator is supported. (Optional) Use the following permissions for the IAM User for the purpose of Terraform provisioning of AWS instances if desired:
+* In order to provision required AWS entities with Terraform you need an IAM User with following permissions:
 ```
 {
     "Version": "2012-10-17",
@@ -117,12 +117,13 @@ Have available the following information and policies before starting the Previe
 
 Use the following procedure to install with Terraform, skip to the next section for manual installation steps.
 
-1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository.
-2. Checkout the `ccie2` branch with `git fetch && git checkout ccie2`.
-3. Run `make init` to copy `terraform.tfvars.template` to `terraform.tfvars`.
+1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository (if you already have it cloned, make sure it is up-to-date and you are on the `master` branch: `git checkout master && get pull`).
+3. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
+3. Fill `terraform.tfvars` with appropriate values.
+4. Run `terraform apply` to provision.
 4. Go to the provided URL at the end of Terraform output and follow the instructions.
 5. Enter your license.
-6. Complete the `Storage` section. It is best practice to use an instance profile for authentication. However, IAM authentication for the AWS administrator is supported. (Optional) Use the following permissions for the IAM User for the purpose of Terraform provisioning of AWS instances if desired:
+6. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User:
      ```JSON
      {
          "Version": "2012-10-17",
@@ -155,7 +156,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-7. Configure the vm-service as follows. The AWS User needs to have the following permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions. The region/subnet/security group will be filled automatically.
+7. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User. It might be the same user as in Storage section, if so, it needs to have both sets of permissions.
      ``` JSON
      {
          "Version": "2012-10-17",
@@ -190,7 +191,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-8. From the Management Console, click Start to start the application. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue. 
+8. After applying settings you are be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue. 
 9. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Next Steps for Getting Started
@@ -201,9 +202,7 @@ Use the following procedure to install with Terraform, skip to the next section 
 
 ## Troubleshooting
 
-Check the Fleet State by clicking the wrench icon on the sidebar navigation of CircleCI and select Fleet State.
-- If no instances appear in the list, then the first builder is still starting. The first build may remain queued while the build containers start.
-- If there is a builder instance in the list but its state is starting-up, then it is still downloading the build container image and starting its first build containers.
+Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad/) document for information about how to check status of Builders.
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
