@@ -268,10 +268,10 @@ Regularly backup data mounted on EBS volumes using the following steps:
 
 ### Backing Up Encryption Keys
 
-If you are running `1.48.4` or later, you need to backup encryption keys. The encryption keys are stored in the Service machine and used to encrypt various sensitive data.
+If you are running `1.48.4` or later, you must backup encryption keys. The encryption keys are stored in the Service machine and are used to encrypt various sensitive data.
 
-**Note:** losing the encryption keys may lead to the unrecoverable data inconsistency as we don't have a mean to decrypt the data without correct keys.
+**Note:** Losing the encryption keys may lead to the unrecoverable data inconsistency because CircleCI does not decrypt  data without the correct keys.
 
-The encryption keys are plain text files, so you can backup them up very easily. Simply backing up `/data/circle/circleci-encryption-keys/` directory and store it in a secure place.
+The encryption keys are plain text files for easy backup from the `/data/circle/circleci-encryption-keys/` directory and should then be stored it in a secure place.
 
-Restoring is also very simple: just restore the directory to the same place. Please note that this needs to be done **before stating up CircleCI**.
+Restore the directory to the same location **before** starting up CircleCI.
