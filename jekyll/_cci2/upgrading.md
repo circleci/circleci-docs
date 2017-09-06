@@ -47,7 +47,7 @@ This procedure uses a `bash` script to performs all of the above steps and then 
 
 ## Perform Installation of CircleCI 
 
-After you have exported your databases, install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/docs/2.0/aws/) document.
+After you have exported your databases, install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
 
 To test your new install, set up a new GitHub application and use a different subdomain. After you have verified that the new installation works, you can cut over from your previous GitHub OAuth Application and subdomain name. 
 
