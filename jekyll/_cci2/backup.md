@@ -11,11 +11,11 @@ This document describes how to back up your CircleCI application so that you can
 * TOC 
 {:toc}
 
-**Note:** If you are running CircleCI in an HA configuration, you must use standard backup mechanisms for the external datastores. See the [High Availability]({{site.baseurl}}/enterprise/high-availability/) document for more information.
+**Note:** If you are running CircleCI in an HA configuration, you must use standard backup mechanisms for the external datastores. See the [High Availability]({{site.baseurl}}/2.0/high-availability/) document for more information.
 
 ## Backing up the Database
 
-If you have **not** configured CircleCI for HA, the best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/enterprise/high-availability/) may be the best solution.
+If you have **not** configured CircleCI for HA, the best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/2.0/high-availability/) may be the best solution.
 
 ## Backing up Object Storage
 
