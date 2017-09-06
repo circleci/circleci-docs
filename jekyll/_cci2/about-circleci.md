@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The hosted solution is available at <https://circleci.com/>. The [CircleCI Enterprise](https://circleci.com/enterprise/) solution is installable inside your private cloud or data center. Both are free to try for two weeks. CircleCI automates build, test, and deployment of software. 
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The hosted option is available at <https://circleci.com/>. [CircleCI 2.0](https://circleci.com/2.0/overview/) is also installable inside your private cloud or data center. Both are free to try for two weeks. CircleCI automates build, test, and deployment of software. 
 
 ![CircleCI Example Flow with GitHub]({{ site.baseurl }}/assets/img/docs/how_it_works.png)
 
@@ -52,8 +52,8 @@ See the [CircleCI Customers page](https://circleci.com/customers/) for the compl
 
 CircleCI provides a free trial with the following options:
 
-- **Hosted application**: See [Signup and Try CircleCI](https://circleci.com/docs/2.0/first-steps/) to get started with the hosted application.
-- **Installation behind your firewall**: Refer to [Try CircleCI Enterprise](https://circleci.com/docs/enterprise/single-box/) for the Enterprise Trial instructions.
+- **Cloud**: See [Signup and Try CircleCI](https://circleci.com/docs/2.0/first-steps/) to get started with the hosted application.
+- **Server**: Refer to [CircleCI Trial Installation](https://circleci.com/docs/2.0/single-box/) for the Enterprise Trial instructions.
 
 
 
