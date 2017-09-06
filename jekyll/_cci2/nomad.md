@@ -26,7 +26,7 @@ This document provides a basic introduction to Nomad for understanding how to op
 
 This section will give you the basic guide of operating a Nomad cluster in your installation.
 
-You can use Nomad CLI in both Nomad servers and clients but we recommend running the following commands in this section from one of your Nomad clients.
+The `nomad` CLI is installed in the Service instance. It is pre-configured to talk to the Nomad cluster, so it is possible to use the `nomad` command to run the following commands in this section.
 
 ### Checking the Jobs Status
 
