@@ -4,6 +4,7 @@ title: Setting up HTTP Proxies
 category: [administration]
 order: 7
 description: "How use an HTTP proxy with my CircleCI installation."
+hide: true
 ---
 
 This document describes how to configure CircleCI to use an HTTP proxy in the following sections:
