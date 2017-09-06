@@ -42,7 +42,7 @@ To determine the size required for your workload using the default `medium` reso
 
 It is possible to install CircleCI 2.0 in either of the following configurations:
 
-- A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services Manually]({{ site.baseurl }}/2.0/aws-manual/) or [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) for instructions.
+- A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) for instructions.
 - A single Services machine with multiple database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/2.0/high-availability/) for instructions.
 
 ## Customer Use Cases 
