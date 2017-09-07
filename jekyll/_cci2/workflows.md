@@ -172,11 +172,11 @@ workflows:
       - test1:
           requires:
             - build
-    context: org-global  
+          context: org-global  
       - test2:
           requires:
             - test1
-    context: org-global  
+          context: org-global  
       - deploy:
           requires:
             - test2
