@@ -15,19 +15,29 @@ This document provides instructions for System Administrators upgrading an exist
 - CircleCI 2.0 is only installable on AWS at this time. 
 - There is not currently an in-place upgrade mechanism. The upgrade process will require you to set up a new installation of CircleCI and import the existing data. This will require a downtime window.
  
+## Perform Installation of CircleCI 2.0
+
+After you have exported your databases, install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
+
+To test your new install, set up a new GitHub application and use a different hostname. After you have verified that the new installation works, you can cut over from your previous GitHub OAuth Application and subdomain name. 
+
+## Verify Your New Installation 
+
+Verify that your installation works by forking and running our [Reality Check](https://github.com/circleci/realitycheck) repository which exercises the basic functionality of CircleCI 2.0.
+
 ## Perform a Backup
 
-Prior to beginning the upgrade procedure, you should back up all of your data as described in the [backup documentation]({{ site.baseurl }}/2.0/backup/).
+Prior to beginning the upgrade procedure, you should back up all of your data in the 1.0 installation as described in the [backup documentation]({{ site.baseurl }}/2.0/backup/).
 
 ## Export Existing Databases 
 
 CircleCI 2.0 runs MongoDB 3.2.11 and PostgreSQL 9.5. These are major upgrade versions compared to CircleCI 1.0 Enterprise. The upgrade process consists of the following steps: 
 
-1. Export existing databases. 
-2. Convert the data to be compatible with the updated versions of the database servers. 
-3. Import upgraded databases into your CircleCI 2.0 installation. 
+1. Convert the data to be compatible with the updated versions of the database servers and export into a tarball.
+2. Transfer the tarball to your new CircleCI 2.0 installation.
+3. Import upgraded databases into the new installation.
 
-This procedure uses a `bash` script to perform all of the above steps and then it runs some basic sanity checks. The following steps should be performed on the existing CircleCI 1.0 Enterprise installation. 
+This procedure uses `bash` scripts to perform all of the above steps and then it runs some basic sanity checks. The following steps should be performed on the existing CircleCI 1.0 Enterprise installation. 
 
 **Note:** The following steps are non-destructive and in the event of any failure in the upgrade process you will be able to revert back to the previous state. As with all major software changes, you should still create a backup just to be safe. 
 
@@ -43,16 +53,6 @@ This procedure uses a `bash` script to perform all of the above steps and then i
 	```
 
 5. After the upgrade process is complete, a `.tar.gz` file appears in the directory where you ran the script. You will use this file to import your data into your new CircleCI 2.0 installation in a subsequent step. 
-
-## Perform Installation of CircleCI 
-
-After you have exported your databases, install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
-
-To test your new install, set up a new GitHub application and use a different subdomain. After you have verified that the new installation works, you can cut over from your previous GitHub OAuth Application and subdomain name. 
-
-## Verify Your New Installation 
-
-Verify that your installation works by forking and running our [Reality Check](https://github.com/circleci/realitycheck) repository which exercises the basic functionality of CircleCI 2.0. 
 
 ## Import Data 
 
@@ -70,13 +70,13 @@ Verify that your installation works by forking and running our [Reality Check](h
 
 Complete the following steps to cut over to the new installation:
 
-1. Update S3 settings. In AWS, edit the new IAM policy and update the name of the S3 bucket to match the name from your previous 1.0 installation. 
+1. Update S3 settings. In AWS, edit the in-line policy in the IAM role named "$prefix_role" created for your 2.0 installation.
 
-2. Update Replicated settings. In the Replicated management console, update the name of the S3 bucket to match the name that you used in your 1.0 installation. 
+2. Update Replicated settings. In the Replicated management console, update the name of the S3 bucket to match the name that you used in your 1.0 installation, and populate the rest of the settings to match your original GitHub OAuth application.
 
-3. After you have restored the databases and updated the S3 bucket, verify that all of your previous builds and project settings are available.
+3. Start the app and verify that all of your previous builds and project settings are available.
 
-4. You can now safely change the GitHub OAuth application to the original OAuth app that you were using and update the DNS to have your previous subdomain point to the new installation. 
+4. You can now update DNS settings to have your original hostname point to the new installation.
 
 ## Troubleshooting
 
