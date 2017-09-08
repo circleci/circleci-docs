@@ -12,7 +12,7 @@ This document provides instructions for System Administrators upgrading an exist
 {:toc}
 
 **Notes:** 
-- CircleCI 2.0 is only available on AWS. 
+- CircleCI 2.0 is only installable on AWS at this time. 
 - There is not currently an in-place upgrade mechanism. The upgrade process will require you to set up a new installation of CircleCI and import the existing data. This will require a downtime window.
  
 ## Perform a Backup
@@ -21,7 +21,7 @@ Prior to beginning the upgrade procedure, you should back up all of your data as
 
 ## Export Existing Databases 
 
-CircleCI 2.0 runs MongoDB 3.2.11 and PostgreSQL 9.5. These are major upgrade versions compared to CircleCI 1.0 Enterprise. The upgrade process consists of the following steps. 
+CircleCI 2.0 runs MongoDB 3.2.11 and PostgreSQL 9.5. These are major upgrade versions compared to CircleCI 1.0 Enterprise. The upgrade process consists of the following steps: 
 
 1. Export existing databases. 
 2. Convert the data to be compatible with the updated versions of the database servers. 
@@ -31,9 +31,9 @@ This procedure uses a `bash` script to perform all of the above steps and then i
 
 **Note:** The following steps are non-destructive and in the event of any failure in the upgrade process you will be able to revert back to the previous state. As with all major software changes, you should still create a backup just to be safe. 
 
-1. Log into the Replicated console located at `https://<your-circleci-install>:8800/dashboard` and select "Stop Now" to shut down CircleCI. 
-2. SSH into the Services machine and switch to the `root` user with the `sudo su` command.
-3. Confirm that MongoDB and PostgreSQL containers have stopped by listing all running containers with the `docker ps` command.
+1. Log in to the Replicated console located at `https://<your-circleci-install>:8800/dashboard` and select Stop Now to shutdown CircleCI. 
+2. SSH in to the Services machine and switch to the `root` user with the `sudo su` command.
+3. Confirm that the MongoDB and PostgreSQL containers have stopped by listing all running containers with the `docker ps` command.
 4. Download and run the upgrade script using the commands below. The duration of the upgrade operation depends on the amount of stored data. 
 
 	```
@@ -68,14 +68,15 @@ Verify that your installation works by forking and running our [Reality Check](h
 
 ## Cut Over
 
-### Update S3 Settings 
+Complete the following steps to cut over to the new installation:
 
-In AWS, you should edit the new IAM policy and update the name of the S3 bucket to match the name from your previous 1.0 installation. 
+1. Update S3 settings. In AWS, edit the new IAM policy and update the name of the S3 bucket to match the name from your previous 1.0 installation. 
 
-### Update Replicated Settings 
-In the replicated consosle you should update the name of the S3 bucket to match the one that you had in your 1.0 installation. 
+2. Update Replicated settings. In the Replicated management console, update the name of the S3 bucket to match the name that you used in your 1.0 installation. 
 
-After you have restored the databases, updated the S3 bucket and verified that all of your previous builds and project settings are available you can safely change the GitHub OAuth application to the original one that you were using and update the DNS to have your previous subdomain point to the new installation. 
+3. After you have restored the databases and updated the S3 bucket, verify that all of your previous builds and project settings are available.
+
+4. You can now safely change the GitHub OAuth application to the original OAuth app that you were using and update the DNS to have your previous subdomain point to the new installation. 
 
 ## Troubleshooting
 
