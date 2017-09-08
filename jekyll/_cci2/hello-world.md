@@ -39,5 +39,11 @@ CircleCI checks out your code, prints "Hello World", and posts a green build to 
 
 You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the PROJECTS tab in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
 
+## Validate Every Configuration Change
+
+To catch CircleCI config errors as you build your full `config.yml` file, it is possible create a git pre-commit hook to validate `~/circleci/config.yml` that, when pushing to git, will run the 
+`circleci config validate` command that is available to every build. 
+
+See the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-jobs/) document for complete information about the `circleci` command and then check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) about creating the Git hook.
 
 
