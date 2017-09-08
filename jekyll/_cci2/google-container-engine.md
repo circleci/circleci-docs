@@ -56,11 +56,17 @@ Once the `GOOGLE_AUTH` environment variable has been saved to your project, it w
 **config.yml**
 
 ```yml
+docker: 
+  - image: gcr.io/project/image-name
+    auth:
+    #Put the contents of keyfile.json into an environment variable for the build called GCR_CREDS, which is then passed in.
+      username: _json_key
+      password: $GCR_CREDS 
 steps:
   # ...
   - run:
       name: Decode Google Cloud Credentials
-      command: echo ${GOOGLE_AUTH} | base64 -i --decode > ${HOME}/gcp-key.json
+      command: echo ${GOOGLE_AUTH} | base64 -i --decode > ${HOME}/gcp-key.json    
   # ...  
 ```
 
