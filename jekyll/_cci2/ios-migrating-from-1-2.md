@@ -262,18 +262,18 @@ beyond `checksum`.
 
 ### Installing CocoaPods
 
-If you already checking your [CocoaPods](https://cocoapods.org/) _into_
+If you are already checking your [CocoaPods](https://cocoapods.org/) _into_
 your repository, there is no need to do anything in this step—your
 dependencies will be picked up correctly. However, if you are _not_
 including the CocoaPods into the repository, you will need to install
 CocoaPods in your `.circleci/config.yml`.
 
-Installing CocoaPods via `pod install` will fetch the whole CocoaPods
+Installing CocoaPods with `pod install` will fetch the whole CocoaPods
 specs repo, and that can take some of the valuable build time. To make
-`pod install` faster on CircleCI and reduce your build time, we provide
+`pod install` faster on CircleCI and reduce your build time, CircleCI provides
 a cache of CocoaPods specs via HTTPS instead of Git.
 
-Here is an example config snippet that will fetch CocoaPods specs via
+Following is an example config snippet that will fetch CocoaPods specs using
 HTTPS and then run `pod install`:
 
 {% raw %}
@@ -292,7 +292,7 @@ jobs:
 
 See [this CocoaPods guide]
 (https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)
-for more details on checking your pods into the repo vs. installing them
+for more details on checking your pods into the repo instead of installing them
 in your config.
 
 ### Running Tests
