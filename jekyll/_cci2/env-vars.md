@@ -14,13 +14,16 @@ This document describes using environment variables in CircleCI in the following
 
 ## Adding Environment Variables in the App
 
-To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Do **not** add keys or secrets to a public CircleCI project.
+To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. 
 
 ### Adding Global Environment Variables
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
 ## Adding Environment Variables in the config.yml File
+
+**Warning**: Do **not** add keys or secrets to a public CircleCI project. 
+Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
 
 To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
 
