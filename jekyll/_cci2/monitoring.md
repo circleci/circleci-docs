@@ -62,7 +62,7 @@ with your logging solution in the following sections:
 
 ## Installing Logging Appliance Agents
 
-CircleCI Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in 
+CircleCI 1.0 Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in 
 `/var/lib/docker/containers/**/*-json.log`.
 
 Logging appliances generally require
@@ -118,7 +118,7 @@ If you are using an orchestration tool, for example Chef, Puppet, or SaltStack, 
 
 ## Integrating With Syslog
 
-CircleCI Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it seamlessly.  Configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
+CircleCI 1.0 Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it seamlessly.  Configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
 
 ```
 #!/bin/bash
