@@ -44,7 +44,7 @@ If you are **not** using workflows, the `jobs` map must contain a job named
 `build`. This `build` job is the default entry-point for a run that is triggered by a
 push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
-### **`build`**
+### **<`build`>**
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
@@ -710,6 +710,10 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
+#### **<`build_test_deploy`>**
+
+A unique name for your workflow.
+
 ### **`jobs`**
 A job can have the keys `requires`, `filters`, and `context`.
 
@@ -718,9 +722,9 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
-#### **`build`**
+#### **<`build`>**
 
-A unique name for your job.
+A job name that exists in your `config.yml`.
 
 ##### **`requires`**
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
@@ -752,7 +756,7 @@ A job may have a `type` of `approval` indicating it must be manually approved be
           requires:
             - hold
 ```
-**Note:** The `hold` job must not exist in the main configuration.
+**Note:** The `hold` job name must not exist in the main configuration.
 
 ##### **`filters`**
 Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
