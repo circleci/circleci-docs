@@ -53,6 +53,12 @@ dependencies:
 ```
 Also, make sure that the directory you are trying to cache is not a part of your repository (i.e. files in this directory are not tracked).
 
+## Save Cache Output
+
+The checkmark and X characters indicate which paths exist at the time when the caches are saved – any paths with a X do not exist.
+
+There are some subtleties here though, in CircleCI 1.0 we create a read-only BTRFS snapshot, and save caches from these. If there are any symlinks that point outside of the snapshot, then they will not be cached, since BTRFS snapshots do not recursively follow symlinks.
+
 ## Per-branch Cache
 
 Each branch of your project will have a separate cache. If it is the
