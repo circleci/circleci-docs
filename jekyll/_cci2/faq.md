@@ -34,7 +34,7 @@ Yep! If you're not ready to fully commit to 2.0, you can easily try it while sti
 
 Create a new branch and add 2.0 configuration as described in the [2.0 Project Tutorial](https://circleci.com/docs/2.0/project-walkthrough/). When you push the branch with 2.0 configuration, your project will build on CircleCI 2.0. All other branches will continue building on CircleCI 1.0.
 
-If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file.
+If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. 
 
 ## What operating systems does CircleCI 2.0 support?
 
@@ -49,6 +49,10 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 ## Why is the 2.0 build not working?
 
 In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is where the build runs. If you are trying to figure out why the new 2.0 build is not working it may be that the build runs on the first image specified in the list. The first image in the list is used for the primary container.
+
+## I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
+
+There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support](mailto:support@circleci.com) or your [Customer Success Manager](mailto:cs@circleci.com) to have it increased. 
 
 ## How do I migrate from Jenkins to CircleCI 2.0?
 
