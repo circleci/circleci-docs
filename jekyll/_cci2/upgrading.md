@@ -57,7 +57,8 @@ Verify that your installation works by forking and running our [Reality Check](h
 ## Import Data 
 
 1. Copy the database export created in the first section to the new CircleCI 2.0 Services instance. 
-2. Download and run the import script using the commands below. The duration of the import operation depends on the amount of stored data. 
+2. Remove the existing databases that were created during testing with `rm -rf /data/circle/postgres` and `rm -rf /data/circle/mongo`. 
+3. Download and run the import script using the commands below. The duration of the import operation depends on the amount of stored data. 
 
   ```
   wget https://s3.amazonaws.com/release-team/scripts/circleci-database-import
@@ -67,7 +68,14 @@ Verify that your installation works by forking and running our [Reality Check](h
 
 ## Cut Over
 
-After you have restored the databases and verified that all of your previous builds and project settings are available you can safely change the GitHub OAuth application to the original one that you were using and update the DNS to have your previous subdomain point to the new installation. 
+### Update S3 Settings 
+
+In AWS, you should edit the new IAM policy and update the name of the S3 bucket to match the name from your previous 1.0 installation. 
+
+### Update Replicated Settings 
+In the replicated consosle you should update the name of the S3 bucket to match the one that you had in your 1.0 installation. 
+
+After you have restored the databases, updated the S3 bucket and verified that all of your previous builds and project settings are available you can safely change the GitHub OAuth application to the original one that you were using and update the DNS to have your previous subdomain point to the new installation. 
 
 ## Troubleshooting
 
