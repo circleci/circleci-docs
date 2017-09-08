@@ -35,7 +35,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 ## **`jobs`**
 
 A run is comprised of one or more named jobs. Jobs are specified in the
-`jobs` map. The name of the job is the key in the map, and the value is a map
+`jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map
 describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
