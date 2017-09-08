@@ -56,10 +56,13 @@ jobs:
       # Get the code from the VCS provider.
       - checkout
 
-      # Install CocoaPods.
+      # Download CocoaPods specs via HTTPS (faster than Git)
+      # and install CocoaPods.
       - run:
           name: Install CocoaPods
-          command: pod install
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod install
 
       # Run tests.
       - run:
@@ -256,6 +259,41 @@ Every time your Gemfile.lock changes, a new cache will be created.
 Please check out [this doc]({{ site.baseurl }}/2.0/caching/) for
 more information about cache keys and other available key options
 beyond `checksum`.
+
+### Installing CocoaPods
+
+If you are already checking your [CocoaPods](https://cocoapods.org/) _into_
+your repository, there is no need to do anything in this step—your
+dependencies will be picked up correctly. However, if you are _not_
+including the CocoaPods into the repository, you will need to install
+CocoaPods in your `.circleci/config.yml`.
+
+Installing CocoaPods with `pod install` will fetch the whole CocoaPods
+specs repo, and that can take some of the valuable build time. To make
+`pod install` faster on CircleCI and reduce your build time, CircleCI provides
+a cache of CocoaPods specs via HTTPS instead of Git.
+
+Following is an example config snippet that will fetch CocoaPods specs using
+HTTPS and then run `pod install`:
+
+{% raw %}
+```
+jobs:
+  build-and-deploy:
+    steps:
+      ...
+      - run:
+          name: Install CocoaPods
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod install
+```
+{% endraw %}
+
+See [this CocoaPods guide]
+(https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)
+for more details on checking your pods into the repo instead of installing them
+in your config.
 
 ### Running Tests
 
