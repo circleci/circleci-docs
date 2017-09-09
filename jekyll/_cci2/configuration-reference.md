@@ -104,6 +104,7 @@ command | N | String or List | The command used as pid 1 (or args for entrypoint
 user | N | String | Which user to run the command as
 environment | N | Map | A map of environment variable names and values
 auth | N | Map | Authentication info for private images
+aws_auth | N | Map | Authentication info for AWS ECR
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
@@ -149,6 +150,19 @@ jobs:
           username: mydockerhub-user  # can specify string literal values
           password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
 ```
+
+If you are using a private image hosted on [AWS ECR](https://aws.amazon.com/ecr/), we must authenticate using the AWS credentials.  By default, CircleCI uses AWS credentials provided through the project AWS Permissions settings or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables.  Users can also set the credentials by using `aws_auth` field like the following:
+
+```
+jobs:
+  build:
+    docker:
+      - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
+        auth:
+          aws_access_key_id: AKIAQWERVA  # can specify string literal values
+          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI env-var reference
+```
+
 
 #### **`machine`**
 {:.no_toc}
