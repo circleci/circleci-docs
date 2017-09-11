@@ -139,7 +139,7 @@ jobs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-If you are using a private image, you can specify the username/password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
+If you are using a private image, you can specify the username and password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
 
 ```YAML
 jobs:
@@ -151,7 +151,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
 ```
 
-If you are using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/), we must authenticate using the AWS credentials.  By default, CircleCI uses AWS credentials provided through the project AWS Permissions settings or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables.  Users can also set the credentials by using `aws_auth` field like the following:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials.  By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables.  It is also possible to set the credentials by using `aws_auth` field as in the following example:
 
 ```
 jobs:
