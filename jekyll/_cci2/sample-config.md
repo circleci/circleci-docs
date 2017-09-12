@@ -230,3 +230,169 @@ workflows:
             - precompile_assets
 ```
 {% endraw %}
+
+## Sample macOS Configuration File
+
+```
+# .circleci/config.yml
+
+# Specify the config version - version 2 is latest.
+version: 2
+
+# Define the jobs for the current project.
+jobs:
+  build-and-test:
+
+    # Specify the Xcode version to use.
+    macos:
+      xcode:
+        version: "8.3.3"
+
+    # Define the steps required to build the project.
+    steps:
+
+      # Get the code from the VCS provider.
+      - checkout
+
+      # Download CocoaPods specs via HTTPS (faster than Git)
+      # and install CocoaPods.
+      - run:
+          name: Install CocoaPods
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            pod install
+
+      # Run tests.
+      - run:
+          name: Run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 6
+            SCAN_SCHEME: WebTests
+
+      # Collect XML test results data to show in the UI,
+      # and save the same XML files under test-results folder
+      # in the Artifacts tab.
+      - store_test_results:
+          path: test_output/report.xml
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: scan-test-results
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
+
+  deploy:
+    macos:
+      xcode:
+        version: 8.3.3
+
+    steps:
+      - checkout
+
+      # Set up code signing via Fastlane Match.
+      - run:
+          name: Set up code signing
+          command: fastlane match development --readonly
+
+      # Build the release version of the app.
+      - run:
+          name: Build IPA
+          command: fastlane gym
+
+      # Store the IPA file in the build artifacts
+      - store_artifacts:
+          path: ./MyApp.ipa
+          destination: ipa
+
+      # Deploy!
+      - run:
+          name: Deploy to App Store
+          command: fastlane spaceship
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
+          filters:
+            branches:
+              only: master
+              ```
+              
+## Sample Linux and macOS Configuration File     
+
+```version: 2
+jobs:
+  linux_seed:
+    docker:
+      - image: circleci/ruby:2.4
+    steps:
+      - run: uname -a | tee linux.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - "*.txt"
+
+  xcode_nine:
+    macos:
+      xcode:
+        version: "9.0"
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run: ruby -v
+      - run: uname -a | tee workspace/xcode90.txt
+      - run: xcodebuild -version | tee -a workspace/xcode90.txt
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - xcode90.txt
+      - run: fastlane scan
+
+  xcode_eight_three_three:
+    macos:
+      xcode:
+        version: "8.3.3"
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run: uname -a | tee workspace/xcode833.txt
+      - run: xcodebuild -version | tee -a workspace/xcode833.txt
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - xcode833.txt
+      - run:
+          shell: /bin/bash --login -eo pipefail
+          command: ruby -v
+          name: Show Ruby Version
+      - run: fastlane scan
+
+  linux_final:
+    docker:
+      - image: circleci/ruby:2.4
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run: cat workspace/*.txt
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - linux_seed
+      - xcode_eight_three_three:
+          requires: [linux_seed]
+      - xcode_nine:
+          requires: [linux_seed]
+      - linux_final:
+          requires:
+            - xcode_nine
+            - xcode_eight_three_three
+```
