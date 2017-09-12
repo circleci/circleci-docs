@@ -18,8 +18,8 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 
 ## Getting Started
 
-Select a macOS project you would like to build on the [Add
-Projects page](https://circleci.com/add-projects). **Note:** Changing build environment is no longer needed in 2.0. If your project is not listed as macOS, choose Linux project and then select macOS in the Operating System section.
+Select a macOS project you would like to build on the Add
+Projects page of the CircleCI application. **Note:** Changing build environment is no longer needed in 2.0. If your project is not listed as macOS, choose Linux project and then select macOS in the Operating System section.
 
 ## Basic setup
 
@@ -361,5 +361,5 @@ Linux containers that are not available for macOS builds at the moment:
   * `machine: <language>`, where `<language>` is any language mentioned
     in the [Configuration doc]( {{ site.baseurl }}/2.0/configuration-reference/)
 
-Please see the [customizing your build](#customizing-your-build) section for alternatives and the [Sample 20 config.yml]( {{ site.baseurl }}/2.0/sample-config/).
+Please see the [Sample 2.0 config.yml]( {{ site.baseurl }}/2.0/sample-config/) for additional examples.
 
