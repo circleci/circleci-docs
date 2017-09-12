@@ -49,9 +49,9 @@ No matter if you commit to a project only once a month or if a project is just g
 
 Adding a project refers to the first time the project is setup on CircleCI.
 (**Related: &nbsp;**[What happens when you add a project?]( {{ site.baseurl }}/1.0/what-happens/))
-Add projects from [add projects](https://circleci.com/add-projects).
+Add projects by clicking the Add Projects button on the Project page in the CircleCI app.
 
-Following a project subscribes you to email notifications and adds the project into your dashboard's project/branch picker. CircleCI users that push to a new project get automatically followed to the project. You can control which projects you follow (including following projects that you do not push to!) from [add projects](https://circleci.com/add-projects).
+Following a project subscribes you to email notifications and adds the project into your dashboard's project/branch picker. CircleCI users that push to a new project get automatically followed to the project. You can control which projects you follow (including following projects that you do not push to!) from the Projects > Add projects page.
 
 
 
