@@ -15,6 +15,7 @@ There are some assumptions made in this guide:
 
 - We assume that your Android project is built with `gradle` (this is the default for projects created with [Android Studio](https://developer.android.com/studio).
 - We assume that your project is located in the root of your `git` repository, with the application located in a subfolder named `app`.
+- It is possible to run your tests, but loading the full emulator may not work.
 
 ## Sample Configuration
 
