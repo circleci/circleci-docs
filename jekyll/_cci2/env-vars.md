@@ -33,12 +33,11 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: postgres:9.6
+      - image: circleci/postgres:9.6
       # Environment variable for all commands executed in the primary container
         environment:
           POSTGRES_USER: conductor
           POSTGRES_DB: conductor_test
-    workDir: /root/workflows-conductor
     steps:
       - checkout
 
@@ -60,19 +59,13 @@ The following example shows separate environment variable settings for the prima
 version: 2
 jobs:
   build:
-    working_directory: ~/circulate
     docker:
-      - image: python:3.6.0
+      - image: circleci/python:3.6.2
        # Environment variable for all commands executed in the primary container
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: postgres:9.6.2
-       # Environment variable for all commands executed in the secondary container
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: circle_test
-          POSTGRES_PASSWORD: ""
+      - image: circleci/postgres:9.6
 ```
 
 See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
