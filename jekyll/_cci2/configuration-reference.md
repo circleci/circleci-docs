@@ -56,7 +56,7 @@ shell | N | String | Shell to use for execution command in all steps. Can be ove
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. (default: `~/project`. `project` is a literal string, not the name of the project.) You can also refer the directory with `$CIRCLE_WORKING_DIRECTORY` environment variable.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
-environment | N | Map | A map of environment variable names and valuables (NOTE: these will override any environment variables you set in the CircleCI web interface).
+environment | N | Map | A map of environment variable names and variables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
 {: class="table table-striped"}
