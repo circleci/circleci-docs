@@ -12,7 +12,7 @@ order: 2
 
 The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
 
-The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows. 
+The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
 
 ## Jobs Overview
 
@@ -30,7 +30,7 @@ Steps are a collection of executable commands which are run during a job. The `s
 
 ## Sample Configuration with Sequential Workflow
 
-Following is a sample 2.0 `.circleci/config.yml` file. 
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 ```
@@ -41,7 +41,7 @@ jobs:
     # The primary container is an instance of the first list image listed. Your build commands run in this container.
     docker:
       - image: circleci/node:4.8.2
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.   
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4
     steps:
       - checkout
@@ -59,7 +59,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:4.8.2  
+      - image: circleci/node:4.8.2
       - image: mongo:3.4.4
     steps:
       - checkout
@@ -75,7 +75,7 @@ jobs:
       - store_artifacts:
           path: coverage
           prefix: coverage
-      
+
 workflows:
   version: 2
   build_and_test:
@@ -245,8 +245,7 @@ jobs:
 
     # Specify the Xcode version to use.
     macos:
-      xcode:
-        version: "8.3.3"
+      xcode: "8.3.3"
 
     # Define the steps required to build the project.
     steps:
@@ -284,8 +283,7 @@ jobs:
 
   deploy:
     macos:
-      xcode:
-        version: 8.3.3
+      xcode: 8.3.3
 
     steps:
       - checkout
@@ -321,9 +319,10 @@ workflows:
           filters:
             branches:
               only: master
-              ```
-              
-## Sample Linux and macOS Configuration File     
+
+```
+
+## Sample Linux and macOS Configuration File
 
 ```version: 2
 jobs:
@@ -339,8 +338,7 @@ jobs:
 
   xcode_nine:
     macos:
-      xcode:
-        version: "9.0"
+      xcode: "9.0"
     steps:
       - checkout
       - attach_workspace:
@@ -356,8 +354,7 @@ jobs:
 
   xcode_eight_three_three:
     macos:
-      xcode:
-        version: "8.3.3"
+      xcode: "8.3.3"
     steps:
       - checkout
       - attach_workspace:
