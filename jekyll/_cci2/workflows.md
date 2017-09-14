@@ -20,6 +20,10 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
 - Fan-out to run multiple jobs in parallel for efficient testing of versions  
 - Fan-in for deployment to separate platforms with increased speed
 
+### Limitations
+
+Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for current limitations and information about features of 2.0 which are not yet supported with Workflows.
+
 ## Rerunning a Workflow from a Failed Job
 
 When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs *after* the failure will run, saving time and resources.
