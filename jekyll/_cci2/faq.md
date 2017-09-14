@@ -158,6 +158,18 @@ No.
 ### Can I build fork PR’s using Workflows?
 We do not support fork PR’s yet.
 
+## Billing
+
+### Is there a way to share plans across organizations and have them billed centrally?
+Yes, go to Settings > Share & Transfer > Share Plan to select Orgs you want to add to your plan.
+
+### Can I set up billing for an organization, without binding it to my personal account?
+Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+
+### What is the definition of a container in the context of billing?
+
+A container is a 2 CPU 4GB RAM box that you pay for access to. Containers can be used for concurerent tasks (for example, running 5 different jobs) or it could be used for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both situations would use five containers.
+
 
 [docker-hub]: https://hub.docker.com
 [docker-library]: https://hub.docker.com/explore/
