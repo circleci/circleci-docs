@@ -178,7 +178,8 @@ Use the following procedure to install with Terraform, skip to the next section 
              },
              {
                  "Action": [
-                     "ec2:TerminateInstances"
+                     "ec2:TerminateInstances",
+		     "ec2:StopInstances"
                  ],
                  "Effect": "Allow",
                  "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*:instance/*",
