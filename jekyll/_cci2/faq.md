@@ -133,6 +133,9 @@ Not yet, but we are working on that functionality.
  
 ### Can I use the Auto-cancel feature with Workflows?
 Not yet, but we are working on that functionality.
+
+### Can I use `store_test_results` with Workflows?
+This is next up on our roadmap to fix. Test timings are available for 2.0 but not with Workflows.
  
 ### Can I use Workflows with CircleCI 1.0?
  
