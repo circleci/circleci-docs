@@ -873,7 +873,8 @@ jobs:
     steps:
       - checkout
 
-      - run: command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+      - run:
+          command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
       # Create Postgres users and database
       # Note the YAML heredoc '|' for nicer formatting
