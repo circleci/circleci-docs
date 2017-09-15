@@ -44,6 +44,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 - store_test_results:
     path: /tmp/test-results
 ```
+**Note:** The results file must be both an XML file and the only file *of any type* in the subdirectory (not just the only XML file) for parsing to succeed.
 
 ### Custom runner examples
 
