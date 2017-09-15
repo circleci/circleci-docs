@@ -28,9 +28,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 ![Manage Schemes Dialogue](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. Commit and push the schemes.
 
-## Build Phases
-
-In this tutorial, builds are divided into dependencies, test, and deployment. The dependencies phase is for installing any Ruby Gems, CocoaPods, Node Modules or other packages required to build the application. The test phase is for building and testing your project.
+## Running tests
 
 For iOS projects, it is possible to run your tests with Fastlane Scan as follows:
 
