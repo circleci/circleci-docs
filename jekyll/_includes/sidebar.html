@@ -18,7 +18,7 @@
 			{% if page.collection == "cci2" %}
 				<ul class="left-links main-nav" style="display: block;">
 			  	<li class="nav-item active"><a href=""><h3>Users &amp; Developers</h3></a>
-			 			<div class="submenu">
+			 			<div class="submenu" style="margin: 5px;">
 			{% endif %}
 						{% assign cats = site.data.categories | where:"section",section.label %}
 						{% for cat in cats %}
@@ -42,7 +42,7 @@
 													{% if doc.children %}
 														{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
 													{% endif %}
-													<li class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+													<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
 												{% endif %}
 											{% endfor %}
 									</ul>
@@ -53,7 +53,7 @@
 						</div>
 					</li>
 					<li class="nav-item active"><a href=""><h3>System Administrators</h3></a>
-						<div class="submenu">
+						<div class="submenu" style="margin: 10px;">
 							<ul>
 								<li><a href="{{ site.baseurl }}/2.0/overview/">Administrator's Overview</a></li>
 								<li><a href="{{ site.baseurl }}/2.0/single-box/">CircleCI 2.0 Trial Installation</a></li>
@@ -69,10 +69,10 @@
 							</ul>
 						</div>
 					</li>
-				</ul>	
-			{% endif %}	
+				</ul>
+			{% endif %}
 		{% endcapture %}
 		{{ sidebar | strip_newlines }}
 		</ul>
-	{% endif %}	
+	{% endif %}
 </nav>
