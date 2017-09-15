@@ -161,7 +161,7 @@ We do not support fork PR’s yet.
 ## Billing
 
 ### Is there a way to share plans across organizations and have them billed centrally?
-Yes, go to Settings > Share & Transfer > Share Plan to select Orgs you want to add to your plan.
+Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
 
 ### Can I set up billing for an organization, without binding it to my personal account?
 Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
