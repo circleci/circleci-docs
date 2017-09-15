@@ -32,7 +32,7 @@ this access with `iptables` rules in a production setup, [contact support](mailt
 for specific instructions.
 
 <ol>
-<li>Find the Amazon Machine Image with at least 8G of RAM in your region from the following list:<br>
+<li>Find the Amazon Machine Image for your region from the following list:<br>
 
   <script>
   var amiIds = {
@@ -73,7 +73,9 @@ for specific instructions.
 
 <script>amiUpdateSelect();</script>
 </li>
-
+<li>
+Ensure you choose an instance type with at least 16G of RAM.
+</li>
 <li>During the Configure Security Group step, open port 22 for SSH, 80 for HTTP, 443 for HTTPS, and 8800 for Custom TCP.
 </li>
 
@@ -101,18 +103,18 @@ Copy the Client ID from GitHub and paste it into the entry field for GitHub Appl
 Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 </li>
 <li>
+Create an s3 bucket for use by CircleCI, and input it in the "Storage" section. Ensure that the IAM User input or Instance Profile associated with the EC2 instance have full access to the bucket.
+</li>
+<li>
+Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. Contact us if you have questions.
+</li>
+<li>
 Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
 </li>
 
 <li>Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
 </li>
 </ol>
-
-### AWS Installation Video Tutorial
-
-<p style="font-size: 20px; text-align: center">Following is a short video walkthrough of the entire install process on AWS:</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
 
 <!---
 ## Installation in a Data Center
