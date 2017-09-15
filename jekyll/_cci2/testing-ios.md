@@ -201,13 +201,14 @@ You can then ensure you're using those, by prefixing commands with `bundle exec`
 ## Configuring Deployment
 
 After you have a signed app you are on the homeward stretch. Distributing
-the app is easy. One popular way to distribute your app is using `shenzhen`.
-Shenzhen supports many distribution services, including:
+the app is easy.
 
 * [iTunes Connect](https://itunesconnect.apple.com/)
 * [HockeyApp](http://hockeyapp.net/)
 * [Beta by Crashlytics](http://try.crashlytics.com/beta/)
 * [TestFairy](https://testfairy.com/)
+
+Then you should set up environment variables for your service of choice:
 
 ### Hockey App 
 
@@ -226,23 +227,6 @@ Project Settings page for your app.
 the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now
 access this token during the build.
 
-5. Modify the deployment section of your `config.yml` as follows:
-
-```
-    steps:
-      - deploy:
-          name: hockey app deploy
-          command: |
-            - gym
-            - ipa distribute:hockeyapp
-                --file             /Users/distiller/<yourprojectname>/<yourappname>.ipa
-                --token            "$HOCKEY_APP_TOKEN"
-                --notes            "CircleCI build $CIRCLE_BUILD_NUM"
-                --commit-sha       "$CIRCLE_SHA1"
-                --build-server-url "$CIRCLE_BUILD_URL"
-                --repository-url   "$CIRCLE_REPOSITORY_URL"
-```
-
 ### Beta By Crashlytics
 
 1. Log in to Fabric.io and visit your organization's settings page.
@@ -256,21 +240,6 @@ the API key and Build Secret links to reveal the items.
 Environment Variables add two new items named `CRASHLYTICS_API_KEY` and
 `CRASHLYTICS_SECRET`, with the values you find on Crashlytics website.
 
-4. Modify the deployment section of your `config.yml` as
-follows:
-
-```
-    steps:
-      - deploy:
-          name: crashlytics deploy
-          command: |
-            - gym
-            - ipa distribute:crashlytics
-                --crashlytics_path Crashlytics.framework
-                --api_token    "$CRASHLYTICS_API_KEY"
-                --build_secret "$CRASHLYTICS_SECRET"
-```
-
 ### TestFairy
 
 To set up your app on TestFairy follow these steps:
@@ -282,19 +251,10 @@ key and go to your App's Project settings on CircleCI.
 3. Add a new
 Environment Variable named `TESTFAIRY_API_KEY` and paste in the API key
 from the TestFairy dashboard.
-
-4. Edit your `config.yml` as follows:
-
 ```
-    steps:
-      - deploy:
-          name: testfairy deploy
-          command: |
-            - gym
-            - ipa distribute:testfairy
-                --key     "$TESTFAIRY_API_KEY"
-                --comment "CircleCI build $CIRCLE_BUILD_URL"
-```
+
+And then follow the [fastlane documentation](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) for deployment, with your environment variable for keys.
+
 
 ## Resolving Common Simulator Issues
 
