@@ -168,7 +168,7 @@ Yes, the billing is associated with the organization. You can buy while within t
 
 ### What is the definition of a container in the context of billing?
 
-A container is a 2 CPU 4GB RAM box that you pay for access to. Containers can be used for concurerent tasks (for example, running 5 different jobs) or it could be used for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both situations would use five containers.
+A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
 
 [docker-hub]: https://hub.docker.com
