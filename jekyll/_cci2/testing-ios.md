@@ -157,7 +157,6 @@ to add nearly any dependency required in your build VM. Here's an example:
       - run:
           name: pre-start sim
           command: brew install cowsay
-    steps:
       - run:
           name: cowsay hi
           command: cowsay Hi!
@@ -174,18 +173,30 @@ project and adding the CocoaPods version to it:
 ```
 source 'https://rubygems.org'
 
-gem 'cocoapods', '= 0.39.0'
+gem 'cocoapods', '= 1.3.0'
 ```
 
-If we detect a Gemfile in your project we’ll run `bundle install` and
-will then invoke CocoaPods with `bundle exec` prepended to the command.
+Then you can install these using bundler:
 
-Please mind that, if overriding the `dependencies` step, you will need
-to manually add the `bundle install` step to your config.
+```
+    steps:
+      - restore_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
 
-If you have any other gems specified in your Gemfile, we will
-automatically install and cache those as well during the `bundle
-install` step.
+      - run: bundle check || bundle install --path vendor/bundle
+
+      - save_cache:
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+```
+
+You can then ensure you're using those, by prefixing commands with `bundle exec`:
+
+```
+    steps:
+      - run: bundle exec pod install
+```
 
 ## Configuring Deployment
 
