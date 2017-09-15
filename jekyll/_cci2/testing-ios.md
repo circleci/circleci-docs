@@ -61,12 +61,12 @@ jobs:
       - checkout
 
       # Download CocoaPods specs via HTTPS (faster than Git)
-      # and install CocoaPods.
       - run:
-          name: Install CocoaPods
+          name: Fetch CocoaPods Specs
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
+
+      - run: pod install --verbose
 
       # Run tests.
       - run:
