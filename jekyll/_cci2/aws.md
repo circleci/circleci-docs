@@ -87,6 +87,7 @@ Have available the following information and policies before starting the Previe
                 "iam:*",
                 "ec2:StartInstances",
                 "ec2:RunInstances",
+                "ec2:TerminateInstances",
                 "ec2:Describe*",
                 "ec2:CreateTags",
                 "ec2:AuthorizeSecurityGroupEgress",
@@ -100,6 +101,7 @@ Have available the following information and policies before starting the Previe
                 "ec2:DescribeSecurityGroups",
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
+                "ec2:ModifyNetworkInterfaceAttribute",
                 "cloudwatch:*",
                 "autoscaling:DescribeAutoScalingGroups",
                 "iam:GetUser"
