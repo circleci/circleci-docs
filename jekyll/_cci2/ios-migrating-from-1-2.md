@@ -47,8 +47,7 @@ jobs:
 
     # Specify the Xcode version to use.
     macos:
-      xcode:
-        version: "8.3.3"
+      xcode: "8.3.3"
 
     # Define the steps required to build the project.
     steps:
@@ -86,8 +85,7 @@ jobs:
 
   deploy:
     macos:
-      xcode:
-        version: 8.3.3
+      xcode: "8.3.3"
 
     steps:
       - checkout
@@ -184,13 +182,11 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode:
-        version: "8.3.3"
+      xcode: "8.3.3"
 ...
   deploy:
     macos:
-      xcode:
-        version: 8.3.3
+      xcode: "8.3.3"
 ...
 ```
 
@@ -376,8 +372,7 @@ jobs:
   ...
   deploy:
     macos:
-      xcode:
-        version: 8.3.3
+      xcode: 8.3.3
 
     steps:
       - checkout
