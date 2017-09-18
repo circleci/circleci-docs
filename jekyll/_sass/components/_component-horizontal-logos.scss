@@ -1,0 +1,44 @@
+// NOTE: expects to be embedded in a bootstrap grid row
+
+.horizontal-logos {
+  @include make-xs-column(12);
+
+  // row element needed for grid nesting
+  .horizontal-logos-row {
+    @include make-row;
+  }
+
+  .horizontal-logo {
+    text-align: center;
+    min-height: 100px;
+    line-height: 100px; // vertical centering of logo imgs in div
+
+    img {
+      max-width: 200px;
+      margin: 40px auto;
+      &:first-of-type {
+        margin-top: 0;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // set up for different logo counts; default: 4
+  .horizontal-logo {
+    @include make-md-column(3);
+  }
+  &.three-wide .horizontal-logo {
+    @include make-md-column(4);
+  }
+  &.five-wide .horizontal-logo {
+    @include make-md-column(2.4);
+  }
+}
+
+// snowflakes
+.horizontal-logo.kickstarter img {
+  max-width: none;
+  width: 220px;
+}

@@ -1,0 +1,582 @@
+// Reset and dependencies
+
+// import bootstrap
+@import 'vendors/_bootstrap';
+
+// Custom mixins
+@import 'base/_mixins';
+
+// Core CSS
+@import 'base/_type';
+
+// Components w/ JavaScript
+// Utility classes
+
+// Custom
+@import 'base/_navbar';
+@import 'base/_subnav';
+@import 'base/_buttons';
+@import 'base/_background';
+@import 'base/_footer-cta';
+@import 'base/_footer';
+@import 'base/_forms';
+@import 'base/_avatars';
+@import 'base/_dark-design';
+@import 'base/_spacing';
+
+// FIXME: We shouldn't have to specify this because it is
+// specified/overridden in variables
+
+html {
+  font-size: $font-size-root;
+}
+
+body {
+  font-family: $font-family-base;
+  font-weight: $font-weight-base;
+  font-size: $font-size-root;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  color: $black;
+
+  // make room for nav
+  padding-top: 70px;
+  &.with-subnav {
+    padding-top: 100px;
+  }
+}
+
+// setting emphasis font family
+h1, h2, h3, h4, h5, button, .btn, nav {
+  font-family: $font-family-emphasis;
+}
+
+.graphik {
+  font-family: $font-family-emphasis;
+  font-weight: inherit;
+}
+
+// http://stackoverflow.com/a/33596636/203773
+.link-unstyled {
+  &, &:link, &:hover {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
+
+main {
+  // overflow-x: auto;
+  // overflow-y: scroll;
+  -webkit-box-flex: auto;
+          box-flex: auto;
+  -webkit-flex: auto;
+          flex: auto;
+}
+
+table {
+  margin-top: 60px;
+}
+
+.removed {
+  display: none;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.flex-wrapper {
+  display: inline-flex;
+}
+
+.vcenter {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+
+  align-items: center;
+}
+.relative {
+  position: relative;
+}
+
+.text-center-small {
+  @media screen and (max-width: $screen-sm) {
+    text-align: center;
+  }
+}
+.text-center-medium {
+  @media screen and (max-width: $screen-md) {
+    text-align: center;
+  }
+}
+
+.inverted {
+  color: $text-color-inverted;
+  background: $background-color-inverted;
+
+  h1, h2, h3, h4, h4, h5, p, span {
+    color: $text-color-inverted;
+  }
+}
+
+.hero h2 {
+  &.green {
+    color: $primary-color;
+  }
+}
+
+.beta-badge {
+  position: relative;
+  &:after {
+    content: 'Beta';
+    position: absolute;
+    background: $white;
+    color: $primary-color;
+    border: $border-width-wide solid $primary-color;
+    border-radius: 40px;
+    font-size: 13px;
+    right: 0;
+    bottom: 40px;
+    padding: 2px 10px 0px 10px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.removed-lg-down {
+  @media screen and (max-width: $screen-lg-min) {
+    display: none;
+  }
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.text-white {
+  color: $white;
+
+  a  {
+    color: inherit;
+    padding-bottom: 2px;
+    border-bottom: 1px solid $primary-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.bg-white {
+  background: $background-color;
+}
+.bg-gray-dark {
+  background: $background-color-darkest;
+}
+.bg-lgray {
+  background: $background-color-dark;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.bold {
+  font-weight: $font-weight-bold;
+}
+
+.limited-width {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+ul {
+  &.circle-checks {
+    list-style: none;
+    font-size: 28px;
+
+    li {
+      margin: 50px 0px 50px 0px;
+      padding-left: 60px;
+
+      &:before {
+        content: asset("icons/ic-checkmark.svg");
+        position: absolute;
+        margin: -14px 0px 0px -100px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      li {
+        font-size: 18px;
+        line-height: 48px;
+      }
+    }
+  }
+
+  &.green-circles {
+    list-style: none;
+    line-height: $line-height-list-base;
+
+    li {
+      margin-left: 15px;
+
+      &:before {
+        position: absolute;
+        width: 5px;
+        margin: -1px 0px 0px -25px;
+        content: asset("icons/ic-bulletpoint.png");
+      }
+    }
+  }
+
+  &.blue-checks {
+    list-style: none;
+    line-height: $line-height-list-base;
+
+    &.large {
+      font-size: $font-size-h4;
+
+      li {
+        margin-bottom: 15px;
+      }
+    }
+
+    li {
+      margin-left: 20px;
+
+      &:before {
+        position: absolute;
+        width: 5px;
+        margin: -1px 0px 0px -30px;
+        content: asset("icons/ic-bluecheck.svg");
+      }
+    }
+  }
+
+  li.no-bulletpoint {
+    &:before {
+      content: "";
+    }
+  }
+}
+
+ul.dark-theme-checks {
+  list-style: none;
+  li:before {
+    position: absolute;
+    margin: 0px 0px 0px -35px;
+    content: asset("icons/ic-bluecheck.svg");
+  }
+}
+
+.shadow-box {
+  background-color: $white;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  border: $border-width solid #ddd;
+  border-radius: $border-radius-large;
+}
+.lgray-bg {
+  background: #FBFBFB;
+}
+
+.center-left-wrapper {
+  max-width: 725px;
+  margin: 0 auto;
+  text-align: left;
+}
+.hero ul.hero {
+  font-size: 20px;
+  text-align: left;
+  padding: 0 0 0 18px;
+  margin: 10px 0 0 0;
+}
+
+.shadow-box-with-hover {
+  @extend .shadow-box;
+  transition: box-shadow 0.4s ease;
+  &:hover {
+    box-shadow: 0 0 4px 1px $text-color-link, 0px 2px 4px 0px rgba(0,0,0,0.2);
+  }
+}
+
+.logo-block {
+  @extend .shadow-box;
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  padding: 15px;
+  text-align: center;
+
+  &.checkmark:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background-image: asset("icons/check-circle-green.svg");
+    right: -6px;
+    top: -6px;
+    width: 22px;
+    height: 22px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+  }
+}
+
+.hero-logo {
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  &.spin {
+    &:hover {
+      @include animation-duration(600ms);
+      @include animation-iteration-count(1);
+      @include animation-timing-function(linear);
+      @include animation-name(clockwise);
+      @include animation-bezier(0.42, 0, 0.58, 1);
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    max-width: 100%;
+  }
+}
+
+.hero-logo-set {
+  img {
+    @extend .hero-logo;
+  }
+
+  img.wide {
+    max-height: 40px;
+  }
+  img.small {
+    max-height: 60px;
+  }
+
+  .spacer {
+    padding: 0 14px;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.tooltip {
+  filter: drop-shadow(0px 0px 4px rgba($gray-dark, 0.5));
+}
+
+.deep-link-anchor {
+  position: relative;
+  top: -100px; // fixed header height
+}
+
+// This allows archor links for employers to appear below nav instead of under it.
+span.link-anchor{
+  display: block;
+  content: " ";
+  margin-top: -100px;
+  height: 100px;
+  visibility: hidden;
+}
+
+hr.dark {
+  border-color: $background-color-darkest;
+
+  &.hr-light {
+    border-color: $gray;
+  }
+}
+hr.blue-highlight {
+  width: $spacing-large-horizontal;
+  border-color: $secondary-color;
+  margin: $spacing-small-vertical 0;
+  border-width: $border-width-wide;
+}
+
+.hr-label-wrap {
+  margin-bottom: $spacing-base;
+
+  hr {
+    position: absolute;
+    border-color: $background-color-darkest;
+    width: 100%;
+    margin-top: ($spacing-base * 2);
+    left: 0;
+  }
+
+  .hr-label-black {
+    $label-width: 120px; 
+
+    color: $primary-color;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-h5;
+    position: absolute;
+    background: $black;
+    width: ($spacing-large-horizontal * 2);
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+ol.legal, ul.legal {
+  list-style-position: inside;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 0.75em;
+  }
+
+  li:before {
+    content: "";
+    padding-right: 20px;
+  }
+
+  .title {
+    font-weight: $font-weight-bold;
+  }
+
+  li > .title:first-child {
+    text-decoration: underline;
+  }
+
+  p.title {
+    margin-top: 1em;
+  }
+
+  .definition {
+    font-weight: $font-weight-bold;
+    font-style: italic;
+  }
+
+  .cross-reference {
+    text-decoration: underline;
+  }
+
+  .indent {
+    padding-left: 45px;
+    p {
+      text-indent: 45px;
+    }
+    ol > li:before {
+      padding-left: 0;
+      padding-right: 20px;
+    }
+  }
+
+  // numeric nested lists
+  ol.numeric {
+    padding-left: 0;
+    counter-reset: list;
+    > li {
+      list-style: none;
+      text-indent: -30px;
+    }
+    > li:before {
+      counter-increment: list;
+      content: counter(list, numeric) ".";
+    }
+  }
+
+  // one level nested lists
+  // style: lower alpha with parentheses
+  // http://stackoverflow.com/a/1636635/203773
+  > li > ol {
+    padding-left: 0;
+    counter-reset: list;
+    > li {
+      list-style: none;
+    }
+    > li:before {
+      counter-increment: list;
+      content: "(" counter(list, lower-alpha) ")";
+      padding-left: 40px;
+      padding-right: 35px;
+    }
+  }
+}
+
+.img-left {
+  @extend .pull-left;
+  max-width: 50% !important;
+  margin-top: $line-height-computed / 3.3 !important;
+  margin-right: $line-height-computed * 2 !important;
+}
+
+.img-right {
+  @extend .pull-right;
+  max-width: 50% !important;
+  margin-top: $line-height-computed / 3.3 !important;
+  margin-left: $line-height-computed * 2 !important;
+}
+
+// Grid Extras
+
+.one-col > * {
+  @include make-md-column(12);
+}
+.two-cols > * {
+  @include make-md-column(6);
+}
+.three-cols > * {
+  @include make-md-column(4);
+}
+.four-cols > * {
+  @include make-md-column(3);
+}
+.five-cols > * {
+  @include make-md-column(2.4);
+}
+
+.readable-width {
+  @include make-md-column(10);
+  @include make-md-column-offset(1);
+  @include make-lg-column(8);
+  @include make-lg-column-offset(2);
+}
+
+// make other variations of this for other widths as needed
+@media (min-width: $screen-md) {
+  .tighten-md-grid-left {
+    padding-left: $grid-gutter-width / 2 / 3;
+  }
+  .tighten-md-grid-right {
+    padding-right: $grid-gutter-width / 2 / 3;
+  }
+}
+
+.m-a-0 { margin:        0 !important; }
+.m-t-0 { margin-top:    0 !important; }
+.m-r-0 { margin-right:  0 !important; }
+.m-b-0 { margin-bottom: 0 !important; }
+.m-l-0 { margin-left:   0 !important; }
+.m-x-0 { margin-right:  0 !important; margin-left:   0 !important; }
+.m-y-0 { margin-top:    0 !important; margin-bottom: 0 !important; }
+
+.m-t-35 { margin-top:   35px !important; }
+.m-t-70 { margin-top:   70px !important; }
+.m-b-35 { margin-bottom:   35px !important; }
+.m-b-70 { margin-bottom:   70px !important; }
+
+.p-a-0 { padding:        0 !important; }
+.p-t-0 { padding-top:    0 !important; }
+.p-r-0 { padding-right:  0 !important; }
+.p-b-0 { padding-bottom: 0 !important; }
+.p-l-0 { padding-left:   0 !important; }
+.p-x-0 { padding-left:   0 !important; padding-right: 0 !important; }
+.p-y-0 { padding-top:    0 !important; padding-bottom: 0 !important; }

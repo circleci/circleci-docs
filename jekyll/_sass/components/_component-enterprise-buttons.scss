@@ -1,0 +1,17 @@
+.cta-buttons {
+  display: inline-block;
+  margin: 40px 15px 10px 15px;
+}
+.or {
+  display: inline-block;
+  font-size: 20px;
+}
+.container-fluid {
+  margin-bottom: 22px;
+}
+@media screen and (max-width: 700px) {
+  .or {
+    display: block;
+    margin-bottom: 10px;
+  }
+}

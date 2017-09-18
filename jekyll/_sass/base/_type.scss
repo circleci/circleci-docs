@@ -1,0 +1,196 @@
+//
+// Typography
+// --------------------------------------------------
+
+// Headings
+// -------------------------
+
+h1, h2, h3, h4, h5, h6, blockquote,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $font-family-emphasis;
+  font-weight: $font-weight-bolder;
+  color: $black;
+
+  small,
+  .small {
+    font-weight: normal;
+    line-height: 1;
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  small,
+  .small {
+    font-size: 65%;
+  }
+}
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: ($line-height / 2);
+  margin-bottom: ($line-height / 2);
+
+  small,
+  .small {
+    font-size: 75%;
+  }
+}
+
+h1, .h1 { font-size: $font-size-h1; line-height: ($line-height - .2); }
+h2, .h2 { font-size: $font-size-h2; line-height: $line-height; }
+h3, blockquote, .h3 { font-size: $font-size-h3; line-height: $headings-line-height; }
+h4, .h4 { font-size: $font-size-h4; line-height: $headings-line-height; }
+h5, .h5 { font-size: $font-size-h5; line-height: $headings-line-height; }
+h6, .h6 { font-size: $font-size-h6; line-height: $headings-line-height; }
+
+h1 {
+  // Line breaking header elements
+  @media screen and (max-width: $screen-sm) {
+    font-size: 30px;
+    text-align: center;
+
+    span {
+      display: block;
+    }
+  }
+}
+
+// Body text
+// -------------------------
+
+p {
+  // This is almost certainly a but but I'm not going to touch this since it's
+  // a big global style. ($line-height / 2) would be 0.75px. I think the intention
+  // was probably font-size * line-height / 2 yielding a more reaonsable value
+  margin: 0 0 ($line-height / 2);
+  font-size: $font-size-base;
+  line-height: $line-height;
+  color: $black;
+
+  &:not(.large) {
+    line-height: $line-height-paragraph;
+  }
+
+  &.large {
+    font-size: $font-size-h4;
+
+    &.margin {
+      margin: 20px 0px 30px 0px;
+    }
+  }
+
+  &.lead {
+    margin-bottom: 10px;
+    font-size: $font-size-base;
+    line-height: $line-height;
+  }
+}
+
+// paragraphs following subheaders
+h3, .h3,
+h4, .h4,
+h5, .h5
+h6, .h6 {
+  + p {
+    margin-top: ($font-size-base * $line-height / 2);
+  }
+}
+
+strong, em, b {
+  font-size: inherit;
+  font-weight: $font-weight-bolder;
+  color: inherit;
+  font-family: inherit;
+}
+
+section p {
+  color: $black;
+}
+
+a {
+  cursor: pointer;
+  color: $text-color-link;
+
+  &:hover {
+    color: $text-color-link;
+  }
+
+  @include hover {
+    transition: all 100ms ease-in-out;
+  }
+}
+
+p a {
+  color: $text-color-link;
+  border-bottom: $border-width solid transparent;
+  font-weight: $font-weight-bold;
+
+  &:hover {
+    color: $secondary-color;
+    text-decoration: underline;
+  }
+}
+
+// Inline code
+
+pre {
+  margin: $line-height-computed 0;
+}
+
+code {
+  padding: 3px 6px;
+  font-size: 90%;
+  color: #04AA51;
+  background-color: #F5FEFF;
+  border-radius: 1px;
+  box-shadow: none;
+  border: $border-width solid #73CF45;
+  white-space: nowrap;
+  font-weight: $font-weight-bold;
+
+  &.block {
+    display: block;
+    background: none;
+    color: inherit;
+    border: none;
+    white-space: pre;
+
+    strong {
+      font-size: $font-size-h3;
+    }
+  }
+}
+
+.hljs {
+  background: inherit;
+}
+
+// Code in a pre-formatted block
+pre code {
+  border: none;
+}
+
+// User input typically entered via keyboard
+kbd {
+  padding: 3px 6px;
+  font-size: 90%;
+  color: $kbd-color;
+  background-color: $kbd-bg;
+  border-radius: $border-radius-small;
+  box-shadow: none;
+  border: $border-width solid $secondary-color;
+  white-space: nowrap;
+  font-weight: $font-weight-bold;
+
+  kbd {
+    padding: 0;
+    font-size: 100%;
+    font-weight: bold;
+    box-shadow: none;
+  }
+}

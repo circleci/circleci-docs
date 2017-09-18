@@ -1,0 +1,178 @@
+body.page-student-developer {
+  h1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 22px;
+    max-width: 580px;
+    line-height: 1.2;
+  }
+
+  .btn {
+    border-radius: 2px;
+    padding: 12px 22px 12px 20px;
+  }
+
+  section {
+    border-top: none;
+  }
+  section.hero {
+    background-color: #161616;
+
+    h2 {
+      color: white;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      max-width: 725px;
+    }
+
+    a.btn {
+      position: relative;
+      left: 50%;
+      margin-left: -126px;
+    }
+
+    p {
+      max-width: 600px;
+      margin-top: 25px;
+      font-size: 14px;
+      margin: 25px auto 0 auto;
+    }
+  }
+  section.features {
+    background-color: #161616;
+    padding-top: 0;
+
+    .bg-gray-dark {
+      padding: 25px;
+    }
+  }
+  section.how-it-works {
+    background-color: #161616;
+
+    .break-control {
+      display: block;
+    }
+    img {
+      margin-top: 80px;
+      width: 100%;
+    }
+    a.btn {
+      margin-top: 30px;
+    }
+
+    .pad {
+      margin-top: 25px;
+    }
+
+    @media screen and (max-width: 767px) {
+      .break-control {
+        display: inline;
+      }
+    }
+  }
+  section.bg-lgray {
+    padding-top: 45px;
+    
+    .row + .row {
+      margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 36px;
+      text-align: center;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .flex {
+      display: flex;
+      flex-direction: row;
+      background: white;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+      @include transition(box-shadow 400ms);
+
+      &:hover {
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25)
+      }
+
+      @media screen and (max-width: 991px) {
+          flex-direction: column;
+      }
+      @media screen and (max-width:  767px) {
+          flex-direction: row;
+          margin-bottom: 25px; 
+      }
+      @media screen and (max-width: 460px) {
+          flex-direction: column;
+      }
+    }
+    .img {
+      flex: 1 1 30%;
+      width: 100px;
+      
+      @media screen and (max-width: 991px) {
+        width: 100%;
+        height: 200px;
+      }
+
+      @media screen and (max-width:  767px) {
+        width: 100px;
+        height: none;
+      }
+
+      @media screen and (max-width: 460px) {
+        width: 100%;
+        height: 200px;
+      }
+
+      &.dollar-shave {
+        background: image_url('integrations/img-dollarshave.png');
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      &.fabric {
+        background: image_url('integrations/img-fabric.png');
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+    }
+    p {
+      flex: 1 1 70%;
+      width: 300px;           
+      padding: 35px;
+    }
+  }
+  section.bg-white {
+    .pad {
+      padding: 0 50px 0 0;
+      @media screen and (max-width: 767px) {
+        padding: 0 20px 50px 20px;
+      }
+    }
+    img {
+      width: 100%;
+      max-width: 400px;
+      margin-top: -25px;
+    }
+    h3 {
+      margin: 0 0 30px 0;
+    }
+    div.col-wrap {
+      -webkit-column-count: 2; /* Chrome, Safari, Opera */
+      -moz-column-count: 2; /* Firefox */
+      column-count: 2;
+
+      @media screen and (max-width: 767px) {
+        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+        -moz-column-count: 1; /* Firefox */
+        column-count: 1;
+      }
+    }
+  }
+}

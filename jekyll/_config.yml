@@ -15,6 +15,14 @@ external_json_to_data:
   - name: circleci_images
     url: https://s3.amazonaws.com/circle-downloads/playground/bundle-images-manifest.json
 
+assets:
+  sources:
+    - _assets/fonts
+    - _assets/css
+    - _assets/img
+    - _assets/js
+    - _assets/code
+
 markdown: kramdown
 kramdown:
   input: GFM

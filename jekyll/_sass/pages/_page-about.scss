@@ -1,0 +1,81 @@
+body.page-about {
+  .fact {
+    @include make-sm-column(4);
+  }
+
+  .people {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: flex-start;
+    justify-content: center;
+
+    // null out extra padding on the left and right person elements
+    margin-left: -44px;
+    margin-right: -44px;
+
+    .person {
+      $size: 150px;
+      $logo-size: $size / 3;
+
+      padding: 0 44px;
+      margin-bottom: 45px;
+      position: relative;
+      text-align: center;
+      max-width: 238px;
+
+      .circle {
+        .pic {
+          position: relative;
+          overflow: hidden;
+          background-color: $gray-lighter;
+
+          &, &::after, & .headshot {
+            height: $size;
+            width: $size;
+            border-radius: $size / 2;
+          }
+
+          &::after {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            content: "";
+            background-color: $black;
+            opacity: 0;
+          }
+        }
+
+        .logo {
+          margin: ($size - $logo-size) / 2;
+          height: $logo-size;
+          width: $logo-size;
+          opacity: 0.2;
+        }
+      }
+
+      .name {
+        margin: 1em 0 0;
+        color: $gray-darker;
+        font-size: 110%;
+        width: 150px;
+      }
+    }
+
+    // This allows archor links for employers to appear below nav instead of under it.
+    span.anchor{
+      display: block;
+      content: " ";
+      margin-top: -110px;
+      height: 110px;
+      visibility: hidden;
+    }
+  }
+}

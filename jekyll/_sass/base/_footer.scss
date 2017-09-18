@@ -1,0 +1,102 @@
+@import 'components/_component-social-buttons';
+
+/**
+ * Footer
+ * */
+
+.footer {
+  font-size: 14px;
+  padding-top: 85px;
+  padding-bottom: 85px;
+  color: $gray-light;
+  background-color: $black;
+  border-top: $border-width solid $background-color-darkest;
+
+  a {
+    color: $gray-light;
+    font-family: $font-family-base;
+
+    @include hover-focus {
+      text-decoration: none;
+      color: $gray-light;
+    }
+  }
+
+  p.lead {
+    font-weight: 700;
+    color: #cccccc;
+  }
+
+  nav {
+    text-transform: uppercase;
+
+    h6 {
+      font-size: $font-size-small;
+      font-weight: 700;
+      line-height: 2;
+      margin: 0 0 12px;
+      color: $gray-light;
+
+      @media (max-width: $screen-sm-max) {
+        margin-top: 30px;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .additional-links {
+    font-size: $font-size-small;
+    padding-top: 16px;
+    color: $gray-light;
+    border-top: 1px solid $gray;
+
+    @media (max-width: $screen-sm-max) {
+      margin-top: 17px;
+      margin-bottom: 0;
+    }
+
+    a {
+      margin-right: 10px;
+    }
+  }
+
+  .social-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .social-btns {
+      margin: 25px 0;
+    }
+
+    .hiring {
+      text-transform: uppercase;
+      vertical-align: -webkit-baseline-middle;
+      font-weight: 600;
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    padding-top: 35px;
+    padding-bottom: 35px;
+
+    nav .col-sm-2 {
+      width: 100%;
+      margin-top: 30px;
+      margin-left: 0;
+    }
+
+    .col-sm-6 {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+$language-icon-small-width: 60px;
+$header-font-size-small: 30px;
+.page-case-study {
+  .language.small {
+    max-width: $language-icon-small-width;
+  }
+  .small-font {
+    font-size: $header-font-size-small;
+  }
+}

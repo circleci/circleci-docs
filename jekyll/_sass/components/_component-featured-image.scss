@@ -1,0 +1,25 @@
+// any kind of featured image... often screenshots or somethign we want to
+// highlight. most styles are dependent on the context the image is appearing in.
+// NOTE: expects to be embedded in a bootstrap grid row
+
+.featured-image {
+  img {
+    @include img-responsive;
+  }
+
+  // under a main section row
+  section > .container > .row > & {
+    @include make-sm-column(8);
+    @include make-sm-column-offset(2);
+    @include make-lg-column(6);
+    @include make-lg-column-offset(3);
+  }
+
+  // under a feature box
+  .feature > .row > & {
+    @include make-sm-column(8);
+    @include make-sm-column-offset(2);
+    @include make-md-column(12);
+    @include make-md-column-offset(0);
+  }
+}

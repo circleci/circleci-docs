@@ -1,0 +1,9 @@
+$max-image-width: 400px;
+
+.component.two-col {
+  .two-col-main-image {
+    @media screen and (max-width: $screen-sm) {
+      max-width: $max-image-width;
+    }
+  }
+}

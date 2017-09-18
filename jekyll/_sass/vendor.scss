@@ -1,0 +1,8 @@
+//= require vendor/highlight/styles/github-gist
+// ⬆ have to require this directly since SASS will not import plain CSS files
+// also has to be the first line in the file so sprockets doesn't ignore it
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "vendors/slick";
+@import "fluidbox/src/css/_fluidbox";

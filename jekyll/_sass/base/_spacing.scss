@@ -1,0 +1,115 @@
+// MARGINS
+
+.margin-vertical-large {
+  @extend .margin-top-large;
+  @extend .margin-bottom-large;
+}
+.margin-vertical-medium {
+  @extend .margin-top-medium;
+  @extend .margin-bottom-medium;
+}
+.margin-vertical-small {
+  @extend .margin-top-small;
+  @extend .margin-bottom-small;
+}
+
+.padding-horizontal-small {
+  @extend .padding-left-small;
+  @extend .padding-right-small;
+}
+.padding-vertical-medium {
+  @extend .padding-top-medium;
+  @extend .padding-bottom-medium;
+}
+
+.margin-top-large {
+  margin-top: $spacing-large-vertical;
+
+  @media screen and (max-width: $screen-sm-max) {
+    margin-top: ($spacing-large-vertical / 2);
+  }
+}
+.margin-top-medium {
+  margin-top: $spacing-medium-vertical;
+
+  @media screen and (max-width: $screen-xs-max) {
+    margin-top: ($spacing-medium-vertical / 2);
+  }
+}
+.margin-top-small {
+  margin-top: $spacing-small-vertical;
+}
+.margin-left-small {
+  margin-left: $spacing-small-horizontal;
+}
+.margin-right-small {
+  margin-right: $spacing-small-horizontal;
+}
+.margin-bottom-small {
+  margin-bottom: $spacing-small-vertical;
+}
+.margin-bottom-medium {
+  margin-bottom: $spacing-medium-vertical;
+
+  @media screen and (max-width: $screen-xs-max) {
+    margin-bottom: ($spacing-medium-vertical / 2);
+  }
+}
+.margin-bottom-large {
+  margin-bottom: $spacing-large-vertical;
+
+  @media screen and (max-width: $screen-sm-max) {
+    margin-bottom: ($spacing-large-vertical / 2);
+  }
+}
+
+// PADDING
+.padding-left-large {
+  padding-left: $spacing-large-horizontal;
+
+  @media screen and (max-width: $screen-sm-max) {
+    padding-left: ($spacing-large-horizontal / 2);
+  }
+}
+.padding-right-large {
+  padding-right: $spacing-large-horizontal;
+}
+.padding-left-small {
+  padding-left: $spacing-small-horizontal;
+}
+.padding-right-small {
+  padding-left: $spacing-small-horizontal;
+}
+.padding-top-medium {
+  padding-top: $spacing-medium-vertical;
+}
+.padding-bottom-medium {
+  padding-bottom: $spacing-medium-vertical;
+}
+
+// RESPONSIVE CLASSES
+.screen-md-margin-top-medium {
+  @media screen and (min-width: $screen-md-min) {
+    margin-top: $spacing-medium-vertical;
+  }
+}
+.screen-md-margin-top-small {
+  @media screen and (min-width: $screen-md-min) {
+    margin-top: $spacing-small-vertical;
+  }
+}
+.screen-md-margin-bottom-medium {
+  @media screen and (min-width: $screen-md-min) {
+    margin-bottom: $spacing-medium-vertical;
+  }
+}
+.screen-md-padding-right-large {
+  @media screen and (max-width: $screen-sm-max) {
+    padding-right: ($spacing-large-horizontal / 2);
+  }
+}
+.screen-sm-padding-top-medium {
+  @media screen and (max-width: $screen-xs-max) {
+    padding-top: $spacing-medium-vertical;
+  }
+}

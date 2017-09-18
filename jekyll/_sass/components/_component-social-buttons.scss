@@ -1,0 +1,21 @@
+.social-btns {
+  white-space: nowrap;
+}
+
+.social-btns > * {
+  font-size: 25px;
+  line-height: 25px; // otherwise they get clipped at the bottom
+  font-weight: normal;
+  display: inline-block;
+  overflow: hidden;
+  width: 25px;
+  height: 25px;
+  margin-left: 15px;
+  text-align: center;
+  vertical-align: top;
+  color: $gray-dark;
+}
+
+.social-btns > *:first-child {
+  margin-left: 0;
+}

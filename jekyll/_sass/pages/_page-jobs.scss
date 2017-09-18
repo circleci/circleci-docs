@@ -1,0 +1,48 @@
+.page-jobs {
+  .hero {
+    .hero-logo.two {
+      display: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn.spin.two {
+      display: none;
+      margin: 45px auto 0 auto;
+      padding: 12px 0px 12px 30px;
+      max-width: 240px;
+      position: relative;
+
+      .movie-icon {
+        width: 25px;
+        position: absolute;
+        left: 15px;
+        top: 12px;
+      }
+    }
+
+    &.circle {
+      background: asset('backgrounds/circle-movie.png');
+
+      .hero-logo:not(.two) {
+        display: none;
+      }
+      .hero-logo.two {
+        display: block;
+      }
+      .hero-header {
+        color: white;
+      }
+      .background.language {
+        display: none;
+      }
+      .btn.spin:not(.two) {
+        display: none;
+      }
+      .btn.spin.two {
+        display: block;
+        background: #EC0400;
+        border-color: #EC0400;
+      }
+    }
+  }
+}

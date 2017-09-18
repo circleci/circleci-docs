@@ -1,0 +1,38 @@
+$logo-max-height: 60px;
+
+.component.logos {
+  .logo-image {
+    max-height: $logo-max-height;
+    max-width: 200px;
+
+    &.wide {
+      max-height: $logo-max-height / 2.5;
+    }
+  }
+}
+
+.horizontal-logos-flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: $screen-sm-max) {
+    flex-direction: column;
+    margin-top: ($spacing-large-vertical / 2);
+    margin-bottom: ($spacing-large-vertical / 2);
+
+    // eliminate extra space between multiple stacked horizontal logo rows on mobile
+    + .horizontal-logos-flex-container {
+      margin-top: -($spacing-large-vertical / 2);
+    }
+  }
+
+  @media screen and (min-width: $screen-md) {
+    flex-direction: row;
+  }
+
+  img {
+    @extend .margin-top-medium;
+    @extend .margin-bottom-medium;
+  }
+}

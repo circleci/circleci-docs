@@ -1,0 +1,352 @@
+// Variables
+//
+// override the Bootstrap defaults
+
+
+// Table of Contents
+//
+// Colors
+// Options
+// Spacing
+// Body
+// Links
+// Grid breakpoints
+// Grid containers
+// Grid columns
+// Fonts
+// Components
+
+// General variable structure
+//
+// Variable format should follow the `$component-modifier-state-property` order.
+
+
+// Colors
+//
+// Grayscale and brand colors for use across Bootstrap.
+// FIXME: It would be nice to make these match the variables in inner
+
+$green: #04AA51;
+$green-light: #1CBF43;
+$blue: #36D4ED;
+$blue-light: #85F3FF;
+$blue-dark: #27A0B6;
+$black: #161616;
+$black-light: #343434;
+$white: #FFFFFF;
+$gray: #D8D8D8;
+$gray-light: #F3F3F3;
+$gray-dark: #898989;
+$gray-darker: #555555;
+
+$box-shadow-color: rgba(0, 0, 0, .2);
+
+// color holding vars
+$primary-color: $green;
+$secondary-color: $blue-dark;
+$primary-hover-color: $green-light;
+$secondary-hover-color: $blue;
+$text-color: $black;
+$text-color-link: $blue-dark;
+$text-color-inverted: $white;
+$background-color: $white;
+$background-color-inverted: $black;
+$background-color-dark: $gray-light;
+$background-color-darker: $gray-dark;
+$background-color-darkest: $black-light;
+$disabled-color: $gray;
+
+
+//language landing colors
+$rubyColor:             #7C0B02;
+$pythonColor:           #3773a3;
+$nodeColor:             #58594e;
+
+$orange:                #e95900;
+
+
+// BOX SHADOW SETTING
+$box-shadow-base: 0 1px 2px $box-shadow-color;
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-flex:               false !default;
+$enable-rounded:            false !default;
+$enable-shadows:            false !default;
+$enable-gradients:          false !default;
+$enable-transitions:        true !default;
+$enable-hover-media-query:  false !default;
+$enable-grid-classes:       true !default;
+
+
+// Z-INDEX CLASSES
+$z-index-nav: 3;
+$z-index-subnav: 2;
+$z-index-zero: 0;
+
+// TRANSITION/ANIMATION TIMING VARS
+$transition-duration-short: 100ms;
+$transition-duration-medium: 400ms;
+
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+
+$spacer:                     1rem !default;
+$spacer-x:                   $spacer !default;
+$spacer-y:                   $spacer !default;
+$border-width:               1px !default;
+$border-width-wide:          2px !default;
+
+$spacing-small-horizontal: 12px;
+$spacing-large-horizontal: 60px;
+$spacing-large-vertical: 90px;
+$spacing-medium-vertical: 48px;
+$spacing-small-vertical: 18px;
+$spacing-base: 6px;
+
+$nav-height: 65px;
+$dropdown-list-spacing: 5px 12px;
+$dropdown-button-spacing: 12px 8px;
+$ico-button-spacing: 0 14px 0 32px; 
+
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+
+$font-family-emphasis:      'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-monospace:       monospace;
+$font-family-base:            'OutputSans';
+
+// Pixel value used to responsively scale all typography. Applied to the `<html>` element.
+$font-size-root:             16px;
+$font-size-base:             $font-size-root; // ~16px
+$font-size-small: 			 14px;
+$font-size-h1: 52px;
+$font-size-h1-small: 45px;
+$font-size-h2: 32px;
+$font-size-h3: 23px;
+$font-size-h4: 20px;
+$font-size-h5: 18px;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height:                1.5;
+$line-height-base:           1.5;
+$line-height-paragraph:      1.75;
+$line-height-list-base:      30px;
+$line-height-sub-nav:        20px;
+
+// Font weights
+$font-weight-bolder: 700;
+$font-weight-bold: 600; 
+$font-weight-base: 400; 
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  480px;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  768px;
+$screen-sm-min:              $screen-sm;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  992px;
+$screen-md-min:              $screen-md;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  1200px;
+$screen-lg-min:              $screen-lg;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min;
+
+// So media queries don't overlap. When required, provide a maximum.
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+$screen-md-max:              ($screen-lg-min - 1);
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         30px;
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint:     $screen-sm-min;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$padding-base-vertical:     6px;
+$padding-base-horizontal:   12px;
+
+$padding-large-vertical:    11px;
+$padding-large-horizontal:  16px;
+
+$padding-xl-vertical:       18px;
+$padding-xl-horizontal:     36px;
+
+$padding-small-vertical:    5px;
+$padding-small-horizontal:  10px;
+
+$padding-xs-vertical:       1px;
+$padding-xs-horizontal:     5px;
+
+$line-height-lg:         (4 / 3) !default;
+$line-height-sm:         1.5 !default;
+
+// BS4 variables
+
+$border-radius-base:        3px;
+$border-radius-large:       3px;
+$border-radius-small:       3px;
+
+$border-radius:          3px !default;
+$border-radius-lg:       3px !default;
+$border-radius-sm:       3px !default;
+$border-radius-circle:   100%;
+
+$component-active-color: #fff !default;
+$component-active-bg:    $brand-primary !default;
+
+$caret-width:            .3em !default;
+$caret-width-lg:         $caret-width !default;
+
+// Forms
+
+$cursor-disabled:                not-allowed !default;
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+// $navbar-height:                    70px;
+// $navbar-margin-bottom:             $line-height-computed;
+$navbar-border-radius:             $border-radius-base;
+$navbar-padding-horizontal:        floor(($grid-gutter-width / 2));
+// $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2);
+$navbar-collapse-max-height:       340px;
+
+// Navbar links
+$navbar-default-link-color:                $black;
+$navbar-default-link-hover-color:          $primary-hover-color;
+$navbar-default-link-hover-bg:             $gray-light;
+$navbar-default-link-active-color:         $primary-color;
+$navbar-default-link-active-bg:            transparent;
+$navbar-default-link-disabled-color:       #ccc;
+$navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+$navbar-default-brand-color:               $navbar-default-link-color;
+$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg:           #ddd;
+$navbar-default-toggle-icon-bar-bg:        #888;
+$navbar-default-toggle-border-color:       #ddd;
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+$button-width-base: 			 250px;
+$button-height-base: 			 50px;
+$button-width-small: 			 100px;
+$btn-padding-x:                  1rem;
+$btn-padding-y:                  .375rem;
+$btn-font-weight:                normal;
+
+$btn-default-color:              #333;
+$btn-default-bg:                 #fff;
+$btn-default-border:             #ccc;
+
+$btn-primary-color:              #fff;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color:            $gray-dark;
+$btn-secondary-bg:               #fff;
+$btn-secondary-border:           #ccc;
+
+$btn-info-color:                 #fff;
+$btn-info-bg:                    $brand-info;
+$btn-info-border:                $btn-info-bg;
+
+$btn-success-color:              #fff;
+$btn-success-bg:                 $primary-color;
+$btn-success-border:             $btn-success-bg;
+
+$btn-warning-color:              #fff;
+$btn-warning-bg:                 $brand-warning;
+$btn-warning-border:             $btn-warning-bg;
+
+$btn-danger-color:               #fff;
+$btn-danger-bg:                  $brand-danger;
+$btn-danger-border:              $btn-danger-bg;
+
+$btn-link-disabled-color:        $gray-light;
+
+$btn-padding-x-sm:               .75rem;
+$btn-padding-y-sm:               .25rem;
+
+$btn-padding-x-lg:               1.25rem;
+$btn-padding-y-lg:               .75rem;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:              $border-radius;
+$btn-border-radius-lg:           $border-radius-lg;
+$btn-border-radius-sm:           $border-radius-sm;
+
+$btn-font-weight:                normal;
+
+
+//== Panels
+//
+//##
+
+$panel-default-border:        #ddd;
+
+
+//== Code
+//
+//##
+
+$code-color:                  $text-color-link;
+$code-bg:                     $background-color-dark;
+
+$kbd-color:                   $text-color-link;
+$kbd-bg:                      $secondary-hover-color;
+
+$pre-bg:                      #f5f5f5;
+$pre-color:                   $gray-dark;
+$pre-border-color:            #ccc;
+$pre-scrollable-max-height:   340px;

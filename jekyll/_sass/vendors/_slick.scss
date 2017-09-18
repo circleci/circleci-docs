@@ -1,0 +1,16 @@
+// need variables for colors
+@import "bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import 'variables';
+
+$slick-font-family: "FontAwesome";
+$slick-dot-character: '\f111'; // "circle"
+$slick-dot-size: 15px;
+$slick-dot-color-active: $primary-color;
+
+@import "slick-carousel/slick/slick";
+@import "slick-carousel/slick/slick-theme";
+
+// prevent forcing the browser to download the loading spinner image
+.slick-loading .slick-list {
+  background-image: none;
+}

@@ -1,0 +1,128 @@
+body.page-mobile {
+  section.hero {
+    // Phone image sizes are scaled by width.
+    $iphone-width: 320px;
+    $htc-width: 260px;
+
+    @include background-after-element {
+      background-image: asset("mobile/iphone.svg"), asset("mobile/htc.svg");
+      background-repeat: no-repeat;
+
+      // iPhone is 50px left of HTC; HTC is one pixel offscreen to the right to ensure full bleed.
+      background-position: right ($htc-width + 50px - 1px) top, right -1px top;
+      background-size: $iphone-width auto, $htc-width auto;
+
+      @media (max-width: $screen-md-max) {
+        opacity: 0.03;
+      }
+    }
+
+    &.ios-bg {
+      @include background-after-element {
+        background-image: asset("mobile/apple.svg");
+
+        // iPhone is 50px left of HTC; HTC is one pixel offscreen to the right to ensure full bleed.
+        background-position: right 70px bottom;
+      }
+    }
+
+    &.android-bg {
+      @include background-after-element {
+        background-image: asset("mobile/android.svg");
+
+        // iPhone is 50px left of HTC; HTC is one pixel offscreen to the right to ensure full bleed.
+        background-position: right 70px bottom;
+        background-size: 400px auto;
+      }
+    }
+  }
+
+  .steps {
+    $circle-radius: 30px;
+    $diagram-color: $gray-dark;
+    $line: 1px dashed $diagram-color;
+    $background-color: $white;
+
+    display: box;
+    display: flex;
+    box-align: top;
+    align-items: top;
+    box-pack: justify;
+    justify-content: space-between;
+    position: relative;
+
+    $margin-top: 40px;
+
+    // The actual margin-top is an additional @circle-radius, to position the
+    // border-top along the axis of the circles.
+    margin-top: $margin-top + $circle-radius;
+    margin-bottom: -$circle-radius;
+    padding: 0;
+    list-style: none;
+    border-top: $line;
+    counter-reset: steps-list;
+
+    > li {
+      counter-increment: steps-list;
+      position: relative;
+      top: -$circle-radius;
+      z-index: 0;
+      width: 160px;
+      text-align: center;
+
+      &:before {
+        content: counter(steps-list);
+        display: block;
+        width: $circle-radius * 2;
+        height: $circle-radius * 2;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        color: $diagram-color;
+        line-height: $circle-radius * 2;
+        border: $line;
+        border-radius: 50%;
+        background: $background-color;
+      }
+
+      &:first-child:after, &:last-child:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        background: $background-color;
+        z-index: -1;
+      }
+
+      &:first-child:after {
+        left: 0;
+      }
+
+      &:last-child:after {
+        right: 0;
+      }
+    }
+  }
+
+  section.footer-cta {
+    // undo standard background styles
+    background: none;
+    .language.background {
+      display: none;
+    }
+
+    @include background-after-element {
+      background-image: asset("mobile/footer-htc.svg");
+      background-repeat: no-repeat;
+
+      // -1px to ensure bleed.
+      background-position: left -1px bottom;
+      background-size: 225px auto;
+
+      @media (max-width: $screen-xs-max) {
+        opacity: .03;
+      }
+    }
+  }
+}

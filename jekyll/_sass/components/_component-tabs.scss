@@ -1,0 +1,49 @@
+.nav-tabs {
+  width: 100%;
+
+  .label {
+    top: 10px;
+    margin-right: 15px;
+  }
+}
+
+.tab-content {
+  .row {
+    position: relative;
+  }
+  .slide {
+    width: 100%;
+  }
+
+  @media screen and (min-width: $screen-md) {
+    .feature-tab-right {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+// dropdown (for tabs on mobile)
+.tab-dropdown {
+  .dropdown {
+    button {
+      padding: $dropdown-button-spacing;
+      width: 100%;
+    }
+  }
+  .dropdown-menu {
+    width: 100%;
+
+    li {
+      cursor: pointer;
+      width: 100%;
+      padding: $dropdown-list-spacing;
+
+      &:hover {
+        background: $blue-light;
+      }
+    }
+  }
+}

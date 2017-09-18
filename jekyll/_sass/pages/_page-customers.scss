@@ -1,0 +1,137 @@
+body.page-customers {
+
+  .logo-capped-width {
+    max-width: 100px;
+  }
+
+  hr {
+    border-top-width: 2px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+
+  .companies-trust {
+    .side-title {
+      @include make-md-column(4);
+      text-align: center;
+      @media (min-width: $screen-md-min) {
+        text-align: left;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: $screen-sm-max) {
+      .title + .all-customers {
+        padding-top: 40px;
+      }
+    }
+
+    .all-customers {
+      @include make-md-column(8);
+      // normally the bootstrap col would set 15px padding, but since all the items in this have
+      // their own margin, we pull back the padding here to use the full width available
+      padding-left: 0;
+      padding-right: 0;
+
+      .customer {
+        margin: 10px 17px; // 17px is tuned to wrap nicely at the most common breakpoints while still being close to the design spec
+      }
+    }
+  }
+
+  .all-customers {
+    text-align: center;
+
+    .customer {
+      display: inline-block;
+      position: relative;
+      margin: 20px;
+
+      .avatar {
+        width: 58px;
+        height: 58px;
+      }
+
+      .bubble {
+        position: absolute;
+        bottom: 0;
+        left: -40px;
+        right: -40px;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.2s, bottom 0.2s;
+        z-index: 2;
+        pointer-events: none;
+        background-color: $white;
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -15px;
+          left: calc(50% - 15px);
+          width: 0;
+          border-width: 15px 15px 0;
+          border-style: solid;
+          border-color: $white transparent;
+        }
+      }
+
+      &:hover .bubble {
+        bottom: 100%;
+        opacity: 1;
+      }
+    }
+  }
+
+  section.customer-cards {
+    .card-col {
+      @include make-sm-column(6);
+      @include make-lg-column(4);
+
+      .card {
+        @extend .shadow-box-with-hover;
+        background-color: $white;
+        transition: all 0.4s ease;
+        padding: 40px;
+        margin-bottom: $grid-gutter-width;
+
+        @media (min-width: $screen-sm) {
+          min-height: 20.5em;
+        }
+        @media (min-width: $screen-md) {
+          min-height: 18.5em;
+        }
+        @media (min-width: $screen-lg) {
+          min-height: 20em;
+        }
+
+        .avatar {
+          margin: 0;
+        }
+
+        .company-logo {
+          @extend .pull-right;
+
+          & img, & svg {
+            height: 25px;
+            width: auto;
+          }
+        }
+
+        .card-title {
+          margin-top: 15px;
+          margin-bottom: 5px;
+        }
+
+        .card-text {
+          line-height: 25px;
+        }
+      }
+    }
+  }
+}

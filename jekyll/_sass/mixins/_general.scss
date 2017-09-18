@@ -1,0 +1,7 @@
+@mixin transition($attribute...) {
+	transition: $attribute;
+	-webkit-transition: $attribute;
+	-ms-transition: $attribute;
+	-o-transition: $attribute;
+	-moz-transition: $attribute;
+}

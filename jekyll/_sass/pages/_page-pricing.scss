@@ -1,0 +1,285 @@
+$tile: 70px;
+$zindex-outer-nav: 20;
+$pricing-max-parallelism: 64;
+$pricing-action-height: $tile * 2 / 3;
+$pricing-action-width: $pricing-action-height * 3;
+$bezier-fadein: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+$bezier-transform: cubic-bezier(0.39, 0.575, 0.565, 1);
+
+body.page-pricing {
+  .pricing-tabs {
+    overflow: visible; // reset back to default, because otherwise tab tooltips get hidden by `section` styles
+    .tab-nav {
+      @extend .nav;
+      @extend .nav-justified;
+
+      .tooltip-trigger {
+        margin-left: 5px;
+        svg {
+          height: 20px; // seems to clip the top without this
+          position: relative;
+          top: 5px;
+        }
+      }
+
+      li {
+        border-radius: none;
+        border: $border-width solid #ddd;
+
+        @media (min-width: $screen-sm) {
+          
+          & + li {
+            border-left-color: transparent;
+          }
+        }
+
+        @media (max-width: $screen-xs-max) {
+          line-height: 1em;
+          &.active + li {
+            border-top-color: transparent;
+          }
+          &:last-of-type {
+            border-bottom-color: #ddd;
+          };
+        }
+
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        a, a:hover, a:focus {
+          color: inherit;
+          background-color: inherit;
+          padding: 10px;
+        }
+
+        &.active {
+          background-color: inherit;
+          border: $border-width solid #04AA51;
+          color: $primary-color;
+
+          .tooltip-trigger path {
+            fill: $text-color-link;
+          }
+
+          @media (min-width: $screen-sm-min) {
+            // bottom arrow
+            position: relative;
+            &:after, &:before {
+              top: 100%;
+              left: 50%;
+              border: solid transparent;
+              content: " ";
+              height: 0;
+              width: 0;
+              position: absolute;
+              pointer-events: none;
+            }
+            &:after {
+              border-color: rgba(242, 250, 252, 0);
+              border-top-color: white;
+              border-width: 15px;
+              margin-left: -15px;
+            }
+            &:before {
+              border-color: rgba(39, 160, 182, 0);
+              border-top-color: $primary-color;
+              border-width: $font-size-base;
+              margin-left: -16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    .tab-pane {
+      > h2 {
+        font-size: $font-size-h1-small;
+        text-align: center;
+        margin: 60px 0;
+      }
+    }
+
+    section:first-of-type {
+      border-top: none;
+    }
+  }
+
+  .pricing-calculator-controls {
+    @include make-sm-column(6);
+
+    font-size: $font-size-base;
+    line-height: 24px;
+
+    h2 {
+      font-size: $font-size-h2;
+      font-weight: 600;
+    }
+  }
+
+  .pricing-calculator-section {
+    @include make-sm-column(6);
+  }
+
+  .containers-range {
+    // .flexy(stretch, center, column);
+    display: box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-align: stretch;
+    box-orient: vertical;
+    box-pack: center;
+    justify-content: center;
+
+    position: relative;
+    height: 5em;
+    margin: 1em 0 2em;
+
+    div {
+      height: 1em;
+      margin: 0;
+      border-radius: 1em;
+      outline: none;
+
+      @include box-sizing(border-box);
+    }
+
+    .range-back {
+      border: $border-width solid $background-color-darker;
+      background: $white;
+    }
+
+    .range-highlight {
+      width: 0;
+      margin-top: -1em;
+      background: $gray-dark;
+
+      @include animation(pricing-range 500ms $bezier-transform 100ms backwards);
+    }
+
+    .range-knob {
+      position: absolute;
+      cursor: pointer;
+      top: 1.5em;
+      left: 0;
+      width: 2em;
+      height: 2em;
+      margin-left: -1em;
+      border: $border-width solid $background-color-darker;
+      border-radius: 1em;
+      background: $background-color-dark;
+
+      @include animation(pricing-knob 500ms $bezier-transform 100ms backwards);
+
+      &:before {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin-top: .25em;
+        content: attr(data-count);
+        text-align: center;
+        color: $black;
+
+        @include animation(pricing-hang 500ms $bezier-fadein 500ms backwards);
+      }
+    }
+  }
+
+  .controls-parallelism {
+    strong {
+      display: inline-block;
+      min-width: 1em;
+      text-align: center;
+      color: $primary-color;
+
+      &.double-digits {
+        min-width: 1.5em;
+      }
+    }
+  }
+
+  .parallelism-options {
+    // .flexy();
+    display: box;
+    display: flex;
+
+    margin: 3em 0;
+
+    button {
+      // .flex(1 1 20%);
+      box-sizing: border-box;
+      box-flex: 1;
+      flex: 1 1 20%;
+
+      height: 3em;
+      margin: 0;
+      padding: 0;
+      transition: 200ms;
+      border: $border-width solid $background-color-darker;
+      outline: none;
+      background: none;
+
+      @include box-sizing(border-box);
+
+      &:hover,
+      &:active {
+        transition: 100ms;
+        background: $gray-light;
+      }
+
+      &.active {
+        color: $white;
+        border: $gray-dark;
+        background: $primary-color;
+      }
+
+      &:first-of-type {
+        border-radius: 1.5em 0 0 1.5em;
+
+        @include animation(pricing-button 500ms $bezier-fadein 500ms backwards);
+      }
+
+      &:last-of-type {
+        border-radius: 0 1.5em 1.5em 0;
+      }
+
+      &:not(:last-of-type) {
+        border-right: none;
+      }
+    }
+  }
+
+  .pricing-tabs-ctas {
+    @extend .text-center;
+
+    font-size: $font-size-h2;
+    a {
+      font-weight: 600;
+    }
+
+    .btn-cta {
+      width: 200px;
+    }
+  }
+
+  .faq-section {
+    .faq-column {
+      @include make-sm-column(6);
+    }
+
+    .faq-item {
+      margin-bottom: 50px;
+
+      h4 {
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+}

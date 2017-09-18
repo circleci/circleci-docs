@@ -1,0 +1,17 @@
+@import 'components/_component-love-slider';
+
+body.page-home {
+  // tighten up the spacing between this and the section title
+  .horizontal-logos {
+    margin-top: -20px;
+  }
+
+  .component.logos,
+  .component.quotes-slider {
+    background-color: $gray-light;
+  }
+
+  .component.quotes-slider + .component.logos {
+    border-top: 1px solid $gray;
+  }
+}

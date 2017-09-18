@@ -1,0 +1,29 @@
+#general-modal {
+	position: fixed;
+	display: none;
+	color: $black;
+	top: -100%;
+	background: white;
+	border-radius: 10px;
+	z-index: 9001;
+	padding: 50px 60px 50px 60px;
+	max-width: 600px;
+	text-align: center;
+	box-shadow: 1px 1px 5px #333;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	@include transition(top 500ms);
+}
+#modal-bg {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	position: fixed;
+	top: 0;
+	display: none; 
+	opacity: 0;
+	z-index: 9000;
+	@include transition(opacity 500ms);
+}

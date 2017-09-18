@@ -1,0 +1,52 @@
+$align-left-sub-nav: 112px;
+
+.sub-nav {
+  min-height: 0;
+  top: 70px;
+  z-index: $z-index-subnav;
+  border-top: $border-width solid $gray;
+  border-bottom: $border-width solid $gray;
+  background: $background-color-dark;
+
+  a {
+    color: $black;
+    font-size: $font-size-small;
+    font-weight: $font-weight-base;
+  }
+
+  .active {
+    background: $background-color;
+  }
+
+  @media screen and (max-width: $screen-md) {
+    position: absolute;
+  }
+
+  .navbar-nav {
+    @media (min-width: $screen-sm-min) {
+      margin-left: $align-left-sub-nav; // circle logo + padding
+    }
+
+    > li > a {
+      padding: 5px 20px;
+      line-height: $line-height-sub-nav;
+      display: inline-block;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .sub-nav {
+    .navbar-nav {
+      margin: 5px 0;
+
+      .list-item {
+        display: inline-block;
+      }
+      .menu-item {
+        border: none;
+        padding: 5px 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+body.page-newsroom {
+  .hero .title h2 {
+    // because the press email was too wide for mobile phone screens
+    font-size: $font-size-h3;
+  }
+
+  .card-deck {
+    margin-top: 2rem;
+  }
+
+  .card {
+    .card-block {
+      @extend .text-center;
+      padding: 2rem 1.25rem;
+    }
+
+    .card-title {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .card-img {
+      @extend .img-circle;
+      margin-bottom: 10px;
+    }
+  }
+
+  .news-item {
+    padding-top: 10px;
+    @extend .text-center;
+    color: $gray-darker;
+  }
+
+  .news-link {
+    display: block;
+  }
+}

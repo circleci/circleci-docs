@@ -1,0 +1,44 @@
+$portrait-image-size: 140px;
+$portrait-image-inset: 40px;
+
+.quote-container {
+  .quote-image-mask {
+    display: inline-block;
+    width: $portrait-image-size;
+    height: $portrait-image-size;
+    border-radius: $border-radius-circle;
+    overflow: hidden;
+    box-shadow: 0 0 $border-radius-small $gray;
+    margin-top: $border-radius-small; // keeps the shadow from being cut off
+    background-color: $white;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+
+      // vertical centering
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    // logos need some padding to separate them from the edges of the mask
+    &.quote-image-mask-logo {
+      padding: $portrait-image-inset;
+      img {
+        left: $portrait-image-inset / 2;
+        width: calc(100% - #{$portrait-image-inset});
+      }
+    }
+  }
+
+
+  blockquote {
+    font-family: $font-family-emphasis;
+    font-size: $font-size-h3;
+    border-left: none;
+  }
+}

@@ -1,0 +1,95 @@
+.page-signup {
+  position: relative; // for absolutely positioned background container
+  text-align: center;
+
+  // set up container for full-width background (fluid container) on the right side, while still
+  // using the fixed-width container for actual content widths. we set up an empty container just to
+  // apply the background to, make it absolutely positioned over entire body section, full height,
+  // and give a background to the right side.
+  .bg-container {
+    position: absolute;
+    width: 100%;
+    &, .row, .bg-container-col {
+      height: 100%;
+    }
+  }
+  .bg-container-col {
+    @media (min-width: $screen-sm) {
+      background: $well-bg;
+    }
+  }
+
+  .gray.wrapper {
+    background: $well-bg;
+    border-top: 1px solid rgba(black, 0.1);
+    width: 100%;
+
+    .col-xs-4:nth-child(3) {
+      img {
+        width: 40%;
+        position: absolute;
+
+        &:nth-child(1) {
+          top: 8px;
+          left: 8px;
+        }
+        &:nth-child(2) {
+          bottom: 8px;
+          right: 8px;
+          width: 35%;
+        }
+      }
+    }
+
+    .line {
+      border-top: 2px dashed #999;
+      position: absolute;
+      left: 20%;
+      top: 42%;
+      width: 60%;
+      height: 1px;
+    }
+  }
+
+  .flow-diagram-col {
+    width: 100% !important;
+    position: relative;
+  }
+
+  // layout
+  .content-col {
+    @include make-sm-column(7);
+  }
+  .bg-container-col {
+    @include make-sm-column-offset(7);
+  }
+  .flow-diagram-col,
+  .bg-container-col {
+    @include make-sm-column(5);
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    line-height: 64px;
+  }
+
+  .sub-header {
+    font-size: $font-size-h2;
+  }
+
+  @media (min-width: $screen-sm) {
+    .col-sm-5:last-child .cta-buttons {
+      margin-bottom: 120px; // ensure always room at the bottom for .fine-print
+    }
+  }
+
+  .flow-diagram-col {
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    .label {
+      display: block;
+      margin-top: 15px;
+    }
+  }
+}

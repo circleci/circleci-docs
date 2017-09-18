@@ -1,0 +1,136 @@
+.auth {
+  $auth-button-height: 52px;
+  $auth-button-width: 300px;
+  $auth-button-dropdown-width: 50px;
+  $auth-button-icon-size: 46px;
+  $spacing-small: 2px;
+  $spacing-medium: 8px;
+  $spacing-large: 32px;
+  $dropdown-padding-vertical: 12.249px;
+  $dropdown-padding-horizontal: 19px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: $spacing-large;
+
+  .auth-buttons {
+    @media (min-width: $screen-xs) {
+      width: $auth-button-width;
+    }
+  }
+
+  .auth-button {
+    margin-bottom: $spacing-large;
+    text-transform: unset;
+    text-align: left;
+
+    .logo-container {
+      display: inline-block;
+      margin-right: $spacing-medium;
+      padding: $spacing-small;
+    }
+
+    .logo-container + span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .auth-button-github {
+    .auth-button {
+      min-width: $auth-button-width - $auth-button-dropdown-width;
+      padding-right: 0;
+    }
+
+    .dropdown {
+      width: $auth-button-dropdown-width;
+      margin-left: 0;
+      // Override bootstrap default dropdown behavior on small viewports
+      @media (max-width: $screen-xs-max) {
+        &:hover .dropdown-menu,
+        &.open .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+
+    .dropdown-toggle {
+      background: $primary-color;
+      padding: $dropdown-padding-vertical $dropdown-padding-horizontal;
+      box-shadow: 1px 1px 2px $box-shadow-color;
+      height: $button-height-base;
+      // ensure hover continuity between dropdown toggle and menu
+      margin-bottom: $spacing-medium;
+      border-radius: 0px $border-radius-base $border-radius-base 0px;
+      width: 100%;
+    }
+
+    .dropdown-menu {
+      margin-top: 0;
+      left: unset;
+      right: 0;
+      top: 100%;
+
+      // Override bootstrap default dropdown behavior on small viewports
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+        position: absolute;
+        display: none;
+        float: right;
+        margin: 0;
+        padding: 5px 0;
+        list-style: none;
+        text-align: left;
+        border: $border-width solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+        &.slideInDown {
+          animation-name: slideInDown;
+        }
+      }
+
+      .selected {
+        background-color: $white;
+      }
+    }
+  }
+
+  .auth-button-google {
+    font-family: $font-family-emphasis;
+  }
+
+  .auth-disclaimer {
+    margin-bottom: $spacing-large;
+    font-size: $font-size-small;
+
+    @media (min-width: $screen-xs) {
+      width: 55%;
+    }
+
+    p {
+      line-height: 25px;
+
+      i {
+        color: $gray-light;
+      }
+    }
+  }
+
+  .auth-separator {
+    display: flex;
+    align-items: center;
+
+    > .auth-separator-rule {
+      flex-grow: 1;
+    }
+
+    > .auth-separator-icon {
+      flex-basis: $spacing-large;
+    }
+  }
+
+  .auth-fine-print {
+    font-size: $font-size-small;
+  }
+}

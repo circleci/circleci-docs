@@ -1,0 +1,28 @@
+.page-enterprise-trial-confirm {
+  section > .container > .row + .row {
+    margin-top: 0;
+  }
+
+  ol {
+    line-height: 30px;
+  }
+
+  p {
+    img {
+      height: 12px;
+      filter: gray; /* IE6-9 */
+      -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+      filter: grayscale(1);
+      opacity: .65;
+    }
+
+    img + a {
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    img + a.phone {
+      margin-left: 16px;
+    }
+  }
+}
