@@ -1,0 +1,21 @@
+.component.hero {
+  .hero-main-image {
+    width: 100%;
+
+    @media screen and (max-width: $screen-md) {
+      display: none;
+    }
+  }
+  .hero-one-col-image {
+    &.small {
+      // In some scenarios it is important to shrink the hero so it doesn't monopolize too much screen space.
+      // This number is totally arbitrary but makes it looks more appropriate in those scenarios 
+      max-width: 915px;
+    }
+  }
+  .hero-txt {
+  	@media screen and (max-width: $screen-sm) {
+  		text-align: center;
+  	}
+  }
+}

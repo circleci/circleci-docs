@@ -1,0 +1,15 @@
+.avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba($gray-dark, 0.25);
+}
+
+.cci-avatar {
+  @extend .avatar;
+  margin-bottom: 10px;
+  width: 60px;
+  height: 60px;
+}

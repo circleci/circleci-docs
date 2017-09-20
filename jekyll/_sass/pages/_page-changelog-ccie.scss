@@ -1,0 +1,18 @@
+body.page-changelog.page-changelog-ccie {
+  .entry {
+    .title-text {
+      padding-left: 0;
+    }
+    h3 {
+      font-weight: 600;
+    }
+    /* prevent anchor links from being under the global nav */
+    h3[id]:before{
+      display: block;
+      content: " ";
+      margin-top: 0;
+      height: auto;
+      visibility: hidden;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.btn-pair {
+  .margin-right-small {
+    @media screen and (max-width: $screen-sm) {
+      margin-right: 0;
+    }
+  }
+}

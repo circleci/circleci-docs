@@ -1,0 +1,37 @@
+// Fact styles for About page and Story pages
+// NOTE: facts expect to be embedded in a bootstrap row element
+
+.fact {
+  padding: 0 10px;
+  text-align: center;
+
+  .header,
+  .caption {
+    font-size: 18px;
+    line-height: 1.2em;
+    margin: 0;
+    color: $gray-dark;
+  }
+
+  .value {
+    font-size: 64px;
+    margin: 0;
+    color: $headings-color;
+    line-height: 95px;
+    &.long {
+      font-size: 30px;
+    }
+  }
+
+  img {
+    max-height: 50px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    margin-bottom: 60px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

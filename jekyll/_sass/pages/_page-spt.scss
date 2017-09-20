@@ -1,0 +1,105 @@
+.page-enterprise-trial-install, .page-enterprise-contact {
+  @extend .dark-design;
+
+  // hide various elements that don't appear on the dark designs
+  form h2,
+  .contact-nav,
+  .main-nav.left-links,
+  .main-nav.right-links,
+  .keyline-container {
+    display: none;
+  }
+
+  form {
+    &.box {
+      padding: inherit;
+      background: inherit;
+    }
+    &.square {
+      textarea:not(.dumb) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .disclosure-text {
+    font-size: $font-size-small;
+    line-height: $line-height-base;
+    text-align: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  section.main ul {
+    font-size: $font-size-large;
+    li {
+      margin-top: 15px;
+    }
+  }
+
+  background: #343434;
+
+  section.main {
+    padding: 50px 0px 50px 0px;
+    @media screen and (max-width: 767px) {
+      padding: 20px 0px 50px 0px;
+    }
+
+    h1 {
+      @media screen and (max-width: 767px) {
+        font-size: 28px;
+        line-height: 41px;
+      }
+    }
+
+    hr {
+      border-color: #505050;
+    }
+  }
+
+  #business-type-toggle {
+    background: #F3F3F3;
+    width: 100%;
+    border: $border-width solid #d1d1d1;
+    border-radius: 4px;
+    position: relative;
+    margin: 20px 0px 0px 0px;
+    overflow: hidden;
+
+    div.toggle-bg {
+      position: absolute;
+      height: 104%;
+      width: 54%;
+      background: white;
+      top: -1px;
+      left: -1%;
+      border: inherit;
+      border-radius: inherit;
+      z-index: 0;
+      @include transition(left 600ms);
+    }
+
+    div.toggle-bg.right {
+      left: 51%;
+    }
+
+    span {
+      width: 50%;
+      height: 100%;
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      padding: 12px;
+      @include transition(color 600ms);
+    }
+    span.active {
+      color: $primary-color;
+    }
+  }
+
+  .disclosure-text {
+    margin-top: 15px;
+  }
+}

@@ -1,0 +1,134 @@
+// Section components
+
+$section-spacing: 60px;
+
+section {
+  position: relative;
+  overflow: hidden;
+  padding-top: $section-spacing;
+  padding-bottom: $section-spacing;
+  
+
+  // almost all of our section styles, we want to scope to the top level of the
+  // markup so styles don't get applied to same-named elements that may exist
+  // below them
+  > .container > .row {
+    > .title {
+      @include make-md-column(10);
+      @include make-md-column-offset(1);
+      @extend .text-center;
+
+      h2 {
+        margin: 0;
+        font-weight: $font-weight-bolder;
+
+        + p {
+          margin-top: 15px;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // spacing between consecutive top-level section rows
+    + .row {
+      margin-top: $section-spacing;
+    }
+  }
+
+  &.condensed {
+    padding-top: $section-spacing * 2/3;
+    padding-bottom: $section-spacing * 2/3;
+
+    > .container > .row + .row {
+      margin-top: $section-spacing * 2/3;
+    }
+  }
+
+  &.zebra {
+    background-color: $white;
+  }
+
+  &.dark {
+    background-color: $black-light;
+    color: $white;
+    // need these extra rules for the specificy of this to overcome the specificy of the general headings color rule
+    h1, h2, h3, h4, h5, p {
+      color: $white;
+    }
+  }
+
+  &.insert {
+    @extend .condensed;
+    font-size: $font-size-h2;
+
+    @media (max-width: $screen-xs-min) {
+      font-size: $font-size-h3;
+    }
+
+    .btn-cta {
+      margin-top: 0;
+      margin-left: 20px;
+      padding-right: 24px;
+
+      @media (max-width: $screen-md-max) {
+        margin-top: 20px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  // formerly known as jumbotron, except we were overriding almost every jumbotron style
+  &.hero {
+    border-top: none; // undo standard section style
+    z-index: 1; // for .background images
+
+    > .container > .row > .title {
+      @include make-xs-column(11);
+      @include make-xs-column-offset(0.5);
+      @include make-md-column(10);
+      @include make-md-column-offset(1);
+
+      // have to do the following here under .title for specificity reasons
+      h2 {
+        margin-top: 20px;
+      }
+
+      // when the last element in a hero title is text, we want to add some
+      // additional spacing at the bottom. in most cases there's a CTA button at
+      // the bottom that adds some space; this is for cases where there isn't.
+      h1:last-child, h2:last-child {
+        margin-bottom: $section-spacing / 2;
+      }
+    }
+
+    h2 {
+      font-size: $font-size-h2;
+      color: $text-color;
+    }
+
+    // element following h2 in a hero section is usually a cta button, but sometimes other elements.
+    // sometimes a CTA button directly follows an h1, so set that explicitly.
+    // in any case, the goal is for it to be evenly spaced between the h2 above and the bottom of the jumbotron
+    h1 + .btn-cta,
+    h2 + * {
+      margin-top: $section-spacing - 20px;
+    }
+
+    // for certain hero sections with lots of copy, we want to left-align them and make other tweaks.
+    // these are primarily used on the mobile pages.
+    &.copy-heavy {
+      @media (min-width: $screen-lg) {
+        // formerly .small-aside
+        h2 {
+          max-width: 70%;
+        }
+      }
+
+      > .container > .row > .title {
+        @include make-xs-column(12);
+        @include make-xs-column-offset(0);
+        text-align: left;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+// Footer CTA section styles
+
+section.footer-cta {
+  font-size: $font-size-large;
+  z-index: 0; // for .background images
+
+  .btn-cta {
+    margin-top: 20px;
+  }
+  .btn {
+  	margin-top: 35px;
+  }
+}

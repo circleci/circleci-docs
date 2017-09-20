@@ -1,0 +1,120 @@
+#enterprise-chat-overlay {
+  @extend .shadow-box;
+  border-radius: 3px 3px 0 0;
+  z-index: $zindex-modal;
+  transition: bottom .2s ease;
+  overflow: hidden; // keeps the title bar background from leaking
+
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  right: 30px;
+  width: 300px;
+
+  .chat-body,
+  .title-bar {
+    padding: 0.8em 1em;
+  }
+
+  .title-bar {
+    color: $white;
+    background-color: $brand-primary;
+    font-weight: 600;
+
+    @media (max-width: $grid-float-breakpoint-max) {
+      display: none;
+    }
+
+    .buttons {
+      float: right;
+      a {
+        padding: 10px 5px;
+      }
+      .fa {
+        transition: transform 0.2s ease;
+      }
+      // only enabling minimize for now, but using the close X icon
+      .btn-close {
+        display: none;
+      }
+    }
+  }
+
+  .expando-fields {
+    max-height: 0; // because http://stackoverflow.com/a/8331169/203773
+    transition: max-height .5s ease;
+
+    > * {
+      display: none;
+    }
+  }
+
+  .btn-expand {
+    display: none;
+  }
+
+  &.expanded {
+    .expando-fields {
+      max-height: 1000px;
+      > * {
+        display: block;
+      }
+    }
+
+    @media (max-width: $grid-float-breakpoint-max) {
+      #enterprise-chat-form {
+        max-height: 1000px;
+        > * {
+          display: block;
+        }
+      }
+
+      .btn-expand {
+        display: none;
+      }
+    }
+  }
+
+  &.minimized {
+    bottom: -210px; // magic numbers!
+    .btn-minimize .fa {
+      transform: rotate(45deg);
+    }
+  }
+
+  &.dismissed {
+    bottom: -1000px;
+  }
+
+  @media (max-width: $grid-float-breakpoint-max) {
+    left: 0;
+    right: 0;
+    width: auto;
+    border-radius: 0;
+
+    .btn-expand {
+      display: block;
+    }
+
+    #enterprise-chat-form {
+      max-height: 0;
+      transition: max-height .5s ease;
+      > * {
+        display: none;
+      }
+    }
+  }
+
+  &.null {
+    .title-bar {
+      display: none;
+    }
+  }
+
+  &.expanded,
+  &.null.expanded {
+    .title-bar {
+      display: block;
+    }
+  }
+}

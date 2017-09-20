@@ -1,0 +1,66 @@
+body.dark-design {
+  background: $black;
+  color: $white;
+
+  // need these extra rules for the specificy of this to overcome the specificy of the general headings color rule
+  h1, h2, h3, h4, h5, p {
+    color: $white;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: $headings-font-weight;
+  }
+
+  .navbar {
+    background-color: $black;
+    border-color: transparent;
+
+    // CircleCI logo image: change color to white
+    .navbar-brand > svg {
+      fill: $white;
+      & circle,
+      & path {
+        fill: $white;
+      }
+    }
+  }
+
+  .btn {
+    @include button-variant($black, $secondary-color, $secondary-color);
+    &:hover, &:focus {
+      @include button-variant($black, $secondary-color, lighten($secondary-color, 10%));
+    }
+  }
+
+  section {
+    border-top-color: transparent;
+  }
+
+  footer {
+    background-color: $black;
+  }
+
+  form {
+    label {
+      font-family: $font-family-emphasis;
+    }
+    button, input, optgroup, select, textarea {
+      color: $black;
+      label {
+        font-family: $font-family-base;
+      }
+    }
+  }
+
+  .lede {
+    color: $secondary-color;
+    text-transform: uppercase;
+    font-weight: $font-weight-bolder;
+  }
+
+  .lede,
+  .subtitle {
+    font-size: $font-size-small;
+    margin-top: 0;
+  }
+}

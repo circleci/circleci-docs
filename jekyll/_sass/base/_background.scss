@@ -1,0 +1,122 @@
+.background {
+  position: absolute;
+  z-index: -1;
+
+  &.docker-whale {
+    $width: 420px;
+    width: $width;
+    bottom: 0;
+    right: 5%;
+    @media (max-width: $screen-sm-max) {
+      opacity: 0.15;
+      right: 50%;
+      margin-right: -$width/2;
+    }
+  }
+}
+
+.background.language {
+  height: 200px;
+
+  &.rails {
+    bottom: -85px;
+    left: 10%;
+    height: 200px;
+  }
+
+  &.clojure {
+    right: 50px;
+    bottom: -120px;
+  }
+
+  &.java {
+    top: -100px;
+    right: 20%;
+  }
+
+  &.php {
+    bottom: -115px;
+    left: 50%;
+  }
+
+  &.python {
+    top: 25%;
+    left: -100px;
+  }
+
+  &.ruby {
+    top: -100px;
+    left: 100px;
+  }
+
+  &.javascript {
+    top: -100px;
+    right: -110px;
+  }
+
+  &.node {
+    top: -170px;
+    right: 40%;
+  }
+}
+
+section.condensed {
+  .background.language {
+    &.java {
+      top: -150px;
+    }
+
+    &.python {
+      top: 15%;
+      left: -150px;
+    }
+  }
+}
+
+// Background implemented as an after so we can set its opacity.
+// Important! The element this is applied to should have a z-index (so it forms
+// a stacking context). Set z-index: 0 if it doesn't already have one. We don't
+// do that in the mixin so we don't override another value.
+@mixin background-after-element {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: '';
+
+    @content;
+  }
+}
+
+.bg-text-white {
+  h1, h2, h3, h4, h5, p, li, span {
+    color: $white;
+  }
+}
+
+.inverted {
+  background: $background-color-inverted;
+  @extend .bg-text-white;
+}
+
+.bg-teal-gradient {
+  background: linear-gradient(to bottom, $black 50%, $blue-dark);
+  @extend .bg-text-white;
+}
+
+.bg-gray {
+  background: $gray-darker;
+  @extend .bg-text-white;
+}
+
+.bg-black-light-gradient,
+.bg-black-light-gradient.inverted {
+  background: linear-gradient(to bottom, $black, $black-light);
+  @extend .bg-text-white;
+}

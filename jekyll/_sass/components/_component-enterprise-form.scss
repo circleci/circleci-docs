@@ -1,0 +1,50 @@
+form.contact-enterprise {
+  margin-bottom: 60px;
+
+  @include background-after-element;
+  &:after {
+    @extend .shadow-box;
+    top: 6px;
+    left: -55px;
+    bottom: -30px;
+    right: -58px;
+  }
+
+  .message {
+    resize: none;
+    height: 3em;
+    overflow: hidden;
+
+    &:focus, &.blurred {
+      height: 12em;
+    }
+
+  }
+
+  .telephone-info {
+    text-align: center;
+    margin: 30px 0;
+
+    .telephone-number {
+      color: inherit;
+    }
+  }
+}
+
+#enterprise-form-thanks-modal {
+  @extend .text-center;
+
+  h2 {
+    font-weight: 400;
+    margin-top: 0;
+  }
+
+  h2, p {
+    margin-bottom: 30px;
+  }
+
+  .modal-content {
+    @extend .shadow-box;
+    padding: 40px;
+  }
+}

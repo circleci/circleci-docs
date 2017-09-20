@@ -1,0 +1,73 @@
+body.page-integrations {
+
+  form.bitbucket-signup input {
+    @media (min-width: $grid-float-breakpoint) {
+      width: 330px;
+    }
+  }
+
+  // in footer CTA, buttons have a top margin, so just line up all the other elements to match
+  .footer-cta form.bitbucket-signup {
+    input, button {
+      margin-top: 20px;
+    }
+  }
+
+  .feature.video {
+    margin-top: 40px;
+
+    > .play {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 200px;
+      height: 200px;
+      margin-right: auto;
+      margin-left: auto;
+      border-radius: 50%;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px $black;
+      }
+
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        content: ' ';
+        transition: background-size 50ms;
+        background-color: rgba(0, 0, 0, 0.3);
+        background-image: asset("video/video-play.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50px;
+      }
+
+      &:active:before {
+        background-size: 47px;
+      }
+    }
+  }
+
+  &.page-docker {
+    section.footer-cta {
+      @include background-after-element {
+        left: -100px;
+        background-image: asset("integrations/banner-docker-logo.svg");
+        background-repeat: no-repeat;
+        background-position: bottom left;
+        background-size: auto 100%;
+
+        @media (max-width: $screen-md-max) {
+          opacity: .03;
+        }
+      }
+    }
+  }
+}

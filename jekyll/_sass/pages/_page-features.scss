@@ -1,0 +1,30 @@
+.page-features {
+
+  // override some section element default styles until these can be componentized
+  section {
+    border-top: none;
+    > .container > .row + .row {
+      margin-top: 35px;
+    }
+  }
+
+  .component.banner {
+    border-bottom: 1px solid $black-light;
+  }
+
+
+  .mobile-config-title {
+    display: none;
+    margin-left: $spacing-small-horizontal;
+
+    @media screen and (max-width: $screen-sm-max) {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: $screen-md) {
+    .nav.nav-tabs {
+      display: none;
+    }
+  }
+}

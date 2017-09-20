@@ -1,0 +1,14 @@
+// Font mixin
+
+@mixin font-face($font, $weight, $font-file-base-name, $style: normal){
+  @font-face{
+    font-family: $font;
+    src: url(font_path($font-file-base-name+".eot")); /* IE9 Compat Modes */
+    src: url(font_path($font-file-base-name+".eot?#iefix")) format('embedded-opentype'), /* IE6-IE8 */
+         url(font_path($font-file-base-name+".woff")) format('woff'), /* Modern Browsers */
+         url(font_path($font-file-base-name+".ttf"))  format('truetype'), /* Safari, Android, iOS */
+         url(font_path($font-file-base-name+".svg#svgFontName")) format('svg'); /* Legacy iOS */
+    font-weight: $weight;
+    font-style: $style;
+  }
+}

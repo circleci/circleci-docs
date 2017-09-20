@@ -1,0 +1,199 @@
+body.page-enterprise {
+  section.hero {
+    background-image: asset('enterprise/skyscraper-gray.svg');
+    background-size: auto 100%;
+    background-position: 100.75% bottom;
+    background-repeat: no-repeat;
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    /*
+    @media (min-width: $screen-lg) {
+      background-image: asset('enterprise/skyscraper.svg');
+    }
+    */
+
+    .inline-logo {
+      height: 80px;
+      margin-bottom: 10px;
+
+      &.aws {
+        margin-left: 10px;
+      }
+      &.azure {
+        margin-left: -15px;
+
+        @media screen and (max-width: $screen-xs) {
+          width: 100%;
+          height: auto;
+          margin-left: 0;
+        }
+      }
+
+      @media screen and (max-width: $screen-xs-max) {
+        display: inline-block;
+        margin-top: 16px;
+      }
+    }
+    .hero-logo {
+      height: 40px;
+    }
+  }
+
+  .horizontal-logos {
+    margin-top: -20px;
+  }
+
+  .devops-dev-features {
+    .feature {
+      margin-top: 1.5em;
+    }
+
+    h2 {
+      margin-top: 0;
+      padding-bottom: .5em;
+      text-align: center;
+
+      @media (max-width: $screen-xs-max) {
+        margin-top: 35px;
+        margin-bottom: 35px;
+      }
+    }
+
+    // vertical border between columns
+    @media (min-width: $screen-md) {
+      position: relative;
+      .divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        border-left: 2px solid $gray-light;
+      }
+    }
+  }
+
+  .devops-col {
+    @include make-md-column(5.5);
+  }
+  .dev-col {
+    @include make-md-column(5.5);
+    @include make-md-column-offset(1);
+  }
+
+  .pricing-matrix .pricing-tile {
+    @include make-sm-column(4);
+    @include make-lg-column(3);
+    &:first-of-type {
+      @include make-lg-column-offset(1.5);
+    }
+    padding: 0; // kill gutter so these sit flush with each other
+  }
+
+  section.integrations {
+    .logo-cloud {
+      margin-top: 14em;
+
+      @media (max-width: $screen-xs-max) {
+        margin-top: 10em;
+      }
+
+      @media (min-width: $screen-lg) {
+        position: relative;
+        margin-top: 18em;
+      }
+
+      .foreground.integration {
+        height: 200px;
+        background: #fff;
+        position: absolute;
+
+        @media (max-width: $screen-xs-max) {
+          transform: scale(.6);
+        }
+
+        &.docker {
+          bottom: 40px;
+          left: 43%;
+          height: 200px;
+          border-radius: 9px;
+          box-shadow: 0px 40px 77px 0px rgba(0,0,0,0.19), 0px 27px 24px 0px rgba(0,0,0,0.24);
+
+          @media (max-width: $screen-xs-max) {
+            left: 32%;
+          }
+        }
+
+        &.hipchat {
+          right: 20%;
+          bottom: 90px;
+          height: 120px;
+          border-radius: 8px;
+          box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19), 0px 12px 15px 0px rgba(0,0,0,0.24);
+
+          @media (max-width: $screen-xs-max) {
+            right: 6%;
+          }
+        }
+
+        &.hockey {
+          right: 16%;
+          bottom: 16px;
+          height: 90px;
+        }
+
+        &.jfrog {
+          bottom: -4px;
+          left: 33%;
+          height: 50px;
+          border-radius: 8px;
+        }
+
+        &.selenium {
+          bottom: 25%;
+          right: -20px;
+          height: 60px;
+          background: transparent;
+
+          @media (min-width: $screen-lg) {
+            bottom: 80px;
+          }
+        }
+
+        &.slack {
+          bottom: 70px;
+          left: -20px;
+          height: 160px;
+          border-radius: 8px;
+          box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19), 0px 12px 15px 0px rgba(0,0,0,0.24);
+        }
+
+        &.testflight {
+          bottom: 40px;
+          left: 20%;
+          height: 88px;
+          border-radius: 16px;
+          box-shadow: 0px 17px 50px 0px rgba(0,0,0,0.19), 0px 12px 15px 0px rgba(0,0,0,0.24);
+        }
+      }
+    }
+  }
+
+  .footer {
+    @media (max-width: $grid-float-breakpoint-max) {
+      padding-bottom: 120px;
+    }
+  }
+}
+
+body.page-enterprise-trial-install {
+  form { 
+    .checkbox-wrap {
+      margin-bottom: 5px;
+    }
+    span input:not(.dumb) {
+      width: 90%;
+      height: 28px;
+    }
+  }
+}

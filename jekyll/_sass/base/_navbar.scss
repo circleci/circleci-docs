@@ -1,0 +1,318 @@
+
+$margin-for-logo: 92px;
+
+.nav-toggle.two {
+  background: $black;
+  position: fixed;
+  z-index: $z-index-nav;
+  width: 100%;
+  top: 0;
+  color: $white;
+  height: 70px;
+
+  .widescreen {
+    .logo {
+      position: absolute;
+      height: 35px;
+      top: 18px;
+      left: 0;
+      z-index: $z-index-nav;
+    }
+
+    a:not(.btn) {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: $primary-hover-color;
+      }
+    }
+
+    .main-nav {
+      list-style: none;
+      position: absolute;
+      font-size: $font-size-small;
+
+      & > .nav-item {
+        display: inline-block;
+        cursor: pointer;
+
+        &:hover .submenu {
+          display: block;
+        }
+      }
+
+      &.left-links {
+        left: $margin-for-logo;
+        top: 24.5px;
+        font-weight: $font-weight-bolder;
+
+        & > .nav-item {
+          padding: 0 14px 0 14px;
+        }
+      }
+      &.right-links {
+        right: 0;
+        top: 12px;
+        z-index: $z-index-zero;
+
+        .btn {
+          margin-bottom: 5px;
+        }
+
+        & > .nav-item, & > .dashboard-link {
+          &.default-item {
+            padding: 0 6px;
+          }
+
+          &.divider-left {
+            padding: 8px 18px;
+            border-left: 1px solid $gray;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      font-family: $font-family-emphasis;
+      list-style: none;
+
+      .subnav {
+        margin-top: 20px;
+        background: $white;
+        color: $black;
+        padding: 4px 16px 10px 15px;
+        border-radius: 2px;
+        box-shadow: 2px 1px 3px $box-shadow-color;
+        font-weight: $font-weight-base;
+        font-family: $font-family-emphasis;
+        min-width: 175px;
+
+        &::before {
+          content: "";
+          width: 0;
+          height: 0;
+          position: absolute;
+          top: 15px;
+          left: 28px;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 5px solid $white;
+        }
+
+        .subnav-item {
+          display: block;
+          padding: 5px 2px;
+          margin: 4px 0;
+          width: 100%;
+
+          &.border-bottom {
+            border-bottom: 1px solid $gray-light;
+          }
+
+          &:hover {
+            color: $primary-hover-color;
+          }
+        }
+      }
+    }
+  }
+
+  .narrowscreen {
+    display: none;
+
+    .navbar-toggle {
+      position: absolute;
+      top: 13px;
+      left: 10px;
+      display: none;
+      display: block;
+      border: none;
+      background: transparent;
+
+      .icon-bar {
+        width: 22px;
+        transition: all .2s;
+        background: $white;
+        pointer-events: none;
+      }
+
+      .top-bar {
+        transform: rotate(45deg);
+        transform-origin: 10% 10%;
+      }
+
+      .middle-bar {
+        opacity: 0;
+      }
+
+      .bottom-bar {
+        transform: rotate(-45deg);
+        transform-origin: 10% 90%;
+      }
+
+      &.collapsed {
+        .top-bar {
+          transform: rotate(0);
+        }
+
+        .middle-bar {
+          opacity: 1;
+        }
+
+        .bottom-bar {
+          transform: rotate(0);
+        }
+      }
+    }
+
+    .logo {
+      height: 35px;
+      position: absolute;
+      display: block;
+      left: 0;
+      right: 0;
+      margin: 20px auto;
+    }
+
+    .login {
+      position: absolute;
+      right: 10px;
+      top: 24px;
+
+      a {
+        color: $white;
+        font-weight: $font-weight-base;
+      }
+    }
+
+    .navbar-toggle.collapsed ~ .dropdown-menu2 {
+      display: none;
+    }
+
+    .dropdown-menu2 {
+      position: fixed;
+      overflow: scroll;
+      height: calc(100% - 65px);
+      width: 100%;
+      top: $nav-height;
+      left: 0px;
+      padding: 0 12px 24px 12px;
+      background: $black;
+      list-style: none;
+
+      & > .border-bottom {
+        border-bottom: 1px solid $gray;
+      }
+
+      li {
+        color: inherit;
+        width: 100%;
+        padding: 14px 0;
+        cursor: pointer;
+        font-weight: $font-weight-bold;
+
+        .btn {
+          width: 100%;
+        }
+
+        a:not(.btn) {
+          color: inherit;
+          padding: 0;
+          font-weight: inherit;
+          text-decoration: none;
+          width: 100%;
+          display: inline-block;
+
+          &:hover {
+            background: $black;
+            color: $primary-hover-color;
+          }
+          
+          &:active {
+            color: $blue-dark;
+          }
+        }
+
+        .btn {
+          color: $white;
+          font-weight: $font-weight-bold;
+
+          &:hover {
+            background: $primary-hover-color;
+          }
+        }
+
+        &.arrow {
+          & > .subnav {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            opacity: .8;
+
+            .subnav-item {
+              padding-left: 0;
+              font-weight: $font-weight-base;
+            }
+          }
+
+          &.collapsed {
+            .subnav {
+              display: none;
+            }
+
+            .fa-angle-right {
+            transform: rotate(90deg); 
+            }
+          }
+
+          .fa-angle-right {
+            position: absolute;
+            right: 15px;
+            color: $primary-color;
+            font-size: $font-size-h4;
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+  }
+
+  // media query
+  @media screen and (max-width: $screen-md) {
+    .widescreen {
+      display: none;
+    }
+    .narrowscreen {
+      display: block;
+    }
+  }
+}
+
+// LOGGED IN CONTROL
+.dashboard-link {
+  display: none;
+}
+
+.loggedin .nav-toggle.two {
+
+  .widescreen {
+    .main-nav.right-links {
+      top: 16px;
+    }
+    .main-nav > .visitor-item {
+      display: none;
+    }
+  }
+
+  .narrowscreen .login .visitor-item {
+    display: none;
+  }
+
+  .dashboard-link {
+    display: inline-block;
+  }
+}

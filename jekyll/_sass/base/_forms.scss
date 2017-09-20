@@ -1,0 +1,187 @@
+$redLight: #c13737;
+
+form.box {
+  border-radius: $border-radius-base;
+  padding: $spacing-medium-vertical $spacing-large-horizontal;
+
+  &.white {
+    background: $white;
+  }
+
+  &.no-pad {
+    padding: 0;
+  }
+
+  &.bordered {
+    border: $border-width solid $gray;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select, textarea {
+    border-radius: $border-radius-base;
+    background: $background-color-dark;
+    margin-bottom: 10px;
+    padding: 16px 0em 16px 13px;
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"], {
+    height: 50px; // this has to be a bespoke value to prevent text cutoff in forms
+  }
+
+  select {
+    width: 100%;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  label {
+    width: 100%;
+  }
+
+  .checkbox-wrap {
+    margin: 4px 0;
+    
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  }
+
+  input[type="radio"] + span {
+    position: absolute;
+    display: inline-block;
+    margin: 2.2px 0 0 5px;
+  }
+
+  .radio-wrapper {
+    padding: 8px 0px 8px 0px;
+  }
+
+  input[type="submit"] {
+    margin-top: 30px;
+  }
+
+  @media screen and (max-width: 991px) {
+    & {
+      padding: 20px 20px 20px 20px;
+    }
+  }
+}
+
+form {
+  &.pad {
+    padding-top: 25px;
+
+    .row {
+      margin-top: 20px
+    }
+  }
+  .form-groups {
+    margin-top: 40px;
+  }
+
+  .success-message {
+    font-size: $font-size-base;
+    margin-top: 1em;
+    transition: opacity 300ms;
+    opacity: 0;
+
+    &.success {
+      opacity: 1;
+    }
+  }
+}
+@mixin smart_label($height, $radius, $margin: 1em, $border: $border-width) {
+  $borders: $border * 2;
+
+  @include box-sizing(border-box);
+
+  outline: none;
+  height: calc(#{$height} + #{$borders});
+  width: 100%;
+  margin: 0 0 $margin;
+  padding: $margin;
+  border: $border solid $gray;
+  background: $white;
+  border-radius: $radius;
+  resize: none;
+  box-shadow: none !important;
+
+  // BS RESET = "!important"
+  &[required] {
+    + label {
+      &[placeholder] {
+        display: block;
+        pointer-events: none;
+        line-height: $margin;
+        margin-top: calc(#{-$height} - #{$borders});
+        margin-bottom: calc(#{$height} - #{$margin} + #{$borders});
+
+        &:before {
+          content: attr(placeholder);
+          display: inline-block;
+          margin: 0 calc(#{$margin} + #{$borders});
+          padding: 0 2px;
+          color: $gray-light;
+          white-space: nowrap;
+          transition: .3s ease-in-out;
+          background-image: linear-gradient(to bottom, $white, $white);
+          background-size: 100% 5px;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+    }
+  }
+}
+
+input:not(.dumb) {
+  $height: 40px;
+
+  &[type="text"],
+  &[type="search"],
+  &[type="email"],
+  &[type="number"] {
+    @include smart_label($height, $height / 2);
+  }
+}
+
+textarea:not(.dumb) {
+  @include smart_label(13em, 3px, .78em);
+}
+
+// replace bootstrap blue glow with green
+.form-control:focus {
+  border-color: rgba($primary-color, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba($primary-color, 0.6);
+}
+
+// make inputs the same height as our CTA buttons on inline forms
+.form-inline {
+  .form-control {
+    height: 54px;
+    border-radius: 54px;
+    padding-top: 16px; // help line up placeholder text baseline with button text baseline
+  }
+
+  .form-group + .btn {
+    @media (min-width: $grid-float-breakpoint) {
+      margin-left: 1em;
+    }
+  }
+}
+
+// NEW SUBMIT BUTTON
+input[type="submit"].btn {
+  background: $primary-color;
+  padding: 12px 25px 12px 25px;
+}

@@ -1,0 +1,53 @@
+// NOTE: flow diagrams expect to be embedded in a bootstrap grid row
+.flow-diagram {
+
+  .steps-index {
+    @include clearfix;
+    @extend .hidden-xs;
+    @extend .hidden-sm;
+    margin-bottom: 60px;
+
+    .feature {
+      @extend .text-center;
+
+      // implement the arrow between steps
+      &:after {
+        font-family: FontAwesome;
+        content: "\f054";
+        color: $gray-light;
+        position: absolute;
+        right: -$grid-gutter-width / 2 / 2;
+        top: 20px; // half the feature icon height minus the height of the element itself
+      }
+      &:last-of-type:after {
+        display: none;
+      }
+    }
+  }
+
+  .steps {
+    @extend .readable-width;
+  }
+
+  .step {
+    @include make-row;
+
+    .feature, .step-image {
+      @include make-md-column(6);
+    }
+
+    .feature {
+      // override standard feature padding for this context
+      padding-bottom: $padding-xl-vertical;
+    }
+  }
+
+  // space between step panels
+  .step + .step {
+    margin-top: 60px;
+  }
+
+  .step-image img {
+    @include img-responsive;
+  }
+}

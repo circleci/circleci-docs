@@ -1,0 +1,24 @@
+@import 'components/_component-love-slider';
+
+body.page-love {
+  section.hero {
+    h1 {
+      margin-bottom: 50px;
+    }
+  }
+
+  .twitter-widget {
+    overflow: hidden;
+
+    // twitter widget is fixed width, so keep it on the right side of the container so it aligns with rest of page content
+    text-align: right;
+
+    > img {
+      height: 285px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      margin-top: 20px;
+    }
+  }
+}

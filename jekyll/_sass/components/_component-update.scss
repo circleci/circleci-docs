@@ -1,0 +1,53 @@
+// TODO: Cleanup component implementation to use vars/ conform to the grid
+
+.alert.alert-server {
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
+  padding-top: 14px;
+  padding-bottom: 10px;
+  border-radius: 0;
+  background-color: #343434;
+  min-height: 50px;
+  text-align: center;
+  color: white;
+
+  a {
+    color: $secondary-color;
+  }
+
+  button.close {
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  .close {
+    font-size: 18px;
+    font-weight: 700;
+    float: right;
+    color: $secondary-color;
+    filter: alpha(opacity=20);
+  }
+}
+
+.page-integrations {
+  .alert.alert-server {
+
+    @media screen and (max-width: $screen-sm) {
+      margin-top: 10px;
+    }
+    @media screen and (max-width: $screen-xs) {
+      margin-top: 40px;
+    }
+  }
+}
