@@ -1,0 +1,39 @@
+@font-face {
+  src: url("../fonts/OutputSans-Regular.eot");
+  /* IE < 9 */
+  src: url("../fonts/OutputSans-Regular.eot?#") format("embedded-opentype"), url("../fonts/OutputSans-Regular.woff2") format("woff2"), url("../fonts/OutputSans-Regular.woff") format("woff");
+  font-family: 'OutputSans';
+  font-style: normal;
+  font-weight: normal; }
+@font-face {
+  src: url("../fonts/OutputSans-Bold.eot");
+  /* IE < 9 */
+  src: url("../fonts/OutputSans-Bold.eot?#") format("embedded-opentype"), url("../fonts/OutputSans-Bold.woff") format("woff");
+  font-family: 'OutputSans';
+  font-style: normal;
+  font-weight: 800; }
+@font-face {
+  font-family: 'Graphik Web';
+  src: url("../fonts/Graphik-Bold-Web.eot");
+  src: url("../fonts/Graphik-Bold-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Bold-Web.woff2") format("woff2"), url("../fonts/Graphik-Bold-Web.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal; }
+.Graphik-Bold-Web {
+  font-family: 'Graphik Web';
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal; }
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url("../fonts/Graphik-Regular-Web.eot");
+  src: url("../fonts/Graphik-Regular-Web.eot?#iefix") format("embedded-opentype"), url("../fonts/Graphik-Regular-Web.woff2") format("woff2"), url("../fonts/Graphik-Regular-Web.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal; }
+.Graphik-Regular-Web {
+  font-family: 'Graphik Web';
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal; }
