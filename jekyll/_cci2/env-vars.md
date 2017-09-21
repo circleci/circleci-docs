@@ -76,8 +76,8 @@ If you need to interpolate other environment variables to set an environment var
 
 ```
     steps:
-      run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
-      run: some_program_in_foo_bin
+      - run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
+      - run: some_program_in_foo_bin
 ```
 
 ## Injecting Environment Variables with the API
