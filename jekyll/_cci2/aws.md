@@ -101,7 +101,7 @@ Have available the following information and policies before starting the Previe
                 "ec2:DescribeSecurityGroups",
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
-                ""ec2:ModifyInstanceAttribute",
+                "ec2:ModifyInstanceAttribute",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "cloudwatch:*",
                 "autoscaling:DescribeAutoScalingGroups",
