@@ -65,7 +65,7 @@ When the items are filepaths, the `filesize` option will weight the split by fil
 
 `circleci tests glob "**/*.go" | circleci tests split --split-by=filesize`
 
-The `timings` split type uses historical timing data to weight the split. CircleCI automatically makes timing data from previous successful runs available inside your container in a default location so the CLI tool can discover them (`/.circleci-task-data/circle-test-results/`).
+The `timings` split type uses historical timing data to weight the split. CircleCI automatically makes timing data from previous successful runs available inside your container in a default location so the CLI tool can discover them (`$CIRCLE_INTERNAL_TASK_DATA/circle-test-results`).
 
 When splitting by `timings`, the tool will assume it’s splitting filenames. If you’re splitting classnames, you’ll need to specify that with the `--timings-type` flag, as in the following examples:
 
