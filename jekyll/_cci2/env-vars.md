@@ -76,8 +76,8 @@ If you need to interpolate other environment variables to set an environment var
 
 ```
     steps:
-      run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
-      run: some_program_in_foo_bin
+      - run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
+      - run: some_program_in_foo_bin
 ```
 
 ## Injecting Environment Variables with the API
@@ -264,3 +264,7 @@ The username or organization name of the project being tested, i.e. “foo” in
 **CIRCLE_PROJECT_REPONAME**
 
 The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123.
+
+**CIRCLE_INTERNAL_TASK_DATA**
+
+The directory where test timing data can be found.

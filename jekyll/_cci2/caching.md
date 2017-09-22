@@ -37,9 +37,17 @@ The dependencies that are most important to cache during a job are the libraries
 
 Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client, and gzip preinstalled.  
 
-## Writing to the Cache
- 
-Cache is written in chronological order. Consider a workflow of Job1 -> Job2 -> Job3. If Job1 and Job3 write to the same cache key, a rerun of Job2 may use the changes written by Job3 because Job2 ran last. That is, any job that runs inside a project will always use the latest write. For example, when you increment versions of a Gem package, the `~/.gem` contains both the old and new versions and the cache is made more useful by the addition of data.
+## Writing to the Cache in Workflows
+
+Jobs in one workflow can share caches.  Note that this makes it possibile to create race conditions in caching across different jobs in workflows.
+
+Cache is immutable on write: once a cache is written for a particular key like `node-cache-master`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
+
+In a run of the workflow, Job3 may use the cache written by Job1 or Job2.  Since caches are immutable, this would be whichever job saved its cache first.  This is usually undesireable because the results aren't deterministic--part of the result depends on chance.  You could make this workflow deterministic by changing the job dependencies: make Job1 and Job2 write to different caches and Job3 loads from only one, or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
+
+There are more complex cases, where jobs can save using a dynamic key like `node-cache-{{ checksum "package.json" }}` and restore using a partial key match like `node-cache-`.  The possibility for a race condition still exists, but the details may change.  For instance, the downstream job uses the cache from the upstream job to run last.
+
+Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2.  Job2 uses the cache saved from Job1.  Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it.  Job2 could also load a cache from a previous workflow.  If this happens, this means Job2 tried to load the cache before Job1 saved it.  This can be resolved by creating a workflow dependency: Job1 -> Job2.  This would force Job2 to wait until Job1 has finished running.
 
 ## Restoring Cache
 
@@ -110,7 +118,7 @@ Template | Description
 {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName`.
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or Unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
@@ -136,24 +144,19 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       - run: cp config/{database_circleci,database}.yml
 
       # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache
+      # Load installed gems from cache if possible, bundle install then save cache 
       # Multiple caches are used to increase the chance of a cache hit
+      
       - restore_cache:
           keys:
             - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-{{ .Branch }}
             - gem-cache
+            
       - run: bundle install --path vendor/bundle
+      
       - save_cache:
           key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          key: gem-cache-{{ .Branch }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          key: gem-cache
           paths:
             - vendor/bundle
 
@@ -164,29 +167,21 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       # Precompile assets
       # Load assets from cache if possible, precompile assets then save cache
       # Multiple caches are used to increase the chance of a cache hit
+      
       - restore_cache:
           keys:
             - asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
             - asset-cache-{{ .Branch }}
             - asset-cache
+            
       - run: bundle exec rake assets:precompile
+      
       - save_cache:
           key: asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
-      - save_cache:
-          key: asset-cache-{{ .Branch }}
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-      - save_cache:
-          key: asset-cache
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-
-
+            
       - run: bundle exec rspec
       - run: bundle exec cucumber
   ```
