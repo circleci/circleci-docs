@@ -18,7 +18,7 @@ If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` Fi
 
 CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** Parallelism in 2.0 can only be set in `.circleci/config.yml`, the parallelism setting from the UI is ignored.
 
-If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. 
+If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
 ## Steps to Configure Required 2.0 Keys
 
@@ -43,7 +43,7 @@ If you already have a `circle.yml` file, the following sections describe how to 
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job. 
+     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job.
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```
@@ -72,25 +72,25 @@ If you already have a `circle.yml` file, the following sections describe how to 
            - run: echo "foo" > /tmp/test-data/foo
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
-     
+
 7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the section in [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
 
-8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
+8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Steps to Configure Workflows
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
 1. To use the Workflows feature, split your build job into multiple jobs, each with a unique name. It might make sense to start by just splitting out a deploy job to prevent you from having to re-run the entire build when only the deployment fails.
- 
-2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
+
+2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.
      ```
      workflows:
        version: 2
        <workflow_name>:
-     ```  
+     ```
 3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
- 
+
      ```
      workflows:
        version: 2
@@ -98,16 +98,16 @@ To increase the speed of your software development through faster feedback, shor
            jobs:
              - build
              - test
-     ```  
+     ```
 4. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
- 
+
      ```
       - <job_name>:
           requires:
             - <job_name>
      ```
 5. For jobs which must run on a particular branch, add the `filters:` key with a nested `branches` and `only` key. For jobs which must not run on a particular branch, add the `filters:` key with a nested `branches` and `ignore` key. **Note:** Workflows will ignore job-level branching, so if you have configured job-level branching and then add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
- 
+
      ```
      - <job_name>:
          filters:
@@ -117,8 +117,8 @@ To increase the speed of your software development through faster feedback, shor
          filters:
            branches:
              ignore: master
-     ```     
-6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed. 
+     ```
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and Replace Deprecated 2.0 Keys
 
@@ -129,7 +129,7 @@ To increase the speed of your software development through faster feedback, shor
       TZ: "/usr/share/zoneinfo/America/Los_Angeles"
 ```
 
-- If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
+- If your configuration modifies $PATH, add the path to your `.bashrc` file and replace
 
 ```
     environment:
@@ -140,13 +140,13 @@ With the following to load it into your shell (the file $BASH_ENV already exists
 
 ```
     steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
       - run: some_program_inside_bin
 ```
 
 - Search and replace the `hosts:` key, for example:
 
-```  
+```
 hosts:
     circlehost: 127.0.0.1
 ```
@@ -208,8 +208,34 @@ With the following, nested under `steps:` and customizing for your application a
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
+## Automatic migration to 2.0
+
+There is also an experimental automatic migration feature. You can enable the automatic migration from your project's **Project Settings > Advanced Settings**.
+
+When you enable the automatic migration, 1.0 configuration of subsequent builds will be automatically translated to 2.0 configuration. Once builds pass, you can copy the 2.0 configuration into `.circleci/config.yml` and disable the feature.
+
+Because this feature is still experimental, not all 1.0 configurations are supported yet.
+
+Here is a table for supported inferences.
+
+| Project Type | Supported       |
+|--------------|-----------------|
+| Clojure      | ✔               |
+| Go           | ✔               |
+| Haskell      |                 |
+| Java         |                 |
+| NodeJS       | ✔               |
+| Ruby (Rails) | 80% completed   |
+| PHP          | ✔               |
+| Python       |                 |
+{: class="table"}
+
+To see the list of all supported 1.0 configuration construct, please see [here](https://discuss.circleci.com/t/support-status-in-automatic-config-translation/16751).
+
+Lastly, we need your feedbacks to make the automatic config translation better! If you find bugs, please report in [our Discuss](https://discuss.circleci.com/tags/c/circleci-2-0/config
+).
+
 ## Next Steps
 
 - Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
 - Refer to the [Writing Jobs With Steps]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
-
