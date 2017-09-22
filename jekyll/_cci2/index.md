@@ -1,29 +1,34 @@
 ---
 layout: classic-docs
-title: "2.0 Docs"
+title: "2.0 Documentation"
 description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
 
-Welcome to CircleCI 2.0! The release of CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CircleCI, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci/) for how it works and then use the [Hello World]({{ site.baseurl }}/2.0/hello-world/) doc to start your first project build. Refer to the [Sample 2.0 config.yml File]({{ site.baseurl }}/2.0/sample-config/) to try out multiple jobs with workflow orchestration, then head over to the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
+Welcome to CircleCI 2.0! The release of CircleCI 2.0 includes many improvements for faster performance and greater control. If you are new to CI/CD, check out the [Overview]({{ site.baseurl }}/2.0/about-circleci/) for how it works. If you are already using CircleCI 1.0, refer to the [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) document.
 
 If you are a System Administrator, see the [2.0 Administrator’s Overview]({{ site.baseurl }}/2.0/overview/) document to get started and refer to the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) for installation instructions.
 
-## Programming Language Support
+## Setup Process
+Use the following process to set up your code repository, run tests, and deploy your artifacts with CircleCI:
 
-Code that builds on Linux will generally build on CircleCI 2.0. For some language versions, CircleCI provides demo applications with YAML file templates and instructions: 
+Task | Instructions
+----|----------
+Sign up and authorize your repository | [Sign Up and Try CircleCI 2.0]({{ site.baseurl }}/2.0/first-steps/)
+Create a CircleCI configuration file in your repository | [Hello World]({{ site.baseurl }}/2.0/hello-world/)
+Select the image and executor (Docker or Machine) for each job | [Specifying Container or Machine Images]({{ site.baseurl }}/2.0/executor-types/)
+Configure a database | [Configuring Databases]({{ site.baseurl }}/2.0/postgres-config/)
+Install dependencies for building your application | [CircleCI Demo Applications (Language Guides)]({{ site.baseurl }}/2.0/demo-apps/)
+Cache dependencies to speed up your builds | [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+Write a job to run your tests | [Writing Jobs With Steps (Run Step Section)]({{ site.baseurl }}/2.0/configuration-reference/#run)
+Automate your browser tests | [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/#install-and-run-selenium-to-automate-browser-testing)
+Get test results | [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/)
+Write a job to deploy artifacts | [Writing Jobs With Steps (Deploy Section)]({{ site.baseurl }}/2.0/configuration-reference/#deploy) and [Deployment Integrations]({{ site.baseurl }}/2.0/deployment_integrations/)
+Set up Workflows | [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/#steps-to-configure-workflows), [Workflows Configuration Examples]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples) and [Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows/)
+Use workspaces in Workflows | [Using Workspaces to Share Data Among Jobs]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) and [Writing Jobs With Steps (`persist_to_workspace` Section)]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace)
+Manually approve workflow steps | [Holding a Workflow for a Manual Approval]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval)
+{: class="table table-striped"}
 
-- **Android**, see the [Android Language Guide]({{ site.baseurl }}/2.0/language-android/)
-- **Clojure 1.2.0 and later**, see the [Clojure Language Guide]({{ site.baseurl }}/2.0/language-clojure/)
-- **Elixir 1.2 and later**, see the [Elixir Language Guide]({{ site.baseurl }}/2.0/language-elixir/)
-- **Go 1.7 and later**, see the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/)
-- **Java 8 and later**, see the [Java Language Guide]({{ site.baseurl }}/2.0/language-java/)
-- **Node.js 4 and later**, see the [JavaScript Language Guide]({{ site.baseurl }}/2.0/language-javascript/)
-- **PHP 5 and later**, see the [PHP Language Guide]({{ site.baseurl }}/2.0/language-php/)
-- **Python 2 and later**, see the [Python Language Guide]({{ site.baseurl }}/2.0/language-python/)
-- **Ruby 2 and later**, see the [Ruby and Rails Guide]({{ site.baseurl }}/2.0/language-ruby/) 
-
-Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more. 
 
 ## Features
 
