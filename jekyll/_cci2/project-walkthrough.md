@@ -52,17 +52,17 @@ jobs:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+          TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
         environment:
-          POSTGRES_USER: ubuntu
+          POSTGRES_USER: root
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
 ```
 
 The environment variables for the *primary container* set some config specific to the Flask framework and set a database URL that references a database run in the `circleci/postgres:9.6.5-alpine-ram` service container. Note that the PostgreSQL database is available at `localhost`.
 
-The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `ubuntu` with an empty password, and a database called `circle_test`.
+The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
 
 ## Installing Dependencies
 
