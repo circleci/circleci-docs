@@ -144,24 +144,19 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       - run: cp config/{database_circleci,database}.yml
 
       # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache
+      # Load installed gems from cache if possible, bundle install then save cache 
       # Multiple caches are used to increase the chance of a cache hit
+      
       - restore_cache:
           keys:
             - gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-{{ .Branch }}
             - gem-cache
+            
       - run: bundle install --path vendor/bundle
+      
       - save_cache:
           key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          key: gem-cache-{{ .Branch }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          key: gem-cache
           paths:
             - vendor/bundle
 
@@ -172,29 +167,21 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       # Precompile assets
       # Load assets from cache if possible, precompile assets then save cache
       # Multiple caches are used to increase the chance of a cache hit
+      
       - restore_cache:
           keys:
             - asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
             - asset-cache-{{ .Branch }}
             - asset-cache
+            
       - run: bundle exec rake assets:precompile
+      
       - save_cache:
           key: asset-cache-{{ .Branch }}-{{ checksum "VERSION" }}
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
-      - save_cache:
-          key: asset-cache-{{ .Branch }}
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-      - save_cache:
-          key: asset-cache
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-
-
+            
       - run: bundle exec rspec
       - run: bundle exec cucumber
   ```
