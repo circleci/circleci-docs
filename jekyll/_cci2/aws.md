@@ -13,8 +13,8 @@ This document provides step-by-step instructions for installing CircleCI 2.0 on 
 
 If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your [CircleCI account representative](mailto:cs@circleci.com) for assistance with upgrading.
 
-**Notes:** 
-- CircleCI 2.0 is only available on AWS.  
+**Notes:**
+- CircleCI 2.0 is only available on AWS.
 - Teams may create a new CircleCI 2.0 `.circleci/config.yml` file in their repositories to add new 2.0 projects incrementally while continuing to build 1.0 projects which use a `circle.yml` configuration file.
 
 ## Prerequisites
@@ -30,8 +30,8 @@ Have the following information available before beginning the installation proce
 * AWS Region, for example `us-west-2`.
 * AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
 * Set your VPC [`enableDnsSupport`] setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) Amazon Web Services documentation for additional details.
-	
-## Private Subnet Requirements	
+
+## Private Subnet Requirements
 
 The following additional settings are required to support using private subnets on AWS with CircleCI:
 
@@ -44,7 +44,7 @@ The following additional settings are required to support using private subnets 
 
 ## Sizing AWS Instances
 
-The following table describes the number of containers or concurrent builds supported by the M3, C3, and R3 machines using the the default CircleCI container size of 2CPU/4GB RAM and 2CPU overhead. 
+The following table describes the number of containers or concurrent builds supported by the M3, C3, and R3 machines using the the default CircleCI container size of 2CPU/4GB RAM and 2CPU overhead.
 
 Type | Supported Containers | Model | Notes
 ----|-----------------------|-------|------
@@ -101,6 +101,7 @@ Have available the following information and policies before starting the Previe
                 "ec2:DescribeSecurityGroups",
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
+                "ec2:ModifyInstanceAttribute",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "cloudwatch:*",
                 "autoscaling:DescribeAutoScalingGroups",
@@ -195,12 +196,12 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-8. After applying settings you are be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue. 
+8. After applying settings you are be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 9. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Next Steps for Getting Started
 
-1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage. 
+1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage.
 1. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
 1. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
 
