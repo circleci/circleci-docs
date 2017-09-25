@@ -164,6 +164,36 @@ to add nearly any dependency required in your build VM. Here's an example:
 
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
+
+## Custom Ruby Versions
+
+The macOS container ships with the system-installed Ruby, as well as the
+latest stable versions of Ruby as provided by [Ruby-Lang.org](https://www.ruby-lang.org/en/downloads/).
+To allow you to manage custom versions of Ruby, we install
+[ruby-install](https://github.com/postmodern/ruby-install) and [chruby](https://github.com/postmodern/chruby).
+To select a custom version of ruby you should [create a file named
+`.ruby-version` and commit it to your
+repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
+You will also need to change the default shell that commands are executed with
+to be a login shell, so that `chruby` is correctly invoked.
+
+```yaml
+version: 2
+jobs:
+  build:
+    macos:
+      version: "9.0"
+    shell: /bin/bash --login --eo pipefail
+```
+
+If you do not want to commit a `.ruby-version` file to source control, then
+you can create the file from a build step:
+```yaml
+run: 
+  name: Set Ruby Version
+  command:  echo "ruby-2.4" > ~/.ruby-version
+```
+
 ### Using Custom Versions of CocoaPods and Other Ruby Gems
 
 To make sure the version of CocoaPods that you use locally is also used
