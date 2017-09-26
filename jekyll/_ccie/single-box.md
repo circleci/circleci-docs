@@ -86,7 +86,7 @@ for specific instructions.
 
 <li>Choose an SSL certificate option. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
 or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
-You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See <a href="{{site.baseurl}}/enterprise/docker-builder-config/">this doc</a> for details on setting builder machine environment variables.
 </li>
 
 <li>
