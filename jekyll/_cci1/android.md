@@ -102,12 +102,6 @@ test:
     - circle-android wait-for-boot
 ```
 
-`circleci-android24` is an AVD preinstalled on the machine for Android 24 on the ARM V7 EABI.
-There's also a corresponding `circleci-android22`; alternatively, you can
-[create your own][create-avd] if these don't suit your purposes.
-
-[create-avd]: https://developer.android.com/tools/devices/managing-avds-cmdline.html#AVDCmdLine
-
 One important note: it's not possible to emulate Android on x86 or
 x86_64 on our build containers. The Android emulator requires KVM on
 Linux, and we can't provide it.
