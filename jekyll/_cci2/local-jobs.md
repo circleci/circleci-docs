@@ -44,7 +44,7 @@ The config validate command checks your local config.yml file for syntax errors.
 
 ### Running A Build
 
-In order to run your build, navigate to your repo and run `circleci build` . This will go and run the commands located under the `build` job. This is because the CLI does not yet support workflows and so only 2.0 jobs will be evaluated by the CLI.
+To run your build, navigate to your repo and run `circleci build`. The commands located under the `build` job are run. Only 2.0 jobs will be evaluated by the CLI because the CLI does not yet support Workflows.
 
 ### Troubleshooting Container Configurations Locally
 
