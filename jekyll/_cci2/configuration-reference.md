@@ -44,7 +44,7 @@ If you are **not** using workflows, the `jobs` map must contain a job named
 `build`. This `build` job is the default entry-point for a run that is triggered by a
 push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
-### **<`build`>**
+### **<`job_name`>**
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
@@ -726,7 +726,7 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
-#### **<`build_test_deploy`>**
+#### **<`workflow_name`>**
 
 A unique name for your workflow.
 
@@ -738,7 +738,7 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
-#### **<`build`>**
+#### **<`job_name`>**
 
 A job name that exists in your `config.yml`.
 
