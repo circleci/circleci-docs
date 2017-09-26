@@ -456,7 +456,7 @@ alerts in chatrooms.
 ##### **`checkout`**
 
 Special step used to check out source code to the configured `path` (defaults to the `working_directory`).
-The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it steps the git config file to checkout over ssh. 
+The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh. 
 
 Key | Required | Type | Description
 ----|-----------|------|------------
