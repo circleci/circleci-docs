@@ -59,6 +59,8 @@ dependencies:
 
 The default inferred step for Bundler is `bundle check || bundle install`. For reasons, we use `check` prior to `install` in order to skip unnecessary steps inherited from the `bundle install` command when all dependencies are cached or otherwise already installed and available on the system.
 
+If running `bundle install` manually within the dependencies override, caching will not work; it will be necessary to specify `bundle install --path=vendor/bundle --jobs=4 --retry=3` within your config.
+
 ### Databases
 
 CircleCI manages all your database requirements,
