@@ -16,7 +16,7 @@ The following sections describe useful tools for validating and debugging your c
 
 The `circleci` commands enable you to reproduce the CircleCI environment locally and run jobs as if they were running on the hosted application for more efficient debugging and configuration in the initial setup phase. 
 
-You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
+You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers. 
 
 **Note:** It is not possible to run Workflows with the CLI.
 
@@ -41,6 +41,10 @@ $ circleci config validate -c .circleci/config.yml
 The config validate command checks your local config.yml file for syntax errors.
 
 **Note**: Local jobs don’t cache dependencies. You may want to comment out dependency sections if you are testing YAML syntax. Or, as in this example, use the `-c` flag to specify a local `config.yml` file that doesn’t pull in large dependencies.
+
+### Running A Build
+
+To run your build, navigate to your repo and run `circleci build`. The commands located under the `build` job are run. Only 2.0 jobs will be evaluated by the CLI because the CLI does not yet support Workflows.
 
 ### Troubleshooting Container Configurations Locally
 
