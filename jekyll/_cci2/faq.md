@@ -50,6 +50,10 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is where the build runs. If you are trying to figure out why the new 2.0 build is not working it may be that the build runs on the first image specified in the list. The first image in the list is used for the primary container.
 
+## Why can't I find my project on the Add Project page?
+ 
+If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
+
 ## I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 
 There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support](mailto:support@circleci.com) or your [Customer Success Manager](mailto:cs@circleci.com) to have it increased. 

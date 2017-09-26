@@ -35,6 +35,8 @@ The first image listed defines the execution environment for your build. The pri
 
 4. If this is your first project on CircleCI, go to the Projects page, click the Add Projects button and then click the Build Project button next to your project.
 
+**Note:** If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must select `myOrg` on the application Switch Organization menu.
+
 CircleCI checks out your code, prints "Hello World", and posts a green build to the Builds page adding a green checkmark on your commit in GitHub or Bitbucket! If the job fails, you are notified in email of the failure with a log of the failing command, exit code, and output with a red X on the commit in GitHub or Bitbucket. 
 
 You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
