@@ -208,15 +208,13 @@ With the following, nested under `steps:` and customizing for your application a
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
-## Automatic migration to 2.0
+## Automatic Migration to 2.0
 
-There is also an experimental automatic migration feature. You can enable the automatic migration from your project's **Project Settings > Advanced Settings**.
+There is also an experimental automatic migration feature. You can enable the automatic migration from your project's **Project Settings > Advanced Settings** page.
 
-When you enable the automatic migration, 1.0 configuration of subsequent builds will be automatically translated to 2.0 configuration. Once builds pass, you can copy the 2.0 configuration into `.circleci/config.yml` and disable the feature.
+When you enable the automatic migration, 1.0 configuration of subsequent builds are automatically translated to 2.0 configuration. After the builds pass, you can copy the 2.0 configuration into `.circleci/config.yml` and disable the feature.
 
-Because this feature is still experimental, not all 1.0 configurations are supported yet.
-
-Here is a table for supported inferences.
+**Note:** Because this feature is still experimental, not all 1.0 configurations are supported yet. The following table lists supported project types.
 
 | Project Type | Supported       |
 |--------------|-----------------|
@@ -230,9 +228,9 @@ Here is a table for supported inferences.
 | Python       |                 |
 {: class="table"}
 
-To see the list of all supported 1.0 configuration construct, please see [here](https://discuss.circleci.com/t/support-status-in-automatic-config-translation/16751).
+To see the list of all supported 1.0 configuration constructs, please see [here](https://discuss.circleci.com/t/support-status-in-automatic-config-translation/16751).
 
-Lastly, we need your feedbacks to make the automatic config translation better! If you find bugs, please report in [our Discuss](https://discuss.circleci.com/tags/c/circleci-2-0/config
+We welcome your feedback to make the automatic config translation better! If you find bugs, please report in [our Discuss](https://discuss.circleci.com/tags/c/circleci-2-0/config
 ).
 
 ## Next Steps
