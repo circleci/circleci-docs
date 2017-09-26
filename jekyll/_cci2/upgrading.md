@@ -70,7 +70,7 @@ This procedure uses `bash` scripts to perform all of the above steps and then it
 
 Complete the following steps to cut over to the new installation:
 
-1. Update S3 settings. In AWS, edit the in-line policy in the IAM role named "$prefix_role" created for your 2.0 installation.
+1. Update S3 settings. In AWS, find the IAM role named "$prefix_role" created for your 2.0 installation and edit its in-line policy, replacing the S3 bucket entries with the S3 information from your 1.0 installation.
 
 2. Update Replicated settings. In the Replicated management console, update the name of the S3 bucket to match the name that you used in your 1.0 installation, and populate the rest of the settings to match your original GitHub OAuth application.
 
