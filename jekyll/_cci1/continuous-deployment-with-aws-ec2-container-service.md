@@ -39,7 +39,7 @@ to as the family name in the AWS CLI. Same thing. Each time we update the task
 definition, say to tell a container to use a newer version of an image, a new 
 revision for the task definition will be created.
 
-*Service* - A "service" handles the logic of running task on the cluster. This 
+*Service* - A "service" handles the logic of running tasks on the cluster. This 
 includes managing which revision of which task to run, how many copies of a 
 task to run, and managing the start/shutdown/updating processes of each task. 
 Take note of the service name as it will be used in the deployment script.
