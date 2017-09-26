@@ -159,13 +159,6 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
 
-### Code Climate
-
-If you’re a Code Climate user, follow their guide on [Configuring Test Coverage](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage). In that guide you'll find: 
-* links to [parallel tests support](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-parallel-tests-and-multiple-test-suites) setup,
-* [troubleshooting tips](https://docs.codeclimate.com/v1.0/docs/setting-up-test-coverage#section-troubleshooting),
-* and a [sample circle.yml](https://docs.codeclimate.com/v1.0/docs/circle-ci-test-coverage-example).
-
 ### PullReview
 
 Follow the [instructions from PullReview](https://github.com/8thcolor/pullreview-coverage/blob/master/README.md)
