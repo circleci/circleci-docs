@@ -230,3 +230,70 @@ workflows:
             - precompile_assets
 ```
 {% endraw %}
+
+## Sample iOS App Configuration with Code Signing and Crashlytics
+In the following example configuration the test steps run with the specified commands.
+The code signing is performed with the CircleCI built-in mechanism 
+and all successful builds of the app on the `master` branch
+will be distributed to Crashlytics:
+
+```
+version: 2
+jobs:
+  test: # just a label, can be anything
+    machine:
+      enabled: true
+      xcode:
+        version: 8.0
+      environment:
+        # please specify your code signing identity name here
+        GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"  
+    steps:
+      - run: swift test
+      - run:
+          name: homebrew dependencies
+          command: |
+            set -o pipefail &&
+            xcodebuild
+              CODE_SIGNING_REQUIRED=NO
+              CODE_SIGN_IDENTITY=
+              PROVISIONING_PROFILE=
+              -sdk iphonesimulator
+              -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
+              -workspace MyWorkspace.xcworkspace
+              -scheme "My Scheme"
+              clean build test |
+            tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+            xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml           
+  deploy: # just a label, can be anything
+    machine:
+      enabled: true
+      xcode:
+        version: 8.0
+      environment:
+        # please specify your code signing identity name here
+        GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Acme Inc. (GL31ZZ3256)"
+    steps:
+      - deploy:
+          name: Maybe Deploy
+          command: |
+            # this will build the ipa file
+            - fastlane gym --scheme "App" --workspace "App.xcworkspace"
+            - ipa distribute:crashlytics
+                --crashlytics_path Crashlytics.framework
+                --api_token    "$CRASHLYTICS_API_KEY"
+                --build_secret "$CRASHLYTICS_SECRET"
+            
+
+workflows:
+  version: 2
+  test_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            test
+          filters:
+            branches:
+              only: master
+```
