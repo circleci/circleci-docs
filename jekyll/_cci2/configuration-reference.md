@@ -473,6 +473,14 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ```
 
+**Note:** CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
+
+```
+- checkout:
+- run: git submodule sync
+- run: git submodule update --init
+```
+
 <a name="save_cache"/>
 ##### **`save_cache`**
 
