@@ -29,6 +29,7 @@ When `setup_docker_engine` executes, a remote environment will be created, and y
 
 `setup_docker_engine` is now enabled automatically when initializing a machine executor. 
 
+**Note:** Previously the `setup_docker_engine` key was called `setup_remote_docker` and used the `reusable` and `exclusive` options which are now deprecated in favor of the `setup_docker_engine` key with the `docker_layer_caching` option.  
 
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
