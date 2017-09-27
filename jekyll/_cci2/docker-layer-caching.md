@@ -13,7 +13,9 @@ order: 70
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
-Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
+Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special `setup_docker_engine` option. 
+
+**Note:** Previously the `setup_docker_engine` key was called `setup_remote_docker` and used the `reusable` and `exclusive` options which are now deprecated in favor of the `setup_docker_engine` key with the `docker_layer_caching` option.  
 
 Docker executor:
 
