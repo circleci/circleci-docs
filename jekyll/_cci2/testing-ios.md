@@ -38,47 +38,42 @@ A new `.xcscheme` file is located in the
 `xcshareddata/xcschemes` folder under your Xcode project.
 8. Commit this file to your git repository so that CircleCI can access it.
 
-Simple projects should run with minimal configuration, as in the following example:
+Simple projects should run with minimal configuration. You can find an
+example of a minimal config in the
+[iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
-```# .circleci/config.yml
+# Recommended setup
 
-# Specify the config version - version 2 is latest.
+In addition to the basic setup steps, the recommended setup includes
+downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
+and linting the Swift code together with the `build-and-test` job:
+
+```
+# .circleci/config.yml
 version: 2
-
-# Define the jobs for the current project.
 jobs:
   build-and-test:
-
-    # Specify the Xcode version to use.
     macos:
       xcode:
-        version: "8.3.3"
+        version: "9.0"
 
-    # Define the steps required to build the project.
     steps:
-
-      # Get the code from the VCS provider.
       - checkout
-
-      # Download CocoaPods specs via HTTPS (faster than Git)
       - run:
           name: Fetch CocoaPods Specs
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-
-      - run: pod install --verbose
-
-      # Run tests.
       - run:
-          name: Run tests
+          name: Install CocoaPods
+          command: pod install --verbose
+
+      - run:
+          name: Build and run tests
           command: fastlane scan
           environment:
-            SCAN_DEVICE: iPhone 6
+            SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
 
-      # Collect XML test results data to show in the UI,
-      # and save the same XML files under test-results folder
-      # in the Artifacts tab.
       - store_test_results:
           path: test_output/report.xml
       - store_artifacts:
@@ -87,7 +82,53 @@ jobs:
       - store_artifacts:
           path: ~/Library/Logs/scan
           destination: scan-logs
-          ```
+
+workflows:
+  version: 2
+    build-and-test:
+      jobs:
+        - build-and-test
+```
+
+### Advanced setup
+
+For advanced setup, it is possible to run a lint job together with your
+build and test job, and potentially also run tools like [Danger](https://github.com/danger/danger).
+
+The recommended config can be extended to add a lint job and a Danger
+job as follows:
+
+
+```
+version: 2
+jobs:
+  build-and-test:
+  ...
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+    steps:
+      - checkout
+      - run: danger
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+      - swiftlint
+      - danger
+      - build-and-test
+```
 
 
 ### CocoaPods
@@ -189,7 +230,7 @@ jobs:
 If you do not want to commit a `.ruby-version` file to source control, then
 you can create the file from a build step:
 ```yaml
-run: 
+run:
   name: Set Ruby Version
   command:  echo "ruby-2.4" > ~/.ruby-version
 ```
