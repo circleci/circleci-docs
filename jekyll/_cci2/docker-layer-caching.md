@@ -9,28 +9,33 @@ order: 70
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
-**Note:** This feature only works with whitelisted projects. To enable this feature, you must contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI). Because Docker Layer Caching uses the `setup_remote_docker` step, it is not compatible with the `machine` executor.
+**Note:** This feature only works with whitelisted projects. To enable this feature, you must contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI).
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
-Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
+Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special `setup_docker_engine` option. 
+
+**Note:** Previously the `setup_docker_engine` key was called `setup_remote_docker` and used the `reusable` and `exclusive` options which are now deprecated in favor of the `setup_docker_engine` key with the `docker_layer_caching` option.  
+
+Docker executor:
 
 ``` YAML
-- setup_remote_docker:
-    reusable: true    # default - false
-    exclusive: true   # default - true
+steps:
+  - setup_docker_engine:
+      docker_layer_caching: true    # default - false
 ```
 
-## **`reusable`**
+Machine executor:
 
-When `reusable` is set to `true`, CircleCI will try to reuse your Remote Docker Environment. That is, every layer you built in a previous job will be accessible in the remote environment and CircleCI will attempt to reuse the previous environment when it is possible. However, in some cases your job may run in a clean environment, even if the configuration specifies `reusable: true`.
+``` YAML
+- machine:
+    docker_layer_caching: true    # default - false
+```
 
-If you run many parallel jobs for the same project, and each job requests a reusable environment, all of them will be provided with a Remote Docker Environment. However, not all of the jobs will have cached layers, although this behavior is subject to change in a future update.
+When `docker_layer_caching` is set to `true`, CircleCI will try to reuse your Remote Docker Environment. That is, every layer you built in a previous job will be accessible in the remote environment and CircleCI will attempt to reuse the previous environment when it is possible. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
 
-## **`exclusive`**
+If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. However, not all of the jobs will have cached layers, although this behavior is subject to change in a future update.
 
-The second option (`exclusive`) indicates whether you want to allow parallel jobs to run simultaneously in the same Remote Docker Environment. Jobs for which `exclusive:` is set to `true` are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
+Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access.
 
-If you set `exclusive:` to `false`, the project's parallel jobs will be able to share the same Remote Docker Environment. This method lets you reduce the chances of receiving a Remote Docker Environment without a cache. If you choose this option, ensure that your project can handle concurrent operations in Docker Engine.
-
-For example, if you build images with mutable tags like `latest`, then a shared Docker environment could have undesireable results. When `exclusive:` is set to `false`, CircleCI only allows two parallel jobs to use the same Docker environment.  This can be any two jobs running in parallel in the same project.  For example, `build 2` on the first job and `deploy 1` on the second job could share the same environment.  As such, you should not assume sequential sharing, where the `build 1` environment is the same one that `test 1` uses in a job.  Instead, each job should be configured to push or pull to a Docker registry as needed.  The Docker environments will eventually stabilize with the images your jobs require after a few job runs.
+For example, if you build images with mutable tags like `latest`, then a shared Docker environment could have undesireable results. As such, you should not assume sequential sharing, where the `build 1` environment is the same one that `test 1` uses in a job. Instead, each job should be configured to push or pull to a Docker registry as needed. The Docker environments will eventually stabilize with the images your jobs require after a few job runs.
