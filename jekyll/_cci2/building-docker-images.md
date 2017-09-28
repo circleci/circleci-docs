@@ -44,6 +44,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker   # (2)
+          docker_layer_caching: true # (3)
 
       # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
@@ -59,8 +60,8 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (3)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (5)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
@@ -68,8 +69,9 @@ Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the [primary container][primary-container].
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it.
-3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-4. We use project environment variables to store credentials for Docker Hub.
+3. Refer to the [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document for details.
+4. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
+5. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker version
 
