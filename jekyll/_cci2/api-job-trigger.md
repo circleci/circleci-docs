@@ -60,7 +60,7 @@ jobs:
       - image: ruby:2.4.0
     working_directory: /
     steps:
-      - setup_remote_docker
+      - setup_docker_engine
       - run: echo "deploy section running"
 ```
 

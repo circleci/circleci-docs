@@ -14,7 +14,7 @@ This document explains how to build Docker images for deploying elsewhere or for
 
 ## Overview
 
-To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your build requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment, you must use a special `setup_docker_engine` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your build requires `docker` or `docker-compose` commands, add the `setup_docker_engine` step into your `.circleci/config.yml`:
 
 ```YAML
 jobs:
@@ -22,12 +22,14 @@ jobs:
     steps:
       # ... steps for building/testing app ...
 
-      - setup_remote_docker
+      - setup_docker_engine
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_docker_engine` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-*Note: `setup_remote_docker` is not curently compatible with the `machine` executor.*
+`setup_docker_engine` is now enabled automatically when initializing a machine executor. 
+
+**Note:** Previously the `setup_docker_engine` key was called `setup_remote_docker` and used the `reusable` and `exclusive` options which are now deprecated in favor of the `setup_docker_engine` key with the `docker_layer_caching` option.  
 
 ### Example
 Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
@@ -43,7 +45,8 @@ jobs:
       - checkout
       # ... steps for building/testing app ...
 
-      - setup_remote_docker   # (2)
+      - setup_docker_engine   # (2)
+          docker_layer_caching: true # (3)
 
       # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
@@ -59,24 +62,25 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (3)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (5)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
 Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the [primary container][primary-container].
-2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it.
-3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-4. We use project environment variables to store credentials for Docker Hub.
+2. Once `setup_docker_engine` is called, a new remote environment is created, and your primary container is configured to use it.
+3. https://circleci.com/docs/2.0/docker-layer-caching/
+4. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
+5. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker version
 
 If your build requires a specific docker image, you can set it as an `image` attribute:
 
 ```YAML
-      - setup_remote_docker:
+      - setup_docker_engine:
           version: 17.05.0-ce
 ```
 
