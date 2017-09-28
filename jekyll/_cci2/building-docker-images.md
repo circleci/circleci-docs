@@ -51,7 +51,8 @@ jobs:
 
      # deploy the container
      - run: docker push company/app:$CIRCLE_BRANCH
-     ```
+```
+
 
 Following is an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
