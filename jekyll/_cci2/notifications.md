@@ -1,11 +1,21 @@
 ---
 layout: classic-docs
 title: "Enabling Web and Email Notifications"
-short-title: "Enabling Web and Email Notifications"
+short-title: "Enabling Web, Email, and Chat Notifications"
 categories: [configuring-jobs]
 order: 100
 published: true
 ---
+
+## Overview 
+
+CircleCI has integrated chat notifications, automated email notifications, and web notifications in your browser that you  control in the CircleCI Settings page for each project.
+
+## Enable Chat Notifications
+
+CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications. Configure chat notifications on the Project Settings > Chat Notifications page of the CircleCI application using the in-app instructions and links for each chat app.
+
+## Set or Change Email Notifications
 Use the [Notifications](https://circleci.com/account/notifications) page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
 
 ## Enabling Web Notifications
