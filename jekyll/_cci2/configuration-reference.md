@@ -506,6 +506,7 @@ Template | Description
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
+{% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 {: class="table table-striped"}
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
@@ -526,7 +527,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 {% raw %}
 ``` YAML
 - save_cache:
-    key: v1-myapp-{{ checksum "project.clj" }}
+    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
       - /home/ubuntu/.m2
 ```
@@ -583,7 +584,7 @@ A path is not required here because the cache will be restored to the location f
 ``` YAML
 - restore_cache:
     keys:
-      - v1-myapp-{{ checksum "project.clj" }}
+      - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
       # if cache for exact version of `project.clj` is not present then load any most recent one
       - v1-myapp-
 
@@ -591,7 +592,7 @@ A path is not required here because the cache will be restored to the location f
 
 # cache will be saved only once for each version of `project.clj`
 - save_cache:
-    key: v1-myapp-{{ checksum "project.clj" }}
+    key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
       - /foo
 ```
