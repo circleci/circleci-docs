@@ -17,15 +17,11 @@ Consider reusing the unchanged layers to significantly reduce image build times.
 
 ``` YAML
 - setup_remote_docker:
-    reusable: true    # default - false
+    docker_layer_caching: true
     exclusive: true   # default - true
 ```
 
-## **`reusable`**
-
-When `reusable` is set to `true`, CircleCI will try to reuse your Remote Docker Environment. That is, every layer you built in a previous job will be accessible in the remote environment and CircleCI will attempt to reuse the previous environment when it is possible. However, in some cases your job may run in a clean environment, even if the configuration specifies `reusable: true`.
-
-If you run many parallel jobs for the same project, and each job requests a reusable environment, all of them will be provided with a Remote Docker Environment. However, not all of the jobs will have cached layers, although this behavior is subject to change in a future update.
+**Note:** Previously the `docker_layer_caching` was called `reusable`. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. 
 
 ## **`exclusive`**
 
