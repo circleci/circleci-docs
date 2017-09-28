@@ -215,7 +215,7 @@ The current job’s name.
 
 **CIRCLE_WORKING_DIRECTORY**
 
-The `working_directory` for the current the job.
+The `working_directory` for the current job.
 
 **CIRCLE_COMPARE_URL**
 
