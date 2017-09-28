@@ -35,7 +35,7 @@ correct build actions. Here is how to share an existing scheme in Xcode:
 6. Select the "Push to remote" option (if your project is managed with Git).
 7. Click the Commit Files button.
 A new `.xcscheme` file is located in the
-`xcshareddata/xcschemes` folder under your Xcode project. 
+`xcshareddata/xcschemes` folder under your Xcode project.
 8. Commit this file to your git repository so that CircleCI can access it.
 
 Simple projects should run with minimal configuration, as in the following example:
@@ -131,7 +131,7 @@ simulator with iOS 10.2:
 ```
     steps:
       - run:
-          name: pre-start sim
+          name: pre-start simulator
           command: xcrun instruments -w "iPhone 7 (10.2) [" || true
 ```
 
@@ -144,7 +144,7 @@ image:
 
 ### Creating a config.yml
 The most flexible means to customize your build is to add a `.circleci/config.yml` file to your project,
-which allows you to run arbitrary bash commands 
+which allows you to run arbitrary bash commands
 at various points in the build process. See the [Writing Jobs With Steps]( {{ site.baseurl }}/2.0/configuration-reference/) document for
 a detailed discussion of the structure of the `config.yml` file. **Note:** A number of options in the document will not work for macOS builds.
 
@@ -155,7 +155,7 @@ to add nearly any dependency required in your build VM. Here's an example:
 ```
     steps:
       - run:
-          name: pre-start sim
+          name: Install cowsay
           command: brew install cowsay
       - run:
           name: cowsay hi
