@@ -130,8 +130,140 @@ workflows:
       - build-and-test
 ```
 
+## Using Fastlane
 
-### CocoaPods
+[Fastlane](https://fastlane.tools/) is a set of tools for automating the
+build and deploy process of mobile apps. We encourage the use of
+Fastlane on CircleCI as that allows for parity of build / deploy locally
+and on CircleCI, and simplifies the setup process.
+
+### Adding a Gemfile
+
+It is recommended to add a `Gemfile` to your repository to make sure
+that the same version of Fastlane is used both locally and on CircleCI.
+The simplest `Gemfile` could look like this:
+
+```
+# Gemfile
+source "https://rubygems.org"
+gem 'fastlane'
+```
+
+Once you have created a `Gemfile` locally, you will need to run
+`bundle install` and check both `Gemfile` and `Gemfile.lock` into your
+repository.
+
+### Setting up Fastlane for use on CircleCI
+
+When using Fastlane in your CircleCI project, it is recommend to add the
+following to your `Fastfile`:
+
+```
+# fastlane/Fastfile
+
+...
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+  ...
+end
+```
+
+The `setup_circle_ci` Fastlane action will perform the following
+actions:
+
+* create a new temporary keychain for use with Fastlane Match (see the
+code signing section for more details);
+* switch Fastlane Match to `readonly` mode to make sure CI does not create
+new code signing certificates or provisioning profiles;
+* set up log and test result paths to be easily collectible.
+
+### Example configuration for using Fastlane on CircleCI
+
+A basic Fastlane configuration that can be used on CircleCI is as follows:
+
+```
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  desc "Ad-hoc build"
+  lane :adhoc do
+    match(type: "adhoc")
+    gym(export_method: "ad-hoc")
+  end
+end
+```
+
+This configuration can be used with the following CircleCI config file:
+
+```
+# .circleci/config.yml
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode: "9.0"
+    working_directory: /Users/distiller/output
+    environment:
+      FL_OUTPUT_DIR: $CIRCLE_WORKING_DIRECTORY
+      FASTLANE_LANE: test
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - run:
+          command: cp $FL_OUTPUT_DIR/scan/report.junit $FL_OUTPUT_DIR/scan/results.xml
+          when: always
+      - store_artifacts:
+          path: /Users/distiller/output
+      - store_test_results:
+          path: /Users/distiller/output/scan
+
+  adhoc:
+    macos:
+      xcode: "9.0"
+    working_directory: /Users/distiller/output
+    environment:
+      FL_OUTPUT_DIR: $CIRCLE_WORKING_DIRECTORY
+      FASTLANE_LANE: adhoc
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: /Users/distiller/output
+
+workflows:
+  version: 2
+  build-test-adhoc:
+    jobs:
+      - build-and-test
+      - adhoc:
+          filters:
+            branches:
+              only: development
+          requires:
+            - build-and-test
+```
+
+## Using CocoaPods
 
 If you are using CocoaPods, then we recommend that you
 check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control).
@@ -153,10 +285,6 @@ The following test tools are known to work well on CircleCI
 ### Other Tools
 Popular iOS testing tools like [Appium](http://appium.io/) and [Frank](http://www.testingwithfrank.com/) should also
 work normally and are installed and called using `run` commands.
-
-## Code Signing
-
-Refer to the iOS Code Signing documentation for CircleCI 2.0.
 
 ### Pre-Starting the Simulator
 
