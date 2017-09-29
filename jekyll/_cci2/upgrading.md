@@ -17,7 +17,7 @@ This document provides instructions for System Administrators upgrading an exist
  
 ## Perform Installation of CircleCI 2.0
 
-After you have exported your databases, install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
+Install CircleCI 2.0 using Terraform as described in the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
 
 To test your new install, set up a new GitHub application and use a different hostname. After you have verified that the new installation works, you can cut over from your previous GitHub OAuth Application and subdomain name. 
 
@@ -27,7 +27,7 @@ Verify that your installation works by forking and running our [Reality Check](h
 
 ## Perform a Backup
 
-Prior to beginning the upgrade procedure, you should back up all of your data in the 1.0 installation as described in the [backup documentation]({{ site.baseurl }}/2.0/backup/).
+Prior to beginning the data migration procedure, you should back up all of your data in the 1.0 installation as described in the [backup documentation]({{ site.baseurl }}/2.0/backup/).
 
 ## Export Existing Databases 
 
