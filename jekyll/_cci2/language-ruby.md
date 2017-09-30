@@ -191,8 +191,8 @@ steps:
     command: |
       bundle exec rspec --profile 10 \
                         --format RspecJunitFormatter \
-                        --format progress \
                         --out test_results/rspec.xml \
+                        --format progress \
                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
     
   # Save test results for timing analysis
