@@ -12,7 +12,7 @@ order: 2
 
 The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
 
-The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows. 
+The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
 
 ## Jobs Overview
 
@@ -30,7 +30,7 @@ Steps are a collection of executable commands which are run during a job. The `s
 
 ## Sample Configuration with Sequential Workflow
 
-Following is a sample 2.0 `.circleci/config.yml` file. 
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 ```
@@ -41,7 +41,7 @@ jobs:
     # The primary container is an instance of the first list image listed. Your build commands run in this container.
     docker:
       - image: circleci/node:4.8.2
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.   
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4
     steps:
       - checkout
@@ -59,7 +59,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:4.8.2  
+      - image: circleci/node:4.8.2
       - image: mongo:3.4.4
     steps:
       - checkout
@@ -75,7 +75,7 @@ jobs:
       - store_artifacts:
           path: coverage
           prefix: coverage
-      
+
 workflows:
   version: 2
   build_and_test:
@@ -230,3 +230,77 @@ workflows:
             - precompile_assets
 ```
 {% endraw %}
+
+<!---
+## Sample configuration with multiple executor types (macOS + Docker)
+
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
+in the same workflow. In the following example each push of an iOS
+project will be built on macO , and additional iOS tools
+([SwiftLint](https://github.com/realm/SwiftLint) and
+[Danger](https://github.com/danger/danger))
+will be run in Docker.
+
+{% raw %}
+```
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode:
+        version: "9.0"
+
+    steps:
+      - checkout
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run:
+          name: Install CocoaPods
+          command: pod install --verbose
+
+      - run:
+          name: Build and run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 8
+            SCAN_SCHEME: WebTests
+
+      - store_test_results:
+          path: test_output/report.xml
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: scan-test-results
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
+
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+    steps:
+      - checkout
+      - run: danger
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+      - swiftlint
+      - danger
+      - build-and-test
+```
+{% endraw %}
+-->
