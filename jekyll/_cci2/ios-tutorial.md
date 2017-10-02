@@ -3,8 +3,9 @@ layout: classic-docs
 title: iOS Project Tutorial
 short-title: iOS Project Tutorial
 categories: [configuring-jobs]
-description: Setting Up iOS applications on CircleCI
+description: Setting Up iOS applications on CircleCI 2.0
 order: 70
+hide: true
 ---
 
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
