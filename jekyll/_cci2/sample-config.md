@@ -231,6 +231,7 @@ workflows:
 ```
 {% endraw %}
 
+<!---
 ## Sample configuration with multiple executor types (macOS + Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
@@ -302,3 +303,4 @@ workflows:
       - build-and-test
 ```
 {% endraw %}
+-->
