@@ -210,7 +210,7 @@ jobs:
 You can see all the available step types in [this doc]({{ site.baseurl }}/2.0/configuration-reference/).
 **Note:** Docker support is not available in the macOS builds.
 
-### Checking out the project code
+### Checking out the Project Code
 
 One of the first items under `steps` will be the code checkout step:
 
@@ -365,7 +365,7 @@ Find more details about these steps in the
 [Artifacts doc]({{ site.baseurl}}/2.0/artifacts/) and the
 [Test Metadata doc]({{ site.baseurl}}/2.0/collect-test-data/).
 
-### Deployment via Workflows
+### Deployment Using Workflows
 
 With the availability of Workflows in 2.0, it is best practice to
 extract all the commands related to the deployment of the app into
