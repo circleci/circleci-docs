@@ -26,7 +26,7 @@ CircleCI 2.0 using Fastlane Match requires *adding a User key* to your
 CircleCI project.
 
 If you have not yet configured your iOS or Mac project on CircleCI 2.0,
-you can find the configuration instructions in the [Testing iOS Applications on macOS]({{ site.baseurl }}/2.0/testing-ios/) document.
+you can find the configuration instructions in the Testing iOS Applications on macOS document.
 
 ## Setting up Fastlane Match
 
