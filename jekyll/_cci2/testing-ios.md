@@ -5,6 +5,7 @@ short-title: Testing iOS Applications on macOS
 categories: [configuring-jobs]
 description: Testing iOS applications on macOS
 order: 71
+hide: true
 ---
 
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
@@ -21,11 +22,11 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 Select a macOS project you would like to build on the Add
 Projects page of the CircleCI application. **Note:** Changing build environment is no longer needed in 2.0. If your project is not listed as macOS, choose Linux project and then select macOS in the Operating System section.
 
-## Basic setup
+## Basic Setup
 
 After enabling macOS builds for your project, share
-the scheme that is going to be built on CircleCI so that we run the
-correct build actions. Here is how to share an existing scheme in Xcode:
+the scheme that is going to be built on CircleCI so that CircleCI runs the
+correct build actions. Complete the following steps to share an existing scheme in Xcode:
 
 1. Choose Product > Scheme > Manage Schemes.
 2. Select the Shared option for the scheme to share, and click Close.
@@ -34,17 +35,17 @@ correct build actions. Here is how to share an existing scheme in Xcode:
 5. Enter your commit message in the text field.
 6. Select the "Push to remote" option (if your project is managed with Git).
 7. Click the Commit Files button.
-A new `.xcscheme` file is located in the
-`xcshareddata/xcschemes` folder under your Xcode project.
+     A new `.xcscheme` file is located in the
+     `xcshareddata/xcschemes` folder under your Xcode project.
 8. Commit this file to your git repository so that CircleCI can access it.
 
 Simple projects should run with minimal configuration. You can find an
 example of a minimal config in the
 [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
-# Recommended setup
+# Best Practices
 
-In addition to the basic setup steps, the recommended setup includes
+In addition to the basic setup steps, it is best practice to include
 downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
 and linting the Swift code together with the `build-and-test` job:
 
@@ -90,12 +91,12 @@ workflows:
         - build-and-test
 ```
 
-### Advanced setup
+### Advanced Setup
 
 For advanced setup, it is possible to run a lint job together with your
 build and test job, and potentially also run tools like [Danger](https://github.com/danger/danger).
 
-The recommended config can be extended to add a lint job and a Danger
+The recommended configuration can be extended to add a lint job and a Danger
 job as follows:
 
 
@@ -149,7 +150,7 @@ source "https://rubygems.org"
 gem 'fastlane'
 ```
 
-Once you have created a `Gemfile` locally, you will need to run
+After you have created a `Gemfile` locally, you will need to run
 `bundle install` and check both `Gemfile` and `Gemfile.lock` into your
 repository.
 
@@ -173,13 +174,13 @@ end
 The `setup_circle_ci` Fastlane action will perform the following
 actions:
 
-* create a new temporary keychain for use with Fastlane Match (see the
-code signing section for more details);
-* switch Fastlane Match to `readonly` mode to make sure CI does not create
-new code signing certificates or provisioning profiles;
-* set up log and test result paths to be easily collectible.
+* Create a new temporary keychain for use with Fastlane Match (see the
+code signing section for more details).
+* Switch Fastlane Match to `readonly` mode to make sure CI does not create
+new code signing certificates or provisioning profiles.
+* Set up log and test result paths to be easily collectible.
 
-### Example configuration for using Fastlane on CircleCI
+### Example Configuration for Using Fastlane on CircleCI
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
 
@@ -294,7 +295,7 @@ Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
 To pre-start the simulator, add the following to your
-`config.yml`, assuming that you are running your tests on an iPhone 7
+`config.yml` file, assuming that you are running your tests on an iPhone 7
 simulator with iOS 10.2:
 
 ```
@@ -308,10 +309,10 @@ simulator with iOS 10.2:
 simulator, as the phone + watch simulator is also present in the build
 image:
 
-* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator;
+* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator.
 * `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
 
-### Creating a config.yml
+### Creating a `config.yml` File
 The most flexible means to customize your build is to add a `.circleci/config.yml` file to your project,
 which allows you to run arbitrary bash commands
 at various points in the build process. See the [Writing Jobs With Steps]( {{ site.baseurl }}/2.0/configuration-reference/) document for
@@ -390,7 +391,7 @@ Then you can install these using bundler:
             - vendor/bundle
 ```
 
-You can then ensure you're using those, by prefixing commands with `bundle exec`:
+You can then ensure you are using those, by prefixing commands with `bundle exec`:
 
 ```
     steps:
@@ -399,8 +400,8 @@ You can then ensure you're using those, by prefixing commands with `bundle exec`
 
 ## Configuring Deployment
 
-After you have a signed app you are on the homeward stretch. Distributing
-the app is easy.
+After you have a signed app you are ready to configure deployment. Distributing
+the app is easy with one of the following:
 
 * [iTunes Connect](https://itunesconnect.apple.com/)
 * [HockeyApp](http://hockeyapp.net/)
@@ -429,11 +430,11 @@ access this token during the build.
 ### Beta By Crashlytics
 
 1. Log in to Fabric.io and visit your organization's settings page.
-![](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
+![Fabric.io loging image](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
 2. Click your organization (CircleCI in the image above), and click 
 the API key and Build Secret links to reveal the items.
-![](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
+![Fabric.io org image](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
 3. Navigate to your App's Project Settings page in the CircleCI app, and under
 Environment Variables add two new items named `CRASHLYTICS_API_KEY` and
@@ -450,7 +451,6 @@ key and go to your App's Project settings on CircleCI.
 3. Add a new
 Environment Variable named `TESTFAIRY_API_KEY` and paste in the API key
 from the TestFairy dashboard.
-```
 
 And then follow the [fastlane documentation](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) for deployment, with your environment variable for keys.
 
