@@ -22,7 +22,7 @@ In 2.0 Jobs can be run using the `machine` executor which enables reuse of recen
 
 When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start and replace the `machine: services:` stanza from 1.0 configuration.  Any public Docker images can be used with the `docker` executor.
 
-See the [Executor Overview]({{ site.baseurl }}/2.0/executor-types/#machine-executor-overview) for more information about the available executors.
+See the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about `docker` versus `machine` use cases and comparisons.
 
 ## Steps Overview
 

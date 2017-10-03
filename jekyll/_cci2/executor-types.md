@@ -13,8 +13,33 @@ This document describes images and containers in the following sections:
 * TOC
 {:toc}
 
-## Docker Image Overview
-This version of CircleCI enables you to use Docker Images optimized for your needs. This increases performance by building only what is required for your application. Specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
+## Overview
+This version of CircleCI enables you to use Docker images or to use a dedicated VM image. 
+
+There are tradeoffs to `docker` versus `machine`, as follows:
+
+Virtual Environment | `docker` | `machine`
+----------|----------|----------
+ Start time | Instant | 30-60 sec
+ Clean environment | Yes | Yes
+ Custom images | Yes | No
+ Build Docker images | Yes <sup>(1)</sup> | Yes
+ Full control over job environment | No | Yes
+ Full root access | No | Yes
+ Run multiple databases | No | Yes
+ Run multiple versions of the same software | No | Yes
+ Layer caching | Yes | No
+ Run privileged containers | No | Yes
+ Use docker compose with volumes | No | Yes
+{: class="table table-striped"}
+
+<sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
+
+### Using Docker
+
+The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run.
+
+Docker increases performance by building only what is required for your application. Specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
 ```
 jobs:
   build:
@@ -22,6 +47,29 @@ jobs:
       - image: buildpack-deps:trusty
 ```
 In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
+
+### Using Machine
+
+The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM). **Note**: Use of `machine` may require additional fees in a future pricing update. 
+
+To use the machine executor, set the `machine` key to `true` in `.circleci/config.yml`. Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctrl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP. 
+
+The following example specifies the default `machine` image.
+
+```YAML
+jobs:
+  build:
+    machine: true
+      image: circleci/classic:201708-01
+``` 
+
+ Following are the available machine images:
+
+* `circleci/classic:latest` is the default image. Changes to this will be announced at least one week before they go live.
+* `circleci/classic:edge` receives the latest updates and will be upgraded at short notice.
+* `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#machine) for versions.
+
+The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
@@ -68,23 +116,6 @@ Docker Images may be specified in three ways, by the image name and version tag 
 
 Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
 
-## Docker and Machine Comparison
-
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. CircleCI also provides a `machine` option.
-
-Like any set of choices, there are tradeoffs to using one over the other. Here’s a basic comparison:
-
-Virtual Environment | `docker` | `machine`
-----------|----------|----------
- Start time | Instant | 30-60 sec
- Clean environment | Yes | Yes
- Custom images | Yes | No
- Build Docker images | Yes <sup>(1)</sup> | Yes
- Full control over job environment | No | Yes
-{: class="table table-striped"}
-
-<sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
-
 ## Docker Benefits and Limitations
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
  
@@ -93,7 +124,7 @@ Docker also has built-in image caching and enables you to build, run, and publis
 - Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
 - You want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
 
-Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes check out the `machine` executor below.
+Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
 
 ## Docker Image Best Practices
 
@@ -103,35 +134,7 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 More details on the Docker Executor are available [here]({{ site.baseurl }}/2.0/configuration-reference/).
 
-## Machine Executor Overview
 
-**Potential Premium Feature Notice: Machine Executor may be available for additional fees in a future pricing update. We welcome your [feedback](https://discuss.circleci.com/c/circleci-2-0/feedback) on this and all other aspects of CircleCI 2.0.**
-
-When you choose the `machine` key, your job will run in a dedicated, ephemeral Virtual Machine (VM). To use the machine executor, simply set the `machine` key to `true` in `.circleci/config.yml`:
-
-```YAML
-jobs:
-  build:
-    machine: true
-```
-
-[You can specify the image used for the VM](https://circleci.com/docs/2.0/configuration-reference/#machine):
-
-* `circleci/classic:latest` is the default image. Changes to this will be announced at least one week before they go live.
-* `circleci/classic:edge` receives the latest updates and will be upgraded at short notice.
-* `circleci/classic:[year-month]` [Specify an image version from the list of available images](https://circleci.com/docs/2.0/configuration-reference/#machine). This lets you pin the image version to prevent breaking changes.
-
-The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
-
-### When To Use the Machine Executor?
-- Your application requires full access to OS resources.
-
-### Advantages
-- Gives full control over job environment.
-
-### Limitations
-- Takes additional time to create VM.
-- Only the default image is supported; your job may require additional provisioning.
 
 
 

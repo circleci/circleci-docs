@@ -30,7 +30,31 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 *Note: `setup_remote_docker` is not curently compatible with the `machine` executor.*
 
 ### Example
-Here's an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
+
+Following is an example of building a Docker image using `machine` with the default image:
+
+```YAML
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         docker login -u $DOCKER_USER -p $DOCKER_PASS
+         docker run -d --name db company/proprietary-db:1.2.3
+
+     # build the application container
+     - run: docker build -t company/app:$CIRCLE_BRANCH .
+
+     # deploy the container
+     - run: docker push company/app:$CIRCLE_BRANCH
+```
+
+
+Following is an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
 ```YAML
 version: 2
