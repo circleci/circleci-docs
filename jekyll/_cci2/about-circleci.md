@@ -7,21 +7,19 @@ categories: [getting-started]
 order: 1
 ---
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The hosted option is available at <https://circleci.com/>. [CircleCI 2.0](https://circleci.com/2.0/overview/) is also installable inside your private cloud or data center. Both are free to try for two weeks. CircleCI automates build, test, and deployment of software. 
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform that automates build, test, and deployment of software and is free to try using the [Sign Up](https://circleci.com/signup/) button. CircleCI 2.0 is also installable inside your private cloud or data center, see the [Administrator's Overview](https://circleci.com/2.0/overview/) document for details.
 
-![CircleCI Example Flow with GitHub]({{ site.baseurl }}/assets/img/docs/how_it_works.png)
+## How to Ship Code Faster Using Continuous Integration and Delivery
 
-For example, after a software repository on GitHub or Bitbucket is authorized and added as a project to the circleci.com SaaS application, every new commit triggers a build and notification of success or failure through webhooks. CircleCI also supports Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
+The following video describes continuous integration, provides a demo of the application, and includes a summary of continous deployment.
 
-CircleCI can also be configured to deploy code to various environments, including the following:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YGYoYSR-d98" frameborder="0" allowfullscreen></iframe>
 
-* AWS CodeDeploy
-* AWS EC2 Container Service (ECS)
-* AWS S3
-* Google Container Engine (GKE)
-* Heroku
+## Overview
 
-Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
+After a software repository on GitHub or Bitbucket is authorized and added as a project to circleci.com, every code change  triggers a build  and automated tests in a clean container or VM configured for your requirements. CircleCI then sends an email notification of success or failure after the build and tests complete. CircleCI also includes integrated Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
+
+CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Container Engine (GKE), and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 
 ## Customer Use Cases
 
