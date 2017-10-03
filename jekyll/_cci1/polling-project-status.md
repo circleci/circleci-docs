@@ -13,6 +13,8 @@ which is the format (originally from CruiseControl) consumed by common CI monito
 
 ### Configuration
 
+Make sure to use an account api token, which you can find or create in your [user settings page](https://circleci.com/account/api)
+
 It should be possible to use any of these tools to poll your CircleCI builds, by
 configuring them with a URL of the form:
 `https://circleci.com/cc.xml?circle-token=:circle-token`
