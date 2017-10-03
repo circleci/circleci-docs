@@ -99,7 +99,7 @@ Configured by `docker` key which takes a list of maps:
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The name of a custom docker image to use
-name | N | String | The name the container is reachable by.  By default, container services is accessible through localhost
+name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
 entrypoint | N | String or List | The command used as executable when launching the container
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
 user | N | String | Which user to run the command as
@@ -116,7 +116,7 @@ The first `image` listed in the file defines the primary container image where a
 
 For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time all `steps` run in the primary container only.
 
-`name` defines the name for reaching the the non-primary containers.  By default, all services are exposed directly on `localhost.  The field is appropriate if user would rather have a different host instead of localhost (e.g. starting multiple versions of the same service).
+`name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
