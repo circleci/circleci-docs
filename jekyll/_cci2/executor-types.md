@@ -62,7 +62,7 @@ jobs:
 
 Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctrl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP.
 
-The following example specifies a particular image for the `machine` executor.
+This example specifies a particular image for the `machine` executor:
 
 ```YAML
 jobs:
