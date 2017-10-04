@@ -59,7 +59,8 @@ The following example specifies the default `machine` image.
 ```YAML
 jobs:
   build:
-    machine: true
+    machine:
+      enabled: true
       image: circleci/classic:201708-01
 ``` 
 
