@@ -52,15 +52,22 @@ In this example, all steps run in the container created by the first image liste
 
 The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM). **Note**: Use of `machine` may require additional fees in a future pricing update. 
 
-To use the machine executor, set the `machine` key to `true` in `.circleci/config.yml`. Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctrl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP. 
+To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
 
-The following example specifies the default `machine` image.
+```YAML
+jobs:
+  build:
+    machine: true
+```
+
+Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctrl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP.
+
+The following example specifies a particular image for the `machine` executor.
 
 ```YAML
 jobs:
   build:
     machine:
-      enabled: true
       image: circleci/classic:201708-01
 ``` 
 
