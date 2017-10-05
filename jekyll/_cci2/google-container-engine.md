@@ -29,7 +29,7 @@ For those with more complicated custom primary containers, follow the [installat
 ## Setting Up Authentication
 
 ### Generating a Service Account Key
-Once the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
+After the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
 
 Paste this into a new environment variable's "Value" field, using the name `GOOGLE_AUTH`. Using this particular name is not required, but will be used throughout the examples in this document.
 
@@ -51,6 +51,12 @@ docker:
     #Put the contents of keyfile.json into an environment variable for the build called GCR_CREDS, which is then passed in.
       username: _json_key
       password: $GOOGLE_AUTH 
+  - steps:
+     # ...
+     - run:
+       name: Dump Google Cloud Credentials to file
+       command: echo ${GOOGLE_AUTH} | > ${HOME}/gcp-key.json
+     # ...  
 ```
 
 ## Configuring `gcloud`
@@ -58,7 +64,7 @@ docker:
 As part of your deployment commands, configure `gcloud` to use the newly-configured service account and set up the appropriate defaults:
 
 ```sh
-gcloud auth activate-service-account --key-file ${GOOGLE_AUTH}
+gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
 gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
