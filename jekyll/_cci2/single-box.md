@@ -94,6 +94,12 @@ You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</
 Upload the license file and set the admin password.
 </li>
 <li>
+If you don't need 1.0 build functionality, you can leave the box for it unchecked. Most users should check the box for 2.0 functionality.
+</li>
+<li>
+Select "Single Box" in the "Builders Configuration" section(s).
+</li>
+<li>
 Register CircleCI as a new OAuth application in GitHub.com at <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 4 for the Homepage URL and using <code>http(s)://AWS instance IP address/auth/github</code> as the Authorization callback URL. Click the Register Application button.
 </li>
 <li>
@@ -103,7 +109,7 @@ Copy the Client ID from GitHub and paste it into the entry field for GitHub Appl
 Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 </li>
 <li>
-Create an s3 bucket for use by CircleCI, and input it in the "Storage" section. Ensure that the IAM User input or Instance Profile associated with the EC2 instance have full access to the bucket.
+Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
 </li>
 <li>
 Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. Contact us if you have questions.
