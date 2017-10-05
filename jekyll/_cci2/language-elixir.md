@@ -21,12 +21,14 @@ jobs:
   build:
     working_directory: ~/cci-demo-phoenix
     docker:
-      - image: trenpixster/elixir:1.3.2
+      - image: elixir:1.5.1
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
     steps:
       - checkout
+      - run: mix local.hex --force
+      - run: mix local.rebar
       - run: mix deps.get
       - run: mix ecto.create
       - run: mix test
@@ -66,22 +68,24 @@ Directly beneath `working_directory`, we can specify container images for the bu
 version: 2
 ...
     docker:
-      - image: trenpixster/elixir:1.3.2
+      - image: elixir:1.5.1
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
 ```
 
-We use 2 Docker images here: `trenpixster/elixir:1.3.2` as the primary build image and `postgres:9.4.1` as the database image.
+We use 2 Docker images here: `elixir:1.5.1` as the primary build image and `postgres:9.4.1` as the database image.
 
 Now we’ll add several `steps` within the `build` job.
 
-We’ll do 4 things: checkout the codebase, install missing dependencies, create the storage for the repo, and finally run the tests:
+We’ll do 6 things: checkout the codebase, install hex package manager and rebar, install missing dependencies, create the storage for the repo, and finally run the tests:
 
 ```YAML
 ...
     steps:
       - checkout
+      - run: mix local.hex --force
+      - run: mix local.rebar
       - run: mix deps.get
       - run: mix ecto.create
       - run: mix test
