@@ -29,20 +29,9 @@ For those with more complicated custom primary containers, follow the [installat
 ## Setting Up Authentication
 
 ### Generating a Service Account Key
-Once the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
+After the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
 
-### Encoding and Storing the Credentials
-Once a valid service account key has been downloaded in JSON format, we must encode the file's contents and save the encoded result to the `GOOGLE_AUTH` environment variable in the CircleCI project settings via the web interface.
-
-_**Note:** It is not advised to save the environment variable for authentication in your `config.yml` file. The credentials will be encoded, **NOT** encrypted._ 
-
-Given a key filename of `My Project.json`, we will encode the file's contents to easily save it as a string environment variable. In a Mac OS X or Linux terminal (shell):
-
-```sh
-base64 "My Project.json"
-```
-
-Copy the result of the command to the clipboard, and paste this into a new environment variable's "Value" field, using the name `GOOGLE_AUTH`. Using this particular name is not required, but will be used throughout the examples in this document.
+Paste this into a new environment variable's "Value" field, using the name `GOOGLE_AUTH`. Using this particular name is not required, but will be used throughout the examples in this document.
 
 Next, simply set up three more environment variables for convenience:
 
@@ -51,17 +40,23 @@ Next, simply set up three more environment variables for convenience:
 * `GOOGLE_COMPUTE_ZONE`: which compute zone to use by default, e.g. `us-central1-a`
 
 ### Setting Up a Job Step to Decode Credentials
-Once the `GOOGLE_AUTH` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container. In order to configure `gcloud` to use the service account key as its authentication method, the key must be reconstructed by decoding it from the environment variable back into a JSON key file for use on the primary container:
+Once the `GOOGLE_AUTH` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container. 
 
 **config.yml**
 
 ```yml
-steps:
-  # ...
-  - run:
-      name: Decode Google Cloud Credentials
-      command: echo ${GOOGLE_AUTH} | base64 -i --decode > ${HOME}/gcp-key.json
-  # ...  
+docker: 
+  - image: gcr.io/project/image-name
+    auth:
+    #Put the contents of keyfile.json into an environment variable for the build called GCR_CREDS, which is then passed in.
+      username: _json_key
+      password: $GOOGLE_AUTH 
+  - steps:
+     # ...
+     - run:
+       name: Dump Google Cloud Credentials to file
+       command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+     # ...  
 ```
 
 ## Configuring `gcloud`
