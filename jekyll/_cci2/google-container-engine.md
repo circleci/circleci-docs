@@ -55,7 +55,7 @@ docker:
      # ...
      - run:
        name: Dump Google Cloud Credentials to file
-       command: echo ${GOOGLE_AUTH} | > ${HOME}/gcp-key.json
+       command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
      # ...  
 ```
 
