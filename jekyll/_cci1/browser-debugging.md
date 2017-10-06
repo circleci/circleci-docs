@@ -47,8 +47,8 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
 
 You can now open your browser on your local machine and navigate to
-`http://localhost:8080` and this will send requests directly to the server
-running on port `3000` on the CircleCI container. You can also manually start the
+`http://localhost:3000` and this will send requests directly to the server
+running on port `8080` on the CircleCI container. You can also manually start the
 test server on the CircleCI container (if it is not already running), and you
 should be able to access the running test server from the browser on your development machine.
 
