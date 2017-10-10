@@ -59,6 +59,7 @@ This section provides the following test runner examples:
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
+* [Jest]( {{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 
 #### <a name="cucumber"></a>Cucumber
@@ -306,6 +307,23 @@ junitReporter: {
 },
 // additional config...
 ```
+
+#### <a name="jest"></a>Jest
+
+Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run 
+`yarn add --dev jest-junit`.
+
+Then form your command in your config to output using the reporter.
+
+```yaml
+ - run:
+      name: Jest Suite
+      command: yarn jest tests --ci --testResultsProcessor="jest-junit"
+      environment:
+        JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+```
+
+A really good read on this can be found [here](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
 
 ## Merging test suites together
