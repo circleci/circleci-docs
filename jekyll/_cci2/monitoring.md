@@ -5,7 +5,7 @@ category: [administration]
 order: 30
 ---
 
-This document is for System Administrators who are setting enviornment variables for installed Builders, gathering metrics for monitoring their CircleCI installation, and viewing logs:
+This document is for System Administrators who are setting environment variables for installed Builders, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
 * TOC
 {:toc}
