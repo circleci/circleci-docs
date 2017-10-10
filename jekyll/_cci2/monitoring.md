@@ -5,12 +5,12 @@ category: [administration]
 order: 30
 ---
 
-This document describes setting enviornment variables for installed Builders, metrics for monitoring your CircleCI installation, and logging integration in the following sections:
+This document is for System Administrators who are setting environment variables for installed Builders, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
 * TOC
 {:toc}
 
-## Setting Environment Variables
+## Setting Environment Variables on Builders
 
 Several aspects of CircleCI Builder behavior can be customized by passing
 environment variables into the builder process. 
@@ -19,7 +19,7 @@ If you are using the [trial]({{site.baseurl}}/2.0/single-box/) installation
 option on a single VM, then you can create a file called `/etc/circle-installation-customizations`
 with entries like `export CIRCLE_OPTION_A=foo` to set environment variables.
 
-## Monitoring 
+## System Monitoring 
 
 Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Enable Cloudwatch. **Note:** CloudWatch does **not** support monitoring of macOS containers.
 
