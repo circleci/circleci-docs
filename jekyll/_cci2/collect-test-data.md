@@ -308,7 +308,7 @@ junitReporter: {
 // additional config...
 ```
 
-#### <a name="karma"></a>Jest
+#### <a name="jest"></a>Jest
 Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run 
 `yarn add --dev jest-junit`
 
@@ -320,7 +320,7 @@ Then form your command in your config to output using the reporter.
       environment:
         JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 ```
-A really good read on this is can be found [here](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
+A really good read on this can be found [here](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
 
 ## Merging test suites together
