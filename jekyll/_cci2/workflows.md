@@ -93,7 +93,7 @@ The illustrated example workflow runs a common build Job, then fans-out to run a
 
 ![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png) 
 
-The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
+The following `config.yml` snippet is an example of a workflow configured for fan-in/fan-out job execution:
 
 ``` 
 workflows:
@@ -126,7 +126,7 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
 
 ```
 workflows:
@@ -156,6 +156,30 @@ In this example, the `deploy:` job will not run until you click the `hold` job i
 Following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
 
 ![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+
+## Scheduling a Workflow
+
+Workflows may be configured to run on a set schedule by using the `triggers:` key with the `type: scheduled` key. The `triggers` key is **only** added under your `workflow` key. This feature enables you to configure a workflow with `type: scheduled` at a specific `frequency` by using `cron` syntax to represent Coordinated Universal Time (UTC/GMT). Jobs run on the specified branches within the hour defined in the `frequency` key (frequency is not guaranteed below the 30 minute increment). The following example shows a `commit` workflow that runs the `test` and `deploy` jobs for every commit to the repo followed by a `nightly` workflow triggered at 12:00am UTC every day of every month of every year that runs the `coverage` job on the master and beta branches:
+
+```
+workflows:
+  version: scheduled-workflows-mvp
+  commit:
+    jobs:
+      - test
+      - deploy
+  nightly:
+    triggers:
+      - type: scheduled
+        frequency: "0 0 * * *"
+        branches:
+          - master
+          - beta
+    jobs:
+      - coverage
+```
+
+It is possible to configure contexts and all additional options associated with workflows for a `triggers` run, except `filters`. Refer to the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. 
 
 ## Using Contexts and Filtering in Your Workflows
 
