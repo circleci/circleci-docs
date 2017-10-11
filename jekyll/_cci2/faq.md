@@ -145,9 +145,9 @@ This is next up on our roadmap to fix. Test timings are available for 2.0 but no
  
 This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
  
-### Can I use Workflows with CircleCI Enterprise?
+### Can I use Workflows with the Installable CircleCI?
 
-Yes, Workflows are available in CircleCI as part of our roll-out of or 2.0 system for enterprise clients. Contact your account manager if you'd like to get on the list for early previews.
+Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
  
 ### How many jobs can I run at one time?
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
@@ -165,26 +165,20 @@ No.
 ### Can I build fork PR’s using Workflows?
 We do not support fork PR’s yet.
 
-### Do scheduled workflows support specific times? 
-Yes, you can say run at hour 16 (for 4 o’clock). All jobs run at UTC, but are only guaranteed to run within 30 minutes of the scheduled time.
+### Can workflows be scheduled to run at a specific time of day?
+Yes. For example, you can run a workflow at 4 PM (`frequency: 0 16 * * *`). Frequencies are interpreted in the UTC time zone.
 
-### What time is the box running? 
-The time is Coordinated Universal TIME (UTC/GMT).
-
-### Why did my build schedule for midnight *not* start at midnight? 
-Jobs will run sometime during the hour of the scheduled time depending on the load of jobs scheduled for that same time.
+### What time zone is used for schedules?
+Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
 
 ### Why didn’t my scheduled build run? 
-You must specify exactly the branches on which the scheduled workflow jobs will run.
+You must specify exactly the branches on which the scheduled workflow will run.
 
-### Can I pass in special parameters or contexts for my scheduled trigger? 
-Yes, anything you can specify for a workflow may be configured for a scheduled trigger with the exception of the `filters` key.
+### Can I schedule multiple workflows?
+Yes, every workflow with a trigger of `type: scheduled` will be run on the configured schedule.
 
-### Can I have only one workflow?
-No, you can have multiple workflows of different types in your `.circleci/config.yml` file. Unscheduled workflows will run after every commit, scheduled `triggers` of `type: scheduled` will run within the hour of the time set in the `frequency` key.
-
-### Aren’t the times when scheduled build should run guaranteed? 
-No, the exact time is not guaranteed below the threshold of an hour.
+### Are scheduled workflows guaranteed to run at precisely the time scheduled?
+CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
 ## Billing
 
