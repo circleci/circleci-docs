@@ -108,11 +108,8 @@ jobs:
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
-      - run:
-          name: save SHA to a file
-          command: echo $CIRCLE_SHA1 > .circle-sha
       - save_cache:
-          key: v1-repo-{{ checksum ".circle-sha" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
 
@@ -122,15 +119,10 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
-      - run:
-          name: save SHA to a file
-          command: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
-          keys:
-            - v1-repo-{{ checksum ".circle-sha" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys:
-            - v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle install --path vendor/bundle
       - save_cache:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
@@ -143,15 +135,10 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
-      - run:
-          name: save SHA to a file
-          command: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
-          keys:
-            - v1-repo-{{ checksum ".circle-sha" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys:
-            - v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load
       - run:
@@ -164,21 +151,16 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
-      - run:
-          name: save SHA to a file
-          command: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
-          keys:
-            - v1-repo-{{ checksum ".circle-sha" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys:
-            - v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
       - save_cache:
-          key: v1-assets-{{ checksum ".circle-sha" }}
+          key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows/public/assets
 
@@ -189,18 +171,12 @@ jobs:
     environment:
       - HEROKU_APP: still-shelf-38337
     steps:
-      - run:
-          name: save SHA to a file
-          command: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
-          keys:
-            - v1-repo-{{ checksum ".circle-sha" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          keys:
-            - v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - restore_cache:
-          keys:
-            - v1-assets-{{ checksum ".circle-sha" }}
+          key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Setup Heroku
           command: bash .circleci/setup-heroku.sh
