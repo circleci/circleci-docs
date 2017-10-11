@@ -147,7 +147,7 @@ This feature only exists on CircleCI 2.0. In order to use Workflows, you must fi
  
 ### Can I use Workflows with CircleCI Enterprise?
 
-Workflows will soon be available in CircleCI as part of our roll-out of or 2.0 system for enterprise clients. Contact your account manager if you'd like to get on the list for early previews.
+Yes, Workflows are available in CircleCI as part of our roll-out of or 2.0 system for enterprise clients. Contact your account manager if you'd like to get on the list for early previews.
  
 ### How many jobs can I run at one time?
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
@@ -164,6 +164,27 @@ No.
  
 ### Can I build fork PR’s using Workflows?
 We do not support fork PR’s yet.
+
+### Do scheduled workflows support specific times? 
+Yes, you can say run at hour 16 (for 4 o’clock). All jobs run at UTC, but are only guaranteed to run within 30 minutes of the scheduled time.
+
+### What time is the box running? 
+The time is Coordinated Universal TIME (UTC/GMT).
+
+### Why did my build schedule for midnight *not* start at midnight? 
+Jobs will run sometime during the hour of the scheduled time depending on the load of jobs scheduled for that same time.
+
+### Why didn’t my scheduled build run? 
+You must specify exactly the branches on which the scheduled workflow jobs will run.
+
+### Can I pass in special parameters or contexts for my scheduled trigger? 
+Yes, anything you can specify for a workflow may be configured for a scheduled trigger with the exception of the `filters` key.
+
+### Can I have only one workflow?
+No, you can have multiple workflows of different types in your `.circleci/config.yml` file. Unscheduled workflows will run after every commit, scheduled `triggers` of `type: scheduled` will run within the hour of the time set in the `frequency` key.
+
+### Aren’t the times when scheduled build should run guaranteed? 
+No, the exact time is not guaranteed below the threshold of an hour.
 
 ## Billing
 
