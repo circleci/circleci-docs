@@ -93,7 +93,7 @@ The illustrated example workflow runs a common build Job, then fans-out to run a
 
 ![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png) 
 
-The following `config.yml` snippet is an example of a workflow configured for fan-in/fan-out job execution:
+The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
 ``` 
 workflows:
@@ -159,7 +159,11 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-Workflows may be configured to run on a set schedule by using the `triggers:` key with the `type: scheduled` key. The `triggers` key is **only** added under your `workflow` key. This feature enables you to configure a workflow with `type: scheduled` at a specific `frequency` by using `cron` syntax to represent Coordinated Universal Time (UTC/GMT). Jobs run on the specified branches within the hour defined in the `frequency` key (frequency is not guaranteed below the 30 minute increment). The following example shows a `commit` workflow that runs the `test` and `deploy` jobs for every commit to the repo followed by a `nightly` workflow triggered at 12:00am UTC every day of every month of every year that runs the `coverage` job on the master and beta branches:
+Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This is configured by adding a scheduled trigger to the configuration of the workflow. 
+
+Configure a workflow to run on a set schedule by using the `triggers:` key with the `type: scheduled` key. The `triggers` key is **only** added under your `workflow` key. This feature enables you to configure a workflow with `type: scheduled` at a specific `frequency` by using `cron` syntax to represent Coordinated Universal Time (UTC/GMT). Jobs run on the specified branches within the hour defined in the `frequency` key (frequency is not guaranteed below the 30 minute increment). 
+
+In the example below, the nightly workflow is configured with a `frequency` of every day at 12:00am UTC. The `frequency` is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
 
 ```
 workflows:
@@ -178,8 +182,6 @@ workflows:
     jobs:
       - coverage
 ```
-
-It is possible to configure contexts and all additional options associated with workflows for a `triggers` run, except `filters`. Refer to the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. 
 
 ## Using Contexts and Filtering in Your Workflows
 
