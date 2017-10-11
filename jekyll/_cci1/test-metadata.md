@@ -60,7 +60,7 @@ We'll automatically store the files in your [build artifacts]( {{ site.baseurl }
 You can tell us the type of test by putting the files in a subdirectory of `$CIRCLE_TEST_REPORTS`.
 For example, if you have RSpec tests, you would write your XML files to `$CIRCLE_TEST_REPORTS/rspec`.
 
-**Note**: It's important to write to a **subdirectory** under `$CIRCLE_TEST_REPORTS` in order for your reports to be found.
+**Note**: If you do not write your report to a **subdirectory** under `$CIRCLE_TEST_REPORTS`, you will see a report in your jobs such as `Your build ran 71 tests in unknown` instead of `Your build ran 71 tests in rspec`.
 
 ### Custom runner examples
 * [Cucumber]( {{ site.baseurl }}/1.0/test-metadata/#cucumber)
