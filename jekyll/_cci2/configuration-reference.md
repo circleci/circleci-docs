@@ -748,29 +748,29 @@ A workflow can have a `trigger` to run on a schedule.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-triggers | N | String | Should currently be `scheduled`.
+triggers | N | String | Should currently be `schedule`.
 {: class="table table-striped"}
 
 #### **`type`**
-A workflow may have a `type` of `scheduled` indicating it runs on a schedule, for example a nightly build that runs every day at 12am UTC:
+A workflow may have a `type` of `schedule` indicating it runs on a schedule, for example a nightly build that runs every day at 12am UTC:
 
 ```
 workflows:
    version: 2
    nightly:
      triggers:
-       - type: scheduled
-         frequency: "0 0 * * *"
+       - type: schedule
+         cron: "0 0 * * *"
          branches:
            - master
            - beta
 ```
-##### **`frequency`**
-Frequency is defined using POSIX `crontab` syntax.
+##### **`cron`**
+The `cron` key is defined using POSIX `crontab` syntax.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-frequency | N | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
+cron | N | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
 {: class="table table-striped"}
 
 #### **`branches`**
