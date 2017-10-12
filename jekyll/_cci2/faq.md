@@ -160,8 +160,23 @@ Yes, we are currently working on that functionality.
 Splitting `config.yml` into multiple files is not yet supported.
  
 ### Can I build only the jobs that changed?
-No.
- 
+There is no workflow configuration to support this, but you can write shell scripts to check for changes at the beginning of your job.  For instance, if you want to have a workflow with many jobs on a monorepo, different jobs might check for git changes in the current PR to see if a folder has changed with a script like:
+
+```
+      - type: shell
+        command: |
+          COMMIT_RANGE=$(echo $CIRCLE_COMPARE_URL | sed 's:^.*/compare/::g')
+          echo "Commit range: " $COMMIT_RANGE
+          git diff $COMMIT_RANGE --name-status
+          if [[ $(git diff $COMMIT_RANGE --name-status | grep "bar") != "" ]]; then
+            echo "running tests for code in bar/"
+          else
+            circleci step halt
+          fi
+```
+
+Note that the above script relies on certain tools like `sed` being available in your Docker image.  These may not be available in some images, such as those based on Alpine.
+
 ### Can I build fork PR’s using Workflows?
 We do not support fork PR’s yet.
 
