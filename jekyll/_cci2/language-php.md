@@ -9,7 +9,7 @@ order: 6
 
 ## New to CircleCI 2.0?
 
-If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/20/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
 ## Quickstart: demo PHP Laravel reference project
 
@@ -22,7 +22,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 ## Pre-built CircleCI Docker images
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from Docker Hub: <https://hub.docker.com/r/circleci/php/>. The demo project uses an official CircleCI image.
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 
