@@ -166,7 +166,7 @@ No.
 We do not support fork PR’s yet.
 
 ### Can workflows be scheduled to run at a specific time of day?
-Yes. For example, you can run a workflow at 4 PM (`frequency: 0 16 * * *`). Frequencies are interpreted in the UTC time zone.
+Yes. For example, you can run a workflow at 4 PM (`cron: 0 16 * * *`). Times are interpreted in the UTC time zone.
 
 ### What time zone is used for schedules?
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
@@ -175,7 +175,7 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 You must specify exactly the branches on which the scheduled workflow will run.
 
 ### Can I schedule multiple workflows?
-Yes, every workflow with a trigger of `type: scheduled` will be run on the configured schedule.
+Yes, every workflow with a trigger of `type: schedule` will be run on the configured schedule.
 
 ### Are scheduled workflows guaranteed to run at precisely the time scheduled?
 CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
