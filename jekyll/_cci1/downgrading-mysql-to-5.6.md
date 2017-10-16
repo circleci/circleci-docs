@@ -6,15 +6,15 @@ description: Our base image comes pre-installed with MySQL 5.7, here's how to do
 last_updated: Oct 16, 2017
 ---
 
-We've updated our Ubuntu 14.04 Trusty [build image](https://circleci.com/docs/1.0/build-image-trusty/) to include MySQL 5.7, however there are some of you who still need MySQL 5.6.
+CircleCI updated the Ubuntu 14.04 Trusty [build image](https://circleci.com/docs/1.0/build-image-trusty/) to include MySQL 5.7, however you may still need MySQL 5.6.
 
-If you're not already on [2.0](https://circleci.com/docs/2.0/), where you can choose your own version of MySQL using docker, here's how to downgrade on 1.0.
+If you're not already on [2.0](https://circleci.com/docs/2.0/), where you can choose your own version of MySQL using docker, this document describes how to downgrade on 1.0.
 
 ## Using Official MySQL Packages
 
 The first option is to use the following script which purges the existing MySQL install, then downloads and installs official packages from MySQL.
 
-Take a look at this `circle.yml` first which runs the script in a "dependencies:pre" step to ensure the database is setup and installed, as well as cached properly before continuing.
+The following `circle.yml` example runs the script in a "dependencies:pre" step to ensure the database is set up and installed, as well as cached properly before continuing.
 
 ```
 machine:
@@ -72,13 +72,13 @@ sudo dpkg -i .dependency-cache/mysql5.6/libmysqlclient18_5.6.23-1ubuntu14.04_amd
 sudo dpkg -i .dependency-cache/mysql5.6/libmysqlclient-dev_5.6.23-1ubuntu14.04_amd64.deb
 ```
 
-You can see from the [following build](https://circleci.com/gh/zzak/mysql-down/8#config/containers/0) we were able to successfully downgrade MySQL to 5.6.
+The [following build](https://circleci.com/gh/zzak/mysql-down/8#config/containers/0) demonstrates successfully downgrading MySQL to 5.6.
 
 ![](  {{ site.baseurl }}/assets/img/docs/downgrade-mysql-to-5.6.png)
 
 ## Using Docker
 
-Alternatively, if you're rather use Docker to run the MySQL server you can use the following configuration.
+Alternatively, if you would rather use Docker to run the MySQL server, use the following configuration.
 
 ```
 machine:
