@@ -762,8 +762,11 @@ workflows:
        - type: schedule
          cron: "0 0 * * *"
          branches:
-           - master
-           - beta
+           only:
+             - master
+             - beta
+     jobs:
+       - test
 ```
 ##### **`cron`**
 The `cron` key is defined using POSIX `crontab` syntax.
@@ -774,11 +777,18 @@ cron | N | String | See the [crontab man page](http://pubs.opengroup.org/onlinep
 {: class="table table-striped"}
 
 #### **`branches`**
-Branches specifies the branches on which the scheduled workflows will run.
+Branches specifies the branches on which the scheduled workflows will run. Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+
+- Any branches that match `only` will run the job.
+- Any branches that match `ignore` will not run the job.
+- If neither `only` nor `ignore` are specified then all branches will run the job.
+- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-branches | N | List | List of branches.
+branches | N | Map | A map defining rules for execution on specific branches
+only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
 ### **`jobs`**
