@@ -739,36 +739,36 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 
-#### **<`workflow_name`>**
+### **<`workflow_name`>**
 
 A unique name for your workflow.
 
-### **`triggers`**
-A workflow can have a `trigger` to run on a schedule.
+#### **`triggers`**
+Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch. 
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 triggers | N | String | Should currently be `schedule`.
 {: class="table table-striped"}
 
-#### **`type`**
-A workflow may have a `type` of `schedule` indicating it runs on a schedule, for example a nightly build that runs every day at 12am UTC:
+##### **`schedule`**
+A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
 ```
 workflows:
    version: 2
    nightly:
      triggers:
-       - type: schedule
-         cron: "0 0 * * *"
-         branches:
-           only:
-             - master
-             - beta
+       - schedule
+           cron: "0 0 * * *"
+           branches:
+             only:
+               - master
+               - beta
      jobs:
        - test
 ```
-##### **`cron`**
+###### **`cron`**
 The `cron` key is defined using POSIX `crontab` syntax.
 
 Key | Required | Type | Description
@@ -776,7 +776,7 @@ Key | Required | Type | Description
 cron | N | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
 {: class="table table-striped"}
 
-#### **`branches`**
+###### **`branches`**
 Branches specifies the branches on which the scheduled workflows will run. Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 
 - Any branches that match `only` will run the job.
