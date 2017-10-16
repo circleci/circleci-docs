@@ -182,7 +182,7 @@ Use the following procedure to install with Terraform, skip to the next section 
              {
                  "Action": [
                      "ec2:TerminateInstances",
-		     "ec2:StartInstances",
+                     "ec2:StartInstances",
                      "ec2:StopInstances"
                  ],
                  "Effect": "Allow",
