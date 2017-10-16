@@ -73,7 +73,7 @@ Contact us at [Support](mailto:enterprise-support@circleci.com) to request a tri
 
 ## Build Environments
 
-By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `/circleci/config.yml` file. 
+By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. 
 
 ## Architecture
 
