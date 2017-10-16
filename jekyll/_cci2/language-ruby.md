@@ -187,8 +187,7 @@ steps:
   # ...
 
   # Run rspec in parallel
-  - type: shell
-    command: |
+  - run: |
       bundle exec rspec --profile 10 \
                         --format RspecJunitFormatter \
                         --out test_results/rspec.xml \
