@@ -177,8 +177,9 @@ workflows:
       - type: scheduled
         frequency: "0 0 * * *"
         branches:
-          - master
-          - beta
+	  only:
+            - master
+            - beta
     jobs:
       - coverage
 ```
