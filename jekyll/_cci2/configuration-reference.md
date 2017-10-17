@@ -217,7 +217,7 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your 'config.yml' file. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -759,12 +759,13 @@ workflows:
    version: 2
    nightly:
      triggers:
-       - schedule
+       - schedule:
            cron: "0 0 * * *"
-           branches:
-             only:
-               - master
-               - beta
+           filters:
+             branches:
+               only:
+                 - master
+                 - beta
      jobs:
        - test
 ```
@@ -773,11 +774,22 @@ The `cron` key is defined using POSIX `crontab` syntax.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-cron | N | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
+cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
 {: class="table table-striped"}
 
-###### **`branches`**
-Branches specifies the branches on which the scheduled workflows will run. Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+###### **`filters`**
+Filters can have the key `branches`. 
+
+Key | Required | Type | Description
+----|-----------|------|------------
+filters | Y | Map | A map defining rules for execution on specific branches
+{: class="table table-striped"}
+
+####### **`branches`**
+
+The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a workflow for the `master` branch.
+
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -787,7 +799,7 @@ Branches specifies the branches on which the scheduled workflows will run. Branc
 Key | Required | Type | Description
 ----|-----------|------|------------
 branches | N | Map | A map defining rules for execution on specific branches
-only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
