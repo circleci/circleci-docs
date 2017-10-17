@@ -172,7 +172,7 @@ Yes. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for 
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
 
 ### Why didn’t my scheduled build run? 
-You must specify exactly the branches on which the scheduled workflow will run and push that config.yml to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch. 
+You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch. 
 
 ### Can I schedule multiple workflows?
 Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule. 
