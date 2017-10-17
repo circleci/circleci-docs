@@ -25,7 +25,26 @@ To add global environment variables that may be shared across projects, use the 
 **Warning**: Do **not** add keys or secrets to a public CircleCI project. 
 Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
 
-To define environment variables in your configuration for a single command, use the `environment` key in your `image` section to set variables for all commands run in the container, or inside a `run step` to set variables for a single command shell as shown in the following example:
+### Adding Environment Variables to a job
+
+To define environment variables for a job command, use the `environment` key under the job name in the `jobs` section.
+See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
+Ex:
+
+```
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      - FOO: "bar"
+```
+
+### Adding Environment Variables to a container
+
+Use the `environment` key in your `image` section to set variables for all commands run in the container.
 
 ```
 version: 2.0
@@ -38,19 +57,6 @@ jobs:
         environment:
           POSTGRES_USER: conductor
           POSTGRES_DB: conductor_test
-    steps:
-      - checkout
-
-      - run: lein javac
-
-      - run: lein deps
-
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          # Environment variable for a single command shell
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
@@ -68,7 +74,27 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key.
+See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
+
+### Adding Environment Variables to a step:
+
+Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
+
+```
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
 
 ## Interpolating Environment Variables to Set Other Environment Variables
 
