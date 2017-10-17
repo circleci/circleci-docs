@@ -69,23 +69,21 @@ The built-in Heroku integration through the CircleCI UI is not implemented for C
 1. Create a script to set up Heroku similar to this example `setup-heroku.sh` file in the `.circleci` folder:
      ```
      #!/bin/bash
-     git remote add heroku https://git.heroku.com/cci-demo-walkthrough.git
      wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-     sudo mkdir -p /usr/local/lib /usr/local/bin
-     sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-     sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+     mkdir -p /usr/local/lib /usr/local/bin
+     tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+     ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
      
      cat > ~/.netrc << EOF
      machine api.heroku.com
        login $HEROKU_LOGIN
        password $HEROKU_API_KEY
-     machine git.heroku.com
-       login $HEROKU_LOGIN
-       password $HEROKU_API_KEY
      EOF
 
-     # Add heroku.com to the list of known hosts
-     ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
+     cat >> ~/.ssh/config << EOF
+     VerifyHostKeyDNS yes
+     StrictHostKeyChecking no
+     EOF
      ```
 This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
 
@@ -112,17 +110,18 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
          name: Deploy Master to Heroku
          command: |
            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-             git push heroku master
+             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
              heroku run python manage.py deploy
              heroku restart
            fi
      ```
 
-Notes on the added keys:
+Notes:
 
 - The new `run:` step executes the `setup-heroku.sh` script.
-- The `add_ssh_keys:` adds an installed SSH key with a unique fingerprint.
+- The `add_ssh_keys:` adds an SSH key to this build, which it gets from your CircleCI account based on the fingerprint you provide.
 - The `deploy` section checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands with every successful build on the master branch. 
+- The `heroku run` commands should be changed to whatever steps make sense for the framework you use. For example, you may need to run `rails db:migrate`.
 
 Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for additional details.
 
