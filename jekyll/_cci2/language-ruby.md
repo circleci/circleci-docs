@@ -67,7 +67,7 @@ jobs:
       - run: bundle exec rake db:schema:load
 
       # Run rspec in parallel
-      - run:
+      - run: |
           bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
                             --out test_results/rspec.xml \
