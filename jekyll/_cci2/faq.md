@@ -145,9 +145,9 @@ This is next up on our roadmap to fix. Test timings are available for 2.0 but no
  
 This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
  
-### Can I use Workflows with CircleCI Enterprise?
+### Can I use Workflows with the Installable CircleCI?
 
-Workflows will soon be available in CircleCI as part of our roll-out of or 2.0 system for enterprise clients. Contact your account manager if you'd like to get on the list for early previews.
+Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. However, scheduled workflows are not yet availalble in an installable release. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
  
 ### How many jobs can I run at one time?
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
@@ -164,6 +164,21 @@ No.
  
 ### Can I build fork PR’s using Workflows?
 We do not support fork PR’s yet.
+
+### Can workflows be scheduled to run at a specific time of day?
+Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an  installable CircleCI release.
+
+### What time zone is used for schedules?
+Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
+
+### Why didn’t my scheduled build run? 
+You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch. 
+
+### Can I schedule multiple workflows?
+Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule. 
+
+### Are scheduled workflows guaranteed to run at precisely the time scheduled?
+CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
 ## Billing
 

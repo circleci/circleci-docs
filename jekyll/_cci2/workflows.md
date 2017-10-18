@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. This document describes the Workflows feature and provides example configurations in the following sections:
+To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. Schedule workflows at a specific time to make efficient use of your resources or to run jobs that should only run periodically. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
@@ -93,7 +93,7 @@ The illustrated example workflow runs a common build Job, then fans-out to run a
 
 ![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png) 
 
-The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
+The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
 ``` 
 workflows:
@@ -126,7 +126,7 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type:approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
 
 ```
 workflows:
@@ -156,6 +156,36 @@ In this example, the `deploy:` job will not run until you click the `hold` job i
 Following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
 
 ![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+
+## Scheduling a Workflow
+
+Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. **Note:** The `triggers` key is not yet supported in an installable CircleCI release.
+
+Configure a workflow to run on a set schedule by using the `triggers:` key with the `schedule` option. The `triggers` key is **only** added under your `workflow` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC/GMT) for specified branches. 
+
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
+
+```
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+      - deploy
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+    jobs:
+      - coverage
+```
+
+See the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) for a full example.
 
 ## Using Contexts and Filtering in Your Workflows
 
