@@ -185,6 +185,8 @@ workflows:
       - coverage
 ```
 
+See the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) for a full example.
+
 ## Using Contexts and Filtering in Your Workflows
 
 The following sections provide example for using Contexts and filters to manage job execution.
