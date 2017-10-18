@@ -798,7 +798,7 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-branches | N | Map | A map defining rules for execution on specific branches
+branches | Y | Map | A map defining rules for execution on specific branches
 only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
