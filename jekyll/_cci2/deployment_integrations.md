@@ -199,6 +199,6 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 
 
 ```
-   -run: cd functions && npm install
+   - run: cd functions && npm install
 ```
 
