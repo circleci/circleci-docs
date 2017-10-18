@@ -174,12 +174,13 @@ workflows:
       - deploy
   nightly:
     triggers:
-      - schedule
-        cron: "0 0 * * *"
-        branches:
-	  only:
-            - master
-            - beta
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+                - beta
     jobs:
       - coverage
 ```
