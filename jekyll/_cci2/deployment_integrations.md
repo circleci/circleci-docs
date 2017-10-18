@@ -43,7 +43,7 @@ The `deploy` step is for deploying artifacts. In a run with parallelism, `deploy
 2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
 The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
-3. Add a `deploy` step to your config.yml file that refers to the specific AWS service, in this example it is S3:
+3. Add a `deploy` step to your `config.yml` file that refers to the specific AWS service, in this example it is S3:
 
 ```
       - deploy:
@@ -184,7 +184,7 @@ firebase login:ci
 
 Add the generated token to the CircleCI project's environment variables as $FIREBASE_DEPLOY_TOKEN.
 
-Add the below to the project's config.yml file
+Add the below to the project's `config.yml` file
 
 ```
      - deploy:
@@ -195,7 +195,7 @@ Add the below to the project's config.yml file
           fi
 ```
 
-If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to config.yml:
+If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
 
 
 ```
