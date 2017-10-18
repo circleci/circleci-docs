@@ -34,9 +34,14 @@
 }
 
 .nav li > a > span {
-    float: right;
+    position: absolute;
+    right: 0;
     font-size: 19px;
     font-weight: bolder;
+}
+
+.nav li > a.header > span {
+    margin-top: 27px;
 }
 
 .nav li > a:hover {

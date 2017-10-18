@@ -46,20 +46,22 @@ nav.sidebar{
 	padding: 30px 20px 20px;
 	width: 25%;
 
-	a{
+	a {
 		display: block;
 		padding: 5px 10px;
 		font-size: 0.875rem;
+		position: relative;
 	}
-		&> ul > li > a{
-			padding: 14px 10px;
-			color: $heading-color;
-			font-size: 1.125rem;
-		}
 
-		li.active > a{
-			font-weight: bold;
-		}
+	&> ul > li > a{
+		padding: 14px 10px;
+		color: $heading-color;
+		font-size: 1.125rem;
+	}
+
+	li.active > a{
+		font-weight: bold;
+	}
 }
 
 
