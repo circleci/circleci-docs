@@ -785,7 +785,8 @@ Key | Required | Type | Description
 filters | Y | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
-####### **`branches`**
+###### **`branches`**
+{:.no_toc}
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a workflow for the `master` branch.
 
