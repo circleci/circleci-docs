@@ -294,3 +294,27 @@ The repository name of the project being tested, i.e. “bar” in circleci.com/
 **CIRCLE_INTERNAL_TASK_DATA**
 
 The directory where test timing data can be found.
+
+**CIRCLE_STAGE**
+
+Same as **CIRCLE_JOB** when running in a workflow
+
+**CIRCLE_WORKFLOW_CONCURRENCY_MAP**
+
+A map of upstream job ids to a list of other job ids that are able to run concurrently
+
+**CIRCLE_WORKFLOW_ID**
+
+Unique identifier for the workflow within which this job is being run
+
+**CIRCLE_WORKFLOW_JOB_ID**
+
+Unique identifer for this job 
+
+**CIRCLE_WORKFLOW_UPSTREAM_JOB_IDS**
+
+List of jobs already run as part of this workflow
+
+**CIRCLE_WORKFLOW_WORKSPACE_ID**
+
+Unique identifier for the workspace that is being passed along between jobs in this workflow
