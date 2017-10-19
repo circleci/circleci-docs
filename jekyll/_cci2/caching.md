@@ -64,7 +64,7 @@ Here's another example of a `restore_cache` step with two keys:
             # when this file is changed, this key will fail
             - v1-npm-deps-{{ checksum "package.json" }}
             # Find the most recent cache used from any branch
-            - v1-npm-deps
+            - v1-npm-deps-
 ```
 {% endraw %}
 
