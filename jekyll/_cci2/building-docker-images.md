@@ -114,7 +114,7 @@ The currently supported versions are:
 * `17.06.1-ce`
 * `17.07.0-ce`
 
-If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`.
+If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. If you are using CircleCI installed by your organization, a different image may not be specified with the version key for `setup_remote_docker` and the `Specified image is not supported` error will appear, contact your system administrator for information about the installed image version that is available. 
 
 ## Separation of Environments
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
