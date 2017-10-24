@@ -677,6 +677,26 @@ paths | Y | List | Glob identifying file(s), or a non-glob path to a directory t
       - build/*
 ```
 
+The `paths` list uses `Glob` from Go, and the pattern matches [filepath.Match](https://golang.org/pkg/path/filepath/#Match). 
+
+``` 
+pattern: 
+        { term } 
+term: 
+        '*' matches any sequence of non-Separator characters 
+        '?' matches any single non-Separator character 
+        '[' [ '^' ] { character-range } 
+        ']' character class (must be non-empty) 
+        c matches character c (c != '*', '?', '\\', '[') 
+        '\\' c matches character c 
+character-range: 
+        c matches character c (c != '\\', '-', ']') 
+        '\\' c matches character c 
+        lo '-' hi matches character c for lo <= c <= hi 
+``` 
+
+The Go documenation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
+
 ##### **`attach_workspace`**
 
 Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
