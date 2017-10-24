@@ -7,6 +7,8 @@ categories: [troubleshooting]
 order: 1
 ---
 
+`ci/circleci — Waiting for status to be reported`
+
 If you have implemented workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
