@@ -145,6 +145,7 @@ This step tells our build to checkout our project code into the working director
 
 Next we pull down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. We run `bundle install` next to pull down the project's dependencies. Normally you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `cache-save` step that will store the dependencies in order to speed things up for next time.
 
+{% raw %}
 ```YAML
 steps:
   # ...
@@ -162,6 +163,7 @@ steps:
       paths:
         - vendor/bundle
 ```
+{% endraw %}
 
 Now we can setup our test database we'll use during the build.
 
