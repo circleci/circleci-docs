@@ -15,7 +15,7 @@ This document describes using the `deploy` step with example instructions in the
 
 It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
-Add the `deploy` step to your `config.yml` to set up conditional deployment for your application. The following example uses a bash command to check that the current branch is the `master` branch before running any deploy commands. Without this check, `<your-deploy-commands>` would be executed every time this job is triggered. It is also possible to create a separate job for deploy for this purpose, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for instructions.
+Add a `deploy` job to your `config.yml` to set up conditional deployment for your application. The following example uses a workflow job filter to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered. See [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for additional workflow examples and links to demo workflow repositories.
 
 ```YAML
 version: 2
@@ -26,15 +26,34 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - run: <do-some-stuff>
+            
+  deploy:
+    docker:
+      - image: my-image
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
+          name: Install some stuff
+          command: <do-some-stuff>
+      - run:
+          name: Deploy if tests pass and branch is Master
+          command: <my-deploy-commands>
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
       - deploy:
-          name: Maybe Deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              <your-deploy-commands>
-            fi
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+            
 ```
 
-The `deploy` step is for deploying artifacts. In a run with parallelism, `deploy` is only executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step. The `deploy` step uses the same configuration map and semantics as a `run` step. Jobs may have more than one deploy step.
+The `deploy` job is for deploying artifacts. 
 
 ## AWS Deployment
 
@@ -43,28 +62,38 @@ The `deploy` step is for deploying artifacts. In a run with parallelism, `deploy
 2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
 The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
-3. Add a `deploy` step to your `config.yml` file that refers to the specific AWS service, in this example it is S3:
+3. Add a `deploy` job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build` to succeed and a `filter` on the master branch.
 
 ```
-      - deploy:
+  deploy:
+    docker:
+      - image: my-image
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
-            else
-              echo "Not master branch so not deploying"
-            fi
-```            
+          command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
 
-To learn more about the `deploy` step, please see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy).
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+```            
 
 ## Azure
 
-To deploy to Azure, use a similar command to the above example that uses the `deploy` key. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
+To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
 
 ## Heroku
 
-The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0. However, it is possible to deploy to Heroku manually by using a script to set up Heroku, adding SSH keys with the `add_ssh_keys` option and setting the $CIRCLECI_BRANCH environment variable. 
+The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0. However, it is possible to deploy to Heroku manually by using a script to set up Heroku, adding SSH keys with the `add_ssh_keys` option and configuring a workflow. 
 
 1. Create a script to set up Heroku similar to this example `setup-heroku.sh` file in the `.circleci` folder:
      ```
@@ -99,28 +128,45 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
 
 6. Add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
 
-7. Add `run` and `deploy` steps similar to the following example in your `config.yml` file: 
+7. Add a `deploy` job with `run` steps and a workflow section similar to the following example in your `config.yml` file: 
 
      ```
-     - run: bash .circleci/setup-heroku.sh
-     - add_ssh_keys:
-         fingerprints:
-           - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-     - deploy:
-         name: Deploy Master to Heroku
-         command: |
-           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-             heroku run python manage.py deploy
-             heroku restart
-           fi
+     deploy:
+       docker:
+         - image: my-image
+       working_directory: /tmp/my-project  
+       steps:
+         - run:
+             name: Run setup script
+             command: bash .circleci/setup-heroku.sh
+         - add_ssh_keys:
+             fingerprints:
+               - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+         - run:
+             name: Deploy Master to Heroku
+             command: |
+               git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
+               heroku run python manage.py deploy
+               heroku restart
+               
+    workflows:
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: master
      ```
 
 Notes:
 
 - The new `run:` step executes the `setup-heroku.sh` script.
 - The `add_ssh_keys:` adds an SSH key to this build, which it gets from your CircleCI account based on the fingerprint you provide.
-- The `deploy` section checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands with every successful build on the master branch. 
+- The `workflow` section filters on `master` and runs the Heroku deployment commands with every successful build on the master branch. 
 - The `heroku run` commands should be changed to whatever steps make sense for the framework you use. For example, you may need to run `rails db:migrate`.
 
 Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for additional details.
@@ -131,12 +177,28 @@ Ensure that the Google Cloud SDK is installed in your primary container so that 
 runs `deploy.sh` to do the actual deployment work.
 
 ```
-     - deploy:
-         name: Deploy Master to GKE
-         command: |
-           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-             ./deploy.sh
-           fi
+
+     deploy:
+       docker:
+         - image: my-image
+       working_directory: /tmp/my-project  
+       steps:
+         - run:
+             name: Deploy Master to GKE
+             command: ./deploy.sh
+               
+    workflows:
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: master
+                  
 ```
 
 The deployment script pushes the newly created
@@ -187,12 +249,28 @@ Add the generated token to the CircleCI project's environment variables as $FIRE
 Add the below to the project's `config.yml` file
 
 ```
-     - deploy:
-         name: Deploy Master to Firebase
-         command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-          fi
+
+     deploy:
+       docker:
+         - image: my-image
+       working_directory: /tmp/my-project  
+       steps:
+         - run:
+             name: Deploy Master to Firebase
+             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+               
+    workflows:
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: master
+
 ```
 
 If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
