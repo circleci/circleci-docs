@@ -533,5 +533,74 @@ Linux containers that are not available for macOS builds at the moment:
   * `machine: <language>`, where `<language>` is any language mentioned
     in the [Configuration doc]( {{ site.baseurl }}/2.0/configuration-reference/)
 
-Please see the [Sample 2.0 config.yml]( {{ site.baseurl }}/2.0/sample-config/) for additional examples.
+## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
+in the same workflow. In the following example each push of an iOS
+project will be built on macOS, and additional iOS tools
+([SwiftLint](https://github.com/realm/SwiftLint) and
+[Danger](https://github.com/danger/danger))
+will be run in Docker.
+
+{% raw %}
+```
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode:
+        version: "9.0"
+
+    steps:
+      - checkout
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run:
+          name: Install CocoaPods
+          command: pod install --verbose
+
+      - run:
+          name: Build and run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 8
+            SCAN_SCHEME: WebTests
+
+      - store_test_results:
+          path: test_output/report.xml
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: scan-test-results
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
+
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+    steps:
+      - checkout
+      - run: danger
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+      - swiftlint
+      - danger
+      - build-and-test
+```
+{% endraw %}
