@@ -127,7 +127,7 @@ workflows:
 
 To ensure a consistent build experience, it is best practice to add a
 Gemfile and set up code signing with the help of Fastlane Match
-before you push a 2.0 `.circle/config.yml` file to your CircleCI iOS
+before you push a 2.0 `.circleci/config.yml` file to your CircleCI iOS
 project.
 
 ### Gemfile
