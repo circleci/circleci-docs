@@ -353,7 +353,7 @@ jobs:
   build:
     macos:
       version: "9.0"
-    shell: /bin/bash --login --eo pipefail
+    shell: /bin/bash --login -eo pipefail
 ```
 
 If you do not want to commit a `.ruby-version` file to source control, then
