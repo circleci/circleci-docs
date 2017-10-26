@@ -166,21 +166,6 @@ startup() {
 time startup
 ```
 
-Following is the content of the `circle-installation-customizations` file:
-```
-# Note that connection strings below should be modified as necessary
-
-# Mongo DB
-MONGO_BASE_URI=mongodb://circle:<password>@<hostname>:27017
-export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?authSource=admin"
-
-# Postgres DB
-export CIRCLE_SECRETS_POSTGRES_MAIN_URI='postgres://circle:<password>@<hostname>:5432/circle'
-```
-
 Following is the content of the `replicated.conf` file:
 ```
 {
@@ -277,3 +262,33 @@ If you are running `1.48.4` or later, you must backup encryption keys. The encry
 The encryption keys are plain text files for easy backup from the `/data/circle/circleci-encryption-keys/` directory and should then be stored it in a secure place.
 
 Restore the directory to the same location **before** starting up CircleCI.
+
+## Configuring Replicated
+
+To securely pass Mongodb, Postgresql and Vault connection settings to services running in Replicated, use of `/etc/circle-installation-customizations` file is required.
+
+Following is the content of the `circle-installation-customizations` file neccesary for HA:
+```
+# Note that connection strings below should be modified as necessary
+
+# Mongo DB
+MONGO_BASE_URI=mongodb://circle:<password>@<hostname>:27017
+export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
+export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
+export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?authSource=admin"
+export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?authSource=admin"
+
+# Postgres DB
+export CIRCLE_SECRETS_POSTGRES_MAIN_URI='postgres://circle:<password>@<hostname>:5432/circle'
+
+# Vault
+export VAULT__SCHEME="<vault-scheme>"
+export VAULT__HOST="<vault-hostname>"
+export VAULT__PORT="<vault-port>"
+export VAULT__CLIENT_TOKEN="<vault-client-token>"
+export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>"
+```
+
+## Transport Layer Security (TLS)
+
+When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificate` with file extension '.crt'.
