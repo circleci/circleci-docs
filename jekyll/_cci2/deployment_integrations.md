@@ -15,19 +15,19 @@ This document describes using the `deploy` step with example instructions in the
 
 It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
-Add a `deploy` job to your `config.yml` to set up conditional deployment for your application. The following example uses a workflow job filter to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered. See [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for additional workflow examples and links to demo workflow repositories.
+Add a job to your `config.yml` to set up conditional deployment for your application. The following example uses a workflow job filter to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered. See [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for additional workflow examples and links to demo workflow repositories.
 
 ```YAML
 version: 2
 jobs:
-  build:
+  build-job:
     docker:
       - image: my-image
     working_directory: /tmp/my-project
     steps:
       - run: <do-some-stuff>
             
-  deploy:
+  deploy-job:
     docker:
       - image: my-image
     working_directory: /tmp/my-project  
@@ -43,8 +43,8 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
-      - deploy:
+      - build-job
+      - deploy-job:
           requires:
             - build
           filters:
@@ -53,8 +53,6 @@ workflows:
             
 ```
 
-The `deploy` job is for deploying artifacts. 
-
 ## AWS Deployment
 
 1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
@@ -62,7 +60,7 @@ The `deploy` job is for deploying artifacts.
 2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
 The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
-3. Add a `deploy` job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build` to succeed and a `filter` on the master branch.
+3. Add a job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build-job` to succeed and a `filter` on the master branch.
 
 ```
   deploy:
@@ -78,8 +76,8 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
-      - deploy:
+      - build-job
+      - deploy-job:
           requires:
             - build
           filters:
@@ -128,10 +126,10 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
 
 6. Add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
 
-7. Add a `deploy` job with `run` steps and a workflow section similar to the following example in your `config.yml` file: 
+7. Add a job with `run` steps and a workflow section similar to the following example in your `config.yml` file: 
 
      ```
-     deploy:
+     deploy-job:
        docker:
          - image: my-image
        working_directory: /tmp/my-project  
@@ -153,8 +151,8 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
       version: 2
       build-deploy:
         jobs:
-          - build
-          - deploy:
+          - build-job
+          - deploy-job:
               requires:
                 - build
               filters:
@@ -178,7 +176,7 @@ runs `deploy.sh` to do the actual deployment work.
 
 ```
 
-     deploy:
+     deploy-job:
        docker:
          - image: my-image
        working_directory: /tmp/my-project  
@@ -191,8 +189,8 @@ runs `deploy.sh` to do the actual deployment work.
       version: 2
       build-deploy:
         jobs:
-          - build
-          - deploy:
+          - build-job
+          - deploy-job:
               requires:
                 - build
               filters:
@@ -250,7 +248,7 @@ Add the below to the project's `config.yml` file
 
 ```
 
-     deploy:
+     deploy-job:
        docker:
          - image: my-image
        working_directory: /tmp/my-project  
@@ -263,8 +261,8 @@ Add the below to the project's `config.yml` file
       version: 2
       build-deploy:
         jobs:
-          - build
-          - deploy:
+          - build-job
+          - deploy-job:
               requires:
                 - build
               filters:
