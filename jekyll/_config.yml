@@ -19,6 +19,9 @@ markdown: kramdown
 kramdown:
   input: GFM
 
+liquid:
+  error_mode: strict
+
 collections:
   # this is named with an underscore because it needs to be processed
   # before the collections that render the actual pages.
