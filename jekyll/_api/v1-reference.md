@@ -116,18 +116,11 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 <dd>
   Delete a checkout key.
 </dd>
-
 <dt>
   DELETE: /project/:vcs-type/:username/:project/build-cache
 </dt>
 <dd>
   Clears the cache for a project.
-</dd>
-<dt>
-  POST: /user/ssh-key
-</dt>
-<dd>
-  Adds a CircleCI key to your GitHub User account.
 </dd>
 <dt>
   POST: /user/heroku-key
