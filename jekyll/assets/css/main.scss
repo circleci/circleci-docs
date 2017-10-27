@@ -6,14 +6,29 @@ $body-text-color: #555;
 $heading-color: #333;
 $nav-bg-color: #FBFBFB;
 $nav-border-color: #CCC;
+$link-text-color: #27A0B6;
+$link-hover-color: #36D4ED;
 
 // General
 body{
 	color: $body-text-color;
 }
-	div.main-body{
-		overflow: auto;
+p {
+	font-family: 'Roboto';
+	color: $body-text-color;
+
+	a {
+		color: $link-text-color;
+
+		&:hover {
+			color: $link-hover-color;
+			text-decoration: none;
+		}
 	}
+}
+div.main-body{
+	overflow: auto;
+}
 
 div.main-body {
 	display: flex;
@@ -99,6 +114,7 @@ div.article-container{
 		h6{
 			a{
 				padding-left: 5px;
+				color: #27A0B6;
 
 				&:hover{
 					text-decoration: none;
@@ -170,10 +186,6 @@ div.align-center{
 		max-width: 90%;
 		text-align: center;
 	}
-
-p {
-	color: #333;
-}
 
 // Homepage
 body.homepage{
