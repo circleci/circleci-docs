@@ -44,14 +44,17 @@ jobs:
         - POSTGRES_DB=db_name
     steps:
       - checkout
-      - name: Install System Dependencies
-        command: apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev nodejs rake
-      - name: Install Ruby Dependencies
-        command: bundle install
-      - name: Set up DB
-        command: |
-          bundle exec rake db:create db:schema:load --trace
-          bundle exec rake db:migrate
+      - run:
+          name: Install System Dependencies
+          command: apt-get update -qq && apt-get install -y build-essential postgresql libpq-dev nodejs rake
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle install
+      - run: 
+          name: Set up DB
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+            bundle exec rake db:migrate
         environment:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
