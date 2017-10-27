@@ -58,10 +58,15 @@ working_directory | N | String | In which directory to run the steps. (default: 
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and variables (NOTE: these will override any environment variables you set in the CircleCI web interface).
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (NOTE: Only works with the `docker` key for paid accounts and is subject to change in a future pricing update.)
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only works with the `docker` key for paid accounts and is subject to change in a future pricing update. **Note:** Paid accounts must request to use this feature by opening a support ticket (or by contacting their Customer Success Manager when applicable) and non-paid users must request to use this feature by sending an email to <support@circleci.com>.)
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
+
+#### `environment`
+A map of environment variable names and variables (**Note**: These will override any environment variables you set in the CircleCI web interface).
+
+#### `parallelism`
 
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
@@ -251,7 +256,7 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. Paid accounts may request this feature from their Customer Success Manager, non-paid users may request to get started by sending email to support@circleci.com.
+It is possible to configure CPU and RAM resources for each job as described in the following table. **Note:** Paid accounts must request to use this feature by opening a support ticket (or by contacting their Customer Success Manager when applicable) and non-paid users must request to use this feature by sending an email to <support@circleci.com>. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
 
 Class       | CPU       | RAM
 ------------|-----------|------
@@ -262,7 +267,7 @@ large       | 4.0 | 8GB
 xlarge      | 8.0 | 16GB
 {: class="table table-striped"}
 
-**Note:** Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. 
+Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. 
 
 #### **`steps`**
 
