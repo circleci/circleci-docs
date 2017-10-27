@@ -13,19 +13,23 @@ $link-hover-color: #36D4ED;
 body{
 	color: $body-text-color;
 }
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto';
+}
 p {
 	font-family: 'Roboto';
 	color: $body-text-color;
+}
 
-	a {
-		color: $link-text-color;
+a {
+	color: $link-text-color;
 
-		&:hover {
-			color: $link-hover-color;
-			text-decoration: none;
-		}
+	&:hover {
+		color: $link-hover-color;
+		text-decoration: none;
 	}
 }
+
 div.main-body{
 	overflow: auto;
 }
@@ -64,7 +68,7 @@ nav.sidebar{
 	a {
 		display: block;
 		padding: 5px 10px;
-		font-size: 0.875rem;
+		font-size: 15px;
 		position: relative;
 	}
 
