@@ -695,3 +695,10 @@ project_post:
       "vcs_url": "https://github.com/circleci/mongofinil",
       "timedout": false
     }
+
+heroku_key:
+  url: "/user/heroku-key"
+  description: "Adds your Heroku API key to CircleCI"
+  method: "POST"
+  body: '{"apikey":"Herou key"}'
+  response: " "
