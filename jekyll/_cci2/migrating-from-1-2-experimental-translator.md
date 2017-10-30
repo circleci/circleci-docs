@@ -56,5 +56,5 @@ For instance, to use the Translator from your browser (assuming you are authenti
 You can also optionally pass your `circle-token` directly and/or the `branch` you want to translate. For instance, if you were to call this with `curl` for the above theoerical project (assuming you had your CircleCI API token in an environment variable called `CIRCLE_TOKEN` it might look like:
 
 ``` Shell
-curl https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop`
+curl https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop
 ```
