@@ -39,7 +39,7 @@ sudo apt-get --yes --force-yes install cuda
 
 ### Docker
 
-Complete the following steps for Doccker-based builders, for LXC-based builders, skip to the next section.
+Complete the following steps for Docker-based builders, for LXC-based builders, skip to the next section.
 
 1.) Using our image builder, add this to the dockerfile of the image you wish to build
 
