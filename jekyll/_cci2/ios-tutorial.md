@@ -85,13 +85,13 @@ version: 2
 jobs:
   test:
     macos:
-      xcode: 9.0
+      xcode: "9.0"
     steps:
       - checkout
       - run: swift test
   deploy:
     macos:
-      xcode: 9.0
+      xcode: "9.0"
     steps:
       - checkout
       - deploy:
