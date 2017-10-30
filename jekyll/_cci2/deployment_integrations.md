@@ -46,7 +46,7 @@ workflows:
       - build-job
       - deploy-job:
           requires:
-            - build
+            - build-job
           filters:
             branches:
               only: master
@@ -79,7 +79,7 @@ workflows:
       - build-job
       - deploy-job:
           requires:
-            - build
+            - build-job
           filters:
             branches:
               only: master
@@ -154,7 +154,7 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
           - build-job
           - deploy-job:
               requires:
-                - build
+                - build-job
               filters:
                 branches:
                   only: master
@@ -192,7 +192,7 @@ runs `deploy.sh` to do the actual deployment work.
           - build-job
           - deploy-job:
               requires:
-                - build
+                - build-job
               filters:
                 branches:
                   only: master
@@ -259,12 +259,13 @@ Add the below to the project's `config.yml` file
                
     workflows:
       version: 2
-      build-deploy:
+      
+      -deploy:
         jobs:
           - build-job
           - deploy-job:
               requires:
-                - build
+                - build-job
               filters:
                 branches:
                   only: master
