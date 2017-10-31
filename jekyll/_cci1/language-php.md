@@ -24,7 +24,7 @@ If you don't want to use the default, you can specify your version in `circle.ym
 ```
 machine:
   php:
-    version: 7.0.4
+    version: 7.0.24
 ```
 
 ## Dependencies
