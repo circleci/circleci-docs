@@ -20,7 +20,7 @@ This Translator is designed to produce working configuration, but not necessaril
 The configuration Translator is an experimental project to help with migrating from CircleCI 1.0 to 2.0. 
 
 The approach in CircleCI 2.0 differs in a few significant ways that make an automated migration complicated:
-1. **CircleCI 1.0 has "magic" inferred commands, whereas 2.0 is wholly deterministic.** In CircleCI 1.0 our Inference Engine runs implicit commands based on the contents of your repository in many cases. For instance, unless overridden, CircleCI 1.0 would detect the presence of rspec tests and run them automatically with no intervention. In 2.0 our philosophy is to run no "magic" commands, preferring instead to have all configuration be transparent and deterministic for developers. 
+1. **CircleCI 1.0 has "magic" inferred commands, whereas 2.0 is wholly deterministic.** In CircleCI 1.0 our Inference Engine runs implicit commands based on the contents of your repository in many cases. For instance, unless overridden, CircleCI 1.0 would detect the presence of rspec tests and run them automatically with no intervention. In 2.0 our philosophy is to run no "magic" commands, preferring instead to have all configuration be explicit and deterministic for developers. 
 2. **CircleCI 1.0 has an opinionated lifecycle, whereas 2.0 is built around arbitrary jobs orchestrated with workflows.** In CircleCI 1.0 your build consists of specific stages that are baked into the system, and the configuration semantics are structured around those stages. In CircleCI 2.0 we allow for arbitrary jobs that are orchestrated with Workflows, so the idiom for how to structure the various tasks of your build is quite different and more powerful in 2.0.
 
 ## Translator Limitations
@@ -29,7 +29,7 @@ The Translator currently attempts to support transfer of inferred commands for t
 * Ruby
 * PHP
 * Node.js
-* iOS (partial)
+* iOS (partial: 1.0 code signing is not supported - use Fastlane instead)
 
 Inferred commands from the following languages are NOT currently supported:
 * Python
@@ -53,7 +53,7 @@ For instance, to use the Translator from your browser (assuming you are authenti
 
 `https://circleci.com/api/v1.1/project/github/bar/foo/config-translation`
 
-You can also optionally pass your `circle-token` directly and/or the `branch` you want to translate. For instance, if you were to call this with `curl` for the above theoerical project (assuming you had your CircleCI API token in an environment variable called `CIRCLE_TOKEN` it might look like:
+If you are not logged in and hitting the endpoint in your browser you can pass your `circle-token` directly in the query string. You can also optionally pass the `branch` you want to translate (default is to use whatever your default branch is in your VCS, typically `master`). For instance, if you were to call this with `curl` for the above theoerical project (assuming you had your CircleCI API token in an environment variable called `CIRCLE_TOKEN` it might look like:
 
 ``` Shell
 curl https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop
