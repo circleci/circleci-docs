@@ -11,7 +11,7 @@ CircleCI is a modern continuous integration and continuous delivery (CI/CD) plat
 
 ## How to Ship Code Faster Using Continuous Integration and Delivery
 
-The following video describes continuous integration, provides a demo of the application, and includes a summary of continous deployment.
+The following video describes continuous integration, provides a demo of the application, and includes a summary of continuous deployment.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YGYoYSR-d98" frameborder="0" allowfullscreen></iframe>
 
