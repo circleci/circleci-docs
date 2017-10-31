@@ -113,6 +113,8 @@ The currently supported versions are:
 * `17.06.0-ce`
 * `17.06.1-ce`
 * `17.07.0-ce`
+* `17.09.0-ce`
+* `17.10.0-ce`
 
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 

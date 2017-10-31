@@ -203,6 +203,8 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 * `circleci/classic:201707-01` – docker 17.06.0-ce, docker-comopse 1.14.0
 * `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
 * `circleci/classic:201709-01` – docker 17.07.0-ce, docker-compose 1.14.0
+* `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
+* `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
 
 You can use one of the `year-month` versioned images to pin the version used by your jobs. Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
 
