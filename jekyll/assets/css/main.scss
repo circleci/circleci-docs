@@ -6,14 +6,33 @@ $body-text-color: #555;
 $heading-color: #333;
 $nav-bg-color: #FBFBFB;
 $nav-border-color: #CCC;
+$link-text-color: #27A0B6;
+$link-hover-color: #36D4ED;
 
 // General
 body{
 	color: $body-text-color;
 }
-	div.main-body{
-		overflow: auto;
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto';
+}
+p {
+	font-family: 'Roboto';
+	color: $body-text-color;
+}
+
+a {
+	color: $link-text-color;
+
+	&:hover {
+		color: $link-hover-color;
+		text-decoration: none;
 	}
+}
+
+div.main-body{
+	overflow: auto;
+}
 
 div.main-body {
 	display: flex;
@@ -49,7 +68,7 @@ nav.sidebar{
 	a {
 		display: block;
 		padding: 5px 10px;
-		font-size: 0.875rem;
+		font-size: 15px;
 		position: relative;
 	}
 
@@ -99,6 +118,7 @@ div.article-container{
 		h6{
 			a{
 				padding-left: 5px;
+				color: #27A0B6;
 
 				&:hover{
 					text-decoration: none;
@@ -170,10 +190,6 @@ div.align-center{
 		max-width: 90%;
 		text-align: center;
 	}
-
-p {
-	color: #333;
-}
 
 // Homepage
 body.homepage{
