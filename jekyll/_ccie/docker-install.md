@@ -4,6 +4,7 @@ section: enterprise
 title: "Installing CircleCI on Non-AWS Machines"
 category: [installation]
 order: 4
+hide: true
 description: "How to install CircleCI Enterprise on any generic machine"
 ---
 
