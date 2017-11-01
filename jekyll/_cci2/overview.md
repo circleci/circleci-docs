@@ -19,31 +19,14 @@ CircleCI 2.0 provides new infrastructure that includes the following improvement
 
 If you are a user or developer, refer to [Sign Up and Try CircleCI]({{ site.baseurl }}/2.0/first-steps/) to get started with the hosted application.
 
-## Trial Installation Requirements
+## Installation Options
 
-- A VM with at least 32GB RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. Must have network connectivity to the GitHub or GitHub Enterprise instance and outbound internet access (proxy server is supported by request to CircleCI customer service).  
+There are three basic ways to install CircleCI in your invironment:
 
-OR
+1. A [single-box installation]({{ site.baseurl }}/2.0/single-box/), suitable for trials and small teams
+2. A [clustered installation on AWS]({{ site.baseurl }}/2.0/aws/), suitable for production use for most teams
+3. A [highly-available configuration]({{ site.baseurl }}/2.0/high-availability/) (if supported by your license) to meet higher uptime requirements
 
-- An Amazon EC2 VM instance with at least 32G RAM, outbound internet access, and network connectivity to the GitHub or GitHub Enterprise instance.
-
-See the [CircleCI Trial Installation]({{ site.baseurl }}/2.0/single-box/) document for trial installation instructions and links to the machine images.
-
-## Production Installation Requirements
-
-- Minimum of two instances, one for the Services component and one for the Builders. Both instances require running a Linux distribution with Docker support, such as Ubuntu Trusty, or the CircleCI Amazon Machine Image (AMI). 
-- The Services instance must have at least eight CPUs and 32GB RAM. 
-- The Builders instance must have six CPUs or GPUs and 10GB RAM and a root volume of at least 50GB.
-- Both instances must have network access to a GitHub or Github Enterprise instance. 
-
-To determine the size required for your workload using the default `medium` resource class, provision two CPUs for processing plus two CPUs and 4GB of memory for each container. For example, six CPUs and 10GB of RAM supports two containers concurrently because the default container size is two CPUs with 4GB. Refer to the Resource Class section of the Writing Jobs with Steps document for information about the available CPU and RAM per class and to plan instance sizes for `large` and `xlarge` workloads. 
-
-### Production Installation Options
-
-It is possible to install CircleCI 2.0 in either of the following configurations:
-
-- A single Services machine with one or more Builder machines. See [Installing CircleCI on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) for instructions.
-- A single Services machine with multiple database hosts for HA and one or more Builder machines, see [Installing CircleCI in a High Availability Configuration]({{ site.baseurl }}/2.0/high-availability/) for instructions.
 
 ## Customer Use Cases 
 
