@@ -184,6 +184,10 @@ New with v1.1 of the api, for endpoints under /project you will now need to tell
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 ```
 
+### Project Username (:username)
+
+This is the GitHub or Bitbucket project account username for the target project (not your personal GitHub or Bitbucket username).
+
 ## F/OSS
 
 If you have a Free / Open Source Software ([F/OSS](https://www.gnu.org/philosophy/free-sw.html)) project, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
