@@ -17,8 +17,7 @@ If you are using the [single-box]({{site.baseurl}}/enterprise/single-box/) insta
 option, then you can create a file called `/etc/circle-installation-customizations`
 with entries like `export CIRCLE_OPTION_A=foo`.
 
-If you are using a clustered install with Docker-based builder machines as documented
-[here]({{site.baseurl}}/enterprise/docker-install/), then you can set environment
+If you are using a clustered install with Docker-based builder machines, then you can set environment
 variables like this:
 
 ```

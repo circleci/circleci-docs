@@ -5,13 +5,13 @@ title: "LXC-based Installation"
 category: [advanced-config]
 order: 5
 hide: true
+published: false
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 ---
 
 The following step-by-step instructions will guide you through the process of
 installing CircleCI Enterprise LXC-based installation.  Note that this is now
-considered an advanced install option. New clustered installations should
-generally use the [Docker-based install option]({{site.baseurl}}/enterprise/docker-install/). If you have any
+considered an advanced install option. If you have any
 questions, please contact <enterprise-support@circleci.com>.
 
 
