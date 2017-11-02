@@ -45,7 +45,7 @@ If the job requires services such as databases they can be run as additional con
 Docker images are typically configured using environment variables, if these are necessary a set of environment variables to be passed to the container can be supplied:
 
 ```
-version 2
+version: 2
 jobs:
   build:
     docker:
