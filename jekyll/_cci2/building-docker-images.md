@@ -46,10 +46,10 @@ jobs:
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # build the application container
+     # build the application image
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # deploy the container
+     # deploy the image
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
