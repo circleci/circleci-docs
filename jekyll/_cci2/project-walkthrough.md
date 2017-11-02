@@ -45,7 +45,7 @@ If the job requires services such as databases they can be run as additional con
 Docker images are typically configured using environment variables, if these are necessary a set of environment variables to be passed to the container can be supplied:
 
 ```
-version 2
+version: 2
 jobs:
   build:
     docker:
@@ -137,11 +137,11 @@ jobs:
 
 The following describes the detail of the added key values:
 
-- The `restore_cache:` step searches for a cache with a key that matches the key template. The template begins with `deps1-` and embeds the current branch name using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. The checksum for the `requirements.txt` file is also embedded into the key template using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. CircleCI restores the most recent cache that matches the template, in this case the branch the cache was saved on and the checksum of the `requirements.txt` file used to create the cached virtualenv must match.
+- The `restore_cache:` step searches for a cache with a key that matches the key template. The template begins with `deps1-` and embeds the current branch name using `{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}`. The checksum for the `requirements.txt` file is also embedded into the key template using `{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}`. CircleCI restores the most recent cache that matches the template, in this case the branch the cache was saved on and the checksum of the `requirements/dev.txt` file used to create the cached virtualenv must match.
 
 - The `run:` step named `Install Python deps in a venv` creates and activates a virtual environment in which to install the Python dependencies, as before.
 
-- The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements.txt` changes.
+- The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements/dev.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements/dev.txt` changes.
 
 ## Install and run Selenium to automate browser testing
 
