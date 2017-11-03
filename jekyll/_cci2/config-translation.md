@@ -42,6 +42,6 @@ The `config-translator` endpoint does **not** currently support translation of t
 3. To use the `config-translator` from your browser when you are **not** authenticated in circleci.com for a repository called `foo` in a GitHub org named `bar`, request the following URL and pass your `circle-token` directly in the query string. The following example calls this with `curl`, passes the `branch` to translate, and assumes your CircleCI API token is in an environment variable called `CIRCLE_TOKEN`. 
 
      ``` Shell
-     curl https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop
+     curl "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop"
      ```
       The default is to use the default branch that is set in your VCS, typically `master`.
