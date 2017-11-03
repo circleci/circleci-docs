@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform that automates build, test, and deployment of software and is free to try using the [Sign Up](https://circleci.com/signup/) button. CircleCI 2.0 is also installable inside your private cloud or data center, see the [Administrator's Overview](https://circleci.com/docs/2.0/overview/) document for details.
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform that automates build, test, and deployment of software and is free to try using the [Sign Up](https://circleci.com/signup/) button. CircleCI 2.0 is also installable inside your private cloud or data center, see the [Administrator's Overview]({{site.baseurl}}/2.0/overview/) document for details.
 
 ## How to Ship Code Faster Using Continuous Integration and Delivery
 
@@ -50,8 +50,8 @@ See the [CircleCI Customers page](https://circleci.com/customers/) for the compl
 
 CircleCI provides a free trial with the following options:
 
-- **Cloud**: See [Signup and Try CircleCI](https://circleci.com/docs/2.0/first-steps/) to get started with the hosted application.
-- **Server**: Refer to [CircleCI Trial Installation](https://circleci.com/docs/2.0/single-box/) for the Enterprise Trial instructions.
+- **Cloud**: See [Signup and Try CircleCI]({{site.baseurl}}/2.0/first-steps/) to get started with the hosted application.
+- **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
 
 
 
