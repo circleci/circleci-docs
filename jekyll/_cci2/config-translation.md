@@ -29,17 +29,17 @@ The `config-translator` endpoint does **not** currently support translation of t
 
 ## Using `config-translation`
 
-1. To use the `config-translator`, use the following API endpoint passing the name of your CircleCI project building on 1.0. 
+1. To use the `config-translation`, use the following API endpoint passing the name of your CircleCI project building on 1.0. 
 
      `GET: /project/:vcs-type/:username/:project/config-translation`
 
      The above endpoint uses the build history of your 1.0 project to generate a `config-translation` file.
 
-2. To use the `config-translator` from your browser when you are authenticated in `circleci.com` for a repository called `foo` in a GitHub org named `bar`, request this URL in your browser:
+2. To use the `config-translation` from your browser when you are authenticated in `circleci.com` for a repository called `foo` in a GitHub org named `bar`, request this URL in your browser:
 
      `https://circleci.com/api/v1.1/project/github/bar/foo/config-translation`
 
-3. To use the `config-translator` from your browser when you are **not** authenticated in circleci.com for a repository called `foo` in a GitHub org named `bar`, request the following URL and pass your `circle-token` directly in the query string. The following example calls this with `curl`, passes the `branch` to translate, and assumes your CircleCI API token is in an environment variable called `CIRCLE_TOKEN`. 
+3. To use the `config-translation` from your browser when you are **not** authenticated in circleci.com for a repository called `foo` in a GitHub org named `bar`, request the following URL and pass your `circle-token` directly in the query string. The following example calls this with `curl`, passes the `branch` to translate, and assumes your CircleCI API token is in an environment variable called `CIRCLE_TOKEN`. 
 
      ``` Shell
      curl "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop"
