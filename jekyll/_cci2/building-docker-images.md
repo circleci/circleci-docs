@@ -67,7 +67,7 @@ jobs:
       - checkout
       # ... steps for building/testing app ...
 
-      - setup_remote_docker   # (2)
+      - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
       # use a primary image that already has Docker (recommended)
