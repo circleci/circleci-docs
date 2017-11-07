@@ -28,7 +28,7 @@ Virtual Environment | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | No | Yes
  Run multiple versions of the same software | No | Yes
- Layer caching | Yes | No
+ Layer caching | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
 {: class="table table-striped"}
