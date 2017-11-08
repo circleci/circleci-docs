@@ -55,8 +55,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode:
-        version: "9.0"
+      xcode: "9.0"
 
     steps:
       - checkout
@@ -352,7 +351,7 @@ version: 2
 jobs:
   build:
     macos:
-      version: "9.0"
+      xcode: "9.0"
     shell: /bin/bash --login -eo pipefail
 ```
 
@@ -548,8 +547,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode:
-        version: "9.0"
+      xcode: "9.0"
 
     steps:
       - checkout
