@@ -72,13 +72,13 @@
 
 
 # CircleCI Enterprise  Docs
-- section: ccie
-  slug: documentation
-  name: "Getting Started"
+#- section: ccie
+#  slug: documentation
+#  name: "Getting Started"
 
-- section: ccie
-  slug: installation
-  name: "Installation"
+#- section: ccie
+#  slug: installation
+#  name: "Installation"
 
 - section: ccie
   slug: advanced-config
