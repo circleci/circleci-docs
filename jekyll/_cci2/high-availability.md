@@ -112,8 +112,8 @@ It is best practice to set up PostgreSQL 9.5 or later using Amazon Relational Da
 4. Download and run the export script using the commands below. The duration of the export operation depends on the amount of stored data.
      ```shell
      wget https://s3.amazonaws.com/release-team/scripts/circle-database-export-2.0
-     chmod +x circleci-database-export-2.0
-     ./circleci-database-export-2.0
+     chmod +x circle-database-export-2.0
+     ./circle-database-export-2.0
      ```
      Both the MongoDB and PostgreSQL databases are exported.
 
