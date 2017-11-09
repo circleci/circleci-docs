@@ -22,7 +22,7 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
 
 ### Limitations
 
-It is not possible to trigger a workflow with the API, projects that run by using the CircleCI API will ingore workflows and will require a job named `build`. That is, if you build a project with workflows using the API, the workflows are ignored, and CircleCI will build the project as if it's a normal build, which must have a `build` job. Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional limitations and information about features of 2.0 which are not yet supported with Workflows.
+It is not possible to trigger a workflow with the API, projects that run by using the CircleCI API will ignore workflows and will require a job named `build`. That is, if you build a project with workflows using the API, the workflows are ignored, and CircleCI will build the project as if it's a normal build, which must have a `build` job. Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional limitations and information about features of 2.0 which are not yet supported with Workflows.
 
 ## Rerunning a Workflow from a Failed Job
 
