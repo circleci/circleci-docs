@@ -42,7 +42,7 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 - **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/1.0/ios-tutorial) to get started.
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
 - **Windows:** We do not yet support building and testing Windows applications.
 
