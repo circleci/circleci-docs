@@ -19,7 +19,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 
 ## Prerequisites
 
-- Add your project to CircleCI, see [Hello World]( {{ site.baseurl }}/2.0/hello-world/)
+- Add your project to CircleCI, see [Hello World]( {{ site.baseurl }}/2.0/hello-world/).
 - This tutorial assumes you have an Xcode workspace for your project with at least one shared scheme and that the selected scheme has a test action. If you do not already have a shared scheme, you can add this in Xcode by completing the following steps:
 
 1. Open your Xcode workspace or project.
@@ -36,11 +36,13 @@ For iOS projects, it is possible to run your tests with Fastlane Scan as follows
 ```
 jobs:
   build-and-test:
+    macos:
+      xcode: "9.0"
     steps:
       ...
       - run:
           name: Run tests
-          command: bundle exec fastlane scan
+          command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
@@ -49,7 +51,7 @@ jobs:
 
 ## Code Signing and Certificates
 
-Refer to <https://codesigning.guide/> for details.
+Refer to [the code signing doc]({{ site.baseurl }}/2.0/ios-codesigning/) for details.
 
 To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]( {{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
@@ -73,7 +75,7 @@ The `run` step is also used to run your tests as in the following example of the
 
 ```
     steps:
-      - run: swift test
+      - run: fastlane scan
 ```
 
 ### Deployment
@@ -88,7 +90,7 @@ jobs:
       xcode: "9.0"
     steps:
       - checkout
-      - run: swift test
+      - run: fastlane scan
   deploy:
     macos:
       xcode: "9.0"
