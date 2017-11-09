@@ -482,25 +482,6 @@ projects. Here are the most frequent of those:
   we default to an older Xcode which might not support the necessary
   features.
 
-* **Timeout waiting for simulator.** If you see your test command
-  failing with errors similar to this:
-
-```
-iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1
-```
-
-  Then the version of the simulator you are trying to use on CircleCI
-  might not be present in the build machines.
-  In addition to the default version of simulator for every Xcode
-  installation, we also make simulators of the following iOS versions
-  available for all Xcode versions:
-
-  * 7.1
-  * 8.4
-
-  Please try using any of the versions of simulator that are present on
-  the machines — the error might disappear.
-
 * **Ruby segfaults.** We have seen cases where some of the Ruby gems
   used during the build would produce a segmentation fault in Ruby. This
   might happen because of the mismatch of Ruby version used to build the
