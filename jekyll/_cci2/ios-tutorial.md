@@ -29,7 +29,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 ![Manage Schemes Dialogue](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. Commit and push the schemes.
 
-## Running tests
+## Running Tests
 
 For iOS projects, it is possible to run your tests with Fastlane Scan as follows:
 
@@ -113,13 +113,13 @@ workflows:
               only: release
 ```
 
-## Advanced configuration
+## Advanced Configuration
 
-See [this doc](https://circleci.com/docs/2.0/testing-ios/) for more
+See the [Testing iOS Applications on macOS](https://circleci.com/docs/2.0/testing-ios/) document for more
 advanced details on configuring iOS projects.
 
-## Example application on GitHub
+## Example Application on GitHub
 
-See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to build, test and sign an iOS project using
 Fastlane on CircleCI 2.0.
