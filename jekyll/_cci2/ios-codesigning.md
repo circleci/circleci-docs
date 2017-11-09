@@ -3,8 +3,8 @@ layout: classic-docs
 title: "Setting Up Code Signing for iOS Projects"
 short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS or Mac app"
-categories: [configuring-jobs]
-order: 72
+categories: [platforms]
+order: 40
 hide: true
 ---
 
