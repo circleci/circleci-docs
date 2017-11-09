@@ -501,17 +501,12 @@ projects. Here are the most frequent of those:
 cases CircleCI may not correctly detect the Xcode workspace, project, or
 scheme. Instead, you can specify these through environment variables.
 
-### Constraints on macOS-Based Builds
-There are a few features normally available on CircleCI's standard
-Linux containers that are not available for macOS builds at the moment:
+### Constraints on macOS-based Builds
 
-* Parallelism is not supported
-* While the general `config.yml` file structure will be honored in macOS-based builds
-[configuration options]( {{ site.baseurl }}/2.0/configuration-reference/), the following sections of
-`circle.yml` will not work correctly:
-  * `machine: services`
-  * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc]( {{ site.baseurl }}/2.0/configuration-reference/)
+These are the features normally available on CircleCI 2.0
+Linux environment that are not available for macOS builds at the moment:
+
+* Parallelism is not supported.
 
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
