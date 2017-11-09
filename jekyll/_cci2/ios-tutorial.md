@@ -113,6 +113,11 @@ workflows:
               only: release
 ```
 
+## Advanced configuration
+
+See [this doc](https://circleci.com/docs/2.0/testing-ios/) for more
+advanced details on configuring iOS projects.
+
 ## Example application on GitHub
 
 See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
