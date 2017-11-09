@@ -71,7 +71,7 @@
 #  icon: "privacy-security.svg"
 
 
-# CircleCI Enterprise  Docs
+# Legacy 1.0 Enterprise Docs
 #- section: ccie
 #  slug: documentation
 #  name: "Getting Started"
@@ -82,15 +82,15 @@
 
 - section: ccie
   slug: advanced-config
-  name: "Configuration"
+  name: "Legacy 1.0 Configuration"
 
 - section: ccie
   slug: troubleshooting
-  name: "Troubleshooting"
+  name: "Legacy 1.0 Troubleshooting"
 
 - section: ccie
   slug: resources
-  name: "Reference"
+  name: "Legacy 1.0 Reference"
 
 # CircleCI 2.0 Docs
 - section: cci2
