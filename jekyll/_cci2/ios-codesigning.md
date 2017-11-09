@@ -243,8 +243,8 @@ workflows:
             - build-and-test
 ```
 
-## Example application on GitHub
+## Example Application on GitHub
 
-See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to configure code signing for iOS apps using
 Fastlane Match.
