@@ -580,8 +580,8 @@ workflows:
 ```
 {% endraw %}
 
-## Example application on GitHub
+## Example Application on GitHub
 
-See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for a full example of how to build, test, sign and deploy an iOS project
 using Fastlane on CircleCI 2.0.
