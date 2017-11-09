@@ -242,3 +242,9 @@ workflows:
           requires:
             - build-and-test
 ```
+
+## Example application on GitHub
+
+See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+for an example of how to configure code signing for iOS apps using
+Fastlane Match.

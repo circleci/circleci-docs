@@ -112,3 +112,9 @@ workflows:
             branches:
               only: release
 ```
+
+## Example application on GitHub
+
+See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+for an example of how to build, test and sign an iOS project using
+Fastlane on CircleCI 2.0.

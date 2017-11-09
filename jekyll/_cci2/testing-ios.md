@@ -578,3 +578,9 @@ workflows:
       - build-and-test
 ```
 {% endraw %}
+
+## Example application on GitHub
+
+See [this GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+for a full example of how to build, test, sign and deploy an iOS project
+using Fastlane on CircleCI 2.0.
