@@ -503,10 +503,11 @@ scheme. Instead, you can specify these through environment variables.
 
 ### Constraints on macOS-based Builds
 
-These are the features normally available on CircleCI 2.0
-Linux environment that are not available for macOS builds at the moment:
+Splitting tests between parallel containers on macOS is currently not supported.
+We suggest the following strategies:
 
-* Parallelism is not supported.
+* Using concurrent jobs for building with different Xcode versions
+* Testing different targets in concurrent jobs
 
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
