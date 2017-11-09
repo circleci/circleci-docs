@@ -2,7 +2,7 @@
 layout: enterprise
 section: enterprise
 title: "Security Features"
-category: [documentation]
+category: [resources]
 order: 5
 description: "CircleCI Enterprise security features."
 ---
