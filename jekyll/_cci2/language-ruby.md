@@ -42,37 +42,68 @@ jobs:
     parallelism: 3
     working_directory: ~/circleci-demo-ruby-rails
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.4-node
         environment:
+          PGHOST: 127.0.0.1
+          PGUSER: circleci-demo-ruby
           RAILS_ENV: test
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
     steps:
       - checkout
 
       # Restore bundle cache
-      - restore_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+      - type: cache-restore
+        name: Restore bundle cache
+        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
 
-      # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
+      - run:
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
 
       # Store bundle cache
-      - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      - type: cache-save
+        name: Store bundle cache
+        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
 
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      # Only necessary if app uses webpacker or yarn in some other way
+      - type: cache-restore
+        name: Restore yarn cache
+        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Yarn Install
+          command: yarn install
+
+      # Store yarn / webpacker cache
+      - type: cache-save
+        name: Store yarn cache
+        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.yarn-cache
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
 
       # Run rspec in parallel
-      - run: |
+      - type: shell
+        command: |
           bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
                             --out test_results/rspec.xml \
                             --format progress \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
 
       # Save test results for timing analysis
       - store_test_results:
@@ -122,17 +153,25 @@ Directly beneath `working_directory`, we can specify container images under a `d
 version: 2
 # ...
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.4-node
         environment:
+          PGHOST: 127.0.0.1
+          PGUSER: circleci-demo-ruby
           RAILS_ENV: test
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
 ```
 
-We use the [official Ruby images](https://hub.docker.com/_/ruby/) tagged to version `2.4.1` and with additional packages installed for NodeJS.
+We use the [official Ruby images](https://hub.docker.com/_/ruby/) tagged to use the latest patch-level version of `2.4` and with additional packages installed for NodeJS.
 
 We've also specified the [official Postgres image](https://hub.docker.com/_/postgres/) for use as our database container.
 
-Now we’ll add several `steps` within the `build` job.
+As well, we've added several environment variables for connecting our application container with the database for our testing purposes.
+
+Now let's add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
 
@@ -151,19 +190,46 @@ steps:
   # ...
 
   # Restore bundle cache
-  - restore_cache:
-      key: rails-demo-{{ checksum "Gemfile.lock" }}
+  - type: cache-restore
+    name: Restore bundle cache
+    key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
 
-  # Bundle install dependencies
-  - run: bundle install --path vendor/bundle
+  - run:
+      name: Bundle Install
+      command: bundle install --path vendor/bundle
 
   # Store bundle cache
-  - save_cache:
-      key: rails-demo-{{ checksum "Gemfile.lock" }}
-      paths:
-        - vendor/bundle
+  - type: cache-save
+    name: Store bundle cache
+    key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+    paths:
+      - vendor/bundle
 ```
 {% endraw %}
+
+If you're application is using Webpack or Yarn for JavaScript dependencies, you should also add this to your config.
+
+{% raw %}
+```YAML
+steps:
+  # ...
+
+  # Only necessary if app uses webpacker or yarn in some other way
+  - type: cache-restore
+    name: Restore yarn cache
+    key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+
+  - run:
+      name: Yarn Install
+      command: yarn install
+
+  # Store yarn / webpacker cache
+  - type: cache-save
+    name: Store yarn cache
+    key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.yarn-cache
+```
 
 Now we can setup our test database we'll use during the build.
 
@@ -172,8 +238,13 @@ steps:
   # ...
 
   # Database setup
-  - run: bundle exec rake db:create
-  - run: bundle exec rake db:schema:load
+  - run:
+      name: Wait for DB
+      command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+  - run:
+      name: Database setup
+      command: bin/rails db:schema:load --trace
 ```
 
 Then `bundle exec rspec` which runs the actual tests in parallel.
@@ -194,7 +265,7 @@ steps:
                         --out test_results/rspec.xml \
                         --format progress \
                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-    
+
   # Save test results for timing analysis
   - store_test_results:
       path: test_results
