@@ -19,7 +19,7 @@ The following requirements must be met for successful trial installation:
 - [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
-- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](mailto:trial-support@circleci.com) for instructions.
+- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
 
 ## Steps for Installation on AWS EC2 
 
@@ -28,8 +28,7 @@ Use this procedure to install CircleCI on a single EC2 VM by using the pre-made 
 **Note:** All builds that run on the installed machine will have access
 to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
 give any inappropriate privileges to your instance. It is possible to block
-this access with `iptables` rules in a production setup, [contact support](mailto:trial-support@circleci.com)
-for specific instructions.
+this access with `iptables` rules in a production setup, <a href="https://support.circleci.com">contact support</a> for specific instructions.
 
 <ol>
 <li>Find the Amazon Machine Image for your region from the following list:<br>
@@ -74,24 +73,34 @@ for specific instructions.
 <script>amiUpdateSelect();</script>
 </li>
 <li>
-Ensure you choose an instance type with at least 16G of RAM.
+Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. Select the "Next" to configure the instance.
 </li>
-<li>During the Configure Security Group step, open port 22 for SSH, 80 for HTTP, 443 for HTTPS, and 8800 for Custom TCP.
+<li>When Configuring Instance Details, choose your network and enable Auto-assign Public IP. You may select an IAM role (TO DO: does the role need to be left as none for the trial?) or leave it as None for the trial. 
+  <img src="https://circleci.com/docs/assets/img/docs/single-box-step3.png" alt="AWS Step 3 Screen Shot">
+</li> 
+<li>By default, the instance will have 100GB of storage.
+</li>
+<li>During the Configure Security Group step, open the following ports:
+  <ul>
+  <li>SSH port 22</li>
+  <li>HTTP port 80</li>
+  <li>HTTPS port 443</li>
+  <li>Custom TCP 8800</li>
+  <li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.</li>
+ </ul>
+   <img src="https://circleci.com/docs/assets/img/docs/single-box-step5.png" alt="AWS Step 6 Screen Shot">
 </li>
 
-<li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
-</li>
-
-<li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process.
+<li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
 </li> 
 
 <li>Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
 or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
-You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See <a href="https://circleci.com/docs//enterprise/docker-builder-config/">this doc</a> for details on setting builder machine environment variables.
 </li>
 
 <li>
-Upload the license file and set the admin password.
+Upload the CircleCI license file and set the admin password.
 </li>
 <li>
 If you don't need 1.0 build functionality, you can leave the box for it unchecked. Most users should check the box for 2.0 functionality.
@@ -100,7 +109,7 @@ If you don't need 1.0 build functionality, you can leave the box for it unchecke
 Select "Single Box" in the "Builders Configuration" section(s).
 </li>
 <li>
-Register CircleCI as a new OAuth application in GitHub.com at <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 4 for the Homepage URL and using <code>http(s)://AWS instance IP address/auth/github</code> as the Authorization callback URL. Click the Register Application button.
+Register CircleCI as a new OAuth application in GitHub.com at <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using <code>http(s)://AWS instance IP address/auth/github</code> as the Authorization callback URL. Click the Register Application button.
 </li>
 <li>
 Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
@@ -112,10 +121,10 @@ Copy the Secret from GitHub and paste it into the entry field for GitHub Applica
 Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
 </li>
 <li>
-Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. Contact us if you have questions.
+Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com) if you have questions.
 </li>
 <li>
-Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 
 </li>
 
 <li>Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
