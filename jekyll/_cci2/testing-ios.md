@@ -504,10 +504,11 @@ scheme. Instead, you can specify these through environment variables.
 ### Constraints on macOS-based Builds
 
 Splitting tests between parallel containers on macOS is currently not supported.
-We suggest the following strategies:
-
-* Using concurrent jobs for building with different Xcode versions
-* Testing different targets in concurrent jobs
+We suggest using a workflow with parallel jobs to build with different
+Xcode versions, or a workflow with parallel jobs to run different
+test targets. Please check
+[this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples)
+for examples of workflows with parallel jobs.
 
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
