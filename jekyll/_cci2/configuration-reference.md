@@ -52,7 +52,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS builds](#macos)
+macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. (default: `~/project`. `project` is a literal string, not the name of the project.) You can also refer the directory with `$CIRCLE_WORKING_DIRECTORY` environment variable.
@@ -227,15 +227,15 @@ jobs:
 #### **`macos`**
 {:.no_toc}
 
-CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job  in a macOS Virtual Machine, you must add the `macos` key to the top-level configuration for the job.
+CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, you must add the `macos` key to the top-level configuration for the job.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-xcode | Y | String | The version of Xcode that should be installed on the virtual machine.
+xcode | Y | String | The version of Xcode that is installed on the virtual machine.
 {: class="table table-striped"}
 
 
-**Example:** use an macOS version with Xcode  version `9.0`:
+**Example:** Use a macOS virtual machine with Xcode version `9.0`:
 
 ```YAML
 jobs:
