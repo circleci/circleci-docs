@@ -73,12 +73,17 @@ this access with `iptables` rules in a production setup, <a href="https://suppor
 <script>amiUpdateSelect();</script>
 </li>
 <li>
-Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. Select the "Next" to configure the instance.
+Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. Select "Next" to configure the instance.
 </li>
-<li>When Configuring Instance Details, choose your network and enable Auto-assign Public IP. You may select an IAM role (TO DO: does the role need to be left as none for the trial?) or leave it as None for the trial. 
+<li>On the Configuring Instance Details page: 
+  <ul>
+  <li>Choose your network</li>
+  <li>Enable Auto-assign Public IP</li> 
+  <li>Set the IAM role to "None"</li> 
+</ul>
   <img src="https://circleci.com/docs/assets/img/docs/single-box-step3.png" alt="AWS Step 3 Screen Shot">
 </li> 
-<li>By default, the instance will have 100GB of storage.
+<li>By default, the instance will have 100GB of storage. 
 </li>
 <li>During the Configure Security Group step, open the following ports:
   <ul>
@@ -94,8 +99,7 @@ Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. 
 <li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
 </li> 
 
-<li>Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
-or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
+<li>Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert, or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
 You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See <a href="https://circleci.com/docs//enterprise/docker-builder-config/">this doc</a> for details on setting builder machine environment variables.
 </li>
 
