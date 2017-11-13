@@ -14,9 +14,9 @@ This document describes images and containers in the following sections:
 {:toc}
 
 ## Overview
-This version of CircleCI enables you to use Docker images or to use a dedicated VM image. 
+This version of CircleCI enables you to run jobs in one of three environments: using  Docker images, using a dedicated Linux VM image, or using a macOS VM image.
 
-There are tradeoffs to `docker` versus `machine`, as follows:
+For building on Linux, there are tradeoffs to `docker` versus `machine`, as follows:
 
 Virtual Environment | `docker` | `machine`
 ----------|----------|----------
@@ -78,6 +78,22 @@ jobs:
 * `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#machine) for versions.
 
 The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
+
+### Using macOS
+
+Using the `macos` executor allows you to run your build in a VM running macOS with a specific version of Xcode installed.
+
+```
+jobs:
+  build:
+    macos:
+      xcode: "9.0"
+      
+    steps:
+      # Commands will execute in macOS container
+      # with Xcode 9.0 installed
+      - run: xcodebuild -version
+```
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
