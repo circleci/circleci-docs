@@ -207,12 +207,11 @@ workflows:
 ```
 {% endraw %}
 
-<!---
-## Sample configuration with multiple executor types (macOS + Docker)
+## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
 in the same workflow. In the following example each push of an iOS
-project will be built on macO , and additional iOS tools
+project will be built on macOS, and additional iOS tools
 ([SwiftLint](https://github.com/realm/SwiftLint) and
 [Danger](https://github.com/danger/danger))
 will be run in Docker.
@@ -223,8 +222,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode:
-        version: "9.0"
+      xcode: "9.0"
 
     steps:
       - checkout
@@ -279,4 +277,3 @@ workflows:
       - build-and-test
 ```
 {% endraw %}
--->

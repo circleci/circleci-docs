@@ -35,6 +35,8 @@ Virtual Environment | `docker` | `machine`
 
 <sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
 
+It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
+
 ### Using Docker
 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run.
