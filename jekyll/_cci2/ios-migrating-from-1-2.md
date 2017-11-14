@@ -149,24 +149,9 @@ gem 'cocoapods'
 
 ### Setting up Code Signing With Fastlane Match
 
-CircleCI 2.0 does not support automated code signing, use Fastlane Match to manage code signing certificates in your iOS projects.
-
-It is best to set up code signing after you have a successful `build` job
-in your iOS project on CircleCI.
-
-Check out the Fastlane Match [getting started guide](https://codesigning.guide/)
-for the exact steps for setting up a Match repo and storing your
-certificates in it.
-
-After your certificates are uploaded, grant CircleCI
-permissions to access your certificates repo on GitHub by going to your CircleCI Project Settings -> Checkout SSH Keys -> Add
-User Key -> Authorize with GitHub.
-
-*Warning*: Please bear in mind that adding a user key will allow
-CircleCI access to _all_ of your private repos.
-
-After you have configured the User Key in the project settings, CircleCI
-will be able to fetch the certificates from GitHub.
+Check out our [code signing guide]({{ site.baseurl
+}}/2.0/ios-codesigning) for the exact steps for setting up code signing
+for your iOS project on CircleCI 2.0.
 
 ## Creating the 2.0 Configuration File
 
@@ -429,3 +414,9 @@ branch after the `build-and-test` job has finished and is successful.
 
 Refer to the [Orchestrating Workflows doc]({{ site.baseurl }}/2.0/workflows/)
 for more examples of using Workflows.
+
+## Example Application on GitHub
+
+See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+for a full example of how to build, test, sign and deploy an iOS project
+using Fastlane on CircleCI 2.0.

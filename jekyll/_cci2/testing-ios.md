@@ -482,25 +482,6 @@ projects. Here are the most frequent of those:
   we default to an older Xcode which might not support the necessary
   features.
 
-* **Timeout waiting for simulator.** If you see your test command
-  failing with errors similar to this:
-
-```
-iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1
-```
-
-  Then the version of the simulator you are trying to use on CircleCI
-  might not be present in the build machines.
-  In addition to the default version of simulator for every Xcode
-  installation, we also make simulators of the following iOS versions
-  available for all Xcode versions:
-
-  * 7.1
-  * 8.4
-
-  Please try using any of the versions of simulator that are present on
-  the machines — the error might disappear.
-
 * **Ruby segfaults.** We have seen cases where some of the Ruby gems
   used during the build would produce a segmentation fault in Ruby. This
   might happen because of the mismatch of Ruby version used to build the
@@ -520,17 +501,14 @@ iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current st
 cases CircleCI may not correctly detect the Xcode workspace, project, or
 scheme. Instead, you can specify these through environment variables.
 
-### Constraints on macOS-Based Builds
-There are a few features normally available on CircleCI's standard
-Linux containers that are not available for macOS builds at the moment:
+### Constraints on macOS-based Builds
 
-* Parallelism is not supported
-* While the general `config.yml` file structure will be honored in macOS-based builds
-[configuration options]( {{ site.baseurl }}/2.0/configuration-reference/), the following sections of
-`circle.yml` will not work correctly:
-  * `machine: services`
-  * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc]( {{ site.baseurl }}/2.0/configuration-reference/)
+Splitting tests between parallel containers on macOS is currently not supported.
+We suggest using a workflow with parallel jobs to build with different
+Xcode versions, or a workflow with parallel jobs to run different
+test targets. Please check
+[this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples)
+for examples of workflows with parallel jobs.
 
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
@@ -602,3 +580,9 @@ workflows:
       - build-and-test
 ```
 {% endraw %}
+
+## Example Application on GitHub
+
+See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
+for a full example of how to build, test, sign and deploy an iOS project
+using Fastlane on CircleCI 2.0.
