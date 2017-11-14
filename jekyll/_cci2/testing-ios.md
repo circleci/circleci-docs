@@ -84,9 +84,9 @@ jobs:
 
 workflows:
   version: 2
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
 ```
 
 ### Advanced Setup
