@@ -17,7 +17,7 @@ Language Guide | Framework | GitHub Repo Name
 [Clojure] | Luminus | [circleci-demo-clojure-luminus]
 [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
 [Go] | Go | [circleci-demo-go]
-[iOS] | Fastlane | [circleci-demo-ios]
+[iOS] | Xcode | [circleci-demo-ios]
 [Java] | Spring | [circleci-demo-java-spring]
 [JavaScript] | React | [circleci-demo-javascript-express]
 [PHP] | Laravel | [circleci-demo-php-laravel]
