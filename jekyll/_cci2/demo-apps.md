@@ -13,9 +13,11 @@ Each language listed below has an associated guide and public repository on GitH
 
 Language Guide | Framework | GitHub Repo Name
 ---------|-----------|-----------------
+[Android] ||
 [Clojure] | Luminus | [circleci-demo-clojure-luminus]
 [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
 [Go] | Go | [circleci-demo-go]
+[iOS] | Fastlane | [circleci-demo-ios]
 [Java] | Spring | [circleci-demo-java-spring]
 [JavaScript] | React | [circleci-demo-javascript-express]
 [PHP] | Laravel | [circleci-demo-php-laravel]
@@ -24,9 +26,11 @@ Language Guide | Framework | GitHub Repo Name
 [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table"}
 
+[Android]: {{ site.baseurl }}/2.0/language-android/
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
 [Go]: {{ site.baseurl }}/2.0/language-go/
+[iOS]: {{ site.baseurl }}/2.0/ios-tutorial/
 [Java]: {{ site.baseurl }}/2.0/language-java/
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
@@ -38,6 +42,7 @@ Language Guide | Framework | GitHub Repo Name
 [circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
 [circleci-demo-java-spring]: https://github.com/CircleCI-Public/circleci-demo-java-spring
 [circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
+[circleci-demo-ios]: https://github.com/CircleCI-Public/circleci-demo-ios
 [circleci-demo-php-laravel]: https://github.com/CircleCI-Public/circleci-demo-php-laravel
 [circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-flask
 [circleci-demo-python-flask]: https://github.com/CircleCI-Public/circleci-demo-python-flask

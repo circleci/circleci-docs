@@ -2,7 +2,7 @@
 layout: classic-docs
 title: iOS Project Tutorial
 short-title: iOS Project Tutorial
-categories: [configuring-jobs]
+categories: [platforms]
 description: Setting Up iOS applications on CircleCI 2.0
 order: 20
 ---
