@@ -102,6 +102,14 @@ If you are brand new to MongoDB, see the [MongoDB on the AWS Cloud](https://docs
 
 It is best practice to set up PostgreSQL 9.5 or later using Amazon Relational Database Service (Amazon RDS) with multi Availability Zone (multi-AZ) mode for automated backups and failover. Refer to the [Amazon RDS Multi-AZ Deployments](https://aws.amazon.com/rds/details/multi-az/) documentation for details.
 
+Five databases are required for 2.0 services:
+
+* `vms`
+* `conductor_production` with extension `uuid-ossp` enabled
+* `contexts_service_production` with extension `uuid-ossp` enabled
+* `cron_service_production`
+* `circle` with extensions `pgcrypto` and `uuid-ossp` enabled
+
 ## Exporting Existing Databases
 
 **Note:** This process will require downtime. Please schedule an outage window with CircleCI users.
@@ -136,10 +144,10 @@ It is best practice to set up PostgreSQL 9.5 or later using Amazon Relational Da
      sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
      ```
 
-1. On the Services machine where you ran the export script, use the following `psql` command to restore the database replacing the variables with the approrpiate user credentials and the name of the PostgreSQL database.
+1. On the Services machine where you ran the export script, use the following `psql` command to restore the databases, replacing the variables with the appropriate user credentials and the name of the PostgreSQL database.
 
      ```
-     psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI.sql
+     psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI_DBNAME.sql
      ```
 
 ## Configuring Automatic Recovery
@@ -263,6 +271,18 @@ The encryption keys are plain text files for easy backup from the `/data/circle/
 
 Restore the directory to the same location **before** starting up CircleCI.
 
+### Vault Requirements
+
+Vault is required for the `contexts-service` to securely encrypt and decrypt shared contexts.
+
+Vault should be setup as follows:
+
+* Vault version `0.7` is the only version currently supported
+* It is highly recommend that Vault be configured with TLS enabled
+* There must be a `transit` mount available
+* A token must be provided with permissions to manage keys and encrypt/decrypt data for the mounted `transit` backend
+
+
 ## Configuring Replicated
 
 To securely pass Mongodb, Postgresql and Vault connection settings to services running in Replicated, use of `/etc/circle-installation-customizations` file is required.
@@ -273,16 +293,27 @@ Following is the content of the `circle-installation-customizations` file necces
 
 # Mongo DB
 MONGO_BASE_URI=mongodb://circle:<password>@<hostname>:27017
-export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?authSource=admin"
-export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?authSource=admin"
+export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI="$MONGO_BASE_URI/  remote_containers_dev_ghe?ssl=on"
 
 # Postgres DB
-export CIRCLE_SECRETS_POSTGRES_MAIN_URI='postgres://circle:<password>@<hostname>:5432/circle'
+export POSTGRES_HOST="<hostname>"
+export POSTGRES_PORT="5432"
+export POSTGRES_PASSWORD="<password>"
+export POSTGRES_USER="circle"
+export DATABASE_PASSWORD="$POSTGRES_PASSWORD"
+export DATABASE_USER="$POSTGRES_USER"
+export DATABASE_HOST="$POSTGRES_HOST"
+export POSTGRES_JDBC_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/contexts_service_production?sslmode=require"
+export DATABASE_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/conductor_production?sslmode=require"
+export CIRCLE_SECRETS_POSTGRES_DOMAIN_URI="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/circle?sslmode=require"
+export CIRCLE_SECRETS_POSTGRES_BUILD_QUEUE_URI="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/circle?sslmode=require"
 
 # Vault
-export VAULT__SCHEME="<vault-scheme>"
+export VAULT__SCHEME="https"
 export VAULT__HOST="<vault-hostname>"
 export VAULT__PORT="<vault-port>"
 export VAULT__CLIENT_TOKEN="<vault-client-token>"
