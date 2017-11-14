@@ -4,8 +4,7 @@ title: Testing iOS Applications on macOS
 short-title: Testing iOS Applications on macOS
 categories: [configuring-jobs]
 description: Testing iOS applications on macOS
-order: 71
-hide: true
+order: 30
 ---
 
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
