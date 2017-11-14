@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Testing iOS Applications on macOS
 short-title: Testing iOS Applications on macOS
-categories: [configuring-jobs]
+categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
 ---
