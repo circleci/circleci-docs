@@ -112,6 +112,8 @@ The built-in Heroku integration through the CircleCI UI is not implemented for C
      StrictHostKeyChecking no
      EOF
      ```
+***Note:*** *this script will need to be executed with `sudo` if running in a Docker container where the user is not `root` (for example, CircleCI's [convenience images](hub.docker.com/r/circleci)).*
+
 This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
 
 2. Install and authorize Heroku for the CircleCI account that owns the project. 
