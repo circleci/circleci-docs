@@ -278,7 +278,7 @@ Vault is required for the `contexts-service` to securely encrypt and decrypt sha
 Vault should be setup as follows:
 
 * Vault version `0.7` is the only version currently supported
-* It is highly recommend that Vault be configured with TLS enabled
+* It is highly recommended that Vault be configured with TLS enabled
 * There must be a `transit` mount available
 * A token must be provided with permissions to manage keys and encrypt/decrypt data for the mounted `transit` backend
 
@@ -297,7 +297,7 @@ export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
 export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
 export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?ssl=on"
 export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?ssl=on"
-export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI="$MONGO_BASE_URI/  remote_containers_dev_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI="$MONGO_BASE_URI/remote_containers_dev_ghe?ssl=on"
 
 # Postgres DB
 export POSTGRES_HOST="<hostname>"
