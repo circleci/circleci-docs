@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Specifying Container Images"
-short-title: "Specifying Container Images"
-description: "Overviews of the docker and machine executor types"
+title: "Choosing an Executor Type"
+short-title: "Choosing an Executor Type"
+description: "Overviews of the docker, machine, and executor types"
 categories: [containerization]
 order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This document describes images and containers in the following sections:
+This document describes the `docker`, `machine`, and `macos` environments in the following sections:
 
 * TOC
 {:toc}
