@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Writing Jobs with Steps"
-short-title: "Writing Jobs with Steps"
+title: "Configuration Reference"
+short-title: "Configuration Reference"
 description: "Reference for .circleci/config.yml"
 categories: [configuring-jobs]
 order: 20
 ---
 
-This document describes how to write jobs and steps to build, test, and deploy your project. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
+This document is a reference for the CircleCI 2.0 configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
 
 If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.0 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
