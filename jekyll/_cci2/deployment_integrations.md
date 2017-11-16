@@ -97,10 +97,10 @@ The built-in Heroku integration through the CircleCI UI is not implemented for C
      ```
      #!/bin/bash
      wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-     mkdir -p /usr/local/lib /usr/local/bin
-     tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-     ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
-     
+     sudo mkdir -p /usr/local/lib /usr/local/bin
+     sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+     sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+
      cat > ~/.netrc << EOF
      machine api.heroku.com
        login $HEROKU_LOGIN
@@ -112,7 +112,7 @@ The built-in Heroku integration through the CircleCI UI is not implemented for C
      StrictHostKeyChecking no
      EOF
      ```
-***Note:*** *this script will need to be executed with `sudo` if running in a Docker container where the user is not `root` (for example, CircleCI's [convenience images](https://hub.docker.com/r/circleci)).*
+***Note:*** *`sudo` is necessary in the above script if running in a Docker container where the user is not `root` (for example, CircleCI's [convenience images](https://hub.docker.com/r/circleci)).  For images running with user `root` (as in most official Docker community images), remove `sudo` as it may not be installed for `root`.*
 
 This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
 
