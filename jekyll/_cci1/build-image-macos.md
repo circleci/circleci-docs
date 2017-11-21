@@ -28,6 +28,7 @@ You should specify the version of Xcode that you would like to build by specifyi
 
 The currently available Xcode versions are:
 
+* `9.1.0`: Xcode 9.1.0 (Build 9A1004)
 * `9.0`: Xcode 9.0.1 (Build 9A1004)
 * `8.3`: Xcode 8.3.3 (Build 8E3004b)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b)
@@ -45,6 +46,7 @@ The currently available Xcode versions are:
 
 We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby, etc.
 
+* [Xcode version 9.1.0 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html).
 * [Xcode version 9.0.1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html).
 * [Xcode version 8.3.3 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html).
 * [Xcode version 8.3.2 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-105/index.html).
