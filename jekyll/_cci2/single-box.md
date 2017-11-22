@@ -79,7 +79,7 @@ this access with `iptables` rules in a production setup, [contact support](https
 - Set the IAM role to None
 ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png)
 4. By default, the instance will have 100GB of storage, this is enough for the trial install.
-5. During the Configure Security Group step, open the following ports: (TO DO: Would this be better as a list or using the screenshot?)
+5. During the Configure Security Group step, open the following ports:
 - SSH port 22
 - HTTP port 80
 - HTTPS port 443
@@ -95,7 +95,7 @@ You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on bu
 2. Upload the CircleCI license file and set the admin password.
 3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
 4. Select "Single Box" in the "Builders Configuration" section(s).
-5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/] or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/](https://github.com/settings/applications/new/) or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
 6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
 7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
