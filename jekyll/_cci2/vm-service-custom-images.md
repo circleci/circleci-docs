@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Building your own VM-Service images"
 category: [administration]
 order: 12
-description: "Buildering your own VM-Service images with your depencies already installed
+description: "Buildering your own VM-Service images with your depencies already installed"
 ---
 
 This document outlines how to run and use your own VM-Service images so that you can save time rather than download the same dependencies over and over again. 
