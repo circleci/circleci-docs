@@ -19,7 +19,7 @@ The following requirements must be met for successful trial installation:
 - [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
-- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](mailto:trial-support@circleci.com) for instructions.
+- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
 
 ## Steps for Installation on AWS EC2 
 
@@ -28,13 +28,11 @@ Use this procedure to install CircleCI on a single EC2 VM by using the pre-made 
 **Note:** All builds that run on the installed machine will have access
 to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
 give any inappropriate privileges to your instance. It is possible to block
-this access with `iptables` rules in a production setup, [contact support](mailto:trial-support@circleci.com)
-for specific instructions.
+this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com) for specific instructions.
 
-<ol>
-<li>Find the Amazon Machine Image for your region from the following list:<br>
+### Configure the Amazon Machine Image:
 
-  <script>
+<script>
   var amiIds = {
   "ap-northeast-1": "ami-32e6d455",
   "ap-northeast-2": "ami-2cef3242",
@@ -70,57 +68,41 @@ for specific instructions.
   <option value="us-west-2">us-west-2</option>
   </select>
   <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">Go!</a>
-
 <script>amiUpdateSelect();</script>
-</li>
-<li>
-Ensure you choose an instance type with at least 16G of RAM.
-</li>
-<li>During the Configure Security Group step, open port 22 for SSH, 80 for HTTP, 443 for HTTPS, and 8800 for Custom TCP.
-</li>
 
-<li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
-</li>
 
-<li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process.
-</li> 
+1. Find the Amazon Machine Image for your region from the list above. 
+2. Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. Select Next to configure the instance.
+3. On the Configuring Instance Details page: 
+- Choose your network
+- Enable Auto-assign Public IP
+- Set the IAM role to None
+![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png)
+4. By default, the instance will have 100GB of storage, this is enough for the trial install.
+5. During the Configure Security Group step, open the following ports:
+- SSH port 22
+- HTTP port 80
+- HTTPS port 443
+- Custom TCP 8800
+- (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
+![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png)
+6. After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
 
-<li>Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,
-or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
-You also need to export <code>CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com</code> on builder machines replacing <code>insecure-ghe.example.com</code> with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
-</li>
+### Configure CircleCI
+1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
+- Note: If you are using a self-signed cert, or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
+You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines replacing `insecure-ghe.example.com` with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+2. Upload the CircleCI license file and set the admin password.
+3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
+4. Select "Single Box" in the "Builders Configuration" section(s).
+5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/](https://github.com/settings/applications/new/) or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
+7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
+8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
+9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com) if you have questions.
+10. Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 
+11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
 
-<li>
-Upload the license file and set the admin password.
-</li>
-<li>
-If you don't need 1.0 build functionality, you can leave the box for it unchecked. Most users should check the box for 2.0 functionality.
-</li>
-<li>
-Select "Single Box" in the "Builders Configuration" section(s).
-</li>
-<li>
-Register CircleCI as a new OAuth application in GitHub.com at <a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 4 for the Homepage URL and using <code>http(s)://AWS instance IP address/auth/github</code> as the Authorization callback URL. Click the Register Application button.
-</li>
-<li>
-Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
-</li>
-<li>
-Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
-</li>
-<li>
-Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
-</li>
-<li>
-Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. Contact us if you have questions.
-</li>
-<li>
-Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
-</li>
-
-<li>Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
-</li>
-</ol>
 
 <!---
 ## Installation in a Data Center
