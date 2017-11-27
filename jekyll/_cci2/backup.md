@@ -36,9 +36,11 @@ It is also possible to automate this process with the AWS API.  Subsequent AMIs/
 
 When restoring test backups or performing a restore in production, you may need to make a couple of changes on the newly launched instance if its public or private IP addresses have changed:
 
-1. Launch a new VM using a previous root-volume backup.
+1. Launch a fresh EC2 instance using the newly generated AMI from the previous steps
 2. Ensure that the hostname configured in the settings page at port 8800 reflects the correct address. If this hostname has changed, you will also need to change it in the corresponding GitHub OAuth application settings or create a new OAuth app to test the recovery and log in to the application.
 3. Update any references to the backed-up instance's public and private IP addresses in `/etc/default/replicated` and `/etc/default/replicated-operator` on Debian/Ubuntu or `/etc/sysconfig/*` in RHEL/CentOS to the new IP addresses.
+4. From the root directory of the Services box, run `sudo rm -rf /opt/nomad`
+5. Reboot the instance from the AWS Management Console
 
 ## Cleaning up Build Records
 
