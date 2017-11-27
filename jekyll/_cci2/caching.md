@@ -108,7 +108,7 @@ The first step is to decide when a cache will be saved or restored by using a ke
 Following are some examples of caching strategies for different goals:
 
  * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the separate cache keys.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate separate cache keys.
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
  
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
