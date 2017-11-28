@@ -165,6 +165,8 @@ Configure a workflow to run on a set schedule by using the `triggers:` key with 
 
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
 
+Note: step syntax (i.e., */1, */20) is not supported.
+
 ```
 workflows:
   version: 2
