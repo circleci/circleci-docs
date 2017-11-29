@@ -296,6 +296,8 @@ workflows:
               ignore: /.*/
 ```
 
+**Note:** The `build` job **must** also have a `filters` `tags` section, as it is a transient dependency of the `deploy` job.
+
 The following example runs
 
 1. `build` and `test` jobs for all branches and only `config-test.*` tags.
