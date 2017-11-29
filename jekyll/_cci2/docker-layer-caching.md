@@ -18,7 +18,7 @@ Consider reusing the unchanged layers to significantly reduce image build times.
 
 ``` YAML
 - setup_remote_docker:
-    docker_layer_caching: true # default - true  
+    docker_layer_caching: true # default - false  
 ``` 
 
 When `docker_layer_caching` is set to `true`, CircleCI will try to reuse Docker Images (layers) from your previous builds. That is, every layer you built in a previous job will be accessible in the remote environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
