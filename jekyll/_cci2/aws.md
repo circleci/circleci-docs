@@ -63,7 +63,7 @@ Have available the following information and policies before starting the Previe
 
 * If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
 * Access to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services.
-* AWS instances must have outbound access to pull docker containers and to verify your license.
+* AWS instances must have outbound access to pull Docker containers and to verify your license.
 * In order to provision required AWS entities with Terraform you need an IAM User with following permissions:
 ```
 {
@@ -121,12 +121,12 @@ Have available the following information and policies before starting the Previe
 Use the following procedure to install with Terraform, skip to the next section for manual installation steps.
 
 1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository (if you already have it cloned, make sure it is up-to-date and you are on the `master` branch: `git checkout master && get pull`).
-3. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
+2. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
 3. Fill `terraform.tfvars` with appropriate values.
 4. Run `terraform apply` to provision.
-4. Go to the provided URL at the end of Terraform output and follow the instructions.
-5. Enter your license.
-6. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User:
+5. Go to the provided URL at the end of Terraform output and follow the instructions.
+6. Enter your license.
+7. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User:
      ```JSON
      {
          "Version": "2012-10-17",
@@ -159,7 +159,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-7. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User. It might be the same user as in Storage section, if so, it needs to have both sets of permissions.
+8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User. If it is the same user as in Storage section, it will need both sets of permissions.
      ``` JSON
      {
          "Version": "2012-10-17",
@@ -196,14 +196,14 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-8. After applying settings you are be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
-9. After the application has started, log in to CircleCI and start running 2.0 builds!
+9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
+10. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Next Steps for Getting Started
 
 1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage.
-1. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
-1. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
+2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
+3. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
 
 ## Troubleshooting
 
@@ -211,7 +211,7 @@ Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/noma
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](mailto:enterprise-support@circleci.com) for assistance.
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance.
 
 
 
