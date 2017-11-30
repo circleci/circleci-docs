@@ -11,7 +11,7 @@ This document provides step-by-step instructions for installing CircleCI 2.0 on 
 * TOC
 {:toc}
 
-If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your [CircleCI account representative](mailto:cs@circleci.com) for assistance with upgrading.
+If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your [CircleCI account representative](https://support.circleci.com/hc/en-us/requests/new) for assistance with upgrading.
 
 **Notes:**
 - CircleCI 2.0 is only available on AWS.
@@ -25,7 +25,7 @@ Install the following automated infrastructure provisioning software:
 
 Have the following information available before beginning the installation procedure:
 
-* CircleCI License file (.rli), contact [CircleCI support](mailto:enterprise-support@circleci.com) for a license.
+* CircleCI License file (.rli), contact [CircleCI support](https://support.circleci.com/hc/en-us/requests/new) for a license.
 * AWS Access Key, AWS Secret Key, and AWS Subnet ID.
 * AWS Region, for example `us-west-2`.
 * AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
