@@ -322,4 +322,4 @@ export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>"
 
 ## Transport Layer Security (TLS)
 
-When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificate` with file extension '.crt'.
+When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificates` with file extension `.crt`.
