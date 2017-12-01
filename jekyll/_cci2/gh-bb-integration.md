@@ -143,7 +143,7 @@ In this example, the GitHub repository is `https://github.com/you/test-repo` and
 4. In you config.yml, you can refer to the key with the following:
 ```
 steps:
-  - add-ssh-keys:
+  - add_ssh_keys:
       fingerprints:
         - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
