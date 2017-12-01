@@ -853,7 +853,7 @@ only | Y | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
-### **`jobs`**
+#### **`jobs`**
 A job can have the keys `requires`, `filters`, and `context`.
 
 Key | Required | Type | Description
@@ -861,11 +861,11 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
-#### **<`job_name`>**
+##### **<`job_name`>**
 
 A job name that exists in your `config.yml`.
 
-##### **`requires`**
+###### **`requires`**
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
 
 Key | Required | Type | Description
@@ -874,7 +874,7 @@ requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
 
-##### **`contexts`**
+###### **`contexts`**
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/workflows) document for adding a context in the application settings.
 
 Key | Required | Type | Description
@@ -882,7 +882,7 @@ Key | Required | Type | Description
 context | N | String | The name of the context. The default name is `org-global`.
 {: class="table table-striped"}
 
-##### **`type`**
+###### **`type`**
 A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
 ```
@@ -897,7 +897,7 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 ```
 **Note:** The `hold` job name must not exist in the main configuration.
 
-##### **`filters`**
+###### **`filters`**
 Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
@@ -905,7 +905,7 @@ Key | Required | Type | Description
 filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
-###### **`branches`**
+####### **`branches`**
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 
 - Any branches that match `only` will run the job.
@@ -920,7 +920,7 @@ only | N | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
-###### **`tags`**
+####### **`tags`**
 CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
 1. For a branch push unaffected by any filters, CircleCI runs the job.
@@ -943,7 +943,7 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 {: class="table table-striped"}
 
 
-##### *Example*
+###### *Example*
 
 ```
 workflows:
@@ -1033,20 +1033,6 @@ jobs:
           paths:
             - ~/.m2
 
-      # Deploy staging
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "staging" ];
-              then ansible-playbook site.yml -i staging;
-            fi
-
-      # Deploy production
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ];
-              then ansible-playbook site.yml -i production;
-            fi
-
       # Save artifacts
       - store_artifacts:
           path: /tmp/artifacts
@@ -1055,5 +1041,41 @@ jobs:
       # Upload test results
       - store_test_results:
           path: /tmp/test-reports
+          
+  deploy-stage:
+    docker:
+      - image: ubuntu:14.04
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
+          name: Deploy if tests pass and branch is Staging
+          command: ansible-playbook site.yml -i staging          
+          
+  deploy-prod:
+    docker:
+      - image: ubuntu:14.04
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
+          name: Deploy if tests pass and branch is Master
+          command: ansible-playbook site.yml -i production
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-stage:
+          requires:
+            -build
+          filters:
+            branches:
+              only: staging
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master          
 ```
 {% endraw %}
