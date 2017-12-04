@@ -22,7 +22,7 @@ If you have CircleCI Enterprise installed you may access CircleCI 2.0 features o
 
 Have the following information available before beginning the installation procedure:
 
-* CircleCI License file (.rli), contact [CircleCI support](mailto:enterprise-support@circleci.com) for a license.
+* CircleCI License file (.rli), contact [CircleCI support](https://support.circleci.com/) for a license.
 * AWS Access Key, AWS Secret Key, and AWS Subnet ID.
 * AWS Region, for example `us-west-2`.
 * AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
@@ -186,7 +186,7 @@ Check the Fleet State by clicking the wrench icon on the sidebar navigation of C
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](mailto:enterprise-support@circleci.com) for assistance.
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/) for assistance.
 
 
 

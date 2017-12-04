@@ -151,7 +151,7 @@ others perform well.  Particularly, on macOS, RealVNC produces a better
 image than Chicken of the VNC.
 
 If you have had a good or bad experience with a VNC viewer,
-[let us know](mailto:support@circleci.com) so we can update this page and help
+[let us know](https://support.circleci.com/) so we can update this page and help
 other customers.
 
 ## Troubleshooting

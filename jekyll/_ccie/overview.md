@@ -28,7 +28,7 @@ CircleCI may also be configured to deploy code to various environments, includin
 
 Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
 
-Contact us at <enterprise-support@circleci.com> to request a trial license.
+Contact us at <https://support.circleci.com/> to request a trial license.
 
 ## Build Environments
 

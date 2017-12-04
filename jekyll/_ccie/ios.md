@@ -12,7 +12,7 @@ CircleCI Enterprise currently supports iOS testing via a specialized Mac Fleet. 
 
 ### Getting Access
 
-We are currently in beta release for building iOS projects with CircleCI Enterprise. If you'd like to be a beta user, please reach out to <enterprise@circleci.com>.
+We are currently in beta release for building iOS projects with CircleCI Enterprise. If you'd like to be a beta user, please reach out to us at <https://support.circleci.com/>.
 
 
 ### Overview of using a Mac Fleet
