@@ -21,7 +21,7 @@ for more help. The best way to do this is to click the question mark ("?") in th
 bottom-right corner of your CircleCI Enterprise web UI. You CircleCI administrator can
 choose where questions here are directed, so you can be sure you're going to the right place.
 If you're still not sure what to do, you can always reach out to
-[CircleCI Enterprise support](mailto:enterprise-support@circleci.com).
+[CircleCI Enterprise support](https://support.circleci.com/).
 
 <!-- TODO: update when we push circleci-precise-container_0.0.1551 -->
 <ul><li><b>Build images:</b> The default build image on CircleCI Enterprise is very similar to

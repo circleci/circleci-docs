@@ -9,7 +9,7 @@ order: 70
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
-**Note:** This feature only works with whitelisted projects. To enable this feature, you must contact your Customer Success manager (email cs@circleci.com and include a link to the project on CircleCI). 
+**Note:** This feature only works with whitelisted projects. To enable this feature, you must contact your Customer Success manager ([open a support ticket](https://support.circleci.com/) and include a link to the project on CircleCI). 
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 

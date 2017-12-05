@@ -20,4 +20,4 @@ This often happens because the native extension gems from your bundle which were
 
 In order to resolve this, you can issue a "Rebuild without cache" and that should get you building again. Note that this option only cleans the cache for that particular build, and you will have to issue this for all affected branches. Please see our documentation on how cache works, and [clearing caches](https://circleci.com/docs/1.0/how-cache-works/#clearing-cache).
 
-Please don't hesitate to give our [support team](mailto:support@circleci.com) a shout should you have any difficulties!
+Please don't hesitate to give our [support team](https://support.circleci.com/) a shout should you have any difficulties!

@@ -59,7 +59,7 @@ _Once you move to a custom image container, you will be responsible for all futu
 
 You can build a customized image with Docker using the [container image builder](https://github.com/circleci/image-builder).
 
-_If you are interested, please reach out to <enterprise-support@circleci.com> as well.  We'd love to hear your feedback and give guidance on how best to configure your build environment_
+_If you are interested, please reach out to us by opening a ticket at <https://support.circleci.com/> as well.  We'd love to hear your feedback and give guidance on how best to configure your build environment_
 
 ### Running Upstream Docker
 

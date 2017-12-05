@@ -142,7 +142,7 @@ See here for a working sample project
     
 ### LXC
 
-Complete the following steps on an LXC-based builder running a release after ( 1.47.0 +). Contact <enterprise-support@circleci.com> for upgrade assistance.
+Complete the following steps on an LXC-based builder running a release after ( 1.47.0 +). Contact us at <https://support.circleci.com/> for upgrade assistance.
 
 
 1.) Run `nvidia-smi` 

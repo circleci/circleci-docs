@@ -12,7 +12,7 @@ description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
 The following step-by-step instructions will guide you through the process of
 installing CircleCI Enterprise LXC-based installation.  Note that this is now
 considered an advanced install option. If you have any
-questions, please contact <enterprise-support@circleci.com>.
+questions, please contact us at <https://support.circleci.com/>.
 
 
 ## Prerequisites
