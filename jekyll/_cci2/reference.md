@@ -10,7 +10,7 @@ Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/configuration-reference/">Configuration</a> | Complete specification for `config.yml` syntax.
 <a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | Complete list of prebuilt CircleCI Docker images.
-<a href="{{ site.baseurl }}/2.0/v1-reference/">API</a> | CircleCI v1.1 API reference documentation.
+<a href="{{ site.baseurl }}/api/v1-reference/">API</a> | CircleCI v1.1 API reference documentation.
 <a href="{{ site.baseurl }}/2.0/glossary/">Glossary</a> | CircleCI terms and definitions.
 <a href="{{ site.baseurl }}/2.0/help-and-support/">Help and Support</a> | How to get answers to your questions from the CircleCI developer community and the CircleCI support team.
 <a href="{{ site.baseurl }}/2.0/faq/">FAQ</a> | Frequently asked questions about CircleCI 2.0.
