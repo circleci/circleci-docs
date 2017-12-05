@@ -270,8 +270,8 @@ jobs:
 ```
 {% endraw %}
 
-See [this CocoaPods guide]
-(https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)
+See [this CocoaPods
+guide](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)
 for more details on checking your pods into the repo instead of installing them
 in your config.
 
