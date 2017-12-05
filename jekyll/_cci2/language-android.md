@@ -110,3 +110,10 @@ We have a different Docker image for each [Android API level](https://source.and
 Our Android Docker images are currently tagged with the suffix `-alpha`. This is to indicate the images are currently under development and might change in backwards incompatible ways from week to week.
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+
+## React Native projects
+
+React Native projects can be built on CircleCI 2.0 using Linux, Android
+and macOS capabilities. Please check out [this example React Native
+application](https://github.com/CircleCI-Public/circleci-demo-react-native)
+on GitHub for a full example of a React Native project.

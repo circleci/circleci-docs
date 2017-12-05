@@ -580,6 +580,13 @@ workflows:
 ```
 {% endraw %}
 
+## React Native projects
+
+React Native projects can be built on CircleCI 2.0 using `macos` and
+`docker` executor types. Please check out [this example React Native
+application](https://github.com/CircleCI-Public/circleci-demo-react-native)
+on GitHub for a full example of a React Native project.
+
 ## Example Application on GitHub
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
