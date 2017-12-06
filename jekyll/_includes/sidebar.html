@@ -50,6 +50,68 @@
 					</li>
 				</ul>
 			{% endif %}
+			{% if page.collection == "cci1" %}
+						{% assign cats = site.data.categories | where:"section",section.label %}
+						{% for cat in cats %}
+							{% if cat.index %}
+								{% assign catPage = cat.index %}
+							{% else %}
+								{% assign catPage = cat.slug %}
+							{% endif %}
+							<ul>
+								<li><a href="#">{{ cat.name }}</a>
+									<ul>
+										{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
+											{% for doc in sortedDocs %}
+												{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
+													{% if doc.short-title %}
+														{% assign title = doc.short-title %}
+													{% else %}
+														{% assign title = doc.title %}
+													{% endif %}
+
+													{% if doc.children %}
+														{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
+													{% endif %}
+													<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+												{% endif %}
+											{% endfor %}
+									</ul>
+								</li>
+							</ul>
+						{% endfor %}
+				{% endif %}
+				{% if page.collection == "ccie" %}
+							{% assign cats = site.data.categories | where:"section",section.label %}
+							{% for cat in cats %}
+								{% if cat.index %}
+									{% assign catPage = cat.index %}
+								{% else %}
+									{% assign catPage = cat.slug %}
+								{% endif %}
+								<ul>
+									<li><a href="#">{{ cat.name }}</a>
+										<ul>
+											{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
+												{% for doc in sortedDocs %}
+													{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
+														{% if doc.short-title %}
+															{% assign title = doc.short-title %}
+														{% else %}
+															{% assign title = doc.title %}
+														{% endif %}
+
+														{% if doc.children %}
+															{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
+														{% endif %}
+														<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
+													{% endif %}
+												{% endfor %}
+										</ul>
+									</li>
+								</ul>
+							{% endfor %}
+					{% endif %}			
 		{% endcapture %}
 		{{ sidebar | strip_newlines }}
 		</ul>
