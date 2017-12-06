@@ -7,6 +7,8 @@ categories: [configuring-jobs]
 order: 70
 ---
 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Storing and Accessing Build Artifacts*
+
 This document describes how to work with Artifacts in the following sections:
 
 * TOC
