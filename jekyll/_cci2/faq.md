@@ -1,11 +1,13 @@
 ---
 layout: classic-docs
-title: "Migration FAQ"
-short-title: "Migration FAQ"
-description: "Frequently asked questions about CircleCI 2.0 Migration"
+title: "FAQ"
+short-title: "FAQ"
+description: "Frequently asked questions about CircleCI 2.0"
 categories: [migration]
 order: 1
 ---
+
+*[Reference]({{ site.baseurl }}/2.0/reference/) > FAQ*
 
 * Contents
 {:toc}
