@@ -7,6 +7,8 @@ categories: [optimization]
 order: 70
 ---
 
+*[Build Environments]({{ site.baseurl }}/2.0/build/) > Enabling Docker Layer Caching*
+
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
 **Note:** This feature only works with whitelisted projects. To enable this feature, you must contact your Customer Success manager ([open a support ticket](https://support.circleci.com/) and include a link to the project on CircleCI). 
