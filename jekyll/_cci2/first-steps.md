@@ -7,6 +7,8 @@ categories: [getting-started]
 order: 2
 ---
 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > [Hello World]({{ site.baseurl }}/2.0/hello-world/) > Sign Up and Try CircleCI 2.0*
+
 If you are already a CircleCI 1.0 user, go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about adding the `.circleci/config.yml` file that enables 2.0 builds. If you are building on 2.0 and want to learn about Workflows, see [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/). 
 
 ## Steps
