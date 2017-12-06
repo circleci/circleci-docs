@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Build"
+title: "Build Environments"
 description: "CircleCI 2.0 Configuration"
 ---
 
