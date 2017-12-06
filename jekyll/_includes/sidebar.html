@@ -17,55 +17,34 @@
     	<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
 			{% if page.collection == "cci2" %}
 				<ul class="left-links main-nav" style="display: block;">
-			  	<li class="nav-item active"><a href="" class="header"><h3>Users &amp; Developers</h3></a>
-			 			<div class="submenu" style="margin: 5px;">
-			{% endif %}
-						{% assign cats = site.data.categories | where:"section",section.label %}
-						{% for cat in cats %}
-							{% if cat.index %}
-								{% assign catPage = cat.index %}
-							{% else %}
-								{% assign catPage = cat.slug %}
-							{% endif %}
-							<ul>
-					      <li><a href="#">{{ cat.name }}</a>
-									<ul>
-										{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
-											{% for doc in sortedDocs %}
-												{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
-													{% if doc.short-title %}
-														{% assign title = doc.short-title %}
-													{% else %}
-														{% assign title = doc.title %}
-													{% endif %}
+			  	<li class="nav-item active"><a href="" class="header"><h3>Cloud</h3></a>
+							<div class="submenu" style="margin: 10px;">
+								<ul>
+									<li><a href="{{ site.baseurl }}/2.0/basics/">Basics</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials & Guides</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/workflows/">Workflows</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/build/">Build</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/test/">Test</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/deployment_integrations/">Deploy</a></li>
+									<li><a href="{{ site.baseurl }}/2.0/reference/">Reference</a></li>
+								</ul>
+							</div>
+						</li>
 
-													{% if doc.children %}
-														{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
-													{% endif %}
-													<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
-												{% endif %}
-											{% endfor %}
-									</ul>
-								</li>
-							</ul>
-						{% endfor %}
-			{% if page.collection == "cci2" %}
-						</div>
-					</li>
-					<li class="nav-item active"><a href="" class="header"><h3>System Administrators</h3></a>
+					<li class="nav-item active"><a href="" class="header"><h3>Server</h3></a>
 						<div class="submenu" style="margin: 10px;">
 							<ul>
-								<li><a href="{{ site.baseurl }}/2.0/overview/">Administrator's Overview</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/single-box/">CircleCI 2.0 Trial Installation</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/admin-faq/">Administration FAQ</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/upgrading/">Upgrading from CircleCI 1.0 Enterprise Installation to 2.0</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/security/">Security Features</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/aws/">Installing CircleCI 2.0 on Amazon Web Services with Terraform</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/high-availability/">Configuring High Availability</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/monitoring/">Administrative Variables, Monitoring, and Logging</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/nomad/">Introduction to Nomad Cluster Operation</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/backup/">Backing up CircleCI Data</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/open-source/">Open Source Acknowledgments</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/overview/">Overview</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/single-box/">Trial</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/admin-faq/">FAQ</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/upgrading/">Upgrade</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/security/">Security</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/aws/">Installation</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/high-availability/">High Availability</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/monitoring/">Monitoring</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/nomad/">Nomad</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/backup/">Backup</a></li>
+								<li><a href="{{ site.baseurl }}/2.0/open-source/">Acknowledgments</a></li>
 							</ul>
 						</div>
 					</li>
