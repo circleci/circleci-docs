@@ -42,6 +42,14 @@ The config validate command checks your local config.yml file for syntax errors.
 
 **Note**: Local jobs don’t cache dependencies. You may want to comment out dependency sections if you are testing YAML syntax. Or, as in this example, use the `-c` flag to specify a local `config.yml` file that doesn’t pull in large dependencies.
 
+## Validate Every Configuration Change
+
+To catch CircleCI config errors as you build your full `config.yml` file, it is possible create a git pre-commit hook to validate `~/.circleci/config.yml` that, when pushing to git, will run the 
+`circleci config validate` command that is available to every build. 
+
+See the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-jobs/) document for complete information about the `circleci` command and then check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) about creating the Git hook.
+
+
 ### Running A Build
 
 To run your build, navigate to your repo and run `circleci build`. The commands located under the `build` job are run. Only 2.0 jobs will be evaluated by the CLI because the CLI does not yet support Workflows.
