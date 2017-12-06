@@ -394,6 +394,40 @@ workflows:
 
 **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
 
+## Troubleshooting
+
+This section describes common problems and solutions for Workflows.
+
+### Workflows Not Starting
+When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
+
+Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting.  As a result, the workflow does not start any jobs.
+
+When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Jobs page) to view the configuration errors.
+
+A project's Job page URL looks like this:
+
+`https://circleci.com/:VCS/:ORG/:PROJECT`
+
+A Workflow page URL looks like this:
+
+`https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
+
+Look for Workflows that have a yellow tag and "Needs Setup" for the text.
+
+![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
+
+### Workflows Waiting for Status in GitHub
+
+If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+
+![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
+
+Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
+
+Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+
+
 ## See Also
 
 - For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document. 
