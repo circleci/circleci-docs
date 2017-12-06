@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Deployment Integrations"
-short-title: "Deployment Integrations"
+title: "Deploy"
+short-title: "Deploy"
 categories: [deploying]
 order: 10
 ---
