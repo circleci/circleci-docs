@@ -1,32 +1,20 @@
 ---
 layout: classic-docs
-title: "Sample 2.0 config.yml File"
+title: "Sample 2.0 config.yml Files"
 short-title: "Sample 2.0 config.yml File"
 description: "Sample 2.0 config.yml File"
 categories: [migration]
 order: 2
 ---
 
+*[2.0]({{ site.baseurl }}/2.0/) > Sample 2.0 config.yml Files*
+
+This document provides three sample `.circleci/config.yml` files.
+
 * TOC
 {:toc}
 
-The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
-
-The following sections provide a sample `.circleci/config.yml` with an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
-
-## Jobs Overview
-
-Jobs are a collection of Steps. All of the steps in the job are executed in a single unit which consumes a CircleCI container from your plan while it's running.
-
-In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases.
-
-When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start and replace the `machine: services:` stanza from 1.0 configuration.  Any public Docker images can be used with the `docker` executor.
-
-See the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about `docker` versus `machine` use cases and comparisons.
-
-## Steps Overview
-
-Steps are a collection of executable commands which are run during a job. The `steps:` key replaces the 1.0 `compile:`, `test:`, and `deployment:` keys. Within `steps:`, the `checkout:` key is still required and a new key for `run:` enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, new keys for `save_cache:`, `restore_cache:`,  `deploy:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps.
+The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback.
 
 ## Sample Configuration with Sequential Workflow
 
