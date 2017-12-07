@@ -7,14 +7,18 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. Schedule workflows at a specific time to make efficient use of your resources or to run jobs that should only run periodically. This document describes the Workflows feature and provides example configurations in the following sections:
+![header](  {{ site.baseurl }}/assets/img/docs/wf-header.png)
+
+To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
  
 ## Overview
 
-A workflow is a set of rules for defining a collection of jobs and their run order that shortens the feedback loop. The Workflows feature supports very complex job orchestration using a simple set of new configuration keys with a powerful user interface to help you resolve failures sooner, for example:
+A workflow is a set of rules for defining a collection of jobs and their run order that shortens the feedback loop. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. 
+
+Schedule workflows at a specific time to make efficient use of your resources or to run jobs that should only run periodically. The Workflows feature supports very complex job orchestration using a simple set of new configuration keys with a powerful user interface to help you resolve failures sooner, for example:
  
 - Run and troubleshoot jobs independently with fast status feedback as each job runs
 - Fan-out to run multiple jobs in parallel for efficient testing of versions  
