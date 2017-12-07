@@ -7,6 +7,8 @@ categories: [migration]
 order: 15
 ---
 
+*[2.0]({{ site.baseurl }}/2.0/) > Migrating from 1.0 to 2.0*
+
 This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
 If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
@@ -18,7 +20,7 @@ If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` Fi
 
 CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** Parallelism in 2.0 can only be set in `.circleci/config.yml`, the parallelism setting from the UI is ignored.
 
-If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. 
+If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. It is also possible to use the beta `config-translation` endpoint to get started with converting a 1.0 config to 2.0, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/sample-config).
 
 ## Steps to Configure Required 2.0 Keys
 
