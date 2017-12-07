@@ -7,6 +7,8 @@ categories: [troubleshooting]
 order: 20
 ---
 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Debugging Jobs Over SSH*
+
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 
 * TOC
