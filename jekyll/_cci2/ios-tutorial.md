@@ -7,6 +7,8 @@ description: Setting Up iOS applications on CircleCI 2.0
 order: 20
 ---
 
+*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > iOS Project Tutorial*
+
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
 
 * TOC
