@@ -14,7 +14,6 @@
 		<ul id="mysidebar" class="nav">
 		{% capture sidebar %}
 			<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }} Index Page</a></li>
-    	<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
 			{% if page.collection == "cci2" %}
 				<ul class="left-links main-nav" style="display: block;">
 			  	<li class="nav-item active"><a href="" class="header"><h3>Developers</h3></a>
@@ -51,6 +50,7 @@
 				</ul>
 			{% endif %}
 			{% if page.collection == "cci1" %}
+			<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
 						{% assign cats = site.data.categories | where:"section",section.label %}
 						{% for cat in cats %}
 							{% if cat.index %}
@@ -82,6 +82,7 @@
 						{% endfor %}
 				{% endif %}
 				{% if page.collection == "ccie" %}
+			<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
 							{% assign cats = site.data.categories | where:"section",section.label %}
 							{% for cat in cats %}
 								{% if cat.index %}
