@@ -11,7 +11,7 @@ Get started by learning about the basics of CircleCI.
 
 Document | Description
 ----|----------
-<a href="{{ site.baseurl }}/2.0/jobs-steps/">Workflows</a> | How to configure workflows to increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
+<a href="{{ site.baseurl }}/2.0/workflows/">Workflows</a> | How to configure workflows to increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
 <a href="{{ site.baseurl }}/2.0/jobs-steps/">Jobs and Steps</a> | How Jobs and Steps are used in a CircleCI 2.0 configuration.
 <a href="{{ site.baseurl }}/2.0/env-vars/">Using Environment Variables</a> | How to use environment variables in the CircleCI app and in the `config.yml` file.
 <a href="{{ site.baseurl }}/2.0/contexts/">Using Contexts</a> | How to use Contexts to set global environment variables.
