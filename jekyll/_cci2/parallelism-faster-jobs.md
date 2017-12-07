@@ -7,7 +7,7 @@ categories: [optimization]
 order: 60
 ---
 
-[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel
+*[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
 
 This document describes how to run tests in parallel in the following sections:
 
