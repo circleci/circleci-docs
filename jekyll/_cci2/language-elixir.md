@@ -7,9 +7,11 @@ categories: [language-guides]
 order: 2
 ---
 
-## Overview
+[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > [Demo Apps]({{ site.baseurl }}/2.0/demo-apps/) > Language Guide: Elixir
 
 This guide will help you get started with an Elixir web application using Phoenix on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+
+## Overview
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
 
