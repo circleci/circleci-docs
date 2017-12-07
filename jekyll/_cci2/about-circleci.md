@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/) > Overview*
+*[2.0]({{ site.baseurl }}/2.0/) > Overview*
 
 CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform that automates build, test, and deployment of software and is free to try using the [Sign Up](https://circleci.com/signup/) button. CircleCI 2.0 is also installable inside your private cloud or data center, see the [Administrator's Overview]({{site.baseurl}}/2.0/overview/) document for details.
 
