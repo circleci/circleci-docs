@@ -7,6 +7,8 @@ categories: [troubleshooting]
 order: 10
 ---
 
+*[Build Environments]({{ site.baseurl }}/2.0/build/) > Using the CircleCI Command Line Interface (CLI)*
+
 The following sections describe useful tools for validating and debugging your configuration:
 
 * TOC

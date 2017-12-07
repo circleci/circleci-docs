@@ -7,6 +7,8 @@ categories: [configuring-jobs]
 order: 41
 ---
 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Contexts*
+
 This document describes creating and using contexts in CircleCI in the following sections:
 
 * TOC

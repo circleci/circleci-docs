@@ -7,6 +7,8 @@ categories: [configuring-jobs]
 order: 35
 ---
 
+*[Build Environments]({{ site.baseurl }}/2.0/build/) > Configuring Databases*
+
 This document describes database configuration and defaults using PostgreSQL and Rails in the following sections:
 
 * TOC

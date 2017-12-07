@@ -7,7 +7,7 @@ order: 100
 published: true
 ---
 
-## Overview 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Enabling Web and Email Notifications* 
 
 CircleCI has integrated chat notifications, automated email notifications, and web notifications in your browser that you  control in the CircleCI Settings page for each project.
 

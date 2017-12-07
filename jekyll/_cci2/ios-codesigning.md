@@ -7,6 +7,8 @@ categories: [platforms]
 order: 40
 ---
 
+*[Test]({{ site.baseurl }}/2.0/test/) > Setting Up Code Signing for iOS Projects*
+
 This document describes the guidelines for setting up code signing
 for your iOS or Mac project on CircleCI 2.0.
 

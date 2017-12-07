@@ -7,6 +7,8 @@ categories: [platforms]
 order: 10
 ---
 
+*[2.0]({{ site.baseurl }}/2.0/) > Migrating your iOS project from 1.0 to 2.0*
+
 This document will give you the guidelines for migrating your iOS
 project from CircleCI 1.0 to 2.0.
 

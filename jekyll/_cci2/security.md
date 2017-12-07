@@ -5,6 +5,7 @@ category: [administration]
 order: 5
 description: "CircleCI security features."
 ---
+*[Reference]({{ site.baseurl }}/2.0/reference/) > Security Features*
 
 This document outlines security features built into CircleCI and related integrations.
 

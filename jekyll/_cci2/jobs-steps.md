@@ -7,12 +7,12 @@ categories: [migration]
 order: 2
 ---
 
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Jobs and Steps*
+
+New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following sections provide an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps, and new keys for Workflows.
+
 * TOC
 {:toc}
-
-New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
-
-The following sections provide an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
 
 ## Jobs Overview
 

@@ -1,13 +1,31 @@
 ---
 layout: classic-docs
-title: "CircleCI Demo Applications"
+title: "Language Support and Demo Applications With Guides"
 short-title: "Demo App Index"
 description: "A list of demo applications for several popular languages"
 categories: [language-guides]
 order: 0
 ---
 
-We’ve created several demo applications for various languages, so you can learn by example.
+*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > Language Support and Demo Applications With Guides*
+
+Code that builds on Linux or iOS will generally build on CircleCI 2.0.
+
+## Supported Languages
+- Clojure (v1.2.0 and later)
+- Elixir (v1.2 and later)
+- Go (v1.7 and later)
+- Java (Java 8 and later)
+- JavaScript (Node.js 4 and later)
+- PHP (PHP 5 and later)
+- Python (Python 2 and later)
+- Ruby and Rails (Ruby 2 and later)
+
+Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
+
+## Demo Applications and Guides
+
+We’ve created several demo applications for various languages and platforms, so you can learn by example.
 
 Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
 

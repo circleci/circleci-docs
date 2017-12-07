@@ -6,6 +6,8 @@ categories: [migration]
 Order: 60
 ---
 
+*[Reference]({{ site.baseurl }}/2.0/reference/) > GitHub and Bitbucket Integration*
+
 This document provides an overview of using GitHub or Bitbucket with CircleCI in the following sections:
 
 * TOC
