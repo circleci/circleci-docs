@@ -6,6 +6,7 @@ description: "Debugging 'Container ID XXX cannot be mapped to a host ID' error w
 categories: [troubleshooting]
 order: 21
 ---
+*[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
 The error `container id 1000000 cannot be mapped to a host id` indicates that CircleCI could not start your
 container because the userns remapping failed.
