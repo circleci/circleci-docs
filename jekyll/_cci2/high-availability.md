@@ -167,7 +167,6 @@ startup() {
   aws s3 cp s3://ha-test-bucket-3f5b105a/settings.conf /etc/settings.conf
   aws s3 cp s3://ha-test-bucket-3f5b105a/replicated.conf /etc/replicated.conf
   aws s3 cp s3://ha-test-bucket-3f5b105a/license.rli /etc/license.rli
-  aws s3 cp s3://ha-test-bucket-3f5b105a/circle-installation-customizations /etc/circle-installation-customizations
   curl https://get.replicated.com/docker | bash -s local_address=$(curl http://169.254.169.254/latest/meta-data/local-ipv4) no_proxy=1
 }
 
@@ -285,34 +284,35 @@ Vault should be setup as follows:
 
 ## Configuring Replicated
 
-To securely pass Mongodb, Postgresql and Vault connection settings to services running in Replicated, use of `/etc/circle-installation-customizations` file is required.
+To securely pass Mongodb, Postgresql and Vault connection settings to services running in Replicated, use of customization files is required.
 
-Following is the content of the `circle-installation-customizations` file neccesary for HA:
+Following are the customization files neccesary for HA:
+
+### `/etc/circle-installation-customizations`
+
 ```
 # Note that connection strings below should be modified as necessary
 
-# Mongo DB
 MONGO_BASE_URI=mongodb://circle:<password>@<hostname>:27017
-export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
-export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?ssl=on"
-export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?ssl=on"
-export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?ssl=on"
-export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI="$MONGO_BASE_URI/remote_containers_dev_ghe?ssl=on"
+export CIRCLE_SECRETS_MONGODB_MAIN_URI="$MONGO_BASE_URI/circle_ghe?ssl=true&authSource=admin"
+export CIRCLE_SECRETS_MONGODB_ACTION_LOGS_URI="$MONGO_BASE_URI/circle_ghe?ssl=true&authSource=admin"
+export CIRCLE_SECRETS_MONGODB_BUILD_STATE_URI="$MONGO_BASE_URI/build_state_dev_ghe?ssl=true&authSource=admin"
+export CIRCLE_SECRETS_MONGODB_CONTAINERS_URI="$MONGO_BASE_URI/containers_dev_ghe?ssl=true&authSource=admin"
+export CIRCLE_SECRETS_MONGODB_REMOTE_CONTAINERS_URI="$MONGO_BASE_URI/remote_containers_dev_ghe?ssl=true&authSource=admin"
+```
 
-# Postgres DB
+### `/etc/circleconfig/shared/postgresql`
+
+```
 export POSTGRES_HOST="<hostname>"
 export POSTGRES_PORT="5432"
 export POSTGRES_PASSWORD="<password>"
 export POSTGRES_USER="circle"
-export DATABASE_PASSWORD="$POSTGRES_PASSWORD"
-export DATABASE_USER="$POSTGRES_USER"
-export DATABASE_HOST="$POSTGRES_HOST"
-export POSTGRES_JDBC_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/contexts_service_production?sslmode=require"
-export DATABASE_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/conductor_production?sslmode=require"
-export CIRCLE_SECRETS_POSTGRES_DOMAIN_URI="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/circle?sslmode=require"
-export CIRCLE_SECRETS_POSTGRES_BUILD_QUEUE_URI="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:5432/circle?sslmode=require"
+```
 
-# Vault
+### `/etc/circleconfig/shared/vault`
+
+```
 export VAULT__SCHEME="https"
 export VAULT__HOST="<vault-hostname>"
 export VAULT__PORT="<vault-port>"
@@ -322,4 +322,4 @@ export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>"
 
 ## Transport Layer Security (TLS)
 
-When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificate` with file extension '.crt'.
+When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificates` with file extension `.crt`.
