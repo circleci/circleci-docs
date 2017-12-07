@@ -7,6 +7,9 @@ categories: [language-guides]
 order: 3
 ---
 
+
+[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > [Demo Apps]({{ site.baseurl }}/2.0/demo-apps/) > Language Guide: Go
+
 **CircleCI 2.0 supports building Go projects using any version of Go that can be installed in a Docker image.**
 
 ## New to CircleCI 2.0?
