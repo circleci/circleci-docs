@@ -38,6 +38,6 @@ source src1
   ...
 ```
 
-Please [contact us](https://support.circleci.com/) and let us know if you're using
+Please [contact us](https://support.circleci.com/hc/en-us) and let us know if you're using
 Sphinx this way! Your feedback helps us keep our documentation up to date, and
 our services as useable as possible.

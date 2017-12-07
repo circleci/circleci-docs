@@ -153,4 +153,4 @@ $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 
 ##### Nope, still broken
 
-Drat! Well, [contact us](https://support.circleci.com/) and we'll try to help.
+Drat! Well, [contact us](https://support.circleci.com/hc/en-us) and we'll try to help.

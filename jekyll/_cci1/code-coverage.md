@@ -170,5 +170,5 @@ reporter. You'll need to add PULLREVIEW_REPO_TOKEN to your
 
 Code coverage is an area where our support is evolving.
 We'd love to have your feedback about how we could support it better.
-[Let us know](https://support.circleci.com/)
+[Let us know](https://support.circleci.com/hc/en-us)
 how you're using it, how you'd like to use it, and what we could do better!
