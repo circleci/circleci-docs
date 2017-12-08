@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Basics: Jobs and Steps"
+title: "Jobs and Steps"
 short-title: "Jobs and Steps"
 description: "Description of Jobs and Steps"
 categories: [migration]
