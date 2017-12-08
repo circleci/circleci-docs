@@ -9,12 +9,12 @@ order: 2
 
 *[2.0]({{ site.baseurl }}/2.0/) > Sample 2.0 config.yml Files*
 
-This document provides three sample `.circleci/config.yml` files.
+This document provides three sample `.circleci/config.yml` files, as follows:
 
 * TOC
 {:toc}
 
-The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback.
+The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
 
 ## Sample Configuration with Sequential Workflow
 
