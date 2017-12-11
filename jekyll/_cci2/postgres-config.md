@@ -123,6 +123,10 @@ It is possible to apply the same principle for the following databases:
 
 `dockerize -wait tcp://localhost:6379 -timeout 1m`
 
+Redis also has a CLI available:
+
+`sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done`
+
 - Other services such as web servers:
 
 `dockerize -wait http://localhost:80 -timeout 1m`
@@ -267,16 +271,10 @@ installing the needed packages, committing, and pushing it to Docker Hub or the
 registry of your choosing.
 
 ## Optimizing Postgres Images
-The `circleci/postgres` Docker image uses regular persistent storage on disk.
-Using `tmpfs` may make tests run faster and may use fewer resources. To create
-a Dockerfile for your own project and potentially reduce the duration of tests,
-consider adding the following line to the pre-built image.
+The default `circleci/postgres` Docker image uses regular persistent storage on disk.
+Using `tmpfs` may make tests run faster and may use fewer resources. To use a variant
+leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e., 
+`circleci/postgres:9.5-alpine-ram`). 
 
-```
-Dockerfile:
-FROM circleci/postgres
-ENV PGDATA /dev/shm/pgdata/data
-```
-
-
-
+PostGIS is also available and can be combined with the previous example:
+`circleci/postgres:9.5-alpine-postgis-ram`
