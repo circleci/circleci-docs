@@ -28,7 +28,7 @@ Use this procedure to install CircleCI on a single EC2 VM by using the pre-made 
 **Note:** All builds that run on the installed machine will have access
 to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
 give any inappropriate privileges to your instance. It is possible to block
-this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com) for specific instructions.
+this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
 
 ### Configure the Amazon Machine Image:
 
@@ -99,7 +99,7 @@ You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on bu
 6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
 7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
-9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com) if you have questions.
+9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions.
 10. Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 
 11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
 

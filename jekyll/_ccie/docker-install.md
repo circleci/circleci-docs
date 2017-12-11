@@ -49,7 +49,7 @@ For test installations, it is possible to complete Step 4 after installation usi
 all builds will have access to the IAM privileges associated with their instance profiles. Do not
 give inappropriate privileges to your instances. It is possible to block
 this access with `iptables` rules in a production setup. If you have any
-questions as you go through these steps, please contact Support by opening a ticket: <https://support.circleci.com/>.
+questions as you go through these steps, please contact Support by opening a ticket: <https://support.circleci.com/hc/en-us>.
 
 ## Installation Steps
 
@@ -119,4 +119,4 @@ Check the Fleet State by clicking the wrench icon on the sidebar navigation of C
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI Enterprise support](https://support.circleci.com/) for assistance.
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI Enterprise support](https://support.circleci.com/hc/en-us) for assistance.

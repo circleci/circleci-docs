@@ -58,7 +58,7 @@ If you are not seeing a project you would like to build and it is not currently 
 
 ## I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 
-There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/) to have it increased. 
+There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
 
 ## How do I migrate from Jenkins to CircleCI 2.0?
 

@@ -56,4 +56,4 @@ curl -k -X POST "https://<builder ip>/api/v1/admin/system/shutdown?circle-token=
 
 #### Is it possible to run iOS/macOS builds on CircleCI Enterprise?
 
-We currently provide limited, early access for iOS builds on CircleCI Enterprise that run on our own cloud of macOS machines. Contact us at <https://support.circleci.com/> to make a request for this fleet.
+We currently provide limited, early access for iOS builds on CircleCI Enterprise that run on our own cloud of macOS machines. Contact us at <https://support.circleci.com/hc/en-us> to make a request for this fleet.

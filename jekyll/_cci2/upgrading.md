@@ -80,5 +80,5 @@ Complete the following steps to cut over to the new installation:
 
 ## Troubleshooting
 
-If you run into any issues with the upgrade process contact [CircleCI support](https://support.circleci.com/) for assistance. 
+If you run into any issues with the upgrade process contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance. 
 

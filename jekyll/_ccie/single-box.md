@@ -20,7 +20,7 @@ The following requirements must be met for successful trial installation:
 - [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI Enterprise and GitHub must be able to reach each other on the network.
-- CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/) or see the [Setting up HTTP Proxies]({{site.baseurl}}/enterprise/proxy/) document for instructions.
+- CircleCI Enterprise machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us) or see the [Setting up HTTP Proxies]({{site.baseurl}}/enterprise/proxy/) document for instructions.
 
 ## Steps for Installation on AWS EC2 
 
@@ -29,7 +29,7 @@ Use this procedure to install CircleCI Enterprise on a single EC2 VM by using th
 **Note:** All builds that run on the installed machine will have access
 to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
 give any inappropriate privileges to your instance. It is possible to block
-this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/)
+this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us)
 for specific instructions.
 
 <ol>

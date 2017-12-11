@@ -72,5 +72,5 @@ in your `circle.yml` file.
 We can deploy to Nodejitsu and other PaaSes as well as to
 physical servers under your control.
 
-If you have any trouble, please [contact us](https://support.circleci.com/)
+If you have any trouble, please [contact us](https://support.circleci.com/hc/en-us)
 and we will be happy to help.
