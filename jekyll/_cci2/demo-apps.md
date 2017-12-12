@@ -7,7 +7,7 @@ categories: [language-guides]
 order: 0
 ---
 
-*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > Language Support and Demo Applications With Guides*
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Demo Applications*
 
 Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve created several demo applications for various languages and platforms, so you can learn by example. Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
 
