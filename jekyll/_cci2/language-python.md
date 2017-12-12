@@ -7,11 +7,11 @@ categories: [language-guides]
 order: 7
 ---
 
-## New to CircleCI 2.0?
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Python*
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
-## Quickstart: demo Python Django reference project
+## Quickstart: Demo Python Django reference project
 
 We maintain a reference Python Django project to show how to build Django on CircleCI 2.0:
 
@@ -20,7 +20,7 @@ We maintain a reference Python Django project to show how to build Django on Cir
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 
-## Alternative: Python Flask demo reference project
+## Alternative: Python Flask Demo Reference Project
 
 The [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) uses a Flask application: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
 
@@ -30,7 +30,7 @@ We recommend using a CircleCI pre-built image that comes pre-installed with tool
 
 Database images for use as a secondary 'service' container are also available.
 
-## Build the demo Django project yourself
+## Build the Demo Django Project Yourself
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
