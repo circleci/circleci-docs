@@ -7,7 +7,7 @@ categories: [language-guides]
 order: 9
 ---
 
-*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > [Demo Apps]({{ site.baseurl }}/2.0/demo-apps/) > Language Guide: Android*
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Android*
 
 This guide will help you get started with an Android application on CircleCI.
 
