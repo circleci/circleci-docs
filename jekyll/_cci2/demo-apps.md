@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Language Support and Demo Applications With Guides"
+title: "2.0 Demo Applications"
 short-title: "Demo App Index"
 description: "A list of demo applications for several popular languages"
 categories: [language-guides]
@@ -10,18 +10,6 @@ order: 0
 *[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > Language Support and Demo Applications With Guides*
 
 Code that builds on Linux or iOS will generally build on CircleCI 2.0.
-
-## Supported Languages
-- Clojure (v1.2.0 and later)
-- Elixir (v1.2 and later)
-- Go (v1.7 and later)
-- Java (Java 8 and later)
-- JavaScript (Node.js 4 and later)
-- PHP (PHP 5 and later)
-- Python (Python 2 and later)
-- Ruby and Rails (Ruby 2 and later)
-
-Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
 
 ## Demo Applications and Guides
 
@@ -41,9 +29,23 @@ Language Guide | Framework | GitHub Repo Name
 [PHP] | Laravel | [circleci-demo-php-laravel]
 [Python] | Django | [circleci-demo-python-django]
 [Python] | Flask | [circleci-demo-python-flask]
-React Native | React Native | [circleci-demo-react-native]
+[React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
 [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table"}
+
+## Supported Languages
+- Clojure (v1.2.0 and later)
+- Elixir (v1.2 and later)
+- Go (v1.7 and later)
+- Java (Java 8 and later)
+- JavaScript (Node.js 4 and later)
+- PHP (PHP 5 and later)
+- Python (Python 2 and later)
+- React Native
+- Ruby and Rails (Ruby 2 and later)
+
+Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
+
 
 [Android]: {{ site.baseurl }}/2.0/language-android/
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
