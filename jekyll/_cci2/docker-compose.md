@@ -15,9 +15,9 @@ To use `docker-compose` with the `docker` key, install it in your [primary conta
 - run:
     name: Install Docker Compose
     command: |
-      set -x
-      curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-      chmod +x /usr/local/bin/docker-compose
+      curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+      chmod +x ~/docker-compose
+      sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
 
 Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
