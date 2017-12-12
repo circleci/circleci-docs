@@ -7,7 +7,7 @@ categories: [migration]
 order: 3
 ---
 
-*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Project Tutorial*
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Project Tutorial*
 
 The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database. The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
 
