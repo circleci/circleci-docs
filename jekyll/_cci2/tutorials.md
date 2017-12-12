@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Tutorials & Guides"
-description: "Tutorials and Guides"
+title: "Tutorials & 2.0 Sample Apps"
+description: "Tutorials and 2.0 Sample Apps with Guides"
 ---
 
 
