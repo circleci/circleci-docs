@@ -15,17 +15,21 @@ Platform Guide | Description
 {: class="table table-striped"}
 
 Language Guide | Framework | GitHub Repo Name
----------|-----------|-----------------
-[Clojure] | Luminus | [circleci-demo-clojure-luminus]
-[Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
-[Go] | Go | [circleci-demo-go]
-[Java] | Spring | [circleci-demo-java-spring]
-[JavaScript] | React | [circleci-demo-javascript-express]
-[PHP] | Laravel | [circleci-demo-php-laravel]
-[Python] | Django | [circleci-demo-python-django]
-[Python] | Flask | [circleci-demo-python-flask]
-[React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
-[Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
+ ---------|-----------|-----------------
+ [Android] | React Native | [circleci-demo-react-native]
+ [Clojure] | Luminus | [circleci-demo-clojure-luminus]
+ [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
+ [Go] | Go | [circleci-demo-go]
+ [iOS] | Xcode | [circleci-demo-ios]
+ [iOS] | React Native | [circleci-demo-react-native]
+ [Java] | Spring | [circleci-demo-java-spring]
+ [JavaScript] | React | [circleci-demo-javascript-express]
+ [JavaScript] | React Native | [circleci-demo-react-native]
+ [PHP] | Laravel | [circleci-demo-php-laravel]
+ [Python] | Django | [circleci-demo-python-django]
+ [Python] | Flask | [circleci-demo-python-flask]
+ [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
+ [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table table-striped"}
 
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
