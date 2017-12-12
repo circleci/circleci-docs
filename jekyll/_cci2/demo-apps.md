@@ -9,28 +9,24 @@ order: 0
 
 *[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > Language Support and Demo Applications With Guides*
 
-Code that builds on Linux or iOS will generally build on CircleCI 2.0.
-
-## Demo Applications and Guides
-
-We’ve created several demo applications for various languages and platforms, so you can learn by example.
-
-Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
+Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve created several demo applications for various languages and platforms, so you can learn by example. Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
 
 Language Guide | Framework | GitHub Repo Name
----------|-----------|-----------------
-[Android] ||
-[Clojure] | Luminus | [circleci-demo-clojure-luminus]
-[Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
-[Go] | Go | [circleci-demo-go]
-[iOS] | Xcode | [circleci-demo-ios]
-[Java] | Spring | [circleci-demo-java-spring]
-[JavaScript] | React | [circleci-demo-javascript-express]
-[PHP] | Laravel | [circleci-demo-php-laravel]
-[Python] | Django | [circleci-demo-python-django]
-[Python] | Flask | [circleci-demo-python-flask]
-[React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
-[Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
+ ---------|-----------|-----------------
+ [Android] | React Native | [circleci-demo-react-native]
+ [Clojure] | Luminus | [circleci-demo-clojure-luminus]
+ [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
+ [Go] | Go | [circleci-demo-go]
+ [iOS] | Xcode | [circleci-demo-ios]
+ [iOS] | React Native | [circleci-demo-react-native]
+ [Java] | Spring | [circleci-demo-java-spring]
+ [JavaScript] | React | [circleci-demo-javascript-express]
+ [JavaScript] | React Native | [circleci-demo-react-native]
+ [PHP] | Laravel | [circleci-demo-php-laravel]
+ [Python] | Django | [circleci-demo-python-django]
+ [Python] | Flask | [circleci-demo-python-flask]
+ [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
+ [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table"}
 
 ## Supported Languages
