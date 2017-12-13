@@ -28,7 +28,7 @@ Language Guide | Framework | GitHub Repo Name
  [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [PHP] | Laravel | [circleci-demo-php-laravel]
  [Python] | Django | [circleci-demo-python-django]
- [Python] | Flask | [circleci-demo-python-flask]
+ [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table table-striped"}
