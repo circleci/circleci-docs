@@ -14,18 +14,18 @@ Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve c
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
  [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
- [Android] | React Native | [circleci-demo-react-native]
+ [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
  [iOS] | Xcode | [circleci-demo-ios]
- [iOS] | React Native | [circleci-demo-react-native]
+ [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Java] | Spring | [circleci-demo-java-spring]
  [JavaScript] | React | [circleci-demo-javascript-express]
- [JavaScript] | React Native | [circleci-demo-react-native]
+ [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [PHP] | Laravel | [circleci-demo-php-laravel]
  [Python] | Django | [circleci-demo-python-django]
- [Python] | Flask | [circleci-demo-python-flask]
+ [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table"}
