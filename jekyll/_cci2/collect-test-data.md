@@ -58,6 +58,7 @@ This section provides the following test runner examples:
 * [Ava]( {{ site.baseurl }}/2.0/collect-test-data/#ava)
 * [ESLint]( {{ site.baseurl }}/2.0/collect-test-data/#eslint)
 * [PHPUnit]( {{ site.baseurl }}/2.0/collect-test-data/#phpunit)
+* [pytest]( {{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
@@ -222,6 +223,26 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
       - store_artifacts:
           path: ~/phpunit          
 ```
+
+#### <a name="pytest"></a>pytest
+
+To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
+
+```
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            mkdir -p test-reports/junit
+            pytest --junitxml=test-reports/junit
+            
+      - store_test_results:
+          path: test-reports
+          
+      - store_artifacts:
+          path: test-reports    
+```
+
 
 #### <a name="rspec"></a>RSpec
 
