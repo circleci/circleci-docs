@@ -14,7 +14,7 @@ Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve c
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
  [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
- [Android] | React Native | [circleci-demo-react-native]
+ [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
