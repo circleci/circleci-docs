@@ -8,6 +8,8 @@ hide: true
 order: 60
 ---
 
+*[2.0]({{ site.baseurl }}/2.0/) > Using the 1.0 to 2.0 config-translation Endpoint*
+
 This document provides instructions for using the `config-translation` endpoint to generate a basic working CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages:
 * Ruby
 * PHP
