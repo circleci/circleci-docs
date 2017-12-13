@@ -16,12 +16,13 @@ Platform Guide | Description
 
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
+ [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
  [Android] | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
  [iOS] | Xcode | [circleci-demo-ios]
- [iOS] | React Native | [circleci-demo-react-native]
+ [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Java] | Spring | [circleci-demo-java-spring]
  [JavaScript] | React | [circleci-demo-javascript-express]
  [JavaScript] | React Native | [circleci-demo-react-native]
