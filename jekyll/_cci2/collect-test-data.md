@@ -58,7 +58,7 @@ This section provides the following test runner examples:
 * [Ava]( {{ site.baseurl }}/2.0/collect-test-data/#ava)
 * [ESLint]( {{ site.baseurl }}/2.0/collect-test-data/#eslint)
 * [PHPUnit]( {{ site.baseurl }}/2.0/collect-test-data/#phpunit)
-* [pytest]( {{ site.baseurl }}/2/0/collect-test-data/#pytest)
+* [pytest]( {{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
