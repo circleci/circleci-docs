@@ -7,11 +7,11 @@ categories: [language-guides]
 order: 6
 ---
 
-## New to CircleCI 2.0?
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: PHP*
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
-## Quickstart: demo PHP Laravel reference project
+## Quickstart: Demo PHP Laravel reference project
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 

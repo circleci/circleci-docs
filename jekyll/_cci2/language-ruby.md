@@ -7,9 +7,13 @@ categories: [language-guides]
 order: 8
 ---
 
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Ruby*
+
+This guide will help you get started with a Ruby on Rails application on CircleCI. 
+
 ## Overview
 
-This guide will help you get started with a Ruby on Rails application on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
 

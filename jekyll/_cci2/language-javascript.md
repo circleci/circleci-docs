@@ -7,7 +7,7 @@ categories: [language-guides]
 order: 5
 ---
 
-## New to CircleCI 2.0?
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: JavaScript*
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 

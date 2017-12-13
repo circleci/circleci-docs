@@ -8,7 +8,7 @@ order: 3
 ---
 
 
-*[Tutorials & Guides]({{ site.baseurl }}/2.0/tutorials/) > [Demo Apps]({{ site.baseurl }}/2.0/demo-apps/) > Language Guide: Go*
+*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Go*
 
 **CircleCI 2.0 supports building Go projects using any version of Go that can be installed in a Docker image.**
 
