@@ -14,6 +14,7 @@ This document provides instructions for System Administrators upgrading an exist
 **Notes:** 
 - CircleCI 2.0 is only installable on AWS at this time. 
 - There is not currently an in-place upgrade mechanism. The upgrade process will require you to set up a new installation of CircleCI and import the existing data. This will require a downtime window.
+- You must be running CircleCI v1.48.5 (the latest version of CircleCI 1.0) in order to upgrade
  
 ## Perform Installation of CircleCI 2.0
 
