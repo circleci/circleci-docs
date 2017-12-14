@@ -15,7 +15,7 @@ order: 70
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
-## Docker layer Caching in Remote Docker
+## Docker Layer Caching in Remote Docker
 Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
 
 ``` YAML
@@ -29,7 +29,7 @@ If you run many parallel jobs for the same project that depend on the same envir
 
 **Note:** The `docker_layer_caching` option is not yet supported in an installable CircleCI release, but this functionality is available by using the `reusable: true` option. Previously the `docker_layer_caching` was called `reusable`. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive` option is deprecated in favor of all VMs being treated as exclusive. This indicates that jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access when using `docker_layer_caching`.
 
-## Docker layer Caching in Machine Executor
+## Docker Layer Caching in Machine Executor
 
 Docker Layer Caching is also available for `machine` executor, and it works in exactly the same way as described above. Enable Docker Layer Caching with the `machine` executor by using the example below.
 
