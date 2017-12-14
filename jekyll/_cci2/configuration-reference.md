@@ -260,19 +260,23 @@ ignore | N | List | List of branches to ignore
 Both `only` and `ignore` lists can have full names and regular expressions. For example:
 
 ``` YAML
-branches:
-  only:
-    - master
-    - /rc-.*/
+jobs:
+  build:
+    branches:
+      only:
+        - master
+        - /rc-.*/
 ```
 
 In this case only "master" branch and branches matching regex "rc-.*" will be executed.
 
 ``` YAML
-branches:
-  ignore:
-    - develop
-    - /feature-.*/
+jobs:
+  build:
+    branches:
+      ignore:
+        - develop
+        - /feature-.*/
 ```
 
 In this example all the branches will be executed except "develop" and branches matching regex "feature-.*".
