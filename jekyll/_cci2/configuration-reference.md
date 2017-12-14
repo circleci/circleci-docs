@@ -519,6 +519,19 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule sync
 - run: git submodule update --init
 ```
+<a name="setup_remote_docker"/>
+##### **`setup_remote_docker`**
+
+Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+{: class="table table-striped"}
+
+***Notes***:
+- *Docker Layer Caching only works with whitelisted projects. To enable this feature, contact your Customer Success Manager ([open a support ticket](https://support.circleci.com/hc/en-us) and include a link to the project on CircleCI).*
+- *`setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#docker-layer-caching-in-machine-executor) for information on how to enable DLC with the `machine` executor.*
 
 <a name="save_cache"/>
 ##### **`save_cache`**
