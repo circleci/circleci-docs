@@ -39,6 +39,30 @@ The dependencies that are most important to cache during a job are the libraries
 
 Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client, and gzip preinstalled.  
 
+## Source Caching
+
+As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git repository, thus saving time in your `checkout` step—especially for larger projects. Here is an example of source caching:
+
+{% raw %}
+```YAML
+    steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
+            
+      - checkout
+      
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
+```
+{% endraw %}
+
+In this example, `restore_cache` looks for a cache-hit from the current git revision, then for a hit from the current branch, then, most broadly, for any cache-hit at all, regardless of branch or revision. If your source code changes frequently, or changes significantly across branches, you may want to remove the third `restore_cache` key, or even both the second *and* third keys, resulting in a more granular source cache that only looks for matches within the current branch and git revision.
+
 ## Writing to the Cache in Workflows
 
 Jobs in one workflow can share caches.  Note that this makes it possibile to create race conditions in caching across different jobs in workflows.
