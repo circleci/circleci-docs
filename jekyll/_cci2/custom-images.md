@@ -66,7 +66,7 @@ There are a few tools a custom image needs to have in order to be used as a prim
  * gzip
  * ca-certificates
 
-Ensure that these tools are present in your custom image. You might not need to install all of them, if the base image you choose has some of them pre-installed.
+Ensure that these tools are present in your custom image. You might not need to install all of them, if the base image you choose has some of them pre-installed. Without these tools, some CircleCI services (Artifacts, storing test results, etc.) may not work.
 
 To add custom files or tools not present in package managers, use the `ADD` command:
 
