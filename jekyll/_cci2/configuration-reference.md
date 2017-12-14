@@ -909,6 +909,7 @@ filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
 ###### **`branches`**
+{:.no_toc}
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
 
 - Any branches that match `only` will run the job.
@@ -924,6 +925,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 ###### **`tags`**
+{:.no_toc}
 CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
 1. For a branch push unaffected by any filters, CircleCI runs the job.
