@@ -83,7 +83,7 @@ repository and copy it to `/etc/apache2/sites-available/` during
 your build.
 Then enable the site with `a2ensite` and restart Apache.
 
-An example configuration that sets up Apache to serve the PHP site from
+An example configuration that uses PHP5 and sets up Apache to serve the PHP site from
 `/home/ubuntu/MY-PROJECT/server-root` is:
 
 ```
@@ -105,6 +105,8 @@ Listen 8080
 Replace `MY-SITE` in with the name of your site configuration
 file and `PHP_VERSION` with the version of PHP you configured
 in your `circle.yml`.
+
+Note: This is not supported for PHP7.
 
 Then enable your site and restart Apache by adding the following to your `circle.yml`
 

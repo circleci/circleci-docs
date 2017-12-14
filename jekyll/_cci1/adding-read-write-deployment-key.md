@@ -14,5 +14,7 @@ Suppose your GitHub repository is `https://github.com/you/test-repo` and the pro
 - Go to `https://github.com/you/test-repo/settings/keys` on GitHub and click **Add deploy key**. Enter any title in the **Title** field, then copy and paste the public key you just created. Make sure to check **Allow write access**, then click **Add key**.
 - Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
 
+* Note: You may need to add the hostname to your .ssh/config.
+
 That's it! Now, when you push to your GitHub repository from builds, the read/write key that you added will be used.
 
