@@ -75,7 +75,7 @@ If you already have a `circle.yml` file, the following sections describe how to 
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
      
-7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the section in [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
+7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
 
