@@ -79,7 +79,7 @@ jobs:
 
 * `circleci/classic:latest` is the default image. Changes to this will be announced at least one week before they go live.
 * `circleci/classic:edge` receives the latest updates and will be upgraded at short notice.
-* `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#machine) for versions.
+* `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#machine) for versions.
 
 The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
 
