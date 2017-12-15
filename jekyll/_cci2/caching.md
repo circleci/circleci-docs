@@ -63,7 +63,7 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
 
 In this example, `restore_cache` looks for a cache-hit from the current git revision, then for a hit from the current branch, then, most broadly, for any cache-hit at all, regardless of branch or revision. If your source code changes frequently, or changes significantly across branches, you may want to remove the third `restore_cache` key, or even both the second *and* third keys, resulting in a more granular source cache that only looks for matches within the current branch and git revision.
 
-Even with the narrowest `restore_cache` option (`source-v1-{{ .Branch }}-{{ .Revision }}`), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
+Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
 
 That said, it's worth comparing build times with and without source-caching; due to the way GitHub is optimized versus CircleCI's own general-purpose caching, `git clone` may be faster than `restore_cache` in many or even most cases.
 
