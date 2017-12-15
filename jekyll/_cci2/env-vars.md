@@ -76,7 +76,7 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-See the [Writing Jobs with Steps](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
+See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
 
 ### Adding Environment Variables to a step:
 
