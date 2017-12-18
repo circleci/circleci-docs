@@ -245,6 +245,7 @@ steps:
       paths:
         - ~/.cache/yarn
 ```
+{% endraw %}
 
 Now we can setup our test database we'll use during the build.
 
