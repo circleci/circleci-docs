@@ -48,6 +48,9 @@ jobs:
     docker:
       - image: circleci/ruby:2.4-node
         environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: circleci-demo-ruby
           RAILS_ENV: test
@@ -59,37 +62,42 @@ jobs:
     steps:
       - checkout
 
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
       # Restore bundle cache
-      - type: cache-restore
-        name: Restore bundle cache
-        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          keys:
+            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - rails-demo-bundle-v2-
 
       - run:
           name: Bundle Install
-          command: bundle install --path vendor/bundle
+          command: bundle check || bundle install
 
       # Store bundle cache
-      - type: cache-save
-        name: Store bundle cache
-        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      - save_cache:
+          key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       # Only necessary if app uses webpacker or yarn in some other way
-      - type: cache-restore
-        name: Restore yarn cache
-        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          keys:
+            - rails-demo-yarn-{{ checksum "yarn.lock" }}
+            - rails-demo-yarn-
 
       - run:
           name: Yarn Install
-          command: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
 
       # Store yarn / webpacker cache
-      - type: cache-save
-        name: Store yarn cache
-        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-        paths:
-          - ~/.yarn-cache
+      - save_cache:
+          key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
 
       - run:
           name: Wait for DB
@@ -159,6 +167,9 @@ version: 2
     docker:
       - image: circleci/ruby:2.4-node
         environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: circleci-demo-ruby
           RAILS_ENV: test
@@ -173,7 +184,7 @@ We use the [official Ruby images](https://hub.docker.com/_/ruby/) tagged to use 
 
 We've also specified the [official Postgres image](https://hub.docker.com/_/postgres/) for use as our database container.
 
-As well, we've added several environment variables for connecting our application container with the database for our testing purposes.
+As well, we've added several environment variables for connecting our application container with the database for our testing purposes. The `BUNDLE_*` environment variables are there to ensure proper caching and improve performance and reliability for installing dependencies with Bundler.
 
 Now let's add several `steps` within the `build` job.
 
@@ -194,20 +205,20 @@ steps:
   # ...
 
   # Restore bundle cache
-  - type: cache-restore
-    name: Restore bundle cache
-    key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+  - restore_cache:
+      keys:
+        - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+        - rails-demo-bundle-v2-
 
   - run:
       name: Bundle Install
       command: bundle install --path vendor/bundle
 
   # Store bundle cache
-  - type: cache-save
-    name: Store bundle cache
-    key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
-    paths:
-      - vendor/bundle
+  - save_cache:
+      key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
 ```
 {% endraw %}
 
@@ -219,20 +230,20 @@ steps:
   # ...
 
   # Only necessary if app uses webpacker or yarn in some other way
-  - type: cache-restore
-    name: Restore yarn cache
-    key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+  - restore_cache:
+      keys:
+        - rails-demo-yarn-{{ checksum "yarn.lock" }}
+        - rails-demo-yarn-
 
   - run:
       name: Yarn Install
-      command: yarn install
+      command: yarn install --cache-folder ~/.cache/yarn
 
   # Store yarn / webpacker cache
-  - type: cache-save
-    name: Store yarn cache
-    key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.yarn-cache
+  - save_cache:
+      key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+      paths:
+        - ~/.cache/yarn
 ```
 
 Now we can setup our test database we'll use during the build.
