@@ -33,6 +33,14 @@ Language Guide | Framework | GitHub Repo Name
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table table-striped"}
 
+Workflow Example | GitHub Repo
+------|-----------
+Parallel | [parallel-jobs](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)
+Sequential | [sequential-branch-filter](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)
+Fan-in / Fan-out | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)
+Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)
+{: class="table table-striped"}
+
 [Android]: {{ site.baseurl }}/2.0/language-android/
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
