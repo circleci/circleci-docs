@@ -233,13 +233,13 @@ steps:
 
   - run:
       name: Yarn Install
-      command: yarn install
+      command: yarn install --cache-folder ~/.cache/yarn
 
   # Store yarn / webpacker cache
   - save_cache:
       key: rails-demo-yarn-{{ checksum "yarn.lock" }}
       paths:
-        - ~/.yarn-cache
+        - ~/.cache/yarn
 ```
 
 Now we can setup our test database we'll use during the build.
