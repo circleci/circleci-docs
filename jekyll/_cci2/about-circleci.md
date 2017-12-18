@@ -25,7 +25,7 @@ Every commit triggers an automated build and test.
 If build and test fails, it’s repaired quickly - within minutes.  
 
 **Why?**    
-Improve team productivity, efficiency, happiness.
+Improve team productivity, efficiency, and happiness.
 Find problems and solve them, quickly.
 Release higher quality, more stable products.
 
@@ -52,11 +52,11 @@ Set up in minutes out of the box, or fully customize to suit your needs.*
   * Go to the **Repositories** tab and then select **New**
   * Alternatively you can navigate directly to <https://github.com/new>
 
-![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+![New GitHub Repo Banner]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 * Select Initialize this repository with a README and click the Create repository button.
 
-![]( {{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
+![Initialize with README checkbox]( {{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
 ### Adding a .yml File
 
@@ -92,13 +92,13 @@ Next, you will be given the option of "following" any projects you have access t
 
 To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, find the repository you just created below, and click the "Setup project" button next to it.
 
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+![Add Project List]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
 On the next screen, you're given some options for configuring your project on CircleCI. Leave everything as-is for now and just click the "Start building" button a bit down the page on the right.
 
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+![Setup Project Page]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
+![Start Building Button]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
 
 ### Running Your First CircleCI Build!
 
@@ -119,7 +119,7 @@ Edit your `config.yml` file (you can just do this in the GitHub editor for simpl
 
 ### Using the Workflows Functionality
 
-To see workflow in action we can edit our `.circle/config.yml` file. Once you have the file in edit mode in your browser window, select the text from `build` and onwards in you file and copy and paste the text to duplicate that section.
+To see workflow in action you can edit your `.circle/config.yml` file. After you have the file in edit mode in your browser window, select the text from `build` and onwards in your file and copy and paste the text to duplicate that section.
 
 That should look similar to the code block below:
 
@@ -140,9 +140,9 @@ jobs:
       - run: echo "A first hello"      
 ```
 
-Next we need to rename our two builds so that they have different names. In my example below I imaginatively picked `one` and `two`. Change the contents of the echo statements to something different. To make the build take a longer period of time we can add a system sleep command.
+Next we need to rename our two builds so that they have different names. In the example below the names are `one` and `two`. Change the contents of the echo statements to something different. To make the build take a longer period of time we can add a system sleep command.
 
-We need to add a `workflows` section to our config file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
+Next, you need to add a `workflows` section to our config file. The workflows section can be placed anywhere in the file. Typically it is at the bottom of the file.
 
 
 ```yml
@@ -172,11 +172,11 @@ workflows:
 
 Commit these changes to your repository and navigate back over to the CircleCI dashboard.
 
-![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
+![Running Workflows]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
 And drilling a little deeper into our workflow...
 
-![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
+![More detaileds of Workflow]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
 You can read more about workflows here: <https://circleci.com/docs/2.0/workflows/#overview>.
 
@@ -231,16 +231,16 @@ You can read more about workspaces here: <https://circleci.com/docs/2.0/workflow
 
 ### SSH-ing into Your Build
 
-![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
+![Image of Terminal Icon]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
 For those who are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your build with the SSH enabled option.
 
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
 
-![]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+![Image of Rebuild with SSH menu item]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
-![]( {{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
+![SSH build terminal string]( {{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
 
 Copy the `ssh` string from the enabling SSH section of your build. Open a terminal and paste in the `ssh` string.
 
