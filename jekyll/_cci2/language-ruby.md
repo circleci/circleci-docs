@@ -87,13 +87,13 @@ jobs:
 
       - run:
           name: Yarn Install
-          command: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
 
       # Store yarn / webpacker cache
       - save_cache:
           key: rails-demo-yarn-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.yarn-cache
+            - ~/.cache/yarn
 
       - run:
           name: Wait for DB
