@@ -23,7 +23,7 @@ jobs:
   build:
     working_directory: ~/cci-demo-phoenix
     docker:
-      - image: elixir:1.5.1
+      - image: elixir:1.5.2
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
@@ -70,13 +70,13 @@ Directly beneath `working_directory`, we can specify container images for the bu
 version: 2
 ...
     docker:
-      - image: elixir:1.5.1
+      - image: elixir:1.5.2
       - image: postgres:9.4.1
         environment:
           POSTGRES_USER: ubuntu
 ```
 
-We use 2 Docker images here: `elixir:1.5.1` as the primary build image and `postgres:9.4.1` as the database image.
+We use 2 Docker images here: `elixir:1.5.2` as the primary build image and `postgres:9.4.1` as the database image.
 
 Now we’ll add several `steps` within the `build` job.
 
