@@ -45,7 +45,7 @@ Set up in minutes out of the box, or fully customize to suit your needs.*
 
 * Some basic knowledge of git and an existing GitHub.com account or ability to create one.
 * Some basic terminal or `bash` know-how is helpful. Prior experience using the command line comes in handy.
-* It is necessary to have your GitHub.com SSH Keys setup for the SSH-ing into your build section. The information you need for that is [here]<https://help.github.com/articles/connecting-to-github-with-ssh/>.
+* It is necessary to have your GitHub.com SSH Keys setup for the SSH-ing into your build section. The information you need for that is in the [GitHub Help](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
 ### Creating a Repository
 * Navigate to your account on GitHub.com
@@ -60,7 +60,7 @@ Set up in minutes out of the box, or fully customize to suit your needs.*
 
 ### Adding a .yml File
 
-CircleCI uses a YAML,  <https://en.wikipedia.org/wiki/YAML>, file to identify how you want your testing environment setup and what tests you want to run.
+CircleCI uses a [YAML](https://en.wikipedia.org/wiki/YAML), file to identify how you want your testing environment setup and what tests you want to run.
 On CircleCI 2.0, this file must be called `config.yml` and must be in a hidden folder called `.circleci` (on Mac, Linux, and Windows systems, files and folders whose names start with a period are treated as system files that are hidden from users by default).
 
  * To create the file and folder on GitHub, click the **"Create new file"** button the repo page and type `.circleci/config.yml`.
@@ -84,9 +84,9 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 ### Setting up Your Build on CircleCI
 
-For this step, you will need a CircleCI account. Visit <https://circleci.com/signup> and click "Start with GitHub". You will need to give CircleCI access to your GitHub account in order to run your builds.
+For this step, you will need a CircleCI account. Visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account in order to run your builds.
 
-If you already have a CircleCI account then you can navigate to your dashboard: <https://circleci.com/dashboard>
+If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard).
 
 Next, you will be given the option of "following" any projects you have access to that are already building on CircleCI (this would typically apply to developers connected to a company or organization's GitHub/Bitbucket account). On the next screen, you'll be able to add the repo you just created as a new project on Circle.
 
@@ -108,9 +108,9 @@ You should see your build start to run automatically—and pass! So, what just h
 
 2. **Checkout code:** CircleCI checked out your GitHub repository and "cloned" it into the virtual environment launched in step 1.
 
-3. **echo:** this was the only other instruction in your `config.yml` file: CircleCI ran the echo command with the input "A first hello" (echo,  <https://linux.die.net/man/1/echo>, does exactly what you'd think it would do).
+3. **echo:** this was the only other instruction in your `config.yml` file: CircleCI ran the echo command with the input "A first hello" ([echo](https://linux.die.net/man/1/echo), does exactly what you'd think it would do).
 
-Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an exit code, <https://en.wikipedia.org/wiki/Exit_status>, of 0. Most customers' projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests—here's an example. You can learn more about all the possible steps one might put in a `config.yml` file <https://circleci.com/docs/2.0/configuration-reference>.
+Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status), of 0. Most customers' projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests—here's an example. You can learn more about all the possible steps one might put in a `config.yml` file in the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 ### Breaking Your Build!
 
@@ -178,7 +178,7 @@ And drilling a little deeper into our workflow...
 
 ![More detaileds of Workflow]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
-You can read more about workflows here: <https://circleci.com/docs/2.0/workflows/#overview>.
+You can read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
 ### Adding Some Changes to use the Workspaces Functionality
 
@@ -227,7 +227,7 @@ workflows:
             - one
 ```
 
-You can read more about workspaces here: <https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs>.
+You can read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ### SSH-ing into Your Build
 
@@ -235,8 +235,8 @@ You can read more about workspaces here: <https://circleci.com/docs/2.0/workflow
 
 For those who are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your build with the SSH enabled option.
 
-*Note that you will need to add your SSH keys to your GitHub account:
-<https://help.github.com/articles/connecting-to-github-with-ssh/>*.
+*Note that you will need to add your SSH keys to your GitHub account, see the 
+[GitHub Help](https://help.github.com/articles/connecting-to-github-with-ssh/)*.
 
 ![Image of Rebuild with SSH menu item]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
@@ -255,8 +255,7 @@ cat <file_name>    # show me the contents of the file <file_name>
 
 ## Further Resources and Links
 
-Blog post on how to validate the CircleCI `config.yml` on every commit with a git hook:
-<https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/>
+[Blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) on how to validate the CircleCI `config.yml` on every commit with a git hook.
 
 ### CircleCI
 
