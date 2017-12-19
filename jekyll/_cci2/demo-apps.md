@@ -62,7 +62,7 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 [circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
 [circleci-demo-ios]: https://github.com/CircleCI-Public/circleci-demo-ios
 [circleci-demo-php-laravel]: https://github.com/CircleCI-Public/circleci-demo-php-laravel
-[circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-flask
+[circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-django
 [circleci-demo-python-flask]: https://github.com/CircleCI-Public/circleci-demo-python-flask
 [circleci-demo-react-native]: https://github.com/CircleCI-Public/circleci-demo-react-native
 [circleci-demo-ruby-rails]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails
