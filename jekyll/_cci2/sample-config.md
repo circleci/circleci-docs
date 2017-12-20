@@ -7,7 +7,7 @@ categories: [migration]
 order: 2
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Sample 2.0 config.yml Files*
+*[Tutorials & Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Sample 2.0 config.yml Files*
 
 This document provides three sample `.circleci/config.yml` files, as follows:
 
