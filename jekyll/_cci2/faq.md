@@ -141,7 +141,7 @@ Not yet, but we are working on that functionality.
 Not yet, but we are working on that functionality.
 
 ### Can I use `store_test_results` with Workflows?
-This is next up on our roadmap to fix. Test timings are available for 2.0 but not with Workflows.
+You can use `store_test_results` in order to populate your builds' Test Summary section with your test results information, however [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-patterns) will not work. This is next up on our roadmap to fix. Test timings data is available for 2.0 but not with Workflows.
  
 ### Can I use Workflows with CircleCI 1.0?
  
