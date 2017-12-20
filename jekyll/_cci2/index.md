@@ -183,7 +183,7 @@ You can read more about workspaces [here](https://circleci.com/docs/2.0/workflow
 
 ## SSH into Your Build
 
-![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.jpg)
+![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
 For those who are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your build with the SSH enabled option.
 
