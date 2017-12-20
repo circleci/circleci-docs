@@ -156,7 +156,7 @@ repository.
 
 ### Setting up Fastlane for use on CircleCI
 
-When using Fastlane in your CircleCI project, it is recommend to add the
+When using Fastlane in your CircleCI project, we recommend adding the
 following to your `Fastfile`:
 
 ```
