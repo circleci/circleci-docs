@@ -51,7 +51,7 @@ In the following example, the whole system starts, then verifies it is running a
 ```
 See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. 
 
-**Note**: The primary container runs in a seperate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network. 
+**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network. 
 
 If you want to use docker compose to manage a multi-container setup, use the `machine` key in your `config.yml` file and use docker-compose as you would normally. **Note: There is an overhead for provisioning a machine executor and use of the `machine` key may require additional fees in a future pricing update.**
 
