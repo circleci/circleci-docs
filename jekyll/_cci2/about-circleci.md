@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-*[2.0]({{ site.baseurl }}/basics/) > Overview*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Overview*
 
 ## What is Continuious Integration?
 
