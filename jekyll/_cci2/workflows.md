@@ -362,7 +362,7 @@ jobs:
     <<: *defaults
     steps:
       - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output"
+      - run: echo "Hello, world!" > workspace/echo-output
 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
