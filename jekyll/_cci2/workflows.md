@@ -335,6 +335,8 @@ workflows:
 
 ```
 
+**Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. This means that if you push a lot of tags we may not receive all of them.
+
 ## Using Workspaces to Share Data Among Jobs
 
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
