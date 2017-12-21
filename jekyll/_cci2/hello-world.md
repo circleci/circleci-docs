@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 4
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Hello World*
+*[Tutorials & Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Hello World*
 
 This document describes how to configure your project to run on CircleCI 2.0. 
 

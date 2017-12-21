@@ -7,7 +7,7 @@ categories: [migration]
 order: 1
 ---
 
-*[Reference]({{ site.baseurl }}/2.0/reference/) > FAQ*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > FAQ*
 
 * Contents
 {:toc}

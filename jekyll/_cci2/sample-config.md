@@ -7,7 +7,7 @@ categories: [migration]
 order: 2
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Sample 2.0 config.yml Files*
+*[Tutorials & Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Sample 2.0 config.yml Files*
 
 This document provides three sample `.circleci/config.yml` files, as follows:
 
@@ -15,6 +15,36 @@ This document provides three sample `.circleci/config.yml` files, as follows:
 {:toc}
 
 The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+
+## Sample Configuration with Parallel Jobs
+
+Following is a sample 2.0 `.circleci/config.yml` file.
+
+{% raw %}
+```
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+{% endraw %}
+This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## Sample Configuration with Sequential Workflow
 
