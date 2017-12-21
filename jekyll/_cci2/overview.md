@@ -21,7 +21,7 @@ If you are a user or developer, refer to [Sign Up and Try CircleCI]({{ site.base
 
 ## Installation Options
 
-There are three basic ways to install CircleCI in your invironment (AWS is currently required for each option):
+There are three basic ways to install CircleCI in your environment (AWS is currently required for each option):
 
 1. A [single-box installation]({{ site.baseurl }}/2.0/single-box/), suitable for trials and small teams
 2. A [clustered installation]({{ site.baseurl }}/2.0/aws/), suitable for production use for most teams
