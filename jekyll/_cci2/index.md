@@ -4,7 +4,7 @@ title: "2.0 Docs Index Page"
 description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
-Welcome to CircleCI 2.0! This page describes how to run your first green build. 
+Welcome to CircleCI 2.0 documentation! This page describes how to run your first green build. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KhjwnTD4oec" frameborder="0" allowfullscreen></iframe>
 
