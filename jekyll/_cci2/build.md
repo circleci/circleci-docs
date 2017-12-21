@@ -16,6 +16,7 @@ Document | Description
 
 Document | Description
 ----|----------
+<a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | Complete list of prebuilt CircleCI Docker images.
 <a href="{{ site.baseurl }}/2.0/custom-images/">Using Custom Images</a> | How to create and use custom Docker images with CircleCI.
 <a href="{{ site.baseurl }}/2.0/private-images/">Using Private Images</a> | How to use an image from a private repository or from Amazon ECR.
 <a href="{{ site.baseurl }}/2.0/building-docker-images/">Running Docker Commands</a> | How to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers.
