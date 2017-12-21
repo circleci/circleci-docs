@@ -7,7 +7,7 @@ categories: [containerization]
 order: 50
 ---
 
-*[Build Environments]({{ site.baseurl }}/2.0/build/) > Using Private Images*
+*[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Using Private Images*
 
 To use private images, specify the username and password in the `auth` field.  To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:
 

@@ -15,7 +15,7 @@ Welcome to CircleCI 2.0 documentation! This page describes how to run your first
 
 ## Creating a Repository
 1. Navigate to your account on GitHub.com
-  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new> ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new>. ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. Select Initialize this repository with a README and click the Create repository button. ![]( {{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
@@ -24,7 +24,7 @@ Welcome to CircleCI 2.0 documentation! This page describes how to run your first
 CircleCI uses a [YAML](https://en.wikipedia.org/wiki/YAML), file to identify how you want your testing environment set up and what tests you want to run.
 On CircleCI 2.0, this file must be called `config.yml` and must be in a hidden folder called `.circleci`. On Mac, Linux, and Windows systems, files and folders whose names start with a period are treated as *system* files that are hidden from users by default.
 
-1. To create the file and folder on GitHub, click the **"Create new file"** button on the repo page and type `.circleci/config.yml`. You should now have in front of you a blank `config.yml` file in a `.circleci` folder.
+1. To create the file and folder on GitHub, click the **Create new file** button on the repo page and type `.circleci/config.yml`. You should now have in front of you a blank `config.yml` file in a `.circleci` folder.
 
 2. To start out with a simple `config.yml`, copy the text below into the file editing window on GitHub:
 
