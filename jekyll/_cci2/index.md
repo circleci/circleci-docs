@@ -49,11 +49,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, find the repository you just created below, and click the **Setup project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
-4. On the next screen, you're given some options for configuring your project on CircleCI. Leave everything as-is for now and just click the **Start building** button a bit down the page on the right.
-
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
-
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
+4. On the next screen, you're given some options for configuring your project on CircleCI. Leave everything as-is for now and just click the **Start building** button a bit down the page on the right. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
 
 ## Running Your First CircleCI Build!
 
@@ -125,11 +121,9 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
 
 4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
-And drilling a little deeper into your workflow you can see that these two jobs run in parallel.
+5. Click on the link for your workflow to see that these two jobs run in parallel. ![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
-![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
-
-You can read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
+Read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
 ## Adding Some Changes to use the Workspaces Functionality
 
@@ -178,7 +172,7 @@ workflows:
             - one
 ```
 
-You can read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
+Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ## SSH into Your Build
 
