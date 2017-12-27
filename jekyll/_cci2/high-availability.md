@@ -6,7 +6,7 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-**NOTE: Your CircleCI license must include support for high-availibility in order to use this configuration. Please contact your account manager if you have questions.**
+**NOTE: Your CircleCI license must include support for high-availability in order to use this configuration. Please contact your account manager if you have questions.**
 
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
