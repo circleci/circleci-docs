@@ -267,7 +267,7 @@ The GitHub/Bitbucket username of the user who created the pull request.
 
 **CIRCLE_PULL_REQUESTS**
 
-Comma-separated list of pull requests this build is a part of.
+Comma-separated list of URLs of pull requests this build is a part of.
 
 **CIRCLE_PULL_REQUEST**
 
