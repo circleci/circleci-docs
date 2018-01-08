@@ -129,11 +129,11 @@ Use the following procedure to download your artifacts with `curl`.
 4. CD to a directory where you would like the artifacts files to be downloaded and run the following command, copying in the token from Step 3:
 
 ```
-export CIRCLE_TOKEN='?circle-token=:your_token'
+export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
 
-<artifacts.txt xargs -P4 -I % wget %$CIRCLE_TOKEN
+<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
 Note 1: Replace all the variables above that start with a : with real values for your project (don't include the colon).
