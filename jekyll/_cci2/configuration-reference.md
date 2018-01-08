@@ -690,20 +690,20 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload test results so they can be used for timing analysis. **Note** At this time the results are not shown as artifacts in the web UI. To see test result as artifacts please also upload them using **store_artifacts**. This key is **not** supported with Workflows.
+Special step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use [the **store_artifacts** step]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts). ***Note:** The `store_test results` key is **not** currently supported with Workflows.*
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-path | Y | String | Directory containing JUnit XML or Cucumber JSON test metadata files
+path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
 {: class="table table-striped"}
 
-The directory layout should match the [classic CircleCI test metadata directory layout]({{ site.baseurl }}/1.0/test-metadata/#metadata-collection-in-custom-test-steps).
+***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
 
 ###### _Example_
 
 ``` YAML
 - store_test_results:
-    path: /tmp/test-results
+    path: test-results
 ```
 
 ##### **`persist_to_workspace`**
