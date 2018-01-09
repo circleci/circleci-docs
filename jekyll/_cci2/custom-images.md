@@ -14,7 +14,7 @@ This document describes how to create and use custom Docker images with CircleCI
 * TOC
 {:toc}
 
-## How to customize Docker images for CircleCI 2.0 Video Tutorial
+## How to Customize Docker Images for CircleCI 2.0 Video Tutorial
 <div class="screen">
 <iframe width="560" height="315" src="https://www.youtube.com/watch?v=JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
 </div>
