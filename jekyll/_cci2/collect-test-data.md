@@ -9,7 +9,7 @@ order: 34
 
 *[Test]({{ site.baseurl }}/2.0/test/) > Collecting Test Metadata*
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. **Note:** This step is not supported with Workflows. To see test result as artifacts, upload them using the `store_artifacts` step. 
+CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step. 
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of   [Insights](https://circleci.com/build-insights) in the application to identify flaky tests and isolate recurring issues.  
 
