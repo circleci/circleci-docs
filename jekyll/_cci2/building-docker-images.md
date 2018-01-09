@@ -77,11 +77,8 @@ jobs:
       - run:
           name: Install Docker client
           command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            curl -fsSL get.docker.com -o get-docker.sh
+            sh get-docker.sh
 
       # build and push Docker image
       - run: |
