@@ -247,7 +247,7 @@ steps:
 ```
 {% endraw %}
 
-Now we can setup our test database we'll use during the build.
+Now we can setup our test database we'll use during the build. We're using the `dockerize` [utility](https://github.com/jwilder/dockerize) to delay the primary container's main process until the database service is available.
 
 ```YAML
 steps:
