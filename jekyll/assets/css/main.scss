@@ -8,6 +8,34 @@ $nav-bg-color: #FBFBFB;
 $nav-border-color: #CCC;
 $link-text-color: #27A0B6;
 $link-hover-color: #36D4ED;
+$blue: #36D4ED;
+$black-light: #343434;
+
+// Screen Sizes
+$screen-sm:                  768px;
+
+// General Sizing
+$spacing-small-horizontal: 12px;
+$spacing-medium-horizontal: 24px;
+$spacing-intermediate-large-horizontal: 48px;
+$spacing-large-horizontal: 60px;
+$spacing-large-vertical: 90px;
+$spacing-intermediate-large-vertical: 66px;
+$spacing-medium-vertical: 48px;
+$spacing-small-vertical: 18px;
+$spacing-base: 6px;
+$logo-width-small: 125px;
+
+// Font Sizes
+$font-size-root: 16px;
+$font-size-base: $font-size-root; // ~16px
+$font-size-small: 14px;
+$font-size-h1: 52px;
+$font-size-h1-small: 45px;
+$font-size-h2: 32px;
+$font-size-h3: 23px;
+$font-size-h4: 20px;
+$font-size-h5: 18px;
 
 // General
 body{
@@ -38,6 +66,54 @@ div.main-body {
 	display: flex;
 	max-width: 1200px;
 	margin: 0 auto;
+}
+.text-center-small-float-right {
+  float: right;
+  @media screen and (max-width: $screen-sm) {
+    text-align: center;
+    float: none;
+  }
+}
+
+.text-center-small-float-left {
+  float: left;
+  @media screen and (max-width: $screen-sm) {
+    text-align: center;
+    float: none;
+  }
+}
+
+.logo-small {
+  max-width: $logo-width-small;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+ul.horizontal {
+  li {
+    display: inline-block;
+    padding: 0 $spacing-medium-horizontal 0 0;
+  }
+  &.blue {
+    a {
+      color: $blue;
+      text-transform: initial;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+hr.dark {
+  border-color: $black-light;
+}
+
+footer { 
+	li, span {
+		text-transform: initial;
+		font-size: $font-size-base;
+	}
 }
 
 // Main Nav Additions
