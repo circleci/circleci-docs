@@ -16,7 +16,9 @@ This document describes how to create and use custom Docker images with CircleCI
 
 ## How to Customize Docker Images for CircleCI 2.0 Video Tutorial
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
+Watch the following video for a detailed tutorial of customizing Docker images.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
 
 ## Custom Image Overview
 CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
