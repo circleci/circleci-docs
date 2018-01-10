@@ -257,7 +257,7 @@ only | N | List | List of branches that only will be executed
 ignore | N | List | List of branches to ignore
 {: class="table table-striped"}
 
-Both `only` and `ignore` lists can have full names and regular expressions. For example:
+Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
 
 ``` YAML
 jobs:
@@ -268,7 +268,7 @@ jobs:
         - /rc-.*/
 ```
 
-In this case only "master" branch and branches matching regex "rc-.*" will be executed.
+In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
 
 ``` YAML
 jobs:
@@ -279,7 +279,7 @@ jobs:
         - /feature-.*/
 ```
 
-In this example all the branches will be executed except "develop" and branches matching regex "feature-.*".
+In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
 
 If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
 
@@ -859,7 +859,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a workflow for the `master` branch.
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -927,7 +927,7 @@ filters | N | Map | A map defining rules for execution on specific branches
 
 ###### **`branches`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch (or a regexp to match against branches, which is required to be enclosed with /s) or map to a list of such strings.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -950,7 +950,7 @@ CircleCI treats tag and branch filters differently when deciding whether a job s
 
 Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. Refer to the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution) section of the Orchestrating Workflows document for more examples.
 
-Tags can have the keys `only` and `ignore` keys.
+Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
