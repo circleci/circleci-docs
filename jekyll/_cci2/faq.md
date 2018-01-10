@@ -176,7 +176,7 @@ This feature only exists on CircleCI 2.0. In order to use Workflows, you must fi
  
 ### Can I use Workflows with the Installable CircleCI?
 
-Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. However, scheduled workflows are not yet availalble in an installable release. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
+Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
  
 ### How many jobs can I run at one time?
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
