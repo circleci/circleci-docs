@@ -28,7 +28,8 @@ You should specify the version of Xcode that you would like to build by specifyi
 
 The currently available Xcode versions are:
 
-* `9.1.0`: Xcode 9.1.0 (Build 9A1004)
+* `9.2.0`: Xcode 9.2.0 (Build 9C40b)
+* `9.1.0`: Xcode 9.1.0 (Build 9B55)
 * `9.0`: Xcode 9.0.1 (Build 9A1004)
 * `8.3`: Xcode 8.3.3 (Build 8E3004b)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b)
@@ -41,6 +42,8 @@ The currently available Xcode versions are:
 * `7.2`: Xcode 7.2 (Build 7C68)
 * `7.1`: Xcode 7.1 (Build 7B91b)
 * `7.0`: Xcode 7.0 (Build 7A220)
+
+**Please note that all future Xcode releases will only be supported on CircleCI 2.0.**
 
 ## Software
 
