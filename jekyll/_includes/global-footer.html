@@ -1,57 +1,83 @@
 <footer class="footer">
   <div class="container">
     <div class="row">
-      <div class="col-md-5">
-        <p class="lead">Over <b>100,000</b> companies and developers trust CircleCI.</p>
-        <span>CircleCI’s continuous integration and delivery platform helps software teams rapidly release code with confidence by automating the build, test, and deploy process. CircleCI offers a modern software development platform that lets teams ramp quickly, scale easily, and build confidently every day.</span>
-        {% include social-buttons.html %}
-      </div>
       <nav>
-        <div class="col-md-2 col-md-offset-1">
-          <h6>CircleCI</h6>
-          <ul class="list-unstyled">
-            <li><a href="https://circleci.com/about/">About Us</a></li>
-            <li><a href="https://circleci.com/about/team/">Team</a></li>
-            <li><a href="https://circleci.com/newsroom/">Newsroom</a></li>
-            <li><a href="https://circleci.com/jobs/">Jobs</a></li>
-            <li><a href="https://circleci.com/blog/">Blog</a></li>
-            <li><a href="https://circleci.com/partners/">Partners</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-3 col-xs-6">
           <h6>Product</h6>
           <ul class="list-unstyled">
-            <li><a href="https://circleci.com/product/">Product</a></li>
-            <li><a href="https://circleci.com/enterprise/">Enterprise</a></li>
+            <li><a href="https://circleci.com/product/">Overview</a></li>
             <li><a href="https://circleci.com/pricing/">Pricing</a></li>
-            <li><a href="https://circleci.com/customers/">Customers</a></li>
+            <li><a href="https://circleci.com/integrations/">Integrations</a></li>
+            <li><a href="https://circleci.com/enterprise/">Enterprise</a></li>
             <li><a href="https://circleci.com/changelog/">Changelog</a></li>
-            <li><a href="https://circleci.com/resources/">Resources</a></li>
           </ul>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-3 col-xs-6">
           <h6>Support</h6>
           <ul class="list-unstyled">
-            <li><a href="{{ site.baseurl }}/">Documentation</a></li>
+            <li><a href="https://circleci.com/docs/">Documentation</a></li>
             <li><a href="https://support.circleci.com/hc/en-us" target="_blank">Get Support</a></li>
-            <li><a href="https://discuss.circleci.com/" target="_blank">Community</a></li>
+            <li><a href="https://status.circleci.com/" target="_blank">CircleCI Status</a></li>
+            <li><a href="https://discuss.circleci.com/" target="_blank">Community Forums</a></li>
             <li><a href="https://circleci.com/support/premium-support/">Premium Support</a></li>
-            <li><a href="https://circleci.com/security/">Security</a></li>
-            <li><a href="https://circleci.com/privacy/">Privacy Policy</a></li>
-            <li><a href="https://circleci.com/terms-of-service/">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-6">
+          <h6>Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="https://circleci.com/blog/">Blog</a></li>
+            <li><a href="https://circleci.com/customers/">Case Studies</a></li>
+            <li><a href="https://circleci.com/resources/#videos">Videos</a></li>
+            <li><a href="https://circleci.com/resources/#webinars">Webinars</a></li>
+            <li><a href="https://circleci.com/resources/#white-papers">White Papers</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-6">
+          <h6>Company</h6>
+          <ul class="list-unstyled">
+            <li><a href="https://circleci.com/about/">About Us</a></li>
+            <li><a href="https://circleci.com/jobs/">Jobs <span class="text-blue">(We're hiring!)</span></a></li>
+            <li><a href="https://circleci.com/about/team/">Team</a></li>
             <li><a href="https://circleci.com/contact/">Contact Us</a></li>
+            <li><a href="https://circleci.com/partners/">Partners</a></li>
+            <li><a href="https://circleci.com/newsroom/">Newsroom</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-6">
+          <h6>Getting Started</h6>
+          <ul>
+            <li><a href="https://circleci.com/continuous-integration/">What is CI?</a></li>
+            <li><a href="https://circleci.com/docs/2.0/">How to get started on 2.0</a></li>
           </ul>
         </div>
       </nav>
     </div>
+    <div class="row margin-top-medium">
+      <div class="col-md-2 col-xs-4">
+        <img src="{{site.baseurl}}/assets/img/logos/logo-wordmark.svg" class="logo-small margin-top-small" alt="circleci">
+      </div>
+      <div class="col-md-4 col-md-offset-6 col-xs-offset-0 col-xs-8">
+        <div class="text-center-small-float-right">
+          {% include social-buttons.html %}
+        </div>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-md-5 additional-links">
-        <span>Copyright © {{ site.time | date: '%Y' }} CircleCI</span>
+      <div class="col-md-12">
+        <hr class="dark no-margin">
+        <div class="margin-top-small text-center-small-float-left">
+          <nav>
+            <ul class="horizontal blue">
+              <li><a href="https://circleci.com/terms-of-service/">Terms of Service</a></li>
+              <li><a href="https://circleci.com/privacy/">Privacy Policy</a></li>
+              <li><a href="https://circleci.com/security/">Security</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="margin-top-small text-center-small-float-right">
+          <span>Copyright © {{ site.time | date: '%Y' }} Circle Internet Services, Inc., All Rights Reserved.</span>
+        </div>
       </div>
     </div>
   </div>
-  <script src="{{ "/assets/js/vendor.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-  <script src="{{ "/assets/js/site.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-  <script src="{{ "/assets/js/jquery.cookie.min.js" | prepend: site.baseurl }}" type="text/javascript" ></script>
-  <script src="{{ "/assets/js/jquery.navgoco.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
 </footer>
