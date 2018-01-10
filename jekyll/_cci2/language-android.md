@@ -109,7 +109,9 @@ Our Android Docker images are currently tagged with the suffix `-alpha`. This is
 
 ### Customizing the Images
 
-We welcome any feedback, PRs, comments and suggestions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has the tools needed to build most apps. We do not plan to provide every tool that you might need. If you want to add customization to the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/).
+We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
+
+If you want to customize the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/).
 
 ## React Native projects
 
