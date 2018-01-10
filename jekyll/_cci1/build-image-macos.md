@@ -28,8 +28,8 @@ You should specify the version of Xcode that you would like to build by specifyi
 
 The currently available Xcode versions are:
 
-* `9.2`: Xcode 9.2.0 (Build 9C40b)
-* `9.1`: Xcode 9.1.0 (Build 9B55)
+* `9.2.0`: Xcode 9.2.0 (Build 9C40b)
+* `9.1.0`: Xcode 9.1.0 (Build 9B55)
 * `9.0`: Xcode 9.0.1 (Build 9A1004)
 * `8.3`: Xcode 8.3.3 (Build 8E3004b)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b)
