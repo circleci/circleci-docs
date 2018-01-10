@@ -163,7 +163,7 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. **Note:** The `triggers` key is not yet supported in CircleCI server.
+Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. 
 
 Configure a workflow to run on a set schedule by using the `triggers:` key with the `schedule` option. The `triggers` key is **only** added under your `workflow` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC/GMT) for specified branches. 
 
