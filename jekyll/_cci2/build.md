@@ -14,9 +14,9 @@ Document | Description
 
 ## How to Build, Test, and Deploy Video Tutorial
 
-Watch the following video webinar for an overview of Docker, iOS, and Android builds.
+Watch the following video for a detailed tutorial of Docker, iOS, and Android builds.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Qp-BA9e0TnA" frameborder="0" allowfullscreen></iframe>
 
 ## Docker
 
