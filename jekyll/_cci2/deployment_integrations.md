@@ -6,6 +6,8 @@ categories: [deploying]
 order: 10
 ---
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nQo1dngizvA" frameborder="0" allowfullscreen></iframe>
+
 This document describes using the `deploy` step with example instructions in the following sections:
 
 * TOC
