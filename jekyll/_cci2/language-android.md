@@ -99,9 +99,7 @@ CircleCI provides a set of [Docker](https://www.docker.com/) [images for buildin
 
 The [Dockerfiles are open-source, and available on GitHub](https://github.com/circleci/circleci-images/tree/master/android). Our image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
-### Customizing the Images
-
-We welcome any feedback, PRs, comments and suggestions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has the tools needed to build most apps. We do not plan to provide every tool that you might need. If you want to add customization to the image, we recommend that you [create your Dockerfile that builds `FROM` our `circleci/android` images]({{ site.baseurl }}/2.0/custom-images/).
+Please note that our official image does *not* include the Android NDK. If you require that toolset, we recommend making your own image and setting these environment variables or using an [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0).
 
 ### API Levels
 
@@ -111,7 +109,11 @@ We have a different Docker image for each [Android API level](https://source.and
 
 Our Android Docker images are currently tagged with the suffix `-alpha`. This is to indicate the images are currently under development and might change in backwards incompatible ways from week to week.
 
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+### Customizing the Images
+
+We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
+
+To customize the image, create a Dockerfile that builds `FROM` the `circleci/android` image. See [Using Custom-Built Docker Images]({{ site.baseurl }}/2.0/custom-images/) for instructions.
 
 ## React Native projects
 
