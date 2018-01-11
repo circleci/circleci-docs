@@ -6,7 +6,7 @@ order: 12
 description: "Troubleshooting steps to take in CircleCI 2.0"
 ---
 
-### Debugging Queuing builds.
+## Debugging Queuing builds.
 
 If your services box is fine, but don't have builds running or all of your builds are queueing then follow the steps below. It is generally a good idea to go a look through the support bundle to see if something obvious isn't standing out.
 
