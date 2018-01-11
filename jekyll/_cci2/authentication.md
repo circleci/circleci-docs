@@ -4,6 +4,7 @@
  short-title: "Authentication"
  description: "Configuring LDAP Authentication"
  categories: [administration]
+ hide: true
  order: 9
 ---
 
@@ -13,7 +14,7 @@ This document describes how to enable, configure, and test CircleCI to authentic
 
 - Install and configure an LDAP instance and populate the database with your users and credentials.
 - Install a new instance of CircleCI 2.0 with no existing users using the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
-- Contact [CircleCI support](support.circleci.com) and file a feature request for CircleCI installed on your own servers.
+- Contact [CircleCI support](https://support.circleci.com) and file a feature request for CircleCI installed on your own servers.
 
 **Note:** After completing this configuration, all new users will be able to log in to CircleCI with their LDAP credentials and then they must use the Connect button on the Accounts page to connect and authenticate their GitHub account.
 
