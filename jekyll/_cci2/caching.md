@@ -44,7 +44,8 @@ Tools that are not explicitly required for your project are best stored on the D
 As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git repository, thus saving time in your `checkout` step—especially for larger projects. Here is an example of source caching:
 
 {% raw %}
-```YAML
+
+```yaml
     steps:
       - restore_cache:
           keys:
@@ -59,6 +60,7 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
           paths:
             - ".git"
 ```
+
 {% endraw %}
 
 In this example, `restore_cache` looks for a cache-hit from the current git revision, then for a hit from the current branch, then, most broadly, for any cache-hit at all, regardless of branch or revision. If your source code changes frequently, or changes significantly across branches, you may want to remove the third `restore_cache` key, or even both the second *and* third keys, resulting in a more granular source cache that only looks for matches within the current branch and git revision.
