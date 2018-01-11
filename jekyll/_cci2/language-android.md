@@ -99,7 +99,7 @@ CircleCI provides a set of [Docker](https://www.docker.com/) [images for buildin
 
 The [Dockerfiles are open-source, and available on GitHub](https://github.com/circleci/circleci-images/tree/master/android). Our image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
-Please note that our official image does *not* include the Android NDK. If you require that toolset, we recommend making your own image or using an [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0).
+Please note that our official image does *not* include the Android NDK. If you require that toolset, we recommend making your own image and setting these environment variables or using an [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0).
 
 ### API Levels
 
