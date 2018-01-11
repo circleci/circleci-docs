@@ -17,7 +17,9 @@ This document describes using the `deploy` step with example instructions in the
 
 It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
-Add a job to your `config.yml` to set up conditional deployment for your application. The following example uses a workflow job filter to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered. See [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows/) for additional workflow examples and links to demo workflow repositories.
+Add a job to your `config.yml` to set up conditional deployment for your application. The following example uses a [workflow job filter]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered.
+
+If your deploy job uses the output of previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ```YAML
 version: 2
