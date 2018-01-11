@@ -69,7 +69,7 @@ If your source code changes frequently, we recommend using fewer, more specific 
 
 Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
 
-That said, it's worth comparing build times with and without source-caching; due to the way GitHub is optimized versus CircleCI's own general-purpose caching, `git clone` may be faster than `restore_cache` in many or even most cases.
+That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
 
 ## Writing to the Cache in Workflows
 
