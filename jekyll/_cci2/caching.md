@@ -44,7 +44,8 @@ Tools that are not explicitly required for your project are best stored on the D
 As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git repository, thus saving time in your `checkout` step—especially for larger projects. Here is an example of source caching:
 
 {% raw %}
-```YAML
+
+```yaml
     steps:
       - restore_cache:
           keys:
@@ -59,13 +60,16 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
           paths:
             - ".git"
 ```
+
 {% endraw %}
 
-In this example, `restore_cache` looks for a cache-hit from the current git revision, then for a hit from the current branch, then, most broadly, for any cache-hit at all, regardless of branch or revision. If your source code changes frequently, or changes significantly across branches, you may want to remove the third `restore_cache` key, or even both the second *and* third keys, resulting in a more granular source cache that only looks for matches within the current branch and git revision.
+In this example, `restore_cache` looks for a cache hit from the current git revision, then for a hit from the current branch, and finally for any cache hit, regardless of branch or revision. When CircleCI encounters a list of `keys`, the cache will be restored from the first match. If there are multiple matches, the **most recent match** will be used.
+
+If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
 
 Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
 
-That said, it's worth comparing build times with and without source-caching; due to the way GitHub is optimized versus CircleCI's own general-purpose caching, `git clone` may be faster than `restore_cache` in many or even most cases.
+That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
 
 ## Writing to the Cache in Workflows
 
@@ -81,9 +85,9 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 
 ## Restoring Cache
 
-To decide how to save your cache, it is useful to first understand that CircleCI selects what will be restored in the order in which they are listed in the special `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. As caches become less specific going down the list in the following example, there is greater likelihood that the dependencies they contain are different from those that the current job requires. When your dependency tool runs (for example, `npm install`) it will discover out-of-date dependencies and install those the current job specifies. This is also referred to as *partial cache* restore. 
+CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the **most recent match** will be used.
 
-Here's another example of a `restore_cache` step with two keys:
+In the example below, two keys are provided:
 
 {% raw %}
 ```YAML
@@ -97,6 +101,8 @@ Here's another example of a `restore_cache` step with two keys:
             - v1-npm-deps-
 ```
 {% endraw %}
+
+Because the second key is less specific than the first, it is more likely that there will be differences between the current state and the most recent cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a *partial cache restore*.
 
 ### Clearing Cache 
 
