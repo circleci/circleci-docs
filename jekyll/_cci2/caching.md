@@ -100,7 +100,7 @@ CircleCI restores caches in the order of keys listed in the `restore_cache` step
 ```
 {% endraw %}
 
-To decide how to save your cache, it is useful to first understand that CircleCI selects what will be restored in the order in which they are listed in the special `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. As caches become less specific going down the list in the following example, there is greater likelihood that the dependencies they contain are different from those that the current job requires. When your dependency tool runs (for example, `npm install`) it will discover out-of-date dependencies and install those the current job specifies. This is also referred to as *partial cache* restore.
+Because the second key is less specific than the first, it is more likely that there will be differences between the current state and the most recent cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a *partial cache restore*.
 
 ### Clearing Cache 
 
