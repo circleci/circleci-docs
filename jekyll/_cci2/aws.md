@@ -42,22 +42,6 @@ The following additional settings are required to support using private subnets 
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
-## Sizing AWS Instances
-
-The following table describes the number of containers or concurrent builds supported by the M3, C3, and R3 machines using the the default CircleCI container size of 2CPU/4GB RAM and 2CPU overhead.
-
-Type | Supported Containers | Model | Notes
-----|-----------------------|-------|------
-M3 | maximum of 3 | `m3.2xlarge` | Largest M3 instance
-C3 | maximum of 6 | `c3.4xlarge` | Limited memory allocation
-C3 | maximum of 14 | `c3.8xlarge` | Limited memory allocation
-R3 | maximum of 3 | `r3.2slarge` | High memory, limited CPU
-R3 | maximum of 7 | `r3.4xlarge` | High memory, limited CPU
-R3 | maximum of 15 | `r3.8xlarge` | High memory, limited CPU
-{: class="table table-striped"}
-
-The R3 instances are a good choice for memory-intensive builds or if you plan to increase the default memory allocation for each container. If you have noisy neighbor problems or contention for resources, it is possible that the additional memory of the R3 family may speed up your builds without changing the default container allocation.
-
 ## Planning
 Have available the following information and policies before starting the Preview Release installation:
 
@@ -117,85 +101,14 @@ Have available the following information and policies before starting the Previe
 ```
 
 ## Installation with Terraform
-
-Use the following procedure to install with Terraform, skip to the next section for manual installation steps.
-
 1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository (if you already have it cloned, make sure it is up-to-date and you are on the `master` branch: `git checkout master && get pull`).
 2. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
 3. Fill `terraform.tfvars` with appropriate values.
 4. Run `terraform apply` to provision.
 5. Go to the provided URL at the end of Terraform output and follow the instructions.
 6. Enter your license.
-7. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User:
-     ```JSON
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Effect": "Allow",
-                 "Action": [
-                     "ec2:RunInstances",
-                     "ec2:TerminateInstances",
-                     "ec2:Describe*",
-                     "ec2:CreateTags",
-                     "iam:GetUser",
-                     "cloudwatch:*",
-                     "sts:GetFederationToken"
-                 ],
-                 "Resource": [
-                     "*"
-                 ]
-             },
-             {
-                 "Effect": "Allow",
-                 "Action": [
-                     "s3:*"
-                 ],
-                 "Resource": [
-                     "arn:aws:s3:::YOUR-BUCKET-HERE",
-                     "arn:aws:s3:::YOUR-BUCKET-HERE/*"
-                 ]
-             }
-         ]
-     }
-     ```
-8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). It is best practice to use an instance profile for authentication (no additional configuration required). However, IAM authentication for the AWS administrator is supported. In this case use the following permissions for the IAM User. If it is the same user as in Storage section, it will need both sets of permissions.
-     ``` JSON
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Action": [
-                     "ec2:RunInstances",
-                     "ec2:CreateTags"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*"
-             },
-             {
-                 "Action": [
-                     "ec2:Describe*"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "*"
-             },
-             {
-                 "Action": [
-                     "ec2:TerminateInstances",
-                     "ec2:StartInstances",
-                     "ec2:StopInstances"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*:instance/*",
-                 "Condition": {
-                     "StringEquals": {
-                         "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
-                     }
-                 }
-             }
-         ]
-     }
-     ```
+7. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required).
+8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). Again, it is best to use an instance profile for authentication (no additional configuration required). 
 9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 10. After the application has started, log in to CircleCI and start running 2.0 builds!
 
