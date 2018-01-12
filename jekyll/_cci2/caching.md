@@ -85,7 +85,9 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 
 ## Restoring Cache
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. In the example below, two keys are provided:
+CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the **most recent match** will be used.
+
+In the example below, two keys are provided:
 
 {% raw %}
 ```YAML
