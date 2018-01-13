@@ -18,6 +18,15 @@ This document describes how to set up and customize testing for an iOS applicati
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
 
+## Supported Xcode Versions
+
+The currently available Xcode versions are:
+
+* `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
+* `9.1.0`: Xcode 9.1.0 (Build 9B55)  [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
+* `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
+* `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+
 ## Getting Started
 
 Select a macOS project you would like to build on the Add
