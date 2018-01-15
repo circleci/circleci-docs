@@ -20,7 +20,7 @@ If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` Fi
 
 CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** Parallelism in 2.0 can only be set in `.circleci/config.yml`, the parallelism setting from the UI is ignored.
 
-If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. It is also possible to use the beta `config-translation` endpoint to get started with converting a 1.0 config to 2.0, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/sample-config).
+If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys. It is also possible to use the beta `config-translation` endpoint to get started with converting a 1.0 config to 2.0, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
 ## Steps to Configure Required 2.0 Keys
 
