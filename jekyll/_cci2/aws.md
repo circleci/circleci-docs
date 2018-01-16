@@ -39,7 +39,7 @@ The following additional settings are required to support using private subnets 
 - The [VPC Endpoint for S3](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/) should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
 - Adequately power the NAT instance for heavy network operations.  Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources.  A NAT that is inadequate could cause slowness in network and cache operations.
 - If you are integrating with [github.com](https://github.com), ensure that your network access control list (ACL) whitelists ports 80 and 443 for GitHub webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
-- See our [Administrator's Overview]({{site.baseurl}}/2.0/overview#services) for more information on what specific ports need to be accessible to instances in your CircleCI installation
+- See our [Administrator's Overview]({{site.baseurl}}/2.0/overview#services) for more information on what specific ports need to be accessible to instances in your CircleCI installation.
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
