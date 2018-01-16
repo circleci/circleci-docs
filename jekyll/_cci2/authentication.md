@@ -12,11 +12,12 @@ This document describes how to enable, configure, and test CircleCI to authentic
 
 ## Prerequisites
 
-- Install and configure an LDAP instance and populate the database with your users and credentials.
-- Install a new instance of CircleCI 2.0 with no existing users using the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document.
+- Install and configure your LDAP server and Active Directory.
+- GitHub Enterprise must be configured and is the source of organizations and projects to which users have access.
+- Install a new instance of CircleCI 2.0 with no existing users using the [Installing CircleCI 2.0 on Amazon Web Services with Terraform]({{ site.baseurl }}/2.0/aws/) document. **Note:** LDAP is not supported with existing installations, only clean installations may use LDAP. The LDAP authentication feature is currently only a preview.
 - Contact [CircleCI support](https://support.circleci.com) and file a feature request for CircleCI installed on your own servers.
 
-**Note:** After completing this configuration, all new users will be able to log in to CircleCI with their LDAP credentials and then they must use the Connect button on the Accounts page to connect and authenticate their GitHub account.
+**Note:** After completing this configuration, all users must log in to CircleCI with their LDAP credentials. After logging in to CircleCI, each user will then click the Connect button on the Accounts page to connect and authenticate their GitHub account.
 
 ## Configure LDAP Authentication 
 
@@ -36,5 +37,4 @@ This section provides the steps to configure LDAP in the management console (Rep
 
 A user who logs in will be redirected to the Accounts page of the CircleCI application with a Connect button that they must use to connect their GitHub account. After they click Connect, an LDAP section with their user information (for example, their email) on the page will appear and they will be directed to authenticate their GitHub account. After authenticating their GitHub account users are directed to the Builds page to use CircleCI.
 
-**Caution:** After a user has authenticated with LDAP and connected their GitHub account, removing their LDAP will not prevent them from logging in by using cookies. 
-
+**Caution:** After a user has authenticated with LDAP and connected their GitHub account, disabling or removing a user from LDAP/AD will not log them out. A user who is removed from LDAP/AD will be able to access CircleCI as long as that user stays logged in (because of cookies). As soon as the user logs out or the cookie expires, they will not be able to log back in. A better handling for this case will be implemented as an update to this feature preview.
