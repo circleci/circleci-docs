@@ -7,4 +7,4 @@ Use markdown over HTML to keep an emphasis on prose.
 Reserve bolding for terms defined either in our glossary or on an external site.
 
 # Official Recommendations
-When recommending a user action, use "consider <action>" instead of "we recommend" or "we suggest".
+When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
