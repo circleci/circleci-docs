@@ -17,7 +17,8 @@ There are some assumptions made in this guide:
 
 - We assume that your Android project is built with `gradle` (this is the default for projects created with [Android Studio](https://developer.android.com/studio).
 - We assume that your project is located in the root of your `git` repository, with the application located in a subfolder named `app`.
-- It is possible to run your tests, but loading the full emulator may not work.
+
+***Note:** Running the Android emulator is not currently supported on CircleCI 2.0. We recommend using an external service such as [Firebase Test Lab](https://firebase.google.com/docs/test-lab) to run your emulator tests from your CircleCI job. You can use the [gcloud Command Line](https://firebase.google.com/docs/test-lab/command-line) to do this. The gcloud tools are preinstalled in our Android Docker images—see the [Dockerfiles here](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) and [Docker Hub links here](https://hub.docker.com/r/circleci/android/tags).*
 
 ## Sample Configuration
 
