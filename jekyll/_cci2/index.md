@@ -79,52 +79,52 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
 
 1. To see Workflows in action, edit your `.circle/config.yml` file. After you have the file in edit mode in your browser window, select the text from `build` and onwards in your file and copy and paste the text to duplicate that section. That should look similar to the code block below:
 
-     ```yml
-     version: 2
-     jobs:
-       build:
-         docker:
-           - image: circleci/ruby:2.4.1
-         steps:
-           - checkout
-           - run: echo "A first hello"
-       build:
-         docker:
-           - image: circleci/ruby:2.4.1
-         steps:
-           - checkout
-           - run: echo "A first hello"      
-     ```
+```yml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A first hello"
+  build:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A first hello"      
+```
 
 2. Next, rename your two jobs so that they have different names. In this example they are named `one` and `two`. Change the contents of the echo statements to something different. To make the build take a longer period of time we can add a system `sleep` command.
 
 3. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
 
 
-     ```yml
-     version: 2
-     jobs:
-       one:
-         docker:
-           - image: circleci/ruby:2.4.1
-         steps:
-           - checkout
-           - run: echo "A first hello"
-           - run: sleep 25
-       two:
-         docker:
-           - image: circleci/ruby:2.4.1
-         steps:
-           - checkout
-           - run: echo "A more familiar hi"
-           - run: sleep 15
-     workflows:
-       version: 2
-       one_and_two:
-         jobs:
-           - one
-           - two
-     ```
+```yml
+version: 2
+jobs:
+  one:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A first hello"
+      - run: sleep 25
+  two:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A more familiar hi"
+      - run: sleep 15
+workflows:
+  version: 2
+  one_and_two:
+    jobs:
+      - one
+      - two
+```
 
 4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
