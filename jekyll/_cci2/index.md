@@ -44,7 +44,7 @@ jobs:
       - run: echo "A first hello"
 ```
 
-3. Commit the file by entering comments and clicking the Commit New File button. 
+3. Commit the file by entering comments and clicking the Commit New File button. ![]( {{ site.baseurl }}/assets/img/docs/commit-new-file.png)
 
 The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use when it builds your project. CircleCI will use the image to boot up a "container" — a virtual computing environment where it will install any languages, system utilities, dependencies, web browsers, and tools, that your project might need to run.
 
