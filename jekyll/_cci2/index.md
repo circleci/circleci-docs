@@ -4,7 +4,12 @@ title: "2.0 Docs"
 description: "Landing page for CircleCI 2.0"
 permalink: /2.0/
 ---
-Welcome to CircleCI 2.0 documentation! This page describes how to run your first green build. 
+Welcome to CircleCI 2.0 documentation! Included here are tutorials, samples, and reference documentation for CircleCI version 2.0 in the following two sections: 
+
+- **Developers:** Instructions for configuring a CircleCI YML file to automate your builds, tests, and deployments using the hosted CircleCI application.
+- **Server Administrators:** Instructions for installing and maintaining CircleCI on your local server or private cloud.
+
+This page describes how to run your first green build. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KhjwnTD4oec" frameborder="0" allowfullscreen></iframe>
 
@@ -15,7 +20,7 @@ Welcome to CircleCI 2.0 documentation! This page describes how to run your first
 
 ## Creating a Repository
 1. Navigate to your account on GitHub.com
-  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new>. ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * Go to the **Repositories** tab and then select **New** or navigate directly to [https://github.com/new](https://github.com/new){:target="_blank"}. ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. Select Initialize this repository with a README and click the Create repository button. ![]( {{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
@@ -39,6 +44,8 @@ jobs:
       - run: echo "A first hello"
 ```
 
+3. Commit the file by entering comments and clicking the Commit New File button. 
+
 The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use when it builds your project. CircleCI will use the image to boot up a "container" — a virtual computing environment where it will install any languages, system utilities, dependencies, web browsers, and tools, that your project might need to run.
 
 ## Setting up Your Build on CircleCI
@@ -53,7 +60,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 ## Running Your First CircleCI Build!
 
-You should see your build start to run automatically—and pass! So, what just happened? Click on the green button and let's investigate.
+You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard to investigate the following parts of the run:
 
 1. **Spin up environment:** CircleCI used the `circleci/ruby:2.4.1` Docker image to launch a virtual computing environment.
 
@@ -65,7 +72,7 @@ Even though there was no actual source code in your repo, and no actual tests co
 
 ## Breaking Your Build!
 
-Edit your `config.yml` file in the GitHub editor for simplicity and replace `echo "A first hello"` with `notacommand`. Click the **Commit change** button in the GitHub editor to trigger a new build and see what happens!
+Edit your `config.yml` file in the GitHub editor for simplicity and replace `echo "A first hello"` with `notacommand`. Click the **Commit change** button in the GitHub editor. When you navigate back to the Builds page in CircleCI, you will see that a new build was triggered. This build will fail with a red Failed button and will send you a notification email of the failure. 
 
 
 ## Using the Workflows Functionality
