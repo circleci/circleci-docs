@@ -48,17 +48,17 @@ Audit logs can be download as a CSV file. Fields with nested data contain JSON b
 In some situations the internal machinery can generate duplicated events into the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 ### Audit Log Fields
-- *action:* The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, eg: `workflow.job.start`.
-- *actor:* The actor who performed this event. In most cases this will be a CircleCI user. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
-- *target:* The entity instance acted upon for this event. This might be a project, an org, an account, a build, etc. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
-- *payload:* A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- *occurred_at:* When the event occurred in UTC expressed in ISO-8601 format with up to 9 digits of fractional precision, such as '2017-12-21T13:50:54.474Z'.
-- *metadata:* A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- *id:* A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- *version:* Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- *scope:* If the target is owned by an Account in the CircleCI domain model, then the account field should be filled in with the Account name and ID. This is a JSON blob that will always contain id and and type and likely contain name.
-- *success:* A flag to indicate if the action was successful.
-- *request:* If this event was triggered by an external request this will be populated can be used to tie together events that originate from the same external request. Format is a JSON blob containing `id` (The request ID assigned to this request by CircleCI), `ip_address` (The original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (The client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request.)
+- **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, eg: `workflow.job.start`.
+- **actor:** The actor who performed this event. In most cases this will be a CircleCI user. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
+- **target:** The entity instance acted upon for this event. This might be a project, an org, an account, a build, etc. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
+- **payload:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+- **occurred_at:** When the event occurred in UTC expressed in ISO-8601 format with up to 9 digits of fractional precision, such as '2017-12-21T13:50:54.474Z'.
+- **metadata:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
+- **id:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
+- **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
+- **scope:** If the target is owned by an Account in the CircleCI domain model, then the account field should be filled in with the Account name and ID. This is a JSON blob that will always contain id and and type and likely contain name.
+- **success:** A flag to indicate if the action was successful.
+- **request:** If this event was triggered by an external request this will be populated can be used to tie together events that originate from the same external request. Format is a JSON blob containing `id` (The request ID assigned to this request by CircleCI), `ip_address` (The original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (The client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request.)
 
 ### Audit Log Events
 <!-- TODO: automate this from event-cataloger -->
