@@ -39,25 +39,42 @@ A few different external services and technology integration points touch Circle
 - **iOS Builds** If you are paying to run iOS builds on CircleCI hardware your source code will be downloaded to a build box on our macOS fleet where it will be compiled and any tests will be run. Similar to our primary build containers that you control, the iOS builds we run are sandboxed such that they cannot be accessed.
 
 ## Audit Logs
+CircleCI logs important events in the system for audit and forensic analysis purposes. These logs are separarate from system logs that track performance and network metrics. 
 
-[TODO: overview and what gets logged]
+Complete audit logs can be downloaded from the Audit Log page within the Admin section of the application.
 
-### Downloading audit logs
-Complete audit logs can be downloaded from the Audit Log page within the admin part of the site.
+Audit logs can be download as a CSV file. Fields with nested data contain JSON blobs.
 
-The audit log download is a CSV file. Fields with nested data contain JSON blobs.
+In some situations the internal machinery can generate duplicated events into the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-There may be duplicate events; the id field can be used to discard extras.
+### Audit Log Fields
+- *action:* The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, eg: `workflow.job.start`.
+- *actor:* The actor who performed this event. In most cases this will be a CircleCI user. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
+- *target:* The entity instance acted upon for this event. This might be a project, an org, an account, a build, etc. This is a JSON blob that will always contain `id` and and `type` and likely contain `name`.
+- *payload:* A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+- *occurred_at:* When the event occurred in UTC expressed in ISO-8601 format with up to 9 digits of fractional precision, such as '2017-12-21T13:50:54.474Z'.
+- *metadata:* A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
+- *id:* A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
+- *version:* Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
+- *scope:* If the target is owned by an Account in the CircleCI domain model, then the account field should be filled in with the Account name and ID. This is a JSON blob that will always contain id and and type and likely contain name.
+- *success:* A flag to indicate if the action was successful.
+- *request:* If this event was triggered by an external request this will be populated can be used to tie together events that originate from the same external request. Format is a JSON blob containing `id` (The request ID assigned to this request by CircleCI), `ip_address` (The original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (The client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request.)
 
-Rows contain these fields:
-- id: A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- version: Version of the event schema. Currently 1. Later versions may have different fields.
-- action: The action that this event represents. This string is designed to be consumed by machine, not humans. The format is ASCII lowercase words separated by dots, eg: 'pet', 'pet.dog.feed'.
-- payload: An arbitrary JSON object with no defined schema. This contains action-dependent data stored with an event. The schema of the payload is expected to be consistent for all events with the same 'action'.
-- metadata: A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional context to the event.
-- occurred_at: The time at which event occurred. This is formatted in the ISO-8601 format, with up to 9 digits of fractional precision, such as '2017-12-21T13:50:54.474Z'.
-- actor: The actor who performed this event. In most cases this will be a CircleCI user. This is a JSON blob that will always contain id and and type and likely contain name.
-- target: The object on which this action was performed. This might be a project, an org, an account, a build, etc. This is a JSON blob that will always contain id and and type and likely contain name.
-- scope: If the target is owned by an account in the CircleCI domain model, then the account field should be filled in with the Account name and ID. This is a JSON blob that will always contain id and and type and likely contain name.
-- success: A flag to indicate if the action was successful.
-- request: If this event was triggered by an external request this will be populated. JSON blob containing id (The request ID assigned to this request by CircleCI), ip_address (The original IP address (in IPV4 dotted notation) from which the request was made, eg. 127.0.0.1), and client_trace_id (The client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request.)
+### Audit Log Events
+<!-- TODO: automate this from event-cataloger -->
+The following are the `action` values currently logged. 
+
+- context.create
+- context.delete
+- context.env_var.delete
+- context.env_var.store
+- project.env_var.create
+- project.env_var.delete
+- project.settings.update
+- user.create
+- user.logged_in
+- user.logged_out
+- workflow.job.approve
+- workflow.job.finish
+- workflow.job.scheduled
+- workflow.job.start
