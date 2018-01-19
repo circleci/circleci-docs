@@ -16,11 +16,11 @@ order: 1
 
 - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
-- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage  upgrades as new versions are released.
+- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
 
 ## Why did you change the name from CircleCI Enterprise? 
 
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for  customers and for CircleCI employees. 
+The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees. 
 
 CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
@@ -168,7 +168,7 @@ Not yet, but we are working on that functionality.
 Not yet, but we are working on that functionality.
 
 ### Can I use `store_test_results` with Workflows?
-You can use `store_test_results` in order to populate your builds' Test Summary section with your test results information  and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-patterns). Test timings data is now available for 2.0 with Workflows.
+You can use `store_test_results` in order to populate your builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-patterns). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
  
 ### Can I use Workflows with CircleCI 1.0?
  
@@ -195,7 +195,7 @@ No.
 We do not support fork PR’s yet.
 
 ### Can workflows be scheduled to run at a specific time of day?
-Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an  installable CircleCI release.
+Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an installable CircleCI release.
 
 ### What time zone is used for schedules?
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
