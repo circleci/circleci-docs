@@ -4,7 +4,6 @@
  short-title: "Authentication"
  description: "Configuring LDAP Authentication"
  categories: [administration]
- hide: true
  order: 9
 ---
 
