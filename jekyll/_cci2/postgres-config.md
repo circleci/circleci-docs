@@ -67,7 +67,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```
      steps:
     # Add the Postgres 9.6 binaries to the path.
-       - run: echo ‘/usr/lib/postgresql/9.6/bin/:$PATH’ >> $BASH_ENV
+       - run: echo '/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
 
 ## Configuring Passwordless Login
@@ -79,7 +79,7 @@ To work around this, consider overwriting the existing user with a new user and 
       - run:
     # Add a password to the `ubuntu` user, since Postgres is configured to
     # always ask for a password without sudo, and fails without one.
-        command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password ‘ubuntu’;”
+        command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
         command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
 
     # Create a new test database.
