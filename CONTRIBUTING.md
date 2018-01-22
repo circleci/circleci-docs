@@ -114,3 +114,7 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 ### Bold and Terms
 
 Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
+
+### Recommending User Actions
+
+When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
