@@ -61,7 +61,7 @@ For basic technical writing style tips, see [Technical writing style](https://en
 
 ### Markdown
 
-Since the emphasis in docs is on prose, we prefer [markdown](http://commonmark.org/help/) over plain HTML.
+To keep the emphasis on prose, use [markdown](http://commonmark.org/help/) over plain HTML.
 
 ### Bootstrap
 

@@ -1,6 +1,3 @@
-# Markdown
-Use markdown over HTML to keep an emphasis on prose.
-
 # Emphasis
 
 ## Bold
