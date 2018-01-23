@@ -5,7 +5,7 @@ title: Embedding Build Status Badges
 
 ## Overview
 
-CircleCI provides build status badges for both projects and branches. Users tend to embed status badges in GitHub READMEs, although they can be placed virtually anywhere.
+CircleCI provides build status badges for projects and branches. Status badges are commonly embedded in GitHub READMEs, although they can be placed virtually anywhere.
 
 ## Steps
 
