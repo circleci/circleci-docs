@@ -25,4 +25,4 @@ If you find the standard status badge ugly, you can use the highly-attractive sh
 - Standard ![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
 - Shield ![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
 
-To use the shield style, simply replace `style=svg` with `style=shield` in the generated link.
+To use the shield style, simply replace `style=svg` with `style=shield` in the link you generated above.
