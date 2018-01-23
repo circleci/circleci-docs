@@ -16,101 +16,35 @@ If a doc is unclear or incorrect, you can open an issue by clicking **Open an is
 
 For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
 
-For larger edits or new articles, you'll want to set up a local environment for editing. Please see our [Local Development README](README-local-development.md) to set that up.
-
-Come back here when you're ready to start editing!
-
-### Editing Docs Locally
-
-All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`, for CircleCI Classic and CircleCI 2.0, respectively.
-
-1. Create a branch and switch to it:
-
-    `git checkout -b <branch-name>`
-
-2. Add or modify the Markdown files in these directories according to the [style guide](#style-guide) below.
-
-If you installed Jekyll with Docker or ran `jekyll serve -Iw`, then the server should watch for changes and automatically rebuild.
-
-3. When you're happy with your changes, commit them with a message summarizing what you did:
-
-    `git commit -a -m "commit message"`
-
-4. Push your branch up:
-
-    `git push origin <branch-name>`
-
-### Submitting a Pull Request
-
-Create a pull request from your fork by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+For larger edits or new articles, you'll want to [set up a local environment](README-local-development.md) for editing or adding articles. When you are finished with your changes, create a pull request from your branch by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
 In order to help those watching for new modifications and additions to the documentation, it is suggested that your pull request title be descriptive enough to help those watching the repository get a general idea of what is being changed and why. Adding a description with more information&mdash;if necessary&mdash;is a bonus!
 
 | Original Pull Request Title | Better Title                                                               |
 |-----------------------------|----------------------------------------------------------------------------|
-| _Updating file.md_          | _Indicating support for environment variables in context paths_            |
-| _Sidebar changes_           | _Moving Deployment to its own navigation section for better organization_  |
+| _Updating file.md_          | _Indicate support for environment variables in context paths_            |
+| _Sidebar changes_           | _Move Deployment to its own navigation section for better organization_  |
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
 
-## Style Guide
+# Style Guide
 
-We don't have a lot of rules, but we do try to be consistent with the ones we have. Please follow these guidelines as best you can!
+For basic technical writing style, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
 
-For basic technical writing style tips, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
+We also have a short list of guidelines that take precedence over the general guide above. We don't have a lot of rules, but we do try to be consistent with the ones we have.
 
-### Markdown
+## Markdown
 
-Since the emphasis in docs is on prose, we prefer [markdown](http://commonmark.org/help/) over plain HTML.
+To keep the emphasis on prose, use [markdown](http://commonmark.org/help/) over plain HTML.
 
-### Bootstrap
-
-The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
-
-### Adding New Articles
-
-New articles can be added to the [jekyll/_cci2](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2) directory in this repo.
-
-When you make a new article, you'll need to add [**front matter**](https://jekyllrb.com/docs/frontmatter/). This contains metadata about the article you're writing and is required so everything works on our site.
-
-Front matter for our docs will look something like:
-
-```
----
-layout: classic-docs
-title: "Your Doc Title"
-short-title: "Short Title"
-categories: [category-slug]
-order: 10
----
-```
-
-`layout` describes visual settings shared across our docs. `title` will appear at the top of your article and appear in hyphenated form for the URL. `short-title` will display in the sidebar on the left underneath the article's category.
-
-The list of available categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml).
-
-`order` specifies the article's placement within its category. You may need to change the `order` of other articles to get your article to appear where you want within a category. Best practice is to use multiples of 10; this makes it easy to put a new doc between two others.
-
-### Headings & Tables of Contents
-
-Jekyll will automatically convert your article's title into a level one heading (#), so we recommend using level two (##), level three (###) and level four (####) headings when structuring your article.
-
-If your article gets too long, you can add a table of contents with the reference name "toc":
-
-```
-* TOC
-{:toc}
-```
-
-This will create an unordered list for every heading level in your article (the `* TOC` line will not display).
-
-If you want to exclude a heading from a TOC, you can specify that with another reference name:
-
-```
-# Not in the TOC
-{:.no_toc}
-```
-
-### Bold and Terms
+## Bold and Terms
 
 Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
+
+## Word Preferences
+
+Like any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
+
+### User Action Recommendations
+
+When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
