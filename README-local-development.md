@@ -98,4 +98,4 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 
 # Submitting Pull Requests
 
-Once you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
