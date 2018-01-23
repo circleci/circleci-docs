@@ -41,6 +41,10 @@ To keep the emphasis on prose, use [markdown](http://commonmark.org/help/) over 
 
 Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
 
-## User Action Recommendations
+## Word Preferences
+
+Like any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
+
+### User Action Recommendations
 
 When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
