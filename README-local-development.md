@@ -72,11 +72,9 @@ order: 10
 ---
 ```
 
-`layout` describes visual settings shared across our docs. `title` will appear at the top of your article and appear in hyphenated form for the URL. `short-title` will display in the sidebar on the left underneath the article's category.
+`layout` and `title` are the only required variables. `layout` describes visual settings shared across our docs. `title` will appear at the top of your article and appear in hypenated form for the URL.
 
-The list of available categories can be found in [categories.yml](https://github.com/circleci/circleci-docs/blob/master/jekyll/_data/categories.yml).
-
-`order` specifies the article's placement within its category. You may need to change the `order` of other articles to get your article to appear where you want within a category. Best practice is to use multiples of 10; this makes it easy to put a new doc between two others.
+The remaining variables (`categories`, `short-title`, and `order`) are deprecated and no longer used in documentation. Navigation links to each article are manually added to category landing pages. If you're having trouble deciding where to put an article, a CircleCI docs lead can help.
 
 ### Headings & Tables of Contents
 
