@@ -80,7 +80,7 @@ The remaining variables (`categories`, `short-title`, and `order`) are deprecate
 
 Jekyll will automatically convert your article's title into a level one heading (#), so we recommend using level two (##), level three (###) and level four (####) headings when structuring your article.
 
-If your article gets too long, you can add a table of contents with the reference name "toc":
+If your article has more than three headings after the title, please use a table of contents. To add a table of contents, use the following reference name:
 
 ```
 * TOC
