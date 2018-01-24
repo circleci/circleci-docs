@@ -15,7 +15,7 @@ CircleCI provides a tool to generate embed code for status badges.
 2. By default, the badge will display the status of your project's default branch. If you want to show the status of a different branch, use the Branch dropdown menu to select it.
 3. (Optional) If you haven't created an API token for viewing a project's details, click on _API Permissions_ in the _Permissions_ section. Next, click _Create Token_, choose the _Status_ scope, and create a label for the token.
 4. (Optional) In the _API Token_ dropdown menu, select the token you want to use.
-5. Depending on where you are embedding the status badge, select the appropriate choice from the _Embed Code_ dropdown menu.
+5. Select the appropriate language from the _Embed Code_ dropdown menu.
 6. Copy and paste the generated link to wherever you want to display the status badge.
 
 ## Customization
