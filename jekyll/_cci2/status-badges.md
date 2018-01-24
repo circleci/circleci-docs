@@ -16,7 +16,7 @@ CircleCI provides a tool to generate embed code for status badges.
 3. (Optional) If you haven't created an API token for viewing a project's details, click on _API Permissions_ in the _Permissions_ section. Next, click _Create Token_, choose the _Status_ scope, and create a label for the token.
 4. (Optional) In the _API Token_ dropdown menu, select the token you want to use.
 5. Select the appropriate language from the _Embed Code_ dropdown menu.
-6. Copy and paste the generated link to wherever you want to display the status badge.
+6. Copy and paste the generated link to the web page or document where you want to display the status badge.
 
 ## Customization
 
