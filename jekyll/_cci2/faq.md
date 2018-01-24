@@ -211,6 +211,12 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 
 ## Billing
 
+### How do I upgrade my plan with more containers to prevent queuing?
+
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
+
+* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+
 ### Is there a way to share plans across organizations and have them billed centrally?
 Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
 
