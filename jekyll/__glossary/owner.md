@@ -2,4 +2,4 @@
 term: Owner
 ---
 
-The owner of the team GitHub or Bitbucket account (org).
+The owner of the team GitHub account or Bitbucket org.
