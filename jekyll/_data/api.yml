@@ -619,7 +619,7 @@ project_post:
     - {name: "build_parameters", description: "Additional environment variables to inject into the build environment.  A map of names to values.", example: "{\"JAVA_OPTS\": \"+Xms128m\"}"}
   body: |
     {
-      "tag": "v0.1" // optional
+      "tag": "v0.1", // optional
       "parallel": 2, //optional, default null
       "build_parameters": { // optional
         "RUN_EXTRA_TESTS": "true"
