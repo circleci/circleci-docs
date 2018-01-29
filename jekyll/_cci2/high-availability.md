@@ -11,7 +11,7 @@ This document describes how to to set up a highly available CircleCI 2.0 install
 * TOC
 {:toc}
 
-## Prequisites
+## Prerequisites
 
 Before you configure an existing CircleCI installation for high availability, you must update your license by contacting the Customer Success Manager on your account or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
 
