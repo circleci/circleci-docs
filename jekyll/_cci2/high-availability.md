@@ -6,18 +6,18 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-**NOTE: Your CircleCI license must include support for high-availability in order to use this configuration. Please contact your account manager if you have questions.**
+High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption.
 
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
 * TOC
 {:toc}
 
-## Overview
+## Prerequisites
 
-The steps in this document assume you have an existing CircleCI 2.0 Services machine and Builders in use. To configure your existing CircleCI 2.0 installation for high availability, you must export the databases currently in use on the Services machine to new AWS instances. This procedure uses three instances for the MongoDB replica set and a new AWS instance ASG (Auto Scaling Group) for PostgreSQL.
+Before you configure an existing CircleCI installation for high availability, you must update your license by contacting our account team or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
 
-After completing these procedures, the security, maintenance, and backups of the external databases will require knowledge of MongoDB and PostgreSQL sufficient for your organization to own this responsibility and perform all related tasks. The benefit of completing this configuration is the ability to replicate your CircleCI data and to automate recovery from a single database instance failure without downtime or loss of services.
+The steps in this document also assume you have an existing CircleCI 2.0 Services machine and Builders in use. To configure your existing CircleCI 2.0 installation for high availability, you must export the databases currently in use on the Services machine to new AWS instances. This procedure uses three instances for the MongoDB replica set and a new AWS Auto Scaling group for PostgreSQL.
 
 ## MongoDB Instance Requirements
 
@@ -255,7 +255,7 @@ docker logs -f frontend
 
 Regularly backup data mounted on EBS volumes using the following steps:
 
-1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **NOTE:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
+1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **Note:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
 2. Use the AWS console or CLI to generate and complete a snapshot.
 3. To rejoin the replica set as a SECONDARY, restart the mongodb  process with `sudo service mongod start`.
 4. The SECONDARY begins serving traffic after replication catches up.
