@@ -9,7 +9,7 @@ order: 34
 
 *[Test]({{ site.baseurl }}/2.0/test/) > Collecting Test Metadata*
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step. 
+CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step.
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of   [Insights](https://circleci.com/build-insights) in the application to identify flaky tests and isolate recurring issues.  
 
@@ -49,7 +49,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 
 ### Custom runner examples
 
-This section provides the following test runner examples: 
+This section provides the following test runner examples:
 
 * [Cucumber]( {{ site.baseurl }}/2.0/collect-test-data/#cucumber)
 * [Maven Surefire]( {{ site.baseurl }}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
@@ -72,15 +72,15 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
 ```yaml
     steps:
       - run:
-          name: Save test results 
+          name: Save test results
           command: |
-            mkdir -p ~/cucumber 
+            mkdir -p ~/cucumber
             bundle exec cucumber --format junit --out ~/cucumber/junit.xml
           when: always
       - store_test_results:
           path: ~/cucumber
       - store_artifacts:
-          path: ~/cucumber 
+          path: ~/cucumber
 ```
 
 The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the Builds page in the application.
@@ -90,9 +90,9 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 ```yaml
     steps:
       - run:
-          name: Save test results 
+          name: Save test results
           command: |
-            mkdir -p ~/cucumber 
+            mkdir -p ~/cucumber
             bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
           when: always
       - store_test_results:
@@ -112,9 +112,9 @@ project.
 ```yaml
     steps:
       - run:
-          name: Save test results 
+          name: Save test results
           command: |
-            mkdir -p ~/junit/ 
+            mkdir -p ~/junit/
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
           when: always
       - store_test_results:
@@ -133,7 +133,7 @@ project.
 ```yaml
     steps:
       - run:
-          name: Save test results 
+          name: Save test results
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
@@ -155,7 +155,7 @@ A working `.circleci/config.yml` section for testing might look like this:
       - checkout
       - run: npm install
       - run: mkdir ~/junit
-      - run: 
+      - run:
           command: mocha test --reporter mocha-junit-reporter
           environment:
             MOCHA_FILE: junit/test-results.xml
@@ -173,7 +173,7 @@ To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner y
 A working `.circleci/config.yml` section for testing might look like the following example:
 
 ```
-    steps: 
+    steps:
       - run:
           command: |
             yarn add ava tap-xunit --dev # or you could use npm
@@ -195,7 +195,7 @@ A working `.circleci/config.yml` test section might look like this:
 
 ```
     steps:
-      - run: 
+      - run:
           command: |
             mkdir -p ~/reports
             eslint ./src/ --format junit --output-file ~/reports/eslint.xml
@@ -213,7 +213,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
 
 ```
     steps:
-      - run: 
+      - run:
           command: |
             mkdir -p ~/phpunit
             phpunit --log-junit ~/phpunit/junit.xml tests
@@ -235,10 +235,10 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
             . venv/bin/activate
             mkdir -p test-reports/junit
             pytest --junitxml=test-reports/junit
-            
+
       - store_test_results:
           path: test-reports
-          
+
       - store_artifacts:
           path: test-reports    
 ```
@@ -259,9 +259,9 @@ And modify your test command to this:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run: mkdir ~/rspec
-      - run: 
+      - run:
           command: bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
-          when: always 
+          when: always
       - store_test_results:
           path: ~/rspec
 ````
@@ -279,13 +279,12 @@ And modify your test command to this:
 ````
     steps:
       - checkout
-      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - run: mkdir ~/reports
-      - run: 
-          command: bundle exec rake test TESTOPTS="--ci-dir=./reports":
+      - run: bundle check || bundle install
+      - run:
+          command: bundle exec rake test
           when: always
       - store_test_results:
-          path: ~/reports
+          path: test/reports
 ````
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
@@ -333,7 +332,7 @@ junitReporter: {
 
 #### <a name="jest"></a>Jest
 
-Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run 
+Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run
 `yarn add --dev jest-junit`.
 
 Then form your command in your config to output using the reporter.
