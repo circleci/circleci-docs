@@ -6,12 +6,14 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-**Note: To use this configuration, your CircleCI license must include support for high availability. Please contact your Customer Success Manager if you'd like to set up a High Availability Installation on CircleCI 2.0.**
-
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
 * TOC
 {:toc}
+
+## Prequisites
+
+Before you configure an existing CircleCI installation for high availability, you must update your license by contacting the Customer Success Manager on your account or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
 
 ## Overview
 
