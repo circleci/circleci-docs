@@ -15,7 +15,7 @@ This document describes how to to set up a highly available CircleCI 2.0 install
 
 ## Prerequisites
 
-Before you configure an existing CircleCI installation for high availability, you must update your license by contacting an account manager or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
+Before you configure an existing CircleCI installation for high availability, you must update your license by contacting our account team or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
 
 The steps in this document also assume you have an existing CircleCI 2.0 Services machine and Builders in use. To configure your existing CircleCI 2.0 installation for high availability, you must export the databases currently in use on the Services machine to new AWS instances. This procedure uses three instances for the MongoDB replica set and a new AWS Auto Scaling group for PostgreSQL.
 
