@@ -67,7 +67,7 @@ The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a 
 
 ## Installing Dependencies
 
-Next the job installs Python dependencies into the *primary container* by running `pip install`. Depedencies are installed into the *primary container* by running regular Steps executing shell commands:
+Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
 
 ```
 version: 2
