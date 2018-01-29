@@ -100,7 +100,11 @@ jobs:
 
 ## Interpolating Environment Variables to Set Other Environment Variables
 
-If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.  As an example, you could add an entry to the `$PATH` as follows:
+If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in Bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.
+
+### Setting PATH
+
+For example, this is how you could set PATH within a build:
 
 ```
     steps:
@@ -116,7 +120,7 @@ Build parameters are environment variables, therefore their names have to meet t
 - They must not begin with a number.
 - They must contain at least one character.
 
-Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are  treated as simple strings. The order that build parameters are loaded in is not guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
+Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is not guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
 For example, when you pass the parameters:
 
