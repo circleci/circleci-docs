@@ -6,6 +6,8 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
+High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption.
+
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
 * TOC
@@ -16,8 +18,6 @@ This document describes how to to set up a highly available CircleCI 2.0 install
 Before you configure an existing CircleCI installation for high availability, you must update your license by contacting an account manager or by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Configuring an existing CircleCI installation for HA without updating the license through the CircleCI customer success team is **not** supported.
 
 The steps in this document also assume you have an existing CircleCI 2.0 Services machine and Builders in use. To configure your existing CircleCI 2.0 installation for high availability, you must export the databases currently in use on the Services machine to new AWS instances. This procedure uses three instances for the MongoDB replica set and a new AWS Auto Scaling group for PostgreSQL.
-
-After completing these procedures, you should be familiar enough with MongoDB and PostgreSQL to manage the security, maintenance, and backups of these external databases. The benefit of completing this configuration is the ability to replicate your CircleCI data and to automate recovery from a single database instance failure without downtime or loss of services.
 
 ## MongoDB Instance Requirements
 
