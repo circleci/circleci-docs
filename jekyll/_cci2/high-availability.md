@@ -6,7 +6,7 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-**NOTE: Your CircleCI license must include support for high-availability in order to use this configuration. Please contact your account manager if you have questions.**
+**Note: To use this configuration, your CircleCI license must include support for high availability. Please contact your Customer Success Manager if you'd like to set up a High Availability Installation on CircleCI 2.0.**
 
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
@@ -255,7 +255,7 @@ docker logs -f frontend
 
 Regularly backup data mounted on EBS volumes using the following steps:
 
-1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **NOTE:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
+1. To ensure that the disk is in a consistent state, stop the mongodb process (using `sudo service mongod stop` or another system-appropriate command) on one of the SECONDARY instances and wait for the process to completely stop. **Note:** stopping the replica outright has proven to be more reliable for consistent restores than using the db.fsyncLock() mechanism described in the mongo documentation. This is also an additional safeguard for consistent state on top of the journal files.
 2. Use the AWS console or CLI to generate and complete a snapshot.
 3. To rejoin the replica set as a SECONDARY, restart the mongodb  process with `sudo service mongod start`.
 4. The SECONDARY begins serving traffic after replication catches up.
