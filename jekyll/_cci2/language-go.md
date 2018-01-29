@@ -37,7 +37,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
-If you want to test your changes locally you can use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
+If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
 
 ---
 
@@ -97,7 +97,7 @@ Next we create a directory for collecting test results
       - run: mkdir -p $TEST_RESULTS
 ```
 
-Then we pull down the cache, if present. If this is your first run, this won't do anything. After we pull down the projects dependencies and build them, we store any package files in the cache. This is the recommended way to cache dependencies for your Go project, if any.
+Then we pull down the cache (if present). If this is your first run, this won't do anything.
 
 ```YAML
       - restore_cache:
@@ -179,7 +179,7 @@ Now we know that our unit tests succeeded we can start our service and validate 
           command: curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-After we build the project using `make`, we store any packages that were built inside the cache.
+After we pull and build the project's dependencies using `make`, we store any built packages in the cache. This is the recommended way to cache dependencies for your Go project.
 
 To start the service we need to build it first. After that we use the same environment variables as we did in the testing step for the service to start. We're using `background: true` to keep the service running and proceed to the next step where we use `curl` to validate it successfully started and is responding to our request.
 
