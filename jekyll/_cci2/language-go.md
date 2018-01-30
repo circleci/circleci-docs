@@ -37,6 +37,8 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
+If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
+
 ---
 
 ## Config Walkthrough
@@ -91,13 +93,23 @@ The `checkout` step will default to the `working_directory` we have already defi
 
 Next we create a directory for collecting test results
 
-``` YAML
+```YAML
       - run: mkdir -p $TEST_RESULTS
 ```
 
-And install the Go implementation of the JUnit reporting tool. This is another good candidate to be preinstalled in primary container.
+Then we pull down the cache (if present). If this is your first run, this won't do anything.
 
 ```YAML
+      - restore_cache:
+          keys:
+            - v1-pkg-cache
+```
+
+And install the Go implementation of the JUnit reporting tool and other dependencies for our application. These are good candidates to be pre-installed in primary container.
+
+```YAML
+      - run: go get github.com/lib/pq
+      - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 ```
 
@@ -149,6 +161,11 @@ Now we know that our unit tests succeeded we can start our service and validate 
 ``` YAML
       - run: make
 
+      - save_cache:
+          key: v1-pkg-cache
+          paths:
+            - "/go/pkg"
+
       - run:
           name: Start service
           environment:
@@ -161,6 +178,8 @@ Now we know that our unit tests succeeded we can start our service and validate 
           name: Validate service is working
           command: curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
+
+After we pull and build the project's dependencies using `make`, we store any built packages in the cache. This is the recommended way to cache dependencies for your Go project.
 
 To start the service we need to build it first. After that we use the same environment variables as we did in the testing step for the service to start. We're using `background: true` to keep the service running and proceed to the next step where we use `curl` to validate it successfully started and is responding to our request.
 
