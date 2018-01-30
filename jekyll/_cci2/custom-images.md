@@ -20,6 +20,10 @@ Watch the following video for a detailed tutorial of customizing Docker images.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
 
+## How to Use the CircleCI Dockerfile Wizard
+
+Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image. 
+
 ## Custom Image Overview
 CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
 
