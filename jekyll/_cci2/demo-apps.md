@@ -21,7 +21,6 @@ Language Guide | Framework | GitHub Repo Name
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Java]{:target="_blank"} | Spring | [circleci-demo-java-spring]{:target="_blank"}
  [JavaScript]{:target="_blank"} | React | [circleci-demo-javascript-express]{:target="_blank"}
- [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [PHP]{:target="_blank"} | Laravel | [circleci-demo-php-laravel]{:target="_blank"}
  [Python]{:target="_blank"} | Django | [circleci-demo-python-django]{:target="_blank"}
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/){:target="_blank"} | Flask | [circleci-demo-python-flask]{:target="_blank"}
