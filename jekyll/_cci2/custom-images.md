@@ -14,19 +14,26 @@ This document describes how to create and use custom Docker images with CircleCI
 * TOC
 {:toc}
 
-## How to Customize Docker Images for CircleCI 2.0 Video Tutorial
+## Overview
 
-Watch the following video for a detailed tutorial of customizing Docker images.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
-
-## Custom Image Overview
 CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
 
 1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
 2. A more concise and easier to maintain CircleCI `config.yml` file
 
-In this document we will give a walkthrough of how to create a custom image. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+## CircleCI Dockerfile Wizard 
+
+Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker. 
+
+## Creating a Custom Image Manually
+
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+
+### How to Customize Docker Images for CircleCI 2.0 Video Tutorial
+
+Watch the following video for a detailed tutorial of customizing Docker images.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
 
 ## Prerequisites
 
