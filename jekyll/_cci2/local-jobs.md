@@ -46,10 +46,10 @@ The config validate command checks your local config.yml file for syntax errors.
 
 ## Validate Every Configuration Change
 
-To catch CircleCI config errors as you build your full `config.yml` file, it is possible create a git pre-commit hook to validate `~/.circleci/config.yml` that, when pushing to git, will run the 
+To catch CircleCI config errors as you build your full `config.yml` file, it is possible create a Git pre-commit hook to validate `~/.circleci/config.yml` that, when pushing to git, will run the 
 `circleci config validate` command that is available to every build. 
 
-See the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-jobs/) document for complete information about the `circleci` command and then check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) about creating the Git hook.
+Check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) about creating the Git hook.
 
 
 ### Running A Build
