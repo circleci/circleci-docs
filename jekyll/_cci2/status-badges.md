@@ -5,7 +5,7 @@ title: Embedding Build Status Badges
 
 [Basics]({{ site.baseurl }}/2.0/basics/) > Embedding Build Status Badges
 
-This document describes how to embed a badge that shows the build status (passed or failed) for your project in your README or in another document. You can generate a code for the following formats: Image URL, Markdown, Textile, Rdoc, AsciiDoc, reStructuredText, and pod. 
+This document describes how to embed a badge that shows the build status (passed or failed) for your project in your README or in another document. You can generate code for the following formats: Image URL, Markdown, Textile, Rdoc, AsciiDoc, reStructuredText, and pod. 
 
 ## Overview
 
