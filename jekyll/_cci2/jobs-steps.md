@@ -9,7 +9,9 @@ order: 2
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Jobs and Steps*
 
-New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback.
+New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
+
+![header]( {{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
 
 The following sections provide an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
 
