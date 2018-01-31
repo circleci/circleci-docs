@@ -177,7 +177,7 @@ Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/
 
 ## Google Cloud
 
-Before deploying to Google Cloud, ensure that you have authenticated the `gcloud` command line tool. To do that, you can read the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/) document.
+Before deploying to Google Cloud, ensure that you have authenticated the `gcloud` command line tool. To do that, you can read the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth.md) document.
 
 In addition, ensure that the Google Cloud SDK is installed in your primary container so that `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands.
 
