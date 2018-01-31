@@ -21,7 +21,7 @@ CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the
 1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
 2. A more concise and easier to maintain CircleCI `config.yml` file
 
-### CircleCI Dockerfile Wizard 
+## CircleCI Dockerfile Wizard 
 
 Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker. 
 
