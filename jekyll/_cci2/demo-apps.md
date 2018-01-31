@@ -13,20 +13,19 @@ Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve c
 
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
- [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [Clojure] | Luminus | [circleci-demo-clojure-luminus]
- [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
- [Go] | Go | [circleci-demo-go]
- [iOS] | Xcode | [circleci-demo-ios]
- [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [Java] | Spring | [circleci-demo-java-spring]
- [JavaScript] | React | [circleci-demo-javascript-express]
- [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [PHP] | Laravel | [circleci-demo-php-laravel]
- [Python] | Django | [circleci-demo-python-django]
- [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
- [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
+ [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
+ [Clojure]{:target="_blank"} | Luminus | [circleci-demo-clojure-luminus]{:target="_blank"}
+ [Elixir]{:target="_blank"} | Phoenix | [circleci-demo-elixir-phoenix]{:target="_blank"}
+ [Go]{:target="_blank"} | Go | [circleci-demo-go]{:target="_blank"}
+ [iOS]{:target="_blank"} | Xcode | [circleci-demo-ios]{:target="_blank"}
+ [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
+ [Java]{:target="_blank"} | Spring | [circleci-demo-java-spring]{:target="_blank"}
+ [JavaScript]{:target="_blank"} | React | [circleci-demo-javascript-express]{:target="_blank"}
+ [PHP]{:target="_blank"} | Laravel | [circleci-demo-php-laravel]{:target="_blank"}
+ [Python]{:target="_blank"} | Django | [circleci-demo-python-django]{:target="_blank"}
+ [Python]({{ site.baseurl }}/2.0/project-walkthrough/){:target="_blank"} | Flask | [circleci-demo-python-flask]{:target="_blank"}
+ [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
+ [Ruby and Rails]{:target="_blank"} | Rails | [circleci-demo-ruby-rails]{:target="_blank"}
 {: class="table"}
 
 ## Supported Languages
