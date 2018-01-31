@@ -3,6 +3,10 @@ layout: classic-docs
 title: Embedding Build Status Badges
 ---
 
+[Basics]({{ site.baseurl }}/2.0/basics/) > Embedding Build Status Badges
+
+This document describes how to embed a badge that shows the build status (passed or failed) for your project in your README or in another document. You can generate code for the following formats: Image URL, Markdown, Textile, Rdoc, AsciiDoc, reStructuredText, and pod. 
+
 ## Overview
 
 CircleCI provides build status badges for projects and branches. Status badges are commonly embedded in GitHub READMEs, although they can be placed virtually anywhere.
