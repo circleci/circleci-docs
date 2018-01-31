@@ -342,17 +342,22 @@ workflows:
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
+![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+
 Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
 
 For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job. 
 
 A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
 
-To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace and made available for subsequent jobs (and re-runs of the workflow) to use. 
+To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use. 
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
 
 ```
+# The following stanza defines a map named defaults with a variable that may be inserted using the YAML merge (<<: *) key 
+# later in the file to save some typing. See http://yaml.org/type/merge.html for details.
+
 defaults: &defaults
   working_directory: /tmp
   docker:
@@ -365,9 +370,11 @@ jobs:
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
-
+      
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+	  # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
           paths:
