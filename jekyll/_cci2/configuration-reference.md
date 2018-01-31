@@ -732,8 +732,10 @@ persist_to_workspace:
 
 After this step completes, the following directories are added to the workspace:
 
-`foo/bar`
-`baz`
+```
+foo/bar
+baz
+```
 
 ###### _Example for paths Key_
 
