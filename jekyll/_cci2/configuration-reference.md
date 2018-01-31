@@ -722,13 +722,15 @@ The root key is a directory on the container which is taken to be the root direc
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
+``` YAML
 persist_to_workspace:
   root: /tmp/dir
   paths:
     - foo/bar
     - baz
+```
 
-After this step completes, the following directories will be added to the workspace:
+After this step completes, the following directories are added to the workspace:
 
 `foo/bar`
 `baz`
