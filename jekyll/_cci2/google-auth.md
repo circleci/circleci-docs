@@ -15,20 +15,20 @@ Before you can use the `gcloud` command line tool with CircleCI, you must authen
 
 ## Steps
 
-### Create a service account and download
+### Create a Service Account and Download
 
 Go to Google's [Getting Started with Authentication][] article and follow the instructions in the **Creating a service account** section.
 
-### Add service account to CircleCI environment
+### Add Service Account to CircleCI Environment
 
 1. Encode the JSON file you downloaded in base64 format and copy the result to the clipboard.
 2. In the CircleCI application, go to your project's settings by clicking the gear icon in the top right.
 3. In the **Build Settings** section, click **Environment Variables**, then click the **Add Variable** button.
 4. Name the variable. In this example, the variable is named `$GCLOUD_SERVICE_KEY`.
-5. Paste the contents from step 2 into the **Value** field.
+5. Paste the contents from Step 2 into the **Value** field.
 6. Click the **Add Variable** button.
 
-### Decode and store service account
+### Decode and Store Service Account
 
 To authenticate the `gcloud` tool, you will first need to decode the environment variable you created above. You could do that by adding the following command to `config.yml`:
 
@@ -36,7 +36,7 @@ To authenticate the `gcloud` tool, you will first need to decode the environment
 
 This will decode the secret into a file named `gcloud-service-key.json`.
 
-### Authenticate the `gcloud` tool
+### Authenticate the `gcloud` Tool
 
 Update `gcloud`, authenticate, and set the project's active configuration.
 
@@ -44,7 +44,7 @@ Update `gcloud`, authenticate, and set the project's active configuration.
     sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
     sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
 
-### Set Google application credentials
+### Set Google Application Credentials
 
 To use certain services (like Google Cloud Datastore), you will also need to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`. See above for instructions on adding environment variables to CircleCI projects.
 
