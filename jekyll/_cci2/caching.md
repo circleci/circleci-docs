@@ -9,7 +9,15 @@ order: 50
 
 *[Build Environments]({{ site.baseurl }}/2.0/build/) > Caching Dependencies*
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. However, the keys are simple to configure, for example, updating a cache if it changes, by using checksum of `pom.xml` with a cascading fallback:
+Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs. After the initial job run, future instances of the job will run faster by not redoing work. 
+
+![caching data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
+
+A good example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload everything on every build.
+
+## Example Caching Configuration
+
+Caching keys are simple to configure. The following example updates a cache if it changes by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
 ```YAML
@@ -20,6 +28,10 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. Autom
            - m2- # used if checksum fails
 ```
 {% endraw %}
+
+## Introduction
+
+Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control. 
 
 This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible. 
 
