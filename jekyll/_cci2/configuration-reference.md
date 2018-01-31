@@ -716,7 +716,24 @@ root | Y | String | Either an absolute path or a path relative to `working_direc
 paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
 {: class="table table-striped"}
 
-###### _Example_
+The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
+
+##### _Example for root Key_
+
+For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
+
+persist_to_workspace:
+  root: /tmp/dir
+  paths:
+    - foo/bar
+    - baz
+
+After this step completes, the following directories will be added to the workspace:
+
+`foo/bar`
+`baz`
+
+###### _Example for paths Key_
 
 ``` YAML
 - persist_to_workspace:
