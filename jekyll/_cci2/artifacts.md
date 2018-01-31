@@ -16,10 +16,16 @@ This document describes how to work with Artifacts in the following sections:
 
 ## Artifacts Overview
 
+Artifacts persist data after a Workflow is completed and may be used for longer-term storage of the outputs of your build process. For example, a Java project that produces a `.jar` file. When the Java build/test process passes, the output of the process (the `.jar` file) can be stored as an artifact. The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
+
+![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
+
+Another example of an Artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
+
 If your build produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
-![]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
 Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
 
