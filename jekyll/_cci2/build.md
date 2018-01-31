@@ -10,6 +10,7 @@ Refer to the following documents for instructions specific to your environment.
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/executor-types/">Choosing an Executor Type</a> | Comparison of the `docker`, `machine` and `macos` executor types, trade-offs and examples of usage.
+<a href="{{ site.baseurl }}/2.0/caching/">Caching Dependencies</a> | How to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
 {: class="table table-striped"}
 
 ## How to Build, Test, and Deploy Video Tutorial
