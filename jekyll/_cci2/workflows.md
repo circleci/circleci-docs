@@ -16,25 +16,26 @@ To increase the speed of your software development through faster feedback, shor
 
 ## Overview
 
-A workflow is a set of rules for defining a collection of jobs and their run order that shortens the feedback loop. For example, if only one job in your Workflow fails, you will know it is failing in real-time and you can rerun *just the failed job* instead of wasting time and resources waiting for the entire build to fail or rerunning the entire set of jobs. 
+A **workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
 
-Schedule workflows at a specific time to make efficient use of your resources or to run jobs that should only run periodically. The Workflows feature supports very complex job orchestration using a simple set of new configuration keys with a powerful user interface to help you resolve failures sooner, for example:
+With workflows, you can:
 
-- Run and troubleshoot jobs independently with fast status feedback as each job runs
-- Fan-out to run multiple jobs in parallel for efficient testing of versions 
-- Fan-in for deployment to separate platforms with increased speed
+- Run and troubleshoot jobs independently with real-time status feedback.
+- Schedule workflows for jobs that should only run periodically.
+- Fan-out to run multiple jobs in parallel for efficient version testing.
+- Fan-in to quickly deploy to multiple platforms.
+
+For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
 ### Limitations
 
-It is not possible to trigger a workflow with the API, projects that run by using the CircleCI API will ignore workflows and will require a job named `build`. That is, if you build a project with workflows using the API, the workflows are ignored, and CircleCI will build the project as if it's a normal build, which must have a `build` job. Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional limitations and information about features of 2.0 which are not yet supported with Workflows.
+Projects run by using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. **Note:** builds without workflows require a `build` job.
 
-## Rerunning a Workflow from a Failed Job
-
-When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs *after* the failure will run, saving time and resources.
-
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional information and limitations.
 
 ## Workflows Configuration Examples
+
+_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference document._
 
 To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
@@ -409,6 +410,12 @@ workflows:
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
+## Rerunning a Workflow from a Failed Job
+
+When you use workflows, you increase your ability to rapidly respond to failures. To rerun a workflow from a failed job, click the **Workflows** icon in the app and select a workflow to see the status of each job. Click the **Rerun** button and select **From failed** to restart the workflow from the last failed job.
+
+![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+
 ## Troubleshooting
 
 This section describes common problems and solutions for Workflows.
@@ -446,8 +453,6 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 ## See Also
 
 - For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document. 
-
-- For details about the `workflows:` key requirements, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference document.
 
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the  FAQ.
 
