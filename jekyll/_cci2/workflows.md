@@ -16,7 +16,7 @@ To increase the speed of your software development through faster feedback, shor
 
 ## Overview
 
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+A **workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
 
 With workflows, you can:
 
@@ -33,15 +33,9 @@ Projects run using the CircleCI API will *not* trigger workflows. If you build a
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional information and limitations.
 
-## Rerunning a Workflow from a Failed Job
-
-When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs *after* the failure will run, saving time and resources.
-
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
-
 ## Workflows Configuration Examples
 
-For a full specification of the `workflows` key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference document.
+_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference document._
 
 To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
@@ -415,6 +409,12 @@ workflows:
 **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+
+## Rerunning a Workflow from a Failed Job
+
+When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs *after* the failure will run, saving time and resources.
+
+![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 ## Troubleshooting
 
