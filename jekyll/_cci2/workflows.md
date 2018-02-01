@@ -29,7 +29,7 @@ For example, if only one job in a workflow fails, you will know it is failing in
 
 ### Limitations
 
-Projects run using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. Please note that builds without workflows require a `build` job.
+Projects run by using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. **Note:** builds without workflows require a `build` job.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional information and limitations.
 
