@@ -23,10 +23,11 @@ jobs:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH
       - run:
-          name: Expose version files
+          name: "Manage Data Files We'll Need"
           command: |
             # cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
+            ./scripts/pull-docker-image-tags.sh
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
