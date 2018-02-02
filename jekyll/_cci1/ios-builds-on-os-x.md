@@ -411,24 +411,17 @@ If you are seeing your UI tests time out in some of the builds, please try using
 
 Please check out [the Troubleshooting section]( {{ site.baseurl }}/1.0/ios-code-signing/#troubleshooting) of the code signing doc.
 
-### A note on code-generating tools
-Many iOS app developers use tools that generate substantial amounts of code. In such
-cases CircleCI's inference may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through [environment variables](#environment-variables).
-
-### Constraints on macOS-based builds
-There are a few features normally available on CircleCI's standard
-Linux containers that are not available for macOS builds at the moment:
+## Constraints on macOS-based builds
+There are a few features normally available on CircleCI's standard Linux containers that are not available for macOS builds at the moment:
 
 * Parallelism is not supported
-* While the general `circle.yml` file structure will be honored in macOS-based builds
-[configuration options]( {{ site.baseurl }}/1.0/configuration/), the following sections of
-`circle.yml` will not work correctly:
+* While the general `circle.yml` file structure will be honored in macOS-based builds [configuration options]( {{ site.baseurl }}/1.0/configuration/), the following sections of `circle.yml` will not work correctly:
   * `machine: services`
-  * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc]( {{ site.baseurl }}/1.0/configuration/)
+  * `machine: <language>`, where `<language>` is any language mentioned in the [Configuration doc]( {{ site.baseurl }}/1.0/configuration/)
 
 Please see the [customizing your build](#customizing-your-build) section for alternatives.
+
+**Note:** Many iOS app developers use tools that generate substantial amounts of code. In such cases, CircleCI's inference may not correctly detect the Xcode workspace, project, or scheme. Instead, you can specify these through [environment variables](#environment-variables).
 
 ## A sample `circle.yml`
 The following configuration will use all the default dependency steps
