@@ -15,42 +15,45 @@ As a convenience, CircleCI maintains a number of Docker Images for popular langu
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<!-- TODO: Sort this -->
-{% assign images = site.data.circleci_images.images %}
-
-
-
-
 ## Available Images
+
+{% assign images = site.data.docker-image-tags | sort %}
 
 **Note:** The language images are to be used as your primary container listed first in your `config.yml` file. The database images are best used as a secondary service container, in which case, list after the primary container image in your `config.yml` file.
 
+<ul class="list-2cols">
 {% for image in images %}
-* [{{ image[1].name }}](#{{ image[1].name | kramdown_generate_id }})
+<li markdown="1">
+[{{ image[1].name }}](#{{ image[1].name | kramdown_generate_id }})
+</li>
 {% endfor %}
-
-
-
+</ul>
 
 **Note:** CircleCI maintains variants, which can be added to the main image name as follows:
 
-{% for variant in site.data.circleci_images.variants %}
-* `-{{ variant[0] }}`: {{ variant[1] }}
-{% endfor %}
+- `-browsers`: Includes browsers and libraries normally used for windowing.
+- `-node`: Includes Node.js in addition to the core language for polyglot applications.
 
 **Note:** If you choose to use the `latest` tag the image may change unexpectedly and create surprising results.
 <hr>
 
 {% for image in images %}
+
 ### {{ image[1].name }} 
+
 **Usage:** Add the following under `docker:` in your config.yml:  
-`image: {{ image[1].image }}:[TAG]`  (<small>[Docker Hub page]({{image[1].info-url}})</small>)  
-**Available Tags:**
-{% for tag in image[1].tags %}
-* {{tag}}
-{% endfor %}
-<hr>
-{% endfor %}
- 
 
+`- image: {{ image[0] }}:[TAG]`
 
+**Latest Tags:** <small>(view all available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
+
+<ul class="list-2cols">
+{% assign tags = image[1].tags | sort %}
+{% for tag in tags %}
+<li>{{ tag }}</li>
+{% endfor %}
+</ul>
+
+---
+
+{% endfor %}
