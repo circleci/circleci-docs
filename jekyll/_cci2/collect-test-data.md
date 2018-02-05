@@ -347,6 +347,8 @@ Then form your command in your config to output using the reporter.
 
 A really good read on this can be found [here](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
+***Note:** when running Jest tests, [please use the ``--runInBand` flag](https://facebook.github.io/jest/docs/en/cli.html#runinband). Without it, Jest will try to allocate the CPU resources of the entire virtual machine in which your build is running, rather than the smaller virtualized build environment ([`cgroup`](https://en.wikipedia.org/wiki/Cgroups)) within that VM. More info [here](https://stackoverflow.com/questions/43864793/why-does-jest-runinband-speed-up-tests), [here](https://github.com/facebook/jest/issues/1524#issuecomment-262366820), and [here](https://github.com/facebook/jest/issues/5239#issuecomment-355867359).*
+
 
 ## Merging test suites together
 
