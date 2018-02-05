@@ -289,13 +289,13 @@ A job that was not executed due to configured rules will show up in the list of 
 
 It is possible to configure CPU and RAM resources for each job as described in the following table. **Note:** Paid accounts must request to use this feature by opening a support ticket (or by contacting their Customer Success Manager when applicable) and non-paid users must request to use this feature by opening a ticket at <https://support.circleci.com/hc/en-us/requests/new>. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
 
-Class       | CPU       | RAM
+Class       | vCPUs       | RAM
 ------------|-----------|------
-small       | 1.0 | 2GB
-medium (default) | 2.0 | 4GB
-medium+     | 3.0 | 6GB
-large       | 4.0 | 8GB
-xlarge      | 8.0 | 16GB
+small       | 1 | 2GB
+medium (default) | 2 | 4GB
+medium+     | 3 | 6GB
+large       | 4 | 8GB
+xlarge      | 8 | 16GB
 {: class="table table-striped"}
 
 Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. 
