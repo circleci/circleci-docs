@@ -363,92 +363,65 @@ deployment:
           --comment "CircleCI build $CIRCLE_BUILD_URL"
 ```
 
-## Common issues
+## Common Issues
 
 A series of simulator-related issues are known to happen on some
 projects. Here are the most frequent of those:
 
-* **Xcode version is not available.** We install
-  a few [different versions](#software-versions) of Xcode in the build
-  image and keep those updated with the latest point releases. Therefore
-  to use the latest Xcode 7.3, for example, which is `7.3.1`, it is
-  sufficient to specify `7.3` in your `circle.yml`. If a newer point
-  release of 7.3 comes out, we will make that one available under the same
-  `7.3` version on CircleCI.
+### Xcode Version is Unavailable
 
-* **Dependency version mismatches.** If you see that the version of the
-  dependencies used in the build are not the expected ones, please try
-  rebuilding without cache — chances are an older dependency got stuck
-  in the cache and is not allowing for the newer version to get
-  installed.
+We install a few [different versions](#software-versions) of Xcode in the build image and keep those updated with the latest point releases. Therefore to use the latest Xcode 7.3, for example, which is `7.3.1`, it is sufficient to specify `7.3` in your `circle.yml`. If a newer point release of 7.3 comes out, we will make that one available under the same `7.3` version on CircleCI.
 
-* **Cryptic compilation errors.** If you see compile-time errors that do
-  not really make sense, please check if the version of Xcode you are using
-  in your build is the same one you are using locally. When the
-  `circle.yml` of the project does not specify an Xcode version,
-  we default to an older Xcode which might not support the necessary
-  features.
+### Dependency Version Mismatches
 
-* **Timeout waiting for simulator.** If you see your test command
-  failing with errors similar to this:
+If you see that the version of the dependencies used in the build are not the expected ones, please try rebuilding without cache — chances are an older dependency got stuck in the cache and is not allowing for the newer version to get installed.
 
-* **Can't add my project as macOS build.** If you are trying to add an macOS
-  project from the ["add-project"](https://circleci.com/add-projects) page, but you don't see your
-  project under the "OS X" tab, you can first add your project as a "Linux"
-  build — and then switch it to an "OS X" build by going to the "Project
-  Settings" page, then on the "Build Environment" page you will see the "Build
-  OS X project" option.
+### Cryptic Compilation Errors
+
+If you see compile-time errors that do not really make sense, please check if the version of Xcode you are using in your build is the same one you are using locally. When the `circle.yml` of the project does not specify an Xcode version, we default to an older Xcode which might not support the necessary features.
+
+### Timeout Waiting for Simulator
+
+If you see your test command failing with errors similar to this:
 
 ```
 iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1
 ```
 
-  Then the version of the simulator you are trying to use on CircleCI
-  might not be present in the build machines.
-  In addition to the default version of simulator for every Xcode
-  installation, we also make simulators of the following iOS versions
-  available for all Xcode versions:
+Then the version of the simulator you are trying to use on CircleCI might not be present in the build machines. In addition to the default version of simulator for every Xcode installation, we also make simulators of the following iOS versions available for all Xcode versions:
 
   * 7.1
   * 8.4
 
-  Please try using any of the versions of simulator that are present on
-  the machines — the error might disappear.
+Please try using any of the versions of simulator that are present on the machines — the error might disappear.
 
-* **Ruby segfaults.** We have seen cases where some of the Ruby gems
-  used during the build would produce a segmentation fault in Ruby. This
-  might happen because of the mismatch of Ruby version used to build the
-  gem and the Ruby version used to run it. Please make sure that the Ruby
-  version used locally is the same as the one used on CircleCI. You can
-  install a newer version Ruby in the container by following [this
-  guide](https://discuss.circleci.com/t/installing-a-newer-ruby-version-on-ios-os-x-containers/2466).
+### Can't Add Project as macOS Build
 
-* **Inconsistent timeouts during test runs.** If you are seeing your UI
-  tests time out in some of the builds, please try using both the raw
-  `xcodebuild` command and the `xctool` command command we suggest [here](#build-commands).
-  Sometimes the issue would only be present with one of these tools but not the other.
+If you are trying to add an macOS project from the ["add-project"](https://circleci.com/add-projects) page, but you don't see your project under the "OS X" tab, you can first add your project as a "Linux" build — and then switch it to an "OS X" build by going to the "Project Settings" page, then on the "Build Environment" page you will see the "Build OS X project" option.
 
-* **Errors while installing code signing certificates.** Please check out [the Troubleshooting
-  section]( {{ site.baseurl }}/1.0/ios-code-signing/#troubleshooting) of the code signing doc.
+### Ruby Segfaults
 
-### A note on code-generating tools
-Many iOS app developers use tools that generate substantial amounts of code. In such
-cases CircleCI's inference may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through [environment variables](#environment-variables).
+We have seen cases where some of the Ruby gems used during the build would produce a segmentation fault in Ruby. This might happen because of the mismatch of Ruby version used to build the gem and the Ruby version used to run it. Please make sure that the Ruby version used locally is the same as the one used on CircleCI. You can install a newer version Ruby in the container by following [this guide](https://discuss.circleci.com/t/installing-a-newer-ruby-version-on-ios-os-x-containers/2466).
 
-### Constraints on macOS-based builds
-There are a few features normally available on CircleCI's standard
-Linux containers that are not available for macOS builds at the moment:
+### Inconsistent Timeouts During Test Runs
+
+If you are seeing your UI tests time out in some of the builds, please try using both the raw `xcodebuild` command and the `xctool` command command we suggest [here](#build-commands). Sometimes the issue would only be present with one of these tools but not the other.
+
+### Errors While Installing Code Signing Certificates
+
+Please check out [the Troubleshooting section]( {{ site.baseurl }}/1.0/ios-code-signing/#troubleshooting) of the code signing doc.
+
+## Constraints on macOS-based builds
+There are a few features normally available on CircleCI's standard Linux containers that are not available for macOS builds at the moment:
 
 * Parallelism is not supported
-* While the general `circle.yml` file structure will be honored in macOS-based builds
-[configuration options]( {{ site.baseurl }}/1.0/configuration/), the following sections of
-`circle.yml` will not work correctly:
+* While the general `circle.yml` file structure will be honored in macOS-based builds [configuration options]( {{ site.baseurl }}/1.0/configuration/), the following sections of `circle.yml` will not work correctly:
   * `machine: services`
-  * `machine: <language>`, where `<language>` is any language mentioned
-    in the [Configuration doc]( {{ site.baseurl }}/1.0/configuration/)
+  * `machine: <language>`, where `<language>` is any language mentioned in the [Configuration doc]( {{ site.baseurl }}/1.0/configuration/)
 
 Please see the [customizing your build](#customizing-your-build) section for alternatives.
+
+**Note:** Many iOS app developers use tools that generate substantial amounts of code. In such cases, CircleCI's inference may not correctly detect the Xcode workspace, project, or scheme. Instead, you can specify these through [environment variables](#environment-variables).
 
 ## A sample `circle.yml`
 The following configuration will use all the default dependency steps
