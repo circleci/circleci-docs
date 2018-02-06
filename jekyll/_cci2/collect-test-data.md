@@ -330,7 +330,7 @@ junitReporter: {
 // additional config...
 ```
 
-#### <a name="jest"></a>Jest
+#### Jest
 
 Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run
 `yarn add --dev jest-junit`.
