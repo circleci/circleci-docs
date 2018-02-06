@@ -23,13 +23,13 @@ To use environment variables set on the Contexts page, the person running the wo
 
 Context names must be unique for each Github or Bitbucket organization. For CircleCI installations on your own server or private cloud, Context names must be unique across the installation.
 
-## Using a Context
+## Creating and Using a Context
 
-1. Navigate to the Settings > Contexts page in the CircleCI application. The Create a Context button appears if you have no existing contexts.
+1. Navigate to the Settings > Contexts page in the CircleCI application. 
 
 2. Click the Create Contexts button. The default name and rules appear with an Add Environment Variable button.
 
-3. Click the Add Environment Variable button and type in the variable name and value. Click the Add Variable button to save it.
+3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
 
 4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
 
@@ -42,7 +42,7 @@ workflows:
             context: org-global
 ```
 
-To rerun a job and use the context, it must be rerun from the Workflows page of the CircleCI application. 
+To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application. 
 
 ## Deleting a Context
 
