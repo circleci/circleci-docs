@@ -332,10 +332,11 @@ junitReporter: {
 
 #### Jest
 
-Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run
-`yarn add --dev jest-junit`.
+To collect Jest data, add a JUnit coverage reporter by running:
 
-Then form your command in your config to output using the reporter.
+    yarn add --dev jest-junit
+
+In your configuration, form a command to output using the reporter:
 
 ```yaml
  - run:
