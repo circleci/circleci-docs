@@ -2,11 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.3
+      - image: cibuilds/ruby:2.4
     working_directory: ~/circleci-docs
     environment:
       - JEKYLL_ENV=production
-      - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       - JOB_RESULTS_PATH=run-results
     steps:
       - checkout
@@ -14,7 +13,7 @@ jobs:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+          command: bundle check --path=vendor/bundle || bundle install --deployment --jobs=4 --retry=3
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
