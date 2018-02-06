@@ -35,9 +35,9 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 
 The Remote Docker Environment has the following technical specifications:
 
-CPUs | Processor                  | RAM | HD
------|----------------------------|------------
-2    | Intel(R) Xeon(R) @ 2.30GHz | 8GB | 100GB
+CPUs | Processor                 | RAM | HD
+-----|---------------------------|------------
+2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
 ### Example
