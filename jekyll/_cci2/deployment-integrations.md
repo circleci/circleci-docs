@@ -6,12 +6,13 @@ categories: [deploying]
 order: 10
 ---
 
-This document describes using the `deploy` step with example instructions in the following sections:
+CircleCI can be configured to deploy to any service. This document provides instructions and examples for the following platforms:
 
 * TOC
 {:toc}
 
-## Deployment Overview 
+## Overview
+{:.no_toc}
 
 It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
 
