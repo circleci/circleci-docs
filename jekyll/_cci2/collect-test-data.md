@@ -330,12 +330,13 @@ junitReporter: {
 // additional config...
 ```
 
-#### <a name="jest"></a>Jest
+#### Jest
 
-Jest data can be collected pretty easily. All you need is a JUnit coverage reporter. Simply run
-`yarn add --dev jest-junit`.
+To collect Jest data, add a JUnit coverage reporter by running:
 
-Then form your command in your config to output using the reporter.
+    yarn add --dev jest-junit
+
+In your configuration, form a command to output using the reporter:
 
 ```yaml
  - run:
@@ -345,10 +346,11 @@ Then form your command in your config to output using the reporter.
         JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 ```
 
-Refer to the [Using Junit on CircleCI 2.0 With Jest and eslint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) for more information.
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
-**Note:** When running Jest tests, please use the `--runInBand` flag, see the [runInBand documentation](https://facebook.github.io/jest/docs/en/cli.html#runinband) for instructions. Without the `--runInBand` flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your build is running, rather than the smaller virtualized build environment within that VM. Refer to the defninition of ([`cgroup`](https://en.wikipedia.org/wiki/Cgroups)) on Wikipedia for details. Get more information in the [Stackoverflow document](https://stackoverflow.com/questions/43864793/why-does-jest-runinband-speed-up-tests), and [GitHub related issue](https://github.com/facebook/jest/issues/1524#issuecomment-262366820), and [GitHub issue](https://github.com/facebook/jest/issues/5239#issuecomment-355867359).
+**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your build is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
+For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
 ## Merging test suites together
 
