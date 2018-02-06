@@ -43,7 +43,7 @@ As a convenience, CircleCI maintains a number of Docker Images for popular langu
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
-`- image: {{ image[0] }}:[TAG]`
+`- image: circleci/{{ image[0] }}:[TAG]`
 
 **Latest Tags:** <small>(view all available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
 
