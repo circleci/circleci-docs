@@ -18,7 +18,7 @@ This document describes creating and using insights in CircleCI in the following
 
 CircleCI Insights shows you how your tests are performing with integrated graphs and a dashboard for performance of all of your code repositories.
 
-![header]({{ site.baseurl }}/assets/img/docs/insights.gif)
+![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
 The image illustrates the following data about your builds:
 
