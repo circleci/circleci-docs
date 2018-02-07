@@ -75,7 +75,7 @@ For example, if you have RSpec tests, you would write your XML files to `$CIRCLE
 * [Karma]( {{ site.baseurl }}/1.0/test-metadata/#karma)
 
 
-#### <a name="cucumber"></a>Cucumber
+#### Cucumber
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `$CIRCLE_TEST_REPORTS/cucumber` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
 
@@ -95,7 +95,7 @@ test:
     - bundle exec cucumber --format pretty --format json --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
 ```
 
-#### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
+#### Maven Surefire Plugin for Java JUnit results
 
 If you are building a [Maven](http://maven.apache.org/) based project,
 you are more than likely using the
@@ -158,7 +158,7 @@ test:
 ```
 
 
-#### <a name="eslint"></a>ESLint
+#### ESLint
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
@@ -172,7 +172,7 @@ test:
 ```
 
 
-#### <a name="phpunit"></a>PHPUnit
+#### PHPUnit
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `$CIRCLE_TEST_REPORTS/phpunit` directory.  Your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) might be:
 
@@ -183,7 +183,7 @@ test:
     - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml tests
 ```
 
-#### <a name="rspec"></a>RSpec
+#### RSpec
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -193,11 +193,11 @@ gem 'rspec_junit_formatter'
 
 And modify your test command to this:
 
-````
+```
 test:
   override:
     - bundle exec rspec --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec.xml
-````
+```
 
 ### <a name="minitest"></a> Minitest
 
@@ -220,10 +220,10 @@ test:
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
+#### test2junit for Clojure tests
 You can use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, please checkout our [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
-#### <a name="karma"></a>Karma
+#### Karma
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
