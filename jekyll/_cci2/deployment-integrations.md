@@ -6,6 +6,8 @@ categories: [deploying]
 order: 10
 ---
 
+![header](  {{ site.baseurl }}/assets/img/docs/deploy.png)
+
 CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
 * TOC
