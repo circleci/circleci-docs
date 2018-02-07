@@ -16,7 +16,7 @@ This document describes creating and using insights in CircleCI in the following
 
 ## Overview
 
-CircleCI Insights shows you how your tests are performing with integrated graphs and a dashboard for performance of all of your code repositories.
+Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
 ![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
@@ -40,7 +40,7 @@ The per-project insights page gives you access to the build status and build per
 
 ![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
 
-- **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch to access over 100 build statuses for the selected branch.
+- **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch in the top right corner to access over 100 build/job statuses for the selected branch.
 
 - **Build Performance:** The Build Performance graph aggregates your build data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
 
