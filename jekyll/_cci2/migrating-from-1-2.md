@@ -204,7 +204,7 @@ With the following, nested under `steps:` and customizing for your application a
 **Notes on Deployment:**
 
 - See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
-- Please read the [Deploy]({{ site.baseurl }}/2.0/deployment_integrations/) document for examples of deployment for CircleCI 2.0.
+- Please read the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deployment for CircleCI 2.0.
 
 ## Validate YAML
 

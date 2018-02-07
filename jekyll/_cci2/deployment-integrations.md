@@ -6,20 +6,19 @@ categories: [deploying]
 order: 10
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nQo1dngizvA" frameborder="0" allowfullscreen></iframe>
+![header](  {{ site.baseurl }}/assets/img/docs/deploy.png)
 
-This document describes using the `deploy` step with example instructions in the following sections:
+CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
 * TOC
 {:toc}
 
-## Deployment Overview 
+## Overview
+{:.no_toc}
 
-It is possible to deploy to any service by adding commands to `.circleci/config.yml` and setting secrets on the Project Settings > Environment Variables page of the CircleCI application. Available deployment targets include Azure, Google (App Engine, Container Engine, and Cloud) and many others. 
+To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to `.circleci/config.yml`. If your deploy job uses any output from previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs). You will also have to set any necessary secrets on the **Project Settings > Environment Variables** page of the CircleCI application.
 
-Add a job to your `config.yml` to set up conditional deployment for your application. The following example uses a [workflow job filter]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) to check that the current branch is the `master` branch before running any deploy commands. Without this workflow configuration, `<my-deploy-commands>` would be executed every time this job is triggered.
-
-If your deploy job uses the output of previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
+Deploying is usually dependent on a successful build. The following example uses a [workflow job filter]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) to check that the `master` branch is checked out before running any deploy commands. Without this filter, deploy commands would be executed every time this job is triggered.
 
 ```YAML
 version: 2
@@ -57,7 +56,7 @@ workflows:
             
 ```
 
-## AWS Deployment
+## AWS
 
 1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
 
