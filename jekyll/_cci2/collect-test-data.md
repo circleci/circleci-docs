@@ -65,7 +65,7 @@ This section provides the following test runner examples:
 * [Jest]( {{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 
-#### <a name="cucumber"></a>Cucumber
+#### Cucumber
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
 
@@ -101,7 +101,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           path: ~/cucumber      
 ```
 
-#### <a name="maven-surefire-plugin-for-java-junit-results"></a>Maven Surefire Plugin for Java JUnit results
+#### Maven Surefire Plugin for Java JUnit results
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the
 [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
@@ -187,7 +187,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 ```
 
 
-#### <a name="eslint"></a>ESLint
+#### ESLint
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
@@ -207,7 +207,7 @@ A working `.circleci/config.yml` test section might look like this:
 ```
 
 
-#### <a name="phpunit"></a>PHPUnit
+#### PHPUnit
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory.  Your `.circleci/config.yml` might be:
 
@@ -224,7 +224,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
           path: ~/phpunit          
 ```
 
-#### <a name="pytest"></a>pytest
+#### pytest
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
@@ -244,7 +244,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 ```
 
 
-#### <a name="rspec"></a>RSpec
+#### RSpec
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -254,7 +254,7 @@ gem 'rspec_junit_formatter'
 
 And modify your test command to this:
 
-````
+```
     steps:
       - checkout
       - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
@@ -264,9 +264,9 @@ And modify your test command to this:
           when: always
       - store_test_results:
           path: ~/rspec
-````
+```
 
-### <a name="minitest"></a> Minitest
+### Minitest
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
@@ -276,7 +276,7 @@ gem 'minitest-ci'
 
 And modify your test command to this:
 
-````
+```
     steps:
       - checkout
       - run: bundle check || bundle install
@@ -285,14 +285,14 @@ And modify your test command to this:
           when: always
       - store_test_results:
           path: test/reports
-````
+```
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### <a name="test2junit-for-clojure-tests"></a>test2junit for Clojure tests
+#### test2junit for Clojure tests
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
-#### <a name="karma"></a>Karma
+#### Karma
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
