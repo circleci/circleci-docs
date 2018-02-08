@@ -54,7 +54,9 @@ Check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-cir
 
 ### Running A Build
 
-To run your build, navigate to your repo and run `circleci build`. The commands located under the `build` job are run. Only 2.0 jobs will be evaluated by the CLI because the CLI does not yet support Workflows.
+To run your build, navigate to your repo and run `circleci build`.
+
+***Note:** The CLI does not yet support Workflows. If your config.yml uses Workflows and has a job named `build`, only that `build` job will run. If none of your Workflows jobs are named `build`, the CLI will not be able to run your project locally.*
 
 ### Troubleshooting Container Configurations Locally
 
