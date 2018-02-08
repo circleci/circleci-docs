@@ -42,7 +42,7 @@ The per-project insights page gives you access to the build status and build per
 
 - **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch in the top right corner to access over 100 build/job statuses for the selected branch.
 
-- **Build Performance:** The Build Performance graph aggregates your build data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
+- **Build Performance:** The Build Performance graph aggregates your build/job data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
 
 ## See Also
 
