@@ -21,13 +21,15 @@ Contexts are created on the Settings page of the CircleCI application, in the Or
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. The default context name is `org-global` and the default rule allows access to all projects in the org.
 
-## Using a Context
+Context names must be unique for each Github or Bitbucket organization. **Note:** The use of multiple contexts is not yet supported for CircleCI installed on your local servers or private cloud.
 
-1. Navigate to the Settings > Contexts page in the CircleCI application. The Create a Context button appears.
+## Creating and Using a Context
 
-2. Click the Create Contexts button. The default name and rules appear with an Add a Resource button.
+1. Navigate to the Settings > Contexts page in the CircleCI application. 
 
-3. Click the Add a Resource button and fill in the variable name and value. Click the Add Variable button to save it.
+2. Click the Create Contexts button. The default name and rules appear with an Add Environment Variable button.
+
+3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
 
 4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
 
@@ -40,9 +42,19 @@ workflows:
             context: org-global
 ```
 
-To rerun a job and use the context, it must be rerun from the Workflows page of the CircleCI application. Jobs invoked using the Rebuild button on the Builds page will **not** use the context defined in the workflow. 
+To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application. 
 
-**Note:** Environment variables are considered in a specific order, as follows:
+## Deleting a Context
+
+1. Navigate to the Settings > Contexts page in the CircleCI application.
+
+2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
+
+3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
+
+## Environment Variable Usage 
+
+Environment variables are considered in a specific order, as follows:
 1. Project-level environment variables set on the Project Settings page.
 2. Context environment variables (assuming the user has access to the Context).
 3. Environment variables set with the `environment` key of a `run` step.
