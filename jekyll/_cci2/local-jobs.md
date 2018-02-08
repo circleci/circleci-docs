@@ -20,7 +20,7 @@ The `circleci` commands enable you to reproduce the CircleCI environment locally
 
 You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers. 
 
-**Note:** It is not possible to run Workflows with the CLI.
+**Note:** The CLI does not yet support Workflows.
 
 ### Installing the CLI Locally 
 
@@ -56,7 +56,7 @@ Check out [this blog post](https://circleci.com/blog/circleci-hacks-validate-cir
 
 To run your build, navigate to your repo and run `circleci build`.
 
-***Note:** The CLI does not yet support Workflows. If your config.yml uses Workflows and has a job named `build`, only that `build` job will run. If none of your Workflows jobs are named `build`, the CLI will not be able to run your project locally.*
+**Note:** If your _config.yml_ uses Workflows and has a job named `build`, only that `build` job will run. If you are using Workflows and have no jobs named `build`, the CLI will not be able to run your project locally.
 
 ### Troubleshooting Container Configurations Locally
 
