@@ -61,7 +61,8 @@ working_directory | N | String | In which directory to run the steps. Default: `
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and variables. (NOTE: These will override any environment variables you set in the CircleCI web interface.)
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only works with the `docker` key for paid accounts and is subject to change in a future pricing update. **Note:** An existing paid account is required to access this feature. Paid accounts can request to use this feature by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new), or by contacting their Customer Success Manager when applicable.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -287,7 +288,7 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. **Note:** Paid accounts must request to use this feature by opening a support ticket (or by contacting their Customer Success Manager when applicable) and non-paid users must request to use this feature by opening a ticket at <https://support.circleci.com/hc/en-us/requests/new>. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
+It is possible to configure CPU and RAM resources for each job as described in the following table. **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
 
 Class       | vCPUs       | RAM
 ------------|-----------|------
@@ -529,7 +530,7 @@ docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer 
 {: class="table table-striped"}
 
 ***Notes***:
-- *Docker Layer Caching only works with whitelisted projects. To enable this feature, contact your Customer Success Manager ([open a support ticket](https://support.circleci.com/hc/en-us) and include a link to the project on CircleCI).*
+- *A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.*
 - *`setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#docker-layer-caching-in-machine-executor) for information on how to enable DLC with the `machine` executor.*
 
 ##### **`save_cache`**
