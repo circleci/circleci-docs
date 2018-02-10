@@ -9,20 +9,20 @@ hide: true
 ---
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
-* New configuration paradigm with any number of jobs and workflows to orchestrate them. 
+* New configuration paradigm with any number of jobs and workflows to orchestrate them.
 * Custom images for execution on a per-job basis.
 * Fine-grained performance with custom caching and per-job CPU or memory allocation.
 
 To participate in the preview release, contact your Account team.
 
-## Private Preview Limitations 
+## Private Preview Limitations
 Set up a trial of the new platform with the expectation that it will update frequently (daily releases) and that you will be asked to provide regular feedback on the installation process, the performance profile of your installation, and any other issues that arise.
 
 The 2.0 preview release has the following constraints:
 
 * Requires setting up a fresh installation that will be entirely disposable with no option to migrate data from an Alpha install to your existing CircleCI Installation.
 * Available only on AWS.
-* Requires teams to build a new CircleCI 2.0 configuration in their repositories. 
+* Requires teams to build a new CircleCI 2.0 configuration in their repositories.
 * Limited documentation -- support from your account team is available.
 * HTTP only for internal communications between workers and the output processor (HTTPS is coming soon). Must be run on a trusted network.
 * Only IAM User Authentication is currently supported (instance profiles are coming soon).
@@ -96,7 +96,7 @@ Use the following procedure to install with Terraform, skip to the next section 
 1. Clone the [Enterprise Setup](https://github.com/circleci/enterprise-setup) repository.
 2. Checkout the `ccie2` branch with `git fetch && git checkout ccie2`.
 3. Run `make init` to copy `terraform.tfvars.template` to `terraform.tfvars`.
-4. Fill out the required variables in `terraform.tfvars`, you can view the [README](https://github.com/circleci/enterprise-setup/blob/ccie2/README.md) for the full list of variables. Be sure to set `enable_nomad=1` in order to use docker builders. 
+4. Fill out the required variables in `terraform.tfvars`, you can view the [README](https://github.com/circleci/enterprise-setup/blob/ccie2/README.md) for the full list of variables. Be sure to set `enable_nomad=1` in order to use docker builders.
 5. Apply Terraform scripts using `terraform apply`.
 6. Go to the provided URL at the end of Terraform output and follow the instructions.
 7. Enter your license.
@@ -168,7 +168,7 @@ Use the following procedure to install with Terraform, skip to the next section 
          ]
      }
      ```
-10. From the Management Console, click Start to start the application. It will take a few minutes to download all of the necesary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue. 
+10. From the Management Console, click Start to start the application. It will take a few minutes to download all of the necessary docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 11. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Manual Installation
@@ -191,7 +191,7 @@ Have available the following resources before beginning manual installation of t
   {: class="table table-striped"}
 * 1.0 Builders - No changes, the same process as for the CCIE 1.0 <https://circleci.com/docs/enterprise/aws-manual/>
 * 2.0 Builders - Instance type should be at least `m4.xlarge` or `m4.4xlarge` installated with the following Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>.
- 
+
 ### Manual Installation Steps
 
 1. SSH into the Services instance.
@@ -279,7 +279,7 @@ Have available the following resources before beginning manual installation of t
 
 CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage engine. If you are upgrading an existing database from your existing 1.0 installation or any Preview version from `Preview3` or older, you must use the following steps to upgrade your Mongo database:
 
-1. Stop CircleCI from the Replicated console. 
+1. Stop CircleCI from the Replicated console.
 2. SSH into the Services instance.
 3. Download and execute the Mongo upgrade script.
      ```
@@ -290,15 +290,15 @@ CircleCI Enterprise 2.0 runs MongoDB 3.2.11 which uses WiredTiger as the storage
 
 ## Upgrading PostgreSQL
 
-CircleCI Enterprise 2.0 runs PostgreSQL 9.5. If you are upgrading an existing database from your 1.0 installation or any Preview from `Preview 7` or older, you must use the following steps to upgrade your PostgreSQL database: 
+CircleCI Enterprise 2.0 runs PostgreSQL 9.5. If you are upgrading an existing database from your 1.0 installation or any Preview from `Preview 7` or older, you must use the following steps to upgrade your PostgreSQL database:
 
-1. Stop CircleCI from the Replicated Console. 
-2. SSH into the Services Instance. 
-3. Download and execute the PostgreSQL upgrade script. 
+1. Stop CircleCI from the Replicated Console.
+2. SSH into the Services Instance.
+3. Download and execute the PostgreSQL upgrade script.
     ```
     wget https://s3.amazonaws.com/release-team/scripts/upgrade-postgres
     chmod +x upgrade-postgres
     sudo ./upgrade-postgres
     ```
 
-You can now start CircleCI from the replicated console and you will be running Mongo 3.2.11 and Postgres 9.5. 
+You can now start CircleCI from the replicated console and you will be running Mongo 3.2.11 and Postgres 9.5.
