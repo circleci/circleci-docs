@@ -8,7 +8,7 @@ order: 20
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Pre-Built CircleCI Docker Images*
 
-As a convenience, CircleCI maintains a number of Docker Images for popular languages with additional tooling that is useful when running your tests. All of the following images are published in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/), the source code is available in the [repository on GitHub](https://github.com/circleci/circleci-images) and the Dockerfiles are available as build artifacts in the [repository's production branch on CircleCI](https://circleci.com/gh/circleci/circleci-images/tree/production). 
+For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tooling that is especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code and Dockerfiles for these images are available in this [GitHub repository](https://github.com/circleci/circleci-images).
 
 ## How to Get Started with Pre-Built Docker Images Video Tutorial
 <div class="screen">
