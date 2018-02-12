@@ -2,13 +2,25 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 **As of March 2017, we are currently focusing on creating new documentation for CircleCI 2.0. Documentation for 1.0 will continue to be improved, but will go into maintenance mode in the coming months. If you're considering contributing a completely new article, we encourage you to contribute to the 2.0 documentation found at <https://circleci.com/docs/2.0/> or in this repo in `/jekyll/_cci2/`.**
 
+# CircleCI Documentation Values
+
+There is never enough time to do everything we want to do. That's why we prioritize issues according to the following 5 categories, in decreasing importance:
+
+1. Created: documentation should exist.
+2. Correct: documentation should be accurate.
+3. Current: documentation should be up to date.
+4. Consistent: documentation should not conflict with itself.
+5. Clear: documentation should be clear.
+
+We use this ranking when deciding which tasks to tackle.
+
 # Contributing to CircleCI Docs
 
 There are a couple of ways to contribute to our documentation. For suggestions and feedback, please [open an issue](#open-an-issue). For edits or new articles, please [submit a pull request](#submit-a-pull-request).
 
 ## Open an Issue
 
-If a doc is unclear or incorrect, you can open an issue by clicking **Open an issue about this page**, located at the bottom of each article. In the issue's text, please let us know what needs fixing or suggest changes.
+If you spot anything that conflicts with our values, you can open an issue by clicking **Open an issue about this page**, located at the bottom of each article. In the issue's text, please let us know what needs fixing or suggest changes.
 
 ## Submit a Pull Request
 
