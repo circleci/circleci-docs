@@ -12,7 +12,7 @@ For convenience, CircleCI maintains several Docker images. These images are exte
 
 ## How to Get Started with Pre-Built Docker Images Video Tutorial
 <div class="screen">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
 
 ## Available Images
