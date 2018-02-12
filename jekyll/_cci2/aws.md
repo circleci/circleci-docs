@@ -109,8 +109,8 @@ Have available the following information and policies before starting the Previe
 5. Go to the provided URL at the end of Terraform output and follow the instructions.
 6. Enter your license.
 7. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required).
-8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). Again, it is best to use an instance profile for authentication (no additional configuration required). 
-9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necesary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
+8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). Again, it is best to use an instance profile for authentication (no additional configuration required).
+9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 10. After the application has started, log in to CircleCI and start running 2.0 builds!
 
 ## Next Steps for Getting Started
@@ -126,6 +126,3 @@ Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/noma
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
 If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance.
-
-
-
