@@ -48,6 +48,44 @@ CircleCI maintains service images for the following services:
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
 
+## Pre-installed Tools
+
+For both language and service images, CircleCI has extended the official Docker images with additional tools.
+
+### APT Packages
+
+The following packages are installed on every image with `apt-get`:
+
+- bzip2
+- ca-certificates
+- curl
+- git
+- gnupg
+- gzip
+- locales
+- mercurial
+- net-tools
+- netcat
+- openssh-client
+- parallel
+- sudo
+- tar
+- unzip
+- wget
+- xvfb
+- zip
+
+### Other Packages
+
+The following packages are installed via cURL or other means:
+
+- Docker client
+- [Docker Compose](https://docs.docker.com/compose/overview/)
+- [dockerize](https://github.com/jwilder/dockerize)
+- [jq](https://stedolan.github.io/jq/)
+
+## Image Variants
+
 **Note:** CircleCI maintains variants, which can be added to the main image name as follows:
 
 - `-browsers`: Includes browsers and libraries normally used for windowing.
