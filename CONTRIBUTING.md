@@ -4,7 +4,7 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do. That's why we prioritize issues according to the following 5 categories, in decreasing importance:
+There is never enough time to do everything we want to do. That's why we prioritize issues according to the following five categories, in decreasing importance:
 
 1. Created: documentation should exist.
 2. Correct: documentation should be accurate.
