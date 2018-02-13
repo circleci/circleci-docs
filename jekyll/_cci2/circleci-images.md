@@ -94,6 +94,7 @@ The following packages are installed via cURL or other means:
 **Note:** If you choose to use the `latest` tag the image may change unexpectedly and create surprising results.
 <hr>
 
+{% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
 
 ### {{ image[1].name }} 
