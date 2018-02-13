@@ -79,7 +79,7 @@ The following packages are installed on every image with `apt-get`:
 
 The following packages are installed via cURL or other means:
 
-- Docker client
+- [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
