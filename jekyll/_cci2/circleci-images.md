@@ -31,24 +31,22 @@ CircleCI maintains language images for the following languages:
 - [Python](#python)
 - [Ruby](#ruby)
 
+### Service Images
+
+Service images are images for services like databases. These images should be listed _after_ language images so they become secondary service containers.
+
+CircleCI maintains service images for the following services:
+
+- [buildpack-deps](#buildpack-deps)
+- [MariaDB](#mariadb)
+- [MongoDB](#mongodb)
+- [MySQL](#mysql)
+- [PostgreSQL](#postgresql)
+
 ## How to Get Started with Pre-Built Docker Images Video Tutorial
 <div class="screen">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
-
-## Available Images
-
-{% assign images = site.data.docker-image-tags | sort %}
-
-**Note:** The language images are to be used as your primary container listed first in your `config.yml` file. The database images are best used as a secondary service container, in which case, list after the primary container image in your `config.yml` file.
-
-<ul class="list-2cols">
-{% for image in images %}
-<li markdown="1">
-[{{ image[1].name }}](#{{ image[1].name | kramdown_generate_id }})
-</li>
-{% endfor %}
-</ul>
 
 **Note:** CircleCI maintains variants, which can be added to the main image name as follows:
 
