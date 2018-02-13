@@ -24,6 +24,7 @@ CircleCI maintains language images for the following languages:
 - [Clojure](#clojure)
 - [Elixir](#elixir)
 - [Go (Golang)](#go-golang)
+- [JRuby](#jruby)
 - [Node.js](#nodejs)
 - [OpenJDK (Java)](#openjdk)
 - [PHP](#php)
