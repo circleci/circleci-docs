@@ -335,6 +335,7 @@ Version: `{{ site.data.trusty.versions-ubuntu-14_04-XXL.summary.android.build-to
 - `{{ version }}`
 {% endfor %}
 
+<!--
 ## dpkg -l
 
 The following is the output of `dpkg -l` from the latest build image.
@@ -342,3 +343,5 @@ The following is the output of `dpkg -l` from the latest build image.
 {% for version in site.data.trusty.versions-ubuntu-14_04-XXL.all %}
 - `{{ version }}`
 {% endfor %}
+-->
+
