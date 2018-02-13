@@ -10,6 +10,26 @@ order: 20
 
 For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tools that are especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code and Dockerfiles for these images are available in this [GitHub repository](https://github.com/circleci/circleci-images).
 
+## Image Types
+
+CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images.
+
+### Language Images
+
+Language images are images for common programming languages, along with common tools pre-installed. These images should be listed first under the `docker` key in your configuration, thus becoming the [**primary container**]({{ site.baseurl }}/2.0/glossary/#primary-container) during execution.
+
+CircleCI maintains language images for the following images:
+
+- [Android](#android)
+- [Clojure](#clojure)
+- [Elixir](#elixir)
+- [Go (Golang)](#go-golang)
+- [Node.js](#nodejs)
+- [OpenJDK (Java)](#openjdk)
+- [PHP](#php)
+- [Python](#python)
+- [Ruby](#ruby)
+
 ## How to Get Started with Pre-Built Docker Images Video Tutorial
 <div class="screen">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
