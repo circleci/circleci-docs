@@ -180,7 +180,7 @@ platform :ios do
 end
 ```
 
-The `setup_circle_ci` Fastlane action will perform the following
+The `setup_circle_ci` Fastlane action must be in the `before_all` block to perform the following
 actions:
 
 * Create a new temporary keychain for use with Fastlane Match (see the
