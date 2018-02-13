@@ -50,7 +50,7 @@ CircleCI maintains service images for the following services:
 
 ## Pre-installed Tools
 
-For both language and service images, CircleCI has extended the official Docker images with additional tools.
+CircleCI has extended all convenience images with additional tools
 
 ### APT Packages
 
@@ -77,7 +77,7 @@ The following packages are installed on every image with `apt-get`:
 
 ### Other Packages
 
-The following packages are installed via cURL or other means:
+The following packages are installed via `curl` or other means:
 
 - [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
