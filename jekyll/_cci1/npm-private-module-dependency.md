@@ -12,10 +12,10 @@ needs to be done. There's two ways to do this:
 * **Using `npm login`**. This is the most common way, but needs a fancy command 
   to get it working in a CI environment. You can find instructions for this [here][1].
 
-* **Using npm tokens**. Newer versions of npm support tokens. The official npm 
+* **Using npm tokens**. Newer versions of npm support tokens (Requires npm version 5.5.1 or greater). The official npm 
   docs covers tokens [here][2]. The summary version is that when `npm login` is 
   used on your local machine, a token is generated and saved in the corresponding 
-  `.npmrc` for that module/project.
+  `.npmrc` for that module/project. Note `.npmrc` must exist in your file system or token replacement will fail silently.
 
   To configure CircleCI to use this token, find token in the `.npmrc` file
   (format is 00000000-0000-0000-0000-000000000000) and set it as a [private
