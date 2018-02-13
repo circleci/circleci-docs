@@ -16,9 +16,9 @@ CircleCI's pre-built Docker images fall into two categories: **language** images
 
 ### Language Images
 
-Language images are images for common programming languages, along with common tools pre-installed. These images should be listed first under the `docker` key in your configuration, thus becoming the [**primary container**]({{ site.baseurl }}/2.0/glossary/#primary-container) during execution.
+Language images are images for common programming languages, along with some common tools pre-installed. These images should be listed first under the `docker` key in your configuration, thus becoming the [**primary container**]({{ site.baseurl }}/2.0/glossary/#primary-container) during execution.
 
-CircleCI maintains language images for the following images:
+CircleCI maintains language images for the following languages:
 
 - [Android](#android)
 - [Clojure](#clojure)
