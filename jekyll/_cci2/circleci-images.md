@@ -12,7 +12,7 @@ For convenience, CircleCI maintains several Docker images. These images are exte
 
 ## Image Types
 
-CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images.
+CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
 
 ### Language Images
 
@@ -50,7 +50,7 @@ CircleCI maintains service images for the following services:
 
 ## Pre-installed Tools
 
-CircleCI has extended all convenience images with additional tools
+All convenience images have been extended with additional tools.
 
 ### APT Packages
 
@@ -86,12 +86,20 @@ The following packages are installed via `curl` or other means:
 
 ## Image Variants
 
-**Note:** CircleCI maintains variants, which can be added to the main image name as follows:
+CircleCI maintains variants of convenience images. These can be created by adding optional suffixes to the end of image tags.
 
-- `-browsers`: Includes browsers and libraries normally used for windowing.
-- `-node`: Includes Node.js in addition to the core language for polyglot applications.
+**Note:** If you choose to use the `latest` tag, the image may change unexpectedly and create surprising results.
 
-**Note:** If you choose to use the `latest` tag the image may change unexpectedly and create surprising results.
+### Language Image Variants
+
+- `-node`: includes Node.js for polyglot applications
+- `-browsers`: includes Java 8, PhantomJS, Firefox, and Chrome
+- `-node-browsers`: a combination of the `-node` and `-browsers` variants
+
+### Service Image Variants
+
+- `-ram`: variants that use the RAM volume to speed up builds
+
 <hr>
 
 {% assign images = site.data.docker-image-tags | sort %}
