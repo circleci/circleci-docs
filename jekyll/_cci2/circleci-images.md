@@ -54,7 +54,7 @@ All convenience images have been extended with additional tools.
 
 ### APT Packages
 
-The following packages are installed on every image with `apt-get`:
+The following packages are installed with `apt-get` on every image:
 
 - [bzip2](https://packages.debian.org/stretch/bzip2)
 - [ca-certificates](https://packages.debian.org/stretch/ca-certificates)
