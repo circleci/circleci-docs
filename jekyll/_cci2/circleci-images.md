@@ -56,24 +56,24 @@ For both language and service images, CircleCI has extended the official Docker 
 
 The following packages are installed on every image with `apt-get`:
 
-- bzip2
-- ca-certificates
-- curl
-- git
-- gnupg
-- gzip
-- locales
-- mercurial
-- net-tools
-- netcat
-- openssh-client
-- parallel
-- sudo
-- tar
-- unzip
-- wget
-- xvfb
-- zip
+- [bzip2](https://packages.debian.org/stretch/bzip2)
+- [ca-certificates](https://packages.debian.org/stretch/ca-certificates)
+- [curl](https://packages.debian.org/stretch/curl)
+- [git](https://packages.debian.org/stretch/git)
+- [gnupg](https://packages.debian.org/stretch/gnupg)
+- [gzip](https://packages.debian.org/stretch/gzip)
+- [locales](https://packages.debian.org/stretch/locales)
+- [mercurial](https://packages.debian.org/stretch/mercurial)
+- [net-tools](https://packages.debian.org/stretch/net-tools)
+- [netcat](https://packages.debian.org/stretch/netcat)
+- [openssh-client](https://packages.debian.org/stretch/openssh-client)
+- [parallel](https://packages.debian.org/stretch/parallel)
+- [sudo](https://packages.debian.org/stretch/sudo)
+- [tar](https://packages.debian.org/stretch/tar)
+- [unzip](https://packages.debian.org/stretch/unzip)
+- [wget](https://packages.debian.org/stretch/wget)
+- [xvfb](https://packages.debian.org/stretch/xvfb)
+- [zip](https://packages.debian.org/stretch/zip)
 
 ### Other Packages
 
