@@ -19,19 +19,19 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ## Overview
 Contexts are created on the Settings page of the CircleCI application, in the Organization section. After a context is set in the application it may be configured in the workflows section of the `config.yml` file for a project.
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. The default context name is `org-global` and the default rule allows access to all projects in the org.
+To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
-Context names must be unique for each Github or Bitbucket organization. **Note:** The use of multiple contexts is not yet supported for CircleCI installed on your local servers or private cloud.
+Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. The use of multiple contexts is not yet supported for CircleCI installed on your local servers or private cloud.
 
 ## Creating and Using a Context
 
 1. Navigate to the Settings > Contexts page in the CircleCI application. 
 
-2. Click the Create Contexts button. The default name and rules appear with an Add Environment Variable button.
+2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your org can access this context at runtime.
 
 3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
 
-4. Add the `context: org-global` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
+4. Add the `context: <context name>` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
 
 ```
 workflows:
