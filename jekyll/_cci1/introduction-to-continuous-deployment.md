@@ -23,7 +23,9 @@ Deployment commands are triggered only after a successful build.
 
 The following example will run the `deploy-to-production.sh`
 script when the tests pass on the master branch and run the
-`deploy-to-staging.sh` script when the tests pass on the staging branch.
+`deploy-to-staging.sh` script when the tests pass on the staging branch. If
+you receive a `Permission Denied` error, you may need to add executable permissions
+to the file: `chmod +x deploy-to-production.sh`
 
 ```
 deployment:
