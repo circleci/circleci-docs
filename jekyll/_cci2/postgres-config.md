@@ -19,13 +19,7 @@ Postgres is not pre-installed in the base container image (the primary image). A
 
 In addition, all base images from docker are based on debian stable which uses version 9.4 packages. If you need a newer version of psql, install it from another location, for example, https://www.postgresql.org/download/linux/debian/.
 
-**Note:** If you are using the `pq` gem, you should not need to install `psql`. This step is only necessary if you want to run the `psql` command.
-
-The default user, port, and test database for PostgreSQL 9.6 are as follows:
-
-`postgres://ubuntu:@127.0.0.1:5432/circle_test`
-
-**Note:** For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
+**Note:** If you are using the `pq` gem, you should not need to install `psql`. This step is only necessary if you want to run the `psql` command. The Postgres defaults are specific to the Docker Library version, see <https://hub.docker.com/_/postgres/>.
 
 ## Example CircleCI Configuration for a Rails App With structure.sql
 
@@ -139,6 +133,8 @@ jobs:
         environment:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
+
+This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
 ## Optional Customization
 
