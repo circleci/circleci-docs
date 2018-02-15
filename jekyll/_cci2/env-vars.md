@@ -104,12 +104,12 @@ If you need to interpolate other environment variables to set an environment var
 
 ### Setting PATH
 
-For example, this is how you could set PATH within a build:
+If your configuration modifies $PATH, add the path to your `.bashrc` file and load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
 
 ```
     steps:
-      - run: echo 'export PATH=/foo/bin:$PATH' >> $BASH_ENV
-      - run: some_program_in_foo_bin
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: some_program_inside_bin
 ```
 
 ## Injecting Environment Variables with the API
