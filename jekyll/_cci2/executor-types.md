@@ -33,6 +33,7 @@ Virtual Environment | `docker` | `machine`
  Layer caching | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
+ [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | No
 {: class="table table-striped"}
 
 <sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
@@ -54,7 +55,14 @@ In this example, all steps run in the container created by the first image liste
 
 ### Using Machine
 
-The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM). **Note**: Use of `machine` may require additional fees in a future pricing update. 
+The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM) with the following technical specifications:
+
+CPUs | Processor                 | RAM | HD
+-----|---------------------------|------------
+2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+{: class="table table-striped"}
+
+**Note**: Use of `machine` may require additional fees in a future pricing update. 
 
 To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
 
