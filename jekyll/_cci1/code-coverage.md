@@ -147,7 +147,7 @@ cohesive coverage report. Codecov will automatically handle the
 merging of coverage stats in parallel builds.
 
 For more information find an example of your language here:
-<https://github.com/codecov?query=example>
+<https://github.com/codecov?q=example>
 
 ### Coveralls
 
