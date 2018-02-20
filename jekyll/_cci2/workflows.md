@@ -295,7 +295,7 @@ workflows:
               only: /.*/
       - deploy:
           requires:
-            - test
+            - build
           filters:
             tags:
               only: /^config-test.*/
