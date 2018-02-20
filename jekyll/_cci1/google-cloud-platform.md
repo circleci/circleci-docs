@@ -52,7 +52,7 @@ gcloud tool is usually the foundational piece for interacting with these
 environments. For compute engine, you can use:
 
 ```
-sudo /opt/google-cloud-sdk/bin/gcloud compute copy-files <artifact> <instance_name:path_to_artifact>
+sudo /opt/google-cloud-sdk/bin/gcloud --quiet compute copy-files <artifact> <instance_name:path_to_artifact>
 ```
 
 to copy artifacts to your instance. For Container Engine, the gcloud command can download the kubectl command
