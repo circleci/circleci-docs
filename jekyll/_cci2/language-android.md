@@ -100,11 +100,11 @@ Nice! You just set up CircleCI for an Android app.
 
 ## Docker Images
 
-CircleCI provides a set of [Docker](https://www.docker.com/) [images for building Android apps](https://hub.docker.com/r/circleci/android/) on CircleCI 2.0.
+For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
 
-The [Dockerfiles are open-source, and available on GitHub](https://github.com/circleci/circleci-images/tree/master/android). Our image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
-Please note that our official image does *not* include the Android NDK. If you require that toolset, we recommend making your own image and setting these environment variables or using an [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0).
+**Note:** The CircleCI Android image does *not* include the Android NDK. If you require that toolset, consider using another [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0) or making your own image.
 
 ### API Levels
 
