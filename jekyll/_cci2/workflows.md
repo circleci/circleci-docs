@@ -282,7 +282,7 @@ workflows:
 The following example runs 
 
 1. `build` job for all branches, and all tags.
-2. `deploy` job for **no** branches, and all tags starting with `config-test`.
+2. `deploy` job only for tags marked with a version number.
 
 ```
 workflows:
@@ -298,7 +298,7 @@ workflows:
             - build
           filters:
             tags:
-              only: /^config-test.*/
+              only: /^v.*/
             branches:
               ignore: /.*/
 ```
