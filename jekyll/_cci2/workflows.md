@@ -266,6 +266,27 @@ CircleCI treats tag and branch filters differently when deciding whether a job s
 
 Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. 
 
+Following is a very basic example for building any branch and using tags.
+
+```
+workflows:
+  version: 2
+  un-tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              ignore: /^v.*/
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+	    tags:
+	      only: /^v.*/
+```
+
 The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
 
 ```
