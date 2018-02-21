@@ -7,6 +7,8 @@ Watch the video to learn about how to use CircleCI convenience images.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 
+## Hello World and Sample Files
+
 Use the Hello World document and sample `config.yml` files to start configuring your build.
 
 Document | Description
@@ -15,7 +17,9 @@ Document | Description
 <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using parallel Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
 {: class="table table-striped"}
 
-Use the tutorials to learn how to use more of the customization that is possible in a `.circleci/config.yml`.
+## Tutorials 
+
+Use the tutorial associated with your platform to learn about the customization that is possible in a `.circleci/config.yml`.
 
 Platform Guide | Description
 ----|----------
@@ -24,7 +28,9 @@ Platform Guide | Description
 <a href="{{ site.baseurl }}/2.0/language-android/">Android Project Tutorial</a> | Full example of setting up an Android project in CircleCI 2.0.
 {: class="table table-striped"}
 
-Refer to the Demo Apps to get help with building the language and framework in which your application is written.
+## Sample Apps with Companion Guides
+
+Refer to the Sample Apps to get help with building the language and framework in which your application is written.
 
 Language in which your App is written | Framework | GitHub Repo Name
  ---------|-----------|-----------------
@@ -44,6 +50,8 @@ Language in which your App is written | Framework | GitHub Repo Name
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table table-striped"}
+
+## Sample Workflows
 
 Workflow Example | GitHub Repo
 ------|-----------
