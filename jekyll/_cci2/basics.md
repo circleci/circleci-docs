@@ -15,6 +15,8 @@ Document | Description
 <a href="{{ site.baseurl }}/2.0/faq/">FAQ</a> | Frequently asked questions about CircleCI 2.0.
 {: class="table table-striped"}
 
+## Migration
+
 Migrate an existing 1.0 project to CircleCI 2.0.
 
 Document | Description
@@ -23,6 +25,8 @@ Document | Description
 <a href="{{ site.baseurl }}/2.0/ios-migrating-from-1-2/">iOS Migration</a> | Migrating a 1.0 iOS project to a CircleCI 2.0 configuration.
 <a href="{{ site.baseurl }}/2.0/config-translation/">Using the 1.0 to 2.0 config-translation Endpoint</a> |  Instructions for using the `config-translation` endpoint to generate an initial CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages: Ruby, PHP, Node.js, iOS (partial: 1.0 code signing is not supported - use Fastlane instead), Java (partial).
 {: class="table table-striped"}
+
+## Features
 
 Learn to use the basic features of CircleCI.
 
