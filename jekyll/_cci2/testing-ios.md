@@ -455,6 +455,8 @@ Environment Variables add two new items named `CRASHLYTICS_API_KEY` and
 
 To set up your app on TestFairy follow these steps:
 
+![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+
 1. Visit the preferences page in the
 TestFairy dashboard and navigate to the API Key section. 
 2. Copy your API
@@ -462,9 +464,29 @@ key and go to your App's Project settings on CircleCI.
 3. Add a new
 Environment Variable named `TESTFAIRY_API_KEY` and paste in the API key
 from the TestFairy dashboard.
+4. You can use curl or fastlane for deployment. Here is an example of a curl run command:
 
-And then follow the [fastlane documentation](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) for deployment, with your environment variable for keys.
+{% raw %}
+```
+jobs:
+  build:
+    steps:
+      - checkout
+      - deploy:
+          name: Deploy to TestFairy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl \
+                -A "CircleCI 2.0" \
+                -F api_key="$TESTFAIRY_API_KEY" \
+                -F comment="CircleCI build $CIRCLE_BUILD_URL" \
+                -F file=@path/to/ipafile.ipa \
+                https://upload.testfairy.com/api/upload/
+            fi
+```
+{% endraw %}
 
+For a complete list of available options, please visit the [TestFairy Upload API documentation](https://docs.testfairy.com/API/Upload_API.html)
 
 ## Resolving Common Simulator Issues
 
