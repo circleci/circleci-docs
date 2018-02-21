@@ -266,7 +266,7 @@ CircleCI treats tag and branch filters differently when deciding whether a job s
 
 Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. 
 
-Following is a very basic example for people migrating from 1.0 who need any branch built and also tags.
+Following is a very basic example for building any branch and using tags.
 
 ```
 workflows:
