@@ -16,7 +16,7 @@ This document describes how to enable Docker Layer Caching (DLC) which is useful
 **Note:** A paid account is required to access this feature. If you are on a paid plan you can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new) and including a link to your CircleCI project in the ticket. 
 
 ## Docker Layer Caching in Remote Docker
-Consider enabling DLC to significantly reduce image build times by reuseing the unchanged layers of the application image built during your job.
+Consider enabling DLC to significantly reduce image build times by reusing the unchanged layers of the application image built during your job.
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
