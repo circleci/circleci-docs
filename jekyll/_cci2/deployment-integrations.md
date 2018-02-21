@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Deploy"
 short-title: "Deploy"
 categories: [deploying]
-order: 10
 ---
 
 ![header](  {{ site.baseurl }}/assets/img/docs/deploy.png)
