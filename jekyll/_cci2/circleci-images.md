@@ -8,7 +8,7 @@ order: 20
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Pre-Built CircleCI Docker Images*
 
-For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tools that are especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code for these images is available at [github.com/circleci/circleci-images](https://github.com/circleci/circleci-images); we also archive the Dockerfiles for each individual tag/variant of each image at [github.com/circleci-public/circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
+For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tools that are especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code for these images is available at [github.com/circleci/circleci-images](https://github.com/circleci/circleci-images). Dockerfiles for each CircleCI image variant are archived at [github.com/circleci-public/circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
 ## Image Types
 
