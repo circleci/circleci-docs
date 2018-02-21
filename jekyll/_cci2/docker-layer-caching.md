@@ -11,19 +11,23 @@ order: 70
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
-**Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI. 
+This document describes how to enable Docker Layer Caching (DLC) which is useful when you are _building_ Docker images during your job or Workflow. DLC does **not** speed up downloading of Docker images used to _run_ your jobs. 
+
+**Note:** A paid account is required to access this feature. If you are on a paid plan you can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new) and including a link to your CircleCI project in the ticket. 
+
+## Docker Layer Caching in Remote Docker
+Consider enabling DLC to significantly reduce image build times by reusing the unchanged layers of the application image built during your job.
 
 If your application is distributed as a Docker image, the image consists of layers that generally change more frequently toward the bottom of the `Dockerfile`. This is because any lines that change in a Dockerfile invalidate the cache of that line and every line after it. The frequently changing layers are referred to as the *top* layers of the image after it is compiled.
 
-## Docker Layer Caching in Remote Docker
-Consider reusing the unchanged layers to significantly reduce image build times. By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
+By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) doesn't provide layer caching, but you can enable this feature with a special option:
 
 ``` YAML
 - setup_remote_docker:
     docker_layer_caching: true # default - false  
 ``` 
 
-When `docker_layer_caching` is set to `true`, CircleCI will try to reuse Docker Images (layers) from your previous builds. That is, every layer you built in a previous job will be accessible in the remote environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
+When `docker_layer_caching` is set to `true`, CircleCI will try to reuse Docker Images (layers) built during a previous job or workflow. That is, every layer you built in a previous job will be accessible in the remote environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
 
 If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical cache.
 
