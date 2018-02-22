@@ -453,36 +453,46 @@ Environment Variables add two new items named `CRASHLYTICS_API_KEY` and
 
 ### TestFairy
 
-To set up your app on TestFairy follow these steps:
+To set up your app on TestFairy, follow these steps:
 
 ![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
-1. Visit the preferences page in the
-TestFairy dashboard and navigate to the API Key section. 
-2. Copy your API
-key and go to your App's Project settings on CircleCI. 
-3. Add a new
-Environment Variable named `TESTFAIRY_API_KEY` and paste in the API key
-from the TestFairy dashboard.
-4. You can use curl or fastlane for deployment. Here is an example of a curl run command:
+1. On the TestFairy dashboard, navigate to the Preferences page.
+2. On the Preferences page, go to the API Key section.
+3. Copy your API key and go to your application's project settings within the CircleCI application.
+4. To deploy, add a job to your configuration using [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
+
 
 {% raw %}
-```
+```yaml
 jobs:
   build:
+    #  insert build code here...
+  deploy:
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy to TestFairy
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl \
-                -A "CircleCI 2.0" \
-                -F api_key="$TESTFAIRY_API_KEY" \
-                -F comment="CircleCI build $CIRCLE_BUILD_URL" \
-                -F file=@path/to/ipafile.ipa \
-                https://upload.testfairy.com/api/upload/
-            fi
+            curl \
+              -A "CircleCI 2.0" \
+              -F api_key="$TESTFAIRY_API_KEY" \
+              -F comment="CircleCI build $CIRCLE_BUILD_URL" \
+              -F file=@path/to/ipafile.ipa \
+              https://upload.testfairy.com/api/upload/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+
 ```
 {% endraw %}
 
