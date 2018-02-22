@@ -18,45 +18,55 @@ To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-
 
 Below is a simple example of deploying a Rails application to Heroku. The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
-```YAML
+```yaml
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
-      - image: my-image
-    working_directory: /tmp/my-project
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    working_directory: ~/circleci-demo-workflows
     steps:
-      - run: <do-some-stuff>
-            
-  deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project  
+      - checkout
+      - run: bundle install --path vendor/bundle  # install dependencies
+      - run: bundle exec rake db:create db:schema:load  # setup database
+      - run:
+          name: Run tests
+          command: rake
+
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/circleci-demo-workflows
+    environment:
+      HEROKU_APP: "sleepy-refuge-55486"
     steps:
+      - checkout
       - run:
-          name: Install some stuff
-          command: <do-some-stuff>
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh
+
       - run:
-          name: Deploy if tests pass and branch is Master
-          command: <my-deploy-commands>
+          command: |
+            git push heroku sequential-branch-filter:master
+            heroku run rake db:migrate
+            sleep 5  # sleep for 5 seconds to wait for dynos
+            heroku restart
 
 workflows:
   version: 2
-  build-deploy:
+  build-and-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
-              only: master
-            
+              only: sequential-branch-filter
 ```
 
-The associated application for the above configuration can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
-
-For more information on conditional deploys, see the [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) article.
+The associated application for the above configuration can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter). For more information on conditional deploys, see [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows).
 
 ## AWS
 
