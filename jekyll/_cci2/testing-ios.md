@@ -460,7 +460,7 @@ To set up your app on TestFairy, follow these steps:
 1. On the TestFairy dashboard, navigate to the Preferences page.
 2. On the Preferences page, go to the API Key section.
 3. Copy your API key and go to your application's project settings within the CircleCI application.
-4. To deploy, you can use [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
+4. To deploy, add a job to your configuration using [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
 
 
 {% raw %}
