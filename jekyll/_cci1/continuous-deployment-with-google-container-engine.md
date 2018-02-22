@@ -11,7 +11,7 @@ Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs litt
 
 ### Tools & Concepts Overview
 
-#### Google Container Engine (GKE)
+#### GKE
 GKE is Google's service to run [Docker](https://www.docker.com/) containers, all powered by Google's open-source software [Kubernetes](http://kubernetes.io/) (K8s). This guide uses Kubernetes v1.2 and depends on the following features:
 
 * [Container Cluster](https://cloud.google.com/container-engine/docs/clusters/) - GKE
