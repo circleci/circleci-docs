@@ -467,19 +467,32 @@ To set up your app on TestFairy, follow these steps:
 ```yaml
 jobs:
   build:
+    #  insert build code here...
+  deploy:
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy to TestFairy
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl \
-                -A "CircleCI 2.0" \
-                -F api_key="$TESTFAIRY_API_KEY" \
-                -F comment="CircleCI build $CIRCLE_BUILD_URL" \
-                -F file=@path/to/ipafile.ipa \
-                https://upload.testfairy.com/api/upload/
-            fi
+            curl \
+              -A "CircleCI 2.0" \
+              -F api_key="$TESTFAIRY_API_KEY" \
+              -F comment="CircleCI build $CIRCLE_BUILD_URL" \
+              -F file=@path/to/ipafile.ipa \
+              https://upload.testfairy.com/api/upload/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+
 ```
 {% endraw %}
 
