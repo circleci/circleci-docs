@@ -7,13 +7,7 @@ description: "How to continuously deploy your application using Google Container
 ---
 
 ## Introduction
-Google's Cloud Platform (GCP) is a huge, scalable hosting platform that can be
-great for deploying an application for today's needs and tomorrow's. CircleCI
-Docs has a brief [GCP overview]( {{ site.baseurl }}/1.0/google-cloud-platform/) doc
-however in this guide, we'll go over continuously deploying an example Rails
-app to Google Container Engine (GKE). General information on continuous
-deployment with CircleCI can be found
-[here]( {{ site.baseurl }}/1.0/introduction-to-continuous-deployment/).
+Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs little introduction. If you still want one, you can read [this overview]({{ site.baseurl }}/1.0/google-cloud-platform/). In this guide, however, we'll show you how to continuously deploy a Rails application to Google Container engine (GKE). For general information on continuous deployment with CircleCI, see the [Introduction to Continuous Deployment]({{ site.baseurl }}/1.0/introduction-to-continuous-deployment/).
 
 ### Tools & Concepts Overview
 
