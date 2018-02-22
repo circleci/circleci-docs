@@ -7,15 +7,31 @@ categories: [optimization]
 order: 60
 ---
 
-NOTES
-- 
-
 *[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
 
 This document describes how to run tests in parallel in the following sections:
 
 * TOC
 {:toc}
+
+## notes
+- rework to resemble our Configuration Reference, rather than paragraphs/writing
+   - clearly explain difference between various flags (`--timings-type=classname` vs. `--timings-type=filename` etc.)
+- language-specific examples
+  - ruby
+  - node
+  - python (debug classnames/filenames issue?)
+- expected fields in our JUnit XML
+   - converting from TAP to JUnit
+   - presence of classnames in JUnit XML?
+   - also Cucumber JSON
+- getting your tests data into Test Summary
+  - need to use `store_test_results`
+- Workflows
+  - confirm that splitting is limited to last 50 jobs
+  - 50 jobs total ? or just last 50 successful jobs ?
+- more explicit info on globbing patterns
+- debugging/FAQ section ('my tests don't seem balanced, why not?' etc.)
 
 ## Overview
 One of the most powerful features of CircleCI is the ability to run your tests in parallel. This section describes how to use `circleci` commands in your `config.yml` file to merge and split tests with the hosted CircleCI CLI for faster builds. See [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#jobs) for information about setting the `parallelism` key in your configuration file. 
