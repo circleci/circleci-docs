@@ -16,7 +16,7 @@ CircleCI can be configured to deploy to virtually any service. This document pro
 
 To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to `.circleci/config.yml`. You will also have to set any necessary secrets on the **Project Settings > Environment Variables** page of the CircleCI application.
 
-Below is a simple example of deploying a Rails application to Heroku. The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
+Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
 
 ```yaml
 version: 2
@@ -66,7 +66,7 @@ workflows:
               only: sequential-branch-filter
 ```
 
-The associated application for the above configuration can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter). For more information on conditional deploys, see [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows).
+The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs). For more information on conditional deploys, see [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows).
 
 ## AWS
 
