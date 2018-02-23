@@ -28,17 +28,15 @@ For smooth deployment, Docker images must be hosted somewhere. While Docker prov
 ## Setup
 
 ### Prerequisites
-
 This guide makes the following assumptions:
 
 1. Your project source code is hosted on a CircleCI compatible repository.
-1. You already have a GCP project registered. Keep the project name handy.
-1. There is an already running cluster on GKE. Keep the cluster name handy.
-1. You're familiar with Docker.
+2. You already have a GCP project registered. Keep the project name handy.
+3. There is an already running cluster on GKE. Keep the cluster name handy.
+4. You're familiar with Docker.
 
 ### Project Settings on CircleCI
-This guide will be using the example project
-[docker-hello-google](https://github.com/circleci/docker-hello-google) on GitHub.
+This guide uses the example project [docker-hello-google](https://github.com/circleci/docker-hello-google) on GitHub.
 
 #### Environment Variables
 This project will use several environment variables (envar). Most will be set
