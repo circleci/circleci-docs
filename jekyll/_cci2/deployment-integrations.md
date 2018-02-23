@@ -151,6 +151,7 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
          - image: my-image
        working_directory: /tmp/my-project  
        steps:
+         - checkout
          - run:
              name: Run setup script
              command: bash .circleci/setup-heroku.sh
