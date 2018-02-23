@@ -77,7 +77,7 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
 
 3. Add a job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build-job` to succeed and a `filter` on the master branch.
 
-```
+```yaml
   deploy-job:
     docker:
       - image: my-image
@@ -109,24 +109,26 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0. However, it is possible to deploy to Heroku manually by using a script to set up Heroku, adding SSH keys with the `add_ssh_keys` option and configuring a workflow. 
 
 1. Create a script to set up Heroku similar to this example `setup-heroku.sh` file in the `.circleci` folder:
-     ```
-     #!/bin/bash
-     wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-     sudo mkdir -p /usr/local/lib /usr/local/bin
-     sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-     sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
-     cat > ~/.netrc << EOF
-     machine api.heroku.com
-       login $HEROKU_LOGIN
-       password $HEROKU_API_KEY
-     EOF
+ ```bash
+ #!/bin/bash
+ wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
+ sudo mkdir -p /usr/local/lib /usr/local/bin
+ sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
+ sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
-     cat >> ~/.ssh/config << EOF
-     VerifyHostKeyDNS yes
-     StrictHostKeyChecking no
-     EOF
-     ```
+ cat > ~/.netrc << EOF
+ machine api.heroku.com
+   login $HEROKU_LOGIN
+   password $HEROKU_API_KEY
+ EOF
+
+ cat >> ~/.ssh/config << EOF
+ VerifyHostKeyDNS yes
+ StrictHostKeyChecking no
+ EOF
+ ```
+
 ***Note:*** *`sudo` is necessary in the above script if running in a Docker container where the user is not `root` (for example, CircleCI's [convenience images](https://hub.docker.com/r/circleci)).  For images running with user `root` (as in most official Docker community images), remove `sudo` as it may not be installed for `root`.*
 
 This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
@@ -143,40 +145,39 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
 
 6. Add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
 
-7. Add a job with `run` steps and a workflow section similar to the following example in your `config.yml` file: 
+7. Add a job with `run` steps and a workflow section similar to the following example in your `config.yml` file:
 
-     ```
-     deploy-job:
-       docker:
-         - image: my-image
-       working_directory: /tmp/my-project  
-       steps:
-         - checkout
-         - run:
-             name: Run setup script
-             command: bash .circleci/setup-heroku.sh
-         - add_ssh_keys:
-             fingerprints:
-               - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-         - run:
-             name: Deploy Master to Heroku
-             command: |
-               git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-               heroku run python manage.py deploy
-               heroku restart
-               
-    workflows:
-      version: 2
-      build-deploy:
-        jobs:
-          - build-job
-          - deploy-job:
-              requires:
-                - build-job
-              filters:
-                branches:
-                  only: master
-     ```
+```yaml
+version: 2
+jobs:
+  # build and test jobs go here
+  deploy-job:
+    docker:
+      - image: my-image
+    working_directory: /tmp/my-project
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            heroku run python manage.py deploy
+            heroku restart
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-jobs:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
+```
 
 Notes:
 
