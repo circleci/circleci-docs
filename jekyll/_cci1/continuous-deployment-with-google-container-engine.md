@@ -23,11 +23,7 @@ GKE is Google's service to run [Docker](https://www.docker.com/) containers, all
 - [kubectl](http://kubernetes.io/docs/user-guide/kubectl-overview/): `kubectl` is a command-line tool for K8s. It will be installed via `gcloud`.
 
 #### Google Container Registry (GCR)
-Docker images need to be hosted somewhere for easy deployment. Most people will
-be familiar with the free registry provided by Docker itself,
-[Docker Hub](https://hub.docker.com/). Among several alternatives, Google
-provides their own registry to store your images with direct support for gcloud,
-GKE and K8s.
+For smooth deployment, Docker images must be hosted somewhere. While Docker provides its own free registry called [Docker Hub](https://hub.docker.com/), Google provides a registry for image storage while still directly supporting `gcloud`, GKE, and K8s.
 
 ## Setup
 
