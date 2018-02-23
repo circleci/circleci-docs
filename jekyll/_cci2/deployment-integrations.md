@@ -132,23 +132,26 @@ First, create a bash script to set up Heroku and place the file in the `.circlec
  EOF
  ```
 
-***Note:*** *`sudo` is necessary in the above script if running in a Docker container where the user is not `root` (for example, CircleCI's [convenience images](https://hub.docker.com/r/circleci)).  For images running with user `root` (as in most official Docker community images), remove `sudo` as it may not be installed for `root`.*
+**Note:** `sudo` is only necessary if the script runs in a Docker container with a non-root user.
+If the user _is_ root,
+remove `sudo` as it may not be installed.
 
-This file runs on CircleCI and configures everything Heroku needs to deploy the app. The second part creates a `.netrc` file and populates it with the API key and login details set previously.
+Next, install and authorize Heroku for the CircleCI account that owns the project.
+[Add environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-environment-variables-in-the-app) for the Heroku API key and login email to the CircleCI application as shown in the following image:
 
-2. Install and authorize Heroku for the CircleCI account that owns the project. 
-
-3. Add environment variables for the Heroku API key and login email to the CircleCI application on the Project > Settings > Environment Variables page as shown in the following image:
 ![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
 
-4. Create a new SSH key, without a passphrase, to connect to the Heroku Git server from CircleCI. The private key is added through the SSH Permissions page with a hostname of `git.heroku.com` as shown in the following screenshot:
+To connect to the Heroku Git server from CircleCI,
+create a new SSH key without a passphrase.
+The private key is added through the SSH Permissions page
+with a hostname of `git.heroku.com` as shown in the following image:
+
 ![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough6.png)
 
-5. Note down the Fingerprint for the private key for later reference. 
+Note the private key's fingerprint for later reference.
+Add the public key to Heroku on the [Account page](https://dashboard.heroku.com/account).
 
-6. Add the public key to Heroku on the <https://dashboard.heroku.com/account> screen.
-
-7. Add a job with `run` steps and a workflow section similar to the following example in your `config.yml` file:
+Finally, update your `config.yml` file with a job and workflow section similar to the following:
 
 ```yaml
 version: 2
@@ -186,7 +189,7 @@ workflows:
 ```
 
 For additional details,
-refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/)
+refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
 ## Google Cloud
 
