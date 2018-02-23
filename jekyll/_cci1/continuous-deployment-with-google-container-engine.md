@@ -7,74 +7,46 @@ description: "How to continuously deploy your application using Google Container
 ---
 
 ## Introduction
-Google's Cloud Platform (GCP) is a huge, scalable hosting platform that can be
-great for deploying an application for today's needs and tomorrow's. CircleCI
-Docs has a brief [GCP overview]( {{ site.baseurl }}/1.0/google-cloud-platform/) doc
-however in this guide, we'll go over continuously deploying an example Rails
-app to Google Container Engine (GKE). General information on continuous
-deployment with CircleCI can be found
-[here]( {{ site.baseurl }}/1.0/introduction-to-continuous-deployment/).
+Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs little introduction. If you still want one, you can read [this overview]({{ site.baseurl }}/1.0/google-cloud-platform/). In this guide, however, we'll show you how to continuously deploy a Rails application to [Google Container Engine](https://cloud.google.com/container-engine/) (GKE). You can find full example project on Github at [docker-hello-google](https://github.com/circleci/docker-hello-google).
+
+For general information on continuous deployment with CircleCI, see the [Introduction to Continuous Deployment]({{ site.baseurl }}/1.0/introduction-to-continuous-deployment/).
 
 ### Tools & Concepts Overview
 
-#### Google Container Engine (GKE)
-[GKE](https://cloud.google.com/container-engine/) is Google's service to run
-[Docker](https://www.docker.com/) containers, all powered by Google's
-open-source software, [Kubernetes](http://kubernetes.io/) (K8s for short). This
-guide takes advantage of newer K8s features (was tested with Kubernetes v1.2).
+#### GKE
+GKE is Google's service to run [Docker](https://www.docker.com/) containers, all powered by Google's open-source software [Kubernetes](http://kubernetes.io/) (K8s). This guide uses Kubernetes v1.2 and depends on the following features:
 
-* [Container Cluster](https://cloud.google.com/container-engine/docs/clusters/) - GKE
-offers clusters that simply a regular K8s cluster for you. It automatically
-runs a master endpoint and any nodes you need across Google Compute Engine
-(GCE) VMs.
-* [Deployments](http://kubernetes.io/docs/user-guide/deployments/) - We'll be
-using K8s deployments in this guide. This is a newer concept that replaces or
-wraps pods and replication controllers/replica sets. Deployments make it easy
-to manage which pods are running, how many, and upgrading containers smartly.
-* [gcloud](https://cloud.google.com/sdk/gcloud/) - command-line tool for GCP.
-This is pre-installed for us on CircleCI.
-* [kubectl](http://kubernetes.io/docs/user-guide/kubectl-overview/) - command-line
-tool for K8s. We install this via `gcloud`.
+- [Container Clusters](https://cloud.google.com/container-engine/docs/clusters/): GKE offers clusters that simplify a normal K8s cluster. With container clusters, GKE automatically runs a master endpoint and any needed nodes across Google Compute Engine (GCE) virtual machines.
+
+- [Deployments](http://kubernetes.io/docs/user-guide/deployments/): We'll be using K8s deployments in this guide. This concept replaces/wraps pods and replication controllers/replica sets. Deployments allow you to manage which pods are running and elegantly upgrade containers.
+
+- [gcloud](https://cloud.google.com/sdk/gcloud/): `gcloud` is a command-line tool for GCP. This is pre-installed for use on CircleCI.
+
+- [kubectl](http://kubernetes.io/docs/user-guide/kubectl-overview/): `kubectl` is a command-line tool for K8s. It will be installed via `gcloud`.
 
 #### Google Container Registry (GCR)
-Docker images need to be hosted somewhere for easy deployment. Most people will
-be familiar with the free registry provided by Docker itself,
-[Docker Hub](https://hub.docker.com/). Among several alternatives, Google
-provides their own registry to store your images with direct support for gcloud,
-GKE and K8s.
+For smooth deployment, Docker images must be hosted somewhere. While Docker provides its own free registry called [Docker Hub](https://hub.docker.com/), Google provides a registry for image storage while still directly supporting `gcloud`, GKE, and K8s.
 
 ## Setup
 
 ### Prerequisites
-
 This guide makes the following assumptions:
 
 1. Your project source code is hosted on a CircleCI compatible repository.
-1. You already have a GCP project registered. Keep the project name handy.
-1. There is an already running cluster on GKE. Keep the cluster name handy.
-1. You're familiar with Docker.
+2. You already have a GCP project registered. Keep the project name handy.
+3. There is an already running cluster on GKE. Keep the cluster name handy.
+4. You're familiar with Docker.
 
 ### Project Settings on CircleCI
-This guide will be using the example project
-[docker-hello-google](https://github.com/circleci/docker-hello-google) on GitHub.
 
 #### Environment Variables
-This project will use several environment variables (envar). Most will be set
-in `circle.yml` which we go over below. There is one that we will set via
-[Project Settings]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)
-due to the need to keep it a secret. This is the
-[GCP Service Account](https://cloud.google.com/storage/docs/authentication#service_accounts).
-This key is generated by Google as a JSON file. Follow the
-[Authentication with Google Cloud Platform]( {{ site.baseurl }}/1.0/google-auth/)
-guide to learn how to generate and base64 encode the key. Create a new envar
-with the name "ACCT_AUTH" and use the base64 encoded JSON key from
-Google as the value.
+This project uses several environment variables (envar). Most are set in `circle.yml`, but one is set via [Project Settings]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git) for security reasons. This is the
+[GCP Service Account](https://cloud.google.com/storage/docs/authentication#service_accounts). This key is generated by Google as a JSON file. Follow the [Authentication with Google Cloud Platform]( {{ site.baseurl }}/1.0/google-auth/) guide to learn how to generate and base64 encode the key. Create a new envar with the name "ACCT_AUTH" and use the base64 encoded JSON key from Google as the value.
 
 #### circle.yml
-We'll cover the relevant snippets of the `circle.yml` file here. You can find
-the complete file [here](https://github.com/circleci/docker-hello-google/blob/master/circle.yml).
+We'll cover the relevant snippets of the `circle.yml` file here. You can find the complete file [here](https://github.com/circleci/docker-hello-google/blob/master/circle.yml).
 
-```
+```yaml
 machine:
   environment:
     PROJECT_NAME: circle-ctl-test
@@ -83,29 +55,27 @@ machine:
     CLOUDSDK_COMPUTE_ZONE: us-central1-f
 ```
 
-In the `machine` section we set some envars for use to use with gcloud later.
-You should replace the values of these three variables for your specific project.
+In the `machine` section we set some envars for use to use with gcloud later. You should replace the values of these three variables for your specific project. **Note:** the project name is actually your project's ID in Google Cloud.
 
-```
+```yaml
 dependencies:
   pre:
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0 kubectl
-    - echo $ACCT_AUTH | base64 --decode -i > ${HOME}//gcloud-service-key.json
+    - echo $ACCT_AUTH | base64 --decode > ${HOME}//gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_ID
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
     - sudo /opt/google-cloud-sdk/bin/gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
-    #...
+    # ...
 ```
 
-`kubectl` is installed via `gcloud` so that we can interact with the cluster
-directly. The JSON key is used to authenticate with GCP, settings are set, and
-the last line uses `gcloud` to download creds for the cluster so that `kubectl`
-can use them during the deployment phase.
+In the above YAML snippet, `kubectl` is installed via `gcloud` so the cluster can be changed directly. The JSON key is used to authenticate with GCP, settings are configured, and finally `gcloud` is used to download cluster credentials so `kubectl` can use them during the deployment phase.
 
-```
+To ensure that there are no authentication issues with your service key, consider running the above `gcloud` commands locally.
+
+```yaml
 dependencies:
   pre:
     #...
