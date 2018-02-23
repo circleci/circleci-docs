@@ -77,7 +77,7 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
 
 ## Using the Workflows Functionality
 
-1. To see Workflows in action, edit your `.circle/config.yml` file. After you have the file in edit mode in your browser window, select the text from `build` and onwards in your file and copy and paste the text to duplicate that section. That should look similar to the code block below:
+1. To see Workflows in action, edit your `.circleci/config.yml` file. After you have the file in edit mode in your browser window, select the text from `build` and onwards in your file and copy and paste the text to duplicate that section. That should look similar to the code block below:
 
 ```yml
 version: 2
