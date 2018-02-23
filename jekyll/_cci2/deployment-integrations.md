@@ -150,7 +150,7 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
 ```yaml
 version: 2
 jobs:
-  # build and test jobs go here
+  # jobs for building/testing go here
   deploy-job:
     docker:
       - image: my-image
@@ -165,7 +165,7 @@ jobs:
           command: bash .circleci/setup-heroku.sh
       - run:
           name: Deploy Master to Heroku
-          command: |  # this command is framework-dependent and may change
+          command: |  # this command is framework-dependent and may vary
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
             heroku run python manage.py deploy
             heroku restart
