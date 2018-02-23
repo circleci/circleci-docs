@@ -157,7 +157,7 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - checkout
-      - add_ssh_keys:
+      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
           fingerprints:
             - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
       - run:
@@ -165,7 +165,7 @@ jobs:
           command: bash .circleci/setup-heroku.sh
       - run:
           name: Deploy Master to Heroku
-          command: |
+          command: |  # this command is framework-dependent and may change
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
             heroku run python manage.py deploy
             heroku restart
@@ -174,7 +174,7 @@ workflows:
   build-deploy:
     jobs:
       - build-job
-      - deploy-jobs:
+      - deploy-jobs:  # only deploy when master successfully builds
           requires:
             - build-job
           filters:
@@ -182,14 +182,8 @@ workflows:
               only: master
 ```
 
-Notes:
-
-- The new `run:` step executes the `setup-heroku.sh` script.
-- The `add_ssh_keys:` adds an SSH key to this build, which it gets from your CircleCI account based on the fingerprint you provide.
-- The `workflow` section filters on `master` and runs the Heroku deployment commands with every successful build on the master branch. 
-- The `heroku run` commands should be changed to whatever steps make sense for the framework you use. For example, you may need to run `rails db:migrate`.
-
-Refer to the full example in the [2.0 Project Tutorial]( {{ site.baseurl }}/2.0/project-walkthrough/) for additional details.
+For additional details,
+refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/)
 
 ## Google Cloud
 
