@@ -57,6 +57,10 @@ Reserve bolding for terms that are defined either in our [glossary](https://gith
 
 Like any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
 
-### User Action Recommendations
+### We the People
+When referring to CircleCI as a company or group, always use "CircleCI".
+Never use "we".
 
+### Recommendating User Actions
 When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
+Never say "please".
