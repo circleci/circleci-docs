@@ -161,6 +161,9 @@ jobs:
           fingerprints:
             - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
       - run:
+          name: Run Setup Script
+          command: bash .circleci/setup-heroku.sh
+      - run:
           name: Deploy Master to Heroku
           command: |
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
