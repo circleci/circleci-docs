@@ -108,9 +108,10 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 
 ## Heroku
 
-The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0. However, it is possible to deploy to Heroku manually by using a script to set up Heroku, adding SSH keys with the `add_ssh_keys` option and configuring a workflow. 
+The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0.
+However, it is possible to deploy to Heroku manually.
 
-1. Create a script to set up Heroku similar to this example `setup-heroku.sh` file in the `.circleci` folder:
+First, create a bash script to set up Heroku and place the file in the `.circleci` directory:
 
  ```bash
  #!/bin/bash
