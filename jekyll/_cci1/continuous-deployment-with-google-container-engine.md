@@ -14,18 +14,13 @@ Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs litt
 #### GKE
 GKE is Google's service to run [Docker](https://www.docker.com/) containers, all powered by Google's open-source software [Kubernetes](http://kubernetes.io/) (K8s). This guide uses Kubernetes v1.2 and depends on the following features:
 
-* [Container Cluster](https://cloud.google.com/container-engine/docs/clusters/) - GKE
-offers clusters that simply a regular K8s cluster for you. It automatically
-runs a master endpoint and any nodes you need across Google Compute Engine
-(GCE) VMs.
-* [Deployments](http://kubernetes.io/docs/user-guide/deployments/) - We'll be
-using K8s deployments in this guide. This is a newer concept that replaces or
-wraps pods and replication controllers/replica sets. Deployments make it easy
-to manage which pods are running, how many, and upgrading containers smartly.
-* [gcloud](https://cloud.google.com/sdk/gcloud/) - command-line tool for GCP.
-This is pre-installed for us on CircleCI.
-* [kubectl](http://kubernetes.io/docs/user-guide/kubectl-overview/) - command-line
-tool for K8s. We install this via `gcloud`.
+- [Container Clusters](https://cloud.google.com/container-engine/docs/clusters/): GKE offers clusters that simplify a normal K8s cluster. With container clusters, GKE automatically runs a master endpoint and any needed nodes across Google Compute Engine (GCE) virtual machines.
+
+- [Deployments](http://kubernetes.io/docs/user-guide/deployments/): We'll be using K8s deployments in this guide. This concept replaces/wraps pods and replication controllers/replica sets. Deployments allow you to manage which pods are running and elegantly upgrade containers.
+
+- [gcloud](https://cloud.google.com/sdk/gcloud/): `gcloud` is a command-line tool for GCP. This is pre-installed for use on CircleCI.
+
+- [kubectl](http://kubernetes.io/docs/user-guide/kubectl-overview/): `kubectl` is a command-line tool for K8s. It will be installed via `gcloud`.
 
 #### Google Container Registry (GCR)
 Docker images need to be hosted somewhere for easy deployment. Most people will
