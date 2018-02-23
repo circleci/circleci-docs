@@ -78,15 +78,17 @@ The **Access Key ID** and **Secret Access Key** that you entered are automatical
 3. Add a job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build-job` to succeed and a `filter` on the master branch.
 
 ```yaml
+version: 2
+jobs:
+  #  build and test jobs go here
   deploy-job:
     docker:
       - image: my-image
-    working_directory: /tmp/my-project  
+    working_directory: /tmp/my-project
     steps:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
-
 workflows:
   version: 2
   build-deploy:
@@ -98,7 +100,7 @@ workflows:
           filters:
             branches:
               only: master
-```            
+```
 
 ## Azure
 
