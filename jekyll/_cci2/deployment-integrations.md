@@ -161,6 +161,7 @@ This file runs on CircleCI and configures everything Heroku needs to deploy the 
          - run:
              name: Deploy Master to Heroku
              command: |
+               heroku git:remote -a HEROKU_APP_NAME
                git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
                heroku run python manage.py deploy
                heroku restart
