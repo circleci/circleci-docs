@@ -68,4 +68,4 @@ test:
 CircleCI offers first-class support for [deployment]( {{ site.baseurl }}/1.0/configuration/#deployment).
 When a build is green,
 CircleCI will deploy your project according to the configuration in your `circle.yml` file.
-We can deploy to other Platforms as a Service (PaaSe) providers as well as physical servers you manage.
+We can deploy to other Platforms as a Service (PaaS) providers as well as physical servers you manage.
