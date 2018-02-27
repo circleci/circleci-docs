@@ -85,7 +85,7 @@ To increase the speed of your software development through faster feedback, shor
 
 1. To use the Workflows feature, split your build job into multiple jobs, each with a unique name. It might make sense to start by just splitting out a deploy job to prevent you from having to re-run the entire build when only the deployment fails.
  
-2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circle/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
+2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circleci/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
      ```
      workflows:
        version: 2
