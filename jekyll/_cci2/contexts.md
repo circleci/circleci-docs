@@ -21,7 +21,7 @@ Contexts are created on the Settings page of the CircleCI application, in the Or
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
-Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. The use of multiple contexts is not yet supported for CircleCI installed on your local servers or private cloud.
+Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
 
 ## Creating and Using a Context
 
