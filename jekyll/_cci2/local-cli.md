@@ -1,11 +1,10 @@
 ---
 layout: classic-docs
-title: "The CircleCI Local Command Line Interface (CLI)"
+title: "Using the CircleCI Local CLI"
 short-title: "Using the CircleCI Local CLI"
 description: "How to run local jobs with the CLI"
 categories: [troubleshooting]
 order: 10
-alias: /docs/2.0/local-jobs/
 ---
 
 *[Build Environments]({{ site.baseurl }}/2.0/build/) > {{ page.title }}*
