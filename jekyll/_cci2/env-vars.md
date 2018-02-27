@@ -257,15 +257,15 @@ The GitHub/Bitbucket compare URL between commits in the build.
 
 The GitHub/Bitbucket repository URL.
 
-**CIRCLE_PR_NUMBER** (_only available in forked PR builds_)
+**CIRCLE_PR_NUMBER**
 
 The GitHub/Bitbucket pull request number.
 
-**CIRCLE_PR_REPONAME** (_only available in forked PR builds_)
+**CIRCLE_PR_REPONAME**
 
 The GitHub/Bitbucket repository name in which the pull request was made.
 
-**CIRCLE_PR_USERNAME** (_only available in forked PR builds_)
+**CIRCLE_PR_USERNAME**
 
 The GitHub/Bitbucket username of the user who created the pull request.
 
