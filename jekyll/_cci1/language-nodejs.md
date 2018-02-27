@@ -65,12 +65,7 @@ test:
 ```
 
 ### Deployment
-
 CircleCI offers first-class support for [deployment]( {{ site.baseurl }}/1.0/configuration/#deployment).
-When a build is green, CircleCI will deploy your project as directed
-in your `circle.yml` file.
-We can deploy to Nodejitsu and other PaaSes as well as to
-physical servers under your control.
-
-If you have any trouble, please [contact us](https://support.circleci.com/hc/en-us)
-and we will be happy to help.
+When a build is green,
+CircleCI will deploy your project according to the configuration in your `circle.yml` file.
+We can deploy to other Platforms as a Service (PaaS) providers as well as physical servers you manage.
