@@ -172,6 +172,7 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
+            heroku git:remote -a HEROKU_APP_NAME
             git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
             heroku run python manage.py deploy
             heroku restart
