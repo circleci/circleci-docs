@@ -38,7 +38,7 @@ For example, if you start a container and run a process with UID 0 inside the co
 ### How Docker and CircleCI use userns
 
 CircleCI runs Docker containers with userns enabled in order to run customers' containers securely.
-When Docker starts a container, Docker pulls an image and extracts image layers form the image. If a layer contains files created with UID/GID outside the remapping range that CircleCI configured on the host machine, say UID 1000000, Docker cannot remap the UID/GID and fails to start the container. This is exactly what's happening in the error you see at the top of this document.
+When Docker starts a container, Docker pulls an image and extracts image layers from the image. If a layer contains files created with UID/GID outside the remapping range that CircleCI configured on the host machine, say UID 1000000, Docker cannot remap the UID/GID and fails to start the container. This is exactly what's happening in the error you see at the top of this document.
 
 ### What should I do?
 
