@@ -55,7 +55,7 @@ limit the JVM’s usage of memory by declaring the limits in the
 ```
 machine:
   environment:
-    _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+    JAVA_OPTS: "-Xms512m -Xmx1024m"
 ```
 
 Note that you might want to use different numbers depending on the other
@@ -65,9 +65,9 @@ adjust the parameters accordingly.
 
 ## Out of memory errors in Android builds
 
-Gradle does not respect the `$JAVA_OPTS` variable,
+Gradle does not respect the `JAVA_OPTS` variable,
 so for Android builds you should limit the JVM’s heap by adding the
-`$GRADLE_OPTS` variable with the following contents to your
+`GRADLE_OPTS` variable with the following contents to your
 `circle.yml` file:
 
 ```
