@@ -218,14 +218,14 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       
       - restore_cache:
           keys:
-            - asset-cache-{{ arch }}-{{ .Branch }}-{{ checksum "VERSION" }}
+            - asset-cache-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - asset-cache-{{ arch }}-{{ .Branch }}
             - asset-cache
             
       - run: bundle exec rake assets:precompile
       
       - save_cache:
-          key: asset-cache-{{ arch }}-{{ .Branch }}-{{ checksum "VERSION" }}
+          key: asset-cache-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
