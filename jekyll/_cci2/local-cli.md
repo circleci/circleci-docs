@@ -24,7 +24,7 @@ You can also run `circleci` commands in your `config.yml` file for jobs that use
 
 ### Ubuntu 16.04+, Fedora 27+, and other Distros Supporting Snap Packages
 
-With `snapd` installed (pre-installed on Ubuntu), the Local CLI can be installed on various Linux distros. This gives you the CircleCI Local CLI, Docker, and the security & auto-update features that come with [Snap packages](https://www.ubuntu.com/desktop/snappy).
+With `snapd` installed (pre-installed on Ubuntu), you can install the Local CLI on various Linux distributions. The following commands give you the CircleCI Local CLI, Docker, and the security & auto-update features that come along with [Snap packages](https://www.ubuntu.com/desktop/snappy).
 
 ```
 sudo snap install docker circleci
