@@ -189,6 +189,63 @@ workflows:
               only: master
 ```
 
+If you prefer to deploy to Heroku using https, please consider this circleci (2.0) configuration which is even easier:
+
+Since we are deploying our app with https, the bash script above needed to setup heroku with ssh is not required anymore.
+For that reason the following steps can be deleted from the configuration:
+
+```yaml
+- add_ssh_keys:  # add key from CircleCI account based on fingerprint
+            fingerprints:
+            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+- run:
+     name: Run Setup Script
+     command: bash .circleci/setup-heroku.sh
+```
+
+instead we use the following step
+
+```yaml
+- run:
+     name: Deploy to Heroku
+        command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            sleep 5  # sleep for 5 seconds to wait for dynos
+            heroku restart
+```
+
+- Result:
+
+```yaml
+version: 2
+jobs:
+  # jobs for building/testing go here
+  deploy-job:
+    docker:
+      - image: my-image
+    working_directory: /tmp/my-project
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |  # this command is framework-dependent and may vary
+            heroku git:remote -a HEROKU_APP_NAME
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            sleep 5  # sleep for 5 seconds to wait for dynos
+            heroku restart
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-jobs:  # only deploy when master successfully builds
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
+```
+
 For additional details,
 refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
