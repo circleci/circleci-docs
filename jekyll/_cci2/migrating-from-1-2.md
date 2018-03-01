@@ -80,7 +80,26 @@ If you already have a `circle.yml` file, the following sections describe how to 
      
 7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
 
-8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
+8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
+
+## Environment Variables
+
+To set environment variables for all commands in a container,
+use the `environment` key in the corresponding `image`.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: circleci/postgres:9.6
+        environment:  # environment variables for database container
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+```
+
+Environment variables set at the `machine` level in CircleCI 1.0 should be set in the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ## Steps to Configure Workflows
 
