@@ -70,16 +70,3 @@ Date:   Wed Jan 23 16:30:24 2013 -0800
 ```
 
 In this example both commits are skipped because they were pushed together.
-
-### 4. Skip a Git tag release
-
-```
-$ git log origin/master..HEAD
-
-master:
- Release v2.6.1 [ci skip]
- Presentation data cleanup (#41)
- Enable translation update for presentation also
- ```
-
-You can skip building Git tags by including `[ci skip]` in the tag description.
