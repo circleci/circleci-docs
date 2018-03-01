@@ -120,7 +120,7 @@ To increase the speed of your software development through faster feedback, shor
            branches:
              ignore: master
      ```     
-6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed. 
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and Replace Deprecated 2.0 Keys
 
@@ -135,7 +135,7 @@ To increase the speed of your software development through faster feedback, shor
 
 ```
     environment:
-    PATH: "/path/to/foo/bin:$PATH"
+      PATH: "/path/to/foo/bin:$PATH"
 ```
 
 With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
