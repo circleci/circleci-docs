@@ -9,12 +9,9 @@ order: 15
 
 *[2.0]({{ site.baseurl }}/2.0/) > Migrating from 1.0 to 2.0*
 
-This document provides a starting point for migrating from CircleCI 1.0 to 2.0.
-The migration process may not end with this document,
-but the goal is to replace most configuration keys with the new syntax.
+This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
-If you do not have a `circle.yml` file,
-start from scratch by referring to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config/).
+If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
 * Contents
 {:toc}
