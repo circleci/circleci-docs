@@ -213,6 +213,8 @@ key_. Here is how you can cache the Ruby gems based on the content of
 ```
 jobs:
   build-and-deploy:
+    environment:
+      BUNDLE_PATH: vendor/bundle  # path to install gems and use for caching
     steps:
       ...
       - restore_cache:
@@ -227,9 +229,6 @@ jobs:
           environment:
             BUNDLE_JOBS: 4
             BUNDLE_RETRY: 3
-            # This is the path where all the gems will be installed, and
-            # which CircleCI will later cache.
-            BUNDLE_PATH: vendor/bundle
       - save_cache:
           key: v1-gems-{{ checksum "Gemfile.lock" }}
           paths:
