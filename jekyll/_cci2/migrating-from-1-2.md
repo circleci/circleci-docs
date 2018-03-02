@@ -77,7 +77,73 @@ If you already have a `circle.yml` file, the following sections describe how to 
      
 7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
 
-8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes. 
+8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
+
+## Environment Variables
+
+CircleCI 2.0 allows you to set environment variables at several scope levels.
+
+To set environment variables **for all commands in a build**,
+set environment variables for a [job]({{ site.baseurl }}/2.0/glossary/#job)
+by using the `environment` key in the associated job.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      - FOO: "bar"
+```
+
+To set environment variables **for all commands in a container**,
+use the `environment` key in the associated `image`.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: circleci/postgres:9.6
+        environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+```
+
+To set environment variables **for a single command**,
+use the `environment` key in the associated `run` [step]({{ site.baseurl }}/2.0/glossary/#step).
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+**Note:** CircleCI 2.0 does not support interpolation of environment variables.
+All defined values are treated literally.
+
+One workaround is to export the required variable within a command.
+
+```yaml
+- run:
+    command: |
+      export PATH=/go/bin:$PATH
+      go-get ...
+```
+
+For more information,
+see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to Configure Workflows
 
@@ -120,7 +186,7 @@ To increase the speed of your software development through faster feedback, shor
            branches:
              ignore: master
      ```     
-6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed. 
+6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and Replace Deprecated 2.0 Keys
 
@@ -135,7 +201,7 @@ To increase the speed of your software development through faster feedback, shor
 
 ```
     environment:
-    PATH: "/path/to/foo/bin:$PATH"
+      PATH: "/path/to/foo/bin:$PATH"
 ```
 
 With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
