@@ -9,7 +9,8 @@ order: 2
 
 <a href="https://circleci.com/docs/2.0/reference/">Reference</a> > Glossary
 
-{% for term in site._glossary %}
+{% assign sorted_terms = site._glossary | sort: 'term' %}
+{% for term in sorted_terms %}
     <h3 id="{{ term.term | slugify }}">{{ term.term }}</h3>
     {{ term.output }}
 {% endfor %}
