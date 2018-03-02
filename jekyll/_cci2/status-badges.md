@@ -36,7 +36,7 @@ and create  a label for the token.
 If you created a token in the previous step,
 select the token you want to use in the _API Token_ dropdown menu.
 5. Select the appropriate language from the _Embed Code_ dropdown menu.
-6. Copy and paste the generated link to the document where you want to display the status badge.
+6. Copy and paste the generated link in the document where you want to display the status badge.
 
 ## Customization
 
