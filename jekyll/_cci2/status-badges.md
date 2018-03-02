@@ -10,7 +10,9 @@ You can generate code for the following formats: Image URL, Markdown, Textile, R
 
 ## Overview
 
-CircleCI provides build status badges for projects and branches. Status badges are commonly embedded in GitHub READMEs, although they can be placed virtually anywhere.
+CircleCI provides build status badges for projects and branches.
+Status badges are commonly embedded in project READMEs,
+although they can be placed virtually anywhere.
 
 ## Steps
 
