@@ -84,7 +84,9 @@ If you already have a `circle.yml` file, the following sections describe how to 
 
 ## Environment Variables
 
-To set environment variables for all commands in a build,
+CircleCI 2.0 allows you to set environment variables at several scope levels.
+
+To set environment variables **for all commands in a build**,
 set environment variables for a [job]({{ site.baseurl }}/2.0/glossary/#job)
 by using the `environment` key in the associated job.
 
@@ -98,7 +100,7 @@ jobs:
       - FOO: "bar"
 ```
 
-To set environment variables for all commands in a container,
+To set environment variables **for all commands in a container**,
 use the `environment` key in the associated `image`.
 
 ```yaml
@@ -113,7 +115,7 @@ jobs:
           POSTGRES_DB: conductor_test
 ```
 
-To set environment variables for a single command,
+To set environment variables **for a single command**,
 use the `environment` key in the associated `run` [step]({{ site.baseurl }}/2.0/glossary/#step).
 
 ```yaml
@@ -133,6 +135,7 @@ jobs:
 
 **Note:** CircleCI 2.0 does not support interpolation of environment variables.
 All defined values are treated literally.
+
 One workaround is to export the required variable within a command.
 
 ```yaml
