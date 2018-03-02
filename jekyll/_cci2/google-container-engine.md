@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Using Google Container Engine"
-short-title: "Using Google Container Engine"
+title: "Deploying to Google Container Engine"
+short-title: "Deploying to Google Container Engine"
 categories: [containerization]
-description: "Setting up Google Cloud Platform's Container Engine with CircleCI 2.0."
+description: "Deploying to Google Container Engine with CircleCI 2.0."
 order: 60
 ---
 
