@@ -40,9 +40,8 @@ select the token you want to use in the _API Token_ dropdown menu.
 
 ## Customization
 
-If you find the standard status badge ugly, you can use the highly-attractive shield style. Behold the difference:
-
-- Standard ![](https://circleci.com/gh/circleci/circle.png?circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
-- Shield ![](https://circleci.com/gh/circleci/circle.svg?style=shield&circle-token=3cc80b12ab3627373c76e13735b8bc00a1259b9e)
-
-To use the shield style, simply replace `style=svg` with `style=shield` in the link you generated above.
+If you find the default status badge too minimal,
+you can use the [shield style](https://shields.io/).
+To use the shield style,
+replace `style=svg` with `style=shield`
+in the link you generated above.
