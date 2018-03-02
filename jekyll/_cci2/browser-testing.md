@@ -48,7 +48,7 @@ jobs:
           background: true
 ```
 
-Sauce Labs essentially provides a Selenium Server as a service, with all kinds of browsers available to test. It has some extra goodies like videos of all test runs as well. 
+As an alternative to configuring your environment for Selenium, Sauce Labs provides a Selenium Server as a service, with a large number of browsers and system combinations available to test. It has some extra goodies like videos of all test runs as well. 
 
 ## Sauce Labs
 
@@ -73,15 +73,14 @@ jobs:
     steps:
       - checkout
       - run: 
-          command: |
-            wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
-            tar -xzf sc-latest-linux.tar.gz
+          name: Install Sauce
+          command: npm install saucelabs
       - run: 
           name: sauce testing
           command: npm run-script sauce
           environment:
-            SAUCE_USERNAME: # ?
-            SAUCE_ACCESS_KEY: # ?
+            SAUCE_USERNAME: # Refer to circleci.com/docs/2.0/env-vars documentation for info
+            SAUCE_ACCESS_KEY: # about setting up environment variables for auth secrets
       - run: # Wait for app to be ready
           command: wget --retry-connrefused --no-check-certificate -T 30 http://localhost:5000
       - run: # Run selenium tests
@@ -92,7 +91,7 @@ jobs:
 
 ## BrowserStack and Appium
 
-In this same way, you could replace the installation of Sauce Labs with installation of another cross-browser testing platform such as BrowserStack and set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those for your BrowserStack account.
+As in the Sauce Labs example above, you could replace the installation of Sauce Labs with installation of another cross-browser testing platform such as BrowserStack and set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
 
 For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
 
@@ -103,7 +102,7 @@ This section provides some examples of how to debug browser tests on CircleCI.
 
 ### Using Screenshots and Artifacts
 
-CircleCI can be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/)
+CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/)
 and make them available from your build. For example, artifacts enable you to save screenshots as part of your build,
 and view them when the build finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`, see the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuration Reference for an example.
 
@@ -115,13 +114,12 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 
 ### Using a Local Browser to Access HTTP server on CircleCI
 
-If you are running a test that runs an HTTP server on CircleCI, sometimes it can
-be helpful to use a browser running on your local machine to debug why a
-particular test is failing. Setting this up is easy with an SSH-enabled
+If you are running a test that runs an HTTP server on CircleCI, sometimes it is helpful to use a browser running on your local machine to debug a
+failing test. Setting this up is easy with an SSH-enabled
 run.
 
-First, run an SSH build using the Rerun Job with SSH button on the Builds page of the CircleCI app. You will be shown the command to log into
-the container over SSH. This command will look like this:
+First, run an SSH build using the Rerun Job with SSH button on the Builds page of the CircleCI app. The command to log into
+the container over SSH apears, as follows:
 
 ```
 ssh -p 64625 ubuntu@54.221.135.43
@@ -130,15 +128,15 @@ ssh -p 64625 ubuntu@54.221.135.43
 To add port-forwarding to the command, use the `-L` flag.
 The following example forwards
 requests to `http://localhost:3000` to port `8080` on the CircleCI container.
-This would be useful, for instance, if your build runs a debug Ruby on Rails app, which listens
+This would be useful, for example, if your build runs a debug Ruby on Rails app, which listens
 on port 8080.
 
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
 
-You can now open your browser on your local machine and navigate to
-`http://localhost:8080` and this will send requests directly to the server
+Then, open your browser on your local machine and navigate to
+`http://localhost:8080` to send requests directly to the server
 running on port `3000` on the CircleCI container. You can also manually start the
 test server on the CircleCI container (if it is not already running), and you
 should be able to access the running test server from the browser on your development machine.
@@ -237,17 +235,5 @@ You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
-### VNC Viewer Recommendations
 
-Some of our customers have had some VNC clients perform poorly and
-others perform well.  Particularly, on macOS, RealVNC produces a better
-image than Chicken of the VNC.
-
-If you have had a good or bad experience with a VNC viewer,
-[let us know](https://support.circleci.com/hc/en-us) so we can update this page and help
-other customers.
-
-## Troubleshooting
-
-If you find that VNC or X11 disconnects unexpectedly, your build container may be running out of memory. See [our guide to memory limits]( {{ site.baseurl }}/1.0/oom/) to learn more.
 
