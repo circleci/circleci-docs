@@ -84,6 +84,20 @@ If you already have a `circle.yml` file, the following sections describe how to 
 
 ## Environment Variables
 
+To set environment variables for all commands in a build,
+set environment variables for a [job]({{ site.baseurl }}/2.0/glossary/#job)
+by using the `environment` key in the associated job.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      - FOO: "bar"
+```
+
 To set environment variables for all commands in a container,
 use the `environment` key in the corresponding `image`.
 
