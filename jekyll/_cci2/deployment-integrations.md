@@ -253,7 +253,7 @@ refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/p
 
 Before deploying to Google Cloud, ensure that you have authenticated the `gcloud` command line tool. To do that, you can read the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
 
-In addition, ensure that the Google Cloud SDK is installed in your primary container so that `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands. See the [Using Google Container Engine]({{ site.baseurl }}/2.0/google-container-engine/) document for details.
+In addition, ensure that the Google Cloud SDK is installed in your primary container so that `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands. See the [Deploying to Google Container Engine]({{ site.baseurl }}/2.0/google-container-engine/) document for details.
 
 In the following example, if the build passes and the current branch was the master branch, CircleCI runs `deploy.sh` to do the actual deployment work.
 
