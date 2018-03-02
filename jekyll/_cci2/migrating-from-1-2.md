@@ -133,7 +133,7 @@ jobs:
 
 **Note:** CircleCI 2.0 does not support interpolation of environment variables.
 All defined values are treated literally.
-A workaround is to export the environment variable within a command.
+One workaround is to export the required variable within a command.
 
 ```yaml
 - run:
