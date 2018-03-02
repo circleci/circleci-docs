@@ -99,7 +99,7 @@ jobs:
 ```
 
 To set environment variables for all commands in a container,
-use the `environment` key in the corresponding `image`.
+use the `environment` key in the associated `image`.
 
 ```yaml
 version: 2.0
@@ -108,7 +108,7 @@ jobs:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
       - image: circleci/postgres:9.6
-        environment:  # environment variables for database container
+        environment:
           POSTGRES_USER: conductor
           POSTGRES_DB: conductor_test
 ```
