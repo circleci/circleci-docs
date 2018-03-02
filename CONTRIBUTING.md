@@ -4,15 +4,14 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do. That's why we prioritize issues according to the following five categories, in decreasing importance:
+There is never enough time to do everything we want to do. That's why we prioritize issues according to the following four categories, in decreasing importance:
 
-1. Created: documentation should exist.
-2. Correct: documentation should be accurate.
-3. Current: documentation should be up to date.
-4. Consistent: documentation should not conflict with itself.
-5. Clear: documentation should be clear.
+1. Correct: documentation should be accurate.
+2. Current: documentation should be up-to-date.
+3. Consistent: documentation should not conflict with itself.
+4. Clear: documentation should be clear.
 
-We use this ranking when deciding which tasks to tackle.
+We use these values when creating new documentation and fixing old documentation.
 
 # Contributing to CircleCI Docs
 
@@ -55,12 +54,16 @@ Reserve bolding for terms that are defined either in our [glossary](https://gith
 
 ## Word Preferences
 
-Like any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
+As in any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
 
-### We the People
-When referring to CircleCI as a company or group, always use "CircleCI".
+### Referencing CircleCI
+
+When referring to CircleCI as a company or group,
+always use "CircleCI".
 Never use "we".
 
-### Recommendating User Actions
-When recommending a user action, use "consider" instead of "we recommend" or "we suggest".
+### Recommending User Actions
+
+When recommending a user action,
+use "consider" instead of "we recommend" or "we suggest".
 Never say "please".
