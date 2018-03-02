@@ -5,7 +5,7 @@ category: [administration]
 order: 1
 description: "High-level overview of the CircleCI installation process."
 ---
-This article provides System Administrator's with an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
+This article provides System Administrators with an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
 
 * TOC
 {:toc}
