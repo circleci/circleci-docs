@@ -113,7 +113,37 @@ jobs:
           POSTGRES_DB: conductor_test
 ```
 
-Environment variables set at the `machine` level in CircleCI 1.0 should be set in the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+To set environment variables for a single command,
+use the `environment` key in the associated `run` [step]({{ site.baseurl }}/2.0/glossary/#step).
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+**Note:** CircleCI 2.0 does not support interpolation of environment variables.
+All defined values are treated literally.
+A workaround is to export the environment variable within a command.
+
+```yaml
+- run:
+    command: |
+      export PATH=/go/bin:$PATH
+      go-get ...
+```
+
+For more information,
+see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to Configure Workflows
 
