@@ -5,23 +5,31 @@ title: Embedding Build Status Badges
 
 [Basics]({{ site.baseurl }}/2.0/basics/) > Embedding Build Status Badges
 
-This document describes how to create a badge that displays your project's build status.
-You can generate code for the following formats: Image URL, Markdown, Textile, Rdoc, AsciiDoc, reStructuredText, and pod.
+This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
 ## Overview
 
-CircleCI provides build status badges for projects and branches.
 Status badges are commonly embedded in project READMEs,
-although they can be placed virtually anywhere.
+although they can be placed in any web document.
+CircleCI provides a tool to generate embed code for status badges.
+By default, a badge displays the status of a project's default branch,
+though you can also select other branches.
+
+You can generate code for the following formats:
+
+- Image URL
+- Markdown
+- Textile
+- Rdoc
+- AsciiDoc
+- reStructuredText
+- pod
 
 ## Steps
 
-CircleCI provides a tool to generate embed code for status badges.
-
 1. In the _Notifications_ section of your project's settings,
 click _Status Badges_.
-2. By default,
-the badge displays the status of your project's default branch.
+2. By default, the badge displays the status of your project's default branch.
 If you want to show the status of a different branch,
 use the Branch dropdown menu to select it.
 3. (Optional)
