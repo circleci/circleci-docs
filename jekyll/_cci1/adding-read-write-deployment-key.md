@@ -13,6 +13,7 @@ Suppose your GitHub repository is `https://github.com/you/test-repo` and the pro
   Note: when asked "Enter passphrase (empty for no passphrase)", do ***not*** enter a passphrase.
 - Go to `https://github.com/you/test-repo/settings/keys` on GitHub and click **Add deploy key**. Enter any title in the **Title** field, then copy and paste the public key you just created. Make sure to check **Allow write access**, then click **Add key**.
 - Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
+- If your project has an old deploy key CircleCI has generated, you'll need to remove it from `https://circleci.com/gh/you/test-repo/edit#checkout`
 
 * Note: You may need to add the hostname to your .ssh/config.
 
