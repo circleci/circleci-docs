@@ -13,8 +13,12 @@ This not only skips the marked commit,
 but also **all other commits** in the push.
 
 If you later decide to build a skipped commit,
-click the _Rebuild_ button on the build details page in CircleCI.
-This overrides any `[ci skip]` or `[skip ci]` tags added to commits.
+you can override any skip tags
+by rerunning the build.
+If you are using workflows,
+go to the Workflows page of the CircleCI application
+and rerun the entire Workflow or rerun it from failed jobs.
+Otherwise, click one of the Rebuild options on the Build page of the CircleCI application.
 
 **Note:**
 This feature is not supported for fork PRs.
