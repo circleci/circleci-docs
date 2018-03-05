@@ -19,9 +19,7 @@ This overrides any `[ci skip]` or `[skip ci]` tags added to commits.
 **Note:**
 This feature is not supported for fork PRs.
 
-## Examples
-
-### Commit Title
+## Example Commit Title
 
 ```bash
 $ git log origin/master..HEAD
@@ -37,7 +35,7 @@ When pushed to a VCS,
 this commit will not be built on CircleCI
 because of the `[ci skip]` in the commit title.
 
-### Commit Description
+## Example Commit Description
 
 ```bash
 $ git log origin/master..HEAD
