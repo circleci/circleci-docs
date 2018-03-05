@@ -18,17 +18,17 @@ Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-
 
 ## Overview
 
-CircleCI automatically runs all your tests, against whatever browsers you choose, every time you commit code. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch. 
+Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch. 
 
 ## Selenium 
 
 Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard. 
 
-Selenium WebDriver provides a common API for programatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface to talk to all of these browsers, you only need to write your browser tests once, and you can run them on as many browsers and platforms as you want. See the [Selenium documentation](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project) for details on set up. Refer to the [Xvfb man page](http://www.xfree86.org/4.0.1/Xvfb.1.html) for virtual framebuffer X server documentation.
+Selenium WebDriver provides a common API for programatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the [Selenium documentation](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project) for details on set up. Refer to the [Xvfb man page](http://www.xfree86.org/4.0.1/Xvfb.1.html) for virtual framebuffer X server documentation.
 
-WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run in remote mode, your tests interact with a Selenium Server, and it it is up to the server to drive the browsers. 
+WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium Server, and it is up to the server to drive the browsers. 
 
-Selenium needs to be installed and run as shown in the following example if it is not included in the primary docker image:
+If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
 ```yml
 version: 2
@@ -48,20 +48,18 @@ jobs:
           background: true
 ```
 
-As an alternative to configuring your environment for Selenium, Sauce Labs provides a Selenium Server as a service, with a large number of browsers and system combinations available to test. It has some extra goodies like videos of all test runs as well. 
+As an alternative to configuring your environment for Selenium, Sauce Labs provides a Selenium Server as a service, with a large number of browsers and system combinations available to test. Sauce Labs also has some extra goodies like videos of all test runs. 
 
 ## Sauce Labs
 
-Sauce Labs operates browsers on a network separate from CircleCI build containers, so there needs to be a way for the browsers to access the web application you want to test. 
+Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To enable the browsers with a way to access the web application you want to test, you can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel, [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
 
-You can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs'
-secure tunnel, [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
 Sauce Connect allows you to run a test server within the CircleCI build container
 and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you
 run your browser tests after deploying to a publicly accessible staging environment,
 then you can use Sauce Labs in the usual way without worrying about Sauce Connect.
 
-This example `circle.yml` file demonstrates how to run browser tests through Sauce Labs
+This example `config.yml` file demonstrates how to run browser tests through Sauce Labs
 against a test server running within a CircleCI build container.
 
 ```yml
@@ -91,7 +89,7 @@ jobs:
 
 ## BrowserStack and Appium
 
-As in the Sauce Labs example above, you could replace the installation of Sauce Labs with installation of another cross-browser testing platform such as BrowserStack and set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
+As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
 
 For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
 
@@ -104,7 +102,7 @@ This section provides some examples of how to debug browser tests on CircleCI.
 
 CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/)
 and make them available from your build. For example, artifacts enable you to save screenshots as part of your build,
-and view them when the build finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`, see the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuration Reference for an example.
+and view them when the build finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuration Reference for an example.
 
 Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
 
@@ -114,32 +112,20 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 
 ### Using a Local Browser to Access HTTP server on CircleCI
 
-If you are running a test that runs an HTTP server on CircleCI, sometimes it is helpful to use a browser running on your local machine to debug a
+If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a
 failing test. Setting this up is easy with an SSH-enabled
 run.
 
-First, run an SSH build using the Rerun Job with SSH button on the Builds page of the CircleCI app. The command to log into
+1. Run an SSH build using the Rerun Job with SSH button on the Builds page of the CircleCI app. The command to log into
 the container over SSH apears, as follows:
-
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-
-To add port-forwarding to the command, use the `-L` flag.
-The following example forwards
-requests to `http://localhost:3000` to port `8080` on the CircleCI container.
-This would be useful, for example, if your build runs a debug Ruby on Rails app, which listens
-on port 8080.
-
+2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` to port `8080` on the CircleCI container. This would be useful, for example, if your build runs a debug Ruby on Rails app, which listens on port 8080.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
-
-Then, open your browser on your local machine and navigate to
-`http://localhost:8080` to send requests directly to the server
-running on port `3000` on the CircleCI container. You can also manually start the
-test server on the CircleCI container (if it is not already running), and you
-should be able to access the running test server from the browser on your development machine.
+3. Then, open your browser on your local machine and navigate to `http://localhost:8080` to send requests directly to the server running on port `3000` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
 This is a very easy way to debug things when setting up Selenium tests, for
 example.
@@ -148,34 +134,25 @@ example.
 
 VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless &mdash; there is nothing to interact with.
 
-Before you start, make sure you have a VNC viewer installed. If you're using macOS, we recommend
-[Chicken of the VNC](http://sourceforge.net/projects/chicken/).
-[RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
+1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/). [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-First, [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/)
-to a CircleCI container. When you connect to the machine, add the -L flag and forward the remote port 5901 to the local port 5902:
-
+2. Then [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container. When you connect to the machine, add the -L flag and forward the remote port 5901 to the local port 5902:
 ```
 daniel@mymac$ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
-
-You should be connected to the CircleCI container. Now start the VNC server:
-
+3. You should be connected to the CircleCI container. Now start the VNC server:
 ```
 ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24
 ```
+4. Enter the password `password` when it prompts you. Your connection is secured with SSH, so there is no need for a strong password. You do need to enter a password to start the VNC server.
 
-Enter the password `password` when it prompts you. Your connection is secured with SSH, so there is no need for a strong password. You do need to enter a password to start the VNC server.
+5. Start your VNC viewer and connect to `localhost:5902`. Enter the password when it prompts you. You should see a display containing a terminal window. You can ignore any warnings about an insecure or unencrypted connection. Your connection is secured through the SSH tunnel.
 
-Start your VNC viewer and connect to `localhost:5902`. Enter the password when it prompts you. You should see a display containing a terminal window. You can ignore any warnings about an insecure or unencrypted connection. Your connection is secured through the SSH tunnel.
-
-Next, make sure to run:
-
+6. Next, be sure to run:
 ```
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-
-to ensure that windows open in the VNC server, rather than the default headless X server.
+to enable windows to open in the VNC server, rather than the default headless X server.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
@@ -183,10 +160,9 @@ For information about Headless Chrome, refer to the [Headless Chrome for More Re
 
 ### Sharing CircleCI's X Server
 
-If you find yourself setting up a VNC server often, then you might want to automate the process. You can use x11vnc to attach a VNC server to X.
+If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
-Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
-
+1. Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
 ```
     steps:
       - run:
@@ -196,9 +172,7 @@ Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it bef
             x11vnc -forever -nopw:
           background: true
 ```
-
-Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
-
+2. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -207,33 +181,22 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-Before you start, make sure you have an X Window System on your computer. If you're using macOS, we recommend
-[XQuartz](http://xquartz.macosforge.org/landing/).
+1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
-With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/)
-to a CircleCI VM, using the `-X` flag to set up forwarding:
-
+2. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 ```
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
-
 This will start an SSH session with X11 forwarding enabled.
 
-To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
-
+3. To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
 ```
 ubuntu@box10$ export DISPLAY=localhost:10.0
 ```
-
-Check that everything is working by starting xclock.
-
+4. Check that everything is working by starting xclock.
 ```
 ubuntu@box10$ xclock
 ```
-
 You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
-
-
-
