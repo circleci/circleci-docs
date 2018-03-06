@@ -10,7 +10,7 @@ This article provides System Administrators with an overview of CircleCI 2.0 ins
 * TOC
 {:toc}
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. Contact us at [Support](https://support.circleci.com/hc/en-us) to request a trial license.
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. Contact us to request a [trial license](https://circleci.com/enterprise-trial-install).
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
 * New configuration with any number of jobs and workflows to orchestrate them. 
@@ -29,7 +29,7 @@ There are three basic ways to install CircleCI in your environment (AWS is curre
 
 ## Build Environments
 
-By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the scheduler and how to perfom basic client and cluster operations.
+By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
 ## Architecture
 
@@ -52,7 +52,7 @@ The machine on which the Service instance runs must not be restarted and may be 
 {: class="table table-striped"}
 
 ### Builders
-The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds and increase the Builder instance machines as needed to balance the load.
+The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds, and increase the Builder instance machines as needed to balance the load.
 
 Each machine on which the Builders are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
 
