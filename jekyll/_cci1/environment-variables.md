@@ -101,10 +101,6 @@ The username of the owner of the fork.
 
 The name of the repository the pull request was submitted from.
 
-`CIRCLE_PR_NUMBER`
-
-The number of the pull request this build forms part of.
-
 ## Parallelism
 
 These variables are available for [manually setting up parallelism](/docs/1.0/parallel-manual-setup/):
