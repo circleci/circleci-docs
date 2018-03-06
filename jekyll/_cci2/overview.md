@@ -10,7 +10,7 @@ This article provides System Administrators with an overview of CircleCI 2.0 ins
 * TOC
 {:toc}
 
-CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. 
+CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. Contact us to request a [trial license](https://circleci.com/enterprise-trial-install).
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
 * New configuration with any number of jobs and workflows to orchestrate them. 
@@ -27,36 +27,9 @@ There are three basic ways to install CircleCI in your environment (AWS is curre
 2. A [clustered installation]({{ site.baseurl }}/2.0/aws/), suitable for production use for most teams
 3. A [highly-available configuration]({{ site.baseurl }}/2.0/high-availability/) (if supported by your license) to meet higher uptime requirements
 
-
-## Customer Use Cases 
-
-**Coinbase** runs CircleCI behind their firewall for security and reliability. The [Coinbase case study report](https://circleci.com/customers/coinbase/) reveals that using CircleCI reduced their average time from merge to deploy in half, reduced operations time spent on continuous integration maintenance from 50% of one person's time to less than one hour per week, and increased developer throughput by 20%. 
-
-**Fanatics** increased their team efficiency by 300% with CircleCI. See the [Fanatics case study report](https://circleci.com/customers/fanatics/).
-
-CircleCI enables **Cruise Automation** (a subsidiary of GM) to run many more simulations before putting code in a road test, see the [Cruise case study report](https://circleci.com/customers/cruise/).
-
-Refer to the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI.
-
-## Basic Features
-
-After a software repository in GitHub or GitHub Enterprise is added as a project to the CircleCI application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, HipChat, Campfire, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
-
-CircleCI may also be configured to deploy code to all major platforms, including the following:
-
-- AWS CodeDeploy
-- AWS EC2 Container Service (ECS)
-- AWS S3
-- Google Container Engine (GKE)
-- Heroku
-
-Other cloud service deployments can be easily scripted using SSH or by installing the API client of the service with your job configuration.
-
-Contact us at [Support](https://support.circleci.com/hc/en-us) to request a trial license.
-
 ## Build Environments
 
-By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. 
+By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
 ## Architecture
 
@@ -79,7 +52,7 @@ The machine on which the Service instance runs must not be restarted and may be 
 {: class="table table-striped"}
 
 ### Builders
-The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds and increase the Builder instance machines as needed to balance the load.
+The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds, and increase the Builder instance machines as needed to balance the load.
 
 Each machine on which the Builders are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
 
@@ -107,5 +80,13 @@ authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, C
 {: class="table table-striped"}
 
 
+## Customer Use Cases 
 
+**Coinbase** runs CircleCI behind their firewall for security and reliability. The [Coinbase case study report](https://circleci.com/customers/coinbase/) reveals that using CircleCI reduced their average time from merge to deploy in half, reduced operations time spent on continuous integration maintenance from 50% of one person's time to less than one hour per week, and increased developer throughput by 20%. 
+
+**Fanatics** increased their team efficiency by 300% with CircleCI. See the [Fanatics case study report](https://circleci.com/customers/fanatics/).
+
+CircleCI enables **Cruise Automation** (a subsidiary of GM) to run many more simulations before putting code in a road test, see the [Cruise case study report](https://circleci.com/customers/cruise/).
+
+Refer to the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI.
 
