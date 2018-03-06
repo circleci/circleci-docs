@@ -29,12 +29,13 @@ test:
     - yarn test
 ```
 
-Overriding the `dependencies` phase means that the `node_modules/.bin` directory doesn't get added to `PATH`. We add it in the `machine` phase.
+Overriding the `dependencies` phase means that the `node_modules/.bin` directory doesn't get added to `PATH` and `NODE_ENV` isn't set. We add it in the `machine` phase.
 
 ```yaml
 machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+    NODE_ENV: test
 ```
 
 ## Cache
