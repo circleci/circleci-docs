@@ -3,6 +3,8 @@ layout: classic-docs
 title: Skipping a Build
 ---
 
+_[Basics]({{ site.baseurl }}/2.0/basics/) > Skipping a Build_
+
 By default,
 CircleCI automatically builds a project
 whenever you push changes to a version control system (VCS).
