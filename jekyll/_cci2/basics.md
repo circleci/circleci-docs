@@ -33,6 +33,7 @@ Learn to use the basic features of CircleCI.
 
 Document | Description
 ----|----------
+[Skipping a Build]({{ site.baseurl }}/2.0/skip-build/) | How to prevent CircleCI from automatically building changes.
 [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) | How to use environment variables in the CircleCI app and in the `config.yml` file.
 [Using Contexts]({{ site.baseurl }}/2.0/contexts/) | How to use Contexts to set global environment variables.
 [Using Insights]({{ site.baseurl }}/2.0/insights/) | How to view status for your repos and build performance data.
