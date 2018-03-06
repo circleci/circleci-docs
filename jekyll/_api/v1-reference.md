@@ -57,7 +57,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
-  GET: /project/:vcs-type/:username/:project/:build_num/artifacts
+  GET: /project/:vcs-type/:reponame/:project/:build_num/artifacts
 </dt>
 <dd>
   List the artifacts produced by a given build.
@@ -84,7 +84,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   POST: /project/:vcs-type/:username/:project/tree/:branch
 </dt>
 <dd markdown="1">
-  Triggers a new build, returns a summary of the build. [Optional build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/).
+  Triggers a new build, returns a summary of the build. [Optional 1.0 build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/) and [Optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/ssh-key
@@ -130,7 +130,7 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 </dd>
 </dl>
 
-## Getting started
+## Getting Started
 
 1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
 2.  To test it,
@@ -284,7 +284,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more about build parameters, read about [using parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/)
+<span class='label label-info'>Note:</span> For more about build parameters, read about [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
 
 {{ site.data.api.project_branch | api_endpoint }}
 
@@ -329,7 +329,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]( {{ site.baseurl }}/1.0/test-metadata/)
+<span class='label label-info'>Note:</span> [Learn how to set up your 1.0 builds to collect test metadata]( {{ site.baseurl }}/1.0/test-metadata/) and [set up your 2.0 builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
 
 ## SSH Keys
 
