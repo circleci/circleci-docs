@@ -118,13 +118,13 @@ Because the second key is less specific than the first, it is more likely that t
 
 ### Clearing Cache 
 
-If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example.   
+If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.   
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Caches are immutable so it is useful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This enables you to regenerate all of your caches by incrementing the version in this prefix.
 </div>
 
-For example:
+For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
 
 * Dependency manager version change, for example, you change npm from 4 to 5
 * Language version change, for example, you change ruby 2.3 to 2.4
