@@ -914,12 +914,12 @@ requires | N | List | A list of jobs that must succeed for the job to start
 {: class="table table-striped"}
 
 
-###### **`contexts`**
-Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/workflows) document for adding a context in the application settings.
+###### **`context`**
+Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String | The name of the context. The default name is `org-global`.
+context | N | String | The name of the context. The initial default name was `org-global`. With the ability to use multiple contexts, each context name must be unique.
 {: class="table table-striped"}
 
 ###### **`type`**
