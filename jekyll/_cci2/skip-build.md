@@ -1,6 +1,10 @@
 ---
 layout: classic-docs
 title: Skipping a Build
+short-title: Skipping a Build
+description: How to Prevent CircleCI From Automatically Building
+categories: [configuring-jobs]
+order: 100
 ---
 
 _[Basics]({{ site.baseurl }}/2.0/basics/) > Skipping a Build_
