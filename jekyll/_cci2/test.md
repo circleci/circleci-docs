@@ -11,6 +11,7 @@ Refer to the following documents for help with setting up your tests.
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuration Reference `run` Step section</a> | Write a job to run your tests.
+[Browser Testing]({{ site.baseurl }}/2.0/browser-testing.md/) | Common methods for running and debugging browser tests in CircleCI.
 <a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a> | How to set up various common test runners in your CircleCI configuration.
 <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
 <a href="{{ site.baseurl }}/2.0/parallelism-faster-jobs/">Running Tests in Parallel</a> | How to glob and splitting tests inside a job.
