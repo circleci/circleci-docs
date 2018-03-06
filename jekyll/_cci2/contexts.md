@@ -39,7 +39,7 @@ workflows:
   my-workflow:
     jobs:
       - run-tests:
-            context: org-global
+          context: org-global
 ```
 
 To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application. 
