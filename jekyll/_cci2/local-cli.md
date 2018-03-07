@@ -41,7 +41,7 @@ sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
 
-***note:*** With snap packages, the `docker` command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
+**Note:** With snap packages, the `docker` command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
 
 ### Validating 2.0 YAML Syntax
 
