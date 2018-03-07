@@ -17,7 +17,7 @@ Document | Description
 [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/) | Information about GitHub and Bitbucket integration with a summary of permissions required and how organizations and groups work.
 [Security Features]({{ site.baseurl }}/2.0/security/) | Description of source code, container, and encryption technology used by CircleCI.
 [Changelog](https://circleci.com/changelog/) | Log of recent changes to the hosted CircleCI 2.0 software.
-[Container ID Cannot Be Mapped to Host ID Error]({{ site.baseurl }}/2.0/high-uid-error/) | Debugging `container ID cannot be mapped to host ID` error.
+[Container ID Cannot Be Mapped to Host ID Error]({{ site.baseurl }}/2.0/high-uid-error/) | Debugging the `container ID cannot be mapped to host ID` error.
 {: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!
