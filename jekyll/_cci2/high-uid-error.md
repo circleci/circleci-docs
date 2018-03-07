@@ -8,28 +8,23 @@ order: 21
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
-When user namespace remapping fails,
-CircleCI will fail to start the affected container.
-This document explains the problem
-and shows you how to fix it.
+When starting a container,
+you may see this error message:
+
+```
+failed to register layer: Error processing tar file (exit status 1): container id 1000000 cannot be mapped to a host id
+```
+
+This document explains the problem and shows you how to fix it.
+
+## Overview
+
+You will see this message when CircleCI is unable to start your container
+
+The user namespace (userns), is a feature of the Linux kernel that adds
 
 The error `container id 1000000 cannot be mapped to a host id` indicates that CircleCI could not start your
 container because the userns remapping failed.
-
-This document explains what this error means and how to fix it.
-
-```
-75c416ea735c: Pull complete
-c6ff40b6d658: Pull complete
-a7050fc1f338: Pull complete
-f0ffb5cf6ba9: Pull complete
-be232718519c: Pull complete
-9dea4940377d: Pull complete
-7aa04d3ad875: Pull complete
-24bb62285b16: Pull complete
-56bec22e3559: Pull complete
-failed to register layer: Error processing tar file(exit status 1): container id 1000000 cannot be mapped to a host id
-```
 
 ### What is userns?
 
