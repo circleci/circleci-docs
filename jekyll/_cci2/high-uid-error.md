@@ -8,6 +8,11 @@ order: 21
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
+When user namespace remapping fails,
+CircleCI will fail to start the affected container.
+This document explains the problem
+and shows you how to fix it.
+
 The error `container id 1000000 cannot be mapped to a host id` indicates that CircleCI could not start your
 container because the userns remapping failed.
 
