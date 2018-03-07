@@ -112,6 +112,8 @@ Five databases are required for 2.0 services:
 
 ## Exporting Existing Databases
 
+**Note:** You do not need to export any existing databases if you are creating a fresh HA install. These steps can be skipped.
+
 **Note:** This process will require downtime. Please schedule an outage window with CircleCI users.
 
 1. Log in to the Replicated console located at https://<YOUR_CIRCLE_URL>:8800/dashboard and select Stop to shut down the CircleCI application.
@@ -144,6 +146,8 @@ Five databases are required for 2.0 services:
      sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
      ```
 
+**Note:** You’ll have to do extra setup so that mongorestore can point to the URI of Mongo. If you’d like to use the uri flag, please see the following doc: https://docs.mongodb.com/manual/reference/program/mongorestore/#cmdoption-mongorestore-uri.
+
 1. On the Services machine where you ran the export script, use the following `psql` command to restore the databases, replacing the variables with the appropriate user credentials and the name of the PostgreSQL database.
 
      ```
@@ -151,6 +155,8 @@ Five databases are required for 2.0 services:
      ```
 
 ## Configuring Automatic Recovery
+
+**Note:** Please see the Backups sections for more information on what is getting backed, and how that gets pulled into automatic recovery. 
 
 To enable the Services machine to automatically recover from failure, replace it with an AWS Auto Scaling Group (ASG) containing a single member. Then, configure the associated userdata for this member to specify how to install and configure Replicated and connect to the external databases as shown in the following file snippets.
 
@@ -167,6 +173,8 @@ startup() {
   aws s3 cp s3://ha-test-bucket-3f5b105a/settings.conf /etc/settings.conf
   aws s3 cp s3://ha-test-bucket-3f5b105a/replicated.conf /etc/replicated.conf
   aws s3 cp s3://ha-test-bucket-3f5b105a/license.rli /etc/license.rli
+  aws s3 cp s3://ha-test-bucket-3f5b105a/circleci-encryption-keys /data/circle/circleci-encryption-keys/ —-recursive
+  echo ‘CIRCLE_SECRETS_SESSION_COOKIE_KEY=<random_16_char_string>’ >> /etc/circle-installation-customizations
   curl https://get.replicated.com/docker | bash -s local_address=$(curl http://169.254.169.254/latest/meta-data/local-ipv4) no_proxy=1
 }
 
