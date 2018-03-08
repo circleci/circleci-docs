@@ -49,6 +49,7 @@ The currently available Xcode versions are:
 
 We maintain a manifest of the software installed on our OSX and macOS build images. This includes version of the operating system, Xcode, Python, Ruby, etc.
 
+* [Xcode 9.2.0 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html).
 * [Xcode version 9.1.0 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html).
 * [Xcode version 9.0.1 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html).
 * [Xcode version 8.3.3 (macOS 10.12 Sierra)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html).
@@ -57,5 +58,3 @@ We maintain a manifest of the software installed on our OSX and macOS build imag
 * [Xcode versions 7.0 – 8.2.1 (OSX 10.11 El Capitan)](https://circle-macos-docs.s3.amazonaws.com/image-manifest/null/index.html).
 
 If you do not have a `circle.yml` file, or you do not specify a version of Xcode, then your project will build with Xcode 7.0 on OSX 10.11.
-
-
