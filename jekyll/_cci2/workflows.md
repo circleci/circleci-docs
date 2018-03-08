@@ -94,7 +94,7 @@ See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/c
 
 ### Fan-Out/Fan-In Workflow Example
 	
-The illustrated example workflow runs a common build Job, then fans-out to run a set of acceptance test Jobs in parallel, and finally fans-in to run a common deploy Job.
+The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs in parallel, and finally fans-in to run a common deploy job.
 
 ![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
 
@@ -131,7 +131,7 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job and type that is **only** added under in your `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. The `type: approval` key is a special job type that is **only** added to jobs under the `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of parallel jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
 
 ```
 workflows:
@@ -154,7 +154,9 @@ workflows:
             - hold
 ```
 
-In this example, the `deploy:` job will not run until you click the `hold` job in the Workflows page of the CircleCI app and then click Approve. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the job and Approve. After you approve the job with `type: approval`, the jobs which require the approval job will start.  In the example above, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
+In this example, the `deploy:` job will not run until you click the `hold` job in the Workflows page of the CircleCI app and then click Approve. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the job and Approve. After you approve the job with `type: approval`, the jobs which require the approval job will start.  In the example above, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
+
+The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
 
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
@@ -200,7 +202,7 @@ The following sections provide example for using Contexts and filters to manage 
 
 ### Using Job Contexts to Share Environment Variables
 
-The following example shows a workflow with four sequential jobs that use shared environment variables. 
+The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
@@ -224,8 +226,6 @@ workflows:
 ```
 
 The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
-
-See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
 ### Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
