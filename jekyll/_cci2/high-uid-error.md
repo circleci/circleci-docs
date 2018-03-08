@@ -19,14 +19,14 @@ This document explains the problem and how to fix it.
 
 ## Background
 
-The user namespace (userns) is a feature of the Linux kernel
+The user namespace (`userns`) is a feature of the Linux kernel
 that adds another security layer to Linux containers.
-The userns allows a host machine
+The `userns` allows a host machine
 to run containers outside its UID/GID namespace.
 This means all containers can have a root account (UID 0) in their own namespace
 and run processes without receiving root privileges from the host machine.
 
-When a userns is created,
+When a `userns` is created,
 the Linux kernel provides a mapping between the container and the host machine.
 For example,
 if you start a container
@@ -37,8 +37,8 @@ while **actually** being run by the non-root user on the host machine.
 
 ## Problem
 
-The error is caused by a userns remapping failure.
-CircleCI runs Docker containers with userns enabled
+The error is caused by a `userns` remapping failure.
+CircleCI runs Docker containers with `userns` enabled
 in order to securely run customers' containers.
 The host machine is configured with a range of valid UID/GID values for remapping.
 
