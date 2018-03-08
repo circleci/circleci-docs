@@ -15,7 +15,7 @@ you may see this error message:
 failed to register layer: Error processing tar file (exit status 1): container id 1000000 cannot be mapped to a host id
 ```
 
-This document explains the problem and shows you how to fix it.
+This document explains the problem and how to fix it.
 
 ## Background
 
