@@ -40,31 +40,38 @@ while **actually** being run by the non-root user on the host machine.
 The error is caused by a `userns` remapping failure.
 CircleCI runs Docker containers with `userns` enabled
 in order to securely run customers' containers.
-The host machine is configured with a range of valid UID/GID values for remapping.
+The host machine is configured with a range of valid UID/GID for remapping.
 
 When Docker starts a container,
 Docker pulls an image
 and extracts layers from that image.
-If a layer contains files with UID/GID values outside the defined range,
+If a layer contains files with UID/GID outside the defined range,
 Docker cannot successfully remap
 and fails to start the container.
 
 ## Solution
 
-When you hit this error, you need to update the files' UID/GID and re-create the image.
+To fix this error,
+you must update the files' UID/GID
+and re-create the image.
 
-Please contact the image maintainer and report the error details.
+If you are not the image maintainer, congratulations:
+it's not your responsibility.
+Contact the imagine maintainer
+and report the error.
 
-If you are an image maintainer, you need to look for which file has high UID/GID and correct it accordingly.
+If you are the image maintainer,
+identify the file with the high UID/GID
+and correct it.
+First, grab the high UID/GID from the error message.
+In the example presented at the top of this document,
+this value is `1000000`.
+Next, start the container and look for the files which receive that invalid value.
 
-Here is one way to find such a file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid).
+One way to do this is to use the `find` command,
+as shown below:
 
-First, grab the high UID/GID value from `container id XXX cannot be mapped to a host id` error message in CircleCI.
-For example, the value is `1000000` in the error message you see at the top of this document.
-
-Second, start the container and look for which files get the high value. There are multiple ways to do this, but one way is using `find` command. Note that the following example only works with BSD/GNU `find` command. If BSD/GNU `find` is not installed in your container, you may need to use different commands.
-
-```
+```bash
 # Start a shell inside the container
 $ docker run -it circleci/doc-highid sh
 
@@ -77,4 +84,14 @@ $ ls -ln file-with-high-id
 -rw-r--r-- 1 1000000 1000000 0 Jul  9 03:05 file-with-high-id
 ```
 
-Once you find which file has a high UID/GID, make sure to change the ownership of the file and re-create the image.
+After locating the offending file,
+change its ownership
+and re-create the image.
+
+**Note:**
+It is possible for an invalid file to be generated and removed
+while a container is building.
+In this case,
+you may have to modify the `RUN` step in the Dockerfile itself.
+Adding `&& chown -R root:root /root` to the problem step
+should fix the problem without creating a bad interim.
