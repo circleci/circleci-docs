@@ -20,18 +20,7 @@ You can also run `circleci` commands in your `config.yml` file for jobs that use
 
 **Note:** The Local CLI does not yet support Workflows.
 
-## Installing
-
-### Ubuntu 16.04+, Fedora 27+, and other Distros Supporting Snap Packages
-
-With `snapd` installed (pre-installed on Ubuntu), you can install the Local CLI on various Linux distributions. The following commands give you the CircleCI Local CLI, Docker, and the security & auto-update features that come along with [Snap packages](https://www.ubuntu.com/desktop/snappy).
-
-```
-sudo snap install docker circleci
-sudo snap connect circleci:docker docker
-```
-
-### macOS and other Linux Distros
+## Installing the CircleCI Local CLI on macOS and Linux Distros
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/engine/installation/).
 
@@ -43,6 +32,17 @@ $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/rele
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available. 
 
+## [Alternative] Installing Ubuntu 16.04 or Ubuntu 17.04+
+
+With Ubuntu, you can optionally install by using Snap. The following commands give you the CircleCI Local CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://www.ubuntu.com/desktop/snappy).
+
+```
+sudo snap install docker circleci
+sudo snap connect circleci:docker docker
+```
+
+**Note:** With snap packages, the `docker` command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
+
 ### Validating 2.0 YAML Syntax
 
 1. Type `circleci` with one of six available commands (`build`, `config`, `help`, `step`, `tests`, and `version`) followed by a valid flag. For example:
@@ -51,7 +51,7 @@ $ circleci config validate -c .circleci/config.yml
 ```
 The config validate command checks your local config.yml file for syntax errors.
 
-**Note**: Local jobs don’t cache dependencies. You may want to comment out dependency sections if you are testing YAML syntax. Or, as in this example, use the `-c` flag to specify a local `config.yml` file that doesn’t pull in large dependencies.
+***Note:*** Local jobs don’t cache dependencies. You may want to comment out dependency sections if you are testing YAML syntax. Or, as in this example, use the `-c` flag to specify a local `config.yml` file that doesn’t pull in large dependencies.
 
 ## Validate Every Configuration Change
 
