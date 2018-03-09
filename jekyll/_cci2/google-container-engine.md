@@ -9,17 +9,15 @@ order: 60
 
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Using Google Container Engine*
 
-In order to deploy to Google Kubernetes Engine,
+In order to deploy to Google Kubernetes Engine (GKE),
 you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 ## Prerequisites
 
-This document makes the following assumptions:
-
-1. You have a working knowledge of Docker and building Docker images.
-1. You already have a GCP project registered. Keep the project name handy.
-1. A Container Engine cluster has already been created in your GCP project. Keep the cluster name handy.
-1. Your repository has already been configured as a CircleCI 2.0 project.
+1. A CircleCI 2.0 project.
+2. A working knowledge of Docker and building Docker images.
+3. A registered Google Cloud Platform (GCP) project. Keep the project name handy.
+4. A GKE cluster connected to your GCP project. Keep the cluster name handy.
 
 ## Selecting a Base Image
 If Debian is acceptable as a base for your custom primary container, Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) image can be a good base image to use.
