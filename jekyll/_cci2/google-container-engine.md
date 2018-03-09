@@ -34,7 +34,7 @@ Before you can use the `gcloud` command line tool with CircleCI,
 you must authenticate it.
 Follow the instructions in the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
 After completing those steps,
-you should have an environment variable called `GCLOUD_SERVICE_KEY`.
+you should have an environment variable called `$GCLOUD_SERVICE_KEY`.
 Using this particular  name is not required,
 but will be used throughout the examples in this document.
 
@@ -43,9 +43,9 @@ but will be used throughout the examples in this document.
 For convenicnce,
 add three more environment variables to your project:
 
-- `GOOGLE_PROJECT_ID`: the ID of your GCP project
-- `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
-- `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
+- `$GOOGLE_PROJECT_ID`: the ID of your GCP project
+- `$GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
+- `$GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
 
 ### Setting Up a Job Step to Decode Credentials
 Once the `GCLOUD_SERVICE_KEY` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container.
