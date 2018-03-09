@@ -83,9 +83,13 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
+            
+      - run:
+          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
+          when: always
 
       - store_test_results:
-          path: test_output/report.xml
+          path: fastlane/test_output
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
