@@ -75,8 +75,13 @@ jobs:
       # Collect XML test results data to show in the UI,
       # and save the same XML files under test-results folder
       # in the Artifacts tab.
+      - run:
+          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
+          when: always
+
       - store_test_results:
-          path: test_output/report.xml
+          path: fastlane/test_output
+          
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
