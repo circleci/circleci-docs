@@ -8,54 +8,71 @@ order: 21
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
-The error `container id 1000000 cannot be mapped to a host id` indicates that CircleCI could not start your
-container because the userns remapping failed.
-
-This document explains what this error means and how to fix it.
+When starting a container,
+you may see this error message:
 
 ```
-75c416ea735c: Pull complete
-c6ff40b6d658: Pull complete
-a7050fc1f338: Pull complete
-f0ffb5cf6ba9: Pull complete
-be232718519c: Pull complete
-9dea4940377d: Pull complete
-7aa04d3ad875: Pull complete
-24bb62285b16: Pull complete
-56bec22e3559: Pull complete
-failed to register layer: Error processing tar file(exit status 1): container id 1000000 cannot be mapped to a host id
+failed to register layer: Error processing tar file (exit status 1): container id 1000000 cannot be mapped to a host id
 ```
 
-### What is userns?
+This document explains the problem and how to fix it.
 
-The user namespace, or sometimes just userns, is a feature of the Linux kernel that adds another layer of security into
-the Linux container technology. The userns allows a host machine to run containers in different UID/GID namespaces from
-the host machine. This means all containers can have UID 0 (root account) in their own namespace and run processes without the host machine giving root priviledges to the container.
+## Background
 
-When a userns is created, the Linux kernel provides a mapping of UID/GID between the container and the host machine.
-For example, if you start a container and run a process with UID 0 inside the container, the Linux kernel maps the container's UID 0 to a non-privileged UID such as UID 65534 on the host machine. Because of this mapping, the process inside the container can run as if it's the root user, but it is actually run by the non-root user on the host machine.
+The user namespace (`userns`) is a feature of the Linux kernel
+that adds another security layer to Linux containers.
+The `userns` allows a host machine
+to run containers outside its UID/GID namespace.
+This means all containers can have a root account (UID 0) in their own namespace
+and run processes without receiving root privileges from the host machine.
 
-### How Docker and CircleCI use userns
+When a `userns` is created,
+the Linux kernel provides a mapping between the container and the host machine.
+For example,
+if you start a container
+and run a process with UID 0 inside of it,
+the Linux kernel maps the container's UID 0 to a non-privileged UID on the host machine.
+This allows the container to run a process as if it were the root user,
+while **actually** being run by the non-root user on the host machine.
 
-CircleCI runs Docker containers with userns enabled in order to run customers' containers securely.
-When Docker starts a container, Docker pulls an image and extracts image layers from the image. If a layer contains files created with UID/GID outside the remapping range that CircleCI configured on the host machine, say UID 1000000, Docker cannot remap the UID/GID and fails to start the container. This is exactly what's happening in the error you see at the top of this document.
+## Problem
 
-### What should I do?
+The error is caused by a `userns` remapping failure.
+CircleCI runs Docker containers with `userns` enabled
+in order to securely run customers' containers.
+The host machine is configured with a valid UID/GID for remapping.
+This UID/GID **must be** in the range of 0 - 65535.
 
-When you hit this error, you need to update the files' UID/GID and re-create the image.
+When Docker starts a container,
+Docker pulls an image
+and extracts layers from that image.
+If a layer contains files with UID/GID outside of the accepted range,
+Docker cannot successfully remap
+and fails to start the container.
 
-Please contact the image maintainer and report the error details.
+## Solution
 
-If you are an image maintainer, you need to look for which file has high UID/GID and correct it accordingly.
+To fix this error,
+you must update the files' UID/GID
+and re-create the image.
 
-Here is one way to find such a file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid).
+If you are not the image maintainer, congratulations:
+it's not your responsibility.
+Contact the imagine maintainer
+and report the error.
 
-First, grab the high UID/GID value from `container id XXX cannot be mapped to a host id` error message in CircleCI.
-For example, the value is `1000000` in the error message you see at the top of this document.
+If you are the image maintainer,
+identify the file with the high UID/GID
+and correct it.
+First, grab the high UID/GID from the error message.
+In the example presented at the top of this document,
+this value is `1000000`.
+Next, start the container and look for the files which receive that invalid value.
 
-Second, start the container and look for which files get the high value. There are multiple ways to do this, but one way is using `find` command. Note that the following example only works with BSD/GNU `find` command. If BSD/GNU `find` is not installed in your container, you may need to use different commands.
+One way to do this is to use the `find` command,
+as shown below:
 
-```
+```bash
 # Start a shell inside the container
 $ docker run -it circleci/doc-highid sh
 
@@ -68,4 +85,14 @@ $ ls -ln file-with-high-id
 -rw-r--r-- 1 1000000 1000000 0 Jul  9 03:05 file-with-high-id
 ```
 
-Once you find which file has a high UID/GID, make sure to change the ownership of the file and re-create the image.
+After locating the offending file,
+change its ownership
+and re-create the image.
+
+**Note:**
+It is possible for an invalid file to be generated and removed
+while a container is building.
+In this case,
+you may have to modify the `RUN` step in the Dockerfile itself.
+Adding `&& chown -R root:root /root` to the problem step
+should fix the problem without creating a bad interim.
