@@ -69,8 +69,9 @@ In the example presented at the top of this document,
 this value is `1000000`.
 Next, start the container and look for the files which receive that invalid value.
 
-One way to do this is to use the `find` command,
-as shown below:
+Below is an example
+of finding an invalid file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid)
+using the `find` command:
 
 ```bash
 # Start a shell inside the container
