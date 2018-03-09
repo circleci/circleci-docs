@@ -40,12 +40,13 @@ while **actually** being run by the non-root user on the host machine.
 The error is caused by a `userns` remapping failure.
 CircleCI runs Docker containers with `userns` enabled
 in order to securely run customers' containers.
-The host machine is configured with a range of valid UID/GID for remapping.
+The host machine is configured with a valid UID/GID for remapping.
+This UID/GID **must be** in the range of 0 - 65535.
 
 When Docker starts a container,
 Docker pulls an image
 and extracts layers from that image.
-If a layer contains files with UID/GID outside the defined range,
+If a layer contains files with UID/GID outside of the accepted range,
 Docker cannot successfully remap
 and fails to start the container.
 
