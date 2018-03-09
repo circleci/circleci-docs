@@ -1,25 +1,27 @@
 ---
 layout: classic-docs
-title: "Build & Publish Snap Packages using Snapcraft on CircleCI"
+title: "Build and Publish Snap Packages using Snapcraft on CircleCI"
 short-title: "Build & Publish Snap Packages"
-description: |
-  A guide on how to build, test, and publish Snap packages on CircleCI using
-  Snapcraft.
+description: "How to build and publish Snap packages on CircleCI using Snapcraft."
 categories: [containerization]
 order: 20
 ---
 
-Snap packages (a.k.a `.snap files`) can be created once and installed on multiple Linux distributions (distros). This makes them a quick way to publish your software to most Linux users with one package. More information on Snapcraft itself can be found [here][snapcraft].
+Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
 
 ## Overview
 
-Here's how you can build a snap package and publish it to the [Snap Store][snapcraft-store] via CircleCI. We'll walk through snippets of a sample `.circleci/config.yml` file with the full version at the end of this doc.
+A .snap file can be created once and installed on any Linux distros that supports `snapd` such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website][snapcraft].
 
-Building a snap on CircleCI is mostly the same as your local machine, wrapped with [CircleCI 2.0 syntax][2.0-docs].
+Building a snap on CircleCI is mostly the same as your local machine, wrapped with [CircleCI 2.0 syntax][config-reference]. Here's how you can build a snap package and publish it to the [Snap Store][snapcraft-store] via CircleCI. We'll walk through snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
+
+## Prerequisites
+
+To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap][snap-guide-1] doc by Snapcraft to get your snap building on your local machine.
 
 ## Build Environment
 
-```
+```YAML
 ...
 version: 2
 jobs:
@@ -29,13 +31,11 @@ jobs:
 ...
 ```
 
-The `docker` executor is used here with the `cibuilds/snapcraft` Docker image. This image includes the `snapcraft` command which will be used to build the actual snap. This image is based on the official `snapcore/snapcraft` Docker image by Canonical with all of the command-line tools you'd want to be installed in a CI environment. The source for `cibuilds/snapcraft` can be found [here][cibuilds-snapcraft] and the source for the upstream image [here][snapcore-snapcraft].
+The `docker` executor is used here with the [`cibuilds/snapcraft`][cibuilds-snapcraft] Docker image. This image is based on the official [`snapcore/snapcraft`][snapcore-snapcraft] Docker image by Canonical with all of the command-line tools you'd want to be installed in a CI environment. This image includes the `snapcraft` command which will be used to build the actual snap.
 
 ## Running Snapcraft
 
-To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap][snap-guide-1] doc by Snapcraft to get your snap building on your local machine.
-
-```
+```YAML
 ...
     steps:
       - checkout
@@ -57,20 +57,18 @@ Building snaps on CircleCI means we end with a `.snap` file which we can test in
 
 ## Publishing
 
-Publishing a snap is more or less a two-step process. The first step which is done once, is to create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable][private-envars] called `$SNAPCRAFT_LOGIN_FILE`.
+Publishing a snap is more or less a two-step process. Here's on this might look on a Linux machine:
 
-Here's on this might look on a Linux machine:
-
-```
+```Bash
 snapcraft login
 # follow prompts for logging in with an Ubuntu One account
 snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
 
-Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
+1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable][private-envars] called `$SNAPCRAFT_LOGIN_FILE`.
 
-```
+```YAML
 ...
       - run:
           name: "Publish to Store"
@@ -80,6 +78,8 @@ Once the base64 encoded version of the file is stored on CircleCI as a private e
             snapcraft push *.snap --release stable
 ...
 ```
+
+2. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
 
 In this example, Snapcraft automatically looks for login credentials in `.snapcraft/snapcraft.cfg` so we decode the environment variable we made previously right into that location. `snapcraft push` is then used to upload the .snap file into the Snap Store.
 
@@ -101,7 +101,7 @@ We can utilize multiple jobs to better organize our snap build. A job to build/c
 
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when neccessarily. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
-```
+```YAML
 ... # from a job that already has the snap
       - persist_to_workspace:
           root: .
@@ -118,7 +118,7 @@ Below is a complete example of how a snap package could be built on CircleCI. Th
 
 ## Full Example Config
 
-```
+```YAML
 workflows:
   version: 2
   main:
@@ -174,3 +174,4 @@ jobs:
 [private-envars]: https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app
 [workflows]: https://circleci.com/docs/2.0/workflows/
 [local-cli-repo]: https://github.com/circleci/local-cli
+[config-ref]: https://circleci.com/docs/2.0/configuration-reference/
