@@ -28,9 +28,15 @@ consider using Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/clo
 Otherwise,
 follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
-### Authenticate
+### Authenticate Google Cloud Platform
 
-Setting Up Authentication
+Before you can use the `gcloud` command line tool with CircleCI,
+you must authenticate it.
+Follow the instructions in the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
+After completing those steps,
+you should have an environment variable called `GCLOUD_SERVICE_KEY`.
+Using this particular  name is not required,
+but will be used throughout the examples in this document.
 
 ### Generating a Service Account Key
 After the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
