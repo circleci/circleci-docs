@@ -41,7 +41,7 @@ but will be used throughout the examples in this document.
 ### Add More Environment Variables
 
 For convenicnce,
-add three more environment variables:
+add three more environment variables to your project:
 
 - `GOOGLE_PROJECT_ID`: the ID of your GCP project
 - `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
