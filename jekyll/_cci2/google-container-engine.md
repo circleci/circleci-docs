@@ -14,10 +14,10 @@ you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your p
 
 ## Prerequisites
 
-1. A CircleCI 2.0 project.
-2. A working knowledge of Docker and building Docker images.
-3. A registered Google Cloud Platform (GCP) project. Keep the project name handy.
-4. A GKE cluster connected to your GCP project. Keep the cluster name handy.
+- A CircleCI 2.0 project.
+- A working knowledge of Docker and building Docker images.
+- A registered Google Cloud Platform (GCP) project. Keep the project name handy.
+- A GKE cluster connected to your GCP project. Keep the cluster name handy.
 
 ## Selecting a Base Image
 If Debian is acceptable as a base for your custom primary container, Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) image can be a good base image to use.
