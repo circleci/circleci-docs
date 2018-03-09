@@ -48,7 +48,7 @@ add three more environment variables:
 - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
 
 ### Setting Up a Job Step to Decode Credentials
-Once the `GOOGLE_AUTH` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container. 
+Once the `GCLOUD_SERVICE_KEY` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container.
 
 **config.yml**
 
@@ -58,12 +58,12 @@ docker:
     auth:
     #Put the contents of keyfile.json into an environment variable for the build called GCR_CREDS, which is then passed in.
       username: _json_key
-      password: $GOOGLE_AUTH 
+      password: $GCLOUD_SERVICE_KEY
   - steps:
      # ...
      - run:
        name: Dump Google Cloud Credentials to file
-       command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+       command: echo ${GCLOUD_SERVICE_KEY} > ${HOME}/gcp-key.json
      # ...  
 ```
 
