@@ -38,16 +38,14 @@ you should have an environment variable called `GCLOUD_SERVICE_KEY`.
 Using this particular  name is not required,
 but will be used throughout the examples in this document.
 
-### Generating a Service Account Key
-After the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
+### Add More Environment Variables
 
-Paste this into a new environment variable's "Value" field, using the name `GOOGLE_AUTH`. Using this particular name is not required, but will be used throughout the examples in this document.
+For convenicnce,
+add three more environment variables:
 
-Next, simply set up three more environment variables for convenience:
-
-* `GOOGLE_PROJECT_ID`: the ID of your GCP project
-* `GOOGLE_CLUSTER_NAME`: the cluster to which deployments will occur
-* `GOOGLE_COMPUTE_ZONE`: which compute zone to use by default, e.g. `us-central1-a`
+- `GOOGLE_PROJECT_ID`: the ID of your GCP project
+- `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
+- `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
 
 ### Setting Up a Job Step to Decode Credentials
 Once the `GOOGLE_AUTH` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container. 
