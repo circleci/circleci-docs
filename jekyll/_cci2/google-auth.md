@@ -10,6 +10,7 @@ Before you can use the `gcloud` command line tool with CircleCI, you must authen
 
 ## Prerequisites
 
+- A CircleCI 2.0 project.
 - A Google account.
 - A Google Cloud Platform project.
 
