@@ -9,10 +9,8 @@ order: 60
 
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Using Google Container Engine*
 
-In order to use Google Cloud, you will need to ensure that the [Google Cloud SDK](https://cloud.google.com/sdk/) is installed on your primary container as described in the following sections:
-
-* TOC
-{:toc}
+In order to deploy to Google Kubernetes Engine,
+you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 ## Prerequisites
 
@@ -71,5 +69,3 @@ gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
-
-
