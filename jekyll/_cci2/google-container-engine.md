@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Deploying to Google Container Engine"
-short-title: "Deploying to Google Container Engine"
+title: "Deploying to Google Kubernetes Engine"
+short-title: "Deploying to Google Kubernetes Engine"
 categories: [containerization]
-description: "Deploying to Google Container Engine with CircleCI 2.0."
+description: "Deploying to Google Kubernetes Engine with CircleCI 2.0."
 order: 60
 ---
 
-*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Using Google Container Engine*
+*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Deploying to Google Kubernetes Engine*
 
 In order to deploy to Google Kubernetes Engine (GKE),
 you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
