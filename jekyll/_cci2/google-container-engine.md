@@ -19,12 +19,18 @@ you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your p
 - A registered Google Cloud Platform (GCP) project. Keep the project name handy.
 - A GKE cluster connected to your GCP project. Keep the cluster name handy.
 
-## Selecting a Base Image
-If Debian is acceptable as a base for your custom primary container, Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) image can be a good base image to use.
+## Steps
 
-For those with more complicated custom primary containers, follow the [installation instructions](https://cloud.google.com/sdk/) for the operating system of your base image.
+### Select a Base Image
 
-## Setting Up Authentication
+If Debian is an acceptable operating system for your primary container,
+consider using Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) as a base image.
+Otherwise,
+follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
+
+### Authenticate
+
+Setting Up Authentication
 
 ### Generating a Service Account Key
 After the Google Cloud SDK has been integrated into your primary container (see above), authentication can be achieved with the use of a [service account](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow). Ensure that you follow the Google Cloud documentation for generating a service account, or create a new key for an existing service account, saving the credentials as a JSON key.
