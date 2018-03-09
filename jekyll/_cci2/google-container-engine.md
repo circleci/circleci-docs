@@ -46,7 +46,7 @@ Once the `GOOGLE_AUTH` environment variable has been saved to your project, it w
 
 **config.yml**
 
-```yml
+```yaml
 docker: 
   - image: gcr.io/project/image-name
     auth:
@@ -65,7 +65,7 @@ docker:
 
 As part of your deployment commands, configure `gcloud` to use the newly-configured service account and set up the appropriate defaults:
 
-```sh
+```bash
 gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
 gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
