@@ -62,8 +62,8 @@ docker:
   - steps:
      # ...
      - run:
-       name: Dump Google Cloud Credentials to file
-       command: echo ${GCLOUD_SERVICE_KEY} > ${HOME}/gcp-key.json
+       name: Decode and Store Service Account
+       command: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
      # ...  
 ```
 
