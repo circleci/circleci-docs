@@ -1108,7 +1108,7 @@ workflows:
       - build
       - deploy-stage:
           requires:
-            -build
+            - build
           filters:
             branches:
               only: staging
