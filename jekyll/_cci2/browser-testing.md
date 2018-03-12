@@ -48,7 +48,7 @@ jobs:
           background: true
 ```
 
-Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/#install-and-run-selenium-to-automate-browser-testing) section of the 2.0 Project Tutorial for a sample application.
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/#install-and-run-selenium-to-automate-browser-testing) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
 
 As an alternative to configuring your environment for Selenium, Sauce Labs provides a Selenium Server as a service, with a large number of browsers and system combinations available to test. Sauce Labs also has some extra goodies like videos of all test runs. 
 
