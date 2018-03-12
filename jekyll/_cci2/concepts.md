@@ -36,7 +36,7 @@ A job is a collection of steps. The Job Space is all of the containers being run
 
 A workflow is a set of rules for defining a collection of jobs and their run order. Within the CI/CD industry, this feature is also referred to as Pipelines.
 
-![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
+![workflow illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
 ## Workspace
 
@@ -45,3 +45,10 @@ A workspace is a workflows-aware storage mechanism. A workspace stores data uniq
 ## Artifact
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
+
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
+
+## Cache
+
+Stores a file or directory of files such as dependencies or source code in object storage.
+
