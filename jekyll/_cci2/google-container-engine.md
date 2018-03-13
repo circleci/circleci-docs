@@ -32,11 +32,12 @@ Otherwise, follow the [SDK installation instructions](https://cloud.google.com/s
 
 Before you can use the `gcloud` command line tool with CircleCI,
 you must authenticate it.
-Follow the instructions in the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
-After completing those steps,
+To do this,
+follow the instructions in the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
+After completing these steps,
 you should have an environment variable called `GCLOUD_SERVICE_KEY`.
 Using this particular name is not required,
-but will be used throughout the examples in this document.
+but it will be used throughout the examples in this document.
 
 ### Add More Environment Variables
 
