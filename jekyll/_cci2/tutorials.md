@@ -34,20 +34,20 @@ Refer to the Sample Apps to get help with building the language and framework in
 
 Language in which your App is written | Framework | GitHub Repo Name
  ---------|-----------|-----------------
- [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android{:target="_blank"})
- [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md{:target="_blank"}) | React Native | [circleci-demo-react-native]
+ [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
+ [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
  [iOS] | Xcode | [circleci-demo-ios]
- [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md{:target="_blank"}) | React Native | [circleci-demo-react-native]
+ [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Java] | Spring | [circleci-demo-java-spring]
  [JavaScript] | React | [circleci-demo-javascript-express]
- [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md{:target="_blank"}) | React Native | [circleci-demo-react-native]
+ [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [PHP] | Laravel | [circleci-demo-php-laravel]
  [Python] | Django | [circleci-demo-python-django]
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
- [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md{:target="_blank"}) | React Native | [circleci-demo-react-native]
+ [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
 {: class="table table-striped"}
 
@@ -55,10 +55,10 @@ Language in which your App is written | Framework | GitHub Repo Name
 
 Workflow Example | GitHub Repo
 ------|-----------
-Parallel | [parallel-jobs](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml{:target="_blank"})
-Sequential | [sequential-branch-filter](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml{:target="_blank"})
+Parallel | [parallel-jobs](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)
+Sequential | [sequential-branch-filter](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)
 Fan-in / Fan-out | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)
-Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml{:target="_blank"})
+Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)
 {: class="table table-striped"}
 
 [Android]: {{ site.baseurl }}/2.0/language-android/
