@@ -5,7 +5,7 @@ categories: [reference]
 description: Using the CircleCI API
 ---
 
-The CircleCI API is a RESTful, fully-featured API that allows you to access all information and trigger all actions in CircleCI. **Note:** The following limitations exist:
+The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** The following limitations exist:
 
 - Access to billing functions is only available from the CircleCI application.
 - Triggering workflows is not yet supported in the API.
