@@ -24,9 +24,9 @@ you must install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your p
 ### Select a Base Image
 
 If Debian is an acceptable operating system for your primary container,
-consider using Google's [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) as a base image.
-Otherwise,
-follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
+consider using Google's base image.
+You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/).
+Otherwise, follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
 ### Authenticate Google Cloud Platform
 
@@ -35,19 +35,19 @@ you must authenticate it.
 Follow the instructions in the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
 After completing those steps,
 you should have an environment variable called `$GCLOUD_SERVICE_KEY`.
-Using this particular  name is not required,
+Using this particular name is not required,
 but will be used throughout the examples in this document.
 
 ### Add More Environment Variables
 
-For convenicnce,
-add three more environment variables to your project:
+For convenience, add three more environment variables to your project:
 
 - `$GOOGLE_PROJECT_ID`: the ID of your GCP project
 - `$GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
 - `$GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
 
 ### Setting Up a Job Step to Decode Credentials
+
 Once the `GCLOUD_SERVICE_KEY` environment variable has been saved to your project, it will be readily available for use in the steps of your job's primary container.
 
 **config.yml**
