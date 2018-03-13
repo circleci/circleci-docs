@@ -44,8 +44,8 @@ but it will be used throughout the examples in this document.
 For convenience, add three more environment variables to your project:
 
 - `GOOGLE_PROJECT_ID`: the ID of your GCP project
-- `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
 - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/)
+- `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments
 
 ### Authenticate to Google's Container Registry
 
@@ -85,13 +85,17 @@ jobs:
         command: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
 ```
 
-## Configuring `gcloud`
+### Configure `gcloud`
 
-As part of your deployment commands, configure `gcloud` to use the newly-configured service account and set up the appropriate defaults:
+Finally, as part of your deployment commands,
+update `gcloud`, authenticate, and set appropriate defaults for your project:
 
 ```bash
-gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+gcloud --quiet components update
+gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
 gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
+
+Refer to the [Google Cloud](https://circleci.com/docs/2.0/deployment-integrations/#google-cloud) deploy example for further steps.
