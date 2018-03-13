@@ -15,7 +15,7 @@ To use `docker-compose` with the `docker` key, install it in your [primary conta
 - run:
     name: Install Docker Compose
     command: |
-      curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+      curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
       chmod +x ~/docker-compose
       sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
