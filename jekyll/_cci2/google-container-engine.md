@@ -49,8 +49,20 @@ For convenience, add three more environment variables to your project:
 
 ### Authenticate to Google's Container Registry
 
-Since you are [using a JSON key file](https://cloud.google.com/container-registry/docs/advanced-authentication#using_a_json_key_file)
-to authenticate to Google's Container Registry (GCR),
+If you chose the `google/cloud-sdk` image,
+no authentication is needed since this is a public image.
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    docker:
+      - image: google/cloud-sdk
+```
+
+If you are using a custom image,
+authenticate to Google's Container Registry (GCR).
+Since you are [using a JSON key file](https://cloud.google.com/container-registry/docs/advanced-authentication#using_a_json_key_file),
 use the `auth` key in `config.yml`
 to specify credentials:
 
@@ -75,10 +87,7 @@ version: 2
 jobs:
   deploy-job:
     docker:
-      - image: gcr.io/project/image-name
-        auth:
-          username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # encoded service account you created
+      - image: google/cloud-sdk
     steps:
       - run:
         name: Decode and Store Service Account
