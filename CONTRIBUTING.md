@@ -94,7 +94,9 @@ Refer to the [Link section](https://daringfireball.net/projects/markdown/syntax#
 
 ## Bold and Terms
 
-Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
+Reserve bolding for terms
+that are defined either in the [CircleCI Glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/)
+or on an external site.
 
 ## Word Preferences
 
