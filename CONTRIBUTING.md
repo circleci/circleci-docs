@@ -30,16 +30,37 @@ and may ask you for more details.
 
 ## Pull Requests
 
-For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
+If you feel motivated,
+you can make documentation changes
+and submit a pull request.
 
-For larger edits or new articles, you'll want to [set up a local environment](README-local-development.md) for editing or adding articles. When you are finished with your changes, create a pull request from your branch by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+For minor changes like typos,
+click "Suggest an edit to this page",
+located at the bottom of each document.
+This will take you to the source file on GitHub,
+where you can submit a pull request for your changes.
 
-In order to help those watching for new modifications and additions to the documentation, it is suggested that your pull request title be descriptive enough to help those watching the repository get a general idea of what is being changed and why. Adding a description with more information&mdash;if necessary&mdash;is a bonus!
+For larger edits or new documents,
+[set up a local environment](README-local-development.md).
+When you are satisfied with your changes,
+create a pull request from your branch
+by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+
+### Titles and Descriptions
+
+Pull request titles should be descriptive enough
+for reviewers to understand *what* is being changed.
+Some ways of doing this are better than others:
 
 | Original Pull Request Title | Better Title                                                               |
 |-----------------------------|----------------------------------------------------------------------------|
 | _Updating file.md_          | _Indicate support for environment variables in context paths_            |
 | _Sidebar changes_           | _Move Deployment to its own navigation section for better organization_  |
+
+Every pull request should have a description
+that explains *why* the change is being made.
+The description adds context
+that is critical for reviewers when giving feedback.
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
 
