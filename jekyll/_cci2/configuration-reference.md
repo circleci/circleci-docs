@@ -287,7 +287,9 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
+**Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+
+After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
 
 Class       | vCPUs       | RAM
 ------------|-----------|------
