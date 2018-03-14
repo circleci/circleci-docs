@@ -14,22 +14,67 @@ This document describes using environment variables in CircleCI in the following
 * TOC
 {:toc}
 
-## Adding Environment Variables in the App
+## Overview
+
+Environment variables are used according to a specific precedence order, as follows:
+
+1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
+2. Environment variables set with the `environment` key for job.
+3. Environment variables set with the `environment` key for a container.
+4. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+5. Project-level environment variables set on the Project Settings page.
+6. CircleCI environment variables.
+
+Environment variables declared inside a shell command `run step` will override environment variables declared with the `environment` and `contexts` keys. Global environment variables added on the Contexts page will take precedence over variables added on the Project Settings. Finally, CircleCI environment variables are loaded.
+
+## Adding Project-Level Environment Variables
 
 To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. 
 
-### Adding Global Environment Variables
+## Adding Global Environment Variables
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
-## Adding Environment Variables in the config.yml File
+## Declaring Environment Variables
 
 **Warning**: Do **not** add keys or secrets to a public CircleCI project. 
 Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
 
-### Adding Environment Variables to a job
+### Declaring an Environment Variable for a Step
 
-To define environment variables for a job command, use the `environment` key under the job name in the `jobs` section.
+Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
+
+```
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+### Interpolating Environment Variables 
+
+If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in Bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.
+
+For example, if your configuration modifies $PATH, add the path to your `.bashrc` file and load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
+
+```
+    steps:
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: some_program_inside_bin
+```
+
+### Declaring Environment Variables for a Job
+
+To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
 See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
 Ex:
 
@@ -44,7 +89,7 @@ jobs:
       - FOO: "bar"
 ```
 
-### Adding Environment Variables to a container
+### Adding Environment Variables for a Container
 
 Use the `environment` key in your `image` section to set variables for all commands run in the container.
 
@@ -78,39 +123,6 @@ jobs:
 
 See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
 
-### Adding Environment Variables to a step:
-
-Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
-
-```
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          # Environment variable for a single command shell
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-## Interpolating Environment Variables to Set Other Environment Variables
-
-If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in Bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.
-
-### Setting PATH
-
-If your configuration modifies $PATH, add the path to your `.bashrc` file and load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
-
-```
-    steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
-      - run: some_program_inside_bin
-```
 
 ## Injecting Environment Variables with the API
 
@@ -120,7 +132,7 @@ Build parameters are environment variables, therefore their names have to meet t
 - They must not begin with a number.
 - They must contain at least one character.
 
-Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is not guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
+Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
 For example, when you pass the parameters:
 
