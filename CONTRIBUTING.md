@@ -74,13 +74,32 @@ but we do consistently apply them.
 To keep the emphasis on prose,
 use [markdown](http://commonmark.org/help/), not plain HTML.
 
+## Links
+
+### Explicit Names
+
+Link text should explicitly name the document or section
+to which it is linking.
+
+For example,
+if you reference a section called "Adding Environment Variables in the App",
+write, "Refer to the 'Adding Environment Variables in the App' section of the Environment Variables document."
+
+### Reference Links
+
+For ease of reviewing,
+use **inline** links instead of **reference** links.
+Refer to the [Link section](https://daringfireball.net/projects/markdown/syntax#link) of the Markdown documentation for more details.
+
 ## Bold and Terms
 
 Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
 
 ## Word Preferences
 
-As in any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
+As in any language, there are many ways to say things.
+This is usually liberating but, in documentation, consistency rules.
+Below is a list of CircleCI-specific word preferences.
 
 ### Referencing CircleCI
 
