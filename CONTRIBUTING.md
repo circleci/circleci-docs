@@ -107,8 +107,7 @@ Below is a list of CircleCI-specific word preferences.
 ### Referencing CircleCI
 
 When referring to CircleCI as a company or group,
-always use "CircleCI".
-Never use "we".
+use "CircleCI" instead of "we".
 
 ### Recommending User Actions
 
