@@ -4,26 +4,31 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do. That's why we prioritize issues according to the following four categories, in decreasing importance:
+There is never enough time to do everything we want to do.
+That's why we prioritize issues according to the following four categories, in decreasing importance:
 
 1. Correct: documentation should be accurate.
 2. Current: documentation should be up-to-date.
 3. Consistent: documentation should not conflict with itself.
 4. Clear: documentation should be clear.
 
-We use these values when creating new documentation and fixing old documentation.
+These values apply to both new and existing documentation.
 
 # Contributing to CircleCI Docs
 
-There are a couple of ways to contribute to our documentation. For suggestions and feedback, please [open an issue](#open-an-issue). For edits or new articles, please [submit a pull request](#submit-a-pull-request).
+We welcome all contributions to CircleCI documentation.
+These contributions come in two forms: issues and pull requests.
 
-## Open an Issue
+## Issues
 
-If you spot anything that conflicts with our values, you can open an issue by clicking **Open an issue about this page**, located at the bottom of each article. In the issue's text, please let us know what needs fixing or suggest changes.
+If you spot anything that conflicts with our values,
+open an issue by clicking "Open an issue about this page",
+located at the bottom of each document.
+In the issue's description, describe the issue you found.
+Someone on the documentation team will label the issue
+and may ask you for more details.
 
-## Submit a Pull Request
-
-**Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
+## Pull Requests
 
 For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
 
