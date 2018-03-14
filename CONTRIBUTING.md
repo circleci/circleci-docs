@@ -72,7 +72,8 @@ but we do consistently apply them.
 ## Markdown
 
 To keep the emphasis on prose,
-use [markdown](http://commonmark.org/help/), not plain HTML.
+use markdown instead of plain HTML.
+Refer to the [Markdown documentation](https://daringfireball.net/projects/markdown/syntax) for more details.
 
 ## Links
 
