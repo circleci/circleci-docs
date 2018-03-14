@@ -10,6 +10,7 @@ Before you can use the `gcloud` command line tool with CircleCI, you must authen
 
 ## Prerequisites
 
+- A CircleCI 2.0 project.
 - A Google account.
 - A Google Cloud Platform project.
 
@@ -25,7 +26,7 @@ Go to Google's [Getting Started with Authentication][] article and follow the in
 2. In the CircleCI application, go to your project's settings by clicking the gear icon in the top right.
 3. In the **Build Settings** section, click **Environment Variables**, then click the **Add Variable** button.
 4. Name the variable. In this example, the variable is named `$GCLOUD_SERVICE_KEY`.
-5. Paste the contents from Step 2 into the **Value** field.
+5. Paste the contents from Step 1 into the **Value** field.
 6. Click the **Add Variable** button.
 
 ### Decode and Store Service Account
