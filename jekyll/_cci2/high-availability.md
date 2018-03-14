@@ -326,6 +326,10 @@ listener "tcp" {
 
 11. For CircleCI, you'll need to generate a token that can be renewed. You can generate this by running the following: `sudo vault token-create -period="1h"`  . Use the generated token as your vault token, that you'll need below. 
 
+12. Seal vault: `sudo vault seal`
+
+Now, just proceed to Configuring Replicated, and you should be almost done with setting up CircleCI in HA mode. 
+
 
 
 ## Configuring Replicated
