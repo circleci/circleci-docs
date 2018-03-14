@@ -54,11 +54,16 @@ To rerun a job and use the context, it **must** be rerun from the Workflows page
 
 ## Environment Variable Usage 
 
-Environment variables are considered in a specific order, as follows:
-1. Project-level environment variables set on the Project Settings page.
-2. Context environment variables (assuming the user has access to the Context).
-3. Environment variables set with the `environment` key of a `run` step.
-4. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
+Environment variables are used according to a specific precedence order, as follows:
+
+1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
+2. Environment variables set with the `environment` key for job.
+3. Environment variables set with the `environment` key for a container.
+4. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+5. Project-level environment variables set on the Project Settings page.
+6. CircleCI environment variables.
+
+Environment variables declared inside a shell command `run step` will override environment variables declared with the `environment` and `contexts` keys. Global environment variables added on the Contexts page will take precedence over variables added on the Project Settings. 
 
 ## Send Feedback on Contexts
 
