@@ -137,7 +137,7 @@ If the user _is_ root,
 remove `sudo` as it may not be installed.
 
 Next, install and authorize Heroku for the CircleCI account that owns the project.
-[Add environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-environment-variables-in-the-app) for the Heroku API key and login email to the CircleCI application as shown in the following image:
+[Add environment variables]({{ site.baseurl }}/2.0/env-vars/) for the Heroku API key and login email to the CircleCI application as shown in the following image:
 
 ![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
 
