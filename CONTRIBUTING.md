@@ -40,7 +40,8 @@ For more tips, see GitHub's blog entry on [how to write the perfect pull request
 
 # Style Guide
 
-We also have a short list of guidelines that take precedence over the general guide above. We don't have a lot of rules, but we do try to be consistent with the ones we have.
+We do not have a lot of rules,
+but we do consistently apply them.
 
 ## Markdown
 
