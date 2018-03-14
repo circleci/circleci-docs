@@ -45,7 +45,8 @@ but we do consistently apply them.
 
 ## Markdown
 
-To keep the emphasis on prose, use [markdown](http://commonmark.org/help/) over plain HTML.
+To keep the emphasis on prose,
+use [markdown](http://commonmark.org/help/), not plain HTML.
 
 ## Bold and Terms
 
