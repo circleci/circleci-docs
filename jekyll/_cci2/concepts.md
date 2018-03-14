@@ -16,9 +16,19 @@ This document provides an overview of the concepts used in CircleCI 2.0 in the f
 
 ## Step
 
-A step is a collection of executable commands.
+A step is an action that needs to be taken to perform your build. A step is usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes commands using a non-login shell by default. 
 
 ![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_step.png)
+
+```YAML
+...
+    steps:
+      - checkout
+      - run:
+          name: Running tests
+          command: make test
+...          
+```          
 
 ## Image
 
@@ -32,7 +42,7 @@ A job is a collection of steps. The Job Space is all of the containers being run
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
-## Workflows
+## Workflow
 
 A workflow is a set of rules for defining a collection of jobs and their run order. Within the CI/CD industry, this feature is also referred to as Pipelines.
 
