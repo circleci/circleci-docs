@@ -178,12 +178,13 @@ jobs:
 #### **`machine`**
 {:.no_toc}
 
-The usage of the [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
+The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 enabled | N | Boolean | This must be true in order to enable the `machine` executor.  Is required if no other value is specified
 image | N | String | The image to use (default: `circleci/classic:latest`)
+docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
 
 As a shorthand, you can set the `machine` key to `true`.
@@ -226,6 +227,16 @@ jobs:
       image: circleci/classic:201708-01
 ```
 
+The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
+
+**Example**
+
+```YAML
+jobs:
+  build:
+    machine: true
+      docker_layer_caching: true    # default - false
+```
 
 #### **`macos`**
 {:.no_toc}
@@ -838,7 +849,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-triggers | N | String | Should currently be `schedule`.
+triggers | N | Array | Should currently be `schedule`.
 {: class="table table-striped"}
 
 ##### **`schedule`**
