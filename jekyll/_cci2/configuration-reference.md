@@ -223,7 +223,7 @@ You can use one of the `year-month` versioned images to pin the version used by 
 ```YAML
 jobs:
   build:
-    machine: true
+    machine:
       image: circleci/classic:201708-01
 ```
 
@@ -849,7 +849,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-triggers | N | String | Should currently be `schedule`.
+triggers | N | Array | Should currently be `schedule`.
 {: class="table table-striped"}
 
 ##### **`schedule`**
