@@ -66,8 +66,10 @@ For more tips, see GitHub's blog entry on [how to write the perfect pull request
 
 # Style Guide
 
-We do not have a lot of rules,
-but we do consistently apply them.
+For basic technical writing style, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
+
+We also have a short list of guidelines
+that take precedence over the general guide above.
 
 ## Markdown
 
