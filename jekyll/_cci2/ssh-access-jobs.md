@@ -16,9 +16,9 @@ This document describes how to access a build container using SSH on CircleCI 2.
 
 ## Overview
 Often the best way to troubleshoot problems is to SSH into a build container and inspect 
-things like log files, running processes, and directory paths.
+things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
-CircleCI 2.0 gives you the option to access all jobs via SSH.
+When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircelCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode. 
 
 1. To start a build with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
