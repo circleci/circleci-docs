@@ -132,7 +132,7 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Adding Read/Write Deployment Keys to GitHub or Bitbucket
+## Adding Deployment Keys to GitHub or Bitbucket
 
 When you add a new project,
 CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project.
