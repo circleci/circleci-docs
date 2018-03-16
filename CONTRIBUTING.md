@@ -4,37 +4,63 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do. That's why we prioritize issues according to the following four categories, in decreasing importance:
+There is never enough time to do everything we want to do.
+That's why we prioritize issues according to the following four categories, in decreasing importance:
 
 1. Correct: documentation should be accurate.
 2. Current: documentation should be up-to-date.
 3. Consistent: documentation should not conflict with itself.
 4. Clear: documentation should be clear.
 
-We use these values when creating new documentation and fixing old documentation.
+These values apply to both new and existing documentation.
 
 # Contributing to CircleCI Docs
 
-There are a couple of ways to contribute to our documentation. For suggestions and feedback, please [open an issue](#open-an-issue). For edits or new articles, please [submit a pull request](#submit-a-pull-request).
+We welcome all contributions to CircleCI documentation.
+These contributions come in two forms: issues and pull requests.
 
-## Open an Issue
+## Issues
 
-If you spot anything that conflicts with our values, you can open an issue by clicking **Open an issue about this page**, located at the bottom of each article. In the issue's text, please let us know what needs fixing or suggest changes.
+If you spot anything that conflicts with our values,
+open an issue by clicking "Open an issue about this page",
+located at the bottom of each document.
+In the issue's description, describe the issue you found.
+Someone on the documentation team will label the issue
+and may ask you for more details.
 
-## Submit a Pull Request
+## Pull Requests
 
-**Pull Requests for clarifications, technical accuracy, spelling fixes, and grammar improvements, are always welcome.**
+If you feel motivated,
+you can make documentation changes
+and submit a pull request.
 
-For minor changes like typos, you can click **Edit the file in your fork of this project**, located at the right of each article. This will take you to the source file on GitHub, where you can submit a pull request for your change through the UI.
+For minor changes like typos,
+click "Suggest an edit to this page",
+located at the bottom of each document.
+This will take you to the source file on GitHub,
+where you can submit a pull request for your changes.
 
-For larger edits or new articles, you'll want to [set up a local environment](README-local-development.md) for editing or adding articles. When you are finished with your changes, create a pull request from your branch by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+For larger edits or new documents,
+[set up a local environment](README-local-development.md).
+When you are satisfied with your changes,
+create a pull request from your branch
+by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
-In order to help those watching for new modifications and additions to the documentation, it is suggested that your pull request title be descriptive enough to help those watching the repository get a general idea of what is being changed and why. Adding a description with more information&mdash;if necessary&mdash;is a bonus!
+### Titles and Descriptions
+
+Pull request titles should be descriptive enough
+for reviewers to understand *what* is being changed.
+Some ways of doing this are better than others:
 
 | Original Pull Request Title | Better Title                                                               |
 |-----------------------------|----------------------------------------------------------------------------|
 | _Updating file.md_          | _Indicate support for environment variables in context paths_            |
 | _Sidebar changes_           | _Move Deployment to its own navigation section for better organization_  |
+
+Every pull request should have a description
+that explains *why* the change is being made.
+The description adds context
+that is critical for reviewers when giving feedback.
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
 
@@ -42,25 +68,55 @@ For more tips, see GitHub's blog entry on [how to write the perfect pull request
 
 For basic technical writing style, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
 
-We also have a short list of guidelines that take precedence over the general guide above. We don't have a lot of rules, but we do try to be consistent with the ones we have.
+We also have a short list of guidelines
+that take precedence over the general guide above.
 
 ## Markdown
 
-To keep the emphasis on prose, use [markdown](http://commonmark.org/help/) over plain HTML.
+To keep the emphasis on prose,
+use markdown instead of plain HTML.
+Refer to the [Markdown documentation](https://daringfireball.net/projects/markdown/syntax) for more details.
+
+## Links
+
+### Explicit Names
+
+Link text should explicitly name the document or section
+to which it is linking.
+
+For example,
+if you reference a section called "Adding Environment Variables in the App",
+write, "Refer to the 'Adding Environment Variables in the App' section of the Environment Variables document."
+
+### Relative Links
+
+Links to other CircleCI documentation should use Liquid filters
+to prepend the `baseurl` value.
+This should look like:
+[Adding Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-environment-variables).
+
+### Reference Links
+
+For ease of reviewing,
+use **inline** links instead of **reference** links.
+Refer to the [Link section](https://daringfireball.net/projects/markdown/syntax#link) of the Markdown documentation for more details.
 
 ## Bold and Terms
 
-Reserve bolding for terms that are defined either in our [glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/) or on an external site.
+Reserve bolding for terms
+that are defined either in the [CircleCI Glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/)
+or on an external site.
 
 ## Word Preferences
 
-As in any language, there are many ways to say things. This is usually liberating but, in documentation, consistency rules. Below is a list of CircleCI-specific word preferences.
+As in any language, there are many ways to say things.
+This is usually liberating but, in documentation, consistency rules.
+Below is a list of CircleCI-specific word preferences.
 
 ### Referencing CircleCI
 
 When referring to CircleCI as a company or group,
-always use "CircleCI".
-Never use "we".
+use "CircleCI" instead of "we".
 
 ### Recommending User Actions
 
