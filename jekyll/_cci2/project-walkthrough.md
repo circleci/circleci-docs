@@ -178,9 +178,15 @@ jobs:
 
 ## Running Tests
 
-In the demo application, tests run in the virtual Python environment through a new `run:` key. Then, the reports and results are stored by using `store_artifacts` and `store_test_results`.
+In the demo application,
+a virtual Python environment is set up,
+and the tests are run using unittest.
+This project uses `unittest-xml-reporting`
+for its ability to save test results as XML files.
+In this example,
+reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
-```
+```yaml
 version: 2
 jobs:
   build:
