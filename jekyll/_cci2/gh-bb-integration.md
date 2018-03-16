@@ -145,7 +145,11 @@ The steps to create a read-write deployment key depend on your VCS.
 
 ### Creating a GitHub Read-Write Key
 
-In this example, the GitHub repository is `https://github.com/you/test-repo` and the project on CircleCI is `https://circleci.com/gh/you/test-repo`.
+In this example,
+the GitHub repository is `https://github.com/you/test-repo`,
+and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
+
+
 
 1. Create an ssh key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/)
   Note: when asked "Enter passphrase (empty for no passphrase)", do ***not*** enter a passphrase.
