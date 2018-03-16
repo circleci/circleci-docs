@@ -88,6 +88,13 @@ For example,
 if you reference a section called "Adding Environment Variables in the App",
 write, "Refer to the 'Adding Environment Variables in the App' section of the Environment Variables document."
 
+### Relative Links
+
+Links to other CircleCI documentation should use Liquid filters
+to prepend the `baseurl` value.
+This should look like:
+[Adding Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-environment-variables).
+
 ### Reference Links
 
 For ease of reviewing,
