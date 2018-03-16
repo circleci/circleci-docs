@@ -132,14 +132,18 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Adding Deployment Keys to GitHub or Bitbucket
+## Deployment Keys
 
 When you add a new project,
 CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project.
 To prevent CircleCI from pushing to your repository,
 this deployment key is read-only.
 
-The deployment key is read-only, to prevent CircleCI from pushing to your repository. However, sometimes you may want push to the repository from your builds and you cannot do this with a read-only deployment key. It is possible to manually add a read/write deployment key with the following steps.
+If you want to push to the repository from your builds,
+you will need a deployment key with write access.
+The steps to create a read-write deployment key depend on your VCS.
+
+### Creating a GitHub Read-Write Key
 
 In this example, the GitHub repository is `https://github.com/you/test-repo` and the project on CircleCI is `https://circleci.com/gh/you/test-repo`.
 
