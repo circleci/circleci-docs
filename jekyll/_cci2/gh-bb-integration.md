@@ -158,11 +158,16 @@ do **not** enter one.
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".
 Enter a title in the "Title" field,
-then copy and paste the public key you created in step 1.
+then copy and paste the key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
-3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
+3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh`,
+and add the key you created in step 1.
+In the "Hostname" field,
+enter "github.com",
+and press the submit button.
+
 4. In you config.yml, you can refer to the key with the following:
 ```
 steps:
