@@ -180,4 +180,6 @@ jobs:
           fingerprints:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
-That's it! Now, when you push to your GitHub repository from a job run, the read/write key that you added will be used.
+
+When you push to your GitHub repository from a job,
+CircleCI will use the SSH key you added.
