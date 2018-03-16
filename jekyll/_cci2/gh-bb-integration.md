@@ -149,11 +149,19 @@ In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
 and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
+#### Steps
 
+1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/).
+When prompted to enter a passphrase,
+do **not** enter one.
 
-1. Create an ssh key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/)
-  Note: when asked "Enter passphrase (empty for no passphrase)", do ***not*** enter a passphrase.
-2. Go to `https://github.com/you/test-repo/settings/keys` on GitHub and click **Add deploy key**. Enter any title in the **Title** field, then copy and paste the public key you just created. Make sure to check **Allow write access**, then click **Add key**.
+2. Go to `https://github.com/you/test-repo/settings/keys`,
+and click "Add deploy key".
+Enter a title in the "Title" field,
+then copy and paste the public key you created in step 1.
+Check "Allow write access",
+then click "Add key".
+
 3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
 4. In you config.yml, you can refer to the key with the following:
 ```
@@ -163,6 +171,3 @@ steps:
         - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 That's it! Now, when you push to your GitHub repository from a job run, the read/write key that you added will be used.
-
-
-
