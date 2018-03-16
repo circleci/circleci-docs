@@ -168,11 +168,16 @@ In the "Hostname" field,
 enter "github.com",
 and press the submit button.
 
-4. In you config.yml, you can refer to the key with the following:
-```
-steps:
-  - add_ssh_keys:
-      fingerprints:
-        - "SO:ME:FIN:G:ER:PR:IN:T"
+4. In your config.yml,
+add the key using the `add_ssh_keys` key:
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 That's it! Now, when you push to your GitHub repository from a job run, the read/write key that you added will be used.
