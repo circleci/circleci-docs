@@ -53,6 +53,6 @@ Reference: https://letsencrypt.readthedocs.io/en/latest/using.html#manual
 
 ### gotchas
 
-Ensure the hostname is properly configured in the Replicated/management console ~ <hostname>:8800/settings **and** the hostname used matches the DNS records associated with the TLS certificates.
+Ensure the hostname is properly configured in the Replicated/management console ~ (hostname:8800/settings) **and** the hostname used matches the DNS records associated with the TLS certificates.
 
 Make sure the auth callback url in Github/Github Enterprise matches the domain name pointing to the services box, including the protocol used e.g. **https**://info-tech.io/
