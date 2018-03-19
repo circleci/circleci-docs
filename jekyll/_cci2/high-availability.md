@@ -174,6 +174,7 @@ startup() {
   aws s3 cp s3://ha-test-bucket-3f5b105a/replicated.conf /etc/replicated.conf
   aws s3 cp s3://ha-test-bucket-3f5b105a/license.rli /etc/license.rli
   aws s3 cp s3://ha-test-bucket-3f5b105a/circleci-encryption-keys /data/circle/circleci-encryption-keys/ —-recursive
+  aws s3 cp s3://ha-test-bucket-3f5b105a/circleconfig/shared /etc/circleconfig/shared --recursive
   echo ‘CIRCLE_SECRETS_SESSION_COOKIE_KEY=<random_16_char_string>’ >> /etc/circle-installation-customizations
   curl https://get.replicated.com/docker | bash -s local_address=$(curl http://169.254.169.254/latest/meta-data/local-ipv4) no_proxy=1
 }
@@ -289,6 +290,47 @@ Vault should be setup as follows:
 * There must be a `transit` mount available
 * A token must be provided with permissions to manage keys and encrypt/decrypt data for the mounted `transit` backend
 
+1. Pull down vault. No higher than 0.7 currently: 
+ 
+2. Put the vault binary somewhere on $PATH (optional but makes life easier)
+
+3. Create a config file like vault.hcl with the following:
+
+```
+storage "file" { # Note:  This can be set to consul if they are using HashiCorps consul for HA
+  address = "127.0.0.1:8500"
+  path    = "/vault"   # If you use consul, don’t include the preceding /
+}
+
+listener "tcp" {
+  address     = "0.0.0.0:8200"
+  tls_disable = 1 # We recommend using tls.  If you want to setup tls, you’ll need a cert and key file, and to change that value to 0. The allowed parameters  are here #https://www.vaultproject.io/docs/configuration/listener/tcp.html
+}
+```
+
+4. Start vault : `sudo vault server -config=/path/to/vault.hcl & `
+
+**Note:** You'll only need to do the below if you are setting up Vault as a test instance with HTTP
+
+5.  `export VAULT_ADDR=http://127.0.0.1:8200`
+
+6. `sudo vault init` 
+
+7. Copy the unseal keys and the root key.  You’ll need these values. 
+
+8. Unseal vault using: `sudo vault unseal` . You'll have to run this command 3 times using 3 different unseal keys. 
+
+9.  Now you need to auth.  Run: `sudo vault auth` The token here should be the root token that you copied earlier.
+
+10. Once authed, you should now need to mount the transit mount: `sudo vault mount transit`
+
+11. For CircleCI, you'll need to generate a token that can be renewed. You can generate this by running the following: `sudo vault token-create -period="1h"`  . Use the generated token as your vault token, that you'll need below. 
+
+12. Seal vault: `sudo vault seal`
+
+Now, just proceed to Configuring Replicated, and you should be almost done with setting up CircleCI in HA mode. 
+
+
 
 ## Configuring Replicated
 
@@ -325,7 +367,7 @@ export VAULT__SCHEME="https"
 export VAULT__HOST="<vault-hostname>"
 export VAULT__PORT="<vault-port>"
 export VAULT__CLIENT_TOKEN="<vault-client-token>"
-export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>"
+export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>" # If you followed the directions above, this would be named "transit"
 ```
 
 ## Transport Layer Security (TLS)
