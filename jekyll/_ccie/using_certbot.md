@@ -17,7 +17,7 @@ To get around this, you can use the Manual method described below.
 
 ## Overview
 
-- Stop the service from within the Replicated console (<hostname:8800>) 
+- Stop the service from within the Replicated console (hostname:8800)
 
 - SSH into services box
 
