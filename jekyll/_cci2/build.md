@@ -11,7 +11,9 @@ Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/executor-types/">Choosing an Executor Type</a> | Comparison of the `docker`, `machine` and `macos` executor types, trade-offs and examples of usage.
 <a href="{{ site.baseurl }}/2.0/caching/">Caching Dependencies</a> | How to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
-[Using the CircleCI Command Line Interface]({{ site.baseurl }}/2.0/local-jobs) | How to run jobs locally.
+[Using the CircleCI Command Line Interface]({{ site.baseurl }}/2.0/local-jobs/) | How to run jobs locally.
+[Using Yarn on CircleCI]({{ site.baseurl }}/2.0/yarn/) | How to install Yarn and cache Yarn packages.
+[Build and Publish Snap Packages using Snapcraft on CircleCI]({{ site.baseurl }}/2.0/build-publish-snap-packages/ | Complete guide for setting up Snapcraft, building packages, and publishing them. 
 {: class="table table-striped"}
 
 ## How to Build, Test, and Deploy Video Tutorial
