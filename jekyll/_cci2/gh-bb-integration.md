@@ -169,7 +169,7 @@ enter "github.com",
 and press the submit button.
 
 4. In your config.yml,
-add the key using the `add_ssh_keys` key:
+add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
