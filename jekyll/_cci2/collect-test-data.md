@@ -32,13 +32,7 @@ gem 'minitest-ci'
 ```
 
 - Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.  
-
-To use another django test runner that is capable of
-producing XUnit XML files, configure it to output them to the
-`$CIRCLE_TEST_REPORTS/django` directory. **Note:** You must create the `django`
-directory if your runner does not create the destination directory
-automatically.  
-
+ 
 ## Metadata collection in custom test steps
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
