@@ -132,7 +132,7 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Deployment Keys
+## Deployment Keys and User Keys
 
 When you add a new project,
 CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project.
@@ -140,8 +140,8 @@ To prevent CircleCI from pushing to your repository,
 this deployment key is read-only.
 
 If you want to push to the repository from your builds,
-you will need a deployment key with write access.
-The steps to create a user deployment key depend on your VCS.
+you will need a deployment key with write access (user key).
+The steps to create a user key depend on your VCS.
 
 ### Creating a GitHub User Key
 
