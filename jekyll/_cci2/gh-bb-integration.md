@@ -149,8 +149,6 @@ In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
 and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
-#### Steps
-
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 When prompted to enter a passphrase,
 do **not** enter one.
@@ -190,8 +188,6 @@ Bitbucket does not currently provide CircleCI with an API
 to create user keys.
 It is still possible to create a user key
 by following this workaround:
-
-#### Steps
 
 1. In your project's settings
 on the "Checkout SSH Keys" page,
