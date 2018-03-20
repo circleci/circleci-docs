@@ -183,3 +183,45 @@ jobs:
 
 When you push to your GitHub repository from a job,
 CircleCI will use the SSH key you added.
+
+### Creating a Bitbucket User Key
+
+Bitbucket does not currently provide CircleCI with an API
+to create user keys.
+It is still possible to create a user key
+by following this workaround:
+
+#### Steps
+
+1. In your project's settings
+on the "Checkout SSH Keys" page,
+open the "Inspect Element" feature
+in your browser's developer tools.
+
+2. Click "Create User Key".
+
+3. In the "Network" tab
+of your developer tools,
+find the generated public key
+and copy it to your clipboard.
+
+4. In your project's "Bitbucket settings",
+click "SSH Keys",
+then click "Add Key".
+Paste the key you generated in step 3.
+
+5. In your config.yml,
+add the fingerprint using the `add_ssh_keys` key:
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your Bitbucket project from a job,
+CircleCI will use the SSH key you added.
