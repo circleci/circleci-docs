@@ -16,7 +16,7 @@ This document outlines how to run GPU (graphics processing unit) Builders using 
 Configure the `vm-service` in the Replicated management console to start a GPU-enabled instance. 
 
 ## Overview
-Run the following comamnds on any Nvidia GPU-enabled instance. The following example uses CUDA 8.0, but you can use any CUDA runtime version supported by your GPU instance.  
+Run the following commands on any Nvidia GPU-enabled instance. The following example uses CUDA 8.0, but you can use any CUDA runtime version supported by your GPU instance.  
 
 1. `wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb`     
 2. `sudo apt-get update`
