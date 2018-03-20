@@ -141,9 +141,9 @@ this deployment key is read-only.
 
 If you want to push to the repository from your builds,
 you will need a deployment key with write access.
-The steps to create a read-write deployment key depend on your VCS.
+The steps to create a user deployment key depend on your VCS.
 
-### Creating a GitHub Read-Write Key
+### Creating a GitHub User Key
 
 In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
