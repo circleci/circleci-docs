@@ -77,6 +77,19 @@ To keep the emphasis on prose,
 use markdown instead of plain HTML.
 Refer to the [Markdown documentation](https://daringfireball.net/projects/markdown/syntax) for more details.
 
+## Tables
+
+When creating tables,
+add the following inline attribute
+for improved borders between rows and columns:
+
+```
+Key | Required | Type | Description
+----|-----------|------|------------
+version | Y | String | Should currently be `2`
+{: class="table table-striped"}
+```
+
 ## Links
 
 ### Explicit Names
