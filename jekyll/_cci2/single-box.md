@@ -96,6 +96,7 @@ You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on bu
 3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
 4. Select "Single Box" in the "Builders Configuration" section(s).
 5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/](https://github.com/settings/applications/new/) or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+- **Note:** If you get an "Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
 6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
 7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
