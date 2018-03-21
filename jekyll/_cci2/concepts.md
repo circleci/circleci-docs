@@ -112,8 +112,6 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
 ```
 
-
-
 {% endraw %}
 
 ## Workflows
@@ -204,3 +202,4 @@ jobs:
           destination: artifact-file
 ...
 ```        
+{% endraw %}
