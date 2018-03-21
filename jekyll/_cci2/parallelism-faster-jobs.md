@@ -27,6 +27,10 @@ specifying a parallelism level for your tests
 and splitting the tests into groups
 using the CircleCI Local CLI.
 
+### Specifying a Job's Parallelism Level
+
+### Splitting Tests Into Groups
+
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
 	`circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
 
