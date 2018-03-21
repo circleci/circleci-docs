@@ -24,8 +24,8 @@ To reduce this time,
 you can spread your tests across multiple machines.
 This requires
 specifying a parallelism level for your tests
-and using the CircleCI Local CLI
-to split the tests into groups.
+and splitting the tests into groups
+using the CircleCI Local CLI.
 
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
 	`circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
