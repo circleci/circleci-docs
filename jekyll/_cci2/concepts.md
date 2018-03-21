@@ -130,6 +130,11 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - checkout
+      - save_cache: # Caches dependencies with a cache key
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+      
   build2:
     docker:
       - image: circleci/ruby:2.4-node
