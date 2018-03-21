@@ -17,7 +17,15 @@ before running the tests.
 
 ## Overview
 
-One of the most powerful features of CircleCI is the ability to run your tests in parallel. This section describes how to use `circleci` commands in your `config.yml` file to merge and split tests with the hosted CircleCI CLI for faster builds. See [Writing Jobs with Steps]({{ site.baseurl }}/2.0/configuration-reference/#jobs) for information about setting the `parallelism` key in your configuration file. 
+If your project has a large suite of tests,
+it will take more time
+to run those tests on one machine.
+To reduce this time,
+you can spread your tests across multiple machines.
+This requires
+specifying a parallelism level for your tests
+and using the CircleCI Local CLI
+to split the tests into groups.
 
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
 	`circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
