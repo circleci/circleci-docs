@@ -80,8 +80,6 @@ Jobs are a collection of steps. The Job Space is all of the containers being run
 A cache stores a file or directory of files such as dependencies or source code in object storage.
 Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
 
-![cache illustration]( {{ site.baseurl }}/assets/img/docs/concepts_cache.png)
-
 {% raw %}
 
 ```YAML
