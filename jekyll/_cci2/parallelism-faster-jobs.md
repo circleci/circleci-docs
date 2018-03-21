@@ -10,7 +10,7 @@ order: 60
 *[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
 
 CircleCI can run your tests in parallel,
-allowing you to save time and resources.
+allowing you to validate your code more quickly.
 This document describes
 how to split tests into groups
 before running the tests.
