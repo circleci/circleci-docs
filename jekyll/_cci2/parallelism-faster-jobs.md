@@ -13,7 +13,7 @@ CircleCI can run your tests in parallel,
 allowing you to save time and resources.
 This document describes
 how to split tests into groups
-before running them.
+before running the tests in parallel.
 
 ## Overview
 
