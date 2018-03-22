@@ -132,24 +132,92 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Adding Read/Write Deployment Keys to GitHub or Bitbucket
+## Deployment Keys and User Keys
 
-When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. The deployment key is read-only, to prevent CircleCI from pushing to your repository. However, sometimes you may want push to the repository from your builds and you cannot do this with a read-only deployment key. It is possible to manually add a read/write deployment key with the following steps.
+When you add a new project,
+CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project.
+To prevent CircleCI from pushing to your repository,
+this deployment key is read-only.
 
-In this example, the GitHub repository is `https://github.com/you/test-repo` and the project on CircleCI is `https://circleci.com/gh/you/test-repo`.
+If you want to push to the repository from your builds,
+you will need a deployment key with write access (user key).
+The steps to create a user key depend on your VCS.
 
-1. Create an ssh key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/)
-  Note: when asked "Enter passphrase (empty for no passphrase)", do ***not*** enter a passphrase.
-2. Go to `https://github.com/you/test-repo/settings/keys` on GitHub and click **Add deploy key**. Enter any title in the **Title** field, then copy and paste the public key you just created. Make sure to check **Allow write access**, then click **Add key**.
-3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh` on CircleCI and add the private key that you just created. Enter `github.com` in the **Hostname** field and press the submit button.
-4. In you config.yml, you can refer to the key with the following:
+### Creating a GitHub User Key
+
+In this example,
+the GitHub repository is `https://github.com/you/test-repo`,
+and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
+
+1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+When prompted to enter a passphrase,
+do **not** enter one.
+
+2. Go to `https://github.com/you/test-repo/settings/keys`,
+and click "Add deploy key".
+Enter a title in the "Title" field,
+then copy and paste the key you created in step 1.
+Check "Allow write access",
+then click "Add key".
+
+3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh`,
+and add the key you created in step 1.
+In the "Hostname" field,
+enter "github.com",
+and press the submit button.
+
+4. In your config.yml,
+add the fingerprint using the `add_ssh_keys` key:
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
-steps:
-  - add_ssh_keys:
-      fingerprints:
-        - "SO:ME:FIN:G:ER:PR:IN:T"
+
+When you push to your GitHub repository from a job,
+CircleCI will use the SSH key you added.
+
+### Creating a Bitbucket User Key
+
+Bitbucket does not currently provide CircleCI with an API
+to create user keys.
+It is still possible to create a user key
+by following this workaround:
+
+1. In your project's settings
+on the "Checkout SSH Keys" page,
+open the "Inspect Element" feature
+in your browser's developer tools.
+
+2. Click "Create User Key".
+
+3. In the "Network" tab
+of your developer tools,
+find the generated public key
+and copy it to your clipboard.
+
+4. In your project's "Bitbucket settings",
+click "SSH Keys",
+then click "Add Key".
+Paste the key you generated in step 3.
+
+5. In your config.yml,
+add the fingerprint using the `add_ssh_keys` key:
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
-That's it! Now, when you push to your GitHub repository from a job run, the read/write key that you added will be used.
 
-
-
+When you push to your Bitbucket project from a job,
+CircleCI will use the SSH key you added.
