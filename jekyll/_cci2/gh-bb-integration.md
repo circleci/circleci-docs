@@ -192,7 +192,9 @@ by following this workaround:
 1. In the CircleCI application,
 go to your project's settings.
 
-2. Click "Create User Key".
+2. On the "Checkout SSH Keys" page,
+right-click the "Create <username> user key"
+and click "Inspect".
 
 3. In the "Network" tab
 of your developer tools,
