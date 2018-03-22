@@ -15,7 +15,7 @@ This document describes how to enable Docker Layer Caching (DLC) which is useful
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
-## Video Overview of Dock Layer Caching
+## Video Overview of Docker Layer Caching
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
