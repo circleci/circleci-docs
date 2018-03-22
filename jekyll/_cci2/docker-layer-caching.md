@@ -31,8 +31,6 @@ When `docker_layer_caching` is set to `true`, CircleCI will try to reuse Docker 
 
 If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical cache.
 
-**Note:** The `docker_layer_caching` feature is not currently supported in an installable CircleCI release, but this functionality is available by using the `reusable: true` option. Previously the `docker_layer_caching` was called `reusable`. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive` option is deprecated in favor of all VMs being treated as exclusive. This indicates that jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access when using `docker_layer_caching`.
-
 ## Docker Layer Caching in Machine Executor
 
 Docker Layer Caching is also available for [`machine` executor](https://circleci.com/docs/2.0/executor-types/#using-machine), and it works in exactly the same way as described above. Enable Docker Layer Caching with the `machine` executor by using the example below.
