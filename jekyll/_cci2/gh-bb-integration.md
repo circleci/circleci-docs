@@ -186,7 +186,7 @@ CircleCI will use the SSH key you added.
 
 Bitbucket does not currently provide CircleCI with an API
 to create user keys.
-It is still possible to create a user key
+However, it is still possible to create a user key
 by following this workaround:
 
 1. In the CircleCI application,
@@ -199,12 +199,17 @@ and click "Inspect".
 3. In the developer console,
 select the "Network" tab.
 
-4. In your project's "Bitbucket settings",
-click "SSH Keys",
-then click "Add Key".
-Paste the key you generated in step 3.
+4. Click "Create [username] user key",
+where [username] is your CircleCI username.
 
-5. In your config.yml,
+5. In the developer console,
+click the `checkout-key` with a 201 status
+and copy the `public_key` to your clipboard.
+
+6. Add the key to Bitbucket
+by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
+
+7. In your config.yml,
 add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
