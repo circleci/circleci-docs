@@ -16,20 +16,22 @@ To increase the speed of your software development through faster feedback, shor
 
 ## Overview
 
-A **workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+A **Workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
 
-With workflows, you can:
+With Workflows, you can:
 
 - Run and troubleshoot jobs independently with real-time status feedback.
-- Schedule workflows for jobs that should only run periodically.
+- Schedule Workflows for jobs that should only run periodically.
 - Fan-out to run multiple jobs in parallel for efficient version testing.
 - Fan-in to quickly deploy to multiple platforms.
 
-For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
+For example, if only one job in a Workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
+
+Projects configured with Workflows often include multiple jobs that share similar or identical syntax (Docker images, environment variables, particular `run` steps); with [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878), you can [reference these shared YAML snippets repeatedly throughout your `.circleci/config.yml` file](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/), in order to keep your `config.yml` small and DRY.
 
 ### Limitations
 
-Projects run by using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. **Note:** builds without workflows require a `build` job.
+It is not yet possible to trigger complete Workflows runs via the CircleCI API. If you try to do so, CircleCI will by default look for a job named `build` in your `.circleci/config.yml` file, and execute that particular job if it exists. Alternatively, you can trigger individual Workflows jobs via the API by [setting the `job_name` environment variable in your API call]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) (however, Workflows features such as Workspaces and Contexts will be ignored in these API-triggered builds).
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FAQ for additional information and limitations.
 
