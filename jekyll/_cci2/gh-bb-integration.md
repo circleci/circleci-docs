@@ -196,10 +196,8 @@ go to your project's settings.
 right-click the "Create <username> user key"
 and click "Inspect".
 
-3. In the "Network" tab
-of your developer tools,
-find the generated public key
-and copy it to your clipboard.
+3. In the developer console,
+select the "Network" tab.
 
 4. In your project's "Bitbucket settings",
 click "SSH Keys",
