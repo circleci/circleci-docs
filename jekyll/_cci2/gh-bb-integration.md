@@ -189,10 +189,8 @@ to create user keys.
 It is still possible to create a user key
 by following this workaround:
 
-1. In your project's settings
-on the "Checkout SSH Keys" page,
-open the "Inspect Element" feature
-in your browser's developer tools.
+1. In the CircleCI application,
+go to your project's settings.
 
 2. Click "Create User Key".
 
