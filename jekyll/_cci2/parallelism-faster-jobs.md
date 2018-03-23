@@ -38,7 +38,19 @@ to run the steps of a job.
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-### Splitting Tests Into Groups
+### Installing the Local CLI Tool
+
+Running tests in parallel requires the CircleCI Local CLI.
+For more information,
+see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli) document.
+
+### Globbing and Splitting
+
+Test allocation across containers is file-based.
+You can make groups of files by
+specifying rules for globbing or splitting.
+
+The number of containers available for running tests is defined by the `parallelism` key.
 
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
 	`circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
