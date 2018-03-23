@@ -162,6 +162,7 @@ workflows:
       - build2:
         requires:
            - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
       - build3:
         requires:
            - build1 # wait for build1 job to complete successfully before starting
@@ -200,7 +201,7 @@ jobs:
   build3:
 ...
     steps:
-      - store_artifacts:
+      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
           path: /tmp/artifact-1
           destination: artifact-file
 ...
