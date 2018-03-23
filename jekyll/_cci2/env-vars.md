@@ -87,7 +87,7 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
     environment:
-      - FOO: "bar"
+      FOO: "bar"
 ```
 
 ### Adding Environment Variables for a Container
