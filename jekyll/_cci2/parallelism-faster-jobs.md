@@ -12,8 +12,8 @@ order: 60
 CircleCI can run your tests in parallel,
 allowing you to validate your code more quickly.
 This document describes
-how to split tests into groups
-before running the tests.
+how to organize tests
+before running them.
 
 ## Overview
 
@@ -23,8 +23,8 @@ to run those tests on one machine.
 To reduce this time,
 you can spread your tests across multiple machines.
 This requires
-specifying a parallelism level for your tests
-and splitting the tests into groups
+specifying a parallelism level
+and globbing or splitting tests
 using the CircleCI Local CLI.
 
 ### Specifying a Job's Parallelism Level
@@ -33,8 +33,8 @@ Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-
 To run a job's steps in parallel,
 set the `parallelism` key in your `.circleci/config.yml`
 to a value greater than 1.
-For more information about the `parallelism` key,
-see the [configuration reference](https://circleci.com/docs/2.0/configuration-reference/#parallelism).
+For more information,
+see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
 ### Splitting Tests Into Groups
 
