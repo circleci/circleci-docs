@@ -31,9 +31,10 @@ using the CircleCI Local CLI.
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level.
 To run a job's steps in parallel,
-set the `parallelism` key to a value greater than 1.
-
-See the [configuration reference](https://circleci.com/docs/2.0/configuration-reference/#parallelism) for more info.
+set the `parallelism` key in your `.circleci/config.yml`
+to a value greater than 1.
+For more information about the `parallelism` key,
+see the [configuration reference](https://circleci.com/docs/2.0/configuration-reference/#parallelism).
 
 ### Splitting Tests Into Groups
 
