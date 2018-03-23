@@ -33,6 +33,8 @@ Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-
 To run a job's steps in parallel,
 set the `parallelism` key in your `.circleci/config.yml`
 to a value greater than 1.
+This value specifies how many independent executors will be set up
+to run the steps of a job.
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
