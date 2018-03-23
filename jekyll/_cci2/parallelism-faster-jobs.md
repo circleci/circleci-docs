@@ -29,6 +29,12 @@ using the CircleCI Local CLI.
 
 ### Specifying a Job's Parallelism Level
 
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level.
+To run a job's steps in parallel,
+set the `parallelism` key to a value greater than 1.
+
+See the [configuration reference](https://circleci.com/docs/2.0/configuration-reference/#parallelism) for more info.
+
 ### Splitting Tests Into Groups
 
 Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
