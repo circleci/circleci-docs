@@ -16,7 +16,7 @@ This document provides an overview of the concepts used in CircleCI 2.0 in the f
 
 ## Steps
 
-Steps are actions that need to be taken to perform your build. ![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_step.png) Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
+Steps are actions that need to be taken to perform your job. ![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_step.png) Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
 
 
 ```YAML
@@ -71,7 +71,7 @@ An image is a packaged system that has the instructions for creating a running c
 
 ## Jobs
 
-Jobs are a collection of steps. The Job Space is all of the containers being run by an executor (`docker`, `machine`, or `macos`) for the current job.
+Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
@@ -114,7 +114,7 @@ jobs:
 
 ## Workflows
 
-Workflows define a list of jobs and their run order. Within the CI/CD industry, this feature is also referred to as Pipelines. It is possible to run jobs in parallel, sequentially, on a schedule, or with a  manual gate using an approval job.
+Workflows define a list of jobs and their run order. It is possible to run jobs in parallel, sequentially, on a schedule, or with a manual gate using an approval job.
 
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
@@ -174,6 +174,8 @@ workflows:
 
 Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
+Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
+
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
   {% raw %}
@@ -207,3 +209,14 @@ jobs:
 ...
 ```        
 {% endraw %}
+
+Note the following distinctions between Artifacts, Workspaces, and Caches:
+
+| Type      | Lifetime        | Use                      | Example |
+|-----------|-----------------|------------------------------------|---------
+| Artifacts | Months          | Preserve long-term artifacts. |  Available in the Artifacts tab of the Build details under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Workspaces | Duration of workflow        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
+| Caches    | Months          | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+{: class="table table-striped"}
+
+Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
