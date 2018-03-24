@@ -7,41 +7,6 @@ description: "Troubleshooting steps to take in CircleCI 2.0"
 ---
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI 2.0 installation on your private server or cloud. **Note:** It is generally a good idea to review the support bundle to check for problems first before beginning troubleshooting steps.
 
-
-## Setting up ELB Certificates
-CircleCI requires the following steps to get Elastic Load Balancer (ELB) certificates working as your primary certificates. The steps to accomplish this are below.
-
-**Note:** You'll only need HTTP below, if you plan on using HTTP requests, otherwise you can leave it out. 
-
-1.) You'll need to following ports on your ELB
-
-Load BalancerProtocol | Load Balancer Port | Instance Protocol | Instance Port | Cipher | SSL Certificate
-----------|----------|----------|----------|----------|----------
-SSL| 443 | SSL | 443 | Change | your-cert
-HTTP | 80 | HTTP | 80 | N/A | N/A
-HTTPS | 8800 | HTTPS | 8800| Change | your cert
-SSL | 8081 | SSL | 8081 | Change | your cert
-SSL | 3000 | SSL | 3000 | Change | your cert
-SSL|8082| SSL| 8082 | Change | your cert
-{: class="table table-striped"}
-
-2.) You'll also need the following security group on your ELB
-
-**Note:** The sources below are left open so that anybody can access the instance over these port ranges. If that is not what you want, then feel free to restrict them. People will experience reduced functionality if your stakeholders are using IP's outside of the Source Range. 
-
-Type | Protocol | Port Range | Source
-----------|----------|----------|----------
-SSH | TCP | 22 | 0.0.0.0
-Custom TCP Rule | TCP | 8800 | 0.0.0.0
-Custom TCP Rule | TCP | 64535-65535 | 0.0.0.0
-HTTPS | TCP | 443 | 0.0.0.0
-{: class="table table-striped"}
-
-3.) Next, in the management console for CircleCI you'll need to upload dummy certs to the `Privacy` Section. These don't need to be real certs as the actual cert management is done at the ELB, but in order to use HTTPS requests, CircleCI requires knowledge of something. This is a bug that we're currently working on.
-
-4.) If you've done the above correctly, then you'll be able to set your Github Authorization Callback to `https` rather than `http`.  
-
-
 ## Debugging Queuing Builds
 
 If your Services component is fine, but builds are not running or all builds are queueing, follow the steps below.
