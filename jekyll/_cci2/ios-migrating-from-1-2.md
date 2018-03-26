@@ -49,6 +49,9 @@ jobs:
     # Specify the Xcode version to use.
     macos:
       xcode: "8.3.3"
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
 
     # Define the steps required to build the project.
     steps:
@@ -72,26 +75,17 @@ jobs:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
 
-      # Collect XML test results data to show in the UI,
-      # and save the same XML files under test-results folder
-      # in the Artifacts tab.
-      - run:
-          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
-          when: always
-
       - store_test_results:
-          path: fastlane/test_output
-          
+          path: output/scan
       - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+          path: output
 
   deploy:
     macos:
       xcode: "8.3.3"
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
 
     steps:
       - checkout
@@ -108,8 +102,7 @@ jobs:
 
       # Store the IPA file in the build artifacts
       - store_artifacts:
-          path: ./MyApp.ipa
-          destination: ipa
+          path: output/MyApp.ipa
 
       # Deploy!
       - run:
@@ -336,15 +329,9 @@ jobs:
     steps:
       ...
       - store_test_results:
-          path: test_output/report.junit
+          path: output/scan
       - store_artifacts:
-          path: /tmp/test-results
-          # Destination is the name of the item in the Artifacts tab
-          # that will contain the paths specified in this step.
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+          path: output
 ```
 
 Find more details about these steps in the
@@ -363,6 +350,9 @@ jobs:
   deploy:
     macos:
       xcode: 8.3.3
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
 
     steps:
       - checkout
@@ -379,7 +369,7 @@ jobs:
 
       # Store the IPA file in the build artifacts
       - store_artifacts:
-          path: ./MyApp.ipa
+          path: output/MyApp.ipa
           destination: ipa
 
       # Deploy!

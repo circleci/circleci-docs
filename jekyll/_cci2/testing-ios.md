@@ -67,6 +67,9 @@ jobs:
   build-and-test:
     macos:
       xcode: "9.0"
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
 
     steps:
       - checkout
@@ -84,19 +87,11 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
-            
-      - run:
-          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
-          when: always
 
       - store_test_results:
-          path: fastlane/test_output
+          path: output/scan
       - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+          path: output
 
 workflows:
   version: 2
@@ -231,7 +226,7 @@ jobs:
       xcode: "9.0"
     working_directory: /Users/distiller/project
     environment:
-      FL_OUTPUT_DIR: /Users/distiller/project/output
+      FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
     shell: /bin/bash --login -o pipefail
     steps:
@@ -240,20 +235,17 @@ jobs:
       - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
-      - run:
-          command: cp $FL_OUTPUT_DIR/scan/report.junit $FL_OUTPUT_DIR/scan/results.xml
-          when: always
       - store_artifacts:
-          path: /Users/distiller/project/output
+          path: output
       - store_test_results:
-          path: /Users/distiller/project/output/scan
+          path: output/scan
 
   adhoc:
     macos:
       xcode: "9.0"
     working_directory: /Users/distiller/project
     environment:
-      FL_OUTPUT_DIR: /Users/distiller/project/output
+      FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
     shell: /bin/bash --login -o pipefail
     steps:
@@ -263,7 +255,7 @@ jobs:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
-          path: /Users/distiller/project/output
+          path: output
 
 workflows:
   version: 2
@@ -573,6 +565,9 @@ jobs:
   build-and-test:
     macos:
       xcode: "9.0"
+    working_directory: /Users/distiller/project
+    environment:
+      FL_OUTPUT_DIR: output
 
     steps:
       - checkout
@@ -592,13 +587,9 @@ jobs:
             SCAN_SCHEME: WebTests
 
       - store_test_results:
-          path: test_output/report.xml
+          path: output/scan
       - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+          path: output
 
   swiftlint:
     docker:
