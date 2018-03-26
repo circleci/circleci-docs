@@ -72,16 +72,9 @@ jobs:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
 
-      # Collect XML test results data to show in the UI,
-      # and save the same XML files under test-results folder
-      # in the Artifacts tab.
-      - run:
-          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
-          when: always
-
       - store_test_results:
-          path: fastlane/test_output
-          
+          path: fastlane/test_output/scan
+
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
@@ -336,7 +329,7 @@ jobs:
     steps:
       ...
       - store_test_results:
-          path: test_output/report.junit
+          path: test_output/scan
       - store_artifacts:
           path: /tmp/test-results
           # Destination is the name of the item in the Artifacts tab

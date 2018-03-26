@@ -84,10 +84,6 @@ jobs:
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
-            
-      - run:
-          command: mv fastlane/test_output/report.junit fastlane/test_output/report.xml
-          when: always
 
       - store_test_results:
           path: fastlane/test_output
@@ -240,13 +236,10 @@ jobs:
       - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
-      - run:
-          command: cp $FL_OUTPUT_DIR/scan/report.junit $FL_OUTPUT_DIR/scan/results.xml
-          when: always
       - store_artifacts:
-          path: /Users/distiller/project/output
+          path: output
       - store_test_results:
-          path: /Users/distiller/project/output/scan
+          path: output/scan
 
   adhoc:
     macos:
@@ -592,7 +585,7 @@ jobs:
             SCAN_SCHEME: WebTests
 
       - store_test_results:
-          path: test_output/report.xml
+          path: test_output/scan
       - store_artifacts:
           path: /tmp/test-results
           destination: scan-test-results
