@@ -18,23 +18,31 @@ This requires specifying a parallelism level
 and using the CircleCI Local CLI
 to glob or split test files.
 
+## Requirement
+
+Running tests in parallel requires the CircleCI Local CLI.
+For installation instructions,
+refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
+
 ## Specifying a Job's Parallelism Level
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies
 how many independent executors will be set up
 to run the steps of a job.
+
 To run a job's steps in parallel,
-set the `parallelism` key to a value greater than 1.
+set the `parallelism` key to a value greater than 1:
+
+```yaml
+version: 2
+jobs:
+  test:
+    parallelism: 5
+```
 
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
-
-## Installing the CircleCI Local CLI
-
-Running tests in parallel requires the CircleCI Local CLI.
-For installation instructions,
-refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document
 
 ## Using Pattern-Matching to Create Groups of Tests
 
@@ -69,7 +77,7 @@ by using the `echo` command in your `.circleci/config.yml` file:
 ```yaml
 version: 2
 jobs:
-  test-job:
+  test:
     steps:
       - run:
           command: |
