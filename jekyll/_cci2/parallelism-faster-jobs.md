@@ -24,7 +24,7 @@ To reduce this time,
 you can spread your tests across multiple machines.
 This requires
 specifying a parallelism level
-and globbing or splitting tests
+and globbing or splitting test files
 using the CircleCI Local CLI.
 
 ### Specifying a Job's Parallelism Level
