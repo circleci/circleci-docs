@@ -64,8 +64,6 @@ This set of files is run across the number of machines you specified with the `p
 
 #### Supported Globbing Patterns
 
-The following patterns are used to glob files:
-
 - `*` matches any sequence of characters (excluding path separators)
 - `**` matches any sequence of characters (including path separators)
 - `?` matches any single character (excluding path separators)
