@@ -27,7 +27,7 @@ specifying a parallelism level
 and globbing or splitting test files
 using the CircleCI Local CLI.
 
-### Specifying a Job's Parallelism Level
+## Specifying a Job's Parallelism Level
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies
@@ -39,17 +39,20 @@ set the `parallelism` key to a value greater than 1.
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-### Installing the CircleCI Local CLI
+## Installing the CircleCI Local CLI
 
 Running tests in parallel requires the CircleCI Local CLI.
 For installation instructions,
 refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document
 
-### Globbing and Splitting
+## Using Pattern-Matching to Create Groups of Tests
 
 Test allocation across containers is file-based.
 You can make groups of files by
-specifying patterns for globbing or splitting.
+specifying patterns for globbing or splitting files.
+
+### Globbing
+
 To specify patterns for globbing,
 use the `circleci tests glob` command,
 as shown below:
@@ -81,8 +84,8 @@ jobs:
     steps:
       - run:
           command: |
-            echo $(circleci tests glob "foo/**/*" "bar/**/*")  # Print all files on one line
-            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo  # Print one file per line
+            echo $(circleci tests glob "foo/**/*" "bar/**/*")
+            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
 ### Splitting Patterns
