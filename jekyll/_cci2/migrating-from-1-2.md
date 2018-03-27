@@ -22,7 +22,7 @@ CircleCI 2.0 introduces the requirement that you create a configuration file (`.
 
 If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
-## Using the 1.0 to 2.0 config-translation Endpoint
+## Using the 1.0 to 2.0 `config-translation` Endpoint
 
 CircleCI's beta `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
