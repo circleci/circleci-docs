@@ -29,7 +29,7 @@ using the CircleCI Local CLI.
 
 ### Specifying a Job's Parallelism Level
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level.
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies
 how many independent executors will be set up
 to run the steps of a job.
