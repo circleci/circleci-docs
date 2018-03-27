@@ -61,13 +61,13 @@ This set of files is run across the number of machines you specified with the `p
 
 #### Supported Globbing Patterns
 
-The following patterns are used to glob files.
+The following patterns are used to glob files:
 
-- `*`: matches any sequence of characters (excluding path separators)
-- `**`: matches any sequence of characters (including path separators)
-- `?`: matches any single character (excluding path separators)
-- `[abc]`: matches any character (excluding path separators) against characters in braces
-- `{foo,bar,...}`: matches a sequence of characters if any of the alternatives in braces matches
+- `*` matches any sequence of characters (excluding path separators)
+- `**` matches any sequence of characters (including path separators)
+- `?` matches any single character (excluding path separators)
+- `[abc]` matches any character (excluding path separators) against characters in brackets
+- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
 
 #### Checking Glob Results
 
