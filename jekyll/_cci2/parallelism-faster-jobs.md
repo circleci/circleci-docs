@@ -39,11 +39,11 @@ set the `parallelism` key to a value greater than 1.
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-### Installing the Local CLI Tool
+### Installing the CircleCI Local CLI
 
 Running tests in parallel requires the CircleCI Local CLI.
-For more information,
-see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli) document.
+For installation instructions,
+refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document
 
 ### Globbing and Splitting
 
