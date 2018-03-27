@@ -9,23 +9,14 @@ order: 60
 
 *[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
 
-CircleCI can run your tests in parallel,
-allowing you to validate your code more quickly.
-This document describes
-how to organize tests
-before running them in parallel.
-
-## Overview
-
-If your project has a large suite of tests,
-it will take more time
-to run those tests on one machine.
+If your project has a lot of tests,
+it will need more time to run them on one machine.
 To reduce this time,
-you can spread your tests across multiple machines.
-This requires
-specifying a parallelism level
-and globbing or splitting test files
-using the CircleCI Local CLI.
+you can run tests in parallel
+by spreading them across multiple machines.
+This requires specifying a parallelism level
+and using the CircleCI Local CLI
+to glob or split test files.
 
 ## Specifying a Job's Parallelism Level
 
