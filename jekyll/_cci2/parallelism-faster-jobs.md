@@ -49,12 +49,27 @@ refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#in
 
 Test allocation across containers is file-based.
 You can make groups of files by
-specifying rules for globbing or splitting.
+specifying patterns for globbing or splitting.
+To specify patterns for globbing,
+use the `circleci tests glob` command,
+as shown below:
 
-The number of containers available for running tests is defined by the `parallelism` key.
+    circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
 
-Use the circle tests glob command to specify multiple globs to merge using a pattern, for example: 
-	`circleci tests glob "tests/unit/*.java" "tests/functional/*.java"`
+In this example, the `glob` command takes the Java files in the `tests/unit/` and `tests/functional` directories as arguments.
+This set of files is run across the number of machines you specified with the `parallelism` key.
+
+#### Supported Globbing Patterns
+
+The following patterns are used to glob files.
+
+- `*`: matches any sequence of characters (excluding path separators)
+- `**`: matches any sequence of characters (including path separators)
+- `?`: matches any single character (excluding path separators)
+- `[abc]`: matches any character (excluding path separators) against characters in braces
+- `{foo,bar,...}`: matches a sequence of characters if any of the alternatives in braces matches
+
+#### Checking Glob Results
 
 In your `config.yml` file, check your glob results by using the `circleci tests glob` command, for example:
 
@@ -67,20 +82,6 @@ run:
   # Print one file per line
   circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
-
-### Supported Globbing Patterns
-
-The following patterns are used to glob files.
-
-- `*`: matches any sequence of characters (excluding path separators)
-- `**`: matches any sequence of characters (including path separators)
-- `?`: matches any single character (excluding path separators)
-- `[abc]`: matches any character (excluding path separators) against characters in braces
-- `{foo,bar,...}`: matches a sequence of characters if any of the alternatives in braces matches
-
-For example:
-
-`circleci tests glob "**/*.java"`
 
 ### Splitting Patterns
 
