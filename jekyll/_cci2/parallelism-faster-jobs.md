@@ -13,7 +13,7 @@ CircleCI can run your tests in parallel,
 allowing you to validate your code more quickly.
 This document describes
 how to organize tests
-before running them.
+before running them in parallel.
 
 ## Overview
 
