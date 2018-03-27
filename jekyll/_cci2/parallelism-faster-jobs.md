@@ -9,7 +9,7 @@ order: 60
 
 *[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
 
-If your project has a lot of tests,
+If your project has a large number of tests,
 it will need more time to run them on one machine.
 To reduce this time,
 you can run tests in parallel
@@ -17,12 +17,6 @@ by spreading them across multiple machines.
 This requires specifying a parallelism level
 and using the CircleCI Local CLI
 to glob or split test files.
-
-## Requirement
-
-Running tests in parallel requires the CircleCI Local CLI.
-For installation instructions,
-refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
 
 ## Specifying a Job's Parallelism Level
 
@@ -48,7 +42,11 @@ see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference
 
 Test allocation across containers is file-based.
 You can make groups of files by
-specifying patterns for globbing or splitting files.
+using the CircleCI Local CLI
+to specifying patterns for globbing or splitting files
+
+To install the Local CLI,
+refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
 
 ### Globbing
 
