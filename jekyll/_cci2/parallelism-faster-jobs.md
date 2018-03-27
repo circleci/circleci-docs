@@ -71,16 +71,18 @@ The following patterns are used to glob files:
 
 #### Checking Glob Results
 
-In your `config.yml` file, check your glob results by using the `circleci tests glob` command, for example:
+You can check the results of pattern-matching
+by using the `echo` command in your `.circleci/config.yml` file:
 
-```
-run:
-- type: shell
-  command: |
-  # Print all files in one line
-  echo $(circleci tests glob "foo/**/*" "bar/**/*")
-  # Print one file per line
-  circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
+```yaml
+version: 2
+jobs:
+  test-job:
+    steps:
+      - run:
+          command: |
+            echo $(circleci tests glob "foo/**/*" "bar/**/*")  # Print all files on one line
+            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo  # Print one file per line
 ```
 
 ### Splitting Patterns
