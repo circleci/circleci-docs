@@ -30,11 +30,12 @@ using the CircleCI Local CLI.
 ### Specifying a Job's Parallelism Level
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level.
-To run a job's steps in parallel,
-set the `parallelism` key in your `.circleci/config.yml`
-to a value greater than 1.
-This value specifies how many independent executors will be set up
+The `parallelism` key specifies
+how many independent executors will be set up
 to run the steps of a job.
+To run a job's steps in parallel,
+set the `parallelism` key to a value greater than 1.
+
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
