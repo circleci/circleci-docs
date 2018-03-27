@@ -59,16 +59,6 @@ In this example, the `glob` command takes the Java files in the `tests/unit/` an
 This set of files is run acrossthe number of machines
 you specified with the `parallelism` key.
 
-#### Supported Globbing Patterns
-
-- `*` matches any sequence of characters (excluding path separators)
-- `**` matches any sequence of characters (including path separators)
-- `?` matches any single character (excluding path separators)
-- `[abc]` matches any character (excluding path separators) against characters in brackets
-- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
-
-#### Checking Globbing Results
-
 You can check the results of pattern-matching
 by using the `echo` command in your `.circleci/config.yml` file:
 
@@ -83,7 +73,18 @@ jobs:
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
-### Splitting Patterns
+#### Supported Globbing Patterns
+
+- `*` matches any sequence of characters (excluding path separators)
+- `**` matches any sequence of characters (including path separators)
+- `?` matches any single character (excluding path separators)
+- `[abc]` matches any character (excluding path separators) against characters in brackets
+- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
+
+### Splitting
+
+When running parallel builds,
+the CircleCI Local CLI can split a list of test files across machines.o
 
 The `circleci` CLI can be used to split a list of test files or classnames when running parallel builds on 2.0. The CLI uses the environment to look up the total number of containers, along with the current container index. Then, it uses deterministic splitting algorithms to return a distinct subset of the input filenames or classnames on each container.
 
