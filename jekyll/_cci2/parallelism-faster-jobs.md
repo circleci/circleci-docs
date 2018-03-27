@@ -38,7 +38,7 @@ jobs:
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-## Using Pattern-Matching to Create Groups of Tests
+## Using the CircleCI Local CLI to Group Test Files
 
 Test allocation across containers is file-based.
 You can make groups of files by
@@ -46,18 +46,18 @@ using the CircleCI Local CLI
 to specifying patterns for globbing or splitting files
 
 To install the Local CLI,
-refer to the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
+see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
 
 ### Globbing
 
 To specify patterns for globbing,
-use the `circleci tests glob` command,
-as shown below:
+use the `circleci tests glob` command:
 
     circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
 
-In this example, the `glob` command takes the Java files in the `tests/unit/` and `tests/functional` directories as arguments.
-This set of files is run across the number of machines you specified with the `parallelism` key.
+In this example, the `glob` command takes the Java files in the `tests/unit/` and `tests/functional/` directories as arguments.
+This set of files is run acrossthe number of machines
+you specified with the `parallelism` key.
 
 #### Supported Globbing Patterns
 
@@ -67,7 +67,7 @@ This set of files is run across the number of machines you specified with the `p
 - `[abc]` matches any character (excluding path separators) against characters in brackets
 - `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
 
-#### Checking Glob Results
+#### Checking Globbing Results
 
 You can check the results of pattern-matching
 by using the `echo` command in your `.circleci/config.yml` file:
