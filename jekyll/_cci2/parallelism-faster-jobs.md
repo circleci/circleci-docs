@@ -26,9 +26,10 @@ how many independent executors will be set up
 to run the steps of a job.
 
 To run a job's steps in parallel,
-set the `parallelism` key to a value greater than 1:
+set the `parallelism` key to a value greater than 1.
 
 ```yaml
+# ~/.circleci/config.yml
 version: 2
 jobs:
   test:
@@ -38,14 +39,14 @@ jobs:
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-## Using the CircleCI Local CLI to Group Test Files
+## Using the CircleCI Local CLI to Split Tests
 
 Test allocation across containers is file-based
 and requires the CircleCI Local CLI.
 To install the CLI,
 see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
 
-### Globbing
+### Globbing Test Files
 
 The CLI supports globbing test files
 using the following patterns:
@@ -56,20 +57,16 @@ using the following patterns:
 - `[abc]` matches any character (excluding path separators) against characters in brackets
 - `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
 
-To use these patterns to group test files,
-use the `circleci tests glob` command:
+To glob test files,
+pass one or more patterns to the `circleci tests glob` command.
 
     circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
 
-In this example,
-the `glob` command takes the Java files in the `tests/unit/` and `tests/functional/` directories as arguments.
-This set of files is run across the number of machines
-specified by the `parallelism` key.
-
-You can check the results of pattern-matching
-by using the `echo` command in your `.circleci/config.yml` file:
+To check the results of pattern-matching,
+use the `echo` command.
 
 ```yaml
+# ~/.circleci/config.yml
 version: 2
 jobs:
   test:
@@ -82,21 +79,45 @@ jobs:
 
 ### Splitting Test Files
 
-When running parallel builds,
-the CircleCI Local CLI can split a list of test files across machines.o
+The CLI supports splitting tests across machines
+when running parallel builds.
+To do this,
+pass a list of filenames to the `circleci tests split` command.
 
-The `circleci` CLI can be used to split a list of test files or classnames when running parallel builds on 2.0. The CLI uses the environment to look up the total number of containers, along with the current container index. Then, it uses deterministic splitting algorithms to return a distinct subset of the input filenames or classnames on each container.
+    circleci tests split test_filenames.txt
 
-The list of items to split can be provided via standard input or as a file argument, as follows:
+The CLI looks up the number of containers
+specified by the `parallelism` key,
+along with the current container index.
+Then, it uses deterministic splitting algorithms
+to spread the test files across all available containers.
 
-- Piping: `circleci tests glob test/**/*.java | circleci tests split`
-- `stdin` redirection: `circleci tests split < /path/to/items/to/split`
-- Process substitution: `circleci tests split <(circleci tests glob test/**/*.java)`
-- From file: `circleci tests split test_filenames.txt`
+#### Splitting by Name
 
-By default, it is assumed that the items being split are filenames and should be split by name. However, the tool can also split by file size or may use historical data to split by test runtimes.
+By default,
+`circleci tests split` expects a list of filenames
+and splits tests alphabetically by test name.
+There are a few ways to provide this list:
 
-Items can be split by `name`, `filesize` (for filepaths), or `timings` (when run on CircleCI). Splitting by name is the default and splits items alphabetically, for example:
+Create a text file with test filenames.
+
+    circleci tests split test_filenames.txt
+
+Provide a path to the test files.
+
+    circleci tests split < /path/to/items/to/split
+
+Or pipe a glob of test files.
+
+    circleci tests glob test/**/*.java | circleci tests split
+
+However, the tool can also split by file size or may use historical data to split by test runtimes.
+
+#### Splitting by Filesize
+
+The CLI can also split by filesize.
+
+`filesize` (for filepaths), or `timings` (when run on CircleCI).
 
 `circleci tests glob "**/*.go" | circleci tests split`
 
