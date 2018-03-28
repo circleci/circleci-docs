@@ -317,3 +317,7 @@ The directory where test timing data can be found.
 **CIRCLE_STAGE**
 
 The job being executed. The default 2.0 job is `build` without using Workflows.
+
+**HOME**
+
+Your home directory.
