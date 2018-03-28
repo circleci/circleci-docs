@@ -132,39 +132,42 @@ Or pipe a glob of test files.
 When provided with filepaths,
 the CLI can also split by filesize.
 To do this,
-use the `--split-by` flag.
+use the `--split-by` flag with the `filesize` split type.
 
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 
-#### Splitting by Runtime
+#### Splitting by Timings
 
-may use historical data to split by test runtimes.
+CircleCI automatically saves timing data from previous successful runs to a default location (`$CIRCLE_INTERNAL_TASK_DATA/circle-test-results`).
+Ensure you are using the [`store_test_results` key]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results)
+to save your timing data,
+or there will be no historical data available.
 
-The `timings` split type uses historical timing data to weight the split. CircleCI automatically makes timing data from previous successful runs available inside your container in a default location so the CLI tool can discover them (`$CIRCLE_INTERNAL_TASK_DATA/circle-test-results`). Make sure you are using the [`store_test_results` key]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) to save your test timing data, otherwise there will not be any historical timing data available.
+To split by timings,
+use the `--split-by` flag with the `timings` split type.
 
-`timings` (when run on CircleCI).
+    circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 
-When splitting by `timings`, the tool will assume it’s splitting filenames. If you’re splitting classnames, you’ll need to specify that with the `--timings-type` flag, as in the following examples:
+By default,
+the CLI assumes that it is splitting filenames.
+You can also split classnames
+by using the `--timings-type` flag.
 
-`circleci tests glob "**/*.go" | circleci tests split --split-by=timings --timings-type=filename`
+    cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 
-`cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname`
-
-### Balancing Libraries
+## Test Balancing Libraries
 
 The following libraries have built-in support for the CircleCI environment variables:
 
-{% include third-party-info.html app='Knapsack'%}
-
 * [Knapsack](https://github.com/ArturT/knapsack) - Deterministic test suite split. A ruby gem for Knapsack will automatically divide your tests between parallel CI nodes, as well as making sure each job runs in comparable time. Supports RSpec, Cucumber, Minitest, Spinach and Turnip.
 
-```
+```yaml
 - run: bundle exec rake knapsack:rspec
 ```
 
 * [Knapsack Pro](https://github.com/KnapsackPro/knapsack_pro-ruby) - Dynamic optimal test suite split. Knapsack Pro is a more advanced version of knapsack gem. It has automated recording of tests time execution across branches, commits and it can distribute tests across parallel CI nodes with predetermine split (regular mode) or in a dynamic way (queue mode) to get most optimal test suite split.
 
-```
+```yaml
 # some tests that are not balanced and executed only on first CI node
 - run: case $CIRCLE_NODE_INDEX in 0) npm test ;; esac
 
@@ -173,3 +176,5 @@ The following libraries have built-in support for the CircleCI environment varia
 # create a bottleneck on the CI node
 - run: bundle exec rake knapsack_pro:queue:rspec
 ```
+
+{% include third-party-info.html app='Knapsack'%}
