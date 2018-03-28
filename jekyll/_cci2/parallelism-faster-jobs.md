@@ -154,27 +154,3 @@ You can also split classnames
 by using the `--timings-type` flag.
 
     cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
-
-## Test Balancing Libraries
-
-The following libraries have built-in support for the CircleCI environment variables:
-
-* [Knapsack](https://github.com/ArturT/knapsack) - Deterministic test suite split. A ruby gem for Knapsack will automatically divide your tests between parallel CI nodes, as well as making sure each job runs in comparable time. Supports RSpec, Cucumber, Minitest, Spinach and Turnip.
-
-```yaml
-- run: bundle exec rake knapsack:rspec
-```
-
-* [Knapsack Pro](https://github.com/KnapsackPro/knapsack_pro-ruby) - Dynamic optimal test suite split. Knapsack Pro is a more advanced version of knapsack gem. It has automated recording of tests time execution across branches, commits and it can distribute tests across parallel CI nodes with predetermine split (regular mode) or in a dynamic way (queue mode) to get most optimal test suite split.
-
-```yaml
-# some tests that are not balanced and executed only on first CI node
-- run: case $CIRCLE_NODE_INDEX in 0) npm test ;; esac
-
-# auto-balancing CI build time execution to be flat and optimal (as fast as possible).
-# Queue Mode does dynamic tests allocation so the previous not balanced run command won't
-# create a bottleneck on the CI node
-- run: bundle exec rake knapsack_pro:queue:rspec
-```
-
-{% include third-party-info.html app='Knapsack'%}
