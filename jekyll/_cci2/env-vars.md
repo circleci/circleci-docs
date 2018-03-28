@@ -190,25 +190,17 @@ export param2="500"
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
 
-## CircleCI Built-in Environment Variable Descriptions
+## CircleCI Built-in Environment Variables
 
-CircleCI exports the environment variables in this section during each build, which are
-useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:
+CircleCI uses Bash,
+which follows the POSIX naming convention for environment variables.
+Valid characters include: letters (uppercase and lowercase), digits, and the underscore.
+The first character of each environment variable must be a letter.
 
-`CIRCLECI`
+The following environment variables are exported in each build
+and can be used for more complex testing or deployment.
 
-true
-
-`CI`
-
-true
-
-CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character must be a letter.
-
-## Build Details
-
-CircleCI publishes the details of the currently running build in this list of variables:
-
+### General Environment Variables
 
 `CI`
 
@@ -221,6 +213,12 @@ Has a value of `true` on our platform.
 Represents whether the current environment is a CircleCI environment.
 
 Has a value of `true` on our platform.
+
+`HOME`
+
+Your home directory.
+
+### Build-Specific Environment Variables
 
 `CIRCLE_BRANCH`
 
@@ -317,7 +315,3 @@ The directory where test timing data can be found.
 `CIRCLE_STAGE`
 
 The job being executed. The default 2.0 job is `build` without using Workflows.
-
-`HOME`
-
-Your home directory.
