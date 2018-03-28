@@ -16,7 +16,10 @@ you can run tests in parallel
 by spreading them across multiple machines.
 This requires specifying a parallelism level
 and using the CircleCI Local CLI
-to glob and split test files.
+to split test files.
+
+* TOC
+{:toc}
 
 ## Specifying a Job's Parallelism Level
 
@@ -33,7 +36,7 @@ set the `parallelism` key to a value greater than 1.
 version: 2
 jobs:
   test:
-    parallelism: 5
+    parallelism: 4
 ```
 
 For more information,
@@ -86,11 +89,24 @@ pass a list of filenames to the `circleci tests split` command.
 
     circleci tests split test_filenames.txt
 
-The CLI looks up the number of containers
-specified by the `parallelism` key,
+The CLI looks up the number of containers,
 along with the current container index.
 Then, it uses deterministic splitting algorithms
-to spread the test files across all available containers.
+to split the test files across all available containers.
+
+By default,
+the number of containers is specified by the `parallelism` key.
+You can manually set this
+by using the `--total` flag.
+
+    circleci tests split --total=4 test_filenames.txt
+
+Similarly,
+the current container index is automatically picked up from environment variables,
+but can be manually set
+by using the `--index` flag.
+
+    circleci tests split --index=0 test_filenames.txt
 
 #### Splitting by Name
 
@@ -111,33 +127,28 @@ Or pipe a glob of test files.
 
     circleci tests glob test/**/*.java | circleci tests split
 
-However, the tool can also split by file size or may use historical data to split by test runtimes.
-
 #### Splitting by Filesize
 
-The CLI can also split by filesize.
+When provided with filepaths,
+the CLI can also split by filesize.
+To do this,
+use the `--split-by` flag.
 
-`filesize` (for filepaths), or `timings` (when run on CircleCI).
+    circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 
-`circleci tests glob "**/*.go" | circleci tests split`
+#### Splitting by Runtime
 
-When the items are filepaths, the `filesize` option will weight the split by file size, for example:
-
-`circleci tests glob "**/*.go" | circleci tests split --split-by=filesize`
+may use historical data to split by test runtimes.
 
 The `timings` split type uses historical timing data to weight the split. CircleCI automatically makes timing data from previous successful runs available inside your container in a default location so the CLI tool can discover them (`$CIRCLE_INTERNAL_TASK_DATA/circle-test-results`). Make sure you are using the [`store_test_results` key]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) to save your test timing data, otherwise there will not be any historical timing data available.
+
+`timings` (when run on CircleCI).
 
 When splitting by `timings`, the tool will assume it’s splitting filenames. If you’re splitting classnames, you’ll need to specify that with the `--timings-type` flag, as in the following examples:
 
 `circleci tests glob "**/*.go" | circleci tests split --split-by=timings --timings-type=filename`
 
 `cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname`
-
-The following additional flags are supported:
-- `--index`: set the container index for this invocation of `circleci tests split`
-- `--total`: set the total number of containers to consider
-
-When running on CircleCI, these values will be automatically picked up from environment variables.
 
 ### Balancing Libraries
 
