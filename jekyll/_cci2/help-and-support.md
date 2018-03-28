@@ -9,11 +9,15 @@ order: 3
 
 If you're here, it's because you couldn't find what you were looking for in the docs. Our apologies!
 
-There are 3 ways to ask for help:
+There are 4 ways to ask for help:
+
+## Check our Support Center
+
+Our [Support Center](https://support.circleci.com/hc/en-us) is home to many articles we have written in response to many of the common issues we see and questions we are asked. If we've seen it before, we'll have your answer here.
 
 ## Ask on Discuss
 
-Chances are you're not the first person to ask your question. That's why our first recommendation is to search our [community forums](https://discuss.circleci.com/).
+Chances are you're not the first person to ask your question. That's why our next recommendation is to search our [community forums](https://discuss.circleci.com/).
 
 If you can't find your question, post it yourself and one of our support engineers -- or another CircleCI user -- will provide some guidance.
 
