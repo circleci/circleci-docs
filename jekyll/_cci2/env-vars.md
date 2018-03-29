@@ -24,7 +24,7 @@ Environment variables are used according to a specific precedence order, as foll
 4. Environment variables set with the `environment` key for a container.
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#circleci-environment-variable-descriptions) section of this document.
+7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#circleci-built-in-environment-variables) section of this document.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
@@ -190,130 +190,128 @@ export param2="500"
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
 
-## CircleCI Environment Variable Descriptions
+## CircleCI Built-in Environment Variables
 
-CircleCI exports the environment variables in this section during each build, which are
-useful for more complex testing or deployment. Ideally, you will not have code which behaves differently in CI. But for the cases when it is necessary, CircleCI sets two environment variables which you can test:
+CircleCI uses Bash,
+which follows the POSIX naming convention for environment variables.
+Valid characters include: letters (uppercase and lowercase), digits, and the underscore.
+The first character of each environment variable must be a letter.
 
-`CIRCLECI`
+The following environment variables are exported in each build
+and can be used for more complex testing or deployment.
 
-true
+### General Environment Variables
 
 `CI`
-
-true
-
-CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Uppercase and lowercase letters, digits, and the underscore are allowed. With the added rule that the first character must be a letter.
-
-## Build Details
-
-CircleCI publishes the details of the currently running build in this list of variables:
-
-
-**CI**
 
 Represents whether the current environment is a CI environment.
 
 Has a value of `true` on our platform.
 
-**CIRCLECI**
+`CIRCLECI`
 
 Represents whether the current environment is a CircleCI environment.
 
 Has a value of `true` on our platform.
 
-**CIRCLE_BRANCH**
+`HOME`
+
+Your home directory.
+
+### Build-Specific Environment Variables
+
+`CIRCLE_BRANCH`
 
 The name of the Git branch currently being built.
 
-**CIRCLE_NODE_TOTAL**
+`CIRCLE_NODE_TOTAL`
 
 An integer representing the number of total build instances.
 
-**CIRCLE_NODE_INDEX**
+`CIRCLE_NODE_INDEX`
 
-An integer between 0 and (CIRCLECI_NODE_TOTAL - 1) representing a specific build instance.
+An integer between 0 and (`CIRCLECI_NODE_TOTAL` - 1) representing a specific build instance.
 
-**CIRCLE_BUILD_NUM**
+`CIRCLE_BUILD_NUM`
 
 The CircleCI build number.
 
-**CIRCLE_PREVIOUS_BUILD_NUM**
+`CIRCLE_PREVIOUS_BUILD_NUM`
 
 The number of previous builds in the branch.
 
-**CIRCLE_BUILD_URL**
+`CIRCLE_BUILD_URL`
 
 The URL for the current build.
 
-**CIRCLE_SHA1**
+`CIRCLE_SHA1`
 
 The SHA1 hash for the current build’s last commit.
 
-**CIRCLE_USERNAME**
+`CIRCLE_USERNAME`
 
 The GitHub/Bitbucket username of the user who triggered the build.
 
-**CIRCLE_JOB**
+`CIRCLE_JOB`
 
 The current job’s name.
 
-**CIRCLE_WORKING_DIRECTORY**
+`CIRCLE_WORKING_DIRECTORY`
 
 The `working_directory` for the current job.
 
-**CIRCLE_COMPARE_URL**
+`CIRCLE_COMPARE_URL`
 
 The GitHub/Bitbucket compare URL between commits in the build.
 
-**CIRCLE_REPOSITORY_URL**
+`CIRCLE_REPOSITORY_URL`
 
 The GitHub/Bitbucket repository URL.
 
-**CIRCLE_PR_NUMBER**
+`CIRCLE_PR_NUMBER`
 
 The GitHub/Bitbucket pull request number.
 
-**CIRCLE_PR_REPONAME**
+`CIRCLE_PR_REPONAME`
 
 The GitHub/Bitbucket repository name in which the pull request was made.
 
-**CIRCLE_PR_USERNAME**
+`CIRCLE_PR_USERNAME`
 
 The GitHub/Bitbucket username of the user who created the pull request.
 
-**CIRCLE_PULL_REQUESTS**
+`CIRCLE_PULL_REQUESTS`
 
 Comma-separated list of URLs of pull requests this build is a part of.
 
-**CIRCLE_PULL_REQUEST**
+`CIRCLE_PULL_REQUEST`
 
 If this build is part of only one pull request, its URL will be populated here. If there was more than one pull request, it will contain one of the pull request URLs (picked randomly).
 
-**CI_PULL_REQUESTS**
+`CI_PULL_REQUESTS`
 
-Same as **CIRCLE_PULL_REQUESTS**, only kept for the backward compatibility with 1.0.
+Same as `CIRCLE_PULL_REQUESTS`, only kept for the backward compatibility with 1.0.
 
-**CI_PULL_REQUEST**
+`CI_PULL_REQUEST`
 
-Same as **CIRCLE_PULL_REQUEST**, only kept for the backward compatibility with 1.0.
+Same as `CIRCLE_PULL_REQUEST`, only kept for the backward compatibility with 1.0.
 
-**CIRCLE_TAG**
+`CIRCLE_TAG`
 
 The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running for a tag. See the [CircleCI 1.0 documentation of tags]( {{ site.baseurl }}/1.0/configuration/#tags) for more information.
 
-**CIRCLE_PROJECT_USERNAME**
+`CIRCLE_PROJECT_USERNAME`
 
 The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123.
 
-**CIRCLE_PROJECT_REPONAME**
+`CIRCLE_PROJECT_REPONAME`
 
 The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123.
 
-**CIRCLE_INTERNAL_TASK_DATA**
+`CIRCLE_INTERNAL_TASK_DATA`
 
 The directory where test timing data can be found.
 
-**CIRCLE_STAGE**
+`CIRCLE_STAGE`
 
 The job being executed. The default 2.0 job is `build` without using Workflows.
