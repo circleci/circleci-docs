@@ -63,17 +63,7 @@ jobs:
 
 ### Interpolating Environment Variables 
 
-If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in Bash.  CircleCI 2.0 automatically sets a `$BASH_ENV` variable to a random name in `/tmp`, and will source this file for each step.
-
-For example, if your configuration modifies $PATH, add the path to your `.bashrc` file and load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
-
-```
-    steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
-      - run: some_program_inside_bin
-```
-
-**Note:** CircleCI 2.0 does not support interpolation of environment variables.
+CircleCI does not support interpolation of environment variables.
 All defined values are treated literally.
 
 One workaround is to export the required variable within a command.
