@@ -39,9 +39,8 @@ This will decode the secret into a file named `gcloud-service-key.json`.
 
 ### Authenticate the `gcloud` Tool
 
-Update `gcloud`, authenticate, and set the project's active configuration.
+Authenticate `gcloud` and set the project's active configuration.
 
-    sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
     sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
     sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
 
