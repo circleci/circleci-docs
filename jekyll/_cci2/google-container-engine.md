@@ -101,11 +101,18 @@ Finally, as part of your deployment commands,
 update `gcloud`, authenticate, and set appropriate defaults for your project.
 
 ```bash
-gcloud --quiet components update
+gcloud --quiet components update  # remove if using the google/cloud-sdk image
 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
 gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
+
+**Note:**
+If you are using Google's official Docker image,
+the [built-in updater is disabled](https://hub.docker.com/r/google/cloud-sdk/~/dockerfile/),
+and `gcloud --quiet components update` will fail.
+To use the latest components,
+use the `google/cloud-sdk:latest` image.
 
 Refer to the [Google Cloud](https://circleci.com/docs/2.0/deployment-integrations/#google-cloud) deploy example for further steps.
