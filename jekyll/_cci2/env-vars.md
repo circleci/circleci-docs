@@ -73,6 +73,18 @@ For example, if your configuration modifies $PATH, add the path to your `.bashrc
       - run: some_program_inside_bin
 ```
 
+**Note:** CircleCI 2.0 does not support interpolation of environment variables.
+All defined values are treated literally.
+
+One workaround is to export the required variable within a command.
+
+```yaml
+- run:
+    command: |
+      export PATH=/go/bin:$PATH
+      go-get ...
+```
+
 ### Declaring Environment Variables for a Job
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
