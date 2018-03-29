@@ -74,13 +74,14 @@ jobs:
       - image: gcr.io/project/image-name
         auth:
           username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # encoded service account you created
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created
 ```
 
 ### Add a Job Step to Decode Credentials
 
 To authenticate the `gcloud` tool,
-add a job step to decode the `GCLOUD_SERVICE_KEY` environment variable:
+add a job step
+to transfer the contents of `GCLOUD_SERVICE_KEY` into a local file.
 
 ```yaml
 version: 2
@@ -90,14 +91,14 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
-        name: Decode and Store Service Account
-        command: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+        name: Store Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 ```
 
 ### Configure `gcloud`
 
 Finally, as part of your deployment commands,
-update `gcloud`, authenticate, and set appropriate defaults for your project:
+update `gcloud`, authenticate, and set appropriate defaults for your project.
 
 ```bash
 gcloud --quiet components update
