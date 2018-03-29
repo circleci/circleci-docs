@@ -102,13 +102,16 @@ If you are brand new to MongoDB, see the [MongoDB on the AWS Cloud](https://docs
 
 It is best practice to set up PostgreSQL 9.5 or later using Amazon Relational Database Service (Amazon RDS) with multi Availability Zone (multi-AZ) mode for automated backups and failover. Refer to the [Amazon RDS Multi-AZ Deployments](https://aws.amazon.com/rds/details/multi-az/) documentation for details.
 
-Five databases are required for 2.0 services:
+Eight databases are required for 2.0 services:
 
-* `vms`
-* `conductor_production` with extension `uuid-ossp` enabled
-* `contexts_service_production` with extension `uuid-ossp` enabled
+* `circle`, with extensions `pgcrypto` and `uuid-ossp` enabled
+* `conductor_production`, with extension `uuid-ossp` enabled
+* `contexts_service_production`, with extension `uuid-ossp` enabled
 * `cron_service_production`
-* `circle` with extensions `pgcrypto` and `uuid-ossp` enabled
+* `domain`
+* `federations`
+* `permissions`
+* `vms`
 
 ## Exporting Existing Databases
 
