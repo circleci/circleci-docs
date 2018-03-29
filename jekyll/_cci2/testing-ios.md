@@ -531,7 +531,7 @@ projects. Here are the most frequent of those:
 
 * **Inconsistent timeouts during test runs.**
 If your UI tests are timing out,
-try running them before the rest of your tests.
+try running them [before the rest of your tests](https://stackoverflow.com/questions/44361446/ios-uitests-failed-idetestoperationsobservererrordomain-code-13/48299184#48299184).
 You can also try using the raw `xcodebuild` command or the `xctool` command.
 Some issues are only present in one of these tools.
 
