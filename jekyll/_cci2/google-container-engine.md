@@ -91,7 +91,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
-        name: Decode and Store Service Account
+        name: Store Service Account
         command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 ```
 
