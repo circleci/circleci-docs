@@ -34,7 +34,6 @@ Refer to the Sample Apps to get help with building the language and framework in
 
 Language in which your App is written | Framework | GitHub Repo Name
  ---------|-----------|-----------------
- [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
