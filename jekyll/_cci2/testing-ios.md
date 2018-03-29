@@ -529,10 +529,11 @@ projects. Here are the most frequent of those:
   install a newer version Ruby in the container by following [this
   guide](https://discuss.circleci.com/t/installing-a-newer-ruby-version-on-ios-os-x-containers/2466).
 
-* **Inconsistent timeouts during test runs.** If you are seeing your UI
-  tests time out in some of the builds, please try using both the raw
-  `xcodebuild` command and the `xctool` command.
-  Sometimes the issue would only be present with one of these tools but not the other.
+* **Inconsistent timeouts during test runs.**
+If your UI tests are timing out,
+try running them [before the rest of your tests](https://stackoverflow.com/questions/44361446/ios-uitests-failed-idetestoperationsobservererrordomain-code-13/48299184#48299184).
+You can also try using the raw `xcodebuild` command or the `xctool` command.
+Some issues are only present in one of these tools.
 
 * **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
 
