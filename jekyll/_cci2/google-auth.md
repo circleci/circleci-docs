@@ -29,13 +29,14 @@ Go to Google's [Getting Started with Authentication][] article and follow the in
 5. Paste the JSON file from Step 1 into the **Value** field.
 6. Click the **Add Variable** button.
 
-### Decode and Store Service Account
+### Store Service Account
 
-To authenticate the `gcloud` tool, you will first need to decode the environment variable you created above. You could do that by adding the following command to `config.yml`:
+To authenticate the `gcloud` tool,
+store the contents of the environment variable in another file.
+To do this,
+add the following command to `.circleci/config.yml`.
 
-    echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
-
-This will decode the secret into a file named `gcloud-service-key.json`.
+    echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 
 ### Authenticate the `gcloud` Tool
 
