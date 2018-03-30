@@ -134,7 +134,14 @@ example.
 
 ### Interacting With the Browser Over VNC
 
-VNC allows you to view and interact with the browser that is running your tests. This will only work if you're using a driver that runs a real browser. You will be able to interact with a browser that Selenium controls, but phantomjs is headless &mdash; there is nothing to interact with.
+VNC allows you to view and interact with the browser
+that is running your tests.
+This only works if you are using a driver
+that runs a real browser.
+You can interact with a browser
+that Selenium controls,
+but PhantomJS is headless,
+so there is nothing to interact with.
 
 1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/). [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
