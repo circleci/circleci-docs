@@ -17,7 +17,9 @@ This document describes how to enable Docker Layer Caching (DLC) which is useful
 
 ## Video Overview of Docker Layer Caching
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ## Docker Layer Caching in Remote Docker
 Consider enabling DLC to significantly reduce image build times by reusing the unchanged layers of the application image built during your job.

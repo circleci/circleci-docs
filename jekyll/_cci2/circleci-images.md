@@ -44,7 +44,7 @@ CircleCI maintains service images for the following services:
 - [PostgreSQL](#postgresql)
 
 ## How to Get Started with Pre-Built Docker Images Video Tutorial
-<div class="screen">
+<div class="video-wrapper">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
 

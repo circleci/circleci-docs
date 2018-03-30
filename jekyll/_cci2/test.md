@@ -3,8 +3,9 @@ layout: classic-docs
 title: "Test"
 description: "CircleCI 2.0 test automation setup"
 ---
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HB5DehCufG0" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HB5DehCufG0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 Refer to the following documents for help with setting up your tests.
 
