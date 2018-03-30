@@ -143,29 +143,65 @@ that Selenium controls,
 but PhantomJS is headless,
 so there is nothing to interact with.
 
-1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/). [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
+1. Install a VNC viewer.
+If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
+[RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-2. Then [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container. When you connect to the machine, add the -L flag and forward the remote port 5901 to the local port 5902:
+2. Open a Terminal window,
+[start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container
+and forward the remote port 5901 to the local port 5902.
+```bash
+ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
-daniel@mymac$ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
+3. Install the `vnc4server` and `metacity` packages.
+You can use `metacity`
+to move the browser around
+and return to your Terminal window.
+```bash
+sudo apt install vnc4server metacity
 ```
-3. You should be connected to the CircleCI container. Now start the VNC server:
-```
+4. After connecting to the CircleCI container, start the VNC server.
+```bash
 ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24
 ```
-4. Enter the password `password` when it prompts you. Your connection is secured with SSH, so there is no need for a strong password. You do need to enter a password to start the VNC server.
+5. Since your connection is secured with SSH,
+there is no need for a strong password.
+However, you still need _a_ password,
+so enter `password` at the prompt.
 
-5. Start your VNC viewer and connect to `localhost:5902`. Enter the password when it prompts you. You should see a display containing a terminal window. You can ignore any warnings about an insecure or unencrypted connection. Your connection is secured through the SSH tunnel.
+6. Start your VNC viewer
+and connect to `localhost:5902`.
+Enter your `password` at the prompt.
 
-6. Next, be sure to run:
-```
+7. You should see a display
+containing a terminal window.
+Since your connection is secured through the SSH tunnel,
+ignore any warnings about an insecure or unencrypted connection.
+
+8. To allow windows to open in the VNC server,
+set the `DISPLAY` variable.
+Without this command,
+windows would open in the default (headless) X server.
+```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-to enable windows to open in the VNC server, rather than the default headless X server.
+9. Start `metacity` in the background.
+```bash
+ubuntu@box159:~$ metacity &
+```
+10. Start `firefox` in the background.
+```bash
+ubuntu@box159:~$ firefox &
+```
 
-Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
+Now, you can run integration tests from the command line
+and watch the browser for unexpected behavior.
+You can even interact with the browser
+as if the tests were running on your local machine.
 
-For information about Headless Chrome, refer to the [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/) CircleCI blog post and the [Related Discuss](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112) thread.
+For more information about working with Headless Chrome,
+see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
+and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112).
 
 ### Sharing CircleCI's X Server
 
