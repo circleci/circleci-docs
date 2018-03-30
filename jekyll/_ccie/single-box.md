@@ -113,7 +113,9 @@ Agree to the license agreement and save. The application start up process begins
 
 <p style="font-size: 20px; text-align: center">Following is a short video walkthrough of the entire install process on AWS:</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/m4plGZmZkj4" frameborder="0" allowfullscreen style="display: block; margin: 20px auto;"></iframe>
+</div>
 
 
 ## Installation in a Data Center or Cloud Provider Other Than AWS  

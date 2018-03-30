@@ -10,8 +10,9 @@ Welcome to CircleCI 2.0 documentation! Included here are tutorials, samples, and
 - **Server Administrators:** Instructions for installing and maintaining CircleCI on your local server or private cloud.
 
 This page describes how to run your first green build. 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KhjwnTD4oec" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KhjwnTD4oec" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Prerequisites for Running Your First Build
 

@@ -4,8 +4,9 @@ title: "Tutorials & 2.0 Sample Apps"
 description: "Tutorials and 2.0 Sample Apps with Guides"
 ---
 Watch the video to learn about how to use CircleCI convenience images.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Hello World and Sample Files
 

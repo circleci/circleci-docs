@@ -33,7 +33,9 @@ The following sections provide a walkthrough of how to create a custom image man
 
 Watch the following video for a detailed tutorial of customizing Docker images.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Prerequisites
 

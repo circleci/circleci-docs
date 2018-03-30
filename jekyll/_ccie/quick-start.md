@@ -33,7 +33,9 @@ Now that your project is set up, every time you commit to your repo, CircleCI wi
 If the build steps are not appropriate for your project, it is possible to add a `circle.yml` configuration file as described below. Add more projects at any time by clicking the Projects icon on the left sidebar in the CircleCI Enterprise app.
 Following is a video walkthrough of the process to add a `circle.yml` file to your project:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LwEdbdSqcZI" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/LwEdbdSqcZI" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ### Overriding or Adding Commands
 
@@ -52,7 +54,9 @@ If you are migrating to CircleCI from Jenkins, you may also find the
 <a href="https://circleci.com/docs/1.0/migrating-from-jenkins/">Migrating from Jenkins to CircleCI</a> helpful.  Here's another video that
 covers the basics of adding a `circle.yml` file to your project repository
 
+<div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/X6TOyHL_RXs" frameborder="0" allowfullscreen></iframe>
+</div>
 
 
 ### Debugging

@@ -37,7 +37,9 @@ Set up in minutes out of the box, or fully customize to suit your needs.*
 
 The following video describes continuous integration, provides a demo of the application, and includes a discussion of continuous deployment.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YGYoYSR-d98" frameborder="0" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/YGYoYSR-d98" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Summary
 

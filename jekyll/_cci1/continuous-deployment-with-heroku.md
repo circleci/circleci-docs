@@ -12,13 +12,13 @@ pipeline with CircleCI and Heroku:
 
 ### Part 1: Green builds and red builds
 
-<div class="embed-responsive embed-responsive-16by9">
+<div class="video-wrapper">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/Hfs_1yuWDf4?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
 </div>
 
 ### Part 2: Multiple Environments
 
-<div class="embed-responsive embed-responsive-16by9">
+<div class="video-wrapper">
   <iframe class="embed-responsive-item" src='//www.youtube.com/embed/YtvKVfjKGWw?rel=0' width='600' height='400' frameborder='0' allowfullscreen></iframe>
 </div>
 
