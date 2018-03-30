@@ -209,13 +209,13 @@ If you find yourself setting up a VNC server often, then you might want to autom
 
 1. Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
 ```
-    steps:
-      - run:
-          name: Download and start X
-          command: |
-            sudo apt-get install -y x11vnc
-            x11vnc -forever -nopw:
-          background: true
+steps:
+  - run:
+      name: Download and start X
+      command: |
+        sudo apt-get install -y x11vnc
+        x11vnc -forever -nopw:
+      background: true
 ```
 2. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```
