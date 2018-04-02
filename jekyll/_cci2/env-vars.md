@@ -30,7 +30,7 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ## Adding Project-Level Environment Variables
 
-To add keys or secret environment variables to your private project,
+To add environment variables to your project,
 use the Environment Variables page of the Build > Project > Settings in the CircleCI application.
 The value of the variables are neither readable nor editable in the app
 after they are set.
