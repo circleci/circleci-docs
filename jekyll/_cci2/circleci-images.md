@@ -111,7 +111,7 @@ CircleCI maintains variants of convenience images. These can be created by addin
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Latest Tags:** <small>(view all available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
+**Latest Tags:** <small>(view more available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
 
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
