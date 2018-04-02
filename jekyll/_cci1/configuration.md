@@ -641,7 +641,7 @@ call for the same build, except that it is wrapped in a "payload" key:
 
 ```
 
-There is also an experimental setting you can configure to specify black- or white-listing of branches
+There is also an experimental setting you can configure to specify blocklists or safelists of branches
 you want to get chat channel build notifications for in the
 [per branch build notification](#per-branch-notifications) section.
 
@@ -651,7 +651,7 @@ CircleCI by default tests every push to _any_ branch in the repository.
 Testing all branches maintains quality in all branches and adds
 confidence when the branches are to be merged with default branch.
 
-You may, however, blacklist branches from being built in CircleCI.  This example
+You may, however, blocklist branches from being built in CircleCI.  This example
 excludes `gh-pages` from being built in circle:
 
 ```
@@ -662,7 +662,7 @@ general:
       - /release\/.*/ # or ignore regexes
 ```
 
-You may also whitelist branches, so only whitelisted branches will trigger a build.
+You may also safelist branches, so only safelisted branches will trigger a build.
 This example limits builds in CircleCI to `master` and `feature-.*` branches:
 
 ```
@@ -673,7 +673,7 @@ general:
       - /feature-.*/ # or regexes
 ```
 
-We discourage branch whitelisting, it means work-in-progress
+We discourage branch safelisting, it means work-in-progress
 code can go a long time without being integrated and tested and we've found
 it leads to problems when that untested code gets merged.
 
@@ -726,10 +726,10 @@ options we are considering adding. These settings are liable to change without n
 
 <h3 id="per-branch-notifications">Per branch build notification in chat channels</h3>
 
-The only experimental setting available at this time is a black- and white-list mechanism
+The only experimental setting available at this time is a blocklist and safelist mechanism
 for chat channel build notifications based on the branch name.
 
-The behavior of the "ignore" and "only" settings is the same as the black- and white-listing
+The behavior of the "ignore" and "only" settings is the same as the blocklist and safelisting
 of branches to build in the [Branches section](#branches).
 Each setting takes a list of either strings or regexes; regexes are
 specified with '/' around the value.
@@ -762,7 +762,7 @@ experimental:
 ```
 
 You can combine them, in which case only branch names which do match
-the whitelist *and* do not match the blacklist get notifications. So for:
+the whitelist *and* do not match the blocklist get notifications. So for:
 
 ```
 experimental:
