@@ -36,9 +36,10 @@ by clicking the gear icon next to your project in the CircleCI application.
 2. In the **Build Settings** section,
 click on **Environment Variables**.
 
-3. Choose whether to
-import variables from another project (**Import Variable(s)**)
-or add new variables (**Add Variable**).
+3. Import variables from another project
+by clicking the **Import Variable(s)** button.
+Add new variables
+by clicking the **Add Variable** button.
 
 Once set,
 environment variables are hidden and uneditable in the application.
