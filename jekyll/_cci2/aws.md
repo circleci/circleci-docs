@@ -47,7 +47,7 @@ The following additional settings are required to support using private subnets 
 Have available the following information and policies before starting the Preview Release installation:
 
 * If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
-* Plan to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services.
+* Plan to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services as well as Builders instances.
 * AWS instances must have outbound access to pull Docker containers and to verify your license.
 * In order to provision required AWS entities with Terraform you need an IAM User with following permissions:
 ```
