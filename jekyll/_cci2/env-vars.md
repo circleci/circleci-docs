@@ -30,7 +30,26 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ## Adding Project-Level Environment Variables
 
-To add keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. 
+1. In the CircleCI application,
+go to your project's settings
+by clicking the gear icon next to your project.
+
+2. In the **Build Settings** section,
+click on **Environment Variables**.
+
+3. Import variables from another project
+by clicking the **Import Variable(s)** button.
+Add new variables
+by clicking the **Add Variable** button.
+
+4. Use your new environment variables in your `.circleci/config.yml` file.
+For an example,
+see the [Heroku deploy walkthrough]({{ site.baseurl }}/2.0/deployment-integrations/#heroku).
+
+Once created,
+environment variables are hidden and uneditable in the application.
+Changing an environment variable is only possible
+by deleting and recreating it.
 
 ## Adding Global Environment Variables
 
