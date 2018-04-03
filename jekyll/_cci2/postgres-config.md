@@ -9,7 +9,7 @@ order: 35
 
 *[Build Environments]({{ site.baseurl }}/2.0/build/) > Configuring Databases*
 
-This document describes database configuration using a PostgreSQL and Rails example in the following sections:
+This document describes database configuration using PostgreSQL/Rails and MySQL/Ruby examples in the following sections:
 
 * TOC
 {:toc}
