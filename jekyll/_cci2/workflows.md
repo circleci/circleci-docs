@@ -268,7 +268,7 @@ CircleCI treats tag and branch filters differently when deciding whether a job s
 
 Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. 
 
-Following is a very basic example for building any branch and using tags.
+Following is a very basic example for building any branch and using tags. The regular expression is a full match rather than a partial match. For example, `only: /^config-test.*/` matches any tag with the prefix `config-test-111` and `only: /^config-test/` matches all tags that match `config-test`. 
 
 ```
 workflows:
