@@ -30,8 +30,9 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ## Adding Project-Level Environment Variables
 
-1. Go to your project's settings
-by clicking the gear icon next to your project in the CircleCI application.
+1. In the CircleCI application,
+go to your project's settings
+by clicking the gear icon next to your project.
 
 2. In the **Build Settings** section,
 click on **Environment Variables**.
