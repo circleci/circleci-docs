@@ -41,10 +41,9 @@ import variables from another project (**Import Variable(s)**)
 or add new variables (**Add Variable**).
 
 Once set,
-environment variables will be hidden and uneditable in the application.
-To change the value of an environment variable,
-delete the current variable
-and add it again with the new value.
+environment variables are hidden and uneditable in the application.
+Changing an environment variable is only possible
+by deleting and recreating it.
 
 ## Adding Global Environment Variables
 
