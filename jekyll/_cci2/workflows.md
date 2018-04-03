@@ -364,8 +364,7 @@ workflows:
 
 ### Regular Expression Support
 
-CircleCI branch and tag filters support the Java variant of regex pattern matching, see the [java.util.regex documentation]
-(https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) for details. 
+CircleCI branch and tag filters support the Java variant of regex pattern matching, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) for details. 
 
 ## Using Workspaces to Share Data Among Jobs
 
