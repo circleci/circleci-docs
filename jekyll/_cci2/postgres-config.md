@@ -136,6 +136,34 @@ jobs:
 
 This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
+The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+
+```version: 2
+jobs:
+  build:
+    working_directory: ~/test-circleci
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: tkuchiki/delayed-mysql
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: circleci
+    steps:
+      - checkout
+      - run:
+          name: Bundle install
+          command: bundle install
+      - run:
+          name: Wait for DB
+          # preinstalled in circleci/* docker image
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: MySQL version
+          command: bundle exec ruby mysql_version.rb
+
+```
+
 ## Optional Customization
 
 This section describes additional optional configuration for further customizing your build, login password, and avoiding race conditions.
