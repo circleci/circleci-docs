@@ -62,6 +62,16 @@ Fan-in / Fan-out | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-
 Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)
 {: class="table table-striped"}
 
+## CircleCI Public Repos
+
+GitHub Repo | config.yml link
+------|-----------
+circleci-docs | [.circleci/config.yml](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)
+circleci frontend | [.circleci/config.yml](https://github.com/circleci/frontend/blob/master/.circleci/config.yml)
+circleci-images | [.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)
+circleci image-builder | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)
+{: class="table table-striped"}
+
 [Android]: {{ site.baseurl }}/2.0/language-android/
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
