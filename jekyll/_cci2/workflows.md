@@ -268,7 +268,8 @@ CircleCI treats tag and branch filters differently when deciding whether a job s
 
 Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. 
 
-Following is a very basic example for building any branch and using tags.
+Following is a very basic example for building any branch and using tags. The regular expression is a full match rather than a partial match. For example, `only: /^config-test.*/` matches any tag with the prefix `config-test-111` and `only: /^config-test/` matches all tags that match `config-test`.  To match the common use case of a semantic versioning, for example, use `/version-2\.1\.[3-7]/` to match `version-2.1.`(3 through 7).
+
 
 ```
 workflows:
@@ -360,6 +361,10 @@ workflows:
 ```
 
 **Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. This means that if you push a lot of tags we may not receive all of them.
+
+### Regular Expression Support
+
+CircleCI branch and tag filters support the Java variant of regex pattern matching, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) for details. 
 
 ## Using Workspaces to Share Data Among Jobs
 
