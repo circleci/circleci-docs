@@ -35,8 +35,9 @@ go to your project's settings
 by clicking the gear icon next to your project in the CircleCI application.
 In the **Build Settings** section,
 click on **Environment Variables**.
-It is possible to add individual variables
-or to import variables from another project.
+To add environment variables,
+import them from another project
+or create them individually.
 The value of the variables are neither readable nor editable in the app
 after they are set.
 To change the value of an environment variable,
