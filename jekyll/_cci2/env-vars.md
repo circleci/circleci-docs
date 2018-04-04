@@ -85,13 +85,14 @@ jobs:
 CircleCI does not support interpolation of environment variables.
 All defined values are treated literally.
 
-One workaround is to export the required variable within a command.
+If you have bash installed,
+you can export the required variable within a command.
 
 ```yaml
 - run:
+    name: Export Env Var
     command: |
-      export PATH=/go/bin:$PATH
-      go-get ...
+      export BAR=foo >> $BASH_ENV
 ```
 
 ### Declaring Environment Variables for a Job
