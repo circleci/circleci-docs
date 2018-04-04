@@ -86,18 +86,16 @@ CircleCI does not support interpolation
 when defining configuration variables like `working_directory` or `images`.
 All defined values are treated literally.
 
-If you have bash installed,
-you can export the required variable within a command.
+However, it is possible to interpolate a variable within a command
+by setting it for the current shell.
 
 ```yaml
 version: 2
 jobs:
   build:
     steps:
-      - run: echo 'export BAR=foo' >> $BASH_ENV
+      - run: echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
 ```
-
-Otherwise, interpolated environment variables inside shell commands resolve normally.
 
 ### Declaring Environment Variables for a Job
 
