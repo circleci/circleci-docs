@@ -104,9 +104,9 @@ To install the Services machine, perform the following steps:
 
 4. Go to the public IP of the host on port 8800 using HTTPS.
 
-5. Enter your license?
+5. Enter your license.
 
-6. Complete the Storage section?
+6. Complete the Storage section.
 
 To install the Nomad Clients, perform the following steps:
 
