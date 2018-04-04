@@ -145,7 +145,7 @@ you can export the required variable within a command.
 - run:
     name: Export Env Var
     command: |
-      export BAR=foo >> $BASH_ENV
+      echo 'export BAR=foo' >> $BASH_ENV
 ```
 
 For more information,
