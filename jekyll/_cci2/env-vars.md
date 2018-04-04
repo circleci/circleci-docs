@@ -82,8 +82,11 @@ jobs:
 
 ### Interpolating Environment Variables 
 
-CircleCI does not support interpolation in configuration variables like `working_directory` or `images`.
+CircleCI does not support interpolation
+when defining configuration variables like `working_directory` or `images`.
 All defined values are treated literally.
+
+Otherwise, interpolated environment variables inside shell commands resolve normally.
 
 If you have bash installed,
 you can export the required variable within a command.
