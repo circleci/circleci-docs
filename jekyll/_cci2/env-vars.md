@@ -97,6 +97,12 @@ jobs:
       - run: echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
 ```
 
+**Note**:
+Depending on your shell,
+the actual command may differ from the above example.
+For more information,
+refer to your shell's documentation.
+
 ### Declaring Environment Variables for a Job
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
