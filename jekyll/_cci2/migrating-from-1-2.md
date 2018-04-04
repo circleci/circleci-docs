@@ -148,6 +148,7 @@ version: 2
 jobs:
   build:
     steps:
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
       - run: echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
 ```
 
