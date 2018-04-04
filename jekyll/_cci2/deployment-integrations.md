@@ -381,20 +381,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 2.  Go to your [project settings]( {{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git), and set the `NPM_TOKEN` variable to the
     obtained authToken.
 
-3.  Configure CircleCI to add the authToken to `~/.npmrc`:
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-```
-
-4.  Configure a CircleCI job to run `npm publish` on tagged commits:
+3.  Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
 
 ```yaml
 version: 2
@@ -404,6 +391,7 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm publish
   
 workflows:
@@ -415,7 +403,7 @@ workflows:
             only: /v[0-9]+(\.[0-9]+)*/
  ```
 
-5.  When you want to publish a new version to npm, run `npm version` to create a new version:
+4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
     ```
     npm version 10.0.1
@@ -427,4 +415,4 @@ workflows:
     ```
     git push --follow-tags
     ``` 
-6.  If tests passed, CircleCI will publish the package to npm automatically.
+5.  If tests passed, CircleCI will publish the package to npm automatically.
