@@ -134,7 +134,8 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-**Note:**
+### Interpolating Environment Variables
+
 CircleCI does not support interpolation
 when defining configuration variables like `working_directory` or `images`.
 All defined values are treated literally.
@@ -150,11 +151,11 @@ jobs:
       - run: echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
 ```
 
-**Note**:
 Depending on your shell,
-the actual command may differ from the above example.
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
 For more information,
-refer to your shell's documentation.
+refer to your shell's documentation on setting environment variables.
 
 For more information,
 see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).

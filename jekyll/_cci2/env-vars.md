@@ -99,9 +99,10 @@ jobs:
 
 **Note**:
 Depending on your shell,
-the actual command may differ from the above example.
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
 For more information,
-refer to your shell's documentation.
+refer to your shell's documentation on setting environment variables.
 
 ### Declaring Environment Variables for a Job
 
