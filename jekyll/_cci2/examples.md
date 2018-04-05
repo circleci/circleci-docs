@@ -36,4 +36,20 @@ Build and test on multiple platforms with tagged releases | **Crystal** is a pro
 Tagged and scheduled workflow jobs | Node.js idiomatic client for **Cloud Pub/Sub**. | [nodejs-pubsub/.circleci/config.yml](https://github.com/googleapis/nodejs-pubsub/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
+Example Description | Project | config.yml link
+------|-----------|------------
+Java build and publish with sbt | **Scio** is a Scala API for Apache Beam and Google Cloud Dataflow inspired by Apache Spark and Scalding. | [scio/.circleci/config.yml](https://github.com/spotify/scio/blob/master/.circleci/config.yml)
+Build and test with npm and yarn, deploy to S3 | The official **CLARK Platform** client | [clark-client/.circleci/config.yml](https://github.com/Cyber4All/clark-client/blob/master/.circleci/config.yml)
+Python build with Postgres database, Selenium tests, and CodeClimate | **CALC** (formerly known as "Hourglass"), which stands for Contracts Awarded Labor Category, is a tool to help contracting personnel estimate their per-hour labor costs for a contract, based on historical pricing information. | [calc/.circleci/config.yml](https://github.com/18F/calc/blob/develop/.circleci/config.yml)
+Python build with apt for parallel job run with webhooks notification | **SunPy** is an open-source Python library for solar physics data analysis. | [sunpy/.circleci/config.yml](https://github.com/sunpy/sunpy/blob/master/.circleci/config.yml)
+Javascript Node frontend build with junit and end-to-end Webdriver screeshot tests | This is the frontend code for **cBioPortal** using React, MobX and TypeScript. | [cbioportal-frontend/.circleci/config.yml](https://github.com/cBioPortal/cbioportal-frontend/blob/master/.circleci/config.yml)
+Golang build with junit and kubernetes tests for prod and master job workflow | The **Azure Container Service Engine** (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. | [acs-engine/.circleci/config.yml](https://github.com/Azure/acs-engine/blob/master/.circleci/config.yml)
+Build and test with custom container image for ARM and x64 with xvfb and mocha | The **Electron** framework lets you write cross-platform desktop applications using JavaScript, HTML and CSS. It is based on Node.js and Chromium |[electron/.circleci/config.yml](https://github.com/electron/electron/blob/master/.circleci/config.yml)
+Build, test, and upload run for macOS and Linux | **Conda** is a platform- and language-independent package manager that sports easy distribution, installation and version management of software. | [bioconda-recipes/.circleci/config.yml](https://github.com/bioconda/bioconda-recipes/blob/master/.circleci/config.yml)
+{: class="table table-striped"}
 
+Example Description | Project | config.yml link
+------|-----------|------------
+A landing page for developers to self-service their way onto your Pivotal Cloud Foundry (PCF) deployment(s).
+
+{: class="table table-striped"}
