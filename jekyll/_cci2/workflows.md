@@ -168,12 +168,11 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-Workflows that are resource-intensive
-or that generate reports
-may be run on a schedule
-rather than on every commit.
-This feature is configured
-by adding a scheduled trigger to the configuration of the workflow.
+It can be inefficient and expensive
+to run a workflow for _every_ commit for _every_ branch.
+Alternatively,
+you can schedule a workflow
+to run at a certain time for specific branches.
 
 Configure a workflow
 to run on a set schedule
