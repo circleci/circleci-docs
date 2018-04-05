@@ -10,7 +10,6 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 Example Name | Description | Link
 ----|----------|--------
 Sample `config.yml` Files | Four sample `config.yml` files using parallel Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. | <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a>
-{: class="table table-striped"}
 Parallel | Parallel job run workflow configuration | [parallel-jobs/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)
 Sequential | Sequential job run workflow configuration | [sequential-branch-filter/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)
 Fan-in / Fan-out | Workflow configuration with sequenced jobs followed by parallel jobs chained to a final sequenced job | [fan-in-fan-out/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)
