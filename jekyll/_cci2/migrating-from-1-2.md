@@ -148,8 +148,12 @@ version: 2
 jobs:
   build:
     steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV  # updating PATH
-      - run: echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV  # runtime definition of env var
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
 ```
 
 Depending on your shell,
