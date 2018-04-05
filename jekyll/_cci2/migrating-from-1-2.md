@@ -134,17 +134,33 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-**Note:** CircleCI 2.0 does not support interpolation of environment variables.
+### Interpolating Environment Variables
+
+CircleCI does not support interpolation
+when defining configuration variables like `working_directory` or `images`.
 All defined values are treated literally.
 
-One workaround is to export the required variable within a command.
+However, it is possible to interpolate a variable within a command
+by setting it for the current shell.
 
 ```yaml
-- run:
-    command: |
-      export PATH=/go/bin:$PATH
-      go-get ...
+version: 2
+jobs:
+  build:
+    steps:
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
 ```
+
+Depending on your shell,
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
+For more information,
+refer to your shell's documentation on setting environment variables.
 
 For more information,
 see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
