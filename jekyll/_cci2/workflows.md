@@ -168,13 +168,33 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. 
+Workflows that are resource-intensive
+or that generate reports
+may be run on a schedule
+rather than on every commit.
+This feature is configured
+by adding a scheduled trigger to the configuration of the workflow.
 
-Configure a workflow to run on a set schedule by using the `triggers:` key with the `schedule` option. The `triggers` key is **only** added under your `workflow` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
+Configure a workflow
+to run on a set schedule
+by using the `triggers:` key with the `schedule` option.
+The `triggers` key is **only** added under your `workflow` key.
+This feature enables you
+to schedule a workflow run
+by using `cron` syntax
+to represent Coordinated Universal Time (UTC) for specified branches.
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
+In the example below,
+the `nightly` workflow is configured
+to run every day at 12:00am UTC.
+The `cron` key is specified using POSIX `crontab` syntax,
+see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics.
+The workflow will be run on the `master` and `beta` branches.
+The `commit` workflow has no scheduled trigger configured,
+so it will run on the push of every commit.
 
-**Note:** Step syntax (for example, `*/1`, `*/20`) is **not** supported.
+**Note:**
+Step syntax (for example, `*/1`, `*/20`) is **not** supported.
 
 ```
 workflows:
@@ -196,7 +216,8 @@ workflows:
       - coverage
 ```
 
-See the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) for a full example.
+For a full example,
+see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
 ## Using Contexts and Filtering in Your Workflows
 
