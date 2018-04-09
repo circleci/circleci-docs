@@ -110,16 +110,16 @@ jobs:
     docker:
       - image: ruby:2.3.1
         environment:
-          PG_HOST=localhost
-          PG_USER=ubuntu
-          RAILS_ENV=test
-          RACK_ENV=test
+          PG_HOST: localhost
+          PG_USER: ubuntu
+          RAILS_ENV: test
+          RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6
         environment:
-          POSTGRES_USER=ubuntu
-          POSTGRES_DB=db_name
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: db_name
     steps:
       - checkout
       - run:
