@@ -7,9 +7,9 @@ categories: [language-guides]
 order: 2
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Clojure*
+*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Clojure*
 
-This guide will help you get started with a Clojure application on CircleCI. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
 ## Overview
 
@@ -91,7 +91,7 @@ version: 2
 
 We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
 
-We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database, queue, etc, be sure to factor them in when you allocate memory for the main JVM heap.
+We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database or queue, for example, consider those containers when you allocate memory for the main JVM heap.
 
 Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case. 
 
@@ -135,9 +135,8 @@ Nice! You just set up CircleCI for a Clojure app.
 
 ## Detailed Examples
 
-This app illustrates the simplest possible setup for a Clojure web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
+This app illustrates the simplest possible setup for a Clojure web app. Real world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:
 
 * [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml), a site which configures disposable virtual machines for remote collaboration (uses PostgreSQL, continuously deployed to Heroku)
-* [Clojars](https://github.com/technomancy/clojars-web/blob/circleci/.circleci/config.yml), the community library repository for Clojure
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
