@@ -38,7 +38,7 @@ For iOS projects, it is possible to run your tests with Fastlane Scan as follows
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "9.2.0"
     steps:
       ...
       - run:
@@ -88,13 +88,13 @@ version: 2
 jobs:
   test:
     macos:
-      xcode: "9.0"
+      xcode: "9.2.0"
     steps:
       - checkout
       - run: fastlane scan
   deploy:
     macos:
-      xcode: "9.0"
+      xcode: "9.2.0"
     steps:
       - checkout
       - deploy:
