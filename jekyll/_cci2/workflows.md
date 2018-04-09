@@ -27,6 +27,10 @@ With workflows, you can:
 
 For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
+## Video: Configure Multiple Jobs with Workflows
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ### Limitations
 
 Projects run by using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. **Note:** builds without workflows require a `build` job.
@@ -171,6 +175,12 @@ Following is a screenshot of the Approval dialog box that appears when you click
 Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. 
 
 Configure a workflow to run on a set schedule by using the `triggers:` key with the `schedule` option. The `triggers` key is **only** added under your `workflow` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
+
+## Video: Schedule Builds to Test and Deploy Automatically
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+### Nightly Example
 
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
 
