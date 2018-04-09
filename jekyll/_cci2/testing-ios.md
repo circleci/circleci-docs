@@ -321,7 +321,7 @@ image:
 ### Creating a `config.yml` File
 The most flexible means to customize your build is to add a `.circleci/config.yml` file to your project,
 which allows you to run arbitrary bash commands
-at various points in the build process. See the [Writing Jobs With Steps]( {{ site.baseurl }}/2.0/configuration-reference/) document for
+at various points in the build process. See the [Configuration Reference]( {{ site.baseurl }}/2.0/configuration-reference/) document for
 a detailed discussion of the structure of the `config.yml` file. **Note:** A number of options in the document will not work for macOS builds.
 
 ### Installing Custom Packages
