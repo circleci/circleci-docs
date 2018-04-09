@@ -138,7 +138,8 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
 
-```version: 2
+```
+version: 2
 jobs:
   build:
     working_directory: ~/test-circleci
@@ -161,7 +162,6 @@ jobs:
       - run:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
-
 ```
 
 ## Optional Customization
