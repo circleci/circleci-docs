@@ -50,6 +50,8 @@ jobs:
 
 ```
 
+Refer to [the Xcode version section]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
+
 ## Code Signing and Certificates
 
 Refer to [the code signing doc]({{ site.baseurl }}/2.0/ios-codesigning/) for details.
