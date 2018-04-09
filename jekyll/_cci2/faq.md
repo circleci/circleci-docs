@@ -106,7 +106,7 @@ myUsername/couchdb:1.6.1
 
 ## Can I use the `latest` tag when specifying image versions?
 
-It is best practice not to use the `latest` tag for specifying image versions. For more context, refer to the [Avoid Mutable Tags]({{ site.baseurl }}/2.0/executor-types) section of Writing Jobs with Steps.
+It is best practice not to use the `latest` tag for specifying image versions. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document.
 
 ## How can I set the timezone in Docker images?
 
