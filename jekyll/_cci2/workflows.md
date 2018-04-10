@@ -188,6 +188,9 @@ a workflow is triggered on every `git push`.
 To trigger a workflow on a schedule,
 add the `triggers` key to the workflow
 and specify a `schedule`.
+A valid `schedule` requires
+a crontab entry
+and a list of applicable branches.
 
 ```yaml
 workflows:
