@@ -351,3 +351,7 @@ The directory where test timing data can be found.
 `CIRCLE_STAGE`
 
 The job being executed. The default 2.0 job is `build` without using Workflows.
+
+`CIRCLE_WORKFLOW_ID`
+
+A unique identifier for the current workflow instance that the build is running in. This identifier will be the same for every job that runs within this instance of the workflow.
