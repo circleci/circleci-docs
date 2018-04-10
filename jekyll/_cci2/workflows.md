@@ -172,13 +172,16 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 It can be inefficient and expensive
 to run a workflow for _every_ commit for _every_ branch.
 Instead,
 you can schedule a workflow
 to run at a certain time for specific branches.
+
+For a quick overview,
+watch the following video.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 A workflow's `schedule` is specified under the `triggers` key.
 The `triggers` key is **only** added under your `workflow` key.
