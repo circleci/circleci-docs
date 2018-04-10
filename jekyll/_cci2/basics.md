@@ -34,6 +34,7 @@ Learn to use the basic features of CircleCI.
 
 Document | Description
 ----|----------
+[Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) | Best practices for building open source projects.
 [Skipping a Build]({{ site.baseurl }}/2.0/skip-build/) | How to prevent CircleCI from automatically building changes.
 [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) | How to use environment variables in the CircleCI app and in the `config.yml` file.
 [Using Contexts]({{ site.baseurl }}/2.0/contexts/) | How to use Contexts to set global environment variables.
