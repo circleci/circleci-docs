@@ -38,10 +38,50 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Details of the configuration steps will be updated soon. Please see the `.circleci/config.yml` file in the demo project to get started.
+Following is the commented the `.circleci/config.yml` file in the demo project.
+
+{% raw %}
+version: 2 # use CircleCI 2.0
+
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker 
+      - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
+    working_directory: ~/laravel # directory where steps will run
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
+      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
+      - run: sudo docker-php-ext-install zip
+      - run: sudo composer self-update
+      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache: # special step to restore the dependency cache if `package.json` does not change
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: yarn install
+      - save_cache: # special step to save the dependency cache with the `package.json` cache key template
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: touch storage/testing.sqlite 
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: ./vendor/bin/codecept build
+      - run: ./vendor/bin/codecept run
+```
+{% raw %}
 
 ---
 
 Success! You just set up CircleCI 2.0 for a PHP app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel) to see how this looks when building on CircleCI.
 
-If you have any questions about the specifics of testing your PHP application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+## See Also
+
+Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public PHP projects.
