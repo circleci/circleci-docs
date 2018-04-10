@@ -399,8 +399,9 @@ workflows:
   tagged-build:
     jobs:
       - publish:
-          tags:
-            only: /v[0-9]+(\.[0-9]+)*/
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
  ```
 
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
