@@ -216,9 +216,12 @@ The value of the `cron` key must be a [valid crontab entry](https://crontab.guru
 In the example above,
 the `nightly` workflow is configured
 to run every day at 12:00am UTC.
-The `cron` key is specified using POSIX `crontab` syntax,
-see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics.
-The workflow will be run on the `master` and `beta` branches.
+
+The value of the `filters` key must be a set of branches
+that should follow the specified schedule.
+In the example above,
+the `nightly` workflow runs `only` on the `master` and `beta` branches.
+
 The `commit` workflow has no scheduled trigger configured,
 so it will run on the push of every commit.
 
