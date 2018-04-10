@@ -186,9 +186,9 @@ watch the following video.
 By default,
 a workflow is triggered on every `git push`.
 To trigger a workflow on a schedule,
-add the `triggers` key to the workflow.
+add the `triggers` key to the workflow
+and specify a `schedule`.
 
-The `triggers` key is **only** added under your `workflow` key.
 This feature enables you
 to schedule a workflow run
 by using `cron` syntax
