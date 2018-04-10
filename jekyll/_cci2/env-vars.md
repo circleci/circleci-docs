@@ -354,4 +354,4 @@ The job being executed. The default 2.0 job is `build` without using Workflows.
 
 `CIRCLE_WORKFLOW_ID`
 
-A unique identifier for the current workflow instance that the build is running in. This identifier will be the same for every job that runs within this instance of the workflow.
+A unique identifier for the workflow run that the job belongs to. This identifier will be the same for every job that belongs to this workflow run.
