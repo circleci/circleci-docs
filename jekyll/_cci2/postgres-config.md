@@ -110,16 +110,16 @@ jobs:
     docker:
       - image: ruby:2.3.1
         environment:
-          PG_HOST=localhost
-          PG_USER=ubuntu
-          RAILS_ENV=test
-          RACK_ENV=test
+          PG_HOST: localhost
+          PG_USER: ubuntu
+          RAILS_ENV: test
+          RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6
         environment:
-          POSTGRES_USER=ubuntu
-          POSTGRES_DB=db_name
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: db_name
     steps:
       - checkout
       - run:
@@ -136,9 +136,94 @@ jobs:
 
 This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
+## Example Go App with PostgreSQL
+
+Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+
+```
+version: 2
+jobs:
+  build:
+    docker:
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      - image: circleci/golang:1.8
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      - image: circleci/postgres:9.6-alpine
+        environment:
+          POSTGRES_USER: circleci-demo-go
+          POSTGRES_DB: circle_test
+
+    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
+
+    environment:
+      TEST_RESULTS: /tmp/test-results
+
+    steps:
+      - checkout
+      - run: mkdir -p $TEST_RESULTS
+
+      - restore_cache:
+          keys:
+            - v1-pkg-cache
+
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation.
+      - run: go get github.com/lib/pq
+      - run: go get github.com/mattes/migrate
+      - run: go get github.com/jstemmer/go-junit-report
+
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
+      - run:
+          name: Run unit tests
+          environment:
+            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
+          command: |
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
+            make test | tee ${TEST_RESULTS}/go-test.out
+      - run: make
+
+      - save_cache:
+          key: v1-pkg-cache
+          paths:
+            - "/go/pkg"
+
+      - run:
+          name: Start service
+          environment:
+            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
+          command: ./workdir/contacts
+          background: true
+
+      - run:
+          name: Validate service is working
+          command: |
+            sleep 5
+            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results:
+          path: /tmp/test-results
+```
+
+## Example Ruby Project with MYSQL and Dockerize
+
 The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
 
-```version: 2
+```
+version: 2
 jobs:
   build:
     working_directory: ~/test-circleci
@@ -161,7 +246,6 @@ jobs:
       - run:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
-
 ```
 
 ## Optional Customization

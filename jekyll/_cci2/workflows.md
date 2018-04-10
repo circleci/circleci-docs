@@ -27,6 +27,10 @@ With workflows, you can:
 
 For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
+## Video: Configure Multiple Jobs with Workflows
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ### Limitations
 
 Projects run by using the CircleCI API will *not* trigger workflows. If you build a project with workflows using the API, CircleCI will build the project as if the workflows did not exist. **Note:** builds without workflows require a `build` job.
@@ -168,6 +172,8 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 It can be inefficient and expensive
 to run a workflow for _every_ commit for _every_ branch.
 Alternatively,
@@ -181,6 +187,8 @@ to schedule a workflow run
 by using `cron` syntax
 to represent Coordinated Universal Time (UTC) for specified branches.
 
+### Nightly Example
+
 In the example below,
 the `nightly` workflow is configured
 to run every day at 12:00am UTC.
@@ -192,6 +200,7 @@ so it will run on the push of every commit.
 
 **Note:**
 Step syntax (for example, `*/1`, `*/20`) is **not** supported.
+
 
 ```
 workflows:

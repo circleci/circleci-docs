@@ -38,7 +38,7 @@ For iOS projects, it is possible to run your tests with Fastlane Scan as follows
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "9.3.0"
     steps:
       ...
       - run:
@@ -49,6 +49,8 @@ jobs:
             SCAN_SCHEME: WebTests
 
 ```
+
+Refer to [the Xcode version section]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
 
 ## Code Signing and Certificates
 
@@ -88,13 +90,13 @@ version: 2
 jobs:
   test:
     macos:
-      xcode: "9.0"
+      xcode: "9.3.0"
     steps:
       - checkout
       - run: fastlane scan
   deploy:
     macos:
-      xcode: "9.0"
+      xcode: "9.3.0"
     steps:
       - checkout
       - deploy:

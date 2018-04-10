@@ -21,12 +21,13 @@ These contributions come in two forms: issues and pull requests.
 
 ## Issues
 
-If you spot anything that conflicts with our values,
-open an issue by clicking "Open an issue about this page",
-located at the bottom of each document.
-In the issue's description, describe the issue you found.
-Someone on the documentation team will label the issue
-and may ask you for more details.
+If you spot anything
+that conflicts with our values,
+opening a GitHub Issue is a great way
+to give us specific feedback.
+
+To make an issue,
+refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page.
 
 ## Pull Requests
 

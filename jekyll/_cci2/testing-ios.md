@@ -22,7 +22,7 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 
 The currently available Xcode versions are:
 
-* `9.3.0`: Xcode 9.3 beta 4 (Build 9Q127n) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-396/index.html)
+* `9.3.0`: Xcode 9.3 (Build 9E145) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-405/index.html)
 * `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
 * `9.1.0`: Xcode 9.1.0 (Build 9B55)  [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
 * `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
@@ -321,7 +321,7 @@ image:
 ### Creating a `config.yml` File
 The most flexible means to customize your build is to add a `.circleci/config.yml` file to your project,
 which allows you to run arbitrary bash commands
-at various points in the build process. See the [Writing Jobs With Steps]( {{ site.baseurl }}/2.0/configuration-reference/) document for
+at various points in the build process. See the [Configuration Reference]( {{ site.baseurl }}/2.0/configuration-reference/) document for
 a detailed discussion of the structure of the `config.yml` file. **Note:** A number of options in the document will not work for macOS builds.
 
 ### Installing Custom Packages
