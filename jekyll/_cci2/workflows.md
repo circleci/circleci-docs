@@ -189,26 +189,7 @@ To trigger a workflow on a schedule,
 add the `triggers` key to the workflow
 and specify a `schedule`.
 
-This feature enables you
-to schedule a workflow run
-by using `cron` syntax
-to represent Coordinated Universal Time (UTC) for specified branches.
-
-### Nightly Example
-
-In the example below,
-the `nightly` workflow is configured
-to run every day at 12:00am UTC.
-The `cron` key is specified using POSIX `crontab` syntax,
-see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics.
-The workflow will be run on the `master` and `beta` branches.
-The `commit` workflow has no scheduled trigger configured,
-so it will run on the push of every commit.
-
-**Note:**
-Step syntax (for example, `*/1`, `*/20`) is **not** supported.
-
-```
+```yaml
 workflows:
   version: 2
   commit:
@@ -227,6 +208,25 @@ workflows:
     jobs:
       - coverage
 ```
+
+This feature enables you
+to schedule a workflow run
+by using `cron` syntax
+to represent Coordinated Universal Time (UTC) for specified branches.
+
+### Nightly Example
+
+In the example below,
+the `nightly` workflow is configured
+to run every day at 12:00am UTC.
+The `cron` key is specified using POSIX `crontab` syntax,
+see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics.
+The workflow will be run on the `master` and `beta` branches.
+The `commit` workflow has no scheduled trigger configured,
+so it will run on the push of every commit.
+
+**Note:**
+Step syntax (for example, `*/1`, `*/20`) is **not** supported.
 
 For a full example,
 see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
