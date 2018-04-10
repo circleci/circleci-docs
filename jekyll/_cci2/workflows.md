@@ -212,14 +212,8 @@ workflows:
       - coverage
 ```
 
-This feature enables you
-to schedule a workflow run
-by using `cron` syntax
-to represent Coordinated Universal Time (UTC) for specified branches.
-
-### Nightly Example
-
-In the example below,
+The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
+In the example above,
 the `nightly` workflow is configured
 to run every day at 12:00am UTC.
 The `cron` key is specified using POSIX `crontab` syntax,
