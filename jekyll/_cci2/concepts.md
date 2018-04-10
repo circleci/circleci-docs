@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/concepts/) > Concepts*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Concepts*
 
 This document provides an overview of the concepts used in CircleCI 2.0 in the following sections:
 
