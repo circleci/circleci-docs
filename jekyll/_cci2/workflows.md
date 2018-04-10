@@ -183,7 +183,11 @@ watch the following video.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-A workflow's `schedule` is specified under the `triggers` key.
+By default,
+a workflow is triggered on every `git push`.
+To trigger a workflow on a schedule,
+add the `triggers` key to the workflow.
+
 The `triggers` key is **only** added under your `workflow` key.
 This feature enables you
 to schedule a workflow run
@@ -203,7 +207,6 @@ so it will run on the push of every commit.
 
 **Note:**
 Step syntax (for example, `*/1`, `*/20`) is **not** supported.
-
 
 ```
 workflows:
