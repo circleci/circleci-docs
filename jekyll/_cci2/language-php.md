@@ -76,7 +76,7 @@ jobs: # a collection of steps
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
 ```
-{% raw %}
+{% endraw %}
 
 ---
 
