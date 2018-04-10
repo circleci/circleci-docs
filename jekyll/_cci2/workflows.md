@@ -173,7 +173,7 @@ Following is a screenshot of the Approval dialog box that appears when you click
 ## Scheduling a Workflow
 
 It can be inefficient and expensive
-to run a workflow for _every_ commit for _every_ branch.
+to run a workflow for every commit for every branch.
 Instead,
 you can schedule a workflow
 to run at a certain time for specific branches.
