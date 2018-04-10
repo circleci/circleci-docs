@@ -42,6 +42,6 @@ Details of the configuration steps will be updated soon. Please see the `.circle
 
 ---
 
-Success! You just set up CircleCI 2.0 for a PHP app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel) to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a PHP app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel) to see how this looks when building on CircleCI.
 
 If you have any questions about the specifics of testing your PHP application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.

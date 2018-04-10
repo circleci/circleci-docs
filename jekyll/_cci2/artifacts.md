@@ -27,7 +27,7 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
+Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
 
 Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
@@ -59,7 +59,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the {% comment %} TODO: Jobs {% endcomment %}build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
@@ -120,7 +120,7 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 ![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the build summary.
+When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the {% comment %} TODO: Job {% endcomment %}build summary.
 
 ## Downloading All Artifacts for a Build on CircleCI  
 

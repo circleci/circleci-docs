@@ -40,7 +40,7 @@ If you'd like to completely revert to 1.0 configuration, simply replace `.circle
 
 ## Why is the 2.0 build not working?
 
-In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is where the build runs. If you are trying to figure out why the new 2.0 build is not working it may be that the build runs on the first image specified in the list. The first image in the list is used for the primary container.
+In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is where the {% comment %} TODO: Job {% endcomment %}build runs. If you are trying to figure out why the new 2.0 build is not working it may be that the {% comment %} TODO: Job {% endcomment %}build runs on the first image specified in the list. The first image in the list is used for the primary container.
 
 ## Why can't I find my project on the Add Project page?
  

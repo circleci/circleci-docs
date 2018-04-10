@@ -100,7 +100,7 @@ jobs:
           name: Build IPA
           command: fastlane gym
 
-      # Store the IPA file in the build artifacts
+      # Store the IPA file in the {% comment %} TODO: Job {% endcomment %}build artifacts
       - store_artifacts:
           path: output/MyApp.ipa
 

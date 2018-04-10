@@ -92,6 +92,6 @@ Now we need to add several `steps` within the `build` job:
 
 You can learn more about each of these steps in our [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/)
 
-Success! You just set up CircleCI 2.0 for a Python Django app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django) to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Python Django app. Check out our [project’s {% comment %} TODO: Job {% endcomment %}build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django) to see how this looks when building on CircleCI.
 
 If you have any questions about the specifics of testing your Python application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.

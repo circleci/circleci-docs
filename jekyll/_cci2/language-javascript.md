@@ -40,6 +40,6 @@ Details of the configuration steps will be updated soon. Please see the `.circle
 
 ---
 
-Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s {% comment %} TODO: Job {% endcomment %}build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
 
 If you have any questions about the specifics of testing your NodeJS application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
