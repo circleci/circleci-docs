@@ -15,8 +15,6 @@ This guide will help you get started with a Java application on CircleCI.
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
-Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
-
 We're going to make a few assumptions here:
 
 * You are using [Maven](https://maven.apache.org/).
@@ -29,35 +27,35 @@ We're going to make a few assumptions here:
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
     
-    working_directory: ~/circleci-demo-java-spring
+    working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
-    docker:
-      - image: circleci/openjdk:8-jdk-browsers
+    docker: # run the steps with Docker
+      - image: circleci/openjdk:8-jdk-browsers # ...with this image as the primary container; this is where all `steps` will run
 
-    steps:
+    steps: # a collection of executable commands
 
-      - checkout
+      - checkout # check out source code to working directory
 
-      - restore_cache:
+      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
-      - run: mvn dependency:go-offline
+      - run: mvn dependency:go-offline # gets the project dependencies
       
-      - save_cache:
+      - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
-      - run: mvn package
+      - run: mvn package # run the actual tests
       
-      - store_test_results:
+      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
           path: target/surefire-reports
       
-      - store_artifacts:
+      - store_artifacts: # store the uberjar as an artifact
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
 ```
 {% endraw %}
@@ -112,7 +110,7 @@ Then `mvn package` runs the actual tests, and if they succeed, it creates an "ub
 
 Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
 
-Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
+Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
 ```YAML
@@ -143,4 +141,5 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
 
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+
+
