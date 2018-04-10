@@ -38,6 +38,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 Following is the `.circleci/config.yml` file in the demo project with comments.
 
+{% raw %}
 ```
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
@@ -75,7 +76,7 @@ jobs: # a collection of steps
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results.xml
 ```          
-          
+{% endraw %}          
 ---
 
 Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
