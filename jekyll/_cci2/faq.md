@@ -36,17 +36,7 @@ Yep! If you're not ready to fully commit to 2.0, you can easily try it while sti
 
 Create a new branch and add 2.0 configuration as described in the [2.0 Project Tutorial](https://circleci.com/docs/2.0/project-walkthrough/). When you push the branch with 2.0 configuration, your project will build on CircleCI 2.0. All other branches will continue building on CircleCI 1.0.
 
-If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. 
-
-## What operating systems does CircleCI 2.0 support?
-
-- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
-
-- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
-
-- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
-
-- **Windows:** We do not yet support building and testing Windows applications.
+If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. Keep in mind that CircleCI 1.0 will be sunset August 31st, 2018. More info available on the [CircleCI Blog](https://circleci.com/blog/sunsetting-1-0/).
 
 ## Why is the 2.0 build not working?
 
@@ -132,33 +122,6 @@ In this example, the timezone is set for both the primary image and an additiona
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-## Can I use IPv6 in my tests?
-
-You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic.  Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
-
-Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
-
-You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring docker daemon like the following:
-
-```yaml
-   ipv6_tests:
-     machine: true
-     steps:
-     - checkout
-     - run:
-         name: enable ipv6
-         command: |
-           cat <<'EOF' | sudo tee /etc/docker/daemon.json
-           {
-             "ipv6": true,
-             "fixed-cidr-v6": "2001:db8:1::/64"
-           }
-           EOF
-           sudo service docker restart
-```
-
-Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
-
 ## Workflows
 
 ### Can I use the API with Workflows?
@@ -225,7 +188,51 @@ Yes, the billing is associated with the organization. You can buy while within t
 
 ### What is the definition of a container in the context of billing?
 
+## Architecture
+
+### Can I use IPv6 in my tests?
+
+You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic.  Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+
+Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
+
+You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring docker daemon like the following:
+
+```yaml
+   ipv6_tests:
+     machine: true
+     steps:
+     - checkout
+     - run:
+         name: enable ipv6
+         command: |
+           cat <<'EOF' | sudo tee /etc/docker/daemon.json
+           {
+             "ipv6": true,
+             "fixed-cidr-v6": "2001:db8:1::/64"
+           }
+           EOF
+           sudo service docker restart
+```
+
+Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
+
+
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+### What operating systems does CircleCI 2.0 support?
+
+- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
+
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
+
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
+
+- **Windows:** We do not yet support building and testing Windows applications.
+
+### Which CPU architectures does CircleCI support?
+
+`amd64` is the only supported CPU architecture.
 
 
 [docker-hub]: https://hub.docker.com
