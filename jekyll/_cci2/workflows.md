@@ -174,9 +174,7 @@ Alternatively,
 you can schedule a workflow
 to run at a certain time for specific branches.
 
-Configure a workflow
-to run on a set schedule
-by using the `triggers:` key with the `schedule` option.
+A workflow's `schedule` is specified under the `triggers` key.
 The `triggers` key is **only** added under your `workflow` key.
 This feature enables you
 to schedule a workflow run
