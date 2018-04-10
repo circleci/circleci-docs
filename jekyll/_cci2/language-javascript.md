@@ -7,7 +7,7 @@ categories: [language-guides]
 order: 5
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: JavaScript*
+*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: JavaScript*
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
@@ -18,7 +18,7 @@ We maintain a reference JavaScript NodeJS project to show how to build an Expres
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project building on CircleCI</a>
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Node projects.
+In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Node projects.
 
 ## Pre-built CircleCI Docker images
 
@@ -36,10 +36,52 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Details of the configuration steps will be updated soon. Please see the `.circleci/config.yml` file in the demo project to get started.
+Following is the `.circleci/config.yml` file in the demo project with comments.
 
+{% raw %}
+```
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/mern-starter # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
+      - image: mongo:3.4.4 # and this image as the secondary service container
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm 
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # run tests
+          name: test
+          command: npm test
+      - run: # run coverage report
+          name: code-coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts: # special step to save test results as as artifact
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results: # special step to upload test results for display in Test Summary
+          path: test-results.xml
+```          
+{% endraw %}          
 ---
 
 Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
 
-If you have any questions about the specifics of testing your NodeJS application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+## See Also
+
+Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public Javascript projects.
+
