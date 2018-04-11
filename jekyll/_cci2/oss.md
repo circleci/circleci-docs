@@ -46,12 +46,12 @@ The following features and setting are useful for contributors to your project:
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-**React** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). <https://github.com/facebook/react>
-**Calypso** - The next generation webapp powering WordPress.com. <https://github.com/Automattic/wp-calypso>
-**Angular** - Another JavaScript framework built on multiple providers including CircleCI. <https://github.com/angular/angular>
-**fastlane** - A build automatically tool for Android and iOS. <https://github.com/fastlane/fastlane>
-**Atom** - The extensible text editor by GitHub is built with CircleCI (and other CI tools). <https://github.com/atom/atom>
-**Yarn** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/). <https://github.com/yarnpkg/yarn>
-**Hype** - Spotify’s tool that lets you execute arbitrary JVM code in a distributed environment. <https://github.com/spotify/hype>
+- **React** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). <https://github.com/facebook/react>
+- **Calypso** - The next generation webapp powering WordPress.com. <https://github.com/Automattic/wp-calypso>
+- **Angular** - Another JavaScript framework built on multiple providers including CircleCI. <https://github.com/angular/angular>
+- **fastlane** - A build automatically tool for Android and iOS. <https://github.com/fastlane/fastlane>
+- **Atom** - The extensible text editor by GitHub is built with CircleCI (and other CI tools). <https://github.com/atom/atom>
+- **Yarn** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/). <https://github.com/yarnpkg/yarn>
+- **Hype** - Spotify’s tool that lets you execute arbitrary JVM code in a distributed environment. <https://github.com/spotify/hype>
 
 Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
