@@ -7,3 +7,8 @@ order: 20
 ---
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Adding SSH Keys*
+
+## Overview
+
+If deploying to your servers requires SSH access,
+you'll need to upload the keys to CircleCI.
