@@ -188,9 +188,6 @@ a workflow is triggered on every `git push`.
 To trigger a workflow on a schedule,
 add the `triggers` key to the workflow
 and specify a `schedule`.
-A valid `schedule` requires
-a crontab entry
-and a list of applicable branches.
 
 ```yaml
 workflows:
@@ -212,23 +209,32 @@ workflows:
       - coverage
 ```
 
+In the above example,
+the `commit` workflow has no `triggers` key
+and will run on every `git push`.
+The `nightly` workflow has a `triggers` key
+and will run on the specified `schedule`.
+
+### Specifying a Valid Schedule
+
+A valid `schedule` requires
+a `cron` key and a `filters` key.
+
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
-In the example above,
+In the above example,
 the `nightly` workflow is configured
 to run every day at 12:00am UTC.
-
-The value of the `filters` key must be a set of branches
-that should follow the specified schedule.
-In the example above,
-the `nightly` workflow runs `only` on the `master` and `beta` branches.
-
-The `commit` workflow has no scheduled trigger configured,
-so it will run on the push of every commit.
-
 **Note:**
-Step syntax (for example, `*/1`, `*/20`) is **not** supported.
+Cron step syntax (e.g. `*/2`) is **not** supported.
 
-For a full example,
+The value of the `filters` key must be a map
+that defines rules for execution on specific branches.
+In the above example,
+the `nightly` workflow runs `only` on the `master` and `beta` branches.
+For more details,
+see the [configuration reference page]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) for the `branches` key.
+
+For a full configuration example,
 see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
 ## Using Contexts and Filtering in Your Workflows
