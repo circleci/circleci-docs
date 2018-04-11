@@ -178,10 +178,11 @@ Instead,
 you can schedule a workflow
 to run at a certain time for specific branches.
 
-For a quick overview,
-watch the following video.
+### Video: How to Schedule Your Builds to Test and Deploy Automatically
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+### Example: Nightly Workflow
 
 By default,
 a workflow is triggered on every `git push`.
