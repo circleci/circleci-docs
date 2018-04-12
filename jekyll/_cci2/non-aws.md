@@ -89,7 +89,7 @@ The following sections describe the steps for installation of the Services VM an
 Have the following information available before beginning the installation procedure:
 
 - CircleCI License file (.rli), contact CircleCI support for a license.
-- A machine to running Ubuntu 14.04 with a minimum of 32 GB RAM and 4CPUs (8CPUs preferred) for the Services VM.
+- A machine to running Ubuntu 14.04 with a minimum of 100 GB storage, 32 GB RAM and 4CPUs (8CPUs preferred) for the Services VM.
 - A cluster of machines running Ubuntu 14.04 with minumum of 8 GB RAM, 4 CPUs each, and netowrk access any Docker registries that are required by your builds for the Nomad client VMs.
 
 ### Steps
