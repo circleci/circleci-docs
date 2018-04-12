@@ -30,3 +30,7 @@ paste the SSH key
 you are adding.
 
 6. Click the **Add SSH Key** button.
+
+**Note:**
+Since CircleCI cannot decrypt SSH keys,
+every new key must have an empty passphrase.
