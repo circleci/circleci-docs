@@ -34,7 +34,7 @@ click on **SSH Permissions**.
 3. Click the **Add SSH Key** button.
 
 4. In the **Hostname** field,
-enter the key's associated host (e.g. "git.heroku.com").
+enter the key's associated host (for example, "git.heroku.com").
 If you don't specify a hostname,
 the key will be used for all hosts.
 
