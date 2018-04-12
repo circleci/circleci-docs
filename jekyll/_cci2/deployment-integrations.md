@@ -111,8 +111,9 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 ## Heroku
 
 The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0.
-However, it is possible to deploy to Heroku manually.
+However, it is possible to deploy to Heroku manually, either via `ssh` or `https`
 
+### ssh
 First, create a bash script to set up Heroku and place the file in the `.circleci` directory:
 
  ```bash
@@ -191,29 +192,21 @@ workflows:
               only: master
 ```
 
-If you prefer to deploy to Heroku using https, please consider this circleci (2.0) configuration which is even easier:
+### https
 
-Since we are deploying our app with https, the bash script above needed to setup heroku with ssh is not required anymore.
-For that reason the following steps can be deleted from the configuration:
+If you prefer to deploy to Heroku using https, please consider this circleci (2.0) configuration which is even easier.
 
-```yaml
-- add_ssh_keys:  # add key from CircleCI account based on fingerprint
-            fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-- run:
-     name: Run Setup Script
-     command: bash .circleci/setup-heroku.sh
-```
+[Add environment variables]({{ site.baseurl }}/2.0/env-vars/) for the Heroku API key as shown in the following image (you don't need to add the email address)
 
-instead we use the following step
+![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
+
+Use the following circlci 2.0 configuration - you will need to make sure `HEROKU_APP_NAME` is defined somewhere in your environment. 
 
 ```yaml
 - run:
      name: Deploy to Heroku
         command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
 ```
 
 - Result:
@@ -231,10 +224,7 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
-            heroku git:remote -a HEROKU_APP_NAME
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
 workflows:
   version: 2
   build-deploy:
