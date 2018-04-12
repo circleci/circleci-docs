@@ -8,6 +8,13 @@ order: 20
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Adding SSH Keys*
 
+There are two kinds of SSH keys
+that can be added to CircleCI:
+
+1. Keys used to check out code from version control systems.
+2. Keys added to containers
+so running processes can access other services.
+
 If deploying to your servers requires SSH access,
 you'll need to upload the keys to CircleCI.
 
