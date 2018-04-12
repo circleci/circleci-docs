@@ -47,6 +47,9 @@ When you are satisfied with your changes,
 create a pull request from your branch
 by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
+Regardless of the size of your change,
+do read through our [Style Guide](https://github.com/circleci/circleci-docs/wiki/Style-Guide).
+
 ### Titles and Descriptions
 
 Pull request titles should be descriptive enough
@@ -64,76 +67,3 @@ The description adds context
 that is critical for reviewers when giving feedback.
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
-
-# Style Guide
-
-For basic technical writing style, see [Technical writing style](https://en.wikiversity.org/wiki/Technical_writing_style).
-
-We also have a short list of guidelines
-that take precedence over the general guide above.
-
-## Markdown
-
-To keep the emphasis on prose,
-use markdown instead of plain HTML.
-Refer to the [Markdown documentation](https://daringfireball.net/projects/markdown/syntax) for more details.
-
-## Tables
-
-When creating tables,
-add the following inline attribute
-for improved borders between rows and columns:
-
-```
-Key | Required | Type | Description
-----|-----------|------|------------
-version | Y | String | Should currently be `2`
-{: class="table table-striped"}
-```
-
-## Links
-
-### Explicit Names
-
-Link text should explicitly name the document or section
-to which it is linking.
-
-For example,
-if you reference a section called "Adding Environment Variables in the App",
-write, "Refer to the 'Adding Environment Variables in the App' section of the Environment Variables document."
-
-### Relative Links
-
-Links to other CircleCI documentation should use Liquid filters
-to prepend the `baseurl` value.
-This should look like:
-[Adding Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-environment-variables).
-
-### Reference Links
-
-For ease of reviewing,
-use **inline** links instead of **reference** links.
-Refer to the [Link section](https://daringfireball.net/projects/markdown/syntax#link) of the Markdown documentation for more details.
-
-## Bold and Terms
-
-Reserve bolding for terms
-that are defined either in the [CircleCI Glossary](https://github.com/circleci/circleci-docs/tree/master/jekyll/_cci2/glossary.md/)
-or on an external site.
-
-## Word Preferences
-
-As in any language, there are many ways to say things.
-This is usually liberating but, in documentation, consistency rules.
-Below is a list of CircleCI-specific word preferences.
-
-### Referencing CircleCI
-
-When referring to CircleCI as a company or group,
-use "CircleCI" instead of "we".
-
-### Recommending User Actions
-
-When recommending a user action,
-use "consider" instead of "we recommend" or "we suggest".
-Never say "please".
