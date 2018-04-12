@@ -34,3 +34,19 @@ you are adding.
 **Note:**
 Since CircleCI cannot decrypt SSH keys,
 every new key must have an empty passphrase.
+
+## Advanced Usage
+
+By default,
+all CircleCI jobs are configured with `ssh-agent`
+and automatically load _all_ keys.
+While this is usually sufficient,
+you may need finer control
+over which keys authenticate.
+This is particularly useful
+for handling a "Too many authentication failures" error.
+
+To add a set of SSH keys to a container,
+use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)
+within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/)
+in your configuration file.
