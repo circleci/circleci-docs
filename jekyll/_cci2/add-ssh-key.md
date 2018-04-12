@@ -50,3 +50,13 @@ To add a set of SSH keys to a container,
 use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)
 within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/)
 in your configuration file.
+
+```yaml
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+```
