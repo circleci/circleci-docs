@@ -19,7 +19,7 @@ to add SSH keys to CircleCI:
 1. To check out code from version control systems.
 2. To enable running processes to access other services.
 
-### Steps
+## Steps
 
 1. In the CircleCI application,
 go to your project's settings
