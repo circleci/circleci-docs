@@ -363,7 +363,7 @@ jobs:
 ```
 
 If you do not want to commit a `.ruby-version` file to source control, then
-you can create the file from a build step:
+you can create the file from a {% comment %} TODO: Job {% endcomment %}build step:
 ```yaml
 run:
   name: Set Ruby Version

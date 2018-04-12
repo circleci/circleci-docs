@@ -9,7 +9,7 @@ order: 34
 
 *[Test]({{ site.baseurl }}/2.0/test/) > Collecting Test Metadata*
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step.
+CircleCI collects test metadata from XML files and uses it to provide insights into your {% comment %} TODO: Job {% endcomment %}build. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step.
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of   [Insights](https://circleci.com/build-insights) in the application to identify flaky tests and isolate recurring issues.  
 
@@ -342,7 +342,7 @@ In your configuration, form a command to output using the reporter:
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
-**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your build is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
+**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your {% comment %} TODO: Job {% endcomment %}build is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 

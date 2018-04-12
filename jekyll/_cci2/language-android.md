@@ -108,7 +108,7 @@ The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.
 
 ### API Levels
 
-We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in your build, you should select `circleci/android:api-24-alpha`.
+We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in your {% comment %} TODO: Job {% endcomment %} build, you should select `circleci/android:api-24-alpha`.
 
 ### Alpha Tag
 

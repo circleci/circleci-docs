@@ -312,8 +312,8 @@ jobs:
 
 ### Storing Artifacts, Test Results, and Diagnostic Files
 
-CircleCI 2.0 does not automatically collect artifacts in your builds,
-so if your build is generating files that you would like to access with
+CircleCI 2.0 does not automatically collect artifacts in your {% comment %} TODO: Job {% endcomment %}builds,
+so if your {% comment %} TODO: Job {% endcomment %}build is generating files that you would like to access with
 the CircleCI application later on, you must explicitly collect those
 files with the `store_artifacts` step.
 

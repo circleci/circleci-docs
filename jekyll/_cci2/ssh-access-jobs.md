@@ -20,7 +20,7 @@ things like log files, running processes, and directory paths. CircleCI 2.0 give
 
 When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircelCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode. 
 
-1. To start a build with SSH enabled, select the 'Rebuild with SSH' option from
+1. To start a {% comment %} TODO: Job {% endcomment %}build with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
 ![Rebuild with SSH](  {{ site.baseurl }}/assets/img/docs/rebuild-ssh-dropdown.png)
 
@@ -37,13 +37,13 @@ you need to.
 The build VM will remain available for **30 minutes after the build finishes running**
 and then automatically shut down. (Or you can cancel it.)
 
-**Note**: If your build has parallel steps, CircleCI launches more than one VM
+**Note**: If your {% comment %} TODO: Job {% endcomment %}build has parallel steps, CircleCI launches more than one VM
 to perform them. Thus, you'll see more than one 'Enable SSH' and
 'Wait for SSH' section in the build output.
 
 ## Debugging: "Permission denied (publickey)"
 
-If you run into permission troubles trying to SSH to your build, try
+If you run into permission troubles trying to SSH to your {% comment %} TODO: Job {% endcomment %}build, try
 these things:
 
 ### Ensure Authentication With GitHub/Bitbucket

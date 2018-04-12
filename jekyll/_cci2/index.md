@@ -182,11 +182,11 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-## SSH into Your Build
+## SSH into Your {% comment %} TODO: Job {% endcomment %}Build
 
 ![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
-If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your build with the SSH enabled option.
+If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.

@@ -131,7 +131,7 @@ Not yet, but we are working on that functionality.
 Not yet, but we are working on that functionality.
 
 ### Can I use `store_test_results` with Workflows?
-You can use `store_test_results` in order to populate your builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+You can use `store_test_results` in order to populate your {% comment %} TODO: Job {% endcomment %}builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
  
 ### Can I use Workflows with CircleCI 1.0?
  
