@@ -178,17 +178,21 @@ Instead,
 you can schedule a workflow
 to run at a certain time for specific branches.
 
+Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
+
 ### Video: How to Schedule Your Builds to Test and Deploy Automatically
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-### Example: Nightly Workflow
+### Nightly Example
 
 By default,
 a workflow is triggered on every `git push`.
 To trigger a workflow on a schedule,
 add the `triggers` key to the workflow
 and specify a `schedule`.
+
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
 
 ```yaml
 workflows:
@@ -222,16 +226,13 @@ A valid `schedule` requires
 a `cron` key and a `filters` key.
 
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
-In the above example,
-the `nightly` workflow is configured
-to run every day at 12:00am UTC.
+
 **Note:**
-Cron step syntax (e.g. `*/2`) is **not** supported.
+Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
 
 The value of the `filters` key must be a map
 that defines rules for execution on specific branches.
-In the above example,
-the `nightly` workflow runs `only` on the `master` and `beta` branches.
+
 For more details,
 see the [configuration reference page]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) for the `branches` key.
 
