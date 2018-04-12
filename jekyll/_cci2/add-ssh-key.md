@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Adding SSH Keys"
-short-title: "Adding SSH Keys"
-description: "How to Add SSH Keys to CircleCI"
+title: "Adding an SSH Key to CircleCI"
+short-title: "Adding an SSH Key"
+description: "How to Add an SSH Key to CircleCI"
 order: 20
 ---
 
@@ -13,7 +13,7 @@ order: 20
 If deploying to your servers requires SSH access,
 you'll need to upload the keys to CircleCI.
 
-## Adding SSH Keys
+## Adding an SSH Key
 
 1. In the CircleCI application,
 go to your project's settings
