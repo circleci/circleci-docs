@@ -172,21 +172,29 @@ Following is a screenshot of the Approval dialog box that appears when you click
 
 ## Scheduling a Workflow
 
-Workflows that are resource-intensive or that generate reports may be run on a schedule rather than on every commit. This feature is configured by adding a scheduled trigger to the configuration of the workflow. 
+It can be inefficient and expensive
+to run a workflow for every commit for every branch.
+Instead,
+you can schedule a workflow
+to run at a certain time for specific branches.
 
-Configure a workflow to run on a set schedule by using the `triggers:` key with the `schedule` option. The `triggers` key is **only** added under your `workflow` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
+Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
 
-## Video: Schedule Builds to Test and Deploy Automatically
+### Video: How to Schedule Your Builds to Test and Deploy Automatically
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Nightly Example
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches. The `commit` workflow has no scheduled trigger configured, so it will run on the push of every commit. 
+By default,
+a workflow is triggered on every `git push`.
+To trigger a workflow on a schedule,
+add the `triggers` key to the workflow
+and specify a `schedule`.
 
-**Note:** Step syntax (for example, `*/1`, `*/20`) is **not** supported.
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
 
-```
+```yaml
 workflows:
   version: 2
   commit:
@@ -206,7 +214,30 @@ workflows:
       - coverage
 ```
 
-See the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) for a full example.
+In the above example,
+the `commit` workflow has no `triggers` key
+and will run on every `git push`.
+The `nightly` workflow has a `triggers` key
+and will run on the specified `schedule`.
+
+### Specifying a Valid Schedule
+
+A valid `schedule` requires
+a `cron` key and a `filters` key.
+
+The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
+
+**Note:**
+Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
+
+The value of the `filters` key must be a map
+that defines rules for execution on specific branches.
+
+For more details,
+see the [configuration reference page]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) for the `branches` key.
+
+For a full configuration example,
+see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
 ## Using Contexts and Filtering in Your Workflows
 
