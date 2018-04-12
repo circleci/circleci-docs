@@ -14,7 +14,9 @@ CircleCI can be configured to deploy to virtually any service. This document pro
 ## Overview
 {:.no_toc}
 
-To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to `.circleci/config.yml`. You will also have to set any necessary secrets on the **Project Settings > Environment Variables** page of the CircleCI application.
+To deploy your application,
+add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file.
+You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
 
 Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
 
