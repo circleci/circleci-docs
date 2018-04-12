@@ -16,18 +16,18 @@ This document describes how to work with Artifacts in the following sections:
 
 ## Artifacts Overview
 
-Artifacts persist data after a Workflow is completed and may be used for longer-term storage of the outputs of your build process. For example, a Java project that produces a `.jar` file. When the Java build/test process passes, the output of the process (the `.jar` file) can be stored as an artifact. The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
+Artifacts persist data after a {% comment %} TODO: Job {% endcomment %}Workflow is completed and may be used for longer-term storage of the outputs of your build process. For example, a Java project that produces a `.jar` file. When the Java build/test process passes, the output of the process (the `.jar` file) can be stored as an artifact. The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Another example of an Artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
 
-If your build produces persistent artifacts such as screenshots, coverage reports, core files, or
+If your {% comment %} TODO: Job {% endcomment %}build produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
+Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
 
 Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
@@ -59,7 +59,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the {% comment %} TODO: Jobs {% endcomment %}build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
@@ -120,9 +120,9 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 ![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the build summary.
+When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the {% comment %} TODO: Job {% endcomment %}build summary.
 
-## Downloading All Artifacts for a Build on CircleCI  
+## Downloading All Artifacts for a {% comment %} TODO: Job {% endcomment %}Build on CircleCI  
 
 Use the following procedure to download your artifacts with `curl`.
 
@@ -148,4 +148,4 @@ Note 2: `:vcs-type` will be `github` or `bitbucket`.
 
 Note 3: In the example, the `xargs` command runs four processes to download files in parallel. Adjust this value to your needs.
 
-Explanation: The line beginning with `curl` fetches all the artifacts details for a build and pipes it through the `grep` command to extract just the URLs. The results are saved to the `artifacts.txt` file. Then, `xargs` reads the file and downloads each artifact to the current directory.  
+Explanation: The line beginning with `curl` fetches all the artifacts details for a {% comment %} TODO: Job {% endcomment %}build and pipes it through the `grep` command to extract just the URLs. The results are saved to the `artifacts.txt` file. Then, `xargs` reads the file and downloads each artifact to the current directory.  

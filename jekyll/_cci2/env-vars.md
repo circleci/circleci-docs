@@ -193,7 +193,7 @@ export qux="{\"quux\": 1}"
 export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 
-Build parameters are exported as environment variables inside the build's containers and can be used by scripts/programs and commands in `config.yml`. The injected environment variables may be used to influence the steps that are run during the build. It is important to note that injected environment variables will not override values defined in `config.yml` nor in the project settings.
+Build parameters are exported as environment variables inside {% comment %} TODO: Job {% endcomment %}the build's containers and can be used by scripts/programs and commands in `config.yml`. The injected environment variables may be used to influence the steps that are run during the {% comment %} TODO: Job {% endcomment %} build. It is important to note that injected environment variables will not override values defined in `config.yml` nor in the project settings.
 
 You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
 

@@ -49,7 +49,7 @@ CircleCI's beta `config-translation` endpoint can help you quickly get started w
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first list image listed. Your build commands run in this container and must be declared for each job. 
+     The primary container is an instance of the first image listed. Your {% comment %} TODO: Job {% endcomment %}build commands run in this container and must be declared for each job. 
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```

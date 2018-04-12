@@ -44,10 +44,10 @@ Jan 9 19:32:33.629:+0000 INFO picard-dispatcher.init Still running...
 
 As soon as you run a build, you should see the above message to inidicate that it has been dispatched to the scheduler. If you do not see the above output or you have a stack trace in the picard-dispatcher container, contact CircleCI support. 
 
-If you run a 2.0 build and do not see a message in the picard-dispatcher log output, it often indicates that the build is getting lost between the dispatcher and the picard dispatcher. Stop and restart the CircleCI app to re-establish the connection between the two containers.
+If you run a 2.0 build and do not see a message in the picard-dispatcher log output, it often indicates that the {% comment %} TODO: Job {% endcomment %}build is getting lost between the dispatcher and the picard dispatcher. Stop and restart the CircleCI app to re-establish the connection between the two containers.
 
 
-1. Run `sudo docker logs picard-scheduler` . The `picard-scheduler` schedules builds and sends them to nomad through a direct connection. It does not actually handle queuing of the builds in CircleCI. 
+1. Run `sudo docker logs picard-scheduler` . The `picard-scheduler` schedules {% comment %} TODO: Job {% endcomment %}builds and sends them to nomad through a direct connection. It does not actually handle queuing of the {% comment %} TODO: Job {% endcomment %} builds in CircleCI. 
 
 
 1. Check to see if there are any nomad nodes by running the `nomad node-status -allocs` command and viewing the following output:
@@ -59,7 +59,7 @@ ec2727c5  us-east-1  ip-127-0-0-1     linux-64bit  false  ready   0
 
 **Note:** DC in the output stands for datacenter and will always print us-east-1 and should be left as such. It doesn't affect or break anything. The things that are the most important are the Drain, Status, and Allocs columns. 
 
-- Drain - If `Drain` is `true` then CircleCI will **not** route builds to that nomad client. It is possible to change this value by running the following command `nomad node-drain [options] <node>`. If you set Drain to `true`, it will finish the builds that were currently running and then stop accepting builds. After the number of allocations reaches 0, it is safe to terminate instance. If `Drain` is set to `false` it means the node is accepting connections and should be getting builds.  
+- Drain - If `Drain` is `true` then CircleCI will **not** route {% comment %} TODO: Job {% endcomment %}builds to that nomad client. It is possible to change this value by running the following command `nomad node-drain [options] <node>`. If you set Drain to `true`, it will finish the {% comment %} TODO: Job {% endcomment %}builds that were currently running and then stop accepting builds. After the number of allocations reaches 0, it is safe to terminate instance. If `Drain` is set to `false` it means the node is accepting connections and should be getting builds.  
 
 - Status - If Status is `ready` then it is ready to accept builds and should be wired up correctly. If it is not wired up correctly it will not show `ready` and it should be investigated because a node that is not showing `ready` in the Status will not accept builds.
 

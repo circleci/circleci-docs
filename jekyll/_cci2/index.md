@@ -73,7 +73,7 @@ Even though there was no actual source code in your repo, and no actual tests co
 
 ## Breaking Your Build!
 
-Edit your `config.yml` file in the GitHub editor for simplicity and replace `echo "A first hello"` with `notacommand`. Click the **Commit change** button in the GitHub editor. When you navigate back to the Builds page in CircleCI, you will see that a new build was triggered. This build will fail with a red Failed button and will send you a notification email of the failure. 
+Edit your `config.yml` file in the GitHub editor for simplicity and replace `echo "A first hello"` with `notacommand`. Click the **Commit change** button in the GitHub editor. When you navigate back to the {% comment %} TODO: Jobs {% endcomment %}Builds page in CircleCI, you will see that a new build was triggered. This build will fail with a red Failed button and will send you a notification email of the failure. 
 
 
 ## Using the Workflows Functionality
@@ -97,7 +97,7 @@ jobs:
       - run: echo "A first hello"      
 ```
 
-2. Next, rename your two jobs so that they have different names. In this example they are named `one` and `two`. Change the contents of the echo statements to something different. To make the build take a longer period of time we can add a system `sleep` command.
+2. Next, rename your two jobs so that they have different names. In this example they are named `one` and `two`. Change the contents of the echo statements to something different. To make the {% comment %} TODO: Job {% endcomment %}build take a longer period of time we can add a system `sleep` command.
 
 3. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
 
@@ -182,11 +182,11 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-## SSH into Your Build
+## SSH into Your {% comment %} TODO: Job {% endcomment %}Build
 
 ![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
-If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your build with the SSH enabled option.
+If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.

@@ -104,7 +104,7 @@ An environment variable defined in a `run:` key will override image-level variab
 
 ## Caching Dependencies
 
-To speed up the builds, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
+To speed up the {% comment %} TODO: Job {% endcomment %}builds, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
 ```
 version: 2
@@ -239,11 +239,11 @@ Notes on the added keys:
 
 - Each command runs in a new shell, so the virtual environment that was activated in the dependencies installation step is activated again in this final `run:` key with `. venv/bin/activate`. 
 - The `store_artifacts` step is a special step. The `path:` is a directory relative to the project’s `root` directory where the files are stored. The `destination:` specifies a prefix chosen to be unique in the event that another step in the job produces artifacts in a directory with the same name. CircleCI collects and uploads the artifacts to S3 for storage.
-- When the build completes, artifacts appear in the CircleCI Artifacts tab:
+- When the {% comment %} TODO: Job {% endcomment %}build completes, artifacts appear in the CircleCI Artifacts tab:
 
 ![Artifacts on CircleCI]({{ site.baseurl }}/assets/img/docs/walkthrough7.png)
 
-- The path for the results files is relative to the `root` directory of the project. The demo application uses the same directory used to store artifacts, but this is not required. When the build completes, CircleCI analyzes the test timings and summarizes them on the Test Summary tab:
+- The path for the results files is relative to the `root` directory of the project. The demo application uses the same directory used to store artifacts, but this is not required. When the {% comment %} TODO: Job {% endcomment %}build completes, CircleCI analyzes the test timings and summarizes them on the Test Summary tab:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 

@@ -79,7 +79,7 @@ jobs: # a collection of steps
 {% endraw %}          
 ---
 
-Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s {% comment %} TODO: Job {% endcomment %}build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
 
 ## See Also
 

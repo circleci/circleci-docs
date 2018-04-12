@@ -55,7 +55,7 @@ See the [Example docker-compose Project](https://github.com/circleci/cci-demo-do
 
 If you want to use docker compose to manage a multi-container setup, use the `machine` key in your `config.yml` file and use docker-compose as you would normally. **Note: There is an overhead for provisioning a machine executor and use of the `machine` key may require additional fees in a future pricing update.**
 
-The overhead delay with `machine` is a result of spinning up a private Docker server. In contrast, the `docker` key runs the executor on a shared Docker server that is already provisioned. To secure your builds, some Docker behavior on this executor is not allowed and restricts your ability to use docker-compose.
+The overhead delay with `machine` is a result of spinning up a private Docker server. In contrast, the `docker` key runs the executor on a shared Docker server that is already provisioned. To secure your {% comment %} TODO: Job {% endcomment %}builds, some Docker behavior on this executor is not allowed and restricts your ability to use docker-compose.
 
 For example, use of volumes is restricted. If you have a docker-compose file that shares local directories with a container, it is possible to do this with the `machine` key, but not with `docker`.  Even though using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, volume mounting and port forwarding do not work as expected in this setup. 
 
