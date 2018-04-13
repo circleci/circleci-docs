@@ -30,14 +30,12 @@ If your builds are queuing often,
 you can add more containers
 by changing your plan.
 
-A **run queue** refers to
-time spent waiting for CircleCI
-to run your build.
-When CircleCI experiences high demand,
-customer builds are placed in a run queue
+A **run queue** forms
+when CircleCI experiences high demand.
+Customer builds are placed in a run queue
 and processed as machines become available.
-CircleCI attempts
-to minimize time spent in a run queue.
+
+
 
 ## Why did you change the name from CircleCI Enterprise? 
 
