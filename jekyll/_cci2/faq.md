@@ -24,12 +24,6 @@ The term Enterprise was used to refer to the behind-the-firewall option. However
 
 CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
-## Why Migrate from CircleCI 1.0 to 2.0?
-
-- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
-- In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
-- 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
-
 ## Can I try CircleCI 2.0 while still using 1.0?
 
 Yep! If you're not ready to fully commit to 2.0, you can easily try it while still building on 1.0:
