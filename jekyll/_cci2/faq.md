@@ -20,6 +20,16 @@ order: 1
 
 ## What is the difference between a usage queue and a run queue?
 
+A **usage queue** refers to
+time spent waiting for the capacity
+to run your build.
+Capacity is determined
+by the plan you choose
+when setting up a project on CircleCI.
+If you are consistently using all your capacity,
+you can reduce the size of a usage queue
+by changing your plan.
+
 A **run queue** refers to
 time spent waiting for CircleCI
 to run your build.
