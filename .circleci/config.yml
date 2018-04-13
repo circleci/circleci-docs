@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.3
+      - image: circleci/ruby:2.5.1
     working_directory: ~/circleci-docs
     environment:
       - JEKYLL_ENV=production
