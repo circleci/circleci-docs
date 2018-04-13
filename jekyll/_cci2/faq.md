@@ -35,7 +35,7 @@ time spent waiting for CircleCI
 to run your build.
 When CircleCI experiences high demand,
 customer builds are placed in a run queue
-and are processed as machines become available.
+and processed as machines become available.
 CircleCI attempts
 to minimize time spent in a run queue.
 
