@@ -35,7 +35,11 @@ when CircleCI experiences high demand.
 Customer builds are placed in a run queue
 and processed as machines become available.
 
-
+In other words,
+you can reduce time spent in a **usage queue**
+by purchasing more containers,
+but time spent in a **run queue** is unavoidable
+(though CircleCI aims to keep this as low as possible).
 
 ## Why did you change the name from CircleCI Enterprise? 
 
