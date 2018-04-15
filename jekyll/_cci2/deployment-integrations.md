@@ -106,6 +106,36 @@ workflows:
 
 Refer to the complete [AWS S3 API documentation](https://docs.aws.amazon.com/cli/latest/reference/s3api/index.html#cli-aws-s3api) for details of commands and options.
 
+## AWS - Capistrano
+
+```yaml
+version: 2
+jobs:
+  #  build and test jobs go here
+  deploy-job:
+    docker:
+      - image: image
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Deploy to AWS if tests pass and branch is Master
+          command: bundle exec cap production deploy
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
+```
 ## Azure
 
 To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
