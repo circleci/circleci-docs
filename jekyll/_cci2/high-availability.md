@@ -109,7 +109,7 @@ Eight databases are required for 2.0 services:
 * `contexts_service_production`, with extension `uuid-ossp` enabled
 * `cron_service_production`
 * `domain`
-* `federations`
+* `federations`, with extension `uuid-ossp` enabled
 * `permissions`
 * `vms`
 
