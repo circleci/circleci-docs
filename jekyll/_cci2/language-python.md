@@ -57,7 +57,7 @@ jobs: # a collection of steps
       - image: circleci/python:3.6.1 # ...with this image as the primary container; this is where all `steps` will run
       - image: circleci/postgres:9.6.2 # database image for service container avalable at `localhost:<port>`
         environment: # environment variables for database
-          POSTGRES_USER: root 
+          POSTGRES_USER: root
           POSTGRES_DB: circle_test
 ```
 
@@ -67,7 +67,7 @@ Finally, add several `steps` within the `build` job:
 ```YAML
     steps: # a collection of executable commands
       - checkout # special step to check out source code to the working directory
-      - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run.
+      - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
