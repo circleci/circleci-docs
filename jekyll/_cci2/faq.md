@@ -18,6 +18,29 @@ order: 1
 
 - **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
 
+## What is the difference between a usage queue and a run queue?
+
+A **usage queue** forms
+when an organization lacks the containers
+to run a build.
+The number of available containers is determined
+by the plan chosen
+when setting up a project on CircleCI.
+If your builds are queuing often,
+you can add more containers
+by changing your plan.
+
+A **run queue** forms
+when CircleCI experiences high demand.
+Customer builds are placed in a run queue
+and processed as machines become available.
+
+In other words,
+you can reduce time spent in a **usage queue**
+by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
+but time spent in a **run queue** is unavoidable
+(though CircleCI aims to keep this as low as possible).
+
 ## Why did you change the name from CircleCI Enterprise? 
 
 The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees. 
