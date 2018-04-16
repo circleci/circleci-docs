@@ -18,7 +18,7 @@ it is a subtle art
 that can produce equally subtle errors.
 You can avoid many of these errors
 by reviewing the best practices
-explained in this document.
+explained below.
 
 ## Best Practices
 
