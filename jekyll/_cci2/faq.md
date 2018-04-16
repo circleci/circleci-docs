@@ -37,7 +37,7 @@ and processed as machines become available.
 
 In other words,
 you can reduce time spent in a **usage queue**
-by purchasing more containers,
+by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
 but time spent in a **run queue** is unavoidable
 (though CircleCI aims to keep this as low as possible).
 
