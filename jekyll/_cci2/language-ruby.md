@@ -28,7 +28,7 @@ This application build also uses one of the pre-built [CircleCI Docker Images](h
 
 ## Pre-built CircleCI Docker images
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
+Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
 
 Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
 
@@ -142,7 +142,7 @@ version: 2
 
 Next, add a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. The sample app only needs a `build` job, so all other options are nested under that key.
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, it is named after the project in the home directory.
+In each job, you have the option of specifying a `working_directory`. In this sample config, it is named after the project in the home directory.
 
 ```YAML
 version: 2
@@ -154,7 +154,7 @@ jobs:
 
 This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
 
-Directly beneath `working_directory`, we can specify container images under a `docker` key.
+Directly beneath `working_directory`, you can specify container images under a `docker` key.
 
 ```YAML
 version: 2
@@ -183,7 +183,7 @@ Then, several environment variables are added to connect the application contain
 
 Finally, add several `steps` within the `build` job.
 
-Start with `checkout` so we can operate on the codebase.
+Start with `checkout` so CircleCI can operate on the codebase.
 
 ```YAML
 steps:
@@ -192,7 +192,7 @@ steps:
 
 This step tells CircleCI to checkout the project code into the working directory.
 
-Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. We run `bundle install` next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `save_cache` step that will store the dependencies to speed things up for next time.
+Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.
 
 {% raw %}
 ```YAML
@@ -217,7 +217,7 @@ steps:
 ```
 {% endraw %}
 
-If you're application is using Webpack or Yarn for JavaScript dependencies, you should also add the following to your config.
+If your application is using Webpack or Yarn for JavaScript dependencies, you should also add the following to your config.
 
 {% raw %}
 ```YAML
@@ -304,9 +304,6 @@ This app illustrates the simplest possible setup for a Ruby on Rails web app. Re
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open source discussion platform.
 * [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
 
-## See Also
-
-The [Linux Project Tutorial](#config-walkthrough) also provides a detailed explanation of CircleCI 2.0 configuration.
 
 
 [fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork
