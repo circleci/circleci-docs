@@ -19,3 +19,10 @@ that can produce equally subtle errors.
 You can avoid many of these errors
 by reviewing the best practices
 explained in this article.
+
+## Best Practices
+
+For a general overview of recommended scripting techniques,
+read [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts/).
+
+For specific advice, read on!
