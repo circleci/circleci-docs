@@ -13,6 +13,9 @@ order: 10
 
 Configuring CircleCI often requires
 writing shell scripts.
-You can avoid commonly encountered errors
+While shell scripting can grant finer control over your build,
+it is a subtle art
+that can produce equally subtle errors.
+You can avoid many of these errors
 by reviewing the best practices
 explained in this article.
