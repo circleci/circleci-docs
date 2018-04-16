@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Shell Scripting Best Practices for CircleCI Configuration"
+title: "Shell Scripting: Best Practices"
 short-title: "Shell Script Best Practices"
 description: "Best practices for writing shell scripts for CircleCI configuration"
 categories: [getting-started]
