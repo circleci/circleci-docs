@@ -41,6 +41,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 Following is the commented the `.circleci/config.yml` file in the demo project.
 
 {% raw %}
+```
 version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
