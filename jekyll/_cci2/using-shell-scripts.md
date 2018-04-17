@@ -23,8 +23,7 @@ explained below.
 ### Use ShellCheck
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool
-that saves you from yourself,
-regardless of your level of shell scripting experience.
+that gives warnings and suggestions for bash/sh shell scripts.
 
 ShellCheck works best with CircleCI
 when you add it as a separate job in your `.circleci/config.yml` file.
