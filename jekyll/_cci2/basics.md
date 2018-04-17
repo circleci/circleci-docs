@@ -14,7 +14,7 @@ Document | Description
 [Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
 [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) | How Jobs and Steps are used in a CircleCI 2.0 configuration.
 [Workflows]({{ site.baseurl }}/2.0/workflows/) | How to configure Workflows to increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
-[Using Shell Scripts]({{ site.baseurl }}/2.0/writing-shell-scripts/) | Best practices for using shell scripts for use in CircleCI configuration.
+[Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) | Best practices for using shell scripts for use in CircleCI configuration.
 [FAQ]({{ site.baseurl }}/2.0/faq/) | Frequently asked questions about CircleCI 2.0.
 {: class="table table-striped"}
 
