@@ -107,11 +107,11 @@ Eight databases are required for 2.0 services:
 * `circle`, with extensions `pgcrypto` and `uuid-ossp` enabled
 * `conductor_production`, with extension `uuid-ossp` enabled
 * `contexts_service_production`, with extension `uuid-ossp` enabled
-* `cron_service_production`
-* `domain`
+* `cron_service_production`, with extension `uuid-ossp` enabled
+* `domain`, with extension `uuid-ossp` enabled
 * `federations`, with extension `uuid-ossp` enabled
-* `permissions`
-* `vms`
+* `permissions`, with extension `uuid-ossp` enabled
+* `vms`, with extension `uuid-ossp` enabled
 
 ## Exporting Existing Databases
 
