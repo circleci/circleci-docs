@@ -31,8 +31,10 @@ This section provides the steps to configure LDAP in the management console (Rep
 6. Fill in the Search password field with the LDAP admin password.
 7. Fill in the User search DN field with an approrpiate value using the format `ou=<users>` replacing `users` with the value used in your LDAP instance.
 8. Fill in the Username field with an approriate unique identifier used for your users, for example, `mail`.
-9. (Optional) Fill in the Test username and Test password fields with a test email and password for an LDAP user you want to test.
-10. Save the settings.
+9. Fill in the Group Membership field with an appropriate value. By default, the value is `uniqueMember` for OpenLDAP and `member` for Active Directory. This field will list member `dn` for a group.
+10. Fill in the Group Object Class field with an approrpiate value. By default, the value is `groupOfUniqueNames` for OpenLDAP and `group` for Active Directory. The value of the `objectClass` field indicates a `dn` is a group.
+11. (Optional) Fill in the Test username and Test password fields with a test email and password for an LDAP user you want to test.
+12. Save the settings.
 
 A user who logs in will be redirected to the Accounts page of the CircleCI application with a Connect button that they must use to connect their GitHub account. After they click Connect, an LDAP section with their user information (for example, their email) on the page will appear and they will be directed to authenticate their GitHub account. After authenticating their GitHub account users are directed to the {% comment %} TODO: Jobs {% endcomment %} Builds page to use CircleCI.
 
