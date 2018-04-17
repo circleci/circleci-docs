@@ -9,6 +9,12 @@ order: 10
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Using Shell Scripts*
 
+This document describes best practices
+for using shell scripts in your CircleCI configuration in the following sections:
+
+* TOC
+{:toc}
+
 ## Overview
 
 Configuring CircleCI often requires
@@ -19,6 +25,8 @@ that can produce equally subtle errors.
 You can avoid many of these errors
 by reviewing the best practices
 explained below.
+
+## Shell Script Best Practices
 
 ### Use ShellCheck
 
