@@ -102,7 +102,7 @@ jobs:
 
 ### Using macOS
 
-Using the `macos` executor allows you to run your {% comment %} TODO: Job {% endcomment %}build in a VM running macOS with a [specific version of Xcode installed]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions).
+Using the `macos` executor allows you to run your {% comment %} TODO: Job {% endcomment %}build in a VM running macOS with a specific version of Xcode installed, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers.
 
 ```
 jobs:
