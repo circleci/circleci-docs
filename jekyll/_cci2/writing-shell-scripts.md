@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Writing Shell Scripts"
-short-title: "Writing Shell Scripts"
-description: "Best practices for writing shell scripts for use in CircleCI configuration"
+title: "Using Shell Scripts"
+short-title: "Using Shell Scripts"
+description: "Best practices for using shell scripts for use in CircleCI configuration"
 categories: [getting-started]
 order: 10
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Writing Shell Scripts*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Shell Scripts*
 
 ## Overview
 
