@@ -44,7 +44,7 @@ The machine on which the Service instance runs must not be restarted and may be 
 
 | Source                      | Ports                   | Use                    |
 |-----------------------------|-------------------------|------------------------|
-| End Users                   | 80, 443                 | HTTP/HTTPS Traffic     |
+| End Users                   | 80, 443 , 4434          | HTTP/HTTPS Traffic     |
 | Administrators              | 22                      | SSH                    |
 | Administrators              | 8800                    | Admin Console          |
 | Builder Boxes               | all traffic / all ports | Internal Communication |
