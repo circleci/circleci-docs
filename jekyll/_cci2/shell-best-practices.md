@@ -59,3 +59,30 @@ workflows:
             branches:
               only: master
 ```
+
+### Set Error Flags
+
+There are several error flags
+you can set
+to automatically exit scripts
+when unfavorable conditions occur.
+As a best practice,
+add the following flags at the beginning of each script
+to protect yourself from tricky errors.
+
+```bash
+#!/usr/bin/env bash
+
+# Exit script if you try to use an uninitialized variable.
+set -o nounset
+
+# Exit script if a statement returns a non-true return value.
+set -o errexit
+
+# Use the error status of the first failure, rather than that of the last item in a pipeline.
+set -o pipefail
+```
+
+For more detailed explanations and additional techniques,
+see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts)
+on writing robust shell scripts.
