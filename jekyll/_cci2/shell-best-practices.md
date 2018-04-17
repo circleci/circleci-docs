@@ -20,9 +20,42 @@ You can avoid many of these errors
 by reviewing the best practices
 explained below.
 
-## Best Practices
+### Use ShellCheck
 
-For a general overview of recommended scripting techniques,
-read [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts/).
+[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool
+that saves you from yourself,
+regardless of your level of shell scripting experience.
 
-For specific advice, read on!
+ShellCheck works best with CircleCI
+when you add it as a separate job in your `.circleci/config.yml` file.
+This allows you
+to run the `shellcheck` job in parallel with other jobs in a workflow.
+
+```yaml
+version: 2
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+    steps:
+      - checkout
+      - run:
+          name: Check Scripts
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+  build-job:
+    ...
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - shellcheck
+      - build-job:
+          requires:
+            - shellcheck
+          filters:
+            branches:
+              only: master
+```
