@@ -21,12 +21,13 @@ CircleCI requires the following steps to get ELB (Elastic Load Balancing) certif
 
 Load BalancerProtocol | Load Balancer Port | Instance Protocol | Instance Port | Cipher | SSL Certificate
 ----------|----------|----------|----------|----------|----------
-SSL| 443 | SSL | 443 | Change | your-cert
 HTTP | 80 | HTTP | 80 | N/A | N/A
-HTTPS | 8800 | HTTPS | 8800| Change | your cert
-SSL | 8081 | SSL | 8081 | Change | your cert
-SSL | 3000 | SSL | 3000 | Change | your cert
-SSL|8082| SSL| 8082 | Change | your cert
+SSL| 443 | SSL | 443 | Change | your-cert
+SSL | 3000 | SSL | 3000 | Change | your-cert
+TCP | 4647 | TCP | 4647 | Change | your-cert
+HTTPS | 8800 | HTTPS | 8800| Change | your-cert
+SSL | 8081 | SSL | 8081 | Change | your-cert
+SSL|8082| SSL| 8082 | Change | your-cert
 {: class="table table-striped"}
 
 2. Add the following security group on your ELB:
@@ -36,9 +37,10 @@ SSL|8082| SSL| 8082 | Change | your cert
 Type | Protocol | Port Range | Source
 ----------|----------|----------|----------
 SSH | TCP | 22 | 0.0.0.0
+HTTPS | TCP | 443 | 0.0.0.0
 Custom TCP Rule | TCP | 8800 | 0.0.0.0
 Custom TCP Rule | TCP | 64535-65535 | 0.0.0.0
-HTTPS | TCP | 443 | 0.0.0.0
+
 {: class="table table-striped"}
 
 3. Next, in the management console for CircleCI, upload dummy certs to the `Privacy` Section. These don't need to be real certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires knowledge of at least a dummy cert.
