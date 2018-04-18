@@ -10,9 +10,9 @@ description: "CircleCI 2.0 test automation setup"
 ### Set Up To Test a Local Config File
 
 1. Add a shell script in your `.circleci` directory, for example, `run-build-locally.sh`.
-2. Create a token on (cirlceci)[https://circleci.com/account/api].
+2. Create a token on the [Personal API Tokens page][https://circleci.com/account/api].
 3. Export the token on the command line `export CIRCLE_TOKEN=<token-from-step-above>`.
-4.  Gather the following information:
+4. Gather the following information:
   - Commit hash from which to build
   - Username
   - Source for project
