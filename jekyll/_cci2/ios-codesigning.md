@@ -68,6 +68,8 @@ On CircleCI, Fastlane Match will need to be run every time you are
 going to generate an Ad-hoc build of your app. The easiest way to
 achieve that is to create a custom Fastlane lane just for that. It is best practice to create a Fastfile similar to the following:
 
+**Note:** For `fastlane match` to work correctly, you _must_ add `setup_circle_ci` to `before_all` in your `Fastfile`. This ensures that a temporary Fastlane keychain is used.
+
 ```
 # fastlane/Fastfile
 default_platform :ios
