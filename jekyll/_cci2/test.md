@@ -30,7 +30,7 @@ curl --user ${CIRCLE_TOKEN}: \
         https://circleci.com/api/v2.0/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
 ```
 
-Run the shell script and debug your config file without having to push through the repo.
+Now you can run the shell script and debug your `config.yml` file without having to push through the repo.
 
 Refer to the following documents for help with setting up your tests.
 
