@@ -28,7 +28,13 @@ by clicking the gear icon next to your project.
 click on **Advanced Settings**.
 
 3. In the **Auto-cancel redundant builds** section,
-click the **On** button. 
+click the **On** button.
+
+**Note:**
+This feature only applies
+to buidls triggered by pushes to GitHub.
+This feature does not apply to workflows.
+Your project's default branch will never skip builds.
 
 Document | Description
 ----|----------
