@@ -20,6 +20,16 @@ you can configure CircleCI
 to automatically cancel any queued or running builds
 when a newer build is triggered on that same branch.
 
+1. In the CircleCI application,
+go to your project's settings
+by clicking the gear icon next to your project.
+
+2. In the **Build Settings** section,
+click on **Advanced Settings**.
+
+3. In the **Auto-cancel redundant builds** section,
+click the **On** button. 
+
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/about-circleci/">Overview</a> | Overview of Continuous Integration (CI) with links to CircleCI case studies.
