@@ -6,17 +6,20 @@ description: "CircleCI 2.0 test automation setup"
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/HB5DehCufG0" frameborder="0" allowfullscreen></iframe>
 </div>
-### Set up to test a local config file
-1 add a shell script in your `.circleci` directory, e.g. `run-build-locally.sh`
-2 create a token on (cirlceci)[https://circleci.com/account/api]
-3 export the token on the command line `export CIRCLE_TOKEN=<token-from-step-above>`
-4 gather the following information:
-  - commit hash from which to build
-  - username
-  - source for project
-  - projectname
-  - branch from which to build
-5 add those values into your shell script
+
+### Set Up To Test a Local Config File
+
+1. Add a shell script in your `.circleci` directory, for example, `run-build-locally.sh`.
+2. Create a token on (cirlceci)[https://circleci.com/account/api].
+3. Export the token on the command line `export CIRCLE_TOKEN=<token-from-step-above>`.
+4.  Gather the following information:
+  - Commit hash from which to build
+  - Username
+  - Source for project
+  - Project name
+  - Branch from which to build
+5. Add those values into your shell script.
+
 ```
 #!/usr/bin/env bash
 curl --user ${CIRCLE_TOKEN}: \
@@ -26,6 +29,7 @@ curl --user ${CIRCLE_TOKEN}: \
     --form notify=false \
         https://circleci.com/api/v2.0/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
 ```
+
 Run the shell script and debug your config file without having to push through the repo.
 
 Refer to the following documents for help with setting up your tests.
