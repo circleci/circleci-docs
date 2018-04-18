@@ -32,7 +32,7 @@ click the **On** button.
 
 **Note:**
 This feature only applies
-to buidls triggered by pushes to GitHub.
+to builds triggered by pushes to GitHub.
 This feature does not apply to workflows.
 Your project's default branch will never skip builds.
 
