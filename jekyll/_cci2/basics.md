@@ -7,6 +7,19 @@ description: "Basics"
 
 Get started by learning about the basic concepts used in CircleCI.
 
+### Auto Cancel a Redundant Build
+
+If you are frequently pushing changes to a branch,
+you increase the chances of builds queueing.
+This means
+you might have to wait for an older version of a branch
+to finish building before the most recent version builds.
+
+To save time,
+you can configure CircleCI
+to automatically cancel any queued or running builds
+when a newer build is triggered on that same branch.
+
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/about-circleci/">Overview</a> | Overview of Continuous Integration (CI) with links to CircleCI case studies.
