@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Configuring Databases"
-short-title: "Configuring Databases"
+title: "Database Configuration Examples"
+short-title: "Database Configuration Examples"
 description: "Example of Configuring PostgreSQL"
 categories: [configuring-jobs]
 order: 35
