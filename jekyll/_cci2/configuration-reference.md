@@ -711,6 +711,20 @@ path | Y | String | Path (absolute, or relative to your `working_directory`) to 
 
 ###### _Example_
 
+Directory structure:
+
+```
+test-results
+├── jest
+│   └── results.xml
+├── mocha
+│   └── results.xml
+└── rspec
+    └── results.xml
+```
+
+`config.yml` syntax:
+
 ``` YAML
 - store_test_results:
     path: test-results
