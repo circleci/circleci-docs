@@ -14,6 +14,8 @@ This document provides example database configuration using PostgreSQL/Rails and
 * TOC
 {:toc}
 
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 
+
 ## Example CircleCI Configuration for a Rails App With structure.sql
 
 If you are migrating a Rails app configured with a `structure.sql` file make
