@@ -67,6 +67,33 @@ workflows:
               only: master
 ```
 
+**Note:**
+Be careful when using `set -o xtrace` / `set -x` with ShellCheck.
+When the shell expands secret environment variables,
+they will be exposed in a not-so-secret way.
+In the example below,
+observe how the `tmp.sh` script file reveals too much.
+
+```
+> cat tmp.sh
+#!/bin/sh
+
+set -o nounset
+set -o errexit
+set -o xtrace
+
+if [ -z "${SECRET_ENV_VAR:-}" ]; then
+  echo "You must set SECRET_ENV_VAR!"
+fi
+> sh tmp.sh
++ '[' -z '' ']'
++ echo 'You must set SECRET_ENV_VAR!'
+You must set SECRET_ENV_VAR!
+> SECRET_ENV_VAR='s3cr3t!' sh tmp.sh
++ '[' -z 's3cr3t!' ']'
+```
+
+
 ### Set Error Flags
 
 There are several error flags
