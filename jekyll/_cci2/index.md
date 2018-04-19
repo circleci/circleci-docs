@@ -6,7 +6,7 @@ permalink: /2.0/
 ---
 Welcome to CircleCI 2.0 documentation! Included here are tutorials, samples, and reference documentation for CircleCI version 2.0 in the following two sections: 
 
-- **Developers:** Instructions for configuring a CircleCI YML file to automate your builds, tests, and deployments using the hosted CircleCI application.
+- **Developers:** Instructions for configuring a CircleCI YAML file to automate your builds, tests, and deployments using the hosted CircleCI application.
 - **Server Administrators:** Instructions for installing and maintaining CircleCI on your local server or private cloud.
 
 This page describes how to run your first green build. 
