@@ -430,6 +430,9 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
+For more information,
+see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
+
 ##### _Background commands_
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
