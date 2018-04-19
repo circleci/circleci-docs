@@ -7,35 +7,6 @@ description: "Basics"
 
 Get started by learning about the basic concepts used in CircleCI.
 
-### Auto Cancel a Redundant Build
-
-If you are frequently pushing changes to a branch,
-you increase the chances of builds queueing.
-This means
-you might have to wait for an older version of a branch
-to finish building before the most recent version builds.
-
-To save time,
-you can configure CircleCI
-to automatically cancel any queued or running builds
-when a newer build is triggered on that same branch.
-
-1. In the CircleCI application,
-go to your project's settings
-by clicking the gear icon next to your project.
-
-2. In the **Build Settings** section,
-click on **Advanced Settings**.
-
-3. In the **Auto-cancel redundant builds** section,
-click the **On** button.
-
-**Note:**
-This feature only applies
-to builds triggered by pushes to GitHub.
-This feature does not apply to workflows.
-Your project's default branch will never skip builds.
-
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/about-circleci/">Overview</a> | Overview of Continuous Integration (CI) with links to CircleCI case studies.
