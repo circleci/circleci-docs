@@ -9,17 +9,10 @@ order: 35
 
 *[Build Environments]({{ site.baseurl }}/2.0/build/) > Configuring Databases*
 
-This document describes database configuration using PostgreSQL/Rails and MySQL/Ruby examples in the following sections:
+This document provides example database configuration using PostgreSQL/Rails and MySQL/Ruby examples in the following sections:
 
 * TOC
 {:toc}
-
-## Database Environment Configuration Overview
-Postgres is not pre-installed in the base container image (the primary image). All commands are executed from the base image that you declare in the first `image` key in your `.circleci/config.yml` file. The Database `postgres:9.6` image is a service container and no commands are executed in this container. So, it is important to tell postgres to use tcp and to specify `host: localhost` in the `database.yml` configuration. See the Docker section of the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/#using-docker) document for more details.
-
-In addition, all base images from docker are based on debian stable which uses version 9.4 packages. If you need a newer version of psql, install it from another location, for example, https://www.postgresql.org/download/linux/debian/.
-
-**Note:** If you are using the `pq` gem, you should not need to install `psql`. This step is only necessary if you want to run the `psql` command. The Postgres defaults are specific to the Docker Library version, see <https://hub.docker.com/_/postgres/>.
 
 ## Example CircleCI Configuration for a Rails App With structure.sql
 
@@ -247,92 +240,4 @@ jobs:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
 ```
-
-## Optional Customization
-
-This section describes additional optional configuration for further customizing your build, login password, and avoiding race conditions.
-
-### Optimizing Postgres Images
-The default `circleci/postgres` Docker image uses regular persistent storage on disk.
-Using `tmpfs` may make tests run faster and may use fewer resources. To use a variant
-leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e., 
-`circleci/postgres:9.6-alpine-ram`). 
-
-PostGIS is also available and can be combined with the previous example:
-`circleci/postgres:9.6-alpine-postgis-ram`
-
-### Using Binaries
-To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
-
-```
-     steps:
-    # Add the Postgres 9.6 binaries to the path.
-       - run: echo '/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
-```
-
-### Configuring Passwordless Login
-Use the configuration in this section if you want to use a DB without a password.  
-
-The default PostgreSQL configuration is set up to always ask the user for a password, unless using `sudo`. However, the default user has no password, so you essentially cannot log in without using `sudo`. 
-
-To work around this, you can overwrite the existing user with a new user and a password and create your own database, for example:
-
-    steps:
-      - run:
-    # Add a password to the `ubuntu` user, since Postgres is configured to
-    # always ask for a password without sudo, and fails without one.
-        command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
-        command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
-
-    # Create a new test database.
-        command: sudo -u postgres psql -p 5433 -c "create database test;"
-        
-Alternativly, you should not need to do this step if you set the environment variables for the postgresql container as documented here: https://hub.docker.com/_/postgres/
-
-### Using Dockerize
-
-Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
-Following is an example of how to do this in your CircleCI `config.yml` file:
-
-```
-version: 2.0
-jobs:
-  build:
-    working_directory: /your/workdir
-    docker:
-      - image: your/image_for_primary_container
-      - image: postgres:9.6.2-alpine
-        environment:
-          POSTGRES_USER: your_postgres_user
-          POSTGRES_DB: your_postgres_test
-    steps:
-      - checkout
-      - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-```
-
-It is possible to apply the same principle for the following databases:
-
-- MySQL:
-
-`dockerize -wait tcp://localhost:3306 -timeout 1m`
-
-- Redis:
-
-`dockerize -wait tcp://localhost:6379 -timeout 1m`
-
-Redis also has a CLI available:
-
-`sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done`
-
-- Other services such as web servers:
-
-`dockerize -wait http://localhost:80 -timeout 1m`
-
 
