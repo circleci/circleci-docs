@@ -143,7 +143,7 @@ click the **Add API Token** button.
 `cd` to a directory
 where you want the artifact files.
 
-6. Run the command below,
+6. Run the commands below,
 replacing all variables starting with a `:` with real values for your project.
 `:your_token` should be replaced with the token you copied earlier.
 `:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
