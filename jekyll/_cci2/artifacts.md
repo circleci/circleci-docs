@@ -156,6 +156,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-Note 3: In the example, the `xargs` command runs four processes to download files in parallel. Adjust this value to your needs.
+The `curl` command fetches all artifact details for a {& comment %} TODO: Job {% endcomment %} build
+and pipes it through the `grep` to extract the URLs.
+The results are saved to the `artifacts.txt` file.
+Finally, `xargs` reads the file
+and downloads each artifact to the current directory.
+In this example, `xargs` runs 4 processes
+to download files in parallel.
+Adjust this value to your needs.
 
-Explanation: The line beginning with `curl` fetches all the artifacts details for a {% comment %} TODO: Job {% endcomment %}build and pipes it through the `grep` command to extract just the URLs. The results are saved to the `artifacts.txt` file. Then, `xargs` reads the file and downloads each artifact to the current directory.  
+**Note:**
+
