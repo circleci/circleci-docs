@@ -144,7 +144,9 @@ click the **Add API Token** button.
 where you want the artifact files.
 
 6. Run the command below,
-substituting `:your_token` with the token you copied.
+replacing all variables starting with a `:` with real values for your project.
+`:your_token` should be replaced with the token you copied earlier.
+`:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
 
 ```bash
 export CIRCLE_TOKEN=':your_token'
@@ -153,10 +155,6 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
-
-Note 1: Replace all the variables above that start with a *:* (colon) with real values for your project (don't include the colon).
-
-Note 2: `:vcs-type` will be `github` or `bitbucket`.
 
 Note 3: In the example, the `xargs` command runs four processes to download files in parallel. Adjust this value to your needs.
 
