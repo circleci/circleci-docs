@@ -124,17 +124,29 @@ When CircleCI runs a build, a link to the core dump file appears under the Artif
 
 ## Downloading All Artifacts for a {% comment %} TODO: Job {% endcomment %}Build on CircleCI  
 
-Use the following procedure to download your artifacts with `curl`.
+To download your artifacts with `curl`,
+follow these steps.
 
-1. Create an API token in the application by going to [User Settings > Personal API Tokens](https://circleci.com/account/api).
+1. On the [Personal API Tokens](https://circleci.com/account/api) settings page,
+click **Create New Token**.
 
-2. Click Create New Token, add a name in the dialog box and click Add API Token. Name tokens to help you remember where they are used.
+2. In the **Token name** field,
+add a name for this token
+to remind you how and where it is used.
 
-3. Copy the token string that appears in the table.
+3. To create the API token,
+click the **Add API Token** button.
 
-4. CD to a directory where you would like the artifacts files to be downloaded and run the following command, copying in the token from Step 3:
+4. Copy the token that appears in the field.
 
-```
+5. In a Terminal window,
+`cd` to a directory
+where you want the artifact files.
+
+6. Run the command below,
+substituting `:your_token` with the token you copied.
+
+```bash
 export CIRCLE_TOKEN=':your_token'
 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
