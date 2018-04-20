@@ -161,6 +161,13 @@ and pipes it through the `grep` to extract the URLs.
 The results are saved to the `artifacts.txt` file.
 Finally, `xargs` reads the file
 and downloads each artifact to the current directory.
+
 In this example, `xargs` runs 4 processes
 to download files in parallel.
 Adjust this value to your needs.
+
+**Note:**
+Uploaded artifact filenames are encoded
+using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
+If the above URL does not work,
+try using an encoded version.
