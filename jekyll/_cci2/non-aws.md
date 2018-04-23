@@ -6,7 +6,7 @@ order: 1
 description: "Using CircleCI 2.0 static installation scripts."
 hide: true
 ---
-This article provides System Administrators with a preview of installing a clean CircleCI 2.0 installation if your existing 1.0 installation did not use AWS and instead used a custom hardware installation in the folloiwng sections:
+This article provides System Administrators with a preview of installing a clean CircleCI 2.0 installation if your existing 1.0 installation did not use AWS and instead used a custom hardware installation in the following sections:
 
 * TOC
 {:toc}
