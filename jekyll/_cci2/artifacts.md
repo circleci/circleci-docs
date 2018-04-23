@@ -162,7 +162,7 @@ The results are saved to the `artifacts.txt` file.
 Finally, `xargs` reads the file
 and downloads each artifact to the current directory.
 
-In this example, `xargs` runs 4 processes
+In this example, `xargs` runs four processes
 to download files in parallel via `wget`.
 Adjust the value given to `-P` to fit your needs.
 
