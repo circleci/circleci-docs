@@ -51,6 +51,13 @@ environment variables are hidden and uneditable in the application.
 Changing an environment variable is only possible
 by deleting and recreating it.
 
+**Note:**
+If you are having difficulties adding a multiline environment variable,
+use `base64` to encode it.
+In your `.circleci/config.yml` file,
+decode the variable in any commands
+that use the variable.
+
 ## Adding Global Environment Variables
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
