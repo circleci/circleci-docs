@@ -27,9 +27,20 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
+Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}Build page.
+Artifacts are stored on Amazon S3.
+There is a 3GB `curl` file size limit.
+Artifacts are designed
+to be useful around the time of the build.
+It is best practice
+not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
-Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+**Note:**
+Uploaded artifact filenames are encoded
+using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
+Keep this in mind
+if you are expecting
+to find artifacts at a given path within the application.
 
 ## Uploading Artifacts
 
@@ -124,17 +135,31 @@ When CircleCI runs a build, a link to the core dump file appears under the Artif
 
 ## Downloading All Artifacts for a {% comment %} TODO: Job {% endcomment %}Build on CircleCI  
 
-Use the following procedure to download your artifacts with `curl`.
+To download your artifacts with `curl`,
+follow these steps.
 
-1. Create an API token in the application by going to [User Settings > Personal API Tokens](https://circleci.com/account/api).
+1. On the [Personal API Tokens](https://circleci.com/account/api) settings page,
+click **Create New Token**.
 
-2. Click Create New Token, add a name in the dialog box and click Add API Token. Name tokens to help you remember where they are used.
+2. In the **Token name** field,
+add a name for this token
+to remind you how and where it is used.
 
-3. Copy the token string that appears in the table.
+3. To create the API token,
+click the **Add API Token** button.
 
-4. CD to a directory where you would like the artifacts files to be downloaded and run the following command, copying in the token from Step 3:
+4. Copy the token that appears in the field.
 
-```
+5. In a Terminal window,
+`cd` to a directory
+where you want the artifact files.
+
+6. Run the commands below,
+replacing all variables starting with a `:` with real values for your project.
+`:your_token` should be replaced with the token you copied earlier.
+`:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
+
+```bash
 export CIRCLE_TOKEN=':your_token'
 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
@@ -142,10 +167,12 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-Note 1: Replace all the variables above that start with a *:* (colon) with real values for your project (don't include the colon).
+The `curl` command fetches all artifact details for a {% comment %} TODO: Job {% endcomment %} build
+and pipes it to `grep` to extract the URLs.
+The results are saved to the `artifacts.txt` file.
+Finally, `xargs` reads the file
+and downloads each artifact to the current directory.
 
-Note 2: `:vcs-type` will be `github` or `bitbucket`.
-
-Note 3: In the example, the `xargs` command runs four processes to download files in parallel. Adjust this value to your needs.
-
-Explanation: The line beginning with `curl` fetches all the artifacts details for a {% comment %} TODO: Job {% endcomment %}build and pipes it through the `grep` command to extract just the URLs. The results are saved to the `artifacts.txt` file. Then, `xargs` reads the file and downloads each artifact to the current directory.  
+In this example, `xargs` runs four processes
+to download files in parallel via `wget`.
+Adjust the value given to `-P` to fit your needs.
