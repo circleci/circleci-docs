@@ -27,9 +27,21 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}build page. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit.
+Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}Build page.
 
-Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+**Note:**
+Uploaded artifact filenames are encoded
+using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
+Keep this in mind
+if you are expecting
+to find artifacts at a given path within the application.
+
+Artifacts are stored on Amazon S3.
+There is a 3GB `curl` file size limit.
+Artifacts are designed
+to be useful around the time of the build.
+It is best practice
+not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
 ## Uploading Artifacts
 
@@ -165,10 +177,3 @@ and downloads each artifact to the current directory.
 In this example, `xargs` runs four processes
 to download files in parallel via `wget`.
 Adjust the value given to `-P` to fit your needs.
-
-**Note:**
-Uploaded artifact filenames are encoded
-using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
-Keep this in mind
-if you are expecting
-to find artifacts at a given path within the application.
