@@ -157,17 +157,18 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 ```
 
 The `curl` command fetches all artifact details for a {% comment %} TODO: Job {% endcomment %} build
-and pipes it through the `grep` to extract the URLs.
+and pipes it to `grep` to extract the URLs.
 The results are saved to the `artifacts.txt` file.
 Finally, `xargs` reads the file
 and downloads each artifact to the current directory.
 
 In this example, `xargs` runs 4 processes
-to download files in parallel.
-Adjust this value to your needs.
+to download files in parallel via `wget`.
+Adjust the value given to `-P` to fit your needs.
 
 **Note:**
 Uploaded artifact filenames are encoded
 using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html).
-If the above URL does not work,
-try using an encoded version.
+Keep this in mind
+if you are expecting
+to find artifacts at a given path within the application.
