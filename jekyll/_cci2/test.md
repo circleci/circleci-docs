@@ -41,7 +41,8 @@ Document | Description
 <a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a> | How to set up various common test runners in your CircleCI configuration.
 <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
 <a href="{{ site.baseurl }}/2.0/parallelism-faster-jobs/">Running Tests in Parallel</a> | How to glob and splitting tests inside a job. 
-<a href="{{ site.baseurl }}/2.0/postgres-config/">Configuring Databases</a> | Configuring a database container using Postgres and Rails. 
+<a href="{{ site.baseurl }}/2.0/postgres-config/">Database Configuration Examples</a> | Example configuration files for PostgreSQL and MySQL. 
+[Configuring Databases]({{ site.baseurl }}/2.0/databases/) | Overview of using service images and basic steps for configuring database tests in CircleCI 2.0.
 **Code Signing** |
 <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0.
 {: class="table table-striped"}
