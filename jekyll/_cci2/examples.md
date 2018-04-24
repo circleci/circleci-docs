@@ -5,6 +5,38 @@ description: "Example CircleCI 2.0 Configuration Files"
 ---
 Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI 2.0.
 
+* TOC
+{:toc}
+
+### Video: Test Your Config File Locally
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/HB5DehCufG0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+1. Add a shell script in your `.circleci` directory, for example, `run-build-locally.sh`.
+2. Create a token on the [Personal API Tokens page](https://circleci.com/account/api).
+3. Export the token on the command line `export CIRCLE_TOKEN=<token-from-step-above>`.
+4. Gather the following information:
+  - Commit hash from which to build
+  - Username
+  - Source for project
+  - Project name
+  - Branch from which to build
+5. Add those values into your shell script. 
+
+```
+#!/usr/bin/env bash
+curl --user ${CIRCLE_TOKEN}: \
+    --request POST \
+    --form revision=<commit hash>\
+    --form config=@config.yml \
+    --form notify=false \
+        https://circleci.com/api/v2.0/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
+```
+
+Now you can run the shell script and debug your `config.yml` file without having to push through the repo.
+
 ## Example CircleCI Files and Public Repos
 
 Example Name | Description | Link
