@@ -23,4 +23,4 @@ Custom `machine` executor AMIs and configurable instance types are defined in a 
 ## Limitations 
 
 - Currently the `macos` executor is not supported on Server.
-- Bitbucket is not supported on Server; GitHub and GitHub Enterprise is the only supported VCS.
+- Bitbucket is not supported on Server; GitHub/GitHub Enterprise is the only supported VCS.
