@@ -110,9 +110,9 @@ To install the Services machine, perform the following steps:
 
 7. Set the VM Provider to None.
 
-8. Set 1.0 to 'Off'.
+8. Set 1.0 Builds to 'Off'.
 
-9. Set 2.0 to 'Clustered'.
+9. Set 2.0 Builds to 'Clustered'.
 
 To install the Nomad Clients, perform the following steps:
 
