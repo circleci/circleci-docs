@@ -108,6 +108,12 @@ To install the Services machine, perform the following steps:
 
 6. Complete the Storage section.
 
+7. Set the VM Provider to None.
+
+8. Set 1.0 Builds to 'Off'.
+
+9. Set 2.0 Builds to 'Clustered'.
+
 To install the Nomad Clients, perform the following steps:
 
 1. Copy the [Client init script](https://github.com/circleci/server-static-install/blob/master/provision-nomad-client-ubuntu.sh) to the Nomad Server machine.
@@ -117,4 +123,10 @@ To install the Nomad Clients, perform the following steps:
 3. Run './provision-services-ubuntu.sh' with the NOMAD_SERVER_ADDRESS environment variable set to the routable IP of the Services machine to start the script. 
 
 
+### Troubleshooting
 
+This section includes some possible resolutions for some common issues that may be encountered during system setup and installation.
+
+- Symptom: Jobs stay in `queued` status until they fail and never successfully run.
+  - Check port 8585 if the nomad client logs contain the following type of error message:
+    - {"error":"rpc error: code = Unavailable desc = grpc: the connection is unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
