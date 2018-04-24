@@ -19,8 +19,8 @@ Conceptually, 2.0 is very different, read the following documents to get answers
 ## Concepts 
 
 Document | Description
-----|----------
+---------|----------
 [Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
 [Workflows]({{ site.baseurl }}/2.0/workflows/) | How to configure Workflows to increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
 [FAQ]({{ site.baseurl }}/2.0/faq/) | Frequently asked questions about CircleCI 2.0.
-
+{: class="table table-striped"}

@@ -26,6 +26,7 @@ Refer to the following document for information and examples of deployment targe
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/deployment-integrations">Deployment</a> | Set up automated deployment.
+{: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!
 
