@@ -6,7 +6,7 @@ order: 1
 description: "Using CircleCI 2.0 static installation scripts."
 hide: true
 ---
-This article provides System Administrators with a preview of installing a clean CircleCI 2.0 installation if your existing 1.0 installation did not use AWS and instead used a custom hardware installation in the folloiwng sections:
+This article provides System Administrators with a preview of installing a clean CircleCI 2.0 installation if your existing 1.0 installation did not use AWS and instead used a custom hardware installation in the following sections:
 
 * TOC
 {:toc}
@@ -32,7 +32,7 @@ By default, CircleCI 2.0 Nomad Client instances automatically provision containe
 
 ## Architecture
 
-CircleCI Static consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
+CircleCI Static consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients (a.k.a Builder Fleet) execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/architecture-v1.png)
 
