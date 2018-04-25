@@ -72,7 +72,7 @@ this access with `iptables` rules in a production setup, [contact support](https
 
 
 1. Find the Amazon Machine Image for your region from the list above. 
-2. Ensure you choose an instance type with at least 16G of RAM, such as t2.xlarge. Select Next to configure the instance.
+2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`. Select Next to configure the instance.
 3. On the Configuring Instance Details page: 
 - Choose your network
 - Enable Auto-assign Public IP
