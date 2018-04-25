@@ -1,5 +1,5 @@
 jekyll:
-    image: jekyll/jekyll:3.7.2
+    image: jekyll/jekyll:3.8.0
     command: jekyll serve --watch --incremental
     ports:
         - 4000:4000
