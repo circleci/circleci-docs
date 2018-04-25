@@ -157,44 +157,6 @@ with a hostname of `git.heroku.com` as shown in the following image:
 Note the private key's fingerprint for later reference.
 Add the public key to Heroku on the [Account page](https://dashboard.heroku.com/account).
 
-Finally, update your `config.yml` file with a job and workflow section similar to the following:
-
-```yaml
-version: 2
-jobs:
-  # jobs for building/testing go here
-  deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project
-    steps:
-      - checkout
-      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
-          fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-      - run:
-          name: Run Setup Script
-          command: bash .circleci/setup-heroku.sh
-      - run:
-          name: Deploy Master to Heroku
-          command: |  # this command is framework-dependent and may vary
-            heroku git:remote -a $HEROKU_APP_NAME
-            git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            heroku run python manage.py deploy
-            heroku restart
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-jobs:  # only deploy when master successfully builds
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
-```
-
 ```yaml
 version: 2
 jobs:
