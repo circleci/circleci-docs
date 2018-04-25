@@ -142,10 +142,18 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 
 ## Heroku
 
-Next, install and authorize Heroku for the CircleCI account that owns the project.
-[Add environment variables]({{ site.baseurl }}/2.0/env-vars/) for the Heroku API key and login email to the CircleCI application as shown in the following image:
+[Heroku](https://www.heroku.com/) is a popular platform
+for hosting applications in the cloud.
+To configure CircleCI
+to deploy your application to Heroku,
+follow the steps below.
 
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
+1. Create a Heroku account
+and [follow the instructions](https://devcenter.heroku.com/start)
+to set up a project in the appropriate language.
+
+2. Add the name of your Heroku application and your Heroku API key as [environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables).
+In this example, these variables are defined as `HEROKU_API_KEY` and `HEROKU_APP_NAME`, respectively.
 
 To connect to the Heroku Git server from CircleCI,
 create a new SSH key without a passphrase.
