@@ -156,7 +156,7 @@ to set up a project in the appropriate language.
 In this example, these variables are defined as `HEROKU_API_KEY` and `HEROKU_APP_NAME`, respectively.
 
 3. [Create a new SSH key](https://devcenter.heroku.com/articles/keys) without a passphrase,
-and [add the new key to Heroku](https://devcenter.heroku.com/articles/keys#adding-keys-to-heroku)
+and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-keys-to-heroku).
 
 To connect to the Heroku Git server from CircleCI,
 add the SSH key to CircleCI.
