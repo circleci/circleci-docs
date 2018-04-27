@@ -38,25 +38,19 @@ SSH into the Services machine and run the following code snippet with your proxy
 2.) (cat <<'EOF'
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
-NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.sphereci.com
-JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com $JVM_OPTS"
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
 
 EOF
-) | sudo tee -a /etc/environment
-3.) sudo service replicated stop; sudo service replicated-agent stop; sudo service replicated-agent start; sudo service replicated start
+) | sudo tee -a /etc//etc/circle-installation-customizations
+3.) sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui ; sudo service replicated-operator start; sudo service replicated start
 ```
+
+**Note:** The above is not handled by by our enterprise-setup script and will need to be added to the user data for the services box startup or done manually. 
+
 ### Corporate Proxies
-In some environments you may not have access to a `NO_PROXY` equivalent outside your network. In that case, put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY` and only add machines on the internal network to `NO_PROXY` such as the Services and Builders. 
+In some environments you may not have access to a `NO_PROXY` equivalent outside your network. In that case, put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY` and only add machines on the internal network to `NO_PROXY` such as the Services and Builders.  
 
-### Installing CircleCI Services 
-SSH into the services box and run the following code snippet.
-
-```
-1.) curl -o ./init-services.sh https://s3.amazonaws.com/circleci-enterprise/init-services.sh
-2.) sudo -E bash init-services.sh
-```
-
-**Note:** This differs from the regular installation instructions by including the `-E` command with `sudo`, allowing the script to have access to the environment variables you exported above.
 
 Also note that when the instructions ask you if you use a proxy, they will also prompt you for the address. It is **very important** that you input the proxy in the following format `<protocol>://<ip>:<port>`. If you are missing any part of that, then `apt-get` won't work correctly and the packages won't download. 
 
@@ -80,24 +74,22 @@ If you cannot access the page of the CircleCI Replicated management console, but
 
 If you are using AWS Terraform install you'll have to add the below to your builder's launch configuration. These instructions should be added to `/etc/environment`. If you are using Docker Builders, refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
 
+
 ```
 #!/bin/bash
 
-(cat <<'EOF'
-# Append
-HTTP_PROXY=10.0.0.33:3128
-HTTPS_PROXY=10.0.0.33:3128
-NO_PROXY=169.254.169.254,10.0.1.238,127.0.0.1,localhost,ghe.sphereci.com
-JVM_OPTS="-Dhttp.proxyHost=10.0.0.33 -Dhttp.proxyPort=3128 -Dhttps.proxyHost=10.0.0.33 -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|10.0.1.238|127.0.0.1|localhost|ghe.sphereci.com $JVM_OPTS"
-
+2.) (cat <<'EOF'
+HTTP_PROXY=<proxy-ip:port>
+HTTPS_PROXY=<proxy-ip:port>
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
 EOF
 ) | sudo tee -a /etc/environment
 
 set -a
 . /etc/environment
 
-# Back to normal BUT MUST REMOVE sudo
-curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
-    CIRCLE_SECRET_PASSPHRASE=<passphrase entered on system console (services box port 8800) settings> \
-    SERVICES_PRIVATE_IP=10.0.1.238 bash
+
 ```
+
+You'll also need to follow these instructions: https://docs.docker.com/network/proxy/ for making sure that your containers have outbound/proxy access. 
