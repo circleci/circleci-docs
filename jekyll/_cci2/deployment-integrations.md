@@ -161,9 +161,6 @@ and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-ke
 4. To connect to Heroku,
 [add the SSH key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/) with a **Hostname** of `git.heroku.com`.
 
-Note the private key's fingerprint for later reference.
-Add the public key to Heroku on the [Account page](https://dashboard.heroku.com/account).
-
 ```yaml
 version: 2
 jobs:
