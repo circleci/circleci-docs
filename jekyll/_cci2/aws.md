@@ -26,9 +26,10 @@ Install the following automated infrastructure provisioning software:
 Have the following information available before beginning the installation procedure:
 
 * CircleCI License file (.rli), contact [CircleCI support](https://support.circleci.com/hc/en-us/requests/new) for a license.
-* AWS Access Key, AWS Secret Key, and AWS Subnet ID.
+* AWS Access Key, AWS Secret Key.
+* Name of [AWS EC2 SSH key](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
 * AWS Region, for example `us-west-2`.
-* AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
+* AWS Virtual Private Cloud (VPC) ID and AWS Subnet ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
 * Set your VPC [`enableDnsSupport`] setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) Amazon Web Services documentation for additional details.
 
 ## Private Subnet Requirements
