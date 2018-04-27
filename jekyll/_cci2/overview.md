@@ -33,7 +33,7 @@ By default, CircleCI 2.0 Builder instances automatically provision containers ac
 
 ## Architecture
 
-CircleCI consists of two primary components: Services and Builders. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Builder instances execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
+CircleCI consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute your jobs and communicate back to the Services. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/architecture-v1.png)
 
@@ -51,10 +51,10 @@ The machine on which the Service instance runs must not be restarted and may be 
 | GitHub (Enterprise or .com) | 80, 443                 | Incoming Webhooks      |
 {: class="table table-striped"}
 
-### Builders
-The Builder instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough Builder machines running to handle all of the builds, track the queued builds, and increase the Builder instance machines as needed to balance the load.
+### Nomad Clients
+The Nomad Clients run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough running to handle all of the builds, track the queued builds, and increase the Nomad Client machines as needed to balance the load.
 
-Each machine on which the Builders are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
+Each machine reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Builder instances:
 
 
 | Source                           | Ports                   | Use                                                            |
@@ -63,7 +63,7 @@ Each machine on which the Builders are installed reserves two CPUs and 4GB of me
 | Administrators                   | 80 or 443                 | CircleCI API Access (graceful shutdown, etc)                   |
 | Administrators                   | 22                      | SSH                                                            |
 | Services Box                     | all traffic / all ports | Internal Communication                                         |
-| Builder Boxes (including itself) | all traffic / all ports | Internal Communication                                         |
+| Nomad Clients (including itself) | all traffic / all ports | Internal Communication                                         |
 {: class="table table-striped"}
 
 ### GitHub
@@ -75,8 +75,8 @@ authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, C
 |---------------|---------|--------------|
 | Services   | 22      | Git Access   |
 | Services   | 80, 443 | API Access   |
-| Builder  | 22      | Git Access   |
-| Builder  | 80, 443 | API Access   |
+| Nomad Client  | 22      | Git Access   |
+| Nomad Client  | 80, 443 | API Access   |
 {: class="table table-striped"}
 
 
