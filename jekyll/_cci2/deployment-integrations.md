@@ -150,7 +150,7 @@ follow the steps below.
 
 1. Create a Heroku account
 and [follow the instructions](https://devcenter.heroku.com/start)
-to set up a project in the appropriate language.
+to set up a project in your chosen language.
 
 2. Add the name of your Heroku application and your Heroku API key as [environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables).
 In this example, these variables are defined as `HEROKU_API_KEY` and `HEROKU_APP_NAME`, respectively.
