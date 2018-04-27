@@ -158,13 +158,8 @@ In this example, these variables are defined as `HEROKU_API_KEY` and `HEROKU_APP
 3. [Create a new SSH key](https://devcenter.heroku.com/articles/keys) without a passphrase,
 and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-keys-to-heroku).
 
-To connect to the Heroku Git server from CircleCI,
-add the SSH key to CircleCI.
-create a new SSH key without a passphrase.
-The private key is added through the SSH Permissions page
-with a hostname of `git.heroku.com` as shown in the following image:
-
-![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough6.png)
+4. To connect to Heroku,
+[add the SSH key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/) with a **Hostname** of `git.heroku.com`.
 
 Note the private key's fingerprint for later reference.
 Add the public key to Heroku on the [Account page](https://dashboard.heroku.com/account).
