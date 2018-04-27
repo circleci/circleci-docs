@@ -113,7 +113,7 @@ Have available the following information and policies before starting the Previe
 9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 10. After the application has started, log in to CircleCI and start running 2.0 builds!
 
-## Next Steps for Getting Started
+## Validating your Installation
 
 1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage.
 2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
@@ -121,7 +121,7 @@ Have available the following information and policies before starting the Previe
 
 ## Troubleshooting
 
-Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad/) document for information about how to check status of Builders.
+If you're unable to run your first builds successfully please start with our [Troubleshooting]({{site.baseurl}}/2.0/troubleshooting/) guide as well as an [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad/) document for information about how to check status of Builders.
 
 After the build containers start and complete downloading of images, the first build should begin immediately.
 
