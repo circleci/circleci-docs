@@ -161,29 +161,28 @@ and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-ke
 4. To connect to Heroku,
 [add the SSH key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/) with a **Hostname** of `git.heroku.com`.
 
+5. In your `.circleci/config.yml`,
+deploy to Heroku with the command in `deploy-job` in the example below.
+
 ```yaml
 version: 2
 jobs:
-  # jobs for building/testing go here
+  build-job:
+    ...
   deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project
     steps:
       - checkout
       - run:
           name: Deploy Master to Heroku
-          command: |  # this command is framework-dependent and may vary
-            heroku git:remote -a HEROKU_APP_NAME
-            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build-job
-      - deploy-jobs:  # only deploy when master successfully builds
+      - deploy-job:
           requires:
             - build-job
           filters:
