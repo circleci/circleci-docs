@@ -162,7 +162,10 @@ and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-ke
 [add the SSH key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/) with a **Hostname** of `git.heroku.com`.
 
 5. In your `.circleci/config.yml`,
-deploy to Heroku with the command in `deploy-job` in the example below.
+create a `deploy-job`,
+`checkout` your code,
+and add a command
+to deploy the master branch to Heroku.
 
 ```yaml
 version: 2
