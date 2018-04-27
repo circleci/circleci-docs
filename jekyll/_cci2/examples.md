@@ -25,14 +25,14 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
   - Branch from which to build
 5. Add those values into your shell script. 
 
-```
+```bash
 #!/usr/bin/env bash
 curl --user ${CIRCLE_TOKEN}: \
     --request POST \
     --form revision=<commit hash>\
     --form config=@config.yml \
     --form notify=false \
-        https://circleci.com/api/v2.0/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
+        https://circleci.com/api/v1.1/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
 ```
 
 Now you can run the shell script and debug your `config.yml` file without having to push through the repo.
