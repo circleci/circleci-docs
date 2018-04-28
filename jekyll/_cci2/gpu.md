@@ -31,4 +31,4 @@ Step 8 is only required for testing purposes. After you install the CUDA driver 
 
 ## Adding GPU Steps to an AMI
 
-To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the [Building Your own VM-Service Images]({{ site.baseurl }}/2.0/vm-service-custom-images/) document. 
+To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the [Configuring VM Service]({{ site.baseurl }}/2.0/vm-service) documentation. 
