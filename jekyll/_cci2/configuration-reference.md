@@ -183,7 +183,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 Key | Required | Type | Description
 ----|-----------|------|------------
 enabled | N | Boolean | This must be true in order to enable the `machine` executor.  Is required if no other value is specified
-image | N | String | The image to use (default: `circleci/classic:latest`)
+image | N | String | The image to use (default: `circleci/classic:latest`). **Note:** This key is only supported on circleci.com. For information about customizing VM service images on CircleCI Server, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
 
