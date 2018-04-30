@@ -207,7 +207,7 @@ steps:
 
   - run:
       name: Bundle Install
-      command: bundle install --path vendor/bundle
+      command: bundle check || bundle install
 
   # Store bundle cache
   - save_cache:
