@@ -178,7 +178,7 @@ Splitting `config.yml` into multiple files is not yet supported.
 No.
  
 ### Can I build fork PR’s using Workflows?
-We do not support fork PR’s yet.
+Yes!
 
 ### Can workflows be scheduled to run at a specific time of day?
 Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an installable CircleCI release.
