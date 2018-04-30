@@ -149,17 +149,18 @@ to deploy your application to Heroku,
 follow the steps below.
 
 1. Create a Heroku account
-and [follow the instructions](https://devcenter.heroku.com/start)
+and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
 to set up a project in your chosen language.
 
-2. Add the name of your Heroku application and your Heroku API key as [environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables).
+2. Add the name of your Heroku application and your Heroku API key as environment variables.
+See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) for instructions.
 In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
 4. In your `.circleci/config.yml`,
 create a `deploy-job`,
 `checkout` your code,
 and add a command
-to deploy the master branch to Heroku via git.
+to deploy the master branch to Heroku using git.
 
 ```yaml
 version: 2
@@ -186,9 +187,6 @@ workflows:
             branches:
               only: master
 ```
-
-For additional details,
-refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
 ## Google Cloud
 
