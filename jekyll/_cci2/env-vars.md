@@ -58,6 +58,13 @@ In your `.circleci/config.yml` file,
 decode the variable in any commands
 that use the variable.
 
+```bash
+$ echo "foobar" | base64
+Zm9vYmFyCg==
+$ echo "foobar" | base64 | base64 --decode
+foobar
+```
+
 ## Adding Global Environment Variables
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
