@@ -142,146 +142,51 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 
 ## Heroku
 
-The built-in Heroku integration through the CircleCI UI is not implemented for CircleCI 2.0.
-However, it is possible to deploy to Heroku manually.
+[Heroku](https://www.heroku.com/) is a popular platform
+for hosting applications in the cloud.
+To configure CircleCI
+to deploy your application to Heroku,
+follow the steps below.
 
-First, create a bash script to set up Heroku and place the file in the `.circleci` directory:
+1. Create a Heroku account
+and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
+to set up a project in your chosen language.
 
- ```bash
- #!/bin/bash
- wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
- sudo mkdir -p /usr/local/lib /usr/local/bin
- sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
- sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+2. Add the name of your Heroku application and your Heroku API key as environment variables.
+See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) for instructions.
+In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
- cat > ~/.netrc << EOF
- machine api.heroku.com
-   login $HEROKU_LOGIN
-   password $HEROKU_API_KEY
- EOF
-
- cat >> ~/.ssh/config << EOF
- VerifyHostKeyDNS yes
- StrictHostKeyChecking no
- EOF
- ```
-
-**Note:** `sudo` is only necessary if the script runs in a Docker container with a non-root user.
-If the user _is_ root,
-remove `sudo` as it may not be installed.
-
-Next, install and authorize Heroku for the CircleCI account that owns the project.
-[Add environment variables]({{ site.baseurl }}/2.0/env-vars/) for the Heroku API key and login email to the CircleCI application as shown in the following image:
-
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough5.png)
-
-To connect to the Heroku Git server from CircleCI,
-create a new SSH key without a passphrase.
-The private key is added through the SSH Permissions page
-with a hostname of `git.heroku.com` as shown in the following image:
-
-![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough6.png)
-
-Note the private key's fingerprint for later reference.
-Add the public key to Heroku on the [Account page](https://dashboard.heroku.com/account).
-
-Finally, update your `config.yml` file with a job and workflow section similar to the following:
+4. In your `.circleci/config.yml`,
+create a `deploy-job`,
+`checkout` your code,
+and add a command
+to deploy the master branch to Heroku using git.
 
 ```yaml
 version: 2
 jobs:
-  # jobs for building/testing go here
+  build-job:
+    ...
   deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project
     steps:
       - checkout
-      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
-          fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-      - run:
-          name: Run Setup Script
-          command: bash .circleci/setup-heroku.sh
       - run:
           name: Deploy Master to Heroku
-          command: |  # this command is framework-dependent and may vary
-            heroku git:remote -a $HEROKU_APP_NAME
-            git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            heroku run python manage.py deploy
-            heroku restart
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build-job
-      - deploy-jobs:  # only deploy when master successfully builds
+      - deploy-job:
           requires:
             - build-job
           filters:
             branches:
               only: master
 ```
-
-If you prefer to deploy to Heroku using https, please consider this circleci (2.0) configuration which is even easier:
-
-Since we are deploying our app with https, the bash script above needed to setup heroku with ssh is not required anymore.
-For that reason the following steps can be deleted from the configuration:
-
-```yaml
-- add_ssh_keys:  # add key from CircleCI account based on fingerprint
-            fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-- run:
-     name: Run Setup Script
-     command: bash .circleci/setup-heroku.sh
-```
-
-instead we use the following step
-
-```yaml
-- run:
-     name: Deploy to Heroku
-        command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
-```
-
-- Result:
-
-```yaml
-version: 2
-jobs:
-  # jobs for building/testing go here
-  deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |  # this command is framework-dependent and may vary
-            heroku git:remote -a HEROKU_APP_NAME
-            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:refs/heads/master
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-jobs:  # only deploy when master successfully builds
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
-```
-
-For additional details,
-refer to the full example in the [2.0 Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/).
 
 ## Google Cloud
 
