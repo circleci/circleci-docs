@@ -153,19 +153,13 @@ and [follow the instructions](https://devcenter.heroku.com/start)
 to set up a project in your chosen language.
 
 2. Add the name of your Heroku application and your Heroku API key as [environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables).
-In this example, these variables are defined as `HEROKU_API_KEY` and `HEROKU_APP_NAME`, respectively.
+In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
-3. [Create a new SSH key](https://devcenter.heroku.com/articles/keys) without a passphrase,
-and [add the key to Heroku](https://devcenter.heroku.com/articles/keys#adding-keys-to-heroku).
-
-4. To connect to Heroku,
-[add the SSH key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/) with a **Hostname** of `git.heroku.com`.
-
-5. In your `.circleci/config.yml`,
+4. In your `.circleci/config.yml`,
 create a `deploy-job`,
 `checkout` your code,
 and add a command
-to deploy the master branch to Heroku.
+to deploy the master branch to Heroku via git.
 
 ```yaml
 version: 2
