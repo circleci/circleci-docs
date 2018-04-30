@@ -89,7 +89,7 @@ Following are the available machine images:
 * `circleci/classic:edge` receives the latest updates and will be upgraded at short notice.
 * `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#machine) for versions.
 
-**Note:** These images are only available on CircleCI Cloud. For information about customizing `machine` executor service images on CircleCI Server, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
+**Note:** These images are **not** available on your private installation of CircleCI. For information about customizing `machine` executor service images on the installable CircleCI, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
 
 The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
 
