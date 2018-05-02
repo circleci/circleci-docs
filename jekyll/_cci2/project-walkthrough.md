@@ -249,10 +249,6 @@ Notes on the added keys:
 
 ## Deploying to Heroku
 
-<div class="alert alert-info" role="alert">
-<p><strong>Note:</strong> CircleCI 2.0 does not yet support seamlessly integrated Heroku and AWS deployments. Keys and configuration added to the Heroku Deployment and AWS CodeDeploy pages in CircleCI are currently not available to 2.0 jobs.</p>
-</div>
-
 The demo `.circleci/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:` and `deploy:` keys to automatically deploy when a build on `master` passes all tests:
 
 ```
