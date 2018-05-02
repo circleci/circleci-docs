@@ -249,12 +249,13 @@ Notes on the added keys:
 
 ## Deploying to Heroku
 
-The demo `.circleci/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:` and `deploy:` keys to automatically deploy when a build on `master` passes all tests:
+The demo `.circleci/config.yml` includes a `deploy-job`
+to automatically deploy when a build on `master` finishes successfully.
 
-```
+```yaml
 version: 2
 jobs:
-  build:
+  build-job:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
@@ -288,25 +289,26 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
-      - run: bash .circleci/setup-heroku.sh
-      - add_ssh_keys:
-          fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-      - deploy:
+  deploy-job:
+    steps:
+      - checkout
+      - run:
           name: Deploy Master to Heroku
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git push heroku master
-              heroku run python manage.py deploy
-              heroku restart
-            fi
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
 ```
-
-Notes on the added keys:
-
-- The new `run:` executes the `setup-heroku.sh` script.
-- The `add_ssh_keys:` adds an installed SSH key with a unique fingerprint.
-- The `deploy` section is a special section that runs deployment commands. It checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands in the following Appendix section.
 
 The app will now update on Heroku with every successful build on the master branch. Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
 
