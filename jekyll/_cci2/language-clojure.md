@@ -11,6 +11,9 @@ order: 2
 
 This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
+* TOC
+{:toc}
+
 ## Overview
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
@@ -26,28 +29,29 @@ If you use another testing tool, you can just adjust that step to run a differen
 
 {% raw %}
 ```YAML
-version: 2
-jobs:
-  build:
-    working_directory: ~/cci-demo-clojure
-    docker:
-      - image: circleci/clojure:lein-2.7.1
-    environment:
+version: 2 # use CircleCI 2.0
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/cci-demo-clojure # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/clojure:lein-2.7.1 # ...with this image as the primary container; this is where all `steps` will run
+    environment: # environment variables for primary container
       LEIN_ROOT: nbd
-      JVM_OPTS: -Xmx3200m
-    steps:
-      - checkout
-      - restore_cache:
+      JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
+    steps: # commands that comprise the `build` job
+      - checkout # check out source code to working directory
+      - restore_cache: # restores saved cache if checksum hasn't changed since the last run
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein deps
-      - save_cache:
+      - save_cache: # generate and store cache in the .m2 directory using a key template
           paths:
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts:
+      - store_artifacts: # upload test results for display in Test Summary
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
 ```
 {% endraw %}
 
@@ -132,6 +136,10 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 {% endraw %}
 
 Nice! You just set up CircleCI for a Clojure app.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 ## Detailed Examples
 
