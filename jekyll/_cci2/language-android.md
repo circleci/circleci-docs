@@ -11,6 +11,9 @@ order: 9
 
 This guide will help you get started with an Android application on CircleCI.
 
+* TOC
+{:toc}
+
 ## Overview
 
 There are some assumptions made in this guide:
@@ -55,6 +58,7 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 
 ```
 {% endraw %}
@@ -126,3 +130,7 @@ React Native projects can be built on CircleCI 2.0 using Linux, Android
 and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

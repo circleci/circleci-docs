@@ -11,6 +11,9 @@ order: 7
 
 This document describes CircleCI configuration for a sample application written in Python. 
 
+* TOC
+{:toc}
+
 ## Demo Python Django Reference Project
 
 We maintain a reference Python Django project to show how to build Django on CircleCI 2.0:
@@ -85,9 +88,15 @@ Finally, add several `steps` within the `build` job:
       - store_artifacts: # special step to store test reports as artifacts
           path: test-reports/
           destination: tr1
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
 
 Refer to the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/) for the complete list of available CircleCI configuration keys.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+
 
 

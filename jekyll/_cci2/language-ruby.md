@@ -11,6 +11,9 @@ order: 8
 
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
 
+* TOC
+{:toc}
+
 ## Overview
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.

@@ -11,6 +11,9 @@ order: 5
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
+* TOC
+{:toc}
+
 ## Quickstart: demo JavaScript NodeJS reference project
 
 We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
@@ -75,11 +78,16 @@ jobs: # a collection of steps
           prefix: coverage
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results.xml
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```          
 {% endraw %}          
 ---
 
 Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our [project’s {% comment %} TODO: Job {% endcomment %}build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express) to see how this looks when building on CircleCI.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 ## See Also
 

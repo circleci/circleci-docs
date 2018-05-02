@@ -12,6 +12,9 @@ order: 3
 
 **CircleCI 2.0 supports building Go projects using any version of Go that can be installed in a Docker image.**
 
+* TOC
+{:toc}
+
 ## New to CircleCI 2.0?
 
 If you're new to CircleCI 2.0, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
@@ -192,4 +195,9 @@ Finally, let's specify a path to store the results of the tests.
 
 Success! You just set up CircleCI 2.0 for a Go app. Check out our {% comment %} TODO: Jobs {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go) to see how this looks when building on CircleCI.
 
-If you have any questions about the specifics of testing your Go application, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
+## Deploy
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+

@@ -11,6 +11,9 @@ order: 6
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
+* TOC
+{:toc}
+
 ## Quickstart: Demo PHP Laravel reference project
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
@@ -76,12 +79,17 @@ jobs: # a collection of steps
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
 
 ---
 
 Success! You just set up CircleCI 2.0 for a PHP app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel) to see how this looks when building on CircleCI.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 ## See Also
 
