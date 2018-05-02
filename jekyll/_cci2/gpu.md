@@ -20,8 +20,8 @@ Run the following commands on any Nvidia GPU-enabled instance. The following exa
 
 1. `wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb`     
 2. `sudo apt-get update`
-3. `uname -r`
-4. `sudo apt-get install -y linux-image-extra-<output of uname -r> linux-headers-<output of uname -r> linux-image-<output of uname -r>`
+3. `export OS_RELEASE=$(uname -r)`
+4. `sudo apt-get install -y linux-image-extra-$OS_RELEASE linux-headers-$OS_RELEASE linux-image-$OS_RELEASE`
 5. `sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb`
 6. `sudo apt-get update`
 7. `sudo apt-get --yes --force-yes install cuda`
