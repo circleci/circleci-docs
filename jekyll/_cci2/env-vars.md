@@ -51,12 +51,34 @@ environment variables are hidden and uneditable in the application.
 Changing an environment variable is only possible
 by deleting and recreating it.
 
-**Note:**
-If you are having difficulties adding a multiline environment variable,
+### Encoding Multi-Line Environment Variables
+
+If you are having difficulty adding a multiline environment variable,
 use `base64` to encode it.
-In your `.circleci/config.yml` file,
-decode the variable in any commands
+
+```bash
+$ echo "foobar" | base64
+Zm9vYmFyCg==
+```
+
+Store the resulting value in a CircleCI environment variable.
+
+```bash
+$ echo $MYVAR
+Zm9vYmFyCg==
+```
+
+Decode the variable in any commands
 that use the variable.
+
+```bash
+$ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
+Login Succeeded
+```
+
+**Note:**
+Not all command-line programs take credentials
+in the same way that `docker` does.
 
 ## Adding Global Environment Variables
 
