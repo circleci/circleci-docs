@@ -45,7 +45,8 @@ jobs:
         
     steps:
       - checkout
-      - run: sudo apt install postgresql-client-9.6
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-9.6
       - run: whoami
       - run: | 
           psql \
@@ -54,7 +55,7 @@ jobs:
       - run: | 
           psql \
           -d $TEST_DATABASE_URL \
-          -c "INSERT INTO test (name char(25));"
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
       - run: | 
           psql \
           -d $TEST_DATABASE_URL \
