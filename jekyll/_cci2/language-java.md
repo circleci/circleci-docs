@@ -11,6 +11,9 @@ order: 4
 
 This guide will help you get started with a Java application on CircleCI. 
 
+* TOC
+{:toc}
+
 ## Overview
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
@@ -57,6 +60,7 @@ jobs: # a collection of steps
       
       - store_artifacts: # store the uberjar as an artifact
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
 
@@ -140,6 +144,10 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
 {% endraw %}
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
+
+## Deploy
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 
 
