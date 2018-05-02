@@ -117,6 +117,7 @@ jobs: # a collection of steps
       # Save test results for timing analysis
       - store_test_results:
           path: test_results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs    
 ```
 {% endraw %}
 
@@ -296,6 +297,9 @@ For more on `circleci tests glob` and `circleci tests split` commands, please re
 
 Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails) to see how this looks when building on CircleCI.
 
+## Deployment
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
 ## Detailed Examples
 
