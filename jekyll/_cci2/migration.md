@@ -8,6 +8,7 @@ Migrate an existing 1.0 project to CircleCI 2.0.
 
 Document | Description
 ----|----------
+[Getting Started]({{ site.baseurl }}/2.0/) | CircleCI 2.0 is very different from 1.0, use the Getting Started doc to get a green 2.0 run with your desired executor (docker, macos, or machine) first and a single job named `build`. Then, add jobs for discreet parts of your run, orchestrate them with a workflow, and share data between jobs with workspaces.
 [Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migrating-from-1-2/) | Migrating a 1.0 Linux project to a CircleCI 2.0 configuration.
 [iOS Migration]({{ site.baseurl }}/2.0/ios-migrating-from-1-2/) | Migrating a 1.0 iOS project to a CircleCI 2.0 configuration.
 [Using the 1.0-to-2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation/) | Instructions for using the `config-translation` endpoint to generate an initial CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages: Ruby, PHP, Node.js, iOS (partial: 1.0 code signing is not supported - use Fastlane instead), Java (partial).
