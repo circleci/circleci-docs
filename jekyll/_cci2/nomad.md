@@ -69,9 +69,13 @@ Nomad itself does not provide a scaling method for cluster, so you must implemen
 
 ### Scaling Up the Client Cluster
 
-Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
+Refer to the Auto Scaling section of the [Administrative Variables, Monitoring, and Logging](https://circleci.com/docs/2.0/monitoring/#auto-scaling) document for details about adding Nomad Client instances to an AWS auto scaling group and using a scaling policy to scale up automatically according to your requirements. 
 
+<!--- 
+commenting until we have non-aws installations?
+Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
 HashiCorp recommends using Consul or other service discovery mechanisms to make this more robust in production. For more information, see the following pages in the official documentation for [Clustering](https://www.nomadproject.io/intro/getting-started/cluster.html), [Service Discovery](https://www.nomadproject.io/docs/service-discovery/index.html), and [Consul Integration](https://www.nomadproject.io/docs/agent/configuration/consul.html).
+--->
 
 ### Shutting Down a Nomad Client
 
@@ -85,15 +89,10 @@ When you want to shutdown a Nomad client, you must first set the client to `drai
 
 `nomad node-status -self`
 
-Alternatively, you can drain a remote node with `nomad node-drain -enable -yes <node-id>`
+Alternatively, you can drain a remote node with `nomad node-drain -enable -yes <node-id>`.
 
 ### Scaling Down the Client Cluster
 
-To scale your Nomad cluster properly, you need a mechanism for clients to shutdown in `drain` mode first. Then, wait for all jobs to be finished before terminating the client.
+To set up a mechanism for clients to shutdown in `drain` mode first and wait for all jobs to be finished before terminating the client, configure an ASG Lifecycle Hook that triggers a script when scaling down instances.
 
-While there are many ways to achieve this, here is one example of implementing such mechanism by using AWS and ASG.
-
-1. Configure ASG Lifecycle Hook that triggers a script when scaling down instances.
-2. The script makes the instance in drain mode.
-3. The script monitors running jobs on the instance and waits for them to finish.
-4. Terminate the instance.
+The script should use the above commands to put the instance in drain mode, monitor running jobs on the instance, wait for them to finish and then terminate the instance.
