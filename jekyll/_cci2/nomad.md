@@ -63,9 +63,10 @@ Complete the following steps to get logs from the allocation of the specified jo
 
 1. Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
+<!---
 ## Scaling the Nomad Cluster
-
 Nomad itself does not provide a scaling method for cluster, so you must implement one. This section provides basic operations regarding scaling a cluster.
+--->
 
 ### Scaling Up the Client Cluster
 
