@@ -107,7 +107,7 @@ Have available the following information and policies before starting the Previe
 2. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
 3. Fill `terraform.tfvars` with appropriate AWS values for section 1. 
 4. Specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters. Passprhase cannot be empty.
-5. Specify the instance size for your Nomad Clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients that get deployed are `m4.xlarge` instances which support three clients per server.  To increase the number of clients per server to support mutiple parallel builds, for example, modify section 2 of the `enterprise-setup/terraform.tfvars` file to specify a larger instance type for the `nomad_client_instance_type`. Using an `m4.2xlarge` instance with 8 CPUs and 32GB RAM is best practice for Nomad Clients. **Note:** The `builder_instance_type` is only used for 1.0 and is disabled by default in section 3. 
+5. Specify the instance type for your Nomad Clients—defaults to `m4.2xlarge`. To increase the number of CircleCI jobs that each Nomad Client can run, use a larger instance type (refer to AWS' [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types) guide for details). **Note:** The `builder_instance_type` is only used for 1.0 and is disabled by default in section 3. 
 4. Run `terraform apply` to provision.
 5. Go to the provided URL at the end of Terraform output and follow the instructions.
 6. Enter your license.
