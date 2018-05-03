@@ -295,9 +295,9 @@ Vault should be setup as follows:
 
 1. Pull down vault. No higher than 0.7 currently: 
  
-2. Put the vault binary somewhere on $PATH (optional but makes life easier)
+2. Put the vault binary somewhere on $PATH as a best practice.
 
-3. Create a config file like vault.hcl with the following:
+3. Create a `vault.hcl` config file with the following:
 
 ```
 storage "file" { # Note:  This can be set to consul if they are using HashiCorps consul for HA
@@ -311,28 +311,27 @@ listener "tcp" {
 }
 ```
 
-4. Start vault : `sudo vault server -config=/path/to/vault.hcl & `
+4. Start vault by running `sudo vault server -config=/path/to/vault.hcl & `.
 
-**Note:** You'll only need to do the below if you are setting up Vault as a test instance with HTTP
+**Note:** You'll only need to do the following if you are setting up vault as a test instance with HTTP.
 
-5.  `export VAULT_ADDR=http://127.0.0.1:8200`
+5. Run `export VAULT_ADDR=http://127.0.0.1:8200`.
 
-6. `sudo vault init` 
+6. Run `sudo vault init`. 
 
 7. Copy the unseal keys and the root key.  You’ll need these values. 
 
-8. Unseal vault using: `sudo vault unseal` . You'll have to run this command 3 times using 3 different unseal keys. 
+8. Unseal vault using: `sudo vault unseal` . You'll have to run this command three times using three different unseal keys. 
 
-9.  Now you need to auth.  Run: `sudo vault auth` The token here should be the root token that you copied earlier.
+9. Now you need to authenticate by running `sudo vault auth`. The token here should be the root token that you copied earlier.
 
-10. Once authed, you should now need to mount the transit mount: `sudo vault mount transit`
+10. Once authenticated, you should now mount the transit mount by running `sudo vault mount transit`.
 
-11. For CircleCI, you'll need to generate a token that can be renewed. You can generate this by running the following: `sudo vault token-create -period="1h"`  . Use the generated token as your vault token, that you'll need below. 
+11. For CircleCI, generate a token that can be renewed. Generate this by running the following: `sudo vault token-create -period="1h"`. Use the generated token as your vault token which you will also need below. 
 
-12. Seal vault: `sudo vault seal`
+12. Seal vault by running `sudo vault seal`.
 
-Now, just proceed to Configuring Replicated, and you should be almost done with setting up CircleCI in HA mode. 
-
+Proceed to Configuring Replicated, to continue with setting up CircleCI in HA mode. 
 
 
 ## Configuring Replicated
