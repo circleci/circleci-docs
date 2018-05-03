@@ -5,19 +5,18 @@ category: [administration]
 order: 30
 ---
 
-This document is for System Administrators who are setting environment variables for installed Builders, gathering metrics for monitoring their CircleCI installation, and viewing logs:
+This document is for System Administrators who are setting environment variables for installed Nomad Clients, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
 * TOC
 {:toc}
 
-## Setting Environment Variables on Builders
+## Setting Environment Variables on Nomad Clients
 
-Several aspects of CircleCI Builder behavior can be customized by passing
+Several aspects of CircleCI Nomad Client behavior can be customized by passing
 environment variables into the builder process. 
 
-If you are using the [trial]({{site.baseurl}}/2.0/single-box/) installation
-option on a single VM, then you can create a file called `/etc/circle-installation-customizations`
-with entries like `export CIRCLE_OPTION_A=foo` to set environment variables.
+To set environment variables create a file called `/etc/circle-installation-customizations`
+with environment variable entries, for example, `export CIRCLE_OPTION_A=foo`. 
 
 ## System Monitoring 
 
@@ -25,10 +24,12 @@ Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Ena
 
 CloudWatch already monitors the health and basic checks for the EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of containers per container if CPU or memory become a bottleneck.
 
+## Auto Scaling
+
 There is a [blog post series](https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/)
  wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
 
-1. In general, size your build cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time, it is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+1. In general, size your cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time, it is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
 
 2. Create an Auto Scaling group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. Scaling up during the weekday normal working hours and back down at night is the best practice to keep queue times down during peak development without over provisioning at night when traffic is low. Looking at millions of builds over time, a bell curve during normal working hour emerges for most data sets.
 
