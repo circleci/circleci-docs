@@ -1,11 +1,11 @@
 ---
 layout: classic-docs
-title: "Administrative Variables, Monitoring, and Logging"
+title: "Environment Variables, Auto Scaling, and Monitoring"
 category: [administration]
 order: 30
 ---
 
-This document is for System Administrators who are setting environment variables for installed Nomad Clients, gathering metrics for monitoring their CircleCI installation, and viewing logs:
+This document is for System Administrators who are setting environment variables for installed Nomad Clients, scaling their cluster, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
 * TOC
 {:toc}
@@ -25,6 +25,12 @@ Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Ena
 CloudWatch already monitors the health and basic checks for the EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of containers per container if CPU or memory become a bottleneck.
 
 ## Auto Scaling
+
+By default, an Auto Scaling group is created on your AWS account. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies. 
+
+Refer to the Shutting Down a Nomad Client section of the [Nomad]({{ site.baseurl }}/2.0/nomad/#shutting-down-a-nomad-client) document for instructions on draining and scaling down the Nomad Clients.
+
+### Auto Scaling Policy Best Practices
 
 There is a [blog post series](https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/)
  wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
