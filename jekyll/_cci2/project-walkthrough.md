@@ -250,7 +250,7 @@ Notes on the added keys:
 ## Deploying to Heroku
 
 The demo `.circleci/config.yml` includes a `deploy-job`
-to automatically deploy when a build on `master` finishes successfully.
+to deploy the `master` branch to Heroku.
 
 ```yaml
 version: 2
