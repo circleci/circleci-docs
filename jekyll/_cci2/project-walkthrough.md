@@ -389,4 +389,8 @@ workflows:
               only: master
 ```
 
-**Note:** If you fork this demo project so you can try it out for yourself, make sure to rename the Heroku project setting so that it can deploy to Heroku without clashing with the namespace used in this tutorial.
+**Note:**
+If you fork this demo project,
+rename the Heroku project,
+so you can deploy to Heroku
+without clashing with the namespace used in this tutorial.
