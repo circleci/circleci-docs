@@ -310,7 +310,7 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-The app will now update on Heroku with every successful build on the master branch. Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
+Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
 
 ## Additional Heroku Configuration
 
@@ -337,7 +337,23 @@ heroku restart
 
 ## Using Workflows to Automatically Deploy
 
+To deploy `master` to Heroku automatically after a successful `master` build,
+add a `workflows` section
+that links `build-job` and `deploy-job`.
+
 ```yaml
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
+
 version: 2
 jobs:
   build-job:
@@ -381,16 +397,7 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-job:
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
 ```
+
+For more information about Workflows,
+see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
