@@ -337,39 +337,4 @@ heroku restart
 
 The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-Deployment with CircleCI 2.0 requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for your Heroku API key and login email must be added to the CircleCI UI:
-
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough9.png)
-
-Creation of a new SSH key, without a passphrase, enables connecting to the Heroku Git server from CircleCI. The private key is added through the CircleCI UI SSH Permissions page with a hostname of `git.heroku.com` as follows:
-
-![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough10.png)
-
-The private key is pasted into the input as shown above. A note is made of the Fingerprint for the private key for later reference. The public key is added to Heroku on the <https://dashboard.heroku.com/account> screen.
-
-The `setup-heroku.sh` file in the `.circleci` folder includes the following:
-
-```
-#!/bin/bash
-  git remote add heroku https://git.heroku.com/circleci-demo-python-flask.git
-  wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-  sudo mkdir -p /usr/local/lib /usr/local/bin
-  sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-  sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
-
-  cat > ~/.netrc << EOF
-  machine api.heroku.com
-    login $HEROKU_LOGIN
-    password $HEROKU_API_KEY
-  machine git.heroku.com
-    login $HEROKU_LOGIN
-    password $HEROKU_API_KEY
-  EOF
-
-  # Add heroku.com to the list of known hosts
-  ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
-```
-
-This file runs on CircleCI and configures everything Heroku needs to deploy the app. `sudo` is required because commands are run by the `ubuntu` user by default in the primary container provided by CircleCI. ¦¦The second part creates a `.netrc` file and populates it with the API key and login details set previously.
-
 **Note:** If you fork this demo project so you can try it out for yourself, make sure to rename the Heroku project setting so that it can deploy to Heroku without clashing with the namespace used in this tutorial.
