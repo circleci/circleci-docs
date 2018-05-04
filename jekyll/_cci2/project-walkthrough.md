@@ -9,7 +9,10 @@ order: 3
 
 *[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Project Tutorial*
 
-The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database. The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
+The demo application in this tutorial uses Python and Flask for the backend.
+PostgreSQL is used for the database.
+The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
+The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
 * Contents
 {:toc}
@@ -252,6 +255,9 @@ Notes on the added keys:
 The demo `.circleci/config.yml` includes a `deploy-job`
 to deploy the `master` branch to Heroku.
 
+For full instructions,
+see the [Heroku section]({{ site.baseurl }}/2.0/deployment-integrations/#heroku) of the Deployment document.
+
 ```yaml
 version: 2
 jobs:
@@ -296,18 +302,6 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-job:
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
 ```
 
 The app will now update on Heroku with every successful build on the master branch. Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
