@@ -258,6 +258,12 @@ to deploy the `master` branch to Heroku.
 For full instructions,
 see the [Heroku section]({{ site.baseurl }}/2.0/deployment-integrations/#heroku) of the Deployment document.
 
+**Note:**
+If you fork this demo project,
+rename the Heroku project,
+so you can deploy to Heroku
+without clashing with the namespace used in this tutorial.
+
 ```yaml
 version: 2
 jobs:
@@ -388,9 +394,3 @@ workflows:
             branches:
               only: master
 ```
-
-**Note:**
-If you fork this demo project,
-rename the Heroku project,
-so you can deploy to Heroku
-without clashing with the namespace used in this tutorial.
