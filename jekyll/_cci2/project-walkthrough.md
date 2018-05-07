@@ -312,7 +312,7 @@ jobs:
 
 Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
 
-## Additional Heroku Configuration
+### Additional Heroku Configuration
 
 The demo application is configured to run on Heroku with settings provided `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
