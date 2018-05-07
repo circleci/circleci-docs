@@ -11,7 +11,7 @@ order: 70
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
-This document describes how to enable Docker Layer Caching (DLC) which is useful when you are _building_ Docker images during your job or Workflow. DLC does **not** speed up downloading of Docker images used to _run_ your jobs. 
+This document describes how to enable Docker Layer Caching (DLC), which is useful when you are _building_ Docker images during your job or Workflow. DLC does **not** speed up downloading of the Docker images used to _run_ your jobs (i.e., any images downloaded in a job's "Spin up Environment" step).
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your circleci.com account for an additional fee. DLC is available by default when licensed for installation in your datacenter or private cloud.
 
