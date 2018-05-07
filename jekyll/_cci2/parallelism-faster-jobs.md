@@ -15,7 +15,7 @@ To reduce this time,
 you can run tests in parallel
 by spreading them across multiple machines.
 This requires specifying a parallelism level
-and using the CircleCI Local CLI
+and using the CircleCI CLI
 to split test files.
 
 * TOC
@@ -42,11 +42,13 @@ jobs:
 For more information,
 see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
 
-## Using the CircleCI Local CLI to Split Tests
+## Using the CircleCI CLI to Split Tests
 
 Test allocation across containers is file-based
-and requires the CircleCI Local CLI.
-To install the CLI,
+and requires the CircleCI CLI. It is automatically
+injected into your build at run-time.
+
+To install the CLI locally,
 see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
 
 ### Globbing Test Files
