@@ -60,7 +60,6 @@ The following projects provide examples of using features and functionality of C
 Example Description | Project | config.yml link
 ------|-----------|------------
 Caching with templates, using workspaces, parallel workflow jobs | Build mobile apps with **React**. | [react-native/.circleci/config.yml](https://github.com/facebook/react-native/blob/master/.circleci/config.yml)
-Scheduled master branch build with contexts | **TypeScript** is a language for application-scale JavaScript. | [TypeScript/.circleci/config.yml](https://github.com/Microsoft/TypeScript/blob/master/.circleci/config.yml)
 Build and test with custom container image for ARM and x64 with `xvfb` and mocha | The **Electron** framework lets you write cross-platform desktop applications using JavaScript, HTML and CSS. It is based on Node.js and Chromium. |[electron/.circleci/config.yml](https://github.com/electron/electron/blob/master/.circleci/config.yml)
 Build, test, and upload run for macOS and Linux | **Conda** is a platform- and language-independent package manager that sports easy distribution, installation and version management of software. | [bioconda-recipes/.circleci/config.yml](https://github.com/bioconda/bioconda-recipes/blob/master/.circleci/config.yml)
 Build and register a Docker image, deploy to AWS ECS | **Taco** is a next generation repository system for DLSS. | [taco/.circleci/config.yml](https://github.com/sul-dlss-labs/taco/blob/master/.circleci/config.yml)
