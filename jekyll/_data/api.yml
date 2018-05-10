@@ -700,5 +700,5 @@ heroku_key:
   url: "/user/heroku-key"
   description: "Adds your Heroku API key to CircleCI"
   method: "POST"
-  body: '{"apikey":"Herou key"}'
+  body: '{"apikey":"Heroku key"}'
   response: " "
