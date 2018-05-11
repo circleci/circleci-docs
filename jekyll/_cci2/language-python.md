@@ -43,7 +43,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 Start with the version:
 
-```YAML
+```yaml
 version: 2 # use CircleCI 2.0
 ```
 
@@ -51,7 +51,7 @@ First, specify a `jobs` key. Each job represents a phase in your Build-Test-Depl
 
 Specify a working directory and container images for this build in `docker` section:
 
-```YAML
+```yaml
 ...
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
@@ -67,7 +67,7 @@ jobs: # a collection of steps
 Finally, add several `steps` within the `build` job:
 
 {% raw %}
-```YAML
+```yaml
     steps: # a collection of executable commands
       - checkout # special step to check out source code to the working directory
       - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run

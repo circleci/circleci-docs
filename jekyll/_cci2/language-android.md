@@ -27,7 +27,7 @@ Running the Android emulator is not currently supported by the type of virtualiz
 ## Sample Configuration
 
 {% raw %}
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -67,7 +67,7 @@ jobs:
 
 We always start with the version.
 
-```YAML
+```yaml
 version: 2
 ```
 
@@ -75,7 +75,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. This is the directory into which our code will be checked out, and this path will be used as the default working directory for the rest of the `job` unless otherwise specified.
 
-```YAML
+```yaml
 jobs:
   build:
     working_directory: ~/code
@@ -83,7 +83,7 @@ jobs:
 
 Directly beneath `working_directory`, we can specify container images under a `docker` key.
 
-```YAML
+```yaml
     docker:
       - image: circleci/android:api-25-alpha
 ```

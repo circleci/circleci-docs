@@ -13,7 +13,7 @@ This document describes how to initiate jobs using the CircleCI API. **Note:** I
 
 The following example initiates a `deploy_production` job by using `curl`.
 
-```YAML
+```yaml
 curl -u ${CIRCLE_API_TOKEN}: \
      -d build_parameters[CIRCLE_JOB]=deploy_production \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
@@ -29,7 +29,7 @@ A few notes about this example:
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed. 
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:

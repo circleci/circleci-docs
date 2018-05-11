@@ -40,7 +40,7 @@ Database images for use as a secondary 'service' container are also available on
 ## Sample Configuration
 
 {% raw %}
-```YAML
+```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
@@ -140,7 +140,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 Start with the version.
 
-```YAML
+```yaml
 version: 2
 ```
 
@@ -148,7 +148,7 @@ Next, add a `jobs` key. Each job represents a phase in your Build-Test-Deploy pr
 
 In each job, you have the option of specifying a `working_directory`. In this sample config, it is named after the project in the home directory.
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -160,9 +160,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, you can specify container images under a `docker` key.
 
-```YAML
-version: 2
-# ...
+```yaml
     docker:
       - image: circleci/ruby:2.4-node
         environment:
@@ -189,7 +187,7 @@ Finally, add several `steps` within the `build` job.
 
 Start with `checkout` so CircleCI can operate on the codebase.
 
-```YAML
+```yaml
 steps:
   - checkout
 ```
@@ -199,7 +197,7 @@ This step tells CircleCI to checkout the project code into the working directory
 Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.
 
 {% raw %}
-```YAML
+```yaml
 steps:
   # ...
 
@@ -224,7 +222,7 @@ steps:
 If your application is using Webpack or Yarn for JavaScript dependencies, you should also add the following to your config.
 
 {% raw %}
-```YAML
+```yaml
 steps:
   # ...
 
@@ -248,7 +246,7 @@ steps:
 
 The next section sets up the test database. It uses the `dockerize` [utility](https://github.com/jwilder/dockerize) to delay starting the main process of the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) until after the database service is available.
 
-```YAML
+```yaml
 steps:
   # ...
 
@@ -269,7 +267,7 @@ If they succeed, it stores the test results using `store_test_results` so Circle
 From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
-```YAML
+```yaml
 steps:
   # ...
 

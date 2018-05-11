@@ -298,7 +298,7 @@ A working `.circleci/config.yml` section might look like this:
       - run: npm install
       - run: mkdir ~/junit
       - run:
-          command: karma start ./karma.conf.js:
+          command: karma start ./karma.conf.js
           environment:
             JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
