@@ -19,7 +19,7 @@ This document provides an overview of the concepts used in CircleCI 2.0 in the f
 Steps are actions that need to be taken to perform your job. ![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_step.png) Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
 
 
-```YAML
+```yaml
 ...
     steps:
       - checkout # Special step to checkout your source code
@@ -37,7 +37,7 @@ Steps are actions that need to be taken to perform your job. ![step illustration
 An image is a packaged system that has the instructions for creating a running container. ![image illustration]( {{ site.baseurl }}/assets/img/docs/concepts_image.png)
  The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
 
- ```YAML
+ ```yaml
  version 2
  jobs:
    build1: # job name
@@ -82,7 +82,7 @@ Each job may contain special steps for caching dependencies from previous jobs t
 
 {% raw %}
 
-```YAML
+```yaml
 version 2
 jobs:
   build1:
@@ -119,7 +119,7 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 {% raw %}
-```YAML
+```yaml
 version 2
 jobs:
   build1:
@@ -179,7 +179,7 @@ Each workflow has a temporary workspace associated with it. The workspace can be
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
   {% raw %}
-  ```YAML
+  ```yaml
 version: 2
 jobs:
   build1:

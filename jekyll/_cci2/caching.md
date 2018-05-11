@@ -20,7 +20,7 @@ A good example is package dependency managers such as Yarn, Bundler, or Pip. Wit
 Caching keys are simple to configure. The following example updates a cache if it changes by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
-```YAML
+```yaml
     steps:
       - restore_cache:
          keys:
@@ -102,7 +102,7 @@ CircleCI restores caches in the order of keys listed in the `restore_cache` step
 In the example below, two keys are provided:
 
 {% raw %}
-```YAML
+```yaml
     steps:
       - restore_cache:
           keys:
@@ -136,7 +136,7 @@ The extra control and power in CircleCI 2.0 manual dependency caching requires t
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
-```YAML
+```yaml
     steps:
       - save_cache:
           key: my-cache
@@ -179,7 +179,7 @@ Template | Description
 The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
 
 {% raw %}
-```YAML
+```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
         environment:

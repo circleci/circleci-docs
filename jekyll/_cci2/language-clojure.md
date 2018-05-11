@@ -28,7 +28,7 @@ If you use another testing tool, you can just adjust that step to run a differen
 ## Sample Configuration
 
 {% raw %}
-```YAML
+```yaml
 version: 2 # use CircleCI 2.0
 jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
@@ -67,7 +67,7 @@ Now we’re ready to build a `config.yml` from scratch.
 
 We always start with the version.
 
-```YAML
+```yaml
 version: 2
 ```
 
@@ -75,7 +75,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -86,7 +86,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we can specify container images under a `docker` key.
 
-```YAML
+```yaml
 version: 2
 ...
     docker:
@@ -99,7 +99,7 @@ We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll 
 
 Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case. 
 
-```YAML
+```yaml
     environment:
       JVM_OPTS: -Xmx3200m
       LEIN_ROOT: nbd
@@ -116,7 +116,7 @@ Then `lein do test, uberjar` runs the actual tests, and if they succeed, it crea
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
-```YAML
+```yaml
 ...
     steps:
       - checkout

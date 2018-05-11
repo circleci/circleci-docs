@@ -29,7 +29,7 @@ We're going to make a few assumptions here:
 ## Sample Configuration
 
 {% raw %}
-```YAML
+```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
@@ -76,7 +76,7 @@ Now we’re ready to build a `config.yml` from scratch.
 
 We always start with the version.
 
-```YAML
+```yaml
 version: 2
 ```
 
@@ -84,7 +84,7 @@ Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deplo
 
 In each job, we must specify a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -95,7 +95,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we can specify container images under a `docker` key.
 
-```YAML
+```yaml
 version: 2
 ...
     docker:
@@ -117,7 +117,7 @@ Next `store_test_results` uploads the test metadata from the `target/surefire-re
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
-```YAML
+```yaml
 ...
     steps:
 

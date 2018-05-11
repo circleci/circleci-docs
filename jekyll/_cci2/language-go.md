@@ -50,7 +50,7 @@ This section explains the commands in `.circleci/config.yml`
 
 We always start with the version.
 
-```YAML
+```yaml
 version: 2
 ```
 
@@ -58,7 +58,7 @@ Next, we have a `jobs` key. Every config file must have a ‘build’ job. This 
 
 In the job, we specify a `working_directory`. Go is very strict about the structure of the [Go Workspace](https://golang.org/doc/code.html#Workspaces), so we’ll need to specify a path that satisfies those requirements.
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -69,7 +69,7 @@ This path will be used as the default working directory for the rest of the `job
 
 Directly beneath `working_directory`, we’ll specify [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) images for this job under `docker`.
 
-```YAML
+```yaml
     docker:
       - image: circleci/golang:1.8
 ```
@@ -78,7 +78,7 @@ We'll use a custom image which is based on `golang:1.8.0` and includes also `net
 
 We're also using an image for PostgreSQL, along with 2 environment variables for initializing the database.
 
-```YAML
+```yaml
       - image: circleci/postgres:9.4.12-alpine
         environment:
           POSTGRES_USER: root
@@ -89,20 +89,20 @@ Now we need to add several `steps` within the `build` job.
 
 The `checkout` step will default to the `working_directory` we have already defined.
 
-```YAML
+```yaml
     steps:
       - checkout
 ```
 
 Next we create a directory for collecting test results
 
-```YAML
+```yaml
       - run: mkdir -p $TEST_RESULTS
 ```
 
 Then we pull down the cache (if present). If this is your first run, this won't do anything.
 
-```YAML
+```yaml
       - restore_cache:
           keys:
             - v1-pkg-cache
@@ -110,7 +110,7 @@ Then we pull down the cache (if present). If this is your first run, this won't 
 
 And install the Go implementation of the JUnit reporting tool and other dependencies for our application. These are good candidates to be pre-installed in primary container.
 
-```YAML
+```yaml
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -135,7 +135,7 @@ This is why `netcat` installed on the CircleCI Go image. We use it to validate t
 
 Now we run our tests. To do that, we need to set an environment variable for our database's URL and path to the DB migrations files. This step has some additional commands, we'll explain them below.
 
-```YAML
+```yaml
       - run:
           name: Run unit tests
           environment:
@@ -188,7 +188,7 @@ To start the service we need to build it first. After that we use the same envir
 
 Finally, let's specify a path to store the results of the tests.
 
-```YAML
+```yaml
       - store_test_results:
           path: /tmp/test-results
 ```

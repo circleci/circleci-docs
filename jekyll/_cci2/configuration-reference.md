@@ -152,7 +152,7 @@ jobs:
 
 If you are using a private image, you can specify the username and password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
 
-```YAML
+```yaml
 jobs:
   build:
     docker:
@@ -220,7 +220,7 @@ You can use one of the `year-month` versioned images to pin the version used by 
 
 **Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
 
-```YAML
+```yaml
 jobs:
   build:
     machine:
@@ -231,7 +231,7 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 
 **Example**
 
-```YAML
+```yaml
 jobs:
   build:
     machine: true
@@ -251,7 +251,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 
 **Example:** Use a macOS virtual machine with Xcode version `9.0`:
 
-```YAML
+```yaml
 jobs:
   build:
     macos:

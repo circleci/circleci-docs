@@ -46,7 +46,7 @@ to find artifacts at a given path within the application.
 
 To upload artifacts created during builds, use the following example:
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -102,7 +102,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 
-```YAML
+```yaml
 version: 2.0
 jobs:
   build:

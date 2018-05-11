@@ -106,14 +106,14 @@ Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's O
 
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
 
-```YAML
+```yaml
 golang:1.7.1
 redis:3.0.7
 ```
 
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
 
-```YAML
+```yaml
 myUsername/couchdb:1.6.1
 ```
 

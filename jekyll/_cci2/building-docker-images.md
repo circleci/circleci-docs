@@ -18,7 +18,7 @@ This document explains how to build Docker images for deploying elsewhere or for
 
 To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your {% comment %} TODO: Job {% endcomment %}build requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
-```YAML
+```yaml
 jobs:
   build:
     steps:
@@ -44,7 +44,7 @@ CPUs | Processor                 | RAM | HD
 
 Following is an example of building a Docker image using `machine` with the default image:
 
-```YAML
+```yaml
 version: 2
 jobs:
  build:
@@ -67,7 +67,7 @@ jobs:
 
 Following is an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
@@ -111,7 +111,7 @@ Let’s break down what’s happening during this build’s execution:
 
 If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as an `image` attribute:
 
-```YAML
+```yaml
       - setup_remote_docker:
           version: 17.05.0-ce
 ```
@@ -135,7 +135,7 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 ### Accessing Services
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
-```YAML
+```yaml
 # start service and check that it’s running
 - run: |
     docker run -d --name my-app my-app
@@ -144,7 +144,7 @@ It’s impossible to start a service in remote docker and ping it directly from 
 
 A different way to do this is to use another container running in the same network as the target container:
 
-```YAML
+```yaml
 - run: |
     docker run -d --name my-app my-app
     docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080

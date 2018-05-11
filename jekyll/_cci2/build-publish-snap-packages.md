@@ -21,7 +21,7 @@ To build a snap in any environment (local, company servers CI, etc) there needs 
 
 ## Build Environment
 
-```YAML
+```yaml
 ...
 version: 2
 jobs:
@@ -35,7 +35,7 @@ The `docker` executor is used here with the [`cibuilds/snapcraft`](https://githu
 
 ## Running Snapcraft
 
-```YAML
+```yaml
 ...
     steps:
       - checkout
@@ -66,7 +66,7 @@ base64 snapcraft.login | xsel --clipboard
 
 1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_LOGIN_FILE`.
 
-```YAML
+```yaml
 ...
       - run:
           name: "Publish to Store"
@@ -99,7 +99,7 @@ We can utilize multiple jobs to better organize our snap build. A job to build/c
 
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
-```YAML
+```yaml
 ... # from a job that already has the snap
       - persist_to_workspace:
           root: .
@@ -116,7 +116,7 @@ Below is a complete example of how a snap package could be built on CircleCI. Th
 
 ## Full Example Config
 
-```YAML
+```yaml
 version: 2
 jobs:
   build:
