@@ -136,18 +136,23 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```yaml
-# start service and check that it’s running
-- run: |
-    docker run -d --name my-app my-app
-    docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
+#...
+      - run:
+          name: "Start Service and Check That it’s Running"
+          command: |
+            docker run -d --name my-app my-app
+            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
+#...
 ```
 
 A different way to do this is to use another container running in the same network as the target container:
 
 ```yaml
-- run: |
-    docker run -d --name my-app my-app
-    docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
+#...
+      - run: |
+          docker run -d --name my-app my-app
+          docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
+#...
 ```
 
 ### Mounting Folders

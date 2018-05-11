@@ -22,13 +22,13 @@ To build a snap in any environment (local, company servers CI, etc) there needs 
 ## Build Environment
 
 ```yaml
-...
+#...
 version: 2
 jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
-...
+#...
 ```
 
 The `docker` executor is used here with the [`cibuilds/snapcraft`](https://github.com/cibuilds/snapcraft) Docker image. This image is based on the official [`snapcore/snapcraft`](https://github.com/snapcore/snapcraft/tree/master/docker) Docker image by Canonical with all of the command-line tools you'd want to be installed in a CI environment. This image includes the `snapcraft` command which will be used to build the actual snap.

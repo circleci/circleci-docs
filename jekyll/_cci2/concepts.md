@@ -20,7 +20,7 @@ Steps are actions that need to be taken to perform your job. ![step illustration
 
 
 ```yaml
-...
+#...
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see
@@ -29,7 +29,7 @@ Steps are actions that need to be taken to perform your job. ![step illustration
           command: make test # executable command run in
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
-...          
+#...          
 ```          
 
 ## Image
@@ -83,7 +83,7 @@ Each job may contain special steps for caching dependencies from previous jobs t
 {% raw %}
 
 ```yaml
-version 2
+version: 2
 jobs:
   build1:
     docker: # Each job requires specifying an executor
@@ -120,7 +120,7 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 
 {% raw %}
 ```yaml
-version 2
+version: 2
 jobs:
   build1:
     docker:

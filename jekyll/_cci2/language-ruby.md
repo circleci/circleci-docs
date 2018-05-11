@@ -161,8 +161,6 @@ This path will be used as the default working directory for the rest of the `job
 Directly beneath `working_directory`, you can specify container images under a `docker` key.
 
 ```yaml
-version: 2
-# ...
     docker:
       - image: circleci/ruby:2.4-node
         environment:

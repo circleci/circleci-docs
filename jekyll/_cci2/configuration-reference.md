@@ -221,6 +221,7 @@ You can use one of the `year-month` versioned images to pin the version used by 
 **Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
 
 ```yaml
+version: 2
 jobs:
   build:
     machine:
@@ -232,9 +233,10 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 **Example**
 
 ```yaml
+version: 2
 jobs:
   build:
-    machine: true
+    machine:
       docker_layer_caching: true    # default - false
 ```
 

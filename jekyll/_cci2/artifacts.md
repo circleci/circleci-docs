@@ -103,7 +103,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 
 ```yaml
-version: 2.0
+version: 2
 jobs:
   build:
     docker:
@@ -113,7 +113,7 @@ jobs:
       - checkout
       - run: make
       - run: |
-    # tell the operating system to remove the file size limit on core dump files 
+          # tell the operating system to remove the file size limit on core dump files 
           ulimit -c unlimited
           ./dump
       - run:
