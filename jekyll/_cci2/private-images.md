@@ -11,7 +11,7 @@ order: 50
 
 To use private images, specify the username and password in the `auth` field.  To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:
 
-```YAML
+```yaml
 jobs:
   build:
     docker:

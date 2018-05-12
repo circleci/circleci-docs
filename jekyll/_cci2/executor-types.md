@@ -66,7 +66,7 @@ CPUs | Processor                 | RAM | HD
 
 To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
 
-```YAML
+```yaml
 jobs:
   build:
     machine: true
@@ -76,7 +76,7 @@ Using the `machine` executor enables your application with full access to OS res
 
 This example specifies a particular image for the `machine` executor:
 
-```YAML
+```yaml
 jobs:
   build:
     machine:
@@ -95,10 +95,11 @@ The images have common language tools preinstalled. Refer to the [specification 
 
 The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
-```YAML
+```yaml
+version: 2
 jobs:
   build:
-    machine: true
+    machine:
       docker_layer_caching: true    # default - false
 ```
 

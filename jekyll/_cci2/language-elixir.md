@@ -15,8 +15,8 @@ If you're in a rush, just copy the configuration below into `.circleci/config.ym
 
 ## Sample Configuration
 
-```yaml
 {% raw %}
+```yaml
 version: 2  # use CircleCI 2.0 instead of CircleCI Classic
 jobs:  # basic units of work in a run
   build:  # runs not using Workflows must have a `build` job as entry point
@@ -73,5 +73,5 @@ jobs:  # basic units of work in a run
 
       - store_test_results:  # upload test results for display in Test Summary
           path: _build/test/junit
-{% endraw %}
 ```
+{% endraw %}
