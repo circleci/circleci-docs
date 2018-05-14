@@ -53,7 +53,7 @@ CircleCI's beta `config-translation` endpoint can help you quickly get started w
      ```yaml
          machine: true
      ```
-See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details.
+     See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details about the available VM images.
      ```yaml
          macos: 
            xcode: "9.0"
