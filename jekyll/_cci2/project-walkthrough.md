@@ -322,7 +322,7 @@ Here's a passing build with deployment for the demo app: <https://circleci.com/g
 
 ### Additional Heroku Configuration
 
-The demo application is configured to run on Heroku with settings provided `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
+The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
 Other files required by Heroku are:
 
