@@ -252,7 +252,7 @@ Notes on the added keys:
 
 ## Deploying to Heroku
 
-The demo `.circleci/config.yml` includes a `deploy-job`
+The demo `.circleci/config.yml` includes a `deploy` job
 to deploy the `master` branch to Heroku.
 
 For full instructions,
@@ -267,7 +267,7 @@ without clashing with the namespace used in this tutorial.
 ```yaml
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
@@ -301,7 +301,7 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
-  deploy-job:
+  deploy:
     steps:
       - checkout
       - run:
@@ -339,24 +339,24 @@ heroku restart
 
 To deploy `master` to Heroku automatically after a successful `master` build,
 add a `workflows` section
-that links `build-job` and `deploy-job`.
+that links the `build` job and the `deploy` job.
 
 ```yaml
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
               only: master
 
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
@@ -390,7 +390,7 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
-  deploy-job:
+  deploy:
     steps:
       - checkout
       - run:
