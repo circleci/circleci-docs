@@ -109,7 +109,7 @@ Let’s break down what’s happening during this build’s execution:
 
 ## Docker version
 
-If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as an `image` attribute:
+If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as an `version` attribute:
 
 ```yaml
       - setup_remote_docker:
