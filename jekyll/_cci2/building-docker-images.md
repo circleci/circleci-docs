@@ -181,7 +181,7 @@ In the same way, if your application produces some artifacts that need to be sto
     docker cp app:/output /path/in/your/job/space
 ```
 
-It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a backup and restore container. The following CircleCI config.yml snippets populate and back up the `bundler-cache` container.
+It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a backup and restore container. The following CircleCI `.circleci/config.yml` snippets populate and back up the `bundler-cache` container.
 
 ``` yaml
 # Populate bundler-data container from circleci cache
@@ -216,6 +216,7 @@ It is also possible to use a lightweight container similar to https://github.com
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
       - ~/bundler-cache
+```
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
