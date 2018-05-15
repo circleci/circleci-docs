@@ -125,3 +125,9 @@ CircleCI maintains variants of convenience images. These can be created by addin
 ---
 
 {% endfor %}
+
+## See Also
+
+See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+
+
