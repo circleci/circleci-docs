@@ -41,14 +41,14 @@ images, as on circleci.com.
 
 - **VPN settings:** If your CircleCI Enterprise installation is not open to the internet, you may
 need to connect to a VPN or take other special steps to access the CircleCI UI or SSH builds.
-This can very greatly depending on your organization's network setup, so ask your CircleCI
+This can vary greatly depending on your organization's network setup, so ask your CircleCI
 administrator if you have trouble connecting.
 
 <!-- TODO: Check what the actual current behavior is on this -->
 
-- **iOS/OSX:** The ability to run builds in OSX VMs is optional in CircleCI Enterprise, and not
+- **iOS/macOS:** The ability to run builds in macOS VMs is optional in CircleCI Enterprise, and not
 available in all installations. Ask your administrator if you aren't sure whether your
-installation supports OSX.
+installation supports macOS.
 
 - **Authentication:** CircleCI Enterprise always uses GitHub (or GitHub Enterprise) for
 authentication. In the case of GitHub Enterprise, this means your CircleCI account may
