@@ -11,6 +11,7 @@ Document | Description
 ----|----------
 [Overview]({{ site.baseurl }}/2.0/about-circleci/) | Overview of Continuous Integration (CI) with links to CircleCI case studies.
 [Using Containers]({{ site.baseurl }}/2.0/containers/) | An overview of containers and how to use them to increase build speed and prevent queuing.
+[Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
 [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) | How Jobs and Steps are used in a CircleCI 2.0 configuration.
 [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) | Best practices for using shell scripts for use in CircleCI configuration.
 [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) | Best practices for building open source projects.
