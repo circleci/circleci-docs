@@ -183,6 +183,7 @@ In the same way, if your application produces some artifacts that need to be sto
 
 It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a backup and restore container. The following CircleCI `.circleci/config.yml` snippets populate and back up the `bundler-cache` container.
 
+{% raw %}
 ``` yaml
 # Populate bundler-data container from circleci cache
 - restore_cache:
@@ -217,6 +218,7 @@ It is also possible to use a lightweight container similar to https://github.com
     paths:
       - ~/bundler-cache
 ```
+{% endraw %}
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
