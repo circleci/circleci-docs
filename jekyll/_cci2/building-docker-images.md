@@ -181,7 +181,7 @@ In the same way, if your application produces some artifacts that need to be sto
     docker cp app:/output /path/in/your/job/space
 ```
 
-It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a container as shown in the following example `circle-dockup.yml` config:
+It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
 
 ```
 version: '2'
