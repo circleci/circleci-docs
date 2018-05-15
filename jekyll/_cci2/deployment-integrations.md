@@ -138,54 +138,57 @@ workflows:
 ```
 ## Azure
 
-To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch. 
+To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
-## Heroku
+## Firebase
 
-[Heroku](https://www.heroku.com/) is a popular platform
-for hosting applications in the cloud.
-To configure CircleCI
-to deploy your application to Heroku,
-follow the steps below.
+Add firebase-tools to the project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
 
-1. Create a Heroku account
-and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
-to set up a project in your chosen language.
+```
+npm install --save-dev firebase-tools
+```
 
-2. Add the name of your Heroku application and your Heroku API key as environment variables.
-See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) for instructions.
-In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+Generate a Firebase CLI token using the following command:
 
-4. In your `.circleci/config.yml`,
-create a `deploy-job`,
-`checkout` your code,
-and add a command
-to deploy the master branch to Heroku using git.
+```
+firebase login:ci
+```
 
-```yaml
-version: 2
-jobs:
-  build-job:
-    ...
-  deploy-job:
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+Add the generated token to the CircleCI project's environment variables as $FIREBASE_DEPLOY_TOKEN.
 
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build-job
-      - deploy-job:
-          requires:
-            - build-job
-          filters:
-            branches:
-              only: master
+Add the below to the project's `config.yml` file
+
+```
+
+     deploy-job:
+       docker:
+         - image: my-image
+       working_directory: /tmp/my-project
+       steps:
+         - run:
+             name: Deploy Master to Firebase
+             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+
+    workflows:
+      version: 2
+
+      -deploy:
+        jobs:
+          - build-job
+          - deploy-job:
+              requires:
+                - build-job
+              filters:
+                branches:
+                  only: master
+
+```
+
+If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
+
+
+```
+   - run: cd functions && npm install
 ```
 
 ## Google Cloud
@@ -249,55 +252,52 @@ kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"c
 The full `deploy.sh` file is available on
 [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
 
-## Firebase
+## Heroku
 
-Add firebase-tools to the project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
+[Heroku](https://www.heroku.com/) is a popular platform
+for hosting applications in the cloud.
+To configure CircleCI
+to deploy your application to Heroku,
+follow the steps below.
 
-```
-npm install --save-dev firebase-tools
-```
+1. Create a Heroku account
+and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
+to set up a project in your chosen language.
 
-Generate a Firebase CLI token using the following command:
+2. Add the name of your Heroku application and your Heroku API key as environment variables.
+See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) for instructions.
+In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
-```
-firebase login:ci
-```
+4. In your `.circleci/config.yml`,
+create a `deploy` job,
+`checkout` your code,
+and add a command
+to deploy the master branch to Heroku using git.
 
-Add the generated token to the CircleCI project's environment variables as $FIREBASE_DEPLOY_TOKEN.
+```yaml
+version: 2
+jobs:
+  build:
+    ...
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
-Add the below to the project's `config.yml` file
-
-```
-
-     deploy-job:
-       docker:
-         - image: my-image
-       working_directory: /tmp/my-project  
-       steps:
-         - run:
-             name: Deploy Master to Firebase
-             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-               
-    workflows:
-      version: 2
-      
-      -deploy:
-        jobs:
-          - build-job
-          - deploy-job:
-              requires:
-                - build-job
-              filters:
-                branches:
-                  only: master
-
-```
-
-If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
-
-
-```
-   - run: cd functions && npm install
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
 
 ## NPM
