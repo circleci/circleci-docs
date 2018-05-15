@@ -181,7 +181,23 @@ In the same way, if your application produces some artifacts that need to be sto
     docker cp app:/output /path/in/your/job/space
 ```
 
-It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a backup and restore container as shown in the following example. The sample CircleCI `.circleci/config.yml` snippets below populate and back up a container called `bundler-cache`.
+It is also possible to use a lightweight container similar to https://github.com/outstand/docker-dockup to spin up a container as shown in the following example `circle-dockup.yml` config:
+
+```
+version: '2'
+services:
+ bundler-cache:
+   image: outstand/dockup:latest
+   command: restore
+   container_name: bundler-cache
+   tty: true
+   environment:
+     COMPRESS: 'false'
+   volumes:
+     - bundler-data:/source/bundler-data
+```
+
+Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
 
 {% raw %}
 ``` yaml
