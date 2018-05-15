@@ -31,6 +31,8 @@ CircleCI maintains language images for the following languages:
 - [Python](#python)
 - [Ruby](#ruby)
 
+If your language is not listed, CircleCI also maintains a wizard you can use to create a custom image. See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions. 
+
 ### Service Images
 
 Service images are images for services like databases. These images should be listed _after_ language images so they become secondary service containers.
