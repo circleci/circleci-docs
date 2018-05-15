@@ -269,7 +269,7 @@ See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#addi
 In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
 4. In your `.circleci/config.yml`,
-create a `deploy-job`,
+create a `deploy` job,
 `checkout` your code,
 and add a command
 to deploy the master branch to Heroku using git.
@@ -277,9 +277,9 @@ to deploy the master branch to Heroku using git.
 ```yaml
 version: 2
 jobs:
-  build-job:
+  build:
     ...
-  deploy-job:
+  deploy:
     steps:
       - checkout
       - run:
@@ -291,10 +291,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
               only: master
