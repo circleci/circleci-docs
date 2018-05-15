@@ -415,7 +415,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
       make test
 ```
 
-`-o`
+`-o pipefail`
 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
