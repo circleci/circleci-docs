@@ -42,7 +42,7 @@ It is also possible to use the `macos` executor type with `xcode`, see the [iOS 
 
 ### Using Docker
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run.
+The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
 Docker increases performance by building only what is required for your application. Specify a Docker image in your `.circleci/config.yml` file that will generate the primary container where all steps run:
 ```
