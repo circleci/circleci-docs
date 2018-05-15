@@ -528,7 +528,7 @@ deployment configuration with a `tag` property that matches the name
 of the tag you created, we will run the build and the deployment
 section that matches.
 
-[Cutting a release on
+[Creating a release on
 GitHub](https://help.github.com/articles/creating-releases/) creates a
 tag and follows the same rules.
 
