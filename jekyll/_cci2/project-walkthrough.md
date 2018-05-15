@@ -9,7 +9,10 @@ order: 3
 
 *[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Project Tutorial*
 
-The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database. The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>
+The demo application in this tutorial uses Python and Flask for the backend.
+PostgreSQL is used for the database.
+The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
+The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
 * Contents
 {:toc}
@@ -249,13 +252,27 @@ Notes on the added keys:
 
 ## Deploying to Heroku
 
-<div class="alert alert-info" role="alert">
-<p><strong>Note:</strong> CircleCI 2.0 does not yet support seamlessly integrated Heroku and AWS deployments. Keys and configuration added to the Heroku Deployment and AWS CodeDeploy pages in CircleCI are currently not available to 2.0 jobs.</p>
-</div>
+The demo `.circleci/config.yml` includes a `deploy` job
+to deploy the `master` branch to Heroku.
+The `deploy` job consists of
+a `checkout` step and a single `command`.
+The `command` assumes that you have:
 
-The demo `.circleci/config.yml` includes `run:`, `add_ssh_keys:`, `fingerprints:` and `deploy:` keys to automatically deploy when a build on `master` passes all tests:
+- created a Heroku account.
+- created a Heroku application.
+- set the `HEROKU_APP_NAME` and `HEROKU_API_KEY` environment variables.
 
-```
+If you have not completed any or all of these steps,
+follow the [instructions]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)
+in the Heroku section of the Deployment document.
+
+**Note:**
+If you fork this demo project,
+rename the Heroku project,
+so you can deploy to Heroku
+without clashing with the namespace used in this tutorial.
+
+```yaml
 version: 2
 jobs:
   build:
@@ -292,31 +309,20 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
-      - run: bash .circleci/setup-heroku.sh
-      - add_ssh_keys:
-          fingerprints:
-            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
-      - deploy:
+  deploy:
+    steps:
+      - checkout
+      - run:
           name: Deploy Master to Heroku
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git push heroku master
-              heroku run python manage.py deploy
-              heroku restart
-            fi
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-Notes on the added keys:
+Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
 
-- The new `run:` executes the `setup-heroku.sh` script.
-- The `add_ssh_keys:` adds an installed SSH key with a unique fingerprint.
-- The `deploy` section is a special section that runs deployment commands. It checks if it is on `master` using the `${CIRCLE_BRANCH}` environment variable. If it is, it runs the Heroku deployment commands in the following Appendix section.
+### Additional Heroku Configuration
 
-The app will now update on Heroku with every successful build on the master branch. Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
-
-## Additional configuration for Heroku
-
-The demo application is configured to run on Heroku with settings provided `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
+The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
 Other files required by Heroku are:
 
@@ -337,41 +343,69 @@ heroku run python manage.py deploy
 heroku restart
 ```
 
-The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
+## Using Workflows to Automatically Deploy
 
-Deployment with CircleCI 2.0 requires installation and authorization of Heroku for the CircleCI account that owns the demo application project. Then, environment variables for your Heroku API key and login email must be added to the CircleCI UI:
+To deploy `master` to Heroku automatically after a successful `master` build,
+add a `workflows` section
+that links the `build` job and the `deploy` job.
 
-![Add Environment Variables]({{ site.baseurl }}/assets/img/docs/walkthrough9.png)
+```yaml
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 
-Creation of a new SSH key, without a passphrase, enables connecting to the Heroku Git server from CircleCI. The private key is added through the CircleCI UI SSH Permissions page with a hostname of `git.heroku.com` as follows:
-
-![Add SSH Key]({{ site.baseurl }}/assets/img/docs/walkthrough10.png)
-
-The private key is pasted into the input as shown above. A note is made of the Fingerprint for the private key for later reference. The public key is added to Heroku on the <https://dashboard.heroku.com/account> screen.
-
-The `setup-heroku.sh` file in the `.circleci` folder includes the following:
-
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.2-stretch-browsers
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6.5-alpine-ram
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
+      - save_cache:
+          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          paths:
+            - "venv"
+      - run:
+          command: |
+            . venv/bin/activate
+            python manage.py test
+      - store_artifacts:
+          path: test-reports/
+          destination: tr1
+      - store_test_results:
+          path: test-reports/
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-#!/bin/bash
-  git remote add heroku https://git.heroku.com/circleci-demo-python-flask.git
-  wget https://cli-assets.heroku.com/branches/stable/heroku-linux-amd64.tar.gz
-  sudo mkdir -p /usr/local/lib /usr/local/bin
-  sudo tar -xvzf heroku-linux-amd64.tar.gz -C /usr/local/lib
-  sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
-  cat > ~/.netrc << EOF
-  machine api.heroku.com
-    login $HEROKU_LOGIN
-    password $HEROKU_API_KEY
-  machine git.heroku.com
-    login $HEROKU_LOGIN
-    password $HEROKU_API_KEY
-  EOF
-
-  # Add heroku.com to the list of known hosts
-  ssh-keyscan -H heroku.com >> ~/.ssh/known_hosts
-```
-
-This file runs on CircleCI and configures everything Heroku needs to deploy the app. `sudo` is required because commands are run by the `ubuntu` user by default in the primary container provided by CircleCI. ¦¦The second part creates a `.netrc` file and populates it with the API key and login details set previously.
-
-**Note:** If you fork this demo project so you can try it out for yourself, make sure to rename the Heroku project setting so that it can deploy to Heroku without clashing with the namespace used in this tutorial.
+For more information about Workflows,
+see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
