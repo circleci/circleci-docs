@@ -348,3 +348,9 @@ workflows:
     git push --follow-tags
     ``` 
 5.  If tests passed, CircleCI will publish the package to npm automatically.
+
+## SSH
+
+To configure CircleCI
+to deploy your application over SSH,
+follow the steps below.
