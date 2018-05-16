@@ -558,7 +558,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 paths | Y | List | List of directories which should be added to the cache
 key | Y | String | Unique identifier for this cache
-name | N | String | Title of the step to be shown in the CircleCI UI (default: `save_cache`)
+name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache")
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
@@ -610,7 +610,7 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 key | Y <sup>(1)</sup> | String | Single cache key to restore
 keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored.
-name | N | String | Title of the step to be shown in the CircleCI UI (default: `restore_cache`)
+name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
 {: class="table table-striped"}
 
 <sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
