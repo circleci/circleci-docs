@@ -45,15 +45,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh
-
-      - run:
+          name: Deploy Master to Heroku
           command: |
-            git push heroku sequential-branch-filter:master
-            heroku run rake db:migrate
-            sleep 5  # sleep for 5 seconds to wait for dynos
-            heroku restart
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
 workflows:
   version: 2
