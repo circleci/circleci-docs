@@ -354,3 +354,44 @@ workflows:
 To configure CircleCI
 to deploy your application over SSH,
 follow the steps below.
+
+1. Add the SSH key for the server
+to which you're deploying.
+For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key/) document.
+
+2. Add the SSH username and SSH hostname of your build VM as environment variables.
+For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/adding-project-level-environment-variables/) document.
+In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+
+3. In your `.circleci/config.yml`,
+create a `deploy` job
+and add a command
+to deploy the master branch to Heroku using git.
+
+```yaml
+version: 2
+jobs:
+  build:
+    ...
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+```
