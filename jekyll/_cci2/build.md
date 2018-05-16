@@ -16,13 +16,6 @@ Document | Description
 [Build and Publish Snap Packages using Snapcraft on CircleCI]({{ site.baseurl }}/2.0/build-publish-snap-packages/) | Complete guide for setting up Snapcraft, building packages, and publishing them. 
 {: class="table table-striped"}
 
-## How to Build, Test, and Deploy Video Tutorial
-
-Watch the following video for a detailed tutorial of Docker, iOS, and Android builds.
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Qp-BA9e0TnA" frameborder="0" allowfullscreen></iframe>
-</div>
-
 ## Docker
 
 Document | Description
