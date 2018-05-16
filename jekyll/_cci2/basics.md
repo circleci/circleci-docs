@@ -11,6 +11,7 @@ Document | Description
 ----|----------
 [Overview]({{ site.baseurl }}/2.0/about-circleci/) | Overview of Continuous Integration (CI) with links to CircleCI case studies.
 [Using Containers]({{ site.baseurl }}/2.0/containers/) | An overview of containers and how to use them to increase build speed and prevent queuing.
+[Using GitHub or Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) | An overview of using GitHub and Bitbucket with CircleCI.
 [Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
 [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) | How Jobs and Steps are used in a CircleCI 2.0 configuration.
 [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) | Each job may use a different executor and image. Comparison of `docker`, `machine`, and `macos` executors for your jobs.
