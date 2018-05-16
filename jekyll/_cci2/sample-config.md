@@ -196,14 +196,10 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh
-      - run:
+          name: Deploy Master to Heroku
           command: |
-            git push heroku fan-in-fan-out:master
-            heroku run rake db:migrate
-            sleep 5 # sleep for 5 seconds to wait for dynos
-            heroku restart
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+
 workflows:
   version: 2
   build-and-deploy:
