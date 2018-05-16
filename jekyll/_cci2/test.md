@@ -4,7 +4,16 @@ title: "Test"
 description: "CircleCI 2.0 test automation setup"
 ---
 
-Refer to the following documents for help with setting up your tests.
+Refer to the following video and documents for help with setting up your tests.
+
+## How to Build, Test, and Deploy Video Tutorial
+
+Watch the following video for a detailed tutorial of Docker, iOS, and Android builds.
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Qp-BA9e0TnA" frameborder="0" allowfullscreen></iframe>
+</div>
+
+## Running, Splitting, and Debugging Tests
 
 Document | Description
 ----|----------
@@ -25,7 +34,7 @@ Refer to the following document for information and examples of deployment targe
 
 Document | Description
 ----|----------
-<a href="{{ site.baseurl }}/2.0/deployment-integrations">Deployment</a> | Set up automated deployment.
+<a href="{{ site.baseurl }}/2.0/deployment-integrations">Deployment</a> | Configure automated deployment to AWS, Azure, Firebase, Google Cloud, Heroku, NPM, or virtually any other service.
 {: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!
