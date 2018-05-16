@@ -373,7 +373,6 @@ version: 2
 jobs:
   build:
     ...
-
   deploy:
     machine:
       enabled: true
