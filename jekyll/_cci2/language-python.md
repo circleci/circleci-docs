@@ -58,7 +58,7 @@ jobs: # a collection of steps
     working_directory: ~/circleci-demo-python-django # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/python:3.6.1 # ...with this image as the primary container; this is where all `steps` will run
-      - image: circleci/postgres:9.6.2 # database image for service container avalable at `localhost:<port>`
+      - image: circleci/postgres:9.6.2 # database image for service container available at `localhost:<port>`
         environment: # environment variables for database
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
