@@ -25,7 +25,7 @@ Go to Google's [Getting Started with Authentication][] article and follow the in
 1. Copy the JSON file you downloaded to the clipboard.
 2. In the CircleCI application, go to your project's settings by clicking the gear icon in the top right.
 3. In the **Build Settings** section, click **Environment Variables**, then click the **Add Variable** button.
-4. Name the variable. In this example, the variable is named `$GCLOUD_SERVICE_KEY`.
+4. Name the variable. In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 5. Paste the JSON file from Step 1 into the **Value** field.
 6. Click the **Add Variable** button.
 
