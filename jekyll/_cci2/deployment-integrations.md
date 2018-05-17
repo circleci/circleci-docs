@@ -333,7 +333,7 @@ workflows:
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
- ```
+```
 
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
@@ -372,7 +372,7 @@ to deploy the master branch to Heroku using git.
 version: 2
 jobs:
   build:
-    ...
+    #...
   deploy:
     machine:
       enabled: true
