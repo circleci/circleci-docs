@@ -360,7 +360,7 @@ to which you're deploying.
 For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key/) document.
 
 2. Add the SSH username and SSH hostname of your build VM as environment variables.
-For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/adding-project-level-environment-variables/) document.
+For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) document.
 In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
 3. In your `.circleci/config.yml`,
