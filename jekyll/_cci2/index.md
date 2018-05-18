@@ -34,11 +34,11 @@ On CircleCI 2.0, this file must be called `config.yml` and must be in a hidden f
 
 2. To start out with a simple `config.yml`, copy the text below into the file editing window on GitHub:
 
-```yml
+```yaml
 version: 2
 jobs:
   build:
-    docker:
+    docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
       - image: circleci/ruby:2.4.1
     steps:
       - checkout

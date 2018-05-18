@@ -39,7 +39,7 @@ CircleCI's beta `config-translation` endpoint can help you quickly get started w
      jobs:
        build:
      ```
-5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
+5. Add the language and version you want to run the primary container to your configuration using either the `docker:` and `- image:` keys in the example or by setting `machine: true` or by using `macos`. If your configuration includes language and version as shown for `ruby:` below, replace it as shown.
      ```
        ruby:
          version: 2.3
@@ -49,7 +49,16 @@ CircleCI's beta `config-translation` endpoint can help you quickly get started w
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first image listed. Your {% comment %} TODO: Job {% endcomment %}build commands run in this container and must be declared for each job. 
+     The primary container is an instance of the first image listed. Your {% comment %} TODO: Job {% endcomment %}build commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
+     ```yaml
+         machine: true
+     ```
+     See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details about the available VM images.
+     ```yaml
+         macos: 
+           xcode: "9.0"
+     ```
+See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2.0/ios-migrating-from-1-2/) document for details.
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```
