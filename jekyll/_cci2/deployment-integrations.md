@@ -371,7 +371,7 @@ In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respe
 3. In your `.circleci/config.yml`,
 create a `deploy` job
 and add a command
-to deploy the master branch to Heroku using git.
+to deploy the master branch.
 
 ```yaml
 version: 2
