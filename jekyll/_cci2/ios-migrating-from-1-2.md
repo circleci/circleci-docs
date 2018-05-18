@@ -154,7 +154,8 @@ for your iOS project on CircleCI 2.0.
 
 ## Creating the 2.0 Configuration File
 
-The following sections provide examples of 2.0 configuration syntax for an iOS project.
+The following sections provide examples of 2.0 configuration syntax for an iOS project. CircleCI also provides partial config translation for iOS projects, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl
+}}/2.0/config-translation). If your 1.0 project does **not** have a `circle.yml` file, the [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) provides a script to generate an initial config file from your 1.0 project.
 
 ### Job Name and Xcode Version
 
