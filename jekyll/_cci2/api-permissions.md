@@ -14,10 +14,9 @@ as well as how to create and revoke them.
 
 ## Overview
 
-There are two major uses
-for API tokens:
+There are two major uses for API tokens:
 
 1. To view the **status** of a build.
-2. To view the **artifacts** of a job.
+2. To view the **artifacts** of a build.
 
 In both cases, CircleCI provides read-only access.
