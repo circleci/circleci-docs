@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Adding an API Token to CircleCI"
-short-title: "Adding an API Token"
-description: "How to Add an API Token to CircleCI"
+title: "API Permissions on CircleCI"
+short-title: "API Permissions"
+description: "How to Change API Permissions on CircleCI"
 order: 20
 ---
