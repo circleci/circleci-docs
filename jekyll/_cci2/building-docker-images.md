@@ -107,7 +107,7 @@ Let’s break down what’s happening during this build’s execution:
 3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 4. We use project environment variables to store credentials for Docker Hub.
 
-## Docker version
+## Docker Version
 
 If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as a `version` attribute:
 
@@ -160,7 +160,7 @@ It is **not** possible to mount a folder from your job space into a container in
 
 ``` yaml
 - run: |
-    # create s dummy container which will hold a volume with config
+    # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
     # copy a config file into this volume
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
@@ -235,6 +235,9 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       - ~/bundler-cache
 ```
 {% endraw %}
+
+Thanks to ryansch for contributing this example.
+
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
