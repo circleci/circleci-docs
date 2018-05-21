@@ -14,7 +14,8 @@ as well as how to create, update, and delete them.
 
 ## Overview
 
-There are two kinds of API tokens.
+There are two types of API token
+you can create within CircleCI.
 
   1. **Personal**:
   These tokens are used to interact with the CircleCI API
