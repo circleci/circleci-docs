@@ -110,7 +110,7 @@ image | Y | String | The name of a custom docker image to use
 name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
 entrypoint | N | String or List | The command used as executable when launching the container
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
-user | N | String | Which user to run the command as
+user | N | String | Which user to run commands as within the Docker container
 environment | N | Map | A map of environment variable names and values
 auth | N | Map | Authentication for registries using standard `docker login` credentials
 aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
