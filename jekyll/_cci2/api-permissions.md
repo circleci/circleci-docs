@@ -69,11 +69,14 @@ click the X in the **Remove** column.
 When the confirmation window appears,
 click the **Remove** button.
 
-## See More
+## What Next?
 
-- [Downloading All Artifacts for a Build on CircleCI]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci)
-- [Injecting Environment Variables with the API]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api)
-- [Using Config Translation]({{ site.baseurl }}/2.0/config-translation/#using-config-translation)
-- [Status Badges]({{ site.baseurl }}/2.0/status-badges/)
-- [Running Jobs With the API]({{ site.baseurl }}/2.0/api-job-trigger/)
-- [Examples]({{ site.baseurl }}/2.0/examples/)
+Now that you know
+how to create API tokens,
+you could...
+
+  - translate your legacy project to CircleCI 2.0 with the [configuration translator]({{ site.baseurl }}/2.0/config-translation/#using-config-translation).
+  - [inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) into a build.
+  - [trigger conditional jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
+  - learn how to [embed build status badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README.
+  - [download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
