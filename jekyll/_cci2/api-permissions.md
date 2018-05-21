@@ -25,6 +25,7 @@ you can create within CircleCI.
   and only grant read permissions.
   Project tokens have three scope options: _Status_, _Build Artifacts_, and _All_.
       - _Status_ tokens grant read access to the project's build statuses.
+      Useful for [embedding status badges]({{ site.baseurl }}/2.0/status-badges/).
       - _Build Artifacts_ tokens grant read access to the project's build artifacts.
       - _All_ tokens grant read access for the project's build statuses and build artifacts.
 
