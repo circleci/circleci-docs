@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "API Permissions"
 short-title: "API Permissions"
-description: "How to Change API Permissions on CircleCI"
+description: "How to Add and Change API Permissions on CircleCI"
 order: 20
 ---
 
