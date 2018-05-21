@@ -28,7 +28,7 @@ refer to the [GitHub and Bitbucket Integration](https://circleci.com/docs/2.0/gh
 go to your project's settings
 by clicking the gear icon next to your project.
 
-2. In the **Build Settings** section,
+2. In the **Permissions** section,
 click on **SSH Permissions**.
 
 3. Click the **Add SSH Key** button.
