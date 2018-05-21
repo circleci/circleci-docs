@@ -41,7 +41,7 @@ is to delete and recreate them.
   2. Click [Personal API Tokens](https://circleci.com/account/api).
   3. Click the **Create New Token** button.
   4. In the **Token name** field,
-  add a name for this token.
+  create a memorable name for the token.
   5. Click the **Add API Token** button.
   6. After the token appears,
   copy and paste it to another location.
@@ -57,9 +57,8 @@ is to delete and recreate them.
   3. Click the **Create Token** button.
   4. Choose a scope from the dropdown menu.
   5. In the **Token Label** field,
-  create a memorable label for the API token.
-  6. Click the **Add Token** button
-  to create the API token.
+  create a memorable label for the token.
+  6. Click the **Add Token** button.
 
 ## See More
 
