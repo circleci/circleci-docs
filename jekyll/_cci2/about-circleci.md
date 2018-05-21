@@ -9,6 +9,11 @@ order: 1
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Overview*
 
+This document provides a summary of continuous integration, how CircleCI enables engineering teams with automation,  CircelCI case studies, and free trial information in the following sections:
+
+* TOC
+{:toc}
+
 ## What is Continuous Integration?
 
 **Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
@@ -43,7 +48,7 @@ The following video describes continuous integration, provides a demo of the app
 
 ## Summary
 
-After a software repository on GitHub or Bitbucket is authorized and added as a project to circleci.com, every code change  triggers a build and automated tests in a clean container or VM configured for your requirements. CircleCI then sends an email notification of success or failure after the build and tests complete. CircleCI also includes integrated Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
+After a software repository on GitHub or Bitbucket is authorized and added as a project to [circleci.com](https://circleci.com), every code change triggers automated tests in a clean container or VM. CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Container Engine (GKE), and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 
@@ -78,3 +83,7 @@ CircleCI provides a free trial with the following options:
 
 - **Cloud**: See [Signup and Try CircleCI]({{site.baseurl}}/2.0/first-steps/) to get started with the hosted application.
 - **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
+
+### Open Source
+
+See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects. 

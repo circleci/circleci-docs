@@ -47,6 +47,10 @@ You automatically *follow* any new project that you push to, subscribing you to 
 
 ## Next Steps
 
-Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
+See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+
+Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
+
+Find complete reference information for all keys and pre-built images in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation.
 
 

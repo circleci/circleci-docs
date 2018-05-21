@@ -53,13 +53,16 @@ See the [Example docker-compose Project](https://github.com/circleci/cci-demo-do
 
 **Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network. 
 
-If you want to use docker compose to manage a multi-container setup, use the `machine` key in your `config.yml` file and use docker-compose as you would normally. **Note: There is an overhead for provisioning a machine executor and use of the `machine` key may require additional fees in a future pricing update.**
+## Using Docker Compose with Machine Executor
 
-The overhead delay with `machine` is a result of spinning up a private Docker server. In contrast, the `docker` key runs the executor on a shared Docker server that is already provisioned. To secure your {% comment %} TODO: Job {% endcomment %}builds, some Docker behavior on this executor is not allowed and restricts your ability to use docker-compose.
+If you want to use docker compose to manage a multi-container setup with a docker-compose file, use the `machine` key in your `config.yml` file and use docker-compose as you would normally. That is, if you have a docker-compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details. **Note: There is an overhead for provisioning a machine executor as a result of spinning up a private Docker server. Use of the `machine` key may require additional fees in a future pricing update.**
 
-For example, use of volumes is restricted. If you have a docker-compose file that shares local directories with a container, it is possible to do this with the `machine` key, but not with `docker`.  Even though using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, volume mounting and port forwarding do not work as expected in this setup. 
 
-This combination is really only intended for users who want to build docker images for deployment and cannot be used for performing volume mounting. See the [Building Docker Images]({{ site.baseurl }}/2.0/building-docker-images) for details.
+## Using Docker Compose with Docker Executor
+
+Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host. 
+
+This combination is required if you want to build docker images for deployment. See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
 
 
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container

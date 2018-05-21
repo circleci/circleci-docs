@@ -107,9 +107,9 @@ Let’s break down what’s happening during this build’s execution:
 3. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
 4. We use project environment variables to store credentials for Docker Hub.
 
-## Docker version
+## Docker Version
 
-If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as an `version` attribute:
+If your {% comment %} TODO: Job {% endcomment %}build requires a specific docker image, you can set it as a `version` attribute:
 
 ```yaml
       - setup_remote_docker:
@@ -130,10 +130,10 @@ The currently supported versions are:
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of Environments
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in  separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
 
 ### Accessing Services
-It’s impossible to start a service in remote docker and ping it directly from a primary container (and vice versa). To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
+It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```yaml
 #...
@@ -156,30 +156,88 @@ A different way to do this is to use another container running in the same netwo
 ```
 
 ### Mounting Folders
-It's not possible to mount a folder from your job space into a container in Remote Docker (and vice versa). But you can use `docker cp` command to transfer files between these two environments. For example, you want to start a container in Remote Docker and you want to use a config file from your source code for that:
+It is **not** possible to mount a folder from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
-``` YAML
+``` yaml
 - run: |
-    # creating dummy container which will hold a volume with config
+    # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
-    # copying config file into this volume
+    # copy a config file into this volume
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
-    # starting application container using this volume
+    # start an application container using this volume
     docker run --volumes-from configs app-image:1.2.3
 ```
 
 In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
 
-``` YAML
+``` yaml
 - run: |
-    # starting container with our application
-    # make sure you're not using `--rm` option otherwise container will be killed after finish
+    # start container with the application
+    # make sure you're not using `--rm` option otherwise the container will be killed after finish
     docker run --name app app-image:1.2.3
 
 - run: |
-    # once application container finishes we can copy artifacts directly from it
+    # after application container finishes, copy artifacts directly from it
     docker cp app:/output /path/in/your/job/space
 ```
+
+It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
+
+```
+version: '2'
+services:
+ bundler-cache:
+   image: outstand/dockup:latest
+   command: restore
+   container_name: bundler-cache
+   tty: true
+   environment:
+     COMPRESS: 'false'
+   volumes:
+     - bundler-data:/source/bundler-data
+```
+
+Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
+
+{% raw %}
+``` yaml
+# Populate bundler-data container from circleci cache
+- restore_cache:
+    keys:
+      - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - v4-bundler-cache-{{ arch }}-{{ .Branch }}
+      - v4-bundler-cache-{{ arch }}      
+- run:
+    name: Restoring bundler cache into docker volumes
+    command: |
+      NAME=bundler-cache
+      CACHE_PATH=~/bundler-cache
+      set -x
+      mkdir -p $CACHE_PATH
+      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-start $NAME
+      docker cp $CACHE_PATH/. $NAME:/backup
+      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
+      docker rm -f $NAME
+      
+# Back up the same volume to circle cache
+- run:
+    name: Backing up bundler cache from docker volumes
+    command: |
+      NAME=bundler-cache
+      CACHE_PATH=~/bundler-cache
+      set -x
+      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml run --name $NAME $NAME backup
+      docker cp $NAME:/backup/. $CACHE_PATH
+      docker rm -f $NAME  
+- save_cache:
+    key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+    paths:
+      - ~/bundler-cache
+```
+{% endraw %}
+
+Thanks to ryansch for contributing this example.
+
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container

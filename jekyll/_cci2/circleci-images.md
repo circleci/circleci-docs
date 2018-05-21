@@ -8,6 +8,11 @@ order: 20
 ---
 *[Reference]({{ site.baseurl }}/2.0/reference/) > Pre-Built CircleCI Docker Images*
 
+This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
+
+* TOC
+{:toc}
+
 For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tools that are especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code for these images is available at [github.com/circleci/circleci-images](https://github.com/circleci/circleci-images). Dockerfiles for each CircleCI image variant are archived at [github.com/circleci-public/circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
 ## Image Types
@@ -30,6 +35,8 @@ CircleCI maintains language images for the following languages:
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
+
+If your language is not listed, CircleCI also maintains a wizard you can use to create a custom image. See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions. 
 
 ### Service Images
 
@@ -123,3 +130,9 @@ CircleCI maintains variants of convenience images. These can be created by addin
 ---
 
 {% endfor %}
+
+## See Also
+
+See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+
+
