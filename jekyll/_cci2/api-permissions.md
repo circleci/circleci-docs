@@ -10,7 +10,7 @@ To use the CircleCI API
 or view details about a build,
 you will need API tokens with the appropriate permissions.
 This document describes the types of API tokens,
-as well as how to create, update, and delete them.
+as well as how to create and delete them.
 
 ## Overview
 
@@ -24,7 +24,33 @@ you can create within CircleCI.
   These tokens provide information about specific projects
   and only grant read permissions.
 
-## Steps
+### Creating a Personal API Token
+
+  1. In the CircleCI application,
+  go to your user settings
+  by clicking the profile picture in the upper-right corner,
+  then clicking [User settings](https://circleci.com/account).
+  2. On the **User Settings** page,
+  click [Personal API Tokens](https://circleci.com/account/api).
+  3. On the Personal API Tokens page,
+  click the **Create New Token** button.
+  4. In the **Token name** field,
+  add a name for this token
+  to remind you
+  how it will be used.
+  5. To create the API token,
+  click the **Add API Token** button.
+  6. After the token appears,
+  copy and paste it to another location.
+  You will not be able to view the token again.
+
+**Note**:
+Once created,
+personal API tokens cannot be modified.
+The only way to change an existing token
+is to delete it and recreate it.
+
+## How to Create a Project API Token
 
   1. In the CircleCI application,
   go to your project's settings
