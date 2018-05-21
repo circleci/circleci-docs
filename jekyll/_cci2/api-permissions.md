@@ -23,6 +23,10 @@ you can create within CircleCI.
   2. **Project**:
   These tokens provide information about specific projects
   and only grant read permissions.
+  Project tokens have three scope options: _Status_, _Build Artifacts_, and _All_.
+      - _Status_ tokens grant read access to the project's build statuses.
+      - _Build Artifacts_ tokens grant read access to the project's build artifacts.
+      - _All_ tokens grant read access for the project's build statuses and build artifacts.
 
 ### Creating a Personal API Token
 
