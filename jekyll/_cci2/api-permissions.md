@@ -14,12 +14,14 @@ as well as how to create and revoke them.
 
 ## Overview
 
-There are two major uses for API tokens:
+There are two kinds of API tokens.
 
-1. To view the **status** of a build.
-2. To view the **artifacts** of a build.
-
-In both cases, CircleCI provides read-only access.
+  1. **Personal**:
+  These tokens are used to interact with the CircleCI API
+  and grant full read and write permissions.
+  2. **Project**:
+  These tokens provide information about specific projects
+  and only grant read permissions.
 
 ## Steps
 
