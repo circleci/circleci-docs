@@ -31,19 +31,12 @@ you can create within CircleCI.
 ### Creating a Personal API Token
 
   1. In the CircleCI application,
-  go to your user settings
-  by clicking the profile picture in the upper-right corner,
-  then clicking [User settings](https://circleci.com/account).
-  2. On the **User Settings** page,
-  click [Personal API Tokens](https://circleci.com/account/api).
-  3. On the Personal API Tokens page,
-  click the **Create New Token** button.
+  go to your [User settings](https://circleci.com/account).
+  2. Click [Personal API Tokens](https://circleci.com/account/api).
+  3. Click the **Create New Token** button.
   4. In the **Token name** field,
-  add a name for this token
-  to remind you
-  how it will be used.
-  5. To create the API token,
-  click the **Add API Token** button.
+  add a name for this token.
+  5. Click the **Add API Token** button.
   6. After the token appears,
   copy and paste it to another location.
   You will not be able to view the token again.
