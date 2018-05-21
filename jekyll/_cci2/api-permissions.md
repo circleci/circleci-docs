@@ -47,6 +47,9 @@ is to delete and recreate them.
   copy and paste it to another location.
   You will not be able to view the token again.
 
+To delete a personal API token,
+click the X in the **Remove** column.
+
 ### Creating a Project API Token
 
   1. In the CircleCI application,
@@ -59,6 +62,11 @@ is to delete and recreate them.
   5. In the **Token Label** field,
   create a memorable label for the token.
   6. Click the **Add Token** button.
+
+To delete a project API token,
+click the X in the **Remove** column.
+When the confirmation window appears,
+click the **Remove** button.
 
 ## See More
 
