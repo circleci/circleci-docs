@@ -28,6 +28,12 @@ you can create within CircleCI.
       - _Build Artifacts_ tokens grant read access to the project's build artifacts.
       - _All_ tokens grant read access for the project's build statuses and build artifacts.
 
+**Note**:
+Once created,
+API tokens cannot be modified.
+The only way to change existing tokens
+is to delete and recreate them.
+
 ### Creating a Personal API Token
 
   1. In the CircleCI application,
@@ -40,12 +46,6 @@ you can create within CircleCI.
   6. After the token appears,
   copy and paste it to another location.
   You will not be able to view the token again.
-
-**Note**:
-Once created,
-personal API tokens cannot be modified.
-The only way to change an existing token
-is to delete it and recreate it.
 
 ### Creating a Project API Token
 
