@@ -50,7 +50,7 @@ personal API tokens cannot be modified.
 The only way to change an existing token
 is to delete it and recreate it.
 
-## How to Create a Project API Token
+### Creating a Project API Token
 
   1. In the CircleCI application,
   go to your project's settings
