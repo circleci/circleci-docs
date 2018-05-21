@@ -56,9 +56,6 @@ is to delete it and recreate it.
   click on **API Permissions**.
   3. Click the **Create Token** button.
   4. Choose a scope from the dropdown menu.
-  **Status** gives read access to build statuses,
-  **Build Artifacts** gives read access to build artifacts,
-  and **All** gives combined access.
   5. In the **Token Label** field,
   create a memorable label for the API token.
   6. Click the **Add Token** button
