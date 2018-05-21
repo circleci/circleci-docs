@@ -6,11 +6,11 @@ description: "How to Change API Permissions on CircleCI"
 order: 20
 ---
 
-To access a private project's details
-using the CircleCI API,
-you must create project-specific API tokens.
-This document describes the token options,
-as well as how to create and revoke them.
+To use the CircleCI API
+or view details about a build,
+you will need API tokens with the appropriate permissions.
+This document describes the types of API tokens,
+as well as how to create, update, and delete them.
 
 ## Overview
 
