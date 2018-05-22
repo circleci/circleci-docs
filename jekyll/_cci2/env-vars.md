@@ -144,8 +144,8 @@ To define environment variables for a job, use the `environment` key under the j
 See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
 Ex:
 
-```
-version: 2.0
+```yaml
+version: 2
 
 jobs:
   build:
@@ -159,8 +159,8 @@ jobs:
 
 Use the `environment` key in your `image` section to set variables for all commands run in the container.
 
-```
-version: 2.0
+```yaml
+version: 2
 jobs:
   build:
     docker:
@@ -174,7 +174,7 @@ jobs:
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
 
-```
+```yaml
 version: 2
 jobs:
   build:
