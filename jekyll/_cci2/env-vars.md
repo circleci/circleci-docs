@@ -98,11 +98,9 @@ set these at the [project level](#adding-project-level-environment-variables) in
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
 See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
-Ex:
 
 ```yaml
 version: 2
-
 jobs:
   build:
     docker:
