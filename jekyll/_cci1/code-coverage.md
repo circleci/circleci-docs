@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Generating Code Coverage Metrics
+title: Generating Code Coverage Metrics in CircleCI 1.0
 short-title: Generating Code Coverage Metrics
 categories: [configuration-tasks]
 description: Generating code coverage metrics
