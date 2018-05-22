@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Continuous Integration and Continuous Deployment with Node.js"
+title: "CircleCI 1.0 Continuous Integration and Continuous Deployment with Node.js"
 short-title: "Node.js"
 categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Node.js"
