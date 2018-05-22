@@ -148,7 +148,8 @@ jobs:
 
 ### Setting Step-Level Environment Variables
 
-Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
+To set environment variables at the step level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run)
 
 ```yaml
 version: 2
