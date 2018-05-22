@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Skipping a build
+title: CircleCI 1.0 Skipping a build
 categories: [configuration-tasks]
 description: How to skip a build
 order: 65
