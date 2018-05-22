@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: SSH access to builds
+title: CircleCI 1.0 SSH access to builds
 categories: [troubleshooting]
 description: SSH access to builds
 ---
