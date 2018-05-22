@@ -6,7 +6,9 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption.
+High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+
+<!---
 
 This document describes how to to set up a highly available CircleCI 2.0 installation in the following sections:
 
@@ -374,4 +376,4 @@ export VAULT__TRANSIT_MOUNT="<vaut-transit-mount>" # If you followed the directi
 
 ## Transport Layer Security (TLS)
 
-When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificates` with file extension `.crt`.
+When signing Mongodb, Postgresql or Vault TLS Certificates with a custom Certificate Authority (CA), a copy of the CA certificate must be saved on Service machine in `/usr/local/share/ca-certificates` with file extension `.crt`.--->
