@@ -84,10 +84,15 @@ in the same way that `docker` does.
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
-## Setting Environment Variables
+## Setting Environment Variables in `.circleci/config.yml`
 
-**Warning**: Do **not** add keys or secrets to a public CircleCI project. 
-Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
+It is also possible to set environment variables at the **job**, **container**, and **step** levels,
+in order of increasing specificity.
+
+**Warning**:
+Environment variables set within configuration are fully visible in build output.
+If you are adding secrets or sensitive data,
+set these at the [project level](#adding-project-level-environment-variables) instead.
 
 ### Setting an Environment Variable for a Step
 
