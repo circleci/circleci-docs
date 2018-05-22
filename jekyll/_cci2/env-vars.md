@@ -96,8 +96,8 @@ set these at the [project level](#adding-project-level-environment-variables) in
 
 ### Setting Job-Level Environment Variables
 
-To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
-See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
+To set environment variables at the job level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
 
 ```yaml
 version: 2
