@@ -88,10 +88,10 @@ To add global environment variables that may be shared across projects, use the 
 
 It is also possible to set environment variables at the **job**, **container**, and **step** levels,
 in order of increasing specificity.
-Environment variables set at the container level
-take precedence over job-level environment variables,
-and environment variables set at the step level
-take precedence over container-level environment variables.
+Environment variables set at the **container** level
+take precedence over environment variables set at the **job** level,
+and environment variables set at the **step** level
+take precedence over environment variables set at the **container** level.
 
 **Warning**:
 Environment variables set within configuration are fully visible in build output.
