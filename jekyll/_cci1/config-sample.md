@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Sample circle.yml file
+title: Sample 1.0 circle.yml file
 categories: [migration]
 description: "Making a circle.yml file"
 ---
