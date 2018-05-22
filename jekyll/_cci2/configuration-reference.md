@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Configuration Reference"
-short-title: "Configuration Reference"
+title: "Configuring CircleCI"
+short-title: "Configuring CircleCI"
 description: "Reference for .circleci/config.yml"
 categories: [configuring-jobs]
 order: 20
 ---
 
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Configuration Reference*
+*[Reference]({{ site.baseurl }}/2.0/reference/) > Configuring CircleCI*
 
 This document is a reference for the CircleCI 2.0 configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
 
