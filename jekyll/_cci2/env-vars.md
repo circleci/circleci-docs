@@ -93,8 +93,8 @@ Be careful that the output doesn't appear in build logs and that the variables a
 
 Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
 
-```
-version: 2.0
+```yaml
+version: 2
 jobs:
   build:
     docker:
