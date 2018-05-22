@@ -28,7 +28,7 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-## Adding Project-Level Environment Variables
+## Setting Project-Level Environment Variables
 
 1. In the CircleCI application,
 go to your project's settings
@@ -80,9 +80,9 @@ Login Succeeded
 Not all command-line programs take credentials
 in the same way that `docker` does.
 
-## Adding Global Environment Variables
+## Setting Global Environment Variables
 
-To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+To set global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
 ## Setting Environment Variables in `.circleci/config.yml`
 
