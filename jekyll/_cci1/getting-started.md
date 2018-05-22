@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Getting Started with CircleCI
+title: Getting Started with CircleCI 1.0
 categories: [getting-started]
 description: Getting Started with CircleCI
 order: 20
