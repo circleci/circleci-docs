@@ -94,55 +94,6 @@ Environment variables set within configuration are fully visible in build output
 If you are adding secrets or sensitive data,
 set these at the [project level](#adding-project-level-environment-variables) instead.
 
-### Setting an Environment Variable for a Step
-
-Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          # Environment variable for a single command shell
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-### Interpolating Environment Variables 
-
-CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
-
-However, it is possible to interpolate a variable within a command
-by setting it for the current shell.
-
-```yaml
-version: 2
-jobs:
-  build:
-    steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
-```
-
-**Note**:
-Depending on your shell,
-you may have to append the new variable to a shell startup file
-like `~/.tcshrc` or `~/.zshrc`.
-For more information,
-refer to your shell's documentation on setting environment variables.
-
 ### Setting Environment Variables for a Job
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
@@ -191,6 +142,55 @@ jobs:
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6
 ```
+
+### Setting an Environment Variable for a Step
+
+Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+### Interpolating Environment Variables
+
+CircleCI does not support interpolation
+when defining configuration variables like `working_directory` or `images`.
+All defined values are treated literally.
+
+However, it is possible to interpolate a variable within a command
+by setting it for the current shell.
+
+```yaml
+version: 2
+jobs:
+  build:
+    steps:
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
+```
+
+**Note**:
+Depending on your shell,
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
+For more information,
+refer to your shell's documentation on setting environment variables.
 
 See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
 
