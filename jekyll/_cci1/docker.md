@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Continuous Integration and Delivery with Docker
+title: CircleCI 1.0 Continuous Integration and Delivery with Docker
 categories: [how-to]
 description: Continuous Integration and Delivery with Docker
 ---
