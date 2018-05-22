@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Collecting Test Metadata
+title: CircleCI 1.0 Collecting Test Metadata
 categories: [configuration-tasks]
 description: "Collecting test metadata"
 order: 45
