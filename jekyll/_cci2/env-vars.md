@@ -165,7 +165,7 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-### Interpolating Environment Variables
+## Interpolating Environment Variables
 
 CircleCI does not support interpolation
 when defining configuration variables like `working_directory` or `images`.
