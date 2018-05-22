@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Using CircleCI Environment Variables
+title: Using CircleCI 1.0 Environment Variables
 categories: [configuration-tasks]
 description: How to work with environment variables
 order: 30
