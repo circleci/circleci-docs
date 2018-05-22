@@ -111,7 +111,8 @@ jobs:
 
 ### Setting Container-Level Environment Variables
 
-Use the `environment` key in your `image` section to set variables for all commands run in the container.
+To set environment variables at the container level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
 
 ```yaml
 version: 2
@@ -120,7 +121,7 @@ jobs:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
       - image: circleci/postgres:9.6
-      # Environment variable for all commands executed in the primary container
+      # environment variables for all commands executed in the primary container
         environment:
           POSTGRES_USER: conductor
           POSTGRES_DB: conductor_test
@@ -134,14 +135,12 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2
-       # Environment variable for all commands executed in the primary container
+       # environment variables for all commands executed in the primary container
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6
 ```
-
-See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
 
 ### Setting Step-Level Environment Variables
 
