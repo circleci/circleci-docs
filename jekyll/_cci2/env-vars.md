@@ -143,6 +143,8 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
+See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
+
 ### Setting an Environment Variable for a Step
 
 Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
@@ -191,9 +193,6 @@ you may have to append the new variable to a shell startup file
 like `~/.tcshrc` or `~/.zshrc`.
 For more information,
 refer to your shell's documentation on setting environment variables.
-
-See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
-
 
 ## Injecting Environment Variables with the API
 
