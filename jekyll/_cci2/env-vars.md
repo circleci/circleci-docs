@@ -94,7 +94,7 @@ Environment variables set within configuration are fully visible in build output
 If you are adding secrets or sensitive data,
 set these at the [project level](#adding-project-level-environment-variables) instead.
 
-### Setting Environment Variables for a Job
+### Setting Job-Level Environment Variables
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
 See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
@@ -111,7 +111,7 @@ jobs:
       FOO: "bar"
 ```
 
-### Adding Environment Variables for a Container
+### Setting Container-Level Environment Variables
 
 Use the `environment` key in your `image` section to set variables for all commands run in the container.
 
@@ -145,7 +145,7 @@ jobs:
 
 See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
 
-### Setting an Environment Variable for a Step
+### Setting Step-Level Environment Variables
 
 Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
 
