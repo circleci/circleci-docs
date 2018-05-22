@@ -140,7 +140,8 @@ use the `--split-by` flag with the `filesize` split type.
 
 #### Splitting by Timings
 
-CircleCI automatically saves timing data from previous successful runs to a default location (`$CIRCLE_INTERNAL_TASK_DATA/circle-test-results`).
+CircleCI automatically saves timing data from previous successful runs to a default directory.
+This directory is specified by the [built-in environment variable]({{ site.baseurl }}/2.0/env-vars/#circleci-built-in-environment-variables) `CIRCLE_INTERNAL_TASK_DATA`.
 Ensure you are using the [`store_test_results` key]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results)
 to save your timing data,
 or there will be no historical data available.
