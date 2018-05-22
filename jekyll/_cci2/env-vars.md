@@ -84,12 +84,12 @@ in the same way that `docker` does.
 
 To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
-## Declaring Environment Variables
+## Setting Environment Variables
 
 **Warning**: Do **not** add keys or secrets to a public CircleCI project. 
 Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
 
-### Declaring an Environment Variable for a Step
+### Setting an Environment Variable for a Step
 
 Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
 
@@ -138,7 +138,7 @@ like `~/.tcshrc` or `~/.zshrc`.
 For more information,
 refer to your shell's documentation on setting environment variables.
 
-### Declaring Environment Variables for a Job
+### Setting Environment Variables for a Job
 
 To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
 See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
