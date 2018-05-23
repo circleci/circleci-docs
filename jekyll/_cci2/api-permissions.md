@@ -71,10 +71,9 @@ click the **Remove** button.
 
 ## Next Steps
 
-Now that you know
-how to create API tokens,
-you can do other things
-that require them:
+API tokens are not useful
+unless you do something with them.
+Here are a few ideas:
 
   - [Embed Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README or other external page.
   - [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
