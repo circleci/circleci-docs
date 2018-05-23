@@ -392,6 +392,9 @@ workflows:
   build-and-deploy:
     jobs:
       - build
+        filters:
+          branches:
+            only: master
       - deploy:
           requires:
             - build
