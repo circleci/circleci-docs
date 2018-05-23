@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "API Permissions"
-short-title: "API Permissions"
-description: "How to Add and Change API Permissions on CircleCI"
+title: "Managing API Tokens"
+short-title: "Managing API Tokens"
+description: "How to assign scoped tokens for using the CircleCI API"
 order: 20
 ---
 
