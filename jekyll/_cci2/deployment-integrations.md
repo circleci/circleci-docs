@@ -391,7 +391,10 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - build:
+        filters:
+          branches:
+            only: master
       - deploy:
           requires:
             - build
