@@ -14,7 +14,7 @@ as well as how to create and delete them.
 
 ## Overview
 
-There are two types of API token
+There are two types of API tokens
 you can create within CircleCI.
 
   1. **Personal**:
@@ -30,8 +30,8 @@ you can create within CircleCI.
       - _All_ tokens grant read access for the project's build statuses and build artifacts.
 
 **Note**:
-Once created,
-API tokens cannot be modified.
+API tokens cannot be modifed
+after they have been created.
 The only way to change existing tokens
 is to delete and recreate them.
 
@@ -42,7 +42,7 @@ is to delete and recreate them.
   2. Click [Personal API Tokens](https://circleci.com/account/api).
   3. Click the **Create New Token** button.
   4. In the **Token name** field,
-  create a memorable name for the token.
+  type a memorable name for the token.
   5. Click the **Add API Token** button.
   6. After the token appears,
   copy and paste it to another location.
@@ -61,7 +61,7 @@ click the X in the **Remove** column.
   3. Click the **Create Token** button.
   4. Choose a scope from the dropdown menu.
   5. In the **Token Label** field,
-  create a memorable label for the token.
+  type a memorable label for the token.
   6. Click the **Add Token** button.
 
 To delete a project API token,
@@ -69,11 +69,12 @@ click the X in the **Remove** column.
 When the confirmation window appears,
 click the **Remove** button.
 
-## What Next?
+## Next Steps
 
 Now that you know
 how to create API tokens,
-you could...
+you can do other things
+that require them:
 
   - translate your legacy project to CircleCI 2.0 with the [configuration translator]({{ site.baseurl }}/2.0/config-translation/#using-config-translation).
   - [inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) into a build.
