@@ -76,8 +76,7 @@ how to create API tokens,
 you can do other things
 that require them:
 
-  - translate your legacy project to CircleCI 2.0 with the [configuration translator]({{ site.baseurl }}/2.0/config-translation/#using-config-translation).
-  - [inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) into a build.
-  - [trigger conditional jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
-  - learn how to [embed build status badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README.
-  - [download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
+  - [Embed Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README or other external page.
+  - [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
+  - [Download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
+  - [Inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) into a build.
