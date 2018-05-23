@@ -67,6 +67,11 @@ To run your build, navigate to your repo and run `circleci build`.
 
 **Note:** If your _config.yml_ uses Workflows and has a job named `build`, only that `build` job will run. If you are using Workflows and have no jobs named `build`, the CLI will not be able to run your project locally.
 
+To run jobs other than build use --job argument.
+```
+$ circleci build --job test
+```
+
 ### Troubleshooting Container Configurations Locally
 
 Test locally to quickly retry configurations such as connecting on different ports or with different users. Jobs often have several containers that need to “talk” to each other. For example, you might want to locally test that a job can connect and create the relevant database with correct permissions on the correct port for a PostgreSQL container. Or you might be using a pre-built container, but you’re unsure if it has all the services you need, or if they're running in the way you hope.
