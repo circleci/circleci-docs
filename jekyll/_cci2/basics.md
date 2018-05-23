@@ -29,7 +29,7 @@ Document | Description
 [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) | Best practices for using shell scripts in CircleCI configuration.
 [Adding an SSH Key]({{ site.baseurl }}/2.0/add-ssh-key/) | How to add an SSH key to CircleCI.
 [Debugging with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/) | How to use SSH to debug build problems.
-[API Permissions]({{ site.baseurl }}/2.0/api-permissions/) | How to add and change API permissions on CircleCI.
+[Managing API Tokens]({{ site.baseurl }}/2.0/api-permissions/) | How to assign scoped tokens for using the CircleCI API.
 [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) | How to prevent CircleCI from automatically building changes.
 [Enabling Notifications]({{ site.baseurl }}/2.0/notifications/) | How to set or modify Slack, chat, and email notifications in the CircleCI app.
 [Embedding Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) | How to display the status of your builds on a web page or document.
