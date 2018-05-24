@@ -96,9 +96,12 @@ Login Succeeded
 Not all command-line programs take credentials
 in the same way that `docker` does.
 
-## Setting Global Environment Variables
+## Setting Context-Level Environment Variables
 
-To set global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+Creating a context
+allows you to share environment variables across multiple projects.
+To set environment variables at the context level,
+see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
 
 ## Setting Job-Level Environment Variables
 
