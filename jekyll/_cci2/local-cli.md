@@ -67,8 +67,11 @@ To run your build, navigate to your repo and run `circleci build`.
 
 **Note:** If your _config.yml_ uses Workflows and has a job named `build`, only that `build` job will run. If you are using Workflows and have no jobs named `build`, the CLI will not be able to run your project locally.
 
-To run jobs other than build use --job argument.
-```
+To run any job besides `build`,
+add the `--job` flag,
+followed by the name of the job.
+
+```bash
 $ circleci build --job test
 ```
 
