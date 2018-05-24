@@ -15,6 +15,17 @@ This document provides information about pre-built CircleCI images and a listing
 
 For convenience, CircleCI maintains several Docker images. These images are extensions of official Docker images and include tools that are especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). The source code for these images is available at [github.com/circleci/circleci-images](https://github.com/circleci/circleci-images). Dockerfiles for each CircleCI image variant are archived at [github.com/circleci-public/circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
+## Best Practices
+
+CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container, similar to using `:latest`. It is best practice to lock down aspects of your build container, by specifying an additional tag to pin down the image in your configuration.
+
+That is, to prevent unintended changes that come from upstream, instead of using `circleci/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
+
+For example, add `-jessie` or `-stretch` to the end of each of those containers to ensure you're only using that base OS. You can pin down those images to a specific point version, like `circleci/ruby:2.3.7-jessie`, or you can just specify the OS version, with `circleci/ruby:2.3`. This is possible for any of the CircleCI images. 
+
+It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes. To find the value, navigate to on older Build page in the CircleCI app that utilized the image you wish to use and select the drop-down for `Spin up Environment`. Inside you will find the SHA256, for example, 
+`circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`. 
+
 ## Image Types
 
 CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
