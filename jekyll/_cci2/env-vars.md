@@ -16,17 +16,27 @@ This document describes using environment variables in CircleCI in the following
 
 ## Overview
 
-Environment variables are used according to a specific precedence order, as follows:
+Environment variables can be set at several scope levels.
+From general to specific, these levels are:
 
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
-5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#circleci-built-in-environment-variables) section of this document.
+1. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
+Automatically available.
+2. [Project-specific](#setting-project-level-environment-variables) environment variables.
+Set within the CircleCI application.
+3. [Context-level]({{ site.baseurl }}/2.0/contexts/) environment variables.
+Set within the CircleCI application.
+3. [Job-level](#setting-job-level-environment-variables) environment variables.
+Set in your `.circleci/config.yml` file.
+4. [Container-level](#setting-container-level-environment-variables) environment variables.
+Set in your `.circleci/config.yml` file.
+5. [Step-level](#setting-step-level-environment-variables) environment variables.
+Set in your `.circleci/config.yml` file.
+6. Environment variables [set within shell commands](#interpolating-environment-variables).
+Set in your `.circleci/config.yml` file.
 
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
+CircleCI also loads environment variables in this order.
+If an environment variable is set at multiple scope levels,
+CircleCI uses the variable set at the **lowest level**.
 
 ## Setting Project-Level Environment Variables
 
