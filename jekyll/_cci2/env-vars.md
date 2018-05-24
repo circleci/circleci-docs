@@ -38,6 +38,11 @@ CircleCI also loads environment variables in this order.
 If an environment variable is set at multiple scope levels,
 CircleCI uses the variable set at the **lowest level**.
 
+**Warning**:
+Environment variables set within configuration are fully visible in build output.
+If you are adding secrets or sensitive data,
+set these at the [project level](#setting-project-level-environment-variables) instead.
+
 ## Setting Project-Level Environment Variables
 
 1. In the CircleCI application,
@@ -104,11 +109,6 @@ are overwritten by...
 2. ...environment variables set at the **container** level,
 which are overwritten by...
 3. ...environment variables set at the **step** level.
-
-**Warning**:
-Environment variables set within configuration are fully visible in build output.
-If you are adding secrets or sensitive data,
-set these at the [project level](#setting-project-level-environment-variables) instead.
 
 ### Setting Job-Level Environment Variables
 
