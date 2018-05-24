@@ -40,7 +40,7 @@ CircleCI uses the variable set at the **lowest level**.
 
 **Warning**:
 Environment variables set within configuration (levels 4-7)
-are **fully visible** in build output.
+are **fully visible** in build output and on the build page.
 If you are adding secrets or sensitive data,
 set these within the CircleCI application (levels 2-3).
 Also note that
