@@ -21,7 +21,7 @@ From general to specific, these levels are:
 
 1. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
 Automatically available.
-2. [Project-specific](#setting-project-level-environment-variables) environment variables.
+2. [Project-level](#setting-project-level-environment-variables) environment variables.
 Set within the CircleCI application.
 3. [Context-level]({{ site.baseurl }}/2.0/contexts/) environment variables.
 Set within the CircleCI application.
