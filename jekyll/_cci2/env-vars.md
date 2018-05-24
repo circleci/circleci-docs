@@ -43,6 +43,10 @@ Environment variables set within configuration (levels 4-7)
 are **fully visible** in build output.
 If you are adding secrets or sensitive data,
 set these within the CircleCI application (levels 2-3).
+Also note that
+running scripts within configuration
+can sometimes expose secret environment variables.
+See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
 
 ## Setting Project-Level Environment Variables
 
