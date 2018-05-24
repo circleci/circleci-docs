@@ -39,12 +39,13 @@ If an environment variable is set at multiple scope levels,
 CircleCI uses the variable set at the **lowest level**.
 
 **Warning**:
-Environment variables set within configuration (levels 4-7)
-are **fully visible** in build output and on the build page.
-If you are adding secrets or sensitive data,
-set these within the CircleCI application (levels 2-3).
-Also note that
-running scripts within configuration
+Do not add secret or sensitive data anywhere inside `.circleci/config.yml`.
+The full text of `config.yml` is **fully visible**
+to anyone who has access to your project on CircleCI.
+Instead, put these data into [project](#setting-project-level-environment-variables) or [context]({{ site.baseurl }}/2.0/contexts/) settings.
+
+Also note
+that running scripts within configuration
 can sometimes expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
 
