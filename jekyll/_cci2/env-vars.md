@@ -31,7 +31,7 @@ Set in your `.circleci/config.yml` file.
 Set in your `.circleci/config.yml` file.
 6. [Step-level](#setting-step-level-environment-variables) environment variables.
 Set in your `.circleci/config.yml` file.
-7. Environment variables [set within shell commands](#interpolating-environment-variables).
+7. Environment variables [set within shell commands](#setting-command-level-environment-variables).
 Set in your `.circleci/config.yml` file.
 
 CircleCI also loads environment variables in this order.
@@ -180,7 +180,7 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-## Interpolating Environment Variables
+## Setting Command-Level Environment Variables
 
 CircleCI does not support interpolation
 when defining configuration variables like `working_directory` or `images`.
