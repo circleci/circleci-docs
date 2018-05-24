@@ -98,7 +98,7 @@ which are overwritten by...
 **Warning**:
 Environment variables set within configuration are fully visible in build output.
 If you are adding secrets or sensitive data,
-set these at the [project level](#adding-project-level-environment-variables) instead.
+set these at the [project level](#setting-project-level-environment-variables) instead.
 
 ### Setting Job-Level Environment Variables
 
