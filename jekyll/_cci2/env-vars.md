@@ -100,18 +100,7 @@ in the same way that `docker` does.
 
 To set global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 
-## Setting Environment Variables in `.circleci/config.yml`
-
-It is also possible to set environment variables at the **job**, **container**, and **step** levels,
-in order of increasing specificity.
-
-1. Environment variables set at the **job** level
-are overwritten by...
-2. ...environment variables set at the **container** level,
-which are overwritten by...
-3. ...environment variables set at the **step** level.
-
-### Setting Job-Level Environment Variables
+## Setting Job-Level Environment Variables
 
 To set environment variables at the job level,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
@@ -126,7 +115,7 @@ jobs:
       FOO: "bar"
 ```
 
-### Setting Container-Level Environment Variables
+## Setting Container-Level Environment Variables
 
 To set environment variables at the container level,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
@@ -159,7 +148,7 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-### Setting Step-Level Environment Variables
+## Setting Step-Level Environment Variables
 
 To set environment variables at the step level,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run)
