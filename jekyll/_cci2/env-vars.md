@@ -80,7 +80,7 @@ refer to your shell's documentation on setting environment variables.
 ## Setting Step-Level Environment Variables
 
 To set environment variables at the step level,
-use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run)
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run).
 
 ```yaml
 version: 2
