@@ -16,7 +16,7 @@ CircleCI can be configured to deploy to virtually any service. This document pro
 
 To deploy your application,
 add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file.
-You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
+You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
 
 Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
 
@@ -259,7 +259,7 @@ and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) d
 to set up a project in your chosen language.
 
 2. Add the name of your Heroku application and your Heroku API key as environment variables.
-See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) for instructions.
+See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) for instructions.
 In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
 4. In your `.circleci/config.yml`,
@@ -365,7 +365,7 @@ to which you're deploying.
 For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key/) document.
 
 2. Add the SSH username and SSH hostname of your build VM as environment variables.
-For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#adding-project-level-environment-variables) document.
+For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
 3. In your `.circleci/config.yml`,

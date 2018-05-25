@@ -18,17 +18,133 @@ This document describes using environment variables in CircleCI in the following
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
+1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
+3. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
+4. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#circleci-built-in-environment-variables) section of this document.
+6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
+7. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#circleci-built-in-environment-variables) section of this document.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-## Adding Project-Level Environment Variables
+**Warning**:
+Do not add secret or sensitive data anywhere inside `.circleci/config.yml`.
+The full text of `config.yml` is **fully visible**
+to anyone who has access to your project on CircleCI.
+Instead, put these data into [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings.
+
+Also note
+that running scripts within configuration
+can sometimes expose secret environment variables.
+See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
+
+## Setting an Environment Variable in a Shell Command
+
+CircleCI does not support interpolation
+when defining configuration variables like `working_directory` or `images`.
+All defined values are treated literally.
+
+However, it is possible to interpolate a variable within a command
+by setting it for the current shell.
+
+```yaml
+version: 2
+jobs:
+  build:
+    steps:
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
+```
+
+**Note**:
+Depending on your shell,
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
+For more information,
+refer to your shell's documentation on setting environment variables.
+
+## Setting an Environment Variable in a Step
+
+To set an environment variable in a step,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+## Setting an Environment Variable in a Job
+
+To set an environment variable in a job,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: "bar"
+```
+
+## Setting an Environment Variable in a Container
+
+To set an environment variable in a container,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: circleci/postgres:9.6
+      # environment variables for all commands executed in the primary container
+        environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+```
+
+The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.2
+       # environment variables for all commands executed in the primary container
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6
+```
+
+## Setting an Environment Variable in a Context
+
+Creating a context
+allows you to share environment variables across multiple projects.
+To set an environment variables in a context,
+see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
+
+## Setting an Environment Variable in a Project
 
 1. In the CircleCI application,
 go to your project's settings
@@ -79,116 +195,6 @@ Login Succeeded
 **Note:**
 Not all command-line programs take credentials
 in the same way that `docker` does.
-
-## Adding Global Environment Variables
-
-To add global environment variables that may be shared across projects, use the Settings > Contexts page of the CircleCI application. See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-
-## Declaring Environment Variables
-
-**Warning**: Do **not** add keys or secrets to a public CircleCI project. 
-Be careful that the output doesn't appear in build logs and that the variables are set using the CircleCI application and not in the `config.yml` file.
-
-### Declaring an Environment Variable for a Step
-
-Use the environment key inside a run step to set variables for a single command shell as shown in the following example:
-
-```
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          # Environment variable for a single command shell
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-### Interpolating Environment Variables 
-
-CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
-
-However, it is possible to interpolate a variable within a command
-by setting it for the current shell.
-
-```yaml
-version: 2
-jobs:
-  build:
-    steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
-```
-
-**Note**:
-Depending on your shell,
-you may have to append the new variable to a shell startup file
-like `~/.tcshrc` or `~/.zshrc`.
-For more information,
-refer to your shell's documentation on setting environment variables.
-
-### Declaring Environment Variables for a Job
-
-To define environment variables for a job, use the `environment` key under the job name in the `jobs` section.
-See [here](https://circleci.com/docs/2.0/configuration-reference/#job_name) for more details.
-Ex:
-
-```
-version: 2.0
-
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: "bar"
-```
-
-### Adding Environment Variables for a Container
-
-Use the `environment` key in your `image` section to set variables for all commands run in the container.
-
-```
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6
-      # Environment variable for all commands executed in the primary container
-        environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
-```
-
-The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
-
-```
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.2
-       # Environment variable for all commands executed in the primary container
-        environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6
-```
-
-See the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#docker--machine-executor) document for details of the specification for the `environment` key of the docker executor type.
-
 
 ## Injecting Environment Variables with the API
 
@@ -253,7 +259,6 @@ export param2="500"
 ```
 
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
-
 
 ## CircleCI Built-in Environment Variables
 
