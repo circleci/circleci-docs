@@ -19,7 +19,7 @@ This document describes using environment variables in CircleCI in the following
 Environment variables are used according to a specific precedence order, as follows:
 
 1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-run-step).
+2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
 3. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
 4. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
