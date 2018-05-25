@@ -19,17 +19,17 @@ This document describes using environment variables in CircleCI in the following
 Environment variables can be set at several scope levels.
 From specific to general, these levels are:
 
-1. Environment variables [set in shell commands](#setting-command-level-environment-variables).
+1. Environment variables [set in shell commands](#setting-an-environment-variable-in-a-shell-command).
 Set in your `.circleci/config.yml` file.
-2. Environment variables [set in a step](#setting-step-level-environment-variables).
+2. Environment variables [set in a step](#setting-an-environment-variable-in-a-step).
 Set in your `.circleci/config.yml` file.
-3. Environment variables [set in a container](#setting-container-level-environment-variables).
+3. Environment variables [set in a container](#setting-an-environment-variable-in-a-container).
 Set in your `.circleci/config.yml` file.
-4. Environment variables [set in a job](#setting-job-level-environment-variables).
+4. Environment variables [set in a job](#setting-an-environment-variable-in-a-job).
 Set in your `.circleci/config.yml` file.
-5. Environment variables [set in a context](#setting-context-level-environment-variables).
+5. Environment variables [set in a context](#setting-an-environment-variable-in-a-context).
 Set within the CircleCI application.
-6. Environment variables [set in a project](#setting-project-level-environment-variables).
+6. Environment variables [set in a project](#setting-an-environment-variable-in-a-project).
 Set within the CircleCI application.
 7. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
 Automatically available.
@@ -48,7 +48,7 @@ that running scripts within configuration
 can sometimes expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
 
-## Setting Command-Level Environment Variables
+## Setting an Environment Variable in a Shell Command
 
 CircleCI does not support interpolation
 when defining configuration variables like `working_directory` or `images`.
@@ -77,9 +77,9 @@ like `~/.tcshrc` or `~/.zshrc`.
 For more information,
 refer to your shell's documentation on setting environment variables.
 
-## Setting Step-Level Environment Variables
+## Setting an Environment Variable in a Step
 
-To set environment variables at the step level,
+To set environment variables in a step,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run).
 
 ```yaml
@@ -98,7 +98,7 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-## Setting Container-Level Environment Variables
+## Setting an Environment Variable in a Container
 
 To set environment variables at the container level,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
@@ -131,7 +131,7 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-## Setting Job-Level Environment Variables
+## Setting an Environment Variable in a Job
 
 To set environment variables at the job level,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
@@ -146,14 +146,14 @@ jobs:
       FOO: "bar"
 ```
 
-## Setting Context-Level Environment Variables
+## Setting an Environment Variable in a Context
 
 Creating a context
 allows you to share environment variables across multiple projects.
 To set environment variables at the context level,
 see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
 
-## Setting Project-Level Environment Variables
+## Setting an Environment Variable in a Project
 
 1. In the CircleCI application,
 go to your project's settings
@@ -268,7 +268,6 @@ export param2="500"
 ```
 
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
-
 
 ## CircleCI Built-in Environment Variables
 
