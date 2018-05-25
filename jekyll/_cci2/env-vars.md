@@ -79,7 +79,7 @@ refer to your shell's documentation on setting environment variables.
 
 ## Setting an Environment Variable in a Step
 
-To set environment variables in a step,
+To set an environment variable in a step,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run).
 
 ```yaml
@@ -100,7 +100,7 @@ jobs:
 
 ## Setting an Environment Variable in a Container
 
-To set environment variables at the container level,
+To set an environment variable in a container,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
 
 ```yaml
@@ -133,7 +133,7 @@ jobs:
 
 ## Setting an Environment Variable in a Job
 
-To set environment variables at the job level,
+To set an environment variable in a job,
 use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
 
 ```yaml
@@ -150,7 +150,7 @@ jobs:
 
 Creating a context
 allows you to share environment variables across multiple projects.
-To set environment variables at the context level,
+To set an environment variables in a context,
 see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
 
 ## Setting an Environment Variable in a Project
