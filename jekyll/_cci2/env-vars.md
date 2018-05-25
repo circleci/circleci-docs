@@ -41,7 +41,7 @@ CircleCI uses the variable set at the **most specific** level.
 Do not add secret or sensitive data anywhere inside `.circleci/config.yml`.
 The full text of `config.yml` is **fully visible**
 to anyone who has access to your project on CircleCI.
-Instead, put these data into [project](#setting-project-level-environment-variables) or [context]({{ site.baseurl }}/2.0/contexts/) settings.
+Instead, put these data into [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings.
 
 Also note
 that running scripts within configuration
