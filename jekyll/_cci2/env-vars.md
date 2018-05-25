@@ -48,6 +48,111 @@ that running scripts within configuration
 can sometimes expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
 
+## Setting Command-Level Environment Variables
+
+CircleCI does not support interpolation
+when defining configuration variables like `working_directory` or `images`.
+All defined values are treated literally.
+
+However, it is possible to interpolate a variable within a command
+by setting it for the current shell.
+
+```yaml
+version: 2
+jobs:
+  build:
+    steps:
+      - run:
+          name: Update PATH and Define Environment Variable at Runtime
+          command: |
+            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
+```
+
+**Note**:
+Depending on your shell,
+you may have to append the new variable to a shell startup file
+like `~/.tcshrc` or `~/.zshrc`.
+For more information,
+refer to your shell's documentation on setting environment variables.
+
+## Setting Step-Level Environment Variables
+
+To set environment variables at the step level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run)
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+    steps:
+      - checkout
+      - run:
+          name: Run migrations
+          command: sql/docker-entrypoint.sh sql
+          # Environment variable for a single command shell
+          environment:
+            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+```
+
+## Setting Container-Level Environment Variables
+
+To set environment variables at the container level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: circleci/postgres:9.6
+      # environment variables for all commands executed in the primary container
+        environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+```
+
+The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.2
+       # environment variables for all commands executed in the primary container
+        environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6
+```
+
+## Setting Job-Level Environment Variables
+
+To set environment variables at the job level,
+use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: "bar"
+```
+
+## Setting Context-Level Environment Variables
+
+Creating a context
+allows you to share environment variables across multiple projects.
+To set environment variables at the context level,
+see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
+
 ## Setting Project-Level Environment Variables
 
 1. In the CircleCI application,
@@ -99,111 +204,6 @@ Login Succeeded
 **Note:**
 Not all command-line programs take credentials
 in the same way that `docker` does.
-
-## Setting Context-Level Environment Variables
-
-Creating a context
-allows you to share environment variables across multiple projects.
-To set environment variables at the context level,
-see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
-
-## Setting Job-Level Environment Variables
-
-To set environment variables at the job level,
-use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: "bar"
-```
-
-## Setting Container-Level Environment Variables
-
-To set environment variables at the container level,
-use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6
-      # environment variables for all commands executed in the primary container
-        environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
-```
-
-The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.2
-       # environment variables for all commands executed in the primary container
-        environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6
-```
-
-## Setting Step-Level Environment Variables
-
-To set environment variables at the step level,
-use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run)
-
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          # Environment variable for a single command shell
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-## Setting Command-Level Environment Variables
-
-CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
-
-However, it is possible to interpolate a variable within a command
-by setting it for the current shell.
-
-```yaml
-version: 2
-jobs:
-  build:
-    steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
-```
-
-**Note**:
-Depending on your shell,
-you may have to append the new variable to a shell startup file
-like `~/.tcshrc` or `~/.zshrc`.
-For more information,
-refer to your shell's documentation on setting environment variables.
 
 ## Injecting Environment Variables with the API
 
