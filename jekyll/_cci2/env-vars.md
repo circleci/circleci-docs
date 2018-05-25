@@ -18,13 +18,13 @@ This document describes using environment variables in CircleCI in the following
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
+1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-run-step).
+3. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
+4. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#circleci-built-in-environment-variables) section of this document.
+6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
+7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions](#circleci-built-in-environment-variables) section of this document.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
