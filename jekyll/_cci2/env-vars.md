@@ -19,17 +19,17 @@ This document describes using environment variables in CircleCI in the following
 Environment variables can be set at several scope levels.
 From specific to general, these levels are:
 
-1. Environment variables [set within shell commands](#setting-command-level-environment-variables).
+1. Environment variables [set in shell commands](#setting-command-level-environment-variables).
 Set in your `.circleci/config.yml` file.
-2. [Step-level](#setting-step-level-environment-variables) environment variables.
+2. Environment variables [set in a step](#setting-step-level-environment-variables).
 Set in your `.circleci/config.yml` file.
-3. [Container-level](#setting-container-level-environment-variables) environment variables.
+3. Environment variables [set in a container](#setting-container-level-environment-variables).
 Set in your `.circleci/config.yml` file.
-4. [Job-level](#setting-job-level-environment-variables) environment variables.
+4. Environment variables [set in a job](#setting-job-level-environment-variables).
 Set in your `.circleci/config.yml` file.
-5. 3. [Context-level]({{ site.baseurl }}/2.0/contexts/) environment variables.
+5. Environment variables [set in a context](#setting-context-level-environment-variables).
 Set within the CircleCI application.
-6. [Project-level](#setting-project-level-environment-variables) environment variables.
+6. Environment variables [set in a project](#setting-project-level-environment-variables).
 Set within the CircleCI application.
 7. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
 Automatically available.
