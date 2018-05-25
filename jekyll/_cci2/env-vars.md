@@ -17,26 +17,25 @@ This document describes using environment variables in CircleCI in the following
 ## Overview
 
 Environment variables can be set at several scope levels.
-From general to specific, these levels are:
+From specific to general, these levels are:
 
-1. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
-Automatically available.
-2. [Project-level](#setting-project-level-environment-variables) environment variables.
-Set within the CircleCI application.
-3. [Context-level]({{ site.baseurl }}/2.0/contexts/) environment variables.
-Set within the CircleCI application.
+1. Environment variables [set within shell commands](#setting-command-level-environment-variables).
+Set in your `.circleci/config.yml` file.
+2. [Step-level](#setting-step-level-environment-variables) environment variables.
+Set in your `.circleci/config.yml` file.
+3. [Container-level](#setting-container-level-environment-variables) environment variables.
+Set in your `.circleci/config.yml` file.
 4. [Job-level](#setting-job-level-environment-variables) environment variables.
 Set in your `.circleci/config.yml` file.
-5. [Container-level](#setting-container-level-environment-variables) environment variables.
-Set in your `.circleci/config.yml` file.
-6. [Step-level](#setting-step-level-environment-variables) environment variables.
-Set in your `.circleci/config.yml` file.
-7. Environment variables [set within shell commands](#setting-command-level-environment-variables).
-Set in your `.circleci/config.yml` file.
+5. 3. [Context-level]({{ site.baseurl }}/2.0/contexts/) environment variables.
+Set within the CircleCI application.
+6. [Project-level](#setting-project-level-environment-variables) environment variables.
+Set within the CircleCI application.
+7. Environment variables [built into CircleCI](#circleci-built-in-environment-variables).
+Automatically available.
 
-CircleCI also loads environment variables in this order.
 If an environment variable is set at multiple scope levels,
-CircleCI uses the variable set at the **lowest level**.
+CircleCI uses the variable set at the **most specific** level.
 
 **Warning**:
 Do not add secret or sensitive data anywhere inside `.circleci/config.yml`.
