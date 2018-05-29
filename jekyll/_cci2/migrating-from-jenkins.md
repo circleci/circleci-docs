@@ -38,7 +38,7 @@ In addition to differences in the basics of running builds on Jenkins and Circle
 
 ### Job Configuration
 
-Jenkins projects are generally configured in the Jenkins web UI and their settings are stored on the filesystem of the Jenkins server. This makes it difficult to share configuration information within a team or organization. Cloning a GitHub or Bitbucket repository doesn’t copy the information stored in Jenkins. Settings living on the Jenkins server also make regular backup of all Jenkins servers extra important.
+Jenkins projects are generally configured in the Jenkins web UI and their settings are stored on the filesystem of the Jenkins server. This makes it difficult to share configuration information within a team or organization. Cloning a GitHub or Bitbucket repository doesn’t copy the information stored in Jenkins. Settings stored on the Jenkins server also make regular backup of all Jenkins servers required.
 
 Almost all configuration of CircleCI builds is stored in a file called `.circleci/config.yml` that goes in the root of each project. Treating CI configuration like any other source code makes it easier to back up and share. Just a few project settings, like secrets, that shouldn’t be stored in source code are stored (encrypted) in the CircleCI app.
 
