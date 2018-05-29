@@ -152,8 +152,8 @@ use the `--split-by` flag with the `timings` split type.
     circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 
 By default,
-the CLI assumes that it is splitting filenames.
-You can also split classnames
+the CLI assumes that the timing data are filenames.
+You can also specify class names
 by using the `--timings-type` flag.
 
     cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
