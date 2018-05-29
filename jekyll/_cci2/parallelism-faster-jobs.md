@@ -141,7 +141,7 @@ use the `--split-by` flag with the `filesize` split type.
 #### Splitting by Timings Data
 
 On each successful run of a test suite,
-CircleCI automatically saves timings data to a directory
+CircleCI saves timings data to a directory
 specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step.
 If you do not use `store_test_results`,
 there will be no timing data available for splitting your tests.
@@ -151,9 +151,11 @@ use the `--split-by` flag with the `timings` split type.
 
     circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 
-By default,
-the CLI assumes that the timing data are filenames.
-You can also specify class names
+The CLI expects both filenames and classnames
+to be present in the timing data
+produced by the testing suite.
+By default, splitting defaults to filename,
+but you can specify classnames
 by using the `--timings-type` flag.
 
     cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
