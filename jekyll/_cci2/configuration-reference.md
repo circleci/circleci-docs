@@ -302,15 +302,24 @@ A job that was not executed due to configured rules will show up in the list of 
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
+After this feature is added to your paid plan,
+it is possible to configure CPU and RAM resources for each job
+as described in the following table.
+In order to use a specific resource class,
+ensure that the box you are using satisfies the minimum requirements.
 
-Class       | vCPUs       | RAM
-------------|-----------|------
-small       | 1 | 2GB
-medium (default) | 2 | 4GB
-medium+     | 3 | 6GB
-large       | 4 | 8GB
-xlarge      | 8 | 16GB
+If `resource_class` is not specified
+or an invalid class is specified,
+the default `resource_class: medium` will be used.
+The `resource_class` key is currently only available for use with the `docker` executor.
+
+Class            | vCPUs | RAM  | 
+-----------------|-------|------|
+small            | 1     | 2GB  | 
+medium (default) | 2     | 4GB  | 
+medium+          | 3     | 6GB  | 
+large            | 4     | 8GB  | 
+xlarge           | 8     | 16GB | 
 {: class="table table-striped"}
 
 Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. 
