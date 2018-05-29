@@ -138,7 +138,7 @@ use the `--split-by` flag with the `filesize` split type.
 
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 
-#### Splitting by Timings
+#### Splitting by Timings Data
 
 On each successful run of a test suite,
 CircleCI automatically saves test timings data to a default directory.
