@@ -9,7 +9,7 @@ order: 20
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Writing YAML*
 
 This document gives an overview of YAML,
-a data serialization language used in CircleCI configuration files.
+a data serialization language used to configure CircleCI.
 
 ## Overview
 
