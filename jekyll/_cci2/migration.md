@@ -15,7 +15,7 @@ Document | Description
 [Using the 1.0-to-2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation/) | Instructions for using the `config-translation` endpoint to generate an initial CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages: Ruby, PHP, Node.js, iOS (partial: 1.0 code signing is not supported - use Fastlane instead), Java (partial).
 [CircleCI Configuration Generator](https://github.com/CircleCI-Public/circleci-config-generator) | Use this script to extend the 1.0-to-2.0 config-translation endpoint by creating a 2.0 test branch for your project. Then, it will generate a  `config.yml` file on that branch and push a commit and run on CircleCI 2.0.
 [Find projects building on CircleCI 1.0](https://github.com/CircleCI-Public/find-circle-yml) | Use this command-line tool to find which repositories in your GitHub organization or Bitbucket team have 1.0 `circle.yml` configuration files.
-[Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) | Conceptial information for migrating from Jenkins to CircleCI 2.0.
+[Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) | Conceptual information for migrating from Jenkins to CircleCI 2.0.
 {: class="table table-striped"}
 
 ## Concepts 
