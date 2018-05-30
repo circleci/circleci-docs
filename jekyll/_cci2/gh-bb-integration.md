@@ -208,13 +208,13 @@ by following this workaround:
 go to your project's settings.
 
 2. On the **Checkout SSH Keys** page,
-right-click the **Create <username> user key** button
-and select the **Inspect** option.
+right-click the **Create `<username>` user key** button
+and select the **Inspect** option to open the browser inspector.
 
 3. In the developer console,
 select the **Network** tab.
 
-4. Click the **Create [username] user key** button.
+4. Click the **Create `<username>` user key** button.
 
 5. In the developer console,
 click the `checkout-key` with a 201 status
