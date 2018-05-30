@@ -77,12 +77,16 @@ There is a default setting within CircleCI to initially limit project parallelis
 
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
+```yaml
     steps:
       - run: "Add any bash command you want here"
       - run:
           command: |
             echo "Arbitrary multi-line bash"
             echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
+```
+            
+Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.           
 
 ## Does CircleCI 2.0 run inference commands?
 
