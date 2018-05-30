@@ -25,7 +25,7 @@ it is important to understand the basics of YAML formatting.
 
 ## How to Write YAML
 
-Tee basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function)).
+The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function)).
 You might also call this a _dictionary_, _hash_, or _object_.
 
 Very generally, a YAML file consists of key-value pairs:
@@ -41,3 +41,7 @@ key: value
 ### Default Values and Map Merging
 
 ## See More
+
+- Peruse our own documentation on [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/).
+- Lose yourself in the [Official YAML Specification](http://yaml.org/spec/1.2/spec.html).
+- Or just read [the important parts](https://learnxinyminutes.com/docs/yaml/).
