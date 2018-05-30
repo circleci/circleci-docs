@@ -33,3 +33,11 @@ Very generally, a YAML file consists of key-value pairs:
 ```yaml
 key: value
 ```
+
+### Scalar Types
+
+### Collection Types
+
+### Default Values and Map Merging
+
+## See More
