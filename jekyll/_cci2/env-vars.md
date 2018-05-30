@@ -16,7 +16,11 @@ This document describes using environment variables in CircleCI in the following
 
 ## Overview
 
-Environment variables are used according to a specific precedence order, as follows:
+To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information.
+
+### Environment Variable Usage Options
+
+Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in a `run` key, `environment` key, or a Workflows `context` key in your configuration. Environment variables are used according to a specific precedence order, as follows:
 
 1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
 2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
@@ -28,16 +32,15 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-**Warning**:
-Do not add secret or sensitive data anywhere inside `.circleci/config.yml`.
-The full text of `config.yml` is **fully visible**
-to anyone who has access to your project on CircleCI.
-Instead, put these data into [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings.
+**Note**:
+Do not add secrets or keys inside the `.circleci/config.yml` file.
+The full text of `config.yml` is visible
+to developers with access to your project on CircleCI.
+Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
 
-Also note
-that running scripts within configuration
-can sometimes expose secret environment variables.
-See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for more information.
+Running scripts within configuration
+may expose secret environment variables.
+See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ## Setting an Environment Variable in a Shell Command
 
