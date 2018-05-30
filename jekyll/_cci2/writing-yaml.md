@@ -22,3 +22,14 @@ located at `~/.circleci/config.yml`,
 where `~` is the root of your project's directory.
 Since most of your work with CircleCI occurs in this file,
 it is important to understand the basics of YAML formatting.
+
+## How to Write YAML
+
+Tee basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function)).
+You might also call this a _dictionary_, _hash_, or _object_.
+
+Very generally, a YAML file consists of key-value pairs:
+
+```yaml
+key: value
+```
