@@ -26,10 +26,8 @@ it is important to understand the basics of YAML formatting.
 
 ## How to Write YAML
 
-The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function)).
-You might also call this a _dictionary_, _hash_, or _object_.
-
-Very generally, a YAML file consists of key-value pairs:
+The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function))
+and consists of one or more key-value pairs.
 
 ```yaml
 key: value
