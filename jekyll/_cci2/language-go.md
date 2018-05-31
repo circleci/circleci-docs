@@ -197,7 +197,5 @@ Success! You just set up CircleCI 2.0 for a Go app. Check out our {% comment %} 
 
 ## Deploy
 
-## Deploy
-
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
