@@ -318,7 +318,7 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-Here's a passing build with deployment for the demo app: <https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>
+Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
 ### Additional Heroku Configuration
 

@@ -51,7 +51,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 ## Setting up Your Build on CircleCI
 
-1. For this step, you will need a CircleCI account.  Visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account to run your builds. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard).
+1. For this step, you will need a CircleCI account.  Visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account to run your builds. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard){:rel="nofollow"}.
 
 2. Next, you will be given the option of *following* any projects you have access to that are already building on CircleCI (this would typically apply to developers connected to a company or organization's GitHub account). On the next screen, you'll be able to add the repo you just created as a new project on CircleCI.
 

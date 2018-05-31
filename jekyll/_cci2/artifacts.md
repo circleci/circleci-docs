@@ -138,7 +138,7 @@ When CircleCI runs a build, a link to the core dump file appears under the Artif
 To download your artifacts with `curl`,
 follow these steps.
 
-1. On the [Personal API Tokens](https://circleci.com/account/api) settings page,
+1. On the [Personal API Tokens](https://circleci.com/account/api){:rel="nofollow"} settings page,
 click **Create New Token**.
 
 2. In the **Token name** field,

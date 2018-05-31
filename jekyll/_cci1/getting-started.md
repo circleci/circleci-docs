@@ -18,7 +18,7 @@ The reason it's so easy is that we automatically infer your settings from your c
 We expect you to have a project that roughly follows best practices for your platform.
 If you do, your tests will be up and running in a flash.
 Add
-your [first project](https://circleci.com/dashboard) now!
+your [first project](https://circleci.com/dashboard){:rel="nofollow"} now!
 
 ### When the magic doesn't work?
 

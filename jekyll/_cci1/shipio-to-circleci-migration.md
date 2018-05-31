@@ -11,7 +11,7 @@ Coming from Ship.io? You've come to the right place, we'll help you get started.
 
 For iOS projects, please [contact support](https://support.circleci.com/hc/en-us) with the name of your GitHub user or organization for access to the iOS build system. Once you've been enabled,
 
-1. Add your project on the [Add Projects page](https://circleci.com/add-projects).
+1. Add your project on the [Add Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
 2. Turn on the "Build iOS project" setting through the **Project Settings > Build Settings > Build Environment** page of your your project.
 3. Push a new commit to start a build on the iOS build system.
 
@@ -19,7 +19,7 @@ For iOS projects, please [contact support](https://support.circleci.com/hc/en-us
 
 You can easily migrate your Android projects from Ship.io to CircleCI in a few simple steps.
 
-1. Add your project on the [Add Projects page](https://circleci.com/add-projects).
+1. Add your project on the [Add Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
 2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started]( {{ site.baseurl }}/1.0/getting-started/) documentation.
 3. Check out the [Testing Android on CircleCI]( {{ site.baseurl }}/1.0/android/) documentation.
 
@@ -48,7 +48,7 @@ CircleCI will detect your workspace. If you have more than one workspace, you ca
 Make sure any scripts that you want to run are included in your repository. You can run your script using a bash command (e.g. `./example_script.sh`) configured in our UI (through **Project Settings > Dependency/Test Commands**) or in a [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file.
 
 ### Configure build notifications
-You can configure build notifications using the "Notifications" section of your Project Settings. Email notifications can be configured from the [Account page](https://circleci.com/account).
+You can configure build notifications using the "Notifications" section of your Project Settings. Email notifications can be configured from the [Account page](https://circleci.com/account){:rel="nofollow"}.
 
 ### Customize the build commands
 You can add to or override our inferred commands through your Project Settings or through a [circle.yml file]( {{ site.baseurl }}/1.0/configuration/).
@@ -66,7 +66,7 @@ We recommend using [fastlane](https://medium.com/mitoo-insider/how-to-set-up-con
 CircleCI is a powerful, developer friendly platform that allows for much greater flexibility in customizing your build environment. At Ship.io, "build steps" were used to specify configuration settings.
 Rather than manually adding Gradle tasks individually or spending precious time tinkering with how much RAM the Android Emulator uses, at CircleCI, nearly all of your configuration is done on the circle.yml. CircleCI has customizable notifications that keep you up to speed with the status of your build.
 You can configure build notifications using the "Notifications" section of your Project Settings.
-Email notifications can be configured from the [Account page](https://circleci.com/account).
+Email notifications can be configured from the [Account page](https://circleci.com/account){:rel="nofollow"}.
 
 
 ### Run Gradle tests

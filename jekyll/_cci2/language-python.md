@@ -19,7 +19,7 @@ This document describes CircleCI configuration for a sample application written 
 We maintain a reference Python Django project to show how to build Django on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-python-django" target="_blank">Demo Python Django Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django" target="_blank">Demo Python Django Project building on CircleCI</a>
+[Demo Python Django Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
 
@@ -36,7 +36,7 @@ Database images for use as a secondary 'service' container are also available on
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. Fork the project on GitHub to your own account.
-2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked.
+2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 ## Config Walkthrough

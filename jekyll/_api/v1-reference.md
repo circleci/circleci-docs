@@ -132,9 +132,9 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
 ## Getting Started
 
-1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
+1.  Add an API token from your [account dashboard](https://circleci.com/account/api){:rel="nofollow"}.
 2.  To test it,
-    [View it in your browser](https://circleci.com/api/v1.1/me)
+    [View it in your browser](https://circleci.com/api/v1.1/me){:rel="nofollow"}
     or call the API using `curl`:
 
     ```
