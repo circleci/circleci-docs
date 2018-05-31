@@ -85,7 +85,7 @@ simulation:
 Remember to properly indent a key-value pair
 when it is the value of an item in a sequence.
 
-### Defaults and Map Merging
+### Anchors and Aliases
 
 To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`,
 you can use anchors and aliases.
@@ -113,9 +113,11 @@ the literal output looks like this.
 - Al
 ```
 
-```yaml
-# merging a map
-```
+### Merging Maps
+
+Anchors and aliases work for scalar values,
+but to save maps or sequences,
+use `<<` to inject the alias.
 
 ```yaml
 default: &default
@@ -129,6 +131,22 @@ draco:
   <<: *default
   house: slytherin
 ```
+
+You can also merge multiple maps.
+
+```yaml
+good: &one
+  - harry
+  - ron
+bad: &two
+  - crabbe
+  - goyle
+students:
+  <<: [*one, *two]
+```
+
+For a more complex example,
+see [this gist](https://gist.github.com/bowsersenior/979804).
 
 ## See More
 
