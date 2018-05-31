@@ -71,7 +71,44 @@ scalar:
   - up
 ```
 
-### Default Values and Map Merging
+Items in sequences can also be key-value pairs.
+
+```yaml
+simulation:
+  - within: "a simulation"
+  - without:
+      a_glitch: "in the matrix"
+```
+
+**Note**:
+Remember to properly indent a key-value pair
+when it is the value of an item in a sequence.
+
+### Defaults and Map Merging
+
+To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`,
+you can use anchors and aliases.
+
+```yaml
+# simple anchor/alias example
+```
+
+```yaml
+# merging a map
+```
+
+```yaml
+default: &default
+  school: hogwarts
+
+harry:
+  <<: *default
+  house: gryffindor
+
+draco:
+  <<: *default
+  house: slytherin
+```
 
 ## See More
 
