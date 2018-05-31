@@ -150,7 +150,15 @@ see [this gist](https://gist.github.com/bowsersenior/979804).
 
 ## See More
 
-- Learn about the keys [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/).
-- Not sure if you wrote valid YAML? Run it through [this validator](http://yaml-online-parser.appspot.com/).
-- Immerse yourself in the [Official YAML Specification](http://yaml.org/spec/1.2/spec.html).
-- Or just read [the important parts](https://learnxinyminutes.com/docs/yaml/).
+While YAML has several other features,
+the examples above should be enough
+to write an robust, functional `config.yml`.
+If you are hungry for more knowledge,
+here are a few ideas.
+
+- For a concrete example of keys and values,
+see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+- If you are unsure whether your `config.yml` is valid YAML,
+[run it through a validator](http://yaml-online-parser.appspot.com/).
+- For a more exhaustive overview of YAML,
+Learn X in Y Minutes has [a great summary](https://learnxinyminutes.com/docs/yaml/).
