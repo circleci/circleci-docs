@@ -33,9 +33,24 @@ and consists of one or more key-value pairs.
 key: value
 ```
 
-### Scalar Types
+You can set another key-value pair as a value
+by indenting the nested key.
 
-### Collection Types
+```yaml
+key:
+  another_key: "another value"
+```
+
+Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar).
+You can also map a scalar to a sequence.
+
+```yaml
+scalar:
+  - here
+  - is
+  - a
+  - sequence
+```
 
 ### Default Values and Map Merging
 
