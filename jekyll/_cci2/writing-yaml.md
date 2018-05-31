@@ -43,7 +43,7 @@ key:
 ### Multi-line Strings
 
 If the value is a multi-line string,
-use the pipe (`|`) character,
+use the `|` character,
 followed by any number of lines.
 This is especially useful for lengthy commands.
 
@@ -89,9 +89,28 @@ when it is the value of an item in a sequence.
 
 To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`,
 you can use anchors and aliases.
+Anchors are identified by an `&` character,
+and aliases by an `*` character.
 
 ```yaml
-# simple anchor/alias example
+- &name Al
+- You
+- can
+- call
+- me
+- *name
+```
+
+When this list is read by a YAML parser,
+the literal output looks like this.
+
+```yaml
+- Al
+- You
+- can
+- call
+- me
+- Al
 ```
 
 ```yaml
