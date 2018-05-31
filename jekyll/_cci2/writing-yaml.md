@@ -93,24 +93,26 @@ Anchors are identified by an `&` character,
 and aliases by an `*` character.
 
 ```yaml
-- &name Al
-- You
-- can
-- call
-- me
-- *name
+song:
+  - &name Al
+  - You
+  - can
+  - call
+  - me
+  - *name
 ```
 
 When this list is read by a YAML parser,
 the literal output looks like this.
 
 ```yaml
-- Al
-- You
-- can
-- call
-- me
-- Al
+song:
+  - Al
+  - You
+  - can
+  - call
+  - me
+  - Al
 ```
 
 ### Merging Maps
