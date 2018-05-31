@@ -64,10 +64,11 @@ You can also map a scalar to a sequence.
 
 ```yaml
 scalar:
-  - here
-  - is
-  - a
-  - sequence
+  - never
+  - gonna
+  - give
+  - you
+  - up
 ```
 
 ### Default Values and Map Merging
