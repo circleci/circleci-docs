@@ -43,8 +43,9 @@ key:
 ### Multi-line Strings
 
 If the value is a multi-line string,
-use the pipe (`|`) character to prefix it.
-This is especially useful for lengthy command-line scripts.
+use the pipe (`|`) character,
+followed by any number of lines.
+This is especially useful for lengthy commands.
 
 ```yaml
 haiku: |
