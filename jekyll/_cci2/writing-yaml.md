@@ -40,6 +40,25 @@ key:
   another_key: "another value"
 ```
 
+### Multi-line Strings
+
+If the value is a multi-line string,
+use the pipe (`|`) character to prefix it.
+This is especially useful for lengthy command-line scripts.
+
+```yaml
+haiku: |
+  Consider me
+  As one who loved poetry
+  And persimmons.
+```
+
+**Note**:
+Quotes are not necessary
+when using multiline strings.
+
+### Sequences
+
 Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar).
 You can also map a scalar to a sequence.
 
