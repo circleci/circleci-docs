@@ -56,6 +56,6 @@ scalar:
 
 ## See More
 
-- Peruse our own documentation on [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/).
-- Lose yourself in the [Official YAML Specification](http://yaml.org/spec/1.2/spec.html).
+- Learn about the keys [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/).
+- Immerse yourself in the [Official YAML Specification](http://yaml.org/spec/1.2/spec.html).
 - Or just read [the important parts](https://learnxinyminutes.com/docs/yaml/).
