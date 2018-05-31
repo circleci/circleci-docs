@@ -215,8 +215,6 @@ and select the **Inspect** option to open the browser inspector.
 4. In the developer console,
 select the **Network** tab.
 
-5. Click the **Create `<username>` user key** button.
-
 6. In the developer console,
 click the `checkout-key` with a 201 status
 and copy the `public_key` to your clipboard.
