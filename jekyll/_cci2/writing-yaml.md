@@ -13,13 +13,12 @@ a data serialization language used to configure CircleCI.
 
 ## Overview
 
-YAML is a [human-friendly data serialization standard](http://yaml.org/) for all programming languages.
+[YAML](http://yaml.org) is a human-friendly data serialization standard for all programming languages.
 It is a strict superset of [JSON](https://www.json.org/),
-another data serialization language,
-which means it has all of the features of JSON.
+another data serialization language.
+This means it can do everything JSON can... and more.
 
-CircleCI configuration is stored in a single YAML file,
-located at `~/.circleci/config.yml`,
+CircleCI configuration is stored in a single YAML file located at `~/.circleci/config.yml`,
 where `~` is the root of your project's directory.
 Since most of your work with CircleCI occurs in this file,
 it is important to understand the basics of YAML formatting.
