@@ -29,7 +29,7 @@ it is important to understand the basics of YAML formatting.
 
 ## How to Write YAML
 
-The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Map_(higher-order_function))
+The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Hash_table)
 and consists of one or more key-value pairs.
 
 ```yaml
