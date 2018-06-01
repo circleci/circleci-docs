@@ -92,17 +92,6 @@ See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
-## Environment Variables
-
-In CircleCI 2.0, all defined values are treated literally.
-When defining configuration variables like `working_directory` or `images`,
-you will not be able to interpolate other variables.
-However, you **can** interpolate a variable within a command
-by setting it for the current shell.
-
-For full details,
-refer to the CircleCI 2.0 document [Using Environment Variables](http://localhost:4000/docs/2.0/env-vars/).
-
 ## Steps to Configure Workflows
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
@@ -229,6 +218,17 @@ With the following, nested under `steps:` and customizing for your application a
 
 - See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
 - Please read the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deployment for CircleCI 2.0.
+
+## Environment Variables
+
+In CircleCI 2.0, all defined values are treated literally.
+When defining configuration variables like `working_directory` or `images`,
+you will not be able to interpolate other variables.
+However, you **can** interpolate a variable within a command
+by setting it for the current shell.
+
+For full details,
+refer to the CircleCI 2.0 document [Using Environment Variables](http://localhost:4000/docs/2.0/env-vars/).
 
 ## Validate YAML
 
