@@ -97,6 +97,8 @@ jobs:
 ```
 The build section hosts the remainder of the schema which executes our commands. This will be explained below.
 ```yaml
+version: 2
+jobs:
   build:
     working_directory: ~/samplescala
     docker:
@@ -108,6 +110,8 @@ The docker/image key represents the Docker image you want to use for the build. 
 
 The environment/SBT_VERSION is an environment variable that specifies the version of sbt to download in later commands which is required to compile the Scala app.
 ```yaml
+version: 2
+jobs:
   build:
     working_directory: ~/samplescala
     docker:
@@ -129,13 +133,13 @@ The environment/SBT_VERSION is an environment variable that specifies the versio
                     apt-get clean && apt-get autoclean
 ```
 The steps/run keys specify the types of actions to perform. The run keys represent the actions to be executed.
-```yaml
+```
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
 This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename. 
 
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
-```yaml
+```
           command: |
                     apt update && apt install -y curl
                     curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
@@ -157,7 +161,7 @@ The 2.0 version of our samplescala schema requires us to download required depen
 - Removes all the unnecessary install packages to minimize container size.
 
 The following keys represent actions performed after the multi-line command is executed:
-```yaml
+```
       - checkout
       - restore_cache:
           key: sbt-cache
