@@ -158,7 +158,8 @@ see [this gist](https://gist.github.com/bowsersenior/979804).
 
 While YAML has several other features,
 the examples above should be enough
-to write an robust, functional `config.yml`.
+to get you started with YAML
+and keep your CircleCI configuration concise.
 If you are hungry for more knowledge,
 here are a few ideas.
 
