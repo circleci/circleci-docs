@@ -50,6 +50,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
+ [Scala] | sbt | [sample-scala]
 {: class="table table-striped"}
 
 ## Sample Workflows
@@ -82,6 +83,7 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 [PHP]: {{ site.baseurl }}/2.0/language-php/
 [Python]: {{ site.baseurl }}/2.0/language-python/
 [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
+[Scala]: {{ site.baseurl }}/2.0/language-scala/
 
 [circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
 [circleci-demo-elixir-phoenix]: https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix
@@ -94,6 +96,7 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 [circleci-demo-python-flask]: https://github.com/CircleCI-Public/circleci-demo-python-flask
 [circleci-demo-react-native]: https://github.com/CircleCI-Public/circleci-demo-react-native
 [circleci-demo-ruby-rails]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails
+[sample-scala]: https://github.com/ariv3ra/samplescala
 
 
 We’re thrilled to have you here. Happy building!
