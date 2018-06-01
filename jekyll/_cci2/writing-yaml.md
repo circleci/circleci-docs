@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Writing YAML"
 short-title: "Writing YAML"
 description: "How to Write YAML on CircleCI"
+categories: [configuring-jobs]
 order: 20
 ---
 
