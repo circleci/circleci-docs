@@ -47,12 +47,12 @@ key:
 ### Multi-line Strings
 
 If the value is a multi-line string,
-use the `|` character,
+use the `>` character,
 followed by any number of lines.
 This is especially useful for lengthy commands.
 
 ```yaml
-haiku: |
+haiku: >
   Consider me
   As one who loved poetry
   And persimmons.
