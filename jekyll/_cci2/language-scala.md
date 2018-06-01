@@ -108,6 +108,10 @@ The docker/image key represents the Docker image you want to use for the build. 
 
 The environment/SBT_VERSION is an environment variable that specifies the version of sbt to download in later commands which is required to compile the Scala app.
 ```yaml
+  build:
+    working_directory: ~/samplescala
+    docker:
+      - image: openjdk:8
     environment:
       - SBT_VERSION: 1.0.4
     steps:
