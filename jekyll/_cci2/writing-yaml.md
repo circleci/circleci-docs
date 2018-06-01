@@ -12,6 +12,9 @@ order: 20
 This document describes the most important features of YAML
 for use in CircleCI configuration.
 
+* TOC
+{:toc}
+
 ## Overview
 
 [YAML](http://yaml.org) is a human-friendly data serialization standard for all programming languages.
