@@ -121,9 +121,9 @@ For public images on Docker Hub, you can pull the image by prefixing the account
 myUsername/couchdb:1.6.1
 ```
 
-## Can I use the `latest` tag when specifying image versions?
+## What is the best practice for specifying image versions?
 
-It is best practice not to use the `latest` tag for specifying image versions. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document.
+It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document for more details.
 
 ## How can I set the timezone in Docker images?
 
