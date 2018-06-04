@@ -108,7 +108,7 @@ song:
   - *name
 ```
 
-When this list is read by a YAML parser,
+When the above list is read by a YAML parser,
 the literal output looks like this.
 
 ```yaml
