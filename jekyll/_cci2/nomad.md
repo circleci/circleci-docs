@@ -63,9 +63,20 @@ Complete the following steps to get logs from the allocation of the specified jo
 
 1. Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
+<!---
+## Scaling the Nomad Cluster
+Nomad itself does not provide a scaling method for cluster, so you must implement one. This section provides basic operations regarding scaling a cluster.
+--->
+
 ### Scaling Up the Client Cluster
 
 Refer to the Auto Scaling section of the [Administrative Variables, Monitoring, and Logging](https://circleci.com/docs/2.0/monitoring/#auto-scaling) document for details about adding Nomad Client instances to an AWS auto scaling group and using a scaling policy to scale up automatically according to your requirements. 
+
+<!--- 
+commenting until we have non-aws installations?
+Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
+HashiCorp recommends using Consul or other service discovery mechanisms to make this more robust in production. For more information, see the following pages in the official documentation for [Clustering](https://www.nomadproject.io/intro/getting-started/cluster.html), [Service Discovery](https://www.nomadproject.io/docs/service-discovery/index.html), and [Consul Integration](https://www.nomadproject.io/docs/agent/configuration/consul.html).
+--->
 
 ### Shutting Down a Nomad Client
 
