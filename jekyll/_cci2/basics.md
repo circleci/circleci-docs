@@ -10,6 +10,7 @@ Get started by learning about the basic concepts used in CircleCI.
 Document | Description
 ----|----------
 [Overview]({{ site.baseurl }}/2.0/about-circleci/) | Overview of Continuous Integration (CI) with links to CircleCI case studies.
+[Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) | An introduction to YAML.
 [Using Containers]({{ site.baseurl }}/2.0/containers/) | An overview of containers and how to use them to increase build speed and prevent queuing.
 [Using GitHub or Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) | An overview of using GitHub and Bitbucket with CircleCI.
 [Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
