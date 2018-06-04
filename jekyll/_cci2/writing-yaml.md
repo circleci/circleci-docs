@@ -29,8 +29,10 @@ it is important to understand the basics of YAML formatting.
 
 ## How to Write YAML
 
-The basic structure of a YAML file is a [map](https://en.wikipedia.org/wiki/Hash_table)
+The basic structure of a YAML file is a hash map
 and consists of one or more key-value pairs.
+For a description of hash maps,
+see the [Wikipedia page on hash tables](https://en.wikipedia.org/wiki/Hash_table).
 
 ```yaml
 key: value
