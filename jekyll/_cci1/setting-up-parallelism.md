@@ -8,7 +8,7 @@ order: 20
 
 This guide assumes you already have a green build without parallelism. If you haven't set up your project yet, check out [getting started guide]({{ site.baseurl }}/1.0/getting-started/).
 
-Head to [your dashboard](https://circleci.com/dashboard) and locate the project you'd like to adjust parallelism for. Click the gear icon to the right, and you'll be treated to the settings for that project.
+Head to [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} and locate the project you'd like to adjust parallelism for. Click the gear icon to the right, and you'll be treated to the settings for that project.
 
 Now click **Adjust Parallelism** in the "Build Settings" section. Simply choose the number of parallel containers you want to use for each build.
 

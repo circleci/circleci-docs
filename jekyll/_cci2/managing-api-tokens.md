@@ -38,8 +38,8 @@ is to delete and recreate them.
 ### Creating a Personal API Token
 
   1. In the CircleCI application,
-  go to your [User settings](https://circleci.com/account).
-  2. Click [Personal API Tokens](https://circleci.com/account/api).
+  go to your [User settings](https://circleci.com/account){:rel="nofollow"}.
+  2. Click [Personal API Tokens](https://circleci.com/account/api){:rel="nofollow"}.
   3. Click the **Create New Token** button.
   4. In the **Token name** field,
   type a memorable name for the token.

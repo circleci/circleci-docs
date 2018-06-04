@@ -27,5 +27,5 @@ This means that:
     *   Your code isn't accessible to other users
     *   We run your tests freshly each time you push
 
-*   You can watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard).
+*   You can watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"}.
 *   We'll send you a notification when you're done.

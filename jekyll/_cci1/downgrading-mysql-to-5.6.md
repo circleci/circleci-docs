@@ -72,7 +72,7 @@ sudo dpkg -i .dependency-cache/mysql5.6/libmysqlclient18_5.6.23-1ubuntu14.04_amd
 sudo dpkg -i .dependency-cache/mysql5.6/libmysqlclient-dev_5.6.23-1ubuntu14.04_amd64.deb
 ```
 
-The [following build](https://circleci.com/gh/zzak/mysql-down/8#config/containers/0) demonstrates successfully downgrading MySQL to 5.6.
+The [following build](https://circleci.com/gh/zzak/mysql-down/8#config/containers/0){:rel="nofollow"} demonstrates successfully downgrading MySQL to 5.6.
 
 ![](  {{ site.baseurl }}/assets/img/docs/downgrade-mysql-to-5.6.png)
 

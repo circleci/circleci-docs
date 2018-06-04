@@ -7,7 +7,7 @@ description: Setting Up iOS applications on CircleCI
 order: 70
 ---
 
-To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects). Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.
+To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects){:rel="nofollow"}. Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.
 
 By default, we build projects on Linux, so you’ll need to enable macOS for your project. You can do this by going to **Project Settings** -> **Build Environment** and enabling the **Build OS X Project** setting.
 
