@@ -222,8 +222,6 @@ With the following, nested under `steps:` and customizing for your application a
 ## Environment Variables
 
 In CircleCI 2.0, all defined values are treated literally.
-When defining configuration variables like `working_directory` or `images`,
-you will not be able to interpolate other variables.
 However, you **can** interpolate a variable within a command
 by setting it for the current shell.
 
