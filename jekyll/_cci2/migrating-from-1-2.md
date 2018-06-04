@@ -221,8 +221,8 @@ With the following, nested under `steps:` and customizing for your application a
 
 ## Environment Variables
 
-In CircleCI 2.0, all defined values are treated literally.
-However, you **can** interpolate a variable within a command
+In CircleCI 2.0, all defined environment variables are treated literally.
+It is possible to interpolat variables within a command
 by setting it for the current shell.
 
 For full details,
