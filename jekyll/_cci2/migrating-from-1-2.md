@@ -225,8 +225,8 @@ In CircleCI 2.0, all defined environment variables are treated literally.
 It is possible to interpolat variables within a command
 by setting it for the current shell.
 
-For full details,
-refer to the CircleCI 2.0 document [Using Environment Variables](http://localhost:4000/docs/2.0/env-vars/).
+For more information,
+refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Validate YAML
 
