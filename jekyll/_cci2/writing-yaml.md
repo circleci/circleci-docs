@@ -94,7 +94,7 @@ when it is the value of an item in a sequence.
 ### Anchors and Aliases
 
 To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`,
-you can use anchors and aliases.
+use anchors and aliases.
 Anchors are identified by an `&` character,
 and aliases by an `*` character.
 
