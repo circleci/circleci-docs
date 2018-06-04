@@ -94,85 +94,12 @@ See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2
 
 ## Environment Variables
 
-CircleCI 2.0 allows you to set environment variables at several scope levels.
-
-To set environment variables **for all commands in a build**,
-set environment variables for a [job]({{ site.baseurl }}/2.0/glossary/#job)
-by using the `environment` key in the associated job.
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      - FOO: "bar"
-```
-
-To set environment variables **for all commands in a container**,
-use the `environment` key in the associated `image`.
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6
-        environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
-```
-
-To set environment variables **for a single command**,
-use the `environment` key in the associated `run` [step]({{ site.baseurl }}/2.0/glossary/#step).
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-### Interpolating Environment Variables
-
-CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
-
-However, it is possible to interpolate a variable within a command
+In CircleCI 2.0, all defined environment variables are treated literally.
+It is possible to interpolat variables within a command
 by setting it for the current shell.
 
-```yaml
-version: 2
-jobs:
-  build:
-    steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
-```
-
-Depending on your shell,
-you may have to append the new variable to a shell startup file
-like `~/.tcshrc` or `~/.zshrc`.
 For more information,
-refer to your shell's documentation on setting environment variables.
-
-For more information,
-see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to Configure Workflows
 
