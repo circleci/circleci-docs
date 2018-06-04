@@ -6,7 +6,8 @@ order: 20
 description: "Configuring High Availability for CircleCI 2.0"
 ---
 
-High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+High availability gives you the ability to replicate your CircleCI data and automate recovery from a single database instance failure, without downtime or service disruption. Comprehensive Installation 
+Consult and HA Support is available with our Gold level premium support. Get started by contacting your Account Executive or [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
 <!---
 
