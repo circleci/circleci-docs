@@ -40,7 +40,7 @@ jobs:
 ```
 
 For more information,
-see the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism).
+see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
 
 ## Using the CircleCI CLI to Split Tests
 

@@ -39,7 +39,7 @@ Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the Migration FA
 
 ## Workflows Configuration Examples
 
-_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference document._
+_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuring CircleCI document._
 
 **Note:** Projects configured with Workflows often include multiple jobs that share syntax for Docker images, environment variables, or `run` steps. Refer the [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) documentation for information about how to alias and reuse syntax to keep your `.circleci/config.yml` file small. See the [Reuse YAML in the CircleCI Config](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/) blog post for a summary.
 
@@ -234,7 +234,7 @@ The value of the `filters` key must be a map
 that defines rules for execution on specific branches.
 
 For more details,
-see the [configuration reference page]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) for the `branches` key.
+see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
 
 For a full configuration example,
 see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
