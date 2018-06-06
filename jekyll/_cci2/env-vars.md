@@ -297,7 +297,6 @@ Variable                    | Type    | Value
 `CIRCLE_PULL_REQUESTS`      | List    | Comma-separated list of URLs of the current build's associated pull requests.
 `CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
-`CIRCLE_STAGE`              | String  | The name of the job currently being executed. When not using workflows, the default is `build`.
 `CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution).
 `CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
