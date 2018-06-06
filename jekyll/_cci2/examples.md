@@ -15,7 +15,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 </div>
 
 1. Add a shell script in your `.circleci` directory, for example, `run-build-locally.sh`.
-2. Create a token on the [Personal API Tokens page](https://circleci.com/account/api){:rel="nofollow"}.
+2. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 3. Export the token on the command line `export CIRCLE_TOKEN=<token-from-step-above>`.
 4. Gather the following information:
   - Commit hash from which to build
