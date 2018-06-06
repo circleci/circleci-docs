@@ -16,6 +16,11 @@ This document describes using environment variables in CircleCI in the following
 
 ## Overview
 
+CircleCI uses Bash,
+which follows the POSIX naming convention for environment variables.
+Valid characters include letters (uppercase and lowercase), digits, and the underscore.
+The first character of each environment variable must be a letter.
+
 To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information.
 
 ### Environment Variable Usage Options
@@ -264,11 +269,6 @@ export param2="500"
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
 ## Built-in Environment Variables
-
-CircleCI uses Bash,
-which follows the POSIX naming convention for environment variables.
-Valid characters include: letters (uppercase and lowercase), digits, and the underscore.
-The first character of each environment variable must be a letter.
 
 The following environment variables are exported in each build
 and can be used for more complex testing or deployment.
