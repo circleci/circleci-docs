@@ -34,12 +34,7 @@ If you want to show the status of a different branch,
 use the Branch dropdown menu to select it.
 3. (Optional)
 If your project is private,
-you will need an API token for viewing a project's details.
-If you haven't created a token yet,
-click on the _API Permissions_ in the _Permissions_ section.
-Click _Create Token_,
-choose the _Status_ scope,
-and create  a label for the token.
+you will need to [create a project API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-project-api-token).
 4. (Optional)
 If you created a token in the previous step,
 select the token you want to use in the _API Token_ dropdown menu.
