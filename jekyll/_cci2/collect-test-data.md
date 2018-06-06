@@ -41,7 +41,12 @@ Write the XML files to a subdirectory if you have a custom test step that produc
     path: /tmp/test-results
 ```
 
-### Custom runner examples
+## Video: Troubleshooting Test Runners
+
+<iframe width="360" height="270" src="https://www.youtube.com/embed/gN31PtA2Fv8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+### Custom Test Runner Examples
 
 This section provides the following test runner examples:
 
