@@ -92,7 +92,8 @@ Finally, add several `steps` within the `build` job:
 ```
 {% endraw %}
 
-Refer to the [configuration reference]({{ site.baseurl }}/2.0/configuration-reference/) for the complete list of available CircleCI configuration keys.
+For the complete list of CircleCI configuration keys,
+refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
 ## Deploy
 

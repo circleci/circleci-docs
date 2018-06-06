@@ -51,6 +51,6 @@ See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
 
-Find complete reference information for all keys and pre-built images in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation.
+Find complete reference information for all keys and pre-built images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation.
 
 

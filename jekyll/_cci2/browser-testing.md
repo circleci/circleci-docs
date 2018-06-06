@@ -108,7 +108,7 @@ This section provides some examples of how to debug browser tests on CircleCI.
 
 CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/)
 and make them available from your build. For example, artifacts enable you to save screenshots as part of your {% comment %} TODO: Job {% endcomment %}build,
-and view them when the {% comment %} TODO: Job {% endcomment %}build finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuration Reference for an example.
+and view them when the {% comment %} TODO: Job {% endcomment %}build finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
 
 Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
 

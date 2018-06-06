@@ -17,7 +17,7 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 
 Document | Description
 ----|----------
-<a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuration Reference `run` Step section</a> | Write a job to run your tests.
+<a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuring CircleCI: `run` Step section</a> | Write a job to run your tests.
 [Browser Testing]({{ site.baseurl }}/2.0/browser-testing/) | Common methods for running and debugging browser tests in CircleCI.
 <a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a> | How to set up various common test runners in your CircleCI configuration.
 <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
