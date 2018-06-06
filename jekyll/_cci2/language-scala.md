@@ -11,7 +11,7 @@ order: 1
 
 This document will walk you through a Scala application building on CircleCI 2.0 in the following sections:
 
-*TOC
+* TOC
 {:toc}
 
 Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.

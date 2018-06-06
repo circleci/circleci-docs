@@ -62,3 +62,4 @@ This document provides System Administrators with a list of ports for the machin
 |  **Nomad Servers** | 4646 | TCP | Inbound | Services Machine | Nomad Server connection | Only if using externalised Nomad Servers |
 |   | 4647 | TCP | Inbound | Services Machine | Nomad Server connection | Only if using externalised Nomad Servers |
 |   | 4648 | TCP | Bi-directional | Nomad Servers | Nomad Servers internal communication | Only if using externalised Nomad Servers |
+{: class="table table-striped"}
