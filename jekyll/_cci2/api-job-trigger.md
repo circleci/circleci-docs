@@ -45,7 +45,7 @@ For a complete reference of the API,
 see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
 
 **Note:**
-While you can **not** trigger [workflows]({{ site.baseurl }}/docs/2.0/workflows/) with the CircleCI API,
+While you can **not** trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API,
 the `config.yml` that contains the job definition
 can still have a `workflows` section.
 These workflows do **not** have to reference the job
