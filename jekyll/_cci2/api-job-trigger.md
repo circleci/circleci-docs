@@ -9,7 +9,11 @@ order: 80
  
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Running Jobs With the API*
  
-This document describes how to initiate jobs using the CircleCI API. **Note:** It is not yet possible to run Workflows with the API. Refer to the [CircleCI API Documentation]({{ site.baseurl }}/api/) for the complete reference. 
+This document describes
+how to initiate jobs using the CircleCI API.
+**Note:**
+It is not yet possible to run Workflows with the API.
+Refer to the [CircleCI API Documentation]({{ site.baseurl }}/api/) for the complete reference.
 
 The following example initiates a `deploy_docker` job by using `curl`.
 
