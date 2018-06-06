@@ -10,12 +10,20 @@ order: 80
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Running Jobs With the API*
  
 This document describes
-how to initiate jobs using the CircleCI API.
-**Note:**
-It is not yet possible to run Workflows with the API.
-Refer to the [CircleCI API Documentation]({{ site.baseurl }}/api/) for the complete reference.
+how to trigger jobs using the CircleCI API.
 
-The following example initiates a `deploy_docker` job by using `curl`.
+* TOC
+{:toc}
+
+## Overview
+
+You can use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
+to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview)
+that you have defined in `.circleci/config.yml`.
+
+The following example shows
+how to trigger the `deploy_docker` job
+by using `curl`.
 
 ```bash
 curl -u ${CIRCLE_API_TOKEN}: \
@@ -23,8 +31,8 @@ curl -u ${CIRCLE_API_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
 ```
 
-A few notes about this example:
-
+Some notes on the variables
+used in this example:
 - `CIRCLE_API_TOKEN` is an API token set on your project's settings page.
 - `<vcs-type>` is a placeholder variable
 and refers to your chosen VCS (either `github` or `bitbucket`).
