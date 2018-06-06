@@ -273,122 +273,34 @@ The first character of each environment variable must be a letter.
 The following environment variables are exported in each build
 and can be used for more complex testing or deployment.
 
-### General Environment Variables
-
-`CI`
-
-Represents whether the current environment is a CI environment.
-
-Has a value of `true` on our platform.
-
-`CIRCLECI`
-
-Represents whether the current environment is a CircleCI environment.
-
-Has a value of `true` on our platform.
-
-`HOME`
-
-Your home directory.
-
-### Build-Specific Environment Variables
-
-`CIRCLE_BRANCH`
-
-The name of the Git branch currently being built.
-
-`CIRCLE_NODE_TOTAL`
-
-An integer representing the number of total build instances.
-
-`CIRCLE_NODE_INDEX`
-
-An integer between 0 and (`CIRCLECI_NODE_TOTAL` - 1) representing a specific build instance.
-
-`CIRCLE_BUILD_NUM`
-
-The CircleCI build number.
-
-`CIRCLE_PREVIOUS_BUILD_NUM`
-
-The number of previous builds in the branch.
-
-`CIRCLE_BUILD_URL`
-
-The URL for the current build.
-
-`CIRCLE_SHA1`
-
-The SHA1 hash for the current build’s last commit.
-
-`CIRCLE_USERNAME`
-
-The GitHub/Bitbucket username of the user who triggered the build.
-
-`CIRCLE_JOB`
-
-The current job’s name.
-
-`CIRCLE_WORKING_DIRECTORY`
-
-The `working_directory` for the current job.
-
-`CIRCLE_COMPARE_URL`
-
-The GitHub/Bitbucket compare URL between commits in the build.
-
-`CIRCLE_REPOSITORY_URL`
-
-The GitHub/Bitbucket repository URL.
-
-`CIRCLE_PR_NUMBER`
-
-The GitHub/Bitbucket pull request number.
-
-`CIRCLE_PR_REPONAME`
-
-The GitHub/Bitbucket repository name in which the pull request was made.
-
-`CIRCLE_PR_USERNAME`
-
-The GitHub/Bitbucket username of the user who created the pull request.
-
-`CIRCLE_PULL_REQUESTS`
-
-Comma-separated list of URLs of pull requests this build is a part of.
-
-`CIRCLE_PULL_REQUEST`
-
-If this build is part of only one pull request, its URL will be populated here. If there was more than one pull request, it will contain one of the pull request URLs (picked randomly).
-
-`CI_PULL_REQUESTS`
-
-Same as `CIRCLE_PULL_REQUESTS`, only kept for the backward compatibility with 1.0.
-
-`CI_PULL_REQUEST`
-
-Same as `CIRCLE_PULL_REQUEST`, only kept for the backward compatibility with 1.0.
-
-`CIRCLE_TAG`
-
-The name of the git tag being tested, e.g. 'release-v1.5.4', if the build is running for a tag. See the [CircleCI 1.0 documentation of tags]( {{ site.baseurl }}/1.0/configuration/#tags) for more information.
-
-`CIRCLE_PROJECT_USERNAME`
-
-The username or organization name of the project being tested, i.e. “foo” in circleci.com/gh/foo/bar/123.
-
-`CIRCLE_PROJECT_REPONAME`
-
-The repository name of the project being tested, i.e. “bar” in circleci.com/gh/foo/bar/123.
-
-`CIRCLE_INTERNAL_TASK_DATA`
-
-The directory where test timing data can be found.
-
-`CIRCLE_STAGE`
-
-The job being executed. The default 2.0 job is `build` without using Workflows.
-
-`CIRCLE_WORKFLOW_ID`
-
-A unique identifier for the workflow run that the job belongs to. This identifier will be the same for every job that belongs to this workflow run.
+Variable                    | Type    | Value
+----------------------------|---------|-----------------------------------------------
+`CI`                        | Boolean | `true` (represents whether the current environment is a CI environment)
+`CI_PULL_REQUEST`           | String  | Deprecated version of `CIRCLE_PULL_REQUEST`. Kept for backward compatibility with CircleCI 1.0.
+`CI_PULL_REQUESTS`          | List    | Deprecated version of `CIRCLE_PULL_REQUESTS`. Kept for backward compatibility with CircleCI 1.0.
+`CIRCLE_BRANCH`             | String  | The name of the Git branch currently being built.
+`CIRCLE_BUILD_NUM`          | Integer | The number of the CircleCI build.
+`CIRCLE_BUILD_URL`          | String  | The URL for the current build.
+`CIRCLE_CI`                 | Boolean | `true` (represents whether the current environment is a CircleCI environment)
+`CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build.
+`CIRCLE_INTERNAL_TASK_DATA` | String  | The directory where test timing data is saved.
+`CIRCLE_JOB`                | String  | The name of the current job.
+`CIRCLE_NODE_INDEX`         | Integer | The index of the specific build instance. A value between 0 and (`CIRCLECI_NODE_TOTAL` - 1)
+`CIRCLE_NODE_TOTAL`         | Integer | The number of total build instances.
+`CIRCLE_PR_NUMBER`          | Integer | The number of the associated GitHub or Bitbucket pull request.
+`CIRCLE_PR_REPONAME`        | String  | The name of the GitHub or Bitbucket respository where the pull request was created.
+`CIRCLE_PR_USERNAME`        | String  | The GitHub or Bitbucket username of the user who created the pull request.
+`CIRCLE_PREVIOUS_BUILD_NUM` | Integer | The number of previous builds on the current branch.
+`CIRCLE_PROJECT_REPONAME`   | String  | The name of the repository of the current project.
+`CIRCLE_PROJECT_USERNAME`   | String  | The name of the current project.
+`CIRCLE_PULL_REQUEST`       | String  | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
+`CIRCLE_PULL_REQUESTS`      | List    | Comma-separated list of URLs of the current build's associated pull requests.
+`CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
+`CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
+`CIRCLE_STAGE`              | String  | The name of the job currently being executed. When not using workflows, the default is `build`.
+`CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution).
+`CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
+`CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
+`CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
+`HOME`                      | String  | Your home directory.
+{:class="table table-striped"}
