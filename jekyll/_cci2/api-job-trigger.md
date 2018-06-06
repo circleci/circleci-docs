@@ -17,7 +17,7 @@ Refer to the [CircleCI API Documentation]({{ site.baseurl }}/api/) for the compl
 
 The following example initiates a `deploy_docker` job by using `curl`.
 
-```yaml
+```bash
 curl -u ${CIRCLE_API_TOKEN}: \
      -d build_parameters[CIRCLE_JOB]=deploy_docker \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
