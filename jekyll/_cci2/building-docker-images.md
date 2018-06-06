@@ -127,7 +127,6 @@ The currently supported versions are:
 [Edge releases](https://download.docker.com/linux/static/edge/x86_64/)
 - `17.05.0-ce`
 - `17.07.0-ce`
-- `17.09.0-ce`
 - `17.10.0-ce`
 - `17.11.0-ce`
 
