@@ -17,7 +17,7 @@ how to trigger jobs using the CircleCI API.
 
 ## Overview
 
-You can use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
+Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
 to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview)
 that you have defined in `.circleci/config.yml`.
 
