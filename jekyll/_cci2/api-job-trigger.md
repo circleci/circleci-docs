@@ -33,7 +33,11 @@ and refers to the name of your CircleCI organization.
 - `<repo>` is a placeholder variable
 and refers to the name of your repository.
 
-- The job triggered using the API won't have access to the environment variables set up in a CicleCI context. 
+**Note:**
+Jobs triggered with the API
+do **not** have access to environment variables
+created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
+
 - The `config.yml` file where the job that is triggered using the API is defined may contain a workflow definition. The workflow does not have to reference this job.
 
 
