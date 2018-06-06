@@ -263,7 +263,7 @@ export param2="500"
 
 Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/v1-reference/#new-build) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
-## CircleCI Built-in Environment Variables
+## Built-in Environment Variables
 
 CircleCI uses Bash,
 which follows the POSIX naming convention for environment variables.
