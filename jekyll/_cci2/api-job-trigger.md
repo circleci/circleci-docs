@@ -57,7 +57,6 @@ created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
 As a workaround,
 define these variables at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
-
 ## Conditionally Running Jobs With the API
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed. 
