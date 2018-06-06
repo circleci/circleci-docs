@@ -18,11 +18,43 @@ environment variables into the builder process.
 To set environment variables create a file called `/etc/circle-installation-customizations`
 with environment variable entries, for example, `export CIRCLE_OPTION_A=foo`. 
 
-## System Monitoring 
+## Basic System Monitoring 
 
-Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Enable Cloudwatch. **Note:** CloudWatch does **not** support monitoring of macOS containers.
+Enable the Cloudwatch by going to Replicated Admin > Settings > Enhanced AWS Integration (1.0 Only) > Enable Cloudwatch (e.g. https://example.com:8800/settings#enhanced_aws). **Note:** CloudWatch does **not** support monitoring of macOS containers.
 
 CloudWatch already monitors the health and basic checks for the EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of containers per container if CPU or memory become a bottleneck.
+
+## Advanced System Monitoring
+
+Enable the ability to forward system and docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics (e.g. https://example.com:8800/settings#metrics) and clicking `Enable Metrics`.
+![Enable Metrics](../assets/img/docs/enable_metrics1.png)
+
+### Support Platform(s)
+
+#### AWS CloudWatch
+Currently only AWS CloudWatch is support.  Click `AWS CloudWatch` to begin configuration.
+![Enable Metrics](../assets/img/docs/enable_metrics2.png)
+
+##### Configuration
+
+There are two options for configuration.  First is to use the IAM instance profile of the services box and configure your custom region and namespace.
+![Enable Metrics](../assets/img/docs/enable_metrics3a.png)
+
+Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+![Enable Metrics](../assets/img/docs/enable_metrics3b.png)
+
+You can verify that metrics are forward by going to the AWS CloudWatch console.
+
+### Technical Details
+Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting & reporting metrics.
+
+The following are the metrics that have been enabled;
+* [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/CPU_README.md#cpu-time-measurements),
+* [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#metrics),
+* [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/MEM_README.md#metrics),
+* [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NET_README.md#measurements--fields), and
+* [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics),
+
 
 ## Auto Scaling
 
