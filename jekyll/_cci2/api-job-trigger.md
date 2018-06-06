@@ -33,7 +33,7 @@ curl -u ${CIRCLE_API_TOKEN}: \
 
 Some notes on the variables
 used in this example:
-- `CIRCLE_API_TOKEN` is an API token set on your project's settings page.
+- `CIRCLE_API_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 - `<vcs-type>` is a placeholder variable
 and refers to your chosen VCS (either `github` or `bitbucket`).
 - `<org>` is a placeholder variable
