@@ -23,6 +23,8 @@ A few notes about this example:
 
 - `CIRCLE_API_TOKEN` should be the API token from your project's settings page.
 - `<vcs-type>/<org>/<repo>` should be replaced with your own VCS and org/repo names; at time of writing, `<vcs-types>` must be either `github` or `bitbucket`.
+- The job triggered using the API won't have access to the environment variables set up in a CicleCI context. 
+- The `config.yml` file where the job that is triggered using the API is defined may contain a workflow definition. The workflow does not have to reference this job.
 
 
 ## Conditionally Running Jobs With the API
