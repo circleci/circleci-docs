@@ -29,15 +29,17 @@ CloudWatch already monitors the health and basic checks for the EC2 instances, f
 Enable the ability to forward system and docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics (e.g. https://example.com:8800/settings#metrics) and clicking `Enable Metrics`.
 ![Enable Metrics](../assets/img/docs/enable_metrics1.png)
 
-### Support Platform(s)
+### Supported Platform(s)
 
 #### AWS CloudWatch
-Currently only AWS CloudWatch is support.  Click `AWS CloudWatch` to begin configuration.
+Currently only AWS CloudWatch is supported.  Click `AWS CloudWatch` to begin configuration.
 ![Enable Metrics](../assets/img/docs/enable_metrics2.png)
 
 ##### Configuration
 
-There are two options for configuration.  First is to use the IAM instance profile of the services box and configure your custom region and namespace.
+There are two options for configuration.  
+
+Use the IAM Instance Profile of the services box and configure your custom region and namespace.
 ![Enable Metrics](../assets/img/docs/enable_metrics3a.png)
 
 Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
@@ -53,12 +55,12 @@ The following are the metrics that have been enabled;
 * [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#metrics),
 * [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/MEM_README.md#metrics),
 * [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NET_README.md#measurements--fields), and
-* [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics),
+* [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
 
-## Auto Scaling
+## Scheduled Scaling
 
-By default, an Auto Scaling group is created on your AWS account. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies. 
+By default, an Auto Scaling Group (ASG) is created on your AWS account. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies. 
 
 Refer to the Shutting Down a Nomad Client section of the [Nomad]({{ site.baseurl }}/2.0/nomad/#shutting-down-a-nomad-client) document for instructions on draining and scaling down the Nomad Clients.
 
