@@ -1,23 +1,28 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "Enabling Usage Statistics"
 category: [administration]
 order: 1
 description: "Using CircleCI 2.0 static installation scripts."
 hide: true
 ---
 
-# Installation Usage Statistics
+This document is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI as described in the following sections:
 
-This document is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI.  This data enhances our visibility into CircleCI installations and is used to better support you and ensure a smooth transition off 1.0. 
+* TOC
+{:toc}
 
-You can Opt-In to this feature by going to settings#usage-statistics and checking the box labeled `Automatically send some usage statistics to CircleCI`.
+Usage statistics data enhances visibility into CircleCI installations and is used to better support you and ensure a smooth transition from CircleCI 1.0 to CircleCI 2.0. 
+
+Opt-In to this feature by going to Settings > Usage Statistics on the management console in Replicated. Then, enable the radio button labeled Automatically send some usage statistics to CircleCI as shown in the following screenshot.
 
 ![](  {{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
 
 ## Detailed Usage Statistics
 
-#### Weekly Account Usage
+The following sections provide information about the usage statistics CircleCI will gather when this setting is enabled.
+
+### Weekly Account Usage
 
 | **Name** | **Type**  | **Purpose** |
 |  ------- | ------ | ------ |
@@ -27,7 +32,7 @@ You can Opt-In to this feature by going to settings#usage-statistics and checkin
 | usage_current_macos | minutes |  | 
 {: class="table table-striped"}
 
-#### Weekly Job Activity
+### Weekly Job Activity
 
 | **Name** | **Type**  | **Purpose** |
 |  ------- | ------ | ------ |
@@ -58,9 +63,9 @@ You can Opt-In to this feature by going to settings#usage-statistics and checkin
 | projects_private_linux_current | 	sum	  |  | 
 {: class="table table-striped"}
 
-## Access
-If you would like programatic access to this data in order to better understand your users please contact us.
+## Accessing Usage Data
+If you would like programatic access to this data in order to better understand your users please contact your CircleCI account representative.
 
-### Disclaimer
+### Security and Privacy 
 
 Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/outer/legal/enterprise-license-agreement.pdf) for our complete security and privacy disclosures.
