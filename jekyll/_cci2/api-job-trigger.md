@@ -28,7 +28,7 @@ by using `curl`.
 ```bash
 curl -u ${CIRCLE_API_TOKEN}: \
      -d build_parameters[CIRCLE_JOB]=deploy_docker \
-     https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
+     https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
 Some notes on the variables
@@ -40,6 +40,8 @@ and refers to your chosen VCS (either `github` or `bitbucket`).
 and refers to the name of your CircleCI organization.
 - `<repo>` is a placeholder variable
 and refers to the name of your repository.
+- `<branch>` is a placeholder variable
+and refers to the name of your branch.
 
 For a complete reference of the API,
 see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
