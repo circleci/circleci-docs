@@ -27,23 +27,23 @@ CloudWatch already monitors the health and basic checks for the EC2 instances, f
 ## Advanced System Monitoring
 
 Enable the ability to forward system and docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics (e.g. https://example.com:8800/settings#metrics) and clicking `Enable Metrics`.
-![Enable Metrics](../assets/img/docs/enable_metrics1.png)
+![Enable Metrics](  {{ site.baseurl }}/assets/img/docs/enable_metrics1.png)
 
 ### Supported Platform(s)
 
 #### AWS CloudWatch
 Currently only AWS CloudWatch is supported.  Click `AWS CloudWatch` to begin configuration.
-![Enable Metrics](../assets/img/docs/enable_metrics2.png)
+![AWS CloudWatch](  {{ site.baseurl }}/assets/img/docs/enable_metrics2.png)
 
 ##### Configuration
 
 There are two options for configuration.  
 
 Use the IAM Instance Profile of the services box and configure your custom region and namespace.
-![Enable Metrics](../assets/img/docs/enable_metrics3a.png)
+![Configuration IAM](  {{ site.baseurl }}/assets/img/docs/enable_metrics3a.png)
 
 Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
-![Enable Metrics](../assets/img/docs/enable_metrics3b.png)
+![Configuration Alt](  {{ site.baseurl }}/assets/img/docs/enable_metrics3b.png)
 
 You can verify that metrics are forward by going to the AWS CloudWatch console.
 
