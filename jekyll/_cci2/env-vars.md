@@ -281,7 +281,6 @@ Variable                    | Type    | Value
 `CIRCLE_BRANCH`             | String  | The name of the Git branch currently being built.
 `CIRCLE_BUILD_NUM`          | Integer | The number of the CircleCI build.
 `CIRCLE_BUILD_URL`          | String  | The URL for the current build.
-`CIRCLE_CI`                 | Boolean | `true` (represents whether the current environment is a CircleCI environment)
 `CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build.
 `CIRCLE_INTERNAL_TASK_DATA` | String  | The directory where test timing data is saved.
 `CIRCLE_JOB`                | String  | The name of the current job.
@@ -301,5 +300,6 @@ Variable                    | Type    | Value
 `CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
+`CIRCLECI`                  | Boolean | `true` (represents whether the current environment is a CircleCI environment)
 `HOME`                      | String  | Your home directory.
 {:class="table table-striped"}
