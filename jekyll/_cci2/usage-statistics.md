@@ -13,7 +13,7 @@ This document is for System Administrators who want to automatically send some a
 
 You can Opt-In to this feature by going to settings#usage-statistics and checking the box labeled `Automatically send some usage statistics to CircleCI`.
 
-![](./assets/img/docs/usage-statistics-setting.png)
+![](  {{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
 
 ## Detailed Usage Statistics
 
@@ -28,6 +28,7 @@ You can Opt-In to this feature by going to settings#usage-statistics and checkin
 {: class="table table-striped"}
 
 #### Weekly Job Activity
+
 | **Name** | **Type**  | **Purpose** |
 |  ------- | ------ | ------ |
 | utc_week | date | 	_Identifies which week the data below applies to_ | 
@@ -62,4 +63,4 @@ If you would like programatic access to this data in order to better understand 
 
 ### Disclaimer
 
-Please reference exhibit C within your terms of contract and our standard license agreement for our complete security and privacy disclosures.
+Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/outer/legal/enterprise-license-agreement.pdf) for our complete security and privacy disclosures.
