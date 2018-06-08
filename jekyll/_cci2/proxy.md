@@ -13,7 +13,11 @@ This document describes how to configure CircleCI to use an HTTP proxy in the fo
 
 ## Overview
 
-If you are setting up your proxy through Amazon, read this before proceeding: http://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html. Avoid proxying internal requests, especially for the Services machine. Run `export NO_PROXY=<services_box_ip>` to add it to the `NO_PROXY` rules. In an ideal case, traffic to S3 will not be proxied, and instead be bypassed by adding `s3.amazonaws.com,*.s3.amazonaws.com` to the `NO_PROXY` rule.
+If you are setting up your proxy through Amazon, read this before proceeding: 
+
+[Using an HTTP Proxy - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html)
+
+Avoid proxying internal requests, especially for the Services machine. Run `export NO_PROXY=<services_box_ip>` to add it to the `NO_PROXY` rules. In an ideal case, traffic to S3 will not be proxied, and instead be bypassed by adding `s3.amazonaws.com,*.s3.amazonaws.com` to the `NO_PROXY` rule.
 
 These instructions assume an unauthenticated HTTP proxy at `10.0.0.33:3128`, a Services machine at `10.0.1.238` and use of `ghe.example.com` as the GitHub Enterprise host.
 
