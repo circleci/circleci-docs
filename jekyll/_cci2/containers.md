@@ -19,7 +19,7 @@ Every change committed to your VCS system triggers CircleCI to checkout your cod
 - **Concurrency** - Utilizing multiple containers to run multiple builds at the same time. To take advantage of concurrency, configure your development workflow using the [Orchestrating Workflows document]({{ site.baseurl }}/2.0/workflows/)
 and run your jobs in parallel as shown in the [Sample 2.0 Config Files document]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-parallel-jobs).
 
-- **Parallelism** - Splitting tests across multiple containers, allowing you to dramatically speed up your test suite. Update your `.circleci/config.yml` file to run your tests in parallel as documented in the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#parallelism). Learn how to update your config file to parallelize and split tests to decrease your build time by reading the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) documentation.
+- **Parallelism** - Splitting tests across multiple containers, allowing you to dramatically speed up your test suite. Update your `.circleci/config.yml` file to run your tests in parallel as documented in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document. Learn how to update your config file to parallelize and split tests to decrease your build time by reading the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) documentation.
 
 ## Getting Started
 

@@ -188,7 +188,7 @@ jobs:
       - ...
 ```
 
-You can see all the available step types in [this doc]({{ site.baseurl }}/2.0/configuration-reference/).
+You can see all the available step types in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 **Note:** Docker support is not available in the macOS builds.
 
 ### Checking out the Project Code

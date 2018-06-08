@@ -8,7 +8,7 @@ Refer to the reference materials for YAML syntax, specifications, FAQs, help, an
 
 Document | Description
 ----|----------
-[Configuration]({{ site.baseurl }}/2.0/configuration-reference/) | Complete specification for `config.yml` syntax.
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) | Complete specification for `config.yml` syntax.
 [Prebuilt Images]({{ site.baseurl }}/2.0/circleci-images/) | Complete list of prebuilt CircleCI Docker images.
 [API]({{ site.baseurl }}/api/v1-reference/) | CircleCI v1.1 API reference documentation.
 [Glossary]({{ site.baseurl }}/2.0/glossary/) | CircleCI terms and definitions.

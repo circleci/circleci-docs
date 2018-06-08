@@ -9,21 +9,54 @@ order: 80
  
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Running Jobs With the API*
  
-This document describes how to initiate jobs using the CircleCI API. **Note:** It is not yet possible to run Workflows with the API. Refer to the [CircleCI API Documentation]({{ site.baseurl }}/api/) for the complete reference. 
+This document describes
+how to trigger jobs using the CircleCI API.
 
-The following example initiates a `deploy_production` job by using `curl`.
+* TOC
+{:toc}
 
-```yaml
+## Overview
+
+Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
+to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview)
+that you have defined in `.circleci/config.yml`.
+
+The following example shows
+how to trigger the `deploy_docker` job
+by using `curl`.
+
+```bash
 curl -u ${CIRCLE_API_TOKEN}: \
-     -d build_parameters[CIRCLE_JOB]=deploy_production \
-     https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/master
+     -d build_parameters[CIRCLE_JOB]=deploy_docker \
+     https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-A few notes about this example:
+Some notes on the variables
+used in this example:
+- `CIRCLE_API_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+- `<vcs-type>` is a placeholder variable
+and refers to your chosen VCS (either `github` or `bitbucket`).
+- `<org>` is a placeholder variable
+and refers to the name of your CircleCI organization.
+- `<repo>` is a placeholder variable
+and refers to the name of your repository.
+- `<branch>` is a placeholder variable
+and refers to the name of your branch.
 
-- `CIRCLE_API_TOKEN` should be the API token from your project's settings page.
-- `<vcs-type>/<org>/<repo>` should be replaced with your own VCS and org/repo names; at time of writing, `<vcs-types>` must be either `github` or `bitbucket`.
+For a complete reference of the API,
+see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
 
+**Note:**
+While you can **not** trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API,
+the `config.yml` that contains the job definition
+can still have a `workflows` section.
+These workflows do **not** have to reference the job
+you trigger with the API.
+
+Jobs triggered with the API
+do **not** have access to environment variables
+created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
+Instead, define these variables at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
 ## Conditionally Running Jobs With the API
 

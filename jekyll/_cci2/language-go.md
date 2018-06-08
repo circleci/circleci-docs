@@ -24,7 +24,7 @@ If you're new to CircleCI 2.0, we recommend reading our [walkthrough](#config-wa
 We maintain a reference Go project to show how to build on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project building on CircleCI</a>
+- [Demo Go Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
 
@@ -37,7 +37,7 @@ We recommend using a CircleCI pre-built image that comes pre-installed with tool
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked
+2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
@@ -193,9 +193,7 @@ Finally, let's specify a path to store the results of the tests.
           path: /tmp/test-results
 ```
 
-Success! You just set up CircleCI 2.0 for a Go app. Check out our {% comment %} TODO: Jobs {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go) to see how this looks when building on CircleCI.
-
-## Deploy
+Success! You just set up CircleCI 2.0 for a Go app. Check out our {% comment %} TODO: Jobs {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## Deploy
 

@@ -132,7 +132,7 @@ For example, you may want to clear the cache in the following scenarios by incre
 
 ## <a name="dependency-caching"></a>Basic Example of Dependency Caching
 
-The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Writing Jobs and Steps document for additional examples.
+The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
@@ -197,14 +197,14 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       
       - restore_cache:
           keys:
-            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-{{ arch }}-{{ .Branch }}
-            - gem-cache
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
             
       - run: bundle install --path vendor/bundle
       
       - save_cache:
-          key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -218,14 +218,14 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       
       - restore_cache:
           keys:
-            - asset-cache-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - asset-cache-{{ arch }}-{{ .Branch }}
-            - asset-cache
+            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - asset-cache-v1-{{ arch }}-{{ .Branch }}
+            - asset-cache-v1
             
       - run: bundle exec rake assets:precompile
       
       - save_cache:
-          key: asset-cache-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - public/assets
             - tmp/cache/assets/sprockets

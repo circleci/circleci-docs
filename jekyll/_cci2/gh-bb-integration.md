@@ -46,7 +46,7 @@ jobs:
           bundle exec cucumber
 ```
         
-CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard) or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
+CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
 
 ![Status Badge After Commit]({{ site.baseurl }}/assets/img/docs/status_badge.png)
 
@@ -97,7 +97,7 @@ Here are the steps to set a machine user's SSH key as a checkout key for your pr
 
 2. Go to <https://circleci.com> and log in. GitHub will ask you to authorize CircleCI to access the machine user's account, so click on the **Authorize application** button.
 
-3. Go to <https://circleci.com/add-projects> and follow the projects you want the machine user to have access to.
+3. Go to <[https://circleci.com/add-projects](https://circleci.com/add-projects){:rel="nofollow"}> and follow the projects you want the machine user to have access to.
 
 4. Go to the **Project Settings > Checkout SSH keys** page and then click on the ***Authorize w/GitHub*** button to give CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
@@ -124,7 +124,7 @@ This section provides an overview of the possible team and individual account ch
 
 1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits. Due to how GitHub and Bitbucket store collaborators, the CircleCI Team page may not show a complete list. For an accurate list of contributors, please refer to your GitHub or Bitbucket project page.
 
-2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects), click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
+2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects){:rel="nofollow"}, click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
 
 3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
@@ -162,7 +162,7 @@ The steps to create a user key depend on your VCS.
 
 In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
-and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
+and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circleci.com/gh/you/test-repo){:rel="nofollow"}.
 
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 When prompted to enter a passphrase,
@@ -175,7 +175,7 @@ then copy and paste the key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
-3. Go to `https://circleci.com/gh/you/test-repo/edit#ssh`,
+3. Go to [https://circleci.com/gh/you/test-repo/edit#ssh](https://circleci.com/gh/you/test-repo/edit#ssh){:rel="nofollow"},
 and add the key you created in step 1.
 In the "Hostname" field,
 enter "github.com",
@@ -207,23 +207,22 @@ by following this workaround:
 1. In the CircleCI application,
 go to your project's settings.
 
-2. On the **Checkout SSH Keys** page,
-right-click the **Create <username> user key** button
-and select the **Inspect** option.
+2. Navigate to the **Checkout SSH Keys** page.
 
-3. In the developer console,
-select the **Network** tab.
+3. Right-click the **Create `<username>` user key** button
+and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
-4. Click the **Create [username] user key** button.
+4. In the developer console,
+select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
 
-5. In the developer console,
+6. In the developer console,
 click the `checkout-key` with a 201 status
 and copy the `public_key` to your clipboard.
 
-6. Add the key to Bitbucket
+7. Add the key to Bitbucket
 by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
 
-7. In your `.circleci/config.yml`,
+8. In your `.circleci/config.yml`,
 add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml

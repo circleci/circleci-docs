@@ -77,12 +77,16 @@ There is a default setting within CircleCI to initially limit project parallelis
 
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
+```yaml
     steps:
       - run: "Add any bash command you want here"
       - run:
           command: |
             echo "Arbitrary multi-line bash"
             echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
+```
+            
+Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.           
 
 ## Does CircleCI 2.0 run inference commands?
 
@@ -117,9 +121,9 @@ For public images on Docker Hub, you can pull the image by prefixing the account
 myUsername/couchdb:1.6.1
 ```
 
-## Can I use the `latest` tag when specifying image versions?
+## What is the best practice for specifying image versions?
 
-It is best practice not to use the `latest` tag for specifying image versions. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document.
+It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document for more details.
 
 ## How can I set the timezone in Docker images?
 
@@ -154,7 +158,7 @@ Not yet, but we are working on that functionality.
 Not yet, but we are working on that functionality.
 
 ### Can I use `store_test_results` with Workflows?
-You can use `store_test_results` in order to populate your {% comment %} TODO: Job {% endcomment %}builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+You can use `store_test_results` in order to populate your {% comment %} TODO: Job {% endcomment %}builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
  
 ### Can I use Workflows with CircleCI 1.0?
  

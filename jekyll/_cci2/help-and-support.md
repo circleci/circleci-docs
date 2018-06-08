@@ -23,7 +23,7 @@ If you can't find your question, post it yourself and one of our support enginee
 
 ## Create a Support Request
 
-If you have a paid account, then you can ask directly for help from our support team. To create a support request, head to your [dashboard](https://circleci.com/dashboard/), click the round question mark button in the lower-right corner, then click 'Support'.
+If you have a paid account, then you can ask directly for help from our support team. To create a support request, head to your [dashboard](https://circleci.com/dashboard/){:rel="nofollow"}, click the round question mark button in the lower-right corner, then click 'Support'.
 
 In the form that appears, enter a title for your question, along with a message detailing your problem. You can also attach files if you have a helpful screenshot or cute cat picture.
 

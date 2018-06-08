@@ -88,91 +88,18 @@ See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
      
-7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) for details.
+7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) document for details.
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Environment Variables
 
-CircleCI 2.0 allows you to set environment variables at several scope levels.
-
-To set environment variables **for all commands in a build**,
-set environment variables for a [job]({{ site.baseurl }}/2.0/glossary/#job)
-by using the `environment` key in the associated job.
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      - FOO: "bar"
-```
-
-To set environment variables **for all commands in a container**,
-use the `environment` key in the associated `image`.
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6
-        environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
-```
-
-To set environment variables **for a single command**,
-use the `environment` key in the associated `run` [step]({{ site.baseurl }}/2.0/glossary/#step).
-
-```yaml
-version: 2.0
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - checkout
-      - run:
-          name: Run migrations
-          command: sql/docker-entrypoint.sh sql
-          environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
-```
-
-### Interpolating Environment Variables
-
-CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
-
-However, it is possible to interpolate a variable within a command
+In CircleCI 2.0, all defined environment variables are treated literally.
+It is possible to interpolat variables within a command
 by setting it for the current shell.
 
-```yaml
-version: 2
-jobs:
-  build:
-    steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
-```
-
-Depending on your shell,
-you may have to append the new variable to a shell startup file
-like `~/.tcshrc` or `~/.zshrc`.
 For more information,
-refer to your shell's documentation on setting environment variables.
-
-For more information,
-see the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to Configure Workflows
 
@@ -298,7 +225,7 @@ With the following, nested under `steps:` and customizing for your application a
 
 **Notes on Deployment:**
 
-- See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
+- See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
 - Please read the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deployment for CircleCI 2.0.
 
 ## Validate YAML
@@ -308,5 +235,5 @@ When you have all the sections in `.circleci/config.yml` we recommend that you c
 ## Next Steps
 
 - Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
-- Refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
+- Refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
 

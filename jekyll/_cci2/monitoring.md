@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Environment Variables, Auto Scaling, and Monitoring"
+title: "Server Settings, Auto Scaling, and Monitoring"
 category: [administration]
 order: 30
 ---
@@ -10,7 +10,7 @@ This document is for System Administrators who are setting environment variables
 * TOC
 {:toc}
 
-## Setting Environment Variables on Nomad Clients
+## Settings on Nomad Clients
 
 Several aspects of CircleCI Nomad Client behavior can be customized by passing
 environment variables into the builder process. 

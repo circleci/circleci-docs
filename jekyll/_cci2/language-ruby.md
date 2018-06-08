@@ -21,7 +21,7 @@ If you’re in a rush, just copy the sample configuration below into a `.circlec
 CircleCI maintains the sample Ruby on Rails project at the following links:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails" target="_blank">Demo Ruby on Rails Project on GitHub</a>
-- <a href="https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails" target="_blank">Demo Ruby on Rails Project building on CircleCI</a>
+- [Demo Ruby on Rails Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"}
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 
@@ -131,7 +131,7 @@ jobs: # a collection of steps
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. [Fork the project][fork-demo-project] on GitHub to your own account.
-2. Go to the [Add Projects](https://circleci.com/add-projects) page in CircleCI and click the Build Project button next to the project you just forked.
+2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 ---
@@ -296,7 +296,7 @@ For more on `circleci tests glob` and `circleci tests split` commands, please re
 
 ---
 
-Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails) to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## Deployment
 

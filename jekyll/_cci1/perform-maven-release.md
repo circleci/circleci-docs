@@ -80,7 +80,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' "https://circleci.com/api/v1.1/project/github/ORG/PROJECT/tree/master?circle-token=TOKEN"
 ```
 
-**NOTE**: replace `TOKEN` in the URL shown with the API token from your [account dashboard](https://circleci.com/account/api). Be sure to also replace `ORG` and `PROJECT` in the URL shown.
+**NOTE**: replace `TOKEN` in the URL shown with the API token from your [account dashboard](https://circleci.com/account/api){:rel="nofollow"}. Be sure to also replace `ORG` and `PROJECT` in the URL shown.
 
 Within the JSON body, adjust these fields as needed for this particular release build:
 
