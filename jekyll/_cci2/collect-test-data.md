@@ -43,7 +43,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 
 ## Video: Troubleshooting Test Runners
 
-<iframe width="360" height="270" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ### Custom Test Runner Examples
