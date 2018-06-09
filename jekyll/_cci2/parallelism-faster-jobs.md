@@ -83,7 +83,7 @@ jobs:
 ```
 ### Video: Troubleshooting Globbing
 
-<iframe width="854" height="480" src="https://www.youtube.com/embed/3GCn4vSS9SU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Splitting Test Files
 
