@@ -32,7 +32,7 @@ by rerunning the build.
 If you are using workflows,
 go to the Workflows page of the CircleCI application
 and rerun the entire Workflow or rerun it from failed jobs.
-Otherwise, click one of the Rebuild options on the {% comment %} TODO: Job {% endcomment %}Build page of the CircleCI application.
+Otherwise, click one of the Rebuild options on the **Jobs page** of the CircleCI application.
 
 **Note:**
 This feature is not supported for fork PRs.
