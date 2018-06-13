@@ -49,7 +49,7 @@ CircleCI's beta `config-translation` endpoint can help you quickly get started w
          docker:
            - image: circleci/ruby:2.3
      ```
-     The primary container is an instance of the first image listed. Your {% comment %} TODO: Job {% endcomment %}build commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
+     The primary container is an instance of the first image listed. Your job's commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
      ```yaml
          machine: true
      ```

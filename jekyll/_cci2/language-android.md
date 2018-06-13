@@ -98,7 +98,7 @@ Next we pull down the cache, if present. If this is your first run, or if you've
 
 Then `./gradlew lint test` runs the unit tests, and runs the built in linting tools to check your code for style issues.
 
-We then upload the build reports as {% comment %} TODO: Job {% endcomment %} build artifacts, and we upload the test metadata (XML) for CircleCI to process.
+We then upload the build reports as job artifacts, and we upload the test metadata (XML) for CircleCI to process.
 
 Nice! You just set up CircleCI for an Android app.
 
@@ -112,7 +112,7 @@ The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.
 
 ### API Levels
 
-We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in your {% comment %} TODO: Job {% endcomment %} build, you should select `circleci/android:api-24-alpha`.
+We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in a job, you should select `circleci/android:api-24-alpha`.
 
 ### Alpha Tag
 

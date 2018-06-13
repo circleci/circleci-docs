@@ -61,10 +61,6 @@ Create a new branch and add 2.0 configuration as described in the [2.0 Project T
 
 If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. Keep in mind that CircleCI 1.0 will be sunset August 31st, 2018. More info available on the [CircleCI Blog](https://circleci.com/blog/sunsetting-1-0/).
 
-## Why is the 2.0 build not working?
-
-In CircleCI 2.0, the first image listed in the `.circleci/config.yml` file is where the {% comment %} TODO: Job {% endcomment %}build runs. If you are trying to figure out why the new 2.0 build is not working it may be that the {% comment %} TODO: Job {% endcomment %}build runs on the first image specified in the list. The first image in the list is used for the primary container.
-
 ## Why can't I find my project on the Add Project page?
  
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
@@ -158,7 +154,7 @@ Not yet, but we are working on that functionality.
 Not yet, but we are working on that functionality.
 
 ### Can I use `store_test_results` with Workflows?
-You can use `store_test_results` in order to populate your {% comment %} TODO: Job {% endcomment %}builds' Test Summary section with your test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
  
 ### Can I use Workflows with CircleCI 1.0?
  

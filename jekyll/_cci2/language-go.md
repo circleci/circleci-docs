@@ -193,7 +193,7 @@ Finally, let's specify a path to store the results of the tests.
           path: /tmp/test-results
 ```
 
-Success! You just set up CircleCI 2.0 for a Go app. Check out our {% comment %} TODO: Jobs {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Go app. Check out our [Jobs page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## Deploy
 

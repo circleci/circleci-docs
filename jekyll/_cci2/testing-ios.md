@@ -365,7 +365,7 @@ jobs:
 ```
 
 If you do not want to commit a `.ruby-version` file to source control, then
-you can create the file from a {% comment %} TODO: Job {% endcomment %}build step:
+you can create the file from a job step:
 ```yaml
 run:
   name: Set Ruby Version
@@ -435,7 +435,7 @@ Project Settings page for your app.
 
 4. Create a new Environment Variable with
 the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now
-access this token during the {% comment %} TODO: Job {% endcomment %}build.
+access this token in any job.
 
 ### Beta By Crashlytics
 
@@ -503,7 +503,7 @@ A series of simulator-related issues are known to happen on some
 projects. Here are the most frequent of those:
 
 * **Xcode version is not available.** We install
-  a few different versions of Xcode in the {% comment %} TODO: Job {% endcomment %}build
+  a few different versions of Xcode in each build
   image and keep those updated with the latest point releases. Therefore
   to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
   sufficient to specify `8.3` in your `config.yml`. If a newer point
@@ -511,7 +511,7 @@ projects. Here are the most frequent of those:
   `8.3` version on CircleCI.
 
 * **Dependency version mismatches.** If you see that the version of the
-  dependencies used in the {% comment %} TODO: Job {% endcomment %}build are not the expected ones, please try
+  dependencies used in a job are not the expected ones, please try
   rebuilding without cache — chances are an older dependency got stuck
   in the cache and is not allowing for the newer version to get
   installed.
@@ -524,7 +524,7 @@ projects. Here are the most frequent of those:
   features.
 
 * **Ruby segfaults.** We have seen cases where some of the Ruby gems
-  used during the {% comment %} TODO: Job {% endcomment %} build would produce a segmentation fault in Ruby. This
+  used during a job would produce a segmentation fault in Ruby. This
   might happen because of the mismatch of Ruby version used to build the
   gem and the Ruby version used to run it. Please make sure that the Ruby
   version used locally is the same as the one used on CircleCI. You can
