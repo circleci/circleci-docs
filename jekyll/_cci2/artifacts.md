@@ -137,7 +137,8 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 ![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-When CircleCI runs a build, a link to the core dump file appears in the Artifacts tab of the **Jobs page**.
+When CircleCI runs a job,
+a link to the core dump file appears in the Artifacts tab of the **Jobs page**.
 
 ## Downloading All Artifacts for a Build on CircleCI
 
