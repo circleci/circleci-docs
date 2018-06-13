@@ -16,7 +16,13 @@ This document describes how to work with Artifacts in the following sections:
 
 ## Artifacts Overview
 
-Artifacts persist data after a job is completed and may be used for longer-term storage of the outputs of your build process. For example, a Java project that produces a `.jar` file. When the Java build/test process passes, the output of the process (the `.jar` file) can be stored as an artifact. The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
+Artifacts persist data after a job is completed
+and may be used for longer-term storage of the outputs of your build process.
+
+For example, a Java project that produces a `.jar` file.
+When the Java build/test process passes,
+the output of the process (the `.jar` file) can be stored as an artifact.
+The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
