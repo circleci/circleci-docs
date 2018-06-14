@@ -32,9 +32,12 @@ CircleCI offers open-source projects additional free build containers for run th
 
 The following features and settings are especially useful for open source projects.
 
-**Public build pages** - Your project build pages can be public to allow core contributors, collaborators, and the general community to have transparency into your project.
+### Public Build Pages
 
-**Private environment variables** - Many projects will end up needing an API token, SSH key, or password  to build all dependencies or perhaps to deploy. Private environment variables enable you to store secrets safely even when your project can be seen and contributed by thousands of outside users.
+To increase transparency among contributors and collaborators,
+you can make the builds of your project public.
+In the **Advanced Settings** of your project,
+set the **Free and Open Source** option to _On_.
 
 **Advanced Settings > Build forked Pull Request** - This page of the CircleCI app determines whether or not PRs opened from forked repositories will be built. The benefit is the ability to test user contributions quickly and efficiently, indicating  whether their PR is good before you even get a chance to look at it. A possible downside could be that a high volume of forked PRs or poorly crafted PRs may keep your build containers too busy to working on building your own code.
 
