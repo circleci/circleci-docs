@@ -49,7 +49,7 @@ Pay attention to the information you choose to print.
 these variables will be shared in [forked pull requests](#pass-secrets-to-builds-from-forked-pull-requests)
 unless explicitly blocked.
 
-## Features and Settings for Open Source
+## Features and Settings for Open Source Projects
 
 The following features and settings are especially useful for open source projects.
 
