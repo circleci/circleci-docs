@@ -52,23 +52,40 @@ see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-envi
 
 By default, CircleCI builds every commit from every branch.
 This behavior may be too aggressive for open source projects,
-which often have considerably more commits than private projects.
-
+which often have significantly more commits than private projects.
 To change this setting,
 go to the **Advanced Settings** of your project
 and set the **Only build pull requests** option to _On_.
 
 **Note:**
 Even if this option is enabled,
-CircleCI will build all commits from your project's default branch.
+CircleCI will still build all commits from your project's default branch.
 
-### Building Pull Requests From Forked Repositories
+### Build Pull Requests From Forked Repositories
 
 Many open source projects accept pull requests from forked repositories.
 Building these pull requests is an effective way
 to catch bugs before manually reviewing changes.
 
-**Advanced Settings -> Only build pull request** - This setting determines that only pull requests (PRs) and the project’s default branch (typically master) will be built. This setting is useful for projects with a lot of commit activity which helps reduce the number of builds that will be run.
+By default, CircleCI does not build pull requests from forked repositories.
+To change this setting,
+go to the **Advanced Settings** of your project
+and set the **Build forked pull requests** option to _Off_.
+
+### Pass Secrets to Builds From Forked Pull Requests
+
+Running an unrestricted build in a parent repository can be dangerous.
+Projects often contain sensitive information,
+and this information is freely available to anyone
+who can push code that triggers a build.
+
+By default, CircleCI does not pass secrets to builds from forked pull requests.
+Builds that require these secrets
+will not run successfully on CircleCI.
+If you are comfortable sharing secrets with anyone who forks your project and opens a pull request,
+you can enable this option.
+In the **Advanced Settings** of your project,
+set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ## Example Open Source Projects 
 
