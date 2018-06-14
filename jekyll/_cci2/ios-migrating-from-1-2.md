@@ -100,7 +100,7 @@ jobs:
           name: Build IPA
           command: fastlane gym
 
-      # Store the IPA file in the {% comment %} TODO: Job {% endcomment %}build artifacts
+      # Store the IPA file in the job's artifacts
       - store_artifacts:
           path: output/MyApp.ipa
 
@@ -313,7 +313,7 @@ jobs:
 
 ### Storing Artifacts, Test Results, and Diagnostic Files
 
-CircleCI 2.0 does not automatically collect artifacts in your {% comment %} TODO: Job {% endcomment %}builds,
+CircleCI 2.0 does not automatically collect artifacts in your jobs,
 so if your {% comment %} TODO: Job {% endcomment %}build is generating files that you would like to access with
 the CircleCI application later on, you must explicitly collect those
 files with the `store_artifacts` step.

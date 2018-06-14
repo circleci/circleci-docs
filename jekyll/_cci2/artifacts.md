@@ -16,18 +16,24 @@ This document describes how to work with Artifacts in the following sections:
 
 ## Artifacts Overview
 
-Artifacts persist data after a {% comment %} TODO: Job {% endcomment %}Workflow is completed and may be used for longer-term storage of the outputs of your build process. For example, a Java project that produces a `.jar` file. When the Java build/test process passes, the output of the process (the `.jar` file) can be stored as an artifact. The `.jar` file is available to download from the CircleCI artifacts system long after the workflow that created it has finished.
+Artifacts persist data after a job is completed
+and may be used for longer-term storage of the outputs of your build process.
+
+For example, when a Java build/test process finishes,
+the output of the process is saved as a `.jar` file.
+CircleCI can store this file as an artifact,
+keeping it available long after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Another example of an Artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
 
-If your {% comment %} TODO: Job {% endcomment %}build produces persistent artifacts such as screenshots, coverage reports, core files, or
+If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the {% comment %} TODO: Job {% endcomment %}Build page.
+Find links to the artifacts at the top of the **Job page**.
 Artifacts are stored on Amazon S3.
 There is a 3GB `curl` file size limit.
 Artifacts are designed
@@ -70,7 +76,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After  the artifacts successfully upload, view them in the **Artifacts** tab of the {% comment %} TODO: Jobs {% endcomment %}build page in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
@@ -131,9 +137,10 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 ![Core Dump File in Artifacts Page]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-When CircleCI runs a build, a link to the core dump file appears under the Artifacts tab of the {% comment %} TODO: Job {% endcomment %}build summary.
+When CircleCI runs a job,
+a link to the core dump file appears in the Artifacts tab of the **Job page**.
 
-## Downloading All Artifacts for a {% comment %} TODO: Job {% endcomment %}Build on CircleCI  
+## Downloading All Artifacts for a Build on CircleCI
 
 To download your artifacts with `curl`,
 follow these steps.
@@ -158,7 +165,7 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-The `curl` command fetches all artifact details for a {% comment %} TODO: Job {% endcomment %} build
+The `curl` command fetches all artifact details for a build
 and pipes it to `grep` to extract the URLs.
 The results are saved to the `artifacts.txt` file.
 Finally, `xargs` reads the file

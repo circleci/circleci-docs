@@ -85,7 +85,7 @@ jobs: # a collection of steps
 
 ---
 
-Success! You just set up CircleCI 2.0 for a PHP app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## Deploy
 

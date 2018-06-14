@@ -296,7 +296,7 @@ For more on `circleci tests glob` and `circleci tests split` commands, please re
 
 ---
 
-Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our {% comment %} TODO: Job {% endcomment %} [project’s build page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## Deployment
 

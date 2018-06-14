@@ -114,7 +114,7 @@ jobs:
 ### Using macOS
 
 Using the `macos` executor allows you
-to run your {% comment %} TODO: Job {% endcomment %}build in a macOS environment on a VM (4CPU 8GB RAM).
+to run your job in a macOS environment on a VM (4CPU 8GB RAM).
 You can also specify which version of Xcode should be used.
 See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers.
 
