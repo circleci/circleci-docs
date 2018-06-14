@@ -39,6 +39,15 @@ you can make the builds of your project public.
 In the **Advanced Settings** of your project,
 set the **Free and Open Source** option to _On_.
 
+### Private Environment Variables
+
+Many projects require API tokens, SSH keys, or passwords.
+Private environment variables allow you
+to safely store secrets,
+even if your project is public.
+For more information,
+see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
+
 ### Only Build Pull Requests
 
 By default, CircleCI builds every commit from every branch.
