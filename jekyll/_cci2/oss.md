@@ -39,6 +39,20 @@ you can make the builds of your project public.
 In the **Advanced Settings** of your project,
 set the **Free and Open Source** option to _On_.
 
+### Only Build Pull Requests
+
+By default, CircleCI builds every commit from every branch.
+This behavior may be too aggressive for open source projects,
+which often have considerably more commits than private projects.
+
+To change this setting,
+go to the **Advanced Settings** of your project
+and set the **Only build pull requests** option to _On_.
+
+**Note:**
+Even if this option is enabled,
+CircleCI will build all commits from your project's default branch.
+
 ### Building Pull Requests From Forked Repositories
 
 Many open source projects accept pull requests from forked repositories.
