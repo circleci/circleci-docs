@@ -26,7 +26,7 @@ to build a single pull request (PR) faster with parallelism,
 or build multiple PRs at once.
 
 These additional containers are automatically enabled,
-as long as the project is public and running on CircleCI's default platform (Linux).
+as long as the project is public and running on Linux.
 If you do not want to use the additional containers
 or do not want your CircleCI project to be public,
 you can change this setting.
