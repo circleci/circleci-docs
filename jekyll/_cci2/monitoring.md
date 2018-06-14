@@ -18,15 +18,48 @@ environment variables into the builder process.
 To set environment variables create a file called `/etc/circle-installation-customizations`
 with environment variable entries, for example, `export CIRCLE_OPTION_A=foo`. 
 
-## System Monitoring 
+## Basic System Monitoring with CloudWatch
 
-Enable the Cloudwatch by going to Replicated Admin > Settings > Monitoring > Enable Cloudwatch. **Note:** CloudWatch does **not** support monitoring of macOS containers.
+Enable CloudWatch by going to Replicated Admin > Settings > Enhanced AWS Integration (1.0 Only) > Enable Cloudwatch, for example, `https://example.com:8800/settings#enhanced_aws`. **Note:** CloudWatch does **not** support monitoring of macOS containers.
 
-CloudWatch already monitors the health and basic checks for the EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of containers per container if CPU or memory become a bottleneck.
+CloudWatch already monitors the health and basic checks for EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of CPUs per container if CPU or memory become a bottleneck.
 
-## Auto Scaling
+## Advanced System Monitoring
 
-By default, an Auto Scaling group is created on your AWS account. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies. 
+Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics, for example `https://example.com:8800/settings#metrics`. Then, click Enable Metrics.
+![Enable Metrics](  {{ site.baseurl }}/assets/img/docs/enable_metrics1.png)
+
+### Supported Platform(s)
+
+Currently, only AWS CloudWatch is supported.  Click AWS CloudWatch to begin configuration.
+![AWS CloudWatch](  {{ site.baseurl }}/assets/img/docs/enable_metrics2.png)
+
+### Configuration
+
+There are two options for configuration:  
+
+- Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+![Configuration IAM](  {{ site.baseurl }}/assets/img/docs/enable_metrics3a.png)
+
+- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+![Configuration Alt](  {{ site.baseurl }}/assets/img/docs/enable_metrics3b.png)
+
+Verify that metrics are forwarding by going to the AWS CloudWatch console.
+
+### Metrics Details
+Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting and reporting metrics.
+
+Following are the metrics that are enabled:
+- [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/CPU_README.md#cpu-time-measurements)
+- [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#metrics)
+- [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/MEM_README.md#metrics)
+- [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NET_README.md#measurements--fields) 
+- [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
+
+
+## Scheduled Scaling
+
+By default, an Auto Scaling Group (ASG) is created on your AWS account. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies. 
 
 Refer to the Shutting Down a Nomad Client section of the [Nomad]({{ site.baseurl }}/2.0/nomad/#shutting-down-a-nomad-client) document for instructions on draining and scaling down the Nomad Clients.
 
