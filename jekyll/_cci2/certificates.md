@@ -60,12 +60,13 @@ This document provides instructions for setting up TLS/HTTPS on your Server inst
 
 3. Install Certbot and generate certificates using the following commands:
 
-```$ sudo apt-get update
-$ sudo apt-get install software-properties-common
-$ sudo add-apt-repository ppa:certbot/certbot
-$ sudo apt-get update
-$ sudo apt-get install certbot
-$ certbot certonly --manual --preferred-challenges dns
+```
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot
+certbot certonly --manual --preferred-challenges dns
 ```
 
 4. You'll be instructed to add a DNS TXT record.
