@@ -10,7 +10,7 @@ When creating or modifying workflow configuration, if you don't see new jobs, yo
 
 Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting.  As a result, the workflow does not start any jobs.
 
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Jobs page) to view the configuration errors.
+When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
 
 A project's Job page URL looks like this:
 

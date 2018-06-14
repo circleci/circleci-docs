@@ -34,7 +34,7 @@ jobs:
 
 The first image listed defines the execution environment for your job. The primary container, where your job's commands are run, is created from this image. The steps check out the code in the project directory and run the `echo` command.
 
-3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0, and a 2.0 icon appears on the **Jobs page **.
+3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0, and a 2.0 icon appears on the **Job page **.
     ![First Green Build Screenshot]({{ site.baseurl }}/assets/img/docs/green_build.png)
 
 4. If this is your first project on CircleCI, go to the Projects page, click the Add Projects button and then click the Build Project button next to your project.
@@ -43,7 +43,7 @@ The first image listed defines the execution environment for your job. The prima
 
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-CircleCI checks out your code, prints "Hello World", and posts a green build to the **Jobs page**, adding a green checkmark on your commit in GitHub or Bitbucket! If the job fails, you are notified in email of the failure with a log of the failing command, exit code, and output with a red X on the commit in GitHub or Bitbucket. 
+CircleCI checks out your code, prints "Hello World", and posts a green build to the **Job page**, adding a green checkmark on your commit in GitHub or Bitbucket! If the job fails, you are notified in email of the failure with a log of the failing command, exit code, and output with a red X on the commit in GitHub or Bitbucket. 
 
 You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
 

@@ -122,7 +122,7 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
 failing test. Setting this up is easy with an SSH-enabled
 run.
 
-1. Run an SSH build using the Rerun Job with SSH button on the **Jobs page** of the CircleCI app. The command to log into
+1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into
 the container over SSH apears, as follows:
 ```
 ssh -p 64625 ubuntu@54.221.135.43
