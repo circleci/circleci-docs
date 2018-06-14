@@ -39,9 +39,11 @@ you can make the builds of your project public.
 In the **Advanced Settings** of your project,
 set the **Free and Open Source** option to _On_.
 
-**Advanced Settings > Build forked Pull Request** - This page of the CircleCI app determines whether or not PRs opened from forked repositories will be built. The benefit is the ability to test user contributions quickly and efficiently, indicating  whether their PR is good before you even get a chance to look at it. A possible downside could be that a high volume of forked PRs or poorly crafted PRs may keep your build containers too busy to working on building your own code.
+### Building Pull Requests From Forked Repositories
 
-**Advanced Settings > Pass secrets to builds from forked pull request** - This setting is extremely important for security. If this setting is enabled, private environment variables, AWS & Heroku credentials, and SSH keys stored on CircleCI are made available to everyone who makes a fork and opens a PR to your project. The upside to this setting is that builds that require these variables will be able to pass. The security risk is that everyone may edit your CircleCI configuration to print out your SSH key to terminal and get access to your servers.
+Many open source projects accept pull requests from forked repositories.
+Building these pull requests is an effective way
+to catch bugs before manually reviewing changes.
 
 **Advanced Settings -> Only build pull request** - This setting determines that only pull requests (PRs) and the project’s default branch (typically master) will be built. This setting is useful for projects with a lot of commit activity which helps reduce the number of builds that will be run.
 
