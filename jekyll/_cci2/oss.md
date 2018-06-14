@@ -30,7 +30,7 @@ CircleCI offers open-source projects additional free build containers for run th
 
 ## Features and Settings for Open Source
 
-The following features and setting are useful for contributors to your project:
+The following features and settings are especially useful for open source projects.
 
 **Public build pages** - Your project build pages can be public to allow core contributors, collaborators, and the general community to have transparency into your project.
 
