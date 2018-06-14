@@ -100,7 +100,8 @@ In the **Advanced Settings** of your project,
 set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 **Note:**
-Builds that require these secrets
+If this setting is disabled,
+forked builds that require secrets
 will not run successfully on CircleCI.
 
 ## Example Open Source Projects 
