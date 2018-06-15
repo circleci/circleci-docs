@@ -164,6 +164,10 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
+**Note:**
+Unlike the special step [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace),
+neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+
 ## Using Keys and Templates
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, it will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, have a `key` that generates a new cache only if something actually changes.
