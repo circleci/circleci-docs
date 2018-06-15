@@ -9,38 +9,112 @@ order: 1
 
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Building Open Source Projects*
 
-This document provides tips and best practices for building your open source project with CircleCI 2.0 in the following sections: 
+This document provides tips and best practices
+for building your open source project on CircleCI in the following sections:
 
 * TOC
 {:toc}
 
-In addition to a free plan for open source repos, the CircleCI app includes extra resources and settings specifically for open source projects.
+## Overview
 
-**Note:** Consider the following basics about visibility of configuration details and logs for your project: 
+To support the open source community,
+projects that are public on GitHub or Bitbucket
+receive three free build containers,
+for a total of four containers.
+Multiple build containers allow you
+to build a single pull request (PR) faster with parallelism,
+or build multiple PRs at once.
 
-- If your repository is public, your CircleCI project will also be publicly available.
-- CircleCI app settings are accessible only by contributors, therefore, environment variables set in the app are hidden from the public. However env-vars are shared in forks unless these are turned off.
-- Build-logs are publicly visible, so don't print sensitive information in them.
+These additional containers are automatically enabled,
+as long as the project is public and running on Linux.
+If you do not want to use the additional containers
+or do not want your CircleCI project to be public,
+you can change this setting.
+In the **Advanced Settings** of your project,
+set the **Free and Open Source** option to _Off_.
 
-## Open Source Container Overview
+**Note:**
+If you are building an open source project on macOS,
+contact billing@circleci.com to enable these additional containers.
 
-CircleCI offers open-source projects additional free build containers for run their jobs. An open source project being built on CircleCI gets **three additional build containers**, four containers in total. Multiple build containers allow you to  either build multiple pull requests (PRs) at a time, or to build a single PR much faster with CircleCI’s parallelism. 
+## Security
 
-**Note:** Projects built on Linux (our default platform) will automatically receive the additional containers if they are public projects on GitHub or Bitbucket. If you are building an open source project on macOS and want to take advantage of our offer, contact billing@circleci.com.
+While open source can be a liberating practice,
+take care not to liberate sensitive information.
 
-## Features and Settings for Open Source
+- If your repository is public,
+your CircleCI project and its build logs are also public.
+Pay attention to the information you choose to print.
+- While environment variables set in the CircleCI application are hidden from the public,
+these variables will be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
+unless explicitly blocked.
 
-The following features and setting are useful for contributors to your project:
+## Features and Settings for Open Source Projects
 
-**Public build pages** - Your project build pages can be public to allow core contributors, collaborators, and the general community to have transparency into your project.
+The following features and settings are especially useful for open source projects.
 
-**Private environment variables** - Many projects will end up needing an API token, SSH key, or password  to build all dependencies or perhaps to deploy. Private environment variables enable you to store secrets safely even when your project can be seen and contributed by thousands of outside users.
+### Private Environment Variables
 
-**Advanced Settings > Build forked Pull Request** - This page of the CircleCI app determines whether or not PRs opened from forked repositories will be built. The benefit is the ability to test user contributions quickly and efficiently, indicating  whether their PR is good before you even get a chance to look at it. A possible downside could be that a high volume of forked PRs or poorly crafted PRs may keep your build containers too busy to working on building your own code.
+Many projects require API tokens, SSH keys, or passwords.
+Private environment variables allow you
+to safely store secrets,
+even if your project is public.
+For more information,
+see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
-**Advanced Settings > Pass secrets to builds from forked pull request** - This setting is extremely important for security. If this setting is enabled, private environment variables, AWS & Heroku credentials, and SSH keys stored on CircleCI are made available to everyone who makes a fork and opens a PR to your project. The upside to this setting is that builds that require these variables will be able to pass. The security risk is that everyone may edit your CircleCI configuration to print out your SSH key to terminal and get access to your servers.
+### Only Build Pull Requests
 
-**Advanced Settings -> Only build pull request** - This setting determines that only pull requests (PRs) and the project’s default branch (typically master) will be built. This setting is useful for projects with a lot of commit activity which helps reduce the number of builds that will be run.
+By default, CircleCI builds every commit from every branch.
+This behavior may be too aggressive for open source projects,
+which often have significantly more commits than private projects.
+To change this setting,
+go to the **Advanced Settings** of your project
+and set the **Only build pull requests** option to _On_.
+
+**Note:**
+Even if this option is enabled,
+CircleCI will still build all commits from your project's default branch.
+
+### Build Pull Requests From Forked Repositories
+
+Many open source projects accept PRs from forked repositories.
+Building these PRs is an effective way
+to catch bugs before manually reviewing changes.
+
+By default, CircleCI does not build PRs from forked repositories.
+To change this setting,
+go to the **Advanced Settings** of your project
+and set the **Build forked pull requests** option to _Off_.
+
+### Pass Secrets to Builds From Forked Pull Requests
+
+Running an unrestricted build in a parent repository can be dangerous.
+Projects often contain sensitive information,
+and this information is freely available to anyone
+who can push code that triggers a build.
+
+By default, CircleCI passes secrets to builds from forked PRs
+If you are uncomfortable sharing secrets with anyone who forks your project and opens a PR,
+you can disable this option.
+In the **Advanced Settings** of your project,
+set the **Pass secrets to builds from forked pull requests** option to _Off_.
+
+When this setting is disabled,
+CircleCI hides four types of configuration data:
+
+- [Environment variables](#private-environment-variables) set through the application.
+
+- [Deployment keys and user keys]({{ site.baseurl }}/2.0/gh-bb-integration/#deployment-keys-and-user-keys).
+
+- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key)
+to access arbitrary hosts during a build.
+
+- [AWS permissions]({{ site.baseurl }}/2.0/deployment-integrations/#aws) and configuration files.
+
+**Note:**
+If this setting is disabled,
+forked PR builds that require secrets
+will not run successfully on CircleCI.
 
 ## Example Open Source Projects 
 

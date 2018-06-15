@@ -43,12 +43,6 @@
   name: "Optimization"
   icon: "parallelism.svg"
 
-#- section: cci1
-#  slug: mobile-platforms
-#  name: "Mobile Platforms"
-#  index: mobile
-#  icon: "mobile.svg"
-
 - section: cci1
   slug: how-to
   name: "Integrations"
@@ -63,22 +57,6 @@
   slug: troubleshooting
   name: "Troubleshooting"
   icon: "troubleshooting.svg"  
-
-#- section: cci1
-#  slug: privacy-and-security
-#  name: "Privacy and Security"
-#  index: privacy-security
-#  icon: "privacy-security.svg"
-
-
-# Legacy 1.0 Enterprise Docs
-#- section: ccie
-#  slug: documentation
-#  name: "Getting Started"
-
-#- section: ccie
-#  slug: installation
-#  name: "Installation"
 
 - section: ccie
   slug: advanced-config
@@ -129,25 +107,9 @@
   slug: language-guides
   name: "Language Guides"
 
-#- section: cci2
-#  slug: docker
-#  name: "Using Docker"
-
 - section: cci2
   slug: reference
   name: "Reference"
-
-# - section: cci2
-#   slug: troubleshooting-and-debugging
-#   name: "Troubleshooting and Debugging"
-
-# - section: cci2
-#   slug: api
-#   name: "API"
-
-# - section: cci2
-#   slug: help-and-support
-#   name: "Help and Support"
 
 # CircleCI API Docs
 - section: api
