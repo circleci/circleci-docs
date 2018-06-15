@@ -75,7 +75,15 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
 
 {% endraw %}
 
-In this example, `restore_cache` looks for a cache hit from the current git revision, then for a hit from the current branch, and finally for any cache hit, regardless of branch or revision. When CircleCI encounters a list of `keys`, the cache will be restored from the first match. If there are multiple matches, the **most recent match** will be used.
+In this example,
+`restore_cache` looks for a cache hit from the current git revision,
+then for a hit from the current branch,
+and finally for any cache hit,
+regardless of branch or revision.
+When CircleCI encounters a list of `keys`,
+the cache will be restored from the first match.
+If there are multiple matches,
+the most recently generated cache will be used.
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
 
@@ -97,7 +105,12 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 
 ## Restoring Cache
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the **most recent match** will be used.
+CircleCI restores caches in the order of keys listed in the `restore_cache` step.
+Each cache key is namespaced to the project,
+and retrieval is prefix-matched.
+The cache will be restored from the first matching key.
+If there are multiple matches,
+the most recently generated cache will be used.
 
 In the example below, two keys are provided:
 
@@ -109,12 +122,16 @@ In the example below, two keys are provided:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
             - v1-npm-deps-{{ checksum "package.json" }}
-            # Find the most recent cache used from any branch
+            # Find the most recently generated cache used from any branch
             - v1-npm-deps-
 ```
 {% endraw %}
 
-Because the second key is less specific than the first, it is more likely that there will be differences between the current state and the most recent cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a *partial cache restore*.
+Because the second key is less specific than the first,
+it is more likely that there will be differences between the current state and the most recently generated cache.
+When a dependency tool runs,
+it would discover outdated dependencies and update them.
+This is referred to as a **partial cache restore**.
 
 ### Clearing Cache 
 
@@ -147,6 +164,10 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
+**Note:**
+Unlike the special step [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace),
+neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+
 ## Using Keys and Templates
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, it will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, have a `key` that generates a new cache only if something actually changes.
@@ -164,7 +185,7 @@ During step execution, the templates above will be replaced by runtime values an
 Template | Description
 ----|----------
 {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
-{% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
+{% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
