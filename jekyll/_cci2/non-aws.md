@@ -120,7 +120,7 @@ To install the Nomad Clients, perform the following steps:
 
 2. Log in to the machine provisioned for the Nomad Server and run the `sudo su` command.
 
-3. Run './provision-services-ubuntu.sh' with the NOMAD_SERVER_ADDRESS environment variable set to the routable IP of the Services machine to start the script. 
+3. Run './provision-nomad-client-ubuntu.sh' with the NOMAD_SERVER_ADDRESS environment variable set to the routable IP of the Services machine to start the script. 
 
 
 ### Troubleshooting
