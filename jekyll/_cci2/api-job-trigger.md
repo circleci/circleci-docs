@@ -26,14 +26,14 @@ how to trigger the `deploy_docker` job
 by using `curl`.
 
 ```bash
-curl -u ${CIRCLE_API_TOKEN}: \
+curl -u ${CIRCLE_API_USER_TOKEN}: \
      -d build_parameters[CIRCLE_JOB]=deploy_docker \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
 Some notes on the variables
 used in this example:
-- `CIRCLE_API_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+- `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 - `<vcs-type>` is a placeholder variable
 and refers to your chosen VCS (either `github` or `bitbucket`).
 - `<org>` is a placeholder variable
@@ -82,7 +82,7 @@ jobs:
           command: |
             # replace this with your build/deploy check (i.e. current branch is "release")
             if [[ true ]]; then
-              curl --user ${CIRCLE_API_TOKEN}: \
+              curl --user ${CIRCLE_API_PROJECT_TOKEN}: \
                 --data build_parameters[CIRCLE_JOB]=deploy_docker \
                 --data revision=$CIRCLE_SHA1 \
                 https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
