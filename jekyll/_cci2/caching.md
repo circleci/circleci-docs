@@ -75,7 +75,15 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
 
 {% endraw %}
 
-In this example, `restore_cache` looks for a cache hit from the current git revision, then for a hit from the current branch, and finally for any cache hit, regardless of branch or revision. When CircleCI encounters a list of `keys`, the cache will be restored from the first match. If there are multiple matches, the **most recent match** will be used.
+In this example,
+`restore_cache` looks for a cache hit from the current git revision,
+then for a hit from the current branch,
+and finally for any cache hit,
+regardless of branch or revision.
+When CircleCI encounters a list of `keys`,
+the cache will be restored from the first match.
+If there are multiple matches,
+the most recently generated cache will be used.
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
 
@@ -97,7 +105,12 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 
 ## Restoring Cache
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the **most recent match** will be used.
+CircleCI restores caches in the order of keys listed in the `restore_cache` step.
+Each cache key is namespaced to the project,
+and retrieval is prefix-matched.
+The cache will be restored from the first matching key.
+If there are multiple matches,
+the most recently generated cache will be used.
 
 In the example below, two keys are provided:
 
@@ -109,12 +122,16 @@ In the example below, two keys are provided:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
             - v1-npm-deps-{{ checksum "package.json" }}
-            # Find the most recent cache used from any branch
+            # Find the most recently generated cache used from any branch
             - v1-npm-deps-
 ```
 {% endraw %}
 
-Because the second key is less specific than the first, it is more likely that there will be differences between the current state and the most recent cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a *partial cache restore*.
+Because the second key is less specific than the first,
+it is more likely that there will be differences between the current state and the most recently generated cache.
+When a dependency tool runs,
+it would discover outdated dependencies and update them.
+This is referred to as a **partial cache restore**.
 
 ### Clearing Cache 
 
