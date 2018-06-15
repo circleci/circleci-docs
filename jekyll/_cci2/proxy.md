@@ -46,7 +46,7 @@ NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.c
 JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
 
 EOF
-) | sudo tee -a /etc//etc/circle-installation-customizations
+) | sudo tee -a /etc/circle-installation-customizations
 3.) sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui ; sudo service replicated-operator start; sudo service replicated start
 ```
 
