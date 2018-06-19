@@ -75,8 +75,8 @@ Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID`
 and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
 3. In your `.circleci/config.yml` file,
-create a new deploy job.
-In this job,
+create a new `deploy` job.
+In the `deploy` job,
 add a step to install `awscli` in your primary container.
 
 4. Install `awscli` in your primary container
