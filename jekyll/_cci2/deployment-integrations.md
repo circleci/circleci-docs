@@ -82,8 +82,11 @@ add a step to install `awscli` in your primary container.
 4. Install `awscli` in your primary container
 by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
-5. Add a job to your `config.yml` file that refers to a specific AWS service like S3
-and add a workflow that requires the `build-job` to succeed and a `filter` on the master branch.
+5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html)
+to deploy your application to S3
+or perform other AWS operations.
+The example below shows
+how CircleCI deploys this documentation site to S3.
 
 ```yaml
 version: 2
