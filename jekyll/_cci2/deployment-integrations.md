@@ -66,10 +66,13 @@ The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy 
 
 ## AWS
 
-1. Install `awscli` in your primary container
+1. As a best security practice,
+create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+
+2. Install `awscli` in your primary container
 by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI
+3. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI
 as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context).
 Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID`
 and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
