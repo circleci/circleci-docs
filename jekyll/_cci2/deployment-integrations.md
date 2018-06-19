@@ -113,7 +113,9 @@ workflows:
               only: master
 ```
 
-Refer to the complete [AWS S3 API documentation](https://docs.aws.amazon.com/cli/latest/reference/s3api/index.html#cli-aws-s3api) for details of commands and options.
+For a complete list of AWS CLI commands and options,
+see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)
+
 ## Azure
 
 To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
