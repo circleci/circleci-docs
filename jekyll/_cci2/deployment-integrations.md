@@ -86,15 +86,15 @@ by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/u
 to deploy your application to S3
 or perform other AWS operations.
 The example below shows
-how CircleCI deploys this documentation site to S3.
-Note the use of [workflows]()
+how CircleCI deploys [this documentation site](https://github.com/circleci/circleci-docs) to S3.
+Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/)
 to deploy only if the build job passes
 and the current branch is `master`.
 
 ```yaml
 version: 2
 jobs:
-  # build job omitted here for brevity
+  # build job omitted for brevity
   deploy:
     docker:
       - image: circleci/python:2.7
