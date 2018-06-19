@@ -66,12 +66,16 @@ The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy 
 
 ## AWS
 
-1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
+1. To deploy to AWS from CircleCI 2.0,
+use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+to ensure that `awscli` is installed in your primary container.
 
 2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
-The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container
+and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
-3. Add a job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build-job` to succeed and a `filter` on the master branch.
+3. Add a job to your `config.yml` file that refers to a specific AWS service like S3
+and add a workflow that requires the `build-job` to succeed and a `filter` on the master branch.
 
 ```yaml
 version: 2
