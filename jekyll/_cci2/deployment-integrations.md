@@ -87,27 +87,34 @@ to deploy your application to S3
 or perform other AWS operations.
 The example below shows
 how CircleCI deploys this documentation site to S3.
+Note the use of [workflows]()
+to deploy only if the build job passes
+and the current branch is `master`.
 
 ```yaml
 version: 2
 jobs:
-  #  build and test jobs go here
-  deploy-job:
+  # build job omitted here for brevity
+  deploy:
     docker:
-      - image: my-image
-    working_directory: /tmp/my-project
+      - image: circleci/python:2.7
+    working_directory: ~/circleci-docs
     steps:
       - run:
-          name: Deploy to S3 if tests pass and branch is Master
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
               only: master
