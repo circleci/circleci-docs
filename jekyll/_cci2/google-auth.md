@@ -7,12 +7,25 @@ description: How to install and authenticate the Google Cloud SDK
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Installing the Google Cloud SDK*
 
 This document explains
-how to install and authenticate the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
+how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
 
 ## Overview
+
+The [Google Cloud SDK](https://cloud.google.com/sdk/) is a powerful set of tools
+that can be used to access Google Cloud Platform services.
+Specifically, deploying your application
+requires authentication using the `gcloud` command-line tool.
+
+## Prerequisites
+
+- A CircleCI 2.0 project.
+- A Google account.
+- A Google Cloud Platform project.
+
+## Steps
 
 Before you can use the `gcloud` command line tool with CircleCI,
 you must authenticate it.
@@ -22,14 +35,6 @@ and add it to CircleCI as an [environment variable]({{ site.baseurl }}/2.0/env-v
 In your configuration,
 you can use this environment variable
 to authenticate the `gcloud` tool.
-
-## Prerequisites
-
-- A CircleCI 2.0 project.
-- A Google account.
-- A Google Cloud Platform project.
-
-## Steps
 
 ### Create a Service Account and Download
 
