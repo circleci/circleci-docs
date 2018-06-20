@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: Authenticating Google Cloud Platform
-description: Authenticating Google Cloud Platform
+title: Installing the Google Cloud SDK
+description: How to install and authenticate the Google Cloud SDK
 ---
 
-*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authenticating Google Cloud Platform*
+*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Installing the Google Cloud SDK*
 
 This document explains
-how to install and authenticate the Google Cloud SDK in your primary container.
+how to install and authenticate the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
