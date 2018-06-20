@@ -66,41 +66,68 @@ The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy 
 
 ## AWS
 
-1. To deploy to AWS from CircleCI 2.0 use the [awscli installation instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to ensure that `awscli` is installed in your primary container. 
+1. As a best security practice,
+create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. Add your AWS credentials to the **Project Settings > AWS Permissions** page in the CircleCI application.
-The **Access Key ID** and **Secret Access Key** that you entered are automatically available in your primary build container and exposed as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI
+as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context).
+Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID`
+and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
-3. Add a job to your `config.yml` file that refers to the specific AWS service, for example S3 and add a workflow  that requires the `build-job` to succeed and a `filter` on the master branch.
+3. In your `.circleci/config.yml` file,
+create a new `deploy` job.
+In the `deploy` job,
+add a step to install `awscli` in your primary container.
+
+4. Install `awscli` in your primary container
+by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
+
+5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html)
+to deploy your application to S3
+or perform other AWS operations.
+The example below shows
+how CircleCI deploys [this documentation site](https://github.com/circleci/circleci-docs) to S3.
+Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/)
+to deploy only if the build job passes
+and the current branch is `master`.
 
 ```yaml
 version: 2
 jobs:
-  #  build and test jobs go here
-  deploy-job:
+  # build job omitted for brevity
+  deploy:
     docker:
-      - image: my-image
-    working_directory: /tmp/my-project
+      - image: circleci/python:2.7
+    working_directory: ~/circleci-docs
     steps:
       - run:
-          name: Deploy to S3 if tests pass and branch is Master
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
+
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
-            - build-job
+            - build
           filters:
             branches:
               only: master
 ```
 
-Refer to the complete [AWS S3 API documentation](https://docs.aws.amazon.com/cli/latest/reference/s3api/index.html#cli-aws-s3api) for details of commands and options.
+For a complete list of AWS CLI commands and options,
+see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)
 
-## AWS - Capistrano
+## Azure
+
+To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
+
+## Capistrano
 
 ```yaml
 version: 2
@@ -130,9 +157,6 @@ workflows:
             branches:
               only: master
 ```
-## Azure
-
-To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Firebase
 
