@@ -6,6 +6,14 @@ description: Authenticating Google Cloud Platform
 
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authenticating Google Cloud Platform*
 
+This document explains
+how to install and authenticate the Google Cloud SDK in your primary container.
+
+* TOC
+{:toc}
+
+## Overview
+
 Before you can use the `gcloud` command line tool with CircleCI,
 you must authenticate it.
 To do this,
