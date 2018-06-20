@@ -95,7 +95,7 @@ See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2
 ## Environment Variables
 
 In CircleCI 2.0, all defined environment variables are treated literally.
-It is possible to interpolat variables within a command
+It is possible to interpolate variables within a command
 by setting it for the current shell.
 
 For more information,
