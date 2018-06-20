@@ -9,10 +9,11 @@ description: Authenticating Google Cloud Platform
 Before you can use the `gcloud` command line tool with CircleCI,
 you must authenticate it.
 To do this,
-you will need to create a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount).
-You can then add this account as an [environment variable]({{ site.baseurl }}/2.0/env-vars/) within CircleCI.
-Your build script will decode this variable
-and authenticate the `gcloud` tool for use in your project.
+you will need to create a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
+and add it to CircleCI as an [environment variable]({{ site.baseurl }}/2.0/env-vars/).
+In your configuration,
+you can use this environment variable
+to authenticate the `gcloud` tool.
 
 ## Prerequisites
 
