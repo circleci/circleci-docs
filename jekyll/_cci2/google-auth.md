@@ -15,17 +15,15 @@ how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your pri
 ## Overview
 
 The Google Cloud SDK is a powerful set of tools
-that can be used to access Google Cloud Platform services
+that can be used to access Google Cloud Platform (GCP) services
 like Google Compute Engine and Google Kubernetes Engine.
-
 On CircleCI, the Google Cloud SDK is required
-to deploy your application to Google Cloud Platform products.
+to deploy your application to GCP products.
 
 ## Prerequisites
 
 - A CircleCI 2.0 project.
-- A Google account.
-- A Google Cloud Platform project.
+- A GCP project.
 
 ## Steps
 
