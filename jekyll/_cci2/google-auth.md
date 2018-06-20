@@ -19,7 +19,7 @@ that can be used to access Google Cloud Platform services
 like Google Compute Engine and Google Kubernetes Engine.
 
 On CircleCI, the Google Cloud SDK is required
-to deploy your application to Google Cloud Platform.
+to deploy your application to Google Cloud Platform products.
 
 ## Prerequisites
 
