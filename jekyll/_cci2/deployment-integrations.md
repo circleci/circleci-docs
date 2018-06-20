@@ -264,7 +264,6 @@ starting up-to-date ones.
 
 ```
 kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
-
 ```
 
 The full `deploy.sh` file is available on
