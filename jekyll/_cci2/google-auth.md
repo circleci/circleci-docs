@@ -27,8 +27,16 @@ requires authentication using the `gcloud` command-line tool (included in the Go
 
 ## Steps
 
-Before you can use the `gcloud` command line tool with CircleCI,
-you must authenticate it.
+### Select a Base Image
+
+If Debian is an acceptable operating system for your primary container,
+consider using Google's base Docker image.
+You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/).
+
+Otherwise, follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
+
+### Authorize Tools With `gcloud`
+
 To do this,
 you will need to create a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
 and add it to CircleCI as an [environment variable]({{ site.baseurl }}/2.0/env-vars/).
