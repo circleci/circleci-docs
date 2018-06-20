@@ -27,7 +27,7 @@ to deploy your application to GCP products.
 
 ## Steps
 
-### Choosing a Base Image
+### Choosing a Base Image for the Deploy Job
 
 If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
