@@ -60,6 +60,7 @@ jobs: # a collection of steps
       - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - composer-v1-
       - run: composer install -n --prefer-dist
       - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
@@ -69,6 +70,7 @@ jobs: # a collection of steps
       - restore_cache: # special step to restore the dependency cache if `package.json` does not change
           keys:
             - node-v1-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - node-v1-
       - run: yarn install
       - save_cache: # special step to save the dependency cache with the `package.json` cache key template
