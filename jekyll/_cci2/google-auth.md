@@ -17,7 +17,7 @@ how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your pri
 The [Google Cloud SDK](https://cloud.google.com/sdk/) is a powerful set of tools
 that can be used to access Google Cloud Platform services.
 Specifically, deploying your application
-requires authentication using the `gcloud` command-line tool.
+requires authentication using the `gcloud` command-line tool (included in the Google Cloud SDK).
 
 ## Prerequisites
 
