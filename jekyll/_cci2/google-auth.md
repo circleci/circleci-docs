@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Installing the Google Cloud SDK
-description: How to install and authenticate the Google Cloud SDK
+description: How to install and authorize the Google Cloud SDK
 ---
 
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Installing the Google Cloud SDK*
@@ -35,18 +35,7 @@ If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
 You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/).
 
-Otherwise, follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
-
-### Authorizing the Cloud SDK
-
-To do this,
-you will need to create a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
-and add it to CircleCI as an [environment variable]({{ site.baseurl }}/2.0/env-vars/).
-In your configuration,
-you can use this environment variable
-to authenticate the `gcloud` tool.
-
-### Create a Service Account and Download
+Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
 Go to Google's [Getting Started with Authentication](https://cloud.google.com/docs/authentication/getting-started) article
 and follow the instructions in the **Creating a service account** section.
@@ -70,18 +59,18 @@ In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 
 6. Click the **Add Variable** button.
 
-### Store Service Account
+### Authorizing the Google Cloud SDK
 
-To authenticate the `gcloud` tool,
+To authorize the `gcloud` tool,
 store the contents of the environment variable in another file.
 To do this,
 add the following command to `.circleci/config.yml`.
 
     echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 
-### Authenticate the `gcloud` Tool
+### Authorize the `gcloud` Tool
 
-Authenticate `gcloud`
+Authorize `gcloud`
 and set the project's active configuration.
 
     sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
@@ -91,4 +80,7 @@ and set the project's active configuration.
 
 To use certain services (like Google Cloud Datastore),
 you will also need to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
-See above for instructions on adding environment variables to CircleCI projects.
+
+In your configuration,
+you can use this environment variable
+to authorize the `gcloud` tool.
