@@ -49,10 +49,59 @@ Remember to download the JSON-formatted key file.
 
 2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/2.0/env-vars/#adding-a-project-level-environment-variable).
 In this example, the variable is named `GCLOUD_SERVICE_KEY`.
+Using this particular name is not required,
+but it will be used throughout the examples in this document.
 
-5. Paste the JSON file from Step 1 into the **Value** field.
+3. For convenience, add two more environment variables to your CircleCI project:
+    - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
+    - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
-6. Click the **Add Variable** button.
+
+### Authenticating to Google Container Registry (GCR)
+
+Depending on the [base Docker image you chose](#choosing-a-base-image-for-the-deploy-job),
+you may have to authenticate to GCR.
+
+If you are using Google's public image (`google/cloud-sdk`),
+no authentication is needed.
+
+```yaml
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+```
+
+If you are using a custom image,
+you must authenticate to GCR.
+Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker)
+to specify credentials.
+
+```yaml
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: gcr.io/project/image-name
+        auth:
+          username: _json_key  # default username when using a JSON key file to authenticate
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created
+```
+
+### Storing Service Account in a Local File
+
+```yaml
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+        name: Store Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+```
 
 ### Authorizing the Google Cloud SDK
 
@@ -62,8 +111,6 @@ To do this,
 add the following command to `.circleci/config.yml`.
 
     echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-
-### Authorize the `gcloud` Tool
 
 Authorize `gcloud`
 and set the project's active configuration.
