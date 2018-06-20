@@ -1,0 +1,3 @@
+files:
+  - source: /jekyll/_cci2/*.md
+    translation: /jekyll/_cci2/%two_letters_code%/%original_file_name%
