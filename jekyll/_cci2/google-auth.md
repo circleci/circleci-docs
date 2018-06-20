@@ -14,10 +14,12 @@ how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your pri
 
 ## Overview
 
-The [Google Cloud SDK](https://cloud.google.com/sdk/) is a powerful set of tools
-that can be used to access Google Cloud Platform services.
-Specifically, deploying your application
-requires authentication using the `gcloud` command-line tool (included in the Google Cloud SDK).
+The Google Cloud SDK is a powerful set of tools
+that can be used to access Google Cloud Platform services
+like Google Compute Engine and Google Kubernetes Engine.
+
+On CircleCI, the Google Cloud SDK is required
+to deploy your application to Google Cloud Platform.
 
 ## Prerequisites
 
@@ -27,7 +29,7 @@ requires authentication using the `gcloud` command-line tool (included in the Go
 
 ## Steps
 
-### Select a Base Image
+### Choosing a Base Image
 
 If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
@@ -35,7 +37,7 @@ You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.
 
 Otherwise, follow the [SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
-### Authorize Tools With `gcloud`
+### Authorizing the Cloud SDK
 
 To do this,
 you will need to create a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
