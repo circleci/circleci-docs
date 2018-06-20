@@ -35,22 +35,19 @@ You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.
 
 Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
-Go to Google's [Getting Started with Authentication](https://cloud.google.com/docs/authentication/getting-started) article
-and follow the instructions in the **Creating a service account** section.
+### Creating and Storing a Service Account
 
-### Add Service Account to CircleCI Environment
+Before you can use any tools in the Google Cloud SDK,
+you must authorize `gcloud`.
+Google offers two types of authorization: user accounts and service accounts.
+Because you are installing the Cloud SDK on CircleCI,
+the service account is the appropriate choice.
 
-1. Copy the JSON file you downloaded to the clipboard.
+1. Create a service account
+by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account).
+Remember to download the JSON-formatted key file.
 
-2. In the CircleCI application,
-go to your project's settings
-by clicking the gear icon in the top right.
-
-3. In the **Build Settings** section,
-click **Environment Variables**,
-then click the **Add Variable** button.
-
-4. Name the variable.
+2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/2.0/env-vars/#adding-a-project-level-environment-variable).
 In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 
 5. Paste the JSON file from Step 1 into the **Value** field.
