@@ -54,9 +54,10 @@ In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 Using this particular name is not required,
 but it will be used throughout the examples in this document.
 
-3. For convenience, add two more environment variables to your CircleCI project:
+3. For convenience, add three more environment variables to your CircleCI project:
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
+    - `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments.
 
 
 ### Authenticating to Google Container Registry
@@ -116,7 +117,7 @@ to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `$
 ### Authorizing the Google Cloud SDK
 
 Use `gcloud` to authorize the Google Cloud SDK
-and set the default project.
+and set several default settings.
 
 ```yaml
 version: 2
@@ -131,6 +132,8 @@ jobs:
       - run: |
           sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          sudo gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
 
 **Note:**
