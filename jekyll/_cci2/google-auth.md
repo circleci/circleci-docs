@@ -91,10 +91,10 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created
 ```
 
-### Storing Service Account in a Local File
+### Copying the Service Account to a Local File
 
 Before you can authorize the SDK,
-you must store the service account variable in a local file.
+you must copy the service account variable to a local file.
 
 ```yaml
 version: 2
