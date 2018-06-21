@@ -108,12 +108,10 @@ jobs:
         command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 ```
 
-### Authorizing the Google Cloud SDK
-
-To authorize the `gcloud` tool,
-store the contents of the environment variable in another file.
-To do this,
-add the following command to `.circleci/config.yml`.
+**Note:**
+To use certain services (like Google Cloud Datastore),
+you will also need
+to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
 
     echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 
