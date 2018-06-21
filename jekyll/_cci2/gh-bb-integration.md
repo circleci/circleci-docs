@@ -107,16 +107,29 @@ CircleCI will use the machine user's SSH key for any git commands run during you
 
 ## Permissions Overview
 
-CircleCI requests permissions as required by the 
-[GitHub permissions model](http://developer.github.com/v3/oauth/#scopes) and [Bitbucket permission model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes) as follows:
+CircleCI requests the following permissions from your VCS provider,
+as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
+and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
 
-*   add deploy keys to a repo
-*   add service hooks to a repo
-*   get a list of a user's repos
-*   get a user's email address
-*   (in some cases) add an SSH key to a user's account
+**Read Permission**
+- Get a user's email address
 
-The first two permissions require write-permission to a repo.
+**Write Permissions**
+- Add deploy keys to a repo
+- Add service hooks to a repo
+- Get a list of a user's repos
+- Add an SSH key to a user's account
+
+**Note:**
+CircleCI only asks for
+permissions that are absolutely necessary.
+However, CircleCI is constrained
+by the specific permissions each VCS provider chooses to supply.
+For example, getting a list of a user's repos from GitHub requires write access
+because GitHub does not provide a read-only permission.
+
+If you feel strongly about reducing the number of permissions CircleCI uses,
+consider contacting your VCS provider to communicate your concerns.
 
 ## Permissions for Team Accounts
 
