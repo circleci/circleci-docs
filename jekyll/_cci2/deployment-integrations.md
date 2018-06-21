@@ -211,7 +211,9 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 
 ## Google Cloud
 
-Before deploying to Google Cloud, ensure that you have authenticated the `gcloud` command line tool. To do that, you can read the [Authenticating Google Cloud Platform]({{ site.baseurl }}/2.0/google-auth/) document.
+Before deploying to Google Cloud Platform,
+you will have to authorize the Google Cloud SDK
+by following the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document.
 
 In addition, ensure that the Google Cloud SDK is installed in your primary container so that `gcloud` and all of the necessary tools for manipulating Kubernetes resources are at your disposal inside your deployment script/commands. See the [Deploying to Google Container Engine]({{ site.baseurl }}/2.0/google-container-engine/) document for details.
 
