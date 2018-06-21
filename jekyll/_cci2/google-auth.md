@@ -2,6 +2,8 @@
 layout: classic-docs
 title: Installing the Google Cloud SDK
 description: How to install and authorize the Google Cloud SDK
+categories: [deploying]
+order: 100
 ---
 
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Installing the Google Cloud SDK*
