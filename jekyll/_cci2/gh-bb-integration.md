@@ -112,13 +112,13 @@ as defined by the [GitHub permissions model](http://developer.github.com/v3/oaut
 and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
 
 **Read Permission**
-- get a user's email address
+- Get a user's email address
 
 **Write Permissions**
-- add deploy keys to a repo
-- add service hooks to a repo
-- get a list of a user's repos
-- add an SSH to a user's account
+- Add deploy keys to a repo
+- Add service hooks to a repo
+- Get a list of a user's repos
+- Add an SSH key to a user's account
 
 **Note:**
 CircleCI only asks for
