@@ -481,9 +481,9 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 
 ## Rerunning a Workflow's Failed Jobs
 
-When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun failed jobs**.
+When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
 
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun failed jobs.png)
+![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## Troubleshooting
 
