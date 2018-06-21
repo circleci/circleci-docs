@@ -113,19 +113,31 @@ To use certain services (like Google Cloud Datastore),
 you will also need
 to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
 
-    echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+### Authorizing the Google Cloud SDK
 
-Authorize `gcloud`
-and set the project's active configuration.
+Use `gcloud` to authorize the Google Cloud SDK
+and set the default project.
 
-    sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-    sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+```yaml
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+        name: Store Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run: |
+          sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+```
 
-### Set Google Application Credentials
+**Note:**
+If you are using a custom base image,
+ensure that you have the most recent components
+by adding the following command before authorizing the SDK.
 
-To use certain services (like Google Cloud Datastore),
-you will also need to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
-
-In your configuration,
-you can use this environment variable
-to authorize the `gcloud` tool.
+```bash
+sudo gcloud --quiet components update
+```
