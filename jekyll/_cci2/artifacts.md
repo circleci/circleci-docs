@@ -26,7 +26,7 @@ keeping it available long after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Another example of an Artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
+Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
