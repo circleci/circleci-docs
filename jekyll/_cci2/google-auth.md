@@ -19,7 +19,7 @@ how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your pri
 The Google Cloud SDK is a powerful set of tools
 that can be used to access Google Cloud Platform (GCP) services
 like Google Compute Engine and Google Kubernetes Engine.
-On CircleCI, the Google Cloud SDK is required
+On CircleCI, the Google Cloud SDK is recommended
 to deploy your application to GCP products.
 
 ## Prerequisites
@@ -59,10 +59,10 @@ but it will be used throughout the examples in this document.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
 
-### Authenticating to Google Container Registry (GCR)
+### Authenticating to Google Container Registry
 
 Depending on the [base Docker image you chose](#choosing-a-base-image-for-the-deploy-job),
-you may have to authenticate to GCR.
+you may have to authenticate to the Google Container Registry.
 
 If you are using Google's public image (`google/cloud-sdk`),
 no authentication is needed.
@@ -85,7 +85,7 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: gcr.io/project/image-name
+      - image: gcr.io/project/<image-name>
         auth:
           username: _json_key  # default username when using a JSON key file to authenticate
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created
