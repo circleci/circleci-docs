@@ -93,6 +93,9 @@ jobs:
 
 ### Storing Service Account in a Local File
 
+Before you can authorize the SDK,
+you must store the service account variable in a local file.
+
 ```yaml
 version: 2
 jobs:
