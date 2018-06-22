@@ -227,6 +227,20 @@ until the job is rerun.
 
 ### Deleting a Context
 
+1. In the CircleCI application,
+select **Settings** in the sidebar.
+
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
+
+3. Click the **X** next to the Context you want to delete.
+A confirmation dialog box appears.
+
+4. Type 'DELETE'
+and click the **Delete** button.
+The Context disappears from the list of Contexts.
+
 ## Setting an Environment Variable in a Project
 
 1. In the CircleCI application,
