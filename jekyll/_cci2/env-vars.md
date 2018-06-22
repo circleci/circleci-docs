@@ -154,6 +154,26 @@ and referenced in the `workflows` section of a project's `.circleci/config.yml` 
 
 ### Creating a Context
 
+1. In the CircleCI application,
+select **Settings** in the sidebar.
+
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
+
+3. Click the **Create Contexts** button
+and enter a name for the new Context.
+Context names must be unique for each Github or Bitbucket organization,
+with the exception of the default Context name (`org-global`).
+To create the Context,
+click the **Create** button.
+The new Context appears in the list of Contexts for your organization.
+
+**Note:**
+By default,
+all new Contexts are public
+and can be referenced by anyone in your organization.
+
 ### Using Contexts
 
 ### Deleting a Context
