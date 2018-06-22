@@ -174,7 +174,9 @@ By default,
 all new Contexts are public
 and can be referenced by anyone in your organization.
 
-### Using Contexts
+### Adding an Environment Variable to a Context
+
+### Using a Context
 
 ### Deleting a Context
 
