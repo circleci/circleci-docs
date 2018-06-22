@@ -145,7 +145,7 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-## Context Environment Variables
+## Contexts
 
 Contexts provide a mechanism
 for securing and sharing environment variables across projects.
