@@ -202,6 +202,23 @@ by deleting and recreating it.
 
 ### Using a Context
 
+Contexts are referenced in the `workflows` section of your project's `~/.circleci/config.yml` file.
+For each job in a workflow you want
+to use the Context,
+use the `context` key with the name of the Context.
+
+```yaml
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - run-tests:
+          context: org-global
+```
+
+In the above example,
+the `run-tests` job uses any environment variables set in the `org-global` Context.
+
 ### Deleting a Context
 
 ## Setting an Environment Variable in a Project
