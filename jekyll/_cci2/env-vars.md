@@ -150,6 +150,12 @@ jobs:
 Contexts provide a mechanism
 for securing and sharing environment variables across projects.
 
+### Creating a Context
+
+### Using Contexts
+
+### Deleting a Context
+
 ## Setting an Environment Variable in a Project
 
 1. In the CircleCI application,
