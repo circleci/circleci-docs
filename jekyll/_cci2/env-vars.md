@@ -150,7 +150,7 @@ jobs:
 Contexts provide a mechanism
 for securing and sharing environment variables across projects.
 Contexts are set in the CircleCI application
-and referenced in the `workflows` section of a project's `~/.circleci/config.yml` file.
+and specified in the `workflows` section of a project's `~/.circleci/config.yml` file.
 
 ### Creating a Context
 
@@ -172,7 +172,7 @@ The new Context appears in the list.
 **Note:**
 By default,
 all new Contexts are public
-and can be referenced by anyone in your organization.
+and can be specified by anyone in your organization.
 
 ### Adding an Environment Variable to a Context
 
@@ -202,7 +202,7 @@ by deleting and recreating it.
 
 ### Using a Context
 
-Contexts are referenced in the `workflows` section of your project's `~/.circleci/config.yml` file.
+Contexts are specified in the `workflows` section of your project's `~/.circleci/config.yml` file.
 For each job in a workflow you want
 to use the Context,
 use the `context` key with the name of the Context.
