@@ -219,6 +219,10 @@ workflows:
 In the above example,
 the `run-tests` job uses any environment variables set in the `org-global` Context.
 
+**Note:**
+After specifying a Context for a job,
+you must rerun the job from the Workflows page of the CircleCI application.
+
 ### Deleting a Context
 
 ## Setting an Environment Variable in a Project
