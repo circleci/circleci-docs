@@ -222,6 +222,7 @@ by clicking the **Add Variable** button.
 For an example,
 see the [Heroku deploy walkthrough]({{ site.baseurl }}/2.0/deployment-integrations/#heroku).
 
+**Note:**
 Once created,
 environment variables are hidden and uneditable in the application.
 Changing an environment variable is only possible
