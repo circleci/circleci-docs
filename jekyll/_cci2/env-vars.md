@@ -145,12 +145,10 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-## Setting an Environment Variable in a Context
+## Context Environment Variables
 
-Creating a context
-allows you to share environment variables across multiple projects.
-To set an environment variables in a context,
-see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
+Contexts provide a mechanism
+for securing and sharing environment variables across projects.
 
 ## Setting an Environment Variable in a Project
 
