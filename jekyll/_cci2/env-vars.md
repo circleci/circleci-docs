@@ -176,6 +176,24 @@ and can be referenced by anyone in your organization.
 
 ### Adding an Environment Variable to a Context
 
+1. In the CircleCI application,
+select **Settings** in the sidebar.
+
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
+
+3. From the list,
+select the name of the Context
+to which you would like
+to add an environment variable.
+
+4. Click the **Add Environment Variable** button.
+
+5. Enter a name and value for the environment variable,
+then click the **Add** button.
+The new environment variable appears in the list.
+
 ### Using a Context
 
 ### Deleting a Context
