@@ -222,6 +222,8 @@ the `run-tests` job uses any environment variables set in the `org-global` Conte
 **Note:**
 After specifying a Context for a job,
 you must rerun the job from the Workflows page of the CircleCI application.
+The job cannot access the environment variables in the Context
+until the job is rerun.
 
 ### Deleting a Context
 
