@@ -149,6 +149,8 @@ jobs:
 
 Contexts provide a mechanism
 for securing and sharing environment variables across projects.
+Contexts are set in the CircleCI application
+and referenced in the `workflows` section of a project's `.circleci/config.yml` file.
 
 ### Creating a Context
 
