@@ -194,6 +194,12 @@ to add an environment variable.
 then click the **Add** button.
 The new environment variable appears in the list.
 
+**Note:**
+Once created,
+environment variables are hidden and uneditable in the application.
+Changing an environment variable is only possible
+by deleting and recreating it.
+
 ### Using a Context
 
 ### Deleting a Context
