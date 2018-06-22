@@ -167,7 +167,7 @@ Context names must be unique for each Github or Bitbucket organization,
 with the exception of the default Context name (`org-global`).
 To create the Context,
 click the **Create** button.
-The new Context appears in the list of Contexts for your organization.
+The new Context appears in the list.
 
 **Note:**
 By default,
