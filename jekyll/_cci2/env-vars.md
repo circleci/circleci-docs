@@ -147,6 +147,11 @@ jobs:
 
 ## Contexts
 
+Creating a context
+allows you to share environment variables across multiple projects.
+To set an environment variables in a context,
+see the [Contexts]({{ site.baseurl }}/2.0/contexts/) document.
+
 ## Setting an Environment Variable in a Project
 
 1. In the CircleCI application,
