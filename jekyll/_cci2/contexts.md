@@ -42,7 +42,13 @@ workflows:
           context: org-global
 ```
 
-To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application. 
+To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
+
+### Uniqueness across Accounts (Server Only)
+
+Note: This section is for Server customers only.
+
+For any GHE that has multiple organizations, the context names within all those organization have to be unique going forward. Example: Your GHE is called Kiwi and you have Spoon and Fork as two organizations. You cannot add context called `deploy` to both those organizations. `deploy` context name is unique for the whole Kiwi account.
 
 ## Deleting a Context
 
