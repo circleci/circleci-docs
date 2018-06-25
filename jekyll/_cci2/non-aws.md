@@ -122,6 +122,9 @@ To install the Nomad Clients, perform the following steps:
 
 3. Run './provision-nomad-client-ubuntu.sh' with the NOMAD_SERVER_ADDRESS environment variable set to the routable IP of the Services machine to start the script. 
 
+### Storage
+
+When using the "None" storage option, artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. We strongly recommend mounting an external volume and creating a symbolic link between the two if you opt to use this storage option.
 
 ### Troubleshooting
 
