@@ -84,7 +84,7 @@ to catch bugs before manually reviewing changes.
 By default, CircleCI does not build PRs from forked repositories.
 To change this setting,
 go to the **Advanced Settings** of your project
-and set the **Build forked pull requests** option to _Off_.
+and set the **Build forked pull requests** option to _On_.
 
 ### Pass Secrets to Builds From Forked Pull Requests
 
