@@ -572,7 +572,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/env-vars/#contexts)—not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts/)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. 
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
@@ -948,7 +948,7 @@ requires | N | List | A list of jobs that must succeed for the job to start
 
 
 ###### **`context`**
-Jobs may be configured to use global environment variables set for an organization. See the [Contexts]({{ site.baseurl }}/2.0/env-vars/#contexts) section for more information.
+Jobs may be configured to use global environment variables set for an organization. See the [Contexts]({{ site.baseurl }}/2.0/contexts/) section for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------

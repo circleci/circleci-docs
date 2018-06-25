@@ -55,7 +55,7 @@ you trigger with the API.
 
 Jobs triggered with the API
 do **not** have access to environment variables
-created for [a CircleCI Context]({{ site.baseurl }}/2.0/env-vars/#contexts).
+created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
 Instead, define these variables at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
 ## Conditionally Running Jobs With the API

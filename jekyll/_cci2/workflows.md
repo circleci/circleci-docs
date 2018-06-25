@@ -245,7 +245,7 @@ The following sections provide example for using Contexts and filters to manage 
 
 ### Using Job Contexts to Share Environment Variables
 
-The following example shows a workflow with four sequential jobs that use a Context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) section for detailed instructions.
+The following example shows a workflow with four sequential jobs that use a Context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions.
 
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
