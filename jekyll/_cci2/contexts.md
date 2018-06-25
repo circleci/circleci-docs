@@ -1,8 +1,13 @@
 ---
 layout: classic-docs
-title: "CircleCI 2.0"
-redirect: /docs/2.0/env-vars/#contexts
+title: "Using Contexts"
+short-title: "Using Contexts"
+description: "Secured, cross-project resources"
+categories: [configuring-jobs]
+order: 41
 ---
+
+_[Basics]({{ site.baseurl }}/2.0/basics/) > Using Contexts_
 
 This document describes
 how to create and use contexts in CircleCI in the following sections:
