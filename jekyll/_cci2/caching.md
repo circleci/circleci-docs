@@ -153,7 +153,7 @@ In this example,
 if a dependency tree is partially restored by either the second or third cache keys,
 dependency managers may not properly install on top of the partial tree.
 Instead of a cascading fallback,
-a more stable option is one specific, versioned cache key.
+a more stable option is one specific, version-prefixed cache key.
 
 {% raw %}
 
