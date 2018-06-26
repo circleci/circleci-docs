@@ -480,8 +480,10 @@ workflows:
 For a live example of using workspaces
 to pass data between build and deploy jobs,
 see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) of this documentation.
-
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+For additional conceptual information on using workspaces,
+caching,
+and artifacts,
+refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/).
 
 ## Rerunning a Workflow's Failed Jobs
 
