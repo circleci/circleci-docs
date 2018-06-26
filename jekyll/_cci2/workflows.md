@@ -479,7 +479,9 @@ workflows:
 
 For a live example of using workspaces
 to pass data between build and deploy jobs,
-see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) of this documentation.
+see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)
+that is configured
+to build the CircleCI documentation.
 For additional conceptual information on using workspaces,
 caching,
 and artifacts,
