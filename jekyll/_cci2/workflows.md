@@ -477,7 +477,15 @@ workflows:
 
 **Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
 
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+For a live example of using workspaces
+to pass data between build and deploy jobs,
+see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)
+that is configured
+to build the CircleCI documentation.
+For additional conceptual information on using workspaces,
+caching,
+and artifacts,
+refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
 ## Rerunning a Workflow's Failed Jobs
 
