@@ -23,6 +23,10 @@ To use environment variables set on the Contexts page, the person running the wo
 
 Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
 
+### Context Naming for CircleCI Installed on Your Servers
+
+For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error. 
+
 ## Creating and Using a Context
 
 1. Navigate to the Settings > Contexts page in the CircleCI application. 
@@ -43,12 +47,6 @@ workflows:
 ```
 
 To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
-
-### Uniqueness across Accounts (Server Only)
-
-Note: This section is for Server customers only.
-
-For any GHE that has multiple organizations, the context names within all those organization have to be unique going forward. Example: Your GHE is called Kiwi and you have Spoon and Knife as two organizations. You cannot add context called `deploy` to both those organizations. `deploy` context name is unique for the whole Kiwi account.
 
 ## Deleting a Context
 
