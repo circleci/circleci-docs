@@ -67,7 +67,11 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
 #### `environment`
-A map of environment variable names and variables (**Note**: These will override any environment variables you set in the CircleCI web interface).
+A map or list of environment variable names and values.
+
+**Note**:
+These will override any environment variables
+you set in the CircleCI web interface.
 
 #### `parallelism`
 
