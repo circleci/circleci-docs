@@ -170,7 +170,6 @@ Since caches are immutable,
 this strategy allows you
 to regenerate all of your caches
 by incrementing the version.
-
 This would be useful in the following scenarios:
 
 - When you change the version of a dependency manager like `npm`.
