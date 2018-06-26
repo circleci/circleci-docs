@@ -133,6 +133,39 @@ When a dependency tool runs,
 it would discover outdated dependencies and update them.
 This is referred to as a **partial cache restore**.
 
+### Partial Dependency Caching Strategies
+
+Many dependency managers do not play well with partial caches.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - gem-cache-{{ arch }}-{{ .Branch }}
+        - gem-cache
+```
+{% endraw %}
+
+In this example,
+if a dependency tree is partially restored by either the second or third cache keys,
+dependency managers may not properly install on top of the partial tree.
+Instead of a cascading fallback,
+a more stable option is one specific, versioned cache key.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+```
+
+{% endraw %}
+
 ### Clearing Cache 
 
 If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.   
