@@ -171,11 +171,28 @@ Since caches are immutable,
 this strategy allows you
 to regenerate all of your caches
 by incrementing the version.
-This would be useful in the following scenarios:
+This is useful in the following scenarios:
 
 - When you change the version of a dependency manager like `npm`.
 - When you change the version of a language like Ruby.
 - When you add or remove dependencies from your project.
+
+The stability of partial dependency caching is dependent on your dependency manager.
+Below is a list of common dependency managers,
+recommended partial caching strategies,
+and associated justifications.
+
+#### `leiningen` (Clojure)
+
+#### Gradle and Maven (Java)
+
+#### `npm` (Node)
+
+#### `pip` (Python)
+
+#### `pipenv` (Python)
+
+#### Bundler (Ruby)
 
 ## Basic Example of Dependency Caching
 
