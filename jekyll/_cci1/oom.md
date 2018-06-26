@@ -83,5 +83,4 @@ Add `export OCAMLRUNPARAM="o=20"` before running your program to limit your memo
 
 Unlike Java, you don't specify a maximum heap size but instead a relative overhead: `o=80` (the default) means that the heap is allowed to grow to the amount of live data in your program + 80%. 
 
-If your tests actually need more than 4GB of RAM, please
-[contact us](https://support.circleci.com/hc/en-us).
+If your tests actually need more than 4GB of RAM, please migrate your project to CircleCI 2.0, see [Migration]({{ site.baseurl }}/2.0/migration/) for instructions.
