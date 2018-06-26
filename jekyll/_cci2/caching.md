@@ -258,7 +258,7 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 
 {% endraw %}
 
-## Caching Strategy Tradeoffs 
+## Caching Strategy Tradeoffs
 
 In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance.  One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
 
