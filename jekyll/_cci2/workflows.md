@@ -483,7 +483,7 @@ see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.ci
 For additional conceptual information on using workspaces,
 caching,
 and artifacts,
-refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/).
+refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
 ## Rerunning a Workflow's Failed Jobs
 
