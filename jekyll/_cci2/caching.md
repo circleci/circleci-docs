@@ -260,24 +260,67 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 
 ## Caching Strategy Tradeoffs
 
-In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance.  One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
+In cases where the build tools for your language include elegant handling of dependencies,
+partial cache restores may be preferable to zero cache restores for performance reasons.
+If you get a zero cache restore,
+you have to reinstall all of your dependencies, which can result in reduced performance.
+One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
 
-However, for other types of languages, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. If the dependencies change infrequently, consider listing the zero cache restore key first. Then, track the costs over time. If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time, only then consider adding a partial cache restore key.
+However,
+for other types of languages,
+partial caches carry the risk of creating code dependencies
+that are not aligned with your declared dependencies
+and do not break until you run a build without a cache.
+If the dependencies change infrequently,
+consider listing the zero cache restore key first.
+Then,
+track the costs over time.
+If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time,
+only then consider adding a partial cache restore key.
 
-Listing multiple keys for restoring a cache increases the odds of a partial cache hit. However, broadening your `restore_cache` scope to a wider history increases the risk of confusing failures. For example, if you have dependencies for Node v6 on an upgrade branch, but your other branches are still on Node v5, a `restore_cache` step that searches other branches might restore incompatible dependencies.
+Listing multiple keys for restoring a cache increases the odds of a partial cache hit.
+However,
+broadening your `restore_cache` scope to a wider history increases the risk of confusing failures.
+For example,
+if you have dependencies for Node v6 on an upgrade branch,
+but your other branches are still on Node v5,
+a `restore_cache` step that searches other branches
+might restore incompatible dependencies.
 
 ### Using a Lock File
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) checksums may be a useful cache key.
 
-An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
+An alternative is to do `ls -laR your-deps-dir > deps_checksum`
+and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}.
+For example,
+in Python,
+to get a more specific cache than the checksum of your `requirements.txt` file
+you could install the dependencies within a virtualenv in the project root `venv`
+and then do `ls -laR venv > python_deps_checksum`.
 
 ### Using Multiple Caches For Different Languages
 
-It is also possible to lower the cost of a cache miss by splitting your job across multiple caches. By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler) if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.
+It is also possible
+to lower the cost of a cache miss
+by splitting your job across multiple caches.
+By specifying multiple `restore_cache` steps with different keys,
+each cache is reduced in size
+thereby reducing the performance impact of a cache miss.
+Consider splitting caches by language type (npm, pip, or bundler)
+if you know how each dependency manager stores its files,
+how it upgrades,
+and how it checks dependencies.
 
 ### Caching Expensive Steps
 
-Certain languages and frameworks have more expensive steps that can and should be cached. Scala and Elixir are two examples where caching the compilation steps will be especially effective. Rails developers, too, would notice a performance boost from caching frontend assets.
+Certain languages and frameworks have more expensive steps
+that can and should be cached.
+Scala and Elixir are two examples
+where caching the compilation steps
+will be especially effective.
+Rails developers, too, would notice a performance boost
+from caching frontend assets.
 
-Do not cache everything, but _do_ consider caching for costly steps like compilation.
+Do not cache everything,
+but _do_ consider caching for costly steps like compilation.
