@@ -57,7 +57,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:3.6.0
+      - image: python:3.6.0-jessie
 
     working_directory: /tmp
     steps:
@@ -113,7 +113,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: gcc:latest
+      - image: gcc:8.1.0
     working_directory: ~/work
     steps:
       - checkout
