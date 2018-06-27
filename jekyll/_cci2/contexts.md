@@ -7,33 +7,80 @@ categories: [configuring-jobs]
 order: 41
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Contexts*
+_[Basics]({{ site.baseurl }}/2.0/basics/) > Using Contexts_
 
-This document describes creating and using contexts in CircleCI in the following sections:
+This document describes
+how to create and use contexts in CircleCI in the following sections:
 
 * TOC
 {:toc}
 
-Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
-
 ## Overview
-Contexts are created on the Settings page of the CircleCI application, in the Organization section. After a context is set in the application it may be configured in the workflows section of the `config.yml` file for a project.
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
+Contexts provide a mechanism
+for securing and sharing environment variables across projects.
+Contexts are set in the CircleCI application
+and specified in the `workflows` section of a project's `~/.circleci/config.yml` file.
 
-Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
+For more information on other types of environment variables,
+see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/) document.
 
-## Creating and Using a Context
+## Creating a Context
 
-1. Navigate to the Settings > Contexts page in the CircleCI application. 
+1. In the CircleCI application,
+select **Settings** in the sidebar.
 
-2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your org can access this context at runtime.
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
 
-3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
+3. Click the **Create Contexts** button
+and enter a name for the new Context.
+Context names must be unique for each Github or Bitbucket organization,
+with the exception of the default Context name (`org-global`).
+To create the Context,
+click the **Create** button.
+The new Context appears in the list.
 
-4. Add the `context: <context name>` key to the `workflows` section of your `config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
+**Note:**
+By default,
+all new Contexts are public
+and can be specified by anyone in your organization.
 
-```
+## Adding an Environment Variable to a Context
+
+1. In the CircleCI application,
+select **Settings** in the sidebar.
+
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
+
+3. From the list,
+select the name of the Context
+to which you would like
+to add an environment variable.
+
+4. Click the **Add Environment Variable** button.
+
+5. Enter a name and value for the environment variable,
+then click the **Add** button.
+The new environment variable appears in the list.
+
+**Note:**
+Once created,
+environment variables are hidden and uneditable in the application.
+Changing an environment variable is only possible
+by deleting and recreating it.
+
+## Using a Context
+
+Contexts are specified in the `workflows` section of your project's `~/.circleci/config.yml` file.
+For each job in a workflow you want
+to use the Context,
+use the `context` key with the name of the Context.
+
+```yaml
 workflows:
   version: 2
   my-workflow:
@@ -42,31 +89,29 @@ workflows:
           context: org-global
 ```
 
-To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application. 
+In the above example,
+the `run-tests` job uses any environment variables set in the `org-global` Context.
+
+**Note:**
+After specifying a Context for a job,
+you must rerun the job from the Workflows page of the CircleCI application.
+The job cannot access the environment variables in the Context
+until the job is rerun.
 
 ## Deleting a Context
 
-1. Navigate to the Settings > Contexts page in the CircleCI application.
+1. In the CircleCI application,
+select **Settings** in the sidebar.
 
-2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
+2. In the **Organization** section,
+select **Contexts**.
+All Contexts for your organization are listed here.
 
-3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
+3. Click the **X** next to the Context you want to delete.
+A confirmation dialog box appears.
 
-## Environment Variable Usage 
+4. Type 'DELETE'
+and click the **Delete** button.
+The Context disappears from the list of Contexts.
 
-Environment variables are used according to a specific precedence order, as follows:
-
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
-5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
-
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
-
-## Send Feedback on Contexts
-
-We're interested in your feedback on how Contexts can evolve. Read more about our proposed roadmap and offer suggestions in the [contexts discussion](https://discuss.circleci.com/t/contexts-feedback/13908).
-
+## See More

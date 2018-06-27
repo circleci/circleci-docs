@@ -26,7 +26,7 @@ Learn to use the basic features of CircleCI.
 Document | Description
 ----|----------
 [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) | How to use environment variables in the CircleCI app and in the `config.yml` file.
-[Using Contexts]({{ site.baseurl }}/2.0/contexts/) | How to use Contexts to set global environment variables.
+[Using Contexts]({{ site.baseurl }}/2.0/contexts/) | How to use Contexts to set environment variables across projects.
 [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) | Best practices for using shell scripts in CircleCI configuration.
 [Adding an SSH Key]({{ site.baseurl }}/2.0/add-ssh-key/) | How to add an SSH key to CircleCI.
 [Debugging with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/) | How to use SSH to debug build problems.

@@ -145,12 +145,12 @@ jobs:
       - image: circleci/postgres:9.6
 ```
 
-## Setting an Environment Variable in a Context
+## Contexts
 
 Creating a context
 allows you to share environment variables across multiple projects.
 To set an environment variables in a context,
-see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
+see the [Contexts]({{ site.baseurl }}/2.0/contexts/) document.
 
 ## Setting an Environment Variable in a Project
 
@@ -170,6 +170,7 @@ by clicking the **Add Variable** button.
 For an example,
 see the [Heroku deploy walkthrough]({{ site.baseurl }}/2.0/deployment-integrations/#heroku).
 
+**Note:**
 Once created,
 environment variables are hidden and uneditable in the application.
 Changing an environment variable is only possible
