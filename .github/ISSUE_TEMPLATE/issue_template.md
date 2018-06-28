@@ -7,7 +7,7 @@ about: Create an issue to help us improve
 A link to the document that confused or misled you. If something is **undocumented**, select the document where you **expected** to find the information.
 
 # Category
-Choose the **kind** of issue you are having. We use the following categories to label Doc issues and pull requests.
+Choose the **kind** of issue you are having. We use the following categories to label issues and pull requests.
 
 - Undocumented = missing documentation
 - Incorrect = incorrect instructions/information
