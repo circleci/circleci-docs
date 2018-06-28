@@ -133,6 +133,117 @@ When a dependency tool runs,
 it would discover outdated dependencies and update them.
 This is referred to as a **partial cache restore**.
 
+## Basic Example of Dependency Caching
+
+The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
+
+To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
+
+```yaml
+    steps:
+      - save_cache:
+          key: my-cache
+          paths:
+            - my-file.txt
+            - my-project/my-dependencies-directory
+```
+
+The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
+
+**Note:**
+Unlike the special step [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace),
+neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+
+## Using Keys and Templates
+
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, it will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, have a `key` that generates a new cache only if something actually changes.
+
+The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
+
+Following are some examples of caching strategies for different goals:
+
+ * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate separate cache keys.
+ * {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
+
+During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
+
+Template | Description
+----|----------
+{% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
+{% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
+{% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
+{% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or Unix epoch.
+{% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux amd64`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
+{: class="table table-striped"}
+
+**Note:** When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. But, there are tradeoffs as described in the following section.
+
+### Full Example of Saving and Restoring Cache
+
+The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
+
+{% raw %}
+
+```yaml
+    docker:
+      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+      - image: circleci/mysql:5.6
+
+    steps:
+      - checkout
+      - run: cp config/{database_circleci,database}.yml
+
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
+
+      - run: bundle install --path vendor/bundle
+
+      - save_cache:
+          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run: bundle exec rubocop
+      - run: bundle exec rake db:create db:schema:load --trace
+      - run: bundle exec rake factory_girl:lint
+
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+
+      - restore_cache:
+          keys:
+            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - asset-cache-v1-{{ arch }}-{{ .Branch }}
+            - asset-cache-v1
+
+      - run: bundle exec rake assets:precompile
+
+      - save_cache:
+          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - public/assets
+            - tmp/cache/assets/sprockets
+
+      - run: bundle exec rspec
+      - run: bundle exec cucumber
+```
+
+{% endraw %}
+
 ### Partial Dependency Caching Strategies
 
 Some dependency managers do not properly handle
@@ -270,117 +381,6 @@ Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a l
 Yes.
 
 Yarn has always used a lock file for exactly these reasons.
-
-## Basic Example of Dependency Caching
-
-The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
-
-To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
-
-```yaml
-    steps:
-      - save_cache:
-          key: my-cache
-          paths:
-            - my-file.txt
-            - my-project/my-dependencies-directory
-```
-
-The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
-
-**Note:**
-Unlike the special step [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace),
-neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
-
-## Using Keys and Templates
-
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, it will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, have a `key` that generates a new cache only if something actually changes.
-
-The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
-
-Following are some examples of caching strategies for different goals:
-
- * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate separate cache keys.
- * {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
- 
-During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
-
-Template | Description
-----|----------
-{% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
-{% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
-{% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
-{% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or Unix epoch.
-{% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux amd64`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
-{: class="table table-striped"}
-
-**Note:** When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. But, there are tradeoffs as described in the following section.
-
-### Full Example of Saving and Restoring Cache
-
-The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
-
-{% raw %}
-
-```yaml
-    docker:
-      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-      - image: circleci/mysql:5.6
-
-    steps:
-      - checkout
-      - run: cp config/{database_circleci,database}.yml
-
-      # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache 
-      # Multiple caches are used to increase the chance of a cache hit
-      
-      - restore_cache:
-          keys:
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}
-            - gem-cache-v1
-            
-      - run: bundle install --path vendor/bundle
-      
-      - save_cache:
-          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      - run: bundle exec rubocop
-      - run: bundle exec rake db:create db:schema:load --trace
-      - run: bundle exec rake factory_girl:lint
-
-      # Precompile assets
-      # Load assets from cache if possible, precompile assets then save cache
-      # Multiple caches are used to increase the chance of a cache hit
-      
-      - restore_cache:
-          keys:
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}
-            - asset-cache-v1
-            
-      - run: bundle exec rake assets:precompile
-      
-      - save_cache:
-          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-            
-      - run: bundle exec rspec
-      - run: bundle exec cucumber
-```
-
-{% endraw %}
 
 ## Caching Strategy Tradeoffs
 
