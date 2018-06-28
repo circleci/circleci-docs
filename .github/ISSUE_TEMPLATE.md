@@ -1,6 +1,6 @@
 ---
-name: Issue template
-about: Required info for submitting a docs issue
+name: Issue Report
+about: Create an issue to help us improve
 
 ---
 
