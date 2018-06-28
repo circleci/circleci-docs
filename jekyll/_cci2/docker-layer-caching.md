@@ -11,7 +11,25 @@ order: 70
 
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
-This document describes how to enable Docker Layer Caching (DLC), which is useful when you are _building_ Docker images during your job or Workflow. Docker Layer Caching (DLC) can reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) or [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/#overview).
+This document describes how to enable Docker Layer Caching (DLC), which is useful when you are _building_ Docker images during your job or Workflow. 
+
+## Overview
+
+Docker Layer Caching (DLC) is a really great feature to use if you are building Docker images on CircleCI with a Dockerfile. This feature reduces the pain of rebuilding images every single time, especially if nothing in your Dockerfile has changed. You can use DLC to cache the layers of images you have already built in a previous run and reuse those layers instead of building the image every single time. 
+
+If, for example, you have a job that runs all of the steps in your Dockerfile with the `docker_layer_caching: true` set in your `config.yml` file, on subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run may take 2:45 seconds to build your Docker image, but if nothing changes in your Dockerfile before the second run, those steps will happen instantly, in zero seconds.
+
+What happens is that none of the layers in your image changed, so CircleCI pulled the layers from cache from the image that you built previously and re-used those instead of rebuilding the entire image. 
+
+If, for example, you change part of you dockerfile (which changes part of the image) and run another build that runs the exact same job, with the modified DOckerfile, it runs in 1:32 seconds, still whole minute faster than rebuilding the entire image. 
+
+What happens is that in the first few steps in the docker file, the cache is used, then in a later step, it had to rerun the entire step because you removed a step in the Dockerfile, so if you change something in the Dockerfile, all of those later steps are invalidated and the layers have to be rebuilt.  But, since some of the steps remained the same (the steps before the one you removed), those can be reused. So, it is still faster than rebuilding the entire image by a whole minute.
+
+Enabling docker layer caching, makes it so that images you build are cached and when you try to build those images, CircleCI finds the layers that already exist and reuses them to make your build even faster.
+
+Docker Layer Caching (DLC) can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) or [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images/#overview).
+
+## Limitations
 
 DLC does **not** speed up downloading of the Docker images used to _run_ your jobs. That is, Docker images that are used to run jobs appear in the Spin up Environment step for a job and are **not** cached by DLC. DLC does **not** affect Docker images serving as build containers, see [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/#using-docker) for details. CircleCI automatically caches build container images, but with the scale and complexity of cloud infrastructure, there is no guarantee that a particular job will receive caches for images serving as build containers.
 
