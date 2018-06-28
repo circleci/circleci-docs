@@ -23,7 +23,7 @@ The details we need to fix the issue will depend on the kind of issue. Based on 
 
 ## Undocumented
 - What are you looking for?
-- Where have you already looked already?
+- Where have you already looked?
 
 ## Incorrect
 - What is wrong?
