@@ -74,6 +74,8 @@ By default, the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-dock
     docker_layer_caching: true # default - false  
 ``` 
 
+### Docker Layer Caching in Machine Executor
+
 Docker Layer Caching is also available for [`machine` executor](https://circleci.com/docs/2.0/executor-types/#using-machine), and it works in exactly the same way as described above. Enable Docker Layer Caching with the `machine` executor by using the example below.
 
 ``` YAML
