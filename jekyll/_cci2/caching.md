@@ -183,17 +183,17 @@ Below is a list of common dependency managers,
 recommended partial caching strategies,
 and associated justifications.
 
-#### `leiningen` (Clojure)
+#### Bundler (Ruby)
 
 #### Gradle and Maven (Java)
 
-#### `npm` (Node)
+#### Leiningen (Clojure)
 
-#### `pip` (Python)
+#### npm (Node)
 
-#### `pipenv` (Python)
+#### pip (Python)
 
-#### Bundler (Ruby)
+#### Pipenv (Python)
 
 ## Basic Example of Dependency Caching
 
