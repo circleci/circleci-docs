@@ -107,8 +107,8 @@ Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's O
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
 
 ```
-golang:1.7.1
-redis:3.0.7
+golang:1.7.1-jessie
+redis:3.0.7-jessie
 ```
 
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
@@ -132,7 +132,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: your/primary-image:version
+      - image: your/primary-image:version-tag
       - image: mysql:5.7
         environment:
            TZ: "/usr/share/zoneinfo/America/Los_Angeles"
