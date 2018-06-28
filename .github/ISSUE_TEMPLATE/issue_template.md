@@ -1,7 +1,6 @@
 ---
 name: Issue Report
 about: Create an issue to help us improve
-
 ---
 
 # Document
