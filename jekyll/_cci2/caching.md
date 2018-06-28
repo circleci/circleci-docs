@@ -257,7 +257,19 @@ you can safely use partial cache restoration.
 
 #### pip (Python)
 
-#### Pipenv (Python)
+**Safe to Use Partial Cache Restoration?**
+Yes (with Pipenv).
+
+Pip can use files
+that are not explicitly specified in `requirements.txt`.
+Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
+
+#### Yarn (Node)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Yarn has always used a lock file for exactly these reasons.
 
 ## Basic Example of Dependency Caching
 
