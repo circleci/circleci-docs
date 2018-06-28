@@ -34,7 +34,7 @@ jobs:
 
 The first image listed defines the execution environment for your job. The primary container, where your job's commands are run, is created from this image. The steps check out the code in the project directory and run the `echo` command.
 
-3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0, and a 2.0 icon appears on the **Job page **.
+3. Commit and push the changes. If you were already using CircleCI 1.0, a build is triggered on 2.0, and a 2.0 icon appears on the **Job page**.
     ![First Green Build Screenshot]({{ site.baseurl }}/assets/img/docs/green_build.png)
 
 4. If this is your first project on CircleCI, go to the Projects page, click the Add Projects button and then click the Build Project button next to your project.
