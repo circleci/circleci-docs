@@ -185,8 +185,8 @@ and associated justifications.
 
 #### Bundler (Ruby)
 
-**Use Partial Cache Restoration?**
-With caution
+**Safe to Use Partial Cache Restoration?**
+Yes (with caution).
 
 Since Bundler uses system gems
 that are not explicitly specified,
@@ -198,6 +198,8 @@ add a step
 that cleans Bundler
 before restoring dependencies from cache.
 
+{% raw %}
+
 ```yaml
 steps:
   - run: bundle install & bundle clean
@@ -206,9 +208,38 @@ steps:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ```
 
-#### Gradle and Maven (Java)
+{% endraw %}
 
-#### Leiningen (Clojure)
+#### Gradle, Maven (Java) and Leiningen (Clojure)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Gradle and Maven repositories are both intended
+to be centralized, shared, and massive.
+Partial caches can be restored
+without impacting which libraries
+are actually added to classpaths of generated artifacts.
+
+Since Leiningen uses Maven under the hood,
+it has equivalent behavior.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+        - maven-repo-v1-{{ .Branch }}-
+        - maven-repo-v1-
+  - save_cache:
+      paths:
+        - ~/.m2
+      key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+```
+
+{% endraw %}
 
 #### npm (Node)
 
