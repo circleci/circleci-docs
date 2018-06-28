@@ -185,6 +185,27 @@ and associated justifications.
 
 #### Bundler (Ruby)
 
+**Use Partial Cache Restoration?**
+With caution
+
+Since Bundler uses system gems
+that are not explicitly specified,
+it is non-deterministic,
+and partial cache restoration can be unreliable.
+
+To prevent this behavior,
+add a step
+that cleans Bundler
+before restoring dependencies from cache.
+
+```yaml
+steps:
+  - run: bundle install & bundle clean
+  - restore_cache:
+      keys:
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+```
+
 #### Gradle and Maven (Java)
 
 #### Leiningen (Clojure)
