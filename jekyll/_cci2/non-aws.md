@@ -106,7 +106,7 @@ To install the Services machine, perform the following steps:
 
 5. Enter your license.
 
-6. Complete the Storage section.
+6. Complete the Storage section. If you are not using a cloud service , then you will pick `None`. More information below.
 
 7. Set the VM Provider to None.
 
@@ -124,7 +124,7 @@ To install the Nomad Clients, perform the following steps:
 
 ### Storage
 
-When using the "None" storage option, artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. We strongly recommend mounting an external volume and creating a symbolic link between the two if you opt to use this storage option.
+The `None` storage driver saves all of your CircleCI data locally.This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. We strongly recommend mounting an external volume and creating a symbolic link between the two if you opt to use this storage option. It is important to note that we can only transfer data as fast as the external volume will let us so SSD's are highly recommended.
 
 ### Troubleshooting
 
