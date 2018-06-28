@@ -20,7 +20,7 @@ This document describes how to enable Docker Layer Caching (DLC). The DLC featur
 
 Docker Layer Caching (DLC) is a great feature to use if you are building Docker images on CircleCI with a Dockerfile. This feature reduces the pain of rebuilding images every single time, especially if nothing in your Dockerfile has changed. You can use DLC to cache the layers of images you have already built in a previous run and reuse those layers instead of building the image every single time. 
 
-In the example below the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run may take 2:45 seconds to build the Docker image, but if nothing changes in the Dockerfile before the second run, those steps will happen instantly, in zero seconds.
+In the example below, the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run may take 2:45 seconds to build the Docker image, but if nothing changes in the Dockerfile before the second run, those steps will happen instantly, in zero seconds.
 
 ```yaml
 version: 2
@@ -41,19 +41,21 @@ If part of the Dockerfile changes (which changes part of the image) a subsequent
 
 So, if you change something in the Dockerfile, all of those later steps are invalidated and the layers have to be rebuilt.  When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
 
-Every layer you built in a previous job will be accessible in the remote environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
-
-If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical cache.
-
 ## Limitations
 
-DLC does **not** speed up downloading of the Docker images used to _run_ your jobs. That is, Docker images that are used to run jobs appear in the Spin up Environment step for a job and are **not** cached by DLC. DLC does **not** affect Docker images serving as build containers, see [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/#using-docker) for details. CircleCI automatically caches build container images, but with the scale and complexity of cloud infrastructure, there is no guarantee that a particular job will receive caches for images serving as build containers.
+DLC does **not** speed up downloading of the Docker images which serve as build containers that are used to _run_ your jobs. You can find Docker images that are used to run jobs in the Spin up Environment section of the Jobs page in the CircleCI app. The images in the Spin up Environment section for a job are **not** cached by DLC. 
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your circleci.com account for an additional fee. DLC is available by default when licensed for installation in your datacenter or private cloud.
 
+### Remote Docker Environment
+
+Every layer you build in a previous job will be accessible in the remote environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
+
+If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical cache.
+
 **Note:** Previously the `docker_layer_caching` was called `reusable`. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive` option is deprecated in favor of all VMs being treated as exclusive. This indicates that jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access when using `docker_layer_caching`.
 
-## Video Overview of Docker Layer Caching
+## Video: Overview of Docker Layer Caching
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
