@@ -135,7 +135,8 @@ This is referred to as a **partial cache restore**.
 
 ### Partial Dependency Caching Strategies
 
-Many dependency managers do not play well with partial caches.
+Some dependency managers do not properly handle
+installing on top of partially restored dependency trees.
 
 {% raw %}
 
@@ -149,9 +150,9 @@ steps:
 ```
 {% endraw %}
 
-In this example,
+In the above example,
 if a dependency tree is partially restored by either the second or third cache keys,
-dependency managers may not properly install on top of the partial tree.
+some dependency managers will incorrectly install on top of an outdated dependency tree.
 
 Instead of a cascading fallback,
 a more stable option is one specific, version-prefixed cache key.
