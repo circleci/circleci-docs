@@ -25,7 +25,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
@@ -97,7 +97,7 @@ jobs:
   # build job omitted for brevity
   deploy:
     docker:
-      - image: circleci/python:2.7
+      - image: circleci/python:2.7-jessie
     working_directory: ~/circleci-docs
     steps:
       - run:
@@ -135,7 +135,7 @@ jobs:
   #  build and test jobs go here
   deploy-job:
     docker:
-      - image: image
+      - image: image pinned to a version and tag
     working_directory: ~/repo
     steps:
       - checkout
@@ -180,7 +180,7 @@ Add the below to the project's `config.yml` file
 
      deploy-job:
        docker:
-         - image: my-image
+         - image: my-image-version-tag
        working_directory: /tmp/my-project
        steps:
          - run:
@@ -222,7 +222,7 @@ In the following example, if `build-job` passes and the current branch was the m
 
      deploy-job:
        docker:
-         - image: my-image
+         - image: my-image-version-tag
        working_directory: /tmp/my-project  
        steps:
          - run:
