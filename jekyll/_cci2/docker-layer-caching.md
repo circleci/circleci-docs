@@ -41,6 +41,12 @@ If part of the Dockerfile changes (which changes part of the image) a subsequent
 
 So, if you change something in the Dockerfile, all of those later steps are invalidated and the layers have to be rebuilt.  When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
 
+## Video: Overview of Docker Layer Caching
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
 ## Limitations
 
 DLC does **not** speed up downloading of the Docker images which serve as build containers that are used to _run_ your jobs. You can find Docker images that are used to run jobs in the Spin up Environment section of the Jobs page in the CircleCI app. The images in the Spin up Environment section for a job are **not** cached by DLC. 
@@ -54,12 +60,6 @@ Every layer you build in a previous job will be accessible in the remote environ
 If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker Environment. Docker Layer Caching guarantees jobs to have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical cache.
 
 **Note:** Previously the `docker_layer_caching` was called `reusable`. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive` option is deprecated in favor of all VMs being treated as exclusive. This indicates that jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access when using `docker_layer_caching`.
-
-## Video: Overview of Docker Layer Caching
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
 
 ## Examples
 
