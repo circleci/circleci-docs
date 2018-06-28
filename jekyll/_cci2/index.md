@@ -39,7 +39,7 @@ version: 2
 jobs:
   build:
     docker: # See https://docs.docker.com/get-started/#docker-concepts if you are new to Docker.
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A first hello"
@@ -47,7 +47,7 @@ jobs:
 
 3. Commit the file by entering comments and clicking the Commit New File button. ![]( {{ site.baseurl }}/assets/img/docs/commit-new-file.png)
 
-The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use when it builds your project. CircleCI will use the image to boot up a "container" — a virtual computing environment where it will install any languages, system utilities, dependencies, web browsers, and tools, that your project might need to run.
+The `- image: circleci/ruby:2.4.1-jessie` text tells CircleCI what Docker image to use when it builds your project. CircleCI will use the image to boot up a *container* — a virtual computing environment where it will install any languages, system utilities, dependencies, web browsers, and tools, that your project might need to run.
 
 ## Setting up Your Build on CircleCI
 
@@ -63,7 +63,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard to investigate the following parts of the run:
 
-1. **Spin up environment:** CircleCI used the `circleci/ruby:2.4.1` Docker image to launch a virtual computing environment.
+1. **Spin up environment:** CircleCI used the `circleci/ruby:2.4.1-jessie` Docker image to launch a virtual computing environment.
 
 2. **Checkout code:** CircleCI checked out your GitHub repository and "cloned" it into the virtual environment launched in Step 1.
 
@@ -85,13 +85,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A first hello"
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A first hello"      
@@ -107,14 +107,14 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A first hello"
       - run: sleep 25
   two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A more familiar hi"
@@ -142,7 +142,7 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A first hello"
@@ -156,7 +156,7 @@ jobs:
             - echo-output      
   two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - checkout
       - run: echo "A more familiar hi"  
