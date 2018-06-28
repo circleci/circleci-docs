@@ -206,6 +206,12 @@ steps:
   - restore_cache:
       keys:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+        - v1-gem-cache-{{ arch }}-
+  - save_cache:
+      paths:
+        - ~/.bundle
+      key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ```
 
 {% endraw %}
