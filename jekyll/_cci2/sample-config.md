@@ -58,9 +58,9 @@ jobs:
     working_directory: ~/mern-starter
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/node:4.8.2-jessie
     # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
-      - image: mongo:3.4.4
+      - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
@@ -77,8 +77,8 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:4.8.2
-      - image: mongo:3.4.4
+      - image: circleci/node:4.8.2-jessie
+      - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
@@ -121,7 +121,7 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
@@ -133,7 +133,7 @@ jobs:
 
   bundle_dependencies:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
@@ -149,7 +149,7 @@ jobs:
 
   rake_test:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
@@ -165,7 +165,7 @@ jobs:
 
   precompile_assets:
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:

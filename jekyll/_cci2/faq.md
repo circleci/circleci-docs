@@ -12,62 +12,21 @@ order: 1
 * Contents
 {:toc}
 
-## What are the differences between CircleCI’s hosting options?
+## Version and Migration Questions
 
-- **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
-
-- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
-
-## What is the difference between a usage queue and a run queue?
-
-A **usage queue** forms
-when an organization lacks the containers
-to run a build.
-The number of available containers is determined
-by the plan chosen
-when setting up a project on CircleCI.
-If your builds are queuing often,
-you can add more containers
-by changing your plan.
-
-A **run queue** forms
-when CircleCI experiences high demand.
-Customer builds are placed in a run queue
-and processed as machines become available.
-
-In other words,
-you can reduce time spent in a **usage queue**
-by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
-but time spent in a **run queue** is unavoidable
-(though CircleCI aims to keep this as low as possible).
-
-## Why did you change the name from CircleCI Enterprise? 
-
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees. 
-
-CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
-
-## Why Migrate from CircleCI 1.0 to 2.0?
+### Why Migrate from CircleCI 1.0 to 2.0?
 
 - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
 - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
 - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
-## Can I try CircleCI 2.0 while still using 1.0?
+### Can I try CircleCI 2.0 while still using 1.0?
 
 Yep! If you're not ready to fully commit to 2.0, you can easily try it while still building on 1.0:
 
 Create a new branch and add 2.0 configuration as described in the [2.0 Project Tutorial](https://circleci.com/docs/2.0/project-walkthrough/). When you push the branch with 2.0 configuration, your project will build on CircleCI 2.0. All other branches will continue building on CircleCI 1.0.
 
 If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. Keep in mind that CircleCI 1.0 will be sunset August 31st, 2018. More info available on the [CircleCI Blog](https://circleci.com/blog/sunsetting-1-0/).
-
-## Why can't I find my project on the Add Project page?
- 
-If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
-
-## I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
-
-There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
 
 ## How do I migrate from Jenkins to CircleCI 2.0?
 
@@ -102,13 +61,58 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
-## How do Docker image names work? Where do they come from?
+### What are the differences between CircleCI’s hosting options?
+
+- **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
+
+- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
+
+### Why did you change the name from CircleCI Enterprise? 
+
+The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees. 
+
+CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+
+## Troubleshooting Questions
+
+### What is the difference between a usage queue and a run queue?
+
+A **usage queue** forms
+when an organization lacks the containers
+to run a build.
+The number of available containers is determined
+by the plan chosen
+when setting up a project on CircleCI.
+If your builds are queuing often,
+you can add more containers
+by changing your plan.
+
+A **run queue** forms
+when CircleCI experiences high demand.
+Customer builds are placed in a run queue
+and processed as machines become available.
+
+In other words,
+you can reduce time spent in a **usage queue**
+by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
+but time spent in a **run queue** is unavoidable
+(though CircleCI aims to keep this as low as possible).
+
+### Why can't I find my project on the Add Project page?
+ 
+If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
+
+### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
+
+There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
+
+### How do Docker image names work? Where do they come from?
 
 CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
 
 ```
-golang:1.7.1
-redis:3.0.7
+golang:1.7.1-jessie
+redis:3.0.7-jessie
 ```
 
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
@@ -117,11 +121,11 @@ For public images on Docker Hub, you can pull the image by prefixing the account
 myUsername/couchdb:1.6.1
 ```
 
-## What is the best practice for specifying image versions?
+### What is the best practice for specifying image versions?
 
 It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document for more details.
 
-## How can I set the timezone in Docker images?
+### How can I set the timezone in Docker images?
 
 You can set the timezone in Docker images with the `TZ` environment variable. In your `.circleci/config.yml`, it would look like:
 
@@ -132,7 +136,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: your/primary-image:version
+      - image: your/primary-image:version-tag
       - image: mysql:5.7
         environment:
            TZ: "/usr/share/zoneinfo/America/Los_Angeles"
@@ -145,7 +149,7 @@ In this example, the timezone is set for both the primary image and an additiona
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-## Workflows
+## Workflows Questions
 
 ### Can I use the API with Workflows?
 Not yet, but we are working on that functionality.

@@ -60,6 +60,8 @@ by setting it for the current shell.
 version: 2
 jobs:
   build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
@@ -123,7 +125,7 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6
+      - image: circleci/postgres:9.6-jessie
       # environment variables for all commands executed in the primary container
         environment:
           POSTGRES_USER: conductor
@@ -137,7 +139,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2
+      - image: circleci/python:3.6.2-jessie
        # environment variables for all commands executed in the primary container
         environment:
           FLASK_CONFIG: testing

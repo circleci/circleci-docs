@@ -37,7 +37,7 @@ After you create and commit a `.circleci/config.yml` file to your GitHub or Bitb
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-jessie
     steps:
       - run: |
           bundle install

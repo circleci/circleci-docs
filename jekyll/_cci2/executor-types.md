@@ -140,7 +140,7 @@ jobs:
     # Primary container image where all steps run.
      - image: buildpack-deps:trusty
     # Secondary container image on common network. 
-     - image: mongo:2.6.8
+     - image: mongo:2.6.8-jessie
        command: [mongod, --smallfiles]
 
     working_directory: ~/
@@ -155,7 +155,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
 ### Public Convenience Images on Docker Hub
 {:.no_toc}
   - `name:tag`
-    - `circleci/node:7.10-browsers`
+    - `circleci/node:7.10-jessie-browsers`
   - `name@digest`
     - `redis@sha256:34057dd7e135ca41...`
 

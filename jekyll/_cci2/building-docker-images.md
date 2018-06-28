@@ -36,7 +36,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 The Remote Docker Environment has the following technical specifications:
 
 CPUs | Processor                 | RAM | HD
------|---------------------------|------------
+-----|---------------------------|-----|------
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
@@ -72,7 +72,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: golang:1.6.4   # (1)
+      - image: golang:1.6.4-jessie   # (1)
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout

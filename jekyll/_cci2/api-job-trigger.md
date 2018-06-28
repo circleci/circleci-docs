@@ -67,9 +67,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ruby:2.4.0
+      - image: ruby:2.4.0-jessie
         environment:
-          - LANG: C.UTF-8
+          LANG: C.UTF-8
     working_directory: /my-project
     parallelism: 2
     steps:
@@ -90,7 +90,7 @@ jobs:
 
   deploy_docker:
     docker:
-      - image: ruby:2.4.0
+      - image: ruby:2.4.0-jessie
     working_directory: /
     steps:
       - setup_remote_docker

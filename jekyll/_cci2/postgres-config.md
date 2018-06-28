@@ -33,7 +33,7 @@ jobs:
     # Primary container image where all commands run
     
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.4.1-node-jessie
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -103,7 +103,7 @@ jobs:
   build:
     working_directory: ~/appName
     docker:
-      - image: ruby:2.3.1
+      - image: ruby:2.3.1-jessie
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -111,7 +111,7 @@ jobs:
           RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
       # which includes a few enhancements and modifications. It is possible to use either image.
-      - image: postgres:9.6
+      - image: postgres:9.6-jessie
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -141,7 +141,7 @@ jobs:
   build:
     docker:
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.8-jessie
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment:
@@ -223,7 +223,7 @@ jobs:
   build:
     working_directory: ~/test-circleci
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4-node-jessie
       - image: tkuchiki/delayed-mysql
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
