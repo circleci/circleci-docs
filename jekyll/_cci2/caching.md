@@ -243,6 +243,12 @@ steps:
 
 #### npm (Node)
 
+**Safe to Use Partial Cache Restoration?**
+Yes (with NPM5+).
+
+With NPM5+ and a lock file,
+you can safely use partial cache restoration.
+
 #### pip (Python)
 
 #### Pipenv (Python)
