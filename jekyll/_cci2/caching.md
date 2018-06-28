@@ -151,11 +151,11 @@ steps:
 {% endraw %}
 
 In the above example,
-if a dependency tree is partially restored by either the second or third cache keys,
-some dependency managers will incorrectly install on top of an outdated dependency tree.
+if a dependency tree is partially restored by the second or third cache keys,
+some dependency managers will incorrectly install on top of the outdated dependency tree.
 
 Instead of a cascading fallback,
-a more stable option is one specific, version-prefixed cache key.
+a more stable option is a single version-prefixed cache key.
 
 {% raw %}
 
