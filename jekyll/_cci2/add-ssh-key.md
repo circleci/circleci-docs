@@ -20,7 +20,9 @@ to add SSH keys to CircleCI:
 2. To enable running processes to access other services.
 
 If you are adding an SSH key for the first reason,
-refer to the [GitHub and Bitbucket Integration](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document. Otherwise, follow the steps below to add an SSH key to your project.
+refer to the [GitHub and Bitbucket Integration](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+Otherwise,
+follow the steps below to add an SSH key to your project.
 
 ## Steps
 
@@ -50,14 +52,10 @@ every new key must have an empty passphrase.
 
 ## Advanced Usage
 
-By default,
-all CircleCI jobs are configured with `ssh-agent`
-and automatically load _all_ keys.
-While this is usually sufficient,
-you may need finer control
-over which keys authenticate.
-This is particularly useful
-for handling a "Too many authentication failures" error.
+Even though all CircleCI jobs use `ssh-agent`
+to automatically sign all added SSH keys,
+you **must** use the `add_ssh_keys` key
+to actually add keys to a container.
 
 To add a set of SSH keys to a container,
 use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)

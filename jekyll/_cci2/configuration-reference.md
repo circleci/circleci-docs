@@ -835,20 +835,26 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 
 ##### **`add_ssh_keys`**
 
-Special step that adds SSH keys configured in the project's UI to the container, and configure ssh to use them.
+Special step that adds SSH keys from a project's settings to a container.
+Also configures SSH to use these keys.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 fingerprints | N | List | List of fingerprints corresponding to the keys to be added (default: all keys added)
 {: class="table table-striped"}
 
-``` YAML
-- add_ssh_keys:
-    fingerprints:
-      - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+```yaml
+steps:
+  - add_ssh_keys:
+      fingerprints:
+        - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-Note that CircleCI 2.0 jobs are auto configured with `ssh-agent` with all keys auto-loaded, and is sufficient for most cases. `add_ssh_keys` may be needed to have greater control over which SSH keys to authenticate (e.g. avoid "Too many authentication failures" problem when having too many SSH keys).
+**Note:**
+Even though CircleCI uses `ssh-agent`
+to sign all added SSH keys,
+you **must** use the `add_ssh_keys` key
+to actually add keys to a container.
 
 ## **`workflows`**
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
