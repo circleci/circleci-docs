@@ -22,6 +22,8 @@ Docker Layer Caching is a great feature to use if building Docker images is a re
 
 Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`)—see [Enabling DLC](#enabling-dlc) for instructions.
 
+***Note:** DLC has **no** effect on Docker images used as build containers—i.e., those that are used to _run_ your jobs, are specified via the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker), and appear in the Spin up Environment step on your Jobs pages.*
+
 ## Example
 
 Let's use the following Dockerfile to illustrate how Docker Layer Caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
@@ -119,10 +121,6 @@ If we were to change the first step in our example Dockerfile—perhaps we want 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
-
-## Limitations
-
-DLC has **no** effect on Docker images used as build containers—i.e., those that are used to _run_ your jobs, are specified via the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker), and appear in the Spin up Environment step on your Jobs pages.
 
 ## Enabling DLC
 
