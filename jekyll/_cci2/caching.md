@@ -330,6 +330,7 @@ steps:
   - run: bundle install & bundle clean
   - restore_cache:
       keys:
+        # when lock file changes, use increasingly general patterns to restore cache
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
@@ -341,12 +342,37 @@ steps:
 
 {% endraw %}
 
-#### Gradle, Maven (Java) and Leiningen (Clojure)
+#### Gradle (Java)
 
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
-Gradle and Maven repositories are both intended
+Gradle repositories are intended
+to be centralized, shared, and massive.
+Partial caches can be restored
+without impacting which libraries
+are actually added to classpaths of generated artifacts.
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+        - gradle-repo-v1-{{ .Branch }}-
+        - gradle-repo-v1-
+  - save_cache:
+      paths:
+        - ~/.gradle
+      key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+```
+
+#### Maven (Java) and Leiningen (Clojure)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Maven repositories are intended
 to be centralized, shared, and massive.
 Partial caches can be restored
 without impacting which libraries
@@ -361,6 +387,7 @@ it has equivalent behavior.
 steps:
   - restore_cache:
       keys:
+        # when lock file changes, use increasingly general patterns to restore cache
         - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
         - maven-repo-v1-{{ .Branch }}-
         - maven-repo-v1-
@@ -380,6 +407,25 @@ Yes (with NPM5+).
 With NPM5+ and a lock file,
 you can safely use partial cache restoration.
 
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - node-v1-{{ .Branch }}-
+        - node-v1-
+  - save_cache:
+      paths:
+        - ~/usr/local/lib/node_modules  # location depends on npm version
+      key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+```
+
+{% endraw %}
+
+
 #### pip (Python)
 
 **Safe to Use Partial Cache Restoration?**
@@ -389,12 +435,48 @@ Pip can use files
 that are not explicitly specified in `requirements.txt`.
 Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
 
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+        - pip-packages-v1-{{ .Branch }}-
+        - pip-packages-v1-
+  - save_cache:
+      paths:
+        - ~/.local/share/virtualenvs/venv  # this path depends on where pipenv creates a virtualenv
+      key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+```
+
+{% endraw %}
+
 #### Yarn (Node)
 
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
 Yarn has always used a lock file for exactly these reasons.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - yarn-packages-v1-{{ .Branch }}-
+        - yarn-packages-v1-
+  - save_cache:
+      paths:
+        - ~/.cache/yarn
+      key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+```
+
+{% endraw %}
 
 ## Caching Strategy Tradeoffs
 
