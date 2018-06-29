@@ -10,6 +10,8 @@ CircleCI automatically infers settings from your code, so it's possible you won'
 
 <h2 id="phases">File Structure and Content</h2>
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 The `circle.yml` file has seven primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
 
 - **`machine`**: adjust the behavior of the virtual machine (VM)
@@ -40,6 +42,8 @@ You can specify when to run custom commands relative to CircleCI's inferred comm
 - **`post`**: run _after_ inferred commands
 
 #### Modifiers
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 You can tweak individual commands by adding a modifier.
 Allowed modifiers are:
@@ -119,6 +123,8 @@ machine:
 
 ### Environment
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 You set environment variables for **all commands** in the build by adding
 `environment` to the `machine` section.
 Remember that CircleCI uses a new shell for every command; as previously mentioned
@@ -135,6 +141,8 @@ If you don't want to use this method, there are
 [a number of other options]( {{ site.baseurl }}/1.0/environment-variables/).
 
 ### Timezone
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 The machine's time zone is UTC by default. You use `timezone` to adjust to the same time zone as your _production_ server. Changing the time to your _development_ machine's time zone is **problematic**.
 
@@ -158,6 +166,8 @@ Be aware that some developers, especially those that collaborate across differen
 
 ### Hosts
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 Sometimes you might need to add one or more entries to the `/etc/hosts` file to
 assign various host names to an IP address. You can provide a mapping from
 hostnames to IP addresses in the following manner:
@@ -176,6 +186,8 @@ hyphens (-) and dots (.).
 
 ### Ruby version
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
 We use the Ruby version you specify in your `.rvmrc`, your
 `.ruby-version` file, or your Gemfile.
@@ -191,6 +203,7 @@ machine:
 ```
 
 <h3 id="node-version">Node.js version</h3>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
 Pre-installed versions can be found on the [Ubuntu 14.04 (default)](https://circleci.com/docs/1.0/build-image-trusty/#nodejs)
@@ -208,6 +221,8 @@ machine:
 
 ### Java version
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 Here's an example of how to set the version of Java to be used for your tests.
 
 ```
@@ -220,6 +235,8 @@ You can find more details about supported versions for [Ubuntu 14.04 (default)](
 and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#java).
 
 ### PHP version
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI uses [php-build](https://github.com/CHH/php-build) and
 [phpenv](https://github.com/CHH/phpenv) to manage PHP versions. Here's an
@@ -236,6 +253,8 @@ and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#php).
 
 ### Python version
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 CircleCI uses [pyenv](https://github.com/yyuu/pyenv)
 to manage Python versions.
 Here's an example of how to set the version of Python used for your tests.
@@ -251,6 +270,8 @@ and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#python).
 
 ### GHC version
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 ```
 machine:
   ghc:
@@ -261,6 +282,8 @@ You can find more details about supported versions [here]( {{ site.baseurl }}/1.
 
 ### Other languages
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 We also support other languages including Clojure, C/C++, Golang, and Erlang.
 
 Pre-installed versions are different depending on which build image you are using.
@@ -268,6 +291,7 @@ Pre-installed versions are different depending on which build image you are usin
 Please check out [Ubuntu 12.04 build image]( {{ site.baseurl }}/1.0/build-image-precise/) and [Ubuntu 14.04 build image]( {{ site.baseurl }}/1.0/build-image-trusty/) to find out what versions are supported.
 
 <h3 id="services">Databases and other services</h3>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI supports a large number of databases and other services.
 Most popular ones are running by default on our build machines (bound to localhost), including Postgres, MySQL, Redis (not started by default on Ubuntu 14.04) and MongoDB.
@@ -290,11 +314,14 @@ machine:
 ```
 
 <h2 id="checkout">Code checkout from GitHub or Bitbucket</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 The `checkout` section is usually pretty vanilla, but we include examples of common things you might need to put in the section.
 Because we don't read `circle.yml` until after the checkout phase, only `post` is supported in this section.
 
 ####  Example: using git submodules
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 ```
 checkout:
@@ -305,6 +332,8 @@ checkout:
 
 ####  Example: overwriting configuration files on CircleCI
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 
 ```
 checkout:
@@ -313,6 +342,7 @@ checkout:
 ```
 
 <h2 id="dependencies">Project-specific dependencies</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 Most web programming languages and frameworks, including Ruby's bundler, npm for Node.js, and Python's pip, have some form of dependency specification;
 CircleCI automatically runs commands to fetch such dependencies.
@@ -322,6 +352,8 @@ Here are examples of common tweaks you might make in the `dependencies` section.
 
 ####  Example: using npm and Node.js
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 ```
 dependencies:
   override:
@@ -329,6 +361,7 @@ dependencies:
 ```
 
 <h4 id="bundler">Example: using a specific version of bundler</h4>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 ```
 dependencies:
@@ -338,6 +371,8 @@ dependencies:
 ```
 
 ### Bundler flags
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 If your project includes bundler (the dependency management program for Ruby), you can include
 `without` to list dependency groups to be excluded from bundle install.
@@ -350,6 +385,7 @@ dependencies:
 ```
 
 <h3 id="cache-directories">Custom Cache Directories</h3>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI caches dependencies between builds.
 To include any custom directories in our caching, you can use
@@ -368,6 +404,7 @@ Caching happens after the dependency step, so the directories that are specified
 Caches are private, and are not shared with other projects.
 
 <h2 id="database">Database setup</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 Your web framework typically includes commands to create your database, install your schema, and run your migrations.
 You can use `override`, `pre`, and/or `post` to modify `database` commands.
@@ -392,6 +429,7 @@ machine:
 ```
 
 <h2 id="compile">Custom Compile Commands</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 You can customize your project's build in the `compile` section of `circle.yml`. Below is an example of using `compile` to verbosely build a Middleman site:
 
@@ -402,6 +440,7 @@ compile:
 ```
 
 <h2 id="test">Running your tests</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 The most important part of testing is actually running the tests!
 
@@ -411,6 +450,7 @@ This allows our test output to tell you about all the tests that fail, not just 
 
 ####  Example: running spinach after RSpec
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 ```
 test:
@@ -421,6 +461,8 @@ test:
 ```
 
 ####  Example: running phpunit on a special directory
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 
 ```
@@ -441,6 +483,7 @@ test directories and you are testing in parallel with MiniTest.
 
 ####  Example: minitest_globs
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 ```
 test:
@@ -450,6 +493,8 @@ test:
 ```
 
 ## Deployment
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 The `deployment`
 section is optional. You can run commands to deploy to staging or production.
@@ -520,6 +565,8 @@ the issue.
 
 ### Tags
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 In addition to deploying based on `branch`, you can deploy based on tags.
 
 
@@ -564,6 +611,8 @@ To deploy on any tag, use the following regex: `/.*?/`
 
 ### SSH Keys
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 If deploying to your servers requires SSH access, you'll need to
 upload the keys to CircleCI.
 CircleCI's UI enables you to do this on your project's **Project Settings > SSH keys** page.
@@ -574,6 +623,7 @@ the private key will be used for all hosts.
 *Please note that added keys will need to have an empty passphrase, as CircleCI does not have the ability to decrypt and use them otherwise.*
 
 <h3 id="heroku-extra">Heroku</h3>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI also has first-class support for deploying to Heroku.
 Specify the app you'd like to
@@ -595,6 +645,8 @@ CircleCI's UI enables you to do this on your project's **Project Settings > Hero
 
 ### Heroku with pre or post-deployment steps
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 If you want to deploy to Heroku and also run commands before or after the deploy, you must use the 'normal' deployment syntax.
 
 ```
@@ -607,6 +659,8 @@ deployment:
 ```
 
 <h2 id="notify">Notifications</h2>
+
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI sends personalized notifications by email.
 
@@ -646,6 +700,7 @@ you want to get chat channel build notifications for in the
 [per branch build notification](#per-branch-notifications) section.
 
 <h2 id="branches">Specifying branches to build</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI by default tests every push to _any_ branch in the repository.
 Testing all branches maintains quality in all branches and adds
@@ -681,6 +736,7 @@ it leads to problems when that untested code gets merged.
 only affect that branch and no other one.
 
 <h2 id="build-dir">Specifying build directory</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 CircleCI runs all commands on the repository root, by default.  However, if
 you store your application code in a subdirectory instead of the root, you
@@ -695,6 +751,7 @@ general:
 CircleCI will run its inference as well as all build commands from that directory.
 
 <h2 id="artifacts">Specifying custom artifacts directories and files</h2>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 You can specify directories and files (in addition to the default
 `$CIRCLE_ARTIFACTS` directory) to be
@@ -721,10 +778,13 @@ test:
 
 <h2 id="experimental">Experimental configuration</h2>
 
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+
 Our **experimental** section is a way of giving early previews of new configuration
 options we are considering adding. These settings are liable to change without notice.
 
 <h3 id="per-branch-notifications">Per branch build notification in chat channels</h3>
+**WARNING: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
 
 The only experimental setting available at this time is a blocklist and safelist mechanism
 for chat channel build notifications based on the branch name.
