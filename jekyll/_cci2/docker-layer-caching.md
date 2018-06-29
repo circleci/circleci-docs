@@ -141,7 +141,7 @@ If you run many parallel jobs for the same project that depend on the same envir
 
 **Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 
-## Machine Executor
+### Machine Executor
 
 Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key:
 
