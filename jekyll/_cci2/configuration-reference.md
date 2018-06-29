@@ -548,7 +548,7 @@ docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer 
 
 ***Notes***:
 - *A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.*
-- *`setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#docker-layer-caching-in-machine-executor) for information on how to enable DLC with the `machine` executor.*
+- *`setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.*
 
 ##### **`save_cache`**
 
