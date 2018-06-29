@@ -133,6 +133,20 @@ When a dependency tool runs,
 it would discover outdated dependencies and update them.
 This is referred to as a **partial cache restore**.
 
+### Clearing Cache
+
+If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.
+
+<div class="alert alert-info" role="alert">
+<b>Tip:</b> Caches are immutable so it is useful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This enables you to regenerate all of your caches by incrementing the version in this prefix.
+</div>
+
+For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
+
+* Dependency manager version change, for example, you change npm from 4 to 5
+* Language version change, for example, you change ruby 2.3 to 2.4
+* Dependencies are removed from your project
+
 ## Basic Example of Dependency Caching
 
 The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
