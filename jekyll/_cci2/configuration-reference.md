@@ -842,7 +842,7 @@ Key | Required | Type | Description
 fingerprints | N | List | List of fingerprints corresponding to the keys to be added (default: all keys added)
 {: class="table table-striped"}
 
-``` YAML
+```yaml
 - add_ssh_keys:
     fingerprints:
       - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
