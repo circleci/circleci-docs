@@ -12,7 +12,7 @@ order: 1
 * Contents
 {:toc}
 
-## Version and Migration Questions
+## Migration and Hosting
 
 ### Why Migrate from CircleCI 1.0 to 2.0?
 
@@ -28,7 +28,7 @@ Create a new branch and add 2.0 configuration as described in the [2.0 Project T
 
 If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. Keep in mind that CircleCI 1.0 will be sunset August 31st, 2018. More info available on the [CircleCI Blog](https://circleci.com/blog/sunsetting-1-0/).
 
-## How do I migrate from Jenkins to CircleCI 2.0?
+### How do I migrate from Jenkins to CircleCI 2.0?
 
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
@@ -43,11 +43,11 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
             
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.           
 
-## Does CircleCI 2.0 run inference commands?
+### Does CircleCI 2.0 run inference commands?
 
 CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
-## Can I use CircleCI 2.0 without creating base images?
+### Can I use CircleCI 2.0 without creating base images?
 
 Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
@@ -57,7 +57,7 @@ The image defaults to running actions as the `ubuntu` user and is designed to wo
 
 Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
 
-## Is CircleCI 2.0 available to enterprise clients?
+### Is CircleCI 2.0 available to enterprise clients?
 
 Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
@@ -73,7 +73,7 @@ The term Enterprise was used to refer to the behind-the-firewall option. However
 
 CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
-## Troubleshooting Questions
+## Troubleshooting 
 
 ### What is the difference between a usage queue and a run queue?
 
@@ -149,7 +149,7 @@ In this example, the timezone is set for both the primary image and an additiona
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-## Workflows Questions
+## Workflows 
 
 ### Can I use the API with Workflows?
 Not yet, but we are working on that functionality.
@@ -214,6 +214,7 @@ Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app
 Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
 
 ### What is the definition of a container in the context of billing?
+A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
 ## Architecture
 
@@ -244,8 +245,6 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
-
-A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
 ### What operating systems does CircleCI 2.0 support?
 
