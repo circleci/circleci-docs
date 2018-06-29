@@ -18,7 +18,7 @@ This document offers an overview of Docker Layer Caching (DLC), which can reduce
 
 ## Overview
 
-Docker Layer Caching is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image from scratch every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
+Docker Layer Caching is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
 
 Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`)—see [Enabling DLC](#enabling-dlc) for instructions.
 
