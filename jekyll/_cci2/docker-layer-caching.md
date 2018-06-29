@@ -22,13 +22,38 @@ Docker Layer Caching (DLC) is a great feature to use if building Docker images i
 
 Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`)—see [Enabling DLC](#enabling-dlc) for instructions.
 
-## Limitations
+### Limitations
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-### Enabling DLC
+## Enabling DLC
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.
+
+### Remote Docker Environment
+
+To enable DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your config.yml file:
+
+``` YAML
+- setup_remote_docker:
+    docker_layer_caching: true  # default - false  
+``` 
+
+Every layer built in a previous job will be accessible in the Remote Docker Environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
+
+If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker environment. Docker Layer Caching guarantees that jobs will have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical caches.
+
+**Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
+
+### Machine Executor
+
+Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
+
+``` YAML
+machine:
+  docker_layer_caching: true    # default - false
+```
+
 
 ## Examples
 
@@ -126,7 +151,7 @@ However, because our `#install jq` step is new, it and all subsequent steps will
 
 If we were to change the first step in our example Dockerfile—perhaps we want to pull from a different Elixir base image—then our entire cache for this image would be invalidated, even if every other part of our Dockerfile stayed the same.
 
-### Video: Overview of Docker Layer Caching
+## Video: Overview of Docker Layer Caching
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -152,27 +177,3 @@ When none of the layers in the image change between job runs, DLC pulls the laye
 If part of the Dockerfile changes (which changes part of the image) a subsequent run of the exact same job with the modified Dockerfile may still finish faster than rebuilding the entire image. It will finish faster because the cache is used for the first few steps that didn't change in the Dockerfile. The steps that follow the change must be rerun because the Dockerfile change invalidates the cache. 
 
 So, if you change something in the Dockerfile, all of those later steps are invalidated and the layers have to be rebuilt. When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
-
-### Remote Docker Environment
-
-To enable DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your config.yml file:
-
-``` YAML
-- setup_remote_docker:
-    docker_layer_caching: true  # default - false  
-``` 
-
-Every layer built in a previous job will be accessible in the Remote Docker Environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
-
-If you run many parallel jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker environment. Docker Layer Caching guarantees that jobs will have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical caches.
-
-**Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
-
-### Machine Executor
-
-Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
-
-``` YAML
-machine:
-  docker_layer_caching: true    # default - false
-```
