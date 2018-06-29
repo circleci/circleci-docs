@@ -37,9 +37,11 @@ Watch the following video for a detailed tutorial of customizing Docker images.
 
 The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
-### Prerequisites
+### Prerequisite
 
-As a prerequisite you'll need to have Docker installed. Please follow the [official Docker guide](https://docs.docker.com/engine/installation/). If you are unfamiliar with Docker, we recommend reading Docker's [getting started guide](https://docs.docker.com/engine/getstarted/).
+- A working [Docker installation](https://docs.docker.com/install/).
+For more details,
+see Docker's [Getting Started documentation](https://docs.docker.com/get-started/)
 
 ### Choosing a Base Image
 
