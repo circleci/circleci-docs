@@ -43,10 +43,20 @@ The following sections provide a walkthrough of how to create a custom image man
 For more details,
 see Docker's [Getting Started documentation](https://docs.docker.com/get-started/)
 
-### Choosing a Base Image
+### Creating a `Dockerfile`
+
+To create a custom image,
+you must [create a `Dockerfile`](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile).
+This is a text document containing commands
+that Docker uses
+to assemble an image.
+Consider keeping your `Dockerfile` in your `.circleci/images` folder,
+as shown in this [Docker demo project](https://github.com/circleci/cci-demo-docker).
+
+### Choosing and Setting a Base Image
 
 Before you create a custom image,
-you must choose another image on which to base the custom image.
+you must choose another image from which to extend the custom image.
 [Docker Hub](https://hub.docker.com/explore/) has official, pre-built images for most popular languages and frameworks.
 Given a particular language or framework,
 there are many image variants
