@@ -28,6 +28,8 @@ Docker Layer Caching can be used with both the [`machine` executor]({{ site.base
 
 Let's use the following Dockerfile to illustrate how Docker Layer Caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
+### Dockerfile
+
 ```
 FROM elixir:1.6.5
 
@@ -82,6 +84,8 @@ USER circleci
 
 CMD ["/bin/sh"]
 ```
+
+### Config.yml
 
 In the config.yml snippet below, let's assume the `build_elixir` job is regularly building an image using the above Dockerfile. By adding `docker_layer_caching: true` underneath our `machine` executor key, we ensure that CircleCI will save each Docker image layer as this Elixir image is built.
 
