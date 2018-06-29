@@ -26,13 +26,13 @@ Docker Layer Caching can be used with both the [`machine` executor]({{ site.base
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-## Enabling DLC
+## Using DLC
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.
 
 ### Remote Docker Environment
 
-To enable DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your config.yml file:
+To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your config.yml file:
 
 ``` YAML
 - setup_remote_docker:
@@ -47,7 +47,7 @@ If you run many parallel jobs for the same project that depend on the same envir
 
 ### Machine Executor
 
-Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
+Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
 
 ``` YAML
 machine:
