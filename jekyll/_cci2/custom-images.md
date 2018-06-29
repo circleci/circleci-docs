@@ -23,11 +23,7 @@ CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the
 
 ## CircleCI Dockerfile Wizard 
 
-Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker. 
-
-## Creating a Custom Image Manually
-
-The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
 
 ### How to Customize Docker Images for CircleCI 2.0 Video Tutorial
 
@@ -37,11 +33,15 @@ Watch the following video for a detailed tutorial of customizing Docker images.
   <iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-## Prerequisites
+## Creating a Custom Image Manually
+
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+
+### Prerequisites
 
 As a prerequisite you'll need to have Docker installed. Please follow the [official Docker guide](https://docs.docker.com/engine/installation/). If you are unfamiliar with Docker, we recommend reading Docker's [getting started guide](https://docs.docker.com/engine/getstarted/).
 
-## Choosing a Base Image and Creating a Dockerfile
+### Choosing a Base Image
 
 Use an image with your main language/framework as a base image.
 [Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks.
@@ -51,6 +51,8 @@ for describing images and conventionally this files is named `Dockerfile`.
 We recommend keeping this file together with your project source code in the `.circleci/images` folder.
 For example,
 in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
+
+### Creating a Dockerfile
 
 After choosing a base image,
 start writing a `Dockerfile`
@@ -95,7 +97,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 Read more about [`RUN` command](https://docs.docker.com/engine/reference/builder/#run).
 
-## Adding Required and Custom Tools or Files
+### Adding Required and Custom Tools or Files
 
 There are a few tools a custom image needs to have in order to be used as a primary image in CircleCI:
 
@@ -115,7 +117,7 @@ ADD custom_tool /usr/bin/
 
 In this case we copy `custom_tool` into the `/usr/bin/` directory of an image. **Note:** `custom_tool` must be in the same directory as `Dockerfile`. Read more about the [`ADD` command](https://docs.docker.com/engine/reference/builder/#add).
 
-## Building the image
+### Building the image
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
@@ -134,7 +136,7 @@ Read more about [`docker build` command](https://docs.docker.com/engine/referenc
 
 Congratulations, you've just built your first image! Now we need to store it somewhere to make it available for CircleCI.
 
-## Storing Images in a Docker Registry
+### Storing Images in a Docker Registry
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
@@ -171,7 +173,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 **Note:** First, we use `docker login` to authenticate in Docker Hub. If you use a registry other than Docker Hub, refer to the related documentation about how to push images to that registry.
 
-## Using Your Image on CircleCI
+### Using Your Image on CircleCI
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
