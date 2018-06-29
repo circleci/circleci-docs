@@ -47,7 +47,7 @@ JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy
 
 EOF
 ) | sudo tee -a /etc/circle-installation-customizations
-3.) sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui ; sudo service replicated-operator start; sudo service replicated start
+3.) sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui start; sudo service replicated-operator start; sudo service replicated start
 ```
 
 **Note:** The above is not handled by by our enterprise-setup script and will need to be added to the user data for the services box startup or done manually. 
