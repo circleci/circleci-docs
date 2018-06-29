@@ -147,7 +147,7 @@ If you run many parallel jobs for the same project that depend on the same envir
 
 ### Machine Executor
 
-Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen in our [example](#config.yml)):
+Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Enable DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen in our [example](#configyml)):
 
 ``` YAML
 machine:
