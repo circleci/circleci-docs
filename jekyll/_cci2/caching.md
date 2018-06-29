@@ -133,9 +133,9 @@ When a dependency tool runs,
 it would discover outdated dependencies and update them.
 This is referred to as a **partial cache restore**.
 
-### Clearing Cache 
+### Clearing Cache
 
-If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.   
+If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Caches are immutable so it is useful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This enables you to regenerate all of your caches by incrementing the version in this prefix.
@@ -147,7 +147,7 @@ For example, you may want to clear the cache in the following scenarios by incre
 * Language version change, for example, you change ruby 2.3 to 2.4
 * Dependencies are removed from your project
 
-## <a name="dependency-caching"></a>Basic Example of Dependency Caching
+## Basic Example of Dependency Caching
 
 The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
@@ -179,7 +179,7 @@ Following are some examples of caching strategies for different goals:
  * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate separate cache keys.
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
- 
+
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
 
 Template | Description
@@ -200,6 +200,7 @@ Template | Description
 The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
 
 {% raw %}
+
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
@@ -213,17 +214,17 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       - run: cp config/{database_circleci,database}.yml
 
       # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache 
+      # Load installed gems from cache if possible, bundle install then save cache
       # Multiple caches are used to increase the chance of a cache hit
-      
+
       - restore_cache:
           keys:
             - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
-            
+
       - run: bundle install --path vendor/bundle
-      
+
       - save_cache:
           key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
@@ -236,46 +237,314 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       # Precompile assets
       # Load assets from cache if possible, precompile assets then save cache
       # Multiple caches are used to increase the chance of a cache hit
-      
+
       - restore_cache:
           keys:
             - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - asset-cache-v1-{{ arch }}-{{ .Branch }}
             - asset-cache-v1
-            
+
       - run: bundle exec rake assets:precompile
-      
+
       - save_cache:
           key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
-            
+
       - run: bundle exec rspec
       - run: bundle exec cucumber
-  ```
+```
+
 {% endraw %}
 
-## Caching Strategy Tradeoffs 
+### Partial Dependency Caching Strategies
 
-In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance.  One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
+Some dependency managers do not properly handle
+installing on top of partially restored dependency trees.
 
-However, for other types of languages, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. If the dependencies change infrequently, consider listing the zero cache restore key first. Then, track the costs over time. If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time, only then consider adding a partial cache restore key.
+{% raw %}
 
-Listing multiple keys for restoring a cache increases the odds of a partial cache hit. However, broadening your `restore_cache` scope to a wider history increases the risk of confusing failures. For example, if you have dependencies for Node v6 on an upgrade branch, but your other branches are still on Node v5, a `restore_cache` step that searches other branches might restore incompatible dependencies.
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - gem-cache-{{ arch }}-{{ .Branch }}
+        - gem-cache
+```
+{% endraw %}
+
+In the above example,
+if a dependency tree is partially restored by the second or third cache keys,
+some dependency managers will incorrectly install on top of the outdated dependency tree.
+
+Instead of a cascading fallback,
+a more stable option is a single version-prefixed cache key.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+```
+
+{% endraw %}
+
+Since caches are immutable,
+this strategy allows you
+to regenerate all of your caches
+by incrementing the version.
+This is useful in the following scenarios:
+
+- When you change the version of a dependency manager like `npm`.
+- When you change the version of a language like Ruby.
+- When you add or remove dependencies from your project.
+
+The stability of partial dependency caching is dependent on your dependency manager.
+Below is a list of common dependency managers,
+recommended partial caching strategies,
+and associated justifications.
+
+#### Bundler (Ruby)
+
+**Safe to Use Partial Cache Restoration?**
+Yes (with caution).
+
+Since Bundler uses system gems
+that are not explicitly specified,
+it is non-deterministic,
+and partial cache restoration can be unreliable.
+
+To prevent this behavior,
+add a step
+that cleans Bundler
+before restoring dependencies from cache.
+
+{% raw %}
+
+```yaml
+steps:
+  - run: bundle install & bundle clean
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+        - v1-gem-cache-{{ arch }}-
+  - save_cache:
+      paths:
+        - ~/.bundle
+      key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+```
+
+{% endraw %}
+
+#### Gradle (Java)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Gradle repositories are intended
+to be centralized, shared, and massive.
+Partial caches can be restored
+without impacting which libraries
+are actually added to classpaths of generated artifacts.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+        - gradle-repo-v1-{{ .Branch }}-
+        - gradle-repo-v1-
+  - save_cache:
+      paths:
+        - ~/.gradle
+      key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+```
+
+{% endraw %}
+
+#### Maven (Java) and Leiningen (Clojure)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Maven repositories are intended
+to be centralized, shared, and massive.
+Partial caches can be restored
+without impacting which libraries
+are actually added to classpaths of generated artifacts.
+
+Since Leiningen uses Maven under the hood,
+it has equivalent behavior.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+        - maven-repo-v1-{{ .Branch }}-
+        - maven-repo-v1-
+  - save_cache:
+      paths:
+        - ~/.m2
+      key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+```
+
+{% endraw %}
+
+#### npm (Node)
+
+**Safe to Use Partial Cache Restoration?**
+Yes (with NPM5+).
+
+With NPM5+ and a lock file,
+you can safely use partial cache restoration.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - node-v1-{{ .Branch }}-
+        - node-v1-
+  - save_cache:
+      paths:
+        - ~/usr/local/lib/node_modules  # location depends on npm version
+      key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+```
+
+{% endraw %}
+
+
+#### pip (Python)
+
+**Safe to Use Partial Cache Restoration?**
+Yes (with Pipenv).
+
+Pip can use files
+that are not explicitly specified in `requirements.txt`.
+Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+        - pip-packages-v1-{{ .Branch }}-
+        - pip-packages-v1-
+  - save_cache:
+      paths:
+        - ~/.local/share/virtualenvs/venv  # this path depends on where pipenv creates a virtualenv
+      key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+```
+
+{% endraw %}
+
+#### Yarn (Node)
+
+**Safe to Use Partial Cache Restoration?**
+Yes.
+
+Yarn has always used a lock file for exactly these reasons.
+
+{% raw %}
+
+```yaml
+steps:
+  - restore_cache:
+      keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - yarn-packages-v1-{{ .Branch }}-
+        - yarn-packages-v1-
+  - save_cache:
+      paths:
+        - ~/.cache/yarn
+      key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+```
+
+{% endraw %}
+
+## Caching Strategy Tradeoffs
+
+In cases where the build tools for your language include elegant handling of dependencies,
+partial cache restores may be preferable to zero cache restores for performance reasons.
+If you get a zero cache restore,
+you have to reinstall all of your dependencies, which can result in reduced performance.
+One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
+
+However,
+for other types of languages,
+partial caches carry the risk of creating code dependencies
+that are not aligned with your declared dependencies
+and do not break until you run a build without a cache.
+If the dependencies change infrequently,
+consider listing the zero cache restore key first.
+Then,
+track the costs over time.
+If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time,
+only then consider adding a partial cache restore key.
+
+Listing multiple keys for restoring a cache increases the odds of a partial cache hit.
+However,
+broadening your `restore_cache` scope to a wider history increases the risk of confusing failures.
+For example,
+if you have dependencies for Node v6 on an upgrade branch,
+but your other branches are still on Node v5,
+a `restore_cache` step that searches other branches
+might restore incompatible dependencies.
 
 ### Using a Lock File
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) checksums may be a useful cache key.
 
-An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
+An alternative is to do `ls -laR your-deps-dir > deps_checksum`
+and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}.
+For example,
+in Python,
+to get a more specific cache than the checksum of your `requirements.txt` file
+you could install the dependencies within a virtualenv in the project root `venv`
+and then do `ls -laR venv > python_deps_checksum`.
 
 ### Using Multiple Caches For Different Languages
 
-It is also possible to lower the cost of a cache miss by splitting your job across multiple caches. By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler) if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.
+It is also possible
+to lower the cost of a cache miss
+by splitting your job across multiple caches.
+By specifying multiple `restore_cache` steps with different keys,
+each cache is reduced in size
+thereby reducing the performance impact of a cache miss.
+Consider splitting caches by language type (npm, pip, or bundler)
+if you know how each dependency manager stores its files,
+how it upgrades,
+and how it checks dependencies.
 
 ### Caching Expensive Steps
 
-Certain languages and frameworks have more expensive steps that can and should be cached. Scala and Elixir are two examples where caching the compilation steps will be especially effective. Rails developers, too, would notice a performance boost from caching frontend assets.
+Certain languages and frameworks have more expensive steps
+that can and should be cached.
+Scala and Elixir are two examples
+where caching the compilation steps
+will be especially effective.
+Rails developers, too, would notice a performance boost
+from caching frontend assets.
 
-Do not cache everything, but _do_ consider caching for costly steps like compilation.
+Do not cache everything,
+but _do_ consider caching for costly steps like compilation.
