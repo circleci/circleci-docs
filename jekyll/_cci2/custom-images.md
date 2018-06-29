@@ -43,28 +43,52 @@ As a prerequisite you'll need to have Docker installed. Please follow the [offic
 
 ## Choosing a Base Image and Creating a Dockerfile
 
-Use an image with your main language/framework as a base image. [Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks. We recommend starting with an [officially supported image](https://hub.docker.com/explore/). Docker has a special format for describing images and conventionally this file is named `Dockerfile`. We recommend keeping this file together with your project source code in the `.circleci/images` folder. For example, in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
+Use an image with your main language/framework as a base image.
+[Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks.
+We recommend starting with an [officially supported image](https://hub.docker.com/explore/).
+Docker has a special format
+for describing images and conventionally this files is named `Dockerfile`.
+We recommend keeping this file together with your project source code in the `.circleci/images` folder.
+For example,
+in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
 
-After choosing a base image, start writing a `Dockerfile` to extend the base image using `FROM` as in the following example:
+After choosing a base image,
+start writing a `Dockerfile`
+to extend the base image using `FROM`,
+as in the following example:
 
-``` Dockerfile
+```Dockerfile
 FROM golang:1.8.0
 ```
 
-Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from  `golang:1.8.0` because the project is using Go. See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) Docker documentation for more information.
+Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from `golang:1.8.0`
+because the project is using Go.
+See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) Docker documentation for more information.
 
-Add the tools required for your job by using the `RUN` command:
+Add the tools
+required for your job
+by using the `RUN` command:
 
-``` Dockerfile
+```Dockerfile
 RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
 
-In the example project, `netcat` is used to validate that the database is up and running. The `golang:1.8.0` base image does not have it preinstalled, so we specify `netcat` in the `Dockerfile`. The next line installs a special Go library for generating test reports `go-junit-report`.
+In the example project,
+`netcat` is used
+to validate that the database is up and running.
+The `golang:1.8.0` base image does not have it preinstalled,
+so we specify `netcat` in the `Dockerfile`.
+The next line installs a special Go library
+for generating test reports `go-junit-report`.
 
-**Note:** For images **not** based on [`Debian`-like](https://en.wikipedia.org/wiki/Debian) distributions, the command for installing additional applications might be different. For instance, for [`Alpine`](https://en.wikipedia.org/wiki/Alpine_Linux) based images the same tools might be installed using:
+**Note:**
+For images **not** based on [`Debian`-like](https://en.wikipedia.org/wiki/Debian) distributions,
+the command for installing additional applications might be different.
+For instance,
+for [`Alpine`](https://en.wikipedia.org/wiki/Alpine_Linux) based images the same tools might be installed using:
 
-``` Dockerfile
+```Dockerfile
 RUN apk update && apk add netcat-openbsd git
 RUN go get github.com/jstemmer/go-junit-report
 ```
