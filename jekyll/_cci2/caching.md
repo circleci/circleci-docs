@@ -353,6 +353,8 @@ Partial caches can be restored
 without impacting which libraries
 are actually added to classpaths of generated artifacts.
 
+{% raw %}
+
 ```yaml
 steps:
   - restore_cache:
@@ -366,6 +368,8 @@ steps:
         - ~/.gradle
       key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ```
+
+{% endraw %}
 
 #### Maven (Java) and Leiningen (Clojure)
 
