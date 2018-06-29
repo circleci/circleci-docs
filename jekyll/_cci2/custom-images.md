@@ -43,16 +43,25 @@ As a prerequisite you'll need to have Docker installed. Please follow the [offic
 
 ### Choosing a Base Image
 
-Use an image with your main language/framework as a base image.
-[Docker Hub](https://hub.docker.com/) has pre-built images for most popular languages and frameworks.
-We recommend starting with an [officially supported image](https://hub.docker.com/explore/).
-Docker has a special format
-for describing images and conventionally this files is named `Dockerfile`.
-We recommend keeping this file together with your project source code in the `.circleci/images` folder.
+Before you create a custom image,
+you must choose another image on which to base the custom image.
+[Docker Hub](https://hub.docker.com/explore/) has official, pre-built images for most popular languages and frameworks.
+Given a particular language or framework,
+there are many image variants
+from which to choose.
+These variants are specified by [Docker tags](https://docs.docker.com/engine/reference/commandline/tag/).
+
 For example,
-in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
+if you want to use version 3.6 of the [official Alpine image](https://hub.docker.com/_/alpine/),
+the full image name is `alpine:3.6`.
 
 ### Creating a Dockerfile
+
+Docker has a special format
+for describing images and conventionally this file is named `Dockerfile`.
+Consider keeping this file together with your project source code in the `.circleci/images` folder.
+For example,
+in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
 
 After choosing a base image,
 start writing a `Dockerfile`
