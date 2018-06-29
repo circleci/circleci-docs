@@ -41,7 +41,7 @@ Here's an example:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - ~/.cache/yarn/v1
 #...
 ```
 {% endraw %}
