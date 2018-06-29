@@ -151,7 +151,7 @@ However, because our `#install jq` step is new, it and all subsequent steps will
 
 If we were to change the first step in our example Dockerfile—perhaps we want to pull from a different Elixir base image—then our entire cache for this image would be invalidated, even if every other part of our Dockerfile stayed the same.
 
-### Video: Overview of Docker Layer Caching
+## Video: Overview of Docker Layer Caching
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
