@@ -67,26 +67,17 @@ For example,
 if you want to use version 3.6 of the [official Alpine image](https://hub.docker.com/_/alpine/),
 the full image name is `alpine:3.6`.
 
-### Creating a Dockerfile
-
-Docker has a special format
-for describing images and conventionally this file is named `Dockerfile`.
-Consider keeping this file together with your project source code in the `.circleci/images` folder.
-For example,
-in [our Docker demo project](https://github.com/circleci/cci-demo-docker) the `Dockerfile` for the primary container is in the [`.circleci/images/primary` folder](https://github.com/circleci/cci-demo-docker/tree/master/.circleci/images/primary).
-
-After choosing a base image,
-start writing a `Dockerfile`
-to extend the base image using `FROM`,
-as in the following example:
+In your `Dockerfile`,
+extend the base image
+by using the [`FROM` instruction](https://docs.docker.com/engine/reference/builder/#from).
 
 ```Dockerfile
 FROM golang:1.8.0
 ```
 
-Refer to the [CircleCI Docker demo project](https://github.com/circleci/cci-demo-docker) for a custom image build from `golang:1.8.0`
-because the project is using Go.
-See the [`FROM` command](https://docs.docker.com/engine/reference/builder/#from) Docker documentation for more information.
+### Add an Entrypoint
+
+### Adding Required Tools
 
 Add the tools
 required for your job
