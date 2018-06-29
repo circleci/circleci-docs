@@ -124,7 +124,7 @@ If we were to change the first step in our example Dockerfile—perhaps we want 
 
 ## Enabling DLC
 
-***Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.*
+***Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.*
 
 ### Remote Docker Environment
 
