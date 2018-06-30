@@ -169,3 +169,21 @@ by using the `--timings-type` flag.
 
 If you need to manually store and retrieve timing data,
 use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
+
+## Test suite split with Knapsack Pro
+
+{% include third-party-info.html app='Knapsack Pro'%}
+
+You can parallelize tests for RSpec, Cucumber, Minitest, Test::Unit, Spinach and Turnip with [knapsack_pro gem](https://github.com/KnapsackPro/knapsack_pro-ruby). It will split tests across CI nodes and it makes sure that tests will run comparable time on each CI node. [Knapsack Pro](https://knapsackpro.com/) gem has built-in support for CircleCI and can help to track slow test files among your CI builds.
+
+<iframe width="854" height="480" src="https://www.youtube.com/embed/pkdLzKlnlQg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+You may find useful an example of [Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) project.
+
+### Splitting in a dynamic way (Queue Mode) - recommended
+
+Autobalance tests to get optimal test suite split between CI nodes. It is designed for tests with random time execution and can solve other issues like filling timing gaps between jobs to complete the CI build as fast as possible. See video [how to split Ruby tests across CI nodes in a dynamic way using Knapsack Pro Queue Mode](https://www.youtube.com/watch?v=hUEB1XDKEFY).
+
+### Splitting in a deterministic way (Regular Mode)
+
+Deterministic split based on test files timing tracked across multiple branches and commits. See video [how split Ruby tests in the deterministic way across CI nodes with Regular Mode in Knapsack Pro](https://www.youtube.com/watch?v=ZEb6NeRRfQ4).
