@@ -1,5 +1,3 @@
-Link to GitHub and/or JIRA issue:
-
 Brief description of changes:
 
-Reviewers:
+Reason for changes OR link to GitHub/JIRA issue:
