@@ -11,7 +11,6 @@ Choose the **kind** of issue you are having. We use the following categories to 
 - Outdated = old but functional
 - Inconsistent = conflicting information
 - Unclear = confusing or ambiguous language
-- Typo = grammatically incorrect
 
 # Problem Details
 The details we need to fix the issue will depend on the kind of issue. Based on the issue category, answer the following questions to help us out.
