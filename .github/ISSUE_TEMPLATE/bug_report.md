@@ -7,7 +7,7 @@ about: Tell us about a technical problem with the site
 If the bug appeared on a specific document,
 please paste a link to the document.
 
-# Problem Details
+# Bug Details
 To help us fix the bug,
 please answer the following questions:
 
