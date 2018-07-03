@@ -3,6 +3,7 @@ name: Document Request
 about: Tell us about something that *isn't* documented
 ---
 
+# New Document Details
 To help us create new documentation,
 please answer the following questions:
 
