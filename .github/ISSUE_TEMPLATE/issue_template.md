@@ -19,10 +19,6 @@ The details we need to fix the issue will depend on the kind of issue. Based on 
 - What is wrong?
 - How do you know? (build output, external link)
 
-## Outdated
-- What is out of date?
-- How should it be updated?
-
 ## Inconsistent
 - What information is conflicting?
 

@@ -7,5 +7,5 @@ To help us create new documentation,
 please answer the following questions:
 
 - What are you looking for?
-- Where have you already looked for this information?
-- Where would you expect to find this information?
+- Where have you already looked for this information? (other documents, Google, etc.)
+- Where would you put this information?
