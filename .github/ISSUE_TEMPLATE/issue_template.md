@@ -15,10 +15,6 @@ Choose the **kind** of issue you are having. We use the following categories to 
 # Problem Details
 The details we need to fix the issue will depend on the kind of issue. Based on the issue category, answer the following questions to help us out.
 
-## Undocumented
-- What are you looking for?
-- Where have you already looked?
-
 ## Incorrect
 - What is wrong?
 - How do you know? (build output, external link)
@@ -32,6 +28,3 @@ The details we need to fix the issue will depend on the kind of issue. Based on 
 
 ## Unclear
 - What is confusing to you?
-
-## Typo
-- What is grammatically incorrect?
