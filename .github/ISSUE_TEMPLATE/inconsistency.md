@@ -1,5 +1,5 @@
 ---
-name: Inconsistency Report
+name: Inconsistent Documentation
 about: Report conflicting documentation
 ---
 
