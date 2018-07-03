@@ -8,4 +8,4 @@ A link to the document with the typo.
 
 # Typo Details
 - What is incorrect?
-- What should it be corrected to?
+- How do you think it should be changed?
