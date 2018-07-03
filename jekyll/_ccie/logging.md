@@ -22,7 +22,7 @@ CircleCI Builders store logs in `/var/log/**/*.log` except for Docker, which sto
 
 Logging appliances generally require
 installation of a custom agent on each machine and configuration that collects logs and
-forwards them to a service, for example [Logstash](https://www.elastic.co/products/logstash),
+forwards them to a service, for example [LogDNA](https://logdna.com/), [Logstash](https://www.elastic.co/products/logstash),
 [Splunk](http://www.splunk.com/), [Graylog](https://www.graylog.org/), and
 [Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 
