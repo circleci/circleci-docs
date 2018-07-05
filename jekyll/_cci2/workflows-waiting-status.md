@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Workflows Waiting for Status in Github"
-short-title: "Workflows Waiting for Status in Github"
-description: "Fixing Workflows Waiting for Status in Github"
+title: "Workflows Waiting for Status in GitHub"
+short-title: "Workflows Waiting for Status in GitHub"
+description: "Fixing Workflows Waiting for Status in GitHub"
 categories: [troubleshooting]
 order: 1
 ---
@@ -13,7 +13,7 @@ If you have implemented workflows on a branch in your GitHub repository, but the
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
+Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
 
