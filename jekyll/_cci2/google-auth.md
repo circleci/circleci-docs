@@ -105,8 +105,8 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
-        name: Store Service Account
-        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          name: Store Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 ```
 
 **Note:**
@@ -127,8 +127,8 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run:
-        name: Store Service Account
-        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          name: Store Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: |
           sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
