@@ -918,7 +918,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a workflow for the `master` branch.
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
