@@ -97,7 +97,7 @@ RUN set -ex \
   && ls -lha /tmp/docker.tgz \
   && tar -xz -C /tmp -f /tmp/docker.tgz \
   && mv /tmp/docker/* /usr/bin \
-  && rm -rf /tmp/docker /tmp/docker.tgz \
+  && rm -rf /tmp/docker /tmp/docker.tgz
 
 # install docker-compose
 RUN curl --silent --show-error --location --fail --retry 3 --output /usr/bin/docker-compose \
