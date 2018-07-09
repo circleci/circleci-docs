@@ -158,6 +158,97 @@ workflows:
               only: master
 ```
 
+## Cloud Foundry
+
+Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to you docker image (commands below assume debian based image).  This example pattern takes advantage of  "Blue/Green" deployments using Cloud Foundry's map-route/unmap-route commands, but is not necessary.
+
+### Install the CLI
+
+```
+- run:
+    name: Setup CF CLI
+    command: |
+      curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+      sudo dpkg -i cf-cli_amd64.deb
+      cf -v
+      cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
+      cf auth $CF_USER $CF_PASSWORD
+      cf target -o $CF_ORG -s $CF_SPACE
+```
+
+### Dark Deployment
+This is the first step in a blue/green deployment.  It pushes out the application and starts it, but on non-production routes.
+
+```
+- run:
+    name: CF Deploy
+    command: |
+      # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
+      cf push --no-start app-name-dark -f manifest.yml -p application.jar -n dark -d example.com
+      # Pass CircleCI variables to Cloud Foundry (optional)
+      cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
+      cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
+      cf set-env app-name-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
+      cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
+      cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
+      # Start the application
+      cf start blueskygreenbuilds-dark
+      # Ensure dark route is exclusive to dark app
+      cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
+```
+
+### Live Deployment
+Until this point the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
+
+```
+- run:
+    name: Re-route live Domain to latest
+    command: |
+      # Send "real" url to new version
+      cf map-route app-name-dark example.com -n www
+      # Stop sending traffic to previous version
+      cf unmap-route app-name example.com -n www
+      # stop previous version
+      cf stop app-name
+      # delete previous version
+      cf delete app-name -f
+      # Switch name of "dark" version to claim correct name
+      cf rename app-name-dark app-name
+```
+
+### Manual Approval
+
+For additional control or validation, you can add a manual "hold" step between the blue & green steps as shown in the sample workflow below.
+
+```
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - test
+      - dark-deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - hold:
+          type: approval
+          requires:
+            - dark-deploy
+          filters:
+            branches:
+              only: master
+      - live-deploy:
+          requires:
+            - hold
+          filters:
+            branches:
+              only: master
+```
+
+
+
 ## Firebase
 
 Add firebase-tools to the project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
@@ -228,7 +319,7 @@ In the following example, if `build-job` passes and the current branch was the m
          - run:
              name: Deploy Master to GKE
              command: ./deploy.sh
-               
+
     workflows:
       version: 2
       build-deploy:
@@ -240,12 +331,12 @@ In the following example, if `build-job` passes and the current branch was the m
               filters:
                 branches:
                   only: master
-                  
+
 ```
 
 The deployment script pushes the newly created Docker image out to the registry, then updates the K8s deployment to use the
 new image with a `gcloud` command to handle authentication and push the image all at
-once: 
+once:
 
 ```
 sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
@@ -353,7 +444,7 @@ jobs:
       - checkout
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm publish
-  
+
 workflows:
   version: 2
   tagged-build:
@@ -375,7 +466,7 @@ workflows:
 
     ```
     git push --follow-tags
-    ``` 
+    ```
 5.  If tests passed, CircleCI will publish the package to npm automatically.
 
 ## SSH
