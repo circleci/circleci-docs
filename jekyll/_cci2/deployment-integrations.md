@@ -160,7 +160,7 @@ workflows:
 
 ## Cloud Foundry
 
-Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to you docker image (commands below assume debian based image).  This example pattern takes advantage of  "Blue/Green" deployments using Cloud Foundry's map-route/unmap-route commands, but is not necessary.
+Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image).  This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
 ### Install the CLI
 
@@ -177,7 +177,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 ```
 
 ### Dark Deployment
-This is the first step in a blue/green deployment.  It pushes out the application and starts it, but on non-production routes.
+This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
 
 ```
 - run:
@@ -198,7 +198,7 @@ This is the first step in a blue/green deployment.  It pushes out the applicatio
 ```
 
 ### Live Deployment
-Until this point the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
+Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
 
 ```
 - run:
@@ -218,7 +218,7 @@ Until this point the previously pushed "app-name" has not changed.  The final st
 
 ### Manual Approval
 
-For additional control or validation, you can add a manual "hold" step between the blue & green steps as shown in the sample workflow below.
+For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
 
 ```
 workflows:
@@ -246,8 +246,6 @@ workflows:
             branches:
               only: master
 ```
-
-
 
 ## Firebase
 
