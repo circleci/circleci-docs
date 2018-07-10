@@ -72,7 +72,7 @@ extend the base image
 by using the [`FROM` instruction](https://docs.docker.com/engine/reference/builder/#from).
 
 ```Dockerfile
-FROM golang:1.8.0
+FROM ubuntu:18.04
 ```
 
 ### Add an Entrypoint
