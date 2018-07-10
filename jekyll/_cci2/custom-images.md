@@ -51,7 +51,7 @@ This is a text document containing commands
 that Docker uses
 to assemble an image.
 Consider keeping your `Dockerfile` in your `.circleci/images` folder,
-as shown in this [Docker demo project](https://github.com/circleci/cci-demo-docker).
+as shown in [this Docker demo project](https://github.com/circleci/cci-demo-docker).
 
 ### Choosing and Setting a Base Image
 
