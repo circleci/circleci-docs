@@ -75,26 +75,17 @@ by using the [`FROM` instruction](https://docs.docker.com/engine/reference/build
 FROM ubuntu:18.04
 ```
 
-### Adding Required Tools
+### Installing Additional Tools
 
-Add the tools
-required for your job
-by using the `RUN` command:
-
-**Note:**
-For images **not** based on [`Debian`-like](https://en.wikipedia.org/wiki/Debian) distributions,
-the command for installing additional applications might be different.
-For instance,
-for [`Alpine`](https://en.wikipedia.org/wiki/Alpine_Linux) based images the same tools might be installed using:
+To install any additional tools
+or execute other commands,
+use the [`RUN` instruction](https://docs.docker.com/engine/reference/builder/#run):
 
 ```Dockerfile
-RUN apk update && apk add netcat-openbsd git
-RUN go get github.com/jstemmer/go-junit-report
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends mysql-client \
+    && rm -rf /var/lib/apt/lists/*
 ```
-
-Read more about [`RUN` command](https://docs.docker.com/engine/reference/builder/#run).
-
-### Adding an Entrypoint
 
 ### Adding Required and Custom Tools or Files
 
@@ -115,6 +106,8 @@ ADD custom_tool /usr/bin/
 ```
 
 In this case we copy `custom_tool` into the `/usr/bin/` directory of an image. **Note:** `custom_tool` must be in the same directory as `Dockerfile`. Read more about the [`ADD` command](https://docs.docker.com/engine/reference/builder/#add).
+
+### Adding an Entrypoint
 
 ### Building the image
 
