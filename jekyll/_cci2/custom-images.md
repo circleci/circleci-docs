@@ -81,19 +81,6 @@ Add the tools
 required for your job
 by using the `RUN` command:
 
-```Dockerfile
-RUN apt-get update && apt-get install -y netcat
-RUN go get github.com/jstemmer/go-junit-report
-```
-
-In the example project,
-`netcat` is used
-to validate that the database is up and running.
-The `golang:1.8.0` base image does not have it preinstalled,
-so we specify `netcat` in the `Dockerfile`.
-The next line installs a special Go library
-for generating test reports `go-junit-report`.
-
 **Note:**
 For images **not** based on [`Debian`-like](https://en.wikipedia.org/wiki/Debian) distributions,
 the command for installing additional applications might be different.
