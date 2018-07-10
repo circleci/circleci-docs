@@ -99,7 +99,7 @@ Cache is immutable on write: once a cache is written for a particular key like `
 
 In a run of the workflow, Job3 may use the cache written by Job1 or Job2.  Since caches are immutable, this would be whichever job saved its cache first.  This is usually undesireable because the results aren't deterministic--part of the result depends on chance.  You could make this workflow deterministic by changing the job dependencies: make Job1 and Job2 write to different caches and Job3 loads from only one, or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
 
-There are more complex cases, where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`.  The possibility for a race condition still exists, but the details may change.  For instance, the downstream job uses the cache from the upstream job to run last.
+There are more complex cases, where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`.  The possibility for a race condition still exists, but the details may change.  For instance, the downstream job uses the cache from the upstream job to run last.
 
 Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2.  Job2 uses the cache saved from Job1.  Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it.  Job2 could also load a cache from a previous workflow.  If this happens, this means Job2 tried to load the cache before Job1 saved it.  This can be resolved by creating a workflow dependency: Job1 -> Job2.  This would force Job2 to wait until Job1 has finished running.
 
@@ -119,9 +119,9 @@ In the example below, two keys are provided:
     steps:
       - restore_cache:
           keys:
-            # Find a cache corresponding to this specific package.json checksum
+            # Find a cache corresponding to this specific package-lock.json checksum
             # when this file is changed, this key will fail
-            - v1-npm-deps-{{ checksum "package.json" }}
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
             # Find the most recently generated cache used from any branch
             - v1-npm-deps-
 ```
@@ -176,8 +176,8 @@ The first step is to decide when a cache will be saved or restored by using a ke
 
 Following are some examples of caching strategies for different goals:
 
- * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate separate cache keys.
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - Cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate separate cache keys.
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
@@ -188,7 +188,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents, so that a new cache key is generated if the file changes. This should be a file committed in your repo. Consider using dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key that is different from the file used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or Unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux amd64`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}
