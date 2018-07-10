@@ -75,8 +75,6 @@ by using the [`FROM` instruction](https://docs.docker.com/engine/reference/build
 FROM ubuntu:18.04
 ```
 
-### Add an Entrypoint
-
 ### Adding Required Tools
 
 Add the tools
@@ -108,6 +106,8 @@ RUN go get github.com/jstemmer/go-junit-report
 ```
 
 Read more about [`RUN` command](https://docs.docker.com/engine/reference/builder/#run).
+
+### Adding an Entrypoint
 
 ### Adding Required and Custom Tools or Files
 
