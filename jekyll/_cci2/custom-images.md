@@ -64,8 +64,8 @@ from which to choose.
 These variants are specified by [Docker tags](https://docs.docker.com/engine/reference/commandline/tag/).
 
 For example,
-if you want to use version 3.6 of the [official Alpine image](https://hub.docker.com/_/alpine/),
-the full image name is `alpine:3.6`.
+if you want to use version 3.5 of the [official Alpine image](https://hub.docker.com/_/alpine/),
+the full image name is `alpine:3.5`.
 
 In your `Dockerfile`,
 extend the base image
