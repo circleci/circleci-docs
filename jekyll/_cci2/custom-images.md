@@ -99,7 +99,7 @@ a custom Docker image must have the following tools installed:
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
 **Note:**
-If you choose not to install these tools with a package manager,
+If you do not install these tools with a package manager,
 you must use the `ADD` instruction instead of `RUN` (see below).
 
 ### Adding Other Files and Directories
