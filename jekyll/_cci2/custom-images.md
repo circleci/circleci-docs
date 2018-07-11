@@ -119,7 +119,7 @@ ADD ./db/migrations /migrations
 ### Adding an Entrypoint
 
 To run the container as an executable,
-use the [ENTRYPOINT instruction](https://docs.docker.com/engine/reference/builder/#entrypoint),
+use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint).
 
 ```Dockerfile
 LABEL com.circleci.preserve-entrypoint=true
@@ -131,7 +131,7 @@ ENTRYPOINT contacts
 By default,
 CircleCI does not preserve the entrypoint.
 To change this behavior,
-use the [LABEL instruction](https://docs.docker.com/engine/reference/builder/#label)
+use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label)
 as shown in the above example.
 
 ### Building the image
