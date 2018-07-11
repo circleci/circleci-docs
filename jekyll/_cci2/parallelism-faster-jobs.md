@@ -134,7 +134,7 @@ Provide a path to the test files.
 
 Or pipe a glob of test files.
 
-    circleci tests glob test/**/*.java | circleci tests split
+    circleci tests glob "test/**/*.java" | circleci tests split
 
 #### Splitting by Filesize
 
