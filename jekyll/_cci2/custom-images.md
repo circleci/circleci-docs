@@ -87,15 +87,26 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 ```
 
-### Adding Required and Custom Tools or Files
+#### Required Tools for Primary Containers
 
-There are a few tools a custom image needs to have in order to be used as a primary image in CircleCI:
+In order to be used as a primary container on CircleCI,
+a custom Docker image must have the following tools installed:
 
- * git
- * ssh
- * tar
- * gzip
- * ca-certificates
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [ssh](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
+- [tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
+- [gzip](http://www.gzip.org/)
+- [ca-certificates](https://packages.debian.org/sid/ca-certificates)
+
+**Note:**
+If you choose not to install these tools with a package manager,
+you must use the `ADD` instruction instead of `RUN` (see below).
+
+### Adding Other Files and Directories
+
+To add files and directories
+that are **not** present in package managers,
+use the [`ADD` instruction](https://docs.docker.com/engine/reference/builder/#add).
 
 Ensure that these tools are present in your custom image. You might not need to install all of them, if the base image you choose has some of them pre-installed. Without these tools, some CircleCI services (Artifacts, storing test results, etc.) may not work.
 
