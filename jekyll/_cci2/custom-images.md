@@ -72,7 +72,7 @@ extend the base image
 by using the [`FROM` instruction](https://docs.docker.com/engine/reference/builder/#from).
 
 ```Dockerfile
-FROM ubuntu:18.04
+FROM golang:1.8.0
 ```
 
 ### Installing Additional Tools
@@ -82,9 +82,8 @@ or execute other commands,
 use the [`RUN` instruction](https://docs.docker.com/engine/reference/builder/#run).
 
 ```Dockerfile
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y netcat
+RUN go get github.com/jstemmer/go-junit-report
 ```
 
 #### Required Tools for Primary Containers
