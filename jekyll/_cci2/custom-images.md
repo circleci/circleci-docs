@@ -79,7 +79,7 @@ FROM ubuntu:18.04
 
 To install any additional tools
 or execute other commands,
-use the [`RUN` instruction](https://docs.docker.com/engine/reference/builder/#run):
+use the [`RUN` instruction](https://docs.docker.com/engine/reference/builder/#run).
 
 ```Dockerfile
 RUN apt-get update \
@@ -98,6 +98,9 @@ a custom Docker image must have the following tools installed:
 - [gzip](http://www.gzip.org/)
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
+Without these tools,
+some CircleCI services may not work.
+
 **Note:**
 If you do not install these tools with a package manager,
 you must use the `ADD` instruction instead of `RUN` (see below).
@@ -105,18 +108,13 @@ you must use the `ADD` instruction instead of `RUN` (see below).
 ### Adding Other Files and Directories
 
 To add files and directories
-that are **not** present in package managers,
+that are not present in package managers,
 use the [`ADD` instruction](https://docs.docker.com/engine/reference/builder/#add).
 
-Ensure that these tools are present in your custom image. You might not need to install all of them, if the base image you choose has some of them pre-installed. Without these tools, some CircleCI services (Artifacts, storing test results, etc.) may not work.
-
-To add custom files or tools not present in package managers, use the `ADD` command:
-
 ``` Dockerfile
-ADD custom_tool /usr/bin/
+ADD ./workdir/contacts /usr/bin/contacts
+ADD ./db/migrations /migrations
 ```
-
-In this case we copy `custom_tool` into the `/usr/bin/` directory of an image. **Note:** `custom_tool` must be in the same directory as `Dockerfile`. Read more about the [`ADD` command](https://docs.docker.com/engine/reference/builder/#add).
 
 ### Adding an Entrypoint
 
