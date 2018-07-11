@@ -128,7 +128,7 @@ ENTRYPOINT contacts
 
 **Note:**
 By default,
-CircleCI does not preserve the entrypoint.
+CircleCI does not preserve entrypoints.
 To change this behavior,
 use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label)
 as shown in the above example.
