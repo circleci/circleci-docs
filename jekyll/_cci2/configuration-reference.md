@@ -502,7 +502,7 @@ alerts in chatrooms.
     working_directory: ~/my-app
     no_output_timeout: 30m
     environment:
-      FOO: "bar"
+      FOO: bar
 
 - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
