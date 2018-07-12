@@ -109,7 +109,7 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
     environment:
-      FOO: "bar"
+      FOO: bar
 ```
 
 ## Setting an Environment Variable in a Container
