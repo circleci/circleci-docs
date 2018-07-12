@@ -43,11 +43,15 @@ It is also possible to specify all the way down to the specific SHA of the image
 
 ## Image Types
 
-CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
+CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images.
+All images add a `circleci` user as a system user.
 
 ### Language Images
 
-Language images are images for common programming languages, along with some common [pre-installed tools](#pre-installed-tools). A language image should be listed first under the `docker` key in your configuration, thus becoming the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+Language images are images for common programming languages,
+along with some common [pre-installed tools](#pre-installed-tools).
+A language image should be listed first under the `docker` key in your configuration,
+thus becoming the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI maintains language images for the following languages:
 
