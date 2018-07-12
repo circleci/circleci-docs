@@ -139,7 +139,7 @@ You can specify image versions using tags or digest. You can use any public imag
 
 Example:
 
-``` YAML
+```yaml
 jobs:
   build:
     docker:
