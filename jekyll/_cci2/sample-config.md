@@ -21,7 +21,8 @@ The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new k
 Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build:
@@ -43,7 +44,9 @@ workflows:
       - build
       - test
 ```
+
 {% endraw %}
+
 This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## Sample Configuration with Sequential Workflow
@@ -51,7 +54,8 @@ This example shows a parallel job workflow where the `build` and `test` jobs run
 Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build:
@@ -106,7 +110,9 @@ workflows:
             branches:
               only: master
 ```
+
 {% endraw %}
+
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## Sample Configuration with Fan-in/Fan-out Workflow
@@ -115,7 +121,8 @@ Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the
 Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 {% raw %}
-```
+
+```yaml
 version: 2.0
 
 jobs:
@@ -187,7 +194,7 @@ jobs:
         enabled: true
     working_directory: ~/circleci-demo-workflows
     environment:
-      - HEROKU_APP: still-shelf-38337
+      HEROKU_APP: still-shelf-38337
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -219,6 +226,7 @@ workflows:
             - rake_test
             - precompile_assets
 ```
+
 {% endraw %}
 
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
@@ -231,7 +239,8 @@ project will be built on macOS, and additional iOS tools
 will be run in Docker.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build-and-test:
@@ -290,4 +299,5 @@ workflows:
       - danger
       - build-and-test
 ```
+
 {% endraw %}
