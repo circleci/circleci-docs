@@ -236,4 +236,3 @@ When you have all the sections in `.circleci/config.yml` we recommend that you c
 
 - Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
 - Refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.
-
