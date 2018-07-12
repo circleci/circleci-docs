@@ -216,7 +216,7 @@ jobs:
     environment:
       BUNDLE_PATH: vendor/bundle  # path to install gems and use for caching
     steps:
-      ...
+      # add other steps here
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
@@ -287,7 +287,7 @@ tests as follows:
 jobs:
   build-and-deploy:
     steps:
-      ...
+      # add other steps here
       - run:
           name: Run tests
           command: bundle exec fastlane scan
@@ -349,7 +349,7 @@ its own job:
 
 ```yaml
 jobs:
-  ...
+  # add other jobs here
   deploy:
     macos:
       xcode: 8.3.3
