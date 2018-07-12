@@ -23,6 +23,13 @@ All of these pre-built images are available in the [CircleCI org on Docker Hub](
 The source code for these images is [available on GitHub](https://github.com/circleci/circleci-images).
 Dockerfiles for these images are also [archived on GitHub](https://github.com/circleci-public/circleci-dockerfiles).
 
+For a brief overview,
+watch this video.
+
+<div class="video-wrapper">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## Best Practices
 
 CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container, similar to using `:latest`. It is best practice to lock down aspects of your build container, by specifying an additional tag to pin down the image in your configuration.
@@ -68,11 +75,6 @@ CircleCI maintains service images for the following services:
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
-
-## How to Get Started with Pre-Built Docker Images Video Tutorial
-<div class="video-wrapper">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
-</div>
 
 ## Pre-installed Tools
 
