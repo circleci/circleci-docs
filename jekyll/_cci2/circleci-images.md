@@ -53,7 +53,7 @@ along with some common [pre-installed tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
 thus becoming the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
-CircleCI maintains language images for the following languages:
+CircleCI maintains images for the languages below.
 
 - [Android](#android)
 - [Clojure](#clojure)
@@ -72,7 +72,7 @@ If your language is not listed, CircleCI also maintains a wizard you can use to 
 
 Service images are images for services like databases. These images should be listed _after_ language images so they become secondary service containers.
 
-CircleCI maintains service images for the following services:
+CircleCI maintains images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
 - [MariaDB](#mariadb)
