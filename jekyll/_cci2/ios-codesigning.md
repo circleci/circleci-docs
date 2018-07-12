@@ -189,7 +189,7 @@ platform :ios do
 end
 ```
 
-```
+```yaml
 # .circleci/config.yml
 version: 2
 jobs:
