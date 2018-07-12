@@ -24,7 +24,7 @@ The source code for these images is [available on GitHub](https://github.com/cir
 Dockerfiles for these images are also [archived on GitHub](https://github.com/circleci-public/circleci-dockerfiles).
 
 For a brief overview,
-watch this video.
+watch the video below.
 
 <div class="video-wrapper">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
