@@ -1048,7 +1048,8 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 {:.no_toc}
 
 {% raw %}
-``` YAML
+
+```yaml
 version: 2
 jobs:
   build:
@@ -1160,4 +1161,5 @@ workflows:
             branches:
               only: master          
 ```
+
 {% endraw %}
