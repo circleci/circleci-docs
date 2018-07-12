@@ -69,7 +69,7 @@ jobs:
     docker:
       - image: ruby:2.4.0
         environment:
-          - LANG: C.UTF-8
+          LANG: C.UTF-8
     working_directory: /my-project
     parallelism: 2
     steps:
