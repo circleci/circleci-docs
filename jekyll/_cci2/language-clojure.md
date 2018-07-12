@@ -28,6 +28,7 @@ If you use another testing tool, you can just adjust that step to run a differen
 ## Sample Configuration
 
 {% raw %}
+
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # basic units of work in a run
@@ -53,6 +54,7 @@ jobs: # basic units of work in a run
           destination: uberjar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
 ```
+
 {% endraw %}
 
 ## Get the Code
