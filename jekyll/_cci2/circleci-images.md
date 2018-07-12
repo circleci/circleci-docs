@@ -78,8 +78,6 @@ CircleCI maintains service images for the following services:
 
 All convenience images have been extended with additional tools.
 
-### APT Packages
-
 The following packages are installed with `apt-get` on every image:
 
 - [bzip2](https://packages.debian.org/stretch/bzip2)
@@ -100,8 +98,6 @@ The following packages are installed with `apt-get` on every image:
 - [wget](https://packages.debian.org/stretch/wget)
 - [xvfb](https://packages.debian.org/stretch/xvfb)
 - [zip](https://packages.debian.org/stretch/zip)
-
-### Other Packages
 
 The following packages are installed via `curl` or other means:
 
