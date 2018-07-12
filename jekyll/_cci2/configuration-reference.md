@@ -326,7 +326,7 @@ Java, Erlang and any other languages that introspect the `/proc` directory for i
 
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
-```
+```yaml
 jobs:
   build:
     working_directory: ~/canary-python
