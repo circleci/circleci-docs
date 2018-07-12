@@ -27,6 +27,7 @@ Running the Android emulator is not currently supported by the type of virtualiz
 ## Sample Configuration
 
 {% raw %}
+
 ```yaml
 version: 2
 jobs:
@@ -61,6 +62,7 @@ jobs:
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 
 ```
+
 {% endraw %}
 
 ## Config Walkthrough
