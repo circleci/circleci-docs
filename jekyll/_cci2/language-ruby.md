@@ -40,6 +40,7 @@ Database images for use as a secondary 'service' container are also available on
 ## Sample Configuration
 
 {% raw %}
+
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
@@ -122,6 +123,7 @@ jobs: # a collection of steps
           path: test_results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs    
 ```
+
 {% endraw %}
 
 ---
