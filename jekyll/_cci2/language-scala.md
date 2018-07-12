@@ -130,14 +130,18 @@ jobs:
                     pip install awscli
                     apt-get clean && apt-get autoclean
 ```
+
 The steps/run keys specify the types of actions to perform. The run keys represent the actions to be executed.
-```
+
+```yaml
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
+
 This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename. 
 
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
-```
+
+```yaml
           command: |
                     apt update && apt install -y curl
                     curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
@@ -148,6 +152,7 @@ The next run command executes multiple commands within the openjdk container. Si
                     pip install awscli
                     apt-get clean && apt-get autoclean
 ```
+
 The 2.0 version of our samplescala schema requires us to download required dependencies and install them into the container.  Below is an explanation of the example multi-line command:
 - Updates the container OS and installs curl.
 - Downloads the [Simple Build Tool (sbt)](https://www.scala-sbt.org/) compiler version specified in the $SBT_VERSION variable.
@@ -159,7 +164,8 @@ The 2.0 version of our samplescala schema requires us to download required depen
 - Removes all the unnecessary install packages to minimize container size.
 
 The following keys represent actions performed after the multi-line command is executed:
-```
+
+```yaml
       - checkout
       - restore_cache:
           key: sbt-cache
@@ -176,6 +182,7 @@ The following keys represent actions performed after the multi-line command is e
             - "~/.sbt"
             - "~/.m2"
 ```
+
 Below is an explanation of the preceding example:
 - `checkout`: basically git clones the project repo from github into the container 
 - `restore_cache` key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
@@ -185,7 +192,7 @@ Below is an explanation of the preceding example:
 
 The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 
-```
+```yaml
   - deploy:
       command: |
         mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
