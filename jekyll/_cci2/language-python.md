@@ -67,6 +67,7 @@ jobs: # a collection of steps
 Finally, add several `steps` within the `build` job:
 
 {% raw %}
+
 ```yaml
     steps: # a collection of executable commands
       - checkout # special step to check out source code to the working directory
@@ -90,6 +91,7 @@ Finally, add several `steps` within the `build` job:
           destination: tr1
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
+
 {% endraw %}
 
 For the complete list of CircleCI configuration keys,
