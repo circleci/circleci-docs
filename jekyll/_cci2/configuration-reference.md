@@ -494,7 +494,7 @@ alerts in chatrooms.
 
 ##### _Example_
 
-``` YAML
+```yaml
 - run:
     name: Testing application
     command: make test
