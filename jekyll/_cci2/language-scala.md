@@ -47,7 +47,7 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
@@ -104,11 +104,13 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
 ```
+
 The docker/image key represents the Docker image you want to use for the build. In this case, we want to use the official `openjdk:8` image from [Docker Hub](https://hub.docker.com/_/openjdk/) because it has the native Java compiler we need for our Scala project.
 
 The environment/SBT_VERSION is an environment variable that specifies the version of sbt to download in later commands which is required to compile the Scala app.
+
 ```yaml
 version: 2
 jobs:
@@ -117,7 +119,7 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
