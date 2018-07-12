@@ -136,7 +136,7 @@ and create surprising results.
 
 - `-ram`: variants that use the RAM volume to speed up builds
 
-<hr>
+## Latest Image Tags by Language
 
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
