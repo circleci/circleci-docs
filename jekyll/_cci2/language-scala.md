@@ -204,5 +204,3 @@ The deploy command is another multi-line execution.
 ## See Also 
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
-
-
