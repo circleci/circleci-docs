@@ -111,14 +111,6 @@ Caching is not currently supported in local jobs. When you have either a `save_c
 
 For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information.
 
-### Relative Path for working_directory
-
-The `working_directory:` key in your `.circleci/config.yml` file must not use a relative path for local jobs. If a relative path is used in `working_directory`, then `circleci` returns an error and immediately exits. To workaround this problem, change the value of the  `working_directory:` key in your `.circleci/config.yml` file to use an absolute path.
-
-This happens because `circleci` mounts the current directory to `working_directory` in order to skip the checkout step, but Docker doesn't allow the container path to be relative for a volume. See [here](https://github.com/docker/docker/issues/4830) for more details.
-
-We plan to remove this limitation in a future update.
-
 ## Using the Local CLI Within CircleCI Convenience Images
 
 The Local CLI is available in CircleCI [Docker convenience images]({{ site.baseurl }}/2.0/circleci-images/), the `machine` executor, and the `macos` executor. For example, check out [Merging and Splitting Tests]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for examples of using `circleci` commands in your `config.yml` file with a remote hosted environment.
