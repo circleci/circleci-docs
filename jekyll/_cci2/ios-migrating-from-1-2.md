@@ -36,7 +36,7 @@ benefit from the improvements in the CircleCI 2.0 platform, including:
 This sample configuration file should work for most iOS projects on
 CircleCI 2.0:
 
-```
+```yaml
 # .circleci/config.yml
 
 # Specify the config version - version 2 is latest.
@@ -209,7 +209,8 @@ key_. Here is how you can cache the Ruby gems based on the content of
 `Gemfile.lock`:
 
 {% raw %}
-```
+
+```yaml
 jobs:
   build-and-deploy:
     environment:
@@ -233,6 +234,7 @@ jobs:
           paths:
             - vendor/bundle
 ```
+
 {% endraw %}
 
 Every time your Gemfile.lock changes, a new cache will be created.
@@ -281,7 +283,7 @@ It is possible to use [Fastlane
 Scan](https://github.com/fastlane/fastlane/tree/master/scan) to run your
 tests as follows:
 
-```
+```yaml
 jobs:
   build-and-deploy:
     steps:
@@ -345,7 +347,7 @@ With the availability of Workflows in 2.0, it is best practice to
 extract all the commands related to the deployment of the app into
 its own job:
 
-```
+```yaml
 jobs:
   ...
   deploy:
