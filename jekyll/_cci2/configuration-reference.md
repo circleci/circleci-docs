@@ -88,7 +88,7 @@ jobs:
     docker:
       - image: buildpack-deps:trusty
     environment:
-      - FOO: "bar"
+      FOO: bar
     parallelism: 3
     resource_class: large
     working_directory: ~/my-app
