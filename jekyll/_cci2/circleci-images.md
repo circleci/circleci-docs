@@ -114,9 +114,13 @@ The following packages are installed via `curl` or other means:
 
 ## Image Variants
 
-CircleCI maintains variants of convenience images. These can be created by adding optional suffixes to the end of image tags.
+CircleCI maintains variants of convenience images.
+These can be created by adding optional suffixes to the end of image tags.
 
-**Note:** If you choose to use the `latest` tag, the image may change unexpectedly and create surprising results.
+**Note:**
+If you choose to use the `latest` tag,
+the image may change unexpectedly
+and create surprising results.
 
 ### Language Image Variants
 
