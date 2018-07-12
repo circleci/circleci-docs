@@ -515,7 +515,6 @@ steps:
       name: Upload Failed Tests
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
-
 ```
 
 ##### **`checkout`**
