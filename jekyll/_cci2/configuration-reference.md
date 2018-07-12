@@ -82,7 +82,8 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 `working_directory` will be created automatically if it doesn't exist.
 
 Example:
-``` YAML
+
+```yaml
 jobs:
   build:
     docker:
