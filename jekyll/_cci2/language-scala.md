@@ -121,14 +121,14 @@ jobs:
       - run:
           name: Get sbt binary
           command: |
-                    apt update && apt install -y curl
-                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-                    dpkg -i sbt-$SBT_VERSION.deb
-                    rm sbt-$SBT_VERSION.deb
-                    apt-get update
-                    apt-get install -y sbt python-pip git
-                    pip install awscli
-                    apt-get clean && apt-get autoclean
+            apt update && apt install -y curl
+            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+            dpkg -i sbt-$SBT_VERSION.deb
+            rm sbt-$SBT_VERSION.deb
+            apt-get update
+            apt-get install -y sbt python-pip git
+            pip install awscli
+            apt-get clean && apt-get autoclean
 ```
 
 The steps/run keys specify the types of actions to perform. The run keys represent the actions to be executed.
@@ -142,15 +142,16 @@ This echo command defines the $ARTIFACT_BUILD environment variable and sets it t
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
 
 ```yaml
+      - run:
           command: |
-                    apt update && apt install -y curl
-                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-                    dpkg -i sbt-$SBT_VERSION.deb
-                    rm sbt-$SBT_VERSION.deb
-                    apt-get update
-                    apt-get install -y sbt python-pip git
-                    pip install awscli
-                    apt-get clean && apt-get autoclean
+            apt update && apt install -y curl
+            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+            dpkg -i sbt-$SBT_VERSION.deb
+            rm sbt-$SBT_VERSION.deb
+            apt-get update
+            apt-get install -y sbt python-pip git
+            pip install awscli
+            apt-get clean && apt-get autoclean
 ```
 
 The 2.0 version of our samplescala schema requires us to download required dependencies and install them into the container.  Below is an explanation of the example multi-line command:
@@ -166,6 +167,7 @@ The 2.0 version of our samplescala schema requires us to download required depen
 The following keys represent actions performed after the multi-line command is executed:
 
 ```yaml
+    steps:
       - checkout
       - restore_cache:
           key: sbt-cache
@@ -193,6 +195,7 @@ Below is an explanation of the preceding example:
 The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 
 ```yaml
+steps:
   - deploy:
       command: |
         mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
