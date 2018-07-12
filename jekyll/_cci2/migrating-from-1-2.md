@@ -148,21 +148,21 @@ To increase the speed of your software development through faster feedback, shor
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 
-```
+```yaml
     environment:
       TZ: "/usr/share/zoneinfo/America/Los_Angeles"
 ```
 
 - If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
 
-```
+```yaml
     environment:
       PATH: "/path/to/foo/bin:$PATH"
 ```
 
 With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
 
-```
+```yaml
     steps:
       - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
       - run: some_program_inside_bin
@@ -170,14 +170,14 @@ With the following to load it into your shell (the file $BASH_ENV already exists
 
 - Search and replace the `hosts:` key, for example:
 
-```  
+```yaml
 hosts:
     circlehost: 127.0.0.1
 ```
 
 With an appropriate `run` Step, for example:
 
-```
+```yaml
     steps:
       - run: echo 127.0.0.1 circlehost | sudo tee -a /etc/hosts
 ```
@@ -185,7 +185,7 @@ With an appropriate `run` Step, for example:
 
 - Search and replace the `dependencies:`, `database`, or `test` and `override:` lines, for example:
 
-```
+```yaml
 dependencies:
   override:
     - <installed-dependency>
@@ -193,7 +193,7 @@ dependencies:
 
 Is replaced with:
 
-```
+```yaml
       - run:
           name: <name>
           command: <installed-dependency>
@@ -201,14 +201,14 @@ Is replaced with:
 
 - Search and replace the `cache_directories:` key:
 
-```
+```yaml
   cache_directories:
     - "vendor/bundle"
 ```
 
 With the following, nested under `steps:` and customizing for your application as appropriate:
 
-```
+```yaml
      - save_cache:
         key: dependency-cache
         paths:
@@ -219,7 +219,7 @@ With the following, nested under `steps:` and customizing for your application a
 
 - Search and replace `deployment:` with the following, nested under `steps`:
 
-```
+```yaml
      - deploy:
 ```
 
