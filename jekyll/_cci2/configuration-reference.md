@@ -495,25 +495,26 @@ alerts in chatrooms.
 ##### _Example_
 
 ```yaml
-- run:
-    name: Testing application
-    command: make test
-    shell: /bin/bash
-    working_directory: ~/my-app
-    no_output_timeout: 30m
-    environment:
-      FOO: bar
+steps:
+  - run:
+      name: Testing application
+      command: make test
+      shell: /bin/bash
+      working_directory: ~/my-app
+      no_output_timeout: 30m
+      environment:
+        FOO: bar
 
-- run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
-- run: |
-    sudo -u root createuser -h localhost --superuser ubuntu &&
-    sudo createdb -h localhost test_db
+  - run: |
+      sudo -u root createuser -h localhost --superuser ubuntu &&
+      sudo createdb -h localhost test_db
 
-- run:
-    name: Upload Failed Tests
-    command: curl --data fail_tests.log http://example.com/error_logs
-    when: on_fail
+  - run:
+      name: Upload Failed Tests
+      command: curl --data fail_tests.log http://example.com/error_logs
+      when: on_fail
 
 ```
 
