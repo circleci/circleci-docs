@@ -27,7 +27,8 @@ In the primary image the config defines an environment variable with the `enviro
 This Postgres image in the example is slightly modified already with `-ram` at the end. It runs in-memory so it does not  hit the disk and that will significantly improve the testing performance on this PostgreSQL database by using this image.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build:
@@ -48,19 +49,20 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-9.6
       - run: whoami
-      - run: | 
+      - run: |
           psql \
           -d $TEST_DATABASE_URL \
           -c "CREATE TABLE test (name char(25));"
-      - run: | 
+      - run: |
           psql \
           -d $TEST_DATABASE_URL \
           -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
-      - run: | 
+      - run: |
           psql \
           -d $TEST_DATABASE_URL \
           -c "SELECT * from test"
 ```
+
 {% endraw %}
 
 The `steps` run `checkout` first, then install the Postgres client tools. The `postgres:9.6.5-alpine-ram` image doesn't install any client-specific database adapters. For example, for Python, you might install `psychopg2` so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#service-images) for the list of images and for a video of this build configuration.
@@ -100,7 +102,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
-```
+```yaml
 version: 2.0
 jobs:
   build:
