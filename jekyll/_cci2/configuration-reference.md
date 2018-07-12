@@ -331,7 +331,7 @@ jobs:
   build:
     working_directory: ~/canary-python
     environment:
-      - FOO: "bar"
+      FOO: bar
     steps:
       - run:
           name: Running tests
