@@ -85,17 +85,13 @@ jobs:
 ## Schema Walkthrough
 
 All version 2.0 config.yml files must start with his line:
-```yaml
-version: 2
-```
-The next key in the schema is the jobs & build keys.  These keys are required and represent the default entry point for a run.
-```yaml
-version: 2
 
-jobs:
-    build:
+```yaml
+version: 2
 ```
-The build section hosts the remainder of the schema which executes our commands. This will be explained below.
+
+The next key in the schema is the jobs & build keys.  These keys are required and represent the default entry point for a run. The build section hosts the remainder of the schema which executes our commands. This will be explained below.
+
 ```yaml
 version: 2
 jobs:
