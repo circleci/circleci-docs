@@ -32,8 +32,6 @@ watch the video below.
 
 ## Best Practices
 
-CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container, similar to using `:latest`. It is best practice to lock down aspects of your build container, by specifying an additional tag to pin down the image in your configuration.
-
 That is, to prevent unintended changes that come from upstream, instead of using `circleci/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
 For example, add `-jessie` or `-stretch` to the end of each of those containers to ensure you're only using that base OS. You can pin down those images to a specific point version, like `circleci/ruby:2.3.7-jessie`, or you can just specify the OS version, with `circleci/ruby:2.3-jessie`. This is possible for any of the CircleCI images. 
