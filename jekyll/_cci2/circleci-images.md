@@ -76,7 +76,7 @@ The above images use the **most current** version of the upstream image.
 Because the latest images are often less stable,
 it is best practice to use a more specific tag.
 For more details,
-see the [Latest Image Tags by Language](#latest-image-tags-by-language).
+see the [Latest Image Tags by Language](#latest-image-tags-by-language) section.
 
 ### Service Images
 
