@@ -71,10 +71,6 @@ A map of environment variable names and values.
 These will override any environment variables
 you set in the CircleCI application.
 
-**Note**:
-While the `environment` key expects a map,
-a list will be accepted without failing or producing an error.
-
 #### `parallelism`
 
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
