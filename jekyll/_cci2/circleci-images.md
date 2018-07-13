@@ -142,7 +142,7 @@ That is, to prevent unintended changes that come from upstream, instead of using
 For example, add `-jessie` or `-stretch` to the end of each of those containers to ensure you're only using that base OS. You can pin down those images to a specific point version, like `circleci/ruby:2.3.7-jessie`, or you can just specify the OS version, with `circleci/ruby:2.3-jessie`. This is possible for any of the CircleCI images.
 
 It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes. To find the value, navigate to on older Build page in the CircleCI app that utilized the image you wish to use and select the drop-down for `Spin up Environment`. Inside you will find the SHA256, for example, 
-`circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`. 
+`circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`.
 
 
 {% assign images = site.data.docker-image-tags | sort %}
