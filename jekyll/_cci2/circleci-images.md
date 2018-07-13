@@ -115,18 +115,22 @@ The following packages are installed via `curl` or other means:
 
 ## Image Tags
 
+You can make convenience images more specific by adding tags.
+There are two good reasons to do this:
 
+- You want to pin an image to a certain version, operating system, or SHA.
+- You want to modify an image by adding tools or changing behavior.
 
-CircleCI maintains several variants for convenience images.
-These can be created by adding optional suffixes to the end of image tags.
+Since convenience images are based on the **latest** versions of upstream images,
+it is best practice to use the most specific image possible.
+This prevents the upstream image from introducing unintended changes to your image.
 
-For language images:
+Instead of using `circleci/golang:1.8`,
+for example,
+you could specify both the version and operating system
+by using `circleci/golang:1.8.6-jessie`.
 
-- `-node`: includes Node.js for polyglot applications
-- `-browsers`: includes Java 8, PhantomJS, Firefox, and Chrome
-- `-node-browsers`: a combination of the `-node` and `-browsers` variants
-
-For service images:
+You can also use a SHA to specify an image.
 
 - `-ram`: variants that use the RAM volume to speed up builds
 
