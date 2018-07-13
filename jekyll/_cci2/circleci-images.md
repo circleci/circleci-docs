@@ -120,11 +120,6 @@ The following packages are installed via `curl` or other means:
 CircleCI maintains several variants for convenience images.
 These can be created by adding optional suffixes to the end of image tags.
 
-**Note:**
-If you choose to use the `latest` tag,
-the image may change unexpectedly
-and create surprising results.
-
 For language images:
 
 - `-node`: includes Node.js for polyglot applications
@@ -134,6 +129,11 @@ For language images:
 For service images:
 
 - `-ram`: variants that use the RAM volume to speed up builds
+
+**Note:**
+If you choose to use the `latest` tag,
+the image may change unexpectedly
+and create surprising results.
 
 ### Latest Image Tags by Language
 
