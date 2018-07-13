@@ -61,7 +61,7 @@ CircleCI also maintains a wizard you can use to create a custom image.
 See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions.
 
 **Note:**
-The above images are based on the **most current** versions of their respective languages.
+The above images are based on the **most current** upstream images for their respective languages.
 Because the latest images are more likely to change,
 it is best practice to use a more specific tag.
 For more details,
