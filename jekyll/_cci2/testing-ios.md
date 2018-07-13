@@ -62,7 +62,7 @@ In addition to the basic setup steps, it is best practice to include
 downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
 and linting the Swift code together with the `build-and-test` job:
 
-```
+```yaml
 # .circleci/config.yml
 version: 2
 jobs:
@@ -111,11 +111,10 @@ The recommended configuration can be extended to add a lint job and a Danger
 job as follows:
 
 
-```
+```yaml
 version: 2
 jobs:
   build-and-test:
-  ...
   swiftlint:
     docker:
       - image: dantoml/swiftlint:latest
@@ -219,7 +218,7 @@ end
 
 This configuration can be used with the following CircleCI config file:
 
-```
+```yaml
 # .circleci/config.yml
 version: 2
 jobs:
@@ -562,7 +561,8 @@ project will be built on macOS, and additional iOS tools
 will be run in Docker.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build-and-test:
@@ -620,6 +620,7 @@ workflows:
       - danger
       - build-and-test
 ```
+
 {% endraw %}
 
 ## React Native projects

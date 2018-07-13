@@ -118,7 +118,7 @@ And install the Go implementation of the JUnit reporting tool and other dependen
 
 Both containers (primary and postgres) start simultaneously, however Postgres may require some time to get ready and if our tests start before that the job will fail. So it's good practice to wait until dependent services are ready. Here we have only Postgres, so we add this step:
 
-``` YAML
+```yaml
       - run:
           name: Waiting for Postgres to be ready
           command: |
@@ -148,20 +148,20 @@ Now we run our tests. To do that, we need to set an environment variable for our
 
 Our project uses `make` for building and testing (you can see `Makefile` [here](https://github.com/CircleCI-Public/circleci-demo-go/blob/master/Makefile)), so we can just run `make test`. In order to collect test results and upload them later (read more about test results in the [Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/)) we're using `go-junit-report`:
 
-``` YAML
+```bash
 make test | go-junit-report > ${TEST_RESULTS}/go-test-report.xml
 ```
 
 In this case all output from `make test` will go straight into `go-junit-report` without appearing in `stdout`. We can solve this by using two standard Unix commands `tee` and `trap`. The first one allows us to duplicate output into `stdout` and somewhere else ([read more](http://man7.org/linux/man-pages/man1/tee.1.html)). The second one allows us to specify some command to be executed on script exit ([read more](http://man7.org/linux/man-pages/man1/trap.1p.html)). So we can do:
 
-``` YAML
+```bash
 trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
 make test | tee ${TEST_RESULTS}/go-test.out
 ```
 
 Now we know that our unit tests succeeded we can start our service and validate it's running.
 
-``` YAML
+```yaml
       - run: make
 
       - save_cache:

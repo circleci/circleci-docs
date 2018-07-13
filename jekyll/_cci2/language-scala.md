@@ -47,7 +47,7 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
@@ -85,17 +85,13 @@ jobs:
 ## Schema Walkthrough
 
 All version 2.0 config.yml files must start with his line:
-```yaml
-version: 2
-```
-The next key in the schema is the jobs & build keys.  These keys are required and represent the default entry point for a run.
-```yaml
-version: 2
 
-jobs:
-    build:
+```yaml
+version: 2
 ```
-The build section hosts the remainder of the schema which executes our commands. This will be explained below.
+
+The next key in the schema is the jobs & build keys.  These keys are required and represent the default entry point for a run. The build section hosts the remainder of the schema which executes our commands. This will be explained below.
+
 ```yaml
 version: 2
 jobs:
@@ -104,11 +100,13 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
 ```
+
 The docker/image key represents the Docker image you want to use for the build. In this case, we want to use the official `openjdk:8` image from [Docker Hub](https://hub.docker.com/_/openjdk/) because it has the native Java compiler we need for our Scala project.
 
 The environment/SBT_VERSION is an environment variable that specifies the version of sbt to download in later commands which is required to compile the Scala app.
+
 ```yaml
 version: 2
 jobs:
@@ -117,39 +115,45 @@ jobs:
     docker:
       - image: openjdk:8
     environment:
-      - SBT_VERSION: 1.0.4
+      SBT_VERSION: 1.0.4
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
           name: Get sbt binary
           command: |
-                    apt update && apt install -y curl
-                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-                    dpkg -i sbt-$SBT_VERSION.deb
-                    rm sbt-$SBT_VERSION.deb
-                    apt-get update
-                    apt-get install -y sbt python-pip git
-                    pip install awscli
-                    apt-get clean && apt-get autoclean
+            apt update && apt install -y curl
+            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+            dpkg -i sbt-$SBT_VERSION.deb
+            rm sbt-$SBT_VERSION.deb
+            apt-get update
+            apt-get install -y sbt python-pip git
+            pip install awscli
+            apt-get clean && apt-get autoclean
 ```
+
 The steps/run keys specify the types of actions to perform. The run keys represent the actions to be executed.
-```
+
+```yaml
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
+
 This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename. 
 
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
-```
+
+```yaml
+      - run:
           command: |
-                    apt update && apt install -y curl
-                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
-                    dpkg -i sbt-$SBT_VERSION.deb
-                    rm sbt-$SBT_VERSION.deb
-                    apt-get update
-                    apt-get install -y sbt python-pip git
-                    pip install awscli
-                    apt-get clean && apt-get autoclean
+            apt update && apt install -y curl
+            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+            dpkg -i sbt-$SBT_VERSION.deb
+            rm sbt-$SBT_VERSION.deb
+            apt-get update
+            apt-get install -y sbt python-pip git
+            pip install awscli
+            apt-get clean && apt-get autoclean
 ```
+
 The 2.0 version of our samplescala schema requires us to download required dependencies and install them into the container.  Below is an explanation of the example multi-line command:
 - Updates the container OS and installs curl.
 - Downloads the [Simple Build Tool (sbt)](https://www.scala-sbt.org/) compiler version specified in the $SBT_VERSION variable.
@@ -161,7 +165,9 @@ The 2.0 version of our samplescala schema requires us to download required depen
 - Removes all the unnecessary install packages to minimize container size.
 
 The following keys represent actions performed after the multi-line command is executed:
-```
+
+```yaml
+    steps:
       - checkout
       - restore_cache:
           key: sbt-cache
@@ -178,6 +184,7 @@ The following keys represent actions performed after the multi-line command is e
             - "~/.sbt"
             - "~/.m2"
 ```
+
 Below is an explanation of the preceding example:
 - `checkout`: basically git clones the project repo from github into the container 
 - `restore_cache` key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
@@ -187,7 +194,8 @@ Below is an explanation of the preceding example:
 
 The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 
-```
+```yaml
+steps:
   - deploy:
       command: |
         mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
@@ -199,5 +207,3 @@ The deploy command is another multi-line execution.
 ## See Also 
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
-
-

@@ -24,7 +24,8 @@ follows, because the circleci/ruby:2.4.1-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 jobs:
   build:
@@ -82,6 +83,7 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
+
 {% endraw %}
 
 **Note:** An alternative is to build your own image by extending the current image,
@@ -97,7 +99,7 @@ In CircleCI 2.0 you must declare your database configuration explicitly because 
 
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -135,7 +137,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -217,7 +219,7 @@ jobs:
 
 The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -242,4 +244,3 @@ jobs:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
 ```
-

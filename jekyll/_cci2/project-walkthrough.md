@@ -48,7 +48,7 @@ If the job requires services such as databases they can be run as additional con
 
 Docker images are typically configured using environment variables, if these are necessary a set of environment variables to be passed to the container can be supplied:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -72,7 +72,7 @@ The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a 
 
 Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -98,7 +98,7 @@ jobs:
 
 An environment variable defined in a `run:` key will override image-level variables, e.g.:
 
-```
+```yaml
       - run:
           command: echo ${FLASK_CONFIG}
           environment:
@@ -109,7 +109,7 @@ An environment variable defined in a `run:` key will override image-level variab
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -151,7 +151,7 @@ The following describes the detail of the added key values:
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
-```
+```yaml
 version: 2
 jobs:
   build:

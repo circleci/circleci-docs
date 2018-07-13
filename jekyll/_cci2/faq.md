@@ -131,7 +131,7 @@ You can set the timezone in Docker images with the `TZ` environment variable. In
 
 A sample `.circleci/config.yml` with a defined `TZ` variable would look like this:
 
-```
+```yaml
 version: 2
 jobs:
   build:

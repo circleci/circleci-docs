@@ -59,7 +59,7 @@ shell | N | String | Shell to use for execution command in all steps. Can be ove
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. NOTE: Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
-environment | N | Map | A map of environment variable names and variables. (NOTE: These will override any environment variables you set in the CircleCI web interface.)
+environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
@@ -67,7 +67,9 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
 #### `environment`
-A map of environment variable names and variables (**Note**: These will override any environment variables you set in the CircleCI web interface).
+A map of environment variable names and values.
+These will override any environment variables
+you set in the CircleCI application.
 
 #### `parallelism`
 
@@ -76,13 +78,14 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 `working_directory` will be created automatically if it doesn't exist.
 
 Example:
-``` YAML
+
+```yaml
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
     environment:
-      - FOO: "bar"
+      FOO: bar
     parallelism: 3
     resource_class: large
     working_directory: ~/my-app
@@ -132,7 +135,7 @@ You can specify image versions using tags or digest. You can use any public imag
 
 Example:
 
-``` YAML
+```yaml
 jobs:
   build:
     docker:
@@ -319,12 +322,12 @@ Java, Erlang and any other languages that introspect the `/proc` directory for i
 
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
-```
+```yaml
 jobs:
   build:
     working_directory: ~/canary-python
     environment:
-      - FOO: "bar"
+      FOO: bar
     steps:
       - run:
           name: Running tests
@@ -487,27 +490,27 @@ alerts in chatrooms.
 
 ##### _Example_
 
-``` YAML
-- run:
-    name: Testing application
-    command: make test
-    shell: /bin/bash
-    working_directory: ~/my-app
-    no_output_timeout: 30m
-    environment:
-      FOO: "bar"
+```yaml
+steps:
+  - run:
+      name: Testing application
+      command: make test
+      shell: /bin/bash
+      working_directory: ~/my-app
+      no_output_timeout: 30m
+      environment:
+        FOO: bar
 
-- run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
-- run: |
-    sudo -u root createuser -h localhost --superuser ubuntu &&
-    sudo createdb -h localhost test_db
+  - run: |
+      sudo -u root createuser -h localhost --superuser ubuntu &&
+      sudo createdb -h localhost test_db
 
-- run:
-    name: Upload Failed Tests
-    command: curl --data fail_tests.log http://example.com/error_logs
-    when: on_fail
-
+  - run:
+      name: Upload Failed Tests
+      command: curl --data fail_tests.log http://example.com/error_logs
+      when: on_fail
 ```
 
 ##### **`checkout`**
@@ -1047,7 +1050,8 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 {:.no_toc}
 
 {% raw %}
-``` YAML
+
+```yaml
 version: 2
 jobs:
   build:
@@ -1159,4 +1163,5 @@ workflows:
             branches:
               only: master          
 ```
+
 {% endraw %}
