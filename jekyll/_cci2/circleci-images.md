@@ -65,7 +65,7 @@ The above images use the **most current** version of the upstream image.
 Because the latest images are more likely to change,
 it is best practice to use a more specific tag.
 For more details,
-see the [Latest Image Tags by Language](#latest-image-tags-by-language) section.
+see the [Image Tags](#image-tags) section.
 
 ### Service Images
 
@@ -113,7 +113,9 @@ The following packages are installed via `curl` or other means:
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
-## Image Variants
+## Image Tags
+
+
 
 CircleCI maintains several variants for convenience images.
 These can be created by adding optional suffixes to the end of image tags.
