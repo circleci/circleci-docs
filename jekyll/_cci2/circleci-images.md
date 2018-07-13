@@ -43,7 +43,8 @@ It is also possible to specify all the way down to the specific SHA of the image
 
 ## Image Types
 
-CircleCI's pre-built Docker images fall into two categories: **language** images and **service** images.
+CircleCI's pre-built Docker images fall into two categories:
+**language** images and **service** images.
 All images add a `circleci` user as a system user.
 
 ### Language Images
