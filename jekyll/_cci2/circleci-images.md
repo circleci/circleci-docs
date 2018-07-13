@@ -70,6 +70,13 @@ If your language is not listed,
 CircleCI also maintains a wizard you can use to create a custom image.
 See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions.
 
+**Note:**
+The above images use the **most current** version of the upstream image.
+Because the latest images are often less stable,
+it is best practice to use a more specific tag.
+For more details,
+see the [Latest Image Tags by Language](#latest-image-tags-by-language).
+
 ### Service Images
 
 Service images are images for services like databases.
