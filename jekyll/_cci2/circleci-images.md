@@ -135,9 +135,7 @@ For service images:
 
 - `-ram`: variants that use the RAM volume to speed up builds
 
-## Latest Image Tags by Language
-
-
+### Latest Image Tags by Language
 
 That is, to prevent unintended changes that come from upstream, instead of using `circleci/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
@@ -146,11 +144,10 @@ For example, add `-jessie` or `-stretch` to the end of each of those containers 
 It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes. To find the value, navigate to on older Build page in the CircleCI app that utilized the image you wish to use and select the drop-down for `Spin up Environment`. Inside you will find the SHA256, for example, 
 `circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`.
 
-
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
 
-### {{ image[1].name }} 
+#### {{ image[1].name }}
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
