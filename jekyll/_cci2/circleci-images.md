@@ -21,7 +21,7 @@ These images are extensions of official Docker images
 and include tools that are especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/).
 The source code for these images is [available on GitHub](https://github.com/circleci/circleci-images).
-Dockerfiles for these images are also [archived on GitHub](https://github.com/circleci-public/circleci-dockerfiles).
+Dockerfiles for these images are also [available on GitHub](https://github.com/circleci-public/circleci-dockerfiles).
 
 For a brief overview,
 watch the video below.
