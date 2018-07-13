@@ -125,13 +125,13 @@ If you choose to use the `latest` tag,
 the image may change unexpectedly
 and create surprising results.
 
-### Language Image Variants
+For language images:
 
 - `-node`: includes Node.js for polyglot applications
 - `-browsers`: includes Java 8, PhantomJS, Firefox, and Chrome
 - `-node-browsers`: a combination of the `-node` and `-browsers` variants
 
-### Service Image Variants
+For service images:
 
 - `-ram`: variants that use the RAM volume to speed up builds
 
@@ -172,5 +172,3 @@ It is also possible to specify all the way down to the specific SHA of the image
 ## See Also
 
 See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
-
-
