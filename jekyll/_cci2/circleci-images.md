@@ -65,7 +65,7 @@ The above images are based on the **most current** upstream images for their res
 Because the latest images are more likely to change,
 it is best practice to use a more specific tag.
 For more details,
-see the [Image Tags](#image-tags) section.
+see the [Customizing a Convenience Image](#customizing-a-convenience-image) section.
 
 ### Service Images
 
@@ -193,6 +193,7 @@ refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circ
 {% for image in images %}
 
 ### {{ image[1].name }}
+{:no_toc}
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
