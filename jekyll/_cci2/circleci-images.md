@@ -116,33 +116,55 @@ The following packages are installed via `curl` or other means:
 ## Image Tags
 
 You can make convenience images more specific by adding tags.
-There are two good reasons to do this:
+There are three good reasons to do this:
 
-- You want to pin an image to a certain version, operating system, or SHA.
-- You want to modify an image by adding tools or changing behavior.
+- You want to pin an image to a certain version or operating system (OS).
+- You want to specify a particular instance of an image with a SHA.
+- You want to modify an image by installing additional tools
+or changing the behavior of the image.
+
+### Pinning an Image Version or OS
 
 Since convenience images are based on the **latest** versions of upstream images,
-it is best practice to use the most specific image possible.
-This prevents the upstream image from introducing unintended changes to your image.
+it is best practice
+to use the most specific image possible.
+This prevents the upstream image
+from introducing unintended changes to your image.
 
-Instead of using `circleci/golang:1.8`,
-for example,
-you could specify both the version and operating system
-by using `circleci/golang:1.8.6-jessie`.
+For example,
+instead of `circleci/golang:1.8`,
+consider using `circleci/golang:1.8.6-jessie`.
+Since the second image specifies both the patch version and OS,
+it is less likely to change unexpectedly.
 
-You can also use a SHA to specify an image.
-
-- `-ram`: variants that use the RAM volume to speed up builds
+See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
 **Note:**
 If you choose to use the `latest` tag,
 the image may change unexpectedly
 and create surprising results.
 
-### Image Variants
+### Specifying a Past Image Build With a SHA
 
-CircleCI maintains variants for convenience images.
-You can use these variants by adding the following suffixes to the end of image tags.
+You can also use a SHA
+to specify a particular instance of an image.
+
+To find a SHA,
+go to the CircleCI application
+and choose a past build
+that used the same image.
+On the **Test Summary** tab,
+click the **Spin up environment** step.
+In the log output,
+locate the sha256 for the appropriate image.
+The full string looks like:
+`circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`.
+
+### Changing the Tools and Behavior of an Image
+
+CircleCI maintains several variants for convenience images.
+You can use these variants
+by adding the following suffixes to the end of image tags.
 
 For language images:
 
