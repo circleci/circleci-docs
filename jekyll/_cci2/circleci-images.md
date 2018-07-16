@@ -132,17 +132,19 @@ This prevents the upstream image
 from introducing unintended changes to your image.
 
 For example,
-instead of `circleci/golang:1.8`,
+instead of `circleci/golang:latest`,
 consider using `circleci/golang:1.8.6-jessie`.
-Since the second image specifies both the patch version and OS,
+Since the second image specifies both the version and OS,
 it is less likely to change unexpectedly.
 
 See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
 **Note:**
-If you choose to use the `latest` tag,
-the image may change unexpectedly
-and create surprising results.
+Excluding the [variants below](#changing-the-tools-and-behavior-of-an-image),
+CircleCI does not control which tags are used.
+These tags are chosen and maintained by upstream projects.
+Do not assume
+that a given tag has the same meaning across images!
 
 ### Specifying a Past Image Build With a SHA
 
@@ -179,13 +181,6 @@ For language images:
 For service images:
 
 - `-ram` uses the RAM volume to speed up builds
-
-**Note:**
-Excluding the above variants,
-CircleCI does not control which tags are used.
-These tags are chosen and maintained by upstream projects.
-Do not assume
-that a given tag has the same meaning across images!
 
 ### Latest Image Tags by Language
 
