@@ -193,7 +193,6 @@ refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circ
 {% for image in images %}
 
 ### {{ image[1].name }}
-{:no_toc}
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
