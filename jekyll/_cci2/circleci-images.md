@@ -186,7 +186,7 @@ For service images:
 
 Below is a list of the latest image tags, sorted by language.
 
-For specific details about the contents of each image,
+For details about the contents of each image,
 refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
 {% assign images = site.data.docker-image-tags | sort %}
