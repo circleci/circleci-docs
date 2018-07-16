@@ -157,8 +157,12 @@ On the **Test Summary** tab,
 click the **Spin up environment** step.
 In the log output,
 locate the sha256 for the appropriate image.
-The full string looks like:
-`circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e`.
+
+Look for something like the example below.
+
+```
+circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
+```
 
 ### Changing the Tools and Behavior of an Image
 
