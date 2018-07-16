@@ -181,10 +181,11 @@ For service images:
 - `-ram` uses the RAM volume to speed up builds
 
 **Note:**
-Besides the variants above,
-image tags are chosen by upstream projects.
+Excluding the above variants,
 CircleCI does not control which tags are used.
-Do not assume that a specific tag always means the same thing!
+These tags are chosen and maintained by upstream projects.
+Do not assume
+that a given tag has the same meaning across images!
 
 ### Latest Image Tags by Language
 
