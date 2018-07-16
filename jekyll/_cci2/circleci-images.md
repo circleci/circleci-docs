@@ -113,9 +113,9 @@ The following packages are installed via `curl` or other means:
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
-## Image Tags
+## Customizing a Convenience Image
 
-You can make convenience images more specific by adding tags.
+You can customize convenience images by adding image tags.
 There are three good reasons to do this:
 
 - You want to pin an image to a certain version or operating system (OS).
@@ -182,14 +182,14 @@ For service images:
 
 - `-ram` uses the RAM volume to speed up builds
 
-### Latest Image Tags by Language
+## Latest Image Tags by Language
 
 [link to Dockerfiles for all of these](https://github.com/circleci-public/circleci-dockerfiles)
 
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
 
-#### {{ image[1].name }}
+### {{ image[1].name }}
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
