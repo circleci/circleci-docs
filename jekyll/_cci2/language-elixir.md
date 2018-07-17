@@ -75,8 +75,8 @@ jobs:  # basic units of work in a run
 
       - run: mix test  # run all tests in project
 
-      - store_test_results:  # upload test results for display in Test Summary
-          path: _build/test/junit
+      - store_test_results:  # upload junit test results for display in Test Summary
+          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
 ```
 
 {% endraw %}
