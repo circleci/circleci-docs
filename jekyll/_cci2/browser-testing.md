@@ -166,7 +166,7 @@ sudo apt install vnc4server metacity
 ```
 4. After connecting to the CircleCI container, start the VNC server.
 ```bash
-ubuntu@box159:~$ vnc4server -geometry 1280x1024 -depth 24
+ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
 5. Since your connection is secured with SSH,
 there is no need for a strong password.
