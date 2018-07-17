@@ -93,7 +93,7 @@ Projects often contain sensitive information,
 and this information is freely available to anyone
 who can push code that triggers a build.
 
-By default, CircleCI passes secrets to builds from forked PRs
+By default, CircleCI passes secrets to builds from forked PRs.
 If you are uncomfortable sharing secrets with anyone who forks your project and opens a PR,
 you can disable this option.
 In the **Advanced Settings** of your project,
