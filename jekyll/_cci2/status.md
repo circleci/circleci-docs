@@ -17,7 +17,7 @@ Integrations enable you to [include status badges in other web pages]({{ site.ba
 
 Queuing |
 ------------------------|------------------
-If your builds are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/using-containers/). |  
+If your builds are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |  
 
 <hr>
 
