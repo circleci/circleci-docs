@@ -36,6 +36,13 @@ CircleCI's pre-built Docker images fall into two categories:
 **language** images and **service** images.
 All images add a `circleci` user as a system user.
 
+**Note:**
+The images below are based on the **most current** upstream images for their respective languages.
+Because the latest images are more likely to change,
+it is best practice to use a more specific tag.
+For more details,
+see the [Best Practices](#best-practices) section.
+
 ### Language Images
 
 Language images are images for common programming languages.
@@ -60,12 +67,20 @@ If your language is not listed,
 CircleCI also maintains a wizard you can use to create a custom image.
 See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions.
 
-**Note:**
-The above images are based on the **most current** upstream images for their respective languages.
-Because the latest images are more likely to change,
-it is best practice to use a more specific tag.
-For more details,
-see the [Customizing a Convenience Image](#customizing-a-convenience-image) section.
+#### Language Image Variants
+
+CircleCI maintains several variants for language images.
+To use these variants,
+add one of the following suffixes to the end of an image tag.
+
+- `-node` includes Node.js for polyglot applications
+- `-browsers` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-node-browsers` combines the `-node` and `-browsers` variants
+
+For example,
+if you want
+to add browsers to the `circleci/golang:1.9` image,
+use the `circleci/golang:1.9-browsers` image.
 
 ### Service Images
 
@@ -80,6 +95,17 @@ CircleCI maintains images for the services below.
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
+
+#### Service Image Variant
+
+CircleCI maintains one variant for service images.
+To use RAM volume on a service image to speed up builds,
+add the `-ram` suffix to the end of a service image tag.
+
+For example,
+if you want the `circleci/postgres:9.5-postgis` image
+to use RAM volume,
+use the `circleci/postgres:9.5-postgis-ram` image.
 
 ## Pre-installed Tools
 
@@ -113,23 +139,24 @@ The following packages are installed via `curl` or other means:
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
-## Customizing a Convenience Image
-
-You can customize convenience images by adding image tags.
-There are three good reasons to do this:
-
-- You want to pin an image to a certain version or operating system (OS).
-- You want to specify a particular instance of an image with a SHA.
-- You want to modify an image by installing additional tools
-or changing the behavior of the image.
-
-### Pinning an Image Version or OS
+## Best Practices
 
 Since convenience images are based on the **latest** versions of upstream images,
 it is best practice
 to use the most specific image possible.
-This prevents the upstream image
+This makes your builds more deterministic
+by preventing an upstream image
 from introducing unintended changes to your image.
+
+There are a couple ways
+to make an image more specific:
+
+- You can pin an image to a certain version or operating system (OS).
+- You can specify a fixed image version with a digest.
+
+### Pinning an Image Version or OS
+
+To pin the version or OS of an image,
 
 For example,
 instead of `circleci/golang:latest`,
@@ -146,7 +173,7 @@ These tags are chosen and maintained by upstream projects.
 Do not assume
 that a given tag has the same meaning across images!
 
-### Specifying a Past Image Build With a SHA
+### Specifying a Fixed Image Version With a Digest
 
 You can also use a SHA
 to specify a particular instance of an image.
@@ -166,17 +193,9 @@ Look for something like the example below.
 circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
 ```
 
-### Changing the Tools and Behavior of an Image
-
 CircleCI maintains several variants for convenience images.
 You can use these variants
 by adding the following suffixes to the end of image tags.
-
-For language images:
-
-- `-node` includes Node.js for polyglot applications
-- `-browsers` includes Java 8, PhantomJS, Firefox, and Chrome
-- `-node-browsers` combines the `-node` and `-browsers` variants
 
 For service images:
 
