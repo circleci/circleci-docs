@@ -85,7 +85,7 @@ CircleCI maintains images for the services below.
 
 All convenience images have been extended with additional tools.
 
-The following packages are installed with `apt-get` on every image:
+The following packages are installed via `apt-get` on every image:
 
 - [bzip2](https://packages.debian.org/stretch/bzip2)
 - [ca-certificates](https://packages.debian.org/stretch/ca-certificates)
