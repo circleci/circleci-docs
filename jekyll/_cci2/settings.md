@@ -18,7 +18,7 @@ CircleCI provides encrypted secrets and [environment variable]({{ site.baseurl }
 <hr>
 API Tokens            | iOS Code Signing
 ----------------------------|----------------------
-Find out how to [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in the app.&nbsp;&nbsp;    |   Learn to set up [iOS code signing]({{ site.baseurl }}/2.0/codesigning-ios/).
+Find out how to [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in the app.&nbsp;&nbsp;    |   Learn to set up [iOS code signing]({{ site.baseurl }}/2.0/ios-codesigning/).
 
 <hr>
 GitHub and Bitbucket           | Open Source
