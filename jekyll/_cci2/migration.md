@@ -27,7 +27,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Commands listed in the `steps` may only be run in the first container listed in the `docker` section.
 - Run builds frequently to test the config so if something breaks, you will know what changed since the last build.
 - Don't add Workflows initially; wait until you have a functional build.
-- Build a config manually from scratch, but use the [`config-translation` endpoint]({{ site.baseurl }}/2.0/config-translator/) as a reference.
+- Build a config manually from scratch, but use the [`config-translation` endpoint]({{ site.baseurl }}/2.0/config-translation/) as a reference.
 - You can't define environment variables in the `environment` section of the config.
 	- The workaround is to echo the variables into `$BASH_ENV`.
 		- Echo of variables into `$BASH_ENV` only works with `bash`, not `sh` (Alpine images only have `sh`).
