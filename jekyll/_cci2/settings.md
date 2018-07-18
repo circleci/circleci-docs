@@ -26,9 +26,9 @@ GitHub and Bitbucket           | Open Source
 Find out about [GitHub and Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) integration with permissions and roles.&nbsp;&nbsp;    |   Learn to use settings just for [building open source projects]({{ site.baseurl }}/2.0/oss/).
 
 ## Project Settings Page
-
+<!--
 ![settings]( {{ site.baseurl }}/assets/img/docs/settings.png)
-
+-->
 
 
 ## Organization Settings Page
@@ -38,5 +38,6 @@ For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), se
 Plans and Billing | Contexts
 ------------------------|------------------
 For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), see the Settings tab of the CircleCI app for summary data about your usage. |  Share environment variables across projects with a Workflow key, on the [contexts page]({{ site.baseurl }}/2.0/contexts/).
-
+<!--
 ![settings]( {{ site.baseurl }}/assets/img/docs/plan-settings.png)
+-->
