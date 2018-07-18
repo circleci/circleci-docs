@@ -18,7 +18,7 @@ This document provides information about pre-built CircleCI images and a listing
 For convenience,
 CircleCI maintains several Docker images.
 These images are extensions of official Docker images
-and include tools that are especially useful for CI/CD.
+and include tools especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/).
 The source code for these images is [available on GitHub](https://github.com/circleci/circleci-images).
 Dockerfiles for these images are also [available on GitHub](https://github.com/circleci-public/circleci-dockerfiles).
@@ -32,20 +32,19 @@ watch the video below.
 
 ## Image Types
 
-CircleCI's pre-built Docker images fall into two categories:
+CircleCI's convenience images fall into two categories:
 **language** images and **service** images.
 All images add a `circleci` user as a system user.
 
 **Note:**
 The images below are based on the **most current** upstream images for their respective languages.
 Because the latest images are more likely to change,
-it is best practice to use a more specific tag.
-For more details,
-see the [Best Practices](#best-practices) section.
+it is [best practice](#best-practices)
+to use a more specific tag.
 
 ### Language Images
 
-Language images are images for common programming languages.
+Language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools.](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
 making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
