@@ -38,10 +38,10 @@ All images add a `circleci` user as a system user.
 
 ### Language Images
 
-Language images are images for common programming languages,
-along with some common [pre-installed tools](#pre-installed-tools).
+Language images are images for common programming languages.
+These images include both the relevant language and [commonly-used tools.](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
-thus becoming the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI maintains images for the languages below.
 
