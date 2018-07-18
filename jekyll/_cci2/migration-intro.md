@@ -20,4 +20,4 @@ Get the list of [tips and tricks]({{ site.baseurl }}/2.0/migration/) for migrati
 
 iOS Migration | Linux Migration
 ------------------------|------------------
-Get an introduction to [migrating your iOS project]({{ site.baseurl }}/2.0/ios-migrating-from-1-2/) `circle.yml` to `.circleci/config.yml` for applications that build on macOS. |  Get the basics of [migrating your Linux application]({{ site.baseurl }}/2.0/migrating-from-1-to-2/) `circle.yml` to `.circleci/config.yml`.
+Get an introduction to [migrating your iOS project]({{ site.baseurl }}/2.0/ios-migrating-from-1-2/) `circle.yml` to `.circleci/config.yml` for applications that build on macOS. |  Get the basics of [migrating your Linux application]({{ site.baseurl }}/2.0/migrating-from-1-2/) `circle.yml` to `.circleci/config.yml`.
