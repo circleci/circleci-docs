@@ -37,7 +37,7 @@ CircleCI's convenience images fall into two categories:
 All images add a `circleci` user as a system user.
 
 **Note:**
-The images below are based on the **most current** upstream images for their respective languages.
+The images below are based on the most recently built upstream images for their respective languages.
 Because the latest images are more likely to change,
 it is [best practice](#best-practices)
 to use a more specific tag.
@@ -63,8 +63,8 @@ CircleCI maintains images for the languages below.
 - [Ruby](#ruby)
 
 If your language is not listed,
-CircleCI also maintains a wizard you can use to create a custom image.
-See the [Dockerfile Wizard]({{ site.baseurl }}/2.0/custom-images/#circleci-dockerfile-wizard) section of the Using Custom-Built Docker Images document for instructions.
+CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
+you can use to create a custom image.
 
 #### Language Image Variants
 
@@ -83,7 +83,7 @@ use the `circleci/golang:1.9-browsers` image.
 
 ### Service Images
 
-Service images are images for services like databases.
+Service images are convenience images for services like databases.
 These images should be listed **after** language images
 so they become secondary service containers.
 
@@ -97,8 +97,9 @@ CircleCI maintains images for the services below.
 
 #### Service Image Variant
 
-CircleCI maintains one variant for service images.
-To use RAM volume on a service image to speed up builds,
+CircleCI maintains only one variant for service images.
+To speed up builds
+using RAM volume,
 add the `-ram` suffix to the end of a service image tag.
 
 For example,
@@ -140,9 +141,9 @@ The following packages are installed via `curl` or other means:
 
 ## Best Practices
 
-Since convenience images are based on the **latest** versions of upstream images,
-it is best practice
-to use the most specific image possible.
+Since convenience images are based on the most recently built versions of upstream images,
+**it is best practice
+to use the most specific image possible**.
 This makes your builds more deterministic
 by preventing an upstream image
 from introducing unintended changes to your image.
@@ -150,10 +151,12 @@ from introducing unintended changes to your image.
 There are a couple ways
 to make an image more specific:
 
-- You can pin an image to a certain version or operating system (OS).
-- You can specify a fixed image version with a digest.
+- You can use a more specific tag
+to pin an image to a version or operating system (OS).
+- You can use a digest
+to pin an image to a fixed version.
 
-### Pinning an Image Version or OS
+### Using an Image Tag to Pin an Image Version or OS
 
 To pin the version or OS of an image,
 
@@ -185,31 +188,24 @@ Look for something like the example below.
 circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
 ```
 
-CircleCI maintains several variants for convenience images.
-You can use these variants
-by adding the following suffixes to the end of image tags.
-
-For service images:
-
-- `-ram` uses the RAM volume to speed up builds
-
 ## Latest Image Tags by Language
 
-Below is a list of the latest image tags, sorted by language.
+Below is a list of the latest convenience images, sorted by language.
+For details about the contents of each image,
+refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
-Excluding the [variants below](#changing-the-tools-and-behavior-of-an-image),
-CircleCI does not control which tags are used.
+**Note:**
+Excluding [language image variants](#language-image-variants) and [the service image variant](#service-image-variant),
+CircleCI does **not** control which tags are used.
 These tags are chosen and maintained by upstream projects.
 Do not assume
 that a given tag has the same meaning across images!
-
-For details about the contents of each image,
-refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
 
 ### {{ image[1].name }}
+{:.no_toc}
 
 **Usage:** Add the following under `docker:` in your config.yml:  
 
