@@ -165,13 +165,6 @@ it is less likely to change unexpectedly.
 
 See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
-**Note:**
-Excluding the [variants below](#changing-the-tools-and-behavior-of-an-image),
-CircleCI does not control which tags are used.
-These tags are chosen and maintained by upstream projects.
-Do not assume
-that a given tag has the same meaning across images!
-
 ### Specifying a Fixed Image Version With a Digest
 
 You can also use a SHA
@@ -203,6 +196,12 @@ For service images:
 ## Latest Image Tags by Language
 
 Below is a list of the latest image tags, sorted by language.
+
+Excluding the [variants below](#changing-the-tools-and-behavior-of-an-image),
+CircleCI does not control which tags are used.
+These tags are chosen and maintained by upstream projects.
+Do not assume
+that a given tag has the same meaning across images!
 
 For details about the contents of each image,
 refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
