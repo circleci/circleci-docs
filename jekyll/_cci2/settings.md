@@ -23,7 +23,7 @@ Find out how to [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/)
 <hr>
 GitHub and Bitbucket           | Open Source
 ----------------------------|----------------------
-Find out about [GitHub and Bitbucket]({{ site.baseurl }}/gh-bb-integration/) integration with permissions and roles.&nbsp;&nbsp;    |   Learn to use settings just for [building open source projects]({{ site.baseurl }}/2.0/oss/).
+Find out about [GitHub and Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) integration with permissions and roles.&nbsp;&nbsp;    |   Learn to use settings just for [building open source projects]({{ site.baseurl }}/2.0/oss/).
 
 ## Project Settings Page
 
