@@ -9,7 +9,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 
 Amazon Web Services &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   |  Microsoft
 ----------------------------|----------------------
-Deploy to [AWS]({{ site.baseurl }}/2.0/deployment-integrations/#aws) or [Capistrano]({{ site.baseurl }}/2.0/deployment-integrations/#capistrano).  &nbsp;&nbsp;&nbsp;&nbsp; |  Automate deployments to  [Azure]({{ site.baseurl }}/2.0/deployment-integrations#azure/).
+Deploy to [AWS]({{ site.baseurl }}/2.0/deployment-integrations/#aws) or [Capistrano]({{ site.baseurl }}/2.0/deployment-integrations/#capistrano).  &nbsp;&nbsp;&nbsp;&nbsp; |  Automate deployments to  [Azure]({{ site.baseurl }}/2.0/deployment-integrations/#azure).
 
 <hr>
 
