@@ -168,7 +168,7 @@ it is less likely to change unexpectedly.
 
 See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
-### Specifying a Fixed Image Version With a Digest
+### Using a Digest to Pin a Fixed Image Version
 
 You can also use a SHA
 to specify a particular instance of an image.
