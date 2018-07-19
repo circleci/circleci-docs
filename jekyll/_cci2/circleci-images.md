@@ -158,7 +158,7 @@ to pin an image to a fixed version.
 
 ### Using an Image Tag to Pin an Image Version or OS
 
-You can specify a variant of a Docker image
+You can pin aspects of a Docker image
 by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
 
 For example,
