@@ -1,3 +1,8 @@
-Brief description of changes:
+# Description
+A brief description of the changes.
 
-Reason for changes OR link to GitHub/JIRA issue:
+# Reasons
+Why did you make these changes?
+
+# Context
+A link to a GitHub and/or JIRA issue (if applicable).
