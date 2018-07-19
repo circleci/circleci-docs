@@ -46,7 +46,7 @@ You can specify when to run custom commands relative to CircleCI's inferred comm
 #### Modifiers
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 You can tweak individual commands by adding a modifier.
@@ -128,7 +128,7 @@ machine:
 ### Environment
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 You set environment variables for **all commands** in the build by adding
@@ -149,7 +149,7 @@ If you don't want to use this method, there are
 ### Timezone
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 The machine's time zone is UTC by default. You use `timezone` to adjust to the same time zone as your _production_ server. Changing the time to your _development_ machine's time zone is **problematic**.
@@ -175,7 +175,7 @@ Be aware that some developers, especially those that collaborate across differen
 ### Hosts
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 Sometimes you might need to add one or more entries to the `/etc/hosts` file to
@@ -197,7 +197,7 @@ hyphens (-) and dots (.).
 ### Ruby version
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI uses [RVM](https://rvm.io/) to manage Ruby versions.
@@ -217,7 +217,7 @@ machine:
 <h3 id="node-version">Node.js version</h3>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI uses [NVM](https://github.com/creationix/nvm) to manage Node versions.
@@ -237,7 +237,7 @@ machine:
 ### Java version
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 Here's an example of how to set the version of Java to be used for your tests.
@@ -269,7 +269,7 @@ and [Ubuntu 12.04](https://circleci.com/docs/1.0/build-image-precise/#php).
 ### Python version
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI uses [pyenv](https://github.com/yyuu/pyenv)
@@ -298,7 +298,7 @@ You can find more details about supported versions [here]( {{ site.baseurl }}/1.
 ### Other languages
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 We also support other languages including Clojure, C/C++, Golang, and Erlang.
@@ -332,7 +332,7 @@ machine:
 <h2 id="checkout">Code checkout from GitHub or Bitbucket</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 The `checkout` section is usually pretty vanilla, but we include examples of common things you might need to put in the section.
@@ -359,7 +359,7 @@ checkout:
 <h2 id="dependencies">Project-specific dependencies</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 Most web programming languages and frameworks, including Ruby's bundler, npm for Node.js, and Python's pip, have some form of dependency specification;
@@ -388,7 +388,7 @@ dependencies:
 ### Bundler flags
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 If your project includes bundler (the dependency management program for Ruby), you can include
@@ -404,7 +404,7 @@ dependencies:
 <h3 id="cache-directories">Custom Cache Directories</h3>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI caches dependencies between builds.
@@ -426,7 +426,7 @@ Caches are private, and are not shared with other projects.
 <h2 id="database">Database setup</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 Your web framework typically includes commands to create your database, install your schema, and run your migrations.
@@ -454,7 +454,7 @@ machine:
 <h2 id="compile">Custom Compile Commands</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 You can customize your project's build in the `compile` section of `circle.yml`. Below is an example of using `compile` to verbosely build a Middleman site:
@@ -468,7 +468,7 @@ compile:
 <h2 id="test">Running your tests</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 The most important part of testing is actually running the tests!
@@ -517,7 +517,7 @@ test:
 ## Deployment
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 The `deployment`
@@ -590,7 +590,7 @@ the issue.
 ### Tags
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 In addition to deploying based on `branch`, you can deploy based on tags.
@@ -638,7 +638,7 @@ To deploy on any tag, use the following regex: `/.*?/`
 ### SSH Keys
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 If deploying to your servers requires SSH access, you'll need to
@@ -653,7 +653,7 @@ the private key will be used for all hosts.
 <h3 id="heroku-extra">Heroku</h3>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI also has first-class support for deploying to Heroku.
@@ -677,7 +677,7 @@ CircleCI's UI enables you to do this on your project's **Project Settings > Hero
 ### Heroku with pre or post-deployment steps
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 If you want to deploy to Heroku and also run commands before or after the deploy, you must use the 'normal' deployment syntax.
@@ -694,7 +694,7 @@ deployment:
 <h2 id="notify">Notifications</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI sends personalized notifications by email.
@@ -737,7 +737,7 @@ you want to get chat channel build notifications for in the
 <h2 id="branches">Specifying branches to build</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI by default tests every push to _any_ branch in the repository.
@@ -776,7 +776,7 @@ only affect that branch and no other one.
 <h2 id="build-dir">Specifying build directory</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 CircleCI runs all commands on the repository root, by default.  However, if
@@ -794,7 +794,7 @@ CircleCI will run its inference as well as all build commands from that director
 <h2 id="artifacts">Specifying custom artifacts directories and files</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 You can specify directories and files (in addition to the default
@@ -823,7 +823,7 @@ test:
 <h2 id="experimental">Experimental configuration</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the <u><a href="https://circleci.com/docs/2.0/configuration-reference/">Configuring CircleCI</a></u> document for 2.0.
 </div>
 
 Our **experimental** section is a way of giving early previews of new configuration
