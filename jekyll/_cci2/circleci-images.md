@@ -111,7 +111,7 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 
 All convenience images have been extended with additional tools.
 
-The following packages are installed via `apt-get` on every image:
+The following packages are installed via `apt-get` on every image.
 
 - [bzip2](https://packages.debian.org/stretch/bzip2)
 - [ca-certificates](https://packages.debian.org/stretch/ca-certificates)
@@ -132,7 +132,7 @@ The following packages are installed via `apt-get` on every image:
 - [xvfb](https://packages.debian.org/stretch/xvfb)
 - [zip](https://packages.debian.org/stretch/zip)
 
-The following packages are installed via `curl` or other means:
+The following packages are installed via `curl` or other means.
 
 - [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
