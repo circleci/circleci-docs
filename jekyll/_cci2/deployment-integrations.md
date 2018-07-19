@@ -192,7 +192,7 @@ This is the first step in a Blue-Green deployment, pushing the application to no
       cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
       cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
       # Start the application
-      cf start blueskygreenbuilds-dark
+      cf start app-name-dark
       # Ensure dark route is exclusive to dark app
       cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
 ```
