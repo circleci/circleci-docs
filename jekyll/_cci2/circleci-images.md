@@ -148,7 +148,7 @@ This makes your builds more deterministic
 by preventing an upstream image
 from introducing unintended changes to your image.
 
-There are a couple ways
+There are two ways
 to make an image more specific:
 
 - You can use a tag
@@ -159,7 +159,7 @@ to pin an image to a fixed version.
 ### Using an Image Tag to Pin an Image Version or OS
 
 You can specify a variant of a Docker image
-by adding an image tag.
+by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
 
 For example,
 instead of `circleci/golang`,
@@ -171,21 +171,39 @@ to change unexpectedly.
 
 See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
-### Using a Digest to Pin a Fixed Image Version
+**Note:**
+If you do not specify a tag,
+Docker applies the `latest` tag.
+The `latest` tag refers to the most recent stable release of an image.
+However,
+since this tag may change unexpectedly,
+it is best practice
+to add an explicit image tag.
 
-You can also use a SHA
-to specify a particular instance of an image.
+### Using a Docker Image ID to Pin an Image to a Fixed Version
 
-To find a SHA,
-go to the CircleCI application
-and choose a past build
-that used the same image.
-On the **Test Summary** tab,
+Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
+You can use this image ID
+to pin an image to a fixed version.
+
+Each image ID is an immutable SHA256 digest
+and looks like this:
+
+```
+sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
+```
+
+#### Finding an Image ID
+
+1. In the CircleCI application,
+go to a past build
+that used the image.
+2. On the **Test Summary** tab,
 click the **Spin up environment** step.
-In the log output,
-locate the sha256 for the appropriate image.
-
-Look for something like the example below.
+3. In the log output,
+locate the digest for the image.
+4. Add the image ID to the image name in your `config.yml` file,
+as shown below.
 
 ```
 circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
