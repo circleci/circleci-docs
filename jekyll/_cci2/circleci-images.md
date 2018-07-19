@@ -151,20 +151,23 @@ from introducing unintended changes to your image.
 There are a couple ways
 to make an image more specific:
 
-- You can use a more specific tag
+- You can use a tag
 to pin an image to a version or operating system (OS).
-- You can use a digest
+- You can use a Docker image ID
 to pin an image to a fixed version.
 
 ### Using an Image Tag to Pin an Image Version or OS
 
-To pin the version or OS of an image,
+You can specify a variant of a Docker image
+by adding an image tag.
 
 For example,
-instead of `circleci/golang:latest`,
-consider using `circleci/golang:1.8.6-jessie`.
-Since the second image specifies both the version and OS,
-it is less likely to change unexpectedly.
+instead of `circleci/golang`,
+you can specify the version and OS
+by using `circleci/golang:1.8.6-jessie`.
+Because the second image specifies a version and OS,
+it is less likely
+to change unexpectedly.
 
 See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
