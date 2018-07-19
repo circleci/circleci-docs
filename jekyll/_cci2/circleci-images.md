@@ -202,8 +202,7 @@ that used the image.
 click the **Spin up environment** step.
 3. In the log output,
 locate the digest for the image.
-4. Add the image ID to the image name in your `config.yml` file,
-as shown below.
+4. Add the image ID to the image name as shown below.
 
 ```
 circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
