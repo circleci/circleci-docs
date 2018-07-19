@@ -38,7 +38,7 @@ All images add a `circleci` user as a system user.
 
 **Note:**
 The images below are based on the most recently built upstream images for their respective languages.
-Because the latest images are more likely to change,
+Because the most recent images are more likely to change,
 it is [best practice](#best-practices)
 to use a more specific tag.
 
