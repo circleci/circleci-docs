@@ -15,6 +15,7 @@ Get started by reviewing tips and tricks for migration, learning about the confi
 Config Intro | Scripts
 ------------------------|------------------
 Get an introduction to [CircleCI 2.0 Config]({{ site.baseurl }}/2.0/config-intro/) `.circleci/config.yml`. |  Get the [script to find projects still using 1.0](https://github.com/CircleCI-Public/find-circle-yml) or to [generate a 2.0 config from your project](https://github.com/CircleCI-Public/circleci-config-generator).
+
 <hr>
 
 
