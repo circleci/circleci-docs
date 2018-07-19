@@ -11,7 +11,7 @@ CircleCI automatically infers settings from your code, so it's possible you won'
 <h2 id="phases">File Structure and Content</h2>
 
 <div class="alert alert-info" role="alert">
-**Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.**
+Warning: This document is no longer being updated and CircleCI 1.0 will sunset on August 31, 2018! For up-to-date syntax, refer to the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document for 2.0.
 </div>
 
 The `circle.yml` file has seven primary sections. Each section represents a _phase_ of the Build-Test-Deploy process:
