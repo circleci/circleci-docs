@@ -39,11 +39,11 @@ This makes your builds more deterministic
 by preventing an upstream image
 from introducing unintended changes to your image.
 
-CircleCI bases pre-built images off of upstream, for example, circleci/ruby:2.4-node is based off the most up to date version of the Ruby 2.4-node container. Using circleci/ruby:2.4-node is similar to using :latest. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
+CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container. Using `circleci/ruby:2.4-node` is similar to using `:latest`. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
 
-That is, to prevent unintended changes that come from upstream, instead of using circleci/ruby:2.4-node use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
+That is, to prevent unintended changes that come from upstream, instead of using `circleci/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
-For example, add -jessie or -stretch to the end of each of those containers to ensure you’re only using that version of the Debian base OS. Pin down those images to a specific point version, like circleci/ruby:2.3.7-jessie, or specify the OS version with circleci/ruby:2.3-jessie. Specifying the version is possible for any of the CircleCI images.
+For example, add `-jessie` or `-stretch` to the end of each of those containers to ensure you’re only using that version of the Debian base OS. Pin down those images to a specific point version, like `circleci/ruby:2.3.7-jessie`, or specify the OS version with `circleci/ruby:2.3-jessie`. Specifying the version is possible for any of the CircleCI images.
 
 It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes.
 
