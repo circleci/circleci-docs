@@ -119,13 +119,13 @@ ADD ./db/migrations /migrations
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
-``` Shell
+```bash
 $ docker build <path-to-dockerfile>
 ```
 
 You'll see how all commands specified in `Dockerfile` are executed. If there are any errors they'll be displayed and you'll need to fix them before continuing. If the build is successful you'll have something like this at the very end:
 
-``` Text
+```
 ...
 Successfully built e32703162dd4
 ```
