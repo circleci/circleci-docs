@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: "Running GPU Builders"
+title: "Running GPU Executors"
 category: [administration]
 order: 11
-description: "How to enable GPU builders in CircleCI Server"
+description: "How to enable GPU Executors in CircleCI Server"
 ---
 
-This document outlines how to run GPU (graphics processing unit) Builders using CircleCI Server.
+This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
 
 * TOC 
 {:toc}
