@@ -172,8 +172,8 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
       sudo dpkg -i cf-cli_amd64.deb
       cf -v
       cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
-      cf auth $CF_USER $CF_PASSWORD
-      cf target -o $CF_ORG -s $CF_SPACE
+      cf auth "$CF_USER" "$CF_PASSWORD"
+      cf target -o "$CF_ORG" -s "$CF_SPACE"
 ```
 
 ### Dark Deployment
