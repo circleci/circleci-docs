@@ -22,6 +22,7 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 
 The currently available Xcode versions are:
 
+* `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
 * `9.4.0`: Xcode 9.4 (Build 9F1027a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-422/index.html)
 * `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
 * `9.3.0`: Xcode 9.3 (Build 9E145) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-405/index.html)
