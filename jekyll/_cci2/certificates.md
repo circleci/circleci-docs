@@ -7,7 +7,7 @@ categories: [administration]
 order: 55
 ---
 
-This document describes the process for using ELB certificates and for using Certbot with your CircleCI installation in the following sections:
+This document describes the process for using an ELB with HTTPS/SSL enabled.  You will need certificates for the ELB and CircleCI Server, covered in the following sections:
 
 * TOC
 {:toc}
@@ -15,7 +15,7 @@ This document describes the process for using ELB certificates and for using Cer
 ## Setting up ELB Certificates
 CircleCI requires the following steps to get ELB (Elastic Load Balancing) certificates working as your primary certs. The steps to accomplish this are below.
 
-**Note:** You only need HTTP below if you plan on using HTTP requests. 
+**Note:** Opening the port for HTTP requests will allow CircleCI to return a HTTPS redirect.
 
 1. Open the following ports on your ELB:
 
@@ -43,16 +43,18 @@ Custom TCP Rule | TCP | 64535-65535 | 0.0.0.0
 
 {: class="table table-striped"}
 
-3. Next, in the management console for CircleCI, upload dummy certs to the `Privacy` Section. These don't need to be real certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires knowledge of at least a dummy cert.
+3. Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
 
 4. It is now possible to set your Github Authorization Callback to `https` rather than `http`.  
 
+## Setting up TLS/HTTPS on CircleCI Server
 
-## Using Certbot to setup TLS/HTTPS on CircleCI Server
+You may use various solutions to generate valid SSL certificate and key file.  Two solutions are provided below.
 
-This document provides instructions for setting up TLS/HTTPS on your Server install using Certbot by manually adding a DNS record set to the Services machine. Certbot generally relies on verifying the DNS record via either port 80 or 443, however this is not supported on CircleCI Server installations as of 2.2.0 because of port conflicts.
+### Using Certbot
 
-## Steps
+This section describes setting up TLS/HTTPS on your Server install using Certbot by manually adding a DNS record set to the Services machine. Certbot generally relies on verifying the DNS record via either port 80 or 443, however this is not supported on CircleCI Server installations as of 2.2.0 because of port conflicts.
+
 
 1. Stop the Service from within the Replicated console (hostname:8800).
 
@@ -71,21 +73,43 @@ certbot certonly --manual --preferred-challenges dns
 
 4. You'll be instructed to add a DNS TXT record.
 
+
+5. After the record is successfully generated, save `fullchain.pem` and `privkey.pem` locally.
+
+
+
 If you're using Route 53 for your DNS records, adding a TXT record is straightforward. When you're creating a new record set, be sure to select type -> TXT and provide the appropriate value enclosed in quotes.
 
-5. After the record is successfully generated, run `fullchain.pem` and `privkey.pem` in the Replicated console.
+### Using Self-Signed Certificates
 
-Because you generated the certificate and private keys *on* the services box, you need to specify the Server path pointing to the cert/private key. 
+Because the ELB does not require a _current_ certificate, you may choose to generate a self-signed certificate with an arbritatry duration.
 
-6. To do so, navigate to `hostname:8800/console/settings`.
+1. Generate the certificate and key using openssl command `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 1 -out certificate.pem`
 
-7. Under "TLS Key & Cert", specify the path pointing to your newly generated certificate and key.
+2. Provide the appropriate information to the prompts.  **NOTE:** The Common Name provided must match the host configured in CircleCI.
 
-### References
+3. Save the certificate.pem and key.pem file locally.
+
+
+### Adding the certificate to CircleCI Server
+
+Once you have a valid certificate and key file in pem format, you must upload it to CircleCI Server.
+
+1. To do so, navigate to `hostname:8800/console/settings`.
+
+2. Under "Privacy" section, check the box for "SSL only (Recommened)"
+
+3. Upload your newly generated certificate and key.
+
+4. Click "Verify TLS Settings" to ensure everything is working.
+
+5. Click "Save" at the bottom of the settings page and restart when prompted.
+
+## References
 
 Reference: https://letsencrypt.readthedocs.io/en/latest/using.html#manual
 
-### Troubleshooting
+## Troubleshooting
 
 Ensure the hostname is properly configured in the Replicated/management console ~ (hostname:8800/settings) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
