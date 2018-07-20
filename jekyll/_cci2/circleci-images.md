@@ -45,7 +45,7 @@ to use a more specific tag.
 ### Language Images
 
 Language images are convenience images for common programming languages.
-These images include both the relevant language and [commonly-used tools.](#pre-installed-tools).
+These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
 making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
