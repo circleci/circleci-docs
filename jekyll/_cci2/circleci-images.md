@@ -30,6 +30,75 @@ watch the video below.
     <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
 </div>
 
+## Best Practices
+
+Since convenience images are based on the most recently built versions of upstream images,
+**it is best practice
+to use the most specific image possible**.
+This makes your builds more deterministic
+by preventing an upstream image
+from introducing unintended changes to your image.
+
+There are two ways
+to make an image more specific:
+
+- You can use a tag
+to pin an image to a version or operating system (OS).
+- You can use a Docker image ID
+to pin an image to a fixed version.
+
+### Using an Image Tag to Pin an Image Version or OS
+
+You can pin aspects of a Docker image
+by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
+
+For example,
+instead of `circleci/golang`,
+you can specify the version and OS
+by using `circleci/golang:1.8.6-jessie`.
+Because the second image specifies a version and OS,
+it is less likely
+to change unexpectedly.
+
+See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
+
+**Note:**
+If you do not specify a tag,
+Docker applies the `latest` tag.
+The `latest` tag refers to the most recent stable release of an image.
+However,
+since this tag may change unexpectedly,
+it is best practice
+to add an explicit image tag.
+
+### Using a Docker Image ID to Pin an Image to a Fixed Version
+
+Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
+You can use this image ID
+to pin an image to a fixed version.
+
+Each image ID is an immutable SHA256 digest
+and looks like this:
+
+```
+sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
+```
+
+#### Finding an Image ID
+
+1. In the CircleCI application,
+go to a past build
+that used the image.
+2. On the **Test Summary** tab,
+click the **Spin up environment** step.
+3. In the log output,
+locate the digest for the image.
+4. Add the image ID to the image name as shown below.
+
+```
+circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
+```
+
 ## Image Types
 
 CircleCI's convenience images fall into two categories:
@@ -138,75 +207,6 @@ The following packages are installed via `curl` or other means.
 - [Docker Compose](https://docs.docker.com/compose/overview/)
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
-
-## Best Practices
-
-Since convenience images are based on the most recently built versions of upstream images,
-**it is best practice
-to use the most specific image possible**.
-This makes your builds more deterministic
-by preventing an upstream image
-from introducing unintended changes to your image.
-
-There are two ways
-to make an image more specific:
-
-- You can use a tag
-to pin an image to a version or operating system (OS).
-- You can use a Docker image ID
-to pin an image to a fixed version.
-
-### Using an Image Tag to Pin an Image Version or OS
-
-You can pin aspects of a Docker image
-by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
-
-For example,
-instead of `circleci/golang`,
-you can specify the version and OS
-by using `circleci/golang:1.8.6-jessie`.
-Because the second image specifies a version and OS,
-it is less likely
-to change unexpectedly.
-
-See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
-
-**Note:**
-If you do not specify a tag,
-Docker applies the `latest` tag.
-The `latest` tag refers to the most recent stable release of an image.
-However,
-since this tag may change unexpectedly,
-it is best practice
-to add an explicit image tag.
-
-### Using a Docker Image ID to Pin an Image to a Fixed Version
-
-Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
-You can use this image ID
-to pin an image to a fixed version.
-
-Each image ID is an immutable SHA256 digest
-and looks like this:
-
-```
-sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
-```
-
-#### Finding an Image ID
-
-1. In the CircleCI application,
-go to a past build
-that used the image.
-2. On the **Test Summary** tab,
-click the **Spin up environment** step.
-3. In the log output,
-locate the digest for the image.
-4. Add the image ID to the image name as shown below.
-
-```
-circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
-```
 
 ## Latest Image Tags by Language
 
