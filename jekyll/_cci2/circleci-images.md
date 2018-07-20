@@ -33,8 +33,8 @@ watch the video below.
 ## Best Practices
 
 Convenience images are based on the most recently built versions of upstream images,
-so **it is best practice
-to use the most specific image possible**.
+so it is best practice
+to use the most specific image possible.
 This makes your builds more deterministic
 by preventing an upstream image
 from introducing unintended changes to your image.
