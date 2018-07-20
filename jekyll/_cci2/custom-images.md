@@ -115,7 +115,7 @@ ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
 
-### Building the image
+### Building the Image
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
