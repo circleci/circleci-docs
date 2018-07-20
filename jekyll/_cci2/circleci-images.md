@@ -62,7 +62,7 @@ by adding an [image tag](https://docs.docker.com/engine/reference/commandline/ta
 
 For example,
 instead of `circleci/golang`,
-you can specify the version and OS
+specify the version and OS
 by using `circleci/golang:1.8.6-jessie`.
 Because the second image specifies a version and OS,
 it is less likely
