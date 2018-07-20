@@ -32,8 +32,8 @@ watch the video below.
 
 ## Best Practices
 
-Since convenience images are based on the most recently built versions of upstream images,
-**it is best practice
+Convenience images are based on the most recently built versions of upstream images,
+so **it is best practice
 to use the most specific image possible**.
 This makes your builds more deterministic
 by preventing an upstream image
@@ -42,9 +42,9 @@ from introducing unintended changes to your image.
 There are two ways
 to make an image more specific:
 
-- You can use a tag
+- Use a tag
 to pin an image to a version or operating system (OS).
-- You can use a Docker image ID
+- Use a Docker image ID
 to pin an image to a fixed version.
 
 ### Using an Image Tag to Pin an Image Version or OS
