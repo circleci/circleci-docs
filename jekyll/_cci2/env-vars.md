@@ -51,6 +51,7 @@ See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-
 
 CircleCI does not support interpolation
 when setting environment variables.
+All defined values are treated literally.
 This can cause issues
 when defining `working_directory`,
 modifying `PATH`,
@@ -93,8 +94,7 @@ they do not support the `BASH_ENV` workaround.
 ## Setting an Environment Variable in a Shell Command
 
 CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
+when setting environment variables.
 
 However, it is possible to interpolate a variable within a command
 by setting it for the current shell.
