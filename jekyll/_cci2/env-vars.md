@@ -96,8 +96,14 @@ they do not support the `BASH_ENV` workaround.
 CircleCI does not support interpolation
 when setting environment variables.
 
-However, it is possible to interpolate a variable within a command
-by setting it for the current shell.
+However,
+it is possible
+to set variables for the current shell
+by [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
+This is useful
+for both modifying your `PATH`
+and setting environment variables
+that reference other variables.
 
 ```yaml
 version: 2
