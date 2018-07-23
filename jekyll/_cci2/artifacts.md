@@ -154,9 +154,17 @@ where you want
 to store the artifacts.
 
 3. Run the commands below.
-Use the table below
+Use the table beneath the commands
 to substitute actual values
 for all variables that start with `:`.
+
+```bash
+export CIRCLE_TOKEN=':your_token'
+
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
+
+<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
+```
 
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|
@@ -167,13 +175,7 @@ Placeholder   | Meaning                                                         
 `:build_num`  | The number for the build for which you want to download artifacts.
 {: class="table table-striped"}
 
-```bash
-export CIRCLE_TOKEN=':your_token'
-
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
-
-<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
-```
+### Description of Commands
 
 First,
 the CIRCLE_TOKEN environment variable is created.
