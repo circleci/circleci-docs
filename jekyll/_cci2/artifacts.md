@@ -175,12 +175,21 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-The `curl` command fetches all artifact details for a build
-and pipes it to `grep` to extract the URLs.
-The results are saved to the `artifacts.txt` file.
-Finally, `xargs` reads the file
-and downloads each artifact to the current directory.
+First,
+the CIRCLE_TOKEN environment variable is created.
+Then,
+the `curl` command fetches all artifact details for a build
+and pipes them to `grep`
+to extract the URLs.
+These URLs are saved to the `artifacts.txt` file.
+Finally,
+`xargs` reads the text file,
+downloading artifacts using `wget`.
+All artifacts are downloaded to the current directory.
 
-In this example, `xargs` runs four processes
-to download files in parallel via `wget`.
-Adjust the value given to `-P` to fit your needs.
+**Note:**
+In the above example,
+`xargs` runs four processes
+to download artifacts in parallel.
+Adjust the number following `-P`
+to fit your needs.
