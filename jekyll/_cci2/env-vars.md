@@ -47,7 +47,7 @@ Running scripts within configuration
 may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
-## Using `BASH_ENV` to Set Environment Variables
+### Using `BASH_ENV` to Set Environment Variables
 
 CircleCI does not support interpolation
 when setting environment variables.
