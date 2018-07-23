@@ -150,7 +150,8 @@ and copy it to a clipboard.
 
 2. In a Terminal window,
 `cd` to a directory
-where you want the artifact files.
+where you want
+to store the artifacts.
 
 3. Run the commands below,
 replacing all variables starting with a `:` with real values for your project.
