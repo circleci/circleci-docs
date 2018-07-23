@@ -152,8 +152,7 @@ jobs:
 Environment variables are not shared across steps.
 If you need an environment variable
 to be accessible in more than one step,
-export the value using `$BASH_ENV`,
-as shown above.
+export the value [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
 
 ## Setting an Environment Variable in a Job
 
