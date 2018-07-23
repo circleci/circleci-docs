@@ -143,7 +143,7 @@ a link to the core dump file appears in the Artifacts tab of the **Job page**.
 ## Downloading All Artifacts for a Build on CircleCI
 
 To download your artifacts with `curl`,
-follow these steps.
+follow the steps below.
 
 1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)
 and copy it to a clipboard.
