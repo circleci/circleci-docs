@@ -47,6 +47,49 @@ Running scripts within configuration
 may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
+## Using `BASH_ENV` to Set Environment Variables
+
+CircleCI does not support interpolation
+when setting environment variables.
+This can cause issues
+when defining `working_directory`,
+modifying `PATH`,
+and sharing variables across multiple `run` steps.
+
+In the example below,
+`$ORGNAME` and `$REPONAME` will not be interpolated.
+
+```yaml
+working_directory: /go/src/github.com/$ORGNAME/$REPONAME
+```
+
+As a workaround,
+export environment variables to `BASH_ENV`,
+as shown below.
+
+```yaml
+name: Setup Environment Variables
+command: |
+  echo 'export IMPORT_PATH="github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
+  echo 'export SERVER_FOLDER="/home/circleci/.go_workspace/src/$IMPORT_PATH"' >> $BASH_ENV
+  echo 'export CIRCLE_ARTIFACTS="$SERVER_FOLDER/artifacts"' >> $BASH_ENV
+  echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+  echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+```
+
+In every step,
+CircleCI automatically loads and runs `BASH_ENV`,
+allowing you to use interpolation
+and share environment variables across `run` steps.
+
+**Note:**
+The `BASH_ENV` workaround only works with `bash`.
+Other implementations like `sh` will not work.
+This limitation affects your image options.
+For example,
+[Alpine images](https://alpinelinux.org/), do not support `bash`,
+and thus do not support the `BASH_ENV` workaround.
+
 ## Setting an Environment Variable in a Shell Command
 
 CircleCI does not support interpolation
