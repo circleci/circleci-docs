@@ -99,6 +99,13 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
+**Note:**
+Environment variables are not shared across steps.
+If you need an environment variable
+to be accessible in more than one step,
+export the value using `$BASH_ENV`,
+as shown above.
+
 ## Setting an Environment Variable in a Job
 
 To set an environment variable in a job,
