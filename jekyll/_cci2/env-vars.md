@@ -70,13 +70,12 @@ to export environment variables to `BASH_ENV`,
 as shown below.
 
 ```yaml
-name: Setup Environment Variables
-command: |
-  echo 'export IMPORT_PATH="github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
-  echo 'export SERVER_FOLDER="/home/circleci/.go_workspace/src/$IMPORT_PATH"' >> $BASH_ENV
-  echo 'export CIRCLE_ARTIFACTS="$SERVER_FOLDER/artifacts"' >> $BASH_ENV
-  echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-  echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+steps:
+  - run:
+      name: Setup Environment Variables
+      command: |
+        echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
 ```
 
 In every step,
