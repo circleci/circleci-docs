@@ -154,12 +154,16 @@ where you want
 to store the artifacts.
 
 3. Run the commands below.
-You must substitute actual values
-for all variables beginning with `:`.
+Use the table below
+to substitute actual values
+for all variables that start with `:`.
 
-Placeholder | Meaning                                                                       |
-------------|-------------------------------------------------------------------------------|
-`:vcs-type` | The version control system (VCS) you are using. Either `github` or `bitbucket`.
+Placeholder  | Meaning                                                                       |
+-------------|-------------------------------------------------------------------------------|
+`:vcs-type`  | The version control system (VCS) you are using. Either `github` or `bitbucket`.
+`:username`  | The VCS project account username for the target project. Located at the top left of the screen in the CircleCI application.
+`:project`   | The name of the target project.
+`:build_num` | The number for the build for which you want to download artifacts.
 {: class="table table-striped"}
 
 `:your_token` should be replaced with the token you copied earlier.
