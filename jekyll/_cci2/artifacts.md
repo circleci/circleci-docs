@@ -153,8 +153,10 @@ and copy it to a clipboard.
 where you want
 to store the artifacts.
 
-3. Run the commands below,
-replacing all variables starting with a `:` with real values for your project.
+3. Run the commands below.
+You must substitute actual values
+for all variables beginning with `:`.
+
 `:your_token` should be replaced with the token you copied earlier.
 `:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
 
