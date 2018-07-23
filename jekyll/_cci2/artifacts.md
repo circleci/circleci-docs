@@ -157,8 +157,9 @@ to store the artifacts.
 You must substitute actual values
 for all variables beginning with `:`.
 
+`:vcs-type` = your version control system (`github` or `bitbucket`)
+
 `:your_token` should be replaced with the token you copied earlier.
-`:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
 
 ```bash
 export CIRCLE_TOKEN=':your_token'
