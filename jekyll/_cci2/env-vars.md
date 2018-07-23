@@ -65,7 +65,8 @@ working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
 
 As a workaround,
-export environment variables to `BASH_ENV`,
+use a `run` step
+to export environment variables to `BASH_ENV`,
 as shown below.
 
 ```yaml
