@@ -193,5 +193,4 @@ All artifacts are downloaded to the current directory.
 In the above example,
 `xargs` runs four processes
 to download artifacts in parallel.
-Adjust the number following `-P`
-to fit your needs.
+Adjust the number given to the `-P` flag as needed.
