@@ -87,8 +87,8 @@ The `BASH_ENV` workaround only works with `bash`.
 Other implementations like `sh` will not work.
 This limitation affects your image options.
 For example,
-[Alpine images](https://alpinelinux.org/), do not support `bash`,
-and thus do not support the `BASH_ENV` workaround.
+because [Alpine images](https://alpinelinux.org/) do not support `bash`,
+they do not support the `BASH_ENV` workaround.
 
 ## Setting an Environment Variable in a Shell Command
 
