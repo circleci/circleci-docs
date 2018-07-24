@@ -18,11 +18,6 @@ environment variables into the builder process.
 To set environment variables create a file called `/etc/circle-installation-customizations`
 with environment variable entries, for example, `export CIRCLE_OPTION_A=foo`. 
 
-## Basic System Monitoring with CloudWatch
-
-Enable CloudWatch by going to Replicated Admin > Settings > Enhanced AWS Integration (1.0 Only) > Enable Cloudwatch, for example, `https://example.com:8800/settings#enhanced_aws`. **Note:** CloudWatch does **not** support monitoring of macOS containers.
-
-CloudWatch already monitors the health and basic checks for EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of CPUs per container if CPU or memory become a bottleneck.
 
 ## Advanced System Monitoring
 
@@ -74,33 +69,23 @@ There is a [blog post series](https://circleci.com/blog/mathematical-justificati
 
 This is in contrast to auto scaling throughout the day based on traffic fluctuations because modeling revealed that boot times are actually too long to prevent queuing in real time. Use [Amazon's Step Policy](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html) instructions to set this up along with Cloudwatch Alarms.
 
-<!---## Health Monitoring Metrics
 
-CloudWatch integration enables the following custom metrics for health monitoring:
-
- * `ContainersReserved` gives you a view of usage over time for capacity planning and budget estimation.
- * `ContainersLeaked` should be 0 or close to 0, an increase indicates a potential infrastructure issue.
- * `ContainersAvailable` is used for Auto Scaling.  If the value is too high, consider shutting some machines down, if the value is too low, consider starting up machines.
-
- * `circle.run-queue.builds` and `circle.run-queue.containers` expresses the degree to which the system is under-provisioned  and number of queued builds that are not running.  Ideally, the ASG will account for this as well.  Values that are too high may indicate an outage or incident.
-
- * `circle.state.running-builds` provides a general insight into current usage.
-
- * Note that `circle.state.num-masters` includes the web server host in the Services machine that does **not** run any builds.  That means the following:
-   * If the value is 0, there is an outage or system is in maintenance.  Risk of dropping some github hooks.
-   * If the value is 1, there are no Builders, so web traffic and GitHub hooks are accepted, but not run.
-   * If the value is 1 + n, there are n builders running and visible to the system. If this is less than the total number of builders launched through AWS, your builders are most likely not launching correctly. If builds are queueing, but this number says you have builders available to the system, you may need to launch more builders.
---->
    
-## Logging  
+## Logging For 1.0
 
 Collecting and centralizing logs is an essential component of monitoring.  The
 logs provide audit trails as well as debugging information for infrastructure
 failures.  This document describes how you can integrate CircleCI 
 with your logging solution in the following sections:
 
+### Basic System Monitoring with CloudWatch
 
-## Installing Logging Appliance Agents
+Enable CloudWatch by going to Replicated Admin > Settings > Enhanced AWS Integration (1.0 Only) > Enable Cloudwatch, for example, `https://example.com:8800/settings#enhanced_aws`. **Note:** CloudWatch does **not** support monitoring of macOS containers.
+
+CloudWatch already monitors the health and basic checks for EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of CPUs per container if CPU or memory become a bottleneck.
+
+
+### Installing Logging Appliance Agents
 
 CircleCI 1.0 Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in 
 `/var/lib/docker/containers/**/*-json.log`.
@@ -161,7 +146,7 @@ curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
 
 If you are using an orchestration tool, for example Chef, Puppet, or SaltStack, it is possible to apply the appropriate recipe or cookbook to the builder instances.
 
-## Integrating With Syslog
+### Integrating With Syslog
 
 CircleCI 1.0 Builders integrate with the `syslog` facility.  `Syslog` is a widely used standard for logging, and most agents integrate with it seamlessly.  Configure the builder machines to emit logs to the `syslog` facility by setting `CIRCLE_LOG_TO_SYSLOG` to `true` in the launch configuration:
 
@@ -182,4 +167,22 @@ The Services machine uses Docker.  It is possible to customize the Docker daemon
 syslog facility as the only mode of logging may accidentally ignore important
 logging info_.  Configuring custom agents to watch all of `/var/log/**/*` will result in
 capturing most logging files including `syslog`.
+
+<!---## Health Monitoring Metrics
+
+CloudWatch integration enables the following custom metrics for health monitoring:
+
+ * `ContainersReserved` gives you a view of usage over time for capacity planning and budget estimation.
+ * `ContainersLeaked` should be 0 or close to 0, an increase indicates a potential infrastructure issue.
+ * `ContainersAvailable` is used for Auto Scaling.  If the value is too high, consider shutting some machines down, if the value is too low, consider starting up machines.
+
+ * `circle.run-queue.builds` and `circle.run-queue.containers` expresses the degree to which the system is under-provisioned  and number of queued builds that are not running.  Ideally, the ASG will account for this as well.  Values that are too high may indicate an outage or incident.
+
+ * `circle.state.running-builds` provides a general insight into current usage.
+
+ * Note that `circle.state.num-masters` includes the web server host in the Services machine that does **not** run any builds.  That means the following:
+   * If the value is 0, there is an outage or system is in maintenance.  Risk of dropping some github hooks.
+   * If the value is 1, there are no Builders, so web traffic and GitHub hooks are accepted, but not run.
+   * If the value is 1 + n, there are n builders running and visible to the system. If this is less than the total number of builders launched through AWS, your builders are most likely not launching correctly. If builds are queueing, but this number says you have builders available to the system, you may need to launch more builders.
+--->
 
