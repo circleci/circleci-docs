@@ -16,9 +16,9 @@ This article provides a System Administrators' overview of CircleCI's preview 2.
 
 This method of preview installation has the following limitations:
 
-- It is not possible to use `machine` executors
-- It is not possible to use the Remote Docker Environment or Docker Layer Caching
-- There is no first-class high-availability option
+- It is not possible to use `machine` executors.
+- It is not possible to use the Remote Docker Environment or Docker Layer Caching.
+- There is no first-class high-availability option.
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
 
