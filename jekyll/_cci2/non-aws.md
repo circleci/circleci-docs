@@ -92,9 +92,7 @@ Have the following available before beginning the installation procedure:
 - A machine to run Ubuntu 14.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM
 - A cluster of machines running Ubuntu 14.04 with a minumum of 8 GB RAM and 4 CPUs each, as well as network access to any Docker registries that are required by your builds for the Nomad Client VMs
 
-### Steps
-
-**To install the Services machine, perform the following steps:**
+### Installing the Services machine
 
 1. Copy the [Services init script](https://github.com/circleci/server-static-install/blob/master/provision-services-ubuntu.sh) to the Services VM machine.
 
@@ -114,7 +112,7 @@ Have the following available before beginning the installation procedure:
 
 9. Set 2.0 Builds to 'Clustered'.
 
-**To install the Nomad Clients, perform the following steps:**
+### Installing the Nomad Clients
 
 1. Copy the [Client init script](https://github.com/circleci/server-static-install/blob/master/provision-nomad-client-ubuntu.sh) to the Nomad Server machine.
 
