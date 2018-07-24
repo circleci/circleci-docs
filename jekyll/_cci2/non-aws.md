@@ -104,7 +104,7 @@ Have the following available before beginning the installation procedure:
 
 5. Enter your license.
 
-6. Complete the Storage section. If you are not using a cloud service, then you will pick `None`—more information below.
+6. Complete the Storage section. If you are not using a cloud service, then you will pick `None` (more information below).
 
 7. Set the VM Provider to None.
 
