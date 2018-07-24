@@ -68,7 +68,7 @@ Each machine on which the Nomad Clients are installed reserves two CPUs and 4GB 
 ### GitHub
 
 CircleCI uses GitHub or GitHub Enterprise credentials for
-authentication which, in turn, may use LDAP, SAML, or SSH for access; that is, CircleCI will inherit the authentication supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad client instances.
+authentication which, in turn, may use LDAP, SAML, or SSH for access. CircleCI will inherit the authentication supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad client instances.
 
 
 | Source        | Ports   | Use          |
