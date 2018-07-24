@@ -126,7 +126,7 @@ The `None` storage driver saves all of your CircleCI data locally. This means th
 
 ### Troubleshooting
 
-This section includes some possible resolutions for  common issues that may be encountered during system setup and installation.
+This section includes some possible resolutions for common issues that may be encountered during system setup and installation.
 
 - Symptom: Jobs stay in `queued` status until they fail and never successfully run.
   - Check port 8585 if the nomad client logs contain the following type of error message:
