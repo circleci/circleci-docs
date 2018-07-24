@@ -170,7 +170,7 @@ Placeholder   | Meaning                                                         
 --------------|-------------------------------------------------------------------------------|
 `:your_token` | The personal API token you created above.
 `:vcs-type`   | The version control system (VCS) you are using. Either `github` or `bitbucket`.
-`:username`   | The VCS project account username for the target project. Located at the top left of the screen in the CircleCI application.
+`:username`   | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application.
 `:project`    | The name of the target project.
 `:build_num`  | The number for the build for which you want to download artifacts.
 {: class="table table-striped"}
