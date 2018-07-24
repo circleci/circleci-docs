@@ -50,10 +50,10 @@ Verify that metrics are forwarding by going to the AWS CloudWatch console.
 Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting and reporting metrics.
 
 Following are the metrics that are enabled:
-- [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/CPU_README.md#cpu-time-measurements)
-- [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/DISK_README.md#metrics)
-- [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/MEM_README.md#metrics)
-- [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/system/NET_README.md#measurements--fields) 
+- [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
+- [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
+- [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
+- [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) 
 - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
 
