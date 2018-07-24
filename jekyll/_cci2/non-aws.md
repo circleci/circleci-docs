@@ -38,7 +38,7 @@ CircleCI Static consists of two primary components: Services and Nomad Clients. 
 
 ### Services 
 
-The machine on which the Services instance runs should only be restarted gracefully and may be backed up using built-in VM snapshotting. DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+The machine on which the Services instance runs should only be restarted gracefully and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/2.0/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
 
 | Source                      | Ports                   | Use                    |
