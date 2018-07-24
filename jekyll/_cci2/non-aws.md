@@ -6,7 +6,7 @@ order: 1
 description: "Using CircleCI 2.0 static installation scripts."
 hide: true
 ---
-This article provides a System Administrators' overview of our preview 2.0 static installation process for non-AWS environments.
+This article provides a System Administrators' overview of CircleCI's preview 2.0 static installation for non-AWS environments.
 
 * TOC
 {:toc}
