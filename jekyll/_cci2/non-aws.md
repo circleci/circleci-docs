@@ -86,7 +86,7 @@ The following sections describe the steps for installation of the Services VM an
 
 ### Prerequisites
 
-Have the following information/resources available before beginning the installation procedure:
+Have the following available before beginning the installation procedure:
 
 - CircleCI License file (.rli)—contact CircleCI support for a license
 - A machine to run Ubuntu 14.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM
