@@ -28,7 +28,7 @@ CircleCI 2.0 provides new infrastructure that includes the following improvement
 
 ## Build Environments
 
-By default, CircleCI 2.0's Nomad Client instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad) to learn more about the job scheduler and how to perfom basic client and cluster operations.
+By default, CircleCI 2.0's Nomad Client instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
 ## Architecture
 
