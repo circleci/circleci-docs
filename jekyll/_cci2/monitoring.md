@@ -10,14 +10,6 @@ This document is for System Administrators who are setting environment variables
 * TOC
 {:toc}
 
-## Settings on Nomad Clients
-
-Several aspects of CircleCI Nomad Client behavior can be customized by passing
-environment variables into the builder process. 
-
-To set environment variables create a file called `/etc/circle-installation-customizations`
-with environment variable entries, for example, `export CIRCLE_OPTION_A=foo`. 
-
 
 ## Advanced System Monitoring
 
