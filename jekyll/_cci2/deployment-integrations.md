@@ -172,8 +172,8 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
       sudo dpkg -i cf-cli_amd64.deb
       cf -v
       cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
-      cf auth $CF_USER $CF_PASSWORD
-      cf target -o $CF_ORG -s $CF_SPACE
+      cf auth "$CF_USER" "$CF_PASSWORD"
+      cf target -o "$CF_ORG" -s "$CF_SPACE"
 ```
 
 ### Dark Deployment
@@ -192,7 +192,7 @@ This is the first step in a Blue-Green deployment, pushing the application to no
       cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
       cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
       # Start the application
-      cf start blueskygreenbuilds-dark
+      cf start app-name-dark
       # Ensure dark route is exclusive to dark app
       cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
 ```
