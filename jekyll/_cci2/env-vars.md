@@ -152,7 +152,8 @@ jobs:
 ```
 
 **Note:**
-Environment variables are not shared across steps.
+Since every `run` step is a new shell,
+environment variables are not shared across steps.
 If you need an environment variable
 to be accessible in more than one step,
 export the value [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
