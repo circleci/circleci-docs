@@ -115,6 +115,28 @@ ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
 
+### Adding an Entrypoint
+
+To run the container as an exectuable,
+use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint).
+Since CircleCI does not preserve entrypoints by default,
+use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label)
+as shown below.
+
+```Dockerfile
+LABEL com.circleci.preserve-entrypoint=true
+
+ENTRYPOINT contacts
+```
+
+**Note:**
+Entrypoints should be commands
+that run forever without failing.
+If the entrypoint fails or terminates in the middle of a build,
+the build will also terminate.
+If you need to access logs or build status,
+consider using a background step instead of an entrypoint.
+
 ### Building the Image
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
