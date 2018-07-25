@@ -79,7 +79,9 @@ steps:
 ```
 
 In every step,
-CircleCI automatically loads and runs `BASH_ENV`,
+CircleCI uses `bash` to source `BASH_ENV`.
+This means that
+`BASH_ENV` is automatically loaded and run,
 allowing you to use interpolation
 and share environment variables across `run` steps.
 
