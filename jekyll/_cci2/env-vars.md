@@ -278,6 +278,15 @@ Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/
 The following environment variables are exported in each build
 and can be used for more complex testing or deployment.
 
+**Note:**
+You cannot use a built-in environment variable
+to define another environment variable.
+Instead,
+you must use a `run` step
+to export the new environment variables using `BASH_ENV`.
+For more details,
+see [Setting an Environment Variable in a Shell Command](#setting-an-environment-variable-in-a-shell-command).
+
 Variable                    | Type    | Value
 ----------------------------|---------|-----------------------------------------------
 `CI`                        | Boolean | `true` (represents whether the current environment is a CI environment)
