@@ -62,7 +62,6 @@ SSH | TCP | 22 | 0.0.0.0
 HTTPS | TCP | 443 | 0.0.0.0
 Custom TCP Rule | TCP | 8800 | 0.0.0.0
 Custom TCP Rule | TCP | 64535-65535 | 0.0.0.0
-
 {: class="table table-striped"}
 
 3. Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
