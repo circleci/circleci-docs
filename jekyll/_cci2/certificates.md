@@ -7,13 +7,35 @@ categories: [administration]
 order: 55
 ---
 
-This document describes the process for using an ELB with HTTPS/SSL enabled.  You will need certificates for the ELB and CircleCI Server, covered in the following sections:
+This document provides a script for using a custom Root Certifcate Authority and the process for using an Elastic Load Balancing certificate in the following sections:  
 
 * TOC
 {:toc}
 
+
+## Using a Custom Root CA
+
+This section describes how to use a custom Root Certificate Authority (CA).
+
+Some installation environments use internal Root Certificate Authorities for encrypting and establishing trust between servers.  If you are using a Root certificate, you will need to import and mark it as a trusted certificate at CircleCI GitHub Enterprise instances. CircleCI will respect such trust when communicating with GitHub and webhook API calls.
+
+CA Certificates must be in a format understood by Java Keystore, and include the entire chain.
+
+The following script provides the necessary steps.
+
+```
+GHE_DOMAIN=github.example.com
+
+# Grab the CA chain from your GitHub Enterprise deployment.
+openssl s_client -connect ${GHE_DOMAIN}:443 -showcerts < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/ghe.crt
+```
+
+Then, navigate to the system console at port 8800 and change the protocol to upgraded. You can change the protocol to "HTTPS (TLS/SSLEnabled)" setting and restart the services.  When trying "Test GitHub Authentication" you should get Success now rather than x509 related error.
+
+
 ## Setting up ELB Certificates
-CircleCI requires the following steps to get ELB (Elastic Load Balancing) certificates working as your primary certs. The steps to accomplish this are below.
+
+CircleCI requires the following steps to get ELB (Elastic Load Balancing) certificates working as your primary certs. The steps to accomplish this are below. You will need certificates for the ELB and CircleCI Server as described in the following sections. 
 
 **Note:** Opening the port for HTTP requests will allow CircleCI to return a HTTPS redirect.
 
