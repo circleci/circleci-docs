@@ -312,9 +312,9 @@ CircleCI skips the job.
 
 In other words,
 **all** jobs run for **all** branches
-unless otherwise specified,
+unless you define branch filters,
 and **no** jobs run for **any** tag
-unless otherwise specified.
+unless you define tag filters.
 
 Item two above means
 that a job **must** have a `filters` `tags` section
