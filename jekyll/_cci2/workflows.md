@@ -317,25 +317,16 @@ and no jobs run for any tags
 unless you define tag filters.
 
 In the example below,
-two workflows are defined:
-`untagged-build` and `tagged-build`.
-
-Item two above means
-that a job **must** have a `filters` `tags` section
-to run as a part of a tag push
-and all its transitively dependent jobs **must** also have a `filters` `tags` section.
-
-Following is a very basic example for building any branch and using tags. The regular expression is a full match rather than a partial match. For example, `only: /^config-test.*/` matches any tag with the prefix `config-test-111` and `only: /^config-test/` matches all tags that match `config-test`.  To match the common use case of a semantic versioning, for example, use `/version-2\.1\.[3-7]/` to match `version-2.1.`(3 through 7).
+two workflows are defined.
+`untagged-build` runs for all branches,
+while `tagged-build` runs for all branches **and** all tags starting with `v`.
 
 ```yaml
 workflows:
   version: 2
-  un-tagged-build:
+  untagged-build:
     jobs:
-      - build:
-          filters:
-            tags:
-              ignore: /^v.*/
+      - build
   tagged-build:
     jobs:
       - build:
@@ -343,6 +334,11 @@ workflows:
             tags:
               only: /^v.*/
 ```
+
+Item two above means
+that a job **must** have a `filters` `tags` section
+to run as a part of a tag push
+and all its transitively dependent jobs **must** also have a `filters` `tags` section.
 
 The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
 
