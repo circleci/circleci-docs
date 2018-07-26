@@ -316,6 +316,10 @@ unless you define branch filters,
 and no jobs run for any tags
 unless you define tag filters.
 
+In the example below,
+two workflows are defined:
+`untagged-build` and `tagged-build`.
+
 Item two above means
 that a job **must** have a `filters` `tags` section
 to run as a part of a tag push
