@@ -304,9 +304,9 @@ In the example, `filters` is set with the `branches` key and the `only` key with
 
 CircleCI treats tag and brach filters differently.
 
-1. For a branch push unaffected by any filters,
+1. If a job is unaffected by **branch** filters,
 CircleCI runs the job.
-2. For a tag push unaffected by any filters,
+2. If a job is unaffected by **tag** filters,
 CircleCI skips the job.
 
 Item two above means
