@@ -302,12 +302,18 @@ In the example, `filters` is set with the `branches` key and the `only` key with
 
 ### Git Tag Job Execution
 
-CircleCI treats tag and branch filters differently when deciding whether a job should run.
+CircleCI treats tag and branch filters differently
+when deciding whether a job should run.
 
-1. For a branch push unaffected by any filters, CircleCI runs the job.
-2. For a tag push unaffected by any filters, CircleCI skips the job.
+1. For a branch push unaffected by any filters,
+CircleCI runs the job.
+2. For a tag push unaffected by any filters,
+CircleCI skips the job.
 
-Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. 
+Item two above means
+that a job **must** have a `filters` `tags` section
+to run as a part of a tag push
+and all its transitively dependent jobs **must** also have a `filters` `tags` section.
 
 Following is a very basic example for building any branch and using tags. The regular expression is a full match rather than a partial match. For example, `only: /^config-test.*/` matches any tag with the prefix `config-test-111` and `only: /^config-test/` matches all tags that match `config-test`.  To match the common use case of a semantic versioning, for example, use `/version-2\.1\.[3-7]/` to match `version-2.1.`(3 through 7).
 
