@@ -302,12 +302,15 @@ In the example, `filters` is set with the `branches` key and the `only` key with
 
 ### Git Tag Job Execution
 
-CircleCI treats tag and brach filters differently.
+CircleCI treats tag and branch filters differently.
 
 1. If a job is unaffected by **branch** filters,
 CircleCI runs the job.
 2. If a job is unaffected by **tag** filters,
 CircleCI skips the job.
+
+**Note:**
+
 
 Item two above means
 that a job **must** have a `filters` `tags` section
