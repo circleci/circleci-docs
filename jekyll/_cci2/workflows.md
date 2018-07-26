@@ -310,6 +310,12 @@ CircleCI runs the job.
 2. If a job is unaffected by **tag** filters,
 CircleCI skips the job.
 
+In other words,
+**all** jobs run for **all** branches
+unless otherwise specified,
+and **no** jobs run for **any** tag
+unless otherwise specified.
+
 Item two above means
 that a job **must** have a `filters` `tags` section
 to run as a part of a tag push
