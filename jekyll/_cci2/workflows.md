@@ -323,8 +323,7 @@ and all its transitively dependent jobs **must** also have a `filters` `tags` se
 
 Following is a very basic example for building any branch and using tags. The regular expression is a full match rather than a partial match. For example, `only: /^config-test.*/` matches any tag with the prefix `config-test-111` and `only: /^config-test/` matches all tags that match `config-test`.  To match the common use case of a semantic versioning, for example, use `/version-2\.1\.[3-7]/` to match `version-2.1.`(3 through 7).
 
-
-```
+```yaml
 workflows:
   version: 2
   un-tagged-build:
@@ -337,10 +336,8 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              ignore: /.*/
-	    tags:
-	      only: /^v.*/
+            tags:
+              only: /^v.*/
 ```
 
 The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
