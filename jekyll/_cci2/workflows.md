@@ -311,9 +311,9 @@ CircleCI runs the job.
 CircleCI skips the job.
 
 In other words,
-**all** jobs run for **all** branches
+all jobs run for all branches
 unless you define branch filters,
-and **no** jobs run for **any** tag
+and no jobs run for any tags
 unless you define tag filters.
 
 Item two above means
