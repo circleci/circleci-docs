@@ -338,16 +338,9 @@ workflows:
 If a job with tag filters requires any other jobs (directly or indirectly),
 it will not run
 unless the dependent jobs also have tag filters.
-
-Item two above means
-that a job **must** have a `filters` `tags` section
-to run as a part of a tag push
-and all its transitively dependent jobs **must** also have a `filters` `tags` section.
-
-The following example runs 
-
-1. `build` job for all branches, and all tags.
-2. `deploy` job only for tags marked with a version number.
+In the example below,
+the `build` job runs for all branches and all tags.
+The `deploy` job runs for no branches and only for tags starting with 'v'.
 
 ```
 workflows:
