@@ -1,6 +1,6 @@
 ---
 name: Bug
-about: Report a technical problem
+about: A technical problem
 ---
 
 # Description
