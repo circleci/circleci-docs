@@ -335,23 +335,12 @@ workflows:
               only: /^v.*/
 ```
 
+
+
 Item two above means
 that a job **must** have a `filters` `tags` section
 to run as a part of a tag push
 and all its transitively dependent jobs **must** also have a `filters` `tags` section.
-
-The following `build` job example will run for all branches, and all tags, except those starting with `testing-`.
-
-```
-workflows:
-  version: 2
-  build-workflow:
-    jobs:
-      - build:
-          filters:
-            tags:
-              ignore: /^testing-.*/
-```
 
 The following example runs 
 
