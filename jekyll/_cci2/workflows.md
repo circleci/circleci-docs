@@ -338,6 +338,7 @@ workflows:
 If a job with tag filters requires any other jobs (directly or indirectly),
 it will not run
 unless the dependent jobs also have tag filters.
+
 In the example below,
 the `build` job runs for all branches and all tags.
 The `deploy` job runs for no branches and only for tags starting with 'v'.
