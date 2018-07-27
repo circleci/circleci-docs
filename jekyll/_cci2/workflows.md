@@ -378,13 +378,13 @@ workflows:
   build-test-deploy:
     jobs:
       - build:
-          filters:
+          filters:  # required since `test` has tag filters AND requires `build`
             tags:
               only: /^config-test.*/
       - test:
           requires:
             - build
-          filters:
+          filters:  # required since `deply` has tag filters AND requires `test`
             tags:
               only: /^config-test.*/
       - deploy:
