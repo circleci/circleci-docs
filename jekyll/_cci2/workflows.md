@@ -318,8 +318,8 @@ unless you define tag filters.
 
 In the example below,
 two workflows are defined.
-`untagged-build` runs for all branches,
-while `tagged-build` runs for all branches **and** all tags starting with `v`.
+`untagged-build` runs the `build` job for all branches,
+while `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
 
 ```yaml
 workflows:
@@ -335,7 +335,9 @@ workflows:
               only: /^v.*/
 ```
 
-
+If a job with tag filters requires any other jobs (directly or indirectly),
+it will not run
+unless the dependent jobs also have tag filters.
 
 Item two above means
 that a job **must** have a `filters` `tags` section
