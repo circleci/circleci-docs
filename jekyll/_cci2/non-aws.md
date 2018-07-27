@@ -118,7 +118,7 @@ Have the following available before beginning the installation procedure:
 
 2. Log in to the machine provisioned for the Nomad Server and run the `sudo su` command.
 
-3. To start the script, run `./provision-nomad-client-ubuntu.sh` with the `NOMAD_SERVER_ADDRESS` environment variable set to the routable IP of the Services machine. 
+3. To start the script, run `./provision-nomad-client-ubuntu.sh` with the `NOMAD_SERVER_ADDRESS` environment variable set to the routable IP of the Services machine (for example, `NOMAD_SERVER_ADDRESS=0.0.0.0 ./provision-nomad-client-ubuntu.sh`).
 
 ### Storage
 
