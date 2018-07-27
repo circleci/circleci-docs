@@ -366,7 +366,7 @@ workflows:
 ```
 
 In the example below,
-three jobs are defined with the `build-n-deploy` workflow:
+three jobs are defined with the `build-test-deploy` workflow:
 
 - The `build` job runs for all branches and only tags starting with 'config-test'.
 - The `test` job runs for all branches and only tags starting with 'config-test'.
