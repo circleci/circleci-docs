@@ -317,9 +317,10 @@ and no jobs run for any tags
 unless you define tag filters.
 
 In the example below,
-two workflows are defined.
-`untagged-build` runs the `build` job for all branches,
-while `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
+two workflows are defined:
+
+- `untagged-build` runs the `build` job for all branches.
+- `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
 
 ```yaml
 workflows:
@@ -340,8 +341,10 @@ it will not run
 unless the dependent jobs also have tag filters.
 
 In the example below,
-the `build` job runs for all branches and all tags.
-The `deploy` job runs for no branches and only for tags starting with 'v'.
+two jobs are defined within the `build-n-deploy` workflow:
+
+- The `build` job runs for all branches and all tags.
+- The `deploy` job runs for no branches and only for tags starting with 'v'.
 
 ```yaml
 workflows:
@@ -363,14 +366,16 @@ workflows:
 ```
 
 In the example below,
-the `build` job runs for all branches and only tags starting with 'config-test'.
-The `test` job runs for all branches and only tags starting with 'config-test'.
-The `deploy` job runs for no branches and only tags starting with 'config-test'.
+three jobs are defined with the `build-n-deploy` workflow:
+
+- The `build` job runs for all branches and only tags starting with 'config-test'.
+- The `test` job runs for all branches and only tags starting with 'config-test'.
+- The `deploy` job runs for no branches and only tags starting with 'config-test'.
 
 ```yaml
 workflows:
   version: 2
-  build-n-deploy:
+  build-test-deploy:
     jobs:
       - build:
           filters:
