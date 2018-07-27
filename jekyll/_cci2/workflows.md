@@ -397,7 +397,11 @@ workflows:
               ignore: /.*/
 ```
 
-**Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. This means that if you push a lot of tags we may not receive all of them.
+**Note:**
+Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads)
+and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags.
+If you push several tags at once,
+CircleCI may not receive all of them.
 
 ### Regular Expression Support
 
