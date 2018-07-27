@@ -343,13 +343,13 @@ In the example below,
 the `build` job runs for all branches and all tags.
 The `deploy` job runs for no branches and only for tags starting with 'v'.
 
-```
+```yaml
 workflows:
   version: 2
   build-n-deploy:
     jobs:
       - build:
-          filters:
+          filters:  # required since `deploy` has tag filters AND requires `build`
             tags:
               only: /.*/
       - deploy:
@@ -362,14 +362,12 @@ workflows:
               ignore: /.*/
 ```
 
-**Note:** The `build` job **must** also have a `filters` `tags` section, as it is a transient dependency of the `deploy` job.
+In the example below,
+the `build` job runs for all branches and only tags starting with 'config-test'.
+The `test` job runs for all branches and only tags starting with 'config-test'.
+The `deploy` job runs for no branches and only tags starting with 'config-test'.
 
-The following example runs
-
-1. `build` and `test` jobs for all branches and only `config-test.*` tags.
-2. `deploy` only for `config-test.*` tags.
-
-```
+```yaml
 workflows:
   version: 2
   build-n-deploy:
@@ -392,7 +390,6 @@ workflows:
               only: /^config-test.*/
             branches:
               ignore: /.*/
-
 ```
 
 **Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. This means that if you push a lot of tags we may not receive all of them.
