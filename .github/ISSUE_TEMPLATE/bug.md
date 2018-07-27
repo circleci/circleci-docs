@@ -1,6 +1,6 @@
 ---
-name: Bug Report
-about: Report a technical problem with the site
+name: Bug
+about: Report a technical problem
 ---
 
 # Location
