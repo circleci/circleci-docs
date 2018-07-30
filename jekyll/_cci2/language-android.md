@@ -16,16 +16,15 @@ This guide will help you get started with an Android application on CircleCI.
 
 ## Overview
 
-Running the Android emulator is not currently supported
-by the type of virtualization CircleCI 2.0 uses on Linux.
-To run emulator tests from a job,
-consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
-To do this,
-you can use the [gcloud command line](https://firebase.google.com/docs/test-lab/command-line).
-Google Cloud tools are preinstalled in our Android Docker images,
-which you can find on [GitHub](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) or [Docker Hub](https://hub.docker.com/r/circleci/android/tags).
+Placeholder sentence about how great and easy it is to build an Android application on CircleCI.
 
 **Note:**
+Due to how CircleCI implements virtualization on Linux,
+running the Android emulator is not supported.
+To run emulator tests from a job,
+consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
+For more details,
+see the [Testing With Firebase](#testing-with-firebase) section below.
 
 ## Prerequisites
 
@@ -143,6 +142,13 @@ React Native projects can be built on CircleCI 2.0 using Linux, Android
 and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
+
+## Testing With Firebase
+
+To test your Android application with Firebase,
+use the [gcloud command line](https://firebase.google.com/docs/test-lab/command-line).
+Google Cloud tools are preinstalled in our Android Docker images,
+which you can find on [GitHub](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) or [Docker Hub](https://hub.docker.com/r/circleci/android/tags).
 
 ## Disabling Pre-Dexing to Improve Build Performance
 
