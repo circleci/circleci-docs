@@ -16,7 +16,9 @@ This guide will help you get started with an Android application on CircleCI.
 
 ## Overview
 
-There are some assumptions made in this guide:
+## Prerequisites
+
+This guide assumes the following:
 
 - You are using [Gradle](https://gradle.org/)
 to build your Android project.
