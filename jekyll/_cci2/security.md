@@ -22,10 +22,10 @@ The nature of CircleCI is
 that our software has access to your code
 and whatever data that code interacts with.
 All jobs on CircleCI run in a sandbox
-(specifically, a Docker container or on-demand VM container)
+(specifically, a Docker container or an ephemeral VM)
 that stands alone from all other builds
 and is not accessible from the Internet or from your own network.
-The build container pulls code via git over SSH.
+The build agent pulls code via git over SSH.
 Your particular test suite or job configurations may call out to external services or integration points within your network,
 and the response from such calls will be pulled into your jobs
 and used by your code at your discretion.
