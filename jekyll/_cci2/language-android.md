@@ -9,7 +9,7 @@ order: 9
 
 *[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Android*
 
-This guide will help you get started with an Android application on CircleCI.
+This guide will get you started with an Android application on CircleCI.
 
 * TOC
 {:toc}
