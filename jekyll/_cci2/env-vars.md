@@ -43,7 +43,7 @@ The full text of `config.yml` is visible
 to developers with access to your project on CircleCI.
 Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
 For more information,
-see the ["Encryption" section]({{ site.baseurl }}/2.0/security/#encryption) of the "Security" document.
+see the [Encryption section]({{ site.baseurl }}/2.0/security/#encryption) of the "Security" document.
 
 Running scripts within configuration
 may expose secret environment variables.
