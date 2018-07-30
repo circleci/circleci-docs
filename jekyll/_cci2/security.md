@@ -31,7 +31,7 @@ and the response from such calls will be pulled into your jobs
 and used by your code at your discretion.
 After a job is complete,
 the container that ran the job is destroyed and rebuilt.
-All environment variables are stored using [Hashicorp Vault](https://www.vaultproject.io/).
+All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/).
 Environment variables are encrypted using AES256-GCM96
 and are unavailable to CircleCI employees.
 
