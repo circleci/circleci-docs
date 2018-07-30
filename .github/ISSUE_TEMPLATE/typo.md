@@ -1,6 +1,6 @@
 ---
-name: Typo Report
-about: Point out a typographical error
+name: Typo
+about: A typographical error
 ---
 
 # Location

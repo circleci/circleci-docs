@@ -1,6 +1,6 @@
 ---
-name: Document Request
-about: Tell us about something that *isn't* documented
+name: Undocumented
+about: Missing information
 ---
 
 # Missing Information

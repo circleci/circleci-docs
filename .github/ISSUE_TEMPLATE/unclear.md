@@ -1,6 +1,6 @@
 ---
-name: Unclear Language
-about: Suggest an improvement to specific language
+name: Unclear
+about: Confusing language
 ---
 
 # Location
