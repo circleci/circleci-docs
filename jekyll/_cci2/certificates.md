@@ -24,7 +24,6 @@ Load BalancerProtocol | Load Balancer Port | Instance Protocol | Instance Port |
 HTTP | 80 | HTTP | 80 | N/A | N/A
 SSL| 443 | SSL | 443 | Change | your-cert
 SSL | 3000 | SSL | 3000 | Change | your-cert
-TCP | 4647 | TCP | 4647 | Change | your-cert
 HTTPS | 8800 | HTTPS | 8800| Change | your-cert
 SSL | 8081 | SSL | 8081 | Change | your-cert
 SSL|8082| SSL| 8082 | Change | your-cert

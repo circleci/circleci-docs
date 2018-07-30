@@ -9,7 +9,7 @@ order: 40
 
 *[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Installing and Using docker-compose*
 
-To use `docker-compose` with the `docker` key, install it in your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your `config.yml` file:
+`docker-compose` is [pre-installed in the CircleCI convenience images][pre-installed]. If you're using another image then you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your `config.yml` file:
 
 ``` 
 - run:
@@ -19,6 +19,9 @@ To use `docker-compose` with the `docker` key, install it in your [primary conta
       chmod +x ~/docker-compose
       sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
+
+[pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools
+[primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
 
 Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
 
@@ -63,6 +66,3 @@ If you want to use docker compose to manage a multi-container setup with a docke
 Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host. 
 
 This combination is required if you want to build docker images for deployment. See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
-
-
-[primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
