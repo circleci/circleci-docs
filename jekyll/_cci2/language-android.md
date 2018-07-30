@@ -143,9 +143,9 @@ and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
-## Testing With Firebase
+## Testing With Firebase Test Lab
 
-To test your Android application with Firebase,
+To test your Android application with Firebase Test Lab,
 use the [gcloud command line](https://firebase.google.com/docs/test-lab/command-line).
 Google Cloud tools are preinstalled in our Android Docker images,
 which you can find on [GitHub](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) or [Docker Hub](https://hub.docker.com/r/circleci/android/tags).
