@@ -115,8 +115,6 @@ Then `./gradlew lint test` runs the unit tests, and runs the built in linting to
 
 We then upload the build reports as job artifacts, and we upload the test metadata (XML) for CircleCI to process.
 
-Nice! You just set up CircleCI for an Android app.
-
 ## Docker Images
 
 For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
