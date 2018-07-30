@@ -50,18 +50,15 @@ jobs:  # basic units of work in a run
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
       - run: mix do deps.get, compile  # get updated dependencies & compile them
-      - save_cache:  # generate and store cache so `restore_cache` works
-          key: v1-mix-cache-{{ checksum "mix.lock" }}
+      - save_cache:  # generate and store mix cache
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
-      - save_cache:  # make another less specific cache
+      - save_cache:  # make another, less specific cache
           key: v1-mix-cache-{{ .Branch }}
           paths: "deps"
-      - save_cache:  # you should really save one more cache just in case
+      - save_cache:  # you should really save one more cache (just in case)
           key: v1-mix-cache
           paths: "deps"
-      - save_cache: # don't forget to save a *build* cache, too
-          key: v1-mix-cache-{{ checksum "mix.lock" }}
-          paths: "_build"
       - save_cache: # don't forget to save a *build* cache, too
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"
