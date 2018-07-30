@@ -47,14 +47,66 @@ Running scripts within configuration
 may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
+### Using `BASH_ENV` to Set Environment Variables
+
+CircleCI does not support interpolation
+when setting environment variables.
+All defined values are treated literally.
+This can cause issues
+when defining `working_directory`,
+modifying `PATH`,
+and sharing variables across multiple `run` steps.
+
+In the example below,
+`$ORGNAME` and `$REPONAME` will not be interpolated.
+
+```yaml
+working_directory: /go/src/github.com/$ORGNAME/$REPONAME
+```
+
+As a workaround,
+use a `run` step
+to export environment variables to `BASH_ENV`,
+as shown below.
+
+```yaml
+steps:
+  - run:
+      name: Setup Environment Variables
+      command: |
+        echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
+        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+```
+
+In every step,
+CircleCI uses `bash` to source `BASH_ENV`.
+This means that
+`BASH_ENV` is automatically loaded and run,
+allowing you to use interpolation
+and share environment variables across `run` steps.
+
+**Note:**
+The `BASH_ENV` workaround only works with `bash`.
+Other implementations like `sh` will not work.
+This limitation affects your image options.
+For example,
+because [Alpine images](https://alpinelinux.org/) do not include `bash` by default,
+the `BASH_ENV` workaround will not work
+without first installing `bash`.
+
 ## Setting an Environment Variable in a Shell Command
 
 CircleCI does not support interpolation
-when defining configuration variables like `working_directory` or `images`.
-All defined values are treated literally.
+when setting environment variables.
 
-However, it is possible to interpolate a variable within a command
-by setting it for the current shell.
+However,
+it is possible
+to set variables for the current shell
+by [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
+This is useful
+for both modifying your `PATH`
+and setting environment variables
+that reference other variables.
 
 ```yaml
 version: 2
@@ -98,6 +150,13 @@ jobs:
           environment:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
+
+**Note:**
+Since every `run` step is a new shell,
+environment variables are not shared across steps.
+If you need an environment variable
+to be accessible in more than one step,
+export the value [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
 
 ## Setting an Environment Variable in a Job
 
@@ -277,6 +336,15 @@ Start a run with the POST API call, see the [new build]( {{ site.baseurl }}/api/
 
 The following environment variables are exported in each build
 and can be used for more complex testing or deployment.
+
+**Note:**
+You cannot use a built-in environment variable
+to define another environment variable.
+Instead,
+you must use a `run` step
+to export the new environment variables using `BASH_ENV`.
+For more details,
+see [Setting an Environment Variable in a Shell Command](#setting-an-environment-variable-in-a-shell-command).
 
 Variable                    | Type    | Value
 ----------------------------|---------|-----------------------------------------------

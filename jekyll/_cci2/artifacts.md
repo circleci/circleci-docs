@@ -143,19 +143,20 @@ a link to the core dump file appears in the Artifacts tab of the **Job page**.
 ## Downloading All Artifacts for a Build on CircleCI
 
 To download your artifacts with `curl`,
-follow these steps.
+follow the steps below.
 
 1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)
 and copy it to a clipboard.
 
 2. In a Terminal window,
 `cd` to a directory
-where you want the artifact files.
+where you want
+to store the artifacts.
 
-3. Run the commands below,
-replacing all variables starting with a `:` with real values for your project.
-`:your_token` should be replaced with the token you copied earlier.
-`:vcs-type` is dependent on your version control system (either `github` or `bitbucket`).
+3. Run the commands below.
+Use the table beneath the commands
+to substitute actual values
+for all variables that start with `:`.
 
 ```bash
 export CIRCLE_TOKEN=':your_token'
@@ -165,12 +166,31 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-The `curl` command fetches all artifact details for a build
-and pipes it to `grep` to extract the URLs.
-The results are saved to the `artifacts.txt` file.
-Finally, `xargs` reads the file
-and downloads each artifact to the current directory.
+Placeholder   | Meaning                                                                       |
+--------------|-------------------------------------------------------------------------------|
+`:your_token` | The personal API token you created above.
+`:vcs-type`   | The version control system (VCS) you are using. Either `github` or `bitbucket`.
+`:username`   | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application.
+`:project`    | The name of the target VCS repository.
+`:build_num`  | The number for the build for which you want to download artifacts.
+{: class="table table-striped"}
 
-In this example, `xargs` runs four processes
-to download files in parallel via `wget`.
-Adjust the value given to `-P` to fit your needs.
+### Description of Commands
+
+First,
+the CIRCLE_TOKEN environment variable is created.
+Then,
+the `curl` command fetches all artifact details for a build
+and pipes them to `grep`
+to extract the URLs.
+These URLs are saved to the `artifacts.txt` file.
+Finally,
+`xargs` reads the text file,
+downloading artifacts using `wget`.
+All artifacts are downloaded to the current directory.
+
+**Note:**
+In the above example,
+`xargs` runs four processes
+to download artifacts in parallel.
+Adjust the number given to the `-P` flag as needed.
