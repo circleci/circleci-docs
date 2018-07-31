@@ -18,7 +18,9 @@ in the following sections.
 
 ## Overview
 
-Placeholder sentence about how great and easy it is to build an Android application on CircleCI.
+This guide provides an introduction to Android development on CircleCI.
+If you are looking for a `.circleci/config.yml` template for Android,
+see the [Sample Configuration](#sample-configuration) section of this document.
 
 **Note:**
 Due to how CircleCI implements virtualization on Linux,
