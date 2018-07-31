@@ -29,7 +29,7 @@ to deploy your application to GCP products.
 
 ## Steps
 
-### Choosing a Base Image for the Deploy Job
+### Installing the Google Cloud SDK
 
 If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
