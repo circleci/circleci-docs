@@ -1,6 +1,6 @@
 ---
 name: Grammatical Error
-about: Correct a writing mistake
+about: Grammatically incorrect writing
 ---
 
 # Location

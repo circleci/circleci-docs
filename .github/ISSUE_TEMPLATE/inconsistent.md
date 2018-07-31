@@ -1,6 +1,6 @@
 ---
-name: Inconsistent Documentation
-about: Report conflicting documentation
+name: Inconsistent
+about: Conflicting information
 ---
 
 # Locations
