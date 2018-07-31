@@ -1,6 +1,6 @@
 ---
-name: Incorrect Information
-about: Report incorrect documentation
+name: Incorrect
+about: Incorrect information
 ---
 
 # Locations
