@@ -9,7 +9,9 @@ order: 9
 
 *[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Android*
 
-This guide will get you started with an Android application on CircleCI.
+This document describes
+how to set up an Android project on CircleCI
+in the following sections.
 
 * TOC
 {:toc}
