@@ -9,7 +9,7 @@ order: 100
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authorizing the Google Cloud SDK*
 
 This document explains
-how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
+how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
