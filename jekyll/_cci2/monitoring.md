@@ -26,25 +26,7 @@ CloudWatch already monitors the health and basic checks for EC2 instances, for e
 
 ## Advanced System Monitoring
 
-Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics, for example `https://example.com:8800/settings#metrics`. Then, click Enable Metrics.
-![Enable Metrics](  {{ site.baseurl }}/assets/img/docs/enable_metrics1.png)
-
-### Supported Platform(s)
-
-Currently, only AWS CloudWatch is supported.  Click AWS CloudWatch to begin configuration.
-![AWS CloudWatch](  {{ site.baseurl }}/assets/img/docs/enable_metrics2.png)
-
-### Configuration
-
-There are two options for configuration:  
-
-- Use the IAM Instance Profile of the services box and configure your custom region and namespace.
-![Configuration IAM](  {{ site.baseurl }}/assets/img/docs/enable_metrics3a.png)
-
-- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
-![Configuration Alt](  {{ site.baseurl }}/assets/img/docs/enable_metrics3b.png)
-
-Verify that metrics are forwarding by going to the AWS CloudWatch console.
+Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings and enabling the provider of your choice, for example `https://example.com:8800/settings#cloudwatch_metrics`.
 
 ### Metrics Details
 Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting and reporting metrics.
@@ -56,6 +38,56 @@ Following are the metrics that are enabled:
 - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) 
 - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
+### Supported Platform(s)
+
+There are two built-in platforms; AWS CloudWatch and DataDog.
+
+#### AWS CloudWatch
+
+Click `Enable' under AWS CloudWatch to begin configuration.
+![AWS CloudWatch](  {{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch1.png)
+
+##### Configuration
+
+There are two options for configuration:  
+
+- Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+    ![Configuration IAM](  {{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
+
+- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+    ![Configuration Alt](  {{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
+
+After saving you can *verify* that metrics are forwarding by going to the AWS CloudWatch console.
+
+#### DataDog
+
+Click `Enable' under DataDog Metrics to begin configuration.
+
+![DataDog](  {{ site.baseurl }}/assets/img/docs/metrics_datadog1.png)
+
+##### Configuration
+
+Enter your DataDog API Key.
+
+![DataDog](  {{ site.baseurl }}/assets/img/docs/metrics_datadog2.png)
+
+After saving you can *verify* that metrics are forwarding by going to the DataDog **where**.
+
+#### Custom Metrics *(beta)*
+
+A beta feature is to configure Telegraf by going to Replicated Admin > Settings > Custom Metrics and enabling the custom option, for example `https://example.com:8800/settings#custom_metrics`.
+
+![Custom](  {{ site.baseurl }}/assets/img/docs/metrics_custom1.png)
+
+##### Configuration
+
+Configuration options are based on Telegraf's documented output plugins. See their documentation [here](https://github.com/influxdata/telegraf#output-plugins).
+
+For example, if you would like to use the InfluxDB Output Plugin the configuration would look like the following.
+
+![DataDog](  {{ site.baseurl }}/assets/img/docs/metrics_custom2.png)
+
+Please see the InfluxDB [documenation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
 
 ## Scheduled Scaling
 
