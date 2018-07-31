@@ -23,4 +23,4 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 Your build appear on the Jobs page of the CircleCI app when a new commit is pushed to your repository. If you do not see your jobs building on the Jobs page when you push config changes, check the Workflows tab of the CircleCI app to find out how to update your config to enable builds.
 
-![Workflows]({{ site.baseurl }}/assets/img/docs/workflows.png)
+![Workflows]({{ site.baseurl }}/assets/img/docs/approval_job.png)
