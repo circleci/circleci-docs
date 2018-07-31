@@ -28,7 +28,7 @@ running the Android emulator is not supported.
 To run emulator tests from a job,
 consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
 For more details,
-see the [Testing With Firebase](#testing-with-firebase) section below.
+see the [Testing With Firebase](#testing-with-firebase-test-lab) section below.
 
 ## Prerequisites
 
