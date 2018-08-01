@@ -68,7 +68,7 @@ You must be an Org Admin to complete the following task.
 2. Click the Create Context button if you will use a new context or click the name of an existing context.
 3. Click the Add Group link. The Add Groups dialog box appears.
 4. Select GitHub teams or LDAP groups to add to the context and click the Add button. Use of the context is now limited to the selected groups.
-5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is limited to members of the security groups.
+5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is now limited to members of the security groups.
 6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
