@@ -233,9 +233,19 @@ jobs:
 
 ## Disabling Pre-Dexing to Improve Build Performance
 
-Disabling pre-dexing for Android builds on CircleCI can speed up your builds. Refer to the [Disable Android pre dexing on CI builds](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/) blog post for details.
+Disabling pre-dexing for Android builds on CircleCI can speed up your builds.
+Refer to the [Disable Android pre dexing on CI builds](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/) blog post for details.
 
-CircleCI always runs clean builds, so pre-dexing has no benefit. By default, the Gradle Android plugin pre-dexes dependencies. Pre-dexing converts Java bytecode into Android bytecode to speed up development by doing only incremental dexing as you change code. Pre-dexing can make compilation slower and may also use large quantities of memory. 
+CircleCI always runs clean builds,
+so pre-dexing has no benefit.
+By default,
+the Gradle Android plugin pre-dexes dependencies.
+Pre-dexing converts Java bytecode into Android bytecode
+to speed up development
+by doing only incremental dexing
+as you change code.
+Pre-dexing can make compilation slower
+and may also use large quantities of memory.
 
 ## Deploy
 
