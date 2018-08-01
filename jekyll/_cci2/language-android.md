@@ -248,7 +248,3 @@ disabling pre-dexing is highly recommended.
 
 For more details,
 refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
-
-## Deploy
-
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
