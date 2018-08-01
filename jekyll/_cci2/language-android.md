@@ -231,6 +231,9 @@ jobs:
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
 ```
 
+For more details on using `gcloud` to run Firebase,
+see the [official documentation](https://firebase.google.com/docs/test-lab/android/command-line).
+
 ## Disabling Pre-Dexing
 
 By default,
