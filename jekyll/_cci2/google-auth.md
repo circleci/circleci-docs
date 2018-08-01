@@ -62,7 +62,7 @@ but it will be used throughout the examples in this document.
 
 ### Authenticating to Google Container Registry
 
-Depending on the [base Docker image you chose](#choosing-a-base-image-for-the-deploy-job),
+Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk),
 you may have to authenticate to the Google Container Registry.
 
 If you are using Google's public image (`google/cloud-sdk`),
