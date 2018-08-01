@@ -50,24 +50,28 @@ To rerun a job and use the context, it **must** be rerun from the Workflows page
 
 ## Securing a Context
 
-CircleCI enables you to secure secrets at run time by adding authorized groups to contexts. Only Org Admins may add *groups* to a new or existing context. Groups are definied as LDAP groups or GitHub teams. After the group is added to a context, only members of that group may use the environment variables of the secure context. 
+CircleCI enables you to secure secrets at run time by adding security groups to contexts. Only Org Admins may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After the security group is added to a context, only members of that security group may access or use the environment variables of the secure context. 
 
-To invoke a job that uses a secure context, a user must be a member of one of the context groups or the workflow will fail with the status of `Unauthorized`. If you add a context to your job and you are **not** a member of any of the context groups, the job will fail as `Unauthorized`.
+The default security group is `organization` and enables any member of the org to use the context.
 
-**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be secured, so only GitHub hosted projects or projects that use GitHub Enterprise with CircleCI include this feature.
+## Runnning Workflows with a Secure Context
 
-### Limit a Context to a Group or Groups of Users
+To invoke a workflow that uses a secure context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the job will fail as `Unauthorized`.
+
+**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be secured, only GitHub hosted projects or projects that use GitHub Enterprise with CircleCI include the ability to limit contexts with security groups.
+
+### Limit a Context to a Security Group or Groups
 
 You must be an Org Admin to complete the following task.
 
-1. Navigate to Organization Settings > Context in the CircleCI app.
-2. Click Add a new context if one does not exist.
-3. Click the context name link.
-4. Click `Add group` to add GitHub teams or LDAP groups to the context. The default group is `organization` and allows all users in the org to invoke jobs with that context.
-5. Select the groups to which you want to limit access for this context.
-6. Click `Add environment variable` to add environment variables to the context if none exist. 
+1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `organization` and allows all users in the org to invoke jobs with that context.
+2. Click the Create Context button if you will use a new context or click the name of an existing context.
+3. Click the Add Group link. The Add Groups dialog box appears.
+4. Select GitHub teams or LDAP groups to add to the context and click the Add button. Use of the context is now limited to the selected groups.
+5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is limited to members of the security groups.
+6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
 
-Only members of the selected groups may now use the context in their jobs or add or remove environment variables for the context.
+Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
 
 ## Removing Groups from Contexts
 
