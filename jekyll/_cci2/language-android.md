@@ -149,10 +149,87 @@ on GitHub for a full example of a React Native project.
 
 ## Testing With Firebase Test Lab
 
-To test your Android application with Firebase Test Lab,
-use the [gcloud command line](https://firebase.google.com/docs/test-lab/command-line).
-Google Cloud tools are preinstalled in our Android Docker images,
-which you can find on [GitHub](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) or [Docker Hub](https://hub.docker.com/r/circleci/android/tags).
+To use Firebase Test Lab with CircleCI,
+first complete the following steps.
+
+1. **Create a Firebase project.**
+Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
+
+2. **Install and authorize the Google Cloud SDK.**
+Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document.
+
+    **Note:**
+    Instead of `google/cloud-sdk`,
+    consider using an [Android convenience image]({{ site.baseurl }}/2.0/circleci-images/#android),
+    which includes `gcloud` and Android-specific tools.
+
+3. **Enable required APIs.**
+Using the service account you created,
+log into Google
+and go to the [Google Developers Console API Library page](https://console.developers.google.com/apis/library).
+Enable the **Google Cloud Testing API** and the **Cloud Tool Results API**
+by typing their names into the search box at the top of the console
+and clicking **Enable API**.
+
+In your `.circleci/config.yml` file,
+add the following `run` steps.
+
+1. **Build the debug APK and test APK.**
+Use Gradle to build two APKs.
+To improve build performance,
+consider [disabling pre-dexing](#disabling-pre-dexing-to-improve-build-performance).
+
+2. **Store the service account.**
+Store the service account you created in a local JSON file.
+
+3. **Authorize `gcloud`**.
+Authorize the `gcloud` tool
+and set the default project.
+
+4. **Use `gcloud` to test with Firebase Test Lab.**
+Adjust the paths to the APK files
+to correspond to your project.
+
+5. **Install `crcmod` and use `gsutil` to copy test results data.**
+`crcmod` is required
+to use `gsutil`.
+Use `gsutil`
+to download the newest files in the bucket to the CircleCI artifacts folder.
+Be sure to replace `BUCKET_NAME` and `OBJECT_NAME` with project-specific names.
+
+```yaml
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    steps:
+      - run:
+          name: Build debug APK and release APK
+          command: |
+            ./gradlew :app:assembleDebug
+            ./gradlew :app:assembleDebugAndroidTest
+      - run:
+          name: Store Google Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Authorize gcloud and set config defaults
+          command: |
+            sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - run:
+          name: Test with Firebase Test Lab
+          command: >
+            sudo gcloud firebase test android run
+              --app <local_server_path>/<app_apk>.apk
+              --test <local_server_path>/<app_test_apk>.apk
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+      - run:
+          name: Install gsutil dependency and copy test results data
+          command: |
+            sudo pip install -U crcmod
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+```
 
 ## Disabling Pre-Dexing to Improve Build Performance
 
