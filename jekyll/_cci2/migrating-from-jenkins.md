@@ -7,7 +7,7 @@ description: Migrating from Jenkins to CircleCI 2.0
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI 2.0 in the following sections:
 
-*TOC
+* TOC
 {:toc}
 
 ## Quick Start
