@@ -71,7 +71,7 @@ Enter your DataDog API Key.
 
 ![DataDog](  {{ site.baseurl }}/assets/img/docs/metrics_datadog2.png)
 
-After saving you can *verify* that metrics are forwarding by going to the DataDog **where**.
+After saving you can *verify* that metrics are forwarding by going to the DataDog metrics summary.
 
 #### Custom Metrics *(beta)*
 
