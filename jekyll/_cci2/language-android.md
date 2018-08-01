@@ -231,21 +231,23 @@ jobs:
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
 ```
 
-## Disabling Pre-Dexing to Improve Build Performance
+## Disabling Pre-Dexing
 
-Disabling pre-dexing for Android builds on CircleCI can speed up your builds.
-Refer to the [Disable Android pre dexing on CI builds](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/) blog post for details.
-
-CircleCI always runs clean builds,
-so pre-dexing has no benefit.
 By default,
 the Gradle Android plugin pre-dexes dependencies.
-Pre-dexing converts Java bytecode into Android bytecode
-to speed up development
-by doing only incremental dexing
+Pre-dexing speeds up development
+by converting Java bytecode into Android bytecode,
+allowing incremental dexing
 as you change code.
-Pre-dexing can make compilation slower
-and may also use large quantities of memory.
+
+Since CircleCI runs clean builds,
+pre-dexing actually **increases** compilation time
+and may also increase memory usage.
+To improve build performance on CircleCI,
+disabling pre-dexing is highly recommended.
+
+For more details,
+refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
 
 ## Deploy
 
