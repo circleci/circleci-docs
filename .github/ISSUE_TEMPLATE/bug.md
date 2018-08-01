@@ -1,15 +1,15 @@
 ---
-name: Bug Report
-about: Report a technical problem with the site
+name: Bug
+about: A technical problem
 ---
-
-# Location
-Add a link to the document where you caught the bug.
-If the bug does not occur in a specific document,
-add a brief description of the bug's location.
 
 # Description
 Describe the bug you found.
+
+# Location
+Describe where you caught the bug.
+If the bug occurs in a specific document,
+add the link here.
 
 # Steps to Reproduce
 Describe the steps you took to produce the bug.
