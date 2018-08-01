@@ -74,11 +74,11 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Define `$RAILS_ENV` and `$RACK_ENV` as `test` (this was automatic in 1.0)
 
 
-## Java(-based)
+## Java
 - Java (apps, tools, and services) will OOM (run out of memory) because it doesn't recognize how much RAM is available. An environment variable should be defined. If it's still running out of memory, a bigger container is necessary.
-	- https://circleci.com/blog/how-to-handle-java-oom-errors/
+	- [CircleCI How to Handle OOM Errors blog](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala projects can have filenames that are too long, include the `-Xmax-classfile-name` flag.
-	- https://discuss.circleci.com/t/scala-sbt-assembly-does-not-work/10499/10
+
 	```
 			    scalacOptions ++= Seq(
 			      `-encoding`, `utf-8`,
