@@ -18,7 +18,22 @@ Security is our top priority at CircleCI, we are proactive and we act on securit
 ## Encryption
 CircleCI uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
 
-The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or on-demand VM container) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build container pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete the container that ran the job is destroyed and rebuilt. All environment variables you store inside CircleCI are encrypted at rest and sent to your job's containers using SSH.
+The nature of CircleCI is
+that our software has access to your code
+and whatever data that code interacts with.
+All jobs on CircleCI run in a sandbox
+(specifically, a Docker container or an ephemeral VM)
+that stands alone from all other builds
+and is not accessible from the Internet or from your own network.
+The build agent pulls code via git over SSH.
+Your particular test suite or job configurations may call out to external services or integration points within your network,
+and the response from such calls will be pulled into your jobs
+and used by your code at your discretion.
+After a job is complete,
+the container that ran the job is destroyed and rebuilt.
+All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/).
+Environment variables are encrypted using AES256-GCM96
+and are unavailable to CircleCI employees.
 
 ## Sandboxing
 With CircleCI you control the resources allocated to run the builds of your code. This will be done through instances of our builder boxes that set up the containers in which your builds will run. By their nature, build containers will pull down source code and run whatever test and deployment scripts are part of the code base or your configuration. The containers are sandboxed, each created and destroyed for one build only (or one slice of a parallel build), and they are not available from outside themselves. The CircleCI service provides the ability to SSH directly to a particular build container. When doing this a user will have complete access to any files or processes being run inside that build container, so provide access to CircleCI only to those also trusted with your source code.
