@@ -58,17 +58,28 @@ As an alternative to configuring your environment for Selenium, Sauce Labs provi
 
 ## Sauce Labs
 
-Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To enable the browsers with a way to access the web application you want to test, you can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel, [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
+Sauce Labs operates browsers on a network
+that is separate from CircleCI build containers.
+To enable the browsers
+with a way to access
+the web application you want to test,
+you can run Selenium WebDriver tests with Sauce Labs on CircleCI
+using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
 
-Sauce Connect allows you to run a test server within the CircleCI build container
-and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you
-run your browser tests after deploying to a publicly accessible staging environment,
-then you can use Sauce Labs in the usual way without worrying about Sauce Connect.
+Sauce Connect allows you
+to run a test server within the CircleCI build container
+and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers.
+If you run your browser tests
+after deploying to a publicly accessible staging environment,
+you can use Sauce Labs in the usual way
+without worrying about Sauce Connect.
 
-This example `config.yml` file demonstrates how to run browser tests through Sauce Labs
-against a test server running within a CircleCI build container.
+This example `config.yml` file demonstrates
+how to run browser tests
+through Sauce Labs against a test server
+running within a CircleCI build container.
 
-```yml
+```yaml
 version: 2
 jobs:
   build:
