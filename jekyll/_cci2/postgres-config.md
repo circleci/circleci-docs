@@ -61,7 +61,7 @@ jobs:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
-      - run: sudo apt install postgresql-client
+      - run: sudo apt install -y postgresql-client || true
 
       # Store bundle cache
       - save_cache:
