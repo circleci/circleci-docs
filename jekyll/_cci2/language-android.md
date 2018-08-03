@@ -244,7 +244,7 @@ allowing incremental dexing
 as you change code.
 
 Since CircleCI runs clean builds,
-pre-dexing actually **increases** compilation time
+pre-dexing actually increases compilation time
 and may also increase memory usage.
 To improve build performance on CircleCI,
 disabling pre-dexing is highly recommended.
