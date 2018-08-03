@@ -39,8 +39,6 @@ jobs:
     docker:
       - image: circleci/<language>:<version TAG>
     parallelism: 4
-    steps:
-      - run: echo ""
 ```
 
 For more information,
