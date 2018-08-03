@@ -318,14 +318,14 @@ A working `.circleci/config.yml` section might look like this:
 // karma.conf.js
 
 // additional config...
-
-reporters: ['junit'],
-
-junitReporter: {
-  outputDir: process.env.JUNIT_REPORT_PATH,
-  outputFile: process.env.JUNIT_REPORT_NAME,
-  useBrowserName: false
-},
+{
+  reporters: ['junit'],
+  junitReporter: {
+    outputDir: process.env.JUNIT_REPORT_PATH,
+    outputFile: process.env.JUNIT_REPORT_NAME,
+    useBrowserName: false
+  },
+}
 // additional config...
 ```
 
