@@ -234,7 +234,11 @@ jobs:
 For more details on using `gcloud` to run Firebase,
 see the [official documentation](https://firebase.google.com/docs/test-lab/android/command-line).
 
-## Disabling Pre-Dexing
+## Disabling Pre-Dexing to Improve Build Performance
+
+Pre-dexing dependencies has no benefit on CircleCI.
+To disable pre-dexing,
+refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
 
 By default,
 the Gradle Android plugin pre-dexes dependencies.
@@ -242,12 +246,6 @@ Pre-dexing speeds up development
 by converting Java bytecode into Android bytecode,
 allowing incremental dexing
 as you change code.
-
-Since CircleCI runs clean builds,
-pre-dexing actually increases compilation time
+CircleCI runs clean builds,
+so pre-dexing actually increases compilation time
 and may also increase memory usage.
-To improve build performance on CircleCI,
-disabling pre-dexing is highly recommended.
-
-For more details,
-refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
