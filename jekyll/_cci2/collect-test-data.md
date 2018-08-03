@@ -356,12 +356,6 @@ steps:
         JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 ```
 
-To collect Jest data, add a JUnit coverage reporter by running:
-
-    yarn add --dev jest-junit
-
-In your configuration, form a command to output using the reporter:
-
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
 **Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
