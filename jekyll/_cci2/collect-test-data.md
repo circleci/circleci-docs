@@ -353,7 +353,7 @@ steps:
       name: Run tests with JUnit as reporter
       command: jest --ci --reporters=default --reporters=jest-junit
       environment:
-        JEST_JUNIT_OUTPUT: "reporters/junit/js-test-results.xml"
+        JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 ```
 
 To collect Jest data, add a JUnit coverage reporter by running:
