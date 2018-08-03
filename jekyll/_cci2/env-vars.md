@@ -228,6 +228,7 @@ click on **Environment Variables**.
 by clicking the **Import Variable(s)** button.
 Add new variables
 by clicking the **Add Variable** button.
+(**Note:** The **Import Variables(s)** button is not currently available on CircleCI installed in your private cloud or datacenter.)
 
 4. Use your new environment variables in your `.circleci/config.yml` file.
 For an example,
