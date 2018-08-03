@@ -85,18 +85,16 @@ jobs:
       - image: circleci/python:jessie-node-browsers
     steps:
       - checkout
-      - run: 
-          name: Install Sauce
-          command: npm install saucelabs
-      - run: 
-          name: sauce testing
-          command: npm run-script sauce
-          environment:
-            SAUCE_USERNAME: # Refer to circleci.com/docs/2.0/env-vars documentation for info
-            SAUCE_ACCESS_KEY: # about setting up environment variables for auth secrets
-      - run: # Wait for app to be ready
-          command: wget --retry-connrefused --no-check-certificate -T 30 http://localhost:5000
-      - run: # Run selenium tests
+      - run:
+          name: Install Sauce Labs and Set Up Tunnel
+          background: true
+          command: |
+            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+            tar -xzf saucelabs.tar.gz
+            cd sc-*
+            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
+            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
+      - run: # run tests here; command is language-specific
           command: nosetests
       - run: # wait for Sauce Connect to close the tunnel
           command: killall --wait sc  
