@@ -306,7 +306,7 @@ CircleCI does not run jobs for tags
 unless you explicitly specify tag filters.
 Additionally,
 if a job requires any other jobs (directly or indirectly),
-those jobs must also have tag filters.
+you must specify tag filters for those jobs.
 
 In the example below,
 two workflows are defined:
