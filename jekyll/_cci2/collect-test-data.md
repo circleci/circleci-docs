@@ -331,19 +331,36 @@ junitReporter: {
 
 #### Jest
 
+To collect Jest data,
+first create a Jest config file called `jest.config.js` with the following:
+
+```javascript
+// jest.config.js
+{
+  reporters: ["default", "jest-junit"],
+}
+```
+
+In your `.circleci/config.yml`,
+add the following `run` steps:
+
+```yaml
+steps:
+  - run:
+      name: Install JUnit coverage reporter
+      run: yarn add --dev jest-junit
+  - run:
+      name: Run tests with JUnit as reporter
+      command: jest --ci --reporters=default --reporters=jest-junit
+      environment:
+        JEST_JUNIT_OUTPUT: "reporters/junit/js-test-results.xml"
+```
+
 To collect Jest data, add a JUnit coverage reporter by running:
 
     yarn add --dev jest-junit
 
 In your configuration, form a command to output using the reporter:
-
-```yaml
- - run:
-      name: Jest Suite
-      command: yarn jest tests --ci --testResultsProcessor="jest-junit"
-      environment:
-        JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
-```
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
 
