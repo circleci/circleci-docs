@@ -35,10 +35,12 @@ set the `parallelism` key to a value greater than 1.
 # ~/.circleci/config.yml
 version: 2
 jobs:
-  docker:
-    - image: circleci/<language>:<version TAG>
   test:
+    docker:
+      - image: circleci/<language>:<version TAG>
     parallelism: 4
+    steps:
+      - run: echo ""
 ```
 
 For more information,
@@ -79,6 +81,7 @@ jobs:
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+    parallelism: 4
     steps:
       - run:
           command: |
