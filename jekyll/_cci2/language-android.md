@@ -177,7 +177,7 @@ add the following `run` steps.
 1. **Build the debug APK and test APK.**
 Use Gradle to build two APKs.
 To improve build performance,
-consider [disabling pre-dexing](#disabling-pre-dexing).
+consider [disabling pre-dexing](#disabling-pre-dexing-to-improve-build-performance).
 
 2. **Store the service account.**
 Store the service account you created in a local JSON file.
