@@ -94,7 +94,7 @@ jobs:
             cd sc-*
             bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
             wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
-      - run: # run tests here; command is language-specific
+      - run: # base image is python, so we run `nosetests`, an extension of `unittest`
           command: nosetests
       - run: # wait for Sauce Connect to close the tunnel
           command: killall --wait sc  
