@@ -372,7 +372,7 @@ workflows:
       - test:
           requires:
             - build
-          filters:  # required since `deply` has tag filters AND requires `test`
+          filters:  # required since `deploy` has tag filters AND requires `test`
             tags:
               only: /^config-test.*/
       - deploy:
