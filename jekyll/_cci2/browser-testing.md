@@ -58,17 +58,26 @@ As an alternative to configuring your environment for Selenium, Sauce Labs provi
 
 ## Sauce Labs
 
-Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To enable the browsers with a way to access the web application you want to test, you can run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel, [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
+Sauce Labs operates browsers on a network
+that is separate from CircleCI build containers.
+To allow the browsers access
+the web application you want to test,
+run Selenium WebDriver tests with Sauce Labs on CircleCI
+using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
 
-Sauce Connect allows you to run a test server within the CircleCI build container
-and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you
-run your browser tests after deploying to a publicly accessible staging environment,
-then you can use Sauce Labs in the usual way without worrying about Sauce Connect.
+Sauce Connect allows you
+to run a test server within the CircleCI build container
+and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers.
+If you run your browser tests
+after deploying to a publicly accessible staging environment,
+you can use Sauce Labs in the usual way
+without worrying about Sauce Connect.
 
-This example `config.yml` file demonstrates how to run browser tests through Sauce Labs
-against a test server running within a CircleCI build container.
+This example `config.yml` file shows
+how to run browser tests through Sauce Labs against a test server
+running within a CircleCI build container.
 
-```yml
+```yaml
 version: 2
 jobs:
   build:
@@ -76,18 +85,16 @@ jobs:
       - image: circleci/python:jessie-node-browsers
     steps:
       - checkout
-      - run: 
-          name: Install Sauce
-          command: npm install saucelabs
-      - run: 
-          name: sauce testing
-          command: npm run-script sauce
-          environment:
-            SAUCE_USERNAME: # Refer to circleci.com/docs/2.0/env-vars documentation for info
-            SAUCE_ACCESS_KEY: # about setting up environment variables for auth secrets
-      - run: # Wait for app to be ready
-          command: wget --retry-connrefused --no-check-certificate -T 30 http://localhost:5000
-      - run: # Run selenium tests
+      - run:
+          name: Install Sauce Labs and Set Up Tunnel
+          background: true
+          command: |
+            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+            tar -xzf saucelabs.tar.gz
+            cd sc-*
+            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
+            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
+      - run: # base image is python, so we run `nosetests`, an extension of `unittest`
           command: nosetests
       - run: # wait for Sauce Connect to close the tunnel
           command: killall --wait sc  
