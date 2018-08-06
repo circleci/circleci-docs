@@ -26,7 +26,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - Commands listed in the `steps` may only be run in the first container listed in the `docker` section.
 - Run builds frequently to test the config so if something breaks, you will know what changed since the last build.
-- Don't add Workflows initially; wait until you have a functional build.
+- Don't add Workflows initially; wait until you have a functional build. If you do add Workflows, be sure to check the Workflows tab of the CircleCI app if your jobs aren't running. Incorrect Workflows config will prevent jobs from running and the errors with details about the problem appear on the Workflows page of the app.
 - Build a config manually from scratch, but use the [`config-translation` endpoint]({{ site.baseurl }}/2.0/config-translation/) as a reference.
 - You can't define environment variables in the `environment` section of the config.
 	- The workaround is to echo the variables into `$BASH_ENV`.
