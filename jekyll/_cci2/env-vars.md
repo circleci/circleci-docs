@@ -42,6 +42,8 @@ Do not add secrets or keys inside the `.circleci/config.yml` file.
 The full text of `config.yml` is visible
 to developers with access to your project on CircleCI.
 Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
+For more information,
+see the [Encryption section]({{ site.baseurl }}/2.0/security/#encryption) of the "Security" document.
 
 Running scripts within configuration
 may expose secret environment variables.
@@ -226,6 +228,7 @@ click on **Environment Variables**.
 by clicking the **Import Variable(s)** button.
 Add new variables
 by clicking the **Add Variable** button.
+(**Note:** The **Import Variables(s)** button is not currently available on CircleCI installed in your private cloud or datacenter.)
 
 4. Use your new environment variables in your `.circleci/config.yml` file.
 For an example,
