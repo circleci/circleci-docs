@@ -29,7 +29,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-*Note: `setup_remote_docker` is not curently compatible with the `machine` executor.*
+*Note: `setup_remote_docker` is not currently compatible with the `machine` executor.*
 
 ### Specifications
 
