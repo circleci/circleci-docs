@@ -268,7 +268,7 @@ workflows:
             - test2
 ```
 
-The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization. 
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization.
 
 ### Branch-Level Job Execution
 The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
@@ -393,7 +393,20 @@ CircleCI may not receive all of them.
 
 ### Regular Expression Support
 
-CircleCI branch and tag filters support the Java variant of regex pattern matching, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) for details. 
+CircleCI branch and tag filters support the Java variant of regex pattern matching.
+When writing filters,
+CircleCI matches exact regular expressions.
+
+For example,
+`only: /^config-test/` only matches the `config-test` tag.
+To match all tags starting with `config-test`,
+use `only: /^config-test.*/` instead.
+Using tags for semantic versioning is a common use case.
+To match patch versions 3-7 of a 2.1 release,
+you could write `/^version-2\.1\.[3-7]/`.
+
+For full details on pattern-matching rules,
+see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
 ## Using Workspaces to Share Data Among Jobs
 
