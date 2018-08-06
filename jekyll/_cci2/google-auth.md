@@ -9,7 +9,7 @@ order: 100
 *[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authorizing the Google Cloud SDK*
 
 This document explains
-how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
+how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
@@ -29,7 +29,7 @@ to deploy your application to GCP products.
 
 ## Steps
 
-### Choosing a Base Image for the Deploy Job
+### Installing the Google Cloud SDK
 
 If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
@@ -62,7 +62,7 @@ but it will be used throughout the examples in this document.
 
 ### Authenticating to Google Container Registry
 
-Depending on the [base Docker image you chose](#choosing-a-base-image-for-the-deploy-job),
+Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk),
 you may have to authenticate to the Google Container Registry.
 
 If you are using Google's public image (`google/cloud-sdk`),
