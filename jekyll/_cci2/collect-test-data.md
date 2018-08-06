@@ -318,29 +318,40 @@ A working `.circleci/config.yml` section might look like this:
 // karma.conf.js
 
 // additional config...
-
-reporters: ['junit'],
-
-junitReporter: {
-  outputDir: process.env.JUNIT_REPORT_PATH,
-  outputFile: process.env.JUNIT_REPORT_NAME,
-  useBrowserName: false
-},
+{
+  reporters: ['junit'],
+  junitReporter: {
+    outputDir: process.env.JUNIT_REPORT_PATH,
+    outputFile: process.env.JUNIT_REPORT_NAME,
+    useBrowserName: false
+  },
+}
 // additional config...
 ```
 
 #### Jest
 
-To collect Jest data, add a JUnit coverage reporter by running:
+To collect Jest data,
+first create a Jest config file called `jest.config.js` with the following:
 
-    yarn add --dev jest-junit
+```javascript
+// jest.config.js
+{
+  reporters: ["default", "jest-junit"],
+}
+```
 
-In your configuration, form a command to output using the reporter:
+In your `.circleci/config.yml`,
+add the following `run` steps:
 
 ```yaml
- - run:
-      name: Jest Suite
-      command: yarn jest tests --ci --testResultsProcessor="jest-junit"
+steps:
+  - run:
+      name: Install JUnit coverage reporter
+      run: yarn add --dev jest-junit
+  - run:
+      name: Run tests with JUnit as reporter
+      command: jest --ci --reporters=default --reporters=jest-junit
       environment:
         JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
 ```
