@@ -1,0 +1,85 @@
+- name: Welcome
+  link: /2.0/about-circleci/
+  icon: docs/welcome.svg
+- name: Welcome
+  link: /2.0/about-circleci/
+  icon: docs/welcome.svg
+- name: Getting Started
+  link: 
+  icon: docs/start.svg
+  children: 
+    - name: CI/CD Overview
+      link: /2.0/about-circleci/
+      children: 
+        - name: This is a test
+          link: /2.0/about-circleci/
+        - name: Another test
+          link: /2.0/project-build/
+        - name: To be ignored
+          link: /2.0/
+    - name: Supported Languages
+      link: /2.0/demo-apps/
+
+- name: Getting Started
+  link: 
+  icon: docs/start.svg
+  children: 
+    - name: CI/CD Overview
+      link: /2.0/about-circleci/
+      children: 
+        - name: This is a test
+          link: /2.0/about-circleci/
+        - name: Another test
+          link: /2.0/project-build/
+        - name: To be ignored
+          link: /2.0/
+    - name: Supported Languages
+      link: /2.0/demo-apps/
+
+- name: Getting Started
+  link: 
+  icon: docs/start.svg
+  children: 
+    - name: CI/CD Overview
+      link: /2.0/about-circleci/
+      children: 
+        - name: This is a test
+          link: /2.0/about-circleci/
+        - name: Another test
+          link: /2.0/project-build/
+        - name: To be ignored
+          link: /2.0/
+    - name: Supported Languages
+      link: /2.0/demo-apps/
+
+- name: Getting Started
+  link: 
+  icon: docs/start.svg
+  children: 
+    - name: CI/CD Overview
+      link: /2.0/about-circleci/
+      children: 
+        - name: This is a test
+          link: /2.0/about-circleci/
+        - name: Another test
+          link: /2.0/project-build/
+        - name: To be ignored
+          link: /2.0/
+    - name: Supported Languages
+      link: /2.0/demo-apps/
+
+- name: Getting Started
+  link: 
+  icon: docs/start.svg
+  children: 
+    - name: CI/CD Overview
+      link: /2.0/about-circleci/
+      children: 
+        - name: This is a test
+          link: /2.0/about-circleci/
+        - name: Another test
+          link: /2.0/project-build/
+        - name: To be ignored
+          link: /2.0/
+    - name: Supported Languages
+      link: /2.0/demo-apps/

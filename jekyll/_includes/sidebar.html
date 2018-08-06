@@ -1,20 +1,47 @@
 
-<nav class="sidebar">
+<div class="sidebar-wrapper">
+	<nav class="sidebar fixed">
+		{% assign sidenav = site.data.sidenav %}
 
-		<ul id="mysidebar" class="nav">
-		{% capture sidebar %}
-			<ul class="left-links main-nav">
-<!--
-<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
-				<li class="nav-item"><a href="{{ site.baseurl }}/2.0/migration/"><b><h2>Migration</h2></b></a>
-						<ul class="subnav" margin="40px">
-								<li class="subnav-item"><a href="https://circleci.com/product/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Migrating a Linux Project</a></li>
-				        <li class="subnav-item"><a href="https://circleci.com/product/#how-it-works">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Migrating an iOS Project</a></li>
-				        <li class="subnav-item"><a href="https://circleci.com/product/#features">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the 1.0 to 2.0 config-translation Endpoint</a></li>
-						</ul>
+		{% for main-item in sidenav %}
+			<ul>
+				<li class="main-nav-item {% if page.url == main-item.link %} active {% endif %}">
+					<div class="list-wrap">
+						{% if main-item.icon %} 
+							{% asset '{{ main-item.icon }}' class=icon %} 
+						{% endif %}
+						
+						<a href="{{ site.baseurl }}/{{ main-item.link }}">{{ main-item.name}}</a>
+
+						{% if main-item.children %}
+							{% asset docs/arrow-right.svg class=arrow %}
+						{% endif %}
 					</div>
+					
+					{% if main-item.children %}
+					<ul class="subnav">
+						{% for item in main-item.children %}
+							<li class="nav-item {% if page.url == item.link %} active {% endif %}"><a href="{{ site.baseurl }}/{{ item.link }}">{{ item.name }}</a></li>
+							{% if item.children %}
+								<ul>
+									{% for sub-item in item.children %}
+										<li class="subnav-item {% if page.url == sub-item.link %} active {% endif %}"><a href="{{ site.baseurl }}/{{ sub-item.link }}">{{ sub-item.name }}</a></li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						{% endfor %}
+					</ul>
+					{% endif %}
 				</li>
--->
+			</ul>
+		{% endfor %}
+	</nav>
+</div>
+
+		<!--
+		<ul id="mysidebar" class="nav">
+			{% capture sidebar %}
+			<ul class="left-links main-nav">
 				<ul class="left-links main-nav">
 					<li class="nav-item"><a href="{{ site.baseurl }}/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/welcome.svg">&nbsp;&nbsp;Welcome</h3></b></a>
 						<div class="submenu">
@@ -38,7 +65,7 @@
 					        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/migrating-from-jenkins/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences from Jenkins</a></li>
 									<li class="subnav-item"><a href="{{ site.baseurl }}/2.0/security/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Security</a></li>
 									</ul>
-								<li class="nav-item"><a href="{{ site.baseurl }}/2.0/migration-intro/"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MIGRATION</h5></a>
+									<li class="nav-item"><a href="{{ site.baseurl }}/2.0/migration-intro/"><h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MIGRATION</h5></a>
 											<ul class="subnav" >
 												  <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/migration/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tips for Migrating to 2.0</a></li>
 													<li class="subnav-item"><a href="{{ site.baseurl }}/2.0/migrating-from-1-2/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Migrating a Linux Project</a></li>
@@ -254,3 +281,4 @@
 		</ul>
 
 </nav>
+/-->
