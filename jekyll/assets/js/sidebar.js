@@ -16,4 +16,17 @@
       }
     }
   });
+
+  // allowing opening/closing of subnav elements
+  var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));
+
+  mainNavItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      if (item.classList.contains('closed')) {
+        item.classList.remove('closed');
+      } else {
+        item.classList.add('closed');
+      }
+    });
+  });
 }());

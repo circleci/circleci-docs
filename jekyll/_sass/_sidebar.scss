@@ -7,9 +7,10 @@
   background: #F7F7F7;
   font-family: "roboto";
   height: 92vh;
-  padding: 10px 30px;
+  padding: 30px;
   overflow-y: scroll;
   position: absolute;
+  top: 70px;
   bottom: 0;
 
   .active {
@@ -28,8 +29,9 @@
     font-size: $font-size-small;
 
     .list-wrap {
-      margin: 20px 0;
+      margin: 0 0 20px 0;
       position: relative;
+      cursor: pointer;
     }
 
     .icon {
@@ -41,6 +43,21 @@
       right: 0;
       top: 4px;
       transform: rotate(90deg);
+      transition: transform 400ms;
+    }
+    .subnav {
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    &.closed {
+      .arrow {
+        transform: rotate(0deg);
+      }
+      .subnav {
+        height: 0;
+        margin: 0;
+      }
     }
   }
   .nav-item {
