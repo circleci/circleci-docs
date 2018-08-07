@@ -1,42 +1,42 @@
 ---
-layout: crwdns20253:0crwdne20253:0
-title: "crwdns20254:0crwdne20254:0"
-description: "crwdns20255:0crwdne20255:0"
+layout: crwdns28072:0crwdne28072:0
+title: "crwdns28073:0crwdne28073:0"
+description: "crwdns28074:0crwdne28074:0"
 ---
-crwdns20256:0crwdne20256:0
+crwdns28075:0crwdne28075:0
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="crwdns20257:0crwdne20257:0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="crwdns28076:0crwdne28076:0" frameborder="0" allowfullscreen></iframe>
 </div>
 
-## crwdns20258:0crwdne20258:0
+## crwdns28077:0crwdne28077:0
 
-crwdns20259:0crwdne20259:0
+crwdns28078:0crwdne28078:0
 
-crwdns20260:0{{ site.baseurl }}crwdne20260:0 crwdns20261:0{{ site.baseurl }}crwdne20261:0 crwdns20262:0crwdne20262:0
+crwdns28079:0{{ site.baseurl }}crwdne28079:0 crwdns28080:0{{ site.baseurl }}crwdne28080:0 crwdns28081:0crwdne28081:0
 
-## crwdns20263:0crwdne20263:0
+## crwdns28082:0crwdne28082:0
 
-crwdns20264:0crwdne20264:0
+crwdns28083:0crwdne28083:0
 
-crwdns20265:0{{ site.baseurl }}crwdnd20265:0{{ site.baseurl }}crwdnd20265:0{{ site.baseurl }}crwdne20265:0
+crwdns28084:0{{ site.baseurl }}crwdnd28084:0{{ site.baseurl }}crwdnd28084:0{{ site.baseurl }}crwdne28084:0
 
-## crwdns20266:0crwdne20266:0
+## crwdns28085:0crwdne28085:0
 
-crwdns20267:0crwdne20267:0
+crwdns28086:0crwdne28086:0
 
-crwdns20268:0[Android]crwdnd20268:0[Clojure]crwdnd20268:0[Elixir]crwdnd20268:0[Go]crwdnd20268:0[iOS]crwdnd20268:0[Java]crwdnd20268:0[JavaScript]crwdnd20268:0[PHP]crwdnd20268:0[Python]crwdnd20268:0{{ site.baseurl }}crwdnd20268:0[Scala]crwdne20268:0
+crwdns28087:0[Android]crwdnd28087:0[Clojure]crwdnd28087:0[Elixir]crwdnd28087:0[Go]crwdnd28087:0[iOS]crwdnd28087:0[Java]crwdnd28087:0[JavaScript]crwdnd28087:0[PHP]crwdnd28087:0[Python]crwdnd28087:0{{ site.baseurl }}crwdnd28087:0[Scala]crwdne28087:0
 
-## crwdns20269:0crwdne20269:0
+## crwdns28088:0crwdne28088:0
 
-crwdns20270:0crwdne20270:0
+crwdns28089:0crwdne28089:0
 
-## crwdns20271:0crwdne20271:0
+## crwdns28090:0crwdne28090:0
 
-crwdns20272:0crwdne20272:0 crwdns20273:0crwdne20273:0 crwdns20274:0crwdne20274:0 crwdns20275:0crwdne20275:0 crwdns20276:0crwdne20276:0
+crwdns28091:0crwdne28091:0 crwdns28092:0crwdne28092:0 crwdns28093:0crwdne28093:0 crwdns28094:0crwdne28094:0 crwdns28095:0crwdne28095:0
 
-crwdns20277:0[Android]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Clojure]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Elixir]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Go]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[iOS]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Java]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[JavaScript]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[PHP]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Python]crwdnd20277:0{{ site.baseurl }}crwdnd20277:0{{ site.baseurl }}crwdnd20277:0[Scala]crwdnd20277:0{{ site.baseurl }}crwdne20277:0
+crwdns28096:0[Android]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Clojure]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Elixir]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Go]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[iOS]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Java]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[JavaScript]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[PHP]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Python]crwdnd28096:0{{ site.baseurl }}crwdnd28096:0{{ site.baseurl }}crwdnd28096:0[Scala]crwdnd28096:0{{ site.baseurl }}crwdne28096:0
 
-crwdns20278:0crwdne20278:0
+crwdns28097:0crwdne28097:0
 
-*crwdns20279:0crwdne20279:0*
+*crwdns28098:0crwdne28098:0*
