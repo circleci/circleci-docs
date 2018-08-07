@@ -163,7 +163,7 @@ Directly beneath `working_directory`, you can specify container images under a `
 
 ```yaml
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4.2-jessie-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
