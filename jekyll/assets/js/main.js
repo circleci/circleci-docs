@@ -69,6 +69,17 @@ window.addEventListener('load', function () {
   });
 });
 
+function getUrlVars(url) {
+  var myJson = {};
+  var decodedParams = decodeURIComponent(url);
+  var hashes = decodedParams.substr(1).split('&');
+  hashes.forEach(function (items) {
+    var hash = items.split('=');
+    myJson[hash[0]] = hash[1];
+  });
+
+  return myJson;
+};
 
 $( document ).ready(function() {
 

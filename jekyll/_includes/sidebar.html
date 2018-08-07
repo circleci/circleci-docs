@@ -5,7 +5,7 @@
 
 		{% for main-item in sidenav %}
 			<ul>
-				<li class="main-nav-item closed {% if page.url == main-item.link %} active {% endif %}">
+				<li class="main-nav-item closed {% if page.url == main-item.link %} active {% endif %}" data-section="{{ main-item.name | slugify }}">
 					<div class="list-wrap">
 						{% if main-item.icon %} 
 							{% asset '{{ main-item.icon }}' class=icon %} 

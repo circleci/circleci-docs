@@ -4,6 +4,18 @@
   var footer = document.querySelector('.footer');
   var sidebar = document.querySelector('.sidebar');
 
+  // get hash, if it exists
+  if (window.location.hash && window.location.hash.indexOf('section') > -1) {
+    var section = getUrlVars(window.location.hash);
+    localStorage.sidenavActive = section['section']
+  }
+  if (localStorage.sidenavActive) {
+    var element = sidebar.querySelector('[data-section=' + localStorage.sidenavActive + ']');
+    if (element.classList.contains('closed')) {
+      element.classList.remove('closed');
+    }
+  }
+
   window.addEventListener('scroll', function () {
     // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
     if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0) {
