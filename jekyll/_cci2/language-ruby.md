@@ -46,9 +46,8 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 3 # run three instances of this job in parallel
-    working_directory: ~/circleci-demo-ruby-rails # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.4.2-jessie-node # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
