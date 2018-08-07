@@ -309,7 +309,5 @@ This app illustrates the simplest possible setup for a Ruby on Rails web app. Re
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open source discussion platform.
 * [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
 
-
-
 [fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork
 [rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
