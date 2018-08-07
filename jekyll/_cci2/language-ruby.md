@@ -163,7 +163,7 @@ Directly beneath `working_directory`, you can specify container images under a `
 
 ```yaml
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: circleci/ruby:2.4.2-jessie-node  # language image
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -171,19 +171,23 @@ Directly beneath `working_directory`, you can specify container images under a `
           PGHOST: 127.0.0.1
           PGUSER: circleci-demo-ruby
           RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine
+      - image: circleci/postgres:9.5-alpine  # service image
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
           POSTGRES_PASSWORD: ""
 ```
 
-The [official Ruby images](https://hub.docker.com/_/ruby/) are tagged
-to use the latest patch-level version of `2.4`
-and with additional packages installed for NodeJS.
+In this example,
+two [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/#image-types) are used:
 
-The [official Postgres image](https://hub.docker.com/_/postgres/) is specified
-for use as the database container.
+- A language image
+that runs on Debian Jessie
+and installs both Ruby 2.4.2 and Node.js.
+
+- A service image
+that runs on Alpine Linux
+and installs PostgreSQL 9.5.
 
 Then, several environment variables are added to connect the application container with the database for testing purposes. The `BUNDLE_*` environment variables are there to ensure proper caching and improve performance and reliability for installing dependencies with Bundler.
 
