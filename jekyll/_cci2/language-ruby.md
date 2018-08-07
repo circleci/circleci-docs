@@ -179,9 +179,12 @@ Directly beneath `working_directory`, you can specify container images under a `
           POSTGRES_PASSWORD: ""
 ```
 
-The [official Ruby images](https://hub.docker.com/_/ruby/) are tagged to use the latest patch-level version of `2.4` and with additional packages installed for NodeJS.
+The [official Ruby images](https://hub.docker.com/_/ruby/) are tagged
+to use the latest patch-level version of `2.4`
+and with additional packages installed for NodeJS.
 
-The [official Postgres image](https://hub.docker.com/_/postgres/) is specified for use as the database container.
+The [official Postgres image](https://hub.docker.com/_/postgres/) is specified
+for use as the database container.
 
 Then, several environment variables are added to connect the application container with the database for testing purposes. The `BUNDLE_*` environment variables are there to ensure proper caching and improve performance and reliability for installing dependencies with Bundler.
 
