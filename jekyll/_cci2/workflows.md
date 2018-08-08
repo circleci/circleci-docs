@@ -277,15 +277,15 @@ The following example shows a workflow configured with jobs on three branches: D
 
 The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
-```
+```yaml
 workflows:
   version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
-          filters:
+          filters:  # using regex filters requires the entire branch to match
             branches:
-              only:
+              only:  # only branches matching the below regex filters will run
                 - dev
                 - /user-.*/
       - test_stage:
@@ -298,7 +298,10 @@ workflows:
               only: /pre-prod(?:-.+)?$/
 ```
 
-In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
+For more information on regular expressions,
+see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below.
+For a full example of workflows,
+see the [configuration file](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for the Sample Sequential Workflow With Branching project.
 
 ### Executing Workflows for a Git Tag
 
@@ -306,7 +309,8 @@ CircleCI does not run workflows for tags
 unless you explicitly specify tag filters.
 Additionally,
 if a job requires any other jobs (directly or indirectly),
-you must specify tag filters for those jobs.
+you must use [regular expressions](#regular-expression-support)
+to specify tag filters for those jobs.
 
 In the example below,
 two workflows are defined:
@@ -391,9 +395,10 @@ and [for some events](https://developer.github.com/v3/activity/events/types/#cre
 If you push several tags at once,
 CircleCI may not receive all of them.
 
-### Regular Expression Support
+### Using Regular Expressions to Filter Tags and Branches
 
-CircleCI branch and tag filters support the Java variant of regex pattern matching.
+CircleCI branch and tag filters support
+the Java variant of regex pattern matching.
 When writing filters,
 CircleCI matches exact regular expressions.
 
