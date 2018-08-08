@@ -96,3 +96,128 @@
           link: /2.0/building-docker-images/
         - name: Using Docker Compose
           link: /2.0/docker-compose/
+
+- name: Projects
+  link: /2.0/projects/
+  icon: docs/project.svg
+  children: 
+    - name: settings
+      link: /2.0/settings/
+      children: 
+        - name: GitHub and Bitbucket
+          link: /2.0/gh-bb-integration/
+        - name: Building Open Source Projects
+          link: /2.0/oss/
+        - name: Using Notifications
+          link: /2.0/notifications/
+        - name: Managing API tokens
+          link: /2.0/managing-api-tokens/
+        - name: Using Environment Variables
+          link: /2.0/env-vars/
+        - name: Using Contexts
+          link: /2.0/contexts/
+        - name: Setting Up iOS Code Signing
+          link: /2.0/ios-codesigning/
+    - name: Optimizations
+      link: /2.0/optimizations/
+      children: 
+        - name: Caching Dependencies
+          link: /2.0/caching/
+        - name: Running Tests in Parallel
+          link: /2.0/parallelism-faster-jobs/
+        - name: Using Docker Layer Caching
+          link: /2.0/docker-layer-caching/
+  
+- name: Jobs
+  link: /2.0/build/
+  icon: docs/builds.svg
+  children: 
+    - name: Status
+      link: /2.0/status/
+      children:
+        - name: Using Containers
+          link: /2.0/containers/
+        - name: Adding Status Badges
+          link: /2.0/status-badges/
+        - name: Storing Build Artifacts
+          link: /2.0/artifacts/
+        - name: Debugging with SSH
+          link: /2.0/ssh-access-jobs/
+        - name: Collecting Test Metadata
+          link: /2.0/collect-test-data/
+    - name: Triggers
+      link: /2.0/triggers/
+      children: 
+        - name: Skip and Cancel Builds
+          link: /2.0/skip-build
+        - name: Using the API to Trigger Jobs
+          link: /2.0/api-job-trigger
+        - name: Orchestrating Workflows
+          link: /2.0/workflows/  
+
+- name: Deployment
+  link: /2.0/deployment/
+  icon: docs/deploy.svg
+  children: 
+    - name: Configuring Deploys
+      link: /2.0/deployment-integrations
+      children: 
+        - name: Using Yarn on CircleCI
+          link: /2.0/yarn/
+        - name: Publishing Snap Packages
+          link: /2.0/build-publish-snap-packages/
+        - name: Using Artifactory
+          link: /2.0/artifactory/
+
+- name: Reference
+  link: /2.0/reference/
+  icon: docs/reference.svg
+  children: 
+    - children:
+        - name: Configuration Reference
+          link: /2.0/configuration-reference
+        - name: API Reference
+          link: /api/
+        - name: Prebuilt Images
+          link: /2.0/circleci-images/
+        - name: Glossary
+          link: /2.0/glossary/
+        - name: Help and Support
+          link: /2.0/help-and-support/
+
+- name: Administration
+  icon: docs/admin.svg
+  children: 
+    - name: Overview
+      link: /2.0/overview/
+      children: 
+        - name: Trial
+          link: /2.0/single-box/
+        - name: Faq
+          link: /2.0/admin-faq/
+        - name: Upgrade
+          link: /2.0/upgrading/
+        - name: Security
+          link: /2.0/security/
+        - name: Certificates
+          link: /2.0/certificates/
+        - name: Proxies
+          link: /2.0/proxy/
+        - name: Installation
+          link: /2.0/aws/
+        - name: Authentication
+          link: /2.0/authentication
+        - name: Monitoring
+          link: /2.0/monitoring
+        - name: Nomad
+          link: /2.0/nomad/
+        - name: Backup
+          link: /2.0/backup/
+        - name: Troubleshooting
+          link: /2.0/troubleshooting/
+        - name: GPU Builders
+          link: /2.0/gpu/
+        - name: Configuring VM Service
+          link: /2.0/vm-service
+        - name: Acknowledgments
+          link: /2.0/open-source/

@@ -21,7 +21,10 @@
 					{% if main-item.children %}
 					<ul class="subnav">
 						{% for item in main-item.children %}
-							<li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ item.name }}</a></li>
+						  {% if item.name %}
+								<li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ item.name }}</a></li>
+							{% endif %}
+
 							{% if item.children %}
 								<ul>
 									{% for sub-item in item.children %}
@@ -41,97 +44,23 @@
 		
 			
 <!-- 		
-										
-    <ul class="left-links main-nav">
-        <li class="nav-item"><a href="{{ site.baseurl }}/2.0/projects/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/project.svg">Projects</h3></b></a>
-            <div class="submenu">
-                <ul class="subnav" margin="40px">
-                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/settings/"><h5>SETTINGS</h5></a>
-                        <ul class="subnav">
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/gh-bb-integration/">GitHub and Bitbucket</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/oss/">Building Open Source Projects</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/notifications/">Using Notifications</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/managing-api-tokens/">Managing API tokens</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/env-vars/">Using Environment Variables</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/contexts/">Using Contexts</a></li>
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up iOS Code Signing</a></li>
-                        </ul>
-                        <ul class="subnav" margin="40px">
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/optimizations/"><h5>OPTIMIZATIONS</h5></a>
-                                <ul class="subnav">
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/caching/">Caching Dependencies</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/parallelism-faster-jobs/">Running Tests in Parallel</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Using Docker Layer Caching</a></li>
-                                </ul>
-            </div>
-            </li>
-            <ul class="left-links main-nav">
-                <li class="nav-item"><a href="{{ site.baseurl }}/2.0/build/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/builds.svg">Jobs</h3></b></a>
-                    <div class="submenu">
-                        <ul class="subnav" margin="40px">
-                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/status/"><h5>STATUS</h5></a>
-                                <ul class="subnav">
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/containers/">Using Containers</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/status-badges/">Adding Status Badges</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/artifacts/">Storing Build Artifacts</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">Debugging with SSH</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a></li>
-                                </ul>
-                                <ul class="subnav" margin="40px">
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/triggers/"><h5>TRIGGERS</h5></a>
-                                        <ul class="subnav">
-                                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/skip-build/">Skip and Cancel Builds</a></li>
-                                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/api-job-trigger/">Using the API to Trigger Jobs</a></li>
-                                            <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/workflows/">Orchestrating Workflows</a></li>
-                                        </ul>
-                    </div>
-                    </li>
-                    <ul class="left-links main-nav">
-                        <li class="nav-item"><a href="{{ site.baseurl }}/2.0/deployment/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/deploy.svg">Deployment</h3></b></a>
-                            <div class="submenu">
-                                <ul class="subnav" margin="40px">
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/deployment-integrations/">Configuring Deploys</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/yarn/">Using Yarn on CircleCI</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/build-publish-snap-packages/">Publishing Snap Packages</a></li>
-                                    <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/artifactory/">Using Artifactory</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <ul class="left-links main-nav">
-                            <li class="nav-item"><a href="{{ site.baseurl }}/2.0/reference/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/reference.svg">Reference</h3></b></a>
-                                <div class="submenu">
-                                    <ul class="subnav" margin="40px">
-                                        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/configuration-reference/">Configuration Reference</a></li>
-                                        <li class="subnav-item"><a href="{{ site.baseurl }}/api/">API Reference</a></li>
-                                        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a></li>
-                                        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/glossary/">Glossary</a></li>
-                                        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/help-and-support/">Help and Support</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <ul class="left-links main-nav">
-                                <li class="nav-item active"><a href="" class="header"><h3><img src="{{ site.baseurl }}/assets/img/docs/admin.svg">Administration</h3></a>
-                                    <div class="submenu">
-                                        <ul class="subnav" margin="40px">
-                                            <li><a href="{{ site.baseurl }}/2.0/overview/">Overview</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/single-box/">Trial</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/admin-faq/">FAQ</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/upgrading/">Upgrade</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/security/">Security</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/certificates/">Certificates</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/proxy/">Proxies</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/aws/">Installation</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/authentication/">Authentication</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/monitoring/">Monitoring</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/nomad/">Nomad</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/backup/">Backup</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/troubleshooting/">Troubleshooting</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/gpu/">GPU Builders</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/vm-service">Configuring VM Service</a></li>
-                                            <li><a href="{{ site.baseurl }}/2.0/open-source/">Acknowledgments</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+<a href="" class="header"><img src="{{ site.baseurl }}/assets/img/docs/admin.svg">Administration</a>
+  <a href="{{ site.baseurl }}/2.0/overview/">Overview</a>
+  <a href="{{ site.baseurl }}/2.0/single-box/">Trial</a>
+  <a href="{{ site.baseurl }}/2.0/admin-faq/">FAQ</a>
+  <a href="{{ site.baseurl }}/2.0/upgrading/">Upgrade</a>
+  <a href="{{ site.baseurl }}/2.0/security/">Security</a>
+  <a href="{{ site.baseurl }}/2.0/certificates/">Certificates</a>
+  <a href="{{ site.baseurl }}/2.0/proxy/">Proxies</a>
+  <a href="{{ site.baseurl }}/2.0/aws/">Installation</a>
+  <a href="{{ site.baseurl }}/2.0/authentication/">Authentication</a>
+  <a href="{{ site.baseurl }}/2.0/monitoring/">Monitoring</a>
+  <a href="{{ site.baseurl }}/2.0/nomad/">Nomad</a>
+  <a href="{{ site.baseurl }}/2.0/backup/">Backup</a>
+  <a href="{{ site.baseurl }}/2.0/troubleshooting/">Troubleshooting</a>
+  <a href="{{ site.baseurl }}/2.0/gpu/">GPU Builders</a>
+  <a href="{{ site.baseurl }}/2.0/vm-service">Configuring VM Service</a>
+  <a href="{{ site.baseurl }}/2.0/open-source/">Acknowledgments</a>
 
 
 
