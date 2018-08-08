@@ -302,7 +302,7 @@ In the example, `filters` is set with the `branches` key and the `only` key with
 
 ### Executing Jobs for a Git Tag
 
-CircleCI does not run jobs for tags
+CircleCI does not run workflows for tags
 unless you explicitly specify tag filters.
 Additionally,
 if a job requires any other jobs (directly or indirectly),
