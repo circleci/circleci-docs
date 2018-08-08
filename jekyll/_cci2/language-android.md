@@ -247,3 +247,7 @@ as you change code.
 CircleCI runs clean builds,
 so pre-dexing actually increases compilation time
 and may also increase memory usage.
+
+## Deployment
+
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
