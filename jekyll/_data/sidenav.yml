@@ -1,85 +1,86 @@
 - name: Welcome
-  link: /2.0/about-circleci/
+  link: 
   icon: docs/welcome.svg
-- name: Welcome
-  link: /2.0/about-circleci/
-  icon: docs/welcome.svg
-- name: Getting Started
-  link: 
-  icon: docs/start.svg
   children: 
     - name: CI/CD Overview
       link: /2.0/about-circleci/
       children: 
-        - name: This is a test
-          link: /2.0/about-circleci/
-        - name: Another test
-          link: /2.0/project-build/
-        - name: To be ignored
-          link: /2.0/
-    - name: Supported Languages
-      link: /2.0/demo-apps/
+        - name: Supported Languages
+          link: /2.0/demo-apps/
 
 - name: Getting Started
-  link: 
+  link: /2.0/
   icon: docs/start.svg
   children: 
-    - name: CI/CD Overview
-      link: /2.0/about-circleci/
+    - name: Introduction
+      link: /2.0/getting-started/
       children: 
-        - name: This is a test
-          link: /2.0/about-circleci/
-        - name: Another test
+        - name: Sign Up & Try CircleCI
+          link: /2.0/first-steps/
+        - name: Hello World
+          link: /2.0/hello-world/
+    - name: Faq
+      link: /2.0/faq/
+    - name: Concepts
+      link: /2.0/concepts/
+      children: 
+        - name: Projects and Builds
           link: /2.0/project-build/
-        - name: To be ignored
-          link: /2.0/
-    - name: Supported Languages
-      link: /2.0/demo-apps/
+        - name: Jobs, Steps, and Workflows
+          link: /2.0/jobs-steps/
+        - name: Differences from Jenkins
+          link: /2.0/migrating-from-jenkins/
+        - name: Security
+          link: /2.0/security/
+    - name: Migration
+      link: /2.0/migration-intro/
+      children: 
+        - name: Tips for Migrating to 2.0
+          link: /2.0/migration/
+        - name: Migrating a Linux Project
+          link: /2.0/migrating-from-1-2/
+        - name: Migrating an iOS Project
+          link: /2.0/ios-migrating-from-1-2/
+        - name: Using the config-translator
+          link: /2.0/config-translation/
 
-- name: Getting Started
-  link: 
-  icon: docs/start.svg
+- name: Configuration
+  link: /2.0/config-start/
+  icon: docs/config.svg
   children: 
-    - name: CI/CD Overview
-      link: /2.0/about-circleci/
+    - name: Introduction
+      link: /2.0/config-intro/
       children: 
-        - name: This is a test
-          link: /2.0/about-circleci/
-        - name: Another test
-          link: /2.0/project-build/
-        - name: To be ignored
-          link: /2.0/
-    - name: Supported Languages
-      link: /2.0/demo-apps/
+        - name: Configuration Reference
+          link: /2.0/configuration-reference/
+        - name: Writing YAML
+          link: 2.0/writing-yaml/
+        - name: Using the CircleCI CLI
+          link: /2.0/local-jobs/
+        - name: Testing Config Locally
+          link: /2.0/examples/
+    - name: Examples
+      link: /2.0/examples-intro/
+      children: 
+        - name: Sample config.yml Files
+          link: /2.0/sample-config/
+        - name: Tutorials
+          link: /2.0/tutorials/
+        - name: Database Config Examples
+          link: /2.0/postgres-config/
+        - name: Example Public Repos
+          link: /2.0/example-configs/
+        - name: Testing iOS Applications
+          link: /2.0/testing-ios/
+    - name: EXECUTORS & IMAGES
+      link: /2.0/executor-intro/
+      children: 
+        - name: Choosing an Executor Type
+          link: /2.0/executor-types/
+        - name: CircleCI Docker Images
+          link: /2.0/circleci-images/
+        - name: Using Custom Images
+          link: /2.0/custom-images/
+        - name: Using Private Images
+          link: /2.0/private-images/
 
-- name: Getting Started
-  link: 
-  icon: docs/start.svg
-  children: 
-    - name: CI/CD Overview
-      link: /2.0/about-circleci/
-      children: 
-        - name: This is a test
-          link: /2.0/about-circleci/
-        - name: Another test
-          link: /2.0/project-build/
-        - name: To be ignored
-          link: /2.0/
-    - name: Supported Languages
-      link: /2.0/demo-apps/
-
-- name: Getting Started
-  link: 
-  icon: docs/start.svg
-  children: 
-    - name: CI/CD Overview
-      link: /2.0/about-circleci/
-      children: 
-        - name: This is a test
-          link: /2.0/about-circleci/
-        - name: Another test
-          link: /2.0/project-build/
-        - name: To be ignored
-          link: /2.0/
-    - name: Supported Languages
-      link: /2.0/demo-apps/

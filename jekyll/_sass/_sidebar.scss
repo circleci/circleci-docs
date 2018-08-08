@@ -10,17 +10,15 @@
   padding: 30px;
   overflow-y: scroll;
   position: absolute;
-  top: 70px;
   bottom: 0;
 
-  .active {
-    a {
-      color: $blue-100;
-    }
+  a.active {
+    color: $blue-100;
   }
 
   &.fixed {
     position: fixed;
+    top: 70px;
   }
 
   .main-nav-item {
@@ -80,6 +78,7 @@
       a {
         color: $body-text-color;
         margin-left: 30px;
+        display: inline-block;
       }
     }
   }

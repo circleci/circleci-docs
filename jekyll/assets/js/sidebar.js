@@ -33,7 +33,8 @@
   var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));
 
   mainNavItems.forEach(function (item) {
-    item.addEventListener('click', function () {
+    var listWrap = item.querySelector('.list-wrap');
+    listWrap.addEventListener('click', function () {
       if (item.classList.contains('closed')) {
         item.classList.remove('closed');
       } else {
