@@ -1027,8 +1027,7 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 {: class="table table-striped"}
 
 For more information,
-see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-jobs-for-a-git-tag) section of the Workflows document.
-
+see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
 ###### *Example*
 

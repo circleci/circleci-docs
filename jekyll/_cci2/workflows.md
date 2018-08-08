@@ -300,7 +300,7 @@ workflows:
 
 In the example, `filters` is set with the `branches` key and the `only` key with the branch name. Any branches that match the value of `only` will run the job. Branches matching the value of `ignore` will not run the job. See the [Sample Sequential Workflow config with Branching](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
-### Executing Jobs for a Git Tag
+### Executing Workflows for a Git Tag
 
 CircleCI does not run workflows for tags
 unless you explicitly specify tag filters.
