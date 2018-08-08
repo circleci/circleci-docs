@@ -102,36 +102,4 @@ $( document ).ready(function() {
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);
 	});
-
-    // Initialize navgoco sidebar menus with default options
-    $("#mysidebar").navgoco({
-      caretHtml: '',
-      accordion: false,
-      openClass: 'active', // open
-      save: true,
-      cookie: {
-        name: 'navgoco',
-        expires: false,
-        path: '/'
-      },
-      slide: {
-        duration: 400,
-        easing: 'swing'
-      }
-    });
-    // By default, open everything. 
-    // This is a brute force approach to fix things being collapsed by default
-    // TODO: make this more elegant
-    $("#mysidebar").navgoco('toggle', true);  
-
-    $("#collapseAll").click(function(e) {
-      e.preventDefault();
-      $("#mysidebar").navgoco('toggle', false);
-    });
-
-    $("#expandAll").click(function(e) {
-      e.preventDefault();
-      $("#mysidebar").navgoco('toggle', true);
-    });
-    // End navgoco sidebar menu options
 });
