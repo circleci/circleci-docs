@@ -34,7 +34,7 @@ jobs:
     # Primary container image where all commands run
     
     docker:
-      - image: circleci/ruby:2.4.1-node-jessie
+      - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -61,7 +61,7 @@ jobs:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
-      - run: sudo apt install postgresql-client
+      - run: sudo apt install -y postgresql-client || true
 
       # Store bundle cache
       - save_cache:

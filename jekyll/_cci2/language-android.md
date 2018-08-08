@@ -9,20 +9,37 @@ order: 9
 
 *[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Android*
 
-This guide will help you get started with an Android application on CircleCI.
+This document describes
+how to set up an Android project on CircleCI
+in the following sections.
 
 * TOC
 {:toc}
 
 ## Overview
 
-There are some assumptions made in this guide:
+This guide provides an introduction to Android development on CircleCI.
+If you are looking for a `.circleci/config.yml` template for Android,
+see the [Sample Configuration](#sample-configuration) section of this document.
 
-- We assume that your Android project is built with `gradle` (this is the default for projects created with [Android Studio](https://developer.android.com/studio).
-- We assume that your project is located in the root of your `git` repository, with the application located in a subfolder named `app`.
+**Note:**
+Running the Android emulator is not supported
+by the type of virtualization CircleCI uses on Linux.
+To run emulator tests from a job,
+consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
+For more details,
+see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
-Running the Android emulator is not currently supported by the type of virtualization CircleCI 2.0 uses on Linux. To run emulator tests from a job, consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). To do this, you can use the [gcloud command line](https://firebase.google.com/docs/test-lab/command-line). Google Cloud tools are preinstalled in our Android Docker images, which you can find on [GitHub](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/android/images) or [Docker Hub](https://hub.docker.com/r/circleci/android/tags).
+## Prerequisites
 
+This guide assumes the following:
+
+- You are using [Gradle](https://gradle.org/)
+to build your Android project.
+Gradle is the default build tool
+for projects created with [Android Studio](https://developer.android.com/studio).
+- Your project is located in the root of your VCS repository.
+- The project's application is located in a subfolder named `app`.
 
 ## Sample Configuration
 
@@ -42,7 +59,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this. 
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
@@ -59,8 +76,7 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
-
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}
@@ -102,15 +118,11 @@ Then `./gradlew lint test` runs the unit tests, and runs the built in linting to
 
 We then upload the build reports as job artifacts, and we upload the test metadata (XML) for CircleCI to process.
 
-Nice! You just set up CircleCI for an Android app.
-
 ## Docker Images
 
 For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
 
 The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
-
-**Note:** The CircleCI Android image does *not* include the Android NDK. If you require that toolset, consider using another [existing image](https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=android-ndk&starCount=0) or making your own image.
 
 ### API Levels
 
@@ -133,12 +145,105 @@ and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
+## Testing With Firebase Test Lab
+
+To use Firebase Test Lab with CircleCI,
+first complete the following steps.
+
+1. **Create a Firebase project.**
+Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
+
+2. **Install and authorize the Google Cloud SDK.**
+Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document.
+
+    **Note:**
+    Instead of `google/cloud-sdk`,
+    consider using an [Android convenience image]({{ site.baseurl }}/2.0/circleci-images/#android),
+    which includes `gcloud` and Android-specific tools.
+
+3. **Enable required APIs.**
+Using the service account you created,
+log into Google
+and go to the [Google Developers Console API Library page](https://console.developers.google.com/apis/library).
+Enable the **Google Cloud Testing API** and the **Cloud Tool Results API**
+by typing their names into the search box at the top of the console
+and clicking **Enable API**.
+
+In your `.circleci/config.yml` file,
+add the following `run` steps.
+
+1. **Build the debug APK and test APK.**
+Use Gradle to build two APKs.
+To improve build performance,
+consider [disabling pre-dexing](#disabling-pre-dexing-to-improve-build-performance).
+
+2. **Store the service account.**
+Store the service account you created in a local JSON file.
+
+3. **Authorize `gcloud`**.
+Authorize the `gcloud` tool
+and set the default project.
+
+4. **Use `gcloud` to test with Firebase Test Lab.**
+Adjust the paths to the APK files
+to correspond to your project.
+
+5. **Install `crcmod` and use `gsutil` to copy test results data.**
+`crcmod` is required
+to use `gsutil`.
+Use `gsutil`
+to download the newest files in the bucket to the CircleCI artifacts folder.
+Be sure to replace `BUCKET_NAME` and `OBJECT_NAME` with project-specific names.
+
+```yaml
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+    steps:
+      - run:
+          name: Build debug APK and release APK
+          command: |
+            ./gradlew :app:assembleDebug
+            ./gradlew :app:assembleDebugAndroidTest
+      - run:
+          name: Store Google Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Authorize gcloud and set config defaults
+          command: |
+            sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - run:
+          name: Test with Firebase Test Lab
+          command: >
+            sudo gcloud firebase test android run
+              --app <local_server_path>/<app_apk>.apk
+              --test <local_server_path>/<app_test_apk>.apk
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+      - run:
+          name: Install gsutil dependency and copy test results data
+          command: |
+            sudo pip install -U crcmod
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+```
+
+For more details on using `gcloud` to run Firebase,
+see the [official documentation](https://firebase.google.com/docs/test-lab/android/command-line).
+
 ## Disabling Pre-Dexing to Improve Build Performance
 
-Disabling pre-dexing for Android builds on CircleCI can speed up your builds. Refer to the [Disable Android pre dexing on CI builds](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/) blog post for details.
+Pre-dexing dependencies has no benefit on CircleCI.
+To disable pre-dexing,
+refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
 
-CircleCI always runs clean builds, so pre-dexing has no benefit. By default, the Gradle Android plugin pre-dexes dependencies. Pre-dexing converts Java bytecode into Android bytecode to speed up development by doing only incremental dexing as you change code. Pre-dexing can make compilation slower and may also use large quantities of memory. 
-
-## Deploy
-
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+By default,
+the Gradle Android plugin pre-dexes dependencies.
+Pre-dexing speeds up development
+by converting Java bytecode into Android bytecode,
+allowing incremental dexing
+as you change code.
+CircleCI runs clean builds,
+so pre-dexing actually increases compilation time
+and may also increase memory usage.
