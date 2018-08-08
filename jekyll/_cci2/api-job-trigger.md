@@ -47,7 +47,7 @@ For a complete reference of the API,
 see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
 
 **Note:**
-It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using a new endpoint, see the Trigger a Build with a Workflow section of the [CircleCI API Projects Documentation]({{ site.baseurl }}/api/v1-reference/#projects/).
+It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using a new endpoint, see the Trigger a Build with a Workflow section of the [CircleCI API Projects Documentation]({{ site.baseurl }}/api/v1-reference/#projects).
 
 Jobs triggered with the API may contain a `workflows` section.
 These workflows do **not** have to reference the job
