@@ -83,4 +83,16 @@
           link: /2.0/custom-images/
         - name: Using Private Images
           link: /2.0/private-images/
-
+    - name: ADVANCED CONFIG
+      link: /2.0/adv-config/
+      children: 
+        - name: Using Shell Scripts
+          link: /2.0/using-shell-scripts/
+        - name: Setting up Browser Testing
+          link: /2.0/browser-testing/
+        - name: Configuring Databases
+          link: /2.0/databases/
+        - name: Running Docker Commands
+          link: /2.0/building-docker-images/
+        - name: Using Docker Compose
+          link: /2.0/docker-compose/

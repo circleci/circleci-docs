@@ -11,7 +11,7 @@
 							{% asset '{{ main-item.icon }}' class=icon %} 
 						{% endif %}
 						
-						<a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}">{{ main-item.name}}</a>
+						<a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
 
 						{% if main-item.children %}
 							{% asset docs/arrow-right.svg class=arrow %}
@@ -21,11 +21,11 @@
 					{% if main-item.children %}
 					<ul class="subnav">
 						{% for item in main-item.children %}
-							<li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}">{{ item.name }}</a></li>
+							<li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ item.name }}</a></li>
 							{% if item.children %}
 								<ul>
 									{% for sub-item in item.children %}
-										<li class="subnav-item"><a class="{% if page.url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}">{{ sub-item.name }}</a></li>
+										<li class="subnav-item"><a class="{% if page.url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ sub-item.name }}</a></li>
 									{% endfor %}
 								</ul>
 							{% endif %}
@@ -42,14 +42,6 @@
 			
 <!-- 		
 										
-	<a href="{{ site.baseurl }}/2.0/adv-config/"><h5>ADVANCED CONFIG</h5></a>
-    <ul class="subnav">
-        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/using-shell-scripts/">Using Shell Scripts</a></li>
-        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/browser-testing/">Setting up Browser Testing</a></li>
-        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/databases/">Configuring Databases</a></li>
-        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/building-docker-images/">Running Docker Commands</a></li>
-        <li class="subnav-item"><a href="{{ site.baseurl }}/2.0/docker-compose/">Using Docker Compose</a></li>
-    </ul>
     <ul class="left-links main-nav">
         <li class="nav-item"><a href="{{ site.baseurl }}/2.0/projects/"><b><h3><img src="{{ site.baseurl }}/assets/img/docs/project.svg">Projects</h3></b></a>
             <div class="submenu">
