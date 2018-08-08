@@ -1005,12 +1005,12 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 
 ###### **`tags`**
 {:.no_toc}
-CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
-1. For a branch push unaffected by any filters, CircleCI runs the job.
-2. For a tag push unaffected by any filters, CircleCI skips the job.
-
-Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. Refer to the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-jobs-for-a-git-tag) section of the Orchestrating Workflows document for more examples.
+CircleCI does not run workflows for tags
+unless you explicitly specify tag filters.
+Additionally,
+if a job requires any other jobs (directly or indirectly),
+you must specify tag filters for those jobs.
 
 Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -1025,6 +1025,9 @@ tags | N | Map | A map defining rules for execution on specific tags
 only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
+
+For more information,
+see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-jobs-for-a-git-tag) section of the Workflows document.
 
 
 ###### *Example*
