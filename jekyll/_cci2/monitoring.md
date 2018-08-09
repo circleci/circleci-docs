@@ -52,7 +52,7 @@ In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.i
 `circle.nomad.server_agent.jobs.complete`: Returns the total number of complete jobs across the cluster.
 `circle.nomad.server_agent.jobs.dead`: Returns the total number of dead jobs across the cluster.
 
-When the Nomad Metrics container is running normally, no output will be written to standard output or standard error during. Failures will elicit a message to standard error.
+When the Nomad Metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
 
 ## Scheduled Scaling
 
