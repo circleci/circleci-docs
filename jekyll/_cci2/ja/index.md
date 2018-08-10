@@ -1,38 +1,38 @@
 ---
 layout: classic-docs
-title: "2.0 Docs"
-description: "Landing page for CircleCI 2.0"
+title: "CircleCI 2.0 マニュアル"
+description: "CircleCI 2.0 マニュアル トップページ"
 permalink: /2.0/
 ---
-Welcome to CircleCI 2.0 documentation! Included here are tutorials, samples, and reference documentation for CircleCI version 2.0 in the following two sections:
+CircleCI 2.0 をご利用いただきありがとうございます。このマニュアルはチュートリアル、サンプルコード、機能説明を含む以下の 2 つのセクションから構成されています。
 
-* **Developers:** Instructions for configuring a CircleCI YML file to automate your builds, tests, and deployments using the hosted CircleCI application.
-* **Server Administrators:** Instructions for installing and maintaining CircleCI on your local server or private cloud.
+* **デベロッパー向け：**CircleCI で管理している開発中アプリケーションのビルド、テスト、デプロイを自動化する YML ファイルの作成方法
+* **サーバー管理者向け：**オンプレミスやプライベートクラウドの環境で CircleCI を稼働させる際のインストールとメンテナンスの方法
 
-This page describes how to run your first green build.
+このページでは、導入直後のファーストステップとなるビルドの手順について説明しています。
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/KhjwnTD4oec" frameborder="0" allowfullscreen></iframe>
 </div>
 
-## Prerequisites for Running Your First Build
+## ビルドにあたっての前提条件
 
-* Some basic knowledge of Git and an existing GitHub.com account or the ability to create one. This procedure uses a new GitHub repository, but CircleCI also supports the use of Bitbucket.
-* Some basic terminal or `bash` knowledge and prior experience using the command line is helpful. 
+* Git に関する基礎的な知識があり、GitHub のアカウントを所有している、もしくはアカウントを作成する権限があること。ここでは GitHub の新しいリポジトリを使用した手順を説明しますが、実際には Bitbucket も利用できます。
+* `bash` をはじめとするターミナル、シェルの基礎的な知識があること。コマンドライン操作に慣れていると理解がスムーズです。 
 
-## Creating a Repository
+## リポジトリの作成
 
-1. Navigate to your account on GitHub.com
+1. GitHub.com にログインし、下記の通り操作します
   
-  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new>{:target="_blank"}. ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * **New repositories** ボタンをクリックするか、<https://github.com/new>{:target="_blank"} に直接アクセスします ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
-2. Select Initialize this repository with a README and click the Create repository button. ![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
+2. 「Initialize this repository with a README」にチェックを入れて、**Create repository** ボタンをクリックします![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
-## Adding a .yml File
+## .YML ファイルの追加
 
-CircleCI uses a [YAML](https://en.wikipedia.org/wiki/YAML) file to identify how you want your testing environment set up and what tests you want to run. On CircleCI 2.0, this file must be called `config.yml` and must be in a hidden folder called `.circleci`. On Mac, Linux, and Windows systems, files and folders whose names start with a period are treated as *system* files that are hidden from users by default.
+CircleCI は、テスト環境の構築方法や実行するテスト内容の定義に [YAML](https://en.wikipedia.org/wiki/YAML) ファイルを使います。 CircleCI 2.0 では、`config.yml` というファイル名で、隠しフォルダである `.circleci` ディレクトリ配下に作成しておく必要があります。 macOS、Linux、Windows においては、ピリオドから始まるファイルやフォルダは、デフォルトで隠し属性のある*システム*ファイルとして扱われます。
 
-1. To create the file and folder on GitHub, click the **Create new file** button on the repo page and type `.circleci/config.yml`. You should now have in front of you a blank `config.yml` file in a `.circleci` folder.
+1. GitHub でファイルやフォルダを作成するには、リポジトリページの **Create new file** ボタンをクリックし、`.circleci/config.yml` と入力します。 すると、空の `config.yml` ファイルが `.circleci` フォルダ内に作成されます。
 
 2. To start out with a simple `config.yml`, copy the text below into the file editing window on GitHub:
 
