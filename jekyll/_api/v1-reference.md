@@ -275,7 +275,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.cancel_build | api_endpoint }}
 
-<h2 id="new-build">Trigger a new Build by Number</h2>
+<h2 id="new-build">Trigger a new Job</h2>
 
 {{ site.data.api.project_post | api_endpoint }}
 
@@ -287,7 +287,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-project-build">Trigger a new Build by Project (preview)</h2>
 
-<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/2.0/build-processing/). This endpoint does **not** yet support the build_parameters or parallel options that the job-triggering endpoint supports.
+<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/2.0/build-processing/). This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
 
 {{ site.data.api.project_build | api_endpoint }}
 
