@@ -12,11 +12,10 @@ order: 1
 This document describes how to enable the preview build processing engine if you need to trigger workflows from the CircleCI API.
 
 ## Getting Started
-Enable build processing at the bottom of the Advanced section of Settings page for your project in the CircleCI app. If you don't see this setting, it should appear in the next few days for you as we roll it out to more and more organizations.
+Enable build processing at the bottom of the Advanced section of Settings page for your project in the CircleCI app. 
 
 The new build processing feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#projects) and the following use cases:
 
-- GitHub and BitBucket support including API and webhooks
 - New API endpoint to trigger builds, including running all workflows in the build
 - Jobs named `build` will be wrapped in a workflows stanza by the processor
 
@@ -29,11 +28,10 @@ We are committed to achieving backwards compatibility in almost all cases, and w
 
 - Build processing is **not** fully backwards-compatible with existing API calls to trigger arbitrary jobs
 - The new build triggering API endpoint does **not** accept parameters and workflow or job filters
-- Auto-cancel redundant builds including workflows auto-cancel is **not** supported
-- UI for Rerun of a job or rerun the workflow of the job is **not** implemented
+- Auto-cancel redundant builds including workflows auto-cancel is **not** yet supported
+- UI for Rerun of a job or rerun the workflow of the job is **not** yet implemented
 
 ## Giving Feedback
 1. Come to [CircleCI Discuss](https://discuss.circleci.com/t/2-1-config-and-build-processing/24102) to post feedback.
 2. Tweet @circleci with thoughts
-3. Add [issues](https://github.com/CircleCI-Public/config-preview-sdk/issues) to this repo.
-4. Vote or add to our [Ideas board](https://circleci.com/ideas/)
+3. Vote or add to our [Ideas board](https://circleci.com/ideas/)
