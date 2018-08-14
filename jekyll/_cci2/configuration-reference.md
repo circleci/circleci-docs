@@ -800,7 +800,7 @@ character-range:
         lo '-' hi matches character c for lo <= c <= hi 
 ``` 
 
-The Go documenation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
+The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
 
 ##### **`attach_workspace`**
 
