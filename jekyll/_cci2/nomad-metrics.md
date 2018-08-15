@@ -24,11 +24,11 @@ Before proceeding, you should be logged into the EC2 Service section of the AWS 
 
 ### Using the AWS Console
 
-#### Prerequisites 
+#### Prerequisites
 
 ##### AWS EC2 Launch Configuration ID
 
-1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.  
+1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.
 2. Locate the ASG with a name tag similar to`*_nomad_clients_asg`
 3. The Launch Configuration name is next to the ASG name IE `terraform-20180814231555427200000001`
 
@@ -36,7 +36,7 @@ Before proceeding, you should be logged into the EC2 Service section of the AWS 
 
 1. Select the `Instances` link located under the Instances group in the left sidebar
 2. Select the Services Box Instance.  The name tag typically resembles `circleci_services`
-3. In the description box at the bottom of the page, make note of the private IP address. 
+3. In the description box at the bottom of the page, make note of the private IP address.
 
 #### Updating the Launch Configuration
 
@@ -45,7 +45,7 @@ Before proceeding, you should be logged into the EC2 Service section of the AWS 
 3.  Once the configuration page opens, select `3. Configure details` link located at the top of the page.
 4. Update the `Name` field to something meaningful IE `nomad-builder-with-metrics-lc-DATE`
 5. Select the `Advanced Details` drop down
-6. Copy and paste the launch configuration script from below in the text field next to `User data`.  
+6. Copy and paste the launch configuration script from below in the text field next to `User data`.
 7. **IMPORTANT:** Enter the private IP address of the services box at Line 10. For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`
 8. Select the `Skip to review` button and then`Create launch configuration` button.
 
@@ -60,6 +60,7 @@ export no_proxy=""
 export CONTAINER_NAME="nomad_metrics"
 export CONTAINER_IMAGE="circleci/nomad-metrics:0.1.90-1448fa7"
 export SERVICES_PRIVATE_IP=""
+export NOMAD_METRICS_PORT="8125"
 
 echo "-------------------------------------------"
 echo "     Performing System Updates"
@@ -157,13 +158,13 @@ docker run --name $CONTAINER_NAME \
     --net=host \
     --userns=host \
     $CONTAINER_IMAGE \
-    start --nomad-uri=http://localhost:4646 --statsd-host=$SERVICES_PRIVATE_IP --client
+    start --nomad-uri=http://localhost:4646 --statsd-host=$SERVICES_PRIVATE_IP --statsd-port=$NOMAD_METRICS_PORT --client
 
 ```
 
 #### Updating the Auto Scaling Group
 
-1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.  
+1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.
 2. Select the ASG with a name tag similar to`*_nomad_clients_asg`
 3. In the description box at the bottom, select the `Edit` button
 4. Select the newly created Launch Configuration from the drop-down.
