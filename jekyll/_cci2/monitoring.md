@@ -25,6 +25,17 @@ Following are the metrics that are enabled:
 - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) 
 - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
+#### Nomad Job Metrics
+In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics) are enabled and emitted by the Nomad Server agent. Five types of metrics are reported: 
+
+`circle.nomad.server_agent.poll_failure`: Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
+`circle.nomad.server_agent.jobs.pending`: Returns the total number of pending jobs across the cluster.
+`circle.nomad.server_agent.jobs.running`: Returns the total number of running jobs across the cluster.
+`circle.nomad.server_agent.jobs.complete`: Returns the total number of complete jobs across the cluster.
+`circle.nomad.server_agent.jobs.dead`: Returns the total number of dead jobs across the cluster.
+
+When the Nomad Metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
+
 ### Supported Platform(s)
 
 There are two built-in platforms; AWS CloudWatch and DataDog.
