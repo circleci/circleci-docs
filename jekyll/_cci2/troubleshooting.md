@@ -5,7 +5,9 @@ category: [administration]
 order: 12
 description: "Troubleshooting steps to take on server installations of CircleCI"
 ---
-This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI 2.0 installation on your private server or cloud. **Note:** It is generally a good idea to review the support bundle to check for problems first before beginning troubleshooting steps.
+This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server.
+
+**Note:** It is generally a good idea to review the support bundle to check for problems first before beginning troubleshooting steps.
 
 ## Debugging Queuing Builds
 
