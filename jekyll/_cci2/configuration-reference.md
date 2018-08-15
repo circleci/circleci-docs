@@ -46,6 +46,11 @@ If you are **not** using workflows, the `jobs` map must contain a job named
 `build`. This `build` job is the default entry-point for a run that is triggered by a
 push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
+**Note:**
+Jobs have a maximum runtime of 5 hours.
+If your jobs are timing out,
+consider running some of them in parallel.
+
 ### **<`job_name`>**
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
@@ -218,6 +223,7 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 * `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
 * `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
 * `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
+* `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
 You can use one of the `year-month` versioned images to pin the version used by your jobs. Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
 
@@ -799,7 +805,7 @@ character-range:
         lo '-' hi matches character c for lo <= c <= hi 
 ``` 
 
-The Go documenation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
+The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
 
 ##### **`attach_workspace`**
 
@@ -1005,12 +1011,12 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 
 ###### **`tags`**
 {:.no_toc}
-CircleCI treats tag and branch filters differently when deciding whether a job should run.
 
-1. For a branch push unaffected by any filters, CircleCI runs the job.
-2. For a tag push unaffected by any filters, CircleCI skips the job.
-
-Item two above means that a job **must** have a `filters` `tags` section to run as a part of a tag push and all its transitively dependent jobs **must** also have a `filters` `tags` section. Refer to the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution) section of the Orchestrating Workflows document for more examples.
+CircleCI does not run workflows for tags
+unless you explicitly specify tag filters.
+Additionally,
+if a job requires any other jobs (directly or indirectly),
+you must specify tag filters for those jobs.
 
 Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -1026,6 +1032,8 @@ only | N | String, or List of Strings | Either a single tag specifier, or a list
 ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
 
+For more information,
+see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
 ###### *Example*
 
