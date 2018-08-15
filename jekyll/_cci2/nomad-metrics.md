@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Working with Nomad Metrics"
+title: "Installing and Configuring Nomad Metrics"
 category: [administration]
 order: 9
-description: "Working with Nomad Metrics"
+description: "Installing and Configuring Nomad Metrics"
 ---
 
 # Configuring Nomad Metrics
@@ -12,13 +12,167 @@ Nomad Metrics is a helper service used to collect metrics data from the [Nomad s
 
 ## Nomad Metrics Server
 
-The Nomad Metrics container is run on the services host in server mode and requires no additional configuration.
+The Nomad Metrics container is run on the services host using the server flag and requires no additional configuration.
 
 ## Nomad Metrics Client
 
-TBD
+The Nomad Metrics client is installed and run on all builder instances.  You will need to update your AWS Launch Configuration in order to install and configure it.
 
-## Metrics
+### Updating the AWS Launch Configuration
+
+Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
+
+### Using the AWS Console
+
+#### Prerequisites 
+
+##### AWS EC2 Launch Configuration ID
+
+1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.  
+2. Locate the ASG with a name tag similar to`*_nomad_clients_asg`
+3. The Launch Configuration name is next to the ASG name IE `terraform-20180814231555427200000001`
+
+##### AWS EC2 Services Box Private IP Address
+
+1. Select the `Instances` link located under the Instances group in the left sidebar
+2. Select the Services Box Instance.  The name tag typically resembles `circleci_services`
+3. In the description box at the bottom of the page, make note of the private IP address. 
+
+#### Updating the Launch Configuration
+
+1. Select the `Launch Configurations` link located under `Auto Scaling` in the sidebar to the left.  Select the Launch Configuration you retrieved in the previous steps.
+2. In the description pane at the bottom, select the `Copy launch configuration` button
+3.  Once the configuration page opens, select `3. Configure details` link located at the top of the page.
+4. Update the `Name` field to something meaningful IE `nomad-builder-with-metrics-lc-DATE`
+5. Select the `Advanced Details` drop down
+6. Copy and paste the launch configuration script from below in the text field next to `User data`.  
+7. **IMPORTANT:** Enter the private IP address of the services box at Line 10. For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`
+8. Select the `Skip to review` button and then`Create launch configuration` button.
+
+```bash
+#! /bin/sh
+
+set -exu
+
+export http_proxy=""
+export https_proxy=""
+export no_proxy=""
+export CONTAINER_NAME="nomad_metrics"
+export CONTAINER_IMAGE="circleci/nomad-metrics:0.1.90-1448fa7"
+export SERVICES_PRIVATE_IP=""
+
+echo "-------------------------------------------"
+echo "     Performing System Updates"
+echo "-------------------------------------------"
+apt-get update && apt-get -y upgrade
+
+echo "--------------------------------------"
+echo "        Installing Docker"
+echo "--------------------------------------"
+apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get update
+apt-get -y install docker-ce=17.03.2~ce-0~ubuntu-trusty cgmanager
+
+sudo echo 'export http_proxy=""' >> /etc/default/docker
+sudo echo 'export https_proxy=""' >> /etc/default/docker
+sudo echo 'export no_proxy=""' >> /etc/default/docker
+sudo service docker restart
+sleep 5
+
+echo "--------------------------------------"
+echo "         Installing nomad"
+echo "--------------------------------------"
+apt-get install -y zip
+curl -o nomad.zip https://releases.hashicorp.com/nomad/0.5.6/nomad_0.5.6_linux_amd64.zip
+unzip nomad.zip
+mv nomad /usr/bin
+
+echo "--------------------------------------"
+echo "      Creating config.hcl"
+echo "--------------------------------------"
+export PRIVATE_IP="$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
+mkdir -p /etc/nomad
+cat <<EOT > /etc/nomad/config.hcl
+log_level = "DEBUG"
+
+data_dir = "/opt/nomad"
+datacenter = "us-east-1"
+
+advertise {
+    http = "$PRIVATE_IP"
+    rpc = "$PRIVATE_IP"
+    serf = "$PRIVATE_IP"
+}
+
+client {
+    enabled = true
+
+    # Expecting to have DNS record for nomad server(s)
+    servers = ["$SERVICES_PRIVATE_IP:4647"]
+    node_class = "linux-64bit"
+    options = {"driver.raw_exec.enable" = "1"}
+}
+
+telemetry {
+    publish_node_metrics = true
+    statsd_address = "$SERVICES_PRIVATE_IP:8125"
+}
+EOT
+
+echo "--------------------------------------"
+echo "      Creating nomad.conf"
+echo "--------------------------------------"
+cat <<EOT > /etc/init/nomad.conf
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+script
+    exec nomad agent -config /etc/nomad/config.hcl
+end script
+EOT
+
+echo "--------------------------------------"
+echo "   Creating ci-privileged network"
+echo "--------------------------------------"
+docker network create --driver=bridge --opt com.docker.network.bridge.name=ci-privileged ci-privileged
+
+echo "--------------------------------------"
+echo "      Starting Nomad service"
+echo "--------------------------------------"
+service nomad restart
+
+echo "--------------------------------------"
+echo "      Setting up Nomad metrics"
+echo "--------------------------------------"
+docker pull $CONTAINER_IMAGE
+docker rm -f $CONTAINER_NAME || true
+
+# Not using --detach so that upstart can perform log management and process
+# monitoring
+docker run --name $CONTAINER_NAME \
+    --rm \
+    --net=host \
+    --userns=host \
+    $CONTAINER_IMAGE \
+    start --nomad-uri=http://localhost:4646 --statsd-host=$SERVICES_PRIVATE_IP --client
+
+```
+
+#### Updating the Auto Scaling Group
+
+1. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.  
+2. Select the ASG with a name tag similar to`*_nomad_clients_asg`
+3. In the description box at the bottom, select the `Edit` button
+4. Select the newly created Launch Configuration from the drop-down.
+5. Press the `Save` button.
+6. At this point, the older Nomad client instances will begin shutting down.  They will be replaced with newer Nomad clients running Nomad Metrics.
+
+
+
+## StatsD Metrics
 
 ## --server
 
