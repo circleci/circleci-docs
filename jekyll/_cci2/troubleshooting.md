@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Troubleshooting CircleCI 2.0"
+title: "Troubleshooting Server Installations"
 category: [administration]
 order: 12
-description: "Troubleshooting steps to take in CircleCI 2.0"
+description: "Troubleshooting steps to take on server installations of CircleCI"
 ---
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI 2.0 installation on your private server or cloud. **Note:** It is generally a good idea to review the support bundle to check for problems first before beginning troubleshooting steps.
 
