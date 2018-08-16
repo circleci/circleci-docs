@@ -3,11 +3,11 @@ layout: classic-docs
 title: "Troubleshooting Server Installations"
 category: [administration]
 order: 12
-description: "Troubleshooting steps to take on server installations of CircleCI"
+description: "Troubleshooting steps to take for server installations of CircleCI"
 ---
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server.
 
-**Note:** It is generally a good idea to review the support bundle to check for problems first before beginning troubleshooting steps.
+**Note:** It is generally a good idea to review the [support bundle](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/) to check for problems first before beginning troubleshooting steps.
 
 ## Debugging Queuing Builds
 
