@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
 title: "Avoiding and Debugging Java Memory Errors"
-description: "How to avoid and debug Java Out of Memory errors on CircleCI."
+description: "How to avoid and debug Java memory errors on CircleCI."
 ---
 
-How to avoid and debug Java Out of Memory errors on CircleCI.
+How to avoid and debug Java memory errors on CircleCI.
 
 ## Overview
 
