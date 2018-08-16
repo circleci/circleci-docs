@@ -8,7 +8,7 @@ description: "Installing and Configuring Nomad Metrics"
 
 # Configuring Nomad Metrics
 
-Nomad Metrics is a helper service used to collect metrics data from the [Nomad server and clients](https://circleci.com/docs/2.0/nomad/) running on the Services and Builder hosts respectively.  Metrics are collected and sent using the [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) protocol and sent to the
+Nomad Metrics is a helper service used to collect metrics data from the [Nomad server and clients](https://circleci.com/docs/2.0/nomad/) running on the Services and Builder hosts respectively.  Metrics are collected and sent using the [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) protocol and sent to the Services host.
 
 ## Nomad Metrics Server
 
@@ -16,13 +16,23 @@ The Nomad Metrics container is run on the services host using the server flag an
 
 ## Nomad Metrics Client
 
-The Nomad Metrics client is installed and run on all builder instances.  You will need to update your AWS Launch Configuration in order to install and configure it.
+The Nomad Metrics client is installed and run on all builder instances.  You will need to update your AWS Launch Configuration in order to install and configure it.  Additionally, you will have to modify the AWS security group to ensure that UDP port 8125 is open on the Services Host.  
+
+**NOTE:** Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
+
+### Updating the Services Host Security Group
+
+1. Select the `Instances` link located under the Instances group in the left sidebar.
+2. Select the Services Box Instance.  The name tag typically resembles `circleci_services`.
+3. In the description box at the bottom, select the users security group link located next to the `Security Groups` section.  It typically resembles `*_users_sg`.
+4. This will take you straight to the Security Group page highlighting the users security group.  In the description box at the bottom, select the `Inbound` tab followed by the `Edit` button.
+5. Select the `Add a Rule` button.  From the drop-down, select `Custom UDP Rule`.  In the Port Range field enter `8125`.  
+6. The source field gives you a few options.  However, this ultimately depends on how you have configured the VPC and subnet.  Below are some more common scenarios.  
+   1. (Suggested) Allow traffic from the nomad client subnet.  You can usually match the entries used for ports 4647 or 3001.  For example, `10.0.0.0/24`.
+   2. Allow all traffic to UDP port 8125 using `0.0.0.0/0`.
+7. Press the `Save Button`
 
 ### Updating the AWS Launch Configuration
-
-Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
-
-### Using the AWS Console
 
 #### Prerequisites
 
@@ -41,12 +51,12 @@ Before proceeding, you should be logged into the EC2 Service section of the AWS 
 #### Updating the Launch Configuration
 
 1. Select the `Launch Configurations` link located under `Auto Scaling` in the sidebar to the left.  Select the Launch Configuration you retrieved in the previous steps.
-2. In the description pane at the bottom, select the `Copy launch configuration` button
+2. In the description pane at the bottom, select the `Copy launch configuration` button.
 3.  Once the configuration page opens, select `3. Configure details` link located at the top of the page.
-4. Update the `Name` field to something meaningful IE `nomad-builder-with-metrics-lc-DATE`
-5. Select the `Advanced Details` drop down
+4. Update the `Name` field to something meaningful IE `nomad-builder-with-metrics-lc-DATE`.
+5. Select the `Advanced Details` drop down.
 6. Copy and paste the launch configuration script from below in the text field next to `User data`.
-7. **IMPORTANT:** Enter the private IP address of the services box at Line 10. For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`
+7. **IMPORTANT:** Enter the private IP address of the services box at Line 10. For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`.
 8. Select the `Skip to review` button and then`Create launch configuration` button.
 
 ```bash
@@ -153,7 +163,7 @@ docker rm -f $CONTAINER_NAME || true
 
 # Not using --detach so that upstart can perform log management and process
 # monitoring
-docker run --name $CONTAINER_NAME \
+docker run -d --name $CONTAINER_NAME \
     --rm \
     --net=host \
     --userns=host \
