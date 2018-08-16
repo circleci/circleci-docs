@@ -5,10 +5,7 @@ categories: [reference]
 description: Using the CircleCI API
 ---
 
-The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** The following limitations exist:
-
-- Access to billing functions is only available from the CircleCI application.
-- Triggering workflows is not yet supported in the API.
+The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
 
 CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
 
@@ -229,9 +226,9 @@ You can narrow the builds to a single branch by appending /tree/:branch to the u
 
 The branch name should be url-encoded.
 
-<h2 id="build">Single Build</h2>
+<h2 id="build">Single Job</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'. 
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -278,7 +275,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.cancel_build | api_endpoint }}
 
-<h2 id="new-build">Trigger a new Build</h2>
+<h2 id="new-build">Trigger a new Job</h2>
 
 {{ site.data.api.project_post | api_endpoint }}
 
@@ -287,6 +284,12 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 <span class='label label-info'>Note:</span> For more about build parameters, read about [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for "failed" should be a boolean `true` or `null`.
 
 {{ site.data.api.project_branch | api_endpoint }}
+
+<h2 id="new-project-build">Trigger a new Build by Project (preview)</h2>
+
+<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/2.0/build-processing/). This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
+
+{{ site.data.api.project_build | api_endpoint }}
 
 <h2 id="clear-cache">Clear Cache</h2>
 

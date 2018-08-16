@@ -16,7 +16,7 @@ This document describes the `docker`, `machine`, and `macos` environments in the
 {:toc}
 
 ## Overview
-This version of CircleCI enables you to run jobs in one of three environments: using  Docker images, using a dedicated Linux VM image, or using a macOS VM image.
+This version of CircleCI enables you to run jobs in one of three environments: using Docker images, using a dedicated Linux VM image, or using a macOS VM image.
 
 For building on Linux, there are tradeoffs to `docker` versus `machine`, as follows:
 
@@ -61,7 +61,7 @@ In this example, all steps run in the container created by the first image liste
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-### Using Machine
+## Using Machine
 
 The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM) with the following technical specifications:
 
@@ -111,7 +111,7 @@ jobs:
       docker_layer_caching: true    # default - false
 ```
 
-### Using macOS
+## Using macOS
 
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers. See the "Installed Software" links in that document for specific information about technical specifications (CPU, RAM, HD) for the VMs running each particular version of Xcode.
 

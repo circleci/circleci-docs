@@ -164,7 +164,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 ## Workflows 
 
 ### Can I use the API with Workflows?
-Not yet, but we are working on that functionality.
+Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
  
 ### Can I use the Auto-cancel feature with Workflows?
 Not yet, but we are working on that functionality.

@@ -363,16 +363,16 @@ Variable                    | Type    | Value
 `CIRCLE_NODE_INDEX`         | Integer | The index of the specific build instance. A value between 0 and (`CIRCLECI_NODE_TOTAL` - 1)
 `CIRCLE_NODE_TOTAL`         | Integer | The number of total build instances.
 `CIRCLE_PR_NUMBER`          | Integer | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
-`CIRCLE_PR_REPONAME`        | String  | The name of the GitHub or Bitbucket respository where the pull request was created. Only available on forked PRs.
+`CIRCLE_PR_REPONAME`        | String  | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
 `CIRCLE_PR_USERNAME`        | String  | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | The number of previous builds on the current branch.
 `CIRCLE_PROJECT_REPONAME`   | String  | The name of the repository of the current project.
-`CIRCLE_PROJECT_USERNAME`   | String  | The name of the current project.
+`CIRCLE_PROJECT_USERNAME`   | String  | The GitHub or Bitbucket username of the current project.
 `CIRCLE_PULL_REQUEST`       | String  | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
 `CIRCLE_PULL_REQUESTS`      | List    | Comma-separated list of URLs of the current build's associated pull requests.
 `CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
-`CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution).
+`CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).
 `CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
