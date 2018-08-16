@@ -46,6 +46,11 @@ If you are **not** using workflows, the `jobs` map must contain a job named
 `build`. This `build` job is the default entry-point for a run that is triggered by a
 push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
+**Note:**
+Jobs have a maximum runtime of 5 hours.
+If your jobs are timing out,
+consider running some of them in parallel.
+
 ### **<`job_name`>**
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
@@ -800,7 +805,7 @@ character-range:
         lo '-' hi matches character c for lo <= c <= hi 
 ``` 
 
-The Go documenation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
+The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
 
 ##### **`attach_workspace`**
 
