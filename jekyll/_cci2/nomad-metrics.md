@@ -194,6 +194,7 @@ Name                                      | Type  | Description
 `circle.nomad.server_agent.jobs.running`  | Gauge | Total number of running jobs across the cluster.
 `circle.nomad.server_agent.jobs.complete` | Gauge | Total number of complete jobs across the cluster.
 `circle.nomad.server_agent.jobs.dead`     | Gauge | Total number of dead jobs across the cluster.
+{: class="table table-striped"}
 
 - The number of jobs in a terminal state (`complete` and `dead`) will typically increase until Nomad garbage-collects the jobs from its state.
 
@@ -214,6 +215,7 @@ Name                                                   | Type  | Description
 `circle.nomad.client_agent.resources.total.iops`       | Gauge | (See below)
 `circle.nomad.client_agent.resources.used.iops`        | Gauge | (See below)
 `circle.nomad.client_agent.resources.available.iops`   | Gauge | (See below)
+{: class="table table-striped"}
 
 - CPU resources are reported in units of MHz.  Memory resources are reported in units of MB.  Disk (capacity) resources are reported in units of MB.
 - Resource metrics are scoped to the Nomad node that nomad-metrics has been configured to poll.  Figures from a single nomad-metrics job operating in `--client` mode are _not_ representative of the entire cluster (Though these timeseries may be aggregated by an external mechanism to arrive at a cluster-wide view.)
