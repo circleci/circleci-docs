@@ -8,7 +8,7 @@ description: "Installing and Configuring Nomad Metrics"
 
 # Configuring Nomad Metrics
 
-Nomad Metrics is a helper service used to collect metrics data from the [Nomad server and clients](https://circleci.com/docs/2.0/nomad/) running on the Services and Builder hosts respectively.  Metrics are collected and sent using the [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) protocol and sent to the Services host.
+Nomad Metrics is a helper service used to collect metrics data from the [Nomad server and clients](https://circleci.com/docs/2.0/nomad/) running on the Services and Nomad Client hosts respectively.  Metrics are collected and sent using the [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) protocol and sent to the Services host.
 
 ## Nomad Metrics Server
 
@@ -16,7 +16,7 @@ The Nomad Metrics container is run on the services host using the server flag an
 
 ## Nomad Metrics Client
 
-The Nomad Metrics client is installed and run on all builder instances.  You will need to update your AWS Launch Configuration in order to install and configure it.  Additionally, you will have to modify the AWS security group to ensure that UDP port 8125 is open on the Services Host.  
+The Nomad Metrics client is installed and run on all Nomad Client instances.  You will need to update your AWS Launch Configuration in order to install and configure it.  Additionally, you will have to modify the AWS security group to ensure that UDP port 8125 is open on the Services Host.  
 
 **NOTE:** Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
 
@@ -53,7 +53,7 @@ The Nomad Metrics client is installed and run on all builder instances.  You wil
 1. Select the `Launch Configurations` link located under `Auto Scaling` in the sidebar to the left.  Select the Launch Configuration you retrieved in the previous steps.
 2. In the description pane at the bottom, select the `Copy launch configuration` button.
 3.  Once the configuration page opens, select `3. Configure details` link located at the top of the page.
-4. Update the `Name` field to something meaningful IE `nomad-builder-with-metrics-lc-DATE`.
+4. Update the `Name` field to something meaningful IE `nomad-client-with-metrics-lc-DATE`.
 5. Select the `Advanced Details` drop down.
 6. Copy and paste the launch configuration script from below in the text field next to `User data`.
 7. **IMPORTANT:** Enter the private IP address of the services box at Line 10. For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`.
@@ -179,7 +179,7 @@ docker run -d --name $CONTAINER_NAME \
 3. In the description box at the bottom, select the `Edit` button
 4. Select the newly created Launch Configuration from the drop-down.
 5. Press the `Save` button.
-6. At this point, the older Nomad client instances will begin shutting down.  They will be replaced with newer Nomad clients running Nomad Metrics.
+6. You will need to terminate the existing Nomad Client instances in order for newer instances with the new Launch Configuration to be created.  Ideally, this should only be done during off-hours or inside of a maintenance window as it could prematurely terminate running jobs.
 
 
 
