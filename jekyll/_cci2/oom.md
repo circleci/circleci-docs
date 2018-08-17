@@ -8,21 +8,20 @@ How to avoid and debug Java memory errors on CircleCI.
 
 ## Overview
 
-By default,
-CircleCI projects build in virtual environments with 4GB of RAM.
-All of your project's processes share this RAM,
-including databases, tests, tools, and frameworks.
-
-One of these frameworks is the [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM).
+The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) is a framework
+used for Android and Java development.
 Without any memory limits,
-the JVM can pre-allocate a significant amount of memory.
-CircleCI uses [cgroups](https://en.wikipedia.org/wiki/Cgroups)
-to allocate resources to individual builds.
-The JVM ignores its individual allocation
-and consumes all available resources,
-resulting in Out of Memory (OOM) errors.
+the JVM pre-allocates a significant amount of memory.
+This pre-allocation can produce Out of Memory (OOM) errors,
+which are difficult
+to debug because the error messages lack detail.
 
-Even when OOM errors appear,
-the error messages lack detail.
-To avoid these errors,
-you can set JVM memory limits.
+To prevent the JVM from pre-allocating too much memory,
+declare memory limits
+[using Java environment variables](#using-java-environment-variables-to-set-memory-limits).
+To debug OOM errors,
+look for the [appropriate exit code](#debugging-java-oom-errors).
+
+## Using Java Environment Variables to Set Memory Limits
+
+## Debugging Java OOM Errors
