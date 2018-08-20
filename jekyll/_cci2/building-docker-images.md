@@ -29,7 +29,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-*Note: `setup_remote_docker` is not curently compatible with the `machine` executor.*
+**Note:** `setup_remote_docker` is not currently compatible with the `machine` or the `macos` executors.
 
 ### Specifications
 
@@ -123,12 +123,16 @@ The currently supported versions are:
 - `17.06.0-ce`
 - `17.06.1-ce`
 - `17.09.0-ce`
+- `18.03.0-ce`
+- `18.03.1-ce`
+- `18.05.0-ce`
 
 [Edge releases](https://download.docker.com/linux/static/edge/x86_64/)
 - `17.05.0-ce`
 - `17.07.0-ce`
 - `17.10.0-ce`
 - `17.11.0-ce`
+- `18.06.0-ce`
 
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
