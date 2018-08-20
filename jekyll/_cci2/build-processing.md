@@ -28,7 +28,6 @@ We are committed to achieving backwards compatibility in almost all cases, and w
 
 - Build processing is **not** fully backwards-compatible with existing API calls to trigger arbitrary jobs
 - The new build triggering API endpoint does **not** accept parameters and workflow or job filters
-- Auto-cancel redundant builds including workflows auto-cancel is **not** yet supported
 - UI for Rerun of a job or rerun the workflow of the job is **not** yet implemented
 
 ## Giving Feedback
