@@ -79,7 +79,7 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 [Go]: {{ site.baseurl }}/2.0/language-go/
 [iOS]: {{ site.baseurl }}/2.0/ios-tutorial/
 [Java]: {{ site.baseurl }}/2.0/language-java/
-[JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
+[NodeJS - JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
 [Python]: {{ site.baseurl }}/2.0/language-python/
 [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
