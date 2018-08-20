@@ -167,7 +167,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
  
 ### Can I use the Auto-cancel feature with Workflows?
-Not yet, but we are working on that functionality.
+Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
 
 ### Can I use `store_test_results` with Workflows?
 You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
