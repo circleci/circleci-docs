@@ -113,7 +113,7 @@ click the **On** button.
 
 Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview [build processing]({{ site.baseurl }}/2.0/build-prcessing/) feature.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview [build processing]({{ site.baseurl }}/2.0/build-processing/) feature.
 
 1. In the CircleCI application,
 go to your project's settings
