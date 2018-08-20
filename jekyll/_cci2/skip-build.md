@@ -93,10 +93,10 @@ when a newer build is triggered on that same branch.
 
 **Note:**
 Your project's default branch will never auto cancel builds.
-This feature only applies to non-workflow builds
-and builds triggered by pushes to GitHub.
+This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new [build processing]({{ site.baseurl }}/2.0/build-prcessing/) feature.
 
-### Steps
+
+### Steps to Enable Auto-Cencel for New Builds Triggered by Pushes to GitHub without Worklfows
 
 1. In the CircleCI application,
 go to your project's settings
@@ -107,3 +107,28 @@ click on **Advanced Settings**.
 
 3. In the **Auto-cancel redundant builds** section,
 click the **On** button.
+
+
+### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
+
+Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
+
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview [build processing]({{ site.baseurl }}/2.0/build-prcessing/) feature.
+
+1. In the CircleCI application,
+go to your project's settings
+by clicking the gear icon next to your project.
+
+2. In the **Build Settings** section,
+click on **Advanced Settings**.
+
+3. In the **Enabling Build Processing (preview)** section, click the **On** button.
+
+4. Commit a change to trigger a build and ensure it runs successfully with the new build processing.
+
+5. In the **Auto-cancel redundant builds** section,
+click the **On** button.
+
+Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
+
+
