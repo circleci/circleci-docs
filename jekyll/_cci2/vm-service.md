@@ -23,6 +23,8 @@ To configure VM service, it is best practice to select the AWS EC2 option in the
 
 If you do not provide a custom [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI) for VM service, `machine` executor and remote Docker jobs on Server will run using the same machine image that we provide by default on Cloud: an Ubuntu 14.04 image with Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with a selection of common languages, tools, and frameworks. See the [`picard-vm-image` branch of our image-builder repository](https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts) for details.
 
+***Note:** the EC2 instance type that you choose for VM Service must support the AWS Elastic Network Adapter. See AWS' [Enhanced Networking on Linux - Amazon Elastic Compute Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html) for a list of supported instance types.*
+
 ## Customization
 
 It may be beneficial to customize the VM service image for your installation of CircleCI; it will allow you to specify other versions of Docker and docker-compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. Without doing so, you will likely need to run these additional install and update steps on every commit as part of your `config.yml` file.
