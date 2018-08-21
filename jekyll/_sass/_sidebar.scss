@@ -1,6 +1,10 @@
 .sidebar-wrapper {
   width: 260px;
   position: relative;
+
+  @media screen and (max-width: $screen-sm) {
+    display: none;
+  }
 }
 
 .sidebar {
@@ -12,7 +16,8 @@
   position: absolute;
   bottom: 0;
 
-  a.active {
+  a.active,
+  .nav-span {
     color: $blue-100;
   }
 
@@ -75,11 +80,57 @@
     padding: 0;
 
     li {
-      a {
+      a, span.nav-span {
         color: $body-text-color;
         margin-left: 30px;
         display: inline-block;
       }
     }
+  }
+}
+
+.sidebar-mobile-wrapper {
+  border-top: 1px solid $gray-200;
+  border-bottom: 1px solid $gray-200;
+  width: 100%;
+  background: $gray-100;
+  display: none;
+  cursor: pointer;
+
+  .mobile-sidebar-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-small-vertical $spacing-medium-horizontal;
+
+    &.hidden {
+      display: none;
+    }
+
+    span {
+      display: inline-block;
+      margin-left: $spacing-small-horizontal;
+    }
+
+    .arrow {
+      float: right;
+      margin-top: 5px;
+      transform: rotate(90deg);
+    }
+  }
+
+  .mobile-sidebar {
+    @extend .sidebar;
+    width: 100%;
+    left: 0;
+    top: 133px;
+    z-index: 2;
+
+    .main-nav-item {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: $screen-sm) {
+    display: block;
   }
 }

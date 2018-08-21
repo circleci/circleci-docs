@@ -1,4 +1,4 @@
-
+<!-- FULL SCREEN /-->
 <div class="sidebar-wrapper">
 	<nav class="sidebar fixed">
 		{% assign sidenav = site.data.sidenav %}
@@ -11,7 +11,11 @@
 							{% asset '{{ main-item.icon }}' class=icon %} 
 						{% endif %}
 						
-						<a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
+						{% if main-item.link %}
+							<a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
+						{% else %}
+							<span class="nav-span">{{ main-item.name}}</span>
+						{% endif %}
 
 						{% if main-item.children %}
 							{% asset docs/arrow-right.svg class=arrow %}

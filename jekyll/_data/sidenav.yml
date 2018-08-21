@@ -9,7 +9,6 @@
           link: /2.0/demo-apps/
 
 - name: Getting Started
-  link: /2.0/
   icon: docs/start.svg
   children: 
     - name: Introduction
@@ -45,7 +44,6 @@
           link: /2.0/config-translation/
 
 - name: Configuration
-  link: /2.0/config-start/
   icon: docs/config.svg
   children: 
     - name: Introduction
@@ -98,7 +96,6 @@
           link: /2.0/docker-compose/
 
 - name: Projects
-  link: /2.0/projects/
   icon: docs/project.svg
   children: 
     - name: settings
@@ -129,7 +126,6 @@
           link: /2.0/docker-layer-caching/
   
 - name: Jobs
-  link: /2.0/build/
   icon: docs/builds.svg
   children: 
     - name: Status
@@ -156,7 +152,6 @@
           link: /2.0/workflows/  
 
 - name: Deployment
-  link: /2.0/deployment/
   icon: docs/deploy.svg
   children: 
     - name: Configuring Deploys
@@ -170,7 +165,6 @@
           link: /2.0/artifactory/
 
 - name: Reference
-  link: /2.0/reference/
   icon: docs/reference.svg
   children: 
     - children:
