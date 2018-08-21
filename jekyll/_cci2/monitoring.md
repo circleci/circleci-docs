@@ -42,6 +42,7 @@ Following are the metrics that are enabled:
 - [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
 - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) 
 - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
+- [Nomad Metrics](https://circleci.com/docs/2.0/nomad-metrics/#statsd-metrics)
 
 
 ## Scheduled Scaling
@@ -62,7 +63,7 @@ There is a [blog post series](https://circleci.com/blog/mathematical-justificati
 This is in contrast to auto scaling throughout the day based on traffic fluctuations because modeling revealed that boot times are actually too long to prevent queuing in real time. Use [Amazon's Step Policy](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html) instructions to set this up along with Cloudwatch Alarms.
 
 
-   
+
 ## Logging For 1.0
 
 Collecting and centralizing logs is an essential component of monitoring.  The
