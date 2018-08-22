@@ -348,7 +348,7 @@ add the following `run` steps:
 steps:
   - run:
       name: Install JUnit coverage reporter
-      run: yarn add --dev jest-junit
+      command: yarn add --dev jest-junit
   - run:
       name: Run tests with JUnit as reporter
       command: jest --ci --reporters=default --reporters=jest-junit

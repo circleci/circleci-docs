@@ -122,7 +122,7 @@ follow:
 
 project:
   url: "/api/v1.1/project/:vcs-type/:username/:project"
-  description: "Build summary for each of the last 30 builds for a single git repo."
+  description: "Build summary for each of the last 30 builds for a single git repo, ordered by build_num."
   method: "GET"
   params:
     - {name: "limit", description: "The number of builds to return. Maximum 100, defaults to 30.", example: 20}

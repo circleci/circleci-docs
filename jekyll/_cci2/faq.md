@@ -73,7 +73,19 @@ The term Enterprise was used to refer to the behind-the-firewall option. However
 
 CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
-## Troubleshooting 
+## Troubleshooting
+
+### Why aren't my jobs running when I push commits?
+
+In the CircleCI application,
+check the Workflows tab
+for error messages.
+More often than not,
+the error is because of formatting errors in your `config.yml` file.
+See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
+
+After checking your `config.yml` for formatting errors,
+search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### What is the difference between a usage queue and a run queue?
 
@@ -155,7 +167,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
  
 ### Can I use the Auto-cancel feature with Workflows?
-Not yet, but we are working on that functionality.
+Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
 
 ### Can I use `store_test_results` with Workflows?
 You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.

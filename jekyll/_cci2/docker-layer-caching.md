@@ -18,13 +18,32 @@ This document offers an overview of Docker Layer Caching (DLC), which can reduce
 
 ## Overview
 
-Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
+Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job. 
 
-Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`)—see [Enabling DLC](#enabling-dlc) for instructions.
+DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
+
+Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
 ### Limitations
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
+
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 
+
+``` YAML
+version: 2 
+jobs: 
+ build: 
+   docker: 
+     # DLC does nothing here, its caching depends on commonality of the image layers.
+     - image: circleci/node:9.8.0-stretch-browsers 
+   steps: 
+     - checkout 
+     - setup_remote_docker: 
+         docker_layer_caching: true 
+     # DLC will explicitly cache layers here and try to avoid rebuilding.
+     - run: docker build .
+``` 
 
 ## Enabling DLC
 
