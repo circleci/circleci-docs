@@ -60,9 +60,8 @@ This Java environment variable takes precedence over all others.
 It is read directly by the JVM
 and overwrites all other Java environment variables,
 including command-line arguments.
-
 Because of this power,
-consider using a more specific Java environment variable
+consider using a more specific Java environment variable.
 
 **Note:**
 `_JAVA_OPTIONS` is exclusive to Oracle.
@@ -73,6 +72,13 @@ if you are using the IBM Java runtime,
 then you would use `IBM_JAVA_OPTIONS`.
 
 ### `JAVA_TOOL_OPTIONS`
+
+This Java environment variable is [a safe choice](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions)
+for setting Java memory limits.
+`JAVA_TOOL_OPTIONS` can be read by all Java virtual machines,
+and you can easily override it
+with command-line arguments
+or more specific environment variables.
 
 ### `JAVA_OPTS`
 
