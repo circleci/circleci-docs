@@ -82,6 +82,10 @@ or more specific environment variables.
 
 ### `JAVA_OPTS`
 
+This Java environment variable is not read by the JVM.
+Instead, several Java-based tools and languages use it
+to pass memory limits to the JVM.
+
 ### `JVM_OPTS`
 
 ### `LEIN_JVM_OPTS`
