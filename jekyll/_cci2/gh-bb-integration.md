@@ -120,6 +120,12 @@ click the **Authorize application** button.
 follow all projects
 you want the machine user to have access to.
 
+5. On the **Project Settings > Checkout SSH keys** page,
+click the **Authorize With GitHub** button.
+This gives CircleCI permission
+to create and upload SSH keys to GitHub
+on behalf of the machine user.
+
 ## Permissions Overview
 
 CircleCI requests the following permissions from your VCS provider,
