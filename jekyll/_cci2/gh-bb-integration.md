@@ -89,9 +89,18 @@ Permission denied (publickey).
 
 ## Machine User Keys
 
-Consider using a machine user's SSH key instead of a regular user's key for automated tasks that may have restricted access to required repos. A [machine user](https://developer.github.com/guides/managing-deploy-keys/#machine-users) is a GitHub user which you create only for automated tasks.  Add a machine user's SSH key to your projects on CircleCI and use that key as the *Checkout SSH key* for these projects, instead of using deploy keys or your own SSH keys.
+For security reasons,
+consider creating a machine user
+for your CircleCI projects.
+A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user
+that you create for running automated tasks.
+By using the SSH key of a machine user,
+you allow anyone with repository access
+to build, test, and deploy the project,
+without sacrificing security.
 
-Here are the steps to set a machine user's SSH key as a checkout key for your project. **Note:** An account with admin privileges of the organization is required to perform these steps.
+To use the SSH key of a machine user,
+follow the steps below.
 
 1. Log in to GitHub as the machine user.
 
@@ -104,6 +113,9 @@ Here are the steps to set a machine user's SSH key as a checkout key for your pr
 5. Click the ***Create and add XXXX user key*** button on the same page.
 
 CircleCI will use the machine user's SSH key for any git commands run during your builds.
+
+**Note:**
+An account with admin privileges of the organization is required to perform these steps.
 
 ## Permissions Overview
 
