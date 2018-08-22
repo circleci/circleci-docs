@@ -1,20 +1,20 @@
 ---
 layout: classic-docs
-title: "Language Guide: JavaScript"
+title: "NodeJS - Javascript Tutorial"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and NodeJS on CircleCI 2.0"
 categories: [language-guides]
 order: 5
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: JavaScript*
+*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > NodeJS - Javascript Tutorial*
 
 If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
 
 * TOC
 {:toc}
 
-## Quickstart: demo JavaScript NodeJS reference project
+## Quickstart: Demo JavaScript NodeJS reference project
 
 We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
 

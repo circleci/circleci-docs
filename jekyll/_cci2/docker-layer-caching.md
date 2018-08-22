@@ -30,7 +30,8 @@ Docker Layer Caching can be used with both the [`machine` executor]({{ site.base
 
 DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 
 
-```version: 2 
+``` YAML
+version: 2 
 jobs: 
  build: 
    docker: 
