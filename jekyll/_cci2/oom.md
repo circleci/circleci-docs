@@ -56,6 +56,22 @@ See the `JVM_OPTS` section below for more details.
 
 ### `_JAVA_OPTIONS`
 
+This Java environment variable takes precedence over all others.
+It is read directly by the JVM
+and overwrites all other Java environment variables,
+including command-line arguments.
+
+Because of this power,
+consider using a more specific Java environment variable
+
+**Note:**
+`_JAVA_OPTIONS` is exclusive to Oracle.
+If you are using a different runtime,
+ensure that you check the name of this variable.
+For example,
+if you are using the IBM Java runtime,
+then you would use `IBM_JAVA_OPTIONS`.
+
 ### `JAVA_TOOL_OPTIONS`
 
 ### `JAVA_OPTS`
