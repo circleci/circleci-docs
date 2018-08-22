@@ -103,6 +103,10 @@ This environment variable is exclusive to `lein`.
 
 ### `GRADLE_OPTS`
 
+This environment variable is exclusive to Gradle projects.
+Use it
+to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
+
 ### `MAVEN_OPTS`
 
 ## Debugging Java OOM Errors
