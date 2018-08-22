@@ -126,6 +126,8 @@ This gives CircleCI permission
 to create and upload SSH keys to GitHub
 on behalf of the machine user.
 
+6. Click the **Create and add XXXX user key** button.
+
 ## Permissions Overview
 
 CircleCI requests the following permissions from your VCS provider,
