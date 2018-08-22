@@ -128,6 +128,10 @@ on behalf of the machine user.
 
 6. Click the **Create and add XXXX user key** button.
 
+Now, CircleCI will use the machine user's SSH key
+for any Git commands
+that run during your builds.
+
 ## Permissions Overview
 
 CircleCI requests the following permissions from your VCS provider,
