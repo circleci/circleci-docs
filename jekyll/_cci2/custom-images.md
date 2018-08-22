@@ -33,8 +33,11 @@ to install them for every job.
 Baking lengthy installation scripts into a custom image
 reduces clutter in your `config.yml` file.
 
-1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
-2. A more concise and easier to maintain CircleCI `config.yml` file
+**Note:**
+When building Docker images,
+CircleCI does not preserve entrypoints by default.
+See [Adding an Entrypoint](#adding-an-entrypoint)
+for more details.
 
 ## CircleCI Dockerfile Wizard 
 
