@@ -99,6 +99,8 @@ use [`_JAVA_OPTIONS`](#_java_options) or [`JAVA_TOOL_OPTIONS`](#java_tool_option
 
 ### `LEIN_JVM_OPTS`
 
+This environment variable is exclusive to `lein`.
+
 ### `GRADLE_OPTS`
 
 ### `MAVEN_OPTS`
