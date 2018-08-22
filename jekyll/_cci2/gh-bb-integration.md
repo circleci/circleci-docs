@@ -88,7 +88,7 @@ Permission denied (publickey).
 
 ## Machine User Keys
 
-For security reasons,
+For fine-grained access to multiple repositories,
 consider creating a machine user
 for your CircleCI projects.
 A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user
