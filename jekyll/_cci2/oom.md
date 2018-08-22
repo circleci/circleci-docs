@@ -54,6 +54,9 @@ this environment variable does not affect `lein`
 or any Java processes launched directly.
 See the `JVM_OPTS` section below for more details.
 
+The above environment variables are listed below,
+along with details on why to choose one over another.
+
 ### `_JAVA_OPTIONS`
 
 This Java environment variable takes precedence over all others.
