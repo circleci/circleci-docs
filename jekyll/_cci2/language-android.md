@@ -254,5 +254,5 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 ## Troubleshooting
 
-See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/oom) document
+See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/oom/) document
 for details on handling Java memory issues.
