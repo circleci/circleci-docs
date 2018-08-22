@@ -195,7 +195,7 @@ You will need to terminate the existing Nomad Client instances in order for inst
 Name                                      | Type  | Description
 ------------------------------------------|-------|-------------
 `circle.nomad.server_agent.poll_failure`  | Gauge | 1 if the last poll of the Nomad agent failed; 0 otherwise.  This gauge is set independent of `circle.nomad.client_agent.poll_failure` when nomad-metrics is operating in `--client` and `--server` modes simultaneously.
-` circle.nomad.server_agent.poll_time` | Guage | Amount of time taken to record a poll. 
+` circle.nomad.server_agent.poll_time`    | Timing| Amount of time taken to record a poll. 
 `circle.nomad.server_agent.jobs.pending`  | Gauge | Total number of pending jobs across the cluster.
 `circle.nomad.server_agent.jobs.running`  | Gauge | Total number of running jobs across the cluster.
 `circle.nomad.server_agent.jobs.complete` | Gauge | Total number of complete jobs across the cluster.
