@@ -29,23 +29,23 @@ to manage JVM memory usage.
 These variables have similar names
 and interact with each other in complicated ways.
 
-The below table shows these environment variables,
+The table below shows these environment variables,
 along with the precedence levels they take
 when using different build tools.
 The lower the number,
 the higher the precedence level,
 with 0 being the highest.
 
-Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein
---------------------------|------|--------|-------|--------|------
-`_JAVA_OPTIONS`           | 0    | 0      | 0     | 0      | 0
-`JAVA_TOOL_OPTIONS`       | 2    | 3      | 2     | 2      | 2
-`JAVA_OPTS`               | no   | 2      | no    | 1      | no
-`JVM_OPTS`                | *    | no     | no    | no     | *
-`LEIN_JVM_OPTS`           | no   | no     | no    | no     | 1
-`GRADLE_OPTS`             | no   | 1      | no    | no     | no
-`MAVEN_OPTS`              | no   | 1      | no    | no     | no
-CLI args                  | 1    | no     | no    | no     | no
+Java Environment Variable                       | Java | Gradle | Maven | Kotlin | Lein
+------------------------------------------------|------|--------|-------|--------|------
+[`_JAVA_OPTIONS`](#_java_options)               | 0    | 0      | 0     | 0      | 0
+[`JAVA_TOOL_OPTIONS`](#java_tool_options)       | 2    | 3      | 2     | 2      | 2
+[`JAVA_OPTS`](#java_opts)                       | no   | 2      | no    | 1      | no
+[`JVM_OPTS`](#jvm_opts)                         | *    | no     | no    | no     | *
+[`LEIN_JVM_OPTS`](#lein_jvm_opts)               | no   | no     | no    | no     | 1
+[`GRADLE_OPTS`](#gradle_opts)                   | no   | 1      | no    | no     | no
+[`MAVEN_OPTS`](#maven_opts)                     | no   | 1      | no    | no     | no
+CLI args                                        | 1    | no     | no    | no     | no
 {:class="table table-striped"}
 
 \* `lein` passes the value of `JVM_OPTS` to the Java process it spawns.
