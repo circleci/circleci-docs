@@ -106,7 +106,8 @@ the machine user must have admin access.
 When you have finished adding projects,
 you can revert the machine user to read-only access.
 
-2. Go to <https://circleci.com> and log in. GitHub will ask you to authorize CircleCI to access the machine user's account, so click on the **Authorize application** button.
+1. Create a machine user
+by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
 
 3. Go to <[https://circleci.com/add-projects](https://circleci.com/add-projects){:rel="nofollow"}> and follow the projects you want the machine user to have access to.
 
