@@ -48,12 +48,6 @@ Java Environment Variable                       | Java | Gradle | Maven | Kotlin
 CLI args                                        | 1    | no     | no    | no     | no
 {:class="table table-striped"}
 
-\* `lein` passes the value of `JVM_OPTS` to the Java process it spawns.
-However,
-this environment variable does not affect `lein`
-or any Java processes launched directly.
-See the `JVM_OPTS` section below for more details.
-
 The above environment variables are listed below,
 along with details on why to choose one over another.
 
