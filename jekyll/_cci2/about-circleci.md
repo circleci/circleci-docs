@@ -7,15 +7,6 @@ categories: [getting-started]
 order: 1
 ---
 
----
-layout: classic-docs
-title: "Overview"
-short-title: "Overview"
-description: "Starting point for CircleCI 2.0 docs"
-categories: [getting-started]
-order: 1
----
-
 *[Basics]({{ site.baseurl }}/2.0/basics/) > Overview*
 
 This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation.
