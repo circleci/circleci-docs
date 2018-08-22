@@ -109,7 +109,7 @@ you can revert the machine user to read-only access.
 1. Create a machine user
 by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
 
-3. Go to <[https://circleci.com/add-projects](https://circleci.com/add-projects){:rel="nofollow"}> and follow the projects you want the machine user to have access to.
+2. Log in to GitHub as the machine user.
 
 4. Go to the **Project Settings > Checkout SSH keys** page and then click on the ***Authorize w/GitHub*** button to give CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
