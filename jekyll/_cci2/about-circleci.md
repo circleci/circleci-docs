@@ -25,7 +25,7 @@ This document provides a summary of continuous integration and how CircleCI enab
 **CircleCI** - Our mission is to empower technology-driven organizations to do their best work.  
 We want to make engineering teams more productive through intelligent automation.
 
-*CircleCI provides Enterprise-class support and services, with the flexibility of a startup.  
+CircleCI provides enterprise-class support and services, with the flexibility of a startup.  
 We work where you work: Linux, macOS, Android - SaaS or behind your firewall.  
 
 ![CircleCI about image]( {{ site.baseurl }}/assets/img/docs/arch.png)
