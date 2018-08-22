@@ -8,8 +8,7 @@ How to avoid and debug Java memory errors on CircleCI.
 
 ## Overview
 
-The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) is a framework
-used for Android and Java development.
+The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications.
 Without any memory limits,
 the JVM pre-allocates a significant amount of memory.
 This pre-allocation can produce Out of Memory (OOM) errors,
