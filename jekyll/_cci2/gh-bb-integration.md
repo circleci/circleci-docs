@@ -116,6 +116,10 @@ When GitHub prompts you
 to authorize CircleCI,
 click the **Authorize application** button.
 
+4. On the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page,
+follow all projects
+you want the machine user to have access to.
+
 ## Permissions Overview
 
 CircleCI requests the following permissions from your VCS provider,
