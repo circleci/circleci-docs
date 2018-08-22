@@ -114,3 +114,17 @@ Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ## Debugging Java OOM Errors
+
+Unfortunately,
+debugging Java OOM errors often comes down
+to finding an `exit code 137` in your error output.
+
+Fortunately, Oracle is aware of these challenges
+and [has added command-line options](https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits).
+Ensure that your `-Xmxn` maximum size is large enough
+for your applications to completely build,
+while small enough
+that other processes can share the remaining memory of your CircleCI build container.
+
+If you are still consistently hitting memory limits,
+consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
