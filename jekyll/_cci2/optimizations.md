@@ -10,6 +10,8 @@ Get started with speeding up your job runs, workflows, and image builds with the
 
 ## Caching Dependencies     
 
+{% raw %}
+
 ```
     steps: # a collection of executable commands
       - checkout # special step to check out source code to the working directory
@@ -25,6 +27,8 @@ Get started with speeding up your job runs, workflows, and image builds with the
           paths:
             - "venv"
 ```            
+
+{% endraw %}
 
 ## Parallelism
 
