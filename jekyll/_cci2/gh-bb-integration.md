@@ -86,7 +86,6 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
-
 ## Machine User Keys
 
 For security reasons,
@@ -98,11 +97,14 @@ By using the SSH key of a machine user,
 you allow anyone with repository access
 to build, test, and deploy the project
 without sacrificing security.
-
 To use the SSH key of a machine user,
 follow the steps below.
 
-1. Log in to GitHub as the machine user.
+**Note:**
+To perform these steps,
+the machine user must have admin access.
+When you have finished adding projects,
+you can revert the machine user to read-only access.
 
 2. Go to <https://circleci.com> and log in. GitHub will ask you to authorize CircleCI to access the machine user's account, so click on the **Authorize application** button.
 
