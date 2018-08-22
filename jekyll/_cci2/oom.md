@@ -109,4 +109,8 @@ to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ### `MAVEN_OPTS`
 
+This environment variable is exclusive to Apache Maven projects.
+Use it
+to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
+
 ## Debugging Java OOM Errors
