@@ -96,7 +96,7 @@ A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#ma
 that you create for running automated tasks.
 By using the SSH key of a machine user,
 you allow anyone with repository access
-to build, test, and deploy the project,
+to build, test, and deploy the project
 without sacrificing security.
 
 To use the SSH key of a machine user,
