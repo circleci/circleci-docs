@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Continuous Deployment with npm"
 description: "How to configure CircleCI to publish packages to npmjs.org automatically."
+sitemap: false
 ---
 
 Setting up CircleCI to publish packages to the npm registry makes it easy for project collaborators to release new package versions in a consistent and predictable way.
