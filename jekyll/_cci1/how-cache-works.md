@@ -3,6 +3,7 @@ layout: classic-docs
 title: Caching in CircleCI
 categories: [optimization]
 description: "How caching works on CircleCI 1.0"
+sitemap: false
 ---
 
 When we talk about caching on CircleCI, we're usually talking about the dependency cache. Dependency caching saves the state of your dependencies between builds, thereby making them run faster.
