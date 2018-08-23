@@ -4,6 +4,7 @@ title: Setting up parallelism
 categories: [parallelism]
 description: Setting up parallelism
 order: 20
+sitemap: false
 ---
 
 This guide assumes you already have a green build without parallelism. If you haven't set up your project yet, check out [getting started guide]({{ site.baseurl }}/1.0/getting-started/).
