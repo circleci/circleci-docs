@@ -4,6 +4,7 @@ title: "CircleCI 1.0 Continuous Integration and Continuous Deployment with Node.
 short-title: "Node.js"
 categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Node.js"
+sitemap: false
 ---
 
 CircleCI has great support for Node.js applications.
