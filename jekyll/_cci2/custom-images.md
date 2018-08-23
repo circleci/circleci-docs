@@ -30,8 +30,8 @@ removes the need
 to install them for every job.
 
 - **Cleaner configuration --**
-Baking lengthy installation scripts into a custom image
-reduces clutter in your `config.yml` file.
+Adding lengthy installation scripts to a custom image
+reduces the number of lines in your `config.yml` file.
 
 **Note:**
 When building Docker images,
