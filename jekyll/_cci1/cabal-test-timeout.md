@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Unexpected Timeouts During `cabal test`
 description: What to do during unexpected time outs
+sitemap: false
 ---
 
 By default, CircleCI times out tests if they have not produced output for 600
