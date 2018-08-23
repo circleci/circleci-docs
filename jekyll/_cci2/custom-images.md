@@ -16,8 +16,8 @@ This document describes how to create and use custom Docker images with CircleCI
 
 ## Overview
 
-Docker is a first-class citizen in CircleCI
-and provides you with a powerful way
+CircleCI supports Docker,
+providing you with a powerful way
 to specify dependencies for your projects.
 If CircleCI's [convenience images]({{ site.baseurl }}/2.0/circleci-images/) do not suit your needs,
 consider creating a custom Docker image for your jobs.
