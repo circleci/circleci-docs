@@ -4,6 +4,7 @@ title: macOS Build Images
 categories: [build-images]
 description: macOS
 changefreq: "weekly"
+sitemap: false
 ---
 
 CircleCI will try to run your build on macOS if we can detect an Xcode project.
