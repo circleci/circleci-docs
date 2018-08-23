@@ -24,12 +24,12 @@ consider creating a custom Docker image for your jobs.
 There are two major benefits
 of doing this:
 
-- **Faster job execution.**
+- **Faster job execution --**
 Packaging your required tools into a custom image
 removes the need
 to install them for every job.
 
-- **Cleaner configuration.**
+- **Cleaner configuration --**
 Baking lengthy installation scripts into a custom image
 reduces clutter in your `config.yml` file.
 
