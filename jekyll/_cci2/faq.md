@@ -23,7 +23,7 @@ to look at your code
 to help you debug the problem.
 See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
 
-## Migration and Hosting
+## Migration
 
 ### Why Migrate from CircleCI 1.0 to 2.0?
 
@@ -67,6 +67,8 @@ The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same conten
 The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
 
 Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
+
+## Hosting
 
 ### Is CircleCI 2.0 available to enterprise clients?
 
