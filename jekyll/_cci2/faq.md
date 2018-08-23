@@ -12,6 +12,17 @@ order: 1
 * Contents
 {:toc}
 
+## General
+
+### Does CircleCI look at my code?
+
+CircleCI employees never look at your code without permission.
+If you have requested support,
+a support engineer may ask permission
+to look at your code
+to help you debug the problem.
+See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
+
 ## Migration and Hosting
 
 ### Why Migrate from CircleCI 1.0 to 2.0?
