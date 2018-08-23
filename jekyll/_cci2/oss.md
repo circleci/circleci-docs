@@ -93,14 +93,8 @@ Projects often contain sensitive information,
 and this information is freely available to anyone
 who can push code that triggers a build.
 
-By default, CircleCI passes secrets to builds from forked PRs.
-If you are uncomfortable sharing secrets with anyone who forks your project and opens a PR,
-you can disable this option.
-In the **Advanced Settings** of your project,
-set the **Pass secrets to builds from forked pull requests** option to _Off_.
-
-When this setting is disabled,
-CircleCI hides four types of configuration data:
+By default, CircleCI does not pass secrets to builds from forked PRs for open source projects
+and hides four types of configuration data:
 
 - [Environment variables](#private-environment-variables) set through the application.
 
@@ -112,9 +106,13 @@ to access arbitrary hosts during a build.
 - [AWS permissions]({{ site.baseurl }}/2.0/deployment-integrations/#aws) and configuration files.
 
 **Note:**
-If this setting is disabled,
-forked PR builds that require secrets
-will not run successfully on CircleCI.
+Forked PR builds of open source projects that require secrets
+will not run successfully on CircleCI until you enable this setting.
+
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR,
+you can enable the **Pass secrets to builds from forked pull requests** option.
+In the **Advanced Settings** of your project,
+set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ## Example Open Source Projects 
 
