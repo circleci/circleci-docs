@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Storing and Accessing Build Artifacts"
-short-title: "Storing and Accessing Build Artifacts"
+title: "Storing Build Artifacts"
+short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 70
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Storing and Accessing Build Artifacts*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Storing Build Artifacts*
 
 This document describes how to work with Artifacts in the following sections:
 
