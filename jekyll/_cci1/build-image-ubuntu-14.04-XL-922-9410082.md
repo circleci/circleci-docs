@@ -4,6 +4,7 @@ title: ubuntu-14.04-XL-922-9410082
 categories: [build-images-2-0]
 description: ubuntu-14.04-XL-922-9410082
 changefreq: "weekly"
+sitemap: false
 ---
 
 ***Please note that we are planning to make the image deprecated on CircleCI 2.0 in the future.***
