@@ -21,11 +21,12 @@ If you have requested support,
 a support engineer may ask permission
 to look at your code
 to help you debug the problem.
+
 See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
 
 ## Migration
 
-### Why Migrate from CircleCI 1.0 to 2.0?
+### Why migrate from CircleCI 1.0 to 2.0?
 
 - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
 - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
