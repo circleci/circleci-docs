@@ -4,6 +4,7 @@ title: Using CircleCI with Phabricator
 categories: [how-to]
 description: Configuring Phabricator to work with CircleCI
 last_updated: Apr 4, 2015
+sitemap: false
 ---
 This document describes how to set up a GitHub repository that uses Phabricator to notify CircleCI to run a build. For example, after completing this setup, you can push a diff to Phabricator and Arcanist will trigger a push to a GitHub tag and Harbormaster will notify CircleCI to run a build.
 

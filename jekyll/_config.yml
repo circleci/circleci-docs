@@ -9,6 +9,13 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 
+plugins: 
+  - jekyll-assets
+  - jekyll-sitemap
+
+sass:
+  sass_dir: _sass
+
 markdown: kramdown
 kramdown:
   input: GFM

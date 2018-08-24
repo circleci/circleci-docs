@@ -3,6 +3,7 @@ layout: classic-docs
 title: Nightly Builds
 categories: [reference]
 description: Nightly Builds
+sitemap: false
 ---
 
 The [Parameterized Build API]( {{ site.baseurl }}/1.0/parameterized-builds/)

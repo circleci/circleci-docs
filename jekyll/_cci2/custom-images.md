@@ -16,10 +16,28 @@ This document describes how to create and use custom Docker images with CircleCI
 
 ## Overview
 
-CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
+CircleCI supports Docker,
+providing you with a powerful way
+to specify dependencies for your projects.
+If the [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) do not suit your needs,
+consider creating a custom Docker image for your jobs.
+There are two major benefits
+of doing this:
 
-1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
-2. A more concise and easier to maintain CircleCI `config.yml` file
+- **Faster job execution --**
+Packaging your required tools into a custom image
+removes the need
+to install them for every job.
+
+- **Cleaner configuration --**
+Adding lengthy installation scripts to a custom image
+reduces the number of lines in your `config.yml` file.
+
+**Note:**
+When building Docker images,
+CircleCI does not preserve entrypoints by default.
+See [Adding an Entrypoint](#adding-an-entrypoint)
+for more details.
 
 ## CircleCI Dockerfile Wizard 
 

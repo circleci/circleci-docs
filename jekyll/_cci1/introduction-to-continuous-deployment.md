@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Introduction to Continuous Deployment
 description: Introduction to Continuous Deployment
+sitemap: false
 ---
 
 CircleCI enables you to automatically deploy after green builds.
