@@ -1,13 +1,11 @@
 ---
 layout: classic-docs
-title: "Jobs and Steps"
-short-title: "Jobs and Steps"
+title: "Jobs, Steps, and Workflows"
+short-title: "Jobs, Steps, and Workflows"
 description: "Description of Jobs and Steps"
 categories: [migration]
 order: 2
 ---
-
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Jobs and Steps*
 
 New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
 
