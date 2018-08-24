@@ -3,6 +3,7 @@ layout: classic-docs
 title: Failed to build gem native extension
 description: Gem::Ext::BuildError Failed to build gem native extension
 last_updated: May 6, 2017
+sitemap: false
 ---
 
 When your build is running during the `bundle install` step, you might see an error like this:

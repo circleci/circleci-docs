@@ -3,6 +3,7 @@ layout: classic-docs
 title: GitHub security and SSH keys
 description: GitHub security and SSH keys
 last_updated: May 1, 2013
+sitemap: false
 ---
 
 GitHub has two different SSH keys&mdash;a _deploy_ key and a _user_ key.

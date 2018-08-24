@@ -3,6 +3,7 @@ layout: classic-docs
 title: Migrating from Jenkins to CircleCI
 categories: [migration]
 description: Migrating from Jenkins to CircleCI
+sitemap: false
 ---
 
 Jenkins is a very popular open-source CI tool, so many users that are new to CircleCI have used it at some point. This document provides the basics that a longtime Jenkins user needs to know when making the switch.
