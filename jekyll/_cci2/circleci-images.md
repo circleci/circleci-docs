@@ -23,13 +23,6 @@ All of these pre-built images are available in the [CircleCI org on Docker Hub](
 Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/circleci/circleci-images).
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
 
-For a brief overview,
-watch the video below.
-
-<div class="video-wrapper">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
-</div>
-
 ## Best Practices
 
 Convenience images are based on the most recently built versions of upstream images,
@@ -56,6 +49,7 @@ to pin an image to a version or operating system (OS).
 to pin an image to a fixed version.
 
 ### Using an Image Tag to Pin an Image Version or OS
+{:.no_toc}
 
 You can pin aspects of a Docker image
 by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
@@ -80,6 +74,7 @@ it is best practice
 to add an explicit image tag.
 
 ### Using a Docker Image ID to Pin an Image to a Fixed Version
+{:.no_toc}
 
 Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
 You can use this image ID
@@ -93,6 +88,7 @@ sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
 ```
 
 #### Finding an Image ID
+{:.no_toc}
 
 1. In the CircleCI application,
 go to a past build
@@ -120,6 +116,7 @@ it is [best practice](#best-practices)
 to use a more specific tag.
 
 ### Language Images
+{:.no_toc}
 
 Language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
@@ -144,6 +141,7 @@ CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public
 you can use to create a custom image.
 
 #### Language Image Variants
+{:.no_toc}
 
 CircleCI maintains several variants for language images.
 To use these variants,
@@ -159,6 +157,7 @@ to add browsers to the `circleci/golang:1.9` image,
 use the `circleci/golang:1.9-browsers` image.
 
 ### Service Images
+{:.no_toc}
 
 Service images are convenience images for services like databases.
 These images should be listed **after** language images
@@ -173,6 +172,7 @@ CircleCI maintains images for the services below.
 - [PostgreSQL](#postgresql)
 
 #### Service Image Variant
+{:.no_toc}
 
 CircleCI maintains only one variant for service images.
 To speed up builds
