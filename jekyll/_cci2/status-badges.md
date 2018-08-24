@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Adding Build Status Badges
+title: Adding Status Badges
 ---
 
 [Basics]({{ site.baseurl }}/2.0/basics/) > Adding Status Badges
