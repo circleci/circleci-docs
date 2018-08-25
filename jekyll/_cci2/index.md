@@ -21,7 +21,7 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
     <td>Get started with CircleCI automated builds.</td>
     <td>Check out some of our popular examples.</td>
   </tr>
-	<p>
+	
   <tr>
     <td><ul><li><a href="/docs/2.0/">Quick Start</a></li>
 		<li><a href="/docs/2.0/">Sign Up & Try</a></li>
