@@ -5,8 +5,6 @@ description: "Welcome to CircleCI Documentation"
 permalink: /2.0/
 ---
 
-<h1>Welcome to CircleCI Documentation</h1>
-
 Welcome to CircleCI documentation! Included here are tutorials, samples, and reference documentation for CircleCI.
 
 <hr>
@@ -23,8 +21,8 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
   </tr>
 	
   <tr>
-    <td><ul><li><a href="/docs/2.0/">Quick Start</a></li>
-		<li><a href="/docs/2.0/">Sign Up & Try</a></li>
+    <td><ul>
+		<li><a href="/docs/2.0/first-steps/">Sign Up & Try</a></li>
 		<li><a href="/docs/2.0/getting-started/">Your First Green Build</a></li>
 		<li><a href="/docs/2.0/hello-world/">Hello World</a></li>
 		<li><a href="/docs/2.0/faq/">FAQ</a></li>
@@ -33,6 +31,7 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 		<li><a href="/docs/2.0/postgres-config">Database Config Examples</a></li>
 		<li><a href="/docs/2.0/sample-config/">Sample config.yml Files</a></li>
 		<li><a href="/docs/2.0/tutorials/">Tutorials and Sample Apps</a></li>
+	        </ul></td>
   </tr>
 </table>
 </div>
@@ -61,6 +60,7 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 		<li><a href="/docs/2.0/workflows/#troubleshooting">Troubleshooting</a></li>
 		<li><a href="/docs/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
 		<li><a href="/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
+	    </ul></td>
   </tr>
 </table>
 </div>
