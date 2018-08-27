@@ -57,7 +57,7 @@ which is automatically injected
 into your build at run-time.
 
 To install the CLI locally,
-see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
+see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
 ### Globbing Test Files
 

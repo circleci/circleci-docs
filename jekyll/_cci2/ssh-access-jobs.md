@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Debugging Jobs Over SSH"
-short-title: "Debugging Jobs Over SSH"
+title: "Debugging with SSH"
+short-title: "Debugging with SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"
 categories: [troubleshooting]
 order: 20
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Debugging Jobs Over SSH*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Debugging with SSH*
 
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 

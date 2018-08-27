@@ -3,6 +3,7 @@ layout: classic-docs
 title: "How to Use Private npm Modules with CircleCI"
 short-title: "Private npm Modules"
 description: "How to authenticate with a npm registry so that you can use private npm modules on CircleCI."
+sitemap: false
 ---
 
 ## Authenticating
