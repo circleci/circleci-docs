@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Migration"
+title: "Tips for Migrating to 2.0"
 description: "Tips for Migrating from 1.0 to CircleCI 2.0 Config"
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "2.0 Sample Applications"
-short-title: "Demo App Index"
+title: "Supported Languages"
+short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"
 categories: [language-guides]
 order: 0

@@ -18,9 +18,81 @@ The `circleci` commands enable you to reproduce the CircleCI environment locally
 
 You can also run `circleci` commands in your `config.yml` file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers. 
 
-**Note:** The Local CLI does not yet support Workflows.
+**Note:** There are currently two versions of the CLI that you may install. The Local CLI available at [https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci] is an older version that does not yet support Workflows.
+The Local CLI version available at [https://github.com/CircleCI-Public/circleci-cli] has a different set of options, some of which are still in active development, and will be the replacement for the old CLI.
 
-## Installing the CircleCI Local CLI on macOS and Linux Distros
+## Updating to the CircleCI-Public CLI
+
+The CLI upgrade provides additional functionality through a totally new CLI developed as a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you already have installed the circle-downloads CLI previously, run the following commands to update and switch:
+
+```
+circleci update
+circleci switch
+```
+
+This command may prompt you for `sudo` if your user doesn't have write permissions to the install directory, `/usr/local/bin`.
+
+## Installing the CircleCI-Public CLI From Scratch
+
+If you haven't already installed `circleci` on your machine, run the following command to install the CircleCI-Public CLI:
+
+```
+curl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh \
+	--fail --show-error | bash
+```
+
+The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory.
+
+If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.
+
+### Configure the CLI
+
+You may first need to generate a CircleCI API Token from the [Personal API Token tab](https://circleci.com/account/api).
+
+```
+$ circleci setup
+```
+
+If you are using this tool on `circleci.com`, accept the provided default `CircleCI API End Point`. If you are using it on you private installation of CircleCI with an administrative console, change the value to your installation address (for example, `circleci.my-org.com`).
+
+
+## Validate A Build Config
+
+To ensure that the tool is installed, you can use it to validate a build config file.
+
+1. Change to the root directory of your CIrcleCI project repository.
+
+2. Run the following command:
+
+```
+$ circleci config validate
+Config file at .circleci/config.yml is valid
+```
+
+## Run a Job in a Container on the Local Machine
+
+```
+$ circleci local execute [flags]
+```
+
+Flags
+
+```
+      --branch string         Git branch
+      --checkout-key string   Git Checkout key (default "~/.ssh/id_rsa")
+  -c, --config string         config file (default ".circleci/config.yml")
+  -e, --env -e VAR=VAL        Set environment variables, e.g. -e VAR=VAL
+  -h, --help                  help for execute
+      --index int             node index of parallelism
+      --job string            job to be executed (default "build")
+      --node-total int        total number of parallel nodes (default 1)
+      --repo-url string       Git Url
+      --revision string       Git Revision
+      --skip-checkout         use local path as-is (default true)
+  -v, --volume strings        Volume bind-mounting
+```  
+
+## Installing the circle-downloads Local CLI on macOS and Linux Distros
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/engine/installation/).
 
@@ -34,7 +106,7 @@ The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do 
 
 ## [Alternative] Installing Ubuntu 16.04 or Ubuntu 17.04+
 
-With Ubuntu, you can optionally install by using Snap. The following commands give you the CircleCI Local CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://www.ubuntu.com/desktop/snappy).
+With Ubuntu, you can optionally install by using Snap. The following commands give you the circle-downloads Local CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://www.ubuntu.com/desktop/snappy).
 
 ```
 sudo snap install docker circleci
@@ -43,9 +115,10 @@ sudo snap connect circleci:docker docker
 
 **Note:** With snap packages, the `docker` command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
 
-### Validating 2.0 YAML Syntax
+### Validating 2.0 YAML Syntax with the circleci-downloads CLI
 
 1. Type `circleci` with one of six available commands (`build`, `config`, `help`, `step`, `tests`, and `version`) followed by a valid flag. For example:
+
 ```
 $ circleci config validate -c .circleci/config.yml
 ```

@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Embedding Build Status Badges
+title: Adding Status Badges
 ---
 
-[Basics]({{ site.baseurl }}/2.0/basics/) > Embedding Build Status Badges
+[Basics]({{ site.baseurl }}/2.0/basics/) > Adding Status Badges
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
