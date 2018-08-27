@@ -66,13 +66,13 @@
   .nav-item {
     text-transform: uppercase;
     font-size: $font-size-micro;
-    font-weight: 100;
+    font-weight: 600;
     margin: 10px 0;
     letter-spacing: .5px;
   }
   .subnav-item {
     font-weight: 100;
-    margin: 5px 0;
+    margin: 5px 0 5px $spacing-medium-horizontal;
   }
 
   ul {
