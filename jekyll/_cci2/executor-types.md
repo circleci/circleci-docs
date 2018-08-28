@@ -16,7 +16,7 @@ This document describes the `docker`, `machine`, and `macos` environments in the
 ## Overview
 {:.no_toc}
 
-This version of CircleCI enables you to run jobs in one of three environments: using Docker images, using a dedicated Linux VM image, or using a macOS VM image.
+CircleCI enables you to run jobs in one of three environments: using Docker images, using a dedicated Linux VM image, or using a macOS VM image.
 
 For building on Linux, there are tradeoffs to `docker` versus `machine`, as follows:
 
