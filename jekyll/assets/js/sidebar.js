@@ -13,9 +13,9 @@
     var section = getUrlVars(window.location.hash);
     localStorage.sidenavActive = section['section']
   }
+
   if (localStorage.sidenavActive) {
     // fullscreen sidenav expansion
-
     function sidenavAutoExpand (parent) {
       var element = parent.querySelector('[data-section=' + localStorage.sidenavActive + ']');
       if (element.classList.contains('closed')) {
@@ -42,8 +42,6 @@
       mobileSidebarDisplay.classList.add('hidden');
     }
   });
-
-
 
   function setSidebar () {
     // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)

@@ -5,7 +5,6 @@
 		{% assign current_url = page.url | slice: 1, page.url.size %}
 
 		{% for main-item in sidenav %}
-		  {% assign current_url = page.url | slice: 1, page.url.size %}
 			<ul>
 				<li class="main-nav-item closed" data-section="{{ main-item.name | slugify }}">
 					<div class="list-wrap">
