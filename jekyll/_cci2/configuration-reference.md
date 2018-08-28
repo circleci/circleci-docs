@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 20
 ---
 
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Configuring CircleCI*
-
 This document is a reference for the CircleCI 2.0 configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
 
 You can see a complete `config.yml` in our [full example](#full-example).
@@ -1173,3 +1171,8 @@ workflows:
 ```
 
 {% endraw %}
+
+## See Also
+{:.no_toc}
+
+[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
