@@ -7,7 +7,11 @@ description: "Collecting test metadata"
 order: 34
 ---
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. To see test result as artifacts, upload them using the `store_artifacts` step.
+CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. 
+
+* TOC {:toc}
+
+To see test result as artifacts, upload them using the `store_artifacts` step.
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the application to identify flaky tests and isolate recurring issues.
 
@@ -95,7 +99,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           path: ~/cucumber      
 ```
 
-#### Maven Surefire Plugin for Java JUnit results
+#### Maven Surefire Plugin for Java JUnit Results
 {:.no_toc}
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the
@@ -118,7 +122,7 @@ project.
           path: ~/junit         
 ```
 
-#### <a name="gradle-junit-results"></a>Gradle JUnit Test results
+#### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
 {:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/),
@@ -292,7 +296,7 @@ And modify your test command to this:
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### test2junit for Clojure tests
+#### test2junit for Clojure Tests
 {:.no_toc}
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
@@ -369,7 +373,7 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
-## Merging test suites together
+## Merging Test Suites Together
 
 If you have multiple JUnit test reports from running more than one test suite or runner, you can merge them together using the third-party NodeJS CLI tool, [junit-merge](https://www.npmjs.com/package/junit-merge).
 
