@@ -6,8 +6,7 @@ description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
 ---
- 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using the API to Trigger Jobs*
+
  
 This document describes
 how to trigger jobs using the CircleCI API.
@@ -99,3 +98,7 @@ Notes on the above example:
 
 - Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
+
+## See Also
+
+[Triggers]({{ site.baseurl }}/2.0/triggers/)
