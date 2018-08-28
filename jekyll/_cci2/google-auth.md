@@ -6,8 +6,6 @@ categories: [deploying]
 order: 100
 ---
 
-*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authorizing the Google Cloud SDK*
-
 This document explains
 how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
@@ -15,6 +13,7 @@ how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 The Google Cloud SDK is a powerful set of tools
 that can be used to access Google Cloud Platform (GCP) services
@@ -23,11 +22,10 @@ On CircleCI, the Google Cloud SDK is recommended
 to deploy your application to GCP products.
 
 ## Prerequisites
+{:.no_toc}
 
 - A CircleCI 2.0 project.
 - A GCP project.
-
-## Steps
 
 ### Installing the Google Cloud SDK
 
