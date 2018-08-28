@@ -134,7 +134,7 @@ Now, CircleCI will use the machine user's SSH key
 for any Git commands
 that run during your builds.
 
-## Permissions and Account Troubleshooting
+## Permissions Overview
 
 CircleCI requests the following permissions from your VCS provider,
 as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
