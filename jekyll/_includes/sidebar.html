@@ -2,6 +2,7 @@
 <div class="sidebar-wrapper">
 	<nav class="sidebar fixed">
 		{% assign sidenav = site.data.sidenav %}
+		{% assign current_url = page.url | slice: 1, page.url.size %}
 
 		{% for main-item in sidenav %}
 			<ul>
@@ -12,7 +13,7 @@
 						{% endif %}
 						
 						{% if main-item.link %}
-							<a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
+							<a class="{% if current_url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
 						{% else %}
 							<span class="nav-span">{{ main-item.name}}</span>
 						{% endif %}
@@ -26,13 +27,13 @@
 					<ul class="subnav">
 						{% for item in main-item.children %}
 						  {% if item.name %}
-								<li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ item.name }}</a></li>
+								<li class="nav-item"><a class="{% if current_url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ item.name }}</a></li>
 							{% endif %}
 
 							{% if item.children %}
 								<ul>
 									{% for sub-item in item.children %}
-										<li class="subnav-item"><a class="{% if page.url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ sub-item.name }}</a></li>
+										<li class="subnav-item"><a class="{% if current_url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ sub-item.name }}</a></li>
 									{% endfor %}
 								</ul>
 							{% endif %}

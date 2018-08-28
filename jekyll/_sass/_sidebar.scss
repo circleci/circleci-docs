@@ -1,3 +1,5 @@
+$sidebar-spacing-base: 5px;
+
 .sidebar-wrapper {
   width: 260px;
   position: relative;
@@ -44,7 +46,7 @@
     .arrow {
       position: absolute;
       right: 0;
-      top: 4px;
+      top: $sidebar-spacing-base;
       transform: rotate(90deg);
       transition: transform 400ms;
     }
@@ -66,13 +68,13 @@
   .nav-item {
     text-transform: uppercase;
     font-size: $font-size-micro;
-    font-weight: 100;
+    font-weight: $font-weight-bold;
     margin: 10px 0;
     letter-spacing: .5px;
   }
   .subnav-item {
     font-weight: 100;
-    margin: 5px 0;
+    margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-medium-horizontal;
   }
 
   ul {
