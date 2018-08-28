@@ -109,11 +109,6 @@ jobs:
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 ```
 
-**Note:**
-To use certain services (like Google Cloud Datastore),
-you will also need
-to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
-
 ### Authorizing the Google Cloud SDK
 
 Use `gcloud` to authorize the Google Cloud SDK
@@ -143,3 +138,9 @@ by adding the following command before authorizing the SDK.
 ```bash
 sudo gcloud --quiet components update
 ```
+
+## Adding Credentials for Server Applications
+
+To use certain services (like Google Cloud Datastore),
+you will also need
+to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
