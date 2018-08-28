@@ -3,6 +3,7 @@ layout: classic-docs
 title: Does CircleCI look at my code?
 categories: [privacy-and-security]
 description: CircleCI security policy issues
+sitemap: false
 ---
 
 Nobody from CircleCI manually looks at your code, without permission.

@@ -4,6 +4,7 @@ title: CircleCI 1.0 Continuous Deployment with AWS CodeDeploy
 categories: [how-to]
 description: Continuous Deployment with AWS CodeDeploy
 last_updated: September 29, 2014
+sitemap: false
 ---
 
 ## Getting Started with CodeDeploy on CircleCI

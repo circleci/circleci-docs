@@ -3,6 +3,7 @@ layout: classic-docs
 title: Pushing packages to packagecloud
 categories: [how-to]
 description: How to push packages to packagecloud
+sitemap: false
 ---
 
 [packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host apt, yum and rubygem repositories without any pre-configuration.

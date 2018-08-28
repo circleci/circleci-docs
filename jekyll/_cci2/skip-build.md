@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: Skipping and Cancelling Builds
-short-title: Skipping and Cancelling Builds
+title: Skip and Cancel Builds
+short-title: Skip and Cancel Builds
 description: How to Prevent CircleCI From Automatically Building
 categories: [configuring-jobs]
 order: 100
 ---
 
-_[Basics]({{ site.baseurl }}/2.0/basics/) > Skipping a Build_
+_[Basics]({{ site.baseurl }}/2.0/basics/) > Skip and Cancel Builds_
 
 This document describes how to
 skip or cancel builds in the following sections.

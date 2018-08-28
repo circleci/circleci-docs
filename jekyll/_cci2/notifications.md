@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Enabling Web and Email Notifications"
-short-title: "Enabling Web, Email, and Chat Notifications"
+title: "Using Notifications"
+short-title: "Using Notifications"
 categories: [configuring-jobs]
 order: 100
 published: true

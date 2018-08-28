@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Running Jobs With the API"
-short-title: "Running Jobs With the API"
+title: "Using the APi to Trigger Jobs"
+short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
 ---
  
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Running Jobs With the API*
+*[Basics]({{ site.baseurl }}/2.0/basics/) > Using the API to Trigger Jobs*
  
 This document describes
 how to trigger jobs using the CircleCI API.

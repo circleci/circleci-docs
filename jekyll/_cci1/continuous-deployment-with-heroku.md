@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Deployment with Heroku
 categories: [how-to]
 description: Continuous Deployment with Heroku
+sitemap: false
 ---
 
 ## Quick start videos
