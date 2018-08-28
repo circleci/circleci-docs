@@ -55,10 +55,9 @@ Using this particular name is not required,
 but it will be used throughout the examples in this document.
 
 3. For convenience, add three more environment variables to your CircleCI project:
+    - `GOOGLE_APPLICATION_CREDENTIALS`: `${HOME}/gcloud-service-key.json`
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
-    - `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments.
-
 
 ### Authenticating to Google Container Registry
 
@@ -138,9 +137,3 @@ by adding the following command before authorizing the SDK.
 ```bash
 sudo gcloud --quiet components update
 ```
-
-## Adding Credentials for Server Applications
-
-To use certain services (like Google Cloud Datastore),
-you will also need
-to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
