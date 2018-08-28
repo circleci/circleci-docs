@@ -13,9 +13,9 @@
     var section = getUrlVars(window.location.hash);
     localStorage.sidenavActive = section['section']
   }
+
   if (localStorage.sidenavActive) {
     // fullscreen sidenav expansion
-
     function sidenavAutoExpand (parent) {
       var element = parent.querySelector('[data-section=' + localStorage.sidenavActive + ']');
       if (element.classList.contains('closed')) {
@@ -43,9 +43,7 @@
     }
   });
 
-
-
-  window.addEventListener('scroll', function () {
+  function setSidebar () {
     // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
     if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0) {
       if (sidebar.classList.contains('fixed')) {
@@ -56,7 +54,10 @@
         sidebar.classList.add('fixed');
       }
     }
-  });
+  };
+
+  window.addEventListener('scroll', setSidebar);
+  window.addEventListener('load', setSidebar);
 
   // allowing opening/closing of subnav elements
   var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));

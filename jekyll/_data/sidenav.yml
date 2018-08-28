@@ -18,8 +18,8 @@
           link: 2.0/first-steps/
         - name: Hello World
           link: 2.0/hello-world/
-    - name: Faq
-      link: 2.0/faq/
+        - name: FAQ
+          link: 2.0/faq/
     - name: Concepts
       link: 2.0/concepts/
       children: 
