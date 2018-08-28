@@ -7,8 +7,6 @@ categories: [getting-started]
 order: 1
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Overview*
-
 This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation.
 
 ## CircleCI Overview
@@ -43,8 +41,6 @@ Improve team productivity, efficiency, happiness.
 Find problems and solve them, quickly.
 Release higher quality, more stable products.
 
-
-
 ## Free Trial Options
 
 CircleCI provides a free trial with the following options:
@@ -55,3 +51,9 @@ CircleCI provides a free trial with the following options:
 ### Open Source
 
 See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects. 
+
+## See Also
+
+Any app that runs on Linux, Android, or macOS is supported. Refer to the 
+[Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
+
