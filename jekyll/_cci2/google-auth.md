@@ -133,7 +133,6 @@ jobs:
           sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          sudo gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 ```
 
 **Note:**
