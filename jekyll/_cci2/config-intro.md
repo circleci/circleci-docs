@@ -220,4 +220,4 @@ The examples above were designed to provide a quick starter to the areas of func
 ## See Also
 {:.no_toc}
 
-[Reference]({{ site.baseurl }}/2.0/configuration-reference/) > Configuring CircleCI
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
