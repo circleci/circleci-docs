@@ -22,7 +22,7 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 ## Steps
 
-1. Ensure that you have added an SSH key in your GitHub or Bitbucket account.
+1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
 2. To start a job with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
