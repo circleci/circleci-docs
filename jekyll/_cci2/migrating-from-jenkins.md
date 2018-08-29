@@ -13,7 +13,7 @@ This document provides the basic concepts that a longtime Jenkins user needs to 
 ## Quick Start
 {:.no_toc}
 
-CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD (see [High-Level Differences]( {{ site.baseurl }}/2.0/migrating-from-jenkins/#high-level-differences) below), but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try one of these options:
+CircleCI is a very different product from Jenkins with a lot of different concepts on how to manage CI and CD, but it won’t take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try one of these options:
 
 1. **Getting Started:** Run your first green build on CircleCI 2.0 using the [getting started video and steps]({{ site.baseurl }}/2.0/).
 
