@@ -62,5 +62,5 @@ This example shows a parallel job workflow where the `build` and `test` jobs run
 
 ## See Also
 
-[Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-[Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
+- [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
