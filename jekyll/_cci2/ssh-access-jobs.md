@@ -15,14 +15,14 @@ This document describes how to access a build container using SSH on CircleCI 2.
 {:toc}
 
 ## Overview
-Often the best way to troubleshoot problems is to SSH into a build container and inspect 
+Often the best way to troubleshoot problems is to SSH into a job and inspect
 things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
-When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircelCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
+When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
 
 ## Steps
 
-1. Ensure that you have already [added an SSH key]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) for either GitHub or Bitbucket.
+1. Ensure that you have added an SSH key in your GitHub or Bitbucket account.
 
 2. To start a job with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
