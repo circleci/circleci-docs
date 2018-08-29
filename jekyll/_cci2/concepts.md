@@ -10,7 +10,8 @@ order: 1
 
 A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 ## Add Projects Page
 
@@ -82,7 +83,7 @@ Jobs are a collection of steps and each job must declare an executor that is eit
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
 ### Cache
-TOC {:toc}
+{:.no_toc}
 
 A cache stores a file or directory of files such as dependencies or source code in object storage.
 Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
@@ -178,7 +179,7 @@ workflows:
 {% endraw %}
 
 ### Workspaces and Artifacts
-TOC {:toc}
+{:.no_toc}
 
 Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
@@ -230,6 +231,6 @@ Caches     | Months               | Store non-vital data that may help the job r
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See Also
-TOC {:toc}
+{:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options. 
