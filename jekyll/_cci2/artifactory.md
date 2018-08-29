@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Upload to Artifactory
 categories: [how-to]
-description: How to upload Artifacts to Artifactory
+description: How to upload Artifacts to Artifactory in CircleCI
 ---
 
 CircleCI supports uploading directly to Artifactory.
@@ -75,4 +75,11 @@ jobs:
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
+```
+
+## See Also
+
+[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+
+
 ```

@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 70
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Storing Build Artifacts*
-
 This document describes how to work with Artifacts in the following sections:
 
 * TOC
@@ -194,3 +192,8 @@ In the above example,
 `xargs` runs four processes
 to download artifacts in parallel.
 Adjust the number given to the `-P` flag as needed.
+
+
+## See Also
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

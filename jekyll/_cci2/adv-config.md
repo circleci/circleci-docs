@@ -103,3 +103,6 @@ jobs:
 
 ```
 
+## See Also
+
+[Optimizations]({{ site.baseurl }}/2.0/optimizations/)

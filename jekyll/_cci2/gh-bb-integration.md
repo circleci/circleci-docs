@@ -6,14 +6,13 @@ categories: [migration]
 Order: 60
 ---
 
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Using GitHub or Bitbucket*
-
 This document provides an overview of using GitHub or Bitbucket with CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
@@ -29,9 +28,10 @@ It is possible to edit the webhooks in GitHub or Bitbucket to restrict events th
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
-## Adding a .circleci/config.yml File
+### Add a .circleci/config.yml File
+{:.no_toc}
 
-After you create and commit a `.circleci/config.yml` file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -86,7 +86,7 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
-## Machine User Keys
+## Creating a Machine User
 
 For fine-grained access to multiple repositories,
 consider creating a machine user
@@ -160,7 +160,8 @@ because GitHub does not provide a read-only permission.
 If you feel strongly about reducing the number of permissions CircleCI uses,
 consider contacting your VCS provider to communicate your concerns.
 
-## Permissions for Team Accounts
+### Permissions for Team Accounts
+{:.no_toc}
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
 
@@ -170,7 +171,8 @@ This section provides an overview of the possible team and individual account ch
 
 3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
-## How to Re-enable CircleCI for a GitHub Organization
+### How to Re-enable CircleCI for a GitHub Organization
+{:.no_toc}
 
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
 
@@ -201,6 +203,7 @@ you will need a deployment key with write access (user key).
 The steps to create a user key depend on your VCS.
 
 ### Creating a GitHub User Key
+{:.no_toc}
 
 In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
@@ -240,6 +243,7 @@ When you push to your GitHub repository from a job,
 CircleCI will use the SSH key you added.
 
 ### Creating a Bitbucket User Key
+{:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API
 to create user keys.
