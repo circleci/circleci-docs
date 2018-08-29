@@ -15,9 +15,7 @@ To run your very first CircleCI build on the CircleCI 2.0 platform, complete the
 
 3. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
 
-4. Click the Authorize Application or equivalent button.
-
-The CircleCI Builds Dashboard appears. 
+4. Click the Authorize Application or equivalent button. The CircleCI Builds Dashboard appears. 
 
 5. Use the Project Setup pages of the CircleCI app to start building your project code.
 
