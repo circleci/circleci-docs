@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Using the APi to Trigger Jobs"
+title: "Using the API to Trigger Jobs"
 short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
 ---
 
- 
+
 This document describes
 how to trigger jobs using the CircleCI API.
 
@@ -57,7 +57,7 @@ Instead, define these variables at the [Project level]({{ site.baseurl }}/2.0/en
 
 ## Conditionally Running Jobs With the API
 
-The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed. 
+The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
 ```yaml
 version: 2
