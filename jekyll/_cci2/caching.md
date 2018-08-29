@@ -7,7 +7,12 @@ categories: [optimization]
 order: 50
 ---
 
-Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs. After the initial job run, future instances of the job will run faster by not redoing work. 
+Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs. 
+
+TOC 
+{:toc}
+
+After an initial job run, future instances of the job will run faster by not redoing work. 
 
 ![caching data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
 
