@@ -9,7 +9,8 @@ order: 34
 
 CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. 
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 To see test result as artifacts, upload them using the `store_artifacts` step.
 
