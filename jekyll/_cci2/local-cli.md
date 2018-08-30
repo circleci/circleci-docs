@@ -33,7 +33,7 @@ circleci switch
 
 This command may prompt you for `sudo` if your user doesn't have write permissions to the install directory, `/usr/local/bin`.
 
-## Installing the CircleCI-Public CLI From Scratch
+## Installing the CircleCI-Public CLI From Scratch on macOS and Linux Distros
 
 If you haven't already installed `circleci` on your machine, run the following command to install the CircleCI-Public CLI:
 
@@ -45,6 +45,10 @@ curl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/insta
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory.
 
 If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.
+
+## Manual download
+
+You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ### Configuring the CLI
 {:.no_toc}
@@ -117,6 +121,18 @@ sudo snap connect circleci:docker docker
 ```
 
 **Note:** With snap packages, the `docker` command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
+
+### [Alternative] Installing on macOS via Homebrew
+{:.no_toc}
+
+If you're using [Homebrew](https://brew.sh/) with macOS, you can install the circle-downloads Local CLI with the following command:
+
+```
+brew install circleci
+```
+
+**Note:** This will install Docker from Homebrew even if Docker for Mac is installed.
+
 
 ### Validating 2.0 YAML Syntax with the circleci-downloads CLI
 {:.no_toc}
