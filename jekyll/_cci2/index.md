@@ -59,7 +59,6 @@ Use the tutorials, samples, how-to, and and reference documentation to learn Cir
     <td><ul>
 			<li><a href="/docs/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
 			<li><a href="/docs/2.0/workflows/#workflows-configuration-examples">Example Workflow Configs</a></li>
-		<li><a href="/docs/2.0/workflows/#troubleshooting">Troubleshooting</a></li>
 		<li><a href="/docs/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
 		<li><a href="/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
 	    </ul></td>
