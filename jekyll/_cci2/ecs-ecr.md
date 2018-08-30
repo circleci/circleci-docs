@@ -41,6 +41,13 @@ jobs:
       - run:
           name: Build, tag and push Docker image to ECR
       - run:
+          name: Create task for deploy
+      - run:
+          name: Register task definition
+      - run:
+          name: Find revision number
+      - run:
+          name: Deploy specific revision
 ```
 
 ## Steps
