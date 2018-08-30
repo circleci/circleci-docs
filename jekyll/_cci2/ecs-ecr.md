@@ -37,9 +37,11 @@ jobs:
       - run:
           name: Install AWS CLI
       - run:
+          name: Build Docker image locally
+      - run:
           name: Log into AWS ECR
       - run:
-          name: Build, tag and push Docker image to ECR
+          name: Tag and push Docker image to ECR
       - run:
           name: Create task for deploy
       - run:
