@@ -7,9 +7,7 @@ categories: [language-guides]
 order: 7
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Python*
-
-This document describes CircleCI configuration for a sample application written in Python. 
+This document describes the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a sample application written in Python. 
 
 * TOC
 {:toc}
@@ -25,7 +23,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 Refer to the [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample Flask application: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
 
-## Pre-built CircleCI Docker Images
+## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/python/>. The demo project uses an official CircleCI image.
 
@@ -97,9 +95,11 @@ Finally, add several `steps` within the `build` job:
 For the complete list of CircleCI configuration keys,
 refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-## Deploy
+## See Also
+{:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- See the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for caching strategies.
 
 
 

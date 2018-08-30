@@ -7,16 +7,13 @@ categories: [getting-started]
 order: 1
 ---
 
-[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Scala
-
-This document will walk you through a Scala application building on CircleCI 2.0 in the following sections:
+This document will walk you through a Scala application [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}
 
-Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
-
 ## Overview
+{:.no_toc}
 
 This document assumes that your [project’s AWS Permission settings](https://circleci.com/docs/2.0/deployment-integrations/#aws) are configured with valid AWS keys that are permitted to read and write to an S3 bucket. The examples in this post upload build packages to the specified S3 bucket.
 
@@ -205,5 +202,7 @@ steps:
 The deploy command is another multi-line execution.
 
 ## See Also 
+{:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
