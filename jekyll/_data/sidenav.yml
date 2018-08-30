@@ -2,9 +2,11 @@
   link: 
   icon: docs/welcome.svg
   children: 
-    - name: CI/CD Overview
-      link: 2.0/about-circleci/
+    - name: CircleCI Documentation
+      link: 2.0/
       children: 
+        - name: CI/CD Overview
+          link: 2.0/about-circleci/
         - name: Supported Languages
           link: 2.0/demo-apps/
 
@@ -54,7 +56,7 @@
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
-          link: 2.0/local-jobs/
+          link: 2.0/local-cli/
         - name: Testing Config Locally
           link: 2.0/examples/
     - name: Examples
@@ -139,8 +141,12 @@
           link: 2.0/artifacts/
         - name: Debugging with SSH
           link: 2.0/ssh-access-jobs/
+        - name: Debugging Java Memory Errors
+          link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
+        - name: Using Insights
+          link: 2.0/insights/          
     - name: Triggers
       link: 2.0/triggers/
       children: 
