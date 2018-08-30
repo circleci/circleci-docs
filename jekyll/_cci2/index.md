@@ -5,7 +5,7 @@ description: "Welcome to CircleCI Documentation"
 permalink: /2.0/
 ---
 
-Use the tutorials, samples, how-to, and and reference documentation to learn CircleCI.
+Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
 <hr>
 <div>
