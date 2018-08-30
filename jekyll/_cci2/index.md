@@ -16,8 +16,8 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 
   </tr>
   <tr>
-    <td>Get started with CircleCI automated builds.</td>
-    <td>Check out some of our popular examples.</td>
+    <td>Get started with CircleCI automated builds.&nbsp;&nbsp;</td>
+    <td>Check out some of our popular examples.&nbsp;&nbsp;</td>
   </tr>
 	
   <tr>
@@ -44,8 +44,8 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 
   </tr>
   <tr>
-    <td>Set up and debug your build configuration.</td>
-    <td>CircleCI Workflows are used to schedule and sequence jobs.</td>
+    <td>Set up and debug your build configuration.&nbsp;&nbsp;</td>
+    <td>CircleCI Workflows are used to schedule and sequence jobs.&nbsp;&nbsp;</td>
   </tr>
   <tr>
     <td><ul>
