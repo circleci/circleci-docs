@@ -7,16 +7,15 @@ categories: [language-guides]
 order: 8
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Ruby*
-
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 CircleCI maintains the sample Ruby on Rails project at the following links:
 
@@ -29,7 +28,7 @@ The application uses the latest stable Rails version 5.1, `rspec-rails`, and [Rs
 
 This application build also uses one of the pre-built [CircleCI Docker Images](http://circleci.com/docs/2.0/circleci-images).
 
-## Pre-built CircleCI Docker images
+## Pre-Built CircleCI Docker Images
 
 Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
 
@@ -127,7 +126,7 @@ jobs: # a collection of steps
 
 ---
 
-## Build the demo Ruby on Rails project yourself
+## Build the Demo Ruby on Rails Project Yourself
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -302,11 +301,11 @@ The `--profile` option reports the slowest examples of each run.
 
 For more on `circleci tests glob` and `circleci tests split` commands, please refer to our documentation on [Parallelism with CircleCI CLI](https://circleci.com/docs/2.0/parallelism-faster-jobs).
 
-## Deployment
+
+## See Also
+{:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
-
-## Detailed Examples
 
 This app illustrates the simplest possible setup for a Ruby on Rails web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 
