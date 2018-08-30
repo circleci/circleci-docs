@@ -2,7 +2,7 @@
   link: 
   icon: docs/welcome.svg
   children: 
-    - name: CircleCI Documentation
+    - name: Introduction
       link: 2.0/
       children: 
         - name: CI/CD Overview
