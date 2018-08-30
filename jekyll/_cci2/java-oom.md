@@ -127,3 +127,8 @@ that other processes can share the remaining memory of your CircleCI build conta
 
 If you are still consistently hitting memory limits,
 consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
+
+## See Also
+
+[Java Language Guide]({{ site.baseurl }}/2.0/language-java/)
+[Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
