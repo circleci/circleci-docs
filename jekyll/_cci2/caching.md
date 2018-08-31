@@ -343,7 +343,7 @@ steps:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
-  - run: bundle install & bundle clean
+  - run: bundle install && bundle clean
   - save_cache:
       paths:
         - ~/.bundle
