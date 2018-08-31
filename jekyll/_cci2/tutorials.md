@@ -4,7 +4,7 @@ title: "Tutorials"
 description: "Tutorials and 2.0 Sample Apps with Guides"
 ---
 
-Use the tutorial associated with your platform to learn about the customization that is possible in a `.circleci/config.yml`.
+Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
 
 ## Tutorials 
 
