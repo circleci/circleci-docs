@@ -72,7 +72,8 @@ More details on the Docker Executor are available in the [Configuring CircleCI](
 
 ## Using Machine
 
-The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM) with the following technical specifications:
+The `machine` option runs your jobs in a dedicated, ephemeral VM
+that has the following specifications:
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|------------
