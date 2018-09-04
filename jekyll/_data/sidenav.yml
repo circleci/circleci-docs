@@ -169,6 +169,8 @@
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
           link: 2.0/artifactory/
+        - name: Publishing Packages to packagecloud
+          link: 2.0/packagecloud/
 
 - name: Reference
   icon: docs/reference.svg
