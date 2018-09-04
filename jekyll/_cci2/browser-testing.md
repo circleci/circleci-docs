@@ -96,6 +96,10 @@ jobs:
             wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
       - run: # base image is python, so we run `nosetests`, an extension of `unittest`
           command: nosetests
+      - run:
+          name: Shut Down Sauce Connect Tunnel
+          command: |
+            kill -9 `cat /tmp/sc_client.pid`          
 ```
 
 ## BrowserStack and Appium
