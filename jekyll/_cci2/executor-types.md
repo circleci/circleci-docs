@@ -83,7 +83,8 @@ CPUs | Processor                 | RAM | HD
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
 
-To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
+To use the machine executor,
+set the `machine` key to `true` in `.circleci/config.yml`:
 
 ```yaml
 jobs:
