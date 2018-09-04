@@ -6,7 +6,6 @@ description: "Listing of available images maintained by CircleCI"
 categories: [containerization]
 order: 20
 ---
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Pre-Built CircleCI Docker Images*
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
 
@@ -14,6 +13,7 @@ This document provides information about pre-built CircleCI images and a listing
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 For convenience,
 CircleCI maintains several Docker images.
@@ -253,5 +253,6 @@ that a given tag has the same meaning across images!
 {% endfor %}
 
 ## See Also
+{:.no_toc}
 
 See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.

@@ -13,9 +13,9 @@
     var section = getUrlVars(window.location.hash);
     localStorage.sidenavActive = section['section']
   }
+
   if (localStorage.sidenavActive) {
     // fullscreen sidenav expansion
-
     function sidenavAutoExpand (parent) {
       var element = parent.querySelector('[data-section=' + localStorage.sidenavActive + ']');
       if (element.classList.contains('closed')) {
@@ -43,11 +43,9 @@
     }
   });
 
-
-
-  window.addEventListener('scroll', function () {
+  function setSidebar () {
     // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
-    if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0) {
+    if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0 && footer.getBoundingClientRect().top >= window.innerHeight) {
       if (sidebar.classList.contains('fixed')) {
         sidebar.classList.remove('fixed');
       }
@@ -56,7 +54,18 @@
         sidebar.classList.add('fixed');
       }
     }
-  });
+
+    // prevents display problems on very large screens with little content
+    if (footer.getBoundingClientRect().top <= window.innerHeight) {
+      sidebar.style.height = (footer.getBoundingClientRect().top - 70) + 'px';
+    } else {
+      sidebar.style.height = null;
+    }
+  };
+
+  window.addEventListener('scroll', setSidebar);
+  window.addEventListener('load', setSidebar);
+  window.addEventListener('resize', setSidebar);
 
   // allowing opening/closing of subnav elements
   var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));

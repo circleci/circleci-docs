@@ -7,14 +7,10 @@ categories: [configuring-jobs]
 order: 35
 ---
 
-*[Build Environments]({{ site.baseurl }}/2.0/build/) > Configuring Databases*
-
-This document provides example database configuration using PostgreSQL/Rails and MySQL/Ruby examples in the following sections:
+This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
 
 * TOC
 {:toc}
-
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 
 
 ## Example CircleCI Configuration for a Rails App With structure.sql
 
@@ -91,6 +87,7 @@ installing the needed packages, committing, and pushing it to Docker Hub or the
 registry of your choosing.
 
 ### Example Environment Setup
+{:.no_toc}
 
 In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -244,3 +241,8 @@ jobs:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
 ```
+
+## See Also
+
+
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 

@@ -5,7 +5,7 @@ description: "Welcome to CircleCI Documentation"
 permalink: /2.0/
 ---
 
-Welcome to CircleCI documentation! Included here are tutorials, samples, and reference documentation for CircleCI.
+Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
 <hr>
 <div>
@@ -16,8 +16,8 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 
   </tr>
   <tr>
-    <td>Get started with CircleCI automated builds.</td>
-    <td>Check out some of our popular examples.</td>
+    <td>Get started with CircleCI automated builds.&nbsp;&nbsp;</td>
+    <td>Check out some of our popular examples.&nbsp;&nbsp;</td>
   </tr>
 	
   <tr>
@@ -35,8 +35,10 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
   </tr>
 </table>
 </div>
-<div>
+
 <hr>
+
+<div>
 <table>
   <tr>
     <th><h2>Config</h2></th>
@@ -44,8 +46,8 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
 
   </tr>
   <tr>
-    <td>Set up and debug your build configuration.</td>
-    <td>CircleCI Workflows are used to schedule and sequence jobs.</td>
+    <td>Set up and debug your build configuration.&nbsp;&nbsp;</td>
+    <td>CircleCI Workflows are used to schedule and sequence jobs.&nbsp;&nbsp;</td>
   </tr>
   <tr>
     <td><ul>
@@ -57,7 +59,6 @@ Welcome to CircleCI documentation! Included here are tutorials, samples, and ref
     <td><ul>
 			<li><a href="/docs/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
 			<li><a href="/docs/2.0/workflows/#workflows-configuration-examples">Example Workflow Configs</a></li>
-		<li><a href="/docs/2.0/workflows/#troubleshooting">Troubleshooting</a></li>
 		<li><a href="/docs/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
 		<li><a href="/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
 	    </ul></td>
