@@ -99,9 +99,21 @@ To use the machine executor,
 set the `machine` key to `true` in `.circleci/config.yml`:
 
 ```yaml
+version: 2
 jobs:
   build:
     machine: true
+```
+
+You can specify images for the machine executor
+by using the `image` key.
+
+```yaml
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
 ```
 
 This example specifies a particular image for the `machine` executor:
