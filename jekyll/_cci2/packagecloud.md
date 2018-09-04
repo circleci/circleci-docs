@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Publish packages to packagecloud
+title: Publishing Packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
 ---
