@@ -80,7 +80,8 @@ CPUs | Processor                 | RAM | HD
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-**Note**: Use of `machine` may require additional fees in a future pricing update. 
+**Note**:
+Using `machine` may require additional fees in a future pricing update.
 
 To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
 
