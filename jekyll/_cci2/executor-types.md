@@ -23,7 +23,8 @@ in one of three environments:
 - Within a dedicated Linux virtual machine (VM) image (`machine`)
 - Within a macOS VM image (`macos`)
 
-For building on Linux, there are tradeoffs to `docker` versus `machine`, as follows:
+For building on Linux,
+there are tradeoffs to using `docker` versus `machine`, as follows:
 
 Virtual Environment | `docker` | `machine`
 ----------|----------|----------
