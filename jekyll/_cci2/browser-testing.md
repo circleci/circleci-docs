@@ -5,18 +5,18 @@ description: Browser Testing on CircleCI
 category: [test]
 ---
 
-*[Test]({{ site.baseurl }}/2.0/basics/) > Browser Testing*
-
 This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:
 
 * TOC
 {:toc}
 
 ## Prerequisites
+{:.no_toc}
 
 Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, PhantomJS, Firefox, and Chrome.
 
 ## Overview
+{:.no_toc}
 
 Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch. 
 
@@ -48,7 +48,7 @@ jobs:
           background: true
 ```
 
-Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/#install-and-run-selenium-to-automate-browser-testing) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
 
 For more information about working with Headless Chrome,
 see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
@@ -112,6 +112,7 @@ Integration tests can be hard to debug, especially when they're running on a rem
 This section provides some examples of how to debug browser tests on CircleCI.
 
 ### Using Screenshots and Artifacts
+{:.no_toc}
 
 CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/)
 and make them available from your build. For example, artifacts enable you to save screenshots as part of your job,
@@ -124,6 +125,7 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 *   [Automatically on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
 
 ### Using a Local Browser to Access HTTP server on CircleCI
+{:.no_toc}
 
 If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a
 failing test. Setting this up is easy with an SSH-enabled
@@ -144,6 +146,7 @@ This is a very easy way to debug things when setting up Selenium tests, for
 example.
 
 ### Interacting With the Browser Over VNC
+{:.no_toc}
 
 VNC allows you to view and interact with the browser
 that is running your tests.
@@ -211,6 +214,7 @@ You can even interact with the browser
 as if the tests were running on your local machine.
 
 ### Sharing CircleCI's X Server
+{:.no_toc}
 
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
@@ -252,3 +256,8 @@ ubuntu@box10$ xclock
 You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
+
+## See Also
+
+
+[Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)

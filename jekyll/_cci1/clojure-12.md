@@ -3,6 +3,7 @@ layout: classic-docs
 title: "java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite"
 description: "Dealing with java.lang.NoSuchMethodError: clojure.lang.KeywordLookupSite"
 last_updated: Feb 2, 2013
+sitemap: false
 ---
 
 This is caused by using jars that were AOT compiled against

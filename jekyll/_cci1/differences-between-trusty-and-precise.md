@@ -4,6 +4,7 @@ title: Notable differences between Ubuntu 14.04 and Ubuntu 12.04
 short-title: Differences between Ubuntu 14.04 and 12.04
 categories: [build-images]
 description: "Notable differences between Ubuntu 14.04 and Ubuntu 12.04 CircleCI build images."
+sitemap: false
 ---
 
 Here are notable differences between Ubuntu 14.04 Trusty and Ubuntu 12.04 Precise build images.

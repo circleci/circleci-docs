@@ -2,6 +2,7 @@
 layout: classic-docs
 title: CircleCI does not recognize the Ruby version
 description: Why does CircleCI not recognize the Ruby version
+sitemap: false
 ---
 
 We infer your Ruby version from your `.rvmrc` file, `.ruby-version` file, or Gemfile.

@@ -1,19 +1,13 @@
 ---
 layout: classic-docs
-title: "Jobs and Steps"
-short-title: "Jobs and Steps"
+title: "Jobs, Steps, and Workflows"
+short-title: "Jobs, Steps, and Workflows"
 description: "Description of Jobs and Steps"
 categories: [migration]
 order: 2
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Jobs and Steps*
-
-New keys for `jobs:` and `steps:` enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
-
-![header]( {{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
-
-The following sections provide an overview of Jobs and Steps, changes to keys from 1.0, new keys that are nested inside Steps and new keys for Workflows.
+The document provides an overview of Jobs and Steps, new [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) keys that are nested inside Steps, and new keys for Workflows.
 
 * TOC
 {:toc}
@@ -21,6 +15,10 @@ The following sections provide an overview of Jobs and Steps, changes to keys fr
 ## Jobs Overview
 
 Jobs are a collection of Steps. All of the steps in the job are executed in a single unit which consumes a CircleCI container from your plan while it's running.
+
+Jobs and Steps enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
+
+![header]( {{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
 
 In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases, or the `macos` executor.
 
@@ -61,3 +59,8 @@ workflows:
 ```
 {% endraw %}
 This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+
+## See Also
+
+- [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
+- [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Rake giving ActionFailed errors
 description: Rake giving ActionFailed errors
 last_updated: Feb 3, 2013
+sitemap: false
 ---
 
 Sometimes in Rails projects you can see Rake throw ActionFailed errors

@@ -3,6 +3,7 @@ layout: classic-docs-parent
 title: Troubleshooting Ruby
 short-title: Ruby
 categories: [troubleshooting]
+sitemap: false
 description: Troubleshooting Ruby
 children:
   - bundler-latest

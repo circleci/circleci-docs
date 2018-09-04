@@ -17,6 +17,10 @@ GEM
     ethon (0.11.0)
       ffi (>= 1.3.0)
     eventmachine (1.2.7)
+    execjs (2.7.0)
+    extras (0.3.0)
+      forwardable-extended (~> 2.5)
+    fastimage (2.1.3)
     ffi (1.9.25)
     forwardable-extended (2.6.0)
     html-proofer (3.9.1)
@@ -44,12 +48,30 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
+    jekyll-assets (3.0.11)
+      activesupport (~> 5.0)
+      execjs (~> 2.7)
+      extras (~> 0.2)
+      fastimage (~> 2.0, >= 1.8)
+      jekyll (>= 3.5, < 4.0)
+      jekyll-sanity (~> 1.2)
+      liquid-tag-parser (~> 1.0)
+      nokogiri (~> 1.8)
+      pathutil (~> 0.16)
+      sprockets (>= 3.3, < 4.1.beta)
+    jekyll-sanity (1.2.0)
+      jekyll (~> 3.1)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
+    jekyll-sitemap (1.2.0)
+      jekyll (~> 3.3)
     jekyll-watch (2.0.0)
       listen (~> 3.0)
     kramdown (1.17.0)
     liquid (4.0.0)
+    liquid-tag-parser (1.9.0)
+      extras (~> 0.3)
+      liquid (>= 3.0, < 5.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -63,6 +85,7 @@ GEM
     pathutil (0.16.1)
       forwardable-extended (~> 2.6)
     public_suffix (3.0.2)
+    rack (2.0.5)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -74,6 +97,9 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    sprockets (3.7.2)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
     thread_safe (0.3.6)
     typhoeus (1.3.0)
       ethon (>= 0.9.0)
@@ -87,9 +113,11 @@ PLATFORMS
 DEPENDENCIES
   html-proofer (= 3.9.1)
   jekyll (= 3.8.3)
+  jekyll-assets
+  jekyll-sitemap
 
 RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.16.3

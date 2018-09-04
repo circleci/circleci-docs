@@ -189,6 +189,19 @@ This is the GitHub or Bitbucket project account username for the target project 
 
 If you have a Free / Open Source Software ([F/OSS](https://www.gnu.org/philosophy/free-sw.html)) project, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
+## List Ordering
+
+There are two API endpoints
+where the list order is significant:
+
+- [Recent Builds Across All Projects](#recent-builds)
+- [Recent Builds For a Project](#recent-builds-project)
+
+In both cases,
+builds are returned in the order that they were created.
+For all other endpoints,
+the order has no special significance.
+
 ## Accept header
 
 If you specify no accept header, we'll return human-readable JSON with comments.

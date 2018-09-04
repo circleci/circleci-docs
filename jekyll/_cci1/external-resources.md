@@ -5,6 +5,7 @@ categories: [configuration-tasks]
 description: How to use resources not in your repository
 last_updated: Feb 2, 2012
 order: 57
+sitemap: false
 ---
 
 There are a number of techniques to do this:

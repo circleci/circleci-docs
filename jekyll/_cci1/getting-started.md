@@ -4,6 +4,7 @@ title: Getting Started with CircleCI 1.0
 categories: [getting-started]
 description: Getting Started with CircleCI
 order: 20
+sitemap: false
 ---
 
 Setting up CircleCI usually takes only three mouse clicks:
