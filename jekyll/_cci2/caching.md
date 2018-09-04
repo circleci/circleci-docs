@@ -337,13 +337,13 @@ before restoring dependencies from cache.
 
 ```yaml
 steps:
-  - run: bundle install & bundle clean
   - restore_cache:
       keys:
         # when lock file changes, use increasingly general patterns to restore cache
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
+  - run: bundle install && bundle clean
   - save_cache:
       paths:
         - ~/.bundle
