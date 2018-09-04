@@ -80,7 +80,17 @@ CPUs | Processor                 | RAM | HD
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP.
+Using the `machine` executor
+gives your application full access to OS resources
+and provides you with full control over the job environment.
+This control can be useful in situations
+where you need to use `ping`
+or modify the system with `sysctl` commands.
+
+Using the `machine` executor also enables you
+to build a Docker image
+without downloading additional packages
+for languages like Ruby and PHP.
 
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
