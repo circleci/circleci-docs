@@ -105,8 +105,13 @@ jobs:
     machine: true
 ```
 
-You can specify images for the machine executor
+The default image for the machine executor is `circleci/classic:latest`.
+You can specify other images
 by using the `image` key.
+
+**Note:**
+The `image` key is not supported on private installations of CircleCI.
+See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
 ```yaml
 version: 2
