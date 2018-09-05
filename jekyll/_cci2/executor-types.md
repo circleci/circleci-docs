@@ -20,7 +20,7 @@ CircleCI enables you to run jobs
 in one of three environments:
 
 - Within Docker images (`docker`)
-- Within a dedicated Linux virtual machine (VM) image (`machine`)
+- Within a Linux virtual machine (VM) image (`machine`)
 - Within a macOS VM image (`macos`)
 
 For building on Linux,
