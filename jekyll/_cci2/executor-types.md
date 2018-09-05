@@ -96,7 +96,7 @@ for languages like Ruby and PHP.
 Using `machine` may require additional fees in a future pricing update.
 
 To use the machine executor,
-set the `machine` key to `true` in `.circleci/config.yml`:
+set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
 
 ```yaml
 version: 2
