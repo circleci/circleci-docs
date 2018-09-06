@@ -162,7 +162,7 @@ Now we know that our unit tests succeeded we can start our service and validate 
       - save_cache:
           key: v1-pkg-cache
           paths:
-            - "/go/pkg"
+            - ~/.cache/go-build
 
       - run:
           name: Start service
@@ -195,5 +195,3 @@ Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](htt
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 Refer to the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for more caching strategies.
-
-
