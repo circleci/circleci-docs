@@ -115,6 +115,8 @@
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
+        - name: Enabling Build Processing
+          link: 2.0/build-processing/  
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
@@ -169,6 +171,8 @@
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
           link: 2.0/artifactory/
+        - name: Publishing Packages to packagecloud
+          link: 2.0/packagecloud/
 
 - name: Reference
   icon: docs/reference.svg
@@ -177,7 +181,7 @@
         - name: Configuration Reference
           link: 2.0/configuration-reference
         - name: API Reference
-          link: api/
+          link: api/v1-reference/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary

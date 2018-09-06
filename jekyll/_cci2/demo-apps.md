@@ -13,6 +13,7 @@ Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Clojure]{:target="_blank"} | Luminus | [circleci-demo-clojure-luminus]{:target="_blank"}
+ [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/teesloane/circleci-demo-crystal)
  [Elixir]{:target="_blank"} | Phoenix | [circleci-demo-elixir-phoenix]{:target="_blank"}
  [Go]{:target="_blank"} | Go | [circleci-demo-go]{:target="_blank"}
  [iOS]{:target="_blank"} | Xcode | [circleci-demo-ios]{:target="_blank"}
@@ -24,6 +25,7 @@ Language Guide | Framework | GitHub Repo Name
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/){:target="_blank"} | Flask | [circleci-demo-python-flask]{:target="_blank"}
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Ruby and Rails]{:target="_blank"} | Rails | [circleci-demo-ruby-rails]{:target="_blank"}
+ [Scala]({{ site.baseurl }}/2.0/language-scala/){:target="_blank"} | sbt | [samplescala](https://github.com/ariv3ra/samplescala){:target="_blank"}
 {: class="table"}
 
 ## Supported Languages
@@ -36,6 +38,7 @@ Language Guide | Framework | GitHub Repo Name
 - Python (Python 2 and later)
 - React Native
 - Ruby and Rails (Ruby 2 and later)
+- Scala and sbt
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
 
