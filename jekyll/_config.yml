@@ -13,6 +13,9 @@ plugins:
   - jekyll-assets
   - jekyll-sitemap
 
+algolia:
+  application_id: 'your_application_id'
+
 sass:
   sass_dir: _sass
 
