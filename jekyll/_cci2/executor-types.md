@@ -16,9 +16,15 @@ This document describes the `docker`, `machine`, and `macos` environments in the
 ## Overview
 {:.no_toc}
 
-CircleCI enables you to run jobs in one of three environments: using Docker images, using a dedicated Linux VM image, or using a macOS VM image.
+CircleCI enables you to run jobs
+in one of three environments:
 
-For building on Linux, there are tradeoffs to `docker` versus `machine`, as follows:
+- Within Docker images (`docker`)
+- Within a Linux virtual machine (VM) image (`machine`)
+- Within a macOS VM image (`macos`)
+
+For building on Linux,
+there are tradeoffs to using `docker` versus `machine`, as follows:
 
 Virtual Environment | `docker` | `machine`
 ----------|----------|----------
@@ -45,12 +51,14 @@ It is also possible to use the `macos` executor type with `xcode`, see the [iOS 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
 Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
-```
+
+```yaml
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
 ```
+
 In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
 
 ### Docker Image Best Practices
@@ -64,43 +72,69 @@ More details on the Docker Executor are available in the [Configuring CircleCI](
 
 ## Using Machine
 
-The `machine` option will run your jobs in a dedicated, ephemeral Virtual Machine (VM) with the following technical specifications:
+The `machine` option runs your jobs in a dedicated, ephemeral VM
+that has the following specifications:
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|------------
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-**Note**: Use of `machine` may require additional fees in a future pricing update. 
+Using the `machine` executor
+gives your application full access to OS resources
+and provides you with full control over the job environment.
+This control can be useful in situations
+where you need to use `ping`
+or modify the system with `sysctl` commands.
 
-To use the machine executor with the default `machine` image, set the `machine` key to `true` in `.circleci/config.yml`:
+Using the `machine` executor also enables you
+to build a Docker image
+without downloading additional packages
+for languages like Ruby and PHP.
+
+**Note**:
+Using `machine` may require additional fees in a future pricing update.
+
+To use the machine executor,
+set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
 
 ```yaml
+version: 2
 jobs:
   build:
     machine: true
 ```
 
-Using the `machine` executor enables your application with full access to OS resources and provides you with full control over the job environment, if for example, you need to use `ping` or to modify system with `sysctl` commands. In addition, it enables your repo to build a docker image without additional downloads for languages like Ruby and PHP.
+The default image for the machine executor is `circleci/classic:latest`.
+You can specify other images
+by using the `image` key.
 
-This example specifies a particular image for the `machine` executor:
+**Note:**
+The `image` key is not supported on private installations of CircleCI.
+See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
 ```yaml
+version: 2
 jobs:
   build:
     machine:
-      image: circleci/classic:201708-01
-``` 
+      image: circleci/classic:2017-01  # pins image to specific version using YYYY-MM format
+```
 
-Following are the available machine images:
+The `image` key accepts one of three image types:
 
-* `circleci/classic:latest` is the default image. Changes to this will be announced at least one week before they go live.
-* `circleci/classic:edge` receives the latest updates and will be upgraded at short notice.
-* `circleci/classic:[year-month]` This lets you pin the image version to prevent breaking changes. Refer to the [Configuring CircleCI](https://circleci.com/docs/2.0/configuration-reference/#machine) document for versions.
+- `circleci/classic:latest`:
+This is the default image.
+Changes to this image are announced at least one week in advance.
+- `circleci/classic:edge`:
+This image receives the latest updates.
+Changes to this image occur frequently.
+- `circleci/classic:{YYYY-MM}`:
+This image is pinned to a specific version
+to prevent breaking changes.
 
-**Note:** These images are **not** available on your private installation of CircleCI. For information about customizing `machine` executor service images on the installable CircleCI, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
-
-The images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information about additional tools.
+All images have common language tools preinstalled.
+Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
 
 The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
