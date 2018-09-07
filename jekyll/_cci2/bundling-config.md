@@ -20,7 +20,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 
 2. Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation.
 
-3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build with the new processing before adding any new 2.1 keys to your config.
+3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new processing before adding any new 2.1 keys to your config.
 
 4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. You will trigger builds as before, but if you look at the configuration on your Jobs page you will see that it has been run using the new processing service. 
 
@@ -81,17 +81,21 @@ When invoking a command, the steps of that command are inserted where it's invok
 ### Invoking Other Commands in Your Command
 {:.no_toc}
 
-Commands can use other commands in the scope of execution. For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
+Commands can use other commands in the scope of execution. 
+
+<!--
+For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
+-->
 
 ## Built-in Commands
 
-CircleCI has several built-in commands available to all circleci.com customers and available by default in CircleCI server installations. Examples of built-in commands are:
+CircleCI has several built-in commands available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of built-in commands are:
 
   * `checkout`
   * `setup_remote_docker`
   * `save_to_workspace`
 
-> NOTE: Built-in commands are implicitly in the empty scope and are thus syntactically equivalent to primitives such as `run`). This _may_ change in future versions of configuration but is true to maintain compatibility with version `2` configuration.
+**Note:** Built-in commands are implicitly in the empty scope and are thus syntactically equivalent to primitives such as `run`). This _may_ change in future versions of configuration but is true to maintain compatibility with version `2` configuration.
 
 ## Examples
 
@@ -170,7 +174,7 @@ jobs:
 
 ## Using the `parameters` Declaration
 
-**Note:** The `parameters` declaration is available in configuration version 2.1 and later._
+**Note:** The `parameters` declaration is available in configuration version 2.1 and later.
 
 Many config elements can be authored to be invocable in your `config.yml` file with specified parameters. Parameters are declared by name as the keys in a map that are all immediate children of the `parameters` key under a job, command, or executor. 
 
@@ -415,7 +419,8 @@ workflows:
 ### Parameter Scope
 {:.no_toc}
 
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly.
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
 
 ```yaml
 version: 2.1
@@ -450,7 +455,7 @@ workflows:
           saywhat: Everyone
 ```
 
-For details on parameter naming rules, see the [naming section in the structure documentation](./structure.md#naming).
+
 
 ### Invoking the Same Job Multiple Times
 {:.no_toc}
@@ -580,7 +585,7 @@ workflows:
 
 
 ## Authoring and Using Executors 
-_Reusable `executor` declarations are available in configuration version 2.1 and later_
+**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 - [What _is_ an executor?](#what-is-an-executor)
 - [Common uses of executors](#common-uses-of-executors)
