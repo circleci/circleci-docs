@@ -43,7 +43,7 @@ Following are the metrics that are enabled:
 - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) 
 - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
-Metrics such as `cpu_time` & `docker_swarm` can be toggled on or off in your config file. As of August 2018, some Docker metrics are missing from the plugin. (We've opened an issue about missing Docker metrics [here](https://github.com/influxdata/telegraf/issues/4591).)
+Metrics such as `cpu_time` & `docker_swarm` can be toggled on or off in your config file.
 
 ## Scheduled Scaling
 
