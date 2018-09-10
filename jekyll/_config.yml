@@ -14,7 +14,7 @@ plugins:
   - jekyll-sitemap
 
 algolia:
-  application_id: 'your_application_id'
+  application_id: 'BH4D9OD16A'
 
 sass:
   sass_dir: _sass
