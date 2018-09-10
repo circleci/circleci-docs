@@ -23,5 +23,5 @@ For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), se
 ## See Also
 
 - Plans and Billing -- For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), see the Settings tab of the CircleCI app for summary data about your usage. 
-- Cntexts --  Share environment variables across projects with a Workflow key, on the [contexts page]({{ site.baseurl }}/2.0/contexts/).
+- Contexts --  Share environment variables across projects with a Workflow key, on the [contexts page]({{ site.baseurl }}/2.0/contexts/).
 
