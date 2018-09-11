@@ -7,16 +7,15 @@ categories: [language-guides]
 order: 4
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Java*
-
 This guide will help you get started with a Java application on CircleCI. 
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 We're going to make a few assumptions here:
 
@@ -145,9 +144,9 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
 
-## Deploy
+## See Also
+{:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-
-
-
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document
+for details on handling Java memory issues.

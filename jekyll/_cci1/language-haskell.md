@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with Haskell
 short-title: Haskell
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Haskell
+sitemap: false
 ---
 
 CircleCI supports building Haskell applications with GHC and Cabal. Before each
