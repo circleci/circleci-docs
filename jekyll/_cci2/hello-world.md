@@ -11,7 +11,7 @@ This document describes how to configure your Linux, Android or macOS project to
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
-2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines, replacing `node:4.8.2` with any Docker image you want: 
+2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines, replacing `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want: 
 
 ```yaml
 version: 2
@@ -46,6 +46,4 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 - Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
 
-- Find complete reference information for all keys and pre-built images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation.
-
-
+- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
