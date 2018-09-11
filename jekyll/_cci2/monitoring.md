@@ -83,9 +83,17 @@ Configuration options are based on Telegraf's documented output plugins. See the
 
 For example, if you would like to use the InfluxDB Output Plugin the configuration would look like the following.
 
-![DataDog](  {{ site.baseurl }}/assets/img/docs/metrics_custom2.png)
+![Custom](  {{ site.baseurl }}/assets/img/docs/metrics_custom2.png)
+
+Additionally, if you would like to ensure that all metrics are tagged against an environment you could place the following code in your config:
+```
+[global_tags]
+Env="<staging-circleci>"
+```
 
 Please see the InfluxDB [documenation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
+
+Global tagging
 
 ## Scheduled Scaling
 
@@ -221,3 +229,5 @@ CloudWatch integration enables the following custom metrics for health monitorin
    * If the value is 1 + n, there are n builders running and visible to the system. If this is less than the total number of builders launched through AWS, your builders are most likely not launching correctly. If builds are queueing, but this number says you have builders available to the system, you may need to launch more builders.
 --->
 
+[global_tags]
+Env="ldap-default-integration"
