@@ -13,6 +13,7 @@ This document provides a step-by-step tutorial for getting your first successful
 {:toc}
 
 ## Prerequisites for Running Your First Build
+{:.no_toc}
 
 * Some basic knowledge of Git and an existing GitHub.com account or the ability to create one. This procedure uses a new GitHub repository, but CircleCI also supports the use of Bitbucket.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
@@ -69,12 +70,14 @@ You should see your build start to run automatically—and pass! So, what just h
 
 Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests. You can learn more about all the possible steps one may put in a `config.yml` file in the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference).
 
-## Breaking Your Build!
+### Breaking Your Build!
+{:.no_toc}
 
 Edit your `config.yml` file in the GitHub editor for simplicity and replace `echo "A first hello"` with `notacommand`. Click the **Commit change** button in the GitHub editor. When you navigate back to the {% comment %} TODO: Jobs {% endcomment %}Builds page in CircleCI, you will see that a new build was triggered. This build will fail with a red Failed button and will send you a notification email of the failure.
 
 
-## Using the Workflows Functionality
+### Using the Workflows Functionality
+{:.no_toc}
 
 1. To see Workflows in action, edit your `.circleci/config.yml` file. After you have the file in edit mode in your browser window, select the text from `build` and onwards in your file and copy and paste the text to duplicate that section. That should look similar to the code block below:
 
@@ -131,7 +134,8 @@ workflows:
 
 Read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
-## Adding Some Changes to use the Workspaces Functionality
+### Adding Some Changes to use the Workspaces Functionality
+{:.no_toc}
 
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. You can use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Try updating `config.yml` to the following:
 
@@ -180,7 +184,8 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-## SSH into Your {% comment %} TODO: Job {% endcomment %}Build
+### SSH into Your {% comment %} TODO: Job {% endcomment %}Build
+{:.no_toc}
 
 ![]( {{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
@@ -204,11 +209,13 @@ cd <directory_name>    # change directory to the <directory_name> directory
 cat <file_name>    # show me the contents of the file <file_name>
 ```
 
-## Further Resources and Links
+## See Also
+{:.no_toc}
 
 [Blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) on how to validate the CircleCI `config.yml` on every commit with a git hook.
 
 ### CircleCI
+{:.no_toc}
 
 * The CircleCI blog and how to follow it
   * <https://circleci.com/blog/>
@@ -220,9 +227,12 @@ cat <file_name>    # show me the contents of the file <file_name>
   * <https://www.facebook.com/circleci>
 
 ### Continuous Integration
+{:.no_toc}
 
 * <https://martinfowler.com/articles/continuousIntegration.html>
 * <https://en.wikipedia.org/wiki/Continuous_integration#Best_practices>
 
 ### YAML
+{:.no_toc}
+
 * <https://en.wikipedia.org/wiki/YAML#Advanced_components>

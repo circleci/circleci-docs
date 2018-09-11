@@ -2,9 +2,11 @@
   link: 
   icon: docs/welcome.svg
   children: 
-    - name: CI/CD Overview
-      link: 2.0/about-circleci/
+    - name: Introduction
+      link: 2.0/
       children: 
+        - name: CI/CD Overview
+          link: 2.0/about-circleci/
         - name: Supported Languages
           link: 2.0/demo-apps/
 
@@ -18,8 +20,8 @@
           link: 2.0/first-steps/
         - name: Hello World
           link: 2.0/hello-world/
-    - name: Faq
-      link: 2.0/faq/
+        - name: FAQ
+          link: 2.0/faq/
     - name: Concepts
       link: 2.0/concepts/
       children: 
@@ -54,7 +56,7 @@
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
-          link: 2.0/local-jobs/
+          link: 2.0/local-cli/
         - name: Testing Config Locally
           link: 2.0/examples/
     - name: Examples
@@ -113,6 +115,8 @@
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
+        - name: Enabling Build Processing
+          link: 2.0/build-processing/  
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
@@ -139,15 +143,19 @@
           link: 2.0/artifacts/
         - name: Debugging with SSH
           link: 2.0/ssh-access-jobs/
+        - name: Debugging Java Memory Errors
+          link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
+        - name: Using Insights
+          link: 2.0/insights/          
     - name: Triggers
       link: 2.0/triggers/
       children: 
         - name: Skip and Cancel Builds
-          link: 2.0/skip-build
+          link: 2.0/skip-build/
         - name: Using the API to Trigger Jobs
-          link: 2.0/api-job-trigger
+          link: 2.0/api-job-trigger/
         - name: Using Workflows to Schedule Jobs
           link: 2.0/workflows/  
 
@@ -163,15 +171,17 @@
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
           link: 2.0/artifactory/
+        - name: Publishing Packages to packagecloud
+          link: 2.0/packagecloud/
 
 - name: Reference
   icon: docs/reference.svg
   children: 
     - children:
         - name: Configuration Reference
-          link: 2.0/configuration-reference
+          link: 2.0/configuration-reference/
         - name: API Reference
-          link: api/
+          link: api/v1-reference/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
@@ -202,7 +212,7 @@
         - name: Authentication
           link: 2.0/authentication
         - name: Monitoring
-          link: 2.0/monitoring
+          link: 2.0/monitoring/
         - name: Nomad
           link: 2.0/nomad/
         - name: Backup
@@ -212,6 +222,6 @@
         - name: GPU Builders
           link: 2.0/gpu/
         - name: Configuring VM Service
-          link: 2.0/vm-service
+          link: 2.0/vm-service/
         - name: Acknowledgments
           link: 2.0/open-source/

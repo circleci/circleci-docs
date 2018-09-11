@@ -7,8 +7,6 @@ categories: [optimization]
 order: 60
 ---
 
-*[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
-
 If your project has a large number of tests,
 it will need more time to run them on one machine.
 To reduce this time,
@@ -60,6 +58,7 @@ To install the CLI locally,
 see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
 ### Globbing Test Files
+{:.no_toc}
 
 The CLI supports globbing test files
 using the following patterns:
@@ -92,11 +91,9 @@ jobs:
             echo $(circleci tests glob "foo/**/*" "bar/**/*")
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
-### Video: Troubleshooting Globbing
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Splitting Test Files
+{:.no_toc}
 
 The CLI supports splitting tests across machines
 when running parallel builds.
@@ -125,6 +122,7 @@ by using the `--index` flag.
     circleci tests split --index=0 test_filenames.txt
 
 #### Splitting by Name
+{:.no_toc}
 
 By default,
 `circleci tests split` expects a list of filenames
@@ -144,6 +142,7 @@ Or pipe a glob of test files.
     circleci tests glob "test/**/*.java" | circleci tests split
 
 #### Splitting by Filesize
+{:.no_toc}
 
 When provided with filepaths,
 the CLI can also split by filesize.
@@ -153,6 +152,7 @@ use the `--split-by` flag with the `filesize` split type.
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 
 #### Splitting by Timings Data
+{:.no_toc}
 
 On each successful run of a test suite,
 CircleCI saves timings data to a directory
@@ -190,3 +190,12 @@ of the specific container that is
 currently running.
 See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables)
 for more details.
+
+### Video: Troubleshooting Globbing
+{:.no_toc}
+
+<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## See Also
+
+[Using Containers]({{ site.baseurl }}/2.0/containers/)

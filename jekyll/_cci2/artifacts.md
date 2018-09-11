@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 70
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Storing Build Artifacts*
-
 This document describes how to work with Artifacts in the following sections:
 
 * TOC
@@ -176,6 +174,7 @@ Placeholder   | Meaning                                                         
 {: class="table table-striped"}
 
 ### Description of Commands
+{:.no_toc}
 
 First,
 the CIRCLE_TOKEN environment variable is created.
@@ -194,3 +193,9 @@ In the above example,
 `xargs` runs four processes
 to download artifacts in parallel.
 Adjust the number given to the `-P` flag as needed.
+
+
+## See Also
+{:.no_toc}
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
