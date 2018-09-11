@@ -62,4 +62,6 @@ jobs:
       - run: docker build .
 ```      
 
+## See Also
 
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)

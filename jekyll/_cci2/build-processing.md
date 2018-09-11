@@ -12,7 +12,7 @@ This document describes how to enable the preview build processing engine if you
 ## Getting Started
 Enable build processing at the bottom of the Advanced section of Settings page for your project in the CircleCI app. 
 
-The new build processing feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#projects) and the following use cases:
+The new build processing feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#new-project-build) and the following use cases:
 
 - New API endpoint to trigger builds, including running all workflows in the build
 - Jobs named `build` will be wrapped in a workflows stanza by the processor

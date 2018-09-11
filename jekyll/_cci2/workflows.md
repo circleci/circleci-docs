@@ -27,6 +27,20 @@ With workflows, you can:
 
 For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
+### States
+{:.no_toc}
+
+Workflows may appear with one of the following states:
+
+- RUNNING: Workflow is in progress
+- NOT RUN: Workflow was never started
+- CANCELLED: Workflow was cancelled before it finished
+- FAILING: A Job in the workflow has failed
+- FAILED: One or more jobs in the workflow failed
+- SUCCESS: All jobs in the workflow completed successfully
+- ON HOLD: A job in the workflow is waiting for approval
+- NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
+
 ### Limitations
 {:.no_toc}
 
