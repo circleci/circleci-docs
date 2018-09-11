@@ -497,6 +497,10 @@ steps:
 
 {% endraw %}
 
+## Limitations
+
+The caches created via the `save_cache` step are stored for up to 60 days.
+
 ## Caching Strategy Tradeoffs
 
 In cases where the build tools for your language include elegant handling of dependencies,
