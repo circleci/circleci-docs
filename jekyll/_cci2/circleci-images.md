@@ -148,8 +148,10 @@ To use these variants,
 add one of the following suffixes to the end of an image tag.
 
 - `-node` includes Node.js for polyglot applications
-- `-browsers` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
+- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
 - `-node-browsers` combines the `-node` and `-browsers` variants
+- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
 For example,
 if you want
