@@ -1,13 +1,11 @@
 ---
 layout: classic-docs
-title: Skipping and Cancelling Builds
-short-title: Skipping and Cancelling Builds
+title: Skip and Cancel Builds
+short-title: Skip and Cancel Builds
 description: How to Prevent CircleCI From Automatically Building
 categories: [configuring-jobs]
 order: 100
 ---
-
-_[Basics]({{ site.baseurl }}/2.0/basics/) > Skipping a Build_
 
 This document describes how to
 skip or cancel builds in the following sections.
@@ -38,6 +36,7 @@ Otherwise, click one of the Rebuild options on the **Job page** of the CircleCI 
 This feature is not supported for fork PRs.
 
 ### Example Commit Title
+{:.no_toc}
 
 ```bash
 $ git log origin/master..HEAD
@@ -54,6 +53,7 @@ this commit will not be built on CircleCI
 because of the `[ci skip]` in the commit title.
 
 ### Example Commit Description
+{:.no_toc}
 
 ```bash
 $ git log origin/master..HEAD
@@ -96,7 +96,8 @@ Your project's default branch will never auto cancel builds.
 This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new [build processing]({{ site.baseurl }}/2.0/build-processing/) feature.
 
 
-### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Worklfows
+### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Workflows
+{:.no_toc}
 
 1. In the CircleCI application,
 go to your project's settings
@@ -110,6 +111,7 @@ click the **On** button.
 
 
 ### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
+{:.no_toc}
 
 Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
 

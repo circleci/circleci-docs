@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 55
 ---
 
-*[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Running Docker Commands*
-
 This document explains how to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers in the following sections:
 
 * TOC
@@ -32,6 +30,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 **Note:** `setup_remote_docker` is not currently compatible with the `machine` or the `macos` executors.
 
 ### Specifications
+{:.no_toc}
 
 The Remote Docker Environment has the following technical specifications:
 
@@ -41,6 +40,7 @@ CPUs | Processor                 | RAM | HD
 {: class="table table-striped"}
 
 ### Example
+{:.no_toc}
 
 Following is an example of building a Docker image using `machine` with the default image:
 
@@ -140,6 +140,8 @@ If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
 
 ### Accessing Services
+{:.no_toc}
+
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```yaml
@@ -163,6 +165,8 @@ A different way to do this is to use another container running in the same netwo
 ```
 
 ### Mounting Folders
+{:.no_toc}
+
 It is **not** possible to mount a folder from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
 ``` yaml
@@ -245,6 +249,11 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 
 Thanks to ryansch for contributing this example.
 
+## See Also
+
+[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
+
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
+[docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching

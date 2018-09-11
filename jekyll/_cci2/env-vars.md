@@ -7,18 +7,18 @@ categories: [configuring-jobs]
 order: 40
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Environment Variables*
-
 This document describes using environment variables in CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information.
 
 ### Environment Variable Usage Options
+{:.no_toc}
 
 CircleCI uses Bash,
 which follows the POSIX naming convention for environment variables.
@@ -50,6 +50,7 @@ may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ### Using `BASH_ENV` to Set Environment Variables
+{:.no_toc}
 
 CircleCI does not support interpolation
 when setting environment variables.
@@ -240,6 +241,7 @@ Changing an environment variable is only possible
 by deleting and recreating it.
 
 ### Encoding Multi-Line Environment Variables
+{:.no_toc}
 
 If you are having difficulty adding a multiline environment variable,
 use `base64` to encode it.
@@ -379,3 +381,8 @@ Variable                    | Type    | Value
 `CIRCLECI`                  | Boolean | `true` (represents whether the current environment is a CircleCI environment)
 `HOME`                      | String  | Your home directory.
 {:class="table table-striped"}
+
+## See Also
+{:.no_toc}
+
+[Contexts]( {{ site.baseurl }}/2.0/contexts/)
