@@ -2,6 +2,7 @@
 layout: classic-docs
 title: What happens when you add a project?
 description: What happens when you add a project?
+sitemap: false
 last_updated: May 2, 2013
 ---
 

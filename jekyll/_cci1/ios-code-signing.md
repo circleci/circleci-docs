@@ -6,6 +6,7 @@ categories: [configuration-tasks]
 description: Setting up code signing for iOS projects
 last_updated: March 2nd, 2016
 order: 72
+sitemap: false
 ---
 
 ## Quick start guide

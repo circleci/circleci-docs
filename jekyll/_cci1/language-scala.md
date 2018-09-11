@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with Scala
 short-title: Scala
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Scala
+sitemap: false
 ---
 
 CircleCI supports building Scala applications with `sbt`. Before each

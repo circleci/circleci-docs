@@ -7,8 +7,9 @@
 {% endif %}
 <div class="outer">
 	{% include global-nav.html %}
+	{% include mobile-sidebar.html %}
 	<div class="main-body">
-		{% unless page.url == "/" %}{% include sidebar.html %}{% endunless %}
+		{% include sidebar.html %}
 		<div class="article-container docs">
 			<form id="site-search" class="doc-search" action="">
 				<input id="cci-search" name="search" type="search" placeholder="Search CircleCI {% if page.collection == 'cci1' %}1.0 {% elsif page.collection == 'cci2' %}2.0 {% elsif page.collection == 'ccie' %}Enterprise {% elsif page.collection == 'api' %}API {% else %}{% endif %}docs" class="form-control" />
@@ -29,8 +30,7 @@
 	<script src="{{ "/assets/js/vendor.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
   <script src="{{ "/assets/js/site.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
   <script src="{{ "/assets/js/jquery.cookie.min.js" | prepend: site.baseurl }}" type="text/javascript" ></script>
-  <script src="{{ "/assets/js/jquery.navgoco.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-	<script src="{{ site.baseurl }}/assets/js/main.js" type="text/javascript"></script>
+	{% asset main.js %}
 	<script src="{{ site.baseurl }}/assets/js/nav.js" type="text/javascript"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
 	<script type="text/javascript">

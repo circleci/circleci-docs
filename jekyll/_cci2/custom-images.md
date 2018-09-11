@@ -7,8 +7,6 @@ categories: [containerization]
 order: 30
 ---
 
-*[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Using Custom-Built Docker Images*
-
 This document describes how to create and use custom Docker images with CircleCI in the following sections:
 
 * TOC
@@ -16,34 +14,46 @@ This document describes how to create and use custom Docker images with CircleCI
 
 ## Overview
 
-CircleCI 2.0 gives you access to the power and flexibility of Docker. One of the ways you can take advantage of this is to create custom Docker images for your jobs. Following are the benefits of creating a custom image:
+CircleCI supports Docker,
+providing you with a powerful way
+to specify dependencies for your projects.
+If the [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) do not suit your needs,
+consider creating a custom Docker image for your jobs.
+There are two major benefits
+of doing this:
 
-1. Faster job execution because you can preinstall all the tools you require, eliminating the need to install them on each job run
-2. A more concise and easier to maintain CircleCI `config.yml` file
+- **Faster job execution --**
+Packaging your required tools into a custom image
+removes the need
+to install them for every job.
+
+- **Cleaner configuration --**
+Adding lengthy installation scripts to a custom image
+reduces the number of lines in your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file.
+
+**Note:**
+When building Docker images,
+CircleCI does not preserve entrypoints by default.
+See [Adding an Entrypoint](#adding-an-entrypoint)
+for more details.
 
 ## CircleCI Dockerfile Wizard 
 
 Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
-
-### How to Customize Docker Images for CircleCI 2.0 Video Tutorial
-
-Watch the following video for a detailed tutorial of customizing Docker images.
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/JYVLeguIbe0" frameborder="0" allowfullscreen></iframe>
-</div>
 
 ## Creating a Custom Image Manually
 
 The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
 ### Prerequisite
+{:.no_toc}
 
 - A working [Docker installation](https://docs.docker.com/install/).
 For more details,
 see Docker's [Getting Started documentation](https://docs.docker.com/get-started/)
 
 ### Creating a `Dockerfile`
+{:.no_toc}
 
 To create a custom image,
 you must [create a `Dockerfile`](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile).
@@ -54,6 +64,7 @@ Consider keeping your `Dockerfile` in your `.circleci/images` folder,
 as shown in [this Docker demo project](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary).
 
 ### Choosing and Setting a Base Image
+{:.no_toc}
 
 Before you create a custom image,
 you must choose another image from which to extend the custom image.
@@ -76,6 +87,7 @@ FROM golang:1.8.0
 ```
 
 ### Installing Additional Tools
+{:.no_toc}
 
 To install any additional tools
 or execute other commands,
@@ -87,6 +99,7 @@ RUN go get github.com/jstemmer/go-junit-report
 ```
 
 #### Required Tools for Primary Containers
+{:.no_toc}
 
 In order to be used as a primary container on CircleCI,
 a custom Docker image must have the following tools installed:
@@ -105,6 +118,7 @@ If you do not install these tools with a package manager,
 you must use the `ADD` instruction instead of `RUN` (see below).
 
 ### Adding Other Files and Directories
+{:.no_toc}
 
 To add files and directories
 that are not present in package managers,
@@ -116,6 +130,7 @@ ADD ./db/migrations /migrations
 ```
 
 ### Adding an Entrypoint
+{:.no_toc}
 
 To run the container as an exectuable,
 use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint).
@@ -138,6 +153,7 @@ If you need to access logs or build status,
 consider using a background step instead of an entrypoint.
 
 ### Building the Image
+{:.no_toc}
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
@@ -157,6 +173,7 @@ Read more about [`docker build` command](https://docs.docker.com/engine/referenc
 Congratulations, you've just built your first image! Now we need to store it somewhere to make it available for CircleCI.
 
 ### Storing Images in a Docker Registry
+{:.no_toc}
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
@@ -194,6 +211,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 **Note:** First, we use `docker login` to authenticate in Docker Hub. If you use a registry other than Docker Hub, refer to the related documentation about how to push images to that registry.
 
 ### Using Your Image on CircleCI
+{:.no_toc}
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 

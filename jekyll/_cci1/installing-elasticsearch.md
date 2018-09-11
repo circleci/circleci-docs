@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Install a custom version of Elasticsearch
 description: Installing a custom version of Elasticsearch
+sitemap: false
 ---
 
 To enable Elasticsearch, add the following to your `circle.yml`:

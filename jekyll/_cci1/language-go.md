@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with Go (Golang)
 short-title: Go (Golang)
 categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Go (Golang)."
+sitemap: false
 ---
 
 CircleCI has built-in support to compile, test, and deploy Go applications. We 

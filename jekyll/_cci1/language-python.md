@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with Python
 short-title: Python
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Python
+sitemap: false
 ---
 
 CircleCI works well for Python projects. We run automatic inference on each

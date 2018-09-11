@@ -3,6 +3,7 @@ layout: classic-docs
 title: Authentication with Google Cloud Platform
 categories: [how-to]
 description: Authentication with Google Cloud Platform
+sitemap: false
 ---
 
 Before using the `gcloud` command line tool to deploy your app to Google Cloud 

@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 20
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Writing YAML*
-
 This document describes the most important features of YAML
 for use in CircleCI configuration.
 
@@ -16,6 +14,7 @@ for use in CircleCI configuration.
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 [YAML](http://yaml.org) is a human-friendly data serialization standard for all programming languages.
 It is a strict superset of [JSON](https://www.json.org/),
@@ -45,6 +44,7 @@ key:
 ```
 
 ### Multi-line Strings
+{:.no_toc}
 
 If the value is a multi-line string,
 use the `>` character,
@@ -63,6 +63,7 @@ Quotes are not necessary
 when using multiline strings.
 
 ### Sequences
+{:.no_toc}
 
 Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar).
 You can also map a scalar to a sequence.
@@ -90,6 +91,7 @@ Remember to properly indent a key-value pair
 when it is the value of an item in a sequence.
 
 ### Anchors and Aliases
+{:.no_toc}
 
 To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`,
 use anchors and aliases.
@@ -120,6 +122,7 @@ song:
 ```
 
 ### Merging Maps
+{:.no_toc}
 
 Anchors and aliases work for scalar values,
 but to save maps or sequences,
@@ -154,7 +157,7 @@ students:
 For a more complex example,
 see [this gist](https://gist.github.com/bowsersenior/979804).
 
-## See More
+## See Also
 
 While YAML has several other features,
 the examples above should be enough
