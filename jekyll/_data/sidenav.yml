@@ -59,6 +59,8 @@
           link: 2.0/local-cli/
         - name: Testing Config Locally
           link: 2.0/examples/
+        - name: Bundling Config
+          link: 2.0/config-bundling/                   
     - name: Examples
       link: 2.0/examples-intro/
       children: 
