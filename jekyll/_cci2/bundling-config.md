@@ -462,7 +462,7 @@ workflows:
 
 A single configuration may invoke a job many times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided.  If you care about the name of the duplicate jobs, they can be explicitly named with the `name` key.
 
->NOTE: The user must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow (ie: if the job is used under the `requires` key of a job invocation in a workflow you will need to name it).
+**Note:** The user must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow (ie: if the job is used under the `requires` key of a job invocation in a workflow you will need to name it).
 
 ```yaml
 version: 2.1
@@ -583,22 +583,84 @@ workflows:
       - foo/bar
 ```
 
+## Conditional Steps
+**Note:** Conditional steps are available in configuration version 2.1 and later.
+
+Conditional steps allow the definition of steps that only run if a condition is
+met. 
+
+<!---
+For example, an orb could define a command that runs a set of steps *if* the
+orb's user invokes it with `myorb/foo: { dostuff: true }`, but not
+`myorb/foo: { dostuff: false }`.
+-->
+
+These conditions are checked before a workflow is actually run. That
+means, for example, that a user can't use a condition to check an environment
+variable.
+
+Conditional steps can be located anywhere a regular step could. 
+
+<!---
+For example, an
+orb author could define conditional steps in the `steps` key of a Job or a
+Command.
+-->
+
+A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run. 
+
+A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
+
+### Example
+{:.no_toc}
+
+```yaml
+# Contents of the orb `myorb` in namespace `mynamespace`
+jobs:
+  myjob:
+    parameters:
+      preinstall-foo:
+        type: boolean
+        default: false
+    machine: true
+    steps:
+      - run: echo "preinstall is << parameters.preinstall-foo >>"
+      - when:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "preinstall"
+      - unless:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "don't preinstall"
+```
+
+```yaml
+# inside config.yml
+version: 2.1
+
+orbs:
+  myorb: mynamespace/myorb@1.0.1
+
+workflows:
+  workflow:
+    jobs:
+      - myorb/myjob:
+          preinstall-foo: false
+      - myorb/myjob:
+          preinstall-foo: true
+```
+
+
 
 ## Authoring and Using Executors 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
-- [What _is_ an executor?](#what-is-an-executor)
-- [Common uses of executors](#common-uses-of-executors)
-- [Declaring and using `executors` in an orbs.](#declaring-and-using-executors-in-an-orbs)
-- [Overriding keys when invoking an executor](#overriding-keys-when-invoking-an-executor)
-- [Using parameters in executors](#using-parameters-in-executors)
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc. 
 
-### What _is_ an executor?
-{:.no_toc}
+Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
-Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc. Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
-
-An executor definition includes the subset of the children keys of a `job` declaration related to setting the environment for a job to execute. This means it does _not_ include `steps`. That subset is one or more of the following keys:
+An executor definition includes the subset of the children keys of a `job` declaration related to setting the environment for a job to execute. This means it does **not** include `steps`. That subset is one or more of the following keys:
 
 - `docker` or `machine` or `macos` 
 - `environment`
@@ -636,11 +698,13 @@ jobs:
 ### Common uses of executors
 {:.no_toc}
 
-Executors in configuration were designed to enable:
-1. Reusing a defined execution environment in multiple jobs in _config.yml_.
-2. Allowing an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
+Executors in configuration were designed to enable re-use of a defined execution environment in multiple jobs in the `config.yml` file.
 
-#### Example - using an executor declared in config.yml in many jobs
+<!---
+2. Allowing an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
+-->
+
+#### Example of Using an Executor Declared in config.yml in Many Jobs
 {:.no_toc}
 
 Imagine you have several jobs that you need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but should run in the same environment. You have three options to accomplish this:
