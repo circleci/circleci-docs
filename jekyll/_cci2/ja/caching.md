@@ -9,7 +9,7 @@ order: 50
 ---
 Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
 
-TOC {:toc}
+- TOC {:toc}
 
 After an initial job run, future instances of the job will run faster by not redoing work.
 
