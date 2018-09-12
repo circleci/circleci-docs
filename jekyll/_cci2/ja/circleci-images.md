@@ -15,7 +15,9 @@ This document provides information about pre-built CircleCI images and a listing
 
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の Docker イメージの拡張版であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の [`circleci-images`](https://github.com/circleci/circleci-images) リポジトリには各 Docker イメージのソースコードも用意しています。 これら Docker イメージの作成に用いる Dockerfiles については [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) リポジトリでチェック可能です。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 These images are typically extensions of official Docker images and include tools especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の [`circleci-images`](https://github.com/circleci/circleci-images) リポジトリには各 Docker イメージのソースコードも用意しています。 これら Docker イメージの作成に用いる Dockerfiles については [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) リポジトリでチェック可能です。
+
+***Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance.*
 
 ## ビルド済みイメージの活用方法
 
