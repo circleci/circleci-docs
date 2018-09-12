@@ -24,7 +24,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 
 4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. You will trigger builds as before, but if you look at the configuration on your Jobs page you will see that it has been run using the new processing service. 
 
-After your build is running successfully with build processing enabled `.circleci/config.yml` file` version 2.1, it is possible to add new keys to bundle config stanzas and run the same job more than once with different parameters (re-use jobs).
+After your build is running successfully with build processing enabled `.circleci/config.yml` file version 2.1, it is possible to add new keys to bundle config stanzas and run the same job more than once with different parameters (re-use jobs).
 
 ## Using the `commands` Key and Authoring commands
 
@@ -56,7 +56,7 @@ A command definition is YAML that defines metadata, parameters, and a sequence o
 A command can have the following immediate children keys as a map:
 
 - **description:** (optional) A string that describes the purpose of the command, used for generating documentation.
-- **parameters:** (optional) A map of parameter keys, each of which adheres to the [parameter](parameters.md) spec.
+- **parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
 - **steps:** (required) A sequence of steps run inside the calling job of the command.
 
 ### Defining Your Commands
@@ -348,7 +348,7 @@ in a map under the `jobs` key in configuration.
 
 Like most elements, jobs can contain an optional but highly recommended `description`.
 
-A user must invoke jobs in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the [parameters documentation](parameters.md) for more detailed information.
+A user must invoke jobs in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters documentation for more detailed information.
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
