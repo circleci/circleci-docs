@@ -6,4 +6,26 @@ var search = instantsearch({
   routing: true
 });
 
+// initialize SearchBox
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '#search-box',
+    cssClasses: { 
+      input: 'instantsearch-search'
+    },
+    placeholder: 'Search for products'
+  })
+);
+
+// initialize hits widget
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '#hits',
+    templates: {
+      empty: 'No results',
+      item: '<a href="/docs/{{ url }}">{{ title }}</a>: {{ content }}'
+    }
+  })
+);
+
 search.start();
