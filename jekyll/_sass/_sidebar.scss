@@ -1,0 +1,139 @@
+$sidebar-spacing-base: 5px;
+
+.sidebar-wrapper {
+  width: 260px;
+  position: relative;
+
+  @media screen and (max-width: $screen-sm) {
+    display: none;
+  }
+}
+
+.sidebar {
+  background: #F7F7F7;
+  font-family: "roboto";
+  height: 92vh;
+  padding: 30px;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+
+  a.active,
+  .nav-span {
+    color: $link-text-color;
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 70px;
+  }
+
+  .main-nav-item {
+    font-weight: 600;
+    width: 200px;
+    font-size: $font-size-small;
+
+    .list-wrap {
+      margin: 0 0 20px 0;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .icon {
+      position: absolute;
+      top: -1px;
+    }
+    .arrow {
+      position: absolute;
+      right: 0;
+      top: $sidebar-spacing-base;
+      transform: rotate(90deg);
+      transition: transform 400ms;
+    }
+    .subnav {
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    &.closed {
+      .arrow {
+        transform: rotate(0deg);
+      }
+      .subnav {
+        height: 0;
+        margin: 0;
+      }
+    }
+  }
+  .nav-item {
+    text-transform: uppercase;
+    font-size: $font-size-micro;
+    font-weight: $font-weight-bold;
+    margin: 10px 0;
+    letter-spacing: .5px;
+  }
+  .subnav-item {
+    font-weight: 100;
+    margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-medium-horizontal;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      a, span.nav-span {
+        color: $body-text-color;
+        margin-left: 30px;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.sidebar-mobile-wrapper {
+  border-top: 1px solid $gray-200;
+  border-bottom: 1px solid $gray-200;
+  width: 100%;
+  background: $gray-100;
+  display: none;
+  cursor: pointer;
+
+  .mobile-sidebar-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-small-vertical $spacing-medium-horizontal;
+
+    &.hidden {
+      display: none;
+    }
+
+    span {
+      display: inline-block;
+      margin-left: $spacing-small-horizontal;
+    }
+
+    .arrow {
+      float: right;
+      margin-top: 5px;
+      transform: rotate(90deg);
+    }
+  }
+
+  .mobile-sidebar {
+    @extend .sidebar;
+    width: 100%;
+    left: 0;
+    top: 133px;
+    z-index: 2;
+
+    .main-nav-item {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: $screen-sm) {
+    display: block;
+  }
+}

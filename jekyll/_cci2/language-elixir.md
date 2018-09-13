@@ -7,11 +7,9 @@ categories: [language-guides]
 order: 2
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Elixir*
-
 This is an annotated `config.yml` for a simple Phoenix web application, which you can access at <https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix>.
 
-If you're in a rush, just copy the configuration below into `.circleci/config.yml` in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
+If you're in a rush, just copy the configuration below into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
 
 ## Sample Configuration
 
@@ -42,7 +40,7 @@ jobs:  # basic units of work in a run
 
       - restore_cache:  # restores saved mix cache
           keys:  # list of cache keys, in decreasing specificity
-            - v1-mix-cache-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
             - v1-mix-cache
       - restore_cache:  # restores saved build cache
@@ -50,18 +48,15 @@ jobs:  # basic units of work in a run
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
       - run: mix do deps.get, compile  # get updated dependencies & compile them
-      - save_cache:  # generate and store cache so `restore_cache` works
-          key: v1-mix-cache-{{ checksum "mix.lock" }}
+      - save_cache:  # generate and store mix cache
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
-      - save_cache:  # make another less specific cache
+      - save_cache:  # make another, less specific cache
           key: v1-mix-cache-{{ .Branch }}
           paths: "deps"
-      - save_cache:  # you should really save one more cache just in case
+      - save_cache:  # you should really save one more cache (just in case)
           key: v1-mix-cache
           paths: "deps"
-      - save_cache: # don't forget to save a *build* cache, too
-          key: v1-mix-cache-{{ checksum "mix.lock" }}
-          paths: "_build"
       - save_cache: # don't forget to save a *build* cache, too
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"
@@ -80,3 +75,8 @@ jobs:  # basic units of work in a run
 ```
 
 {% endraw %}
+
+## See Also
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+[Configuring Databases]({{ site.baseurl }}/2.0/databases/)

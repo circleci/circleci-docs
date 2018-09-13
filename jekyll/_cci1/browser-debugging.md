@@ -2,6 +2,7 @@
 layout: classic-docs
 title: "Interacting with the browser on CircleCI's VM"
 description: "How to interact with a browser on CircleCI's VM"
+sitemap: false
 ---
 
 Integration tests can be hard to debug, especially when they're running on a remote machine.

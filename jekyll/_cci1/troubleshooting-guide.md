@@ -4,6 +4,7 @@ title: Troubleshooting guide
 short-title: Troubleshooting guide
 categories: [troubleshooting]
 description: Troubleshooting guide
+sitemap: false
 ---
 
 ### The build passes locally but fails on CircleCI

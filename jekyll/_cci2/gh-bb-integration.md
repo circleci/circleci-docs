@@ -6,14 +6,13 @@ categories: [migration]
 Order: 60
 ---
 
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Using GitHub or Bitbucket*
-
 This document provides an overview of using GitHub or Bitbucket with CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
@@ -25,13 +24,14 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 - CircleCI processes PR hooks to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GithHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
+It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
-## Adding a .circleci/config.yml File
+### Add a .circleci/config.yml File
+{:.no_toc}
 
-After you create and commit a `.circleci/config.yml` file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -86,24 +86,53 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
+## Creating a Machine User
 
-<h2 id="machine-user-keys">Machine user keys</h2>
+For fine-grained access to multiple repositories,
+consider creating a machine user
+for your CircleCI projects.
+A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user
+that you create for running automated tasks.
+By using the SSH key of a machine user,
+you allow anyone with repository access
+to build, test, and deploy the project.
+Creating a machine user also reduces
+the risk of losing credentials linked to a single user.
 
-Consider using a machine user's SSH key instead of a regular user's key for automated tasks that may have restricted access to required repos. A [machine user](https://developer.github.com/guides/managing-deploy-keys/#machine-users) is a GitHub user which you create only for automated tasks.  Add a machine user's SSH key to your projects on CircleCI and use that key as the *Checkout SSH key* for these projects, instead of using deploy keys or your own SSH keys.
+To use the SSH key of a machine user,
+follow the steps below.
 
-Here are the steps to set a machine user's SSH key as a checkout key for your project. **Note:** An account with admin privileges of the organization is required to perform these steps.
+**Note:**
+To perform these steps,
+the machine user must have admin access.
+When you have finished adding projects,
+you can revert the machine user to read-only access.
 
-1. Log in to GitHub as the machine user.
+1. Create a machine user
+by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
 
-2. Go to <https://circleci.com> and log in. GitHub will ask you to authorize CircleCI to access the machine user's account, so click on the **Authorize application** button.
+2. Log in to GitHub as the machine user.
 
-3. Go to <[https://circleci.com/add-projects](https://circleci.com/add-projects){:rel="nofollow"}> and follow the projects you want the machine user to have access to.
+3. [Log in to CircleCI](https://circleci.com/login).
+When GitHub prompts you
+to authorize CircleCI,
+click the **Authorize application** button.
 
-4. Go to the **Project Settings > Checkout SSH keys** page and then click on the ***Authorize w/GitHub*** button to give CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+4. On the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page,
+follow all projects
+you want the machine user to have access to.
 
-5. Click the ***Create and add XXXX user key*** button on the same page.
+5. On the **Project Settings > Checkout SSH keys** page,
+click the **Authorize With GitHub** button.
+This gives CircleCI permission
+to create and upload SSH keys to GitHub
+on behalf of the machine user.
 
-CircleCI will use the machine user's SSH key for any git commands run during your builds.
+6. Click the **Create and add XXXX user key** button.
+
+Now, CircleCI will use the machine user's SSH key
+for any Git commands
+that run during your builds.
 
 ## Permissions Overview
 
@@ -131,7 +160,8 @@ because GitHub does not provide a read-only permission.
 If you feel strongly about reducing the number of permissions CircleCI uses,
 consider contacting your VCS provider to communicate your concerns.
 
-## Permissions for Team Accounts
+### Permissions for Team Accounts
+{:.no_toc}
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
 
@@ -141,7 +171,8 @@ This section provides an overview of the possible team and individual account ch
 
 3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
-## How to Re-enable CircleCI for a GitHub Organization
+### How to Re-enable CircleCI for a GitHub Organization
+{:.no_toc}
 
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
 
@@ -172,6 +203,7 @@ you will need a deployment key with write access (user key).
 The steps to create a user key depend on your VCS.
 
 ### Creating a GitHub User Key
+{:.no_toc}
 
 In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
@@ -211,6 +243,7 @@ When you push to your GitHub repository from a job,
 CircleCI will use the SSH key you added.
 
 ### Creating a Bitbucket User Key
+{:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API
 to create user keys.

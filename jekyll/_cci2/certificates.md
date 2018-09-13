@@ -102,7 +102,7 @@ If you're using Route 53 for your DNS records, adding a TXT record is straightfo
 
 ### Using Self-Signed Certificates
 
-Because the ELB does not require a _current_ certificate, you may choose to generate a self-signed certificate with an arbritatry duration.
+Because the ELB does not require a _current_ certificate, you may choose to generate a self-signed certificate with an arbitrary duration.
 
 1. Generate the certificate and key using openssl command `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 1 -out certificate.pem`
 

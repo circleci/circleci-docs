@@ -4,6 +4,7 @@ title: Ubuntu 14.04 (Trusty)
 categories: [build-images]
 description: Ubuntu 14.04 (Trusty)
 changefreq: "weekly"
+sitemap: false
 ---
 
 The default image is Ubuntu 14.04 (Trusty), but you can always change the image directly by going to 'Project Settings' -> 'Build Environment'.
