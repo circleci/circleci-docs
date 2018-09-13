@@ -90,8 +90,7 @@ this access with `iptables` rules in a production setup, [contact support](https
 
 ### Configure CircleCI
 1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
-- Note: If you are using a self-signed cert, or using a custom CA root, select the HTTPS (with self-signed certificate) option in the System Console at port 8800.
-You also need to export `CIRCLE_IGNORE_CERT_HOST=insecure-ghe.example.com` on builder machines replacing `insecure-ghe.example.com` with the host of your GitHub Enterprise instance. See [this doc]({{site.baseurl}}/enterprise/docker-builder-config/) for details on setting builder machine environment variables.
+- Note: If you are using a self-signed cert, or using a custom CA root, please see the [certificates]({{site.baseurl}}/2.0/certificates/) document for a script to add the information to the CircleCI truststore.
 2. Upload the CircleCI license file and set the admin password.
 3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
 4. Select "Single Box" in the "Builders Configuration" section(s).
