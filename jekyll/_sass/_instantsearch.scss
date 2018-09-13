@@ -1,0 +1,27 @@
+.base-input-style {
+  border-radius: 0;
+  padding: 1em 1em 1em 2.8em;
+}
+
+#search-box {
+  .instantsearch-search {
+    @extend .base-input-style;
+  }
+}
+
+#mobile-search-box {
+  display: none;
+
+  .ais-search-box {
+    max-width: 100%;
+  }
+
+  .instantsearch-search {
+    @extend .base-input-style;
+    width: 100%;
+  }
+
+  @media screen and (max-width: $screen-sm) {
+    display: block;
+  }
+}

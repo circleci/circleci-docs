@@ -10,7 +10,18 @@ var search = instantsearch({
 search.addWidget(
   instantsearch.widgets.searchBox({
     container: '#search-box',
-    cssClasses: { 
+    cssClasses: {
+      input: 'instantsearch-search'
+    },
+    placeholder: 'Search for products'
+  })
+);
+
+// initialize SearchBox
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '#mobile-search-box',
+    cssClasses: {
       input: 'instantsearch-search'
     },
     placeholder: 'Search for products'
