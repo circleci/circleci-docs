@@ -36,17 +36,17 @@ SSH で Nomad クライアントのサービスボックスにアクセスし、
 
 2. CircleCI を再起動する
 
-3. Nomad クライアントにビルダーボックスを登録するための `init` スクリプトで、その中にある `CIRCLE_SECRET_PASSPHRASE` を書き換える
+3. Update `CIRCLE_SECRET_PASSPHRASE` in the `init` script that you use to add Nomad Clients to your fleet.
 
-これで、Nomad クライアントに join した新しいビルダーボックスが変更後のパスフレーズを使うようになります。 古いパスフレーズを使っている既存のビルダーボックスもこれまで通り動作します。 ただし、すべてのクライアントで同じパスフレーズを使うよう、そうしたビルダーボックスもできるだけ早めに再起動した方が良いでしょう。
+New Nomad Clients joining the fleet will use the new passphrase. Existing Nomad Clients with the old passphrase will also continue functioning. ただし、すべてのクライアントで同じパスフレーズを使うよう、そうしたビルダーボックスもできるだけ早めに再起動した方が良いでしょう。
 
-#### ビルダーインスタンスを安全にシャットダウンさせるには？
+#### How can I gracefully shutdown a Nomad Clients?
 
 [Nomad クラスタの運用方法]({{site.baseurl}}/2.0/nomad/) をお読みください。
 
 #### CircleCI では iOS/macOS アプリケーションのビルドは可能ですか？
 
-iOS アプリのビルドは対応済みですが、macOS アプリケーションのビルドは今後対応予定です。新機能のアーリーアクセスにご興味をお持ちでしたら当社までお問い合わせください。
+Support for running your own macOS fleet is coming soon. Contact your account team to express interest in getting on the early access list.
 
 #### GitHub の認証テストに失敗してしまいます。
 
