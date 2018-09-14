@@ -44,6 +44,6 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 - CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素について説明している[コンセプト]({{ site.baseurl }}/2.0/concepts/)ページをご覧ください。
 
-- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは Workflow の手動処理の例は [Workflow]({{ site.baseurl }}/2.0/workflows) ページが参考になります。 
+- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページが参考になります。 
 
 - Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
