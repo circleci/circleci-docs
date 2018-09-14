@@ -1,30 +1,30 @@
 ---
 layout: classic-docs
-title: "Bundling Config"
-short-title: "Bundling Config"
-description: "Bundling configuration with CircleCI 2.1"
+title: "Reusing Config"
+short-title: "Reusing Config"
+description: "Reusing configuration in CircleCI 2.1"
 categories: [configuration]
 order: 1
 ---
 
 
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with bundling config.
+This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusing config.
 
 * TOC
 {:toc}
 
-## Getting Started with Config Bundling
+## Getting Started with Config Reuse
 {:.no_toc}
 
 1. Add your project on the Add Projects page if it is a new project. For an existing Project, go to the Project Settings and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
 
-2. Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation.
+2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
 3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new processing before adding any new 2.1 keys to your config.
 
 4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. You will trigger builds as before, but if you look at the configuration on your Jobs page you will see that it has been run using the new processing service. 
 
-After your build is running successfully with build processing enabled `.circleci/config.yml` file version 2.1, it is possible to add new keys to bundle config stanzas and run the same job more than once with different parameters (re-use jobs).
+After your build is running successfully with build processing enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to bundle config stanzas and run the same job more than once with different parameters (re-use jobs).
 
 ## Using the `commands` Key and Authoring commands
 
@@ -62,7 +62,7 @@ A command can have the following immediate children keys as a map:
 ### Defining Your Commands
 {:.no_toc}
 
-Commands are declared under the `commands` key of a `config.yml` or `orb.yml` file. For instance, to make a command called `sayhello` it might look like:
+Commands are declared under the `commands` key of a `config.yml` file. For instance, to make a command called `sayhello` it might look like:
 
 ```yaml
 commands:
@@ -87,7 +87,7 @@ Commands can use other commands in the scope of execution.
 For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 -->
 
-## Built-in Commands
+## Built-In Commands
 
 CircleCI has several built-in commands available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of built-in commands are:
 
@@ -95,7 +95,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
   * `setup_remote_docker`
   * `save_to_workspace`
 
-**Note:** Built-in commands are implicitly in the empty scope and are thus syntactically equivalent to primitives such as `run`). This _may_ change in future versions of configuration but is true to maintain compatibility with version `2` configuration.
+**Note:** It is possible to override the built-in commands with a custom command.
 
 ## Examples
 
@@ -120,7 +120,7 @@ commands:
           name: Deploy to S3
           command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 ```
---->
+
 
 Defining a command called "s3sync" is invoked in a 2.1 `.circleci/config.yml` file as:
 
@@ -140,8 +140,9 @@ workflows:
               to: "s3://mybucket_uri"
               overwrite: true
 ```
+--->
 
-If the same command were declared locally inside `config.yml` it would look something like:
+Defining a command called `s3sync` locally inside `config.yml` it would look something like:
 
 ```yaml
 commands:
@@ -213,13 +214,53 @@ A parameter can have the following keys as immediate children:
 | Key Name    | Description                                                                                   | Default value |
 |-------------|-----------------------------------------------------------------------------------------------|---------------|
 | description | Optional. Used to generate documentation for your orb.                                        | N/A           |
-| type        | Required. Currently "string", "boolean", "enum", and "steps" are supported                           | N/A           |
+| type        | Required. Currently "string", "boolean", "enum" (takes extra keys), and "steps" are supported                           | N/A           |
 | default     | The default value for the parameter. If not present, the parameter is implied to be required. | N/A           |
 
 ### Parameter Types
 {:.no_toc}
 
 This section describes the types of parameters and their usage.
+
+### Parameter Scope
+{:.no_toc}
+
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
+
+```yaml
+version: 2.1
+
+jobs:
+  sayhello:
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          # Since the command "say" doesn't define a default
+          # value for the "saywhat" parameter, it must be
+          # passed in manually
+          saywhat: << parameters.saywhat >>
+
+commands:
+  say:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
+
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          saywhat: Everyone
+```
+
 
 #### String
 {:.no_toc}
@@ -238,7 +279,7 @@ commands:
       - cp *.md << destination >>
 ```
 
-Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in yaml. In all other instances, quotes are optional.
+Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in yaml, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy.
 
 #### Boolean
 {:.no_toc}
@@ -309,7 +350,7 @@ steps:
 #### Enum Parameter
 {:.no_toc}
 
-Use the `enum` parameter to declare the target operating system for a binary.
+The `enum` parameter may be a lits of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
 commands:
@@ -416,44 +457,6 @@ workflows:
 ```
 --->
 
-### Parameter Scope
-{:.no_toc}
-
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
-
-
-```yaml
-version: 2.1
-
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          # Since the command "say" doesn't define a default
-          # value for the "saywhat" parameter, it must be
-          # passed in manually
-          saywhat: << parameters.saywhat >>
-
-commands:
-  say:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
-
-workflows:
-  build:
-    jobs:
-      - sayhello:
-          saywhat: Everyone
-```
 
 
 
@@ -488,9 +491,9 @@ workflows:
 ### Pre and Post Steps
 {:.no_toc}
 
-**Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later_
+**Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
 
-Every job accepts two special arguments: `pre-steps` and `post-steps`.
+Every job invocation can optionally accept two special arguments: `pre-steps` and `post-steps`.
 You can optionally invoke a job with one or both of these arguments. Steps under `pre-steps`
 are executed before any of the other steps in the job. The steps under
 `post-steps` are executed after all of the other steps.
@@ -516,7 +519,7 @@ the job will run the steps in `pre-steps` first, before any other steps run, and
 then it will run the steps in `post-steps` last, after any other steps run.
 
 Pre- and post- steps allow users to be execute steps in a given job's environment
-without modifying the orb. This is useful, for example, when a user imports a job
+without modifying the job. This is useful, for example, when a user imports a job
 and wants to upload assets after it completes, or to run some custom setup steps
 before job execution. Pre- and post- steps allow the user to make these additions
 without modifying the imported job.
@@ -527,10 +530,9 @@ but it requires that the job be modified with an execution site for the paramete
 #### Example of Using Pre- and Post-Steps
 {:.no_toc}
 
-An orb `foo` might define a job:
+Define a job:
 
 ```yaml
-# yaml from orb `foo`
 jobs:
   bar:
     machine: true
@@ -542,12 +544,10 @@ jobs:
           command: echo "testing"
 ```
 
-Then an orb user could use the job as follows:
+Then use the job as follows:
 ```yaml
 # config.yml
 version: 2.1
-orbs:
-  foo: somenamespace/foo@1.2
 workflows:
   build:
     jobs:
