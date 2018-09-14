@@ -61,22 +61,22 @@ Also note that when the instructions ask you if you use a proxy, they will also 
 If you cannot access the page of the CircleCI Replicated management console, but the services machine seems to be running, try to SSH tunnel into the machine doing the following: `ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_box>`. 
 
 
-### Builder Box configuration:
+### Nomad Client Configuration
 
 - **External Network Calls** - CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, along with jars from Amazon S3. Both `curl` and `awscli` respect environment settings, but if you have whitelisted traffic from Amazon S3 you should not have any problems.
   
 - **Internal Network Calls** 
   - CircleCI JVM:  
-    - Any connections to other Builders or the Services machine should be excluded from HTTP proxy
+    - Any connections to other Nomad Clients or the Services machine should be excluded from HTTP proxy
     - Connections to GitHub Enterprise should be excluded from HTTP proxy
   - The following contains parts that may be impacted due to a proxy configuration:
       - Amazon EC2 metadata (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).  This **should not** be proxied.  If it is, then the machine will be misconfigured.
       - Amazon S3 traffic — note S3 discussion above
       - Amazon EC2 API - EC2 API traffic may need to be proxied.  You would note lots of failures (timeout failures) in logs if the proxy setting is misconfigured, but it will not block CircleCI from functioning.
 
-### Setup Builder Proxy Support
+### Nomad Client Proxy Setup
 
-If you are using AWS Terraform install you'll have to add the below to your builder's launch configuration. These instructions should be added to `/etc/environment`. If you are using Docker Builders, refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
+If you are using AWS Terraform install you'll have to add the below to your Nomad client launch configuration. These instructions should be added to `/etc/environment`. If you are using Docker, refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
 
 
 ```
