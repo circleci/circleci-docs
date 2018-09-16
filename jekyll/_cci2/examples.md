@@ -27,6 +27,8 @@ curl --user ${CIRCLE_TOKEN}: \
         https://circleci.com/api/v1.1/project/<source, eg. github>/<user name>/<project name>/tree/<branch name>
 ```
 
+NB - this is specific to projects using config.yml, i.e. those on CircleCI 1.0. For 2.0 projects, consider using the CLI linked below.
+
 Now you can run the shell script and debug your `config.yml` file without having to push through the repo.
 
 ## See Also
