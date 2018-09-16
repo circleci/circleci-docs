@@ -128,7 +128,7 @@ In the example below, two keys are provided:
 
 {% endraw %}
 
-keys 内の 2 番目の項目が 1 番目よりも短いのは、その方が現在の状態と生成された最新のキャッシュとの間で差分が生じやすいためです。 （npm のような）依存関係管理ツールを実行すると、古くなった依存関係を見つけ、更新します。 これは**部分キャッシュリストア**とも呼ばれます。
+keys 内の 2 番目の項目が 1 番目よりも短いのは、その方が現在の状態と生成された最新のキャッシュとの間で差分が生じやすいためです。 npm のような依存関係管理ツールを実行すると、古くなった依存関係を見つけ、更新します。 これは**部分キャッシュリストア**とも呼ばれます。
 
 ### Clearing Cache
 
@@ -163,11 +163,11 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-**※**特殊な [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace) ステップとは違って、`save_cache` も `restore_cache` も、`paths` キーに対してワイルドカードによるグロブをサポートしません。
+**注：**特別な [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace) ステップとは違って、`save_cache` も `restore_cache` も、`paths` キーに対してワイルドカードによるグロブをサポートしません。
 
 ## Using Keys and Templates
 
-キャッシュキーにテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 ビルドのたびに新しいキャッシュを生成したくないときは、変更があった場合にのみ新しいキャッシュを生成する`キー`を指定します。
+キャッシュ`キー`にテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 ビルドのたびに新しいキャッシュを生成したくないときは、変更があった場合にのみ新しいキャッシュを生成する`キー`を指定します。
 
 まず初めに、プロジェクトにおいて一意となる値のキーを用いて、キャッシュを保存・復元するタイミングを決めます。 ビルド番号が増えたとき、リビジョンが上がったとき、依存マニフェストファイルのハッシュ値が変わったときなどが考えられます。
 
@@ -179,11 +179,11 @@ The path for directories is relative to the `working_directory` of your job. You
     `package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチは、それごとに異なるキャッシュキーを生成します 
 - {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
 
-ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列がキーの値として使われます。 CirlceCI のキャッシュキーで利用可能なテンプレートを下記の表にまとめました。
+ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。 CirlceCI のキャッシュ`キー`で利用可能なテンプレートを下記の表にまとめました。
 
-テンプレート | 解説 \----|\---\---\---- {% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのブランチ名 {% raw %}`{{ .BuildNum }}`{% endraw %} | 実行中のビルドにおける CircleCI のジョブ番号 {% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのリビジョン {% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 （[定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できます。ユーザー定義の環境変数は使えません） {% raw %}`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイル内容の SHA256 ハッシュを Base64 エンコードしたもの。ファイル内容に変更があるとキャッシュキーも新たに生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 また、`restore_cache` から `save_cache` までの処理でファイル内容が変わらないようにします。そうしないと `restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にキャッシュが保存されることになります。 {% raw %}`{{ epoch }}`{% endraw %} | 協定世界時（UTC）における 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX 時間や Unix 時間と同じです {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください {: class="table table-striped"}
+テンプレート | 解説 \----|\---\---\---- {% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのブランチ名。 {% raw %}`{{ .BuildNum }}`{% endraw %} | 実行中のビルドにおける CircleCI のジョブ番号。 {% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのリビジョン。 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 ([定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。 {% raw %}`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイル内容の SHA256 ハッシュを Base64 エンコードしたもの。ファイル内容に変更があるとキャッシュキーも新たに生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 また、`restore_cache` から `save_cache` までの処理でファイル内容が変わらないようにします。そうしないと `restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にキャッシュが保存されることになります。 {% raw %}`{{ epoch }}`{% endraw %} | 協定世界時 (UTC) における 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX 時間や UNIX 時間と同じです。 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください {: class="table table-striped"}
 
-※キャッシュに対してユニークな識別子を定義する際には、{% raw %}`{{ epoch }}`{% endraw %} のような厳密すぎる値になるテンプレートをむやみに使わないよう注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。 これについては、以降で説明するようにトレードオフの関係にあると言えます。
+**注：**キャッシュに対してユニークな識別子を定義する際には、{% raw %}`{{ epoch }}`{% endraw %} のような厳密すぎる値になるテンプレートをむやみに使わないよう注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。 これについては、以降で説明するようにトレードオフの関係にあると言えます。
 
 ### Full Example of Saving and Restoring Cache
 
