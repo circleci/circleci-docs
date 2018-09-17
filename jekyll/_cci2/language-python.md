@@ -100,6 +100,3 @@ refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-referen
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for caching strategies.
-
-
-
