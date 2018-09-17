@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Language Guide: Python"
 short-title: "Python"
-description: "Building and Testing with Python on CircleCI 2.0"
+description: "Continuous integration and deployment with Python on CircleCI"
 categories: [language-guides]
 order: 7
 ---
