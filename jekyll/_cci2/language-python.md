@@ -14,14 +14,14 @@ using a sample application written in Python.
 * TOC
 {:toc}
 
-## Demo Python Django Reference Project
+## Overview
 
-We maintain a reference Python Django project to show how to build Django on CircleCI 2.0:
-
-- <a href="https://github.com/CircleCI-Public/circleci-demo-python-django" target="_blank">Demo Python Django Project on GitHub</a>
-[Demo Python Django Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}
-
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Python projects.
+This guide uses a [sample Django application](https://github.com/CircleCI-Public/circleci-demo-python-django)
+to describe configuration best practices for Python applications
+building on CircleCI.
+Consider forking this sample project
+and recreating `.circleci/config.yml`
+while you follow the guide.
 
 Refer to the [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample Flask application: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
 
