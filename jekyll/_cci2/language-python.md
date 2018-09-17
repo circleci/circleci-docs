@@ -7,7 +7,9 @@ categories: [language-guides]
 order: 7
 ---
 
-This document describes the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a sample application written in Python. 
+This document describes
+how to use CircleCI
+using a sample application written in Python.
 
 * TOC
 {:toc}
