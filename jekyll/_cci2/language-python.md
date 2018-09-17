@@ -20,8 +20,8 @@ This guide uses a [sample Django application](https://github.com/CircleCI-Public
 to describe configuration best practices
 for Python applications building on CircleCI.
 Consider [forking this repository](https://help.github.com/articles/fork-a-repo/)
-and recreating `.circleci/config.yml`
-while you follow the guide.
+and rewriting `.circleci/config.yml`
+while following this guide.
 
 ## Pre-Built CircleCI Docker Images
 
