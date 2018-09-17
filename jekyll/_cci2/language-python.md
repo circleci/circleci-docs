@@ -31,6 +31,18 @@ Database images for use as a secondary 'service' container are also available on
 
 ## Config Walkthrough
 
+### Specify a Python version (pick a Docker image)
+
+### Add additional services (databases, etc.)
+
+### Install package managers and dependencies
+
+### Set up caching rules for dependencies
+
+### Run test suites
+
+### Deploy the application
+
 Start with the version:
 
 ```yaml
