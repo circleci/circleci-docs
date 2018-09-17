@@ -23,8 +23,6 @@ Consider forking this sample project
 and recreating `.circleci/config.yml`
 while you follow the guide.
 
-Refer to the [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample Flask application: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
-
 ## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/python/>. The demo project uses an official CircleCI image.
@@ -100,5 +98,6 @@ refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-referen
 ## See Also
 {:.no_toc}
 
+- See the [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a sample Flask application.
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for caching strategies.
