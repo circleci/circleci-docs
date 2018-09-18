@@ -27,19 +27,19 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2` or `2.1` See [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/#section=configuration) for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
+version | Y | String | `2` or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
 ## **`commands`** (requires version:2.1)
 
-A [command definition]({{ site.baseurl }}/2.0/reusing-config/) defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+parameters | N  | Map | A map of parameter keys. See the Parameter Syntax section of the Reusing Config document for details.
 description | N | String | A string that describes the purpose of the command.
 {: class="table table-striped"}
 
@@ -87,7 +87,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-See also [Using Parameters in Executors]({{ site.baseurl }}/2.0/reusing-config/#using-parameters-in-executors) for examples of parameterized executors.
+See the Using Parameters in Executors section of the Reusing Config document for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -576,7 +576,7 @@ steps:
 
 ##### **`when`** (requires version: 2.1)
 
-A [conditional step]({{ site.baseurl }}/2.0/reusing-config/#conditional-steps) consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. See the Conditional Steps section of the Reusing Config document for details.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
