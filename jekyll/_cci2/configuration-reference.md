@@ -7,11 +7,11 @@ categories: [configuring-jobs]
 order: 20
 ---
 
-This document is a reference for the CircleCI 2.0 configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
+This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
 
 You can see a complete `config.yml` in our [full example](#full-example).
 
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.0 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
+**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
 ---
 
@@ -27,10 +27,67 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | Should currently be `2`
+version | Y | String | `2` or `2.1` See [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/#section=configuration) for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+
+## **`commands`** (requires version:2.1)
+
+A [command definition]({{ site.baseurl }}/2.0/reusing-config/) defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
+parameters | N  | Map | A map of parameter keys. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+description | N | String | A string that describes the purpose of the command.
+{: class="table table-striped"}
+
+Example:
+
+```yaml
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+```
+
+## **`executors`** (requires version 2.1)
+
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
+machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
+macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
+shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
+working_directory | N | String | In which directory to run the steps.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+{: class="table table-striped"}
+
+Example:
+
+```yaml
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
+
+See also [Using Parameters in Executors]({{ site.baseurl }}/2.0/reusing-config/#using-parameters-in-executors) for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -397,7 +454,7 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-##### _Default shell options_
+###### _Default shell options_
 
 The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified by default). Hence, the default shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files. Descriptions of the `-eo pipefail` options are provided below.
 
@@ -442,7 +499,7 @@ In general, we recommend using the default options (`-eo pipefail`) because they
 For more information,
 see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
 
-##### _Background commands_
+###### _Background commands_
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
@@ -455,7 +512,7 @@ The `background` attribute enables you to configure commands to run in the backg
 - run: make test
 ```
 
-##### _Shorthand syntax_
+###### _Shorthand syntax_
 
 `run` has a very convenient shorthand syntax:
 
@@ -469,7 +526,7 @@ The `background` attribute enables you to configure commands to run in the backg
 ```
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
-##### The `when` Attribute
+###### The `when` Attribute
 
 By default, CircleCI will execute job steps one at a time, in the order that
 they are defined in `config.yml`, until a step fails (returns a non-zero exit
@@ -492,7 +549,7 @@ if you want to store some diagnostic data to help debug test failures, or to run
 custom notifications about the failure, such as sending emails or triggering
 alerts in chatrooms.
 
-##### _Example_
+###### _Example_
 
 ```yaml
 steps:
@@ -516,6 +573,16 @@ steps:
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
 ```
+
+##### **`when`** (requires version: 2.1)
+
+A [conditional step]({{ site.baseurl }}/2.0/reusing-config/#conditional-steps) consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+condition | Y | String | A parameter value
+<step_type> |	Y |	Map or String |	A configuration map for the step or some string whose semantics are defined by the step.
+{: class="table table-striped"}
 
 ##### **`checkout`**
 
