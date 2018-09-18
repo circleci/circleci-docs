@@ -97,9 +97,9 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 **Note:** It is possible to override the built-in commands with a custom command.
 
+<!---
 ## Examples
 
-<!---
 The following is a an example of part of an "s3tools" orb defining a command called "s3sync":
 
 ```yaml
@@ -142,6 +142,14 @@ workflows:
 ```
 --->
 
+
+
+## Using the `parameters` Declaration
+
+**Note:** The `parameters` declaration is available in configuration version 2.1 and later.
+
+Many config elements can be authored to be invocable in your `config.yml` file with specified parameters. Parameters are declared by name as the keys in a map that are all immediate children of the `parameters` key under a job, command, or executor. 
+
 Defining a command called `s3sync` locally inside `config.yml` it would look something like:
 
 ```yaml
@@ -171,39 +179,6 @@ jobs:
           from: .
           to: "s3://mybucket_uri"
           overwrite: true
-```
-
-## Using the `parameters` Declaration
-
-**Note:** The `parameters` declaration is available in configuration version 2.1 and later.
-
-Many config elements can be authored to be invocable in your `config.yml` file with specified parameters. Parameters are declared by name as the keys in a map that are all immediate children of the `parameters` key under a job, command, or executor. 
-
-For instance, the following shows declaring a parameter `foo` in the definition of a command `bar`:
-
-```yaml
-commands:
-  bar:
-    parameters:
-      foo:
-        description: this parameter is used for a thing
-        default: "I'm a default value"
-        type: string
-
-    steps:
-      - run: echo '<< parameters.foo >>'
-```
-
-In the above example a value for the parameter `foo` can be passed when invoking the command. For instance, passing the parameter `foo` would look something like:
-
-```yaml
-jobs:
-  myjob:
-    docker:
-      - image: circleci/ruby:2.4-node
-    steps:
-      - bar:
-          foo: "I'm the passed value"
 ```
 
 ### Parameter Syntax
@@ -279,7 +254,7 @@ commands:
       - cp *.md << destination >>
 ```
 
-Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in yaml, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy.
+Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
 #### Boolean
 {:.no_toc}
@@ -308,7 +283,7 @@ Capitalized and uppercase versions of the above values are also valid.
 #### Steps
 {:.no_toc}
 
-Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as an array, even if only one step is provided.
+Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
 ```yaml
 commands:
@@ -324,7 +299,7 @@ commands:
     - run: make test
 ```
 
-Steps passed as parameters are given as the value of a `steps` declaration under the job's `steps` declaration and are expanded and spliced into the array of existing steps. For example,
+Steps passed as parameters are given as the value of a `steps` declaration under the job's `steps` declaration and are expanded and spliced into the sequence of existing steps. For example,
 
 ```yaml
 jobs:
@@ -350,7 +325,7 @@ steps:
 #### Enum Parameter
 {:.no_toc}
 
-The `enum` parameter may be a lits of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
+The `enum` parameter may be a lists of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
 commands:
@@ -599,7 +574,7 @@ These conditions are checked before a workflow is actually run. That
 means, for example, that a user can't use a condition to check an environment
 variable.
 
-Conditional steps can be located anywhere a regular step could. 
+Conditional steps can be located anywhere a regular step could and only use parameter values as inputs. 
 
 <!---
 For example, an
@@ -615,7 +590,8 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 {:.no_toc}
 
 ```yaml
-# Contents of the orb `myorb` in namespace `mynamespace`
+# inside config.yml
+version: 2.1
 jobs:
   myjob:
     parameters:
@@ -633,19 +609,11 @@ jobs:
           condition: << parameters.preinstall-foo >>
           steps:
             - run: echo "don't preinstall"
-```
-
-```yaml
-# inside config.yml
-version: 2.1
-
-orbs:
-  myorb: mynamespace/myorb@1.0.1
 
 workflows:
   workflow:
     jobs:
-      - myorb/myjob:
+      - myjob:
           preinstall-foo: false
       - myorb/myjob:
           preinstall-foo: true
@@ -675,7 +643,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:volatile
+      - image: circleci/ruby:2.5.1-node-browsers
 
 jobs:
   my-job:
@@ -768,6 +736,7 @@ jobs:
       - run: echo "how are ya?"
 ```
 
+<!---
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
 ```yaml
@@ -804,6 +773,8 @@ jobs:
 
 Note that `foo-orb/bar` and `baz-orb/bar` are different executors. They
 both have the local name `bar` relative to their orbs, but the are independent executors living in different orbs.
+
+-->
 
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
@@ -856,7 +827,7 @@ jobs:
 
 If you'd like to use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter that you would like to pass in.
 
-Parameters in executors can be of the type `string` or `boolean`. Default values can be provided with the optional `default` key.
+Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
 #### Example Build Configuration Using a Parameterized Executor
 {:.no_toc}
