@@ -20,15 +20,15 @@ CircleCI builds push hooks by default. So, builds are triggered for all push hoo
 
 There are some additional, less common cases where CircleCI uses hooks, as follows: - CircleCI processes PR hooks to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch. - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI は常にプッシュがビルドの契機となり、（設定すれば）プルリクエスト時にもビルドを実行することになります。しかしながら、Webhooks の設定でプッシュ時のフックを除外すれば、CircleCI はビルドを実行しなくなります。 Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
+It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI は常にプッシュがビルドの契機となり、（設定すれば）プルリクエスト時にもビルドを実行することになります。しかしながら、Webhooks の設定でプッシュ時のフックを除外すれば、CircleCI はビルドを実行しなくなります。 フックと Webhooks については、[GitHub のページ](https://developer.github.com/v3/repos/hooks/#edit-a-hook) や [Bitbucket のページ](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) で詳しく知ることができます。
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes.
 
-### Add a .circleci/config.yml File
+### .circleci/config.yml の追加方法
 
 {:.no_toc}
 
-After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成し、GitHub や Bitbucket のリポジトリに対してコミットした後、CircleCI は直ちにそのコードをチェックアウトしたうえで、テストを含む最初のジョブを実行します。 For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -77,9 +77,9 @@ Here are common errors that indicate you need to add a user key.
     Permission denied (publickey).
     
 
-## Creating a Machine User
+## マシンユーザーの作成方法
 
-For fine-grained access to multiple repositories, consider creating a machine user for your CircleCI projects. A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
+複数のリポジトリにこまめにアクセスするような場合、CircleCI のプロジェクトにマシンユーザーを追加するのがおすすめです。 [マシンユーザー](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) は、タスクの自動実行を実現するために作成する GitHub ユーザーのことです。 マシンユーザーの SSH 鍵を利用することで、プロジェクトのビルド、テスト、デプロイを行うためのリポジトリアクセスが誰でもできるようになります。 マシンユーザーはさらに、個別のユーザーにひもづけられた証明書を当人が紛失してアクセスできなくなる、というリスクの対策にもなります。
 
 To use the SSH key of a machine user, follow the steps below.
 
