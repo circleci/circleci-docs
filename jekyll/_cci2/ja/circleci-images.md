@@ -15,13 +15,13 @@ This document provides information about pre-built CircleCI images and a listing
 
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 These images are typically extensions of official Docker images and include tools especially useful for CI/CD. All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の [`circleci-images`](https://github.com/circleci/circleci-images) リポジトリには各 Docker イメージのソースコードも用意しています。 これら Docker イメージの作成に用いる Dockerfiles については [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) リポジトリでチェック可能です。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の標準的な Docker イメージの拡張機能であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
 
-***Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance.*
+***※**CircleCI まれに不具合修正や機能改善を目的とした Docker イメージの更新を行います。この更新が CircleCI のジョブにおけるイメージの動作に多少の影響を与えることがあります。 Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance.*
 
 ## ビルド済みイメージの活用方法
 
-提供する Docker イメージはアップストリーム（ソースコード）イメージの最新バージョンを元にしており、何かに特化したイメージを使うのにも理想的な環境となっています。 アップストリームイメージの内容がバージョンアップなどで変更されることを防げば、確実性の高いビルドを実現できます。
+提供する Docker イメージはアップストリーム (ソースコード) イメージの最新バージョンを元にしており、何かに特化したイメージを使うのにも理想的な環境となっています。 アップストリームイメージの内容がバージョンアップなどで変更されることを防げば、確実性の高いビルドを実現できます。
 
 アップストリーム版を元にビルド済みイメージを作成している CircleCI では、`circleci/ruby:2.4-node` と記述した場合、最新版の Ruby 2.4-node コンテナを使うことを意味し、 あるいは `circleci/ruby:latest` としても結果は同じになります。 このようにタグを用いて使用するイメージを具体的に決めることは、ビルドコンテナの用途を絞るのに役立ちます。
 
@@ -46,7 +46,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 [言語別の最新イメージタグ](#latest-image-tags-by-language)は下の方にある一覧でご確認ください。
 
-**※**タグを指定しない場合、Docker は `latest` タグが付与されているものとして扱います。 `latest` タグが参照するのは安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。
+**注：**タグを指定しない場合、Docker は `latest` タグが付与されているものとして扱います。 `latest` タグが参照するのは安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。
 
 ### イメージを一定のバージョンにする Docker イメージ ID の使い方
 
@@ -54,7 +54,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 全ての Docker イメージには[ユニーク ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier) が割り当てられており、 一定バージョンのイメージを使う際にはこのイメージ ID を使うことができます。
 
-イメージ ID は固有の SHA-256 メッセージダイジェスト（ハッシュ）で構成されています。例えば次のようなものです。
+イメージ ID は固有の SHA-256 メッセージダイジェスト (ハッシュ) で構成されています。例えば次のようなものです。
 
     sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
     
@@ -63,10 +63,10 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 {:.no_toc}
 
-1. CircleCI にアクセスし、イメージを使った過去のビルドを表示します
-2. **Test Summary** タブに表示されるステップのうち、**Spin up Environment** をクリックします
-3. ログに **Digest** の項目があることを確認します
-4. そこにあるイメージ ID を下記のようにイメージ名の末尾に付加します
+1. CircleCI にアクセスし、イメージを使った過去のビルドを表示します。
+2. **Test Summary** タブに表示されるステップのうち、**Spin up Environment** をクリックします。
+3. ログに **Digest** の項目があることを確認します。
+4. そこにあるイメージ ID を下記のようにイメージ名の末尾に付加します。
 
     circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
     
@@ -75,7 +75,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 CircleCI が提供する Docker イメージは 2 タイプに分類されます。**言語**イメージと**サービス**イメージです。これらのイメージは、システムユーザーの権限をもつユーザー `circleci` を追加します。
 
-**※**下記で紹介しているイメージは、各言語のアップストリームイメージの最新ビルドを元にしたものです。 これらの最新イメージはアップデートが頻繁にあるため、[タグを追加指定して利用](#best-practices)することをおすすめします。
+**注：**下記で紹介しているイメージは、各言語のアップストリームイメージの最新ビルドを元にしたものです。 これらの最新イメージはアップデートが頻繁にあるため、タグを追加指定して利用することを[おすすめ](#best-practices)します。
 
 ### 言語イメージ
 
@@ -88,10 +88,10 @@ CircleCI では下記の言語イメージを提供しています。
 - [Android](#android)
 - [Clojure](#clojure)
 - [Elixir](#elixir)
-- [Go（Golang）](#go-golang)
+- [Go (Golang)](#go-golang)
 - [JRuby](#jruby)
 - [Node.js](#nodejs)
-- [OpenJDK（Java）](#openjdk)
+- [OpenJDK (Java)](#openjdk)
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
@@ -159,7 +159,7 @@ CircleCI が提供するサービスイメージは、各サービス 1 つの�
 - [xvfb](https://packages.debian.org/stretch/xvfb)
 - [zip](https://packages.debian.org/stretch/zip)
 
-下記のパッケージは `curl` などでインストールされます。
+下記のパッケージは `curl` でインストールされます。
 
 - [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
@@ -170,7 +170,7 @@ CircleCI が提供するサービスイメージは、各サービス 1 つの�
 
 下記では言語別にまとめた最新のビルド済み Docker イメージを列挙しています。 それぞれの詳細については [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) でご確認ください。
 
-**※**[言語イメージのバリエーション](#language-image-variants)や[サービスイメージのバリエーション](#service-image-variant)で紹介しているタグのイメージ以外は、CircleCI の管理下にありません。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じような内容のイメージとは限らないことにご注意ください。
+**注：**[言語イメージのバリエーション](#language-image-variants)や[サービスイメージのバリエーション](#service-image-variant)で紹介しているタグのイメージ以外は、CircleCI の管理下に**ありません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じような内容のイメージとは限らないことにご注意ください。
 
 {% assign images = site.data.docker-image-tags | sort %} {% for image in images %}
 
@@ -182,7 +182,7 @@ CircleCI が提供するサービスイメージは、各サービス 1 つの�
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**利用可能なタグ：** <small>（これ以外のタグも <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a> で見つけられます）</small>
+**利用可能なタグ：** <small> (これ以外のタグも <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a> で見つけられます)</small>
 
 <ul class="list-2cols">
   {% assign tags = image[1].tags | sort %} {% for tag in tags %}
@@ -198,4 +198,4 @@ CircleCI が提供するサービスイメージは、各サービス 1 つの�
 
 {:.no_toc}
 
-プライベートリポジトリまたは Amazon EC2 Container Registry（ECR）におけるイメージを使ったビルドの手順について知りたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images/)を参照してください。
+プライベートリポジトリまたは Amazon EC2 Container Registry (ECR) におけるイメージを使ったビルドの手順について知りたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images/)を参照してください。
