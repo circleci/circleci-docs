@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Testing Config Files Locally"
+title: "設定ファイルをローカルでテストする方法"
 description: "CircleCI 2.0 のサンプル設定ファイル"
 ---
 To add a script that tests your config file locally, complete the following steps:
