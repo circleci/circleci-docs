@@ -77,9 +77,9 @@ jobs:
     machine: true
 ```
 
-The default image for the machine executor is `circleci/classic:latest`. You can specify other images by using the `image` key.
+machine Executor のデフォルトイメージは `circleci/classic:latest` となっています。`image` キーではこれ以外のイメージも指定できます。
 
-**Note:** The `image` key is not supported on private installations of CircleCI. See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
+**※**`image` キーはプライベートサーバー環境にインストールした CircleCI では利用できません。 詳しくは [VM サービス]({{ site.baseurl }}/2.0/vm-service)ページをご覧ください。
 
 ```yaml
 version: 2
@@ -89,13 +89,13 @@ jobs:
       image: circleci/classic:2017-01  # YYYY-MM 形式で指定したバージョンのイメージに固定します
 ```
 
-The `image` key accepts one of three image types:
+利用できる `image` キーは下記の通り 3 種類あります。
 
-- `circleci/classic:latest`: This is the default image. Changes to this image are announced at least one week in advance.
-- `circleci/classic:edge`: This image receives the latest updates. Changes to this image occur frequently.
-- `circleci/classic:{YYYY-MM}`: This image is pinned to a specific version to prevent breaking changes.
+- `circleci/classic:latest`：CircleCI におけるデフォルトのイメージです。このイメージに更新がある時は 1 週間前に告知されます。
+- `circleci/classic:edge`：最新版のイメージを利用できますが、事前の告知なしに更新されます。
+- `circleci/classic:{YYYY-MM}`：指定したバージョンに固定して、意図しないイメージの変更を防ぐことができます。
 
-All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
+すべてのイメージには一般的なプログラミング言語やツール類がプリインストールされています。 詳しくは [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) をご覧ください。
 
 下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)（DLC）を有効にした例です。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかり、この機能を有効にするためにサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
 
