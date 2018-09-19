@@ -7,11 +7,11 @@ categories:
   - getting-started
 order: 4
 ---
-This document describes how to configure your Linux, Android or macOS project to run on CircleCI 2.0 after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+このページでは、[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後に CircleCI 2.0 で Linux、Android、macOS のプロジェクトを実行するための設定方法について解説しています。
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines, replacing `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want:
+2. `.circleci` ディレクトリを作成し、そのなかに下記の内容を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成します。`node:4.8.2` の部分は用途に合わせて任意の [Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)の指定に置き換えます。
 
 ```yaml
 version: 2
@@ -30,7 +30,7 @@ CircleCI checks out your code, prints "Hello World", and posts a green build to 
 
 ## Following Projects
 
-自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した組織の各プロジェクトについて、手動でフォローとアンフォローもできます。**ADD PROJECTS** を選び、プロジェクト名の横にある **Follow project** ボタンもしくは **Unfollow project** ボタンをクリックしてください。
+自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した組織の各プロジェクトについて、手動でフォローとアンフォローもできます。**Add Project** を選び、プロジェクト名の横にある **Follow Project** ボタンもしくは **Unfollow Project** ボタンをクリックしてください。
 
 ## Org Switching
 
@@ -42,8 +42,8 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 ## Next Steps
 
-- CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素について説明している[コンセプト]({{ site.baseurl }}/2.0/concepts/)ページをご覧ください。
+- CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素についての説明は[コンセプト]({{ site.baseurl }}/2.0/concepts/)ページで確認できます。
 
-- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページが参考になります。 
+- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページを参考にしてください。
 
 - Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
