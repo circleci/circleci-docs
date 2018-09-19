@@ -540,6 +540,53 @@ commands:
         enum: ["darwin", "linux"]
 ```        
 
+### Using Parameters in Executors
+{:.no_toc}
+
+If you'd like to use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter that you would like to pass in.
+
+Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
+
+#### Example Build Configuration Using a Parameterized Executor
+{:.no_toc}
+
+```yaml
+version: 2.1
+
+executors:
+  python:
+    parameters:
+      tag:
+        type: string
+        default: latest
+      myspecialvar:
+        type: string
+    docker:
+      - image: circleci/python:<< parameters.tag >>
+    environment:
+      MYPRECIOUS: << parameters.myspecialvar >>
+
+jobs:
+  build:
+    executor:
+      name: python
+      tag: "2.7"
+      myspecialvar: "myspecialvalue"  
+```
+
+The above would resolve to the following: 
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    steps: []
+    docker:
+      - image: circleci/python:2.7
+    environment:
+      MYPRECIOUS: "myspecialvalue"
+```
+
 ## Authoring and Using Jobs
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
@@ -808,58 +855,6 @@ workflows:
       - myorb/myjob:
           preinstall-foo: true
 ```
-
-
-
-
-
-### Using Parameters in Executors
-{:.no_toc}
-
-If you'd like to use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter that you would like to pass in.
-
-Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
-
-#### Example Build Configuration Using a Parameterized Executor
-{:.no_toc}
-
-```yaml
-version: 2.1
-
-executors:
-  python:
-    parameters:
-      tag:
-        type: string
-        default: latest
-      myspecialvar:
-        type: string
-    docker:
-      - image: circleci/python:<< parameters.tag >>
-    environment:
-      MYPRECIOUS: << parameters.myspecialvar >>
-
-jobs:
-  build:
-    executor:
-      name: python
-      tag: "2.7"
-      myspecialvar: "myspecialvalue"  
-```
-
-The above would resolve to the following: 
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    steps: []
-    docker:
-      - image: circleci/python:2.7
-    environment:
-      MYPRECIOUS: "myspecialvalue"
-```
-
 
 
 
