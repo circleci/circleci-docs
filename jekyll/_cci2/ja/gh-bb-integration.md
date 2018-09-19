@@ -97,7 +97,7 @@ Here are common errors that indicate you need to add a user key.
     
     * **Create and add XXXX user key** ボタンをクリックします</ol> 
     
-    Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
+    これで、CircleCI はビルド時の際、さまざまな Git コマンドの実行にマシンユーザーの SSH 鍵を使うようになります。
     
     ## Permissions Overview
     
