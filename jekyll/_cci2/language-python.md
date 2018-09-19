@@ -25,12 +25,11 @@ while following this guide.
 
 ## Configuration Walkthrough
 
-Every CircleCI project requires a configuration file
-located in `.circleci/config.yml`.
+Every CircleCI project requires a configuration file called `.circleci/config.yml`.
 Follow the steps below
-to build a `config.yml` from scratch.
+to create a complete `config.yml` file.
 
-### Specify Version
+### Specify a Version
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used
