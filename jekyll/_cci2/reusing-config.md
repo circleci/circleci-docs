@@ -137,7 +137,7 @@ Executors define the environment in which the steps of a job will be run. When d
 
 Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
-An executor definition includes the subset of the children keys of a `job` declaration related to setting the environment for a job to execute. This means it does **not** include `steps`. That subset is one or more of the following keys:
+An executor definition includes one or more of the following keys:
 
 - `docker` or `machine` or `macos` 
 - `environment`
@@ -257,7 +257,7 @@ both have the local name `bar` relative to their orbs, but the are independent e
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-There is **one exception** to this rule: `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
+**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
 ```yaml
 executors:
@@ -283,7 +283,7 @@ jobs:
 ```
 
 
-This would resolve to:
+The above config would resolve to the following:
 ```yaml
 jobs:
  build:
@@ -427,10 +427,10 @@ commands:
       - ls <<# all >> -a <</ all >>
 ```
 
-Boolean parameter evaluation is based on the [values specified in YAML 1.1][http://yaml.org/type/bool.html]:
+Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
 
-* true: `y` `yes` `true` `on`
-* false: `n` `no` `false` `off`
+* True: `y` `yes` `true` `on`
+* False: `n` `no` `false` `off`
 
 Capitalized and uppercase versions of the above values are also valid.
 
@@ -453,7 +453,7 @@ commands:
     - run: make test
 ```
 
-Steps passed as parameters are given as the value of a `steps` declaration under the job's `steps` declaration and are expanded and spliced into the sequence of existing steps. For example,
+The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
 ```yaml
 jobs:
@@ -479,7 +479,7 @@ steps:
 #### Enum Parameter
 {:.no_toc}
 
-The `enum` parameter may be a lists of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
 commands:
@@ -507,7 +507,7 @@ commands:
 ### Using Parameters in Executors
 {:.no_toc}
 
-If you'd like to use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter that you would like to pass in.
+To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
@@ -659,13 +659,13 @@ Every job invocation may optionally accept two special arguments: `pre-steps` an
 are executed before any of the other steps in the job. The steps under
 `post-steps` are executed after all of the other steps.
 
-Pre- and post- steps allow you to execute steps in a given job 
+Pre and post steps allow you to execute steps in a given job 
 without modifying the job. This is useful, for example, to run custom setup steps
 before job execution. 
 
-#### Defining Pre- and Post-Steps
+#### Defining Pre and Post Steps
 
-The following example adds pre-setps and post-steps to the `bar` job in the `build` workflow:
+The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
 
 ```yaml
 # config.yml
@@ -706,7 +706,7 @@ orb's user invokes it with `myorb/foo: { dostuff: true }`, but not
 -->
 
 These conditions are checked before a workflow is actually run. That
-means, for example, that a you can't use a condition to check an environment
+means, for example, that a you cannot use a condition to check an environment
 variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
