@@ -7,14 +7,14 @@ categories:
   - getting-started
 order: 1
 ---
-This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation.
+このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明しています。
 
-## CircleCI Overview
+## CircleCI とは
 
 我々 **CircleCI** のミッションは、世の中のテクノロジー企業が最高の成果を上げられるようにする、というもの。インテリジェントな自動化ツールを用いることで、チーム開発の生産性をさらに高めてほしいと願っています。
 
-CircleCI provides enterprise-class support and services, with the flexibility of a startup.  
-We work where you work: Linux, macOS, Android - SaaS or behind your firewall.
+CircleCI は、大手一流企業のようなサポートとサービスに、スタートアップ企業の柔軟さをプラスして提供します。  
+Linux、macOS、Android の各プラットフォームに加え、SaaS やオンプレミスといったサービス形態にも余さず対応します。
 
 ![CircleCI about image]({{ site.baseurl }}/assets/img/docs/arch.png)
 
@@ -51,6 +51,6 @@ CircleCI では以下の無料トライアルを用意しています。
 
 パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは「[オープンソースプロジェクトのビルド]({{site.baseurl}}/2.0/oss/)」をご覧ください。
 
-## See Also
+## その他の参考資料
 
 Any app that runs on Linux, Android, or macOS is supported. Refer to the [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
