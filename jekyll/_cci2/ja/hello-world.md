@@ -17,28 +17,28 @@ order: 4
 version: 2
 jobs:
   build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+    docker: # 実行タイプです。他に machine、macos という実行タイプを指定できます 
+      - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout # プロジェクトのディレクトリにあるコードをチェックアウトします
+      - run: echo "hello world" # 「echo」コマンドを実行します
 ```
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+リポジトリに対するコミットとプッシュは、CircleCI のビルド実行の契機になります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**Add Project** ボタンをクリックします。その後プロジェクト名の横にある **Bulid Project** ボタンをクリックしてください。
 
-CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
+CircleCI はソースコードを取得 (チェックアウト) して「Hello World」と出力し、Job ページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
 
-## Following Projects
+## プロジェクトをフォローする
 
 自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した組織の各プロジェクトについて、手動でフォローとアンフォローもできます。**Add Project** を選び、プロジェクト名の横にある **Follow Project** ボタンもしくは **Unfollow Project** ボタンをクリックしてください。
 
-## Org Switching
+## 「組織」の切り替え方
 
-In the top left, you will find the Org switcher.
+CirlceCI の画面左上に、組織を切り替えるメニューがあります。
 
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の `myOrg` に切り替えます。
+プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある組織名を確認してください。 もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の `myOrg` に切り替えます。
 
 ## Next Steps
 
@@ -46,4 +46,4 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 - パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページを参考にしてください。
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
+- [CircleCI の設定方法]({{ site.baseurl }}/2.0/configuration-reference/) や [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/) のページでは、設定ファイルにおけるキーやビルド済みイメージについて具体的に説明しています。
