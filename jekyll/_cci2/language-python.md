@@ -53,19 +53,35 @@ jobs:
 ```
 
 The [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key is used to specify
-where the job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
 
-## Pre-Built CircleCI Docker Images
+### Choose an Executor Type
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/python/>. The demo project uses an official CircleCI image.
+A job's steps occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+In this example,
+the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
+to specify a custom Docker image.
+The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+All of a job's commands execute in this container.
 
-Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
+```yaml
+...
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.6.4  # primary container
+```
 
-### Specify a Python version (pick a Docker image)
+The Docker image above is
+a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
+These images are extensions of official Docker images
+and include tools useful for CI/CD environments.
 
 ### Add additional services (databases, etc.)
 
-### Install package managers and dependencies
+Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
+
+### Install dependencies
 
 ### Set up caching rules for dependencies
 
