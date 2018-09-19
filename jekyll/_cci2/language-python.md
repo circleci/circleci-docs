@@ -33,7 +33,7 @@ to create a complete `config.yml` file.
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used
-to issue warnings about breaking changes or deprecations.
+to issue warnings about breaking changes.
 
 ```yaml
 version: 2  # use CircleCI 2.0
