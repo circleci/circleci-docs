@@ -26,7 +26,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current \[primary container\]\[primary-container\] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-**Note:** `setup_remote_docker` is not currently compatible with the `machine` or the `macos` executors.
+**※**`setup_remote_docker` は、現在のところ `machine` および `macos` Executor とは一緒に使えません。
 
 ### Specifications
 
@@ -101,7 +101,7 @@ Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the \[primary container\]\[primary-container\].
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-3. We enable \[Docker Layer Caching\]\[docker-layer-caching\] here to speed up image building.
+3. Docker イメージのビルド高速化のため \[Docker レイヤーキャッシュ\]\[docker-layer-caching\] をここで有効にしています
 4. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker Version
@@ -238,8 +238,8 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## See Also
+## その他の参考資料
 
-[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container [docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching
