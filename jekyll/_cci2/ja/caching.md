@@ -310,7 +310,7 @@ Bundler は明示的に指定されないシステム上の gem を扱うこと�
 steps:
   - restore_cache:
       keys:
-        # when lock file changes, use increasingly general patterns to restore cache
+        # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
@@ -455,9 +455,9 @@ steps:
 
 {% endraw %}
 
-## Limitations
+## 制限について
 
-The caches created via the `save_cache` step are stored for up to 60 days.
+`save_cache` ステップで生成されたキャッシュは 60 日間保持されます。
 
 ## Caching Strategy Tradeoffs
 
@@ -475,7 +475,7 @@ The caches created via the `save_cache` step are stored for up to 60 days.
 
 チェックサムの取得方法は、他にも `ls -laR your-deps-dir > deps_checksum` としたうえで、 {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %} で参照するやり方もあります。 例えば Python で多くの固有キャッシュを取得する際には、`requirements.txt` ファイルのチェックサムを利用する以外にも、Python のプロジェクトルートで仮想環境 `venv` を使って依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行する手法が使えます。
 
-### Using Multiple Caches For Different Language
+### 異なる言語ごとに複数のキャッシュを使う
 
 {:.no_toc}
 
@@ -489,8 +489,8 @@ The caches created via the `save_cache` step are stored for up to 60 days.
 
 なんでもキャッシュするのではなく、コンパイルのような処理コストの高いステップにおいてキャッシュすることを*ぜひ*心がけてください。
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
-[Optimizations]({{ site.baseurl }}/2.0/optimizations/)
+[最適化]({{ site.baseurl }}/2.0/optimizations/)
