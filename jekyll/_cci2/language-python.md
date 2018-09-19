@@ -39,6 +39,22 @@ to issue warnings about breaking changes.
 version: 2  # use CircleCI 2.0
 ```
 
+### Create a Build Job
+
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
+it must have a `build` job.
+
+```yaml
+...
+jobs:
+  build:
+    working_directory: ~/circleci-demo-python-django
+```
+
+The [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key is used to specify
+where the job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+
 ## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/python/>. The demo project uses an official CircleCI image.
