@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Build Environments"
-description: "CircleCI 2.0 Build Environment Configuration"
+title: "ビルド環境"
+description: "CircleCI 2.0 のビルド環境の設定"
 ---
 Refer to the following documents for instructions specific to your environment.
 
