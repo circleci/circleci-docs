@@ -17,7 +17,7 @@ This document provides information about pre-built CircleCI images and a listing
 
 CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の標準的な Docker イメージの拡張機能であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
 
-***※**CircleCI まれに不具合修正や機能改善を目的とした Docker イメージの更新を行います。この更新が CircleCI のジョブにおけるイメージの動作に多少の影響を与えることがあります。 Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance.*
+***※**CircleCI まれに不具合修正や機能改善を目的とした Docker イメージの更新を行います。この更新が CircleCI のジョブにおけるイメージの動作に多少の影響を与えることがあります。 このようなメンテナンススケジュールについてあらかじめ把握しておくには、[**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) をチェックしてください。*
 
 ## ビルド済みイメージの活用方法
 
@@ -105,10 +105,10 @@ CircleCI では下記の言語イメージを提供しています。
 CircleCI では言語イメージについていくつかのバリエーションを用意しています。使い方は、下記のいずれかをイメージタグの末尾に付加するだけです。
 
 - `-node`：多言語対応の Node.js を含めます
-- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
-- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-browsers`：Chrome、Firefox、Java 8、Geckodriver を含めます
+- `-browsers-legacy`：Chrome、Firefox、Java 8、PhantomJS を含めます
 - `-node-browsers`：`-node` と `-browsers` の組み合わせです
-- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
+- `-node-browsers-legacy`：`-node` と `-browsers-legacy` の組み合わせです
 
 参考までに、`circleci/golang:1.9` に Web ブラウザ をインストールしておきたいときは `circleci/golang:1.9-browsers` とします。
 
