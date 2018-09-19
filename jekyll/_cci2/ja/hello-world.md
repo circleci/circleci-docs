@@ -17,7 +17,7 @@ order: 4
 version: 2
 jobs:
   build:
-    docker: # 実行タイプです。他に machine、macos という実行タイプを指定できます 
+    docker: # Executor タイプです。他に machine、macos という実行タイプを指定できます 
       - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
     steps:
       - checkout # プロジェクトのディレクトリにあるコードをチェックアウトします
@@ -46,4 +46,4 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 
 - パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページを参考にしてください。
 
-- [CircleCI の設定方法]({{ site.baseurl }}/2.0/configuration-reference/) や [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/) のページでは、設定ファイルにおけるキーやビルド済みイメージについて具体的に説明しています。
+- [CircleCI の設定方法]({{ site.baseurl }}/2.0/configuration-reference/)や [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)のページでは、設定ファイルにおけるキーやビルド済みイメージについて具体的に説明しています。
