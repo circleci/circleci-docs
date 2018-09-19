@@ -17,13 +17,13 @@ This document describes the `docker`, `machine`, and `macos` environments in the
 
 {:.no_toc}
 
-CircleCI enables you to run jobs in one of three environments:
+CircleCI は下記 3 種類の実行環境のいずれかでジョブを実行できます。
 
-- Within Docker images (`docker`)
-- Within a Linux virtual machine (VM) image (`machine`)
-- Within a macOS VM image (`macos`)
+- Docker イメージ（`docker`）
+- Linux 仮想環境（VM）イメージ（`machine`）
+- macOS 仮想環境（VM)イメージ（`macos`）
 
-For building on Linux, there are tradeoffs to using `docker` versus `machine`, as follows:
+Linux 環境のイメージでビルドする場合、`docker` と `machine` のどちらを使うかで下記のようなメリット・デメリットがあります。
 
 Virtual Environment | `docker` | `machine` \---\---\----|\---\---\----|\---\---\---- Start time | Instant | 30-60 sec Clean environment | Yes | Yes Custom images | Yes | No Build Docker images | Yes <sup>(1)</sup> | Yes Full control over job environment | No | Yes Full root access | No | Yes Run multiple databases | No | Yes Run multiple versions of the same software | No | Yes Layer caching | Yes | Yes Run privileged containers | No | Yes Use docker compose with volumes | No | Yes [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | No {: class="table table-striped"}
 
@@ -35,7 +35,7 @@ It is also possible to use the `macos` executor type with `xcode`, see the [iOS 
 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
-Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
+Docker increases performance by building only what is required for your application. 各ステップを実行するプライマリコンテナを生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
 
 ```yaml
 jobs:
