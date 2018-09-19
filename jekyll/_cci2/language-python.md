@@ -36,7 +36,7 @@ This key is used
 to issue warnings about breaking changes.
 
 ```yaml
-version: 2  # use CircleCI 2.0
+version: 2
 ```
 
 ### Create a Build Job
@@ -46,7 +46,7 @@ Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-r
 it must have a `build` job.
 
 ```yaml
-...
+version: 2
 jobs:
   build:
     working_directory: ~/circleci-demo-python-django
@@ -72,8 +72,6 @@ Database images for use as a secondary 'service' container are also available on
 ### Run test suites
 
 ### Deploy the application
-
-First, specify a `jobs` key. Each job represents a phase in your Build-Test-Deploy (BTD) process. The sample app only needs a `build` job, so all other configuration will be nested under that key.
 
 Specify a working directory and container images for this build in `docker` section:
 
@@ -115,7 +113,6 @@ Finally, add several `steps` within the `build` job:
       - store_artifacts: # special step to store test reports as artifacts
           path: test-reports/
           destination: tr1
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 
 {% endraw %}
