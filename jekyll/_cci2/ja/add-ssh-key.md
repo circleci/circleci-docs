@@ -50,6 +50,6 @@ jobs:
 
 **補足：**` fingerprints ` に指定した 1 つまたは複数のフィンガープリントは、管理画面で登録した SSH 鍵と一致していなければなりません。
 
-## See Also
+## その他の参考資料
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
