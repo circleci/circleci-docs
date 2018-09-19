@@ -551,21 +551,9 @@ jobs:
       MYPRECIOUS: "myspecialvalue"
 ```
 
-## Authoring and Using Jobs
+## Authoring Parameterized Jobs
 
-**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
-
-Jobs are sets of steps and the environments they should be executed within.
-
-### Job Naming and Organization
-{:.no_toc}
-
-Jobs are defined in your build configuration. Job names are defined
-in a map under the `jobs` key in configuration.
-
-Like most elements, jobs can contain an optional but highly recommended `description`.
-
-A user must invoke jobs in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters documentation for more detailed information.
+It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
@@ -573,7 +561,7 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 version: 2.1
 
 jobs:
-  sayhello:
+  sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
     parameters:
       saywhat:
@@ -587,9 +575,11 @@ jobs:
 workflows:
   build:
     jobs:
-      - sayhello:
+      - sayhello: # invokes the parameterized job
           saywhat: Everyone
 ```
+
+**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
 
 <!---
 ### Jobs Defined in an orb
@@ -634,14 +624,12 @@ workflows:
 --->
 
 
-
-
 ### Invoking the Same Job Multiple Times
 {:.no_toc}
 
-A single configuration may invoke a job many times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided.  If you care about the name of the duplicate jobs, they can be explicitly named with the `name` key.
+A single configuration may invoke a job multiple times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided or you may name the duplicate jobs explicitly with the `name` key.
 
-**Note:** The user must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow (ie: if the job is used under the `requires` key of a job invocation in a workflow you will need to name it).
+**Note:** You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow you will need to explicitly name it.
 
 ```yaml
 version: 2.1
@@ -664,51 +652,24 @@ workflows:
             - SayHelloChad
 ```
 
-### Pre and Post Steps
+### Using Pre and Post Steps
 {:.no_toc}
 
-**Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
-
-Every job invocation can optionally accept two special arguments: `pre-steps` and `post-steps`.
-You can optionally invoke a job with one or both of these arguments. Steps under `pre-steps`
+Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
 are executed before any of the other steps in the job. The steps under
 `post-steps` are executed after all of the other steps.
 
-For this reason, the parameter names `pre-steps` and `post-steps` are reserved
-and may not be redefined by a job author. For example, the following job
-definition is invalid:
+Pre- and post- steps allow you to execute steps in a given job 
+without modifying the job. This is useful, for example, to run custom setup steps
+before job execution. 
+
+#### Defining Pre- and Post-Steps
+
+The following example adds pre-setps and post-steps to the `bar` job in the `build` workflow:
 
 ```yaml
-jobs:
-  foo:
-    parameters:
-      pre-steps:    # invalid: pre-steps is a reserved parameter name
-        type: steps
-        default: []
-```
-
-All jobs accept two special arguments of type `steps`: `pre-steps` and
-`post-steps`.
-
-If an orb user invokes a job with one or both of these arguments,
-the job will run the steps in `pre-steps` first, before any other steps run, and
-then it will run the steps in `post-steps` last, after any other steps run.
-
-Pre- and post- steps allow users to be execute steps in a given job's environment
-without modifying the job. This is useful, for example, when a user imports a job
-and wants to upload assets after it completes, or to run some custom setup steps
-before job execution. Pre- and post- steps allow the user to make these additions
-without modifying the imported job.
-
-A `steps` parameter can be used for a similar purpose, passing steps into a job,
-but it requires that the job be modified with an execution site for the parameter.
-
-#### Example of Using Pre- and Post-Steps
-{:.no_toc}
-
-Define a job:
-
-```yaml
+# config.yml
+version: 2.1
 jobs:
   bar:
     machine: true
@@ -718,16 +679,10 @@ jobs:
           command: echo "building"
       - run:
           command: echo "testing"
-```
-
-Then use the job as follows:
-```yaml
-# config.yml
-version: 2.1
 workflows:
   build:
     jobs:
-      - foo/bar:
+      - bar:
           pre-steps:
             - run:
                 command: echo "install custom dependency"
@@ -736,31 +691,10 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-The resulting configuration would look like this:
+**Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
 
-```yaml
-version: 2.1
-jobs:
-  foo/bar:
-    machine: true
-    steps:
-      - run:
-          command: echo "install custom dependency"
-      - checkout
-      - run:
-          command: echo "building"
-      - run:
-          command: echo "testing"
-      - run:
-          command: echo "upload artifact to s3"
-workflows:
-  build:
-    jobs:
-      - foo/bar
-```
 
 ## Conditional Steps
-**Note:** Conditional steps are available in configuration version 2.1 and later.
 
 Conditional steps allow the definition of steps that only run if a condition is
 met. 
@@ -772,10 +706,10 @@ orb's user invokes it with `myorb/foo: { dostuff: true }`, but not
 -->
 
 These conditions are checked before a workflow is actually run. That
-means, for example, that a user can't use a condition to check an environment
+means, for example, that a you can't use a condition to check an environment
 variable.
 
-Conditional steps can be located anywhere a regular step could and only use parameter values as inputs. 
+Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
 
 <!---
 For example, an
@@ -816,11 +750,11 @@ workflows:
     jobs:
       - myjob:
           preinstall-foo: false
-      - myorb/myjob:
+      - myjob:
           preinstall-foo: true
 ```
 
-
+**Note:** Conditional steps are available in configuration version 2.1 and later.
 
 
 
