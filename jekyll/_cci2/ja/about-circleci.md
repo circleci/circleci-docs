@@ -16,7 +16,7 @@ order: 1
 CircleCI は、大手一流企業のようなサポートとサービスに、スタートアップ企業の柔軟さをプラスして提供します。  
 Linux、macOS、Android の各プラットフォームに加え、SaaS やオンプレミスといったサービス形態にも余さず対応します。
 
-![CircleCI about image]({{ site.baseurl }}/assets/img/docs/arch.png)
+![CircleCI のシステム構成概略図]({{ site.baseurl }}/assets/img/docs/arch.png)
 
 ## 概要
 
@@ -53,4 +53,4 @@ CircleCI では以下の無料トライアルを用意しています。
 
 ## その他の参考資料
 
-Any app that runs on Linux, Android, or macOS is supported. Refer to the [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
+CircleCI では Linux、Android、macOS 上で動作するアプリを全てに対応しています。詳しい実例と利用ガイドは [サポートするプログラミング言語]({{site.baseurl}}/2.0/demo-apps/) で確認してください。
