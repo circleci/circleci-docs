@@ -16,8 +16,6 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-Complete the following prerequisite steps before adding the `commands`, `executors`, or `parameters` keys to your configuration. 
-
 1. Add your project on the Add Projects page if it is a new project. For an existing Project, go to the Project Settings and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
@@ -134,7 +132,6 @@ workflows:
 --->
 
 ## Authoring Reusable Executors 
-**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc. 
 
@@ -148,7 +145,7 @@ An executor definition includes the subset of the children keys of a `job` decla
 - `shell`
 - `resource_class`
 
-A simple example of using an executor:
+In the following example `my-executor` is passed as the single value of the key `executor`. 
 
 ```yaml
 version: 2.1
@@ -164,7 +161,11 @@ jobs:
       - run: echo outside the executor
 ```
 
-In the above example the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations (see below):
+**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
+
+## Invoking Reusable Executors
+
+The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations (see below):
 
 ```yaml
 jobs:
@@ -175,56 +176,19 @@ jobs:
       - run: echo outside the executor
 ```
 
-### Common Uses of Executors
-{:.no_toc}
-
-Executors in configuration were designed to enable re-use of a defined execution environment in multiple jobs in the `config.yml` file.
-
 <!---
 2. Allowing an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 -->
 
-#### Example of Using an Executor Declared in config.yml in Multiple Jobs
+### Example of Using an Executor Declared in config.yml in Multiple Jobs
 {:.no_toc}
 
-Imagine you have several jobs that you need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but should run in the same environment. You have three options to accomplish this:
+The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment. 
 
-1. Declare each job with repetitive `docker` and `working_directory` keys.
-2. Use YAML anchors to achieve some reuse.
-3. Declare an executor with the values you want, and invoke it in your jobs.
-
-With an executor declaration your configuration might look something like: 
-
-**Without Executors**
 ```yaml
-jobs:
-  build:
-    docker:
-      - image: clojure:lein-2.8.1
-    working_directory: ~/project
-    environment:
-      MYSPECIALVAR: "my-special-value"
-      MYOTHERVAR: "my-other-value"
-    steps:
-      - checkout
-      - run: echo "your build script would go here"
-      
-  test:
-    docker:
-      - image: clojure:lein-2.8.1
-    working_directory: ~/project
-    environment:
-      MYSPECIALVAR: "my-special-value"
-      MYOTHERVAR: "my-other-value"
-    steps:
-      - checkout
-      - run: echo "your test commands would run here"
-```
-    
-**Same Code, With Executors**
-```yaml
+version: 2.1
 executors:
-  lein_exec:
+  lein_exec: # declares a reusable executor
     docker:
       - image: clojure:lein-2.8.1
     working_directory: ~/project
@@ -291,9 +255,9 @@ both have the local name `bar` relative to their orbs, but the are independent e
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
 
-When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For instance, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
+When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-There is **one exception** to this rule: `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the `job`'s value will win. For example, if you had the following configuration:
+There is **one exception** to this rule: `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
 ```yaml
 executors:
