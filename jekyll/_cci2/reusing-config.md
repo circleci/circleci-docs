@@ -466,7 +466,7 @@ jobs:
           - run: echo "And now I'm going to run the tests"
 ```
 
-will become:
+The above will resolve to the following:
 
 ```yaml
 steps:
