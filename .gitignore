@@ -7,4 +7,5 @@
 _site/
 jekyll/.jekyll-cache/
 jekyll/environments/
+jekyll/assets/js/app.min.js
 run-results/
