@@ -20,16 +20,31 @@ This guide uses a [sample Django application](https://github.com/CircleCI-Public
 to describe configuration best practices
 for Python applications building on CircleCI.
 Consider [forking this repository](https://help.github.com/articles/fork-a-repo/)
-and rewriting `.circleci/config.yml`
+and rewriting the configuration file
 while following this guide.
+
+## Configuration Walkthrough
+
+Every CircleCI project requires a configuration file
+located in `.circleci/config.yml`.
+Follow the steps below
+to build a `config.yml` from scratch.
+
+### Specify Version
+
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used
+to issue warnings about breaking changes or deprecations.
+
+```yaml
+version: 2  # use CircleCI 2.0
+```
 
 ## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Python version you need from Docker Hub: <https://hub.docker.com/r/circleci/python/>. The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
-
-## Config Walkthrough
 
 ### Specify a Python version (pick a Docker image)
 
@@ -42,12 +57,6 @@ Database images for use as a secondary 'service' container are also available on
 ### Run test suites
 
 ### Deploy the application
-
-Start with the version:
-
-```yaml
-version: 2 # use CircleCI 2.0
-```
 
 First, specify a `jobs` key. Each job represents a phase in your Build-Test-Deploy (BTD) process. The sample app only needs a `build` job, so all other configuration will be nested under that key.
 
