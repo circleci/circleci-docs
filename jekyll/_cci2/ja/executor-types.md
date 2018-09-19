@@ -31,11 +31,11 @@ Virtual Environment | `docker` | `machine` \---\---\----|\---\---\----|\---\---\
 
 It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
 
-## Using Docker
+## Docker の使い方
 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
-Docker increases performance by building only what is required for your application. 各ステップを実行するプライマリコンテナを生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
+Docker increases performance by building only what is required for your application. 各ステップを実行するプライマリコンテナ生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
 
 ```yaml
 jobs:
