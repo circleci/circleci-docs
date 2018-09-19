@@ -51,6 +51,7 @@ commands:
 **Note:** The `commands` stanza is available in configuration version 2.1 and later.
 
 ## Invoking Reusable Commands
+{:.no_toc}
 
 Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted in the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
 
@@ -164,6 +165,7 @@ jobs:
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 ## Invoking Reusable Executors
+{:.no_toc}
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations (see below):
 
@@ -663,7 +665,8 @@ Pre and post steps allow you to execute steps in a given job
 without modifying the job. This is useful, for example, to run custom setup steps
 before job execution. 
 
-#### Defining Pre and Post Steps
+### Defining Pre and Post Steps
+{:.no_toc}
 
 The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
 
@@ -694,7 +697,7 @@ workflows:
 **Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
 
 
-## Conditional Steps
+## Defining Conditional Steps
 
 Conditional steps allow the definition of steps that only run if a condition is
 met. 
