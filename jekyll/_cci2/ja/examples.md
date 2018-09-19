@@ -3,7 +3,7 @@ layout: classic-docs
 title: "設定ファイルをローカルでテストする方法"
 description: "CircleCI 2.0 のサンプル設定ファイル"
 ---
-To add a script that tests your config file locally, complete the following steps:
+設定ファイルをローカルでテストするには、下記の手順に従って進めます。
 
 1. シェルスクリプトを `run-build-locally.sh` などのファイル名で`.circleci` ディレクトリに作成します
 2. [こちらの手順]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)通りに API トークンを作成します。
@@ -32,4 +32,4 @@ curl --user ${CIRCLE_TOKEN}: \
 
 ## その他のサンプル
 
-[Using the Local CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/)
+[CircleCI のローカルのコマンドラインインターフェースの使い方]({{ site.baseurl }}/2.0/local-cli/)
