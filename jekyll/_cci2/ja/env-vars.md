@@ -25,17 +25,17 @@ CircleCI は Bash を使っているため、環境変数には POSIX 命名規�
 
 CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 環境変数は次の優先順位で使用されます。
 
-1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの（例：`FOO=bar make install`）
-2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの
-3. [ jobs](#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの
-4. [コンテナ](#setting-an-environment-variable-in-a-container)において `environment` キーで定義したもの
+1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの (例：`FOO=bar make install`)。
+2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
+3. [ jobs](#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの。
+4. [コンテナ](#setting-an-environment-variable-in-a-container)において `environment` キーで定義したもの。
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]({{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)
-7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数
+6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
+7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
 `FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
 
-**※**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/2.0/security/#encryption)で解説しています。
+**注：**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/2.0/security/#encryption)で解説しています。
 
 設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) ページでご確認ください。
 
@@ -64,7 +64,7 @@ steps:
 
 CircleCI は `bash` コマンドを用いて、ステップごとにその都度 `BASH_ENV` の内容を取得しています。 これはつまり、`BASH_ENV` の読み込みと実行が自動的に行われ、インターポレーションを可能にし、`run` ステップ間で環境変数を共有できるということです。
 
-**※**`BASH_ENV` を使ったこの方法は `bash` 上でしか機能しません。 `sh` など他のシェルでは動作しないことに注意してください。 この制約は Docker イメージの OS 選択に影響を与える場合があります。 例えば [Alpine Linux](https://alpinelinux.org/) は `bash` が標準で含まれていないため、先に `bash` をインストールしてからでないと `BASH_ENV` を使った解決方法を実践できません。
+**注：**`BASH_ENV` を使ったこの方法は `bash` 上でしか機能しません。 `sh` など他のシェルでは動作しないことに注意してください。 この制約は Docker イメージの OS 選択に影響を与える場合があります。 例えば [Alpine Linux](https://alpinelinux.org/) は `bash` が標準で含まれていないため、先に `bash` をインストールしてからでないと `BASH_ENV` を使った解決方法を実践できません。
 
 ## シェルコマンドで環境変数を設定する
 
@@ -87,7 +87,7 @@ jobs:
             source $BASH_ENV
 ```
 
-**※**シェルによっては `~/.tcshrc` や `~/.zshrc` のような初期化ファイルに新しく変数を追加する必要があります。 詳しくはシェルの環境変数設定に関する解説書などを参考にしてください。
+**注：**シェルによっては `~/.tcshrc` や `~/.zshrc` のような初期化ファイルに新しく変数を追加する必要があります。 詳しくはシェルの環境変数設定に関する解説書などを参考にしてください。
 
 ## ステップ内で環境変数を設定する
 
@@ -109,7 +109,7 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-**※**`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#using-bash_env-to-set-environment-variables) を使って変数値をエクスポートするようにしてください。
+**注：**`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#using-bash_env-to-set-environment-variables) を使って変数値をエクスポートするようにしてください。
 
 ## ジョブ内で環境変数を設定する
 
@@ -142,7 +142,7 @@ jobs:
           POSTGRES_DB: conductor_test
 ```
 
-下記は（1 行目に指定されている）プライマリコンテナイメージ用の環境変数と、セカンダリもしくはサービスコンテナイメージ用の環境変数とを分ける例です。
+下記は (1 行目に指定されている) プライマリコンテナイメージ用の環境変数と、セカンダリもしくはサービスコンテナイメージ用の環境変数とを分ける例です。
 
 ```yaml
 version: 2
@@ -167,7 +167,7 @@ jobs:
 
 2. In the **Build Settings** section, click on **Environment Variables**.
 
-3. **Import Variables** ボタンをクリックすると他のプロジェクトで定義している変数をインポートできます。 **Add Variable** ボタンでは変数を手動で新規追加します （**※****Import Variables** ボタンは、プライベートクラウドやデータセンターにインストールした CircleCI では今のところまだ利用できません）
+3. **Import Variables** ボタンをクリックすると他のプロジェクトで定義している変数をインポートできます。 また、**Add Variable** ボタンをクリックすると変数を手動で新規追加できます。 (**注：****Import Variables** ボタンは、プライベートクラウドやデータセンターにインストールした CircleCI では現在利用できません。)
 
 4. Use your new environment variables in your `.circleci/config.yml` file. For an example, see the [Heroku deploy walkthrough]({{ site.baseurl }}/2.0/deployment-integrations/#heroku).
 
@@ -191,14 +191,14 @@ $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
-変数を利用するコマンドで値をデコードします
+変数を利用するコマンドで値をデコードします。
 
 ```bash
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
 
-**※**これと同じ手順で全てのコマンドラインプログラムがログイン認証をパスできるわけではありません。例えば `docker` がそうです。
+**注：**これと同じ手順で全てのコマンドラインプログラムがログイン認証をパスできるわけではありません。例えば `docker` がそうです。
 
 ## API に環境変数を代入する方法
 
@@ -230,9 +230,9 @@ Login Succeeded
     export list="[\"a\", \"list\", \"of\", \"strings\"]"
     
 
-ビルドパラメータは各ジョブのコンテナ内で環境変数としてエクスポートされ、`config.yml` のスクリプトやプログラム、コマンドで使われることになります。 代入された環境変数はジョブ内のステップの実行内容を変えるのに使うこともあります。 ここで念頭に置いておかなければいけないのは、代入された環境変数は `config.yml` で定義されたものでも、プロジェクトの設定で定義されたものでも、上書きできないことです。
+ビルドパラメータは各ジョブのコンテナ内で環境変数としてエクスポートされ、`config.yml` のスクリプトやプログラム、コマンドで使われることになります。 代入された環境変数はジョブ内のステップの実行内容を変えるのに使われることもあります。 ここで念頭に置いておかなければいけないのは、代入された環境変数は `config.yml` で定義されたものでも、プロジェクトの設定で定義されたものでも、上書きできないことです。
 
-連続的に異なるターゲット OS で機能テストを行うのに、`build_parameters` キーに環境変数を代入したくなることがあります。 例えば、複数の異なるホストに対して機能テストが必要なステージング環境へのデプロイを実行するような場合です。 下記の例のように、`bash` と `curl` を組み合わせ（開発言語にあらかじめ用意されている HTTP ライブラリを使ってもかまいません）、`Content-type: application/json` として JSON フォーマットでデータ送信する形で `build_parameters` を含ませることが可能です。
+連続的に異なるターゲット OS で機能テストを行うのに、`build_parameters` キーに環境変数を代入したくなることがあります。 例えば、複数の異なるホストに対して機能テストが必要なステージング環境へのデプロイを実行するような場合です。 下記の例のように、`bash` と `curl` を組み合わせ (開発言語にあらかじめ用意されている HTTP ライブラリを使ってもかまいません)、`Content-type: application/json` として JSON フォーマットでデータ送信する形で `build_parameters` を含ませることが可能です。
 
     {
       "build_parameters": {
@@ -259,18 +259,18 @@ Login Succeeded
     export param2="500"
     
 
-API コールは POST リクエストで実行します。詳細は API リファレンスの [new build]({{ site.baseurl }}/api/v1-reference/#new-build) セクションを参照してください。 パラメータなしで POST リクエストした場合は名前付きブランチが新規で実行されます。
+API の呼び出しは POST リクエストで実行します。詳細は API リファレンスの [new build]({{ site.baseurl }}/api/v1-reference/#new-build) セクションを参照してください。 パラメータなしで POST リクエストした場合は名前付きブランチが新規で実行されます。
 
 ## 定義済み環境変数
 
-下記の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイの実行に役立てられます。
+下記の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
 
-**※**他の環境変数を定義するのに定義済み環境変数を使うことはできません。 代わりに、`BASH_ENV` を用いて別の新しい環境変数をエクスポートしようとするなら `run` ステップを利用すべきです。 詳しくは [シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command) をご覧ください。
+**注：**他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは [シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command) をご覧ください。
 
-変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true`（現在のビルド環境が CI であることを表します。常に true となります） `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ `CIRCLE_JOB` | String | 現在のジョブの名称 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です `CIRCLE_PR_REPONAME` | String | The name of the GitHub or Bitbucket repository where the pull request was created. フォークしたプルリクエストのみで使用可能です `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名 `CIRCLE_PROJECT_USERNAME` | String | The GitHub or Bitbucket username of the current project. `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag). `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値 `CIRCLECI` | Boolean | `true`（現在のビルド環境が CircleCI であることを表します。常に true となります） `HOME` | String | ホームディレクトリ {:class="table table-striped"}
+変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true` (現在のビルド環境が CI であることを表します。常に true となります。) `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名。 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数。 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL。 `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL。 `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ。 `CIRCLE_JOB` | String | 現在のジョブの名称。 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります。 `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数。 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_REPONAME` | String | プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。 `CIRCLE_PROJECT_USERNAME` | String | 現在のプロジェクトの GitHub/Bitbucket ユーザー名。 `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。 `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。 `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。 `CIRCLECI` | Boolean | `true` (現在のビルド環境が CircleCI であることを表します。常に true となります。) `HOME` | String | ホームディレクトリ {:class="table table-striped"}
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
-[Contexts]({{ site.baseurl }}/2.0/contexts/)
+[コンテキスト]({{ site.baseurl }}/2.0/contexts/)
