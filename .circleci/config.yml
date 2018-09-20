@@ -5,6 +5,11 @@ references:
     v8-dependency-js-deps-{{ checksum "package-lock.json" }}
   js_deps_backup_cache_key: &js_deps_backup_cache_key
     v8-dependency-js-deps
+  workspace_root: &workspace_root
+    ~/circleci-docs
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
 
 jobs:
   js_dependencies:
@@ -12,7 +17,7 @@ jobs:
       - image: node:8.11.1
     working_directory: ~/circleci-docs
     steps:
-      - checkout
+      - *attach_workspace
       - run:
           name: npm dependencies
           command: npm install
@@ -30,7 +35,7 @@ jobs:
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
       JOB_RESULTS_PATH: run-results
     steps:
-      - checkout
+      - *attach_workspace
       - restore_cache:
           keys:
             - *js_deps_cache_key
