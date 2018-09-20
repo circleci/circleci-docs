@@ -32,8 +32,6 @@ jobs:
       JEKYLL_ENV: production
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
       JOB_RESULTS_PATH: run-results
-    requires:
-      - js_dependencies
     steps:
       - checkout
       - run:
@@ -107,6 +105,7 @@ workflows:
       - deploy:
           requires:
             - build
+            - js_dependencies
           filters:
             branches:
               only: master
