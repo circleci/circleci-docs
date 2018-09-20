@@ -85,6 +85,9 @@ footer {
 		text-transform: initial;
 		font-size: $font-size-base;
 	}
+
+	z-index: 2;
+	position: relative;
 }
 
 // Main Nav Additions

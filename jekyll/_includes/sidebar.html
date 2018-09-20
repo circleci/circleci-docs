@@ -4,11 +4,6 @@
 		{% assign sidenav = site.data.sidenav %}
 		{% assign current_url = page.url | slice: 1, page.url.size %}
 
-		<div id="search-box">
-	    <!-- SearchBox widget will appear here -->
-	  </div>
-	  <br>
-	  
 		{% for main-item in sidenav %}
 			<ul>
 				<li class="main-nav-item closed" data-section="{{ main-item.name | slugify }}">

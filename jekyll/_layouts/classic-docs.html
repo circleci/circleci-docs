@@ -2,11 +2,20 @@
 <html>
 {% include head.html %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
+
+<div style="display:none;">
+	<div id="hits-template">
+		<h2>Search Results for "<span id="search-term-display"></span>"</h2>
+		<div id="instant-hits"></div>
+	</div>
+</div>
+
 {% if jekyll.environment == "production" %}
 	{% include google-tag-manager.html %}
 {% endif %}
 <div class="outer">
 	{% include global-nav.html %}
+	{% include main-searchbar.html %}
 	{% include mobile-sidebar.html %}
 	<div class="main-body">
 		{% include sidebar.html %}
@@ -14,6 +23,7 @@
 			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
+
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1>{{ page.title }}</h1>{% endif %}
 				{{ content }}
@@ -23,10 +33,6 @@
 			</article>
 		</div><!-- .article-container -->
 	</div><!-- .main-body -->
-
-	<div id="hits">
-	  <!-- Hits widget will appear here -->
-	</div>
 
 	{% include global-footer.html %}
 	<script src="{{ "/assets/js/vendor.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
