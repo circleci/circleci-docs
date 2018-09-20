@@ -27,7 +27,7 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2` or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -64,11 +64,12 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
 
 Example:
@@ -574,15 +575,44 @@ steps:
       when: on_fail
 ```
 
-##### **`when`** (requires version: 2.1)
+##### **The `when` Step** (requires version: 2.1)
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. See the Conditional Steps section of the Reusing Config document for details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the Conditional Steps section of the Reusing Config document for more details.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 condition | Y | String | A parameter value
-<step_type> |	Y |	Map or String |	A configuration map for the step or some string whose semantics are defined by the step.
+steps |	Y |	Map or String |	A configuration map for the step or some string whose semantics are defined by the step.
 {: class="table table-striped"}
+
+###### *Example*
+
+```
+version: 2.1
+
+jobs: # conditional steps may also be defined in `commands:`
+  job_with_optional_custom_checkout:
+    parameters:
+      custom_checkout:
+        type: string
+        default: \"\"
+    machine: true
+    steps:
+      - when:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - run: echo \"my custom checkout\"
+      - unless:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - checkout
+workflows:
+  build-test-deploy:
+    jobs:
+      - job_with_optional_custom_checkout:
+          custom_checkout: \"any non-empty string is truthy\"
+      - job_with_optional_custom_checkout            
+```
 
 ##### **`checkout`**
 
