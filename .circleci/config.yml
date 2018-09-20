@@ -5,11 +5,6 @@ references:
     v8-dependency-js-deps-{{ checksum "package-lock.json" }}
   js_deps_backup_cache_key: &js_deps_backup_cache_key
     v8-dependency-js-deps
-  restore_js_deps: &restore_js_deps
-    restore_cache:
-      keys:
-        - *js_deps_cache_key
-        - *js_deps_backup_cache_key
 
 jobs:
   js_dependencies:
@@ -36,7 +31,10 @@ jobs:
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
-      - *restore_js_deps
+      - restore_cache:
+          keys:
+            - *js_deps_cache_key
+            - *js_deps_backup_cache_key
       - run:
           name: "Test Markdown Files"
           command: |
