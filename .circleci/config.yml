@@ -1,28 +1,14 @@
 version: 2
 
-references:
-
-  js_deps_cache_key: &js_deps_cache_key
-    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
-
-  restore_js_deps: &restore_js_deps
-    restore_cache:
-      keys:
-        - *js_deps_cache_key
-
 jobs:
   js_dependencies:
     docker:
       - image: node:8.11.1
     steps:
-      - *restore_js_deps
       - run:
           name: npm dependencies
           command: npm install
-      - save_cache:
-          key: *js_deps_cache_key
-          paths:
-            - ~/circleci-docs/node_modules
+
   build:
     docker:
       - image: circleci/ruby:2.5.1
