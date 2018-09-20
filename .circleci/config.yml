@@ -45,6 +45,9 @@ jobs:
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
             ./scripts/pull-docker-image-tags.sh
       - run:
+          name: Prepare JS assets
+          command: NODE_ENV=production webpack -p
+      - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
