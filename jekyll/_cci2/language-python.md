@@ -19,9 +19,9 @@ using a sample application written in Python.
 This guide uses a [sample Django application](https://github.com/CircleCI-Public/circleci-demo-python-django)
 to describe configuration best practices
 for Python applications building on CircleCI.
-Consider [forking this repository](https://help.github.com/articles/fork-a-repo/)
+Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
 and rewriting the configuration file
-while following this guide.
+while you follow this guide.
 
 ## Configuration Walkthrough
 
@@ -45,15 +45,15 @@ A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-re
 Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
 it must have a `build` job.
 
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
+to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+
 ```yaml
 version: 2
 jobs:
   build:
     working_directory: ~/circleci-demo-python-django
 ```
-
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name)
-to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
 
 ### Choose an Executor Type
 
@@ -101,28 +101,43 @@ jobs:
           POSTGRES_DB: circle_test
 ```
 
-### Install dependencies
+### Install Dependencies
 
-### Set up caching rules for dependencies
+After choosing containers for a job,
+create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
 
-### Run test suites
+Use the special [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+to check out source code.
+By default,
+source code is checked out to the path specified by `working_directory`.
 
-### Deploy the application
-
-Specify a working directory and container images for this build in `docker` section:
+Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step
+to execute bash commands.
+In this example,
+[`pipenv`](https://pipenv.readthedocs.io/en/latest/) is used
+to create a virtual environment
+and install Python packages.
 
 ```yaml
-...
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/circleci-demo-python-django # directory where steps will run
-    docker: # run the steps with Docker
-      - image: circleci/python:3.6.1 # ...with this image as the primary container; this is where all `steps` will run
-      - image: circleci/postgres:9.6.2 # database image for service container available at `localhost:<port>`
-        environment: # environment variables for database
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
+version: 2
+jobs:
+  build:
+    ...
+    steps:
+      - checkout  # checkout source code to working directory
+      - run:
+        command: |  # install pipenv to install dependencies
+          sudo pip install pipenv
+          pipenv install
 ```
+
+### Create Caching Rules
+
+### Run Tests
+
+### Store Test Results
+
+### Deploy Application
 
 Finally, add several `steps` within the `build` job:
 
