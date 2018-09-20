@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -28,14 +29,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\*.js/,
+        test: /\.js$/,
         use: {
           loader: 'babel-loader',
-          query: {
-            presets: ['es2015']
+          options: {
+            presets: ['@babel/preset-env']
           }
         }
       }
     ]
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
   }
 };

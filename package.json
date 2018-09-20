@@ -12,11 +12,15 @@
   },
   "license": "EPL-1.0",
   "dependencies": {
-    "js-cookie": "^2.2.0",
-    "webpack": "^4.19.1"
+    "js-cookie": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
   }
 }
