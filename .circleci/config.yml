@@ -5,6 +5,11 @@ references:
   js_deps_cache_key: &js_deps_cache_key
     v8-dependency-js-deps-{{ checksum "package-lock.json" }}
 
+  restore_js_deps: &restore_js_deps
+    restore_cache:
+      keys:
+        - *js_deps_cache_key
+
   js_dependencies:
     docker:
       - image: node:8.11.1
@@ -17,11 +22,6 @@ references:
           key: *js_deps_cache_key
           paths:
             - node_modules
-
-  restore_js_deps: &restore_js_deps
-    restore_cache:
-      keys:
-        - *js_deps_cache_key
 
 jobs:
   build:
