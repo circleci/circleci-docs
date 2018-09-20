@@ -17,9 +17,9 @@ This document provides System Administrators with a list of ports for the machin
 |   | 8081 | TCP | Inbound | End users | Artifacts access |  |
 |   | 22 | TCP | Inbound | Administrators | SSH |  |
 |   | 8800 | TCP | Inbound | Administrators | Admin console |  |
-|   | 8125 | UDP | Bi-directional | Nomad Clients | Metrics |  |
-|   | 8125 | UDP | Bi-directional | Nomad Servers | Metrics | Only if using externalised Nomad Servers |
-|   | 8125 | UDP | Bi-directional | All Database Servers | Metrics | Only if using externalised databases |
+|   | 8125 | UDP | Outbound | Nomad Clients | Metrics |  |
+|   | 8125 | UDP | Inbound | Nomad Servers | Metrics | Only if using externalised Nomad Servers |
+|   | 8125 | UDP | Inbound | All Database Servers | Metrics | Only if using externalised databases |
 |   | 4647 | TCP | Bi-directional | Nomad Clients | Internal communication |  |
 |   | 8585 | TCP | Bi-directional | Nomad Clients | Internal communication |  |
 |   | 7171 | TCP | Bi-directional | Nomad Clients | Internal communication |  |
