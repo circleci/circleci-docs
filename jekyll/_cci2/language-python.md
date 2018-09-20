@@ -194,8 +194,28 @@ jobs:
 
 ### Upload And Store Test Results
 
-For the complete list of CircleCI configuration keys,
-refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+Use the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step
+to upload test results to CircleCI.
+These results will display in the **Test Summary** section of the CircleCI application.
+
+Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step
+to save test results as artifacts.
+
+```yaml
+version: 2
+jobs:
+  build:
+    ...
+    steps:
+      ...
+      - store_test_results:
+        path: test-results
+      - store_artifacts:
+        path: test-results
+        destination: tr1
+```
+
+### Deploy Application
 
 ## See Also
 {:.no_toc}
