@@ -155,9 +155,9 @@
       link: 2.0/triggers/
       children: 
         - name: Skip and Cancel Builds
-          link: 2.0/skip-build
+          link: 2.0/skip-build/
         - name: Using the API to Trigger Jobs
-          link: 2.0/api-job-trigger
+          link: 2.0/api-job-trigger/
         - name: Using Workflows to Schedule Jobs
           link: 2.0/workflows/  
 
@@ -165,7 +165,7 @@
   icon: docs/deploy.svg
   children: 
     - name: Configuring Deploys
-      link: 2.0/deployment-integrations
+      link: 2.0/deployment-integrations/
       children: 
         - name: Using Yarn on CircleCI
           link: 2.0/yarn/
@@ -181,7 +181,7 @@
   children: 
     - children:
         - name: Configuration Reference
-          link: 2.0/configuration-reference
+          link: 2.0/configuration-reference/
         - name: API Reference
           link: api/v1-reference/
         - name: Prebuilt Images
@@ -212,9 +212,9 @@
         - name: Installation
           link: 2.0/aws/
         - name: Authentication
-          link: 2.0/authentication
+          link: 2.0/authentication/
         - name: Monitoring
-          link: 2.0/monitoring
+          link: 2.0/monitoring/
         - name: Nomad
           link: 2.0/nomad/
         - name: Backup
@@ -224,6 +224,6 @@
         - name: GPU Builders
           link: 2.0/gpu/
         - name: Configuring VM Service
-          link: 2.0/vm-service
+          link: 2.0/vm-service/
         - name: Acknowledgments
           link: 2.0/open-source/

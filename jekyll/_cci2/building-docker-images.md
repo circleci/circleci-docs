@@ -256,3 +256,4 @@ Thanks to ryansch for contributing this example.
 
 [job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
+[docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching

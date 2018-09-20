@@ -13,7 +13,7 @@ This document describes common methods for running and debugging browser testing
 ## Prerequisites
 {:.no_toc}
 
-Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, PhantomJS, Firefox, and Chrome.
+Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## Overview
 {:.no_toc}
@@ -227,7 +227,7 @@ steps:
       name: Download and start X
       command: |
         sudo apt-get install -y x11vnc
-        x11vnc -forever -nopw:
+        x11vnc -forever -nopw
       background: true
 ```
 2. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:

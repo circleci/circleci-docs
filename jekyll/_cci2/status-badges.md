@@ -50,4 +50,4 @@ in the link you generated above.
 
 ## See Also
 
-[Status]({{ site.baseurl }}/2.0/status/
+[Status]({{ site.baseurl }}/2.0/status/)

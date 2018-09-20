@@ -17,7 +17,7 @@ This document provides instructions for installing and using the CircleCI CLI.
 
 The `circleci` commands enable you to reproduce the CircleCI environment locally and run jobs as if they were running on the hosted application for more efficient debugging and configuration in the initial setup phase. 
 
-You can also run `circleci` commands in your [`.circleci/config.yml`]]({{ site.baseurl }}/2.0/configuration-reference/) file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers. 
+You can also run `circleci` commands in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
 
 **Note:** There are currently two versions of the CLI that you may install. The Local CLI available at [https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci] is an older version that does not yet support Workflows.
 The Local CLI version available at [https://github.com/CircleCI-Public/circleci-cli] has a different set of options, some of which are still in active development, and will be the replacement for the old CLI.
@@ -212,7 +212,7 @@ Caching is not currently supported in local jobs. When you have either a `save_c
 ### Environment Variables
 {:.no_toc}
 
-For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information.
+For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
 
 ## Using the Local CLI Within CircleCI Convenience Images
 

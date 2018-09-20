@@ -13,6 +13,10 @@ plugins:
   - jekyll-assets
   - jekyll-sitemap
 
+algolia:
+  application_id: 06F2EYGKB6
+  index_name: documentation
+
 sass:
   sass_dir: _sass
 

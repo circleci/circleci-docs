@@ -21,7 +21,7 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 
 The currently available Xcode versions are:
 
-* `10.0.0`: Xcode 10.0 (Build 10L221o) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-440/index.html)
+* `10.0.0`: Xcode 10.0 (Build 10A254a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-449/index.html)
 * `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
 * `9.4.0`: Xcode 9.4 (Build 9F1027a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-422/index.html)
 * `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
@@ -524,7 +524,8 @@ projects. Here are the most frequent of those:
 
 * **Xcode version is not available.** We install
   a few different versions of Xcode in each build
-  image and keep those updated with the latest point releases. Therefore
+  image and keep those updated with the latest point releases. For version `10.0.0`, 
+  you must specify the full version, down to the point release number. However,
   to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
   sufficient to specify `8.3` in your `config.yml`. If a newer point
   release of 8.3 comes out, we will make that one available under the same
