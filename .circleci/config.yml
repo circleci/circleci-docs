@@ -34,6 +34,9 @@ jobs:
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
+      - run:
+          name: test
+          command: echo "Inside of $PWD"
       - restore_cache:
           keys:
             - *js_deps_cache_key
