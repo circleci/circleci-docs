@@ -122,7 +122,7 @@ and install Python packages.
 version: 2
 jobs:
   build:
-    ...
+    # ...
     steps:
       - checkout  # checkout source code to working directory
       - run:
@@ -150,7 +150,7 @@ to restore cached files or directories.
 version: 2
 jobs:
   build:
-    ...
+    # ...
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
@@ -184,9 +184,9 @@ to run your test suite.
 version: 2
 jobs:
   build:
-    ...
+    # ...
     steps:
-      ...
+      # ...
       - run:
         command: |
           pipenv run "python manage.py test"
@@ -205,9 +205,9 @@ to save test results as artifacts.
 version: 2
 jobs:
   build:
-    ...
+    # ...
     steps:
-      ...
+      # ...
       - store_test_results:
         path: test-results
       - store_artifacts:
