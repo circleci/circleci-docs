@@ -87,9 +87,7 @@ workflows:
   build-deploy:
     jobs:
       - js_dependencies
-      - build:
-        requires:
-          - js_dependencies
+      - build
       - deploy:
           requires:
             - build
