@@ -8,7 +8,7 @@ order: 7
 ---
 
 This document describes
-how to use CircleCI
+how to configure CircleCI
 using a sample application written in Python.
 
 * TOC
@@ -21,7 +21,7 @@ to describe configuration best practices
 for Python applications building on CircleCI.
 Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
 and rewriting the configuration file
-while you follow this guide.
+as you follow this guide.
 
 ## Configuration Walkthrough
 
@@ -219,3 +219,49 @@ jobs:
 
 This Django application is not deployed anywhere.
 See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
+
+## Full Configuration File
+
+{% raw %}
+
+```yaml
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.6.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6.2
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+      - run:
+          command: |
+            pipenv run "python manage.py test"
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
+```
+
+{% endraw %}
