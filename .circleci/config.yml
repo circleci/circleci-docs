@@ -10,6 +10,7 @@ references:
       keys:
         - *js_deps_cache_key
 
+jobs:
   js_dependencies:
     docker:
       - image: node:8.11.1
@@ -22,8 +23,6 @@ references:
           key: *js_deps_cache_key
           paths:
             - ~/circleci-docs/node_modules
-
-jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.1
