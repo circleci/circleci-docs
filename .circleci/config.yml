@@ -21,7 +21,7 @@ references:
       - save_cache:
           key: *js_deps_cache_key
           paths:
-            - node_modules
+            - ~/circleci-docs/node_modules
 
 jobs:
   build:
