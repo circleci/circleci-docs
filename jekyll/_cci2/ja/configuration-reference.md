@@ -7,11 +7,11 @@ categories:
   - configuring-jobs
 order: 20
 ---
-This document is a reference for the CircleCI 2.0 configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.0 infrastructure.
+This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
 
 You can see a complete `config.yml` in our [full example](#full-example).
 
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.0 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
+**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
 * * *
 
@@ -25,9 +25,53 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 ## **`version`**
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- version | Y | String | Should currently be `2` {: class="table table-striped"}
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs. {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+
+## **`commands`** (requires version:2.1)
+
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- steps | Y | Sequence | A sequence of steps run inside the calling job of the command. parameters | N | Map | A map of parameter keys. See the Parameter Syntax section of the Reusing Config document for details. description | N | String | A string that describes the purpose of the command. {: class="table table-striped"}
+
+Example:
+
+```yaml
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+```
+
+## **`executors`** (requires version 2.1)
+
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker) resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine) macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos) shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) working_directory | N | String | In which directory to run the steps. environment | N | Map | A map of environment variable names and values. {: class="table table-striped"}
+
+Example:
+
+```yaml
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
+
+See the Using Parameters in Executors section of the Reusing Config document for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -43,7 +87,7 @@ If you are **not** using workflows, the `jobs` map must contain a job named `bui
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker) machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine) macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos) shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) steps | Y | List | A list of [steps](#steps) to be performed working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. NOTE: Paths written in your YAML configuration file will *not* be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. parallelism | N | Integer | Number of parallel instances of this job to run (default: 1) environment | N | Map | A map of environment variable names and values. branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow. resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). {: class="table table-striped"}
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker) machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine) macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos) shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) steps | Y | List | A list of [steps](#steps) to be performed working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. NOTE: Paths written in your YAML configuration file will *not* be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. parallelism | N | Integer | Number of parallel instances of this job to run (default: 1) environment | N | Map | A map of environment variable names and values. branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config. resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
@@ -228,7 +272,7 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using Workflows, job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- only | N | List | List of branches that only will be executed ignore | N | List | List of branches to ignore {: class="table table-striped"}
 
@@ -330,7 +374,7 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-##### *Default shell options*
+###### *Default shell options*
 
 The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified by default). Hence, the default shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files. Descriptions of the `-eo pipefail` options are provided below.
 
@@ -376,7 +420,7 @@ In general, we recommend using the default options (`-eo pipefail`) because they
 
 For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
 
-##### *Background commands*
+###### *Background commands*
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
@@ -389,7 +433,7 @@ The `background` attribute enables you to configure commands to run in the backg
 - run: make test
 ```
 
-##### *Shorthand syntax*
+###### *Shorthand syntax*
 
 `run` has a very convenient shorthand syntax:
 
@@ -404,7 +448,7 @@ The `background` attribute enables you to configure commands to run in the backg
 
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
-##### The `when` Attribute
+###### The `when` Attribute
 
 By default, CircleCI will execute job steps one at a time, in the order that they are defined in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps will be executed.
 
@@ -416,7 +460,7 @@ A value of `always` means that the step will run regardless of the exit status o
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-##### *Example*
+###### *Example*
 
 ```yaml
 steps:
@@ -440,6 +484,40 @@ steps:
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
 ```
+
+##### **The `when` Step** (requires version: 2.1)
+
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the Conditional Steps section of the Reusing Config document for more details.
+
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step. {: class="table table-striped"}
+
+###### *Example*
+
+    version: 2.1
+    
+    jobs: # conditional steps may also be defined in `commands:`
+      job_with_optional_custom_checkout:
+        parameters:
+          custom_checkout:
+            type: string
+            default: \"\"
+        machine: true
+        steps:
+          - when:
+              condition: <<parameters.custom_checkout>>
+              steps:
+                - run: echo \"my custom checkout\"
+          - unless:
+              condition: <<parameters.custom_checkout>>
+              steps:
+                - checkout
+    workflows:
+      build-test-deploy:
+        jobs:
+          - job_with_optional_custom_checkout:
+              custom_checkout: \"any non-empty string is truthy\"
+          - job_with_optional_custom_checkout            
+    
 
 ##### **`checkout`**
 
