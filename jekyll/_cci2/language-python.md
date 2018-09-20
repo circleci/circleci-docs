@@ -106,7 +106,7 @@ jobs:
 After choosing containers for a job,
 create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
 
-Use the special [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
 to check out source code.
 By default,
 source code is checked out to the path specified by `working_directory`.
@@ -177,9 +177,22 @@ to grant CircleCI access to dependency locations.
 
 ### Run Tests
 
-### Store Test Results
+Use the `run` step
+to run your test suite.
 
-### Deploy Application
+```yaml
+version: 2
+jobs:
+  build:
+    ...
+    steps:
+      ...
+      - run:
+        command: |
+          pipenv run "python manage.py test"
+```
+
+### Upload And Store Test Results
 
 For the complete list of CircleCI configuration keys,
 refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
