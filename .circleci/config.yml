@@ -15,6 +15,7 @@ jobs:
   js_dependencies:
     docker:
       - image: node:8.11.1
+    working_directory: ~/circleci-docs
     steps:
       - run:
           name: npm dependencies
