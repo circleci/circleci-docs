@@ -101,11 +101,13 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - js_dependencies
+      - build:
+        requires:
+          - js_dependencies
       - deploy:
           requires:
             - build
-            - js_dependencies
           filters:
             branches:
               only: master
