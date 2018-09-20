@@ -469,7 +469,7 @@ For a complete list of available options, please visit the [TestFairy Upload API
 
 A series of simulator-related issues are known to happen on some projects. Here are the most frequent of those:
 
-- **Xcode version is not available.** We install a few different versions of Xcode in each build image and keep those updated with the latest point releases. Therefore to use the latest Xcode 8.3, for example, which is `8.3.3`, it is sufficient to specify `8.3` in your `config.yml`. If a newer point release of 8.3 comes out, we will make that one available under the same `8.3` version on CircleCI.
+- **Xcode version is not available.** We install a few different versions of Xcode in each build image and keep those updated with the latest point releases. For version `10.0.0`, you must specify the full version, down to the point release number. However, to use the latest Xcode 8.3, for example, which is `8.3.3`, it is sufficient to specify `8.3` in your `config.yml`. If a newer point release of 8.3 comes out, we will make that one available under the same `8.3` version on CircleCI.
 
 - **Dependency version mismatches.** If you see that the version of the dependencies used in a job are not the expected ones, please try rebuilding without cache — chances are an older dependency got stuck in the cache and is not allowing for the newer version to get installed.
 
