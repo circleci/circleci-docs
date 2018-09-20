@@ -17,6 +17,7 @@ jobs:
       - image: node:8.11.1
     working_directory: ~/circleci-docs
     steps:
+      - checkout
       - run:
           name: npm dependencies
           command: npm install
