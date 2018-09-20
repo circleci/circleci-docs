@@ -52,7 +52,7 @@ jobs:
     working_directory: ~/circleci-demo-python-django
 ```
 
-The [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key is used to specify
+[`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) is used to specify
 where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
 
 ### Choose an Executor Type
@@ -72,8 +72,8 @@ All of a job's commands execute in this container.
       - image: circleci/python:3.6.4  # primary container
 ```
 
-The Docker image above is
-a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
+**Note:**
+`circleci/python:3.6.4` is a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
 These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
