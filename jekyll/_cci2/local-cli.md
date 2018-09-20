@@ -212,7 +212,7 @@ Caching is not currently supported in local jobs. When you have either a `save_c
 ### Environment Variables
 {:.no_toc}
 
-For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information.
+For security reasons, encrypted environment variables configured in the UI will not be exported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
 
 ## Using the Local CLI Within CircleCI Convenience Images
 
