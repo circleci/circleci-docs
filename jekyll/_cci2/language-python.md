@@ -51,7 +51,7 @@ to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-referenc
 ```yaml
 version: 2
 jobs:
-  build:
+  build:  # required for runs that don't use workflows
     working_directory: ~/circleci-demo-python-django
 ```
 
@@ -114,7 +114,7 @@ source code is checked out to the path specified by `working_directory`.
 Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step
 to execute bash commands.
 In this example,
-[`pipenv`](https://pipenv.readthedocs.io/en/latest/) is used
+[Pipenv](https://pipenv.readthedocs.io/en/latest/) is used
 to create a virtual environment
 and install Python packages.
 
@@ -126,47 +126,60 @@ jobs:
     steps:
       - checkout  # checkout source code to working directory
       - run:
-        command: |  # install pipenv to install dependencies
+        command: |  # use pipenv to install dependencies
           sudo pip install pipenv
           pipenv install
 ```
 
 ### Create Caching Rules
 
+To save time between runs,
+consider [caching dependencies and source code]({{ site.baseurl }}/2.0/caching/).
+
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
+to cache certain files or directories.
+In this example,
+the virtual environment and installed packages are cached.
+
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
+to restore cached files or directories.
+
+{% raw %}
+
+```yaml
+version: 2
+jobs:
+  build:
+    ...
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:  # ensure this step occurs *before* installing dependencies
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+        command: |
+          sudo pip install pipenv
+          pipenv install
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+```
+
+{% endraw %}
+
+**Note:**
+Use the `chown` command
+to grant CircleCI access to dependency locations.
+
 ### Run Tests
 
 ### Store Test Results
 
 ### Deploy Application
-
-Finally, add several `steps` within the `build` job:
-
-{% raw %}
-
-```yaml
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to the working directory
-      - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache: # special step to save dependency cache
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          paths:
-            - "venv"
-      - run: # run tests
-          command: |
-            . venv/bin/activate
-            python manage.py test
-      - store_artifacts: # special step to store test reports as artifacts
-          path: test-reports/
-          destination: tr1
-```
-
-{% endraw %}
 
 For the complete list of CircleCI configuration keys,
 refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
