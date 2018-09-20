@@ -131,10 +131,10 @@ jobs:
           pipenv install
 ```
 
-### Create Caching Rules
+### Cache Dependencies
 
 To save time between runs,
-consider [caching dependencies and source code]({{ site.baseurl }}/2.0/caching/).
+consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
 
 Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
 to cache certain files or directories.
