@@ -77,9 +77,21 @@ All of a job's commands execute in this container.
 These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
-### Add additional services (databases, etc.)
+### Add Other Services
 
-Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
+You can specify additional containers for services like databases.
+
+```yaml
+...
+  build:
+    ...
+    docker:
+      - image: circleci/python:3.6.4
+      - image: circleci/postgres:9.6.2
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
+```
 
 ### Install dependencies
 
