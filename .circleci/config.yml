@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           key: *js_deps_cache_key
           paths:
-            - node_modules
+            - ~/circle-docs/node_modules
 
   build:
     docker:
