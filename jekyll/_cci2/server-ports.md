@@ -17,7 +17,7 @@ This document provides System Administrators with a list of ports for the machin
 |   | 8081 | TCP | Inbound | End users | Artifacts access |  |
 |   | 22 | TCP | Inbound | Administrators | SSH |  |
 |   | 8800 | TCP | Inbound | Administrators | Admin console |  |
-|   | 8125 | UDP | Outbound | Nomad Clients | Metrics |  |
+|   | 8125 | UDP | Inbound | Nomad Clients | Metrics |  |
 |   | 8125 | UDP | Inbound | Nomad Servers | Metrics | Only if using externalised Nomad Servers |
 |   | 8125 | UDP | Inbound | All Database Servers | Metrics | Only if using externalised databases |
 |   | 4647 | TCP | Bi-directional | Nomad Clients | Internal communication |  |
@@ -45,6 +45,7 @@ This document provides System Administrators with a list of ports for the machin
 |   | 3001 | TCP | Bi-directional | Services Machine | Internal communication |  |
 |   | 443 | TCP | Outbound | Cloud Storage Provider | Artifacts storage | Only if using external artifacts storage |
 |   | 53 | UDP | Outbound | Internal DNS Server | DNS resolution | This is to make sure that your jobs can resolve all DNS names that are needed for their correct operation |
+|   | 8125 | UDP | Outbound | Nomad Clients | Metrics |  |
 |  **GitHub Enterprise / GitHub.com (whichever applies)** | 22 | TCP | Inbound | Services Machine | Git access |  |
 |   | 22 | TCP | Inbound | Nomad Clients | Git access |  |
 |   | 80 | TCP | Inbound | Nomad Clients | API access |  |
