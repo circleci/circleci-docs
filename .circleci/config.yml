@@ -16,6 +16,9 @@ jobs:
       - run:
           name: npm dependencies
           command: npm install
+      - run:
+          name: test
+          command: echo "Inside of $PWD"
       - save_cache:
           key: *js_deps_cache_key
           paths:
