@@ -195,7 +195,7 @@ If you find yourself setting up a VNC server often, then you might want to autom
           name: Download and start X
           command: |
             sudo apt-get install -y x11vnc
-            x11vnc -forever -nopw:
+            x11vnc -forever -nopw
           background: true
     
 
