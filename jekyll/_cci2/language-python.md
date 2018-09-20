@@ -52,12 +52,13 @@ jobs:
     working_directory: ~/circleci-demo-python-django
 ```
 
-[`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) is used to specify
-where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name)
+to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
 
 ### Choose an Executor Type
 
 A job's steps occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+
 In this example,
 the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
 to specify a custom Docker image.
@@ -65,7 +66,8 @@ The first image listed becomes the job's [primary container]({{ site.baseurl }}/
 All of a job's commands execute in this container.
 
 ```yaml
-...
+version: 2
+jobs:
   build:
     working_directory: ~/circleci-demo-python-django
     docker:
@@ -77,16 +79,22 @@ All of a job's commands execute in this container.
 These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
-### Add Other Services
+### Add Other Services and Set Environment Variables
 
 You can specify additional containers for services like databases.
+Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key
+to set environment variables for all commands in a container.
 
 ```yaml
-...
+version: 2
+jobs:
   build:
-    ...
+    working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.2
         environment:
           POSTGRES_USER: root
