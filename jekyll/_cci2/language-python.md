@@ -217,9 +217,5 @@ jobs:
 
 ### Deploy Application
 
-## See Also
-{:.no_toc}
-
-- See the [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) document for a sample Flask application.
-- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-- See the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for caching strategies.
+This Django application is not deployed anywhere.
+See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
