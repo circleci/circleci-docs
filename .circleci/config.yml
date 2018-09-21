@@ -18,6 +18,10 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
+      - restore_cache:
+          keys:
+            - *js_deps_cache_key
+            - *js_deps_backup_cache_key
       - run:
           name: npm dependencies
           command: npm install
@@ -41,6 +45,10 @@ jobs:
           paths:
             - js
             - html
+      - save_cache:
+          key: *js_deps_cache_key
+          paths:
+            - node_modules
 
   build:
     docker:
@@ -56,10 +64,6 @@ jobs:
       - run:
           name: test
           command: echo "Inside of $PWD"
-      - restore_cache:
-          keys:
-            - *js_deps_cache_key
-            - *js_deps_backup_cache_key
       - run:
           name: "Test Markdown Files"
           command: |
