@@ -44,6 +44,8 @@ jobs:
      - run: docker build .
 ``` 
 
+**Note:** We enforce limits for the DLC usage to guarantee the stability of our platform. 
+
 ## Enabling DLC
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.
