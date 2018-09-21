@@ -23,7 +23,7 @@ jobs:
           command: npm install
       - run:
           name: Prepare JS assets
-          command: NODE_ENV=production webpack -p
+          command: npm run webpack-prod
       - run:
           name: Persist JS assets
           command: |
