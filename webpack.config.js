@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
@@ -12,16 +11,6 @@ module.exports = {
     publicPath: '',
     filename: 'dist/[name].min.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: '_includes/app.html',
-      templateContent: ({ htmlWebpackPlugin }) =>
-        `<script src="{{ "/${
-          htmlWebpackPlugin.files.chunks.app.entry
-        }" | prepend: site.baseurl }}" type="text/javascript"></script>`,
-      inject: false
-    })
-  ],
   module: {
     rules: [
       {
