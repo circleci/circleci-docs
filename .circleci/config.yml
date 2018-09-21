@@ -84,22 +84,22 @@ jobs:
       - run:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
-      - store_artifacts: 
+      - store_artifacts:
           path: jekyll/_site/docs/
           destination: circleci-docs
-      - store_artifacts: 
+      - store_artifacts:
           path: run-results/
           destination: run-results
       - persist_to_workspace:
-          root: ~/circleci-docs/jekyll/_site 
-          paths: 
+          root: ~/circleci-docs/jekyll/_site
+          paths:
             - docs
   deploy:
     docker:
       - image: cibuilds/aws:1.15.73
     steps:
       - attach_workspace:
-          at: ./generated-site 
+          at: ./generated-site
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
