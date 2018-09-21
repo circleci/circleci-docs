@@ -30,10 +30,17 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/js
             mv jekyll/assets/js/dist/* /tmp/workspace/js/
+      - run:
+          name: Persist html assets
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/html
+            mv jekyll/_includes/app.html /tmp/workspace/html/
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - js
+            - html
 
   build:
     docker:
@@ -88,6 +95,18 @@ jobs:
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
             ./scripts/pull-docker-image-tags.sh
       - run:
+          name: Restore html
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/html
+            mv /tmp/workspace/html/* jekyll/_includes/
+      - run:
+          name: Restore js
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/js
+            mv /tmp/workspace/js/ jekyll/assets/js/dist/
+      - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
@@ -99,12 +118,6 @@ jobs:
       - store_artifacts:
           path: run-results/
           destination: run-results
-      - run:
-          name: Restore js
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/js
-            mv /tmp/workspace/js/ jekyll/assets/js/dist/
       - persist_to_workspace:
           root: ~/circleci-docs/jekyll/_site
           paths:
