@@ -52,9 +52,9 @@ One DLC volume can only be attached to one `machine` or Remote Docker job at a t
 
 Depending on which jobs the volumes are used in, they might end up with different layers saved on them. The volumes that are used less frequently might have older layers saved on them.
 
-The DLC volumes are deleted after 14 days of not been used in a job.
+The DLC volumes are deleted after 14 days of not being used in a job.
 
-CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs.
+CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs, so a maximum of 1 job with 50x parallelism will have access to DLC per project, or 2 jobs with 25x parallelism, and so on.
 
 ## Enabling DLC
 
