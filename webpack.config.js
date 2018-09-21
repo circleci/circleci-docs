@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'jekyll/assets/js'),
     publicPath: '',
-    filename: 'assets/js/dist/[name]-[contenthash].min.js'
+    filename: 'assets/js/dist/[name].min.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
