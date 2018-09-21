@@ -44,7 +44,17 @@ jobs:
      - run: docker build .
 ``` 
 
-**Note:** We enforce limits for the DLC usage to guarantee the stability of our platform. 
+## How DLC Works
+
+DLC caches your Docker image layers by creating an external volume and attaching it to the instances that execute the `machine` and Remote Docker jobs. The volume is attached in a way that makes Docker save the image layers on the attached volume. When the job finishes, the volume is disconnected and re-used in a future job. This means that the layers downloaded in a previous job with DLC will be available in the next job that uses the same DLC volume.
+
+One DLC volume can only be attached to one `machine` or Remote Docker job at a time. If one DLC volume exists but two jobs that request DLC are launched, CircleCI will create a new DLC volume and attach it to the second job. From that point on the project will have two DLC volumes associated with it. This applies to parallel jobs as well: if two `machine` jobs are run in parallel, they will get different DLC volumes.
+
+Depending on which jobs the volumes are used in, they might end up with different layers saved on them. The volumes that are used less frequently might have older layers saved on them.
+
+The DLC volumes are deleted after 14 days of not been used in a job.
+
+CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs.
 
 ## Enabling DLC
 
