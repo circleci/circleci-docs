@@ -4,72 +4,163 @@ title: CircleCI API v1.1 Reference
 categories: [reference]
 description: Using the CircleCI API
 ---
+## API Overview
 
-The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
+The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:
+<dl>
+  <dt>
+    GET - retrieve specific information, which may include arrays and sets of data and information.
+  </dt>
+  <dt>
+    POST - create/add a new API element.
+  </dt> 
+  <dt>
+    PUT - update an existing API element in the API server.
+  </dt>
+  <dt>
+    DELETE - remove/delete an API element in the API server.
+  </dt>
+  <dt>
+</dl>
+
+Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not currently use the PUT verb.
+
+### API Syntax
+
+When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown below:
+
+"https://circleci.com/api/v1.1"
+
+Where:
+
+<dl>
+  <dt>
+  https://circleci.com - the resource URL for the API being called.
+  </dt>
+  <dt>
+  api - the class being called.
+  </dt>
+  <dt>
+  v1.1 - the API version.
+  </dt>
+</dl>
+
+**Note:** Access to billing functions is only available from the CircleCI application.
+
+### Authentication
+
+The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
+
+#### Add an API Token
+
+To add an API token, perform the steps listed below.
+
+1.  Add an API token from your [account dashboard](https://circleci.com/account/api){:rel="nofollow"}.
+2.  To test it,
+    [View it in your browser](https://circleci.com/api/v1.1/me){:rel="nofollow"}
+    or call the API using `curl`:
+
+```
+$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+```
+3.  You should see a response like the following:
+
+```
+{
+  "user_key_fingerprint" : null,
+  "days_left_in_trial" : -238,
+  "plan" : "p16",
+  "trial_end" : "2011-12-28T22:02:15Z",
+  "basic_email_prefs" : "smart",
+  "admin" : true,
+  "login" : "pbiggar"
+}
+```
+**Note** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
+
+#### Get Authenticated
+
+To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the
+`circle-token` query param: 
+
+```
+curl https://circleci.com/api/v1.1/me?circle-token=:token
+```
+Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
+
+```
+curl -u <circle-token>: https://circleci.com/api/...
+```
+
+**Note** the colon `:` tells `curl` that there's no password.
 
 CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
 
 * TOC
 {:toc}
 
-## Summary
+### Rate Limiting/Throttling ###
 
-All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
+Unlike many other APIs, CircleCI does not currently perform any rate limiting or throttling of API requests to the server, CircleCI may, at its discretion, manually limit the number of requests that can be made to the server if it is determined that the user may be acting inappropriately. 
+
+## Summary of API Endpoints
+
+The CircleCI API consists of the following endpoints, which can be called by making a properly-formatted API request.
 
 <dl>
 <dt>
   GET: /me
 </dt>
 <dd>
-  Provides information about the signed in user.
+  Returns detailed information about the user currently signed into the server.
 </dd>
 <dt>
   GET: /projects
 </dt>
 <dd>
-  List of all the projects you're following on CircleCI, with build information organized by branch.
+  Returns an array of all projects you are currently following on CircleCI, including build information organized by branch.
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/follow
 </dt>
 <dd>
-  Follow a new project on CircleCI.
+  Adds a new project to the list of projects you are currently following on CircleCI.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project
 </dt>
 <dd>
-  Build summary for each of the last 30 builds for a single git repo.
+  Returns a build summary for each of the last 30 builds for a single git repo.
 </dd>
 <dt>
   GET: /recent-builds
 </dt>
 <dd>
-  Build summary for each of the last 30 recent builds, ordered by build_num.
+  Returns a build summary for each of the last 30 recent builds, ordered by build_num.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project/:build_num
 </dt>
 <dd markdown="1">
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
+  Returns detailed information for a single build. The JSON response includes all fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project/:build_num/artifacts
 </dt>
 <dd>
-  List the artifacts produced by a given build.
+  Returns an array of artifacts produced by a given build.
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/:build_num/retry
 </dt>
 <dd>
-  Retries the build, returns a summary of the new build.
+  Retries the build and then returns a summary of the new build.
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/:build_num/cancel
 </dt>
 <dd>
-  Cancels the build, returns a summary of the build.
+  Cancels the build and then returns a summary of the build.
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/:build_num/ssh-users
@@ -81,101 +172,55 @@ All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
   POST: /project/:vcs-type/:username/:project/tree/:branch
 </dt>
 <dd markdown="1">
-  Triggers a new build, returns a summary of the build. [Optional 1.0 build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/) and [Optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
+  Triggers a new build and then returns a summary of the build. [Optional 1.0 build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/) and [Optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/ssh-key
 </dt>
 <dd>
-  Create an ssh key used to access external systems that require SSH key-based authentication
+  Creates an ssh key used to access external systems that require SSH key-based authentication.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
-  Lists checkout keys.
+  Returns an array of checkout keys.
 </dd>
 <dt>
   POST: /project/:vcs-type/:username/:project/checkout-key
 </dt>
 <dd>
-  Create a new checkout key.
+  Creates a new checkout key.
 </dd>
 <dt>
   GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>
-  Get a checkout key.
+  Returns an individula checkout key.
 </dd>
 <dt>
   DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
 </dt>
 <dd>
-  Delete a checkout key.
+  Deletes a checkout key.
 </dd>
 <dt>
   DELETE: /project/:vcs-type/:username/:project/build-cache
 </dt>
 <dd>
-  Clears the cache for a project.
+  Deletes the cache for a project.
 </dd>
 <dt>
   POST: /user/heroku-key
 </dt>
 <dd>
-  Adds your Heroku API key to CircleCI, takes apikey as form param name.
+  Adds your Heroku API key to CircleCI and then takes apikey as form param name.
 </dd>
 </dl>
 
-## Getting Started
-
-1.  Add an API token from your [account dashboard](https://circleci.com/account/api){:rel="nofollow"}.
-2.  To test it,
-    [View it in your browser](https://circleci.com/api/v1.1/me){:rel="nofollow"}
-    or call the API using `curl`:
-
-    ```
-$ curl https://circleci.com/api/v1.1/me?circle-token=:token
-```
-
-3.  You should see a response like the following:
-
-    ```
-{
-  "user_key_fingerprint" : null,
-  "days_left_in_trial" : -238,
-  "plan" : "p16",
-  "trial_end" : "2011-12-28T22:02:15Z",
-  "basic_email_prefs" : "smart",
-  "admin" : true,
-  "login" : "pbiggar"
-}
-```
-
-<h2 id="calling">Making calls</h2>
-
-All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
-All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
-
-## Authentication
-
-To authenticate, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the
-`circle-token` query param, like so:
-
-```
-curl https://circleci.com/api/v1.1/me?circle-token=:token
-```
-Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command, like so:
-
-```
-curl -u <circle-token>: https://circleci.com/api/...
-```
-
-(Note the colon `:`, which tells `curl` that there's no password.)
-
 ## Version Control System (:vcs-type)
 
-New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCI what version control system type your project uses. Current choices are 'github' or 'bitbucket'. The command for recent builds for a project would be formatted like so:
+New with v1.1 of the api, for endpoints under /project you will now need to tell CircleCI what version control system type your project uses. You may currently select either 'github' or 'bitbucket'. The command for recent builds for a project would be formatted as follows:
 
 ```
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
@@ -204,7 +249,7 @@ the order has no special significance.
 
 ## Accept header
 
-If you specify no accept header, we'll return human-readable JSON with comments.
+If you specify no accept header, The CircleCI API will return human-readable JSON with comments.
 If you prefer to receive compact JSON with no whitespace or comments, add the `"application/json" Accept header`.
 Using `curl`:
 
@@ -339,7 +384,6 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 <h2 id="delete-checkout-key">Delete Checkout Key</h2>
 
 {{ site.data.api.delete_checkout_key | api_endpoint}}
-
 
 ## Test Metadata
 
