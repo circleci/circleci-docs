@@ -8,11 +8,7 @@ module.exports = {
     app: './src-js/app.js'
   },
   output: {
-    // We need the flexibility to build a js file to one place and an html file
-    // in another, which are in different places in the jekyll directory tree.
-    // We set a fairly high level path and empty default path so that we can get
-    // this flexibility.
-    path: path.join(__dirname, 'jekyll/'),
+    path: path.join(__dirname, 'jekyll/assets/js'),
     publicPath: '',
     filename: 'assets/js/dist/[name]-[contenthash].min.js'
   },
