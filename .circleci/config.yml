@@ -10,7 +10,7 @@ jobs:
   js_dependencies:
     docker:
       - image: node:8.11.1
-    working_directory: ~/circleci-docs
+    working_directory: /home/circleci/circleci-docs
     steps:
       - checkout
       - run:
@@ -22,7 +22,7 @@ jobs:
       - save_cache:
           key: *js_deps_cache_key
           paths:
-            - ~/circleci-docs/node_modules
+            - /home/circleci/circleci-docs/node_modules
 
   build:
     docker:
