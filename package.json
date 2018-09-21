@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "webpack-dev": "webpack -p",
-    "webpack-prod": "NODE_ENV=production webpack -p"
+    "webpack-prod": "NODE_ENV=production webpack -p",
+    "webpack-watch": "webpack -p --watch"
   },
   "repository": {
     "type": "git",
