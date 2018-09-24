@@ -1,14 +1,16 @@
 <!-- MOBILE SUBNAV /-->
+<div id="mobile-search-box">
+</div>
 <div class="sidebar-mobile-wrapper">
   <!-- DISPLAY ITEM /-->
   <div class="current-item">
     {% assign items = site.data.sidenav %}
     {% for item in items %}
       <div class="mobile-sidebar-item {% if forloop.index != 1 %} hidden {% endif %}" data-id="{{ item.name | slugify }}">
-        {% if item.icon %} 
-          {% asset '{{ item.icon }}' class=icon %} 
+        {% if item.icon %}
+          {% asset '{{ item.icon }}' class=icon %}
         {% endif %}
-        
+
         <span class="nav-span"><strong>{{ item.name }}</strong></span>
 
         {% asset docs/arrow-right.svg class="arrow" %}
@@ -25,10 +27,10 @@
         <ul>
           <li class="main-nav-item closed" data-section="{{ main-item.name | slugify }}">
             <div class="list-wrap">
-              {% if main-item.icon %} 
-                {% asset '{{ main-item.icon }}' class=icon %} 
+              {% if main-item.icon %}
+                {% asset '{{ main-item.icon }}' class=icon %}
               {% endif %}
-              
+
               {% if main-item.link %}
                 <a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ main-item.name}}</a>
               {% else %}
@@ -39,7 +41,7 @@
                 {% asset docs/arrow-right.svg class=arrow %}
               {% endif %}
             </div>
-            
+
             {% if main-item.children %}
             <ul class="subnav">
               {% for item in main-item.children %}
