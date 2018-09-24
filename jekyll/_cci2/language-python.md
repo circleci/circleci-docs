@@ -47,6 +47,9 @@ it must have a `build` job.
 
 Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
 to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+By default,
+the value of `working_directory` is `~/project`,
+where `project` is a literal string.
 
 ```yaml
 version: 2
