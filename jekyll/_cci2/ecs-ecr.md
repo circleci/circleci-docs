@@ -1,13 +1,26 @@
 ---
 layout: classic-docs
 title: Deploying to AWS ECR/ECS
-description: How to Deploy to AWS ECR/ECS With CircleCI
+description: How to deploy to AWS ECR/ECS with CircleCI
 ---
+
+This document describes
+how to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR)
+using CircleCI.
+
+* TOC
+{:toc}
 
 ## Overview
 
-- what is AWS ECR/ECS?
-- why would you use it with CircleCI?
+There are three main parts of this guide:
+
+- Build and test a Dockerized web application.
+- Push the Docker image to ECR.
+- Use AWS Fargate to deploy to ECS.
+
+The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)
+and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
 
 ## Prerequisites
 
@@ -51,7 +64,3 @@ jobs:
       - run:
           name: Deploy specific revision
 ```
-
-## Steps
-
-## Next Steps
