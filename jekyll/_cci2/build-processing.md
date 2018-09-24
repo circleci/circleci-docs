@@ -17,12 +17,13 @@ The new build processing feature enables use of the new [API endpoint to trigger
 - New API endpoint to trigger builds, including running all workflows in the build
 - Jobs named `build` will be wrapped in a workflows stanza by the processor
 - Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
+- Use of configuration version 2.1 or higher requires build processing to be on.
 
 **Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. 
 
 ## Troubleshooting
 
-Build processing errors will appear on the Jobs page or the Workflows page. You may safely go back by disabling the radio button for the build processing feature on your Advanced Settings for your project if jobs or workflows fail the new build processing service.
+Build processing errors will appear on the Jobs page or the Workflows page. When migrating an existing project to build processing, you may safely go back by disabling the radio button for the build processing feature on your Advanced Settings for your project if jobs or workflows fail the new build processing service.
 
 ## Limitations
 CircleCI is committed to achieving backwards compatibility in almost all cases, and most projects that enable build processing will have no effect on existing builds. Let us know if you experience breaking builds that worked before you turned on build processing but broke after you turned it on. 
