@@ -14,7 +14,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "js-cookie": "^2.2.0"
+    "js-cookie": "^2.2.0",
+    "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
