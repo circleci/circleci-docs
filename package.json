@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git://github.com/circleci/circleci-docs.git"
   },
-  "license": "EPL-1.0",
+  "license": "MIT",
   "dependencies": {
     "js-cookie": "^2.2.0"
   },
