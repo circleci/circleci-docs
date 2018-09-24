@@ -95,6 +95,7 @@ CircleCI では下記の言語イメージを提供しています。
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
+- [Rust](#rust)
 
 使用している言語がこのなかにないときはカスタムイメージを作成することになります。CircleCI が提供する [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard) も活用してください。
 
@@ -121,10 +122,12 @@ CircleCI では言語イメージについていくつかのバリエーショ�
 CircleCI では下記のサービスイメージを提供しています。
 
 - [buildpack-deps](#buildpack-deps)
+- [DynamoDB](#dynamodb)
 - [MariaDB](#mariadb)
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
+- [Redis](#redis)
 
 #### サービスイメージのバリエーション
 
