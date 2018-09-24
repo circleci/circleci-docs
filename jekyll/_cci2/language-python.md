@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Language Guide: Python"
+title: "Configuring a Python Application on CircleCI"
 short-title: "Python"
-description: "Continuous integration and deployment with Python on CircleCI"
+description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
 ---
