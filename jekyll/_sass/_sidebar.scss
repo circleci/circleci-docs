@@ -3,6 +3,7 @@ $sidebar-spacing-base: 5px;
 .sidebar-wrapper {
   width: 260px;
   position: relative;
+  z-index: 1;
 
   @media screen and (max-width: $screen-sm) {
     display: none;
@@ -25,7 +26,7 @@ $sidebar-spacing-base: 5px;
 
   &.fixed {
     position: fixed;
-    top: 70px;
+    top: 118px;
   }
 
   .main-nav-item {
