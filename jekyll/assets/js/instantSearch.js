@@ -17,7 +17,7 @@ search.addWidget(
   })
 );
 
-// initialize SearchBox
+// initialize mobile SearchBox
 search.addWidget(
   instantsearch.widgets.searchBox({
     container: '#mobile-search-box',
