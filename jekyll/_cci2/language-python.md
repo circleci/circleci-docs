@@ -16,9 +16,12 @@ using a sample application written in Python.
 
 ## Overview
 
-This guide uses a [sample Django application](https://github.com/CircleCI-Public/circleci-demo-python-django)
+This guide uses a sample Django application
 to describe configuration best practices
 for Python applications building on CircleCI.
+The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django)
+and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
+
 Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
 and rewriting the configuration file
 as you follow this guide.
