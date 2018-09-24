@@ -19,7 +19,7 @@ search.addWidget(
       input: 'instantsearch-search'
     },
     placeholder: 'Search Documentation',
-    queryHook: lodash(function () { return true; }, 1000)
+    queryHook: lodash(function (query, searchFunction) { searchFunction(query); }, 1000)
   })
 );
 
