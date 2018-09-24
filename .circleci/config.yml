@@ -34,17 +34,10 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/js
             mv jekyll/assets/js/dist/* /tmp/workspace/js/
-      - run:
-          name: Persist html assets
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/html
-            mv jekyll/_includes/app.html /tmp/workspace/html/
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - js
-            - html
       - save_cache:
           key: *js_deps_cache_key
           paths:
@@ -95,12 +88,6 @@ jobs:
             # cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
             ./scripts/pull-docker-image-tags.sh
-      - run:
-          name: Restore html
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/html
-            mv /tmp/workspace/html/* jekyll/_includes/
       - run:
           name: Restore js
           command: |
