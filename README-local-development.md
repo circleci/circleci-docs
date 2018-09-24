@@ -20,6 +20,17 @@ We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofe
 
 You're welcome to use [Bundler](http://bundler.io/) to install these gems.
 
+## Building js assets
+
+Our js assets are compiled by webpack and put into a place that the jekyll build can find them.
+
+Anytime you are working on js be sure to run:
+
+```bash
+$ npm install
+$ npm run webpack-watch
+```
+
 ## First Run
 
 To get a local copy of our docs, run the following commands:
