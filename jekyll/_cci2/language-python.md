@@ -60,13 +60,13 @@ jobs:
 
 ### Choose an Executor Type
 
-A job's steps occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
 In this example,
 the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
 to specify a custom Docker image.
 The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
-All of a job's commands execute in this container.
+All commands for a job execute in this container.
 
 ```yaml
 version: 2
