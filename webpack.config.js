@@ -7,9 +7,9 @@ module.exports = {
     app: './src-js/app.js'
   },
   output: {
-    path: path.join(__dirname, 'jekyll/assets/js'),
+    path: path.join(__dirname, 'jekyll/assets/js/dist'),
     publicPath: '',
-    filename: 'dist/[name].min.js'
+    filename: '[name].min.js'
   },
   module: {
     rules: [
