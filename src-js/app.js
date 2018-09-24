@@ -1,3 +1,4 @@
-import * as Cookie from 'js-cookie';
+import * as rollbar from './rollbar';
 
-window.Cookie = Cookie;
+// CIRCLECI_ENVIRONMENT is defined by webpack.
+window.Rollbar = rollbar.init(CIRCLECI_ENVIRONMENT);
