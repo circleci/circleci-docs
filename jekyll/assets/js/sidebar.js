@@ -57,7 +57,7 @@
 
     // prevents display problems on very large screens with little content
     if (footer.getBoundingClientRect().top <= window.innerHeight) {
-      sidebar.style.height = (footer.getBoundingClientRect().top - 118) + 'px';
+      sidebar.style.height = (footer.getBoundingClientRect().top - 70) + 'px';
     } else {
       sidebar.style.height = null;
     }
