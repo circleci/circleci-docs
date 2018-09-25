@@ -11,7 +11,7 @@ order: 4
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-2. `.circleci` ディレクトリを作成し、そのなかに下記の内容を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成します。`node:4.8.2` の部分は用途に合わせて任意の [Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)の指定に置き換えます。
+2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want:
 
 ```yaml
 version: 2
@@ -24,9 +24,11 @@ jobs:
       - run: echo "hello world" # 「echo」コマンドを実行します
 ```
 
-リポジトリに対するコミットとプッシュは、CircleCI のビルド実行の契機になります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**Add Project** ボタンをクリックします。その後プロジェクト名の横にある **Bulid Project** ボタンをクリックしてください。
+**Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file.
 
-CircleCI はソースコードを取得 (チェックアウト) して「Hello World」と出力し、Job ページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
+Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+
+CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
 
 **Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
