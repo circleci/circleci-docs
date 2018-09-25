@@ -489,7 +489,7 @@ steps:
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the Conditional Steps section of the Reusing Config document for more details.
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step. {: class="table table-striped"}
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Sequence | A list of steps to execute when the condition is true {: class="table table-striped"}
 
 ###### *Example*
 
