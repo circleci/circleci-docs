@@ -2,28 +2,21 @@
 <html>
 {% include head.html %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
-
-<div style="display:none;">
-	<div id="hits-template">
-		<h2>Search Results for "<span id="search-term-display"></span>"</h2>
-		<div id="instant-hits"></div>
-	</div>
-</div>
-
 {% if jekyll.environment == "production" %}
 	{% include google-tag-manager.html %}
 {% endif %}
 <div class="outer">
 	{% include global-nav.html %}
-	{% include main-searchbar.html %}
 	{% include mobile-sidebar.html %}
 	<div class="main-body">
 		{% include sidebar.html %}
 		<div class="article-container docs">
+			<form id="site-search" class="doc-search" action="">
+				<input id="cci-search" name="search" type="search" placeholder="Search CircleCI {% if page.collection == 'cci1' %}1.0 {% elsif page.collection == 'cci2' %}2.0 {% elsif page.collection == 'ccie' %}Enterprise {% elsif page.collection == 'api' %}API {% else %}{% endif %}docs" class="form-control" />
+			</form>
 			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
-
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1>{{ page.title }}</h1>{% endif %}
 				{{ content }}
@@ -33,7 +26,6 @@
 			</article>
 		</div><!-- .article-container -->
 	</div><!-- .main-body -->
-
 	{% include global-footer.html %}
 	<script src="{{ "/assets/js/vendor.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
   <script src="{{ "/assets/js/dist/app.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
@@ -41,7 +33,16 @@
   <script src="{{ "/assets/js/jquery.cookie.min.js" | prepend: site.baseurl }}" type="text/javascript" ></script>
 	{% asset main.js %}
 	<script src="{{ site.baseurl }}/assets/js/nav.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+	<script type="text/javascript">
+	docsearch({
+		apiKey: '851a2eaa13614d164b36370fba830a78',
+		indexName: 'circleci',
+		inputSelector: '#cci-search',
+		algoliaOptions: { 'facetFilters': ["version:{% if page.collection == 'cci1' %}1.0{% elsif page.collection == 'cci2' %}2.0{% elsif page.collection == 'ccie' %}enterprise{% elsif page.collection == 'api' %}api{% else %}{% endif %}"] },
+		debug: {% if jekyll.environment == "production" %}false{% else %}true{% endif %} // Set debug to true if you want to inspect the dropdown
+	});
+	</script>
 </div><!-- .outter -->
-
 </body>
 </html>
