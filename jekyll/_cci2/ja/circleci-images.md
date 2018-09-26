@@ -188,10 +188,14 @@ CircleCI が提供するサービスイメージは、各サービス 1 つの�
 **利用可能なタグ：** <small> (これ以外のタグも <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a> で見つけられます)</small>
 
 <ul class="list-2cols">
-  {% assign tags = image[1].tags | sort %} {% for tag in tags %}
-<li>{{ tag }}</li>
-{% endfor %}
+  {% assign tags = image[1].tags | sort %} {% for tag in tags %} {% unless tag contains "-browsers" or tag contains "-node" %} 
+  
+  <li>
+    {{ tag }}
+  </li> {% endunless %} {% endfor %}
 </ul>
+
+<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
 
 * * *
 
