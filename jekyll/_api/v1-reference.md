@@ -3,129 +3,43 @@ layout: classic-docs
 title: CircleCI API v1.1 Reference
 categories: [reference]
 description: Using the CircleCI API
+regenerate: true
 ---
 
-The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
-
-CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
+The CircleCI API v1.x is a JSON API that allows you to access information and trigger actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
 
 * TOC
 {:toc}
 
-## Summary
+## Endpoint Summary
 
 All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
-<dl>
-<dt>
-  GET: /me
-</dt>
-<dd>
-  Provides information about the signed in user.
-</dd>
-<dt>
-  GET: /projects
-</dt>
-<dd>
-  List of all the projects you're following on CircleCI, with build information organized by branch.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/follow
-</dt>
-<dd>
-  Follow a new project on CircleCI.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project
-</dt>
-<dd>
-  Build summary for each of the last 30 builds for a single git repo.
-</dd>
-<dt>
-  GET: /recent-builds
-</dt>
-<dd>
-  Build summary for each of the last 30 recent builds, ordered by build_num.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/:build_num
-</dt>
-<dd markdown="1">
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/:build_num/artifacts
-</dt>
-<dd>
-  List the artifacts produced by a given build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/retry
-</dt>
-<dd>
-  Retries the build, returns a summary of the new build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/cancel
-</dt>
-<dd>
-  Cancels the build, returns a summary of the build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/ssh-users
-</dt>
-<dd>
-  Adds a user to the build's SSH permissions.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/tree/:branch
-</dt>
-<dd markdown="1">
-  Triggers a new build, returns a summary of the build. [Optional 1.0 build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/) and [Optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/ssh-key
-</dt>
-<dd>
-  Create an ssh key used to access external systems that require SSH key-based authentication
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/checkout-key
-</dt>
-<dd>
-  Lists checkout keys.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/checkout-key
-</dt>
-<dd>
-  Create a new checkout key.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
-</dt>
-<dd>
-  Get a checkout key.
-</dd>
-<dt>
-  DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
-</dt>
-<dd>
-  Delete a checkout key.
-</dd>
-<dt>
-  DELETE: /project/:vcs-type/:username/:project/build-cache
-</dt>
-<dd>
-  Clears the cache for a project.
-</dd>
-<dt>
-  POST: /user/heroku-key
-</dt>
-<dd>
-  Adds your Heroku API key to CircleCI, takes apikey as form param name.
-</dd>
-</dl>
+<table class="table table-striped table-hover">
+	<thead class="thead-light"><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+{% assign apis = site.data.api | sort: url %}
+{%- for endpoint in apis %}
+	{%- unless endpoint[1].url contains "/project/:vcs-type/:username/:project" %}
+	<tr>
+		<td>{{ endpoint[1].url | remove: "/api/v1.1" }}</td>
+		<td>{{- endpoint[1].method -}}</td>
+		<td>{{- endpoint[1].description -}}</td>
+	</tr>
+	{%- endunless -%}
+{% endfor %}
+	<thead class="thead-light"><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+<tr><td colspan="3">Project endpoints below should be prefixed with <code>/api/v1.1/project/:vcs-type/:username/:project</code></td></tr>
+{%- for endpoint in apis %}
+	{%- if endpoint[1].url contains "/project/:vcs-type/:username/:project" -%}
+	<tr>
+		<td>{{ endpoint[1].url | remove: "/api/v1.1/project/:vcs-type/:username/:project" }}</td>
+		<td>{{- endpoint[1].method -}}</td>
+		<td>{{- endpoint[1].description -}}</td>
+	</tr>
+	{%- endif -%}
+{% endfor %}
+</table>
+
 
 ## Getting Started
 

@@ -501,13 +501,10 @@ project_build_cache:
       "status" : "build caches deleted"
     }
 
-"user/ssh-key":
+user_ssh-key:
+  url: "/api/v1.1/user/ssh-key"
   method: "POST"
   description: "Adds a CircleCI key to your GitHub User account."
-
-"user/heroku-key":
-  method: "POST"
-  description: "Adds your Heroku API key to CircleCI, takes apikey as form param name."
 
 list_environment_variables:
   try_it: false
