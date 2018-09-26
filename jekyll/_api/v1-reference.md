@@ -3,6 +3,7 @@ layout: classic-docs
 title: CircleCI API v1.1 Reference
 categories: [reference]
 description: Using the CircleCI API
+regenerate: true
 ---
 
 The CircleCI API v1.x is a JSON API that allows you to access information and trigger actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
