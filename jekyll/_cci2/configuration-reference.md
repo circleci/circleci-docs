@@ -582,7 +582,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 Key | Required | Type | Description
 ----|-----------|------|------------
 condition | Y | String | A parameter value
-steps |	Y |	Map or String |	A configuration map for the step or some string whose semantics are defined by the step.
+steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
 ###### *Example*
