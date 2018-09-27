@@ -13,9 +13,7 @@
     "url": "git://github.com/circleci/circleci-docs.git"
   },
   "license": "MIT",
-  "dependencies": {
-    "rollbar-browser": "^1.9.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
