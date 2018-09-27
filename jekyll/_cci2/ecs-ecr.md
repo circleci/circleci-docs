@@ -72,9 +72,101 @@ AWS_ACCOUNT_ID           | Required for deployment. [Find your AWS Account ID](h
 AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.
 {:class="table table-striped"}
 
-## Steps
+## Configuration Walkthrough
 
-## Full Configuration
+Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
+Follow the steps below to create a complete `config.yml` file.
+
+### Specify a Version
+
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used
+to issue warnings about breaking changes.
+
+```yaml
+version: 2
+```
+
+### Create a Build Job
+
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+For this sample application,
+there are two jobs:
+one for building and testing the application,
+and one for deploying the application.
+These jobs are called `build` and `job`, respectively.
+
+In the `build` job,
+use the `docker` [executor]({{ site.baseurl }}/2.0/executor-types/)
+and specify the `circleci/golang:1.8` [convenience image]({{ site.baseurl }}/2.0/circleci-images/).
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.8
+```
+
+### Build Application
+
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+to check out source code.
+Because [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) is unspecified,
+the application is checked out to `~/project`.
+
+Use the [`setup_remote_docker`]({{ site.baseurl }}/2.0/configuration-reference/#setup_remote_docker) step
+to create a remote Docker environment.
+This is required
+to build the Docker image for deployment.
+
+Compile the Go source code
+and pack the results into an archive called `demo-app`.
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Create executable
+        command: |
+          go build -o demo-app src/main.go  # 'demo-app' is used in the Dockerfile
+```
+
+### Set Environment Variables
+
+For convenience,
+set two environment variables:
+
+- the name of your ECR repository
+- the full name of the Docker image
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+    steps:
+      # ...
+      - run:
+          name: Set convenience environment variables
+          command: |
+            echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+            echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${CIRCLE_SHA1}"' >> $BASH_ENV
+```
+
+**Note:**
+When setting environment variables,
+CircleCI does not support interpolation.
+Instead, [use `BASH_ENV` to set environment variables]({{ site.baseurl }}/2.0/env-vars/#using-bash_env-to-set-environment-variables).
+
+## Full Configuration File
+
+{% raw %}
 
 ```yaml
 version: 2
@@ -179,3 +271,5 @@ workflows:
             branches:
               only: master
 ```
+
+{% endraw %}
