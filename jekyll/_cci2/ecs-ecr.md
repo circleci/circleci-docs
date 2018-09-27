@@ -79,30 +79,103 @@ AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should corres
 ```yaml
 version: 2
 jobs:
-  build:
-    ...
-  test:
-    ...
-  deploy:
+  build:  
     docker:
-      - image: <pick-an-image>
+      - image: circleci/golang:1.8
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install AWS CLI
+          name: Make the executable
+          command: |
+            go build -o demo-app src/main.go
       - run:
-          name: Build Docker image locally
+          name: Setup common environment variables
+          command: |
+            echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+            echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${CIRCLE_SHA1}"' >> $BASH_ENV
       - run:
-          name: Log into AWS ECR
+          name: Build image
+          command: |
+            docker build -t $FULL_IMAGE_NAME .
       - run:
-          name: Tag and push Docker image to ECR
+          name: Test image
+          command: |
+            docker run -d -p 8080:8080 --name built-image $FULL_IMAGE_NAME
+            sleep 10
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8080 | grep "Hello World!"
       - run:
-          name: Create task for deploy
+          name: Save image to an archive
+          command: |
+            mkdir docker-image
+            docker save -o docker-image/image.tar $FULL_IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - docker-image
+  deploy:  
+    docker:
+      - image: circleci/python:3.6.1
+    environment:
+      AWS_DEFAULT_OUTPUT: json
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: workspace
+      - restore_cache:
+          key: v1-{{ checksum "requirements.txt" }}
       - run:
-          name: Register task definition
+          name: Install awscli
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: v1-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
       - run:
-          name: Find revision number
+          name: Load image
+          command: |
+            docker load --input workspace/docker-image/image.tar
       - run:
-          name: Deploy specific revision
+          name: Setup common environment variables
+          command: |
+            echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+            echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
+            echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
+      - run:
+          name: Push image
+          command: |
+            . venv/bin/activate
+            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$CIRCLE_SHA1
+      - run:
+          name: Deploy
+          command: |
+            . venv/bin/activate
+            export ECS_TASK_FAMILY_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"
+            export ECS_CONTAINER_DEFINITION_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"
+            export EXECUTION_ROLE_ARN="arn:aws:iam::$AWS_ACCOUNT_ID:role/${AWS_RESOURCE_NAME_PREFIX}-ecs-execution-role"
+            ./deploy.sh
+      - run:
+          name: Test deployment (Please manually tear down AWS resources after use, if desired)
+          command: |
+            . venv/bin/activate
+            TARGET_GROUP_ARN=$(aws ecs describe-services --cluster $ECS_CLUSTER_NAME --services $ECS_SERVICE_NAME | jq -r '.services[0].loadBalancers[0].targetGroupArn')
+            ELB_ARN=$(aws elbv2 describe-target-groups --target-group-arns $TARGET_GROUP_ARN | jq -r '.TargetGroups[0].LoadBalancerArns[0]')
+            ELB_DNS_NAME=$(aws elbv2 describe-load-balancers --load-balancer-arns $ELB_ARN | jq -r '.LoadBalancers[0].DNSName')
+            curl http://$ELB_DNS_NAME | grep "Hello World!"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
