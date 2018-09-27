@@ -31,7 +31,7 @@ Virtual Environment | `docker` | `machine` \---\---\----|\---\---\----|\---\---\
 
 It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
 
-## docker を使用する
+## Docker を使用する
 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
@@ -97,7 +97,7 @@ jobs:
 
 すべてのイメージには一般的なプログラミング言語やツール類がプリインストールされています。 詳しくは [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) をご覧ください。
 
-下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)（DLC）を有効にした例です。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかり、この機能を有効にするためにサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
+下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **注**：Docker レイヤーキャッシュの利用には追加の料金がかかり、この機能を有効にするためにサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
 
 ```yaml
 version: 2
@@ -109,7 +109,7 @@ jobs:
 
 ## Using macOS
 
-`macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 このとき、どのバージョンの Xcode を使うか指定することもできます。 利用可能なバージョンについては、「iOS アプリのテスト方法」内の[サポートしている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)を参照してください。 各バージョンの Xcode が動作している VM のマシンスペック（CPU、メモリサイズ、HDD容量など）に関する詳細は、同ページの「インストール済みソフト」のリンク先で確認できます。
+`macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 このとき、どのバージョンの Xcode を使うか指定することもできます。 利用可能なバージョンについては、「iOS アプリのテスト方法」内の[サポートしている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)を参照してください。 各バージョンの Xcode が動作している VM のマシンスペック (CPU、メモリサイズ、HDD容量など) に関する詳細は、同ページの「インストール済みソフト」のリンク先で確認できます。
 
     jobs:
       build:
@@ -157,7 +157,7 @@ Docker イメージの指定方法は 3 パターンあります。イメージ�
 
 {:.no_toc} - `image_full_url:tag` - `gcr.io/google-containers/busybox:1.24` - `image_full_url@digest` - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Docker Hub と Docker レジストリにある公開イメージの多くは、`config.yml` 内の `docker:` キーで指定してすぐに利用できます。 独自のプライベートなイメージ・レジストリを動かしたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images) を参照してください。
+Docker Hub と Docker レジストリにある公開イメージの多くは、`config.yml` 内の `docker:` キーで指定してすぐに利用できます。 独自のプライベートなイメージ・レジストリを動かしたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images)を参照してください。
 
 ## Docker のメリットと制限
 
@@ -165,10 +165,10 @@ Docker にはもともとイメージのキャッシュ機能があり、\[リ�
 
 - 自己完結型のアプリケーションである
 - テストのために他のサービスが必要なアプリケーションである
-- Docker イメージとして開発しているアプリケーションである（要\[リモート Docker\]\[building-docker-images\]）
+- Docker イメージとして開発しているアプリケーションである (要\[リモート Docker\]\[building-docker-images\])
 - `docker-compose` を使いたい（要\[リモート Docker\]\[building-docker-images\]）
 
-Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります（CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です）。 そのため、ネットワークへの低レベルアクセスや外部ストレージのマウントといった機能が必要な場合は、`docker` ではなく `machine` を使うことも検討してください。
+Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 そのため、ネットワークへの低レベルアクセスや外部ストレージのマウントといった機能が必要な場合は、`docker` ではなく `machine` を使うことも検討してください。
 
 ## その他の参考資料
 
