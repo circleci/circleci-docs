@@ -13,39 +13,42 @@ to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Containe
 
 ## Overview
 
-There are three components of this guide:
+This guide has three phases:
 
 - Building and testing a Dockerized web application.
 - Pushing the Docker image to ECR.
 - Using AWS Fargate to deploy to ECS.
 
-The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)
-and [builds on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
+The web application is written in Go
+and [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr).
+You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
 
 ## Prerequisites
 
-### Create AWS Resources
+### Create AWS Resources With Terraform
 
-This guide requires several AWS resources.
-To create these resources,
-CircleCI provides [several Terraform scripts](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup).
+Several AWS resources are required
+to build and deploy the application in this guide.
+CircleCI provides [several Terraform scripts](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup)
+to create these resources.
 To use these scripts,
 follow the steps below.
 
 1. [Create an AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
-
 2. [Install Terraform](https://www.terraform.io/).
-
-3. Update [`terraform_setup/terraform.tfvars`](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/terraform_setup/terraform.tfvars) with real values for AWS variables.
-
-4. Run the following commands
-to create the AWS resources.
+3. Clone the [sample project](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)
+and go to its root directory.
+4. Update `~/terraform_setup/terraform.tfvars` with real values for the AWS variables.
+For more details,
+see the [Configure CircleCI Environment Variables](#configure-circleci-environment-variables) section below.
+5. Create the AWS resources
+by running the following commands.
 
 ```bash
 cd terraform_setup
 terraform init
 terraform plan  # review the plan
-terraform apply  # apply the plan
+terraform apply  # apply the plan and create AWS resources
 ```
 
 **Note:**
@@ -57,7 +60,8 @@ particularly the **ECS**, **CloudFormation** and **VPC** pages.
 
 ### Configure CircleCI Environment Variables
 
-Set the following [project environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+In the CircleCI application,
+set the following [project environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
 Variable                 | Description
 -------------------------|------------
