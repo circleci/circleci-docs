@@ -20,7 +20,7 @@ There are three components of this guide:
 - Using AWS Fargate to deploy to ECS.
 
 The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)
-and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
+and [builds on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
 
 ## Prerequisites
 
