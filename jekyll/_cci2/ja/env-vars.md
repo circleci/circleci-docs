@@ -37,7 +37,7 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 
 **注：**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/2.0/security/#encryption)で解説しています。
 
-設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) ページでご確認ください。
+設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
 ### `BASH_ENV` で環境変数を定義する
 
@@ -251,7 +251,7 @@ Login Succeeded
       https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
     
 
-ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token) です。
+ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
 
 ビルド時には下記のような環境変数となります。
 
@@ -265,7 +265,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 
 下記の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
 
-**注：**他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは [シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command) をご覧ください。
+**注：**他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true` (現在のビルド環境が CI であることを表します。常に true となります。) `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名。 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数。 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL。 `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL。 `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ。 `CIRCLE_JOB` | String | 現在のジョブの名称。 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります。 `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数。 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_REPONAME` | String | プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。 `CIRCLE_PROJECT_USERNAME` | String | 現在のプロジェクトの GitHub/Bitbucket ユーザー名。 `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。 `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。 `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。 `CIRCLECI` | Boolean | `true` (現在のビルド環境が CircleCI であることを表します。常に true となります。) `HOME` | String | ホームディレクトリ {:class="table table-striped"}
 
