@@ -52,7 +52,8 @@ terraform apply  # apply the plan
 You can destroy most AWS resources
 by running `terraform destroy`.
 If any resources remain,
-check the **ECS**, **CloudFormation** and **VPC** pages of the [AWS Management Console](https://console.aws.amazon.com/).
+check the [AWS Management Console](https://console.aws.amazon.com/),
+particularly the **ECS**, **CloudFormation** and **VPC** pages.
 
 ### Configure CircleCI Environment Variables
 
