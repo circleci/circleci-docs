@@ -19,8 +19,8 @@ The `circleci` commands enable you to reproduce the CircleCI environment locally
 
 You can also run `circleci` commands in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
 
-**Note:** There are currently two versions of the CLI that you may install. The Local CLI available at [https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci] is an older version that does not yet support Workflows.
-The Local CLI version available at [https://github.com/CircleCI-Public/circleci-cli] has a different set of options, some of which are still in active development, and will be the replacement for the old CLI.
+**Note:** There are currently two versions of the CLI that you may install. The Local CLI available at <https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci> is an older version that does not yet support Workflows.
+The Local CLI version available at <https://github.com/CircleCI-Public/circleci-cli> has a different set of options, some of which are still in active development, and will be the replacement for the old CLI.
 
 ## Updating to the CircleCI-Public CLI
 
