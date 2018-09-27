@@ -74,7 +74,7 @@ AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should corres
 
 ## Steps
 
-## Configuration
+## Full Configuration
 
 ```yaml
 version: 2
