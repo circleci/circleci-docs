@@ -13,11 +13,11 @@ using CircleCI.
 
 ## Overview
 
-There are three main parts of this guide:
+There are three components of this guide:
 
-- Build and test a Dockerized web application.
-- Push the Docker image to ECR.
-- Use AWS Fargate to deploy to ECS.
+- Building and testing a Dockerized web application.
+- Pushing the Docker image to ECR.
+- Using AWS Fargate to deploy to ECS.
 
 The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)
 and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
