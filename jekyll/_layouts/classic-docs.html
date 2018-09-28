@@ -5,6 +5,15 @@
 {% if jekyll.environment == "production" %}
 	{% include google-tag-manager.html %}
 {% endif %}
+
+<!-- instant hit template container /-->
+<div style="display:none;">
+	<div id="hits-template">
+		<h2>Search Results for "<span id="search-term-display"></span>"</h2>
+		<div id="instant-hits"></div>
+	</div>
+</div>
+
 <div class="outer">
 	{% include global-nav.html %}
 	{% include main-searchbar.html %}
