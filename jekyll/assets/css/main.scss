@@ -2,7 +2,6 @@
 ---
 @import 'variables';
 @import 'sidebar';
-@import 'instantsearch';
 
 // General
 body{
@@ -80,14 +79,11 @@ hr.dark {
   border-color: $black-light;
 }
 
-footer {
+footer { 
 	li, span {
 		text-transform: initial;
 		font-size: $font-size-base;
 	}
-
-	z-index: 2;
-	position: relative;
 }
 
 // Main Nav Additions

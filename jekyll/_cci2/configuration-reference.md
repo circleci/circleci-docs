@@ -27,7 +27,7 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and paramaterize jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -273,7 +273,7 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 * `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance.
 * `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
 * `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
-* `circleci/classic:201707-01` – docker 17.06.0-ce, docker-comopse 1.14.0
+* `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
 * `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
 * `circleci/classic:201709-01` – docker 17.07.0-ce, docker-compose 1.14.0
 * `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
@@ -420,7 +420,7 @@ jobs:
 
 In this case, the `checkout` step will checkout project source code into the job's [`working_directory`](#jobs).
 
-In general all steps can be describe as:
+In general all steps can be described as:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -582,7 +582,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 Key | Required | Type | Description
 ----|-----------|------|------------
 condition | Y | String | A parameter value
-steps |	Y |	Map or String |	A configuration map for the step or some string whose semantics are defined by the step.
+steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
 ###### *Example*
@@ -919,7 +919,7 @@ at | Y | String | Directory to attach the workspace to.
 ```
 
 Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
-Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their fileystem using the `attach_workspace` step.
+Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
 The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it.
 
 When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.

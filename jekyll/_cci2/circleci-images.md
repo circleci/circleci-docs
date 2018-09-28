@@ -251,9 +251,12 @@ that a given tag has the same meaning across images!
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
 {% for tag in tags %}
-<li>{{ tag }}</li>
+	{% unless tag contains "-browsers" or tag contains "-node" %}
+	<li>{{ tag }}</li>
+	{% endunless %}
 {% endfor %}
 </ul>
+<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
 
 ---
 

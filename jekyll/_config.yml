@@ -9,7 +9,7 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 
-plugins: 
+plugins:
   - jekyll-assets
   - jekyll-sitemap
 
@@ -84,3 +84,4 @@ segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
 analytics:
   events:
     go_button_clicked: go-button-clicked
+rollbar_env: development
