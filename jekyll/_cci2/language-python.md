@@ -98,13 +98,13 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+          environment:
+            PIPENV_VENV_IN_PROJECT: true
+            DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.2
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
+          environment:
+            POSTGRES_USER: root
+            POSTGRES_DB: circle_test
 ```
 
 ### Install Dependencies
@@ -132,9 +132,9 @@ jobs:
     steps:
       - checkout  # checkout source code to working directory
       - run:
-        command: |  # use pipenv to install dependencies
-          sudo pip install pipenv
-          pipenv install
+          command: |  # use pipenv to install dependencies
+            sudo pip install pipenv
+            pipenv install
 ```
 
 ### Cache Dependencies
@@ -164,9 +164,9 @@ jobs:
       - restore_cache:  # ensure this step occurs *before* installing dependencies
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
-        command: |
-          sudo pip install pipenv
-          pipenv install
+          command: |
+            sudo pip install pipenv
+            pipenv install
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -215,10 +215,10 @@ jobs:
     steps:
       # ...
       - store_test_results:
-        path: test-results
+          path: test-results
       - store_artifacts:
-        path: test-results
-        destination: tr1
+          path: test-results
+          destination: tr1
 ```
 
 ### Deploy Application
