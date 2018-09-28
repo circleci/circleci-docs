@@ -87,7 +87,7 @@ and include tools useful for CI/CD environments.
 
 ### Add Other Services and Set Environment Variables
 
-You can specify additional containers for services like databases.
+Specify additional containers for services like databases.
 Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key
 to set environment variables for all commands in a container.
 
