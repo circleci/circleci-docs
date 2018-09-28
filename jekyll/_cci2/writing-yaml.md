@@ -159,7 +159,7 @@ harry_data:
 ```
 
 **Note**:
-As mentionned in [a yaml issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
+As mentionned in [a YAML repository issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
 
 For a more complex example,
 see [this gist](https://gist.github.com/bowsersenior/979804).
