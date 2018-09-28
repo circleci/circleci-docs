@@ -11,9 +11,6 @@
 	<div class="main-body">
 		{% include sidebar.html %}
 		<div class="article-container docs">
-			<form id="site-search" class="doc-search" action="">
-				<input id="cci-search" name="search" type="search" placeholder="Search CircleCI {% if page.collection == 'cci1' %}1.0 {% elsif page.collection == 'cci2' %}2.0 {% elsif page.collection == 'ccie' %}Enterprise {% elsif page.collection == 'api' %}API {% else %}{% endif %}docs" class="form-control" />
-			</form>
 			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
