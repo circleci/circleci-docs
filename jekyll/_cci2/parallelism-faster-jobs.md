@@ -191,6 +191,18 @@ currently running.
 See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables)
 for more details.
 
+## Running Split Tests
+
+Globbing and splitting tests does not actually run your tests.
+To combine test grouping with test execution,
+consider saving the grouped tests to an environment variable,
+then passing this variable to your test runner.
+
+```bash
+TESTFILES=$(circleci tests glob "spec/**/*.rb" | circleci tests split --split-by=timings)
+bundle exec rspec -- ${TESTFILES}
+```
+
 ### Video: Troubleshooting Globbing
 {:.no_toc}
 
