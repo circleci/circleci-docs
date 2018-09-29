@@ -183,7 +183,7 @@
         - name: Configuration Reference
           link: 2.0/configuration-reference/
         - name: API Reference
-          link: api/v1-reference/
+          link: api/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
