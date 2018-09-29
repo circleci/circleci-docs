@@ -20,7 +20,7 @@ CircleCI builds push hooks by default. So, builds are triggered for all push hoo
 
 There are some additional, less common cases where CircleCI uses hooks, as follows: - CircleCI processes PR hooks to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch. - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI は常にプッシュがビルドの契機となり、（設定すれば）プルリクエスト時にもビルドを実行することになります。しかしながら、Webhooks の設定でプッシュ時のフックを除外すれば、CircleCI はビルドを実行しなくなります。 フックと Webhooks については、[GitHub のページ](https://developer.github.com/v3/repos/hooks/#edit-a-hook) や [Bitbucket のページ](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) で詳しく知ることができます。
+It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI は常にプッシュがビルドの契機となり、(設定すれば) プルリクエスト時にもビルドを実行することになります。しかしながら、Webhooks の設定でプッシュ時のフックを除外すれば、CircleCI はビルドを実行しなくなります。 フックと Webhooks については、[GitHub のページ](https://developer.github.com/v3/repos/hooks/#edit-a-hook) や [Bitbucket のページ](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) で詳しく知ることができます。
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes.
 
@@ -43,7 +43,7 @@ jobs:
           bundle exec cucumber
 ```
 
-CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. [ダッシュボード](https://circleci.com/dashboard){:rel="nofollow"}ではそのテストの状況が逐次表示され、ジョブの完了後にはメール通知で結果を知ることができます。 Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
+CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. [ダッシュボード](https://circleci.com/dashboard) {:rel="nofollow"} ではそのテストの状況が逐次表示され、ジョブの完了後にはメール通知で結果を知ることができます。 Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
 
 ![Status Badge After Commit]({{ site.baseurl }}/assets/img/docs/status_badge.png)
 
