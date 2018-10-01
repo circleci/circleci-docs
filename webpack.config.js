@@ -11,6 +11,11 @@ module.exports = {
     publicPath: '',
     filename: '[name].min.js'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      CIRCLECI_ENVIRONMENT: `"${process.env.NODE_ENV}"`
+    })
+  ],
   module: {
     rules: [
       {
