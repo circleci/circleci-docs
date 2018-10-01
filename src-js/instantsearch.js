@@ -9,6 +9,13 @@ export function init () {
     routing: true
   });
 
+  // adding conditions to filter search
+  search.addWidget(
+    instantsearch.widgets.configure({
+      filters: "collection: cci2" 
+    })
+  );
+
   // initialize SearchBox
   search.addWidget(
     instantsearch.widgets.searchBox({
