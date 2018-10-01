@@ -199,6 +199,38 @@ jobs:
             docker save -o docker-image/image.tar $FULL_IMAGE_NAME
 ```
 
+#### Save Image for Later
+
+Use [`persist_to_workspace`]()
+to save the image for use in the [`deploy` job](#create-a-deploy-job).
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+    steps:
+      # ...
+      persist_to_workspace:
+        root: .
+        paths:
+          - docker-image
+```
+
+### Create a Deploy Job
+
+
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  deploy:
+    docker:
+      - image: circleci/python:3.6.1
+```
+
 ## Full Configuration File
 
 {% raw %}
