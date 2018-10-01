@@ -112,7 +112,7 @@ jobs:
       - image: circleci/golang:1.8
 ```
 
-### Build Application
+### Build the Application
 
 Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
 to check out source code.
