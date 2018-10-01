@@ -28,17 +28,6 @@ export function init () {
     })
   );
 
-  // initialize SearchBox
-  search.addWidget(
-    instantsearch.widgets.searchBox({
-      container: '#mobile-search-box',
-      cssClasses: {
-        input: 'instantsearch-search'
-      },
-      placeholder: 'Search Documentation'
-    })
-  );
-
   // initialize hits widget
   search.addWidget(
     instantsearch.widgets.hits({
@@ -60,6 +49,7 @@ export function init () {
     var resultContainer = document.querySelector('.main-body');
     var resultDisplay = document.querySelector('.main-body');
     var stateHolder = resultDisplay.cloneNode(true);
+    var form = document.querySelector('.main-searchbar form');
 
     var renderResults = function (e) {
       resultDisplay.innerHTML = "";
@@ -68,12 +58,19 @@ export function init () {
         var results = template.cloneNode(true);
 
         resultDisplay.appendChild(results);
+        window.scrollTo(0, 0); 
       } else {
         resultDisplay.appendChild(stateHolder);
       }
     };
 
     searchBox.addEventListener('keyup', renderResults);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      renderResults();
+    });
+
     window.addEventListener('load', renderResults);
     searchResetButton.addEventListener('click', function () {
       resultDisplay.innerHTML = "";
