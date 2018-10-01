@@ -23,7 +23,7 @@ The application is [hosted on GitHub](https://github.com/CircleCI-Public/circlec
 and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
 
 Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
-and rewriting the configuration file
+and rewriting [the configuration file](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)
 as you follow this guide.
 
 ## Configuration Walkthrough
@@ -271,3 +271,7 @@ jobs:
 ```
 
 {% endraw %}
+
+## See Also
+
+- See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.
