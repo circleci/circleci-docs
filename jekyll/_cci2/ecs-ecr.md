@@ -112,7 +112,7 @@ jobs:
       - image: circleci/golang:1.8
 ```
 
-### Build the Application
+#### Build the Application
 
 Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
 to check out source code.
@@ -140,7 +140,7 @@ jobs:
         command: go build -o demo-app src/main.go  # 'demo-app' is used in the Dockerfile
 ```
 
-### Set Environment Variables
+#### Set Environment Variables
 
 For convenience,
 set two environment variables:
@@ -167,7 +167,7 @@ When setting environment variables,
 CircleCI does not support interpolation.
 Instead, [use `BASH_ENV` to set environment variables]({{ site.baseurl }}/2.0/env-vars/#using-bash_env-to-set-environment-variables).
 
-### Build, Test, and Deploy Image
+#### Build, Test, and Archive Image
 
 [Build the Docker image](https://docs.docker.com/engine/reference/commandline/build/) from the Dockerfile.
 
