@@ -167,6 +167,38 @@ When setting environment variables,
 CircleCI does not support interpolation.
 Instead, [use `BASH_ENV` to set environment variables]({{ site.baseurl }}/2.0/env-vars/#using-bash_env-to-set-environment-variables).
 
+### Build, Test, and Deploy Image
+
+[Build the Docker image](https://docs.docker.com/engine/reference/commandline/build/) from the Dockerfile.
+
+Test the Docker image
+by [publishing its port to the host](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose).
+
+[Save the image](https://docs.docker.com/engine/reference/commandline/save/) to an archive.
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+    steps:
+      # ...
+      - run:
+          name: Build image
+          command: docker build -t $FULL_IMAGE_NAME .
+      - run:
+          name: Test image
+          command: |
+            docker run -d -p 8080:8080 --name built-image $FULL_IMAGE_NAME
+            sleep 10
+            docker run --network container:built-image appropriate/curl --retry
+      - run:
+          name: Save image to an archive
+          command: |
+            mkdir docker-image
+            docker save -o docker-image/image.tar $FULL_IMAGE_NAME
+```
+
 ## Full Configuration File
 
 {% raw %}
