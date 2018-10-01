@@ -1,4 +1,4 @@
-import * as throttle from 'lodash.throttle';
+import * as debounce from 'lodash.debounce';
 
 // Instant search initialization
 export function init () {
@@ -17,7 +17,7 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
-      queryHook: throttle(function (query, searchFunction) { searchFunction(query); }, 1000) // method to throttle search requests
+      queryHook: debounce(function (query, searchFunction) { searchFunction(query); }, 500, { 'leading': true, 'trailing': true }) // method to throttle search requests
     })
   );
 
