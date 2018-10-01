@@ -137,8 +137,7 @@ jobs:
     - setup_remote_docker
     - run:
         name: Create executable
-        command: |
-          go build -o demo-app src/main.go  # 'demo-app' is used in the Dockerfile
+        command: go build -o demo-app src/main.go  # 'demo-app' is used in the Dockerfile
 ```
 
 ### Set Environment Variables
