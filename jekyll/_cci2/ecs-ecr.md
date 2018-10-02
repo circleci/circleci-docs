@@ -287,6 +287,8 @@ jobs:
 Use [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) and [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache)
 to cache the installation of the AWS CLI.
 
+{% raw %}
+
 ```yaml
 version: 2
 jobs:
@@ -306,6 +308,8 @@ jobs:
         paths:
           - "venv"
 ```
+
+{% endraw %}
 
 See the [Caching Dependencies document]({{ site.baseurl }}/2.0/caching/) for more information.
 
