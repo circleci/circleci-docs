@@ -239,7 +239,7 @@ jobs:
       AWS_DEFAULT_OUTPUT: json
 ```
 
-### Add Setup Steps and Attach Workspace
+#### Add Setup Steps and Attach Workspace
 
 [As in the `build` job](#build-the-application),
 add the `checkout` and `setup_remote_docker` steps.
@@ -261,7 +261,7 @@ jobs:
           at: workspace
 ```
 
-### Install the AWS CLI
+#### Install the AWS CLI
 
 Install the AWS CLI.
 In this project,
@@ -283,7 +283,7 @@ jobs:
             pip install -r requirements.txt
 ```
 
-### Set Up Caching Steps
+#### Set Up Caching Steps
 
 Use [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) and [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache)
 to cache the installation of the AWS CLI.
@@ -316,7 +316,7 @@ jobs:
 
 See the [Caching Dependencies document]({{ site.baseurl }}/2.0/caching/) for more information.
 
-### Load Docker Image and Set Environment Variables
+#### Load Docker Image and Set Environment Variables
 
 [Load the Docker image](https://docs.docker.com/engine/reference/commandline/load/) from the workspace,
 then set the following environment variables for convenience:
@@ -349,7 +349,7 @@ jobs:
 Recall that you must [use `BASH_ENV`](#set-environment-variables)
 to set interpolated environment variables.
 
-### Push Image to ECR, Deploy, and Test Deployment
+#### Push Image to ECR, Deploy, and Test Deployment
 
 [Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR,
 then deploy the image
@@ -387,7 +387,7 @@ jobs:
             curl http://$ELB_DNS_NAME | grep "Hello World!"
 ```
 
-## Set Up Workflows
+### Set Up a Workflow
 
 Use workflows
 to link the `build` and `deploy` jobs.
