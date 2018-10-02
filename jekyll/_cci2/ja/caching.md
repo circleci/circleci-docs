@@ -457,7 +457,7 @@ steps:
 
 ## 制限について
 
-`save_cache` ステップで生成されたキャッシュは 60 日間保持されます。
+The caches created via the `save_cache` step are stored for up to 30 days.
 
 ## Caching Strategy Tradeoffs
 
