@@ -12,7 +12,7 @@ export function init () {
   // adding conditions to filter search
   search.addWidget(
     instantsearch.widgets.configure({
-      filters: "collection: cci2" 
+      filters: "collection: cci2"
     })
   );
 

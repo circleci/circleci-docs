@@ -34,6 +34,13 @@ div.main-body {
 	max-width: 1200px;
 	margin: 0 auto;
 }
+
+#hits-template {
+	display: block;
+	max-width: 1180px;
+	margin: 50px auto 0 auto;
+}
+
 .text-center-small-float-right {
   float: right;
   @media screen and (max-width: $screen-sm) {
