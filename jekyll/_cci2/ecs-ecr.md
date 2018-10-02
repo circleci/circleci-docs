@@ -6,7 +6,7 @@ description: How to deploy to AWS ECR/ECS with CircleCI
 
 This document describes
 how to use CircleCI
-to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR)
+to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 
 * TOC
 {:toc}
@@ -29,7 +29,7 @@ See [Creating a Custom Image Manually]({{ site.baseurl }}/2.0/custom-images/#cre
 
 ## Prerequisites
 
-### Create AWS Resources With Terraform
+### Use Terraform to Create AWS Resources
 
 Several AWS resources are required
 to build and deploy the application in this guide.
@@ -169,12 +169,14 @@ Instead, [use `BASH_ENV` to set environment variables]({{ site.baseurl }}/2.0/en
 
 #### Build, Test, and Archive Image
 
-[Build the Docker image](https://docs.docker.com/engine/reference/commandline/build/) from the Dockerfile.
+Add three steps to set up the Docker image:
 
-Test the Docker image
+- [Build the Docker image](https://docs.docker.com/engine/reference/commandline/build/) from the Dockerfile.
+
+- Test the Docker image
 by [publishing its port to the host](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose).
 
-[Save the image](https://docs.docker.com/engine/reference/commandline/save/) to an archive.
+- [Archive the image](https://docs.docker.com/engine/reference/commandline/save/).
 
 ```yaml
 version: 2
@@ -199,7 +201,7 @@ jobs:
             docker save -o docker-image/image.tar $FULL_IMAGE_NAME
 ```
 
-#### Save Image for Later
+#### Save Image for the Deploy Phase
 
 Use [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace)
 to save the image for use in the [`deploy` job](#create-a-deploy-job).
@@ -221,9 +223,9 @@ jobs:
 
 Create a separate job
 to deploy the image you created in the `build` job.
-
 For convenience,
-create an environment variable to set the format of AWS output.
+create an environment variable
+to set the default format of AWS output.
 
 ```yaml
 version: 2
