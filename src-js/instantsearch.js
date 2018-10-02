@@ -46,21 +46,28 @@ export function init () {
     var searchResetButton = document.querySelector("#search-box .ais-search-box--reset");
     var searchBox = document.querySelector("input.instantsearch-search");
     var template = document.querySelector("#hits-template");
-    var resultContainer = document.querySelector('.main-body');
-    var resultDisplay = document.querySelector('.main-body');
+    var pageBody = document.querySelector('.main-body');
+    var resultDisplay = document.querySelector('.hits-target');
     var stateHolder = resultDisplay.cloneNode(true);
     var form = document.querySelector('.main-searchbar form');
 
     var renderResults = function (e) {
       resultDisplay.innerHTML = "";
+      console.log(searchBox.value.length);
       if (searchBox.value.length > 0) {
         template.querySelector('#search-term-display').innerHTML = searchBox.value;
         var results = template.cloneNode(true);
 
         resultDisplay.appendChild(results);
         window.scrollTo(0, 0); 
+
+        pageBody.style.display = "none";
+        resultDisplay.style.display = "block";
       } else {
         resultDisplay.appendChild(stateHolder);
+
+        pageBody.style.display = "flex";
+        resultDisplay.style.display = "none";
       }
     };
 
@@ -73,8 +80,9 @@ export function init () {
 
     window.addEventListener('load', renderResults);
     searchResetButton.addEventListener('click', function () {
-      resultDisplay.innerHTML = "";
-      resultDisplay.appendChild(stateHolder);
+      setTimeout(function () {
+        renderResults();
+      }, 100);
     });
   }());
 };

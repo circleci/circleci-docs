@@ -12,6 +12,7 @@
   width: 100%;
   background: white;
   z-index: 2;
+  top: 70px;
 
   #search-box {
     max-width: 1200px;
@@ -66,4 +67,8 @@
 
 .ais-hits__empty {
   margin-left: $spacing-small-vertical;
+}
+
+.hits-target {
+  padding-top: $spacing-small-vertical;
 }
