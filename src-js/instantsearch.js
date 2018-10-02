@@ -24,7 +24,7 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
-      queryHook: debounce(function (query, searchFunction) { searchFunction(query); }, 500, { 'leading': true, 'trailing': true }) // method to throttle search requests
+      queryHook: debounce(function (query, searchFunction) { searchFunction(query); setTimeout(renderResults, 100); }, 500, { 'leading': true, 'trailing': true, 'maxWait': 1000 }) // method to throttle search requests
     })
   );
 
@@ -41,48 +41,45 @@ export function init () {
 
   search.start();
 
-  (function () {
-    // insert search results
-    var searchResetButton = document.querySelector("#search-box .ais-search-box--reset");
-    var searchBox = document.querySelector("input.instantsearch-search");
-    var template = document.querySelector("#hits-template");
-    var pageBody = document.querySelector('.main-body');
-    var resultDisplay = document.querySelector('.hits-target');
-    var stateHolder = resultDisplay.cloneNode(true);
-    var form = document.querySelector('.main-searchbar form');
+  // insert search results
+  var searchResetButton = document.querySelector("#search-box .ais-search-box--reset");
+  var searchBox = document.querySelector("input.instantsearch-search");
+  var template = document.querySelector("#hits-template");
+  var pageBody = document.querySelector('.main-body');
+  var resultDisplay = document.querySelector('.hits-target');
+  var stateHolder = resultDisplay.cloneNode(true);
+  var form = document.querySelector('.main-searchbar form');
 
-    var renderResults = function (e) {
-      resultDisplay.innerHTML = "";
-      console.log(searchBox.value.length);
-      if (searchBox.value.length > 0) {
-        template.querySelector('#search-term-display').innerHTML = searchBox.value;
-        var results = template.cloneNode(true);
+  function renderResults (e) {
+    resultDisplay.innerHTML = "";
+    if (searchBox.value.length > 0) {
+      template.querySelector('#search-term-display').innerHTML = searchBox.value;
+      var results = template.cloneNode(true);
 
-        resultDisplay.appendChild(results);
-        window.scrollTo(0, 0); 
+      resultDisplay.appendChild(results);
+      window.scrollTo(0, 0); 
 
-        pageBody.style.display = "none";
-        resultDisplay.style.display = "block";
-      } else {
-        resultDisplay.appendChild(stateHolder);
+      pageBody.style.display = "none";
+      resultDisplay.style.display = "block";
+    } else {
+      resultDisplay.appendChild(stateHolder);
 
-        pageBody.style.display = "flex";
-        resultDisplay.style.display = "none";
-      }
-    };
+      pageBody.style.display = "flex";
+      resultDisplay.style.display = "none";
+    }
+  };
 
-    searchBox.addEventListener('keyup', renderResults);
+  searchBox.addEventListener('keyup', renderResults);
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    renderResults();
+  });
+
+  window.addEventListener('load', renderResults);
+  searchResetButton.addEventListener('click', function () {
+    setTimeout(function () {
       renderResults();
-    });
-
-    window.addEventListener('load', renderResults);
-    searchResetButton.addEventListener('click', function () {
-      setTimeout(function () {
-        renderResults();
-      }, 100);
-    });
-  }());
+    }, 100);
+  });
 };
