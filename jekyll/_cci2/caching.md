@@ -499,7 +499,7 @@ steps:
 
 ## Limitations
 
-The caches created via the `save_cache` step are stored for up to 60 days.
+The caches created via the `save_cache` step are stored for up to 30 days.
 
 ## Caching Strategy Tradeoffs
 
