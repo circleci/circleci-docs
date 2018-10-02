@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Deploying to AWS ECR/ECS
-description: How to deploy to AWS ECR/ECS with CircleCI
+description: How to use CircleCI to deploy to AWS ECS from ECR
 ---
 
 This document describes
