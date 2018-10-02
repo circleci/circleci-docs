@@ -13,11 +13,11 @@ to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Containe
 
 ## Overview
 
-This guide has three phases:
+This guide has two phases:
 
 - Building and testing a Dockerized web application.
-- Pushing the Docker image to ECR.
-- Using AWS Fargate to deploy to ECS.
+- Pushing the Docker image to ECR
+and using AWS Fargate to deploy to ECS.
 
 The web application is written in Go
 and [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr).
