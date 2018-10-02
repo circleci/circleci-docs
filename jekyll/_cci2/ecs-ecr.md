@@ -201,7 +201,7 @@ jobs:
 
 #### Save Image for Later
 
-Use [`persist_to_workspace`]()
+Use [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace)
 to save the image for use in the [`deploy` job](#create-a-deploy-job).
 
 ```yaml
