@@ -270,16 +270,17 @@ the AWS CLI is specified in [`requirements.txt`](https://github.com/CircleCI-Pub
 ```yaml
 version: 2
 jobs:
-  build:
-    # ...
+  # ...
   deploy:
     # ...
-    - run:
-        name: Install the AWS CLI
-        command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
+    steps:
+      # ...
+      - run:
+          name: Install the AWS CLI
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
 ```
 
 ### Set Up Caching Steps
@@ -292,21 +293,23 @@ to cache the installation of the AWS CLI.
 ```yaml
 version: 2
 jobs:
-  build:
-    # ...
+  # ...
   deploy:
-    - restore_cache:
-        key: v1-{{ checksum "requirements.txt" }}
-    - run:
-        name: Install the AWS CLI
-        command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
-    - save_cache:
-        key: v1-{{ checksum "requirements.txt" }}
-        paths:
-          - "venv"
+    # ...
+    steps:
+      # ...
+      - restore_cache:
+          key: v1-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install the AWS CLI
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: v1-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
 ```
 
 {% endraw %}
@@ -323,40 +326,90 @@ then set the following environment variables for convenience:
 - the name of the ECS service
 
 ```yaml
-- run:
-    name: Load image
-    command: |
-      docker load --input workspace/docker-image/image.tar
-- run:
-    name: Setup common environment variables
-    command: |
-      echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
-      echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
-      echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
+version: 2
+jobs:
+  # ...
+  deploy:
+    # ...
+    steps:
+      # ...
+      - run:
+          name: Load image
+          command: |
+            docker load --input workspace/docker-image/image.tar
+      - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+            echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
+            echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
 ```
 
 **Note:**
 Recall that you must [use `BASH_ENV`](#set-environment-variables)
 to set interpolated environment variables.
 
-### Push Image to ECR
+### Push Image to ECR, Deploy, and Test Deployment
 
-[Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR.
+[Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR,
+then deploy the image
+and validate that the deployment succeeded.
 
 ```yaml
 version: 2
 jobs:
-  build:
-    # ...
+  # ...
   deploy:
     # ...
-    - run:
-        name: Push image
-        command: |
-          . venv/bin/activate
-          eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$CIRCLE_SHA1
+    steps:
+      # ...
+      - run:
+          name: Push image to ECR
+          command: |
+            . venv/bin/activate
+            eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$CIRCLE_SHA1
+      - run:
+          name: Deploy
+          command: |
+            . venv/bin/activate
+            export ECS_TASK_FAMILY_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"
+            export ECS_CONTAINER_DEFINITION_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"
+            export EXECUTION_ROLE_ARN="arn:aws:iam::$AWS_ACCOUNT_ID:role/${AWS_RESOURCE_NAME_PREFIX}-ecs-execution-role"
+            ./deploy.sh
+      - run:
+          name: Test deployment (Please manually tear down AWS resources after use, if desired)
+          command: |
+            . venv/bin/activate
+            TARGET_GROUP_ARN=$(aws ecs describe-services --cluster $ECS_CLUSTER_NAME --services $ECS_SERVICE_NAME | jq -r '.services[0].loadBalancers[0].targetGroupArn')
+            ELB_ARN=$(aws elbv2 describe-target-groups --target-group-arns $TARGET_GROUP_ARN | jq -r '.TargetGroups[0].LoadBalancerArns[0]')
+            ELB_DNS_NAME=$(aws elbv2 describe-load-balancers --load-balancer-arns $ELB_ARN | jq -r '.LoadBalancers[0].DNSName')
+            curl http://$ELB_DNS_NAME | grep "Hello World!"
 ```
+
+## Set Up Workflows
+
+Use workflows
+to link the `build` and `deploy` jobs.
+
+```yaml
+version: 2
+jobs:
+  # ...
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+```
+
+See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
 
 ## Full Configuration File
 
