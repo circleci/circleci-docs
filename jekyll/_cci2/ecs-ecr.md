@@ -219,7 +219,11 @@ jobs:
 
 ### Create a Deploy Job
 
+Create a separate job
+to deploy the image you created in the `build` job.
 
+For convenience,
+create an environment variable to set the format of AWS output.
 
 ```yaml
 version: 2
@@ -229,6 +233,8 @@ jobs:
   deploy:
     docker:
       - image: circleci/python:3.6.1
+    environment:
+      AWS_DEFAULT_OUTPUT: json
 ```
 
 ## Full Configuration File
