@@ -261,6 +261,54 @@ jobs:
           at: workspace
 ```
 
+### Install the AWS CLI
+
+Install the AWS CLI.
+In this project,
+the AWS CLI is specified in [`requirements.txt`](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/requirements.txt).
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  deploy:
+    # ...
+    - run:
+        name: Install the AWS CLI
+        command: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+```
+
+### Set Up Caching Steps
+
+Use [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) and [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache)
+to cache the installation of the AWS CLI.
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  deploy:
+    - restore_cache:
+        key: v1-{{ checksum "requirements.txt" }}
+    - run:
+        name: Install the AWS CLI
+        command: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+    - save_cache:
+        key: v1-{{ checksum "requirements.txt" }}
+        paths:
+          - "venv"
+```
+
+See the [Caching Dependencies document]({{ site.baseurl }}/2.0/caching/) for more information.
+
 ## Full Configuration File
 
 {% raw %}
