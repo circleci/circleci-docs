@@ -313,6 +313,51 @@ jobs:
 
 See the [Caching Dependencies document]({{ site.baseurl }}/2.0/caching/) for more information.
 
+### Load Docker Image and Set Environment Variables
+
+[Load the Docker image](https://docs.docker.com/engine/reference/commandline/load/) from the workspace,
+then set the following environment variables for convenience:
+
+- the name of the ECR repository
+- the name of the ECS cluster
+- the name of the ECS service
+
+```yaml
+- run:
+    name: Load image
+    command: |
+      docker load --input workspace/docker-image/image.tar
+- run:
+    name: Setup common environment variables
+    command: |
+      echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+      echo 'export ECS_CLUSTER_NAME="${AWS_RESOURCE_NAME_PREFIX}-cluster"' >> $BASH_ENV
+      echo 'export ECS_SERVICE_NAME="${AWS_RESOURCE_NAME_PREFIX}-service"' >> $BASH_ENV
+```
+
+**Note:**
+Recall that you must [use `BASH_ENV`](#set-environment-variables)
+to set interpolated environment variables.
+
+### Push Image to ECR
+
+[Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR.
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  deploy:
+    # ...
+    - run:
+        name: Push image
+        command: |
+          . venv/bin/activate
+          eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPOSITORY_NAME:$CIRCLE_SHA1
+```
+
 ## Full Configuration File
 
 {% raw %}
