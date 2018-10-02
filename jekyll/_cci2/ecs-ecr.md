@@ -239,6 +239,28 @@ jobs:
       AWS_DEFAULT_OUTPUT: json
 ```
 
+### Add Setup Steps and Attach Workspace
+
+[As in the `build` job](#build-the-application),
+add the `checkout` and `setup_remote_docker` steps.
+
+Use [`attach_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#attach_workspace)
+to attach the [workspace from the `build` job](#save-image-for-the-deploy-phase) to this container.
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+  deploy:
+    # ...
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: workspace
+```
+
 ## Full Configuration File
 
 {% raw %}
