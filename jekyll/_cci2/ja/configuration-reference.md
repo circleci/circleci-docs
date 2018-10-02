@@ -712,6 +712,8 @@ Directory structure:
 
 Special step used to persist a temporary file to be used by another job in the workflow.
 
+**Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- root | Y | String | Either an absolute path or a path relative to `working_directory` paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself. {: class="table table-striped"}
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
