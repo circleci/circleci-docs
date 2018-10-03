@@ -98,7 +98,7 @@ For this sample application,
 there are two jobs:
 one for building and testing the application,
 and one for deploying the application.
-These jobs are called `build` and `job`, respectively.
+These jobs are called `build` and `deploy`, respectively.
 
 In the `build` job,
 use the `docker` [executor]({{ site.baseurl }}/2.0/executor-types/)
