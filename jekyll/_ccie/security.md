@@ -5,6 +5,7 @@ title: "Security Features"
 category: [resources]
 order: 5
 description: "CircleCI Enterprise security features."
+sitemap: false
 ---
 
 This document outlines security features built into CircleCI Enterprise and related integrations.
