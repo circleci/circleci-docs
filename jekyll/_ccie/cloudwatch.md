@@ -5,6 +5,7 @@ title: "Enabling CloudWatch Monitoring"
 category: [advanced-config]
 order: 4.0
 description: "How to enable and monitor CloudWatch for CircleCI Enterprise."
+sitemap: false
 ---
 
 To enable Cloudwatch support, check and add `cloudwatch:*` to the IAM policy permission.  Installations completed after November, 2015 will have it enabled by default.  Prior installations may require modifications.  The actual mechanism for change depends on how it was installed, for example using Terraform/CloudFormation or manually.  Refer to the best practice IAM policy at <https://enterprise-docs.circleci.com/assets/aws/circleci-iam-policy.json>.

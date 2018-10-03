@@ -6,6 +6,7 @@ category: [resources]
 order: 4
 description: "Using a custom Root Certificate Authority (CA) with CircleCI Enterprise."
 hide: true
+sitemap: false
 ---
 
 ## Supporting Custom Root CA
