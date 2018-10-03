@@ -7,25 +7,25 @@ categories: [migration]
 order: 3
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Project Tutorial*
-
 The demo application in this tutorial uses Python and Flask for the backend.
 PostgreSQL is used for the database.
-The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
-The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-* Contents
+* TOC
 {:toc}
 
 The following sections walk through how Jobs and Steps are configured for this application, how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment, and how to deploy the demo application to Heroku.
 
-## Basic Setup 
+The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.
+The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-The `.circleci/config.yml` file may be comprised of several Jobs. In this example we have one Job called `build`. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
+## Basic Setup 
+{:.no_toc}
+
+The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several Jobs. In this example we have one Job called `build`. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -42,7 +42,7 @@ jobs:
 - Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing. 
 - Steps starting with a required `checkout` Step and followed by `run:` keys that execute commands sequentially on the primary container.
 
-## Service containers
+## Service Containers
 
 If the job requires services such as databases they can be run as additional containers by listing more `image:`s in the `docker:` stanza.
 
@@ -105,7 +105,8 @@ An environment variable defined in a `run:` key will override image-level variab
             FLASK_CONFIG: staging
 ```
 
-## Caching Dependencies
+### Caching Dependencies
+{:.no_toc}
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
@@ -147,7 +148,7 @@ The following describes the detail of the added key values:
 
 - The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements/dev.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements/dev.txt` changes.
 
-## Install and run Selenium to automate browser testing
+## Installing and Running Selenium to Automate Browser Testing
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
@@ -321,6 +322,7 @@ jobs:
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
 ### Additional Heroku Configuration
+{:.no_toc}
 
 The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
 
@@ -406,6 +408,9 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
+
+## See Also
+{:.no_toc}
 
 For more information about Workflows,
 see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.

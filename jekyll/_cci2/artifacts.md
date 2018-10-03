@@ -174,6 +174,7 @@ Placeholder   | Meaning                                                         
 {: class="table table-striped"}
 
 ### Description of Commands
+{:.no_toc}
 
 First,
 the CIRCLE_TOKEN environment variable is created.
@@ -195,5 +196,6 @@ Adjust the number given to the `-P` flag as needed.
 
 
 ## See Also
+{:.no_toc}
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

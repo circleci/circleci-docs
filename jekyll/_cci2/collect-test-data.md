@@ -374,12 +374,6 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
-## Merging Test Suites Together
-
-If you have multiple JUnit test reports from running more than one test suite or runner, you can merge them together using the third-party NodeJS CLI tool, [junit-merge](https://www.npmjs.com/package/junit-merge).
-
-This tool can combine the reports into a single file that our test summary system can parse and give you correct test totals.
-
 ## API
 
 To access test metadata for a run from the API, refer to the [test-metadata API documentation]( {{ site.baseurl }}/api/v1-reference/#test-metadata).

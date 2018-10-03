@@ -67,3 +67,7 @@ workflows:
           requires:
             - hold
 ```
+
+## See Also
+
+[Workflows]({{ site.baseurl }}/2.0/workflows/)

@@ -1,6 +1,9 @@
+# Local Development Instructions
+
+
 There are two ways to work on CircleCI docs locally: with Docker and with Ruby/Bundler.
 
-# 1. Local Development with Docker (recommended)
+## 1. Local Development with Docker (recommended)
 
 1. Install Docker for you platform: <https://docs.docker.com/engine/installation/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
@@ -10,7 +13,8 @@ There are two ways to work on CircleCI docs locally: with Docker and with Ruby/B
 
 **Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
 
-# 2. Local Development with Ruby and Bundler (alternative to Docker)
+
+## 2. Local Development with Ruby and Bundler (alternative to Docker)
 
 If you already have a stable Ruby environment (currently Ruby 2.3.3) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
 
@@ -19,6 +23,17 @@ Check out the [Gemfile](Gemfile) for the Ruby version we're currently using. We 
 We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
 
 You're welcome to use [Bundler](http://bundler.io/) to install these gems.
+
+## Building js assets
+
+Our js assets are compiled by webpack and put into a place that the jekyll build can find them.
+
+Anytime you are working on js be sure to run:
+
+```bash
+$ npm install
+$ npm run webpack-watch
+```
 
 ## First Run
 
@@ -34,7 +49,7 @@ Jekyll will build the site and start a web server, which can be viewed in your b
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 
-# Editing Docs Locally
+## Editing Docs Locally
 
 The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
@@ -96,6 +111,13 @@ If you want to exclude a heading from a TOC, you can specify that with another r
 {:.no_toc}
 ```
 
-# Submitting Pull Requests
+## Submitting Pull Requests
 
 After you are finished with your changes, please follow our [Contributing Guide](CONTRIBUTING.md) to submit a pull request.
+
+## Docker Tag List for CircleCI Convenience Images
+
+The Docker tag list for convenience images, located in ./jekyll/_cci2/circleci-images.md, is dynamically updated during a CircleCI build.
+There's usually no need to touch this.
+If you'd like to see an updated list generated locally however, you can do so by running `./scripts/pull-docker-image-tags.sh` from the root of this repo.
+Note that you'll need the command-line tool [jq](https://stedolan.github.io/jq/) installed.

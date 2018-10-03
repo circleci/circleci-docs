@@ -13,7 +13,7 @@ This document describes common methods for running and debugging browser testing
 ## Prerequisites
 {:.no_toc}
 
-Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, PhantomJS, Firefox, and Chrome.
+Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## Overview
 {:.no_toc}
@@ -48,7 +48,7 @@ jobs:
           background: true
 ```
 
-Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/#install-and-run-selenium-to-automate-browser-testing) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
 
 For more information about working with Headless Chrome,
 see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
@@ -96,8 +96,10 @@ jobs:
             wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
       - run: # base image is python, so we run `nosetests`, an extension of `unittest`
           command: nosetests
-      - run: # wait for Sauce Connect to close the tunnel
-          command: killall --wait sc  
+      - run:
+          name: Shut Down Sauce Connect Tunnel
+          command: |
+            kill -9 `cat /tmp/sc_client.pid`          
 ```
 
 ## BrowserStack and Appium
@@ -225,7 +227,7 @@ steps:
       name: Download and start X
       command: |
         sudo apt-get install -y x11vnc
-        x11vnc -forever -nopw:
+        x11vnc -forever -nopw
       background: true
 ```
 2. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:

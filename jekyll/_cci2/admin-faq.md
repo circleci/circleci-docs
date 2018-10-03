@@ -38,18 +38,18 @@ $ ifconfig eth0 | grep "inet addr"
 
 2. Restart the application.
 
-3. Update `CIRCLE_SECRET_PASSPHRASE` in the `init` script that you use to add builder boxes to your fleet.
+3. Update `CIRCLE_SECRET_PASSPHRASE` in the `init` script that you use to add Nomad Clients to your fleet.
 
-New builder boxes joining the fleet will use the new passphrase. Existing builder boxes with the old passphrase will also continue functioning. But, it is best practice to restart these boxes as soon as you can to use the consistent passphrase across your fleet.
+New Nomad Clients joining the fleet will use the new passphrase. Existing Nomad Clients with the old passphrase will also continue functioning. But, it is best practice to restart these boxes as soon as you can to use the consistent passphrase across your fleet.
 
 
-#### How can I gracefully shutdown a Builder instance?
+#### How can I gracefully shutdown a Nomad Clients?
 
 Refer to the Introduction to Nomad Cluster Operation document for details.
 
 #### Is it possible to run iOS/macOS builds on CircleCI?
 
-Support for running your own macOS builders is coming soon. Contact your account team to express interest in getting on the early access list.
+Support for running your own macOS fleet is coming soon. Contact your account team to express interest in getting on the early access list.
 
 #### Why is Test GitHub Authentication failing?
 

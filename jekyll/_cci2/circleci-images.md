@@ -17,11 +17,13 @@ This document provides information about pre-built CircleCI images and a listing
 
 For convenience,
 CircleCI maintains several Docker images.
-These images are extensions of official Docker images
+These images are typically extensions of official Docker images
 and include tools especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/).
 Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/circleci/circleci-images).
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
+
+_**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
 
 ## Best Practices
 
@@ -135,6 +137,7 @@ CircleCI maintains images for the languages below.
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
+- [Rust](#rust)
 
 If your language is not listed,
 CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
@@ -148,8 +151,10 @@ To use these variants,
 add one of the following suffixes to the end of an image tag.
 
 - `-node` includes Node.js for polyglot applications
-- `-browsers` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
+- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
 - `-node-browsers` combines the `-node` and `-browsers` variants
+- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
 For example,
 if you want
@@ -166,10 +171,12 @@ so they become secondary service containers.
 CircleCI maintains images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
+- [DynamoDB](#dynamodb)
 - [MariaDB](#mariadb)
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
+- [Redis](#redis)
 
 #### Service Image Variant
 {:.no_toc}
@@ -244,9 +251,12 @@ that a given tag has the same meaning across images!
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
 {% for tag in tags %}
-<li>{{ tag }}</li>
+	{% unless tag contains "-browsers" or tag contains "-node" %}
+	<li>{{ tag }}</li>
+	{% endunless %}
 {% endfor %}
 </ul>
+<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
 
 ---
 

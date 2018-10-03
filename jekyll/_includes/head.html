@@ -1,6 +1,6 @@
 <head>
 	<script src="https://cdn.optimizely.com/js/8188917468.js"></script>
-	{% unless page.search %}<meta name="robots" content="noindex" />{% endunless %}
+	{% if page.url contains '/archive/' %}<meta name="robots" content="noindex, nofollow" />{% endif %}
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -24,4 +24,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
 	{% include segment.html %}
+
+	<!-- Instant Search CDN links /-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.2/dist/instantsearch.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.2"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.2/dist/instantsearch-theme-algolia.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.min.js"></script>
 </head>

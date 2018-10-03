@@ -7,8 +7,6 @@ categories: [troubleshooting]
 order: 20
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Debugging with SSH*
-
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 
 * TOC
@@ -51,6 +49,7 @@ If you run into permission troubles trying to SSH to your job, try
 these things:
 
 ### Ensure Authentication With GitHub/Bitbucket
+{:.no_toc}
 
 A single command can be used to test that your keys are set up as expected. For 
 GitHub run:
@@ -82,6 +81,7 @@ If you _don't_ see output like that, you need to start by
 [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
 
 ### Ensure Authenticating as the Correct User
+{:.no_toc}
 
 If you have multiple accounts, double-check that you are
 authenticated as the right one!
@@ -94,6 +94,7 @@ by offering a different SSH key with `ssh -i`. See the next section if
 you need a hand figuring out which key is being offered.
 
 ### Ensure the Correct Key is Offered to CircleCI
+{:.no_toc}
 
 If you've verified that you can authenticate as the correct
 user, but you're still getting "Permission denied" from CircleCI, you
@@ -138,3 +139,8 @@ argument to SSH. For example:
 ```
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 ```
+
+## See Also
+{:.no_toc}
+
+[GitHub and Bitbucket Integration](  {{ site.baseurl }}/2.0/gh-bb-integration/)
