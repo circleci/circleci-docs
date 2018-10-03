@@ -5,6 +5,7 @@ title: "Installing CircleCI on Amazon Web Services Manually"
 category: [installation]
 order: 3
 description: "How to install CircleCI Enterprise manually on Amazon Web Services (AWS)."
+sitemap: false
 ---
 
 This document provides step-by-step instructions for installing CircleCI Enterprise on Amazon Web Services (AWS) without using separate orchestration software in the following sections:
