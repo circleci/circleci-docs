@@ -5,6 +5,7 @@ title: "Using Centralized Logging"
 category: [advanced-config]
 order: 4.0
 description: "How to use centralized logging with CircleCI."
+sitemap: false
 ---
 
 Collecting and centralizing logs is an essential component of monitoring.  The
