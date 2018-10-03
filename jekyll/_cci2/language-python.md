@@ -98,13 +98,13 @@ jobs:
     working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4
-          environment:
-            PIPENV_VENV_IN_PROJECT: true
-            DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.2
-          environment:
-            POSTGRES_USER: root
-            POSTGRES_DB: circle_test
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
 ```
 
 ### Install Dependencies
