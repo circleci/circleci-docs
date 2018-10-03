@@ -65,6 +65,11 @@ The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy 
 
 ## AWS
 
+To deploy to AWS S3,
+follow the steps below.
+To deploy to AWS ECS from ECR,
+see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
+
 1. As a best security practice,
 create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
@@ -120,7 +125,7 @@ workflows:
 ```
 
 For a complete list of AWS CLI commands and options,
-see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)
+see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ## Azure
 

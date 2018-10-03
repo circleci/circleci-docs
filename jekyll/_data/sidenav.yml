@@ -167,6 +167,8 @@
     - name: Configuring Deploys
       link: 2.0/deployment-integrations/
       children: 
+        - name: Deploying to AWS ECR/ECS
+          link: 2.0/ecs-ecr/
         - name: Using Yarn on CircleCI
           link: 2.0/yarn/
         - name: Publishing Snap Packages
