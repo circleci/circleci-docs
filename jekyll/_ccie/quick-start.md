@@ -5,6 +5,7 @@ title: "Setting Up Projects"
 category: [documentation]
 order: 1
 description: "Overview of getting started with CircleCI Enterprise."
+sitemap: false
 ---
 
 This guide describes how to set up a project and provides a primer on configuration troubleshooting in CircleCI Enterprise for developers, as follows:

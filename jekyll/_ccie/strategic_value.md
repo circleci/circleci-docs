@@ -6,6 +6,7 @@ category: [resources]
 order: 0
 description: "These are the strategic value points on what CircleCI Enterprise provides to customers."
 hide: true
+sitemap: false
 ---
 
 ## Maximizing Throughput at Any Scale
