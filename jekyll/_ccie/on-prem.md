@@ -7,6 +7,7 @@ order: 5
 hide: true
 published: false
 description: "How to install CircleCI Enterprise LXC on Ubuntu 14.04"
+sitemap: false
 ---
 
 The following step-by-step instructions will guide you through the process of
