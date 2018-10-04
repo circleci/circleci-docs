@@ -1056,6 +1056,7 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 Key | Required | Type | Description
 ----|-----------|------|------------
 requires | N | List | A list of jobs that must succeed for the job to start
+name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
 {: class="table table-striped"}
 
 
@@ -1266,7 +1267,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master          
+              only: master
 ```
 
 {% endraw %}
