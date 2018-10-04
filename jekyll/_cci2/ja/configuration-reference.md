@@ -686,7 +686,7 @@ Special step used to upload test results so they display in builds' Test Summary
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files {: class="table table-striped"}
 
-***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
+***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
 
 ###### *Example*
 
