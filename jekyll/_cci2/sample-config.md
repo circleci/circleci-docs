@@ -302,4 +302,4 @@ workflows:
 
 ## See Also
 
-See the [Example Public Repos] document for a list of public projects that use CircleCI.
+See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
