@@ -1,17 +1,19 @@
 ---
 layout: classic-docs
-title: "Upgrading from CircleCI Enterprise Installation 2.14.01 to 2.15.0"
+title: "Upgrading from CircleCI Installation 2.14.01 to 2.15.0"
 category: [administration]
 order: 12
-description: "How to upgrade from CircleCI Enterprise Installation 2.14.01 to 2.15.0 when using externalized MongoDB"
+description: "How to Upgrading MongoDB from 3.2 to 3.6 when using externalized MongoDB"
 ---
 
-This document provides instructions for System Administrators upgrading an existing CircleCI Enterprise Installation 2.14.01 to 2.15.0 in the following sections:
+This document provides links to instructions for upgrading MongoDB to v3.6. If you are running an external MongoDB with your CircleCI installation, this MongoDB upgrade is required for use with CircleCI v2.15.0.
 
 * TOC
 {:toc}
 
-**Notes:**
+
+## Prerequisite
+
 - You must be running CircleCI v2.15.0 in order to upgrade MongoDB.
 
 ## Goals
