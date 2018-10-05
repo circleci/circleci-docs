@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Upgrading from CircleCI Installation 2.14.01 to 2.15.0"
+title: "Upgrading MongoDB when using externalized MongoDB"
 category: [administration]
 order: 12
 description: "How to Upgrading MongoDB from 3.2 to 3.6 when using externalized MongoDB"
