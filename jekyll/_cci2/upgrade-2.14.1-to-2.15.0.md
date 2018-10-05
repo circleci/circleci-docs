@@ -28,7 +28,7 @@ Once complete you may run the following admin command (new in 3.4):
 
 ```db.adminCommand({setFeatureCompatibilityVersion: "3.4"})```
 
-This will the compatibility version to 3.4 which will continue to be used once you upgrade to 3.6.6. More information can be found [here](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/#setfeaturecompatibilityversion).
+This will change the compatibility version to 3.4 which will continue to be used once you upgrade to 3.6. More information can be found [here](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/#setfeaturecompatibilityversion).
 
 You can verify it is set properly to `3.4` by running:
 
