@@ -72,7 +72,7 @@ If you're using [Homebrew](https://brew.sh/) with macOS, you can install the CLI
 brew install circleci
 ```
 
-**Note:** This will install Docker from Homebrew even if Docker for Mac is installed.
+**Note:** If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### [Alternative] Manual download
 {:.no_toc}
