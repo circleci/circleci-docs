@@ -123,7 +123,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 
 ## Separation of Environments
 
-ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることができません。
+ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることはできません。
 
 ### Accessing Services
 
@@ -167,7 +167,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-これを応用することで、アプリケーションが生成した何らかのデータを保管しておきたいときにリモート Docker からコピーさせる、といった使い方ができます。
+これを応用することで、アプリケーションが生成した何らかのデータを保管したいときに、リモート Docker からコピーさせる、という使い方ができます。
 
 ```yaml
 - run: |
@@ -195,7 +195,7 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
          - bundler-data:/source/bundler-data
     
 
-以下にある `.circleci/config.yml` のサンプルスニペットも、`bundler-cache` コンテナのデータ格納やバックアップのサンプルとして参考にしてみてください。
+以下にある `.circleci/config.yml` のサンプルスニペットも、`bundler-cache` コンテナのデータ格納やバックアップのサンプルとして参考にしてください。
 
 {% raw %}
 
