@@ -116,7 +116,7 @@ workflows:
 
 下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。 この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
 
-なお、依存関係が解決しない限りジョブは実行されないことから、その前に実行される上流ジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
+なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行される上流ジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
 
 {% raw %}
 
