@@ -95,7 +95,7 @@ Setup will prompt you for configuration settings. If you are using the CLI with 
 
 To ensure that the CLI is configured correctly you can use it to validate a CircleCI config file.
 
-1. Change to the root directory of your CIrcleCI project repository.
+1. Change to the root directory of your CircleCI project repository.
 
 2. Run the following command:
 
