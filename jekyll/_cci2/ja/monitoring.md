@@ -7,7 +7,7 @@ order: 30
 ---
 This document is for System Administrators who are setting environment variables for installed Nomad Clients, scaling their cluster, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
-- TOC {:toc}
+* TOC {:toc}
 
 ## Advanced System Monitoring
 
@@ -17,7 +17,13 @@ Enable the ability to forward system and Docker metrics to supported platforms b
 
 Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting and reporting metrics.
 
-Following are the metrics that are enabled: - [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements) - [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics) - [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics) - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
+Following are the metrics that are enabled:
+
+* [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
+* [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
+* [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
+* [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields)
+* [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
 #### Nomad Job Metrics
 
@@ -39,9 +45,13 @@ Click `Enable' under AWS CloudWatch to begin configuration. ![AWS CloudWatch]({{
 
 There are two options for configuration:
 
-- Use the IAM Instance Profile of the services box and configure your custom region and namespace. ![Configuration IAM]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
+* Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+    
+    ![Configuration IAM]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
 
-- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace. ![Configuration Alt]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
+* Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+    
+    ![Configuration Alt]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
 
 After saving you can *verify* that metrics are forwarding by going to the AWS CloudWatch console.
 
@@ -79,7 +89,7 @@ Additionally, if you would like to ensure that all metrics in an installation ar
     Env="<staging-circleci>"
     
 
-Please see the InfluxDB [documenation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
+Please see the InfluxDB [documentation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
 
 Note: Any changes to the config will require a restart of the system.
 
@@ -115,11 +125,11 @@ CircleCI 1.0 Builders store logs in `/var/log/**/*.log` except for Docker, which
 
 Logging appliances generally require installation of a custom agent on each machine and configuration that collects logs and forwards them to a service. Some available logging appliances are:
 
-- [Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring)
-- [Graylog](https://www.graylog.org/)
-- [LogDNA](https://logdna.com/)
-- [Logstash](https://www.elastic.co/products/logstash)
-- [Splunk](http://www.splunk.com/)
+* [Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring)
+* [Graylog](https://www.graylog.org/)
+* [LogDNA](https://logdna.com/)
+* [Logstash](https://www.elastic.co/products/logstash)
+* [Splunk](http://www.splunk.com/)
 
 Configure the agent according to the environment, the authentication mechanisms, and centralized logging service discovery mechanism. You can reuse your current practices for setting up the agent and configuration.
 
