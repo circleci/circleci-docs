@@ -1,4 +1,8 @@
-# Configurable Java virtual Machine Heap Size
+---
+layout: classic-docs
+title: "Configuring Java Virtual Machine Heap Size"
+description: "How to configure Java virtual Machine Heap Size in CircleCI Server."
+---
 
 JVM_HEAP_SIZE is configurable for frontend and test-result containers
 
