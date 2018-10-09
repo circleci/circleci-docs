@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
 title: "Configuring Java Virtual Machine Heap Size"
+category: [administration]
 description: "How to configure Java virtual Machine Heap Size in CircleCI Server."
 ---
 
