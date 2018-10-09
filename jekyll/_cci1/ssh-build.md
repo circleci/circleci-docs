@@ -3,6 +3,7 @@ layout: classic-docs
 title: CircleCI 1.0 SSH access to builds
 categories: [troubleshooting]
 description: SSH access to builds
+sitemap: false
 ---
 
 Often the best way to troubleshoot problems is to ssh into a

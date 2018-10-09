@@ -3,6 +3,7 @@ layout: classic-docs
 title: "unable to obtain stable firefox connection in 60 seconds"
 description: Firefox connection issues
 last_updated: Feb 2, 2013
+sitemap: false
 ---
 
 This is an issue with the selenium-webdriver gem.

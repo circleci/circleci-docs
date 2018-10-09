@@ -3,6 +3,7 @@ layout: classic-docs
 title: Build artifacts
 categories: [reference]
 description: Dealing with build artifacts
+sitemap: false
 ---
 
 If your build produces persistent artifacts such as screenshots, coverage reports, or

@@ -8,21 +8,66 @@ order: 2
 ---
 
 
-<hr>
+There are a few great tricks for triggering and scheduling builds in the following snippets!
 
-Skip Builds            | API Triggers
-----------------------------|----------------------
-Find out how to [skip or cancel builds]({{ site.baseurl }}/2.0/skip-build/) in your commits.&nbsp;&nbsp;    |   Learn to [use the API to trigger jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
+## Skip Builds 
 
-<hr>
+By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description. 
 
-Scheduled Builds |
-------------------------|------------------
-Learn about [scheduled build configuration]({{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow) syntax with `cron`. |  
 
-<hr>
-The following video provides a tutorial of scheduled build configuration with [Workflows]({{ site.baseurl }}/2.0/workflows/).
+## Trigger a Job Using curl and Your API Token
 
-<div class="video-wrapper">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+```
+curl -u ${CIRCLE_API_USER_TOKEN}: \
+     -d build_parameters[CIRCLE_JOB]=deploy_docker \
+     https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
+```
+
+## Scheduled Builds 
+
+```
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - test
+      - deploy
+  nightly:
+    triggers: #use the triggers key to indicate a scheduled build
+      - schedule:
+          cron: "0 0 * * *" # use cron syntax to set the schedule
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+    jobs:
+      - coverage
+```      
+
+## Manual Approval
+
+```
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - build
+      - test1:
+          requires:
+            - build
+      - test2:
+          requires:
+            - test1
+      - hold:
+          type: approval # requires that an in-app button be clicked by an appropriate member of the project to continue.
+          requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
+```
+
+## See Also
+
+[Workflows]({{ site.baseurl }}/2.0/workflows/)

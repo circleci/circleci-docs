@@ -3,6 +3,7 @@ layout: classic-docs
 title: rake db:schema:load fails
 description: rake db:schema:load fails
 last_updated: Feb 3, 2013
+sitemap: false
 ---
 
 If your build fails during the `rake db:create db:schema:load`

@@ -65,8 +65,10 @@ The following sections provide information about the usage statistics CircleCI w
 {: class="table table-striped"}
 
 ## Accessing Usage Data
-If you would like programatic access to this data in order to better understand your users please contact your CircleCI account representative.
+If you would like programatic access to this data in order to better understand your users you may run this command from the Services VM.
 
-### Security and Privacy 
+`docker exec usage-stats /src/builds/extract`
+
+### Security and Privacy
 
 Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/outer/legal/enterprise-license-agreement.pdf) for our complete security and privacy disclosures.

@@ -4,6 +4,7 @@ title: Continuous Deployment with Ninefold
 categories: [how-to]
 description: Continuous Deployment with Ninefold
 deprecated: "This guide has been deprecated since NineFold.com has shutdown."
+sitemap: false
 ---
 
 Deploying from CircleCI to Ninefold is easy with Ninefold's GitHub integration.

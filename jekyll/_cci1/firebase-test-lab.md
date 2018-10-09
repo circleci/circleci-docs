@@ -3,6 +3,7 @@ layout: classic-docs
 title: Testing with Firebase Test Lab
 categories: [how-to]
 description: Testing with Firebase Test Lab
+sitemap: false
 ---
 
 This guide is based off of commands in Firebase Test Lab. 

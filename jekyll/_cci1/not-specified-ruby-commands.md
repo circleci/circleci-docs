@@ -2,6 +2,7 @@
 layout: classic-docs
 title: CircleCI is running the Ruby commands not present in the config
 description: CircleCI is running the Ruby commands not present in the config
+sitemap: false
 ---
 
 CircleCI infers your test settings from the code in your repository, typically looking at the packages you use.

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Deployment to Google App Engine
 categories: [how-to]
 description: Continuous Deployment to Google App Engine
+sitemap: false
 ---
 
 Note that there are a few common dependencies like the `gcloud` command line tool and Service Account authentication that are required

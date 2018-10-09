@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with PHP
 short-title: PHP
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with PHP
+sitemap: false
 ---
 
 CircleCI works seamlessly with all the tools and package managers that 

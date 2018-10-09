@@ -4,6 +4,7 @@ categories: [troubleshooting]
 title: Time-based results are one day off
 description: Time-based results are one day off
 last_updated: Feb 3, 2013
+sitemap: false
 ---
 
 Time-zones are fickle masters, and time-based code frequently only works in the time-zone in which it was written.

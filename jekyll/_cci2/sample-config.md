@@ -7,9 +7,7 @@ categories: [migration]
 order: 2
 ---
 
-*[Tutorials & Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Sample 2.0 config.yml Files*
-
-This document provides three sample `.circleci/config.yml` files, as follows:
+This document provides three sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
 
 * TOC
 {:toc}
@@ -301,3 +299,7 @@ workflows:
 ```
 
 {% endraw %}
+
+## See Also
+
+See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.

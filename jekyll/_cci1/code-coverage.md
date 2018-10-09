@@ -5,6 +5,7 @@ short-title: Generating Code Coverage Metrics
 categories: [configuration-tasks]
 description: Generating code coverage metrics
 order: 50
+sitemap: false
 ---
 
 Code Coverage tells you how much of your application is tested.

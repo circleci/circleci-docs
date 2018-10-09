@@ -7,16 +7,17 @@ categories: [optimization]
 order: 60
 ---
 
-*[Test]({{ site.baseurl }}/2.0/test/) > Running Tests in Parallel*
-
 If your project has a large number of tests,
 it will need more time to run them on one machine.
 To reduce this time,
 you can run tests in parallel
 by spreading them across multiple machines.
-This requires specifying a parallelism level
-and using the CircleCI CLI
-to split test files.
+This requires specifying a parallelism level.
+You can use either the CircleCI CLI
+to split test files,
+or use environment variables
+to configure each parallel machine
+individually.
 
 * TOC
 {:toc}
@@ -46,14 +47,18 @@ see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#p
 
 ## Using the CircleCI CLI to Split Tests
 
-Test allocation across containers is file-based
-and requires the CircleCI CLI. It is automatically
-injected into your build at run-time.
+CircleCI supports automatic test allocation
+across your containers.
+The allocation is file-based.
+It requires the CircleCI CLI,
+which is automatically injected
+into your build at run-time.
 
 To install the CLI locally,
-see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/#installing-the-circleci-local-cli-on-macos-and-linux-distros) document.
+see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
 ### Globbing Test Files
+{:.no_toc}
 
 The CLI supports globbing test files
 using the following patterns:
@@ -86,11 +91,9 @@ jobs:
             echo $(circleci tests glob "foo/**/*" "bar/**/*")
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
-### Video: Troubleshooting Globbing
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Splitting Test Files
+{:.no_toc}
 
 The CLI supports splitting tests across machines
 when running parallel builds.
@@ -119,6 +122,7 @@ by using the `--index` flag.
     circleci tests split --index=0 test_filenames.txt
 
 #### Splitting by Name
+{:.no_toc}
 
 By default,
 `circleci tests split` expects a list of filenames
@@ -138,6 +142,7 @@ Or pipe a glob of test files.
     circleci tests glob "test/**/*.java" | circleci tests split
 
 #### Splitting by Filesize
+{:.no_toc}
 
 When provided with filepaths,
 the CLI can also split by filesize.
@@ -147,6 +152,7 @@ use the `--split-by` flag with the `filesize` split type.
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 
 #### Splitting by Timings Data
+{:.no_toc}
 
 On each successful run of a test suite,
 CircleCI saves timings data to a directory
@@ -170,3 +176,38 @@ by using the `--timings-type` flag.
 
 If you need to manually store and retrieve timing data,
 use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
+
+## Using Environment Variables to Split Tests 
+
+For full control over parallelism,
+CircleCI provides two environment variables
+that you can use in lieu of the CLI
+to configure each container individually.
+`CIRCLE_NODE_TOTAL` is the total number of
+parallel containers being used to run your
+job, and `CIRCLE_NODE_INDEX` is the index
+of the specific container that is
+currently running.
+See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables)
+for more details.
+
+## Running Split Tests
+
+Globbing and splitting tests does not actually run your tests.
+To combine test grouping with test execution,
+consider saving the grouped tests to an environment variable,
+then passing this variable to your test runner.
+
+```bash
+TESTFILES=$(circleci tests glob "spec/**/*.rb" | circleci tests split --split-by=timings)
+bundle exec rspec -- ${TESTFILES}
+```
+
+### Video: Troubleshooting Globbing
+{:.no_toc}
+
+<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## See Also
+
+[Using Containers]({{ site.baseurl }}/2.0/containers/)

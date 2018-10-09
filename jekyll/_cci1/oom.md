@@ -4,6 +4,7 @@ title: Your build hit the 4G memory limit
 categories: [troubleshooting]
 description: What happens when your build hit the 4G memory limit
 last_updated: Feb 25, 2014
+sitemap: false
 ---
 
 Your build contains a message that says:

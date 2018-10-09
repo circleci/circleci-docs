@@ -7,19 +7,12 @@ categories: [language-guides]
 order: 3
 ---
 
-
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Go*
-
-**CircleCI 2.0 supports building Go projects using any version of Go that can be installed in a Docker image.**
+CircleCI supports building Go projects using any version of Go that can be installed in a Docker image.
 
 * TOC
 {:toc}
 
-## New to CircleCI 2.0?
-
-If you're new to CircleCI 2.0, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
-
-## Quickstart: demo Go reference project
+## Quickstart: Demo Go Reference Project
 
 We maintain a reference Go project to show how to build on CircleCI 2.0:
 
@@ -28,11 +21,13 @@ We maintain a reference Go project to show how to build on CircleCI 2.0:
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
 
-## Pre-built CircleCI Docker images
+### Pre-Built CircleCI Docker Images
+{:.no_toc}
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
 
-## Build the demo project yourself
+### Build the Demo Project Yourself
+{:.no_toc}
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -167,7 +162,7 @@ Now we know that our unit tests succeeded we can start our service and validate 
       - save_cache:
           key: v1-pkg-cache
           paths:
-            - "/go/pkg"
+            - ~/.cache/go-build
 
       - run:
           name: Start service
@@ -195,7 +190,8 @@ Finally, let's specify a path to store the results of the tests.
 
 Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## Deploy
+## See Also
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
+Refer to the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for more caching strategies.

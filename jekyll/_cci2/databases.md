@@ -7,18 +7,17 @@ categories: [configuring-jobs]
 order: 35
 ---
 
-*[Test]({{ site.baseurl }}/2.0/test/) > Configuring Databases*
+This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
 
 * TOC
 {:toc}
 
-This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
-
 ## Overview
+{:.no_toc}
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/r/circleci/).
 
-The following example shows a 2.0 `.circleci/config.yml` file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The secondary image gives access to things like databases. 
+The following example shows a 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The secondary image gives access to things like databases. 
 
 ## PostgreSQL Database Testing Example
 
@@ -80,6 +79,8 @@ When the database service spins up, it automatically creates the database `circl
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
 ### Optimizing Postgres Images
+{:.no_toc}
+
 The default `circleci/postgres` Docker image uses regular persistent storage on disk.
 Using `tmpfs` may make tests run faster and may use fewer resources. To use a variant
 leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e., 
@@ -89,6 +90,8 @@ PostGIS is also available and can be combined with the previous example:
 `circleci/postgres:9.6-alpine-postgis-ram`
 
 ### Using Binaries
+{:.no_toc}
+
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
 
 ```
@@ -98,6 +101,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```
 
 ### Using Dockerize to Wait for Dependencies
+{:.no_toc}
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
@@ -144,6 +148,7 @@ Redis also has a CLI available:
 `dockerize -wait http://localhost:80 -timeout 1m`
 
 ## See Also
+{:.no_toc}
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/2.0/postgres-config/) document for additional configuration file examples.
 

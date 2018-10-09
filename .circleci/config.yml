@@ -1,5 +1,48 @@
 version: 2
+
+references:
+  js_deps_cache_key: &js_deps_cache_key
+    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
+  js_deps_backup_cache_key: &js_deps_backup_cache_key
+    v8-dependency-js-deps
+  workspace_root: &workspace_root
+    /tmp/workspace
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
 jobs:
+  js_build:
+    docker:
+      - image: node:8.11.1
+    steps:
+      - *attach_workspace
+      - checkout
+      - restore_cache:
+          keys:
+            - *js_deps_cache_key
+            - *js_deps_backup_cache_key
+      - run:
+          name: npm dependencies
+          command: npm install
+      - run:
+          name: Prepare JS assets
+          command: npm run webpack-prod
+      - run:
+          name: Persist JS assets
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/js
+            mv jekyll/assets/js/dist/* /tmp/workspace/js/
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - js
+      - save_cache:
+          key: *js_deps_cache_key
+          paths:
+            - node_modules
+
   build:
     docker:
       - image: circleci/ruby:2.5.1
@@ -10,6 +53,7 @@ jobs:
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
+      - *attach_workspace
       - run:
           name: "Test Markdown Files"
           command: |
@@ -45,27 +89,33 @@ jobs:
             cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
             ./scripts/pull-docker-image-tags.sh
       - run:
+          name: Restore js
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/js
+            mv /tmp/workspace/js/ jekyll/assets/js/dist/
+      - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
-      - store_artifacts: 
+      - store_artifacts:
           path: jekyll/_site/docs/
           destination: circleci-docs
-      - store_artifacts: 
+      - store_artifacts:
           path: run-results/
           destination: run-results
       - persist_to_workspace:
-          root: ~/circleci-docs/jekyll/_site 
-          paths: 
+          root: ~/circleci-docs/jekyll/_site
+          paths:
             - docs
   deploy:
     docker:
-      - image: cibuilds/aws:1.15.44
+      - image: cibuilds/aws:1.15.73
     steps:
       - attach_workspace:
-          at: ./generated-site 
+          at: ./generated-site
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
@@ -74,7 +124,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - js_build
+      - build:
+          requires:
+            - js_build
       - deploy:
           requires:
             - build

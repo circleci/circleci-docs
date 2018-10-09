@@ -4,6 +4,7 @@ title: "Continuous Integration and Continuous Deployment with Ruby/Rails"
 short-title: "Ruby/Rails"
 categories: [languages]
 description: "Continuous Integration and Continuous Deployment with Ruby/Rails"
+sitemap: false
 ---
 
 CircleCI makes Rails testing simple. During each build, CircleCI looks at your code,

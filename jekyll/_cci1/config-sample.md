@@ -3,6 +3,7 @@ layout: classic-docs
 title: Sample 1.0 circle.yml file
 categories: [migration]
 description: "Making a circle.yml file"
+sitemap: false
 ---
 
 In our [configuration document]( {{ site.baseurl }}/1.0/configuration/) we list everything that can go into a

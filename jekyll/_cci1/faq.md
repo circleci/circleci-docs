@@ -5,6 +5,7 @@ short-title: FAQ
 categories: [getting-started]
 description: Frequently Asked Questions
 order: 60
+sitemap: false
 ---
 
 * Contents

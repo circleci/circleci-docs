@@ -36,6 +36,7 @@ Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/deployment-integrations/">Deployment</a> | Configure automated deployment to AWS, Azure, Firebase, Google Cloud, Heroku, NPM, or virtually any other service.
 <a href="{{ site.baseurl }}/2.0/artifactory/">Artifactory</a> | Configure automated uploads to Artifactory with the Jfrog CLI.
+<a href="{{ site.baseurl }}/2.0/packagecloud/">packagecloud</a> | Publish packages to packagecloud.
 {: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!

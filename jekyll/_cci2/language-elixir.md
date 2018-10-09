@@ -7,11 +7,9 @@ categories: [language-guides]
 order: 2
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Elixir*
-
 This is an annotated `config.yml` for a simple Phoenix web application, which you can access at <https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix>.
 
-If you're in a rush, just copy the configuration below into `.circleci/config.yml` in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
+If you're in a rush, just copy the configuration below into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
 
 ## Sample Configuration
 
@@ -77,3 +75,8 @@ jobs:  # basic units of work in a run
 ```
 
 {% endraw %}
+
+## See Also
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+[Configuring Databases]({{ site.baseurl }}/2.0/databases/)

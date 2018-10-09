@@ -1,20 +1,18 @@
 ---
 layout: classic-docs
-title: "Language Guide: JavaScript"
+title: "NodeJS - Javascript Tutorial"
 short-title: "JavaScript"
 description: "Building and Testing with JavaScript and NodeJS on CircleCI 2.0"
 categories: [language-guides]
 order: 5
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: JavaScript*
-
-If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a NodeJS sample application.
 
 * TOC
 {:toc}
 
-## Quickstart: demo JavaScript NodeJS reference project
+## Quickstart: Demo JavaScript NodeJS Reference Project
 
 We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
 
@@ -23,13 +21,13 @@ We maintain a reference JavaScript NodeJS project to show how to build an Expres
 
 In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Node projects.
 
-## Pre-built CircleCI Docker images
+## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 
-## Build the demo JavaScript Node project yourself
+## Build the Demo JavaScript Node Project Yourself
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -85,11 +83,9 @@ jobs: # a collection of steps
 
 Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## Deploy
-
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-
 ## See Also
+{:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public Javascript projects.
-
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public Javascript projects.
+- If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

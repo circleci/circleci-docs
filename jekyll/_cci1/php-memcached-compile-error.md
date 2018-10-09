@@ -3,6 +3,7 @@ layout: classic-docs
 title: Adding memcached with pecl on CircleCI
 description: Adding memcached with pecl on CircleCI
 last_updated: May 23, 2013
+sitemap: false
 ---
 
 CircleCI is built on Ubuntu 12.04, and PHP's memcached module clashes with this. If you try to run

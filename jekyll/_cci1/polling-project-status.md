@@ -4,6 +4,7 @@ title: Polling project status using CCMenu, CCTray, etc.
 categories: [reference]
 description: Polling project status using CCMenu, CCTray, etc.
 last_updated: Feb 2, 2013
+sitemap: false
 ---
 
 If you would prefer to poll the status of your projects' builds, rather than rely on

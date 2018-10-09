@@ -7,8 +7,6 @@ categories: [getting-started]
 order: 1
 ---
 
-*[Migration]({{ site.baseurl }}/2.0/migration) > Migrating from Cloud to Server*
-
 There is no formal process or toolset to migrate between CircleCI Cloud (SaaS) to an installed CircleCI Server setup.
 The process is to perform a fresh install of CircleCI 2.0, using AWS and Terraform—see [Installation]({{ site.baseurl }}/2.0/aws) for instructions.
 

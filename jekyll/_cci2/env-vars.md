@@ -7,18 +7,18 @@ categories: [configuring-jobs]
 order: 40
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Environment Variables*
-
 This document describes using environment variables in CircleCI in the following sections:
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information.
 
 ### Environment Variable Usage Options
+{:.no_toc}
 
 CircleCI uses Bash,
 which follows the POSIX naming convention for environment variables.
@@ -50,6 +50,7 @@ may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ### Using `BASH_ENV` to Set Environment Variables
+{:.no_toc}
 
 CircleCI does not support interpolation
 when setting environment variables.
@@ -240,6 +241,7 @@ Changing an environment variable is only possible
 by deleting and recreating it.
 
 ### Encoding Multi-Line Environment Variables
+{:.no_toc}
 
 If you are having difficulty adding a multiline environment variable,
 use `base64` to encode it.
@@ -363,19 +365,24 @@ Variable                    | Type    | Value
 `CIRCLE_NODE_INDEX`         | Integer | The index of the specific build instance. A value between 0 and (`CIRCLECI_NODE_TOTAL` - 1)
 `CIRCLE_NODE_TOTAL`         | Integer | The number of total build instances.
 `CIRCLE_PR_NUMBER`          | Integer | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
-`CIRCLE_PR_REPONAME`        | String  | The name of the GitHub or Bitbucket respository where the pull request was created. Only available on forked PRs.
+`CIRCLE_PR_REPONAME`        | String  | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
 `CIRCLE_PR_USERNAME`        | String  | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | The number of previous builds on the current branch.
 `CIRCLE_PROJECT_REPONAME`   | String  | The name of the repository of the current project.
-`CIRCLE_PROJECT_USERNAME`   | String  | The name of the current project.
+`CIRCLE_PROJECT_USERNAME`   | String  | The GitHub or Bitbucket username of the current project.
 `CIRCLE_PULL_REQUEST`       | String  | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
 `CIRCLE_PULL_REQUESTS`      | List    | Comma-separated list of URLs of the current build's associated pull requests.
 `CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
-`CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution).
+`CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).
 `CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
 `CIRCLECI`                  | Boolean | `true` (represents whether the current environment is a CircleCI environment)
 `HOME`                      | String  | Your home directory.
 {:class="table table-striped"}
+
+## See Also
+{:.no_toc}
+
+[Contexts]( {{ site.baseurl }}/2.0/contexts/)

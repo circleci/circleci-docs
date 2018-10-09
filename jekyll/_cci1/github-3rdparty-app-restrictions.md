@@ -3,6 +3,7 @@ layout: classic-docs
 title: Re-enabling CircleCI after enabling third-party application restrictions for a GitHub organization
 description: Re-enabling CircleCI after enabling third-party application restrictions for a GitHub organization
 last_updated: Jan 26, 2015
+sitemap: false
 ---
 
 ## How to re-enable CircleCI

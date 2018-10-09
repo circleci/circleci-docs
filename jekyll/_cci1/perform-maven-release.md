@@ -3,6 +3,7 @@ layout: classic-docs
 title: Perform a Maven Release
 categories: [how-to]
 description: How to perform a maven release
+sitemap: false
 ---
 
 Using the [CircleCI REST API]({{ site.baseurl }}/1.0/api/) and some additional configuration, it’s possible to [perform a Maven release](http://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html).

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Upload to Artifactory
 categories: [how-to]
 description: How to upload Artifacts to Artifactory
+sitemap: false
 ---
 
 CircleCI supports uploading directly to Artifactory.

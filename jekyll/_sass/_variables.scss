@@ -1,0 +1,58 @@
+// Colors for EVERYTHING (alphabetical)
+$body-text-color: #555;
+$heading-color: #333;
+$nav-bg-color: #FBFBFB;
+$nav-border-color: #CCC;
+$link-text-color: #27A0B6;
+$link-hover-color: #36D4ED;
+$blue: #36D4ED;
+$blue-100: #5194DF;
+$black-light: #343434;
+$black-text: #161616;
+$gray-100: #F7F7F7;
+$gray-200: #e2e0e0;
+
+// Screen Sizes
+$screen-xs:                  480px;
+$screen-xs-min:              $screen-xs;
+
+// Small screen / tablet
+$screen-sm:                  768px;
+$screen-sm-min:              $screen-sm;
+
+// Medium screen / desktop
+$screen-md:                  992px;
+$screen-md-min:              $screen-md;
+
+// Large screen / wide desktop
+$screen-lg:                  1200px;
+$screen-lg-min:              $screen-lg;
+
+// General Sizing
+$spacing-small-horizontal: 12px;
+$spacing-medium-horizontal: 24px;
+$spacing-intermediate-large-horizontal: 48px;
+$spacing-large-horizontal: 60px;
+$spacing-large-vertical: 90px;
+$spacing-intermediate-large-vertical: 66px;
+$spacing-medium-vertical: 48px;
+$spacing-small-vertical: 18px;
+$spacing-base: 6px;
+$logo-width-small: 125px;
+
+// Font Sizes
+$font-size-root: 16px;
+$font-size-base: $font-size-root; // ~16px
+$font-size-small: 14px;
+$font-size-micro: 12px;
+$font-size-h1: 52px;
+$font-size-h1-small: 45px;
+$font-size-h2: 32px;
+$font-size-h3: 23px;
+$font-size-h4: 20px;
+$font-size-h5: 18px;
+
+// Font Weights
+$font-weight-base: 400; 
+$font-weight-thin: 100;
+$font-weight-bold: 600;

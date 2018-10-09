@@ -3,6 +3,7 @@ layout: classic-docs
 title: Deploying to Google Cloud Platform
 categories: [how-to]
 description: Deploying to Google Cloud Platform
+sitemap: false
 ---
 
 ## Prerequisites

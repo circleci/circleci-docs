@@ -1,10 +1,9 @@
 ---
 layout: classic-docs
-title: "Deploy"
-short-title: "Deploy"
+title: "Configuring Deploys"
+short-title: "Configuring Deploys"
 ---
 
-![header](  {{ site.baseurl }}/assets/img/docs/deploy.png)
 
 CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
@@ -66,6 +65,11 @@ The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy 
 
 ## AWS
 
+To deploy to AWS S3,
+follow the steps below.
+To deploy to AWS ECS from ECR,
+see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
+
 1. As a best security practice,
 create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
@@ -121,7 +125,7 @@ workflows:
 ```
 
 For a complete list of AWS CLI commands and options,
-see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)
+see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ## Azure
 
@@ -163,6 +167,7 @@ workflows:
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image).  This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
 ### Install the CLI
+{:.no_toc}
 
 ```
 - run:
@@ -177,6 +182,8 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 ```
 
 ### Dark Deployment
+{:.no_toc}
+
 This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
 
 ```
@@ -198,6 +205,8 @@ This is the first step in a Blue-Green deployment, pushing the application to no
 ```
 
 ### Live Deployment
+{:.no_toc}
+
 Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
 
 ```
@@ -217,6 +226,7 @@ Until now, the previously pushed "app-name" has not changed.  The final step is 
 ```
 
 ### Manual Approval
+{:.no_toc}
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
 

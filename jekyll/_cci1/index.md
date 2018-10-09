@@ -3,6 +3,7 @@ layout: classic-docs
 page-type: index
 title: "CircleCI 1.0 Documentation"
 permalink: /1.0/
+sitemap: false
 ---
 
 CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The hosted solution is available at <https://circleci.com/>. The [CircleCI Enterprise](https://circleci.com/enterprise/) solution is installable inside your private cloud or data center. Both are free to try for two weeks. If you are new to CircleCI, check out the [Getting Started with CircleCI]({{ site.baseurl }}/1.0/getting-started/).

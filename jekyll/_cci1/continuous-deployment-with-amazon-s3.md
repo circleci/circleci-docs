@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Deployment with Amazon S3
 categories: [how-to]
 description: Continuous Deployment with Amazon S3
+sitemap: false
 ---
 
 

@@ -12,7 +12,7 @@ CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to sequence a
 
 Holding a Workflow for Manual Approval     |  Using Filters
 ----------------------------|----------------------
-Add an [approval job]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) to set up a manual gate. &nbsp;&nbsp;&nbsp;&nbsp; |   Use [regex]({{ site.baseurl }}/2.0/workflows/#regular-expression-support) to [filter on branches]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) or [filter on tags]({{ site.baseurl }}/2.0/workflows/#git-tag-job-execution).  
+Add an [approval job]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) to set up a manual gate. &nbsp;&nbsp;&nbsp;&nbsp; |   Use [regex]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches) to [filter on branches]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) or [filter on tags]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).  
 
 <hr>
 

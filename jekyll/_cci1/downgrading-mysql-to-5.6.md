@@ -4,6 +4,7 @@ title: Downgrading MySQL from 5.7 to 5.6
 categories: [troubleshooting]
 description: Our base image comes pre-installed with MySQL 5.7, here's how to downgrade
 last_updated: Oct 16, 2017
+sitemap: false
 ---
 
 CircleCI updated the Ubuntu 14.04 Trusty [build image](https://circleci.com/docs/1.0/build-image-trusty/) to include MySQL 5.7, however you may still need MySQL 5.6.

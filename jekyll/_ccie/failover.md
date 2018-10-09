@@ -6,6 +6,7 @@ category: [advanced-config]
 order: 4.0
 description: "This document covers preparing for and recovering from catastrophic events that bring down your instance of CircleCI Enterprise."
 published: false
+sitemap: false
 ---
 
 This document covers preparing for and recovering from catastrophic events that bring down your instance of CircleCI Enterprise.

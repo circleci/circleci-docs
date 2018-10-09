@@ -9,6 +9,17 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 
+plugins:
+  - jekyll-assets
+  - jekyll-sitemap
+
+algolia:
+  application_id: 06F2EYGKB6
+  index_name: documentation
+
+sass:
+  sass_dir: _sass
+
 markdown: kramdown
 kramdown:
   input: GFM
@@ -28,6 +39,13 @@ collections:
     permalink: /1.0/:path/
     prefix: "/1.0"
     selectorName: "1.0"
+  archive:
+    name: "Archive"
+    site_section: true
+    output: true
+    permalink: /archive/:path/
+    prefix: "/archive"
+    selectorName: "archive"
   ccie:
     name: "Enterprise Docs"
     site_section: true
@@ -66,3 +84,4 @@ segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
 analytics:
   events:
     go_button_clicked: go-button-clicked
+rollbar_env: development

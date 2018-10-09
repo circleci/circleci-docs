@@ -1,14 +1,13 @@
 ---
 layout: classic-docs
-title: "Running Jobs With the API"
-short-title: "Running Jobs With the API"
+title: "Using the API to Trigger Jobs"
+short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
 ---
- 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Running Jobs With the API*
- 
+
+
 This document describes
 how to trigger jobs using the CircleCI API.
 
@@ -47,20 +46,18 @@ For a complete reference of the API,
 see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
 
 **Note:**
-While you can **not** trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API,
-the `config.yml` that contains the job definition
-can still have a `workflows` section.
+It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using a new endpoint, see the Trigger a Build by Project section of the [CircleCI API Projects Documentation]({{ site.baseurl }}/api/v1-reference/#projects).
+
+Jobs triggered with the API may contain a `workflows` section.
 These workflows do **not** have to reference the job
 you trigger with the API.
-
-Jobs triggered with the API
-do **not** have access to environment variables
+Jobs triggered with the API do **not** have access to environment variables
 created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
 Instead, define these variables at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
 ## Conditionally Running Jobs With the API
 
-The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed. 
+The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
 ```yaml
 version: 2
@@ -101,3 +98,7 @@ Notes on the above example:
 
 - Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
+
+## See Also
+
+[Triggers]({{ site.baseurl }}/2.0/triggers/)

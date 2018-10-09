@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Parameterized Builds
 description: Parameterized Builds
+sitemap: false
 ---
 
 The Parameterized Build API allows you to trigger a build using the

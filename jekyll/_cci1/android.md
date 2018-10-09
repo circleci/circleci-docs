@@ -4,6 +4,7 @@ title: Test Android Applications
 short-title: Android
 categories: [build-images]
 description: Testing Android applications on CircleCI
+sitemap: false
 ---
 
 CircleCI supports building and testing Android applications.

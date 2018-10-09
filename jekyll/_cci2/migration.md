@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Migration"
+title: "Tips for Migrating to 2.0"
 description: "Tips for Migrating from 1.0 to CircleCI 2.0 Config"
 ---
 
@@ -34,7 +34,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - Conditionally run commands with `bash` `if` statements
 	- `if [ $CIRCLE_BRANCH = `master` ] ; then ./ci.sh ; fi`
-- Conditionally halt the build at that step with `circleci step halt`
+- Conditionally halt the build at that step with `circleci-agent step halt`
 	- Allows you to use `setup_remote_docker` conditionally by halting
 - The Timezone can be changed just by defining an environment variable
 	- `TZ: /usr/share/zoneinfo/America/New_York`

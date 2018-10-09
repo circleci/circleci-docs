@@ -3,6 +3,7 @@ layout: classic-docs
 title: CircleCI 1.0 Continuous Integration and Delivery with Docker
 categories: [how-to]
 description: Continuous Integration and Delivery with Docker
+sitemap: false
 ---
 
 CircleCI 1.0 offers support for running Docker within build containers. Support for Docker on CircleCI 1.0 is limited to Docker up to version 1.9 and has several limitations. **If you're starting a new project that uses Docker, we strongly recommend using CircleCI 2.0. This documentation is for customers using Docker for existing projects on CircleCI 1.0.**

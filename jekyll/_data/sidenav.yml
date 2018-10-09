@@ -1,0 +1,231 @@
+- name: Welcome
+  link: 
+  icon: docs/welcome.svg
+  children: 
+    - name: Introduction
+      link: 2.0/
+      children: 
+        - name: CI/CD Overview
+          link: 2.0/about-circleci/
+        - name: Supported Languages
+          link: 2.0/demo-apps/
+
+- name: Getting Started
+  icon: docs/start.svg
+  children: 
+    - name: Introduction
+      link: 2.0/getting-started/
+      children: 
+        - name: Sign Up & Try CircleCI
+          link: 2.0/first-steps/
+        - name: Hello World
+          link: 2.0/hello-world/
+        - name: FAQ
+          link: 2.0/faq/
+    - name: Concepts
+      link: 2.0/concepts/
+      children: 
+        - name: Projects and Builds
+          link: 2.0/project-build/
+        - name: Jobs, Steps, and Workflows
+          link: 2.0/jobs-steps/
+        - name: Differences from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Security
+          link: 2.0/security/
+    - name: Migration
+      link: 2.0/migration-intro/
+      children: 
+        - name: Tips for Migrating to 2.0
+          link: 2.0/migration/
+        - name: Migrating a Linux Project
+          link: 2.0/migrating-from-1-2/
+        - name: Migrating an iOS Project
+          link: 2.0/ios-migrating-from-1-2/
+        - name: Using the config-translator
+          link: 2.0/config-translation/
+
+- name: Configuration
+  icon: docs/config.svg
+  children: 
+    - name: Introduction
+      link: 2.0/config-intro/
+      children: 
+        - name: Configuration Reference
+          link: 2.0/configuration-reference/
+        - name: Writing YAML
+          link: 2.0/writing-yaml/
+        - name: Using the CircleCI CLI
+          link: 2.0/local-cli/
+        - name: Testing Config Locally
+          link: 2.0/examples/
+        - name: Reusing Config
+          link: 2.0/reusing-config/                   
+    - name: Examples
+      link: 2.0/examples-intro/
+      children: 
+        - name: Sample config.yml Files
+          link: 2.0/sample-config/
+        - name: Tutorials
+          link: 2.0/tutorials/
+        - name: Database Config Examples
+          link: 2.0/postgres-config/
+        - name: Example Public Repos
+          link: 2.0/example-configs/
+        - name: Testing iOS Applications
+          link: 2.0/testing-ios/
+    - name: EXECUTORS & IMAGES
+      link: 2.0/executor-intro/
+      children: 
+        - name: Choosing an Executor Type
+          link: 2.0/executor-types/
+        - name: CircleCI Docker Images
+          link: 2.0/circleci-images/
+        - name: Using Custom Images
+          link: 2.0/custom-images/
+        - name: Using Private Images
+          link: 2.0/private-images/
+    - name: ADVANCED CONFIG
+      link: 2.0/adv-config/
+      children: 
+        - name: Using Shell Scripts
+          link: 2.0/using-shell-scripts/
+        - name: Setting up Browser Testing
+          link: 2.0/browser-testing/
+        - name: Configuring Databases
+          link: 2.0/databases/
+        - name: Running Docker Commands
+          link: 2.0/building-docker-images/
+        - name: Using Docker Compose
+          link: 2.0/docker-compose/
+
+- name: Projects
+  icon: docs/project.svg
+  children: 
+    - name: settings
+      link: 2.0/settings/
+      children: 
+        - name: GitHub and Bitbucket
+          link: 2.0/gh-bb-integration/
+        - name: Building Open Source Projects
+          link: 2.0/oss/
+        - name: Using Notifications
+          link: 2.0/notifications/
+        - name: Managing API tokens
+          link: 2.0/managing-api-tokens/
+        - name: Using Environment Variables
+          link: 2.0/env-vars/
+        - name: Using Contexts
+          link: 2.0/contexts/
+        - name: Enabling Build Processing
+          link: 2.0/build-processing/  
+        - name: Setting Up iOS Code Signing
+          link: 2.0/ios-codesigning/
+    - name: Optimizations
+      link: 2.0/optimizations/
+      children: 
+        - name: Caching Dependencies
+          link: 2.0/caching/
+        - name: Running Tests in Parallel
+          link: 2.0/parallelism-faster-jobs/
+        - name: Using Docker Layer Caching
+          link: 2.0/docker-layer-caching/
+  
+- name: Jobs
+  icon: docs/builds.svg
+  children: 
+    - name: Status
+      link: 2.0/status/
+      children:
+        - name: Using Containers
+          link: 2.0/containers/
+        - name: Adding Status Badges
+          link: 2.0/status-badges/
+        - name: Storing Build Artifacts
+          link: 2.0/artifacts/
+        - name: Debugging with SSH
+          link: 2.0/ssh-access-jobs/
+        - name: Debugging Java Memory Errors
+          link: 2.0/java-oom/
+        - name: Collecting Test Metadata
+          link: 2.0/collect-test-data/
+        - name: Using Insights
+          link: 2.0/insights/          
+    - name: Triggers
+      link: 2.0/triggers/
+      children: 
+        - name: Skip and Cancel Builds
+          link: 2.0/skip-build/
+        - name: Using the API to Trigger Jobs
+          link: 2.0/api-job-trigger/
+        - name: Using Workflows to Schedule Jobs
+          link: 2.0/workflows/  
+
+- name: Deployment
+  icon: docs/deploy.svg
+  children: 
+    - name: Configuring Deploys
+      link: 2.0/deployment-integrations/
+      children: 
+        - name: Deploying to AWS ECR/ECS
+          link: 2.0/ecs-ecr/
+        - name: Using Yarn on CircleCI
+          link: 2.0/yarn/
+        - name: Publishing Snap Packages
+          link: 2.0/build-publish-snap-packages/
+        - name: Using Artifactory
+          link: 2.0/artifactory/
+        - name: Publishing Packages to packagecloud
+          link: 2.0/packagecloud/
+
+- name: Reference
+  icon: docs/reference.svg
+  children: 
+    - children:
+        - name: Configuration Reference
+          link: 2.0/configuration-reference/
+        - name: API Reference
+          link: api/
+        - name: Prebuilt Images
+          link: 2.0/circleci-images/
+        - name: Glossary
+          link: 2.0/glossary/
+        - name: Help and Support
+          link: 2.0/help-and-support/
+
+- name: Administration
+  icon: docs/admin.svg
+  children: 
+    - name: Overview
+      link: 2.0/overview/
+      children: 
+        - name: Trial
+          link: 2.0/single-box/
+        - name: Faq
+          link: 2.0/admin-faq/
+        - name: Upgrade
+          link: 2.0/upgrading/
+        - name: Security
+          link: 2.0/security/
+        - name: Certificates
+          link: 2.0/certificates/
+        - name: Proxies
+          link: 2.0/proxy/
+        - name: Installation
+          link: 2.0/aws/
+        - name: Authentication
+          link: 2.0/authentication/
+        - name: Monitoring
+          link: 2.0/monitoring/
+        - name: Nomad
+          link: 2.0/nomad/
+        - name: Backup
+          link: 2.0/backup/
+        - name: Troubleshooting
+          link: 2.0/troubleshooting/
+        - name: GPU Builders
+          link: 2.0/gpu/
+        - name: Configuring VM Service
+          link: 2.0/vm-service/
+        - name: Acknowledgments
+          link: 2.0/open-source/

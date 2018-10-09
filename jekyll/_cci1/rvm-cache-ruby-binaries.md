@@ -3,6 +3,7 @@ layout: classic-docs
 title: Caching Compiled Rubies with RVM
 description: Caching Compiled Rubies with RVM
 last_updated: January 25, 2017
+sitemap: false
 ---
 
 We get requests to install different Ruby versions into our images.  It takes some time to update, test, and roll out images into our build fleet, and our current Ubuntu 12 image has 81 preinstalled Ruby versions, in response to user requests.

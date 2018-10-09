@@ -3,6 +3,7 @@ layout: classic-docs
 title: Test with Sphinx
 categories: [how-to]
 description: How to test with Sphinx
+sitemap: false
 ---
 
 If your tests require a running Sphinx server you will need to configure and

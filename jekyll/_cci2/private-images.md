@@ -7,9 +7,7 @@ categories: [containerization]
 order: 50
 ---
 
-*[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Using Private Images*
-
-To use private images, specify the username and password in the `auth` field.  To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:
+To use private Docker images, specify the username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.  To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:
 
 ```yaml
 jobs:
@@ -116,3 +114,7 @@ workflows:
             tags:
               only: /^\d{4}\.\d+$/
 ```
+
+## See Also
+
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)

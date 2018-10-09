@@ -3,6 +3,7 @@ layout: classic-docs
 title: Why does CircleCI need all those permissions?
 description: CircleCI permissions explanation 
 last_updated: Feb 3, 2013
+sitemap: false
 ---
 
 We would love to ask for less permissions than we do, but

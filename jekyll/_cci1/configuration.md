@@ -4,6 +4,7 @@ title: Configuring CircleCI 1.0
 categories: [configuration-tasks]
 description: How to configure CircleCI 1.0
 order: 20
+sitemap: false
 ---
 
 CircleCI automatically infers settings from your code, so it's possible you won't need to add any custom configuration. If you _do_ need to tweak settings, you can create a `circle.yml` in your project's root directory and CircleCI will read it each time it runs a build. Use the following sections to set up your `circle.yml` file.

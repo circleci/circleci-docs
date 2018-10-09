@@ -3,6 +3,7 @@ layout: classic-docs
 title: "ChromeDriver raises an 'Element is not clickable' exception"
 description: "'Element is not clickable' issue with ChromeDriver"
 last_updated: Aug 7, 2013
+sitemap: false
 ---
 
 This can be caused by the small delay between ChromeDriver determining the

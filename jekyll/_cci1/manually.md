@@ -4,6 +4,7 @@ title: Overview
 categories: [configuration-tasks]
 description: Overview of manual build setup
 order: 1
+sitemap: false
 ---
  
 CircleCI is designed to set up most tests automatically because we infer your settings from your code.

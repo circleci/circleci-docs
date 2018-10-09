@@ -4,6 +4,7 @@ title: Continuous Deployment with AWS EC2 Container Service
 short-title: Continuous Deployment with AWS ECS
 categories: [how-to]
 description: "How to continuously deploy your application using AWS EC2 Container Service, AWS Container Registry, and CircleCI."
+sitemap: false
 ---
 
 Go (Golang) is an increasing popular language for scalable webapps. In that 

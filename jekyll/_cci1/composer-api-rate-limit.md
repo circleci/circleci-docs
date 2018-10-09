@@ -2,6 +2,7 @@
 layout: classic-docs
 title: Composer hitting GitHub API rate limits
 description: GitHub API rate limits as composer
+sitemap: false
 ---
 
 *Note that this only applies when setting up your Composer step manually -

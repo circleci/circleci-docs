@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Basics"
 description: "Basics"
 ---
-![header]( {{ site.baseurl }}/assets/img/docs/new_header.png)
+
 
 Get started by learning about the basic concepts used in CircleCI.
 

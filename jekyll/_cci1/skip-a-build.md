@@ -4,6 +4,7 @@ title: CircleCI 1.0 Skipping a build
 categories: [configuration-tasks]
 description: How to skip a build
 order: 65
+sitemap: false
 ---
 
 CircleCI supports the `[ci skip]` or `[skip ci]` standard for ignoring builds.

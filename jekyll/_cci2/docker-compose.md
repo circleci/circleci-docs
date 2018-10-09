@@ -7,9 +7,12 @@ categories: [containerization]
 order: 40
 ---
 
-*[Docker, Machine, and iOS Builds]({{ site.baseurl }}/2.0/build/) > Installing and Using docker-compose*
+This document describes how to install and use `docker-compose`.
 
-`docker-compose` is [pre-installed in the CircleCI convenience images][pre-installed]. If you're using another image then you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your `config.yml` file:
+* TOC 
+{:toc}
+
+The `docker-compose` utility is [pre-installed in the CircleCI convenience images][pre-installed]. If you're using another image, you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
 ``` 
 - run:
@@ -52,6 +55,9 @@ In the following example, the whole system starts, then verifies it is running a
             docker run --network container:contacts \
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
+
+## Example Project
+
 See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. 
 
 **Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network. 
@@ -65,4 +71,9 @@ If you want to use docker compose to manage a multi-container setup with a docke
 
 Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host. 
 
-This combination is required if you want to build docker images for deployment. See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
+This combination is required if you want to build docker images for deployment. 
+
+## See Also
+{:.no_toc}
+
+See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.

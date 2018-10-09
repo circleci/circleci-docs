@@ -6,7 +6,6 @@ description: "Listing of available images maintained by CircleCI"
 categories: [containerization]
 order: 20
 ---
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Pre-Built CircleCI Docker Images*
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
 
@@ -14,21 +13,17 @@ This document provides information about pre-built CircleCI images and a listing
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 For convenience,
 CircleCI maintains several Docker images.
-These images are extensions of official Docker images
+These images are typically extensions of official Docker images
 and include tools especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/).
 Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/circleci/circleci-images).
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
 
-For a brief overview,
-watch the video below.
-
-<div class="video-wrapper">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
-</div>
+_**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
 
 ## Best Practices
 
@@ -56,6 +51,7 @@ to pin an image to a version or operating system (OS).
 to pin an image to a fixed version.
 
 ### Using an Image Tag to Pin an Image Version or OS
+{:.no_toc}
 
 You can pin aspects of a Docker image
 by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
@@ -80,6 +76,7 @@ it is best practice
 to add an explicit image tag.
 
 ### Using a Docker Image ID to Pin an Image to a Fixed Version
+{:.no_toc}
 
 Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
 You can use this image ID
@@ -93,6 +90,7 @@ sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
 ```
 
 #### Finding an Image ID
+{:.no_toc}
 
 1. In the CircleCI application,
 go to a past build
@@ -120,6 +118,7 @@ it is [best practice](#best-practices)
 to use a more specific tag.
 
 ### Language Images
+{:.no_toc}
 
 Language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
@@ -138,20 +137,24 @@ CircleCI maintains images for the languages below.
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
+- [Rust](#rust)
 
 If your language is not listed,
 CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
 you can use to create a custom image.
 
 #### Language Image Variants
+{:.no_toc}
 
 CircleCI maintains several variants for language images.
 To use these variants,
 add one of the following suffixes to the end of an image tag.
 
 - `-node` includes Node.js for polyglot applications
-- `-browsers` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
+- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
 - `-node-browsers` combines the `-node` and `-browsers` variants
+- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
 For example,
 if you want
@@ -159,6 +162,7 @@ to add browsers to the `circleci/golang:1.9` image,
 use the `circleci/golang:1.9-browsers` image.
 
 ### Service Images
+{:.no_toc}
 
 Service images are convenience images for services like databases.
 These images should be listed **after** language images
@@ -167,12 +171,15 @@ so they become secondary service containers.
 CircleCI maintains images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
+- [DynamoDB](#dynamodb)
 - [MariaDB](#mariadb)
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
+- [Redis](#redis)
 
 #### Service Image Variant
+{:.no_toc}
 
 CircleCI maintains only one variant for service images.
 To speed up builds
@@ -244,14 +251,18 @@ that a given tag has the same meaning across images!
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
 {% for tag in tags %}
-<li>{{ tag }}</li>
+	{% unless tag contains "-browsers" or tag contains "-node" %}
+	<li>{{ tag }}</li>
+	{% endunless %}
 {% endfor %}
 </ul>
+<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
 
 ---
 
 {% endfor %}
 
 ## See Also
+{:.no_toc}
 
 See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.

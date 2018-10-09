@@ -5,6 +5,7 @@ short-title: Setting Up iOS applications on CircleCI
 categories: [configuration-tasks]
 description: Setting Up iOS applications on CircleCI
 order: 70
+sitemap: false
 ---
 
 To get your build running on CircleCI, you first need to [add your project to CircleCI](https://circleci.com/projects){:rel="nofollow"}. Once you’ve done this, GitHub/Bitbucket will start notifying us of changes to your repository so we can perform builds.

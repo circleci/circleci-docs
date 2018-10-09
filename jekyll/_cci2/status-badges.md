@@ -1,9 +1,8 @@
 ---
 layout: classic-docs
-title: Embedding Build Status Badges
+title: Adding Status Badges
+description: How to embed a CircleCI status badge in any web page or document
 ---
-
-[Basics]({{ site.baseurl }}/2.0/basics/) > Embedding Build Status Badges
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
@@ -48,3 +47,7 @@ you can use the [shield style](https://shields.io/).
 To use the shield style,
 replace `style=svg` with `style=shield`
 in the link you generated above.
+
+## See Also
+
+[Status]({{ site.baseurl }}/2.0/status/)

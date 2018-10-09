@@ -1,20 +1,20 @@
 ---
 layout: classic-docs
-title: "2.0 Sample Applications"
-short-title: "Demo App Index"
+title: "Supported Languages"
+short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"
 categories: [language-guides]
 order: 0
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > 2.0 Sample Applications*
-
-Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve created several demo applications in various languages, so you can learn by example form an app written in the same laguage as your application. Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
+Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve created several demo applications in various languages, so you can learn by example from an app written in the same laguage as your application. Each language listed below has an associated guide and public repository on GitHub. Fork them and follow along!
 
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
+ [Android]({{ site.baseurl }}/2.0/language-android/){:target="_blank"} | Gradle | 
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Clojure]{:target="_blank"} | Luminus | [circleci-demo-clojure-luminus]{:target="_blank"}
+ [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/teesloane/circleci-demo-crystal)
  [Elixir]{:target="_blank"} | Phoenix | [circleci-demo-elixir-phoenix]{:target="_blank"}
  [Go]{:target="_blank"} | Go | [circleci-demo-go]{:target="_blank"}
  [iOS]{:target="_blank"} | Xcode | [circleci-demo-ios]{:target="_blank"}
@@ -26,6 +26,7 @@ Language Guide | Framework | GitHub Repo Name
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/){:target="_blank"} | Flask | [circleci-demo-python-flask]{:target="_blank"}
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Ruby and Rails]{:target="_blank"} | Rails | [circleci-demo-ruby-rails]{:target="_blank"}
+ [Scala]({{ site.baseurl }}/2.0/language-scala/){:target="_blank"} | sbt | [samplescala](https://github.com/ariv3ra/samplescala){:target="_blank"}
 {: class="table"}
 
 ## Supported Languages
@@ -38,8 +39,13 @@ Language Guide | Framework | GitHub Repo Name
 - Python (Python 2 and later)
 - React Native
 - Ruby and Rails (Ruby 2 and later)
+- Scala and sbt
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
+
+## See Also
+
+Refer to the [Getting Started Introduction] for the steps to run your first build.
 
 
 [Android]: {{ site.baseurl }}/2.0/language-android/

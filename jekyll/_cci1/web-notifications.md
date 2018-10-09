@@ -5,6 +5,7 @@ short-title: Activating Web Notifications
 categories: [configuration-tasks]
 description: How to activate web notifications for build results
 order: 40
+sitemap: false
 ---
 
 ## Turning On Build Notifications

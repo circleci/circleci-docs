@@ -3,6 +3,7 @@ layout: classic-docs
 title: An important file is missing from your repository
 description: What to do when an important file is missing from your repository
 last_updated: Feb 3, 2013
+sitemap: false
 ---
 
 Developers commonly omit certain files from their repositories, especially files containing application settings, passwords and API keys.

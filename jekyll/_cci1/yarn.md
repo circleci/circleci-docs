@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Using Yarn (the npm replacement) on CircleCI"
 short-title: "Yarn Package Manager"
 categories: [how-to]
+sitemap: false
 description: "How to use the Yarn package manager on CircleCI."
 ---
 

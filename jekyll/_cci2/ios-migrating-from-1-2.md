@@ -7,8 +7,6 @@ categories: [platforms]
 order: 10
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Migrating your iOS project from 1.0 to 2.0*
-
 This document will give you the guidelines for migrating your iOS
 project from CircleCI 1.0 to 2.0.
 
@@ -130,6 +128,7 @@ before you push a 2.0 `.circleci/config.yml` file to your CircleCI iOS
 project.
 
 ### Gemfile
+{:.no_toc}
 
 We suggest that you add a Gemfile to your iOS project if you don't have
 one already. Checking in a Gemfile and using Bundler to install and run
@@ -147,6 +146,7 @@ gem 'cocoapods'
 ```
 
 ### Setting up Code Signing With Fastlane Match
+{:.no_toc}
 
 Check out our [code signing guide]({{ site.baseurl
 }}/2.0/ios-codesigning) for the exact steps for setting up code signing
@@ -158,6 +158,7 @@ The following sections provide examples of 2.0 configuration syntax for an iOS p
 }}/2.0/config-translation). If your 1.0 project does **not** have a `circle.yml` file, the [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) provides a script to generate an initial config file from your 1.0 project.
 
 ### Job Name and Xcode Version
+{:.no_toc}
 
 In the 2.0 `.circleci/config.yml` file the first few lines specify the
 name of the job and the Xcode version to use:
@@ -176,6 +177,7 @@ jobs:
 ```
 
 ### Build Steps Key
+{:.no_toc}
 
 The top-level `steps` key contains all the build steps that will be run
 for a particular job:
@@ -192,6 +194,7 @@ You can see all the available step types in the [Configuring CircleCI]({{ site.b
 **Note:** Docker support is not available in the macOS builds.
 
 ### Checking out the Project Code
+{:.no_toc}
 
 One of the first items under `steps` will be the code checkout step:
 
@@ -203,6 +206,7 @@ jobs:
 ```
 
 ### Caching Ruby Gems Installed With Bundler
+{:.no_toc}
 
 In CircleCI 2.0, cache save and cache restore are based on a _cache
 key_. Here is how you can cache the Ruby gems based on the content of
@@ -243,6 +247,7 @@ more information about cache keys and other available key options
 beyond `checksum`.
 
 ### Installing CocoaPods
+{:.no_toc}
 
 If you are already checking your [CocoaPods](https://cocoapods.org/) _into_
 your repository, there is no need to do anything in this step—your
@@ -278,6 +283,7 @@ for more details on checking your pods into the repo instead of installing them
 in your config.
 
 ### Running Tests
+{:.no_toc}
 
 It is possible to use [Fastlane
 Scan](https://github.com/fastlane/fastlane/tree/master/scan) to run your
@@ -314,6 +320,7 @@ jobs:
 ```
 
 ### Storing Artifacts, Test Results, and Diagnostic Files
+{:.no_toc}
 
 CircleCI 2.0 does not automatically collect artifacts in your jobs,
 so if your {% comment %} TODO: Job {% endcomment %}build is generating files that you would like to access with
@@ -342,6 +349,7 @@ Find more details about these steps in the
 [Test Metadata doc]({{ site.baseurl}}/2.0/collect-test-data/).
 
 ### Deployment Using Workflows
+{:.no_toc}
 
 With the availability of Workflows in 2.0, it is best practice to
 extract all the commands related to the deployment of the app into

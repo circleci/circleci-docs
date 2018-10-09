@@ -3,132 +3,43 @@ layout: classic-docs
 title: CircleCI API v1.1 Reference
 categories: [reference]
 description: Using the CircleCI API
+regenerate: true
 ---
 
-The CircleCI API is a fully-featured JSON API that allows you to access all information and trigger all actions in CircleCI. **Note:** The following limitations exist:
-
-- Access to billing functions is only available from the CircleCI application.
-- Triggering workflows is not yet supported in the API.
-
-CircleCI 1.0 and 2.0 are supported by API version `1.1` as documented in the following sections:
+The CircleCI API v1.x is a JSON API that allows you to access information and trigger actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
 
 * TOC
 {:toc}
 
-## Summary
+## Endpoint Summary
 
 All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.
 
-<dl>
-<dt>
-  GET: /me
-</dt>
-<dd>
-  Provides information about the signed in user.
-</dd>
-<dt>
-  GET: /projects
-</dt>
-<dd>
-  List of all the projects you're following on CircleCI, with build information organized by branch.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/follow
-</dt>
-<dd>
-  Follow a new project on CircleCI.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project
-</dt>
-<dd>
-  Build summary for each of the last 30 builds for a single git repo.
-</dd>
-<dt>
-  GET: /recent-builds
-</dt>
-<dd>
-  Build summary for each of the last 30 recent builds, ordered by build_num.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/:build_num
-</dt>
-<dd markdown="1">
-  Full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/:build_num/artifacts
-</dt>
-<dd>
-  List the artifacts produced by a given build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/retry
-</dt>
-<dd>
-  Retries the build, returns a summary of the new build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/cancel
-</dt>
-<dd>
-  Cancels the build, returns a summary of the build.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/:build_num/ssh-users
-</dt>
-<dd>
-  Adds a user to the build's SSH permissions.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/tree/:branch
-</dt>
-<dd markdown="1">
-  Triggers a new build, returns a summary of the build. [Optional 1.0 build parameters can be set as well]( {{ site.baseurl }}/1.0/parameterized-builds/) and [Optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api).
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/ssh-key
-</dt>
-<dd>
-  Create an ssh key used to access external systems that require SSH key-based authentication
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/checkout-key
-</dt>
-<dd>
-  Lists checkout keys.
-</dd>
-<dt>
-  POST: /project/:vcs-type/:username/:project/checkout-key
-</dt>
-<dd>
-  Create a new checkout key.
-</dd>
-<dt>
-  GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
-</dt>
-<dd>
-  Get a checkout key.
-</dd>
-<dt>
-  DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint
-</dt>
-<dd>
-  Delete a checkout key.
-</dd>
-<dt>
-  DELETE: /project/:vcs-type/:username/:project/build-cache
-</dt>
-<dd>
-  Clears the cache for a project.
-</dd>
-<dt>
-  POST: /user/heroku-key
-</dt>
-<dd>
-  Adds your Heroku API key to CircleCI, takes apikey as form param name.
-</dd>
-</dl>
+<table class="table table-striped table-hover">
+	<thead class="thead-light"><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+{% assign apis = site.data.api | sort: url %}
+{%- for endpoint in apis %}
+	{%- unless endpoint[1].url contains "/project/:vcs-type/:username/:project" %}
+	<tr>
+		<td>{{ endpoint[1].url | remove: "/api/v1.1" }}</td>
+		<td>{{- endpoint[1].method -}}</td>
+		<td>{{- endpoint[1].description -}}</td>
+	</tr>
+	{%- endunless -%}
+{% endfor %}
+	<thead class="thead-light"><tr><th>Endpoint</th><th>Method</th><th>Description</th></tr></thead>
+<tr><td colspan="3">Project endpoints below should be prefixed with <code>/api/v1.1/project/:vcs-type/:username/:project</code></td></tr>
+{%- for endpoint in apis %}
+	{%- if endpoint[1].url contains "/project/:vcs-type/:username/:project" -%}
+	<tr>
+		<td>{{ endpoint[1].url | remove: "/api/v1.1/project/:vcs-type/:username/:project" }}</td>
+		<td>{{- endpoint[1].method -}}</td>
+		<td>{{- endpoint[1].description -}}</td>
+	</tr>
+	{%- endif -%}
+{% endfor %}
+</table>
+
 
 ## Getting Started
 
@@ -192,6 +103,19 @@ This is the GitHub or Bitbucket project account username for the target project 
 
 If you have a Free / Open Source Software ([F/OSS](https://www.gnu.org/philosophy/free-sw.html)) project, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
+## List Ordering
+
+There are two API endpoints
+where the list order is significant:
+
+- [Recent Builds Across All Projects](#recent-builds)
+- [Recent Builds For a Project](#recent-builds-project)
+
+In both cases,
+builds are returned in the order that they were created.
+For all other endpoints,
+the order has no special significance.
+
 ## Accept header
 
 If you specify no accept header, we'll return human-readable JSON with comments.
@@ -229,9 +153,9 @@ You can narrow the builds to a single branch by appending /tree/:branch to the u
 
 The branch name should be url-encoded.
 
-<h2 id="build">Single Build</h2>
+<h2 id="build">Single Job</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'.
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/1.0/configuration/#notify), in which case this object is the value to a key named 'payload'. 
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -278,7 +202,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.cancel_build | api_endpoint }}
 
-<h2 id="new-build">Trigger a new Build</h2>
+<h2 id="new-build">Trigger a new Job</h2>
 
 {{ site.data.api.project_post | api_endpoint }}
 
@@ -287,6 +211,12 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 <span class='label label-info'>Note:</span> For more about build parameters, read about [using 1.0 parameterized builds]( {{ site.baseurl }}/1.0/parameterized-builds/) and [optional 2.0 build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for "failed" should be a boolean `true` or `null`.
 
 {{ site.data.api.project_branch | api_endpoint }}
+
+<h2 id="new-project-build">Trigger a new Build by Project (preview)</h2>
+
+<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/2.0/build-processing/). This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
+
+{{ site.data.api.project_build | api_endpoint }}
 
 <h2 id="clear-cache">Clear Cache</h2>
 

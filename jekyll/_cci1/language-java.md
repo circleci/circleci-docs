@@ -4,6 +4,7 @@ title: Continuous Integration and Continuous Deployment with Java
 short-title: Java
 categories: [languages]
 description: Continuous Integration and Continuous Deployment with Java
+sitemap: false
 ---
 
 CircleCI supports building Java applications using most common JDKs and build tools.

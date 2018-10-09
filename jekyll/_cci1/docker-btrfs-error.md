@@ -3,6 +3,7 @@ layout: classic-docs
 title: Docker Btrfs volume error
 last_updated: Mar 29, 2016
 description: Docker Btrfs issue
+sitemap: false
 ---
 
 When you build a Docker image on CircleCI, you will see the following strange error:

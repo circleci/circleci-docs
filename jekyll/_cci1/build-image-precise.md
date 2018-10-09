@@ -4,6 +4,7 @@ title: Ubuntu 12.04 (Precise)
 categories: [build-images]
 description: Ubuntu 12.04 (Precise)
 changefreq: "yearly"
+sitemap: false
 ---
 
 <div class="alert alert-danger" markdown="1">

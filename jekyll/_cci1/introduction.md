@@ -5,6 +5,7 @@ short-title: Introduction to CircleCI
 categories: [getting-started]
 description: "An introduction to Continuous Integration, Continuous Deployment, and how CircleCI can help."
 order: 10
+sitemap: false
 ---
 
 CircleCI acts as a platform for both [Continuous Integration][wiki-ci] and Continuous Deployment.

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Customizing Build Environments
 categories: [build-images]
 description: How to install custom software
+sitemap: false
 ---
 
 The CircleCI environment provides the libraries, languages, and databases needed for most development work.

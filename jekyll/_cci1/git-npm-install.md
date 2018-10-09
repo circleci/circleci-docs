@@ -3,6 +3,7 @@ layout: classic-docs
 title: Git errors during npm install
 description: Git errors during npm install
 last_updated: Sep 16, 2013
+sitemap: false
 ---
 
 When your tests run, during the

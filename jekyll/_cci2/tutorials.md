@@ -1,26 +1,12 @@
 ---
 layout: classic-docs
-title: "Tutorials & 2.0 Sample Apps"
+title: "Tutorials"
 description: "Tutorials and 2.0 Sample Apps with Guides"
 ---
-Watch the video to learn about how to use CircleCI convenience images.
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allowfullscreen></iframe>
-</div>
 
-## Hello World and Sample Files
-
-Use the Hello World document and sample `config.yml` files to start configuring your build.
-
-Document | Description
-----|----------
-<a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.
-<a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using parallel Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
-{: class="table table-striped"}
+Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
 
 ## Tutorials 
-
-Use the tutorial associated with your platform to learn about the customization that is possible in a `.circleci/config.yml`.
 
 Platform Guide | Description
 ----|----------
@@ -38,13 +24,14 @@ Language in which your App is written | Framework | GitHub Repo Name
  [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
+ [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/teesloane/circleci-demo-crystal)
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
  [iOS] | Xcode | [circleci-demo-ios]
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Java] | Spring | [circleci-demo-java-spring]
- [JavaScript] | React | [circleci-demo-javascript-express]
  [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
+ [NodeJS - JavaScript] | React | [circleci-demo-javascript-express]
  [PHP] | Laravel | [circleci-demo-php-laravel]
  [Python] | Django | [circleci-demo-python-django]
  [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
@@ -79,7 +66,7 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 [Go]: {{ site.baseurl }}/2.0/language-go/
 [iOS]: {{ site.baseurl }}/2.0/ios-tutorial/
 [Java]: {{ site.baseurl }}/2.0/language-java/
-[JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
+[NodeJS - JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
 [Python]: {{ site.baseurl }}/2.0/language-python/
 [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
@@ -99,6 +86,12 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 [sample-scala]: https://github.com/ariv3ra/samplescala
 
 
-We’re thrilled to have you here. Happy building!
+## See Also
 
-_The CircleCI Team_
+Use the Hello World document and sample `config.yml` files to start configuring your build.
+
+Document | Description
+----|----------
+<a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.
+<a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using parallel Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
+{: class="table table-striped"}

@@ -10,6 +10,8 @@ This guide focuses on getting you started with the core of the CircleCI experien
 {:toc}
 
 ## Getting Started with CircleCI Config
+{:.no_toc}
+
 This guide describes how CircleCI finds and runs `config.yml` and how you can use shell commands to do things, then it outlines how `config.yml` can interact with code and kick-off a build
 followed by how to use docker containers to run in precisely the environment that you need. Finally, there is a short exploration of workflows so you can learn to orchestrate your build, tests, security scans, approval steps, and deployment.
 
@@ -42,6 +44,8 @@ jobs:
 Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
 
 ### Learnings
+{:.no_toc}
+
 The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in details
 
 - Line 1: This indicates the version of the CircleCI platform you are using.  2.0 is the most recent version.
@@ -80,6 +84,7 @@ jobs:
 ```
 
 ### Learnings
+{:.no_toc}
 Although we’ve only made two small changes to the config, these represent significant organizational concepts.
 
 - Line 7: The `checkout` command is an example of a built-in reserved word that contextualizes your job.  In this case, it is pulling down your code so you can start a build.
@@ -120,6 +125,8 @@ jobs:
 We also added a small `run` block that demonstrates we are running in a node container.
 
 ### Learnings
+{:.no_toc}
+
 The above two changes to the config significantly affect how you get work done.  By associating a docker container to a job and then dynamically running the job in the container, you don’t need to perform special magic or operational gymnastics to upgrade, experiment or tune the environment you run in.  With a small change you can dramatically upgrade a mongo environment, grow or shrink the base image, or even change languages.
 
 - Line 4: Here we see a comment in-line in yml.  Like any other unit of code, comments are a useful tool as config gets complicated.
@@ -196,6 +203,8 @@ workflows:
 ```
 
 ### Learnings
+{:.no_toc}
+
 We now know how to create a workflow including a manual gate that you can use to protect promotion of expensive interactions.
 
 - Line 3: The command that echo’s `Hello World!` has been turned in a full fledged job with the name Hello-World
@@ -207,3 +216,8 @@ We now know how to create a workflow including a manual gate that you can use to
 
 
 The examples above were designed to provide a quick starter to the areas of functionality available through CircleCI config.  There remains a lot more.  Take a look at the rest of the documentation.  You will find that scheduled jobs, workspaces, artifacts, and more are all simple variations on the concepts you’ve learned here.  Now go forth and automate your CI/CD world!
+
+## See Also
+{:.no_toc}
+
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)

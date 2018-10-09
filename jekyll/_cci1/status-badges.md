@@ -3,6 +3,7 @@ layout: classic-docs
 title: Embeddable status badges
 categories: [reference]
 description: Embeddable status badges
+sitemap: false
 ---
 
 We provide project and branch status images, which you can embed anywhere you want: a GitHub

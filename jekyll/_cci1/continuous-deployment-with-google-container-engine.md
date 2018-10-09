@@ -4,6 +4,7 @@ title: Continuous Deployment with Google Container Engine
 short-title: Continuous Deployment with GKE
 categories: [how-to]
 description: "How to continuously deploy your application using Google Container Engine, Google Container Registry, and CircleCI."
+sitemap: false
 ---
 
 ## Introduction

@@ -3,6 +3,7 @@ layout: classic-docs
 title: Continuous Deployment to IBM Bluemix and Pivotal Web Service
 categories: [how-to]
 description: Continuous Deployment to IBM Bluemix and Pivotal Web Service
+sitemap: false
 ---
 
 Bluemix is a PaaS offering from IBM, and PWS is a PaaS offering from

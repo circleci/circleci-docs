@@ -8,8 +8,6 @@ hide: true
 order: 60
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Using the 1.0 to 2.0 config-translation Endpoint*
-
 This document provides instructions for using the `config-translation` endpoint to generate a basic working CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages:
 * Ruby
 * PHP
@@ -47,3 +45,8 @@ The `config-translator` endpoint does **not** currently support translation of t
      curl "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop"
      ```
       The default is to use the default branch that is set in your VCS, typically `master`.
+      
+## See Also
+
+ [Tips For Migrating from 1.0 to 2.0]({{site.baseurl}}/2.0/migration/)
+

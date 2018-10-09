@@ -3,6 +3,7 @@ layout: classic-docs
 title: Test with Solr
 categories: [how-to]
 description: How to test with Solr
+sitemap: false
 ---
 
 If your tests require a running solr instance, you will need to configure

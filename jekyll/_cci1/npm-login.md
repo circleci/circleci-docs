@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Using npm login on CircleCI"
 short-title: "npm login"
 description: "How to get npm login to work in an environment like CircleCI."
+sitemap: false
 ---
 
 When using `npm` to install a private module in a continuous integration 
