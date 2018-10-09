@@ -82,6 +82,13 @@ A beta feature is to configure Telegraf by going to Replicated Admin > Settings 
 ![Custom](  {{ site.baseurl }}/assets/img/docs/metrics_custom1.png)
 
 ##### Configuration
+Following are the metrics that are enabled:
+- [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
+- [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
+- [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
+- [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields)
+- [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
+- [Nomad Metrics](https://circleci.com/docs/2.0/nomad-metrics/#statsd-metrics)
 
 Configuration options are based on Telegraf's documented output plugins. See their documentation [here](https://github.com/influxdata/telegraf#output-plugins).
 
