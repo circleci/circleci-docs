@@ -187,7 +187,7 @@ Workflow では、`type: approval` キーを利用することで、ジョブを
 
 ## Workflow をスケジュール実行する
 
-ブランチひとつひとつに毎回コミットするたび Workflow を実行するのは非効率で手間もかかります。解決するためには、特定のブランチを決まった時間に実行するよう Workflow をスケジューリングします。
+It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 膨大なリソースを使用する Workflow、あるいは `triggers` キーを利用してコミット時以外にも定期的にリポートを生成するような Workflow を考えてみます。 `triggers` キーを挿入できるのは `workflows` キーの配下**のみ**となります。 この機能は、指定したブランチについて、協定世界時 (UTC) を扱う `cron` コマンドの構文で Workflow の実行をスケジューリングできるようにします。
 
