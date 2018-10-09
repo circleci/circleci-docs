@@ -11,21 +11,7 @@ This document is for System Administrators who are setting environment variables
 
 ## Advanced System Monitoring
 
-Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings > Metrics, for example `https://example.com:8800/settings#metrics`. Then, click Enable Metrics. ![Enable Metrics]({{ site.baseurl }}/assets/img/docs/enable_metrics1.png)
-
-### Supported Platform(s)
-
-Currently, only AWS CloudWatch is supported. Click AWS CloudWatch to begin configuration. ![AWS CloudWatch]({{ site.baseurl }}/assets/img/docs/enable_metrics2.png)
-
-### Configuration
-
-There are two options for configuration:
-
-- Use the IAM Instance Profile of the services box and configure your custom region and namespace. ![Configuration IAM]({{ site.baseurl }}/assets/img/docs/enable_metrics3a.png)
-
-- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace. ![Configuration Alt]({{ site.baseurl }}/assets/img/docs/enable_metrics3b.png)
-
-Verify that metrics are forwarding by going to the AWS CloudWatch console.
+Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings and enabling the provider of your choice, for example `https://example.com:8800/settings#cloudwatch_metrics`.
 
 ### Metrics Details
 
@@ -33,7 +19,69 @@ Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.
 
 Following are the metrics that are enabled: - [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements) - [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics) - [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics) - [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields) - [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
-Metrics such as `cpu_time` & `docker_swarm` can be toggled on or off in your config file.
+#### Nomad Job Metrics
+
+In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics) are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
+
+`circle.nomad.server_agent.poll_failure`: Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0. `circle.nomad.server_agent.jobs.pending`: Returns the total number of pending jobs across the cluster. `circle.nomad.server_agent.jobs.running`: Returns the total number of running jobs across the cluster. `circle.nomad.server_agent.jobs.complete`: Returns the total number of complete jobs across the cluster. `circle.nomad.server_agent.jobs.dead`: Returns the total number of dead jobs across the cluster.
+
+When the Nomad Metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
+
+### Supported Platform(s)
+
+There are two built-in platforms; AWS CloudWatch and DataDog.
+
+#### AWS CloudWatch
+
+Click `Enable' under AWS CloudWatch to begin configuration. ![AWS CloudWatch]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch1.png)
+
+##### Configuration
+
+There are two options for configuration:
+
+- Use the IAM Instance Profile of the services box and configure your custom region and namespace. ![Configuration IAM]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
+
+- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace. ![Configuration Alt]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
+
+After saving you can *verify* that metrics are forwarding by going to the AWS CloudWatch console.
+
+#### DataDog
+
+Click `Enable' under DataDog Metrics to begin configuration.
+
+![DataDog]({{ site.baseurl }}/assets/img/docs/metrics_datadog1.png)
+
+##### Configuration
+
+Enter your DataDog API Key.
+
+![DataDog]({{ site.baseurl }}/assets/img/docs/metrics_datadog2.png)
+
+After saving you can *verify* that metrics are forwarding by going to the DataDog metrics summary.
+
+#### Custom Metrics *(beta)*
+
+A beta feature is to configure Telegraf by going to Replicated Admin > Settings > Custom Metrics and enabling the custom option, for example `https://example.com:8800/settings#custom_metrics`.
+
+![Custom]({{ site.baseurl }}/assets/img/docs/metrics_custom1.png)
+
+##### Configuration
+
+Configuration options are based on Telegraf's documented output plugins. See their documentation [here](https://github.com/influxdata/telegraf#output-plugins).
+
+For example, if you would like to use the InfluxDB Output Plugin the configuration would look like the following.
+
+![Custom]({{ site.baseurl }}/assets/img/docs/metrics_custom2.png)
+
+Additionally, if you would like to ensure that all metrics in an installation are tagged against an environment you could place the following code in your config:
+
+    [global_tags]
+    Env="<staging-circleci>"
+    
+
+Please see the InfluxDB [documenation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
+
+Note: Any changes to the config will require a restart of the system.
 
 ## Scheduled Scaling
 
