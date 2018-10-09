@@ -132,4 +132,4 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 ## See Also
 {:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
+Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
