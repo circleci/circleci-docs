@@ -137,6 +137,7 @@ CircleCI maintains images for the languages below.
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
+- [Rust](#rust)
 
 If your language is not listed,
 CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
@@ -170,10 +171,12 @@ so they become secondary service containers.
 CircleCI maintains images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
+- [DynamoDB](#dynamodb)
 - [MariaDB](#mariadb)
 - [MongoDB](#mongodb)
 - [MySQL](#mysql)
 - [PostgreSQL](#postgresql)
+- [Redis](#redis)
 
 #### Service Image Variant
 {:.no_toc}
@@ -248,9 +251,12 @@ that a given tag has the same meaning across images!
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
 {% for tag in tags %}
-<li>{{ tag }}</li>
+	{% unless tag contains "-browsers" or tag contains "-node" %}
+	<li>{{ tag }}</li>
+	{% endunless %}
 {% endfor %}
 </ul>
+<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
 
 ---
 
