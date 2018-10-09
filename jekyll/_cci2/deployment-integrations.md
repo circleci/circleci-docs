@@ -368,6 +368,7 @@ kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"c
 
 The full `deploy.sh` file is available on
 [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
+A CircleCI 2.0 Google Cloud deployment example project is also available [here](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app).
 
 ## Heroku
 
