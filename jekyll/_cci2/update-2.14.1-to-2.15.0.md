@@ -6,8 +6,9 @@ order: 12
 description: "How to upgrading MongoDB from 3.2 to 3.6 when using externalized MongoDB"
 ---
 
-This document provides links to instructions for upgrading MongoDB to v3.6. If you are running an external MongoDB with your CircleCI installation, this MongoDB upgrade is required for use with CircleCI v2.15.0.
+If you are running an external MongoDB with your CircleCI installation, multiple MongoDB upgrades are required for use with CircleCI v2.15.0. Work with a CircleCI Solutions Engineer to complete the required upgrades to your custom HA configuration (requires Platinum Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
+<!---
 * TOC
 {:toc}
 
@@ -41,3 +42,4 @@ Follow the upgrade procedures outlined by MongoDb [documentation](https://docs.m
 You can again verify it is set properly to `3.4` by running:
 
 ```db.adminCommand({getParameter: 1, featureCompatibilityVersion: 1})```
+--->

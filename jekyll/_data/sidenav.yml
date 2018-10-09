@@ -217,6 +217,8 @@
           link: 2.0/authentication/
         - name: Monitoring
           link: 2.0/monitoring/
+        - name: Configuring JVM Heap Size
+          link: 2.0/jvm-heap-size-configuration/
         - name: Nomad
           link: 2.0/nomad/
         - name: Backup
