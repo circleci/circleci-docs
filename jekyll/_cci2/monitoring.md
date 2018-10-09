@@ -10,22 +10,24 @@ This document is for System Administrators who are setting environment variables
 * TOC
 {:toc}
 
-
 ## Advanced System Monitoring
 
 Enable the ability to forward system and Docker metrics to supported platforms by going to Replicated Admin > Settings and enabling the provider of your choice, for example `https://example.com:8800/settings#cloudwatch_metrics`.
 
 ### Metrics Details
+
 Services VM Host and Docker metrics are forwarded via [Telegraf](https://github.com/influxdata/telegraf), a plugin-driven server agent for collecting and reporting metrics.
 
 Following are the metrics that are enabled:
-- [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
-- [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
-- [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
-- [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields)
-- [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
+
+* [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
+* [Disk](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
+* [Memory](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
+* [Networking](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields)
+* [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
 #### Nomad Job Metrics
+
 In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics) are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
 
 `circle.nomad.server_agent.poll_failure`: Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
@@ -49,10 +51,12 @@ Click `Enable' under AWS CloudWatch to begin configuration.
 
 There are two options for configuration:
 
-- Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+* Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+
     ![Configuration IAM](  {{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
 
-- Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+* Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+
     ![Configuration Alt](  {{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
 
 After saving you can *verify* that metrics are forwarding by going to the AWS CloudWatch console.
@@ -91,7 +95,7 @@ Additionally, if you would like to ensure that all metrics in an installation ar
 Env="<staging-circleci>"
 ```
 
-Please see the InfluxDB [documenation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
+Please see the InfluxDB [documentation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
 
 Note: Any changes to the config will require a restart of the system.
 
@@ -112,8 +116,6 @@ There is a [blog post series](https://circleci.com/blog/mathematical-justificati
 
 This is in contrast to auto scaling throughout the day based on traffic fluctuations because modeling revealed that boot times are actually too long to prevent queuing in real time. Use [Amazon's Step Policy](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html) instructions to set this up along with Cloudwatch Alarms.
 
-
-
 ## Logging For 1.0
 
 Collecting and centralizing logs is an essential component of monitoring.  The
@@ -127,7 +129,6 @@ Enable CloudWatch by going to Replicated Admin > Settings > Enhanced AWS Integra
 
 CloudWatch already monitors the health and basic checks for EC2 instances, for example, CPU, memory, disk space, and basic counts with alerts. Consider upgrading machine types for the Services instance or decrease the number of CPUs per container if CPU or memory become a bottleneck.
 
-
 ### Installing Logging Appliance Agents
 
 CircleCI 1.0 Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in
@@ -138,11 +139,11 @@ installation of a custom agent on each machine and configuration that collects l
 forwards them to a service.
 Some available logging appliances are:
 
-- [Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring)
-- [Graylog](https://www.graylog.org/)
-- [LogDNA](https://logdna.com/)
-- [Logstash](https://www.elastic.co/products/logstash)
-- [Splunk](http://www.splunk.com/)
+* [Amazon Cloudwatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring)
+* [Graylog](https://www.graylog.org/)
+* [LogDNA](https://logdna.com/)
+* [Logstash](https://www.elastic.co/products/logstash)
+* [Splunk](http://www.splunk.com/)
 
 Configure the agent according to the environment, the
 authentication mechanisms, and centralized logging service discovery
