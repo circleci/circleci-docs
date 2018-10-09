@@ -15,11 +15,13 @@ This document provides instructions for installing and using the CircleCI CLI.
 ## Overview
 {:.no_toc}
 
-The `circleci` command-line tool enables you to reproduce the CircleCI environment locally and run jobs as if they were running on the hosted application for more efficient debugging and configuration in the initial setup phase.
+The `circleci` command-line interface enables you to reproduce the CircleCI environment locally and run jobs as if they were running on the hosted application for more efficient debugging and configuration in the initial setup phase.
 
 You can also run `circleci` commands in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for jobs that use the primary container image. This is particularly useful for globbing or splitting tests among containers.
 
-**Note:** An older version of the circleci cli has been replaced by a new version available at <https://github.com/CircleCI-Public/circleci-cli>. See upgrading and installation instructions below.
+**Note:** If you installed the CLI prior to October 2018 you may need to do an
+extra one-time step to switch to [the new CLI](https://github.com/CircleCI-Public/circleci-cli).
+See upgrading and installation instructions below.
 
 ## Install
 
@@ -72,7 +74,7 @@ If you're using [Homebrew](https://brew.sh/) with macOS, you can install the CLI
 brew install circleci
 ```
 
-**Note:** This will install Docker from Homebrew even if Docker for Mac is installed.
+**Note:** If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### [Alternative] Manual download
 {:.no_toc}
@@ -95,7 +97,7 @@ Setup will prompt you for configuration settings. If you are using the CLI with 
 
 To ensure that the CLI is configured correctly you can use it to validate a CircleCI config file.
 
-1. Change to the root directory of your CIrcleCI project repository.
+1. Change to the root directory of your CircleCI project repository.
 
 2. Run the following command:
 
@@ -120,7 +122,7 @@ The CLI allows you to run a single job from the CircleCI on your desktop using d
 $ circleci local execute --job JOB_NAME
 ```
 
-**Note:** If your _config.yml_ uses Workflows and has a job named `build`, only the `build` job will run. It is not possible to run an entire workflow using the CLI.
+**Note:** This command will only run a single job, it does not run a workflow.
 
 ### Troubleshooting Container Configurations Locally
 {:.no_toc}
