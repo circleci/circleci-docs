@@ -6,6 +6,7 @@ category: [resources]
 order: 0
 description: "How to import and export project settings in CircleCI Enterprise."
 hide: true
+sitemap: false
 ---
 
 ## Exporting/Importing Project Settings

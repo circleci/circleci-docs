@@ -5,6 +5,7 @@ title: "Setting up GPU Builders"
 category: [advanced-config]
 order: 6
 description: "How to set up CircleCI GPU builders"
+sitemap: false
 ---
 
 This document list the various commands you can use to install GPUs that may be accessed by containers running in your fleet in the following sections:

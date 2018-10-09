@@ -59,6 +59,8 @@
           link: 2.0/local-cli/
         - name: Testing Config Locally
           link: 2.0/examples/
+        - name: Reusing Config
+          link: 2.0/reusing-config/                   
     - name: Examples
       link: 2.0/examples-intro/
       children: 
@@ -165,6 +167,8 @@
     - name: Configuring Deploys
       link: 2.0/deployment-integrations/
       children: 
+        - name: Deploying to AWS ECR/ECS
+          link: 2.0/ecs-ecr/
         - name: Using Yarn on CircleCI
           link: 2.0/yarn/
         - name: Publishing Snap Packages
@@ -181,7 +185,7 @@
         - name: Configuration Reference
           link: 2.0/configuration-reference/
         - name: API Reference
-          link: api/v1-reference/
+          link: api/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary

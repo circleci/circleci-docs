@@ -391,11 +391,12 @@ add_user_ssh:
 
 project_build:
   url: "/api/v1.1/project/:vcs-type/:username/:project/build"
-  description: "Trigger a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received."
   method: "POST"
+  description: "Trigger a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received."
+  body: '{"branch":"staging"}'
   params:
     - {name: "branch", description: "The branch to build. Cannot be used with tag parameter."}
-    - {name: "revision", description: "The specific revision to build. If not specified, the HEAD of the branch is used. Cannot be used with tag parameter", note: "Branch and revision can either be used separately or together. If they are used together, the revision is built but the branch is used to display the correct branch on the job page."}
+    - {name: "revision", description: "The specific revision to build. If not specified, the HEAD of the branch is used. Cannot be used with tag parameter.", note: "Branch and revision can either be used separately or together. If they are used together, the revision is built but the branch is used to display the correct branch on the job page."}
     - {name: "tag", description: "The git tag to build. Cannot be used with branch and revision parameters."}
   response: |
     {
@@ -500,13 +501,10 @@ project_build_cache:
       "status" : "build caches deleted"
     }
 
-"user/ssh-key":
+user_ssh-key:
+  url: "/api/v1.1/user/ssh-key"
   method: "POST"
   description: "Adds a CircleCI key to your GitHub User account."
-
-"user/heroku-key":
-  method: "POST"
-  description: "Adds your Heroku API key to CircleCI, takes apikey as form param name."
 
 list_environment_variables:
   try_it: false

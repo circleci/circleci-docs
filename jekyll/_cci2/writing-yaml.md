@@ -144,15 +144,22 @@ draco:
 You can also merge multiple maps.
 
 ```yaml
-good: &one
-  - harry
-  - ron
-bad: &two
-  - crabbe
-  - goyle
-students:
-  <<: [*one, *two]
+name: &harry_name
+  first_name: Harry
+  last_name: Potter
+  
+address: &harry_address
+  street: 4, Privet Drive
+  district: Little Whinging
+  county: Surrey
+  country: England
+
+harry_data:
+  <<: [*harry_name, *harry_address]
 ```
+
+**Note**:
+As mentionned in [a YAML repository issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
 
 For a more complex example,
 see [this gist](https://gist.github.com/bowsersenior/979804).

@@ -6,6 +6,7 @@ category: [resources]
 order: 99
 description: "Special instructions if upgrading from versions prior to 1.47.0"
 hide: true
+sitemap: false
 ---
 
 ## Note for Admins

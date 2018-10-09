@@ -5,6 +5,7 @@ title: "Overview"
 category: [documentation]
 order: 1
 description: "High-level overview of the CircleCI Enterprise."
+sitemap: false
 ---
 
 This article provides an overview of CircleCI Enterprise features, environments, and architecture in the following sections:

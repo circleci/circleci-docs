@@ -36,7 +36,7 @@ the 'Rebuild' dropdown menu:
 that you use for GitHub or Bitbucket) to perform whatever troubleshooting
 you need to.
 
-The build VM will remain available for **30 minutes after the build finishes running**
+The build VM will remain available for **10 minutes after the build finishes running**
 and then automatically shut down. (Or you can cancel it.)
 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM
