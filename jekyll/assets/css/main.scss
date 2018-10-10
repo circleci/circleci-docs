@@ -87,7 +87,7 @@ hr.dark {
   border-color: $black-light;
 }
 
-footer { 
+footer {
 	li, span {
 		text-transform: initial;
 		font-size: $font-size-base;
@@ -164,8 +164,8 @@ div.article-container{
 			&[id]:before{
 				display: block;
 				content: " ";
-				margin-top: -71px;
-				height: 71px;
+				margin-top: -135px;
+				height: 135px;
 				visibility: hidden;
 			}
 		}
