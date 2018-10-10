@@ -1,5 +1,13 @@
 import * as debounce from 'lodash.debounce';
 
+const formatResultSnippet = (snippet) => {
+  const titleTag = `<strong>${snippet.title.value}</strong>`;
+  const contextTag = snippet.headings ?
+    `<p class="context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
+  const contentTag = `<p class="content">${snippet.content.value}</p>`;
+  return `<div class="result-item-wrap">${titleTag + contextTag + contentTag}</div>`;
+}
+
 // Instant search initialization
 export function init () {
   var search = instantsearch({
@@ -34,7 +42,13 @@ export function init () {
       container: '#instant-hits',
       templates: {
         empty: 'No results',
-        item: '<a href="/docs{{ url }}"><div class="result-item-wrap"><strong>{{ title }}</strong><br><p>{{ content }}</p></div>'
+        item: (item) => {
+          let url = item.url;
+          if (item.anchor) {
+            url += `#${item.anchor}`;
+          }
+          return `<a href="/docs${url}">${formatResultSnippet(item._snippetResult)}</a>`;
+        }
       }
     })
   );

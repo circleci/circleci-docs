@@ -54,9 +54,20 @@
     font-size: $font-size-small;
   }
 
-  p {
+  .content {
     margin-top: 4px;
     font-size: $font-size-small;
+  }
+
+  .context {
+    margin-top: 4px;
+    color: $gray-dark;
+    font-size: $font-size-micro;
+  }
+
+  .custom_highlight {
+    font-style: normal;
+    font-weight: bold;
   }
 
   &:hover {
