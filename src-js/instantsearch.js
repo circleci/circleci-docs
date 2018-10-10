@@ -14,7 +14,8 @@ export function init () {
     appId: 'U0RXNGRK45',
     apiKey: 'dd49f5b81d238d474b49645a4daed322', // search-only API Key; safe for front-end code
     indexName: 'documentation',
-    routing: true
+    routing: true,
+    searchParameters: { hitsPerPage: 25 }
   });
 
   // adding conditions to filter search
@@ -71,7 +72,7 @@ export function init () {
       var results = template.cloneNode(true);
 
       resultDisplay.appendChild(results);
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
 
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";
