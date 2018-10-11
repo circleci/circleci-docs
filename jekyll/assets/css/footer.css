@@ -2,6 +2,8 @@
  * Footer
  * */
 .footer {
+  position: relative;
+  z-index: 2;
   padding-top: 85px;
   padding-bottom: 85px;
   color: #F3F3F3;

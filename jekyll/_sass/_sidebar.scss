@@ -25,7 +25,7 @@ $sidebar-spacing-base: 5px;
 
   &.fixed {
     position: fixed;
-    top: 70px;
+    top: 118px;
   }
 
   .main-nav-item {
@@ -95,6 +95,7 @@ $sidebar-spacing-base: 5px;
 .sidebar-mobile-wrapper {
   border-top: 1px solid $gray-200;
   border-bottom: 1px solid $gray-200;
+  padding: 50px 0 0 0;
   width: 100%;
   background: $gray-100;
   display: none;
@@ -125,7 +126,7 @@ $sidebar-spacing-base: 5px;
     @extend .sidebar;
     width: 100%;
     left: 0;
-    top: 133px;
+    top: 182px;
     z-index: 2;
 
     .main-nav-item {

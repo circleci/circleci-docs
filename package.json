@@ -13,7 +13,10 @@
     "url": "git://github.com/circleci/circleci-docs.git"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "js-cookie": "^2.2.0",
+    "lodash.debounce": "^4.0.8"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
