@@ -23,7 +23,7 @@ To use the CircleCI Check integration, you first need to enable the Org Setting,
 
 ### Prerequisites
 
-- Your project must be using CircleCI 2.0 with [Workflows]( {{ site.baseurl }}/2.0/docs/workflows/).
+- Your project must be using CircleCI 2.0 with [Workflows]( {{ site.baseurl }}/2.0/workflows/).
 - You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
 ### Steps
