@@ -41,6 +41,7 @@ export function init () {
   search.addWidget(
     instantsearch.widgets.hits({
       container: '#instant-hits',
+      escapeHits: true,
       templates: {
         empty: 'No results',
         item: (item) => {
