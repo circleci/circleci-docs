@@ -107,6 +107,8 @@
       children: 
         - name: GitHub and Bitbucket
           link: 2.0/gh-bb-integration/
+        - name: Enabling GitHub Checks  
+          link: 2.0/enable-checks/ 
         - name: Building Open Source Projects
           link: 2.0/oss/
         - name: Using Notifications
