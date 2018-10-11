@@ -818,7 +818,7 @@ Key | Required | Type | Description
 path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
 {: class="table table-striped"}
 
-***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
+***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
 
 ###### _Example_
 
@@ -1056,6 +1056,7 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 Key | Required | Type | Description
 ----|-----------|------|------------
 requires | N | List | A list of jobs that must succeed for the job to start
+name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
 {: class="table table-striped"}
 
 
@@ -1266,7 +1267,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master          
+              only: master
 ```
 
 {% endraw %}

@@ -4,6 +4,7 @@ title: "Adding External Database Hosts for High Availability"
 category: [installation]
 order: 8
 description: "Configuring High Availability for CircleCI Enterprise"
+sitemap: false
 ---
 
 This document describes how to to set up a highly available CircleCI Enterprise installation in the following sections:

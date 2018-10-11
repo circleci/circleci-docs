@@ -6,6 +6,7 @@ category: [advanced-config]
 order: 4.5
 published: true
 hide: true
+sitemap: false
 ---
 
 By default, all machines in a CircleCI Enterprise installation verify SSL

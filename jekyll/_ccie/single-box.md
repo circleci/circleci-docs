@@ -5,6 +5,7 @@ title: "Try CircleCI Enterprise"
 category: [documentation]
 order: 0
 description: "How to install CircleCI Enterprise on a single VM"
+sitemap: false
 ---
 
 CircleCI Enterprise is a scalable CI/CD platform that supports clusters

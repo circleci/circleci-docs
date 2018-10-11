@@ -6,6 +6,7 @@ category: [advanced-config]
 order: 0
 description: "Pre-release access to CircleCI 2.0 functionality behind your firewall"
 hide: true
+sitemap: false
 ---
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
