@@ -14,7 +14,7 @@ plugins:
   - jekyll-sitemap
 
 algolia:
-  application_id: 06F2EYGKB6
+  application_id: U0RXNGRK45
   index_name: documentation
 
 sass:
