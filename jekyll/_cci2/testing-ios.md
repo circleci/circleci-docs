@@ -276,6 +276,8 @@ workflows:
             - build-and-test
 ```
 
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan. 
+
 ### Using CocoaPods
 {:.no_toc}
 
