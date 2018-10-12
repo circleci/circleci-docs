@@ -4,7 +4,7 @@ layout: classic-docs title: "Configuring Java Virtual Machine Heap Size" descrip
 
 * * *
 
-JVM_HEAP_SIZE is configurable for frontend and test-result containers
+JVM_HEAP_SIZE is configurable for frontend, test-result and picard-output-processor containers
 
 ## Setting up
 
@@ -15,6 +15,7 @@ To customize JVM_HEAP_SIZE value, you will need to create customizations file in
 ```sh
 /etc/circleconfig/frontend/customizations
 /etc/circleconfig/test-results/customizations
+/etc/circleconfig/output-processor/customizations
 ```
 
 2. In the file, add the line below to export desire JVM_HEAP_SIZE in the file
@@ -41,6 +42,12 @@ sudo docker exec -it frontend lein repl :connect 6005
 
 ```sh
 sudo docker exec -it test-result lein repl :connect 2719
+```
+
+#### For picard-output-processor container
+
+```sh
+sudo docker exec -it picard-output-processor lein repl :connect 6007
 ```
 
 verify JVM_HEAP_SIZE has reset.
