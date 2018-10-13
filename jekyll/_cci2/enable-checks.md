@@ -13,13 +13,13 @@ This document describes how to enable the GitHub Checks CircleCI Setting and aut
 
 GitHub Checks provides your workflow status messages on the GitHub Checks page and enables you to rerun a workflow from the GitHub Checks page. 
 
-After checks are enabled, CircleCI workflow status is reported under the checks tab on GitHub and job status will no longer be displayed.
+After checks are enabled, CircleCI workflow and job status is reported under the checks tab on GitHub. 
 
 ![CircleCI Checks]( {{ site.baseurl }}/assets/img/docs/checks_tab.png)
 
 ## To Enable GitHub Checks
 
-To use the CircleCI Check integration, you first need to enable the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
+To use the CircleCI Check integration, you first need to navigate to the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
 
 ### Prerequisites
 
@@ -41,7 +41,7 @@ CircleCI reports the status of workflows and all corresponding jobs under the Ch
 
 After the rerun is initiated, CircleCI reruns the workflow from beginning and reposts the status on the Checks tab. To navigate to the CircleCI app from GitHub, click the View more details on CircleCI Checks link. 
 
-## To Disable GitHub Checks
+## To Disable GitHub Checks for a Project
 
 To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
 
@@ -51,4 +51,12 @@ To disable the CircleCI Check integration, navigate to the Org Settings Page, th
 2. Select VCS. 
 3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_update.png)
 4. Deselect the repository to uninstall the Checks integration.
+
+## To Uninstall Checks for the organization.
+
+1. Click the Settings tab in the CircleCI app main menu.
+2. Select VCS.
+3. Click the Manage GitHub Checks button.
+4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
+
 
