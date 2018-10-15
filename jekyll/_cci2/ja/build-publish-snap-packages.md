@@ -1,25 +1,25 @@
 ---
 layout: classic-docs
-title: "Build and Publish Snap Packages using Snapcraft on CircleCI"
-short-title: "Build & Publish Snap Packages"
-description: "How to build and publish Snap packages on CircleCI using Snapcraft."
+title: "CircleCI で Snapcraft を使用して Snap パッケージをビルドおよびパブリッシュする"
+short-title: "Snap パッケージのビルドとパブリッシュ"
+description: "CircleCI で Snapcraft を使用して Snap パッケージをビルドおよびパブリッシュする方法。"
 categories:
   - containerization
 order: 20
 ---
-Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
+Snap パッケージを使用すると、ソフトウェアを複数の Linux ディストリビューション (distros) 上へ迅速にパブリッシュできます。 このドキュメントでは、CircleCI を使用して Snap パッケージをビルドし、Snap Store にパブリッシュする方法を紹介します。
 
-## Overview
+## 概要
 
-A .snap file can be created once and installed on any Linux distros that supports `snapd` such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website](https://snapcraft.io/).
+.snap ファイルを 1 回作成すれば、Ubuntu、Debian、Fedora、Arch など、`snapd` をサポートする、どの Linux distros にもインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
-Building a snap on CircleCI is mostly the same as your local machine, wrapped with [CircleCI 2.0 syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
+CircleCI で Snap をビルドする手順は、ローカルマシンとほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/docs/2.0/configuration-reference/)を使用します。 このドキュメントでは、Snap パッケージをビルドし、CircleCI を使用して [Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 以下のセクションでは、サンプルの `.circleci/config.yml` ファイルのスニペットを使用します。完全なバージョンは、[このドキュメントの末尾](#full-example-config)にあります。
 
-## Prerequisites
+## 前準備
 
-To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap](https://docs.snapcraft.io/build-snaps/your-first-snap) doc by Snapcraft to get your snap building on your local machine.
+ローカル、企業サーバー CI など、どの環境でも、Snap のビルドには Snapcraft 構成ファイルが必要です。 このファイルは通常、`snap/snapcraft.yml` にあります。 このドキュメントでは、このファイルが既に存在し、ローカルマシンで Snap を正常にビルドできることを前提としています。 そうでない場合は、Snapcraft の[最初の Snap のビルド](https://docs.snapcraft.io/build-snaps/your-first-snap)についてのドキュメントを読み、ローカルマシンで Snap をビルドできるようにしてください。
 
-## Build Environment
+## ビルド環境
 
 ```yaml
 #...
@@ -31,9 +31,9 @@ jobs:
 #...
 ```
 
-The `docker` executor is used here with the [`cibuilds/snapcraft`](https://github.com/cibuilds/snapcraft) Docker image. This image is based on the official [`snapcore/snapcraft`](https://github.com/snapcore/snapcraft/tree/master/docker) Docker image by Canonical with all of the command-line tools you'd want to be installed in a CI environment. This image includes the `snapcraft` command which will be used to build the actual snap.
+`docker` executor は、[`cibuilds/snapcraft`](https://github.com/cibuilds/snapcraft) Docker イメージとともに、ここで使用されます。 このイメージは、Canonical による公式の [`snapcore/snapcraft`](https://github.com/snapcore/snapcraft/tree/master/docker) Docker イメージを基礎とし、CI 環境にインストールすると便利なすべてのコマンドラインツールが含まれています。 このイメージには、実際の Snap をビルドするために使用される `snapcraft` コマンドも含まれています。
 
-## Running Snapcraft
+## Snapcraft の実行
 
 ```yaml
 ...
@@ -45,26 +45,26 @@ The `docker` executor is used here with the [`cibuilds/snapcraft`](https://githu
 ...
 ```
 
-On CircleCI, this single command is needed to actually build your snap. This will run Snapcraft, which will then go through all of it's build steps and generate a `.snap` file for you. This file will typically be in the format of `<snap-name>-<snap-version>-<system-arch>.snap`.
+CircleCI では、この単一のコマンドだけで、Snap を実際にビルドできます。 これによって Snapcraft が実行され、すべてのビルド手順が行われ、`.snap` ファイルが生成されます。 このファイルは通常、`<snap-name>-<snap-version>-<system-arch>.snap` の形式です。
 
-## Testing
+## テスト
 
-Unit testing your code has been covered extensively in our blog and our docs and is out of the scope of this document. You'll likely want to create a `job` before building the snap that pulls project dependencies, any pre-checks you'd want to do, testing, and compiling.
+コードの単体テストについては、弊社のブログやドキュメントで包括的に扱われているため、このドキュメントの範囲外です。 Snap をビルドする前に、プロジェクトの依存関係、行うべき事前チェック、テスト、およびコンパイルのすべてをプルする `job` を作成することをお勧めします。
 
-Building snaps on CircleCI results in a `.snap` file which is testable in addition to the code that created it. How you test the snap itself is up to you. Some users will attempt to install the snap in various distros and then run a command to make sure that installation process works. Snapcraft offers a build fleet for spreadtesting that allows you to test snaps on different distros, after you've already tested the code itself. This can be found [here](https://build.snapcraft.io/).
+CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、作成に使用されたコードとともにテストできます。 Snap 自体のテスト方法はユーザーが決定します。 一部のユーザーは、各種の distros に Snap をインストールしてから、インストールプロセスが正しく動作することを確認するコマンドを実行します。 Snapcraft はスプレッドテスト用のビルドフリートを提供しており、コード自体のテストを行った後で、各種の distros で Snap をテストできます。 このビルドフリートは、[ここ](https://build.snapcraft.io/)で入手できます。
 
-## Publishing
+## パブリッシュ
 
-Publishing a snap is more or less a two-step process. Here's on this might look on a Linux machine:
+Snap のパブリッシュは、約 2 手順のプロセスです。Linux マシンでは次のようになります。
 
 ```Bash
 snapcraft login
-# follow prompts for logging in with an Ubuntu One account
+# Ubuntu One アカウントでログインするためプロンプトに従う
 snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
 
-1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_LOGIN_FILE`.
+1. ローカルマシンで、CircleCI にアップロードする「ログインファイル」を作成します。 ローカルマシンにこれらのツールが既にインストールされており、Snapcraft Store にログインしている (`snapcraft login`) と想定すると、`snapcraft export-login snapcraft.login` コマンドを使用して、`snapcraft.login` という名前のログインファイルを生成します。 このファイルの公開や、Git リポジトリに保存されることは望ましくないため、このファイルを base64 エンコードし、`$SNAPCRAFT_LOGIN_FILE` という名前の [非公開環境変数](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) に保存します。
 
 ```yaml
 ...
@@ -77,42 +77,42 @@ base64 snapcraft.login | xsel --clipboard
 ...
 ```
 
-1. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
+1. ファイルの base64 エンコードされたバージョンが、非公開環境変数として CircleCI に保存されたら、そのファイルをビルド内で使用して、ストアへ自動的にパブリッシュできます。
 
-In this example, Snapcraft automatically looks for login credentials in `.snapcraft/snapcraft.cfg` and the environment variable made previously is decoded into that location. The `snapcraft push` command is then used to upload the .snap file into the Snap Store.
+この例では、Snapcraft が `.snapcraft/snapcraft.cfg` 内のログイン資格情報を自動的に探し、以前に作成した環境変数がその場所にデコードされます。 その後で、`snapcraft push` コマンドを使用して .snap ファイルが Snap Store にアップロードされます。
 
-### Uploading vs Releasing
+### アップロードとリリースの相違
 
-`snapcraft push *.snap` by default will upload the snap to the Snap Store, run any store checks on the server side, and then stop. The snap won't be "released" meaning users won't automatically see the update. The snap can be published locally with the `snap release <release-id>` command or by logging into the Snap Store and clicking the release button.
+`snapcraft push *.snap` はデフォルトで、Snap を Snap Store にアップロードし、サーバー側でストアチェックを実行してから停止します。 スナップ「解放」されません。これは、ユーザーが更新を自動的に確認できないということです。 `snap release <release-id>` コマンドを使用するか、Snap Store にログインして [リリース] ボタンをクリックすると、Snap をローカルにパブリッシュできます。
 
-In typical CircleCI fashion, we can go fully automated (as in the above example) but using the `--release <channel>` flag. This uploads the snap, does Store side verification, and then will automatically release the snap in the specified channels.
+一般的な CircleCI の形式のように、これらを完全に自動化できます (上述の例のように) が、この場合は `--release <channel>` フラグを使用します。 これにより Snap がアップロードされ、Store 側での検証が行われてから、指定のチャンネルに Snap が自動的にリリースされます。
 
 ## Workflows
 
-We can utilize multiple jobs to better organize our snap build. A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `master` would all be useful.
+複数のジョブを利用すると、Snap ビルドをより的確に整理できます。 実際のプロジェクトをビルド/コンパイルするジョブ、Snap 自体をビルドするジョブ、`master` にのみ Snap (および他のパッケージ) をパブリッシュするジョブなどが便利です。
 
-[Workflows](https://circleci.com/docs/2.0/workflows/) can help with building snaps in two ways:
+[Workflows](https://circleci.com/docs/2.0/workflows/) を使用すると、Snap のビルドに 2 つの点で役立ちます。
 
-1. **Snap Store Channels** - As we mentioned in the previous section, when we upload to the Store we could optionally release at the same time. This allows us to designate specific jobs on CircleCI to deploy to specific Snap Channels. For example, the `master` branch could be used to deploy to the `edge` channel`while tagged releases could be used to deploy to the`stable` channel.
-2. **Parallelize Packing** - If your software is being packaged as a snap as well as something else, say a flatpak, .deb, .apk, etc, each package type could be placed in its own job and all run parallel. This allows your build to complete must fast than if the .deb package could start to build until the snap completed, and so on.
+1. **Snap Store チャンネル** - 前のセクションで述べたように、Store にアップロードするとき、同時にリリースも選択できます。 これによって、CircleCI の特定のジョブを、特定の Snap チャンネルにデプロイするよう割り当てできます。 たとえば、`master` ブランチを使用して `edge` チャンネルにデプロイし、`同時にタグ付けされたリリースを使用して`安定したチャンネルにデプロイできます。
+2. **パッキングの並列化** - ソフトウェアが Snap として以外に、flatpak、.deb、apk など他のものとしてもパッケージされる場合、各パッケージタイプを独自のジョブに配置し、すべて並列実行できます。 これによって、Snap が完了してから .deb パッケージのビルドを開始するなどの順に処理を行うよりも、はるかに短時間でビルドが完了します。
 
-Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
+CircleCI `workspaces` を使用して、生成された Snap ファイルを必要なときにジョブ間で移動できます。「from」ジョブのスニペットと、「to」ジョブのスニペットの例を次に示します。
 
 ```yaml
-... # from a job that already has the snap
+... # 既に Snap が存在するジョブから
       - persist_to_workspace:
           root: .
           paths:
             - "*.snap"
-... # to the next job that needs the snap
+... # Snap を必要とする次のジョブへ
       - attach_workspace:
           at: .
 ...
 ```
 
-Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap pakcage for the \[CircleCI Local CLI\]\[local-cli-repo\].
+以下に示すのは、CircleCI で Snap パッケージをビルドする方法を示す完全な例です。\[CircleCI Local CLI\]\[local-cli-repo\] 用の Snap パッケージをビルドするときにも、同じプロセスが使用されます。
 
-## Full Example Config
+## 構成の完全な例
 
 ```yaml
 version: 2
