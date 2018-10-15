@@ -1,67 +1,67 @@
 ---
 layout: classic-docs
-title: "Installing CircleCI 2.0 on Amazon Web Services Manually"
+title: "Amazon Webサービスに手動でCircleCI 2.0をインストールする"
 category:
-  - administration
+  - 管理
 order: 11
 hide: true
 published: false
-description: "How to install CircleCI on Amazon Web Services (AWS) manually."
+description: "Amazon Webサービス(AWS)に手動でCircleCIをインストールする方法"
 ---
-This document provides step-by-step instructions for installing CircleCI 2.0 on Amazon Web Services (AWS) manually in the following sections:
+このドキュメントでは、Amazon Webサービス(AWS)に手動でCircleCI 2.0をインストールする詳細手順について説明します。このドキュメントには以下のセクションがあります。
 
 - TOC {:toc}
 
-If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your CircleCI account representative for assistance with upgrading.
+CircleCI Enterpriseがインストールされていれば、現在のインストールでCircleCI 2.0の機能にアクセスでき、現在の契約およびサポートレベル内での制限はありません。 アップグレードの方法については、CircleCIアカウント担当者にお問い合わせください。
 
-- CircleCI 2.0 is only available on AWS.
-- Teams may create a new CircleCI 2.0 `.circleci/config.yml` file in their repositories to add new 2.0 projects incrementally while continuing to build 1.0 projects which use a `circle.yml` configuration file. 
+- 注: - CircleCI 2.0はAWS上でのみ利用できます。
+- チームで新しいCircleCI 2.0の`.circleci/config.yml`ファイルをリポジトリに作成し、新しい2.0プロジェクトを段階的に追加しながら、それと平行して`circle.yml`構成ファイルを使用する1.0プロジェクトを引き続きビルドすることもできます。 
 
-## Prerequisites
+## 前準備
 
-Have the following information available before beginning the installation procedure:
+インストール手順の開始前に、次の情報が利用可能なことを確認します。
 
-- CircleCI License file (.rli), contact [CircleCI support](https://support.circleci.com/hc/en-us) for a license.
-- AWS Access Key, AWS Secret Key, and AWS Subnet ID.
-- AWS Region, for example `us-west-2`.
-- AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
-- Set your VPC [`enableDnsSupport`] setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) Amazon Web Services documentation for additional details.
+- CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us)にお問い合わせください。
+- AWSアクセスキー、AWS秘密キー、AWSサブネットID。
+- AWSリージョン、たとえば`us-west-2`。
+- AWS仮想プライベートクラウド(VPC)のID。自分のアカウントがデフォルトVPCを使用するよう構成されていれば、デフォルトVPC IDは、Amazonの [アカウントの属性] に記載されています。
+- VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
 
-## Private Subnet Requirements
+## 非公開サブネットの要件
 
-The following additional settings are required to support using private subnets on AWS with CircleCI:
+AWS上の非公開サブネットをCircleCIで使用するには、次の追加設定が必要です。
 
-- The private subnet for builder boxes must be a network address translation (NAT) instance or an internet gateway configured for the outbound traffic to the internet.
-- The [VPC Endpoint for S3](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/) should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
-- Adequately power the NAT instance for heavy network operations. Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources. A NAT that is inadequate could cause slowness in network and cache operations.
-- If you are integrating with https://github.com/, ensure that your network access control list (ACL) whitelists github.com webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
+- ビルダボックス用の非公開サブネットは、ネットワークアドレス変換(NAT)インスタンスまたはインターネット・ゲートウェイで、インターネットへの外向きトラフィック用に構成されている必要があります。
+- [S3用のVPCエンドポイント](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にします。 S3用のVPCエンドポイントを有効にすると、CircleCIや、サブネット内の他のノードについて、S3動作が大幅に改良されます。
+- NATインスタンスに、多くのネットワーク動作に耐えられるよう、十分な性能があることを確認します。 展開の仕様によっては、Dockerや外部のネットワークリソースを使用して、NATインスタンスを並列性の高いビルドにすることもできます。 NATの性能が不十分な場合、ネットワークやキャッシュの動作速度が低下する可能性があります。
+- https://github.comと統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにgithub.com webhooksが含まれていることを確認します。 GitHubと統合するときは、CircleCIを公開サブネットにセットアップするか、github.comのトラフィックを転送するための公開ロードバランサーをセットアップします。
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
-## Sizing AWS Instances
+## AWSインスタンスのサイズの決定
 
-The following table describes the number of containers or concurrent builds supported by the M3, C3, and R3 machines using the the default CircleCI container size of 2CPU/4GB RAM and 2CPU overhead.
+CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CPUオーバーヘッドを使用するM3、C3、R3マシンでサポートされるコンテナの数と、ビルドの同時実行数の一覧を、次の表に示します。
 
-Type | Supported Containers | Model | Notes \----|\---\---\---\---\---\---\-----|\---\----|\---\--- M3 | maximum of 3 | `m3.2xlarge` | Largest M3 instance C3 | maximum of 6 | `c3.4xlarge` | Limited memory allocation C3 | maximum of 14 | `c3.8xlarge` | Limited memory allocation R3 | maximum of 3 | `r3.2slarge` | High memory, limited CPU R3 | maximum of 7 | `r3.4xlarge` | High memory, limited CPU R3 | maximum of 15 | `r3.8xlarge` | High memory, limited CPU {: class="table table-striped"}
+タイプ | サポートされるコンテナ数 | モデル | 注 \----|\---\---\---\---\---\---\-----|\---\----|\---\--- M3 | 最大3 | `m3.2xlarge` | 最大のM3インスタンス C3 | 最大6 | `c3.4xlarge` | メモリ割り当て制限あり C3 | 最大14 | `c3.8xlarge` | メモリ割り当て制限あり R3 | 最大3 | `r3.2slarge` | 大容量メモリ、CPU制限あり R3 | 最大7 | `r3.4xlarge` | 大容量メモリ、CPU制限あり R3 | 最大15 | `r3.8xlarge` | 大容量メモリ、CPU制限あり {: class="table table-striped"}
 
-The R3 instances are a good choice for memory-intensive builds or if you plan to increase the default memory allocation for each container. If you have noisy neighbor problems or contention for resources, it is possible that the additional memory of the R3 family may speed up your builds without changing the default container allocation.
+メモリを大量に使用するビルド、または各コンテナのデフォルトメモリ割り当てを増やすことを計画している場合は、R3インスタンスの選択が適切です。 周囲のノイズが多い、またはリソースの競合がある場合は、R3ファミリの追加メモリによって、デフォルトのコンテナ割り当てを変更せずビルドを高速化できます。
 
-## Planning
+## 計画
 
-Have available the following information and policies before starting the Preview Release installation:
+プレビューリリースのインストールを開始する前に、次の情報とポリシーが利用可能なことを確認します。
 
-- If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
-- Access to provision at least two AWS instances, one for the Services and one for your first set of Builders. Best practice is to use an `m4.2xlarge` instance with 8 CPUs and 32GB RAM for the Services.
-- AWS instances must have outbound access to pull docker containers and to verify your license.
-- See the table below for required port configuration.
+- ネットワークプロキシを使用する場合、CircleCI 2.0のインストールを試みる前に、自社のアカウントチームに問い合わせます。
+- サービス用に1つ、Buildersの最初のセット用に1つ、合計で最低2つのAWSインスタンスのプロビジョニングにアクセスできることを確認します。 ベストプラクティスとして、サービス用に、8つのvCPUと32GBのRAMを持つ`m4.2xlarge`インスタンスを使用することをお勧めします。
+- AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。
+- 必要なポート構成については、次の表を参照してください。
 
-### Manual Installation Steps
+### 手動でのインストール手順
 
-1. SSH into the Services instance.
-2. Run `curl https://get.replicated.com/docker | sudo bash`.
-3. Go to the provided URL at the end of the previous step.
-4. Use a 2.0 license.
-5. Configure storage. It is best practice to use an instance profile for authentication. However, IAM authentication for the AWS administrator is supported. Use the following permissions for the IAM User: 
+1. ServicesインスタンスへSSHで接続します。
+2. `curl https://get.replicated.com/docker | sudo bash`を実行します。
+3. 前の手順の最後で表示されるURLに移動します。
+4. 2.0ライセンスを使用します。
+5. ストレージを構成します。 ベストプラクティスとして、認証にインスタンスプロファイルを使用することをお勧めします。 ただし、AWS管理者用のIAM認証もサポートされています。 IAMユーザーでは、次のアクセス許可を使用します。 
         JSON
          {
              "Version": "2012-10-17",
@@ -94,7 +94,7 @@ Have available the following information and policies before starting the Previe
              ]
          }
 
-6. Configure the vm-service. The AWS user needs to have these permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions. 
+6. vm-serviceを構成します。AWSユーザーにはこれらのアクセス許可が必要です。S3用の同じユーザーを使用する場合、両方のアクセス許可のセットが必要です。 
         JSON
          {
              "Version": "2012-10-17",
@@ -129,31 +129,31 @@ Have available the following information and policies before starting the Previe
              ]
          }
 
-7. Configure the EC2 security group to have the following rules:
+7. EC2セキュリティグループに、次のルールを構成します。
     
-    | Protocol | Port Range | Source | | \---\----- | \---\---\---- | \---\---- | | TCP | 22 | 0.0.0.0 | | TCP | 2376 | 0.0.0.0 | | TCP | 32768-61000| 0.0.0.0 | {: class="table table-striped"}
+    | プロトコル | ポートの範囲 | ソース | | \---\----- | \---\---\---- | \---\---- | | TCP | 22 | 0.0.0.0 | | TCP | 2376 | 0.0.0.0 | | TCP | 32768-61000| 0.0.0.0 | {: class="table table-striped"}
 
-8. To install the 2.0 Builders cluster, using an `m4.xlarge` or `m4.4xlarge`, start one of the following public CircleCI AMIs for each Builder (the number you start depends on the number of concurrent runs you want) in the appropriate AWS region. {#builder} **Note:** CircleCI allocates 4GB per build container by default, consider using spot instances as Builder components.
+8. `m4.xlarge`または`m4.4xlarge`を使用して2.0 Buildersクラスタをインストールするには、適切なAWS領域において、各ビルダについて次の公開CircleCI AMIのいずれかを開始します(開始する数は、希望する同時ユーザー数によって異なります)。 {#builder}**注: **CircleCIは、スポットインスタンスをBuilderコンポーネントとして使用することを考慮し、ビルドのコンテナごとにデフォルトで4GBを割り当てます。
     
-    Region | AMI \---\---\---\---\----- |\---\---\---\---- ap-northeast-1 | ami-eeffcd89 ap-northeast-2 | ami-8eec31e0 ap-southeast-1 | ami-5823a63b ap-southeast-2 | ami-7c12181f eu-central-1 | ami-0f32ec60 eu-west-1 | ami-821a14e4 sa-east-1 | ami-3a026d56 us-east-1 | ami-7d71046b us-east-2 | ami-eec5e28b us-west-1 | ami-45c8ee25 us-west-2 | ami-18492c78 {: class="table table-striped"}
+    領域 | AMI \---\---\---\---\----- |\---\---\---\---- ap-northeast-1 | ami-eeffcd89 ap-northeast-2 | ami-8eec31e0 ap-southeast-1 | ami-5823a63b ap-southeast-2 | ami-7c12181f eu-central-1 | ami-0f32ec60 eu-west-1 | ami-821a14e4 sa-east-1 | ami-3a026d56 us-east-1 | ami-7d71046b us-east-2 | ami-eec5e28b us-west-1 | ami-45c8ee25 us-west-2 | ami-18492c78 {: class="table table-striped"}
 
-9. Place the Builder instaces in a security group with the following attributes:
+9. Builderのインスタンスを、次の属性を持つセキュリティグループに配置します。
 
-- Whitelist all traffic from/to builder boxes and service box
-- Whitelist ports 22, 80, 443, 64535-65535 for users. The high ports are used for the SSH feature, so that users can `ssh` into the build containers.
+- ビルダボックスおよびサービスボックスとの間で、すべてのトラフィックが双方向でホワイトリストに指定されている。
+- ユーザー用に、ポート22、80、443、64535～65535がホワイトリストに指定されている。大きい番号のポートは、ユーザーがビルドコンテナに`ssh`で接続できるようにするためのSSH機能に使用されます。
 
-1. To start the installation, use the following [Terraform script](https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf). It should take 5-15 minutes for the machine to be fully ready to take builds.
+1. インストールを開始するには、この[Terraformスクリプト](https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf)を使用します。 5～15分で、マシンでビルドを受け付ける準備が完了します。
 
-## Next Steps for Getting Started
+## 使用開始の次の手順
 
-1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage. 
-2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
-3. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
+1. ダッシュボードの [開く] リンクをクリックすると、CircleCI アプリに移動します。CircleCIアプリケーションの起動中に開始ページが少しの間表示されてから、ホームページへ自動的に転送されます。 
+2. [使用開始] ボタンをクリックし、サインアップまたはサインインします。最初にログインしたユーザーは管理者になります。
+3. [Hello World]({{site.baseurl}}/2.0/hello-world/)ドキュメントを使用して、プロジェクトを追加します。
 
-## Troubleshooting
+## トラブルシューティング
 
-Check the Fleet State by clicking the wrench icon on the sidebar navigation of CircleCI and select Fleet State. - If no instances appear in the list, then the first builder is still starting. The first build may remain queued while the build containers start. - If there is a builder instance in the list but its state is starting-up, then it is still downloading the build container image and starting its first build containers.
+CircleCIのサイドバー・ナビゲーションにあるレンチのアイコンをクリックし、フリートの状態をチェックします。 - リストにインスタンスが表示されない場合、最初のBuilderがまだ開始中です。 ビルドコンテナの開始中、最初のビルドがキューに置かれたままになることがあります。 - リストにBuilderのインスタンスが表示されているが、状態が開始中の場合、ビルドコンテナのイメージをダウンロードし、最初のビルドコンテナを開始する作業がまだ終了していません。
 
-After the build containers start and complete downloading of images, the first build should begin immediately.
+ビルドコンテナが開始し、イメージのダウンロードが完了した後で、最初のビルドがただちに開始されます。
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance.
+15分間更新がなく、[更新] ボタンを押しても更新が行われない場合、[CircleCIサポート](https://support.circleci.com/hc/en-us)にお問い合わせください。
