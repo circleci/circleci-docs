@@ -24,7 +24,7 @@ CircleCI に SSH 公開鍵を登録する必要があるケースは、以下の
 
 3. **Add SSH Key** ボタンをクリックします
 
-4. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
+4. **Hostname**フィールドに、キーと関連付けられているホスト(git.heroku.comなど)を入力します。hostnameを指定しない場合は、すべてのホストに同じキーが使用されます。
 
 5. **Private Key** には、登録したい SSH 鍵の文字列を貼り付けます
 
