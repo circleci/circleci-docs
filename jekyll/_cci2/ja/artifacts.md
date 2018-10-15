@@ -2,16 +2,16 @@
 layout: classic-docs
 title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
-description: "Example of uploading artifacts created during a build"
+description: "ビルド中に作成されるアーティファクトのアップロード例"
 categories:
   - configuring-jobs
 order: 70
 ---
-This document describes how to work with Artifacts in the following sections:
+このドキュメントでは、アーティファクトの操作方法について説明します。このドキュメントには次のセクションがあります。
 
 * TOC {:toc}
 
-## Artifacts Overview
+## アーティファクトの概要
 
 Artifacts persist data after a job is completed and may be used for longer-term storage of the outputs of your build process.
 
@@ -29,7 +29,7 @@ Find links to the artifacts at the top of the **Job page**. Artifacts are stored
 
 **Note:** Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
-## Uploading Artifacts
+## アーティファクトのアップロード
 
 To upload artifacts created during builds, use the following example:
 
@@ -61,25 +61,25 @@ The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
-* `path` is a path to the file or directory to be uploaded as artifacts.
-* `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
+* `path`は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
+* `destination` **(オプション)**は、アーティファクトAPIでアーティファクトのパスに追加されるプレフィックスです。`path`に指定されたファイルのディレクトリが、デフォルトとして使用されます。
 
-## Uploading Core Files
+## コアファイルのアップロード
 
 This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
-1. Create a `Makefile` with the following lines:
+1. 次の行を含む`Makefile`を作成します。
     
         all:
            gcc -o dump main.c
 
-2. Create a `main.c` file with the following lines.
+2. 次の行を含む`main.c`を作成します。
     
     ```C #include <stdlib.h>
     
     int main(int argc, char **argv) { abort(); } ```
 
-3. Run `make` and `./dump` on the generated program to print `Aborted (core dumped)`!
+3. 生成されたプログラムで`make`および `./dump`を実行し、`Aborted (core dumped)`! を印刷します。
 
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 
