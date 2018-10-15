@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using the API to Trigger Jobs"
 short-title: "Using the API to Trigger Jobs"
-description: "How to define and trigger non-build jobs"
+description: "ビルド以外のジョブの定義およびトリガー方法"
 categories:
   - configuring-jobs
 order: 80
@@ -72,8 +72,8 @@ jobs:
 
 Notes on the above example:
 
-- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
-- We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
+- ビルドジョブの`deploy`ステップを必ず使用してください。これを使用しないと、並列処理の値がNの場合に、N回のビルドがトリガーされることがあります。
+- API呼び出しを`build_parameters[CIRCLE_JOB]=deploy_docker`で使用し、`deploy_docker`ジョブのみが実行されるようにします。
 
 ## See Also
 
