@@ -1,54 +1,54 @@
 ---
 layout: classic-docs
-title: "Installing CircleCI 2.0 on Amazon Web Services with Terraform"
+title: "Terraformを使用してAmazon WebサービスにCircleCI 2.0をインストールする方法"
 category:
-  - administration
+  - 管理
 order: 10
-description: "How to install CircleCI on Amazon Web Services (AWS)."
+description: "Amazon Webサービス(AWS)にCircleCIをインストールする方法"
 ---
-This document provides step-by-step instructions for installing CircleCI 2.0 on Amazon Web Services (AWS) with Terraform in the following sections:
+このドキュメントでは、Terraformを使用してAmazon Webサービス(AWS)にCircleCI 2.0をインストールする詳細手順について説明します。このドキュメントには以下のセクションがあります。
 
 * TOC {:toc}
 
-If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your [CircleCI account representative](https://support.circleci.com/hc/en-us/requests/new) for assistance with upgrading.
+CircleCI Enterpriseがインストールされていれば、現在のインストールでCircleCI 2.0の機能にアクセスでき、現在の契約およびサポートレベル内での制限はありません。 アップグレードの方法については、[CircleCIアカウント担当者](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
 
-**Notes:** - CircleCI 2.0 is only available on AWS. - Teams may create a new CircleCI 2.0 `.circleci/config.yml` file in their repositories to add new 2.0 projects incrementally while continuing to build 1.0 projects which use a `circle.yml` configuration file.
+**注: **- CircleCI 2.0はAWS上でのみ利用できます。 - チームで新しいCircleCI 2.0の`circleci/config.yml`ファイルをリポジトリに作成し、新しい2.0プロジェクトを段階的に追加しながら、それと平行して`circle.yml`構成ファイルを使用する1.0プロジェクトを引き続きビルドできます。
 
-## Prerequisites
+## 前準備
 
-Install the following automated infrastructure provisioning software:
+次の自動インフラストラクチャ・プロビジョニング・ソフトウェアをインストールします。
 
-* Terraform, see the [Download Terraform](https://www.terraform.io/downloads.html) web site for links to packages for your architecture.
+* Terraform。 [Terraformのダウンロード](https://www.terraform.io/downloads.html)で、お使いのアーキテクチャ用のパッケージを探してください。
 
-Have the following information available before beginning the installation procedure:
+インストール手順の開始前に、次の情報が利用可能なことを確認します。
 
-* CircleCI License file (.rli), contact [CircleCI support](https://support.circleci.com/hc/en-us/requests/new) for a license.
-* AWS Access Key, AWS Secret Key.
-* Name of [AWS EC2 SSH key](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).
-* AWS Region, for example `us-west-2`.
-* AWS Virtual Private Cloud (VPC) ID and AWS Subnet ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
-* Set your VPC [`enableDnsSupport`] setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) Amazon Web Services documentation for additional details.
+* CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
+* AWSアクセスキーとAWS秘密キー。
+* Name of [AWS EC2 SSHキー](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)の名前。
+* AWSリージョン、たとえば`us-west-2`。
+* AWS仮想プライベートクラウド(VPC)のIDと、AWSサブネットID。自分のアカウントがデフォルトVPCを使用するよう構成されていれば、デフォルトVPC IDは、Amazonの [アカウントの属性] に記載されています。
+* VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
 
-## Private Subnet Requirements
+## 非公開サブネットの要件
 
-The following additional settings are required to support using private subnets on AWS with CircleCI:
+AWS上の非公開サブネットをCircleCIで使用するには、次の追加設定が必要です。
 
-* The private subnet for builder boxes must be configured with a [NAT gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html) or an [internet gateway](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html) configured for the outbound traffic to the internet via attached route tables.
-* The [VPC Endpoint for S3](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/) should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
-* Adequately power the NAT instance for heavy network operations. Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources. A NAT that is inadequate could cause slowness in network and cache operations.
-* If you are integrating with [github.com](https://github.com), ensure that your network access control list (ACL) whitelists ports 80 and 443 for GitHub webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
-* See the Services section of the [Administrator's Overview]({{site.baseurl}}/2.0/overview#services) for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
+* ビルダボックス用の非公開サブネットは、[NATゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)または[インターネットゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)で、添付のルートテーブルにより、インターネットへの外向けトラフィック用に構成する必要があります。
+* [S3用のVPCエンドポイント](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にします。 S3用のVPCエンドポイントを有効にすると、CircleCIや、サブネット内の他のノードについて、S3動作が大幅に改良されます。
+* NATインスタンスに、多くのネットワーク動作に耐えられるよう、十分な性能があることを確認します。 展開の仕様によっては、Dockerや外部のネットワークリソースを使用して、NATインスタンスを並列性の高いビルドにすることもできます。 NATの性能が不十分な場合、ネットワークやキャッシュの動作速度が低下する可能性があります。
+* [github.com](https://github.com)と統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにGitHub webhooksのポート80および443が含まれていることを確認します。 GitHubと統合するときは、CircleCIを公開サブネットにセットアップするか、github.comのトラフィックを転送するための公開ロードバランサーをセットアップします。
+* CircleCIインストールのインスタンスにアクセス可能な必要のあるポートの詳細については、「[管理者向け概要]({{site.baseurl}}/2.0/overview#services)」の「サービス」セクションを参照してください。
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
-## Planning
+## 計画
 
-Have available the following information and policies before starting the Preview Release installation:
+プレビューリリースのインストールを開始する前に、次の情報とポリシーが利用可能なことを確認します。
 
-* If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
-* Plan to provision at least two AWS instances, one for the Services and one for your first set of Nomad Clients. Best practice is to use an `m4.2xlarge` instance with 8 vCPUs and 32GB RAM for the Services as well as Nomad Clients instances.
-* AWS instances must have outbound access to pull Docker containers and to verify your license.
-* In order to provision required AWS entities with Terraform you need an IAM User with following permissions:
+* ネットワークプロキシを使用する場合、CircleCI 2.0のインストールを試みる前に、自社のアカウントチームに問い合わせます。
+* サービス用に1つ、Nomad Clientsの最初のセット用に1つ、最低2つのAWSインスタンスのプロビジョニングを計画します。 ベストプラクティスとして、サービスとNomad Clientsインスタンスの両方に、8つのvCPUと32GBのRAMを持つ`m4.2xlarge`インスタンスを使用することをお勧めします。
+* AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。
+* 必要なAWSエンティティをTerraformでプロビジョニングするには、次のアクセス許可を持つIAMユーザーが必要です。
 
     {
         "Version": "2012-10-17",
@@ -100,31 +100,31 @@ Have available the following information and policies before starting the Previe
     }
     
 
-## Installation with Terraform
+## Terraformによるインストール
 
 1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository (if you already have it cloned, make sure it is up-to-date and you are on the `master` branch: `git checkout master && git pull`).
-2. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
-3. Fill `terraform.tfvars` with appropriate AWS values for section 1. 
-4. Specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters. Passphrase cannot be empty.
-5. Specify the instance type for your Nomad Clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m4.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types) guide for details. **Note:** The `builder_instance_type` is only used for 1.0 and is disabled by default in section 3. 
-6. Run `terraform apply` to provision.
-7. Go to the provided URL at the end of Terraform output and follow the instructions.
-8. Enter your license.
-9. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required).
-10. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). Again, it is best to use an instance profile for authentication (no additional configuration required).
-11. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
-12. After the application has started, log in to CircleCI and start running 2.0 builds!
+2. `make init`を実行し、`terraform.tfvars`ファイルを初期化します(既に`terraform.tfvars`が存在する場合、同じディレクトリにバックアップされます)。
+3. `terraform.tfvars`に、セクション1の適切なAWS値を入力します。 
+4. セクション2に`circle_secret_passphrase`を指定します。`...`の部分は英数字に置き換えます。パスフレーズは空白にできません。
+5. Nomad Clientsのインスタンスタイプを指定します。 デフォルトでは、Nomad Clients用の `terraform.tfvars`ファイルに指定される値は `m4.2xlarge` (8つのvCPU、32GBのRAM)です。 各Nomad Clientsが同時に実行できるCircleCIジョブの数を増やすには、`terraform.tfvars`ファイルのセクション2を変更し、 `nomad_client_instance_type`の値を大きくします。 詳細については、AWSの「[Amazon EC2インスタンスタイプ](https://aws.amazon.com/ec2/instance-types)」ガイドを参照してください。 **注: **`builder_instance_type`は1.0でのみ使用されるもので、セクション3ではデフォルトで無効になっています。 
+6. `terraform apply`を実行してプロビジョニングを行います。
+7. Terraform出力の末尾にあるURLに移動し、指示に従います。
+8. ライセンスを入力します。
+9. `Storage`セクションを入力します。ベストプラクティスとして、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。
+10. [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/)または`machine` executor機能の使用を計画している場合、vm-serviceを構成します(後からでも構成できます)。 ここでも、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。
+11. 設定の適用後、管理コンソール・ダッシュボードに転送されます。 必要なDockerコンテナすべてをダウンロードするため、数分間が必要です。 管理コンソールで、`Failure reported from operator: no such image`が報告された場合、[スタート] を再クリックすると動作が続行します。
+12. アプリケーションの開始後、CircleCIにログインし、2.0ビルドの実行を開始します。
 
-## Validating your Installation
+## インストールの検証
 
-1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage.
-2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
-3. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
+1. ダッシュボードの [開く] リンクをクリックすると、CircleCI アプリに移動します。CircleCIアプリケーションの起動中に開始ページが少しの間表示されてから、ホームページへ自動的に転送されます。
+2. [使用開始] ボタンをクリックし、サインアップまたはサインインします。最初にログインしたユーザーは管理者になります。
+3. [Hello World]({{site.baseurl}}/2.0/hello-world/)ドキュメントを使用して、プロジェクトを追加します。
 
-## Troubleshooting
+## トラブルシューティング
 
-If you're unable to run your first builds successfully please start with our [Troubleshooting]({{site.baseurl}}/2.0/troubleshooting/) guide as well as an [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad/) document for information about how to check status of Builders.
+最初のビルドが正しく実行されない場合、弊社の[トラブルシューティング]({{site.baseurl}}/2.0/troubleshooting/)ガイドや、『[Nomadクラスタの動作の概要]({{site.baseurl}}/2.0/nomad/)』ドキュメントを参照し、ビルダのステータスを調べる方法を確認します。
 
-After the build containers start and complete downloading of images, the first build should begin immediately.
+ビルドコンテナが開始し、イメージのダウンロードが完了した後で、最初のビルドがただちに開始されます。
 
-If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance.
+15分間更新がなく、[更新] ボタンを押しても更新が行われない場合、[CircleCIサポート](https://support.circleci.com/hc/en-us)にお問い合わせください。
