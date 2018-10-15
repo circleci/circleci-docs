@@ -1,46 +1,46 @@
 ---
 layout: classic-docs
-title: "Running Docker Commands"
-short-title: "Running Docker Commands"
-description: "How to build Docker images and access remote services"
+title: "Docker コマンドの実行手順"
+short-title: "Docker コマンドの実行手順"
+description: "Docker イメージのビルドとリモートサービスへのアクセスの方法"
 categories:
   - configuring-jobs
 order: 55
 ---
-This document explains how to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers in the following sections:
+このドキュメントでは、Docker イメージをビルドして他の場所にデプロイ、または詳細テストを行う方法、およびリモート Docker コンテナでサービスを開始する方法について説明します。このドキュメントには以下のセクションがあります。
 
 - TOC {:toc}
 
-## Overview
+## 概要
 
-To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
+デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離され、Docker コマンドの実行用に構成されたリモート環境ですす。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
 
 ```yaml
 jobs:
   build:
     steps:
-      # ... steps for building/testing app ...
+      # ... アプリのビルド/テスト用の手順 ...
 
       - setup_remote_docker
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current \[primary container\]\[primary-container\] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+`setup_remote_docker` が実行されるとリモート環境が作成され、現在の \[primary container\]\[primary-container\] がそのリモート環境用に構成されます。 その後は、Docker に関連するコマンドはすべて、この新しい環境で安全に実行されるようになります。
 
 **※**`setup_remote_docker` は、現在のところ `machine` および `macos` Executor とは一緒に使えません。
 
-### Specifications
+### 仕様
 
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications:
+リモート Docker 環境の技術仕様は次のとおりです。
 
 CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB {: class="table table-striped"}
 
-### Example
+### 例
 
 {:.no_toc}
 
-Following is an example of building a Docker image using `machine` with the default image:
+`machine` を使用して、デフォルトイメージで Docker イメージをビルドする例を次に示します。
 
 ```yaml
 version: 2
@@ -49,20 +49,20 @@ jobs:
    machine: true
    steps:
      - checkout
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
+     # UI に保管されている資格情報を使用して
+     # プライベート Docker イメージによる専用 DB を開始する
      - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # build the application image
+     # アプリケーションイメージをビルドする
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # deploy the image
+     # イメージをデプロイする
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-Following is an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
+弊社の [Docker デモ用プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージのビルドとプッシュに使用されている例を、次に示します。
 
 ```yaml
 version: 2
@@ -73,13 +73,13 @@ jobs:
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout
-      # ... steps for building/testing app ...
+      # ... アプリのビルドおよびテストの手順は次のとおりです。
 
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
-      # use a primary image that already has Docker (recommended)
-      # or install it during a build like we do here
+      # Docker が既に存在するプライマリイメージを使う (推奨) か
+      # 以下のようにビルド中にインストールします
       - run:
           name: Install Docker client
           command: |
@@ -89,7 +89,7 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
 
-      # build and push Docker image
+      # Docker イメージのビルドとプッシュ
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
@@ -97,14 +97,14 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-Let’s break down what’s happening during this build’s execution:
+このビルドの実行中に行われる動作の詳細は次のとおりです。
 
-1. All commands are executed in the \[primary container\]\[primary-container\].
-2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
+1. すべてのコマンドは、\[primary container\]\[primary-container\] 内で実行されます。
+2. `setup_remote_docker` が呼び出されると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。 Docker 関連のコマンドはすべてプライマリコンテナ内でも実行されますが、イメージのビルド/プッシュおよびコンテナの実行は、リモート Docker エンジン内で処理されます。
 3. Docker イメージのビルド高速化のため \[Docker レイヤーキャッシュ\]\[docker-layer-caching\] をここで有効にしています
-4. We use project environment variables to store credentials for Docker Hub.
+4. プロジェクト環境変数を使用して、Docker Hub の資格情報を保存します。
 
-## Docker Version
+## Docker のバージョン
 
 ジョブによって特定のバージョンの Docker を使う必要がある場合は、`version` キーをセットします。
 
@@ -113,7 +113,7 @@ Let’s break down what’s happening during this build’s execution:
           version: 17.05.0-ce
 ```
 
-The currently supported versions are:
+現在サポートしているバージョンは次のとおりです。
 
 [安定版](https://download.docker.com/linux/static/stable/x86_64/) - `17.03.0-ce` (デフォルト) - `17.06.0-ce` - `17.06.1-ce` - `17.09.0-ce` - `18.03.0-ce` - `18.03.1-ce` - `18.05.0-ce`
 
@@ -121,11 +121,11 @@ The currently supported versions are:
 
 Docker をインストールした Git を含む Docker イメージを使いたい時は、`17.05.0-ce-git` を利用してください。 **注：**`version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
-## Separation of Environments
+## 環境の分離
 
 ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることはできません。
 
-### Accessing Services
+### サービスへのアクセス方法
 
 {:.no_toc}
 
@@ -134,7 +134,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 ```yaml
 #...
       - run:
-          name: "Start Service and Check That it’s Running"
+          name: "サービスを起動し実行状況をチェックする"
           command: |
             docker run -d --name my-app my-app
             docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
@@ -151,7 +151,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 #...
 ```
 
-### Mounting Folders
+### フォルダのマウント
 
 {:.no_toc}
 
@@ -159,11 +159,11 @@ Docker をインストールした Git を含む Docker イメージを使いた
 
 ```yaml
 - run: |
-    # create a dummy container which will hold a volume with config
+    # 設定ファイルのコピー先ボリューム用のダミーコンテナを作成します
     docker create -v /cfg --name configs alpine:3.4 /bin/true
-    # copy a config file into this volume
+    # 設定ファイルをダミーコンテナのボリュームにコピーします
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
-    # start an application container using this volume
+    # このボリュームを使ってアプリエーションコンテナを起動します
     docker run --volumes-from configs app-image:1.2.3
 ```
 
@@ -171,12 +171,12 @@ Docker をインストールした Git を含む Docker イメージを使いた
 
 ```yaml
 - run: |
-    # start container with the application
-    # make sure you're not using `--rm` option otherwise the container will be killed after finish
+    # アプリケーションとともにコンテナを起動します
+    # 「--rm」オプションを指定してはいけません。終了時にコンテナが kill されてしまいます
     docker run --name app app-image:1.2.3
 
 - run: |
-    # after application container finishes, copy artifacts directly from it
+    # アプリケーションコンテナが終了した後、そこからアーティファクトが直接コピーされます
     docker cp app:/output /path/in/your/job/space
 ```
 
@@ -200,14 +200,14 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 {% raw %}
 
 ```yaml
-# Populate bundler-data container from circleci cache
+# CircleCI キャッシュから bundler-data コンテナを格納する
 - restore_cache:
     keys:
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}
       - v4-bundler-cache-{{ arch }}      
 - run:
-    name: Restoring bundler cache into docker volumes
+    name: bundler cache を Docker ボリュームにリストア
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
@@ -218,9 +218,9 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
 
-# Back up the same volume to circle cache
+# 同じボリュームを CircleCI キャッシュにバックアップする
 - run:
-    name: Backing up bundler cache from docker volumes
+    name: bundler キャッシュを Docker ボリュームから バックアップ
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
