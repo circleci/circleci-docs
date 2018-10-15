@@ -1,35 +1,35 @@
 ---
 layout: classic-docs
-title: Browser Testing
-description: Browser Testing on CircleCI
+title: ブラウザーのテスト
+description: CircleCI でのブラウザーのテスト
 category:
-  - test
+  - テスト
 ---
-This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:
+このドキュメントでは、CircleCI の構成をブラウザーでテストおよびデバッグする一般的な方法について説明します。このドキュメントには以下のセクションがあります。
 
 * TOC {:toc}
 
-## Prerequisites
+## 前準備
 
 {:.no_toc}
 
 Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
-## Overview
+## 概要
 
 {:.no_toc}
 
-Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch.
+コードをプッシュしてコミットするごとに、CircleCI は選択したブラウザーに対してすべてのテストを自動的に実行します。 ブラウザーベースのテストは、変更が行われたとき、すべてのデプロイの前、またはとテイクのブランチのたびに実行されるよう構成できます。
 
 ## Selenium
 
-Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
+ブラウザーテスト用の多くの自動化ツールは、広く採用されているブラウザー駆動標準である Selenium WebDriver を使用しています。
 
-Selenium WebDriver provides a common API for programatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the [Selenium documentation](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project) for details on set up. Refer to the [Xvfb man page](http://www.xfree86.org/4.0.1/Xvfb.1.html) for virtual framebuffer X server documentation.
+Selenium WebDriver には、Java、Python、Ruby などいくつかの一般的な言語で実装されているブラウザーをプログラムで動かすための、一般的な API が含まれています。 Selenium WebDriver は、これらのブラウザー用に統一されたインターフェースを用意しているため、ブラウザーテストは 1 回だけ作成すれば十分です。 これらのテストは、すべてのブラウザーとプラットフォームで動作します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
-WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium Server, and it is up to the server to drive the browsers.
+WebDriver は、ローカルとリモートの 2 つのモードで動作できます。 ローカルで実行すると、テストは Selenium WebDriver ライブラリを使用し、同じマシンのブラウザーと直接通信を行います。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
 
-If Selenium is not included in your primary docker image, install and run Selenium as shown below::
+プライマリ Docker イメージに Selenium が含まれていない場合、次に示すように Selenium をインストールし、実行できます。
 
 ```yml
 version: 2
@@ -49,11 +49,11 @@ jobs:
           background: true
 ```
 
-Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Ruby on Rails 用の Capybara/Selenium/Chrome headless CircleCI 2.0 構成のレイについては、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
-For more information about working with Headless Chrome, see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/) and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112).
+Headless Chrome の使用方法の詳細については、CircleCI ブログの投稿「[Headless Chrome による、より信頼性が高く効率的なブラウザーテスト](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」および、それに関連する[ディスカッションスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
-As an alternative to configuring your environment for Selenium, Sauce Labs provides a Selenium Server as a service, with a large number of browsers and system combinations available to test. Sauce Labs also has some extra goodies like videos of all test runs.
+環境を Selenium 用に構成する代わりに、Sauce Labs から提供されている Selenium Server をサービスとして使用することもできます。これにより、多くのブラウザーとシステムの組み合わせをテストに使用できます。 Sauce Labs は、すべてのテスト実行のビデオなど、役に立つ他の資料も用意しています。
 
 ## Sauce Labs
 
@@ -88,107 +88,107 @@ jobs:
             kill -9 `cat /tmp/sc_client.pid`          
 ```
 
-## BrowserStack and Appium
+## BrowserStack と Appium
 
-As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
+上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 その後で、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/2.0/env-vars/)を、自分の BrowserStack アカウントのものに設定します。
 
-For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
+モバイルアプリケーションの場合、Appium をジョブにインストールし、CircleCI の USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/2.0/env-vars/)を使用して、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用することもできます。
 
-## Debugging Browser Tests
+## ブラウザーテストのデバッグ
 
-Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
+統合テストは、特にリモートマシンで実行している場合、デバッグが困難なことがあります。このセクションでは、CircleCI でブラウザーテストをデバッグする方法について、いくつかの例を紹介します。
 
-### Using Screenshots and Artifacts
-
-{:.no_toc}
-
-CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
-
-Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
-
-* [Manually, using Selenium directly](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
-* [Automatically on failure, using Cucumber](https://github.com/mattheworiordan/capybara-screenshot)
-* [Automatically on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
-
-### Using a Local Browser to Access HTTP server on CircleCI
+### スクリーンショットとアーティファクトの使用
 
 {:.no_toc}
 
-If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
+CircleCI の構成により、[ビルドアーティファクト]({{ site.baseurl }}/2.0/artifacts/)を収集し、自分のビルドから使用可能にできます。 For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
+
+スクリーンショットの保存は簡単です。これは WebKit および Selenium に組み込まれた機能で、ほとんどのテストスィートでサポートされています。
+
+* [Selenium を直接使用して手動で](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
+* [Cucumber を使用して障害時に自動的に](https://github.com/mattheworiordan/capybara-screenshot)
+* [Behat と Mink を使用して障害時に自動的に](https://gist.github.com/michalochman/3175175)
+
+### ローカルブラウザーを使用して CircleCI の HTTP サーバーにアクセスする
+
+{:.no_toc}
+
+CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカルマシン上で実行されているブラウザーを使用して、失敗したテストのデバッグを行えると便利です。 この操作、SSH 対応の実行により簡単にセットアップできます。
 
 1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into the container over SSH apears, as follows:
 
     ssh -p 64625 ubuntu@54.221.135.43
     
 
-1. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
+1. コマンドへのポート転送を追加するには、`-L` フラグを使用します。 次の例では、`http://localhost:3000` への要求を、CircleCI コンテナのポート `8080` に転送します。 This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
 
     ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
     
 
-1. Then, open your browser on your local machine and navigate to `http://localhost:8080` to send requests directly to the server running on port `3000` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
+1. 次に、ローカルマシンでブラウザーを開き、`http://localhost:8080` を開いて、CircleCI コンテナのポート `3000` で実行されているサーバーに要求を直接転送します。 または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
 
-This is a very easy way to debug things when setting up Selenium tests, for example.
+この方法で、たとえば Selenium テストをセットアップするときのデバッグが非常に簡単になります。
 
-### Interacting With the Browser Over VNC
+### VNC 上でのブラウザーとの連携
 
 {:.no_toc}
 
-VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
+VNC を使用すると、テストを実行しているブラウザーを表示し、連携が可能になります。 この方法は、実際のブラウザーを実行しているドライバを使用しているときのみ機能します。 Selenium がコントロールしているブラウザーとは連携できますが、PhantomJS はヘッドレスなので、連携できません。
 
-1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/). [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
+1. VNC ビューアをインストールします。 macOS を使用している場合、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討します。 [RealVNC](http://www.realvnc.com/download/viewer/) も、ほとんどのプラットフォームで使用できます。
 
-2. Open a Terminal window, [start an SSH run]({{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
+2. ターミナルウィンドウを開き、CircleCI コンテナに対して [SSH の実行を開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、リモートポート 5901 からローカルポート 5902 へ転送します。
 
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 
-1. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
+1. `vnc4server` および `metacity` パッケージをインストールします。`metacity` を使用してブラウザーを移動し、ターミナルウィンドウに戻すことができます。
 
 ```bash
 sudo apt install vnc4server metacity
 ```
 
-1. After connecting to the CircleCI container, start the VNC server.
+1. CircleCI コンテナに接続してから、VNC サーバーを開始します。
 
 ```bash
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
 
-1. Since your connection is secured with SSH, there is no need for a strong password. However, you still need *a* password, so enter `password` at the prompt.
+1. SSH により接続のセキュリティが保護されているので、強力なパスワードの必要はありません。ただし、パスワード*は*依然として必要なので、プロンプトで `password` と入力します。
 
-2. Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
+2. VNC ビューアを開始し、`localhost:5902` に接続します。プロンプトで `password` と入力します。
 
-3. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
+3. ディスプレイにターミナルウィンドウが表示されます。SSH トンネルによって接続のセキュリティが保護されているので、セキュアでない、または暗号化されていない接続についての警告は無視します。
 
-4. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
+4. VNC サーバーでウィンドウを開けるようにするため、`DISPLAY` 変数を設定します。このコマンドを使用しない場合、ウィンドウはデフォルトの (ヘッドレス) X サーバーに開きます。
 
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
 
-1. Start `metacity` in the background.
+1. `metacity` をバックグラウンドで開始します。
 
 ```bash
 ubuntu@box159:~$ metacity &
 ```
 
-1. Start `firefox` in the background.
+1. `firefox` をバックグラウンドで開始します。
 
 ```bash
 ubuntu@box159:~$ firefox &
 ```
 
-Now, you can run integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
+これで、コマンドラインから統合テストを実行し、予期しない動作がないかブラウザーで確認できます。テストがローカルマシンで実行されているときと同様に、ブラウザーを操作することもできます。
 
-### Sharing CircleCI's X Server
+### CircleCI の X サーバーの共有
 
 {:.no_toc}
 
-If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
+VNC サーバーのセットアップを頻繁に行う場合、プロセスを自動化できます。`x11vnc` を使用して、VNC サーバーを X に接続できます。
 
-1. Download [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) and start it before your tests:
+1. [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) をダウンロードし、テストの前に開始します。
 
     steps:
       - run:
@@ -199,37 +199,37 @@ If you find yourself setting up a VNC server often, then you might want to autom
           background: true
     
 
-1. Now when you [start an SSH build]({{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+1. これで、[SSH ビルドを開始する]({{ site.baseurl }}/2.0/ssh-access-jobs/)とき、デフォルトのテストステップが実行されている間に VNC サーバーへ接続できます。 SSH トンネリングが可能な VNC ビューアを使用するか、自分でトンネルをセットアップできます。
 
     $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
     
 
-## X11 forwarding over SSH
+## SSH 上の X11 転送
 
-CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
+CircleCI は、SSH 上の X11 転送もサポートしています。X11 転送は VNC とほぼ同じで、CircleCI 上で実行されているブラウザーを、ローカルマシンから操作できます。
 
-1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
+1. コンピュータに X Window システムをインストールします。macOS を使用している場合、[XQuartz](http://xquartz.macosforge.org/landing/) を検討します。
 
-2. With X set up on your system, [start an SSH build]({{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
+2. システムに X がセットアップされた状態で、CircleCI VM への [SSH ビルドを開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、`-X` フラグを使用して転送をセットアップします。
 
     daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
     
 
-This will start an SSH session with X11 forwarding enabled.
+これによって、X11 転送が有効な状態で SSH セッションが開始されます。
 
-1. To connect your VM's display to your machine, set the display environment variable to `localhost:10.0`
+1. VM の表示を自分のマシンと接続するには、display 環境変数を `localhost:10.0` に設定します。
 
     ubuntu@box10$ export DISPLAY=localhost:10.0
     
 
-1. Check that everything is working by starting xclock.
+1. xclock を開始し、すべてが動作していることをチェックします。
 
     ubuntu@box10$ xclock
     
 
-You can kill xclock with `Ctrl+c` after it appears on your desktop.
+xclock がデスクトップに表示された後で、`Ctrl+c` を使用して終了できます。
 
-Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
+これで、コマンドラインから統合テストを実行し、予測しない動作がないかブラウザーで確認できます。テストがローカルマシンで実行されているときと同様に、ブラウザーを操作することもできます。
 
 ## See Also
 
