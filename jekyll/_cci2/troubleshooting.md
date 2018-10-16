@@ -13,6 +13,10 @@ please [generate a support bundle](https://help.replicated.com/docs/native/packa
 and contact our Support Engineers
 by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
+## Testing Server Functionality
+
+We recommend running using [our realitycheck repo](https://github.com/circleci/realitycheck) to check basic CircleCI functionality. Please note the contexts test will fail without the given contexts existing in the system.
+
 ## Debugging Queuing Builds
 
 If your Services component is fine, but builds are not running or all builds are queueing, follow the steps below.
