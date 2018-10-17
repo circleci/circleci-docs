@@ -103,9 +103,9 @@ replicated -version
 Try restarting Replicated services. You can do this by running the following commands on the service box:
 
 ```
-sudo restart replicated-ui
-sudo restart replicated
-sudo restart replicated-agent
+sudo service replicated-ui restart
+sudo service replicated restart
+sudo service replicated-operator restart
 ```
 
 Then, go to your services box admin (i.e. https://YOUR-CCIE-INSTALL:8800) and try restarting with "Stop Now" and "Start Now".
