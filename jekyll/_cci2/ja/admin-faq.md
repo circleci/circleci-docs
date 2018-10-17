@@ -95,9 +95,9 @@ Replicated 使用時にトラブルが発生したとき、問題を検証する
 
 次に Replicated サービスを再起動します。サービスボックスで下記の通りコマンドを実行してください。
 
-    sudo restart replicated-ui
-    sudo restart replicated
-    sudo restart replicated-agent
+    sudo service replicated-ui restart
+    sudo service replicated restart
+    sudo service replicated-operator restart
     
 
 その後、管理コンソール（https://CircleCI サーバーアドレス:8800）にアクセスし、「Stop Now」の後に「Start Now」を実行して CircleCI を再起動してください。
