@@ -198,24 +198,24 @@ All convenience images have been extended with additional tools.
 With the exception of [Android images](https://hub.docker.com/r/circleci/android),
 all images include the following packages, installed via `apt-get`:
 
-- bzip2
-- ca-certificates
-- curl
-- git
-- gnupg
-- gzip
-- locales
-- mercurial
-- net-tools
-- netcat
-- openssh-client
-- parallel
-- sudo
-- tar
-- unzip
-- wget
-- xvfb
-- zip
+- `bzip2`
+- `ca-certificates`
+- `curl`
+- `git`
+- `gnupg`
+- `gzip`
+- `locales`
+- `mercurial`
+- `net-tools`
+- `netcat`
+- `openssh-client`
+- `parallel`
+- `sudo`
+- `tar`
+- `unzip`
+- `wget`
+- `xvfb`
+- `zip`
 
 The specific version of a particular package
 that gets installed in a particular CircleCI image variant
