@@ -221,8 +221,8 @@ The specific version of a particular package
 that gets installed in a particular CircleCI image variant
 depends on the default version included in the package directory
 for the Linux distribution/version installed in that variant's base image.
-Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie)-
-or [Stretch](https://packages.debian.org/stretch)-based images,
+Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
+or [Stretch](https://packages.debian.org/stretch/)-based images,
 however some extend [Ubuntu](https://packages.ubuntu.com)-based images.
 For details on individual variants of CircleCI images, see the
 [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
