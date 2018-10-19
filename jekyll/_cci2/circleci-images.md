@@ -224,6 +224,8 @@ for the Linux distribution/version installed in that variant's base image.
 Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie)-
 or [Stretch](https://packages.debian.org/stretch)-based images,
 however some extend [Ubuntu](https://packages.ubuntu.com)-based images.
+For details on individual variants of CircleCI images, see the
+[circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 
 The following packages are installed via `curl` or other means.
 
