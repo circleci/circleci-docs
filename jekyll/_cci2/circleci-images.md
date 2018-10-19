@@ -195,26 +195,35 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 
 All convenience images have been extended with additional tools.
 
-The following packages are installed via `apt-get` on every image.
+With the exception of [Android images](https://hub.docker.com/r/circleci/android),
+all images include the following packages, installed via `apt-get`:
 
-- [bzip2](https://packages.debian.org/stretch/bzip2)
-- [ca-certificates](https://packages.debian.org/stretch/ca-certificates)
-- [curl](https://packages.debian.org/stretch/curl)
-- [git](https://packages.debian.org/stretch/git)
-- [gnupg](https://packages.debian.org/stretch/gnupg)
-- [gzip](https://packages.debian.org/stretch/gzip)
-- [locales](https://packages.debian.org/stretch/locales)
-- [mercurial](https://packages.debian.org/stretch/mercurial)
-- [net-tools](https://packages.debian.org/stretch/net-tools)
-- [netcat](https://packages.debian.org/stretch/netcat)
-- [openssh-client](https://packages.debian.org/stretch/openssh-client)
-- [parallel](https://packages.debian.org/stretch/parallel)
-- [sudo](https://packages.debian.org/stretch/sudo)
-- [tar](https://packages.debian.org/stretch/tar)
-- [unzip](https://packages.debian.org/stretch/unzip)
-- [wget](https://packages.debian.org/stretch/wget)
-- [xvfb](https://packages.debian.org/stretch/xvfb)
-- [zip](https://packages.debian.org/stretch/zip)
+- bzip2
+- ca-certificates
+- curl
+- git
+- gnupg
+- gzip
+- locales
+- mercurial
+- net-tools
+- netcat
+- openssh-client
+- parallel
+- sudo
+- tar
+- unzip
+- wget
+- xvfb
+- zip
+
+The specific version of a particular package
+that gets installed in a particular CircleCI image variant
+depends on the default version included in the package directory
+for the Linux distribution/version installed in that variant's base image.
+Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie)-
+or [Stretch](https://packages.debian.org/stretch)-based images,
+however some extend [Ubuntu](https://packages.ubuntu.com)-based images.
 
 The following packages are installed via `curl` or other means.
 
