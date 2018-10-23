@@ -172,6 +172,14 @@ We're also using an image for PostgreSQL, along with 2 environment variables for
           POSTGRES_DB: circle_test
 ```
 
+After setting up Docker we will set an environment variable to store the path to
+our test results.
+
+```yaml
+    environment:
+      TEST_RESULTS: /tmp/test-results
+```
+
 Now we need to add several `steps` within the `build` job.
 
 The `checkout` step will default to the `working_directory` we have already defined.
