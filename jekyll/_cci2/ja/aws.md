@@ -114,6 +114,7 @@ AWS上の非公開サブネットをCircleCIで使用するには、次の追加
 10. [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/)または`machine` executor機能の使用を計画している場合、vm-serviceを構成します(後からでも構成できます)。 ここでも、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。
 11. 設定の適用後、管理コンソール・ダッシュボードに転送されます。 必要なDockerコンテナすべてをダウンロードするため、数分間が必要です。 管理コンソールで、`Failure reported from operator: no such image`が報告された場合、[スタート] を再クリックすると動作が続行します。
 12. アプリケーションの開始後、CircleCIにログインし、2.0ビルドの実行を開始します。
+13. You can use [our realitycheck repo](https://github.com/circleci/realitycheck) to check basic CircleCI functionality.
 
 ## インストールの検証
 
