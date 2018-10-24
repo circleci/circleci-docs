@@ -77,7 +77,7 @@ jobs:
   build:
     working_directory: ~/circleci-demo-python-django
     docker:
-      - image: circleci/python:3.6.4  # primary container
+      - image: circleci/python:3.6.4  # primary container for the build job
 ```
 
 **Note:**
@@ -97,11 +97,11 @@ jobs:
   build:
     working_directory: ~/circleci-demo-python-django
     docker:
-      - image: circleci/python:3.6.4
+      - image: circleci/python:3.6.4 # every job must define an image for the docker executor and subsequent jobs may define a different image.
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2
+      - image: circleci/postgres:9.6.2 # an example of how to specify a service container
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
