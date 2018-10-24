@@ -16,7 +16,20 @@ plugins:
 algolia:
   application_id: U0RXNGRK45
   index_name: documentation
-
+  settings:
+    highlightPreTag: '<strong>'
+    highlightPostTag: '</strong>'
+    attributesToSnippet: [
+      'content:80',
+      'headings',
+      'title'
+    ]
+    attributesToHighlight: [
+      'content:80',
+      'headings',
+      'title'
+    ]
+    
 sass:
   sass_dir: _sass
 
