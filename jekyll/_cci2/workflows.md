@@ -326,7 +326,7 @@ unless you explicitly specify tag filters.
 Additionally,
 if a job requires any other jobs (directly or indirectly),
 you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches)
-to specify tag filters for those jobs.
+to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
 
 In the example below,
 two workflows are defined:
