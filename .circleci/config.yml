@@ -85,8 +85,6 @@ jobs:
       - run:
           name: "Manage Data Files We'll Need"
           command: |
-            # cp jekyll/_data/trusty/versions.json jekyll/environments/trusty.json
-            cp jekyll/_data/trusty/versions-ubuntu-14_04-XXL.json jekyll/environments/ubuntu-14.04-XXL.json
             ./scripts/pull-docker-image-tags.sh
       - run:
           name: Restore js
