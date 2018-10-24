@@ -240,6 +240,7 @@ jobs:
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command. 
 
+
 ```
 jobs:
   myjob:
@@ -249,6 +250,7 @@ jobs:
       - sayhello:
           to: "Lev"
 ```
+
 
 
 
