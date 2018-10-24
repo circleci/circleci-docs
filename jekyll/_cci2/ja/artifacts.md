@@ -25,7 +25,7 @@ If a job produces persistent artifacts such as screenshots, coverage reports, co
 
 ![artifacts tab screeshot]({{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-Find links to the artifacts at the top of the **Job page**. Artifacts are stored on Amazon S3. There is a 3GB `curl` file size limit. Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+Find links to the artifacts at the top of the **Job page**. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. There is a 3GB `curl` file size limit. Artifacts are designed to be useful around the time of the build. It is best practice not to rely on artifacts as a software distribution mechanism with long term future guarantees.
 
 **Note:** Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
