@@ -31,7 +31,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 ## **`commands`** (requires version:2.1)
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- steps | Y | Sequence | A sequence of steps run inside the calling job of the command. parameters | N | Map | A map of parameter keys. See the Parameter Syntax section of the Reusing Config document for details. description | N | String | A string that describes the purpose of the command. {: class="table table-striped"}
 
@@ -71,7 +71,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the Using Parameters in Executors section of the Reusing Config document for examples of parameterized executors.
+See the Using Parameters in Executors section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -189,6 +189,17 @@ Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authent
             aws_auth:
               aws_access_key_id: AKIAQWERVA  # can specify string literal values
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+    
+
+It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
+
+    jobs:
+      myjob:
+        docker:
+          - image: "circleci/node:9.6.1"
+        steps:
+          - sayhello:
+              to: "Lev"
     
 
 #### **`machine`**
