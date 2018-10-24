@@ -37,11 +37,10 @@ crwdns32464:0crwdne32464:0 crwdns32465:0crwdne32465:0 crwdns32466:0crwdne32466:0
 
 2. crwdns32469:0{{ site.baseurl }}crwdne32469:0 crwdns32470:0crwdne32470:0 crwdns32471:0crwdne32471:0
 
-3. crwdns32472:0crwdne32472:0
+3. crwdns69958:0crwdne69958:0
     
-    - crwdns32473:0${HOME}crwdne32473:0
-    - crwdns32474:0crwdne32474:0
-    - crwdns32475:0crwdne32475:0
+    - crwdns69960:0crwdne69960:0
+    - crwdns69962:0crwdne69962:0
 
 ### crwdns32476:0crwdne32476:0
 
@@ -59,24 +58,16 @@ crwdns32480:0crwdne32480:0
 crwdns32481:0$GCLOUD_SERVICE_KEYcrwdne32481:0
 ```
 
-### crwdns32482:0crwdne32482:0
+### crwdns69964:0crwdne69964:0
 
-crwdns32483:0crwdne32483:0
-
-```yaml
-crwdns32484:0$GCLOUD_SERVICE_KEYcrwdnd32484:0${HOME}crwdne32484:0
-```
-
-### crwdns32485:0crwdne32485:0
-
-crwdns32486:0crwdne32486:0
+crwdns69966:0crwdne69966:0
 
 ```yaml
-crwdns32487:0$GCLOUD_SERVICE_KEYcrwdnd32487:0${HOME}crwdnd32487:0${HOME}crwdnd32487:0${GOOGLE_PROJECT_ID}crwdnd32487:0${GOOGLE_COMPUTE_ZONE}crwdne32487:0
+crwdns69968:0$GCLOUD_SERVICE_KEYcrwdnd69968:0${GOOGLE_PROJECT_ID}crwdnd69968:0${GOOGLE_COMPUTE_ZONE}crwdne69968:0
 ```
 
-crwdns32488:0crwdne32488:0
+crwdns69970:0crwdne69970:0
 
 ```bash
-crwdns32489:0crwdne32489:0
+crwdns69972:0crwdne69972:0
 ```
