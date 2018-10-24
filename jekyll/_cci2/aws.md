@@ -115,6 +115,7 @@ Have available the following information and policies before starting the Previe
 8. Configure the vm-service if you plan to use [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/) or `machine` executor features (you can configure it later if necessary). Again, it is best to use an instance profile for authentication (no additional configuration required).
 9. After applying settings you will be redirected to the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers. If the Management Console reports that `Failure reported from operator: no such image` click Start again and it should continue.
 10. After the application has started, log in to CircleCI and start running 2.0 builds!
+11. You can use [our realitycheck repo](https://github.com/circleci/realitycheck) to check basic CircleCI functionality.
 
 ## Validating your Installation
 
