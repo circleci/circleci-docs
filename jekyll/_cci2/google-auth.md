@@ -52,8 +52,7 @@ In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 Using this particular name is not required,
 but it will be used throughout the examples in this document.
 
-3. For convenience, add three more environment variables to your CircleCI project:
-    - `GOOGLE_APPLICATION_CREDENTIALS`: `${HOME}/gcloud-service-key.json`
+3. For convenience, add two more environment variables to your CircleCI project:
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
@@ -89,23 +88,6 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created
 ```
 
-### Copying the Service Account to a Local File
-
-Before you can authorize the SDK,
-you must copy the service account variable to a local file.
-
-```yaml
-version: 2
-jobs:
-  deploy:
-    docker:
-      - image: google/cloud-sdk
-    steps:
-      - run:
-          name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-```
-
 ### Authorizing the Google Cloud SDK
 
 Use `gcloud` to authorize the Google Cloud SDK
@@ -118,11 +100,8 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      - run:
-          name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: |
-          sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          echo $GCLOUD_SERVICE_KEY | sudo gcloud auth activate-service-account --key-file=-
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
