@@ -240,7 +240,8 @@ jobs:
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command. 
 
-``
+
+```
 jobs:
   myjob:
     docker:
@@ -248,7 +249,8 @@ jobs:
     steps:
       - sayhello:
           to: "Lev"
-``
+```
+
 
 
 
@@ -1129,7 +1131,7 @@ Additionally,
 if a job requires any other jobs (directly or indirectly),
 you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
+Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
