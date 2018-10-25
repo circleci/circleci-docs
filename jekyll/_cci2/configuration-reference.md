@@ -42,6 +42,46 @@ commands | N | String | The name of a command to declare.
 jobs | N | String | The name of a job to declare.
 {: class="table table-striped"}
 
+The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+
+```
+version: 2.1
+orbs:
+    hello: circleci/hello-build@volatile
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+
+The following example declares an inline Orb in the `config.yml` file for the project.
+
+```
+version: 2.1
+
+orbs:
+  orb-node:
+    executors:
+      default:
+        docker:
+          - image: circleci/node:4.8.2
+          - image: mongo:3.4.4
+    jobs:
+      orb-node-build:
+        executor: default
+        steps:
+          - checkout
+          - run:
+              name: update-npm
+              command: 'sudo npm install -g npm@5'
+...
+
+workflows:
+  test:
+    jobs:
+      - orb-node/orb-node-build
+```
+
 ## **`commands`** (requires version: 2.1)
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
