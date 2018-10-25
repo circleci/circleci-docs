@@ -113,4 +113,4 @@ yourusername/circle-autoAdded by GitHub
 
 Question: How can I intentionally fail a build that invokes an orb from within an orb?
 
-Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run:circleci-agent step halt` as a step to exit the job without failing.
+Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
