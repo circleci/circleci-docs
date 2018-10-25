@@ -267,7 +267,7 @@ that a given tag has the same meaning across images!
 	{% endunless %}
 {% endfor %}
 </ul>
-<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
+<p>Note: Any variants available for this image can be added by appending the variant tag to the tags above.</p>
 
 ---
 
