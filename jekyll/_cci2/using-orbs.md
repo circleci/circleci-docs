@@ -45,7 +45,7 @@ You must invoke jobs in the workflow stanza of `config.yml`, making sure to pass
 ### Executors
 {:.no_toc}
 
-Executors define the environment in which the steps of a job will be run. When you declare a `job` in CircleCI configuration, you define the type of environment (e.g. `docker`, `machine`, `macros`, etc.) to run in, in addition to any other parameters of that environment, such as:
+Executors define the environment in which the steps of a job will be run. When you declare a `job` in CircleCI configuration, you define the type of environment (e.g. `docker`, `machine`, `macos`, etc.) to run in, in addition to any other parameters of that environment, such as:
 
 * environment variables to populate
 * which shell to use
@@ -55,7 +55,7 @@ When you declare an executor in a configuration outside of `jobs`, you can use t
 
 Each executor definition includes the subset of the children keys of a `job` declaration related to setting the environment for a job to execute. This means it does not include `steps`. The subset can be one or more of the following keys:
 
-* `docker`, `machine`, or `macros`
+* `docker`, `machine`, or `macos`
 * `environment`
 * `working_directory`
 * `shell`
@@ -67,7 +67,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: circleci/ruby:volatile
+      - image: circleci/ruby:2.4.0
 
 jobs:
   my-job:
@@ -93,7 +93,7 @@ Before using Orbs, you should first familiarize yourself with some basic core co
 ### Development vs. Production Orbs
 {:.no_toc}
 
-Orbs can be published either as ```dev:foo``` or as a semantically versioned production orb. Development Orbs are mutable and expire, whereas Production Orbs are immutable and durable as long as they remain in use.
+Orbs can be published either as ```dev:foo``` or as a semantically versioned production orb. Development Orbs are mutable and expire, whereas Production Orbs are immutable and durable.
 
 ### Certified vs. 3rd Party Orbs
 {:.no_toc}
@@ -101,7 +101,7 @@ Orbs can be published either as ```dev:foo``` or as a semantically versioned pro
 CircleCI will make available a number of individual Orbs that have been tested and certified to work with the platform. These orbs will be treated as part of the platform; all other orbs are considered 3rd party Orbs.
 
 <aside class="notice">
-As of September 2018, all Orbs are open, meaning that anyone can use them and see their source. Also, only the ```circleci``` namespace is certified.
+All Orbs are open, meaning that anyone can use them and see their source. Also, only the ```circleci``` namespace is certified.
 </aside>
 
 ## Design Methodology
