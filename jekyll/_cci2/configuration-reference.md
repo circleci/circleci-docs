@@ -27,12 +27,22 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
-## **`commands`** (requires version:2.1)
+## **`orbs`** (requires version: 2.1)
+
+Key | Required | Type | Description
+----|-----------|------|------------
+orbs | N | String | The name of an orb to use.
+executors | N | String | The name of an executor to declare.
+commands | N | String | The name of a command to declare.
+jobs | N | String | The name of a job to declare.
+{: class="table table-striped"}
+
+## **`commands`** (requires version: 2.1)
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
@@ -57,7 +67,7 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`executors`** (requires version 2.1)
+## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
