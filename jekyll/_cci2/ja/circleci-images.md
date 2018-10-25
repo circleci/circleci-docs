@@ -197,7 +197,7 @@ The specific version of a particular package that gets installed in a particular
   </li> {% endunless %} {% endfor %}
 </ul>
 
-<p>Note: Any variants availables for this image can be added by appending the variant tag to the tags above.</p>
+<p>Note: Any variants available for this image can be added by appending the variant tag to the tags above.</p>
 
 * * *
 
