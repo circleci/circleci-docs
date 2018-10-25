@@ -45,13 +45,14 @@ This command may prompt you for `sudo` if your user doesn't have write permissio
 If you haven't already installed `circleci` on your machine, run the following command to install the CircleCI CLI:
 
 ```
-curl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh \
-	--fail --show-error | bash
+curl -fLSs https://circle.ci/cli | bash
 ```
 
-The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory.
+By default, the `circleci` app will be installed to the ``/usr/local/bin`` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
 
-If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`.
+```
+curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash
+```
 
 ### [Alternative] Install with snap 
 {:.no_toc}
