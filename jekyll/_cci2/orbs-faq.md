@@ -50,6 +50,7 @@ You attempted to run a local build with version 2.1 of configuration.
 
 * Answer: To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci build` (this has now been moved to `circleci local execute`) against the processed configuration.
 
+<!---
 ### Environment Variables Not Being Passed at Runtime
 
 Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
@@ -94,6 +95,7 @@ workflows:
 
 yourusername/circle-autoAdded by GitHub
 ```
+--->
 
 ### Standard Process To Access Previously Stored Artifacts
 
