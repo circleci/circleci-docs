@@ -9,6 +9,9 @@ order: 1
 
 This document provides a basic example of using an inline Orb and elements of Orbs followed by a conceptual overview of Orbs design.
 
+* TOC
+{:toc}
+
 ## Introduction
 
 Orbs are package systems (similar to Ruby Gems) that you can use to quickly and easily get up and running using the CircleCI platform. 
