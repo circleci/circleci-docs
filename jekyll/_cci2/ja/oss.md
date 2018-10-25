@@ -26,7 +26,7 @@ These additional containers are automatically enabled, as long as the project is
 While open source can be a liberating practice, take care not to liberate sensitive information.
 
 - If your repository is public, your CircleCI project and its build logs are also public. Pay attention to the information you choose to print.
-- While environment variables set in the CircleCI application are hidden from the public, these variables will be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly blocked.
+- Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly enabled.
 
 ## Features and Settings for Open Source Projects
 
