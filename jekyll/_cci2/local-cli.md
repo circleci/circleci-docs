@@ -48,7 +48,7 @@ If you haven't already installed `circleci` on your machine, run the following c
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-By default, the `circleci` app will be installed to the ``/usr/local/bin`` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
+By default, the `circleci` app will be installed to the `/usr/local/bin` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
 
 ```
 curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash
