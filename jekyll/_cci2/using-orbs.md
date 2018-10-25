@@ -1,17 +1,33 @@
 ---
 layout: classic-docs
-title: "Orbs Overview"
-short-title: "Orbs Overview"
+title: "Using Orbs"
+short-title: "Using Orbs"
 description: "Starting point for CircleCI Orbs"
 categories: [getting-started]
 order: 1
 ---
 
-This document provides a conceptual overview of Orbs and Orb design.
+This document provides a basic example of using an inline Orb and elements of Orbs followed by a conceptual overview of Orbs design.
 
 ## Introduction
 
-Orbs are package systems (similar to Ruby Gems) that you can use to quickly and easily get up and running using the CircleCI platform. Orbs encourage abstraction of a tight scope with a usable and flexible interface.
+Orbs are package systems (similar to Ruby Gems) that you can use to quickly and easily get up and running using the CircleCI platform. 
+
+To use an existing orb inline in your `config.yml` file, invoke it with the `orbs` key. The following example invokes the `hello-build` orb in the `circleci` namespace.
+
+```
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@volatile
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+
+Orbs encourage abstraction of a tight scope with a usable and flexible interface.
 
 Orbs consist of the following elements:
 
@@ -24,7 +40,8 @@ Orbs consist of the following elements:
 
 Commands are reusable sets of steps that you can invoke with specific parameters within an existing job (e.g. `checkout` and `run`). For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
-``jobs
+```yaml
+jobs
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
