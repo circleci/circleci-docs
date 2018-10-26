@@ -46,7 +46,7 @@ Slack notifications will look like the following:
 
 ![]({{ site.baseurl }}/assets/img/docs/notification-chat-success.png)
 
-![]({{ site.baseurl }}/assets/img/docs/notification-chat-failure.png)
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-fail.png)
 
 
 ## Set or Change Email Notifications
