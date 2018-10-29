@@ -155,9 +155,9 @@ For example, you may want to clear the cache in the following scenarios by incre
 * Dependencies are removed from your project
 
 <div class="alert alert-info" role="alert">
-  <b>Tip:</b> Beware using special or reserved characters in your cache key (ex:
+  <b>Tip:</b> Beware when using special or reserved characters in your cache key (ex:
   <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Generally,
-  consisider using keys within [a-z][A-Z] in your cache key prefix.
+  consider using keys within [a-z][A-Z] in your cache key prefix.
 </div>
 
 ## Basic Example of Dependency Caching
