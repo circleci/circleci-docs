@@ -10,7 +10,7 @@ references:
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
-  update_algolia_index: &update-algolia-index
+  update_algolia_index: &update_algolia_index
     run:
       name: Update Algolia Index
       command: ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia
