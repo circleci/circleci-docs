@@ -14,7 +14,7 @@ CircleCI に SSH 公開鍵を登録する必要があるケースは、以下の
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つめの目的で SSH 鍵を登録するときは、「GitHub および Bitbucket との統合」ページの[「複数のプライベートリポジトリをチェックアウトできるようにする」](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories)の項を参照してください。 2 つ目が目的のときは、下記の手順でプロジェクトに SSH 鍵を登録してみてください。
+If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document. 2 つ目が目的のときは、下記の手順でプロジェクトに SSH 鍵を登録してみてください。
 
 ## 追加手順
 
