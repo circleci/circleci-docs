@@ -97,7 +97,7 @@ ADD ./db/migrations /migrations
 
 {:.no_toc}
 
-To run the container as an exectuable, use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint). Since CircleCI does not preserve entrypoints by default, use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label) as shown below.
+To run the container as an executable, use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint). Since CircleCI does not preserve entrypoints by default, use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label) as shown below.
 
 ```Dockerfile
 LABEL com.circleci.preserve-entrypoint=true
