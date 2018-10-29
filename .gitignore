@@ -10,3 +10,5 @@ jekyll/environments/
 jekyll/assets/js/dist/
 jekyll/_includes/app.html
 run-results/
+jekyll/ruby/
+node_modules
