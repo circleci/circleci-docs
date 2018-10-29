@@ -139,7 +139,7 @@ harry_data:
   <<: [*harry_name, *harry_address]
 ```
 
-**Note**: As mentionned in [a YAML repository issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
+**Note**: As mentioned in [a YAML repository issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
 
 For a more complex example, see [this gist](https://gist.github.com/bowsersenior/979804).
 
