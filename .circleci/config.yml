@@ -108,6 +108,11 @@ jobs:
           root: ~/circleci-docs/jekyll/_site
           paths:
             - docs
+      - run:
+          name: Update Algolia Index
+          command: |
+            ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --config jekyll/_config.yml
+
   deploy:
     docker:
       - image: cibuilds/aws:1.16.43
