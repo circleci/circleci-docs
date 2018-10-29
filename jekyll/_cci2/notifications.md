@@ -7,14 +7,56 @@ order: 100
 published: true
 ---
 
-CircleCI has integrated chat notifications, automated email notifications, and web notifications in your browser that you  control in the CircleCI Settings page for each project.
+CircleCI has integrated chat notifications, automated email notifications, and
+web notifications. Notifications are delivered on the success or failure of a
+[workflow]({{ site.baseurl }}/2.0/workflows/). Consider the minimal CircleCI config below:
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test: # < A notification will be visible for this workflow
+    jobs:
+      - build
+      - test
+```
+
+Continue reading to learn how each notification type (chat, email, and web) is configurable.
 
 ## Enable Chat Notifications
 
 CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications. Configure chat notifications on the Project Settings > Chat Notifications page of the CircleCI application using the in-app instructions and links for each chat app.
 
+![]({{ site.baseurl }}/assets/img/docs/notification-chat.png)
+
+Slack notifications will look like the following:
+
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-success.png)
+
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-fail.png)
+
+
 ## Set or Change Email Notifications
 Use the [Notifications](https://circleci.com/account/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
+
+Email notifications will look like the following:
+
+![]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
+
+![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
 ## Enable Web Notifications
 
