@@ -13,7 +13,9 @@ references:
   update_algolia_index: &update_algolia_index
     run:
       name: Update Algolia Index
-      command: ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia
+      command: |
+        cd jekyll
+        ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia
 
 jobs:
   js_build:
