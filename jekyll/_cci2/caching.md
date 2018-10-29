@@ -154,6 +154,12 @@ For example, you may want to clear the cache in the following scenarios by incre
 * Language version change, for example, you change ruby 2.3 to 2.4
 * Dependencies are removed from your project
 
+<div class="alert alert-info" role="alert">
+  <b>Tip:</b> Beware using special or reserved characters in your cache key (ex:
+  <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Generally,
+  consisider using keys within [a-z][A-Z] in your cache key prefix.
+</div>
+
 ## Basic Example of Dependency Caching
 
 The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section](https://circleci.com/docs/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
