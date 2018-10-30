@@ -160,7 +160,7 @@ A working `.circleci/config.yml` section for testing might look like this:
       - run:
           command: mocha test --reporter mocha-junit-reporter
           environment:
-            MOCHA_FILE: junit/test-results.xml
+            MOCHA_FILE: ~/junit/test-results.xml
           when: always
       - store_test_results:
           path: ~/junit
@@ -181,7 +181,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
           command: |
             yarn add ava tap-xunit --dev # or you could use npm
             mkdir -p ~/reports
-            ava --tap | tap-xunit > /reports/ava.xml
+            ava --tap | tap-xunit > ~/reports/ava.xml
           when: always
       - store_test_results:
           path: ~/reports
@@ -320,7 +320,7 @@ A working `.circleci/config.yml` section might look like this:
             JUNIT_REPORT_NAME: test-results.xml
           when: always  
       - store_test_results:
-          path: ~/junit
+          path: ./junit
       - store_artifacts:
           path: ./junit
 ```
