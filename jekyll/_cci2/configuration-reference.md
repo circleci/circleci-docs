@@ -36,10 +36,9 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | String | The name of an orb to use.
-executors | N | String | The name of an executor to declare.
-commands | N | String | The name of a command to declare.
-jobs | N | String | The name of a job to declare.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be a 2.1 config, though `workflow` and `jobs` are not required.
+executors | N | Map | A map of strings to executor definitions. See the Executors Syntax section below.
+commands | N | Map | A map of command names to command definitions. See the Commands Syntax section below.
 {: class="table table-striped"}
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
@@ -47,39 +46,11 @@ The following example calls an Orb named `hello-build` that exists in the certif
 ```
 version: 2.1
 orbs:
-    hello: circleci/hello-build@volatile
+    hello: circleci/hello-build@0.0.5
 workflows:
     "Hello Workflow":
         jobs:
           - hello/hello-build
-```
-
-The following example declares an inline Orb in the `config.yml` file for the project.
-
-```
-version: 2.1
-
-orbs:
-  orb-node:
-    executors:
-      default:
-        docker:
-          - image: circleci/node:4.8.2
-          - image: mongo:3.4.4
-    jobs:
-      orb-node-build:
-        executor: default
-        steps:
-          - checkout
-          - run:
-              name: update-npm
-              command: 'sudo npm install -g npm@5'
-...
-
-workflows:
-  test:
-    jobs:
-      - orb-node/orb-node-build
 ```
 
 ## **`commands`** (requires version: 2.1)
