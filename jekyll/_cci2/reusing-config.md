@@ -8,7 +8,7 @@ order: 1
 ---
 
 
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, and executors.
+This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
 * TOC
 {:toc}
