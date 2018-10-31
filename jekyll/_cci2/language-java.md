@@ -109,6 +109,11 @@ We start with `checkout` so we can operate on the codebase.
 
 Next we pull down the cache, if present. If this is your first run, or if you've changed `pom.xml`, this won't do anything. We run `mvn dependency:go-offline` next to pull down the project's dependencies. This allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
 
+<div class="alert alert-info" role="alert">
+  <strong>Tip:</strong> <code class="highlighter-rouge">mvn dependency:go-offline</code> may not work if you are running a multi-module
+project build. If this is the case, consider using the <a href="https://github.com/qaware/go-offline-maven-plugin">go-offline-maven-plugin</a>.
+</div>
+
 Then `mvn package` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
 
 Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 

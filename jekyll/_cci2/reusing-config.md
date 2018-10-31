@@ -345,53 +345,20 @@ A parameter can have the following keys as immediate children:
 | Key Name    | Description                                                                                   | Default value |
 |-------------|-----------------------------------------------------------------------------------------------|---------------|
 | description | Optional. Used to generate documentation for your orb.                                        | N/A           |
-| type        | Required. Currently "string", "boolean", "enum" (takes extra keys), and "steps" are supported                           | N/A           |
+| type        | Required. See Parameter Types below for details.                           | N/A           |
 | default     | The default value for the parameter. If not present, the parameter is implied to be required. | N/A           |
+{: class="table table-striped"}
 
 ### Parameter Types
 {:.no_toc}
 
-This section describes the types of parameters and their usage.
-
-### Parameter Scope
-{:.no_toc}
-
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
-
-
-```yaml
-version: 2.1
-
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          # Since the command "say" doesn't define a default
-          # value for the "saywhat" parameter, it must be
-          # passed in manually
-          saywhat: << parameters.saywhat >>
-
-commands:
-  say:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
-
-workflows:
-  build:
-    jobs:
-      - sayhello:
-          saywhat: Everyone
-```
-
+This section describes the types of parameters and their usage. The parameter types supported are:
+* string
+* boolean
+* integer
+* enum
+* executor
+* steps
 
 #### String
 {:.no_toc}
@@ -487,70 +454,89 @@ The `enum` parameter may be a list of any values. Use the `enum` parameter type 
 commands:
   list-files:
     parameters:
-      os: 
+      os:
         default: "linux"
         description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
         type: enum
         enum: ["linux", "darwin", "win32"]
-```        
+```
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
 ```yaml
 commands:
   list-files:
-    parameters:      
+    parameters:
       os:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
-```        
-
-### Using Parameters in Executors
-{:.no_toc}
-
-To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
-
-Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
-
-#### Example Build Configuration Using a Parameterized Executor
-{:.no_toc}
-
-```yaml
-version: 2.1
-
-executors:
-  python:
-    parameters:
-      tag:
-        type: string
-        default: latest
-      myspecialvar:
-        type: string
-    docker:
-      - image: circleci/python:<< parameters.tag >>
-    environment:
-      MYPRECIOUS: << parameters.myspecialvar >>
-
-jobs:
-  build:
-    executor:
-      name: python
-      tag: "2.7"
-      myspecialvar: "myspecialvalue"  
 ```
+#### Executor parameter
+{:.no_toc}
 
-The above would resolve to the following: 
+Use an `executor` parameter type to allow the invoker of a job to decide what
+executor it will run on.
 
 ```yaml
 version: 2.1
+executors:
+  xenial:
+    parameters:
+      some-value:
+        type: string
+        default: foo
+    environment:
+      SOME_VAR: << parameters.some-value >>
+    docker:
+      - image: ubuntu:xenial
+  bionic:
+    docker:
+      - image: ubuntu:bionic
+
+jobs:
+  test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - run: some-tests
+
+workflows:
+  workflow:
+    jobs:
+      - test:
+          e: bionic
+      - test:
+          e:
+            name: xenial
+            some-value: foobar
+```
+#### Integer Parameter
+{:.no_toc}
+
+The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
+
+```yaml
+version: "2.1"
+
 jobs:
   build:
-    steps: []
-    docker:
-      - image: circleci/python:2.7
-    environment:
-      MYPRECIOUS: "myspecialvalue"
+    parameters:
+      p:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
+    machine: true
+    steps:
+      - checkout
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          p: 2
 ```
 
 ## Authoring Parameterized Jobs
@@ -624,6 +610,93 @@ workflows:
           saywhat: Everyone
 ```
 --->
+
+### Using Parameters in Executors
+{:.no_toc}
+
+To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
+
+Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
+
+#### Example Build Configuration Using a Parameterized Executor
+{:.no_toc}
+
+```yaml
+version: 2.1
+
+executors:
+  python:
+    parameters:
+      tag:
+        type: string
+        default: latest
+      myspecialvar:
+        type: string
+    docker:
+      - image: circleci/python:<< parameters.tag >>
+    environment:
+      MYPRECIOUS: << parameters.myspecialvar >>
+
+jobs:
+  build:
+    executor:
+      name: python
+      tag: "2.7"
+      myspecialvar: "myspecialvalue"  
+```
+
+The above would resolve to the following: 
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    steps: []
+    docker:
+      - image: circleci/python:2.7
+    environment:
+      MYPRECIOUS: "myspecialvalue"
+```
+
+
+
+### The Scope of Parameters
+{:.no_toc}
+
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
+```yaml
+version: 2.1
+
+jobs:
+  sayhello:
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          # Since the command "say" doesn't define a default
+          # value for the "saywhat" parameter, it must be
+          # passed in manually
+          saywhat: << parameters.saywhat >>
+
+commands:
+  say:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
+
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          saywhat: Everyone
+```
 
 
 ### Invoking the Same Job Multiple Times
