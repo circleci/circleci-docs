@@ -656,11 +656,6 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule sync
 - run: git submodule update --init
 ```
-**Note:** The `checkout` step will configure Git to skip automatic garbage
-collection. If you are caching your `.git` directory with
-[restore_cache](#restore_cache) and would like to use garbage collection to
-reduce its size, you may wish to use a [run](#run) step with command `git gc`
-before doing so.
 
 ##### **`setup_remote_docker`**
 
