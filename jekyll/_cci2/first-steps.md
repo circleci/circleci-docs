@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Sign Up and Try CircleCI 2.0"
-short-title: "Sign Up and Try CircleCI 2.0"
+title: "Sign Up and Try CircleCI"
+short-title: "Sign Up and Try CircleCI"
 description: "First step for using CircleCI"
 categories: [getting-started]
 order: 2
