@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 2
 ---
 
-To run your very first CircleCI build on the CircleCI 2.0 platform, complete the following steps:
+To run your very first CircleCI build on the CircleCI 2.x platform, complete the following steps:
 
 1. Go to the [Sign Up](https://circleci.com/signup/) page.
 
