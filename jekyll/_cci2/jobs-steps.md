@@ -14,7 +14,7 @@ The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/
 
 ## Orbs Overview
 
-Orbs are packages of config (similar to Ruby Gems) that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to Orb design.
+Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design.
 
 ## Jobs Overview
 
