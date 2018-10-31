@@ -17,7 +17,7 @@ This document describes how to configure your Linux, Android or macOS project to
 version: 2.1
 
 orbs:
-    hello: circleci/hello-build@volatile
+    hello: circleci/hello-build@.0.0.5
 
 workflows:
     "Hello Workflow":
