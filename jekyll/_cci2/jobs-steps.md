@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Jobs, Steps, and Workflows"
+title: "Orbs, Jobs, Steps, and Workflows"
 short-title: "Orbs, Jobs, Steps, and Workflows"
 description: "Description of Jobs and Steps"
 categories: [migration]
