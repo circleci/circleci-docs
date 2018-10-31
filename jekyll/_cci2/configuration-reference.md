@@ -55,7 +55,7 @@ workflows:
 
 ## **`commands`** (requires version: 2.1)
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -109,7 +109,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the Using Parameters in Executors section of the Reusing Config document for examples of parameterized executors.
+See the Using Parameters in Executors section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -258,6 +258,21 @@ jobs:
           aws_access_key_id: AKIAQWERVA  # can specify string literal values
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
+
+It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command. 
+
+
+```
+jobs:
+  myjob:
+    docker:
+      - image: "circleci/node:9.6.1"
+    steps:
+      - sayhello:
+          to: "Lev"
+```
+
+
 
 
 #### **`machine`**
@@ -662,6 +677,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule sync
 - run: git submodule update --init
 ```
+
 ##### **`setup_remote_docker`**
 
 Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
@@ -1137,7 +1153,7 @@ Additionally,
 if a job requires any other jobs (directly or indirectly),
 you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
+Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.

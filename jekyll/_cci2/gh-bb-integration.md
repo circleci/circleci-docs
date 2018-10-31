@@ -56,7 +56,10 @@ Integrated status also appears on the pull request screen, to show that all test
 
 ## Enable Your Project to Check Out Additional Private Repositories
 
-If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a GitHub user key has access to _all_ of your GitHub repositories.
+If your testing process refers to multiple repositories, CircleCI will need a
+GitHub user key in addition to the deploy key because each deploy key is valid
+for only _one_ repository while a GitHub user key has access to _all_ of your
+GitHub repositories. Refer to the [adding ssh keys]({{ site.baseurl }}/2.0/add-ssh-key) document to learn more.
 
 Provide CircleCI with a GitHub user key on your project's
 **Project Settings > Checkout SSH keys** page.

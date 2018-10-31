@@ -24,7 +24,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Clojure] | Luminus | [circleci-demo-clojure-luminus]
- [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/teesloane/circleci-demo-crystal)
+ [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/CircleCI-Public/circleci-demo-crystal)
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
  [iOS] | Xcode | [circleci-demo-ios]

@@ -17,10 +17,10 @@ If you’re in a rush, just copy the sample configuration below into a `.circlec
 
 You can view an example Crystal project at the following link:
 
-- <a href="https://github.com/teesloane/circleci-demo-crystal" 
+- <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
 target="_blank">Demo Crystal Project on Github</a>
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/teesloane/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 
 The application uses Crystal 0.26 and Kemal 0.24. Both Crystal and Kemal are
 developing quickly. Altering the Docker image to the `:latest` version may cause
