@@ -111,7 +111,7 @@ jobs:
       - run:
           name: Update Algolia Index
           command: |
-            ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --config jekyll/_config.yml
+            ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
 
   deploy:
     docker:
