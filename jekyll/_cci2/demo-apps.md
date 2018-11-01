@@ -45,7 +45,7 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 
 ## See Also
 
-Refer to the [Getting Started Introduction] for the steps to run your first build.
+Refer to the [Getting Started Introduction]({{ site.baseurl }}/2.0/getting-started/) for the steps to run your first build.
 
 
 [Android]: {{ site.baseurl }}/2.0/language-android/
