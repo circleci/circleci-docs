@@ -130,12 +130,12 @@ All orbs are open, meaning that anyone can use them and see their source.
 
 Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these Orbs were designed. Orbs were designed with the following considerations:
 
-* Orbs are transparent - If you can execute an Orb, you and anyone else can view the source of that orb.
-* Metadata is baked in - Everything can take a ```description``` key.
-* Orbs are ALWAYS semantic versioned (semver'd) - CircleCI allows development Orbs that have versions that start with `dev:`.
-* Production Orbs are immutable - Once an Orb has been published to a semantic version, the Orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
-* One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where Orbs can be kept.
-* Organization Admins publish production Orbs. Organization members publish development Orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production Orb. All organization members can publish development Orbs.
+* Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
+* Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
+* Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
+* Production orbs are immutable - Once an Orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+* One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
+* Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
 
 ## See Also
