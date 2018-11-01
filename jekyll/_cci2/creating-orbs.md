@@ -197,17 +197,15 @@ The sections below describe important concepts that you should understand before
 
 #### Orb Registry
 
-Each installation of CircleCI has a single orb registry. The registry on circleci.com serves as the master source for all certified namespaces and orbs and is the only orb registry that users of circleci.com can use.
-
-When orb features come to the server installation of CircleCI, each installation will have its own registry that operators can control.
+CircleCI has a single orb registry. The registry on circleci.com serves as the master source for all certified namespaces and orbs and is the only orb registry that users of circleci.com can use.
 
 <aside class="notice">
-Currently, orb features are not yet supported on server installations.
+Orbs are not yet supported for CircleCI installed on your private servers or cloud.
 </aside>
 
 #### Namespaces
 
-Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the orb ```circleci/rails``` means the rails orb in the ```circleci``` namespace may coexist in the registry with an orb called ```somenamespace/rails``` because they are in separate namespaces.
+Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called ```hannah/rails``` because they are in separate namespaces.
 
 Namespaces are owned by organizations. Only organization administrators can create namespaces.
 
@@ -223,11 +221,13 @@ Orb versions may be added to the registry either as development versions or prod
 
 * Any member of an organization can publish dev orbs in namespaces.
 
+* Organization administrators can promote any dev orb to be a semantically versioned production orb.
+
 ##### Development and Production Orb Retention and Mutability Characteristics
 
 * Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
 
-* Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version. CircleCI generally recommends using the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
+* Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
 
 ##### Development and Production Orbs Versioning Semantics
 
@@ -252,7 +252,7 @@ Examples of valid development orb tags:
 
 In production orbs you must use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
-While not strictly enforced, CircleCI recommends when versioning your production orbs you use the standard semantic versioning convention for deciding what major, minor, and patch should mean semantically:
+While not strictly enforced, it is best practce when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
 * MAJOR: when you make incompatible API changes
 * MINOR: when you add functionality in a backwards-compatible manner
@@ -260,19 +260,19 @@ While not strictly enforced, CircleCI recommends when versioning your production
 
 #### Using Orbs in Orbs and Register-Time Resolution
 
-You may use an ```orbs``` stanza inside an orb, providing a way to pull in other orbs' elements into your orb. The scoping rules are the same as orbs in configuration, and you declare inline orbs in an orb.
+You may use an ```orbs``` stanza inside an orb. 
 
 <aside class="notice">
-Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than the time you run your build (eager resolution).
+Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
 
-For example, if you choose to publish orb ```foo/bar``` at version ```1.2.3```, and that orb you are publishing has, internally, an ```orbs``` stanza that imports another orb referenced as ```biz/baz@volatile```, the latest version at the time you want to perform this action is ```2.1.0```. At the time you register ```foo/bar@1.2.3``` the system will resolve ```biz/baz@volatile``` as the latest version and include its elements directly into the packaged version of ```foo/bar@1.2.3```.
+For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```orbs``` stanza that imports ```biz/baz@volatile```. At the time you register ```foo/bar@1.2.3``` the system will resolve ```biz/baz@volatile``` as the latest version and include its elements directly into the packaged version of ```foo/bar@1.2.3```.
 
-Now, if afterwards, ```biz/baz``` receives a new release that is now ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version.
+If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
 </aside>
 
 #### Deleting Production Orbs
 
-In general, CircleCI prefers to never delete production orbs that were published as "Open" because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
+In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
 
 If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (**Note:** If you are deleting because of a security concern, you must practice responsible disclosure: https://circleci.com/security/).
 
@@ -296,39 +296,32 @@ For a full list of help commands inside the CLI, visit https://circleci-public.g
 
 ### Orb Publishing Workflow
 
-To publish an orb, follow the steps listed below.
+To publish an orb, follow the steps listed below as an org Admin.
 
 1. Claim a namespace (assuming you don't yet have one), e.g.;
 
-```circleci namespace create sandbox github CircleCI-Public
-```
+`circleci namespace create sandbox github CircleCI-Public`
 
 2. Create the orb inside your namespace, e.g.:
 
-```circleci orb create sandbox/hello-world
-```
+`circleci orb create sandbox/hello-world`
 
-3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, but, let's assume a file in /tmp/orb.yml could be made with a bare-bones orb similar to:
+3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in /tmp/orb.yml could be made with a simple orb similar to:
 
-```echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml
-```
+`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
 4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
-```circleci orb validate /tmp/orb.yml
-```
+`circleci orb validate /tmp/orb.yml`
 
 5. Publish a development version of your orb, e.g.:
 
-```circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first
-```
+`circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
-6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. If you wish to increment the new dev version to become 0.0.1, you can use the following command:
+6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. To increment the new dev version to become 0.0.1, use the following command:
 
-```circleci orb publish promote sandbox/hello-world@dev:first patch
-```
+`circleci orb publish promote sandbox/hello-world@dev:first patch`
 
-7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can pull the source of your orb by using:
+7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
 
-```circleci orb source sandbox/hello-world@0.0.1
-```
+`circleci orb source sandbox/hello-world@0.0.1`
