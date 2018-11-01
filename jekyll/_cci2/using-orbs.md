@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-This document provides a basic example of using an inline Orb and elements of Orbs followed by a conceptual overview of Orbs design.
+This document provides a basic example of using an inline orb and elements of orbs followed by a conceptual overview of orbs design.
 
 * TOC
 {:toc}
