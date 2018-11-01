@@ -57,18 +57,18 @@ For example:
 Examples of orb version declarations and their meaning:
 
 1. ```circleci/python@volatile``` - use the latest version of the Python orb in the registry at the time a build is triggered.
-2. ```circleci/python@2``` - use the latest version of version 2.x.y of the Python orb .
-3. ```circleci/python@2.4``` - use the latest version of version 2.4.x of the Python orb .
+2. ```circleci/python@2``` - use the latest version of version 2.x.y of the Python orb.
+3. ```circleci/python@2.4``` - use the latest version of version 2.4.x of the Python orb.
 4. ```circleci/python@3.1.4``` - use exactly version 3.1.4 of the Python orb.
 
 #### Using Development Versions
 
 While all production orbs must be published securely by organization administrators, development orbs allow your team much broader latitude.
 
-A development version must be referenced entirely, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
+A development version must be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
 <aside class="notice">
-Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb.
+Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for admin members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 </aside>
 
 ## Importing an Orb
@@ -86,10 +86,12 @@ When designing your own orbs, make sure your orbs meet the following requirement
 
 * Orbs should always use 'description'. - Be sure to explain usage, assumptions, and any tricks in the ```description``` key under jobs, commands, executors, and parameters.
 * Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
-* Use concise naming for your Orb - Remember that use of your commands and jobs is always contextual to your Orb, so you can use general names like "run-tests" in most cases.
-* Required vs. Optional Parameters - Provide sound default values of parameters whenever possible.
-* Avoid Job-only Orbs - Job-only Orbs are inflexible. While these Orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
+* Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your Orb, so you can use general names like "run-tests" in most cases.
+* Required vs. optional parameters - Provide sound default values of parameters whenever possible.
+* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
 * Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
+
+Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details and examples of commands, executors and parameters in orbs.
 
 When developing your own orb, you may find it useful to write an inline orb. The section below describes how you can write your own inline orb.
 
@@ -113,7 +115,7 @@ orbs:
           - run: echo "We will now do special things"
     jobs:
       myjob:
-        executor: default
+        executor: specialthingsexecutor
         steps:
           - dospecialthings
           - codecov/upload:
@@ -132,7 +134,7 @@ In the example above, note that the contents of ```my-orb``` are resolved as an 
 
 ### Example Template
 
-When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required concepts. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
+When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
 ```
 version: 2.1
 orbs:
@@ -179,14 +181,14 @@ This section covers the tooling and flow of authoring and publishing your own or
 
 Orbs may be authored inline in your config.yml file or authored separately and then published to to the orb registry for reuse across projects.
 
-[WARNING] Orbs are always world-readable. All published orbs can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
+[WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
 
 ### Prerequisites
 
 Before publishing an orb, you will need to first opt-in to the new 3rd-Party Software terms and turn on orb publishing for your organization.
 
 <aside class="notice">
-Only an organization administrator can opt-in to the 3rd party Software terms. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
+Only an organization administrator can opt-in to the 3rd-party Software terms. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
 </aside>
 
 ### Orb Publishing Concepts
