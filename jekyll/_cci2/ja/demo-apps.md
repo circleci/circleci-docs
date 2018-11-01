@@ -28,6 +28,6 @@ Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe
 
 ## See Also
 
-Refer to the [Getting Started Introduction] for the steps to run your first build.
+Refer to the [Getting Started Introduction]({{ site.baseurl }}/2.0/getting-started/) for the steps to run your first build.
 
 [Android]: {{ site.baseurl }}/2.0/language-android/ [Clojure]: {{ site.baseurl }}/2.0/language-clojure/ [Elixir]: {{ site.baseurl }}/2.0/language-elixir/ [Go]: {{ site.baseurl }}/2.0/language-go/ [iOS]: {{ site.baseurl }}/2.0/ios-tutorial/ [Java]: {{ site.baseurl }}/2.0/language-java/ [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/ [PHP]: {{ site.baseurl }}/2.0/language-php/ [Python]: {{ site.baseurl }}/2.0/language-python/ [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
