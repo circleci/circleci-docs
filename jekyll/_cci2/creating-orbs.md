@@ -169,9 +169,9 @@ workflows:
   build-test-deploy:
     jobs:
       - inline_example/my_inline_job:
-          name: build
+          name: mybuild # best practice is to name each orb job
       - inline_example/my_inline_job:
-          name: build2
+          name: mybuild2
           greeting_name: world
 ```
 
@@ -185,10 +185,10 @@ Orbs may be authored inline in your config.yml file or authored separately and t
 
 ### Prerequisites
 
-Before publishing an orb, you will need to first opt-in to the new 3rd-Party Software terms and turn on orb publishing for your organization.
+Before publishing an orb, you will need to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
 
 <aside class="notice">
-Only an organization administrator can opt-in to the 3rd-party Software terms. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
+Only an organization administrator can opt-in to the Code Sharing Terms of Service. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
 </aside>
 
 ### Orb Publishing Concepts
@@ -278,7 +278,7 @@ If the case arises where you need to delete an orb for emergency reasons, please
 
 #### Using the CLI to Create and Publish Orbs
 
-The ```circleci``` CLI has several handy commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run ```circleci help```. Listed below are some of the most pertinent commands for publishing orbs:
+The ```circleci``` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run ```circleci help```. Refer to [Using the CircleCI CLI]( {{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
 
 * ```circleci namespace create <name> <vcs-type> <org-name> [flags]```
 
