@@ -63,7 +63,7 @@ Examples of orb version declarations and their meaning:
 
 #### Using Development Versions
 
-While all production orbs must be published securely by organization administrators, development orbs allow your team much broader latitude.
+While all production orbs must be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, `dev` orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
 A development version must be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
@@ -197,7 +197,7 @@ The sections below describe important concepts that you should understand before
 
 #### Orb Registry
 
-CircleCI has a single orb registry. The registry on circleci.com serves as the master source for all certified namespaces and orbs and is the only orb registry that users of circleci.com can use.
+CircleCI has a single orb registry. The registry on `circleci.com` serves as the master source for all certified namespaces and orbs. This master source is the only orb registry available to users of `circleci.com`.
 
 <aside class="notice">
 Orbs are not yet supported for CircleCI installed on your private servers or cloud.
@@ -213,7 +213,7 @@ Organizations are, by default, limited to claiming only one namespace. This poli
 
 #### Development vs. Production Orbs
 
-Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with dev:.
+Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with `dev:` for example `dev:myfirstorb`.
 
 ##### Development and Production Orb Security Profiles
 
@@ -252,7 +252,7 @@ Examples of valid development orb tags:
 
 In production orbs you must use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
-While not strictly enforced, it is best practce when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
+While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
 * MAJOR: when you make incompatible API changes
 * MINOR: when you add functionality in a backwards-compatible manner
