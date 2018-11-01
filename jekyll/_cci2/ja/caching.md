@@ -35,7 +35,7 @@ Caching keys are simple to configure. The following example updates a cache if i
 
 {% endraw %}
 
-## Introduction
+## はじめに
 
 {:.no_toc}
 
@@ -45,7 +45,7 @@ This document describes the manual caching available, the costs and benefits of 
 
 For information about enabling a premium feature to reuse the unchanged layers of your Docker image, see the [Enabling Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
 
-## Overview
+## 概要
 
 {:.no_toc}
 
