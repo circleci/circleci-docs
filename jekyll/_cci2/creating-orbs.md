@@ -300,7 +300,7 @@ The ```circleci``` CLI has several commands for managing your orb publishing pip
 
 For a full list of help commands inside the CLI, visit https://circleci-public.github.io/circleci-cli/circleci_orb.html [update link when the link to the docs site is active]
 
-### Orb Publishing Workflow
+### Orb Publishing Process
 
 To publish an orb, follow the steps listed below as an org Admin.
 
