@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects. Orbs are made available for use in a configuration through the orbs key in the top level of your `config.yml` file.
 
 This section describes how you can:
 
@@ -16,17 +16,17 @@ This section describes how you can:
 * Create an inline orb in your `config.yml` file
 * Create and publish an orb in the registry
 
-Orbs are made available for use in a configuration through the orbs key in the top level of your config.yml.
-
 ## Using Existing Orbs
 
-CircleCI has made available a number of certified and 3rd party orbs that you may use in your configuration to reduce the time needed to get up and running using orbs in your configuration. By using CircleCI certified orbs, or 3rd-party orbs developed by CircleCI partners, you can be confident that these orbs have been developed and tested to ensure they work with the CircleCI platform.
+CircleCI has made available a number of certified and 3rd-Party orbs that you may use in your configuration to reduce the time needed to get up and running using orbs in your configuration. By using CircleCI certified orbs, or 3rd-party orbs developed by CircleCI partners, you can be confident that these orbs have been developed and tested to ensure they work with the CircleCI platform.
 
-### Certified orbs vs. 3rd party Orbs
+### Certified Orbs
 
 Certified orbs are those that CircleCI has built or has reviewed and approved as part of the features of the CircleCI platform. Any project may use certified orbs in configuration version 2.1 and higher.
 
-3rd party orbs are those published by our customers and other members of our community. For you to publish orbs or for your projects to use 3rd party orbs, your organization must opt-in under SECURITY within the Organization Settings page under the section "Orb Security Settings" where an organization administrator must agree to the terms for using 3rd-party software.
+### 3rd-Party Orbs
+
+3rd-party orbs are those published by our customers and other members of our community. For you to publish orbs or for your projects to use 3rd party orbs, your organization must opt-in under Security within the Settings tab under the Orb Security Settings where an organization administrator must agree to the terms for using 3rd-party software.
 
 <aside class="notice">
 This setting can only be toggled by organization administrators.
@@ -34,13 +34,13 @@ This setting can only be toggled by organization administrators.
 
 ### Orb reference format
 
-Orb references have the following format shown below:
+Orb references have the following format:
 
 ```
 [namespace]/[orb]@[version]
 ```
 
-### Semantic Versioning in Orbs
+#### Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
 
@@ -56,7 +56,7 @@ For example:
 
 Examples of orb version declarations and their meaning:
 
-1. ```circleci/python@volatile``` - use the latest version of the Python orb in the registry at the time a build is triggered.
+1. ```circleci/python@volatile``` - use the highest version of the Python orb in the registry at the time a build is triggered. This is likely the most recently published and least stable Python orb.
 2. ```circleci/python@2``` - use the latest version of version 2.x.y of the Python orb.
 3. ```circleci/python@2.4``` - use the latest version of version 2.4.x of the Python orb.
 4. ```circleci/python@3.1.4``` - use exactly version 3.1.4 of the Python orb.
@@ -102,6 +102,8 @@ Inline orbs can be handy during development of an orb or as a convenience for na
 To write inline orbs, you need to place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
 ```
+description: # The purpose of this orb
+
 orbs:
   codecov: circleci/codecov-clojure@0.0.4
   my-orb:
@@ -137,12 +139,16 @@ In the example above, note that the contents of ```my-orb``` are resolved as an 
 When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
 ```
 version: 2.1
+
+description: This is an inline job
+
 orbs:
   inline_example:
     jobs:
       my_inline_job:
         parameters:
           greeting_name:
+            description: # a helpful description
             type: string
             default: olleh
         executor: my_inline_executor
