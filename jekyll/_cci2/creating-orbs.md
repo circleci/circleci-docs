@@ -32,7 +32,7 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 This setting can only be toggled by organization administrators.
 </aside>
 
-### Orb reference format
+### Orb Reference Format
 
 Orb references have the following format:
 
@@ -217,7 +217,7 @@ Namespaces are owned by organizations. Only organization administrators can crea
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace please contact your account team at CircleCI.
 
-#### Development vs. Production Orbs
+#### Development and Production Orbs
 
 Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with `dev:` for example `dev:myfirstorb`.
 
