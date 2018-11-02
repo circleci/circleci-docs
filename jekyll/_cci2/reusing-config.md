@@ -90,12 +90,12 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 ## Examples
 
-The following is a an example of part of an "s3tools" orb defining a command called "s3sync":
+The following is a an example of part of an "s3tools" orb defining a command called "sync":
 
 ```yaml
-# s3tools orb
+# aws-s3 orb
 commands:
-  s3sync:
+  sync:
     description: "A simple encapsulation of doing an s3 sync"
     parameters:
       from:
@@ -112,25 +112,47 @@ commands:
 ```
 
 
-Defining a command called "s3sync" is invoked in a 2.1 `.circleci/config.yml` file as:
+Defining a command called "sync" is invoked in a 2.1 `.circleci/config.yml` file as:
 
 ```yaml
 version: 2.1
 
 orbs:
-  s3tools: circleci/s3@1
+  aws-s3: circleci/aws-s3@1.0.0
 
 workflows:
   build-test-deploy:
     jobs:
       - deploy2s3:
         steps:
-          - s3tools/s3sync:
+          - aws-s3/sync:
               from: .
               to: "s3://mybucket_uri"
               overwrite: true
 ```
 
+Defining a `build` job:
+
+```
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@volatile
+  aws-s3: circleci/aws-s3@volatile
+jobs:
+  build:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
+      - aws-s3/sync:
+          from: bucket
+          to: "s3://my-s3-bucket-name/prefix"
+          overwrite: true
+      - aws-s3/copy:
+          from: bucket/build_asset.txt
+          to: "s3://my-s3-bucket-name"
+          arguments: --dryrun
+ ```
 
 ## Authoring Reusable Executors 
 
