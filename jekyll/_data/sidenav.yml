@@ -60,7 +60,7 @@
         - name: Testing Config Locally
           link: 2.0/examples/
     - name: Orbs
-      link: 2.0/orbs-intro/    
+      link: 2.0/orb-intro/    
       children:
         - name: Using Orbs
           link: 2.0/using-orbs/     
