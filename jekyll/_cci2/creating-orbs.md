@@ -9,12 +9,12 @@ order: 1
 
 Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects. Orbs are made available for use in a configuration through the orbs key in the top level of your `config.yml` file.
 
-This section describes how you can:
+This document describes how you can:
 
 * Use an existing orb in your configuration
 * Import an orb
 * Create an inline orb in your `config.yml` file
-* Create and publish an orb in the registry
+* Create, validate, and publish an orb in the registry
 
 ## Using Existing Orbs
 
