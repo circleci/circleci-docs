@@ -26,7 +26,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 		<li><a href="/docs/2.0/getting-started/">Your First Green Build</a></li>
 		<li><a href="/docs/2.0/hello-world/">Hello World</a></li>
 		<li><a href="/docs/2.0/faq/">FAQ</a></li>
-	        <li><a href="/docs/2.0/orbs-intro/">Orbs</a></li>
+	        <li><a href="/docs/2.0/orb-intro/">Orbs</a></li>
 		</ul></td>
     <td><ul><li><a href="/docs/2.0/example-configs/">Open Source Projects that use CircleCI</a></li>
 		<li><a href="/docs/2.0/postgres-config">Database Config Examples</a></li>
