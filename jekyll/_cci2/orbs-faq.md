@@ -46,6 +46,14 @@ You attempted to run a local build with version 2.1 of configuration.
 
 * Answer: To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
+### Rerun Error
+
+* Question: Why do I get the following error when re-running the same workflow:
+```only certified orbs are permitted in this project.```
+
+* Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
+
+
 <!---
 ### Environment Variables Not Being Passed at Runtime
 
