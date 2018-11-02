@@ -331,3 +331,203 @@ To publish an orb, follow the steps listed below as an org Admin.
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
 
 `circleci orb source sandbox/hello-world@0.0.1`
+
+
+## Creating a CircleCI Orb 
+
+This section describes each step of the orb creation and publishing process so you will have a deep understanding of how to write and publish your own orb. This examples enables you to follow the process step-by-step to ensure you write an orb that both adheres to CircleCI requirements while also meeting your own needs.
+
+The following sections describe each step in the orb authoring and publishing process:
+
+1. Meet initial CircleCI prerequisites
+2. Import an existing orb or author your own orb
+3. Validate and publish your orb
+
+## Meet Initial CircleCI Prerequisites
+
+Before you begin creating your own orb, there are a few steps you need to take to ensure that your orb will work with the CircleCI platform and your orb will be properly formatted and structured.
+
+### Get the new CircleCI CLI
+
+The CircleCI platform enables you to write orbs using the CircleCI CLI. If you choose to work with the CLI, the process of writing orbs will be more efficient because you will be able to use existing CircleCI CLI tools and commands.
+
+#### Installing the CLI for the First Time
+
+If you are installing the new `circleci` CLI for the first time, run the following command:
+
+```
+curl -fLSs https://circle.ci/cli | bash
+```
+
+By default, the `circleci` app will be installed in the `/usr/local/bin directory`. If you do not have write permissions to `/usr/local/bin`, you may need to use the `sudo` command. Alternatively, you may install the CLI to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
+
+```
+curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin/bash
+```
+
+##### Homebrew
+
+If you wish to use Homebrew, run the following command:
+
+```
+brew install circleci
+```
+##### Snapcraft
+
+You may also use Snapcraft to install the CLI by running the following command:
+
+```
+sudo snap install circleci
+```
+
+#### Upgrading From an Existing CLI
+
+If you have used a previous version of the CircleCI and are currently running a version older than `0.1.6`, you will need to run the following commands to upgrade your CLI version to the latest version.
+
+```
+circleci update
+circleci switch
+```
+
+If you do not have write permissions, be sure to use the `sudo` command. This will install the CLI to the `/usr/local/bin` directory.
+
+#### Updating the CircleCI CLI after Installation
+
+The CircleCI comes with a built-in version management system. After you have installed the CLI, you should check to see if there are any updates to the CLI that need to be installed by running the following commands:
+
+```
+circleci update check
+circleci update install
+```
+
+### Configuring the CircleCI CLI
+
+Now that you have installed the CircleCI CLI, you will want to configure the CLI for use. The process for configuring the CLI is simple and straightforward, requiring you only to follow a few steps.
+
+Before you can configure the CLI, you may need to first generate a CircleCI API token from the Personal API Token tab [https://circleci.com/accounts/api]:
+
+```
+$ circleci setup
+```
+
+If you are using the CLI tool on `circleci.com`, make sure to accept the provided default `CircleCI Host`.
+
+If you are a user of a privately installed CircleCI deployment you will have to change the default value to your custom address, for example, circleci.my-org.com.
+
+<aside class="notice">
+CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you will only be able to use `circlecli local execute` (this was previously `circleci build`).
+</aside>
+
+### Validating a Build Config
+
+To ensure that the CircleCI CLI tool has been installed properly, you can use the CLI tool to validate a build config file by running the following command:
+
+```
+$ circleci config validate
+```
+
+You should see a response similar to the following:
+
+```
+Config file at .circleci/config.yml is valid
+```
+
+### Set the Version Property to 2.1
+
+After you have installed the CircleCI CLI tool, you will then need to set the version property to version 2.1. This is a very simple process, requiring you only to set the value of the top-level 'version' key in your configuration file. This will enable all 2.1 features and allow you to begin working with orbs in your environment.
+
+## Import an Existing Orb or Author Your Own Orb
+
+After you have met all of the prerequisites for working with orbs, you may now begin either working with an existing orb (via the import feature) or authoring your own orb. Because CircleCI has provided 20 certified and tested orbs, along with several 3rd party orbs authored by CircleCI partners, it is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow.
+
+### Importing an Existing Orb
+
+If you wish to import an existing orb, it would be similar to the example shown below.
+
+```
+orbs:
+  slack: circleci/slack@0.1.0
+  heroku: circleci/heroku@1.0.0
+```
+
+In the above example, two orbs would be made available to you (slack & heroku), one for each key in the map.
+
+Because the values of the above keys under `orbs` are all scalar values they are assumed to be imports based on the orb ref format of `${NAMESPACE}/${ORB_NAME}@${VERSION}`
+
+### Authoring Your Own Orb
+
+If you find that there are no existing orbs that meet your needs, you may wish to author your own orb to meet your specific environment or configuration requirements. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create an orb that is specific to your organization.
+
+For more detailed information on how to author your own orb, please refer to the Authoring Orbs page [link needed here], where you will find step-by-step instructions on how to create your own orb.
+
+## Validate and Publish Your Orb
+
+When you have completed authoring your own orb, you will want to validate that the orb is properly constructed and will work in your configuration before publication. Although there are several different tests you can perform to ensure an orb's integrity, CircleCI recommends that you use the `circleci/orb-tools` orb.
+
+The `orb-tools orb` provides the following jobs and commands that you may find useful.
+
+* `orb-tools/pack` (experimental) uses the CLI to pack an orb file structure into a single orb yml.
+* `orb-tools/validate` uses the CLI to validate a given orb yml.
+* `orb-tools/increment` uses the CLI to increment the version of an orb in the registry. If the orb does not have a version yet it starts at 0.0.0.
+* `orb-tools/publish` uses the CLI to publish an orb to the registry.
+
+### `orb-tools/pack`
+
+This CLI command enables you to pack the content of an orb for publishing. The following parameters may be passed with this command:
+
+* source-dir: Path to the root of the orb source directory to be packed. (ie: my-orb/src/)
+* destination-orb-path: Path including filename of where the packed orb will be written.
+* validate: Boolean for whether or not to do validation on the orb. Default is false.
+* checkout: Boolean for whether or not to checkout as a first step. Default is true.
+* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+* workspace-path: Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided then this job will not persist to a workspace.
+* artifact-path: Path to directory that should be saved as a job artifact. If the default value of blank is provided then this job will not save any artifacts.
+
+### `orb-tools/increment`
+
+This command uses the CLI to increment the version of an orb in the registry. If the orb does not have a version yet it starts at 0.0.0. The following parameters may be passed with this command:
+
+* orb-path: Path to an orb file.
+* orb-ref: A version-less orb-ref in the form /
+* segment: The semantic version segment to increment 'major' or 'minor' or 'patch'
+* publish-token-variable: The env var containing your token. Pass this as a literal string such as $ORB_PUBLISHING_TOKEN. Do not paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
+* validate: Boolean for whether or not to do validation on the orb. Default is false.
+* checkout: Boolean for whether or not to checkout as a first step. Default is true.
+* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+
+### `orb-tools/publish`
+
+This command is used to publish an orb. The following parameters may be passed with this command:
+
+* orb-path: Path of the orb file to publish.
+* orb-ref: A full orb-ref in the form of /@
+* publish-token-variable: The env var containing your publish token. Pass this as a literal string such as `$ORB_PUBLISHING_TOKEN`. DO NOT paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
+* validate: Boolean for whether or not to do validation on the orb. Default is false.
+* checkout: Boolean for whether or not to checkout as a first step. Default is true.
+* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+
+### Validate and Publish Example
+
+Below is an example of how to use the `orb-tools` orb to validate and publish an orb.
+
+```
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@volatile
+
+workflows:
+  btd:
+    jobs:
+      - orb-tools/publish:
+          orb-path: src/orb.yml
+          orb-ref: circleci/hello-build@dev:${CIRCLE_BRANCH}
+          publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
+          validate: true
+```
+
+In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When orb-tools/publish succeeds, the Job input will contain a success message that the new orb has been published.
+
