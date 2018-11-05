@@ -203,7 +203,7 @@ To trigger a workflow on a schedule,
 add the `triggers` key to the workflow
 and specify a `schedule`.
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
 
 ```yaml
 workflows:
