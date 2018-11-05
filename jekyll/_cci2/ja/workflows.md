@@ -197,7 +197,7 @@ It can be inefficient and expensive to run a workflow for every commit for every
 
 デフォルトでは、Workflow は `git push` するたびに実行されます。一方、Workflow をスケジュール実行するには、`triggers` キーを Workflow に追加して、`schedule` を指定します。
 
-下記は、`nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 `cron` は POSIX 規格の `crontab` の構文で表記します。`cron` の書き方については [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html) を参照してください。 この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
+下記は、`nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
 
 ```yaml
 workflows:
