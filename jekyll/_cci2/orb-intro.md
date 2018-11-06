@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "Orbs Introduction"
 short-title: "Orbs Introduction"
-description: "Starting point for CircleCI orbs"
+description: "Starting point for CircleCI Orbs"
 categories: [getting-started]
 order: 1
 ---
 
-CircleCI provides certified and tested orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/) for the complete list of available Orbs. 
+CircleCI Orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs. 
 
 ### Importing an Existing Orb
 
@@ -25,7 +25,7 @@ Because the values of the above keys under `orbs` are all scalar values they are
 
 ### Authoring Your Own Orb
 
-If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create an orb that is specific to your organization.
+If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
 
 ## See Also
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
