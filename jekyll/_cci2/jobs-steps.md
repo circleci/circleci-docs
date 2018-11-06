@@ -40,19 +40,18 @@ Steps are a collection of executable commands which are run during a job, the `c
  version: 2.1
  
  orbs:
-   s3tools: circleci/s3@1 #imports the s3 orb in the circleci namespace
+   aws-s3: circleci/s3@1.0.0 #imports the s3 orb in the circleci namespace
  
  workflows:
    build-test-deploy:
      jobs:
        - deploy2s3:
          steps:
-           - s3tools/s3sync: #invokes the s3sync command declared in the s3 orb
+           - aws-s3/sync: #invokes the sync command declared in the s3 orb
                from: .
               to: "s3://mybucket_uri"
               overwrite: true
 ```
-
 
 ## Sample Configuration with Parallel Jobs
 
