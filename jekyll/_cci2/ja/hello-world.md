@@ -7,21 +7,39 @@ categories:
   - getting-started
 order: 4
 ---
-このページでは、[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後に CircleCI 2.0 で Linux、Android、macOS のプロジェクトを実行するための設定方法について解説しています。
+This document describes how to configure your Linux, Android or macOS project to run on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want:
+2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines.
+
+```yaml
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@.0.0.5
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+
+Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+
+Add a job called `build` that uses the Docker executor to spin up a Node container and runs a simple `echo` command:
+
+1. Add following lines to your `config.yml` file. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want: 
 
 ```yaml
 version: 2
 jobs:
   build:
-    docker: # Executor タイプです。他に machine、macos という実行タイプを指定できます 
-      - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
+    docker: # use the docker executor type; machine and macos executors are also supported
+      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
-      - checkout # プロジェクトのディレクトリにあるコードをチェックアウトします
-      - run: echo "hello world" # 「echo」コマンドを実行します
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
 ```
 
 **Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file.
