@@ -30,7 +30,7 @@ workflows:
           - hello/hello-build
 ```
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/#section=projects) to use the `orbs` key. 
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key. 
 
 Orbs consist of the following elements:
 
@@ -41,7 +41,7 @@ Orbs consist of the following elements:
 ### Commands
 {:.no_toc}
 
-Commands are reusable sets of steps that you can invoke with specific parameters within an existing job (e.g. `checkout` and `run`). For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
+Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
 ```
 jobs
