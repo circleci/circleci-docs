@@ -36,7 +36,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be a 2.1 config, though `workflow` and `jobs` are not required.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
 executors | N | Map | A map of strings to executor definitions. See the Executors Syntax section below.
 commands | N | Map | A map of command names to command definitions. See the Commands Syntax section below.
 {: class="table table-striped"}
