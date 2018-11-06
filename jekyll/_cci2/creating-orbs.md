@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects. Orbs are made available for use in a configuration through the orbs key in the top level of your `config.yml` file.
+Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects. Orbs are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
 This document describes how you can:
 
@@ -16,7 +16,7 @@ This document describes how you can:
 * Create an inline orb in your `config.yml` file
 * Create, validate, and publish an orb in the registry
 
-## Using Existing Orbs
+## Overview
 
 CircleCI has made available a number of certified and 3rd-Party orbs that you may use in your configuration to reduce the time needed to get up and running using orbs in your configuration. By using CircleCI certified orbs, or 3rd-party orbs developed by CircleCI partners, you can be confident that these orbs have been developed and tested to ensure they work with the CircleCI platform.
 
@@ -26,7 +26,7 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 ### 3rd-Party Orbs
 
-3rd-party orbs are those published by our customers and other members of our community. For you to publish orbs or for your projects to use 3rd party orbs, your organization must opt-in under Security within the Settings tab under the Orb Security Settings where an organization administrator must agree to the terms for using 3rd-party software.
+3rd-party orbs are those published by CircleCI customers and other members of our community. For you to publish orbs or for your projects to use 3rd party orbs, your organization must opt-in under Security within the Settings tab under the Orb Security Settings where an organization administrator must agree to the terms for using 3rd-party software.
 
 <aside class="notice">
 This setting can only be toggled by organization administrators.
