@@ -138,7 +138,7 @@ the container over SSH apears, as follows:
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
+2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:8080` to port `3000` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 3000.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
