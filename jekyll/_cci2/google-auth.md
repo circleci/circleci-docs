@@ -56,6 +56,16 @@ but it will be used throughout the examples in this document.
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
+#### Adding Granular Permissions
+
+If you are having issues pushing container images to GCR you may need more
+granular permissions than the default `service account` provides. You can grant
+permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
+
+Refer to the Cloud Storage [permission
+documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions)
+to learn more about Identity and Access Management (IAM) permissions.
+
 ### Authenticating to Google Container Registry
 
 Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk),
