@@ -94,6 +94,7 @@ build to speed up. Following that, we run `stack setup` to enable all the build
 tools as per your `stack.yaml` and `package.yaml` config.
 
 
+{% raw %}
 ```yaml
     steps:
       - checkout
@@ -111,6 +112,7 @@ tools as per your `stack.yaml` and `package.yaml` config.
             - ~/.stack
             - ~/.stack-work
 ```
+{% endraw %}
 
 Note: It's also possible to use a `cabal` build file for caching dependencies.
 `stack`, however, is commonly recommended especially for those new to the Haskell ecosystem. Because this
