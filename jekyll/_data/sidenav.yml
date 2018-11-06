@@ -27,7 +27,7 @@
       children: 
         - name: Projects and Builds
           link: 2.0/project-build/
-        - name: Jobs, Steps, and Workflows
+        - name: Orbs, Jobs, Steps, and Workflows
           link: 2.0/jobs-steps/
         - name: Differences from Jenkins
           link: 2.0/migrating-from-jenkins/
@@ -59,8 +59,17 @@
           link: 2.0/local-cli/
         - name: Testing Config Locally
           link: 2.0/examples/
+    - name: Orbs
+      link: 2.0/orb-intro/    
+      children:
+        - name: Using Orbs
+          link: 2.0/using-orbs/     
         - name: Reusing Config
-          link: 2.0/reusing-config/                   
+          link: 2.0/reusing-config/
+        - name: Orbs FAQ
+          link: 2.0/orbs-faq/   
+        - name: Creating Orbs
+          link: 2.0/creating-orbs/           
     - name: Examples
       link: 2.0/examples-intro/
       children: 

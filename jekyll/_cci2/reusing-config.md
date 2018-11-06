@@ -8,7 +8,7 @@ order: 1
 ---
 
 
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable commands and executors.
+This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
 * TOC
 {:toc}
@@ -67,7 +67,7 @@ jobs:
           to: "Lev"
 ```
 
-<!---
+
 ### Invoking Other Commands in Your Command
 {:.no_toc}
 
@@ -90,12 +90,12 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 ## Examples
 
-The following is a an example of part of an "s3tools" orb defining a command called "s3sync":
+The following is a an example of part of an "s3tools" orb defining a command called "sync":
 
 ```yaml
-# s3tools orb
+# aws-s3 orb
 commands:
-  s3sync:
+  sync:
     description: "A simple encapsulation of doing an s3 sync"
     parameters:
       from:
@@ -112,25 +112,47 @@ commands:
 ```
 
 
-Defining a command called "s3sync" is invoked in a 2.1 `.circleci/config.yml` file as:
+Defining a command called "sync" is invoked in a 2.1 `.circleci/config.yml` file as:
 
 ```yaml
 version: 2.1
 
 orbs:
-  s3tools: circleci/s3@1
+  aws-s3: circleci/aws-s3@1.0.0
 
 workflows:
   build-test-deploy:
     jobs:
       - deploy2s3:
         steps:
-          - s3tools/s3sync:
+          - aws-s3/sync:
               from: .
               to: "s3://mybucket_uri"
               overwrite: true
 ```
---->
+
+Defining a `build` job:
+
+```
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@volatile
+  aws-s3: circleci/aws-s3@volatile
+jobs:
+  build:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
+      - aws-s3/sync:
+          from: bucket
+          to: "s3://my-s3-bucket-name/prefix"
+          overwrite: true
+      - aws-s3/copy:
+          from: bucket/build_asset.txt
+          to: "s3://my-s3-bucket-name"
+          arguments: --dryrun
+ ```
 
 ## Authoring Reusable Executors 
 
@@ -167,7 +189,7 @@ jobs:
 ## Invoking Reusable Executors
 {:.no_toc}
 
-The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations (see below):
+The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
 ```yaml
 jobs:
@@ -178,9 +200,9 @@ jobs:
       - run: echo outside the executor
 ```
 
-<!---
-2. Allowing an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
--->
+
+It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
+
 
 ### Example of Using an Executor Declared in config.yml in Multiple Jobs
 {:.no_toc}
@@ -214,7 +236,7 @@ jobs:
       - run: echo "how are ya?"
 ```
 
-<!---
+
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
 ```yaml
@@ -235,7 +257,7 @@ executors:
       - image: clojure:lein-2.8.1
 ```
 
-A user could use either executor from their configuration file with:
+You may use either executor from your configuration file with:
 
 ```yaml
 # config.yml
@@ -249,10 +271,9 @@ jobs:
     executor: baz-orb/bar  # prefixed executor
 ```
 
-Note that `foo-orb/bar` and `baz-orb/bar` are different executors. They
-both have the local name `bar` relative to their orbs, but the are independent executors living in different orbs.
+**Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They
+both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
 
--->
 
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
@@ -569,10 +590,10 @@ workflows:
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
 
-<!---
-### Jobs Defined in an orb
 
-If a job is declared inside an orb it can use commands in that orb or the global commands. We do not currently allow calling commands outside the scope of declaration of the job.
+### Jobs Defined in an Orb
+
+If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
 
 **hello-orb**
 ```yaml
@@ -609,7 +630,7 @@ workflows:
       - hello-orb/sayhello:
           saywhat: Everyone
 ```
---->
+
 
 ### Using Parameters in Executors
 {:.no_toc}
@@ -775,11 +796,9 @@ workflows:
 Conditional steps allow the definition of steps that only run if a condition is
 met. 
 
-<!---
-For example, an orb could define a command that runs a set of steps *if* the
-orb's user invokes it with `myorb/foo: { dostuff: true }`, but not
+For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
--->
+
 
 These conditions are checked before a workflow is actually run. That
 means, for example, that a you cannot use a condition to check an environment
@@ -787,11 +806,9 @@ variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
 
-<!---
 For example, an
 orb author could define conditional steps in the `steps` key of a Job or a
 Command.
--->
 
 A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run. 
 
