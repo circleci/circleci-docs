@@ -30,8 +30,35 @@ href="https://github.com/CircleCI-Public/<<TODO-REPO-LINK>>/blob/master/.circlec
 {% raw %}
 
 ```yaml
-TODO:
-  TODO: ...
+version: 2
+jobs:
+  build:
+    docker:
+      - image: fpco/stack-build:lts
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Cached Dependencies
+          keys:
+            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}
+      - run:
+          name: Resolve/Update Dependencies
+          command: stack setup
+      - run:
+          name: Run tests
+          command: stack test
+      - run:
+          name: Install executable
+          command: stack install
+      - save_cache:
+          name: Cache Dependencies
+          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
+          paths:
+            - ".stack-work"
+      - store_artifacts: # upload build artifact for display in CircleCi
+          path: ~/.local/bin/circleci-demo-haskell-exe
+          destination: circleci-demo-haskell-exe
+
 ```
 
 {% endraw %}
