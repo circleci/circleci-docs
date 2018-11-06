@@ -16,7 +16,7 @@ If you wish to import an existing orb, it would be similar to the example shown 
 ```
 orbs:
   slack: circleci/slack@0.1.0
-  heroku: circleci/heroku@1.0.0
+  heroku: circleci/heroku@0.0.1
 ```
 
 In the above example, two orbs would be made available to you (slack & heroku), one for each key in the map.
