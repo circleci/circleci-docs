@@ -5,9 +5,9 @@ short-title: "crwdns34078:0crwdne34078:0"
 description: "crwdns34079:0crwdne34079:0"
 categories:
   - crwdns34080:0crwdne34080:0
-order: 4081:0d286cef765.80570278crwdns34081:0crwdne34081:0
+order: rwdns34081:0crwdne34081:0crwdns34081:0crwdne34081:0
 ---
-crwdns34082:0{{ site.baseurl }}crwdne34082:0
+crwdns73106:0{{ site.baseurl }}crwdne73106:0
 
 * crwdns34083:0{:toc}crwdne34083:0
 
@@ -53,438 +53,341 @@ crwdns34107:0crwdne34107:0
 crwdns34108:0crwdne34108:0
 ```
 
-<!---
-### Invoking Other Commands in Your Command
-{:.no_toc}
+### crwdns73108:0crwdne73108:0
 
-Commands can use other commands in the scope of execution. 
+crwdns73110:0{:.no_toc}crwdne73110:0
 
+crwdns73112:0crwdne73112:0
 
-For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
+crwdns73114:0crwdne73114:0 crwdns73116:0crwdne73116:0
 
+## crwdns73118:0crwdne73118:0
 
-## Built-In Commands
+crwdns73120:0crwdne73120:0 crwdns73122:0crwdne73122:0
 
-CircleCI has several built-in commands available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of built-in commands are:
+* `crwdns73124:0crwdne73124:0`
+* `crwdns73126:0crwdne73126:0`
+* `crwdns73128:0crwdne73128:0`
 
-  * `checkout`
-  * `setup_remote_docker`
-  * `save_to_workspace`
+crwdns73130:0crwdne73130:0
 
-**Note:** It is possible to override the built-in commands with a custom command.
+## crwdns73132:0crwdne73132:0
 
-
-## Examples
-
-The following is a an example of part of an "s3tools" orb defining a command called "s3sync":
+crwdns73134:0crwdne73134:0
 
 ```yaml
-# s3tools orb
-commands:
-  s3sync:
-    description: "A simple encapsulation of doing an s3 sync"
-    parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
-    steps:
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+crwdns73136:0crwdne73136:0
 ```
 
-
-Defining a command called "s3sync" is invoked in a 2.1 `.circleci/config.yml` file as:
+crwdns73138:0crwdne73138:0
 
 ```yaml
-version: 2.1
-
-orbs:
-  s3tools: circleci/s3@1
-
-workflows:
-  build-test-deploy:
-    jobs:
-      - deploy2s3:
-        steps:
-          - s3tools/s3sync:
-              from: .
-              to: "s3://mybucket_uri"
-              overwrite: true
-```
---->
-
-## crwdns34109:0crwdne34109:0
-
-crwdns34110:0crwdne34110:0 crwdns34111:0crwdne34111:0 crwdns34112:0crwdne34112:0
-
-crwdns34113:0crwdne34113:0
-
-crwdns34114:0crwdne34114:0
-
-* crwdns34115:0crwdne34115:0 
-* `crwdns34116:0crwdne34116:0`
-* `crwdns34117:0crwdne34117:0`
-* `crwdns34118:0crwdne34118:0`
-* `crwdns34119:0crwdne34119:0`
-
-crwdns34120:0crwdne34120:0
-
-```yaml
-crwdns34121:0crwdne34121:0
+crwdns73140:0crwdne73140:0
+              crwdns73142:0crwdne73142:0
 ```
 
-crwdns34122:0crwdne34122:0
+crwdns73144:0crwdne73144:0
 
-## crwdns34123:0crwdne34123:0
+    crwdns73146:0crwdne73146:0 crwdns73148:0crwdne73148:0 crwdns73150:0crwdne73150:0 
+    
+    crwdns73152:0crwdne73152:0
+    
+    crwdns73154:0crwdne73154:0 
+    
+    crwdns73156:0crwdne73156:0
+    
 
-crwdns34124:0{:.no_toc}crwdne34124:0
+crwdns73158:0crwdne73158:0
 
-crwdns34125:0crwdne34125:0
-
-```yaml
-crwdns34126:0crwdne34126:0
-```
-
-<!---
-2. Allowing an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
--->
-
-### crwdns34127:0crwdne34127:0
-
-crwdns34128:0{:.no_toc}crwdne34128:0
-
-crwdns34129:0crwdne34129:0 crwdns34130:0crwdne34130:0
-
-```yaml
-crwdns34131:0crwdne34131:0
-```
-
-<!---
-You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
-
-```yaml
-# yaml from foo-orb
-executors:
-  bar:
-    machine: true
-    environment:
-      RUN_TESTS: foobar
-```
-
-`baz-orb` could define the `bar` executor too:
-```yaml
-# yaml from baz-orb
-executors:
-  bar:
-    docker:
-      - image: clojure:lein-2.8.1
-```
-
-A user could use either executor from their configuration file with:
-
-```yaml
-# config.yml
-orbs:
-  foo-orb: somenamespace/foo@1
-  baz-orb: someothernamespace/baz@3.3.1
-jobs:
-  some-job:
-    executor: foo-orb/bar  # prefixed executor
-  some-other-job:
-    executor: baz-orb/bar  # prefixed executor
-```
-
-Note that `foo-orb/bar` and `baz-orb/bar` are different executors. They
-both have the local name `bar` relative to their orbs, but the are independent executors living in different orbs.
-
--->
-
-### crwdns34132:0crwdne34132:0
+## crwdns73160:0crwdne73160:0
 
 crwdns34133:0{:.no_toc}crwdne34133:0
 
-crwdns34134:0crwdne34134:0 crwdns34135:0crwdne34135:0
-
-crwdns34136:0crwdne34136:0 crwdns34137:0crwdne34137:0 crwdns34138:0crwdne34138:0
+crwdns73162:0crwdne73162:0
 
 ```yaml
-crwdns34139:0crwdne34139:0
+crwdns73164:0crwdne73164:0
 ```
 
-crwdns34140:0crwdne34140:0
+crwdns73166:0crwdne73166:0
+
+### crwdns73168:0crwdne73168:0
+
+crwdns73170:0{:.no_toc}crwdne73170:0
+
+crwdns73172:0crwdne73172:0 crwdns73174:0crwdne73174:0
 
 ```yaml
-crwdns34141:0crwdne34141:0
+crwdns73176:0crwdne73176:0
 ```
 
-## crwdns34142:0crwdne34142:0
-
-crwdns34143:0crwdne34143:0
-
-crwdns34144:0crwdne34144:0
+crwdns73178:0crwdne73178:0
 
 ```yaml
-crwdns34145:0crwdne34145:0
-          crwdns34146:0crwdne34146:0
+crwdns73180:0crwdne73180:0
 ```
 
-crwdns34147:0crwdne34147:0
+crwdns73182:0crwdne73182:0
 
-### crwdns34148:0crwdne34148:0
+```yaml
+crwdns73184:0crwdne73184:0
+```
 
-crwdns34149:0{:.no_toc}crwdne34149:0
+crwdns73186:0crwdne73186:0
 
-crwdns34150:0crwdne34150:0
+```yaml
+crwdns73188:0crwdne73188:0
+```
 
-crwdns71384:0crwdne71384:0 crwdns71386:0crwdne71386:0 crwdns71388:0crwdne71388:0 crwdns71390:0crwdne71390:0 crwdns71392:0crwdne71392:0 crwdns71394:0crwdne71394:0 crwdns71396:0crwdne71396:0
+crwdns73190:0crwdne73190:0 crwdns73192:0crwdne73192:0
 
-### crwdns34163:0crwdne34163:0
+### crwdns73194:0crwdne73194:0
 
-crwdns71398:0{:.no_toc}crwdne71398:0
+crwdns73196:0{:.no_toc}crwdne73196:0
 
-crwdns71400:0crwdne71400:0
+crwdns73198:0crwdne73198:0 crwdns73200:0crwdne73200:0
+
+crwdns73202:0crwdne73202:0 crwdns73204:0crwdne73204:0 crwdns73206:0crwdne73206:0
+
+```yaml
+crwdns73208:0crwdne73208:0
+```
+
+crwdns73210:0crwdne73210:0
+
+```yaml
+crwdns73212:0crwdne73212:0
+```
+
+## crwdns73214:0crwdne73214:0
+
+crwdns73216:0crwdne73216:0
+
+crwdns73218:0crwdne73218:0
+
+```yaml
+crwdns73220:0crwdne73220:0
+          crwdns73222:0crwdne73222:0
+```
+
+crwdns73224:0crwdne73224:0
+
+### crwdns73226:0crwdne73226:0
+
+crwdns73228:0{:.no_toc}crwdne73228:0
+
+crwdns73230:0crwdne73230:0
+
+crwdns73232:0crwdne73232:0 crwdns73234:0crwdne73234:0 crwdns73236:0crwdne73236:0 crwdns73238:0crwdne73238:0 crwdns73240:0crwdne73240:0 crwdns73242:0crwdne73242:0 crwdns73244:0crwdne73244:0
+
+### crwdns73246:0crwdne73246:0
+
+crwdns71426:0{:.no_toc}crwdne71426:0
+
+crwdns73248:0crwdne73248:0
 
 #### crwdns34172:0crwdne34172:0
 
-crwdns71402:0{:.no_toc}crwdne71402:0
+crwdns73250:0{:.no_toc}crwdne73250:0
 
-crwdns71404:0crwdne71404:0
+crwdns73252:0crwdne73252:0
 
 ```yaml
-crwdns71406:0crwdne71406:0
+crwdns73254:0crwdne73254:0
 ```
 
-crwdns71408:0crwdne71408:0 crwdns71410:0crwdne71410:0 crwdns71412:0crwdne71412:0 crwdns71414:0crwdne71414:0
+crwdns73256:0crwdne73256:0 crwdns73258:0crwdne73258:0 crwdns73260:0crwdne73260:0 crwdns73262:0crwdne73262:0
 
 #### crwdns34180:0crwdne34180:0
 
-crwdns71416:0{:.no_toc}crwdne71416:0
+crwdns73264:0{:.no_toc}crwdne73264:0
 
-crwdns71418:0crwdne71418:0
+crwdns73266:0crwdne73266:0
 
 ```yaml
-crwdns71420:0crwdne71420:0
+crwdns73268:0crwdne73268:0
 ```
 
-crwdns71422:0crwdne71422:0
+crwdns73270:0crwdne73270:0
 
 * crwdns34185:0crwdne34185:0
 * crwdns34186:0crwdne34186:0
 
-crwdns71424:0crwdne71424:0
+crwdns73272:0crwdne73272:0
 
 #### crwdns34188:0crwdne34188:0
 
-crwdns71426:0{:.no_toc}crwdne71426:0
+crwdns71470:0{:.no_toc}crwdne71470:0
 
-crwdns71428:0crwdne71428:0 crwdns71430:0crwdne71430:0
+crwdns73274:0crwdne73274:0 crwdns73276:0crwdne73276:0
 
 ```yaml
-crwdns71432:0crwdne71432:0
+crwdns73278:0crwdne73278:0
 ```
 
-crwdns71434:0crwdne71434:0
+crwdns73280:0crwdne73280:0
 
 ```yaml
-crwdns71436:0crwdne71436:0
+crwdns73282:0crwdne73282:0
 ```
 
-crwdns71438:0crwdne71438:0
+crwdns73284:0crwdne73284:0
 
 ```yaml
-crwdns71440:0crwdne71440:0
+crwdns73286:0crwdne73286:0
 ```
 
 #### crwdns34197:0crwdne34197:0
 
-crwdns71442:0{:.no_toc}crwdne71442:0
+crwdns73288:0{:.no_toc}crwdne73288:0
 
-crwdns71444:0crwdne71444:0 crwdns71446:0crwdne71446:0 crwdns71448:0crwdne71448:0
+crwdns73290:0crwdne73290:0 crwdns73292:0crwdne73292:0 crwdns73294:0crwdne73294:0
 
 ```yaml
-crwdns71450:0crwdne71450:0 crwdns71452:0crwdne71452:0
-        crwdns71454:0crwdne71454:0
+crwdns73296:0crwdne73296:0 crwdns73298:0crwdne73298:0
+        crwdns73300:0crwdne73300:0
 ```
 
-crwdns71456:0crwdne71456:0
+crwdns73302:0crwdne73302:0
 
 ```yaml
-crwdns71458:0crwdne71458:0
+crwdns73304:0crwdne73304:0
 ```
 
 #### crwdns71460:0crwdne71460:0
 
-crwdns71462:0{:.no_toc}crwdne71462:0
+crwdns73306:0{:.no_toc}crwdne73306:0
 
-crwdns71464:0crwdne71464:0
+crwdns73308:0crwdne73308:0
 
 ```yaml
-crwdns71466:0crwdne71466:0
+crwdns73310:0crwdne73310:0
 ```
 
 #### crwdns71468:0crwdne71468:0
 
-crwdns71470:0{:.no_toc}crwdne71470:0
+crwdns73312:0{:.no_toc}crwdne73312:0
 
-crwdns71472:0crwdne71472:0
-
-```yaml
-crwdns71474:0crwdne71474:0
-```
-
-## crwdns34217:0crwdne34217:0
-
-crwdns71476:0crwdne71476:0 crwdns71478:0crwdne71478:0
-
-crwdns71480:0crwdne71480:0
+crwdns73314:0crwdne73314:0
 
 ```yaml
-crwdns71482:0crwdne71482:0
+crwdns73316:0crwdne73316:0
 ```
 
-crwdns71484:0crwdne71484:0
+## crwdns73318:0crwdne73318:0
 
-<!---
-### Jobs Defined in an orb
+crwdns73320:0crwdne73320:0 crwdns73322:0crwdne73322:0
 
-If a job is declared inside an orb it can use commands in that orb or the global commands. We do not currently allow calling commands outside the scope of declaration of the job.
+crwdns73324:0crwdne73324:0
 
-**hello-orb**
 ```yaml
-# partial yaml from hello-orb
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          saywhat: "<< parameters.saywhat >>"
-commands:
-  saywhat:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
+crwdns73326:0crwdne73326:0
 ```
 
-**Config leveraging hello-orb**
+crwdns73328:0crwdne73328:0
+
+### crwdns73330:0crwdne73330:0
+
+crwdns73332:0crwdne73332:0
+
+**crwdns73334:0crwdne73334:0**
+
 ```yaml
-# config.yml
-version: 2.1
-orbs:
-  hello-orb: somenamespace/hello-orb@volatile
-workflows:
-  build:
-    jobs:
-      - hello-orb/sayhello:
-          saywhat: Everyone
+crwdns73336:0crwdne73336:0
 ```
---->
 
-### crwdns71486:0crwdne71486:0
+**crwdns73338:0crwdne73338:0**
 
-crwdns71488:0{:.no_toc}crwdne71488:0
+```yaml
+crwdns73340:0crwdne73340:0
+```
 
-crwdns71490:0crwdne71490:0 crwdns71492:0crwdne71492:0
+### crwdns73342:0crwdne73342:0
 
-crwdns71494:0crwdne71494:0
+crwdns73344:0{:.no_toc}crwdne73344:0
+
+crwdns73346:0crwdne73346:0 crwdns73348:0crwdne73348:0
+
+crwdns73350:0crwdne73350:0
 
 #### crwdns71496:0crwdne71496:0
 
-crwdns71498:0{:.no_toc}crwdne71498:0
+crwdns73352:0{:.no_toc}crwdne73352:0
 
 ```yaml
-crwdns71500:0crwdne71500:0  
+crwdns73354:0crwdne73354:0  
 ```
 
-crwdns71502:0crwdne71502:0
+crwdns73356:0crwdne73356:0
 
 ```yaml
-crwdns71504:0crwdne71504:0
+crwdns73358:0crwdne73358:0
 ```
 
-### crwdns71506:0crwdne71506:0
+### crwdns73360:0crwdne73360:0
 
-crwdns34231:0{:.no_toc}crwdne34231:0
+crwdns73362:0{:.no_toc}crwdne73362:0
 
-crwdns71508:0crwdne71508:0 crwdns71510:0crwdne71510:0 crwdns71512:0crwdne71512:0
+crwdns73364:0crwdne73364:0 crwdns73366:0crwdne73366:0 crwdns73368:0crwdne73368:0
 
 ```yaml
-crwdns71514:0crwdne71514:0
+crwdns73370:0crwdne73370:0
 ```
 
-### crwdns34223:0crwdne34223:0
+### crwdns73372:0crwdne73372:0
 
-crwdns71516:0{:.no_toc}crwdne71516:0
+crwdns73374:0{:.no_toc}crwdne73374:0
 
-crwdns71518:0crwdne71518:0 crwdns71520:0crwdne71520:0
+crwdns73376:0crwdne73376:0 crwdns73378:0crwdne73378:0
 
-crwdns71522:0crwdne71522:0 crwdns71524:0crwdne71524:0
+crwdns73380:0crwdne73380:0 crwdns73382:0crwdne73382:0
 
 ```yaml
-crwdns71526:0crwdne71526:0
+crwdns73384:0crwdne73384:0
 ```
 
-### crwdns34230:0crwdne34230:0
+### crwdns73386:0crwdne73386:0
 
-crwdns71528:0{:.no_toc}crwdne71528:0
+crwdns73388:0{:.no_toc}crwdne73388:0
 
-crwdns71530:0crwdne71530:0 crwdns71532:0crwdne71532:0 crwdns71534:0crwdne71534:0
+crwdns73390:0crwdne73390:0 crwdns73392:0crwdne73392:0 crwdns73394:0crwdne73394:0
 
-crwdns71536:0crwdne71536:0
+crwdns73396:0crwdne73396:0
 
-### crwdns34236:0crwdne34236:0
+### crwdns73398:0crwdne73398:0
 
-crwdns71538:0{:.no_toc}crwdne71538:0
+crwdns73400:0{:.no_toc}crwdne73400:0
 
-crwdns71540:0crwdne71540:0
+crwdns73402:0crwdne73402:0
 
 ```yaml
-crwdns71542:0crwdne71542:0
+crwdns73404:0crwdne73404:0
 ```
 
-crwdns71544:0crwdne71544:0
+crwdns73406:0crwdne73406:0
 
-## crwdns34241:0crwdne34241:0
+## crwdns73408:0crwdne73408:0
 
-crwdns71546:0crwdne71546:0
+crwdns73410:0crwdne73410:0
 
-<!---
-For example, an orb could define a command that runs a set of steps *if* the
-orb's user invokes it with `myorb/foo: { dostuff: true }`, but not
-`myorb/foo: { dostuff: false }`.
--->
+crwdns73412:0{ dostuff: true }crwdnd73412:0{ dostuff: false }crwdne73412:0
 
-crwdns71548:0crwdne71548:0
+crwdns73414:0crwdne73414:0
 
-crwdns71550:0crwdne71550:0
+crwdns73416:0crwdne73416:0
 
-<!---
-For example, an
-orb author could define conditional steps in the `steps` key of a Job or a
-Command.
--->
+crwdns73418:0crwdne73418:0
 
-crwdns71552:0crwdne71552:0 crwdns71554:0crwdne71554:0 crwdns71556:0crwdne71556:0
+crwdns73420:0crwdne73420:0 crwdns73422:0crwdne73422:0 crwdns73424:0crwdne73424:0
 
-crwdns71558:0crwdne71558:0 crwdns71560:0crwdne71560:0 crwdns71562:0crwdne71562:0
+crwdns73426:0crwdne73426:0 crwdns73428:0crwdne73428:0 crwdns73430:0crwdne73430:0
 
-### crwdns34251:0crwdne34251:0
+### crwdns73432:0crwdne73432:0
 
-crwdns71564:0{:.no_toc}crwdne71564:0
+crwdns73434:0{:.no_toc}crwdne73434:0
 
 ```yaml
-crwdns71566:0crwdne71566:0
+crwdns73436:0crwdne73436:0
 ```
 
-crwdns71568:0crwdne71568:0
+crwdns73438:0crwdne73438:0
