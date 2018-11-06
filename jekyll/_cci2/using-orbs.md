@@ -16,7 +16,7 @@ This document provides a basic example of using an inline orb and elements of or
 
 Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. 
 
-To use an existing orb in your `config.yml` file, invoke it with the `orbs` key. The following example invokes the `hello-build` orb in the `circleci` namespace.
+To use an existing orb in your 2.1 `config.yml` file, invoke it with the `orbs` key. The following example invokes the `hello-build` orb in the `circleci` namespace.
 
 ```
 version: 2.1
@@ -29,6 +29,8 @@ workflows:
         jobs:
           - hello/hello-build
 ```
+
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/#section=projects/) to use the `orbs` key. 
 
 Orbs consist of the following elements:
 
