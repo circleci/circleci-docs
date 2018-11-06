@@ -23,7 +23,7 @@ orbs:
 
 In the above example, two orbs are imported into your config, the [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) and the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku). 
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/#section=projects/) to use the `orbs` key.
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/#section=projects) to use the `orbs` key.
 
 ### Authoring Your Own Orb
 
