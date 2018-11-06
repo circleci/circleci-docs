@@ -335,7 +335,7 @@ To publish an orb, follow the steps listed below as an org Admin.
 
 ## Creating a CircleCI Orb 
 
-This section describes each step of the orb creation and publishing process so you will have a deep understanding of how to write and publish your own orb. This examples enables you to follow the process step-by-step to ensure you write an orb that both adheres to CircleCI requirements while also meeting your own needs.
+This section describes each step of the orb creation and publishing process so you will have a deep understanding of how to write and publish your own orb. These examples enables you to follow the process step-by-step to ensure you write an orb that both adheres to CircleCI requirements while also meeting your own needs.
 
 The following sections describe each step in the orb authoring and publishing process:
 
@@ -346,6 +346,10 @@ The following sections describe each step in the orb authoring and publishing pr
 ## Meet Initial CircleCI Prerequisites
 
 Before you begin creating your own orb, there are a few steps you need to take to ensure that your orb will work with the CircleCI platform and your orb will be properly formatted and structured.
+
+### CircleCI Settings
+
+In the CircleCI app Settings for your project, [Build Processing]{{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The org Admin must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
 
 ### Get the new CircleCI CLI
 
