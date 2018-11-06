@@ -11,17 +11,17 @@ CircleCI Orbs are shareable packages of configuration elements, including jobs, 
 
 ### Importing an Existing Orb
 
-If you wish to import an existing orb, it would be similar to the example shown below.
+To import an existing orb, add a single line to to your version 2.1 [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
 
 ```
+version: 2.1
+
 orbs:
   slack: circleci/slack@0.1.0
   heroku: circleci/heroku@0.0.1
 ```
 
-In the above example, two orbs would be made available to you (slack & heroku), one for each key in the map.
-
-Because the values of the above keys under `orbs` are all scalar values they are assumed to be imports based on the orb ref format of `${NAMESPACE}/${ORB_NAME}@${VERSION}`. 
+In the above example, two orbs are imported into your config, the [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) and the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku). 
 
 ### Authoring Your Own Orb
 
