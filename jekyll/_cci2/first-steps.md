@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Sign Up and Try CircleCI 2.0"
-short-title: "Sign Up and Try CircleCI 2.0"
+title: "Sign Up and Try CircleCI"
+short-title: "Sign Up and Try CircleCI"
 description: "First step for using CircleCI"
 categories: [getting-started]
 order: 2
 ---
 
-To run your very first CircleCI build on the CircleCI 2.0 platform, complete the following steps:
+To run your very first CircleCI build on the CircleCI 2.x platform, complete the following steps:
 
 1. Go to the [Sign Up](https://circleci.com/signup/) page.
 

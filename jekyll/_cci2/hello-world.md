@@ -7,11 +7,33 @@ categories: [getting-started]
 order: 4
 ---
 
-This document describes how to configure your Linux, Android or macOS project to run on CircleCI 2.0 after you [sign up]({{ site.baseurl }}/2.0/first-steps/).  
+This document describes how to get started with a basic build of your Linux, Android, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).  
+
+## Use the Hello-Build Orb
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
-2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want: 
+2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines that import the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build).
+
+```yaml
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@.0.0.5 # uses the circleci/buildpack-deps Docker image
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+
+Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+
+## Echo Hello World with a `build` Job
+
+Add a job called `build` that uses the Docker executor to spin up a Node container and runs a simple `echo` command:
+
+1. Add following lines to your `.circleci/config.yml` file. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want: 
 
 ```yaml
 version: 2
