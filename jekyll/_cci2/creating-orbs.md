@@ -279,7 +279,7 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
 
 In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
 
-If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (**Note:** If you are deleting because of a security concern, you must practice responsible disclosure: https://circleci.com/security/).
+If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (**Note:** If you are deleting because of a security concern, you must practice responsible disclosure using the [CircleCI Security](https://circleci.com/security/) web page.
 
 #### Using the CLI to Create and Publish Orbs
 
