@@ -20,7 +20,7 @@ To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2
     version: 2.1
     
     orbs:
-        hello: circleci/hello-build@v0.0.5
+        hello: circleci/hello-build@0.0.5
     
     workflows:
         "Hello Workflow":
@@ -47,7 +47,7 @@ Commands are reusable sets of steps that you can invoke with specific parameters
         docker:
           - image: "circleci/node:9.6.1"
         steps:
-          - sayhello:
+          - myorb/sayhello:
               to: "Lev"
     
 
