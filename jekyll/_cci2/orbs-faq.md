@@ -19,13 +19,15 @@ This document describes various questions and technical issues that you may find
 
 * Answer: You can invoke orbs using the `orbs` stanza in version 2.1 or higher of a CircleCI configuration. For example, if you want to publish an orb called  `hello-build` in the namespace `circleci` and have a published version `0.0.1`, invoke an orb like the example shown below:
 
-```orbs:
-     hello: circleci/hello-build@0.0.1
+```
+orbs:
+     hello: circleci/hello-build@0.0.5
 ```
 
 You may then use the elements of that orb in your configuration by referencing these elements under the key `hello`. For example, if an orb has a job called `hello-build`, you can invoke that job in a workflow like the example shown below.
 
-```workflows:
+```
+workflows:
   info:
     jobs:
       - hello/hello-build
@@ -37,10 +39,12 @@ CircleCI publishes a web-based registry viewer so orbs documentation can be auto
 
 * Question: Why do I get the following error when testing locally:
 
-```circleci build -c .circleci/jobs.yml --job test
+```
+circleci build -c .circleci/jobs.yml --job test
 ```
 
-```Error:
+```
+Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```
 
@@ -49,7 +53,10 @@ You attempted to run a local build with version 2.1 of configuration.
 ### Rerun Error
 
 * Question: Why do I get the following error when re-running the same workflow:
-```only certified orbs are permitted in this project.```
+
+```
+only certified orbs are permitted in this project.
+```
 
 * Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
@@ -106,7 +113,7 @@ yourusername/circle-autoAdded by GitHub
 
 * Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to stdout, but is there a better way to log those log messages.
 
-* Answer: In CircleCI, whatever steps are run are logged, so any output from those steps will appear in the console. You can shoe to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
+* Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
 
 ### Failing Builds
 
