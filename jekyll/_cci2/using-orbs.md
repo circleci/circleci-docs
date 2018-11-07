@@ -49,7 +49,7 @@ jobs
     docker:
       - image: "circleci/node:9.6.1"
     steps:
-      - hello/sayhello:
+      - myorb/sayhello:
           to: "Lev"
 ```
 
