@@ -297,7 +297,7 @@ The ```circleci``` CLI has several commands for managing your orb publishing pip
 
 * ```circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]```
 
-For a full list of help commands inside the CLI, visit https://circleci-public.github.io/circleci-cli/circleci_orb.html [update link when the link to the docs site is active]
+For a full list of help commands inside the CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
 ### Orb Publishing Process
 
