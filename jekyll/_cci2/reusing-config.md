@@ -90,7 +90,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 ## Examples
 
-The following is a an example of part of an "s3tools" orb defining a command called "sync":
+The following is a an example of part of an `aws-s3` orb defining a command called `sync`:
 
 ```yaml
 # aws-s3 orb
@@ -112,7 +112,7 @@ commands:
 ```
 
 
-Defining a command called "sync" is invoked in a 2.1 `.circleci/config.yml` file as:
+Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file as:
 
 ```yaml
 version: 2.1
@@ -136,8 +136,8 @@ Defining a `build` job:
 ```
 version: 2.1
 orbs:
-  aws-cli: circleci/aws-cli@volatile
-  aws-s3: circleci/aws-s3@volatile
+  aws-cli: circleci/aws-cli@0.1.2
+  aws-s3: circleci/aws-s3@1.0.0
 jobs:
   build:
     executor: aws-cli/default
@@ -325,11 +325,11 @@ jobs:
 
 Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map.
 
-The following example defines a command called `s3sync`:
+The following example defines a command called `sync`:
 
 ```yaml
 commands: # a reusable command with parameters
-  s3sync:
+  sync:
     parameters:
       from:
         type: string
@@ -346,11 +346,11 @@ executors: # a reusable executor
   aws:
     docker:
       - image: cibuilds/aws:1.15
-jobs: # a job that invokes the `aws` executor and the `s3sync` command
+jobs: # a job that invokes the `aws` executor and the `sync` command
   deploy2s3:
     executor: aws
     steps:
-      - s3sync:
+      - sync:
           from: .
           to: "s3://mybucket_uri"
           overwrite: true

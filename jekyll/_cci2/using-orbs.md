@@ -7,16 +7,16 @@ categories: [getting-started]
 order: 1
 ---
 
-This document provides a basic example of using an inline orb and elements of orbs followed by a conceptual overview of orbs design.
+This document provides a basic example of importing an [orb]({{ site.baseurl }}/2.0/orb-intro/) and elements of orbs followed by a conceptual overview of orbs design. 
 
 * TOC
 {:toc}
 
 ## Introduction
 
-Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. 
+Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
-To use an existing orb in your 2.1 `config.yml` file, invoke it with the `orbs` key. The following example invokes the `hello-build` orb in the `circleci` namespace.
+To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
 
 ```
 version: 2.1
@@ -36,7 +36,7 @@ Orbs consist of the following elements:
 
 * Commands
 * Jobs
-* Executors
+* Executors 
 
 ### Commands
 {:.no_toc}
@@ -58,9 +58,8 @@ jobs
 
 Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
 
-<aside class="notice">
-You must invoke jobs in the workflow stanza of `config.yml`, making sure to pass any necessary parameters as subkeys to the job.
-</aside>
+You must invoke jobs in the workflow stanza of `config.yml` file, making sure to pass any necessary parameters as subkeys to the job.
+
 
 ### Executors
 {:.no_toc}
