@@ -269,7 +269,7 @@ While not strictly enforced, it is best practice when versioning your production
 * MINOR: when you add functionality in a backwards-compatible manner
 * PATCH: when you make backwards-compatible bug fixes
 
-#### Using Orbs in Orbs and Register-Time Resolution
+#### Using Orbs Within Your Orb and Register-Time Resolution
 
 You may use an ```orbs``` stanza inside an orb. 
 
