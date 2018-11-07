@@ -246,15 +246,20 @@ In development orbs, the string label given by the user has the following restri
 Examples of valid development orb tags:
 
 * Valid:
+```
   "dev:mybranch"
   "dev:2018_09_01"
   "dev:1.2.3-rc1"
   "dev:myinitials/mybranch"
   "dev:myVERYIMPORTANTbranch"
+```
 
 * Invalid
+
+```
   "dev: 1" (No spaces allowed)
   "1.2.3-rc1" (No leading "dev:")
+```
 
 In production orbs you must use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
@@ -303,32 +308,25 @@ For a full list of help commands inside the CLI, visit the [CircleCI CLI help](h
 
 To publish an orb, follow the steps listed below as an org Admin.
 
-1. Claim a namespace (assuming you don't yet have one), e.g.;
-
+1. Claim a namespace (assuming you don't yet have one), for example;
 `circleci namespace create sandbox github CircleCI-Public`
 
-2. Create the orb inside your namespace, e.g.:
-
+2. Create the orb inside your namespace, for example:
 `circleci orb create sandbox/hello-world`
 
 3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in `/tmp/orb.yml` could be made with a simple orb similar to:
-
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
 4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
-
 `circleci orb validate /tmp/orb.yml`
 
-5. Publish a development version of your orb, e.g.:
-
+5. Publish a development version of your orb, for example:
 `circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
 6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. To increment the new dev version to become 0.0.1, use the following command:
-
 `circleci orb publish promote sandbox/hello-world@dev:first patch`
 
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
-
 `circleci orb source sandbox/hello-world@0.0.1`
 
 
