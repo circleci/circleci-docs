@@ -28,21 +28,22 @@ In the above example, two orbs are imported into your config, the [Slack orb](ht
 
 If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
 
-    $ circleci orb help
-    Operate on orbs
-    
-    
-    Usage:
-      circleci orb [command]
-    
-    Available Commands:
-      create      Create an orb in the specified namespace
-      list        List orbs
-      process     Validate an orb and print its form after all pre-registration processing
-      publish     Publish an orb to the registry
-      source      Show the source of an orb
-      validate    Validate an orb.yml
-    
+```nohighlight
+$ circleci orb help
+Operate on orbs
+
+
+Usage:
+  circleci orb [command]
+
+Available Commands:
+  create      Create an orb in the specified namespace
+  list        List orbs
+  process     Validate an orb and print its form after all pre-registration processing
+  publish     Publish an orb to the registry
+  source      Show the source of an orb
+  validate    Validate an orb.yml
+```
 
 ## See Also
 
