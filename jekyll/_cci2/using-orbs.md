@@ -72,7 +72,7 @@ Executors define the environment in which the steps of a job will be run. When y
 
 When you declare an executor in a configuration outside of `jobs`, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
 
-Each executor definition includes the subset of the children keys of a `job` declaration related to setting the environment for a job to execute. This means it does not include `steps`. The subset can be one or more of the following keys:
+An executor definition has the following keys available (some of which are also available when using the `job` declaration):
 
 * `docker`, `machine`, or `macos`
 * `environment`
