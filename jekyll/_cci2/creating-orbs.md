@@ -311,7 +311,7 @@ To publish an orb, follow the steps listed below as an org Admin.
 
 `circleci orb create sandbox/hello-world`
 
-3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in /tmp/orb.yml could be made with a simple orb similar to:
+3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in `/tmp/orb.yml` could be made with a simple orb similar to:
 
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
@@ -348,7 +348,7 @@ Before you begin creating your own orb, there are a few steps you need to take t
 
 ### CircleCI Settings
 
-In the CircleCI app Settings for your project, [Build Processing]{{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The org Admin must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
+In the CircleCI app Settings page for your project, [Build Processing]({{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The org Admin must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
 
 ### Get the new CircleCI CLI
 
@@ -407,7 +407,7 @@ circleci update install
 
 Now that you have installed the CircleCI CLI, you will want to configure the CLI for use. The process for configuring the CLI is simple and straightforward, requiring you only to follow a few steps.
 
-Before you can configure the CLI, you may need to first generate a CircleCI API token from the Personal API Token tab [https://circleci.com/accounts/api]:
+Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/accounts/api):
 
 ```
 $ circleci setup
@@ -440,7 +440,7 @@ After you have installed the CircleCI CLI tool, you will then need to set the ve
 
 ## Import an Existing Orb or Author Your Own Orb
 
-After you have met all of the prerequisites for working with orbs, you may now begin either working with an existing orb (via the import feature) or authoring your own orb. Because CircleCI has provided 20 certified and tested orbs, along with several 3rd party orbs authored by CircleCI partners, it is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow.
+After you have met all of the prerequisites for working with orbs, you may now begin either working with an existing orb (via the import feature) or authoring your own orb. Because CircleCI has provided 20 certified and tested orbs, along with several 3rd-party orbs authored by CircleCI partners, it is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow.
 
 ### Importing an Existing Orb
 
@@ -460,7 +460,7 @@ Because the values of the above keys under `orbs` are all scalar values they are
 
 If you find that there are no existing orbs that meet your needs, you may wish to author your own orb to meet your specific environment or configuration requirements. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create an orb that is specific to your organization.
 
-For more detailed information on how to author your own orb, please refer to the Authoring Orbs page [link needed here], where you will find step-by-step instructions on how to create your own orb.
+For examples of orb source, please refer to the [Public CircleCI Repo](https://github.com/CircleCI-Public/), where you will find source code for several certified orbs.
 
 ## Validate and Publish Your Orb
 
@@ -477,7 +477,7 @@ The `orb-tools orb` provides the following jobs and commands that you may find u
 
 This CLI command enables you to pack the content of an orb for publishing. The following parameters may be passed with this command:
 
-* source-dir: Path to the root of the orb source directory to be packed. (ie: my-orb/src/)
+* source-dir: Path to the root of the orb source directory to be packed. (for example, `my-orb/src/`)
 * destination-orb-path: Path including filename of where the packed orb will be written.
 * validate: Boolean for whether or not to do validation on the orb. Default is false.
 * checkout: Boolean for whether or not to checkout as a first step. Default is true.
@@ -531,5 +531,5 @@ workflows:
           validate: true
 ```
 
-In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When orb-tools/publish succeeds, the job input will contain a success message that the new orb has been published.
+In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published.
 
