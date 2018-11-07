@@ -58,9 +58,8 @@ jobs
 
 Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
 
-<aside class="notice">
-You must invoke jobs in the workflow stanza of `config.yml`, making sure to pass any necessary parameters as subkeys to the job.
-</aside>
+You must invoke jobs in the workflow stanza of `config.yml` file, making sure to pass any necessary parameters as subkeys to the job.
+
 
 ### Executors
 {:.no_toc}
