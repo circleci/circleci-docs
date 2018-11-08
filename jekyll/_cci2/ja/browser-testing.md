@@ -126,7 +126,7 @@ CircleCI 上で HTTP サーバーを実行するテストを行う場合、ロ�
     ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
     
 
-1. 次に、ローカルマシンでブラウザーを開き、`http://localhost:8080` を開いて、CircleCI コンテナのポート `3000` で実行されているサーバーに要求を直接転送します。 または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
+1. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
 
 この方法で、たとえば Selenium テストをセットアップするときのデバッグが非常に簡単になります。
 
