@@ -172,6 +172,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
+{% raw %}
 ```
 version: 2
 jobs:
@@ -263,6 +264,7 @@ jobs:
                 path: ./coverage/lcov.info
                 prefix: tests
 ```
+{% endraw %}
 
 #### <a name="ava"></a>Ava for Node.js
 {:.no_toc}
