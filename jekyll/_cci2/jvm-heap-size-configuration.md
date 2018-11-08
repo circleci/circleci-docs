@@ -4,15 +4,16 @@ title: "Configuring Java Virtual Machine Heap Size"
 description: "How to configure Java virtual Machine Heap Size in CircleCI Server."
 ---
 
-JVM_HEAP_SIZE is configurable for frontend, test-result and picard-output-processor containers
+JVM_HEAP_SIZE is configurable for frontend, test-result, picard-output-processor containers, and for v2.15 and later contexts-service is configurable.
 
 ## Setting up
 To customize JVM_HEAP_SIZE value, you will need to create customizations file in your services box
-1. Create customizations files for frontend or test-result
+1. Create customizations files:
 ```sh
 /etc/circleconfig/frontend/customizations
 /etc/circleconfig/test-results/customizations
 /etc/circleconfig/output-processor/customizations
+/etc/circleconfig/contexts-service/customizations
 ```
 
 2. In the file, add the line below to export desire JVM_HEAP_SIZE in the file
