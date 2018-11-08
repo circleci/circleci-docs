@@ -7,42 +7,49 @@ categories: [getting-started]
 order: 1
 ---
 
-Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects. 
+Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/). 
 
 [Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
-This document describes how you can:
+## Getting Started
 
-* Use an existing orb in your configuration
-* Import an orb
-* Create an inline orb in your `config.yml` file
-* Create, validate, and publish an orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/)
+The following animation shows the basics of creating and publishing an orb using an example:
+
+![Orb creating animation](  {{ site.baseurl }}/assets/img/docs/GIFMaker.org_P4Gg6g.gif)
+
+The animation shows snippets to give you an overview of the following steps for creating an orb:
+
+1. Defining a reusable job named `orb-doc-generation` and checking the 2.1 config is well-formed with `circleci-config-validate .circleci/config.yml`.
+2. Running `circleci config process .circleci/config.yml` to process the config.
+3. Committing the change and checking that the build succeeds in the CircleCI app.
+4. Enabling orbs use under Settings > Security in the CircleCI app.
+5. Running `circleci namespace create ndintenfass` to create a namespace in which to publish to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
+6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
+7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
+8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
+9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
+10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
+11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
+
+**Note:** Running `circleci setup`, providing a personal API token from the CircleCI app project settings page, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
+
+Give it a try! If you have any trouble, check out the additional details and tips below or the [Orbs FAQ]({{ site.baseurl }}/2.0/orbs-faq/).
 
 ## Overview
 
-CircleCI has made available a number of certified and 3rd-Party orbs that you may use in your configuration to reduce the time needed to get up and running using orbs in your configuration. 
+This following sections of this document describe in more detail:
 
-By using CircleCI certified orbs, or 3rd-party orbs developed by CircleCI partners, you can be confident that these orbs have been developed and tested to ensure they work with the CircleCI platform.
-
-### Certified Orbs
+* Versioning and Designing orbs
+* Creating an inline orb in your `config.yml` file with templates
+* Creating, validating, and publishing an orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/)
 
 Certified orbs are those that CircleCI has built or has reviewed and approved as part of the features of the CircleCI platform. Any project may use certified orbs in configuration version 2.1 and higher.
-
-### 3rd-Party Orbs
 
 3rd-party orbs are those published by CircleCI customers and other members of our community. For you to publish orbs or for your projects to use 3rd-party orbs, your organization must opt-in under Security within the Settings tab under the Orb Security Settings where an organization administrator must agree to the terms for using 3rd-party software.
 
 **Note:** The Security setting required for publishing or using 3rd-party orbs may only be toggled by organization administrators.
 
-### Orb Reference Format
-
-Orb references have the following format:
-
-```
-[namespace]/[orb]@[version]
-```
-
-#### Semantic Versioning in Orbs
+## Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
 
@@ -61,7 +68,7 @@ Examples of orb version declarations and their meaning:
 3. ```circleci/python@2.4``` - use the latest version of version 2.4.x of the Python orb.
 4. ```circleci/python@3.1.4``` - use exactly version 3.1.4 of the Python orb.
 
-#### Using Development Versions
+### Using Development Versions
 
 While all production orbs must be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, dev orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
@@ -69,18 +76,7 @@ A development version must be referenced by its complete, fully-qualified name, 
 
 **Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for admin members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 
-
-## Importing an Orb
-
-Importing a set of existing orbs is a simple process that only requires you to provide the following instruction in your configuration. In the example below, you can see how to import a CircleCI Slack and Heroku orb:
-
-```
-orbs:
-  slack: circleci/slack@0.1.0
-  heroku: circleci/heroku@volatile
-```
-
-### Designing Orbs
+## Designing Orbs
 
 When designing your own orbs, make sure your orbs meet the following requirements:
 
@@ -133,7 +129,7 @@ workflows:
 In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
 
 
-### Example Template
+### Example Inline Template
 
 When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
 
@@ -193,23 +189,9 @@ Orbs may be authored inline in your config.yml file or authored separately and t
 
 Before publishing an orb, you will need to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
 
-
 **Note:** Only an organization administrator can opt-in to the Code Sharing Terms of Service. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
 
-
-### Orb Publishing Concepts
-
-The sections below describe important concepts that you should understand before publishing an orb.
-
-#### Orb Registry
-
-CircleCI has a single orb registry. The registry on `circleci.com` serves as the master source for all certified namespaces and orbs. This master source is the only orb registry available to users of `circleci.com`.
-
-<aside class="notice">
-Orbs are not yet supported for CircleCI installed on your private servers or cloud.
-</aside>
-
-#### Namespaces
+### Namespaces
 
 Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called ```hannah/rails``` because they are in separate namespaces.
 
@@ -217,11 +199,11 @@ Namespaces are owned by organizations. Only organization administrators can crea
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace please contact your account team at CircleCI.
 
-#### Development and Production Orbs
+### Development and Production Orbs
 
 Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with `dev:` for example `dev:myfirstorb`.
 
-##### Development and Production Orb Security Profiles
+### Development and Production Orb Security Profiles
 
 * Only organization administrators can publish production orbs.
 
@@ -229,13 +211,13 @@ Orb versions may be added to the registry either as development versions or prod
 
 * Organization administrators can promote any dev orb to be a semantically versioned production orb.
 
-##### Development and Production Orb Retention and Mutability Characteristics
+### Development and Production Orb Retention and Mutability Characteristics
 
 * Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
 
 * Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
 
-##### Development and Production Orbs Versioning Semantics
+### Development and Production Orbs Versioning Semantics
 
 Development orbs are tagged with the format ```dev:<< your-string >>```. Production orbs are always published using the semantic versioning ("semver") scheme.
 
@@ -246,15 +228,20 @@ In development orbs, the string label given by the user has the following restri
 Examples of valid development orb tags:
 
 * Valid:
+```
   "dev:mybranch"
   "dev:2018_09_01"
   "dev:1.2.3-rc1"
   "dev:myinitials/mybranch"
   "dev:myVERYIMPORTANTbranch"
+```
 
 * Invalid
+
+```
   "dev: 1" (No spaces allowed)
   "1.2.3-rc1" (No leading "dev:")
+```
 
 In production orbs you must use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
@@ -264,7 +251,8 @@ While not strictly enforced, it is best practice when versioning your production
 * MINOR: when you add functionality in a backwards-compatible manner
 * PATCH: when you make backwards-compatible bug fixes
 
-#### Using Orbs in Orbs and Register-Time Resolution
+
+#### Using Orbs Within Your Orb and Register-Time Resolution
 
 You may use an ```orbs``` stanza inside an orb. 
 
@@ -274,14 +262,13 @@ For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```or
 
 If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
 
-
-#### Deleting Production Orbs
+### Deleting Production Orbs
 
 In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
 
 If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (**Note:** If you are deleting because of a security concern, you must practice responsible disclosure using the [CircleCI Security](https://circleci.com/security/) web page.
 
-#### Using the CLI to Create and Publish Orbs
+## Using the CLI to Create and Publish Orbs
 
 The ```circleci``` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run ```circleci help```. Refer to [Using the CircleCI CLI]( {{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
 
@@ -303,34 +290,26 @@ For a full list of help commands inside the CLI, visit the [CircleCI CLI help](h
 
 To publish an orb, follow the steps listed below as an org Admin.
 
-1. Claim a namespace (assuming you don't yet have one), e.g.;
-
+1. Claim a namespace (assuming you don't yet have one), for example;
 `circleci namespace create sandbox github CircleCI-Public`
 
-2. Create the orb inside your namespace, e.g.:
-
+2. Create the orb inside your namespace, for example:
 `circleci orb create sandbox/hello-world`
 
 3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in `/tmp/orb.yml` could be made with a simple orb similar to:
-
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
 4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
-
 `circleci orb validate /tmp/orb.yml`
 
-5. Publish a development version of your orb, e.g.:
-
+5. Publish a development version of your orb, for example:
 `circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
 6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. To increment the new dev version to become 0.0.1, use the following command:
-
 `circleci orb publish promote sandbox/hello-world@dev:first patch`
 
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
-
 `circleci orb source sandbox/hello-world@0.0.1`
-
 
 ## Creating a CircleCI Orb 
 
@@ -339,7 +318,7 @@ This section describes each step of the orb creation and publishing process so y
 The following sections describe each step in the orb authoring and publishing process:
 
 1. Meet initial CircleCI prerequisites
-2. Import an existing orb or author your own orb
+2. Author your own orb
 3. Validate and publish your orb
 
 ## Meet Initial CircleCI Prerequisites
@@ -438,27 +417,7 @@ Config file at .circleci/config.yml is valid
 
 After you have installed the CircleCI CLI tool, you will then need to set the version property to version 2.1. This is a very simple process, requiring you only to set the value of the top-level 'version' key in your configuration file. This will enable all 2.1 features and allow you to begin working with orbs in your environment.
 
-## Import an Existing Orb or Author Your Own Orb
-
-After you have met all of the prerequisites for working with orbs, you may now begin either working with an existing orb (via the import feature) or authoring your own orb. Because CircleCI has provided 20 certified and tested orbs, along with several 3rd-party orbs authored by CircleCI partners, it is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow.
-
-### Importing an Existing Orb
-
-If you wish to import an existing orb, it would be similar to the example shown below.
-
-```
-orbs:
-  slack: circleci/slack@0.1.0
-  heroku: circleci/heroku@1.0.0
-```
-
-In the above example, two orbs would be made available to you (slack & heroku), one for each key in the map.
-
-Because the values of the above keys under `orbs` are all scalar values they are assumed to be imports based on the orb ref format of `${NAMESPACE}/${ORB_NAME}@${VERSION}`
-
-### Authoring Your Own Orb
-
-If you find that there are no existing orbs that meet your needs, you may wish to author your own orb to meet your specific environment or configuration requirements. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create an orb that is specific to your organization.
+### Authoring Your Orb
 
 For examples of orb source, please refer to the [Public CircleCI Repo](https://github.com/CircleCI-Public/), where you will find source code for several certified orbs.
 
