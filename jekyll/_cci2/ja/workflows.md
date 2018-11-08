@@ -153,7 +153,9 @@ workflows:
 
 ## 承認後に処理を続行する Workflow の例
 
-Workflow では、`type: approval` キーを利用することで、ジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 `approval` は `workflow` キー配下のジョブに挿入できる**唯一**の特殊な type 属性です。 Workflow のなかで承認操作を待ちたい一連のジョブの前に `type: approval` を挿入することで設定が有効になります。 下記の `config.yml` の例にあるように、Workflow が `type: approval` キーを処理するまで、ジョブは順番通りに実行されます。
+Workflow では、`type: approval` キーを利用することで、ジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 Anyone who has push access to the repository can click the Approval button to continue the workflow.
+
+The `approval` job is a special job type that is **only** added to jobs under the `workflow` key. Workflow のなかで承認操作を待ちたい一連のジョブの前に `type: approval` を挿入することで設定が有効になります。 下記の `config.yml` の例にあるように、Workflow が `type: approval` キーを処理するまで、ジョブは順番通りに実行されます。
 
     workflows:
       version: 2
