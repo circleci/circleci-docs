@@ -150,7 +150,9 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. `approval` is a special job type that is **only** added to jobs under the `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. Anyone who has push access to the repository can click the Approval button to continue the workflow. 
+
+The `approval` job is a special job type that is **only** added to jobs under the `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
 
 ```
 workflows:
