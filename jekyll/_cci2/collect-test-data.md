@@ -160,12 +160,108 @@ A working `.circleci/config.yml` section for testing might look like this:
       - run:
           command: mocha test --reporter mocha-junit-reporter
           environment:
-            MOCHA_FILE: junit/test-results.xml
+            MOCHA_FILE: ~/junit/test-results.xml
           when: always
       - store_test_results:
           path: ~/junit
       - store_artifacts:
           path: ~/junit          
+```
+
+#### Mocha with nyc
+
+Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
+
+```
+version: 2
+jobs:
+    build:
+        environment:
+            CC_TEST_REPORTER_ID: code_climate_id_here
+            NODE_ENV: development
+        docker:
+            - image: circleci/node:8
+              environment:
+                MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
+            - image: mongo:4.0
+              environment:
+                MONGO_INITDB_ROOT_USERNAME: admin
+                MONGO_INITDB_ROOT_PASSWORD: password
+        working_directory: ~/repo
+        steps:
+            - checkout
+
+            # Update npm
+            - run:
+                name: update-npm
+                command: 'sudo npm install -g npm@latest'
+
+            # Download and cache dependencies
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    # fallback to using the latest cache if no exact match is found
+                    - v1-dependencies-
+
+            - run: npm install
+
+            - run: npm install mocha-junit-reporter # just for CircleCI
+
+            - save_cache:
+                paths:
+                    - node_modules
+                key: v1-dependencies-{{ checksum "package.json" }}
+
+            - run: mkdir reports
+
+            # Run mocha
+            - run:
+                name: npm test
+                command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+                when: always
+
+            # Run eslint
+            - run:
+                name: eslint
+                command: |
+                    ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
+                when: always
+
+            # Run coverage report for Code Climate
+
+            - run:
+                name: Setup Code Climate test-reporter
+                command: |
+                    # download test reporter as a static binary
+                    curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+                    chmod +x ./cc-test-reporter
+                    ./cc-test-reporter before-build
+                when: always
+
+            - run:
+                name: code-coverage
+                command: |
+                    mkdir coverage
+                    # nyc report requires that nyc has already been run,
+                    # which creates the .nyc_output folder containing necessary data
+                    ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
+                    ./cc-test-reporter after-build -t lcov
+                when: always
+
+            # Upload results
+
+            - store_test_results:
+                path: reports
+
+            - store_artifacts:
+                path: ./reports/mocha/test-results.xml
+
+            - store_artifacts:
+                path: ./reports/eslint/eslint.xml
+
+            - store_artifacts: # upload test coverage as artifact
+                path: ./coverage/lcov.info
+                prefix: tests
 ```
 
 #### <a name="ava"></a>Ava for Node.js
@@ -181,7 +277,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
           command: |
             yarn add ava tap-xunit --dev # or you could use npm
             mkdir -p ~/reports
-            ava --tap | tap-xunit > /reports/ava.xml
+            ava --tap | tap-xunit > ~/reports/ava.xml
           when: always
       - store_test_results:
           path: ~/reports
@@ -320,7 +416,7 @@ A working `.circleci/config.yml` section might look like this:
             JUNIT_REPORT_NAME: test-results.xml
           when: always  
       - store_test_results:
-          path: ~/junit
+          path: ./junit
       - store_artifacts:
           path: ./junit
 ```
