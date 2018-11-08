@@ -150,10 +150,10 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-
 Workflows can be configured to wait for manual approval of a job before
-continuing to the next job. To do this, add a job to the `jobs` list with the
-key `type: approval`. Let's look at a commented config example.
+continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. 
+To do this, add a job to the `jobs` list with the
+key `type: approval`. Let's look at a commented config example. 
 
 ```yaml
 # ...

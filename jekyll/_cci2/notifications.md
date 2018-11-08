@@ -8,8 +8,10 @@ published: true
 ---
 
 CircleCI has integrated chat notifications, automated email notifications, and
-web notifications. Notifications are delivered on the success or failure of a
-[workflow]({{ site.baseurl }}/2.0/workflows/). Consider the minimal CircleCI config below:
+web notifications. For Slack and Email, notifications are delivered on the success or failure of a
+[workflow]({{ site.baseurl }}/2.0/workflows/). Otherwise, notifications are
+delivered for each job for all other notification platforms. Consider the minimal CircleCI config below:
+
 
 ```yaml
 version: 2
@@ -28,9 +30,10 @@ jobs:
       - run: <command>
 workflows:
   version: 2
-  build_and_test: # < A notification will be visible for this workflow
+  build_and_test: # < Slack and Email notifications will be delivered for workflows
     jobs:
-      - build
+    # All other notification integrations (HipChat, IRC, etc) will receive notification for each job.
+      - build 
       - test
 ```
 
