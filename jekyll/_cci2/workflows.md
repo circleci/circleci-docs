@@ -471,19 +471,22 @@ To persist data from a job and make it available to other jobs, configure the jo
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
 
-```
-# The following stanza defines a map named defaults with a variable that may be inserted using the YAML merge (<<: *) key 
-# later in the file to save some typing. See http://yaml.org/type/merge.html for details.
+```yaml
+# Note that thte following stanza uses CircleCI 2.1 to make use of a Reuseable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
-defaults: &defaults
-  working_directory: /tmp
-  docker:
-    - image: buildpack-deps:jessie
+version: 2.1
 
-version: 2
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+    working_directory: /tmp
+
 jobs:
   flow:
-    <<: *defaults
+    executor: my-executor
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
@@ -491,14 +494,14 @@ jobs:
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
-	  # taken to be the root directory of the workspace.
+          # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
           paths:
             - echo-output
 
   downstream:
-    <<: *defaults
+    executor: my-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
@@ -512,7 +515,7 @@ jobs:
           fi
 
 workflows:
-  version: 2
+  version: 2.1
 
   btd:
     jobs:
