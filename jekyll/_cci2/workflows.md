@@ -472,7 +472,7 @@ To persist data from a job and make it available to other jobs, configure the jo
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
 
 ```yaml
-# Note that thte following stanza uses CircleCI 2.1 to make use of a Reuseable Executor
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
 # This allows defining a docker image to reuse across jobs.
 # visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
