@@ -18,7 +18,7 @@ Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/) to trigger [jobs]({
 The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
 ```bash
-curl -u ${CIRCLE_API_USER_TOKEN}: \
+curl -u ${CIRCLE_API_USER_TOKEN} \
      -d build_parameters[CIRCLE_JOB]=deploy_docker \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
@@ -55,7 +55,7 @@ jobs:
           command: |
             # replace this with your build/deploy check (i.e. current branch is "release")
             if [[ true ]]; then
-              curl --user ${CIRCLE_API_PROJECT_TOKEN}: \
+              curl --user ${CIRCLE_API_USER_TOKEN} \
                 --data build_parameters[CIRCLE_JOB]=deploy_docker \
                 --data revision=$CIRCLE_SHA1 \
                 https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH
