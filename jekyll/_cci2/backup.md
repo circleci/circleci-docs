@@ -6,20 +6,20 @@ order: 50
 description: "How to regularly back up a CircleCI installation"
 ---
 
-This document describes how to back up your CircleCI application so that you can recover from accidental or unexpected loss of CircleCI data attached to the Services machine:
+This document describes how to back up your CircleCI application so that you can recover from accidental or unexpected loss of CircleCI data on the Services machine:
 
 * TOC 
 {:toc}
 
-**Note:** If you are running CircleCI in an HA configuration, you must use standard backup mechanisms for the external datastores. See the [High Availability]({{site.baseurl}}/2.0/high-availability/) document for more information.
+**Note:** If you are running CircleCI with external databases configured, you must use separate standard backup mechanisms for those external datastores. 
 
 ## Backing up the Database
 
-If you have **not** configured CircleCI for HA, the best practice for backing up your CircleCI data is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. There is a small risk, that varies by filesystem and distribution, that snapshots taken without a reboot may have some data corruption, but this is rare in practice. If zero downtime backups and robustness in the face of data corruption issues are required, then an [HA configuration]({{site.baseurl}}/2.0/high-availability/) may be the best solution.
+The best practice for backing up your CircleCI Services machine is to use VM snapshots of the virtual disk acting as the root volume for the Services machine. Backups may be performed without downtime as long the underlying virtual disk supports such an operation as is true with AWS EBS. 
 
 ## Backing up Object Storage
 
-Build artifacts, output, and caches are generally stored in object storage services like AWS S3. These services are considered highly redundant and are unlikely to require separate backup. An exception is if your instance is setup to store large objects locally on the Services machine, either directly on-disk or on an NFS volume. In this case, you must separately back these files up and ensure they are mounted back to the same location on restore.
+Build artifacts, output, and caches are generally stored in object storage services like AWS S3. These services are considered highly redundant and are unlikely to require separate backup. An exception is if your instance is set up to store large objects locally on the Services machine, either directly on-disk or on an NFS volume. In this case, you must separately back these files up and ensure they are mounted back to the same location on restore.
 
 ## Snapshotting on AWS EBS
 
@@ -36,12 +36,12 @@ It is also possible to automate this process with the AWS API.  Subsequent AMIs/
 
 When restoring test backups or performing a restore in production, you may need to make a couple of changes on the newly launched instance if its public or private IP addresses have changed:
 
-1. Launch a fresh EC2 instance using the newly generated AMI from the previous steps
-2. Stop the app in the Management Console (at port 8800) if it is already running
+1. Launch a fresh EC2 instance using the newly generated AMI from the previous steps.
+2. Stop the app in the Management Console (at port 8800) if it is already running.
 2. Ensure that the hostname configured in the Management Console at port 8800 reflects the correct address. If this hostname has changed, you will also need to change it in the corresponding GitHub OAuth application settings or create a new OAuth app to test the recovery and log in to the application.
 3. Update any references to the backed-up instance's public and private IP addresses in `/etc/default/replicated` and `/etc/default/replicated-operator` on Debian/Ubuntu or `/etc/sysconfig/*` in RHEL/CentOS to the new IP addresses.
-4. From the root directory of the Services box, run `sudo rm -rf /opt/nomad`
-5. Restart the app in the Management Console at port 8800
+4. From the root directory of the Services box, run `sudo rm -rf /opt/nomad`.
+5. Restart the app in the Management Console at port 8800.
 
 ## Cleaning up Build Records
 
