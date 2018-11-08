@@ -70,7 +70,7 @@ Examples of orb version declarations and their meaning:
 
 ### Using Development Versions
 
-While all production orbs must be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, dev orbs are also mutable, so they are ideal for rapid iteration of an idea.
+While all production orbs must be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
 A development version must be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
