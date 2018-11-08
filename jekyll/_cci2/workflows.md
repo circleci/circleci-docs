@@ -150,30 +150,54 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows may be configured to wait for manual approval of a job before continuing by using the `type: approval` key. `approval` is a special job type that is **only** added to jobs under the `workflow` key. This enables you to configure a job with `type: approval` in the workflow before a set of jobs that must all wait for manual approval. Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends as in the following `config.yml` example:
+Workflows can be configured to wait for manual approval of a job before
+continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. 
+To do this, add a job to the `jobs` list with the
+key `type: approval`. Let's look at a commented config example. 
 
-```
+```yaml
+# ...
+# << Your config for the build, test1, test2, and deploy jobs >>
+# ...
+
 workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build
-      - test1:
-          requires:
+      - build  # your custom job from your config, that builds your code
+      - test1: # your custom job; runs test suite 1
+          requires: # test1 will not run until the `build` job is completed.
             - build
-      - test2:
-          requires:
+      - test2: # another custom job; runs test suite 2,
+          requires: # test2 is dependent on the succes of job `test1`
             - test1
-      - hold:
-          type: approval
-          requires:
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          requires: # We only run the "hold" job when test2 has succeeded
            - test2
+      # On approval of the `hold` job, any successive job that requires the `hold` job will run. 
+      # In this case, a user is manually triggering the deploy job.
       - deploy:
           requires:
             - hold
 ```
 
-In this example, the `deploy:` job will not run until you click the `hold` job in the Workflows page of the CircleCI app and then click Approve. Notice that the `hold` job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the job and Approve. After you approve the job with `type: approval`, the jobs which require the approval job will start.  In the example above, the purpose is to wait for approval to begin deployment. To configure this behavior, the `hold` job must be `type: approval` and the `deploy` job must require `hold`. 
+The outcome of the above example is that the `deploy:` job will not run until
+you click the `hold` job in the Workflows page of the CircleCI app and then
+click Approve. In this example the purpose of the `hold` job is to wait for
+approval to begin deployment.
+
+Some things to keep in mind when using manual approval in a workflow:
+
+- `approval` is a special job type that is **only** available to jobs under the `workflow` key
+- The `hold` job must be a unique name not used by any other job.
+  - that is, your custom configured jobs, such as `build` or `test1` in the
+    example above wouldn't be given a `type: approval` key.
+- The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example,
+  as long as the job has a `type: approval` key in it.
+- All jobs that are to run after a manually approved job _must_ `require:` the
+  name of that job. Refer to the `deploy:` job in the above example.
+- Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
 The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
 
@@ -447,19 +471,22 @@ To persist data from a job and make it available to other jobs, configure the jo
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
 
-```
-# The following stanza defines a map named defaults with a variable that may be inserted using the YAML merge (<<: *) key 
-# later in the file to save some typing. See http://yaml.org/type/merge.html for details.
+```yaml
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
-defaults: &defaults
-  working_directory: /tmp
-  docker:
-    - image: buildpack-deps:jessie
+version: 2.1
 
-version: 2
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+    working_directory: /tmp
+
 jobs:
   flow:
-    <<: *defaults
+    executor: my-executor
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
@@ -467,14 +494,14 @@ jobs:
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
-	  # taken to be the root directory of the workspace.
+          # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
           paths:
             - echo-output
 
   downstream:
-    <<: *defaults
+    executor: my-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
@@ -488,7 +515,7 @@ jobs:
           fi
 
 workflows:
-  version: 2
+  version: 2.1
 
   btd:
     jobs:
