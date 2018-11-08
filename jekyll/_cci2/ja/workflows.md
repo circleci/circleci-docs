@@ -153,31 +153,45 @@ workflows:
 
 ## 承認後に処理を続行する Workflow の例
 
-Workflow では、`type: approval` キーを利用することで、ジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 Anyone who has push access to the repository can click the Approval button to continue the workflow.
+Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. To do this, add a job to the `jobs` list with the key `type: approval`. Let's look at a commented config example.
 
-The `approval` job is a special job type that is **only** added to jobs under the `workflow` key. Workflow のなかで承認操作を待ちたい一連のジョブの前に `type: approval` を挿入することで設定が有効になります。 下記の `config.yml` の例にあるように、Workflow が `type: approval` キーを処理するまで、ジョブは順番通りに実行されます。
+```yaml
+# ...
+# << Your config for the build, test1, test2, and deploy jobs >>
+# ...
 
-    workflows:
-      version: 2
-      build-test-and-approval-deploy:
-        jobs:
-          - build
-          - test1:
-              requires:
-                - build
-          - test2:
-              requires:
-                - test1
-          - hold:
-              type: approval
-              requires:
-               - test2
-          - deploy:
-              requires:
-                - hold
-    
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - build  # your custom job from your config, that builds your code
+      - test1: # your custom job; runs test suite 1
+          requires: # test1 will not run until the `build` job is completed.
+            - build
+      - test2: # another custom job; runs test suite 2,
+          requires: # test2 is dependent on the succes of job `test1`
+            - test1
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          requires: # We only run the "hold" job when test2 has succeeded
+           - test2
+      # On approval of the `hold` job, any successive job that requires the `hold` job will run. 
+      # In this case, a user is manually triggering the deploy job.
+      - deploy:
+          requires:
+            - hold
+```
 
-この例では、CircleCI の Workflows ページで `hold` ジョブをクリックし、Approve をクリックしない限り `deploy:` ジョブは実行されません。 `hold` ジョブは、他のジョブで使われていない一意の名前を指定する必要があります。 ジョブと Approve をクリックするまで、Workflow は「ON HOLD」の状態で待機し、 `type: approval` が指定されたジョブを承認すれば、そのジョブがスタートします。 上の例はデプロイ開始の承認を待つことを目的としています。 この動作実現には、`hold` ジョブを `type: approval` とし、`deploy` ジョブが `hold` ジョブ を `require` するようにします。
+The outcome of the above example is that the `deploy:` job will not run until you click the `hold` job in the Workflows page of the CircleCI app and then click Approve. In this example the purpose of the `hold` job is to wait for approval to begin deployment.
+
+Some things to keep in mind when using manual approval in a workflow:
+
+- `approval` is a special job type that is **only** available to jobs under the `workflow` key
+- The `hold` job must be a unique name not used by any other job. 
+  - that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
+- The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key in it.
+- All jobs that are to run after a manually approved job *must* `require:` the name of that job. Refer to the `deploy:` job in the above example.
+- Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
 スクリーンショット： `request-testing` ジョブの承認を待つ Workflow 。
 
@@ -412,56 +426,59 @@ For full details on pattern-matching rules, see the [java.util.regex documentati
 
 `attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
-     # 以降の一連のコードでは、YAML のマージ記号（<<: *）を使って、
-     # 後でタイプした文字列を保存するために defaults という名前で値をマッピングします。
-     # マージについての詳細は http://yaml.org/type/merge.html を参照してください。
-    
-    defaults: &defaults
-      working_directory: /tmp
-      docker:
-        - image: buildpack-deps:jessie
-    
-    version: 2
+```yaml
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: buildpack-deps:jessie
+    working_directory: /tmp
+
+jobs:
+  flow:
+    executor: my-executor
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "Hello, world!" > workspace/echo-output
+
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # working_directory からの相対パスか絶対パスを指定します This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+
+  downstream:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      - run: |
+          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
+workflows:
+  version: 2.1
+
+  btd:
     jobs:
-      flow:
-        <<: *defaults
-        steps:
-          - run: mkdir -p workspace
-          - run: echo "Hello, world!" > workspace/echo-output
-    
-          # 以降のジョブで使えるよう、指定のパス (workspace/echo-output) をWorkspace に保存します 
-          - persist_to_workspace:
-              # working_directory からの相対パスか絶対パスを指定します 
-              # これは Workspace のルートディレクトリとなるコンテナ内のディレクトリです
-              root: workspace
-              # ルートからの相対パスを指定します
-              paths:
-                - echo-output
-    
-      downstream:
-        <<: *defaults
-        steps:
-          - attach_workspace:
-              # working_directory からの相対パスか絶対パスを指定します
-              at: /tmp/workspace
-    
-          - run: |
-              if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-                echo "It worked!";
-              else
-                echo "Nope!"; exit 1
-              fi
-    
-    workflows:
-      version: 2
-    
-      btd:
-        jobs:
-          - flow
-          - downstream:
-              requires:
-                - flow
-    
+      - flow
+      - downstream:
+          requires:
+            - flow
+```
 
 **注**：1 行目の`defaults:` キーの部分は任意で名前をつけられます。 新しい名前でキーを作るのはもちろん、再利用しやすい設定キーにするために、`&name` のような参照名で定義することも可能です。
 
