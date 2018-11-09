@@ -8,7 +8,7 @@ description: "Amazon Webサービス(AWS)にCircleCIをインストールする�
 ---
 このドキュメントでは、Terraformを使用してAmazon Webサービス(AWS)にCircleCI 2.0をインストールする詳細手順について説明します。このドキュメントには以下のセクションがあります。
 
-* TOC {:toc}
+- TOC {:toc}
 
 CircleCI Enterpriseがインストールされていれば、現在のインストールでCircleCI 2.0の機能にアクセスでき、現在の契約およびサポートレベル内での制限はありません。 アップグレードの方法については、[CircleCIアカウント担当者](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
 
@@ -18,26 +18,26 @@ CircleCI Enterpriseがインストールされていれば、現在のインス�
 
 次の自動インフラストラクチャ・プロビジョニング・ソフトウェアをインストールします。
 
-* Terraform。 [Terraformのダウンロード](https://www.terraform.io/downloads.html)で、お使いのアーキテクチャ用のパッケージを探してください。
+- Terraform。 [Terraformのダウンロード](https://www.terraform.io/downloads.html)で、お使いのアーキテクチャ用のパッケージを探してください。
 
 インストール手順の開始前に、次の情報が利用可能なことを確認します。
 
-* CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
-* AWSアクセスキーとAWS秘密キー。
-* Name of [AWS EC2 SSHキー](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)の名前。
-* AWSリージョン、たとえば`us-west-2`。
-* AWS仮想プライベートクラウド(VPC)のIDと、AWSサブネットID。自分のアカウントがデフォルトVPCを使用するよう構成されていれば、デフォルトVPC IDは、Amazonの [アカウントの属性] に記載されています。
-* VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
+- CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
+- AWSアクセスキーとAWS秘密キー。
+- Name of [AWS EC2 SSHキー](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)の名前。
+- AWSリージョン、たとえば`us-west-2`。
+- AWS仮想プライベートクラウド(VPC)のIDと、AWSサブネットID。自分のアカウントがデフォルトVPCを使用するよう構成されていれば、デフォルトVPC IDは、Amazonの [アカウントの属性] に記載されています。
+- VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
 
 ## 非公開サブネットの要件
 
 AWS上の非公開サブネットをCircleCIで使用するには、次の追加設定が必要です。
 
-* ビルダボックス用の非公開サブネットは、[NATゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)または[インターネットゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)で、添付のルートテーブルにより、インターネットへの外向けトラフィック用に構成する必要があります。
-* [S3用のVPCエンドポイント](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にします。 S3用のVPCエンドポイントを有効にすると、CircleCIや、サブネット内の他のノードについて、S3動作が大幅に改良されます。
-* NATインスタンスに、多くのネットワーク動作に耐えられるよう、十分な性能があることを確認します。 展開の仕様によっては、Dockerや外部のネットワークリソースを使用して、NATインスタンスを並列性の高いビルドにすることもできます。 NATの性能が不十分な場合、ネットワークやキャッシュの動作速度が低下する可能性があります。
-* [github.com](https://github.com)と統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにGitHub webhooksのポート80および443が含まれていることを確認します。 GitHubと統合するときは、CircleCIを公開サブネットにセットアップするか、github.comのトラフィックを転送するための公開ロードバランサーをセットアップします。
-* CircleCIインストールのインスタンスにアクセス可能な必要のあるポートの詳細については、「[管理者向け概要]({{site.baseurl}}/2.0/overview#services)」の「サービス」セクションを参照してください。
+- ビルダボックス用の非公開サブネットは、[NATゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)または[インターネットゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)で、添付のルートテーブルにより、インターネットへの外向けトラフィック用に構成する必要があります。
+- [S3用のVPCエンドポイント](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にします。 S3用のVPCエンドポイントを有効にすると、CircleCIや、サブネット内の他のノードについて、S3動作が大幅に改良されます。
+- NATインスタンスに、多くのネットワーク動作に耐えられるよう、十分な性能があることを確認します。 展開の仕様によっては、Dockerや外部のネットワークリソースを使用して、NATインスタンスを並列性の高いビルドにすることもできます。 NATの性能が不十分な場合、ネットワークやキャッシュの動作速度が低下する可能性があります。
+- [github.com](https://github.com)と統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにGitHub webhooksのポート80および443が含まれていることを確認します。 GitHubと統合するときは、CircleCIを公開サブネットにセットアップするか、github.comのトラフィックを転送するための公開ロードバランサーをセットアップします。
+- CircleCIインストールのインスタンスにアクセス可能な必要のあるポートの詳細については、「[管理者向け概要]({{site.baseurl}}/2.0/overview#services)」の「サービス」セクションを参照してください。
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
@@ -45,10 +45,10 @@ AWS上の非公開サブネットをCircleCIで使用するには、次の追加
 
 プレビューリリースのインストールを開始する前に、次の情報とポリシーが利用可能なことを確認します。
 
-* ネットワークプロキシを使用する場合、CircleCI 2.0のインストールを試みる前に、自社のアカウントチームに問い合わせます。
-* サービス用に1つ、Nomad Clientsの最初のセット用に1つ、最低2つのAWSインスタンスのプロビジョニングを計画します。 ベストプラクティスとして、サービスとNomad Clientsインスタンスの両方に、8つのvCPUと32GBのRAMを持つ`m4.2xlarge`インスタンスを使用することをお勧めします。
-* AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。
-* 必要なAWSエンティティをTerraformでプロビジョニングするには、次のアクセス許可を持つIAMユーザーが必要です。
+- ネットワークプロキシを使用する場合、CircleCI 2.0のインストールを試みる前に、自社のアカウントチームに問い合わせます。
+- サービス用に1つ、Nomad Clientsの最初のセット用に1つ、最低2つのAWSインスタンスのプロビジョニングを計画します。 ベストプラクティスとして、サービスとNomad Clientsインスタンスの両方に、8つのvCPUと32GBのRAMを持つ`m4.2xlarge`インスタンスを使用することをお勧めします。
+- AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。
+- 必要なAWSエンティティをTerraformでプロビジョニングするには、次のアクセス許可を持つIAMユーザーが必要です。
 
     {
         "Version": "2012-10-17",
@@ -110,11 +110,9 @@ AWS上の非公開サブネットをCircleCIで使用するには、次の追加
 6. `terraform apply`を実行してプロビジョニングを行います。
 7. Terraform出力の末尾にあるURLに移動し、指示に従います。
 8. ライセンスを入力します。
-9. `Storage`セクションを入力します。ベストプラクティスとして、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。
-10. [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/)または`machine` executor機能の使用を計画している場合、vm-serviceを構成します(後からでも構成できます)。 ここでも、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。
-11. 設定の適用後、管理コンソール・ダッシュボードに転送されます。 必要なDockerコンテナすべてをダウンロードするため、数分間が必要です。 管理コンソールで、`Failure reported from operator: no such image`が報告された場合、[スタート] を再クリックすると動作が続行します。
-12. アプリケーションの開始後、CircleCIにログインし、2.0ビルドの実行を開始します。
-13. You can use [our realitycheck repo](https://github.com/circleci/realitycheck) to check basic CircleCI functionality.
+9. Register CircleCI as a new OAuth application in GitHub.com at <https://github.com/settings/applications/new/> or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+
+- **Note:** If you get an "Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL. 8. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID. 9. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication. 10. Complete the `Storage` section. It is best practice to use an instance profile for authentication (no additional configuration required). 11. [Remote Docker]({{site.baseurl}}/2.0/building-docker-images/)または`machine` executor機能の使用を計画している場合、vm-serviceを構成します(後からでも構成できます)。 ここでも、認証用のインスタンスプロファイルの使用をお勧めします(追加構成は必要ありません)。 12. 設定の適用後、管理コンソール・ダッシュボードに転送されます。 必要なDockerコンテナすべてをダウンロードするため、数分間が必要です。 管理コンソールで、`Failure reported from operator: no such image`が報告された場合、[スタート] を再クリックすると動作が続行します。 13. アプリケーションの開始後、CircleCIにログインし、2.0ビルドの実行を開始します。 14. You can use [our realitycheck repo](https://github.com/circleci/realitycheck) to check basic CircleCI functionality.
 
 ## インストールの検証
 
