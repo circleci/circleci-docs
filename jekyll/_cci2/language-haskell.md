@@ -83,15 +83,15 @@ jobs:
       - image: fpco/stack-build:lts
 ```
 
-We are now set to run `stack` commands in our environment. The remainder of our
+We are now set to run the Haskell buidl tool `stack` in our environment. The remainder of our
 `config.yaml` file all falls under the `steps` key. 
 
 Our first step is to run `checkout` to pull our repository's code down and set
 it up in our environment. 
 
 Next we check if there are any dependencies that can be restored, enabling our
-build to speed up. Following that, we run `stack setup` to enable all the build
-tools as per your `stack.yaml` and `package.yaml` config.
+build to speed up. Following that, we run `stack setup` to pull in the Haskell
+compiler as specified in your `stack.yaml` config.
 
 
 {% raw %}
