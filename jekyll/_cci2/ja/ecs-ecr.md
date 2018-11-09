@@ -285,7 +285,7 @@ jobs:
 
 #### Push Image to ECR, Deploy, and Test Deployment
 
-[Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR, then deploy the image and validate that the deployment succeeded.
+[Push the image](https://docs.docker.com/engine/reference/commandline/push/) to ECR, then deploy the image and validate that the deployment succeeded. Refer to the complete [./deploy.sh](https://github.com/circleci/go-ecs-ecr/blob/master/deploy.sh) script for details.
 
 ```yaml
 version: 2
