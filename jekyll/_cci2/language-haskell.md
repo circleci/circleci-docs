@@ -84,7 +84,7 @@ jobs:
 ```
 
 We are now set to run the Haskell buidl tool `stack` in our environment. The remainder of our
-`config.yaml` file all falls under the `steps` key. 
+`config.yml` file all falls under the `steps` key.
 
 Our first step is to run `checkout` to pull our repository's code down and set
 it up in our environment. 
