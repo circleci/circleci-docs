@@ -30,7 +30,7 @@ href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circ
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -55,7 +55,7 @@ jobs:
           key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
           paths:
             - ".stack-work"
-      - store_artifacts: # upload build artifact for display in CircleCi
+      - store_artifacts: # upload build artifact for display in CircleCI
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -69,7 +69,7 @@ Let's start our walkthrough and build a Haskell `config.yml` from scratch. First
 up, we need to specify the version of CircleCI we will use.
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
 Next, we have a `jobs` key. Each job represents a phase in your workflow. Our
@@ -118,7 +118,7 @@ Note: It's also possible to use a `cabal` build file for caching dependencies.
 `stack`, however, is commonly recommended especially for those new to the Haskell ecosystem. Because this
 demo app leverages `stack.yaml` and `package.yaml`, we use the latter as the
 cache key for our dependencies. You can read more about the differences between
-`stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/#why-specify-deps-twice)
+`stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/#why-specify-deps-twice).
 
 Finally, we can run our application build commands. We'll run our tests first
 and then move on to install our executable. Running `stack install` will create
@@ -136,7 +136,7 @@ a binary and move it to `~/.local/bin`.
 Finally, we can take the built executable and store it as an artifact.
 
 ```yaml
-      - store_artifacts: # upload build results for display in CircleCi
+      - store_artifacts: # upload build results for display in CircleCI
           path: ~/.local/bin/circleci-demo-haskell-exe 
           destination: circleci-demo-haskell-exe
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
