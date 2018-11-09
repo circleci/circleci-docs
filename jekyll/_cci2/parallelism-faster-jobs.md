@@ -203,6 +203,8 @@ TESTFILES=$(circleci tests glob "spec/**/*.rb" | circleci tests split --split-by
 bundle exec rspec -- ${TESTFILES}
 ```
 
+The TESTFILES var will have a different value in each container, based on $CIRCLE_NODE_INDEX and $CIRCLE_NODE_TOTAL.
+
 ### Video: Troubleshooting Globbing
 {:.no_toc}
 

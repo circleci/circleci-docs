@@ -27,12 +27,33 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the Reusing Config doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
-## **`commands`** (requires version:2.1)
+## **`orbs`** (requires version: 2.1)
+
+Key | Required | Type | Description
+----|-----------|------|------------
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
+executors | N | Map | A map of strings to executor definitions. See the Executors Syntax section below.
+commands | N | Map | A map of command names to command definitions. See the Commands Syntax section below.
+{: class="table table-striped"}
+
+The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+
+```
+version: 2.1
+orbs:
+    hello: circleci/hello-build@0.0.5
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+
+## **`commands`** (requires version: 2.1)
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
 
@@ -57,7 +78,7 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`executors`** (requires version 2.1)
+## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -656,6 +677,12 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule sync
 - run: git submodule update --init
 ```
+
+**Note:** The `checkout` step will configure Git to skip automatic garbage
+collection. If you are caching your `.git` directory with
+[restore_cache](#restore_cache) and would like to use garbage collection to
+reduce its size, you may wish to use a [run](#run) step with command `git gc`
+before doing so.
 
 ##### **`setup_remote_docker`**
 

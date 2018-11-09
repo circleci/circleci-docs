@@ -97,6 +97,10 @@ Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }
 
 That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
 
+**NOTE**: The built-in `checkout` command disables git's automatic garbage 
+collection. You might choose to manually run `git gc` in a `run` step prior to
+running `save_cache` to reduce the size of the saved cache.
+
 ## Writing to the Cache in Workflows
 
 Jobs in one workflow can share caches.  Note that this makes it possibile to create race conditions in caching across different jobs in workflows.
