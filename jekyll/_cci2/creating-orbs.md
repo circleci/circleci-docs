@@ -11,25 +11,30 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 [Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
-## Getting Started
+## Orb Publishing Process
 
-The following animation shows the basics of creating and publishing an orb using an example:
+To publish an orb, follow the steps listed below as an org Admin.
 
-![Orb creating animation](  {{ site.baseurl }}/assets/img/docs/GIFMaker.org_P4Gg6g.gif)
+1. Claim a namespace (assuming you don't yet have one), for example;
+`circleci namespace create sandbox github CircleCI-Public`
 
-The animation shows snippets to give you an overview of the following steps for creating an orb:
+2. Create the orb inside your namespace, for example:
+`circleci orb create sandbox/hello-world`
 
-1. Defining a reusable job named `orb-doc-generation` and checking the 2.1 config is well-formed with `circleci-config-validate .circleci/config.yml`.
-2. Running `circleci config process .circleci/config.yml` to process the config.
-3. Committing the change and checking that the build succeeds in the CircleCI app.
-4. Enabling orbs use under Settings > Security in the CircleCI app.
-5. Running `circleci namespace create ndintenfass` to create a namespace in which to publish to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
-6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
-7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
-8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
-9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
-10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
-11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
+3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in `/tmp/orb.yml` could be made with a simple orb similar to:
+`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+
+4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
+`circleci orb validate /tmp/orb.yml`
+
+5. Publish a development version of your orb, for example:
+`circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
+
+6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. To increment the new dev version to become 0.0.1, use the following command:
+`circleci orb publish promote sandbox/hello-world@dev:first patch`
+
+7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
+`circleci orb source sandbox/hello-world@0.0.1`
 
 **Note:** Running `circleci setup`, providing a personal API token from the CircleCI app project settings page, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
 
@@ -491,4 +496,24 @@ workflows:
 ```
 
 In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published.
+
+#### Tutorial
+
+The following animation shows the basics of creating and publishing an orb using an example:
+
+![Orb creating animation](  {{ site.baseurl }}/assets/img/docs/GIFMaker.org_P4Gg6g.gif)
+
+The animation shows snippets to give you an overview of the following steps for creating an orb:
+
+1. Defining a reusable job named `orb-doc-generation` and checking the 2.1 config is well-formed with `circleci-config-validate .circleci/config.yml`.
+2. Running `circleci config process .circleci/config.yml` to process the config.
+3. Committing the change and checking that the build succeeds in the CircleCI app.
+4. Enabling orbs use under Settings > Security in the CircleCI app.
+5. Running `circleci namespace create ndintenfass` to create a namespace in which to publish to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
+6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
+7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
+8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
+9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
+10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
+11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
 
