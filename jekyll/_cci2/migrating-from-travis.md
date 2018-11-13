@@ -68,6 +68,7 @@ root of their repository.
 
 A CircleCI configuration looks like so:
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -94,6 +95,7 @@ jobs:
           name: test
           command: npm test
 ```
+{% endraw %}
 
 In the config above, no _language_ is specifically required, and the
 user is able to specify any number of `steps` that can be run, with no
