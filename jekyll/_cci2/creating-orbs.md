@@ -36,7 +36,7 @@ To publish an orb, follow the steps listed below as an org Admin.
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
 `circleci orb source sandbox/hello-world@0.0.1`
 
-**Note:** Running `circleci setup`, providing a personal API token from the CircleCI app project settings page, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
+**Note:** Running `circleci setup`, providing a personal API token, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
 
 Give it a try! If you have any trouble, check out the additional details and tips below or the [Orbs FAQ]({{ site.baseurl }}/2.0/orbs-faq/).
 
