@@ -480,8 +480,6 @@ workflows:
             - flow
 ```
 
-**注**：1 行目の`defaults:` キーの部分は任意で名前をつけられます。 新しい名前でキーを作るのはもちろん、再利用しやすい設定キーにするために、`&name` のような参照名で定義することも可能です。
-
 ビルドジョブとデプロイジョブの間でデータをやりとりする Workspace を活用する生きたサンプルとして、CircleCI マニュアルのビルドを構成している [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。 Workspace、キャッシュ、アーティファクトの使用における概念がわかる情報として、ブログページ [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) もチェックしてみてください。
 
 ## Workflow で失敗したジョブの再実行の仕方
