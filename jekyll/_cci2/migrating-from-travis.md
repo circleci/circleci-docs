@@ -10,8 +10,7 @@ We'll step through setting up different features of CI ranging in complexity and
 features for each system.
 
 The examples that follow will be applied to an [example JavaScript
-repository](). For context (and limiting the scope of this article), we will consider the example repository's owner to
-want to achieve the following things:
+repository](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml). For context (and limiting the scope of this article), we will consider the example repository's owner to want to achieve the following things:
 
 - On pushing code: run a build and run all tests.
 - Expect that build time will be reduced by caching any dependencies after the
@@ -148,6 +147,31 @@ _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 
 **Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
 
-## Test Results / Artifacts
+## Artifacts Uploading
+
+With TravisCI you can upload build artifacts either a) manually via AWS S3 or b)
+as an attachment to a Github Release.
+
+On CircleCI, uploading artifacts just requires a step in your config. Below,
+we'll modify the previous example configuration:
+
+```yaml
+  # same command as before
+  - run:
+      name: test 
+      command: npm test 
+  # A new command that generates a code coverage report.
+  - run:
+      name: code-coverage
+      command: './node_modules/.bin/nyc report --reporter=text-lcov'
+  # Specify storing an artifact: a JUnit  test-results xml file.
+  - store_artifacts:
+      path: test-results.xml
+      prefix: tests
+```
+
+After the artifacts successfully upload, you can view them in the Artifacts tab
+of the Job page in your browser, or access them via the CircleCI API. Read the
+documentation on [artifact uploading](https://circleci.com/docs/2.0/artifacts/) to learn more.
 
 ## Build Rules based on Git Tags
