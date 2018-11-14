@@ -144,7 +144,7 @@ settings page. Read the docs for setting environment variable in a [single
 project]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
 With CircleCI, it is also possible to securely set environment variables across
-_all_ projects using [contexts]({{ site.baseurl }}/docs/2.0/contexts/).
+_all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 
 **Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
 
