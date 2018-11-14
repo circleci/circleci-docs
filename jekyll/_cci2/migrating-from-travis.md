@@ -20,14 +20,10 @@ want to achieve the following things:
 - On each build, upload a `test-results.xml` file to be made accessible online.
 - On pushing a git tag: create a Github Release, and also deploy.
 
-* TOC
-{:toc}
-
 ## Pre-requisites
 
 This document assumes that you have an account with CircleCI that is linked
 to a repository. If you don't, consider going over our [getting started guide]({{ site.baseurl }}/2.0/getting-started/).
-
 
 ## Configuration Files
 
@@ -55,9 +51,10 @@ cache: npm
 ```
 
 For basic builds, a TravisCI configuration will leverage a language's best known
-dependency and build tools and will abstract them away from the user. In this
-case, when the build runs, TravisCI will automatically run `npm install` behind
-the scenes and cache dependencies via `node_modules`. 
+dependency and build tools and will abstract them away as default commands
+(which can be overridden) in the [the job lifecycle](https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle). In this
+case, when the build runs, TravisCI will automatically run `npm install` for the
+`install` step, and run `npm start` for the `script` step.
 
 If a user needs more control with their CI environment, TravisCI uses _hooks_
 to run commands before/after the `install` and `script` steps. In our case, we
@@ -102,15 +99,54 @@ user is able to specify any number of `steps` that can be run, with no
 restrictions on order or step. By leveraging Docker, specific Node.js and
 MongoDB versions are made available in each `command` that gets run.
 
-Further, as a user you have control over when and where in your config you want
-to cache and restore dependencies. In the above example, the CircleCI `.config`
-checks for a dependency cache based specifically on a package.json. Refer to the
-[caching dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build
+**On Caching Dependencies**
+
+With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.config`
+checks for a dependency cache based specifically on a checksum of the
+`package.json` file. You can set your cache based on any key as well as set a
+group of cache paths to defer to in a specific order. Refer to the [caching
+dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build
 creates and restores caches for more fine-grained control.
 
-### On Using Containers
+In a Travis Configuration, the [dependency caching](https://docs.travis-ci.com/user/caching/) as a step in your build happens after the
+`script` phase of a build, and is tied to the language you are using. In our
+case, by using the `cache: npm` key in `.travis.yml`, dependencies will be
+cached via `node_modules`.
+
+**On Using Containers**
+
+With CircleCI, the context in which your checked out code executes (builds,
+tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
+
+If you're coming from TravisCI, using Docker will be the closest means to running
+a build based on a language. While you can use any docker image in your
+`.config`, CircleCI maintains several [Docker Images]({{ site.baseurl
+}}/2.0/circleci-images/) tailored for your `.config`.
 
 ## Environment Variables
+
+Both Travis and CircleCI enable the use of environment variables in you builds.
+
+In your CircleCI `.config` you can put environment variables directly in your
+build config in a step, a job, or a container. Remember,
+these variables are public and unencrypted. With TravisCI, it is 
+[possible](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml)
+to include encrypted environment variables directly in your config if you
+install the `travis` gem). If you have private information in your environment
+variables, consider securely setting environment variables in the CircleCI web application.
+
+**Setting Environment Variables in the Web Application**
+
+If you've used TravisCI's [repository
+settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
+you'll be comfortable setting your environment variables in CircleCI's project
+settings page. Read the docs for setting environment variable in a [single
+project]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+
+With CircleCI, it is also possible to securely set environment variables across
+_all_ projects using [contexts]({{ site.baseurl }}/docs/2.0/contexts/).
+
+**Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
 
 ## Test Results / Artifacts
 
