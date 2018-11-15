@@ -40,7 +40,6 @@ Here's an example:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-            - node_modules
 #...
 ```
 {% endraw %}
