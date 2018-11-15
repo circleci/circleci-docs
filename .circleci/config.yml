@@ -149,6 +149,9 @@ workflows:
       - reindex-search:
           requires:
             - build
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - build
