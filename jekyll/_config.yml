@@ -15,7 +15,7 @@ plugins:
 
 algolia:
   application_id: U0RXNGRK45
-  index_name: documentation
+  index_name: documentation-dev
   settings:
     highlightPreTag: '<strong>'
     highlightPostTag: '</strong>'
