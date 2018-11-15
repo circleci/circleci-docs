@@ -6,18 +6,19 @@ description: Migrating from Travi CI
 ---
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.
-We'll step through setting up different features of CI ranging in complexity and use of
-features for each system.
 
-The examples that follow will be applied to an [example JavaScript
-repository](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml). For context (and limiting the scope of this article), we will consider the example repository's owner to want to achieve the following things:
+The example build configurations referenced throughout this article are based
+off this [example JavaScript
+repository](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml).
+For context (and limiting the scope of this article), we will consider the
+example repository's owner to want to achieve the following with their
+Continuous Integration tooling:
 
 - On pushing code: run a build and run all tests.
 - Expect that build time will be reduced by caching any dependencies after the
   initial build.
 - Enable the safe use of environment variables.
 - On each build, upload a `test-results.xml` file to be made accessible online.
-- On pushing a git tag: create a Github Release, and also deploy.
 
 ## Pre-requisites
 
@@ -37,7 +38,12 @@ root of your repository.
 Let's look at the minimum viable config we can use to get our build running
 before we explore more complex configuration choices.
 
-For the example repository, the beginnings of a simple Travis Configuration might look like so:
+Let's consider the example repository linked above. It provides an example
+application for creating, reading, updating, and deleting articles. The
+app is built with the `MERN` stack, so there are tests present on the client as
+well as the REST API.
+
+To get tests running for this example repository, the beginnings of a simple Travis Configuration might look like so:
 
 ```yaml
 language: node_js
@@ -62,7 +68,7 @@ installation of npm@5 in the `before_install` hook. Hooks can execute shell
 scripts as well, which users will sometimes store in a `.travis` folder at the
 root of their repository.
 
-A CircleCI configuration looks like so:
+The following CircleCI configuration is excerpted from the example repository:
 
 {% raw %}
 ```yaml
@@ -102,15 +108,15 @@ MongoDB versions are made available in each `command` that gets run.
 
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.config`
 checks for a dependency cache based specifically on a checksum of the
-`package.json` file. You can set your cache based on any key as well as set a
-group of cache paths to defer to in a specific order. Refer to the [caching
+`package.json` file. You can set your cache based on any key (not just `package.json`) as well as set a
+group of cache paths to defer to in the declared order. Refer to the [caching
 dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build
-creates and restores caches for more fine-grained control.
+creates and restores caches.
 
 In a Travis Configuration, the [dependency caching](https://docs.travis-ci.com/user/caching/) as a step in your build happens after the
 `script` phase of a build, and is tied to the language you are using. In our
-case, by using the `cache: npm` key in `.travis.yml`, dependencies will be
-cached via `node_modules`.
+case, by using the `cache: npm` key in `.travis.yml`, dependencies will defualt
+to caching `node_modules`.
 
 **On Using Containers**
 
@@ -149,14 +155,14 @@ _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 
 ## Artifacts Uploading
 
-With TravisCI you can upload build artifacts either a) manually via AWS S3 or b)
+With TravisCI you can upload build artifacts either manually via AWS S3 or
 as an attachment to a Github Release.
 
-On CircleCI, uploading artifacts just requires a step in your config. Below,
+On CircleCI, uploading artifacts is setup in a step in your config. Below,
 we'll modify the previous example configuration:
 
 ```yaml
-  # same command as before
+  # Same command as before
   - run:
       name: test 
       command: npm test 
@@ -170,8 +176,18 @@ we'll modify the previous example configuration:
       prefix: tests
 ```
 
-After the artifacts successfully upload, you can view them in the Artifacts tab
+After an artifact is successfully uploaded, you can view it in the Artifacts tab
 of the Job page in your browser, or access them via the CircleCI API. Read the
-documentation on [artifact uploading](https://circleci.com/docs/2.0/artifacts/) to learn more.
+documentation on [artifact uploading]({{site.baseurl}}/2.0/artifacts/) to learn more.
 
-## Build Rules based on Git Tags
+## Advanced Tooling
+
+More advanced configuration on Travis might make use of a *Build Matrix*
+(a configuration that specifies running multiple parallel jobs) or *Build Stages*
+(grouping jobs into stages that can run in parallel as well as having sequential
+jobs rely on the success of previous jobs.)
+
+With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.config` to define a collection of jobs and their
+run order, whether leveraging parallelism, fan-in or fan-out builds, or
+sequentially-dependant builds. Workflows allow complex and fine-grained control
+over your build configuration. 
