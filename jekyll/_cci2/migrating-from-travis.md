@@ -155,6 +155,7 @@ as an attachment to a Github Release.
 On CircleCI, artifact uploading occurs in a step in your config. Below,
 we'll modify the previous example configuration:
 
+{% raw %}
 ```yaml
   # Same command as before
   - run:
@@ -169,6 +170,7 @@ we'll modify the previous example configuration:
       path: test-results.xml
       prefix: tests
 ```
+{% endraw %}
 
 After an artifact is successfully uploaded, you can view it in the Artifacts tab
 of the Job page in your browser, or access them via the CircleCI API. Read the
