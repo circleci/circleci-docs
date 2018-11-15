@@ -155,22 +155,22 @@ as an attachment to a Github Release.
 On CircleCI, artifact uploading occurs in a step in your config. Below,
 we'll modify the previous example configuration:
 
-{% raw %}
 ```yaml
-  # Same command as before
-  - run:
-      name: test 
-      command: npm test 
-  # A new command that generates a code coverage report.
-  - run:
-      name: code-coverage
-      command: './node_modules/.bin/nyc report --reporter=text-lcov'
-  # Specify storing an artifact: a JUnit  test-results xml file.
-  - store_artifacts:
-      path: test-results.xml
-      prefix: tests
+      - run:
+          name: test
+          command: npm test
+      - run:
+          name: code-coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: test-results.xml
 ```
-{% endraw %}
 
 After an artifact is successfully uploaded, you can view it in the Artifacts tab
 of the Job page in your browser, or access them via the CircleCI API. Read the
