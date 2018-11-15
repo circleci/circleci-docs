@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Migrating From Travis CI
 categories: [migration]
-description: Migrating from Travi CI
+description: Migrating from Travis CI
 ---
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.
@@ -40,8 +40,8 @@ before we explore more complex configuration choices.
 
 Let's consider the example repository linked above. It provides an example
 application for creating, reading, updating, and deleting articles. The
-app is built with the `MERN` stack, so there are tests present on the client as
-well as the REST API.
+app is built with the `MERN` stack and there are tests present on the client as
+well as the REST API that we want to run whenever we push our code.
 
 To get tests running for this example repository, the beginnings of a simple Travis Configuration might look like so:
 
@@ -68,7 +68,7 @@ installation of npm@5 in the `before_install` hook. Hooks can execute shell
 scripts as well, which users will sometimes store in a `.travis` folder at the
 root of their repository.
 
-The following CircleCI configuration is excerpted from the example repository:
+The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
 {% raw %}
 ```yaml
@@ -115,7 +115,7 @@ creates and restores caches.
 
 In a Travis Configuration, the [dependency caching](https://docs.travis-ci.com/user/caching/) as a step in your build happens after the
 `script` phase of a build, and is tied to the language you are using. In our
-case, by using the `cache: npm` key in `.travis.yml`, dependencies will defualt
+case, by using the `cache: npm` key in `.travis.yml`, dependencies will default
 to caching `node_modules`.
 
 **On Using Containers**
@@ -130,26 +130,20 @@ a build based on a language. While you can use any docker image in your
 
 ## Environment Variables
 
-Both Travis and CircleCI enable the use of environment variables in you builds.
+Both Travis and CircleCI enable the use of environment variables in your builds.
 
 In your CircleCI `.config` you can put environment variables directly in your
 build config in a step, a job, or a container. Remember,
-these variables are public and unencrypted. With TravisCI, it is 
-[possible](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml)
-to include encrypted environment variables directly in your config if you
-install the `travis` gem). If you have private information in your environment
-variables, consider securely setting environment variables in the CircleCI web application.
+these variables are public and unencrypted. With TravisCI, it is possible to include [encrypted environment](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml) variables directly in your config if you install the `travis` gem).
 
 **Setting Environment Variables in the Web Application**
 
-If you've used TravisCI's [repository
-settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
+If you've used TravisCI's [repository settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
 you'll be comfortable setting your environment variables in CircleCI's project
 settings page. Read the docs for setting environment variable in a [single
 project]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
 
-With CircleCI, it is also possible to securely set environment variables across
-_all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
+With CircleCI, it is also possible to securely set environment variables across _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 
 **Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
 
@@ -158,7 +152,7 @@ _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
 With TravisCI you can upload build artifacts either manually via AWS S3 or
 as an attachment to a Github Release.
 
-On CircleCI, uploading artifacts is setup in a step in your config. Below,
+On CircleCI, artifact uploading occurs in a step in your config. Below,
 we'll modify the previous example configuration:
 
 ```yaml
