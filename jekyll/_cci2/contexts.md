@@ -17,7 +17,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ## Overview
 {:.no_toc}
 
-Contexts are created on the Settings page of the CircleCI application, in the Organization section. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
+Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an Org Admin to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
@@ -30,7 +30,7 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 ## Creating and Using a Context
 
-1. Navigate to the Settings > Contexts page in the CircleCI application. 
+1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application. 
 
 2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your org can access this context at runtime.
 
@@ -51,7 +51,7 @@ To rerun a job and use the context, it **must** be rerun from the Workflows page
 
 ## Deleting a Context
 
-1. Navigate to the Settings > Contexts page in the CircleCI application.
+1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
 
 2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
 

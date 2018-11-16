@@ -21,9 +21,9 @@
 
     .ais-search-box {
       max-width: 400px;
-      
+
       @media screen and (min-width: $screen-sm) {
-        left: 20px;
+        left: 6px;
       }
     }
 
@@ -82,4 +82,5 @@
 
 .hits-target {
   padding-top: $spacing-small-vertical;
+  background: #fff;
 }

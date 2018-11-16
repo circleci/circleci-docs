@@ -7,6 +7,9 @@
 // General
 body{
 	color: $body-text-color;
+	display: block;
+	width: 100%;
+	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 50%, #fff 50%, #fff 100%);
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto';
@@ -33,6 +36,7 @@ div.main-body {
 	display: flex;
 	max-width: 1200px;
 	margin: 0 auto;
+	background: #fff;
 }
 
 #hits-template {
