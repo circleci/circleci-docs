@@ -30,7 +30,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 6. **Add SSH Key** ボタンをクリックして完了です
 
-**補足**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。
+**補足**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。 CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
 ## 高度な設定
 
