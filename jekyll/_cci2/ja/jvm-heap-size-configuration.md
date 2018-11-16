@@ -4,7 +4,7 @@ layout: classic-docs title: "Configuring Java Virtual Machine Heap Size" descrip
 
 * * *
 
-JVM_HEAP_SIZE is configurable for frontend, test-result, picard-output-processor containers, and for v2.15 and later contexts-service is configurable.
+JVM_HEAP_SIZE is configurable for the frontend, test-results, picard-output-processor containers, and for v2.15 and later contexts-service is configurable.
 
 ## Setting up
 
@@ -39,10 +39,10 @@ When Circle application restarted, run the command below to run REPL into the co
 sudo docker exec -it frontend lein repl :connect 6005
 ```
 
-##### For test-result container
+##### For test-results container
 
 ```sh
-sudo docker exec -it test-result lein repl :connect 2719
+sudo docker exec -it test-results lein repl :connect 2719
 ```
 
 #### For picard-output-processor container
