@@ -4,7 +4,7 @@ title: "Configuring Java Virtual Machine Heap Size"
 description: "How to configure Java virtual Machine Heap Size in CircleCI Server."
 ---
 
-JVM_HEAP_SIZE is configurable for frontend, test-result, picard-output-processor containers, and for v2.15 and later contexts-service is configurable.
+JVM_HEAP_SIZE is configurable for the frontend, test-results, picard-output-processor containers, and for v2.15 and later contexts-service is configurable.
 
 ## Setting up
 To customize JVM_HEAP_SIZE value, you will need to create customizations file in your services box
@@ -32,9 +32,9 @@ When Circle application restarted, run the command below to run REPL into the co
 ```sh
 sudo docker exec -it frontend lein repl :connect 6005
 ```
-##### For test-result container
+##### For test-results container
 ```sh
-sudo docker exec -it test-result lein repl :connect 2719
+sudo docker exec -it test-results lein repl :connect 2719
 ```
 #### For picard-output-processor container
 ```sh
