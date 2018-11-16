@@ -152,10 +152,10 @@ When you want to author an orb, you may wish to use this example template to qui
         commands:
           my_inline_command:
             parameters:
-              name:
+              greeting_name:
                 type: string
             steps:
-              - run: echo "hello <<parameters.name>>, from the inline command"
+              - run: echo "hello <<parameters.greeting_name>>, from the inline command"
         executors:
           my_inline_executor:
             parameters:
