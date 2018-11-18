@@ -97,7 +97,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```
      steps:
     # Add the Postgres 9.6 binaries to the path.
-       - run: echo '/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
+       - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
 
 ### Using Dockerize to Wait for Dependencies
