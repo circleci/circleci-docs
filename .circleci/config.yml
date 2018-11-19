@@ -108,6 +108,21 @@ jobs:
           root: ~/circleci-docs/jekyll/_site
           paths:
             - docs
+
+  reindex-search:
+    docker:
+      - image: circleci/ruby:2.5.1
+    working_directory: ~/circleci-docs
+    environment:
+      JEKYLL_ENV: production
+    steps:
+      - checkout
+      - *attach_workspace
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run:
           name: Update Algolia Index
           command: |
@@ -122,7 +137,7 @@ jobs:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
-
+  
 workflows:
   version: 2
   build-deploy:
@@ -131,6 +146,12 @@ workflows:
       - build:
           requires:
             - js_build
+      - reindex-search:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - build
