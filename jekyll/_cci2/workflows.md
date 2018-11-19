@@ -525,8 +525,6 @@ workflows:
             - flow
 ```
 
-**Note:** The `defaults:` key in this example is arbitrary. It is possible to name a new key and define it with an arbitrary `&name` to create a reusable set of configuration keys.
-
 For a live example of using workspaces
 to pass data between build and deploy jobs,
 see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml)
