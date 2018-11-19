@@ -44,6 +44,8 @@
           link: 2.0/ios-migrating-from-1-2/
         - name: Using the config-translator
           link: 2.0/config-translation/
+        - name: Migrating from TravisCI
+          link: 2.0/migrating-from-travis/
 
 - name: Configuration
   icon: docs/config.svg
