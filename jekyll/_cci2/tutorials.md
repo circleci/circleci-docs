@@ -27,6 +27,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/CircleCI-Public/circleci-demo-crystal)
  [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
  [Go] | Go | [circleci-demo-go]
+ [Haskell]({{ site.baseurl }}/2.0/language-haskell/) | Scotty | [circleci-demo-haskell](https://github.com/CircleCI-Public/circleci-demo-haskell)
  [iOS] | Xcode | [circleci-demo-ios]
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Java] | Spring | [circleci-demo-java-spring]
