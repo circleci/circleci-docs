@@ -15,7 +15,7 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 To publish an orb, follow the steps listed below as an org Admin.
 
-1. Claim a namespace (assuming you don't yet have one), for example;
+1. Claim a namespace (assuming you don't yet have one), using the command `circleci namespace create <NAMESPACEID> <VCS> <YOURORG>`. For example:
 `circleci namespace create sandbox github CircleCI-Public`
 
 2. Create the orb inside your namespace, for example:
@@ -36,7 +36,7 @@ To publish an orb, follow the steps listed below as an org Admin.
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
 `circleci orb source sandbox/hello-world@0.0.1`
 
-**Note:** Running `circleci setup`, providing a personal API token from the CircleCI app project settings page, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
+**Note:** Running `circleci setup`, providing a personal API token, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
 
 Give it a try! If you have any trouble, check out the additional details and tips below or the [Orbs FAQ]({{ site.baseurl }}/2.0/orbs-faq/).
 
@@ -159,10 +159,10 @@ orbs:
     commands:
       my_inline_command:
         parameters:
-          name:
+          greeting_name:
             type: string
         steps:
-          - run: echo "hello <<parameters.name>>, from the inline command"
+          - run: echo "hello <<parameters.greeting_name>>, from the inline command"
     executors:
       my_inline_executor:
         parameters:

@@ -19,7 +19,7 @@ This document describes how to get started with a basic build of your Linux, And
 version: 2.1
 
 orbs:
-    hello: circleci/hello-build@.0.0.5 # uses the circleci/buildpack-deps Docker image
+    hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
 
 workflows:
     "Hello Workflow":
