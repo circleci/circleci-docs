@@ -13,10 +13,35 @@ $sidebar-spacing-base: 5px;
   background: #F7F7F7;
   font-family: "roboto";
   height: 92vh;
-  padding: 30px;
-  overflow-y: scroll;
+  padding: 30px 24px 60px 16px;
   position: absolute;
   bottom: 0;
+  width: 260px;
+  border-right: 1px solid $gray-200;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar-track {
+    box-shadow: none;
+    border-radius: 10px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  &:hover{
+    &::-webkit-scrollbar-thumb {
+      background: #C2C2C2;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
 
   a.active,
   .nav-span {
@@ -30,7 +55,6 @@ $sidebar-spacing-base: 5px;
 
   .main-nav-item {
     font-weight: 600;
-    width: 200px;
     font-size: $font-size-small;
 
     .list-wrap {
@@ -51,8 +75,10 @@ $sidebar-spacing-base: 5px;
       transition: transform 400ms;
     }
     .subnav {
-      margin-bottom: 20px;
       overflow: hidden;
+      ul{
+        margin-bottom: 20px;
+      }
     }
 
     &.closed {
@@ -69,12 +95,12 @@ $sidebar-spacing-base: 5px;
     text-transform: uppercase;
     font-size: $font-size-micro;
     font-weight: $font-weight-bold;
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     letter-spacing: .5px;
   }
   .subnav-item {
     font-weight: 100;
-    margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-medium-horizontal;
+    margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-small-horizontal;
   }
 
   ul {
@@ -104,7 +130,7 @@ $sidebar-spacing-base: 5px;
   .mobile-sidebar-item {
     display: block;
     width: 100%;
-    padding: $spacing-small-vertical $spacing-medium-horizontal;
+    padding: $spacing-small-vertical 16px;
 
     &.hidden {
       display: none;
@@ -124,6 +150,7 @@ $sidebar-spacing-base: 5px;
 
   .mobile-sidebar {
     @extend .sidebar;
+    padding-right: 16px;
     width: 100%;
     left: 0;
     top: 182px;
@@ -133,7 +160,7 @@ $sidebar-spacing-base: 5px;
       width: 100%;
     }
   }
-  
+
   @media screen and (max-width: $screen-sm) {
     display: block;
   }
