@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "Server Ports"
 category: [administration]
 order: 1
 description: "Using CircleCI 2.0 static installation scripts."
