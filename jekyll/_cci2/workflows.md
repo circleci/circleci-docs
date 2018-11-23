@@ -587,8 +587,6 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 
 - For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
 
-- For troubleshooting a workflow with Waiting for Status in GitHub, see [Workflows Waiting for Status in GitHub]({{ site.baseurl }}/2.0/workflows-waiting-status).
-
 ## Video: Configure Multiple Jobs with Workflows
 {:.no_toc}
 
