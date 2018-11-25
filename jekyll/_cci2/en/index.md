@@ -6,146 +6,54 @@ permalink: crwdns75178:0crwdne75178:0
 ---
 crwdns75180:0crwdne75180:0
 
-<hr />
+<hr class="hidden-xs" />
 
-<div>
-  <table>
-    <tr>
-      <th>
-        <h2>
-          crwdns75182:0crwdne75182:0
-        </h2>
-      </th>
-      
-      <th>
-        <h2>
-          crwdns75184:0crwdne75184:0
-        </h2>
-      </th>
-    </tr>
-    
-    <tr>
-      <td>
-        crwdns75186:0crwdne75186:0
-      </td>
-      
-      <td>
-        crwdns75188:0crwdne75188:0
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        <ul>
-          <li>
-            <a href="crwdns75190:0crwdne75190:0">crwdns75192:0crwdne75192:0</a>
-          </li>
-          <li>
-            <a href="crwdns75194:0crwdne75194:0">crwdns75196:0crwdne75196:0</a>
-          </li>
-          <li>
-            <a href="crwdns75198:0crwdne75198:0">crwdns75200:0crwdne75200:0</a>
-          </li>
-          <li>
-            <a href="crwdns75202:0crwdne75202:0">crwdns75204:0crwdne75204:0</a>
-          </li>
-          <li>
-            <a href="crwdns75206:0crwdne75206:0">crwdns75208:0crwdne75208:0</a>
-          </li>
-        </ul>
-      </td>
-      
-      <td>
-        <ul>
-          <li>
-            <a href="crwdns75210:0crwdne75210:0">crwdns75212:0crwdne75212:0</a>
-          </li>
-          <li>
-            <a href="crwdns75214:0crwdne75214:0">crwdns75216:0crwdne75216:0</a>
-          </li>
-          <li>
-            <a href="crwdns75218:0crwdne75218:0">crwdns75220:0crwdne75220:0</a>
-          </li>
-          <li>
-            <a href="crwdns75222:0crwdne75222:0">crwdns75224:0crwdne75224:0</a>
-          </li>
-          <li>
-            <a href="crwdns75226:0crwdne75226:0">crwdns75228:0crwdne75228:0</a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<hr />
-
-<div>
-  <table>
-    <tr>
-      <th>
-        <h2>
-          crwdns75230:0crwdne75230:0
-        </h2>
-      </th>
-      
-      <th>
-        <h2>
-          crwdns75232:0crwdne75232:0
-        </h2>
-      </th>
-    </tr>
-    
-    <tr>
-      <td>
-        crwdns75234:0crwdne75234:0
-      </td>
-      
-      <td>
-        crwdns75236:0crwdne75236:0
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        <ul>
-          <li>
-            <a href="crwdns75238:0{{ site.baseurl }}crwdne75238:0">crwdns75240:0crwdne75240:0</a>
-          </li>
-          <li>
-            <a href="crwdns75242:0{{ site.baseurl }}crwdne75242:0">crwdns75244:0crwdne75244:0</a>
-          </li>
-          <li>
-            <a href="crwdns75246:0{{ site.baseurl }}crwdne75246:0">crwdns75248:0crwdne75248:0</a>
-          </li>
-          <li>
-            <a href="crwdns75250:0{{ site.baseurl }}crwdne75250:0">crwdns75252:0crwdne75252:0</a>
-          </li>
-          <li>
-            <a href="crwdns75254:0crwdne75254:0">crwdns75256:0crwdne75256:0</a>
-          </li>
-        </ul>
-      </td>
-      
-      <td>
-        <ul>
-          <li>
-            <a href="crwdns75258:0crwdne75258:0">crwdns75260:0crwdne75260:0</a>
-          </li>
-          <li>
-            <a href="crwdns75262:0crwdne75262:0">crwdns75264:0crwdne75264:0</a>
-          </li>
-          <li>
-            <a href="crwdns75266:0crwdne75266:0">crwdns75268:0crwdne75268:0</a>
-          </li>
-          <li>
-            <a href="crwdns75270:0crwdne75270:0">crwdns75272:0crwdne75272:0</a>
-          </li>
-          <li>
-            <a href="crwdns75274:0crwdne75274:0">crwdns75276:0crwdne75276:0</a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <h2>crwdns79248:0crwdne79248:0</h2>
+    <p>crwdns79250:0crwdne79250:0</p>
+    <ul>
+      <li><a href="crwdns79252:0crwdne79252:0">crwdns79254:0crwdne79254:0</a></li>
+      <li><a href="crwdns79256:0crwdne79256:0">crwdns79258:0crwdne79258:0</a></li>
+      <li><a href="crwdns79260:0crwdne79260:0">crwdns79262:0crwdne79262:0</a></li>
+      <li><a href="crwdns79264:0crwdne79264:0">crwdns79266:0crwdne79266:0</a></li>
+      <li><a href="crwdns79268:0crwdne79268:0">crwdns79270:0crwdne79270:0</a></li>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h2>crwdns79272:0crwdne79272:0</h2>
+    <p>crwdns79274:0crwdne79274:0</p>
+    <ul>
+      <li><a href="crwdns79276:0crwdne79276:0">crwdns79278:0crwdne79278:0</a></li>
+        <li><a href="crwdns79280:0crwdne79280:0">crwdns79282:0crwdne79282:0</a></li>
+        <li><a href="crwdns79284:0crwdne79284:0">crwdns79286:0crwdne79286:0</a></li>
+        <li><a href="crwdns79288:0crwdne79288:0">crwdns79290:0crwdne79290:0</a></li>
+        <li><a href="crwdns79292:0crwdne79292:0">crwdns79294:0crwdne79294:0</a></li>
+      </ul>
+  </div>
+  <div class="col-xs-12">
+    <hr />
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h2>crwdns79296:0crwdne79296:0</h2>
+    <p>crwdns79298:0crwdne79298:0</p>
+    <ul>
+      <li><a href="crwdns79300:0{{ site.baseurl }}crwdne79300:0">crwdns79302:0crwdne79302:0</a></li>
+      <li><a href="crwdns79304:0{{ site.baseurl }}crwdne79304:0">crwdns79306:0crwdne79306:0</a></li>
+      <li><a href="crwdns79308:0{{ site.baseurl }}crwdne79308:0">crwdns79310:0crwdne79310:0</a></li>
+      <li><a href="crwdns79312:0{{ site.baseurl }}crwdne79312:0">crwdns79314:0crwdne79314:0</a></li>
+      <li><a href="crwdns79316:0crwdne79316:0">crwdns79318:0crwdne79318:0</a></li>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h2>crwdns79320:0crwdne79320:0</h2>
+    <p>crwdns79322:0crwdne79322:0</p>
+    <ul>
+      <li><a href="crwdns79324:0crwdne79324:0">crwdns79326:0crwdne79326:0</a></li>
+      <li><a href="crwdns79328:0crwdne79328:0">crwdns79330:0crwdne79330:0</a></li>
+      <li><a href="crwdns79332:0crwdne79332:0">crwdns79334:0crwdne79334:0</a></li>
+      <li><a href="crwdns79336:0crwdne79336:0">crwdns79338:0crwdne79338:0</a></li>
+      <li><a href="crwdns79340:0crwdne79340:0">crwdns79342:0crwdne79342:0</a></li>
+    </ul>
+  </div>
 </div>
