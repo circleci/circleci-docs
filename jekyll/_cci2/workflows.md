@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Schedule Jobs"
-short-title: "Using Workflows to Schedule Jobs"
-description: "Using Workflows to Schedule Jobs"
+title: "Using Workflows"
+short-title: "Using Workflows"
+description: "Using Workflows"
 categories: [configuring-jobs]
 order: 30
 ---
