@@ -50,7 +50,7 @@ CircleCI provides a free trial with the following options:
 
 ### Open Source
 
-See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects. 
+See [Building Open Source Projects]({{site.baseurl}}/2.0/open-source/) for information about free containers for public open source projects. 
 
 ## See Also
 
