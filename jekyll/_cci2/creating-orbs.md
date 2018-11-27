@@ -512,7 +512,7 @@ The animation shows snippets to give you an overview of the following steps for 
 5. Running `circleci namespace create ndintenfass github ndintenfass_org` to create
    a namespace in which to publish to the [CircleCI Orb
    Registry](https://circleci.com/orbs/registry/), using Github as a VCS with
-   `ndintenfass` as the namespace and `ndintenfass_org` as the org-name.
+   `ndintenfass` as the namespace and `ndintenfass_org` as the org-name. The org-name must exist already as an organization on CircleCI.
 6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
 7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
 8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
