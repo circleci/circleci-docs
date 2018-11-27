@@ -41,6 +41,8 @@ CircleCI reports the status of workflows and all corresponding jobs under the Ch
 
 After the rerun is initiated, CircleCI reruns the workflow from beginning and reposts the status on the Checks tab. To navigate to the CircleCI app from GitHub, click the View more details on CircleCI Checks link. 
 
+**Note:** Your project will stop receiving job level status after GitHub Checks is turned on. You can change this in the GitHub Status updates section of the Project Settings > Advanced Settings page. 
+
 ## To Disable GitHub Checks for a Project
 
 To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
@@ -58,5 +60,18 @@ To disable the CircleCI Check integration, navigate to the Org Settings Page, th
 2. Select VCS.
 3. Click the Manage GitHub Checks button.
 4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
+
+## GitHub Checks Waiting for Status in GitHub
+
+`ci/circleci:build — Waiting for status to be reported`
+
+If you have enabled GitHub Checks in your GitHub repository, but the status check never completes on Github Checks tab, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci:build` status key as this check refers to the job status from CircleCI 2.0, as follows:
+
+![Uncheck GitHub Job Status Keys]({{ site.baseurl }}/assets/img/docs/github_job_status.png)
+
+Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a workflow job level.
+
+Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
+
 
 
