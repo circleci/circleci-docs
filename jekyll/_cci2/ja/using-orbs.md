@@ -98,7 +98,7 @@ The example below shows a simple example of using an executor:
     
     
 
-jobs: my-job: executor: name: my-executor steps: -run: echo outside the executor ```
+jobs: my-job: executor: name: my-executor steps: - run: echo outside the executor ```
 
 ## Key Concepts
 
