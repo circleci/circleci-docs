@@ -10,9 +10,11 @@ body{
 	display: block;
 	width: 100%;
 	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 50%, #fff 50%, #fff 100%);
+	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto';
+  font-weight: 500;
 }
 p {
 	font-family: 'Roboto';
@@ -141,8 +143,12 @@ nav.nav-toggle.two {
 // Article
 div.article-container{
 	float: left;
-	padding: 50px 43px 0;
-	width: 75%;
+	@media screen and (max-width: $screen-sm) {
+		padding: 0 16px 0 16px;
+		width: 100%;
+	}
+	padding: 60px 48px 0 48px;
+	width: calc(100% - 260px);
 }
 	article{
 		h2,
@@ -238,9 +244,13 @@ div.align-center{
 
 // Homepage
 body.homepage{
-
   .article-container{
-	  padding: 30px 70px 0;
+    @media screen and (max-width: $screen-sm) {
+  	  padding: 0 16px 0 16px;
+      width: 100%;
+    }
+	  padding: 60px 48px 0 48px;
+    width: calc(100% - 260px);
   }
 
 	article{
