@@ -1,20 +1,20 @@
 ---
 layout: classic-docs
-title: "NodeJS - Javascript Tutorial"
+title: "Node.js - JavaScript Tutorial"
 short-title: "JavaScript"
-description: "Building and Testing with JavaScript and NodeJS on CircleCI 2.0"
+description: "Building and Testing with JavaScript and Node.js on CircleCI 2.0"
 categories: [language-guides]
 order: 5
 ---
 
-This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a NodeJS sample application.
+This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.
 
 * TOC
 {:toc}
 
-## Quickstart: Demo JavaScript NodeJS Reference Project
+## Quickstart: Demo JavaScript Node.js Reference Project
 
-We maintain a reference JavaScript NodeJS project to show how to build an Express.js app on CircleCI 2.0:
+We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - [Demo JavaScript Node Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
@@ -48,12 +48,12 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
       - image: mongo:3.4.4 # and this image as the secondary service container
-    steps: # a collection of executable commands 
+    steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
-          name: update-npm 
+          name: update-npm
           command: 'sudo npm install -g npm@latest'
-      - restore_cache: # special step to restore the dependency cache 
+      - restore_cache: # special step to restore the dependency cache
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-wee
@@ -76,16 +76,16 @@ jobs: # a collection of steps
           prefix: coverage
       - store_test_results: # special step to upload test results for display in Test Summary
           path: test-results.xml
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
-```          
-{% endraw %}          
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+```
+{% endraw %}
 ---
 
-Success! You just set up CircleCI 2.0 for a NodeJS app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See Also
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public Javascript projects.
+- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public JavaScript projects.
 - If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

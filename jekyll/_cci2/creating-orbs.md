@@ -15,7 +15,7 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 To publish an orb, follow the steps listed below as an org Admin.
 
-1. Claim a namespace (assuming you don't yet have one), for example;
+1. Claim a namespace (assuming you don't yet have one), using the command `circleci namespace create <NAMESPACEID> <VCS> <YOURORG>`. For example:
 `circleci namespace create sandbox github CircleCI-Public`
 
 2. Create the orb inside your namespace, for example:
@@ -36,7 +36,7 @@ To publish an orb, follow the steps listed below as an org Admin.
 7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
 `circleci orb source sandbox/hello-world@0.0.1`
 
-**Note:** Running `circleci setup`, providing a personal API token from the CircleCI app project settings page, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
+**Note:** Running `circleci setup`, providing a personal API token, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
 
 Give it a try! If you have any trouble, check out the additional details and tips below or the [Orbs FAQ]({{ site.baseurl }}/2.0/orbs-faq/).
 
@@ -109,7 +109,7 @@ orbs:
   codecov: circleci/codecov-clojure@0.0.4
   my-orb:
     executors:
-      default:
+      specialthingsexecutor:
         docker:
           - image: circleci/ruby:1.4.2
     commands:
@@ -159,10 +159,10 @@ orbs:
     commands:
       my_inline_command:
         parameters:
-          name:
+          greeting_name:
             type: string
         steps:
-          - run: echo "hello <<parameters.name>>, from the inline command"
+          - run: echo "hello <<parameters.greeting_name>>, from the inline command"
     executors:
       my_inline_executor:
         parameters:
@@ -509,7 +509,10 @@ The animation shows snippets to give you an overview of the following steps for 
 2. Running `circleci config process .circleci/config.yml` to process the config.
 3. Committing the change and checking that the build succeeds in the CircleCI app.
 4. Enabling orbs use under Settings > Security in the CircleCI app.
-5. Running `circleci namespace create ndintenfass` to create a namespace in which to publish to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
+5. Running `circleci namespace create ndintenfass github ndintenfass_org` to create
+   a namespace in which to publish to the [CircleCI Orb
+   Registry](https://circleci.com/orbs/registry/), using Github as a VCS with
+   `ndintenfass` as the namespace and `ndintenfass_org` as the org-name. The org-name must exist already as an organization on CircleCI.
 6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
 7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
 8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.

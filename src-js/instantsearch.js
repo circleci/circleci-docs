@@ -1,10 +1,13 @@
 import * as debounce from 'lodash.debounce';
+import * as get from 'lodash.get';
 
 const formatResultSnippet = (snippet) => {
-  const titleTag = `<strong>${snippet.title.value}</strong>`;
+  const title = get(snippet, ['title', 'value'], '(untitled)');
+  const content = get(snippet, ['content', 'value'], '');
+  const titleTag = `<strong>${title}</strong>`;
   const contextTag = snippet.headings ?
     `<p class="context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
-  const contentTag = `<p class="content">${snippet.content.value}</p>`;
+  const contentTag = `<p class="content">${content}</p>`;
   return `<div class="result-item-wrap">${titleTag + contextTag + contentTag}</div>`;
 }
 
