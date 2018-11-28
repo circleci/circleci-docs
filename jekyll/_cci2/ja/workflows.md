@@ -536,8 +536,6 @@ GitHub リポジトリのブランチに実装済みの Workflow があり、か
 
 - Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) から入手できます。
 
-- Workflow の処理中に GitHub で待機状態のままになってしまう問題を解決するには、[GitHub で Workflow が待機状態になる問題]({{ site.baseurl }}/2.0/workflows-waiting-status) を参照してください。
-
 ## 動画：Workflow を使った複数ジョブの設定
 
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
