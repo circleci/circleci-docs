@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "Server Ports"
 category:
   - administration
 order: 1
