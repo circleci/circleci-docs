@@ -65,7 +65,7 @@ Environment variables are used according to a specific precedence order, as foll
 2. Environment variables declared with the `environment` key for a `run` step.
 3. Environment variables set with the `environment` key for a job.
 4. Environment variables set with the `environment` key for a container.
-5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+5. Context environment variables (assuming the user has access to the Context).
 6. Project-level environment variables set on the Project Settings page.
 7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
 
