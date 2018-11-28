@@ -104,7 +104,7 @@ To write inline orbs, you need to place the orb elements under that orb's key in
       codecov: circleci/codecov-clojure@0.0.4
       my-orb:
         executors:
-          default:
+          specialthingsexecutor:
             docker:
               - image: circleci/ruby:1.4.2
         commands:
