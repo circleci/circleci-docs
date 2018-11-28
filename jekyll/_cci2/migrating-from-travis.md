@@ -20,7 +20,7 @@ Continuous Integration tooling:
 - Enable the safe use of environment variables.
 - On each build, upload a `test-results.xml` file to be made accessible online.
 
-## Pre-requisites
+## Prerequisites
 
 This document assumes that you have an account with CircleCI that is linked
 to a repository. If you don't, consider going over our [getting started guide]({{ site.baseurl }}/2.0/getting-started/).
@@ -39,7 +39,8 @@ The example repository linked above is a basic application for creating, reading
 app is built with the `MERN` stack and there are tests present on the client as
 well as the REST API that should run whenever code is pushed.
 
-To get tests running for this example repository, the beginnings of a simple Travis Configuration might look like so:
+To get tests running for this example repository, the beginnings of a simple
+Travis Configuration might look like the following example:
 
 ```yaml
 language: node_js
@@ -99,9 +100,9 @@ user is able to specify any number of `steps` that can be run, with no
 restrictions on step order. By leveraging Docker, specific Node.js and
 MongoDB versions are made available in each `command` that gets run.
 
-**On Caching Dependencies**
+### Caching Dependencies
 
-With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.config`
+With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml`
 checks for a dependency cache based specifically on a checksum of the
 `package.json` file. You can set your cache based on any key (not just `package.json`) as well as set a
 group of cache paths to defer to in the declared order. Refer to the [caching
@@ -114,7 +115,7 @@ caching](https://docs.travis-ci.com/user/caching/) occurs in your build after th
 case, by using the `cache: npm` key in `.travis.yml`, dependencies will default
 to caching `node_modules`.
 
-**On Using Containers**
+### On Using Containers
 
 With CircleCI, the context in which your checked out code executes (builds,
 tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
@@ -127,10 +128,10 @@ a build based on a language. While you can use any custom Docker Images, CircleC
 
 Both Travis and CircleCI enable the use of environment variables in your builds.
 
-In your CircleCI `.config` you can put environment variables directly in your
+In your CircleCI `.circleci/config.yml` you can put environment variables directly in your
 build config in a step, a job, or a container. These variables are public and unencrypted. With TravisCI, it is possible to include [encrypted environment](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml) variables directly in your config (if you install the `travis` gem).
 
-**Setting Environment Variables in the Web Application**
+### Setting Environment Variables in the Web Application
 
 If you've used TravisCI's [repository settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
 you'll be comfortable setting your environment variables in CircleCI's project
@@ -143,7 +144,7 @@ With CircleCI, it is also possible to securely set environment variables across 
 
 ## Artifacts Uploading
 
-With TravisCI you can upload build artifacts either manually via AWS S3 or
+With TravisCI you can upload build artifacts either manually using AWS S3 or
 as an attachment to a Github Release.
 
 On CircleCI, artifact uploading occurs in a step in your config:
@@ -155,7 +156,7 @@ On CircleCI, artifact uploading occurs in a step in your config:
       - run:
           name: code-coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts: # < stores test-results.xml, available in the web app or via the api.
+      - store_artifacts: # < stores test-results.xml, available in the web app or through the api.
           path: test-results.xml
           prefix: tests
       - store_artifacts:
@@ -166,7 +167,7 @@ On CircleCI, artifact uploading occurs in a step in your config:
 ```
 
 After an artifact is successfully uploaded, you can view it in the Artifacts tab
-of the Job page in your browser, or access them via the CircleCI API. Read the
+of the Job page in your browser, or access them through the CircleCI API. Read the
 documentation on [artifact uploading]({{site.baseurl}}/2.0/artifacts/) to learn more.
 
 ## Advanced Tooling
@@ -176,7 +177,7 @@ More advanced configuration on Travis might make use of a *Build Matrix*
 (grouping jobs into stages that can run in parallel as well as having sequential
 jobs rely on the success of previous jobs.)
 
-With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.config` to define a collection of jobs and their
+With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their
 run order, whether leveraging parallelism, fan-in or fan-out builds, or
 sequentially-dependant builds. Workflows allow complex and fine-grained control
 over your build configuration. 
