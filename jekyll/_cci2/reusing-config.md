@@ -485,7 +485,10 @@ commands:
 Use an `executor` parameter type to allow the invoker of a job to decide what
 executor it will run on.
 
-```yaml
+```
+{% raw %}
+
+yaml
 version: 2.1
 executors:
   xenial:
@@ -519,6 +522,8 @@ workflows:
           e:
             name: xenial
             some-value: foobar
+
+{% endraw %}
 ```
 
 #### Steps
@@ -526,7 +531,10 @@ workflows:
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
-```yaml
+```
+{% raw %}
+
+yaml
 commands:
   run-tests:
     parameters:
@@ -538,11 +546,17 @@ commands:
     - run: make deps
     - steps: << parameters.after-deps >>
     - run: make test
+
+{% endraw %}
+
 ```
 
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
-```yaml
+```
+{% raw %}
+
+yaml
 jobs:
   build:
     machine: true
@@ -551,22 +565,33 @@ jobs:
         after-deps:
           - run: echo "The dependencies are installed"
           - run: echo "And now I'm going to run the tests"
+
+{% endraw %}
+
 ```
 
 The above will resolve to the following:
 
-```yaml
+```
+{% raw %}
+
+yaml
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
   - run: echo "And now I'm going to run the tests"
   - run: make test
+
+{% endraw %}
+
 ```
 #### Environment Variable Name
 
 The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
 ```
+{% raw %}
+
 version: 2
 jobs:
   build:
@@ -611,6 +636,8 @@ workflows:
            access-key: FOO_BAR
            secret-key: BIN_BAZ
            command: ls s3://some/where
+
+{% endraw %}
 ```
 
 ## Authoring Parameterized Jobs
