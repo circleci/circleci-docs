@@ -54,6 +54,8 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 **Note:** The Security setting required for publishing or using 3rd-party orbs may only be toggled by organization administrators.
 
+**Note:** Private installations of CircleCI server are not currently supported when creating or using orbs.
+
 ## Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
@@ -132,7 +134,6 @@ workflows:
 ```
 
 In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
-
 
 ### Example Inline Template
 
@@ -255,7 +256,6 @@ While not strictly enforced, it is best practice when versioning your production
 * MAJOR: when you make incompatible API changes
 * MINOR: when you add functionality in a backwards-compatible manner
 * PATCH: when you make backwards-compatible bug fixes
-
 
 #### Using Orbs Within Your Orb and Register-Time Resolution
 
@@ -403,7 +403,6 @@ If you are a user of a privately installed CircleCI deployment you will have to 
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you will only be able to use `circlecli local execute` (this was previously `circleci build`).
 
-
 ### Validating a Build Config
 
 To ensure that the CircleCI CLI tool has been installed properly, you can use the CLI tool to validate a build config file by running the following command:
@@ -519,4 +518,3 @@ The animation shows snippets to give you an overview of the following steps for 
 9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
 10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
 11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
-
