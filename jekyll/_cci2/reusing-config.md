@@ -380,6 +380,7 @@ This section describes the types of parameters and their usage. The parameter ty
 * enum
 * executor
 * steps
+* environment variable name
 
 #### String
 {:.no_toc}
@@ -424,6 +425,102 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 
 Capitalized and uppercase versions of the above values are also valid.
 
+#### Integer
+{:.no_toc}
+
+The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
+
+```yaml
+version: "2.1"
+
+jobs:
+  build:
+    parameters:
+      p:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
+    machine: true
+    steps:
+      - checkout
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          p: 2
+```
+
+#### Enum
+{:.no_toc}
+
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
+
+```yaml
+commands:
+  list-files:
+    parameters:
+      os:
+        default: "linux"
+        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
+        type: enum
+        enum: ["linux", "darwin", "win32"]
+```
+
+The following `enum` type declaration is invalid because the default is not declared in the enum list.
+
+```yaml
+commands:
+  list-files:
+    parameters:
+      os:
+        type: enum
+        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
+        enum: ["darwin", "linux"]
+ ```
+
+#### Executor
+{:.no_toc}
+
+Use an `executor` parameter type to allow the invoker of a job to decide what
+executor it will run on.
+
+```yaml
+version: 2.1
+executors:
+  xenial:
+    parameters:
+      some-value:
+        type: string
+        default: foo
+    environment:
+      SOME_VAR: << parameters.some-value >>
+    docker:
+      - image: ubuntu:xenial
+  bionic:
+    docker:
+      - image: ubuntu:bionic
+
+jobs:
+  test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - run: some-tests
+
+workflows:
+  workflow:
+    jobs:
+      - test:
+          e: bionic
+      - test:
+          e:
+            name: xenial
+            some-value: foobar
+```
+
 #### Steps
 {:.no_toc}
 
@@ -465,99 +562,55 @@ steps:
   - run: echo "And now I'm going to run the tests"
   - run: make test
 ```
+#### Environment Variable Name
 
-#### Enum Parameter
-{:.no_toc}
+The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
-The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
-
-```yaml
-commands:
-  list-files:
-    parameters:
-      os:
-        default: "linux"
-        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
-        type: enum
-        enum: ["linux", "darwin", "win32"]
 ```
-
-The following `enum` type declaration is invalid because the default is not declared in the enum list.
-
-```yaml
-commands:
-  list-files:
-    parameters:
-      os:
-        type: enum
-        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
-        enum: ["darwin", "linux"]
-```
-#### Executor parameter
-{:.no_toc}
-
-Use an `executor` parameter type to allow the invoker of a job to decide what
-executor it will run on.
-
-```yaml
-version: 2.1
-executors:
-  xenial:
-    parameters:
-      some-value:
-        type: string
-        default: foo
-    environment:
-      SOME_VAR: << parameters.some-value >>
-    docker:
-      - image: ubuntu:xenial
-  bionic:
-    docker:
-      - image: ubuntu:bionic
-
-jobs:
-  test:
-    parameters:
-      e:
-        type: executor
-    executor: << parameters.e >>
-    steps:
-      - run: some-tests
-
-workflows:
-  workflow:
-    jobs:
-      - test:
-          e: bionic
-      - test:
-          e:
-            name: xenial
-            some-value: foobar
-```
-#### Integer Parameter
-{:.no_toc}
-
-The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
-
-```yaml
-version: "2.1"
-
+version: 2
 jobs:
   build:
-    parameters:
-      p:
-        type: integer
-        default: 1
-    parallelism: << parameters.p >>
-    machine: true
+    docker:
+    - image: ubuntu:latest
     steps:
-      - checkout
-
+    - run:
+        command: |
+          s3cmd --access_key ${FOO_BAR} \
+                --secret_key ${BIN_BAZ} \
+                ls s3://some/where
 workflows:
   workflow:
     jobs:
-      - build:
-          p: 2
+    - build
+  version: 2
+
+ Original config.yml file:
+ version: 2.1
+ jobs:
+   build:
+     parameters:
+       access-key:
+         type: env_var_name
+         default: AWS_ACCESS_KEY
+       secret-key:
+         type: env_var_name
+         default: AWS_SECRET_KEY
+       command:
+         type: string
+     docker:
+       - image: ubuntu:latest
+     steps:
+       - run: |
+           s3cmd --access_key ${<< parameters.access-key >>} \\
+                 --secret_key ${<< parameters.secret-key >>} \\
+                 << parameters.command >>
+ workflows:
+   workflow:
+     jobs:
+       - build:
+           access-key: FOO_BAR
+           secret-key: BIN_BAZ
+           command: ls s3://some/where
 ```
 
 ## Authoring Parameterized Jobs
@@ -589,7 +642,6 @@ workflows:
 ```
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
-
 
 ### Jobs Defined in an Orb
 
@@ -630,7 +682,6 @@ workflows:
       - hello-orb/sayhello:
           saywhat: Everyone
 ```
-
 
 ### Using Parameters in Executors
 {:.no_toc}
@@ -848,6 +899,3 @@ workflows:
 ```
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
-
-
-
