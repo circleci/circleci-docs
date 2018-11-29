@@ -108,7 +108,6 @@ yourusername/circle-autoAdded by GitHub
 ```
 --->
 
-
 ### Logging Outputs
 
 * Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to stdout, but is there a better way to log those log messages.
@@ -121,10 +120,14 @@ Question: How can I intentionally fail a job that invokes an orb from within an 
 
 Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
 
+### Private Installation of CircleCI When Using Orbs
+
+* Question: Can I use a private installation of CircleCI when using creating/using orbs?
+
+* Answer: No. Currently the CircleCI server does not support private installations of CircleCI when creating or using orbs.
 
 ## See Also
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-
