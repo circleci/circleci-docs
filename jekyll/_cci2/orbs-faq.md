@@ -122,9 +122,9 @@ Answer: You can always return a non-zero status code from the shell to fail the 
 
 ### Private Installation of CircleCI When Using Orbs
 
-* Question: Can I use a private installation of CircleCI when using creating/using orbs?
+* Question: Can I use a private installation of CircleCI Server when using working with orbs?
 
-* Answer: No. Currently the CircleCI server does not support private installations of CircleCI when creating or using orbs.
+* Answer: No. CircleCI Server does not currently support private installations.
 
 ## See Also
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
