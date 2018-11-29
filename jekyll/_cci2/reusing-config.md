@@ -469,7 +469,11 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-```yaml
+```
+
+{% raw %}
+
+yaml
 commands:
   list-files:
     parameters:
@@ -477,6 +481,9 @@ commands:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
+ 
+ {% endraw %}
+ 
  ```
 
 #### Executor
@@ -638,6 +645,7 @@ workflows:
            command: ls s3://some/where
 
 {% endraw %}
+
 ```
 
 ## Authoring Parameterized Jobs
@@ -646,7 +654,10 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
-```yaml
+```
+{% raw %}
+
+yaml
 version: 2.1
 
 jobs:
@@ -666,6 +677,9 @@ workflows:
     jobs:
       - sayhello: # invokes the parameterized job
           saywhat: Everyone
+
+{% endraw %}
+
 ```
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
@@ -797,7 +811,6 @@ workflows:
           saywhat: Everyone
 ```
 
-
 ### Invoking the Same Job Multiple Times
 {:.no_toc}
 
@@ -879,7 +892,7 @@ For example, an orb could define a command that runs a set of steps *if* invoked
 
 
 These conditions are checked before a workflow is actually run. That
-means, for example, that a you cannot use a condition to check an environment
+means, for example, that you cannot use a condition to check an environment
 variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
