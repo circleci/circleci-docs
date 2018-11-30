@@ -364,7 +364,7 @@ A parameter can have the following keys as immediate children:
 
 {:.no_toc}
 
-This section describes the types of parameters and their usage. The parameter types supported are: * string * boolean * integer * enum * executor * steps
+This section describes the types of parameters and their usage. The parameter types supported are: * string * boolean * integer * enum * executor * steps * environment variable name
 
 #### String
 
@@ -411,121 +411,7 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 
 Capitalized and uppercase versions of the above values are also valid.
 
-#### Steps
-
-{:.no_toc}
-
-Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
-
-```yaml
-commands:
-  run-tests:
-    parameters:
-      after-deps:
-        description: "Steps that will be executed after dependencies are installed, but before tests are run"
-        type: steps
-        default: []
-    steps:
-    - run: make deps
-    - steps: << parameters.after-deps >>
-    - run: make test
-```
-
-The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
-
-```yaml
-jobs:
-  build:
-    machine: true
-    steps:
-    - run-tests:
-        after-deps:
-          - run: echo "The dependencies are installed"
-          - run: echo "And now I'm going to run the tests"
-```
-
-The above will resolve to the following:
-
-```yaml
-steps:
-  - run: make deps
-  - run: echo "The dependencies are installed"
-  - run: echo "And now I'm going to run the tests"
-  - run: make test
-```
-
-#### Enum Parameter
-
-{:.no_toc}
-
-The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
-
-```yaml
-commands:
-  list-files:
-    parameters:
-      os:
-        default: "linux"
-        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
-        type: enum
-        enum: ["linux", "darwin", "win32"]
-```
-
-The following `enum` type declaration is invalid because the default is not declared in the enum list.
-
-```yaml
-commands:
-  list-files:
-    parameters:
-      os:
-        type: enum
-        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
-        enum: ["darwin", "linux"]
-```
-
-#### Executor parameter
-
-{:.no_toc}
-
-Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
-
-```yaml
-version: 2.1
-executors:
-  xenial:
-    parameters:
-      some-value:
-        type: string
-        default: foo
-    environment:
-      SOME_VAR: << parameters.some-value >>
-    docker:
-      - image: ubuntu:xenial
-  bionic:
-    docker:
-      - image: ubuntu:bionic
-
-jobs:
-  test:
-    parameters:
-      e:
-        type: executor
-    executor: << parameters.e >>
-    steps:
-      - run: some-tests
-
-workflows:
-  workflow:
-    jobs:
-      - test:
-          e: bionic
-      - test:
-          e:
-            name: xenial
-            some-value: foobar
-```
-
-#### Integer Parameter
+#### Integer
 
 {:.no_toc}
 
@@ -552,63 +438,151 @@ workflows:
           p: 2
 ```
 
-## Authoring Parameterized Jobs
+#### Enum
 
-It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
+{:.no_toc}
 
-Example of defining and invoking a parameterized job in a `config.yml`:
-
-```yaml
-version: 2.1
-
-jobs:
-  sayhello: # defines a parameterized job
-    description: A job that does very little other than demonstrate what a parameterized job looks like
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - run: echo "Hello << parameters.saywhat >>"
-
-workflows:
-  build:
-    jobs:
-      - sayhello: # invokes the parameterized job
-          saywhat: Everyone
-```
-
-**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
-
-### Jobs Defined in an Orb
-
-If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
-
-**hello-orb**
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
-# partial yaml from hello-orb
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          saywhat: "<< parameters.saywhat >>"
 commands:
-  saywhat:
+  list-files:
     parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
+      os:
+        default: "linux"
+        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
+        type: enum
+        enum: ["linux", "darwin", "win32"]
 ```
+
+The following `enum` type declaration is invalid because the default is not declared in the enum list.
+
+    <br />{% raw %}
+    
+    yaml
+    commands:
+      list-files:
+        parameters:
+          os:
+            type: enum
+            default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
+            enum: ["darwin", "linux"]
+    
+     {% endraw %}
+    
+     ```
+    
+    #### Executor
+    {:.no_toc}
+    
+    Use an `executor` parameter type to allow the invoker of a job to decide what
+    executor it will run on.
+    
+    
+
+{% raw %}
+
+yaml version: 2.1 executors: xenial: parameters: some-value: type: string default: foo environment: SOME_VAR: << parameters.some-value >> docker: - image: ubuntu:xenial bionic: docker: - image: ubuntu:bionic
+
+jobs: test: parameters: e: type: executor executor: << parameters.e >> steps: - run: some-tests
+
+workflows: workflow: jobs: - test: e: bionic - test: e: name: xenial some-value: foobar
+
+{% endraw %}
+
+    <br />#### Steps
+    {:.no_toc}
+    
+    Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
+    
+    
+
+{% raw %}
+
+yaml commands: run-tests: parameters: after-deps: description: "Steps that will be executed after dependencies are installed, but before tests are run" type: steps default: [] steps: - run: make deps - steps: << parameters.after-deps >> - run: make test
+
+{% endraw %}
+
+    <br />The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
+    
+    
+
+{% raw %}
+
+yaml jobs: build: machine: true steps: - run-tests: after-deps: - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests"
+
+{% endraw %}
+
+    <br />The above will resolve to the following:
+    
+    
+
+{% raw %}
+
+yaml steps: - run: make deps - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests" - run: make test
+
+{% endraw %}
+
+    #### Environment Variable Name
+    
+    The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
+    
+    
+
+{% raw %}
+
+version: 2 jobs: build: docker: - image: ubuntu:latest steps: - run: command: | s3cmd --access_key ${FOO_BAR} \ --secret_key ${BIN_BAZ} \ ls s3://some/where workflows: workflow: jobs: - build version: 2
+
+Original config.yml file: version: 2.1 jobs: build: parameters: access-key: type: env_var_name default: AWS_ACCESS_KEY secret-key: type: env_var_name default: AWS_SECRET_KEY command: type: string docker: - image: ubuntu:latest steps: - run: | s3cmd --access_key ${<< parameters.access-key >>} \\ --secret_key ${<< parameters.secret-key >>} \\ << parameters.command >> workflows: workflow: jobs: - build: access-key: FOO_BAR secret-key: BIN_BAZ command: ls s3://some/where
+
+{% endraw %}
+
+    <br />## Authoring Parameterized Jobs
+    
+    It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
+    
+    Example of defining and invoking a parameterized job in a `config.yml`:
+    
+    
+
+{% raw %}
+
+yaml version: 2.1
+
+jobs: sayhello: # defines a parameterized job description: A job that does very little other than demonstrate what a parameterized job looks like parameters: saywhat: description: "To whom shall we say hello?" default: "World" type: string machine: true steps: - run: echo "Hello << parameters.saywhat >>"
+
+workflows: build: jobs: - sayhello: # invokes the parameterized job saywhat: Everyone
+
+{% endraw %}
+
+    <br />**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
+    
+    ### Jobs Defined in an Orb
+    
+    If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
+    
+    **hello-orb**
+    ```yaml
+    # partial yaml from hello-orb
+    jobs:
+      sayhello:
+        parameters:
+          saywhat:
+            description: "To whom shall we say hello?"
+            default: "World"
+            type: string
+        machine: true
+        steps:
+          - say:
+              saywhat: "<< parameters.saywhat >>"
+    commands:
+      saywhat:
+        parameters:
+          saywhat:
+            type: string
+        steps:
+          - run: echo "<< parameters.saywhat >>"
+    
 
 **Config leveraging hello-orb**
 
@@ -787,7 +761,7 @@ Conditional steps allow the definition of steps that only run if a condition is 
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
 
-These conditions are checked before a workflow is actually run. That means, for example, that a you cannot use a condition to check an environment variable.
+These conditions are checked before a workflow is actually run. That means, for example, that you cannot use a condition to check an environment variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
