@@ -101,6 +101,8 @@ To ensure that the CLI is configured correctly you can use it to validate a Circ
     Config file at .circleci/config.yml is valid
     
 
+You can also [validate your config through CircleCI's API]({{ site.baseurl }}/2.0/examples/).
+
 ### Run validate using git hooks
 
 {:.no_toc}
