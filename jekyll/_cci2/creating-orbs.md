@@ -133,7 +133,6 @@ workflows:
 
 In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
 
-
 ### Example Inline Template
 
 When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
@@ -256,7 +255,6 @@ While not strictly enforced, it is best practice when versioning your production
 * MINOR: when you add functionality in a backwards-compatible manner
 * PATCH: when you make backwards-compatible bug fixes
 
-
 #### Using Orbs Within Your Orb and Register-Time Resolution
 
 You may use an ```orbs``` stanza inside an orb. 
@@ -266,6 +264,26 @@ Because production orb releases are immutable, the system will resolve all orb d
 For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```orbs``` stanza that imports ```biz/baz@volatile```. At the time you register ```foo/bar@1.2.3``` the system will resolve ```biz/baz@volatile``` as the latest version and include its elements directly into the packaged version of ```foo/bar@1.2.3```.
 
 If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
+
+**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
+{% raw %}
+```
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command
+          param1: "hello"
+```
+{% endraw %}
 
 ### Deleting Production Orbs
 
@@ -519,4 +537,3 @@ The animation shows snippets to give you an overview of the following steps for 
 9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
 10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
 11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
-
