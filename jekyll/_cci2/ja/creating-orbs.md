@@ -47,6 +47,8 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 **Note:** The Security setting required for publishing or using 3rd-party orbs may only be toggled by organization administrators.
 
+**Note:** Orbs are not currently supported on private installations of CircleCI Server.
+
 ## Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
