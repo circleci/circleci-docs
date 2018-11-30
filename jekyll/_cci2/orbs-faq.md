@@ -119,11 +119,11 @@ yourusername/circle-autoAdded by GitHub
 
 * Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
 
-### Using Orb Elements In 
+### Using Orb Elements For Other Orbs
 
 * Question: May I use elements from a different orb when creating my own orb?
 
-* Answer: Yes, orbs may be composed directly using elements of other orbs. Example:
+* Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
 
 {% raw %}
 ```
@@ -141,6 +141,7 @@ jobs:
       - my-command
           param1: "hello"
 ```
+{% endraw %}
 
 ## See Also
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
