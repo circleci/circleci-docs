@@ -54,6 +54,8 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 **Note:** The Security setting required for publishing or using 3rd-party orbs may only be toggled by organization administrators.
 
+**Note:** Orbs are not currently supported on private installations of CircleCI Server.
+
 ## Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
@@ -420,7 +422,6 @@ If you are using the CLI tool on `circleci.com`, make sure to accept the provide
 If you are a user of a privately installed CircleCI deployment you will have to change the default value to your custom address, for example, circleci.my-org.com.
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you will only be able to use `circlecli local execute` (this was previously `circleci build`).
-
 
 ### Validating a Build Config
 
