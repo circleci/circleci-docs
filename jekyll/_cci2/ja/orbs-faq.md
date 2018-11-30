@@ -110,9 +110,34 @@ yourusername/circle-autoAdded by GitHub
 
 ### Failing Builds
 
-Question: How can I intentionally fail a job that invokes an orb from within an orb?
+- Question: How can I intentionally fail a job that invokes an orb from within an orb?
 
-Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
+- Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
+
+### Using Orb Elements For Other Orbs
+
+- Question: May I use elements from a different orb when creating my own orb?
+
+- Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
+
+{% raw %}
+
+    orbs:
+      some-orb: some-ns/some-orb@volatile
+    executors:
+      my-executor: some-orb/their-executor
+    commands:
+      my-command: some-orb/their-command
+    jobs:
+      my-job: some-orb/their-job
+      another-job:
+        executor: my-executor
+        steps:
+          - my-command
+              param1: "hello"
+    
+
+{% endraw %}
 
 ## See Also
 
