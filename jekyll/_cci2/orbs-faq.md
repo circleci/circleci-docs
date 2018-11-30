@@ -119,6 +119,12 @@ yourusername/circle-autoAdded by GitHub
 
 * Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
 
+### Private Installation of CircleCI When Using Orbs
+
+* Question: Can I use a private installation of CircleCI Server when using working with orbs?
+
+* Answer: No. CircleCI Server does not currently support private installations.
+
 ### Using Orb Elements For Other Orbs
 
 * Question: May I use elements from a different orb when creating my own orb?
@@ -142,6 +148,7 @@ jobs:
           param1: "hello"
 ```
 {% endraw %}
+
 
 ## See Also
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
