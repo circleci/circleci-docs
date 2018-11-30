@@ -60,7 +60,6 @@ only certified orbs are permitted in this project.
 
 * Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
-
 <!---
 ### Environment Variables Not Being Passed at Runtime
 
@@ -108,7 +107,6 @@ yourusername/circle-autoAdded by GitHub
 ```
 --->
 
-
 ### Logging Outputs
 
 * Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to stdout, but is there a better way to log those log messages.
@@ -117,14 +115,35 @@ yourusername/circle-autoAdded by GitHub
 
 ### Failing Builds
 
-Question: How can I intentionally fail a job that invokes an orb from within an orb?
+* Question: How can I intentionally fail a job that invokes an orb from within an orb?
 
-Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
+* Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
 
+### Using Orb Elements In 
+
+* Question: May I use elements from a different orb when creating my own orb?
+
+* Answer: Yes, orbs may be composed directly using elements of other orbs. Example:
+
+{% raw %}
+```
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command
+          param1: "hello"
+```
 
 ## See Also
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-
