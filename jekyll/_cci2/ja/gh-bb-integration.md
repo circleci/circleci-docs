@@ -158,11 +158,13 @@ Here are common errors that indicate you need to add a user key.
     
     1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). When prompted to enter a passphrase, do **not** enter one.
     
-    2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy key". Enter a title in the "Title" field, then copy and paste the key you created in step 1. Check "Allow write access", then click "Add key".
+    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
     
-    3. <https://circleci.com/gh/you/test-repo/edit#ssh>{:rel="nofollow"} でも同じように SSH キーを追加します。 「Hostname」には「github.com」と入力し、Submit ボタンをクリックします。
+    1. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy key". Enter a title in the "Title" field, then copy and paste the key you created in step 1. Check "Allow write access", then click "Add key".
     
-    4. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
+    2. <https://circleci.com/gh/you/test-repo/edit#ssh>{:rel="nofollow"} でも同じように SSH キーを追加します。 「Hostname」には「github.com」と入力し、Submit ボタンをクリックします。
+    
+    3. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
     
     ```yaml
     version: 2
