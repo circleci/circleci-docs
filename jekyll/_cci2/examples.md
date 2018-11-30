@@ -4,11 +4,10 @@ title: "Testing Config Files Locally"
 description: "Example CircleCI 2.0 Configuration Files"
 ---
 
-
 <div class="alert alert-info" role="alert">
-<b>Note:</b> This document describes a legacy means of testing your config file locally.
-It is recommended to install the updated version of the <a href="{{ site.baseurl }}/2.0/local-cli/#overview">CircleCI
-CLI</a> which allows you to <a href="{{ site.baseurl }}/2.0/local-cli/#validate-a-circleci-config">validate</a> your CircleCI config locally.
+<b>Note:</b> This document describes how to test and validate your config through the CircleCI API.
+It is also possible to install the <a href="{{ site.baseurl }}/2.0/local-cli/#overview">CircleCI
+CLI</a>, which allows you to <a href="{{ site.baseurl }}/2.0/local-cli/#validate-a-circleci-config">validate</a> your CircleCI config locally.
 </div>
 
 To add a script that tests your config file locally, complete the following steps:
