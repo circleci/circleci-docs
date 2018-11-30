@@ -45,7 +45,7 @@ and refers to the name of your branch.
 For a complete reference of the API,
 see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
 
-**Import Considerations When Triggering A Job Via The API**
+**Important Considerations When Triggering A Job Via The API**
 
 - Jobs triggered with the API may contain a `workflows` section
 - Your workflow does **not** have to reference the job you triggered with the API
