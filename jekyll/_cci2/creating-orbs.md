@@ -267,6 +267,26 @@ For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```or
 
 If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
 
+**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
+{% raw %}
+```
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command
+          param1: "hello"
+```
+{% endraw %}
+
 ### Deleting Production Orbs
 
 In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.

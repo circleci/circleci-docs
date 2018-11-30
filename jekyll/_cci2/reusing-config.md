@@ -380,6 +380,7 @@ This section describes the types of parameters and their usage. The parameter ty
 * enum
 * executor
 * steps
+* environment variable name
 
 #### String
 {:.no_toc}
@@ -424,49 +425,33 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 
 Capitalized and uppercase versions of the above values are also valid.
 
-#### Steps
+#### Integer
 {:.no_toc}
 
-Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
+The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
-commands:
-  run-tests:
-    parameters:
-      after-deps:
-        description: "Steps that will be executed after dependencies are installed, but before tests are run"
-        type: steps
-        default: []
-    steps:
-    - run: make deps
-    - steps: << parameters.after-deps >>
-    - run: make test
-```
+version: "2.1"
 
-The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
-
-```yaml
 jobs:
   build:
+    parameters:
+      p:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
     machine: true
     steps:
-    - run-tests:
-        after-deps:
-          - run: echo "The dependencies are installed"
-          - run: echo "And now I'm going to run the tests"
+      - checkout
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          p: 2
 ```
 
-The above will resolve to the following:
-
-```yaml
-steps:
-  - run: make deps
-  - run: echo "The dependencies are installed"
-  - run: echo "And now I'm going to run the tests"
-  - run: make test
-```
-
-#### Enum Parameter
+#### Enum
 {:.no_toc}
 
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
@@ -484,7 +469,11 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-```yaml
+```
+
+{% raw %}
+
+yaml
 commands:
   list-files:
     parameters:
@@ -492,14 +481,21 @@ commands:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
-```
-#### Executor parameter
+ 
+ {% endraw %}
+ 
+ ```
+
+#### Executor
 {:.no_toc}
 
 Use an `executor` parameter type to allow the invoker of a job to decide what
 executor it will run on.
 
-```yaml
+```
+{% raw %}
+
+yaml
 version: 2.1
 executors:
   xenial:
@@ -533,31 +529,123 @@ workflows:
           e:
             name: xenial
             some-value: foobar
+
+{% endraw %}
 ```
-#### Integer Parameter
+
+#### Steps
 {:.no_toc}
 
-The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
+Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
-```yaml
-version: "2.1"
+```
+{% raw %}
 
+yaml
+commands:
+  run-tests:
+    parameters:
+      after-deps:
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
+        type: steps
+        default: []
+    steps:
+    - run: make deps
+    - steps: << parameters.after-deps >>
+    - run: make test
+
+{% endraw %}
+
+```
+
+The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
+
+```
+{% raw %}
+
+yaml
 jobs:
   build:
-    parameters:
-      p:
-        type: integer
-        default: 1
-    parallelism: << parameters.p >>
     machine: true
     steps:
-      - checkout
+    - run-tests:
+        after-deps:
+          - run: echo "The dependencies are installed"
+          - run: echo "And now I'm going to run the tests"
 
+{% endraw %}
+
+```
+
+The above will resolve to the following:
+
+```
+{% raw %}
+
+yaml
+steps:
+  - run: make deps
+  - run: echo "The dependencies are installed"
+  - run: echo "And now I'm going to run the tests"
+  - run: make test
+
+{% endraw %}
+
+```
+#### Environment Variable Name
+
+The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
+
+```
+{% raw %}
+
+version: 2
+jobs:
+  build:
+    docker:
+    - image: ubuntu:latest
+    steps:
+    - run:
+        command: |
+          s3cmd --access_key ${FOO_BAR} \
+                --secret_key ${BIN_BAZ} \
+                ls s3://some/where
 workflows:
   workflow:
     jobs:
-      - build:
-          p: 2
+    - build
+  version: 2
+
+ Original config.yml file:
+ version: 2.1
+ jobs:
+   build:
+     parameters:
+       access-key:
+         type: env_var_name
+         default: AWS_ACCESS_KEY
+       secret-key:
+         type: env_var_name
+         default: AWS_SECRET_KEY
+       command:
+         type: string
+     docker:
+       - image: ubuntu:latest
+     steps:
+       - run: |
+           s3cmd --access_key ${<< parameters.access-key >>} \\
+                 --secret_key ${<< parameters.secret-key >>} \\
+                 << parameters.command >>
+ workflows:
+   workflow:
+     jobs:
+       - build:
+           access-key: FOO_BAR
+           secret-key: BIN_BAZ
+           command: ls s3://some/where
+
+{% endraw %}
+
 ```
 
 ## Authoring Parameterized Jobs
@@ -566,7 +654,10 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
-```yaml
+```
+{% raw %}
+
+yaml
 version: 2.1
 
 jobs:
@@ -586,10 +677,12 @@ workflows:
     jobs:
       - sayhello: # invokes the parameterized job
           saywhat: Everyone
+
+{% endraw %}
+
 ```
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
-
 
 ### Jobs Defined in an Orb
 
@@ -630,7 +723,6 @@ workflows:
       - hello-orb/sayhello:
           saywhat: Everyone
 ```
-
 
 ### Using Parameters in Executors
 {:.no_toc}
@@ -719,7 +811,6 @@ workflows:
           saywhat: Everyone
 ```
 
-
 ### Invoking the Same Job Multiple Times
 {:.no_toc}
 
@@ -801,7 +892,7 @@ For example, an orb could define a command that runs a set of steps *if* invoked
 
 
 These conditions are checked before a workflow is actually run. That
-means, for example, that a you cannot use a condition to check an environment
+means, for example, that you cannot use a condition to check an environment
 variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
@@ -848,6 +939,3 @@ workflows:
 ```
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
-
-
-
