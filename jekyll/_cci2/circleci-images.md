@@ -231,7 +231,7 @@ The following packages are installed via `curl` or other means.
 
 - [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
-- [dockerize](https://github.com/jwilder/dockerize)
+- [dockerize](https://github.com/powerman/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
 ## Latest Image Tags by Language

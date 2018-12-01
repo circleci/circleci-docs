@@ -251,7 +251,7 @@ steps:
 ```
 {% endraw %}
 
-The next section sets up the test database. It uses the `dockerize` [utility](https://github.com/jwilder/dockerize) to delay starting the main process of the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) until after the database service is available.
+The next section sets up the test database. It uses the `dockerize` [utility](https://github.com/powerman/dockerize) to delay starting the main process of the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) until after the database service is available.
 
 ```yaml
 steps:

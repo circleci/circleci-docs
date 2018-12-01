@@ -121,9 +121,9 @@ jobs:
       - checkout
       - run:
           name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          command: curl -sfL https://github.com/powerman/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-`uname -s`-`uname -m` | install /dev/stdin /usr/local/bin/dockerize
           environment:
-            DOCKERIZE_VERSION: v0.3.0
+            DOCKERIZE_VERSION: v0.10.0
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m

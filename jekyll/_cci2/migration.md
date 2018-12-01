@@ -123,7 +123,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Building custom images with everything pre-installed speeds up the build and adds reliability
 	- This prevents a situation wherein Heroku (for example) pushes a bad update to their installer that breaks your builds
 - The `dockerize` utility can be used to wait for service containers to be available before running tests
-	- https://github.com/jwilder/dockerize
+	- https://github.com/powerman/dockerize
 - ElasticSearch has their own Docker registry from which to pull
 	- https://www.docker.elastic.co/
 - Containers can have names. So, multiple containers of a given service can run on the same port with different hostnames.
