@@ -11,7 +11,7 @@ published: true
 
 #### ビルドコンテナの現在の状況を監視することはできますか？
 
-可能です。詳しくは [Nomad クラスタの運用方法]({{site.baseurl}}/2.0/nomad/)を参照してください。 また、AWS で稼働している場合の追加コンテナの監視方法については、[サーバー設定、オートスケール、監視]({{site.baseurl}}/2.0/monitoring/)のページをお読みください。
+Yes, refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details. また、AWS で稼働している場合の追加コンテナの監視方法については、[サーバー設定、オートスケール、監視]({{site.baseurl}}/2.0/monitoring/)のページをお読みください。
 
 #### 管理者ユーザーの追加方法を教えてください。
 
@@ -42,7 +42,7 @@ SSH で Nomad クライアントのサービスボックスにアクセスし、
 
 #### Nomad クライアントを安全にシャットダウンさせるには？
 
-[Nomad クラスタの運用方法]({{site.baseurl}}/2.0/nomad/) をお読みください。
+Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details.
 
 #### CircleCI では iOS/macOS アプリケーションのビルドは可能ですか？
 
@@ -126,7 +126,7 @@ Replicated 実行時には、CircleCI Enterprise を動作させるため多数�
 
 コマンドの出力内容は例えば下記のようになります。
 
-     sudo docker ps
+    $ sudo docker ps
     CONTAINER ID        IMAGE                                                    COMMAND                  CREATED             STATUS              PORTS                                                              NAMES
     03fb873adf26        <service-box-ip>:9874/circleci-frontend:0.1.149242-d650d3c   "/docker-entrypoint.s"   3 days ago          Up 3 days           0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:4434->4434/tcp   e53e4f74259a6ec0a268d8c984ac6277
     113b9ea03b46        <service-box-ip>:9874/circleci-slanger:0.4                   "/docker-entrypoint.s"   3 days ago          Up 3 days           0.0.0.0:4567->4567/tcp, 0.0.0.0:8081->8080/tcp                     d262cc492bd5d692d467f74d8cc39748
