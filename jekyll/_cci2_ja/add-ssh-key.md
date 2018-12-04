@@ -33,7 +33,7 @@ CircleCI に SSH 公開鍵を登録する必要があるケースは、以下の
 
 **注**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。また、CircleCI は OpenSSH のデフォルトフォーマットをサポートしていません。
 
-OpenSSH と使う場合は `ssh-keygen -m pem` コマンドで鍵を生成するようにしてください。
+OpenSSH を使う場合は `ssh-keygen -m pem` コマンドで鍵を生成するようにしてください。
 
 ## 高度な設定
 
@@ -55,5 +55,5 @@ jobs:
 
 ## 関連情報
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
 
