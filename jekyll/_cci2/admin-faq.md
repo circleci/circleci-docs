@@ -12,7 +12,7 @@ published: true
 
 #### Can I monitor available build containers?
 
-Yes, refer to the Introduction to Nomad Cluster Operation document for details. Refer to the [Administrative Variables, Monitoring, and Logging]({{site.baseurl}}/2.0/monitoring/) document for how to enable additional container monitoring for AWS.
+Yes, refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details. Refer to the [Administrative Variables, Monitoring, and Logging]({{site.baseurl}}/2.0/monitoring/) document for how to enable additional container monitoring for AWS.
 
 #### How do I provision admin users?
 
@@ -45,7 +45,7 @@ New Nomad Clients joining the fleet will use the new passphrase. Existing Nomad 
 
 #### How can I gracefully shutdown a Nomad Clients?
 
-Refer to the Introduction to Nomad Cluster Operation document for details.
+Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details.
 
 #### Is it possible to run iOS/macOS builds on CircleCI?
 
@@ -66,7 +66,7 @@ We set the services box to have termination protection in AWS. We also write to 
 
 #### Do the builders store any state?
 
-They can be torn down without worry as they don't persist any data. 
+They can be torn down without worry as they don't persist any data.
 
 
 #### How do I verify TLS settings are failing?
@@ -137,7 +137,7 @@ Replicated starts many Docker containers to run CCIE, so it may be useful to che
 You should see something similar to this output:
 
 ```
- sudo docker ps
+$ sudo docker ps
 CONTAINER ID        IMAGE                                                    COMMAND                  CREATED             STATUS              PORTS                                                              NAMES
 03fb873adf26        <service-box-ip>:9874/circleci-frontend:0.1.149242-d650d3c   "/docker-entrypoint.s"   3 days ago          Up 3 days           0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:4434->4434/tcp   e53e4f74259a6ec0a268d8c984ac6277
 113b9ea03b46        <service-box-ip>:9874/circleci-slanger:0.4                   "/docker-entrypoint.s"   3 days ago          Up 3 days           0.0.0.0:4567->4567/tcp, 0.0.0.0:8081->8080/tcp                     d262cc492bd5d692d467f74d8cc39748
