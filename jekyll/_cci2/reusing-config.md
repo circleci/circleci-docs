@@ -560,10 +560,8 @@ commands:
 
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
-```
+```yaml
 {% raw %}
-
-yaml
 jobs:
   build:
     machine: true
@@ -579,10 +577,8 @@ jobs:
 
 The above will resolve to the following:
 
-```
+```yaml
 {% raw %}
-
-yaml
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
@@ -596,7 +592,7 @@ steps:
 
 The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
-```
+```yaml
 {% raw %}
 
 version: 2
@@ -654,10 +650,8 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
-```
+```yaml
 {% raw %}
-
-yaml
 version: 2.1
 
 jobs:
@@ -678,7 +672,7 @@ workflows:
       - sayhello: # invokes the parameterized job
           saywhat: Everyone
 
-{% endraw %}
+{% endraw %}d
 
 ```
 
