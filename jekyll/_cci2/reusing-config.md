@@ -36,6 +36,7 @@ A reusable command may have the following immediate children keys as a map:
 
 Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
 
+{% raw %}
 ```yaml
 commands:
   sayhello:
@@ -58,6 +59,7 @@ Reusable commands are invoked with specific parameters as steps inside a job. Wh
 
 The following example invokes the command `sayhello` and passes it a parameter `to`:
 
+{% raw %}
 ```yaml
 jobs:
   myjob:
@@ -94,6 +96,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 The following is a an example of part of an `aws-s3` orb defining a command called `sync`:
 
+{% raw %}
 ```yaml
 # aws-s3 orb
 commands:
@@ -117,6 +120,7 @@ commands:
 
 Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file as:
 
+{% raw %}
 ```yaml
 version: 2.1
 
@@ -137,6 +141,7 @@ workflows:
 
 Defining a `build` job:
 
+{% raw %}
 ```yaml
 version: 2.1
 orbs:
@@ -175,6 +180,7 @@ An executor definition includes one or more of the following keys:
 
 In the following example `my-executor` is passed as the single value of the key `executor`. 
 
+{% raw %}
 ```yaml
 version: 2.1
 executors:
@@ -197,6 +203,7 @@ jobs:
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
+{% raw %}
 ```yaml
 jobs:
   my-job:
@@ -216,6 +223,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment. 
 
+{% raw %}
 ```yaml
 version: 2.1
 executors:
@@ -247,6 +255,7 @@ jobs:
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
+{% raw %}
 ```yaml
 # yaml from foo-orb
 executors:
@@ -269,6 +278,7 @@ executors:
 
 You may use either executor from your configuration file with:
 
+{% raw %}
 ```yaml
 # config.yml
 orbs:
@@ -293,6 +303,7 @@ When invoking an executor in a `job` any keys in the job itself will override th
 
 **Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
+{% raw %}
 ```yaml
 executors:
   python:
@@ -340,6 +351,7 @@ Parameters are declared by name under a job, command, or executor. The immediate
 
 The following example defines a command called `sync`:
 
+{% raw %}
 ```yaml
 commands: # a reusable command with parameters
   sync:
@@ -401,6 +413,7 @@ This section describes the types of parameters and their usage. The parameter ty
 
 Basic string parameters are described below:
 
+{% raw %}
 ```yaml
 commands:
   copy-markdown:
@@ -421,6 +434,7 @@ Strings should be quoted if they would otherwise represent another type (such as
 
 Boolean parameters are useful for conditionals:
 
+{% raw %}
 ```yaml
 commands:
   list-files:
@@ -446,6 +460,7 @@ Capitalized and uppercase versions of the above values are also valid.
 
 The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
 
+{% raw %}
 ```yaml
 version: "2.1"
 
@@ -473,6 +488,7 @@ workflows:
 
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
+{% raw %}
 ```yaml
 commands:
   list-files:
