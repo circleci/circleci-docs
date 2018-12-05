@@ -79,19 +79,22 @@ After saving you can *verify* that metrics are forwarding by going to the DataDo
 
 Custom Metrics via Telegraf configuration file is an alternative to the predefined CloudWatch and Datadog metric sections above. It can also be used instead of those sections for more fine grained control.
 
+![Custom](  {{ site.baseurl }}/assets/img/docs/metrics-custom.png)
+
 ##### Configuration
 
 Configuration options are based on Telegraf's documented output plugins. See their documentation [here](https://github.com/influxdata/telegraf#output-plugins).
 
 For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps;
 1. SSH into the Servics Machine
-2. cd `/etc/circleconfig/telegraf/influxdb.conf
-3. Adding the desired ouputs, e.g. ```
+2. cd `/etc/circleconfig/telegraf/influxdb.conf`
+3. Adding the desired ouputs, for example
+```
 [[output.influxdb]]
   url = "http://52.67.66.155:8086"
   database = "testdb"
-'''
-4. `docker restart telegraf` to restart the container to load or reload any changes.
+```
+4. Run `docker restart telegraf` to restart the container to load or reload any changes.
 
 You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs.
 
