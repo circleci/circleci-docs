@@ -29,7 +29,7 @@ breaking changes.
 ## Sample Configuration
 
 {% raw %}
-```
+```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of jobs
   build: 
@@ -39,6 +39,7 @@ jobs: # a collection of jobs
     steps: # a collection of executable steps
       - checkout # checks out source code to working directory
       - restore_cache: # Restore dependency cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
           name: Install dependencies.
