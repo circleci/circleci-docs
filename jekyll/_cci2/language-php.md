@@ -37,12 +37,12 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ---
 
-## Config Walkthrough
+## Sample Configuration
 
-Following is the commented the `.circleci/config.yml` file in the demo project.
+Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
-```
+```yaml
 version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
@@ -82,6 +82,80 @@ jobs: # a collection of steps
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
+
+## Config Walkthrough
+
+We always start with the version of CircleCI to use.
+
+```yaml
+version: 2
+```
+
+Next, we have a `jobs:` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
+
+We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes
+browser tooling.
+
+In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers 
+    working_directory: ~/laravel 
+```
+
+Next, we'll run a series of commands under the `steps:` key. Below we install
+some PHP tooling allowing up to manage our dependencies.
+
+```yaml
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
+      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
+      - run: sudo docker-php-ext-install zip
+      - run: sudo composer self-update
+```
+
+Before installing our dependencies, we can check if there is a cache to restore
+the dependencies from. The cache key will be based on a checksum of the
+`composer.lock` file, but will fall back to using a more generic cache key. 
+
+The next set of steps for the config are all related to dependency management
+and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
+
+{% raw %}
+```yaml
+      - restore_cache: 
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache: 
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: yarn install
+      - save_cache: 
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+```
+{% endraw %}
+
+Finally, we will set up a test database with Sqlite, run migrations and run tests.
+
+```yaml
+      - run: touch storage/testing.sqlite 
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: ./vendor/bin/codecept build
+      - run: ./vendor/bin/codecept run
+```
 
 ---
 
