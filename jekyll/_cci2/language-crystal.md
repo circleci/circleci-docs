@@ -22,7 +22,7 @@ target="_blank">Demo Crystal Project on Github</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 
-The application uses Crystal 0.26 and Kemal 0.24. Both Crystal and Kemal are
+The application uses Crystal 0.27 and Kemal 0.25. Both Crystal and Kemal are
 developing quickly. Altering the Docker image to the `:latest` version may cause
 breaking changes.
 
@@ -35,7 +35,7 @@ jobs: # a collection of jobs
   build: 
     working_directory: ~/demo_app
     docker: # run build steps with docker
-      - image: crystallang/crystal:0.26.0 # primary docker container; all `steps` will run here.
+      - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
     steps: # a collection of executable steps
       - checkout # checks out source code to working directory
       - restore_cache: # Restore dependency cache
@@ -54,6 +54,58 @@ jobs: # a collection of jobs
 # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
+
+## Config Walkthrough
+
+We always start with the version of CircleCI to use.
+
+```yaml
+version: 2
+```
+
+Next, we have the `jobs:` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
+
+We use the [official Crystal Docker
+image](https://hub.docker.com/r/crystallang/crystal/) as our primary container.
+
+In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+
+```yaml
+jobs:
+  build: 
+    working_directory: ~/demo_app
+    docker:
+      - image: crystallang/crystal:0.27.0
+```
+
+Next, we'll run a series of commands under the `steps:` key. First we'll try to
+restore the cache by checking if anything has changed in the `shard.lock` file.
+Then we'll proceed to install dependencies and save the cache if necessary.
+
+{% raw %}
+```yaml
+    steps: #
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "shard.lock" }}
+      - run:
+          name: Install dependencies.
+          command: shards install
+      - save_cache:
+          key: dependency-cache-{{ checksum "shard.lock" }}
+          paths:
+            - ./lib
+```
+
+{% endraw %}
+
+Finally, we run `crystal spec` to run the project's test suite.
+
+```yaml
+      - run:
+          name: test
+          command: crystal spec
+```
 
 Great! You've set up CircleCI 2.0 for a basic Crystal application.
 

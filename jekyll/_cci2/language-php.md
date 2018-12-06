@@ -110,13 +110,15 @@ jobs:
 Next, we'll run a series of commands under the `steps:` key. Below we install
 some PHP tooling allowing up to manage our dependencies.
 
+{% raw %}
 ```yaml
-    steps: # a set of executable commands
-      - checkout # special step to check out source code to working directory
+    steps:
+      - checkout
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
 ```
+{% endraw %}
 
 Before installing our dependencies, we can check if there is a cache to restore
 the dependencies from. The cache key will be based on a checksum of the
