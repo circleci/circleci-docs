@@ -111,7 +111,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run: |
-          echo $GCLOUD_SERVICE_KEY | base64 --decode | sudo gcloud auth activate-service-account --key-file=-
+          echo $GCLOUD_SERVICE_KEY | sudo gcloud auth activate-service-account --key-file=-
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
