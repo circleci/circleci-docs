@@ -26,7 +26,7 @@ jobs:
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の \[primary container\]\[primary-container\] がそのリモート環境用に構成されます。 その後は、Docker に関連するコマンドはすべて、この新しい環境で安全に実行されるようになります。
 
-**※**`setup_remote_docker` は、現在のところ `machine` および `macos` Executor とは一緒に使えません。
+**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor *is* a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
 
 ### 仕様
 
