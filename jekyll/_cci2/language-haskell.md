@@ -38,6 +38,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           name: Restore Cached Dependencies
           keys:
             - cci-demo-haskell-v1-{{ checksum "package.yaml" }}
@@ -55,7 +56,8 @@ jobs:
           key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
           paths:
             - ".stack-work"
-      - store_artifacts: # upload build artifact for display in CircleCI
+      - store_artifacts:
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -83,7 +85,7 @@ jobs:
       - image: fpco/stack-build:lts
 ```
 
-We are now set to run the Haskell buidl tool `stack` in our environment. The remainder of our
+We are now set to run the Haskell build tool `stack` in our environment. The remainder of our
 `config.yml` file all falls under the `steps` key.
 
 Our first step is to run `checkout` to pull our repository's code down and set
