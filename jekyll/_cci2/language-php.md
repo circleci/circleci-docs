@@ -85,18 +85,26 @@ jobs: # a collection of steps
 
 ## Config Walkthrough
 
-We always start with the version of CircleCI to use.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
 ```
 
-Next, we have a `jobs:` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
 
-We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes
-browser tooling.
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
+it must have a `build` job.
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
+to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+
+In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
+to specify a custom Docker image. We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes browser tooling.
 
 ```yaml
 version: 2
@@ -120,12 +128,16 @@ some PHP tooling allowing up to manage our dependencies.
 ```
 {% endraw %}
 
-Before installing our dependencies, we can check if there is a cache to restore
-the dependencies from. The cache key will be based on a checksum of the
-`composer.lock` file, but will fall back to using a more generic cache key. 
-
 The next set of steps for the config are all related to dependency management
 and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
+
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
+to cache certain files or directories. In this example, the cache key will be based on a checksum of the
+`composer.lock` file, but will fall back to using a more generic cache key. 
+
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
+to restore cached files or directories.
+
 
 {% raw %}
 ```yaml
