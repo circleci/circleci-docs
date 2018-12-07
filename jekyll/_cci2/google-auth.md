@@ -95,7 +95,7 @@ jobs:
       - image: gcr.io/project/<image-name>
         auth:
           username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # JSON service account you created
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
 
 ### Authorizing the Google Cloud SDK
