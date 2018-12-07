@@ -29,7 +29,7 @@ algolia:
       'headings',
       'title'
     ]
-    
+
 sass:
   sass_dir: _sass
 
@@ -80,6 +80,13 @@ collections:
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
+  cci2_ja:
+    name: "2.0 Docs"
+    site_section: true
+    output: true
+    permalink: /ja/2.0/:path/
+    prefix: "/ja/2.0"
+    selectorName: "2.0"
 
 twitter_username: circleci
 github_username: circleci
@@ -88,9 +95,27 @@ defaults:
   -
     scope:
       path: ""
+      type: "cci2"
+    values:
+      lang: "en"
+
+  -
+    scope:
+      path: ""
+      type: "cci2_ja"
+    values:
+      lang: "ja"
+
+  -
+    scope:
+      path: ""
     values:
       hide: false
       search: true
+
+t:
+    translation_in_progress:
+        ja: "このページはただいま翻訳中です"
 
 segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
 
