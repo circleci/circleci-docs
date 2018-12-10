@@ -1,17 +1,17 @@
 ---
 layout: classic-docs
-title: "Using Environment Variables"
-short-title: "Using Environment Variables"
-description: "A list of supported environment variables in CircleCI 2.0"
+title: "環境変数の使い方"
+short-title: "環境変数の使い方"
+description: "CircleCI 2.0 で利用可能な環境変数一覧"
 categories:
   - configuring-jobs
 order: 40
 ---
-This document describes using environment variables in CircleCI in the following sections:
+このページでは CircleCI で利用可能な環境変数の使い方について、下記の内容に沿って解説しています。
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## はじめに
 
 {:.no_toc}
 
@@ -29,7 +29,7 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
 3. [ jobs](#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの。
 4. [コンテナ](#setting-an-environment-variable-in-a-container)において `environment` キーで定義したもの。
-5. Context environment variables (assuming the user has access to the Context). See the [Contexts]({{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+5. コンテキスト環境変数 (コンテキストを利用している場合)。詳細は[コンテキスト]({{ site.baseurl }}/2.0/contexts/)を参照。
 6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
 7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
@@ -163,13 +163,13 @@ jobs:
 
 ## プロジェクト内で環境変数を設定する
 
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします。
 
-2. In the **Build Settings** section, click on **Environment Variables**.
+2. **BUILD SETTINGS** セクションの **Environment Variables** をクリックします。
 
 3. **Import Variables** ボタンをクリックすると他のプロジェクトで定義している変数をインポートできます。 また、**Add Variable** ボタンをクリックすると変数を手動で新規追加できます。 (**注：****Import Variables** ボタンは、プライベートクラウドやデータセンターにインストールした CircleCI では現在利用できません。)
 
-4. Use your new environment variables in your `.circleci/config.yml` file. For an example, see the [Heroku deploy walkthrough]({{ site.baseurl }}/2.0/deployment-integrations/#heroku).
+4. `.circleci/config.yml` に新しい環境変数を追加します。 詳しくは [Heroku のデプロイ手順]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)を参照してください。
 
 環境変数を作ると CircleCI の設定ページ上では変数値が伏せ字になり、書き換えることはできません。環境変数の値を変更するには、いったん削除してから改めて作成してください。
 
@@ -204,9 +204,9 @@ Login Succeeded
 
 ビルドパラメータは環境変数からなります。そのため、その環境変数名は下記の条件を満たしている必要があります。
 
-- They must contain only ASCII letters, digits and the underscore character.
-- They must not begin with a number.
-- They must contain at least one character.
+- 変数名に使えるのは ASCII 文字列、数字、アンダースコアのみです
+- 数字から始まる変数は使えません
+- 少なくとも 1 文字以上の変数でなければなりません
 
 環境変数における通常の制約の他に、変数値自体に注意すべきところはありません。単純な文字列として扱われるところも変わりありません。 ビルドパラメータが読み込まれる順序は保証**されない**ため、ビルドパラメータの 1 つを別のビルドパラメータに渡すようなインターポレーションは避けてください。 順不同の独立した環境変数リストとしてビルドパラメータを設定するのがおすすめです。
 
