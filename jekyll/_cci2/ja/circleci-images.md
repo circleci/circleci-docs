@@ -1,21 +1,21 @@
 ---
 layout: classic-docs
-title: "Pre-Built CircleCI Docker Images"
-short-title: "Pre-Built CircleCI Docker Images"
-description: "Listing of available images maintained by CircleCI"
+title: "CircleCI のビルド済み Docker イメージ"
+short-title: "CircleCI のビルド済み Docker イメージ"
+description: "CircleCI 提供の Docker イメージ一覧"
 categories:
   - containerization
 order: 20
 ---
-This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
+このページでは、CircleCI が提供しているビルド済みイメージの詳細を解説するとともに、言語ごと、サービス (データベース) ごと、タグごとに探せる Docker イメージを紹介しています。
 
-- TOC {:toc}
+- 目次 {:toc}
 
 ## はじめに
 
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の標準的な Docker イメージの拡張機能であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/). GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の標準的な Docker イメージの拡張機能であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/) には、ここで紹介しているものを含む全ビルド済みイメージがあります。 GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
 
 ***※**CircleCI まれに不具合修正や機能改善を目的とした Docker イメージの更新を行います。この更新が CircleCI のジョブにおけるイメージの動作に多少の影響を与えることがあります。 このようなメンテナンススケジュールについてあらかじめ把握しておくには、[**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) をチェックしてください。*
 
