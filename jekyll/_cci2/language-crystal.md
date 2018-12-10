@@ -57,18 +57,25 @@ jobs: # a collection of jobs
 
 ## Config Walkthrough
 
-We always start with the version of CircleCI to use.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
 ```
 
-Next, we have the `jobs:` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
+it must have a `build` job.
 
-We use the [official Crystal Docker
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
+to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+
+The steps of a job occur in a virtual environment called an [executor]({{
+site.baseurl }}/2.0/executor-types/). In this example, we use the [official Crystal Docker
 image](https://hub.docker.com/r/crystallang/crystal/) as our primary container.
-
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+All commands for a job execute in this container.
 
 ```yaml
 jobs:
@@ -78,9 +85,19 @@ jobs:
       - image: crystallang/crystal:0.27.0
 ```
 
-Next, we'll run a series of commands under the `steps:` key. First we'll try to
-restore the cache by checking if anything has changed in the `shard.lock` file.
-Then we'll proceed to install dependencies and save the cache if necessary.
+After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
+
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+
+To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
+
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
+to cache certain files or directories. In this example, the installed packages ("Shards") are cached.
+
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
+to restore cached files or directories. In this example, we use a checksum of
+the `shard.lock` file to determine if the dependency cache has changed.
 
 {% raw %}
 ```yaml
@@ -96,7 +113,6 @@ Then we'll proceed to install dependencies and save the cache if necessary.
           paths:
             - ./lib
 ```
-
 {% endraw %}
 
 Finally, we run `crystal spec` to run the project's test suite.

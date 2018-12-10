@@ -139,7 +139,8 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Start with the version.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
