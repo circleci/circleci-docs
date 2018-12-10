@@ -1,21 +1,21 @@
 ---
 layout: classic-docs
-title: よくある質問（サーバー管理者編）
+title: よくある質問 (サーバー管理者編)
 category:
   - administration
 order: 3
-description: "CircleCI サーバー管理者向けのよくある質問集"
+description: "CircleCI サーバー管理者向けのよくある質問"
 published: true
 ---
 - 目次 {:toc}
 
 #### ビルドコンテナの現在の状況を監視することはできますか？
 
-Yes, refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details. また、AWS で稼働している場合の追加コンテナの監視方法については、[サーバー設定、オートスケール、監視]({{site.baseurl}}/2.0/monitoring/)のページをお読みください。
+Yes, refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details. また、AWS で稼働している場合の追加コンテナの監視方法については、[サーバー設定、オートスケール、ログ監視]({{site.baseurl}}/2.0/monitoring/)のページをお読みください。
 
 #### 管理者ユーザーの追加方法を教えてください。
 
-CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の Users ページ（`https://[domain-to-your-installation]/admin/users`）で行えます。
+CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の Users ページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
 
 #### パスフレーズやプライベート IP アドレスを紛失してしまったときは？
 
@@ -32,9 +32,9 @@ SSH で Nomad クライアントのサービスボックスにアクセスし、
 
 #### パスフレーズの変更方法を教えてください。
 
-1. 管理コンソール（8800 番ポート）の設定ページ上でパスフレーズを変更する
+1. 管理コンソール (8800 番ポート) の設定ページ上でパスフレーズを変更します。
 
-2. CircleCI を再起動する
+2. CircleCI を再起動します。
 
 3. フリートに Nomad クライアントを登録するのに用いる `init` スクリプトを開き、そこにある `CIRCLE_SECRET_PASSPHRASE` を書き換えます
 
@@ -58,7 +58,7 @@ CircleCI は起動時に自己署名証明書を生成しますが、これは�
 
 #### リソースごとに terraform destroy しないのはなぜですか？
 
-CircleCI のサービスボックスでは、AWS のインスタンス終了保護機能（termination protection）を有効にしたうえで、 AWS S3 Bucket を使ってデータを書き込んでいます。 リソースごとに terraform destroy したいなら、手動でそのインスタンスを削除するか、circleci.tf ファイル内でインスタンス終了保護（termination protection）をオフに設定してください。 さらに、terraform install によって生成された AWS S3 Bucket を空にする必要もあります。
+CircleCI のサービスボックスでは、AWS のインスタンス削除保護機能 (termination protection) を有効にしたうえで、 AWS S3 Bucket を使ってデータを書き込んでいます。 リソースごとに terraform destroy したい場合は、手動でそのインスタンスを削除するか、circleci.tf ファイル内でインスタンス削除保護 (termination protection) をオフに設定してください。 さらに、terraform install によって生成された AWS S3 Bucket を空にする必要もあります。
 
 #### ビルド時に何らかのデータが保持されるようなことはありますか？
 
@@ -86,7 +86,7 @@ Replicated 使用時にトラブルが発生したとき、問題を検証する
 
 - Replicated が正しくインストールされていることを確認する
 
-まずは Replicated が間違いなくインストールされていることを以下のコマンドで確かめておいてください。
+まずは Replicated が間違いなくインストールされていることを以下のコマンドで確かめてください。
 
     replicated -version
     
@@ -100,11 +100,11 @@ Replicated 使用時にトラブルが発生したとき、問題を検証する
     sudo service replicated-operator restart
     
 
-その後、管理コンソール（https://CircleCI サーバーアドレス:8800）にアクセスし、「Stop Now」の後に「Start Now」を実行して CircleCI を再起動してください。
+その後、管理コンソール (https://CircleCI サーバーアドレス:8800) にアクセスし、「Stop Now」の後に「Start Now」を実行して CircleCI を再起動してください。
 
 - Replicated へのログインを試す
 
-Replicated にログインできるか確認してみてください。 サービスボックスで下記のコマンドを実行するとログインできます。 コマンド実行後に要求されるパスワードは、管理コンソール（https://CircleCI サーバーアドレス:8800）と同じものになります。
+Replicated にログインできるか確認してみてください。 サービスボックスで下記のコマンドを実行するとログインできます。 コマンド実行後に要求されるパスワードは、管理コンソール (https://CircleCI サーバーアドレス:8800) と同じものになります。
 
     replicated login
     
@@ -138,4 +138,4 @@ Replicated 実行時には、CircleCI Enterprise を動作させるため多数�
     796013f64732        <service-box-ip>:9874/redis:2.8.23                           "/entrypoint.sh redis"   3 days ago          Up 3 days           0.0.0.0:32773->6379/tcp                                            dce3519e7aff9a365bd3b42ed3a6f77f
     
 
-サービスボックスで実行した `sudo docker ps` コマンドの内容を当社までお送りいただければ、問題解決につながるかもしれません。
+解決できないときは、サービスボックスで実行した `sudo docker ps` コマンドの内容を当社までお送りください。問題解決につながるかもしれません。
