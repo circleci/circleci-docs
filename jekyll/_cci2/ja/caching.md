@@ -1,27 +1,27 @@
 ---
 layout: classic-docs
-title: "Caching Dependencies"
-short-title: "Caching Dependencies"
-description: "Caching Dependencies"
+title: "依存関係のキャッシュ"
+short-title: "依存関係のキャッシュ"
+description: "依存関係のキャッシュ"
 categories:
   - optimization
 order: 50
 ---
-Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
+キャッシュは、ジョブを高速化する手段として最も効果的な方法の 1 つです。CircleCI においては、高コストな処理が必要なデータを過去のジョブから再利用することが可能になっています。
 
 - 目次 {:toc}
 
 初回のジョブを実行すると、その後のジョブインスタンスでは前回と同じ処理が不要になるため、その分高速化される仕組みです。
 
-![caching data flow]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
+![データフローのキャッシュ]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
 
-A good example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload everything on every build.
+わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を読み込むことで、複数のモジュールからなるパッケージであっても、`yarn install` などのコマンドは新たに必要になった依存ファイルのみダウンロードするだけでよくなります。
 
-## Example Caching Configuration
+## キャッシュ設定の例
 
 {:.no_toc}
 
-Caching keys are simple to configure. The following example updates a cache if it changes by using checksum of `pom.xml` with a cascading fallback:
+キャッシュを利用する際のキー設定は簡単です。下記の例では、`pom.xml` ファイルの内容が書き換えられ、そのチェックサムが変わった時にキャッシュを更新します。
 
 {% raw %}
 
@@ -30,7 +30,7 @@ Caching keys are simple to configure. The following example updates a cache if i
       - restore_cache:
          keys:
            - m2-{{ checksum "pom.xml" }}
-           - m2- # used if checksum fails
+           - m2- # チェックサムが変わった時はこちらが使われる
 ```
 
 {% endraw %}
@@ -39,31 +39,33 @@ Caching keys are simple to configure. The following example updates a cache if i
 
 {:.no_toc}
 
-Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control.
+CircleCI 2.0 では依存関係のキャッシュの自動化には対応していません。ビルドの高速化を狙ってキャッシュの積極利用を図ろうとしているときは注意が必要です。 ただし、CicleCI 2.0 ではより優れたキャッシュ活用を手動設定で実現できます。
 
-This document describes the manual caching available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching. **Note:** The Docker images used for CircleCI 2.0 job runs are automatically cached on the server infrastructure where possible.
+ここでは、そのメリットとデメリットも含め、正しく利用するためのキャッシュの手動設定の仕方について説明しています。   
+**注：**CircleCI 2.0 のジョブ実行に使われる Docker イメージは、サーバーインフラ上で自動的にキャッシュされる場合があります。
 
-For information about enabling a premium feature to reuse the unchanged layers of your Docker image, see the [Enabling Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
+Docker イメージの未変更レイヤー部分を再利用する有償のキャッシュ機能については、[Docker レイヤーキャッシュの利用]({{ site.baseurl }}/2.0/docker-layer-caching/)をご覧ください。
 
 ## 概要
 
 {:.no_toc}
 
-A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but in the case of a cache miss or zero cache restore the job will still run successfully, for example, by caching Npm, Gem, or Maven package directories.
+キャッシュはキーで指定したファイル群の階層構造を保存するものです。 ジョブを高速化するためのデータを保存するのがキャッシュの目的です。ただし、Npm や Gem、Maven といった依存関係管理ツールのパッケージディレクトリをキャッシュするときのように、キャッシュミスやキャッシュを一から作り直す場合のジョブも問題なく実行されます。
 
-Caching is a balance between reliability (not using an out-of-date or inappropriate cache) and getting maximum performance (using a full cache for every build).
+キャッシュは信頼性をとるか (期限切れ、もしくは不正なキャッシュのときは使用しない)、あるいは最大のパフォーマンスを得るか (ビルド時に毎回キャッシュをフルで使う) という、安全と性能のトレードオフを考慮して設定します。
 
-In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability.
+通常は、高速化と引き換えに古い依存関係を残したまま不確実なビルドになる危険を犯すよりも、信頼性を担保できる設定にするのが無難とされます。 そのため理想としては、高い信頼性を維持しながらパフォーマンスを高められるバランスの良い設定を目指します。
 
-## Caching Libraries
+## ライブラリのキャッシュ
 
-The dependencies that are most important to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and demo projects for the specifics for your stack: <https://circleci.com/docs/2.0/demo-apps/>.
+ジョブ処理における依存関係でキャッシュが最も効果的に働くのは、プロジェクトで使われているライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 自身のプロジェクトや環境に応じた詳しい情報については、下記の開発言語ごとのガイドマニュアルとデモプロジェクトをご覧ください。  
+<https://circleci.com/docs/2.0/demo-apps/>
 
-Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) pre-built by CircleCI have tools preinstalled that are generic for building projects using the language the image is focused on. For example the `circleci/ruby:2.4.1` image has useful tools like git, openssh-client, and gzip preinstalled.
+現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI があらかじめ用意しているビルド済み Docker イメージには、そのプロジェクトで使われている開発言語に合わせて一般的に必要となるツールが含まれています。 たとえば、`circleci/ruby:2.4.1` というビルド済みイメージには git、openssh-client、gzip がプリインストールされています。
 
-## Source Caching
+## ソースコードのキャッシュ
 
-As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git repository, thus saving time in your `checkout` step—especially for larger projects. Here is an example of source caching:
+git リポジトリのキャッシュは、あらゆる場面でメリットが得られます。特にプロジェクトが大規模なほど `checkout` ステップの処理時間の短縮に効果を発揮します。 ソースコードのキャッシュ方法は下記を参考にしてください。
 
 {% raw %}
 
@@ -87,31 +89,31 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
 
 上記の `restore_cache` の例では、最初に現在の git のリビジョンから該当するキャッシュを見つけようとします。なければ現在のブランチ全体から探し、それでも見つからなければブランチやリビジョンにかかわらず全体からキャッシュを見つける、という動きになります。 `keys` のなかに複数のリストがある場合、CircleCI はそのなかから最初にマッチしたものについて復元します。 該当するキャッシュが複数ある場合は、一番新しいキャッシュを使用します。
 
-If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
+ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
+`restore_cache` で（{% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %} のように）狭い範囲を指定したときでも、ソースコードのキャッシュはかなり有効に働きます。例えば ([API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build) を用いるなどして) 同一の git リビジョンでビルドを繰り返す場合、もしくは Workflow 内のジョブごとにリポジトリを一度だけ `checkout` する Workflow を使う場合です。
 
-That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
+とはいえ、ソースコードのキャッシュの有無によってビルド速度が向上するかどうかは検証した方が良い場合もあります。例えば `restore_cache` するより `git clone` を実行する方が高速な場合も多々あります。
 
 **NOTE**: The built-in `checkout` command disables git's automatic garbage collection. You might choose to manually run `git gc` in a `run` step prior to running `save_cache` to reduce the size of the saved cache.
 
-## Writing to the Cache in Workflows
+## Workflow におけるキャッシュの指定方法
 
-Jobs in one workflow can share caches. Note that this makes it possibile to create race conditions in caching across different jobs in workflows.
+Workflow では、ジョブ間でキャッシュを共有することができます。異なる複数のジョブにまたがったキャッシュによって、いわゆるレースコンディションが発生しうる可能性があることに注意してください。
 
-Cache is immutable on write: once a cache is written for a particular key like `node-cache-master`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3. They all read and write to the same cache key.
+キャッシュは書き換え不可です。`node-cache-master` のような特殊なキーに対してキャッシュが一度書き込まれると、さらに書き込むことはできません。 仮に、並列動作するジョブ 1 とジョブ 2 に依存する ジョブ 3 がある、という構成の Workflow ({Job1, Job2} -> Job3) を想定したとき、 それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
 
-In a run of the workflow, Job3 may use the cache written by Job1 or Job2. Since caches are immutable, this would be whichever job saved its cache first. This is usually undesireable because the results aren't deterministic--part of the result depends on chance. You could make this workflow deterministic by changing the job dependencies: make Job1 and Job2 write to different caches and Job3 loads from only one, or ensure there can be only one ordering: Job1 -> Job2 ->Job3.
+Workflow の実行中は、最後の ジョブ 3 はジョブ 1 もしくはジョブ 2 のどちらかが書き込んだキャッシュを使用します。 ただし、キャッシュは書き換え不可のため、ジョブ 1 とジョブ 2 のどちらかが最初に書き込んだキャッシュを使うことになります。 これは通常期待される動作ではありません。実行時に最初に書き込むのがジョブ 1 になるか、ジョブ 2 になるかがその時々で変わり、一意の結果が得られなくなるためです。 しかしながら、ジョブの依存関係を工夫することで Workflow の結果の一意性を担保することが可能です。ジョブ 1 とジョブ 2 それぞれが異なるキャッシュに書き込み、ジョブ 3 がそのどちらか一方のキャッシュを読み込むようにする、というのが 1 つ。あるいは、ジョブ 1 → ジョブ 2 → ジョブ 3 と、依存関係が 1 対 1 になるように順序を整理する方法もあります。
 
-さらに複雑なケースもあります。{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような可変キーで保存し、`node-cache-` のような部分マッチのキーで復元する場合です。 The possibility for a race condition still exists, but the details may change. For instance, the downstream job uses the cache from the upstream job to run last.
+さらに複雑なケースもあります。{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような可変キーで保存し、`node-cache-` のような部分マッチのキーで復元する場合です。 レースコンディションが発生する可能性はあるものの、そうならない場合もあります。 例えば、後の方で実行されるジョブが、継続実行しているジョブのキャッシュを使うようなケースもあります。
 
-Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2. Job2 uses the cache saved from Job1. Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it. Job2 could also load a cache from a previous workflow. If this happens, this means Job2 tried to load the cache before Job1 saved it. This can be resolved by creating a workflow dependency: Job1 -> Job2. This would force Job2 to wait until Job1 has finished running.
+ジョブ間で共有するキャッシュでレースコンディションが発生することもあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなる Workflow を考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使うこととします。 ジョブ 1 がキャッシュを保存していても、ジョブ 2 はそのキャッシュを復元することもあれば、キャッシュがないことを検出することもあります。 ジョブ 2 はさらに直前の Workflow からキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 これを解決するには、ジョブ 1 → ジョブ 2 という関係性の依存 Workflow を作成する方法が挙げられます。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
 
-## Restoring Cache
+## キャッシュの復元
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. キャッシュキーはプロジェクトに名前空間をもち、検索時は文字列の前方一致となります。 The cache will be restored from the first matching key. 該当するキャッシュが複数ある場合は、一番新しいキャッシュを使用します。
+CircleCI は、`restore_cache` ステップの keys 内で記述している順番通りにキャッシュを復元しようとします。 キャッシュキーはプロジェクトに名前空間をもち、検索時は文字列の前方一致となります。 最初にマッチしたキーのキャッシュ内容が復元され、 該当するキャッシュが複数ある場合は、一番新しいキャッシュを使用します。
 
-In the example below, two keys are provided:
+2 つのキーを用いた例は下記の通りです。 
 
 {% raw %}
 
@@ -132,21 +134,21 @@ In the example below, two keys are provided:
 
 keys 内の 2 番目の項目が 1 番目よりも短いのは、その方が現在の状態と生成された最新のキャッシュとの間で差分が生じやすいためです。 npm のような依存関係管理ツールを実行すると、古くなった依存関係を見つけ、更新します。 これは**部分キャッシュリストア**とも呼ばれます。
 
-### Clearing Cache
+### キャッシュのクリア
 
 {:.no_toc}
 
-If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.
+開発言語や依存関係管理ツールのバージョンアップ時などにキャッシュをクリアしたいときは、先述のサンプルコードにあったような命名規則にしたうえで、`config.yml` に記述したキャッシュキー名を変え、コミットします。
 
 <div class="alert alert-info" role="alert">
 <b>ヒント：</b>キャッシュは書き換え不可のため、キャッシュキー名の先頭にバージョン名などを入れておくと好都合です。例えば <code class="highlighter-rouge">v1-...</code> のようにします。 こうすると、そのバージョン名の数字を増やすだけでキャッシュ全体を再生成できることになります。
 </div>
 
-For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
+下記のような状況では、キャッシュキーの名前を変えることによるキャシュのクリアを検討してみてください。
 
-- Dependency manager version change, for example, you change npm from 4 to 5
-- Language version change, for example, you change ruby 2.3 to 2.4
-- Dependencies are removed from your project
+- npm コマンドがバージョンアップするなど、依存関係管理ツールのバージョンが変更になった
+- Ruby がバージョンアップするなど、開発言語のバージョンが変わった
+- プロジェクトから依存関係が削除された
 
 <div class="alert alert-info" role="alert">
   <b>Tip:</b> Beware when using special or reserved characters in your cache key (ex:
@@ -154,11 +156,11 @@ For example, you may want to clear the cache in the following scenarios by incre
   consider using keys within [a-z][A-Z] in your cache key prefix.
 </div>
 
-## Basic Example of Dependency Caching
+## 依存関係のキャッシュにおける基礎
 
-The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. 具体例は CircleCI の設定方法のページ内にある [save_cache](https://circleci.com/docs/2.0/configuration-reference/#save_cache) のセクションをご覧ください。
+CircleCI 2.0 で利用できる、強力でカスタマイズ性の高い依存関係の手動キャッシュ管理。これを活用するには、何を、どうキャッシュするかという明確な目的をもっていなくてはなりません。 具体例は CircleCI の設定方法のページ内にある [save_cache](https://circleci.com/docs/2.0/configuration-reference/#save_cache) のセクションをご覧ください。
 
-To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
+ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定している ジョブに `save_cache` ステップを追加します。
 
 ```yaml
     steps:
@@ -169,11 +171,11 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
             - my-project/my-dependencies-directory
 ```
 
-The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
+ディレクトリはジョブにおける `working_directory` への相対パス、または絶対パスを指定します。
 
 **注：**特別な [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace) ステップとは違って、`save_cache` も `restore_cache` も、`paths` キーに対してワイルドカードによるグロブをサポートしません。
 
-## Using Keys and Templates
+## キーとテンプレートを使用する
 
 キャッシュ`キー`にテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 ビルドのたびに新しいキャッシュを生成したくないときは、変更があった場合にのみ新しいキャッシュを生成する`キー`を指定します。
 
@@ -185,7 +187,8 @@ The path for directories is relative to the `working_directory` of your job. You
     `package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチも、同じキャッシュキーを生成します
 - {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %}  
     `package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチは、それごとに異なるキャッシュキーを生成します 
-- {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build will generate separate cache keys.
+- {% raw %}`myapp-{{ epoch }}`{% endraw %}  
+    ビルドごとに異なるキャッシュキーを生成します
 
 ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。 CirlceCI のキャッシュ`キー`で利用可能なテンプレートを下記の表にまとめました。
 
@@ -193,7 +196,7 @@ The path for directories is relative to the `working_directory` of your job. You
 
 **注：**キャッシュに対してユニークな識別子を定義する際には、{% raw %}`{{ epoch }}`{% endraw %} のような厳密すぎる値になるテンプレートをむやみに使わないよう注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。 これについては、以降で説明するようにトレードオフの関係にあると言えます。
 
-### Full Example of Saving and Restoring Cache
+### キャッシュの保存・復元の参考例
 
 {:.no_toc}
 
@@ -467,7 +470,7 @@ steps:
 
 The caches created via the `save_cache` step are stored for up to 30 days.
 
-## Caching Strategy Tradeoffs
+## キャッシュのメリットとデメリット
 
 依存関係のスマートな制御機能を実装している開発言語では、ビルド時のパフォーマンス上の要因からキャッシュを一から作り直すことは避け、部分キャッシュリストアを推奨するケースがあります。 キャッシュを一から作り直すには、依存関係をすべて再インストールする必要があり、パフォーマンスの低下にもつながります。 これを避けるためには、一から作り直すのではなく、依存関係の大部分を古いキャッシュから復元する方法が有効です。
 
