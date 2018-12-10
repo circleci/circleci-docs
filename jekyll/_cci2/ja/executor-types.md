@@ -1,19 +1,19 @@
 ---
 layout: classic-docs
-title: "Choosing an Executor Type"
-short-title: "Choosing an Executor Type"
-description: "Overviews of the docker, machine, and executor types"
+title: "Executor タイプの選び方"
+short-title: "Executor タイプの選び方"
+description: "Executor タイプである docker、machine などについての概要"
 categories:
   - containerization
 order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This document describes the `docker`, `machine`, and `macos` environments in the following sections:
+このページでは、 下記の内容に沿って、`docker`、`machine`、`macos` 環境について解説しています。
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## はじめに
 
 {:.no_toc}
 
@@ -25,17 +25,17 @@ CircleCI は下記 3 種類の実行環境のいずれかでジョブを実行�
 
 Linux 環境のイメージでビルドする場合、`docker` と `machine` のどちらを使うかで下記のようなメリット・デメリットがあります。
 
-Virtual Environment | `docker` | `machine` \---\---\----|\---\---\----|\---\---\---- Start time | Instant | 30-60 sec Clean environment | Yes | Yes Custom images | Yes | No Build Docker images | Yes <sup>(1)</sup> | Yes Full control over job environment | No | Yes Full root access | No | Yes Run multiple databases | No | Yes Run multiple versions of the same software | No | Yes Layer caching | Yes | Yes Run privileged containers | No | Yes Use docker compose with volumes | No | Yes [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | No {: class="table table-striped"}
+VM 環境 | `docker` | `machine` \---\---\----|\---\---\----|\---\---\---- 起動時間 | インスタントオン | 30〜60 秒 クリーン環境 | ○ | ○ カスタムイメージ | ○ | × Docker イメージのビルド | ○ <sup>(1)</sup> | ○ ジョブ環境全体の制御 | × | ○ root 権限 | × | ○ 複数データベースの利用 | × | ○ 同一ソフトウェアにおける複数バージョンの利用 | × | ○ レイヤーキャッシュ | ○ | ○ 権限付きコンテナの実行 | × | ○ ストレージにおける docker compose の使用 | × | ○ [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○ | × {: class="table table-striped"}
 
-<sup>(1)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
+<sup>(1)</sup> \[リモート Docker\]\[building-docker-images\] の利用が必須です。
 
-It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
+Executor タイプとして `Xcode` とともに `macOS` を使うこともできます。詳しくは [iOS プロジェクトチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)を参照してください。
 
 ## Docker を使用する
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+`docker` キーは、Docker コンテナによってジョブを実行する基礎技術である Docker を定義するものです。 コンテナはユーザーが指定した Docker イメージのインスタンスです。設定ファイル内で最初に指定したイメージは、各ステップを実行するプライマリコンテナとなります。 Docker に初めて触れるということであれば、まずは [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) で基本を押さえておきましょう。
 
-Docker increases performance by building only what is required for your application. 各ステップを実行するプライマリコンテナ生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
+実行するアプリケーションに必要なものだけをビルドすることでパフォーマンスを高める、といった Docker の使い方が可能です。 各ステップを実行するプライマリコンテナ生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
 
 ```yaml
 jobs:
@@ -44,7 +44,7 @@ jobs:
       - image: buildpack-deps:trusty
 ```
 
-In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
+この例では、`build` ジョブ後に記述している最初のイメージ指定で作成したコンテナ上ですべてのステップが実行されることになります。 環境に汎用性をもたせるために、CircleCI では一般的なプログラミング言語に対応するビルド済み Docker イメージを Docker Hub 上に用意しています。 それらの名前とタグの一覧は [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)で確認してください。 Docker 自体や Git を含む Docker イメージがほしいときは、[公式 Docker image](https://hub.docker.com/_/docker/) の `docker:stable-git` を利用するのが近道です。
 
 ### Docker イメージ活用のヒント
 
@@ -56,7 +56,7 @@ In this example, all steps run in the container created by the first image liste
 
 Docker Executor のより詳細な解説は [CircleCI の設定]({{ site.baseurl }}/2.0/configuration-reference/)をご覧ください。
 
-## Using Machine
+## Machine を使用する
 
 `machine` を指定すると、下記のようなマシンスペックの一時 VM 環境を使ってジョブを実行します。
 
@@ -104,10 +104,10 @@ version: 2
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # default - false
+      docker_layer_caching: true    # デフォルトは false です
 ```
 
-## Using macOS
+## macOS を使用する
 
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 このとき、どのバージョンの Xcode を使うか指定することもできます。 利用可能なバージョンについては、「iOS アプリのテスト方法」内の[サポートしている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)を参照してください。 各バージョンの Xcode が動作している VM のマシンスペック (CPU、メモリサイズ、HDD容量など) に関する詳細は、同ページの「インストール済みソフト」のリンク先で確認できます。
 
@@ -117,8 +117,8 @@ jobs:
           xcode: "9.0"
     
         steps:
-          # Commands will execute in macOS container
-          # with Xcode 9.0 installed
+          # コマンドは Xcode 9.0 がインストールされた
+          #  macOS コンテナで実行されます
           - run: xcodebuild -version
     
 
@@ -129,9 +129,9 @@ jobs:
     jobs:
       build:
         docker:
-        # Primary container image where all steps run.
+        # 全てのステップを実行するプライマリコンテナ
          - image: buildpack-deps:trusty
-        # Secondary container image on common network. 
+        # 共通ネットワーク上で動作するセカンダリコンテナのイメージ 
          - image: mongo:2.6.8-jessie
            command: [mongod, --smallfiles]
     
@@ -145,15 +145,15 @@ jobs:
 
 Docker イメージの指定方法は 3 パターンあります。イメージ名を指定する方法、Docker Hub 上のバージョンタグを指定する方法、レジストリにあるイメージの URL を指定する方法です。
 
-### Public Convenience Images on Docker Hub
+### Docker Hub の簡易的な公開イメージ
 
 {:.no_toc} - `name:tag` - `circleci/node:7.10-jessie-browsers` - `name@digest` - `redis@sha256:34057dd7e135ca41...`
 
-### Public Images on Docker Hub
+### Docker Hub の公開イメージ
 
 {:.no_toc} - `name:tag` - `alpine:3.4` - `name@digest` - `redis@sha256:54057dd7e125ca41...`
 
-### Public Docker Registries
+### 公開 Docker レジストリ
 
 {:.no_toc} - `image_full_url:tag` - `gcr.io/google-containers/busybox:1.24` - `image_full_url@digest` - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
