@@ -2,45 +2,45 @@
 layout: classic-docs
 title: "Docker コマンドの実行手順"
 short-title: "Docker コマンドの実行手順"
-description: "Docker イメージのビルドとリモートサービスへのアクセスの方法"
+description: "Docker イメージのビルド方法とリモート環境へのアクセス方法"
 categories:
   - configuring-jobs
 order: 55
 ---
-このドキュメントでは、Docker イメージをビルドして他の場所にデプロイ、または詳細テストを行う方法、およびリモート Docker コンテナでサービスを開始する方法について説明します。このドキュメントには以下のセクションがあります。
+ここでは、デプロイや詳細テストを行う際の Docker イメージのビルド方法と、リモートの Docker コンテナ内のサービスを実行する方法について解説しています。
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## 概要
+## はじめに
 
-デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離され、Docker コマンドの実行用に構成されたリモート環境ですす。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
+デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離された、Docker コマンドの実行に特化したリモート環境となっています。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
 
 ```yaml
 jobs:
   build:
     steps:
-      # ... アプリのビルド/テスト用の手順 ...
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker
 ```
 
-`setup_remote_docker` が実行されるとリモート環境が作成され、現在の \[primary container\]\[primary-container\] がそのリモート環境用に構成されます。 その後は、Docker に関連するコマンドはすべて、この新しい環境で安全に実行されるようになります。
+`setup_remote_docker` が処理されるとリモート環境が作成され、現在の \[primary-container\]\[primary-container\] がそのリモート環境用に構成されます。 その後は、Docker の操作に関わるあらゆるコマンドは仮想環境内で安全に実行されるようになります。
 
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor *is* a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
 
-### 仕様
+### リモート Docker 環境のスペック
 
 {:.no_toc}
 
-リモート Docker 環境の技術仕様は次のとおりです。
+リモート Docker 環境のハードウェアスペックは下記の通りです。
 
 CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB {: class="table table-striped"}
 
-### 例
+### 設定例
 
 {:.no_toc}
 
-`machine` を使用して、デフォルトイメージで Docker イメージをビルドする例を次に示します。
+`machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
 
 ```yaml
 version: 2
@@ -49,20 +49,20 @@ jobs:
    machine: true
    steps:
      - checkout
-     # UI に保管されている資格情報を使用して
-     # プライベート Docker イメージによる専用 DB を開始する
+     # UI に保管されている ID・パスワードを使い
+     # プライベート Docker イメージによる専用 DB を稼働させる
      - run: |
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # アプリケーションイメージをビルドする
+     # アプリケーションイメージをビルド
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # イメージをデプロイする
+     # イメージのデプロイ
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-弊社の [Docker デモ用プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージのビルドとプッシュに使用されている例を、次に示します。
+下記の例は、[Docker デモ用アプリ](https://github.com/CircleCI-Public/circleci-demo-docker)で使われているものと同じものです。
 
 ```yaml
 version: 2
@@ -73,13 +73,13 @@ jobs:
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout
-      # ... アプリのビルドおよびテストの手順は次のとおりです。
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
-      # Docker が既に存在するプライマリイメージを使う (推奨) か
-      # 以下のようにビルド中にインストールします
+      # Docker がすでに動いているプライマリイメージを使う (推奨) か
+      # もしくは以下にある通りビルド中にインストールしてください
       - run:
           name: Install Docker client
           command: |
@@ -97,14 +97,14 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-このビルドの実行中に行われる動作の詳細は次のとおりです。
+以上のビルドのなかで、ポイントとなる部分を順を追って説明します。
 
-1. すべてのコマンドは、\[primary container\]\[primary-container\] 内で実行されます。
-2. `setup_remote_docker` が呼び出されると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。 Docker 関連のコマンドはすべてプライマリコンテナ内でも実行されますが、イメージのビルド/プッシュおよびコンテナの実行は、リモート Docker エンジン内で処理されます。
+1. 全てのコマンドは \[primary-container\]\[primary-container\] の中で実行されます。
+2. `setup_remote_docker` が呼ばれると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。 Docker に関わるコマンドは全てプライマリコンテナ内で実行されますが、イメージのビルド・プッシュおよびコンテナの実行はリモート Docker エンジン内で処理されます。
 3. Docker イメージのビルド高速化のため \[Docker レイヤーキャッシュ\]\[docker-layer-caching\] をここで有効にしています
-4. プロジェクト環境変数を使用して、Docker Hub の資格情報を保存します。
+4. Docker Hub のログイン情報の保管にはプロジェクト環境変数を使用します。
 
-## Docker のバージョン
+## 使用する Docker のバージョン変更
 
 ジョブによって特定のバージョンの Docker を使う必要がある場合は、`version` キーをセットします。
 
@@ -113,7 +113,7 @@ jobs:
           version: 17.05.0-ce
 ```
 
-現在サポートしているバージョンは次のとおりです。
+現在サポートしているバージョンは下記の通りです。
 
 [安定版](https://download.docker.com/linux/static/stable/x86_64/) - `17.03.0-ce` (デフォルト) - `17.06.0-ce` - `17.06.1-ce` - `17.09.0-ce` - `18.03.0-ce` - `18.03.1-ce` - `18.05.0-ce`
 
@@ -121,7 +121,7 @@ jobs:
 
 Docker をインストールした Git を含む Docker イメージを使いたい時は、`17.05.0-ce-git` を利用してください。 **注：**`version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
-## 環境の分離
+## 分離された環境について
 
 ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることはできません。
 
@@ -159,7 +159,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 
 ```yaml
 - run: |
-    # 設定ファイルのコピー先ボリューム用のダミーコンテナを作成します
+    # 設定ファイルのコピー先となるダミーコンテナのボリュームを作成します
     docker create -v /cfg --name configs alpine:3.4 /bin/true
     # 設定ファイルをダミーコンテナのボリュームにコピーします
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
@@ -176,7 +176,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
     docker run --name app app-image:1.2.3
 
 - run: |
-    # アプリケーションコンテナが終了した後、そこからアーティファクトが直接コピーされます
+    # アプリケーションコンテナが終了した後、そこからデータが直接コピーされます
     docker cp app:/output /path/in/your/job/space
 ```
 
@@ -220,7 +220,7 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 # 同じボリュームを CircleCI キャッシュにバックアップする
 - run:
-    name: bundler キャッシュを Docker ボリュームから バックアップ
+    name: bundler cache を Docker ボリュームから バックアップ
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
