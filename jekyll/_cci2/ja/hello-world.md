@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "First project on CircleCI 2.0"
+description: "CircleCI 2.0 の最初の一歩"
 categories:
   - getting-started
 order: 4
@@ -11,7 +11,7 @@ This document describes how to get started with a basic build of your Linux, And
 
 ## Use the Hello-Build Orb
 
-1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
+1. GitHub または Bitbucket のローカルリポジトリのルートディレクトリに `.circleci` ディレクトリを作成します。
 
 2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines that import the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build).
 
@@ -66,7 +66,7 @@ In the top left, you will find the Org switcher.
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の `myOrg` に切り替えます。
 
-## Next Steps
+## 次のステップは？
 
 - CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素についての説明は[コンセプト]({{ site.baseurl }}/2.0/concepts/)ページで確認できます。
 
