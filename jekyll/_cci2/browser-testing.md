@@ -35,7 +35,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node-jessie-browsers
+      - image: circleci/node:jessie-browsers
     steps:
       - checkout
       - run: mkdir test-reports
