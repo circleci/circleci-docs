@@ -64,14 +64,14 @@ For the replicated update to succeed, it’s necessary to update docker to the r
 Then, you are ready to perform the actual replicated update, by executing the replicated-provided update script:
 
 ```
-    curl -sSL https://get.replicated.com/docker | sudo bash
+    curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
 ```
 
 Double-check your replicated and docker versions;
 
 ```
-    replicatedctl version    # 2.28.1 or greater
-    docker -v                # 17.2.1
+    replicatedctl version    # 2.29.0
+    docker -v                # 17.12.1
 ```
 
 Restart app with
