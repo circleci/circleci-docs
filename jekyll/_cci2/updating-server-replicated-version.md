@@ -59,6 +59,11 @@ For the replicated update to succeed, it’s necessary to update docker to the r
     sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
+We suggest that you pin the Docker version using:
+```
+    sudo apt-mark hold docker-ce
+```
+
 ## Update
 
 Then, you are ready to perform the actual replicated update, by executing the replicated-provided update script:
