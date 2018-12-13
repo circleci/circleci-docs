@@ -117,11 +117,9 @@ sitemap: false
 - [Certificates]({{ site.baseurl }}/enterprise/custom-ca/){:rel="nofollow"}
 - [Debugging Replicated]({{ site.baseurl }}/enterprise/debugging-replicated/){:rel="nofollow"}
 - [Differences from Cloud]({{ site.baseurl }}/enterprise/differences/){:rel="nofollow"}
-- [Docker Builder Configuration]({{ site.baseurl }}/enterprise/docker-builder/){:rel="nofollow"}
-- [Docker Installation]({{ site.baseurl }}/enterprise/docker-install/){:rel="nofollow"}
+- [Docker Builder Configuration]({{ site.baseurl }}/enterprise/docker-builder-config/){:rel="nofollow"}
 - [Docker]({{ site.baseurl }}/enterprise/docker/){:rel="nofollow"}
 - [Exporting and Importing Projects]({{ site.baseurl }}/enterprise/export-import-projects/){:rel="nofollow"}
-- [Failover]({{ site.baseurl }}/enterprise/failover/){:rel="nofollow"}
 - [Admin FAQ]({{ site.baseurl }}/enterprise/faq/){:rel="nofollow"}
 - [GPU Configuration]({{ site.baseurl }}/enterprise/gpu-configuration/){:rel="nofollow"}
 - [HA]({{ site.baseurl }}/enterprise/high-availability/){:rel="nofollow"}
