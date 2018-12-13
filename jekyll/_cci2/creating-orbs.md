@@ -54,6 +54,8 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 **Note:** The Security setting required for publishing or using 3rd-party orbs may only be toggled by organization administrators.
 
+**Note:** Orbs are not currently supported on private installations of CircleCI Server.
+
 ## Semantic Versioning in Orbs
 
 Orbs are published with the standard 3-number semantic versioning system:
@@ -109,7 +111,7 @@ orbs:
   codecov: circleci/codecov-clojure@0.0.4
   my-orb:
     executors:
-      default:
+      specialthingsexecutor:
         docker:
           - image: circleci/ruby:1.4.2
     commands:
@@ -132,7 +134,6 @@ workflows:
 ```
 
 In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
-
 
 ### Example Inline Template
 
@@ -256,7 +257,6 @@ While not strictly enforced, it is best practice when versioning your production
 * MINOR: when you add functionality in a backwards-compatible manner
 * PATCH: when you make backwards-compatible bug fixes
 
-
 #### Using Orbs Within Your Orb and Register-Time Resolution
 
 You may use an ```orbs``` stanza inside an orb. 
@@ -266,6 +266,26 @@ Because production orb releases are immutable, the system will resolve all orb d
 For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```orbs``` stanza that imports ```biz/baz@volatile```. At the time you register ```foo/bar@1.2.3``` the system will resolve ```biz/baz@volatile``` as the latest version and include its elements directly into the packaged version of ```foo/bar@1.2.3```.
 
 If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
+
+**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
+{% raw %}
+```
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command
+          param1: "hello"
+```
+{% endraw %}
 
 ### Deleting Production Orbs
 
@@ -403,7 +423,6 @@ If you are a user of a privately installed CircleCI deployment you will have to 
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you will only be able to use `circlecli local execute` (this was previously `circleci build`).
 
-
 ### Validating a Build Config
 
 To ensure that the CircleCI CLI tool has been installed properly, you can use the CLI tool to validate a build config file by running the following command:
@@ -509,11 +528,13 @@ The animation shows snippets to give you an overview of the following steps for 
 2. Running `circleci config process .circleci/config.yml` to process the config.
 3. Committing the change and checking that the build succeeds in the CircleCI app.
 4. Enabling orbs use under Settings > Security in the CircleCI app.
-5. Running `circleci namespace create ndintenfass` to create a namespace in which to publish to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
+5. Running `circleci namespace create ndintenfass github ndintenfass_org` to create
+   a namespace in which to publish to the [CircleCI Orb
+   Registry](https://circleci.com/orbs/registry/), using Github as a VCS with
+   `ndintenfass` as the namespace and `ndintenfass_org` as the org-name. The org-name must exist already as an organization on CircleCI.
 6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
 7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
 8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
 9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
 10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
 11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
-
