@@ -6,39 +6,36 @@ description: "Starting point for Creating CircleCI Orbs"
 categories: [getting-started]
 order: 1
 ---
-
+## Introduction
 Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/). 
 
 [Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
-## Orb Publishing Process
+### Orb Publishing Process
 
-To publish an orb, follow the steps listed below as an org Admin.
+Before working with orbs, you may find it helpful to gain a high-level understanding the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process.
+![orbsworkflow-v2 image](  {{ site.baseurl }}/assets/img/docs/orbsworkflow-v2.png)
 
-1. Claim a namespace (assuming you don't yet have one), using the command `circleci namespace create <NAMESPACEID> <VCS> <YOURORG>`. For example:
-`circleci namespace create sandbox github CircleCI-Public`
+#### Steps 1 - 3 - Use the CircleCI CLI
+The first step you must perform in the orbs publishing process is to download and install, update, and then configure the CircleCI CLI for use with CircleCI orbs. Detailed instructions for how to install, update and configure the CLI can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
 
-2. Create the orb inside your namespace, for example:
-`circleci orb create sandbox/hello-world`
+#### Step 4 - Validate your build configuration
+Once you have configured the CircleCI CLI, you then need to validate your build configuration to ensure you can correctly create or update an orb. You can find detailed instructions on how to validate your build configuration in the [Validating a Build Config] (https://circleci.com/docs/2.0/creating-orbs/#validating-a-build-config) section.
 
-3. Create the content of your orb in a file. You will generally perform this action in your code editor in a git repo made for your orb. For example, let's assume a file in `/tmp/orb.yml` could be made with a simple orb similar to:
-`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+#### Step 5 - Set the Version Property to 2.1
+After validating your build configuration, set the version property to 2.1. More information on how to set the version property can be found in the [Set the Version Property to 2.1](https://circleci.com/docs/2.0/creating-orbs/#set-the-version-property-to-21) section on this page.
 
-4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
-`circleci orb validate /tmp/orb.yml`
+#### Step 6 - Create a new Orb using inline template
+CircleCI provides you an example inline template that you can, and should, use when creating your own orbs. The example inline teamplat can be found in the [Example Inlline Template](https://circleci.com/docs/2.0/creating-orbs/#example-inline-template) section on this page.
 
-5. Publish a development version of your orb, for example:
-`circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
+#### Step 7
+Now that you have copied the example inline template from step 6, you will need to add your own orb elements (Jobs, Commands, and Executors to this inline template. For more information on these orb elements, refer to the [Commands](https://circleci.com/docs/2.0/using-orbs/#commands), [Jobs](https://circleci.com/docs/2.0/using-orbs/#jobs), and [Executors](https://circleci.com/docs/2.0/using-orbs/#executors) sections found in the [Using Orbs](https://circleci.com/docs/2.0/using-orbs/#section=configuration) page.
 
-6. Once you are ready to push your orb to production, you can publish it manually using ```circleci orb publish``` command or promote it directly from the development version. To increment the new dev version to become 0.0.1, use the following command:
-`circleci orb publish promote sandbox/hello-world@dev:first patch`
+#### Steps 8 - 9 - Validating your Orb
+When you have finished authoring your orb, you need to validate your orb to ensure it will work on in your configuration before publication. CircleCI provides several different tools to validate your orb, including the `circleci/orb-tools` orb. For more information on using the `circleci/orb-tools` orb, see the [Validate and Publish Your Orb](https://circleci.com/docs/2.0/creating-orbs/#validate-and-publish-your-orb) section on this page.
 
-7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can view the source of your orb by using:
-`circleci orb source sandbox/hello-world@0.0.1`
-
-**Note:** Running `circleci setup`, providing a personal API token, and enabling [Build Processing]({{ site.baseurl }}/2.0/build-processing/) for your project are prerequisites for creating orbs.
-
-Give it a try! If you have any trouble, check out the additional details and tips below or the [Orbs FAQ]({{ site.baseurl }}/2.0/orbs-faq/).
+#### Steps 10 - 11 - Publishing your Orb
+The final step in the orb publishing process is for you to publish your orb using the `orb-tools/publish` command in the `circleci/orb-tools` orb. For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
 
 ## Overview
 
@@ -495,7 +492,7 @@ This command is used to publish an orb. The following parameters may be passed w
 * attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
 * workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
 
-### Validate and Publish Example
+### 11) Validate and Publish Example
 
 Below is an example of how to use the `orb-tools` orb to validate and publish an orb.
 
