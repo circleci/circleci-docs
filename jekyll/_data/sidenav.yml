@@ -206,6 +206,8 @@ en:
           link: 2.0/glossary/
         - name: Help and Support
           link: 2.0/help-and-support/
+        - name: Archive
+          link: 2.0/archive/
 
 - name: Administration
   icon: docs/admin.svg
