@@ -50,6 +50,7 @@ jobs: # basic units of work in a run
       - run: mkdir -p $TEST_RESULTS # create the test results directory
 
       - restore_cache: # restores saved cache if no changes are detected since last run
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           keys:
             - v1-pkg-cache
 
@@ -103,11 +104,11 @@ jobs: # basic units of work in a run
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
 
-      - store_artifacts: # Upload test summary for display in Artifacts
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: /tmp/test-results
           destination: raw-test-output
 
-      - store_test_results: # Upload test results for display in Test Summary
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: /tmp/test-results
 ```
 
@@ -135,7 +136,8 @@ If you want to test your changes locally, use [our CLI tool](https://circleci.co
 
 This section explains the commands in `.circleci/config.yml`
 
-We always start with the version.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
@@ -182,7 +184,8 @@ our test results.
 
 Now we need to add several `steps` within the `build` job.
 
-The `checkout` step will default to the `working_directory` we have already defined.
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+to check out source code. By default, source code is checked out to the path specified by `working_directory`.
 
 ```yaml
     steps:
