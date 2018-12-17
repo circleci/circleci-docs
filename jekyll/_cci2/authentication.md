@@ -1,10 +1,10 @@
 ---
- layout: classic-docs
- title: "Authentication"
- short-title: "Authentication"
- description: "Configuring LDAP Authentication"
- categories: [administration]
- order: 9
+layout: classic-docs
+title: "Authentication"
+short-title: "Authentication"
+description: "Configuring LDAP Authentication"
+categories: [administration]
+order: 9
 ---
 
 This document describes how to enable, configure, and test CircleCI to authenticate users with OpenLDAP or Active Directory credentials.
