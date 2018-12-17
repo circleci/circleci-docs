@@ -1,16 +1,15 @@
 ---
 layout: classic-docs
-title: "Updating server replicated version"
+title: "Updating Server Replicated Version"
 category: [administration]
 order: 12
 description: "How to update server replicated and docker version"
 ---
 
+This document describes how to update the server replicated version for your private installation of CircleCI in the following sections:
+
 * TOC
 {:toc}
-
-
-# Updating server replicated version
 
 ## Assumptions
 
@@ -18,25 +17,24 @@ description: "How to update server replicated and docker version"
 - You are running replicated version 2.10.3 on your services machine
   - replicated --version
 - Your installation is **not** airgapped and you can access the internet from it
-- All steps take place on the services machine
+- All steps are completed on the Services machine
   
 ## Preparations
 
-Before performing a replicated version update, make sure to backup your data as per https://circleci.com/docs/2.0/backup/
+Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
 
-Stop the CircleCI application with
+- Stop the CircleCI application with
 
 ```
     replicatedctl app stop
 ```
 
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run
+Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
 
 ```
     replicatedctl app status inspect
 ```
 
-to check the current status of the application.
 Example Output:
 ```
 [
@@ -53,33 +51,34 @@ Example Output:
 ]
 ```
 
-For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
+- For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
 
 ```
     sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
-We suggest that you pin the Docker version using:
+- Pin the Docker version using the following command:
+
 ```
     sudo apt-mark hold docker-ce
 ```
 
 ## Update
 
-Then, you are ready to perform the actual replicated update, by executing the replicated-provided update script:
+Perform the Replicated update by executing the update script as follows:
 
 ```
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
 ```
 
-Double-check your replicated and docker versions;
+Double-check your replicated and docker versions:
 
 ```
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
 ```
 
-Restart app with
+Restart the app with
 
 ```
     replicatedctl app start
