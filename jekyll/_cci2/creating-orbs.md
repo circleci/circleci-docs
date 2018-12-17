@@ -26,7 +26,7 @@ Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://
 Once you have configured the CircleCI CLI, verify you installed the CLI correctly and the CLI is updated and configured properly before beginning to work with orbs. You can perform this check by referring to the 
 
 #### Step 5 - Bump Version Property to Orbs-Compatible 2.1
-After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs. More information on how to bump the version property can be found in the [Bump Version Property to Orbs-Compatible 2.1](link needed here) section on this page.
+After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs. More information on how to bump the version property can be found in the "Bump Version Property to Orbs-Compatible 2.1" section on this page.
 
 #### Step 6 - Create a new Orb using inline template
 Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
