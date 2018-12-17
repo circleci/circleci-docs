@@ -218,6 +218,8 @@
           link: 2.0/admin-faq/
         - name: Upgrade
           link: 2.0/upgrading/
+        - name Updating Replicated
+          link: 2.0/updating-server-replicated-version/
         - name: Security
           link: 2.0/security/
         - name: Certificates
