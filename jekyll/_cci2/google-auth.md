@@ -95,7 +95,7 @@ jobs:
       - image: gcr.io/project/<image-name>
         auth:
           username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # JSON service account you created
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
 
 ### Authorizing the Google Cloud SDK
@@ -111,7 +111,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - run: |
-          echo $GCLOUD_SERVICE_KEY | base64 --decode | sudo gcloud auth activate-service-account --key-file=-
+          echo $GCLOUD_SERVICE_KEY | sudo gcloud auth activate-service-account --key-file=-
           sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```

@@ -43,6 +43,7 @@ jobs: # a collection of steps
       - checkout # check out source code to working directory
 
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn dependency:go-offline # gets the project dependencies
@@ -55,9 +56,11 @@ jobs: # a collection of steps
       - run: mvn package # run the actual tests
       
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: target/surefire-reports
       
       - store_artifacts: # store the uberjar as an artifact
+      # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
