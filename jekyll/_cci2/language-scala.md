@@ -60,11 +60,12 @@ jobs:
                     apt-get clean && apt-get autoclean
       - checkout
       - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: sbt-cache
       - run:
           name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts:
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -81,7 +82,8 @@ jobs:
 
 ## Schema Walkthrough
 
-All version 2.0 config.yml files must start with his line:
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
@@ -183,11 +185,11 @@ The following keys represent actions performed after the multi-line command is e
 ```
 
 Below is an explanation of the preceding example:
-- `checkout`: basically git clones the project repo from github into the container 
-- `restore_cache` key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
-- `run` command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
-- `store_artifacts` path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
-- `save_cache` path: saves the specified directories for use in future builds when specified in the `restore_cache` keys.
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from github into the container 
+- [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
+- [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
+- [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
+- [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
 
 The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 

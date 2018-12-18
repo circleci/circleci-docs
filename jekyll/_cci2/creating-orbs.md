@@ -108,8 +108,9 @@ To write inline orbs, you need to place the orb elements under that orb's key in
 description: # The purpose of this orb
 
 orbs:
-  codecov: circleci/codecov-clojure@0.0.4
   my-orb:
+    orbs:
+      codecov: circleci/codecov-clojure@0.0.4
     executors:
       specialthingsexecutor:
         docker:

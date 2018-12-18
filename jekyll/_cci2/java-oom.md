@@ -43,7 +43,7 @@ Java Environment Variable                       | Java | Gradle | Maven | Kotlin
 [`JVM_OPTS`](#jvm_opts)                         | *    | no     | no    | no     | *
 [`LEIN_JVM_OPTS`](#lein_jvm_opts)               | no   | no     | no    | no     | 1
 [`GRADLE_OPTS`](#gradle_opts)                   | no   | 1      | no    | no     | no
-[`MAVEN_OPTS`](#maven_opts)                     | no   | 1      | no    | no     | no
+[`MAVEN_OPTS`](#maven_opts)                     | no   | no     | 1     | no     | no
 CLI args                                        | 1    | no     | no    | no     | no
 {:class="table table-striped"}
 
@@ -118,8 +118,6 @@ Unfortunately,
 debugging Java OOM errors often comes down
 to finding an `exit code 137` in your error output.
 
-Fortunately, Oracle is aware of these challenges
-and [has added command-line options](https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits).
 Ensure that your `-Xmxn` maximum size is large enough
 for your applications to completely build,
 while small enough
