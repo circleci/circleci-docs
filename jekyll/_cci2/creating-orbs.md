@@ -518,26 +518,3 @@ workflows:
 ```
 
 In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published.
-
-#### Tutorial
-
-The following animation shows the basics of creating and publishing an orb using an example:
-
-![Orb creating animation](  {{ site.baseurl }}/assets/img/docs/GIFMaker.org_P4Gg6g.gif)
-
-The animation shows snippets to give you an overview of the following steps for creating an orb:
-
-1. Defining a reusable job named `orb-doc-generation` and checking the 2.1 config is well-formed with `circleci-config-validate .circleci/config.yml`.
-2. Running `circleci config process .circleci/config.yml` to process the config.
-3. Committing the change and checking that the build succeeds in the CircleCI app.
-4. Enabling orbs use under Settings > Security in the CircleCI app.
-5. Running `circleci namespace create ndintenfass github ndintenfass_org` to create
-   a namespace in which to publish to the [CircleCI Orb
-   Registry](https://circleci.com/orbs/registry/), using Github as a VCS with
-   `ndintenfass` as the namespace and `ndintenfass_org` as the org-name. The org-name must exist already as an organization on CircleCI.
-6. Creating and committing an `orb.yml` file in a `.circleci/orbs/orb-utils` directory of the project repo with the content of a reusable executor and the `orb-doc-generation` job.
-7. Running `circleci orb create ndintenfass orb-utils` to create the orb in the namespace.
-8. Running `circleci orb publish dev .circleci/orbs/orb-utils/@orb.yml ndintenfass orb-utils test` to publish the dev:test orb.
-9. Replacing the inline executor and job definitions in the `.circleci/config.yml` with the reference to the published `ndintenfass/orb-utils@dev:test` orb.
-10. Running `circleci-config-validate .circleci/config.yml` to validate it is well-formed.
-11. Committing the change and checking that the build succeeds when using the imported orb. The processed config appears on the Configuration tab of the CircleCI Jobs page. 
