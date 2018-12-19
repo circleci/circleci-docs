@@ -68,16 +68,17 @@ jobs: # a collection of steps
           command: bundle -v
 
       # Restore bundle cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
             - rails-demo-bundle-v2-
 
-      - run:
+      - run: # Install Ruby dependencies
           name: Bundle Install
           command: bundle check || bundle install
 
-      # Store bundle cache
+      # Store bundle cache for Ruby dependencies
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
@@ -117,9 +118,9 @@ jobs: # a collection of steps
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
-      - store_test_results:
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 ```
 
 {% endraw %}
@@ -138,7 +139,8 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Start with the version.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
