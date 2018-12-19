@@ -50,7 +50,7 @@ Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://
 * [Configure the CLI](https://circleci.com/docs/2.0/creating-orbs/#configuring-the-circleci-cli).
 
 #### Step 2 - Verify You Installed the CLI Correctly
-Once you have configured the CircleCI CLI, verify you installed the CLI correctly and the CLI is updated and configured properly before beginning to work with orbs. You can perform this check by referring to the 
+Once you have configured the CircleCI CLI, verify you installed the CLI correctly and the CLI is updated and configured properly before beginning to work with orbs.
 
 #### Step 3 - Bump Version Property to Orbs-Compatible 2.1
 After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs. More information on how to bump the version property can be found in the "Bump Version Property to Orbs-Compatible 2.1" section on this page.
@@ -59,7 +59,7 @@ After validating your build configuration, bump the version property to 2.1 so i
 When you have finished authoring your orb, simply run the `validate` command from your CLI. CircleCI provides several different tools to validate your orb, including the `circleci/orb-tools` orb. For more information on using the `circleci/orb-tools` orb, see the [Validate and Publish Your Orb](https://circleci.com/docs/2.0/creating-orbs/#validate-and-publish-your-orb) section on this page.
 
 #### Step 5 - Design Your Orb
-Deoending on whether you use an inline template or author your orb independent of this inline template, you will want to add elements (Jobs, Commands, and Executors) to your orb. For more information on these orb elements, refer to the [Commands](https://circleci.com/docs/2.0/using-orbs/#commands), [Jobs](https://circleci.com/docs/2.0/using-orbs/#jobs), and [Executors](https://circleci.com/docs/2.0/using-orbs/#executors) sections found in the [Using Orbs](https://circleci.com/docs/2.0/using-orbs/#section=configuration) page.
+Depending on whether you use an inline template or author your orb independent of this inline template, you will want to add elements (Jobs, Commands, and Executors) to your orb. For more information on these orb elements, refer to the [Commands](https://circleci.com/docs/2.0/using-orbs/#commands), [Jobs](https://circleci.com/docs/2.0/using-orbs/#jobs), and [Executors](https://circleci.com/docs/2.0/using-orbs/#executors) sections found in the [Using Orbs](https://circleci.com/docs/2.0/using-orbs/#section=configuration) page.
 
 #### Step 6 - Create a New Orb Using Inline Template
 Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
@@ -93,7 +93,7 @@ Orbs are published with the standard 3-number semantic versioning system:
 * minor
 * patch
 
-Orb authors need to adhere to semantic versioning. Within ```config.yml```, you may specify wildcard version ranges to resolve orbs. You may also use the special string ```volatile``` to pull in whatever the highest version number is at time your build runs.
+Orb authors should adhere to semantic versioning. Within ```config.yml```, you may specify wildcard version ranges to resolve orbs. You may also use the special string ```volatile``` to pull in whatever the highest version number is at time your build runs.
 
 For example, when ```mynamespace/some-orb@8.2.0``` exists, and ```mynamespace/some-orb@8.1.24``` and ```mynamespace/some-orb@8.0.56``` are published after 8.2.0, ```volatile``` will still refer to ```mynamespace/some-orb@8.2.0``` as the highest semantic version.
 
@@ -106,9 +106,9 @@ Examples of orb version declarations and their meaning:
 
 ### Using Development Versions
 
-While all production orbs must be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
+While all production orbs can be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
-A development version must be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
+A development version should be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
 **Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for admin members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 
@@ -131,7 +131,7 @@ When developing your own orb, you may find it useful to write an inline orb. The
 
 Inline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.
 
-To write inline orbs, you need to place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
+To write inline orbs, place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
 ```
 description: # The purpose of this orb
@@ -223,9 +223,9 @@ Orbs may be authored inline in your config.yml file or authored separately and t
 
 ### Prerequisites
 
-Before publishing an orb, you will need to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
+Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
 
-**Note:** Only an organization administrator can opt-in to the Code Sharing Terms of Service. The organization admin will need to navigate to the organization Settings tab and complete the form on the Security page.
+**Note:** Only an organization administrator can opt-in to the Code Sharing Terms of Service. The organization admin will navigate to the organization Settings tab and complete the form on the Security page.
 
 ### Namespaces
 
@@ -276,7 +276,7 @@ Examples of valid development orb tags:
   "1.2.3-rc1" (No leading "dev:")
 ```
 
-In production orbs you must use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
+In production orbs, use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
 While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
@@ -345,7 +345,7 @@ The following sections describe each step in the orb authoring and publishing pr
 
 ## Meet Initial CircleCI Prerequisites
 
-Before you begin creating your own orb, there are a few steps you need to take to ensure that your orb will work with the CircleCI platform and your orb will be properly formatted and structured.
+Before you begin creating your own orb, there are a few steps you should take to ensure that your orb will work with the CircleCI platform and your orb will be properly formatted and structured.
 
 ### CircleCI Settings
 
@@ -363,7 +363,7 @@ If you are installing the new `circleci` CLI for the first time, run the followi
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-By default, the `circleci` app will be installed in the `/usr/local/bin directory`. If you do not have write permissions to `/usr/local/bin`, you may need to use the `sudo` command. Alternatively, you may install the CLI to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
+By default, the `circleci` app will be installed in the `/usr/local/bin directory`. If you do not have write permissions to `/usr/local/bin`, use the `sudo` command. Alternatively, you may install the CLI to an alternate location by defining the `DESTDIR` environment variable when invoking `bash`:
 
 ```
 curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin/bash
@@ -386,7 +386,7 @@ sudo snap install circleci
 
 #### Upgrading From an Existing CLI
 
-If you have used a previous version of the CircleCI and are currently running a version older than `0.1.6`, you will need to run the following commands to upgrade your CLI version to the latest version.
+If you have used a previous version of the CircleCI and are currently running a version older than `0.1.6`, run the following commands to upgrade your CLI version to the latest version.
 
 ```
 circleci update
@@ -397,7 +397,7 @@ If you do not have write permissions, be sure to use the `sudo` command. This wi
 
 #### Updating the CircleCI CLI after Installation
 
-The CircleCI comes with a built-in version management system. After you have installed the CLI, you should check to see if there are any updates to the CLI that need to be installed by running the following commands:
+The CircleCI comes with a built-in version management system. After you have installed the CLI, check if there are any updates to the CLI that need to be installed by running the following commands:
 
 ```
 circleci update check
@@ -414,15 +414,15 @@ Before you can configure the CLI, you may need to first generate a CircleCI API 
 $ circleci setup
 ```
 
-If you are using the CLI tool on `circleci.com`, make sure to accept the provided default `CircleCI Host`.
+If you are using the CLI tool on `circleci.com`, accept the provided default `CircleCI Host`.
 
-If you are a user of a privately installed CircleCI deployment you will have to change the default value to your custom address, for example, circleci.my-org.com.
+If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.my-org.com.
 
-**Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you will only be able to use `circlecli local execute` (this was previously `circleci build`).
+**Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circlecli local execute` (this was previously `circleci build`).
 
 ### Validating a Build Config
 
-To ensure that the CircleCI CLI tool has been installed properly, you can use the CLI tool to validate a build config file by running the following command:
+To ensure that the CircleCI CLI tool has been installed properly, use the CLI tool to validate a build config file by running the following command:
 
 ```
 $ circleci config validate
@@ -436,7 +436,7 @@ Config file at .circleci/config.yml is valid
 
 ### Bump Version Property to Orb-Compatible 2.1
 
-After you have installed the CircleCI CLI tool, bump the version property to an orbs-compatible version (2.1). This is a very simple process, requiring you only to set the value of the top-level 'version' key in your configuration file. This will enable all 2.1 features and allow you to begin working with orbs in your environment.
+After you have installed the CircleCI CLI tool, bump the version property to an orbs-compatible version (2.1). This is a very simple process, requiring you only to set the value of the top-level 'version' key in your configuration file. This enables all 2.1 features and allow you to begin working with orbs in your environment.
 
 ### Authoring Your Orb
 
@@ -444,7 +444,7 @@ For examples of orb source, please refer to the [Public CircleCI Repo](https://g
 
 ## Validate and Publish Your Orb
 
-When you have completed authoring your own orb, you will want to validate that the orb is properly constructed and will work in your configuration before publication. Although there are several different tests you can perform to ensure an orb's integrity, CircleCI recommends that you use the `circleci/orb-tools` orb.
+When you have completed authoring your own orb, validate that the orb is properly constructed and will work in your configuration before publication. Although there are several different tests you can perform to ensure an orb's integrity, CircleCI recommends that you use the `circleci/orb-tools` orb.
 
 The `orb-tools orb` provides the following jobs and commands that you may find useful.
 
