@@ -1296,22 +1296,22 @@ Learn how to set up your 2.0 builds to <a href="https://circleci.com/docs/2.0/co
 </aside>
 <h2 id='ssh-keys'>SSH Keys</h2>
 <p>Creates an SSH key that will be used to access the external system identified by the hostname parameter for SSH key-based authentication.</p>
-<h3 id='method-24'>Method</h3>
+<h3 id='method-25'>Method</h3>
 <p>POST</p>
-<h3 id='example-call-24'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
+<h3 id='example-call-25'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
 </code></pre><h3 id='example-response-24'>Example Response</h3>
 <p>no response expected</p>
 <p>Deletes an SSH key from the system.</p>
-<h3 id='method-25'>Method</h3>
+<h3 id='method-26'>Method</h3>
 <p>DELETE</p>
-<h3 id='example-call-25'>Example Call</h3><pre class="highlight plaintext"><code>{"fingerprint":"Fingerprint", "hostname":"Hostname"}
+<h3 id='example-call-26'>Example Call</h3><pre class="highlight plaintext"><code>{"fingerprint":"Fingerprint", "hostname":"Hostname"}
 </code></pre><h3 id='example-response-25'>Example Response</h3>
 <p>no response expected</p>
 <h2 id='heroku-keys'>Heroku Keys</h2>
 <p>Adds your Heroku API key to CircleCI and then takes <code>apikey</code> as form param name.</p>
-<h3 id='method-26'>Method</h3>
+<h3 id='method-27'>Method</h3>
 <p>POST</p>
-<h3 id='example-call-26'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key?circle-token=:token
+<h3 id='example-call-27'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key?circle-token=:token
 </code></pre><h3 id='example-response-26'>Example Response</h3>
 <p>no response expected</p>
 
