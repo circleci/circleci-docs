@@ -111,30 +111,14 @@ Let’s break down what’s happening during this build’s execution:
 
 ## Docker Version
 
-If your job requires a specific docker image, you can set it as a `version` attribute:
+If your job requires a specific docker version, you can set it as a `version` attribute:
 
 ```yaml
       - setup_remote_docker:
           version: 17.05.0-ce
 ```
 
-The currently supported versions are:
-
-[Stable releases](https://download.docker.com/linux/static/stable/x86_64/)
-- `17.03.0-ce` (default)
-- `17.06.0-ce`
-- `17.06.1-ce`
-- `17.09.0-ce`
-- `18.03.0-ce`
-- `18.03.1-ce`
-- `18.05.0-ce`
-
-[Edge releases](https://download.docker.com/linux/static/edge/x86_64/)
-- `17.05.0-ce`
-- `17.07.0-ce`
-- `17.10.0-ce`
-- `17.11.0-ce`
-- `18.06.0-ce`
+CircleCI supports multiple versions of Docker and defaults to using `17.03.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 

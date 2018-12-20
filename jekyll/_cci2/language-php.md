@@ -37,12 +37,12 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ---
 
-## Config Walkthrough
+## Sample Configuration
 
-Following is the commented the `.circleci/config.yml` file in the demo project.
+Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
-```
+```yaml
 version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
@@ -82,6 +82,94 @@ jobs: # a collection of steps
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
+
+## Config Walkthrough
+
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
+
+```yaml
+version: 2
+```
+
+
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
+it must have a `build` job.
+
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
+to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
+By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+
+In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
+to specify a custom Docker image. We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes browser tooling.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers 
+    working_directory: ~/laravel 
+```
+
+Next, we'll run a series of commands under the `steps:` key. Below we install
+some PHP tooling allowing up to manage our dependencies.
+
+{% raw %}
+```yaml
+    steps:
+      - checkout
+      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
+      - run: sudo docker-php-ext-install zip
+      - run: sudo composer self-update
+```
+{% endraw %}
+
+The next set of steps for the config are all related to dependency management
+and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
+
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
+to cache certain files or directories. In this example, the cache key will be based on a checksum of the
+`composer.lock` file, but will fall back to using a more generic cache key. 
+
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
+to restore cached files or directories.
+
+
+{% raw %}
+```yaml
+      - restore_cache: 
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache: 
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: yarn install
+      - save_cache: 
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+```
+{% endraw %}
+
+Finally, we will set up a test database with Sqlite, run migrations and run tests.
+
+```yaml
+      - run: touch storage/testing.sqlite 
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: ./vendor/bin/codecept build
+      - run: ./vendor/bin/codecept run
+```
 
 ---
 
