@@ -146,6 +146,7 @@ example tree structure above, the `pack` command will  map the folder names and
 file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
 
 
+{% raw %}
 ```yaml
 $ circleci config pack foo
 bar:
@@ -160,6 +161,7 @@ subtree:
     pine:
       seasonality: evergreen
 ```
+{% endraw %}
 
 ### Other Config Packing Capabilities
 {:.no_toc}
@@ -168,17 +170,22 @@ A file beginning with `@` will have its contents merged into its parent folder l
 
 Thus:
 
+{% raw %}
 ```sh
 $ cat foo/bar/@baz.yml
 {baz: qux}
 ```
+{% endraw %}
 
 Is mapped to:
 
+{% raw %}
 ```yaml
 bar:
     baz: qux
 ```
+
+{% endraw %}
 
 
 ### An Example Packed Config.yml
