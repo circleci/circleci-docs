@@ -147,8 +147,11 @@ file names to **yaml keys**  and the file contents as the **values** to those ke
 
 
 {% raw %}
-```yaml
+```sh
 $ circleci config pack foo
+```
+
+```yaml
 bar:
   baz: qux
 foo: bar
@@ -179,13 +182,10 @@ $ cat foo/bar/@baz.yml
 
 Is mapped to:
 
-{% raw %}
 ```yaml
-bar:
-    baz: qux
+bar: 
+  baz: qux
 ```
-
-{% endraw %}
 
 
 ### An Example Packed Config.yml
@@ -200,10 +200,12 @@ expanded source configuration alongside your original config (useful if you are 
 
 Consider the example configuration that uses the `hello-build` orb:
 
-```yaml
+```
 version: 2.1
+
 orbs:
     hello: circleci/hello-build@0.0.5
+
 workflows:
     "Hello Workflow":
         jobs:
