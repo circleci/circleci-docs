@@ -102,7 +102,7 @@ circleci setup
 
 Setup will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI Enterprise change the value to your installation address (for example, circleci.my-org.com).
 
-## Validating A CircleCI Config
+## Validate A CircleCI Config
 
 The CLI can be used to validate your `.circleci/config.yml` file. This can save
 you from pushing commits just for the sake of testing your configuration. 
