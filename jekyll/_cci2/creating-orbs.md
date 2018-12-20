@@ -15,8 +15,11 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 The following high-level steps will enable you to publish your first orb:
 
-1. Claim a namespace (assuming you don't yet have one), eg:
+1. Claim a namespace (assuming you don't yet have one):
+
 `circleci namespace create sandbox github CircleCI-Public`
+
+In this example we are creating the `sandbox` namespace, which will be linked to the GitHub organization `CircleCI-Public`.
 
 **Note** Namespaces cannot be removed or renamed once you have claimed a namespace.
 
