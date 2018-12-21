@@ -15,15 +15,17 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 The following high-level steps will enable you to publish your first orb:
 
-1. Claim a namespace (assuming you don't yet have one), eg:
+1. Claim a namespace (assuming you don't yet have one). For example:
 `circleci namespace create sandbox github CircleCI-Public`
+
+**Note** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider. Note that the org you specified should already be added to CircleCI CLI. Also, the org setting "Uncertified Orbs" needs to be enabled.
 
 **Note** Namespaces cannot be removed or renamed once you have claimed a namespace.
 
-2. Create the orb inside your namespace, eg:
+2. Create the orb inside your namespace. For example:
 `circleci orb create sandbox/hello-world`
 
-3. Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of example, let's assume a file in /tmp/orb.yml could be made with a bare-bones orb like:
+3. Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in /tmp/orb.yml could be made with a bare-bones orb like:
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
 4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
@@ -40,7 +42,7 @@ The following high-level steps will enable you to publish your first orb:
 
 ### Orb Publishing Process
 
-Before working with orbs, you may find it helpful to gain a high-level understanding the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process.
+Before working with orbs, you may find it helpful to gain a high-level understanding the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process. ![Orbs Workflow Diagram image](  {{ site.baseurl }}/assets/img/docs/orbsworkflow-v2_orbs_outline.png)
 
 #### Step 1 - Set Up the CircleCI CLI
 Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Detailed instructions can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
