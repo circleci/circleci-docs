@@ -15,12 +15,15 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 The following high-level steps will enable you to publish your first orb:
 
+
 1. Claim a namespace (assuming you don't yet have one). For example:
 `circleci namespace create sandbox github CircleCI-Public`
 
-**Note** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider. Note that the org you specified should already be added to CircleCI CLI. Also, the org setting "Uncertified Orbs" needs to be enabled.
+In this example we are creating the `sandbox` namespace, which will be linked to the GitHub organization `CircleCI-Public`.
 
-**Note** Namespaces cannot be removed or renamed once you have claimed a namespace.
+**Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider. Note that the org you specified should already be added to CircleCI CLI. Also, the org setting "Uncertified Orbs" needs to be enabled.
+
+**Note:** Namespaces cannot be removed or renamed once you have claimed a namespace.
 
 2. Create the orb inside your namespace. For example:
 `circleci orb create sandbox/hello-world`
