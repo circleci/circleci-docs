@@ -16,7 +16,7 @@ things you can do with the CircleCI CLI include:
 - Debug and validate your CI config 
 - Run jobs locally 
 - Query CircleCI's API
-- Create, publish, view and manage Orbs.
+- Create, publish, view and manage Orbs
 
 This document will cover the installation and usage of the CLI tool.
 
@@ -52,14 +52,14 @@ There are several alternative installation methods for the CircleCI CLI. Read on
 #### Install with Snap
 {:.no_toc}
 
-The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with Snap packages.
+The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
 
 ```sh
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
 
-**Note**: With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
+**Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
 
 #### Install With Homebrew
 {:.no_toc}
@@ -94,18 +94,19 @@ This command may prompt you for `sudo` if your user doesn't have write permissio
 
 ## Configuring The CLI
 
-Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://circleci.com/account/api). Once you have a token, configure the CLI by running:
+Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://circleci.com/account/api). After you get your token, configure the CLI by running:
 
 ```sh
 circleci setup
 ```
 
-Setup will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI Enterprise change the value to your installation address (for example, circleci.my-org.com).
+Setup will prompt you for configuration settings. If you are using the CLI with
+circleci.com, use the default CircleCI Host. If you are using CircleCI installed
+on your own server or private cloud, change the value to your installation address (for example, circleci.my-org.com).
 
 ## Validate A CircleCI Config
 
-The CLI can be used to validate your `.circleci/config.yml` file. This can save
-you from pushing commits just for the sake of testing your configuration. 
+You can avoid pushing additional commits to test your config.yml by using the CLI to validate your config locally.
 
 To validate your config, navigate to a directory with a `.circleci/config.yml` file and run:
 
