@@ -215,23 +215,23 @@ Login Succeeded
 例えば下記のパラメータを処理したとします。
 
 ```
-    {
-      "build_parameters": {
-        "foo": "bar",
-        "baz": 5,
-        "qux": {"quux": 1},
-        "list": ["a", "list", "of", "strings"]
-      }
-    }
+{
+  "build_parameters": {
+    "foo": "bar",
+    "baz": 5,
+    "qux": {"quux": 1},
+    "list": ["a", "list", "of", "strings"]
+  }
+}
 ```
 
 ビルド時には下記のような環境変数となります。
 
 ```
-    export foo="bar"
-    export baz="5"
-    export qux="{\"quux\": 1}"
-    export list="[\"a\", \"list\", \"of\", \"strings\"]"
+export foo="bar"
+export baz="5"
+export qux="{\"quux\": 1}"
+export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 
 ビルドパラメータは各ジョブのコンテナ内で環境変数としてエクスポートされ、`config.yml` のスクリプトやプログラム、コマンドで使われることになります。 インジェクトされた環境変数はジョブ内のステップの実行内容を変えるのに使われることもあります。 ここで念頭に置いておかなければいけないのは、インジェクトされた環境変数は `config.yml` で定義されたものでも、プロジェクトの設定で定義されたものでも、上書きできないことです。
@@ -239,22 +239,22 @@ Login Succeeded
 連続的に異なるターゲット OS で機能テストを行うのに、`build_parameters` キーに環境変数をインジェクトしたくなるかもしれません。 例えば、複数の異なるホストに対して機能テストが必要なステージング環境へのデプロイを実行するような場合です。 下記の例のように、`bash` と `curl` を組み合わせ (開発言語にあらかじめ用意されている HTTP ライブラリを使ってもかまいません)、`Content-type: application/json` として JSON フォーマットでデータ送信する形で `build_parameters` を含ませることが可能です。
 
 ```
-    {
-      "build_parameters": {
-        "param1": "value1",
-        "param2": 500
-      }
-    }
+{
+  "build_parameters": {
+  "param1": "value1",
+  "param2": 500
+  }
+}
 ```
 
 `curl` の場合は下記のようにします。
 
 ```
-    curl \
-      --header "Content-Type: application/json" \
-      --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
-      --request POST \
-      https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
+curl \
+  --header "Content-Type: application/json" \
+  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
+  --request POST \
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
 ```
 
 ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
@@ -306,7 +306,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 `HOME` | String | ホームディレクトリ
 {:class="table table-striped"}
 
-## こちらもご覧ください
+## See Also
 {:.no_toc}
 
 [Contexts]( {{ site.baseurl }}/ja/2.0/contexts/)
