@@ -215,7 +215,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       docker cp $CACHE_PATH/. $NAME:/backup
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
-      
+
 # Back up the same volume to circle cache
 - run:
     name: Backing up bundler cache from docker volumes
@@ -239,7 +239,8 @@ Thanks to ryansch for contributing this example.
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
+[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
-[primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
-[docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching
+[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+
+[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
