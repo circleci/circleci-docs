@@ -24,18 +24,18 @@ CircleCI は Bash を使っているため、環境変数には POSIX 命名規�
 
 CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 環境変数は次の優先順位で使用されます。
 
-1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの (例：`FOO=bar make install`)。
-2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
-3. [ jobs](#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの。
-4. [コンテナ](#setting-an-environment-variable-in-a-container)において `environment` キーで定義したもの。
+1. `run` ステップ内で指定している[シェルコマンド](#シェルコマンドで環境変数を設定する)で宣言されたもの (例：`FOO=bar make install`)。
+2. [`run` ステップ内](#ステップ内で環境変数を設定する) で `environment` キーを使って宣言されたもの。
+3. [jobs](#ジョブ内で環境変数を設定する) 内において `environment` キーで定義したもの。
+4. [コンテナ](#コンテナ内で環境変数を設定する)において `environment` キーで定義したもの。
 5. コンテキスト環境変数 (コンテキストを利用している場合)。詳細は[Contexts]({{ site.baseurl }}/ja/2.0/contexts/)を参照。
-6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
-7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
+6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#プロジェクト内で環境変数を設定する)。
+7. [CircleCI の定義済み環境変数](#定義済み環境変数)で解説している特殊な環境変数。
 
 `FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
 
 **注：**
-`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[Contexts]({{ site.baseurl }}/ja/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/ja/2.0/security/#encryption)で解説しています。
+`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#プロジェクト内で環境変数を設定する)設定や[Contexts]({{ site.baseurl }}/ja/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/ja/2.0/security/#encryption)で解説しています。
 
 設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
@@ -70,7 +70,7 @@ CircleCI は `bash` コマンドを用いて、ステップごとにその都度
 
 CircleCI は環境変数設定時のインターポレーションに対応していません。
 
-ただし、[`BASH_ENV` を使う](#using-bash_env-to-set-environment-variables)ことで現在のシェルに対して変数をセットすることはできます。 この方法は、`PATH` の書き換えや他の変数から環境変数の値を参照するときなどに便利です。
+ただし、[`BASH_ENV` を使う](#bash_env-で環境変数を定義するs)ことで現在のシェルに対して変数をセットすることはできます。 この方法は、`PATH` の書き換えや他の変数から環境変数の値を参照するときなどに便利です。
 
 ```yaml
 version: 2
@@ -111,7 +111,7 @@ jobs:
 ```
 
 **注：**
-`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#using-bash_env-to-set-environment-variables) を使って変数値をエクスポートするようにしてください。
+`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#bash_env-で環境変数を定義するs) を使って変数値をエクスポートするようにしてください。
 
 ## ジョブ内で環境変数を設定する
 
@@ -273,7 +273,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 下記の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
 
 **注：**
-他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する](#シェルコマンドで環境変数を設定する)をご覧ください。
 
 変数 | 型 | 値
 ----------------------------|---------|-----------------------------------------------
