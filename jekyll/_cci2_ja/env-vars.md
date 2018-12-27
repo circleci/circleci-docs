@@ -163,6 +163,7 @@ jobs:
 
 Contextを作成することで複数のプロジェクト間で環境変数の共有が可能になります。 Contextで環境変数を設定する方法は[Contextのドキュメント]({{ site.baseurl }}/ja/2.0/contexts/)をご覧ください。
 
+<a name="setting-an-environment-variable-in-a-project"></a>
 ## プロジェクト内で環境変数を設定する
 
 1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします。
