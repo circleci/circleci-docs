@@ -28,14 +28,14 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
 3. [ jobs](#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの。
 4. [コンテナ](#setting-an-environment-variable-in-a-container)において `environment` キーで定義したもの。
-5. コンテキスト環境変数 (コンテキストを利用している場合)。詳細は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)を参照。
+5. コンテキスト環境変数 (コンテキストを利用している場合)。詳細は[Contexts]({{ site.baseurl }}/ja/2.0/contexts/)を参照。
 6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
 7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
 `FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
 
 **注：**
-`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/ja/2.0/security/#encryption)で解説しています。
+`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[Contexts]({{ site.baseurl }}/ja/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/ja/2.0/security/#encryption)で解説しています。
 
 設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
@@ -306,7 +306,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 `HOME` | String | ホームディレクトリ
 {:class="table table-striped"}
 
-## See Also
+## 関連情報
 {:.no_toc}
 
 [Contexts]( {{ site.baseurl }}/ja/2.0/contexts/)
