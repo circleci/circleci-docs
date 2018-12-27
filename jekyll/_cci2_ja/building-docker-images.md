@@ -14,7 +14,7 @@ order: 55
 
 ## はじめに
 
-デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離された、Docker コマンドの実行に特化したリモート環境となっています。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
+デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離された、Docker コマンドの実行に特化したリモート環境となっています。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを追加します。
 
 ```yaml
 jobs:
@@ -42,6 +42,7 @@ CPU数 | プロセッサー | RAM | ストレージ
 {: class="table table-striped"
 
 ### 設定例
+{:.no_toc}
 
 `machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
 
@@ -104,7 +105,7 @@ jobs:
 
 1. 全てのコマンドは [primary-container][primary-container] の中で実行されます。
 2. `setup_remote_docker` が呼ばれると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。Docker に関わるコマンドは全てプライマリコンテナ内で実行されますが、イメージのビルド・プッシュおよびコンテナの実行はリモート Docker エンジン内で処理されます。
-3. イメージのビルドを高速化するために [Docker Layer Caching][docker-layer-caching] を有効かしています。
+3. イメージのビルドを高速化するために [Docker Layer Caching][docker-layer-caching] を有効化しています。
 4. Docker Hub のログイン情報の保管にはプロジェクト環境変数を使用します。
 
 ## 使用する Docker のバージョン変更
@@ -117,7 +118,7 @@ jobs:
 ```
 
 現在サポートしているバージョンは下記の通りです。
-CircleCIは複数の Docker のバージョンをサポートしており、デフォルトは `17.03.0-ce` です。サポートする全てのバージョンは [安定版リリース](https://download.docker.com/linux/static/stable/x86_64/) や [Edgeリリース](https://download.docker.com/linux/static/edge/x86_64/) をご確認ください。
+CircleCIは複数の Docker のバージョンをサポートしており、デフォルトは `17.03.0-ce` です。サポートする全てのバージョンは[安定版リリース](https://download.docker.com/linux/static/stable/x86_64/)や[Edgeリリース](https://download.docker.com/linux/static/edge/x86_64/)をご確認ください。
 
 Docker をインストールした Git を含む Docker イメージを使いたい時は、`17.05.0-ce-git` を利用してください。 **注：** `version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
@@ -126,6 +127,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることはできません。
 
 ### サービスへのアクセス方法
+{:.no_toc}
 
 プライマリコンテナからリモート Docker 内のサービスを開始させたり Ping したりすることは**できません**。また、リモート Docker 内のサービスに対して Ping するようなプライマリコンテナを稼働させることも**できません**。 ただし、同じコンテナを経由する形でリモート Docker 側からサービスに対してコマンドを実行することで、この問題を解決できます。
 
@@ -152,7 +154,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 ### フォルダのマウント
 {:.no_toc}
 
-ジョブスペースからリモート Docker 内のコンテナに (もしくはその反対でも) フォルダをマウントすることは **できません**。 そのような 2 つの環境間でファイルをやりとりするには、`docker cp` コマンドを使うことができます。 例えば、ソースコード内の設定ファイルを使ってリモート Docker のコンテナを起動するには、下記のように記述します。
+ジョブスペースからリモート Docker 内のコンテナに (もしくはその反対でも) フォルダをマウントすることは**できません**。そのような 2 つの環境間でファイルをやりとりするには、`docker cp` コマンドを使うことができます。 例えば、ソースコード内の設定ファイルを使ってリモート Docker のコンテナを起動するには、下記のように記述します。
 
 ```yaml
 - run: |
@@ -202,7 +204,7 @@ services:
     keys:
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}
-      - v4-bundler-cache-{{ arch }}      
+      - v4-bundler-cache-{{ arch }}
 - run:
     name: bundler cache を Docker ボリュームにリストア
     command: |
@@ -224,7 +226,7 @@ services:
       set -x
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml run --name $NAME $NAME backup
       docker cp $NAME:/backup/. $CACHE_PATH
-      docker rm -f $NAME  
+      docker rm -f $NAME
 - save_cache:
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
@@ -234,7 +236,7 @@ services:
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## See Also
+## 関連情報
 
 [Docker Layer Caching]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
 
