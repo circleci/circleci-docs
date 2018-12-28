@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Testing Config Files Locally"
-description: "Example CircleCI 2.0 Configuration Files"
+description: "Testing Config Files Locally"
 ---
 
 <div class="alert alert-info" role="alert">
@@ -21,7 +21,7 @@ To add a script that tests your config file locally, complete the following step
   - Source for project
   - Project name
   - Branch from which to build
-5. Add those values into your shell script. 
+5. Add those values into your shell script.
 
 ```bash
 #!/usr/bin/env bash
@@ -38,4 +38,3 @@ Now you can run the shell script and debug your `config.yml` file without having
 ## See Also
 
 [Using the Local CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/)
-
