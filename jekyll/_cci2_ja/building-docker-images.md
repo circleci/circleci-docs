@@ -151,7 +151,7 @@ Docker をインストールした Git を含む Docker イメージを使いた
 #...
 ```
 
-<a name="built-in-environment-variables"></a>
+<a name="mounting-folders"></a>
 ### フォルダのマウント
 {:.no_toc}
 
