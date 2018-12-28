@@ -39,6 +39,7 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 
 設定ファイルでスクリプトを実行した場合も、隠し環境変数が明らかになってしまう可能性があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#shell-script-best-practices)ページでご確認ください。
 
+<a name="using-bash_env-to-set-environment-variables"></a>
 ### `BASH_ENV` で環境変数を定義する
 {:.no_toc}
 
@@ -70,7 +71,7 @@ CircleCI は `bash` コマンドを用いて、ステップごとにその都度
 
 CircleCI は環境変数設定時のインターポレーションに対応していません。
 
-ただし、[`BASH_ENV` を使う](#bash_env-で環境変数を定義するs)ことで現在のシェルに対して変数をセットすることはできます。 この方法は、`PATH` の書き換えや他の変数から環境変数の値を参照するときなどに便利です。
+ただし、[`BASH_ENV` を使う](#bash_env-で環境変数を定義する)ことで現在のシェルに対して変数をセットすることはできます。 この方法は、`PATH` の書き換えや他の変数から環境変数の値を参照するときなどに便利です。
 
 ```yaml
 version: 2
@@ -111,7 +112,7 @@ jobs:
 ```
 
 **注：**
-`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#bash_env-で環境変数を定義するs) を使って変数値をエクスポートするようにしてください。
+`run` ステップでは毎回新たなシェルが実行されるため、ステップ間で環境変数を共有することはできません。 2 つ以上のステップから同じ環境変数を参照する場合は、[`BASH_ENV`](#bash_env-で環境変数を定義する) を使って変数値をエクスポートするようにしてください。
 
 ## ジョブ内で環境変数を設定する
 
@@ -127,6 +128,7 @@ jobs:
       FOO: bar
 ```
 
+<a name="setting-an-environment-variable-in-a-container"></a>
 ## コンテナ内で環境変数を設定する
 
 コンテナの中で環境変数を設定するには [`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macosexecutor)を使います。
@@ -203,6 +205,7 @@ Login Succeeded
 **注：**
 このように `docker` と同じ手順で全てのコマンドラインプログラムがログイン認証をパスできるわけではありません。
 
+<a name=>"injecting-environment-variables-with-the-api"</a>
 ## API を使って環境変数をインジェクトする方法
 
 ビルドパラメータは環境変数からなります。そのため、そのパラメータ名は下記の条件を満たしている必要があります。
@@ -269,6 +272,7 @@ export param2="500"
 
 API の呼び出しは POST リクエストで実行します。詳細は API リファレンスの [new build]({{ site.baseurl }}/api/v1-reference/#new-build) セクションを参照してください。 パラメータなしで POST リクエストした場合は名前付きブランチが新規で実行されます。
 
+<a name="built-in-environment-variables"></a>
 ## 定義済み環境変数
 
 下記の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
@@ -299,7 +303,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。
 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。
 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。
-`CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/ja/2.0/workflows/#git-tag-job-execution)を参照してください。
+`CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/ja/2.0/workflows/##executing-workflows-for-a-git-tag)を参照してください。
 `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。
 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。
 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。

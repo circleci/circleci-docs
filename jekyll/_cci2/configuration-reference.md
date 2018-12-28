@@ -259,7 +259,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command. 
+It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
 
 
 ```
@@ -403,7 +403,7 @@ A job that was not executed due to configured rules will show up in the list of 
 
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor. 
+After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
 
 Class       | vCPUs       | RAM
 ------------|-----------|------
@@ -414,7 +414,7 @@ large       | 4 | 8GB
 xlarge      | 8 | 16GB
 {: class="table table-striped"}
 
-Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. 
+Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
 #### **`steps`**
 
@@ -647,13 +647,13 @@ workflows:
     jobs:
       - job_with_optional_custom_checkout:
           custom_checkout: \"any non-empty string is truthy\"
-      - job_with_optional_custom_checkout            
+      - job_with_optional_custom_checkout
 ```
 
 ##### **`checkout`**
 
 Special step used to check out source code to the configured `path` (defaults to the `working_directory`).
-The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh. 
+The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -720,7 +720,7 @@ Template | Description
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. 
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 {: class="table table-striped"}
@@ -927,25 +927,25 @@ baz
       - build/*
 ```
 
-The `paths` list uses `Glob` from Go, and the pattern matches [filepath.Match](https://golang.org/pkg/path/filepath/#Match). 
+The `paths` list uses `Glob` from Go, and the pattern matches [filepath.Match](https://golang.org/pkg/path/filepath/#Match).
 
-``` 
-pattern: 
-        { term } 
-term: 
-        '*' matches any sequence of non-Separator characters 
-        '?' matches any single non-Separator character 
-        '[' [ '^' ] { character-range } 
-        ']' character class (must be non-empty) 
-        c matches character c (c != '*', '?', '\\', '[') 
-        '\\' c matches character c 
-character-range: 
-        c matches character c (c != '\\', '-', ']') 
-        '\\' c matches character c 
-        lo '-' hi matches character c for lo <= c <= hi 
-``` 
+```
+pattern:
+        { term }
+term:
+        '*' matches any sequence of non-Separator characters
+        '?' matches any single non-Separator character
+        '[' [ '^' ] { character-range }
+        ']' character class (must be non-empty)
+        c matches character c (c != '*', '?', '\\', '[')
+        '\\' c matches character c
+character-range:
+        c matches character c (c != '\\', '-', ']')
+        '\\' c matches character c
+        lo '-' hi matches character c for lo <= c <= hi
+```
 
-The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory. 
+The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
 
 ##### **`attach_workspace`**
 
@@ -1021,7 +1021,7 @@ version | Y | String | Should currently be `2`
 A unique name for your workflow.
 
 #### **`triggers`**
-Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch. 
+Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1055,7 +1055,7 @@ cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinep
 {: class="table table-striped"}
 
 ###### **`filters`**
-Filters can have the key `branches`. 
+Filters can have the key `branches`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1275,20 +1275,20 @@ jobs:
       # Upload test results
       - store_test_results:
           path: /tmp/test-reports
-          
+
   deploy-stage:
     docker:
       - image: ubuntu:14.04
-    working_directory: /tmp/my-project  
+    working_directory: /tmp/my-project
     steps:
       - run:
           name: Deploy if tests pass and branch is Staging
-          command: ansible-playbook site.yml -i staging          
-          
+          command: ansible-playbook site.yml -i staging
+
   deploy-prod:
     docker:
       - image: ubuntu:14.04
-    working_directory: /tmp/my-project  
+    working_directory: /tmp/my-project
     steps:
       - run:
           name: Deploy if tests pass and branch is Master

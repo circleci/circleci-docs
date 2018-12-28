@@ -183,7 +183,7 @@ CircleCI 2.0 で利用できる、強力でカスタマイズ性の高い依存�
 {% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのブランチ名。
 {% raw %}`{{ .BuildNum }}`{% endraw %} | 実行中のビルドにおける CircleCI のジョブ番号。
 {% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのリビジョン。
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 ([定義済み環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName` で示される環境変数 ([定義済み環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)、もしくは[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイル内容の SHA256 ハッシュを Base64 エンコードしたもの。ファイル内容に変更があるとキャッシュキーも新たに生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 また、`restore_cache` から `save_cache` までの処理でファイル内容が変わらないようにします。そうしないと `restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にキャッシュが保存されることになります。
 {% raw %}`{{ epoch }}`{% endraw %} | 協定世界時 (UTC) における 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX 時間や UNIX 時間と同じです。
 {% raw %}`{{ arch }}`{% endraw %} | OS と CPU の種類。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin amd64` あるいは `linux amd64` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください
