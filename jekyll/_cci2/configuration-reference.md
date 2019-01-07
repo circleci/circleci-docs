@@ -36,7 +36,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
 executors | N | Map | A map of strings to executor definitions. See the Executors Syntax section below.
 commands | N | Map | A map of command names to command definitions. See the Commands Syntax section below.
 {: class="table table-striped"}
@@ -52,6 +52,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
 
 ## **`commands`** (requires version: 2.1)
 
@@ -1224,11 +1225,6 @@ jobs:
 
     working_directory: ~/my-project
 
-    branches:
-      ignore:
-        - develop
-        - /feature-.*/
-
     steps:
       - checkout
 
@@ -1298,7 +1294,12 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /feature-.*/
       - deploy-stage:
           requires:
             - build
