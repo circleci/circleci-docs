@@ -1224,11 +1224,6 @@ jobs:
 
     working_directory: ~/my-project
 
-    branches:
-      ignore:
-        - develop
-        - /feature-.*/
-
     steps:
       - checkout
 
@@ -1298,7 +1293,12 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /feature-.*/
       - deploy-stage:
           requires:
             - build
