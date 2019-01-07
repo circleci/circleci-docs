@@ -7,7 +7,6 @@ categories: [configuration]
 order: 1
 ---
 
-
 This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
 * TOC
@@ -16,7 +15,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the Add Projects page if it is a new project. For an existing Project, go to the Project Settings and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
@@ -67,7 +66,6 @@ jobs:
           to: "Lev"
 ```
 
-
 ### Invoking Other Commands in Your Command
 {:.no_toc}
 
@@ -110,7 +108,6 @@ commands:
           name: Deploy to S3
           command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 ```
-
 
 Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file as:
 
@@ -200,9 +197,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
-
 
 ### Example of Using an Executor Declared in config.yml in Multiple Jobs
 {:.no_toc}
@@ -235,7 +230,6 @@ jobs:
       - checkout
       - run: echo "how are ya?"
 ```
-
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
@@ -305,7 +299,6 @@ jobs:
     working_directory: ~/tests
 ```
 
-
 The above config would resolve to the following:
 ```yaml
 jobs:
@@ -366,7 +359,7 @@ A parameter can have the following keys as immediate children:
 | Key Name    | Description                                                                                   | Default value |
 |-------------|-----------------------------------------------------------------------------------------------|---------------|
 | description | Optional. Used to generate documentation for your orb.                                        | N/A           |
-| type        | Required. See Parameter Types below for details.                           | N/A           |
+| type        | Required. See **Parameter Types** in the section below for details.                           | N/A           |
 | default     | The default value for the parameter. If not present, the parameter is implied to be required. | N/A           |
 {: class="table table-striped"}
 
@@ -489,8 +482,7 @@ commands:
 #### Executor
 {:.no_toc}
 
-Use an `executor` parameter type to allow the invoker of a job to decide what
-executor it will run on.
+Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
 ```
 {% raw %}
@@ -538,9 +530,8 @@ workflows:
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
-```
 {% raw %}
-
+```
 yaml
 commands:
   run-tests:
@@ -553,16 +544,13 @@ commands:
     - run: make deps
     - steps: << parameters.after-deps >>
     - run: make test
-
-{% endraw %}
-
 ```
+{% endraw %}
 
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
-```
 {% raw %}
-
+```
 yaml
 jobs:
   build:
@@ -572,33 +560,28 @@ jobs:
         after-deps:
           - run: echo "The dependencies are installed"
           - run: echo "And now I'm going to run the tests"
-
-{% endraw %}
-
 ```
+{% endraw %}
 
 The above will resolve to the following:
 
-```
 {% raw %}
-
+```
 yaml
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
   - run: echo "And now I'm going to run the tests"
   - run: make test
-
+```
 {% endraw %}
 
-```
 #### Environment Variable Name
 
 The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
-```
 {% raw %}
-
+```
 version: 2
 jobs:
   build:
@@ -643,10 +626,8 @@ workflows:
            access-key: FOO_BAR
            secret-key: BIN_BAZ
            command: ls s3://some/where
-
-{% endraw %}
-
 ```
+{% endraw %}
 
 ## Authoring Parameterized Jobs
 
@@ -654,9 +635,8 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
-```
 {% raw %}
-
+```
 yaml
 version: 2.1
 
@@ -677,10 +657,8 @@ workflows:
     jobs:
       - sayhello: # invokes the parameterized job
           saywhat: Everyone
-
-{% endraw %}
-
 ```
+{% endraw %}
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
 
@@ -689,6 +667,7 @@ workflows:
 If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
 
 **hello-orb**
+
 ```yaml
 # partial yaml from hello-orb
 jobs:
@@ -712,6 +691,7 @@ commands:
 ```
 
 **Config leveraging hello-orb**
+
 ```yaml
 # config.yml
 version: 2.1
@@ -770,8 +750,6 @@ jobs:
     environment:
       MYPRECIOUS: "myspecialvalue"
 ```
-
-
 
 ### The Scope of Parameters
 {:.no_toc}
