@@ -97,16 +97,16 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (5)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
 Let’s break down what’s happening during this build’s execution:
 
-1. All commands are executed in the [primary container][primary-container].
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-3. We enable [Docker Layer Caching][docker-layer-caching] here to speed up image building.
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) here to speed up image building.
 4. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker Version
