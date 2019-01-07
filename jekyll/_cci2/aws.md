@@ -35,6 +35,7 @@ Number of daily active CircleCI users| CPU | RAM| Disk space | NIC speed
 251-1000 | 16 cores | 128GB | 500GB | 10Gbps
 1001-5000 | 20 cores | 256GB | 1TB | 10Gbps
 5000+ | 24 cores | 512GB | 2TB | 10Gbps
+{: class="table table-striped"}
 
 ### Externalization
 {:no_toc}
@@ -54,7 +55,7 @@ Contact support to evaluate your installation against the current requirements f
 ### Nomad Clients
 {:no_toc}
 
-Nomad client machines run the CircleCI jobs that were scheduled by the Services machine. Following are the Minimum CPU, RAM, and disk space requirements per client:
+Nomad client machines run the CircleCI jobs that were scheduled by the Services machine. Following are the Minimum CPU, RAM, and disk space requirements per client for the default [resource class]({{site.baseurl}}/2.0/configuration-reference/#resource_class):
 
 - CPU: 4 cores
 - RAM: 16GB
@@ -69,7 +70,7 @@ Number of daily active CircleCI users | Number of Nomad client machines
 50-250 | 5-10
 250-1000 | 10-15
 5000+ | 15+
-
+{: class="table table-striped"}
 
 ## Installation Prerequisites
 
@@ -206,6 +207,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 8125 | UDP | Inbound | Nomad Clients | Metrics |  |
 |   | 8125 | UDP | Inbound | Nomad Servers | Metrics | Only if using externalised Nomad Servers |
 |   | 8125 | UDP | Inbound | All Database Servers | Metrics | Only if using externalised databases |
+{: class="table table-striped"}
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
@@ -218,7 +220,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 80 | TCP | Outbound | AWS API endpoints | API access | Only if running on AWS |
 |   | 443 | TCP | Outbound | AWS API endpoints | API access | Only if running on AWS |
 |   | 5432 | TCP | Outbound | PostgreSQL Servers | PostgreSQL database connection | Only if using externalised databases. Port is user-defined, assuming the default PostgreSQL port. |
-
+{: class="table table-striped"}
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
@@ -227,7 +229,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 6379 | TCP | Outbound | Redis Servers | Redis connection | Only if using externalised Redis |
 |   | 4647 | TCP | Outbound | Nomad Servers | Nomad Server connection | Only if using externalised Nomad Servers |
 |   | 443 | TCP | Outbound | CloudWatch Endpoints | Metrics | Only if using AWS CloudWatch |
-
+{: class="table table-striped"}
 
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
@@ -243,7 +245,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 3001 | TCP | Bi-directional | Services Machine | Internal communication |  |
 |   | 443 | TCP | Outbound | Cloud Storage Provider | Artifacts storage | Only if using external artifacts storage |
 |   | 53 | UDP | Outbound | Internal DNS Server | DNS resolution | This is to make sure that your jobs can resolve all DNS names that are needed for their correct operation |
-
+{: class="table table-striped"}
 
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
@@ -254,26 +256,26 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 443 | TCP | Inbound | Nomad Clients | API access |  |
 |   | 80 | TCP | Bi-directional | Services Machine | Webhooks / API access |  |
 |   | 443 | TCP | Bi-directional | Services Machine | Webhooks / API access |  |
-
+{: class="table table-striped"}
 
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 |  **PostgreSQL Servers** | 5432 | TCP | Bi-directional | PostgreSQL Servers | PostgreSQL replication | Only if using externalised databases. Port is user-defined, assuming the default PostgreSQL port. |
-
+{: class="table table-striped"}
 
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 |  **MongoDB Servers** | 27017 | TCP | Bi-directional | MongoDB Servers | MongoDB replication | Only if using externalised databases. Port is user-defined, assuming the default MongoDB port. |
-
+{: class="table table-striped"}
 
 
 |  **Machine type** | **Port number** | **Protocol** | **Direction** | **Source / destination** | **Use** | **Notes** |
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 |  **RabbitMQ Servers** | 5672 | TCP | Inbound | Services Machine | RabbitMQ connection | Only if using externalised RabbitMQ |
 |   | 5672 | TCP | Bi-directional | RabbitMQ Servers | RabbitMQ mirroring | Only if using externalised RabbitMQ |
-
+{: class="table table-striped"}
 
 
 
@@ -281,7 +283,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |  ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 |  **Redis Servers** | 6379 | TCP | Inbound | Services Machine | Redis connection | Only if using externalised Redis |
 |   | 6379 | TCP | Bi-directional | Redis Servers | Redis replication | Only if using externalised Redis and using Redis replication (optional) |
-
+{: class="table table-striped"}
 
 
 
@@ -290,3 +292,4 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |  **Nomad Servers** | 4646 | TCP | Inbound | Services Machine | Nomad Server connection | Only if using externalised Nomad Servers |
 |   | 4647 | TCP | Inbound | Services Machine | Nomad Server connection | Only if using externalised Nomad Servers |
 |   | 4648 | TCP | Bi-directional | Nomad Servers | Nomad Servers internal communication | Only if using externalised Nomad Servers |
+{: class="table table-striped"}
