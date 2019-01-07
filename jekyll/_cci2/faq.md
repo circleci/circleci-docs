@@ -30,14 +30,6 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
 - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
-### Can I try CircleCI 2.0 while still using 1.0?
-{:.no_toc}
-Yep! If you're not ready to fully commit to 2.0, you can easily try it while still building on 1.0:
-
-Create a new branch and add 2.0 configuration as described in the [2.0 Project Tutorial](https://circleci.com/docs/2.0/project-walkthrough/). When you push the branch with 2.0 configuration, your project will build on CircleCI 2.0. All other branches will continue building on CircleCI 1.0.
-
-If you'd like to completely revert to 1.0 configuration, simply replace `.circleci/config.yml` with a 1.0 `circle.yml` file. Keep in mind that CircleCI 1.0 will be sunset August 31st, 2018. More info available on the [CircleCI Blog](https://circleci.com/blog/sunsetting-1-0/).
-
 ### How do I migrate from Jenkins to CircleCI 2.0?
 {:.no_toc}
 Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
