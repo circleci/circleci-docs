@@ -52,6 +52,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
 
 ## **`commands`** (requires version: 2.1)
 
@@ -1185,11 +1186,6 @@ jobs:
 
     working_directory: ~/my-project
 
-    branches:
-      ignore:
-        - develop
-        - /feature-.*/
-
     steps:
       - checkout
 
@@ -1259,7 +1255,12 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /feature-.*/
       - deploy-stage:
           requires:
             - build
