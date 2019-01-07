@@ -36,9 +36,9 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the Executors Syntax section below.
-commands | N | Map | A map of command names to command definitions. See the Commands Syntax section below.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
+executors | N | Map | A map of strings to executor definitions. See the [Executors] ({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
+commands | N | Map | A map of command names to command definitions. See the [Commands] ({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
@@ -61,7 +61,7 @@ A command definition defines a sequence of steps as a map to be executed in a jo
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See the Parameter Syntax section of the Reusing Config document for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
 description | N | String | A string that describes the purpose of the command.
 {: class="table table-striped"}
 
@@ -110,24 +110,18 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the Using Parameters in Executors section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors] (https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 
-A run is comprised of one or more named jobs. Jobs are specified in the
-`jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map
-describing the job.
+A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
 
-If you are **not** using workflows, the `jobs` map must contain a job named
-`build`. This `build` job is the default entry-point for a run that is triggered by a
-push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
+If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
 **Note:**
-Jobs have a maximum runtime of 5 hours.
-If your jobs are timing out,
-consider running some of them in parallel.
+Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
 
 ### **<`job_name`>**
 
@@ -140,7 +134,7 @@ machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. NOTE: Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
+working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules for whitelisting/blacklisting execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all whitelisted). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
@@ -150,9 +144,7 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
 #### `environment`
-A map of environment variable names and values.
-These will override any environment variables
-you set in the CircleCI application.
+A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
 
 #### `parallelism`
 
@@ -248,7 +240,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials.  By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables.  It is also possible to set the credentials by using `aws_auth` field as in the following example:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
 
 ```
 jobs:
@@ -262,7 +254,6 @@ jobs:
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
 
-
 ```
 jobs:
   myjob:
@@ -272,9 +263,6 @@ jobs:
       - sayhello:
           to: "Lev"
 ```
-
-
-
 
 #### **`machine`**
 {:.no_toc}
@@ -307,8 +295,8 @@ jobs:
 
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
-* `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with common language tools found in CircleCI 1.0 build image.  The `latest` channel provides the latest tested images, changes to the channel are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance.
-* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image.  The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
+* `circleci/classic:latest` (default) - an Ubuntu version `14.04` image that includes Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with common language tools found in CircleCI 1.0 build image. The `latest` channel provides the latest tested images, changes to the channel are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance.
+* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
 * `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
 * `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
 * `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
@@ -351,7 +339,6 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
-
 
 **Example:** Use a macOS virtual machine with Xcode version `9.0`:
 
@@ -534,8 +521,7 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
-For more information,
-see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
+For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
 
 ###### _Background commands_
 
@@ -566,28 +552,18 @@ In this case, `command` and `name` become the string value of `run`, and the res
 
 ###### The `when` Attribute
 
-By default, CircleCI will execute job steps one at a time, in the order that
-they are defined in `config.yml`, until a step fails (returns a non-zero exit
-code). After a command fails, no further job steps will be executed.
+By default, CircleCI will execute job steps one at a time, in the order that they are defined in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps will be executed.
 
-Adding the `when` attribute to a job step allows you to override this default
-behaviour, and selectively run or skip steps depending on the status of the job.
+Adding the `when` attribute to a job step allows you to override this default behaviour, and selectively run or skip steps depending on the status of the job.
 
-The default value of `on_success` means that the step will run only if all of the
-previous steps have been successful (returned exit code 0).
+The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
 
-A value of `always` means that the step will run regardless of the exit status of
-previous steps. This is useful if you have a task that you want to run regardless
-of whether the previous steps are successful or not. For example, you might have a job
+A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job
 step that needs to upload logs or code-coverage data somewhere.
 
-A value of `on_fail` means that the step will run only if one of the preceding
-steps has failed (returns a non-zero exit code). It is common to use `on_fail`
-if you want to store some diagnostic data to help debug test failures, or to run
-custom notifications about the failure, such as sending emails or triggering
-alerts in chatrooms.
+A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-###### _Example_
+###### Example
 
 ```yaml
 steps:
@@ -653,8 +629,7 @@ workflows:
 
 ##### **`checkout`**
 
-Special step used to check out source code to the configured `path` (defaults to the `working_directory`).
-The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+Special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -679,11 +654,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
-**Note:** The `checkout` step will configure Git to skip automatic garbage
-collection. If you are caching your `.git` directory with
-[restore_cache](#restore_cache) and would like to use garbage collection to
-reduce its size, you may wish to use a [run](#run) step with command `git gc`
-before doing so.
+**Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
 ##### **`setup_remote_docker`**
 
@@ -695,8 +666,8 @@ docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer 
 {: class="table table-striped"}
 
 ***Notes***:
-- *A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.*
-- *`setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.*
+- A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.
+- `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 
 ##### **`save_cache`**
 
@@ -710,7 +681,9 @@ name | N | String | Title of the step to be shown in the CircleCI UI (default: "
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
-The cache for a specific `key` is immutable and cannot be changed once written. NOTE: _If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step._
+The cache for a specific `key` is immutable and cannot be changed once written. 
+
+**Note** If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
@@ -765,7 +738,7 @@ name | N | String | Title of the step to be shown in the CircleCI UI (default: "
 
 A key is searched against existing keys as a prefix.
 
-NOTE: _When there are multiple matches, the **most recent match** will be used, even if there is a more precise match._
+**Note**: When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
 For example:
 
@@ -795,7 +768,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-###### _Example_
+###### Example
 
 {% raw %}
 ``` YAML
@@ -823,7 +796,7 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-###### _Example_
+###### Example
 
 ``` YAML
 - deploy:
@@ -845,7 +818,7 @@ destination | N | String | Prefix added to the artifact paths in the artifacts A
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-###### _Example_
+###### Example
 
 ``` YAML
 - store_artifacts:
@@ -862,7 +835,7 @@ Key | Required | Type | Description
 path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
 {: class="table table-striped"}
 
-***Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your Test Summary section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.*
+**Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
 
 ###### _Example_
 
@@ -967,7 +940,6 @@ at | Y | String | Directory to attach the workspace to.
 Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
 The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it.
-
 When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
 
 If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
@@ -985,8 +957,7 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 
 ##### **`add_ssh_keys`**
 
-Special step that adds SSH keys from a project's settings to a container.
-Also configures SSH to use these keys.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1001,10 +972,7 @@ steps:
 ```
 
 **Note:**
-Even though CircleCI uses `ssh-agent`
-to sign all added SSH keys,
-you **must** use the `add_ssh_keys` key
-to actually add keys to a container.
+Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
 ## **`workflows`**
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
@@ -1103,7 +1071,6 @@ requires | N | List | A list of jobs that must succeed for the job to start
 name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
 {: class="table table-striped"}
 
-
 ###### **`context`**
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
@@ -1154,11 +1121,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 ###### **`tags`**
 {:.no_toc}
 
-CircleCI does not run workflows for tags
-unless you explicitly specify tag filters.
-Additionally,
-if a job requires any other jobs (directly or indirectly),
-you must specify tag filters for those jobs.
+CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
 Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
 
@@ -1174,8 +1137,7 @@ only | N | String, or List of Strings | Either a single tag specifier, or a list
 ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
 
-For more information,
-see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
+For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
 ###### *Example*
 
@@ -1196,11 +1158,10 @@ workflows:
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
-## _Full Example_
+## Full Example
 {:.no_toc}
 
 {% raw %}
-
 ```yaml
 version: 2
 jobs:
@@ -1313,7 +1274,6 @@ workflows:
             branches:
               only: master
 ```
-
 {% endraw %}
 
 ## See Also
