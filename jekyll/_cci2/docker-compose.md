@@ -48,7 +48,7 @@ In the following example, the whole system starts, then verifies it is running a
 
 ``` YAML
       - run:
-          name: Start container and verify it's working
+          name: Start container and verify it is working
           command: |
             set -x
             docker-compose up -d
