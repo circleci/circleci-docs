@@ -1093,7 +1093,7 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 ```
 **Note:** The `hold` job name must not exist in the main configuration.
 
-##### **`filters`**
+###### **`filters`**
 Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
@@ -1138,7 +1138,7 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-##### *Example*
+###### *Example*
 
 ```
 workflows:
