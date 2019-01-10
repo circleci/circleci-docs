@@ -125,9 +125,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **Calypso** - The next generation webapp powering WordPress.com. <https://github.com/Automattic/wp-calypso>
 - **Angular** - Another JavaScript framework built on multiple providers including CircleCI. <https://github.com/angular/angular>
 - **fastlane** - A build automatically tool for Android and iOS. <https://github.com/fastlane/fastlane>
-- **Atom** - The extensible text editor by GitHub is built with CircleCI (and other CI tools). <https://github.com/atom/atom>
 - **Yarn** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/). <https://github.com/yarnpkg/yarn>
-- **Hype** - Spotify’s tool that lets you execute arbitrary JVM code in a distributed environment. <https://github.com/spotify/hype>
 
 ## See Also
 {:.no_toc}
