@@ -21,7 +21,8 @@ The example app is available here: <https://circleci-demo-python-flask.herokuapp
 ## Basic Setup 
 {:.no_toc}
 
-The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several Jobs. In this example we have one Job called `build`. In turn, a job is comprised of several Steps, which are commands that execute in the container that is defined in the first `image:` key in the file. This first image is also referred to as the *primary container*.
+The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/)
+file may be comprised of several [`Jobs`]({{ site.baseurl }}/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
@@ -36,7 +37,8 @@ jobs:
       - run: pip install -r requirements/dev.txt
 ```
 
-**Note:** Every `.circleci/config.yml` file must have a job named `build` that includes the following:
+**Note:** If you are **not** using  [workflows]({{ site.baseurl }}/2.0/workflows) in your
+`.circleci/config.yml`, you must have a job named `build` that includes the following:
 
 - Executor of the underlying technology, defined as `docker` in this example.
 - Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing. 
@@ -148,6 +150,8 @@ The following describes the detail of the added key values:
 
 - The `save_cache:` step creates a cache from the specified paths, in this case `venv`. The cache key is created from the template specified by the `key:`. Note that it is important to use the same template as the `restore_cache:` step so that CircleCI saves a cache that can be found by the `restore_cache:` step. Before saving the cache CircleCI generates the cache key from the template, if a cache that matches the generated key already exists then CircleCI does not save a new cache. Since the template contains the branch name and the checksum of `requirements/dev.txt`, CircleCI will create a new cache whenever the job runs on a different branch, and/or if the checksum of `requirements/dev.txt` changes.
 
+You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
+
 ## Installing and Running Selenium to Automate Browser Testing
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
@@ -250,6 +254,8 @@ Notes on the added keys:
 - The path for the results files is relative to the `root` directory of the project. The demo application uses the same directory used to store artifacts, but this is not required. When a job completes, CircleCI analyzes the test timings and summarizes them on the Test Summary tab:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
+
+Read more about [artifact storage]({{ site.baseurl }}/2.0/artifacts) and [test results]({{ site.baseurl }}/2.0/collect-test-data/).
 
 ## Deploying to Heroku
 

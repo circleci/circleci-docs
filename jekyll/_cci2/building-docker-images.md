@@ -97,44 +97,28 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (5)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
 Let’s break down what’s happening during this build’s execution:
 
-1. All commands are executed in the [primary container][primary-container].
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-3. We enable [Docker Layer Caching][docker-layer-caching] here to speed up image building.
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) here to speed up image building.
 4. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker Version
 
-If your job requires a specific docker image, you can set it as a `version` attribute:
+If your job requires a specific docker version, you can set it as a `version` attribute:
 
 ```yaml
       - setup_remote_docker:
           version: 17.05.0-ce
 ```
 
-The currently supported versions are:
-
-[Stable releases](https://download.docker.com/linux/static/stable/x86_64/)
-- `17.03.0-ce` (default)
-- `17.06.0-ce`
-- `17.06.1-ce`
-- `17.09.0-ce`
-- `18.03.0-ce`
-- `18.03.1-ce`
-- `18.05.0-ce`
-
-[Edge releases](https://download.docker.com/linux/static/edge/x86_64/)
-- `17.05.0-ce`
-- `17.07.0-ce`
-- `17.10.0-ce`
-- `17.11.0-ce`
-- `18.06.0-ce`
+CircleCI supports multiple versions of Docker and defaults to using `17.03.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 
 If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -231,7 +215,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       docker cp $CACHE_PATH/. $NAME:/backup
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
-      
+
 # Back up the same volume to circle cache
 - run:
     name: Backing up bundler cache from docker volumes
@@ -255,7 +239,8 @@ Thanks to ryansch for contributing this example.
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
+[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[job-space]: {{ site.baseurl }}/2.0/glossary/#job-space
-[primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
-[docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching
+[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+
+[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
