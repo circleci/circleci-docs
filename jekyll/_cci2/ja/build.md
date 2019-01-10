@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "ビルド環境"
-description: "CircleCI 2.0 のビルド環境の設定"
+title: "Build Environments"
+description: "CircleCI 2.0 Build Environment Configuration"
 ---
 現在の状況や知りたい内容に関して、下記のドキュメントを参照してください。
 
@@ -25,6 +25,6 @@ description: "CircleCI 2.0 のビルド環境の設定"
 <a href="{{ site.baseurl }}/2.0/testing-ios/">macOS 上での iOS アプリのテスト手順</a> | CircleCI における iOS アプリ開発の準備とテスト方法のカスタマイズ。
 <a href="{{ site.baseurl }}/2.0/ios-codesigning/">iOS プロジェクトにおけるコードサイニングの設定</a> | CircleCI 2.0 での iOS および Mac のプロジェクトにおけるコードサイニング証明書の設定に関するガイドライン。 {: class="table table-striped"}
 
-CircleCI で開発の質と速度を底上げしよう！
+We’re thrilled to have you here. Happy building!
 
 *CircleCI チーム*
