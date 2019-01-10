@@ -15,9 +15,9 @@ order: 20
 
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 いずれも公式の標準的な Docker イメージの拡張機能であり、CI/CD ツール上での利用に適したツール類もあらかじめインストールしています。 [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/) には、ここで紹介しているものを含む全ビルド済みイメージがあります。 GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 These images are typically extensions of official Docker images and include tools especially useful for CI/CD. [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/) には、ここで紹介しているものを含む全ビルド済みイメージがあります。 GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
 
-***※**CircleCI まれに不具合修正や機能改善を目的とした Docker イメージの更新を行います。この更新が CircleCI のジョブにおけるイメージの動作に多少の影響を与えることがあります。 このようなメンテナンススケジュールについてあらかじめ把握しておくには、[**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) をチェックしてください。*
+***Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance.*
 
 ## ビルド済みイメージの活用方法
 
@@ -29,7 +29,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 例えば、決まったバージョンの Debian ベースの OS を使うには、`-jessie` や `-stretch` をコンテナ名の末尾に追記します。 `circleci/ruby:2.3.7-jessie` としたり、`circleci/ruby:2.3-jessie` としたりして、使用するイメージをピンポイントのバージョンに決め打ちします。 バージョン指定は CircleCI の Docker イメージの全てで利用できます。
 
-また、使いたいイメージの SHA ハッシュをそれらのタグの後に指定することも可能です。そうすることで、変更前の特定のイメージでいくらでもテストできるようになります。
+It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes.
 
 使用するイメージを特化させたいときは、下記の通り 2 つの方法があります。
 
@@ -73,7 +73,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 ## イメージタイプ
 
-CircleCI が提供する Docker イメージは 2 タイプに分類されます。**言語**イメージと**サービス**イメージです。これらのイメージは、システムユーザーの権限をもつユーザー `circleci` を追加します。
+CircleCI's convenience images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
 
 **注：**下記で紹介しているイメージは、各言語のアップストリームイメージの最新ビルドを元にしたものです。 これらの最新イメージはアップデートが頻繁にあるため、タグを追加指定して利用することを[おすすめ](#best-practices)します。
 
@@ -103,13 +103,13 @@ CircleCI では下記の言語イメージを提供しています。
 
 {:.no_toc}
 
-CircleCI では言語イメージについていくつかのバリエーションを用意しています。使い方は、下記のいずれかをイメージタグの末尾に付加するだけです。
+CircleCI maintains several variants for language images. To use these variants, add one of the following suffixes to the end of an image tag.
 
 - `-node`：多言語対応の Node.js を含めます
-- `-browsers`：Chrome、Firefox、Java 8、Geckodriver を含めます
-- `-browsers-legacy`：Chrome、Firefox、Java 8、PhantomJS を含めます
+- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
+- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
 - `-node-browsers`：`-node` と `-browsers` の組み合わせです
-- `-node-browsers-legacy`：`-node` と `-browsers-legacy` の組み合わせです
+- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
 参考までに、`circleci/golang:1.9` に Web ブラウザ をインストールしておきたいときは `circleci/golang:1.9-browsers` とします。
 
@@ -117,7 +117,7 @@ CircleCI では言語イメージについていくつかのバリエーショ�
 
 {:.no_toc}
 
-サービスイメージはデータベースをはじめとする処理に向いた Docker イメージです。このイメージ指定を言語イメージの**後**に挿入することで、セカンダリサービスコンテナとして動作します。
+Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
 
 CircleCI では下記のサービスイメージを提供しています。
 
@@ -133,7 +133,7 @@ CircleCI では下記のサービスイメージを提供しています。
 
 {:.no_toc}
 
-CircleCI が提供するサービスイメージは、各サービス 1 つのみです。ただし、RAM ディスクを使用してビルドの高速化を図るのに、サービスイメージタグの末尾に `-ram` を付加することができます。
+CircleCI maintains only one variant for service images. To speed up builds using RAM volume, add the `-ram` suffix to the end of a service image tag.
 
 参考までに、`circleci/postgres:9.5-postgis` イメージで RAM ディスクを使うには、`circleci/postgres:9.5-postgis-ram` とします。
 
