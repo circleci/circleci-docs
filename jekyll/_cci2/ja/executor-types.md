@@ -17,13 +17,13 @@ order: 10
 
 {:.no_toc}
 
-CircleCI は下記 3 種類の実行環境のいずれかでジョブを実行できます。
+CircleCI enables you to run jobs in one of three environments:
 
-- Docker イメージ（`docker`）
-- Linux 仮想環境（VM）イメージ（`machine`）
-- macOS 仮想環境（VM)イメージ（`macos`）
+- Within Docker images (`docker`)
+- Within a Linux virtual machine (VM) image (`machine`)
+- Within a macOS VM image (`macos`)
 
-Linux 環境のイメージでビルドする場合、`docker` と `machine` のどちらを使うかで下記のようなメリット・デメリットがあります。
+For building on Linux, there are tradeoffs to using `docker` versus `machine`, as follows:
 
 VM 環境 | `docker` | `machine` \---\---\----|\---\---\----|\---\---\---- 起動時間 | インスタントオン | 30〜60 秒 クリーン環境 | ○ | ○ カスタムイメージ | ○ | × Docker イメージのビルド | ○ <sup>(1)</sup> | ○ ジョブ環境全体の制御 | × | ○ root 権限 | × | ○ 複数データベースの利用 | × | ○ 同一ソフトウェアにおける複数バージョンの利用 | × | ○ レイヤーキャッシュ | ○ | ○ 権限付きコンテナの実行 | × | ○ ストレージにおける docker compose の使用 | × | ○ [リソースのカスタマイズ (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○ | × {: class="table table-striped"}
 
@@ -35,7 +35,7 @@ Executor タイプとして `Xcode` とともに `macOS` を使うこともで�
 
 `docker` キーは、Docker コンテナによってジョブを実行する基礎技術である Docker を定義するものです。 コンテナはユーザーが指定した Docker イメージのインスタンスです。設定ファイル内で最初に指定したイメージは、各ステップを実行するプライマリコンテナとなります。 Docker に初めて触れるということであれば、まずは [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) で基本を押さえておきましょう。
 
-実行するアプリケーションに必要なものだけをビルドすることでパフォーマンスを高める、といった Docker の使い方が可能です。 各ステップを実行するプライマリコンテナ生成用の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) で Docker イメージを指定してください。
+実行するアプリケーションに必要なものだけをビルドすることでパフォーマンスを高める、といった Docker の使い方が可能です。 Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
 
 ```yaml
 jobs:
@@ -58,17 +58,17 @@ Docker Executor のより詳細な解説は [CircleCI の設定]({{ site.baseurl
 
 ## Machine を使用する
 
-`machine` を指定すると、下記のようなマシンスペックの一時 VM 環境を使ってジョブを実行します。
+The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
 CPU数 | プロセッサ名 | メモリ | HDD \-----|\---\---\---\---\---\---\---\---\---|\---\---\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB {: class="table table-striped"}
 
-<0>machine</0> Executor を使うと、OS のリソースにフルアクセスできるアプリケーションを開発でき、ジョブ環境全体の制御も可能にします。 これは、例えば `ping` やカーネルの変更に用いる `sysctl` コマンドを使うような場面で有用です。
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need to use `ping` or modify the system with `sysctl` commands.
 
-`machine` Executor はさらに、Ruby や PHP といったプログラミング言語の追加パッケージのダウンロードなしに、Docker イメージをビルドできるようにします。
+Using the `machine` executor also enables you to build a Docker image without downloading additional packages for languages like Ruby and PHP.
 
-**※**`machine` を使ったプロジェクトは CircleCI の将来的なアップデートで別途追加料金が必要になる可能性があります。
+**Note**: Using `machine` may require additional fees in a future pricing update.
 
-マシン Executor を使うには、下記の通り `.circleci/config.yml` 内で [`machine` キー]({{ site.baseurl }}/2.0/configuration-reference/#machine)を `true` にします。
+To use the machine executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
 
 ```yaml
 version: 2
@@ -77,25 +77,25 @@ jobs:
     machine: true
 ```
 
-machine Executor のデフォルトイメージは `circleci/classic:latest` となっています。`image` キーではこれ以外のイメージも指定できます。
+The default image for the machine executor is `circleci/classic:latest`. You can specify other images by using the `image` key.
 
-**※**`image` キーはプライベートサーバー環境にインストールした CircleCI では利用できません。 詳しくは [VM サービス]({{ site.baseurl }}/2.0/vm-service)ページをご覧ください。
+**Note:** The `image` key is not supported on private installations of CircleCI. See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
 ```yaml
 version: 2
 jobs:
   build:
     machine:
-      image: circleci/classic:2017-01  # YYYY-MM 形式で指定したバージョンのイメージに固定します
+      image: circleci/classic:2017-01  # pins image to specific version using YYYY-MM format
 ```
 
-利用できる `image` キーは下記の通り 3 種類あります。
+The `image` key accepts one of three image types:
 
-- `circleci/classic:latest`：CircleCI におけるデフォルトのイメージです。このイメージに更新がある時は 1 週間前に告知されます。
-- `circleci/classic:edge`：最新版のイメージを利用できますが、事前の告知なしに更新されます。
-- `circleci/classic:{YYYY-MM}`：指定したバージョンに固定して、意図しないイメージの変更を防ぐことができます。
+- `circleci/classic:latest`: This is the default image. Changes to this image are announced at least one week in advance.
+- `circleci/classic:edge`: This image receives the latest updates. Changes to this image occur frequently.
+- `circleci/classic:{YYYY-MM}`: This image is pinned to a specific version to prevent breaking changes.
 
-すべてのイメージには一般的なプログラミング言語やツール類がプリインストールされています。 詳しくは [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) をご覧ください。
+All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
 
 下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **注**：Docker レイヤーキャッシュの利用には追加の料金がかかり、この機能を有効にするためにサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
 
@@ -170,6 +170,6 @@ Docker にはもともとイメージのキャッシュ機能があり、\[リ�
 
 Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 そのため、ネットワークへの低レベルアクセスや外部ストレージのマウントといった機能が必要な場合は、`docker` ではなく `machine` を使うことも検討してください。
 
-## その他の参考資料
+## See Also
 
-[CircleCI の設定]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
