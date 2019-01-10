@@ -36,6 +36,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           name: Restore Cached Dependencies
           keys:
             - cci-demo-haskell-v1-{{ checksum "package.yaml" }}
@@ -53,7 +54,8 @@ jobs:
           key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
           paths:
             - ".stack-work"
-      - store_artifacts: # upload build artifact for display in CircleCI
+      - store_artifacts:
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -63,13 +65,21 @@ jobs:
 
 ## Config Walkthrough
 
-Let's start our walkthrough and build a Haskell `config.yml` from scratch. First up, we need to specify the version of CircleCI we will use.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2.1
 ```
 
 Next, we have a `jobs` key. Each job represents a phase in your workflow. Our sample app only needs a `build` job, so all our steps and commands will live under that key.
+
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+
+In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+
+All commands for a job execute in this container.
 
 ```yaml
 jobs:
@@ -78,11 +88,11 @@ jobs:
       - image: fpco/stack-build:lts
 ```
 
-We are now set to run the Haskell buidl tool `stack` in our environment. The remainder of our `config.yml` file all falls under the `steps` key.
+We are now set to run the Haskell build tool `stack` in our environment. The remainder of our `config.yml` file all falls under the `steps` key.
 
 Our first step is to run `checkout` to pull our repository's code down and set it up in our environment.
 
-Next we check if there are any dependencies that can be restored, enabling our build to speed up. Following that, we run `stack setup` to pull in the Haskell compiler as specified in your `stack.yaml` config.
+Next we check if there are any dependencies that can be restored, enabling our build to speed up. Following that, we run `stack setup` to pull in the Haskell compiler as specified in the `stack.yaml` config.
 
 {% raw %}
 
@@ -122,10 +132,10 @@ Finally, we can run our application build commands. We'll run our tests first an
 Finally, we can take the built executable and store it as an artifact.
 
 ```yaml
-      - store_artifacts: # upload build results for display in CircleCI
+      - store_artifacts:
+          # Upload buildresults for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: ~/.local/bin/circleci-demo-haskell-exe 
           destination: circleci-demo-haskell-exe
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
 ```
 
 Excellent! You are now setup on CircleCI with a Haskell app.
