@@ -88,8 +88,8 @@ jobs:
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | sudo gcloud auth activate-service-account --key-file=-
-          sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
 **Note:** If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
