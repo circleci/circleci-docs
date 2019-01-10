@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "設定ファイルをローカルでテストする方法"
-description: "CircleCI 2.0 のサンプル設定ファイル"
+title: "Testing Config Files Locally"
+description: "Testing Config Files Locally"
 ---
 <div class="alert alert-info" role="alert">
   
 <b>Note:</b> This document describes how to test and validate your config through the CircleCI API. It is also possible to install the <a href="{{ site.baseurl }}/2.0/local-cli/#overview">CircleCI CLI</a>, which allows you to <a href="{{ site.baseurl }}/2.0/local-cli/#validate-a-circleci-config">validate</a> your CircleCI config locally.
 </div>
 
-設定ファイルをローカルでテストするには、下記の手順に従って進めます。
+To add a script that tests your config file locally, complete the following steps:
 
 1. シェルスクリプトを `run-build-locally.sh` などのファイル名で `.circleci` ディレクトリに作成します。
 2. [こちらの手順]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)通りに API トークンを作成します。
@@ -21,7 +21,7 @@ description: "CircleCI 2.0 のサンプル設定ファイル"
     - プロジェクトソース
     - プロジェクト名
     - ビルド対象のブランチ
-5. 用意した情報を下記のシェルスクリプトに当てはめます。 
+5. 用意した情報を下記のシェルスクリプトに当てはめます。
 
 ```bash
 #!/usr/bin/env bash
@@ -37,4 +37,4 @@ curl --user ${CIRCLE_TOKEN}: \
 
 ## その他のサンプル
 
-[CircleCI のローカルのコマンドラインインターフェースの使い方]({{ site.baseurl }}/2.0/local-cli/)
+[Using the Local CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/)
