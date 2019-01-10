@@ -24,7 +24,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 3. **Add SSH Key** ボタンをクリックします
 
-4. **Hostname** には、鍵に関連付けるホスト名 (git.heroku.com など) を入力します。指定しない場合はどのホストに対しても同じ鍵が使われます
+4. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
 
 5. **Private Key** には、登録したい SSH 鍵の文字列を貼り付けます
 
@@ -50,6 +50,6 @@ jobs:
 
 **注：**` fingerprints ` に指定した 1 つまたは複数のフィンガープリントは、管理画面で登録した SSH 鍵と一致していなければなりません。
 
-## その他の参考資料
+## See Also
 
-[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
