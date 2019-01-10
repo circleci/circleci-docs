@@ -96,7 +96,7 @@ jobs:
 
 ## ブラウザーテストのデバッグ
 
-統合テストは、特にリモートマシンで実行している場合、デバッグが困難なことがあります。このセクションでは、CircleCI でブラウザーテストをデバッグする方法について、いくつかの例を紹介します。
+Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
 ### スクリーンショットとアーティファクトの使用
 
@@ -121,12 +121,12 @@ CircleCI 上で HTTP サーバーを実行するテストを行う場合、ロ�
     ssh -p 64625 ubuntu@54.221.135.43
     
 
-1. コマンドへのポート転送を追加するには、`-L` フラグを使用します。 次の例では、`http://localhost:3000` への要求を、CircleCI コンテナのポート `8080` に転送します。 This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
+1. コマンドへのポート転送を追加するには、`-L` フラグを使用します。 The following example forwards requests to `http://localhost:8080` to port `3000` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
 
     ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
     
 
-1. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
+1. 次に、ローカルマシンでブラウザーを開き、`http://localhost:8080` を開いて、CircleCI コンテナのポート `3000` で実行されているサーバーに要求を直接転送します。 または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
 
 この方法で、たとえば Selenium テストをセットアップするときのデバッグが非常に簡単になります。
 
@@ -144,7 +144,7 @@ VNC を使用すると、テストを実行しているブラウザーを表示�
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
 
-1. `vnc4server` および `metacity` パッケージをインストールします。`metacity` を使用してブラウザーを移動し、ターミナルウィンドウに戻すことができます。
+1. Install the `vnc4server` and `metacity` packages. You can use `metacity` to move the browser around and return to your Terminal window.
 
 ```bash
 sudo apt install vnc4server metacity
@@ -156,13 +156,13 @@ sudo apt install vnc4server metacity
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```
 
-1. SSH により接続のセキュリティが保護されているので、強力なパスワードの必要はありません。ただし、パスワード*は*依然として必要なので、プロンプトで `password` と入力します。
+1. Since your connection is secured with SSH, there is no need for a strong password. However, you still need *a* password, so enter `password` at the prompt.
 
-2. VNC ビューアを開始し、`localhost:5902` に接続します。プロンプトで `password` と入力します。
+2. Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
 
-3. ディスプレイにターミナルウィンドウが表示されます。SSH トンネルによって接続のセキュリティが保護されているので、セキュアでない、または暗号化されていない接続についての警告は無視します。
+3. You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
 
-4. VNC サーバーでウィンドウを開けるようにするため、`DISPLAY` 変数を設定します。このコマンドを使用しない場合、ウィンドウはデフォルトの (ヘッドレス) X サーバーに開きます。
+4. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
 
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
@@ -180,13 +180,13 @@ ubuntu@box159:~$ metacity &
 ubuntu@box159:~$ firefox &
 ```
 
-これで、コマンドラインから統合テストを実行し、予期しない動作がないかブラウザーで確認できます。テストがローカルマシンで実行されているときと同様に、ブラウザーを操作することもできます。
+Now, you can run integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ### CircleCI の X サーバーの共有
 
 {:.no_toc}
 
-VNC サーバーのセットアップを頻繁に行う場合、プロセスを自動化できます。`x11vnc` を使用して、VNC サーバーを X に接続できます。
+If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
 
 1. [`x11vnc`](http://www.karlrunge.com/x11vnc/index.html) をダウンロードし、テストの前に開始します。
 
@@ -206,9 +206,9 @@ VNC サーバーのセットアップを頻繁に行う場合、プロセスを�
 
 ## SSH 上の X11 転送
 
-CircleCI は、SSH 上の X11 転送もサポートしています。X11 転送は VNC とほぼ同じで、CircleCI 上で実行されているブラウザーを、ローカルマシンから操作できます。
+CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-1. コンピュータに X Window システムをインストールします。macOS を使用している場合、[XQuartz](http://xquartz.macosforge.org/landing/) を検討します。
+1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
 2. システムに X がセットアップされた状態で、CircleCI VM への [SSH ビルドを開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、`-X` フラグを使用して転送をセットアップします。
 
@@ -229,7 +229,7 @@ CircleCI は、SSH 上の X11 転送もサポートしています。X11 転送�
 
 xclock がデスクトップに表示された後で、`Ctrl+c` を使用して終了できます。
 
-これで、コマンドラインから統合テストを実行し、予測しない動作がないかブラウザーで確認できます。テストがローカルマシンで実行されているときと同様に、ブラウザーを操作することもできます。
+Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ## See Also
 
