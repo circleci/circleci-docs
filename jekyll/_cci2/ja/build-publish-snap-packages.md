@@ -55,7 +55,7 @@ CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、
 
 ## パブリッシュ
 
-Snap のパブリッシュは、約 2 手順のプロセスです。Linux マシンでは次のようになります。
+Publishing a snap is more or less a two-step process. Here's on this might look on a Linux machine:
 
 ```Bash
 snapcraft login
@@ -96,7 +96,7 @@ base64 snapcraft.login | xsel --clipboard
 1. **Snap Store チャンネル** - 前のセクションで述べたように、Store にアップロードするとき、同時にリリースも選択できます。 これによって、CircleCI の特定のジョブを、特定の Snap チャンネルにデプロイするよう割り当てできます。 たとえば、`master` ブランチを使用して `edge` チャンネルにデプロイし、`同時にタグ付けされたリリースを使用して`安定したチャンネルにデプロイできます。
 2. **パッキングの並列化** - ソフトウェアが Snap として以外に、flatpak、.deb、apk など他のものとしてもパッケージされる場合、各パッケージタイプを独自のジョブに配置し、すべて並列実行できます。 これによって、Snap が完了してから .deb パッケージのビルドを開始するなどの順に処理を行うよりも、はるかに短時間でビルドが完了します。
 
-CircleCI `workspaces` を使用して、生成された Snap ファイルを必要なときにジョブ間で移動できます。「from」ジョブのスニペットと、「to」ジョブのスニペットの例を次に示します。
+Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
 ```yaml
 ... # 既に Snap が存在するジョブから
@@ -110,7 +110,7 @@ CircleCI `workspaces` を使用して、生成された Snap ファイルを必�
 ...
 ```
 
-以下に示すのは、CircleCI で Snap パッケージをビルドする方法を示す完全な例です。\[CircleCI Local CLI\]\[local-cli-repo\] 用の Snap パッケージをビルドするときにも、同じプロセスが使用されます。
+Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap pakcage for the \[CircleCI Local CLI\]\[local-cli-repo\].
 
 ## 構成の完全な例
 
