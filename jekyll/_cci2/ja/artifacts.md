@@ -62,7 +62,7 @@ The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
 * `path`は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
-* `destination` **(オプション)**は、アーティファクトAPIでアーティファクトのパスに追加されるプレフィックスです。`path`に指定されたファイルのディレクトリが、デフォルトとして使用されます。
+* `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
 
 ## コアファイルのアップロード
 
