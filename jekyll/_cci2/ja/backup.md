@@ -26,7 +26,7 @@ AWS EBSスナップショットには、バックアップ処理を簡単にす�
 
 1. 手動でバックアップを作成するには、EC2コンソールでインスタンスを選択し、[アクション] > [イメージ] > [イメージの作成] を選択します。
 
-2. 停止時間を避けるには、[リブートなし] オプションを選択します。復元用のAMIが作成され、新しいEC2インスタンスとしていつでも実行できます。
+2. Select the No reboot option if you want to avoid downtime. An AMI that can be readily launched as a new EC2 instance for restore purposes is created.
 
 また、AWS APIを使用して、このプロセスを自動化することもできます。 それ以後のAMIやスナップショットは、前回のスナップショット以後の差分(変更されたブロック)分の大きさしかないため、頻繁にスナップショットを作成した場合に不必要なストレージコストは発生しません。詳細については、「[Amazon EBS スナップショットの利用料金はどのように計算されていますか?](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-snapshot-billing/)」ドキュメントを参照してください。
 
