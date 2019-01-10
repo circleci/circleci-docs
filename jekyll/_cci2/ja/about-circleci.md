@@ -7,17 +7,17 @@ categories:
   - getting-started
 order: 1
 ---
-このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明しています。
+This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation.
 
-## CircleCI とは
+## CircleCI Overview
 
 私たち **CircleCI** のミッションは、世の中のテクノロジー企業が最高の成果を上げられるようにする、というものです。  
 インテリジェントな自動化ツールを用いることで、チーム開発の生産性をさらに高めてほしいと願っています。
 
-CircleCI は、大手一流企業のようなサポートとサービスに、スタートアップ企業の柔軟さをプラスして提供します。  
-Linux、macOS、Android の各プラットフォームに加え、SaaS やオンプレミスといったサービス形態にも余さず対応します。
+CircleCI provides enterprise-class support and services, with the flexibility of a startup.  
+We work where you work: Linux, macOS, Android - SaaS or behind your firewall.
 
-![CircleCI のシステム構成概略図]({{ site.baseurl }}/assets/img/docs/arch.png)
+![CircleCI about image]({{ site.baseurl }}/assets/img/docs/arch.png)
 
 ## 概要
 
@@ -36,10 +36,8 @@ AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Eng
 コミットのたびにビルドとテストが自動で実行されます。  
 ビルドやテストに失敗したときは、その問題の解決を即座に図れます。
 
-**メリットは？**  
-チーム開発の生産性、効率、満足度が向上します。  
-コードにおける問題の迅速な発見と解決につながります。  
-不具合の少ない高品質なプロダクトの提供を実現します。
+**Why?**  
+Improve team productivity, efficiency, happiness. Find problems and solve them, quickly. Release higher quality, more stable products.
 
 ## 無料トライアル
 
@@ -52,6 +50,6 @@ CircleCI では以下の無料トライアルを用意しています。
 
 パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/2.0/oss/)をご覧ください。
 
-## その他の参考資料
+## See Also
 
-CircleCI では Linux、Android、macOS 上で動作するアプリ全てに対応しています。詳しい実例と利用ガイドは[サポートするプログラミング言語]({{site.baseurl}}/2.0/demo-apps/)で確認してください。
+Any app that runs on Linux, Android, or macOS is supported. Refer to the [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
