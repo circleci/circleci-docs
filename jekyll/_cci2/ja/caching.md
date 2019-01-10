@@ -9,9 +9,9 @@ order: 50
 ---
 キャッシュは、ジョブを高速化する手段として最も効果的な方法の 1 つです。CircleCI においては、高コストな処理が必要なデータを過去のジョブから再利用することが可能になっています。
 
-- 目次 {:toc}
+- TOC {:toc}
 
-初回のジョブを実行すると、その後のジョブインスタンスでは前回と同じ処理が不要になるため、その分高速化される仕組みです。
+After an initial job run, future instances of the job will run faster by not redoing work.
 
 ![データフローのキャッシュ]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
 
@@ -21,7 +21,7 @@ order: 50
 
 {:.no_toc}
 
-キャッシュを利用する際のキー設定は簡単です。下記の例では、`pom.xml` ファイルの内容が書き換えられ、そのチェックサムが変わった時にキャッシュを更新します。
+Caching keys are simple to configure. The following example updates a cache if it changes by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
 
@@ -99,7 +99,7 @@ git リポジトリのキャッシュは、あらゆる場面でメリットが�
 
 ## Workflow におけるキャッシュの指定方法
 
-Workflow では、ジョブ間でキャッシュを共有することができます。異なる複数のジョブにまたがったキャッシュによって、いわゆるレースコンディションが発生しうる可能性があることに注意してください。
+Jobs in one workflow can share caches. Note that this makes it possible to create race conditions in caching across different jobs in workflows.
 
 キャッシュは書き換え不可です。`node-cache-master` のような特殊なキーに対してキャッシュが一度書き込まれると、さらに書き込むことはできません。 仮に、並列動作するジョブ 1 とジョブ 2 に依存する ジョブ 3 がある、という構成の Workflow ({Job1, Job2} -> Job3) を想定したとき、 それら 3 つのジョブはすべて同じキャッシュキーについて読み書きを行います。
 
@@ -158,7 +158,7 @@ keys 内の 2 番目の項目が 1 番目よりも短いのは、その方が現
 
 ## 依存関係のキャッシュにおける基礎
 
-CircleCI 2.0 で利用できる、強力でカスタマイズ性の高い依存関係の手動キャッシュ管理。これを活用するには、何を、どうキャッシュするかという明確な目的をもっていなくてはなりません。 具体例は CircleCI の設定方法のページ内にある [save_cache](https://circleci.com/docs/2.0/configuration-reference/#save_cache) のセクションをご覧ください。
+CircleCI 2.0 で利用できる、強力でカスタマイズ性の高い依存関係の手動キャッシュ管理。これを活用するには、何を、どうキャッシュするかという明確な目的をもっていなくてはなりません。 See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
 ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルで指定している ジョブに `save_cache` ステップを追加します。
 
@@ -171,9 +171,9 @@ CircleCI 2.0 で利用できる、強力でカスタマイズ性の高い依存�
             - my-project/my-dependencies-directory
 ```
 
-ディレクトリはジョブにおける `working_directory` への相対パス、または絶対パスを指定します。
+The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-**注：**特別な [`persist_to_workspace`](https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace) ステップとは違って、`save_cache` も `restore_cache` も、`paths` キーに対してワイルドカードによるグロブをサポートしません。
+**Note:** Unlike the special step [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 ## キーとテンプレートを使用する
 
@@ -297,7 +297,7 @@ steps:
 
 {% endraw %}
 
-キャッシュは書き換え不可のため、このようにバージョン (v1-) の数字を増やすことでキャッシュを丸ごと生成し直す方法がとれます。これは以下のようなシチュエーションでも有効です。
+Since caches are immutable, this strategy allows you to regenerate all of your caches by incrementing the version. This is useful in the following scenarios:
 
 - `npm` などの依存関係管理ツールのバージョンを変えたとき
 - Ruby などの開発言語のバージョンを変えたとき
@@ -321,7 +321,7 @@ Bundler は明示的に指定されないシステム上の gem を扱うこと�
 steps:
   - restore_cache:
       keys:
-        # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
+        # when lock file changes, use increasingly general patterns to restore cache
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
@@ -340,7 +340,7 @@ steps:
 
 **安全な部分キャッシュリストア**…可能
 
-Gradle リポジトリは集約型、共有型、かつ大規模を指向したツールです。アーティファクトの生成先となる classpath にどれだけのライブラリが追加されたかに関係なく、部分キャッシュリストアが可能です。
+Gradle repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are actually added to classpaths of generated artifacts.
 
 {% raw %}
 
@@ -366,7 +366,7 @@ steps:
 
 **安全な部分キャッシュリストア**…可能
 
-Maven リポジトリは集約型、共有型、かつ大規模を指向したツールです。アーティファクトの生成先となる classpath にどれだけのライブラリが追加されたかに関係なく、部分キャッシュリストアが可能です。
+Maven repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are actually added to classpaths of generated artifacts.
 
 Clojure 向けビルドツールである Leiningen も裏で Maven を利用しているため、同じように部分キャッシュリストアが可能となります。
 
@@ -420,7 +420,7 @@ steps:
 
 **安全な部分キャッシュリストア**…可能 (要 Pipenv)
 
-Pip は `requirements.txt` のなかで明示的に指定されていないファイルを使えてしまいます。lock ファイルの正確なバージョン管理機能が含まれる [Pipenv](https://docs.pipenv.org/) を組み合わせてください。
+Pip can use files that are not explicitly specified in `requirements.txt`. Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
 
 {% raw %}
 
@@ -466,7 +466,7 @@ steps:
 
 {% endraw %}
 
-## 制限について
+## Limitations
 
 The caches created via the `save_cache` step are stored for up to 30 days.
 
@@ -486,7 +486,7 @@ The caches created via the `save_cache` step are stored for up to 30 days.
 
 チェックサムの取得方法は、他にも `ls -laR your-deps-dir > deps_checksum` としたうえで、 {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %} で参照するやり方もあります。 例えば Python で多くの固有キャッシュを取得する際には、`requirements.txt` ファイルのチェックサムを利用する以外にも、Python のプロジェクトルートで仮想環境 `venv` を使って依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行する手法が使えます。
 
-### 異なる言語ごとに複数のキャッシュを使う
+### Using Multiple Caches For Different Language
 
 {:.no_toc}
 
@@ -500,7 +500,7 @@ The caches created via the `save_cache` step are stored for up to 30 days.
 
 なんでもキャッシュするのではなく、コンパイルのような処理コストの高いステップにおいてキャッシュすることを*ぜひ*心がけてください。
 
-## その他の参考資料
+## See Also
 
 {:.no_toc}
 
