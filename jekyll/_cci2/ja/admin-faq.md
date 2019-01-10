@@ -36,17 +36,17 @@ SSH で Nomad クライアントのサービスボックスにアクセスし、
 
 2. CircleCI を再起動します。
 
-3. フリートに Nomad クライアントを登録するのに用いる `init` スクリプトを開き、そこにある `CIRCLE_SECRET_PASSPHRASE` を書き換えます
+3. Update `CIRCLE_SECRET_PASSPHRASE` in the `init` script that you use to add Nomad Clients to your fleet.
 
-これで、フリートに join した新しい Nomad クライアントが変更後のパスフレーズを使うようになります。 古いパスフレーズを使っている既存の Nomad クライアントもこれまで通り動作します。 ただし、すべてのクライアントで同じパスフレーズを使うよう、そうしたビルダーボックスもできるだけ早めに再起動した方が良いでしょう。
+New Nomad Clients joining the fleet will use the new passphrase. Existing Nomad Clients with the old passphrase will also continue functioning. ただし、すべてのクライアントで同じパスフレーズを使うよう、そうしたビルダーボックスもできるだけ早めに再起動した方が良いでしょう。
 
-#### Nomad クライアントを安全にシャットダウンさせるには？
+#### How can I gracefully shutdown a Nomad Clients?
 
 Refer to the [Introduction to Nomad Cluster Operation]({{site.baseurl}}/2.0/nomad) document for details.
 
 #### CircleCI では iOS/macOS アプリケーションのビルドは可能ですか？
 
-iOS アプリのビルドは対応済みですが、独自の macOS フリートの実行は今後対応予定です。新機能のアーリーアクセスにご興味をお持ちでしたら当社までお問い合わせください。
+Support for running your own macOS fleet is coming soon. Contact your account team to express interest in getting on the early access list.
 
 #### GitHub の認証テストに失敗してしまいます。
 
@@ -93,7 +93,7 @@ Replicated 使用時にトラブルが発生したとき、問題を検証する
 
 - Replicated と CircleCI を再起動する
 
-次に Replicated サービスを再起動します。サービスボックスで下記の通りコマンドを実行してください。
+Try restarting Replicated services. You can do this by running the following commands on the service box:
 
     sudo service replicated-ui restart
     sudo service replicated restart
