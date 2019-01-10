@@ -77,8 +77,8 @@ jobs:
 
 Notes on the above example:
 
-- ビルドジョブの`deploy`ステップを必ず使用してください。これを使用しないと、並列処理の値がNの場合に、N回のビルドがトリガーされることがあります。
-- API呼び出しを`build_parameters[CIRCLE_JOB]=deploy_docker`で使用し、`deploy_docker`ジョブのみが実行されるようにします。
+- ビルドジョブの `deploy` ステップを必ず使用してください。これを使用しないと、並列処理の値が N の場合に、N 回のビルドがトリガーされることがあります。
+- API 呼び出しを `build_parameters[CIRCLE_JOB]=deploy_docker` で使用し、`deploy_docker` ジョブのみが実行されるようにします。
 
 ## See Also
 
