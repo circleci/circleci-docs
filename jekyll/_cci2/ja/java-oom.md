@@ -17,7 +17,7 @@ You can set several Java environment variables to manage JVM memory usage. These
 
 The table below shows these environment variables, along with the precedence levels they take when using different build tools. The lower the number, the higher the precedence level, with 0 being the highest.
 
-Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein \---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---|\---\---|\---\-----|\---\----|\---\-----|\---\--- [`_JAVA_OPTIONS`](#_java_options) | 0 | 0 | 0 | 0 | 0 [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2 | 3 | 2 | 2 | 2 [`JAVA_OPTS`](#java_opts) | no | 2 | no | 1 | no [`JVM_OPTS`](#jvm_opts) | * | no | no | no | * [`LEIN_JVM_OPTS`](#lein_jvm_opts) | no | no | no | no | 1 [`GRADLE_OPTS`](#gradle_opts) | no | 1 | no | no | no [`MAVEN_OPTS`](#maven_opts) | no | 1 | no | no | no CLI args | 1 | no | no | no | no {:class="table table-striped"}
+Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein \---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---|\---\---|\---\-----|\---\----|\---\-----|\---\--- [`_JAVA_OPTIONS`](#_java_options) | 0 | 0 | 0 | 0 | 0 [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2 | 3 | 2 | 2 | 2 [`JAVA_OPTS`](#java_opts) | no | 2 | no | 1 | no [`JVM_OPTS`](#jvm_opts) | * | no | no | no | * [`LEIN_JVM_OPTS`](#lein_jvm_opts) | no | no | no | no | 1 [`GRADLE_OPTS`](#gradle_opts) | no | 1 | no | no | no [`MAVEN_OPTS`](#maven_opts) | no | no | 1 | no | no CLI args | 1 | no | no | no | no {:class="table table-striped"}
 
 The above environment variables are listed below, along with details on why to choose one over another.
 
@@ -57,7 +57,7 @@ This environment variable is exclusive to Apache Maven projects. Use it to overw
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit code 137` in your error output.
 
-Fortunately, Oracle is aware of these challenges and [has added command-line options](https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits). Ensure that your `-Xmxn` maximum size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
+Ensure that your `-Xmxn` maximum size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
 
 If you are still consistently hitting memory limits, consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
