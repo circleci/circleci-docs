@@ -15,7 +15,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 
 {:.no_toc}
 
-1. Add your project on the Add Projects page if it is a new project. For an existing Project, go to the Project Settings and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
@@ -358,7 +358,7 @@ jobs: # a job that invokes the `aws` executor and the `sync` command
 
 A parameter can have the following keys as immediate children:
 
-| Key Name | Description | Default value | |\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---| | description | Optional. Used to generate documentation for your orb. | N/A | | type | Required. See Parameter Types below for details. | N/A | | default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A | {: class="table table-striped"}
+| Key Name | Description | Default value | |\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---| | description | Optional. Used to generate documentation for your orb. | N/A | | type | Required. See **Parameter Types** in the section below for details. | N/A | | default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A | {: class="table table-striped"}
 
 ### Parameter Types
 
@@ -475,8 +475,7 @@ The following `enum` type declaration is invalid because the default is not decl
     #### Executor
     {:.no_toc}
     
-    Use an `executor` parameter type to allow the invoker of a job to decide what
-    executor it will run on.
+    Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
     
     
 
@@ -495,57 +494,52 @@ workflows: workflow: jobs: - test: e: bionic - test: e: name: xenial some-value:
     
     Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
     
+    {% raw %}
     
-
-{% raw %}
 
 yaml commands: run-tests: parameters: after-deps: description: "Steps that will be executed after dependencies are installed, but before tests are run" type: steps default: [] steps: - run: make deps - steps: << parameters.after-deps >> - run: make test
 
-{% endraw %}
-
-    <br />The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
+    {% endraw %}
     
+    The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
     
-
-{% raw %}
+    {% raw %}
+    
 
 yaml jobs: build: machine: true steps: - run-tests: after-deps: - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests"
 
-{% endraw %}
-
-    <br />The above will resolve to the following:
+    {% endraw %}
     
+    The above will resolve to the following:
     
-
-{% raw %}
+    {% raw %}
+    
 
 yaml steps: - run: make deps - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests" - run: make test
 
-{% endraw %}
-
+    {% endraw %}
+    
     #### Environment Variable Name
     
     The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
     
+    {% raw %}
     
-
-{% raw %}
 
 version: 2 jobs: build: docker: - image: ubuntu:latest steps: - run: command: | s3cmd --access_key ${FOO_BAR} \ --secret_key ${BIN_BAZ} \ ls s3://some/where workflows: workflow: jobs: - build version: 2
 
 Original config.yml file: version: 2.1 jobs: build: parameters: access-key: type: env_var_name default: AWS_ACCESS_KEY secret-key: type: env_var_name default: AWS_SECRET_KEY command: type: string docker: - image: ubuntu:latest steps: - run: | s3cmd --access_key ${<< parameters.access-key >>} \\ --secret_key ${<< parameters.secret-key >>} \\ << parameters.command >> workflows: workflow: jobs: - build: access-key: FOO_BAR secret-key: BIN_BAZ command: ls s3://some/where
 
-{% endraw %}
-
-    <br />## Authoring Parameterized Jobs
+    {% endraw %}
+    
+    ## Authoring Parameterized Jobs
     
     It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
     
     Example of defining and invoking a parameterized job in a `config.yml`:
     
+    {% raw %}
     
-
-{% raw %}
 
 yaml version: 2.1
 
@@ -553,15 +547,16 @@ jobs: sayhello: # defines a parameterized job description: A job that does very 
 
 workflows: build: jobs: - sayhello: # invokes the parameterized job saywhat: Everyone
 
-{% endraw %}
-
-    <br />**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
+    {% endraw %}
+    
+    **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
     
     ### Jobs Defined in an Orb
     
     If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
     
     **hello-orb**
+    
     ```yaml
     # partial yaml from hello-orb
     jobs:
