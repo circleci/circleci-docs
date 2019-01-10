@@ -92,32 +92,28 @@ jobs:
       # Docker イメージのビルドとプッシュ
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .      # (4)
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (5)
+          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
+          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
 以上のビルドのなかで、ポイントとなる部分を順を追って説明します。
 
-1. 全てのコマンドは \[primary-container\]\[primary-container\] の中で実行されます。
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 2. `setup_remote_docker` が呼ばれると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。 Docker に関わるコマンドは全てプライマリコンテナ内で実行されますが、イメージのビルド・プッシュおよびコンテナの実行はリモート Docker エンジン内で処理されます。
-3. Docker イメージのビルド高速化のため \[Docker レイヤーキャッシュ\]\[docker-layer-caching\] をここで有効にしています
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) here to speed up image building.
 4. Docker Hub のログイン情報の保管にはプロジェクト環境変数を使用します。
 
 ## 使用する Docker のバージョン変更
 
-ジョブによって特定のバージョンの Docker を使う必要がある場合は、`version` キーをセットします。
+If your job requires a specific docker version, you can set it as a `version` attribute:
 
 ```yaml
       - setup_remote_docker:
           version: 17.05.0-ce
 ```
 
-現在サポートしているバージョンは下記の通りです。
-
-[安定版](https://download.docker.com/linux/static/stable/x86_64/) - `17.03.0-ce` (デフォルト) - `17.06.0-ce` - `17.06.1-ce` - `17.09.0-ce` - `18.03.0-ce` - `18.03.1-ce` - `18.05.0-ce`
-
-[Edge リリース](https://download.docker.com/linux/static/edge/x86_64/) - `17.05.0-ce` - `17.07.0-ce` - `17.10.0-ce` - `17.11.0-ce` - `18.06.0-ce`
+CircleCI supports multiple versions of Docker and defaults to using `17.03.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 
 Docker をインストールした Git を含む Docker イメージを使いたい時は、`17.05.0-ce-git` を利用してください。 **注：**`version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
@@ -238,8 +234,12 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## その他の参考資料
+## See Also
 
-[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[job-space]: {{ site.baseurl }}/2.0/glossary/#job-space [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container [docker-layer-caching]: {{ site.baseurl }}/2.0/glossary/#docker-layer-caching
+[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
+
+[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+
+[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
