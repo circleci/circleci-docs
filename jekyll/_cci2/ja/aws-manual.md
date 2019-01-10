@@ -24,7 +24,7 @@ CircleCI Enterpriseがインストールされていれば、現在のインス�
 - CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us)にお問い合わせください。
 - AWSアクセスキー、AWS秘密キー、AWSサブネットID。
 - AWSリージョン、たとえば`us-west-2`。
-- AWS仮想プライベートクラウド(VPC)のID。自分のアカウントがデフォルトVPCを使用するよう構成されていれば、デフォルトVPC IDは、Amazonの [アカウントの属性] に記載されています。
+- AWS Virtual Private Cloud (VPC) ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
 - VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
 
 ## 非公開サブネットの要件
@@ -94,7 +94,7 @@ CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CP
              ]
          }
 
-6. vm-serviceを構成します。AWSユーザーにはこれらのアクセス許可が必要です。S3用の同じユーザーを使用する場合、両方のアクセス許可のセットが必要です。 
+6. Configure the vm-service. The AWS user needs to have these permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions. 
         JSON
          {
              "Version": "2012-10-17",
@@ -140,14 +140,14 @@ CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CP
 9. Builderのインスタンスを、次の属性を持つセキュリティグループに配置します。
 
 - ビルダボックスおよびサービスボックスとの間で、すべてのトラフィックが双方向でホワイトリストに指定されている。
-- ユーザー用に、ポート22、80、443、64535～65535がホワイトリストに指定されている。大きい番号のポートは、ユーザーがビルドコンテナに`ssh`で接続できるようにするためのSSH機能に使用されます。
+- Whitelist ports 22, 80, 443, 64535-65535 for users. The high ports are used for the SSH feature, so that users can `ssh` into the build containers.
 
 1. インストールを開始するには、この[Terraformスクリプト](https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf)を使用します。 5～15分で、マシンでビルドを受け付ける準備が完了します。
 
 ## 使用開始の次の手順
 
 1. ダッシュボードの [開く] リンクをクリックすると、CircleCI アプリに移動します。CircleCIアプリケーションの起動中に開始ページが少しの間表示されてから、ホームページへ自動的に転送されます。 
-2. [使用開始] ボタンをクリックし、サインアップまたはサインインします。最初にログインしたユーザーは管理者になります。
+2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
 3. [Hello World]({{site.baseurl}}/2.0/hello-world/)ドキュメントを使用して、プロジェクトを追加します。
 
 ## トラブルシューティング
