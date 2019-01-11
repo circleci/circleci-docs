@@ -155,10 +155,10 @@ jobs:
       - image: your/primary-image:version-tag
       - image: mysql:5.7
         environment:
-           TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+           TZ: "America/Los_Angeles"
     working_directory: ~/your-dir
     environment:
-      TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+      TZ: "America/Los_Angeles"
 ```
 
 In this example, the timezone is set for both the primary image and an additional mySQL image.
