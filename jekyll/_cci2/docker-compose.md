@@ -12,7 +12,7 @@ This document describes how to install and use `docker-compose`.
 * TOC 
 {:toc}
 
-The `docker-compose` utility is [pre-installed in the CircleCI convenience images][pre-installed]. If you're using another image, you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
+The `docker-compose` utility is [pre-installed in the CircleCI convenience images][pre-installed] and machine executors. If you're using another image, you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
 ``` 
 - run:
