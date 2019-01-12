@@ -1,42 +1,42 @@
 ---
-layout: crwdns88806:0crwdne88806:0
-title: "crwdns88808:0crwdne88808:0"
-short-title: "crwdns88810:0crwdne88810:0"
-description: "crwdns88812:0crwdne88812:0"
+layout: crwdns112972:0crwdne112972:0
+title: "crwdns112974:0crwdne112974:0"
+short-title: "crwdns112976:0crwdne112976:0"
+description: "crwdns112978:0crwdne112978:0"
 categories:
-  - crwdns88814:0crwdne88814:0
-order: crwdns88816:0crwdne88816:0
+  - crwdns112980:0crwdne112980:0
+order: crwdns112982:0crwdne112982:0
 ---
-crwdns88818:0{{ site.baseurl }}crwdne88818:0 crwdns88820:0crwdne88820:0
+crwdns112984:0{{ site.baseurl }}crwdne112984:0 crwdns112986:0crwdne112986:0
 
 ```yaml
-crwdns88822:0$DOCKERHUB_PASSWORDcrwdne88822:0
+crwdns112988:0$DOCKERHUB_PASSWORDcrwdne112988:0
 ```
 
-crwdns88824:0crwdne88824:0 crwdns88826:0crwdne88826:0
+crwdns112990:0crwdne112990:0 crwdns112992:0crwdne112992:0
 
-    crwdns88828:0$QUAY_USERNAMEcrwdnd88828:0$QUAY_PASSWORDcrwdne88828:0
+    crwdns112994:0$QUAY_USERNAMEcrwdnd112994:0$QUAY_PASSWORDcrwdne112994:0
     
 
-crwdns88830:0crwdne88830:0
+crwdns112996:0crwdne112996:0
 
-    crwdns88832:0$DOCKER_USERcrwdnd88832:0$DOCKER_PASScrwdne88832:0
+    crwdns112998:0$DOCKER_USERcrwdnd112998:0$DOCKER_PASScrwdne112998:0
     
 
-crwdns88834:0crwdne88834:0 crwdns88836:0crwdne88836:0
+crwdns113000:0crwdne113000:0 crwdns113002:0crwdne113002:0
 
-1. crwdns88838:0crwdne88838:0
-2. crwdns88840:0crwdne88840:0
-3. crwdns88842:0crwdne88842:0
+1. crwdns113004:0crwdne113004:0
+2. crwdns113006:0crwdne113006:0
+3. crwdns113008:0crwdne113008:0
 
-    crwdns88844:0$ECR_AWS_SECRET_ACCESS_KEYcrwdne88844:0
+    crwdns113010:0$ECR_AWS_SECRET_ACCESS_KEYcrwdne113010:0
     
 
-crwdns88846:0crwdne88846:0 crwdns88848:0crwdne88848:0 crwdns88850:0crwdne88850:0
+crwdns113012:0crwdne113012:0 crwdns113014:0crwdne113014:0 crwdns113016:0crwdne113016:0
 
-    crwdns88852:0$AWS_ACCESS_KEY_ID_STAGINGcrwdnd88852:0$AWS_SECRET_ACCESS_KEY_STAGINGcrwdne88852:0 crwdns88854:0$AWS_ACCESS_KEY_ID_STAGINGcrwdnd88854:0$AWS_SECRET_ACCESS_KEY_STAGINGcrwdne88854:0 crwdns88856:0{4}crwdnd88856:0{4}crwdne88856:0
+    crwdns113018:0$AWS_ACCESS_KEY_ID_STAGINGcrwdnd113018:0$AWS_SECRET_ACCESS_KEY_STAGINGcrwdne113018:0 crwdns113020:0$AWS_ACCESS_KEY_ID_STAGINGcrwdnd113020:0$AWS_SECRET_ACCESS_KEY_STAGINGcrwdne113020:0 crwdns113022:0{4}crwdnd113022:0{4}crwdne113022:0
     
 
-## crwdns88858:0crwdne88858:0
+## crwdns113024:0crwdne113024:0
 
-[crwdns88862:0crwdne88862:0](crwdns88860:0{{ site.baseurl }}crwdne88860:0)
+[crwdns113028:0crwdne113028:0](crwdns113026:0{{ site.baseurl }}crwdne113026:0)
