@@ -293,22 +293,24 @@ jobs:
 
 ### How are these keys used?
 
-When we build your project, we install the private key into the .ssh directory, and configure ssh to use it when communicating with your version control provider. Therefore, it gets used for:
+When CircleCI build your project, we install the private key into the .ssh directory, and configure SSH to use it when communicating with your version control provider. Therefore, it gets used for:
 
 - checking out the main project
 - checking out any GitHub-hosted submodules
 - checking out any GitHub-hosted private dependencies
 - automatic git merging/tagging/etc.
 
-That's why a deploy key isn't sufficiently powerful for projects with additional private dependencies!
+For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies!
 
 ### What about security?
 
-The private keys of the checkout keypairs we generate never leave our systems
-(only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since they are installed into your build containers, any code that you run in CircleCI can read them. You shouldn't push untrusted code to CircleCI!
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since they are installed into your build containers, any code that you run in CircleCI can read them.
 
-**Isn't there a middle ground between deploy keys and user keys?**
+**Isn't there a Difference between deploy keys and user keys?**
 
-Not really (unfortunately!). Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (i.e. there's no way to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user they're associated with.
+Deploy keys and user keys are the only key types that GitHub supports. Deploy
+keys are globally unique (for example, no mechanism exists to make a deploy key with
+access to multiple repositories) and user keys have no notion of _scope_
+separate from the user associated with them.
 
 To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
