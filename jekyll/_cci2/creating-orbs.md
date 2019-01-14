@@ -68,7 +68,7 @@ Depending on whether you use an inline template or author your orb independent o
 #### Step 6 - Create a New Orb Using Inline Template
 Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
 
-#### Step 7 - Publish your Orb
+#### Step 7 - Publish Your Orb
 The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable).
 
 For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
@@ -217,13 +217,20 @@ workflows:
           greeting_name: world
 ```
 
-## Providing usage examples of orbs
+## Providing Usage Examples of Orbs
 _The `examples` stanza is available in configuration version 2.1 and later_
 
 As an author of an orb, you may want to document examples of using it in a CircleCI config file, not only to provide a starting point for new users, but also to demonstrate more complicated use cases.
 
-### Simple examples
-Given the following orb:
+### Example Usage Syntax
+The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
+
+- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
+- **usage:** (required) A full, valid config map that includes an example of using the orb.
+- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
+
+### Simple Examples
+Below is an example orb you can use:
 
 ```yaml
 version: 2.1
@@ -240,7 +247,7 @@ commands:
       - run: "echo Hello << parameters.username >>"
 ```
 
-...you can supply an additional `examples` stanza like this:
+If you would like, you may also supply an additional `examples` stanza in the orb like the example shown below:
 
 ```yaml
 examples:
@@ -260,7 +267,7 @@ examples:
 
 Please note that `examples` can contain multiple keys at the same level as `simple_greeting`, allowing for multiple examples.
 
-### Expected usage results
+### Expected Usage Results
 
 The above usage example can be optionally supplemented with a `result` key, demonstrating what the configuration will look like after expanding the orb with its parameters:
 
@@ -292,15 +299,6 @@ examples:
           jobs:
           - build
 ```
-
-**Note:** in the future we may add automated checks whether the output of compiling `usage` matches what is specified in `result`.
-
-### Example usage syntax
-The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
-
-- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
-- **usage:** (required) A full, valid config map that includes an example of using the orb.
-- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
 
 ## Publishing an Orb
 
