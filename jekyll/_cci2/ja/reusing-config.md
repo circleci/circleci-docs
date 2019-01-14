@@ -87,7 +87,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 ## Examples
 
-The following is a an example of part of an `aws-s3` orb defining a command called `sync`:
+The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
 ```yaml
 # aws-s3 orb
