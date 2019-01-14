@@ -71,9 +71,7 @@ jobs:
 
 Commands can use other commands in the scope of execution. 
 
-
 For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
-
 
 ## Built-In Commands
 
@@ -85,10 +83,9 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 **Note:** It is possible to override the built-in commands with a custom command.
 
-
 ## Examples
 
-The following is a an example of part of an `aws-s3` orb defining a command called `sync`:
+The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
 ```yaml
 # aws-s3 orb
