@@ -8,7 +8,7 @@ Order: 60
 ---
 このページでは、CircleCI における GitHub や Bitbucket の統合、活用方法の概要について、下記の内容に沿って解説しています。
 
-* 目次 {:toc}
+- 目次 {:toc}
 
 ## はじめに
 
@@ -129,8 +129,8 @@ CircleCI が利用する権限の数が多すぎると感じるときは、そ�
 
 ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した際に、CircleCI の組織へのアクセスを再有効化する方法を解説します。 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) ページの「Organization access」で、次のいずれかの操作を行ってください。
 
-* あなたが組織の管理者でないときは **Request** をクリックします (管理者の承認待ちとなります)
-* あなたが管理者のときは **Grant** をクリックします
+- あなたが組織の管理者でないときは **Request** をクリックします (管理者の承認待ちとなります)
+- あなたが管理者のときは **Grant** をクリックします
 
 アクセスが承認されると、CircleCI は元通りの挙動になるはずです。
 
@@ -146,9 +146,15 @@ CircleCI が利用する権限の数が多すぎると感じるときは、そ�
 
 ## Deploy Key とユーザーキー
 
-新しいプロジェクトを作成したとき、CircleCI は Web ベースのバージョン管理システム (GitHub や Bitbucket) 上にそのプロジェクト用の deploy key を生成します。 リポジトリへのプッシュがうまくいかないときは、この deploy key がリードオンリー属性になっている可能性があります。
+**What is a deploy key?**
+
+When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH key. If you are using Github as your VCS then GitHub has the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
+
+**What is a user key?**
+
+A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
 ### GitHub ユーザーキーの生成方法
 
@@ -208,4 +214,23 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-ジョブから Bitbucket プロジェクトにプッシュする際、CircleCI はここで追加した SSH キーを使います。
+### How are these keys used?
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key gets gets used for:
+
+- checking out the main project
+- checking out any GitHub-hosted submodules
+- checking out any GitHub-hosted private dependencies
+- automatic git merging/tagging/etc.
+
+For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
+
+### What about security?
+
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since they are installed into your build containers, any code that you run in CircleCI can read them.
+
+**Isn't there a difference between deploy keys and user keys?**
+
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of *scope* separate from the user associated with them.
+
+To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
