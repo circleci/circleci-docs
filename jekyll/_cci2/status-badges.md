@@ -40,6 +40,9 @@ You can generate code for the following formats:
 5. Select the appropriate language from the _Embed Code_ dropdown menu.
 6. Copy and paste the generated link in the document where you want to display the status badge.
 
+
+![](  {{ site.baseurl }}/assets/img/docs/status_badge_embed.png)
+
 ## Customization
 
 If you find the default status badge too minimal,
