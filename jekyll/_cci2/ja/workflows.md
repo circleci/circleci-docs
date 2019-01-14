@@ -211,7 +211,7 @@ It can be inefficient and expensive to run a workflow for every commit for every
 
 {:.no_toc}
 
-デフォルトでは、Workflow は `git push` するたびに実行されます。一方、Workflow をスケジュール実行するには、`triggers` キーを Workflow に追加して、`schedule` を指定します。
+By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
 下記は、`nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
 
@@ -498,7 +498,7 @@ Workflow を利用すると、ビルドの失敗に迅速に対応できるよ�
 
 Workflow を設定しているときに新しいジョブが表示されなくなった場合、`config.yml` の記述にエラーがあると考えられます。
 
-Workflow がトリガーされないときは、設定エラーが原因で Workflow の実行が妨げられることがよくあります。結果的に、Workflow がジョブをスタートしないことになります。
+Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
 
 Workflow の設定を行っているときは、その設定に問題がないか CircleCI の Workflow ページ (ジョブページでは*ありません*) をたびたび確認するとよいでしょう。
 
