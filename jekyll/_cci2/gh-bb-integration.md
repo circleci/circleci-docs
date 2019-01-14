@@ -208,7 +208,7 @@ If you want to push to the repository from your builds, you will need a deployme
 
 **What is a user key?**
 
-A user key is a user-specific SSH key. Your VCS has the public key, and we store the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
 ### Creating a GitHub User Key
 {:.no_toc}
@@ -293,20 +293,22 @@ jobs:
 
 ### How are these keys used?
 
-When CircleCI build your project, we install the private key into the .ssh directory, and configure SSH to use it when communicating with your version control provider. Therefore, it gets used for:
+When CircleCI builds your project, the private key is installed into the `.ssh`
+directory and SSH is subsequently configured to communicate with your version
+control provider. Therefore, the private key gets gets used for:
 
 - checking out the main project
 - checking out any GitHub-hosted submodules
 - checking out any GitHub-hosted private dependencies
 - automatic git merging/tagging/etc.
 
-For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies!
+For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
 
 ### What about security?
 
 The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since they are installed into your build containers, any code that you run in CircleCI can read them.
 
-**Isn't there a Difference between deploy keys and user keys?**
+**Isn't there a difference between deploy keys and user keys?**
 
 Deploy keys and user keys are the only key types that GitHub supports. Deploy
 keys are globally unique (for example, no mechanism exists to make a deploy key with
