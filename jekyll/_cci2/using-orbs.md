@@ -107,8 +107,6 @@ jobs:
       - run: echo outside the executor
 ```
 
-
-
 ## Key Concepts
 
 Before using orbs, you should first familiarize yourself with some basic core concepts of Orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage Orbs and use them easily in your own environments.
@@ -138,8 +136,10 @@ Before using orbs, you may find it helpful to understand the various design deci
 * One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
 * Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
-
 ## See Also
 {:.no_toc}
 
-[Reusing Config]({{site.baseurl}}/2.0/reusing-config/)
+- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
