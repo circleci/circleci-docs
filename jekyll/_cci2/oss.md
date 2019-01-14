@@ -121,11 +121,21 @@ set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-- **React** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). <https://github.com/facebook/react>
-- **Calypso** - The next generation webapp powering WordPress.com. <https://github.com/Automattic/wp-calypso>
-- **Angular** - Another JavaScript framework built on multiple providers including CircleCI. <https://github.com/angular/angular>
-- **fastlane** - A build automatically tool for Android and iOS. <https://github.com/fastlane/fastlane>
-- **Yarn** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/). <https://github.com/yarnpkg/yarn>
+- **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). 
+- **[React Native](https://github.com/facebook/react-native/)** - Build native mobile apps using JavaScript and React.
+- **[Flow](https://github.com/facebook/flow/)** - Adds static typing to JavaScript to improve developer productivity and code quality.
+- **[Relay](https://github.com/facebook/relay)** - JavaScript framework for building data-driven React applications. 
+- **[Vue](https://github.com/vuejs/vue)** -  Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
+- **[StoryBook](https://github.com/storybooks/storybook)** - Interactive UI component dev & test: React, React Native, Vue, Angular, Ember.
+- **[Electron](https://github.com/electron/electron)** - Build cross-platform desktop apps with JavaScript, HTML, and CSS.
+- **[Angular](https://github.com/angular/angular)** - Framework for building browser and desktop web applications.
+- **[Pandas](https://github.com/pandas-dev/pandas)** - Flexible and powerful data analysis / manipulation library for Python.
+- **[Apollo](https://github.com/apollographql)** - A community building flexible open source tools for GraphQL.
+- **[PyTorch](https://github.com/pytorch/pytorch)** - Data manipulation.
+- **[Calypso](https://github.com/Automattic/wp-calypso)** - The next generation webapp powering WordPress.com.
+- **[Angular](https://github.com/angular/angular)** - Another JavaScript framework built on multiple providers including CircleCI.
+- **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
+- **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
 ## See Also
 {:.no_toc}
