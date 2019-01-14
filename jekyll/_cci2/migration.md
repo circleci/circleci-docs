@@ -37,7 +37,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Conditionally halt the build at that step with `circleci-agent step halt`
 	- Allows you to use `setup_remote_docker` conditionally by halting
 - The Timezone can be changed just by defining an environment variable
-	- `TZ: /usr/share/zoneinfo/America/New_York`
+	- `TZ: America/New_York`
 - Running the build out of `/dev/shm` (for example, `/dev/shm/project`) can speed up certain projects
 	- Some things like Ruby gems can't be loaded out of shared memory. They can be installed elsewhere in the system (for example, `~/vendor`) and symlinked in.
 - Instead of prefixing a lot of commands with sudo, consider setting the shell to sudo for that `run`
