@@ -9,7 +9,7 @@ order: 1
 ---
 This document provides a basic example of importing an [orb]({{ site.baseurl }}/2.0/orb-intro/) and elements of orbs followed by a conceptual overview of orbs design.
 
-* TOC {:toc}
+- TOC {:toc}
 
 ## Introduction
 
@@ -32,9 +32,9 @@ To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2
 
 Orbs consist of the following elements:
 
-* Commands
-* Jobs
-* Executors 
+- Commands
+- Jobs
+- Executors 
 
 ### Commands
 
@@ -65,19 +65,19 @@ You must invoke jobs in the workflow stanza of `config.yml` file, making sure to
 
 Executors define the environment in which the steps of a job will be run. When you declare a `job` in CircleCI configuration, you define the type of environment (e.g. `docker`, `machine`, `macos`, etc.) to run in, in addition to any other parameters of that environment, such as:
 
-* environment variables to populate
-* which shell to use
-* what size `resource_class` to use
+- environment variables to populate
+- which shell to use
+- what size `resource_class` to use
 
 When you declare an executor in a configuration outside of `jobs`, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
 
 An executor definition has the following keys available (some of which are also available when using the `job` declaration):
 
-* `docker`, `machine`, or `macos`
-* `environment`
-* `working_directory`
-* `shell`
-* `resource_class`
+- `docker`, `machine`, or `macos`
+- `environment`
+- `working_directory`
+- `shell`
+- `resource_class`
 
 The example below shows a simple example of using an executor:
 
@@ -124,15 +124,17 @@ All orbs are open, meaning that anyone can use them and see their source.
 
 Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these Orbs were designed. Orbs were designed with the following considerations:
 
-* Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
-* Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
-* Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
-* Production orbs are immutable - Once an Orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
-* One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
-* Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+- Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
+- Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
+- Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
+- Production orbs are immutable - Once an Orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+- One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
+- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
 ## See Also
 
 {:.no_toc}
 
-[Reusing Config]({{site.baseurl}}/2.0/reusing-config/)
+- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
