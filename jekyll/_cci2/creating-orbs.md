@@ -15,7 +15,6 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 The following high-level steps will enable you to publish your first orb:
 
-
 1. Claim a namespace (assuming you don't yet have one). For example:
 `circleci namespace create sandbox github CircleCI-Public`
 
@@ -69,7 +68,7 @@ Depending on whether you use an inline template or author your orb independent o
 #### Step 6 - Create a New Orb Using Inline Template
 Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
 
-#### Step 7 - Publish your Orb
+#### Step 7 - Publish Your Orb
 The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable).
 
 For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
@@ -218,6 +217,91 @@ workflows:
           greeting_name: world
 ```
 
+## Providing Usage Examples of Orbs
+_The `examples` stanza is available in configuration version 2.1 and later_
+
+As an author of an orb, you may wish to document examples of using it in a CircleCI config file, not only to provide a starting point for new users, but also to demonstrate more complicated use cases. 
+
+When you have completed authoring an orb, and have published the orb, the orb will be published in the [Orb Registry](https://circleci.com/orbs/registry/). You will see your newly-created orb in the Orb Registry, which is shown below.
+
+### Example Usage Syntax
+The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
+
+- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
+- **usage:** (required) A full, valid config map that includes an example of using the orb.
+- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
+
+### Simple Examples
+Below is an example orb you can use:
+
+```yaml
+version: 2.1
+description: A foo orb
+
+commands:
+  hello:
+    description: Greet the user politely
+    parameters:
+      username:
+        type: string
+        description: A name of the user to greet
+    steps:
+      - run: "echo Hello << parameters.username >>"
+```
+
+If you would like, you may also supply an additional `examples` stanza in the orb like the example shown below:
+
+```yaml
+examples:
+  simple_greeting:
+    description: Greeting a user named Anna
+    usage:
+      version: 2.1
+      orbs:
+        foo: bar/foo@1.2.3
+      jobs:
+        build:
+          machine: true
+          steps:
+            - foo/hello:
+                username: "Anna"
+```
+
+Please note that `examples` can contain multiple keys at the same level as `simple_greeting`, allowing for multiple examples.
+
+### Expected Usage Results
+
+The above usage example can be optionally supplemented with a `result` key, demonstrating what the configuration will look like after expanding the orb with its parameters:
+
+```yaml
+examples:
+  simple_greeting:
+    description: Greeting a user named Anna
+    usage:
+      version: 2.1
+      orbs:
+        foo: bar/foo@1.2.3
+      jobs:
+        build:
+          machine: true
+          steps:
+            - foo/hello:
+                username: "Anna"
+    result:
+      version: 2.1
+      jobs:
+        build:
+          machine: true
+          steps:
+          - run:
+              command: echo Hello Anna
+      workflows:
+        version: 2
+        workflow:
+          jobs:
+          - build
+```
+
 ## Publishing an Orb
 
 This section covers the tooling and flow of authoring and publishing your own orbs to the orb registry.
@@ -236,7 +320,7 @@ Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms 
 
 Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called ```hannah/rails``` because they are in separate namespaces.
 
-Namespaces are owned by organizations. Only organization administrators can create namespaces.
+Namespaces are owned by organizations. Only organization owners can create namespaces.
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace please contact your account team at CircleCI.
 
