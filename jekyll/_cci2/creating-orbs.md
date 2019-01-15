@@ -223,6 +223,7 @@ _The `examples` stanza is available in configuration version 2.1 and later_
 As an author of an orb, you may wish to document examples of using it in a CircleCI config file, not only to provide a starting point for new users, but also to demonstrate more complicated use cases. 
 
 When you have completed authoring an orb, and have published the orb, the orb will be published in the [Orb Registry](https://circleci.com/orbs/registry/). You will see your newly-created orb in the Orb Registry, which is shown below.
+
 ![Orbs Registry image](  {{ site.baseurl }}/assets/img/docs/Orbs%20Registry.png).
 
 ### Example Usage Syntax
