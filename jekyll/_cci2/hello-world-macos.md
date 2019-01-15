@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Hello World on macOS"
-short-title: "Hello World"
-description: "First project on CircleCI 2.0"
+title: "Hello World On MacOS"
+short-title: "Hello World On MacOS"
+description: "First macOS project on CircleCI 2.0"
 categories: [getting-started]
 order: 4
 ---
@@ -19,9 +19,9 @@ To follow along with this document you will need:
 - A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
 - An Apple computer with XCode installed on it (if you want to open the example project).
 
-## Overview to the macOS executor
+## Overview Of The macOS Executor
 
-The macOS build environment (or 'executor') is used for iOS and macOS
+The macOS build environment (or `executor`) is used for iOS and macOS
 development, allowing you to test, build, and deploy macOS and iOS applications on
 CircleCI. The macOS executor runs jobs in a macOS environment on a VM and provides access to iOS simulators.
 
@@ -73,6 +73,18 @@ jobs: # a basic unit of work in a run
           destination: app
 ```
 
+If this is your first exposure to a CircleCI `config.yml`, some of the above
+might seem a bit confusing. In the section below you can find some links that
+provide a more in-depth overview of how a `config.yml` works.
+
+Since this is a general introduction, the `config.yml` above example covers the following:
+
+- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor) to use 
+- Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
+- Running tests with Xcode
+- Building our application
+- Compressing our application and storing it with the [`store_artifacts`]({{
+  site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
 
 ## Next Steps
 
