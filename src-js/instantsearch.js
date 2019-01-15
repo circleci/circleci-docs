@@ -72,7 +72,7 @@ export function init () {
   function renderResults (e) {
     resultDisplay.innerHTML = "";
     if (searchBox.value.length > 0) {
-      template.querySelector('#search-term-display').innerHTML = searchBox.value;
+      template.querySelector('#search-term-display').innerText = searchBox.value;
       var results = template.cloneNode(true);
 
       resultDisplay.appendChild(results);
