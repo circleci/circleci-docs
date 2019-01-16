@@ -22,9 +22,9 @@ order: 41
 
 1. GitHub.com にログインし、下記の通り操作します。
   
-  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new>{:target="_blank"}. ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * **New repositories** ボタンをクリックするか、<https://github.com/new>{:target="_blank"} に直接アクセスします ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
-2. Select Initialize this repository with a README and click the Create repository button. ![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
+2. 「Initialize this repository with a README」にチェックを入れて、**Create repository** ボタンをクリックします。![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
 ## .YML ファイルの追加
 
