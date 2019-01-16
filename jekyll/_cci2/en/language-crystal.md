@@ -5,7 +5,7 @@ short-title: "crwdns100722:0crwdne100722:0"
 description: "crwdns100724:0crwdne100724:0"
 categories:
   - crwdns100726:0crwdne100726:0
-order: ':0crwdne100728:005.74075crwdns100728:0crwdne100728:054crwdns100728:0crwdne100728:0'
+order: crwdns100728:0crwdne100728:0
 ---
 *crwdns100730:0{{ site.baseurl }}crwdne100730:0*
 
