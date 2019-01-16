@@ -5,7 +5,7 @@ short-title: "crwdns98704:0crwdne98704:0"
 description: "crwdns98706:0crwdne98706:0"
 categories:
   - crwdns98708:0crwdne98708:0
-order: dne98710:0530d5.76828983crwdns98710:0crwdne98710:0
+order: crwdns98710:0crwdne98710:0
 ---
 crwdns98712:0[building-docker-images]crwdnd98712:0{{ site.baseurl }}crwdne98712:0
 
