@@ -53,7 +53,7 @@ haiku: >
 
 {:.no_toc}
 
-Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar). You can also map a scalar to a sequence.
+Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar). You may also map a scalar to a sequence.
 
 ```yaml
 scalar:
@@ -149,4 +149,11 @@ While YAML has several other features, the examples above should be enough to ge
 
 - For a concrete example of keys and values, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 - If you are unsure whether your `config.yml` is valid YAML, [run it through a validator](http://yaml-online-parser.appspot.com/).
+
+CircleCI has also developed "orbs," which enable you to use pre-conifgured and tested packages of configuration elements that you can use in your configuration workflow. Utilizing DRY (Don't Repeat Yourself), orbs enable you to quickly and easily incorporate configuration elements (jobs, executors, commands) in your workflow. For more detailed information about orbs:
+
+- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of orbs.
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - For a more exhaustive overview of YAML, Learn X in Y Minutes has [a great summary](https://learnxinyminutes.com/docs/yaml/).
