@@ -71,10 +71,10 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-      - store_artifacts:
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/reports
           destination: reports
-      - store_test_results:
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
@@ -243,8 +243,33 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 ## Troubleshooting
 
-See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document
-for details on handling Java memory issues.
+### Handling Out Of Memory Errors
+
+You might run into out of memory (oom) errors with your build. To get acquainted
+with the basics of customizing the JVM's memory usage, consider reading the
+[Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document. 
+
+If you are using [Robolectric](http://robolectric.org/) for testing you may need to make tweaks to gradle's
+use of memory. When the gradle vm is forked for tests it does not receive
+previously customized JVM memory parameters. You will need to supply Gradle with
+JVM memory paramaters for tests like so in your `build.gradle` file.
+
+```
+android {
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+
+            all {
+                maxHeapSize = "1024m"
+            }
+        }
+    }
+```
+
+If you are still running into OOM issues you can also limit the max workers for
+gradle: `./gradlew test --max-workers 4`
 
 ### Disabling Pre-Dexing to Improve Build Performance
 {:.no_toc}
