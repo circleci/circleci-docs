@@ -169,7 +169,7 @@ workflows:
 
 ##### AWS ECS
 
-This orb enables you to update AWS ECS.
+This orb enables you to update an existing AWS ECS instance.
 
 ```
 version: 2.1
@@ -328,7 +328,7 @@ workflows:
 
 ### Orb Deployment Example
 
-CircleCI has developed a CloudFoundry Orb that you can use to simplify your configurations. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with a CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
+CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with a CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
 
 ```
 version: 2.1
