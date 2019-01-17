@@ -408,6 +408,31 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
    - run: cd functions && npm install
 ```
 
+### Firebase Orb Example
+
+If you would like to simplify your Firebase configuration workflow, you may use a pre-configured package of configurations (referred to as an "orb") to deploy your application to Firebase. The example below shows this Firebase orb.
+
+```
+version: 2.1
+description: Orb for firebase deploy.
+commands:
+  deploy:
+    description: Deploy to firebase
+    parameters:
+      token:
+        type: string
+        description: Firebase Deploy Token
+    steps:
+      - run:
+          name: Install Firebase Tools
+          command: npm install --prefix=./firebase-deploy firebase-tools
+      - run:
+          name: Deploy to Firebase
+          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
+```
+
+For more detailed information about how you can use the Firebase orb to deploy your application, refer to the [Firebase Orb Deploy] (https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
 ## Google Cloud
 
 Before deploying to Google Cloud Platform, you will have to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
