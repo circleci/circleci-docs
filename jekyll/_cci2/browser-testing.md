@@ -90,6 +90,31 @@ jobs:
             kill -9 `cat /tmp/sc_client.pid`          
 ```
 
+### Sauce Labs Browser Testing Orb Example
+
+CircleCI has developed a Sauce labs browser testing orb that enables you to open a Sauce Labs tunnel before performing any browser testing. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
+
+```
+version: 2.1
+orbs:
+  saucelabs: saucelabs/connect@volatile
+workflows:
+  browser_tests:
+    jobs:
+      - saucelabs/with_proxy:
+          name: Chrome Tests
+          steps:
+            - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
+          tunnel_identifier: chrome
+      - saucelabs/with_proxy:
+          name: Safari Tests
+          steps:
+            - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
+          tunnel_identifier: safari
+```
+
+For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry] (https://circleci.com/orbs/registry/).
+
 ## BrowserStack and Appium
 
 As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
