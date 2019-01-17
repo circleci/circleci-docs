@@ -121,6 +121,22 @@ As in the Sauce Labs example above, you could replace the installation of Sauce 
 
 For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
 
+## Cypress
+
+Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress] (https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
+
+```
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.1.0
+workflows:
+  build:
+    jobs:
+      - cypress/run
+```
+
+There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/orbs/registry/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
 ## Debugging Browser Tests
 
 Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
@@ -225,7 +241,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz (http://xquartz.macosforge.org/landing/).
+1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz] (http://xquartz.macosforge.org/landing/).
 
 2. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 
