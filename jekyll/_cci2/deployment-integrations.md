@@ -194,7 +194,7 @@ workflows:
 
 For more detailed information about the AWS ECS & AWS ECR orbs, refer to the following Orb registry pages:
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
-- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
+- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 
 ## Azure
 
@@ -328,7 +328,7 @@ workflows:
 
 ### Orb Deployment Example
 
-CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with a CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
+CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
 
 ```
 version: 2.1
@@ -356,7 +356,7 @@ build_and_push:
                 manifest: # path to manifest.yml file
                 package: # path to application package
 ```
-If you would like more detailed information about various CloudFooundry orb examples that you can use in your configurations, refer to the the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+If you would like more detailed information about various CloudFoundry orb examples that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Firebase
 
@@ -491,19 +491,9 @@ A CircleCI 2.0 Google Cloud deployment example project is also available [here](
 If you would like to simplify your configuration workflows using a CircleCI orb (a package of configurations that you can use that includes job, commands and executors), the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different orb examples for Google Cloud, including the example shown below.
 
 ```
-version: 2.1
-
-description: |
-  Install and configure the Google Cloud CLI (gcloud)
-examples:
-  simple_install_and_configure:
-    description: Install the gcloud CLI, if not available
-    usage:
       version: 2.1
-
       orbs:
         gcp-cli: circleci/gcp-cli@1.0.0
-
       workflows:
         install_and_configure_cli:
           # optionally determine executor to use
