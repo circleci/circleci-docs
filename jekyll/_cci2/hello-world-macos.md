@@ -77,7 +77,7 @@ If this is your first exposure to a CircleCI `config.yml`, some of the above
 might seem a bit confusing. In the section below you can find some links that
 provide a more in-depth overview of how a `config.yml` works.
 
-Since this is a general introduction, the `config.yml` above example covers the following:
+Since this is a general introduction to building on MacOs, the `config.yml` above example covers the following:
 
 - Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor) to use 
 - Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
@@ -85,6 +85,8 @@ Since this is a general introduction, the `config.yml` above example covers the 
 - Building our application
 - Compressing our application and storing it with the [`store_artifacts`]({{
   site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
+  
+You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/#section=configuration).
 
 ## Next Steps
 
