@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'jekyll/assets/js/dist'),
     publicPath: '',
-    filename: '[name].min.js'
+    filename: '[name].js'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,8 +28,5 @@ module.exports = {
         }
       }
     ]
-  },
-  optimization: {
-    minimizer: [new UglifyJsPlugin()]
   }
 };

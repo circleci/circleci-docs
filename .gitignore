@@ -8,5 +8,6 @@ _site/
 jekyll/.jekyll-cache/
 jekyll/environments/
 jekyll/_includes/app.html
+jekyll/assets/js/dist/app.js
 run-results/
 node_modules/
