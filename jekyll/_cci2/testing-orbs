@@ -1,0 +1,29 @@
+---
+layout: classic-docs
+title: "Testing CircleCI Orbs"
+short-title: "Testing Orbs"
+description: "Starting point for Testing CircleCI Orbs"
+categories: [getting-started]
+order: 1
+---
+## Introduction
+
+CircleCI orbs are packages of configuration that you can use in your configurations to simplify your workflows and quickly and easily deploy application and orbs in your workflow.
+
+## Orb Testing Best Practices
+
+The most significant issue when testing orbs is that, because orbs are interpolated into an expanded `config.yml` at build inception, it is not straightforward to push a new commit to a repository containing orb source code (assuming the repo is configured with CI/CD) and have the newest changes to the orb that are contained in that commit, also be tested, as a new dev version of the orb, within the same commit.
+
+There are several different approaches you can use to test your orbs (e.g. using inline orbs, external repositories); however, other testing approaches are currently being developed to enable you to more easily test your orbs. For more detailed information about these testing examples, refer to the [Emerging Testing Best Practices for Orbs](https://discuss.circleci.com/t/emerging-testing-best-practices-for-orbs/27474) page in the CircleCI Discussion Forum.
+
+
+
+
+   
+    
+
+
+
+
+
+
