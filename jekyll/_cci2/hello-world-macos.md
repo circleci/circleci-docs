@@ -23,7 +23,7 @@ To follow along with this document you will need:
 
 The macOS build environment (or `executor`) is used for iOS and macOS
 development, allowing you to test, build, and deploy macOS and iOS applications on
-CircleCI. The macOS executor runs jobs in a macOS environment on a VM and provides access to iOS simulators.
+CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
 
 Before we get to setting up the macOS executor, we will need to setup our example application.
 
