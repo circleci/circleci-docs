@@ -86,7 +86,7 @@ Since this is a general introduction to building on MacOs, the `config.yml` abov
 - Compressing our application and storing it with the [`store_artifacts`]({{
   site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
   
-You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/#section=configuration).
+You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
 
 ## Next Steps
 
