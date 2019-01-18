@@ -66,7 +66,7 @@ jobs:
 
 2. **チェックアウトコード：** CircleCI は、GitHub リポジトリをチェックアウトし、手順 1 でローンチされた仮想環境に「クローン」しました。
 
-3. **echo：** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は echo コマンドを実行し、「A first hello」という入力を与えました ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
+3. **echo：** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は 「A first hello」という入力を echo コマンドに渡して実行します。 ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
 
 今のところはリポジトリにソースコードが含まれておらず、`config.yml` 内にもテストに関わる設定が含まれていませんが、CircleCI はビルドに「成功」したものとして扱います ([exit コード](https://en.wikipedia.org/wiki/Exit_status)としては 0 を返しているため)。 ほとんどのプロジェクトは、これよりはるかに複雑で、多くの場合は複数の Docker イメージと複数のステップが存在し、多くのテストも含まれます。 `config.yml` ファイルに記述できる全てのステップの詳細については、[CircleCI の設定方法](https://circleci.com/docs/ja/2.0/configuration-reference)を参照してください。
 
