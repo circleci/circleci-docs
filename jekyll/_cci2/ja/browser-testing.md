@@ -88,11 +88,50 @@ jobs:
             kill -9 `cat /tmp/sc_client.pid`          
 ```
 
+### Sauce Labs Browser Testing Orb Example
+
+CircleCI has developed a Sauce labs browser testing orb that enables you to open a Sauce Labs tunnel before performing any browser testing. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
+
+    version: 2.1
+    orbs:
+      saucelabs: saucelabs/connect@volatile
+    workflows:
+      browser_tests:
+        jobs:
+          - saucelabs/with_proxy:
+              name: Chrome Tests
+              steps:
+                - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
+              tunnel_identifier: chrome
+          - saucelabs/with_proxy:
+              name: Safari Tests
+              steps:
+                - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
+              tunnel_identifier: safari
+    
+
+For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) page in the \[CircleCI Orbs Registry\] (https://circleci.com/orbs/registry/).
+
 ## BrowserStack と Appium
 
 上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 その後で、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/2.0/env-vars/)を、自分の BrowserStack アカウントのものに設定します。
 
 モバイルアプリケーションの場合、Appium をジョブにインストールし、CircleCI の USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/2.0/env-vars/)を使用して、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用することもできます。
+
+## Cypress
+
+Another browser testing solution you can use in your Javascript end-to-end testing is \[Cypress\] (https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
+
+    version: 2.1
+    orbs:
+      cypress: cypress-io/cypress@1.1.0
+    workflows:
+      build:
+        jobs:
+          - cypress/run
+    
+
+There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/orbs/registry/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## ブラウザーテストのデバッグ
 
@@ -102,7 +141,7 @@ Integration tests can be hard to debug, especially when they're running on a rem
 
 {:.no_toc}
 
-CircleCI の構成により、[ビルドアーティファクト]({{ site.baseurl }}/2.0/artifacts/)を収集し、自分のビルドから使用可能にできます。 For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
+CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
 
 スクリーンショットの保存は簡単です。これは WebKit および Selenium に組み込まれた機能で、ほとんどのテストスィートでサポートされています。
 
@@ -114,7 +153,7 @@ CircleCI の構成により、[ビルドアーティファクト]({{ site.baseur
 
 {:.no_toc}
 
-CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカルマシン上で実行されているブラウザーを使用して、失敗したテストのデバッグを行えると便利です。 この操作、SSH 対応の実行により簡単にセットアップできます。
+If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
 
 1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into the container over SSH apears, as follows:
 
@@ -128,17 +167,17 @@ CircleCI 上で HTTP サーバーを実行するテストを行う場合、ロ�
 
 1. 次に、ローカルマシンでブラウザーを開き、`http://localhost:8080` を開いて、CircleCI コンテナのポート `3000` で実行されているサーバーに要求を直接転送します。 または、CircleCI コンテナ上でテストサーバーを手作業で開始 (既に実行中でなければ) すると、開発用マシンのブラウザーから、実行中のテストサーバーにアクセスできるようになります。
 
-この方法で、たとえば Selenium テストをセットアップするときのデバッグが非常に簡単になります。
+This is a very easy way to debug things when setting up Selenium tests, for example.
 
 ### VNC 上でのブラウザーとの連携
 
 {:.no_toc}
 
-VNC を使用すると、テストを実行しているブラウザーを表示し、連携が可能になります。 この方法は、実際のブラウザーを実行しているドライバを使用しているときのみ機能します。 Selenium がコントロールしているブラウザーとは連携できますが、PhantomJS はヘッドレスなので、連携できません。
+VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
 
 1. VNC ビューアをインストールします。 macOS を使用している場合、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討します。 [RealVNC](http://www.realvnc.com/download/viewer/) も、ほとんどのプラットフォームで使用できます。
 
-2. ターミナルウィンドウを開き、CircleCI コンテナに対して [SSH の実行を開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、リモートポート 5901 からローカルポート 5902 へ転送します。
+2. Open a Terminal window, [start an SSH run]({{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
 
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
@@ -208,7 +247,7 @@ If you find yourself setting up a VNC server often, then you might want to autom
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
+1. Install an X Window System on your computer. If you're using macOS, consider \[XQuartz\] (http://xquartz.macosforge.org/landing/).
 
 2. システムに X がセットアップされた状態で、CircleCI VM への [SSH ビルドを開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、`-X` フラグを使用して転送をセットアップします。
 
