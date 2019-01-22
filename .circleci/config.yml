@@ -33,7 +33,7 @@ jobs:
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
-            mv jekyll/assets/js/app.js /tmp/workspace/js/
+            mv jekyll/assets/js/app.js /tmp/workspace/js/app.js
       - persist_to_workspace:
           root: *workspace_root
           paths:
