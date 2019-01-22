@@ -7,7 +7,7 @@ module.exports = {
     app: './src-js/app.js'
   },
   output: {
-    path: path.join(__dirname, 'jekyll/assets/js/dist'),
+    path: path.join(__dirname, 'jekyll/assets/js'),
     publicPath: '',
     filename: '[name].js'
   },
