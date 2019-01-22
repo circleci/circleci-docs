@@ -70,7 +70,7 @@ jobs:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       - run:
-          name: "What branch am I on?"
+          name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH # Note: you can interpolate vars with or without brackets
       - run:
           name: "What was my custom environment variable?"
@@ -85,8 +85,8 @@ When the above config runs, the output looks like this:
 
 ![]({{site.baseurl}}/assets/img/docs/env-vars-interpolation-example.png)
 
-You may have noticed that there are two duplicate steps in the above image and config - "What branch am I
-on?". These steps  illustrate two different ways to read environment variables. Note that
+You may have noticed that there are two similar steps in the above image and config - "What branch am I
+on?". These steps illustrate two different methods to read environment variables. Note that
 both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell
 paramater expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
