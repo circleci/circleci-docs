@@ -28,6 +28,12 @@ jobs:
       - run:
           name: Prepare JS assets
           command: npm run webpack-prod
+      - run:
+          name: Persist JS assets
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/js
+            mv jekyll/assets/js/app.js /tmp/workspace/js/app.js
       - persist_to_workspace:
           root: *workspace_root
           paths:
@@ -80,6 +86,12 @@ jobs:
           name: "Manage Data Files We'll Need"
           command: |
             ./scripts/pull-docker-image-tags.sh
+      - run:
+          name: Restore js
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/js
+            mv /tmp/workspace/js/ jekyll/assets/js/
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
