@@ -213,3 +213,10 @@ The TESTFILES var will have a different value in each container, based on $CIRCL
 ## See Also
 
 [Using Containers]({{ site.baseurl }}/2.0/containers/)
+
+## Other ways to split tests
+
+### Test suite split with Knapsack Pro for Ruby & JavaScript
+{% include third-party-info.html app='Knapsack Pro'%}
+
+You can allocate tests in a dynamic way across parallel CI nodes with [Knapsack Pro](https://knapsackpro.com) Queue Mode. This way you can auto balance CI nodes timing affected by the randomness of tests time execution to run faster CI builds. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
