@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "FAQ"
 short-title: "FAQ"
-description: "Frequently asked questions about CircleCI 2.0"
+description: "CircleCI についてのよくある質問"
 categories:
   - migration
 order: 1
@@ -23,26 +23,26 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 
 {:.no_toc} - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
-### How do I migrate from Jenkins to CircleCI 2.0?
+### Jenkins から CircleCI 2.0 に移行するには？
 
 {:.no_toc} Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
 ```yaml
     steps:
-      - run: "Add any bash command you want here"
+      - run: "bash コマンドをここに記述します"
       - run:
           command: |
-            echo "Arbitrary multi-line bash"
-            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
+            echo "複数行の bash コマンドはこのようにします"
+            echo "たいていは Jenkins の Execute Shell の内容をコピー＆ペーストするだけです"
 ```
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
-### Does CircleCI 2.0 run inference commands?
+### CircleCI 2.0 では（移行を効率化する）インファレンスツールを用意していますか？
 
 {:.no_toc} CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
-### Can I use CircleCI 2.0 without creating base images?
+### CircleCI 2.0 は元となる OS イメージを作成しなくても使えますか？
 
 {:.no_toc} Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
@@ -54,21 +54,21 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 ## Hosting
 
-### Is CircleCI 2.0 available to enterprise clients?
+### CircleCI 2.0 は法人利用も可能ですか？
 
 {:.no_toc} Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
-### What are the differences between CircleCI’s hosting options?
+### CircleCI のホスティングの種類について教えてほしい。
 
 {:.no_toc} - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
 - **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
 
-### Why did you change the name from CircleCI Enterprise?
+### どうして CircleCI Enterprise という名称をやめたのですか？
 
 {:.no_toc} The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
 
-CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
+そのため、クラウドサービス経由で使えるもの、ファイアウォールを設置した環境に導入するもの、あるいはそのハイブリッドで活用するもの、というように、ニーズに応じて利用可能な CircleCI という 1 つの製品としました。
 
 ## Troubleshooting
 
