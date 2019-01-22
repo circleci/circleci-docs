@@ -41,7 +41,7 @@ jobs:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v1
+            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
@@ -53,7 +53,7 @@ jobs:
           command: stack install
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ epoch }}
+          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
           paths:
             - ".stack"
             - ".stack-work"
@@ -114,23 +114,24 @@ compiler as specified in the `stack.yaml` config.
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v1
+            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ epoch }}
+          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
           paths:
             - ~/.stack
             - ~/.stack-work
 ```
 {% endraw %}
 
-Note: While creating a narrow cache using epoch is typically frowned upon, it's beneficial
-here, otherwise we would need to use a checksum of package.yaml and stack.yaml in the
-cache key. Additionally, using even just those two checksums could potentially still be
-insufficient, if we change the docker image to use a newer version of stack.
+Note: It's also possible to use a `cabal` build file for caching dependencies.
+`stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this
+demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the
+cache key for our dependencies. You can read more about the differences between
+`stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
 
 Finally, we can run our application build commands. We'll run our tests first
 and then move on to install our executable. Running `stack install` will create
