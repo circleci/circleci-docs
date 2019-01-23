@@ -26,7 +26,7 @@ To test whether an orb is valid YAML and is well-formed according to the schema,
 #### Example
 
 Given an orb with source at `./src/orb.yml` you can run `circleci orb validate ./src/orb.yml` to receive feedback on whether the orb is valid and will pass through config processing. If there is an error, you will receive the first schema validation error encountered. Alternatively, you can pass STDIN rather than a file path. 
-For instance, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate` -. 
+For instance, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.' 
 
 **Note** Schema errors are often best read "inside out", where your coding error may be best described in one of the inner-most errors in a stack of errors.
 
@@ -46,6 +46,7 @@ The following steps illustrate doing basic expansion testing from the CLI:
 
 1) Assume a simple orb in `src/orb.yml`
 
+{% raw %}
 ```
 version: 2.1
 
@@ -56,7 +57,7 @@ executors:
         type: string
         default: "curl-browsers"
       docker:
-        - image:  circleci/buildpack-deps:<< parameters.tag >>
+        - image:  circleci/buildpack-deps:parameters.tag
 
 jobs:
   hello-build:
@@ -64,6 +65,7 @@ jobs:
     steps:
       - run: echo "Hello, build!"
 ```
+{% endraw %}
 
 2) Validate the orb with `circleci orb validate src/orb.yml`.
 
@@ -71,6 +73,7 @@ jobs:
 
 4) Include that orb in `.circleci/config.yml`:
 
+{% raw %}
 ```
 version: 2.1
 
@@ -81,7 +84,13 @@ workflows:
   hello-workflow:
     jobs:
       - hello/hello-build
-After running circleci config process .circleci/config.yml the expected result would be:
+```
+{% endraw %}
+
+After running `circleci config process .circleci/config.yml` the expected result would be:
+
+{% raw %}
+```
 version: 2
 jobs:
   hello/hello-build:
@@ -96,9 +105,11 @@ workflows:
       - hello/hello-build
   version: 2
 ```
+{% endraw %}
 
 The `config.yml` file should look like the following:
 
+{% raw %}
 ```
 version: 2.1
 
@@ -110,6 +121,7 @@ orbs:
     jobs:
         - hello/hello-build
 ```
+{% endraw %}
 
 The result shown above may now be used in a custom script that tests for its structure relative to what is expected. This form of testing is useful for ensuring you do not break any contracts your orb interface has established with users of the orb, while also enabling you to test different parameter inputs to determine how these parameter imputs impact what is generated during config processing.
 
