@@ -30,6 +30,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [Haskell]({{ site.baseurl }}/2.0/language-haskell/) | Scotty | [circleci-demo-haskell](https://github.com/CircleCI-Public/circleci-demo-haskell)
  [iOS] | Xcode | [circleci-demo-ios]
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
+ [macOS](https://github.com/CircleCI-Public/circleci-demo-macos) | MacOS | [circleci-demo-macos](https://github.com/CircleCI-Public/circleci-demo-macos)
  [Java] | Spring | [circleci-demo-java-spring]
  [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [NodeJS - JavaScript] | React | [circleci-demo-javascript-express]

@@ -7,9 +7,9 @@ module.exports = {
     app: './src-js/app.js'
   },
   output: {
-    path: path.join(__dirname, 'jekyll/assets/js/dist'),
+    path: path.join(__dirname, 'jekyll/assets/js'),
     publicPath: '',
-    filename: '[name].min.js'
+    filename: '[name].bundle.js'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,8 +28,5 @@ module.exports = {
         }
       }
     ]
-  },
-  optimization: {
-    minimizer: [new UglifyJsPlugin()]
   }
 };

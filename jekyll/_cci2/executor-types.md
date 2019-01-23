@@ -121,7 +121,7 @@ jobs:
       image: circleci/classic:2017-01  # pins image to specific version using YYYY-MM format
 ```
 
-The `image` key accepts one of three image types:
+The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
 
 - `circleci/classic:latest`:
 This is the default image.

@@ -10,6 +10,8 @@ en:
           link: 2.0/about-circleci/
         - name: Supported Languages
           link: 2.0/demo-apps/
+        - name: Core Features
+          link: 2.0/features/
 
 - name: Getting Started
   icon: docs/start.svg
@@ -21,6 +23,8 @@ en:
           link: 2.0/first-steps/
         - name: Hello World
           link: 2.0/hello-world/
+        - name: Hello World MacOS
+          link: 2.0/hello-world-macos/
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
