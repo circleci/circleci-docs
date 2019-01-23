@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'jekyll/assets/js'),
     publicPath: '',
-    filename: '[name].js'
+    filename: '[name].bundle.js'
   },
   plugins: [
     new webpack.DefinePlugin({
