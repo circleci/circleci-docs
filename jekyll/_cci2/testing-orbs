@@ -46,7 +46,8 @@ The following steps illustrate doing basic expansion testing from the CLI:
 
 1) Assume a simple orb in `src/orb.yml`
 
-```version: 2.1
+```
+version: 2.1
 
 executors:
   default:
