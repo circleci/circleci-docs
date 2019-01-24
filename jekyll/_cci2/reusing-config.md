@@ -35,7 +35,8 @@ A reusable command may have the following immediate children keys as a map:
 
 Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
 
-```yaml
+{% raw %}
+```
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -46,6 +47,7 @@ commands:
     steps:
       - run: echo << parameters.to >>
 ```
+{% endraw %}
 
 **Note:** The `commands` stanza is available in configuration version 2.1 and later.
 
@@ -56,7 +58,8 @@ Reusable commands are invoked with specific parameters as steps inside a job. Wh
 
 The following example invokes the command `sayhello` and passes it a parameter `to`:
 
-```yaml
+{% raw %}
+```
 jobs:
   myjob:
     docker:
@@ -65,6 +68,7 @@ jobs:
       - sayhello:
           to: "Lev"
 ```
+{% endraw %}
 
 ### Invoking Other Commands in Your Command
 {:.no_toc}
@@ -87,8 +91,8 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
-```yaml
-# aws-s3 orb
+{% raw %}
+```
 commands:
   sync:
     description: "A simple encapsulation of doing an s3 sync"
@@ -105,10 +109,12 @@ commands:
           name: Deploy to S3
           command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 ```
+{% endraw %}
 
 Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file as:
 
-```yaml
+{% raw %}
+```
 version: 2.1
 
 orbs:
@@ -124,9 +130,11 @@ workflows:
               to: "s3://mybucket_uri"
               overwrite: true
 ```
+{% endraw %}
 
 Defining a `build` job:
 
+{% raw %}
 ```
 version: 2.1
 orbs:
@@ -147,6 +155,7 @@ jobs:
           to: "s3://my-s3-bucket-name"
           arguments: --dryrun
  ```
+ {% endraw %}
 
 ## Authoring Reusable Executors 
 
@@ -164,7 +173,8 @@ An executor definition includes one or more of the following keys:
 
 In the following example `my-executor` is passed as the single value of the key `executor`. 
 
-```yaml
+{% raw %}
+```
 version: 2.1
 executors:
   my-executor:
@@ -177,6 +187,7 @@ jobs:
     steps:
       - run: echo outside the executor
 ```
+{% endraw %}
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
@@ -185,7 +196,8 @@ jobs:
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
-```yaml
+{% raw %}
+```
 jobs:
   my-job:
     executor:
@@ -193,6 +205,7 @@ jobs:
     steps:
       - run: echo outside the executor
 ```
+{% endraw %}
 
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 
@@ -201,7 +214,8 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment. 
 
-```yaml
+{% raw %}
+```
 version: 2.1
 executors:
   lein_exec: # declares a reusable executor
@@ -227,31 +241,35 @@ jobs:
       - checkout
       - run: echo "how are ya?"
 ```
+{% endraw %}
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
-```yaml
-# yaml from foo-orb
+{% raw %}
+```
 executors:
   bar:
     machine: true
     environment:
       RUN_TESTS: foobar
 ```
+{% endraw %}
 
 `baz-orb` could define the `bar` executor too:
-```yaml
-# yaml from baz-orb
+
+{% raw %}
+```
 executors:
   bar:
     docker:
       - image: clojure:lein-2.8.1
 ```
+{% endraw %}
 
 You may use either executor from your configuration file with:
 
-```yaml
-# config.yml
+{% raw %}
+```
 orbs:
   foo-orb: somenamespace/foo@1
   baz-orb: someothernamespace/baz@3.3.1
@@ -261,10 +279,10 @@ jobs:
   some-other-job:
     executor: baz-orb/bar  # prefixed executor
 ```
+{% endraw %}
 
 **Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They
 both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
-
 
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
@@ -273,7 +291,8 @@ When invoking an executor in a `job` any keys in the job itself will override th
 
 **Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
-```yaml
+{% raw %}
+```
 executors:
   python:
     docker:
@@ -295,9 +314,12 @@ jobs:
       TESTS: unit
     working_directory: ~/tests
 ```
+{% endraw %}
 
 The above config would resolve to the following:
-```yaml
+
+{% raw %}
+```
 jobs:
  build:
    steps: []
@@ -310,6 +332,7 @@ jobs:
    shell: /bin/bash            # From executor
    working_directory: ~/tests  # From job
 ```
+{% endraw %}
 
 ## Using the `parameters` Declaration
 
@@ -317,8 +340,9 @@ Parameters are declared by name under a job, command, or executor. The immediate
 
 The following example defines a command called `sync`:
 
-```yaml
-commands: # a reusable command with parameters
+{% raw %}
+```
+commands:
   sync:
     parameters:
       from:
@@ -329,14 +353,14 @@ commands: # a reusable command with parameters
         default: false
         type: boolean
     steps:
-      - run: # a parameterized run step
+      - run:
           name: Deploy to S3
           command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 executors: # a reusable executor
   aws:
     docker:
       - image: cibuilds/aws:1.15
-jobs: # a job that invokes the `aws` executor and the `sync` command
+jobs:
   deploy2s3:
     executor: aws
     steps:
@@ -345,6 +369,7 @@ jobs: # a job that invokes the `aws` executor and the `sync` command
           to: "s3://mybucket_uri"
           overwrite: true
 ```
+{% endraw %}
 
 **Note:** The `parameters` declaration is available in configuration version 2.1 and later.
 
@@ -377,7 +402,8 @@ This section describes the types of parameters and their usage. The parameter ty
 
 Basic string parameters are described below:
 
-```yaml
+{% raw %}
+```
 commands:
   copy-markdown:
     parameters:
@@ -388,6 +414,7 @@ commands:
     steps:
       - cp *.md << destination >>
 ```
+{% endraw %}
 
 Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
@@ -396,7 +423,8 @@ Strings should be quoted if they would otherwise represent another type (such as
 
 Boolean parameters are useful for conditionals:
 
-```yaml
+{% raw %}
+```
 commands:
   list-files:
     parameters:
@@ -407,6 +435,7 @@ commands:
     steps:
       - ls <<# all >> -a <</ all >>
 ```
+{% endraw %}
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
 
@@ -420,7 +449,8 @@ Capitalized and uppercase versions of the above values are also valid.
 
 The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
 
-```yaml
+{% raw %}
+```
 version: "2.1"
 
 jobs:
@@ -440,13 +470,15 @@ workflows:
       - build:
           p: 2
 ```
+{% endraw %}
 
 #### Enum
 {:.no_toc}
 
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
-```yaml
+{% raw %}
+```
 commands:
   list-files:
     parameters:
@@ -456,14 +488,12 @@ commands:
         type: enum
         enum: ["linux", "darwin", "win32"]
 ```
+{% endraw %}
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-```
-
 {% raw %}
-
-yaml
+```
 commands:
   list-files:
     parameters:
@@ -471,20 +501,16 @@ commands:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
- 
- {% endraw %}
- 
  ```
+ {% endraw %}
 
 #### Executor
 {:.no_toc}
 
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
-```
 {% raw %}
-
-yaml
+```
 version: 2.1
 executors:
   xenial:
@@ -518,9 +544,8 @@ workflows:
           e:
             name: xenial
             some-value: foobar
-
-{% endraw %}
 ```
+{% endraw %}
 
 #### Steps
 {:.no_toc}
@@ -529,7 +554,6 @@ Steps are used when you have a job or command that needs to mix predefined and u
 
 {% raw %}
 ```
-yaml
 commands:
   run-tests:
     parameters:
@@ -548,7 +572,6 @@ The following example demonstrates that steps passed as parameters are given as 
 
 {% raw %}
 ```
-yaml
 jobs:
   build:
     machine: true
@@ -564,7 +587,6 @@ The above will resolve to the following:
 
 {% raw %}
 ```
-yaml
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
@@ -634,9 +656,7 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 
 {% raw %}
 ```
-yaml
 version: 2.1
-
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -665,8 +685,8 @@ If a job is declared inside an orb it can use commands in that orb or the global
 
 **hello-orb**
 
-```yaml
-# partial yaml from hello-orb
+{% raw %}
+```
 jobs:
   sayhello:
     parameters:
@@ -686,11 +706,12 @@ commands:
     steps:
       - run: echo "<< parameters.saywhat >>"
 ```
+{% endraw %}
 
 **Config leveraging hello-orb**
 
-```yaml
-# config.yml
+{% raw %}
+```
 version: 2.1
 orbs:
   hello-orb: somenamespace/hello-orb@volatile
@@ -700,6 +721,7 @@ workflows:
       - hello-orb/sayhello:
           saywhat: Everyone
 ```
+{% endraw %}
 
 ### Using Parameters in Executors
 {:.no_toc}
@@ -711,9 +733,9 @@ Parameters in executors can be of the type `string`, `enum`, or `boolean`. Defau
 #### Example Build Configuration Using a Parameterized Executor
 {:.no_toc}
 
-```yaml
+{% raw %}
+```
 version: 2.1
-
 executors:
   python:
     parameters:
@@ -734,10 +756,12 @@ jobs:
       tag: "2.7"
       myspecialvar: "myspecialvalue"  
 ```
+{% endraw %}
 
 The above would resolve to the following: 
 
-```yaml
+{% raw %}
+```
 version: 2.1
 jobs:
   build:
@@ -747,13 +771,15 @@ jobs:
     environment:
       MYPRECIOUS: "myspecialvalue"
 ```
+{% endraw %}
 
 ### The Scope of Parameters
 {:.no_toc}
 
 Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
 
-```yaml
+{% raw %}
+```
 version: 2.1
 
 jobs:
@@ -785,6 +811,7 @@ workflows:
       - sayhello:
           saywhat: Everyone
 ```
+{% endraw %}
 
 ### Invoking the Same Job Multiple Times
 {:.no_toc}
@@ -793,7 +820,8 @@ A single configuration may invoke a job multiple times. At configuration process
 
 **Note:** You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow you will need to explicitly name it.
 
-```yaml
+{% raw %}
+```
 version: 2.1
 workflows:
   build:
@@ -813,25 +841,23 @@ workflows:
           requires:
             - SayHelloChad
 ```
+{% endraw %}
 
 ### Using Pre and Post Steps
 {:.no_toc}
 
 Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
-are executed before any of the other steps in the job. The steps under
-`post-steps` are executed after all of the other steps.
+are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job 
-without modifying the job. This is useful, for example, to run custom setup steps
-before job execution. 
+Pre and post steps allow you to execute steps in a given job  without modifying the job. This is useful, for example, to run custom setup steps before job execution. 
 
 ### Defining Pre and Post Steps
 {:.no_toc}
 
 The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
 
-```yaml
-# config.yml
+{% raw %}
+```
 version: 2.1
 jobs:
   bar:
@@ -853,27 +879,22 @@ workflows:
             - run:
                 command: echo "upload artifact to s3"
 ```
+{% endraw %}
 
 **Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
 
-
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a condition is
-met. 
+Conditional steps allow the definition of steps that only run if a condition is met. 
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
 
-
-These conditions are checked before a workflow is actually run. That
-means, for example, that you cannot use a condition to check an environment
-variable.
+These conditions are checked before a workflow is actually run. That means, for example, that you cannot use a condition to check an environment variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
 
-For example, an
-orb author could define conditional steps in the `steps` key of a Job or a
+For example, an orb author could define conditional steps in the `steps` key of a Job or a
 Command.
 
 A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run. 
@@ -883,8 +904,8 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 ### Example
 {:.no_toc}
 
-```yaml
-# inside config.yml
+{% raw %}
+```
 version: 2.1
 jobs:
   myjob:
@@ -912,5 +933,6 @@ workflows:
       - myjob:
           preinstall-foo: true
 ```
+{% endraw %}
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
