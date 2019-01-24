@@ -50,36 +50,43 @@ may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 
-### What Environment Variables Look Like In An Example Config
+### Example Configuration of Environment Variables
 
 Consider the example `config.yml` below:
 
 ```yaml
-version: 2
-jobs:
-  build:
-    docker:
+version: 2  # use CircleCI 2.0
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: circleci/node:10.0-browsers
-    steps:
-      - checkout
-      - run:
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable.
+      - run: 
           name: "Setup custom environment variables"
           command: |
             echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
-      - run:
+      # Run a step to print what branch our code base is on.
+      - run: # test what branch we're on.
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
-      - run:
+      # Run another step, the same as above; note that you can
+      # invoke environment variable without curly braces.
+      - run: #
           name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH # Note: you can interpolate vars with or without brackets
+          command: echo $CIRCLE_BRANCH
       - run:
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
 ```
 
-In the `config.yml` above we are: setting our own custom variables, using
-built-in environment variable that CircleCI provides, and demonstrating how
-varibles are read (or interpolated) in your `config.yml`.
+The above `config.yml` demonstrates the following: 
+
+- seting custom environment variables
+- reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
+- demonstrate how variables are used (or interpolated) in your `config.yml`
 
 When the above config runs, the output looks like this:
 
