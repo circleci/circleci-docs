@@ -67,14 +67,14 @@ jobs: # basic units of work in a run
       - run: 
           name: "Setup custom environment variables"
           command: |
-            echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+            echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
       # Run a step to print what branch our code base is on.
       - run: # test what branch we're on.
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       # Run another step, the same as above; note that you can
       # invoke environment variable without curly braces.
-      - run: #
+      - run:
           name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH
       - run:
