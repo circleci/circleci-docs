@@ -17,6 +17,7 @@ of tens or hundreds of build machines. This document provides instructions for i
 The following requirements must be met for successful trial installation:
 
 - [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
+- Ensure that you use the currently supported Browsers and Operating Systems (need to verify what is currently supported).
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
 - CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
@@ -31,6 +32,7 @@ give any inappropriate privileges to your instance. It is possible to block
 this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
 
 ### Configure the Amazon Machine Image:
+### Configure the Amazon Machine Image
 
 <script>
   var amiIds = {
@@ -73,12 +75,15 @@ this access with `iptables` rules in a production setup, [contact support](https
 
 1. Find the Amazon Machine Image for your region from the list above. 
 2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`. Select Next to configure the instance.
+2. Select a 'Free tier eligible' AMI and an instance type, when using a Free Tier account for your trial (need valid samples). Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`.  Select 'Next: Configure Instance Details' to configure the instance.
 3. On the Configuring Instance Details page: 
 - Choose your network
 - Enable Auto-assign Public IP
+- Set Auto-assign Public IP to Enable
 - Set the IAM role to None
 ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png)
 4. By default, the instance will have 100GB of storage, this is enough for the trial install.
+4. Select 'Next: Add Storage'. By default, the instance will have 100GB of storage, this is enough for the trial install.
 5. During the Configure Security Group step, open the following ports:
 - SSH port 22
 - HTTP port 80
@@ -87,6 +92,7 @@ this access with `iptables` rules in a production setup, [contact support](https
 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png)
 6. After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
+6. After the VM is launched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
 
 ### Configure CircleCI
 1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
