@@ -84,13 +84,13 @@ jobs: # basic units of work in a run
 
 The above `config.yml` demonstrates the following: 
 
-- seting custom environment variables
-- reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
-- demonstrate how variables are used (or interpolated) in your `config.yml`
+- Setting custom environment variables
+- Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
+- How variables are used (or interpolated) in your `config.yml`
 
 When the above config runs, the output looks like this:
 
-![]({{site.baseurl}}/assets/img/docs/env-vars-interpolation-example.png)
+![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-interpolation-example.png)
 
 You may have noticed that there are two similar steps in the above image and config - "What branch am I
 on?". These steps illustrate two different methods to read environment variables. Note that
