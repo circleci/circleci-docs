@@ -10,8 +10,8 @@ order: 1
 
 Get started by reviewing tips and tricks for migration, learning about the config-translator, and getting specific tutorials for your platform.
 
-> [Migrating from Travis CI]({{ site.baseurl }}/docs/2.0/migrating-from-travis/)
-> [Migrating from Jenkins]({{ site.baseurl }}/docs/2.0/migrating-from-jenkins/#section=getting-started)
+- [Migrating from Travis CI]({{ site.baseurl }}/2.0/migrating-from-travis/)
+- [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/#section=getting-started)
 
 <hr>
 
