@@ -23,7 +23,7 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 
 {:.no_toc} - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
-### Jenkins から CircleCI 2.0 に移行するには？
+### Jenkins から CircleCI 2.0 へ移行するには？
 
 {:.no_toc} Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
 
@@ -32,7 +32,7 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
       - run: "bash コマンドをここに記述します"
       - run:
           command: |
-            echo "複数行の bash コマンドはこのようにします"
+            echo "2 行以上の bash コマンドはこのようにします"
             echo "たいていは Jenkins の Execute Shell の内容をコピー＆ペーストするだけです"
 ```
 
@@ -42,7 +42,7 @@ Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/
 
 {:.no_toc} CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
-### CircleCI 2.0 は元となる OS イメージを作成しなくても使えますか？
+### CircleCI 2.0 は元となる OS イメージを新たに作成しなくても使えますか？
 
 {:.no_toc} Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
@@ -54,7 +54,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 ## Hosting
 
-### CircleCI 2.0 は法人利用も可能ですか？
+### CircleCI 2.0 はオンプレミスでの利用も可能ですか？
 
 {:.no_toc} Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
@@ -68,7 +68,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 {:.no_toc} The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
 
-そのため、クラウドサービス経由で使えるもの、ファイアウォールを設置した環境に導入するもの、あるいはそのハイブリッドで活用するもの、というように、ニーズに応じて利用可能な CircleCI という 1 つの製品としました。
+そのため、クラウドサービス経由で使えるもの、ファイアウォール環境に導入するもの、あるいはそのハイブリッドで活用するもの、というように、ニーズに応じて利用可能な CircleCI という 1 つの製品としました。
 
 ## Troubleshooting
 
