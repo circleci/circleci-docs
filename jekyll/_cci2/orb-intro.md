@@ -46,6 +46,8 @@ Available Commands:
   validate    Validate an orb.yml
 ```
 
+**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+
 ## Importing Partner Orbs
 
 Import the following Partner Orbs by using the `orbs` key in your `.circleci.yml/config.yml` file and replacing `<orb reference string>` with one from the table.
@@ -87,3 +89,4 @@ Partner Orb Registry Link | Orb Reference String
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to the [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
