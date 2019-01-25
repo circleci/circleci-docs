@@ -7,16 +7,23 @@ categories: [getting-started]
 order: 1
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Concepts*
 
-This document provides an overview of the concepts used in CircleCI 2.0 in the following sections:
+A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
 
-* TOC
+* TOC 
 {:toc}
+
+## Add Projects Page
+
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+
+*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
+
+The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.
 
 ## Steps
 
-Steps are actions that need to be taken to perform your job. ![step illustration]( {{ site.baseurl }}/assets/img/docs/concepts_step.png) Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
+Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
 
 
 ```yaml
@@ -34,7 +41,7 @@ Steps are actions that need to be taken to perform your job. ![step illustration
 
 ## Image
 
-An image is a packaged system that has the instructions for creating a running container. ![image illustration]( {{ site.baseurl }}/assets/img/docs/concepts_image.png)
+An image is a packaged system that has the instructions for creating a running container. 
  The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
 
  ```yaml
@@ -76,6 +83,7 @@ Jobs are a collection of steps and each job must declare an executor that is eit
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
 ### Cache
+{:.no_toc}
 
 A cache stores a file or directory of files such as dependencies or source code in object storage.
 Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
@@ -171,6 +179,7 @@ workflows:
 {% endraw %}
 
 ### Workspaces and Artifacts
+{:.no_toc}
 
 Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
@@ -222,5 +231,6 @@ Caches     | Months               | Store non-vital data that may help the job r
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See Also
+{:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options. 

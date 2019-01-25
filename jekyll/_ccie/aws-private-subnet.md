@@ -6,6 +6,7 @@ category: [advanced-config]
 order: 3
 description: "Information on private subnets in AWS"
 hide: true
+sitemap: false
 ---
 
 Private subnets on AWS are supported, but please make sure to use the following settings:

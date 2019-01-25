@@ -5,6 +5,7 @@ title: "Open Source Acknowledgments"
 category: [resources]
 order: 4.2
 description: "List and acknowledgements for open-source projects and libraries that are used in CircleCI Enterprise."
+sitemap: false
 ---
 
 CircleCI Enterprise includes the following 3rd-party components.

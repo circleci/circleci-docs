@@ -6,6 +6,7 @@ category: [resources]
 order: 4
 description: "Docker Usage and Caveats on CircleCI Enterprise."
 hide: true
+sitemap: false
 ---
 
 ## Using Docker with CircleCI Enterprise

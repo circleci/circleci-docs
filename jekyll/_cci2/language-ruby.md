@@ -7,16 +7,15 @@ categories: [language-guides]
 order: 8
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Ruby*
-
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 CircleCI maintains the sample Ruby on Rails project at the following links:
 
@@ -29,7 +28,7 @@ The application uses the latest stable Rails version 5.1, `rspec-rails`, and [Rs
 
 This application build also uses one of the pre-built [CircleCI Docker Images](http://circleci.com/docs/2.0/circleci-images).
 
-## Pre-built CircleCI Docker images
+## Pre-Built CircleCI Docker Images
 
 Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
 
@@ -46,9 +45,8 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 3 # run three instances of this job in parallel
-    working_directory: ~/circleci-demo-ruby-rails # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.4.2-jessie-node # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -70,16 +68,17 @@ jobs: # a collection of steps
           command: bundle -v
 
       # Restore bundle cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
             - rails-demo-bundle-v2-
 
-      - run:
+      - run: # Install Ruby dependencies
           name: Bundle Install
           command: bundle check || bundle install
 
-      # Store bundle cache
+      # Store bundle cache for Ruby dependencies
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
@@ -119,16 +118,16 @@ jobs: # a collection of steps
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
-      - store_test_results:
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 ```
 
 {% endraw %}
 
 ---
 
-## Build the demo Ruby on Rails project yourself
+## Build the Demo Ruby on Rails Project Yourself
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -140,7 +139,8 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Start with the version.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
@@ -164,7 +164,7 @@ Directly beneath `working_directory`, you can specify container images under a `
 
 ```yaml
     docker:
-      - image: circleci/ruby:2.4-node
+      - image: circleci/ruby:2.4.2-jessie-node  # language image
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -172,16 +172,23 @@ Directly beneath `working_directory`, you can specify container images under a `
           PGHOST: 127.0.0.1
           PGUSER: circleci-demo-ruby
           RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine
+      - image: circleci/postgres:9.5-alpine  # service image
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
           POSTGRES_PASSWORD: ""
 ```
 
-The [official Ruby images](https://hub.docker.com/_/ruby/) are tagged to use the latest patch-level version of `2.4` and with additional packages installed for NodeJS.
+In this example,
+two [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/#image-types) are used:
 
-The [official Postgres image](https://hub.docker.com/_/postgres/) is specified for use as the database container.
+- A language image
+that runs on Debian Jessie
+and installs both Ruby 2.4.2 and Node.js.
+
+- A service image
+that runs on Alpine Linux
+and installs PostgreSQL 9.5.
 
 Then, several environment variables are added to connect the application container with the database for testing purposes. The `BUNDLE_*` environment variables are there to ensure proper caching and improve performance and reliability for installing dependencies with Bundler.
 
@@ -296,22 +303,16 @@ The `--profile` option reports the slowest examples of each run.
 
 For more on `circleci tests glob` and `circleci tests split` commands, please refer to our documentation on [Parallelism with CircleCI CLI](https://circleci.com/docs/2.0/parallelism-faster-jobs).
 
----
 
-Success! You just set up CircleCI 2.0 for a Ruby on Rails app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"} to see how this looks when building on CircleCI.
-
-## Deployment
+## See Also
+{:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
-
-## Detailed Examples
 
 This app illustrates the simplest possible setup for a Ruby on Rails web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open source discussion platform.
 * [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
-
-
 
 [fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork
 [rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter

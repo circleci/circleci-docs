@@ -7,14 +7,13 @@ categories: [language-guides]
 order: 2
 ---
 
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Clojure*
-
-This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
 
@@ -49,7 +48,7 @@ jobs: # basic units of work in a run
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # upload test results for display in Test Summary
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
@@ -139,14 +138,15 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 
 Nice! You just set up CircleCI for a Clojure app.
 
-## Deploy
+## See Also
+{:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
-## Detailed Examples
+### Detailed Examples
+{:.no_toc}
 
-This app illustrates the simplest possible setup for a Clojure web app. Real world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:
+The app described in this guide illustrates the simplest possible setup for a Clojure web app. Real-world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:
 
 * [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml), a site which configures disposable virtual machines for remote collaboration (uses PostgreSQL, continuously deployed to Heroku)
 
-If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.

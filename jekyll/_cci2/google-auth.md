@@ -6,15 +6,14 @@ categories: [deploying]
 order: 100
 ---
 
-*[Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) > Authorizing the Google Cloud SDK*
-
 This document explains
-how to install the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
+how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
 The Google Cloud SDK is a powerful set of tools
 that can be used to access Google Cloud Platform (GCP) services
@@ -23,13 +22,12 @@ On CircleCI, the Google Cloud SDK is recommended
 to deploy your application to GCP products.
 
 ## Prerequisites
+{:.no_toc}
 
 - A CircleCI 2.0 project.
 - A GCP project.
 
-## Steps
-
-### Choosing a Base Image for the Deploy Job
+### Installing the Google Cloud SDK
 
 If Debian is an acceptable operating system for your primary container,
 consider using Google's base Docker image.
@@ -54,15 +52,23 @@ In this example, the variable is named `GCLOUD_SERVICE_KEY`.
 Using this particular name is not required,
 but it will be used throughout the examples in this document.
 
-3. For convenience, add three more environment variables to your CircleCI project:
+3. For convenience, add two more environment variables to your CircleCI project:
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
-    - `GOOGLE_CLUSTER_NAME`: the target cluster for all deployments.
 
+#### Adding Granular Permissions
+
+If you are having issues pushing container images to GCR you may need more
+granular permissions than the default `service account` provides. You can grant
+permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
+
+Refer to the Cloud Storage [permission
+documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions)
+to learn more about Identity and Access Management (IAM) permissions.
 
 ### Authenticating to Google Container Registry
 
-Depending on the [base Docker image you chose](#choosing-a-base-image-for-the-deploy-job),
+Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk),
 you may have to authenticate to the Google Container Registry.
 
 If you are using Google's public image (`google/cloud-sdk`),
@@ -89,30 +95,8 @@ jobs:
       - image: gcr.io/project/<image-name>
         auth:
           username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # JSON service account you created
+          password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
-
-### Copying the Service Account to a Local File
-
-Before you can authorize the SDK,
-you must copy the service account variable to a local file.
-
-```yaml
-version: 2
-jobs:
-  deploy:
-    docker:
-      - image: google/cloud-sdk
-    steps:
-      - run:
-          name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-```
-
-**Note:**
-To use certain services (like Google Cloud Datastore),
-you will also need
-to set the CircleCI `$GOOGLE_APPLICATION_CREDENTIALS` environment variable to `${HOME}/gcloud-service-key.json`.
 
 ### Authorizing the Google Cloud SDK
 
@@ -126,14 +110,10 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      - run:
-          name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: |
-          sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-          sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          sudo gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+          echo $GCLOUD_SERVICE_KEY | sudo gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
 **Note:**

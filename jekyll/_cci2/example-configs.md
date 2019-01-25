@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Overview"
-short-title: "Overview"
+title: "Example Public Repos"
+short-title: "Example Public Repos"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
 order: 1

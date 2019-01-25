@@ -5,6 +5,7 @@ title: Troubleshooting the Install
 category: [troubleshooting]
 order: 0
 published: true
+sitemap: false
 ---
 
 

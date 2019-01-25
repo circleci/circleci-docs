@@ -6,6 +6,7 @@ category: [documentation]
 order: 2
 description: "CircleCI Frequently Asked Questions (FAQs)."
 published: true
+sitemap: false
 ---
 
 * TOC

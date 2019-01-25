@@ -5,6 +5,7 @@ title: "Debugging Replicated"
 category: [troubleshooting]
 order: 1
 description: "Tips for debugging CircleCI Enterprise."
+sitemap: false
 ---
 
 As you may know, we use [Replicated](https://www.replicated.com/) to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI Enterprise.

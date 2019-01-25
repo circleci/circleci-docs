@@ -4,9 +4,9 @@ title: "Using the Static Installation Scripts"
 category: [administration]
 order: 1
 description: "Using CircleCI 2.0 static installation scripts."
-hide: true
+hide: false
 ---
-This article provides a System Administrators' overview of CircleCI's preview 2.0 static installation for non-AWS environments.
+This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
 * TOC
 {:toc}
@@ -14,7 +14,7 @@ This article provides a System Administrators' overview of CircleCI's preview 2.
 
 ## Limitations 
 
-This method of preview installation has the following limitations:
+This method of installation has the following limitations:
 
 - It is not possible to use `machine` executors.
 - It is not possible to use the Remote Docker Environment or Docker Layer Caching.
@@ -32,7 +32,7 @@ By default, CircleCI 2.0's Nomad Client instances automatically provision contai
 
 ## Architecture
 
-CircleCI Static consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute your jobs and communicate back to the Services machine. Both components must access your instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
+A CircleCI static installation consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute jobs and communicate back to the Services machine. Both components must access an instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
 ![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/architecture-v1.png)
 
@@ -88,11 +88,11 @@ The following sections describe the steps for installation of the Services VM an
 
 Have the following available before beginning the installation procedure:
 
-- A CircleCI License file (.rli)—contact CircleCI support if you need one
-- A machine to run Ubuntu 14.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM
-- A cluster of machines running Ubuntu 14.04 with a minumum of 8 GB RAM and 4 CPUs each, as well as network access to any Docker registries that are required by your builds for the Nomad Client VMs
+- A CircleCI License file (.rli). Contact CircleCI support if you need a license.
+- A machine to run Ubuntu 14.04 or 16.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM.
+- A cluster of machines running Ubuntu 14.04 or 16.04 with a minumum of 8 GB RAM and 4 CPUs each, as well as network access to any Docker registries that are required by your builds for the Nomad Client VMs.
 
-### Installing the Services machine
+### Installing the Services Machine
 
 1. Copy the [Services init script](https://github.com/circleci/server-static-install/blob/master/provision-services-ubuntu.sh) to the Services VM machine.
 
@@ -108,9 +108,9 @@ Have the following available before beginning the installation procedure:
 
 7. Set the VM Provider to None.
 
-8. Set 1.0 Builds to 'Off'.
+8. Set 1.0 Builds to Off.
 
-9. Set 2.0 Builds to 'Clustered'.
+9. Set 2.0 Builds to Clustered.
 
 ### Installing the Nomad Clients
 
@@ -122,7 +122,7 @@ Have the following available before beginning the installation procedure:
 
 ### Storage
 
-The `None` storage driver saves all of your CircleCI data locally. This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. We strongly recommend mounting an external volume and creating a symbolic link between the two if you opt to use this storage option. It is important to note that data can only be transferred as quickly as the external volume will allow, so SSDs are highly recommended.
+The `None` storage driver saves all of your CircleCI data locally. This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. It is best practice to mount an external volume and create a symbolic link between the two when using this storage option. **Note:** Data may only be transferred as quickly as the external volume will allow, so SSDs are best practice.
 
 ### Troubleshooting
 

@@ -1,125 +1,64 @@
-{% assign section = site.collections | where:"label",page.collection | first %}
-<a href="#" id="nav-button">Menu</a>
-<nav class="sidebar">
-	Section:
-	<select onchange="window.location.assign(this.options[this.selectedIndex].value)">
-		<option value="{{ site.baseurl }}/">Docs Home</option>
-		{% for collection in site.collections %}
-		{% unless collection.site_section %}{% continue %}{% endunless %}
-		<option value="{{ site.baseurl }}{{ collection.prefix }}/" {% if collection.label == section.label %}selected{% endif %}>{{ collection.selectorName }}</option>
-		{% endfor %}
-	</select>
-	<hr />
-	{% if page.page-type != "homepage" %}
-		<ul id="mysidebar" class="nav">
-		{% capture sidebar %}
-			<li><a href="{{ site.baseurl }}{{ section.prefix }}/"><i class="fa fa-book"></i> {{ section.name }}</a></li>
-			{% if page.collection == "cci2" %}
-				<ul class="left-links main-nav" style="display: block;">
-			  	<li class="nav-item active"><a href="" class="header"><h3>Developers</h3></a>
-							<div class="submenu" style="margin: 10px;">
-								<ul>
-									<li><a href="{{ site.baseurl }}/2.0/migration-intro/">1.0 to 2.0 Migration</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/examples/">Example Configs</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials and Sample Apps</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/basics/">Basics</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/workflows/">Workflows</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/build/">Docker, Machine, and iOS Builds</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/test/">Test and Deploy</a></li>
-									<li><a href="{{ site.baseurl }}/2.0/reference/">Reference</a></li>								</ul>
-							</div>
-						</li>
+<!-- FULL SCREEN /-->
+<div class="sidebar-wrapper">
+	<nav class="sidebar fixed">
+		{% assign lang = page.lang %}
+		{% assign sidenav = site.data.sidenav[lang] %}
+		{% assign current_url = page.url | slice: 1, page.url.size %}
 
-					<li class="nav-item active"><a href="" class="header"><h3>Server Administrators</h3></a>
-						<div class="submenu" style="margin: 10px;">
-							<ul>
-								<li><a href="{{ site.baseurl }}/2.0/overview/">Overview</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/single-box/">Trial</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/admin-faq/">FAQ</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/upgrading/">Upgrade</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/security/">Security</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/certificates/">Certificates</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/proxy/">Proxies</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/aws/">Installation</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/authentication/">Authentication</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/monitoring/">Monitoring</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/nomad/">Nomad</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/backup/">Backup</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/troubleshooting/">Troubleshooting</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/gpu/">GPU Builders</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/vm-service">Configuring VM Service</a></li>
-								<li><a href="{{ site.baseurl }}/2.0/open-source/">Acknowledgments</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			{% endif %}
-			{% if page.collection == "cci1" %}
-			<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
-						{% assign cats = site.data.categories | where:"section",section.label %}
-						{% for cat in cats %}
-							{% if cat.index %}
-								{% assign catPage = cat.index %}
-							{% else %}
-								{% assign catPage = cat.slug %}
+		{% for main-item in sidenav %}
+			<ul>
+				<li class="main-nav-item closed" data-section="{{ main-item.name | slugify }}">
+					<div class="list-wrap">
+						{% if main-item.icon %}
+							{% asset '{{ main-item.icon }}' class=icon %}
+						{% endif %}
+
+            {% if main-item.i18n_name %}
+              {% assign display_name = main-item.i18n_name %}
+            {% else %}
+              {% assign display_name = main-item.name %}
+            {% endif %}
+
+						{% if main-item.link %}
+							<a class="{% if current_url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name}}</a>
+            {% else %}
+							<span class="nav-span">{{ display_name }}</span>
+						{% endif %}
+
+						{% if main-item.children %}
+							{% asset docs/arrow-right.svg class=arrow %}
+						{% endif %}
+					</div>
+
+					{% if main-item.children %}
+					<ul class="subnav">
+						{% for item in main-item.children %}
+						  {% if item.name %}
+                {% if item.i18n_name %}
+                  {% assign display_name = item.i18n_name %}
+                {% else %}
+                  {% assign display_name = item.name %}
+                {% endif %}
+								<li class="nav-item"><a class="{% if current_url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
 							{% endif %}
-							<ul>
-								<li><a href="#">{{ cat.name }}</a>
-									<ul>
-										{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
-											{% for doc in sortedDocs %}
-												{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
-													{% if doc.short-title %}
-														{% assign title = doc.short-title %}
-													{% else %}
-														{% assign title = doc.title %}
-													{% endif %}
 
-													{% if doc.children %}
-														{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
-													{% endif %}
-													<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
-												{% endif %}
-											{% endfor %}
-									</ul>
-								</li>
-							</ul>
-						{% endfor %}
-				{% endif %}
-				{% if page.collection == "ccie" %}
-			<p><a style="display: inline" id="expandAll" href="#">Expand All</a> / <a style="display: inline" id="collapseAll" href="#">Collapse All</a></p>
-							{% assign cats = site.data.categories | where:"section",section.label %}
-							{% for cat in cats %}
-								{% if cat.index %}
-									{% assign catPage = cat.index %}
-								{% else %}
-									{% assign catPage = cat.slug %}
-								{% endif %}
+							{% if item.children %}
 								<ul>
-									<li><a href="#">{{ cat.name }}</a>
-										<ul>
-											{% assign sortedDocs = site.documents | where:"collection",section.label | sort: 'order' %}
-												{% for doc in sortedDocs %}
-													{% if doc.categories contains cat.slug and doc.slug != catPage and doc.hide != true %}
-														{% if doc.short-title %}
-															{% assign title = doc.short-title %}
-														{% else %}
-															{% assign title = doc.title %}
-														{% endif %}
-
-														{% if doc.children %}
-															{% capture title %}{{ title }} ({{ doc.children | size }}){% endcapture %}
-														{% endif %}
-														<li  style="margin: 10px;" class="{% if page.url == doc.url %}active{% endif %}"><a href="{{ site.baseurl }}{{ doc.url }}">{{ title }}</a></li>
-													{% endif %}
-												{% endfor %}
-										</ul>
-									</li>
+									{% for sub-item in item.children %}
+                    {% if sub-item.i18n_name %}
+                      {% assign display_name = sub-item.i18n_name %}
+                    {% else %}
+                      {% assign display_name = sub-item.name %}
+                    {% endif %}
+										<li class="subnav-item"><a class="{% if current_url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
+									{% endfor %}
 								</ul>
-							{% endfor %}
-					{% endif %}			
-		{% endcapture %}
-		{{ sidebar | strip_newlines }}
-		</ul>
-	{% endif %}
-</nav>
+							{% endif %}
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>
+			</ul>
+		{% endfor %}
+	</nav>
+</div>

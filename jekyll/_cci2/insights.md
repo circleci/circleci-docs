@@ -7,12 +7,7 @@ categories: [configuring-jobs]
 order: 41
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Insights*
-
 This document describes creating and using insights in CircleCI in the following sections:
-
-* TOC
-{:toc}
 
 ## Overview
 

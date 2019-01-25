@@ -5,7 +5,6 @@ category: [administration]
 order: 5
 description: "CircleCI security features."
 ---
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Security Features*
 
 This document outlines security features built into CircleCI and related integrations.
 
@@ -63,6 +62,8 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 ### Audit Log Events
+{:.no_toc}
+
 <!-- TODO: automate this from event-cataloger -->
 Following are the system events that are logged. See `action` in the Field section below for the definition and format.
 
@@ -83,6 +84,8 @@ Following are the system events that are logged. See `action` in the Field secti
 
 
 ### Audit Log Fields
+{:.no_toc}
+
 - **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
 - **actor:** The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
 - **target:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
@@ -95,3 +98,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - **success:** A flag to indicate if the action was successful.
 - **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
 
+## See Also
+{:.no_toc}
+
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)

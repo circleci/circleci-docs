@@ -7,10 +7,8 @@ categories: [getting-started]
 order: 10
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Using Shell Scripts*
-
 This document describes best practices
-for using shell scripts in your CircleCI configuration in the following sections:
+for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}
@@ -29,6 +27,7 @@ explained below.
 ## Shell Script Best Practices
 
 ### Use ShellCheck
+{:.no_toc}
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool
 that gives warnings and suggestions for bash/sh shell scripts.
@@ -43,7 +42,7 @@ version: 2
 jobs:
   shellcheck:
     docker:
-      - image: nlknguyen/alpine-shellcheck:v0.4.6
+      - image: koalaman/shellcheck-alpine:stable
     steps:
       - checkout
       - run:
@@ -95,6 +94,7 @@ You must set SECRET_ENV_VAR!
 
 
 ### Set Error Flags
+{:.no_toc}
 
 There are several error flags
 you can set
@@ -116,6 +116,8 @@ set -o errexit
 # Use the error status of the first failure, rather than that of the last item in a pipeline.
 set -o pipefail
 ```
+
+## See Also
 
 For more detailed explanations and additional techniques,
 see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts)

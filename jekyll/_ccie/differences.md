@@ -6,6 +6,7 @@ category: [documentation]
 order: 1
 description: "Here are the differences between CircleCI.com and CircleCI Enterprise."
 hide: true
+sitemap: false
 ---
 
 Below is a list of some of the most significant differences between CircleCI Enterprise

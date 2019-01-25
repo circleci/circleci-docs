@@ -4,6 +4,7 @@ section: enterprise
 title: "Setting Builder Machine Environment Variables"
 category: [advanced-config]
 order: 0
+sitemap: false
 ---
 
 Several aspects of CircleCI Builder behavior can be customized by passing

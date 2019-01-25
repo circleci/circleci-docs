@@ -5,6 +5,7 @@ title: "Backing up CircleCI Data"
 category: [advanced-config]
 order: 8
 description: "How to regularly back up CircleCI Enterprise"
+sitemap: false
 ---
 
 This document describes how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of CircleCI data attached to the Services machine:

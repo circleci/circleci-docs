@@ -1,24 +1,67 @@
 ---
 layout: classic-docs
-title: "Enabling Web and Email Notifications"
-short-title: "Enabling Web, Email, and Chat Notifications"
+title: "Using Notifications"
+short-title: "Using Notifications"
 categories: [configuring-jobs]
 order: 100
 published: true
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Enabling Web and Email Notifications* 
+CircleCI has integrated chat notifications, automated email notifications, and
+web notifications. For Slack and Email, notifications are delivered on the success or failure of a
+[workflow]({{ site.baseurl }}/2.0/workflows/). Otherwise, notifications are
+delivered for each job for all other notification platforms. Consider the minimal CircleCI config below:
 
-CircleCI has integrated chat notifications, automated email notifications, and web notifications in your browser that you  control in the CircleCI Settings page for each project.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test: # < Slack and Email notifications will be delivered for workflows
+    jobs:
+    # All other notification integrations (HipChat, IRC, etc) will receive notification for each job.
+      - build 
+      - test
+```
+
+Continue reading to learn how each notification type (chat, email, and web) is configurable.
 
 ## Enable Chat Notifications
 
 CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications. Configure chat notifications on the Project Settings > Chat Notifications page of the CircleCI application using the in-app instructions and links for each chat app.
 
+![]({{ site.baseurl }}/assets/img/docs/notification-chat.png)
+
+Slack notifications will look like the following:
+
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-success.png)
+
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-fail.png)
+
+
 ## Set or Change Email Notifications
 Use the [Notifications](https://circleci.com/account/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
 
-## Enabling Web Notifications
+Email notifications will look like the following:
+
+![]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
+
+![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
+
+## Enable Web Notifications
 
 1. Go to your [CircleCI user settings](https://circleci.com/account/notifications){:rel="nofollow"}. The link to turn on permissions is at the bottom in the Web Notifications section as shown in the screenshot:
 ![](  {{ site.baseurl }}/assets/img/docs/notification-default-message.png)

@@ -1,13 +1,11 @@
 ---
 layout: classic-docs
-title: "Debugging Jobs Over SSH"
-short-title: "Debugging Jobs Over SSH"
+title: "Debugging with SSH"
+short-title: "Debugging with SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"
 categories: [troubleshooting]
 order: 20
 ---
-
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Debugging Jobs Over SSH*
 
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 
@@ -15,26 +13,30 @@ This document describes how to access a build container using SSH on CircleCI 2.
 {:toc}
 
 ## Overview
-Often the best way to troubleshoot problems is to SSH into a build container and inspect 
+Often the best way to troubleshoot problems is to SSH into a job and inspect
 things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
-When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircelCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode. 
+When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
 
-1. To start a job with SSH enabled, select the 'Rebuild with SSH' option from
+## Steps
+
+1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
+
+2. To start a job with SSH enabled, select the 'Rebuild with SSH' option from
 the 'Rebuild' dropdown menu:
 ![Rebuild with SSH](  {{ site.baseurl }}/assets/img/docs/rebuild-ssh-dropdown.png)
 
-2. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect:
+3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect:
 ![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/57f50e26ec245d0373c4265ec4375641553bdbdb_1_690x295.png)	
 ![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/514e8aec3e8017dac8e8d401d22432026b473161_1_690x281.png)
 
      The details are displayed again in the 'Wait for SSH' section at the end of the job.
 
-3. SSH to the running job (using the same SSH key
+4. SSH to the running job (using the same SSH key
 that you use for GitHub or Bitbucket) to perform whatever troubleshooting
 you need to.
 
-The build VM will remain available for **30 minutes after the build finishes running**
+The build VM will remain available for **10 minutes after the build finishes running**
 and then automatically shut down. (Or you can cancel it.)
 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM
@@ -47,6 +49,7 @@ If you run into permission troubles trying to SSH to your job, try
 these things:
 
 ### Ensure Authentication With GitHub/Bitbucket
+{:.no_toc}
 
 A single command can be used to test that your keys are set up as expected. For 
 GitHub run:
@@ -78,6 +81,7 @@ If you _don't_ see output like that, you need to start by
 [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
 
 ### Ensure Authenticating as the Correct User
+{:.no_toc}
 
 If you have multiple accounts, double-check that you are
 authenticated as the right one!
@@ -90,6 +94,7 @@ by offering a different SSH key with `ssh -i`. See the next section if
 you need a hand figuring out which key is being offered.
 
 ### Ensure the Correct Key is Offered to CircleCI
+{:.no_toc}
 
 If you've verified that you can authenticate as the correct
 user, but you're still getting "Permission denied" from CircleCI, you
@@ -134,3 +139,8 @@ argument to SSH. For example:
 ```
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 ```
+
+## See Also
+{:.no_toc}
+
+[GitHub and Bitbucket Integration](  {{ site.baseurl }}/2.0/gh-bb-integration/)

@@ -1,48 +1,20 @@
 ---
 ---
-
-// Colors for EVERYTHING (alphabetical)
-$body-text-color: #555;
-$heading-color: #333;
-$nav-bg-color: #FBFBFB;
-$nav-border-color: #CCC;
-$link-text-color: #27A0B6;
-$link-hover-color: #36D4ED;
-$blue: #36D4ED;
-$black-light: #343434;
-
-// Screen Sizes
-$screen-sm:                  768px;
-
-// General Sizing
-$spacing-small-horizontal: 12px;
-$spacing-medium-horizontal: 24px;
-$spacing-intermediate-large-horizontal: 48px;
-$spacing-large-horizontal: 60px;
-$spacing-large-vertical: 90px;
-$spacing-intermediate-large-vertical: 66px;
-$spacing-medium-vertical: 48px;
-$spacing-small-vertical: 18px;
-$spacing-base: 6px;
-$logo-width-small: 125px;
-
-// Font Sizes
-$font-size-root: 16px;
-$font-size-base: $font-size-root; // ~16px
-$font-size-small: 14px;
-$font-size-h1: 52px;
-$font-size-h1-small: 45px;
-$font-size-h2: 32px;
-$font-size-h3: 23px;
-$font-size-h4: 20px;
-$font-size-h5: 18px;
+@import 'variables';
+@import 'sidebar';
+@import 'instantsearch';
 
 // General
 body{
 	color: $body-text-color;
+	display: block;
+	width: 100%;
+	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 50%, #fff 50%, #fff 100%);
+	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto';
+  font-weight: 500;
 }
 p {
 	font-family: 'Roboto';
@@ -66,7 +38,15 @@ div.main-body {
 	display: flex;
 	max-width: 1200px;
 	margin: 0 auto;
+	background: #fff;
 }
+
+#hits-template {
+	display: block;
+	max-width: 1180px;
+	margin: 50px auto 0 auto;
+}
+
 .text-center-small-float-right {
   float: right;
   @media screen and (max-width: $screen-sm) {
@@ -113,7 +93,7 @@ hr.dark {
   border-color: $black-light;
 }
 
-footer { 
+footer {
 	li, span {
 		text-transform: initial;
 		font-size: $font-size-base;
@@ -137,30 +117,6 @@ nav.nav-toggle.two {
 // Navigation Sidebar
 #nav-button{
 	display: none;
-}
-
-nav.sidebar{
-	border-right: 1px solid $nav-border-color;
-	background-color: $nav-bg-color;
-	padding: 30px 20px 20px;
-	width: 25%;
-
-	a {
-		display: block;
-		padding: 5px 10px;
-		font-size: 15px;
-		position: relative;
-	}
-
-	&> ul > li > a{
-		padding: 14px 10px;
-		color: $heading-color;
-		font-size: 1.125rem;
-	}
-
-	li.active > a{
-		font-weight: bold;
-	}
 }
 
 
@@ -187,8 +143,12 @@ nav.sidebar{
 // Article
 div.article-container{
 	float: left;
-	padding: 30px 43px 0;
-	width: 75%;
+	@media screen and (max-width: $screen-sm) {
+		padding: 0 16px 0 16px;
+		width: 100%;
+	}
+	padding: 60px 48px 0 48px;
+	width: calc(100% - 260px);
 }
 	article{
 		h2,
@@ -214,8 +174,8 @@ div.article-container{
 			&[id]:before{
 				display: block;
 				content: " ";
-				margin-top: -71px;
-				height: 71px;
+				margin-top: -135px;
+				height: 135px;
 				visibility: hidden;
 			}
 		}
@@ -284,10 +244,13 @@ div.align-center{
 
 // Homepage
 body.homepage{
-
   .article-container{
-	  padding: 30px 70px 0;
-	  width: 100%;
+    @media screen and (max-width: $screen-sm) {
+  	  padding: 0 16px 0 16px;
+      width: 100%;
+    }
+	  padding: 60px 48px 0 48px;
+    width: calc(100% - 260px);
   }
 
 	article{

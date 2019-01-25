@@ -5,6 +5,7 @@ title: Setting up HTTP Proxies
 category: [advanced-config]
 order: 7
 description: "How to get CircleCI Enterprise to use a HTTP proxy."
+sitemap: false
 ---
 
 This document describes how to configure CircleCI to use an HTTP proxy in the following sections:

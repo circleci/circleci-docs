@@ -6,15 +6,41 @@ description: "CircleCI 2.0 executors and images"
 categories: [configuration]
 order: 1
 ---
-Set up your build environment to run with the `docker`, `machine`, or `macos` executor and specify an image with only the tools and packages you need with the following documentation.
-<hr>
 
-Executor Type Comparison     | Pre-Built CircleCI Docker Images
-----------------------------|----------------------
-Learn about the [types of executors you can choose]({{ site.baseurl }}/2.0/executor-types/) for each job run.  |   Get started easily with Docker by using [pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) in your jobs.
+Set up your build environment to run with the `docker`, `machine`, or `macos` executor and specify an image with only the tools and packages you need.
 
-<hr>
+## Docker
 
-Customize | Private Images
-------------------------|------------------
-Learn how to create and use a [custom Docker image]({{ site.baseurl }}/2.0/custom-images/). &nbsp;&nbsp;&nbsp;&nbsp; |  You can also use a [private image]({{ site.baseurl }}/2.0/private-images/) stored in a private registry.
+```
+jobs:
+  build: # name of your job
+    docker: # executor type
+      - image: buildpack-deps:trusty # primary container will run Ubuntu Trusty
+```
+
+## Machine
+
+```
+jobs:
+  build: 
+    machine: 
+      image: circleci/classic:201708-01 # VM will run Ubuntu 14.04 for this release date
+```
+
+## macOS
+
+```
+jobs:
+  build:
+    macos:
+      xcode: "9.0"
+      
+    steps:
+      # Commands will execute in macOS container
+      # with Xcode 9.0 installed
+      - run: xcodebuild -version
+```
+
+## See Also
+
+Learn more about the [pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).

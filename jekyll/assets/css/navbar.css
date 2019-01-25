@@ -33,6 +33,7 @@
       .nav-toggle.two .widescreen .main-nav.left-links > .nav-item {
         padding: 0 14px 0 14px; }
     .nav-toggle.two .widescreen .main-nav.right-links {
+      display: none;
       right: 0;
       top: 12px;
       z-index: 0; }

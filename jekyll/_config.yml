@@ -9,6 +9,30 @@ url: "http://localhost:4040" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 
+plugins:
+  - jekyll-assets
+  - jekyll-sitemap
+
+algolia:
+  application_id: U0RXNGRK45
+  index_name: documentation
+  settings:
+    highlightPreTag: '<strong>'
+    highlightPostTag: '</strong>'
+    attributesToSnippet: [
+      'content:80',
+      'headings',
+      'title'
+    ]
+    attributesToHighlight: [
+      'content:80',
+      'headings',
+      'title'
+    ]
+
+sass:
+  sass_dir: _sass
+
 markdown: kramdown
 kramdown:
   input: GFM
@@ -28,6 +52,13 @@ collections:
     permalink: /1.0/:path/
     prefix: "/1.0"
     selectorName: "1.0"
+  archive:
+    name: "Archive"
+    site_section: true
+    output: true
+    permalink: /archive/:path/
+    prefix: "/archive"
+    selectorName: "archive"
   ccie:
     name: "Enterprise Docs"
     site_section: true
@@ -49,6 +80,13 @@ collections:
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
+  cci2_ja:
+    name: "2.0 Docs"
+    site_section: true
+    output: true
+    permalink: /ja/2.0/:path/
+    prefix: "/ja/2.0"
+    selectorName: "2.0"
 
 twitter_username: circleci
 github_username: circleci
@@ -57,12 +95,31 @@ defaults:
   -
     scope:
       path: ""
+      type: "cci2"
+    values:
+      lang: "en"
+
+  -
+    scope:
+      path: ""
+      type: "cci2_ja"
+    values:
+      lang: "ja"
+
+  -
+    scope:
+      path: ""
     values:
       hide: false
       search: true
+
+t:
+    translation_in_progress:
+        ja: "このページはただいま翻訳中です"
 
 segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
 
 analytics:
   events:
     go_button_clicked: go-button-clicked
+rollbar_env: development

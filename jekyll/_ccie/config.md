@@ -6,6 +6,7 @@ category: [advanced-config]
 order: 6
 hide: true
 description: "Configuring the CircleCI Enterprise installation."
+sitemap: false
 ---
 
 CircleCI Enterprise builder behavior can be customized with a number parameters specified via environment variables. These variables can be specified by customizing the startup script (or `*.tf` file if using Terraform) for builders to the following instead of the default:

@@ -5,12 +5,7 @@ categories: [how-to]
 description: How to leverage CircleCI containers
 ---
 
-[Basics]({{ site.baseurl }}/2.0/basics/) > Using Containers
-
 This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. 
-
-* TOC
-{:toc}
 
 ## Overview
 

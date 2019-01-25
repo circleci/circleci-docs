@@ -1,32 +1,34 @@
 ---
 layout: classic-docs
-title: "Migrating from 1.0 to 2.0"
-short-title: "Migrating from 1.0 to 2.0"
+title: "Migrating a Linux Project from 1.0 to 2.0"
+short-title: "Migrating a Linux Project from 1.0 to 2.0"
 description: "Why and how to migrate from CircleCI 1.0 to 2.0"
 categories: [migration]
 order: 15
 ---
 
-*[2.0]({{ site.baseurl }}/2.0/) > Migrating from 1.0 to 2.0*
+This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. 
 
-This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
+* TOC
+{:toc}
+
+The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
 If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
-* Contents
-{:toc}
-
 ## Overview
+{:.no_toc}
 
-CircleCI 2.0 introduces the requirement that you create a configuration file (`.circleci/config.yml`), and it adds new required keys for which values must be defined. This release also allows you to use multiple jobs in your configuration. **Note:** Parallelism in 2.0 can only be set in `.circleci/config.yml`, the parallelism setting from the UI is ignored.
+CircleCI requires that you create a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference), and it adds new required keys for which values must be defined. **Note:** Parallelism may only be set in the `.circleci/config.yml` file, the parallelism setting in the CircleCI app is ignored.
 
 If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
-## Using the 1.0 to 2.0 `config-translation` Endpoint
+### Using the 1.0 to 2.0 `config-translation` Endpoint
+{:.no_toc}
 
-CircleCI's beta `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
+The `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
-## Steps to Configure Required 2.0 Keys
+## Steps to Configure Required Keys
 
 1. Copy your existing `circle.yml` file into a new directory called `.circleci` at the root of your project repository.
 
@@ -150,7 +152,7 @@ To increase the speed of your software development through faster feedback, shor
 
 ```yaml
     environment:
-      TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+      TZ: "America/Los_Angeles"
 ```
 
 - If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
@@ -223,16 +225,14 @@ With the following, nested under `steps:` and customizing for your application a
      - deploy:
 ```
 
-**Notes on Deployment:**
-
-- See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#deploy) document for valid `deploy` options to configure deployments on CircleCI 2.0
-- Please read the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deployment for CircleCI 2.0.
-
 ## Validate YAML
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
 ## Next Steps
+{:.no_toc}
 
+- See the [Tips for Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migration/)
+- Refer the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deployment.
 - Refer to the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about Docker and Machine images in CircleCI 2.0.
 - Refer to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document for details on the exact syntax of CircleCI 2.0 `jobs` and `steps` and all available options.

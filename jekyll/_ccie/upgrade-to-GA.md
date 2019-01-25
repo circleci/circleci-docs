@@ -6,6 +6,7 @@ category: [resources]
 order: 0
 description: "How to upgrade from a beta installation of CircleCI Enterprise to the General Availability (GA) version."
 hide: true
+sitemap: false
 ---
 
 ## Upgrading from Beta to GA

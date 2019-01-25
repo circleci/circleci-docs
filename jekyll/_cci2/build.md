@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Docker, Machine, and iOS Builds"
-description: "CircleCI 2.0 Configuration"
+title: "Build Environments"
+description: "CircleCI 2.0 Build Environment Configuration"
 ---
 
 

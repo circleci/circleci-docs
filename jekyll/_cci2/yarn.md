@@ -6,8 +6,6 @@ categories: [how-to]
 description: "How to use the Yarn package manager on CircleCI."
 ---
 
-<img src="{{ site.baseurl }}/assets/img/logos/yarn-logo.svg" style="display:block;margin:15px auto;width:40%;min-width:320px;" alt="Yarn Logo" />
-
 [Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript.
 The packages it installs can be cached.
 This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
@@ -36,7 +34,7 @@ Here's an example:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -45,3 +43,7 @@ Here's an example:
 #...
 ```
 {% endraw %}
+
+## See Also
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

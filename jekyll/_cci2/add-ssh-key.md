@@ -6,8 +6,6 @@ description: "How to Add an SSH Key to CircleCI"
 order: 20
 ---
 
-*[Basics]({{ site.baseurl }}/2.0/basics/) > Adding an SSH Key*
-
 If deploying to your servers requires SSH access,
 you'll need to add SSH keys to CircleCI.
 
@@ -20,7 +18,7 @@ to add SSH keys to CircleCI:
 2. To enable running processes to access other services.
 
 If you are adding an SSH key for the first reason,
-refer to the [GitHub and Bitbucket Integration](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
 Otherwise,
 follow the steps below to add an SSH key to your project.
 
@@ -49,6 +47,7 @@ you are adding.
 **Note:**
 Since CircleCI cannot decrypt SSH keys,
 every new key must have an empty passphrase.
+CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
 ## Advanced Usage
 
@@ -76,3 +75,7 @@ jobs:
 All fingerprints in the `fingerprints` list
 must correspond to keys
 that have been added through the CircleCI application.
+
+## See Also
+
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)

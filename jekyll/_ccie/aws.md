@@ -5,6 +5,7 @@ title: "Installing CircleCI on Amazon Web Services with Terraform"
 category: [installation]
 order: 2
 description: "How to install CircleCI Enterprise on Amazon Web Services (AWS)."
+sitemap: false
 ---
 
 This document provides step-by-step instructions for installing CircleCI Enterprise on Amazon Web Services (AWS) with Terraform in the following sections:

@@ -7,16 +7,13 @@ categories: [getting-started]
 order: 1
 ---
 
-[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Scala
-
-This document will walk you through a Scala application building on CircleCI 2.0 in the following sections:
+This document will walk you through a Scala application [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}
 
-Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
-
 ## Overview
+{:.no_toc}
 
 This document assumes that your [project’s AWS Permission settings](https://circleci.com/docs/2.0/deployment-integrations/#aws) are configured with valid AWS keys that are permitted to read and write to an S3 bucket. The examples in this post upload build packages to the specified S3 bucket.
 
@@ -33,7 +30,7 @@ mkdir .circleci/
 touch .circleci/config.yml
 ```
 
-These commands create a directory named `.circleci` & the next command creates a new file named `config.yml` within the `.circleci` directory.  Again you **must** use the names .circleci for the dir and config.yml.  Learn more about the [version 2.0 prerequisites here](({{ site.baseurl }}/2.0/migrating-from-1-2/#steps-to-configure-required-20-keys).
+These commands create a directory named `.circleci` & the next command creates a new file named `config.yml` within the `.circleci` directory.  Again you **must** use the names .circleci for the dir and config.yml.  Learn more about the [version 2.0 prerequisites here]({{ site.baseurl }}/2.0/migrating-from-1-2/).
 
 ### Scala config.yml File
 
@@ -63,11 +60,12 @@ jobs:
                     apt-get clean && apt-get autoclean
       - checkout
       - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: sbt-cache
       - run:
           name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts:
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -84,7 +82,8 @@ jobs:
 
 ## Schema Walkthrough
 
-All version 2.0 config.yml files must start with his line:
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
@@ -186,11 +185,11 @@ The following keys represent actions performed after the multi-line command is e
 ```
 
 Below is an explanation of the preceding example:
-- `checkout`: basically git clones the project repo from github into the container 
-- `restore_cache` key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
-- `run` command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
-- `store_artifacts` path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
-- `save_cache` path: saves the specified directories for use in future builds when specified in the `restore_cache` keys.
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from github into the container 
+- [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
+- [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
+- [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
+- [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) path: saves the specified directories for use in future builds when specified in the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) keys.
 
 The final portion of the 2.0 schema are the deploy command keys which move and rename the compiled samplescala.zip to the $CIRCLE_ARTIFACTS/ directory.  The file is then uploaded to the AWS S3 bucket specified.
 
@@ -205,5 +204,8 @@ steps:
 The deploy command is another multi-line execution.
 
 ## See Also 
+{:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
+- How to [parallelize tests in SBT on CircleCI](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)

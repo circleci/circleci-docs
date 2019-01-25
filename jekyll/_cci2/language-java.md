@@ -7,16 +7,15 @@ categories: [language-guides]
 order: 4
 ---
 
-*[Tutorials & 2.0 Demo Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Java*
-
 This guide will help you get started with a Java application on CircleCI. 
 
 * TOC
 {:toc}
 
 ## Overview
+{:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
 We're going to make a few assumptions here:
 
@@ -44,6 +43,7 @@ jobs: # a collection of steps
       - checkout # check out source code to working directory
 
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn dependency:go-offline # gets the project dependencies
@@ -56,9 +56,11 @@ jobs: # a collection of steps
       - run: mvn package # run the actual tests
       
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: target/surefire-reports
       
       - store_artifacts: # store the uberjar as an artifact
+      # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
@@ -110,6 +112,11 @@ We start with `checkout` so we can operate on the codebase.
 
 Next we pull down the cache, if present. If this is your first run, or if you've changed `pom.xml`, this won't do anything. We run `mvn dependency:go-offline` next to pull down the project's dependencies. This allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
 
+<div class="alert alert-info" role="alert">
+  <strong>Tip:</strong> <code class="highlighter-rouge">mvn dependency:go-offline</code> may not work if you are running a multi-module
+project build. If this is the case, consider using the <a href="https://github.com/qaware/go-offline-maven-plugin">go-offline-maven-plugin</a>.
+</div>
+
 Then `mvn package` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
 
 Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
@@ -145,9 +152,9 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
 
-## Deploy
+## See Also
+{:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-
-
-
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document
+for details on handling Java memory issues.

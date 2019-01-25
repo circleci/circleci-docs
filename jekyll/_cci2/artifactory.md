@@ -2,10 +2,13 @@
 layout: classic-docs
 title: Upload to Artifactory
 categories: [how-to]
-description: How to upload Artifacts to Artifactory
+description: How to upload Artifacts to Artifactory in CircleCI
 ---
 
 CircleCI supports uploading directly to Artifactory.
+
+* TOC 
+{:toc}
 
 ## Deploy
 
@@ -52,7 +55,8 @@ If you'd like to upload WAR files use the following example:
 
 The full .circleci/config.yml file would look something like the following:
 
-```
+```yaml
+version: 2
 jobs:
   upload-artifact:
     docker:
@@ -76,3 +80,10 @@ jobs:
             ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```
+
+## See Also
+
+{:.no_toc}
+
+[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+

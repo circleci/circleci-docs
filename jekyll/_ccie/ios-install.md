@@ -6,6 +6,7 @@ category: [resources]
 order: 0
 description: "Adding macOS and iOS support to your CircleCI Enterprise installation."
 hide: true
+sitemap: false
 ---
 
 ## What we need

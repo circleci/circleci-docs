@@ -7,6 +7,7 @@ order: 4
 hide: true
 published: false
 description: "How to install CircleCI Enterprise on any generic machine"
+sitemap: false
 ---
 
 Use the following step-by-step instructions to complete the process of
