@@ -5,7 +5,7 @@ short-title: "crwdns120768:0crwdne120768:0"
 description: "crwdns120770:0crwdne120770:0"
 categories:
   - crwdns120772:0crwdne120772:0
-order: dne120774:047acrwdns120774:0crwdne120774:06.90492311crwdns120774:0crwdne120774:0
+order: crwdns120774:0crwdne120774:0
 ---
 crwdns120776:0crwdne120776:0 crwdns120778:0crwdne120778:0 crwdns120780:0crwdne120780:0 crwdns120782:0crwdne120782:0
 
@@ -147,6 +147,6 @@ crwdns120926:0{:.no_toc}crwdne120926:0 <iframe width="854" height="480" src="crw
 
 ### crwdns120938:0crwdne120938:0
 
-crwdns120940:0crwdne120940:0
+crwdns120940:0{% include third-party-info.html app='Knapsack Pro'%}crwdne120940:0
 
 crwdns120942:0crwdne120942:0 crwdns120944:0crwdne120944:0 crwdns120946:0crwdne120946:0
