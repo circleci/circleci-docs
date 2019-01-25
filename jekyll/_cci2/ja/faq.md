@@ -38,7 +38,7 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
-### CircleCI 2.0 では（移行を効率化する）インファレンスツールを用意していますか？
+### CircleCI 2.0 では 1.0 にあった inference コマンドを実行してくれますか？
 
 {:.no_toc} CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
 
