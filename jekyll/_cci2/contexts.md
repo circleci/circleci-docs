@@ -55,7 +55,7 @@ CircleCI enables you to secure secret environment variables at run time by addin
 
 The default security group is `organization` and enables any member of the org who uses CircleCI to use the context.
 
-## Runnning Workflows with a Secure Context
+## Running Workflows with a Secure Context
 
 To invoke a workflow that uses a secure context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the workflow will fail as `Unauthorized`.
 
@@ -85,10 +85,6 @@ CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added o
 ### Adding and Removing Environment Variables from Secure Contexts
 
 Addition and deletion of environment variables from a secure context is limited to members of the context groups.
-
-### Approving Jobs that use Secure Contexts
-
-Manual invocation of a job that is `type: approval` is limited to members of the context groups.
 
 ## Deleting a Context
 
