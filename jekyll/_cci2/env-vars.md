@@ -49,6 +49,54 @@ Running scripts within configuration
 may expose secret environment variables.
 See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
+
+### Example Configuration of Environment Variables
+
+Consider the example `config.yml` below:
+
+```yaml
+version: 2  # use CircleCI 2.0
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      - image: circleci/node:10.0-browsers
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable.
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV # Redirect MY_ENV_VAR into $BASH_ENV
+      # Run a step to print what branch our code base is on.
+      - run: # test what branch we're on.
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
+      # Run another step, the same as above; note that you can
+      # invoke environment variable without curly braces.
+      - run:
+          name: "What branch am I on now?"
+          command: echo $CIRCLE_BRANCH
+      - run:
+          name: "What was my custom environment variable?"
+          command: echo ${MY_ENV_VAR}
+```
+
+The above `config.yml` demonstrates the following: 
+
+- Setting custom environment variables
+- Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
+- How variables are used (or interpolated) in your `config.yml`
+
+When the above config runs, the output looks like this:
+
+![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-interpolation-example.png)
+
+You may have noticed that there are two similar steps in the above image and config - "What branch am I
+on?". These steps illustrate two different methods to read environment variables. Note that
+both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell
+paramater expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
+
 ### Using `BASH_ENV` to Set Environment Variables
 {:.no_toc}
 
@@ -67,10 +115,14 @@ In the example below,
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
 
-As a workaround,
-use a `run` step
-to export environment variables to `BASH_ENV`,
-as shown below.
+There are several workarounds to interpolate values into your config.
+
+If you are using **CircleCI 2.1**, you can reuse pieces of config across your 
+`config.yml`. By using the `parameters` declaration, you can interpolate (or,
+"pass values") into reusable `commands` `jobs` and `executors`. Consider
+reading the documentation on [using the parameters declaration]({{ site.baseurl }}/2.0/reusing-config/#using-the-parameters-declaration).
+
+Another possible method to interpolate values into your config is to use a `run` step to export environment variables to `BASH_ENV`, as shown below.
 
 ```yaml
 steps:
@@ -99,17 +151,9 @@ without first installing `bash`.
 
 ## Setting an Environment Variable in a Shell Command
 
-CircleCI does not support interpolation
-when setting environment variables.
-
-However,
-it is possible
-to set variables for the current shell
-by [using `BASH_ENV`](#using-bash_env-to-set-environment-variables).
-This is useful
-for both modifying your `PATH`
-and setting environment variables
-that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible
+to set variables for the current shell by [using `BASH_ENV`](#using-bash_env-to-set-environment-variables). This is useful
+for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2
