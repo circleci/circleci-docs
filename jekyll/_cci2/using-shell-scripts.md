@@ -42,7 +42,7 @@ version: 2
 jobs:
   shellcheck:
     docker:
-      - image: nlknguyen/alpine-shellcheck:v0.4.6
+      - image: koalaman/shellcheck-alpine:stable
     steps:
       - checkout
       - run:
