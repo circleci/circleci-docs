@@ -248,6 +248,86 @@ Yes, the billing is associated with the organization. You can buy while within t
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
+### What are credits?
+{:.no_toc}
+
+Credits are used to pay for your usage based on machine type and size.
+
+For example, the 25,000 credit package would provide 2,500 build minutes when
+using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+
+### Can I get one workflow run to use 50 containers at once without queuing?
+{:.no_toc}
+
+The Performance plan will experience less queuing, so you may run 50x parallelism builds and kick off a bunch concurrently, but this will increase your credit usage significantly.  The Seed plan has a maximum of 4x parallelism.
+
+### If a container is used for under one minute, do I have to pay for a full minute? 
+{:.no_toc}
+
+You pay to the nearest credit. First we round up to the nearest second, and then up to the nearest credit. On the 2x4 (medium) box this is effectively in 6 second increments. 
+
+### How do I buy credits? Can I buy in any increments?
+{:.no_toc}
+
+Every month, you are charged for your selected credit package at the beginning of the month.
+Bonus credits are offered on the Performance plan for 50,000 credit purchases and above.
+
+### What happens when I run out of credits?
+{:.no_toc}
+
+On the Seed plan, you never have to worry about compute spend going above your budget. Your projects will not build until your billing cycle is complete. You will get an error message in-app and through email explaining why your build did not run. If you decide you want to build more, you can upgrade to a Performance plan if you choose.
+
+On the Performance plan, whenever you run out of credits, you can elect to have your plan renew so builds will never be blocked on a lack of credits in your account.
+
+### What happens to my credits if I upgrade to a new plan?
+{:.no_toc}
+
+If you upgrade within Seed, the rates are exactly the same.
+If you upgrade to Performance, credits rollover from your Seed plan.
+
+### Do credits expire?
+{:.no_toc}
+
+**Hobbyist**: Credits expire every week.
+
+**Seed**: Credits expire every month.
+
+**Performance**: Credits expire one year after purchase or if the account has 3 months of inactivity without builds.
+
+### How do I pay?
+{:.no_toc}
+
+You can pay from inside the CircleCI app for monthly or annual pricing.
+You can also request invoiced billing by talking to the CircleCI Sales team.
+
+### When do I pay?
+{:.no_toc}
+
+Payment times vary based on what plan you are on.
+
+**Seed Plan**
+
+- The day you purchase a plan, you’ll get a charge for the credit plan you choose.
+- The end of your billing cycle, you’ll get a charge for any users above \$5.
+- On the second billing cycle, you’ll be charged for the credit plan chosen and
+  (if above 5 users), the previous user count.
+
+**Performance Plan**
+
+- The day you purchase a plan, you’ll be charged a one time charge for the number of credits you purchase.
+- You will be charged a recurring flat fee for 5 users. The following month, you will be charged this flat user fee plus a charge per user over 5 users from the previous billing period. For example, during January you used 7 users, you will be charged for 2 additional users at $15 each on February’s bill.
+
+### What are the other renewal dates?
+{:.no_toc}
+
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- Anytime your team’s balance exceeds $500 from adding new users.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+
 ## Architecture
 
 ### Can I use IPv6 in my tests?
