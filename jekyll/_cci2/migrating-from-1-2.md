@@ -152,7 +152,7 @@ To increase the speed of your software development through faster feedback, shor
 
 ```yaml
     environment:
-      TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+      TZ: "America/Los_Angeles"
 ```
 
 - If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
