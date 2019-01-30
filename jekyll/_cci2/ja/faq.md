@@ -29,11 +29,11 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 
 ```yaml
     steps:
-      - run: "bash コマンドをここに記述します"
+      - run: echo "Add any bash command you want here"
       - run:
           command: |
-            echo "2 行以上の bash コマンドはこのようにします"
-            echo "たいていは Jenkins の Execute Shell の内容をコピー＆ペーストするだけです"
+            echo "Arbitrary multi-line bash"
+            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
 ```
 
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
