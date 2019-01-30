@@ -98,13 +98,17 @@ In other words, you can reduce time spent in a **usage queue** by [purchasing mo
 
 {:.no_toc} CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub](https://hub.docker.com). For [official images](https://hub.docker.com/explore/), you can pull by simply specifying the name of the image and a tag:
 
+    ```
     golang:1.7.1-jessie
     redis:3.0.7-jessie
+    ```
     
 
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
 
+    ```
     myUsername/couchdb:1.6.1
+    ```
     
 
 ### What is the best practice for specifying image versions?
@@ -228,7 +232,8 @@ Hosts running with machine executor are configured with IPv6 addresses for `eth0
 You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
-   ipv6_tests:
+   ```
+ipv6_tests:
      machine: true
      steps:
      - checkout
@@ -242,6 +247,7 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
            }
            EOF
            sudo service docker restart
+```
 ```
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
