@@ -213,7 +213,7 @@ jobs:
     # ...
     steps:
       # ...
-      persist_to_workspace:
+      - persist_to_workspace:
         root: .
         paths:
           - docker-image
