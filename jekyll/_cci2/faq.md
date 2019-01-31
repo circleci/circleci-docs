@@ -36,7 +36,7 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
 
 ```yaml
     steps:
-      - run: "Add any bash command you want here"
+      - run: echo "Add any bash command you want here"
       - run:
           command: |
             echo "Arbitrary multi-line bash"
