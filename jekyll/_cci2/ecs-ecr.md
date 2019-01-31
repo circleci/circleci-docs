@@ -214,9 +214,9 @@ jobs:
     steps:
       # ...
       - persist_to_workspace:
-        root: .
-        paths:
-          - docker-image
+          root: .
+          paths:
+            - docker-image
 ```
 
 ### Create a Deploy Job
