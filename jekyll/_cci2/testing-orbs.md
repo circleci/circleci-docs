@@ -26,7 +26,8 @@ To test whether an orb is valid YAML and is well-formed according to the schema,
 #### Example
 
 Given an orb with source at `./src/orb.yml` you can run `circleci orb validate ./src/orb.yml` to receive feedback on whether the orb is valid and will pass through config processing. If there is an error, you will receive the first schema validation error encountered. Alternatively, you can pass STDIN rather than a file path. 
-For instance, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.' 
+
+For example, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.' 
 
 **Note** Schema errors are often best read "inside out", where your coding error may be best described in one of the inner-most errors in a stack of errors.
 
@@ -129,7 +130,7 @@ The result shown above may now be used in a custom script that tests for its str
 
 Runtime testing involves running active builds with orbs. Because the jobs in a build can only depend on orbs that are either part of the config or were published when the build started, this technique requires some special planning.
 
-One approach is to run jobs within your build's jobs by using the circleci CLI to run local builds using `circleci local execute` on a machine executor within your builds. This allows you to print the build output to STDOUT so you can make assertions about it. This approach can be limiting, however, because local builds do not support workflows and have other caveats. This is also powerful if you need to test the actual running output of a build using your orb elements. 
+One approach is to run jobs within your build's jobs by using the circleci CLI to run local builds using `circleci local execute` on a machine executor within your builds. This allows you to print the build output to `stdout` so you can make assertions about it. This approach can be limiting, however, because local builds do not support workflows and have other caveats. This is also powerful if you need to test the actual running output of a build using your orb elements. 
 
 For an example of using this technique see the [Artifactory Orb](https://github.com/CircleCI-Public/artifactory-orb) page in CircleCI's public GitHub page.
 
@@ -147,7 +148,7 @@ Yet another approach is when you run a build, publish a dev version of the orb, 
 
 Sometimes you will want to test how your orbs interact with external services. There are several possible approaches depending on circumstances:
 
-* Make your orb support a dry-run functionality of whatever it is interacting with, and use that mode in your tests
+* Make your orb support a dry-run functionality of whatever it is interacting with, and use that mode in your tests.
 * Do real interactions, using a properly set up test account and a separate repository that runs those tests using a published dev version of your orb.
 * Spin up a local service in another container of your job.
 
