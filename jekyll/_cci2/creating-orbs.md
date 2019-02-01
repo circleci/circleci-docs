@@ -137,7 +137,7 @@ Inline orbs can be handy during development of an orb or as a convenience for na
 
 To write inline orbs, place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
-```
+```yaml
 description: # The purpose of this orb
 
 orbs:
@@ -173,7 +173,7 @@ In the example above, note that the contents of ```my-orb``` are resolved as an 
 
 When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
 
-```
+```yaml
 version: 2.1
 
 description: This is an inline job
@@ -352,7 +352,7 @@ In development orbs, the string label given by the user has the following restri
 Examples of valid development orb tags:
 
 * Valid:
-```
+```yaml
   "dev:mybranch"
   "dev:2018_09_01"
   "dev:1.2.3-rc1"
@@ -362,7 +362,7 @@ Examples of valid development orb tags:
 
 * Invalid
 
-```
+```yaml
   "dev: 1" (No spaces allowed)
   "1.2.3-rc1" (No leading "dev:")
 ```
@@ -388,7 +388,7 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
 **Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
 
 {% raw %}
-```
+```yaml
 orbs:
   some-orb: some-ns/some-orb@volatile
 executors:
@@ -586,7 +586,7 @@ This command is used to publish an orb. The following parameters may be passed w
 
 Below is an example of how to use the `orb-tools` orb to validate and publish an orb.
 
-```
+```yaml
 version: 2.1
 
 orbs:
