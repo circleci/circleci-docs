@@ -58,7 +58,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 {:.no_toc} Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
 
-### CircleCI のホスティングの種類について教えてほしい。
+### CircleCI のホスティングの種類は？
 
 {:.no_toc} - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
