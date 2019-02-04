@@ -1,151 +1,105 @@
 ---
-layout: crwdns103450:0crwdne103450:0
-title: "crwdns103452:0crwdne103452:0"
-short-title: "crwdns103454:0crwdne103454:0"
-description: "crwdns103456:0crwdne103456:0"
+layout: crwdns124346:0crwdne124346:0
+title: "crwdns124348:0crwdne124348:0"
+short-title: "crwdns124350:0crwdne124350:0"
+description: "crwdns124352:0crwdne124352:0"
 categories:
-  - crwdns103458:0crwdne103458:0
-order: 03460:0crwdne103460:052988crwdns103460:0crwdne103460:0
+  - crwdns124354:0crwdne124354:0
+order: crwdns124356:0crwdne124356:0
 ---
-crwdns103462:0crwdne103462:0
+crwdns124358:0crwdne124358:0
 
-- crwdns103464:0{:toc}crwdne103464:0
+- crwdns124360:0{:toc}crwdne124360:0
 
-### crwdns103466:0crwdne103466:0
+### crwdns124362:0crwdne124362:0
 
-crwdns103468:0{:.no_toc}crwdne103468:0
+crwdns124364:0{:.no_toc}crwdne124364:0
 
-- crwdns103470:0crwdne103470:0
+- crwdns124366:0crwdne124366:0
 
-- crwdns103472:0crwdne103472:0 crwdns103474:0crwdne103474:0
+- crwdns124368:0crwdne124368:0 crwdns124370:0crwdne124370:0
 
-    crwdns103476:0crwdne103476:0
+    crwdns124372:0crwdne124372:0
     
 
-crwdns103478:0crwdne103478:0 crwdns103480:0crwdne103480:0
+crwdns124374:0crwdne124374:0 crwdns124376:0crwdne124376:0
 
-    crwdns103482:0crwdne103482:0
+    crwdns124378:0crwdne124378:0
     
 
-crwdns103484:0crwdne103484:0 crwdns103486:0crwdne103486:0 crwdns103488:0crwdne103488:0
+crwdns124380:0crwdne124380:0 crwdns124382:0crwdne124382:0 crwdns124384:0crwdne124384:0
 
-### crwdns103490:0crwdne103490:0
+### crwdns124386:0crwdne124386:0
 
-- crwdns103492:0crwdne103492:0
+- crwdns124388:0crwdne124388:0
 
-    crwdns103494:0crwdne103494:0
+    crwdns124390:0crwdne124390:0
     
 
-    crwdns103496:0crwdne103496:0
+    crwdns124392:0crwdne124392:0
     
 
-- crwdns103498:0crwdne103498:0 crwdns103500:0crwdne103500:0
+- crwdns124394:0crwdne124394:0 crwdns124396:0crwdne124396:0
 
-### crwdns103502:0crwdne103502:0
+### crwdns124398:0crwdne124398:0
 
-- crwdns103504:0crwdne103504:0
+- crwdns124400:0crwdne124400:0
 
-    crwdns103506:0crwdne103506:0
+    crwdns124402:0crwdne124402:0
     
 
-- crwdns103508:0crwdne103508:0 crwdns103510:0crwdne103510:0 crwdns103512:0crwdne103512:0 crwdns103514:0crwdne103514:0
+- crwdns124404:0crwdne124404:0 crwdns124406:0crwdne124406:0 crwdns124408:0crwdne124408:0 crwdns124410:0crwdne124410:0
 
-<!---
-### Environment Variables Not Being Passed at Runtime
+### crwdns124412:0crwdne124412:0
 
-Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
+crwdns124414:0crwdne124414:0 crwdns124416:0crwdne124416:0
 
-```export AUTO_FILE=/Users/yourusername/Desktop/apkpure_app_887.apk
-export AUTO_DIR=.
-circleci build -c .circleci/echo.yml --job test
-```
+crwdns124418:0crwdne124418:0 crwdns124420:0crwdne124420:0
 
-The config shows:
-
-```#!bin/bash -eo pipefail
-echo file $(AUTO_FILE) dir $(AUTO_DIR)
-file directlySuccess!
-```
-Upon execution, you may see the following response:
-
-.circleci/echo.yml
-
-```version: 2
-jobs:
-  build:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    steps:
-    - checkout
-  test:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    environment:
-    - TERM: dumb
-    steps:
-    - checkout
-    - run:
-        command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-    - test```
-
-yourusername/circle-autoAdded by GitHub
-```
---->
-
-### crwdns103516:0crwdne103516:0
-
-- crwdns103518:0crwdne103518:0 crwdns103520:0crwdne103520:0 crwdns103522:0crwdne103522:0
-
-- crwdns103524:0crwdne103524:0 crwdns103526:0crwdne103526:0 crwdns103528:0crwdne103528:0
-
-### crwdns103530:0crwdne103530:0
-
-- crwdns103532:0crwdne103532:0
-
-- crwdns103534:0crwdne103534:0 crwdns103536:0crwdne103536:0
-
-### crwdns103538:0crwdne103538:0
-
-- crwdns103540:0crwdne103540:0
-
-- crwdns103542:0crwdne103542:0 crwdns103544:0crwdne103544:0
-
-### crwdns103546:0crwdne103546:0
-
-- crwdns103548:0crwdne103548:0
-
-- crwdns103550:0crwdne103550:0 crwdns103552:0crwdne103552:0
-
-crwdns103554:0{% raw %}crwdne103554:0
-
-    crwdns103556:0crwdne103556:0
+    <br />crwdns124422:0$(AUTO_FILE)crwdnd124422:0$(AUTO_DIR)crwdne124422:0
     
 
-crwdns103558:0{% endraw %}crwdne103558:0
+crwdns124424:0crwdne124424:0
 
-### crwdns103560:0crwdne103560:0
+crwdns124426:0crwdne124426:0
 
-- crwdns103562:0crwdne103562:0
+    crwdns124428:0${AUTO_FILE}crwdnd124428:0${AUTO_DIR}crwdne124428:0
 
-- crwdns103564:0crwdne103564:0 crwdns103566:0crwdne103566:0
+crwdns124430:0crwdne124430:0
 
-    crwdns103568:0crwdne103568:0 crwdns103570:0crwdne103570:0
+    crwdns124432:0crwdne124432:0 crwdns124434:0crwdne124434:0 crwdns124436:0crwdne124436:0
+    
+    crwdns124438:0crwdne124438:0 crwdns124440:0crwdne124440:0 crwdns124442:0crwdne124442:0
+    
+    crwdns124444:0crwdne124444:0
+    
+    crwdns124446:0crwdne124446:0 crwdns124448:0crwdne124448:0
+    
+    crwdns124450:0crwdne124450:0
+    
+    crwdns124452:0crwdne124452:0 crwdns124454:0crwdne124454:0
+    
+    crwdns124456:0crwdne124456:0
+    
+    crwdns124458:0crwdne124458:0 crwdns124460:0{% raw %}crwdne124460:0
     
 
-crwdns103572:0crwdne103572:0 crwdns103574:0crwdne103574:0
+crwdns124462:0crwdne124462:0
 
-crwdns103576:0crwdne103576:0
+    crwdns124464:0{% endraw %}crwdne124464:0
+    
+    crwdns124466:0crwdne124466:0 crwdns124468:0crwdne124468:0
+    
 
-crwdns103578:0crwdne103578:0 crwdns103580:0crwdne103580:0
+crwdns124470:0crwdne124470:0 crwdns124472:0crwdne124472:0 crwdns124474:0crwdne124474:0
 
-## crwdns103582:0crwdne103582:0
+crwdns124476:0crwdne124476:0
 
-- crwdns103584:0{{site.baseurl}}crwdne103584:0
-- crwdns103586:0{{site.baseurl}}crwdne103586:0
-- crwdns103588:0{{site.baseurl}}crwdne103588:0
-- crwdns103590:0{{site.baseurl}}crwdne103590:0
+crwdns124478:0crwdne124478:0 crwdns124480:0crwdne124480:0
+
+## crwdns124482:0crwdne124482:0
+
+- crwdns124484:0{{site.baseurl}}crwdne124484:0
+- crwdns124486:0{{site.baseurl}}crwdne124486:0
+- crwdns124488:0{{site.baseurl}}crwdne124488:0
+- crwdns124490:0{{site.baseurl}}crwdne124490:0
