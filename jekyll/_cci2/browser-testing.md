@@ -97,7 +97,7 @@ CircleCI has developed a Sauce labs browser testing orb that enables you to open
 ```
 version: 2.1
 orbs:
-  sauce-connect: saucelabs/connect@1.0.1
+  sauce-connect: saucelabs/sauce-connect@1.0.1
 workflows:
   browser_tests:
     jobs:
