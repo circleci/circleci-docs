@@ -332,7 +332,7 @@ Orb versions may be added to the registry either as development versions or prod
 
 ### Development and Production Orb Security Profiles
 
-* Only organization administrators can publish production orbs.
+* Only organization owners can publish production orbs.
 * Any member of an organization can publish dev orbs in namespaces.
 * Organization administrators can promote any dev orb to be a semantically versioned production orb.
 
