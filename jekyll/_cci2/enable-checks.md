@@ -53,6 +53,11 @@ To disable the CircleCI Check integration, navigate to the Org Settings Page, th
 2. Select VCS. 
 3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_update.png)
 4. Deselect the repository to uninstall the Checks integration.
+5. Confirm the status settings on your projects: Go to CircleCI > Project
+   Settings > Advanced Settings > Confirm that the setting `Github Status
+   Updates` is set to `on`.
+
+![Re-enable Github Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
 
 ## To Uninstall Checks for the Organization
 
