@@ -110,11 +110,11 @@ Examples of orb version declarations and their meaning:
 
 ### Using Development Versions
 
-While all production orbs can be published securely by organization administrators, development orbs provide non-administrator members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
+While all production orbs can be published securely by organization owners, development orbs provide non-owner members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
 A development version should be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
-**Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for admin members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
+**Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for org members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 
 ## Designing Orbs
 
@@ -316,7 +316,7 @@ Orbs may be authored inline in your config.yml file or authored separately and t
 
 Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
 
-**Note:** Only an organization administrator can opt-in to the Code Sharing Terms of Service. The organization admin will navigate to the organization Settings tab and complete the form on the Security page.
+**Note:** Only an organization owner can opt-in to the Code Sharing Terms of Service. The organization owner will navigate to the organization Settings tab and complete the form on the Security page.
 
 ### Namespaces
 
@@ -324,7 +324,7 @@ Namespaces are used to organize a set of orbs. Each namespace has a unique and i
 
 Namespaces are owned by organizations. Only organization owners can create namespaces.
 
-Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace please contact your account team at CircleCI.
+Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace, please contact your account team at CircleCI.
 
 ### Development and Production Orbs
 
@@ -334,7 +334,7 @@ Orb versions may be added to the registry either as development versions or prod
 
 * Only organization owners can publish production orbs.
 * Any member of an organization can publish dev orbs in namespaces.
-* Organization administrators can promote any dev orb to be a semantically versioned production orb.
+* Organization owners can promote any dev orb to be a semantically versioned production orb.
 
 ### Development and Production Orb Retention and Mutability Characteristics
 
@@ -440,7 +440,7 @@ Before you begin creating your own orb, there are a few steps you should take to
 
 ### CircleCI Settings
 
-In the CircleCI app Settings page for your project, [Build Processing]({{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The org Admin must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
+In the CircleCI app Settings page for your project, [Build Processing]({{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The organization owner must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
 
 ### Get the new CircleCI CLI
 
