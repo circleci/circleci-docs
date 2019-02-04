@@ -459,10 +459,8 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-```
-
 {% raw %}
-
+```
 yaml
 commands:
   list-files:
@@ -471,19 +469,16 @@ commands:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
- 
- {% endraw %}
- 
  ```
+{% endraw %}
 
 #### Executor
 {:.no_toc}
 
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
-```
 {% raw %}
-
+```
 yaml
 version: 2.1
 executors:
@@ -518,9 +513,8 @@ workflows:
           e:
             name: xenial
             some-value: foobar
-
-{% endraw %}
 ```
+{% endraw %}
 
 #### Steps
 {:.no_toc}
@@ -818,12 +812,9 @@ workflows:
 {:.no_toc}
 
 Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
-are executed before any of the other steps in the job. The steps under
-`post-steps` are executed after all of the other steps.
+are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job 
-without modifying the job. This is useful, for example, to run custom setup steps
-before job execution. 
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution. 
 
 ### Defining Pre and Post Steps
 {:.no_toc}
@@ -859,22 +850,16 @@ workflows:
 
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a condition is
-met. 
+Conditional steps allow the definition of steps that only run if a condition isvmet. 
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
 
-
-These conditions are checked before a workflow is actually run. That
-means, for example, that you cannot use a condition to check an environment
-variable.
+These conditions are checked before a workflow is actually run. That means, for example, that you cannot use a condition to check an environment variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
 
-For example, an
-orb author could define conditional steps in the `steps` key of a Job or a
-Command.
+For example, an orb author could define conditional steps in the `steps` key of a Job or a Command.
 
 A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run. 
 
