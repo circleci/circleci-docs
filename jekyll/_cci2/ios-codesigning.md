@@ -106,6 +106,14 @@ Keys -> Add user key** and click *Authorize with GitHub*.
 same GitHub permissions as the user who will be clicking the *Authorize
 with GitHub* button.
 
+**Note2:** In your Matchfile, you must use **git** URL unlike **https://** for git_url parameter. 
+Otherwise you may see an authentication error when you attempt to use match.
+```
+git_url("git@github.com:fastlane/certificates")
+app_identifier("tools.fastlane.app")
+username("user@fastlane.tools")
+```
+
 It is best practice to create a machine user with access to just the
 project repo and the keys repo, and use that machine user to create a
 user key to reduce the level of GitHub access granted to the CircleCI project.
