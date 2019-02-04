@@ -60,7 +60,6 @@ only certified orbs are permitted in this project.
 
 * Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
-<!---
 ### Environment Variables Not Being Passed at Runtime
 
 Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
@@ -109,7 +108,7 @@ yourusername/circle-autoAdded by GitHub
 
 ### Logging Outputs
 
-* Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to stdout, but is there a better way to log those log messages.
+* Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages.
 
 * Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
 
@@ -157,7 +156,7 @@ jobs:
 ```
 "Orb {orb@version} not loaded. To use this orb, an organization admin must opt-in to using third party orbs in Organization Security settings."
 ```
-Users are blocked from using Orbs from the registry until they have turned on the ability to use Orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using Orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
+Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
 
 To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.
 
