@@ -6,11 +6,17 @@ description: "Starting point for Testing CircleCI Orbs"
 categories: [getting-started]
 order: 1
 ---
+
+This page describes various testing methodologies you can test use to test orbs.
+
+* TOC
+{:toc}
+
 ## Introduction
 
 CircleCI orbs are packages of configuration that you can use in your configurations to simplify your workflows and quickly and easily deploy application and orbs in your workflow. When creating orbs for your workflow, you will want to perform testing to ensure your orb meets your specific needs before deploying and publishing the orb.
 
-You can think of orb testing at 4 levels, in increasing levels of complexity and scope.
+You can think of orb testing at four levels, in increasing levels of complexity and scope.
 
 * Schema Validation - this can be done with a single CLI command and checks if the orb is well-formed YAML and conforms to the orb schema.
 * Expansion Testing - this can be done by scripting the CircleCI CLI and tests whether the elements of the orb generate the configuration you intended when processing configuration containing those elements.
@@ -27,7 +33,7 @@ To test whether an orb is valid YAML and is well-formed according to the schema,
 
 Given an orb with source at `./src/orb.yml` you can run `circleci orb validate ./src/orb.yml` to receive feedback on whether the orb is valid and will pass through config processing. If there is an error, you will receive the first schema validation error encountered. Alternatively, you can pass STDIN rather than a file path. 
 
-For example, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.' 
+For example, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.` 
 
 **Note** Schema errors are often best read "inside out", where your coding error may be best described in one of the inner-most errors in a stack of errors.
 
@@ -49,6 +55,7 @@ The following steps illustrate doing basic expansion testing from the CLI:
 
 {% raw %}
 ```
+yaml
 version: 2.1
 
 executors:
@@ -76,6 +83,7 @@ jobs:
 
 {% raw %}
 ```
+yaml
 version: 2.1
 
 orbs:
@@ -92,7 +100,9 @@ After running `circleci config process .circleci/config.yml` the expected result
 
 {% raw %}
 ```
-version: 2
+yaml
+version: 2.1
+
 jobs:
   hello/hello-build:
     docker:
@@ -112,6 +122,7 @@ The `config.yml` file should look like the following:
 
 {% raw %}
 ```
+yaml
 version: 2.1
 
 orbs:
@@ -132,7 +143,7 @@ Runtime testing involves running active builds with orbs. Because the jobs in a 
 
 One approach is to run jobs within your build's jobs by using the circleci CLI to run local builds using `circleci local execute` on a machine executor within your builds. This allows you to print the build output to `stdout` so you can make assertions about it. This approach can be limiting, however, because local builds do not support workflows and have other caveats. This is also powerful if you need to test the actual running output of a build using your orb elements. 
 
-For an example of using this technique see the [Artifactory Orb](https://github.com/CircleCI-Public/artifactory-orb) page in CircleCI's public GitHub page.
+For an example of using this technique see the [Artifactory Orb](https://github.com/CircleCI-Public/artifactory-orb) page in the CircleCI public GitHub page.
 
 The other main approach to runtime testing is to make the orb entities available to your job's configuration directly.
 
@@ -156,7 +167,7 @@ Sometimes you will want to test how your orbs interact with external services. T
 
 The most significant issue when testing orbs is that it is not straightforward to push a new commit to a repository containing orb source code. This is because orbs are interpolated into an expanded `config.yml` at build inception and may not have the newest changes to the orb contained in that commit.
 
-There are several different approaches you can use to test your orbs (e.g. using inline orbs or external repositories) to ensure orb compatibility with the CircleCI platform. CircleCI is also in the process of developing newer ways for you to test your orbs. For more detailed information about these testing examples, refer to the [Emerging Testing Best Practices for Orbs](https://discuss.circleci.com/t/emerging-testing-best-practices-for-orbs/27474) page in the CircleCI Discussion Forum.
+There are several different approaches you can use to test your orbs (for example, using inline orbs or external repositories) to ensure orb compatibility with the CircleCI platform. CircleCI is also in the process of developing newer ways for you to test your orbs. For more detailed information about these testing examples, refer to the [Emerging Testing Best Practices for Orbs](https://discuss.circleci.com/t/emerging-testing-best-practices-for-orbs/27474) page in the CircleCI Discussion Forum.
 
 ## Orb Testing Methodologies
 
@@ -164,7 +175,7 @@ There are several different approaches you can use to test your orbs (e.g. using
 
 One of the easiest ways to test your orbs locally is to create an inline orb. Creating an inline orb enables you to test your orb while in active development. Inline orbs can be useful when developing your orb, or as a convenience for name-spacing jobs and commands in lengthy configurations.
 
-For more detailed information on how to create an inline orb, refer to the [Creating Orbs](https://circleci.com/docs/2.0/creating-orbs/#creating-inline-orbs) page in the CircleCI technical documentation.
+For more detailed information on how to create an inline orb, refer to the [Creating Orbs](({{site.baseurl}}/creating-orbs/#creating-inline-orbs) page in the CircleCI technical documentation.
 
 ### Testing Orbs Automatically
 
@@ -173,3 +184,8 @@ Testing orbs can be done at a few different levels. Choosing how much testing yo
 In all cases, CircleCI recommends that you make use of the CircleCI CLI to validate your orb locally and/or automate testing in a build. For installation instructions for the CLI see the CLI documentation
 
 For advanced testing, you may also want to use a shell unit testing framework such as BATS.
+
+## See Also
+
+* Refer to [Creating Orbs] (({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
+* Refer to [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) for more detailed information on the CircleCI CLI and how to use the CLI for orb testing.
