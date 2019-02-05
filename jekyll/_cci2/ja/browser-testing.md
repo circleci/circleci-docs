@@ -7,16 +7,15 @@ category:
 ---
 このドキュメントでは、CircleCI の構成をブラウザーでテストおよびデバッグする一般的な方法について説明します。このドキュメントには以下のセクションがあります。
 
-* TOC {:toc}
+* TOC
+{:toc}
 
 ## 前準備
-
 {:.no_toc}
 
 Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## 概要
-
 {:.no_toc}
 
 コードをプッシュしてコミットするごとに、CircleCI は選択したブラウザーに対してすべてのテストを自動的に実行します。 ブラウザーベースのテストは、変更が行われたとき、すべてのデプロイの前、またはとテイクのブランチのたびに実行されるよう構成できます。
@@ -94,16 +93,16 @@ CircleCI has developed a Sauce labs browser testing orb that enables you to open
 
     version: 2.1
     orbs:
-      saucelabs: saucelabs/connect@volatile
+      sauce-connect: saucelabs/sauce-connect@1.0.1
     workflows:
       browser_tests:
         jobs:
-          - saucelabs/with_proxy:
+          - sauce-connect/with_proxy:
               name: Chrome Tests
               steps:
                 - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
               tunnel_identifier: chrome
-          - saucelabs/with_proxy:
+          - sauce-connect/with_proxy:
               name: Safari Tests
               steps:
                 - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
@@ -138,7 +137,6 @@ There are other Cypress orb examples that you can use in your configuration work
 Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
 ### スクリーンショットとアーティファクトの使用
-
 {:.no_toc}
 
 CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
@@ -150,7 +148,6 @@ CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/a
 * [Behat と Mink を使用して障害時に自動的に](https://gist.github.com/michalochman/3175175)
 
 ### ローカルブラウザーを使用して CircleCI の HTTP サーバーにアクセスする
-
 {:.no_toc}
 
 If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
@@ -170,7 +167,6 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
 This is a very easy way to debug things when setting up Selenium tests, for example.
 
 ### VNC 上でのブラウザーとの連携
-
 {:.no_toc}
 
 VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
@@ -222,7 +218,6 @@ ubuntu@box159:~$ firefox &
 Now, you can run integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ### CircleCI の X サーバーの共有
-
 {:.no_toc}
 
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
