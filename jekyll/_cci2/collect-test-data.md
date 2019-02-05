@@ -480,7 +480,8 @@ To access test metadata for a run from the API, refer to the [test-metadata API 
 
 If you would like to upload code coverage reports, or other non-junit
 test-results, consider using a `store-artifacts` step. In the example below,
-Jest is used with the `--collectCoverage` flag enabled, which can then be uploaded as an artifact.
+Jest is used with the `--collectCoverage` flag enabled, which can then upload
+the coverage report as an artifact.
 
 ```yaml
 version: 2
