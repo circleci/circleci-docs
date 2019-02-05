@@ -275,7 +275,9 @@ Bonus credits are offered on the Performance plan for 50,000 credit purchases an
 ### What happens when I run out of credits?
 {:.no_toc}
 
-On the Seed plan, you never have to worry about compute spend going above your budget. Your projects will not build until your billing cycle is complete. You will get an error message in-app and through email explaining why your build did not run. If you decide you want to build more, you can upgrade to a Performance plan if you choose.
+On the Seed plan, you never have to worry about compute spend going above your
+budget. Your projects will not build until your billing cycle begins and your
+credit package is refilled. You will get an error message in-app and through email explaining why your build did not run. If you decide you want to build more, you can upgrade to a Performance plan if you choose.
 
 On the Performance plan, whenever you run out of credits, you can elect to have your plan renew so builds will never be blocked on a lack of credits in your account.
 
@@ -303,19 +305,15 @@ You can also request invoiced billing by talking to the CircleCI Sales team.
 ### When do I pay?
 {:.no_toc}
 
-Payment times vary based on what plan you are on.
+When you initially purchase a plan you will pay, upfront, for credits and the selected number of user seats. 
+Payment renewals will occur based on what plan you are on:
 
-**Seed Plan**
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- Anytime your team’s balance exceeds $500 from adding new users.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
-- The day you purchase a plan, you’ll get a charge for the credit plan you choose.
-- The end of your billing cycle, you’ll get a charge for any users above \$5.
-- On the second billing cycle, you’ll be charged for the credit plan chosen and
-  (if above 5 users), the previous user count.
-
-**Performance Plan**
-
-- The day you purchase a plan, you’ll be charged a one time charge for the number of credits you purchase.
-- You will be charged a recurring flat fee for 5 users. The following month, you will be charged this flat user fee plus a charge per user over 5 users from the previous billing period. For example, during January you used 7 users, you will be charged for 2 additional users at $15 each on February’s bill.
 
 ### What are the other renewal dates?
 {:.no_toc}
