@@ -476,6 +476,28 @@ For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.gith
 
 To access test metadata for a run from the API, refer to the [test-metadata API documentation]( {{ site.baseurl }}/api/v1-reference/#test-metadata).
 
+## Storing Test Coverage Reports
+
+If you would like to upload code coverage reports, or other non-junit
+test-results, consider using a `store-artifacts` step. In the example below,
+Jest is used with the `--collectCoverage` flag enabled, which can then be uploaded as an artifact.
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.0-browsers
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: "Run Jest and Collect Coverage Reports"
+          command: npm run test:coverage
+      - store_artifacts:
+          path: coverage
+```
+
 ## See Also
 {:.no_toc}
 
