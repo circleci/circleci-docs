@@ -150,7 +150,7 @@ jobs:
       # ...
       - run:
         command: |
-          pipenv run "python manage.py test"
+          pipenv run python manage.py test
 ```
 
 ### Upload And Store Test Results
@@ -217,7 +217,7 @@ jobs: # A basic unit of work in a run
             - "/usr/local/lib/python3.6/site-packages"
       - run:
           command: |
-            pipenv run "python manage.py test"
+            pipenv run python manage.py test
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
