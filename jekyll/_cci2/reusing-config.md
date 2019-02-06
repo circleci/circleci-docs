@@ -95,7 +95,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
-{$ raw %}
+{% raw %}
 ```yaml
 version: 2.1
 # aws-s3 orb
