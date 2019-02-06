@@ -183,5 +183,5 @@ For advanced testing, you may also want to use a shell unit testing framework su
 
 ## See Also
 
-* Refer to [Creating Orbs] (({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
+* Refer to [Creating Orbs]({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
 * Refer to [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) for more detailed information on the CircleCI CLI and how to use the CLI for orb testing.
