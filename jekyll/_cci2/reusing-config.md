@@ -142,7 +142,8 @@ workflows:
 Defining a `build` job:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 orbs:
