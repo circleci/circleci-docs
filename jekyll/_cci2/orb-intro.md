@@ -46,6 +46,8 @@ Available Commands:
   validate    Validate an orb.yml
 ```
 
+**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+
 ## Importing Partner Orbs
 
 Import the following Partner Orbs by using the `orbs` key in your `.circleci.yml/config.yml` file and replacing `<orb reference string>` with one from the table.
@@ -64,7 +66,9 @@ Partner Orb Registry Link | Orb Reference String
 [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`
 [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0`
 [Datree](https://circleci.com/orbs/registry/orb/datree/version-alignment-rule) | `datree: datree/version-alignment-rule@1.0.0`
+[DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0`
 [Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0`
+[Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1`
 [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1`
 [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`
 [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`
@@ -88,3 +92,5 @@ Partner Orb Registry Link | Orb Reference String
 - Refer to the [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+
