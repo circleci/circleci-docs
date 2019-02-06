@@ -38,8 +38,10 @@ The Service machine has many components that need to make network calls, as foll
 SSH into the Services machine and run the following code snippet with your proxy address. If you run in Amazon's EC2 service then you'll need to include `169.254.169.254` EC2 services as shown below.
 
 ```
-1.) echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee  /etc/replicated.conf
-2.) (cat <<'EOF'
+# 1.) instruct replicated to use proxy for pulling down containers
+echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee  /etc/replicated.conf
+# 2.) instruct all CircleCI containers to use proxy for their communications
+(cat <<'EOF'
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
 NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
@@ -47,7 +49,8 @@ JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy
 
 EOF
 ) | sudo tee -a /etc/circle-installation-customizations
-3.) sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui start; sudo service replicated-operator start; sudo service replicated start
+# 3.) Restart replicated to pick up changes
+sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui start; sudo service replicated-operator start; sudo service replicated start
 ```
 
 **Note:** The above is not handled by by our enterprise-setup script and will need to be added to the user data for the services box startup or done manually. 
@@ -82,7 +85,8 @@ If you are using AWS Terraform install you'll have to add the below to your Noma
 ```
 #!/bin/bash
 
-2.) (cat <<'EOF'
+# 1.) Set proxy to be read by any processes
+(cat <<'EOF'
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
 NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
@@ -90,9 +94,9 @@ JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy
 EOF
 ) | sudo tee -a /etc/environment
 
+# 2.) Read the modified environment into current shell
 set -a
 . /etc/environment
-
 
 ```
 
