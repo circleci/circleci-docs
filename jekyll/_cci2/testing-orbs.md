@@ -54,8 +54,7 @@ The following steps illustrate doing basic expansion testing from the CLI:
 1) Assume a simple orb in `src/orb.yml`
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
 
 executors:
@@ -82,8 +81,7 @@ jobs:
 4) Include that orb in `.circleci/config.yml`:
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
 
 orbs:
@@ -99,8 +97,7 @@ workflows:
 After running `circleci config process .circleci/config.yml` the expected result would be:
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
 
 jobs:
@@ -121,8 +118,7 @@ workflows:
 The `config.yml` file should look like the following:
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
 
 orbs:
