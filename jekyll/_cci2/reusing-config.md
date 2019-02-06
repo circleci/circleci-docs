@@ -37,6 +37,8 @@ Commands are declared under the `commands` key of a `config.yml` file. The follo
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -60,6 +62,8 @@ The following example invokes the command `sayhello` and passes it a parameter `
 
 {% raw %}
 ```yaml
+version: 2.1
+
 jobs:
   myjob:
     docker:
@@ -93,7 +97,9 @@ The following is an example of part of an `aws-s3` orb defining a command called
 
 {$ raw %}
 ```yaml
+version: 2.1
 # aws-s3 orb
+
 commands:
   sync:
     description: "A simple encapsulation of doing an s3 sync"
@@ -138,6 +144,7 @@ Defining a `build` job:
 {% raw %}
 ```yaml
 version: 2.1
+
 orbs:
   aws-cli: circleci/aws-cli@0.1.2
   aws-s3: circleci/aws-s3@1.0.0
@@ -177,6 +184,7 @@ In the following example `my-executor` is passed as the single value of the key 
 {% raw %}
 ```yaml
 version: 2.1
+
 executors:
   my-executor:
     docker:
@@ -199,6 +207,8 @@ The following example passes `my-executor` as the value of a `name` key under `e
 
 {% raw %}
 ```yaml
+version: 2.1
+
 jobs:
   my-job:
     executor:
@@ -218,6 +228,7 @@ The following example declares and invokes an executor in two jobs that need to 
 {% raw %}
 ```yaml
 version: 2.1
+
 executors:
   lein_exec: # declares a reusable executor
     docker:
@@ -248,7 +259,9 @@ You can also refer to executors from other orbs. Users of an orb can invoke its 
 
 {% raw %}
 ```yaml
+version: 2.1
 # yaml from foo-orb
+
 executors:
   bar:
     machine: true
@@ -261,7 +274,9 @@ executors:
 
 {% raw %}
 ```yaml
+version: 2.1
 # yaml from baz-orb
+
 executors:
   bar:
     docker:
@@ -273,10 +288,13 @@ You may use either executor from your configuration file with:
 
 {% raw %}
 ```yaml
+version: 2.1
 # config.yml
+
 orbs:
   foo-orb: somenamespace/foo@1
   baz-orb: someothernamespace/baz@3.3.1
+
 jobs:
   some-job:
     executor: foo-orb/bar  # prefixed executor
@@ -297,6 +315,8 @@ When invoking an executor in a `job` any keys in the job itself will override th
 
 {% raw %}
 ```yaml
+version: 2.1
+
 executors:
   python:
     docker:
@@ -318,12 +338,14 @@ jobs:
       TESTS: unit
     working_directory: ~/tests
 ```
-{% raw %}
+{% endraw %}
 
 The above config would resolve to the following:
 
 {% raw %}
 ```yaml
+version: 2.1
+
 jobs:
  build:
    steps: []
@@ -346,6 +368,8 @@ The following example defines a command called `sync`:
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands: # a reusable command with parameters
   sync:
     parameters:
@@ -360,10 +384,12 @@ commands: # a reusable command with parameters
       - run: # a parameterized run step
           name: Deploy to S3
           command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+
 executors: # a reusable executor
   aws:
     docker:
       - image: cibuilds/aws:1.15
+
 jobs: # a job that invokes the `aws` executor and the `sync` command
   deploy2s3:
     executor: aws
@@ -408,6 +434,8 @@ Basic string parameters are described below:
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   copy-markdown:
     parameters:
@@ -429,6 +457,8 @@ Boolean parameters are useful for conditionals:
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -483,6 +513,8 @@ The `enum` parameter may be a list of any values. Use the `enum` parameter type 
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -498,6 +530,8 @@ The following `enum` type declaration is invalid because the default is not decl
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -516,6 +550,7 @@ Use an `executor` parameter type to allow the invoker of a job to decide what ex
 {% raw %}
 ```yaml
 version: 2.1
+
 executors:
   xenial:
     parameters:
@@ -558,6 +593,8 @@ Steps are used when you have a job or command that needs to mix predefined and u
 
 {% raw %}
 ```yaml
+version: 2.1
+
 commands:
   run-tests:
     parameters:
@@ -591,6 +628,7 @@ The above will resolve to the following:
 
 {% raw %}
 ```yaml
+version: 2.1
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
@@ -605,7 +643,8 @@ The environment variable name (``env_var_name``) parameter is a string that must
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -661,6 +700,7 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 {% raw %}
 ```yaml
 version: 2.1
+
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -691,7 +731,9 @@ If a job is declared inside an orb it can use commands in that orb or the global
 
 {% raw %}
 ```yaml
+version: 2.1
 # partial yaml from hello-orb
+
 jobs:
   sayhello:
     parameters:
@@ -703,6 +745,7 @@ jobs:
     steps:
       - say:
           saywhat: "<< parameters.saywhat >>"
+
 commands:
   saywhat:
     parameters:
@@ -719,8 +762,10 @@ commands:
 ```yaml
 # config.yml
 version: 2.1
+
 orbs:
   hello-orb: somenamespace/hello-orb@volatile
+
 workflows:
   build:
     jobs:
@@ -770,6 +815,7 @@ The above would resolve to the following:
 {% raw %}
 ```yaml
 version: 2.1
+
 jobs:
   build:
     steps: []
@@ -830,6 +876,7 @@ A single configuration may invoke a job multiple times. At configuration process
 {% raw %}
 ```yaml
 version: 2.1
+
 workflows:
   build:
     jobs:
@@ -867,6 +914,7 @@ The following example defines pre-steps and post-steps in the `bar` job of the `
 ```yaml
 # config.yml
 version: 2.1
+
 jobs:
   bar:
     machine: true
@@ -876,6 +924,7 @@ jobs:
           command: echo "building"
       - run:
           command: echo "testing"
+
 workflows:
   build:
     jobs:
@@ -915,6 +964,7 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 ```yaml
 # inside config.yml
 version: 2.1
+
 jobs:
   myjob:
     parameters:
