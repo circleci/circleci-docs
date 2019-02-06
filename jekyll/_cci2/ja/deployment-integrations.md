@@ -5,10 +5,10 @@ short-title: "Configuring Deploys"
 ---
 CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
-- TOC {:toc}
+- TOC
+{:toc}
 
 ## Overview
-
 {:.no_toc}
 
 To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file. You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
@@ -71,7 +71,7 @@ To deploy to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ si
 
 3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
 
-4. Install `awscli` in your primary container by following the [AWS CLI documentation (http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
+4. Install `awscli` in your primary container by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
 5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. The example below shows how CircleCI deploys [this documentation site](https://github.com/circleci/circleci-docs) to S3. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
 
@@ -104,11 +104,11 @@ workflows:
               only: master
 ```
 
-For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference (https://docs.aws.amazon.com/cli/latest/reference/).
+For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ### AWS Orb Examples
 
-CircleCI and its partners have developed several different AWS orbs that enable you to quickly deploy AWS applications that can be found in the \[CircleCI Orbs Registry\]((https://circleci.com/orbs/registry/). The examples below illustrate how you can use the AWS S3 and AWS ECR/ECS orbs.
+CircleCI and its partners have developed several different AWS orbs that enable you to quickly deploy AWS applications that can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/). The examples below illustrate how you can use the AWS S3 and AWS ECR/ECS orbs.
 
 #### AWS S3 Orb
 
@@ -178,7 +178,8 @@ This orb enables you to update an existing AWS ECS instance.
               account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
               repo: '${MY_APP_PREFIX}'
               region: '${AWS_REGION}'
-              tag: '${CIRCLE_SHA1}'
+              tag: '${CIRCLE_SHA1}
+      '
           - aws-ecs/deploy-service-update:
               requires:
                 - aws-ecr/build_and_push_image
@@ -229,10 +230,9 @@ workflows:
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
 ### Install the CLI
-
 {:.no_toc}
 
-    - run:
+- run:
         name: Setup CF CLI
         command: |
           curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
@@ -244,7 +244,6 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
     
 
 ### Dark Deployment
-
 {:.no_toc}
 
 This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
@@ -256,18 +255,17 @@ This is the first step in a Blue-Green deployment, pushing the application to no
           cf push --no-start app-name-dark -f manifest.yml -p application.jar -n dark -d example.com
           # Pass CircleCI variables to Cloud Foundry (optional)
           cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
-          cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
+      cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
           cf set-env app-name-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
-          cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
-          cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
-          # Start the application
+      cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
+      cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
+      # Start the application
           cf start app-name-dark
           # Ensure dark route is exclusive to dark app
           cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
     
 
 ### Live Deployment
-
 {:.no_toc}
 
 Until now, the previously pushed "app-name" has not changed. The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
@@ -288,7 +286,6 @@ Until now, the previously pushed "app-name" has not changed. The final step is t
     
 
 ### Manual Approval
-
 {:.no_toc}
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
@@ -418,7 +415,7 @@ If you would like to simplify your Firebase configuration workflow, you may use 
               command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
     
 
-For more detailed information about how you can use the Firebase orb to deploy your application, refer to the \[Firebase Orb Deploy\] (https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+For more detailed information about how you can use the Firebase orb to deploy your application, refer to the [Firebase Orb Deploy](https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Google Cloud
 
@@ -484,7 +481,7 @@ If you would like to simplify your configuration workflows using a CircleCI orb 
                     google-compute-zone: myGoogleComputeZone
     
 
-For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry[(https://circleci.com/orbs/registry/).
+For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Heroku
 
