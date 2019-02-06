@@ -127,7 +127,7 @@ workflows:
 
 Defining a `build` job:
 
-```
+```yaml
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@0.1.2
@@ -240,6 +240,7 @@ executors:
 ```
 
 `baz-orb` could define the `bar` executor too:
+
 ```yaml
 # yaml from baz-orb
 executors:
@@ -297,6 +298,7 @@ jobs:
 ```
 
 The above config would resolve to the following:
+
 ```yaml
 jobs:
  build:
@@ -460,8 +462,7 @@ commands:
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
 {% raw %}
-```
-yaml
+```yaml
 commands:
   list-files:
     parameters:
@@ -478,8 +479,7 @@ commands:
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
 executors:
   xenial:
@@ -522,8 +522,7 @@ workflows:
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
 {% raw %}
-```
-yaml
+```yaml
 commands:
   run-tests:
     parameters:
@@ -541,8 +540,7 @@ commands:
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
 {% raw %}
-```
-yaml
+```yaml
 jobs:
   build:
     machine: true
@@ -557,8 +555,7 @@ jobs:
 The above will resolve to the following:
 
 {% raw %}
-```
-yaml
+```yaml
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
@@ -572,7 +569,7 @@ steps:
 The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
 {% raw %}
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -627,10 +624,8 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
 {% raw %}
-```
-yaml
+```yaml
 version: 2.1
-
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -847,10 +842,9 @@ workflows:
 
 **Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
 
-
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a condition isvmet. 
+Conditional steps allow the definition of steps that only run if a condition is met. 
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
