@@ -9,7 +9,8 @@ order: 55
 ---
 ここでは、デプロイや詳細テストを行う際の Docker イメージのビルド方法と、リモートの Docker コンテナ内のサービスを実行する方法について解説しています。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## はじめに
 
@@ -29,15 +30,14 @@ jobs:
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor *is* a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
 
 ### リモート Docker 環境のスペック
-
 {:.no_toc}
 
 リモート Docker 環境のハードウェアスペックは下記の通りです。
 
-CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB {: class="table table-striped"}
+CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+{: class="table table-striped"}
 
 ### 設定例
-
 {:.no_toc}
 
 `machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
@@ -110,19 +110,18 @@ If your job requires a specific docker version, you can set it as a `version` at
 
 ```yaml
       - setup_remote_docker:
-          version: 17.05.0-ce
+          version: 18.06.0-ce
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `17.03.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 
-Docker をインストールした Git を含む Docker イメージを使いたい時は、`17.05.0-ce-git` を利用してください。 **注：**`version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
+**注：**`version` キーは現在のところ、プライベートクラウドやオンプレミス環境の CircleCI では利用できません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
 ## 分離された環境について
 
 ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 そのため、Docker コンテナはリモート Docker 内で稼働しているコンテナと直接やりとりすることはできません。
 
 ### サービスへのアクセス方法
-
 {:.no_toc}
 
 プライマリコンテナからリモート Docker 内のサービスを開始させたり Ping したりすることは**できません**。また、リモート Docker 内のサービスに対して Ping するようなプライマリコンテナを稼働させることも**できません**。 ただし、同じコンテナを経由する形でリモート Docker 側からサービスに対してコマンドを実行することで、この問題を解決できます。
@@ -148,7 +147,6 @@ Docker をインストールした Git を含む Docker イメージを使いた
 ```
 
 ### フォルダのマウント
-
 {:.no_toc}
 
 ジョブスペースからリモート Docker 内のコンテナに (もしくはその反対でも) フォルダをマウントすることは**できません**。 そのような 2 つの環境間でファイルをやりとりするには、`docker cp` コマンドを使うことができます。 例えば、ソースコード内の設定ファイルを使ってリモート Docker のコンテナを起動するには、下記のように記述します。
@@ -194,7 +192,6 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 以下にある `.circleci/config.yml` のサンプルスニペットも、`bundler-cache` コンテナのデータ格納やバックアップのサンプルとして参考にしてください。
 
 {% raw %}
-
 ```yaml
 # CircleCI キャッシュから bundler-data コンテナを格納する
 - restore_cache:
@@ -229,7 +226,6 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
     paths:
       - ~/bundler-cache
 ```
-
 {% endraw %}
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
