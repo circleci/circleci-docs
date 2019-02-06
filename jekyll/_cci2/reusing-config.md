@@ -182,7 +182,8 @@ An executor definition includes one or more of the following keys:
 In the following example `my-executor` is passed as the single value of the key `executor`. 
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 executors:
@@ -206,7 +207,8 @@ jobs:
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -226,7 +228,8 @@ It is also possible to allow an orb to define the executor used by all of its co
 The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment. 
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 executors:
@@ -258,7 +261,8 @@ jobs:
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 # yaml from foo-orb
 
@@ -273,7 +277,8 @@ executors:
 `baz-orb` could define the `bar` executor too:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 # yaml from baz-orb
 
@@ -287,7 +292,8 @@ executors:
 You may use either executor from your configuration file with:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 # config.yml
 
@@ -314,7 +320,8 @@ When invoking an executor in a `job` any keys in the job itself will override th
 **Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 executors:
@@ -343,7 +350,8 @@ jobs:
 The above config would resolve to the following:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -367,7 +375,8 @@ Parameters are declared by name under a job, command, or executor. The immediate
 The following example defines a command called `sync`:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands: # a reusable command with parameters
@@ -433,7 +442,8 @@ This section describes the types of parameters and their usage. The parameter ty
 Basic string parameters are described below:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands:
@@ -456,7 +466,8 @@ Strings should be quoted if they would otherwise represent another type (such as
 Boolean parameters are useful for conditionals:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands:
@@ -484,7 +495,8 @@ Capitalized and uppercase versions of the above values are also valid.
 The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
 
 {% raw %}
-```yaml
+```
+yaml
 version: "2.1"
 
 jobs:
@@ -512,7 +524,8 @@ workflows:
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands:
@@ -529,7 +542,8 @@ commands:
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands:
@@ -548,7 +562,8 @@ commands:
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 executors:
@@ -592,7 +607,8 @@ workflows:
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 commands:
@@ -612,7 +628,8 @@ commands:
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
 {% raw %}
-```yaml
+```
+yaml
 jobs:
   build:
     machine: true
@@ -627,7 +644,8 @@ jobs:
 The above will resolve to the following:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 steps:
   - run: make deps
@@ -642,7 +660,8 @@ steps:
 The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -698,7 +717,8 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -730,7 +750,8 @@ If a job is declared inside an orb it can use commands in that orb or the global
 **hello-orb**
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 # partial yaml from hello-orb
 
@@ -759,7 +780,8 @@ commands:
 **Config leveraging hello-orb**
 
 {% raw %}
-```yaml
+```
+yaml
 # config.yml
 version: 2.1
 
@@ -785,7 +807,8 @@ Parameters in executors can be of the type `string`, `enum`, or `boolean`. Defau
 {:.no_toc}
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 executors:
@@ -813,7 +836,8 @@ jobs:
 The above would resolve to the following: 
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -832,7 +856,8 @@ jobs:
 Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 jobs:
@@ -874,7 +899,8 @@ A single configuration may invoke a job multiple times. At configuration process
 **Note:** You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow you will need to explicitly name it.
 
 {% raw %}
-```yaml
+```
+yaml
 version: 2.1
 
 workflows:
@@ -911,7 +937,8 @@ Pre and post steps allow you to execute steps in a given job without modifying t
 The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
 
 {% raw %}
-```yaml
+```
+yaml
 # config.yml
 version: 2.1
 
@@ -961,7 +988,8 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 {:.no_toc}
 
 {% raw %}
-```yaml
+```
+yaml
 # inside config.yml
 version: 2.1
 
