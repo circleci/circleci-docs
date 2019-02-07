@@ -9,15 +9,15 @@ order: 20
 ---
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 
-* TOC {:toc}
+* 目次 {:toc}
 
-## Overview
+## 概要
 
 Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
 When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
 
-## Steps
+## 追加手順
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
@@ -110,8 +110,8 @@ If it was not offered, you can specify it via the `-i` command-line argument to 
     $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
     
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
