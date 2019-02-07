@@ -141,7 +141,7 @@ Finally, we can take the built executable and store it as an artifact.
 
 Excellent! You are now setup on CircleCI with a Haskell app.
 
-## その他の参考資料
+## 関連情報
 
 {:.no_toc}
 
