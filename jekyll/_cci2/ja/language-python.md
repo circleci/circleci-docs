@@ -227,6 +227,6 @@ jobs: # A basic unit of work in a run
 
 {% endraw %}
 
-## その他の参考資料
+## 関連情報
 
 - See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.
