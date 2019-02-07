@@ -9,10 +9,10 @@ order: 1
 ---
 This document provides tips and best practices for building your open source project on CircleCI in the following sections:
 
-- TOC
+- 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
 To support the open source community, projects that are public on GitHub or Bitbucket receive three free build containers, for a total of four containers. Multiple build containers allow you to build a single pull request (PR) faster with parallelism, or build multiple PRs at once.
@@ -88,7 +88,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
 - **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
-## See Also
+## その他の参考資料
 {:.no_toc}
 
 Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
