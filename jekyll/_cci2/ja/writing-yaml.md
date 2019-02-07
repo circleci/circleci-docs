@@ -143,7 +143,7 @@ harry_data:
 
 For a more complex example, see [this gist](https://gist.github.com/bowsersenior/979804).
 
-## その他の参考資料
+## 関連情報
 
 While YAML has several other features, the examples above should be enough to get you started with YAML and keep your CircleCI configuration concise. If you are hungry for more knowledge, here are a few ideas.
 
