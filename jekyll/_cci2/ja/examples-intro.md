@@ -18,10 +18,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    # 最初の1行目に指定されたイメージがプライマリコンテナのインスタンスとなります。 ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+    # 2 番目に指定されたイメージがセカンダリコンテナのインスタンスとなります。このインスタンスは、ローカルホスト上のプライマリコンテナのポートを通じて共通ネットワークで動作します。
       - image: mongo:3.4.4-jessie
     steps:
       - checkout
@@ -79,7 +79,7 @@ jobs:
           command: ./gradlew androidDependencies
 ```
 
-{% endraw %}
+{% endraw %}          
 
 ## iOS
 
@@ -98,6 +98,6 @@ jobs:
     
     
 
-## See Also
+## 関連情報
 
 Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
