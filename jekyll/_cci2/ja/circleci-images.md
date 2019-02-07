@@ -9,10 +9,10 @@ order: 20
 ---
 このページでは、CircleCI が提供しているビルド済みイメージの詳細を解説するとともに、言語ごと、サービス (データベース) ごと、タグごとに探せる Docker イメージを紹介しています。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
-## はじめに
-
+## 概要
 {:.no_toc}
 
 CircleCI ではすぐに使える Docker イメージを多数提供しています。 These images are typically extensions of official Docker images and include tools especially useful for CI/CD. [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/) には、ここで紹介しているものを含む全ビルド済みイメージがあります。 GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
@@ -37,7 +37,6 @@ It is also possible to specify all the way down to the specific SHA of the image
 - Docker イメージ ID を使って一定のバージョンにする
 
 ### バージョンや OS を決め打ちするイメージタグの使い方
-
 {:.no_toc}
 
 [イメージタグ](https://docs.docker.com/engine/reference/commandline/tag/#extended-description)を利用することで Docker イメージの役割を決めることができます。
@@ -49,7 +48,6 @@ It is also possible to specify all the way down to the specific SHA of the image
 **注：**タグを指定しない場合、Docker は `latest` タグが付与されているものとして扱います。 `latest` タグが参照するのは安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。
 
 ### イメージを一定のバージョンにする Docker イメージ ID の使い方
-
 {:.no_toc}
 
 全ての Docker イメージには[ユニーク ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier) が割り当てられており、 一定バージョンのイメージを使う際にはこのイメージ ID を使うことができます。
@@ -60,7 +58,6 @@ It is also possible to specify all the way down to the specific SHA of the image
     
 
 #### イメージ ID の調べ方
-
 {:.no_toc}
 
 1. CircleCI にアクセスし、イメージを使った過去のビルドを表示します。
@@ -78,7 +75,6 @@ CircleCI's convenience images fall into two categories: **language** images and 
 **注：**下記で紹介しているイメージは、各言語のアップストリームイメージの最新ビルドを元にしたものです。 これらの最新イメージはアップデートが頻繁にあるため、タグを追加指定して利用することを[おすすめ](#best-practices)します。
 
 ### 言語イメージ
-
 {:.no_toc}
 
 言語イメージは代表的なプログラミング言語向けに用意したビルド済み Docker イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
@@ -100,7 +96,6 @@ CircleCI では下記の言語イメージを提供しています。
 使用している言語がこのなかにないときはカスタムイメージを作成することになります。CircleCI が提供する [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard) も活用してください。
 
 #### 言語イメージのバリエーション
-
 {:.no_toc}
 
 CircleCI maintains several variants for language images. To use these variants, add one of the following suffixes to the end of an image tag.
@@ -114,7 +109,6 @@ CircleCI maintains several variants for language images. To use these variants, 
 参考までに、`circleci/golang:1.9` に Web ブラウザ をインストールしておきたいときは `circleci/golang:1.9-browsers` とします。
 
 ### サービスイメージ
-
 {:.no_toc}
 
 Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
@@ -130,7 +124,6 @@ CircleCI では下記のサービスイメージを提供しています。
 - [Redis](#redis)
 
 #### サービスイメージのバリエーション
-
 {:.no_toc}
 
 CircleCI maintains only one variant for service images. To speed up builds using RAM volume, add the `-ram` suffix to the end of a service image tag.
@@ -177,10 +170,10 @@ The specific version of a particular package that gets installed in a particular
 
 **注：**[言語イメージのバリエーション](#language-image-variants)や[サービスイメージのバリエーション](#service-image-variant)で紹介しているタグのイメージ以外は、CircleCI の管理下に**ありません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じような内容のイメージとは限らないことにご注意ください。
 
-{% assign images = site.data.docker-image-tags | sort %} {% for image in images %}
+{% assign images = site.data.docker-image-tags | sort %}
+{% for image in images %}
 
 ### {{ image[1].name }}
-
 {:.no_toc}
 
 **使い方：**config.yml の `docker:` 配下に次の書式で挿入します
@@ -190,11 +183,14 @@ The specific version of a particular package that gets installed in a particular
 **利用可能なタグ：** <small> (これ以外のタグも <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a> で見つけられます)</small>
 
 <ul class="list-2cols">
-  {% assign tags = image[1].tags | sort %} {% for tag in tags %} {% unless tag contains "-browsers" or tag contains "-node" %} 
-  
-  <li>
+{% assign tags = image[1].tags | sort %}
+{% for tag in tags %}
+	{% unless tag contains "-browsers" or tag contains "-node" %}
+	<li>
     {{ tag }}
-  </li> {% endunless %} {% endfor %}
+  </li>
+	{% endunless %}
+{% endfor %}
 </ul>
 
 <p>Note: Any variants available for this image can be added by appending the variant tag to the tags above.</p>
@@ -203,8 +199,7 @@ The specific version of a particular package that gets installed in a particular
 
 {% endfor %}
 
-## その他の参考資料
-
+## 関連情報
 {:.no_toc}
 
 プライベートリポジトリまたは Amazon EC2 Container Registry (ECR) におけるイメージを使ったビルドの手順について知りたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images/)を参照してください。
