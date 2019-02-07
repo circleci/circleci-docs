@@ -157,7 +157,7 @@ The TESTFILES var will have a different value in each container, based on $CIRCL
 
 {:.no_toc} <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-## その他の参考資料
+## 関連情報
 
 [Using Containers]({{ site.baseurl }}/2.0/containers/)
 
