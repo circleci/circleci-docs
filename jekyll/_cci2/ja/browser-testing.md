@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: ブラウザーのテスト
+title: Browser Testing
 description: CircleCI でのブラウザーのテスト
 category:
   - テスト
 ---
 このドキュメントでは、CircleCI の構成をブラウザーでテストおよびデバッグする一般的な方法について説明します。このドキュメントには以下のセクションがあります。
 
-* TOC
+* 目次
 {:toc}
 
 ## 前準備
@@ -265,6 +265,6 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
-## See Also
+## その他の参考資料
 
 [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
