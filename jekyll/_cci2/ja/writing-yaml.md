@@ -9,9 +9,9 @@ order: 20
 ---
 This document describes the most important features of YAML for use in CircleCI configuration.
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## 概要
 
 {:.no_toc}
 
@@ -143,7 +143,7 @@ harry_data:
 
 For a more complex example, see [this gist](https://gist.github.com/bowsersenior/979804).
 
-## See Also
+## その他の参考資料
 
 While YAML has several other features, the examples above should be enough to get you started with YAML and keep your CircleCI configuration concise. If you are hungry for more knowledge, here are a few ideas.
 
