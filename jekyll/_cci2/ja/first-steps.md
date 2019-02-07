@@ -1,24 +1,24 @@
 ---
 layout: classic-docs
-title: "Sign Up and Try CircleCI"
-short-title: "Sign Up and Try CircleCI"
-description: "First step for using CircleCI"
+title: "CircleCI を始める"
+short-title: "CircleCI を始める"
+description: "CircleCI を使うための最初のステップ"
 categories:
   - getting-started
 order: 2
 ---
-To run your very first CircleCI build on the CircleCI 2.x platform, complete the following steps:
+CircleCI 2.x で初めてビルドを実行するには、次の手順に従ってください。
 
-1. Go to the [Sign Up](https://circleci.com/signup/) page.
+1. [ユーザー登録](https://circleci.jp/signup/)ページにアクセスします。
 
-2. Click one of the Start buttons on the page to begin logging in or to start the process of allowing CircleCI to access your code on GitHub or Bitbucket. To limit CircleCI from accessing your private GitHub repositories, select Public Repos Only from the Start with Github menu when you sign up and on every subsequent login.
+2. アカウント登録ページに表示されるいずれかのボタンをクリックし、ログインまたはお使いの GitHub や Bitbucket への CircleCI のアクセスを許可します。 GitHub のプライベートリポジトリへのアクセスを制限する場合は、アカウント登録時やログイン時に [Github でログイン] ボタンのプルダウンメニューから [公開リポジトリと連携] を選択します。
 
-3. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
+3. GitHub または Bitbucket のユーザー名、パスワード、また必要であれば二要素認証情報を入力し、[ログイン] をクリックします。
 
 4. Click the Authorize Application or equivalent button. The CircleCI Builds Dashboard appears.
 
-5. Use the Project Setup pages of the CircleCI app to start building your project code.
+5. CircleCI の [Set Up Project] ページにアクセスし、プロジェクトを始めます。
 
-## Next Steps
+## 次のステップは？
 
-Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about the basics of Projects, switching Orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your build environment and automates your tests.
+[Hello World]({{ site.baseurl }}/2.0/hello-world/) のページでは、プロジェクトの基本的なビルド方法や Org の切り替え方法、また、ビルド環境の決定やテストの自動化に役立つ [.circleci/config.yml</code>]({{ site.baseurl }}/2.0/configuration-reference/) ファイルについて説明しています。
