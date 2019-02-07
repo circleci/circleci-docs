@@ -22,11 +22,11 @@ The new build processing feature enables use of the new [API endpoint to trigger
 
 **Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
-## Troubleshooting
+## トラブルシューティング
 
 Build processing errors will appear on the Jobs page or the Workflows page. When migrating an existing project to build processing, you may safely go back by disabling the radio button for the build processing feature on your Advanced Settings for your project if jobs or workflows fail the new build processing service.
 
-## Limitations
+## 制限について
 
 CircleCI is committed to achieving backwards compatibility in almost all cases, and most projects that enable build processing will have no effect on existing builds. Let us know if you experience breaking builds that worked before you turned on build processing but broke after you turned it on.
 
@@ -39,6 +39,6 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 2. Tweet @circleci with thoughts
 3. Vote or add to our [Ideas board](https://ideas.circleci.com/)
 
-## See Also
+## 関連情報
 
 Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build) document for more details.
