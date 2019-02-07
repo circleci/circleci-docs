@@ -37,7 +37,7 @@ jobs:
 CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-### 設定例
+### 例
 {:.no_toc}
 
 `machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
@@ -230,7 +230,7 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## その他の参考資料
+## 関連情報
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
