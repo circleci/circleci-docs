@@ -21,7 +21,7 @@ These additional containers are automatically enabled, as long as the project is
 
 **Note:** If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
-## Security
+## セキュリティ
 
 While open source can be a liberating practice, take care not to liberate sensitive information.
 
