@@ -8,16 +8,15 @@ order: 100
 ---
 This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 The Google Cloud SDK is a powerful set of tools that can be used to access Google Cloud Platform (GCP) services like Google Compute Engine and Google Kubernetes Engine. On CircleCI, the Google Cloud SDK is recommended to deploy your application to GCP products.
 
-## Prerequisites
-
+## 前準備
 {:.no_toc}
 
 - A CircleCI 2.0 project.
