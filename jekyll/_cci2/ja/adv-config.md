@@ -89,7 +89,7 @@ jobs:
 jobs:
   build:
     steps:
-      # ... steps for building/testing app ...
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker
 
@@ -103,6 +103,6 @@ jobs:
 
 ```
 
-## See Also
+## 関連情報
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
