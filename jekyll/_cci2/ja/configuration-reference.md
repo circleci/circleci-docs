@@ -19,7 +19,7 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 {:.no_toc}
 
-- TOC {:toc}
+- 目次 {:toc}
 
 * * *
 
@@ -271,7 +271,7 @@ jobs:
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
-**Example**
+**設定例**
 
 ```yaml
 version: 2
@@ -488,7 +488,7 @@ A value of `always` means that the step will run regardless of the exit status o
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-###### Example
+###### 設定例
 
 ```yaml
 steps:
@@ -519,7 +519,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Sequence | A list of steps to execute when the condition is true {: class="table table-striped"}
 
-###### *Example*
+###### *設定例*
 
     version: 2.1
     
@@ -591,9 +591,9 @@ The cache for a specific `key` is immutable and cannot be changed once written.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
-Template | Description \----|\---\---\---- {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built. {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build. {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built. {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo. {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable). {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch. {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`. {: class="table table-striped"}
+テンプレート | 解説 \----|\---\---\---- {% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのブランチ名。 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build. {% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのリビジョン。 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo. {% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 ([定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch. {% raw %}`{{ arch }}`{% endraw %} | OS と CPU の種類。 Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`. {: class="table table-striped"}
 
-During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
+ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。
 
 Template examples: * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key. * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
@@ -603,7 +603,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 </div>
 
-###### *Example*
+###### *設定例*
 
 {% raw %}
 
@@ -656,7 +656,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-###### Example
+###### 設定例
 
 {% raw %}
 
@@ -686,7 +686,7 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-###### Example
+###### 設定例
 
 ```YAML
 - deploy:
@@ -704,7 +704,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-###### Example
+###### 設定例
 
 ```YAML
 - store_artifacts:
@@ -720,7 +720,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 **Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
 
-###### *Example*
+###### *設定例*
 
 Directory structure:
 
@@ -803,7 +803,7 @@ Special step used to attach the workflow's workspace to the current container. T
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- at | Y | String | Directory to attach the workspace to. {: class="table table-striped"}
 
-###### *Example*
+###### *設定例*
 
 ```YAML
 - attach_workspace:
@@ -973,7 +973,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-###### *Example*
+###### *設定例*
 
     workflows:
       version: 2
@@ -1112,7 +1112,7 @@ workflows:
 
 {% endraw %}
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
