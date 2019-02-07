@@ -265,6 +265,6 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
-## その他の参考資料
+## 関連情報
 
 [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
