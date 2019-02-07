@@ -21,7 +21,7 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
 
-### Parallelism
+### 並列処理
 
 If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can [run tests in parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) by spreading them across multiple machines. This requires specifying a parallelism level.
 
