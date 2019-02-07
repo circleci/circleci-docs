@@ -28,7 +28,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 5. **Private Key** には、登録したい SSH 鍵の文字列を貼り付けます
 
-6. **Add SSH Key** ボタンをクリックして完了です
+6. **Add SSH Key** ボタンをクリックします
 
 **注**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。 CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
@@ -50,6 +50,6 @@ jobs:
 
 **注：**` fingerprints ` に指定した 1 つまたは複数のフィンガープリントは、管理画面で登録した SSH 鍵と一致していなければなりません。
 
-## See Also
+## 関連情報
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
