@@ -9,9 +9,9 @@ order: 1
 ---
 This document provides a basic example of importing an [orb]({{ site.baseurl }}/2.0/orb-intro/) and elements of orbs followed by a conceptual overview of orbs design.
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Introduction
+## はじめに
 
 Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
@@ -131,7 +131,7 @@ Before using orbs, you may find it helpful to understand the various design deci
 - One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
 - Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
