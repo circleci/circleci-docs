@@ -170,6 +170,6 @@ Docker にはもともとイメージのキャッシュ機能があり、\[リ�
 
 Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 そのため、ネットワークへの低レベルアクセスや外部ストレージのマウントといった機能が必要な場合は、`docker` ではなく `machine` を使うことも検討してください。
 
-## その他の参考資料
+## 関連情報
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
