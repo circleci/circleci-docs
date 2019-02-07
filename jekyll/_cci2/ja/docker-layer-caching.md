@@ -7,13 +7,15 @@ categories:
   - optimization
 order: 70
 ---
+
 {% include beta-premium-feature.html feature='Docker Layer Caching' %}
 
 This document offers an overview of Docker Layer Caching (DLC), which can reduce Docker image build times on CircleCI.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
+## 概要
 
 Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
@@ -21,8 +23,7 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 
 Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
-### Limitations
-
+### 制限について
 {:.no_toc}
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to *run* your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
@@ -61,7 +62,6 @@ CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50
 **Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.
 
 ### Remote Docker Environment
-
 {:.no_toc}
 
 To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file:
@@ -78,7 +78,6 @@ If you run many parallel jobs for the same project that depend on the same envir
 **Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 
 ### Machine Executor
-
 {:.no_toc}
 
 Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
@@ -93,10 +92,9 @@ machine:
 Let's use the following Dockerfile to illustrate how Docker Layer Caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
 ### Dockerfile
-
 {:.no_toc}
 
-    FROM elixir:1.6.5
+FROM elixir:1.6.5
     
     # make apt non-interactive
     RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
@@ -151,7 +149,6 @@ Let's use the following Dockerfile to illustrate how Docker Layer Caching works.
     
 
 ### Config.yml
-
 {:.no_toc}
 
 In the config.yml snippet below, let's assume the `build_elixir` job is regularly building an image using the above Dockerfile. By adding `docker_layer_caching: true` underneath our `machine` executor key, we ensure that CircleCI will save each Docker image layer as this Elixir image is built.
@@ -187,7 +184,6 @@ However, because our `#install jq` step is new, it and all subsequent steps will
 If we were to change the first step in our example Dockerfile—perhaps we want to pull from a different Elixir base image—then our entire cache for this image would be invalidated, even if every other part of our Dockerfile stayed the same.
 
 ## Video: Overview of Docker Layer Caching
-
 {:.no_toc}
 
 In the video example, the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run takes over two minutes to build the Docker image. If nothing changes in the Dockerfile before the second run, those steps happen instantly, in zero seconds.
