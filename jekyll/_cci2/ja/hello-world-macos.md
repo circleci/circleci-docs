@@ -75,7 +75,7 @@ Since this is a general introduction to building on MacOs, the `config.yml` abov
 
 You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
 
-## Next Steps
+## 次のステップは？
 
 The macOS executor is commonly used for testing and building iOS applications, which can be more complex in their continuous integrations configuration. If you are interested in building and/or testing iOS applications, consider checking out our following docs that further explore this topic:
 
