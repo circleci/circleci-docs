@@ -9,7 +9,8 @@ order: 70
 ---
 このドキュメントでは、アーティファクトの操作方法について説明します。このドキュメントには次のセクションがあります。
 
-* TOC {:toc}
+* 目次
+{:toc}
 
 ## アーティファクトの概要
 
@@ -132,18 +133,17 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 <artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
 ```
 
-Placeholder | Meaning | \---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----| `:your_token` | The personal API token you created above. `:vcs-type` | The version control system (VCS) you are using. Either `github` or `bitbucket`. `:username` | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application. `:project` | The name of the target VCS repository. `:build_num` | The number for the build for which you want to download artifacts. {: class="table table-striped"}
+Placeholder | Meaning | \---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----| `:your_token` | The personal API token you created above. `:vcs-type` | The version control system (VCS) you are using. Either `github` or `bitbucket`. `:username` | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application. `:project` | The name of the target VCS repository. `:build_num` | The number for the build for which you want to download artifacts.
+{: class="table table-striped"}
 
 ### Description of Commands
-
 {:.no_toc}
 
 First, the CIRCLE_TOKEN environment variable is created. Then, the `curl` command fetches all artifact details for a build and pipes them to `grep` to extract the URLs. These URLs are saved to the `artifacts.txt` file. Finally, `xargs` reads the text file, downloading artifacts using `wget`. All artifacts are downloaded to the current directory.
 
 **Note:** In the above example, `xargs` runs four processes to download artifacts in parallel. Adjust the number given to the `-P` flag as needed.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
-[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
