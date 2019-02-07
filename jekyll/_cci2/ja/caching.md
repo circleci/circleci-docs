@@ -9,7 +9,8 @@ order: 50
 ---
 キャッシュは、ジョブを高速化する手段として最も効果的な方法の 1 つです。CircleCI においては、高コストな処理が必要なデータを過去のジョブから再利用することが可能になっています。
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 After an initial job run, future instances of the job will run faster by not redoing work.
 
@@ -18,13 +19,11 @@ After an initial job run, future instances of the job will run faster by not red
 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を読み込むことで、複数のモジュールからなるパッケージであっても、`yarn install` などのコマンドは新たに必要になった依存ファイルのみダウンロードするだけでよくなります。
 
 ## キャッシュ設定の例
-
 {:.no_toc}
 
 Caching keys are simple to configure. The following example updates a cache if it changes by using checksum of `pom.xml` with a cascading fallback:
 
 {% raw %}
-
 ```yaml
     steps:
       - restore_cache:
@@ -32,11 +31,9 @@ Caching keys are simple to configure. The following example updates a cache if i
            - m2-{{ checksum "pom.xml" }}
            - m2- # チェックサムが変わった時はこちらが使われる
 ```
-
 {% endraw %}
 
 ## はじめに
-
 {:.no_toc}
 
 CircleCI 2.0 では依存関係のキャッシュの自動化には対応していません。ビルドの高速化を狙ってキャッシュの積極利用を図ろうとしているときは注意が必要です。 ただし、CicleCI 2.0 ではより優れたキャッシュ活用を手動設定で実現できます。
@@ -47,7 +44,6 @@ CircleCI 2.0 では依存関係のキャッシュの自動化には対応して�
 Docker イメージの未変更レイヤー部分を再利用する有償のキャッシュ機能については、[Docker レイヤーキャッシュの利用]({{ site.baseurl }}/2.0/docker-layer-caching/)をご覧ください。
 
 ## 概要
-
 {:.no_toc}
 
 キャッシュはキーで指定したファイル群の階層構造を保存するものです。 ジョブを高速化するためのデータを保存するのがキャッシュの目的です。ただし、Npm や Gem、Maven といった依存関係管理ツールのパッケージディレクトリをキャッシュするときのように、キャッシュミスやキャッシュを一から作り直す場合のジョブも問題なく実行されます。
@@ -91,7 +87,13 @@ git リポジトリのキャッシュは、あらゆる場面でメリットが�
 
 ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
-`restore_cache` で（{% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %} のように）狭い範囲を指定したときでも、ソースコードのキャッシュはかなり有効に働きます。例えば ([API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build) を用いるなどして) 同一の git リビジョンでビルドを繰り返す場合、もしくは Workflow 内のジョブごとにリポジトリを一度だけ `checkout` する Workflow を使う場合です。
+`restore_cache` で（
+
+{% raw %}
+`source-v1-{{ .Branch }}-{{ .Revision }}`
+{% endraw %}
+
+のように）狭い範囲を指定したときでも、ソースコードのキャッシュはかなり有効に働きます。例えば ([API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build) を用いるなどして) 同一の git リビジョンでビルドを繰り返す場合、もしくは Workflow 内のジョブごとにリポジトリを一度だけ `checkout` する Workflow を使う場合です。
 
 とはいえ、ソースコードのキャッシュの有無によってビルド速度が向上するかどうかは検証した方が良い場合もあります。例えば `restore_cache` するより `git clone` を実行する方が高速な場合も多々あります。
 
@@ -105,7 +107,13 @@ Jobs in one workflow can share caches. Note that this makes it possible to creat
 
 Workflow の実行中は、最後の ジョブ 3 はジョブ 1 もしくはジョブ 2 のどちらかが書き込んだキャッシュを使用します。 ただし、キャッシュは書き換え不可のため、ジョブ 1 とジョブ 2 のどちらかが最初に書き込んだキャッシュを使うことになります。 これは通常期待される動作ではありません。実行時に最初に書き込むのがジョブ 1 になるか、ジョブ 2 になるかがその時々で変わり、一意の結果が得られなくなるためです。 しかしながら、ジョブの依存関係を工夫することで Workflow の結果の一意性を担保することが可能です。ジョブ 1 とジョブ 2 それぞれが異なるキャッシュに書き込み、ジョブ 3 がそのどちらか一方のキャッシュを読み込むようにする、というのが 1 つ。あるいは、ジョブ 1 → ジョブ 2 → ジョブ 3 と、依存関係が 1 対 1 になるように順序を整理する方法もあります。
 
-さらに複雑なケースもあります。{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような可変キーで保存し、`node-cache-` のような部分マッチのキーで復元する場合です。 レースコンディションが発生する可能性はあるものの、そうならない場合もあります。 例えば、後の方で実行されるジョブが、継続実行しているジョブのキャッシュを使うようなケースもあります。
+さらに複雑なケースもあります。
+{% raw %}`node-cache-{{ checksum "package-lock.json" }}
+            `
+
+{% endraw %}
+
+のような可変キーで保存し、`node-cache-` のような部分マッチのキーで復元する場合です。 レースコンディションが発生する可能性はあるものの、そうならない場合もあります。 例えば、後の方で実行されるジョブが、継続実行しているジョブのキャッシュを使うようなケースもあります。
 
 ジョブ間で共有するキャッシュでレースコンディションが発生することもあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなる Workflow を考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使うこととします。 ジョブ 1 がキャッシュを保存していても、ジョブ 2 はそのキャッシュを復元することもあれば、キャッシュがないことを検出することもあります。 ジョブ 2 はさらに直前の Workflow からキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 これを解決するには、ジョブ 1 → ジョブ 2 という関係性の依存 Workflow を作成する方法が挙げられます。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
 
@@ -113,11 +121,8 @@ Workflow の実行中は、最後の ジョブ 3 はジョブ 1 もしくはジ�
 
 CircleCI は、`restore_cache` ステップの keys 内で記述している順番通りにキャッシュを復元しようとします。 キャッシュキーはプロジェクトに名前空間をもち、検索時は文字列の前方一致となります。 最初にマッチしたキーのキャッシュ内容が復元され、 該当するキャッシュが複数ある場合は、一番新しいキャッシュを使用します。
 
-2 つのキーを用いた例は下記の通りです。 
-
-{% raw %}
-
-```yaml
+2 つのキーを用いた例は下記の通りです。
+{% raw %}```yaml
     steps:
       - restore_cache:
           keys:
@@ -129,13 +134,11 @@ CircleCI は、`restore_cache` ステップの keys 内で記述している順�
  
 
 ```
-
 {% endraw %}
 
 keys 内の 2 番目の項目が 1 番目よりも短いのは、その方が現在の状態と生成された最新のキャッシュとの間で差分が生じやすいためです。 npm のような依存関係管理ツールを実行すると、古くなった依存関係を見つけ、更新します。 これは**部分キャッシュリストア**とも呼ばれます。
 
 ### キャッシュのクリア
-
 {:.no_toc}
 
 開発言語や依存関係管理ツールのバージョンアップ時などにキャッシュをクリアしたいときは、先述のサンプルコードにあったような命名規則にしたうえで、`config.yml` に記述したキャッシュキー名を変え、コミットします。
@@ -183,21 +186,85 @@ The path for directories is relative to the `working_directory` of your job. You
 
 いくつかのキャッシュの設定例を下記に挙げてみます。
 
-- {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %}  
-    `package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチも、同じキャッシュキーを生成します
-- {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %}  
-    `package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチは、それごとに異なるキャッシュキーを生成します 
-- {% raw %}`myapp-{{ epoch }}`{% endraw %}  
-    ビルドごとに異なるキャッシュキーを生成します
+-
+{% raw %}`myapp-{{ checksum "package-lock.json" }}`
+
+{% endraw %}
+
+`package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチも、同じキャッシュキーを生成します
+-
+{% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        `
+
+{% endraw %}
+
+`package-lock.json` の内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチは、それごとに異なるキャッシュキーを生成します 
+-
+{% raw %}`myapp-{{ epoch }}`
+
+{% endraw %}
+
+ビルドごとに異なるキャッシュキーを生成します
 
 ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。 CirlceCI のキャッシュ`キー`で利用可能なテンプレートを下記の表にまとめました。
 
-テンプレート | 解説 \----|\---\---\---- {% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのブランチ名。 {% raw %}`{{ .BuildNum }}`{% endraw %} | 実行中のビルドにおける CircleCI のジョブ番号。 {% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルドを実行しているバージョン管理システムのリビジョン。 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 ([定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。 {% raw %}`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイル内容の SHA256 ハッシュを Base64 エンコードしたもの。ファイル内容に変更があるとキャッシュキーも新たに生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 また、`restore_cache` から `save_cache` までの処理でファイル内容が変わらないようにします。そうしないと `restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にキャッシュが保存されることになります。 {% raw %}`{{ epoch }}`{% endraw %} | 協定世界時 (UTC) における 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX 時間や UNIX 時間と同じです。 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください {: class="table table-striped"}
+テンプレート | 解説 \----|\---\---\----
+{% raw %}`{{ .Branch }}`
 
-**注：**キャッシュに対してユニークな識別子を定義する際には、{% raw %}`{{ epoch }}`{% endraw %} のような厳密すぎる値になるテンプレートをむやみに使わないよう注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。 これについては、以降で説明するようにトレードオフの関係にあると言えます。
+{% endraw %}
+
+| 現在ビルドを実行しているバージョン管理システムのブランチ名。
+{% raw %}`{{ .BuildNum }}`
+
+{% endraw %}
+
+
+| 実行中のビルドにおける CircleCI のジョブ番号。
+
+{% raw %}
+
+`{{ .Revision }}`
+
+{% endraw %}
+
+| 現在ビルドを実行しているバージョン管理システムのリビジョン。
+
+{% raw %}
+
+`{{ .Environment.variableName }}`
+
+{% endraw %}
+
+| `variableName`で示される環境変数 ([定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。
+
+{% raw %}
+
+`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイル内容の SHA256 ハッシュを Base64 エンコードしたもの。ファイル内容に変更があるとキャッシュキーも新たに生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 また、`restore_cache` から `save_cache` までの処理でファイル内容が変わらないようにします。そうしないと `restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にキャッシュが保存されることになります。
+
+{% raw %}
+
+`{{ epoch }}`{% endraw %} | 協定世界時 (UTC) における 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX 時間や UNIX 時間と同じです。
+
+{% raw %}
+
+`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください
+{: class="table table-striped"}
+
+**注：**キャッシュに対してユニークな識別子を定義する際には、
+
+{% raw %}
+
+`{{ epoch }}`{% endraw %} のような厳密すぎる値になるテンプレートをむやみに使わないよう注意してください。
+
+{% raw %}
+
+`{{ .Branch }}`{% endraw %} や
+
+{% raw %}
+
+`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。 これについては、以降で説明するようにトレードオフの関係にあると言えます。
 
 ### キャッシュの保存・復元の参考例
-
 {:.no_toc}
 
 下記に、キーとテンプレートを含む `restore_cache` および `save_cache` の使い方がわかる `.circleci/config.yml` ファイルのサンプルコードを例示します。
@@ -264,7 +331,6 @@ The path for directories is relative to the `working_directory` of your job. You
 {% endraw %}
 
 ### 依存関係の部分キャッシュの使い方
-
 {:.no_toc}
 
 依存関係管理ツールによっては、部分的に復元した依存関係ツリー上位へのインストールを正しく行えないものもあります。
@@ -306,7 +372,6 @@ Since caches are immutable, this strategy allows you to regenerate all of your c
 依存関係の部分キャッシュの信頼性については、依存関係管理ツールに左右されます。 下記に、各種依存関係管理ツールにおける部分キャッシュの推奨される使い方とその解説を記載しました。
 
 #### Bundler (Ruby)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能 (条件付き)
@@ -335,7 +400,6 @@ steps:
 {% endraw %}
 
 #### Gradle (Java)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能
@@ -361,7 +425,6 @@ steps:
 {% endraw %}
 
 #### Maven (Java) および Leiningen (Clojure)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能
@@ -389,7 +452,6 @@ steps:
 {% endraw %}
 
 #### npm (Node)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能 (NPM5 以降)
@@ -404,7 +466,7 @@ steps:
       keys:
        # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
         - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-        - node-v1-{{ .Branch }}-
+- node-v1-{{ .Branch }}-
         - node-v1-
   - save_cache:
       paths:
@@ -415,7 +477,6 @@ steps:
 {% endraw %}
 
 #### pip (Python)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能 (要 Pipenv)
@@ -441,7 +502,6 @@ steps:
 {% endraw %}
 
 #### Yarn (Node)
-
 {:.no_toc}
 
 **安全な部分キャッシュリストア**…可能
@@ -466,7 +526,7 @@ steps:
 
 {% endraw %}
 
-## Limitations
+## 制限について
 
 The caches created via the `save_cache` step are stored for up to 30 days.
 
@@ -479,7 +539,6 @@ The caches created via the `save_cache` step are stored for up to 30 days.
 キャッシュ復元のために複数のキーを列挙すると、部分キャッシュのヒットは増加します。 ただし、より広範囲に `restore_cache` の対象が広がることで、さらに多くの混乱を招く危険性もあります。 例えば、他のブランチでまだ Node.js v5 を使っているにもかかわらず、アップグレードしたブランチに Node.js v6 の依存関係がある場合、他のブランチを見る `restore_cache` は、アップグレードしたブランチとは互換性のない依存関係を復元してしまいます。
 
 ### Lock ファイルを使用する
-
 {:.no_toc}
 
 依存関係管理ツールが扱う Lock ファイル (`Gemfile.lock` や `yarn.lock` など) のチェックサムは、キャッシュキーに適しています。
@@ -487,21 +546,18 @@ The caches created via the `save_cache` step are stored for up to 30 days.
 チェックサムの取得方法は、他にも `ls -laR your-deps-dir > deps_checksum` としたうえで、 {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %} で参照するやり方もあります。 例えば Python で多くの固有キャッシュを取得する際には、`requirements.txt` ファイルのチェックサムを利用する以外にも、Python のプロジェクトルートで仮想環境 `venv` を使って依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行する手法が使えます。
 
 ### Using Multiple Caches For Different Language
-
 {:.no_toc}
 
 複数のキャッシュにまたがる形でジョブを分けることにより、キャッシュミスの発生を抑えることも可能です。 異なるキーを用いた複数の `restore_cache` ステップを指定することで、1 つあたりのキャッシュサイズを小さくし、キャッシュミスによるパフォーマンスへの影響を最小限にします。 依存関係管理ツールがそれぞれどのようにファイルを保管しているのか、どのように更新しているか、あるいは依存関係をどのように確認しているのかを把握しているなら、言語 (npm、pip、bundler) ごとにキャッシュを分割することを検討してください。
 
 ### 処理コストの高いステップのキャッシュ
-
 {:.no_toc}
 
 いくつかの言語やフレームワークにおいては、キャッシュした方が望ましい、処理コストの高いステップが存在します。 Scala や Elixir は、コンパイルステップのキャッシュが顕著に影響する言語です。 Rails の開発者も同様に、フロントエンドのアセットをキャッシュすることがパフォーマンスアップに効果的であることを実感するはずです。
 
 なんでもキャッシュするのではなく、コンパイルのような処理コストの高いステップにおいてキャッシュすることを*ぜひ*心がけてください。
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
