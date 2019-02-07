@@ -2,74 +2,78 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "CircleCI 2.0 の最初の一歩"
+description: "CircleCI 2.0 での最初のプロジェクト"
 categories:
   - getting-started
 order: 4
 ---
-This document describes how to get started with a basic build of your Linux, Android, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+このページでは、[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後に CircleCI 2.x で Linux、Android、macOS プロジェクトの基本的なビルドを実行するための方法について解説しています。
 
-## Use the Hello-Build Orb
+## Hello-Build Orb を使う
 
 1. GitHub または Bitbucket のローカルリポジトリのルートディレクトリに `.circleci` ディレクトリを作成します。
 
-2. Add a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file in the `.circleci` directory with the following lines that import the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build).
+2. `.circleci` ディレクトリに以下の内容を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを追加し、[hello-build</code> orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) をインポートします。
 
 ```yaml
+```
 version: 2.1
 
 orbs:
-    hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
+    hello: circleci/hello-build@0.0.7 # circleci/buildpack-deps Docker イメージを使います
 
 workflows:
     "Hello Workflow":
         jobs:
           - hello/hello-build
 ```
+```
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
 
-## Echo Hello World with a `build` Job
+## Echo Hello World を実行する `build` ジョブ
 
-Add a job called `build` that uses the Docker executor to spin up a Node container and runs a simple `echo` command:
+Docker executor を使い Node コンテナをスピンアップし、シンプルな `echo` コマンドを実行する `build` ジョブを追加します。
 
-1. Add following lines to your `.circleci/config.yml` file. For Docker executors, replace `node:4.8.2` with any [Docker image]({{ site.baseurl }}/2.0/circleci-images/) you want: 
+1. 以下の内容を `.circleci/config.yml` ファイルに追加します。 Docker executors は、`node:4.8.2` の部分を希望の [Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)に置き換えます。 
 
 ```yaml
+```
 version: 2
 jobs:
   build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+    docker: # Executor タイプです。他に machine、macOS という実行タイプを指定できます 
+      - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout # プロジェクトのディレクトリにあるコードをチェックアウトします
+      - run: echo "hello world" # 「echo」コマンドを実行します
+```
 ```
 
-**Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file.
+**注**：`macOS` executors では、一部の設定が異なります。 iOS のプロジェクトを立ち上げる方法は、[iOS チュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)にアクセスし、`macOS` の設定例を参考にしてください。
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
 
-CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
+CircleCI はソースコードを取得 (チェックアウト) して "Hello World" と出力し、ジョブページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
 
-**Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+**注：**ファイルの拡張子に `.yaml` を使うと、`No Config Found` エラーが発生します。 ファイルの拡張子で `.yml` を使うことで、このエラーは解消されます。
 
-## Following Projects
+## プロジェクトをフォローする
 
-自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した組織の各プロジェクトについて、手動でフォローとアンフォローもできます。**Add Project** を選び、プロジェクト名の横にある **Follow Project** ボタンもしくは **Unfollow Project** ボタンをクリックしてください。
+自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した Org の各プロジェクトについて、手動でフォローとフォロー解除もできます。[Add Project] を選び、プロジェクト名の横にある [Follow Project] ボタンもしくは [Unfollow Project] ボタンをクリックしてください。
 
-## Org Switching
+## Org の切り替え
 
-In the top left, you will find the Org switcher.
+画面左上に、Org を切り替えるメニューがあります。
 
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の `myOrg` に切り替えます。
+プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `[Add Projects]` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [SWITCH ORGANIZATION] メニューから目的の `myOrg` に切り替えます。
 
 ## 次のステップは？
 
 - CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素についての説明は[コンセプト]({{ site.baseurl }}/2.0/concepts/)ページで確認できます。
 
-- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflow の例については、[Workflow]({{ site.baseurl }}/2.0/workflows) ページを参考にしてください。
+- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflows の例については、[Workflows]({{ site.baseurl }}/2.0/workflows) ページを参考にしてください。
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
+- [CircleCI の設定方法]({{ site.baseurl }}/2.0/configuration-reference/)や [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)のページでは、設定ファイルにおけるキーやビルド済みイメージについて具体的に説明しています。
