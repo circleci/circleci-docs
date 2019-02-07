@@ -7,7 +7,7 @@ description: Differences from Jenkins
 ---
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI in the following sections:
 
-* TOC {:toc}
+* 目次 {:toc}
 
 ## Quick Start
 
