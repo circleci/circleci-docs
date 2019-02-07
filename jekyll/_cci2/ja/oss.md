@@ -88,7 +88,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
 - **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
-## その他の参考資料
+## 関連情報
 {:.no_toc}
 
 Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
