@@ -9,7 +9,8 @@ order: 1
 ---
 A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 ## Add Projects Page
 
@@ -19,7 +20,7 @@ A CircleCI project shares the name of the associated code repository and is visi
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
 
-## Steps
+## 追加手順
 
 Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
 
@@ -64,7 +65,6 @@ Jobs are a collection of steps and each job must declare an executor that is eit
 ![job illustration]({{ site.baseurl }}/assets/img/docs/concepts1.png)
 
 ### Cache
-
 {:.no_toc}
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
@@ -96,8 +96,8 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
-```
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          ```
 
 {% endraw %}
 
@@ -108,7 +108,6 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 ![workflows illustration]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 {% raw %}
-
 ```yaml
 version: 2
 jobs:
@@ -120,7 +119,7 @@ jobs:
       - checkout
       - save_cache: # Caches dependencies with a cache key
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
+      paths:
             - ~/circleci-demo-workflows
 
   build2:
@@ -158,11 +157,9 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 in parallel to save time.
 ```
-
 {% endraw %}
 
 ### Workspaces and Artifacts
-
 {:.no_toc}
 
 Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
@@ -172,7 +169,6 @@ Each workflow has a temporary workspace associated with it. The workspace can be
 ![workflow illustration]({{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
 {% raw %}
-
 ```yaml
 version: 2
 jobs:
@@ -201,18 +197,17 @@ jobs:
           path: /tmp/artifact-1
           destination: artifact-file
 ...
-```
-
+```        
 {% endraw %}
 
 Note the following distinctions between Artifacts, Workspaces, and Caches:
 
-Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\----- Artifacts | Months | Preserve long-term artifacts. | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory. Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs. Caches | Months | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`. {: class="table table-striped"}
+Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\----- Artifacts | Months | Preserve long-term artifacts. | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory. Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs. Caches | Months | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
+{: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
