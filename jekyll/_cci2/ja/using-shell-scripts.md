@@ -93,6 +93,6 @@ set -o errexit
 set -o pipefail
 ```
 
-## その他の参考資料
+## 関連情報
 
 For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
