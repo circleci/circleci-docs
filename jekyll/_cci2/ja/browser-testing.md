@@ -20,7 +20,7 @@ Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-
 
 コードをプッシュしてコミットするごとに、CircleCI は選択したブラウザーに対してすべてのテストを自動的に実行します。 ブラウザーベースのテストは、変更が行われたとき、すべてのデプロイの前、またはとテイクのブランチのたびに実行されるよう構成できます。
 
-## Selenium
+## セレン
 
 ブラウザーテスト用の多くの自動化ツールは、広く採用されているブラウザー駆動標準である Selenium WebDriver を使用しています。
 
