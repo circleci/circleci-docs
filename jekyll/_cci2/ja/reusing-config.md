@@ -9,7 +9,7 @@ order: 1
 ---
 This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
-* TOC {:toc}
+* 目次 {:toc}
 
 ## Getting Started with Config Reuse
 
@@ -766,7 +766,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under thi
 
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 
-### Example
+### 設定例
 
 {:.no_toc}
 
