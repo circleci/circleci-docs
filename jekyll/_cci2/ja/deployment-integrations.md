@@ -5,10 +5,10 @@ short-title: "Configuring Deploys"
 ---
 CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
-- TOC
+- 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
 To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file. You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
