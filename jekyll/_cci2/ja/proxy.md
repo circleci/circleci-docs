@@ -8,9 +8,9 @@ description: "How use an HTTP proxy with my CircleCI installation."
 ---
 This document describes how to configure CircleCI to use an HTTP proxy in the following sections:
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## 概要
 
 If you are setting up your proxy through Amazon, read this before proceeding:
 
