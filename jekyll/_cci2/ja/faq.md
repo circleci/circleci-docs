@@ -9,23 +9,27 @@ order: 1
 ---
 - TOC {:toc}
 
-## General
+## 一般
 
-### Does CircleCI look at my code?
+### CircleCI の従業員にプログラムコードを見られる恐れはありませんか？
 
 {:.no_toc} CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
 
-See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
+詳しくは CircleCI の[セキュリティポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
 
-## Migration
+## 開発環境の移行
 
-### Why migrate from CircleCI 1.0 to 2.0?
+### CircleCI 1.0 から 2.0 へ移行するメリットは？
 
-{:.no_toc} - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. - In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
+{:.no_toc}  
+- CircleCI 2.0 ではコンテナの使い方に関する大幅な仕様変更があり、多数のジョブの高速化と、使用可能なコンテナのアイドル化状態の防止を図っています。  
+- CircleCI 2.0 では 1 つのジョブはステップ内に記述されます。 ジョブ内のそれぞれのステップは自由に編集でき、ビルドの方法を好きなように、柔軟にカスタマイズすることが可能になりました。  
+- CircleCI 2.0 のジョブでは、公開されているあらゆる Docker イメージはもちろん、独自に依存関係を設定しているカスタムイメージも利用できます。
 
 ### Jenkins から CircleCI 2.0 へ移行するには？
 
-{:.no_toc} Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add `steps:` to duplicate your project exactly as it is in Jenkins, for example:
+{:.no_toc}  
+[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/) を例を挙げると、下記のように Jenkins の `steps` に記述している内容をそのまま `steps:` にコピー＆ペーストすることになります。
 
 ```yaml
     steps:
@@ -36,33 +40,36 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
             echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
 ```
 
-Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
+Jenkins と CircleCI の仕組みの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ### CircleCI 2.0 では 1.0 にあった inference コマンドを実行してくれますか？
 
-{:.no_toc} CircleCI 2.0 does not infer from your project and is moving toward a model of smart defaults with a configuration builder interface to assist with configuring all jobs in the `config.yml` file.
+{:.no_toc}  
+CircleCI 2.0 はプロジェクトの内容から推測して変換するようなことはしません。あらかじめ用意された定型の `config.yml` ファイルから選択できるスマートデフォルト型のインターフェースを利用する方向で進めています。
 
 ### CircleCI 2.0 は元となる OS イメージを新たに作成しなくても使えますか？
 
 {:.no_toc} Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
 
-The `circleci/build-image:ubuntu-14.04-XL-922-9410082` image has the same content as the Ubuntu Trusty 14.04 image our web app uses. Just know that the image is fairly large (around 17.5 GB uncompressed), so it’s less ideal for local testing.
+たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、Trusty 版の Ubuntu 14.04 と同等の内容になっています。 容量はかなり大きく（非圧縮時 17.5GB 程度）、ローカル環境でテストするのにはあまり向いていないかもしれません。
 
-The image defaults to running actions as the `ubuntu` user and is designed to work with network services provided by Docker Compose.
+このイメージではデフォルトで `ubuntu` ユーザーとして実行され、Docker Compose によって提供されるネットワークサービスを稼働させる用途に適しています。
 
-Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/) included in the image.
+詳しくは、イメージに含まれている[言語やツールの一覧]({{site.baseurl}}/1.0/build-image-ubuntu-14.04-XL-922-9410082/)をご覧ください。
 
-## Hosting
+## ホスティング
 
 ### CircleCI 2.0 はオンプレミスでの利用も可能ですか？
 
-{:.no_toc} Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for details and links to installation instructions.
+{:.no_toc}  
+可能です。CircleCI 2.0 はオンプレミス環境を必要とされるエンタープライズにもご利用いただけます。詳しいインストール手順については「[管理者向け概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
 
 ### CircleCI のホスティングの種類は？
 
-{:.no_toc} - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
+{:.no_toc}  
+- **クラウド型：**CircleCI がサーバーの初期設定、インフラ、セキュリティを管理し、サービスのメンテナンスを行います。 新機能や自動アップグレードが即座に反映され、システムの内部的な管理負担が軽減されます。
 
-- **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
+- **オンプレミス型：**AWS などと同じようにユーザーが CircleCI のインストールと管理を行います。ファイアウォール環境におけるサーバーの初期設定とメンテナンスも、ユーザー自身がデータセンターのポリシーにしたがって実施します。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限があります。
 
 ### どうして CircleCI Enterprise という名称をやめたのですか？
 
@@ -70,33 +77,38 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 
 そのため、クラウドサービス経由で使えるもの、ファイアウォール環境に導入するもの、あるいはそのハイブリッドで活用するもの、というように、ニーズに応じて利用可能な CircleCI という 1 つの製品としました。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Why aren't my jobs running when I push commits?
+### コミットをプッシュしてもジョブが実行されない理由は？
 
-{:.no_toc} In the CircleCI application, check the Workflows tab for error messages. More often than not, the error is because of formatting errors in your `config.yml` file. See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
+{:.no_toc}  
+CircleCI の Workflows タブでエラーメッセージを確認してみてください。 たいていの場合は `config.yml` ファイル内での文法エラーが原因です。 詳しくは「[YAML の書き方]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご確認ください。
 
-After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+`config.yml` の文法エラーをチェックして、それでもなお解決しないときは「[ナレッジベース](https://support.circleci.com/hc/ja)」で検索してみてください。
 
-### What is the difference between a usage queue and a run queue?
+### 「usage キュー」と「run キュー」の違いはなんですか？
 
-{:.no_toc} A **usage queue** forms when an organization lacks the containers to run a build. The number of available containers is determined by the plan chosen when setting up a project on CircleCI. If your builds are queuing often, you can add more containers by changing your plan.
+{:.no_toc}  
+**usage キュー**は、1 つの組織においてビルドを実行するためのコンテナが不足しているときに使われるものです。 使用可能なコンテナの数は、CircleCI でプロジェクトを設定したときに選んだプランによって決まります。 ビルドがキューに入りがちな場合は、プランを変更して使用可能なコンテナ数を増やすことをおすすめします。
 
 A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
 
-In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
+つまり、**usage キュー** が発生するときは[コンテナの数を増やす](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing)ことで処理時間を短縮できますが、**run キュー**による待ち時間は避けようがないということになります（もちろん CircleCI では可能な限りそうならないよう務めます）。
 
-### Why can't I find my project on the Add Project page?
+### 「Add Project」ページにプロジェクトが見つからないのはなぜですか？
 
-{:.no_toc} If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`. If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
+{:.no_toc}  
+ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の Org である `myOrg` に切り替えます。
 
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 
-{:.no_toc} There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased.
+{:.no_toc}  
+CircleCI では、基本的には 1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI Japanese Support Center](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
 ### How do Docker image names work? Where do they come from?
 
-{:.no_toc} CircleCI 2.0 currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub](https://hub.docker.com). For [official images](https://hub.docker.com/explore/), you can pull by simply specifying the name of the image and a tag:
+{:.no_toc}  
+CircleCI 2.0 では現在のところ [Docker Hub](https://hub.docker.com) 上の Docker イメージのプル（と Docker Engine のプッシュ）にのみ対応しています。 これら[公式の Docker イメージ](https://hub.docker.com/explore/)に対してできるのは、単純に下記のような名前やタグを指定してプルすることです。
 
     ```
     golang:1.7.1-jessie
@@ -104,24 +116,26 @@ In other words, you can reduce time spent in a **usage queue** by [purchasing mo
     ```
     
 
-For public images on Docker Hub, you can pull the image by prefixing the account or team username:
+Docker Hub のパブリックイメージについては、下記のようにアカウント名やユーザー名を付加した形でプルすることも可能です。
 
     ```
     myUsername/couchdb:1.6.1
     ```
     
 
-### What is the best practice for specifying image versions?
+### Docker イメージのバージョンを指定するときのベストな方法は？
 
-{:.no_toc} It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/executor-types/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document.
+{:.no_toc}  
+Docker イメージを指定する際に、`latest` タグを付け**ない**のが正しい方法です。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、たとえば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
 
-### How can I set the timezone in Docker images?
+### Docker イメージでタイムゾーンを設定する方法は？
 
 {:.no_toc} You can set the timezone in Docker images with the `TZ` environment variable. In your `.circleci/config.yml`, it would look like:
 
-A sample `.circleci/config.yml` with a defined `TZ` variable would look like this:
+環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
 ```yaml
+```
 version: 2
 jobs:
   build:
@@ -134,100 +148,120 @@ jobs:
     environment:
       TZ: "America/Los_Angeles"
 ```
+```
 
-In this example, the timezone is set for both the primary image and an additional mySQL image.
+この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
-A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+利用可能なタイムゾーンの一覧は [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) で確認できます。
 
 ## Workflows
 
-### Can I use the API with Workflows?
+### Workflows のなかで API は使えますか？
 
-{:.no_toc} Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
+{:.no_toc}  
+使えます。利用方法や API エンドポイントの URL については「[ビルド処理の有効化]({{ site.baseurl }}/ja/2.0/build-processing/)」をご覧ください。
 
-### Can I use the Auto-cancel feature with Workflows?
+### Workflows でビルドの「自動キャンセル」はできますか？
 
-{:.no_toc} Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
+{:.no_toc}  
+可能です。「[ビルドのスキップ・キャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)」で設定手順をご確認ください。
 
-### Can I use `store_test_results` with Workflows?
+### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 
-{:.no_toc} You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+{:.no_toc}  
+テスト結果のデータを「Test Summary」というセクションに記録するのに、`store_test_results` が使えます。また、データを[時系列順に分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timings-data)する際にも使えます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
 
-### Can I use Workflows with CircleCI 1.0?
+### CircleCI 1.0 で Workflows を使うことはできますか？
 
-{:.no_toc} This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
+{:.no_toc}  
+Workflows は CircleCI 2.0 固有の機能です。Workflows を利用するには CircleCI 2.0 でビルドを実行する必要があります。
 
-### Can I use Workflows with the Installable CircleCI?
+### オンプレミス環境にインストールした CircleCI でも Workflows は使えますか？
 
-{:.no_toc} Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
+{:.no_toc}  
+もちろん使えます。Workflows は CircleCI 2.0 の 1 機能としてエンタープライズ向けのオンプレミス環境でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向け概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
 
-### How many jobs can I run at one time?
+### 同時に実行できるジョブの数はいくつですか？
 
-{:.no_toc} The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run. Using Workflow config you can run multiple jobs at once or sequentially. You can fan-out (run multiple jobs at once) or fan-in (wait for all the jobs to complete before executing the dependent job).
+{:.no_toc}  
+契約しているプランにおける利用可能なコンテナ数が、同時に実行可能なジョブの数を決めることになります。 仮に 10 個の Workflows ジョブが実行されようとしていて、プラン上は 5 つのコンテナしか使えない場合は、実行されるのは一度に 5 つのジョブまでです。 Workflow の設定を行うことで、複数のジョブを同時もしくは連続的に実行できます。 ファンアウト（複数のジョブを同時実行する）、あるいはファンイン（その前の独立したジョブが完了するまで以降の全ジョブを待機させる）が可能です。
 
-### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
+### 同一の Workflow 内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 
-{:.no_toc} Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker) document.
+{:.no_toc}  
+すでにサポートしています。 「config.yml の設定例」内の[複数の実行環境 (macOS ＋ Docker) を利用する設定例]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker)を参照してください。
 
-### Is it possible to split the `config.yml` into different files?
+### `config.yml` ファイルの内容を複数ファイルに分割することはできますか？
 
-{:.no_toc} Splitting `config.yml` into multiple files is not yet supported.
+{:.no_toc}  
+`config.yml` の内容を複数のファイルに分割する機能は今のところ提供していません。
 
-### Can I build only the jobs that changed?
+### 変更のあった単一のジョブのみをビルドできますか？
 
-{:.no_toc} No.
+{:.no_toc}  
+できません。
 
-### Can I build fork PR’s using Workflows?
+### Workflows でフォークするプルリクエストをビルドすることは可能ですか？
 
-{:.no_toc} Yes!
+{:.no_toc}  
+可能です！
 
-### Can workflows be scheduled to run at a specific time of day?
+### Workflows を指定した日時にスケジュール実行することは可能ですか？
 
-{:.no_toc} Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an installable CircleCI release.
+{:.no_toc}  
+CircleCI がホスティングしているクラウド環境なら可能です。 たとえば午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。 今後はオンプレミス環境の CircleCI でも Workflows のスケジュール実行が可能になるよう計画しています。
 
-### What time zone is used for schedules?
+### スケジュール実行の際に使われるタイムゾーンは？
 
-{:.no_toc} Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
+{:.no_toc}  
+スケジュール実行におけるタイムゾーンは UTC 協定世界時に合わせられます。
 
-### Why didn’t my scheduled build run?
+### ビルドのスケジュール実行が失敗する理由は？
 
-{:.no_toc} You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch.
+{:.no_toc}  
+スケジュール実行する Workflow のブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュしてください。 `master` ブランチにおけるプッシュは、`master` ブランチに対する Workflow しかスケジュールされません。
 
-### Can I schedule multiple workflows?
+### 複数の Workflows をスケジュール実行できますか？
 
-{:.no_toc} Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule.
+{:.no_toc}  
+可能です。`trigger:` キーのなかで `schedule` が設定された Workflow は、どれも指定されたスケジュールで実行されます。
 
-### Are scheduled workflows guaranteed to run at precisely the time scheduled?
+### スケジュールされた Workflows は、指定された時間通り正確に実行されますか？
 
 {:.no_toc} CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
-## Billing
+## 料金・支払
 
-### How do I upgrade my plan with more containers to prevent queuing?
+### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
 
-{:.no_toc} * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
+{:.no_toc}  
+* Linux プランの変更：CircleCI で [SETTINGS] → [Plan Overview] 画面を表示し、[Add Containers] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
-- macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+- macOS プランの変更：CircleCI で [SETTINGS] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
 
-### Is there a way to share plans across organizations and have them billed centrally?
+### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 
-{:.no_toc} Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
+{:.no_toc}  
+可能です。CircleCI で [SETTINGS] → [Share & Transfer] → [Share Plan] ページと進み、プランを共有したい Org を選択してください。
 
-### Can I set up billing for an organization, without binding it to my personal account?
+### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
 
-{:.no_toc} Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+{:.no_toc}  
+可能です。請求は Org にひもづけられます。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
 
-### What is the definition of a container in the context of billing?
+### 課金におけるコンテナの定義は？
 
-{:.no_toc} A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+{:.no_toc}  
+料金を支払って利用できるコンテナ 1 個は、2 つの CPU と 4GB のメモリを搭載するマシンです。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
 
-## Architecture
+## 稼働環境
 
-### Can I use IPv6 in my tests?
+### テスト時に IPv6 は利用できますか？
 
-{:.no_toc} You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+{:.no_toc}  
+IPv6 によるローカル通信のテストでは [machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) が活用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
+machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
 You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
 
@@ -250,18 +284,19 @@ ipv6_tests:
 ```
 ```
 
-Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
+Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
-### What operating systems does CircleCI 2.0 support?
+### CircleCI 2.0 がサポートしている OS は？
 
 {:.no_toc} - **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
+- **Android：**詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
 
-- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
+- **iOS：**「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
 
-- **Windows:** We do not yet support building and testing Windows applications.
+- **Windows：**Windows アプリケーションのビルドとテストは現在サポートしていません。
 
-### Which CPU architectures does CircleCI support?
+### CircleCI がサポートしている CPU アーキテクチャは？
 
-{:.no_toc} `amd64` is the only supported CPU architecture.
+{:.no_toc}  
+サポートしている CPU アーキテクチャは `amd64` のみとなります。
