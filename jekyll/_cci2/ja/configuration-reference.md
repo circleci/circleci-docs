@@ -52,7 +52,7 @@ A command definition defines a sequence of steps as a map to be executed in a jo
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- steps | Y | Sequence | A sequence of steps run inside the calling job of the command. parameters | N | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details. description | N | String | A string that describes the purpose of the command. {: class="table table-striped"}
 
-Example:
+例
 
 ```yaml
 commands:
@@ -72,7 +72,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker) resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine) macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos) shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) working_directory | N | String | In which directory to run the steps. environment | N | Map | A map of environment variable names and values. {: class="table table-striped"}
 
-Example:
+例
 
 ```yaml
 version: 2.1
@@ -118,7 +118,7 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 
 `working_directory` will be created automatically if it doesn't exist.
 
-Example:
+例
 
 ```yaml
 jobs:
@@ -165,7 +165,7 @@ The `environment` settings apply to all commands run in this executor, not just 
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
-Example:
+例
 
 ```yaml
 jobs:
@@ -229,7 +229,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 As a shorthand, you can set the `machine` key to `true`.
 
-Example:
+例
 
 ```YAML
 jobs:
@@ -271,7 +271,7 @@ jobs:
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
-**設定例**
+**例**
 
 ```yaml
 version: 2
@@ -298,7 +298,7 @@ jobs:
       xcode: "9.0"
 ```
 
-#### **`branches`**
+#### **`ブランチ`**
 
 Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
@@ -386,7 +386,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 Each built-in step is described in detail below.
 
-##### **`run`**
+##### **`走らせる`**
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
@@ -488,7 +488,7 @@ A value of `always` means that the step will run regardless of the exit status o
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-###### 設定例
+###### 例
 
 ```yaml
 steps:
@@ -519,7 +519,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Sequence | A list of steps to execute when the condition is true {: class="table table-striped"}
 
-###### *設定例*
+###### *例*
 
     version: 2.1
     
@@ -603,7 +603,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 </div>
 
-###### *設定例*
+###### *例*
 
 {% raw %}
 
@@ -656,7 +656,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-###### 設定例
+###### 例
 
 {% raw %}
 
@@ -686,7 +686,7 @@ Special step for deploying artifacts.
 
 In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
-###### 設定例
+###### 例
 
 ```YAML
 - deploy:
@@ -704,7 +704,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-###### 設定例
+###### 例
 
 ```YAML
 - store_artifacts:
@@ -720,7 +720,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 **Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
 
-###### *設定例*
+###### *例*
 
 Directory structure:
 
@@ -803,7 +803,7 @@ Special step used to attach the workflow's workspace to the current container. T
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- at | Y | String | Directory to attach the workspace to. {: class="table table-striped"}
 
-###### *設定例*
+###### *例*
 
 ```YAML
 - attach_workspace:
@@ -886,7 +886,7 @@ Filters can have the key `branches`.
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- filters | Y | Map | A map defining rules for execution on specific branches {: class="table table-striped"}
 
-###### **`branches`**
+###### **`ブランチ`**
 
 {:.no_toc}
 
@@ -945,7 +945,7 @@ Filters can have the key `branches` or `tags`. **Note** Workflows will ignore jo
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- filters | N | Map | A map defining rules for execution on specific branches {: class="table table-striped"}
 
-###### **`branches`**
+###### **`ブランチ`**
 
 {:.no_toc} Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -973,7 +973,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-###### *設定例*
+###### *例*
 
     workflows:
       version: 2
@@ -1112,7 +1112,7 @@ workflows:
 
 {% endraw %}
 
-## その他の参考資料
+## 関連情報
 
 {:.no_toc}
 
