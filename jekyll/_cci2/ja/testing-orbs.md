@@ -9,10 +9,10 @@ order: 1
 ---
 This page describes various testing methodologies you can test use to test orbs.
 
-* TOC
+* 目次
 {:toc}
 
-## Introduction
+## はじめに
 
 CircleCI orbs are packages of configuration that you can use in your configurations to simplify your workflows and quickly and easily deploy application and orbs in your workflow. When creating orbs for your workflow, you will want to perform testing to ensure your orb meets your specific needs before deploying and publishing the orb.
 
@@ -29,7 +29,7 @@ The sections below provide details on each of these techniques for each level of
 
 To test whether an orb is valid YAML and is well-formed according to the schema, use `circleci orb validate` with the CircleCI CLI.
 
-#### Example
+#### 設定例
 
 Given an orb with source at `./src/orb.yml` you can run `circleci orb validate ./src/orb.yml` to receive feedback on whether the orb is valid and will pass through config processing. If there is an error, you will receive the first schema validation error encountered. Alternatively, you can pass STDIN rather than a file path.
 
@@ -181,7 +181,7 @@ In all cases, CircleCI recommends that you make use of the CircleCI CLI to valid
 
 For advanced testing, you may also want to use a shell unit testing framework such as BATS.
 
-## See Also
+## その他の参考資料
 
 * Refer to [Creating Orbs]({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
 * Refer to [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) for more detailed information on the CircleCI CLI and how to use the CLI for orb testing.
