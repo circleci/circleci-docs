@@ -7,7 +7,7 @@ categories:
   - getting-started
 order: 1
 ---
-## Introduction
+## はじめに
 
 Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/).
 
@@ -75,7 +75,7 @@ The final step in the orb publishing process is for you to simply publish your o
 
 For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
 
-## Overview
+## 概要
 
 This following sections of this document describe in more detail:
 
@@ -315,7 +315,7 @@ Orbs may be authored inline in your config.yml file or authored separately and t
 
 [WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
 
-### Prerequisites
+### 前準備
 
 Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms of Service and turn on orb publishing for your organization.
 
