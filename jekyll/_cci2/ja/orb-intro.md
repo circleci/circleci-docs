@@ -62,7 +62,7 @@ Partner Orb Registry Link | Orb Reference String \---\---\---\---|\---\---\-----
 
 **Note:** As a prerequisite, you must enable use of 3rd-party orbs on the Settings > Security page for your org.
 
-## その他の参考資料
+## 関連情報
 
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
