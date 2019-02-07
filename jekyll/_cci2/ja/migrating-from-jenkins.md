@@ -90,7 +90,7 @@ CircleCI runs all Linux and Android builds in dedicated containers, which are de
 
 If you run builds on your own hardware with [CircleCI](https://circleci.com/enterprise/), running all builds in containers allows you to heavily utilize the hardware available to run builds.
 
-## Parallelism
+## 並列処理
 
 It is possible to run multiple tests in parallel on a Jenkins build using techniques like multithreading, but this can cause subtle issues related to shared resources like databases and filesystems.
 
