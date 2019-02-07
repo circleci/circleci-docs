@@ -131,7 +131,7 @@ Before using orbs, you may find it helpful to understand the various design deci
 - One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
 - Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
-## その他の参考資料
+## 関連情報
 
 {:.no_toc}
 
