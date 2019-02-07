@@ -66,7 +66,7 @@ Using `docker` combined with `setup_remote_docker` provides a remote engine simi
 
 This combination is required if you want to build docker images for deployment.
 
-## その他の参考資料
+## 関連情報
 
 {:.no_toc}
 
