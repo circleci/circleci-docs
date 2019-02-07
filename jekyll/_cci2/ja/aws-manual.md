@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Amazon Webサービスに手動でCircleCI 2.0をインストールする"
 category:
-  - 管理
+  - administration
 order: 11
 hide: true
 published: false
@@ -10,7 +10,8 @@ description: "Amazon Webサービス(AWS)に手動でCircleCIをインストー�
 ---
 このドキュメントでは、Amazon Webサービス(AWS)に手動でCircleCI 2.0をインストールする詳細手順について説明します。このドキュメントには以下のセクションがあります。
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 CircleCI Enterpriseがインストールされていれば、現在のインストールでCircleCI 2.0の機能にアクセスでき、現在の契約およびサポートレベル内での制限はありません。 アップグレードの方法については、CircleCIアカウント担当者にお問い合わせください。
 
@@ -42,7 +43,8 @@ AWS上の非公開サブネットをCircleCIで使用するには、次の追加
 
 CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CPUオーバーヘッドを使用するM3、C3、R3マシンでサポートされるコンテナの数と、ビルドの同時実行数の一覧を、次の表に示します。
 
-タイプ | サポートされるコンテナ数 | モデル | 注 \----|\---\---\---\---\---\---\-----|\---\----|\---\--- M3 | 最大3 | `m3.2xlarge` | 最大のM3インスタンス C3 | 最大6 | `c3.4xlarge` | メモリ割り当て制限あり C3 | 最大14 | `c3.8xlarge` | メモリ割り当て制限あり R3 | 最大3 | `r3.2slarge` | 大容量メモリ、CPU制限あり R3 | 最大7 | `r3.4xlarge` | 大容量メモリ、CPU制限あり R3 | 最大15 | `r3.8xlarge` | 大容量メモリ、CPU制限あり {: class="table table-striped"}
+タイプ | サポートされるコンテナ数 | モデル | 注 \----|\---\---\---\---\---\---\-----|\---\----|\---\--- M3 | 最大3 | `m3.2xlarge` | 最大のM3インスタンス C3 | 最大6 | `c3.4xlarge` | メモリ割り当て制限あり C3 | 最大14 | `c3.8xlarge` | メモリ割り当て制限あり R3 | 最大3 | `r3.2slarge` | 大容量メモリ、CPU制限あり R3 | 最大7 | `r3.4xlarge` | 大容量メモリ、CPU制限あり R3 | 最大15 | `r3.8xlarge` | 大容量メモリ、CPU制限あり
+{: class="table table-striped"}
 
 メモリを大量に使用するビルド、または各コンテナのデフォルトメモリ割り当てを増やすことを計画している場合は、R3インスタンスの選択が適切です。 周囲のノイズが多い、またはリソースの競合がある場合は、R3ファミリの追加メモリによって、デフォルトのコンテナ割り当てを変更せずビルドを高速化できます。
 
@@ -131,11 +133,14 @@ CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CP
 
 7. EC2セキュリティグループに、次のルールを構成します。
     
-    | プロトコル | ポートの範囲 | ソース | | \---\----- | \---\---\---- | \---\---- | | TCP | 22 | 0.0.0.0 | | TCP | 2376 | 0.0.0.0 | | TCP | 32768-61000| 0.0.0.0 | {: class="table table-striped"}
+    | プロトコル | ポートの範囲 | ソース | | \---\----- | \---\---\---- | \---\---- | | TCP | 22 | 0.0.0.0 | | TCP | 2376 | 0.0.0.0 | | TCP | 32768-61000| 0.0.0.0 |
+     {: class="table table-striped"}
 
 8. `m4.xlarge`または`m4.4xlarge`を使用して2.0 Buildersクラスタをインストールするには、適切なAWS領域において、各ビルダについて次の公開CircleCI AMIのいずれかを開始します(開始する数は、希望する同時ユーザー数によって異なります)。 {#builder}**注: **CircleCIは、スポットインスタンスをBuilderコンポーネントとして使用することを考慮し、ビルドのコンテナごとにデフォルトで4GBを割り当てます。
     
-    領域 | AMI \---\---\---\---\----- |\---\---\---\---- ap-northeast-1 | ami-eeffcd89 ap-northeast-2 | ami-8eec31e0 ap-southeast-1 | ami-5823a63b ap-southeast-2 | ami-7c12181f eu-central-1 | ami-0f32ec60 eu-west-1 | ami-821a14e4 sa-east-1 | ami-3a026d56 us-east-1 | ami-7d71046b us-east-2 | ami-eec5e28b us-west-1 | ami-45c8ee25 us-west-2 | ami-18492c78 {: class="table table-striped"}
+    領域 | AMI \---\---\---\---\----- |\---\---\---\---- ap-northeast-1 | ami-eeffcd89 ap-northeast-2 | ami-8eec31e0 ap-southeast-1 | ami-5823a63b ap-southeast-2 | ami-7c12181f eu-central-1 | ami-0f32ec60 eu-west-1 | ami-821a14e4 sa-east-1 | ami-3a026d56 us-east-1 | ami-7d71046b us-east-2 | ami-eec5e28b us-west-1 | ami-45c8ee25 us-west-2 | ami-18492c78
+     {: class="table table-striped"}
+
 
 9. Builderのインスタンスを、次の属性を持つセキュリティグループに配置します。
 
