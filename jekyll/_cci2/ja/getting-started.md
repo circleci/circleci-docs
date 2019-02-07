@@ -9,13 +9,13 @@ order: 41
 ---
 このドキュメントでは、CircleCI 2.0 で成功 (グリーン) ビルドを行うための詳しい手順を説明します。
 
-* 目次 {:toc}
+* 目次
+{:toc}
 
 ## ビルドにあたっての前提条件
-
 {:.no_toc}
 
-* Some basic knowledge of Git and an existing GitHub.com account or the ability to create one. This procedure uses a new GitHub repository, but CircleCI also supports the use of Bitbucket.
+* Git および既存の GitHub.com アカウント、またはアカウントの作成についての基本的な知識。 この手順では新しい GitHub リポジトリを使用しますが、CircleCI では Bitbucket の使用もサポートしています。
 * ターミナルや `bash` についての基本的な知識。またコマンドラインの使用経験があれば役に立ちます。
 
 ## リポジトリの作成
@@ -35,6 +35,7 @@ CircleCI は、テスト環境の構築方法や実行するテスト内容の�
 2. 単純な `config.yml` から始めたいときは、下記の内容を GitHub の編集画面にコピーしてください。
 
 ```yml
+```
 version: 2
 jobs:
   build:
@@ -43,6 +44,7 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
+```
 ```
 
 1. コメントを入力してから、[Commit New File] ボタンをクリックしてファイルをコミットします。![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
@@ -61,7 +63,7 @@ jobs:
 
 ## CircleCI での初めてのビルド
 
-You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard to investigate the following parts of the run:
+ビルドが開始され、自動的に正しく実行されるはずです。 実行結果を確認します。 CircleCI ダッシュボードに表示される緑色の [SUCCESS] ボタンをクリックすると、実行の次の部分を調べることができます。
 
 1. **環境のスピンアップ：** CircleCI は、`circleci/ruby:2.4.1` Docker イメージを使用して、仮想コンピューティング環境をローンチしました。
 
@@ -72,18 +74,17 @@ You should see your build start to run automatically—and pass! So, what just h
 今のところはリポジトリにソースコードが含まれておらず、`config.yml` 内にもテストに関わる設定が含まれていませんが、CircleCI はビルドに「成功」したものとして扱います ([exit コード](https://en.wikipedia.org/wiki/Exit_status)としては 0 を返しているため)。 ほとんどのプロジェクトは、これよりはるかに複雑で、多くの場合は複数の Docker イメージと複数のステップが存在し、多くのテストも含まれます。 `config.yml` ファイルに記述できる全てのステップの詳細については、[CircleCI の設定方法](https://circleci.com/docs/ja/2.0/configuration-reference)を参照してください。
 
 ### ビルドを意図的に失敗させる
-
 {:.no_toc}
 
 単純化のため、GitHub エディターで `config.yml` ファイルを編集し、`echo "A first hello"` を `notacommand` に置き換えます。 GitHub エディターの **[Commit change]** ボタンをクリックします。 CircleCI の {% comment %} TODO: Jobs {% endcomment %}Builds ページに戻ると、新しいビルドがトリガーされています。 このビルドは失敗し、赤色の [FAILED] ボタンが表示され、失敗を通知するためのメールが送信されます。
 
 ### Workflows 機能の使用
-
 {:.no_toc}
 
 1. Workflows の動作を見るには、`.circleci/config.yml` ファイルを編集します。 ブラウザーのウィンドウでファイルを編集モードにしてから、ファイル内で `build` とそれ以後のテキストを選択し、コピー＆ペーストし、そのセクションを複製します。 コードブロックは次のようになります。
 
 ```yml
+```
 version: 2
 jobs:
   build:
@@ -97,14 +98,16 @@ jobs:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "A first hello"      
+      - run: echo "A first hello"
+```      
 ```
 
-1. 次に、2 つのジョブを別々の名前にします。 この例では、`one` と `two` という名前にします。 echo コマンドの内容も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
+1. 次に、2 つのジョブを別々の名前に変更します。 この例では、`one` と `two` という名前にします。 エコーコマンドの内容も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
 
-2. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
+2. Add a `workflows` section to your `config.yml` file. workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
 
 ```yml
+```
 jobs:
   one:
     docker:
@@ -127,20 +130,21 @@ workflows:
       - one
       - two
 ```
+```
 
 1. これらの変更をリポジトリにコミットしてから、CircleCI のダッシュボードに戻ります。![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
 2. Workflow のリンクをクリックすると、2 つのジョブが並列実行されていることを確認できます。![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
-Workflows の詳細については、[「Workflows の制御」](https://circleci.com/docs/ja/2.0/workflows/#overview)ドキュメントを参照してください。
+Workflows の詳細については、[「Workflows の制御」](https://circleci.com/docs/2.0/workflows/#overview)ドキュメントを参照してください。
 
 ### Workspaces 機能を使ってみる
-
 {:.no_toc}
 
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspaces を使用して、その実行に固有のダウンストリームのジョブで必要となるデータを渡すことができます。 `config.yml` を次のように書き換えてみてください。
 
 ```yml
+```
 version: 2
 jobs:
   one:
@@ -182,18 +186,18 @@ workflows:
           requires:
             - one
 ```
+```
 
-Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs)を参照してください。
+Workspaces の詳細については、[こちら](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs)を参照してください。
 
-### SSH での {% comment %} TODO: Job {% endcomment %}ビルドへの接続
-
+### SSH での{% comment %} TODO: Job {% endcomment %}ビルドへの接続
 {:.no_toc}
 
 ![]({{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
-ターミナルの操作に慣れている場合、SSH enabled オプションで {% comment %} TODO: Job {% endcomment %}ビルドを再実行することで、CircleCI のジョブに SSH で直接接続してビルドのトラブルシューティングを行えます。
+ターミナルの操作に慣れている場合、SSH enabled オプションで{% comment %} TODO: Job {% endcomment %}ビルドを再実行することで、CircleCI のジョブに SSH で直接接続してビルドのトラブルシューティングを行えます。
 
-*この場合、GitHub アカウントに SSH キーを追加する必要があることに注意してください。詳細については、<https://help.github.com/articles/connecting-to-github-with-ssh/>* を参照してください。
+*この場合、GitHub アカウントに SSH キーを追加する必要があることに注意してください。詳細については、<https://help.github.com/articles/connecting-to-github-with-ssh/> を参照してください。*
 
 ![]({{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
@@ -209,14 +213,12 @@ Copy the `ssh` string from the enabling SSH section of your build. Open a termin
     cat <file_name>    # <file_name> で指定したファイルの内容を表示します
     
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 Git フックでのコミットごとに CircleCI の `config.yml` をバリデーションする方法については[こちらのブログ](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)で紹介しています。
 
-### CircleCI
-
+### CircleCI、弊社
 {:.no_toc}
 
 * CircleCI のブログとフォロー方法 
@@ -229,14 +231,12 @@ Git フックでのコミットごとに CircleCI の `config.yml` をバリデ�
   * <https://www.facebook.com/circleci>
 
 ### 継続的インテグレーション
-
 {:.no_toc}
 
 * <https://martinfowler.com/articles/continuousIntegration.html>
 * [https://en.wikipedia.org/wiki/Continuous_integration#Best_practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices)
 
 ### YAML
-
 {:.no_toc}
 
 * <https://en.wikipedia.org/wiki/YAML#Advanced_components>
