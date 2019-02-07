@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Migration"
-short-title: "Migration"
+title: "開発環境の移行"
+short-title: "開発環境の移行"
 description: "CircleCI 2.0 Migration Introduction"
 categories:
   - migration
