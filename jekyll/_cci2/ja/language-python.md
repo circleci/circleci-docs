@@ -9,9 +9,9 @@ order: 7
 ---
 This document describes how to configure CircleCI using a sample application written in Python.
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## 概要
 
 This guide uses a sample Django application to describe configuration best practices for Python applications building on CircleCI. The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django) and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
 
@@ -227,6 +227,6 @@ jobs: # A basic unit of work in a run
 
 {% endraw %}
 
-## See Also
+## その他の参考資料
 
 - See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.
