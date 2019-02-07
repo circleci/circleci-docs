@@ -12,7 +12,7 @@ order: 55
 - 目次
 {:toc}
 
-## はじめに
+## 概要
 
 デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離された、Docker コマンドの実行に特化したリモート環境となっています。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
 
@@ -230,7 +230,7 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## See Also
+## その他の参考資料
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
