@@ -9,7 +9,7 @@ order: 20
 ---
 This document describes various questions and technical issues that you may find helpful when working with Orbs.
 
-- TOC {:toc}
+- 目次 {:toc}
 
 ### Downloading, Integrating, and Testing Orbs
 
@@ -143,7 +143,7 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 
 **Note:** CircleCI does not require this for certified orbs (orbs that have been reviewed and approved by CircleCI prior to publishing). At this time, the certification program for orbs authored by third parties is not yet available, though will be available in the near future.
 
-## See Also
+## その他の参考資料
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
