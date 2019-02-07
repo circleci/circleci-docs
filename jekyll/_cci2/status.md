@@ -30,3 +30,6 @@ CircleCI provides an integrated dashboard with the status of your build jobs:
 - RUNNING: Job run is in progress
 - ON HOLD: Job is waiting for approval
 - QUEUED: Job is waiting for available container
+
+If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
+see other [workflow-specific statuses]({{ site.baseurl}}/2.0/workflows/#states).
