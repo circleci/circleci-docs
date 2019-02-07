@@ -29,6 +29,6 @@ In the form that appears, enter a title for your question, along with a message 
 
 When you're done, click 'Submit support request', and one of our support engineers will get back to you soon.
 
-## Premium Support
+## 有償サポート
 
 If you know you're going to need a rapid response to problems, then check out our [Premium Support](https://circleci.com/support/premium-support/). You can skip the line for support requests, get critical issues escalated, and access early features of CircleCI.
