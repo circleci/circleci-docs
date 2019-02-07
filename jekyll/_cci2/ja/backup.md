@@ -2,13 +2,14 @@
 layout: classic-docs
 title: "CircleCIデータのバックアップ"
 category:
-  - 管理
+  - administration
 order: 50
 description: "CircleCIインストールの定期的なバックアップ方法"
 ---
 This document describes how to back up your CircleCI application so that you can recover from accidental or unexpected loss of CircleCI data on the Services machine:
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 **Note:** If you are running CircleCI with external databases configured, you must use separate standard backup mechanisms for those external datastores.
 
