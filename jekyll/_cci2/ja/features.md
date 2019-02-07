@@ -27,13 +27,13 @@ If your project has a large number of tests, it will need more time to run them 
 
 Use either the CircleCI CLI to split test files or use environment variables to configure each parallel machine individually.
 
-### Resource Class
+### リソースクラス
 
 It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
 
 ### Cache
 
-Another popular feature is [caching]({{ site.baseurl }}/2.0/caching/). Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
+Another popular feature is [caching]({{ site.baseurl }}/2.0/caching/). キャッシュは、ジョブを高速化する手段として最も効果的な方法の 1 つです。CircleCI においては、高コストな処理が必要なデータを過去のジョブから再利用することが可能になっています。
 
 ### Workflows
 
