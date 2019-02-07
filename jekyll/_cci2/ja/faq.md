@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "FAQ"
-short-title: "FAQ"
+title: "よくあるご質問"
+short-title: "よくあるご質問"
 description: "CircleCI についてのよくある質問"
 categories:
   - migration
