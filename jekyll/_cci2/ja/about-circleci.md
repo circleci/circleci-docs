@@ -50,6 +50,6 @@ CircleCI では以下の無料トライアルを用意しています。
 
 パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/2.0/oss/)をご覧ください。
 
-## See Also
+## 関連情報
 
 Any app that runs on Linux, Android, or macOS is supported. Refer to the [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
