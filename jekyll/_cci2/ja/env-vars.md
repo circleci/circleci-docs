@@ -11,7 +11,7 @@ order: 40
 
 - 目次 {:toc}
 
-## はじめに
+## 概要
 
 {:.no_toc}
 
@@ -23,7 +23,7 @@ order: 40
 
 CircleCI は Bash を使っているため、環境変数には POSIX 命名規則が適用されます。 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の頭文字はアルファベットとします。
 
-CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 環境変数は次の優先順位で使用されます。
+CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 Environment variables are used according to a specific precedence order, as follows:
 
 1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの (例：`FOO=bar make install`)。
 2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
@@ -33,7 +33,7 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
 7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
-`FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
+Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
 **注：**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/2.0/security/#encryption)で解説しています。
 
@@ -209,7 +209,7 @@ jobs:
 
 ## プロジェクト内で環境変数を設定する
 
-1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします。
+1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします
 
 2. **BUILD SETTINGS** セクションの **Environment Variables** をクリックします。
 
@@ -315,7 +315,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 
 変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true` (現在のビルド環境が CI であることを表します。常に true となります。) `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名。 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数。 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL。 `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL。 `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ。 `CIRCLE_JOB` | String | 現在のジョブの名称。 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります。 `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数。 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_REPONAME` | String | The name of the GitHub or Bitbucket repository where the pull request was created. フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。 `CIRCLE_PROJECT_USERNAME` | String | The GitHub or Bitbucket username of the current project. `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。 `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag). `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。 `CIRCLECI` | Boolean | `true` (現在のビルド環境が CircleCI であることを表します。常に true となります。) `HOME` | String | ホームディレクトリ {:class="table table-striped"}
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
