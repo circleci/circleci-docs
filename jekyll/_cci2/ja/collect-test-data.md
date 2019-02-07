@@ -466,7 +466,7 @@ For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.gith
 
 To access test metadata for a run from the API, refer to the [test-metadata API documentation]({{ site.baseurl }}/api/v1-reference/#test-metadata).
 
-## その他の参考資料
+## 関連情報
 
 {:.no_toc}
 
