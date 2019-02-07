@@ -1,5 +1,5 @@
 ---
-layout: classic-docs  テスト テスト
+layout: classic-docs
 title: "2.0 API のドキュメント"
 short-title: "2.0 API のドキュメント"
 categories:
