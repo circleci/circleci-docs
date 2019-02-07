@@ -7,7 +7,8 @@ order: 3
 description: "CircleCI サーバー管理者向けのよくある質問"
 published: true
 ---
-- 目次 {:toc}
+- 目次
+{:toc}
 
 #### ビルドコンテナの現在の状況を監視することはできますか？
 
@@ -93,7 +94,7 @@ Replicated 使用時にトラブルが発生したとき、問題を検証する
 
 - Replicated と CircleCI を再起動する
 
-Try restarting Replicated services. You can do this by running the following commands on the service box:
+次に Replicated サービスを再起動します。サービスボックスで下記の通りコマンドを実行してください。
 
     sudo service replicated-ui restart
     sudo service replicated restart
