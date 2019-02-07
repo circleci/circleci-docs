@@ -34,6 +34,6 @@ You can generate code for the following formats:
 
 If you find the default status badge too minimal, you can use the [shield style](https://shields.io/). To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
-## その他の参考資料
+## 関連情報
 
 [Status]({{ site.baseurl }}/2.0/status/)
