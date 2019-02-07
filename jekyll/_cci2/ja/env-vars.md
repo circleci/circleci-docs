@@ -23,7 +23,7 @@ order: 40
 
 CircleCI は Bash を使っているため、環境変数には POSIX 命名規則が適用されます。 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の頭文字はアルファベットとします。
 
-CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 Environment variables are used according to a specific precedence order, as follows:
+CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 環境変数は次の優先順位で使用されます。
 
 1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの (例：`FOO=bar make install`)。
 2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
@@ -33,7 +33,7 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
 7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
+`FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
 
 **注：**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 そのプロジェクトにアクセスできるエンジニア全員が `config.yml` ファイルの全文を見ることができます。 隠したい環境変数は CircleCI の[プロジェクト](#setting-an-environment-variable-in-a-project)設定や[コンテキスト]({{ site.baseurl }}/2.0/contexts/)設定で登録するようにしてください。 詳しくは「セキュリティ」ページの[暗号化]({{ site.baseurl }}/2.0/security/#encryption)で解説しています。
 
