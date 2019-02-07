@@ -9,9 +9,9 @@ order: 2
 ---
 This guide will help you get started with a basic Haskell application on CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- TOC {:toc}
+- 目次 {:toc}
 
-## Overview
+## 概要
 
 {:.no_toc}
 
@@ -141,7 +141,7 @@ Finally, we can take the built executable and store it as an artifact.
 
 Excellent! You are now setup on CircleCI with a Haskell app.
 
-## See Also
+## その他の参考資料
 
 {:.no_toc}
 
