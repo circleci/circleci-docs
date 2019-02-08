@@ -79,7 +79,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
   * `checkout`
   * `setup_remote_docker`
-  * `save_to_workspace`
+  * `persist_to_workspace`
 
 **Note:** It is possible to override the built-in commands with a custom command.
 
