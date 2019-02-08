@@ -9,10 +9,10 @@ order: 1
 ---
 This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
-* 目次 {:toc}
+* 目次
+{:toc}
 
 ## Getting Started with Config Reuse
-
 {:.no_toc}
 
 1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
@@ -50,7 +50,6 @@ commands:
 **Note:** The `commands` stanza is available in configuration version 2.1 and later.
 
 ## Invoking Reusable Commands
-
 {:.no_toc}
 
 Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted in the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
@@ -68,7 +67,6 @@ jobs:
 ```
 
 ### Invoking Other Commands in Your Command
-
 {:.no_toc}
 
 Commands can use other commands in the scope of execution.
@@ -81,7 +79,7 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 
 * `checkout`
 * `setup_remote_docker`
-* `save_to_workspace`
+* `persist_to_workspace`
 
 **Note:** It is possible to override the built-in commands with a custom command.
 
@@ -182,7 +180,6 @@ Defining a `build` job:
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 ## Invoking Reusable Executors
-
 {:.no_toc}
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
@@ -199,7 +196,6 @@ jobs:
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 
 ### Example of Using an Executor Declared in config.yml in Multiple Jobs
-
 {:.no_toc}
 
 The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment.
@@ -269,7 +265,6 @@ jobs:
 **Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
 
 ### Overriding Keys When Invoking an Executor
-
 {:.no_toc}
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
@@ -353,21 +348,19 @@ jobs: # a job that invokes the `aws` executor and the `sync` command
 **Note:** The `parameters` declaration is available in configuration version 2.1 and later.
 
 ### Parameter Syntax
-
 {:.no_toc}
 
 A parameter can have the following keys as immediate children:
 
-| Key Name | Description | Default value | |\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---| | description | Optional. Used to generate documentation for your orb. | N/A | | type | Required. See **Parameter Types** in the section below for details. | N/A | | default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A | {: class="table table-striped"}
+| Key Name | Description | Default value | |\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---| | description | Optional. Used to generate documentation for your orb. | N/A | | type | Required. See **Parameter Types** in the section below for details. | N/A | | default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A |
+{: class="table table-striped"}
 
 ### Parameter Types
-
 {:.no_toc}
 
 This section describes the types of parameters and their usage. The parameter types supported are: * string * boolean * integer * enum * executor * steps * environment variable name
 
 #### String
-
 {:.no_toc}
 
 Basic string parameters are described below:
@@ -387,7 +380,6 @@ commands:
 Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
 #### Boolean
-
 {:.no_toc}
 
 Boolean parameters are useful for conditionals:
@@ -412,7 +404,6 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 Capitalized and uppercase versions of the above values are also valid.
 
 #### Integer
-
 {:.no_toc}
 
 The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
@@ -439,7 +430,6 @@ workflows:
 ```
 
 #### Enum
-
 {:.no_toc}
 
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
@@ -457,9 +447,11 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-    <br />{% raw %}
-    
-    yaml
+    <br />
+
+{% raw %}
+
+yaml
     commands:
       list-files:
         parameters:
@@ -467,18 +459,15 @@ The following `enum` type declaration is invalid because the default is not decl
             type: enum
             default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
             enum: ["darwin", "linux"]
-    
-     {% endraw %}
-    
-     ```
+ 
+ {% endraw %}
+ 
+ ```
     
     #### Executor
-    {:.no_toc}
-    
-    Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
-    
-    
+{:.no_toc}
 
+Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 {% raw %}
 
 yaml version: 2.1 executors: xenial: parameters: some-value: type: string default: foo environment: SOME_VAR: << parameters.some-value >> docker: - image: ubuntu:xenial bionic: docker: - image: ubuntu:bionic
@@ -488,68 +477,52 @@ jobs: test: parameters: e: type: executor executor: << parameters.e >> steps: - 
 workflows: workflow: jobs: - test: e: bionic - test: e: name: xenial some-value: foobar
 
 {% endraw %}
+<br />#### Steps
+{:.no_toc}
 
-    <br />#### Steps
-    {:.no_toc}
-    
-    Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
-    
-    {% raw %}
-    
+Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
+{% raw %}
 yaml commands: run-tests: parameters: after-deps: description: "Steps that will be executed after dependencies are installed, but before tests are run" type: steps default: [] steps: - run: make deps - steps: << parameters.after-deps >> - run: make test
+{% endraw %}
 
-    {% endraw %}
-    
-    The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
-    
-    {% raw %}
-    
+The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
+{% raw %}
 yaml jobs: build: machine: true steps: - run-tests: after-deps: - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests"
+{% endraw %}
 
-    {% endraw %}
-    
-    The above will resolve to the following:
-    
-    {% raw %}
-    
+The above will resolve to the following:
 
+{% raw %}
 yaml steps: - run: make deps - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests" - run: make test
+{% endraw %}
 
-    {% endraw %}
-    
-    #### Environment Variable Name
+#### Environment Variable Name
     
     The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
-    
-    {% raw %}
-    
 
+{% raw %}
 version: 2 jobs: build: docker: - image: ubuntu:latest steps: - run: command: | s3cmd --access_key ${FOO_BAR} \ --secret_key ${BIN_BAZ} \ ls s3://some/where workflows: workflow: jobs: - build version: 2
 
 Original config.yml file: version: 2.1 jobs: build: parameters: access-key: type: env_var_name default: AWS_ACCESS_KEY secret-key: type: env_var_name default: AWS_SECRET_KEY command: type: string docker: - image: ubuntu:latest steps: - run: | s3cmd --access_key ${<< parameters.access-key >>} \\ --secret_key ${<< parameters.secret-key >>} \\ << parameters.command >> workflows: workflow: jobs: - build: access-key: FOO_BAR secret-key: BIN_BAZ command: ls s3://some/where
+{% endraw %}
 
-    {% endraw %}
-    
-    ## Authoring Parameterized Jobs
+## Authoring Parameterized Jobs
     
     It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
     
     Example of defining and invoking a parameterized job in a `config.yml`:
-    
-    {% raw %}
-    
 
+{% raw %}
 yaml version: 2.1
 
 jobs: sayhello: # defines a parameterized job description: A job that does very little other than demonstrate what a parameterized job looks like parameters: saywhat: description: "To whom shall we say hello?" default: "World" type: string machine: true steps: - run: echo "Hello << parameters.saywhat >>"
 
 workflows: build: jobs: - sayhello: # invokes the parameterized job saywhat: Everyone
+{% endraw %}
 
-    {% endraw %}
-    
-    **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
+**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
     
     ### Jobs Defined in an Orb
     
@@ -594,7 +567,6 @@ workflows:
 ```
 
 ### Using Parameters in Executors
-
 {:.no_toc}
 
 To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
@@ -602,7 +574,6 @@ To use parameters in executors, define the parameters under the given executor. 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
 #### Example Build Configuration Using a Parameterized Executor
-
 {:.no_toc}
 
 ```yaml
@@ -643,7 +614,6 @@ jobs:
 ```
 
 ### The Scope of Parameters
-
 {:.no_toc}
 
 Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
@@ -682,7 +652,6 @@ workflows:
 ```
 
 ### Invoking the Same Job Multiple Times
-
 {:.no_toc}
 
 A single configuration may invoke a job multiple times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided or you may name the duplicate jobs explicitly with the `name` key.
@@ -711,7 +680,6 @@ workflows:
 ```
 
 ### Using Pre and Post Steps
-
 {:.no_toc}
 
 Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
@@ -719,7 +687,6 @@ Every job invocation may optionally accept two special arguments: `pre-steps` an
 Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
 
 ### Defining Pre and Post Steps
-
 {:.no_toc}
 
 The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
@@ -767,7 +734,6 @@ A conditional step consists of a step with the key `when` or `unless`. Under thi
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 
 ### 例
-
 {:.no_toc}
 
 ```yaml
