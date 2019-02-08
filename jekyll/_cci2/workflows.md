@@ -545,6 +545,10 @@ When you use workflows, you increase your ability to rapidly respond to failures
 
 This section describes common problems and solutions for Workflows.
 
+### Rerunning Workflows Fails
+
+It has been observed that in some case, a failure happens before the workflow runs (during build processing). In this case, rerunning the workflow will fail even though it was succeeding before the outage. To workaround this, push a change to the project's repository. This will re-run build processing first and then run the workflow.
+
 ### Workflows Not Starting
 {:.no_toc}
 
