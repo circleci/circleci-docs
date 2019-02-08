@@ -80,7 +80,7 @@ jobs:
           name: Run Tests
           command: bin/rails test
       - store_artifacts:
-          path: /home/circleci/project/coverage
+          path: coverage
 ```
 
 The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
@@ -136,7 +136,7 @@ jobs:
           $HOME/.local/bin/coverage report
           $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
     - store_artifacts:
-        path: /home/circleci/project/htmlcov
+        path: htmlcov
 workflows:
   version: 2
   workflow:
@@ -170,6 +170,39 @@ jobs:
 ```
 
 ### Golang
+
+Go has built-in functionality for generating code coverage reports. To generate
+reports, add the flag `-coverprofile=c.out`. This will generate a coverage
+report which can be converted to html via `go tool`.
+
+```sh
+go test -cover -coverprofile=c.out
+go tool cover -html=c.out -o coverage.html 
+```
+
+An example `.circleci/config.yml`:
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11
+    steps:
+      - checkout
+      - run: go build
+      - run:
+          name: "Create a temp directory for artifacts"
+          command: |
+            mkdir -p /tmp/artifacts
+      - run: 
+          command: |
+            go test -coverprofile=c.out
+            go tool cover -html=c.out -o coverage.html
+            mv coverage.html /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+```
 
 
 ## Using a Code Coverage Service
