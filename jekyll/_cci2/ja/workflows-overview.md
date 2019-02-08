@@ -31,4 +31,15 @@ The following video shows you how to configure workflows in your `.circleci/conf
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 </div>
 
-Workflows may appear with one of the following states: - RUNNING: Workflow is in progress - NOT RUN: Workflow was never started - CANCELLED: Workflow was cancelled before it finished - FAILING: A Job in the workflow has failed - FAILED: One or more jobs in the workflow failed - SUCCESS: All jobs in the workflow completed successfully - ON HOLD: A job in the workflow is waiting for approval - NEEDS SETUP: A workflow stanza is not included or is incorrect in the `config.yml` file for this project
+## Possible Workflow Statuses
+
+Workflows may appear with one of the following states:
+
+- RUNNING: Workflow is in progress
+- NOT RUN: Workflow was never started
+- CANCELLED: Workflow was cancelled before it finished
+- FAILING: A Job in the workflow has failed
+- FAILED: One or more jobs in the workflow failed
+- SUCCESS: All jobs in the workflow completed successfully
+- ON HOLD: A job in the workflow is waiting for approval
+- NEEDS SETUP: A workflow stanza is not included or is incorrect in the `config.yml` file for this project
