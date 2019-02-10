@@ -86,20 +86,27 @@ this access with `iptables` rules in a production setup, [contact support](https
 - Custom TCP 8800
 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png)
+![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png) >> ('single-box-step5.png'image should include all configurable fields, e.g. 'Source' with suggested values).
 6. After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
+6. After the VM is launched, on your browser use the public or private IP address or hostname for the VM (https://<IP or hostname to your VM>:8800) to go to the 'Welcome to CircleCI' page. (Include scressnshot of the 'Welcome to CircleCI' page). Click on 'Get Started' to continue with the guided installation process for CircleCI. 
 
 ### Configure CircleCI
 1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
+1. If you are using a self-signed certificate, proceed after receiving the warning. Provide the IP address as a value for the Hostname field. Select 'Use Self-Signed Cert' for SSL certificate option. If you receive a warning, proceed to the 'Upload your license' step. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
 - Note: If you are using a self-signed cert, or using a custom CA root, please see the [certificates]({{site.baseurl}}/2.0/certificates/) document for a script to add the information to the CircleCI truststore.
 2. Upload the CircleCI license file and set the admin password.
+2. Upload the CircleCI license .rli file, that you received from CircleCI and set the admin password to secure the Administrative Console. Wait for the 'Preflight Checks' verifications to complete and continue.
 3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
 4. Select "Single Box" in the "Builders Configuration" section(s).
 5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/](https://github.com/settings/applications/new/) or in the GitHub Enterprise Settings using the IP address of the AWS instance from Step 6 for the Homepage URL and using `http(s)://AWS instance IP address/auth/github` as the Authorization callback URL. Click the Register Application button.
+5. Register CircleCI as a new OAuth application in GitHub.com at [https://github.com/settings/applications/new/](https://github.com/settings/applications/new/) or in the GitHub Enterprise Settings using the AWS instance IP address from 'Configure the Amazon Machine Image > Step 6' for the 'Homepage URL' field and using `http(s)://AWS instance IP address/auth/github` for the 'Authorization callback URL' field. Click the 'Register Application' button.
 - **Note:** If you get an "Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
 6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID.
-7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
+6. Copy the 'Client ID' value from the GitHub New OAuth application and paste it into the 'GitHub Application Client ID' field.
+7. Copy the 'Secret' value from GitHub New OAuth site and paste it into the 'GitHub Application Client Secret' field. Click 'Test  GitHub Authentication'.
 8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
-9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions.
+8. After authentication completes, ensure that in the 'Privacy' section 'SSL only' option is unchecked if 'http' was used as a protocol in the GitHub application. 'None' should be selected in the 'Storage' section. In production installations, other object stores may be used but will require corresponding IAM permissions.
+9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circlci.com/hc/en-us) if you have questions.
 10. Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 
 11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
 
