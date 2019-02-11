@@ -14,7 +14,11 @@ CircleCI provides a number of different options for code coverage reporting,
 using built-in CircleCI features combined with open source libraries,
 or using partners.
 
-## Viewing Coverage on CircleCI
+* TOC 
+{:toc}
+
+
+# Viewing Coverage on CircleCI
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage
@@ -23,7 +27,7 @@ report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). C
 Here are a few examples to demonstrate configuring coverage libraries for
 different languages.
 
-### Ruby 
+## Ruby 
 
 [Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
 coverage library. To get started, add the `simplecov` gem to your `Gemfile`
@@ -85,7 +89,7 @@ jobs:
 
 The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
 
-### Python
+## Python
 
 [Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) is a popular library
 for generating Code Coverage Reports in python. To get started, install
@@ -144,7 +148,7 @@ workflows:
     - build
 ```
 
-### Java
+## Java
 
 [JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code
 coverage. Below is an example pom.xml that includes JUnit and JaCoCo as part of
@@ -245,7 +249,7 @@ jobs:
           path:  target
 ```
 
-### JavaScript
+## JavaScript
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
 JavaScript projects. Another popular testing tool, Jest, uses Istanbul to
@@ -267,7 +271,7 @@ jobs:
           path: coverage
 ```
 
-### PHP
+## PHP
 
 PHPUnit is a popular testing framework for PHP. To generate code-coverage
 reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are
@@ -293,7 +297,7 @@ jobs:
           path:  build/coverage-report
 ```
 
-### Golang
+## Golang
 
 Go has built-in functionality for generating code coverage reports. To generate
 reports, add the flag `-coverprofile=c.out`. This will generate a coverage
@@ -329,9 +333,9 @@ jobs:
 ```
 
 
-## Using a Code Coverage Service
+# Using a Code Coverage Service
 
-### Codecov
+## Codecov
 
 Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
 
@@ -348,7 +352,7 @@ jobs:
 
 Read more about Codecov's orb in their [guest blog post](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/).
 
-### Coveralls
+## Coveralls
 
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://coveralls.io/docs)
