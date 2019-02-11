@@ -147,6 +147,106 @@ workflows:
 
 ### Java
 
+[JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code
+coverage. Below is an example pom.xml that includes JUnit and JaCoCo as part of
+the build system:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.foo</groupId>
+	<artifactId>DemoProject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>DemoProject</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+    	<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.3</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+
+							<dataFile>target/jacoco.exec</dataFile>
+							<!-- Sets the output directory for the code coverage report. -->
+							<outputDirectory>target/my-reports</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+
+```
+
+Running `mvn test` will include a code coverage report (an `exec`) file that is
+also converted to an `html` page, like many other coverage tools. The Pom file
+above writes to the `target` directory, which you can then store as an artifact
+in your CircleCI `config.yml` file.
+
+Here is a  minimal CI configuration to correspond with the above example:
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+    steps:
+      - checkout
+      - run : mvn test
+      - store_artifacts:
+          path:  target
+```
+
+
 ### JavaScript
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
