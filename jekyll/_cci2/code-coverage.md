@@ -144,7 +144,6 @@ workflows:
     - build
 ```
 
-
 ### Java
 
 [JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code
@@ -246,7 +245,6 @@ jobs:
           path:  target
 ```
 
-
 ### JavaScript
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
@@ -267,6 +265,32 @@ jobs:
           command: jest --collectCoverage=true
       - store_artifacts:
           path: coverage
+```
+
+### PHP
+
+PHPUnit is a popular testing framework for PHP. To generate code-coverage
+reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are
+using an earlier version than PHP 5.6. Versions of PHP after 5.6 have access to
+a tool called phpdbg; you can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`
+
+In the following basic `.circleci/config.yml` we upload the coverage reports in
+the `store_artifacts` step at the end of the config.
+
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7-fpm-browsers-legacy
+    steps:
+      - checkout
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path:  build/coverage-report
 ```
 
 ### Golang
@@ -306,3 +330,30 @@ jobs:
 
 
 ## Using a Code Coverage Service
+
+### Codecov
+
+Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
+
+```yaml
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    steps:
+      - codecov/upload:
+          file: {{ coverage_report_filepath }}
+```
+
+Read more about Codecov's orb in their [guest blog post](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/).
+
+### Coveralls
+
+If you're a Coveralls customer, follow
+[their guide to set up your coverage stats.](https://coveralls.io/docs)
+You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
+[environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
+
+Coveralls will automatically handle the merging of coverage stats in
+parallel builds.
