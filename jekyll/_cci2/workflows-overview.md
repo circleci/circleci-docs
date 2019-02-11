@@ -31,7 +31,10 @@ The following video shows you how to configure workflows in your `.circleci/conf
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
+## Possible Workflow Statuses
+
 Workflows may appear with one of the following states:
+
 - RUNNING: Workflow is in progress
 - NOT RUN: Workflow was never started
 - CANCELLED: Workflow was cancelled before it finished
