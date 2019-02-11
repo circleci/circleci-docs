@@ -390,8 +390,7 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
 **Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
 
 {% raw %}
-
-    orbs:
+orbs:
       some-orb: some-ns/some-orb@volatile
     executors:
       my-executor: some-orb/their-executor
@@ -404,8 +403,6 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
         steps:
           - my-command
               param1: "hello"
-    
-
 {% endraw %}
 
 ### Deleting Production Orbs
@@ -502,7 +499,7 @@ The CircleCI comes with a built-in version management system. After you have ins
 
 Now that you have installed the CircleCI CLI, you will want to configure the CLI for use. The process for configuring the CLI is simple and straightforward, requiring you only to follow a few steps.
 
-Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/accounts/api):
+Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/account/api):
 
     $ circleci setup
     
@@ -597,7 +594,7 @@ Below is an example of how to use the `orb-tools` orb to validate and publish an
           - orb-tools/publish:
               orb-path: src/orb.yml
               orb-ref: circleci/hello-build@dev:${CIRCLE_BRANCH}
-              publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
+          publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
               validate: true
     
 
