@@ -102,8 +102,7 @@ jobs:
           name: Build API documentation with Slate
           command: |
             cd src-api; bundle install; 
-            ls
-            cd src-api; bundle exec middleman src-api/build --clean
+            bundle exec middleman build --clean
             cp -R src-api/build/* jekyll/_api
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
