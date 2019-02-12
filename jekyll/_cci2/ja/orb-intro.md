@@ -26,7 +26,7 @@ CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素
 
 ## 独自に Orb を作成する
 
-If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
+既存の Orbs のなかに目的に合うものが見つからないときは、下記の `circleci orb help` コマンドの出力結果にある通り、[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) を使用して自身の環境や設定要件を満たす独自の Orb を作成できます。 Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
 
 ```nohighlight
 $ circleci orb help
