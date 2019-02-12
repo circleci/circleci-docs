@@ -13,7 +13,7 @@ order: 4
 
 1. GitHub または Bitbucket のローカルリポジトリのルートディレクトリに `.circleci` ディレクトリを作成します。
 
-2. `.circleci` ディレクトリに以下の内容を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを追加し、[hello-build</code> orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) をインポートします。
+2. `.circleci` ディレクトリに以下の内容を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを追加し、[`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) をインポートします。
 
 ```yaml
 ```
