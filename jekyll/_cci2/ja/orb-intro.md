@@ -26,23 +26,23 @@ CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素
 
 ## 独自に Orb を作成する
 
-既存の Orbs のなかに目的に合うものが見つからないときは、下記の `circleci orb help` コマンドの出力結果にある通り、[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) を使用して自身の環境や設定要件を満たす独自の Orb を作成できます。 既存の Orb をインポートするのに比べて時間はかかってしまいますが、新たに作成したものは世界中のユーザーが利用可能な Orb として公開することもできます。
+既存の Orbs のなかに目的に合うものが見つからないときは、下記の `circleci orb help` コマンドの出力結果にある通り、[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) を使用して自身の環境や設定要件を満たす独自の Orb を作成できます。 既存の Orb をインポートするのに比べて時間はかかってしまいますが、新たに作成したものは世界中のユーザーが利用可能な Orb として公開できます。
 
 ```nohighlight
 $ circleci orb help
 Operate on orbs
 
 
-Usage:
+使い方：
   circleci orb [command]
 
-Available Commands:
-  create      Create an orb in the specified namespace
-  list        List orbs
-  process     Validate an orb and print its form after all pre-registration processing
-  publish     Publish an orb to the registry
-  source      Show the source of an orb
-  validate    Validate an orb.yml
+利用できるコマンド：
+  create      指定した名前空間において Orb を作成します
+  list            Orbs を一覧します
+  process    Orb を精査し、レジストリ登録の前処理を行った後、その内容を出力します
+  publish     Orb をレジストリに登録します
+  source      Orb のソースコードを表示します
+  validate    orb.yml ファイルを精査します
 ```
 
 **Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
