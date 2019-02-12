@@ -19,13 +19,3 @@ gem "nokogiri", ">= 1.8.5"
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
 end
-
-
-# These gems are for the Slate API documentation build process.
-# Middleman
-gem 'middleman', '~>4.2.1'
-gem 'middleman-syntax', '~> 3.0.0'
-gem 'middleman-autoprefixer', '~> 2.7.0'
-gem 'middleman-sprockets', '~> 4.1.0'
-gem 'rouge', '~> 2.0'
-gem 'redcarpet', '~> 3.4.0'
