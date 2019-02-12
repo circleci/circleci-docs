@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Orbs Introduction"
-short-title: "Orbs Introduction"
+title: "Orbs とは"
+short-title: "Orbs とは"
 description: "Starting point for CircleCI Orbs"
 categories:
   - getting-started
