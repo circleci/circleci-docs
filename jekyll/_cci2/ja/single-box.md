@@ -8,9 +8,10 @@ description: "How to install CircleCI on a single VM"
 ---
 CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Prerequisites
+## 前準備
 
 The following requirements must be met for successful trial installation:
 
@@ -38,7 +39,7 @@ Use this procedure to install CircleCI on a single EC2 VM by using the pre-made 
   "sa-east-1": "ami-70026d1c",
   "us-east-1": "ami-cb6f1add",
   "us-east-2": "ami-57c7e032",
-  "us-west-1": "ami-4fc8ee2f",
+  "us-west-1": "ami-059b818564104e5c6",
   "us-west-2": "ami-c24a2fa2"
   };
 
