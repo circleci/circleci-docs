@@ -9,23 +9,23 @@ order: 30
 ---
 ![header]({{ site.baseurl }}/assets/img/docs/wf-header.png)
 
-To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
+フィードバックの迅速化、再実行までの時間短縮、リソースの効率的な活用を通じてソフトウェア開発のスピードアップを目指すなら、Workflow を設定します。 このページでは、下記の内容に沿って Workflow の機能と設定例を解説しています。
 
 - 目次
 {:toc}
 
 ## 概要
 
-A **workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+**Workflow** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 Workflow は、失敗の素早いリカバリーを可能にするシンプルな設定キーにより、複雑なジョブの自動化をサポートします。
 
-With workflows, you can:
+Workflow を使うと下記が可能になります。
 
-- Run and troubleshoot jobs independently with real-time status feedback.
-- Schedule workflows for jobs that should only run periodically.
-- Fan-out to run multiple jobs in parallel for efficient version testing.
-- Fan-in to quickly deploy to multiple platforms.
+- リアルタイムのステータス表示を見ながら、ジョブの実行とトラブルシューティングをそれぞれ別個に行えます
+- 定期的に実行する必要があるジョブを含む Workflow のスケジュール化が可能です
+- バージョンごとのテストの効率化を目的とした、複数ジョブを並行実行するファンアウトをサポートします
+- 複数の OS に対する高速なデプロイを実現するファンインをサポートします
 
-For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
+Workflow 内のジョブの 1 つが失敗した場合、リアルタイムで知ることができます。 ビルド全体が失敗するのを待ってから全てのジョブを改めて実行するような無駄な時間を費やすことがなく、*失敗したジョブのみを*再実行できます。
 
 ### States
 {:.no_toc}
