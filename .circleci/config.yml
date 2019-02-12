@@ -103,7 +103,7 @@ jobs:
           command: |
             cd src-api; bundle install; 
             bundle exec middleman build --clean
-            cp -R src-api/build/* jekyll/_api
+            cp -R build/* ../jekyll/_api
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
           paths:
