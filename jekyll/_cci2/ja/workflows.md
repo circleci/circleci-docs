@@ -7,27 +7,27 @@ categories:
   - configuring-jobs
 order: 30
 ---
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/wf-header.png)
+![header]({{ site.baseurl }}/assets/img/docs/wf-header.png)
 
-フィードバックの迅速化、再実行までの時間短縮、リソースの効率的な活用を通じてソフトウェア開発のスピードアップを目指すなら、Workflow を設定します。 このページでは、下記の内容に沿って Workflow の機能と設定例を解説しています。
+To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
-## はじめに
+## 概要
 
-**Workflow** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 Workflow は、失敗の素早いリカバリーを可能にするシンプルな設定キーにより、複雑なジョブの自動化をサポートします。
+A **workflow** is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
 
-Workflow を使うと下記が可能になります。
+With workflows, you can:
 
-- リアルタイムのステータス表示を見ながら、ジョブの実行とトラブルシューティングをそれぞれ別個に行えます
-- 定期的に実行する必要があるジョブを含む Workflow のスケジュール化が可能です
-- バージョンごとのテストの効率化を目的とした、複数ジョブを並行実行するファンアウトをサポートします
-- 複数の OS に対する高速なデプロイを実現するファンインをサポートします
+- Run and troubleshoot jobs independently with real-time status feedback.
+- Schedule workflows for jobs that should only run periodically.
+- Fan-out to run multiple jobs in parallel for efficient version testing.
+- Fan-in to quickly deploy to multiple platforms.
 
-Workflow 内のジョブの 1 つが失敗した場合、リアルタイムで知ることができます。 ビルド全体が失敗するのを待ってから全てのジョブを改めて実行するような無駄な時間を費やすことがなく、*失敗したジョブのみを*再実行できます。
+For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
 ### States
-
 {:.no_toc}
 
 Workflows may appear with one of the following states:
@@ -42,20 +42,19 @@ Workflows may appear with one of the following states:
 - NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
 
 ### 制限について
-
 {:.no_toc}
 
 Projects that have [Build Processing]({{ site.baseurl }}/2.0/build-processing/) enabled may use the CircleCI API to trigger workflows. Projects that do not enable build processing will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
 
-## Workflow の設定例
+## Workflows Configuration Examples
 
-`workflows` *キーに関する詳細な仕様は、CircleCI 設定マニュアルの [Workflow]({{ site.baseurl }}/2.0/configuration-reference/#workflows) の項で説明しています。*
+*For a full specification of the* `workflows` *key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuring CircleCI document.*
 
-Workflow が設定されたプロジェクトは通常、Docker イメージ、環境変数、`run` ステップなど、いくつかの構文に分けて記述された複数のジョブからなります。 `.circleci/config.yml` のコードをコンパクトにするエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 また、ブログページの [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)も参考にしてください。
+**Note:** Projects configured with Workflows often include multiple jobs that share syntax for Docker images, environment variables, or `run` steps. Refer the [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) documentation for information about how to alias and reuse syntax to keep your `.circleci/config.yml` file small. See the [Reuse YAML in the CircleCI Config](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/) blog post for a summary.
 
-パラレルジョブを扱うときは、`.circleci/config.yml` ファイルの末尾に新たに `workflows:` セクションを設け、バージョンと Workflow 識別用の固有名を付けます。 下記は、並列動作させる 2 つのジョブからなる典型的な Workflow 自動化の手法を示した `.circleci/config.yml` の例です。 `build_and_test` という名前の `workflows:` キーで Workflow が定義され、その下にネストされた `jobs:` キーとジョブ名のリストが見えます。 ジョブには依存関係の定義がないことから、これらは並列で実行することになります。
+To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
 ```yaml
 version: 2
@@ -80,17 +79,16 @@ workflows:
       - test
 ```
 
-これに関する実際の設定ファイルは [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) で確認できます。
+See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
-### シーケンシャルジョブ実行の例
-
+### Sequential Job Execution Example
 {:.no_toc}
 
-下記は 4 つのシーケンシャルジョブを含む Workflow の例です。 ジョブは設定された順番通りに実行され、`requires:` で要求されたジョブが問題なく完了するまで、以下で図示しているように各ジョブの処理が待機する仕組みになっています。
+The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram.
 
-![シーケンシャルジョブを実行する Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
+![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
-下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
+The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
 
     workflows:
       version: 2
@@ -108,19 +106,18 @@ workflows:
                 - test2
     
 
-例にある通り、依存関係は `requires:` キーで定義されます。 `deploy:` ジョブは `build`、`test1`、`test2` という 3 つのジョブが無事完了するまで実行されません。 ジョブは依存関係にあるそれ以前の全ジョブの処理が完了するまで待つことになるため、 `deploy` ジョブは `test2` を待ち、`test2` ジョブは `test1` ジョブを待ち、そして`test1` ジョブは `build` ジョブを待つという構図になります。
+The dependencies are defined by setting the `requires:` key as shown. The `deploy:` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
 
-これに関する実際の設定ファイルは [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) で確認できます。
+See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
-### ファンイン・ファンアウト Workflow の例
-
+### Fan-Out/Fan-In Workflow Example
 {:.no_toc}
 
-図示している例では、Workflow は最初に build ジョブを普通に実行し、並列動作する一連の `acceptance_test` ジョブを実行するファンアウトを行います。最終的には `deploy` ジョブを走らせるファンインで処理を終えます。
+The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs in parallel, and finally fans-in to run a common deploy job.
 
-![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
 
-下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブの設定を施した Workflow の例です。
+The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
     workflows:
       version: 2
@@ -147,11 +144,11 @@ workflows:
                 - acceptance_test_4
     
 
-この例では、`build` ジョブが完了した後すぐに 4 つの `acceptance_test` ジョブがスタートします。 その後、 4 つの `acceptance_test` ジョブの完了を待って、`deploy` ジョブが実行されます。
+In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
 
-実際の設定サンプルは [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) で確認できます。
+See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) for a full example.
 
-## 承認後に処理を続行する Workflow の例
+## Holding a Workflow for a Manual Approval
 
 Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. To do this, add a job to the `jobs` list with the key `type: approval`. Let's look at a commented config example.
 
@@ -193,27 +190,26 @@ Some things to keep in mind when using manual approval in a workflow:
 - All jobs that are to run after a manually approved job *must* `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-スクリーンショット： `request-testing` ジョブの承認を待つ Workflow 。
+The following screenshots show a workflow on hold waiting for approval of the `request-testing` job:
 
-![ジョブの承認で処理を続行する Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-また、下記は `request-testing` ジョブをクリックしたときに現れる承認ダイアログのスクリーンショットです。
+Following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
 
-![Workflow が一時停止された時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
 
-## Workflow をスケジュール実行する
+## Scheduling a Workflow
 
 It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
-膨大なリソースを使用する Workflow、あるいは `triggers` キーを利用してコミット時以外にも定期的にリポートを生成するような Workflow を考えてみます。 `triggers` キーを挿入できるのは `workflows` キーの配下**のみ**となります。 この機能は、指定したブランチについて、協定世界時 (UTC) を扱う `cron` コマンドの構文で Workflow の実行をスケジューリングできるようにします。
+Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
 
-### 夜間に実行する例
-
+### Nightly Example
 {:.no_toc}
 
 By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
-下記は、`nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
+In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
 
 ```yaml
 workflows:
@@ -235,35 +231,33 @@ workflows:
       - coverage
 ```
 
-このなかで `commit` という名前の Workflow には `triggers` がありません。そのため、この部分は `git push` するたびに実行されます。 `nightly` の Workflow には `triggers` があり、指定した`スケジュールに沿って`実行されます。
+In the above example, the `commit` workflow has no `triggers` key and will run on every `git push`. The `nightly` workflow has a `triggers` key and will run on the specified `schedule`.
 
-### スケジュール設定における注意点
-
+### Specifying a Valid Schedule
 {:.no_toc}
 
-`schedule` 配下では、`cron` キー と `filters` キーを指定する必要があります。
+A valid `schedule` requires a `cron` key and a `filters` key.
 
-`cron` キーの値は [valid crontab entry](https://crontab.guru/) にある通りに指定しなければなりません。
+The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
 
-**注**：Cron のステップ値 (`*/1` や `*/20` など) には**対応していません**。
+**Note:** Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
 
-`filters` キーの値は、所定のブランチの実行ルールを定義する内容とします。
+The value of the `filters` key must be a map that defines rules for execution on specific branches.
 
-詳しくは [CircleCI 設定リファレンス]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)ページの `branches` を参照してください。
+For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
 
-実際の設定サンプルは [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) で確認できます。
+For a full configuration example, see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
-## Workflow でのコンテキストとフィルターの使い方
+## Using Contexts and Filtering in Your Workflows
 
-次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
+The following sections provide example for using Contexts and filters to manage job execution.
 
-### 環境変数を共有するジョブコンテキストの使い方
-
+### Using Job Contexts to Share Environment Variables
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
-下記で示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う設定を施した、シーケンシャルジョブ Workflow の例です。
+The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
     workflows:
       version: 2
@@ -283,17 +277,16 @@ workflows:
                 - test2
     
 
-この例では、環境変数はデフォルト名の `org-global` としている `context` キーを設定することで定義されます。 Workflows にある `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 通常は、組織が管理している全プロジェクトがその組織の一連のコンテキストにアクセスすることになります。
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization.
 
-### 枝分かれしたジョブの実行
-
+### Branch-Level Job Execution
 {:.no_toc}
 
-下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
+The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
-![枝分かれしたジョブの実行]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
+The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
 ```yaml
 workflows:
@@ -319,7 +312,6 @@ workflows:
 For more information on regular expressions, see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below. For a full example of workflows, see the [configuration file](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for the Sample Sequential Workflow With Branching project.
 
 ### Executing Workflows for a Git Tag
-
 {:.no_toc}
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
@@ -401,7 +393,6 @@ workflows:
 **Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 
 ### Using Regular Expressions to Filter Tags and Branches
-
 {:.no_toc}
 
 CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
@@ -410,21 +401,21 @@ For example, `only: /^config-test/` only matches the `config-test` tag. To match
 
 For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
-## ジョブ間でデータ共有を可能にする Workspace の使い方
+## Using Workspaces to Share Data Among Jobs
 
-各 Workflow は、後で実行されるジョブにファイルを渡すことのできる Workspace を、その Workflow に関連付けた形で保持しています。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を行うとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできるということです。 下記のイラストは、Workspace 内に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を説明しているものです。
+各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
-![Workspace のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![workspaces data flow]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
-そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するようなワークフローでは、Workspace を利用してデータを共有する必要に迫られることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
+Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
-例えば、Scala のプロジェクトはビルドジョブにおけるコンパイルの部分で多くの CPU リソースを消費します。 一方、Scala のテストジョブは CPU 負荷が高いとは言えず、複数コンテナを並行処理しても問題ないほどです。 ビルドジョブに大きなコンテナを使い、Workspace にコンパイル済みデータを保存しておくことで、ビルドジョブで作成したコンパイル済みの Scala をテストコンテナで使うことが可能になります。
+For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
 
-もう 1 つの例は、JAVA アプリケーションをビルドし、その jar ファイルを Workspace に保存する `build` ジョブを含むプロジェクトです。 jar を用いてテストを並行処理するために、`build` ジョブは `integration-test`、`unit-test`、`code-coverage` にファンアウトするとします。
+A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
 
-ジョブで作られたデータを保存して他のジョブでも使えるよう、`persist_to_workspace` キーをジョブに追加します。 `persist_to_workspace` の `paths:` プロパティに記述されたディレクトリ・ファイルは、`root` キーで指定しているディレクトリの相対パスとなる一時 Workspace にアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
+To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-`attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
+Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
 ```yaml
 # Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
@@ -448,7 +439,7 @@ jobs:
 
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
-          # working_directory からの相対パスか絶対パスを指定します This is a directory on the container which is 
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
           # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
@@ -480,66 +471,65 @@ workflows:
             - flow
 ```
 
-ビルドジョブとデプロイジョブの間でデータをやりとりする Workspace を活用する生きたサンプルとして、CircleCI マニュアルのビルドを構成している [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。 Workspace、キャッシュ、アーティファクトの使用における概念がわかる情報として、ブログページ [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) もチェックしてみてください。
+For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation. For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
-## Workflow で失敗したジョブの再実行の仕方
+## Rerunning a Workflow's Failed Jobs
 
-Workflow を利用すると、ビルドの失敗に迅速に対応できるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行するには、CircleCI 上で **WORKFLOWS** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示します。さらに、**Rerun** ボタンをクリックして **Rerun from failed** を選びます。
+When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
 
-![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 
-ここでは Workflow に関する一般的な問題とその解決方法について解説しています。
+This section describes common problems and solutions for Workflows.
 
-### Workflow がスタートしない
-
+### Workflows Not Starting
 {:.no_toc}
 
-Workflow を設定しているときに新しいジョブが表示されなくなった場合、`config.yml` の記述にエラーがあると考えられます。
+When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
 
 Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
 
-Workflow の設定を行っているときは、その設定に問題がないか CircleCI の Workflow ページ (ジョブページでは*ありません*) をたびたび確認するとよいでしょう。
+When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
 
-プロジェクトのジョブページは下記のような URL になっています。
+A project's Job page URL looks like this:
 
 `https://circleci.com/:VCS/:ORG/:PROJECT`
 
-また、Workflow ページは下記のような URL となっています。
+A Workflow page URL looks like this:
 
 `https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
 
-この Workflow ページで、黄色地に「Needs Setup」という文字が表示されていないか確認してください。
+Look for Workflows that have a yellow tag and "Needs Setup" for the text.
 
-![Workflow の誤った設定例]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
+![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
-### Workflow の処理中に GitHub で待機状態のままになる
-
+### Workflows Waiting for Status in GitHub
 {:.no_toc}
 
-GitHub リポジトリのブランチに実装済みの Workflow があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除した方が良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
+If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
-![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
+![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-`ci/circleci` のチェックボックスがオンになっていると、Workflow 使用時に GitHub での処理完了を表すステータス表示に問題が出ることがあります。原因は、名前で区別したジョブを含むキーと合わせて CircleCI がステータスを GitHub にポストするためです。
+Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
 
-この設定を解除するには、GitHub の Setting ページから Branches にアクセスし、保護されたブランチの Edit ボタンクリックします。該当のページは https://github.com/your-org/project/settings/branches といった URL になっています。
+Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
 
-## その他の参考資料
-
+## 関連情報
 {:.no_toc}
 
-- CircleCI 1.0 の `circle.yml` ファイルから CircleCI 2.0 の `.circleci/config.yml` ファイルへ移行する際の Workflow の設定方法を知りたい場合は、2.0 移行マニュアルの [Workflow 設定の手順]({{ site.baseurl }}/2.0/migrating-from-1-2/)をご覧ください。
+- For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document.
 
-- Workflow に関するよくある質問は、FAQ ページの [Workflow]({{ site.baseurl }}/2.0/faq) セクションを参照してください。
+- For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ.
 
-- Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) から入手できます。
+- For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
 
-## 動画：Workflow を使った複数ジョブの設定
+## Video: Configure Multiple Jobs with Workflows
+{:.no_toc}
 
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-### 動画：テストとデプロイを自動実行するビルドのスケジューリング方法
+### Video: How to Schedule Your Builds to Test and Deploy Automatically
+{:.no_toc}
 
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
