@@ -45,7 +45,7 @@ Operate on orbs
   validate    orb.yml ファイルを精査します
 ```
 
-**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+**※**Orb の作成においては、サードパーティ製 Orb の利用と作成にあなたの所属組織がオプトインした時点で、CircleCI のコード共有利用規約に同意したとみなされます。 CircleCI thereby licenses all orbs back to users under the MIT License agreement.
 
 ## Importing Partner Orbs
 
