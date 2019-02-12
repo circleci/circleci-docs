@@ -7,11 +7,11 @@ categories:
   - getting-started
 order: 1
 ---
-CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素をまとめた他のユーザーと共有可能なパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of certified orbs.
+CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素をまとめた他のユーザーと共有可能なパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 Workflow 設定において、まずはそれら既存の Orbs が活用できないかチェックしてみることをおすすめします。 認証済み Orbs は [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)で一覧可能です。
 
-## Importing an Existing Orb
+## Orb をインポートする
 
-To import an existing orb, add a single line to to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
+既存の Orb をインポートするには、version 2.1 とした [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、以下のように 1つの Orb につき設定を 1 行書き加えます。
 
     version: 2.1
     
@@ -20,11 +20,11 @@ To import an existing orb, add a single line to to your version 2.1 [.circleci/c
       heroku: circleci/heroku@0.0.1
     
 
-In the above example, two orbs are imported into your config, the [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) and the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
+この例では、設定に [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) と [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) という 2 つの Orbs がインポートされます。
 
 **Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key.
 
-## Authoring Your Own Orb
+## 独自に Orb を作成する
 
 If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
 
