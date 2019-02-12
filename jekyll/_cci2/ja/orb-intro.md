@@ -11,7 +11,7 @@ CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素
 
 ## Orb をインポートする
 
-既存の Orb をインポートするには、version 2.1 とした [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、以下のように 1つの Orb につき設定を 1 行書き加えます。
+既存の Orb をインポートするには、version 2.1 とした [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、下記のように 1つの Orb につき設定を 1 行書き加えます。
 
     version: 2.1
     
@@ -45,9 +45,9 @@ Operate on orbs
   validate    orb.yml ファイルを精査します
 ```
 
-**※**Orb の作成においては、サードパーティ製 Orb の利用と作成にあなたの所属組織がオプトインした時点で、CircleCI のコード共有利用規約に同意したとみなされます。 CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+**※**Orb の作成においては、サードパーティ製 Orb の利用と作成にあなたの所属組織がオプトインした時点で、CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がそのユーザーに利用を許諾する形となります。
 
-## Importing Partner Orbs
+## パートナー製 Orbs をインポートする
 
 Import the following Partner Orbs by using the `orbs` key in your `.circleci.yml/config.yml` file and replacing `<orb reference string>` with one from the table.
 
