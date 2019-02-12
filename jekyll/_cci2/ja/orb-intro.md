@@ -45,7 +45,7 @@ Operate on orbs
   validate    orb.yml ファイルを精査します
 ```
 
-**※**Orb の作成時においては、CircleCI の設定画面でサードパーティ製 Orb の利用と作成に関するオプトインをあなたの所属組織が承諾した段階で、あなたが CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がそのユーザーに利用を許諾する形となります。
+**※**Orb の作成時においては、CircleCI の設定画面でサードパーティ製 Orb の利用と作成に関するオプトインをあなたの所属組織が承諾した段階で、あなたが CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がユーザーに利用を許諾する形となります。
 
 ## パートナー製 Orbs をインポートする
 
@@ -68,5 +68,5 @@ Operate on orbs
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - 一般的な質問に対する答えをお探しの場合は [Orbs に関する FAQ]({{site.baseurl}}/2.0/orbs-faq/) をご覧ください。
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく説明しています。
+- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
 - Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
