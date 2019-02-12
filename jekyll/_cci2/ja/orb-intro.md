@@ -7,11 +7,11 @@ categories:
   - getting-started
 order: 1
 ---
-CircleCI Orbs は、ジョブ、コマンド、Executor といった設定要素をまとめた他のユーザーと共有可能なパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 Workflow 設定において、まずはそれら既存の Orbs が活用できないかチェックしてみることをおすすめします。 認証済み Orbs は [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)で一覧可能です。
+CircleCI Orbs は、ジョブ、コマンド、Executor のような設定要素をまとめた共有型のパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 Workflow の設定をする際には、まずはそれら既存の Orbs のなかに活用できるものがないかチェックしてみることをおすすめします。 認証済みの Orbs などは [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)で一覧可能です。
 
 ## Orb をインポートする
 
-既存の Orb をインポートするには、version 2.1 とした [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、下記のように 1つの Orb につき設定を 1 行書き加えます。
+既存の Orb をインポートするには、version 2.1 の [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、下記のように 1つの Orb につき設定を 1 行書き加えます。
 
     version: 2.1
     
@@ -60,13 +60,13 @@ Operate on orbs
 パートナー製 Orb の名称 | Orb 参照文字列 \---\---\---\---|\---\---\----- [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0` [Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1` [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1` [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0` [Datree](https://circleci.com/orbs/registry/orb/datree/version-alignment-rule) | `datree: datree/version-alignment-rule@1.0.0` [DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0` [Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0` [Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1` [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1` [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5` [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0` [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2` [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1` [Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0` [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0` [Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.0` [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2` [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1` [Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2` [Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4` [WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
 {: class="table table-striped"}
 
-**Note:** As a prerequisite, you must enable use of 3rd-party orbs on the Settings > Security page for your org.
+**※**あなたの組織でサードパーティ製 Orbs を利用するにあたっては、あらかじめ CircleCI の SETTINGS ＞ Security ページにアクセスし、「Orb Security Settings」で「Yes」を選んでおく必要があります。
 
 ## 関連情報
 
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
-- Refer to the [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
+- 一般的な質問に対する答えをお探しの場合は [Orbs に関する FAQ]({{site.baseurl}}/2.0/orbs-faq/) をご覧ください。
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
-- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく説明しています。
+- Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
