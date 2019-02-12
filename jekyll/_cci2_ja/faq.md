@@ -115,7 +115,7 @@ myUsername/couchdb:1.6.1
 
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 {:.no_toc}
-Docker イメージを指定する際に、`latest` タグを付け **ない** のが正しい方法です。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、たとえば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
+Docker イメージを指定する際に、`latest` タグを付け **ない** のが正しい方法です。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、たとえば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/ja/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {:.no_toc}
@@ -169,7 +169,7 @@ Workflows は CircleCI 2.0 固有の機能です。Workflows を利用するに�
 
 ### 同一の Workflow 内で Linux 環境と Mac 環境両方のジョブを実行できるようにする機能が追加される予定はありますか？
 {:.no_toc}
-すでにサポートしています。 「config.yml の設定例」内の[複数の実行環境 (macOS ＋ Docker) を利用する設定例]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker)を参照してください。
+すでにサポートしています。 「config.yml の設定例」内の[複数の実行環境 (macOS ＋ Docker) を利用する設定例]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker)を参照してください。
 
 ### `config.yml` ファイルの内容を複数ファイルに分割することはできますか？
 {:.no_toc}
