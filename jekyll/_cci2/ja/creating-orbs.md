@@ -45,9 +45,9 @@ Before working with orbs, you may find it helpful to gain a high-level understan
 
 Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Detailed instructions can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
 
-* [Download and Install the CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#installing-the-cli-for-the-first-time).
-* [Update the CLI](https://circleci.com/docs/2.0/creating-orbs/#updating-the-circleci-cli-after-installation).
-* [Configure the CLI](https://circleci.com/docs/2.0/creating-orbs/#configuring-the-circleci-cli).
+- [Download and Install the CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#installing-the-cli-for-the-first-time).
+- [Update the CLI](https://circleci.com/docs/2.0/creating-orbs/#updating-the-circleci-cli-after-installation).
+- [Configure the CLI](https://circleci.com/docs/2.0/creating-orbs/#configuring-the-circleci-cli).
 
 #### Step 2 - Verify You Installed the CLI Correctly
 
@@ -79,9 +79,9 @@ For detailed information about this command, refer to the [orb-tools/publish](ht
 
 This following sections of this document describe in more detail:
 
-* Versioning and Designing orbs
-* Creating an inline orb in your `config.yml` file with templates
-* Creating, validating, and publishing an orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/)
+- Versioning and Designing orbs
+- Creating an inline orb in your `config.yml` file with templates
+- Creating, validating, and publishing an orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/)
 
 Certified orbs are those that CircleCI has built or has reviewed and approved as part of the features of the CircleCI platform. Any project may use certified orbs in configuration version 2.1 and higher.
 
@@ -95,9 +95,9 @@ Certified orbs are those that CircleCI has built or has reviewed and approved as
 
 Orbs are published with the standard 3-number semantic versioning system:
 
-* major
-* minor
-* patch
+- major
+- minor
+- patch
 
 Orb authors should adhere to semantic versioning. Within ```config.yml```, you may specify wildcard version ranges to resolve orbs. You may also use the special string ```volatile``` to pull in whatever the highest version number is at time your build runs.
 
@@ -122,12 +122,12 @@ A development version should be referenced by its complete, fully-qualified name
 
 When designing your own orbs, make sure your orbs meet the following requirements:
 
-* Orbs should always use `description`. - Be sure to explain usage, assumptions, and any tricks in the ```description``` key under jobs, commands, executors, and parameters.
-* Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
-* Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your Orb, so you can use general names like "run-tests" in most cases.
-* Required vs. optional parameters - Provide sound default values of parameters whenever possible.
-* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
-* Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
+- Orbs should always use `description`. - Be sure to explain usage, assumptions, and any tricks in the ```description``` key under jobs, commands, executors, and parameters.
+- Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
+- Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your Orb, so you can use general names like "run-tests" in most cases.
+- Required vs. optional parameters - Provide sound default values of parameters whenever possible.
+- Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
+- Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
 
 Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details and examples of commands, executors and parameters in orbs.
 
@@ -231,9 +231,9 @@ When you have completed authoring an orb, and have published the orb, the orb wi
 
 The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
 
-* **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
-* **usage:** (required) A full, valid config map that includes an example of using the orb.
-* **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
+- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
+- **usage:** (required) A full, valid config map that includes an example of using the orb.
+- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
 
 ### Simple Examples
 
@@ -335,14 +335,14 @@ Orb versions may be added to the registry either as development versions or prod
 
 ### Development and Production Orb Security Profiles
 
-* Only organization owners can publish production orbs.
-* Any member of an organization can publish dev orbs in namespaces.
-* Organization owners can promote any dev orb to be a semantically versioned production orb.
+- Only organization owners can publish production orbs.
+- Any member of an organization can publish dev orbs in namespaces.
+- Organization owners can promote any dev orb to be a semantically versioned production orb.
 
 ### Development and Production Orb Retention and Mutability Characteristics
 
-* Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
-* Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
+- Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
+- Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
 
 ### Development and Production Orbs Versioning Semantics
 
@@ -350,11 +350,11 @@ Development orbs are tagged with the format ```dev:<< your-string >>```. Product
 
 In development orbs, the string label given by the user has the following restrictions:
 
-* Up to 1023 non-whitespace characters
+- Up to 1023 non-whitespace characters
 
 Examples of valid development orb tags:
 
-* Valid:
+- Valid:
 
       "dev:mybranch"
       "dev:2018_09_01"
@@ -363,7 +363,7 @@ Examples of valid development orb tags:
       "dev:myVERYIMPORTANTbranch"
     
 
-* Invalid
+- Invalid
 
       "dev: 1" (No spaces allowed)
       "1.2.3-rc1" (No leading "dev:")
@@ -373,9 +373,9 @@ In production orbs, use the form ```X.Y.Z``` where ```X``` is a "major" version,
 
 While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
-* MAJOR: when you make incompatible API changes
-* MINOR: when you add functionality in a backwards-compatible manner
-* PATCH: when you make backwards-compatible bug fixes
+- MAJOR: when you make incompatible API changes
+- MINOR: when you add functionality in a backwards-compatible manner
+- PATCH: when you make backwards-compatible bug fixes
 
 #### Using Orbs Within Your Orb and Register-Time Resolution
 
@@ -415,17 +415,17 @@ If the case arises where you need to delete an orb for emergency reasons, please
 
 The ```circleci``` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run ```circleci help```. Refer to [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
 
-*     circleci namespace create <name> <vcs-type> <org-name> [flags]
+-     circleci namespace create <name> <vcs-type> <org-name> [flags]
 
-*     circleci orb create <namespace>/<orb> [flags]
+-     circleci orb create <namespace>/<orb> [flags]
 
-*     circleci orb validate <path> [flags]
+-     circleci orb validate <path> [flags]
 
-*     circleci orb publish <path> <namespace>/<orb>@<version> [flags]
+-     circleci orb publish <path> <namespace>/<orb>@<version> [flags]
 
-*     circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]
+-     circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]
 
-*     circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]
+-     circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]
 
 For a full list of help commands inside the CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
@@ -536,48 +536,48 @@ When you have completed authoring your own orb, validate that the orb is properl
 
 The `orb-tools orb` provides the following jobs and commands that you may find useful.
 
-* `orb-tools/pack` (experimental) uses the CLI to pack an orb file structure into a single orb yml.
-* `orb-tools/validate` uses the CLI to validate a given orb yml.
-* `orb-tools/increment` uses the CLI to increment the version of an orb in the registry. If the orb does not have a version yet it starts at 0.0.0.
-* `orb-tools/publish` uses the CLI to publish an orb to the registry.
+- `orb-tools/pack` (experimental) uses the CLI to pack an orb file structure into a single orb yml.
+- `orb-tools/validate` uses the CLI to validate a given orb yml.
+- `orb-tools/increment` uses the CLI to increment the version of an orb in the registry. If the orb does not have a version yet it starts at 0.0.0.
+- `orb-tools/publish` uses the CLI to publish an orb to the registry.
 
 ### `orb-tools/pack`
 
 This CLI command enables you to pack the content of an orb for publishing. The following parameters may be passed with this command:
 
-* source-dir: Path to the root of the orb source directory to be packed. (for example, `my-orb/src/`)
-* destination-orb-path: Path including filename of where the packed orb will be written.
-* validate: Boolean for whether or not to do validation on the orb. Default is false.
-* checkout: Boolean for whether or not to checkout as a first step. Default is true.
-* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
-* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
-* workspace-path: Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided then this job will not persist to a workspace.
-* artifact-path: Path to directory that should be saved as a job artifact. If the default value of blank is provided then this job will not save any artifacts.
+- source-dir: Path to the root of the orb source directory to be packed. (for example, `my-orb/src/`)
+- destination-orb-path: Path including filename of where the packed orb will be written.
+- validate: Boolean for whether or not to do validation on the orb. Default is false.
+- checkout: Boolean for whether or not to checkout as a first step. Default is true.
+- attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+- workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+- workspace-path: Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided then this job will not persist to a workspace.
+- artifact-path: Path to directory that should be saved as a job artifact. If the default value of blank is provided then this job will not save any artifacts.
 
 ### `orb-tools/increment`
 
 This command uses the CLI to increment the version of an orb in the registry. If the orb does not have a version yet it starts at 0.0.0. The following parameters may be passed with this command:
 
-* orb-path: Path to an orb file.
-* orb-ref: A version-less orb-ref in the form /
-* segment: The semantic version segment to increment 'major' or 'minor' or 'patch'
-* publish-token-variable: The env var containing your token. Pass this as a literal string such as $ORB_PUBLISHING_TOKEN. Do not paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
-* validate: Boolean for whether or not to do validation on the orb. Default is false.
-* checkout: Boolean for whether or not to checkout as a first step. Default is true.
-* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
-* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+- orb-path: Path to an orb file.
+- orb-ref: A version-less orb-ref in the form /
+- segment: The semantic version segment to increment 'major' or 'minor' or 'patch'
+- publish-token-variable: The env var containing your token. Pass this as a literal string such as $ORB_PUBLISHING_TOKEN. Do not paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
+- validate: Boolean for whether or not to do validation on the orb. Default is false.
+- checkout: Boolean for whether or not to checkout as a first step. Default is true.
+- attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+- workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
 
 ### `orb-tools/publish`
 
 This command is used to publish an orb. The following parameters may be passed with this command:
 
-* orb-path: Path of the orb file to publish.
-* orb-ref: A full orb-ref in the form of /@
-* publish-token-variable: The env var containing your publish token. Pass this as a literal string such as `$ORB_PUBLISHING_TOKEN`. DO NOT paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
-* validate: Boolean for whether or not to do validation on the orb. Default is false.
-* checkout: Boolean for whether or not to checkout as a first step. Default is true.
-* attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
-* workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
+- orb-path: Path of the orb file to publish.
+- orb-ref: A full orb-ref in the form of /@
+- publish-token-variable: The env var containing your publish token. Pass this as a literal string such as `$ORB_PUBLISHING_TOKEN`. DO NOT paste the actual token into your configuration. If omitted it's assumed the CLI has already been setup with a valid token.
+- validate: Boolean for whether or not to do validation on the orb. Default is false.
+- checkout: Boolean for whether or not to checkout as a first step. Default is true.
+- attach-workspace: Boolean for whether or not to attach to an existing workspace. Default is false.
+- workspace-root: Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to '.' (the working directory)
 
 ### Validate and Publish Example
 
@@ -599,3 +599,11 @@ Below is an example of how to use the `orb-tools` orb to validate and publish an
     
 
 In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published.
+
+## 関連情報
+
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
+- Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
