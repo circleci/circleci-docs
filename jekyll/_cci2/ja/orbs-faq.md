@@ -9,10 +9,10 @@ order: 20
 ---
 This document describes various questions and technical issues that you may find helpful when working with Orbs.
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ### Downloading, Integrating, and Testing Orbs
-
 {:.no_toc}
 
 - Question: How do I download, integrate and test orbs?
@@ -122,15 +122,12 @@ yourusername/circle-autoAdded by GitHub
     * Question: May I use elements from a different orb when creating my own orb?
     
     * Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
-    
-    {% raw %}
-    
 
+{% raw %}
 orbs: some-orb: some-ns/some-orb@volatile executors: my-executor: some-orb/their-executor commands: my-command: some-orb/their-command jobs: my-job: some-orb/their-job another-job: executor: my-executor steps: - my-command param1: "hello"
+{% endraw %}
 
-    {% endraw %}
-    
-    ### Using 3rd Party Orbs
+### Using 3rd Party Orbs
     
     * Question: Why do I receive an error message when trying to use a 3rd party orb?
     
@@ -145,7 +142,8 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 
 ## 関連情報
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
+- Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
