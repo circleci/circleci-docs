@@ -139,7 +139,7 @@ To write inline orbs, place the orb elements under that orb's key in the ```orb
 
 {% raw %}
 ```yaml
-version 2.1
+version: 2.1
 description: # The purpose of this orb
 
 orbs:
@@ -261,7 +261,7 @@ If you would like, you may also supply an additional `examples` stanza in the or
 
 {% raw %}
 ```yaml
-version 2.1
+version: 2.1
 
 examples:
   simple_greeting:
@@ -287,7 +287,7 @@ The above usage example can be optionally supplemented with a `result` key, demo
 
 {% raw %}
 ```yaml
-version 2.1
+version: 2.1
 
 examples:
   simple_greeting:
@@ -408,7 +408,7 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
 
 {% raw %}
 ```yaml
-version 2.1
+version: 2.1
 
 orbs:
   some-orb: some-ns/some-orb@volatile
@@ -421,7 +421,7 @@ jobs:
   another-job:
     executor: my-executor
     steps:
-      - my-command
+      - my-command:
           param1: "hello"
 ```
 {% endraw %}
