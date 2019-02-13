@@ -182,6 +182,8 @@ In all cases, CircleCI recommends that you make use of the CircleCI CLI to valid
 For advanced testing, you may also want to use a shell unit testing framework such as BATS.
 
 ## See Also
-
-* Refer to [Creating Orbs]({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
-* Refer to [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) for more detailed information on the CircleCI CLI and how to use the CLI for orb testing.
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to the [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
