@@ -9,7 +9,7 @@ order: 1
 ---
 This page describes various testing methodologies you can test use to test orbs.
 
-* 目次
+- 目次
 {:toc}
 
 ## はじめに
@@ -18,10 +18,10 @@ CircleCI orbs are packages of configuration that you can use in your configurati
 
 You can think of orb testing at four levels, in increasing levels of complexity and scope.
 
-* Schema Validation - this can be done with a single CLI command and checks if the orb is well-formed YAML and conforms to the orb schema.
-* Expansion Testing - this can be done by scripting the CircleCI CLI and tests whether the elements of the orb generate the configuration you intended when processing configuration containing those elements.
-* Runtime Testing - this requires setting up separate tests and running them inside a CircleCI build.
-* Integration Testing - this is likely only needed for fairly advanced orbs or orbs designed specifically as public, stable interfaces to 3rd-party services. Doing orb integration tests requires a custom build and your own external testing environments for whatever systems you are integration with.
+- Schema Validation - this can be done with a single CLI command and checks if the orb is well-formed YAML and conforms to the orb schema.
+- Expansion Testing - this can be done by scripting the CircleCI CLI and tests whether the elements of the orb generate the configuration you intended when processing configuration containing those elements.
+- Runtime Testing - this requires setting up separate tests and running them inside a CircleCI build.
+- Integration Testing - this is likely only needed for fairly advanced orbs or orbs designed specifically as public, stable interfaces to 3rd-party services. Doing orb integration tests requires a custom build and your own external testing environments for whatever systems you are integration with.
 
 The sections below provide details on each of these techniques for each level of orb testing.
 
@@ -155,9 +155,9 @@ Yet another approach is when you run a build, publish a dev version of the orb, 
 
 Sometimes you will want to test how your orbs interact with external services. There are several possible approaches depending on circumstances:
 
-* Make your orb support a dry-run functionality of whatever it is interacting with, and use that mode in your tests.
-* Do real interactions, using a properly set up test account and a separate repository that runs those tests using a published dev version of your orb.
-* Spin up a local service in another container of your job.
+- Make your orb support a dry-run functionality of whatever it is interacting with, and use that mode in your tests.
+- Do real interactions, using a properly set up test account and a separate repository that runs those tests using a published dev version of your orb.
+- Spin up a local service in another container of your job.
 
 ## Orb Testing Best Practices
 
@@ -183,5 +183,8 @@ For advanced testing, you may also want to use a shell unit testing framework su
 
 ## 関連情報
 
-* Refer to [Creating Orbs]({{site.baseurl}}//2.0/creating-orbs/#creating-inline-orbs) for more information on how to test your inline orbs.
-* Refer to [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) for more detailed information on the CircleCI CLI and how to use the CLI for orb testing.
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- 一般的な質問に対する答えをお探しの場合は [Orbs に関する FAQ]({{site.baseurl}}/2.0/orbs-faq/) をご覧ください。
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
