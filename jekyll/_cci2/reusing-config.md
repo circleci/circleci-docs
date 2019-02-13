@@ -153,7 +153,7 @@ jobs:
           from: bucket/build_asset.txt
           to: "s3://my-s3-bucket-name"
           arguments: --dryrun
- ```
+```
 
 ## Authoring Reusable Executors 
 
@@ -515,7 +515,7 @@ commands:
         type: enum
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
- ```
+```
  {% endraw %}
 
 #### Executor
@@ -644,7 +644,7 @@ workflows:
 Original config.yml file:
 ```yaml
 version: 2.1
- 
+
 jobs:
    build:
      parameters:
@@ -663,13 +663,13 @@ jobs:
            s3cmd --access_key ${<< parameters.access-key >>} \\
                  --secret_key ${<< parameters.secret-key >>} \\
                  << parameters.command >>
- workflows:
-   workflow:
-     jobs:
-       - build:
-           access-key: FOO_BAR
-           secret-key: BIN_BAZ
-           command: ls s3://some/where
+workflows:
+  workflow:
+    jobs:
+      - build:
+          access-key: FOO_BAR
+          secret-key: BIN_BAZ
+          command: ls s3://some/where
 ```
 {% endraw %}
 
