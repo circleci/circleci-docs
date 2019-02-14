@@ -608,13 +608,13 @@ jobs: # conditional steps may also be defined in `commands:`
     parameters:
       custom_checkout:
         type: string
-        default: \"\"
+        default: ""
     machine: true
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
           steps:
-            - run: echo \"my custom checkout\"
+            - run: echo "my custom checkout"
       - unless:
           condition: <<parameters.custom_checkout>>
           steps:
@@ -623,7 +623,7 @@ workflows:
   build-test-deploy:
     jobs:
       - job_with_optional_custom_checkout:
-          custom_checkout: \"any non-empty string is truthy\"
+          custom_checkout: "any non-empty string is truthy"
       - job_with_optional_custom_checkout
 ```
 

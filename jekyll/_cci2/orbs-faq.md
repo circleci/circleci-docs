@@ -163,7 +163,8 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 **Note:** CircleCI does not require this for certified orbs (orbs that have been reviewed and approved by CircleCI prior to publishing). At this time, the certification program for orbs authored by third parties is not yet available, though will be available in the near future.
 
 ## See Also
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
