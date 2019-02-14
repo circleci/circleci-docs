@@ -43,7 +43,7 @@ this access with `iptables` rules in a production setup, [contact support](https
   "sa-east-1": "ami-70026d1c",
   "us-east-1": "ami-cb6f1add",
   "us-east-2": "ami-57c7e032",
-  "us-west-1": "ami-4fc8ee2f",
+  "us-west-1": "ami-059b818564104e5c6",
   "us-west-2": "ami-c24a2fa2"
   };
 
