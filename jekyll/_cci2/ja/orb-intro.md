@@ -23,7 +23,7 @@ orbs:
 
 この例では、設定に [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) と [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) という 2 つの Orbs がインポートされます。
 
-**注：**CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を ON にすることで `Orbs` を使えるようになります。
+**注：**CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を ON にすることで `Orbs` キーを使えるようになります。
 
 ## 独自に Orb を作成する
 
@@ -45,7 +45,7 @@ orbs:
       validate    Validate an orb.yml
     
 
-**※**Orb の作成時においては、CircleCI の設定画面でサードパーティ製 Orb の利用と作成に関するオプトインをあなたの所属組織が承諾した段階で、あなたが CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がユーザーに利用を許諾する形となります。
+**注 :** Orb の作成時においては、CircleCI の設定画面でサードパーティ製 Orb の利用と作成に関するオプトインをあなたの所属組織が承諾した段階で、あなたが CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がユーザーに利用を許諾する形となります。
 
 ## パートナー製 Orbs をインポートする
 
