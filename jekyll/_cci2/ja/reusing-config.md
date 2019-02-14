@@ -36,6 +36,8 @@ A reusable command may have the following immediate children keys as a map:
 Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
 
 ```yaml
+version: 2.1
+
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -57,6 +59,8 @@ Reusable commands are invoked with specific parameters as steps inside a job. Wh
 The following example invokes the command `sayhello` and passes it a parameter `to`:
 
 ```yaml
+version: 2.1
+
 jobs:
   myjob:
     docker:
@@ -88,7 +92,9 @@ CircleCI has several built-in commands available to all [circleci.com](http://ci
 The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
 ```yaml
+version: 2.1
 # aws-s3 orb
+
 commands:
   sync:
     description: "A simple encapsulation of doing an s3 sync"
@@ -127,55 +133,72 @@ workflows:
 
 Defining a `build` job:
 
-    version: 2.1
-    orbs:
-      aws-cli: circleci/aws-cli@0.1.2
-      aws-s3: circleci/aws-s3@1.0.0
-    jobs:
-      build:
-        executor: aws-cli/default
-        steps:
-          - checkout
-          - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
-          - aws-s3/sync:
-              from: bucket
-              to: "s3://my-s3-bucket-name/prefix"
-              overwrite: true
-          - aws-s3/copy:
-              from: bucket/build_asset.txt
-              to: "s3://my-s3-bucket-name"
-              arguments: --dryrun
-     ```
-    
-    ## Authoring Reusable Executors 
-    
-    Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc. 
-    
-    Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
-    
-    An executor definition includes one or more of the following keys:
-    
-    - `docker` or `machine` or `macos` 
-    - `environment`
-    - `working_directory`
-    - `shell`
-    - `resource_class`
-    
-    In the following example `my-executor` is passed as the single value of the key `executor`. 
-    
-    ```yaml
-    version: 2.1
-    executors:
-      my-executor:
-        docker:
-          - image: circleci/ruby:2.5.1-node-browsers
-    
-    jobs:
-      my-job:
-        executor: my-executor
-        steps:
-          - run: echo outside the executor
-    
+```yaml
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.2
+  aws-s3: circleci/aws-s3@1.0.0
+jobs:
+  build:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
+      - aws-s3/sync:
+          from: bucket
+          to: "s3://my-s3-bucket-name/prefix"
+          overwrite: true
+      - aws-s3/copy:
+          from: bucket/build_asset.txt
+          to: "s3://my-s3-bucket-name"
+          arguments: --dryrun
+```
+
+## Authoring Reusable Executors
+
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+
+Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
+
+An executor definition includes one or more of the following keys:
+
+* `docker` or `machine` or `macos` 
+* `environment`
+* `working_directory`
+* `shell`
+* `resource_class`
+
+In the following example `my-executor` is passed as the single value of the key `executor`.
+
+```yaml
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
+
+```yaml
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
@@ -185,6 +208,8 @@ Defining a `build` job:
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
 ```yaml
+version: 2.1
+
 jobs:
   my-job:
     executor:
@@ -202,6 +227,7 @@ The following example declares and invokes an executor in two jobs that need to 
 
 ```yaml
 version: 2.1
+
 executors:
   lein_exec: # declares a reusable executor
     docker:
@@ -230,7 +256,9 @@ jobs:
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
 ```yaml
+version: 2.1
 # yaml from foo-orb
+
 executors:
   bar:
     machine: true
@@ -241,7 +269,9 @@ executors:
 `baz-orb` could define the `bar` executor too:
 
 ```yaml
+version: 2.1
 # yaml from baz-orb
+
 executors:
   bar:
     docker:
@@ -251,7 +281,9 @@ executors:
 You may use either executor from your configuration file with:
 
 ```yaml
+version: 2.1
 # config.yml
+
 orbs:
   foo-orb: somenamespace/foo@1
   baz-orb: someothernamespace/baz@3.3.1
@@ -272,6 +304,8 @@ When invoking an executor in a `job` any keys in the job itself will override th
 **Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
 
 ```yaml
+version: 2.1
+
 executors:
   python:
     docker:
@@ -297,6 +331,8 @@ jobs:
 The above config would resolve to the following:
 
 ```yaml
+version: 2.1
+
 jobs:
  build:
    steps: []
@@ -317,7 +353,9 @@ Parameters are declared by name under a job, command, or executor. The immediate
 The following example defines a command called `sync`:
 
 ```yaml
+version: 2.1
 commands: # a reusable command with parameters
+
   sync:
     parameters:
       from:
@@ -366,6 +404,8 @@ This section describes the types of parameters and their usage. The parameter ty
 Basic string parameters are described below:
 
 ```yaml
+version: 2.1
+
 commands:
   copy-markdown:
     parameters:
@@ -385,6 +425,8 @@ Strings should be quoted if they would otherwise represent another type (such as
 Boolean parameters are useful for conditionals:
 
 ```yaml
+version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -409,7 +451,7 @@ Capitalized and uppercase versions of the above values are also valid.
 The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
-version: "2.1"
+version: 2.1
 
 jobs:
   build:
@@ -435,6 +477,8 @@ workflows:
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
+version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -447,116 +491,244 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-    <br />
-
 {% raw %}
+```yaml
+version: 2.1
 
-yaml
-    commands:
-      list-files:
-        parameters:
-          os:
-            type: enum
-            default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
-            enum: ["darwin", "linux"]
- 
+commands:
+  list-files:
+    parameters:
+      os:
+        type: enum
+        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
+        enum: ["darwin", "linux"]
+```
  {% endraw %}
- 
- ```
-    
-    #### Executor
+
+#### Executor
 {:.no_toc}
 
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
+
 {% raw %}
+```yaml
+version: 2.1
 
-yaml version: 2.1 executors: xenial: parameters: some-value: type: string default: foo environment: SOME_VAR: << parameters.some-value >> docker: - image: ubuntu:xenial bionic: docker: - image: ubuntu:bionic
+executors:
+  xenial:
+    parameters:
+      some-value:
+        type: string
+        default: foo
+    environment:
+      SOME_VAR: << parameters.some-value >>
+    docker:
+      - image: ubuntu:xenial
+  bionic:
+    docker:
+      - image: ubuntu:bionic
 
-jobs: test: parameters: e: type: executor executor: << parameters.e >> steps: - run: some-tests
+jobs:
+  test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - run: some-tests
 
-workflows: workflow: jobs: - test: e: bionic - test: e: name: xenial some-value: foobar
-
+workflows:
+  workflow:
+    jobs:
+      - test:
+          e: bionic
+      - test:
+          e:
+            name: xenial
+            some-value: foobar
+```
 {% endraw %}
-<br />#### Steps
+
+#### 追加手順
 {:.no_toc}
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
 {% raw %}
-yaml commands: run-tests: parameters: after-deps: description: "Steps that will be executed after dependencies are installed, but before tests are run" type: steps default: [] steps: - run: make deps - steps: << parameters.after-deps >> - run: make test
+```yaml
+version: 2.1
+
+commands:
+  run-tests:
+    parameters:
+      after-deps:
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
+        type: steps
+        default: []
+    steps:
+    - run: make deps
+    - steps: << parameters.after-deps >>
+    - run: make test
+```
 {% endraw %}
 
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
 {% raw %}
-yaml jobs: build: machine: true steps: - run-tests: after-deps: - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests"
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine: true
+    steps:
+    - run-tests:
+        after-deps:
+          - run: echo "The dependencies are installed"
+          - run: echo "And now I'm going to run the tests"
+```
 {% endraw %}
 
 The above will resolve to the following:
 
 {% raw %}
-yaml steps: - run: make deps - run: echo "The dependencies are installed" - run: echo "And now I'm going to run the tests" - run: make test
+```yaml
+version: 2.1
+
+steps:
+  - run: make deps
+  - run: echo "The dependencies are installed"
+  - run: echo "And now I'm going to run the tests"
+  - run: make test
+```
 {% endraw %}
 
 #### Environment Variable Name
-    
-    The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
+
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
 
 {% raw %}
-version: 2 jobs: build: docker: - image: ubuntu:latest steps: - run: command: | s3cmd --access_key ${FOO_BAR} \ --secret_key ${BIN_BAZ} \ ls s3://some/where workflows: workflow: jobs: - build version: 2
+```yaml
+version: 2.1
 
-Original config.yml file: version: 2.1 jobs: build: parameters: access-key: type: env_var_name default: AWS_ACCESS_KEY secret-key: type: env_var_name default: AWS_SECRET_KEY command: type: string docker: - image: ubuntu:latest steps: - run: | s3cmd --access_key ${<< parameters.access-key >>} \\ --secret_key ${<< parameters.secret-key >>} \\ << parameters.command >> workflows: workflow: jobs: - build: access-key: FOO_BAR secret-key: BIN_BAZ command: ls s3://some/where
+obs:
+  build:
+    docker:
+    - image: ubuntu:latest
+    steps:
+    - run:
+        command: |
+          s3cmd --access_key ${FOO_BAR} \
+                --secret_key ${BIN_BAZ} \
+                ls s3://some/where
+workflows:
+  workflow:
+    jobs:
+    - build
+  version: 2
+```
+
+Original config.yml file:
+
+```yaml
+version: 2.1
+
+jobs:
+   build:
+     parameters:
+       access-key:
+         type: env_var_name
+         default: AWS_ACCESS_KEY
+       secret-key:
+         type: env_var_name
+         default: AWS_SECRET_KEY
+       command:
+         type: string
+     docker:
+       - image: ubuntu:latest
+     steps:
+       - run: |
+           s3cmd --access_key ${<< parameters.access-key >>} \\
+                 --secret_key ${<< parameters.secret-key >>} \\
+                 << parameters.command >>
+workflows:
+  workflow:
+    jobs:
+      - build:
+          access-key: FOO_BAR
+          secret-key: BIN_BAZ
+          command: ls s3://some/where
+```
 {% endraw %}
 
 ## Authoring Parameterized Jobs
-    
-    It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
-    
-    Example of defining and invoking a parameterized job in a `config.yml`:
+
+It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
+
+Example of defining and invoking a parameterized job in a `config.yml`:
 
 {% raw %}
-yaml version: 2.1
+```yaml
+version: 2.1
 
-jobs: sayhello: # defines a parameterized job description: A job that does very little other than demonstrate what a parameterized job looks like parameters: saywhat: description: "To whom shall we say hello?" default: "World" type: string machine: true steps: - run: echo "Hello << parameters.saywhat >>"
+jobs:
+  sayhello: # defines a parameterized job
+    description: A job that does very little other than demonstrate what a parameterized job looks like
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - run: echo "Hello << parameters.saywhat >>"
 
-workflows: build: jobs: - sayhello: # invokes the parameterized job saywhat: Everyone
+workflows:
+  build:
+    jobs:
+      - sayhello: # invokes the parameterized job
+          saywhat: Everyone
+```
 {% endraw %}
 
 **Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
-    
-    ### Jobs Defined in an Orb
-    
-    If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
-    
-    **hello-orb**
-    
-    ```yaml
-    # partial yaml from hello-orb
-    jobs:
-      sayhello:
-        parameters:
-          saywhat:
-            description: "To whom shall we say hello?"
-            default: "World"
-            type: string
-        machine: true
-        steps:
-          - say:
-              saywhat: "<< parameters.saywhat >>"
-    commands:
+
+### Jobs Defined in an Orb
+
+If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
+
+**hello-orb**
+
+```yaml
+version: 2.1
+# partial yaml from hello-orb
+
+jobs:
+  sayhello:
+    parameters:
       saywhat:
-        parameters:
-          saywhat:
-            type: string
-        steps:
-          - run: echo "<< parameters.saywhat >>"
-    
+        description: "To whom shall we say hello?"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          saywhat: "<< parameters.saywhat >>"
+commands:
+  saywhat:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
+```
 
 **Config leveraging hello-orb**
 
 ```yaml
 # config.yml
 version: 2.1
+
 orbs:
   hello-orb: somenamespace/hello-orb@volatile
 workflows:
@@ -604,6 +776,7 @@ The above would resolve to the following:
 
 ```yaml
 version: 2.1
+
 jobs:
   build:
     steps: []
@@ -660,6 +833,7 @@ A single configuration may invoke a job multiple times. At configuration process
 
 ```yaml
 version: 2.1
+
 workflows:
   build:
     jobs:
@@ -694,6 +868,7 @@ The following example defines pre-steps and post-steps in the `bar` job of the `
 ```yaml
 # config.yml
 version: 2.1
+
 jobs:
   bar:
     machine: true
@@ -739,6 +914,7 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 ```yaml
 # inside config.yml
 version: 2.1
+
 jobs:
   myjob:
     parameters:
