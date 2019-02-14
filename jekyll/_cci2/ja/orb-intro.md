@@ -2,16 +2,16 @@
 layout: classic-docs
 title: "Orbs とは"
 short-title: "Orbs とは"
-description: "Starting point for CircleCI Orbs"
+description: "CircleCI Orbs マニュアルの入口"
 categories:
   - getting-started
 order: 1
 ---
-CircleCI Orbs は、ジョブ、コマンド、Executor のような設定要素をまとめた共有型のパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 Workflow の設定をする際には、まずはそれら既存の Orbs のなかに活用できるものがないかチェックしてみることをおすすめします。 認証済みの Orbs などは [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)で一覧可能です。
+CircleCI Orbs は、ジョブ、コマンド、Executor のような設定要素をまとめた共有可能なパッケージです。 CircleCI 独自の認証済み Orbs のほか、パートナー企業によるサードパーティ製 Orbs を用意しています。 Workflow の設定をする際には、まずはそれら既存の Orbs のなかに活用できるものがないかチェックしてみることをおすすめします。 認証済みの Orbs は [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)で一覧を確認できます。
 
 ## Orb をインポートする
 
-既存の Orb をインポートするには、version 2.1 の [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、下記のように 1つの Orb につき設定を 1 行書き加えます。
+既存の Orb をインポートするには、version 2.1 の [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで、下記のように 1 つの Orb につき設定を 1 行書き加えます。
 
 ```yaml
 version: 2.1
