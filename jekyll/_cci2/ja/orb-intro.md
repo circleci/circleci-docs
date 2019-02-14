@@ -13,12 +13,13 @@ CircleCI Orbs は、ジョブ、コマンド、Executor のような設定要素
 
 既存の Orb をインポートするには、version 2.1 の [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、下記のように 1つの Orb につき設定を 1 行書き加えます。
 
-    version: 2.1
-    
-    orbs:
-      slack: circleci/slack@0.1.0
-      heroku: circleci/heroku@0.0.1
-    
+```yaml
+version: 2.1
+
+orbs:
+  slack: circleci/slack@0.1.0
+  heroku: circleci/heroku@0.0.1
+```
 
 この例では、設定に [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) と [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) という 2 つの Orbs がインポートされます。
 
@@ -28,22 +29,21 @@ CircleCI Orbs は、ジョブ、コマンド、Executor のような設定要素
 
 既存の Orbs のなかに目的に合うものが見つからないときは、下記の `circleci orb help` コマンドの結果で示されている通り、[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) 上で自身の環境や設定要件を満たす独自の Orb を作成できます。 既存の Orb をインポートするのに比べて時間はかかってしまいますが、新たに作成したものは世界中のユーザーに使ってもらえる Orb として公開できます。
 
-```nohighlight
-$ circleci orb help
-Operate on orbs
-
-
-使い方：
-  circleci orb [command]
-
-利用できるコマンド：
-  create      指定した名前空間において Orb を作成します
-  list            Orbs を一覧します
-  process    Orb を精査し、レジストリ登録の前処理を行った後、その内容を出力します
-  publish     Orb をレジストリに登録します
-  source      Orb のソースコードを表示します
-  validate    orb.yml ファイルを精査します
-```
+    nohighlight
+    $ circleci orb help
+    Operate on orbs
+    
+    Usage:
+      circleci orb [command]
+    
+    Available Commands:
+      create      Create an orb in the specified namespace
+      list        List orbs
+      process     Validate an orb and print its form after all pre-registration processing
+      publish     Publish an orb to the registry
+      source      Show the source of an orb
+      validate    Validate an orb.yml
+    
 
 **※**Orb の作成時においては、CircleCI の設定画面でサードパーティ製 Orb の利用と作成に関するオプトインをあなたの所属組織が承諾した段階で、あなたが CircleCI のコード共有利用規約に同意したとみなされます。 これにより、すべての Orbs は MIT ライセンスの元、CircleCI がユーザーに利用を許諾する形となります。
 
@@ -51,11 +51,12 @@ Operate on orbs
 
 パートナー製の Orbs をインポートするには、`.circleci.yml/config.yml` ファイル内で `orbs` キーを指定し、`<orb 参照文字列>` を下記の一覧から選んだ文字列と置き換えます。
 
-    version: 2.1
-    
-    orbs:
-      <orb 参照文字列>
-    
+```yaml
+version: 2.1
+
+orbs:
+  <orb 参照文字列>
+```
 
 パートナー製 Orb の名称 | Orb 参照文字列 \---\---\---\---|\---\---\----- [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0` [Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1` [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1` [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0` [Datree](https://circleci.com/orbs/registry/orb/datree/version-alignment-rule) | `datree: datree/version-alignment-rule@1.0.0` [DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0` [Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0` [Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1` [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1` [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5` [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0` [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2` [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1` [Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0` [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0` [Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.0` [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2` [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1` [Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2` [Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4` [WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
 {: class="table table-striped"}
