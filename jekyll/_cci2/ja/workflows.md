@@ -1,15 +1,15 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Schedule Jobs"
-short-title: "Using Workflows to Schedule Jobs"
-description: "Using Workflows to Schedule Jobs"
+title: "ジョブのスケジュールを可能にする Workflow を使う"
+short-title: "ジョブのスケジュールを可能にする Workflow を使う"
+description: "ジョブのスケジュールを可能にする Workflow を使う"
 categories:
   - configuring-jobs
 order: 30
 ---
 ![header]({{ site.baseurl }}/assets/img/docs/wf-header.png)
 
-フィードバックの迅速化、再実行までの時間短縮、リソースの効率的な活用を通じてソフトウェア開発のスピードアップを目指すなら、Workflow を設定します。 このページでは、下記の内容に沿って Workflow の機能と設定例を解説しています。
+迅速なフィードバック、再実行までの時間短縮、リソースの最適化でソフトウェア開発のスピードアップを目指すなら、Workflow を活用してください。 このページでは、下記の内容に沿って Workflow の機能と設定例を解説しています。
 
 - 目次
 {:toc}
