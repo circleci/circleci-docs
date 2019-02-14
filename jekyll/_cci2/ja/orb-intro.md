@@ -23,7 +23,7 @@ orbs:
 
 この例では、設定に [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) と [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) という 2 つの Orbs がインポートされます。
 
-**注：**CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を ON にすることで `Orbs` キーを使えるようになります。
+**注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を ON にすることで `Orbs` キーを使えるようになります。
 
 ## 独自に Orb を作成する
 
@@ -58,7 +58,27 @@ orbs:
   <orb 参照文字列>
 ```
 
-パートナー製 Orb の名称 | Orb 参照文字列 \---\---\---\---|\---\---\----- [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0` [Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1` [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1` [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0` [Datree](https://circleci.com/orbs/registry/orb/datree/version-alignment-rule) | `datree: datree/version-alignment-rule@1.0.0` [DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0` [Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0` [Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1` [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1` [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5` [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0` [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2` [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1` [Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0` [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0` [Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.0` [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2` [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1` [Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2` [Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4` [WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
+パートナー製 Orb の名称 | Orb 参照文字列 \---\---\---\---|\---\---\----- [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0`  
+[Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1`  
+[Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`  
+[Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0`  
+[Datree](https://circleci.com/orbs/registry/orb/datree/version-alignment-rule) | `datree: datree/version-alignment-rule@1.0.0`  
+[DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0`  
+[Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0`  
+[Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1`  
+[Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1`  
+[Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`  
+[Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`  
+[Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`  
+[Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`  
+[Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0`  
+[Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0`  
+[Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.0`  
+[Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2`  
+[Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1`  
+[Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2`  
+[Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4`  
+[WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
 {: class="table table-striped"}
 
 **注 :** あなたの組織でサードパーティ製 Orbs を利用するにあたっては、あらかじめ CircleCI の Settings ＞ Security ページにアクセスし、[Orb Security Settings] で [Yes] を選んでおく必要があります。
