@@ -146,4 +146,4 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
-- Orbs 利用時の法的条件に関する詳細については、[Orbs レジストリ](https://circleci.com/orbs/registry/licensing) をご覧ください。
+- Orbs 利用時の法的条件に関する詳細については「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
