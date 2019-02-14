@@ -65,9 +65,9 @@ orbs:
 
 ## 関連情報
 
-- 既存の Orbs の使い方については、「[Orbs を使用する]({{site.baseurl}}/ja/2.0/using-orbs/)」をご覧ください。
-- 「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」ページでは、新たに Orb を作成する詳しい手順を確認できます。
+- 既存の Orbs の使い方については「[Orbs を使用する]({{site.baseurl}}/ja/2.0/using-orbs/)」をご覧ください。
+- 新たに Orb を作成する詳しい手順は「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」をご覧ください。
 - 一般的な質問に対する答えをお探しの場合は「[Orbs に関する FAQ]({{site.baseurl}}/ja/2.0/orbs-faq/) 」をご覧ください。
-- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-- 作成した Orb のテスト方法については、「[Orbs をテストする]({{site.baseurl}}/ja/2.0/testing-orbs/)」で詳しく解説しています。
-- Orbs 利用時の法的条件に関する詳細については、「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
+- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
+- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
+- Orbs 利用時の法的条件に関する詳細については「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
