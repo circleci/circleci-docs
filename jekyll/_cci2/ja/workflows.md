@@ -208,16 +208,17 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 
 ブランチ 1 つ 1 つにおいてコミットごとに Workflow を実行するのは、非効率で手間もかかります。 そんなときは特定のブランチに対して、一定の時刻に Workflow をスケジュール実行する機能が使えます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
 
-膨大なリソースを使用する Workflow、あるいは `triggers` キーを利用してコミット時以外にも定期的にリポートを生成するような Workflow を考えてみます。 `triggers` キーを挿入できるのは `workflows` キーの配下**だけ**です。 この機能は、指定したブランチについて、協定世界時 (UTC) を扱う `cron` コマンドの構文で Workflow の実行をスケジューリングできるようにします。
+これは膨大なリソースを使用する Workflow、あるいは `triggers` キーを利用してコミット時以外にも定期的にリポートを生成するような Workflow において有効です。 `triggers` キーを挿入できるのは `workflows` キーの配下**だけ**です。 この機能は、指定したブランチについて、協定世界時 (UTC) を扱う `cron` コマンドの構文で Workflow の実行をスケジュールできるようにします。
 
-### Nightly Example
+### 夜間に実行する例
 {:.no_toc}
 
-By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
+デフォルトでは、`git push` のたびに Workflow の実行がトリガーされます。 これをスケジュール実行に変えるには、Workflow に `triggers` キーを追加し、`schedule` を指定します。
 
-In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
+下記は `nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格における `crontab` の構文で表記します。`cron` の書き方については [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
 
 ```yaml
+```
 workflows:
   version: 2
   commit:
@@ -236,32 +237,33 @@ workflows:
     jobs:
       - coverage
 ```
+```
 
-In the above example, the `commit` workflow has no `triggers` key and will run on every `git push`. The `nightly` workflow has a `triggers` key and will run on the specified `schedule`.
+上記では、`commit` という名前の Workflow には `triggers` がありません。そのため、この部分は `git push` するたびに実行されます。 `nightly` の Workflow には `triggers` があり、指定した`スケジュールに沿って`実行されます。
 
-### Specifying a Valid Schedule
+### スケジュール設定における注意点
 {:.no_toc}
 
-A valid `schedule` requires a `cron` key and a `filters` key.
+`schedule` の配下には、`cron` キー と `filters` キーが必要です。
 
-The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
+`cron` キーの値は [valid crontab entry](https://crontab.guru/) にある通りに指定してください。
 
-**Note:** Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
+**※**Cron のステップ構文 (`*/1` や `*/20` など) には**対応していません**。
 
-The value of the `filters` key must be a map that defines rules for execution on specific branches.
+`filters` キーの値は、所定のブランチの実行ルールを定義する内容とします。
 
-For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
+詳しくは [CircleCI 設定リファレンス]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)ページの `branches` を参照してください。
 
-For a full configuration example, see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
+実際の設定サンプルは [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) で確認できます。
 
-## Using Contexts and Filtering in Your Workflows
+## Workflow におけるコンテキストとフィルターの使い方
 
-The following sections provide example for using Contexts and filters to manage job execution.
+このセクションではジョブの実行を管理するコンテキストとフィルターの使い方について解説しています。
 
-### Using Job Contexts to Share Environment Variables
+### 環境変数を共有するジョブコンテキストを使う
 {:.no_toc}
 
-The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定の手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
 
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
