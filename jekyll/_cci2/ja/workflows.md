@@ -265,8 +265,9 @@ workflows:
 
 下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定の手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
 
-The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
+下記に示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う構成にした、シーケンシャルジョブの例です。
 
+    ```
     workflows:
       version: 2
       build-test-and-deploy:
@@ -283,6 +284,7 @@ The following `config.yml` snippet is an example of a sequential job workflow co
           - deploy:
               requires:
                 - test2
+    ```
     
 
 The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization.
