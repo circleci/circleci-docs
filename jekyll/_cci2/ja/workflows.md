@@ -194,13 +194,13 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
   - つまり、`build` や `test1` といったすでに使用しているジョブ名では、そのなかで `type: approval` キーを指定することはできません。
 - 待機用のジョブの名前は任意に付けられます。`type: approval` キーを含めてさえいれば、`wait` や `pause` などでもかまいません。
 - 手動の承認操作後に実行されることになる全てのジョブは、 *必ず* `require:` でその待機用のジョブ名を指定しておいてください。 上記の例では `deploy:` ジョブがそれに該当します。
-- Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
+- 依存しているジョブに続いて実行される `type: approval` キーのあるジョブまで、Workflow は順番通りに実行します。
 
-The following screenshots show a workflow on hold waiting for approval of the `request-testing` job:
+スクリーンショット： `request-testing` ジョブの承認を待つ Workflow。
 
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-Following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
+スクリーンショット：`request-testing` ジョブをクリックすると現れる承認ダイアログ。
 
 ![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
 
