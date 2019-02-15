@@ -347,9 +347,9 @@ workflows:
               only: /^v.*/
 ```
 
-In the example below, two jobs are defined within the `build-n-deploy` workflow:
+下記の例では `build-n-deploy` という名前の Workflow で 2 つのジョブを定義しています。
 
-- The `build` job runs for all branches and all tags.
+- `build` ジョブは全てのブランチ、全てのタグを実行します。
 - The `deploy` job runs for no branches and only for tags starting with 'v'.
 
 ```yaml
