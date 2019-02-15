@@ -206,9 +206,9 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 
 ## Scheduling a Workflow
 
-ブランチ 1 つ 1 つに対してコミットごとに Workflow を実行したりするのは、非効率で手間もかかります。 Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+ブランチ 1 つ 1 つにおいてコミットごとに Workflow を実行するのは、非効率で手間もかかります。 そんなときは特定のブランチに対して、一定の時刻に Workflow をスケジュール実行する機能が使えます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
 
-Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
+膨大なリソースを使用する Workflow、あるいは `triggers` キーを利用してコミット時以外にも定期的にリポートを生成するような Workflow を考えてみます。 `triggers` キーを挿入できるのは `workflows` キーの配下**だけ**です。 この機能は、指定したブランチについて、協定世界時 (UTC) を扱う `cron` コマンドの構文で Workflow の実行をスケジューリングできるようにします。
 
 ### Nightly Example
 {:.no_toc}
