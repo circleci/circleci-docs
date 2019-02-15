@@ -110,19 +110,20 @@ workflows:
     ```
     
 
-ご覧いただくとわかるように、依存関係は `requires:` キーで定義されます。 `deploy:` ジョブは `build`、`test1`、`test2` という 3 つのジョブが全て完了するまで実行されません。 A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
+ご覧いただくとわかるように、依存関係は `requires:` キーで定義されます。 `deploy:` ジョブは `build`、`test1`、`test2` という 3 つのジョブが全て完了するまで実行されません。 ジョブは依存関係にあるそれ以前の全ジョブの処理が終了するまで待つことになるため、 `deploy` ジョブは `test2` を待ち、`test2` ジョブは `test1` を待ち、そして`test1` ジョブは `build` を待つという構図になります。
 
-See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
+以上に関する実際の設定ファイルは [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) で確認できます。
 
-### Fan-Out/Fan-In Workflow Example
+### ファンイン・ファンアウトの Workflow の例
 {:.no_toc}
 
-The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs in parallel, and finally fans-in to run a common deploy job.
+図示している例では、Workflow は最初に build ジョブを普通に実行し、並列動作する一連の `acceptance_test` ジョブを実行するファンアウトを行います。最終的には `deploy` ジョブを走らせるファンインで処理を終えます。
 
 ![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
 
-The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
+下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブで構成した Workflow の例です。
 
+    ```
     workflows:
       version: 2
       build_accept_deploy:
@@ -146,19 +147,20 @@ The following `config.yml` snippet is an example of a workflow configured for fa
                 - acceptance_test_2
                 - acceptance_test_3
                 - acceptance_test_4
+    ```
     
 
-In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
+この例では、`build` ジョブが完了した後すぐに 4 つの `acceptance_test` ジョブがスタートします。 その後、4 つの `acceptance_test` ジョブの完了を待って、`deploy` ジョブが実行されます。
 
-See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) for a full example.
+以上の実際の設定サンプルは [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out) で確認できます。
 
-## Holding a Workflow for a Manual Approval
+## 承認後に処理を続行する Workflow の例
 
-Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. To do this, add a job to the `jobs` list with the key `type: approval`. Let's look at a commented config example.
+Workflow では、次のジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 リポジトリに対するプッシュ権限があれば、Workflow の続行を指示する「承認ボタン」をクリックできます。 これを設定するには `jobs` 内にジョブを追加し、`type: approval` キーを追加してください。 設定例としては次のようなものになります。
 
 ```yaml
 # ...
-# << Your config for the build, test1, test2, and deploy jobs >>
+# << build、test1、test2、deploy ジョブを含むビルドの設定 >>
 # ...
 
 workflows:
