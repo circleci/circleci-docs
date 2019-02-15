@@ -323,7 +323,7 @@ workflows:
 
 正規表現の詳しい使い方については、[正規表現でタグ、ブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 枝分かれしたプロジェクトを伴うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
-### Executing Workflows for a Git Tag
+### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
