@@ -228,7 +228,9 @@ Yes, every workflow with a `schedule` listed in the `trigger:` key will be run o
 {:.no_toc}
 CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
-## Billing
+## Billing - Container Based
+
+The following FAQ questions are for our _Container Based Plans_.
 
 ### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
@@ -248,9 +250,16 @@ Yes, the billing is associated with the organization. You can buy while within t
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
+## Billing - Credit Usage Based
+
+The following FAQ questions are for our __Credit Usage Plans_.
+
+### How do the new pricing plans affect me as a customer?
+{:.no_toc}
+For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider. 
+
 ### What are credits?
 {:.no_toc}
-
 Credits are used to pay for your usage based on machine type and size.
 
 For example, the 25,000 credit package would provide 2,500 build minutes when
@@ -258,28 +267,19 @@ using a single machine at the default rate of 10 credits per minute. The same pa
 
 ### Can I get one workflow run to use 50 containers at once without queuing?
 {:.no_toc}
-
 The Performance plan will experience less queuing, so you may run 50x parallelism builds and kick off a bunch concurrently, but this will increase your credit usage significantly.  The Seed plan has a maximum of 4x parallelism.
 
 ### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
-
 You pay to the nearest credit. First we round up to the nearest second, and then up to the nearest credit. On the 2x4 (medium) box this is effectively in 6 second increments. 
 
 ### How do I buy credits? Can I buy in any increments?
 {:.no_toc}
-
 Every month, you are charged for your selected credit package at the beginning of the month.
-Bonus credits are offered on the Performance plan for 50,000 credit purchases and above.
 
 ### What happens when I run out of credits?
 {:.no_toc}
-
-On the Seed plan, you never have to worry about compute spend going above your
-budget. Your projects will not build until your billing cycle begins and your
-credit package is refilled. You will get an error message in-app and through email explaining why your build did not run. If you decide you want to build more, you can upgrade to a Performance plan if you choose.
-
-On the Performance plan, whenever you run out of credits, you can elect to have your plan renew so builds will never be blocked on a lack of credits in your account.
+On the Performance plan, your credit package will be refilled at 10% of your monthly selected package size when you have 5% remaining on your credit package so builds will never be blocked on a lack of credits in your account.
 
 ### What happens to my credits if I upgrade to a new plan?
 {:.no_toc}
@@ -289,31 +289,15 @@ If you upgrade to Performance, credits rollover from your Seed plan.
 
 ### Do credits expire?
 {:.no_toc}
-
-**Hobbyist**: Credits expire every week.
-
-**Seed**: Credits expire every month.
-
-**Performance**: Credits expire one year after purchase or if the account has 3 months of inactivity without builds.
+**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
 
 ### How do I pay?
 {:.no_toc}
-
-You can pay from inside the CircleCI app for monthly or annual pricing.
-You can also request invoiced billing by talking to the CircleCI Sales team.
+You can pay from inside the CircleCI app for monthly pricing.
 
 ### When do I pay?
 {:.no_toc}
-
-When you initially purchase a plan you will pay, upfront, for credits and the selected number of user seats. 
-Payment renewals will occur based on what plan you are on:
-
-- On the monthly renewal date if your team is on the monthly plan.
-- On the annual renewal date if your team is on the annual plan.
-- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
-- Anytime your team’s balance exceeds $500 from adding new users.
-- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
-
+On the Usage Plans, you will be charged for the plan selections you’ve made for credits, user seats, and premium support tiers at the beginning of your billing cycle.
 
 ### What are the other renewal dates?
 {:.no_toc}
