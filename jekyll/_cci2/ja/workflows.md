@@ -175,11 +175,11 @@ workflows:
           requires: # test2 は test1 が完了してからの実行となります
             - test1
       - hold: # <<< ジョブの続きを実行するには CircleCI の Web ページ上で手動で承認する必要があります。
-          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
-          requires: # We only run the "hold" job when test2 has succeeded
+          type: approval # <<< このキーを使うと Workflow を「待機」状態にします
+          requires: # test2 が完了すると hold ジョブに処理が移ります
            - test2
-      # On approval of the `hold` job, any successive job that requires the `hold` job will run. 
-      # In this case, a user is manually triggering the deploy job.
+      # hold ジョブにおいて承認すると、hold ジョブの完了待ちとなっていた残りのジョブが実行されます 
+      # この例では、ユーザーの手動操作が deploy ジョブの実行トリガーとなります
       - deploy:
           requires:
             - hold
