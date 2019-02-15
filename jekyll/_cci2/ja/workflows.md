@@ -289,12 +289,12 @@ workflows:
 
 環境変数は、上記でデフォルト名 `org-global` としているように、`context` キーを設定することで定義されます。 この例の `test1` と `test2` のジョブは、組織に所属するユーザーによって実行された際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
 
-### 枝分かれしたジョブを実行する
+### ブランチレベルのジョブを実行する
 {:.no_toc}
 
-下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
+下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
 
-![枝分かれしたジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![ブランチレベルのジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
 下記に示した `config.yml` ファイルのコードは、ブランチレベルのジョブを実行する構成にした Workflow の例です。
 
