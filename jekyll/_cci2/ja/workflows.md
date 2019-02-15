@@ -25,9 +25,9 @@ Workflow を使うと下記が可能になります。
 - バージョンごとのテストの効率化を目的とした、複数ジョブを並行実行するファンアウトをサポートします
 - 複数の環境に対して高速なデプロイを実現するファンインをサポートします
 
-Workflow 内のジョブの 1 つが失敗したとしても、それをリアルタイムで知ることができます。 ビルド全体が失敗するのを待ってから全てのジョブを改めて実行するような無駄な時間を費やすことがなく、*失敗したジョブのみを*再実行できます。
+Workflow 内のジョブの 1 つが失敗したとしても、それをリアルタイムで知ることができます。 ビルド処理全体が終了するのを待って、改めて最初からジョブを実行するような無駄な時間は不要です。Workflow では*失敗したジョブのみを*再実行できます。
 
-### States
+### ステータス値
 {:.no_toc}
 
 Workflows may appear with one of the following states:
@@ -39,12 +39,12 @@ Workflows may appear with one of the following states:
 - FAILED: One or more jobs in the workflow failed
 - SUCCESS: All jobs in the workflow completed successfully
 - ON HOLD: A job in the workflow is waiting for approval
-- NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
+- NEEDS SETUP：そのプロジェクトの [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに Workflow の記述がないか、内容に誤りがあります。
 
 ### 制限について
 {:.no_toc}
 
-Projects that have [Build Processing]({{ site.baseurl }}/2.0/build-processing/) enabled may use the CircleCI API to trigger workflows. Projects that do not enable build processing will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
+[ビルド処理のプレビュー]({{ site.baseurl }}/2.0/build-processing/)を有効にしたプロジェクトは、Workflow の実行トリガーに CircleCI API を用いることもできます。 ビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
 
