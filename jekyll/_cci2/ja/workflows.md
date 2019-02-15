@@ -326,12 +326,12 @@ workflows:
 ### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 また、あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、[正規表現](#using-regular-expressions-to-filter-tags-and-branches)を用いてそのジョブに対するタグフィルターを指定する必要があります。 Both lightweight and annotated tags are supported.
 
-In the example below, two workflows are defined:
+下記は 2 つの workflows を用いた例です。
 
-- `untagged-build` runs the `build` job for all branches.
-- `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
+- `untagged-build` は全てのブランチに対して `build` ジョブを実行します。
+- `tagged-build` は `v` から始まるタグをもつ全てのブランチの `build` ジョブを実行します。
 
 ```yaml
 workflows:
