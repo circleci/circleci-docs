@@ -321,7 +321,7 @@ workflows:
 ```
 ```
 
-For more information on regular expressions, see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below. For a full example of workflows, see the [configuration file](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for the Sample Sequential Workflow With Branching project.
+正規表現の詳しい使い方については、[正規表現でタグ、ブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 枝分かれしたプロジェクトを伴うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
 ### Executing Workflows for a Git Tag
 {:.no_toc}
