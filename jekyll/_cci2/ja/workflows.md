@@ -171,10 +171,10 @@ workflows:
       - test1: # 1 つめの test を実行する任意のジョブ
           requires: # build ジョブが完了次第 test1 を実行します
             - build
-      - test2: # another custom job; runs test suite 2,
-          requires: # test2 is dependent on the succes of job `test1`
+      - test2: # 2 つめの test を実行する任意のジョブ
+          requires: # test2 は test1 が完了してからの実行となります
             - test1
-      - hold: # <<< A job that will require manual approval in the CircleCI web application.
+      - hold: # <<< ジョブの続きを実行するには CircleCI の Web ページ上で手動で承認する必要があります。
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
