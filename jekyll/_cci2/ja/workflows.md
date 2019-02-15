@@ -358,7 +358,7 @@ workflows:
   build-n-deploy:
     jobs:
       - build:
-          filters:  # required since `deploy` has tag filters AND requires `build`
+          filters:  # タグフィルター付き、かつ「build」を requires している「deploy」に必要
             tags:
               only: /.*/
       - deploy:
@@ -371,7 +371,7 @@ workflows:
               ignore: /.*/
 ```
 
-In the example below, three jobs are defined with the `build-test-deploy` workflow:
+下記の例では `build-testn-deploy` という名前の Workflow で 3 つのジョブを定義しています。
 
 - The `build` job runs for all branches and only tags starting with 'config-test'.
 - The `test` job runs for all branches and only tags starting with 'config-test'.
