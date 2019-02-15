@@ -228,78 +228,82 @@ Yes, every workflow with a `schedule` listed in the `trigger:` key will be run o
 {:.no_toc}
 CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
-## Billing - Container Based
+## Billing
 
-The following FAQ questions are for our _Container Based Plans_.
+### Container Based Plans
 
-### How do I upgrade my plan with more containers to prevent queuing?
+#### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
 
 * macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
-### Is there a way to share plans across organizations and have them billed centrally?
+#### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
 Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
 
-### Can I set up billing for an organization, without binding it to my personal account?
+#### Can I set up billing for an organization, without binding it to my personal account?
 {:.no_toc}
 Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
 
-### What is the definition of a container in the context of billing?
+#### What is the definition of a container in the context of billing?
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
-## Billing - Credit Usage Based
+---
 
-The following FAQ questions are for our __Credit Usage Plans_.
+### Credit Usage Plans
 
-### How do the new pricing plans affect me as a customer?
+#### How do the new pricing plans affect me as a customer?
 {:.no_toc}
 For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider. 
 
-### What are credits?
+#### What are credits?
 {:.no_toc}
-Credits are used to pay for your usage based on machine type and size.
+Credits are used to pay for your usage based on machine type and size. Credits
+can also be used to pay for features, such as Docker Layer Caching.
 
 For example, the 25,000 credit package would provide 2,500 build minutes when
 using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
-### Can I get one workflow run to use 50 containers at once without queuing?
+#### Can I get one workflow run to use 50 containers at once without queuing?
 {:.no_toc}
 The Performance plan will experience less queuing, so you may run 50x parallelism builds and kick off a bunch concurrently, but this will increase your credit usage significantly.  The Seed plan has a maximum of 4x parallelism.
 
-### If a container is used for under one minute, do I have to pay for a full minute? 
+#### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
 You pay to the nearest credit. First we round up to the nearest second, and then up to the nearest credit. On the 2x4 (medium) box this is effectively in 6 second increments. 
 
-### How do I buy credits? Can I buy in any increments?
+#### How do I buy credits? Can I buy in any increments?
 {:.no_toc}
 Every month, you are charged for your selected credit package at the beginning of the month.
 
-### What happens when I run out of credits?
+#### What happens when I run out of credits?
 {:.no_toc}
 On the Performance plan, your credit package will be refilled at 10% of your monthly selected package size when you have 5% remaining on your credit package so builds will never be blocked on a lack of credits in your account.
 
-### What happens to my credits if I upgrade to a new plan?
+On the Performance plan, when you reach 5% of your remaining credits, you will
+be refilled 10% of your credits. For example, if your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+
+#### What happens to my credits if I upgrade to a new plan?
 {:.no_toc}
 
 If you upgrade within Seed, the rates are exactly the same.
 If you upgrade to Performance, credits rollover from your Seed plan.
 
-### Do credits expire?
+#### Do credits expire?
 {:.no_toc}
 **Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
 
-### How do I pay?
+#### How do I pay?
 {:.no_toc}
 You can pay from inside the CircleCI app for monthly pricing.
 
-### When do I pay?
+#### When do I pay?
 {:.no_toc}
 On the Usage Plans, you will be charged for the plan selections you’ve made for credits, user seats, and premium support tiers at the beginning of your billing cycle.
 
-### What are the other renewal dates?
+#### What are the other renewal dates?
 {:.no_toc}
 
 The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
