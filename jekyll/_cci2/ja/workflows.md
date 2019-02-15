@@ -185,13 +185,13 @@ workflows:
             - hold
 ```
 
-結果的に以上の例では、CircleCI の Workflow ページで `hold` ジョブをクリックし、さらに Approve をクリックしない限り `deploy:` ジョブは実行されません。 In this example the purpose of the `hold` job is to wait for approval to begin deployment.
+結果的に以上の例では、CircleCI の Workflow ページで `hold` ジョブをクリックし、さらに Approve をクリックしない限り `deploy:` ジョブは実行されません。 承認するまでデプロイを待機させるというのが、ここでの `hold` ジョブの目的になっています。
 
-Some things to keep in mind when using manual approval in a workflow:
+Workflow で手動で承認させる形にする場合は、下記の点に注意が必要です。
 
-- `approval` is a special job type that is **only** available to jobs under the `workflow` key
-- The `hold` job must be a unique name not used by any other job. 
-  - that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
+- `approval` は `workflow` キー配下のジョブ内で**のみ**利用できる特殊な type 属性です。
+- `hold` のように待機用に用意するジョブは、他にジョブ名として使われていない一意の名前にする必要があります。 
+  - つまり、`build` や `test1` といったすでに使用しているジョブ名では、そのなかで `type: approval` キーを指定することはできません。
 - The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key in it.
 - All jobs that are to run after a manually approved job *must* `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
