@@ -289,14 +289,14 @@ workflows:
 
 環境変数は、上記でデフォルト名 `org-global` としているように、`context` キーを設定することで定義されます。 この例の `test1` と `test2` のジョブは、組織に所属するユーザーによって実行された際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
 
-### ブランチレベルのジョブを実行する
+### ブランチレベルでジョブを実行する
 {:.no_toc}
 
-下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
+下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。最初にジョブレベルで `branches` を使っていて、その後 Workflow に変える場合は、ジョブレベルではなく、workflows の `filters` 内で宣言しなければなりません。下記の `config.yml` を参考にしてください。
 
-![ブランチレベルのジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-下記に示した `config.yml` ファイルのコードは、ブランチレベルのジョブを実行する構成にした Workflow の例です。
+下記に示した `config.yml` ファイルのコードは、ブランチレベルでジョブを実行する構成にした Workflow の例です。
 
 ```yaml
 ```
@@ -321,12 +321,12 @@ workflows:
 ```
 ```
 
-正規表現の詳しい使い方については、[正規表現でタグ、ブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 枝分かれしたプロジェクトを伴うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
+正規表現の詳しい使い方については、[正規表現でタグ、ブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
 ### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
 
 In the example below, two workflows are defined:
 
