@@ -167,9 +167,9 @@ workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build  # your custom job from your config, that builds your code
-      - test1: # your custom job; runs test suite 1
-          requires: # test1 will not run until the `build` job is completed.
+      - build  # コードをビルドする任意のジョブ
+      - test1: # 1 つめの test を実行する任意のジョブ
+          requires: # build ジョブが完了次第 test1 を実行します
             - build
       - test2: # another custom job; runs test suite 2,
           requires: # test2 is dependent on the succes of job `test1`
