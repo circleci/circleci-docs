@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "ジョブのスケジュールを可能にする Workflow を使う"
-short-title: "ジョブのスケジュールを可能にする Workflow を使う"
-description: "ジョブのスケジュールを可能にする Workflow を使う"
+title: "ジョブの自動化を可能にする Workflow を使う"
+short-title: "ジョブの自動化を可能にする Workflow を使う"
+description: "ジョブの自動化を可能にする Workflow を使う"
 categories:
   - configuring-jobs
 order: 30
