@@ -44,13 +44,13 @@ Workflows may appear with one of the following states:
 ### 制限について
 {:.no_toc}
 
-[ビルド処理のプレビュー]({{ site.baseurl }}/2.0/build-processing/)を有効にしたプロジェクトは、Workflow の実行トリガーに CircleCI API を用いることもできます。 ビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
+[ビルド処理のプレビュー]({{ site.baseurl }}/2.0/build-processing/)を有効にしたプロジェクトは、Workflow の実行トリガーに CircleCI API を用いることもできます。 反対にビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
 
-Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
+こうした制限に関する詳細については [FAQ]({{ site.baseurl }}/2.0/faq) をご確認ください。
 
-## Workflows Configuration Examples
+## Workflow の設定例
 
-*For a full specification of the* `workflows` *key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuring CircleCI document.*
+`workflows` *キーに関する細かな仕様は、CircleCI 設定マニュアルの [Workflow]({{ site.baseurl }}/2.0/configuration-reference/#workflows) で説明しています。*
 
 **Note:** Projects configured with Workflows often include multiple jobs that share syntax for Docker images, environment variables, or `run` steps. Refer the [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) documentation for information about how to alias and reuse syntax to keep your `.circleci/config.yml` file small. See the [Reuse YAML in the CircleCI Config](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/) blog post for a summary.
 
