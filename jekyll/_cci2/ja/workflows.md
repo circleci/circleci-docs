@@ -206,7 +206,7 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 
 ## Scheduling a Workflow
 
-It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+ブランチ 1 つ 1 つに対してコミットごとに Workflow を実行したりするのは、非効率で手間もかかります。 Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
 
