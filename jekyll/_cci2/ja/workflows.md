@@ -350,7 +350,7 @@ workflows:
 下記の例では `build-n-deploy` という名前の Workflow で 2 つのジョブを定義しています。
 
 - `build` ジョブは全てのブランチ、全てのタグを実行します。
-- The `deploy` job runs for no branches and only for tags starting with 'v'.
+- `deploy` ジョブはブランチのない、「v」から始まるタグに対してのみ実行します。
 
 ```yaml
 workflows:
