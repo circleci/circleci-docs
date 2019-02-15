@@ -287,26 +287,27 @@ workflows:
     ```
     
 
-環境変数は、上記で `org-global` としているように、`context` キーを設定することで定義されます。 この例における `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
+環境変数は、上記でデフォルト名 `org-global` としているように、`context` キーを設定することで定義されます。 この例の `test1` と `test2` のジョブは、組織に所属するユーザーによって実行された際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
 
-### Branch-Level Job Execution
+### 枝分かれしたジョブを実行する
 {:.no_toc}
 
-The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定した Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
 
-![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![枝分かれしたジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
+下記に示した `config.yml` ファイルのコードは、ブランチレベルのジョブを実行する構成にした Workflow の例です。
 
 ```yaml
+```
 workflows:
   version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
-          filters:  # using regex filters requires the entire branch to match
+          filters:  # ブランチ全体にマッチさせる正規表現フィルターを使う
             branches:
-              only:  # only branches matching the below regex filters will run
+              only:  # 下記の正規表現フィルターにマッチするブランチのみが実行される
                 - dev
                 - /user-.*/
       - test_stage:
@@ -317,6 +318,7 @@ workflows:
           filters:
             branches:
               only: /pre-prod(?:-.+)?$/
+```
 ```
 
 For more information on regular expressions, see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below. For a full example of workflows, see the [configuration file](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for the Sample Sequential Workflow With Branching project.
