@@ -287,7 +287,7 @@ workflows:
     ```
     
 
-環境変数は、上記で `org-global` としているように、`context` キーを設定することで定義されます。 The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization.
+環境変数は、上記で `org-global` としているように、`context` キーを設定することで定義されます。 この例における `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
 
 ### Branch-Level Job Execution
 {:.no_toc}
