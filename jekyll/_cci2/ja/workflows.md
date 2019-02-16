@@ -321,7 +321,7 @@ workflows:
 ```
 ```
 
-正規表現の詳しい使い方については、[正規表現でタグとブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
+正規表現の詳しい使い方については、[正規表現でタグとブランチをフィルターする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
 ### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
@@ -404,12 +404,12 @@ workflows:
 
 **※**Webhook で許容される GitHub 連携のデータ容量は[最大 5MB](https://developer.github.com/webhooks/#payloads)、一度にプッシュできるタグの数は[最大 3 つ](https://developer.github.com/v3/activity/events/types/#createevent)までに制限されています。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
 
-### 正規表現でタグとブランチをフィルタリングする方法
+### 正規表現でタグとブランチをフィルターする方法
 {:.no_toc}
 
-CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
+CircleCI のブランチ・タグフィルターは、Java の正規表現パターンをサポートしています。 フィルターを指定する場合、CircleCI は厳密な正規表現で照合します。
 
-For example, `only: /^config-test/` only matches the `config-test` tag. To match all tags starting with `config-test`, use `only: /^config-test.*/` instead. Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `/^version-2\.1\.[3-7]/`.
+例えば、`only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` のようにします。 Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `/^version-2\.1\.[3-7]/`.
 
 For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
