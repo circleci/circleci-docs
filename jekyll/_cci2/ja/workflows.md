@@ -44,7 +44,7 @@ Workflows may appear with one of the following states:
 ### 制限について
 {:.no_toc}
 
-プロジェクトの設定にある Advanced Settings で [Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を有効にすると、Workflow の実行トリガーに CircleCI API を利用できるようにもなります。 反対にビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
+プロジェクトの設定にある Advanced Settings で [Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を有効にすると、Workflow の実行トリガーに CircleCI API を利用できるようにもなります。 反対に Enable build processing を有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
 
 こうした制限に関する詳細については [FAQ]({{ site.baseurl }}/2.0/faq) をご確認ください。
 
@@ -52,7 +52,7 @@ Workflows may appear with one of the following states:
 
 `workflows` *キーに関する細かな仕様は、CircleCI 設定マニュアルの [Workflow]({{ site.baseurl }}/2.0/configuration-reference/#workflows) で説明しています。*
 
-**※**Workflow が設定されたプロジェクトは通常、Docker イメージ、環境変数、`run` ステップなど、いくつかの構文に分けて記述された複数のジョブからなります。 `.circleci/config.yml` のコードをコンパクトにまとめられるエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 ブログの [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)という投稿内容も参考にしてください。
+**※**Workflow で構成されたプロジェクトは通常、Docker イメージ、環境変数、`run` ステップなど、いくつかの構文に分けて記述された複数のジョブからなります。 `.circleci/config.yml` のコードをコンパクトにまとめられるエイリアスの使い方や構文の再利用方法については [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) でご確認ください。 [CircleCI の設定における YAML ファイルの再利用](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)というブログ投稿の内容も参考にしてください。
 
 パラレルジョブを実行したいときは、`.circleci/config.yml` ファイルの末尾に新たに `workflows:` セクションを追加し、バージョンと Workflow 識別用の固有名を付けます。 下記は、並列動作させる 2 つのジョブからなる Workflow による典型的な自動化の手法を示した `.circleci/config.yml` の例です。 `build_and_test` という名前の `workflows:` キーで Workflow が定義され、その下にネストされた `jobs:` キーとジョブ名のリストが見えます。 ジョブには依存関係の定義がないことから、これらは並列で実行されます。
 
