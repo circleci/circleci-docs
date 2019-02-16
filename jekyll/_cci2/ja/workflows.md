@@ -411,17 +411,17 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 
 例えば `only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` とします。 よくあるのは、セマンティック・バージョニングに対してタグを利用するケースです。 バージョン 2.1 リリースのうちパッチバージョンが 3 〜 7 のものについてマッチさせるときは、`/^version-2\.1\.[3-7]/` のように記述します。
 
-For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
+パターンマッチングのルールについて詳しく知りたいときは、[java.util.regex](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) のページを参照してください。
 
-## Using Workspaces to Share Data Among Jobs
+## ジョブ間のデータ共有を可能にする Workspace を使う
 
-各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
+各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を用いるとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできることになります。 下記は、Workspace に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を解説したものです。
 
 ![workspaces data flow]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
-Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
+そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するような Workflow では、Workspace を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
 
-For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
+例えば、Scala のプロジェクトにおいては、ビルドジョブのコンパイルの段階で多くの CPU リソースを消費します。 一方、Scala のテストジョブでは CPU 負荷は高いとは言えず、複数のコンテナを並行処理しても問題ないほどです。 ビルドジョブに大きなコンテナを使い、Workspace にコンパイル済みデータを保存しておくことで、ビルドジョブで作成したコンパイル済みの Scala をテストコンテナで使うことが可能になります。
 
 A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
 
