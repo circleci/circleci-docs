@@ -321,7 +321,7 @@ workflows:
 ```
 ```
 
-正規表現の詳しい使い方については、[正規表現でタグ、ブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
+正規表現の詳しい使い方については、[正規表現でタグとブランチをフィルタリングする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
 ### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
@@ -402,9 +402,9 @@ workflows:
               ignore: /.*/
 ```
 
-**Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
+**※**Webhook で許容される GitHub 連携のデータ容量は[最大 5MB](https://developer.github.com/webhooks/#payloads)、一度にプッシュできるタグの数は[最大 3 つ](https://developer.github.com/v3/activity/events/types/#createevent)までに制限されています。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
 
-### Using Regular Expressions to Filter Tags and Branches
+### 正規表現でタグとブランチをフィルタリングする方法
 {:.no_toc}
 
 CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
