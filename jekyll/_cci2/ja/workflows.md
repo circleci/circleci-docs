@@ -498,26 +498,26 @@ Workflow を利用すると、失敗したビルドに対して迅速にアク�
 ### 失敗した Workflow を再実行する
 {:.no_toc}
 
-It has been observed that in some case, a failure happens before the workflow runs (during build processing). In this case, rerunning the workflow will fail even though it was succeeding before the outage. To workaround this, push a change to the project's repository. This will re-run build processing first and then run the workflow.
+ときどき遭遇するのが、Workflow（のビルド処理）を実行する前に失敗してしまうというものです。 In this case, rerunning the workflow will fail even though it was succeeding before the outage. To workaround this, push a change to the project's repository. This will re-run build processing first and then run the workflow.
 
 ### Workflow がスタートしない
 {:.no_toc}
 
 Workflow の設定時に新しいジョブが表示されなくなったときは、`config.yml` の記述にエラーがあると考えられます。
 
-Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
+Workflow がトリガーされないことがよくある場合、設定エラーが原因です。Workflow の実行が妨げられ、 その結果としてジョブがスタートしていないものと思われます。
 
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
+Workflow の設定を行うときは、その設定に問題がないか CircleCI の WORKFLOWS ページ (JOB ページでは*ありません*) をたびたび確認するとよいでしょう。
 
-A project's Job page URL looks like this:
+プロジェクトのジョブページは下記のような URL になっています。
 
 `https://circleci.com/:VCS/:ORG/:PROJECT`
 
-A Workflow page URL looks like this:
+また、Workflow ページは下記のような URL となっています。
 
 `https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
 
-Look for Workflows that have a yellow tag and "Needs Setup" for the text.
+この Workflow ページで、黄色地に「Needs Setup」という文字が表示されていないか確認してください。
 
 ![Workflow の誤った設定例]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
