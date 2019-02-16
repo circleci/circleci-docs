@@ -451,10 +451,10 @@ jobs:
 
       # 後に続くジョブで利用できるように Workspace に指定のパス（workspace/echo-output）を保存します。 
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
-          # taken to be the root directory of the workspace.
+          # working_directory からの相対パスか絶対パスを指定します。 
+          # これは Workspace のルートディレクトリとなるコンテナ内のディレクトリです
           root: workspace
-          # Must be relative path from root
+          # root からの相対パスを指定します
           paths:
             - echo-output
 
@@ -462,14 +462,14 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # working_directory からの相対パスか絶対パスを指定します
           at: /tmp/workspace
 
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
+            echo "成功しました！";
           else
-            echo "Nope!"; exit 1
+            echo "失敗しました！"; exit 1
           fi
 
 workflows:
