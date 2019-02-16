@@ -15,7 +15,7 @@ CircleCI 2.x で初めてビルドを実行するには、次の手順に従っ�
 
 3. GitHub または Bitbucket のユーザー名、パスワード、また必要であれば二要素認証情報を入力し、[ログイン] をクリックします。
 
-4. Click the Authorize Application or equivalent button. The CircleCI Builds Dashboard appears.
+4. 「アプリケーションを認証する」などのボタンが表示されたら、それをクリックします。 CircleCI のダッシュボード画面が表示されます。
 
 5. CircleCI の [Set Up Project] ページにアクセスし、プロジェクトを始めます。
 
