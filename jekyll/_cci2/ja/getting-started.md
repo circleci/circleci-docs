@@ -104,7 +104,7 @@ jobs:
 
 1. 次に、2 つのジョブを別々の名前に変更します。 この例では、`one` と `two` という名前にします。 エコーコマンドの内容も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
 
-2. Add a `workflows` section to your `config.yml` file. workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
+2. `config.yml` ファイルに `workflows` セクションを追加します。 workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
 
 ```yml
 ```
@@ -203,7 +203,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/2.0/
 
 ![]({{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
 
-Copy the `ssh` string from the enabling SSH section of your build. Open a terminal and paste in the `ssh` string.
+ビルド画面の「Enable SSH」セクションで `ssh` コマンド文字列をコピーします。 ターミナルを起動し `ssh` コマンド文字列を貼り付けます。
 
 以下のコマンドのいくつかを使用すると、Workspaces を使用して作成したファイルの内容を検索し、表示できます。
 
