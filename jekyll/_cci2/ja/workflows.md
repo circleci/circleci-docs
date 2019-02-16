@@ -483,11 +483,11 @@ workflows:
             - flow
 ```
 
-For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation. For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
+build ジョブと deploy ジョブの間でデータをやりとりする、Workspace を活用する生きたサンプルとして、こちらの [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。これは CircleCI のマニュアルのビルドに利用しているものです。 Workspace、キャッシュ、アーティファクトの使用における概念がわかる情報として、ブログ記事 [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) もチェックしてみてください。
 
-## Rerunning a Workflow's Failed Jobs
+## Workflow のなかで失敗したジョブを再実行する
 
-When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
+Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
