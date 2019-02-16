@@ -498,7 +498,7 @@ Workflow を利用すると、失敗したビルドに対して迅速にアク�
 ### 失敗した Workflow を再実行する
 {:.no_toc}
 
-ときどき遭遇するのが、Workflow（のビルド処理）を実行する前に失敗してしまうというものです。 In this case, rerunning the workflow will fail even though it was succeeding before the outage. To workaround this, push a change to the project's repository. This will re-run build processing first and then run the workflow.
+ときどき見受けられるのが、Workflow の実行前（のビルド処理の最中）に失敗してしまうケースです。 停電前は問題なく成功していたのに、その後 Workflow の実行は失敗する、といったことがあります。 この問題をひとまず解決するには、プロジェクトのリポジトリに対して変更があったとしてプッシュします。 最初にビルド処理の再実行が始まり、続いて Workflow が実行されます。
 
 ### Workflow がスタートしない
 {:.no_toc}
