@@ -427,12 +427,12 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 
 このとき、ジョブで作られたデータを保存して他のジョブでも使えるようにするには、ジョブ内に `persist_to_workspace` キーを追加します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時 Workspace にアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (あるいは Workflow の再実行時に) 利用できるようにします。
 
-Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
+`attach_workspace` キーをセットして、保存されたデータを取得できるようにジョブを設定します。 下記の `config.yml` ファイルの例では、`flow` ジョブと、そこで作られたリソースを使う `downstream` ジョブ、という 2 つのジョブを定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理が開始する前に `flow` ジョブが終了していなければなりません。
 
 ```yaml
-# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
-# This allows defining a docker image to reuse across jobs.
-# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+# ここでは再利用可能な Executor を有効にするため CircleCI 2.1 を使用しています。
+# これによりジョブ間で再利用する Docker イメージを定義できるようになります。　
+# 詳細は→ https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors
 
 version: 2.1
 
@@ -449,7 +449,7 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      # 後に続くジョブで利用できるように Workspace に指定のパス（workspace/echo-output）を保存します。 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
           # taken to be the root directory of the workspace.
