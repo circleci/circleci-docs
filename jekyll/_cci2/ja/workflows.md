@@ -373,9 +373,9 @@ workflows:
 
 下記の例では `build-testn-deploy` という名前の Workflow で 3 つのジョブを定義しています。
 
-- The `build` job runs for all branches and only tags starting with 'config-test'.
-- The `test` job runs for all branches and only tags starting with 'config-test'.
-- The `deploy` job runs for no branches and only tags starting with 'config-test'.
+- `build` ジョブは全てのブランチを対象に、タグが「config-test」から始まるものについてのみ実行します。
+- `test` ジョブは全てのブランチを対象に、タグが「config-test」から始まるものについてのみ実行します。
+- `deploy` ジョブはブランチない、タグが「config-test」から始まるものについてのみ実行します。
 
 ```yaml
 workflows:
@@ -383,13 +383,13 @@ workflows:
   build-test-deploy:
     jobs:
       - build:
-          filters:  # required since `test` has tag filters AND requires `build`
+          filters:  # タグフィルター付き、かつ「build」を requires している「test」に必要
             tags:
               only: /^config-test.*/
       - test:
           requires:
             - build
-          filters:  # required since `deploy` has tag filters AND requires `test`
+          filters:  # タグフィルター付き、かつ「test」を requires している「deploy」に必要
             tags:
               only: /^config-test.*/
       - deploy:
