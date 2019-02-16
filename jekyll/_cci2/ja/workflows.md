@@ -407,9 +407,9 @@ workflows:
 ### 正規表現でタグとブランチをフィルターする方法
 {:.no_toc}
 
-CircleCI のブランチ・タグフィルターは、Java の正規表現パターンをサポートしています。 フィルターを指定する場合、CircleCI は厳密な正規表現で照合します。
+CircleCI のブランチ・タグフィルターは、Java の正規表現パターンをサポートしています。 フィルターを記述する場合、CircleCI は厳密な正規表現で照合します。
 
-例えば、`only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` のようにします。 Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `/^version-2\.1\.[3-7]/`.
+例えば `only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` とします。 よくあるのは、セマンティック・バージョニングに対してタグを利用するケースです。 バージョン 2.1 リリースのうちパッチバージョンが 3 〜 7 のものについてマッチさせるときは、`/^version-2\.1\.[3-7]/` のように記述します。
 
 For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
