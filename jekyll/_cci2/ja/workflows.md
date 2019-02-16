@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "ジョブの自動化を可能にする Workflow を使う"
-short-title: "ジョブの自動化を可能にする Workflow を使う"
-description: "ジョブの自動化を可能にする Workflow を使う"
+title: "ジョブの実行を Workflow で制御する"
+short-title: "ジョブの実行を Workflow で制御する"
+description: "ジョブの実行を Workflow で制御する"
 categories:
   - configuring-jobs
 order: 30
@@ -44,7 +44,7 @@ Workflows may appear with one of the following states:
 ### 制限について
 {:.no_toc}
 
-[ビルド処理のプレビュー]({{ site.baseurl }}/2.0/build-processing/)を有効にしたプロジェクトは、Workflow の実行トリガーに CircleCI API を用いることもできます。 反対にビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
+プロジェクトの設定にある Advanced Settings で [Enable build processing]({{ site.baseurl }}/2.0/build-processing/) を有効にすると、Workflow の実行トリガーに CircleCI API を利用できるようにもなります。 反対にビルド処理のプレビューを有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **※**Workflow を使わずにビルドするには `build` ジョブを使います。</p> 
 
 こうした制限に関する詳細については [FAQ]({{ site.baseurl }}/2.0/faq) をご確認ください。
 
