@@ -421,11 +421,11 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 
 そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するような Workflow では、Workspace を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
 
-例えば、Scala のプロジェクトにおいては、ビルドジョブのコンパイルの段階で多くの CPU リソースを消費します。 一方、Scala のテストジョブでは CPU 負荷は高いとは言えず、複数のコンテナを並行処理しても問題ないほどです。 ビルドジョブに大きなコンテナを使い、Workspace にコンパイル済みデータを保存しておくことで、ビルドジョブで作成したコンパイル済みの Scala をテストコンテナで使うことが可能になります。
+例えば、Scala のプロジェクトにおいては、ビルドジョブのコンパイルの段階で多くの CPU リソースを消費します。 一方、Scala のテストジョブでは CPU 負荷は高いとは言えず、複数のコンテナを並行処理しても問題ないほどです。 ビルドジョブに大きなコンテナを使い、そのなかで生成したコンパイル済みデータを Workspace に保存しておくことで、すでにコンパイルされた Scala をそのままテストコンテナで使うことが可能になります。
 
-A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
+もう 1 つの例は、Java アプリケーションをビルドし、その jar ファイルを Workspace に保存する `build` ジョブを含むプロジェクトです。 jar を用いて`integration-test`、`unit-test`、`code-coverage` の 3 つのテストを並行処理するために、`build` ジョブをファンアウトするとします。
 
-To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+このとき、ジョブで作られたデータを保存して他のジョブでも使えるようにするには、ジョブ内に `persist_to_workspace` キーを追加します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時 Workspace にアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (あるいは Workflow の再実行時に) 利用できるようにします。
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
