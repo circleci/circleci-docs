@@ -88,7 +88,7 @@ workflows:
 
 下記は 4 つのシーケンシャルジョブを含む Workflow の例です。 ジョブは設定した順番通りに実行され、図示しているように、各ジョブはそれぞれ `requires:` に記述されたジョブが問題なく完了するまで、処理が待機する仕組みになっています。
 
-![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
+![シーケンシャルジョブを実行する Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
 下記に示す `config.yml` のコードは、シーケンシャルジョブで構成した Workflow の例です。
 
@@ -119,7 +119,7 @@ workflows:
 
 図示している例では、Workflow は最初に build ジョブを普通に実行し、並列動作する一連の `acceptance_test` ジョブを実行するファンアウトを行います。最終的には `deploy` ジョブを走らせるファンインで処理を終えます。
 
-![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
 
 下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブで構成した Workflow の例です。
 
@@ -198,11 +198,11 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 
 スクリーンショット： `request-testing` ジョブの承認を待つ Workflow。
 
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+![待機状態の Workflow で承認されたジョブ]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 スクリーンショット：`request-testing` ジョブをクリックすると現れる承認ダイアログ。
 
-![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
 
 ## Scheduling a Workflow
 
@@ -417,7 +417,7 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を用いるとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできることになります。 下記は、Workspace に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を解説したものです。
 
-![workspaces data flow]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![Workspace のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
 そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するような Workflow では、Workspace を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
 
@@ -487,23 +487,23 @@ build ジョブと deploy ジョブの間でデータをやりとりする、Wor
 
 ## Workflow のなかで失敗したジョブを再実行する
 
-Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
+Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行できます。CircleCI で **WORKFLOWS** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示してから、**Rerun** ボタンをクリックして **Rerun from failed** を選びます。
 
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 
-This section describes common problems and solutions for Workflows.
+ここでは Workflow に関する一般的な問題とその解決方法について解説しています。
 
-### Rerunning Workflows Fails
+### 失敗した Workflow を再実行する
 {:.no_toc}
 
 It has been observed that in some case, a failure happens before the workflow runs (during build processing). In this case, rerunning the workflow will fail even though it was succeeding before the outage. To workaround this, push a change to the project's repository. This will re-run build processing first and then run the workflow.
 
-### Workflows Not Starting
+### Workflow がスタートしない
 {:.no_toc}
 
-When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
+Workflow の設定時に新しいジョブが表示されなくなったときは、`config.yml` の記述にエラーがあると考えられます。
 
 Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
 
@@ -519,34 +519,34 @@ A Workflow page URL looks like this:
 
 Look for Workflows that have a yellow tag and "Needs Setup" for the text.
 
-![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
+![Workflow の誤った設定例]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
-### Workflows Waiting for Status in GitHub
+### Workflow の処理中に GitHub で待機状態のままになる
 {:.no_toc}
 
-If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+GitHub リポジトリのブランチに実装済みの Workflow があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
 
-![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
+![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
+`ci/circleci` のチェックボックスがオンになっていると、Workflow 使用時に GitHub での処理完了を表すステータス表示に問題が発生することがあります。原因は、名前で区別したジョブを含むキーと合わせて CircleCI がステータスを GitHub にポストするためです。
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+この設定を解除するには、GitHub の Setting ページから Branches にアクセスし、保護されたブランチの Edit ボタンクリックします。該当のページは https://github.com/your-org/project/settings/branches のような URL になっています。
 
 ## 関連情報
 {:.no_toc}
 
-- For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document.
+- CircleCI 1.0 の `circle.yml` ファイルから CircleCI 2.0 の `.circleci/config.yml` ファイルへ移行する際の Workflow の設定方法を知りたい場合は、2.0 移行マニュアルの [Workflow の設定の手順]({{ site.baseurl }}/2.0/migrating-from-1-2/)をご覧ください。
 
-- For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ.
+- Workflow に関するよくある質問は、FAQ の [Workflow]({{ site.baseurl }}/2.0/faq) を参照してください。
 
-- For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
+- Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) で入手できます。
 
 ## Video: Configure Multiple Jobs with Workflows
 {:.no_toc}
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-### Video: How to Schedule Your Builds to Test and Deploy Automatically
+### 動画：テストとデプロイを自動実行するビルドのスケジューリング方法
 {:.no_toc}
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
