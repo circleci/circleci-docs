@@ -130,7 +130,7 @@ Docker イメージを指定する際に、`latest` タグを付け**ない**の
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 
-{:.no_toc} You can set the timezone in Docker images with the `TZ` environment variable. In your `.circleci/config.yml`, it would look like:
+{:.no_toc} 環境変数 `TZ` を用いて Docker イメージのタイムゾーンを設定できます。 In your `.circleci/config.yml`, it would look like:
 
 環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
@@ -228,7 +228,7 @@ CircleCI がホスティングしているクラウド環境なら可能です�
 
 ### スケジュールされた Workflows は、指定された時間通り正確に実行されますか？
 
-{:.no_toc} CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
+{:.no_toc} CircleCI はスケジュールの正確性については保証していません。 設定した時間にコミットがプッシュされたとして Workflow をスケジュール実行します。
 
 ## 料金・支払
 
@@ -263,7 +263,7 @@ IPv6 によるローカル通信のテストでは [machine Executor]({{ site.ba
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
-You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。 下記のように Docker デーモンを設定することでグローバルに有効化できます。
 
 ```yaml
    ```
@@ -288,7 +288,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 
 ### CircleCI 2.0 がサポートしている OS は？
 
-{:.no_toc} - **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
+{:.no_toc} - **Linux：**CircleCI はほとんどの Linux アプリケーションのビルドが可能な高い柔軟性をもっています。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
 
 - **Android：**詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
 
