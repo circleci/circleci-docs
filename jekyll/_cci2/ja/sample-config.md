@@ -1,25 +1,27 @@
 ---
 layout: classic-docs
-title: "config.yml の設定例"
-short-title: "config.yml の設定例"
-description: "config.yml の設定例"
+title: "Sample 2.0 config.yml Files"
+short-title: "Sample 2.0 config.yml File"
+description: "Sample 2.0 config.yml File"
 categories:
   - migration
 order: 2
 ---
 This document provides three sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
 
-* 目次 {:toc}
+* 目次
+{:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルドの高度な制御を可能にするだけでなく、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflow]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
+The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
 
-## パラレルジョブの設定例
+## Sample Configuration with Parallel Jobs
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 
 ```yaml
+```
 version: 2
 jobs:
   build:
@@ -41,14 +43,15 @@ workflows:
       - build
       - test
 ```
+```
 
 {% endraw %}
 
-これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflow について、詳しくは [Workflow]({{ site.baseurl }}/2.0/workflows) を参照してください。
+This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
-## シーケンシャル Workflow の設定例
+## Sample Configuration with Sequential Workflow
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 
@@ -65,12 +68,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: npm のアップデート
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -83,10 +86,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: テスト
+          name: Test
           command: npm test
       - run:
-          name: コードカバレッジの生成
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
@@ -110,13 +113,13 @@ workflows:
 
 {% endraw %}
 
-これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflow について、詳しくは [Workflow]({{ site.baseurl }}/2.0/workflows) を参照してください。
+This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
-## ファンイン・ファンアウト Workflow の設定例
+## Sample Configuration with Fan-in/Fan-out Workflow
 
-下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。 この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
+Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
-なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行される上流ジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
+Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 {% raw %}
 
@@ -165,7 +168,7 @@ jobs:
       - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load
       - run:
-          name: テストの実行
+          name: Run tests
           command: bundle exec rake
 
   precompile_assets:
@@ -180,7 +183,7 @@ jobs:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
-          name: コンパイル済みアセット
+          name: Precompile assets
           command: bundle exec rake assets:precompile
       - save_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
@@ -201,7 +204,7 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: マスターから Heroku にデプロイ
+          name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
@@ -227,9 +230,9 @@ workflows:
 
 {% endraw %}
 
-## 複数の実行環境 (macOS ＋ Docker) を利用する設定例
+## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
-1 つの Workflow のなかで複数の[実行環境](https://circleci.com/docs/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドします。
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 {% raw %}
 
@@ -243,15 +246,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: CocoaPods の Specs リポジトリをフェッチ
+          name: Fetch CocoaPods Specs
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
-          name: CocoaPods のインストール
+          name: Install CocoaPods
           command: pod install --verbose
 
       - run:
-          name: ビルド、実行テスト
+          name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -295,6 +298,6 @@ workflows:
 
 {% endraw %}
 
-## See Also
+## 関連情報
 
 See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
