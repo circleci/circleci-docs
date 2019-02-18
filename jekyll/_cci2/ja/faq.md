@@ -13,7 +13,7 @@ order: 1
 
 ### CircleCI の従業員にプログラムコードを見られる恐れはありませんか？
 
-{:.no_toc} CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
+{:.no_toc} CircleCI の従業員がユーザーの許諾を得ずにコードを見ることはありません。 サポートをご希望の際、サポートエンジニアが問題解決を図るために許可を得たうえでコードを確認させていただく場合があります。
 
 詳しくは CircleCI の[セキュリティポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
 
@@ -32,12 +32,14 @@ order: 1
 [Hello World]({{ site.baseurl }}/ja/2.0/hello-world/) を例を挙げると、下記のように Jenkins の `steps` に記述している内容をそのまま `steps:` にコピー＆ペーストすることになります。
 
 ```yaml
-    steps:
-      - run: echo "Add any bash command you want here"
+    ```
+steps:
+      - run: echo "bash コマンドをここに記述します"
       - run:
           command: |
-            echo "Arbitrary multi-line bash"
-            echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
+            echo "2 行以上の bash コマンドはこのようにします"
+            echo "たいていは Jenkins の Execute Shell の内容をコピー＆ペーストするだけです"
+```
 ```
 
 Jenkins と CircleCI の仕組みの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
@@ -49,7 +51,7 @@ CircleCI 2.0 はプロジェクトの内容から推測して変換するよう�
 
 ### CircleCI 2.0 は元となる OS イメージを新たに作成しなくても使えますか？
 
-{:.no_toc} Yes, you can use one of ours! For now, but this image may be deprecated in a future release.
+{:.no_toc} もちろん使えます。CircleCI が提供している OS イメージをご利用ください。 ただし、将来的にそれらの OS イメージが使えなくなる可能性がある点についてはご了承ください。
 
 たとえば `circleci/build-image:ubuntu-14.04-XL-922-9410082` というイメージは、Trusty 版の Ubuntu 14.04 と同等の内容になっています。 容量はかなり大きく（非圧縮時 17.5GB 程度）、ローカル環境でテストするのにはあまり向いていないかもしれません。
 
@@ -73,7 +75,7 @@ CircleCI 2.0 はプロジェクトの内容から推測して変換するよう�
 
 ### どうして CircleCI Enterprise という名称をやめたのですか？
 
-{:.no_toc} The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
+{:.no_toc} Enterprise はファイアウォールのあるオンプレミス環境で利用可能なオプションを指すものでした。 ただ、ユーザーの皆様や CircleCI のスタッフにとってまぎらわしい用語でもありました。
 
 そのため、クラウドサービス経由で使えるもの、ファイアウォール環境に導入するもの、あるいはそのハイブリッドで活用するもの、というように、ニーズに応じて利用可能な CircleCI という 1 つの製品としました。
 
