@@ -91,7 +91,7 @@ CircleCI の Workflows タブでエラーメッセージを確認してみてく
 {:.no_toc}  
 **usage キュー**は、1 つの組織においてビルドを実行するためのコンテナが不足しているときに使われるものです。 使用可能なコンテナの数は、CircleCI でプロジェクトを設定したときに選んだプランによって決まります。 ビルドがキューに入りがちな場合は、プランを変更して使用可能なコンテナ数を増やすことをおすすめします。
 
-A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
+**run キュー**はCircleCI 自体が高負荷な状況に陥っているときに発生することがあります。 この場合、ユーザーのビルドはいったん run キューに置かれ、マシンが利用できる状態になったら処理されます。
 
 つまり、**usage キュー** が発生するときは[コンテナの数を増やす](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing)ことで処理時間を短縮できますが、**run キュー**による待ち時間は避けようがないということになります（もちろん CircleCI では可能な限りそうならないよう務めます）。
 
@@ -100,12 +100,12 @@ A **run queue** forms when CircleCI experiences high demand. Customer builds are
 {:.no_toc}  
 ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される SWITCH ORGANIZATION メニューから目的の Org である `myOrg` に切り替えます。
 
-### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
+### 「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。しかし、現在のプランはその条件を満たしています。 なぜエラーになるのでしょうか？
 
 {:.no_toc}  
 CircleCI では、基本的には 1 プロジェクトあたりの並列処理数が 16 までに制限されています。 この数を超えてリクエストした場合、ビルドは失敗してしまいます。 上限を大きくしたいときは [CircleCI Japanese Support Center](https://support.circleci.com/hc/ja) よりお問い合わせください。
 
-### How do Docker image names work? Where do they come from?
+### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 
 {:.no_toc}  
 CircleCI 2.0 では現在のところ [Docker Hub](https://hub.docker.com) 上の Docker イメージのプル（と Docker Engine のプッシュ）にのみ対応しています。 これら[公式の Docker イメージ](https://hub.docker.com/explore/)に対してできるのは、単純に下記のような名前やタグを指定してプルすることです。
@@ -130,7 +130,7 @@ Docker イメージを指定する際に、`latest` タグを付け**ない**の
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 
-{:.no_toc} 環境変数 `TZ` を用いて Docker イメージのタイムゾーンを設定できます。 In your `.circleci/config.yml`, it would look like:
+{:.no_toc} 環境変数 `TZ` を用いて Docker イメージのタイムゾーンを設定できます。 下記のように `.circleci/config.yml` を編集してみてください。
 
 環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
