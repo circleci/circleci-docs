@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orbs とは"
 short-title: "Orbs とは"
-description: "CircleCI Orbs マニュアルの入口"
+description: "CircleCI Orbs 入門"
 categories:
   - getting-started
 order: 1
