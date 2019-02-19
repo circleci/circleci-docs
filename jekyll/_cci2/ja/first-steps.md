@@ -21,4 +21,4 @@ CircleCI 2.x で初めてビルドを実行するには、次の手順に従っ�
 
 ## 次のステップは？
 
-[Hello World]({{ site.baseurl }}/2.0/hello-world/) のページでは、プロジェクトの基本的なビルド方法や Org の切り替え方法、また、ビルド環境の決定やテストの自動化に役立つ [.circleci/config.yml</code>]({{ site.baseurl }}/2.0/configuration-reference/) ファイルについて説明しています。
+[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/) のページでは、プロジェクトの基本的なビルド方法や Org の切り替え方法、また、ビルド環境の決定やテストの自動化に役立つ [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルについて説明しています。
