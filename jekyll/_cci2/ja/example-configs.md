@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "サンプル設定ファイルのリポジトリ"
-short-title: "サンプル設定ファイルのリポジトリ"
+title: "パブリックリポジトリの例"
+short-title: "パブリックリポジトリの例"
 description: "CircleCI 2.0 マニュアルの入口"
 categories:
   - getting-started
