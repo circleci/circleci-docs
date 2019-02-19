@@ -51,7 +51,7 @@ jobs:
 
 ## CircleCI 上でのビルドの準備
 
-1. この手順を実行するには、CircleCI アカウントが必要です。 CircleCI の[ユーザー登録ページ](https://circleci.com/signup)を開き、[GitHub でログイン] をクリックします。 ビルドを実行するには、GitHub アカウントに CircleCI へのアクセスを許可する必要があります。 CircleCI アカウントを既に持っている場合は、[ダッシュボード](https://circleci.com/dashboard)にアクセスします。
+1. この手順を実行するには、CircleCI アカウントが必要です。 CircleCI の[ユーザー登録ページ](https://circleci.jp/signup)を開き、[GitHub でログイン] をクリックします。 ビルドを実行するには、GitHub アカウントに CircleCI へのアクセスを許可する必要があります。 CircleCI アカウントを既に持っている場合は、[ダッシュボード](https://circleci.com/dashboard)にアクセスします。
 
 2. 次に、CricleCI で既に構築され、自分がアクセス可能なプロジェクトを*フォローする*かどうかのオプションが表示されます (これは通常、会社や組織の GitHub アカウントを使用している開発者に表示されます)。 次の画面では、作成したリポジトリを、新しいプロジェクトとして CircleCI に追加できます。
 
@@ -67,7 +67,7 @@ jobs:
 
 2. **チェックアウトコード :** CircleCI は、GitHub リポジトリをチェックアウトし、手順 1 でローンチされた仮想環境に「クローン」しました。
 
-3. **echo：** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は echo コマンドを実行し、「A first hello」という入力を与えました ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
+3. **echo :** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は echo コマンドを実行し、「A first hello」という入力を与えました ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
 
 今のところはリポジトリにソースコードが含まれておらず、`config.yml` 内にもテストに関わる設定が含まれていませんが、CircleCI はビルドに「成功」したものとして扱います ([exit コード](https://en.wikipedia.org/wiki/Exit_status)としては 0 を返しているため)。 ほとんどのプロジェクトは、これよりはるかに複雑で、多くの場合は複数の Docker イメージと複数のステップが存在し、多くのテストも含まれます。 `config.yml` ファイルに記述できる全てのステップの詳細については、[CircleCI の設定方法](https://circleci.com/docs/ja/2.0/configuration-reference)を参照してください。
 
@@ -82,7 +82,6 @@ jobs:
 1. Workflows の動作を見るには、`.circleci/config.yml` ファイルを編集します。 ブラウザーのウィンドウでファイルを編集モードにしてから、ファイル内で `build` とそれ以後のテキストを選択し、コピー＆ペーストし、そのセクションを複製します。 コードブロックは次のようになります。
 
 ```yml
-```
 version: 2
 jobs:
   build:
@@ -96,16 +95,14 @@ jobs:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "A first hello"
-```      
+      - run: echo "A first hello"      
 ```
 
-1. 次に、2 つのジョブを別々の名前に変更します。 この例では、`one` と `two` という名前にします。 エコーコマンドの内容も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
+1. 次に、2 つのジョブを別々の名前に変更します。 この例では、`one` と `two` という名前にします。 echo コマンドの部分も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
 
 2. `config.yml` ファイルに `workflows` セクションを追加します。 workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
 
 ```yml
-```
 jobs:
   one:
     docker:
@@ -128,13 +125,12 @@ workflows:
       - one
       - two
 ```
-```
 
 1. これらの変更をリポジトリにコミットしてから、CircleCI のダッシュボードに戻ります。![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
 2. Workflow のリンクをクリックすると、2 つのジョブが並列実行されていることを確認できます。![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
-Workflows の詳細については、[「Workflows の制御」](https://circleci.com/docs/2.0/workflows/#overview)ドキュメントを参照してください。
+Workflows の詳細については「[Workflows の制御](https://circleci.com/docs/ja/2.0/workflows/#overview)」ドキュメントを参照してください。
 
 ### Workspaces 機能を使ってみる
 {:.no_toc}
@@ -142,7 +138,6 @@ Workflows の詳細については、[「Workflows の制御」](https://circlec
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspaces を使用して、その実行に固有のダウンストリームのジョブで必要となるデータを渡すことができます。 `config.yml` を次のように書き換えてみてください。
 
 ```yml
-```
 version: 2
 jobs:
   one:
@@ -184,9 +179,8 @@ workflows:
           requires:
             - one
 ```
-```
 
-Workspaces の詳細については、[こちら](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs)を参照してください。
+Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs)を参照してください。
 
 ### SSH での{% comment %} TODO: Job {% endcomment %}ビルドへの接続
 {:.no_toc}
@@ -201,7 +195,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/2.0/
 
 ![]({{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
 
-ビルド画面の「Enable SSH」セクションで `ssh` コマンド文字列をコピーします。 ターミナルを起動し `ssh` コマンド文字列を貼り付けます。
+ビルドの SSH の有効化セクションから、`ssh` の接続先をコピーします。 ターミナルを開き、`ssh` の接続先を貼り付けます。
 
 以下のコマンドのいくつかを使用すると、Workspaces を使用して作成したファイルの内容を検索し、表示できます。
 
@@ -216,7 +210,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/2.0/
 
 Git フックでのコミットごとに CircleCI の `config.yml` をバリデーションする方法については[こちらのブログ](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)で紹介しています。
 
-### CircleCI、弊社
+### CircleCI に関する資料
 {:.no_toc}
 
 * CircleCI のブログとフォロー方法 
