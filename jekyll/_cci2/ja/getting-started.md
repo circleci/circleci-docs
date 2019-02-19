@@ -35,7 +35,6 @@ CircleCI は、テスト環境の構築方法や実行するテスト内容の�
 2. 単純な `config.yml` から始めたいときは、下記の内容を GitHub の編集画面にコピーしてください。
 
 ```yml
-```
 version: 2
 jobs:
   build:
@@ -44,7 +43,6 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-```
 ```
 
 1. コメントを入力してから、[Commit New File] ボタンをクリックしてファイルをコミットします。![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
@@ -65,9 +63,9 @@ jobs:
 
 ビルドが開始され、自動的に正しく実行されるはずです。 実行結果を確認します。 CircleCI ダッシュボードに表示される緑色の [SUCCESS] ボタンをクリックすると、実行の次の部分を調べることができます。
 
-1. **環境のスピンアップ：** CircleCI は、`circleci/ruby:2.4.1` Docker イメージを使用して、仮想コンピューティング環境をローンチしました。
+1. **環境のスピンアップ :** CircleCI は、`circleci/ruby:2.4.1` Docker イメージを使用して、仮想コンピューティング環境をローンチしました。
 
-2. **チェックアウトコード：** CircleCI は、GitHub リポジトリをチェックアウトし、手順 1 でローンチされた仮想環境に「クローン」しました。
+2. **チェックアウトコード :** CircleCI は、GitHub リポジトリをチェックアウトし、手順 1 でローンチされた仮想環境に「クローン」しました。
 
 3. **echo：** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は echo コマンドを実行し、「A first hello」という入力を与えました ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
 
