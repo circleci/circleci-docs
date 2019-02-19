@@ -6,29 +6,26 @@ order: 3
 description: "How to install CircleCI on a single VM"
 ---
 
-CircleCI is a scalable CI/CD platform that supports clusters
-of tens or hundreds of build machines. This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
+CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the CircleCI platform on a single virtual machine. This is intended as a simple mechanism for getting started with a small trial in any environment:
 
 * TOC
 {:toc}
 
 ## Prerequisites
 
-The following requirements must be met for successful trial installation:
+The following requirements must be met for a successful trial installation:
 
-- [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
+- [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a CircleCI trial license file.
+- You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start).
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
-- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
+- CircleCI machines must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
 
-## Steps for Installation on AWS EC2 
+## Steps for Installation on AWS EC2
 
-Use this procedure to install CircleCI on a single EC2 VM by using the pre-made Amazon Machine Image (AMI) which is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
+The steps in this section walk you through installing CircleCI on a single EC2 VM using a pre-made Amazon Machine Image (AMI). An AMI is a special type of virtual appliance used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
 
-**Note:** All builds that run on the installed machine will have access
-to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not**
-give any inappropriate privileges to your instance. It is possible to block
-this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
+**Note:** All builds that run on the installed machine will have access to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not** give any inappropriate privileges to your instance. It is possible to block this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
 
 ### Configure the Amazon Machine Image:
 
@@ -71,25 +68,29 @@ this access with `iptables` rules in a production setup, [contact support](https
 <script>amiUpdateSelect();</script>
 
 
-1. Find the Amazon Machine Image for your region from the list above. 
-2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`. Select Next to configure the instance.
-3. On the Configuring Instance Details page: 
+1. Find the Amazon Machine Image for your region from the list above, and click Go!
+2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`, from the list. Select Next: Configure Instance Details.
+3. On the Configuring Instance Details page:
 - Choose your network
 - Enable Auto-assign Public IP
-- Set the IAM role to None
+- Check the IAM role is set to None
 ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png)
-4. By default, the instance will have 100GB of storage, this is enough for the trial install.
-5. During the Configure Security Group step, open the following ports:
+- Select Next: Add Storage.
+4. By default, the instance will have 100GiB of storage, this is enough for the trial install. Select Next: Add Tags.
+5. You don't need to add a tag for the purposes of this trial but feel free to do so using the Add Tag button. Select Next: Configure Security Group.
+5. On the Configure Security Group page, open the following ports:
 - SSH port 22
 - HTTP port 80
 - HTTPS port 443
 - Custom TCP 8800
 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png)
-6. After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
+- Select Review and Launch to see a summary of your trial instance, then select Launch.
+6. You should now be looking at the Launch Status Page. From here you can select View Instances to jump to your AWS dashboard and see the full details of your trial instance. Once the instance is up and running, go to the public or private IP address or hostname and click Get Started to complete the rest of the guided installation process for CircleCI.
+![Getting Started Page]({{site.baseurl}}/assets/img/docs/GettingStartedPage.png)
 
 ### Configure CircleCI
-1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance. 
+1. Choose an SSL certificate option. By default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance.
 - Note: If you are using a self-signed cert, or using a custom CA root, please see the [certificates]({{site.baseurl}}/2.0/certificates/) document for a script to add the information to the CircleCI truststore.
 2. Upload the CircleCI license file and set the admin password.
 3. If you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
@@ -100,14 +101,14 @@ this access with `iptables` rules in a production setup, [contact support](https
 7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication.
 8. Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
 9. Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions.
-10. Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 
-11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
+10. Agree to the license agreement and save. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete.
+11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
 
 
 <!---
 ## Installation in a Data Center
 
-1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. 
+1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04.
 
 2. Open ports 22 and 8800 to administrators, open ports 80 and 443 to all users, and optionally open ports 64535-65535 to developers to SSH into builds.
 
@@ -115,14 +116,7 @@ this access with `iptables` rules in a production setup, [contact support](https
 
 4. Visit port 8800 on the machine in a web browser to complete the guided installation process.
 
-5. Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames,  enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+5. Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames,  enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete.
 
-6. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
+6. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
 -->
-
-
-
-
-
-
-
