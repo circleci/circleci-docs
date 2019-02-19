@@ -103,27 +103,28 @@ jobs:
 2. `config.yml` ファイルに `workflows` セクションを追加します。 workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
 
 ```yml
+version: 2
 jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: sleep 25
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - run: sleep 15
+one:
+docker:
+- image: circleci/ruby:2.4.1
+steps:
+- checkout
+- run: echo "A first hello"
+- run: sleep 25
+two:
+docker:
+- image: circleci/ruby:2.4.1
+steps:
+- checkout
+- run: echo "A more familiar hi"
+- run: sleep 15
 workflows:
-  version: 2
-  one_and_two:
-    jobs:
-      - one
-      - two
+version: 2
+one_and_two:
+jobs:
+- one
+- two
 ```
 
 1. これらの変更をリポジトリにコミットしてから、CircleCI のダッシュボードに戻ります。![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
