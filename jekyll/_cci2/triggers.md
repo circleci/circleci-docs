@@ -68,6 +68,22 @@ workflows:
             - hold
 ```
 
+## Trigger Docker Builds in Dockerhub
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.0-browsers # < an arbitrarily chosen docker image.
+    steps:
+      - checkout
+      - run:
+          # example curl request from dockerhub documentation
+          name: Trigger docker remotely
+          command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
+```
+
 ## See Also
 
 [Workflows]({{ site.baseurl }}/2.0/workflows/)
