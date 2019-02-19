@@ -280,10 +280,9 @@ Every month, you are charged for your selected credit package at the beginning o
 
 #### What happens when I run out of credits?
 {:.no_toc}
-On the Performance plan, your credit package will be refilled at 10% of your monthly selected package size when you have 5% remaining on your credit package so builds will never be blocked on a lack of credits in your account.
 
 On the Performance plan, when you reach 5% of your remaining credits, you will
-be refilled 10% of your credits. For example, if your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
 
 #### What happens to my credits if I upgrade to a new plan?
 {:.no_toc}
