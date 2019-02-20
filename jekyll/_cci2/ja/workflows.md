@@ -319,7 +319,7 @@ CircleCI は明示的にタグフィルターを指定しない限り、タグ�
 下記は 2 つの workflows を用いた例です。
 
 - `untagged-build` は全てのブランチに対して `build` ジョブを実行します。
-- `tagged-build` は `v` から始まるタグをもつ全てのブランチの `build` ジョブを実行します。
+- `tagged-build` は全てのブランチ**だけでなく**`v` から始まるタグに対して `build` ジョブを実行します。
 
 ```yaml
 workflows:
@@ -390,24 +390,24 @@ workflows:
               ignore: /.*/
 ```
 
-**※**Webhook で許容される GitHub 連携のデータ容量は[最大 5MB](https://developer.github.com/webhooks/#payloads)、一度にプッシュできるタグの数は[最大 3 つ](https://developer.github.com/v3/activity/events/types/#createevent)までに制限されています。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
+**注 :** Webhook で許容される GitHub 連携のデータ容量は[最大 5MB](https://developer.github.com/webhooks/#payloads)、一度にプッシュできるタグの数は[最大 3 つ](https://developer.github.com/v3/activity/events/types/#createevent)までに制限されています。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
 
 ### 正規表現でタグとブランチをフィルターする方法
 {:.no_toc}
 
 CircleCI のブランチ・タグフィルターは、Java の正規表現パターンをサポートしています。 フィルターを記述する場合、CircleCI は厳密な正規表現で照合します。
 
-例えば `only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` とします。 よくあるのは、セマンティック・バージョニングに対してタグを利用するケースです。 バージョン 2.1 リリースのうちパッチバージョンが 3 〜 7 のものについてマッチさせるときは、`/^version-2\.1\.[3-7]/` のように記述します。
+例えば `only: /^config-test/` と指定したときは `config-test` タグにのみマッチします。 `config-test` から始まる全てのタグにマッチさせたいなら、`only: /^config-test.*/` とします。 よくあるのは、セマンティック バージョニングに対してタグを利用するケースです。 バージョン 2.1 リリースのうちパッチバージョンが 3 〜 7 のものについてマッチさせるときは、`/^version-2\.1\.[3-7]/` のように記述します。
 
 パターンマッチングのルールについて詳しく知りたいときは、[java.util.regex](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html) のページを参照してください。
 
-## ジョブ間のデータ共有を可能にする Workspace を使う
+## ジョブ間のデータ共有を可能にする Workspaces を使う
 
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を用いるとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできることになります。 下記は、Workspace に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を解説したものです。
 
 ![Workspace のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
-そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するような Workflow では、Workspace を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
+そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspaces を使います。 複数のブランチでジョブを実行するような Workflows では、Workspaces を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspaces は役立ちます。
 
 例えば、Scala のプロジェクトにおいては、ビルドジョブのコンパイルの段階で多くの CPU リソースを消費します。 一方、Scala のテストジョブでは CPU 負荷は高いとは言えず、複数のコンテナを並行処理しても問題ないほどです。 ビルドジョブに大きなコンテナを使い、そのなかで生成したコンパイル済みデータを Workspace に保存しておくことで、すでにコンパイルされた Scala をそのままテストコンテナで使うことが可能になります。
 
