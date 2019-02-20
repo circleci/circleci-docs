@@ -90,7 +90,6 @@ workflows:
 
 下記に示す `config.yml` のコードは、シーケンシャルジョブで構成した Workflow の例です。
 
-    ```
     workflows:
       version: 2
       build-test-and-deploy:
@@ -105,7 +104,6 @@ workflows:
           - deploy:
               requires:
                 - test2
-    ```
     
 
 これを見るとわかるように、依存関係は `requires:` キーで定義されます。 `deploy:` ジョブは `build`、`test1`、`test2` という 3 つのジョブが全て完了するまで実行されません。 ジョブは依存関係にあるそれ以前の全ジョブの処理が終了するまで待つことになるため、 `deploy` ジョブは `test2` を待ち、`test2` ジョブは `test1` を待ち、そして`test1` ジョブは `build` を待つという構図になります。
@@ -121,7 +119,6 @@ workflows:
 
 下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブで構成した Workflow の例です。
 
-    ```
     workflows:
       version: 2
       build_accept_deploy:
@@ -145,7 +142,6 @@ workflows:
                 - acceptance_test_2
                 - acceptance_test_3
                 - acceptance_test_4
-    ```
     
 
 この例では、`build` ジョブが完了した後すぐに 4 つの `acceptance_test` ジョブがスタートします。 その後、4 つの `acceptance_test` ジョブの完了を待って、`deploy` ジョブが実行されます。
@@ -154,7 +150,7 @@ workflows:
 
 ## 承認後に処理を続行する Workflow の例
 
-Workflow では、次のジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 リポジトリに対するプッシュ権限があれば、Workflow の続行を指示する「承認ボタン」をクリックできます。 これを設定するには `jobs` 内にジョブを追加し、`type: approval` キーを追加してください。 設定例としては次のようなものになります。
+Workflow では、次のジョブを続行する前に手動の承認操作を待つ設定にすることも可能です。 リポジトリに対するプッシュ権限があれば、Workflow の続行を指示する [Approval] ボタンをクリックできます。 これを設定するには `jobs` 内にジョブを追加し、`type: approval` キーを追加してください。 設定例としては次のようなものになります。
 
 ```yaml
 # ...
