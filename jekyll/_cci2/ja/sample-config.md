@@ -12,11 +12,11 @@ order: 2
 * 目次
 {:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルドの高度な制御を可能にするだけでなく、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflows]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
+CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflows]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
 
 ## Sample Configuration with Parallel Jobs
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
 
 {% raw %}
 
