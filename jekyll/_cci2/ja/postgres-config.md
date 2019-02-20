@@ -24,7 +24,7 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # Primary container image where all commands run
+    # すべてのコマンドの実行を担うプライマリコンテナイメージ
 
     docker:
       - image: circleci/ruby:2.4.1-node
@@ -33,7 +33,7 @@ jobs:
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # Service container image available at `host: localhost`
+    # 「host: localhost」で使えるサービスコンテナイメージ
 
       - image: circleci/postgres:9.6.2-alpine
         environment:
@@ -43,20 +43,20 @@ jobs:
     steps:
       - checkout
 
-      # Restore bundle cache
+      # bundle キャッシュをリストアする
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # Bundle install dependencies
+      # bundle install で依存関係をインストールする
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # Store bundle cache
+      # bundle キャッシュを保存する
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
@@ -72,7 +72,7 @@ jobs:
           name: Parallel RSpec
           command: bin/rails test
 
-      # Save artifacts
+      # アーティファクトを保存する
       - store_test_results:
           path: /tmp/test-results
 ```
@@ -134,9 +134,9 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      # CircleCI の Go のイメージはこちら https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI の PostgreSQL のイメージはこちら https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: circleci-demo-go
@@ -155,8 +155,8 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # Normally, this step would be in a custom primary image;
-      # we've added it here for the sake of explanation.
+      # 通常以下の内容はカスタムしたプライマリイメージのところに記述しますが、
+      # わかりやすくするためにここに記述しています。
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -170,7 +170,7 @@ jobs:
               echo -n .
               sleep 1
             done
-            echo Failed waiting for Postgres && exit 1
+            echo Postgres の待機に失敗しました && exit 1
       - run:
           name: Run unit tests
           environment:
