@@ -45,11 +45,11 @@ workflows:
 
 {% endraw %}
 
-これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行するWorkflow について、詳しくは [Workflows]({{ site.baseurl }}/2.0/workflows) ページを参照してください。
 
-## Sample Configuration with Sequential Workflow
+## シーケンシャル Workflow の設定例
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
 
 {% raw %}
 
@@ -66,12 +66,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update npm
+          name: npm のアップデート
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Install npm wee
+          name: npm wee のインストール
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -84,10 +84,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test
+          name: テスト
           command: npm test
       - run:
-          name: Generate code coverage
+          name: コードカバレッジの生成
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
