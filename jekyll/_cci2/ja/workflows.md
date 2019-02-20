@@ -255,11 +255,10 @@ workflows:
 ### 環境変数を共有するジョブコンテキストを使う
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定の手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定の手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
 
 下記に示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う構成にした、シーケンシャルジョブの例です。
 
-    ```
     workflows:
       version: 2
       build-test-and-deploy:
@@ -276,7 +275,6 @@ workflows:
           - deploy:
               requires:
                 - test2
-    ```
     
 
 上記では Context の設定画面におけるデフォルト名である `org-global` を設定していますが、このように `context` キーを設定することで環境変数が定義されます。 この例の `test1` と `test2` のジョブは、組織に所属するユーザーによって実行された際に同じ共有環境変数を使います。 デフォルトでは、組織の管理する全プロジェクトが、その組織におけるコンテキストについてアクセス権限をもちます。
@@ -284,14 +282,13 @@ workflows:
 ### ブランチレベル（ブランチの配下）でジョブを実行する
 {:.no_toc}
 
-下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflow は `jobs` 直下でネストしている `branches` キーを無視します。最初は Workflow を使わずジョブレベル（jobs の直下）で branches を使っていて、その後 Workflow を使う設定に変える場合は、ジョブレベルに記述するのではなく、workflows セクションの jobs のなかで branches キーを宣言しなければなりません。下記の `config.yml` を参考にしてください。
+下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflows は `jobs` 直下でネストしている `branches` キーを無視します。最初は Workflow を使わずジョブレベル（jobs の直下）で branches を使っていて、その後 Workflow を使う設定に変える場合は、ジョブレベルに記述するのではなく、workflows セクションの jobs のなかで branches キーを宣言しなければなりません。下記の `config.yml` を参考にしてください。
 
 ![ブランチレベル（ブランチの配下）でジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
 下記に示した `config.yml` ファイルのコードは、ブランチレベルでジョブを実行する構成にした Workflow の例です。
 
 ```yaml
-```
 workflows:
   version: 2
   dev_stage_pre-prod:
@@ -311,14 +308,13 @@ workflows:
             branches:
               only: /pre-prod(?:-.+)?$/
 ```
-```
 
 正規表現の詳しい使い方については、[正規表現でタグとブランチをフィルターする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、[こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
-### Git タグに対応可能な Workflow を実行する
+### Git タグに対応可能な Workflows を実行する
 {:.no_toc}
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 また、あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、[正規表現](#using-regular-expressions-to-filter-tags-and-branches)を用いてそのジョブに対するタグフィルターを指定する必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。 また、あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、[正規表現を用いて](#using-regular-expressions-to-filter-tags-and-branches)そのジョブに対するタグフィルターを指定する必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 下記は 2 つの workflows を用いた例です。
 
