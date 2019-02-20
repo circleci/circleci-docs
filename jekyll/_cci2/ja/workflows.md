@@ -495,9 +495,9 @@ Workflow の設定時に新しいジョブが表示されなくなったとき�
 
 Workflow がトリガーされないことがよくある場合、設定エラーが原因です。Workflow の実行が妨げられ、 その結果としてジョブがスタートしていないものと思われます。
 
-Workflow の設定を行うときは、その設定に問題がないか CircleCI の WORKFLOWS ページ (JOB ページでは*ありません*) をたびたび確認するとよいでしょう。
+Workflow の設定を行うときは、その設定に問題がないか CircleCI の Workflows ページ (Jobs ページでは*ありません*) をたびたび確認するとよいでしょう。
 
-プロジェクトのジョブページは下記のような URL になっています。
+プロジェクトの Job ページは下記のような URL になっています。
 
 `https://circleci.com/:VCS/:ORG/:PROJECT`
 
@@ -505,14 +505,14 @@ Workflow の設定を行うときは、その設定に問題がないか CircleC
 
 `https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
 
-この Workflow ページで、黄色地に「Needs Setup」という文字が表示されていないか確認してください。
+この Workflows ページで、黄色地に [NEEDS SETUP] という文字が表示されていないか確認してください。
 
 ![Workflow の誤った設定例]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
-### Workflow の処理中に GitHub で待機状態のままになる
+### Workflows の処理中に GitHub で待機状態のままになる
 {:.no_toc}
 
-GitHub リポジトリのブランチに実装済みの Workflow があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
+GitHub リポジトリのブランチに実装済みの Workflows があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、[Protect this branches] をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
 
 ![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
