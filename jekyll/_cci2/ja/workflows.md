@@ -9,7 +9,7 @@ order: 30
 ---
 ![header]({{ site.baseurl }}/assets/img/docs/wf-header.png)
 
-迅速なフィードバック、再実行までの時間短縮、リソースの最適化でソフトウェア開発のスピードアップを目指すなら、Workflows を活用してください。 このページでは、下記の内容に沿って Workflow の機能と設定例を解説しています。
+迅速なフィードバック、再実行までの時間短縮、リソースの最適化でソフトウェア開発のスピードアップを目指すなら、Workflows を活用してください。 このページでは、下記の内容に沿って Workflows の機能と設定例を解説しています。
 
 - 目次
 {:toc}
@@ -18,10 +18,10 @@ order: 30
 
 **Workflow** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 単純な設定キーで複雑なジョブを自動化し、ビルドに失敗しても素早いリカバリーを可能にします。
 
-Workflow を使うと下記が可能になります。
+Workflows を使うと下記が可能になります。
 
 - リアルタイムのステータス表示を見ながら、ジョブの実行とトラブルシューティングをそれぞれ別個に行えます
-- 定期的に実行したいジョブを含む Workflow のスケジュール化が可能です
+- 定期的に実行したいジョブを含む Workflows のスケジュール化が可能です
 - バージョンごとのテストの効率化を目的とした、複数ジョブを並行実行するファンアウトをサポートします
 - 複数の環境に対して高速なデプロイを実現するファンインをサポートします
 
@@ -30,7 +30,7 @@ Workflow 内のジョブの 1 つが失敗したとしても、それをリア�
 ### ステータス値
 {:.no_toc}
 
-Workflow のステータスは下記のうちいずれかの値をとります。
+Workflows のステータスは下記のうちいずれかの値をとります。
 
 - RUNNING：Workflow は実行中です。
 - NOT RUN：Workflow は未実行です。
@@ -44,11 +44,11 @@ Workflow のステータスは下記のうちいずれかの値をとります�
 ### 制限について
 {:.no_toc}
 
-プロジェクトの設定にある Advanced Settings で [[Enable build processing]]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすると、Workflow の実行トリガーに CircleCI API を利用できるようにもなります。 反対に [Enable build processing] を有効にしていないプロジェクトについては、Workflow は API 経由で実行されることはありません。 **注 :** Workflows を使わずにビルドするには `build` ジョブを使います。
+プロジェクトの設定にある Advanced Settings で [[Enable build processing]]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすると、Workflows の実行トリガーに CircleCI API を利用できるようにもなります。 反対に [Enable build processing] を有効にしていないプロジェクトについては、Workflows は API 経由で実行されることはありません。 **注 :** Workflows を使わずにビルドするには `build` ジョブを使います。
 
 こうした制限に関する詳細については [FAQ]({{ site.baseurl }}/ja/2.0/faq) をご確認ください。
 
-## Workflow の設定例
+## Workflows の設定例
 
 `workflows` *キーに関する細かな仕様は、CircleCI 設定マニュアルの [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) で説明しています。*
 
@@ -57,7 +57,6 @@ Workflow のステータスは下記のうちいずれかの値をとります�
 パラレルジョブを実行したいときは、`.circleci/config.yml` ファイルの末尾に新たに `workflows:` セクションを追加し、バージョンと Workflow 識別用の固有名を付けます。 下記は、並列動作させる 2 つのジョブからなる Workflow による典型的な自動化の手法を示した `.circleci/config.yml` の例です。 `build_and_test` という名前の `workflows:` キーで Workflow が定義され、その下にネストされた `jobs:` キーとジョブ名のリストが見えます。 ジョブには依存関係の定義がないことから、これらは並列で実行されます。
 
 ```yaml
-```
 version: 2
 jobs:
   build:
@@ -78,7 +77,6 @@ workflows:
     jobs:
       - build
       - test
-```
 ```
 
 以上に関する実際の設定ファイルは [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) で確認できます。
