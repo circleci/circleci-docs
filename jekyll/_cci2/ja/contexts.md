@@ -46,8 +46,6 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
               context: org-global
     
 
-To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
-
 ## Deleting a Context
 
 1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
