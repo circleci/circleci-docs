@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Database Configuration Examples"
-short-title: "Database Configuration Examples"
-description: "Example of Configuring PostgreSQL"
+title: "データベースの設定例"
+short-title: "データベースの設定例"
+description: "PostgreSQL の設定サンプル"
 categories:
   - configuring-jobs
 order: 35
