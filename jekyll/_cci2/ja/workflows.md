@@ -30,9 +30,9 @@ Workflow 内のジョブの 1 つが失敗したとしても、それをリア�
 ### ステータス値
 {:.no_toc}
 
-Workflows may appear with one of the following states:
+Workflow のステータスは下記のうちいずれかの値をとります。
 
-- RUNNING: Workflow is in progress
+- RUNNING：Workflow は実行中です。
 - NOT RUN: Workflow was never started
 - CANCELLED: Workflow was cancelled before it finished
 - FAILING: A Job in the workflow has failed
