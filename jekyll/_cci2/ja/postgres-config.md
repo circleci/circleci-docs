@@ -103,8 +103,8 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
-      # which includes a few enhancements and modifications. It is possible to use either image.
+      # この例では postgres 9.6 の公式イメージを使っています。もしくは circleci/postgres:9.6 と指定することもできます。 
+      # 後者には多少の機能改善やカスタマイズが加わっていますが、 どちらのイメージを指定しても問題ありません。
       - image: postgres:9.6-jessie
         environment:
           POSTGRES_USER: ubuntu
