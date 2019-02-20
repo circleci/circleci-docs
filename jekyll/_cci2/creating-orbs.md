@@ -499,7 +499,7 @@ circleci update install
 
 Now that you have installed the CircleCI CLI, you will want to configure the CLI for use. The process for configuring the CLI is simple and straightforward, requiring you only to follow a few steps.
 
-Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/accounts/api):
+Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/account/api):
 
 ```
 $ circleci setup

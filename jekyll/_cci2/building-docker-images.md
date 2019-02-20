@@ -115,12 +115,12 @@ If your job requires a specific docker version, you can set it as a `version` at
 
 ```yaml
       - setup_remote_docker:
-          version: 17.05.0-ce
+          version: 18.06.0-ce
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `17.03.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 
-If you need a Docker image that installs Docker and has Git, use `17.05.0-ce-git`. **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of Environments
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
