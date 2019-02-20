@@ -405,7 +405,7 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を用いるとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできることになります。 下記は、Workspace に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を解説したものです。
 
-![Workspace のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![Workspaces のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
 そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspaces を使います。 複数のブランチでジョブを実行するような Workflows では、Workspaces を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspaces は役立ちます。
 
@@ -477,7 +477,7 @@ build ジョブと deploy ジョブの間でデータをやりとりする、Wor
 
 Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行できます。CircleCI で **[Workflows]** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示してから、**[Rerun]** ボタンをクリックして **[Rerun from failed]** を選びます。
 
-![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI の Workflows ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 
@@ -523,13 +523,13 @@ GitHub リポジトリのブランチに実装済みの Workflows があり、�
 ## 関連情報
 {:.no_toc}
 
-- CircleCI 1.0 の `circle.yml` ファイルから CircleCI 2.0 の `.circleci/config.yml` ファイルへ移行する際の Workflow の設定方法を知りたい場合は、2.0 移行マニュアルの [Workflow の設定の手順]({{ site.baseurl }}/2.0/migrating-from-1-2/)をご覧ください。
+- CircleCI 1.0 の `circle.yml` ファイルから CircleCI 2.0 の `.circleci/config.yml` ファイルへ移行する際の Workflow の設定方法を知りたい場合は、2.0 移行マニュアルの [Workflows の設定の手順]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)をご覧ください。
 
-- Workflow に関するよくある質問は、FAQ の [Workflow]({{ site.baseurl }}/2.0/faq) を参照してください。
+- Workflows に関するよくある質問は、FAQ の [Workflow]({{ site.baseurl }}/ja/2.0/faq) を参照してください。
 
-- Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) で入手できます。
+- Workflows を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) で入手できます。
 
-## 動画：Workflow を使った複数ジョブの設定
+## 動画：Workflows を使った複数ジョブの設定
 {:.no_toc}
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
