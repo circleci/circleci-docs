@@ -111,11 +111,11 @@ workflows:
 
 {% endraw %}
 
-This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行するWorkflow について、詳しくは [Workflows]({{ site.baseurl }}/2.0/workflows) ページを参照してください。
 
-## Sample Configuration with Fan-in/Fan-out Workflow
+## ファンイン・ファンアウト Workflow の設定例
 
-Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
+下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。 この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
 
 Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
