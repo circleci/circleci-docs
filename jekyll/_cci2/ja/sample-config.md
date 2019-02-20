@@ -166,7 +166,7 @@ jobs:
       - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load
       - run:
-          name: Run tests
+          name: テストの実行
           command: bundle exec rake
 
   precompile_assets:
@@ -181,7 +181,7 @@ jobs:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
-          name: Precompile assets
+          name: コンパイル済みアセット
           command: bundle exec rake assets:precompile
       - save_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
@@ -202,7 +202,7 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Deploy Master to Heroku
+          name: マスターから Heroku にデプロイ
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
