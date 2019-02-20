@@ -532,6 +532,139 @@ If you are a user of a privately installed CircleCI deployment, change the defau
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circlecli local execute` (this was previously `circleci build`).
 
+### Packing A Config
+
+The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+
+```sh
+$ tree
+.
+├── config.yml
+└── foo
+    ├── bar
+    │   └── @baz.yml
+    ├── foo.yml
+    └── subtree
+        └── types.yml
+
+3 directories, 4 files
+```
+
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will  map the folder names and file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+
+{% raw %}
+```sh
+$ circleci config pack foo
+```
+
+```yaml
+bar:
+  baz: qux
+foo: bar
+subtree:
+  types:
+    ginkgo:
+      seasonality: deciduous
+    oak:
+      seasonality: deciduous
+    pine:
+      seasonality: evergreen
+```
+{% endraw %}
+
+#### Other Config Packing Capabilities
+{:.no_toc}
+
+A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
+
+Thus:
+
+{% raw %}
+```sh
+$ cat foo/bar/@baz.yml
+{baz: qux}
+```
+{% endraw %}
+
+Is mapped to:
+
+```yaml
+bar: 
+  baz: qux
+```
+
+#### An Example Packed Config.yml
+{:.no_toc}
+
+See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+
+### Processing A Config
+
+Running `circleci config process` validates your config, but will also display expanded source configuration alongside your original config (useful if you are using orbs).
+
+Consider the example configuration that uses the `hello-build` orb:
+
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@0.0.5
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+{% endraw %}
+
+Running `circleci config process .circleci/config.yml` will output the following (which is a mix of the expanded source and the original config commented out).
+
+{% raw %}
+```sh
+# Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
+version: 2
+jobs:
+  hello/hello-build:
+    docker:
+    - image: circleci/buildpack-deps:curl-browsers
+    steps:
+    - run:
+        command: echo "Hello ${CIRCLE_USERNAME}"
+    - run:
+        command: |-
+          echo "TRIGGERER: ${CIRCLE_USERNAME}"
+          echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
+          echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
+          echo "BRANCH: ${CIRCLE_BRANCH}"
+          echo "RUNNING JOB: ${CIRCLE_JOB}"
+          echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
+          echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
+        name: Show some of the CircleCI runtime env vars
+    - run:
+        command: |-
+          echo "uname:" $(uname -a)
+          echo "arch: " $(arch)
+        name: Show system information
+workflows:
+  Hello Workflow:
+    jobs:
+    - hello/hello-build
+  version: 2
+
+ Original config.yml file:
+ version: 2.1
+ 
+ orbs:
+     hello: circleci/hello-build@0.0.5
+ 
+ workflows:
+     \"Hello Workflow\":
+         jobs:
+           - hello/hello-build
+```
+{% endraw %}
+
 ### Validating a Build Config
 
 To ensure that the CircleCI CLI tool has been installed properly, use the CLI tool to validate a build config file by running the following command:
@@ -633,3 +766,4 @@ In this example, the `btd` workflow runs the `orb-tools/validate` job first. If 
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+- Refer to [Local CLI] ({{site.baseurl}}/2.0/local-cli) for more information about how you can use the CircleCI CLI in your orbs deployments.
