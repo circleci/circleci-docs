@@ -420,7 +420,7 @@ CircleCI のブランチ・タグフィルターは、Java の正規表現パタ
 ```yaml
 # ここでは再利用可能な Executor を有効にするため CircleCI 2.1 を使用しています。
 # これによりジョブ間で再利用する Docker イメージを定義できるようになります。　
-# 詳細は→ https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors
+# 詳細は https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors
 
 version: 2.1
 
@@ -471,11 +471,11 @@ workflows:
             - flow
 ```
 
-build ジョブと deploy ジョブの間でデータをやりとりする、Workspace を活用する生きたサンプルとして、こちらの [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。これは CircleCI のマニュアルのビルドに利用しているものです。 Workspace、キャッシュ、アーティファクトの使用における概念がわかる情報として、ブログ記事 [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) もチェックしてみてください。
+build ジョブと deploy ジョブの間でデータをやりとりする、Workspace を活用する生きたサンプルとして、こちらの [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。これは CircleCI のマニュアルのビルドに利用しているものです。 Workspaces、キャッシュ、アーティファクトの使用における概念がわかる情報として、ブログ記事 [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) もチェックしてみてください。
 
 ## Workflow のなかで失敗したジョブを再実行する
 
-Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行できます。CircleCI で **WORKFLOWS** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示してから、**Rerun** ボタンをクリックして **Rerun from failed** を選びます。
+Workflow を利用すると、失敗したビルドに対して迅速にアクションをとれるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行できます。CircleCI で **[Workflows]** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示してから、**[Rerun]** ボタンをクリックして **[Rerun from failed]** を選びます。
 
 ![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
@@ -483,12 +483,12 @@ Workflow を利用すると、失敗したビルドに対して迅速にアク�
 
 ここでは Workflow に関する一般的な問題とその解決方法について解説しています。
 
-### 失敗した Workflow を再実行する
+### 失敗した Workflows を再実行する
 {:.no_toc}
 
-ときどき見受けられるのが、Workflow の実行前（のビルド処理の最中）に失敗してしまうケースです。 停電前は問題なく成功していたのに、その後 Workflow の実行は失敗する、といったことがあります。 この問題をひとまず解決するには、プロジェクトのリポジトリに対して変更があったとしてプッシュします。 最初にビルド処理の再実行が始まり、続いて Workflow が実行されます。
+ときどき見受けられるのが、Workflow の実行前（のビルド処理の最中）に失敗してしまうケースです。 今までは問題なく成功していたにもかかわらず、その後 Workflow の再実行は失敗する、といったことがあります。 この問題をひとまず解決するには、プロジェクトのリポジトリに対して変更があったとしてプッシュします。 最初にビルド処理の再実行が始まり、続いて Workflow が実行されます。
 
-### Workflow がスタートしない
+### Workflows がスタートしない
 {:.no_toc}
 
 Workflow の設定時に新しいジョブが表示されなくなったときは、`config.yml` の記述にエラーがあると考えられます。
