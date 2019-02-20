@@ -806,8 +806,8 @@ For example, the following step syntax persists the specified paths from `/tmp/d
 
 After this step completes, the following directories are added to the workspace:
 
-    foo/bar
-    baz
+    /tmp/dir/foo/bar
+    /tmp/dir/baz
     
 
 ###### *Example for paths Key*
