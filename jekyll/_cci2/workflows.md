@@ -264,7 +264,7 @@ a `cron` key and a `filters` key.
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
 
 **Note:**
-Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
+Cron step syntax (for example, `*/1`, `*/20`) is **not** supported. Range elements within comma-separated lists of elements are also **not** supported. 
 
 The value of the `filters` key must be a map
 that defines rules for execution on specific branches.
