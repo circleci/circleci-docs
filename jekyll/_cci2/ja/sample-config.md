@@ -12,7 +12,7 @@ order: 2
 * 目次
 {:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルドの高度な制御を可能にするだけでなく、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflows]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
 
 ## Sample Configuration with Parallel Jobs
 
