@@ -7,7 +7,7 @@ categories:
   - configuring-jobs
 order: 35
 ---
-This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+このページでは、PostgreSQL/Rails および MySQL/Ruby の組み合わせにおける、データベース設定を含む [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例を解説しています。
 
 * 目次
 {:toc}
@@ -230,7 +230,7 @@ jobs:
           command: bundle install
       - run:
           name: Wait for DB
-          # preinstalled in circleci/* docker image
+          # circleci/* の Docker イメージにプリインストール
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
           name: MySQL version
