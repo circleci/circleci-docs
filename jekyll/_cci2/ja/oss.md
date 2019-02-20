@@ -70,6 +70,12 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Advanced Settings** of your project, set the **Pass secrets to builds from forked pull requests** option to *On*.
 
+### Caching
+
+Caches are isolated based on Github Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache. - PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master). - Two PRs in different Fork Repos will have different caches.
+
+Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
+
 ## Example Open Source Projects
 
 Following are a few examples of projects (big and small) that build on CircleCI:
