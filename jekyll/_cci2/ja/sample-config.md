@@ -14,7 +14,7 @@ order: 2
 
 CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflows]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
 
-## Sample Configuration with Parallel Jobs
+## パラレルジョブの設定例
 
 下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
 
@@ -45,7 +45,7 @@ workflows:
 
 {% endraw %}
 
-This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## Sample Configuration with Sequential Workflow
 
