@@ -21,7 +21,6 @@ Following is a sample 2.0 `.circleci/config.yml` file.
 {% raw %}
 
 ```yaml
-```
 version: 2
 jobs:
   build:
@@ -42,7 +41,6 @@ workflows:
     jobs:
       - build
       - test
-```
 ```
 
 {% endraw %}
