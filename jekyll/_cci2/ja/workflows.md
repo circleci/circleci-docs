@@ -181,7 +181,7 @@ workflows:
 
 結果的に以上の例では、CircleCI の Workflow ページで `hold` ジョブをクリックし、さらに Approve をクリックしない限り `deploy:` ジョブは実行されません。 承認するまでデプロイを待機させるというのが、ここでの `hold` ジョブの目的になっています。
 
-Workflow で手動で承認させる形にする場合は、下記の点に注意が必要です。
+Workflow で手動承認を選択する場合は、下記の点に注意が必要です。
 
 - `approval` は `workflow` キー配下のジョブ内で**のみ**利用できる特殊な type 属性です。
 - `hold` のように待機用に用意するジョブは、他にジョブ名として使われていない一意の名前にする必要があります。 
@@ -212,7 +212,6 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 下記は `nightly` という Workflow が毎日午前 12 時 00 分 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格における `crontab` の構文で表記します。`cron` の書き方については [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 この例では、Workflow は `master` と `beta` のブランチにおいてのみ実行されます。
 
 ```yaml
-```
 workflows:
   version: 2
   commit:
@@ -230,7 +229,6 @@ workflows:
                 - beta
     jobs:
       - coverage
-```
 ```
 
 上記では、`commit` という名前の Workflow には `triggers` がありません。そのため、この部分は `git push` するたびに実行されます。 `nightly` の Workflow には `triggers` があり、指定した`スケジュールに沿って`実行されます。
