@@ -167,6 +167,8 @@ en:
           link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
+        - name: Storing Test Coverage
+          link: 2.0/code-coverage/
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers
