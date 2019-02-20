@@ -231,7 +231,7 @@ workflows:
       - coverage
 ```
 
-上記では、`commit` という名前の Workflow には `triggers` がありません。そのため、この部分は `git push` するたびに実行されます。 `nightly` の Workflow には `triggers` があり、指定した`スケジュールに沿って`実行されます。
+上記では、`commit` という名前の Workflow には `triggers` がありません。そのため、この部分は `git push` するたびに実行されます。 `nightly` の Workflow には `triggers` があり、`schedule` で指定した時間に合わせ実行されます。
 
 ### スケジュール設定における注意点
 {:.no_toc}
@@ -240,15 +240,15 @@ workflows:
 
 `cron` キーの値は [valid crontab entry](https://crontab.guru/) にある通りに指定してください。
 
-**※**Cron のステップ構文 (`*/1` や `*/20` など) には**対応していません**。
+**注 :** Cron のステップ構文 (`*/1` や `*/20` など) には**対応していません**。
 
 `filters` キーの値は、所定のブランチの実行ルールを定義する内容とします。
 
-詳しくは [CircleCI 設定リファレンス]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)ページの `branches` を参照してください。
+詳しくは [CircleCI 設定リファレンス]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)ページの `branches` を参照してください。
 
 実際の設定サンプルは [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml) で確認できます。
 
-## Workflow におけるコンテキストとフィルターの使い方
+## Workflows におけるコンテキストとフィルターの使い方
 
 このセクションではジョブの実行を管理するコンテキストとフィルターの使い方について解説しています。
 
