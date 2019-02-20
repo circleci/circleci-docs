@@ -13,7 +13,7 @@ CircleCI Orbs are shareable packages of configuration elements, including jobs, 
 
 To import an existing orb, add a single line to to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
 
-```
+```yaml
 version: 2.1
 
 orbs:
@@ -29,10 +29,10 @@ In the above example, two orbs are imported into your config, the [Slack orb](ht
 
 If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
 
-```nohighlight
+```
+nohighlight
 $ circleci orb help
 Operate on orbs
-
 
 Usage:
   circleci orb [command]
@@ -52,7 +52,7 @@ Available Commands:
 
 Import the following Partner Orbs by using the `orbs` key in your `.circleci.yml/config.yml` file and replacing `<orb reference string>` with one from the table.
 
-```
+```yaml
 version: 2.1
 
 orbs:
@@ -93,4 +93,3 @@ Partner Orb Registry Link | Orb Reference String
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
-
