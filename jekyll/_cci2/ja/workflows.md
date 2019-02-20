@@ -240,7 +240,7 @@ workflows:
 
 `cron` キーの値は [valid crontab entry](https://crontab.guru/) にある通りに指定してください。
 
-**注 :** Cron のステップ構文 (`*/1` や `*/20` など) には**対応していません**。
+**Note:** Cron step syntax (for example, `*/1`, `*/20`) is **not** supported. Range elements within comma-separated lists of elements are also **not** supported.
 
 `filters` キーの値は、所定のブランチの実行ルールを定義する内容とします。
 
