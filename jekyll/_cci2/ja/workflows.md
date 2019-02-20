@@ -33,12 +33,12 @@ Workflow 内のジョブの 1 つが失敗したとしても、それをリア�
 Workflow のステータスは下記のうちいずれかの値をとります。
 
 - RUNNING：Workflow は実行中です。
-- NOT RUN: Workflow was never started
-- CANCELLED: Workflow was cancelled before it finished
-- FAILING: A Job in the workflow has failed
-- FAILED: One or more jobs in the workflow failed
-- SUCCESS: All jobs in the workflow completed successfully
-- ON HOLD: A job in the workflow is waiting for approval
+- NOT RUN：Workflow は未実行です。
+- CANCELLED：Workflow は完了前に中断されました。
+- FAILING：Workflow 内のジョブが失敗しました。
+- FAILED：Workflow 内の 1 つ以上のジョブが失敗しました。
+- SUCCESS：Workflow 内のすべてのジョブが問題なく完了しました。
+- ON HOLD：Workflow 内のジョブ実行が承認待ちの状態です。
 - NEEDS SETUP：そのプロジェクトの [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに Workflow の記述がないか、内容に誤りがあります。
 
 ### 制限について
@@ -204,7 +204,7 @@ Workflow で手動で承認させる形にする場合は、下記の点に注�
 
 ![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
 
-## Scheduling a Workflow
+## Workflow をスケジュール実行する
 
 ブランチ 1 つ 1 つにおいてコミットごとに Workflow を実行するのは、非効率で手間もかかります。 そんなときは特定のブランチに対して、一定の時刻に Workflow をスケジュール実行する機能が使えます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
 
@@ -326,7 +326,7 @@ workflows:
 ### Git タグに対応可能な Workflow を実行する
 {:.no_toc}
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 また、あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、[正規表現](#using-regular-expressions-to-filter-tags-and-branches)を用いてそのジョブに対するタグフィルターを指定する必要があります。 Both lightweight and annotated tags are supported.
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflow は実行しません。 また、あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、[正規表現](#using-regular-expressions-to-filter-tags-and-branches)を用いてそのジョブに対するタグフィルターを指定する必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 下記は 2 つの workflows を用いた例です。
 
@@ -541,7 +541,7 @@ GitHub リポジトリのブランチに実装済みの Workflow があり、か
 
 - Workflow を使ったデモアプリは、GitHub の [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) で入手できます。
 
-## Video: Configure Multiple Jobs with Workflows
+## 動画：Workflow を使った複数ジョブの設定
 {:.no_toc}
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
