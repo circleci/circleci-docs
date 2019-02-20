@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Sample 2.0 config.yml Files"
-short-title: "Sample 2.0 config.yml File"
-description: "Sample 2.0 config.yml File"
+title: "config.yml の設定例"
+short-title: "config.yml の設定例"
+description: "2.0 config.yml の設定例"
 categories:
   - migration
 order: 2
