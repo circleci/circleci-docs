@@ -7,12 +7,12 @@ categories:
   - migration
 order: 2
 ---
-This document provides three sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
+このページでは [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの設定例を以下の内容に沿って解説しています。
 
 * 目次
 {:toc}
 
-The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
 
 ## Sample Configuration with Parallel Jobs
 
