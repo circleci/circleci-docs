@@ -9,10 +9,10 @@ order: 30
 ---
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
@@ -21,6 +21,7 @@ CircleCI offers support for building and testing iOS and macOS projects. Refer t
 
 The currently available Xcode versions are:
 
+- `10.2.0`: Xcode 10.2 (Build 10P99q) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-520/index.html)
 - `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 - `10.0.0`: Xcode 10.0 (Build 10A255) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 - `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
@@ -51,8 +52,7 @@ After enabling macOS builds for your project, share the scheme that is going to 
 
 Simple projects should run with minimal configuration. You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
-### Best Practices
-
+### ビルド済みイメージの活用方法
 {:.no_toc}
 
 In addition to the basic setup steps, it is best practice to include downloading CocoaPods specs from the CircleCI mirror (up to 70% faster) and linting the Swift code together with the `build-and-test` job:
@@ -138,7 +138,6 @@ workflows:
 [Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as that allows for parity of build / deploy locally and on CircleCI, and simplifies the setup process.
 
 ### Adding a Gemfile
-
 {:.no_toc}
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI. The simplest `Gemfile` could look like this:
@@ -151,7 +150,6 @@ It is recommended to add a `Gemfile` to your repository to make sure that the sa
 After you have created a `Gemfile` locally, you will need to run `bundle install` and check both `Gemfile` and `Gemfile.lock` into your repository.
 
 ### Setting up Fastlane for use on CircleCI
-
 {:.no_toc}
 
 When using Fastlane in your CircleCI project, we recommend adding the following to your `Fastfile`:
@@ -174,7 +172,6 @@ The `setup_circle_ci` Fastlane action must be in the `before_all` block to perfo
 - Set up log and test result paths to be easily collectible.
 
 ### Example Configuration for Using Fastlane on CircleCI
-
 {:.no_toc}
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
@@ -258,7 +255,6 @@ workflows:
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan.
 
 ### Using CocoaPods
-
 {:.no_toc}
 
 If you are using CocoaPods, then we recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
@@ -268,7 +264,6 @@ If you are using CocoaPods, then we recommend that you check your [Pods director
 In CircleCI 2.0 it is possible to customize your build as needed to satisfy almost any iOS build and test strategy.
 
 ### XCTest-based tools
-
 {:.no_toc}
 
 The following test tools are known to work well on CircleCI (though many others should work just fine):
@@ -278,13 +273,11 @@ The following test tools are known to work well on CircleCI (though many others 
 - [KIF](https://github.com/kif-framework/KIF)
 
 ### Other Tools
-
 {:.no_toc}
 
 Popular iOS testing tools like [Appium](http://appium.io/) and [Frank](http://www.testingwithfrank.com/) should also work normally and are installed and called using `run` commands.
 
 ### Pre-Starting the Simulator
-
 {:.no_toc}
 
 Pre-start the iOS simulator before building your application to make sure that the simulator is booted in time. Doing so generally reduces the number of simulator timeouts observed in builds.
@@ -303,13 +296,11 @@ To pre-start the simulator, add the following to your `config.yml` file, assumin
 - `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
 
 ### Creating a `config.yml` File
-
 {:.no_toc}
 
 The most flexible means to customize your build is to add a `.circleci/config.yml` file to your project, which allows you to run arbitrary bash commands at various points in the build process. See the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document for a detailed discussion of the structure of the `config.yml` file. **Note:** A number of options in the document will not work for macOS builds.
 
 ### Installing Custom Packages
-
 {:.no_toc}
 
 [Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency required in your build VM. Here's an example:
@@ -326,7 +317,6 @@ The most flexible means to customize your build is to add a `.circleci/config.ym
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
 ### Using Custom Ruby Versions
-
 {:.no_toc}
 
 The macOS container ships with the system-installed Ruby, as well as the latest stable versions of Ruby as provided by [Ruby-Lang.org](https://www.ruby-lang.org/en/downloads/). To allow you to manage custom versions of Ruby, we install [ruby-install](https://github.com/postmodern/ruby-install) and [chruby](https://github.com/postmodern/chruby). To select a custom version of ruby you should [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). You will also need to change the default shell that commands are executed with to be a login shell, so that `chruby` is correctly invoked.
@@ -349,7 +339,6 @@ run:
 ```
 
 ### Using Custom Versions of CocoaPods and Other Ruby Gems
-
 {:.no_toc}
 
 To make sure the version of CocoaPods that you use locally is also used in your CircleCI builds, we suggest creating a Gemfile in your iOS project and adding the CocoaPods version to it:
@@ -362,19 +351,16 @@ To make sure the version of CocoaPods that you use locally is also used in your 
 Then you can install these using bundler:
 
 {% raw %}
-
-        steps:
+steps:
           - restore_cache:
               key: 1-gems-{{ checksum "Gemfile.lock" }}
-    
-          - run: bundle check || bundle install --path vendor/bundle
+
+      - run: bundle check || bundle install --path vendor/bundle
     
           - save_cache:
               key: 1-gems-{{ checksum "Gemfile.lock" }}
-              paths:
+          paths:
                 - vendor/bundle
-    
-
 {% endraw %}
 
 You can then ensure you are using those, by prefixing commands with `bundle exec`:
@@ -394,8 +380,7 @@ After you have a signed app you are ready to configure deployment. Distributing 
 
 Then you should set up environment variables for your service of choice:
 
-### Hockey App
-
+### Hockey App 
 {:.no_toc}
 
 1. Log in to Hockey app and create a new API token on the [Tokens page](https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at least upload permission to upload new builds to Hockey App.
@@ -407,7 +392,6 @@ Then you should set up environment variables for your service of choice:
 4. Create a new Environment Variable with the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now access this token in any job.
 
 ### Beta By Crashlytics
-
 {:.no_toc}
 
 1. Log in to Fabric.io and visit your organization's settings page. ![Fabric.io loging image]({{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
@@ -417,7 +401,6 @@ Then you should set up environment variables for your service of choice:
 3. Navigate to your App's Project Settings page in the CircleCI app, and under Environment Variables add two new items named `CRASHLYTICS_API_KEY` and `CRASHLYTICS_SECRET`, with the values you find on Crashlytics website.
 
 ### TestFairy
-
 {:.no_toc}
 
 To set up your app on TestFairy, follow these steps:
@@ -429,8 +412,8 @@ To set up your app on TestFairy, follow these steps:
 3. Copy your API key and go to your application's project settings within the CircleCI application.
 4. To deploy, add a job to your configuration using [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
 
-{% raw %}
 
+{% raw %}
 ```yaml
 jobs:
   build:
@@ -461,13 +444,11 @@ workflows:
             only: master
 
 ```
-
 {% endraw %}
 
 For a complete list of available options, please visit the [TestFairy Upload API documentation](https://docs.testfairy.com/API/Upload_API.html)
 
 ## Resolving Common Simulator Issues
-
 {:.no_toc}
 
 A series of simulator-related issues are known to happen on some projects. Here are the most frequent of those:
@@ -487,7 +468,6 @@ A series of simulator-related issues are known to happen on some projects. Here 
 - **Many iOS app developers use tools that generate substantial amounts of code.** In such cases CircleCI may not correctly detect the Xcode workspace, project, or scheme. Instead, you can specify these through environment variables.
 
 ### Constraints on macOS-based Builds
-
 {:.no_toc}
 
 Splitting tests between parallel containers on macOS is currently not supported. We suggest using a workflow with parallel jobs to build with different Xcode versions, or a workflow with parallel jobs to run different test targets. Please check [this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples) for examples of workflows with parallel jobs.
@@ -560,13 +540,11 @@ workflows:
 {% endraw %}
 
 ## React Native projects
-
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using `macos` and `docker` executor types. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI 2.0.
