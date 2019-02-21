@@ -114,23 +114,19 @@ CircleCI では、基本的には 1 プロジェクトあたりの並列処理�
 {:.no_toc}  
 CircleCI 2.0 では現在のところ [Docker Hub](https://hub.docker.com) 上の Docker イメージのプル（と Docker Engine のプッシュ）にのみ対応しています。 これら[公式の Docker イメージ](https://hub.docker.com/explore/)に対してできるのは、単純に下記のような名前やタグを指定してプルすることです。
 
-    ```
     golang:1.7.1-jessie
     redis:3.0.7-jessie
-    ```
     
 
 Docker Hub のパブリックイメージについては、下記のようにアカウント名やユーザー名を付加した形でプルすることも可能です。
 
-    ```
     myUsername/couchdb:1.6.1
-    ```
     
 
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 
 {:.no_toc}  
-Docker イメージを指定する際に、`latest` タグを付け**ない**のが正しい方法です。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、たとえば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
+Docker イメージを指定する際に、`latest` タグを付け**ない**のが正しい方法です。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージが変更されないようにしてアップストリームにコンテナへの影響を防ぐには、例えば `circleci/ruby:2.4-jessie-node` のように指定します。 `circleci/ruby:2.4` とだけ指定した場合は、`jessie` から `stretch` への予期しない変更による影響を受ける可能性があります。 他の応用例を知りたいときは、「Executor タイプの選び方」の[Docker イメージ活用のヒント]({{ site.baseurl }}/ja/2.0/executor-types/#docker-image-best-practices)や、「CircleCI のビルド済み Docker イメージ」の[ビルド済みイメージの活用方法]({{ site.baseurl }}/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 
@@ -140,7 +136,6 @@ Docker イメージを指定する際に、`latest` タグを付け**ない**の
 環境変数 `TZ` を定義する `.circleci/config.yml` の設定例
 
 ```yaml
-```
 version: 2
 jobs:
   build:
@@ -152,7 +147,6 @@ jobs:
     working_directory: ~/your-dir
     environment:
       TZ: "America/Los_Angeles"
-```
 ```
 
 この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
@@ -174,7 +168,7 @@ jobs:
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 
 {:.no_toc}  
-テスト結果のデータを「Test Summary」というセクションに記録するのに、`store_test_results` が使えます。また、データを[時系列順に分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timings-data)する際にも使えます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
+テスト結果のデータを [Test Summary] というセクションに記録するのに、`store_test_results` が使えます。また、データを[時系列順に分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timings-data)する際にも使えます。 時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
 
 ### CircleCI 1.0 で Workflows を使うことはできますか？
 
@@ -214,7 +208,7 @@ Workflows は CircleCI 2.0 固有の機能です。Workflows を利用するに�
 ### Workflows を指定した日時にスケジュール実行することは可能ですか？
 
 {:.no_toc}  
-CircleCI がホスティングしているクラウド環境なら可能です。 たとえば午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。 今後はオンプレミス環境の CircleCI でも Workflows のスケジュール実行が可能になるよう計画しています。
+CircleCI がホスティングしているクラウド環境なら可能です。 例えば、午後 4 時に Workflow を実行するなら、`cron:` キーの値として `"0 16 * * *"` を指定します。 時刻は UTC 協定世界時のタイムゾーンとなります。 今後はオンプレミス環境の CircleCI でも Workflows のスケジュール実行が可能になるよう計画しています。
 
 ### スケジュール実行の際に使われるタイムゾーンは？
 
