@@ -14,7 +14,7 @@ order: 35
 
 ## structure.sql を使う Rails アプリケーション用の設定例
 
-If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access.
+`structure.sql` ファイルを用いて設定する Rails アプリケーションに移行するときは、`psql` が PATH の通っている場所にインストールされていること、psql に対するアクセス権限が正しく設定されていることを確認してください。circleci/ruby:2.4.1-node というイメージには psql がデフォルトでインストールされておらず、データベースアクセスに `pg` gem を使うためです。
 
 {% raw %}
 
@@ -79,9 +79,9 @@ jobs:
 
 {% endraw %}
 
-**Note:** An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
+**※**上記の方法以外にも、既存のイメージに手を入れて独自のイメージとしてビルドし、必要なパッケージを組み合わせて Docker Hub やレジストリにコミット、プッシュする、という方法もあります。
 
-### Example Environment Setup
+### 環境設定の例
 {:.no_toc}
 
 In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
