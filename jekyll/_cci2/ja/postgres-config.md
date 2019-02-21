@@ -127,7 +127,7 @@ jobs:
 
 ## PostgreSQL と Go 言語を使ったアプリケーションの設定例
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+下記の設定に関する全体像やアプリケーションの公開リポジトリのソースは、[Go 言語ガイド]({{ site.baseurl }}/2.0/language-go/)で確認できます。
 
 ```yaml
 version: 2
@@ -207,9 +207,9 @@ jobs:
           path: /tmp/test-results
 ```
 
-## Example Ruby Project with MYSQL and Dockerize
+## MySQL を使った Ruby プロジェクトの設定例と、それを Docker 化する例
 
-The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+下記は MySQL と dockerize コマンドを使った例です。補足情報は [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) でご確認ください。
 
 ```yaml
 version: 2
