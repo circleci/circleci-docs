@@ -2,17 +2,17 @@
 layout: classic-docs
 title: "データベースの設定例"
 short-title: "データベースの設定例"
-description: "PostgreSQL の設定サンプル"
+description: "データベースを利用する際の設定例"
 categories:
   - configuring-jobs
 order: 35
 ---
-このページでは、PostgreSQL/Rails および MySQL/Ruby の組み合わせにおける、データベース設定を含む [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例を解説しています。
+このページでは、PostgreSQL/Rails および MySQL/Ruby の組み合わせにおけるデータベース設定を含む、[config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例を解説しています。
 
 * 目次
 {:toc}
 
-## Example CircleCI Configuration for a Rails App With structure.sql
+## structure.sql を使う Rails アプリケーション用の設定例
 
 If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access.
 
