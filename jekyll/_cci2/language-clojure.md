@@ -127,7 +127,6 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
       - save_cache:
           paths:
             - ~/.m2
-            - ~/.lein
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
       - store_artifacts:

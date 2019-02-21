@@ -47,7 +47,6 @@ workflows:
           context: org-global
 ```
 
-To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
 
 ## Deleting a Context
 
