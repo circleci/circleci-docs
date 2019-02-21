@@ -123,9 +123,9 @@ jobs:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
 
-This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
+これは PostgreSQL 9.6 で、デフォルトのユーザーとポートを使用するように `$DATABASE_URL` を指定した例となります。バージョンが 9.5 の場合はポート番号を 5433 とします。 他のポートを指定するときは、`$DATABASE_URL` と `psql` を呼び出しているすべての箇所を変更してください。
 
-## Example Go App with PostgreSQL
+## PostgreSQL と Go 言語を使ったアプリケーションの設定例
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
