@@ -34,12 +34,12 @@ Workflows のステータスは下記のうちいずれかの値をとります�
 
 - RUNNING：Workflow は実行中です。
 - NOT RUN：Workflow は未実行です。
-- CANCELLED：Workflow は完了前に中断されました。
+- CANCELLED : Workflow は完了前に中断されました。
 - FAILING：Workflow 内のジョブが失敗しました。
 - FAILED：Workflow 内の 1 つ以上のジョブが失敗しました。
 - SUCCESS：Workflow 内のすべてのジョブが問題なく完了しました。
 - ON HOLD：Workflow 内のジョブ実行が承認待ちの状態です。
-- NEEDS SETUP：そのプロジェクトの [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに Workflow の記述がないか、内容に誤りがあります。
+- NEEDS SETUP：そのプロジェクトの [config.yml file]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに Workflow の記述がないか、内容に誤りがあります。
 
 ### 制限について
 {:.no_toc}
