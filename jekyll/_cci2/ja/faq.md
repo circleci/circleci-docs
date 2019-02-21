@@ -235,14 +235,14 @@ CircleCI はスケジュールの正確性については保証していませ�
 ### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
 
 {:.no_toc}  
-* Linux プランの変更：CircleCI で [SETTINGS] → [Plan Overview] 画面を表示し、[Add Containers] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
+* Linux プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Add Containers] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
-- macOS プランの変更：CircleCI で [SETTINGS] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
+- macOS プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
 
 ### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 
 {:.no_toc}  
-可能です。CircleCI で [SETTINGS] → [Share & Transfer] → [Share Plan] ページと進み、プランを共有したい Org を選択してください。
+可能です。CircleCI で [Settings] → [Share & Transfer] → [Share Plan] ページと進み、プランを共有したい Org を選択してください。
 
 ### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
 
@@ -266,8 +266,7 @@ machine Executor で実行しているホストは、`eth0` や `lo` といっ�
 IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。 下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
 ```yaml
-   ```
-ipv6_tests:
+   ipv6_tests:
      machine: true
      steps:
      - checkout
@@ -282,7 +281,6 @@ ipv6_tests:
            EOF
            sudo service docker restart
 ```
-```
 
 Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
@@ -291,11 +289,11 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 {:.no_toc}  
 - **Linux :** CircleCI はほとんどの Linux アプリケーションのビルドが可能な高い柔軟性をもっています。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
 
-- **Android：**詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
+- **Android :** 詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
 
-- **iOS：**「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS :** 「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
 
-- **Windows：**Windows アプリケーションのビルドとテストは現在サポートしていません。
+- **Windows :** Windows アプリケーションのビルドとテストは現在サポートしていません。
 
 ### CircleCI がサポートしている CPU アーキテクチャは？
 
