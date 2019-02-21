@@ -21,6 +21,16 @@ The following requirements must be met for successful trial installation:
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
 - CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
 
+## Getting started with AWS for new users
+You should have good grasp of AWS EC2 before proceeding, but many users may have no experiance with AWS or AWS EC2. Users who are experienced with AWS EC2 should skip to the [next section](#Steps-for-Installation-on-AWS-EC2). 
+
+**Note:** If you do not yet have an AWS account you can [get a free account.](https://aws.amazon.com/free/?sc_channel=PS&sc_campaign=acquisition_US&sc_publisher=google&sc_medium=ACQ-P%7CPS-GO%7CBrand%7CDesktop%7CSU%7CCore-Main%7CCore%7CUS%7CEN%7CText&sc_content=Brand_aws_e&sc_detail=aws&sc_category=Core&sc_segment=315739797248&sc_matchtype=e&sc_country=US&s_kwcid=AL!4422!3!315739797248!e!!g!!aws&ef_id=EAIaIQobChMIyoGJ3-jN4AIVvSCtBh0wlgdIEAAYASAAEgI2JfD_BwE:G:s
+) 
+
+Amazon offers a series of [Getting Started Tutorials](https://aws.amazon.com/getting-started/). Drop into this YouTube [video](https://www.youtube.com/watch?v=ubCNZRNjhyo&index=131&list=WL&t=34s) for a solid introduction. Tutorialspoint also offers a detailed [overview](https://www.tutorialspoint.com/amazon_web_services/) of AWS.
+
+If you have a solid understanding of the AWS basics but need to learn more about AWS EC2 peruse this Amazon [tutorial](https://aws.amazon.com/ec2/getting-started/), or jump over to YouTube and watch this excellent [introduction to EC2](https://www.youtube.com/watch?v=Xs0g_ZEv2bw&list=WL&index=129). 
+
 ## Steps for Installation on AWS EC2 
 
 Use this procedure to install CircleCI on a single EC2 VM by using the pre-made Amazon Machine Image (AMI) which is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
