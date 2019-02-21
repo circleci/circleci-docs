@@ -1,0 +1,42 @@
+---
+layout: classic-docs
+title: "Build Configuration Cookbook Introduction"
+short-title: "Build Config Introduction"
+description: "Starting point for Build Configuration Cookbook"
+categories: [getting-started]
+order: 1
+---
+
+The CircleCI Build Configuration Cookbook is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various build configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and its associated pages, will enable you to quickly and easily perform repeatable build tasks on the CircleCI platform.
+
+## Introduction
+
+This page, and its associated "recipes" on subsequent pages, describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI build is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources. In order to maximize efficiency and speed, you may wish to earmark build configuration tasks
+
+### Build Configuration Recipes
+
+Build Configuration Recipe | Description 
+------------|-----------
+[Blue/Green Deployment (link here) | 
+[AWS Deployment ECR/ECS](link here) | 
+[Heroku Deployment](link here) | 
+[Custom Slack Notifications in Jobs](link here) | 
+[Single-threading builds on a branch](link here) | 
+[Using GitHub Releases and Tagging inside your jobs](link here) | 
+[Advanced tag/branch filtering inside jobs](link here) | 
+[Retrieving artifacts from upstream jobs and/or previous builds](link here) | 
+[Publishing to GitHub Pages from inside a build](link here) | 
+[Chaining builds with the API](link here) | 
+[Advanced Caching Techniques](link here) | 
+[Dependency Caching Strategies in Package Managers](link here) | 
+[Testing Libraries/Packages Against Multiple Versions of Ruby/Python/Node/etc.](link here) | 
+[Diagnostics](link here) | 
+{: class="table table-striped"}
+
+## Build Configuration Example
+
+The example below illustrates a "typical" build configuration "recipe" used in this "cookbook." Please note that each example in this guide will be specific to the build configuration task and may not always be similar to this example.
+
+(example here)
+
+## See Also
