@@ -89,7 +89,7 @@ CircleCI 2.0 では複数のビルド済みイメージやカスタムイメー�
 1. 定義済みの環境変数 DATABASE_URL の値
 2. `config.yml` ファイル内の該当する環境の test セクションにおける設定（Rails のテストスイートでは通常は `test` と記述しています）
 
-The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
+下記では、このデータベース URL の設定の仕方について、イメージの定義に `environment` を組み合わせる例と、データベース接続を有効にするシェルコマンドを用いた `environment` の例を示しています。
 
 ```yaml
 version: 2
