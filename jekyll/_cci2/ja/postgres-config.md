@@ -84,9 +84,9 @@ jobs:
 ### 環境設定の例
 {:.no_toc}
 
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+CircleCI 2.0 では複数のビルド済みイメージやカスタムイメージが使われることがあります。そのため、データベース設定は明示的に宣言しておかなければなりません。 例えば Rails は下記の優先順位で使用するデータベース URL を探索します。
 
-1. DATABASE_URL environment variable, if set
+1. 環境変数 DATABASE_URL がセットされていればこれを使用します。
 2. The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).
 
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
