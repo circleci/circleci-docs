@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "データベースの設定例"
 short-title: "データベースの設定例"
-description: "データベースを利用する際の設定例"
+description: "データベースを使う際の設定例"
 categories:
   - configuring-jobs
 order: 35
 ---
-このページでは、PostgreSQL/Rails および MySQL/Ruby の組み合わせにおけるデータベース設定を含む、[config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例を解説しています。
+このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について解説しています。
 
 * 目次
 {:toc}
@@ -123,7 +123,7 @@ jobs:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
 
-これは PostgreSQL 9.6 で、デフォルトのユーザーとポートを使用するように `$DATABASE_URL` を指定した例となります。バージョンが 9.5 の場合はポート番号を 5433 とします。 他のポートを指定するときは、`$DATABASE_URL` と `psql` を呼び出しているすべての箇所を変更してください。
+これは PostgreSQL 9.6 で、デフォルトのユーザーとポートを使用するように `$DATABASE_URL` を設定した例となります。バージョンが 9.5 の場合はポート番号を 5433 とします。 他のポートを使うときは、`$DATABASE_URL` と `psql` を呼び出しているすべての箇所を変更してください。
 
 ## PostgreSQL と Go 言語を使ったアプリケーションの設定例
 
@@ -155,8 +155,8 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # 通常以下の内容はカスタムしたプライマリイメージのところに記述しますが、
-      # わかりやすくするためにここに記述しています。
+      # 通常、以下の内容はカスタムしたプライマリイメージのところに記述しますが、
+      # わかりやすくするためここに記述しています。
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -239,4 +239,4 @@ jobs:
 
 ## 関連情報
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識は、「[データベースを設定する]({{ site.baseurl }}/2.0/databases/)」ページで得られます。
