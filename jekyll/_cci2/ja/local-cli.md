@@ -7,7 +7,7 @@ categories:
   - troubleshooting
 order: 10
 ---
-## Overview
+## 概要
 
 The CircleCI CLI is a command line interface that leverages many of CircleCI's advanced and powerful tools from the comfort of your terminal. Some of the things you can do with the CircleCI CLI include:
 
@@ -18,7 +18,8 @@ The CircleCI CLI is a command line interface that leverages many of CircleCI's a
 
 This document will cover the installation and usage of the CLI tool.
 
-* TOC {:toc}
+* 目次
+{:toc}
 
 ## Installation
 
@@ -47,7 +48,6 @@ curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash
 There are several alternative installation methods for the CircleCI CLI. Read on if you need to customize your installation, or are running into issues with the quick installation above.
 
 #### Install with Snap
-
 {:.no_toc}
 
 The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
@@ -60,7 +60,6 @@ sudo snap connect circleci:docker docker
 **Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
 
 #### Install With Homebrew
-
 {:.no_toc}
 
 If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
@@ -80,7 +79,6 @@ You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-
 You can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them) use the command: `circleci update check`.
 
 ### Updating the Legacy CLI
-
 {:.no_toc}
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
@@ -123,48 +121,41 @@ Where the above command will look for an orb called `my_orb.yml` in the `/tmp` f
 
 ## Packing A Config
 
-The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+The CLI provides a `pack` command, allowing you to create a single YAML file from several separate files. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
 ```sh
 $ tree
 .
-├── config.yml
-└── foo
-    ├── bar
-    │   └── @baz.yml
-    ├── foo.yml
-    └── subtree
-        └── types.yml
+└── your-orb-source
+    ├── @orb.yml
+    ├── commands
+    │   └── foo.yml
+    └── jobs
+        └── bar.yml
 
-3 directories, 4 files
+3 directories, 3 files
 ```
 
-The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **yaml keys** and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys** and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+
 
 {% raw %}
-
 ```sh
-$ circleci config pack foo
+$ circleci config pack your-orb-source
 ```
 
 ```yaml
-bar:
-  baz: qux
-foo: bar
-subtree:
-  types:
-    ginkgo:
-      seasonality: deciduous
-    oak:
-      seasonality: deciduous
-    pine:
-      seasonality: evergreen
+# contents of @orb.yml appear here
+commands:
+  foo:
+    # contents of foo.yml appear here
+jobs:
+  bar:
+    # contents of bar.yml appear here
 ```
-
 {% endraw %}
 
 ### Other Config Packing Capabilities
-
 {:.no_toc}
 
 A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
@@ -172,12 +163,10 @@ A file beginning with `@` will have its contents merged into its parent folder l
 Thus:
 
 {% raw %}
-
 ```sh
 $ cat foo/bar/@baz.yml
 {baz: qux}
 ```
-
 {% endraw %}
 
 Is mapped to:
@@ -188,10 +177,9 @@ bar:
 ```
 
 ### An Example Packed Config.yml
-
 {:.no_toc}
 
-See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories) to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
 ## Processing A Config
 
@@ -213,7 +201,6 @@ Consider the example configuration that uses the `hello-build` orb:
 Running `circleci config process .circleci/config.yml` will output the following (which is a mix of the expanded source and the original config commented out).
 
 {% raw %}
-
 ```sh
 # Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
 version: 2
@@ -257,25 +244,21 @@ workflows:
 #           - hello/hello-build
 
 ```
-
 {% endraw %}
 
 ## Run A Job In A Container On Your Machine
 
-### Overview
-
+### 概要
 {:.no_toc}
 
 The CLI enables you to run jobs in your config via Docker. This can be useful to run tests before pushing config changes or debugging your build process without impacting your build queue.
 
-### Prerequisites
-
+### 前準備
 {:.no_toc}
 
 You will need to have [Docker](https://www.docker.com/products/docker-desktop) installed on your system and have installed the most recent version of the CLI tool. You will also need to have a project with a valid `.circleci/config.yml` file in it.
 
 ### Running a Job
-
 {:.no_toc}
 
 The CLI allows you to run a single job from CircleCI on your desktop using Docker.
@@ -295,7 +278,6 @@ circleci local execute --job build
 The commands above will run the entire *build* job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and will then execute your CI steps locally. In this case, Golang and Postgres docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running and so on.
 
 ### Limitations of Running Jobs Locally
-
 {:.no_toc}
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
