@@ -75,7 +75,7 @@ The steps in this section walk you through installing CircleCI on a single EC2 V
 - Enable Auto-assign Public IP
 - Check the IAM role is set to None
 ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png)
-Then select Next: Add Storage.
+- Then select Next: Add Storage.
 4. By default, the instance will have 100GiB of storage, this is enough for the trial install. Select Next: Add Tags.
 5. You don't need to add a tag for the purposes of this trial but feel free to do so using the Add Tag button. Select Next: Configure Security Group.
 5. On the Configure Security Group page, open the following ports:
@@ -85,8 +85,8 @@ Then select Next: Add Storage.
 - Custom TCP 8800
 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png)
-Then select Review and Launch to see a summary of your trial instance, then select Launch.
-6. You should now be looking at the Launch Status Page. From here you can select View Instances to jump to your AWS dashboard and see the full details of your trial instance. Once the instance is up and running, go to the public or private IP address or hostname and click Get Started to complete the rest of the guided installation process for CircleCI. Note, your browser may warn you that the Get Started link is unsafe.
+- Then select Review and Launch to see a summary of your trial instance, then select Launch.
+6. You should now be looking at the Launch Status Page. From here you can select View Instances to jump to your AWS dashboard and see the full details of your trial instance. Once the instance is up and running, go to the public or private IP address or hostname and click Get Started to complete the rest of the guided installation process for CircleCI. **Note:** your browser may warn you that the Get Started link is unsafe.
 ![Getting Started Page]({{site.baseurl}}/assets/img/docs/GettingStartedPage.png)
 
 ### Configure CircleCI
@@ -104,8 +104,8 @@ Then select Review and Launch to see a summary of your trial instance, then sele
 - Follow the Github integration instructions. **Note:** If you get an *"Unknown error authenticating via GitHub. Try again, or contact us."* message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
 - Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
 - Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions.
-- Agree to the license agreement, save and click Take me to the Dashboard from the popup. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete.
-11. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
+- Agree to the license agreement, save and head to your Dashboard. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete.
+11. Click Open to launch the CircleCI app and click Sign Up to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
 
 
 <!---
