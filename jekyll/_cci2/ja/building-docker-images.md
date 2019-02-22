@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker
 ```
 
-`setup_remote_docker` が処理されるとリモート環境が作成され、現在の \[primary-container\]\[primary-container\] がそのリモート環境用に構成されます。 その後は、Docker の操作に関わるあらゆるコマンドは仮想環境内で安全に実行されるようになります。
+When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. その後は、Docker の操作に関わるあらゆるコマンドは仮想環境内で安全に実行されるようになります。
 
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor *is* a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
 
