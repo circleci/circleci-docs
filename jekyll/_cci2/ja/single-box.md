@@ -20,7 +20,7 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 - CircleCI および GitHub を実行するマシンは、ネットワーク上で互いにアクセスできる必要がある。
 - CircleCI マシンは、インターネットへ外向きアクセスできる必要がある。 プロキシサーバーを使用している場合の手順については、[CircleCIにお問い合わせくださいcontact us](https://support.circleci.com/hc/en-us/requests/new)。
 
-## Steps for Installation on AWS EC2
+## AWS EC2 へのインストー手順
 
 Use this procedure to install CircleCI on a single EC2 VM by using the pre-made Amazon Machine Image (AMI) which is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
 
