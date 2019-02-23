@@ -4,7 +4,7 @@ title: "CircleCI Trial Installation"
 category:
   - administration
 order: 3
-description: "How to install CircleCI on a single VM"
+description: "単一のVM に CircleCI をインストールする方法"
 ---
 CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
 
