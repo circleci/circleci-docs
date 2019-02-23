@@ -13,9 +13,9 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 
 ## 前準備
 
-The following requirements must be met for successful trial installation:
+トライアルを首尾よくインストールするためには、下記の要件を満たす必要があります。
 
-- [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a trial license file.
+- トライアルライセンスのファイルを受信するために[登録](https://circleci.com/enterprise-trial-install/)する。
 - Use **GitHub.com or GitHub Enterprise** for version control.
 - Machines running CircleCI and GitHub must be able to reach each other on the network.
 - CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
