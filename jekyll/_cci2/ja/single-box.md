@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: "CircleCI Trial Installation"
+title: "CircleCI トライアルのインストール"
 category:
   - administration
 order: 3
 description: "単一のVM に CircleCI をインストールする方法"
 ---
-CircleCI は拡張性のある CI/CD プラットフォームで、数十数百ものビルドマシンのクラスタをサポートします。 This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
+CircleCI は拡張性のある CI/CD プラットフォームで、数十数百ものビルドマシンのクラスタをサポートします。 このページでは、任意の環境でマシンのちょっとした動作を試してみるために、単一の仮想マシン環境にプラットフォームをインストールして実行する手順について説明します。
 
 - 目次
 {:toc}
