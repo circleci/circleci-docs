@@ -244,15 +244,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Fetch CocoaPods Specs
+          name: CocoaPods の Specs リポジトリをフェッチ
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
-          name: Install CocoaPods
+          name: CocoaPods のインストール
           command: pod install --verbose
 
       - run:
-          name: Build and run tests
+          name: ビルド、実行テスト
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -298,4 +298,4 @@ workflows:
 
 ## 関連情報
 
-See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
+CircleCI を使用するパブリックプロジェクトのリストについては、[Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) ドキュメントを参照してください。
