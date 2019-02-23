@@ -298,4 +298,4 @@ workflows:
 
 ## 関連情報
 
-CircleCI を使用するパブリックプロジェクトのリストについては、[Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) ドキュメントを参照してください。
+CircleCI を使用するパブリックプロジェクトのリストについては、[Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) ページを参照してください。
