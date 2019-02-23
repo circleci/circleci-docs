@@ -16,9 +16,9 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 トライアルを首尾よくインストールするためには、下記の要件を満たす必要があります。
 
 - トライアルライセンスのファイルを受信するために[登録](https://circleci.com/enterprise-trial-install/)する。
-- Use **GitHub.com or GitHub Enterprise** for version control.
-- Machines running CircleCI and GitHub must be able to reach each other on the network.
-- CircleCI machine must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
+- バージョン管理のために **GitHub.com または GitHub Enterprise** を使用する。
+- CircleCI および GitHub を実行するマシンは、ネットワーク上で互いにアクセスできる必要がある。
+- CircleCI マシンは、インターネットへ外向きアクセスできる必要がある。 プロキシサーバーを使用している場合の手順については、[CircleCIにお問い合わせくださいcontact us](https://support.circleci.com/hc/en-us/requests/new)。
 
 ## Steps for Installation on AWS EC2
 
