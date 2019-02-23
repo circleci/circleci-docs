@@ -228,7 +228,7 @@ workflows:
 
 {% endraw %}
 
-## Sample Configuration with Multiple Executor Types (macOS + Docker)
+## 複数の Executor タイプ (macOS ＋ Docker) を利用する設定例
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
