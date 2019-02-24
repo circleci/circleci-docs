@@ -24,9 +24,9 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 
 この手順を使用して単一 EC2 VM に CircleCI をインストールするには、仮想アプライアンスの特殊なタイプであり、 Amazon Elastic Compute Cloud ("EC2") 内で想マシンの作成に使用されるプリメイドの Amazon Machine Image (AMI) を使用します。
 
-**注:** インストールされたマシンで実行されるすべてのビルドは、そのインスタンスプロファイルに関連付けされている AWS Identity and Access Management (IAM) 権限にアクセスします。 お使いのインスタンスに不適切な権限を付与 **しない**でください。 It is possible to block this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
+**注:** インストールされたマシンで実行されるすべてのビルドは、そのインスタンスプロファイルに関連付けされている AWS Identity and Access Management (IAM) 権限にアクセスします。 お使いのインスタンスに不適切な権限を付与 **しない**でください。 プロダクション設定をすると、`iptables` ルールでこのアクセスをブロックすることができます。固有の手順については[サポートにお問い合わせください](https://support.circleci.com/hc/en-us)。
 
-### Configure the Amazon Machine Image:
+### Amazon Machine Image の設定:
 
 <script>
   var amiIds = {
@@ -53,7 +53,7 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 <select id="ami-select" onchange="amiUpdateSelect()"> <option value="ap-northeast-1">ap-northeast-1</option> <option value="ap-northeast-2">ap-northeast-2</option> <option value="ap-southeast-1">ap-southeast-1</option> <option value="ap-southeast-2">ap-southeast-2</option> <option value="eu-central-1">eu-central-1</option> <option value="eu-west-1">eu-west-1</option> <option value="sa-east-1">sa-east-1</option> <option value="us-east-1" selected="selected">us-east-1</option> <option value="us-east-2">us-east-2</option> <option value="us-west-1">us-west-1</option> <option value="us-west-2">us-west-2</option> </select> <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">Go!</a>
 <script>amiUpdateSelect();</script>
 
-1. Find the Amazon Machine Image for your region from the list above. 
+1. 上記のリストから、お住いの地域の Amazon Machine Image を見つけてください。 
 2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`. Select Next to configure the instance.
 3. On the Configuring Instance Details page: 
 
