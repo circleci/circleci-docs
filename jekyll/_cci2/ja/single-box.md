@@ -55,7 +55,7 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 
 1. 上記のリストから、お住いの地域の Amazon Machine Image を見つけてください。 
 2. `m4.2xlarge` など、最低でも 32G の RAM を持つインスタンスタイプを選んでいることを確認します。 [Next] を選択してインスタンスを設定します。
-3. On the Configuring Instance Details page: 
+3. インスタンス詳細の設定ページで、以下を実行します。 
 
 - Choose your network - Enable Auto-assign Public IP - Set the IAM role to None ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png) 4. By default, the instance will have 100GB of storage, this is enough for the trial install. 5. During the Configure Security Group step, open the following ports: - SSH port 22 - HTTP port 80 - HTTPS port 443 - Custom TCP 8800 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP. ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png) 6. After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process for CircleCI.
 
