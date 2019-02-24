@@ -24,7 +24,7 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 
 この手順を使用して単一 EC2 VM に CircleCI をインストールするには、仮想アプライアンスの特殊なタイプであり、 Amazon Elastic Compute Cloud ("EC2") 内で想マシンの作成に使用されるプリメイドの Amazon Machine Image (AMI) を使用します。
 
-**Note:** All builds that run on the installed machine will have access to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not** give any inappropriate privileges to your instance. It is possible to block this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
+**注:** インストールされたマシンで実行されるすべてのビルドは、そのインスタンスプロファイルに関連付けされている AWS Identity and Access Management (IAM) 権限にアクセスします。 お使いのインスタンスに不適切な権限を付与 **しない**でください。 It is possible to block this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
 
 ### Configure the Amazon Machine Image:
 
