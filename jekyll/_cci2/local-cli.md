@@ -126,44 +126,39 @@ Where the above command will look for an orb called `my_orb.yml` in the `/tmp` f
 
 ## Packing A Config
 
-The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+The CLI provides a `pack` command, allowing you to create a single YAML file from several separate files. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
 ```sh
 $ tree
 .
-├── config.yml
-└── foo
-    ├── bar
-    │   └── @baz.yml
-    ├── foo.yml
-    └── subtree
-        └── types.yml
+└── your-orb-source
+    ├── @orb.yml
+    ├── commands
+    │   └── foo.yml
+    └── jobs
+        └── bar.yml
 
-3 directories, 4 files
+3 directories, 3 files
 ```
 
 The unix `tree` command is great for printing out folder structures. In the
 example tree structure above, the `pack` command will  map the folder names and
-file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+file names to **YAML keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
 
 
 {% raw %}
 ```sh
-$ circleci config pack foo
+$ circleci config pack your-orb-source
 ```
 
 ```yaml
-bar:
-  baz: qux
-foo: bar
-subtree:
-  types:
-    ginkgo:
-      seasonality: deciduous
-    oak:
-      seasonality: deciduous
-    pine:
-      seasonality: evergreen
+# contents of @orb.yml appear here
+commands:
+  foo:
+    # contents of foo.yml appear here
+jobs:
+  bar:
+    # contents of bar.yml appear here
 ```
 {% endraw %}
 
@@ -192,7 +187,7 @@ bar:
 ### An Example Packed Config.yml
 {:.no_toc}
 
-See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories) to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
 ## Processing A Config
 
