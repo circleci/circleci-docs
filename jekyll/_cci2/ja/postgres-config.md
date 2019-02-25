@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "データベースの設定例"
 short-title: "データベースの設定例"
-description: "データベースを使う際の設定例"
+description: "PostgreSQL を使う際の設定例"
 categories:
   - configuring-jobs
 order: 35
 ---
-このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について解説しています。
+このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について解説しています。
 
 * 目次
 {:toc}
