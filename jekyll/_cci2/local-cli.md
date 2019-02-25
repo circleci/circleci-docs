@@ -316,10 +316,10 @@ For security reasons, encrypted environment variables configured in the UI will 
 ## Uninstallation
 
 Commands for uninstalling the CircleCI CLI will vary depending on what your
-installation method was:
+installation method was using respectively:
 
-- **via the curl command**: Remove the `circleci` executable from `usr/local/bin`
-- **via Homebrew for Mac**: Run `brew uninstall circleci`
-- **via Snap on Linux**: Run `sudo snap remove circleci`
+- **curl installation command**: Remove the `circleci` executable from `usr/local/bin`
+- **Homebrew installation for Mac**: Run `brew uninstall circleci`
+- **Snap installation on Linux**: Run `sudo snap remove circleci`
 
 
