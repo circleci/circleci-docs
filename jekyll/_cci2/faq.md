@@ -266,17 +266,24 @@ can also be used to pay for features, such as Docker Layer Caching.
 For example, the 25,000 credit package would provide 2,500 build minutes when
 using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
-#### Can I get one workflow run to use 50 containers at once without queuing?
-{:.no_toc}
-The Performance plan will experience less queuing, so you may run 50x parallelism builds and kick off a bunch concurrently, but this will increase your credit usage significantly.  The Seed plan has a maximum of 4x parallelism.
-
 #### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
-You pay to the nearest credit. First we round up to the nearest second, and then up to the nearest credit. On the 2x4 (medium) box this is effectively in 6 second increments. 
+You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
 #### How do I buy credits? Can I buy in any increments?
 {:.no_toc}
 Every month, you are charged for your selected credit package at the beginning of the month.
+
+#### How do I buy credits? Can I buy in any increments?
+{:.no_toc}
+Every month, you are charged for your selected credit package at the beginning of the month.
+
+#### What do I pay for?
+{:.no_toc}
+You can choose to pay for premium features per active user, compute, and optionally, premium support.
+
+- Access to features, such as new machine sizes, and Docker Layer Caching (DLS) are paid with a monthly fee of $15 per active user. 
+- Compute is paid for monthly in credits for the machine size and duration you use.
 
 #### What happens when I run out of credits?
 {:.no_toc}
@@ -300,7 +307,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 
 #### When do I pay?
 {:.no_toc}
-On the Usage Plans, you will be charged for the plan selections you’ve made for credits, user seats, and premium support tiers at the beginning of your billing cycle.
+On the Usage Plans, you will be charged for the plan selections you’ve made for credits, user seats, and premium support tiers at the beginning of every billing cycle.
 
 #### What are the other renewal dates?
 {:.no_toc}
