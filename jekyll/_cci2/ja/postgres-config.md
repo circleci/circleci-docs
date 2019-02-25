@@ -72,14 +72,14 @@ jobs:
           name: Parallel RSpec
           command: bin/rails test
 
-      # アーティファクトを保存する
+      # artifacts を保存する
       - store_test_results:
           path: /tmp/test-results
 ```
 
 {% endraw %}
 
-**※**上記の方法以外にも、既存のイメージに手を入れて独自のイメージとしてビルドし、必要なパッケージを組み合わせて Docker Hub やレジストリにコミット、プッシュする、という方法もあります。
+**注 :** 上記の方法以外にも、既存のイメージに手を入れて独自のイメージとしてビルドし、必要なパッケージを組み合わせて Docker Hub やレジストリにコミット、プッシュする、という方法もあります。
 
 ### 環境設定の例
 {:.no_toc}
