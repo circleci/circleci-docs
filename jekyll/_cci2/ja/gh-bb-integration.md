@@ -8,10 +8,10 @@ Order: 60
 ---
 このページでは、CircleCI における GitHub や Bitbucket の統合、活用方法の概要について、下記の内容に沿って解説しています。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## 概要
-
 {:.no_toc}
 
 CircleCI でプロジェクトを開始するとき、最初にCircleCI のユーザー登録をする際に与えた権限に従って、下記のような GitHub または Bitbucket の設定がリポジトリに追加されます。 　**deploy key：**GitHub または Bitbucket からプロジェクトのコードの取得 (チェックアウト) するのに使われます 　**service hook：**GitHub または Bitbucket へのプッシュを CircleCI へ通知するのに使われます
@@ -25,7 +25,6 @@ CircleCI builds push hooks by default. So, builds are triggered for all push hoo
 タグを利用したプッシュによるビルドの方法は、[Workflow フィルター]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のページで解説しています。
 
 ### Add a .circleci/config.yml File
-
 {:.no_toc}
 
 After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. 例えば、Postgres の機能を駆使した Rails のプロジェクトに携わっているなら、下記のような run ステップのジョブを記述することになります。
@@ -112,7 +111,6 @@ CircleCI は、バージョン管理システムを稼働しているサーバ�
 CircleCI が利用する権限の数が多すぎると感じるときは、その懸念を払拭するためにも、バージョン管理システムの運営元に問い合わせてみてください。
 
 ### チームアカウントに対する権限
-
 {:.no_toc}
 
 ここでは、さまざまなビジネスニーズにおいて考えうるチームアカウントとユーザー個別アカウントの適切な選択の仕方について解説します。
@@ -124,7 +122,6 @@ CircleCI が利用する権限の数が多すぎると感じるときは、そ�
 3. Bitbucket の個人アカウントは、チームあたり最大 5 つまでのプライベートリポジトリが無料となっています。 Bitbucket の個人アカウントでチームを作成してメンバーを追加し、ビルドを実行するメンバーに対し必要に応じてリポジトリの管理権限を付与することも可能です。 このプロジェクトでは、メンバーがフォローするのに CircleCI 上で特に必要な操作はありません。
 
 ### GitHub の組織 (Organization) へのアクセスを再有効化する方法
-
 {:.no_toc}
 
 ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した際に、CircleCI の組織へのアクセスを再有効化する方法を解説します。 [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) ページの「Organization access」で、次のいずれかの操作を行ってください。
@@ -148,7 +145,7 @@ CircleCI が利用する権限の数が多すぎると感じるときは、そ�
 
 **What is a deploy key?**
 
-When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH key. If you are using Github as your VCS then GitHub has the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH key. If you are using GitHub as your VCS then GitHub has the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
 
@@ -157,7 +154,6 @@ If you want to push to the repository from your builds, you will need a deployme
 A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
 ### GitHub ユーザーキーの生成方法
-
 {:.no_toc}
 
 ここでは、仮に GitHub のリポジトリが `https://github.com/you/test-repo` となっており、CircleCI のプロジェクトが <https://circleci.com/gh/you/test-repo>{:rel="nofollow"} となっている場合の方法を例として解説しています。
@@ -185,7 +181,6 @@ jobs:
 ジョブから GitHub リポジトリにプッシュする際、CircleCI はここで追加した SSH キーを使います。
 
 ### Bitbucket ユーザーキーの生成方法
-
 {:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
