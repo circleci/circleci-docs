@@ -274,16 +274,14 @@ You pay to the next nearest credit. First we round up to the nearest second, and
 {:.no_toc}
 Every month, you are charged for your selected credit package at the beginning of the month.
 
-#### How do I buy credits? Can I buy in any increments?
-{:.no_toc}
-Every month, you are charged for your selected credit package at the beginning of the month.
-
 #### What do I pay for?
 {:.no_toc}
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
-- Access to features, such as new machine sizes, and Docker Layer Caching (DLS) are paid with a monthly fee of $15 per active user. 
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
 - Compute is paid for monthly in credits for the machine size and duration you use.
+- Docker Layer Caching (DLS) is paid for with credits per usage, similar to
+  compute credits.
 
 #### What happens when I run out of credits?
 {:.no_toc}
