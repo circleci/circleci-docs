@@ -68,7 +68,7 @@ CircleCI はソースコードを取得 (チェックアウト) して "Hello Wo
 
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `[Add Projects]` の下に表示されることになります。 GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [SWITCH ORGANIZATION] メニューから目的の `myOrg` に切り替えます。
+プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある Org を確認してください。 For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
 ## 次のステップは？
 
