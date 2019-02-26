@@ -164,7 +164,6 @@ orbs:
           - codecov/upload:
               path: ~/tmp/results.xml
 
-version: 2.1
 workflows:
   main:
     jobs:
