@@ -209,7 +209,7 @@ jobs:
 
 ## MySQL を使った Ruby プロジェクトの設定例と、それを Docker 化する例
 
-下記は MySQL と dockerize コマンドを使った例です。補足情報は [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) でご確認ください。
+The following example uses MySQL and dockerize, see the [sample project on GitHub](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
 
 ```yaml
 version: 2
