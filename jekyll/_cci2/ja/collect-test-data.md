@@ -9,7 +9,8 @@ order: 34
 ---
 CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step.
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
 To see test result as artifacts, upload them using the `store_artifacts` step.
 
@@ -42,7 +43,6 @@ Write the XML files to a subdirectory if you have a custom test step that produc
     
 
 ### Custom Test Runner Examples
-
 {:.no_toc}
 
 This section provides the following test runner examples:
@@ -61,7 +61,6 @@ This section provides the following test runner examples:
 * [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 #### Cucumber
-
 {:.no_toc}
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
@@ -99,7 +98,6 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 ```
 
 #### Maven Surefire Plugin for Java JUnit Results
-
 {:.no_toc}
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
@@ -109,17 +107,16 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
       - run:
           name: Save test results
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: ~/test-results
       - store_artifacts:
-          path: ~/junit         
+          path: ~/test-results/junit         
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
-
 {:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
@@ -129,17 +126,16 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
       - run:
           name: Save test results
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: ~/test-results
       - store_artifacts:
-          path: ~/junit         
+          path: ~/test-results/junit         
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
-
 {:.no_toc}
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
@@ -167,8 +163,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
-
-    version: 2
+version: 2
     jobs:
         build:
             environment:
@@ -195,7 +190,7 @@ Following is a complete example for Mocha with nyc, contributed by [marcospgp](h
                 - restore_cache:
                     keys:
                         - v1-dependencies-{{ checksum "package.json" }}
-                        # fallback to using the latest cache if no exact match is found
+                    # fallback to using the latest cache if no exact match is found
                         - v1-dependencies-
     
                 - run: npm install
@@ -206,8 +201,8 @@ Following is a complete example for Mocha with nyc, contributed by [marcospgp](h
                     paths:
                         - node_modules
                     key: v1-dependencies-{{ checksum "package.json" }}
-    
-                - run: mkdir reports
+
+            - run: mkdir reports
     
                 # Run mocha
                 - run:
@@ -257,12 +252,9 @@ Following is a complete example for Mocha with nyc, contributed by [marcospgp](h
                 - store_artifacts: # upload test coverage as artifact
                     path: ./coverage/lcov.info
                     prefix: tests
-    
-
 {% endraw %}
 
 #### <a name="ava"></a>Ava for Node.js
-
 {:.no_toc}
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
@@ -283,7 +275,6 @@ A working `.circleci/config.yml` section for testing might look like the followi
     
 
 #### ESLint
-
 {:.no_toc}
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
@@ -303,7 +294,6 @@ A working `.circleci/config.yml` test section might look like this:
     
 
 #### PHPUnit
-
 {:.no_toc}
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
@@ -321,7 +311,6 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
     
 
 #### pytest
-
 {:.no_toc}
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
@@ -341,7 +330,6 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
     
 
 #### RSpec
-
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
@@ -363,7 +351,6 @@ And modify your test command to this:
     
 
 ### Minitest
-
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -386,11 +373,10 @@ And modify your test command to this:
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
 #### test2junit for Clojure Tests
-
-{:.no_toc} Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
+{:.no_toc}
+Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 #### Karma
-
 {:.no_toc}
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
@@ -430,7 +416,6 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 #### Jest
-
 {:.no_toc}
 
 To collect Jest data, first create a Jest config file called `jest.config.js` with the following:
@@ -467,11 +452,11 @@ For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.gith
 To access test metadata for a run from the API, refer to the [test-metadata API documentation]({{ site.baseurl }}/api/v1-reference/#test-metadata).
 
 ## 関連情報
-
 {:.no_toc}
 
 [Using Insights]({{ site.baseurl }}/2.0/insights/)
 
 ## Video: Troubleshooting Test Runners
+{:.no_toc}
 
-{:.no_toc} <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+<iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
