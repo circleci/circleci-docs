@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "config.yml の設定例"
+title: "2.0 config.yml の設定例"
 short-title: "config.yml の設定例"
 description: "2.0 config.yml の設定例"
 categories:
