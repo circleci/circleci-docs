@@ -7,12 +7,12 @@ categories:
   - migration
 order: 2
 ---
-このページでは [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの設定例を以下の内容に沿って解説しています。
+このページでは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの設定例を 3 つあげて解説しています。
 
 * TOC
 {:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは [ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および [Workflows]({{ site.baseurl }}/2.0/workflows/) でチェックしてください。
+CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは「[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)」や「 [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)」ページをご覧ください。
 
 ## パラレルジョブの設定例
 
