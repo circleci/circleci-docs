@@ -238,7 +238,7 @@ Following is the list of ports for machines in a CircleCI 2.16 installation:
 |   | 80 | TCP | Inbound | Administrators | CircleCI Admin API access |  |
 |   | 443 | TCP | Inbound | Administrators | CircleCI Admin API access |  |
 |   | 22 | TCP | Inbound | Administrators | SSH |  |
-|   | 22 | TCP | Outbound | GitHub Enterprise / GitHub.com (whichever applies) | Download Code From Github. |  |
+|   | 22 | TCP | Outbound | GitHub Enterprise / GitHub.com (whichever applies) | Download Code From GitHub. |  |
 |   | 4647 | TCP | Bi-directional | Services Machine | Internal communication |  |
 |   | 8585 | TCP | Bi-directional | Services Machine | Internal communication |  |
 |   | 7171 | TCP | Bi-directional | Services Machine | Internal communication |  |

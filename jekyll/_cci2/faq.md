@@ -116,7 +116,7 @@ but time spent in a **run queue** is unavoidable
 
 ### Why can't I find my project on the Add Project page?
  {:.no_toc}
-If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
+If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
@@ -134,7 +134,7 @@ redis:3.0.7-jessie
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
 
 ```
-myUsername/couchdb:1.6.1
+my-user/couchdb:1.6.1
 ```
 
 ### What is the best practice for specifying image versions?
