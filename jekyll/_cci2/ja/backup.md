@@ -49,5 +49,5 @@ AWS EBSスナップショットには、バックアップ処理を簡単にす�
 復元後に、データベース内の異常なビルドレコードをクリーンアップするには、Servicesマシンで次のコマンドを実行します。ここで、例のビルドURLは、CircleCIアプリケーションの実際のURLに置き換えます。
 
     $ circleci dev-console
-    # コンソールのロードを待つ
-    user=> (admin/delete-build "https://my-circleci-hostname.com/gh/my-org/my-project/1234")
+    # Wait for console to load
+    user=> (admin/delete-build "https://my-circleci-hostname.com/gh/your-org/my-project/1234")
