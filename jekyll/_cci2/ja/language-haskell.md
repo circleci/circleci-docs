@@ -9,16 +9,16 @@ order: 2
 ---
 This guide will help you get started with a basic Haskell application on CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## 概要
-
 {:.no_toc}
 
 You can view an example Haskell project that build with CircleCI at the following link:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-haskell"
-target="_blank">Demo Haskell Project on Github</a>
+target="_blank">Demo Haskell Project on GitHub</a>
 
 In the project you will find a commented CircleCI configuration file <a
 href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>.
@@ -96,7 +96,6 @@ Our first step is to run `checkout` to pull our repository's code down and set i
 Next we check if there are any dependencies that can be restored, enabling our build to speed up. Following that, we run `stack setup` to pull in the Haskell compiler as specified in the `stack.yaml` config.
 
 {% raw %}
-
 ```yaml
     steps:
       - checkout
@@ -114,7 +113,6 @@ Next we check if there are any dependencies that can be restored, enabling our b
             - ~/.stack
             - ~/.stack-work
 ```
-
 {% endraw %}
 
 Note: It's also possible to use a `cabal` build file for caching dependencies. `stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the cache key for our dependencies. You can read more about the differences between `stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
@@ -142,7 +140,6 @@ Finally, we can take the built executable and store it as an artifact.
 Excellent! You are now setup on CircleCI with a Haskell app.
 
 ## 関連情報
-
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
