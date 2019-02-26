@@ -280,7 +280,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 
 - Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
 - Compute is paid for monthly in credits for the machine size and duration you use.
-- Docker Layer Caching (DLS) is paid for with credits per usage, similar to
+- Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
 #### What happens when I run out of credits?
@@ -305,7 +305,8 @@ You can pay from inside the CircleCI app for monthly pricing.
 
 #### When do I pay?
 {:.no_toc}
-On the Usage Plans, you will be charged for the plan selections you’ve made for credits, user seats, and premium support tiers at the beginning of every billing cycle.
+
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling on reaching 5% of credits available) will be paid _at the time of the refill_.
 
 #### What are the other renewal dates?
 {:.no_toc}
