@@ -214,7 +214,7 @@ jobs:
 
 ## Example Ruby Project with MYSQL and Dockerize
 
-The following example uses MySQL and dockerize, see the [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+The following example uses MySQL and dockerize, see the [sample project on GitHub](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
 
 ```yaml
 version: 2

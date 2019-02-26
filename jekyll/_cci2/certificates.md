@@ -65,7 +65,7 @@ Custom TCP Rule | TCP | 64535-65535 | 0.0.0.0
 
 3. Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
 
-4. It is now possible to set your Github Authorization Callback to `https` rather than `http`.  
+4. It is now possible to set your GitHub Authorization Callback to `https` rather than `http`.  
 
 ## Setting up TLS/HTTPS on CircleCI Server
 
@@ -133,4 +133,4 @@ Reference: https://letsencrypt.readthedocs.io/en/latest/using.html#manual
 
 Ensure the hostname is properly configured in the Replicated/management console ~ (hostname:8800/settings) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
-Make sure the Auth Callback URL in Github/Github Enterprise matches the domain name pointing to the services box, including the protocol used, for example **https**://info-tech.io/.
+Make sure the Auth Callback URL in GitHub/GitHub Enterprise matches the domain name pointing to the services box, including the protocol used, for example **https**://info-tech.io/.
