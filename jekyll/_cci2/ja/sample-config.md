@@ -111,13 +111,13 @@ workflows:
 
 {% endraw %}
 
-これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行するWorkflow について、詳しくは [Workflows]({{ site.baseurl }}/2.0/workflows) ページを参照してください。
+これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/ja/2.0/workflows) 」ページを参照してください。
 
 ## ファンイン・ファンアウト Workflow の設定例
 
 下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。 この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
 
-なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行される上流ジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
+なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行されるアップストリームジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
 
 {% raw %}
 
@@ -230,7 +230,7 @@ workflows:
 
 ## 複数の Executor タイプ (macOS ＋ Docker) を利用する設定例
 
-1 つの Workflow のなかで複数の[Executor タイプ ](https://circleci.com/docs/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドします。
+1 つの Workflow のなかで複数の[Executor タイプ ](https://circleci.com/docs/ja/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドします。
 
 {% raw %}
 
