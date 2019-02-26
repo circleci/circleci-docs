@@ -14,7 +14,7 @@ The example build configurations referenced throughout this article are based of
 - Enable the safe use of environment variables.
 - On each build, upload a `test-results.xml` file to be made accessible online.
 
-## Prerequisites
+## 前準備
 
 This document assumes that you have an account with CircleCI that is linked to a repository. If you don't, consider going over our [getting started guide]({{ site.baseurl }}/2.0/getting-started/).
 
@@ -45,13 +45,13 @@ If a user needs more control with their CI environment, TravisCI uses *hooks* to
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
 {% raw %}
-
 ```yaml
 version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
     docker:
+
       - image: circleci/node:4.8.2
       - image: mongo:3.4.4
     steps:
@@ -72,12 +72,11 @@ jobs:
           name: test
           command: npm test
 ```
-
 {% endraw %}
 
 In the config above, no *language* is specifically required, and the user is able to specify any number of `steps` that can be run, with no restrictions on step order. By leveraging Docker, specific Node.js and MongoDB versions are made available in each `command` that gets run.
 
-### Caching Dependencies
+### 依存関係のキャッシュ
 
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml` checks for a dependency cache based specifically on a checksum of the `package.json` file. You can set your cache based on any key (not just `package.json`) as well as set a group of cache paths to defer to in the declared order. Refer to the [caching dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build creates and restores caches.
 
@@ -105,7 +104,7 @@ With CircleCI, it is also possible to securely set environment variables across 
 
 ## Artifacts Uploading
 
-With TravisCI you can upload build artifacts either manually using AWS S3 or as an attachment to a Github Release.
+With TravisCI you can upload build artifacts either manually using AWS S3 or as an attachment to a GitHub Release.
 
 On CircleCI, artifact uploading occurs in a step in your config:
 
