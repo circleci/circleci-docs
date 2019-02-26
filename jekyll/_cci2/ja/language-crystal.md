@@ -11,14 +11,14 @@ order: 9
 
 This guide will help you get started with a minimal Crystal application on CircleCI.
 
-## Overview
+## 概要
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
 You can view an example Crystal project at the following link:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
-target="_blank">Demo Crystal Project on Github</a>
+target="_blank">Demo Crystal Project on GitHub</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>.
 
@@ -27,13 +27,13 @@ The application uses Crystal 0.27 and Kemal 0.25. Both Crystal and Kemal are dev
 ## Sample Configuration
 
 {% raw %}
-
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of jobs
   build: 
     working_directory: ~/demo_app
     docker: # run build steps with docker
+
       - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
     steps: # a collection of executable steps
       - checkout # checks out source code to working directory
@@ -52,7 +52,6 @@ jobs: # a collection of jobs
           command: crystal spec
 # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
-
 {% endraw %}
 
 ## Config Walkthrough
@@ -88,9 +87,9 @@ Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cach
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories. In this example, we use a checksum of the `shard.lock` file to determine if the dependency cache has changed.
 
 {% raw %}
-
 ```yaml
     steps: #
+
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
@@ -102,7 +101,6 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           paths:
             - ./lib
 ```
-
 {% endraw %}
 
 Finally, we run `crystal spec` to run the project's test suite.
@@ -115,6 +113,6 @@ Finally, we run `crystal spec` to run the project's test suite.
 
 Great! You've set up CircleCI 2.0 for a basic Crystal application.
 
-## Deploy
+## デプロイ、デプロイする
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
