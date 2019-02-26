@@ -338,7 +338,7 @@ workflows:
 ```
 
 正規表現の詳しい使い方については、
-[正規表現でタグとブランチをフィルターする方法](#using-regular-expressions-to-filter-tags-and-branches)をご覧ください。
+[正規表現でタグとブランチをフィルターする方法](#正規表現でタグとブランチをフィルターする方法)をご覧ください。
 ブランチ化されているプロジェクトを扱うシーケンシャル Workflow の実際の設定サンプルは、
 [こちらの設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)で確認できます。
 
@@ -349,7 +349,7 @@ CircleCI は明示的にタグフィルターを指定しない限り、
 タグが含まれる Workflows は実行しません。
 また、
 あるジョブを実行するのに他のジョブを（直接的にしろ間接的にしろ）必要としているような場合も、
-[正規表現を用いて](#using-regular-expressions-to-filter-tags-and-branches)
+[正規表現を用いて](#正規表現でタグとブランチをフィルターする方)
 そのジョブに対するタグフィルターを指定する必要があります。CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 下記は
