@@ -72,7 +72,7 @@ brew install circleci
 
 ### Manual Download
 
-You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
+You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ## Updating The CLI
 
@@ -98,7 +98,7 @@ Before using the CLI you need to generate a CircleCI API Token from the [Persona
 circleci setup
 ```
 
-Setup will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI installed on your own server or private cloud, change the value to your installation address (for example, circleci.my-org.com).
+Setup will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI installed on your own server or private cloud, change the value to your installation address (for example, circleci.your-org.com).
 
 ## Validate A CircleCI Config
 
