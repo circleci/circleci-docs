@@ -51,5 +51,5 @@ If you want to clean up any abnormal build records in your database after a reco
 ```
 $ circleci dev-console
 # Wait for console to load
-user=> (admin/delete-build "https://my-circleci-hostname.com/gh/my-org/my-project/1234") 
+user=> (admin/delete-build "https://my-circleci-hostname.com/gh/your-org/my-project/1234") 
 ```

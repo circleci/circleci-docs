@@ -145,7 +145,7 @@ With CircleCI, it is also possible to securely set environment variables across 
 ## Artifacts Uploading
 
 With TravisCI you can upload build artifacts either manually using AWS S3 or
-as an attachment to a Github Release.
+as an attachment to a GitHub Release.
 
 On CircleCI, artifact uploading occurs in a step in your config:
 
