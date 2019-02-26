@@ -32,7 +32,7 @@ As a user getting to know the macOS build environment, our ideal scenario is for
 - Run tests using XCode on the macOS VM whenever we push code.
 - Create and upload the compiled application as an artifact after tests have run successfully.
 
-You can checkout the example application's repo on [Github](https://github.com/CircleCI-Public/circleci-demo-macos).
+You can checkout the example application's repo on [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
 
 ## Example Configuration File
 
