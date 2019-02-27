@@ -27,12 +27,7 @@ _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs o
 
 ## Best Practices
 
-Convenience images are based on the most recently built versions of upstream images,
-so it is best practice
-to use the most specific image possible.
-This makes your builds more deterministic
-by preventing an upstream image
-from introducing unintended changes to your image.
+Convenience images are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
 CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container. Using `circleci/ruby:2.4-node` is similar to using `:latest`. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
 
@@ -49,6 +44,10 @@ to make an image more specific:
 to pin an image to a version or operating system (OS).
 - Use a Docker image ID
 to pin an image to a fixed version.
+
+**NOTE:** For docker images that have `-node` (Node.js) included in the container, the latest LTS
+version of Node is used. If you would like to include your own specific version of
+Node.js / NPM you can do so as a `run` step in your `.circleci/config.yml`.
 
 ### Using an Image Tag to Pin an Image Version or OS
 {:.no_toc}
