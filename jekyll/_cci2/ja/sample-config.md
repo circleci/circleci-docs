@@ -230,7 +230,7 @@ workflows:
 
 ## 複数の Executor タイプ (macOS ＋ Docker) を利用する設定例
 
-1 つの Workflow のなかで複数の[Executor タイプ ](https://circleci.com/docs/ja/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker でビルドします。
+1 つの Workflow のなかで複数の[Executor タイプ ](https://circleci.com/docs/ja/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール（[SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)）は Docker でビルドします。
 
 {% raw %}
 
