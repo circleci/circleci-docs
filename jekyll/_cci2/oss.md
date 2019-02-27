@@ -119,7 +119,7 @@ set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ### Caching
 
-Caches are isolated based on Github Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
 - PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master).
 - Two PRs in different Fork Repos will have different caches.
 

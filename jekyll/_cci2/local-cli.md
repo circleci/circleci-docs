@@ -76,7 +76,7 @@ brew install circleci
 
 ### Manual Download
 
-You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
+You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ## Updating The CLI
 
@@ -104,7 +104,7 @@ circleci setup
 
 Setup will prompt you for configuration settings. If you are using the CLI with
 circleci.com, use the default CircleCI Host. If you are using CircleCI installed
-on your own server or private cloud, change the value to your installation address (for example, circleci.my-org.com).
+on your own server or private cloud, change the value to your installation address (for example, circleci.your-org.com).
 
 ## Validate A CircleCI Config
 
@@ -318,3 +318,14 @@ For security reasons, encrypted environment variables configured in the UI will 
 
 Currently, only the legacy CircleCI CLI is available to run on server
 installations of CircleCI. The legacy CircleCI CLI is available [here](https://github.com/circleci/local-cli).
+
+## Uninstallation
+
+Commands for uninstalling the CircleCI CLI will vary depending on what your
+installation method was using respectively:
+
+- **curl installation command**: Remove the `circleci` executable from `usr/local/bin`
+- **Homebrew installation for Mac**: Run `brew uninstall circleci`
+- **Snap installation on Linux**: Run `sudo snap remove circleci`
+
+
