@@ -42,7 +42,7 @@ You can add a machine user's SSH key to your projects on CircleCI and use that k
 
 The main benefit of using a machine user's SSH key instead of a regular user's key is that you can lock down the machine user's access to just the repos that it _needs_ to access.
 
-Here are the steps to set a machine user's SSH key as a checkout key for your project.  We recommend doing this in an incognito window, as you will have to sign out of your normal user's Github and CircleCI accounts.
+Here are the steps to set a machine user's SSH key as a checkout key for your project.  We recommend doing this in an incognito window, as you will have to sign out of your normal user's GitHub and CircleCI accounts.
 
 - First, you need to login to GitHub as the machine user.
 
