@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "2.0 config.yml の設定例"
-short-title: "config.yml の設定例"
+short-title: "2.0 config.yml の設定例"
 description: "2.0 config.yml の設定例"
 categories:
   - migration
@@ -45,7 +45,7 @@ workflows:
 
 {% endraw %}
 
-これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflow について、詳しくは [Workflow]({{ site.baseurl }}/2.0/workflows) を参照してください。
+これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflows について、詳しくは [Workflow]({{ site.baseurl }}/2.0/workflows) を参照してください。
 
 ## シーケンシャル Workflow の設定例
 
