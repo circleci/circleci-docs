@@ -18,7 +18,9 @@ things you can do with the CircleCI CLI include:
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
 
-This document will cover the installation and usage of the CLI tool.
+This document will cover the installation and usage of the CLI tool. **Note:**
+the new CLI is currently not available on server installations of CircleCI. The
+legacy CLI does work in Server and can be installed. Read more below: TODO:
 
 * TOC
 {:toc}
@@ -311,3 +313,8 @@ Further, not all commands may work on your local machine as they do online. For 
 **Environment Variables**
 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
+
+## Using the CLI on CircleCI Server
+
+Currently, only the legacy CircleCI CLI is available to run on server
+installations of CircleCI. The legacy CircleCI CLI is available [here](https://github.com/circleci/local-cli).
