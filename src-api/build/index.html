@@ -1,0 +1,1331 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>CircleCI API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#circleci-api-reference-guide" class="toc-h1 toc-link" data-title="CircleCI API Reference Guide">CircleCI API Reference Guide</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#api-overview" class="toc-h2 toc-link" data-title="API Overview">API Overview</a>
+                  </li>
+                  <li>
+                    <a href="#getting-started" class="toc-h2 toc-link" data-title="Getting Started">Getting Started</a>
+                  </li>
+                  <li>
+                    <a href="#summary-of-api-endpoints" class="toc-h2 toc-link" data-title="Summary of API Endpoints">Summary of API Endpoints</a>
+                  </li>
+                  <li>
+                    <a href="#user" class="toc-h2 toc-link" data-title="User">User</a>
+                  </li>
+                  <li>
+                    <a href="#projects" class="toc-h2 toc-link" data-title="Projects">Projects</a>
+                  </li>
+                  <li>
+                    <a href="#follow-a-new-project-on-circleci" class="toc-h2 toc-link" data-title="Follow a New Project on CircleCI">Follow a New Project on CircleCI</a>
+                  </li>
+                  <li>
+                    <a href="#recent-builds-across-all-projects" class="toc-h2 toc-link" data-title="Recent Builds Across All Projects">Recent Builds Across All Projects</a>
+                  </li>
+                  <li>
+                    <a href="#recent-builds-for-a-single-project" class="toc-h2 toc-link" data-title="Recent Builds For A Single Project">Recent Builds For A Single Project</a>
+                  </li>
+                  <li>
+                    <a href="#recent-builds-for-a-project-branch" class="toc-h2 toc-link" data-title="Recent Builds For a Project Branch">Recent Builds For a Project Branch</a>
+                  </li>
+                  <li>
+                    <a href="#single-job" class="toc-h2 toc-link" data-title="Single Job">Single Job</a>
+                  </li>
+                  <li>
+                    <a href="#artifacts-of-a-build" class="toc-h2 toc-link" data-title="Artifacts Of A Build">Artifacts Of A Build</a>
+                  </li>
+                  <li>
+                    <a href="#download-an-artifact-file" class="toc-h2 toc-link" data-title="Download an artifact file">Download an artifact file</a>
+                  </li>
+                  <li>
+                    <a href="#artifacts-of-the-latest-build" class="toc-h2 toc-link" data-title="Artifacts of the latest Build">Artifacts of the latest Build</a>
+                  </li>
+                  <li>
+                    <a href="#retry-a-build" class="toc-h2 toc-link" data-title="Retry a Build">Retry a Build</a>
+                  </li>
+                  <li>
+                    <a href="#add-user-to-build" class="toc-h2 toc-link" data-title="Add User to Build">Add User to Build</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-a-build" class="toc-h2 toc-link" data-title="Cancel a Build">Cancel a Build</a>
+                  </li>
+                  <li>
+                    <a href="#trigger-a-new-job" class="toc-h2 toc-link" data-title="Trigger a new Job">Trigger a new Job</a>
+                  </li>
+                  <li>
+                    <a href="#trigger-a-new-build-with-a-branch" class="toc-h2 toc-link" data-title="Trigger a new Build with a Branch">Trigger a new Build with a Branch</a>
+                  </li>
+                  <li>
+                    <a href="#trigger-a-new-build-by-project-preview" class="toc-h2 toc-link" data-title="Trigger a new Build by Project (preview)">Trigger a new Build by Project (preview)</a>
+                  </li>
+                  <li>
+                    <a href="#clear-cache" class="toc-h2 toc-link" data-title="Clear Cache">Clear Cache</a>
+                  </li>
+                  <li>
+                    <a href="#list-environment-variables" class="toc-h2 toc-link" data-title="List Environment Variables">List Environment Variables</a>
+                  </li>
+                  <li>
+                    <a href="#add-environment-variables" class="toc-h2 toc-link" data-title="Add Environment Variables">Add Environment Variables</a>
+                  </li>
+                  <li>
+                    <a href="#get-single-environment-variable" class="toc-h2 toc-link" data-title="Get Single Environment Variable">Get Single Environment Variable</a>
+                  </li>
+                  <li>
+                    <a href="#delete-environment-variables" class="toc-h2 toc-link" data-title="Delete Environment Variables">Delete Environment Variables</a>
+                  </li>
+                  <li>
+                    <a href="#list-checkout-keys" class="toc-h2 toc-link" data-title="List Checkout Keys">List Checkout Keys</a>
+                  </li>
+                  <li>
+                    <a href="#new-checkout-key" class="toc-h2 toc-link" data-title="New Checkout Key">New Checkout Key</a>
+                  </li>
+                  <li>
+                    <a href="#get-checkout-key" class="toc-h2 toc-link" data-title="Get Checkout Key">Get Checkout Key</a>
+                  </li>
+                  <li>
+                    <a href="#delete-checkout-key" class="toc-h2 toc-link" data-title="Delete Checkout Key">Delete Checkout Key</a>
+                  </li>
+                  <li>
+                    <a href="#test-metadata" class="toc-h2 toc-link" data-title="Test Metadata">Test Metadata</a>
+                  </li>
+                  <li>
+                    <a href="#ssh-keys" class="toc-h2 toc-link" data-title="SSH Keys">SSH Keys</a>
+                  </li>
+                  <li>
+                    <a href="#heroku-keys" class="toc-h2 toc-link" data-title="Heroku Keys">Heroku Keys</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='circleci-api-reference-guide'>CircleCI API Reference Guide</h1><h2 id='api-overview'>API Overview</h2>
+<p>The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:</p>
+
+<ul>
+<li>GET - retrieve specific information, which may include arrays and sets of data and information.</li>
+<li>POST - create/add a new API element.</li>
+<li>PUT - update an existing API element in the API server.</li>
+<li>DELETE - remove/delete an API element in the API server.</li>
+</ul>
+
+<aside class="notice">
+Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not currently use the `PUT` verb.
+</aside>
+
+<aside class="notice">
+Access to billing functions is only available from the CircleCI application.
+</aside>
+<h3 id='api-syntax'>API Syntax</h3>
+<p>When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown below:
+&quot;https://circleci.com/api/v1.1&quot;</p>
+
+<p>Where:</p>
+
+<ul>
+<li>https://circleci.com - the resource URL for the API being called.</li>
+<li>api - the class being called.</li>
+<li>v1.1 - the API version.</li>
+</ul>
+<h3 id='authentication'>Authentication</h3>
+<p>The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.</p>
+<h4 id='add-an-api-token'>Add an API Token</h4><pre class="highlight plaintext"><code>$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+</code></pre>
+<p>To add an API token, perform the steps listed below.</p>
+
+<p><code>{
+  &quot;user_key_fingerprint&quot; : null,
+  &quot;days_left_in_trial&quot; : -238,
+  &quot;plan&quot; : &quot;p16&quot;,
+  &quot;trial_end&quot; : &quot;2011-12-28T22:02:15Z&quot;,
+  &quot;basic_email_prefs&quot; : &quot;smart&quot;,
+  &quot;admin&quot; : true,
+  &quot;login&quot; : &quot;pbiggar&quot;
+ }
+</code></p>
+
+<ol>
+<li> Add an API token from your <a href="https://circleci.com/account/api">account dashboard</a>{:rel=&quot;nofollow&quot;}.</li>
+<li> To test it, <a href="https://circleci.com/api/v1.1/me">View it in your browser</a>{:rel=&quot;nofollow&quot;} or call the API using</li>
+<li> You should see a response similar to the example shown in the right pane.</li>
+</ol>
+
+<aside class="notice">
+All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
+</aside>
+<h4 id='get-authenticated'>Get Authenticated</h4><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/me?circle-token=:token
+</code></pre><pre class="highlight plaintext"><code>curl -u &lt;circle-token&gt;: https://circleci.com/api/...
+</code></pre>
+<p>To be authenticated by the API server, add an API token using your <a href="https://circleci.com/account/api">account dashboard</a>. To use the API token, add it to the <code>circle-token</code> query param:</p>
+
+<p>Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the <code>-u</code> flag to the <code>curl</code> command:</p>
+
+<aside class="notice">
+the colon ":" tells curl that there's no password.
+</aside>
+<h3 id='rate-limiting-throttling'>Rate Limiting/Throttling</h3>
+<p>Unlike many other APIs, CircleCI does not currently perform any rate limiting or throttling of API requests to the server, CircleCI may, at its discretion, manually limit the number of requests that can be made to the server if it is determined that the user may be acting inappropriately.</p>
+<h3 id='version-control-systems-vcs-type'>Version Control Systems (:vcs-type)</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
+</code></pre>
+<p>New with v1.1 of the API, for endpoints under /project you will now need to tell CircleCI what version control system type your project uses. You may currently select either ‘github’ or ‘bitbucket’. The command for recent builds for a project would be formatted like the example shown in the right pane.</p>
+<h3 id='f-oss'>F/OSS</h3>
+<p>If you have a Free / Open Source Software (F/OSS) project <a href="https://www.gnu.org/philosophy/free-sw.html">external link</a>, and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.</p>
+<h3 id='list-ordering'>List Ordering</h3>
+<p>There are two API endpoints where the list order is significant:</p>
+
+<ul>
+<li>Recent Builds Across All Projects <a href="https://circleci.com/docs/api/v1-reference/#recent-builds">external link</a></li>
+<li>Recent Builds For a Single Project <a href="https://circleci.com/docs/api/v1-reference/#recent-builds-project">external link</a></li>
+</ul>
+
+<p>In both cases, builds are returned in the order that they were created. For all other endpoints, the order has no special significance.</p>
+<h3 id='accept-header'>Accept Header</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
+</code></pre>
+<p>If no accept header is specified, CircleCI will return human-readable JSON with comments. If you prefer to receive compact JSON with no whitespace or comments, add the <code>application/json</code> Accept header.</p>
+<h2 id='getting-started'>Getting Started</h2>
+<p>CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the following sections:</p>
+
+<ul>
+<li>Summary of API Endpoints</li>
+<li>User</li>
+<li>Projects</li>
+<li>Test Metadata</li>
+<li>SSH Keys</li>
+<li>Heroku Keys</li>
+</ul>
+<h2 id='summary-of-api-endpoints'>Summary of API Endpoints</h2>
+<p>All CircleCI API endpoints begin with &quot;https://circleci.com/api/v1.1/&quot;.</p>
+<h3 id='get-requests'>GET Requests</h3>
+<table><thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GET :/me</td>
+<td>Provides information about the signed in user.</td>
+</tr>
+<tr>
+<td>GET :/projects</td>
+<td>Lists all projects you are following on CircleCI, with build information organized by branch.</td>
+</tr>
+<tr>
+<td>GET: /project/:vcs-type/:username/:project</td>
+<td>Returns a build summary for each of the last 30 builds for a single git repo.</td>
+</tr>
+<tr>
+<td>GET: /recent-builds</td>
+<td>Returns a build summary for each of the last 30 recent builds, ordered by build_num.</td>
+</tr>
+<tr>
+<td>GET: /project/:vcs-type/:username/:project/:build_num</td>
+<td>Returns full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the notification webhooks (https://circleci.com/docs/2.0/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.</td>
+</tr>
+<tr>
+<td>GET: /project/:vcs-type/:username/:project/:build_num/artifacts</td>
+<td>Lists the artifacts produced by a given build.</td>
+</tr>
+<tr>
+<td>GET: /project/:vcs-type/:username/:project/checkout-key/:fingerprint</td>
+<td>Retrieves a checkout key.</td>
+</tr>
+</tbody></table>
+<h3 id='post-requests'>POST Requests</h3>
+<table><thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/follow</td>
+<td>Follow a new project on CircleCI..</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/:build_num/retry</td>
+<td>Retries the build, returns a summary of the new build.</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/:build_num/cancel</td>
+<td>Cancels the build, returns a summary of the build.</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/:build_num/ssh-users</td>
+<td>Adds a user to the build&#39;s SSH permissions.</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/tree/:branch</td>
+<td>Triggers a new build, returns a summary of the build. Optional 1.0 build parameters (https://circleci.com/docs/2.0/parallelism-faster-jobs/) can be set as well and Optional 2.0 build parameters (https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api).</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/ssh-key</td>
+<td>Creates an ssh key used to access external systems that require SSH key-based authentication</td>
+</tr>
+<tr>
+<td>POST: /project/:vcs-type/:username/:project/checkout-key</td>
+<td>Creates a new checkout key.</td>
+</tr>
+</tbody></table>
+<h3 id='delete-requests'>DELETE Requests</h3>
+<table><thead>
+<tr>
+<th><strong>API</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint</td>
+<td>Deletes a checkout key.</td>
+</tr>
+<tr>
+<td>DELETE: /project/:vcs-type/:username/:project/build-cache</td>
+<td>Clears the cache for a project.</td>
+</tr>
+</tbody></table>
+<h2 id='user'>User</h2>
+<p>Provides information about the user that is currently signed in.</p>
+<h3 id='method'>Method</h3>
+<p>GET</p>
+<h3 id='example-call'>Example Call</h3>
+<p><code>curl https://circleci.com/api/v1.1/me?circle-token=:token
+</code></p>
+<h3 id='example-response'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "basic_email_prefs" : "smart", // can be "smart", "none" or "all"
+  "login" : "pbiggar" // your github username
+}
+</code></pre><h2 id='projects'>Projects</h2>
+<p>Returns an array of all projects you are currently following on CircleCI, with build information organized by branch.</p>
+<h3 id='method-2'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-2'>Example Call</h3><pre class="highlight plaintext"><code></code></pre><h3 id='example-response-2'>Example Response</h3>
+<p>```[ {
+  &quot;vcs_url&quot;: &quot;https://github.com/circleci/mongofinil&quot;,
+  &quot;followed&quot;: true, // true if you follow this project in CircleCI
+  &quot;username&quot;: &quot;circleci&quot;,
+  &quot;reponame&quot;: &quot;mongofinil&quot;,
+  &quot;branches&quot; : {
+    &quot;master&quot; : {
+      &quot;pusher_logins&quot; : [ &quot;pbiggar&quot;, &quot;arohner&quot; ], // users who have pushed
+      &quot;last_non_success&quot; : { // last failed build on this branch
+        &quot;pushed_at&quot; : &quot;2013-02-12T21:33:14Z&quot;,
+        &quot;vcs_revision&quot; : &quot;1d231626ba1d2838e599c5c598d28e2306ad4e48&quot;,
+        &quot;build_num&quot; : 22,
+        &quot;outcome&quot; : &quot;failed&quot;,
+        },
+      &quot;last_success&quot; : { // last successful build on this branch
+        &quot;pushed_at&quot; : &quot;2012-08-09T03:59:53Z&quot;,
+        &quot;vcs_revision&quot; : &quot;384211bbe72b2a22997116a78788117b3922d570&quot;,
+        &quot;build_num&quot; : 15,
+        &quot;outcome&quot; : &quot;success&quot;,
+        },
+      &quot;recent_builds&quot; : [ { // last 5 builds, ordered by pushed_at (decreasing)
+        &quot;pushed_at&quot; : &quot;2013-02-12T21:33:14Z&quot;,
+        &quot;vcs_revision&quot; : &quot;1d231626ba1d2838e599c5c598d28e2306ad4e48&quot;,
+        &quot;build_num&quot; : 22,
+        &quot;outcome&quot; : &quot;failed&quot;,
+        }, {
+        &quot;pushed_at&quot; : &quot;2013-02-11T03:09:54Z&quot;,
+        &quot;vcs_revision&quot; : &quot;0553ba86b35a97e22ead78b0d568f6a7c79b838d&quot;,</p>
+
+<p>&quot;build_num&quot; : 21,
+        &quot;outcome&quot; : &quot;failed&quot;,
+        }, ... ],
+      &quot;running_builds&quot; : [ ] // currently running builds
+    }
+  }
+}, ... ]
+```</p>
+<h2 id='follow-a-new-project-on-circleci'>Follow a New Project on CircleCI</h2>
+<p>Follows a new project. CircleCI will then monitor the project for automatic building of commits.</p>
+<h3 id='method-3'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-3'>Example Call</h3>
+<p><code>curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow?circle-token=:token
+</code></p>
+<h3 id='example-response-3'>Example Response</h3>
+<p><code>{
+  &quot;followed&quot; : true,
+  &quot;first_build&quot; : {
+    &quot;compare&quot; : null,
+    &quot;previous_successful_build&quot; : null,
+    &quot;build_parameters&quot; : null,
+    &quot;oss&quot; : true,
+    &quot;committer_date&quot; : null,
+    &quot;body&quot; : null,
+    &quot;usage_queued_at&quot; : &quot;2016-09-07T13:48:10.825Z&quot;,
+    &quot;fail_reason&quot; : null,
+    &quot;retry_of&quot; : null,
+    &quot;reponame&quot; : &quot;testing-circleci&quot;,
+    &quot;ssh_users&quot; : [ ],
+    &quot;build_url&quot; : &quot;https://circleci.com/gh/circleci/mongofinil/1&quot;,
+    &quot;parallel&quot; : 1,
+    &quot;failed&quot; : null,
+    &quot;branch&quot; : &quot;master&quot;,
+    &quot;username&quot; : &quot;circleci&quot;,
+    &quot;author_date&quot; : null,
+    &quot;why&quot; : &quot;first-build&quot;,
+    &quot;user&quot; : {
+      &quot;is_user&quot; : true,
+      &quot;login&quot; : &quot;circleci&quot;,
+      &quot;avatar_url&quot; : &quot;https://avatars.githubusercontent.com/u/6017470?v=3&quot;,
+      &quot;name&quot; : &quot;CircleCI&quot;,
+      &quot;vcs_type&quot; : &quot;github&quot;,
+      &quot;id&quot; : 10101010
+    },
+    &quot;vcs_revision&quot; : &quot;b2b5def65bf54091dde02ebb39ef3c54de3ff049&quot;,
+    &quot;vcs_tag&quot; : null,
+    &quot;build_num&quot; : 1,
+    &quot;infrastructure_fail&quot; : false,
+    &quot;committer_email&quot; : null,
+    &quot;previous&quot; : null,
+    &quot;status&quot; : &quot;not_running&quot;,
+    &quot;committer_name&quot; : null,
+    &quot;retries&quot; : null,
+    &quot;subject&quot; : null,
+    &quot;vcs_type&quot; : &quot;github&quot;,
+    &quot;timedout&quot; : false,
+    &quot;dont_build&quot; : null,
+    &quot;lifecycle&quot; : &quot;not_running&quot;,
+    &quot;no_dependency_cache&quot; : false,
+    &quot;stop_time&quot; : null,
+    &quot;ssh_disabled&quot; : false,
+    &quot;build_time_millis&quot; : null,
+    &quot;circle_yml&quot; : null,
+    &quot;messages&quot; : [ ],
+    &quot;is_first_green_build&quot; : false,
+    &quot;job_name&quot; : null,
+    &quot;start_time&quot; : null,
+    &quot;canceler&quot; : null,
+    &quot;outcome&quot; : null,
+    &quot;vcs_url&quot; : &quot;https://github.com/circleci/mongofinil&quot;,
+    &quot;author_name&quot; : null,
+    &quot;node&quot; : null,
+    &quot;canceled&quot; : false,
+    &quot;author_email&quot; : null
+  }
+}
+</code></p>
+<h2 id='recent-builds-across-all-projects'>Recent Builds Across All Projects</h2>
+<p>Returns a build summary for each of the last 30 recent builds, ordered by <code>build_num</code>.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>The number of builds to return. Maximum 100, defaults to 30.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>The API returns builds starting from this offset, defaults to 0.</td>
+</tr>
+</tbody></table>
+<h3 id='method-4'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-4'>Example Call</h3>
+<p><code>curl https://circleci.com/api/v1.1/recent-builds?circle-token=:token&amp;limit=20&amp;offset=5
+</code></p>
+<h3 id='example-response-4'>Example Response</h3><pre class="highlight plaintext"><code>[ {
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
+  "build_num" : 22,
+  "branch" : "master",
+  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Don't explode when the system clock shifts backwards",
+  "body" : "", // commit message body
+  "why" : "github", // short string explaining the reason we built
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-02-12T21:33:30Z" // time build was queued
+  "start_time" : "2013-02-12T21:33:38Z", // time build started
+  "stop_time" : "2013-02-12T21:34:01Z", // time build finished
+  "build_time_millis" : 23505,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
+  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "retry_of" : null, // build_num of the build this is a retry of
+  "previous" : { // previous build
+    "status" : "failed",
+    "build_num" : 21
+  }, ... ]
+</code></pre><h2 id='recent-builds-for-a-single-project'>Recent Builds For A Single Project</h2>
+<p>Returns a build summary for each of the last 30 builds for a single git repo, ordered by build_num.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>The number of builds to return. Maximum 100, defaults to 30.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>The API returns builds starting from this offset, defaults to 0.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>Restricts which builds are returned. Set to &quot;completed&quot;, &quot;successful&quot;, &quot;failed&quot;, &quot;running&quot;, or defaults to no filter.</td>
+</tr>
+</tbody></table>
+<h3 id='method-5'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-5'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token&amp;limit=20&amp;offset=5&amp;filter=completed
+</code></pre><h3 id='example-response-5'>Example Response</h3><pre class="highlight plaintext"><code>[ {
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
+  "build_num" : 22,
+  "branch" : "master",
+  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Don't explode when the system clock shifts backwards",
+  "body" : "", // commit message body
+  "why" : "github", // short string explaining the reason we built
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-02-12T21:33:30Z" // time build was queued
+  "start_time" : "2013-02-12T21:33:38Z", // time build started running
+  "stop_time" : "2013-02-12T21:34:01Z", // time build finished running
+  "build_time_millis" : 23505,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
+  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "retry_of" : null, // build_num of the build this is a retry of
+  "previous" : { // previous build
+    "status" : "failed",
+    "build_num" : 21
+  }, ... ]
+</code></pre><h2 id='recent-builds-for-a-project-branch'>Recent Builds For a Project Branch</h2>
+<p>https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch</p>
+
+<p>You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.</p>
+<h2 id='single-job'>Single Job</h2>
+<aside class="notice">
+This is also the payload for the notification webhooks, in which case this object is the value to a key named ‘payload’
+</aside>
+
+<p>Returns the full details for a single job. The response includes all of the fields from the job summary.</p>
+<h3 id='method-6'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-6'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num?circle-token=:token
+</code></pre><h3 id='example-response-6'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
+  "build_num" : 22,
+  "branch" : "master",
+  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Don't explode when the system clock shifts backwards",
+  "body" : "", // commit message body
+  "why" : "github", // short string explaining the reason the build ran
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-02-12T21:33:30Z" // time build was queued
+  "start_time" : "2013-02-12T21:33:38Z", // time build started
+  "stop_time" : "2013-02-12T21:34:01Z", // time build finished
+  "build_time_millis" : 23505,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "outcome" : "success", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
+  "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  "retry_of" : null, // build_num of the build this is a retry of
+  "steps" : [ {
+    "name" : "configure the build",
+    "actions" : [ {
+      "bash_command" : null,
+      "run_time_millis" : 1646,
+      "start_time" : "2013-02-12T21:33:38Z",
+      "end_time" : "2013-02-12T21:33:39Z",
+      "name" : "configure the build",
+      "exit_code" : null,
+      "type" : "infrastructure",
+      "index" : 0,
+      "status" : "success",
+    } ] },
+
+    "name" : "lein2 deps",
+    "actions" : [ {
+      "bash_command" : "lein2 deps",
+      "run_time_millis" : 7555,
+      "start_time" : "2013-02-12T21:33:47Z",
+      "messages" : [ ],
+      "step" : 1,
+      "exit_code" : 0,
+      "end_time" : "2013-02-12T21:33:54Z",
+      "index" : 0,
+      "status" : "success",
+      "type" : "dependencies",
+      "source" : "inference",
+      "failed" : null
+    } ] },
+    "name" : "lein2 trampoline midje",
+    "actions" : [ {
+      "bash_command" : "lein2 trampoline midje",
+      "run_time_millis" : 2310,
+      "continue" : null,
+      "parallel" : true,
+      "start_time" : "2013-02-12T21:33:59Z",
+      "name" : "lein2 trampoline midje",
+      "messages" : [ ],
+      "step" : 6,
+      "exit_code" : 1,
+      "end_time" : "2013-02-12T21:34:01Z",
+      "index" : 0,
+      "status" : "failed",
+      "timedout" : null,
+      "infrastructure_fail" : null,
+      "type" : "test",
+      "source" : "inference",
+      "failed" : true
+    } ]
+  } ],
+  ...
+}
+</code></pre><h2 id='artifacts-of-a-build'>Artifacts Of A Build</h2>
+<p>Returns an array of artifacts produced by a given build.</p>
+<h3 id='method-7'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-7'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=:token
+</code></pre><h3 id='example-response-7'>Example Response</h3><pre class="highlight plaintext"><code>[ {
+  "path" : "raw-test-output/go-test-report.xml",
+  "pretty_path" : "raw-test-output/go-test-report.xml",
+  "node_index" : 0,
+  "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+}, {
+  "path" : "raw-test-output/go-test.out",
+  "pretty_path" : "raw-test-output/go-test.out",
+  "node_index" : 0,
+  "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+} ]
+</code></pre><h4 id='notes'>Notes</h4>
+<ul>
+<li>the value of path is relative to the project root (the working_directory)</li>
+<li>pretty_path returns the same value as path. It is included in the response for backwards compatibility</li>
+</ul>
+<h2 id='download-an-artifact-file'>Download an artifact file</h2>
+<p>https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token</p>
+
+<p>You can download an individual artifact file via the API by appending a query string to its URL. Note that <code>:token</code> is an API token with &#39;view-builds&#39; scope.</p>
+<h2 id='artifacts-of-the-latest-build'>Artifacts of the latest Build</h2>
+<p>Returns an array of artifacts produced by the latest build on a given branch.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>branch</td>
+<td>The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>Restricts which builds are returned. Set to &quot;completed&quot;, &quot;successful&quot;, &quot;failed&quot;, &quot;running&quot;, or defaults to no filter.</td>
+</tr>
+</tbody></table>
+<h3 id='method-8'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-8'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token&amp;branch=:branch&amp;filter=:filter
+</code></pre><h3 id='example-response-8'>Example Response</h3><pre class="highlight plaintext"><code>[ {
+  "path" : "raw-test-output/go-test-report.xml",
+  "pretty_path" : "raw-test-output/go-test-report.xml",
+  "node_index" : 0,
+  "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test-report.xml"
+}, {
+  "path" : "raw-test-output/go-test.out",
+  "pretty_path" : "raw-test-output/go-test.out",
+  "node_index" : 0,
+  "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
+} ]
+</code></pre><h4 id='notes-2'>Notes</h4>
+<ul>
+<li>the value of path is relative to the project root (the working_directory)</li>
+<li>pretty_path returns the same value as path. It is included in the response for backwards compatibility</li>
+</ul>
+<h2 id='retry-a-build'>Retry a Build</h2>
+<p>Retries the build and then returns a summary of the new build.</p>
+<h3 id='method-9'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-9'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry?circle-token=:token
+</code></pre><h3 id='example-response-9'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/23",
+  "build_num" : 23,
+  "branch" : "master",
+  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Don't explode when the system clock shifts backwards",
+  "body" : "", // commit message body
+  "why" : "retry", // short string explaining the reason we built
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-04-12T21:33:30Z" // time build was queued
+  "start_time" : "2013-04-12T21:33:38Z", // time build started running
+  "stop_time" : "2013-04-12T21:34:01Z", // time build finished running
+  "build_time_millis" : 23505,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "queued",
+  "outcome" : null,
+  "status" : "queued",
+  "retry_of" : 22, // build_num of the build this is a retry of
+  "previous" : { // previous build
+    "status" : "failed",
+    "build_num" : 22
+  }
+}
+</code></pre>
+<p>https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh</p>
+
+<p>You can retry a build with ssh by swapping “retry” with “ssh”.</p>
+<h2 id='add-user-to-build'>Add User to Build</h2>
+<p>This API call is only available when using a user API token. If the current user has permission to build the project, this API adds the current user&#39;s SSH public key to the authorized keys on each container running a build. This allows them to SSH to the build containers.</p>
+<h3 id='method-10'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-10'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users?circle-token=:token
+</code></pre><h3 id='example-response-10'>Example Response</h3><pre class="highlight plaintext"><code>{... the build data ... }
+</code></pre><h2 id='cancel-a-build'>Cancel a Build</h2>
+<p>Cancels the build and then returns a summary of the build.</p>
+<h3 id='method-11'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-11'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/cancel?circle-token=:token
+</code></pre><h3 id='example-response-11'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/26",
+  "build_num" : 26,
+  "branch" : "master",
+  "vcs_revision" : "59c9c5ea3e289f2f3b0c94e128267cc0ce2d65c6",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Merge pull request #6 from dlowe/master"
+  "body" : "le bump", // commit message body
+  "why" : "retry", // short string explaining the reason we built
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-05-24T19:37:59.095Z" // time build was queued
+  "start_time" : null, // time build started running
+  "stop_time" : null, // time build finished running
+  "build_time_millis" : null,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "queued",
+  "outcome" : "canceled",
+  "status" : "canceled",
+  "canceled" : true,
+  "retry_of" : 25, // build_num of the build this is a retry of
+  "previous" : { // previous build
+    "status" : "success",
+    "build_num" : 25
+  }
+}
+</code></pre><h2 id='trigger-a-new-job'>Trigger a new Job</h2>
+<p>Triggers a new build and then returns a summary of the build.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>revision</td>
+<td>The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>The tag to build. Default is null. Cannot be used with revision parameter.</td>
+</tr>
+<tr>
+<td>parallel</td>
+<td>The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.</td>
+</tr>
+<tr>
+<td>build_parameters</td>
+<td>Additional environment variables to inject into the build environment. A map of names to values.</td>
+</tr>
+</tbody></table>
+<h3 id='method-12'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-12'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{
+  "tag": "v0.1", // optional
+  "parallel": 2, //optional, default null
+  "build_parameters": { // optional
+    "RUN_EXTRA_TESTS": "true"
+  }
+}
+</code></pre>
+<p>https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token</p>
+<h3 id='example-response-12'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "author_name": "Allen Rohner",
+  "build_url": "https://circleci.com/gh/circleci/mongofinil/54",
+  "reponame": "mongofinil",
+  "failed": null,
+  "infrastructure_fail": false,
+  "canceled": false,
+  "all_commit_details": [{
+      "author_name": "Allen Rohner",
+      "commit": "f1baeb913288519dd9a942499cef2873f5b1c2bf",
+      "author_login": "arohner",
+      "committer_login": "arohner",
+      "committer_name": "Allen Rohner",
+      "body": "Minor version bump",
+      "author_date": "2014-04-17T08:41:40Z",
+      "committer_date": "2014-04-17T08:41:40Z",
+      "commit_url": "https://github.com/circleci/mongofinil/commit/f1baeb913288519dd9a942499cef2873f5b1c2bf",
+      "committer_email": "arohner@gmail.com",
+      "author_email": "arohner@gmail.com",
+      "subject": "Merge pull request #15 from circleci/minor-version-bump"
+    }],
+  "previous": {
+    "build_num": 53,
+    "status": "success",
+    "build_time_millis": 55413
+  },
+  "ssh_enabled": null,
+  "author_email": "arohner@gmail.com",
+  "why": "edit",
+  "build_time_millis": null,
+  "committer_email": "arohner@gmail.com",
+  "parallel": 2,
+  "retries": null,
+  "compare": null,
+  "dont_build": null,
+  "committer_name": "Allen Rohner",
+  "usage_queued_at": "2014-04-29T12:56:55.338Z",
+  "branch": "master",
+  "body": "Minor version bump",
+  "author_date": "2014-04-17T08:41:40Z",
+  "node": null,
+  "committer_date": "2014-04-17T08:41:40Z",
+  "start_time": null,
+  "stop_time": null,
+  "lifecycle": "not_running",
+  "user": {
+    "email": "arohner@gmail.com",
+    "name": "Allen Rohner",
+    "login": "arohner",
+    "is_user": true
+  },
+  "subject": "Merge pull request #15 from circleci/minor-version-bump",
+  "messages": [],
+  "job_name": null,
+  "retry_of": null,
+  "previous_successful_build": {
+    "build_num": 53,
+    "status": "success",
+    "build_time_millis": 55413
+  },
+  "outcome": null,
+  "status": "not_running",
+  "vcs_revision": "f1baeb913288519dd9a942499cef2873f5b1c2bf",
+  "vcs_tag": "v0.1",
+  "build_num": 54,
+  "username": "circleci",
+  "vcs_url": "https://github.com/circleci/mongofinil",
+  "timedout": false
+}
+</code></pre><h2 id='trigger-a-new-build-with-a-branch'>Trigger a new Build with a Branch</h2>
+<aside class="notice">
+For more about build parameters, read about using 1.0 parameterized builds [external link] (https://circleci.com/docs/2.0/parallelism-faster-jobs) and optional 2.0 build parameters [external link] (https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for “failed” should be a boolean true or null.
+</aside>
+
+<p>Triggers a new build and then returns a summary of the build.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>revision</td>
+<td>The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.</td>
+</tr>
+<tr>
+<td>parallel</td>
+<td>The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.</td>
+</tr>
+<tr>
+<td>build_parameters</td>
+<td>Additional environment variables to inject into the build environment. A map of names to values.</td>
+</tr>
+</tbody></table>
+<h3 id='method-13'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-13'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{
+  "parallel": 2, //optional, default null
+  "revision": "f1baeb913288519dd9a942499cef2873f5b1c2bf" // optional
+  "build_parameters": { // optional
+    "RUN_EXTRA_TESTS": "true"
+  }
+}
+</code></pre>
+<p>https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?circle-token=:token</p>
+<h3 id='example-response-13'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "author_name": "Allen Rohner",
+  "build_url": "https://circleci.com/gh/circleci/mongofinil/54",
+  "reponame": "mongofinil",
+  "failed": null,
+  "infrastructure_fail": false,
+  "canceled": false,
+  "all_commit_details": [
+    {
+      "author_name": "Allen Rohner",
+      "commit": "f1baeb913288519dd9a942499cef2873f5b1c2bf",
+      "author_login": "arohner",
+      "committer_login": "arohner",
+      "committer_name": "Allen Rohner",
+      "body": "Minor version bump",
+      "author_date": "2014-04-17T08:41:40Z",
+      "committer_date": "2014-04-17T08:41:40Z",
+      "commit_url": "https://github.com/circleci/mongofinil/commit/f1baeb913288519dd9a942499cef2873f5b1c2bf",
+      "committer_email": "arohner@gmail.com",
+      "author_email": "arohner@gmail.com",
+      "subject": "Merge pull request #15 from circleci/minor-version-bump"
+    }
+  ],
+  "previous": {
+    "build_num": 53,
+    "status": "success",
+    "build_time_millis": 55413
+  },
+  "ssh_enabled": null,
+  "author_email": "arohner@gmail.com",
+  "why": "edit",
+  "build_time_millis": null,
+  "committer_email": "arohner@gmail.com",
+  "parallel": 2,
+  "retries": null,
+  "compare": null,
+  "dont_build": null,
+  "committer_name": "Allen Rohner",
+  "usage_queued_at": "2014-04-29T12:56:55.338Z",
+  "branch": "master",
+  "body": "Minor version bump",
+  "author_date": "2014-04-17T08:41:40Z",
+  "node": null,
+  "committer_date": "2014-04-17T08:41:40Z",
+  "start_time": null,
+  "stop_time": null,
+  "lifecycle": "not_running", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+  "user": {
+    "email": "arohner@gmail.com",
+    "name": "Allen Rohner",
+    "login": "arohner",
+    "is_user": true
+  },
+  "subject": "Merge pull request #15 from circleci/minor-version-bump",
+  "messages": [],
+  "job_name": null,
+  "retry_of": null,
+  "previous_successful_build": {
+    "build_num": 53,
+    "status": "success",
+    "build_time_millis": 55413
+  },
+  "outcome": null,
+  "status": "not_running",
+  "vcs_revision": "f1baeb913288519dd9a942499cef2873f5b1c2bf",
+  "build_num": 54,
+  "username": "circleci",
+  "vcs_url": "https://github.com/circleci/mongofinil",
+  "timedout": false
+}
+</code></pre><h2 id='trigger-a-new-build-by-project-preview'>Trigger a new Build by Project (preview)</h2>
+<p>Prerequisite: You must go to your Project Settings in the CircleCI app to Enable Build Processing (preview) <a href="https://circleci.com/docs/2.0/build-processing/">external link</a>. This endpoint does not yet support the build_parameters options that the job-triggering endpoint supports.</p>
+
+<p>Triggers a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.</p>
+
+<table><thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>revision</td>
+<td>The specific revision to build. If not specified, the HEAD of the branch is used. Cannot be used with tag parameter</td>
+</tr>
+<tr>
+<td>branch</td>
+<td>The branch to build. Cannot be used with tag parameter.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>The git tag to build. Cannot be used with branch and revision parameters.</td>
+</tr>
+</tbody></table>
+<h3 id='method-14'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-14'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build?circle-token=:token
+</code></pre><h3 id='example-response-14'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "status": 200,
+  "body": "Build created"
+  }
+</code></pre><h2 id='clear-cache'>Clear Cache</h2>
+<p>Clears the cache for a project.</p>
+<h3 id='method-15'>Method</h3>
+<p>DELETE</p>
+<h3 id='example-call-15'>Example Call</h3><pre class="highlight plaintext"><code>curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build-cache?circle-token=:token
+</code></pre><h3 id='example-response-15'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "status" : "build caches deleted"
+}
+</code></pre><h2 id='list-environment-variables'>List Environment Variables</h2>
+<p>Returns four &#39;x&#39; characters plus the last four ASCII characters of the value, consistent with the display of environment variable values in the CircleCI website.</p>
+<h3 id='method-16'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-16'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?circle-token=:token
+</code></pre><h3 id='example-response-16'>Example Response</h3><pre class="highlight plaintext"><code>[{"name":"foo","value":"xxxx1234"}]
+</code></pre><h2 id='add-environment-variables'>Add Environment Variables</h2>
+<p>Creates a new environment variable.</p>
+<h3 id='method-17'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-17'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?circle-token=:token
+</code></pre><h3 id='example-response-17'>Example Response</h3><pre class="highlight plaintext"><code>{"name":"foo","value":"xxxx"}
+</code></pre><h2 id='get-single-environment-variable'>Get Single Environment Variable</h2>
+<p>Returns the hidden value of environment variable <code>:name</code>.</p>
+<h3 id='method-18'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-18'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name?circle-token=:token
+</code></pre><h3 id='example-response-18'>Example Response</h3><pre class="highlight plaintext"><code>{"name":"foo","value":"xxxx"}
+</code></pre><h2 id='delete-environment-variables'>Delete Environment Variables</h2>
+<p>Deletes the environment variable named :name.</p>
+<h3 id='method-19'>Method</h3>
+<p>DELETE</p>
+<h3 id='example-call-19'>Example Call</h3><pre class="highlight plaintext"><code>curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name?circle-token=:token
+</code></pre><h3 id='example-response-19'>Example Response</h3><pre class="highlight plaintext"><code>{"message":"ok"}
+</code></pre><h2 id='list-checkout-keys'>List Checkout Keys</h2>
+<p>Returns an array of checkout keys for <code>:project.</code></p>
+<h3 id='method-20'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-20'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?circle-token=:token
+</code></pre><h3 id='example-response-20'>Example Response</h3><pre class="highlight plaintext"><code>[{"public_key": "ssh-rsa...",
+  "type": "deploy-key", // can be "deploy-key" or "github-user-key"
+  "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+  "preferred": true,
+  "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
+  }]
+</code></pre><h2 id='new-checkout-key'>New Checkout Key</h2>
+<p>Creates a new checkout key. This API request is only usable with a user API token.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>The type of key to create. Can be &#39;deploy-key&#39; or &#39;github-user-key&#39;.</td>
+</tr>
+</tbody></table>
+<h3 id='method-21'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-21'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"type":"github-user-key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?circle-token=:token
+</code></pre><h3 id='example-response-21'>Example Response</h3><pre class="highlight plaintext"><code>{"public_key": "ssh-rsa...",
+  "type": "deploy-key", // can be "deploy-key" or "user-key"
+  "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+  "preferred": true,
+  "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
+  }
+</code></pre><h2 id='get-checkout-key'>Get Checkout Key</h2>
+<p>Returns an individual checkout key.</p>
+<h3 id='method-22'>Method</h3>
+<p>GET</p>
+<h3 id='example-call-22'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint?circle-token=:token
+</code></pre><h3 id='example-response-22'>Example Response</h3><pre class="highlight plaintext"><code>{"public_key": "ssh-rsa...",
+  "type": "deploy-key", // can be "deploy-key" or "user-key"
+  "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+  "preferred": true,
+  "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
+  }
+</code></pre><h2 id='delete-checkout-key'>Delete Checkout Key</h2>
+<p>Deletes the checkout key.</p>
+<h3 id='method-23'>Method</h3>
+<p>DELETE</p>
+<h3 id='example-call-23'>Example Call</h3><pre class="highlight plaintext"><code>curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint?circle-token=:token
+</code></pre><h3 id='example-response-23'>Example Response</h3><pre class="highlight plaintext"><code>{"message":"ok"}
+</code></pre><h2 id='test-metadata'>Test Metadata</h2>
+<p>Provides test metadata for a build.</p>
+<h3 id='example-call-24'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/tests?circle-token=:token
+</code></pre><h3 id='example-response-24'>Example Response</h3><pre class="highlight plaintext"><code>{
+  "tests" : [ {
+    "message" : "",
+    "file" : "features/desktop/invitations.feature",
+    "source" : "cucumber",
+    "run_time" : 2.957513661,
+    "result" : "success",
+    "name" : "Accepting an invitation",
+    "classname" : "Invitations"
+  }, {
+    "message" : null,
+    "file" : "spec/lib/webfinger_spec.rb",
+    "source" : "rspec",
+    "run_time" : 0.011366,
+    "result" : "success",
+    "name" : "Webfinger#intialize sets account ",
+    "classname" : "spec.lib.webfinger_spec"
+  } ]
+}
+</code></pre>
+<aside class="notice">
+Learn how to set up your 1.0 builds to collect test metadata [external link] (https://circleci.com/docs/2.0/collect-test-data/) and set up your 2.0 builds to collect test metadata. [external link] (https://circleci.com/docs/2.0/collect-test-data/)
+</aside>
+<h2 id='ssh-keys'>SSH Keys</h2>
+<p>Creates an SSH key that will be used to access the external system identified by the hostname parameter for SSH key-based authentication.</p>
+<h3 id='method-24'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-25'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
+</code></pre><h3 id='example-response-25'>Example Response</h3>
+<p>no response expected</p>
+<h2 id='heroku-keys'>Heroku Keys</h2>
+<p>Adds your Heroku API key to CircleCI and then takes <code>apikey</code> as form param name.</p>
+<h3 id='method-25'>Method</h3>
+<p>POST</p>
+<h3 id='example-call-26'>Example Call</h3><pre class="highlight plaintext"><code>curl -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key?circle-token=:token
+</code></pre><h3 id='example-response-26'>Example Response</h3>
+<p>no response expected</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

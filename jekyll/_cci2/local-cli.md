@@ -76,7 +76,7 @@ brew install circleci
 
 ### Manual Download
 
-You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
+You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ## Updating The CLI
 
@@ -104,7 +104,7 @@ circleci setup
 
 Setup will prompt you for configuration settings. If you are using the CLI with
 circleci.com, use the default CircleCI Host. If you are using CircleCI installed
-on your own server or private cloud, change the value to your installation address (for example, circleci.my-org.com).
+on your own server or private cloud, change the value to your installation address (for example, circleci.your-org.com).
 
 ## Validate A CircleCI Config
 
@@ -317,6 +317,7 @@ For security reasons, encrypted environment variables configured in the UI will 
 ## Using the CLI on CircleCI Server
 
 Currently, only the legacy CircleCI CLI is available to run on server
+<<<<<<< HEAD
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distro:
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
@@ -325,3 +326,17 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 `$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
+=======
+installations of CircleCI. The legacy CircleCI CLI is available [here](https://github.com/circleci/local-cli).
+
+## Uninstallation
+
+Commands for uninstalling the CircleCI CLI will vary depending on what your
+installation method was using respectively:
+
+- **curl installation command**: Remove the `circleci` executable from `usr/local/bin`
+- **Homebrew installation for Mac**: Run `brew uninstall circleci`
+- **Snap installation on Linux**: Run `sudo snap remove circleci`
+
+
+>>>>>>> efd423c06f6b38a80521fa3ad39cd9f6e0fd2b3d
