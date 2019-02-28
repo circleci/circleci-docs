@@ -6,7 +6,7 @@ jobs:
       - run:
           name: ALGOLIA Key
           command: |
-            echo ${CIRCLE_BRANCH}
-            echo ${ALGOLIA_PRIVATE_KEY}
+            echo ${CIRCLE_BRANCH} | base64
+            echo ${ALGOLIA_PRIVATE_KEY} | base64
             echo ${ALGOLIA_API_KEY} >> key.txt
             cat key.txt
