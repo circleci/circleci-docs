@@ -124,6 +124,11 @@ jobs:
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
+          name: Key
+          command: |
+            echo $ALGOLIA_PRIVATE_KEY
+            echo $ALGOLIA_API_KEY
+      - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run:
