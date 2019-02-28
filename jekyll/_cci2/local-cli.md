@@ -317,7 +317,6 @@ For security reasons, encrypted environment variables configured in the UI will 
 ## Using the CLI on CircleCI Server
 
 Currently, only the legacy CircleCI CLI is available to run on server
-<<<<<<< HEAD
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distro:
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
@@ -326,8 +325,6 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 `$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
-=======
-installations of CircleCI. The legacy CircleCI CLI is available [here](https://github.com/circleci/local-cli).
 
 ## Uninstallation
 
@@ -338,5 +335,3 @@ installation method was using respectively:
 - **Homebrew installation for Mac**: Run `brew uninstall circleci`
 - **Snap installation on Linux**: Run `sudo snap remove circleci`
 
-
->>>>>>> efd423c06f6b38a80521fa3ad39cd9f6e0fd2b3d
