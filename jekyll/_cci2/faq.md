@@ -289,12 +289,6 @@ You can choose to pay for premium features per active user, compute, and optiona
 On the Performance plan, when you reach 5% of your remaining credits, you will
 be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
 
-#### What happens to my credits if I upgrade to a new plan?
-{:.no_toc}
-
-If you upgrade within Seed, the rates are exactly the same.
-If you upgrade to Performance, credits rollover from your Seed plan.
-
 #### Do credits expire?
 {:.no_toc}
 **Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
@@ -316,7 +310,6 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 - On the monthly renewal date if your team is on the monthly plan.
 - On the annual renewal date if your team is on the annual plan.
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
-- Anytime your team’s balance exceeds $500 from adding new users.
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
 ## Architecture
