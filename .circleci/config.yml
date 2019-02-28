@@ -1,17 +1,24 @@
 version: 2
 
 references:
-  js_deps_cache_key: &js_deps_cache_key
-    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
-  js_deps_backup_cache_key: &js_deps_backup_cache_key
-    v8-dependency-js-deps
-  workspace_root: &workspace_root
-    /tmp/workspace
+  js_deps_cache_key: &js_deps_cache_key v8-dependency-js-deps-{{ checksum "package-lock.json" }}
+  js_deps_backup_cache_key: &js_deps_backup_cache_key v8-dependency-js-deps
+  workspace_root: &workspace_root /tmp/workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
 
 jobs:
+  testing:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - run:
+          name: ALGOLIA Key
+          command: |
+            echo $ALGOLIA_PRIVATE_KEY
+            echo $ALGOLIA_API_KEY
+
   js_build:
     docker:
       - image: node:8.11.1
@@ -124,11 +131,6 @@ jobs:
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
-          name: Key
-          command: |
-            echo $ALGOLIA_PRIVATE_KEY
-            echo $ALGOLIA_API_KEY
-      - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run:
@@ -145,12 +147,13 @@ jobs:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
-  
+
 workflows:
   version: 2
   build-deploy:
     jobs:
       - js_build
+      - testing
       - build:
           requires:
             - js_build
