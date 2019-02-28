@@ -624,7 +624,7 @@ The environment variable name (``env_var_name``) parameter is a string that must
 ```yaml
 version: 2.1
 
-obs:
+jobs:
   build:
     docker:
     - image: ubuntu:latest
