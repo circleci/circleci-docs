@@ -20,7 +20,7 @@ things you can do with the CircleCI CLI include:
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed. Read more below: TODO:
+legacy CLI does work in Server and can be installed. Read more below: 
 
 * TOC
 {:toc}
@@ -317,7 +317,7 @@ For security reasons, encrypted environment variables configured in the UI will 
 ## Using the CLI on CircleCI Server
 
 Currently, only the legacy CircleCI CLI is available to run on server
-installations of CircleCI. To install the legacy CLI on macOS and other Linux Distro:
+installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
 
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
 2. To install the CLI, run the following command:
