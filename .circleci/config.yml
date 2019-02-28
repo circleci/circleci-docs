@@ -57,6 +57,11 @@ jobs:
       - checkout
       - *attach_workspace
       - run:
+          name: ALGOLIA Key
+          command: |
+            echo ${ALGOLIA_PRIVATE_KEY}
+            echo ${ALGOLIA_API_KEY}
+      - run:
           name: "Test Markdown Files"
           command: |
             wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
