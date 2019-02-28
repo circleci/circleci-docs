@@ -22,8 +22,8 @@ jobs:
       - run:
           name: ALGOLIA Key
           command: |
-            echo $ALGOLIA_PRIVATE_KEY
-            echo $ALGOLIA_API_KEY
+            echo ${ALGOLIA_PRIVATE_KEY}
+            echo ${ALGOLIA_API_KEY}
       - run:
           name: npm dependencies
           command: npm install
