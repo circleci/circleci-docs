@@ -47,7 +47,27 @@ to pin an image to a fixed version.
 
 **NOTE:** For docker images that have `-node` (Node.js) included in the container, the latest LTS
 version of Node is used. If you would like to include your own specific version of
-Node.js / NPM you can do so as a `run` step in your `.circleci/config.yml`.
+Node.js / NPM you can set it up in a series of `run` steps in your `.circleci/config.yml`.
+Consider the example below, which installs a specific version of Node.js
+alongside the Ruby image.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+    steps:
+      - checkout
+      - run:
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
+```
 
 ### Using an Image Tag to Pin an Image Version or OS
 {:.no_toc}
