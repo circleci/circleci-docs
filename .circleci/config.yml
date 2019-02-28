@@ -9,16 +9,6 @@ references:
       at: *workspace_root
 
 jobs:
-  testing:
-    docker:
-      - image: buildpack-deps:trusty
-    steps:
-      - run:
-          name: ALGOLIA Key
-          command: |
-            echo $ALGOLIA_PRIVATE_KEY
-            echo $ALGOLIA_API_KEY
-
   js_build:
     docker:
       - image: node:8.11.1
@@ -29,6 +19,11 @@ jobs:
           keys:
             - *js_deps_cache_key
             - *js_deps_backup_cache_key
+      - run:
+          name: ALGOLIA Key
+          command: |
+            echo $ALGOLIA_PRIVATE_KEY
+            echo $ALGOLIA_API_KEY
       - run:
           name: npm dependencies
           command: npm install
@@ -153,7 +148,6 @@ workflows:
   build-deploy:
     jobs:
       - js_build
-      - testing
       - build:
           requires:
             - js_build
