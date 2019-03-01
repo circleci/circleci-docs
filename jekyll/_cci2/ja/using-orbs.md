@@ -106,17 +106,17 @@ jobs: my-job: executor: name: my-executor steps: - run: echo outside the executo
 
 Orbs を使い始める前に、まずは Orbs の軸となる基本コンセプトと、Orbs がどのように作られ、動作しているのかについて学んでおきましょう。 理解を深めることで、自身のプロジェクトでより簡単に Orbs を使えるようになり、活用も広がります。
 
-### Development vs. Production Orbs
+### 開発版と リリース版の違い
 
 {:.no_toc}
 
-Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production Orbs are immutable and durable.
+開発版の Orbs は下記のような名前でパブリッシュされます。 ```myorbnamespace/myorb@dev:foo``` これに対してリリース版はセマンティック・バージョニングされた `mynamespace/myorb@0.1.3` のような名前になります。 開発版の Orbs は内容が変更されることがあり、作成から 90 日後に期限切れとなります。 リリース版の Orbs は変更されることはなく、公開され続けることになります。
 
-### Certified vs. 3rd-Party Orbs
+### 認証済みと サードパーティ製の違い
 
 {:.no_toc}
 
-CircleCI has available a number of individual orbs that have been tested and certified to work with the platform. These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. **Note:** The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
+CircleCI では該当プラットフォームにおける動作テスト・認証が済んだ Orbs を多数用意しています。 These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. **Note:** The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
 
 <aside class="notice">
 All orbs are open, meaning that anyone can use them and see their source. 
