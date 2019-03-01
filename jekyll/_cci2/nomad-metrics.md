@@ -161,8 +161,6 @@ echo "--------------------------------------"
 docker pull $CONTAINER_IMAGE
 docker rm -f $CONTAINER_NAME || true
 
-# Not using --detach so that upstart can perform log management and process
-# monitoring
 docker run -d --name $CONTAINER_NAME \
     --rm \
     --net=host \

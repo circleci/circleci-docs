@@ -77,6 +77,8 @@ en:
           link: 2.0/orbs-faq/
         - name: Creating Orbs
           link: 2.0/creating-orbs/
+        - name: Testing Orbs
+          link: 2.0/testing-orbs/
     - name: Examples
       link: 2.0/examples-intro/
       children:
@@ -167,6 +169,8 @@ en:
           link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
+        - name: Generating Code Coverage Metrics
+          link: 2.0/code-coverage/
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers

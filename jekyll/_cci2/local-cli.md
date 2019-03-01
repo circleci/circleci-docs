@@ -74,7 +74,7 @@ brew install circleci
 
 ### Manual Download
 
-You can visit the [Github releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
+You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ## Updating The CLI
 
@@ -102,7 +102,7 @@ circleci setup
 
 Setup will prompt you for configuration settings. If you are using the CLI with
 circleci.com, use the default CircleCI Host. If you are using CircleCI installed
-on your own server or private cloud, change the value to your installation address (for example, circleci.my-org.com).
+on your own server or private cloud, change the value to your installation address (for example, circleci.your-org.com).
 
 ## Validate A CircleCI Config
 
@@ -126,44 +126,39 @@ Where the above command will look for an orb called `my_orb.yml` in the `/tmp` f
 
 ## Packing A Config
 
-The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+The CLI provides a `pack` command, allowing you to create a single YAML file from several separate files. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
 ```sh
 $ tree
 .
-├── config.yml
-└── foo
-    ├── bar
-    │   └── @baz.yml
-    ├── foo.yml
-    └── subtree
-        └── types.yml
+└── your-orb-source
+    ├── @orb.yml
+    ├── commands
+    │   └── foo.yml
+    └── jobs
+        └── bar.yml
 
-3 directories, 4 files
+3 directories, 3 files
 ```
 
 The unix `tree` command is great for printing out folder structures. In the
 example tree structure above, the `pack` command will  map the folder names and
-file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+file names to **YAML keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
 
 
 {% raw %}
 ```sh
-$ circleci config pack foo
+$ circleci config pack your-orb-source
 ```
 
 ```yaml
-bar:
-  baz: qux
-foo: bar
-subtree:
-  types:
-    ginkgo:
-      seasonality: deciduous
-    oak:
-      seasonality: deciduous
-    pine:
-      seasonality: evergreen
+# contents of @orb.yml appear here
+commands:
+  foo:
+    # contents of foo.yml appear here
+jobs:
+  bar:
+    # contents of bar.yml appear here
 ```
 {% endraw %}
 
@@ -192,7 +187,7 @@ bar:
 ### An Example Packed Config.yml
 {:.no_toc}
 
-See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories) to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
 ## Processing A Config
 
@@ -316,3 +311,15 @@ Further, not all commands may work on your local machine as they do online. For 
 **Environment Variables**
 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
+
+
+## Uninstallation
+
+Commands for uninstalling the CircleCI CLI will vary depending on what your
+installation method was using respectively:
+
+- **curl installation command**: Remove the `circleci` executable from `usr/local/bin`
+- **Homebrew installation for Mac**: Run `brew uninstall circleci`
+- **Snap installation on Linux**: Run `sudo snap remove circleci`
+
+

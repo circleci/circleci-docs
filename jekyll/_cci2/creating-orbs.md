@@ -137,7 +137,9 @@ Inline orbs can be handy during development of an orb or as a convenience for na
 
 To write inline orbs, place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
-```
+{% raw %}
+```yaml
+version: 2.1
 description: # The purpose of this orb
 
 orbs:
@@ -160,12 +162,12 @@ orbs:
           - codecov/upload:
               path: ~/tmp/results.xml
 
-version: 2.1
 workflows:
   main:
     jobs:
       - my-orb/myjob
 ```
+{% endraw %}
 
 In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
 
@@ -173,9 +175,9 @@ In the example above, note that the contents of ```my-orb``` are resolved as an 
 
 When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
 
-```
+{% raw %}
+```yaml
 version: 2.1
-
 description: This is an inline job
 
 orbs:
@@ -216,6 +218,7 @@ workflows:
           name: mybuild2
           greeting_name: world
 ```
+{% endraw %}
 
 ## Providing Usage Examples of Orbs
 _The `examples` stanza is available in configuration version 2.1 and later_
@@ -236,6 +239,7 @@ The top level `examples` key is optional. Example usage maps nested below it can
 ### Simple Examples
 Below is an example orb you can use:
 
+{% raw %}
 ```yaml
 version: 2.1
 description: A foo orb
@@ -250,10 +254,14 @@ commands:
     steps:
       - run: "echo Hello << parameters.username >>"
 ```
+{% endraw %}
 
 If you would like, you may also supply an additional `examples` stanza in the orb like the example shown below:
 
+{% raw %}
 ```yaml
+version: 2.1
+
 examples:
   simple_greeting:
     description: Greeting a user named Anna
@@ -268,6 +276,7 @@ examples:
             - foo/hello:
                 username: "Anna"
 ```
+{% endraw %}
 
 Please note that `examples` can contain multiple keys at the same level as `simple_greeting`, allowing for multiple examples.
 
@@ -275,7 +284,10 @@ Please note that `examples` can contain multiple keys at the same level as `simp
 
 The above usage example can be optionally supplemented with a `result` key, demonstrating what the configuration will look like after expanding the orb with its parameters:
 
+{% raw %}
 ```yaml
+version: 2.1
+
 examples:
   simple_greeting:
     description: Greeting a user named Anna
@@ -303,6 +315,7 @@ examples:
           jobs:
           - build
 ```
+{% endraw %}
 
 ## Publishing an Orb
 
@@ -352,6 +365,8 @@ In development orbs, the string label given by the user has the following restri
 Examples of valid development orb tags:
 
 * Valid:
+
+{% raw %}
 ```
   "dev:mybranch"
   "dev:2018_09_01"
@@ -359,13 +374,16 @@ Examples of valid development orb tags:
   "dev:myinitials/mybranch"
   "dev:myVERYIMPORTANTbranch"
 ```
+{% endraw %}
 
 * Invalid
 
+{% raw %}
 ```
   "dev: 1" (No spaces allowed)
   "1.2.3-rc1" (No leading "dev:")
 ```
+{% endraw %}
 
 In production orbs, use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
@@ -388,7 +406,9 @@ If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` wil
 **Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
 
 {% raw %}
-```
+```yaml
+version: 2.1
+
 orbs:
   some-orb: some-ns/some-orb@volatile
 executors:
@@ -400,7 +420,7 @@ jobs:
   another-job:
     executor: my-executor
     steps:
-      - my-command
+      - my-command:
           param1: "hello"
 ```
 {% endraw %}
@@ -499,7 +519,7 @@ circleci update install
 
 Now that you have installed the CircleCI CLI, you will want to configure the CLI for use. The process for configuring the CLI is simple and straightforward, requiring you only to follow a few steps.
 
-Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/accounts/api):
+Before you can configure the CLI, you may need to first generate a CircleCI API token from the [Personal API Token tab](https://circleci.com/account/api):
 
 ```
 $ circleci setup
@@ -507,9 +527,142 @@ $ circleci setup
 
 If you are using the CLI tool on `circleci.com`, accept the provided default `CircleCI Host`.
 
-If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.my-org.com.
+If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.your-org.com.
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circlecli local execute` (this was previously `circleci build`).
+
+### Packing A Config
+
+The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+
+```sh
+$ tree
+.
+├── config.yml
+└── foo
+    ├── bar
+    │   └── @baz.yml
+    ├── foo.yml
+    └── subtree
+        └── types.yml
+
+3 directories, 4 files
+```
+
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will  map the folder names and file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+
+{% raw %}
+```sh
+$ circleci config pack foo
+```
+
+```yaml
+bar:
+  baz: qux
+foo: bar
+subtree:
+  types:
+    ginkgo:
+      seasonality: deciduous
+    oak:
+      seasonality: deciduous
+    pine:
+      seasonality: evergreen
+```
+{% endraw %}
+
+#### Other Config Packing Capabilities
+{:.no_toc}
+
+A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
+
+Thus:
+
+{% raw %}
+```sh
+$ cat foo/bar/@baz.yml
+{baz: qux}
+```
+{% endraw %}
+
+Is mapped to:
+
+```yaml
+bar: 
+  baz: qux
+```
+
+#### An Example Packed Config.yml
+{:.no_toc}
+
+See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+
+### Processing A Config
+
+Running `circleci config process` validates your config, but will also display expanded source configuration alongside your original config (useful if you are using orbs).
+
+Consider the example configuration that uses the `hello-build` orb:
+
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@0.0.5
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+{% endraw %}
+
+Running `circleci config process .circleci/config.yml` will output the following (which is a mix of the expanded source and the original config commented out).
+
+{% raw %}
+```sh
+# Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
+version: 2
+jobs:
+  hello/hello-build:
+    docker:
+    - image: circleci/buildpack-deps:curl-browsers
+    steps:
+    - run:
+        command: echo "Hello ${CIRCLE_USERNAME}"
+    - run:
+        command: |-
+          echo "TRIGGERER: ${CIRCLE_USERNAME}"
+          echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
+          echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
+          echo "BRANCH: ${CIRCLE_BRANCH}"
+          echo "RUNNING JOB: ${CIRCLE_JOB}"
+          echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
+          echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
+        name: Show some of the CircleCI runtime env vars
+    - run:
+        command: |-
+          echo "uname:" $(uname -a)
+          echo "arch: " $(arch)
+        name: Show system information
+workflows:
+  Hello Workflow:
+    jobs:
+    - hello/hello-build
+  version: 2
+
+ Original config.yml file:
+ version: 2.1
+ 
+ orbs:
+     hello: circleci/hello-build@0.0.5
+ 
+ workflows:
+     \"Hello Workflow\":
+         jobs:
+           - hello/hello-build
+```
+{% endraw %}
 
 ### Validating a Build Config
 
@@ -586,7 +739,8 @@ This command is used to publish an orb. The following parameters may be passed w
 
 Below is an example of how to use the `orb-tools` orb to validate and publish an orb.
 
-```
+{% raw %}
+```yaml
 version: 2.1
 
 orbs:
@@ -601,5 +755,14 @@ workflows:
           publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
           validate: true
 ```
+{% endraw %}
 
 In this example, the `btd` workflow runs the `orb-tools/validate` job first. If the orb is indeed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published.
+
+## See Also
+- Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
+- Refer to [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+- Refer to [Local CLI] ({{site.baseurl}}/2.0/local-cli) for more information about how you can use the CircleCI CLI in your orbs deployments.

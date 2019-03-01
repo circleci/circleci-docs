@@ -28,6 +28,7 @@ Build processing errors will appear on the Jobs page or the Workflows page. When
 ## Limitations
 CircleCI is committed to achieving backwards compatibility in almost all cases, and most projects that enable build processing will have no effect on existing builds. Let us know if you experience breaking builds that worked before you turned on build processing but broke after you turned it on.
 
+- Anchors will be processed and resolved instead of appearing in the app config.
 - If you use `<<` in your shell commands (most commonly found in use of heredocs) you will need to escape them using backslash `\` as in `\<<` in order to use version 2.1 or higher of configuration.
 - Build processing is **not** fully backwards-compatible with the 1.1 API endpoint to trigger arbitrary jobs - you may experience unexpected or inconsistent results if you use this endpoint after turning on Build Processing. Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/v1-reference/#new-project-build) introduced in September 2018. Please keep in mind that this build triggering API endpoint does **not** accept parameters or workflow or job filters. If you make heavy use of those API features and want to use Build Processing please contact your CircleCI account team.
 

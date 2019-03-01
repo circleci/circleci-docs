@@ -97,16 +97,16 @@ CircleCI has developed a Sauce labs browser testing orb that enables you to open
 ```
 version: 2.1
 orbs:
-  saucelabs: saucelabs/connect@volatile
+  sauce-connect: saucelabs/sauce-connect@1.0.1
 workflows:
   browser_tests:
     jobs:
-      - saucelabs/with_proxy:
+      - sauce-connect/with_proxy:
           name: Chrome Tests
           steps:
             - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
           tunnel_identifier: chrome
-      - saucelabs/with_proxy:
+      - sauce-connect/with_proxy:
           name: Safari Tests
           steps:
             - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
