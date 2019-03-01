@@ -7,13 +7,13 @@ categories:
   - getting-started
 order: 1
 ---
-ここでは [Orb]({{ site.baseurl }}/2.0/orb-intro/) の基礎的なインポートの仕方とそれに関連する要素について、下記の流れで解説しています。
+ここでは [Orb]({{ site.baseurl }}/2.0/orb-intro/) の基礎的なインポートの例とそれに関連する要素について、下記の流れで解説しています。
 
 - 目次 {:toc}
 
 ## はじめに
 
-Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs は設定をプロジェクト間で共有したり、設定の標準化を行ったり、設定方法を簡便にしたりするのに役立ちます。 最適な設定方法のサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
+Orbs は CircleCI を手早く使い始めるのに有用なコンフィグパッケージです。 Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。 最適なコンフィグのサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
 
 `orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build`](https://circleci.com/orbs/registry/orb/circleci/hello-build) という Orb を呼び出している例です。
 
@@ -137,6 +137,6 @@ Orbs を使うにあたり、Orbs の開発時に用いられた設計方針や�
 
 {:.no_toc}
 
-- Orbs の具体的な使用方法については「[Orbs とは]({{site.baseurl}}/2.0/orb-intro/)」のページをご覧ください。
-- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
-- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Orbs の具体的な使用方法については「[Orbs とは]({{site.baseurl}}/2.0/orb-intro/)」をご覧ください。
+- 「[Orbs を作成する]({{site.baseurl}}/2.0/creating-orbs/)」では Orb の作成手順について詳しく解説しています。
+- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
