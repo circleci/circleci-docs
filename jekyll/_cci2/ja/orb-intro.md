@@ -29,7 +29,6 @@ orbs:
 
 既存の Orbs のなかに目的に合うものが見つからないときは、下記の `circleci orb help` コマンドの結果で示されている通り、[CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-cli/) 上で自身の環境や設定要件を満たす独自の Orb を作成できます。 既存の Orb をインポートするのに比べて時間はかかってしまいますが、新たに作成したものは世界中のユーザーに使ってもらえる Orb として公開できます。 See [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) for more information.
 
-    nohighlight
     $ circleci orb help
     Operate on orbs
     
