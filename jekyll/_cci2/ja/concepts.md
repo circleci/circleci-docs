@@ -58,7 +58,7 @@ build3: macos: # Specifies a macOS virtual machine with Xcode version 9.0 xcode:
 ...  
 ```
 
-## Jobs
+## ジョブ
 
 Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
 
