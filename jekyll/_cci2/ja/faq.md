@@ -202,33 +202,93 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 ## 料金・支払
 
-### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
+### Container Based Plans
+
+#### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Add Containers] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
 - macOS プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
 
-### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
+#### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
 可能です。CircleCI で [Settings] → [Share & Transfer] → [Share Plan] ページと進み、プランを共有したい Org を選択してください。
 
-### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
+#### Can I set up billing for an organization, without binding it to my personal account?
 {:.no_toc}
 可能です。請求は Org にひもづけられます。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
 
-### 課金におけるコンテナの定義は？
+#### What is the definition of a container in the context of billing?
 {:.no_toc}
 料金を支払って利用できるコンテナ 1 個は、2 つの CPU と 4GB のメモリを搭載するマシンです。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
 
+* * *
+
+### Credit Usage Plans
+
+#### How do the new pricing plans affect me as a customer?
+{:.no_toc}
+For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
+
+#### What are credits?
+{:.no_toc}
+Credits are used to pay for your usage based on machine type and size. Credits can also be used to pay for features, such as Docker Layer Caching.
+
+For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+
+#### If a container is used for under one minute, do I have to pay for a full minute? 
+{:.no_toc}
+You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
+
+#### How do I buy credits? Can I buy in any increments?
+{:.no_toc}
+Every month, you are charged for your selected credit package at the beginning of the month.
+
+#### What do I pay for?
+{:.no_toc}
+You can choose to pay for premium features per active user, compute, and optionally, premium support.
+
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
+- Compute is paid for monthly in credits for the machine size and duration you use.
+- Docker Layer Caching (DLC) is paid for with credits per usage, similar to compute credits.
+
+#### What happens when I run out of credits?
+{:.no_toc}
+
+On the Performance plan, when you reach 5% of your remaining credits, you will be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+
+#### Do credits expire?
+{:.no_toc}
+**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+
+#### How do I pay?
+{:.no_toc}
+You can pay from inside the CircleCI app for monthly pricing.
+
+#### When do I pay?
+{:.no_toc}
+
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills *during* the month (such as the auto-refilling on reaching 5% of credits available) will be paid *at the time of the refill*.
+
+#### What are the other renewal dates?
+{:.no_toc}
+
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+
 ## 稼働環境
 
-### テスト時に IPv6 は利用できますか？
+### Can I use IPv6 in my tests?
 {:.no_toc}
-IPv6 によるローカル通信のテストでは [machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) が活用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
-machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
+Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。 下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
+You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
    ipv6_tests:
@@ -247,18 +307,18 @@ IPv6 環境のサービスをテストするために、コンテナに IPv6 ア
            sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
+Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
-### CircleCI 2.0 がサポートしている OS は？
+### What operating systems does CircleCI 2.0 support?
 {:.no_toc}
-- **Linux :** CircleCI はほとんどの Linux アプリケーションのビルドが可能な高い柔軟性をもっています。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
+- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android :** 詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS :** 「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows :** Windows アプリケーションのビルドとテストは現在サポートしていません。
+- **Windows:** We do not yet support building and testing Windows applications.
 
-### CircleCI がサポートしている CPU アーキテクチャは？
+### Which CPU architectures does CircleCI support?
 {:.no_toc}
-サポートしている CPU アーキテクチャは `amd64` のみとなります。
+`amd64` is the only supported CPU architecture.
