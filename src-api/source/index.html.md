@@ -28,7 +28,7 @@ Access to billing functions is only available from the CircleCI application.
 
 ### API Syntax
 
-When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown below:
+When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown in the pane to the right:
 "https://circleci.com/api/v1.1"
 
 Where:
@@ -61,8 +61,8 @@ To add an API token, perform the steps listed below.
  }
 ```
 
-1.  Add an API token from your [account dashboard](https://circleci.com/account/api){:rel="nofollow"}.
-2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me){:rel="nofollow"} or call the API using
+1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
+2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me) or call the API using
 3.  You should see a response similar to the example shown in the right pane.
 
 <aside class="notice">
@@ -87,10 +87,6 @@ Alternatively, you can use the API token as the username for HTTP Basic Authenti
 the colon ":" tells curl that there's no password.
 </aside>
 
-### Rate Limiting/Throttling
-
-Unlike many other APIs, CircleCI does not currently perform any rate limiting or throttling of API requests to the server, CircleCI may, at its discretion, manually limit the number of requests that can be made to the server if it is determined that the user may be acting inappropriately.
-
 ### Version Control Systems (:vcs-type)
 
 ```
@@ -101,14 +97,14 @@ New with v1.1 of the API, for endpoints under /project you will now need to tell
 
 ### F/OSS
 
-If you have a Free / Open Source Software (F/OSS) project [external link] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
+If you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
 ### List Ordering
 
 There are two API endpoints where the list order is significant:
 
-* Recent Builds Across All Projects [external link] (https://circleci.com/docs/api/v1-reference/#recent-builds)
-* Recent Builds For a Single Project [external link] (https://circleci.com/docs/api/v1-reference/#recent-builds-project)
+* Recent Builds Across All Projects 
+* Recent Builds For a Single Project 
 
 In both cases, builds are returned in the order that they were created. For all other endpoints, the order has no special significance.
 
@@ -133,7 +129,7 @@ CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the follo
 
 ## Summary of API Endpoints
 
-All CircleCI API endpoints begin with "https://circleci.com/api/v1.1/".
+All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 
 ### GET Requests
 
@@ -165,6 +161,7 @@ POST: /project/:vcs-type/:username/:project/checkout-key | Creates a new checkou
 ------- | -------------
 DELETE: /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
 DELETE: /project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
+DELETE: /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.
 
 ## User
 
@@ -233,7 +230,6 @@ https://circleci.com/api/v1.1/projects?circle-token=:token
         }, {
         "pushed_at" : "2013-02-11T03:09:54Z",
         "vcs_revision" : "0553ba86b35a97e22ead78b0d568f6a7c79b838d",
-
         "build_num" : 21,
         "outcome" : "failed",
         }, ... ],
@@ -557,14 +553,12 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 } ]
 ```
 
-#### Notes
+## Notes
 
 * the value of path is relative to the project root (the working_directory)
 * pretty_path returns the same value as path. It is included in the response for backwards compatibility
 
 ## Download an artifact file
-
-https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
 
 You can download an individual artifact file via the API by appending a query string to its URL. Note that `:token` is an API token with 'view-builds' scope.
 
@@ -830,7 +824,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=
 ## Trigger a new Build with a Branch
 
 <aside class="notice">
-For more about build parameters, read about using 1.0 parameterized builds [external link] (https://circleci.com/docs/2.0/parallelism-faster-jobs) and optional 2.0 build parameters [external link] (https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for “failed” should be a boolean true or null.
+For more about build parameters, see 2.0 build parameters [for environment variables](https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for “failed” should be a boolean true or null.
 </aside>
 
 Triggers a new build and then returns a summary of the build.
@@ -855,8 +849,9 @@ curl -X POST --header "Content-Type: application/json" -d '{
     "RUN_EXTRA_TESTS": "true"
   }
 }
-```
+
 https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?circle-token=:token
+```
 
 ### Example Response
 
@@ -935,7 +930,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?
 
 ## Trigger a new Build by Project (preview)
 
-Prerequisite: You must go to your Project Settings in the CircleCI app to Enable Build Processing (preview) [external link] (https://circleci.com/docs/2.0/build-processing/). This endpoint does not yet support the build_parameters options that the job-triggering endpoint supports.
+Prerequisite: You must go to your Project Settings in the CircleCI app to [Enable Build Processing](https://circleci.com/docs/2.0/build-processing/). This endpoint does not yet support the `build_parameters` options that the job-triggering endpoint supports.
 
 Triggers a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.
 
@@ -1199,7 +1194,7 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 ```
 
 <aside class="notice">
-Learn how to set up your 1.0 builds to collect test metadata [external link] (https://circleci.com/docs/2.0/collect-test-data/) and set up your 2.0 builds to collect test metadata. [external link] (https://circleci.com/docs/2.0/collect-test-data/)
+Learn how to set up your 2.0 builds to [Collect Test Metadata](https://circleci.com/docs/2.0/collect-test-data/).
 </aside>
 
 ## SSH Keys
