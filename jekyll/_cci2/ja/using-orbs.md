@@ -129,9 +129,9 @@ Orbs を使うにあたり、Orbs の開発時に用いられた設計方針や�
 - Orbs は透明性をもつ。Orb を実行できるということは、自分も他の誰かもそのソースを見ることができるということ。
 - 説明用のメタデータが使える。どのキーにおいても ```description``` キーを記述でき、Orb でもその一番上に `description` を記述しておける。
 - リリース版の Orbs は必ずセマンティック・バージョニングされる。開発版の Orbs については `dev:` から始まるバージョン命名規則が用いられる。
-- 製品版の Orbs は不変。Orb がセマンティック・バージョニングされた形でいったんパブリッシュされれば、その後は二度と内容が変わることはない。 This prevents unexpected breakage or changing behaviors in core orchestration.
-- One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
-- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+- 製品版の Orbs は不変。Orb がセマンティック・バージョニングされた形でいったんパブリッシュされれば、その後は二度と内容が変わることはない。 これは、オーケストレーションツールの核となる部分における意図しない破綻や挙動の変化を防ぐ。
+- レジストリは（1 インストールにつき）1 つ限り。circleci.com も含め、CircleCI のインストールごとに所有できる Orbs のレジストリは 1 つのみとなる。
+- 組織管理者が製品版の Orbs をパブリッシュできる。 管理者ではないメンバーがパブリッシュできるのは開発版の Orbs のみ。 Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
 ## 関連情報
 
