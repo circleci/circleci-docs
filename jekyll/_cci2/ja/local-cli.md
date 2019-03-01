@@ -16,7 +16,7 @@ The CircleCI CLI is a command line interface that leverages many of CircleCI's a
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
 
-This document will cover the installation and usage of the CLI tool.
+This document will cover the installation and usage of the CLI tool. **Note:** the new CLI is currently not available on server installations of CircleCI. The legacy CLI does work in Server and can be installed. Read more below:
 
 - 目次
 {:toc}
@@ -299,6 +299,17 @@ Further, not all commands may work on your local machine as they do online. For 
 **Environment Variables**
 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
+
+## Using the CLI on CircleCI Server
+
+Currently, only the legacy CircleCI CLI is available to run on server installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
+
+1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
+2. To install the CLI, run the following command:
+
+`$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
+
+The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
 ## Uninstallation
 
