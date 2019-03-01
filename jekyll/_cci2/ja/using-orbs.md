@@ -13,7 +13,7 @@ order: 1
 
 ## はじめに
 
-Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs enable you to share, standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs は設定をプロジェクト間で共有したり、設定の標準化を行ったり、設定方法を簡便にしたりするのに役立ちます。 最適な設定方法のサンプルとして Orbs を活用することもできます。 Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
 To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
 
