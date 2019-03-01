@@ -116,13 +116,13 @@ Orbs を使い始める前に、まずは Orbs の軸となる基本コンセプ
 
 {:.no_toc}
 
-CircleCI では該当プラットフォームにおける動作テスト・認証が済んだ Orbs を多数用意しています。 These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. **Note:** The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
+CircleCI では該当プラットフォームにおける動作テスト・認証が済んだ Orbs を多数用意しています。 こうした Orbs についてはプラットフォームの一部として扱われることになりますが、それ以外はすべてサードパーティ製の Orbs とみなされます。 **※**サードパーティ製の Orbs を利用するには、組織において CircleCI の SETTINGS → Security ページで Orb Security Settings を「Yes」にする必要があります。
 
 <aside class="notice">
-All orbs are open, meaning that anyone can use them and see their source. 
+あらゆる Orbs はオープンです。つまり、誰でも利用でき、誰でもそのソースコードを参照できます。 
 </aside>
 
-## Design Methodology
+## 設計思想
 
 Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these Orbs were designed. Orbs were designed with the following considerations:
 
