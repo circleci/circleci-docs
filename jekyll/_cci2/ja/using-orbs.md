@@ -96,16 +96,15 @@ Executor を宣言し定義する際には下記のキーが使えます（こ�
     
     この例では「my-executor」という Executor は「executor」キーの単独の値として渡すこととしています。
      もしくは「executor」の後に「name」キーを指定し、その値として「my-executor」を渡してもかまいません。
-     こちらの方が Executor のパラメーター付き呼び出しにおいてよく使われる手法です。
-     An example of this method is shown in the example below.
+     こちらの方が Executor のパラメーター付き呼び出しにおいてよく使われる手法です。 例えば下記のように記述します。
     
     
 
 jobs: my-job: executor: name: my-executor steps: - run: echo outside the executor ```
 
-## Key Concepts
+## キーコンセプト
 
-Before using orbs, you should first familiarize yourself with some basic core concepts of Orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage Orbs and use them easily in your own environments.
+Orbs を使い始める前に、まずは Orbs の軸となる基本コンセプトと、Orbs がどのように作られ、動作しているのかについて学んでおきましょう。 理解を深めることで、自身のプロジェクトでより簡単に Orbs を使えるようになり、活用も広がります。
 
 ### Development vs. Production Orbs
 
