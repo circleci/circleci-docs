@@ -45,10 +45,8 @@ to pin an image to a version or operating system (OS).
 - Use a Docker image ID
 to pin an image to a fixed version.
 
-**NOTE:** For docker images that have `-node` (Node.js) included in the container, the latest LTS
-version of Node is used. If you would like to include your own specific version of
-Node.js / NPM you can set it up in a series of `run` steps in your `.circleci/config.yml`.
-Consider the example below, which installs a specific version of Node.js
+**NOTE:** For Node.js variant Docker images (tags that end in `-node`) the LTS release of Node.js is pre-installed. If you would like to include your own specific version of
+Node.js / NPM you can set it up in a series of `run` steps in your `.circleci/config.yml`. Consider the example below, which installs a specific version of Node.js
 alongside the Ruby image.
 
 ```yaml
