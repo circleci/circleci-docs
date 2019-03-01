@@ -170,7 +170,7 @@ jobs:
               echo -n .
               sleep 1
             done
-            echo Postgres の待機に失敗しました && exit 1
+            echo Failed waiting for Postgres && exit 1
       - run:
           name: Run unit tests
           environment:
