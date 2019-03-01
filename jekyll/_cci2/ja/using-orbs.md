@@ -13,9 +13,9 @@ order: 1
 
 ## はじめに
 
-Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs は設定をプロジェクト間で共有したり、設定の標準化を行ったり、設定方法を簡便にしたりするのに役立ちます。 最適な設定方法のサンプルとして Orbs を活用することもできます。 Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs は設定をプロジェクト間で共有したり、設定の標準化を行ったり、設定方法を簡便にしたりするのに役立ちます。 最適な設定方法のサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
 
-To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
+`orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build`](https://circleci.com/orbs/registry/orb/circleci/hello-build) という Orb を呼び出している例です。
 
     version: 2.1
     
@@ -28,7 +28,7 @@ To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2
               - hello/hello-build
     
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key.
+**※**バージョン 2.1 以前に作成したプロジェクトで Orbs を利用したいときは、[設定で Build Processing を有効化]({{ site.baseurl }}/2.0/build-processing/)したうえで `orbs` キーを呼び出します。
 
 Orbs consist of the following elements:
 
