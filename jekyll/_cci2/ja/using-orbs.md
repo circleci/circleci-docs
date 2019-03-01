@@ -30,17 +30,17 @@ Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッ�
 
 **※**バージョン 2.1 以前に作成したプロジェクトで Orbs を利用したいときは、[設定で Build Processing を有効化]({{ site.baseurl }}/2.0/build-processing/)したうえで `orbs` キーを呼び出します。
 
-Orbs consist of the following elements:
+Orbs は下記の要素で構成されています。
 
-- Commands
-- Jobs
-- Executors 
+- コマンド
+- ジョブ
+- Executor 
 
-### Commands
+### コマンド
 
 {:.no_toc}
 
-Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
+steps の再利用を容易にする仕組みがコマンドです。ジョブのなかでパラメーター付きで呼び出すことができます。 下記の例のように `sayhello` というコマンドを呼び出すとき、`to` で指定したパラメーターを渡すことができます。
 
     jobs
       myjob:
@@ -51,15 +51,15 @@ Commands are reusable sets of steps that you can invoke with specific parameters
               to: "Lev"
     
 
-### Jobs
+### ジョブ
 
 {:.no_toc}
 
-Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
+ジョブは 2 つのパートからなります。steps の定義と、それらを処理する実行環境の定義です。 Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
 
 You must invoke jobs in the workflow stanza of `config.yml` file, making sure to pass any necessary parameters as subkeys to the job.
 
-### Executors
+### Executor
 
 {:.no_toc}
 
