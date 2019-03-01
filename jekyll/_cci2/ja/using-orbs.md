@@ -126,10 +126,10 @@ CircleCI では該当プラットフォームにおける動作テスト・認�
 
 Orbs を使うにあたり、Orbs の開発時に用いられた設計方針や手法が理解の一助となるでしょう。 Orbs は下記のような検討を経て設計されました。
 
-- Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
-- Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
-- Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
-- Production orbs are immutable - Once an Orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+- Orbs は透明性をもつ。Orb を実行できるということは、自分も他の誰かもそのソースを見ることができるということ。
+- 説明用のメタデータが使える。どのキーにおいても ```description``` キーを記述でき、Orb でもその一番上に `description` を記述しておける。
+- リリース版の Orbs は必ずセマンティック・バージョニングされる。開発版の Orbs については `dev:` から始まるバージョン命名規則が用いられる。
+- 製品版の Orbs は不変。Orb がセマンティック・バージョニングされた形でいったんパブリッシュされれば、その後は二度と内容が変わることはない。 This prevents unexpected breakage or changing behaviors in core orchestration.
 - One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
 - Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
