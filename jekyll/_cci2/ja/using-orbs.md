@@ -55,9 +55,9 @@ steps の再利用を容易にする仕組みがコマンドです。ジョブ�
 
 {:.no_toc}
 
-ジョブは 2 つのパートからなります。steps の定義と、それらを処理する実行環境の定義です。 Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
+ジョブは 2 つのパートからなります。steps の定義と、それらを処理する実行環境の定義です。 ジョブはビルド設定の中、もしくは外部にある Orb の中で定義し、それぞれの `jobs` キーの直下でジョブ名を定義しておきます。
 
-You must invoke jobs in the workflow stanza of `config.yml` file, making sure to pass any necessary parameters as subkeys to the job.
+その後、`config.yml` ファイル内の Workflow から、サブキーとして必要なパラメーターを渡してジョブを呼び出す形とします。
 
 ### Executor
 
