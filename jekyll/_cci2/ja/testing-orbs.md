@@ -184,7 +184,7 @@ For advanced testing, you may also want to use a shell unit testing framework su
 ## 関連情報
 
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
-- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- 「[Orbs を作成する]({{site.baseurl}}/2.0/creating-orbs/)」では Orb の作成手順について詳しく解説しています。
 - 一般的な質問に対する答えをお探しの場合は「[Orbs に関する FAQ]({{site.baseurl}}/ja/2.0/orbs-faq/) 」をご覧ください。
-- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
 - Orbs 利用時の法的条件に関する詳細については「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
