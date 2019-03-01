@@ -69,9 +69,9 @@ Executor はジョブ内の steps を実行するための環境を定義しま�
 - 使用するシェル
 - 使用する `resource_class` のサイズ
 
-When you declare an executor in a configuration outside of `jobs`, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
+特定の `jobs` 以外のところで Executor を宣言しても、その宣言のスコープ内であれば他の全てのジョブにおいて有効です。こうすることで、1 つの Executor の宣言を複数のジョブで共有することが可能になります。
 
-An executor definition has the following keys available (some of which are also available when using the `job` declaration):
+Executor を宣言し定義する際には下記のキーが使えます（このうちいくつかは `job` の宣言時にも使えます）。
 
 - `docker`, `machine`, or `macos`
 - `environment`
