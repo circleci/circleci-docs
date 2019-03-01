@@ -131,12 +131,12 @@ Orbs を使うにあたり、Orbs の開発時に用いられた設計方針や�
 - リリース版の Orbs は必ずセマンティック・バージョニングされる。開発版の Orbs については `dev:` から始まるバージョン命名規則が用いられる。
 - 製品版の Orbs は不変。Orb がセマンティック・バージョニングされた形でいったんパブリッシュされれば、その後は二度と内容が変わることはない。 これは、オーケストレーションツールの核となる部分における意図しない破綻や挙動の変化を防ぐ。
 - レジストリは（1 インストールにつき）1 つ限り。circleci.com も含め、CircleCI のインストールごとに所有できる Orbs のレジストリは 1 つのみとなる。
-- 組織管理者が製品版の Orbs をパブリッシュできる。 管理者ではないメンバーがパブリッシュできるのは開発版の Orbs のみ。 Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+- 組織管理者がリリース版の Orbs をパブリッシュし、 管理者ではないメンバーが開発版の Orbs をパブリッシュする。名前空間は組織が管理するものとし、 組織の管理者だけがリリース版の Orb をパブリッシュ・運用できる。 開発版の Orbs のパブリッシュは組織内の全メンバーができるものとする。
 
 ## 関連情報
 
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview.
+- Orbs の具体的な使用方法については「[Orbs とは]({{site.baseurl}}/2.0/orb-intro/)」のページをご覧ください。
 - Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
