@@ -303,7 +303,7 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。
 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。
 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。
-`CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag)を参照してください。
+`CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 詳しくは [Git タグを使ったジョブの実行]({{ site.baseurl }}/ja/2.0/workflows/#git-タグに対応可能な-workflows-を実行する)を参照してください。
 `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。
 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。
 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。
