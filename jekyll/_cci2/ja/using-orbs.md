@@ -124,7 +124,7 @@ CircleCI では該当プラットフォームにおける動作テスト・認�
 
 ## 設計思想
 
-Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these Orbs were designed. Orbs were designed with the following considerations:
+Orbs を使うにあたり、Orbs の開発時に用いられた設計方針や手法が理解の一助となるでしょう。 Orbs は下記のような検討を経て設計されました。
 
 - Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
 - Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
