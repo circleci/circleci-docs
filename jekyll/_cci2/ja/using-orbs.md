@@ -63,11 +63,11 @@ steps の再利用を容易にする仕組みがコマンドです。ジョブ�
 
 {:.no_toc}
 
-Executors define the environment in which the steps of a job will be run. When you declare a `job` in CircleCI configuration, you define the type of environment (e.g. `docker`, `machine`, `macos`, etc.) to run in, in addition to any other parameters of that environment, such as:
+Executor はジョブ内の steps を実行するための環境を定義します。 設定ファイルで `job` を宣言する際、実行環境（`docker`、`machine`、`macos`などの）の種類を定義したり、それらの環境における下記のようなパラメーターを指定したりするのに使います。
 
-- environment variables to populate
-- which shell to use
-- what size `resource_class` to use
+- データ保存に使う環境変数
+- 使用するシェル
+- 使用する `resource_class` のサイズ
 
 When you declare an executor in a configuration outside of `jobs`, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
 
