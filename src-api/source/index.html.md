@@ -49,7 +49,8 @@ $ curl https://circleci.com/api/v1.1/me?circle-token=:token
 
 To add an API token, perform the steps listed below.
 
-```{
+```
+{
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
   "plan" : "p16",
@@ -175,7 +176,8 @@ GET
 
 ### Example Call
 
-```curl https://circleci.com/api/v1.1/me?circle-token=:token
+```
+curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
 
 ### Example Response
@@ -196,12 +198,14 @@ GET
 
 ### Example Call
 
-```https://circleci.com/api/v1.1/projects?circle-token=:token
+```
+https://circleci.com/api/v1.1/projects?circle-token=:token
 ```
 
 ### Example Response
 
-```[ {
+```
+[ {
   "vcs_url": "https://github.com/circleci/mongofinil",
   "followed": true, // true if you follow this project in CircleCI
   "username": "circleci",
@@ -249,12 +253,14 @@ POST
 
 ### Example Call
 
-```curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow?circle-token=:token
+```
+curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow?circle-token=:token
 ```
 
 ### Example Response
 
-```{
+```
+{
   "followed" : true,
   "first_build" : {
     "compare" : null,
@@ -332,7 +338,8 @@ GET
 
 ### Example Call
 
-```curl https://circleci.com/api/v1.1/recent-builds?circle-token=:token&limit=20&offset=5
+```
+curl https://circleci.com/api/v1.1/recent-builds?circle-token=:token&limit=20&offset=5
 ```
 
 ### Example Response
