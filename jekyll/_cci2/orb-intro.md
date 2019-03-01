@@ -27,7 +27,7 @@ In the above example, two orbs are imported into your config, the [Slack orb](ht
 
 ## Authoring Your Own Orb
 
-If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration.
+If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration. See [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) for more information.
 
 ```
 nohighlight
