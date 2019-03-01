@@ -553,7 +553,7 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 } ]
 ```
 
-## Notes
+### Notes
 
 * the value of path is relative to the project root (the working_directory)
 * pretty_path returns the same value as path. It is included in the response for backwards compatibility
@@ -597,7 +597,7 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/a
 } ]
 ```
 
-#### Notes
+### Notes
 
 * the value of path is relative to the project root (the working_directory)
 * pretty_path returns the same value as path. It is included in the response for backwards compatibility
@@ -745,7 +745,6 @@ curl -X POST --header "Content-Type: application/json" -d '{
   }
 }
 ```
-https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token
 
 ### Example Response
 
