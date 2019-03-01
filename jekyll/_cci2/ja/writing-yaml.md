@@ -154,6 +154,6 @@ CircleCI has also developed "orbs," which enable you to use pre-conifgured and t
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of orbs.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
-- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
-- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- 「[Orbs を作成する]({{site.baseurl}}/2.0/creating-orbs/)」では Orb の作成手順について詳しく解説しています。
+- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
 - For a more exhaustive overview of YAML, Learn X in Y Minutes has [a great summary](https://learnxinyminutes.com/docs/yaml/).
