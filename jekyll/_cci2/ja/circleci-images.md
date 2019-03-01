@@ -21,7 +21,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 ## ビルド済みイメージの活用方法
 
-提供する Docker イメージはアップストリーム (ソースコード) イメージの最新バージョンを元にしており、何かに特化したイメージを使うのにも理想的な環境となっています。 アップストリームイメージの内容がバージョンアップなどで変更されることを防げば、確実性の高いビルドを実現できます。
+Convenience images are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
 アップストリーム版を元にビルド済みイメージを作成している CircleCI では、`circleci/ruby:2.4-node` と記述した場合、最新版の Ruby 2.4-node コンテナを使うことを意味し、 あるいは `circleci/ruby:latest` としても結果は同じになります。 このようにタグを用いて使用するイメージを具体的に決めることは、ビルドコンテナの用途を絞るのに役立ちます。
 
@@ -36,23 +36,43 @@ It is also possible to specify all the way down to the specific SHA of the image
 - タグを使ってイメージのバージョンや OS を決め打ちにする
 - Docker イメージ ID を使って一定のバージョンにする
 
+**NOTE:** For Node.js variant Docker images (tags that end in `-node`) the LTS release of Node.js is pre-installed. If you would like to include your own specific version of Node.js / NPM you can set it up in a series of `run` steps in your `.circleci/config.yml`. Consider the example below, which installs a specific version of Node.js alongside the Ruby image.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+    steps:
+      - checkout
+      - run:
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
+```
+
 ### バージョンや OS を決め打ちするイメージタグの使い方
 {:.no_toc}
 
-[イメージタグ](https://docs.docker.com/engine/reference/commandline/tag/#extended-description)を利用することで Docker イメージの役割を決めることができます。
+You can pin aspects of a Docker image by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
 
-例えば `circleci/golang` は、`circleci/golang:1.8.6-jessie` として言語のバージョンと OS を指定するパターンに書き換えられます。 後者のようにバージョンと OS を指定すれば、予期しない挙動になることはまずありません。
+For example, instead of `circleci/golang`, specify the version and OS by using `circleci/golang:1.8.6-jessie`. Because the second image specifies a version and OS, it is less likely to change unexpectedly.
 
-[言語別の最新イメージタグ](#latest-image-tags-by-language)は下の方にある一覧でご確認ください。
+See below for a list of the [Latest Image Tags by Language](#latest-image-tags-by-language).
 
-**注：**タグを指定しない場合、Docker は `latest` タグが付与されているものとして扱います。 `latest` タグが参照するのは安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。
+**Note:** If you do not specify a tag, Docker applies the `latest` tag. The `latest` tag refers to the most recent stable release of an image. However, since this tag may change unexpectedly, it is best practice to add an explicit image tag.
 
 ### イメージを一定のバージョンにする Docker イメージ ID の使い方
 {:.no_toc}
 
-全ての Docker イメージには[ユニーク ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier) が割り当てられており、 一定バージョンのイメージを使う際にはこのイメージ ID を使うことができます。
+Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier). You can use this image ID to pin an image to a fixed version.
 
-イメージ ID は固有の SHA-256 メッセージダイジェスト (ハッシュ) で構成されています。例えば次のようなものです。
+Each image ID is an immutable SHA256 digest and looks like this:
 
     sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
     
@@ -72,14 +92,14 @@ It is also possible to specify all the way down to the specific SHA of the image
 
 CircleCI's convenience images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
 
-**注：**下記で紹介しているイメージは、各言語のアップストリームイメージの最新ビルドを元にしたものです。 これらの最新イメージはアップデートが頻繁にあるため、タグを追加指定して利用することを[おすすめ](#best-practices)します。
+**Note:** The images below are based on the most recently built upstream images for their respective languages. Because the most recent images are more likely to change, it is [best practice](#best-practices) to use a more specific tag.
 
 ### 言語イメージ
 {:.no_toc}
 
-言語イメージは代表的なプログラミング言語向けに用意したビルド済み Docker イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+Language images are convenience images for common programming languages. These images include both the relevant language and [commonly-used tools](#pre-installed-tools). A language image should be listed first under the `docker` key in your configuration, making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
-CircleCI では下記の言語イメージを提供しています。
+CircleCI maintains images for the languages below.
 
 - [Android](#android)
 - [Clojure](#clojure)
@@ -93,7 +113,7 @@ CircleCI では下記の言語イメージを提供しています。
 - [Ruby](#ruby)
 - [Rust](#rust)
 
-使用している言語がこのなかにないときはカスタムイメージを作成することになります。CircleCI が提供する [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard) も活用してください。
+If your language is not listed, CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard) you can use to create a custom image.
 
 #### 言語イメージのバリエーション
 {:.no_toc}
@@ -106,14 +126,14 @@ CircleCI maintains several variants for language images. To use these variants, 
 - `-node-browsers`：`-node` と `-browsers` の組み合わせです
 - `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
-参考までに、`circleci/golang:1.9` に Web ブラウザ をインストールしておきたいときは `circleci/golang:1.9-browsers` とします。
+For example, if you want to add browsers to the `circleci/golang:1.9` image, use the `circleci/golang:1.9-browsers` image.
 
 ### サービスイメージ
 {:.no_toc}
 
 Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
 
-CircleCI では下記のサービスイメージを提供しています。
+CircleCI maintains images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
 - [DynamoDB](#dynamodb)
@@ -128,11 +148,11 @@ CircleCI では下記のサービスイメージを提供しています。
 
 CircleCI maintains only one variant for service images. To speed up builds using RAM volume, add the `-ram` suffix to the end of a service image tag.
 
-参考までに、`circleci/postgres:9.5-postgis` イメージで RAM ディスクを使うには、`circleci/postgres:9.5-postgis-ram` とします。
+For example, if you want the `circleci/postgres:9.5-postgis` image to use RAM volume, use the `circleci/postgres:9.5-postgis-ram` image.
 
 ## インストール済みツール
 
-提供している Docker イメージは全て追加のツール類で機能拡張しています。
+All convenience images have been extended with additional tools.
 
 With the exception of [Android images](https://hub.docker.com/r/circleci/android), all images include the following packages, installed via `apt-get`:
 
@@ -157,7 +177,7 @@ With the exception of [Android images](https://hub.docker.com/r/circleci/android
 
 The specific version of a particular package that gets installed in a particular CircleCI image variant depends on the default version included in the package directory for the Linux distribution/version installed in that variant's base image. Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)- or [Stretch](https://packages.debian.org/stretch/)-based images, however some extend [Ubuntu](https://packages.ubuntu.com)-based images. For details on individual variants of CircleCI images, see the [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 
-下記のパッケージは `curl` でインストールされます。
+The following packages are installed via `curl` or other means.
 
 - [Docker client](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
@@ -166,9 +186,9 @@ The specific version of a particular package that gets installed in a particular
 
 ## 言語別の最新イメージタグ
 
-下記では言語別にまとめた最新のビルド済み Docker イメージを列挙しています。 それぞれの詳細については [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) でご確認ください。
+Below is a list of the latest convenience images, sorted by language. For details about the contents of each image, refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
-**注：**[言語イメージのバリエーション](#language-image-variants)や[サービスイメージのバリエーション](#service-image-variant)で紹介しているタグのイメージ以外は、CircleCI の管理下に**ありません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じような内容のイメージとは限らないことにご注意ください。
+**Note:** Excluding [language image variants](#language-image-variants) and [the service image variant](#service-image-variant), CircleCI does **not** control which tags are used. These tags are chosen and maintained by upstream projects. Do not assume that a given tag has the same meaning across images!
 
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
@@ -176,11 +196,11 @@ The specific version of a particular package that gets installed in a particular
 ### {{ image[1].name }}
 {:.no_toc}
 
-**使い方：**config.yml の `docker:` 配下に次の書式で挿入します
+**Usage:** Add the following under `docker:` in your config.yml:
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**利用可能なタグ：** <small> (これ以外のタグも <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a> で見つけられます)</small>
+**Latest Tags:** <small>(view more available tags on <a href="https://hub.docker.com/r/circleci/{{ image[0] }}/tags/">Docker Hub</a>)</small>
 
 <ul class="list-2cols">
 {% assign tags = image[1].tags | sort %}
@@ -202,4 +222,4 @@ The specific version of a particular package that gets installed in a particular
 ## 関連情報
 {:.no_toc}
 
-プライベートリポジトリまたは Amazon EC2 Container Registry (ECR) におけるイメージを使ったビルドの手順について知りたいときは、[プライベートイメージの使い方]({{ site.baseurl }}/2.0/private-images/)を参照してください。
+See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
