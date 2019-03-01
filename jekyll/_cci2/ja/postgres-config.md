@@ -14,7 +14,7 @@ order: 35
 
 ## structure.sql を使う Rails アプリケーション用の設定例
 
-`structure.sql` ファイルを用いて設定する Rails アプリケーションに移行するときは、`psql` が PATH の通っている場所にインストールされていること、psql に対するアクセス権限が正しく設定されていることを確認してください。circleci/ruby:2.4.1-node というイメージには psql がデフォルトでインストールされておらず、データベースアクセスに `pg` gem を使うためです。
+`structure.sql` ファイルを用いて設定する Rails アプリケーションを移行するときは、`psql` が PATH の通っている場所にインストールされていること、psql に対するアクセス権限が正しく設定されていることを確認してください。circleci/ruby:2.4.1-node というイメージには psql がデフォルトでインストールされておらず、データベースアクセスに `pg` gem を使うためです。
 
 {% raw %}
 
@@ -33,7 +33,7 @@ jobs:
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # 「host: localhost」で使えるサービスコンテナイメージ
+    # 「host: localhost」でアクセスできるサービスコンテナイメージ
 
       - image: circleci/postgres:9.6.2-alpine
         environment:
