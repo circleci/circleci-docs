@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Using Orbs"
-short-title: "Using Orbs"
-description: "Starting point for CircleCI Orbs"
+title: "Orbs を使う"
+short-title: "Orbs を使う"
+description: "CircleCI Orbs 入門"
 categories:
   - getting-started
 order: 1
