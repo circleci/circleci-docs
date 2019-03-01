@@ -7,13 +7,13 @@ categories:
   - getting-started
 order: 1
 ---
-This document provides a basic example of importing an [orb]({{ site.baseurl }}/2.0/orb-intro/) and elements of orbs followed by a conceptual overview of orbs design.
+ここでは [Orb]({{ site.baseurl }}/2.0/orb-intro/) の基礎的なインポートの仕方とそれに関連する要素について、下記の流れで解説しています。
 
 - 目次 {:toc}
 
 ## はじめに
 
-Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+Orbs は CircleCI を手早く使い始めるのに有用な設定用のパッケージです。 Orbs enable you to share, standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
 To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
 
