@@ -823,7 +823,7 @@ curl -X POST --header "Content-Type: application/json" -d '{
 ## Trigger a new Build with a Branch
 
 <aside class="notice">
-For more about build parameters, see 2.0 build parameters [for environment variables](https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api). The response for “failed” should be a boolean true or null.
+For more about build parameters, see 2.0 build parameters <a href="https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api">for environment variables</a>. The response for “failed” should be a boolean true or null.
 </aside>
 
 Triggers a new build and then returns a summary of the build.
@@ -1193,7 +1193,7 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 ```
 
 <aside class="notice">
-Learn how to set up your 2.0 builds to [Collect Test Metadata](https://circleci.com/docs/2.0/collect-test-data/).
+Learn how to set up your 2.0 builds to <a href="https://circleci.com/docs/2.0/collect-test-data/">Collect Test Metadata</a>.
 </aside>
 
 ## SSH Keys
