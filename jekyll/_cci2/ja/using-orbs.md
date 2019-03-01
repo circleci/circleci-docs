@@ -73,13 +73,13 @@ Executor はジョブ内の steps を実行するための環境を定義しま�
 
 Executor を宣言し定義する際には下記のキーが使えます（このうちいくつかは `job` の宣言時にも使えます）。
 
-- `docker`, `machine`, or `macos`
+- `docker`、`machine`、`macos` のうちいずれか
 - `environment`
 - `working_directory`
 - `shell`
 - `resource_class`
 
-The example below shows a simple example of using an executor:
+下記は Executor を使った簡単なサンプルです。
 
     version: 2.1
     executors:
@@ -91,10 +91,13 @@ The example below shows a simple example of using an executor:
       my-job:
         executor: my-executor
         steps:
-          - run: echo outside the executor
+          - run: echo Executor の外です
      ```
     
-    Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
+    この例では「my-executor」という Executor は「executor」キーの単独の値として渡すこととしています。
+     もしくは「executor」の後に「name」キーを指定し、その値として「my-executor」を渡してもかまいません。
+     こちらの方が Executor のパラメーター付き呼び出しにおいてよく使われる手法です。
+     An example of this method is shown in the example below.
     
     
 
