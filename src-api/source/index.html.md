@@ -19,7 +19,7 @@ The CircleCI API is a full-featured RESTful API that allows you to access all in
 * DELETE - remove/delete an API element in the API server.
 
 <aside class="notice">
-Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not currently use the `PUT` verb.
+Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not currently use the PUT verb.
 </aside>
 
 <aside class="notice">
@@ -99,12 +99,13 @@ New with v1.1 of the API, for endpoints under /project you will now need to tell
 
 If you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
+
+### List Ordering
+
 ```
 (https://circleci.com/docs/api/v1-reference/#recent-builds)
 (https://circleci.com/docs/api/v1-reference/#recent-builds-project)
 ```
-
-### List Ordering
 
 There are two API endpoints where the list order is significant:
 
