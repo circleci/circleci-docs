@@ -765,4 +765,4 @@ In this example, the `btd` workflow runs the `orb-tools/validate` job first. If 
 - 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
 - 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
 - Orbs 利用時の法的条件に関する詳細については「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
-- Refer to \[Local CLI\] ({{site.baseurl}}/2.0/local-cli) for more information about how you can use the CircleCI CLI in your orbs deployments.
+- Refer to [Local CLI]({{site.baseurl}}/2.0/local-cli/#overview) for more information about how you can use the CircleCI CLI in your orbs deployments.
