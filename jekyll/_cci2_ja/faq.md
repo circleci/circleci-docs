@@ -116,7 +116,7 @@ CircleCI 自体が高負荷な状況に陥っているときに発生します�
 
 ### 「Add Project」ページにプロジェクトが見つからないのはなぜですか？
 {:.no_toc}  
-ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。もし左上に見えるのがあなたのユーザー名 `myUser` だったとすると、`myUser` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。GitHub のプロジェクト名 `myOrg/orgProject` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [SWITCH ORGANIZATION] メニューから目的の Org である `myOrg` に切り替えます。
+ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。もし左上に見えるのがあなたのユーザー名 `my-user` だったとすると、`my-user` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。GitHub のプロジェクト名 `your-org/project` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [SWITCH ORGANIZATION] メニューから目的の Org である `your-org` に切り替えます。
 
 ### 「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。しかし、現在のプランはその条件を満たしています。なぜエラーになるのでしょうか？
 {:.no_toc}  
@@ -134,7 +134,7 @@ redis:3.0.7-jessie
 Docker Hub のパブリックイメージについては、下記のようにアカウント名やユーザー名を付加した形でプルすることも可能です。
 
 ```
-myUsername/couchdb:1.6.1
+my-user/couchdb:1.6.1
 ```    
 
 ### Docker イメージのバージョンを指定するときのベストな方法は？

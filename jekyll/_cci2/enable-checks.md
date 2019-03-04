@@ -54,10 +54,10 @@ To disable the CircleCI Check integration, navigate to the Org Settings Page, th
 3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_update.png)
 4. Deselect the repository to uninstall the Checks integration.
 5. Confirm the status settings on your projects: Go to CircleCI > Project
-   Settings > Advanced Settings > Confirm that the setting `Github Status
+   Settings > Advanced Settings > Confirm that the setting `GitHub Status
    Updates` is set to `on`.
 
-![Re-enable Github Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
+![Re-enable GitHub Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
 
 ## To Uninstall Checks for the Organization
 
@@ -70,7 +70,7 @@ To disable the CircleCI Check integration, navigate to the Org Settings Page, th
 
 `ci/circleci:build — Waiting for status to be reported`
 
-If you have enabled GitHub Checks in your GitHub repository, but the status check never completes on Github Checks tab, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci:build` status key as this check refers to the job status from CircleCI 2.0, as follows:
+If you have enabled GitHub Checks in your GitHub repository, but the status check never completes on GitHub Checks tab, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci:build` status key as this check refers to the job status from CircleCI 2.0, as follows:
 
 ![Uncheck GitHub Job Status Keys]({{ site.baseurl }}/assets/img/docs/github_job_status.png)
 
