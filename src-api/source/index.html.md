@@ -99,12 +99,17 @@ New with v1.1 of the API, for endpoints under /project you will now need to tell
 
 If you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
 
+```
+(https://circleci.com/docs/api/v1-reference/#recent-builds)
+(https://circleci.com/docs/api/v1-reference/#recent-builds-project)
+```
+
 ### List Ordering
 
 There are two API endpoints where the list order is significant:
 
-* Recent Builds Across All Projects 
-* Recent Builds For a Single Project 
+* Recent Builds Across All Projects
+* Recent Builds For a Single Project
 
 In both cases, builds are returned in the order that they were created. For all other endpoints, the order has no special significance.
 
@@ -560,6 +565,10 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 
 ## Download an artifact file
 
+```
+https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
+```
+
 You can download an individual artifact file via the API by appending a query string to its URL. Note that `:token` is an API token with 'view-builds' scope.
 
 ## Artifacts of the latest Build
@@ -744,6 +753,8 @@ curl -X POST --header "Content-Type: application/json" -d '{
     "RUN_EXTRA_TESTS": "true"
   }
 }
+
+https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token
 ```
 
 ### Example Response
@@ -1214,7 +1225,25 @@ curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname
 
 no response expected
 
+Deletes an SSH key from the system.
+
+
+### Method
+
+DELETE
+
+### Example Call
+
+```
+curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"} https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
+```
+
+### Example Response
+
+no response expected
+
 ## Heroku Keys
+
 
 Adds your Heroku API key to CircleCI and then takes `apikey` as form param name.
 
