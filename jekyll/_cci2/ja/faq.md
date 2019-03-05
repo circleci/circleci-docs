@@ -210,15 +210,15 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 - macOS プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
 
-#### Is there a way to share plans across organizations and have them billed centrally?
+#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {:.no_toc}
 可能です。CircleCI で [Settings] → [Share & Transfer] → [Share Plan] ページと進み、プランを共有したい Org を選択してください。
 
-#### Can I set up billing for an organization, without binding it to my personal account?
+#### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
 {:.no_toc}
 可能です。請求は Org にひもづけられます。 Org の設定ページにて、ユーザー自身がその Org として支払うことができます。 ただし、そのユーザーが全てのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub Org 管理者をたてる必要があります。 将来のアップデートではよりわかりやすい解決策を提供できる予定です。
 
-#### What is the definition of a container in the context of billing?
+#### 課金におけるコンテナの定義は？
 {:.no_toc}
 料金を支払って利用できるコンテナ 1 個は、2 つの CPU と 4GB のメモリを搭載するマシンです。 コンテナはタスクの同時実行（5 つの異なるジョブを実行するなど）や並列実行（1 つのジョブを 5 つの異なるタスクに分解してそれぞれを一斉に実行するなど）を行うのに使われます。 この場合はどちらの例でも 5 つのコンテナが必要になります。
 
