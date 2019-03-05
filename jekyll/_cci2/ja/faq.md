@@ -232,7 +232,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### クレジットとは何ですか？
 {:.no_toc}
-クレジットは、マシンのタイプとサイズに基づくお客様の使用に対して支払いをするために使用されます。 Credits can also be used to pay for features, such as Docker Layer Caching.
+クレジットは、マシンのタイプとサイズに基づくお客様の使用に対して支払いをするために使用されます。 クレジットは、Docker レイヤーキャッシュなどへの使用料の支払いに使用することもできます。
 
 For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
