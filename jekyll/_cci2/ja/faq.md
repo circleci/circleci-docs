@@ -91,7 +91,7 @@ CircleCI の Workflows タブでエラーメッセージを確認してみてく
 
 ### 「Add Project」ページにプロジェクトが見つからないのはなぜですか？
  {:.no_toc}
-ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。 For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
+ビルドしようとしているプロジェクトが見当たらず、目的のビルドでないものが表示されている場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `my-user` だったとすると、`my-user` に属する GitHub プロジェクトだけが `Add Projects` の下に表示されることになります。 If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
 ### 「build didn’t run because it needs more containers than your plan allows」というエラーが表示されます。しかし、現在のプランはその条件を満たしています。 なぜエラーになるのでしょうか？
 {:.no_toc}
