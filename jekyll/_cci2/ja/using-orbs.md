@@ -16,7 +16,7 @@ order: 1
 
 Orbs は CircleCI を手早く使い始めるのに有用なコンフィグパッケージです。 Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。 最適なコンフィグのサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
 
-`orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build`](https://circleci.com/orbs/registry/orb/circleci/hello-build) という Orb を呼び出している例です。
+`orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) を呼び出している例です。
 
     version: 2.1
     
@@ -29,7 +29,7 @@ Orbs は CircleCI を手早く使い始めるのに有用なコンフィグパ�
               - hello/hello-build
     
 
-**※**バージョン 2.1 以前に作成したプロジェクトで Orbs を利用したいときは、[設定で Build Processing を有効化]({{ site.baseurl }}/2.0/build-processing/)したうえで `orbs` キーを呼び出します。
+**注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、設定で [[Enable build processing]]({{ site.baseurl }}/ja/2.0/build-processing/) を [On] にすることで `orbs` キーを使えるようになります。
 
 Orbs は下記の要素で構成されています。
 
