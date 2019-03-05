@@ -234,7 +234,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 {:.no_toc}
 クレジットは、マシンのタイプとサイズに基づくお客様の使用に対して支払いをするために使用されます。 クレジットは、Docker レイヤーキャッシュなどへの使用料の支払いに使用することもできます。
 
-例えば、毎分 10 クレジットのデフォルトレートで 1 台のマシンを使用しているとき、25,000 クレジットのパッケージは毎分 2,500 ビルドを提供します。 The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+例えば、毎分 10 クレジットのデフォルトレートで 1 台のマシンを使用しているとき、25,000 クレジットのパッケージは毎分 2,500 ビルドを提供します。 10 倍の平行処理で 2 倍の平行処理または 250 分を使用しているとき、同じパッケージは 1,250 分間持続します。
 
 #### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
