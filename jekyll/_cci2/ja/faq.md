@@ -238,7 +238,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### コンテナを 1 分未満しか使用していない場合、まるまる 1 分間分支払わなければならないのですか？ 
 {:.no_toc}
-お客様には次に近いクレジットをお支払いいただきます。 First we round up to the nearest second, and then up to the nearest credit.
+お客様には次に近いクレジットをお支払いいただきます。 まず、当社はもっとも近い秒に切り上げ、次にもっとも近いクレジットに切り上げます。
 
 #### How do I buy credits? Can I buy in any increments?
 {:.no_toc}
