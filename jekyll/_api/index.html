@@ -1161,6 +1161,8 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?
 </code></pre><h2 id='trigger-a-new-build-by-project-preview'>Trigger a new Build by Project (preview)</h2>
 <p>Prerequisite: You must go to your Project Settings in the CircleCI app to <a href="https://circleci.com/docs/2.0/build-processing/">Enable Build Processing</a>. This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.</p>
 
+**Note**: Before triggering a build, make sure to check if there are any projects owned by other organizations that you are not a member of.
+
 <p>Triggers a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.</p>
 
 <table><thead>
