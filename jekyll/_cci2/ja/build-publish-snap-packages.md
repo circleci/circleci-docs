@@ -64,20 +64,22 @@ snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
 
-1. ローカルマシンで、CircleCI にアップロードする「ログインファイル」を作成します。 ローカルマシンにこれらのツールが既にインストールされており、Snapcraft Store にログインしている (`snapcraft login`) と想定すると、`snapcraft export-login snapcraft.login` コマンドを使用して、`snapcraft.login` という名前のログインファイルを生成します。 このファイルの公開や、Git リポジトリに保存されることは望ましくないため、このファイルを base64 エンコードし、`$SNAPCRAFT_LOGIN_FILE` という名前の [非公開環境変数](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) に保存します。
+1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_LOGIN_FILE`.
+    
+    *Note: The default expiration time for the Snapcraft login file is 1 year. If you want the auth file to be valid for longer, make sure to set an expiration date with the `--expires` flag.*
+    
+    ```yaml
+    ...
+          - run:
+              name: "Publish to Store"
+              command: |
+                mkdir .snapcraft
+                echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+                snapcraft push *.snap --release stable
+    ...
+    ```
 
-```yaml
-...
-      - run:
-          name: "Publish to Store"
-          command: |
-            mkdir .snapcraft
-            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-            snapcraft push *.snap --release stable
-...
-```
-
-1. ファイルの base64 エンコードされたバージョンが、非公開環境変数として CircleCI に保存されたら、そのファイルをビルド内で使用して、ストアへ自動的にパブリッシュできます。
+2. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
 
 この例では、Snapcraft が `.snapcraft/snapcraft.cfg` 内のログイン資格情報を自動的に探し、以前に作成した環境変数がその場所にデコードされます。 その後で、`snapcraft push` コマンドを使用して .snap ファイルが Snap Store にアップロードされます。
 
@@ -93,18 +95,18 @@ base64 snapcraft.login | xsel --clipboard
 
 [Workflows](https://circleci.com/docs/2.0/workflows/) を使用すると、Snap のビルドに 2 つの点で役立ちます。
 
-1. **Snap Store チャンネル** - 前のセクションで述べたように、Store にアップロードするとき、同時にリリースも選択できます。 これによって、CircleCI の特定のジョブを、特定の Snap チャンネルにデプロイするよう割り当てできます。 たとえば、`master` ブランチを使用して `edge` チャンネルにデプロイし、`同時にタグ付けされたリリースを使用して`安定したチャンネルにデプロイできます。
-2. **パッキングの並列化** - ソフトウェアが Snap として以外に、flatpak、.deb、apk など他のものとしてもパッケージされる場合、各パッケージタイプを独自のジョブに配置し、すべて並列実行できます。 これによって、Snap が完了してから .deb パッケージのビルドを開始するなどの順に処理を行うよりも、はるかに短時間でビルドが完了します。
+1. **Snap Store Channels** - As we mentioned in the previous section, when we upload to the Store we could optionally release at the same time. This allows us to designate specific jobs on CircleCI to deploy to specific Snap Channels. For example, the `master` branch could be used to deploy to the `edge` channel`while tagged releases could be used to deploy to the`stable` channel.
+2. **Parallelize Packing** - If your software is being packaged as a snap as well as something else, say a flatpak, .deb, .apk, etc, each package type could be placed in its own job and all run parallel. This allows your build to complete must fast than if the .deb package could start to build until the snap completed, and so on.
 
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
 ```yaml
-... # 既に Snap が存在するジョブから
+... # from a job that already has the snap
       - persist_to_workspace:
           root: .
           paths:
             - "*.snap"
-... # Snap を必要とする次のジョブへ
+... # to the next job that needs the snap
       - attach_workspace:
           at: .
 ...
