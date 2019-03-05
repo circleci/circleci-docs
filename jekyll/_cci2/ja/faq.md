@@ -236,7 +236,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 例えば、毎分 10 クレジットのデフォルトレートで 1 台のマシンを使用しているとき、25,000 クレジットのパッケージは毎分 2,500 ビルドを提供します。 10 倍の平行処理で 2 倍の平行処理または 250 分を使用しているとき、同じパッケージは 1,250 分間持続します。
 
-#### If a container is used for under one minute, do I have to pay for a full minute? 
+#### コンテナを 1 分未満しか使用していない場合、まるまる 1 分間分支払わなければならないのですか？ 
 {:.no_toc}
 You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
