@@ -202,9 +202,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 ## 料金・支払
 
-### Container Based Plans
+### コンテナベースの計画
 
-#### How do I upgrade my plan with more containers to prevent queuing?
+#### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
 {:.no_toc}
 * Linux プランの変更：CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Add Containers] ボタンをクリックします。 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
