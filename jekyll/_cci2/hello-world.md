@@ -27,7 +27,10 @@ workflows:
           - hello/hello-build
 ```
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+Commit and push the changes to trigger a build. If this is your first project on
+CircleCI, go to the Projects page, click the **Add Projects** button, then click
+the **Set Up Project** button next to your project. You may also click **Start
+Building** to manually trigger your first build.
 
 ## Echo Hello World with a `build` Job
 
@@ -48,7 +51,10 @@ jobs:
 
 **Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file. 
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+Commit and push the changes to trigger a build. If this is your first project on
+CircleCI, go to the Projects page, click the **Add Projects** button, then click
+the **Set Up Project** button next to your project. You may also click **Start
+Building** to manually trigger your first build.
 
 CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
 
