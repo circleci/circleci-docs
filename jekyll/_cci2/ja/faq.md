@@ -226,11 +226,11 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 ### クレジットの利用プラン
 
-#### 新しい料金プランで、ユーザーとしての私はどんな影響を受けますか？
+#### 新しい料金プランで、顧客としての私はどんな影響を受けますか？
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
+圧倒的多数のユーザーのために、現在のプランを当面そのままにしておくことができます。そうすることで、考慮したい新しいオプションが表示されます。
 
-#### What are credits?
+#### クレジットとは何ですか？
 {:.no_toc}
 Credits are used to pay for your usage based on machine type and size. Credits can also be used to pay for features, such as Docker Layer Caching.
 
