@@ -29,7 +29,7 @@ workflows:
 ```
 ```
 
-変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
+変更のコミットやプッシュは、ビルド実行のトリガーになります。 If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button, then click the **Set Up Project** button next to your project. You may also click **Start Building** to manually trigger your first build.
 
 ## Echo Hello World を実行する `build` ジョブ
 
@@ -52,7 +52,7 @@ jobs:
 
 **注**：`macOS` executors では、一部の設定が異なります。 iOS のプロジェクトを立ち上げる方法は、[iOS チュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)にアクセスし、`macOS` の設定例を参考にしてください。
 
-変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
+変更のコミットやプッシュは、ビルド実行のトリガーになります。 If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button, then click the **Set Up Project** button next to your project. You may also click **Start Building** to manually trigger your first build.
 
 CircleCI はソースコードを取得 (チェックアウト) して "Hello World" と出力し、ジョブページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
 
