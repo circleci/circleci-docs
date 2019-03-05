@@ -228,11 +228,11 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### 新しい料金プランで、顧客としての私はどんな影響を受けますか？
 {:.no_toc}
-圧倒的多数のユーザーのために、現在のプランを当面そのままにしておくことができます。そうすることで、考慮したい新しいオプションが表示されます。
+圧倒的多数のお客様のために、現在のプランを当面そのままにしておくことができます。そうすることで、考慮したい新しいオプションが表示されます。
 
 #### クレジットとは何ですか？
 {:.no_toc}
-Credits are used to pay for your usage based on machine type and size. Credits can also be used to pay for features, such as Docker Layer Caching.
+クレジットは、マシンのタイプとサイズに基づくお客様の使用に対して支払いをするために使用されます。 Credits can also be used to pay for features, such as Docker Layer Caching.
 
 For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
