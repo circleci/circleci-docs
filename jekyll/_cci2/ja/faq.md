@@ -224,9 +224,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 * * *
 
-### Credit Usage Plans
+### クレジットの利用プラン
 
-#### How do the new pricing plans affect me as a customer?
+#### 新しい料金プランで、ユーザーとしての私はどんな影響を受けますか？
 {:.no_toc}
 For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
 
