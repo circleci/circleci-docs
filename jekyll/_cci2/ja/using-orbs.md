@@ -29,7 +29,7 @@ Orbs は CircleCI を手早く使い始めるのに有用なコンフィグパ�
               - hello/hello-build
     
 
-**注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、設定で [[Enable build processing]]({{ site.baseurl }}/ja/2.0/build-processing/) を [On] にすることで `orbs` キーを使えるようになります。
+**注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Build Processing 設定]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすることで `orbs` キーを使えるようになります。
 
 Orbs は下記の要素で構成されています。
 
