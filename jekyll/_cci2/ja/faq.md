@@ -255,7 +255,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 #### クレジットが不足した場合、どうなりますか？
 {:.no_toc}
 
-On the Performance plan, when you reach 5% of your remaining credits, you will be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+パフォーマンスプランで、残りのクレジットが 5% になったら、10% のクレジットを補充できます。 For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
 
 #### Do credits expire?
 {:.no_toc}
