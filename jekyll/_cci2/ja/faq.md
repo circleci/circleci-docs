@@ -255,11 +255,11 @@ CircleCI はスケジュールの正確性については保証していませ�
 #### クレジットが不足した場合、どうなりますか？
 {:.no_toc}
 
-パフォーマンスプランで、残りのクレジットが 5% になったら、10% のクレジットを補充できます。 For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+パフォーマンスプランで、残りのクレジットが 5% になったら、10% のクレジットを補充できます。 例えば、毎月パッケージサイズが 25,000 クレジットであるとすると、残りのクレジットが 1,250 になると、 2,500 クレジットが自動的に補充されます。
 
-#### Do credits expire?
+#### クレジットの有効期限は？
 {:.no_toc}
-**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+**Performance Plan**: クレジットは購入後 1 後に期限切れとなります。 Unused credits will be forfeited when the account subscription is canceled.
 
 #### How do I pay?
 {:.no_toc}
