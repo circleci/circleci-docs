@@ -244,7 +244,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 {:.no_toc}
 お客様は毎月、月初めに選択されたクレジットパッケージを請求されます。
 
-#### What do I pay for?
+#### 私が支払う金額でどんなサービスが受けられますか？
 {:.no_toc}
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
