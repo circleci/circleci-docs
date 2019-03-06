@@ -275,9 +275,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 CircleCI からの次の請求に加えて、有料プランへのアップグレード日または有料プランの変更日における最初のクレジットカード請求。
 
-- お客様のチームが毎月のプランに加入している場合、毎月の更新日に。
+- お客様のチームが月間のプランに加入している場合、毎月の更新日に。
 - お客様のチームが年間プランに加入している場合、毎年の更新日に。
-- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- お客様のチームが年間プランに加入しており、かつ新しいユーザーの追加または別のクレジットを利用することから発生する見払残画家がある場合、その月の最終日に。
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
 ## 稼働環境
