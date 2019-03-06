@@ -248,8 +248,8 @@ CircleCI はスケジュールの正確性については保証していませ�
 {:.no_toc}
 アクティブユーザーごとのプレミアム機能、計算、およびオプションで、プレミアムサポートでのお私払いを選択できます。
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
-- Compute is paid for monthly in credits for the machine size and duration you use.
+- 新しいマシンサイズなどの機能へのアクセスについては、アクティブユーザーごとに 15 ドル/月をお支払いただきます。 
+- 計算については、マシンサイズと使用期間に対して毎月クレジットからお支払いいただきます。
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to compute credits.
 
 #### What happens when I run out of credits?
