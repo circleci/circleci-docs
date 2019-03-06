@@ -246,7 +246,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### 私が支払う金額でどんなサービスが受けられますか？
 {:.no_toc}
-アクティブなユーザーごとのプレミアム機能、計算、およびオプションで、プレミアムサポートでのお私払いを選択できます。
+アクティブユーザーごとのプレミアム機能、計算、およびオプションで、プレミアムサポートでのお私払いを選択できます。
 
 - Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
 - Compute is paid for monthly in credits for the machine size and duration you use.
