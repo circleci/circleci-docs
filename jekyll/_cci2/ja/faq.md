@@ -268,7 +268,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 #### 私払いの時期は？
 {:.no_toc}
 
-On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills *during* the month (such as the auto-refilling on reaching 5% of credits available) will be paid *at the time of the refill*.
+使用料プランでは、契約の初めに、ユーザーシート、プレミアムサポート、毎月のクレジット割当に対して請求されます。 Any subsequent credit refills *during* the month (such as the auto-refilling on reaching 5% of credits available) will be paid *at the time of the refill*.
 
 #### What are the other renewal dates?
 {:.no_toc}
