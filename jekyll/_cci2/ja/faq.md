@@ -273,10 +273,10 @@ CircleCI はスケジュールの正確性については保証していませ�
 #### その他の更新日については？
 {:.no_toc}
 
-The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+CircleCI からの次の請求に加えて、有料プランへのアップグレード日または有料プランの変更日における最初のクレジットカード請求。
 
-- On the monthly renewal date if your team is on the monthly plan.
-- On the annual renewal date if your team is on the annual plan.
+- お客様のチームが毎月のプランに加入している場合、毎月の更新日に。
+- お客様のチームが年間プランに加入している場合、毎年の更新日に。
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
