@@ -259,9 +259,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### クレジットの有効期限は？
 {:.no_toc}
-**Performance Plan**: クレジットは購入後 1 後に期限切れとなります。 Unused credits will be forfeited when the account subscription is canceled.
+**Performance Plan**: クレジットは購入後 1 後に期限切れとなります。 アカウントのサブスクリプションがキャンセルされたとき、未使用のクレジットは権利を失います。
 
-#### How do I pay?
+#### 私払い方法は？
 {:.no_toc}
 You can pay from inside the CircleCI app for monthly pricing.
 
