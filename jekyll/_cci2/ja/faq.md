@@ -268,9 +268,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 #### 支払いの時期は？
 {:.no_toc}
 
-使用量プランでは、契約の初めに、ユーザーシート、プレミアムサポート、毎月のクレジット割り当てに対して請求されます。 Any subsequent credit refills *during* the month (such as the auto-refilling on reaching 5% of credits available) will be paid *at the time of the refill*.
+使用量プランでは、契約の初めに、ユーザーシート、プレミアムサポート、毎月のクレジット割り当てに対して請求されます。 その後、月の*間*の補充（利用可能なクレジットが残り 5% になった時の自動補充など）は*補充時に*お支払いいただきます。
 
-#### What are the other renewal dates?
+#### その他の更新日については？
 {:.no_toc}
 
 The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
