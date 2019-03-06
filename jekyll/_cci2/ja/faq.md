@@ -278,7 +278,7 @@ CircleCI からの次の請求に加えて、有料プランへのアップグ�
 - お客様のチームが月間のプランに加入している場合、毎月の更新日に。
 - お客様のチームが年間プランに加入している場合、毎年の更新日に。
 - お客様のチームが年間プランに加入しており、かつ新しいユーザーの追加または別のクレジットを利用することから発生する見払残画家がある場合、その月の最終日に。
-- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+- お客様がパフォーマンスプランに加入しており、お客様のチームのクレジット残高が事前に設定された制限値を下回った場合、いつでも別のクレジット購入が処理されます。
 
 ## 稼働環境
 
