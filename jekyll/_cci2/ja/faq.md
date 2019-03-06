@@ -250,9 +250,9 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 - 新しいマシンサイズなどの機能へのアクセスについては、アクティブユーザーごとに 15 ドル/月をお支払いただきます。 
 - 計算については、マシンサイズと使用期間に対して毎月クレジットからお支払いいただきます。
-- Docker Layer Caching (DLC) is paid for with credits per usage, similar to compute credits.
+- Docker レイヤーキャッシュ (DLC) は計算クレジットと同様に、使用量に対してお支払いただきます。
 
-#### What happens when I run out of credits?
+#### クレジットが不足した場合、どうなりますか？
 {:.no_toc}
 
 On the Performance plan, when you reach 5% of your remaining credits, you will be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
