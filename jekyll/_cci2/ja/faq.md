@@ -263,7 +263,7 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### 私払い方法は？
 {:.no_toc}
-You can pay from inside the CircleCI app for monthly pricing.
+毎月の料金については CircleCI アプリ内部からお支払が可能です。
 
 #### When do I pay?
 {:.no_toc}
