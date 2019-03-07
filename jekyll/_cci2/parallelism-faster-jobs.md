@@ -217,10 +217,13 @@ The TESTFILES var will have a different value in each container, based on $CIRCL
 ## Other ways to split tests
 
 Some third party applications and libraries might help you to split your test
-suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss]("https://discuss.circleci.com/").
+suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
 
 - **[Knapsack Pro](https://knapsackpro.com)** - Enables allocating tests
   dynamically across parallel CI nodes, allowing your test suite exection to run
   faster. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
 
-- **[phpunit-finder](https://github.com/previousnext/phpunit-finder)** - This is a helper CLI tool that queries phpunit.xml files to get a list of test filenames and print them. This is useful if you want to split tests to run them in parallel based on timings on CI tools such as CirclCI.
+- **[phpunit-finder](https://github.com/previousnext/phpunit-finder)** - This is
+  a helper CLI tool that queries `phpunit.xml` files to get a list of test
+  filenames and print them. This is useful if you want to split tests to run
+  them in parallel based on timings on CI tools.
