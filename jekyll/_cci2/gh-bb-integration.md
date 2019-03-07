@@ -200,7 +200,7 @@ The account and permissions system we use is not as clear as we would like and a
 
 When you add a new project, CircleCI creates a deployment key on the web-based
 VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH
-key. If you are using Github as your VCS then GitHub has the public key, and
+key. If you are using GitHub as your VCS then GitHub has the public key, and
 CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
 To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 

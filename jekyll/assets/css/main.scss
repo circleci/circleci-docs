@@ -320,6 +320,11 @@ code {
 	grid-template-columns: 50% 50%;
 }
 
+.list-3cols{
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+}
+
 /* A fix for https://github.com/circleci/circleci-docs/issues/1978 */
 body > img:last-of-type{
 	display: none;
