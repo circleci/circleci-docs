@@ -133,7 +133,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.43
+      - image: cibuilds/aws:1.16.118
     steps:
       - attach_workspace:
           at: ./generated-site
