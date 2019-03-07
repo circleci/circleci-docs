@@ -1,23 +1,23 @@
 ---
 layout: classic-docs
-title: "Database Configuration Examples"
-short-title: "Database Configuration Examples"
-description: "Example of Configuring PostgreSQL"
+title: "データベースの設定例"
+short-title: "データベースの設定例"
+description: "PostgreSQL を使う際の設定例"
 categories: [configuring-jobs]
 order: 35
 ---
 
-This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について解説しています。
 
 * TOC
 {:toc}
 
-## Example CircleCI Configuration for a Rails App With structure.sql
+## structure.sql を使う Rails アプリケーション用の設定例
 
-If you are migrating a Rails app configured with a `structure.sql` file make
-sure that `psql` is installed in your PATH and has the proper permissions, as
-follows, because the circleci/ruby:2.4.1-node image does not have psql installed
-by default and uses `pg` gem for database access.
+`structure.sql` ファイルを用いて設定する Rails アプリケーションを移行するときは、
+`psql` が PATH の通っている場所にインストールされていること、psql に対するアクセス権限が正しく設定されていることを確認してください。
+circleci/ruby:2.4.1-node というイメージには psql がデフォルトでインストールされておらず、
+データベースアクセスに `pg` gem を使うためです。
 
 {% raw %}
 
@@ -26,40 +26,40 @@ version: 2
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
-    
-    # Primary container image where all commands run
-    
+
+    # すべてのコマンドの実行を担うプライマリコンテナイメージ
+
     docker:
       - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-    
-    # Service container image available at `host: localhost`
-    
+
+    # 「host: localhost」でアクセスできるサービスコンテナイメージ
+
       - image: circleci/postgres:9.6.2-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
-        
+
     steps:
       - checkout
 
-      # Restore bundle cache
+      # bundle キャッシュをリストアする
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # Bundle install dependencies
+      # bundle install で依存関係をインストールする
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # Store bundle cache
+      # bundle キャッシュを保存する
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
@@ -75,26 +75,26 @@ jobs:
           name: Parallel RSpec
           command: bin/rails test
 
-      # Save artifacts
+      # artifacts を保存する
       - store_test_results:
           path: /tmp/test-results
 ```
 
 {% endraw %}
 
-**Note:** An alternative is to build your own image by extending the current image,
-installing the needed packages, committing, and pushing it to Docker Hub or the
-registry of your choosing.
+**注 :** 上記の方法以外にも、既存のイメージに手を入れて独自のイメージとしてビルドし、
+必要なパッケージを組み合わせて Docker Hub やレジストリにコミット、プッシュする、
+という方法もあります。
 
-### Example Environment Setup
+### 環境設定の例
 {:.no_toc}
 
-In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
+CircleCI 2.0 では複数のビルド済みイメージやカスタムイメージが使われることがあります。そのため、データベース設定は明示的に宣言しておかなければなりません。例えば Rails は下記の優先順位で使用するデータベース URL を特定します。
 
-1.	DATABASE_URL environment variable, if set
-2.	The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).
+1. 定義済みの環境変数 DATABASE_URL の値
+2. `config.yml` ファイル内の該当する環境の test セクションにおける設定（Rails のテストスイートでは通常は `test` と記述しています）
 
-The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
+下記では、このデータベース URL の設定の仕方について、イメージの定義に `environment` を組み合わせる例と、データベース接続を有効にするシェルコマンドを用いた `environment` の例を示しています。
 
 ```yaml
 version: 2
@@ -108,8 +108,8 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
-      # which includes a few enhancements and modifications. It is possible to use either image.
+      # この例では postgres 9.6 の公式イメージを使っています。もしくは circleci/postgres:9.6 と指定することもできます。
+      # 後者には多少の機能改善やカスタマイズが加わっていますが、どちらのイメージを指定しても問題ありません。
       - image: postgres:9.6-jessie
         environment:
           POSTGRES_USER: ubuntu
@@ -119,7 +119,7 @@ jobs:
       - run:
           name: Install Ruby Dependencies
           command: bundle install
-      - run: 
+      - run:
           name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
@@ -128,20 +128,20 @@ jobs:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
 
-This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
+これは PostgreSQL 9.6 で、デフォルトのユーザーとポートを使用するように `$DATABASE_URL` を設定した例となります。バージョンが 9.5 の場合はポート番号を 5432 ではなく 5433 とします。他のポートを使うときは、`$DATABASE_URL` と `psql` を呼び出しているすべての箇所を変更してください。
 
-## Example Go App with PostgreSQL
+## PostgreSQL と Go 言語を使ったアプリケーションの設定例
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+下記の設定に関する全体像やアプリケーションのパブリックリポジトリのソースは、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)で確認できます。
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      # CircleCI の Go のイメージはこちら https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI の PostgreSQL のイメージはこちら https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: circleci-demo-go
@@ -160,8 +160,8 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # Normally, this step would be in a custom primary image;
-      # we've added it here for the sake of explanation.
+      # 通常、以下の内容はカスタムしたプライマリイメージのところに記述しますが、
+      # わかりやすくするためここに記述しています。
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -175,7 +175,7 @@ jobs:
               echo -n .
               sleep 1
             done
-            echo Failed waiting for Postgres && exit 1
+            echo Failed waiting for Postgres &amp;&amp; exit 1
       - run:
           name: Run unit tests
           environment:
@@ -212,9 +212,9 @@ jobs:
           path: /tmp/test-results
 ```
 
-## Example Ruby Project with MYSQL and Dockerize
+## MySQL を使った Ruby プロジェクトの設定例と、それを Docker 化する例
 
-The following example uses MySQL and dockerize, see the [sample project on GitHub](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+下記は MySQL と dockerize コマンドを使った例です。補足情報は [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) でご確認ください。
 
 ```yaml
 version: 2
@@ -235,14 +235,14 @@ jobs:
           command: bundle install
       - run:
           name: Wait for DB
-          # preinstalled in circleci/* docker image
+          # circleci/* の Docker イメージにプリインストール
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
           name: MySQL version
           command: bundle exec ruby mysql_version.rb
 ```
 
-## See Also
+## 関連情報
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を「[データベースを設定する]({{ site.baseurl }}/ja/2.0/databases/)」ページで紹介しています。

@@ -37,8 +37,8 @@ The `version` field is intended to be used in order to issue warnings for deprec
 Key | Required | Type | Description
 ----|-----------|------|------------
 orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors] ({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands] ({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
+executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
+commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
@@ -110,7 +110,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the [Using Parameters in Executors] (https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 
@@ -887,8 +887,8 @@ For example, the following step syntax persists the specified paths from `/tmp/d
 After this step completes, the following directories are added to the workspace:
 
 ```
-foo/bar
-baz
+/tmp/dir/foo/bar
+/tmp/dir/baz
 ```
 
 ###### _Example for paths Key_

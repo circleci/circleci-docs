@@ -27,7 +27,10 @@ workflows:
           - hello/hello-build
 ```
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+Commit and push the changes to trigger a build. If this is your first project on
+CircleCI, go to the Projects page, click the **Add Projects** button, then click
+the **Set Up Project** button next to your project. You may also click **Start
+Building** to manually trigger your first build.
 
 ## Echo Hello World with a `build` Job
 
@@ -48,7 +51,10 @@ jobs:
 
 **Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file. 
 
-Commit and push the changes to trigger a build. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button and then click the **Build Project** button next to your project.
+Commit and push the changes to trigger a build. If this is your first project on
+CircleCI, go to the Projects page, click the **Add Projects** button, then click
+the **Set Up Project** button next to your project. You may also click **Start
+Building** to manually trigger your first build.
 
 CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
 
@@ -64,7 +70,7 @@ In the top left, you will find the Org switcher.
 
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must select `myOrg` on the application Switch Organization menu.
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
 ## Next Steps
 

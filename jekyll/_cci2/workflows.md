@@ -264,7 +264,7 @@ a `cron` key and a `filters` key.
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
 
 **Note:**
-Cron step syntax (for example, `*/1`, `*/20`) is **not** supported.
+Cron step syntax (for example, `*/1`, `*/20`) is **not** supported. Range elements within comma-separated lists of elements are also **not** supported. 
 
 The value of the `filters` key must be a map
 that defines rules for execution on specific branches.
@@ -578,7 +578,7 @@ If you have implemented Workflows on a branch in your GitHub repository, but the
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to Github with a key that includes the job by name.
+Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
 
