@@ -185,22 +185,6 @@ jobs:
       - run: echo outside the executor
 ```
 
-
-```yaml
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers
-
-jobs:
-  my-job:
-    executor: my-executor
-    steps:
-      - run: echo outside the executor
-```
-
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 ## Invoking Reusable Executors
