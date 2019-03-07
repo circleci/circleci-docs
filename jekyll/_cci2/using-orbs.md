@@ -43,10 +43,8 @@ Orbs consist of the following elements:
 
 Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
-{% raw %}
 ```yaml
 version: 2.1
-
 jobs
   myjob:
     docker:
@@ -55,7 +53,6 @@ jobs
       - myorb/sayhello:
           to: "Lev"
 ```
-{% endraw %}
 
 ### Jobs
 {:.no_toc}
@@ -87,7 +84,6 @@ The example below shows a simple example of using an executor:
 
 ```yaml
 version: 2.1
-
 executors:
   my-executor:
     docker:
@@ -102,7 +98,6 @@ jobs:
 
 Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
 
-{% raw %} 
 ```yaml
 version: 2.1
 jobs:
@@ -112,7 +107,6 @@ jobs:
     steps:
       - run: echo outside the executor
 ```
-{% endraw %}
 
 ## Key Concepts
 
