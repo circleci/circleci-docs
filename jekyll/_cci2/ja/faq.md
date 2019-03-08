@@ -282,7 +282,7 @@ CircleCI からの次の請求に加えて、有料プランへのアップグ�
 
 ## 稼働環境
 
-### Can I use IPv6 in my tests?
+### テスト時に IPv6 は利用できますか？
 {:.no_toc}
 You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
