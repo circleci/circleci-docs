@@ -44,7 +44,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 ### Orb Publishing Process
 
-Before working with orbs, you may find it helpful to gain a high-level understanding of the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process. ![Orbs Workflow Diagram image](  {{ site.baseurl }}/assets/img/docs/orbsworkflow-v2_orbs_outline.png)
+Before working with orbs, you may find it helpful to gain a high-level understanding of the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process. ![Orbs Workflow Diagram image](  {{ site.baseurl }}/assets/img/docs/orbs_outline_v3.png)
 
 #### Step 1 - Set Up the CircleCI CLI
 Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Detailed instructions can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
