@@ -172,4 +172,4 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 ## 関連情報
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
