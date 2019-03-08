@@ -11,7 +11,7 @@ order: 20
 
 `config.yml` ファイルの全容は、このページ内の[サンプルコード](#full-example)で紹介しています。
 
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
+**※**CircleCI 1.0 を利用していた場合は、`config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。 従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` の含まれない CircleCI 1.0 環境の実行にも支障はありません。
 
 * * *
 
