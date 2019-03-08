@@ -284,11 +284,11 @@ CircleCI からの次の請求に加えて、有料プランへのアップグ�
 
 ### テスト時に IPv6 は利用できますか？
 {:.no_toc}
-You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+IPv6 によるローカル通信のテストでは [machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) が活用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
+machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
-You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。 下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
 ```yaml
    ipv6_tests:
@@ -307,7 +307,7 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
            sudo service docker restart
 ```
 
-Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
+Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
 ### What operating systems does CircleCI 2.0 support?
 {:.no_toc}
