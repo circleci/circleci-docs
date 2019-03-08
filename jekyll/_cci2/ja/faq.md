@@ -309,16 +309,16 @@ IPv6 環境のサービスをテストするために、コンテナに IPv6 ア
 
 Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
-### What operating systems does CircleCI 2.0 support?
+### CircleCI 2.0 がサポートしている OS は？
 {:.no_toc}
-- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
+- **Linux :** CircleCI はほとんどの Linux アプリケーションのビルドが可能な高い柔軟性をもっています。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
 
-- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
+- **Android :** 詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
 
-- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
+- **iOS :** 「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
 
-- **Windows:** We do not yet support building and testing Windows applications.
+- **Windows :** Windows アプリケーションのビルドとテストは現在サポートしていません。
 
-### Which CPU architectures does CircleCI support?
+### CircleCI がサポートしている CPU アーキテクチャは？
 {:.no_toc}
-`amd64` is the only supported CPU architecture.
+サポートしている CPU アーキテクチャは `amd64` のみとなります。
