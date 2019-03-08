@@ -25,12 +25,12 @@ order: 20
 
 ## **`version`**
 
-キー | 必須 | 型タイプ | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のいずれかの値をとる。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のいずれかの値をとる。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照。
 {: class="table table-striped"}
 
 `version` フィールドは、非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
 
-## **`orbs`**（version: 2.1 が必須）
+## **`orbs`**（version: 2.1 必須）
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details. executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below. commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
