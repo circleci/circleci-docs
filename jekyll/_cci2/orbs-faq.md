@@ -131,7 +131,8 @@ yourusername/circle-autoAdded by GitHub
 * Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
 
 {% raw %}
-```
+```yaml
+version: 2.1
 orbs:
   some-orb: some-ns/some-orb@volatile
 executors:
@@ -153,9 +154,11 @@ jobs:
 * Question: Why do I receive an error message when trying to use a 3rd party orb?
 
 * Answer: When using a 3rd party orb, you must first opt-in to using 3rd party orbs. If you use a 3rd party orb before opting in, you will receive the following error message:
+
 ```
 "Orb {orb@version} not loaded. To use this orb, an organization admin must opt-in to using third party orbs in Organization Security settings."
 ```
+
 Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
 
 To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.
