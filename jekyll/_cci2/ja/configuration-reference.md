@@ -7,9 +7,9 @@ categories:
   - configuring-jobs
 order: 20
 ---
-This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
+このページでは `config.yml` ファイル内で使用する CircleCI 2.0 のコンフィグ用のキーについて解説しています。 CircleCI と連携したリポジトリのブランチに `.circleci/config.yml` ファイルが含まれていれば、それは CircleCI 2.0 の環境で利用するということを意味します。
 
-You can see a complete `config.yml` in our [full example](#full-example).
+`config.yml` ファイルの全容は、このページ内の[サンプルコード](#full-example)で紹介しています。
 
 **Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
