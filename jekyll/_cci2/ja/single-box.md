@@ -6,25 +6,26 @@ category:
 order: 3
 description: "単一のVM に CircleCI をインストールする方法"
 ---
-CircleCI は拡張性のある CI/CD プラットフォームで、数十数百ものビルドマシンのクラスタをサポートします。 このページでは、任意の環境でマシンのちょっとした動作を試してみるために、単一の仮想マシン環境にプラットフォームをインストールして実行する手順について説明します。
+CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the CircleCI platform on a single virtual machine. This is intended as a simple mechanism for getting started with a small trial in any environment:
 
 - 目次
 {:toc}
 
 ## 前準備
 
-トライアルを首尾よくインストールするためには、下記の要件を満たす必要があります。
+The following requirements must be met for a successful trial installation:
 
-- トライアルライセンスのファイルを受信するために[登録](https://circleci.com/enterprise-trial-install/)する。
-- バージョン管理のために **GitHub.com または GitHub Enterprise** を使用する。
-- CircleCI および GitHub を実行するマシンは、ネットワーク上で互いにアクセスできる必要がある。
-- CircleCI マシンは、インターネットへ外向きアクセスできる必要がある。 プロキシサーバーを使用している場合の手順については、[CircleCIにお問い合わせくださいcontact us](https://support.circleci.com/hc/en-us/requests/new)。
+- [Sign-up](https://circleci.com/enterprise-trial-install/) to receive a CircleCI trial license file.
+- You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start).
+- Use **GitHub.com or GitHub Enterprise** for version control.
+- Machines running CircleCI and GitHub must be able to reach each other on the network.
+- CircleCI machines must have outbound internet access. If you use a proxy server, [contact us](https://support.circleci.com/hc/en-us/requests/new) for instructions.
 
 ## AWS EC2 へのインストー手順
 
-この手順を使用して単一 EC2 VM に CircleCI をインストールするには、仮想アプライアンスの特殊なタイプであり、 Amazon Elastic Compute Cloud ("EC2") 内で想マシンの作成に使用されるプリメイドの Amazon Machine Image (AMI) を使用します。
+The steps in this section walk you through installing CircleCI on a single EC2 VM using a pre-made Amazon Machine Image (AMI). An AMI is a special type of virtual appliance used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2").
 
-**注:** インストールされたマシンで実行されるすべてのビルドは、そのインスタンスプロファイルに関連付けされている AWS Identity and Access Management (IAM) 権限にアクセスします。 お使いのインスタンスに不適切な権限を付与 **しない**でください。 プロダクション設定をすると、`iptables` ルールでこのアクセスをブロックすることができます。固有の手順については[サポートにお問い合わせください](https://support.circleci.com/hc/en-us)。
+**Note:** All builds that run on the installed machine will have access to the AWS Identity and Access Management (IAM) privileges associated with its instance profile. Do **not** give any inappropriate privileges to your instance. It is possible to block this access with `iptables` rules in a production setup, [contact support](https://support.circleci.com/hc/en-us) for specific instructions.
 
 ### Amazon Machine Image の設定:
 
@@ -53,22 +54,22 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 <select id="ami-select" onchange="amiUpdateSelect()"> <option value="ap-northeast-1">ap-northeast-1</option> <option value="ap-northeast-2">ap-northeast-2</option> <option value="ap-southeast-1">ap-southeast-1</option> <option value="ap-southeast-2">ap-southeast-2</option> <option value="eu-central-1">eu-central-1</option> <option value="eu-west-1">eu-west-1</option> <option value="sa-east-1">sa-east-1</option> <option value="us-east-1" selected="selected">us-east-1</option> <option value="us-east-2">us-east-2</option> <option value="us-west-1">us-west-1</option> <option value="us-west-2">us-west-2</option> </select> <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">Go!</a>
 <script>amiUpdateSelect();</script>
 
-1. 上記のリストから、お住いの地域の Amazon Machine Image を見つけてください。 
-2. `m4.2xlarge` など、最低でも 32G の RAM を持つインスタンスタイプを選んでいることを確認します。 [Next] を選択してインスタンスを設定します。
-3. インスタンス詳細の設定ページで、以下を実行します。 
+1. Find the Amazon Machine Image for your region from the list above, and click Go!
+2. Ensure you choose an instance type with at least 32G of RAM, such as `m4.2xlarge`, from the list. Select Next: Configure Instance Details.
+3. インスタンス詳細の設定ページで、以下を実行します。
 
-- お使いのネットワークを選択する - 自動割り当て公開 IP を有効にする - IAM ロールを「なし」に設定する ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png) 4. デフォルトのインスタンスには、100GB のストレージがあります。トライアルのインストールにはこの容量で十分です。 5. セキュリティグループの設定手順の間、下記のポートを開きます。 - SSH ポート 22 - HTTP ポート 80 - HTTPS ポート 443 - Custom TCP 8800 - (Optional) 開発者がデバッグ目的で SSH でのビルドへの接続を有効にするには、Custom TCP のポート 64535-65535 を開きます。 ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png) 6. VM を開始後、公開または非公開 IP アドレスまたは VM のホスト名にアクセスし、[Get Started] をクリックして CircleCI のガイド付きインストールプロセスの残り部分を完了します。
+- Choose your network - Enable Auto-assign Public IP - Check the IAM role is set to None ![AWS Step 3]({{site.baseurl}}/assets/img/docs/single-box-step3.png) - Then select Next: Add Storage. 4. By default, the instance will have 100GiB of storage, this is enough for the trial install. Select Next: Add Tags. 5. You don't need to add a tag for the purposes of this trial but feel free to do so using the Add Tag button. Select Next: Configure Security Group. 5. On the Configure Security Group page, open the following ports: - SSH port 22 - HTTP port 80 - HTTPS port 443 - Custom TCP 8800 - (Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP. ![AWS Step 5]({{site.baseurl}}/assets/img/docs/single-box-step5.png) - Then select Review and Launch to see a summary of your trial instance, then select Launch. 6. You should now be looking at the Launch Status Page. From here you can select View Instances to jump to your AWS dashboard and see the full details of your trial instance. Once the instance is up and running, go to the public or private IP address or hostname and click Get Started to complete the rest of the guided installation process for CircleCI. **Note:** your browser may warn you that the Get Started link is unsafe. ![Getting Started Page]({{site.baseurl}}/assets/img/docs/GettingStartedPage.png)
 
 ### CircleCI の設定
 
-1. SSL 証明書オプションを選択します。 デフォルトで、CircleCI インストールにおけるすべてのマシンは GitHub Enterprise インスタンス用の SSL 証明書を確認します。 
+1. Choose an SSL certificate option and enter a hostname if relevant. This is where you can upload the licence file you were provided with when you signed up for your CircleCI account. Otherwise, by default, all machines in a CircleCI installation verify SSL certificates for the GitHub Enterprise instance.
 
-- 注: あなたが自己署名証明書を使用している場合、またはカスタム CA ルートを使用している場合、スクリプトの[証明書]({{site.baseurl}}/2.0/certificates/)ドキュメントを参照して CircleCI truststore を追加します。 2. CircleCI ライセンスファイルをアップロードし、管理者パスワードを設定します。 3. 1.0 ビルド機能を必要としない場合、ボックスのチェックは外したままにしてください。 ほとんどのユーザーはボックスにチェクを入れて 2.0 機能を有効にする必要があります。 4. 「ビルダ設定」セクションで「単一ボックス」を選択します。 5. ホームページ URL の手順 6 から AWS インスタンスの IP アドレスを使用して、および承認コールバックの URL として `http(s)://AWS instance IP address/auth/github` を使用して、GitHub.com （<https://github.com/settings/applications/new/>~）のまたは GitHub Enterprise 設定の新しい OAuth アプリケーションとして CircleCI を登録します。 [Register Application] ボタンをクリックします。 - **Note:** If you get an "Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL. 6. Copy the Client ID from GitHub and paste it into the entry field for GitHub Application Client ID. 7. Copy the Secret from GitHub and paste it into the entry field for GitHub Application Client Secret and click Test Authentication. 8. 「なし」が「ストレージ」セクションで選択されていることを確認します。 プロダクションインストールで、他のオブジェクトストアを使用することはできますが、対応する権限が必要となります。 9. 「VM プロバイダ」が「なし」に設定されていることを確認します。 CircleCI でVM をダイナミックにプロビジョニングしたい場合 (例：Docker ビルドの実行をサポートするために) この設定を変更できますが、追加の IAM 権限が必要となります。 ご不明な点やご質問がありましたら[お問い合わせください](https://support.circleci.com/hc/en-us)。 10. ライセンス契約に同意し、保存します。 アプリケーションの起動プロセスは 160 MB 未満の Docker イメージのダウンロードによって始まるため、完了には少し時間がかかります。 11. CircleCI アプリを開いて [Get Started] をクリックし GitHub アカウントを承認します。 [Add Projects] ページが開き、最初のビルドのプロジェクトを選択できます。
+- 注: あなたが自己署名証明書を使用している場合、またはカスタム CA ルートを使用している場合、スクリプトの[証明書]({{site.baseurl}}/2.0/certificates/)ドキュメントを参照して CircleCI truststore を追加します。 2. Once you have uploaded your CircleCI licence file you can decide how to secure your admin console. You have three options: - Anonymous admin access to the console, anyone on port8800 can access. (not-recommended). - Set a password that can be used to securely access the admin console (recommended). - Use your existing directory-based authentication system (LDPA). 4. Your CircleCI instance will now be put through a set of preflight checks, once they have completed, click Continue. 3. On the Settings page, address the following: - Enter your hostname, or IP address if you didn't set one, and click Test Hostname Resolution. - Under Execution Engines, if you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality. - Under 2.0 Builders Configuration, select "Single Box". - Follow the Github integration instructions. **Note:** If you get an *"Unknown error authenticating via GitHub. Try again, or contact us."* message, try using `http:` instead of `https:` for the Homepage URL and callback URL. - Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions. - Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions. - Agree to the license agreement, save and head to your Dashboard. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete. 11. Click Open to launch the CircleCI app and click Sign Up to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
 
 <!---
 ## Installation in a Data Center
 
-1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04. 
+1. Launch a VM with at least 8GB of RAM, 100GB of disk space on the root volume, and a version of Linux that supports Docker, for example Ubuntu Trusty 14.04.
 
 2. Open ports 22 and 8800 to administrators, open ports 80 and 443 to all users, and optionally open ports 64535-65535 to developers to SSH into builds.
 
@@ -76,7 +77,7 @@ CircleCI は拡張性のある CI/CD プラットフォームで、数十数百�
 
 4. Visit port 8800 on the machine in a web browser to complete the guided installation process.
 
-5. Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames,  enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete. 
+5. Complete the process by choosing an SSL certificate option, uploading the license, setting the admin password and hostnames,  enabling GitHub OAuth registration, and defining protocol settings. The application start up process begins by downloading the ~160 MB docker image, so it may take some time to complete.
 
-6. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build. 
+6. Open the CircleCI app and click Get Started to authorize your GitHub account. The Add Projects page appears where you can select a project for your first build.
 -->
