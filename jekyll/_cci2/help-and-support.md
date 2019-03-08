@@ -23,7 +23,7 @@ If you can't find your question, post it yourself and one of our support enginee
 
 ## Create a Support Request
 
-If you have a paid account, then you can ask directly for help from our support team. To create a support request, click the  'Support' link in the top right navigation bar, then click 'Get Support'. You can then browse the support center, and click 'Submit a Request' in the top left when ready.
+If you need in-depth help, or have details you can't share on the forums, then you can ask directly for help from our support team. To create a support request, click the  'Support' link in the top right navigation bar, then click 'Get Support'. You can then browse the support center, and click 'Submit a Request' in the top left when ready.
 
 In the form that appears, enter a title for your question, along with a message detailing your problem. You can also attach files if you have a helpful screenshot or cute cat picture.
 
