@@ -50,25 +50,27 @@ jobs:
 ```
 ```
 
-**注**：`macOS` executors では、一部の設定が異なります。 iOS のプロジェクトを立ち上げる方法は、[iOS チュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)にアクセスし、`macOS` の設定例を参考にしてください。
+CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+
+**Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out the [Hello World macOS]({{site.baseurl}}/2.0/hello-world-macos/) document and the [iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for examples of a simple `macos` config files.
 
 変更のコミットやプッシュは、ビルド実行のトリガーになります。 If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button, then click the **Set Up Project** button next to your project. You may also click **Start Building** to manually trigger your first build.
 
-CircleCI はソースコードを取得 (チェックアウト) して "Hello World" と出力し、ジョブページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
+CircleCI checks out your code, prints "Hello World", and posts a green build to the Job page, adding a green checkmark on your commit in GitHub or Bitbucket.
 
-**注：**ファイルの拡張子に `.yaml` を使うと、`No Config Found` エラーが発生します。 ファイルの拡張子で `.yml` を使うことで、このエラーは解消されます。
+**Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
 ## プロジェクトをフォローする
 
-自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した Org の各プロジェクトについて、手動でフォローとフォロー解除もできます。[Add Project] を選び、プロジェクト名の横にある [Follow Project] ボタンもしくは [Unfollow Project] ボタンをクリックしてください。
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
 
 ## Org の切り替え
 
-画面左上に、Org を切り替えるメニューがあります。
+In the top left, you will find the Org switcher.
 
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある Org を確認してください。 For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
 ## 次のステップは？
 
