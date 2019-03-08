@@ -25,7 +25,7 @@ order: 20
 
 ## **`version`**
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+キー | 必須 | 型タイプ | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のいずれかの値をとる。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照。
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
