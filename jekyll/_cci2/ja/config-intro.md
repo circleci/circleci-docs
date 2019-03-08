@@ -219,4 +219,4 @@ The examples above were designed to provide a quick starter to the areas of func
 ## 関連情報
 {:.no_toc}
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
