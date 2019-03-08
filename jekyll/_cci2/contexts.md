@@ -47,6 +47,9 @@ workflows:
           context: org-global
 ```
 
+## Moving a Repo that Uses a Context
+
+If you move your repo to a new org, you must also have the context with that unique name set in the new org.
 
 ## Deleting a Context
 
