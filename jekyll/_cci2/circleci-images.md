@@ -270,21 +270,32 @@ that a given tag has the same meaning across images!
 ### {{ image[1].name }}
 {:.no_toc}
 
+**Resources:**
+
+- [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
+- [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - the Dockerfiles this image was built from.
+
 **Usage:** Add the following under `docker:` in your config.yml:  
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Latest Tags:** <small>(view more available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
+**Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
 
-<ul class="list-2cols">
-{% assign tags = image[1].tags | sort %}
+<ul class="list-3cols">
+{% assign tags = image[1].tags | sort | reverse %}
+{% assign tagCounter = 1 %}
 {% for tag in tags %}
-	{% unless tag contains "-browsers" or tag contains "-node" %}
+	{% if tagCounter > 99 %}
+		{% break %}
+	{% endif %}
+	{% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
 	<li>{{ tag }}</li>
+	{% assign tagCounter = tagCounter | plus:1 %}
 	{% endunless %}
 {% endfor %}
 </ul>
-<p>Note: Any variants available for this image can be added by appending the variant tag to the tags above.</p>
+
+Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
 
 ---
 

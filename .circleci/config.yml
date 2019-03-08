@@ -45,7 +45,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.6.1
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -127,7 +127,7 @@ jobs:
 
   reindex-search:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.6.1
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -146,7 +146,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.43
+      - image: cibuilds/aws:1.16.118
     steps:
       - attach_workspace:
           at: ./generated-site
