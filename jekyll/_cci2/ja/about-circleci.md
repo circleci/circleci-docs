@@ -21,34 +21,36 @@ We work where you work: Linux, macOS, Android - SaaS or behind your firewall.
 
 ## 概要
 
-GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 テスト完了後にはメールで成功・失敗の通知が届くほか、 Slack、HipChat、Campfire、Flowdock、IRC などのチャットツールと連携して通知を受け取ることも可能です。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
+GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs CircleCI spins up a container or VM to run the job in.
 
-AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Engine (GKE)、Heroku といったデプロイサービスを利用している場合、CircleCI はそれに合わせてデプロイコードを構成します。 その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、簡単にスクリプト化できます。
+CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
+
+CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Container Engine (GKE), and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 
 ## 継続的インテグレーションとは？
 
-**継続的インテグレーション**とは、Git のような共有リポジトリにおける `master` (中央の) ブランチに対して、素早く、定期的に、個々の開発者が自身のコードをマージするための手法です。 別の場所で機能追加などを行い、開発サイクルの終了間際にマージする方法とは違って、継続的インテグレーションでは、開発メンバーそれぞれが随時、自身のコードを共有リポジトリ上でマージしていく形になります。
+**Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
-**継続的インテグレーション**は、デジタルトランスフォーメーションに向けた大切な第一歩です。
+**Continuous Integration** is a key step to digital transformation.
 
-**導入すると？**  
-開発メンバー全員がリポジトリの共有メインラインに日々コミットできます。  
-コミットのたびにビルドとテストが自動で実行されます。  
-ビルドやテストに失敗したときは、その問題の解決を即座に図れます。
+**What?**  
+Every developer commits daily to a shared mainline.  
+Every commit triggers an automated build and test.  
+If build and test fails, it’s repaired quickly - within minutes.
 
 **Why?**  
 Improve team productivity, efficiency, happiness. Find problems and solve them, quickly. Release higher quality, more stable products.
 
 ## 無料トライアル
 
-CircleCI では以下の無料トライアルを用意しています。
+CircleCI provides a free trial with the following options:
 
 - **クラウド型**：クラウドサーバー上にホスティングした CircleCI を試せるものです。[無料トライアルはこちら]({{site.baseurl}}/2.0/first-steps/)。
 - **サーバー型**：自身のサーバー上で CircleCI の動作を試せるものです。[インストール方法はこちら]({{site.baseurl}}/2.0/single-box/)。
 
 ### オープンソース特典
 
-パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/2.0/oss/)をご覧ください。
+See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects.
 
 ## 関連情報
 
