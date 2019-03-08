@@ -9,7 +9,8 @@ order: 60
 ---
 If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can run tests in parallel by spreading them across multiple machines. This requires specifying a parallelism level. You can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## Specifying a Job's Parallelism Level
 
@@ -36,7 +37,6 @@ CircleCI supports automatic test allocation across your containers. The allocati
 To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
 ### Globbing Test Files
-
 {:.no_toc}
 
 The CLI supports globbing test files using the following patterns:
@@ -70,7 +70,6 @@ jobs:
 ```
 
 ### Splitting Test Files
-
 {:.no_toc}
 
 The CLI supports splitting tests across machines when running parallel builds. To do this, pass a list of filenames to the `circleci tests split` command.
@@ -91,7 +90,6 @@ Similarly, the current container index is automatically picked up from environme
     
 
 #### Splitting by Name
-
 {:.no_toc}
 
 By default, `circleci tests split` expects a list of filenames and splits tests alphabetically by test name. There are a few ways to provide this list:
@@ -112,7 +110,6 @@ Or pipe a glob of test files.
     
 
 #### Splitting by Filesize
-
 {:.no_toc}
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
@@ -121,7 +118,6 @@ When provided with filepaths, the CLI can also split by filesize. To do this, us
     
 
 #### Splitting by Timings Data
-
 {:.no_toc}
 
 On each successful run of a test suite, CircleCI saves timings data to a directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. If you do not use `store_test_results`, there will be no timing data available for splitting your tests.
@@ -154,8 +150,9 @@ bundle exec rspec -- ${TESTFILES}
 The TESTFILES var will have a different value in each container, based on $CIRCLE_NODE_INDEX and $CIRCLE_NODE_TOTAL.
 
 ### Video: Troubleshooting Globbing
+{:.no_toc}
 
-{:.no_toc} <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
+<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
 ## 関連情報
 
@@ -163,8 +160,8 @@ The TESTFILES var will have a different value in each container, based on $CIRCL
 
 ## Other ways to split tests
 
-### Test suite split with Knapsack Pro for Ruby & JavaScript
+Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
 
-{% include third-party-info.html app='Knapsack Pro'%}
+- **[Knapsack Pro](https://knapsackpro.com)** - Enables allocating tests dynamically across parallel CI nodes, allowing your test suite exection to run faster. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
 
-You can allocate tests in a dynamic way across parallel CI nodes with [Knapsack Pro](https://knapsackpro.com) Queue Mode. This way you can auto balance CI nodes timing affected by the randomness of tests time execution to run faster CI builds. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
+- **[phpunit-finder](https://github.com/previousnext/phpunit-finder)** - This is a helper CLI tool that queries `phpunit.xml` files to get a list of test filenames and print them. This is useful if you want to split tests to run them in parallel based on timings on CI tools.
