@@ -46,6 +46,10 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
               context: org-global
     
 
+## Moving a Repo that Uses a Context
+
+If you move your repo to a new org, you must also have the context with that unique name set in the new org.
+
 ## Deleting a Context
 
 1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
