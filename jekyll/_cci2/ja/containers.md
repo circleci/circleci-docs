@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Using Containers
+title: コンテナを使用する
 categories:
   - how-to
-description: How to leverage CircleCI containers
+description: CircleCI コンテナの使用方法
 ---
 このページでは、コンテナの基本について説明します。また、お使いのプランで提供されるコンテナを活用してジョブや Workflows の実行を高速化する方法についても解説します。
 
@@ -17,8 +17,8 @@ VCS システムに変更がコミットされると、CircleCI はコードを�
 
 ## はじめよう
 
-無料の Linux プランでは、同時に実行できる Workflows は 1つのみで、並列処理は行えません。 Open source projects include three additional free containers to run jobs in parallel. Purchasing a Linux plan enables you to use additional containers when you need them. Choose a paid or free plan during the signup process and change your plan in the CircleCI app Settings page later to meet changing business requirements. Most CircleCI customers use two to three containers per full-time developer. Increase the number of containers at any level of parallelism and concurrency as your team or the complexity of your workflow grows.
+無料の Linux プランでは、同時に実行できる Workflows は 1つのみで、並列処理は行えません。 オープンソースプロジェクトにはさらに 3つの無料コンテナが提供されるため、ジョブを並列で実行できます。 追加のコンテナが必要な場合は、有料の Linux プランを購入してください。 ユーザー登録時に無料プランか有料プランを選択できます。登録後に必要になったときには CircleCI アプリの [Settings] ページでプランの変更が可能です。 CircleCI のお客様の大半が、フルタイムの開発者 1人あたり 2 〜 3個のコンテナをお使いになっています。 チームの規模が拡大したときや Workflows が複雑化したときには、必要な並列処理や同時処理を行えるよう、コンテナを追加してください。
 
-## Upgrading
+## アップグレード
 
-Refer to the [FAQ about upgrading]({{ site.baseurl }}/2.0/faq/#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing) for step-by-step instructions about upgrading your plan.
+プランのアップグレード手順については、[アップグレードに関するよくあるご質問]({{ site.baseurl }}/ja/2.0/faq/#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing)のページに詳しく記載しています。
