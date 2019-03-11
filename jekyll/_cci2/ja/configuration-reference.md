@@ -73,7 +73,7 @@ commands:
 
 executors は、ジョブにおけるステップの実行環境を定義します。Executor は 1 つ定義するだけで複数のジョブで再利用可能です。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を利用する。指定可能なオプションは[こちら](#docker) resource_class | - | String | ジョブにおいて各コンテナに割り当てられた CPU の数とメモリ容量 （`docker` Executor の時のみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を利用する。指定可能なオプションは[こちら](#machine) macos | ○<sup>(1)</sup> | Map | macOS Executor を利用する。指定可能なオプションは[こちら](#macos) shell | - | String | ステップ内のコマンド実行に用いるシェル。 Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) working_directory | N | String | In which directory to run the steps. environment | N | Map | A map of environment variable names and values.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を利用する。指定可能なオプションは[こちら](#docker) resource_class | - | String | ジョブにおいて各コンテナに割り当てられた CPU の数とメモリ容量 （`docker` Executor の時のみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を利用する。指定可能なオプションは[こちら](#machine) macos | ○<sup>(1)</sup> | Map | macOS Executor を利用する。指定可能なオプションは[こちら](#macos) shell | - | String | ステップ内のコマンド実行に用いるシェル。 ステップごとに使用する `shell` を変えることも可能（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照） environment | - | Map | 観光変数の名前と値のマップ
 {: class="table table-striped"}
 
 例
@@ -89,10 +89,10 @@ jobs:
   my-job:
     executor: my-executor
     steps:
-      - run: echo outside the executor
+      - run: echo Executor の“外”で定義しました
 ```
 
-See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+Executor の並列処理させ型については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」のなかの「[Executor でパラメーターを使う](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
 
 ## **`jobs`**
 
