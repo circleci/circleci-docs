@@ -52,7 +52,7 @@ order: 20
 
 commands は、ステップシーケンスをジョブ内で実行するマップの形で定義します。これを活用することで、複数ジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/2.0/reusing-config/)が可能になります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- steps | Y | Sequence | A sequence of steps run inside the calling job of the command. parameters | N | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details. description | N | String | A string that describes the purpose of the command.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンス parameters | - | Map | パラメーターキーのマップ。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax)」を参照 description | - | String | コマンドの内容を説明する文章
 {: class="table table-striped"}
 
 例
@@ -60,7 +60,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 ```yaml
 commands:
   sayhello:
-    description: "A very simple command for demonstration purposes"
+    description: "デモ用のごく単純なコマンドです"
     parameters:
       to:
         type: string
@@ -69,7 +69,7 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`executors`** (requires version: 2.1)
+## **`executors`**（version: 2.1 が必須）
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
