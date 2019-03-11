@@ -46,9 +46,9 @@ order: 20
               - hello/hello-build
     
 
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
+`circleci/hello-build@0.0.5` がそもそもの Orb の参照先ですが、この例では `hello` がその Orb の参照名となります。
 
-## **`commands`** (requires version: 2.1)
+## **`commands`**（version: 2.1 が必須）
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
 
