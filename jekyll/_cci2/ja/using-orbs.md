@@ -7,14 +7,14 @@ categories:
   - getting-started
 order: 1
 ---
-ここでは [Orb]({{ site.baseurl }}/ja/2.0/orb-intro/) の基礎的なインポートの例とそれに関連する要素について、下記の流れで解説しています。
+ここでは [Orb]({{ site.baseurl }}/ja/2.0/orb-intro/) の基礎的なインポートして使用する例とそれに関連する要素について、下記の流れで解説しています。
 
 - TOC
 {:toc}
 
 ## はじめに
 
-Orbs は CircleCI を手早く使い始めるのに有用なコンフィグパッケージです。 Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。 最適なコンフィグのサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
+Orbs は CircleCI を手早く使い始めるのに便利なコンフィグパッケージです。 Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。 最適なコンフィグのサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
 
 `orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) を呼び出している例です。
 
