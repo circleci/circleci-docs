@@ -32,10 +32,10 @@ order: 20
 
 ## **`orbs`**（version: 2.1 が必須）
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | 割り当てる名前: Orb の参照名（文字列）または Orb の定義名（割り当て名) Orb の定義は、バージョン 2.1 のコンフィグにおける Orb 関連のサブセットととなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | - | Map | Executor の定義文字列の参照名。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | - | Map | command の定義に対するコマンド名の割り当て。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | ユーザー指定の名前によるマップ。Orb の参照名（文字列）または Orb の定義名（マップ) Orb の定義は、バージョン 2.1 のコンフィグにおける Orb 関連のサブセットとなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | - | Map | Executor の定義文字列の参照名。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | - | Map | command 定義に対するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
 {: class="table table-striped"}
 
-下記は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb の例です。
+以下の例は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb のものです。
 
     version: 2.1
     orbs:
