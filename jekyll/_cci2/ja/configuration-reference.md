@@ -96,11 +96,11 @@ Executor の並列処理させ型については「[コンフィグを再利用�
 
 ## **`jobs`**
 
-実行処理は 1 つ以上のジョブで構成されます。 それらのジョブは `jobs` キーを用いるマップで指定します。 The name of the job is the key in the map, and the value is a map describing the job.
+実行処理は 1 つ以上のジョブで構成され、 それらのジョブの指定は `jobs` キーによるマップで行います。「[config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)」では `job` マップの 2 通りの例を確認できます。 そのマップにおけるキーがジョブの名前となり、値はジョブの内容を記述するマップとなります。
 
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
+[Workflows]({{ site.baseurl }}/2.0/workflows/) を利用する際は、`.circleci/config.yml` ファイル内でユニークなジョブ名を設定しなければなりません。
 
-If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
+Workflows を使わない場合は、`jobs` マップにおいて `build` という名前のジョブを用意する必要があります。 `build` ジョブは、GitHub など VCS によるプッシュをトリガーとして実行する際のデフォルトのエントリーポイントとなります。 It is possible to then specify additional jobs and run them using the CircleCI API.
 
 **Note:** Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
 
