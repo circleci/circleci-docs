@@ -182,7 +182,7 @@ jobs:
   my-job:
     executor: my-executor
     steps:
-      - run: echo outside the executor
+      - run: echo Executor の“外”で定義しました
 ```
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
