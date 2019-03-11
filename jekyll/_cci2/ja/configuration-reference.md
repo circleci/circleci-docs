@@ -11,11 +11,11 @@ order: 20
 
 `config.yml` ファイルの全容は、このページ内の[サンプルコード](#full-example)で紹介しています。
 
-**※**CircleCI 1.0 を利用していた場合、`config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。 従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` のないブランチの CircleCI 1.0 環境の実行にも支障はありません。
+**※**CircleCI 1.0 を利用していた場合、新たに `config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。 従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` のないブランチとなっている CircleCI 1.0 環境の実行には支障はありません。
 
 * * *
 
-## Table of Contents
+## 目次
 {:.no_toc}
 
 - 目次
