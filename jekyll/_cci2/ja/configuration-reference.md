@@ -50,7 +50,7 @@ order: 20
 
 ## **`commands`**（version: 2.1 が必須）
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
+commands は、ステップシーケンスをジョブ内で実行するマップの形で定義します。これを活用することで、複数ジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/2.0/reusing-config/)が可能になります。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- steps | Y | Sequence | A sequence of steps run inside the calling job of the command. parameters | N | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details. description | N | String | A string that describes the purpose of the command.
 {: class="table table-striped"}
