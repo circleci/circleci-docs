@@ -96,7 +96,7 @@ Executor の並列処理させ型については「[コンフィグを再利用�
 
 ## **`jobs`**
 
-A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+実行処理は 1 つ以上のジョブで構成されます。 それらのジョブは `jobs` キーを用いるマップで指定します。 The name of the job is the key in the map, and the value is a map describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
 
