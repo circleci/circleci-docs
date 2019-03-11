@@ -71,7 +71,7 @@ commands:
 
 ## **`executors`**（version: 2.1 が必須）
 
-Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+executors は、ジョブにおけるステップの実行環境を定義します。Executor は 1 つ定義するだけで複数のジョブで再利用可能です。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker) resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine) macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos) shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options)) working_directory | N | String | In which directory to run the steps. environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
