@@ -30,12 +30,12 @@ order: 20
 
 `version` フィールドは、非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
 
-## **`orbs`**（version: 2.1 必須）
+## **`orbs`**（version: 2.1 が必須）
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | — | Map | 割り当てる名前: Orb の参照名（文字列）または Orb の定義名（割り当て名）。 Orb の定義は、バージョン 2.1 における Orb 関連のサブセットととなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | — | Map | Executor の定義文字列の参照名 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | N | Map | command の定義に対するコマンド名の割り当て。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | 割り当てる名前: Orb の参照名（文字列）または Orb の定義名（割り当て名) Orb の定義は、バージョン 2.1 のコンフィグにおける Orb 関連のサブセットととなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | - | Map | Executor の定義文字列の参照名。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | - | Map | command の定義に対するコマンド名の割り当て。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
 {: class="table table-striped"}
 
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
+下記は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb の例です。
 
     version: 2.1
     orbs:
