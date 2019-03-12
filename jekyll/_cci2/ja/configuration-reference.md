@@ -146,12 +146,12 @@ jobs:
 
 #### **`docker`** / **`machine`** / **`macos`**(*Executor*)
 
-「Executor」は、簡単に言えば「ステップを処理する場所」です。 CircleCI 2.0 は一度に必要な分の Docker コンテナを起動して、あるいは仮想マシンを利用して、目的とする環境をビルドできます。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
+「Executor」は、端的に言えば「ステップを処理する場所」です。 CircleCI 2.0 は一度に必要な分の Docker コンテナを起動して、あるいは仮想マシンを利用して、目的とする環境をビルドできます。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
 
 #### `docker`
 {:.no_toc}
 
-Configured by `docker` key which takes a list of maps:
+`docker` キーは下記リストの要素を用いて設定します。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- image | Y | String | The name of a custom docker image to use name | N | String | The name the container is reachable by. By default, container services are accessible through `localhost` entrypoint | N | String or List | The command used as executable when launching the container command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container user | N | String | Which user to run commands as within the Docker container environment | N | Map | A map of environment variable names and values auth | N | Map | Authentication for registries using standard `docker login` credentials aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
 {: class="table table-striped"}
