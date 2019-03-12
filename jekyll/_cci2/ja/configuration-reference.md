@@ -558,12 +558,12 @@ steps:
 
 ##### **`checkout`**
 
-設定済み `path`（デフォルトは `working_directory`）におけるソースコードのチェックアウトに用いる特別なステップです。 これが特別なのは、コードのチェックアウトを簡便にすることを目的に用意にしたヘルパー関数だからです。 If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+設定済み `path`（デフォルトは `working_directory`）にあるソースコードのチェックアウトに用いる特別なステップです。 コードのチェックアウトを簡便にすることを目的にしたヘルパー関数であるのが特別としている理由です。 HTTPS 経由で git を実行する場合はこのステップは使えません。ssh 経由でチェックアウトするのと同じ設定をする必要があります。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | - | String | チェックアウトディレクトリ（デフォルト：ジョブの [`working_directory`](#jobs)）
 {: class="table table-striped"}
 
-If `path` already exists and is: * a git repo - step will not clone whole repo, instead will pull origin * NOT a git repo - step will fail.
+`path` が存在し、かつソースコードが …git リポジトリの場合は、ステップはリポジトリ全体をクローンせず、オリジナルをプルします。 …git リポジトリ以外の場合は、このステップは失敗します。
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
 
