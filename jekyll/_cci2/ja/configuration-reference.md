@@ -146,7 +146,7 @@ jobs:
 
 #### **`docker`** / **`machine`** / **`macos`**(*Executor*)
 
-「Executor」は、簡単に言えば「ステップを処理する場所」です。 CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+「Executor」は、簡単に言えば「ステップを処理する場所」です。 CircleCI 2.0 は一度に必要な分の Docker コンテナを起動して、あるいは仮想マシンを利用して、目的とする環境をビルドできます。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
 
 #### `docker`
 {:.no_toc}
