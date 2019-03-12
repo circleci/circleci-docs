@@ -344,7 +344,7 @@ jobs:
 
 有償プランにこの機能が追加されると、ジョブごとに CPUの数 とメモリ容量を設定できるようになります。利用可能なマシンリソースは下記の表の通りです。 `resource_class` を指定しない場合、もしくは正しい指定の仕方でなかったときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。 `resource_class` キーは現在のところ `docker` Executor との組み合わせのみサポートしています。
 
-Class | vCPUs | RAM \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium (default) | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
+クラス | 仮想CPU数 | メモリ容量 \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium (default) | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
 {: class="table table-striped"}
 
 CPU 数を取得するのに`/proc` ディレクトリをチェックする Java や Erlang などの開発言語においては、CircleCI 2.0 の resource_class 機能の使用時にパフォーマンスが低下する問題があることから、これを回避するため追加の設定が必要になる場合があります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題の起こらない CPU リソースの使い方になるよう CPU コア数を決まった範囲に固定するなどして対処してください。
@@ -385,14 +385,14 @@ jobs:
           - checkout
     
 
-In this case, the `checkout` step will checkout project source code into the job's [`working_directory`](#jobs).
+この例の `checkout` ステップは、プロジェクトのソースコードをジョブの [`working_directory`](#jobs) にチェックアウトします。
 
-In general all steps can be described as:
+一般的にはステップは下記のように記述することになります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | ○ | Map / String | ステップの設定マップ、またはステップで定義された内容を表す文字列
 {: class="table table-striped"}
 
-Each built-in step is described in detail below.
+ステップのなかで利用可能な要素ごとの詳細は下記の通りです。
 
 ##### **`走らせる`**
 
