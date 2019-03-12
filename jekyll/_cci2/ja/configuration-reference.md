@@ -156,9 +156,9 @@ jobs:
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- image | ○ | String | 使用するカスタム Docker イメージの名前 name | - | String | 他から参照する際のコンテナの名前。 デフォルトではコンテナサービスは `localhost` 経由でアクセスされる entrypoint | - | String / List | コンテナ起動時に実行するコマンド command | - | String / List | コンテナ起動時にルートプロセスとなる PID 1（または entrypoint の引数）にするコマンド user | - | String | Docker コンテナにおいてコマンドを実行するユーザー environment | - | Map | 環境変数の名前と値のマップ auth | - | Map | 標準の `docker login` 証明書によるレジストリの認証情報 aws_auth | - | Map | AWS EC2 Container Registry（ECR）の認証情報
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+一番最初に記述した `image` は、すべてのステップを実行するプライマリコンテナとなります。
 
-`entrypoint` overrides default entrypoint from Dockerfile.
+`entrypoint` は Dockerfile のデフォルトエントリーポイントを上書きします。
 
 `command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
 
