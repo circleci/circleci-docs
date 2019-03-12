@@ -367,7 +367,7 @@ jobs:
 
 ここでは `run` がステップのタイプとなります。 `name` 属性は CircleCI 上での表示に使われるものです。 `command` 属性は `run` ステップに特有の、実行するコマンドを定義するものです。
 
-場合によっては steps はより簡便に記述することもできます。 For example, `run` may be also be called like this:
+場合によっては steps はより簡便に記述することもできます。 例えば `run` ステップを下記のように記述可能です。
 
     jobs:
       build:
@@ -375,7 +375,7 @@ jobs:
           - run: make test
     
 
-In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
+簡略化した表記方法では、実行する `command` を文字列値のようにして、`run` ステップをダイレクトに指定できるようになります。 In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
 
 Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
 
