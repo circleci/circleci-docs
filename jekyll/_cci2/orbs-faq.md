@@ -144,7 +144,7 @@ jobs:
   another-job:
     executor: my-executor
     steps:
-      - my-command
+      - my-command:
           param1: "hello"
 ```
 {% endraw %}
