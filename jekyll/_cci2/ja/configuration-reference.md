@@ -336,13 +336,13 @@ jobs:
 
 `ignore` と `only` の両方が同時に指定されていた場合は、`ignore` に関するフィルターのみが考慮されます。
 
-A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
+コンフィグのルール設定によって実行されなかったジョブは、実行がスキップされたとして CircleCI 上に履歴表示されます。
 
 #### **`resource_class`**
 
-**Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+**※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするためには[サポートチケットを使って](https://support.circleci.com/hc/en-us/requests/new) CircleCI のセールスチームに問い合わせる必要があります。
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+有償プランにこの機能が追加されると、ジョブごとに CPUの数 とメモリ容量を設定できるようになります。利用可能なマシンリソースは下記の表の通りです。 `resource_class` を指定しない場合、もしくは正しい指定の仕方でなかったときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。 `resource_class` キーは現在のところ `docker` Executor との組み合わせのみサポートしています。
 
 Class | vCPUs | RAM \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium (default) | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
 {: class="table table-striped"}
