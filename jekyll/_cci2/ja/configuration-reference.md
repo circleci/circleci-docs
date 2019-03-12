@@ -524,7 +524,7 @@ steps:
 
 ##### **`when` ステップ**（version: 2.1 が必須）
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下では `condition` と `steps` というサブキーが使えます。 `when` ステップの用途としては、その前の Workflows の実行で確認した（コンパイル時間によって決定する）独自の条件で実行するために、コマンドとジョブ設定をカスタマイズすることです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下ではサブキーとして `condition` と `steps` が使えます。 `when` ステップの用途は、事前に Workflows を実行して確認した（コンパイルの時点で決定される）独自の条件を元にして実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- condition | ○ | String | パラメーター値 steps | ○ | Sequence | condition が true の時に実行するステップの内容
 {: class="table table-striped"}
@@ -1167,4 +1167,4 @@ workflows:
 ## 関連情報
 {:.no_toc}
 
-[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
+[イントロダクション]({{site.baseurl}}/2.0/config-intro/)
