@@ -168,12 +168,12 @@ jobs:
 
 `environment` の設定は、初期化用の `command` も含め、この Executor におけるすべてのコマンド実行で有効です。 `environment` による設定はジョブのマップにおいて何よりも優先されます。
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
+タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/2.0/executor-types)」を参照してください。
 
 例
 
 ```yaml
-jobs:
+obs:
   build:
     docker:
       - image: buildpack-deps:trusty # primary container
