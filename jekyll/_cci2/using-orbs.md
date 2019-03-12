@@ -106,7 +106,7 @@ jobs:
       name: my-executor
     steps:
       - run: echo outside the executor
-```
+   ```
 
 ## Key Concepts
 
