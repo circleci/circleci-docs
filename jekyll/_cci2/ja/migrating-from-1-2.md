@@ -72,7 +72,7 @@ The `config-translation` endpoint can help you quickly get started with converti
                - checkout
                - run:
     
-    For example: 
+    例えば下記のようにします。 
     
         checkout:
           post:
