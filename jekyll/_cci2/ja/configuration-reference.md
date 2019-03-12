@@ -472,18 +472,18 @@ jobs:
 
 ###### *簡略化した構文*
 
-`run` ステップでは大変便利な簡略化構文が利用できます。
+`run` ステップでは大変便利な簡略化構文を利用できます。
 
 ```YAML
 - run: make test
 
-# shorthanded command can also have multiple lines
+# 簡略化したうえで複数行のコマンドを実行
 - run: |
     mkdir -p /tmp/test-results
     make test
 ```
 
-In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
+ここでは、`command` と `name` は `run` の文字列値になっており、`run` のコンフィグマップの残り（省略されたキーの値）はデフォルト値となります。
 
 ###### The `when` Attribute
 
