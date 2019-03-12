@@ -119,7 +119,7 @@ Workflows を使わない場合は、`jobs` マップ内に `build` という名
 
 #### `parallelism`
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+`parallelism` の値を 2 以上に設定すると、独立した Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
 
