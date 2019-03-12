@@ -7,7 +7,7 @@ The core of the CircleCI experience is creating a *deterministic build* with the
 
 <hr />
 
-| Config Introduction                                                                                 | Configuration Reference                                                                                                    |
+| イントロダクション                                                                                           | Configuration Reference                                                                                                    |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [Introduction to Config]({{ site.baseurl }}/2.0/config-intro/) in CircleCI.&nbsp;&nbsp;&nbsp;&nbsp; | [Complete specification]({{ site.baseurl }}/2.0/configuration-reference/) for `config.yml` syntax.&nbsp;&nbsp;&nbsp;&nbsp; |
 
