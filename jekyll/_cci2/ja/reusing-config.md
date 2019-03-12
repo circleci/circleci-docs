@@ -889,7 +889,7 @@ Conditional steps may be located anywhere a regular step could and may only use 
 
 For example, an orb author could define conditional steps in the `steps` key of a Job or a Command.
 
-A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run.
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run.
 
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 
