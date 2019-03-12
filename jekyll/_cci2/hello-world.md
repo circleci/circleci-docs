@@ -49,7 +49,9 @@ jobs:
       - run: echo "hello world" # run the `echo` command
 ```
 
-**Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out [the iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for an example of a simple `macos` config file. 
+CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+
+**Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out the [Hello World macOS]({{site.baseurl}}/2.0/hello-world-macos/) document and the [iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for examples of a simple `macos` config files. 
 
 Commit and push the changes to trigger a build. If this is your first project on
 CircleCI, go to the Projects page, click the **Add Projects** button, then click

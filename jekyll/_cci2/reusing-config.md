@@ -445,7 +445,7 @@ Capitalized and uppercase versions of the above values are also valid.
 #### Integer
 {:.no_toc}
 
-The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
+Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
 version: 2.1
