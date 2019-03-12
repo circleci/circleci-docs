@@ -495,7 +495,7 @@ jobs:
 
 `always` はそれまでステップの終了ステータスが何かにかかわらず処理を続けます。 前のステップが成功したか否かに関係なく処理を続けたいタスクがあるときに都合の良い設定です。 例えば、ログやコードカバレッジのデータをどこかのサーバーにアップロードするようなジョブステップに利用できます。
 
-A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
+`on_fail` は直前のステップが失敗した（ゼロ以外の終了コードを返した）ときにのみ処理を続行するものです。 デバッグを支援するなんらかの診断データを保存したいとき、あるいはメールやチャットなどで失敗に関する通知をしたいときなどに `on_fail` が使えます。
 
 ###### 例
 
@@ -522,9 +522,9 @@ steps:
       when: on_fail
 ```
 
-##### **The `when` Step** (requires version: 2.1)
+##### **`when` ステップ**（version: 2.1 が必須）
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下では `condition` と `steps` というサブキーが使えます。 `when` ステップの用途としては、その前の Workflows の実行で確認した（コンパイル時間によって決定する）独自の条件で実行するために、コマンドとジョブ設定をカスタマイズすることです。 See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Sequence | A list of steps to execute when the condition is true
 {: class="table table-striped"}
