@@ -202,18 +202,18 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使う際は、AWS 証明書での認証が必要です。 By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使う際は、AWS 証明書での認証が必要です。 デフォルトでは、CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
 
     jobs:
       build:
         docker:
           - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
             aws_auth:
-              aws_access_key_id: AKIAQWERVA  # can specify string literal values
-              aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+              aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定するか
+              aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # プロジェクト設定の環境変数を指定する
     
 
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
+バージョン 2.1を使う場合は、ジョブにおいて[宣言済みコマンド]({{ site.baseurl }}/2.0/reusing-config/)の再利用が可能です。下記の例では `sayhello` コマンドを呼び出しています。
 
     jobs:
       myjob:
