@@ -119,9 +119,9 @@ Workflows を使わない場合は、`jobs` マップ内に `build` という名
 
 #### `parallelism`
 
-`parallelism` の値を 2 以上に設定すると、独立した Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+`parallelism` の値を 2 以上に設定すると、独立した Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 ただし、並列処理を設定していても並列処理にならず、単一の Executor でしか実行されない場合もあります（[`deploy` ステップ](#deploy) がその一例です）。 詳しくは[パラレルジョブ]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照してください。
 
-`working_directory` will be created automatically if it doesn't exist.
+`working_directory` で指定したディレクトリが存在しないときは自動で作成されます。
 
 例
 
@@ -144,7 +144,7 @@ jobs:
       - run: make
 ```
 
-#### **`docker`** / **`machine`** / **`macos`**(*executor*)
+#### **`docker`** / **`machine`** / **`macos`**(*Executor*)
 
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
