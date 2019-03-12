@@ -97,14 +97,14 @@ The `image` key accepts one of three image types, refer to the [Configuration Re
 
 All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
 
-下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするためにはサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
 
 ```yaml
 version: 2
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # default - false
+      docker_layer_caching: true    # デフォルト：false
 ```
 
 ## macOS を使用する
