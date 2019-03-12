@@ -229,7 +229,7 @@ jobs:
 
 [machine Executor]({{ site.baseurl }}/2.0/executor-types) は `machine` キーとともに下記リストの要素を用いて設定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor を利用するときは必ず True にします。 Is required if no other value is specified image | N | String | The image to use (default: `circleci/classic:latest`). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service). docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor を利用するには必ず True にする。 他に指定している値がないときは必須 image | – | String | 使用するイメージ（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>このキーはオンプレミス版の CircleCI ではサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor イメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
 
 As a shorthand, you can set the `machine` key to `true`.
