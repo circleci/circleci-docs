@@ -84,8 +84,6 @@ authentication which, in turn, may use LDAP, SAML, or SSH for access. That is, C
 
 **Coinbase** runs CircleCI behind their firewall for security and reliability. The [Coinbase case study report](https://circleci.com/customers/coinbase/) reveals that using CircleCI reduced their average time from merge to deploy in half, reduced operations time spent on continuous integration maintenance from 50% of one person's time to less than one hour per week, and increased developer throughput by 20%. 
 
-**Fanatics** increased their team efficiency by 300% with CircleCI. See the [Fanatics case study report](https://circleci.com/customers/fanatics/).
-
 CircleCI enables **Cruise Automation** (a subsidiary of GM) to run many more simulations before putting code in a road test, see the [Cruise case study report](https://circleci.com/customers/cruise/).
 
 Refer to the [CircleCI Customers page](https://circleci.com/customers/) for the complete set of case studies for companies large and small who are using CircleCI.
