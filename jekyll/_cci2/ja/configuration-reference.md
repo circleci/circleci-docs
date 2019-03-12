@@ -417,7 +417,7 @@ jobs:
 
 `-e`
 
-> （単一のコマンドからなる）パイプやカッコ「()」で囲まれたサブシェルコマンドが実行されたら、あるいは中カッコ「{}」で囲まれたコマンドリストの一部がゼロ以外の終了ステータスを返したら、即座に終了する。
+> （単一のコマンドからなる）パイプやカッコ「()」で囲まれたサブシェルコマンドが実行されたら、あるいは中カッコ「{}」で囲まれたコマンドリストの一部がゼロ以外の終了ステータスを返したら、即座に終了します。
 
 つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば下記のようにします。
 
@@ -439,7 +439,7 @@ jobs:
 
 `-o pipefail`
 
-> If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
+> pipefail を有効にした場合は、パイプの返り値は最後に実行されたコマンド（通常は最も右に記述したもの）のゼロ以外の終了ステータス値となります。全てのコマンドが成功したときはゼロが返ります。 シェルは値を返す前に、パイプにある全てのコマンドが終了するまで待機します。
 
 例えば下記のようにします。
 
@@ -447,7 +447,7 @@ jobs:
 - run: make test | tee test-output.log
 ```
 
-If `make test` fails, the `-o pipefail` option will cause the whole step to fail. Without `-o pipefail`, the step will always run successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which will always return a zero status.
+ここで仮に `make test` が失敗したとすると、`-o pipefail` オプションによりステップ全体が失敗したことになります。 `-o pipefail` がなければ、このステップは常に成功することになります。パイプ全体の結果としては、必ずゼロを返す最後のコマンド（`tee test-output.log`）の返り値で決まるためです。
 
 Note that even if `make test` fails the rest of pipeline will be executed.
 
