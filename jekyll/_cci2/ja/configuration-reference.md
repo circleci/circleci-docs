@@ -305,9 +305,9 @@ jobs:
 
 #### **`ブランチ`**
 
-Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Workflows を利用**せず**、バージョン 2.0（2.1 は不可）のコンフィグを使っているケースでは、ブランチの実行をホワイトリスト・ブラックリスト方式で定義します。[Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) を利用している場合は、ジョブレベルの branches は無視されるため、Workflows セクション内で設定します。 バージョン 2.1 のコンフィグにおいては、Workflows を追加することでフィルタリングを行います。 詳しくは [workflows](#workflows) を参照してください。 ジョブレベルの `branches` キーは、下記リストの要素を用いて設定します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- only | N | List | List of branches that only will be executed ignore | N | List | List of branches to ignore
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- only | - | List | 実行するブランチのみを列挙する ignore | - | List | 実行しないブランチを列挙する
 {: class="table table-striped"}
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
