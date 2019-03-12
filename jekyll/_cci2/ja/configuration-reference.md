@@ -347,11 +347,11 @@ jobs:
 Class | vCPUs | RAM \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium (default) | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
 {: class="table table-striped"}
 
-Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+CPU 数を取得するのに`/proc` ディレクトリをチェックする Java や Erlang などの開発言語においては、CircleCI 2.0 の resource_class 機能の使用時にパフォーマンスが低下する問題があることから、これを回避するため追加の設定が必要になる場合があります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題の起こらない CPU リソースの使い方になるよう CPU コア数を決まった範囲に固定するなどして対処してください。
 
 #### **`steps`**
 
-The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+ジョブにおける `steps` の設定は、単一のキーと値のペアを列挙する形で行います。キーはステップのタイプを表すものです。 The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
 ```yaml
 jobs:
