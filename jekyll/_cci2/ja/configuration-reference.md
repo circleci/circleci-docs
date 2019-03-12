@@ -396,12 +396,12 @@ jobs:
 
 ##### **`走らせる`**
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+あらゆるコマンドラインプログラムを呼び出す際に使います。設定値を表すマップを記述するか、もしくは簡略表記では `command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、コマンド内でいわゆる dotfiles を明示的に指定するなどの工夫が必要です。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- command | Y | String | Command to run via the shell name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`) shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options)) environment | N | Map | Additional environmental variables, locally scoped to command background | N | Boolean | Whether or not this step should run in the background (default: false) working_directory | N | String | In which directory to run this step (default: [`working_directory`](#jobs) of the job) no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes) when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンド name | - | String | CircleCI 上で表示するステップのタイトル名（デフォルト：`command` 文字列全体) shell | - | String | コマンド実行に用いるシェル（デフォルト：[デフォルトのシェルオプション](#default-shell-options)） environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数 background | - | Boolean | このステップをバックグラウンドで実行するかどうか（デフォルト：false） working_directory | - | String | このステップを実行するディレクトリ（デフォルト：当該ジョブの[`working_directory`](#jobs)） no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間。 「20m」「1.25h」「5s」のように時間単位付きの十進数で指定する（デフォルト：10分間） when | - | String | [ステップの実行を有効・無効にする条件タイミングを指定する](#the-when-attribute)。 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
 
-Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
+`run` を宣言するたびに新たなシェルが立ち上がることになります。 It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
 ```YAML
 - run:
@@ -595,7 +595,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
 
 The cache for a specific `key` is immutable and cannot be changed once written.
