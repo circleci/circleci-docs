@@ -166,9 +166,9 @@ jobs:
 
 `name` では、セカンダリサービスコンテナを利用する際の名前を定義します。  デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。 これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
 
-The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
+`environment` の設定は、初期化用の `command` も含め、この Executor におけるすべてのコマンド実行で有効です。 `environment` による設定はジョブのマップにおいて何よりも優先されます。
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
+タグやハッシュ値でイメージのバージョンを指定することもできます。 You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
 例
 
