@@ -310,7 +310,7 @@ Workflows を利用**せず**、バージョン 2.0（2.1 は不可）のコン�
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- only | - | List | 実行するブランチのみを列挙する ignore | - | List | 実行しないブランチを列挙する
 {: class="table table-striped"}
 
-Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
+`only` と `ignore` に記述する内容は、完全一致のフルネームと正規表現で表せます。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 例えば下記のようにします。
 
 ```YAML
 jobs:
@@ -321,7 +321,7 @@ jobs:
         - /rc-.*/
 ```
 
-In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
+このケースでは、「master」ブランチと正規表現「rc-.*」にマッチするブランチのみが実行されます。
 
 ```YAML
 jobs:
@@ -332,9 +332,9 @@ jobs:
         - /feature-.*/
 ```
 
-In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
+上記の例では、「develop」と正規表現「feature-.*」にマッチしたもの以外の全てのブランチが実行されます。
 
-If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
+`ignore` と `only` の両方が同時に指定されていた場合は、`ignore` に関するフィルターのみが考慮されます。
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
@@ -419,7 +419,7 @@ The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is 
 
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
+So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. 例えば下記のようにします。
 
 ```YAML
 - run:
@@ -441,7 +441,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
-For example:
+例えば下記のようにします。
 
 ```YAML
 - run: make test | tee test-output.log
@@ -667,7 +667,7 @@ A key is searched against existing keys as a prefix.
 
 **Note**: When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
-For example:
+例えば下記のようにします。
 
 ```YAML
 steps:
@@ -940,7 +940,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -1000,7 +1000,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 ###### **`ブランチ`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -1015,7 +1015,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
+Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 Both lightweight and annotated tags are supported.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
