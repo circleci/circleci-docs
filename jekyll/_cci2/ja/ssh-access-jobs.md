@@ -105,7 +105,7 @@ Next, run the SSH command for your CircleCI build, but add the -v flag. In the o
 
 Make sure that the key which GitHub accepted (in our example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
 
-If it was not offered, you can specify it via the `-i` command-line argument to SSH. For example:
+If it was not offered, you can specify it via the `-i` command-line argument to SSH. 例えば下記のようにします。
 
     $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
     
