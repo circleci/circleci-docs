@@ -153,7 +153,7 @@ jobs:
 
 `docker` キーは下記リストの要素を用いて設定します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- image | Y | String | The name of a custom docker image to use name | N | String | The name the container is reachable by. By default, container services are accessible through `localhost` entrypoint | N | String or List | The command used as executable when launching the container command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container user | N | String | Which user to run commands as within the Docker container environment | N | Map | A map of environment variable names and values auth | N | Map | Authentication for registries using standard `docker login` credentials aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- image | ○ | String | 使用するカスタム Docker イメージの名前 name | - | String | 他から参照する際のコンテナの名前。 By default, container services are accessible through `localhost` entrypoint | N | String or List | The command used as executable when launching the container command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container user | N | String | Which user to run commands as within the Docker container environment | N | Map | A map of environment variable names and values auth | N | Map | Authentication for registries using standard `docker login` credentials aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
