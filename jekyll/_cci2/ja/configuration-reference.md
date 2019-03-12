@@ -176,7 +176,7 @@ jobs:
 obs:
   build:
     docker:
-      - image: buildpack-deps:trusty # primary container
+      - image: buildpack-deps:trusty # プライマリコンテナ
         environment:
           ENV: CI
 
@@ -283,7 +283,7 @@ version: 2
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # default - false
+      docker_layer_caching: true    # デフォルト：false
 ```
 
 #### **`macos`**
@@ -1030,14 +1030,14 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 ###### *例*
 
     workflows:
-      version: 2
+      version: 2
     
-      build_test_deploy:
+      build_test_deploy:
         jobs:
-          - flow
-          - downstream:
-              requires:
-                - flow
+          - flow
+          - downstream:
+              requires:
+                - flow
               filters:
                 branches:
                   only: master
