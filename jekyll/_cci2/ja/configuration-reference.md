@@ -524,17 +524,16 @@ steps:
 
 ##### **`when` ステップ**（version: 2.1 が必須）
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下では `condition` と `steps` というサブキーが使えます。 `when` ステップの用途としては、その前の Workflows の実行で確認した（コンパイル時間によって決定する）独自の条件で実行するために、コマンドとジョブ設定をカスタマイズすることです。 See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下では `condition` と `steps` というサブキーが使えます。 `when` ステップの用途としては、その前の Workflows の実行で確認した（コンパイル時間によって決定する）独自の条件で実行するために、コマンドとジョブ設定をカスタマイズすることです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- condition | Y | String | A parameter value steps | Y | Sequence | A list of steps to execute when the condition is true
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- condition | ○ | String | パラメーター値 steps | ○ | Sequence | condition が true の時に実行するステップの内容
 {: class="table table-striped"}
 
 ###### *例*
 
     version: 2.1
     
-    jobs: # conditional steps may also be defined in `commands:`
-      job_with_optional_custom_checkout:
+    jobs: # 条件付きステップは「commands:」でも定義できる  job_with_optional_custom_checkout:
         parameters:
           custom_checkout:
             type: string
@@ -544,7 +543,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
           - when:
               condition: <<parameters.custom_checkout>>
               steps:
-                - run: echo "my custom checkout"
+                - run: echo "独自のチェックアウト処理"
           - unless:
               condition: <<parameters.custom_checkout>>
               steps:
@@ -553,7 +552,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
       build-test-deploy:
         jobs:
           - job_with_optional_custom_checkout:
-              custom_checkout: "any non-empty string is truthy"
+              custom_checkout: "空文字列でなければ正常に終了"
           - job_with_optional_custom_checkout
     
 
