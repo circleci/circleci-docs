@@ -29,7 +29,7 @@ Use either the CircleCI CLI to split test files or use environment variables to 
 
 ### リソースクラス
 
-It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. `resource_class` を指定しない場合、もしくは正しい指定の仕方でなかったときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。
 
 ### Cache
 
