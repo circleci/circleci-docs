@@ -560,7 +560,7 @@ steps:
 
 Special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | - | String | チェックアウトディレクトリ（デフォルト：ジョブの [`working_directory`](#jobs)）
 {: class="table table-striped"}
 
 If `path` already exists and is: * a git repo - step will not clone whole repo, instead will pull origin * NOT a git repo - step will fail.
@@ -1042,9 +1042,9 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
                   only: master
     
 
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
+Workflows の詳細な例と概念については[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
-## Full Example
+## サンプルコード
 {:.no_toc}
 
 {% raw %}
@@ -1060,7 +1060,7 @@ jobs:
         command: [mongod, --smallfiles]
 
       - image: postgres:9.4.1
-        # some containers require setting environment variables
+        # コンテナによっては環境変数の設定が必要
         environment:
           POSTGRES_USER: root
 
@@ -1079,8 +1079,8 @@ jobs:
       - run:
           command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
-      # Create Postgres users and database
-      # Note the YAML heredoc '|' for nicer formatting
+      # Postgres ユーザーとデータベースを作成
+      # 整形に使う YAML のヒアドキュメントの「|」に注意
       - run: |
           sudo -u root createuser -h localhost --superuser ubuntu &&
           sudo createdb -h localhost test_db
@@ -1111,12 +1111,12 @@ jobs:
           paths:
             - ~/.m2
 
-      # Save artifacts
+      # アーティファクトを保存
       - store_artifacts:
           path: /tmp/artifacts
           destination: build
 
-      # Upload test results
+      # テスト結果をアップロード
       - store_test_results:
           path: /tmp/test-reports
 
