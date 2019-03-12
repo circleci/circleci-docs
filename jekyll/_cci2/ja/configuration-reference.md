@@ -251,8 +251,8 @@ jobs:
 
 CircleCI は `image` フィールドにおいて複数の machine イメージの指定をサポートしています。
 
-- `circleci/classic:latest`（デフォルト）：Docker v`17.03.0-ce` と docker-compose v`1.9.0`、さらに CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `latest` というチャネルを付加することで、最新の検証イメージが使えます。チャネルに更新があるときは、1 週間前までに[アナウンス](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)されます。
-- `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.06.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. The `edge` channel provides release candidates that will eventually be promoted to `classic:latest`.
+- `circleci/classic:latest`（デフォルト）：Docker v`17.03.0-ce` と docker-compose v`1.9.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `latest` というチャネルを指定することで、最新の検証イメージが使えます。チャネルに更新があるときは、1 週間前までに[アナウンス](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)されます。
+- `circleci/classic:edge`：Docker v`17.06.0-ce` と docker-compose v`1.14.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `edge` というチャネルを指定することで、最終的に `classic:latest` に格上げされる予定のリリース候補版を使えます。
 - `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
 - `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
 - `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
@@ -262,7 +262,7 @@ CircleCI は `image` フィールドにおいて複数の machine イメージ�
 - `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
 - `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
-You can use one of the `year-month` versioned images to pin the version used by your jobs. Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
+ジョブで使うイメージのバージョンを一定にするために、`year-month` の体裁でバージョン指定することもできます。 Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
 
 **Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
 
