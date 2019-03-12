@@ -459,7 +459,7 @@ jobs:
 
 ###### *background コマンド*
 
-`background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+`background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 `background` 属性を `true` にセットすることで、ジョブ実行においてコマンドの終了を待つことなく、即座に次のステップへと処理を移します。 下記の例は、Web の UI 検証に用いるツール Selenium のテスト時によく必要とされる、バックグラウンドにおける X virtual framebuffer の実行に関するコンフィグです。
 
 ```YAML
 - run:
@@ -470,9 +470,9 @@ jobs:
 - run: make test
 ```
 
-###### *Shorthand syntax*
+###### *簡略化した構文*
 
-`run` has a very convenient shorthand syntax:
+`run` ステップでは大変便利な簡略化構文が利用できます。
 
 ```YAML
 - run: make test
