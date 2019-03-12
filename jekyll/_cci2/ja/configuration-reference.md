@@ -242,7 +242,7 @@ jobs:
     machine:
       enabled: true
 
-# or just
+# もしくは単に以下のようにする
 
 jobs:
   build:
