@@ -45,7 +45,7 @@ Commands are reusable sets of steps that you can invoke with specific parameters
 
 ```yaml
 version: 2.1
-jobs
+jobs:
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
