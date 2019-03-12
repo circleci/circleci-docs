@@ -158,9 +158,9 @@ jobs:
 
 一番最初に記述した `image` は、すべてのステップを実行するプライマリコンテナとなります。
 
-`entrypoint` は Dockerfile のデフォルトエントリーポイントを上書きします。
+`entrypoint` は Dockerfile のデフォルトのエントリーポイントを上書きします。
 
-`command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
+`command` は、（Dockerfile で指定していれば）イメージのエントリーポイントに対する引数として使われます。もしくは、（このスコープや Dockerfile 内にエントリーポイントがない場合は）実行形式として扱われます。
 
 For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time all `steps` run in the primary container only.
 
