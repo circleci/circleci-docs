@@ -375,9 +375,9 @@ jobs:
           - run: make test
     
 
-簡略化した表記方法では、実行する `command` を文字列値のようにして、`run` ステップをダイレクトに指定できるようになります。 In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
+簡略化した表記方法では、実行する `command` を文字列値のようにして、`run` ステップをダイレクトに指定できるようになります。 このとき、省略された他の属性に対してはデフォルトの値が自動で設定されます（例えば `name` 属性には `command` と同じ値が設定されます）。
 
-Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
+もう 1 つの簡略化の例としては、ステップ名をキーと値のペアの代わりとなる文字列として利用するシンプルな方法もあります。
 
     jobs:
       build:
