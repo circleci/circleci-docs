@@ -190,7 +190,7 @@ obs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-If you are using a private image, you can specify the username and password in the `auth` field. To protect the password, you can set it as a project setting which you reference here:
+プライベートな Docker イメージを利用するときは、`auth` を使ってユーザー名とパスワードを指定できます。 パスワード保護を目的に、下記のようにプロジェクトの設定値としてセットしておくこともできます。
 
 ```yaml
 jobs:
@@ -198,11 +198,11 @@ jobs:
     docker:
       - image: acme-private/private-image:321
         auth:
-          username: mydockerhub-user  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
+          username: mydockerhub-user  # 文字列リテラル値を指定するか
+          password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使う際は、AWS 証明書での認証が必要です。 By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
 
     jobs:
       build:
