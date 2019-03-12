@@ -162,9 +162,9 @@ jobs:
 
 `command` は、（Dockerfile で指定していれば）イメージのエントリーポイントに対する引数として使われます。もしくは、（このスコープや Dockerfile 内にエントリーポイントがない場合は）実行形式として扱われます。
 
-[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。 At this time all `steps` run in the primary container only.
+[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。 今のところは、すべての `steps` はプライマリコンテナ内でのみ実行されます。
 
-`name` defines the name for reaching the secondary service containers. By default, all services are exposed directly on `localhost`. The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
+`name` では、セカンダリサービスコンテナを利用する際の名前を定義します。  デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。 これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
