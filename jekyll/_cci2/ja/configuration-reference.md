@@ -401,7 +401,7 @@ jobs:
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンド name | - | String | CircleCI 上で表示するステップのタイトル名（デフォルト：`command` 文字列全体) shell | - | String | コマンド実行に用いるシェル（デフォルト：[デフォルトのシェルオプション](#default-shell-options)） environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数 background | - | Boolean | このステップをバックグラウンドで実行するかどうか（デフォルト：false） working_directory | - | String | このステップを実行するディレクトリ（デフォルト：当該ジョブの[`working_directory`](#jobs)） no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間。 「20m」「1.25h」「5s」のように時間単位付きの十進数で指定する（デフォルト：10分間） when | - | String | [ステップの実行を有効・無効にする条件タイミングを指定する](#the-when-attribute)。 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
 
-`run` を宣言するたびに新たなシェルが立ち上がることになります。 It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
+`run` を宣言するたびに新たなシェルが立ち上がることになります。 複数行の `command` を指定し、それらを同一のシェル内で実行することも可能です。
 
 ```YAML
 - run:
@@ -411,9 +411,9 @@ jobs:
       make test
 ```
 
-###### *Default shell options*
+###### *デフォルトのシェルオプション*
 
-The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified by default). Hence, the default shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files. Descriptions of the `-eo pipefail` options are provided below.
+ビルドコンテナに `/bin/bash` がある場合、シェルオプションのデフォルト値は `/bin/bash -eo pipefail` となります。 それ以外のパターンでは `/bin/sh -eo pipefail` がデフォルト値となります。 デフォルトは非ログインシェルです（`--login` や `-l` はデフォルトでは付加されません）。 そのため、デフォルトのシェルは `~/.bash_profile` や `~/.bash_login`、`~/.profile` といったファイルを読み込み**ません**。 `-eo pipefail` というオプションの意味については下記の通りです。
 
 `-e`
 
