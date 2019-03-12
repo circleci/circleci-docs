@@ -262,9 +262,9 @@ CircleCI は `image` フィールドにおいて複数の machine イメージ�
 - `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
 - `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
-ジョブで使うイメージのバージョンを一定にするために、`year-month` の体裁でバージョン指定することもできます。 Please [subscribe to our Announcements](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) to be notified when new images are released.
+ジョブで使うイメージのバージョンを一定にするために、`year-month` の体裁でバージョン指定することもできます。 新しいイメージは続々とリリースされています。ぜひ[お知らせに登録](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)して最新情報を受け取ってください。
 
-**Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
+**参考例：**Docker v`17.06.1-ce` と docker-compose v`1.14.0` を含む Ubuntu v`14.04` のイメージを使う場合
 
 ```yaml
 version: 2
@@ -274,7 +274,7 @@ jobs:
       image: circleci/classic:201708-01
 ```
 
-The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
+machine Executor は、ジョブや Workflows で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)をサポートしています。
 
 **例**
 
