@@ -78,7 +78,7 @@ To enable Fastlane Match to download the certificates and the keys from GitHub, 
 
 **Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
 
-In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. For example:
+In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. 例えば下記のようにします。
 
     git_url("git@github.com:fastlane/certificates")
     app_identifier("tools.fastlane.app")
