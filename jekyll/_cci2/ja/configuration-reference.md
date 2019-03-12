@@ -558,7 +558,7 @@ steps:
 
 ##### **`checkout`**
 
-Special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+設定済み `path`（デフォルトは `working_directory`）におけるソースコードのチェックアウトに用いる特別なステップです。 これが特別なのは、コードのチェックアウトを簡便にすることを目的に用意にしたヘルパー関数だからです。 If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | - | String | チェックアウトディレクトリ（デフォルト：ジョブの [`working_directory`](#jobs)）
 {: class="table table-striped"}
@@ -585,10 +585,10 @@ In the case of `checkout`, the step type is just a string with no additional att
 
 Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | - | boolean | リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) を有効にするには、この値を `true` にセットする（デフォルト：`false`）
 {: class="table table-striped"}
 
-***Notes***: - A paid account is required to access Docker Layer Caching. 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 Please include a link to the project on CircleCI) with your request. - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
+***※***Docker レイヤーキャッシュを利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 Please include a link to the project on CircleCI) with your request. - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 
 ##### **`save_cache`**
 
