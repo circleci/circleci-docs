@@ -18,16 +18,17 @@ Orbs は CircleCI を手早く使い始めるのに便利なコンフィグパ�
 
 `orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) を呼び出している例です。
 
-    version: 2.1
-    
-    orbs:
-        hello: circleci/hello-build@0.0.5
-    
-    workflows:
-        "Hello Workflow":
-            jobs:
-              - hello/hello-build
-    
+```yaml
+version: 2.1
+
+orbs:
+    hello: circleci/hello-build@0.0.5
+
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
 
 **注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Build Processing 設定]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすることで `orbs` キーを使えるようになります。
 
@@ -42,14 +43,16 @@ Orbs は下記の要素で構成されています。
 
 steps の再利用を容易にする仕組みがコマンドです。ジョブのなかでパラメーター付きで呼び出すことができます。 下記の例のように `sayhello` というコマンドを呼び出すとき、`to` で指定したパラメーターを渡すことができます。
 
-    jobs
-      myjob:
-        docker:
-          - image: "circleci/node:9.6.1"
-        steps:
-          - myorb/sayhello:
-              to: "Lev"
-    
+```yaml
+version: 2.1
+jobs:
+  myjob:
+    docker:
+      - image: "circleci/node:9.6.1"
+    steps:
+      - myorb/sayhello:
+          to: "Lev"
+```
 
 ### ジョブ
 {:.no_toc}
@@ -79,40 +82,34 @@ Executor を宣言し定義する際には下記のキーが使えます（こ�
 
 下記は Executor を使った簡単なサンプルです。
 
+```yaml version: 2.1 executors: my-executor: docker: - image: circleci/ruby:2.4.0
+
+jobs: my-job: executor: my-executor steps: - run: echo outside the executor ```
+
+Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
+
+    yaml
     version: 2.1
-    executors:
-      my-executor:
-        docker:
-          - image: circleci/ruby:2.4.0
-    
     jobs:
       my-job:
-        executor: my-executor
+        executor:
+          name: my-executor
         steps:
-          - run: echo Executor の外です
-     ```
-    
-    この例では「my-executor」という Executor は「executor」キーの単独の値として渡すこととしています。
-     もしくは「executor」の後に「name」キーを指定し、その値として「my-executor」を渡してもかまいません。
-     こちらの方が Executor のパラメーター付き呼び出しにおいてよく使われる手法です。 例えば下記のように記述します。
-    
-    
-
-jobs: my-job: executor: name: my-executor steps: - run: echo outside the executor ```
+          - run: echo outside the executor
 
 ## キーコンセプト
 
-Orbs を使い始める前に、まずは Orbs の軸となる基本コンセプトと、Orbs がどのように作られ、動作しているのかについて学んでおきましょう。 理解を深めることで、自身のプロジェクトでより簡単に Orbs を使えるようになり、活用も広がります。
+Before using orbs, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage orbs and use them easily in your own environments.
 
 ### 開発版と リリース版の違い
 {:.no_toc}
 
-開発版の Orbs は下記のような名前でパブリッシュされます。 ```myorbnamespace/myorb@dev:foo``` これに対してリリース版はセマンティック バージョニングされた `mynamespace/myorb@0.1.3` のような名前になります。 開発版の Orbs はミュータブルであり、作成から 90 日後に期限切れとなります。 リリース版の Orbs はイミュータブルで、公開され続けることになります。
+Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production orbs are immutable and durable.
 
 ### 認証済みと サードパーティ製の違い
 {:.no_toc}
 
-CircleCI では該当プラットフォームにおける動作テスト・認証が済んだ Orbs を多数用意しています。 こうした Orbs についてはプラットフォームの一部として扱われることになりますが、それ以外はすべてサードパーティ製の Orbs とみなされます。 **注 :** サードパーティ製の Orbs を利用するには、Org のダッシュボードで [Settings] → [Security] ページと進み、[Orb Security Settings] で [Yes] を選択する必要があります。
+CircleCI has available a number of individual orbs that have been tested and certified to work with the platform. These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. **Note:** The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
 
 <aside class="notice">
 あらゆる Orbs はオープンです。つまり、誰でも利用でき、誰でもそのソースコードを参照できます。 
@@ -120,12 +117,12 @@ CircleCI では該当プラットフォームにおける動作テスト・認�
 
 ## 設計思想
 
-Orbs を使うにあたり、まず Orbs の開発時に用いられた設計方針や手法を理解することが役に立ちます。 Orbs は下記のような検討を経て設計されました。
+Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
 
 - Orbsは透過的であること - Orb を実行できるということは、自分も他の誰かもそのソースを見ることができるということ。
 - 説明用のメタデータが使える - どのキーにおいても ```description``` キーを記述でき、Orb でもその一番上に `description` を記述しておける。
 - リリース版の Orbs は必ずセマンティック バージョニングされる - 開発版の Orbs については `dev:` から始まるバージョン命名規則が用いられる。
-- リリース版の Orbs はイミュータブル - Orb がセマンティック バージョニングされた形でいったんパブリッシュされれば、その後は二度と内容が変わることはない。 これは、オーケストレーションツールの核となる部分における意図しない破綻や挙動の変化を防ぐ。
+- Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. これは、オーケストレーションツールの核となる部分における意図しない破綻や挙動の変化を防ぐ。
 - レジストリは（1 インストールにつき）1 つ限り - circleci.com も含め、CircleCI のインストールごとに所有できる Orbs のレジストリは 1 つのみとなる。
 - Org 管理者がリリース版の Orbs をパブリッシュし、 管理者ではないメンバーが開発版の Orbs をパブリッシュする - 名前空間は Org が管理するものとし、 Org の管理者だけがリリース版の Orb をパブリッシュ・運用できる。 開発版の Orbs のパブリッシュは組織内の全メンバーができるものとする。
 
