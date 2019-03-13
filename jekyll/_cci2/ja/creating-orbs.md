@@ -606,10 +606,8 @@ Consider the example configuration that uses the `hello-build` orb:
 {% raw %}
 ```yaml
 version: 2.1
-
 orbs:
     hello: circleci/hello-build@0.0.5
-
 workflows:
     "Hello Workflow":
         jobs:
@@ -622,7 +620,7 @@ Running `circleci config process .circleci/config.yml` will output the following
 {% raw %}
 ```sh
 # Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
-version: 2
+version: 2.1
 jobs:
   hello/hello-build:
     docker:
