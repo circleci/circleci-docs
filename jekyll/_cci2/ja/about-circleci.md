@@ -7,9 +7,9 @@ categories:
   - getting-started
 order: 1
 ---
-This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation.
+このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明しています。
 
-## CircleCI Overview
+## CircleCI とは
 
 私たち **CircleCI** のミッションは、世の中のテクノロジー企業が最高の成果を上げられるようにする、というものです。  
 インテリジェントな自動化ツールを用いることで、チーム開発の生産性をさらに高めてほしいと願っています。
