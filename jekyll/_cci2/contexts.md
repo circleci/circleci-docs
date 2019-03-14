@@ -76,7 +76,13 @@ Only members of the selected groups may now use the context in their workflows o
 
 ### Approving Jobs that use Restricted Contexts
 
-Adding an approval job to a workflow allows a user to manually approve the use of a restricted context. Manual invocation of a job that requires approval is limited to members of the context groups. 
+Adding an approval job to a workflow allows a user to manually approve the use of a restricted context. 
+
+To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs. 
+
+For example, if you want the execution of job C and job D restricted to a secutiry group, you need to add an approval job B before the jobs C and D to that use a context with a security group. That is, you can have four jobs in a workflow, job A can run unrestricted, the approval job B may be approved by any member, but the jobs C and D after the approval may only be executed by someone in the security group for the context used on jobs C and D. 
+
+If the approver of a job is not part of the restricted context, it is possible to approve the job B, however the jobs C and D in the workflow will fail as unauthorized. That is, the Approval button will appear for every user, even for users who are not part of the group with permissions for the context. When the downstream jobs fail with Unauthorized, it indicates an approval was made by a user who is not part of the security group for the downstream jobs. 
 
 ## Removing Groups from Contexts
 
