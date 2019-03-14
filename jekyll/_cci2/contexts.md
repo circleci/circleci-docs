@@ -49,19 +49,19 @@ workflows:
 
 To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
 
-## Securing a Context
+## Restricting a Context
 
-CircleCI enables you to secure secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the secure context. 
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the secure context. 
 
 The default security group is `organization` and enables any member of the org who uses CircleCI to use the context.
 
-## Running Workflows with a Secure Context
+## Running Workflows with a Restricted Context
 
-To invoke a workflow that uses a secure context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the workflow will fail as `Unauthorized`.
+To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the workflow will fail as `Unauthorized`.
 
-**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be secured, only GitHub hosted projects or projects that use GitHub Enterprise with CircleCI include the ability to limit contexts with security groups.
+**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub hosted projects or projects that use GitHub Enterprise with CircleCI include the ability to restrict contexts with security groups.
 
-### Limit a Context to a Security Group or Groups
+### Restrict a Context to a Security Group or Groups
 
 You must be an Org Admin to complete the following task.
 
@@ -72,7 +72,11 @@ You must be an Org Admin to complete the following task.
 5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is now limited to members of the security groups.
 6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
 
-Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
+Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context. 
+
+### Approving Jobs that use Restricted Contexts
+
+Adding an approval job to a workflow allows a user to manually approve the use of a restricted context. Manual invocation of a job that requires approval is limited to members of the context groups. 
 
 ## Removing Groups from Contexts
 
@@ -82,13 +86,13 @@ To make a context available only to the admins of the org, you may remove all of
 
 CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
 
-### Adding and Removing Environment Variables from Secure Contexts
+### Adding and Removing Environment Variables from Restricted Contexts
 
-Addition and deletion of environment variables from a secure context is limited to members of the context groups.
+Addition and deletion of environment variables from a restricted context is limited to members of the context groups.
 
 ## Deleting a Context
 
-If the context is secured with a group other than `organization`, you must be a member of the security group to complete this task.
+If the context is restricted with a group other than `organization`, you must be a member of the security group to complete this task.
 
 1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
 
@@ -110,13 +114,9 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-## Send Feedback on Contexts
-{:.no_toc}
-
-We're interested in your feedback on how Contexts can evolve. Read more about our proposed roadmap and offer suggestions in the [contexts discussion](https://discuss.circleci.com/t/contexts-feedback/13908).
-
 ## See Also
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
+[Workflows]({{ site.baseurl }}/2.0/workflows/) 
 
 
