@@ -859,7 +859,7 @@ Workflows を再度実行すると、元の Workflow のものと同じ Workspac
 
 Artifacts、Workspace、キャッシュはそれぞれ下記のような違いがあることを頭に入れておいてください。
 
-| タイプ | データ寿命 | 用途 | 使用例・参照先 | |\---\---\-----|\---\---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\---\--- | Artifacts | 1カ月単位 | artifacts の長期間に渡る保管 | **JOBS ページ**の Artifacts タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される | | Workspaces | Workflow に従う | `attach_workspace:` ステップを使う下流のコンテナに対して Workspace をアタッチするのに用いる | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する | | Caches | 1カ月単位 | ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる。npm や Gem パッケージなど。 | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`. |
+| タイプ | データ寿命 | 用途 | 使用例・参照先 | |\---\---\-----|\---\---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\---\--- | Artifacts | 1カ月単位 | artifacts の長期間に渡る保管 | **JOBS ページ**の Artifacts タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される | | Workspaces | Workflow に従う | `attach_workspace:` ステップを使う下流のコンテナに対して Workspace をアタッチするのに用いる | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する | | Caches | 1カ月単位 | npm や Gem パッケージなど、ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる | `save_cache` ステップでは、`paths` でディレクトリのリストを追加する。また、`key` でキャッシュを一意に識別する名前を指定する（ブランチ、ビルド番号、リビジョンなどを用いる）。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
