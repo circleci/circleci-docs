@@ -753,12 +753,12 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 
 ##### **`store_test_results`**
 
-テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果はビルドにおけるテストサマリーセクションに表示され、時系列解析などに用いることができます。 To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
+テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果はビルドにおけるテストサマリーセクションに表示され、時系列解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をさらにビルドの成果物ファイルとして出力できます。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | ○ | String | JUnit XML のサブディレクトリや Cucumber JSON のテストメタデータが含まれるディレクトリへのパス（`working_directory`に対する絶対もしくは相対パス）
 {: class="table table-striped"}
 
-**Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
+**※**`store_test_results` で指定したパスの**サブディレクトリ**にテスト結果を保存するようにしてください。CircleCI 上でテストリポートの推測がしやすくなるよう、ユーザー独自のテストスイートの名前に合わせてディレクトリを命名すると好都合です。 If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
 
 ###### *例*
 
