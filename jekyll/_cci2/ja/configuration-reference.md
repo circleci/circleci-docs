@@ -722,7 +722,7 @@ artifact のデプロイを行う特殊なステップです。
 
 `deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。 ジョブには少なくとも 1 つ以上の `deploy` ステップがあります。
 
-In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
+通常 `deploy` ステップは 1 つの例外を除き `run` と似た形で動作します。`parallelism` を使ったジョブの場合、`deploy` ステップは他のすべてのノードが成功した場合にのみ、ノード番号 0 として実行されます。 ノード番号 0 以外はステップを実行しません。
 
 ###### 例
 
@@ -736,7 +736,7 @@ In general `deploy` step behaves just like `run` with one exception - in a job w
 
 ##### **`store_artifacts`**
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Web アプリケーションや API を通じて使う artifacts（ログ、バイナリなど）を保存するステップです。 詳しくは「[artifacts をアップロードする]({{ site.baseurl }}/2.0/artifacts/)」を参照してください。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | Y | String | Directory in the primary container to save as job artifacts destination | N | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
 {: class="table table-striped"}
@@ -762,18 +762,18 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 ###### *例*
 
-Directory structure:
+ディレクトリ構造
 
     test-results
     ├── jest
-    │   └── results.xml
+    │   └── results.xml
     ├── mocha
-    │   └── results.xml
+    │   └── results.xml
     └── rspec
         └── results.xml
     
 
-`config.yml` syntax:
+`config.yml` の構文
 
 ```YAML
 - store_test_results:
