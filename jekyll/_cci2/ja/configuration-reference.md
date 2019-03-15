@@ -594,10 +594,10 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)できます。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- paths | ○ | List | キャッシュに追加するディレクトリのリスト key | ○ | String | キャッシュ識別用のユニーク ID name | - | String | CircleCI の画面上にタイトル表示するステップの名前（デフォルト：Saving Cache） when | - | String | ステップを有効または無効にする[タイミング](#the-when-attribute)の指定 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
 
-The cache for a specific `key` is immutable and cannot be changed once written.
+特定の`キー`に対するキャッシュは、一度書き込むと書き換えられません。
 
 **Note** If the cache for the given `key` already exists it won't be modified, and job execution will proceed to the next step.
 
