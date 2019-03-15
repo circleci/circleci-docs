@@ -793,7 +793,7 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 
 ##### *root キーの使用例*
 
-For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
+下記の構文は `/tmp/dir` 内にある paths で指定している内容を、 Workspace の `/tmp/dir` ディレクトリ内に相対パスで保持します。
 
 ```YAML
 - persist_to_workspace:
@@ -803,13 +803,13 @@ For example, the following step syntax persists the specified paths from `/tmp/d
       - baz
 ```
 
-After this step completes, the following directories are added to the workspace:
+このステップが完了すると、Workspace には下記のディレクトリが追加されることになります。
 
     /tmp/dir/foo/bar
     /tmp/dir/baz
     
 
-###### *Example for paths Key*
+###### *paths キーの使用例*
 
 ```YAML
 - persist_to_workspace:
