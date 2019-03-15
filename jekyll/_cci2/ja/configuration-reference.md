@@ -878,22 +878,22 @@ steps:
         - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
 ```
 
-**Note:** Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
+**※**CircleCI は登録された全ての SSH 鍵に対して `ssh-agent` を通じて署名を行います。ただし、コンテナに対して鍵を実際に登録するには、コンフィグファイル内で `add_ssh_keys` を**必ず**設定する必要があります。
 
 ## **`workflows`**
 
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
+あらゆるジョブの自動化に用います。 Workflow 1 つ 1 つはそれぞれ名前となるキーと、値となるマップからなります。 Workflow の名前は `config.yml` ファイル内でユニークでなければなりません。 Workflows の設定でトップレベルに置くべきキーは、`version` と `jobs` になります。
 
 ### **`version`**
 
-The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
+Workflows の `version` フィールドは、機能の廃止やベータ版で重大な変更があったときに警告する際の判断材料として使われます。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- version | Y | String | Should currently be `2`
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | 現在のところは必ず `2` とする
 {: class="table table-striped"}
 
 ### **<`workflow_name`>**
 
-A unique name for your workflow.
+Workflow に付けるユニークな名前です。
 
 #### **`triggers`**
 
