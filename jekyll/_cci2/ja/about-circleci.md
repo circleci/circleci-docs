@@ -50,7 +50,7 @@ CircleCI では以下の無料トライアルを用意しています。
 
 ### オープンソース特典
 
-See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects.
+パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/2.0/oss/)をご覧ください。
 
 ## 関連情報
 
