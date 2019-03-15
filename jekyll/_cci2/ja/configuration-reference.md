@@ -897,14 +897,14 @@ Workflow に付けるユニークな名前です。
 
 #### **`triggers`**
 
-Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
+Workflow の実行契機となるトリガーを指定します。 デフォルトではブランチにプッシュすると Workflow の実行をスタートするようになっています。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- triggers | N | Array | Should currently be `schedule`.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- triggers | - | Array | 現在のところは必ず `schedule` とする
 {: class="table table-striped"}
 
 ##### **`schedule`**
 
-A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
+Workflow では、一定の時刻に実行を指示する `schedule` を記述することもできます。ユーザーの少ない毎日夜12時にビルドする、といったことも可能です。
 
     workflows:
        version: 2
@@ -923,16 +923,16 @@ A workflow may have a `schedule` indicating it runs at a certain time, for examp
 
 ###### **`cron`**
 
-The `cron` key is defined using POSIX `crontab` syntax.
+`cron` キーは POSIX 準拠の`crontab` の構文で定義します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- cron | ○ | String | [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html)を参照
 {: class="table table-striped"}
 
 ###### **`filters`**
 
-Filters can have the key `branches`.
+filters では `branches` キーが使えます。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- filters | Y | Map | A map defining rules for execution on specific branches
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- filters | ○ | Map | 実行する特定のブランチを定義付けするマップ
 {: class="table table-striped"}
 
 ###### **`ブランチ`**
@@ -1025,7 +1025,7 @@ Tags can have the keys `only` and `ignore` keys. You may also use regular expres
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- tags | N | Map | A map defining rules for execution on specific tags only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
 
-For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
+詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
 
 ###### *例*
 
