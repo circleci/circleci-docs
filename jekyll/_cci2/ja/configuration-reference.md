@@ -571,7 +571,7 @@ steps:
 - checkout
 ```
 
-**Note:** CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
+**※**CircleCI はサブモジュールのチェックアウトは行いません。 そのプロジェクトにサブモジュールが必要なときは、下記の例のように適切なコマンドを実行する `run` ステップを追加します。
 
 ```YAML
 - checkout
@@ -579,7 +579,7 @@ steps:
 - run: git submodule update --init
 ```
 
-**Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
+**※**`checkout` ステップは、Git がガベージコレクションをスキップするように設定します。 If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
 ##### **`setup_remote_docker`**
 
