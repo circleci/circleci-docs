@@ -579,11 +579,11 @@ steps:
 - run: git submodule update --init
 ```
 
-**※**`checkout` ステップは、Git がガベージコレクションをスキップするように設定します。 If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
+**※**`checkout` ステップは Git がガベージコレクションをスキップするように設定します。 [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行する方法もあります。
 
 ##### **`setup_remote_docker`**
 
-Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
+Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/2.0/building-docker-images/)を参照してください。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | - | boolean | リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) を有効にするには、この値を `true` にセットする（デフォルト：`false`）
 {: class="table table-striped"}
