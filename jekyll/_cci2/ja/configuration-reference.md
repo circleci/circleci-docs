@@ -965,19 +965,19 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 デフォルトでは、複数のジョブは並行で処理されます。そのため、ジョブ名を使って必要な依存関係の処理を明確にしておく必要があります。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- requires | - | List | そのジョブの開始までに完了させるべきジョブのリスト name | - | String | ジョブの別名。 何度もジョブを実行する際に都合の良い名前を指定できる。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 only)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- requires | - | List | そのジョブの開始までに完了させるべきジョブのリスト name | - | String | ジョブの別名。 何度もジョブを実行する際に都合の良い名前を指定できる。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です （バージョン 2.1 が必須）
 {: class="table table-striped"}
 
 ###### **`context`**
 
-Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
+ジョブでは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については、[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- context | N | String | The name of the context. The initial default name was `org-global`. With the ability to use multiple contexts, each context name must be unique.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- context | - | String | コンテキスト名。 デフォルトは `org-global` となる。 複数のコンテキストを利用できるようにするには、コンテキストごとに名前をユニークにする
 {: class="table table-striped"}
 
 ###### **`type`**
 
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
+ジョブでは、その後のジョブを続行する前に手動の承認操作を求めることができるように、`approval` の `type` を指定することができます。 下記の例にある通り、Workflow が `type: approval` キーを処理するまで、ジョブは依存関係の通りの順番で実行されます。
 
           - hold:
               type: approval
