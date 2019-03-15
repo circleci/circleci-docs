@@ -625,10 +625,10 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。
 
-Template examples: *
+テンプレートの使用例 *
 
 {% raw %}
-`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key. *
+`myapp-{{ checksum "package.json" }}`{% endraw %} `package.json` ファイルの内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチも同じキャッシュキーを生成します。 *
 
 {% raw %}
 `myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache *{% raw %}
