@@ -841,9 +841,9 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 ##### **`attach_workspace`**
 
-Workflows における Workspace を現在のコンテナに対してアタッチするのに利用する特殊なステップです。 The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
+Workflows で使用している Workspace を現在のコンテナにアタッチするのに利用する特殊なステップです。 The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- at | Y | String | Directory to attach the workspace to.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- at | ○ | String | Workspace をアタッチするディレクトリ
 {: class="table table-striped"}
 
 ###### *例*
