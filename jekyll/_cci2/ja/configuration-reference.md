@@ -637,7 +637,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 キャッシュの `key` にテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 そのため、実際に変更があったときにのみ新しいキャッシュを生成し、ジョブ実行のたびに新たなキャッシュを作らないように `key` を使うのがコツです。
 
 <div class="alert alert-info" role="alert">
-<b>ヒント：</b>キャッシュが書き換え不可ということもあり、キャッシュキー名の先頭にバージョン名などを入れておくと管理に好都合です。例えば <code class="highlighter-rouge">v1-...</code> のようにします。 That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
+<b>ヒント：</b>キャッシュが書き換え不可ということもあり、キャッシュキー名の先頭にバージョン名などを入れておくと管理に好都合です。例えば <code class="highlighter-rouge">v1-...</code> のようにします。 こうすることで、プレフィックスのバージョンの数字を増やしていくだけで全キャッシュを 1 から再生成できることになります。
 </div>
 
 ###### *例*
