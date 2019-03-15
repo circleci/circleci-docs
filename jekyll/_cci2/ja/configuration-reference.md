@@ -940,30 +940,30 @@ filters では `branches` キーが使えます。
 
 `branches` キーは、`trigger` を定義した `config.yml` ファイルを含むブランチにおいて、スケジュール実行すべきブランチかどうかを決定するのに使えます。 つまり、`master` ブランチにプッシュすると、`master` ブランチの [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) のみをスケジュール実行します。
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
+branches では、ブランチ名を指す文字列をマップさせる `only` キーと `ignore` キーを指定できます。 文字列を `/` で囲んで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
-- Any branches that match `only` will run the job.
-- Any branches that match `ignore` will not run the job.
-- If neither `only` nor `ignore` are specified then all branches will run the job.
-- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+- `only` の値にマッチする全てのブランチはジョブを実行します。
+- `ignore` の値にマッチする全てのブランチはジョブを実行しません。
+- `only` と `ignore` のどちらも指定していない場合、全てのブランチはジョブを実行します。
+- `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- branches | Y | Map | A map defining rules for execution on specific branches only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- branches | ○ | Map | 実行する特定のブランチを定義するマップ only | ○ | String / Strings のリスト | 単独のブランチ名、もしくはブランチ名のリスト ignore | - | String / Strings のリスト | 単独のブランチ名、もしくはブランチ名のリスト
 {: class="table table-striped"}
 
 #### **`jobs`**
 
-A job can have the keys `requires`, `filters`, and `context`.
+jobs では `requires`、`filters`、`context` キーを使えます。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- jobs | Y | List | A list of jobs to run with their dependencies
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- jobs | ○ | List | 依存関係の指定を含む実行するジョブのリスト
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
 
-A job name that exists in your `config.yml`.
+`config.yml` ファイルで定義するジョブの名前です。
 
 ###### **`requires`**
 
-Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
+デフォルトでは、複数のジョブは並行で処理されます。そのため、ジョブ名を使って必要な依存関係の処理を明確にしておく必要があります。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- requires | N | List | A list of jobs that must succeed for the job to start name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
 {: class="table table-striped"}
@@ -1002,10 +1002,10 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 {:.no_toc}
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
-- Any branches that match `only` will run the job.
-- Any branches that match `ignore` will not run the job.
-- If neither `only` nor `ignore` are specified then all branches will run the job.
-- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+- `only` の値にマッチする全てのブランチはジョブを実行します。
+- `ignore` の値にマッチする全てのブランチはジョブを実行しません。
+- `only` と `ignore` のどちらも指定していない場合、全てのブランチはジョブを実行します。
+- `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- branches | N | Map | A map defining rules for execution on specific branches only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
@@ -1020,7 +1020,7 @@ Tags can have the keys `only` and `ignore` keys. You may also use regular expres
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then the job is skipped for all tags.
-- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+- `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- tags | N | Map | A map defining rules for execution on specific tags only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
