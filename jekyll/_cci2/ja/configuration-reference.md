@@ -821,19 +821,20 @@ root キーは Workspace のルートディレクトリとなるコンテナ内�
 
 `paths` では、Go 言語の `Glob` 関数をベースにした、[filepath.Match](https://golang.org/pkg/path/filepath/#Match) によるパターンマッチングに対応します。
 
-    pattern:
+    パターン
         { term }
 term:
-            '*' matches any sequence of non-Separator characters
-            '?' matches any single non-Separator character
+            '*'　区切り文字を含まない文字シーケンスの全てにマッチする
+            '?'　区切り文字を含まないあらゆる文字 1 つにマッチする
             '[' [ '^' ] { character-range }
-        ']' character class (must be non-empty)
-            c matches character c (c != '*', '?', '\\', '[')
-            '\\' c matches character c
+        ']'
+    　　　　　　　　文字クラス（空文字は不可）
+            c　文字 c にマッチする（'*'　'?'　'\\'　'[' 以外）
+            '\\'c　文字 c にマッチする
     character-range:
-            c matches character c (c != '\\', '-', ']')
-            '\\' c matches character c
-            lo '-' hi matches character c for lo <= c <= hi
+            c　文字 c にマッチする（'\\'　'-'　']' 以外)
+            '\\'c　文字 c にマッチする
+            lo '-' hi　lo <= c <= hi の範囲にある文字 c にマッチする
     
 
 The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
