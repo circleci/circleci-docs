@@ -657,10 +657,10 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 `key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- key | Y <sup>(1)</sup> | String | Single cache key to restore keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- key | ○ <sup>(1)</sup> | String | 復元するキャッシュのキー（1つのみ） keys | ○ <sup>(1)</sup> | List | 復元するキャッシュを探索するためのキャッシュキーのリスト。 ただし、最初にマッチしたキーのみが復元される。 name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
 {: class="table table-striped"}
 
-<sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
+<sup>(1)</sup>いずれか 1 つの属性のみ指定します。 `key` と `keys` の両方が指定されたときは、`key` の内容がまず始めに検証され、次に `keys` の内容が検証されます。
 
 A key is searched against existing keys as a prefix.
 
