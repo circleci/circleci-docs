@@ -688,7 +688,7 @@ steps:
 
 この例では、`v1-myapp-cache-new` で示したキャッシュが復元されます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、後の方が `v1-myapp-cache` というプレフィックスで検索して一番最後にマッチしたものだからです。
 
-For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
+key の詳しい書式については、[`save_cache` ステップ](#save_cache)の `key` セクションをご覧ください。
 
 When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
@@ -702,12 +702,12 @@ A path is not required here because the cache will be restored to the location f
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-      # if cache for exact version of `project.clj` is not present then load any most recent one
+      # 「project.clj」の本来のバージョンのキャッシュが見つからなかったら、今あるなかで最新のキャッシュを使う
       - v1-myapp-
 
-# ... Steps building and testing your application ...
+# ... アプリケーションのビルドやテストのステップをここに記述する
 
-# cache will be saved only once for each version of `project.clj`
+# キャッシュは「project.clj」のバージョンごとに一度だけ保存する
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
