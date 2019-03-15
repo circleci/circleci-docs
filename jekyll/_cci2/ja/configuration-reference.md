@@ -786,12 +786,12 @@ Workflows の実行時に、他のジョブが使っていた一時ファイル�
 
 **※**Workspace はファイル作成後30日間保存します。 30日以上経過後もジョブで Workspace を使おうとすると、Workflows の一部の再実行も、SSH 経由の個別ジョブの実行も、失敗します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- root | Y | String | Either an absolute path or a path relative to `working_directory` paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- root | ○ | String | `working_directory`に対する絶対パスまたは相対パス paths | ○ | List | ファイルを特定するグロブ（ワイルドカードなど）、または共有 Workspace に付加するディレクトリパス（グロブ不可）。 Workspace のルートディレクトリへの相対パスと見なされる。 Workspace のルートディレクトリそのものを指定するのは不可
 {: class="table table-striped"}
 
-The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
+root キーは Workspace のルートディレクトリとなるコンテナ内のディレクトリを指します。 一方、paths の値は必ずルートへの相対ディレクトリとなります。
 
-##### *Example for root Key*
+##### *root キーの使用例*
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
