@@ -720,7 +720,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 
 artifact のデプロイを行う特殊なステップです。
 
-`deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
+`deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。 ジョブには少なくとも 1 つ以上の `deploy` ステップがあります。
 
 In general `deploy` step behaves just like `run` with one exception - in a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 
