@@ -965,7 +965,7 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 デフォルトでは、複数のジョブは並行で処理されます。そのため、ジョブ名を使って必要な依存関係の処理を明確にしておく必要があります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- requires | N | List | A list of jobs that must succeed for the job to start name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- requires | - | List | そのジョブの開始までに完了させるべきジョブのリスト name | - | String | ジョブの別名。 何度もジョブを実行する際に都合の良い名前を指定できる。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 only)
 {: class="table table-striped"}
 
 ###### **`context`**
