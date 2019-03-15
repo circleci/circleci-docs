@@ -690,7 +690,7 @@ steps:
 
 key の詳しい書式については、[`save_cache` ステップ](#save_cache)の `key` セクションをご覧ください。
 
-CircleCI が `keys` のリストを処理するときは、最初にマッチした既存のキャッシュを復元します。 Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+CircleCI が `keys` のリストを処理するときは、最初にマッチした既存のキャッシュを復元します。 もっと別の条件を加えて特定のキーに狙ってマッチさせたい（`package.json` ファイルの実在するバージョンのキャッシュなど）、あるいはもっと幅広くマッチさせたいと思うかもしれません。 If no key has a cache that exists, the step will be skipped with a warning.
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
