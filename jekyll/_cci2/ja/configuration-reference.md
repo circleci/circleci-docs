@@ -862,13 +862,13 @@ Artifacts、Workspace、キャッシュはそれぞれ下記のような違い�
 | タイプ | データ寿命 | 用途 | 使用例・参照先 | |\---\---\-----|\---\---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\---\--- | Artifacts | 1カ月単位 | artifacts の長期間に渡る保管 | **JOBS ページ**の Artifacts タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される | | Workspaces | Workflow に従う | `attach_workspace:` ステップを使う下流のコンテナに対して Workspace をアタッチするのに用いる | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する | | Caches | 1カ月単位 | npm や Gem パッケージなど、ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる | `save_cache` ステップでは、`paths` でディレクトリのリストを追加する。また、`key` でキャッシュを一意に識別する名前を指定する（ブランチ、ビルド番号、リビジョンなどを用いる）。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する |
 {: class="table table-striped"}
 
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+Workspace や キャッシュ、artifacts に関する詳細は、[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)を参照してください。
 
 ##### **`add_ssh_keys`**
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
+プロジェクト設定でコンテナに対して SSH 鍵を追加する特殊なステップです。 下記のキーを使って SSH に関する設定を行うこともできます。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- fingerprints | N | List | List of fingerprints corresponding to the keys to be added (default: all keys added)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- fingerprints | - | List | 追加される鍵に対応する SSH fingerprint のリスト（デフォルト：追加された鍵全て）
 {: class="table table-striped"}
 
 ```yaml
