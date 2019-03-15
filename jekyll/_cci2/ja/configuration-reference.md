@@ -686,11 +686,11 @@ steps:
       key: v1-myapp-cache
 ```
 
-この例では、`v1-myapp-cache-new` で示したキャッシュが復元されます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、後の方が `v1-myapp-cache` というプレフィックスで検索して一番最後にマッチしたものだからです。
+この例では、`v1-myapp-cache-new` で示したキャッシュが復元されます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、後の方が `v1-myapp-cache` というプレフィックスで検索したときに一番最後にマッチしたものになるからです。
 
 key の詳しい書式については、[`save_cache` ステップ](#save_cache)の `key` セクションをご覧ください。
 
-When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+CircleCI が `keys` のリストを処理するときは、最初にマッチした既存のキャッシュを復元します。 Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
@@ -718,7 +718,7 @@ A path is not required here because the cache will be restored to the location f
 
 ##### **`deploy`**
 
-Special step for deploying artifacts.
+artifact のデプロイを行う特殊なステップです。
 
 `deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
 
@@ -1111,7 +1111,7 @@ jobs:
           paths:
             - ~/.m2
 
-      # アーティファクトを保存
+      # artifacts を保存
       - store_artifacts:
           path: /tmp/artifacts
           destination: build
