@@ -33,17 +33,17 @@ AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Eng
 
 **継続的インテグレーション**は、デジタルトランスフォーメーションに向けた大切な第一歩です。
 
-**What?**  
-Every developer commits daily to a shared mainline.  
-Every commit triggers an automated build and test.  
-If build and test fails, it’s repaired quickly - within minutes.
+**導入すると？**  
+開発メンバー全員がリポジトリの共有メインラインに日々コミットできます。  
+コミットのたびにビルドとテストが自動で実行されます。  
+ビルドやテストに失敗したときは、その問題の解決を即座に図れます。
 
-**Why?**  
-Improve team productivity, efficiency, happiness. Find problems and solve them, quickly. Release higher quality, more stable products.
+**メリットは？**  
+チーム開発の生産性、効率、満足度が向上します。 コードにおける問題の迅速な発見と解決につながります。 不具合の少ない高品質なプロダクトの提供を実現します。
 
 ## 無料トライアル
 
-CircleCI provides a free trial with the following options:
+CircleCI では以下の無料トライアルを用意しています。
 
 - **クラウド型**：クラウドサーバー上にホスティングした CircleCI を試せるものです。[無料トライアルはこちら]({{site.baseurl}}/2.0/first-steps/)。
 - **サーバー型**：自身のサーバー上で CircleCI の動作を試せるものです。[インストール方法はこちら]({{site.baseurl}}/2.0/single-box/)。
