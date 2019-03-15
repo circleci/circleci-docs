@@ -592,7 +592,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 ##### **`save_cache`**
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
