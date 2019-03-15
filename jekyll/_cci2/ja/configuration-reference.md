@@ -753,12 +753,12 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 
 ##### **`store_test_results`**
 
-テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果はビルドにおけるテストサマリーセクションに表示され、時系列解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をさらにビルドの成果物ファイルとして出力できます。
+テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果は「JOBS」ページの「Test Summary」タブに表示され、時系列解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をさらにビルドの成果物ファイルとして出力できます。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | ○ | String | JUnit XML のサブディレクトリや Cucumber JSON のテストメタデータが含まれるディレクトリへのパス（`working_directory`に対する絶対もしくは相対パス）
 {: class="table table-striped"}
 
-**※**`store_test_results` で指定したパスの**サブディレクトリ**にテスト結果を保存するようにしてください。CircleCI 上でテストリポートの推測がしやすくなるよう、ユーザー独自のテストスイートの名前に合わせてディレクトリを命名すると好都合です。 If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
+**※**`store_test_results` で指定したパスの**サブディレクトリ**にテスト結果を保存するようにしてください。CircleCI 上でテストリポートの推測がしやすくなるよう、ユーザー独自のテストスイートの名前に合わせてディレクトリを命名すると好都合です。 サブディレクトリに保存しないときは、CircleCI 上の「Test Summary」タブでテストリポートをチェックします。この場合は `Your build ran 71 tests in unknown` のような表示になります。適切な名前のサブディレクトリに保存した場合は、`Your build ran 71 tests in rspec` のようになります。
 
 ###### *例*
 
@@ -782,7 +782,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 
 ##### **`persist_to_workspace`**
 
-Special step used to persist a temporary file to be used by another job in the workflow.
+Workflows の実行時に、他のジョブが使っていた一時ファイルを保持しておくための特殊なステップです。
 
 **Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
