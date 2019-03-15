@@ -655,7 +655,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 ##### **`restore_cache`**
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
+`key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- key | Y <sup>(1)</sup> | String | Single cache key to restore keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
 {: class="table table-striped"}
