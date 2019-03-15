@@ -784,7 +784,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 
 Workflows の実行時に、他のジョブが使っていた一時ファイルを保持しておくための特殊なステップです。
 
-**Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+**※**Workspace はファイル作成後30日間保存します。 30日以上経過後もジョブで Workspace を使おうとすると、Workflows の一部の再実行も、SSH 経由の個別ジョブの実行も、失敗します。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- root | Y | String | Either an absolute path or a path relative to `working_directory` paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
 {: class="table table-striped"}
