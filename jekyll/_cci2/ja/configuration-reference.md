@@ -601,7 +601,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 **※**`key` で指定されたキャッシュがすでに存在していると書き換えられじ、ジョブ実行は次のステップの処理に移ります。
 
-キャッシュを新たに保存したとき、その `key` の値は特別なテンプレート値になります。
+キャッシュを新たに保存すると、その `key` の値は特殊なテンプレート値を含む形になります。
 
 テンプレート | 解説 \----|\---\---\----
 {% raw %}`{{ .Branch }}`
@@ -611,12 +611,12 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 {% raw %}`{{ .BuildNum }}`
 {% endraw %}
 
-| The CircleCI build number for this build.
+| 実行中のビルドにおける CircleCI のビルド番号。
 {% raw %}`{{ .Revision }}`
 {% endraw %}
 
 | 現在ビルドを実行しているバージョン管理システムのリビジョン。
-{% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
+{% raw %}`{{ .CheckoutKey }}`{% endraw %} | リポジトリのチェックアウトに使用する SSH 鍵
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | `variableName`で示される環境変数 ([定義済み環境変数](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) 、もしくは[コンテキスト](https://circleci.com/docs/2.0/contexts)を指定できますが、ユーザー定義の環境変数は使えません)。
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
