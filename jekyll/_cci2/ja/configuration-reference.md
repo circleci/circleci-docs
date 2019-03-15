@@ -841,7 +841,7 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 ##### **`attach_workspace`**
 
-Workflows で使用している Workspace を現在のコンテナにアタッチするのに利用する特殊なステップです。 The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
+Workflows で使用している Workspace を現在のコンテナにアタッチするのに利用する特殊なステップです。 Workspace 内のコンテンツは完全な状態でダウンロードされ、Workspace がアタッチされているディレクトリにコピーされます。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- at | ○ | String | Workspace をアタッチするディレクトリ
 {: class="table table-striped"}
@@ -853,7 +853,7 @@ Workflows で使用している Workspace を現在のコンテナにアタッ�
     at: /tmp/workspace
 ```
 
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow. Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step. The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it. When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
+Workflows 1 つ 1 つは、それぞれに一時的な Workspace が関連付けられています。 Workspace は同じ Workflows において、ジョブの実行中にビルドしたデータを他のジョブに渡すのに使います。 ジョブ内では `persist_to_workspace` ステップで Workspace にファイルを追加でき、さらに `attach_workspace` ステップを呼び出すと、Workspace 内のファイルをアタッチしたファイルシステムにダウンロードできます。 The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it. When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
 
 If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
