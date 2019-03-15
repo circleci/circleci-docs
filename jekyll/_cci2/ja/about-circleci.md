@@ -25,11 +25,11 @@ GitHub もしくは Bitbucket アカウントの認証が完了し、各リポ�
 
 テスト完了後にはメールで成功・失敗の通知が届くほか、 Slack、HipChat、Campfire、Flowdock、IRC などのチャットツールと連携して通知を受け取ることも可能です。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
 
-CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Container Engine (GKE), and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
+AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Engine (GKE)、Heroku といったデプロイサービスを利用している場合、CircleCI はそれに合わせてデプロイコードを構成します。 その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、簡単にスクリプト化できます。
 
 ## 継続的インテグレーションとは？
 
-**Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**継続的インテグレーション**とは、Git のような共有リポジトリにおける `master` (中央の) ブランチに対して、素早く、定期的に、個々の開発者が自身のコードをマージするための手法です。 Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
 **Continuous Integration** is a key step to digital transformation.
 
