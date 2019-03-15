@@ -631,10 +631,10 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 `myapp-{{ checksum "package.json" }}`{% endraw %} `package.json` ファイルの内容が変わるたびにキャッシュが毎回生成されます。このプロジェクトの別のブランチも同じキャッシュキーを生成します。 *
 
 {% raw %}
-`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache *{% raw %}
-`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
+`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - ファイル内容が変わるたびにキャッシュが毎回生成されます。ただし、こちらはブランチごとに別のキャッシュを生成します。 *{% raw %}
+`myapp-{{ epoch }}`{% endraw %} - ジョブを実行するたびに新たにキャッシュを生成します。
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
+キャッシュの `key` にテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
 
 <div class="alert alert-info" role="alert">
 <b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
