@@ -989,7 +989,7 @@ jobs では `requires`、`filters`、`context` キーを使えます。
                 - hold
     
 
-**Note:** The `hold` job name must not exist in the main configuration.
+**※**`hold` というジョブ名は、メインのコンフィグに入れないようにしてください。
 
 ###### **`filters`**
 
