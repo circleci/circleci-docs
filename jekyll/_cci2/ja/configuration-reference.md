@@ -657,14 +657,14 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 `key` に設定されている内容を元に、あらかじめ保存されていたキャッシュを復元します。 先に [`save_cache` ステップ](#save_cache)を利用して、この key に該当するキャッシュを保存しておかなければなりません。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- key | ○ <sup>(1)</sup> | String | 復元するキャッシュのキー（1つのみ） keys | ○ <sup>(1)</sup> | List | 復元するキャッシュを探索するためのキャッシュキーのリスト。 ただし、最初にマッチしたキーのみが復元される。 name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- key | ○ <sup>(1)</sup> | String | 復元するキャッシュのキー（1つのみ） keys | ○ <sup>(1)</sup> | List | 復元するキャッシュを探索するためのキャッシュキーのリスト。 ただし、最初にマッチしたキーのみが復元される。 name | - | String | CircleCI の画面上にタイトル表示するステップの名前（デフォルト：Restoring Cache）
 {: class="table table-striped"}
 
 <sup>(1)</sup>いずれか 1 つの属性のみ指定します。 `key` と `keys` の両方が指定されたときは、`key` の内容がまず始めに検証され、次に `keys` の内容が検証されます。
 
-A key is searched against existing keys as a prefix.
+既存のキーのプレフィックスに対して検索が実行されることになります。
 
-**Note**: When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
+**※**一致するものが複数あった場合、マッチ度合いの高いものが他にあったとしても、一番最後に見つかったものが使われます。
 
 例えば下記のようにします。
 
@@ -686,7 +686,7 @@ steps:
       key: v1-myapp-cache
 ```
 
-In this case cache `v1-myapp-cache-new` will be restored because it's the most recent match with `v1-myapp-cache` prefix even if the first key (`v1-myapp-cache`) has exact match.
+この例では、`v1-myapp-cache-new` で示したキャッシュが復元されます。最初のキー（`v1-myapp-cache`）にもマッチはしていますが、後の方が `v1-myapp-cache` というプレフィックスで検索して一番最後にマッチしたものだからです。
 
 For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
 
