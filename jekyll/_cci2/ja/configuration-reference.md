@@ -592,7 +592,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 ##### **`save_cache`**
 
-依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)できます。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
 {: class="table table-striped"}
@@ -655,7 +655,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 ##### **`restore_cache`**
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- key | Y <sup>(1)</sup> | String | Single cache key to restore keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
 {: class="table table-striped"}
