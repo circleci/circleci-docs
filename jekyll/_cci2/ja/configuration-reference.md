@@ -837,11 +837,11 @@ term:
             lo '-' hi　lo <= c <= hi の範囲にある文字 c にマッチする
     
 
-The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
+Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名でパターンを記述できるとしています（/ は区切り文字です）。 **※**どのような指定方法でも Workspace のルートディレクトリへの相対パスとなります。
 
 ##### **`attach_workspace`**
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
+Workflows における Workspace を現在のコンテナに対してアタッチするのに利用する特殊なステップです。 The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- at | Y | String | Directory to attach the workspace to.
 {: class="table table-striped"}
