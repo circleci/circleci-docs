@@ -738,10 +738,10 @@ artifact のデプロイを行う特殊なステップです。
 
 Web アプリケーションや API を通じて使う artifacts（ログ、バイナリなど）を保存するステップです。 詳しくは「[artifacts をアップロードする]({{ site.baseurl }}/2.0/artifacts/)」を参照してください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | Y | String | Directory in the primary container to save as job artifacts destination | N | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | ○ | String | ジョブで作成した artifacts の保存先となるプライマリコンテナ内のディレクトリ destination | - | String | artifacts の API において artifacts の保存先パスに付加するプレフィックス（デフォルト：`path` で指定したファイルディレクトリ）
 {: class="table table-striped"}
 
-There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
+ジョブでは複数の `store_artifacts` ステップを指定することもできます。 ファイルが上書きされたりしないよう、ステップごとにユニークなプレフィックスを付加するようにしてください。
 
 ###### 例
 
@@ -753,7 +753,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
+テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果はビルドにおけるテストサマリーセクションに表示され、時系列解析などに用いることができます。 To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
 {: class="table table-striped"}
