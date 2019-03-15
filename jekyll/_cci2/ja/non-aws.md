@@ -9,9 +9,11 @@ hide: false
 ---
 This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Limitations
+
+## 制限について
 
 This method of installation has the following limitations:
 
@@ -29,7 +31,7 @@ CircleCI 2.0 provides new infrastructure that includes the following improvement
 
 By default, CircleCI 2.0's Nomad Client instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
-## Architecture
+## 稼働環境
 
 A CircleCI static installation consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute jobs and communicate back to the Services machine. Both components must access an instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
@@ -39,7 +41,14 @@ A CircleCI static installation consists of two primary components: Services and 
 
 The machine on which the Services instance runs should only be restarted gracefully and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/2.0/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
 
-| Source | Ports | Use | |\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---| | End Users | 80, 443, 7171, 8081 | HTTP/HTTPS Traffic | | Administrators | 22 | SSH | | Administrators | 8800 | Admin Console | | Nomad Clients | 4647, 8585, 7171, 3001 | Internal Communication | | GitHub (Enterprise or .com) | 80, 443 | Incoming Webhooks | {: class="table table-striped"}
+| Source                      | Ports                  | Use                    |
+| --------------------------- | ---------------------- | ---------------------- |
+| End Users                   | 80, 443, 7171, 8081    | HTTP/HTTPS Traffic     |
+| Administrators              | 22                     | SSH                    |
+| Administrators              | 8800                   | Admin Console          |
+| Nomad Clients               | 4647, 8585, 7171, 3001 | Internal Communication |
+| GitHub (Enterprise or .com) | 80, 443                | Incoming Webhooks      |
+{: class="table table-striped"}
 
 ### Nomad Clients
 
@@ -47,22 +56,36 @@ The Nomad Client instances run without storing state, enabling you to increase o
 
 Each machine on which the Nomad Clients are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Nomad client instances:
 
-| Source | Ports | Use | |\---\---\---\---\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----| | End Users | 64535-65535 | [SSH into builds feature](https://circleci.com/docs/2.0/ssh-access-jobs/) | | Administrators | 80 or 443 | CircleCI API Access (graceful shutdown, etc) | | Administrators | 22 | SSH | | Services VM | 4647, 8585, 7171, 3001 | Internal Communication | {: class="table table-striped"}
+| Source         | Ports                  | Use                                                                       |
+| -------------- | ---------------------- | ------------------------------------------------------------------------- |
+| End Users      | 64535-65535            | [SSH into builds feature](https://circleci.com/docs/2.0/ssh-access-jobs/) |
+| Administrators | 80 or 443              | CircleCI API Access (graceful shutdown, etc)                              |
+| Administrators | 22                     | SSH                                                                       |
+| Services VM    | 4647, 8585, 7171, 3001 | Internal Communication                                                    |
+{: class="table table-striped"}
 
 ### GitHub
 
 CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, in turn, may use LDAP, SAML, or SSH for access. CircleCI will inherit the authentication supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad client instances.
 
-| Source | Ports | Use | |\---\---\---\---\---|\---\---\---|\---\---\---\-----| | Services | 22 | Git Access | | Services | 80, 443 | API Access | | Nomad Client | 22 | Git Access | | Nomad Client | 80, 443 | API Access | {: class="table table-striped"}
+| Source       | Ports   | Use        |
+| ------------ | ------- | ---------- |
+| Services     | 22      | Git Access |
+| Services     | 80, 443 | API Access |
+| Nomad Client | 22      | Git Access |
+| Nomad Client | 80, 443 | API Access |
+{: class="table table-striped"}
+
 
 ## Installation
 
 The following sections describe the steps for installation of the Services VM and the Nomad cluster.
 
-### Prerequisites
+### 前準備
 
 Have the following available before beginning the installation procedure:
 
+- A Platinum CircleCI support agreement. Contact CircleCI support or your account representative to get started.
 - A CircleCI License file (.rli). Contact CircleCI support if you need a license.
 - A machine to run Ubuntu 14.04 or 16.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM.
 - A cluster of machines running Ubuntu 14.04 or 16.04 with a minumum of 8 GB RAM and 4 CPUs each, as well as network access to any Docker registries that are required by your builds for the Nomad Client VMs.
@@ -77,7 +100,7 @@ Have the following available before beginning the installation procedure:
 
 4. Go to the public IP of the host on port 8800 using HTTPS.
 
-5. Enter your license.
+5. ライセンスを入力します。
 
 6. Complete the Storage section. If you are not using a cloud service, then you will pick `None` (more information below).
 
@@ -99,7 +122,7 @@ Have the following available before beginning the installation procedure:
 
 The `None` storage driver saves all of your CircleCI data locally. This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. It is best practice to mount an external volume and create a symbolic link between the two when using this storage option. **Note:** Data may only be transferred as quickly as the external volume will allow, so SSDs are best practice.
 
-### Troubleshooting
+### トラブルシューティング
 
 This section includes some possible resolutions for common issues that may be encountered during system setup and installation.
 
