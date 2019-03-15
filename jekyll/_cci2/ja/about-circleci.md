@@ -29,9 +29,9 @@ AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Eng
 
 ## 継続的インテグレーションとは？
 
-**継続的インテグレーション**とは、Git のような共有リポジトリにおける `master` (中央の) ブランチに対して、素早く、定期的に、個々の開発者が自身のコードをマージするための手法です。 Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**継続的インテグレーション**とは、Git のような共有リポジトリにおける `master` (中央の) ブランチに対して、素早く、定期的に、個々の開発者が自身のコードをマージするための手法です。 別の場所で機能追加などを行い、開発サイクルの終了間際にマージする方法とは違って、継続的インテグレーションでは、開発メンバーそれぞれが随時、自身のコードを共有リポジトリ上でマージしていく形になります。
 
-**Continuous Integration** is a key step to digital transformation.
+**継続的インテグレーション**は、デジタルトランスフォーメーションに向けた大切な第一歩です。
 
 **What?**  
 Every developer commits daily to a shared mainline.  
