@@ -588,7 +588,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | - | boolean | リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) を有効にするには、この値を `true` にセットする（デフォルト：`false`）
 {: class="table table-striped"}
 
-***※***Docker レイヤーキャッシュを利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 Please include a link to the project on CircleCI) with your request. - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
+***補足*** ・Docker レイヤーキャッシュを利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 リクエストの際には 該当するプロジェクトへのリンクもお送りください。 ・`setup_remote_docker` は `machine` Executor との互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について詳細は、「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)」を参照してください。
 
 ##### **`save_cache`**
 
