@@ -45,8 +45,8 @@ AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Eng
 
 CircleCI では以下の無料トライアルを用意しています。
 
-- **クラウド型**：クラウドサーバー上にホスティングした CircleCI を試せるものです。[無料トライアルはこちら]({{site.baseurl}}/2.0/first-steps/)。
-- **サーバー型**：自身のサーバー上で CircleCI の動作を試せるものです。[インストール方法はこちら]({{site.baseurl}}/2.0/single-box/)。
+- **クラウド型** : クラウドサーバー上にホスティングした CircleCI を試せるものです。登録方法は「[CircleCI を始める]({{site.baseurl}}/ja/2.0/first-steps/)」をご覧ください。
+- **サーバー型** : 自身のサーバー上で CircleCI の動作を試せるものです。詳しくは「[インストール方法]({{site.baseurl}}/ja/2.0/single-box/)」をご覧ください。
 
 ### オープンソース特典
 
