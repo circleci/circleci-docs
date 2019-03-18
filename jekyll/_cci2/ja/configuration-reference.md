@@ -524,9 +524,9 @@ steps:
 
 ##### **`when` ステップ**（version: 2.1 が必須）
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下ではサブキーとして `condition` と `steps` が使えます。 `when` ステップの用途は、事前に Workflows を実行して確認した（コンパイルの時点で決定される）独自の条件を元にして実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キー配下ではサブキーとして `condition` と `steps` が使えます。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- condition | ○ | String | パラメーター値 steps | ○ | Sequence | condition が true の時に実行するステップの内容
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- condition | ○ | String | パラメーター値を指定します。 steps | ○ | Sequence | condition が true の時に実行するステップの内容を設定します。
 {: class="table table-striped"}
 
 ###### *例*
@@ -560,7 +560,7 @@ steps:
 
 設定済み `path`（デフォルトは `working_directory`）にあるソースコードのチェックアウトに用いる特殊なステップです。 コードのチェックアウトを簡便にすることを目的にしたヘルパー関数である、というのが特殊としている理由です。 HTTPS 経由で git を実行する場合はこのステップは使えません。ssh 経由でチェックアウトするのと同じ設定を行う必要があります。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | - | String | チェックアウトディレクトリ（デフォルト：ジョブの [`working_directory`](#jobs)）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | - | String | チェックアウトディレクトリを指定します（デフォルト：ジョブの [`working_directory`](#jobs)）。
 {: class="table table-striped"}
 
 `path` が存在し、かつソースコードが git リポジトリの場合は、ステップはリポジトリ全体をクローンせず、オリジナルをプルします。 同様の条件で git リポジトリ以外の場合は、このステップは失敗します。
@@ -571,7 +571,7 @@ steps:
 - checkout
 ```
 
-**※**CircleCI はサブモジュールのチェックアウトは行いません。 そのプロジェクトにサブモジュールが必要なときは、下記の例のように適切なコマンドを実行する `run` ステップを追加します。
+**※**CircleCI はサブモジュールのチェックアウトは行いません。 そのプロジェクトにサブモジュールが必要なときは、下記の例のように適切なコマンドを実行する `run` ステップを追加してください。
 
 ```YAML
 - checkout
@@ -579,27 +579,27 @@ steps:
 - run: git submodule update --init
 ```
 
-**※**`checkout` ステップは Git がガベージコレクションをスキップするように設定します。 [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行する方法もあります。
+**※**`checkout` ステップは git がガベージコレクションをスキップするように設定します。 [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行しておく方法があります。
 
 ##### **`setup_remote_docker`**
 
 Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/2.0/building-docker-images/)を参照してください。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | - | boolean | リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) を有効にするには、この値を `true` にセットする（デフォルト：`false`）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | - | boolean | リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) を有効にするには、この値を `true` にセットします（デフォルト：`false`）。
 {: class="table table-striped"}
 
-***補足*** ・Docker レイヤーキャッシュを利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 リクエストの際には 該当するプロジェクトへのリンクもお送りください。 ・`setup_remote_docker` は `machine` Executor との互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について詳細は、「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)」を参照してください。
+***補足*** ・Docker レイヤーキャッシュを利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 リクエストの際には該当するプロジェクトへのリンクもお送りください。 ・`setup_remote_docker` は `machine` Executor との互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について、詳細は「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)」を参照してください。
 
 ##### **`save_cache`**
 
-依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)できます。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
+CircleCI のオブジェクトストレージにある、依存関係やソースコードのようなファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)することができます。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- paths | ○ | List | キャッシュに追加するディレクトリのリスト key | ○ | String | キャッシュ識別用のユニーク ID name | - | String | CircleCI の画面上にタイトル表示するステップの名前（デフォルト：Saving Cache） when | - | String | ステップを有効または無効にする[タイミング](#the-when-attribute)の指定 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- paths | ○ | List | キャッシュに追加するディレクトリのリストを指定します。 key | ○ | String | キャッシュ識別用のユニーク ID を指定します。 name | - | String | CircleCI の画面上にタイトル表示するステップの名前を指定します（デフォルト：Saving Cache）。 when | - | String | ステップの実行を有効・無効にする[条件](#the-when-attribute)を指定します。 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
-個別の `key` に対するキャッシュは、一度書き込むと書き換えられません。
+`key` で割り当てたキャッシュは、一度書き込むと書き換えられません。
 
-**※**`key` で指定されたキャッシュがすでに存在していると書き換えられじ、ジョブ実行は次のステップの処理に移ります。
+**※**`key` で指定されたキャッシュがすでに存在していると、書き換えられないまま次のジョブステップの処理に移ります。
 
 キャッシュを新たに保存すると、その `key` の値は特殊なテンプレート値を含む形になります。
 
