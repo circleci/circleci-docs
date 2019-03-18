@@ -21,7 +21,7 @@ Linux、macOS、Android の各プラットフォームに加え、SaaS やオン
 
 ## 概要
 
-GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI は、異なる[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/2.0/glossary/#job)を走らせます。 つまり、ジョブが CircleCI を走らせるたびにジョブを走らせるコンテナや VM がスピンアップされます。
+GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)を実行します。 つまり、ジョブが CircleCI を走らせるたびにジョブを走らせるコンテナや VM がスピンアップされます。
 
 テスト完了後にはメールで成功・失敗の通知が届くほか、 Slack、HipChat、Campfire、Flowdock、IRC などのチャットツールと連携して通知を受け取ることも可能です。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
 
