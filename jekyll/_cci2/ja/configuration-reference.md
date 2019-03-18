@@ -932,7 +932,7 @@ Workflow では、一定の時刻に実行を指示する `schedule` を記述�
 
 filters では `branches` キーが使えます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- filters | ○ | Map | 実行する特定のブランチを定義付けするマップ
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- filters | ○ | Map | 実行するブランチを定義付けするマップ
 {: class="table table-striped"}
 
 ###### **`ブランチ`**
@@ -940,7 +940,7 @@ filters では `branches` キーが使えます。
 
 `branches` キーは、`trigger` を定義した `config.yml` ファイルを含むブランチにおいて、スケジュール実行すべきブランチかどうかを決定するのに使えます。 つまり、`master` ブランチにプッシュすると、`master` ブランチの [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) のみをスケジュール実行します。
 
-branches では、ブランチ名を指す文字列をマップさせる `only` キーと `ignore` キーを指定できます。 文字列を `/` で囲んで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲んで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチする全てのブランチはジョブを実行します。
 - `ignore` の値にマッチする全てのブランチはジョブを実行しません。
@@ -993,14 +993,14 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 ###### **`filters`**
 
-フィルターでは `branches` か `tags` キーのいずれかを使えます。 **※**Workflows のなかではジョブレベルの branches キーは無視されることに注意してください。 If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+フィルターでは `branches` か `tags` キーのいずれかを使えます。 **※**Workflows のなかではジョブレベルの branches キーは無視されることに注意してください。 最初にジョブレベルで branches キーを使っていて、その後 `config.yml` を Workflows に移行するような場合、ジョブレベルにあった branches は Workflows のセクションのなかで宣言するようにしてください。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- filters | N | Map | A map defining rules for execution on specific branches
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- filters | - | Map | 実行するブランチを定義付けするマップ
 {: class="table table-striped"}
 
 ###### **`ブランチ`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を / で囲むことで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチする全てのブランチはジョブを実行します。
 - `ignore` の値にマッチする全てのブランチはジョブを実行しません。
