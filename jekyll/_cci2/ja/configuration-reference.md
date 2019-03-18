@@ -73,7 +73,7 @@ commands:
 
 executors は、ジョブステップの実行環境を定義するものです。Executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
 {: class="table table-striped"}
 
 例
@@ -108,7 +108,7 @@ Workflows を**使わない**場合は、`jobs` マップ内に `build` とい�
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルト：すべてホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
@@ -453,13 +453,13 @@ jobs:
 
 このような動作に不都合があるときは、コマンドで `set +o pipefail` を指定するか、`shell` 全体を（最初の例のように）書き換えてください。
 
-通常はデフォルトのオプション（`-eo pipefail`）を使うことを推奨しています。こうすることで、途中のコマンドでエラーがあっても気付くことができ、ジョブが失敗したときのデバッグも用意になります。 CircleCI 上では `run` ステップごとに使用したシェルとアクティブなオプションを表示するのも好都合です。
+通常はデフォルトのオプション（`-eo pipefail`）を使うことを推奨しています。こうすることで、途中のコマンドでエラーがあっても気付くことができ、ジョブが失敗したときのデバッグも容易になります。 CircleCI 上では `run` ステップごとに使用したシェルとアクティブなオプションを表示するのも好都合です。
 
 詳細は[シェルスクリプトを使う]({{ site.baseurl }}/2.0/using-shell-scripts/)を参照してください。
 
 ###### *background コマンド*
 
-`background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 `background` 属性を `true` にセットすることで、ジョブ実行においてコマンドの終了を待つことなく、即座に次のステップへと処理を移します。 下記の例は、Web の UI 検証に用いるツール Selenium のテスト時によく必要とされる、バックグラウンドにおける X virtual framebuffer の実行に関するコンフィグです。
+`background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 `background` 属性を `true` にセットすることで、ジョブ実行においてコマンドの終了を待つことなく、即座に次のステップへと処理を移します。 下記の例は Web の UI 検証に用いるツール Selenium のテスト時によく必要とされる、バックグラウンドにおける X virtual framebuffer の実行に関するコンフィグです。
 
 ```YAML
 - run:
@@ -493,7 +493,7 @@ jobs:
 
 デフォルト値である `on_success` は、それまでのステップが全て成功している（終了コード 0 を返した）ときのみ処理を続けます。
 
-`always` はそれまでステップの終了ステータスが何かにかかわらず処理を続けます。 前のステップが成功したか否かに関係なく処理を続けたいタスクがあるときに都合の良い設定です。 例えば、ログやコードカバレッジのデータをどこかのサーバーにアップロードするようなジョブステップに利用できます。
+`always` はそれまでのステップの終了ステータスにかかわらず処理を続けます。 前のステップが成功したか否かに関係なく処理を続けたいタスクがあるときに都合の良い設定です。 例えば、ログやコードカバレッジのデータをどこかのサーバーにアップロードするようなジョブステップに利用できます。
 
 `on_fail` は直前のステップが失敗した（ゼロ以外の終了コードを返した）ときにのみ処理を続行するものです。 デバッグを支援するなんらかの診断データを保存したいとき、あるいはメールやチャットなどで失敗に関する通知をしたいときなどに `on_fail` が使えます。
 
