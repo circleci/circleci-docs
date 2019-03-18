@@ -940,7 +940,7 @@ filters では `branches` キーが使えます。
 
 `branches` キーは、`trigger` を定義した `config.yml` ファイルを含むブランチにおいて、スケジュール実行すべきブランチかどうかを決定するのに使えます。 つまり、`master` ブランチにプッシュすると、`master` ブランチの [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) のみをスケジュール実行します。
 
-branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲んで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチする全てのブランチはジョブを実行します。
 - `ignore` の値にマッチする全てのブランチはジョブを実行しません。
@@ -1000,14 +1000,14 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 ###### **`ブランチ`**
 {:.no_toc}
-branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を / で囲むことで正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
+branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチする全てのブランチはジョブを実行します。
 - `ignore` の値にマッチする全てのブランチはジョブを実行しません。
 - `only` と `ignore` のどちらも指定していない場合、全てのブランチはジョブを実行します。
 - `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- branches | N | Map | A map defining rules for execution on specific branches only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- branches | - | Map | 実行する特定のブランチを定義するマップ only | - | String / Strings のリスト | 単独のブランチ名、もしくはブランチ名のリスト ignore | - | String / Strings のリスト | 単独のブランチ名、もしくはブランチ名のリスト
 {: class="table table-striped"}
 
 ###### **`tags`**
