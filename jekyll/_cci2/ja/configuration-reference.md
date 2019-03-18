@@ -73,7 +73,7 @@ commands:
 
 executors は、ジョブステップの実行環境を定義するものです。Executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 working_directory | - | String | steps を実行する際のディレクトリです。 environment | - | Map | 環境変数の名前と値のマップです。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
 {: class="table table-striped"}
 
 例
@@ -108,7 +108,7 @@ Workflows を**使わない**場合は、`jobs` マップ内に `build` とい�
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 steps | ○ | List | [実行内容](#steps)のリストです。 working_directory | - | String | steps を実行する際のディレクトリです。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数です（デフォルトは 1）。 environment | - | Map | 環境変数の名前と値のマップです。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップです（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルトは 1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
@@ -153,7 +153,7 @@ jobs:
 
 `docker` キーは下記の要素を用いて設定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- image | ○ | String | 使用するカスタム Docker イメージの名前 name | - | String | 他から参照する際のコンテナの名前。 デフォルトではコンテナサービスは `localhost` 経由でアクセスされる entrypoint | - | String / List | コンテナ起動時に実行するコマンド command | - | String / List | コンテナ起動時にルートプロセスとなる PID 1（または entrypoint の引数）にするコマンド user | - | String | Docker コンテナにおいてコマンドを実行するユーザー environment | - | Map | 環境変数の名前と値のマップ auth | - | Map | 標準の `docker login` 証明書によるレジストリの認証情報 aws_auth | - | Map | AWS EC2 Container Registry（ECR）の認証情報
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- image | ○ | String | 使用するカスタム Docker イメージの名前を指定します。 name | - | String | 他から参照する際のコンテナの名前を指定します。 デフォルトではコンテナサービスには `localhost` 経由でアクセスできます。 entrypoint | - | String / List | コンテナ起動時に実行するコマンドを指定します。 command | - | String / List | コンテナ起動時にルートプロセスとなる PID 1（または entrypoint の引数）にするコマンドを指定します。 user | - | String | Docker コンテナにおいてコマンドを実行するユーザー名を指定します。 environment | - | Map | 環境変数の名前と値のマップを設定します。 auth | - | Map | 標準の `docker login` 証明書によるレジストリの認証情報を記述します。 aws_auth | - | Map | AWS EC2 Container Registry（ECR）の認証情報を記述します。
 {: class="table table-striped"}
 
 一番最初に記述した `image` は、すべてのステップを実行するプライマリコンテナとなります。
@@ -162,7 +162,7 @@ jobs:
 
 `command` は、（Dockerfile で指定していれば）イメージのエントリーポイントに対する引数として使われます。もしくは、（このスコープや Dockerfile 内にエントリーポイントがない場合は）実行形式として扱われます。
 
-[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。 今のところは、すべての `steps` はプライマリコンテナ内でのみ実行されます。
+[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。 現在のところは、`steps` は常にプライマリコンテナ内でのみ実行されます。
 
 `name` では、セカンダリサービスコンテナを利用する際の名前を定義します。  デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。 これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
 
@@ -202,7 +202,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使う際は、AWS 証明書での認証が必要です。 デフォルトでは、CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 証明書での認証が必要です。 デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
 
     jobs:
       build:
@@ -213,7 +213,7 @@ jobs:
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # プロジェクト設定の環境変数を指定する
     
 
-バージョン 2.1を使う場合は、ジョブにおいて[宣言済みコマンド]({{ site.baseurl }}/2.0/reusing-config/)の再利用が可能です。下記の例では `sayhello` コマンドを呼び出しています。
+バージョン 2.1 のコンフィグでは、ジョブにおいて[宣言済みコマンド]({{ site.baseurl }}/2.0/reusing-config/)の再利用が可能です。下記の例では `sayhello` コマンドを呼び出しています。
 
     jobs:
       myjob:
@@ -227,9 +227,9 @@ jobs:
 #### **`machine`**
 {:.no_toc}
 
-[machine Executor]({{ site.baseurl }}/2.0/executor-types) は `machine` キーとともに下記リストの要素を用いて設定します。
+[machine Executor]({{ site.baseurl }}/2.0/executor-types) は `machine` キーとともに下記の要素を用いて設定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor の利用時は必ず true にする。 他に指定している値がないときは必須 image | – | String | 使用するイメージ（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>このキーはオンプレミス版の CircleCI ではサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor イメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とする。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするためにはサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。 他に指定している値がないときは必須 image | – | String | 使用するイメージ（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>このキーはオンプレミス版の CircleCI ではサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor イメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とする。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするためにはサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
 {: class="table table-striped"}
 
 `machine` キーに `true` をセットする簡単な方法があります。
@@ -332,7 +332,7 @@ jobs:
         - /feature-.*/
 ```
 
-上記の例では、「develop」と正規表現「feature-.*」にマッチしたもの以外の全てのブランチが実行されます。
+上記の例では、「develop」と正規表現「feature-.*」にマッチしたもの以外のすべてのブランチが実行されます。
 
 `ignore` と `only` の両方が同時に指定されていた場合は、`ignore` に関するフィルターのみが考慮されます。
 
