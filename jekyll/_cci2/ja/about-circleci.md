@@ -21,7 +21,7 @@ Linux、macOS、Android の各プラットフォームに加え、SaaS やオン
 
 ## 概要
 
-GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)を実行します。 つまりジョブを実行するたびに、CircleCI はジョブを実行するためのコンテナまたは VM をスピンアップします。
+GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/ja/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)を実行します。 つまりジョブを実行するたびに、CircleCI はジョブを実行するためのコンテナまたは VM をスピンアップします。
 
 テスト完了後にはメールで成功・失敗の通知が届くほか、 Slack、HipChat、Campfire、Flowdock、IRC などのチャットツールと連携して通知を受け取ることも可能です。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
 
@@ -54,4 +54,4 @@ CircleCI では以下の無料トライアルを用意しています。
 
 ## 関連情報
 
-CircleCI は Linux、Android、そして macOS 上で動くアプリケーションをサポートしています。 詳しい実例と利用ガイドについては、「[サポート言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
+CircleCI は Linux、Android、macOS 上で動くアプリケーションをサポートしています。 詳しい実例と利用ガイドについては「[サポート言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
