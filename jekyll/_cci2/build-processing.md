@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Build Processing"
-short-title: "Enabling Build Processing"
-description: "How to enable build processing"
+title: "Pipelines"
+short-title: "Enabling Pipelines"
+description: "How to enable pipelines"
 categories: [settings]
 order: 1
 ---
