@@ -970,7 +970,7 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 ###### **`context`**
 
-ジョブでは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については、[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
+ジョブは、組織において設定したグローバル環境変数を使えるようにすることも可能です。設定画面で context を追加する方法については、[コンテキスト]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- context | - | String | コンテキスト名。 デフォルトは `org-global` となる。 複数のコンテキストを利用できるようにするには、コンテキストごとに名前をユニークにする
 {: class="table table-striped"}
@@ -993,7 +993,7 @@ jobs では `requires`、`filters`、`context` キーを使えます。
 
 ###### **`filters`**
 
-Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+フィルターでは `branches` か `tags` キーのいずれかを使えます。 **※**Workflows のなかではジョブレベルの branches キーは無視されることに注意してください。 If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
