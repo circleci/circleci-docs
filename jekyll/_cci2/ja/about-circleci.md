@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "概要"
 short-title: "概要"
-description: "CircleCI 2.0 マニュアルの入口"
+description: "CircleCI 2.0 入門"
 categories:
   - getting-started
 order: 1
