@@ -7,11 +7,11 @@ categories:
   - configuring-jobs
 order: 20
 ---
-このページでは `config.yml` ファイル内で使用する CircleCI 2.0 のコンフィグ用のキーについて解説しています。 CircleCI と連携したリポジトリのブランチに `.circleci/config.yml` ファイルが含まれていれば、それは CircleCI 2.x の環境で利用するということを意味します。
+このページでは `config.yml` ファイル内で使える CircleCI 2.0 のコンフィグ用のキーについて解説しています。 CircleCI と連携したリポジトリのブランチに `.circleci/config.yml` ファイルが含まれていれば、それは CircleCI 2.x の環境で利用することを意味します。
 
-`config.yml` ファイルの全容は、このページ内の[サンプルコード](#full-example)で紹介しています。
+`config.yml` ファイルの全容はこのページ内の[サンプルコード](#full-example)にありますので、参考にしてください。
 
-**※**CircleCI 1.0 を利用していた場合、新たに `config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。 従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` のないブランチとなっている CircleCI 1.0 環境の実行には支障はありません。
+**※**CircleCI 1.0 から利用していたユーザーは、新たに `config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。 従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` のないブランチである CircleCI 1.0 環境の実行にも支障はありません。
 
 * * *
 
@@ -25,7 +25,7 @@ order: 20
 
 ## **`version`**
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のいずれかの値をとる。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のうちのどれか。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照してください。
 {: class="table table-striped"}
 
 `version` フィールドは、非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
@@ -1015,14 +1015,14 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 
 CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。 また、（直接にしろ間接的にしろ）他のジョブの実行が必要なジョブの場合、そのジョブにはタグフィルターの指定が必須となります。
 
-tags では`only` キーと `ignore` キーが使えます。 You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 Both lightweight and annotated tags are supported.
+tags では `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってタグをマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
-- Any tags that match `only` will run the job.
-- Any tags that match `ignore` will not run the job.
-- If neither `only` nor `ignore` are specified then the job is skipped for all tags.
+- `only` の値にマッチする全てのタグはジョブを実行します。
+- `ignore` の値にマッチする全てのタグはジョブを実行しません。
+- `only` と `ignore` のどちらも指定していない場合、全てのジョブはスキップされます。
 - `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- tags | N | Map | A map defining rules for execution on specific tags only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- branches | - | Map | 実行するタグを定義するマップ only | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリスト ignore | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリスト
 {: class="table table-striped"}
 
 詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
