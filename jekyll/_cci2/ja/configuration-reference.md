@@ -1013,9 +1013,9 @@ branches では、ブランチ名を指す文字列をマップさせるため�
 ###### **`tags`**
 {:.no_toc}
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。 また、（直接にしろ間接的にしろ）他のジョブの実行が必要なジョブの場合、そのジョブにはタグフィルターの指定が必須となります。
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 Both lightweight and annotated tags are supported.
+tags では`only` キーと `ignore` キーが使えます。 You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列**全体**にマッチさせる形にしなければなりません。 Both lightweight and annotated tags are supported.
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
