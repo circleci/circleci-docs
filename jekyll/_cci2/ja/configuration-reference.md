@@ -229,10 +229,10 @@ jobs:
 
 [machine Executor]({{ site.baseurl }}/2.0/executor-types) は `machine` キーとともに下記の要素を用いて設定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。 他に指定している値がないときは必須 image | – | String | 使用するイメージ（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>このキーはオンプレミス版の CircleCI ではサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor イメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とする。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするためにはサポートチケットを使って CircleCI のセールスチームに問い合わせる必要があります。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。 他に値の指定がないときは必須です。 image | – | String | 使用するイメージを指定します（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>プライベート環境の CircleCI はこのキーをサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor のイメージカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とします。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
 {: class="table table-striped"}
 
-`machine` キーに `true` をセットする簡単な方法があります。
+`machine` キーに `true` をセットする際には、より簡単な記述方法が使えます。
 
 例
 
@@ -251,7 +251,7 @@ jobs:
 
 CircleCI は `image` フィールドにおいて複数の machine イメージの指定をサポートしています。
 
-- `circleci/classic:latest`（デフォルト）：Docker v`17.03.0-ce` と docker-compose v`1.9.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `latest` というチャネルを指定することで、最新の検証イメージが使えます。チャネルに更新があるときは、1 週間前までに[アナウンス](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)されます。
+- `circleci/classic:latest`（デフォルト）：Docker v`17.03.0-ce` と docker-compose v`1.9.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `latest` というチャネルを指定することで最新の検証イメージが使えます。チャネルに更新があるときは 1 週間前までに[アナウンス](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)されます。
 - `circleci/classic:edge`：Docker v`17.06.0-ce` と docker-compose v`1.14.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `edge` というチャネルを指定することで、最終的に `classic:latest` に格上げされる予定のリリース候補版を使えます。
 - `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
 - `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
@@ -289,9 +289,9 @@ jobs:
 #### **`macos`**
 {:.no_toc}
 
-CircleCI は、[macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには[watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
+CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定する。利用可能なバージョンについては、「iOS アプリをテストする」内の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)」を参照
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions)」を参照してください。
 {: class="table table-striped"}
 
 **参考例：**macOS 仮想マシンを Xcode v`9.0` で使う場合
