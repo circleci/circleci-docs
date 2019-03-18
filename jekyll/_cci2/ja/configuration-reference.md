@@ -92,11 +92,11 @@ jobs:
       - run: echo Executor の“外”で定義しました
 ```
 
-Executor の並列処理させ型については「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」のなかの「[Executor でパラメーターを使う](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
+パラメーター付き Executor の例は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」の「[Executor でパラメーターを使う](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
 
 ## **`jobs`**
 
-実行処理は 1 つ以上のジョブで構成され、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)」では `job` マップの 2 通りの例を確認できます。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
+実行処理は 1 つ以上の名前の付いたジョブで構成され、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)」では `job` マップの 2 通りの例を紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
 
 [Workflows]({{ site.baseurl }}/2.0/workflows/) を利用する際は、`.circleci/config.yml` ファイル内でユニークなジョブ名を設定しなければなりません。
 
