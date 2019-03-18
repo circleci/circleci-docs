@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "Pipelines"
 short-title: "Enabling Pipelines"
-description: "How to enable the preview of pipelines"
+description: "How to enable pipelines"
 categories: [settings]
 order: 1
 ---
 
-This document describes how to enable the preview pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
+This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
 ## Getting Started
 Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app.
@@ -33,9 +33,8 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 - Pipelines are **not** fully backwards-compatible with the 1.1 API endpoint to trigger arbitrary jobs - you may experience unexpected or inconsistent results if you use this endpoint after turning on Pipelines. Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/v1-reference/#new-project-build) introduced in September 2018. Please keep in mind that this build triggering API endpoint does **not** accept parameters or workflow or job filters. If you make heavy use of those API features and want to use Pipelines, please contact your CircleCI account team.
 
 ## Giving Feedback
-1. Come to [CircleCI Discuss](https://discuss.circleci.com/t/2-1-config-and-build-processing/24102) to post feedback.
-2. Tweet @circleci with thoughts
-3. Vote or add to our [Ideas board](https://ideas.circleci.com/)
+1. Tweet @circleci with thoughts
+2. Vote or add to our [Ideas board](https://ideas.circleci.com/)
 
 ## See Also
 
