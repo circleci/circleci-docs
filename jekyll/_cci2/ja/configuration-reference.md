@@ -108,18 +108,18 @@ Workflows を**使わない**場合は、`jobs` マップ内に `build` とい�
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 steps | ○ | List | [実行内容](#steps)のリストです。 working_directory | - | String | steps を実行する際のディレクトリです。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数です（デフォルトは 1）。 environment | - | Map | 環境変数の名前と値のマップです。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップです（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てるCPU数とメモリ容量 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 steps | ○ | List | [実行内容](#steps)のリストです。 working_directory | - | String | steps を実行する際のディレクトリです。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数です（デフォルトは 1）。 environment | - | Map | 環境変数の名前と値のマップです。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップです（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
 {: class="table table-striped"}
 
-<sup>(1)</sup> これらのうちいずれか 1 つを必ず指定します。 2 つ以上指定した場合はエラーとなります。
+<sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
 
 #### `environment`
 
-環境変数の名前と値のマップです。 CircleCI でセットした環境変数を上書きするのに使えます。
+環境変数の名前と値のマップです。 CircleCI の設定画面でセットした環境変数を上書きするのに使えます。
 
 #### `parallelism`
 
-`parallelism` の値を 2 以上に設定すると、独立した Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 ただし、並列処理を設定していても並列処理にならず、単一の Executor でしか実行されない場合もあります（[`deploy` ステップ](#deploy) がその一例です）。 詳しくは[パラレルジョブ]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照してください。
+`parallelism` の値を 2 以上に設定すると、Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 ただし、並列処理するように設定していても 1 つの Executor でしか実行されない場合もあります（[`deploy` ステップ](#deploy) がその一例です）。 詳しくは[パラレルジョブ]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照してください。
 
 `working_directory` で指定したディレクトリが存在しないときは自動で作成されます。
 
@@ -144,14 +144,14 @@ jobs:
       - run: make
 ```
 
-#### **`docker`** / **`machine`** / **`macos`**(*Executor*)
+#### **`docker`** / **`machine`** / **`macos`**（*Executor*）
 
-「Executor」は、端的に言えば「ステップを処理する場所」です。 CircleCI 2.0 は一度に必要な分の Docker コンテナを起動して、あるいは仮想マシンを利用して、目的とする環境をビルドできます。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
+「Executor」は、端的に言えば「ステップを処理する場所」です。 CircleCI 2.0 では Executor として一度に必要な分の Docker コンテナを起動するか、仮想マシンを利用することで、目的の環境をビルドします。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
 
 #### `docker`
 {:.no_toc}
 
-`docker` キーは下記リストの要素を用いて設定します。
+`docker` キーは下記の要素を用いて設定します。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- image | ○ | String | 使用するカスタム Docker イメージの名前 name | - | String | 他から参照する際のコンテナの名前。 デフォルトではコンテナサービスは `localhost` 経由でアクセスされる entrypoint | - | String / List | コンテナ起動時に実行するコマンド command | - | String / List | コンテナ起動時にルートプロセスとなる PID 1（または entrypoint の引数）にするコマンド user | - | String | Docker コンテナにおいてコマンドを実行するユーザー environment | - | Map | 環境変数の名前と値のマップ auth | - | Map | 標準の `docker login` 証明書によるレジストリの認証情報 aws_auth | - | Map | AWS EC2 Container Registry（ECR）の認証情報
 {: class="table table-striped"}
