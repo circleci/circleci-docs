@@ -108,7 +108,7 @@ Workflows を**使わない**場合は、`jobs` マップ内に `build` とい�
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト値については「[デフォルトのシェルオプション](#default-shell-options)」を参照）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルトは 1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルトでは、すべてをホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
@@ -229,7 +229,7 @@ jobs:
 
 [machine Executor]({{ site.baseurl }}/2.0/executor-types) は `machine` キーとともに下記の要素を用いて設定します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。 他に値の指定がないときは必須です。 image | – | String | 使用するイメージを指定します（デフォルトは `circleci/classic:latest</0）。 <strong>※</strong>プライベート環境の CircleCI はこのキーをサポートして<strong>いません</strong>。 プライベート環境における <code>michine` Executor のイメージカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とします。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。 他に値の指定がないときは必須です。 image | – | String | 使用するイメージを指定します（デフォルト：`circleci/classic:latest`）。 **※**プライベート環境の CircleCI はこのキーをサポートして**いません**。 プライベート環境における `michine` Executor のイメージカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/2.0/vm-service) を参照してください。 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)を有効にするには `true` とします。 **※**Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
 {: class="table table-striped"}
 
 `machine` キーに `true` をセットする際には、より簡単な記述方法が使えます。
@@ -367,7 +367,7 @@ jobs:
 
 ここでは `run` がステップのタイプとなります。 `name` 属性は CircleCI 上での表示に使われるものです。 `command` 属性は `run` ステップに特有の、実行するコマンドを定義するものです。
 
-場合によっては steps はより簡便に記述することもできます。 例えば `run` ステップを下記のように記述可能です。
+場合によっては steps をより簡便に記述できます。 例えば `run` ステップを下記のように記述することが可能です。
 
     jobs:
       build:
@@ -377,7 +377,7 @@ jobs:
 
 簡略化した表記方法では、実行する `command` を文字列値のようにして、`run` ステップをダイレクトに指定できるようになります。 このとき、省略された他の属性に対してはデフォルトの値が自動で設定されます（例えば `name` 属性には `command` と同じ値が設定されます）。
 
-もう 1 つの簡略化の例としては、ステップ名をキーと値のペアの代わりとなる文字列として利用するシンプルな方法もあります。
+もう 1 つ、キーと値のペアの代わりにステップ名を文字列として使うシンプルな方法もあります。
 
     jobs:
       build:
@@ -387,18 +387,18 @@ jobs:
 
 この例の `checkout` ステップは、プロジェクトのソースコードをジョブの [`working_directory`](#jobs) にチェックアウトします。
 
-一般的にはステップは下記のように記述することになります。
+通常、ステップは下記にある通りに記述します。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | ○ | Map / String | ステップの設定マップ、またはステップで定義された内容を表す文字列
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | ○ | Map / String | ステップの設定マップ、またはステップで定義された内容を表す文字列を設定します。
 {: class="table table-striped"}
 
-ステップのなかで利用可能な要素ごとの詳細は下記の通りです。
+ステップのなかで利用可能な要素の詳細は下記の通りです。
 
 ##### **`走らせる`**
 
-あらゆるコマンドラインプログラムを呼び出す際に使います。設定値を表すマップを記述するか、もしくは簡略表記では `command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、コマンド内でいわゆる dotfiles を明示的に指定するなどの工夫が必要です。
+あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンド name | - | String | CircleCI 上で表示するステップのタイトル名（デフォルト：`command` 文字列全体) shell | - | String | コマンド実行に用いるシェル（デフォルト：[デフォルトのシェルオプション](#default-shell-options)） environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数 background | - | Boolean | このステップをバックグラウンドで実行するかどうか（デフォルト：false） working_directory | - | String | このステップを実行するディレクトリ（デフォルト：当該ジョブの[`working_directory`](#jobs)） no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間。 「20m」「1.25h」「5s」のように時間単位付きの十進数で指定する（デフォルト：10分間） when | - | String | [ステップの実行を有効・無効にする条件タイミングを指定する](#the-when-attribute)。 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンドを指定します。 name | - | String | CircleCI 上で表示するステップのタイトル名を指定します（デフォルト：`command` 文字列全体)。 shell | - | String | コマンド実行に用いるシェルを指定します（デフォルト：[デフォルトのシェルオプション](#default-shell-options)）。 environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数を設定します。 background | - | Boolean | このステップをバックグラウンドで実行するかどうかを設定します（デフォルト：false）。 working_directory | - | String | このステップを実行するディレクトリを指定します（デフォルト：当該ジョブの[`working_directory`](#jobs)）。 no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間を指定します。 「20m」「1.25h」「5s」のように、時間単位付きの十進数で指定します（デフォルト：10分間）。 when | - | String | [ステップの実行を有効・無効にする条件を指定します](#the-when-attribute)。 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
 `run` を宣言するたびに新たなシェルが立ち上がることになります。 複数行の `command` を指定し、それらを同一のシェル内で実行することも可能です。
@@ -594,7 +594,7 @@ Docker コマンド実行用のリモート Docker 環境を作成します。 �
 
 依存関係やソースコードなど、CircleCI のオブジェクトストレージにあるファイル、ディレクトリのキャッシュを生成し、保存します。 キャッシュはその後のジョブで[復元](#restore_cache)できます。 詳しくは[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)をご覧ください。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- paths | ○ | List | キャッシュに追加するディレクトリのリスト key | ○ | String | キャッシュ識別用のユニーク ID name | - | String | CircleCI の画面上にタイトル表示するステップの名前（デフォルト：Saving Cache） when | - | String | ステップを有効または無効にする[タイミング](#the-when-attribute)の指定 次のいずれかの値をとる。`always`/`on_success`/`on_fail`（デフォルトdefault: `on_success`）
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- paths | ○ | List | キャッシュに追加するディレクトリのリスト key | ○ | String | キャッシュ識別用のユニーク ID name | - | String | CircleCI の画面上にタイトル表示するステップの名前（デフォルト：Saving Cache） when | - | String | ステップを有効または無効にする[タイミング](#the-when-attribute)の指定 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
 個別の `key` に対するキャッシュは、一度書き込むと書き換えられません。
