@@ -25,14 +25,14 @@ order: 20
 
 ## **`version`**
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のうちのどれか。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照してください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- version | ○ | String | `2`、`2.0`、`2.1` のうちのどれかを指定します。`.circleci/config.yml` ファイルの単純化やコードの再利用、パラメーター付きジョブを実現する 2.1 の新しいキーの解説は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」を参照してください。
 {: class="table table-striped"}
 
-`version` フィールドは、非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
+`version` フィールドは、将来的に非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
 
 ## **`orbs`**（version: 2.1 が必須）
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | ユーザー指定の名前によるマップ。Orb の参照名（文字列）または Orb の定義名（マップ) Orb の定義は、バージョン 2.1 のコンフィグにおける Orb 関連のサブセットとなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | - | Map | Executor の定義文字列の参照名。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | - | Map | command 定義に対するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | ユーザー指定の名前によるマップです。Orb の参照名（文字列）または Orb の定義名（マップ）を指定します。 Orb の定義は、バージョン 2.1 のコンフィグにおける Orb 関連のサブセットとなる。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照。 executors | - | Map | Executor の定義文字列の参照名。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) のセクションを参照。 commands | - | Map | command 定義に対するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照。
 {: class="table table-striped"}
 
 以下の例は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb のものです。
