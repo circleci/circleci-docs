@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "パブリックリポジトリの例"
 short-title: "パブリックリポジトリの例"
-description: "CircleCI 2.0 マニュアルの入口"
+description: "CircleCI 2.0 入門"
 categories:
   - getting-started
 order: 1
