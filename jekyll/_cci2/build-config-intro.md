@@ -46,7 +46,7 @@ Deploying Software Changes to Google Kubernetes Engine (GKE) | This page describ
 
 ## Deploying Software Changes to Amazon ECS
 
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform.
+The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the Amazon ECS service and its components, please refer to the [Amazon ECS]({{ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
 
 ### Prerequisites
 
@@ -70,7 +70,11 @@ If you do not already have pipelines enabled, you'll need to go to **Project Set
 
 ### Updating the Amazon ECS Service
 
-Now that your environment is configured to work with orbs, you will need to update the Amazon ECS service to ensure you have the latest version of ECS. The yaml code sample below illustrates how you can update the ECS service.
+Now that your environment is configured to work with orbs, you should update the Amazon ECS service to ensure you have the latest version of ECS. There are two different ways you can update the Amazon ECS Service, depending on whether you also want to update the existing Amazon Web Services CLI. Both of these approaches are described below.
+
+#### Updating the Amazon ECS Sevice WIthout Updating AWS CLI
+
+If you want to update the Amazon ECS Service without updating the AWS CLI using CircleCI orbs, review the the yaml code sample shown below, which illustrates how you can update the ECS service.
 
 ```yaml
 version: 2.1
@@ -94,3 +98,75 @@ workflows:
 ```
 
 Notice in this example that you need to instantiate two different AWS ECR orbs: `aws-ecr 0.0.3` and `aws-ecr 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb workflows in the orb first build and push the image, and then deploy the service update to ECS.
+
+### Updating the Amazon Web Services CLI and Amazon ECS
+
+If, however, you would like to update both the AWS CLI and ECS Service at the same time, you can use the orb shown below to simplify the process of updating these services.
+
+```yaml
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.3
+jobs:
+  update-tag:
+    docker:
+      - image: 'circleci/python:3.7.1'
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - aws-ecs/update-service:
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=stable'
+workflows:
+  deploy:
+    jobs:
+      - update-tag
+```
+
+Notice in the above example that you instantiate two different orbs, `aws-cli: circleci/aws-cli@0.1.4` and `aws-ecs: circleci/aws-ecs@0.0.3` to perform a number of sequential steps to ensure that the Amazon CLI is installed and configured before updating the Amazon ECS service.
+
+### Verifying the Amazon ECS Service Update
+
+Once you have updated the Amazon ECS service, you should verify that the update was properly applied using the Amazon ECR/ECS orb. This orb example is shown below.
+
+```yaml
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.3
+jobs:
+  verify-deployment:
+    docker:
+      - image: 'circleci/python:3.7.1'
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - run:
+          name: Get last task definition
+          command: >
+            TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
+                --task-definition ${MY_APP_PREFIX}-service \
+                --output text \
+                --query 'taskDefinition.taskDefinitionArn')
+            echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
+            $BASH_ENV
+      - aws-ecs/verify-revision-is-deployed:
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          task-definition-arn: '${TASK_DEFINITION_ARN}'
+workflows:
+  test-workflow:
+    jobs:
+      - verify-deployment
+```
+
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed.
+
+For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry] (https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
+
