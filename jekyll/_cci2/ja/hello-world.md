@@ -50,7 +50,7 @@ jobs:
 ```
 ```
 
-CircleCI は、異なる[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/2.0/glossary/#job)を走らせます。 That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+CircleCI は、個別の[コンテナ]({{site.baseurl}}/ja/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)を実行します。 That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
 
 **Note**: For `macos` executors, some setup is different. If you want to setup for an iOS project, please check out the [Hello World macOS]({{site.baseurl}}/2.0/hello-world-macos/) document and the [iOS tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for examples of a simple `macos` config files.
 
