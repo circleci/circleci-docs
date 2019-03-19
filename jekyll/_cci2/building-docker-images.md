@@ -118,26 +118,26 @@ If your job requires a specific docker version, you can set it as a `version` at
           version: 18.06.0-ce
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Following are the supported stable and edge versions:
+CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`. Following are the supported stable and edge versions:
 
-- `docker-17.03.0-ce`
-- `docker-17.05.0-ce`
-- `docker-17.06.0-ce`
-- `docker-17.06.1-ce`
-- `docker-17.07.0-ce`
-- `docker-17.09.0-ce`
-- `docker-17.10.0-ce`
-- `docker-17.11.0-ce`
-- `docker-17.12.0-ce`
-- `docker-17.12.1-ce`
-- `docker-18.01.0-ce`
-- `docker-18.02.0-ce`
-- `docker-18.03.0-ce`
-- `docker-18.03.1-ce`
-- `docker-18.04.0-ce`
-- `docker-18.05.0-ce`
-- `docker-18.06.0-ce`
-- `docker-18.09.3-ce`
+- `17.03.0-ce`
+- `17.05.0-ce`
+- `17.06.0-ce`
+- `17.06.1-ce`
+- `d17.07.0-ce`
+- `17.09.0-ce`
+- `17.10.0-ce`
+- `17.11.0-ce`
+- `17.12.0-ce`
+- `17.12.1-ce`
+- `18.01.0-ce`
+- `18.02.0-ce`
+- `18.03.0-ce`
+- `18.03.1-ce`
+- `18.04.0-ce`
+- `18.05.0-ce`
+- `18.06.0-ce`
+- `18.09.3-ce`
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
