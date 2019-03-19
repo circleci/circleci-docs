@@ -164,7 +164,7 @@ workflows:
 
 Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
+Workflows 1 つ 1 つは、それぞれに一時的な Workspace が関連付けられています。 Workspace は同じ Workflows において、ジョブの実行中にビルドしたデータを他のジョブに渡すのに使います。
 
 ![workflow illustration]({{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
@@ -200,12 +200,12 @@ jobs:
 ```        
 {% endraw %}
 
-Note the following distinctions between Artifacts, Workspaces, and Caches:
+Artifacts、Workspace、キャッシュはそれぞれ下記のような違いがあることを頭に入れておいてください。
 
-Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\----- Artifacts | Months | Preserve long-term artifacts. | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory. Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs. Caches | Months | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
+Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\----- Artifacts | Months | Preserve long-term artifacts. | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory. Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する。 Caches | Months | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). `restore_cache` と 適切な `key` を使ってキャッシュを復元する。
 {: class="table table-striped"}
 
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ## 関連情報
 {:.no_toc}
