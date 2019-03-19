@@ -33,7 +33,7 @@ workflows:
 
 **Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key.
 
-For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{site.baseurl}}/2.0/orbs-intro/) page.
+For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orbs-intro/) page.
 
 ### Build Configuration Recipes
 
