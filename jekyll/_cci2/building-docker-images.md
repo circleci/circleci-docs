@@ -118,7 +118,30 @@ If your job requires a specific docker version, you can set it as a `version` at
           version: 18.06.0-ce
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Following are the supported stable and edge versions:
+
+- `docker-17.03.0-ce`
+- `docker-17.05.0-ce`
+- `docker-17.06.0-ce`
+- `docker-17.06.1-ce`
+- `docker-17.07.0-ce`
+- `docker-17.09.0-ce`
+- `docker-17.10.0-ce`
+- `docker-17.11.0-ce`
+- `docker-17.12.0-ce`
+- `docker-17.12.1-ce`
+- `docker-18.01.0-ce`
+- `docker-18.02.0-ce`
+- `docker-18.03.0-ce`
+- `docker-18.03.1-ce`
+- `docker-18.04.0-ce`
+- `docker-18.05.0-ce`
+- `docker-18.06.0-ce`
+- `docker-18.09.3-ce`
+
+<!---
+Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+--->
 
 **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
