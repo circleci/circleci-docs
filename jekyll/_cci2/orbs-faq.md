@@ -77,8 +77,6 @@ file directlySuccess!
 ```
 Upon execution, you may see the following response:
 
-.circleci/echo.yml
-
 ```yaml
 version: 2.1
 jobs:
@@ -97,15 +95,12 @@ jobs:
     - run:
         command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
 workflows:
-  version: 2
+  version: 2.1
   workflow:
     jobs:
     - build
-    - test```
-
-yourusername/circle-autoAdded by GitHub
+    - test
 ```
---->
 
 ### Logging Outputs
 
