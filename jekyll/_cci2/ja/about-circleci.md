@@ -54,4 +54,4 @@ CircleCI では以下の無料トライアルを用意しています。
 
 ## 関連情報
 
-CircleCI は Linux、Android、macOS 上で動くアプリケーションをサポートしています。 詳しい実例と利用ガイドについては「[サポート言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
+CircleCI は Linux、Android、macOS 上で動くアプリケーションをサポートしています。 詳しい実例と利用ガイドについては「[サポートしているプログラミング言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
