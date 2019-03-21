@@ -53,7 +53,7 @@ CircleCI publishes a web-based registry viewer so orbs documentation can be auto
     only certified orbs are permitted in this project.
     
 
-- Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
+- Answer: Try making a whitespace change or similar. Your configuration will not recompile until you have made a change. Configuration processing occurs before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
 ### Environment Variables Not Being Passed at Runtime
 
@@ -70,75 +70,72 @@ Occasionally, when you try to convert a configuration to a 2.0 compatible format
 
 Upon execution, you may see the following response:
 
-.circleci/echo.yml
-
-    version: 2
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+    - image: circleci/openjdk:8-jdk
+    steps:
+    - checkout
+  test:
+    docker:
+    - image: circleci/openjdk:8-jdk
+    environment:
+    - TERM: dumb
+    steps:
+    - checkout
+    - run:
+        command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
+workflows:
+  version: 2
+  workflow:
     jobs:
-      build:
-        docker:
-        - image: circleci/openjdk:8-jdk
-        steps:
-        - checkout
-      test:
-        docker:
-        - image: circleci/openjdk:8-jdk
-        environment:
-        - TERM: dumb
-        steps:
-        - checkout
-        - run:
-            command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
-    workflows:
-      version: 2
-      workflow:
-        jobs:
-        - build
-        - test
+    - build
+    - test
+```
 
-yourusername/circle-autoAdded by GitHub
+### Logging Outputs
 
-    --->
-    
-    ### Logging Outputs
-    
-    * Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages.
-    
-    * Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
-    
-    ### Failing Builds
-    
-    * Question: How can I intentionally fail a job that invokes an orb from within an orb?
-    
-    * Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
-    
-    ### Private Installation of CircleCI When Using Orbs
-    
-    * Question: Can I use a private installation of CircleCI Server when using working with orbs?
-    
-    * Answer: No. CircleCI Server does not currently support private installations.
-    
-    ### Using Orb Elements For Other Orbs
-    
-    * Question: May I use elements from a different orb when creating my own orb?
-    
-    * Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
+- Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages?
+
+- Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
+
+### Failing Builds
+
+- Question: How can I intentionally fail a job that invokes an orb from within an orb?
+
+- Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
+
+### Private Installation of CircleCI When Using Orbs
+
+- Question: May I use a private installation of CircleCI Server when using working with orbs?
+
+- Answer: No. CircleCI Server does not currently support private installations.
+
+### Using Orb Elements For Other Orbs
+
+- Question: May I use elements from a different orb when creating my own orb?
+
+- Answer: Yes, orbs may be composed directly using elements of other orbs. 例えば下記のようにします。
 
 {% raw %}
 ```yaml
-    version: 2.1
-    orbs:
-      some-orb: some-ns/some-orb@volatile
-    executors:
-      my-executor: some-orb/their-executor
-    commands:
-      my-command: some-orb/their-command
-    jobs:
-      my-job: some-orb/their-job
-      another-job:
-        executor: my-executor
-        steps:
-          - my-command:
-              param1: "hello"
+version: 2.1
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command:
+          param1: "hello"
+```
 {% endraw %}
 
 ### Using 3rd Party Orbs
