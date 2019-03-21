@@ -44,7 +44,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 ### Orb Publishing Process
 
-Before working with orbs, you may find it helpful to gain a high-level understanding of the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process. ![Orbs Workflow Diagram image](  {{ site.baseurl }}/assets/img/docs/orbsworkflow-v2_orbs_outline.png)
+Before working with orbs, you may find it helpful to gain a high-level understanding of the end-to-end orbs publishing process. The diagram shown below illustrates the orbs publishing process. ![Orbs Workflow Diagram image](  {{ site.baseurl }}/assets/img/docs/orbs_outline_v3.png)
 
 #### Step 1 - Set Up the CircleCI CLI
 Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Detailed instructions can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
@@ -59,14 +59,14 @@ Once you have configured the CircleCI CLI, verify you installed the CLI correctl
 #### Step 3 - Bump Version Property to Orbs-Compatible 2.1
 After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs. More information on how to bump the version property can be found in the "Bump Version Property to Orbs-Compatible 2.1" section on this page.
 
-#### Step 4 - Validate your Orb
-When you have finished authoring your orb, simply run the `validate` command from your CLI. CircleCI provides several different tools to validate your orb, including the `circleci/orb-tools` orb. For more information on using the `circleci/orb-tools` orb, see the [Validate and Publish Your Orb](https://circleci.com/docs/2.0/creating-orbs/#validate-and-publish-your-orb) section on this page.
+#### Step 4 - Create a New Orb Using Inline Template
+Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
 
 #### Step 5 - Design Your Orb
 Depending on whether you use an inline template or author your orb independent of this inline template, you will want to add elements (Jobs, Commands, and Executors) to your orb. For more information on these orb elements, refer to the [Commands](https://circleci.com/docs/2.0/using-orbs/#commands), [Jobs](https://circleci.com/docs/2.0/using-orbs/#jobs), and [Executors](https://circleci.com/docs/2.0/using-orbs/#executors) sections found in the [Using Orbs](https://circleci.com/docs/2.0/using-orbs/#section=configuration) page.
 
-#### Step 6 - Create a New Orb Using Inline Template
-Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
+#### Step 6 - Validate your Orb
+When you have finished authoring your orb, simply run the `validate` command from your CLI. CircleCI provides several different tools to validate your orb, including the `circleci/orb-tools` orb. For more information on using the `circleci/orb-tools` orb, see the [Validate and Publish Your Orb](https://circleci.com/docs/2.0/creating-orbs/#validate-and-publish-your-orb) section on this page.
 
 #### Step 7 - Publish Your Orb
 The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable).
@@ -97,9 +97,9 @@ Orbs are published with the standard 3-number semantic versioning system:
 * minor
 * patch
 
-Orb authors should adhere to semantic versioning. Within ```config.yml```, you may specify wildcard version ranges to resolve orbs. You may also use the special string ```volatile``` to pull in whatever the highest version number is at time your build runs.
+Orb authors should adhere to semantic versioning. Within `config.yml`, you may specify wildcard version ranges to resolve orbs. You may also use the special string `volatile` to pull in whatever the highest version number is at time your build runs.
 
-For example, when ```mynamespace/some-orb@8.2.0``` exists, and ```mynamespace/some-orb@8.1.24``` and ```mynamespace/some-orb@8.0.56``` are published after 8.2.0, ```volatile``` will still refer to ```mynamespace/some-orb@8.2.0``` as the highest semantic version.
+For example, when `mynamespace/some-orb@8.2.0` exists, and `mynamespace/some-orb@8.1.24` and `mynamespace/some-orb@8.0.56` are published after 8.2.0, `volatile` will still refer to `mynamespace/some-orb@8.2.0` as the highest semantic version.
 
 Examples of orb version declarations and their meaning:
 
@@ -112,7 +112,7 @@ Examples of orb version declarations and their meaning:
 
 While all production orbs can be published securely by organization owners, development orbs provide non-owner members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable, so they are ideal for rapid iteration of an idea.
 
-A development version should be referenced by its complete, fully-qualified name, such as: ```mynamespace/myorb@dev:mybranch.```; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
+A development version should be referenced by its complete, fully-qualified name, such as: `mynamespace/myorb@dev:mybranch.`; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
 **Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for org members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 
@@ -120,9 +120,9 @@ A development version should be referenced by its complete, fully-qualified name
 
 When designing your own orbs, make sure your orbs meet the following requirements:
 
-* Orbs should always use `description`. - Be sure to explain usage, assumptions, and any tricks in the ```description``` key under jobs, commands, executors, and parameters.
+* Orbs should always use `description`. - Be sure to explain usage, assumptions, and any tricks in the `description` key under jobs, commands, executors, and parameters.
 * Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
-* Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your Orb, so you can use general names like "run-tests" in most cases.
+* Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your orb, so you can use general names like "run-tests" in most cases.
 * Required vs. optional parameters - Provide sound default values of parameters whenever possible.
 * Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
 * Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
@@ -135,7 +135,7 @@ When developing your own orb, you may find it useful to write an inline orb. The
 
 Inline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.
 
-To write inline orbs, place the orb elements under that orb's key in the ```orbs``` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
+To write inline orbs, place the orb elements under that orb's key in the `orbs` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
 {% raw %}
 ```yaml
@@ -162,7 +162,6 @@ orbs:
           - codecov/upload:
               path: ~/tmp/results.xml
 
-version: 2.1
 workflows:
   main:
     jobs:
@@ -170,11 +169,11 @@ workflows:
 ```
 {% endraw %}
 
-In the example above, note that the contents of ```my-orb``` are resolved as an inline orb because the contents of ```my-orb``` are a map; whereas the contents of ```codecov``` are a scalar value, and thus assumed to be an orb URI.
+In the example above, note that the contents of `my-orb` are resolved as an inline orb because the contents of `my-orb` are a map; whereas the contents of `codecov` are a scalar value, and thus assumed to be an orb URI.
 
 ### Example Inline Template
 
-When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use ```circleci config process .circleci/config.yml``` to check whether your orb usage matches your expectation.
+When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use `circleci config process .circleci/config.yml` to check whether your orb usage matches your expectation.
 
 {% raw %}
 ```yaml
@@ -322,7 +321,7 @@ examples:
 
 This section covers the tooling and flow of authoring and publishing your own orbs to the orb registry.
 
-Orbs may be authored inline in your config.yml file or authored separately and then published to to the orb registry for reuse across projects.
+Orbs may be authored inline in your `config.yml` file or authored separately and then published to to the orb registry for reuse across projects.
 
 [WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
 
@@ -334,7 +333,7 @@ Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms 
 
 ### Namespaces
 
-Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called ```hannah/rails``` because they are in separate namespaces.
+Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called `hannah/rails` because they are in separate namespaces.
 
 Namespaces are owned by organizations. Only organization owners can create namespaces.
 
@@ -353,11 +352,11 @@ Orb versions may be added to the registry either as development versions or prod
 ### Development and Production Orb Retention and Mutability Characteristics
 
 * Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
-* Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the ```orb publish increment``` and/or the ```orb publish promote``` commands in the ```circleci``` CLI when publishing orbs to production.
+* Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the `orb publish increment` and/or the `orb publish promote` commands in the `circleci` CLI when publishing orbs to production.
 
 ### Development and Production Orbs Versioning Semantics
 
-Development orbs are tagged with the format ```dev:<< your-string >>```. Production orbs are always published using the semantic versioning ("semver") scheme.
+Development orbs are tagged with the format `dev:<< your-string >>`. Production orbs are always published using the semantic versioning ("semver") scheme.
 
 In development orbs, the string label given by the user has the following restrictions:
 
@@ -386,7 +385,7 @@ Examples of valid development orb tags:
 ```
 {% endraw %}
 
-In production orbs, use the form ```X.Y.Z``` where ```X``` is a "major" version, ```Y``` is a "minor" version, and ```Z``` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
+In production orbs, use the form `X.Y.Z` where `X` is a "major" version, `Y` is a "minor" version, and `Z` is a "patch" version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
 While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
@@ -396,13 +395,13 @@ While not strictly enforced, it is best practice when versioning your production
 
 #### Using Orbs Within Your Orb and Register-Time Resolution
 
-You may use an ```orbs``` stanza inside an orb. 
+You may use an `orbs` stanza inside an orb. 
 
 Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
 
-For example, orb ```foo/bar``` is published at version ```1.2.3``` with an ```orbs``` stanza that imports ```biz/baz@volatile```. At the time you register ```foo/bar@1.2.3``` the system will resolve ```biz/baz@volatile``` as the latest version and include its elements directly into the packaged version of ```foo/bar@1.2.3```.
+For example, orb `foo/bar` is published at version `1.2.3` with an `orbs` stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
 
-If ```biz/baz``` is updated to ```3.0.0```, anyone using ```foo/bar@1.2.3``` will not see the change in ```biz/baz@3.0.0``` until ```foo/bar``` is published at a higher version than `1.2.3`.
+If `biz/baz` is updated to `3.0.0`, anyone using `foo/bar@1.2.3` will not see the change in `biz/baz@3.0.0` until `foo/bar` is published at a higher version than `1.2.3`.
 
 **Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
 
@@ -434,14 +433,14 @@ If the case arises where you need to delete an orb for emergency reasons, please
 
 ## Using the CLI to Create and Publish Orbs
 
-The ```circleci``` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run ```circleci help```. Refer to [Using the CircleCI CLI]( {{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
+The `circleci` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run `circleci help`. Refer to [Using the CircleCI CLI]( {{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
 
-* ```circleci namespace create <name> <vcs-type> <org-name> [flags]```
-* ```circleci orb create <namespace>/<orb> [flags]```
-* ```circleci orb validate <path> [flags]```
-* ```circleci orb publish <path> <namespace>/<orb>@<version> [flags]```
-* ```circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]```
-* ```circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]```
+* `circleci namespace create <name> <vcs-type> <org-name> [flags]`
+* `circleci orb create <namespace>/<orb> [flags]`
+* `circleci orb validate <path> [flags]`
+* `circleci orb publish <path> <namespace>/<orb>@<version> [flags]`
+* `circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]`
+* `circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]`
 
 For a full list of help commands inside the CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
@@ -451,9 +450,9 @@ This section describes each step of the orb creation and publishing process so y
 
 The following sections describe each step in the orb authoring and publishing process:
 
-1. Meet initial CircleCI prerequisites
-2. Author your own orb
-3. Validate and publish your orb
+1. Meet initial CircleCI prerequisites.
+2. Author your own orb.
+3. Validate and publish your orb.
 
 ## Meet Initial CircleCI Prerequisites
 
@@ -528,9 +527,141 @@ $ circleci setup
 
 If you are using the CLI tool on `circleci.com`, accept the provided default `CircleCI Host`.
 
-If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.my-org.com.
+If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.your-org.com.
 
 **Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circlecli local execute` (this was previously `circleci build`).
+
+### Packing A Config
+
+The CLI provides a `pack` command, allowing you to create a single `config.yml` file from several separate files. This is particularly useful for breaking up large configs and allows custom organization of your yaml configuration. `circleci config pack` converts a filesystem tree into a single yaml file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `config.yml`. Consider the following example folder structure:
+
+```sh
+$ tree
+.
+├── config.yml
+└── foo
+    ├── bar
+    │   └── @baz.yml
+    ├── foo.yml
+    └── subtree
+        └── types.yml
+
+3 directories, 4 files
+```
+
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will  map the folder names and file names to **yaml keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+
+{% raw %}
+```sh
+$ circleci config pack foo
+```
+
+```yaml
+version: 2.1
+bar:
+  baz: qux
+foo: bar
+subtree:
+  types:
+    ginkgo:
+      seasonality: deciduous
+    oak:
+      seasonality: deciduous
+    pine:
+      seasonality: evergreen
+```
+{% endraw %}
+
+#### Other Config Packing Capabilities
+{:.no_toc}
+
+A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
+
+Thus:
+
+{% raw %}
+```sh
+$ cat foo/bar/@baz.yml
+{baz: qux}
+```
+{% endraw %}
+
+Is mapped to:
+
+```yaml
+bar: 
+  baz: qux
+```
+
+#### An Example Packed Config.yml
+{:.no_toc}
+
+See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+
+### Processing A Config
+
+Running `circleci config process` validates your config, but will also display expanded source configuration alongside your original config (useful if you are using orbs).
+
+Consider the example configuration that uses the `hello-build` orb:
+
+{% raw %}
+```yaml
+version: 2.1
+orbs:
+    hello: circleci/hello-build@0.0.5
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
+```
+{% endraw %}
+
+Running `circleci config process .circleci/config.yml` will output the following (which is a mix of the expanded source and the original config commented out).
+
+{% raw %}
+```sh
+# Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
+version: 2.1
+jobs:
+  hello/hello-build:
+    docker:
+    - image: circleci/buildpack-deps:curl-browsers
+    steps:
+    - run:
+        command: echo "Hello ${CIRCLE_USERNAME}"
+    - run:
+        command: |-
+          echo "TRIGGERER: ${CIRCLE_USERNAME}"
+          echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
+          echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
+          echo "BRANCH: ${CIRCLE_BRANCH}"
+          echo "RUNNING JOB: ${CIRCLE_JOB}"
+          echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
+          echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
+        name: Show some of the CircleCI runtime env vars
+    - run:
+        command: |-
+          echo "uname:" $(uname -a)
+          echo "arch: " $(arch)
+        name: Show system information
+workflows:
+  Hello Workflow:
+    jobs:
+    - hello/hello-build
+  version: 2
+
+ Original config.yml file:
+ version: 2.1
+ 
+ orbs:
+     hello: circleci/hello-build@0.0.5
+ 
+ workflows:
+     \"Hello Workflow\":
+         jobs:
+           - hello/hello-build
+```
+{% endraw %}
 
 ### Validating a Build Config
 
@@ -633,3 +764,4 @@ In this example, the `btd` workflow runs the `orb-tools/validate` job first. If 
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+- Refer to [Local CLI]({{site.baseurl}}/2.0/local-cli/#overview) for more information about how you can use the CircleCI CLI in your orbs deployments.

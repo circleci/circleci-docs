@@ -19,11 +19,11 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
-3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new processing before adding any new 2.1 keys to your config.
+3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new pipelines before adding any new 2.1 keys to your config.
 
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new processing service. 
+4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new pipelines service. 
 
-After your build is running successfully with build processing enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
+After your build is running successfully with pipelines enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
 
 ## Authoring Reusable Commands
 
@@ -173,22 +173,6 @@ In the following example `my-executor` is passed as the single value of the key 
 
 ```yaml
 version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers
-
-jobs:
-  my-job:
-    executor: my-executor
-    steps:
-      - run: echo outside the executor
-```
-
-
-```yaml
-version: 2.1
-
 executors:
   my-executor:
     docker:
@@ -461,7 +445,7 @@ Capitalized and uppercase versions of the above values are also valid.
 #### Integer
 {:.no_toc}
 
-The parameter type `integer` is use to pass a numeric integer value. The following example using the `integer` type to populate the value of `parallelism` in a job.
+Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
 version: 2.1
@@ -624,7 +608,7 @@ The environment variable name (``env_var_name``) parameter is a string that must
 ```yaml
 version: 2.1
 
-obs:
+jobs:
   build:
     docker:
     - image: ubuntu:latest

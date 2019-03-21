@@ -45,7 +45,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.6.1
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -95,6 +95,19 @@ jobs:
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
+
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+      - run:
+          name: Build API documentation with Slate
+          command: |
+            cd src-api; bundle install; 
+            bundle exec middleman build --clean
+            cp -R build/* ../jekyll/_api
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+          paths:
+            - "src-api/vendor/bundle"
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
@@ -114,7 +127,7 @@ jobs:
 
   reindex-search:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.6.1
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -133,7 +146,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.43
+      - image: cibuilds/aws:1.16.118
     steps:
       - attach_workspace:
           at: ./generated-site
@@ -161,3 +174,18 @@ workflows:
           filters:
             branches:
               only: master
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - js_build
+      - build:
+          requires:
+            - js_build
+      - deploy:
+          requires:
+            - build
