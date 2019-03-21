@@ -76,8 +76,7 @@ Your project's default branch will never auto cancel builds. This feature only a
 
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
-3. In the **Auto-cancel redundant builds** section, click the **On** button.
-
+3. In the **Enabling Build Processing (preview)** section, click the **On** button.
 
 ### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
 {:.no_toc}
