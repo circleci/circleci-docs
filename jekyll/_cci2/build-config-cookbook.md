@@ -72,7 +72,7 @@ If you do not already have pipelines enabled, you'll need to go to **Project Set
 
 Now that your environment is configured to work with orbs, you should update the Amazon ECS service to ensure you have the latest version of ECS. There are two different ways you can update the Amazon ECS Service, depending on whether you also want to update the existing Amazon Web Services CLI. Both of these approaches are described below.
 
-### Updating the Amazon ECS Sevice WIthout Updating AWS CLI
+### Updating the Amazon ECS Sevice Without Updating AWS CLI
 
 If you want to update the Amazon ECS Service without updating the AWS CLI using CircleCI orbs, review the the yaml code sample shown below, which illustrates how you can update the ECS service.
 
@@ -243,7 +243,7 @@ commands:
 
 ## Publishing and Rolling Out The Image to the GKE Cluster
 
-Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for use. Using the CircleCI GKE orb, you can quickly 
+Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for use. 
 
 ```yaml
 version: 2.1
