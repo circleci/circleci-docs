@@ -13,21 +13,16 @@ page, allowing you assign tasks and fixes based on the status of your build.
 
 # Installation Steps
 
-1. Navigate to project settings under `integrations` `JIRA integration`
-
+1. Navigate to project settings under `integrations` >  `JIRA integration`
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
-
 2. Go to the Atlassian Marketplace to get the [CircleCI JIRA Plugin](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)
-
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
-
 3. Install the plugin and follow the prompts to set it up.
-
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png)
-
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
-
 4. Return to the CircleCI JIRA Integration settings page and add the generated token.
+
+---
 
 # Creating JIRA Tickets from the Jobs Page
 
@@ -42,7 +37,7 @@ Click on the JIRA icon and select the following:
 - Issue summary
 - Description
 
-![]({{ site.baseurl }}/assets/img/docs/jira_plugin_5.png)
+![]({{ site.baseurl }}/assets/img/docs/jira_plugin_6.png)
 
 Note: The current JIRA plugin only supports default fields.
 
