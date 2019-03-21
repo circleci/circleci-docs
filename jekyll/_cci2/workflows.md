@@ -91,7 +91,7 @@ The following `config.yml` snippet is an example of a workflow configured for se
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -121,7 +121,7 @@ The following `config.yml` snippet is an example of a workflow configured for fa
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   build_accept_deploy:
     jobs:
       - build
@@ -161,7 +161,7 @@ key `type: approval`. Let's look at a commented config example.
 # ...
 
 workflows:
-  version: 2.1
+  version: 2
   build-test-and-approval-deploy:
     jobs:
       - build  # your custom job from your config, that builds your code
@@ -217,7 +217,7 @@ In the example below, the `nightly` workflow is configured to run every day at 1
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   commit:
     jobs:
       - test
@@ -266,7 +266,7 @@ The following `config.yml` snippet is an example of a sequential job workflow co
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -296,7 +296,7 @@ The following `config.yml` snippet is an example of a workflow configured for br
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
@@ -332,7 +332,7 @@ In the example below, two workflows are defined:
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   untagged-build:
     jobs:
       - build
@@ -351,7 +351,7 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   build-n-deploy:
     jobs:
       - build:
@@ -376,7 +376,7 @@ In the example below, three jobs are defined with the `build-test-deploy` workfl
 
 ```yaml
 workflows:
-  version: 2.1
+  version: 2
   build-test-deploy:
     jobs:
       - build:
@@ -475,7 +475,7 @@ jobs:
           fi
 
 workflows:
-  version: 2.1
+  version: 2
 
   btd:
     jobs:
