@@ -17,6 +17,12 @@ This document describes how to set up and customize testing for an iOS applicati
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
 
+## macOS Build Containers
+
+Each `macos` job is run a fresh container, running macOS. We build a new container each time a new version of Xcode is released by Apple. The contents of a particular build container remain unchanged (in very exceptional circumstances we might be forced to re-build a container). Our goal is to keep your builds environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+
+We announce the availability of new macOS containers in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
+
 ## Supported Xcode Versions
 
 The currently available Xcode versions are:
@@ -73,10 +79,8 @@ jobs:
   build-and-test:
     macos:
       xcode: "9.0"
-    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
-
     steps:
       - checkout
       - run:
@@ -232,7 +236,6 @@ jobs:
   build-and-test:
     macos:
       xcode: "9.0"
-    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -251,7 +254,6 @@ jobs:
   adhoc:
     macos:
       xcode: "9.0"
-    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -364,32 +366,30 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ### Using Custom Ruby Versions
 {:.no_toc}
 
-The macOS container ships with the system-installed Ruby, as well as the
-latest stable versions of Ruby as provided by [Ruby-Lang.org](https://www.ruby-lang.org/en/downloads/).
-To allow you to manage custom versions of Ruby, we install
-[ruby-install](https://github.com/postmodern/ruby-install) and [chruby](https://github.com/postmodern/chruby).
-To select a custom version of ruby you should [create a file named
-`.ruby-version` and commit it to your
-repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
-You will also need to change the default shell that commands are executed with
-to be a login shell, so that `chruby` is correctly invoked.
+Our macOS containers contain multiple versions of Ruby. The default version is  the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are  installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
+
+If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so. To activate `chruby`, you **must** change the `shell` parameter of your job to be a login shell (adding `--login`).
 
 ```yaml
 version: 2
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: "10.1.0"
     shell: /bin/bash --login -eo pipefail
 ```
 
-If you do not want to commit a `.ruby-version` file to source control, then
-you can create the file from a job step:
+ To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+
 ```yaml
 run:
   name: Set Ruby Version
-  command:  echo "ruby-2.4" > ~/.ruby-version
+  command:  echo "ruby-2.4" > ~/.ruby-version # Replace 2.4 with the specific version of Ruby here.
 ```
+
+**Note:** The version of Ruby that you select must be one of the versions listed in the [software manifests of your macOS container](#supported-xcode-versions).
+
+To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the technique above.
 
 ### Using Custom Versions of CocoaPods and Other Ruby Gems
 {:.no_toc}
