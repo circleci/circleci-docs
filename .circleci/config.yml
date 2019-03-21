@@ -95,6 +95,19 @@ jobs:
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
+
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+      - run:
+          name: Build API documentation with Slate
+          command: |
+            cd src-api; bundle install; 
+            bundle exec middleman build --clean
+            cp -R build/* ../jekyll/_api
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+          paths:
+            - "src-api/vendor/bundle"
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
