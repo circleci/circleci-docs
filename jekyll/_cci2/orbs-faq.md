@@ -95,7 +95,7 @@ jobs:
     - run:
         command: "echo file ${AUTO_FILE} dir ${AUTO_DIR}"
 workflows:
-  version: 2.1
+  version: 2
   workflow:
     jobs:
     - build
