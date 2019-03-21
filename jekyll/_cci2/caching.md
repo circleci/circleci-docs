@@ -51,6 +51,11 @@ Caching is a balance between reliability (not using an out-of-date or inappropri
 
 In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability.
 
+
+## Cache Expiration
+
+The caches created via the `save_cache` step are stored for up to 30 days.
+
 ## Caching Libraries
 
 The dependencies that are most important to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and demo projects for the specifics for your stack: <https://circleci.com/docs/2.0/demo-apps/>.
@@ -506,10 +511,6 @@ steps:
 ```
 
 {% endraw %}
-
-## Limitations
-
-The caches created via the `save_cache` step are stored for up to 30 days.
 
 ## Caching Strategy Tradeoffs
 

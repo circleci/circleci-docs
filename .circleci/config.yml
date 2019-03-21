@@ -174,3 +174,18 @@ workflows:
           filters:
             branches:
               only: master
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - js_build
+      - build:
+          requires:
+            - js_build
+      - deploy:
+          requires:
+            - build
