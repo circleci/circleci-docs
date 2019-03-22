@@ -283,6 +283,19 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
+#### What constitutes an _Active User_
+{:.no_toc}
+
+An `active user` is any user who meets the following criteria:
+
+- Anyone triggering the use of compute resources on non-OSS projects.
+- Commits from users that trigger builds, including PR Merge commits.
+- Users who re-run workflows, either with SSH or the CircleCI web application.
+- Users who perform manual job approvals.
+
+**Note:** If your project is open-source you will **not** be considered an active user.
+
+
 #### What happens when I run out of credits?
 {:.no_toc}
 
