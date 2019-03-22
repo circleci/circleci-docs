@@ -41,11 +41,4 @@ Click on the JIRA icon and select the following:
 
 Note: The current JIRA plugin only supports default fields.
 
-You're all set to creating quick tickets from your jobs page!
-
-
-
-
-
-
-
+You're all set to creating quick tickets from your job output page!
