@@ -261,7 +261,7 @@ CircleCI は `image` フィールドにおいて複数の machine イメージ�
 - `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
 - `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
 - `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
-- `ubuntu-1604:20190301-01` - Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+- `ubuntu-1604:201903-01` - Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
 
 **Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
 
