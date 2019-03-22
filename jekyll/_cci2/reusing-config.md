@@ -19,11 +19,11 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
-3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new processing before adding any new 2.1 keys to your config.
+3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new pipelines before adding any new 2.1 keys to your config.
 
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new processing service. 
+4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new pipelines service. 
 
-After your build is running successfully with build processing enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
+After your build is running successfully with pipelines enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
 
 ## Authoring Reusable Commands
 
