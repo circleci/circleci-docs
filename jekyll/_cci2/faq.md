@@ -283,7 +283,7 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
-#### What constitutes an _Active User_
+#### What constitutes an _Active User_?
 {:.no_toc}
 
 An `active user` is any user who meets the following criteria:
