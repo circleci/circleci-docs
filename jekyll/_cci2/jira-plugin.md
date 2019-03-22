@@ -7,7 +7,7 @@ description: "Connecting JIRA with CircleCI"
 
 This document describes how you can connect JIRA to your CircleCI builds. With
 the CircleCI JIRA plugin, you can create JIRA tickets directly from your Jobs
-page, allowing you assign tasks and fixes based on the status of your build.
+page, allowing you to assign tasks and fixes based on the status of your job.
 
 **Note:** You have to be an JIRA admin to install this plugin.
 
@@ -41,7 +41,7 @@ Click on the JIRA icon and select the following:
 
 Note: The current JIRA plugin only supports default fields.
 
-You're all set to creating quick tickets from your build page!
+You're all set to creating quick tickets from your jobs page!
 
 
 
