@@ -32,7 +32,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 **注**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。 CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
-## 高度な設定
+## Adding SSH Keys to a Job
 
 CircleCI のすべてのジョブは、登録された SSH 鍵に対し `ssh-agent` を通じて自動で署名を行います。ただし、コンテナに対して鍵を実際に登録するには設定ファイル内で `add_ssh_keys` を**必ず**指定しなければなりません。
 
