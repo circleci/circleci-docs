@@ -302,7 +302,7 @@ jobs:
       xcode: "9.0"
 ```
 
-#### **`ブランチ`**
+#### **`branches`**
 
 Workflows を利用 **せず**、バージョン 2.0（2.1 ではなく）のコンフィグを使っているケースでは、ブランチの実行をホワイトリスト・ブラックリスト方式で定義できます。[Workflows]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) を使っている場合はジョブレベルの branches は無視されるため、利用する `config.yml` ファイルの Workflows セクション内で設定します。 バージョン 2.1 のコンフィグでは、Workflows を追加することでフィルタリングが可能です。 詳しくは後述の [workflows](#workflows) を参照してください。 ジョブレベルの `branches` キーは下記の要素を用いて設定します。
 
@@ -384,23 +384,23 @@ jobs:
           - checkout
     
 
-In this case, the `checkout` step will checkout project source code into the job's [`working_directory`](#jobs).
+この例の `checkout` ステップは、プロジェクトのソースコードをジョブの [`working_directory`](#jobs) にチェックアウトします。
 
-In general all steps can be described as:
+通常、ステップは下記にある通りに記述します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- <step_type> | ○ | Map / String | ステップの設定マップ、またはステップで定義された内容を表す文字列を設定します。
 {: class="table table-striped"}
 
-Each built-in step is described in detail below.
+ステップのなかで利用可能な要素の詳細は下記の通りです。
 
-##### **`走らせる`**
+##### **`run`**
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- command | Y | String | Command to run via the shell name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`) shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options)) environment | N | Map | Additional environmental variables, locally scoped to command background | N | Boolean | Whether or not this step should run in the background (default: false) working_directory | N | String | In which directory to run this step (default: [`working_directory`](#jobs) of the job) no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes) when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンドを指定します。 name | - | String | CircleCI 上で表示するステップのタイトル名を指定します（デフォルト：`command` 文字列全体)。 shell | - | String | コマンド実行に用いるシェルを指定します（デフォルト：[デフォルトのシェルオプション](#default-shell-options)）。 environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数を設定します。 background | - | Boolean | このステップをバックグラウンドで実行するかどうかを設定します（デフォルト：false）。 working_directory | - | String | このステップを実行するディレクトリを指定します（デフォルト：当該ジョブの[`working_directory`](#jobs)）。 no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間を指定します。 「20m」「1.25h」「5s」のように、時間単位付きの十進数で指定します（デフォルト：10分間）。 when | - | String | [ステップの実行を有効・無効にする条件を指定します](#the-when-attribute)。 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
-Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
+`run` を宣言するたびに新たなシェルが立ち上がることになります。 複数行の `command` を指定し、それらを同一のシェル内で実行することも可能です。
 
 ```YAML
 - run:
@@ -593,7 +593,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- paths | Y | List | List of directories which should be added to the cache key | Y | String | Unique identifier for this cache name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache") when | N | String | [Specify when to enable or disable the step](#the-when-attribute). 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
 The cache for a specific `key` is immutable and cannot be changed once written.
