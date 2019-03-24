@@ -73,7 +73,7 @@ commands:
 
 Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
 {: class="table table-striped"}
 
 例
@@ -98,17 +98,17 @@ jobs:
 
 実行処理は 1 つ以上の名前の付いたジョブで構成され、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)」では `job` マップの 2 通りの例を紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
 
-[Workflows]({{ site.baseurl }}/2.0/workflows/) を利用する際は、`.circleci/config.yml` ファイル内でユニークなジョブ名を設定してください。
+[Workflows]({{ site.baseurl }}/ja/2.0/workflows/) を利用する際は、`.circleci/config.yml` ファイル内でユニークなジョブ名を設定してください。
 
-Workflows を**使わない**場合は、`jobs` マップ内に `build` という名前のジョブを用意します。 `build` ジョブは GitHub など VCS によるプッシュをトリガーとして実行する際のデフォルトのエントリーポイントとなります。 あるいは、CircleCI API を利用して別のジョブを実行することも可能です。
+Workflows を **使わない** 場合は、`jobs` マップ内に `build` という名前のジョブを用意します。 `build` ジョブは GitHub など VCS によるプッシュをトリガーとして実行する際のデフォルトのエントリーポイントとなります。 あるいは、CircleCI API を利用して別のジョブを実行することも可能です。
 
-**※**ジョブの実行可能時間は最大5時間となります。 ジョブがタイムアウトするようなら、ジョブを並列処理させることも検討してください。
+**※** ジョブの実行可能時間は最大 5 時間となります。 ジョブがタイムアウトするようなら、ジョブを並列処理させることも検討してください。
 
 ### **<`job_name`>**
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルト：すべてホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルト：すべてホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
