@@ -101,7 +101,7 @@ jobs:
       - run:
           name: Build API documentation with Slate
           command: |
-            cd src-api; bundle install; 
+            cd src-api; bundle install;
             bundle exec middleman build --clean
             cp -R build/* ../jekyll/_api
       - save_cache:
@@ -127,7 +127,7 @@ jobs:
 
   reindex-search:
     docker:
-      - image: circleci/ruby:2.6.1
+      - image: circleci/ruby:2.6.2
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -153,7 +153,7 @@ jobs:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
-  
+
 workflows:
   version: 2
   build-deploy:
