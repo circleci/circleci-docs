@@ -53,7 +53,7 @@ Variable | Description \---\---\---\---\---\---\---\----|\---\---\---\--- AWS_AC
 
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
 
-**Note**: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found here: - AWS-ECR: https://circleci.com/orbs/registry/orb/circleci/aws-ecr - AWS-ECS: https://circleci.com/orbs/registry/orb/circleci/aws-ecs
+**Note**: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found here: - [AWS-ECR]https://circleci.com/orbs/registry/orb/circleci/aws-ecr - [AWS-ECS]https://circleci.com/orbs/registry/orb/circleci/aws-ecs
 
 ### Build and Push the Docker image to AWS ECR
 
@@ -106,27 +106,6 @@ Use workflows to link the `build_and_push_image` and `deploy-service-update` job
 
 ```yaml
 version: 2.1
-jobs:
-  # ...
-workflows:
-  version: 2.1
-  build-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-```
-
-See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
-
-## Full Configuration File
-
-```yaml
-version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.2
   aws-ecs: circleci/aws-ecs@0.0.3
@@ -148,7 +127,33 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
+See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
+
+## Full Configuration File
+
+```yaml
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecs: circleci/aws-ecs@0.0.3
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build_and_push_image:
+          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+          repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          region: ${AWS_DEFAULT_REGION}
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build_and_push_image
+          aws-region: ${AWS_DEFAULT_REGION}
+          family: "${AWS_RESOURCE_NAME_PREFIX}-service"
+          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
+          container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+```
+
 ## 関連情報
 
-- An alternative example that builds, tests and pushes the Docker image to ECR and then uses the aws-ecs orb to deploy the update may be found here: https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs
-- If you would also like to review an example that does not use CircleCI orbs, go to: https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs
+- If you would like to review an example that builds, tests and pushes the Docker image to ECR and then uses the `aws-ecs` orb to deploy the update, go to the [AWS-ECS-ECR Orbs]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs demo page.
+- If you would also like to review an example that does not use CircleCI orbs, go to the [Non-Orbs AWS ECR-ECS Demo]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs demo page.
