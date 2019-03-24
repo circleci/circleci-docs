@@ -341,16 +341,16 @@ jobs:
 
 **※** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、[サポートチケットを使って](https://support.circleci.com/hc/en-us/requests/new) CircleCI のセールスチームに問い合わせてください。
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. `resource_class` を指定しない場合、もしくは指定の仕方が正しくないときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。 The `resource_class` key is currently only available for use with the `docker` executor.
+お使いの有償プランにこの機能が追加されると、ジョブごとに CPUの数 とメモリ容量を設定できるようになります。利用可能なマシンリソースは下記の表の通りです。 `resource_class` を指定しない場合、もしくは指定した class が正しくないときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。 `resource_class` キーは現在のところ `docker` Executor との組み合わせのみサポートしています。
 
-Class | vCPUs | RAM \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium (default) | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
+クラス | 仮想CPU数 | メモリ容量 \---\---\---\---|\---\---\-----|\---\--- small | 1 | 2GB medium（デフォルト） | 2 | 4GB medium+ | 3 | 6GB large | 4 | 8GB xlarge | 8 | 16GB
 {: class="table table-striped"}
 
-Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+`/proc` ディレクトリをチェックして CPU 数を取得する Java や Erlang などの言語においては、CircleCI 2.0 の resource_class 機能の使用時にパフォーマンスが低下する問題があることから、これを回避するため追加の設定が必要になる場合があります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題が起こらないよう CPU コア数を決まった範囲に固定するなどして対処してください。
 
 #### **`steps`**
 
-The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+ジョブにおける `steps` の設定は、キーと値のペアを 1 つずつ列挙する形で行います。キーはステップのタイプを表し、 The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
 ```yaml
 jobs:
