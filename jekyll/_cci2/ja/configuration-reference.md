@@ -32,7 +32,7 @@ order: 20
 
 ## **`orbs`**（version: 2.1 が必須）
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | ユーザー指定の名前によるマップです。Orb の参照名（文字列）または Orb の定義名（マップ）を指定します。 Orb の定義はバージョン 2.1 のコンフィグにおけるサブセットです。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照してください。 executors | - | Map | Executor の定義文字列のマップです。 後述の [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) セクションも参照してください。 commands | - | Map | command を定義するコマンド名のマップです。 下記 [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照してください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- orbs | - | Map | ユーザー指定の名前によるマップです。Orb の参照名（文字列）または Orb の定義名（マップ）を指定します。 Orb の定義はバージョン 2.1 のコンフィグにおけるサブセットです。詳細は「[Orb を作成する]({{ site.baseurl }}/2.0/creating-orbs/)」を参照してください。 executors | - | Map | Executor の定義文字列のマップです。 後述の [executors]({{ site.baseurl }}/ja/2.0/configuration-reference/#executors-requires-version-21) セクションも参照してください。 commands | - | Map | command を定義するコマンド名のマップです。 下記 [commands]({{ site.baseurl }}/ja/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照してください。
 {: class="table table-striped"}
 
 以下の例は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb のものです。
@@ -50,9 +50,9 @@ order: 20
 
 ## **`commands`**（version: 2.1 が必須）
 
-commands は、ジョブ内で実行するマップの形でステップシーケンスを定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/2.0/reusing-config/)が可能になります。
+commands は、ジョブ内で実行するマップの形でステップシーケンスを定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)が可能になります。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。 parameters | - | Map | パラメーターキーのマップです。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax)」を参照してください。 description | - | String | コマンドの内容を説明する文章です。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。 parameters | - | Map | パラメーターキーのマップです。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。 description | - | String | コマンドの内容を説明する文章です。
 {: class="table table-striped"}
 
 例
