@@ -350,7 +350,7 @@ jobs:
 
 #### **`steps`**
 
-ジョブにおける `steps` の設定は、キーと値のペアを 1 つずつ列挙する形で行います。キーはステップのタイプを表し、 The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+ジョブにおける `steps` の設定は、キーと値のペアを 1 つずつ列挙する形で行います。キーはステップのタイプを表し、 値は設定内容を記述するマップか文字列（ステップのタイプによって異なる）のどちらかになります。 下記はマップを記述する場合の例です。
 
 ```yaml
 jobs:
@@ -364,9 +364,9 @@ jobs:
           command: make test
 ```
 
-Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific for `run` step and defines command to execute.
+ここでは `run` がステップのタイプとなります。 `name` 属性は CircleCI 上での表示に使われるものです。 `command` 属性は `run` ステップに特有の、実行するコマンドを定義するものです。
 
-Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
+場合によっては steps をより簡便に記述できます。 例えば `run` ステップを下記のように記述することが可能です。
 
     jobs:
       build:
@@ -374,9 +374,9 @@ Some steps may implement a shorthand semantic. For example, `run` may be also be
           - run: make test
     
 
-In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
+簡略化した表記方法では、実行する `command` を文字列値のようにして、`run` ステップをダイレクトに指定できるようになります。 このとき、省略された他の属性に対してはデフォルトの値が自動で設定されます（例えば `name` 属性には `command` と同じ値が設定されます）。
 
-Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
+もう 1 つ、キーと値のペアの代わりにステップ名を文字列として使うシンプルな方法もあります。
 
     jobs:
       build:
