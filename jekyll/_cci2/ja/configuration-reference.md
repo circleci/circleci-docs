@@ -251,8 +251,8 @@ jobs:
 
 CircleCI は `image` フィールドにおいて複数の machine イメージの指定をサポートしています。
 
-- `circleci/classic:latest`（デフォルト）：Docker v`17.09.0-ce` と docker-compose v`1.14.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 Changes to the `latest` image are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance.
-- `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.10.0-ce` and docker-compose version `1.16.1`, along with common language tools found in CircleCI 1.0 build image.
+- `circleci/classic:latest`（デフォルト）：Docker v`17.09.0-ce` と docker-compose v`1.14.0`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。 `latest` イメージに更新があるときは 1 週間前までに[アナウンス](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616)されます。
+- `circleci/classic:edge`：Docker v`17.10.0-ce` と docker-compose v`1.16.1`、それと CircleCI 1.0 のビルドイメージに含まれる共通言語ツールを含んだ Ubuntu v`14.04` のイメージです。
 - `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
 - `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
 - `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
@@ -261,9 +261,9 @@ CircleCI は `image` フィールドにおいて複数の machine イメージ�
 - `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
 - `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
 - `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
-- `ubuntu-1604:201903-01` - Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+- `ubuntu-1604:201903-01` – Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
 
-**Example:** use an Ubuntu version `14.04` image with Docker `17.06.1-ce` and docker-compose `1.14.0`:
+**参考例 :** Docker v`17.06.1-ce` と docker-compose v`1.14.0` を含む Ubuntu v`14.04` のイメージを使う場合
 
 ```yaml
 version: 2
@@ -273,7 +273,7 @@ jobs:
       image: circleci/classic:201708-01
 ```
 
-The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
+machine Executor は、ジョブや Workflows で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)をサポートしています。
 
 **例**
 
@@ -288,12 +288,12 @@ jobs:
 #### **`macos`**
 {:.no_toc}
 
-CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, you must add the `macos` key to the top-level configuration for the job and specify the version of Xcode you would like to use.
+CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」を参照してください。
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version `9.0`:
+**参考例：**macOS 仮想マシンを Xcode v`9.0` で使う場合
 
 ```yaml
 jobs:
