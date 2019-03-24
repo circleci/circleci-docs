@@ -71,9 +71,9 @@ commands:
 
 ## **`executors`**（version: 2.1 が必須）
 
-executors は、ジョブステップの実行環境を定義するものです。Executor を 1 つ定義するだけで複数のジョブで再利用できます。
+Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定可能なオプションは[こちら](#docker)。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。 shell | - | String | ステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 environment | - | Map | 環境変数の名前と値のマップです。
 {: class="table table-striped"}
 
 例
@@ -92,7 +92,7 @@ jobs:
       - run: echo Executor の“外”で定義しました
 ```
 
-パラメーター付き Executor の例は「[コンフィグを再利用する]({{ site.baseurl }}/2.0/reusing-config/)」の「[Executor でパラメーターを使う](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
+パラメーター付き Executor の例は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」の「[Executor でパラメーターを使う](https://circleci.com/docs/ja/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
 
 ## **`jobs`**
 
@@ -108,7 +108,7 @@ Workflows を**使わない**場合は、`jobs` マップ内に `build` とい�
 
 1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルト：すべてホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` Executor でのみ有効）。**※**この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。 shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。 ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。 steps | ○ | List | [実行内容](#steps)のリストを設定します。 working_directory | - | String | steps を実行する際のディレクトリを指定します。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **※**YAML ファイルに記述したパスは展開*されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。 environment | - | Map | 環境変数の名前と値のマップを設定します。 branches | - | Map | Workflows ではなく、バージョン 2.1 のコンフィグでも**ない**単一のジョブにおいて、ホワイトリスト・ブラックリスト方式で特定のブランチの実行ルールを決めるためのマップを設定します（デフォルト：すべてホワイトリストとして扱います）。 Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します。 （`docker` executor でのみ有効）。**※** この機能を利用するには有償アカウントが必要です。 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
@@ -587,7 +587,7 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
 {: class="table table-striped"}
 
-***Notes***: - A paid account is required to access Docker Layer Caching. 有償プランをお使いの方は[サポートチケット](https://support.circleci.com/hc/en-us/requests/new)を利用してリクエストしてください。 Please include a link to the project on CircleCI) with your request. - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
+***Notes***: - A paid account is required to access Docker Layer Caching. 有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。 Please include a link to the project on CircleCI) with your request. - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 
 ##### **`save_cache`**
 
