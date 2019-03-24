@@ -304,12 +304,12 @@ jobs:
 
 #### **`ブランチ`**
 
-Defines rules for whitelisting/blacklisting execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Workflows を利用 **せず**、バージョン 2.0（2.1 ではなく）のコンフィグを使っているケースでは、ブランチの実行をホワイトリスト・ブラックリスト方式で定義できます。[Workflows]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) を使っている場合はジョブレベルの branches は無視されるため、利用する `config.yml` ファイルの Workflows セクション内で設定します。 バージョン 2.1 のコンフィグでは、Workflows を追加することでフィルタリングが可能です。 詳しくは後述の [workflows](#workflows) を参照してください。 ジョブレベルの `branches` キーは下記の要素を用いて設定します。
 
-Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\--- only | N | List | List of branches that only will be executed ignore | N | List | List of branches to ignore
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- only | - | List | 実行するブランチのみを列挙します。 ignore | - | List | 実行しないブランチを列挙します。
 {: class="table table-striped"}
 
-Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. 例えば下記のようにします。
+`only` や `ignore` に記述する内容は、完全一致のフルネームおよび正規表現で表すことができます。 正規表現では文字列 **全体** にマッチさせる形にしなければなりません。 例えば下記のようにします。
 
 ```YAML
 jobs:
@@ -320,7 +320,7 @@ jobs:
         - /rc-.*/
 ```
 
-In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
+このケースでは「master」ブランチと正規表現「rc-.*」にマッチするブランチのみが実行されます。
 
 ```YAML
 jobs:
@@ -331,15 +331,15 @@ jobs:
         - /feature-.*/
 ```
 
-In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
+上記の例では「develop」と正規表現「feature-.*」にマッチしたもの以外のすべてのブランチが実行されます。
 
-If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
+`ignore` と `only` の両方が同時に指定されていた場合は、`ignore` に関するフィルターのみが考慮されます。
 
-A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
+コンフィグのルール設定によって実行されなかったジョブは、実行がスキップされたとして CircleCI の画面上に履歴表示されます。
 
 #### **`resource_class`**
 
-**Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+**※** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、[サポートチケットを使って](https://support.circleci.com/hc/en-us/requests/new) CircleCI のセールスチームに問い合わせてください。
 
 After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. `resource_class` を指定しない場合、もしくは指定の仕方が正しくないときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。 The `resource_class` key is currently only available for use with the `docker` executor.
 
@@ -939,7 +939,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. 正規表現では文字列 **全体** にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチするブランチはすべてジョブを実行します。
 - `ignore` の値にマッチするブランチはすべてジョブを実行しません。
@@ -999,7 +999,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 ###### **`ブランチ`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列 **全体** にマッチさせる形にしなければなりません。
 
 - `only` の値にマッチするブランチはすべてジョブを実行します。
 - `ignore` の値にマッチするブランチはすべてジョブを実行しません。
@@ -1014,7 +1014,7 @@ Key | Required | Type | Description \----|\---\---\-----|\---\---|\---\---\---\-
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. Regular expressions must match the **entire** string. CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with '/s', or map to a list of such strings. 正規表現では文字列 **全体** にマッチさせる形にしなければなりません。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 - `only` の値にマッチするタグはすべてジョブを実行します。
 - `ignore` の値にマッチするタグはすべてジョブを実行しません。
