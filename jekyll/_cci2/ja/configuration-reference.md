@@ -395,7 +395,7 @@ jobs:
 
 ##### **`run`**
 
-あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- command | ○ | String | シェルを通じて実行するコマンドを指定します。 name | - | String | CircleCI 上で表示するステップのタイトル名を指定します（デフォルト：`command` 文字列全体)。 shell | - | String | コマンド実行に用いるシェルを指定します（デフォルト：[デフォルトのシェルオプション](#default-shell-options)）。 environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数を設定します。 background | - | Boolean | このステップをバックグラウンドで実行するかどうかを設定します（デフォルト：false）。 working_directory | - | String | このステップを実行するディレクトリを指定します（デフォルト：当該ジョブの[`working_directory`](#jobs)）。 no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間を指定します。 「20m」「1.25h」「5s」のように、時間単位付きの十進数で指定します（デフォルト：10分間）。 when | - | String | [ステップの実行を有効・無効にする条件を指定します](#the-when-attribute)。 次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
@@ -412,13 +412,13 @@ jobs:
 
 ###### *デフォルトのシェルオプション*
 
-The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified by default). Hence, the default shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files. Descriptions of the `-eo pipefail` options are provided below.
+ビルドコンテナに `/bin/bash` がある場合、シェルオプションのデフォルト値は `/bin/bash -eo pipefail` となります。 それ以外のパターンでは `/bin/sh -eo pipefail` がデフォルト値となります。 デフォルトは非ログインシェルです（`--login` や `-l` はデフォルトでは付加されません）。 そのため、デフォルトのシェルは `~/.bash_profile` や `~/.bash_login`、`~/.profile` といったファイルを読み込み **ません**。 `-eo pipefail` というオプションの意味については下記の通りです。
 
 `-e`
 
 > （単一のコマンドからなる）パイプやカッコ「()」で囲まれたサブシェルコマンドが実行されたら、あるいは中カッコ「{}」で囲まれたコマンドリストの一部がゼロ以外の終了ステータスを返したら、即座に終了します。
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. 例えば下記のようにします。
+つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば下記のようにします。
 
 ```YAML
 - run:
