@@ -168,7 +168,7 @@ jobs:
 
 `environment` の設定は、初期化用の `command` も含め、この Executor におけるすべてのコマンド実行で有効です。 `environment` による設定はジョブのマップにおいて何よりも優先されます。
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/2.0/executor-types)」を参照してください。
+タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types)」を参照してください。
 
 例
 
