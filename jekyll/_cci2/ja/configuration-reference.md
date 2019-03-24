@@ -446,11 +446,11 @@ jobs:
 - run: make test | tee test-output.log
 ```
 
-If `make test` fails, the `-o pipefail` option will cause the whole step to fail. Without `-o pipefail`, the step will always run successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which will always return a zero status.
+ここで仮に `make test` が失敗したとすると、`-o pipefail` オプションによりステップ全体が失敗したことになります。 `-o pipefail` がなければ、このステップは常に成功することになります。パイプ全体の結果としては、必ずゼロを返す最後のコマンド（`tee test-output.log`）の返り値で決まるためです。
 
-Note that even if `make test` fails the rest of pipeline will be executed.
+`make test` が失敗したとしても、パイプの残りの部分が実行されることに注意してください。
 
-If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
+このような動作を避けたい場合は、コマンドで `set +o pipefail` を指定するか、`shell` 全体を（最初の例のように）書き換えてください。
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
