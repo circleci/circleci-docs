@@ -452,9 +452,9 @@ jobs:
 
 このような動作を避けたい場合は、コマンドで `set +o pipefail` を指定するか、`shell` 全体を（最初の例のように）書き換えてください。
 
-In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
+通常はデフォルトのオプション（`-eo pipefail`）を使うことを推奨しています。こうすることで、途中のコマンドでエラーがあっても気付くことができ、ジョブが失敗したときのデバッグも容易になります。 CircleCI 上では `run` ステップごとに使用したシェルとアクティブなオプションを表示する便利な機能もあります。
 
-For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
+詳細は「[シェルスクリプトを使う]({{ site.baseurl }}/ja/2.0/using-shell-scripts/)」を参照してください。
 
 ###### *background コマンド*
 
