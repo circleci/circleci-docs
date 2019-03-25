@@ -8,9 +8,9 @@ published: true
 ---
 
 CircleCI has integrated chat notifications, automated email notifications, and
-web notifications. For Slack and Email, notifications are delivered on the success or failure of a
-[workflow]({{ site.baseurl }}/2.0/workflows/). Otherwise, notifications are
-delivered for each job for all other notification platforms. Consider the minimal CircleCI config below:
+web notifications. Slack and Email notifications are delivered on the success or failure of a
+[workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are
+delivered for each job. Consider the minimal CircleCI config below:
 
 
 ```yaml
@@ -32,8 +32,8 @@ workflows:
   version: 2
   build_and_test: # < Slack and Email notifications will be delivered for workflows
     jobs:
-    # All other notification integrations (HipChat, IRC, etc) will receive notification for each job.
-      - build 
+    # IRC integrations will receive notification for each job.
+      - build
       - test
 ```
 
@@ -41,9 +41,9 @@ Continue reading to learn how each notification type (chat, email, and web) is c
 
 ## Enable Chat Notifications
 
-CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications. Configure chat notifications on the Project Settings > Chat Notifications page of the CircleCI application using the in-app instructions and links for each chat app.
+CircleCI supports Slack and IRC notifications. Configure chat notifications on the Project Settings > Chat Notifications page of the CircleCI application using the in-app instructions and links for each chat app. To access the Chatroom Integrations page for a project, first select Settings from the main sidebar, then Projects under the Organization menu, then click the settings icon associated with your project:
 
-![]({{ site.baseurl }}/assets/img/docs/notification-chat.png)
+![]({{ site.baseurl }}/assets/img/docs/notification-chat-v2.png)
 
 Slack notifications will look like the following:
 
@@ -66,12 +66,12 @@ Email notifications will look like the following:
 1. Go to your [CircleCI user settings](https://circleci.com/account/notifications){:rel="nofollow"}. The link to turn on permissions is at the bottom in the Web Notifications section as shown in the screenshot:
 ![](  {{ site.baseurl }}/assets/img/docs/notification-default-message.png)
 
-2. Click the link to turn on permissions. Your browser will ask you to confirm that you want to allow notifications from CircleCI. 
+2. Click the link to turn on permissions. Your browser will ask you to confirm that you want to allow notifications from CircleCI.
 
 3. Click Allow as shown in the screenshot example.
 ![](  {{ site.baseurl }}/assets/img/docs/notification-allowing.png)
 
-4. Select the radio button to show notifications for completed builds. **Note:** To select the radio button, you may need to reload the page. 
+4. Select the radio button to show notifications for completed builds. **Note:** To select the radio button, you may need to reload the page.
 
 If you've previously denied CircleCI permission to send you web notifications
 then you'll need to turn those permissions on in your browser, as CircleCI can't
