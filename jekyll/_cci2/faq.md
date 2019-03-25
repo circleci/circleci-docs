@@ -286,14 +286,15 @@ You can choose to pay for premium features per active user, compute, and optiona
 #### What constitutes an _Active User_?
 {:.no_toc}
 
-An `active user` is any user who meets the following criteria:
+An `active user` is any user who triggers the use of compute resources on
+non-OSS projects. This includes activities such as:
 
-- Anyone triggering the use of compute resources on non-OSS projects.
 - Commits from users that trigger builds, including PR Merge commits.
-- Users who re-run workflows, either with SSH or the CircleCI web application.
-- Users who perform manual job approvals.
+- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream
+  jobs).
 
-**Note:** If your project is open-source you will **not** be considered an active user.
+**Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
 
 #### What happens when I run out of credits?
