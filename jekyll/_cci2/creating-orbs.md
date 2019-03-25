@@ -529,7 +529,7 @@ If you are using the CLI tool on `circleci.com`, accept the provided default `Ci
 
 If you are a user of a privately installed CircleCI deployment, change the default value to your custom address, for example, circleci.your-org.com.
 
-**Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circlecli local execute` (this was previously `circleci build`).
+**Note:** CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circleci local execute` (this was previously `circleci build`).
 
 ### Packing A Config
 
