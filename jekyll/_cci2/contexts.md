@@ -30,7 +30,7 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 ## Creating and Using a Context
 
-1. As an Organization Administrator, Navigate to the Settings > Contexts page in the CircleCI application. 
+1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application. 
 
 2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your organization can access this context at runtime.
 
@@ -47,9 +47,9 @@ workflows:
           context: org-global
 ```
 
-## Moving a Repo that Uses a Context
+## Moving a Repository that Uses a Context
 
-If you move your repo to a new organization, you must also have the context with that unique name set in the new organization.
+If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
 ## Restricting a Context
 
