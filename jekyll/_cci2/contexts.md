@@ -17,7 +17,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ## Overview
 {:.no_toc}
 
-Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an Org Admin to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
+Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization administrator to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
@@ -30,9 +30,9 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 ## Creating and Using a Context
 
-1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application. 
+1. As an Organization Administrator, Navigate to the Settings > Contexts page in the CircleCI application. 
 
-2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your org can access this context at runtime.
+2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your organization can access this context at runtime.
 
 3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
 
@@ -49,23 +49,23 @@ workflows:
 
 ## Moving a Repo that Uses a Context
 
-If you move your repo to a new org, you must also have the context with that unique name set in the new org.
+If you move your repo to a new organization, you must also have the context with that unique name set in the new organization.
 
 ## Restricting a Context
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the secure context. 
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the restricted context. 
 
-The default security group is `All members` and enables any member of the org who uses CircleCI to use the context.
+The default security group is `All members` and enables any member of the organization who uses CircleCI to use the context.
 
 ## Running Workflows with a Restricted Context
 
-To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the workflow will fail as `Unauthorized`.
+To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the security groups, the workflow will fail as `Unauthorized`.
 
 **Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Restricted Contexts are also **not** yet supported in private installations of CircleCI.
 
 ### Restrict a Context to a Security Group or Groups
 
-You must be an Org Admin to complete the following task.
+You must be an organization administrator to complete the following task.
 
 1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `All members` and allows all users in the org to invoke jobs with that context.
 2. Click the Create Context button if you will use a new context or click the name of an existing context.
@@ -84,11 +84,11 @@ To restrict running of jobs that are downstream from an approval job, add a rest
 
 For example, if you want the execution of job C and job D restricted to a security group, you need to add an approval job B before the jobs C and D to that use a context with a security group. That is, you can have four jobs in a workflow, job A can run unrestricted, the approval job B may be approved by any member, but the jobs C and D after the approval may only be executed by someone in the security group for the context used on jobs C and D. 
 
-If the approver of a job is not part of the restricted context, it is possible to approve the job B, however the jobs C and D in the workflow will fail as unauthorized. That is, the Approval button will appear for every user, even for users who are not part of the group with permissions for the context. When the downstream jobs fail with Unauthorized, it indicates an approval was made by a user who is not part of the security group for the downstream jobs. 
+If the approver of a job is not part of the restricted context, it is possible to approve the job B, however the jobs C and D in the workflow will fail as unauthorized. That is, the Approval job will appear for every user, even for users who are not part of the group with permissions for the context. When the downstream jobs fail with Unauthorized, it indicates an approval was made by a user who is not part of the security group for the downstream jobs. 
 
 ## Removing Groups from Contexts
 
-To make a context available only to the admins of the org, you may remove all of the groups associated with a context. All other users will lose access to that context.
+To make a context available only to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
 
 ### Adding and Removing Users from Teams and Groups
 
@@ -102,7 +102,7 @@ Addition and deletion of environment variables from a restricted context is limi
 
 If the context is restricted with a group other than `All members`, you must be a member of the security group to complete this task.
 
-1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
+1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application.
 
 2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
 
