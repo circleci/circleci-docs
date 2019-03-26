@@ -65,7 +65,7 @@ To invoke a workflow that uses a restricted context, a user must be a member of 
 
 You must be an Org Admin to complete the following task.
 
-1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `organization` and allows all users in the org to invoke jobs with that context.
+1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `All members` and allows all users in the org to invoke jobs with that context.
 2. Click the Create Context button if you will use a new context or click the name of an existing context.
 3. Click the Add Group link. The Add Groups dialog box appears.
 4. Select GitHub teams or LDAP groups to add to the context and click the Add button. Use of the context is now limited to the selected groups.
