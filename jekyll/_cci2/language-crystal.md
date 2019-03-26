@@ -18,7 +18,7 @@ If you’re in a rush, just copy the sample configuration below into a `.circlec
 You can view an example Crystal project at the following link:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
-target="_blank">Demo Crystal Project on Github</a>
+target="_blank">Demo Crystal Project on GitHub</a>
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 

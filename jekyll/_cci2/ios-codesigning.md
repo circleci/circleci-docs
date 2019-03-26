@@ -106,6 +106,14 @@ Keys -> Add user key** and click *Authorize with GitHub*.
 same GitHub permissions as the user who will be clicking the *Authorize
 with GitHub* button.
 
+In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. For example:
+
+```
+git_url("git@github.com:fastlane/certificates")
+app_identifier("tools.fastlane.app")
+username("user@fastlane.tools")
+```
+
 It is best practice to create a machine user with access to just the
 project repo and the keys repo, and use that machine user to create a
 user key to reduce the level of GitHub access granted to the CircleCI project.
@@ -244,6 +252,8 @@ workflows:
           requires:
             - build-and-test
 ```
+
+By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
 
 ## Example Application on GitHub
 

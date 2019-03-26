@@ -7,8 +7,10 @@ There are two ways to work on CircleCI docs locally: with Docker and with Ruby/B
 
 1. Install Docker for you platform: <https://docs.docker.com/engine/installation/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
+3. Download this file: https://circleci.com/docs/assets/app.bundle-576b5ac91166f5b87d5f6254b647c9182e3468eeea4717c8cdc7ff7304cac0c9.js
+4. Rename the file from Step 3 to `app.bundle.js` and save it in the `jekyll/assets/js` directory.
 3. `cd` into the directory where you cloned the docs
-4. run `docker-compose up`
+4. Run `docker-compose up`
 5. The docs site will now be running on <http://localhost:4000/docs/>
 
 **Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
@@ -121,3 +123,42 @@ The Docker tag list for convenience images, located in ./jekyll/_cci2/circleci-i
 There's usually no need to touch this.
 If you'd like to see an updated list generated locally however, you can do so by running `./scripts/pull-docker-image-tags.sh` from the root of this repo.
 Note that you'll need the command-line tool [jq](https://stedolan.github.io/jq/) installed.
+
+## Updating the API Reference
+
+Our API is handled in two possible places currently:
+- [Old version](https://circleci.com/docs/api/v1-reference/) - This currently
+  accessible via the CircleCI landing page > Developers Dropdown > "Api"
+- [New Version using Slate](https://circleci.com/docs/api/#section=reference) -
+  A newer API guide, built with [Slate](https://github.com/lord/slate)
+  
+**What is Slate?**
+
+Slate is a tool for generating API documentation. Slate works by having a user
+clone or fork it's Github Repo, having the user fill in the API spec into a
+`index.html.md` file, and then generating the static documentation using Ruby
+(via `bundler`).
+
+**How do we use Slate?**
+
+We have cloned slate into our docs repo ("vendored" it) so that the whole
+project is available under `circleci-docs/src-api`. Because Slate is not a
+library, it is required to pull the entire repo and use it's respective build
+steps to create your API documentation.
+
+When it comes time to make changes to our API, start with the following:
+
+- All changes to the API happen in `circleci-docs/src-api/source/index.html.md`
+- If you want to see your changes live before committing them, `cd` into
+  `src-api` and run `bundle install` followed by `bundle exec middleman server`.
+- When the time comes to push your code, a step in our CI will run the Slate
+  compilation commands and move the generated files _into_ the jekyll API subfolder:
+
+  ```yaml
+      - run:
+          name: Build API documentation with Slate
+          command: |
+            cd src-api; bundle install; 
+            bundle exec middleman build --clean
+            cp -R build/* ../jekyll/_api
+  ```

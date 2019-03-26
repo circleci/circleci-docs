@@ -21,7 +21,7 @@ Contexts are created on the Settings page of the CircleCI application, in the Or
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
-Context names must be unique for each Github or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
+Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
 
 ### Context Naming for CircleCI Installed on Your Servers
 {:.no_toc}
@@ -47,7 +47,9 @@ workflows:
           context: org-global
 ```
 
-To rerun a job and use the context, it **must** be rerun from the Workflows page of the CircleCI application.
+## Moving a Repo that Uses a Context
+
+If you move your repo to a new org, you must also have the context with that unique name set in the new org.
 
 ## Restricting a Context
 

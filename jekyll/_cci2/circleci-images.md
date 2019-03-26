@@ -27,12 +27,7 @@ _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs o
 
 ## Best Practices
 
-Convenience images are based on the most recently built versions of upstream images,
-so it is best practice
-to use the most specific image possible.
-This makes your builds more deterministic
-by preventing an upstream image
-from introducing unintended changes to your image.
+Convenience images are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
 CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container. Using `circleci/ruby:2.4-node` is similar to using `:latest`. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
 
@@ -49,6 +44,28 @@ to make an image more specific:
 to pin an image to a version or operating system (OS).
 - Use a Docker image ID
 to pin an image to a fixed version.
+
+**NOTE:** For Node.js variant Docker images (tags that end in `-node`) the LTS release of Node.js is pre-installed. If you would like to include your own specific version of
+Node.js / NPM you can set it up in a series of `run` steps in your `.circleci/config.yml`. Consider the example below, which installs a specific version of Node.js
+alongside the Ruby image.
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+    steps:
+      - checkout
+      - run:
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
+```
 
 ### Using an Image Tag to Pin an Image Version or OS
 {:.no_toc}
@@ -253,21 +270,32 @@ that a given tag has the same meaning across images!
 ### {{ image[1].name }}
 {:.no_toc}
 
+**Resources:**
+
+- [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
+- [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - the Dockerfiles this image was built from.
+
 **Usage:** Add the following under `docker:` in your config.yml:  
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
-**Latest Tags:** <small>(view more available tags on [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags/))</small>
+**Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
 
-<ul class="list-2cols">
-{% assign tags = image[1].tags | sort %}
+<ul class="list-3cols">
+{% assign tags = image[1].tags | sort | reverse %}
+{% assign tagCounter = 1 %}
 {% for tag in tags %}
-	{% unless tag contains "-browsers" or tag contains "-node" %}
+	{% if tagCounter > 99 %}
+		{% break %}
+	{% endif %}
+	{% unless tag contains "-browsers" or tag contains "-node" or tag contains "-ram" %}
 	<li>{{ tag }}</li>
+	{% assign tagCounter = tagCounter | plus:1 %}
 	{% endunless %}
 {% endfor %}
 </ul>
-<p>Note: Any variants available for this image can be added by appending the variant tag to the tags above.</p>
+
+Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
 
 ---
 

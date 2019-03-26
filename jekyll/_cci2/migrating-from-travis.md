@@ -33,6 +33,32 @@ configuration will live in a `.travis.yml` file in the root of your repository.
 With CircleCI, your configuration will live in `.circleci/config.yml` at the
 root of your repository.
 
+| Travis CI         | Circle CI                   | Description                                                                                       |
+|-------------------|-----------------------------|---------------------------------------------------------------------------------------------------|
+| language:         | [docker.image](https://circleci.com/docs/2.0/configuration-reference/#docker)                | Use the Docker executor to specify an appropriate Docker image for the target language            |
+| dist:             | [docker, machine, macos](https://circleci.com/docs/2.0/executor-types/)      | If your build must run in a fully virtualized environment, or on a macOS builder                  |
+| cache components: | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
+| before_cache      | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
+| before_install:   | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify pre install commands                                                 |
+| install:          | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify install commands                                                     |
+| before_script     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify pre-execution commands                                               |
+| script:           | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify execution commands                                                   |
+| after_script:     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify post-execution commands                                              |
+| deploy:           | [deploy:](https://circleci.com/docs/2.0/configuration-reference/#deploy)                     | Use the deploy: step to deploy build artifacts                                                    |
+| env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment)                | Use the environment: element to specify environment variables                                     |
+| matrix:           | [workflows:](https://circleci.com/docs/2.0/configuration-reference/#workflows)                  | Workflows are used on CircleCI to orchestrate multiple jobs                                       |
+| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                   | Use the requires: element to explicitly require any job dependencies and control parallel builds. |
+{: class="table table-striped"}
+
+### On Using Containers
+
+With CircleCI, the context in which your checked out code executes (builds,
+tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
+
+If you're coming from Travis CI, using Docker will be the closest means to running
+a build based on a language. While you can use any custom Docker Images, CircleCI maintains several [Docker Images]({{ site.baseurl
+}}/2.0/circleci-images/) tailored for common `.config` scenarios.
+
 ## Building on Pushing Code
 
 The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The
@@ -115,15 +141,6 @@ caching](https://docs.travis-ci.com/user/caching/) occurs in your build after th
 case, by using the `cache: npm` key in `.travis.yml`, dependencies will default
 to caching `node_modules`.
 
-### On Using Containers
-
-With CircleCI, the context in which your checked out code executes (builds,
-tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
-
-If you're coming from TravisCI, using Docker will be the closest means to running
-a build based on a language. While you can use any custom Docker Images, CircleCI maintains several [Docker Images]({{ site.baseurl
-}}/2.0/circleci-images/) tailored for common `.config` scenarios.
-
 ## Environment Variables
 
 Both Travis and CircleCI enable the use of environment variables in your builds.
@@ -145,7 +162,7 @@ With CircleCI, it is also possible to securely set environment variables across 
 ## Artifacts Uploading
 
 With TravisCI you can upload build artifacts either manually using AWS S3 or
-as an attachment to a Github Release.
+as an attachment to a GitHub Release.
 
 On CircleCI, artifact uploading occurs in a step in your config:
 

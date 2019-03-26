@@ -50,11 +50,7 @@ If you install CircleCI on your own hardware, the divide between the host OS (at
 ## Web UI
 {:.no_toc}
 
-Jenkins is extremely widespread because it has been around since nearly the beginning of CI. This means that its UI was originally developed in a very different landscape of web technology, and it is still fairly dated. Each page load generally needs to be rendered completely by the server, making the navigation experience a bit sluggish. The UI can also be impacted by any number of installed plugins.
-
-![](  {{ site.baseurl }}/assets/img/docs/jenkins-ui.png)
-
-CircleCI is a single-page web app that makes heavy use of AJAX, HTML5, and other newer technologies to make the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves it’s UI. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.
+CircleCI is a single-page web app that makes the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves it’s UI. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.
 
 ![](  {{ site.baseurl }}/assets/img/docs/circle-ui.png)
 

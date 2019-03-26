@@ -73,7 +73,7 @@ To deploy to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ si
 
 3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
 
-4. Install `awscli` in your primary container by following the [AWS CLI documentation (http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
+4. Install `awscli` in your primary container by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
 
 5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. The example below shows how CircleCI deploys [this documentation site](https://github.com/circleci/circleci-docs) to S3. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
 
@@ -106,11 +106,11 @@ workflows:
               only: master
 ```
 
-For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference (https://docs.aws.amazon.com/cli/latest/reference/).
+For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ### AWS Orb Examples
 
-CircleCI and its partners have developed several different AWS orbs that enable you to quickly deploy AWS applications that can be found in the [CircleCI Orbs Registry]((https://circleci.com/orbs/registry/). The examples below illustrate how you can use the AWS S3 and AWS ECR/ECS orbs.
+CircleCI and its partners have developed several different AWS orbs that enable you to quickly deploy AWS applications that can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/). The examples below illustrate how you can use the AWS S3 and AWS ECR/ECS orbs.
 
 #### AWS S3 Orb
 
@@ -198,7 +198,7 @@ For more detailed information about the AWS ECS & AWS ECR orbs, refer to the fol
 
 ## Azure
 
-To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
+To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Capistrano
 
@@ -431,7 +431,7 @@ commands:
           command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
 ```
 
-For more detailed information about how you can use the Firebase orb to deploy your application, refer to the [Firebase Orb Deploy] (https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+For more detailed information about how you can use the Firebase orb to deploy your application, refer to the [Firebase Orb Deploy](https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Google Cloud
 
@@ -505,7 +505,7 @@ If you would like to simplify your configuration workflows using a CircleCI orb 
                 google-compute-zone: myGoogleComputeZone
 ```
 
-For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry[(https://circleci.com/orbs/registry/).
+For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Heroku
 

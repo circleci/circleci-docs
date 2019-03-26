@@ -49,7 +49,7 @@ Since CircleCI cannot decrypt SSH keys,
 every new key must have an empty passphrase.
 CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
-## Advanced Usage
+## Adding SSH Keys to a Job
 
 Even though all CircleCI jobs use `ssh-agent`
 to automatically sign all added SSH keys,

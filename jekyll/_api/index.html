@@ -504,6 +504,10 @@ the colon ":" tells curl that there's no password.
 <td>DELETE: /project/:vcs-type/:username/:project/build-cache</td>
 <td>Clears the cache for a project.</td>
 </tr>
+<tr>
+<td>DELETE: /project/:vcs-type/:username/:project/ssh-key</td>
+<td>Delete the SSH key from a project.</td>
+</tr>
 </tbody></table>
 <h2 id='user'>User</h2>
 <p>Provides information about the user that is currently signed in.</p>
@@ -732,78 +736,201 @@ This is also the payload for the notification webhooks, in which case this objec
 <p>GET</p>
 <h3 id='example-call-6'>Example Call</h3><pre class="highlight plaintext"><code>curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num?circle-token=:token
 </code></pre><h3 id='example-response-6'>Example Response</h3><pre class="highlight plaintext"><code>{
-  "vcs_url" : "https://github.com/circleci/mongofinil",
-  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
-  "build_num" : 22,
-  "branch" : "master",
-  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
-  "committer_name" : "Allen Rohner",
-  "committer_email" : "arohner@gmail.com",
-  "subject" : "Don't explode when the system clock shifts backwards",
-  "body" : "", // commit message body
-  "why" : "github", // short string explaining the reason the build ran
-  "dont_build" : null, // reason why we didn't build, if we didn't build
-  "queued_at" : "2013-02-12T21:33:30Z" // time build was queued
-  "start_time" : "2013-02-12T21:33:38Z", // time build started
-  "stop_time" : "2013-02-12T21:34:01Z", // time build finished
-  "build_time_millis" : 23505,
-  "username" : "circleci",
-  "reponame" : "mongofinil",
-  "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
-  "outcome" : "success", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-  "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
-  "retry_of" : null, // build_num of the build this is a retry of
+  {
+  "compare" : "https://github.com/ryanwohara/test-2.0/compare/ffe960a611b6...0f794ecf3be9",
+  "previous_successful_build" : {
+    "build_num" : 696,
+    "status" : "success",
+    "build_time_millis" : 12722
+  },
+  "build_parameters" : {
+    "CIRCLE_JOB" : "build"
+  },
+  "oss" : true,
+  "all_commit_details_truncated" : false,
+  "committer_date" : "2019-01-24T12:20:48-07:00",
   "steps" : [ {
-    "name" : "configure the build",
+    "name" : "Spin up Environment",
     "actions" : [ {
-      "bash_command" : null,
-      "run_time_millis" : 1646,
-      "start_time" : "2013-02-12T21:33:38Z",
-      "end_time" : "2013-02-12T21:33:39Z",
-      "name" : "configure the build",
-      "exit_code" : null,
-      "type" : "infrastructure",
+      "truncated" : false,
       "index" : 0,
-      "status" : "success",
-    } ] },
-
-    "name" : "lein2 deps",
-    "actions" : [ {
-      "bash_command" : "lein2 deps",
-      "run_time_millis" : 7555,
-      "start_time" : "2013-02-12T21:33:47Z",
-      "messages" : [ ],
-      "step" : 1,
-      "exit_code" : 0,
-      "end_time" : "2013-02-12T21:33:54Z",
-      "index" : 0,
-      "status" : "success",
-      "type" : "dependencies",
-      "source" : "inference",
-      "failed" : null
-    } ] },
-    "name" : "lein2 trampoline midje",
-    "actions" : [ {
-      "bash_command" : "lein2 trampoline midje",
-      "run_time_millis" : 2310,
-      "continue" : null,
       "parallel" : true,
-      "start_time" : "2013-02-12T21:33:59Z",
-      "name" : "lein2 trampoline midje",
-      "messages" : [ ],
-      "step" : 6,
-      "exit_code" : 1,
-      "end_time" : "2013-02-12T21:34:01Z",
-      "index" : 0,
-      "status" : "failed",
-      "timedout" : null,
+      "failed" : null,
       "infrastructure_fail" : null,
+      "name" : "Spin up Environment",
+      "bash_command" : null,
+      "status" : "success",
+      "timedout" : null,
+      "continue" : null,
+      "end_time" : "2019-01-24T19:21:03.688Z",
       "type" : "test",
-      "source" : "inference",
-      "failed" : true
+      "allocation_id" : "5c4a10159873980008ba4659-0-build/23C23580",
+      "output_url" : "https://circle-production-action-output.s3.amazonaws.com/798b8a1000ff34877101a4c5-c31b4d41-58bd-412e-afcb-42d45f5e8156-0-0?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190201T232915Z&X-Amz-SignedHeaders=host&X-Amz-Expires=431999&X-Amz-Credential=AKIAIJNI6FA5RIAFFQ7Q%2F20190201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6c91bb99437d37a9027e92682fbf580d8e7c08b42f967c37b9c89397d7c64991",
+      "start_time" : "2019-01-24T19:20:55.562Z",
+      "background" : false,
+      "exit_code" : null,
+      "insignificant" : false,
+      "canceled" : null,
+      "step" : 0,
+      "run_time_millis" : 8126,
+      "has_output" : true
+    } ]
+  }, {
+    "name" : "docker version",
+    "actions" : [ {
+      "truncated" : false,
+      "index" : 0,
+      "parallel" : true,
+      "failed" : null,
+      "infrastructure_fail" : null,
+      "name" : "docker version",
+      "bash_command" : "#!sudo /bin/bash\ndocker version",
+      "status" : "success",
+      "timedout" : null,
+      "continue" : null,
+      "end_time" : "2019-01-24T19:21:06.487Z",
+      "type" : "test",
+      "allocation_id" : "5c4a10159873980008ba4659-0-build/23C23580",
+      "output_url" : "https://circle-production-action-output.s3.amazonaws.com/509b8a1000ff34872201a4c5-c31b4d41-58bd-412e-afcb-42d45f5e8156-101-0?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190201T232915Z&X-Amz-SignedHeaders=host&X-Amz-Expires=431999&X-Amz-Credential=AKIAIJNI6FA5RIAFFQ7Q%2F20190201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a14565d46feef38a17296c2e360a2d2f0b44e517680c6abac4a22708b60923ad",
+      "start_time" : "2019-01-24T19:21:06.176Z",
+      "background" : false,
+      "exit_code" : 0,
+      "insignificant" : false,
+      "canceled" : null,
+      "step" : 101,
+      "run_time_millis" : 311,
+      "has_output" : true
+    } ]
+  }, {
+    "name" : "docker-compose version",
+    "actions" : [ {
+      "truncated" : false,
+      "index" : 0,
+      "parallel" : true,
+      "failed" : null,
+      "infrastructure_fail" : null,
+      "name" : "docker-compose version",
+      "bash_command" : "#!sudo /bin/bash\ndocker-compose version",
+      "status" : "success",
+      "timedout" : null,
+      "continue" : null,
+      "end_time" : "2019-01-24T19:21:07.319Z",
+      "type" : "test",
+      "allocation_id" : "5c4a10159873980008ba4659-0-build/23C23580",
+      "output_url" : "https://circle-production-action-output.s3.amazonaws.com/709b8a1000ff34872201a4c5-c31b4d41-58bd-412e-afcb-42d45f5e8156-102-0?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190201T232915Z&X-Amz-SignedHeaders=host&X-Amz-Expires=431999&X-Amz-Credential=AKIAIJNI6FA5RIAFFQ7Q%2F20190201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1e98dae56c4b87960203446500f2ae8095ddb1d33230f08b0d4d687c8f352dfe",
+      "start_time" : "2019-01-24T19:21:06.519Z",
+      "background" : false,
+      "exit_code" : 0,
+      "insignificant" : false,
+      "canceled" : null,
+      "step" : 102,
+      "run_time_millis" : 800,
+      "has_output" : true
     } ]
   } ],
-  ...
+  "body" : "",
+  "usage_queued_at" : "2019-01-24T19:20:53.906Z",
+  "context_ids" : [ ],
+  "fail_reason" : null,
+  "retry_of" : null,
+  "reponame" : "test-2.0",
+  "ssh_users" : [ ],
+  "build_url" : "https://circleci.com/gh/ryanwohara/test-2.0/698",
+  "parallel" : 1,
+  "failed" : false,
+  "branch" : "machine",
+  "username" : "ryanwohara",
+  "author_date" : "2019-01-24T12:20:48-07:00",
+  "why" : "github",
+  "user" : {
+    "is_user" : true,
+    "login" : "ryanwohara",
+    "avatar_url" : "https://avatars1.githubusercontent.com/u/5102611?v=4",
+    "name" : "Ryan O'Hara",
+    "vcs_type" : "github",
+    "id" : 5102611
+  },
+  "vcs_revision" : "0f794ecf3be9f102d202096a419dff8b57e1153a",
+  "workflows" : {
+    "job_name" : "build",
+    "job_id" : "a733c9aa-5b5b-4ad7-98aa-484a5e86a861",
+    "workflow_id" : "41110d8d-6a60-4df0-ba81-9ee3f0e50e7d",
+    "workspace_id" : "41110d8d-6a60-4df0-ba81-9ee3f0e50e7d",
+    "upstream_job_ids" : [ ],
+    "upstream_concurrency_map" : { },
+    "workflow_name" : "test_and_deploy"
+  },
+  "owners" : [ "ryanwohara" ],
+  "vcs_tag" : null,
+  "pull_requests" : [ ],
+  "build_num" : 698,
+  "infrastructure_fail" : false,
+  "committer_email" : "ryan@ryanohara.co",
+  "has_artifacts" : true,
+  "previous" : {
+    "build_num" : 697,
+    "status" : "failed",
+    "build_time_millis" : 12153
+  },
+  "status" : "success",
+  "committer_name" : "Ryan W. O'Hara",
+  "retries" : null,
+  "subject" : "no exit",
+  "vcs_type" : "github",
+  "timedout" : false,
+  "dont_build" : null,
+  "lifecycle" : "finished",
+  "no_dependency_cache" : false,
+  "stop_time" : "2019-01-24T19:21:07.375Z",
+  "ssh_disabled" : true,
+  "build_time_millis" : 11855,
+  "picard" : {
+    "build_agent" : {
+      "image" : "circleci/picard:0.1.1480-7a5183d3",
+      "properties" : {
+        "build_agent" : "0.1.1480-7a5183d3",
+        "executor" : "machine"
+      }
+    },
+    "resource_class" : {
+      "cpu" : 2.0,
+      "ram" : 7680,
+      "class" : "medium"
+    },
+    "executor" : "machine",
+    "used_features" : [ "" ]
+  },
+  "circle_yml" : {
+    "string" : "version: 2\njobs:\n  build:\n    machine: true\n    shell: sudo /bin/bash\n    steps:\n      - run: docker version\n      - run: docker-compose version\n\n\nworkflows:\n  version: 2\n  test_and_deploy:\n    jobs:\n      - build\n"
+  },
+  "messages" : [ ],
+  "is_first_green_build" : false,
+  "job_name" : null,
+  "start_time" : "2019-01-24T19:20:55.520Z",
+  "canceler" : null,
+  "all_commit_details" : [ {
+    "committer_date" : "2019-01-24T12:20:48-07:00",
+    "body" : "",
+    "branch" : "machine",
+    "author_date" : "2019-01-24T12:20:48-07:00",
+    "committer_email" : "ryan@ryanohara.co",
+    "commit" : "0f794ecf3be9f102d202096a419dff8b57e1153a",
+    "committer_login" : "ryanwohara",
+    "committer_name" : "Ryan W. O'Hara",
+    "subject" : "no exit",
+    "commit_url" : "https://github.com/ryanwohara/test-2.0/commit/0f794ecf3be9f102d202096a419dff8b57e1153a",
+    "author_login" : "ryanwohara",
+    "author_name" : "Ryan W. O'Hara",
+    "author_email" : "ryan@ryanohara.co"
+  } ],
+  "platform" : "2.0",
+  "outcome" : "success",
+  "vcs_url" : "https://github.com/ryanwohara/test-2.0",
+  "author_name" : "Ryan W. O'Hara",
+  "node" : null,
+  "queued_at" : "2019-01-24T19:20:53.937Z",
+  "canceled" : false,
+  "author_email" : "ryan@ryanohara.co"
 }
 </code></pre><h2 id='artifacts-of-a-build'>Artifacts Of A Build</h2>
 <p>Returns an array of artifacts produced by a given build.</p>
@@ -1157,6 +1284,8 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?
 </code></pre><h2 id='trigger-a-new-build-by-project-preview'>Trigger a new Build by Project (preview)</h2>
 <p>Prerequisite: You must go to your Project Settings in the CircleCI app to <a href="https://circleci.com/docs/2.0/build-processing/">Enable Build Processing</a>. This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.</p>
 
+**Note**: Before triggering a build, make sure to check if there are any projects owned by other organizations that you are not a member of.
+
 <p>Triggers a build of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.</p>
 
 <table><thead>
@@ -1304,7 +1433,7 @@ Learn how to set up your 2.0 builds to <a href="https://circleci.com/docs/2.0/co
 <p>Deletes an SSH key from the system.</p>
 <h3 id='method-26'>Method</h3>
 <p>DELETE</p>
-<h3 id='example-call-26'>Example Call</h3><pre class="highlight plaintext"><code>curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"}
+<h3 id='example-call-26'>Example Call</h3><pre class="highlight plaintext"><code>curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"} https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key?circle-token=:token
 </code></pre><h3 id='example-response-26'>Example Response</h3>
 <p>no response expected</p>
 <h2 id='heroku-keys'>Heroku Keys</h2>
