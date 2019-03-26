@@ -98,7 +98,7 @@ Addition and deletion of environment variables from a restricted context is limi
 
 ## Deleting a Context
 
-If the context is restricted with a group other than `organization`, you must be a member of the security group to complete this task.
+If the context is restricted with a group other than `All members`, you must be a member of the security group to complete this task.
 
 1. As an Org Admin, Navigate to the Settings > Contexts page in the CircleCI application.
 
