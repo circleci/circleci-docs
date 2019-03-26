@@ -59,7 +59,7 @@ The default security group is `organization` and enables any member of the org w
 
 To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the context groups, the workflow will fail as `Unauthorized`.
 
-**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub  projects include the ability to restrict contexts with security groups. Restricted Contexts are also **not** yet supported in private installations of CircleCI.
+**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Restricted Contexts are also **not** yet supported in private installations of CircleCI.
 
 ### Restrict a Context to a Security Group or Groups
 
