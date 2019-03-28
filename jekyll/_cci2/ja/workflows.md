@@ -319,7 +319,7 @@ For a full example of workflows, see the [configuration file](https://github.com
 ### Git タグに対応可能な Workflows を実行する
 {:.no_toc}
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。 Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
 In the example below, two workflows are defined:
 
