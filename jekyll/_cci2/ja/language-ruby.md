@@ -9,10 +9,10 @@ order: 8
 ---
 This guide will help you get started with a Ruby on Rails application on CircleCI.
 
-* TOC {:toc}
+* 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -28,7 +28,7 @@ The application uses the latest stable Rails version 5.1, `rspec-rails`, and [Rs
 
 This application build also uses one of the pre-built [CircleCI Docker Images](http://circleci.com/docs/2.0/circleci-images).
 
-## Pre-Built CircleCI Docker Images
+## CircleCI のビルド済み Docker イメージ
 
 Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
 
@@ -63,12 +63,14 @@ jobs: # a collection of steps
       - checkout # special step to check out source code to working directory
 
       # Which version of bundler?
+
       - run:
           name: Which bundler?
           command: bundle -v
 
       # Restore bundle cache
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
@@ -79,12 +81,14 @@ jobs: # a collection of steps
           command: bundle check || bundle install
 
       # Store bundle cache for Ruby dependencies
+
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
       # Only necessary if app uses webpacker or yarn in some other way
+
       - restore_cache:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
@@ -95,6 +99,7 @@ jobs: # a collection of steps
           command: yarn install --cache-folder ~/.cache/yarn
 
       # Store yarn / webpacker cache
+
       - save_cache:
           key: rails-demo-yarn-{{ checksum "yarn.lock" }}
           paths:
@@ -118,6 +123,7 @@ jobs: # a collection of steps
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
+
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
@@ -200,12 +206,12 @@ This step tells CircleCI to checkout the project code into the working directory
 Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.
 
 {% raw %}
-
 ```yaml
 steps:
   # ...
 
   # Restore bundle cache
+
   - restore_cache:
       keys:
         - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
@@ -216,23 +222,23 @@ steps:
       command: bundle check || bundle install
 
   # Store bundle cache
+
   - save_cache:
       key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
 ```
-
 {% endraw %}
 
 If your application is using Webpack or Yarn for JavaScript dependencies, you should also add the following to your config.
 
 {% raw %}
-
 ```yaml
 steps:
   # ...
 
   # Only necessary if app uses webpacker or yarn in some other way
+
   - restore_cache:
       keys:
         - rails-demo-yarn-{{ checksum "yarn.lock" }}
@@ -243,12 +249,12 @@ steps:
       command: yarn install --cache-folder ~/.cache/yarn
 
   # Store yarn / webpacker cache
+
   - save_cache:
       key: rails-demo-yarn-{{ checksum "yarn.lock" }}
       paths:
         - ~/.cache/yarn
 ```
-
 {% endraw %}
 
 The next section sets up the test database. It uses the `dockerize` [utility](https://github.com/jwilder/dockerize) to delay starting the main process of the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) until after the database service is available.
@@ -258,6 +264,7 @@ steps:
   # ...
 
   # Database setup
+
   - run:
       name: Wait for DB
       command: dockerize -wait tcp://localhost:5432 -timeout 1m
@@ -274,12 +281,12 @@ If they succeed, it stores the test results using `store_test_results` so Circle
 From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
-
 ```yaml
 steps:
   # ...
 
   # Run rspec in parallel
+
   - run: |
       bundle exec rspec --profile 10 \
                         --format RspecJunitFormatter \
@@ -288,10 +295,10 @@ steps:
                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
   # Save test results for timing analysis
+
   - store_test_results:
       path: test_results
 ```
-
 {% endraw %}
 
 Two formatters are specified for the RSpec test suite:
@@ -303,8 +310,7 @@ The `--profile` option reports the slowest examples of each run.
 
 For more on `circleci tests glob` and `circleci tests split` commands, please refer to our documentation on [Parallelism with CircleCI CLI](https://circleci.com/docs/2.0/parallelism-faster-jobs).
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
