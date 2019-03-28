@@ -9,7 +9,8 @@ order: 6
 ---
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a PHP sample application.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 ## Quickstart: Demo PHP Laravel reference project
 
@@ -20,7 +21,7 @@ We maintain a reference PHP Laravel project to show how to build PHP on CircleCI
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
 
-## Pre-Built CircleCI Docker Images
+## CircleCI のビルド済み Docker イメージ
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 
@@ -41,13 +42,13 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
-
 ```yaml
 version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker 
+
       - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
     working_directory: ~/laravel # directory where steps will run
     steps: # a set of executable commands
@@ -81,7 +82,6 @@ jobs: # a collection of steps
       - run: ./vendor/bin/codecept run
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
-
 {% endraw %}
 
 ## Config Walkthrough
@@ -112,15 +112,14 @@ jobs:
 Next, we'll run a series of commands under the `steps:` key. Below we install some PHP tooling allowing up to manage our dependencies.
 
 {% raw %}
-
 ```yaml
     steps:
+
       - checkout
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
 ```
-
 {% endraw %}
 
 The next set of steps for the config are all related to dependency management and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
@@ -129,10 +128,10 @@ Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cach
 
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
 
-{% raw %}
 
+{% raw %}
 ```yaml
-      - restore_cache: 
+<br />      - restore_cache: 
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
             - composer-v1-
@@ -151,7 +150,6 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           paths:
             - node_modules
 ```
-
 {% endraw %}
 
 Finally, we will set up a test database with Sqlite, run migrations and run tests.
@@ -167,8 +165,7 @@ Finally, we will set up a test database with Sqlite, run migrations and run test
 
 Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
