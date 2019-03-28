@@ -16,7 +16,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="/docs/2.0/first-steps/">Sign Up & Try</a></li>
       <li><a href="/docs/2.0/getting-started/">Your First Green Build</a></li>
       <li><a href="/docs/2.0/hello-world/">Hello World</a></li>
-      <li><a href="/docs/2.0/faq/">FAQ</a></li>
+      <li><a href="/docs/2.0/faq/">よくあるご質問</a></li>
       <li><a href="/docs/2.0/orb-intro/">Orbs</a></li>
     </ul>
   </div>
@@ -28,7 +28,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
         <li><a href="/docs/2.0/postgres-config/">Database Config Examples</a></li>
         <li><a href="/docs/2.0/sample-config/">Sample config.yml Files</a></li>
         <li><a href="/docs/2.0/tutorials/">Tutorials and Sample Apps</a></li>
-        <li><a href="/docs/2.0/using-orbs/">Using Orbs</a></li>
+        <li><a href="/docs/2.0/using-orbs/">Orbs を使う</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
@@ -40,7 +40,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
     <ul>
       <li><a href="{{ site.baseurl }}/2.0/configuration-reference/">Configuration Reference</a></li>
       <li><a href="{{ site.baseurl }}/2.0/writing-yaml/">Writing YAML</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/env-vars/">Using Environment Variables</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/env-vars/">環境変数の使い方</a></li>
       <li><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">Debugging with SSH</a></li>
       <li><a href="/docs/2.0/reusing-config/">Reusing Config</a></li>
     </ul>
@@ -49,10 +49,10 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
     <h2>Workflows</h2>
     <p>CircleCI Workflows are used to schedule and sequence jobs.</p>
     <ul>
-      <li><a href="/docs/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
+      <li><a href="/docs/2.0/workflows/">ジョブの実行を Workflow で制御する</a></li>
       <li><a href="/docs/2.0/workflows/#workflows-configuration-examples">Example Configs</a></li>
       <li><a href="/docs/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
-      <li><a href="/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
+      <li><a href="/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Workflows におけるコンテキストとフィルターの使い方</a></li>
       <li><a href="/docs/2.0/creating-orbs/">Creating Orbs</a></li>
     </ul>
   </div>
