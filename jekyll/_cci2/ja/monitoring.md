@@ -7,7 +7,8 @@ order: 30
 ---
 This document is for System Administrators who are setting environment variables for installed Nomad Clients, scaling their cluster, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
-* TOC {:toc}
+* 目次
+{:toc}
 
 ## Advanced System Monitoring
 
@@ -79,14 +80,18 @@ Custom Metrics via Telegraf configuration file is an alternative to the predefin
 
 Configuration options are based on Telegraf's documented output plugins. See their documentation [here](https://github.com/influxdata/telegraf#output-plugins).
 
-For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps; 1. SSH into the Servics Machine 2. cd `/etc/circleconfig/telegraf/influxdb.conf` 3. Adding the desired ouputs, for example
+For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps;
+
+1. SSH into the Servics Machine
+2. cd `/etc/circleconfig/telegraf/influxdb.conf`
+3. Adding the desired ouputs, for example
 
     [[output.influxdb]]
       url = "http://52.67.66.155:8086"
       database = "testdb"
     
 
-1. Run `docker restart telegraf` to restart the container to load or reload any changes.
+4. Run `docker restart telegraf` to restart the container to load or reload any changes.
 
 You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs.
 
@@ -160,7 +165,7 @@ If you are using CircleCI Terraform/CloudFormation templates, you can modify the
     file = /var/log/circle-builder/circle.log
     buffer_duration = 5000
     log_stream_name = {instance_id}
-    initial_position = end_of_file
+initial_position = end_of_file
     log_group_name = /var/log/circle-builder/circle.log
     EOF
     
