@@ -9,14 +9,14 @@ order: 3
 ---
 The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 The following sections walk through how Jobs and Steps are configured for this application, how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment, and how to deploy the demo application to Heroku.
 
 The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>. The example app is available here: <https://circleci-demo-python-flask.herokuapp.com/>
 
-## Basic Setup
-
+## Basic Setup 
 {:.no_toc}
 
 The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
@@ -103,8 +103,7 @@ An environment variable defined in a `run:` key will override image-level variab
             FLASK_CONFIG: staging
 ```
 
-### Caching Dependencies
-
+### 依存関係のキャッシュ
 {:.no_toc}
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
@@ -309,7 +308,6 @@ jobs:
 Here's a passing build with deployment for the demo app: <<https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>{:rel="nofollow"}>
 
 ### Additional Heroku Configuration
-
 {:.no_toc}
 
 The demo application is configured to run on Heroku with settings provided in `config.py` and `manage.py`. These two files tell the app to use production settings, run migrations for the PostgreSQL database, and use SSL when on Heroku.
@@ -353,6 +351,7 @@ version: 2
 jobs:
   build:
     docker:
+
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_CONFIG: testing
@@ -394,8 +393,7 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 For more information about Workflows, see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
