@@ -35,7 +35,7 @@ If you can run 1.0 builds, but not 2.0 builds, or if you can only run 2.0 builds
     Jan 9 19:34:44.694:+0000 INFO picard-dispatcher.core taking build=GERey/realitycheck/38
     Jan 9 19:34:45.001:+0000 INFO circle.http.builds project GERey/realitycheck at revision 2c6179654541ee3dc0abf46970551b4594986293 succcessfully fetched and parsed .circleci/config.yml
     Jan 9 19:34:45.027:+0000 INFO picard-dispatcher.tasks build GERey/realitycheck/38 is using resource class {:cpu 2.0, :ram 4096, :class :medium}
-    Jan 9 19:34:45.027:+0000 INFO picard-dispatcher.tasks Computed tasks for build=GERey/realitycheck/38, stage=:write_artifacts, parallel=1
+Jan 9 19:34:45.027:+0000 INFO picard-dispatcher.tasks Computed tasks for build=GERey/realitycheck/38, stage=:write_artifacts, parallel=1
     Jan 9 19:34:45.027:+0000 INFO picard-dispatcher.tasks build has matching jobs: build=GERey/realitycheck/38 parsed=:write_artifacts passed=:write_artifacts
     
 
