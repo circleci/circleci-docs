@@ -5,7 +5,7 @@ description: "How to avoid and debug Java memory errors on CircleCI."
 ---
 How to avoid and debug Java memory errors on CircleCI.
 
-## Overview
+## 概要
 
 The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications. Without any memory limits, the JVM pre-allocates a significant amount of memory. This pre-allocation can produce Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail.
 
@@ -17,7 +17,17 @@ You can set several Java environment variables to manage JVM memory usage. These
 
 The table below shows these environment variables, along with the precedence levels they take when using different build tools. The lower the number, the higher the precedence level, with 0 being the highest.
 
-Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein \---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---|\---\---|\---\-----|\---\----|\---\-----|\---\--- [`_JAVA_OPTIONS`](#_java_options) | 0 | 0 | 0 | 0 | 0 [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2 | 3 | 2 | 2 | 2 [`JAVA_OPTS`](#java_opts) | no | 2 | no | 1 | no [`JVM_OPTS`](#jvm_opts) | * | no | no | no | * [`LEIN_JVM_OPTS`](#lein_jvm_opts) | no | no | no | no | 1 [`GRADLE_OPTS`](#gradle_opts) | no | 1 | no | no | no [`MAVEN_OPTS`](#maven_opts) | no | no | 1 | no | no CLI args | 1 | no | no | no | no {:class="table table-striped"}
+| Java Environment Variable                 | Java | Gradle | Maven | Kotlin | Lein |
+| ----------------------------------------- | ---- | ------ | ----- | ------ | ---- |
+| [`_JAVA_OPTIONS`](#_java_options)         | 0    | 0      | 0     | 0      | 0    |
+| [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2    | 3      | 2     | 2      | 2    |
+| [`JAVA_OPTS`](#java_opts)                 | no   | 2      | no    | 1      | no   |
+| [`JVM_OPTS`](#jvm_opts)                   | *    | no     | no    | no     | *    |
+| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | no   | no     | no    | no     | 1    |
+| [`GRADLE_OPTS`](#gradle_opts)             | no   | 1      | no    | no     | no   |
+| [`MAVEN_OPTS`](#maven_opts)               | no   | no     | 1     | no     | no   |
+| CLI args                                  | 1    | no     | no    | no     | no   |
+{:class="table table-striped"}
 
 The above environment variables are listed below, along with details on why to choose one over another.
 
@@ -61,6 +71,6 @@ Ensure that your `-Xmxn` maximum size is large enough for your applications to c
 
 If you are still consistently hitting memory limits, consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
-## See Also
+## 関連情報
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
