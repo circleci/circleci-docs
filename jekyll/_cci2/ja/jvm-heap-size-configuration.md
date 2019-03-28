@@ -7,7 +7,9 @@ JVM_HEAP_SIZE is configurable for the frontend, test-results, picard-output-proc
 
 ## Setting up
 
-To customize JVM_HEAP_SIZE value, you will need to create customizations file in your services box 1. Create customizations files:
+To customize JVM_HEAP_SIZE value, you will need to create customizations file in your services box
+
+1. Create customizations files:
 
 ```sh
 /etc/circleconfig/frontend/customizations
@@ -16,13 +18,13 @@ To customize JVM_HEAP_SIZE value, you will need to create customizations file in
 /etc/circleconfig/contexts-service/customizations
 ```
 
-1. In the file, add the line below to export desire JVM_HEAP_SIZE in the file
+2. In the file, add the line below to export desire JVM_HEAP_SIZE in the file
 
 ```sh
 export JVM_HEAP_SIZE=2g
 ```
 
-1. Stop and restart CircleCI application
+3. Stop and restart CircleCI application
 
 ## Verify customization is applied
 
