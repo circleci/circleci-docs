@@ -9,18 +9,17 @@ order: 9
 ---
 This document describes how to set up an Android project on CircleCI in the following sections.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 This guide provides an introduction to Android development on CircleCI. If you are looking for a `.circleci/config.yml` template for Android, see the [Sample Configuration](#sample-configuration) section of this document.
 
 **Note:** Running the Android emulator is not supported by the type of virtualization CircleCI uses on Linux. To run emulator tests from a job, consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
-## Prerequisites
-
+## 前準備
 {:.no_toc}
 
 This guide assumes the following:
@@ -113,19 +112,16 @@ For convenience, CircleCI provides a set of Docker images for building Android a
 The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
 ### API Levels
-
 {:.no_toc}
 
 We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in a job, you should select `circleci/android:api-24-alpha`.
 
 ### Alpha Tag
-
 {:.no_toc}
 
 Our Android Docker images are currently tagged with the suffix `-alpha`. This is to indicate the images are currently under development and might change in backwards incompatible ways from week to week.
 
 ### Customizing the Images
-
 {:.no_toc}
 
 We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
@@ -133,7 +129,6 @@ We welcome contributions [on our GitHub repo for the Android image](https://gith
 To customize the image, create a Dockerfile that builds `FROM` the `circleci/android` image. See [Using Custom-Built Docker Images]({{ site.baseurl }}/2.0/custom-images/) for instructions.
 
 ### React Native Projects
-
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using Linux, Android and macOS capabilities. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
@@ -202,7 +197,7 @@ For more details on using `gcloud` to run Firebase, see the [official documentat
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Handling Out Of Memory Errors
 
@@ -226,7 +221,6 @@ If you are using [Robolectric](http://robolectric.org/) for testing you may need
 If you are still running into OOM issues you can also limit the max workers for gradle: `./gradlew test --max-workers 4`
 
 ### Disabling Pre-Dexing to Improve Build Performance
-
 {:.no_toc}
 
 Pre-dexing dependencies has no benefit on CircleCI. To disable pre-dexing, refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
