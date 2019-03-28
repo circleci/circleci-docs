@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Language Guide: Go"
-short-title: "Go"
+short-title: "Go、Go 言語"
 description: "Building and Testing with Go (Golang) on CircleCI 2.0"
 categories:
   - language-guides
@@ -9,7 +9,8 @@ order: 3
 ---
 CircleCI supports building Go projects using any version of Go that can be installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 ## Quickstart: Demo Go Reference Project
 
@@ -43,6 +44,7 @@ jobs: # basic units of work in a run
       TEST_RESULTS: /tmp/test-results # path to where test results will be saved
 
     steps: # steps that comprise the `build` job
+
       - checkout # check out source code to working directory
       - run: mkdir -p $TEST_RESULTS # create the test results directory
 
@@ -53,12 +55,14 @@ jobs: # basic units of work in a run
 
       # Normally, this step would be in a custom primary image;
       # we've added it here for the sake of explanation.
+
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
       #  CircleCi's Go Docker image includes netcat
       #  This allows polling the DB port to confirm it is open before proceeding
+
       - run:
           name: Waiting for Postgres to be ready
           command: |
@@ -111,14 +115,12 @@ jobs: # basic units of work in a run
 
 {% endraw %}
 
-### Pre-Built CircleCI Docker Images
-
+### CircleCI のビルド済み Docker イメージ
 {:.no_toc}
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
 
 ### Build the Demo Project Yourself
-
 {:.no_toc}
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
@@ -289,7 +291,7 @@ Finally, let's specify a path to store the results of the tests.
 
 Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## See Also
+## 関連情報
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
