@@ -1021,7 +1021,7 @@ tags では `only` キーと `ignore` キーが使えます。 文字列を `/`
 - `only` と `ignore` のどちらも指定していない場合、全てのジョブはスキップされます。
 - `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
-キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- branches | - | Map | 実行するタグを定義するマップを設定します。 only | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリストを指定します。 ignore | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリスト指定します。
+キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- tags | - | Map | 実行するタグを定義するマップを設定します。 only | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリストを指定します。 ignore | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリスト指定します。
 {: class="table table-striped"}
 
 詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
