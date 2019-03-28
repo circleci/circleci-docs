@@ -9,7 +9,8 @@ hide: true
 ---
 This document is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI as described in the following sections:
 
-* TOC {:toc}
+* 目次
+{:toc}
 
 Usage statistics data enhances visibility into CircleCI installations and is used to better support you and ensure a smooth transition from CircleCI 1.0 to CircleCI 2.0.
 
@@ -23,18 +24,45 @@ The following sections provide information about the usage statistics CircleCI w
 
 ### Weekly Account Usage
 
-| **Name** | **Type** | **Purpose** | | \---\---- | \---\--- | \---\--- | | account_id | UUID | *Uniquely identifies each vcs account* | | usage_current_macos | minutes | *For each account, track weekly builds performed in minutes.* | | usage_legacy_macos | minutes | |  
-| usage_current_linux | minutes | | | usage_legacy_linux | minutes | | {: class="table table-striped"}
+| **Name**              | **Type** | **Purpose**                                                   |
+| --------------------- | -------- | ------------------------------------------------------------- |
+| account_id            | UUID     | *Uniquely identifies each vcs account*                        |
+| usage_current_macos | minutes  | *For each account, track weekly builds performed in minutes.* |
+| usage_legacy_macos  | minutes  |                                                               |
+| usage_current_linux | minutes  |                                                               |
+| usage_legacy_linux  | minutes  |                                                               | 
+{: class="table table-striped"}
 
 ### Weekly Job Activity
 
-| **Name** | **Type** | **Purpose** | | \---\---- | \---\--- | \---\--- | | utc_week | date | *Identifies which week the data below applies to* | | usage_oss_macos_legacy | minutes | *Track builds performed by week* | | usage_oss_macos_current | minutes | | | usage_oss_linux_legacy | minutes | | | usage_oss_linux_current | minutes | | | usage_private_macos_legacy | minutes | | | usage_private_macos_current | minutes | | | usage_private_linux_legacy | minutes | | | usage_private_linux_current | minutes | | | new_projects_oss_macos_legacy | sum | *Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0.* | | new_projects_oss_macos_current | sum | | | new_projects_oss_linux_legacy | sum | |  
-| new_projects_oss_linux_current | sum | |  
-| new_projects_private_macos_legacy | sum | |  
-| new_projects_private_macos_current | sum | |  
-| new_projects_private_linux_legacy | sum | |  
-| new_projects_private_linux_current | sum | |  
-| projects_oss_macos_legacy | sum | *Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0.* | | projects_oss_macos_current | sum | | | projects_oss_linux_legacy | sum | | | projects_oss_linux_current | sum | | | projects_private_macos_legacy | sum | | | projects_private_macos_current | sum | | | projects_private_linux_legacy | sum | | | projects_private_linux_current | sum | | {: class="table table-striped"}
+| **Name**                               | **Type** | **Purpose**                                                                                              |
+| -------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| utc_week                               | date     | *Identifies which week the data below applies to*                                                        |
+| usage_oss_macos_legacy               | minutes  | *Track builds performed by week*                                                                         |
+| usage_oss_macos_current              | minutes  |                                                                                                          |
+| usage_oss_linux_legacy               | minutes  |                                                                                                          |
+| usage_oss_linux_current              | minutes  |                                                                                                          |
+| usage_private_macos_legacy           | minutes  |                                                                                                          |
+| usage_private_macos_current          | minutes  |                                                                                                          |
+| usage_private_linux_legacy           | minutes  |                                                                                                          |
+| usage_private_linux_current          | minutes  |                                                                                                          |
+| new_projects_oss_macos_legacy      | sum      | *Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0.*               |
+| new_projects_oss_macos_current     | sum      |                                                                                                          |
+| new_projects_oss_linux_legacy      | sum      |                                                                                                          |
+| new_projects_oss_linux_current     | sum      |                                                                                                          |
+| new_projects_private_macos_legacy  | sum      |                                                                                                          |
+| new_projects_private_macos_current | sum      |                                                                                                          |
+| new_projects_private_linux_legacy  | sum      |                                                                                                          |
+| new_projects_private_linux_current | sum      |                                                                                                          |
+| projects_oss_macos_legacy            | sum      | *Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0.* |
+| projects_oss_macos_current           | sum      |                                                                                                          |
+| projects_oss_linux_legacy            | sum      |                                                                                                          |
+| projects_oss_linux_current           | sum      |                                                                                                          |
+| projects_private_macos_legacy        | sum      |                                                                                                          |
+| projects_private_macos_current       | sum      |                                                                                                          |
+| projects_private_linux_legacy        | sum      |                                                                                                          |
+| projects_private_linux_current       | sum      |                                                                                                          | 
+{: class="table table-striped"}
 
 ## Accessing Usage Data
 
