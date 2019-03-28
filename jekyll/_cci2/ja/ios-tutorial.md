@@ -9,16 +9,15 @@ order: 20
 ---
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 The following sections walk through how to write Jobs and Steps that use `xcodebuild` for this application, how to set up code signing and a provisioning profile in the CircleCI environment, and how to deploy with Fastlane.
 
-## Prerequisites
-
+## 前準備
 {:.no_toc}
 
 - Add your project to CircleCI, see [Hello World]({{ site.baseurl }}/2.0/hello-world/).
@@ -78,7 +77,6 @@ The `run` step is also used to run your tests as in the following example of the
     
 
 ### Deployment
-
 {:.no_toc}
 
 To deploy your application with CircleCI using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools) specify an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
@@ -104,6 +102,7 @@ To deploy your application with CircleCI using [Gym](https://github.com/fastlane
       version: 2
       test_release:
         jobs:
+    
           - test
           - deploy:
               requires:
