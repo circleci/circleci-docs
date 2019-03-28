@@ -33,6 +33,7 @@ jobs:  # basic units of work in a run
     working_directory: ~/app  # directory where steps will run
 
     steps:  # commands that comprise the `build` job
+
       - checkout  # check out source code to working directory
 
       - run: mix local.hex --force  # install Hex locally (without prompt)
@@ -131,9 +132,8 @@ Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cach
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
 
 {% raw %}
-
 ```yaml
-      - restore_cache:
+<br />      - restore_cache:
           keys:
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
@@ -159,7 +159,6 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           key: v1-build-cache
           paths: "_build"
 ```
-
 {% endraw %}
 
 Finally, we wait for the database to come online so that we can run the test suite. Following running the tests, we upload our test results to be made available in the CircleCI web app.
@@ -173,6 +172,6 @@ Finally, we wait for the database to come online so that we can run the test sui
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## See Also
+## 関連情報
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
