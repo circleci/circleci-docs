@@ -9,9 +9,10 @@ order: 10
 ---
 This document will give you the guidelines for migrating your iOS project from CircleCI 1.0 to 2.0.
 
-* TOC {:toc}
+* 目次
+{:toc}
 
-## Overview
+## 概要
 
 With the release of CircleCI 2.0 for macOS, your iOS projects can now benefit from the improvements in the CircleCI 2.0 platform, including:
 
@@ -44,10 +45,12 @@ jobs:
     steps:
 
       # Get the code from the VCS provider.
+
       - checkout
 
       # Download CocoaPods specs via HTTPS (faster than Git)
       # and install CocoaPods.
+
       - run:
           name: Install CocoaPods
           command: |
@@ -55,6 +58,7 @@ jobs:
             pod install
 
       # Run tests.
+
       - run:
           name: Run tests
           command: fastlane scan
@@ -75,23 +79,28 @@ jobs:
       FL_OUTPUT_DIR: output
 
     steps:
+
       - checkout
 
       # Set up code signing via Fastlane Match.
+
       - run:
           name: Set up code signing
           command: fastlane match development --readonly
 
       # Build the release version of the app.
+
       - run:
           name: Build IPA
           command: fastlane gym
 
       # Store the IPA file in the job's artifacts
+
       - store_artifacts:
           path: output/MyApp.ipa
 
       # Deploy!
+
       - run:
           name: Deploy to App Store
           command: fastlane spaceship
@@ -100,6 +109,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - build-and-test
       - deploy:
           requires:
@@ -109,12 +119,11 @@ workflows:
               only: master
 ```
 
-## Best Practices
+## ビルド済みイメージの活用方法
 
 To ensure a consistent build experience, it is best practice to add a Gemfile and set up code signing with the help of Fastlane Match before you push a 2.0 `.circleci/config.yml` file to your CircleCI iOS project.
 
 ### Gemfile
-
 {:.no_toc}
 
 We suggest that you add a Gemfile to your iOS project if you don't have one already. Checking in a Gemfile and using Bundler to install and run gems ensures that recent versions of Fastlane and CocoaPods are available in your build.
@@ -129,7 +138,6 @@ Following is a sample Gemfile:
     
 
 ### Setting up Code Signing With Fastlane Match
-
 {:.no_toc}
 
 Check out our \[code signing guide\]({{ site.baseurl }}/2.0/ios-codesigning) for the exact steps for setting up code signing for your iOS project on CircleCI 2.0.
@@ -139,7 +147,6 @@ Check out our \[code signing guide\]({{ site.baseurl }}/2.0/ios-codesigning) for
 The following sections provide examples of 2.0 configuration syntax for an iOS project. CircleCI also provides partial config translation for iOS projects, see \[Using the 1.0 to 2.0 config-translation Endpoint\]({{ site.baseurl }}/2.0/config-translation). If your 1.0 project does **not** have a `circle.yml` file, the [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) provides a script to generate an initial config file from your 1.0 project.
 
 ### Job Name and Xcode Version
-
 {:.no_toc}
 
 In the 2.0 `.circleci/config.yml` file the first few lines specify the name of the job and the Xcode version to use:
@@ -157,7 +164,6 @@ In the 2.0 `.circleci/config.yml` file the first few lines specify the name of t
     
 
 ### Build Steps Key
-
 {:.no_toc}
 
 The top-level `steps` key contains all the build steps that will be run for a particular job:
@@ -172,7 +178,6 @@ The top-level `steps` key contains all the build steps that will be run for a pa
 You can see all the available step types in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document. **Note:** Docker support is not available in the macOS builds.
 
 ### Checking out the Project Code
-
 {:.no_toc}
 
 One of the first items under `steps` will be the code checkout step:
@@ -184,7 +189,6 @@ One of the first items under `steps` will be the code checkout step:
     
 
 ### Caching Ruby Gems Installed With Bundler
-
 {:.no_toc}
 
 In CircleCI 2.0, cache save and cache restore are based on a *cache key*. Here is how you can cache the Ruby gems based on the content of `Gemfile.lock`:
@@ -221,7 +225,6 @@ jobs:
 Every time your Gemfile.lock changes, a new cache will be created. Please check out [this doc]({{ site.baseurl }}/2.0/caching/) for more information about cache keys and other available key options beyond `checksum`.
 
 ### Installing CocoaPods
-
 {:.no_toc}
 
 If you are already checking your [CocoaPods](https://cocoapods.org/) *into* your repository, there is no need to do anything in this step—your dependencies will be picked up correctly. However, if you are *not* including the CocoaPods into the repository, you will need to install CocoaPods in your `.circleci/config.yml`.
@@ -231,24 +234,21 @@ Installing CocoaPods with `pod install` will fetch the whole CocoaPods specs rep
 Following is an example config snippet that will fetch CocoaPods specs using HTTPS and then run `pod install`:
 
 {% raw %}
-
-    jobs:
+jobs:
       build-and-deploy:
         steps:
           ...
+    
           - run:
               name: Install CocoaPods
               command: |
                 curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
                 pod install
-    
-
 {% endraw %}
 
 See [this CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control) for more details on checking your pods into the repo instead of installing them in your config.
 
 ### Running Tests
-
 {:.no_toc}
 
 It is possible to use [Fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan) to run your tests as follows:
@@ -280,7 +280,6 @@ You can replace the `bundle exec fastlane scan` command with your custom test co
     
 
 ### Storing Artifacts, Test Results, and Diagnostic Files
-
 {:.no_toc}
 
 CircleCI 2.0 does not automatically collect artifacts in your jobs, so if your {% comment %} TODO: Job {% endcomment %}build is generating files that you would like to access with the CircleCI application later on, you must explicitly collect those files with the `store_artifacts` step.
@@ -302,7 +301,6 @@ To save logs as artifacts, use the `store_artifacts` step as shown in the follow
 Find more details about these steps in the [Artifacts doc]({{ site.baseurl}}/2.0/artifacts/) and the [Test Metadata doc]({{ site.baseurl}}/2.0/collect-test-data/).
 
 ### Deployment Using Workflows
-
 {:.no_toc}
 
 With the availability of Workflows in 2.0, it is best practice to extract all the commands related to the deployment of the app into its own job:
@@ -318,24 +316,29 @@ jobs:
       FL_OUTPUT_DIR: output
 
     steps:
+
       - checkout
 
       # Set up code signing via Fastlane Match.
+
       - run:
           name: Set up code signing
           command: fastlane match development --readonly
 
       # Build the release version of the app.
+
       - run:
           name: Build IPA
           command: bundle exec fastlane gym
 
       # Store the IPA file in the build artifacts
+
       - store_artifacts:
           path: output/MyApp.ipa
           destination: ipa
 
       # Deploy!
+
       - run:
           name: Deploy to App Store
           command: bundle exec fastlane spaceship
