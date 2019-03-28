@@ -246,49 +246,60 @@ CircleCI はスケジュールの正確性については保証していませ�
 
 #### 支払う料金の内訳は？
 {:.no_toc}
-プレミアム機能を利用するアクティブユーザー数分の料金、実行処理に対する料金、またオプションで利用できるプレミアムサポート料金になります。
+プレミアム機能を利用するアクティブユーザー数分の料金、コンピューティングに対する料金、またオプションで利用できるプレミアムサポート料金になります。
 
 - マシンサイズを選べる機能などを利用するには、1 アクティブユーザーあたり $15/月が必要です。 
-- 実行処理に対する毎月の料金は、従量課金制（クレジット）になります。クレジットの月間消費量はマシンのサイズと使用した時間で決まります。
-- Docker レイヤーキャッシュ（DLC）に対する料金は、実行時間の料金同様、使用回数による従量課金制（クレジット）になります。
+- コンピューティングに対する毎月の料金は、従量課金制（クレジット）になります。クレジットの月間消費量はマシンのサイズと使用した時間で決まります。
+- Docker レイヤーキャッシュ（DLC）に対する料金は、コンピューティングに対する料金同様、使用回数による従量課金制（クレジット）になります。
 
-#### クレジットを使い切るとどうなりますか？
+#### What constitutes an *Active User*?
 {:.no_toc}
 
-Performance プランでは、クレジットの残高が 5% になると、10% のクレジットがチャージされます。 例えば、毎月のパッケージサイズが 25,000 クレジットの場合、クレジットの残りが 1,250 になると、 2,500 クレジットが自動的にチャージされます。
+An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
-#### クレジットに有効期限はありますか？
-{:.no_toc}
-**Performance プラン** : クレジットの有効期限は購入から 1 年になります。 ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
+- Commits from users that trigger builds, including PR Merge commits.
+- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
 
-#### 支払い方法は？
-{:.no_toc}
-毎月の料金は CircleCI の設定画面からお支払いいただけます。
+**Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
-#### 支払いのスケジュールは？
+#### What happens when I run out of credits?
 {:.no_toc}
 
-従量課金制（クレジット）プランでは、請求サイクルの初日に、利用するユーザー数分の料金、プレミアムサポート料金、選択したクレジットパッケージ料金が請求されます。 請求サイクルの *月途中* で発生したチャージ分（クレジットの残高が 5% になった際に実行されるオートチャージ分など）は、*チャージ実行時* に請求されます。
+On the Performance plan, when you reach 5% of your remaining credits, you will be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
 
-#### 有料プランの更新日は？
+#### Do credits expire?
+{:.no_toc}
+**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+
+#### How do I pay?
+{:.no_toc}
+You can pay from inside the CircleCI app for monthly pricing.
+
+#### When do I pay?
 {:.no_toc}
 
-更新日は、以下にあげる CircleCI からの請求が発生する日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills *during* the month (such as the auto-refilling on reaching 5% of credits available) will be paid *at the time of the refill*.
 
-- 月間プランの場合、毎月の月額料金の請求日が更新日になります。
-- 年間プランの場合、年に一度の年間料金の請求日が更新日になります。
-- 年間プランを利用中でも、ユーザーの追加やクレジットの消費により未払い残高が発生した場合、その月の最終日が更新日になります。
-- Performance プランでは、クレジットの残高が設定された最低残高を下回った場合、自動的にクレジット購入が実行されます。
+#### What are the other renewal dates?
+{:.no_toc}
+
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
 ## 稼働環境
 
 ### テスト時に IPv6 は利用できますか？
 {:.no_toc}
-IPv6 によるローカル通信のテストでは [machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) が活用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
-machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
+Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。 下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
+You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
    ipv6_tests:
@@ -307,18 +318,18 @@ IPv6 環境のサービスをテストするために、コンテナに IPv6 ア
            sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
+Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
 ### CircleCI 2.0 がサポートしている OS は？
 {:.no_toc}
-- **Linux :** CircleCI はほとんどの Linux アプリケーションのビルドが可能な高い柔軟性をもっています。 Web アプリケーションはもちろん、それ以外のビルドにも利用できます。
+- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android :** 詳細は「[言語別ガイド：Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS :** 「[iOS プロジェクト チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows :** Windows アプリケーションのビルドとテストは現在サポートしていません。
+- **Windows:** We do not yet support building and testing Windows applications.
 
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {:.no_toc}
-サポートしている CPU アーキテクチャは `amd64` のみとなります。
+`amd64` is the only supported CPU architecture.
