@@ -8,9 +8,10 @@ description: "Configuring VM service on Server for `machine` executor and remote
 ---
 This document outlines how to set up VM service for your CircleCI installation, as well as how customize your own VM service images.
 
-* TOC {:toc}
+* TOC 
+{:toc}
 
-## Overview
+## 概要
 
 VM service enables users of CircleCI Server to run jobs using the [Remote Docker Environment](https://circleci.com/docs/2.0/building-docker-images) and the [`machine` executor](https://circleci.com/docs/2.0/executor-types/#using-machine).
 
