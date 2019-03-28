@@ -19,7 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 ```
 
-You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io)—make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
+You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io)—make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. 例えば下記のようにします。
 
     - image: quay.io/project/image:tag
       auth:
@@ -39,6 +39,7 @@ Alternatively, you can utilize the `machine` executor to achieve the same thing:
           - checkout
     
           # start proprietary DB using private Docker image
+    
           - run: |
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker run -d --name db company/proprietary-db:1.2.3
@@ -95,6 +96,7 @@ Options 2 & 3 are virtually the same except that 3 lets you specify whatever var
       version: 2
       main:
         jobs:
+    
           - build:
               filters:
                 tags:
@@ -109,6 +111,6 @@ Options 2 & 3 are virtually the same except that 3 lets you specify whatever var
                   only: /^\d{4}\.\d+$/
     
 
-## See Also
+## 関連情報
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
