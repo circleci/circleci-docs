@@ -8,11 +8,12 @@ description: "CircleCI security features."
 ---
 This document outlines security features built into CircleCI and related integrations.
 
-- TOC {:toc}
+- TOC 
+{:toc}
 
-## Overview
+## 概要
 
-Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to [&#x73;&#101;&#99;&#x75;&#114;&#105;&#x74;&#121;&#x40;&#x63;&#105;&#x72;&#x63;&#108;&#x65;c&#105;&#x2e;&#99;&#111;&#x6d;](&#109;&#x61;i&#108;&#x74;&#111;&#58;&#x73;&#101;&#99;&#x75;&#114;&#105;&#x74;&#121;&#x40;&#x63;&#105;&#x72;&#x63;&#108;&#x65;c&#105;&#x2e;&#99;&#111;&#x6d;) with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
+Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
 ## Encryption
 
@@ -51,7 +52,6 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 ### Audit Log Events
-
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger --> Following are the system events that are logged. See 
@@ -74,7 +74,6 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 - workflow.job.start
 
 ### Audit Log Fields
-
 {:.no_toc}
 
 - **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
@@ -89,8 +88,7 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 - **success:** A flag to indicate if the action was successful.
 - **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
