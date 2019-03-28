@@ -9,7 +9,8 @@ order: 5
 ---
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 ## Quickstart: Demo JavaScript Node.js Reference Project
 
@@ -20,7 +21,7 @@ We maintain a reference JavaScript Node.js project to show how to build an Expre
 
 In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with Node projects.
 
-## Pre-Built CircleCI Docker Images
+## CircleCI のビルド済み Docker イメージ
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
 
@@ -39,13 +40,13 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 Following is the `.circleci/config.yml` file in the demo project with comments.
 
 {% raw %}
-
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
+
       - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
       - image: mongo:3.4.4 # and this image as the secondary service container
     steps: # a collection of executable commands
@@ -81,8 +82,8 @@ jobs: # a collection of steps
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
-## {% endraw %}
-
+##
+{% endraw %}
 ## Config Walkthrough
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
@@ -119,9 +120,9 @@ Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cach
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
 
 {% raw %}
-
 ```yaml
     steps:
+
       - checkout
       - run:
           name: update-npm
@@ -136,7 +137,6 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           paths:
             - ./node_modules
 ```
-
 {% endraw %}
 
 Now that dependencies are installed we can run the test suite and upload the test results as an artifact (made available on the CircleCI web app).
@@ -160,8 +160,7 @@ Now that dependencies are installed we can run the test suite and upload the tes
 
 Success! You just set up CircleCI 2.0 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
