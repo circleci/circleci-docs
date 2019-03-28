@@ -19,9 +19,9 @@ If you're using your own Docker image base or the `macos` or `machine` executors
 Yarn packages can be cached to improve CI build times. Here's an example:
 
 {% raw %}
-
 ```yaml
 #...
+
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -36,9 +36,8 @@ Yarn packages can be cached to improve CI build times. Here's an example:
             - ~/.cache/yarn
 #...
 ```
-
 {% endraw %}
 
-## See Also
+## 関連情報
 
-[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
