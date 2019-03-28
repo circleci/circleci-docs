@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Workflows Waiting for Status in GitHub"
-short-title: "Workflows Waiting for Status in GitHub"
+title: "Workflows の処理中に GitHub で待機状態のままになる"
+short-title: "Workflows の処理中に GitHub で待機状態のままになる"
 description: "Fixing Workflows Waiting for Status in GitHub"
 categories:
   - troubleshooting
