@@ -36,7 +36,8 @@ Both Travis and CircleCI make use of a *configuration file* to determine what ea
 | deploy:           | [deploy:](https://circleci.com/docs/2.0/configuration-reference/#deploy)                                                                                                    | Use the deploy: step to deploy build artifacts                                                                                     |
 | env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment)                                                                                          | Use the environment: element to specify environment variables                                                                      |
 | matrix:           | [workflows:](https://circleci.com/docs/2.0/configuration-reference/#workflows)                                                                                              | Workflows are used on CircleCI to orchestrate multiple jobs                                                                        |
-| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                                                                                                | Use the requires: element to explicitly require any job dependencies and control parallel builds. |{: class="table table-striped"}
+| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                                                                                                | Use the requires: element to explicitly require any job dependencies and control parallel builds. |
+{: class="table table-striped"}
 
 |
 
