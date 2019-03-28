@@ -9,28 +9,27 @@ order: 1
 ---
 Get started with speeding up your job runs, workflows, and image builds with the following example snippets.
 
-## Caching Dependencies
+## 依存関係のキャッシュ     
 
 {% raw %}
 
-        steps: # a collection of executable commands
+steps: # a collection of executable commands
           - checkout # special step to check out source code to the working directory
           - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run
               key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-          - run: # install and activate virtual environment with pip
+      - run: # install and activate virtual environment with pip
               command: |
                 python3 -m venv venv
                 . venv/bin/activate
                 pip install -r requirements.txt
           - save_cache: # special step to save dependency cache
               key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-              paths:
-                - "venv"
-    
+          paths:
+                - "venv"            
 
 {% endraw %}
 
-## Parallelism
+## 並列処理
 
     # ~/.circleci/config.yml
     version: 2
@@ -59,6 +58,6 @@ DLC is a premium feature and you must open a support ticket to enable it on your
           - run: docker build .
     
 
-## See Also
+## 関連情報
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
