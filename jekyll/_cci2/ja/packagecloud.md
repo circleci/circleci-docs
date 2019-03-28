@@ -7,7 +7,8 @@ description: How to publish packages to packagecloud using CircleCI
 ---
 [Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
 
-* TOC {:toc}
+* 目次
+{:toc}
 
 ## Configure Environment Variables
 
@@ -221,6 +222,6 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 
 {:.no_toc}
 
-## See Also
+## 関連情報
 
 [Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
