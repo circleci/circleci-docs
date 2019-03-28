@@ -28,7 +28,7 @@ The error is caused by a `userns` remapping failure. CircleCI runs Docker contai
 
 When Docker starts a container, Docker pulls an image and extracts layers from that image. If a layer contains files with UID/GID outside of the accepted range, Docker cannot successfully remap and fails to start the container.
 
-## Solution
+## ソリューション
 
 To fix this error, you must update the files' UID/GID and re-create the image.
 
