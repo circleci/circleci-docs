@@ -9,10 +9,10 @@ order: 4
 ---
 This guide will help you get started with a Java application on CircleCI.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
-## Overview
-
+## 概要
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -27,7 +27,6 @@ We're going to make a few assumptions here:
 ## Sample Configuration
 
 {% raw %}
-
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
@@ -36,6 +35,7 @@ jobs: # a collection of steps
     working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
     docker: # run the steps with Docker
+
       - image: circleci/openjdk:8-jdk-browsers # ...with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
@@ -45,14 +45,14 @@ jobs: # a collection of steps
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-
+      
       - run: mvn dependency:go-offline # gets the project dependencies
 
       - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-
+      
       - run: mvn package # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
@@ -64,7 +64,6 @@ jobs: # a collection of steps
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
-
 {% endraw %}
 
 ## Get the Code
@@ -124,7 +123,6 @@ Next `store_test_results` uploads the test metadata from the `target/surefire-re
 Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
-
 ```yaml
 ...
     steps:
@@ -133,14 +131,14 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
 
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-
+      
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-
+      
       - run: mvn package
 
       - store_test_results:
@@ -149,13 +147,11 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
       - store_artifacts:
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
 ```
-
 {% endraw %}
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
 
-## See Also
-
+## 関連情報
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
