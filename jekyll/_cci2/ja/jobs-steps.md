@@ -9,7 +9,8 @@ order: 2
 ---
 The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) keys for Orbs.
 
-- TOC {:toc}
+- 目次
+{:toc}
 
 ## Orbs Overview
 
@@ -35,22 +36,54 @@ Steps are a collection of executable commands which are run during a job, the `c
 
 ## Sample Configuration with Imported Orb
 
-```yaml version: 2.1
+```yaml
+ version: 2.1
 
-orbs: aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
+ orbs:
+   aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
 
-workflows: build-test-deploy: jobs: - deploy2s3: steps: - aws-s3/sync: #invokes the sync command declared in the s3 orb from: . to: "s3://mybucket_uri" overwrite: true
+ workflows:
+   build-test-deploy:
+     jobs:
 
-    <br />## Sample Configuration with Parallel Jobs
+       - deploy2s3:
+         steps:
+           - aws-s3/sync: #invokes the sync command declared in the s3 orb
+               from: .
+              to: "s3://mybucket_uri"
+              overwrite: true
+```
+
+## Sample Configuration with Parallel Jobs
+
+Following is a sample 2.0 `.circleci/config.yml` file.
+
+{% raw %}
+version: 2
+    jobs:
+      build:
+        docker:
     
-    Following is a sample 2.0 `.circleci/config.yml` file.
-    
-    {% raw %}
-    
+          - image: circleci/<language>:<version TAG>
+        steps:
+          - checkout
+          - run: <command>
+      test:
+        docker:
+          - image: circleci/<language>:<version TAG>
+        steps:
+          - checkout
+          - run: <command>
+    workflows:
+      version: 2
+      build_and_test:
+        jobs:
+          - build
+          - test
+{% endraw %}
+This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
-version: 2 jobs: build: docker: - image: circleci/<language>:<version tag> steps: - checkout - run: <command> test: docker: - image: circleci/<language>:<version tag> steps: - checkout - run: <command> workflows: version: 2 build_and_test: jobs: - build - test ``` {% endraw %} This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
-
-## See Also
+## 関連情報
 
 - [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
 - [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
