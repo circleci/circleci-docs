@@ -507,6 +507,46 @@ If you would like to simplify your configuration workflows using a CircleCI orb 
 
 For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
+## Hapistrano
+
+[Hapistrano](https://github.com/stackbuilders/hapistrano) is a deployment library based on Haskell similar to Ruby's Capistrano. Hapistrano (like Capistrano for Ruby) deploys applications to a new directory marked with a timestamp on the remote host. It creates this new directory quickly by placing a git repository for caching purposes on the remote server. Hapistrano uses a yml deploy file to perform tasks on the remote servers.
+
+```yaml
+
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: stackbuilders/hapistrano:v0.3.9.2
+
+    steps:
+      - checkout
+      - deploy:
+          name: Deploy
+          command:
+            hap deploy -c deploy/deploy-file.yaml
+
+```
+Here's an example of a deploy file.
+
+```yaml
+---
+deploy_path: /path/to/deploy
+host: user@remote.server
+repo: git@github.com:project/repository.git
+revision: origin/master
+#Number of releases to keep in the remote server
+keep_releases: 3
+#Set of commands that your application needs to build.
+build_script:
+  - command 1
+  - command 2
+  - ...
+  - command n
+#Command that your application need to run.
+restart_command:
+```
+
 ## Heroku
 
 [Heroku](https://www.heroku.com/) is a popular platform for hosting applications in the cloud. To configure CircleCI
