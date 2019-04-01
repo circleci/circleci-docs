@@ -41,7 +41,7 @@ Steps are actions that need to be taken to perform your job. Steps are usually a
 
 An image is a packaged system that has the instructions for creating a running container. The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
 
-```yaml version 2 jobs: build1: # job name docker: # Specifies the primary container image, # see circleci.com/docs/2.0/circleci-images/ for # the list of pre-built CircleCI images on dockerhub. - image: buildpack-deps:trusty
+```yaml version: 2 jobs: build1: # job name docker: # Specifies the primary container image, # see circleci.com/docs/2.0/circleci-images/ for # the list of pre-built CircleCI images on dockerhub. - image: buildpack-deps:trusty
 
        - image: postgres:9.4.1 # Specifies the database image
         # for the secondary or service container run in a common
