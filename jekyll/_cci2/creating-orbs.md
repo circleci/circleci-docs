@@ -24,6 +24,8 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 **Note:** Namespaces cannot be removed or renamed once you have claimed a namespace.
 
+**Note:** Only organization owners can create namespaces.
+
 2. Create the orb inside your namespace. For example:
 `circleci orb create sandbox/hello-world`
 
@@ -335,7 +337,7 @@ Before publishing an orb, be sure to first opt-in to the new Code Sharing Terms 
 
 Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called `hannah/rails` because they are in separate namespaces.
 
-Namespaces are owned by organizations. Only organization owners can create namespaces.
+Namespaces are owned by organizations.
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace, please contact your account team at CircleCI.
 
