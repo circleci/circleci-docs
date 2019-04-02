@@ -10,7 +10,7 @@ description: "Amazon Webサービス(AWS)に手動でCircleCIをインストー�
 ---
 このドキュメントでは、Amazon Webサービス(AWS)に手動でCircleCI 2.0をインストールする詳細手順について説明します。このドキュメントには以下のセクションがあります。
 
-- 目次
+- TOC
 {:toc}
 
 CircleCI Enterpriseがインストールされていれば、現在のインストールでCircleCI 2.0の機能にアクセスでき、現在の契約およびサポートレベル内での制限はありません。 アップグレードの方法については、CircleCIアカウント担当者にお問い合わせください。
@@ -18,7 +18,7 @@ CircleCI Enterpriseがインストールされていれば、現在のインス�
 - 注: - CircleCI 2.0はAWS上でのみ利用できます。
 - チームで新しいCircleCI 2.0の`.circleci/config.yml`ファイルをリポジトリに作成し、新しい2.0プロジェクトを段階的に追加しながら、それと平行して`circle.yml`構成ファイルを使用する1.0プロジェクトを引き続きビルドすることもできます。 
 
-## 前準備
+## Prerequisites
 
 インストール手順の開始前に、次の情報が利用可能なことを確認します。
 
@@ -155,7 +155,7 @@ CircleCIコンテナのデフォルトサイズである2CPU/4GB RAMおよび2CP
 2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
 3. [Hello World]({{site.baseurl}}/2.0/hello-world/)ドキュメントを使用して、プロジェクトを追加します。
 
-## トラブルシューティング
+## Troubleshooting
 
 CircleCIのサイドバー・ナビゲーションにあるレンチのアイコンをクリックし、フリートの状態をチェックします。 - リストにインスタンスが表示されない場合、最初のBuilderがまだ開始中です。 ビルドコンテナの開始中、最初のビルドがキューに置かれたままになることがあります。 - リストにBuilderのインスタンスが表示されているが、状態が開始中の場合、ビルドコンテナのイメージをダウンロードし、最初のビルドコンテナを開始する作業がまだ終了していません。
 
