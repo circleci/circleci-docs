@@ -9,7 +9,7 @@ order: 100
 ---
 This document describes how to skip or cancel builds in the following sections.
 
-- 目次
+- TOC
 {:toc}
 
 ## Skipping a Build
