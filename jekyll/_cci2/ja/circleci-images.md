@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "CircleCI のビルド済み Docker イメージ"
-short-title: "CircleCI のビルド済み Docker イメージ"
+short-title: "Pre-Built CircleCI Docker Images"
 description: "CircleCI 提供の Docker イメージ一覧"
 categories:
   - containerization
@@ -9,10 +9,10 @@ order: 20
 ---
 このページでは、CircleCI が提供しているビルド済みイメージの詳細を解説するとともに、言語ごと、サービス (データベース) ごと、タグごとに探せる Docker イメージを紹介しています。
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 CircleCI ではすぐに使える Docker イメージを多数提供しています。 These images are typically extensions of official Docker images and include tools especially useful for CI/CD. [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/) には、ここで紹介しているものを含む全ビルド済みイメージがあります。 GitHub の `circleci-images` リポジトリには[各 Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。 これら [Docker イメージの作成に用いる Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) については `circleci-dockerfiles` リポジトリでチェック可能です。
@@ -229,7 +229,7 @@ Note: Any variants available for this image can be used by appending the variant
 
 {% endfor %}
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
