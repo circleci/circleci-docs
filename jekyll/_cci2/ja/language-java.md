@@ -9,10 +9,10 @@ order: 4
 ---
 This guide will help you get started with a Java application on CircleCI.
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -151,7 +151,7 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/arti
 
 Nice! You just set up CircleCI for a Java app using Maven and Spring.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
