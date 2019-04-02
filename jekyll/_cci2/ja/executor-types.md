@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Executor タイプの選び方"
-short-title: "Executor タイプの選び方"
+short-title: "Choosing an Executor Type"
 description: "Executor タイプである docker、machine などについての概要"
 categories:
   - containerization
@@ -11,9 +11,9 @@ order: 10
 
 このページでは、 下記の内容に沿って、`docker`、`machine`、`macos` 環境について解説しています。
 
-- 目次 {:toc}
+- TOC {:toc}
 
-## 概要
+## Overview
 
 {:.no_toc}
 
@@ -97,14 +97,14 @@ The `image` key accepts one of three image types, refer to the [Configuration Re
 
 All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
 
-下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **注 :** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
+下記は、デフォルトのマシンイメージを使用し、ジョブや Workflow で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) を有効にした例です。 **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
 ```yaml
 version: 2
 jobs:
   build:
     machine:
-      docker_layer_caching: true    # デフォルト：false
+      docker_layer_caching: true    # default - false
 ```
 
 ## macOS を使用する
@@ -170,6 +170,6 @@ Docker にはもともとイメージのキャッシュ機能があり、\[リ�
 
 Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 そのため、ネットワークへの低レベルアクセスや外部ストレージのマウントといった機能が必要な場合は、`docker` ではなく `machine` を使うことも検討してください。
 
-## 関連情報
+## See Also
 
-[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
