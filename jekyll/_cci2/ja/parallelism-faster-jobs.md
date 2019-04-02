@@ -9,7 +9,7 @@ order: 60
 ---
 If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can run tests in parallel by spreading them across multiple machines. This requires specifying a parallelism level. You can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
 
-- 目次
+- TOC
 {:toc}
 
 ## Specifying a Job's Parallelism Level
@@ -154,7 +154,7 @@ The TESTFILES var will have a different value in each container, based on $CIRCL
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-## 関連情報
+## See Also
 
 [Using Containers]({{ site.baseurl }}/2.0/containers/)
 
