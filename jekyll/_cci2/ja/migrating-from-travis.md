@@ -14,7 +14,7 @@ The example build configurations referenced throughout this article are based of
 - Enable the safe use of environment variables.
 - On each build, upload a `test-results.xml` file to be made accessible online.
 
-## 前準備
+## Prerequisites
 
 This document assumes that you have an account with CircleCI that is linked to a repository. If you don't, consider going over our [getting started guide]({{ site.baseurl }}/2.0/getting-started/).
 
@@ -22,7 +22,7 @@ This document assumes that you have an account with CircleCI that is linked to a
 
 Both Travis and CircleCI make use of a *configuration file* to determine what each Continuous Integration provider does respectively. With Travis, your configuration will live in a `.travis.yml` file in the root of your repository. With CircleCI, your configuration will live in `.circleci/config.yml` at the root of your repository.
 
-| Travis CI         | Circle CI                                                                                                                                                                   | お問い合わせ内容                                                                                                                           |
+| Travis CI         | Circle CI                                                                                                                                                                   | Description                                                                                                                        |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | language:         | [docker.image](https://circleci.com/docs/2.0/configuration-reference/#docker)                                                                                               | Use the Docker executor to specify an appropriate Docker image for the target language                                             |
 | dist:             | [docker, machine, macos](https://circleci.com/docs/2.0/executor-types/)                                                                                                     | If your build must run in a fully virtualized environment, or on a macOS builder                                                   |
@@ -101,7 +101,7 @@ jobs:
 
 In the config above, no *language* is specifically required, and the user is able to specify any number of `steps` that can be run, with no restrictions on step order. By leveraging Docker, specific Node.js and MongoDB versions are made available in each `command` that gets run.
 
-### 依存関係のキャッシュ
+### Caching Dependencies
 
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml` checks for a dependency cache based specifically on a checksum of the `package.json` file. You can set your cache based on any key (not just `package.json`) as well as set a group of cache paths to defer to in the declared order. Refer to the [caching dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build creates and restores caches.
 
