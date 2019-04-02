@@ -9,10 +9,10 @@ order: 8
 ---
 This guide will help you get started with a Ruby on Rails application on CircleCI.
 
-* 目次
+* TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -28,7 +28,7 @@ The application uses the latest stable Rails version 5.1, `rspec-rails`, and [Rs
 
 This application build also uses one of the pre-built [CircleCI Docker Images](http://circleci.com/docs/2.0/circleci-images).
 
-## CircleCI のビルド済み Docker イメージ
+## Pre-Built CircleCI Docker Images
 
 Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from Docker Hub: <https://hub.docker.com/r/circleci/ruby/>.
 
@@ -310,7 +310,7 @@ The `--profile` option reports the slowest examples of each run.
 
 For more on `circleci tests glob` and `circleci tests split` commands, please refer to our documentation on [Parallelism with CircleCI CLI](https://circleci.com/docs/2.0/parallelism-faster-jobs).
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
