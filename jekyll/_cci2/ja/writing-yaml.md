@@ -9,9 +9,9 @@ order: 20
 ---
 This document describes the most important features of YAML for use in CircleCI configuration.
 
-- 目次 {:toc}
+- TOC {:toc}
 
-## 概要
+## Overview
 
 {:.no_toc}
 
@@ -143,7 +143,7 @@ harry_data:
 
 For a more complex example, see [this gist](https://gist.github.com/bowsersenior/979804).
 
-## 関連情報
+## See Also
 
 While YAML has several other features, the examples above should be enough to get you started with YAML and keep your CircleCI configuration concise. If you are hungry for more knowledge, here are a few ideas.
 
@@ -154,6 +154,6 @@ CircleCI has also developed "orbs," which enable you to use pre-conifgured and t
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of orbs.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
-- 新たに Orb を作成する詳しい手順は「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」をご覧ください。
-- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - For a more exhaustive overview of YAML, Learn X in Y Minutes has [a great summary](https://learnxinyminutes.com/docs/yaml/).
