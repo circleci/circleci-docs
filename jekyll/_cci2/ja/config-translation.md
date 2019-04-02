@@ -14,7 +14,7 @@ The generated `config-translation` file includes comments to help you understand
 
 **Warning: Do not use the generated configuration file in production without testing.** There are structures in 1.0 that cannot be reconciled in the 2.0 configuration, so it is important to put the generated configuration file on a branch, test it, and modify it before going to production. Results may vary significantly from your 1.0 results with the draft configuration generated with `config-translation`.
 
-## 概要
+## Overview
 
 The `config-translation` endpoint will help you generate a draft 2.0 configuration file from your CircleCI 1.0 project. Major differences exist between CircleCI 1.0 and 2.0 as follows:
 
@@ -42,6 +42,6 @@ The `config-translator` endpoint does **not** currently support translation of t
     
     `master`.
 
-## 関連情報
+## See Also
 
 [Tips For Migrating from 1.0 to 2.0]({{site.baseurl}}/2.0/migration/)
