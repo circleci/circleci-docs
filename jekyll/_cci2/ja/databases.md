@@ -9,10 +9,10 @@ order: 35
 ---
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0.
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/r/circleci/).
@@ -129,7 +129,7 @@ It is possible to apply the same principle for the following databases:
 
 `dockerize -wait tcp://localhost:3306 -timeout 1m`
 
-- Redis でも同様です。
+- Redis:
 
 `dockerize -wait tcp://localhost:6379 -timeout 1m`
 
@@ -141,7 +141,7 @@ Redis also has a CLI available:
 
 `dockerize -wait http://localhost:80 -timeout 1m`
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/2.0/postgres-config/) document for additional configuration file examples.
