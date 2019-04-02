@@ -8,7 +8,7 @@ description: "High-level overview of the CircleCI installation process."
 ---
 This article provides System Administrators with an overview of CircleCI 2.0 installation, features, environments, and architecture in the following sections:
 
-* 目次
+* TOC
 {:toc}
 
 CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. CircleCI is installable inside your private cloud or data center and is free to try for a limited time. Contact us to request a [trial license](https://circleci.com/enterprise-trial-install).
@@ -33,7 +33,7 @@ There are three basic ways to install CircleCI in your environment (AWS is curre
 
 By default, CircleCI 2.0 Builder instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
-## 稼働環境
+## Architecture
 
 CircleCI consists of two primary components: Services and Nomad Clients. Services typically run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute your jobs and communicate back to the Services. Both components must access GitHub or your hosted instance of GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
