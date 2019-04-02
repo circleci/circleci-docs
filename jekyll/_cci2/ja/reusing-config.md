@@ -9,7 +9,7 @@ order: 1
 ---
 This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
-* 目次
+* TOC
 {:toc}
 
 ## Getting Started with Config Reuse
@@ -157,7 +157,7 @@ jobs:
 
 ## Authoring Reusable Executors
 
-Executors はジョブ内の steps を実行するための環境を定義します。 When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
 Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -182,7 +182,7 @@ jobs:
   my-job:
     executor: my-executor
     steps:
-      - run: echo Executor の“外”で定義しました
+      - run: echo outside the executor
 ```
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
@@ -534,7 +534,7 @@ workflows:
 ```
 {% endraw %}
 
-#### 追加手順
+#### Steps
 {:.no_toc}
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
@@ -893,7 +893,7 @@ For example, an orb author could define conditional steps in the `steps` key of 
 
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 
-### 例
+### Example
 {:.no_toc}
 
 ```yaml
