@@ -9,13 +9,13 @@ order: 20
 ---
 Snap パッケージを使用すると、ソフトウェアを複数の Linux ディストリビューション (distros) 上へ迅速にパブリッシュできます。 このドキュメントでは、CircleCI を使用して Snap パッケージをビルドし、Snap Store にパブリッシュする方法を紹介します。
 
-## 概要
+## Overview
 
 .snap ファイルを 1 回作成すれば、Ubuntu、Debian、Fedora、Arch など、`snapd` をサポートする、どの Linux distros にもインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
 CircleCI で Snap をビルドする手順は、ローカルマシンとほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/docs/2.0/configuration-reference/)を使用します。 このドキュメントでは、Snap パッケージをビルドし、CircleCI を使用して [Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 以下のセクションでは、サンプルの `.circleci/config.yml` ファイルのスニペットを使用します。完全なバージョンは、[このドキュメントの末尾](#full-example-config)にあります。
 
-## 前準備
+## Prerequisites
 
 ローカル、企業サーバー CI など、どの環境でも、Snap のビルドには Snapcraft 構成ファイルが必要です。 このファイルは通常、`snap/snapcraft.yml` にあります。 このドキュメントでは、このファイルが既に存在し、ローカルマシンで Snap を正常にビルドできることを前提としています。 そうでない場合は、Snapcraft の[最初の Snap のビルド](https://docs.snapcraft.io/build-snaps/your-first-snap)についてのドキュメントを読み、ローカルマシンで Snap をビルドできるようにしてください。
 
