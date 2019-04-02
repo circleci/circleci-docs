@@ -5,7 +5,7 @@ description: "How to avoid and debug Java memory errors on CircleCI."
 ---
 How to avoid and debug Java memory errors on CircleCI.
 
-## 概要
+## Overview
 
 The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications. Without any memory limits, the JVM pre-allocates a significant amount of memory. This pre-allocation can produce Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail.
 
@@ -71,6 +71,6 @@ Ensure that your `-Xmxn` maximum size is large enough for your applications to c
 
 If you are still consistently hitting memory limits, consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
-## 関連情報
+## See Also
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
