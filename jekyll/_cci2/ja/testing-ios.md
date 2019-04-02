@@ -9,10 +9,10 @@ order: 30
 ---
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
@@ -58,7 +58,7 @@ After enabling macOS builds for your project, share the scheme that is going to 
 
 Simple projects should run with minimal configuration. You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
-### ビルド済みイメージの活用方法
+### Best Practices
 {:.no_toc}
 
 In addition to the basic setup steps, it is best practice to include downloading CocoaPods specs from the CircleCI mirror (up to 70% faster) and linting the Swift code together with the `build-and-test` job:
@@ -552,7 +552,7 @@ workflows:
 
 React Native projects can be built on CircleCI 2.0 using `macos` and `docker` executor types. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI 2.0.
