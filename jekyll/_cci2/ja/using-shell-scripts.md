@@ -9,9 +9,9 @@ order: 10
 ---
 This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
-+ 目次 {:toc}
++ TOC {:toc}
 
-## 概要
+## Overview
 
 Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
 
@@ -93,6 +93,6 @@ set -o errexit
 set -o pipefail
 ```
 
-## 関連情報
+## See Also
 
 For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
