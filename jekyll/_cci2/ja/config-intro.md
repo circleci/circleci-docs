@@ -5,7 +5,7 @@ description: "Landing page for CircleCI 2.0 Config"
 ---
 This guide focuses on getting you started with the core of the CircleCI experience - `config.yml` in the following simple steps:
 
-- 目次
+- TOC
 {:toc}
 
 ## Getting Started with CircleCI Config
@@ -216,7 +216,7 @@ We now know how to create a workflow including a manual gate that you can use to
 
 The examples above were designed to provide a quick starter to the areas of functionality available through CircleCI config. There remains a lot more. Take a look at the rest of the documentation. You will find that scheduled jobs, workspaces, artifacts, and more are all simple variations on the concepts you’ve learned here. Now go forth and automate your CI/CD world!
 
-## 関連情報
+## See Also
 {:.no_toc}
 
-[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
