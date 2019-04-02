@@ -11,7 +11,7 @@ This document outlines how to set up VM service for your CircleCI installation, 
 * TOC 
 {:toc}
 
-## 概要
+## Overview
 
 VM service enables users of CircleCI Server to run jobs using the [Remote Docker Environment](https://circleci.com/docs/2.0/building-docker-images) and the [`machine` executor](https://circleci.com/docs/2.0/executor-types/#using-machine).
 
