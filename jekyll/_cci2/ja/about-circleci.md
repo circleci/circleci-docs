@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "概要"
-short-title: "概要"
+title: "Overview"
+short-title: "Overview"
 description: "CircleCI 2.0 入門"
 categories:
   - getting-started
@@ -52,6 +52,6 @@ CircleCI では以下の無料トライアルを用意しています。
 
 パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/ja/2.0/oss/)をご覧ください。
 
-## 関連情報
+## See Also
 
 CircleCI は Linux、Android、macOS 上で動くアプリケーションをサポートしています。 サンプルや手順に関する詳細は「[サポートしている言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
