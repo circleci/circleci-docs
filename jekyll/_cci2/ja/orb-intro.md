@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Orbs とは"
-short-title: "Orbs とは"
+short-title: "Orbs Introduction"
 description: "CircleCI Orbs 入門"
 categories:
   - getting-started
@@ -82,7 +82,7 @@ orbs:
 
 **注 :** あなたの組織でサードパーティ製 Orbs を利用するにあたっては、あらかじめ CircleCI の Settings ＞ Security ページにアクセスし、[Orb Security Settings] で [Yes] を選んでおく必要があります。
 
-## 関連情報
+## See Also
 
 - 既存の Orbs の使い方については「[Orbs を使用する]({{site.baseurl}}/ja/2.0/using-orbs/)」をご覧ください。
 - 新たに Orb を作成する詳しい手順は「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」をご覧ください。
