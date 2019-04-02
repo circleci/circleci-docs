@@ -8,10 +8,10 @@ description: "単一のVM に CircleCI をインストールする方法"
 ---
 CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the CircleCI platform on a single virtual machine. This is intended as a simple mechanism for getting started with a small trial in any environment:
 
-- 目次
+- TOC
 {:toc}
 
-## 前準備
+## Prerequisites
 
 The following requirements must be met for a successful trial installation:
 
