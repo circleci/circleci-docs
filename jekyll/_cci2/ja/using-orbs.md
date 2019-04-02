@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Orbs を使う"
-short-title: "Orbs を使う"
+short-title: "Using Orbs"
 description: "CircleCI Orbs 入門"
 categories:
   - getting-started
@@ -38,7 +38,7 @@ Orbs は下記の要素で構成されています。
 - ジョブ
 - Executors 
 
-### コマンド
+### Commands
 {:.no_toc}
 
 steps の再利用を容易にする仕組みがコマンドです。ジョブのなかでパラメーター付きで呼び出すことができます。 下記の例のように `sayhello` というコマンドを呼び出すとき、`to` で指定したパラメーターを渡すことができます。
@@ -54,7 +54,7 @@ jobs:
           to: "Lev"
 ```
 
-### ジョブ
+### Jobs
 {:.no_toc}
 
 ジョブは 2 つのパートからなります。steps の定義と、それらを処理する実行環境の定義です。 ジョブはビルド設定もしくは orb の中で定義され、それぞれの `jobs` キーの直下、もしくは外部にある orb の中でジョブ名を定義できます。
@@ -126,7 +126,7 @@ Before using orbs, you may find it helpful to understand the various design deci
 - レジストリは（1 インストールにつき）1 つ限り - circleci.com も含め、CircleCI のインストールごとに所有できる Orbs のレジストリは 1 つのみとなる。
 - Org 管理者がリリース版の Orbs をパブリッシュし、 管理者ではないメンバーが開発版の Orbs をパブリッシュする - 名前空間は Org が管理するものとし、 Org の管理者だけがリリース版の Orb をパブリッシュ・運用できる。 開発版の Orbs のパブリッシュは組織内の全メンバーができるものとする。
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 - Orbs の具体的な使用方法については「[Orbs とは]({{site.baseurl}}/ja/2.0/orb-intro/)」をご覧ください。
