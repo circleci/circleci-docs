@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Docker コマンドの実行手順"
-short-title: "Docker コマンドの実行手順"
+short-title: "Running Docker Commands"
 description: "Docker イメージのビルド方法とリモート環境へのアクセス方法"
 categories:
   - configuring-jobs
@@ -9,10 +9,10 @@ order: 55
 ---
 ここでは、デプロイや詳細テストを行う際の Docker イメージのビルド方法と、リモートの Docker コンテナ内のサービスを実行する方法について解説しています。
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 
 デプロイ用の Docker イメージをビルドするには、セキュアなビルドを実現するため、ビルドごとに異なる環境を作成する `setup_remote_docker` という特別なキーを使います。 これは完全に隔離された、Docker コマンドの実行に特化したリモート環境となっています。 ジョブの中で `docker` もしくは `docker-compose` コマンドを使う時は、`.circleci/config.yml` 内に`setup_remote_docker` ステップを挿入します。
 
@@ -37,7 +37,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-### 例
+### Example
 {:.no_toc}
 
 `machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
@@ -73,7 +73,7 @@ jobs:
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+      # ... steps for building/testing app ...
 
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
@@ -253,7 +253,7 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 これらのサンプルコードは ryansch 氏より提供していただきました。
 
-## 関連情報
+## See Also
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
