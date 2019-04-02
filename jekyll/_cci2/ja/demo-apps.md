@@ -26,7 +26,7 @@ Language Guide | Framework | GitHub Repo Name \---\---\---|\---\---\-----|\---\-
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
 
-## 関連情報
+## See Also
 
 Refer to the [Getting Started Introduction]({{ site.baseurl }}/2.0/getting-started/) for the steps to run your first build.
 
