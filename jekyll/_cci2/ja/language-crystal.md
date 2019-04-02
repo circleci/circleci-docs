@@ -11,7 +11,7 @@ order: 9
 
 This guide will help you get started with a minimal Crystal application on CircleCI.
 
-## 概要
+## Overview
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
