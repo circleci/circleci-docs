@@ -7,7 +7,7 @@ categories:
   - troubleshooting
 order: 10
 ---
-## 概要
+## Overview
 
 The CircleCI CLI is a command line interface that leverages many of CircleCI's advanced and powerful tools from the comfort of your terminal. Some of the things you can do with the CircleCI CLI include:
 
@@ -18,7 +18,7 @@ The CircleCI CLI is a command line interface that leverages many of CircleCI's a
 
 This document will cover the installation and usage of the CLI tool. **Note:** the new CLI is currently not available on server installations of CircleCI. The legacy CLI does work in Server and can be installed. Read more below:
 
-- 目次
+- TOC
 {:toc}
 
 ## Installation
@@ -248,12 +248,12 @@ workflows:
 
 ## Run A Job In A Container On Your Machine
 
-### 概要
+### Overview
 {:.no_toc}
 
 The CLI enables you to run jobs in your config via Docker. This can be useful to run tests before pushing config changes or debugging your build process without impacting your build queue.
 
-### 前準備
+### Prerequisites
 {:.no_toc}
 
 You will need to have [Docker](https://www.docker.com/products/docker-desktop) installed on your system and have installed the most recent version of the CLI tool. You will also need to have a project with a valid `.circleci/config.yml` file in it.
