@@ -9,11 +9,11 @@ hide: false
 ---
 This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
-- 目次
+- TOC
 {:toc}
 
 
-## 制限について
+## Limitations
 
 This method of installation has the following limitations:
 
@@ -31,7 +31,7 @@ CircleCI 2.0 provides new infrastructure that includes the following improvement
 
 By default, CircleCI 2.0's Nomad Client instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
 
-## 稼働環境
+## Architecture
 
 A CircleCI static installation consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute jobs and communicate back to the Services machine. Both components must access an instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
 
@@ -81,7 +81,7 @@ CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, 
 
 The following sections describe the steps for installation of the Services VM and the Nomad cluster.
 
-### 前準備
+### Prerequisites
 
 Have the following available before beginning the installation procedure:
 
@@ -100,7 +100,7 @@ Have the following available before beginning the installation procedure:
 
 4. Go to the public IP of the host on port 8800 using HTTPS.
 
-5. ライセンスを入力します。
+5. Enter your license.
 
 6. Complete the Storage section. If you are not using a cloud service, then you will pick `None` (more information below).
 
@@ -122,7 +122,7 @@ Have the following available before beginning the installation procedure:
 
 The `None` storage driver saves all of your CircleCI data locally. This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. It is best practice to mount an external volume and create a symbolic link between the two when using this storage option. **Note:** Data may only be transferred as quickly as the external volume will allow, so SSDs are best practice.
 
-### トラブルシューティング
+### Troubleshooting
 
 This section includes some possible resolutions for common issues that may be encountered during system setup and installation.
 
