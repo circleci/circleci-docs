@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "基礎"
-description: "基礎"
+description: "Basics"
 ---
 CircleCIで使用される基本的な概念について説明します。
 
