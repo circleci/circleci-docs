@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
 title: "ジョブの実行を Workflow で制御する"
-short-title: "ジョブの実行を Workflow で制御する"
-description: "ジョブの実行を Workflow で制御する"
+short-title: "Using Workflows to Schedule Jobs"
+description: "Using Workflows to Schedule Jobs"
 categories:
   - configuring-jobs
 order: 30
@@ -14,7 +14,7 @@ order: 30
 - 目次
 {:toc}
 
-## 概要
+## Overview
 
 **Workflow** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 単純な設定キーで複雑なジョブを自動化し、ビルドに失敗しても素早いリカバリーを可能にします。
 
@@ -41,7 +41,7 @@ Workflows のステータスは下記のうちいずれかの値をとります�
 - ON HOLD：Workflow 内のジョブ実行が承認待ちの状態です。
 - NEEDS SETUP：そのプロジェクトの [config.yml file]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに Workflow の記述がないか、内容に誤りがあります。
 
-### 制限について
+### Limitations
 {:.no_toc}
 
 プロジェクトの設定にある Advanced Settings で [[Enable build processing]]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすると、Workflows の実行トリガーに CircleCI API を利用できるようにもなります。 Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **注 :** Workflows を使わずにビルドするには `build` ジョブを使います。
@@ -287,7 +287,7 @@ workflows:
 
 下記は、Dev、Stage、Pre-Prod という 3 つのブランチを扱うジョブを設定した Workflow の例です。 Workflows は `jobs` 直下でネストしている `branches` キーを無視します。最初は Workflow を使わずジョブレベル（jobs の直下）で branches を使っていて、その後 Workflow を使う設定に変える場合は、ジョブレベルに記述するのではなく、workflows セクションの jobs のなかで branches キーを宣言しなければなりません。下記の `config.yml` を参考にしてください。
 
-![ブランチレベル（ブランチの配下）でジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
 下記に示した `config.yml` ファイルのコードは、ブランチレベルでジョブを実行する構成にした Workflow の例です。
 
@@ -319,7 +319,7 @@ For a full example of workflows, see the [configuration file](https://github.com
 ### Git タグに対応可能な Workflows を実行する
 {:.no_toc}
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。 Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
 
 In the example below, two workflows are defined:
 
@@ -410,7 +410,7 @@ For full details on pattern-matching rules, see the [java.util.regex documentati
 
 ## ジョブ間のデータ共有を可能にする Workspaces を使う
 
-各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
+Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
 ![workspaces data flow]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
@@ -488,7 +488,7 @@ When you use workflows, you increase your ability to rapidly respond to failures
 
 ![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
-## トラブルシューティング
+## Troubleshooting
 
 This section describes common problems and solutions for Workflows.
 
@@ -529,7 +529,7 @@ Having the `ci/circleci` checkbox enabled will prevent the status from showing a
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 - CircleCI 1.0 の `circle.yml` ファイルから CircleCI 2.0 の `.circleci/config.yml` ファイルへ移行する際の Workflow の設定方法を知りたい場合は、2.0 移行マニュアルの [Workflows の設定の手順]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)をご覧ください。
