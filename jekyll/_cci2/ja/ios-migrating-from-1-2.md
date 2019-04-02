@@ -9,10 +9,10 @@ order: 10
 ---
 This document will give you the guidelines for migrating your iOS project from CircleCI 1.0 to 2.0.
 
-* 目次
+* TOC
 {:toc}
 
-## 概要
+## Overview
 
 With the release of CircleCI 2.0 for macOS, your iOS projects can now benefit from the improvements in the CircleCI 2.0 platform, including:
 
@@ -119,7 +119,7 @@ workflows:
               only: master
 ```
 
-## ビルド済みイメージの活用方法
+## Best Practices
 
 To ensure a consistent build experience, it is best practice to add a Gemfile and set up code signing with the help of Fastlane Match before you push a 2.0 `.circleci/config.yml` file to your CircleCI iOS project.
 
