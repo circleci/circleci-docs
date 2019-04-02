@@ -9,7 +9,7 @@ order: 1
 ---
 This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app.
 
-## 概要
+## Overview
 
 GitHub Checks provides your workflow status messages on the GitHub Checks page and enables you to rerun a workflow from the GitHub Checks page.
 
@@ -21,12 +21,12 @@ After checks are enabled, CircleCI workflow and job status is reported under the
 
 To use the CircleCI Check integration, you first need to navigate to the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
 
-### 前準備
+### Prerequisites
 
 - Your project must be using CircleCI 2.0 with [Workflows]({{ site.baseurl }}/2.0/workflows/).
 - You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
-### 追加手順
+### Steps
 
 1. Click the Settings tab in the CircleCI app main menu.
 2. Select VCS. 
@@ -45,7 +45,7 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
 
-### 追加手順
+### Steps
 
 1. Click the Settings tab in the CircleCI app main menu.
 2. Select VCS. 
