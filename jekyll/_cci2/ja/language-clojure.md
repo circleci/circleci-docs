@@ -9,10 +9,10 @@ order: 2
 ---
 This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-* 目次
+* TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
@@ -137,7 +137,7 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 
 Nice! You just set up CircleCI for a Clojure app.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
