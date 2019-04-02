@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "認証"
-short-title: "認証"
+short-title: "Authentication"
 description: "LDAP認証の構成"
 categories:
   - administration
@@ -9,7 +9,7 @@ order: 9
 ---
 このドキュメントでは、CircleCIでOpenLDAPまたはActive Directory資格情報によるユーザー認証を有効化し、構成とテストを行う方法について説明します。
 
-## 前準備
+## Prerequisites
 
 - LDAPサーバーとActive Directoryをインストールし、構成します。
 - GitHub Enterpriseが構成済みで、組織およびプロジェクトのソースとしてユーザーからアクセス可能なことを確認します。
