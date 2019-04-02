@@ -9,10 +9,10 @@ order: 30
 ---
 This document describes how to create and use custom Docker images with CircleCI in the following sections:
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 
 CircleCI supports Docker, providing you with a powerful way to specify dependencies for your projects. If the [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) do not suit your needs, consider creating a custom Docker image for your jobs. There are two major benefits of doing this:
 
