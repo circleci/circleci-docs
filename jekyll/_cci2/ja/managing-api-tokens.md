@@ -7,12 +7,12 @@ order: 20
 ---
 To use the CircleCI API or view details about a build, you will need API tokens with the appropriate permissions. This document describes the types of API tokens, as well as how to create and delete them.
 
-## 概要
+## Overview
 
 There are two types of API tokens you can create within CircleCI.
 
 1. **Personal**: These tokens are used to interact with the CircleCI API and grant full read and write permissions.
-2. **プロジェクト**: These tokens provide information about specific projects and only grant read permissions. Project tokens have three scope options: *Status*, *Build Artifacts*, and *All*. 
+2. **Project**: These tokens provide information about specific projects and only grant read permissions. Project tokens have three scope options: *Status*, *Build Artifacts*, and *All*. 
     - *Status* tokens grant read access to the project's build statuses. Useful for [embedding status badges]({{ site.baseurl }}/2.0/status-badges/).
     - *Build Artifacts* tokens grant read access to the project's build artifacts.
     - *All* tokens grant read access for the project's build statuses and build artifacts.
@@ -32,7 +32,7 @@ To delete a personal API token, click the X in the **Remove** column.
 
 ### Creating a Project API Token
 
-1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします
+1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
 2. In the **Permissions** section, click on **API Permissions**.
 3. Click the **Create Token** button.
 4. Choose a scope from the dropdown menu.
@@ -41,7 +41,7 @@ To delete a personal API token, click the X in the **Remove** column.
 
 To delete a project API token, click the X in the **Remove** column. When the confirmation window appears, click the **Remove** button.
 
-## 次のステップは？
+## Next Steps
 
 API tokens are not useful unless you do something with them. Here are a few ideas:
 
