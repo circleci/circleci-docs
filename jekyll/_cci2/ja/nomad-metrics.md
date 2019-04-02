@@ -34,7 +34,7 @@ The Nomad Metrics client is installed and run on all builder instances. You will
 
 ### Updating the AWS Launch Configuration
 
-#### 前準備
+#### Prerequisites
 
 ##### AWS EC2 Launch Configuration ID
 
@@ -183,7 +183,7 @@ docker run -d --name $CONTAINER_NAME \
 
 ## --server
 
-| Name                                      | Type  | お問い合わせ内容                                                                                                                                                                                                                |
+| Name                                      | Type  | Description                                                                                                                                                                                                             |
 | ----------------------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `circle.nomad.server_agent.poll_failure`  | Gauge | 1 if the last poll of the Nomad agent failed; 0 otherwise. This gauge is set independent of `circle.nomad.client_agent.poll_failure` when nomad-metrics is operating in `--client` and `--server` modes simultaneously. |
 | `circle.nomad.server_agent.jobs.pending`  | Gauge | Total number of pending jobs across the cluster.                                                                                                                                                                        |
@@ -195,7 +195,7 @@ docker run -d --name $CONTAINER_NAME \
 
 ## --client
 
-| Name                                                   | Type  | お問い合わせ内容                                                   |
+| Name                                                   | Type  | Description                                                |
 | ------------------------------------------------------ | ----- | ---------------------------------------------------------- |
 | `circle.nomad.client_agent.poll_failure`               | Gauge | 1 if the last poll of the Nomad agent failed; 0 otherwise. |
 | `circle.nomad.client_agent.resources.total.cpu`        | Gauge | (See below)                                                |
