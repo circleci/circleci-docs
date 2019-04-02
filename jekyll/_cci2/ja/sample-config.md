@@ -58,10 +58,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # 最初の1行目に指定されたイメージがプライマリコンテナのインスタンスとなります。 ジョブのコマンドはこのコンテナ内で実行されます。
+    # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
       - image: circleci/node:4.8.2-jessie
-    # 2 番目に指定されたイメージがセカンダリコンテナのインスタンスとなります。このインスタンスは、ローカルホスト上のプライマリコンテナのポートを通じて共通ネットワークで動作します。
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
     steps:
       - checkout
@@ -296,6 +296,6 @@ workflows:
 
 {% endraw %}
 
-## 関連情報
+## See Also
 
 CircleCI を使用するパブリックプロジェクトのリストについては、「[パブリックリポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)」ページを参照してください。
