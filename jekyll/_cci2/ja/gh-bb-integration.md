@@ -8,10 +8,10 @@ Order: 60
 ---
 このページでは、CircleCI における GitHub や Bitbucket の統合、活用方法の概要について、下記の内容に沿って解説しています。
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 CircleCI でプロジェクトを開始するとき、最初にCircleCI のユーザー登録をする際に与えた権限に従って、下記のような GitHub または Bitbucket の設定がリポジトリに追加されます。 　**deploy key：**GitHub または Bitbucket からプロジェクトのコードの取得 (チェックアウト) するのに使われます 　**service hook：**GitHub または Bitbucket へのプッシュを CircleCI へ通知するのに使われます
