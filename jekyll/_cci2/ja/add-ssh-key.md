@@ -7,7 +7,7 @@ order: 20
 ---
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に公開鍵認証用の SSH 鍵を登録する必要があります。
 
-## 概要
+## Overview
 
 CircleCI に SSH 公開鍵を登録する必要があるケースは、以下の 2 パターンです。
 
@@ -16,9 +16,9 @@ CircleCI に SSH 公開鍵を登録する必要があるケースは、以下の
 
 If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document. 2 つ目が目的のときは、下記の手順でプロジェクトに SSH 鍵を登録してみてください。
 
-## 追加手順
+## Steps
 
-1. CircleCI 管理画面で、プロジェクト名の横にある歯車アイコンをクリックし、**PROJECT SETTINGS** にアクセスします
+1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
 
 2. **PERMISSIONS** 内の **SSH Permissions** を選びます
 
@@ -28,7 +28,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 5. **Private Key** には、登録したい SSH 鍵の文字列を貼り付けます
 
-6. **Add SSH Key** ボタンをクリックします
+6. Click the **Add SSH Key** button.
 
 **注**：CircleCI が SSH 鍵を復号できるよう、鍵には常に空のパスフレーズを設定してください。 CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key.
 
@@ -50,6 +50,6 @@ jobs:
 
 **注：**` fingerprints ` に指定した 1 つまたは複数のフィンガープリントは、管理画面で登録した SSH 鍵と一致していなければなりません。
 
-## 関連情報
+## See Also
 
-[GitHub/Bitbucket との統合]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
