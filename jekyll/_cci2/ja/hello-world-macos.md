@@ -9,7 +9,7 @@ order: 4
 ---
 This document describes how to get started with continuous integration on **macOS build environments** on CircleCI. If you still need to get acquainted with CircleCI, it is recommended to checkout the [getting started guide]({{ site.baseurl }}/2.0/getting-started).
 
-## 前準備
+## Prerequisites
 
 To follow along with this document you will need:
 
