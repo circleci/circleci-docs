@@ -21,13 +21,13 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
 
-### 並列処理
+### Parallelism
 
 If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can [run tests in parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) by spreading them across multiple machines. This requires specifying a parallelism level.
 
 Use either the CircleCI CLI to split test files or use environment variables to configure each parallel machine individually.
 
-### リソースクラス
+### Resource Class
 
 It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file. `resource_class` を指定しない場合、もしくは指定の仕方が正しくないときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。
 
