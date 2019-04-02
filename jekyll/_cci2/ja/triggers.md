@@ -79,6 +79,6 @@ jobs:
           command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
 ```
 
-## 関連情報
+## See Also
 
 [Workflows]({{ site.baseurl }}/2.0/workflows/)
