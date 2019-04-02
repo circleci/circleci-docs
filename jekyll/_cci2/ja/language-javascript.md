@@ -9,7 +9,7 @@ order: 5
 ---
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.
 
-- 目次
+- TOC
 {:toc}
 
 ## Quickstart: Demo JavaScript Node.js Reference Project
@@ -21,7 +21,7 @@ We maintain a reference JavaScript Node.js project to show how to build an Expre
 
 In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with Node projects.
 
-## CircleCI のビルド済み Docker イメージ
+## Pre-Built CircleCI Docker Images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
 
@@ -160,7 +160,7 @@ Now that dependencies are installed we can run the test suite and upload the tes
 
 Success! You just set up CircleCI 2.0 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
