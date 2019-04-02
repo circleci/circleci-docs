@@ -5,10 +5,10 @@ description: How to use CircleCI to deploy to AWS ECS from ECR
 ---
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 
 This guide has two phases:
 
@@ -21,7 +21,7 @@ You can also find the application [building on CircleCI](https://circleci.com/gh
 
 See [Creating a Custom Image Manually]({{ site.baseurl }}/2.0/custom-images/#creating-a-custom-image-manually) for more information.
 
-## 前準備
+## Prerequisites
 
 ### Use Terraform to Create AWS Resources
 
@@ -153,7 +153,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-## 関連情報
+## See Also
 
 - If you would like to review an example that builds, tests and pushes the Docker image to ECR and then uses the `aws-ecs` orb to deploy the update, go to the [AWS-ECS-ECR Orbs]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs demo page.
 - If you would also like to review an example that does not use CircleCI orbs, go to the [Non-Orbs AWS ECR-ECS Demo]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs demo page.
