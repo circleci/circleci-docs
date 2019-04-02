@@ -10,7 +10,7 @@ CircleCI supports uploading directly to Artifactory.
 - TOC 
 {:toc}
 
-## デプロイ、デプロイする
+## Deploy
 
 Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
 
@@ -79,7 +79,7 @@ jobs:
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```
 
-## 関連情報
+## See Also
 
 {:.no_toc}
 
