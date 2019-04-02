@@ -33,11 +33,11 @@ Set up your build environment to run with the `docker`, `machine`, or `macos` ex
           xcode: "9.0"
     
         steps:
-          # コマンドは Xcode 9.0 がインストールされた
-          #  macOS コンテナで実行されます
+          # Commands will execute in macOS container
+          # with Xcode 9.0 installed
           - run: xcodebuild -version
     
 
-## 関連情報
+## See Also
 
 Learn more about the [pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
