@@ -9,7 +9,7 @@ order: 55
 ---
 This document provides a script for using a custom Root Certifcate Authority and the process for using an Elastic Load Balancing certificate in the following sections:
 
-* 目次
+* TOC
 {:toc}
 
 
@@ -109,7 +109,7 @@ Once you have a valid certificate and key file in pem format, you must upload it
 
 Reference: https://letsencrypt.readthedocs.io/en/latest/using.html#manual
 
-## トラブルシューティング
+## Troubleshooting
 
 Ensure the hostname is properly configured in the Replicated/management console ~ (hostname:8800/settings) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
