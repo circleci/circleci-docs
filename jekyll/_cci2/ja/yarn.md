@@ -38,6 +38,6 @@ Yarn packages can be cached to improve CI build times. Here's an example:
 ```
 {% endraw %}
 
-## 関連情報
+## See Also
 
-[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
