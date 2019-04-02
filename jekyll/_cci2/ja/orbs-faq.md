@@ -9,7 +9,7 @@ order: 20
 ---
 This document describes various questions and technical issues that you may find helpful when working with Orbs.
 
-- 目次
+- TOC
 {:toc}
 
 ### Downloading, Integrating, and Testing Orbs
@@ -117,7 +117,7 @@ workflows:
 
 - Question: May I use elements from a different orb when creating my own orb?
 
-- Answer: Yes, orbs may be composed directly using elements of other orbs. 例えば下記のようにします。
+- Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
 
 {% raw %}
 ```yaml
@@ -153,10 +153,10 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 
 **Note:** CircleCI does not require this for certified orbs (orbs that have been reviewed and approved by CircleCI prior to publishing). At this time, the certification program for orbs authored by third parties is not yet available, though will be available in the near future.
 
-## 関連情報
+## See Also
 
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
-- 新たに Orb を作成する詳しい手順は「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」をご覧ください。
-- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
-- 作成した Orb のテスト方法については、[Orbs をテストする]({{site.baseurl}}/2.0/testing-orbs/) で詳しく解説しています。
-- Orbs 利用時の法的条件に関する詳細については「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」をご覧ください。
+- Refer to [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/), where you will find step-by-step instructions on how to create your own orb.
+- Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
+- Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
