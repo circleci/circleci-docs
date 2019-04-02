@@ -9,7 +9,7 @@ order: 3
 ---
 The demo application in this tutorial uses Python and Flask for the backend. PostgreSQL is used for the database.
 
-- 目次
+- TOC
 {:toc}
 
 The following sections walk through how Jobs and Steps are configured for this application, how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment, and how to deploy the demo application to Heroku.
@@ -103,7 +103,7 @@ An environment variable defined in a `run:` key will override image-level variab
             FLASK_CONFIG: staging
 ```
 
-### 依存関係のキャッシュ
+### Caching Dependencies
 {:.no_toc}
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
@@ -393,7 +393,7 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 For more information about Workflows, see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
