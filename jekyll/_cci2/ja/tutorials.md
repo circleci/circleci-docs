@@ -28,7 +28,7 @@ GitHub Repo | Description | config.yml link \---\---|\---\---\-----|\---\---\---
 
 [Android]: {{ site.baseurl }}/2.0/language-android/ [Clojure]: {{ site.baseurl }}/2.0/language-clojure/ [Elixir]: {{ site.baseurl }}/2.0/language-elixir/ [Go]: {{ site.baseurl }}/2.0/language-go/ [iOS]: {{ site.baseurl }}/2.0/ios-tutorial/ [Java]: {{ site.baseurl }}/2.0/language-java/ [NodeJS - JavaScript]: {{ site.baseurl }}/2.0/language-javascript/ [PHP]: {{ site.baseurl }}/2.0/language-php/ [Python]: {{ site.baseurl }}/2.0/language-python/ [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/ [Scala]: {{ site.baseurl }}/2.0/language-scala/
 
-## 関連情報
+## See Also
 
 Use the Hello World document and sample `config.yml` files to start configuring your build.
 
