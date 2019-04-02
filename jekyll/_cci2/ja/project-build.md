@@ -9,7 +9,7 @@ order: 1
 ---
 This document describes how CircleCI automates builds of your project.
 
-## 概要
+## Overview
 
 After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{ site.baseurl }}/2.0/glossary/#project) to circleci.com, every code change triggers a [build]({{ site.baseurl }}/2.0/build) and automated tests in a clean container or VM configured for your requirements.
 
@@ -35,6 +35,6 @@ Your build appears on the Jobs page of the CircleCI app when a new commit is pus
 
 ![Workflows]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-## 関連情報
+## See Also
 
 [Settings]({{ site.baseurl }}/2.0/settings)
