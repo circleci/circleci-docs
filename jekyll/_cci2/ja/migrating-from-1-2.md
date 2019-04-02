@@ -9,13 +9,13 @@ order: 15
 ---
 This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist.
 
-- 目次 {:toc}
+- TOC {:toc}
 
 The migration process may not end with this document, but the goal is to get the majority of keys replaced with the equivalent syntax nesting and to help you get started with adding new functionality.
 
 If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
-## 概要
+## Overview
 
 {:.no_toc}
 
@@ -214,7 +214,7 @@ With the following, nested under `steps:` and customizing for your application a
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
-## 次のステップは？
+## Next Steps
 
 {:.no_toc}
 
