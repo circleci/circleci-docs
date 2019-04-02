@@ -8,7 +8,7 @@ description: "Introduction to Nomad Cluster Operation with CircleCI"
 ---
 CircleCI uses [Nomad](https://www.hashicorp.com/blog/nomad-announcement/) as the primary job scheduler in CircleCI 2.0. This document provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation in the following sections:
 
-- 目次
+- TOC
 {:toc}
 
 ## Basic Terminology and Architecture
