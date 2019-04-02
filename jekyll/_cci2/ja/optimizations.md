@@ -9,7 +9,7 @@ order: 1
 ---
 Get started with speeding up your job runs, workflows, and image builds with the following example snippets.
 
-## 依存関係のキャッシュ     
+## Caching Dependencies     
 
 {% raw %}
 
@@ -29,7 +29,7 @@ steps: # a collection of executable commands
 
 {% endraw %}
 
-## 並列処理
+## Parallelism
 
     # ~/.circleci/config.yml
     version: 2
@@ -58,6 +58,6 @@ DLC is a premium feature and you must open a support ticket to enable it on your
           - run: docker build .
     
 
-## 関連情報
+## See Also
 
-[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
