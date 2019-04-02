@@ -9,7 +9,7 @@ hide: true
 ---
 This document is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI as described in the following sections:
 
-* 目次
+* TOC
 {:toc}
 
 Usage statistics data enhances visibility into CircleCI installations and is used to better support you and ensure a smooth transition from CircleCI 1.0 to CircleCI 2.0.
