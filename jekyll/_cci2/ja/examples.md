@@ -35,6 +35,6 @@ curl --user ${CIRCLE_TOKEN}: \
 
 このシェルスクリプトを実行すると、リポジトリを介してプッシュすることなく `config.yml` ファイルの内容をデバッグできます。
 
-## 関連情報
+## See Also
 
 [Using the Local CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/)
