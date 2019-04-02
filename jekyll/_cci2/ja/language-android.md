@@ -9,17 +9,17 @@ order: 9
 ---
 This document describes how to set up an Android project on CircleCI in the following sections.
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 This guide provides an introduction to Android development on CircleCI. If you are looking for a `.circleci/config.yml` template for Android, see the [Sample Configuration](#sample-configuration) section of this document.
 
 **Note:** Running the Android emulator is not supported by the type of virtualization CircleCI uses on Linux. To run emulator tests from a job, consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
-## 前準備
+## Prerequisites
 {:.no_toc}
 
 This guide assumes the following:
@@ -197,7 +197,7 @@ For more details on using `gcloud` to run Firebase, see the [official documentat
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
-## トラブルシューティング
+## Troubleshooting
 
 ### Handling Out Of Memory Errors
 
