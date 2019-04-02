@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "CircleCI を始める"
-short-title: "CircleCI を始める"
+short-title: "Sign Up and Try CircleCI"
 description: "CircleCI を使うための最初のステップ"
 categories:
   - getting-started
@@ -19,6 +19,6 @@ CircleCI 2.x で初めてビルドを実行するには、次の手順に従っ�
 
 5. CircleCI の [Set Up Project] ページにアクセスし、プロジェクトを始めます。
 
-## 次のステップは？
+## Next Steps
 
 [Hello World]({{ site.baseurl }}/ja/2.0/hello-world/) のページでは、プロジェクトの基本的なビルド方法や Org の切り替え方法、また、ビルド環境の決定やテストの自動化に役立つ [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルについて説明しています。
