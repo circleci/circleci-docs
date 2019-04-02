@@ -172,6 +172,6 @@ Finally, we wait for the database to come online so that we can run the test sui
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## 関連情報
+## See Also
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
