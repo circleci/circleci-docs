@@ -12,10 +12,10 @@ order: 70
 
 This document offers an overview of Docker Layer Caching (DLC), which can reduce Docker image build times on CircleCI.
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 
 Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
