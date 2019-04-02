@@ -26,10 +26,10 @@ Once the integration is added, navigate to the job details page and the JIRA ico
 
 Click on the JIRA icon and select the following:
 
-- プロジェクト名
+- Project name
 - Issue type
 - Issue summary
-- お問い合わせ内容
+- Description
 
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_6.png)
 
