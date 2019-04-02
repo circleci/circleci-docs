@@ -1,15 +1,15 @@
 ---
 layout: classic-docs
-title: "依存関係のキャッシュ"
-short-title: "依存関係のキャッシュ"
-description: "依存関係のキャッシュ"
+title: "Caching Dependencies"
+short-title: "Caching Dependencies"
+description: "Caching Dependencies"
 categories:
   - optimization
 order: 50
 ---
-キャッシュは、ジョブを高速化する手段として最も効果的な方法の 1 つです。CircleCI においては、高コストな処理が必要なデータを過去のジョブから再利用することが可能になっています。
+Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
 
-- 目次
+- TOC
 {:toc}
 
 After an initial job run, future instances of the job will run faster by not redoing work.
@@ -33,7 +33,7 @@ Caching keys are simple to configure. The following example updates a cache if i
 ```
 {% endraw %}
 
-## はじめに
+## Introduction
 {:.no_toc}
 
 CircleCI 2.0 では依存関係のキャッシュの自動化には対応していません。ビルドの高速化を狙ってキャッシュの積極利用を図ろうとしているときは注意が必要です。 ただし、CicleCI 2.0 ではより優れたキャッシュ活用を手動設定で実現できます。
@@ -43,7 +43,7 @@ CircleCI 2.0 では依存関係のキャッシュの自動化には対応して�
 
 Docker イメージの未変更レイヤー部分を再利用する有償のキャッシュ機能については、[Docker レイヤーキャッシュの利用]({{ site.baseurl }}/2.0/docker-layer-caching/)をご覧ください。
 
-## 概要
+## Overview
 {:.no_toc}
 
 キャッシュはキーで指定したファイル群の階層構造を保存するものです。 ジョブを高速化するためのデータを保存するのがキャッシュの目的です。ただし、Npm や Gem、Maven といった依存関係管理ツールのパッケージディレクトリをキャッシュするときのように、キャッシュミスやキャッシュを一から作り直す場合のジョブも問題なく実行されます。
@@ -556,7 +556,7 @@ steps:
 
 なんでもキャッシュするのではなく、コンパイルのような処理コストの高いステップにおいてキャッシュすることを*ぜひ*心がけてください。
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
