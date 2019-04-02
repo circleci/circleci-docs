@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "環境変数の使い方"
-short-title: "環境変数の使い方"
+short-title: "Using Environment Variables"
 description: "CircleCI 2.0 で利用可能な環境変数一覧"
 categories:
   - configuring-jobs
@@ -9,9 +9,9 @@ order: 40
 ---
 このページでは CircleCI で利用可能な環境変数の使い方について、下記の内容に沿って解説しています。
 
-- 目次 {:toc}
+- TOC {:toc}
 
-## 概要
+## Overview
 
 {:.no_toc}
 
@@ -313,9 +313,9 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 
 **注：**他の環境変数を定義するのに定義済み環境変数を使うことはできません。 この場合は、`run` ステップを利用し、`BASH_ENV` を用いて別の新しい環境変数をエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する](#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
-変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true` (現在のビルド環境が CI であることを表します。常に true となります。) `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名。 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数。 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL。 `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL。 `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ。 `CIRCLE_JOB` | String | 現在のジョブの名称。 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります。 `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数。 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_REPONAME` | String | The name of the GitHub or Bitbucket repository where the pull request was created. フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。 `CIRCLE_PROJECT_USERNAME` | String | The GitHub or Bitbucket username of the current project. `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。 `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag). `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。 `CIRCLECI` | Boolean | `true` (現在のビルド環境が CircleCI であることを表します。常に true となります。) `HOME` | String | ホームディレクトリ {:class="table table-striped"}
+変数 | 型 | 値 \---\---\---\---\---\---\---\---\----|\---\---\---|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\----- `CI` | Boolean | `true` (現在のビルド環境が CI であることを表します。常に true となります。) `CI_PULL_REQUEST` | String | 使用不可。`CIRCLE_PULL_REQUEST` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CI_PULL_REQUESTS` | List | 使用不可。`CIRCLE_PULL_REQUESTS` を使用してください。 CircleCI 1.0 との後方互換性のために残しています。 `CIRCLE_BRANCH` | String | 現在ビルドしている Git のブランチ名。 `CIRCLE_BUILD_NUM` | Integer | CircleCI におけるビルドの回数。 `CIRCLE_BUILD_URL` | String | 現在のビルドへの URL。 `CIRCLE_COMPARE_URL` | String | ビルドにおけるコミット間の違いを比較するための GitHub または Bitbucket の URL。 `CIRCLE_INTERNAL_TASK_DATA` | String | テスト時のデータが格納されたディレクトリ。 `CIRCLE_JOB` | String | 現在のジョブの名称。 `CIRCLE_NODE_INDEX` | Integer | ビルドインスタンスの固有インデックス。 この値は 0 から (`CIRCLECI_NODE_TOTAL` - 1) の間の値をとります。 `CIRCLE_NODE_TOTAL` | Integer | ビルドインスタンスの合計数。 `CIRCLE_PR_NUMBER` | Integer | GitHub または Bitbucket におけるプルリクエストの回数。 フォークしたプルリクエストのみで使用可能です。 `CIRCLE_PR_REPONAME` | String | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs. `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 Only available on forked PRs. `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。 `CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。 `CIRCLE_PROJECT_USERNAME` | String | The GitHub or Bitbucket username of the current project. `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。 `CIRCLE_SHA1` | String | 現在のビルドの最後のコミットに関する SHA1 ハッシュ。 `CIRCLE_TAG` | String | 現在のビルドがタグ付けされている場合の git タグの名前。 For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag). `CIRCLE_USERNAME` | String | ビルドをスタートさせたユーザーの GitHub または Bitbucket ユーザー名。 `CIRCLE_WORKFLOW_ID` | String | 現在のジョブにおける Workflow インスタンスのユニーク ID。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。 `CIRCLE_WORKING_DIRECTORY` | String | 現在のジョブの`working_directory` キーの値。 `CIRCLECI` | Boolean | `true` (現在のビルド環境が CircleCI であることを表します。常に true となります。) `HOME` | String | ホームディレクトリ {:class="table table-striped"}
 
-## 関連情報
+## See Also
 
 {:.no_toc}
 
