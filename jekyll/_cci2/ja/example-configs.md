@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
 title: "パブリックリポジトリの例"
-short-title: "パブリックリポジトリの例"
-description: "CircleCI 2.0 入門"
+short-title: "Example Public Repos"
+description: "Starting point for CircleCI 2.0 docs"
 categories:
   - getting-started
 order: 1
@@ -31,6 +31,6 @@ order: 1
 参考機能例 | プロジェクト概要 | 設定ファイルの場所 \---\---|\---\---\-----|\---\---\---\--- `Xvfb` を利用した Bazel によるビルドとテスト | **Angular** は、TypeScript や JavaScript などで構築するモバイルアプリおよび Web アプリの開発プラットフォームです。 | [angular/.circleci/config.yml](https://github.com/angular/angular/blob/master/.circleci/config.yml) Saleseforce DX | CircleCI で **Salesforce DX** をセットアップする方法を示したリポジトリです。 | [sfdx-circleci/.circleci/config.yml](https://github.com/forcedotcom/sfdx-circleci/blob/master/.circleci/config.yml) Kubernetes および codecov を用いた、Docker 上での Go 言語開発 と VM における各種処理 (依存関係、lint、ビルド、テスト) | **Istio** は、マイクロサービスの相互接続、管理、セキュリティ保護を目的としたオープンプラットフォームです。 | [istio/.circleci/config.yml](https://github.com/istio/istio/blob/master/.circleci/config.yml) `JUnit` を組み合わせた Go 言語開発、本番公開に向けた Kubernetes のテスト、およびマスタージョブの Workflow | **Microsoft Azure Container Service Engine** (acs-engine) は、DC/OS や Kubernetes、Swarm Mode、あるいは Swarm orchestrators とともに使用し、Microsoft Azure 上で Docker 対応クラスタ向けの Azure Resource Manager のテンプレートを生成します。 | [acs-engine/.circleci/config.yml](https://github.com/Azure/acs-engine/blob/master/.circleci/config.yml) Go 言語と Node によるビルド、パッケージ、デプロイの実行 | **Ignition** は、Pivotal Cloud Foundry (PCF) によるデプロイを支援する開発ツールです。 | [ignition/.circleci/config.yml](https://github.com/pivotalservices/ignition/blob/master/.circleci/config.yml) `sbt` を用いた Java アプリケーションのビルドおよびパブリッシュ | **Scio** は、Apache Spark や Scalding に似た、Apache Beam および Google Cloud Dataflow 向けの Scala API です。 | [scio/.circleci/config.yml](https://github.com/spotify/scio/blob/master/.circleci/config.yml) `JUnit` で構築された JavaScript Node フロントエンド開発、および Webdriver によるエンドツーエンドのスクリーンショットテスト | React、MobX、TypeScript を使用した **cBioPortal** 向けのフロントエンド言語です。 | [cbioportal-frontend/.circleci/config.yml](https://github.com/cBioPortal/cbioportal-frontend/blob/master/.circleci/config.yml) 手動デプロイ環境での Node および Yarn | **Docusaurus** は、オープンソースな Web サイトのスムーズなビルド、デプロイ、メンテナンスの実現を目指したプロジェクトです。 | [master/.circleci/config.yml](https://github.com/facebook/Docusaurus/blob/master/.circleci/config.yml) Node と Yarn のテスト、およびキャッシュを活用した Web サイトのデプロイ | **NEO•ONE** は、NEO によるブロックチェーンソリューションのコーディング、テスト、デプロイ作業を簡単に進められます。 | [neo-one/.circleci/config.yml](https://github.com/neo-one-suite/neo-one/blob/master/.circleci/config.yml) NPM と Yarn によるビルドとテスト、AWS S3 へのデプロイ | **CLARK Platform** 公式クライアント | [clark-client/.circleci/config.yml](https://github.com/Cyber4All/clark-client/blob/master/.circleci/config.yml) Postgres データベースを用いた Python コードのビルド、Selenium のテスト、Code Climate の使用 | **CALC** (旧 Hourglass) は、Contracts Awarded Labor Category の略で、米国における職種ごとの人件費単価データベースを活用できる、契約時の人件費算出サポートのツールです。 | [calc/.circleci/config.yml](https://github.com/18F/calc/blob/develop/.circleci/config.yml) Webhooks を活用したパラレルジョブを実現する `apt` を使った Python コードのビルド | **SunPy** は、太陽物理学のデータ分析向けオープンソース Python ライブラリです。 | [sunpy/.circleci/config.yml](https://github.com/sunpy/sunpy/blob/master/.circleci/config.yml) Scala および `sbt` を用いた 3 パターンの Workflow によるビルド、テスト、リリース | **Arweave4s** は、仮想通貨 Arweave のブロックチェーン専用の軽量なモジュール型 HTTP クライアントです。 | [arweave4s/.circleci/config.yml](https://github.com/toknapp/arweave4s/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## 関連情報
+## See Also
 
 [チュートリアルとサンプルアプリ]({{ site.baseurl }}/ja/2.0/tutorials/)もご覧ください。このページでは 11 のプログラム言語で作成された基礎的なアプリケーションについて、コメントや細かな解説がついたひと通りのサンプル設定ファイルを用意しています。
