@@ -5,7 +5,7 @@ short-title: "Configuring Deploys"
 ---
 CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
-- 目次
+- TOC
 {:toc}
 
 ## 概要
