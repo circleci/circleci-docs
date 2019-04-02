@@ -98,6 +98,6 @@ jobs:
     
     
 
-## 関連情報
+## See Also
 
 Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
