@@ -1,34 +1,34 @@
 ---
 layout: classic-docs
-title: "はじめに"
-short-title: "はじめに"
+title: "Getting Started Introduction"
+short-title: "Getting Started Introduction"
 description: "CircleCI で成功 (グリーン) ビルドを行うためのチュートリアル"
 categories:
   - getting-started
 order: 41
 ---
-このドキュメントでは、CircleCI 2.0 で成功 (グリーン) ビルドを行うための詳しい手順を説明します。
+This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI 2.0.
 
 * 目次
 {:toc}
 
-## ビルドにあたっての前提条件
+## Prerequisites for Running Your First Build
 {:.no_toc}
 
 * Git および既存の GitHub.com アカウント、またはアカウントの作成についての基本的な知識。 この手順では新しい GitHub リポジトリを使用しますが、CircleCI では Bitbucket の使用もサポートしています。
 * ターミナルや `bash` についての基本的な知識。またコマンドラインの使用経験があれば役に立ちます。
 
-## リポジトリの作成
+## Creating a Repository
 
-1. GitHub.com で自分のアカウントに移動します。
+1. Navigate to your account on GitHub.com
   
   * **[Repositories]** タブに移動し、 **[New]** を選択するか、<https://github.com/new> に直接移動します。 ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. [Initialize this repository with a README] にチェックを入れて、[Create repository] ボタンをクリックします。![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
-## .yml ファイルの追加
+## Adding a .yml File
 
-CircleCI は、テスト環境の構築方法や実行するテスト内容の定義に [YAML](https://en.wikipedia.org/wiki/YAML) ファイルを使います。 CircleCI 2.0 では、`config.yml` というファイル名で、隠しフォルダである `.circleci` ディレクトリ配下に作成しておく必要があります。 macOS、Linux、Windows においては、ピリオドから始まるファイルやフォルダは、デフォルトで隠し属性のある*システム*ファイルとして扱われますので、ご注意ください。
+CircleCI uses a [YAML](https://en.wikipedia.org/wiki/YAML) file to identify how you want your testing environment set up and what tests you want to run. CircleCI 2.0 では、`config.yml` というファイル名で、隠しフォルダである `.circleci` ディレクトリ配下に作成しておく必要があります。 On Mac, Linux, and Windows systems, files and folders whose names start with a period are treated as *system* files that are hidden from users by default.
 
 1. GitHub でファイルやフォルダを作成するには、リポジトリページの **[Create new file]** ボタンをクリックし、`.circleci/config.yml` と入力します。 空の `config.yml` ファイルが `.circleci` フォルダ内に作成されます。
 
@@ -45,23 +45,23 @@ jobs:
       - run: echo "A first hello"
 ```
 
-1. コメントを入力してから、[Commit New File] ボタンをクリックしてファイルをコミットします。![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
+1. Commit the file by entering comments and clicking the Commit New File button. ![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
 
 `- image: circleci/ruby:2.4.1` という部分は、プロジェクトをビルドする際にどの Docker イメージを使うか指定しているものです。 CircleCI は、イメージを使用して「コンテナ」を立ち上げます。コンテナとは、プロジェクトの実行に必要な言語、システムユーティリティ、依存関係、Web ブラウザー、ツールなどがインストールされる仮想コンピューティング環境です。
 
-## CircleCI 上でのビルドの準備
+## Setting up Your Build on CircleCI
 
-1. この手順を実行するには、CircleCI アカウントが必要です。 CircleCI の[ユーザー登録ページ](https://circleci.jp/signup)を開き、[GitHub でログイン] をクリックします。 ビルドを実行するには、GitHub アカウントに CircleCI へのアクセスを許可する必要があります。 CircleCI アカウントを既に持っている場合は、[ダッシュボード](https://circleci.com/dashboard)にアクセスします。
+1. For this step, you will need a CircleCI account. CircleCI の[ユーザー登録ページ](https://circleci.jp/signup)を開き、[GitHub でログイン] をクリックします。 You will need to give CircleCI access to your GitHub account to run your builds. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard).
 
 2. 次に、CricleCI で既に構築され、自分がアクセス可能なプロジェクトを*フォローする*かどうかのオプションが表示されます (これは通常、会社や組織の GitHub アカウントを使用している開発者に表示されます)。 次の画面では、作成したリポジトリを、新しいプロジェクトとして CircleCI に追加できます。
 
-3. 自分の新しいリポジトリを追加するには、左上のドロップダウンで自分の GitHub アカウントが選択されていることを確認してから、作成したリポジトリを下で見つけ、横にある **[Set Up Project]** ボタンをクリックします。 ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, find the repository you just created below, and click the **Setup project** button next to it. ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
-4. さらに次の画面ではプロジェクトに関する設定が可能です。 この時点では設定はそのままでもかまいません。右下にある **[Start building]** ボタンをクリックしてください。 ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
+4. さらに次の画面ではプロジェクトに関する設定が可能です。 Leave everything as-is for now and just click the **Start building** button a bit down the page on the right. ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
 
-## CircleCI での初めてのビルド
+## Running Your First CircleCI Build!
 
-ビルドが開始され、自動的に正しく実行されるはずです。 実行結果を確認します。 CircleCI ダッシュボードに表示される緑色の [SUCCESS] ボタンをクリックすると、実行の次の部分を調べることができます。
+You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard to investigate the following parts of the run:
 
 1. **環境のスピンアップ :** CircleCI は、`circleci/ruby:2.4.1` Docker イメージを使用して、仮想コンピューティング環境をローンチしました。
 
@@ -69,17 +69,17 @@ jobs:
 
 3. **echo :** これは、`config.yml` に含まれる唯一の他の命令です。CircleCI は echo コマンドを実行し、「A first hello」という入力を与えました ([echo](https://linux.die.net/man/1/echo) コマンドは、入力された文字列をそのまま出力します)。
 
-今のところはリポジトリにソースコードが含まれておらず、`config.yml` 内にもテストに関わる設定が含まれていませんが、CircleCI はビルドに「成功」したものとして扱います ([exit コード](https://en.wikipedia.org/wiki/Exit_status)としては 0 を返しているため)。 ほとんどのプロジェクトは、これよりはるかに複雑で、多くの場合は複数の Docker イメージと複数のステップが存在し、多くのテストも含まれます。 `config.yml` ファイルに記述できる全てのステップの詳細については、[CircleCI の設定方法](https://circleci.com/docs/ja/2.0/configuration-reference)を参照してください。
+今のところはリポジトリにソースコードが含まれておらず、`config.yml` 内にもテストに関わる設定が含まれていませんが、CircleCI はビルドに「成功」したものとして扱います ([exit コード](https://en.wikipedia.org/wiki/Exit_status)としては 0 を返しているため)。 Most projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests. `config.yml` ファイルに記述できる全てのステップの詳細については、[CircleCI の設定方法](https://circleci.com/docs/ja/2.0/configuration-reference)を参照してください。
 
-### ビルドを意図的に失敗させる
+### Breaking Your Build!
 {:.no_toc}
 
-単純化のため、GitHub エディターで `config.yml` ファイルを編集し、`echo "A first hello"` を `notacommand` に置き換えます。 GitHub エディターの **[Commit change]** ボタンをクリックします。 CircleCI の {% comment %} TODO: Jobs {% endcomment %}Builds ページに戻ると、新しいビルドがトリガーされています。 このビルドは失敗し、赤色の [FAILED] ボタンが表示され、失敗を通知するためのメールが送信されます。
+単純化のため、GitHub エディターで `config.yml` ファイルを編集し、`echo "A first hello"` を `notacommand` に置き換えます。 Click the **Commit change** button in the GitHub editor. CircleCI の {% comment %} TODO: Jobs {% endcomment %}Builds ページに戻ると、新しいビルドがトリガーされています。 This build will fail with a red Failed button and will send you a notification email of the failure.
 
-### Workflows 機能の使用
+### Using the Workflows Functionality
 {:.no_toc}
 
-1. Workflows の動作を見るには、`.circleci/config.yml` ファイルを編集します。 ブラウザーのウィンドウでファイルを編集モードにしてから、ファイル内で `build` とそれ以後のテキストを選択し、コピー＆ペーストし、そのセクションを複製します。 コードブロックは次のようになります。
+1. Workflows の動作を見るには、`.circleci/config.yml` ファイルを編集します。 ブラウザーのウィンドウでファイルを編集モードにしてから、ファイル内で `build` とそれ以後のテキストを選択し、コピー＆ペーストし、そのセクションを複製します。 That should look similar to the code block below:
 
 ```yml
 version: 2
@@ -98,9 +98,9 @@ jobs:
       - run: echo "A first hello"      
 ```
 
-1. 次に、2 つのジョブを別々の名前に変更します。 この例では、`one` と `two` という名前にします。 echo コマンドの部分も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
+1. Next, rename your two jobs so that they have different names. この例では、`one` と `two` という名前にします。 echo コマンドの部分も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
 
-2. `config.yml` ファイルに `workflows` セクションを追加します。 workflows セクションは、ファイルのどこにでも配置できます。 通常は、ファイルの先頭または末尾に配置します。
+2. `config.yml` ファイルに `workflows` セクションを追加します。 The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
 
 ```yml
 version: 2
@@ -127,16 +127,16 @@ jobs:
 - two
 ```
 
-1. これらの変更をリポジトリにコミットしてから、CircleCI のダッシュボードに戻ります。![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
+1. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
-2. Workflow のリンクをクリックすると、2 つのジョブが並列実行されていることを確認できます。![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
+2. Click on the link for your workflow to see that these two jobs run in parallel. ![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
 Workflows の詳細については「[Workflows の制御](https://circleci.com/docs/ja/2.0/workflows/#overview)」ドキュメントを参照してください。
 
-### Workspaces 機能を使ってみる
+### Adding Some Changes to use the Workspaces Functionality
 {:.no_toc}
 
-各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。 Workspaces を使用して、その実行に固有のダウンストリームのジョブで必要となるデータを渡すことができます。 `config.yml` を次のように書き換えてみてください。
+Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. You can use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. `config.yml` を次のように書き換えてみてください。
 
 ```yml
 version: 2
@@ -190,7 +190,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2
 
 ターミナルの操作に慣れている場合、SSH enabled オプションで{% comment %} TODO: Job {% endcomment %}ビルドを再実行することで、CircleCI のジョブに SSH で直接接続してビルドのトラブルシューティングを行えます。
 
-*この場合、GitHub アカウントに SSH キーを追加する必要があることに注意してください。詳細については、<https://help.github.com/articles/connecting-to-github-with-ssh/> を参照してください。*
+*Note that you will need to add your SSH keys to your GitHub account: <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
 
 ![]({{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
@@ -198,7 +198,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2
 
 ビルドの SSH の有効化セクションから、`ssh` の接続先をコピーします。 ターミナルを開き、`ssh` の接続先を貼り付けます。
 
-以下のコマンドのいくつかを使用すると、Workspaces を使用して作成したファイルの内容を検索し、表示できます。
+Using some of the following commands, see if you can find and view the contents of the file you created using workspaces:
 
     pwd     # print what directory の略で、現在のディレクトリがファイルシステムのどこなのかを確認できます
     ls -al   # list の略で、現在のディレクトリに存在するファイルとディレクトリを一覧表示します
@@ -206,7 +206,7 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2
     cat <file_name>    # <file_name> で指定したファイルの内容を表示します
     
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 Git フックでのコミットごとに CircleCI の `config.yml` をバリデーションする方法については[こちらのブログ](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)で紹介しています。
@@ -214,16 +214,16 @@ Git フックでのコミットごとに CircleCI の `config.yml` をバリデ�
 ### CircleCI に関する資料
 {:.no_toc}
 
-* CircleCI のブログとフォロー方法 
+* The CircleCI blog and how to follow it 
   * <https://circleci.com/blog/>
-* 関連するブログ投稿  
+* Relevant blog post  
   * <https://circleci.com/blog/what-is-continuous-integration/>
-* CircleCI の SNS アカウントと GitHub アカウント 
+* Our other social media and GitHub 
   * <https://github.com/circleci>
-  * <https://twitter.com/circlecijapan>
+  * <https://twitter.com/circleci>
   * <https://www.facebook.com/circleci>
 
-### 継続的インテグレーション
+### Continuous Integration
 {:.no_toc}
 
 * <https://martinfowler.com/articles/continuousIntegration.html>
