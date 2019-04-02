@@ -7,7 +7,7 @@ order: 30
 ---
 This document is for System Administrators who are setting environment variables for installed Nomad Clients, scaling their cluster, gathering metrics for monitoring their CircleCI installation, and viewing logs:
 
-* 目次
+* TOC
 {:toc}
 
 ## Advanced System Monitoring
