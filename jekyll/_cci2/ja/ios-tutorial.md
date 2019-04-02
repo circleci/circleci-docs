@@ -9,15 +9,15 @@ order: 20
 ---
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 {:.no_toc}
 
 The following sections walk through how to write Jobs and Steps that use `xcodebuild` for this application, how to set up code signing and a provisioning profile in the CircleCI environment, and how to deploy with Fastlane.
 
-## 前準備
+## Prerequisites
 {:.no_toc}
 
 - Add your project to CircleCI, see [Hello World]({{ site.baseurl }}/2.0/hello-world/).
