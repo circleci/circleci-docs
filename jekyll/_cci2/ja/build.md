@@ -30,4 +30,4 @@ description: "CircleCI 2.0 Build Environment Configuration"
 
 We’re thrilled to have you here. Happy building!
 
-*CircleCI チーム*
+*The CircleCI Team*
