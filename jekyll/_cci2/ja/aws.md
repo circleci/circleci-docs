@@ -8,7 +8,7 @@ description: "Amazon Webサービス(AWS)にCircleCIをインストールする�
 ---
 This document provides requirements and step-by-step instructions for installing CircleCI v2.16 on Amazon Web Services (AWS) with Terraform in the following sections.
 
-- 目次
+- TOC
 {:toc}
 
 Refer to the [v2.16 Changelog](https://circleci.com/server/changelog) for what's new and fixed in this release.
@@ -65,33 +65,33 @@ Number of daily active CircleCI users | Number of Nomad client machines \---\---
 
 - Terraform。 [Terraformのダウンロード](https://www.terraform.io/downloads.html)で、お使いのアーキテクチャ用のパッケージを探してください。
 
-インストール手順の開始前に、次の情報が利用可能なことを確認します。
+Have the following information available before beginning the installation procedure:
 
 - CircleCIライセンスファイル(.rli)。ライセンスについては、[CircleCIサポート](https://support.circleci.com/hc/en-us/requests/new)にお問い合わせください。
 - AWSアクセスキーとAWS秘密キー。
 - Name of [AWS EC2 SSHキー](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)の名前。
-- AWSリージョン、たとえば`us-west-2`。
+- AWS Region, for example `us-west-2`.
 - AWS Virtual Private Cloud (VPC) ID and AWS Subnet ID. Your default VPC ID is listed under Account Attributes in Amazon if your account is configured to use a default VPC.
-- VPCの [`enableDnsSupport`] を`true`に設定し、Amazonが提供するIPアドレス169.254.169.253のDNSサーバー、またはVPC IPv4ネットワーク範囲のベース+2の予約IPアドレスへのクエリが成功するようにします。 さらに詳しい情報については、Amazon Webサービスのドキュメントにある[VPCでのDNSの使用](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating)を参照してください。
+- Set your VPC [`enableDnsSupport`] setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the [Using DNS with Your VPC](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating) Amazon Web Services documentation for additional details.
 
-### 非公開サブネットの要件
+### Private Subnet Requirements
 {:no_toc}
 
-AWS上の非公開サブネットをCircleCIで使用するには、次の追加設定が必要です。
+The following additional settings are required to support using private subnets on AWS with CircleCI:
 
 - ビルダボックス用の非公開サブネットは、[NATゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)または[インターネットゲートウェイ](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html)で、添付のルートテーブルにより、インターネットへの外向けトラフィック用に構成する必要があります。 **Note:** The subnet should be large enough to *never* exhaust the addresses.
-- [S3用のVPCエンドポイント](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にします。 S3用のVPCエンドポイントを有効にすると、CircleCIや、サブネット内の他のノードについて、S3動作が大幅に改良されます。
-- NATインスタンスに、多くのネットワーク動作に耐えられるよう、十分な性能があることを確認します。 展開の仕様によっては、Dockerや外部のネットワークリソースを使用して、NATインスタンスを並列性の高いビルドにすることもできます。 NATの性能が不十分な場合、ネットワークやキャッシュの動作速度が低下する可能性があります。
-- [github.com](https://github.com)と統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにGitHub webhooksのポート80および443が含まれていることを確認します。 GitHubと統合するときは、CircleCIを公開サブネットにセットアップするか、github.comのトラフィックを転送するための公開ロードバランサーをセットアップします。
+- The [VPC Endpoint for S3](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/) should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
+- Adequately power the NAT instance for heavy network operations. Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources. A NAT that is inadequate could cause slowness in network and cache operations.
+- [github.com](https://github.com)と統合する場合、ネットワークのアクセス制御リスト(ACL)のホワイトリストにGitHub webhooksのポート80および443が含まれていることを確認します。 When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
 - CircleCIインストールのインスタンスにアクセス可能な必要のあるポートの詳細については、「[管理者向け概要]({{site.baseurl}}/2.0/overview#services)」の「サービス」セクションを参照してください。
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
 
-## 計画
+## Planning
 
-プレビューリリースのインストールを開始する前に、次の情報とポリシーが利用可能なことを確認します。
+Have available the following information and policies before starting the Preview Release installation:
 
-- ネットワークプロキシを使用する場合、CircleCI 2.0のインストールを試みる前に、自社のアカウントチームに問い合わせます。
+- If you use network proxies, contact your Account team before attempting to install CircleCI 2.0.
 - サービス用に1つ、Nomad Clientsの最初のセット用に1つ、最低2つのAWSインスタンスのプロビジョニングを計画します。 ベストプラクティスとして、サービスとNomad Clientsインスタンスの両方に、8つのvCPUと32GBのRAMを持つ`m4.2xlarge`インスタンスを使用することをお勧めします。
 - AWSインスタンスには、Dockerコンテナをプルするため、およびライセンスを確認するため、外向けのアクセスが必要です。
 - 必要なAWSエンティティをTerraformでプロビジョニングするには、次のアクセス許可を持つIAMユーザーが必要です。
@@ -162,17 +162,17 @@ AWS上の非公開サブネットをCircleCIで使用するには、次の追加
 
 ## Validating Your Installation
 
-1. ダッシュボードの [開く] リンクをクリックすると、CircleCI アプリに移動します。CircleCIアプリケーションの起動中に開始ページが少しの間表示されてから、ホームページへ自動的に転送されます。
+1. Click the Open link in the dashboard to go to the CircleCI app. The Starting page appears for a few minutes as the CircleCI application is booting up, then automatically redirects to the homepage.
 2. Sign up or sign in by clicking the Get Started button. Because you are the first user to log in, you become the Administrator.
-3. [Hello World]({{site.baseurl}}/2.0/hello-world/)ドキュメントを使用して、プロジェクトを追加します。
+3. Add a project using the [Hello World]({{site.baseurl}}/2.0/hello-world/) document.
 
-## トラブルシューティング
+## Troubleshooting
 
 最初のビルドが正しく実行されない場合、弊社の[トラブルシューティング]({{site.baseurl}}/2.0/troubleshooting/)ガイドや、『[Nomadクラスタの動作の概要]({{site.baseurl}}/2.0/nomad/)』ドキュメントを参照し、ビルダのステータスを調べる方法を確認します。
 
-ビルドコンテナが開始し、イメージのダウンロードが完了した後で、最初のビルドがただちに開始されます。
+After the build containers start and complete downloading of images, the first build should begin immediately.
 
-15分間更新がなく、[更新] ボタンを押しても更新が行われない場合、[CircleCIサポート](https://support.circleci.com/hc/en-us)にお問い合わせください。
+If there are no updates after about 15 minutes and you have clicked the Refresh button, contact [CircleCI support](https://support.circleci.com/hc/en-us) for assistance.
 
 ### Server Ports
 
