@@ -14,7 +14,7 @@ sitemap: false
 - [Getting Started with CircleCI 1.0]({{ site.baseurl }}/archive/getting-started/){:rel="nofollow"}
 - [FAQ]({{ site.baseurl }}/archive/faq/){:rel="nofollow"}
 
-## 開発環境の移行
+## Migration
 
 - [Sample 1.0 circle.yml file]({{ site.baseurl }}/archive/config-sample/){:rel="nofollow"}
 - [GitHub Integration (5)]({{ site.baseurl }}/archive/github-privacy/){:rel="nofollow"}
@@ -98,7 +98,7 @@ sitemap: false
 - [Polling project status using CCMenu, CCTray, etc.]({{ site.baseurl }}/archive/polling-project-status/){:rel="nofollow"}
 - [Embeddable status badges]({{ site.baseurl }}/archive/status-badges/){:rel="nofollow"}
 
-## トラブルシューティング
+## Troubleshooting
 
 - [Downgrading MySQL from 5.7 to 5.6]({{ site.baseurl }}/archive/downgrading-mysql-to-5.6/){:rel="nofollow"}
 - [File-ordering bugs on Linux systems]({{ site.baseurl }}/archive/file-ordering/){:rel="nofollow"}
