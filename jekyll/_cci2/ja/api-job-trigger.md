@@ -9,10 +9,10 @@ order: 80
 ---
 This document describes how to trigger jobs using the CircleCI API.
 
-- 目次
+- TOC
 {:toc}
 
-## 概要
+## Overview
 
 Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
@@ -81,6 +81,6 @@ Notes on the above example:
 - ビルドジョブの `deploy` ステップを必ず使用してください。これを使用しないと、並列処理の値が N の場合に、N 回のビルドがトリガーされることがあります。
 - API 呼び出しを `build_parameters[CIRCLE_JOB]=deploy_docker` で使用し、`deploy_docker` ジョブのみが実行されるようにします。
 
-## 関連情報
+## See Also
 
 [Triggers]({{ site.baseurl }}/2.0/triggers/)
