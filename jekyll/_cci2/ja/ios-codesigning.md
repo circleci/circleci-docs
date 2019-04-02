@@ -9,7 +9,7 @@ order: 40
 ---
 This document describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0.
 
-* 目次
+* TOC
 {:toc}
 
 ## Basic Configuration of iOS Projects
@@ -78,7 +78,7 @@ To enable Fastlane Match to download the certificates and the keys from GitHub, 
 
 **Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
 
-In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. 例えば下記のようにします。
+In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. For example:
 
     git_url("git@github.com:fastlane/certificates")
     app_identifier("tools.fastlane.app")
@@ -216,7 +216,7 @@ By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for an example of how to configure code signing for iOS apps using Fastlane Match.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 To read a blog post by Franz Busch at Sixt about their setup for CI with Fastlane and CircleCI, refer to the [Continuous integration and delivery with fastlane and CircleCI](https://medium.com/sixt-labs-techblog/continuous-integration-and-delivery-at-sixt-91ca215670a0) blog post on Medium.
