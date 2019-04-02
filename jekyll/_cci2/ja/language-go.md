@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Language Guide: Go"
-short-title: "Go、Go 言語"
+short-title: "Go"
 description: "Building and Testing with Go (Golang) on CircleCI 2.0"
 categories:
   - language-guides
@@ -9,7 +9,7 @@ order: 3
 ---
 CircleCI supports building Go projects using any version of Go that can be installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- 目次
+- TOC
 {:toc}
 
 ## Quickstart: Demo Go Reference Project
@@ -115,7 +115,7 @@ jobs: # basic units of work in a run
 
 {% endraw %}
 
-### CircleCI のビルド済み Docker イメージ
+### Pre-Built CircleCI Docker Images
 {:.no_toc}
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
@@ -291,7 +291,7 @@ Finally, let's specify a path to store the results of the tests.
 
 Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## 関連情報
+## See Also
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
