@@ -9,7 +9,7 @@ order: 2
 ---
 The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) keys for Orbs.
 
-- 目次
+- TOC
 {:toc}
 
 ## Orbs Overview
@@ -83,7 +83,7 @@ version: 2
 {% endraw %}
 This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
-## 関連情報
+## See Also
 
 - [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
 - [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
