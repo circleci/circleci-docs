@@ -3,11 +3,11 @@ layout: classic-docs
 title: Browser Testing
 description: CircleCI でのブラウザーのテスト
 category:
-  - テスト
+  - test
 ---
 このドキュメントでは、CircleCI の構成をブラウザーでテストおよびデバッグする一般的な方法について説明します。このドキュメントには以下のセクションがあります。
 
-* 目次
+* TOC
 {:toc}
 
 ## 前準備
@@ -15,12 +15,12 @@ category:
 
 Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
-## 概要
+## Overview
 {:.no_toc}
 
 コードをプッシュしてコミットするごとに、CircleCI は選択したブラウザーに対してすべてのテストを自動的に実行します。 ブラウザーベースのテストは、変更が行われたとき、すべてのデプロイの前、またはとテイクのブランチのたびに実行されるよう構成できます。
 
-## セレン
+## Selenium
 
 ブラウザーテスト用の多くの自動化ツールは、広く採用されているブラウザー駆動標準である Selenium WebDriver を使用しています。
 
@@ -265,6 +265,6 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
-## 関連情報
+## See Also
 
 [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
