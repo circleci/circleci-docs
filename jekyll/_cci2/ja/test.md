@@ -15,7 +15,7 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 
 ## Running, Splitting, and Debugging Tests
 
-| Document                                                                     | お問い合わせ内容                                                                                          |
+| Document                                                                     | Description                                                                                       |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | <a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuring CircleCI: <code>run</code> Step section</a>                                                    | Write a job to run your tests.                                                                    |
 | [Browser Testing]({{ site.baseurl }}/2.0/browser-testing/)                   | Common methods for running and debugging browser tests in CircleCI.                               |
@@ -28,11 +28,11 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 | <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a>                                                    | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0. |
 {: class="table table-striped"}
 
-## デプロイ、デプロイする
+## Deploy
 
 Refer to the following document for information and examples of deployment targets and tools.
 
-| Document                  | お問い合わせ内容                                                                                                           |
+| Document                  | Description                                                                                                        |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | <a href="{{ site.baseurl }}/2.0/deployment-integrations/">Deployment</a> | Configure automated deployment to AWS, Azure, Firebase, Google Cloud, Heroku, NPM, or virtually any other service. |
 | <a href="{{ site.baseurl }}/2.0/artifactory/">Artifactory</a> | Configure automated uploads to Artifactory with the Jfrog CLI.                                                     |
@@ -41,4 +41,4 @@ Refer to the following document for information and examples of deployment targe
 
 We’re thrilled to have you here. Happy building!
 
-*CircleCI チーム*
+*The CircleCI Team*
