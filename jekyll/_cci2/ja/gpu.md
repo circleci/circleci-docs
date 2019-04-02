@@ -11,11 +11,11 @@ This document outlines how to run GPU (graphics processing unit) machine executo
 * TOC 
 {:toc}
 
-## 前準備
+## Prerequisites
 
 Configure the `vm-service` in the Replicated management console to start a GPU-enabled instance.
 
-## 概要
+## Overview
 
 Run the following commands on any Nvidia GPU-enabled instance. The following example uses CUDA 8.0, but you can use any CUDA runtime version supported by your GPU instance.
 
