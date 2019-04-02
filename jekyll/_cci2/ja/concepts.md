@@ -20,7 +20,7 @@ A CircleCI project shares the name of the associated code repository and is visi
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
 
-## 追加手順
+## Steps
 
 Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
 
@@ -58,7 +58,7 @@ build3: macos: # Specifies a macOS virtual machine with Xcode version 9.0 xcode:
 ...  
 ```
 
-## ジョブ
+## Jobs
 
 Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
 
@@ -207,7 +207,7 @@ Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\--
 
 Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
