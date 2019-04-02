@@ -8,7 +8,7 @@ description: "How to update server replicated and docker version"
 ---
 This document describes how to update the server replicated version for your private installation of CircleCI in the following sections:
 
-- 目次
+- TOC
 {:toc}
 
 ## Assumptions
