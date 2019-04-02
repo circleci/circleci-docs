@@ -9,12 +9,12 @@ order: 41
 ---
 This document describes creating and using contexts in CircleCI in the following sections:
 
-* 目次
+* TOC
 {:toc}
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
 
-## 概要
+## Overview
 {:.no_toc}
 
 Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization administrator to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
@@ -109,7 +109,7 @@ If the context is restricted with a group other than `All members`, you must be 
 
 ## Environment Variable Usage
 
-環境変数は次の優先順位で使用されます。
+Environment variables are used according to a specific precedence order, as follows:
 
 1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
 2. Environment variables declared with the `environment` key for a `run` step.
@@ -119,8 +119,8 @@ If the context is restricted with a group other than `All members`, you must be 
 6. Project-level environment variables set on the Project Settings page.
 7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
 
-`FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
+Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-## 関連情報
+## See Also
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) [Workflows]({{ site.baseurl }}/2.0/workflows/)
