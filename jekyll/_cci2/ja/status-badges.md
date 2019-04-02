@@ -5,7 +5,7 @@ description: How to embed a CircleCI status badge in any web page or document
 ---
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
-## 概要
+## Overview
 
 Status badges are commonly embedded in project READMEs, although they can be placed in any web document. CircleCI provides a tool to generate embed code for status badges. By default, a badge displays the status of a project's default branch, though you can also select other branches.
 
@@ -34,6 +34,6 @@ You can generate code for the following formats:
 
 If you find the default status badge too minimal, you can use the [shield style](https://shields.io/). To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
-## 関連情報
+## See Also
 
 [Status]({{ site.baseurl }}/2.0/status/)
