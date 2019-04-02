@@ -9,7 +9,7 @@ order: 70
 ---
 このドキュメントでは、アーティファクトの操作方法について説明します。このドキュメントには次のセクションがあります。
 
-* 目次
+* TOC
 {:toc}
 
 ## アーティファクトの概要
@@ -143,7 +143,7 @@ First, the CIRCLE_TOKEN environment variable is created. Then, the `curl` comman
 
 **Note:** In the above example, `xargs` runs four processes to download artifacts in parallel. Adjust the number given to the `-P` flag as needed.
 
-## 関連情報
+## See Also
 {:.no_toc}
 
 [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
