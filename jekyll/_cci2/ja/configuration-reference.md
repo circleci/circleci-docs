@@ -50,7 +50,7 @@ order: 20
 
 ## **`commands`**（version：2.1 が必須）
 
-commands は、ジョブ内で実行するマップの形でステップシーケンスを定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)が可能になります。
+commands は、ジョブ内で実行するステップシーケンスをマップとして定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)が可能になります。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。 parameters | - | Map | パラメーターキーのマップです。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。 description | - | String | コマンドの内容を説明する文章です。
 {: class="table table-striped"}
