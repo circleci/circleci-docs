@@ -312,8 +312,8 @@ examples:
 ```
 {% endraw %}
 
-### Example Usage Syntax
-The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
+### Usage Examples Syntax
+The top level `examples` key is optional. Usage example maps nested below it can have the following keys:
 
 - **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
 - **usage:** (required) A full, valid config map that includes an example of using the orb.
