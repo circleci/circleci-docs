@@ -231,13 +231,6 @@ When you have completed authoring an orb, and have published the orb, the orb wi
 
 ![Orbs Registry image]({{ site.baseurl }}/assets/img/docs/Orbs-Registry.png)
 
-### Example Usage Syntax
-The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
-
-- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
-- **usage:** (required) A full, valid config map that includes an example of using the orb.
-- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
-
 ### Simple Examples
 Below is an example orb you can use:
 
@@ -318,6 +311,13 @@ examples:
           - build
 ```
 {% endraw %}
+
+### Example Usage Syntax
+The top level `examples` key is optional. Example usage maps nested below it can have the following keys:
+
+- **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
+- **usage:** (required) A full, valid config map that includes an example of using the orb.
+- **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
 
 ## Publishing an Orb
 
