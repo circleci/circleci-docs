@@ -752,7 +752,7 @@ Web アプリケーションや API を通じて使う artifacts（ログ、バ�
 
 ##### **`store_test_results`**
 
-テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果は Builds ページの [Test Summary] タブに表示され、時系列解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をビルドの artifact ファイルとして出力することもできます。
+テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果は Builds ページの [Test Summary] タブに表示され、テストのタイミング解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をビルドの artifact ファイルとして出力することもできます。
 
 キー | 必須 | 型 | 説明 \----|\---\---\-----|\---\---|\---\---\---\--- path | ○ | String | JUnit XML のサブディレクトリや Cucumber JSON のテストメタデータが含まれるディレクトリへのパス（`working_directory`に対する絶対もしくは相対パス）を指定します。
 {: class="table table-striped"}
@@ -858,7 +858,7 @@ Workflow を再度実行すると、元の Workflow のものと同じ Workspace
 
 Artifacts、Workspaces、キャッシュはそれぞれ下記のような違いがあることを頭に入れておいてください。
 
-| タイプ | データ寿命 | 用途 | 使用例・参照先 | |\---\---\-----|\---\---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\---\--- | Artifacts | 1 ヶ月単位 | artifacts の長期間に渡る保管 | **Builds ページ**の [Artifacts] タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される。 | | Workspaces | Workflow に従う | `attach_workspace:` ステップを使うダウンストリームのコンテナに対して Workspace をアタッチするのに用いる。 | The `attach_workspace` copies and re-creates the entire workspace content when it runs. | | Caches | 1 ヶ月単位 | npm や Gem パッケージなど、ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる。 | `save_cache` ステップでは、`paths` でディレクトリのリストを追加する。また、`key` でキャッシュを一意に識別する名前を（ブランチ、ビルド番号、リビジョンなどを用いて）指定する。 Restore the cache with `restore_cache` and the appropriate `key`. |
+| タイプ | 保存期間 | 用途 | 使用例・参照先 | |\---\---\-----|\---\---\---\---\-----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\---\--- | Artifacts | 1 ヶ月単位 | artifacts の長期間に渡る保管 | **Builds ページ**の [Artifacts] タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される。 | | Workspaces | Workflow に従う | `attach_workspace:` ステップを使うダウンストリームのコンテナに対して Workspace をアタッチするのに用いる。 | The `attach_workspace` copies and re-creates the entire workspace content when it runs. | | Caches | 1 ヶ月単位 | npm や Gem パッケージなど、ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる。 | `save_cache` ステップでは、`paths` でディレクトリのリストを追加する。また、`key` でキャッシュを一意に識別する名前を（ブランチ、ビルド番号、リビジョンなどを用いて）指定する。 Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Workspaces や キャッシュ、artifacts に関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
