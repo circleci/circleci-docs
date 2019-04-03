@@ -11,7 +11,7 @@ order: 9
 
 This guide will help you get started with a minimal Crystal application on CircleCI.
 
-## Overview
+## 概要
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
@@ -113,6 +113,6 @@ Finally, we run `crystal spec` to run the project's test suite.
 
 Great! You've set up CircleCI 2.0 for a basic Crystal application.
 
-## デプロイ、デプロイする
+## デプロイ
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
