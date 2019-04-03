@@ -202,7 +202,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 証明書での認証が必要です。 デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 認証情報での認証が必要です。 デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
 
     jobs:
       build:
@@ -719,7 +719,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 
 artifact のデプロイを行う特殊なステップです。
 
-`deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。 ジョブには少なくとも 1 つ以上の `deploy` ステップがあります。
+`deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。 複数のジョブには 2 つ以上の `deploy` ステップがあります。
 
 通常 `deploy` ステップは 1 つの例外を除き `run` と似た形で動作します。`parallelism` を使ったジョブの場合、`deploy` ステップは他のすべてのノードが成功した場合にのみ、ノード番号 0 として実行されます。 ノード番号 0 以外はステップを実行しません。
 
