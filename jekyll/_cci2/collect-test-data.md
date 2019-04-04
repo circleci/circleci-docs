@@ -14,8 +14,8 @@ CircleCI collects test metadata from XML files and uses it to provide insights i
 
 To see test results as artifacts, upload them using the `store_artifacts` step.
 
-The usage of the `[store_test_results]({{
-site.baseurl}}/2.0/configuration-reference/#store_test_results)` key in your
+The usage of the [`store_test_results`]({{
+site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your
 config looks like the following:
 
 ```sh
