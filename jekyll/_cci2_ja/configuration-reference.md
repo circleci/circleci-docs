@@ -56,7 +56,7 @@ workflows:
 
 ## **`commands`**（version：2.1 が必須）
 
-commands は、ジョブ内で実行するマップの形でステップシーケンスを定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)が可能になります。
+commands は、ジョブ内で実行するステップシーケンスをマップとして定義します。これを活用することで、複数のジョブ間で [コマンド定義の再利用]({{ site.baseurl }}/ja/2.0/reusing-config/)が可能になります。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
@@ -202,7 +202,7 @@ aws_auth | - | Map | AWS EC2 Container Registry（ECR）の認証情報を記述
 
 [プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。現在のところは、`steps` は常にプライマリコンテナ内でのみ実行されます。
 
-`name` では、セカンダリサービスコンテナを利用する際の名前を定義します。デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
+`name` では、セカンダリサービスコンテナにアクセスする際の名前を定義します。デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
 
 `environment` の設定は、初期化用の `command` も含め、この Executor におけるすべてのコマンド実行で有効です。`environment` による設定はジョブのマップにおいて何よりも優先されます。
 
@@ -240,7 +240,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 証明書での認証が必要です。デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
+[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 認証情報での認証が必要です。デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 証明書、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。下記のように `aws_auth` フィールドを用いて証明書をセットすることも可能です。
 
 ```
 jobs:
@@ -792,7 +792,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 
 artifact のデプロイを行う特殊なステップです。
 
-`deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。ジョブには少なくとも 1 つ以上の `deploy` ステップがあります。
+`deploy` は [`run`](#run)  ステップと同様のコンフィグマップなどを用いて設定します。複数のジョブには 2 つ以上の `deploy` ステップがあります。
 
 通常 `deploy` ステップは 1 つの例外を除き `run` と似た形で動作します。`parallelism` を使ったジョブの場合、`deploy` ステップは他のすべてのノードが成功した場合にのみ、ノード番号 0 として実行されます。 ノード番号 0 以外はステップを実行しません。
 
@@ -828,7 +828,7 @@ destination | - | String | artifacts の API において artifacts の保存先
 
 ##### **`store_test_results`**
 
-テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果は Builds ページの [Test Summary] タブに表示され、時系列解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をビルドの artifact ファイルとして出力することもできます。
+テスト結果をアップロードするのに利用する特殊なステップです。これによってテスト結果は Builds ページの [Test Summary] タブに表示され、テストのタイミング解析などに用いることができます。 [**store_artifacts** ステップ](#store_artifacts)を使うことで、テスト結果をビルドの artifact ファイルとして出力することもできます。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
@@ -946,14 +946,14 @@ Workflow を再度実行すると、元の Workflow のものと同じ Workspace
 
 Artifacts、Workspaces、キャッシュはそれぞれ下記のような違いがあることを頭に入れておいてください。
 
-| タイプ | データ寿命 | 用途 | 使用例・参照先 |
+| タイプ | 保存期間 | 用途 | 使用例・参照先 |
 |-----------|-----------------|------------------------------------|---------
 | Artifacts | 1 ヶ月単位 | artifacts の長期間に渡る保管 | **Builds ページ** の [Artifacts] タブで参照する。`tmp/circle-artifacts.<hash>/container` などの配下に格納される。 |
 | Workspaces | Workflow に従う | `attach_workspace:` ステップを使うダウンストリームのコンテナに対して Workspace をアタッチするのに用いる。 | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する。 |
 | Caches | 1 ヶ月単位 | npm や Gem パッケージなど、ジョブ実行の高速化に役立つ変化の少ないデータの保存に用いる。 | `save_cache` ステップでは、`paths` でディレクトリのリストを追加する。また、`key` でキャッシュを一意に識別する名前を（ブランチ、ビルド番号、リビジョンなどを用いて）指定する。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
 {: class="table table-striped"}
 
-Workspaces や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する：キャッシュ、Artifacts、Workspaces 活用のタイミング](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+Workspaces や キャッシュ、artifacts に関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ##### **`add_ssh_keys`**
 
@@ -990,7 +990,7 @@ version | ○ | String | 現在のところは必ず `2` とします。
 Workflow に付けるユニークな名前です。
 
 #### **`triggers`**
-Workflow の実行契機となるトリガーを指定します。デフォルトではブランチにプッシュすると Workflow の実行をトリガーするようになっています。
+Workflow を実行するトリガーを指定します。デフォルトではブランチにプッシュすると Workflow の実行をトリガーするようになっています。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
@@ -1121,7 +1121,7 @@ ignore | - | String / Strings のリスト | 単独のブランチ名、もし�
 ###### **`tags`**
 {:.no_toc}
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグが含まれる Workflows は実行しません。また、（直接にしろ間接的にしろ）他のジョブの実行が必要なジョブの場合、そのジョブにはタグフィルターの指定が必須となります。
+CircleCI は明示的にタグフィルターを指定しない限り、タグに対して Workflows は実行しません。また、（直接にしろ間接的にしろ）他のジョブの実行が必要なジョブの場合、そのジョブにはタグフィルターの指定が必須となります。
 
 tags では `only` キーと `ignore` キーが使えます。文字列を `/` で囲み、正規表現を使ってタグをマッチさせたり、文字列のリストを作ってマップさせることも可能です。正規表現では文字列 **全体** にマッチさせる形にしなければなりません。CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
