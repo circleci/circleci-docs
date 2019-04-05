@@ -127,7 +127,7 @@ jobs:
 
   reindex-search:
     docker:
-      - image: circleci/ruby:2.6.2
+      - image: circleci/ruby:2.6.1-node-browsers
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
