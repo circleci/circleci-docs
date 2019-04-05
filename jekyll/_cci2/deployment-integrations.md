@@ -195,21 +195,21 @@ workflows:
 
 ##### AWS CodeDeploy
 
-This orb enables you to run deployments through AWS CodeDeploy
+The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
 
 ```yaml
-version: 2.1
-orbs:
+version: 2.1 # We must use 2.1 to make use of orbs.
+orbs: # specify all orbs you want to use.
   aws-code-deploy: circleci/aws-code-deploy@1.0.0
 workflows:
   deploy_application:
     jobs:
       - aws-code-deploy/deploy:
-          application-name: myApplication
-          deployment-group: myDeploymentGroup
-          service-role-arn: myDeploymentGroupRoleARN
-          bundle-bucket: myApplicationS3Bucket
-          bundle-key: myS3BucketKey
+          application-name: myApplication # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: myDeploymentGroup # The name of a new deployment group for the specified application.
+          service-role-arn: myDeploymentGroupRoleARN # The service role for a deployment group.
+          bundle-bucket: myApplicationS3Bucket # The s3 bucket where an application revision will be stored.
+          bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
 ```
 
 For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
