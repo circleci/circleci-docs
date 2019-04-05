@@ -9,7 +9,7 @@ order: 20
 
 このページでは `config.yml` ファイル内で使える CircleCI 2.0 のコンフィグ用のキーについて解説しています。CircleCI と連携したリポジトリのブランチに `.circleci/config.yml` ファイルが含まれていれば、それは CircleCI 2.x の環境で利用することを意味します。
 
-`config.yml` ファイルの全容はこのページ内の[サンプルコード](#full-example)にありますので、参考にしてください。
+`config.yml` ファイルの全容はこのページ内の[サンプルコード](#サンプルコード)にありますので、参考にしてください。
 
 **注 :** CircleCI 1.0 から利用していたユーザーは、新たに `config.yml` ファイルを使うことで、以前とは異なるブランチで 2.x 環境におけるビルドを試すことができます。従来の `circle.yml` の設定内容は残るため、`.circleci/config.yml` のないブランチである CircleCI 1.0 環境の実行にも支障はありません。
 
@@ -37,8 +37,8 @@ version | ○ | String | `2`、`2.0`、`2.1` のうちのどれかを指定し�
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 orbs | - | Map | ユーザー指定の名前によるマップです。Orb の参照名（文字列）または Orb の定義名（マップ）を指定します。Orb の定義はバージョン 2.1 のコンフィグにおけるサブセットです。詳細は「[Orb を作成する]({{ site.baseurl }}/ja/2.0/creating-orbs/)」を参照してください。
-executors | - | Map | Executor の定義文字列のマップです。後述の [executors]({{ site.baseurl }}/ja/2.0/configuration-reference/#executors-requires-version-21) セクションも参照してください。
-commands | - | Map | command を定義するコマンド名のマップです。下記 [commands]({{ site.baseurl }}/ja/2.0/configuration-reference/#commands-requires-version-21) のセクションを参照してください。
+executors | - | Map | Executor の定義文字列のマップです。後述の [executors]({{ site.baseurl }}/ja/2.0/configuration-reference/#executorsversion21-が必須) セクションも参照してください。
+commands | - | Map | command を定義するコマンド名のマップです。下記 [commands]({{ site.baseurl }}/ja/2.0/configuration-reference/#commandsversion21-が必須) のセクションを参照してください。
 {: class="table table-striped"}
 
 以下の例は認証済みの名前空間 `circleci` 配下にある `hello-build` という Orb のものです。
@@ -89,7 +89,7 @@ docker | ○<sup>(1)</sup> | List | docker executor を使用します。指定�
 resource_class | - | String | ジョブの各コンテナに割り当てる CPU の数とメモリ容量を指定します （`docker` Executor でのみ有効）。**注 :** この機能を利用するには有償アカウントが必要です。有償プランをお使いの方は[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)利用できるようリクエストしてください。
 machine | ○<sup>(1)</sup> | Map | machine Executor を使用します。指定可能なオプションは[こちら](#machine)。
 macos | ○<sup>(1)</sup> | Map | macOS Executor を使用します。指定可能なオプションは[こちら](#macos)。
-shell | - | String | ステップ内のコマンド実行に用いるシェルです。ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。
+shell | - | String | ステップ内のコマンド実行に用いるシェルです。ステップごとに使用する `shell` を変えることもできます（デフォルト：[デフォルトのシェルオプション](#デフォルトのシェルオプション)を参照してください）。
 working_directory | - | String | steps を実行する際のディレクトリを指定します。
 environment | - | Map | 環境変数の名前と値のマップです。
 {: class="table table-striped"}
@@ -132,7 +132,7 @@ Workflows を **使わない** 場合は、`jobs` マップ内に `build` とい
 docker | ○<sup>(1)</sup> | List | docker Executor を使います。指定可能なオプションは[こちら](#docker)。
 machine | ○<sup>(1)</sup> | Map | machine Executor を使います。指定可能なオプションは[こちら](#machine)。
 macos | ○<sup>(1)</sup> | Map | macOS Executor を使います。指定可能なオプションは[こちら](#macos)。
-shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#default-shell-options)を参照してください）。
+shell | - | String | すべてのステップ内のコマンド実行に用いるシェルです。ステップごとに使用する `shell` を変えることも可能です（デフォルト：[デフォルトのシェルオプション](#デフォルトのシェルオプション)を参照してください）。
 steps | ○ | List | [実行内容](#steps)のリストを設定します。
 working_directory | - | String | steps を実行する際のディレクトリを指定します。デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。**注 :** YAML ファイルに記述したパスは展開 *されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。
 parallelism | – | Integer | このジョブの並列処理の数を指定します（デフォルト：1）。
@@ -351,7 +351,7 @@ jobs:
 
 #### **`branches`**
 
-Workflows を利用 **せず**、バージョン 2.0（2.1 ではなく）のコンフィグを使っているケースでは、ブランチの実行をホワイトリスト・ブラックリスト方式で定義できます。[Workflows]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) を使っている場合はジョブレベルの branches は無視されるため、利用する `config.yml` ファイルの Workflows セクション内で設定します。バージョン 2.1 のコンフィグでは、Workflows を追加することでフィルタリングが可能です。詳しくは後述の [workflows](#workflows) を参照してください。ジョブレベルの `branches` キーは下記の要素を用いて設定します。
+Workflows を利用 **せず**、バージョン 2.0（2.1 ではなく）のコンフィグを使っているケースでは、ブランチの実行をホワイトリスト・ブラックリスト方式で定義できます。[Workflows]({{ site.baseurl }}/ja/2.0/workflows/#workflows-におけるコンテキストとフィルターの使い方) を使っている場合はジョブレベルの branches は無視されるため、利用する `config.yml` ファイルの Workflows セクション内で設定します。バージョン 2.1 のコンフィグでは、Workflows を追加することでフィルタリングが可能です。詳しくは後述の [workflows](#workflows) を参照してください。ジョブレベルの `branches` キーは下記の要素を用いて設定します。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
@@ -461,12 +461,12 @@ jobs:
 ----|-----------|------|------------
 command | ○ | String | シェルを通じて実行するコマンドを指定します。
 name | - | String | CircleCI 上で表示するステップのタイトル名を指定します（デフォルト：`command` 文字列全体)。
-shell | - | String | コマンド実行に用いるシェルを指定します（デフォルト：[デフォルトのシェルオプション](#default-shell-options)）。
+shell | - | String | コマンド実行に用いるシェルを指定します（デフォルト：[デフォルトのシェルオプション](#デフォルトのシェルオプション)）。
 environment | - | Map | コマンドへのローカルスコープとなる追加の環境変数を設定します。
 background | - | Boolean | このステップをバックグラウンドで実行するかどうかを設定します（デフォルト：false）。
 working_directory | - | String | このステップを実行するディレクトリを指定します（デフォルト：当該ジョブの[`working_directory`](#jobs)）。
 no_output_timeout | - | String | 出力のないコマンドの実行持続可能時間を指定します。「20m」「1.25h」「5s」のように、時間単位付きの十進数で指定します（デフォルト：10分間）。
-when | - | String | [ステップの実行を有効・無効にする条件を指定します](#the-when-attribute)。次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
+when | - | String | [ステップの実行を有効・無効にする条件を指定します](#when-属性)。次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
 `run` を宣言するたびに新たなシェルが立ち上がることになります。複数行の `command` を指定し、それらを同一のシェル内で実行することも可能です。
@@ -678,7 +678,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 paths | ○ | List | キャッシュに追加するディレクトリのリストを指定します。
 key | ○ | String | キャッシュ識別用のユニーク ID を指定します。
 name | - | String | CircleCI の画面上にタイトル表示するステップの名前を指定します（デフォルト：Saving Cache）。
-when | - | String | ステップの実行を有効・無効にする[条件](#the-when-attribute)を指定します。次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
+when | - | String | ステップの実行を有効・無効にする[条件](#when-属性)を指定します。次の値のうちいずれかを指定してください。`always`/`on_success`/`on_fail`（デフォルト：`on_success`）
 {: class="table table-striped"}
 
 `key` で割り当てたキャッシュは、一度書き込むと書き換えられません。
@@ -1034,7 +1034,7 @@ filters | ○ | Map | 実行するブランチを定義付けするマップを�
 ###### **`ブランチ`**
 {:.no_toc}
 
-`branches` キーは、`trigger` を定義した `config.yml` ファイルを含むブランチにおいて、スケジュール実行すべきブランチかどうかを決定するのに使えます。つまり、`master` ブランチにプッシュすると、`master` ブランチの [Workflows]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) のみをスケジュール実行します。
+`branches` キーは、`trigger` を定義した `config.yml` ファイルを含むブランチにおいて、スケジュール実行すべきブランチかどうかを決定するのに使えます。つまり、`master` ブランチにプッシュすると、`master` ブランチの [Workflows]({{ site.baseurl }}/ja/2.0/workflows/#workflows-におけるコンテキストとフィルターの使い方) のみをスケジュール実行します。
 
 branches では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。正規表現では文字列 **全体** にマッチさせる形にしなければなりません。
 
@@ -1137,7 +1137,7 @@ only | - | String / Strings のリスト | 単独のタグ文字列、もしく�
 ignore | - | String / Strings のリスト | 単独のタグ文字列、もしくはタグ文字列のリスト指定します。
 {: class="table table-striped"}
 
-詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/ja/2.0/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
+詳細は Workflows ページの「[Git タグを用いて Workflows を実行する]({{ site.baseurl }}/ja/2.0/workflows/#git-タグに対応可能な-workflows-を実行する)」を参照してください。
 
 ###### *例*
 
