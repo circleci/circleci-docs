@@ -33,7 +33,7 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.8 #
+      - image: circleci/golang:1.12 #
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment: # environment variables for primary container
@@ -160,15 +160,15 @@ Directly beneath `working_directory`, we’ll specify [primary container]({{ sit
 
 ```yaml
     docker:
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.12
 ```
 
-We'll use a custom image which is based on `golang:1.8.0` and includes also `netcat` (we'll need it later).
+We'll use a custom image which is based on `golang:1.12.0` and includes also `netcat` (we'll need it later).
 
 We're also using an image for PostgreSQL, along with 2 environment variables for initializing the database.
 
 ```yaml
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
