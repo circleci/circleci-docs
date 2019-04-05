@@ -131,6 +131,8 @@ en:
           link: 2.0/oss/
         - name: Using Notifications
           link: 2.0/notifications/
+        - name: Connecting JIRA with CircleCI
+          link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
         - name: Using Environment Variables
