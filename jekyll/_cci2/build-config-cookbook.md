@@ -15,7 +15,9 @@ This page, and its associated "recipes" on subsequent pages, describes how you c
 
 ### What Are CircleCI Orbs?
 
-Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+CircleCI Orbs are configuration packages that you can use to get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices. 
+
+Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
 To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
 
@@ -23,15 +25,13 @@ To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2
 version: 2.1
 
 orbs:
-    hello: circleci/hello-build@0.0.5
+  hello: circleci/hello-build@0.0.5
 
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  "Hello Workflow":
+    jobs:
+      - hello/hello-build
 ```
-
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key.
 
 For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
@@ -41,8 +41,8 @@ The table below lists the different build configuration "recipes" you can perfor
 
 Build Configuration Recipe | Description 
 ------------|-----------
-Deploying Software Changes to Amazon Elastic Container Service (ECS) | This page describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-Deploying Software Changes to Google Kubernetes Engine (GKE) | This page describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
+Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -50,7 +50,7 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
 
 ### Prerequisites
 
-Before you can deploy any software changes to Amazon ECS on the CircleCI platform, you must first perform a series of configuration steps to ensure that you have properly set up your environment for the CircleCI platform. Also, because CircleCI has created an "orb" to simplify these steps, you will also need to ensure your instance has been configured for using CircleCI orbs.
+Before you can deploy any software changes to Amazon ECS on the CircleCI platform, you must first perform a series of configuration steps to ensure that you have properly set up your environment for the CircleCI platform. Also, because CircleCI has created an "orb" to simplify these steps, you will also need to ensure your CircleCI project has been configured for using CircleCI orbs.
 
 ### Configuring Your Environment for the CircleCI Platform and Orbs
 
@@ -58,12 +58,12 @@ Before you can deploy any software changes to Amazon ECS on the CircleCI platfor
 
 `version: 2.1`
 
-If you do not already have pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and enable pipelines.
+If you do not already have pipelines enabled, you'll need to go to **Project Settings -> Enable Pipelines** to ensure you have properly enabled pipelines.
 
-2) Add the orbs stanza below your version, invoking the orb:
+2) Add the orbs stanza below your version, which in turn invokes the orb:
 
-```orbs:
-  aws-ecs: circleci/aws-ecs@0.0.6
+```yaml
+aws-ecs: circleci/aws-ecs@0.0.6
 ```
 
 3) Use `aws-ecs elements` in your existing workflows and jobs.
@@ -97,7 +97,7 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-Notice in this example that you need to instantiate two different AWS ECR orbs: `aws-ecr 0.0.3` and `aws-ecr 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb workflows in the orb first build and push the image, and then deploy the service update to ECS.
+Notice in this example that you need to instantiate two different AWS ECS orbs: `aws-ecs 0.0.3` and `aws-ecs 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb workflows in the orb first build and push the image, and then deploy the service update to ECS.
 
 ### Updating the Amazon Web Services CLI and Amazon ECS
 
@@ -166,7 +166,7 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed.
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to build and push an image to Amazon ECS.
 
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
@@ -177,7 +177,7 @@ The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to q
 ### Prerequisites
 
 #### Setting Environment Variables
-The following environment variables need to be set in CircleCI either directly or via a context:
+The following environment variables need to be set in CircleCI either directly or through a context:
 
 - `GCLOUD_SERVICE_KEY` (required)
 - `GOOGLE_PROJECT_ID`
@@ -196,9 +196,7 @@ If you do not already have pipelines enabled, you'll need to go to **Project Set
 2) Add the orbs stanza below your version, invoking the following orbs:
 
 ```orbs:
-    gcloud: circleci/gcp-cli@1.0.6
-    gcr: circleci/gcp-gcr@0.0.2
-    k8s: circleci/kubernetes@0.1.0
+    gcr: circleci/gcp-gke@0.0.2
 ```
 
 ### Managing GKE Actions
@@ -313,7 +311,6 @@ jobs:
 The example below illustrates how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and roll the image out to the GKE cluster.
 
 ```yaml
-example:
   publish-and-rollout-image:
     description: |
       "The simplest example of using this Orb. Logs into GCP, builds and 
