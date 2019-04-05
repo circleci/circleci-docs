@@ -559,7 +559,7 @@ If you would like to simplify your Heroku configuration workflows, including dep
 
 #### Deploying Heroku
 
-```
+```yaml
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -571,7 +571,7 @@ workflows:
 
 #### Customizing Heroku Workflows
 
-```
+```yaml
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -581,12 +581,12 @@ workflows:
       - deploy
 jobs:
   deploy:
-    executor: heroku/default
+    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
     steps:
       - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          only-branch: master
+      - heroku/install # Runs the heroku install command, if necessary.
+      - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
+          only-branch: master # If you specify an only-branch, the deploy will not occur for any other branch.
 ```
 
 For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku) page in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
