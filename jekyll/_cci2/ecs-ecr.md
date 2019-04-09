@@ -162,5 +162,5 @@ workflows:
 ```
 
 ## See Also
-- If you would like to review an example that builds, tests and pushes the Docker image to ECR and then uses the `aws-ecs` orb to deploy the update, go to the [AWS-ECS-ECR Orbs]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs demo page.
-- If you would also like to review an example that does not use CircleCI orbs, go to the [Non-Orbs AWS ECR-ECS Demo]https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs demo page.
+- If you would like to review an example that builds, tests and pushes the Docker image to ECR and then uses the `aws-ecs` orb to deploy the update, go to the [AWS-ECS-ECR Orbs](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs) demo page.
+- If you would also like to review an example that does not use CircleCI orbs, go to the [Non-Orbs AWS ECR-ECS Demo](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs) demo page.
