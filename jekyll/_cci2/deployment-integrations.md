@@ -192,9 +192,30 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-For more detailed information about the AWS ECS & AWS ECR orbs, refer to the following Orb registry pages:
+
+##### AWS CodeDeploy
+
+The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
+
+```yaml
+version: 2.1 # We must use 2.1 to make use of orbs.
+orbs: # specify all orbs you want to use.
+  aws-code-deploy: circleci/aws-code-deploy@1.0.0
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: myDeploymentGroup # The name of a new deployment group for the specified application.
+          service-role-arn: myDeploymentGroupRoleARN # The service role for a deployment group.
+          bundle-bucket: myApplicationS3Bucket # The s3 bucket where an application revision will be stored.
+          bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
+```
+
+For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
 
