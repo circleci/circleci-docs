@@ -139,7 +139,7 @@ en:
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
-        - name: Enabling Build Processing
+        - name: Enabling Pipelines
           link: 2.0/build-processing/
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
