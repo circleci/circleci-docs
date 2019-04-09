@@ -33,7 +33,7 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.8 #
+      - image: circleci/golang:1.12 #
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment: # environment variables for primary container
@@ -122,9 +122,9 @@ We recommend using a CircleCI pre-built image that comes pre-installed with tool
 ### Build the Demo Project Yourself
 {:.no_toc}
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+A good way to start using CircleCI is to build a project yourself. Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
 
-1. Fork the project on GitHub to your own account
+1. Fork the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a> to your own account
 2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
@@ -160,15 +160,15 @@ Directly beneath `working_directory`, we’ll specify [primary container]({{ sit
 
 ```yaml
     docker:
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.12
 ```
 
-We'll use a custom image which is based on `golang:1.8.0` and includes also `netcat` (we'll need it later).
+We'll use a custom image which is based on `golang:1.12.0` and includes also `netcat` (we'll need it later).
 
 We're also using an image for PostgreSQL, along with 2 environment variables for initializing the database.
 
 ```yaml
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
