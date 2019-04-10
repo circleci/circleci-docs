@@ -15,7 +15,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** tab and enable "pipelines" with the radio button.
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
