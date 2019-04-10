@@ -462,7 +462,7 @@ Before you begin creating your own orb, there are a few steps you should take to
 
 ### CircleCI Settings
 
-In the CircleCI app Settings page for your project, [Build Processing]({{ site.baseurl }}/2.0/build-processing/) must be enabled (default is to be ON for all new projects). The organization owner must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
+In the CircleCI app Settings page for your project, pipelines must be enabled (default is to be ON for all new projects). The organization owner must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
 
 ### Get the new CircleCI CLI
 
