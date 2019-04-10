@@ -30,7 +30,7 @@ workflows:
           - hello/hello-build
 ```
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key. 
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key. 
 
 Orbs consist of the following elements:
 
