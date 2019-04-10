@@ -43,6 +43,8 @@ Build Configuration Recipe | Description
 ------------|-----------
 Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
 Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+Deploying Software Changes to Heroku | This section describes how you can deploy software changes using the CircleCI Heroku orb.
+Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customixed Slack notifications in CircleCI jobs.
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -329,3 +331,129 @@ The example below illustrates how you can use the CircleCI GKE orb to log into t
                 image: orb-badge-server
                 tag: "2"
 ```
+
+## Deploying Applications to Heroku
+
+
+
+### Prerequisites
+
+
+
+### Configuring Your Environment for the CircleCI Platform and Orbs
+
+1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+
+`version: 2.1`
+
+If you do not already have pipelines enabled, you'll need to go to Project Settings -> Advanced Settings and turn it on.
+
+2) Add the orbs stanza below your version, invoking the orb:
+
+```orbs:
+  heroku: circleci/heroku@0.0.6
+```
+
+3) Use heroku elements in your existing workflows and jobs.
+
+### Deploying an Application to Heroku
+
+
+
+### Updating the Amazon ECS Sevice Without Updating AWS CLI
+
+
+### Updating the Amazon Web Services CLI and Amazon ECS
+
+
+## Verifying the Amazon ECS Service Update
+
+
+
+
+## Enabling Custom Slack Notifications in CircleCI Jobs
+
+
+
+### Prerequisites
+
+
+
+### Configuring Your Environment for the CircleCI Platform and Orbs
+
+1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+
+`version: 2.1`
+
+If you do not already have pipelines enabled, you'll need to go to Project Settings -> Advanced Settings and turn it on.
+
+2) Add the orbs stanza below your version, invoking the orb:
+
+```orbs:
+  slack: circleci/slack@2.2.0
+```
+
+3) Use slack elements in your existing workflows and jobs.
+
+
+### Notifying a Slack Channel of Pending Approval
+
+The example below illustrates how you can create a custom Slack approval notification in a CircleCI job:
+
+```yaml
+version: 2.1
+
+orbs:
+  slack: circleci/slack@1.0.0
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - slack/approval-notification:
+          message: Pending approval
+          webhook: webhook
+```
+Notice in the above example that you first need to invoke the Slack 1.0.0 orb before running the `approval-notification` job. In this job, the "Pending approval" message is delivered as part of the Slack notification.
+
+For more detailed information about this example, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+
+### Notifying a Slack Channel With Custom Messages
+
+You may also create a custom notification in a Slack channel to 
+
+The example shown below details how you can create a custom message that will be delivered in a specific Slack channel for users.
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: <docker image>
+    steps:
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'USERID1,USERID2,'
+          message: This is a custom message notification
+          webhook: webhook
+orbs:
+  slack: circleci/slack@1.0.0
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - build
+```
+
+After building a Docker image, perform the following steps to create your custom notification:
+
+1) Specify the `color` of the text in the message.
+2) Identify the recipients (`mentions`) of the message.
+3) Provide the text in the `message` you want delivered.
+4) Specify the `webhook` for the message.
+
+Once you have performed these steps, invoke the CircleCI Slack orb (`circleci/slack@1.0.0`) to initiate the workflow to deliver your notification. 
+
+### Sending a Status Alert at the End of a Job Based on Success or Failure
+
+
+## Verifying the Amazon ECS Service Update
