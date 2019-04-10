@@ -44,7 +44,7 @@ Workflows may appear with one of the following states:
 ### Limitations
 {:.no_toc}
 
-Projects that have [Build Processing]({{ site.baseurl }}/2.0/build-processing/) enabled may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
+Projects that have pipelines enabled may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
 
