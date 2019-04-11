@@ -1,20 +1,12 @@
+# Artifacts
+
 ## Artifacts Of A Build
 
-Returns an array of artifacts produced by a given build.
-
-### Method
-
-GET
-
-### Example Call
-
-```
+```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=:token
 ```
 
-### Example Response
-
-```
+```json
 [ {
   "path" : "raw-test-output/go-test-report.xml",
   "pretty_path" : "raw-test-output/go-test-report.xml",
@@ -28,10 +20,15 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 } ]
 ```
 
+
+Returns an array of artifacts produced by a given build.
+Request Type: `GET`
+
 ### Notes
 
 * the value of path is relative to the project root (the working_directory)
 * pretty_path returns the same value as path. It is included in the response for backwards compatibility
+
 
 ## Download an artifact file
 
@@ -43,26 +40,12 @@ You can download an individual artifact file via the API by appending a query st
 
 ## Artifacts of the latest Build
 
-Returns an array of artifacts produced by the latest build on a given branch.
 
-**Parameter** | **Description**
-------- | -------------
-branch | The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.
-filter | Restricts which builds are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
-
-### Method
-
-GET
-
-### Example Call
-
-```
+```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token&branch=:branch&filter=:filter
 ```
 
-### Example Response
-
-```
+```json
 [ {
   "path" : "raw-test-output/go-test-report.xml",
   "pretty_path" : "raw-test-output/go-test-report.xml",
@@ -75,6 +58,16 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/a
   "url" : "https://24-88881093-gh.circle-artifacts.com/0/raw-test-output/go-test.out"
 } ]
 ```
+
+Returns an array of artifacts produced by the latest build on a given branch.
+
+Request Type: `GET`
+
+**Parameter** | **Description**
+------- | -------------
+branch | The branch you would like to look in for the latest build. Returns artifacts for latest build in entire project if omitted.
+filter | Restricts which builds are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
+
 
 ### Notes
 
