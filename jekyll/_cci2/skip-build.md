@@ -66,8 +66,7 @@ If you are frequently pushing changes to a branch, you increase the chances of b
 To save time, you can configure CircleCI to automatically cancel any queued or running builds when a newer build is triggered on that same branch.
 
 **Note:**
-Your project's default branch will never auto cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new [build processing]({{ site.baseurl }}/2.0/build-processing/) feature.
-
+Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new pipelines feature.
 
 ### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Workflows
 {:.no_toc}
@@ -76,20 +75,20 @@ Your project's default branch will never auto cancel builds. This feature only a
 
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
-3. In the **Enabling Build Processing (preview)** section, click the **On** button.
+3. In the **Enabling Pipelines (preview)** section, click the **On** button.
 
 ### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
 {:.no_toc}
 
 Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview [build processing]({{ site.baseurl }}/2.0/build-processing/) feature.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview feature.
 
 1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
 
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
-3. In the **Enabling Build Processing (preview)** section, click the **On** button.
+3. In the **Enabling Pipelines (preview)** section, click the **On** button.
 
 4. Commit a change to trigger a build and ensure it runs successfully with the new pipelines.
 

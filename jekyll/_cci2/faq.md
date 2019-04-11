@@ -14,11 +14,7 @@ order: 1
 
 ### Does CircleCI look at my code?
 {:.no_toc}
-CircleCI employees never look at your code without permission.
-If you have requested support,
-a support engineer may ask permission
-to look at your code
-to help you debug the problem.
+CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
 
 See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
 
@@ -81,38 +77,19 @@ CircleCI is one product that can be accessed through our cloud service, installe
 
 ### Why aren't my jobs running when I push commits?
 {:.no_toc}
-In the CircleCI application,
-check the Workflows tab
-for error messages.
-More often than not,
-the error is because of formatting errors in your `config.yml` file.
+In the CircleCI application, check the Workflows tab for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
+
 See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
 
-After checking your `config.yml` for formatting errors,
-search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### What is the difference between a usage queue and a run queue?
 {:.no_toc}
-A **usage queue** forms
-when an organization lacks the containers
-to run a build.
-The number of available containers is determined
-by the plan chosen
-when setting up a project on CircleCI.
-If your builds are queuing often,
-you can add more containers
-by changing your plan.
+A **usage queue** forms when an organization lacks the containers to run a build. The number of available containers is determined by the plan chosen when setting up a project on CircleCI. If your builds are queuing often, you can add more containers by changing your plan.
 
-A **run queue** forms
-when CircleCI experiences high demand.
-Customer builds are placed in a run queue
-and processed as machines become available.
+A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
 
-In other words,
-you can reduce time spent in a **usage queue**
-by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
-but time spent in a **run queue** is unavoidable
-(though CircleCI aims to keep this as low as possible).
+In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
 ### Why can't I find my project on the Add Project page?
  {:.no_toc}
@@ -169,7 +146,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 ### Can I use the API with Workflows?
 {:.no_toc}
-Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
+Yes. Refer to the [Enabling Pipelines]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
  
 ### Can I use the Auto-cancel feature with Workflows?
 {:.no_toc}
