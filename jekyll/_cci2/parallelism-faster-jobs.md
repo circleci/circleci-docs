@@ -227,3 +227,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
   a helper CLI tool that queries `phpunit.xml` files to get a list of test
   filenames and print them. This is useful if you want to split tests to run
   them in parallel based on timings on CI tools.
+- **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
+    ```
+    go test -v $(go list ./... | circleci tests split)
+    ```
