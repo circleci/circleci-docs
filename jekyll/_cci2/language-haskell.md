@@ -157,6 +157,18 @@ Finally, we can take the built executable and store it as an artifact.
 
 Excellent! You are now setup on CircleCI with a Haskell app.
 
+## Common Trouble Shooting
+
+If you see `stack test` fails due to `Process exited with code: ExitFailure (-9) (THIS MAY INDICATE OUT OF MEMORY)`, add `-j1` option like the following. This will avoid the build 
+using multiple cores hence reduce its memory usage, while it may lead a longer
+test time.  
+
+```yaml
+      - run:
+          name: Run tests
+          command: stack test -j1
+```
+
 ## See Also
 {:.no_toc}
 
