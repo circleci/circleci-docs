@@ -149,7 +149,7 @@ see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) 
 - If you are unsure whether your `config.yml` is valid YAML,
 [run it through a validator](http://yaml-online-parser.appspot.com/).
 
-CircleCI has also developed "orbs," which enable you to use pre-conifgured and tested packages of configuration elements that you can use in your configuration workflow. Utilizing DRY (Don't Repeat Yourself), orbs enable you to quickly and easily incorporate configuration elements (jobs, executors, commands) in your workflow. For more detailed information about orbs:
+CircleCI has also developed "orbs," which enable you to use pre-configured and tested packages of configuration elements that you can use in your configuration workflow. Utilizing DRY (Don't Repeat Yourself), orbs enable you to quickly and easily incorporate configuration elements (jobs, executors, commands) in your workflow. For more detailed information about orbs:
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of orbs.
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.
