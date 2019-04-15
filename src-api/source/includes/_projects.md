@@ -1,11 +1,14 @@
 # Projects
 
+If you would like to retrieve detailed information about projects, CircleCI provides several different endpoints that you may call to return this information, including the ability to return detailed information for all projects. To ensure you do not encounter any performance-related lags or issues when making an API request, you may wish to limit your search for a single project instead of an array of projects.
+
+The sections below describe the endpoints you may call to return Project information.
+
 ## Get All Followed Projects
 
 ```sh
 curl https://circleci.com/api/v1.1/projects?circle-token=:token
 ```
-
 
 ```json
 [ {
@@ -49,6 +52,8 @@ curl https://circleci.com/api/v1.1/projects?circle-token=:token
 `GET` request.
 
 Returns an array of all projects you are currently following on CircleCI, with build information organized by branch.
+
+**Note**: When making an API request for Project information, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
 
 
 ## Follow a New Project on CircleCI
@@ -172,6 +177,7 @@ limit | The number of builds to return. Maximum 100, defaults to 30.
 offset | The API returns builds starting from this offset, defaults to 0.
 shallow | An optional boolean parameter that may be sent to improve performance if set to 'true'.
 
+**Note**: When making an API request for Project information, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
 
 ## Recent Builds For A Single Project
 
