@@ -13,12 +13,11 @@ Orbs are reusable packages of CircleCI configuration that you may share across p
 
 ### Orbs Quickstart
 Before you create your first orb, please see the following notes:
-* Orbs exist in namespaces, and namespaces are created & owned by organizations / Github users.
-* Namespaces are global across ALL orgs and users, so pick a unique name!
-* Namespaces cannot be removed or renamed once you have claimed a namespace.
-* Only organization owners can create namespaces.
-* By default, any orb created outside of the `circleci` namespace is an "uncertified" orb. You will need to go to your CircleCI Org Settings in the UI and enable "Allow Uncertified Orbs" in the Security section.
-* If you are creating an orb on behalf of another organization, it is recommended to use [Development Versions](#using-development-versions). Consult that section for more info.
+* Orbs exist in namespaces, and namespaces exist in a 1:1 relationship with GitHub/Bitbucket organizations/users.
+* Namespaces are global within the CircleCI orb regiistry, so pick a unique name!
+* Only users with "owner"/"administrator" privileges within a given GitHub/Bitbucket orbanization can create a namespace linked to that organization.
+* By default, any orb created outside of the `circleci` namespace is an "uncertified" orb. To use uncertified orbs, you will need enable the "Allow Uncertified Orbs" setting in the Security section of CircleCI's Organization Settings page for your organization.
+* If you are creating an orb, you can publish [Development Versions](#using-development-versions) to avoid having your orb publicly listed in CircleCI's orb registry before it is ready.
 
 The following high-level steps will enable you to publish your first orb:
 
