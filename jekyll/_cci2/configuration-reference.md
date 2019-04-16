@@ -1051,7 +1051,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 #### **`jobs`**
-A job can have the keys `requires`, `filters`, and `context`.
+A job can have the keys `requires`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
