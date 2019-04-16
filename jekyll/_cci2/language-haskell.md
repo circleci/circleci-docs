@@ -159,9 +159,8 @@ Excellent! You are now setup on CircleCI with a Haskell app.
 
 ## Common Trouble Shooting
 
-If you see `stack test` fails due to `Process exited with code: ExitFailure (-9) (THIS MAY INDICATE OUT OF MEMORY)`, consider adding `-j1` option like the following. This will avoid the build 
-using multiple cores hence reduce its memory usage, while it may lead a longer
-test time.  
+The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the stack test command 
+as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
 
 ```yaml
       - run:
