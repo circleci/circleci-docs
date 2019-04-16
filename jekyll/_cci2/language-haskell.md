@@ -159,7 +159,7 @@ Excellent! You are now setup on CircleCI with a Haskell app.
 
 ## Common Trouble Shooting
 
-The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the stack test command 
+The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command 
 as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
 
 ```yaml
