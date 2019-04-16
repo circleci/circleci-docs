@@ -222,9 +222,9 @@ jobs:
       - run:
           name: Test with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run
-              --app <local_server_path>/<app_apk>.apk
-              --test <local_server_path>/<app_test_apk>.apk
+            sudo gcloud firebase test android run \ 
+              --app <local_server_path>/<app_apk>.apk \ 
+              --test <local_server_path>/<app_test_apk>.apk \ 
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Install gsutil dependency and copy test results data
@@ -252,14 +252,13 @@ with the basics of customizing the JVM's memory usage, consider reading the
 If you are using [Robolectric](http://robolectric.org/) for testing you may need to make tweaks to gradle's
 use of memory. When the gradle vm is forked for tests it does not receive
 previously customized JVM memory parameters. You will need to supply Gradle with
-JVM memory paramaters for tests like so in your `build.gradle` file.
+additional JVM heap for tests in your `build.gradle` file by adding `android.testOptions.unitTests.all { maxHeapSize = "1024m" }`. You can also add `all { maxHeapSize = "1024m" }` to your existing Android config block, which could look like so after the addition:
 
-```
+```groovy
 android {
     testOptions {
         unitTests {
-            returnDefaultValues = true
-            includeAndroidResources = true
+            // Any other configurations
 
             all {
                 maxHeapSize = "1024m"
