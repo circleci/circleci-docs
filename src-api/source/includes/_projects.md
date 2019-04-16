@@ -1,11 +1,14 @@
 # Projects
 
+If you would like to retrieve detailed information about projects, CircleCI provides several different endpoints that you may call to return this information, including the ability to return detailed information for all projects. To ensure you do not encounter any performance-related lags or issues when making an API request, you may wish to limit your search for a single project instead of an array of projects.
+
+The sections below describe the endpoints you may call to return Project information.
+
 ## Get All Followed Projects
 
 ```sh
 curl https://circleci.com/api/v1.1/projects?circle-token=:token
 ```
-
 
 ```json
 [ {
@@ -49,7 +52,6 @@ curl https://circleci.com/api/v1.1/projects?circle-token=:token
 `GET` request.
 
 Returns an array of all projects you are currently following on CircleCI, with build information organized by branch.
-
 
 ## Follow a New Project on CircleCI
 
@@ -121,16 +123,14 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 }
 ```
 
-
 Request Type: `POST`
 
 Follows a new project. CircleCI will then monitor the project for automatic building of commits.
 
 ## Recent Builds Across All Projects
 
-
 ```sh
-curl https://circleci.com/api/v1.1/recent-builds?circle-token=:token&limit=20&offset=5
+curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
 
 ```json
@@ -170,7 +170,9 @@ Returns a build summary for each of the last 30 recent builds, ordered by `build
 ------- | -------------
 limit | The number of builds to return. Maximum 100, defaults to 30.
 offset | The API returns builds starting from this offset, defaults to 0.
+shallow | An optional boolean parameter that may be sent to improve performance if set to 'true'.
 
+**Note**: When making an API request for Project information, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
 
 ## Recent Builds For A Single Project
 
@@ -178,13 +180,13 @@ offset | The API returns builds starting from this offset, defaults to 0.
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token&limit=20&offset=5&filter=completed
 ```
 
-> **Note:** You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
-> Example: 
+>**Note:** You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
+
+>Example: 
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
+curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
-
 
 ```json
 [ {
@@ -215,7 +217,6 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:br
   }, ... ]
 ```
 
-
 **`GET` Request:** Returns a build summary for each of the last 30 builds for a single git repo, ordered by build_num.
 
 **Parameter** | **Description**
@@ -223,6 +224,70 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:br
 limit | The number of builds to return. Maximum 100, defaults to 30.
 offset | The API returns builds starting from this offset, defaults to 0.
 filter | Restricts which builds are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
+shallow | An optional boolean value that may be sent to improve overall performance if set to 'true.'
+
+### Improving Performance In Recent Build Requests Using the `Shallow` Parameter
+
+When making API requests for information about recent builds, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
+
+The example to the right shows a user request for recent build information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag. 
+
+#### Sample Request Using the `Shallow` Parameter
+
+```json
+[{
+	"committer_date": "2019-04-12T10:44:51-07:00",
+	"body": "",
+	"usage_queued_at": "2019-04-12T17:46:11.229Z",
+	"reponame": "circleci.com",
+	"build_url": "https://circleci.com/gh/circleci/circleci.com/16315",
+	"parallel": 1,
+	"branch": "ja-homepage",
+	"username": "circleci",
+	"author_date": "2019-04-12T10:44:51-07:00",
+	"why": "github",
+	"user": {
+		"is_user": true,
+		"login": "trevor-circleci",
+		"avatar_url": "https://avatars1.githubusercontent.com/u/22457684?v=4",
+		"name": null,
+		"vcs_type": "github",
+		"id": 22457684
+	},
+	"vcs_revision": "8139060f4d1f6ff617ac49f8afb2273c4fee2343",
+	"workflows": {
+		"job_name": "build-preview",
+		"job_id": "981f2bfa-3c50-4505-865d-5266670217eb",
+		"workflow_id": "a063aeae-5b89-458b-8aa1-cca4c565b07d",
+		"workspace_id": "a063aeae-5b89-458b-8aa1-cca4c565b07d",
+		"upstream_job_ids": ["7e92fbf5-8111-430b-8e2a-54b169ba745d"],
+		"upstream_concurrency_map": {},
+		"workflow_name": "build-website"
+	},
+	"vcs_tag": null,
+	"pull_requests": [{
+		"head_sha": "8139060f4d1f6ff617ac49f8afb2273c4fee2343",
+		"url": "https://github.com/circleci/circleci.com/pull/2347"
+	}],
+	"build_num": 16315,
+	"committer_email": "trevor@circleci.com",
+	"status": "success",
+	"committer_name": "Trevor Sorel",
+	"subject": "adding japanese translations for main nav",
+	"dont_build": null,
+	"lifecycle": "finished",
+	"fleet": "picard",
+	"stop_time": "2019-04-12T17:47:42.298Z",
+	"build_time_millis": 89366,
+	"start_time": "2019-04-12T17:46:12.932Z",
+	"platform": "2.0",
+	"outcome": "success",
+	"vcs_url": "https://github.com/circleci/circleci.com",
+	"author_name": "Trevor Sorel",
+	"queued_at": "2019-04-12T17:46:11.289Z",
+	"author_email": "trevor@circleci.com"
+}]
+```
 
 ## Clear Project Cache
 
@@ -237,4 +302,3 @@ curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:projec
   "status" : "build caches deleted"
 }
 ```
-
