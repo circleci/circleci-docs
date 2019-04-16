@@ -53,9 +53,6 @@ curl https://circleci.com/api/v1.1/projects?circle-token=:token
 
 Returns an array of all projects you are currently following on CircleCI, with build information organized by branch.
 
-**Note**: When making an API request for Project information, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
-
-
 ## Follow a New Project on CircleCI
 
 ```sh
@@ -126,16 +123,14 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 }
 ```
 
-
 Request Type: `POST`
 
 Follows a new project. CircleCI will then monitor the project for automatic building of commits.
 
 ## Recent Builds Across All Projects
 
-
 ```sh
-curl https://circleci.com/api/v1.1/recent-builds?circle-token=:token&limit=20&offset=5
+curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
 
 ```json
@@ -185,13 +180,13 @@ shallow | An optional boolean parameter that may be sent to improve performance 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token&limit=20&offset=5&filter=completed
 ```
 
-> **Note:** You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
-> Example: 
+>**Note:** You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
+
+>Example: 
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
+curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 ```
-
 
 ```json
 [ {
@@ -222,7 +217,6 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:br
   }, ... ]
 ```
 
-
 **`GET` Request:** Returns a build summary for each of the last 30 builds for a single git repo, ordered by build_num.
 
 **Parameter** | **Description**
@@ -236,8 +230,7 @@ shallow | An optional boolean value that may be sent to improve overall performa
 
 When making API requests for information about recent builds, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
 
-The example below shows a user request for recent build information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag. 
-
+The example to the right shows a user request for recent build information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag. 
 
 #### Sample Request Using the `Shallow` Parameter
 
@@ -296,7 +289,6 @@ The example below shows a user request for recent build information. Notice that
 }]
 ```
 
-
 ## Clear Project Cache
 
 **`DELETE` Request:** Clears the cache for a project.
@@ -310,4 +302,3 @@ curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:projec
   "status" : "build caches deleted"
 }
 ```
-
