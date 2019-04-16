@@ -78,7 +78,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
     steps:
@@ -235,7 +235,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -253,7 +253,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -375,7 +375,7 @@ version: 2
 jobs:
   build:
     macos:
-      xcode: "10.1.0"
+      xcode: "10.2.0"
     shell: /bin/bash --login -eo pipefail
 ```
 
@@ -594,7 +594,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
