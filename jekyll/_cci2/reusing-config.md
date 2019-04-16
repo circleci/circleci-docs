@@ -37,7 +37,6 @@ Commands are declared under the `commands` key of a `config.yml` file. The follo
 
 ```yaml
 version: 2.1
-
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -60,7 +59,6 @@ The following example invokes the command `sayhello` and passes it a parameter `
 
 ```yaml
 version: 2.1
-
 jobs:
   myjob:
     docker:
@@ -94,7 +92,6 @@ The following is an example of part of an `aws-s3` orb defining a command called
 ```yaml
 version: 2.1
 # aws-s3 orb
-
 commands:
   sync:
     description: "A simple encapsulation of doing an s3 sync"
@@ -116,7 +113,6 @@ Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file
 
 ```yaml
 version: 2.1
-
 orbs:
   aws-s3: circleci/aws-s3@1.0.0
 
@@ -135,7 +131,6 @@ Defining a `build` job:
 
 ```yaml
 version: 2.1
-
 orbs:
   aws-cli: circleci/aws-cli@0.1.2
   aws-s3: circleci/aws-s3@1.0.0
@@ -177,7 +172,6 @@ executors:
   my-executor:
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
-
 jobs:
   my-job:
     executor: my-executor
@@ -194,7 +188,6 @@ The following example passes `my-executor` as the value of a `name` key under `e
 
 ```yaml
 version: 2.1
-
 jobs:
   my-job:
     executor:
@@ -212,7 +205,6 @@ The following example declares and invokes an executor in two jobs that need to 
 
 ```yaml
 version: 2.1
-
 executors:
   lein_exec: # declares a reusable executor
     docker:
@@ -221,14 +213,12 @@ executors:
     environment:
       MYSPECIALVAR: "my-special-value"
       MYOTHERVAR: "my-other-value"
-    
 jobs:
   build:
     executor: lein_exec
     steps:
       - checkout
-      - run: echo "hello world"
-      
+      - run: echo "hello world"  
   test:
     executor: lein_exec
     environment:
@@ -243,7 +233,6 @@ You can also refer to executors from other orbs. Users of an orb can invoke its 
 ```yaml
 version: 2.1
 # yaml from foo-orb
-
 executors:
   bar:
     machine: true
@@ -256,7 +245,6 @@ executors:
 ```yaml
 version: 2.1
 # yaml from baz-orb
-
 executors:
   bar:
     docker:
@@ -268,7 +256,6 @@ You may use either executor from your configuration file with:
 ```yaml
 version: 2.1
 # config.yml
-
 orbs:
   foo-orb: somenamespace/foo@1
   baz-orb: someothernamespace/baz@3.3.1
@@ -291,7 +278,6 @@ When invoking an executor in a `job` any keys in the job itself will override th
 
 ```yaml
 version: 2.1
-
 executors:
   python:
     docker:
@@ -302,7 +288,6 @@ executors:
       TESTS: all
     shell: /bin/bash    
     working_directory: ~/project
-
 jobs:
   build:
     docker:
@@ -318,7 +303,6 @@ The above config would resolve to the following:
 
 ```yaml
 version: 2.1
-
 jobs:
  build:
    steps: []
@@ -341,7 +325,6 @@ The following example defines a command called `sync`:
 ```yaml
 version: 2.1
 commands: # a reusable command with parameters
-
   sync:
     parameters:
       from:
@@ -402,7 +385,6 @@ Basic string parameters are described below:
 
 ```yaml
 version: 2.1
-
 commands:
   copy-markdown:
     parameters:
@@ -423,7 +405,6 @@ Boolean parameters are useful for conditionals:
 
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -449,7 +430,6 @@ Use the parameter type `integer` to pass a numeric integer value. The following 
 
 ```yaml
 version: 2.1
-
 jobs:
   build:
     parameters:
@@ -460,7 +440,6 @@ jobs:
     machine: true
     steps:
       - checkout
-
 workflows:
   workflow:
     jobs:
@@ -475,7 +454,6 @@ The `enum` parameter may be a list of any values. Use the `enum` parameter type 
 
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -491,7 +469,6 @@ The following `enum` type declaration is invalid because the default is not decl
 {% raw %}
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -510,7 +487,6 @@ Use an `executor` parameter type to allow the invoker of a job to decide what ex
 {% raw %}
 ```yaml
 version: 2.1
-
 executors:
   xenial:
     parameters:
@@ -554,7 +530,6 @@ Steps are used when you have a job or command that needs to mix predefined and u
 {% raw %}
 ```yaml
 version: 2.1
-
 commands:
   run-tests:
     parameters:
@@ -574,7 +549,6 @@ The following example demonstrates that steps passed as parameters are given as 
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   build:
     machine: true
@@ -591,7 +565,6 @@ The above will resolve to the following:
 {% raw %}
 ```yaml
 version: 2.1
-
 steps:
   - run: make deps
   - run: echo "The dependencies are installed"
@@ -607,7 +580,6 @@ The environment variable name (``env_var_name``) parameter is a string that must
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   build:
     docker:
@@ -626,9 +598,9 @@ workflows:
 ```
 
 Original config.yml file:
+
 ```yaml
 version: 2.1
-
 jobs:
    build:
      parameters:
@@ -666,7 +638,6 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -678,7 +649,6 @@ jobs:
     machine: true
     steps:
       - run: echo "Hello << parameters.saywhat >>"
-
 workflows:
   build:
     jobs:
@@ -698,7 +668,6 @@ If a job is declared inside an orb it can use commands in that orb or the global
 ```yaml
 version: 2.1
 # partial yaml from hello-orb
-
 jobs:
   sayhello:
     parameters:
@@ -724,7 +693,6 @@ commands:
 ```yaml
 # config.yml
 version: 2.1
-
 orbs:
   hello-orb: somenamespace/hello-orb@volatile
 workflows:
@@ -746,7 +714,6 @@ Parameters in executors can be of the type `string`, `enum`, or `boolean`. Defau
 
 ```yaml
 version: 2.1
-
 executors:
   python:
     parameters:
@@ -759,7 +726,6 @@ executors:
       - image: circleci/python:<< parameters.tag >>
     environment:
       MYPRECIOUS: << parameters.myspecialvar >>
-
 jobs:
   build:
     executor:
@@ -772,7 +738,6 @@ The above would resolve to the following:
 
 ```yaml
 version: 2.1
-
 jobs:
   build:
     steps: []
@@ -789,7 +754,6 @@ Parameters are in-scope only within the job or command that defined them. If you
 
 ```yaml
 version: 2.1
-
 jobs:
   sayhello:
     parameters:
@@ -804,7 +768,6 @@ jobs:
           # value for the "saywhat" parameter, it must be
           # passed in manually
           saywhat: << parameters.saywhat >>
-
 commands:
   say:
     parameters:
@@ -812,7 +775,6 @@ commands:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-
 workflows:
   build:
     jobs:
@@ -829,7 +791,6 @@ A single configuration may invoke a job multiple times. At configuration process
 
 ```yaml
 version: 2.1
-
 workflows:
   build:
     jobs:
@@ -865,7 +826,6 @@ The following example defines pre-steps and post-steps in the `bar` job of the `
 ```yaml
 # config.yml
 version: 2.1
-
 jobs:
   bar:
     machine: true
@@ -891,12 +851,12 @@ workflows:
 
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a condition is met. 
+Conditional steps allow the definition of steps that only run if a `condition` is met. 
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
 
-These conditions are checked before a workflow is actually run. That means, for example, that you cannot use a condition to check an environment variable.
+These conditions are checked before a workflow is actually run. This means, for example, that you may not use a condition to check an environment variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
 
@@ -912,7 +872,6 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 ```yaml
 # inside config.yml
 version: 2.1
-
 jobs:
   myjob:
     parameters:
@@ -930,7 +889,6 @@ jobs:
           condition: << parameters.preinstall-foo >>
           steps:
             - run: echo "don't preinstall"
-
 workflows:
   workflow:
     jobs:
@@ -939,5 +897,7 @@ workflows:
       - myjob:
           preinstall-foo: true
 ```
+
+**Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters (first example), or by the result of a Bash function (second example). Also, please note that`when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
