@@ -226,9 +226,9 @@ jobs:
       - run:
           name: Test with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run
-              --app <local_server_path>/<app_apk>.apk
-              --test <local_server_path>/<app_test_apk>.apk
+            sudo gcloud firebase test android run \ 
+              --app <local_server_path>/<app_apk>.apk \ 
+              --test <local_server_path>/<app_test_apk>.apk \ 
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Install gsutil dependency and copy test results data
