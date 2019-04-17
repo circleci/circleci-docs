@@ -4,11 +4,11 @@
 
 Returns a list of all environment variables.
 
-``sh
+```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar?circle-token=:token
 ``
 
-``json
+```json
 [{
 	"name": "foo",
 	"value": "xxxx1234"
