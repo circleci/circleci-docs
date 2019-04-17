@@ -11,7 +11,7 @@ includes:
   - builds_and_jobs
   - keys
   - artifacts
-  - environment_variables
+  - environment_vars
 
 search: true
 ---
