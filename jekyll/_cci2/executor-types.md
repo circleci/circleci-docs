@@ -34,7 +34,7 @@ Virtual Environment | `docker` | `machine`
  Build Docker images | Yes <sup>(1)</sup> | Yes
  Full control over job environment | No | Yes
  Full root access | No | Yes
- Run multiple databases | Yes | Yes
+ Run multiple databases | Yes <sup>(2)</sup> | Yes
  Run multiple versions of the same software | No | Yes
  Layer caching | Yes | Yes
  Run privileged containers | No | Yes
@@ -43,6 +43,8 @@ Virtual Environment | `docker` | `machine`
 {: class="table table-striped"}
 
 <sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(2)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
 
 It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
 
