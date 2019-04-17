@@ -34,7 +34,7 @@ Virtual Environment | `docker` | `machine`
  Build Docker images | Yes <sup>(1)</sup> | Yes
  Full control over job environment | No | Yes
  Full root access | No | Yes
- Run multiple databases | No | Yes
+ Run multiple databases | Yes | Yes
  Run multiple versions of the same software | No | Yes
  Layer caching | Yes | Yes
  Run privileged containers | No | Yes
