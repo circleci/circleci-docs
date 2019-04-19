@@ -74,7 +74,7 @@ This section provides the following test runner examples:
 * [pytest]( {{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
-* [trx2junit]( {{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-vs-tests)
+* [trx2junit]( {{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
 * [Jest]( {{ site.baseurl }}/2.0/collect-test-data/#jest)
 
