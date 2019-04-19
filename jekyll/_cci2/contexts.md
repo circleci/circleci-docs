@@ -30,7 +30,7 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 ## Creating and Using a Context
 
-1. As an organization member, Navigate to the Settings > Contexts page in the CircleCI application. **Note:** Any organization memeber can create a context only organization administrators can restrict it with a security group.
+1. As an organization member, Navigate to the Settings > Contexts page in the CircleCI application. **Note:** Any organization member can create a context only organization administrators can restrict it with a security group.
 
 2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this context at runtime.
 
