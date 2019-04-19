@@ -74,6 +74,7 @@ This section provides the following test runner examples:
 * [pytest]( {{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
+* [trx2junit]( {{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-vs-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
 * [Jest]( {{ site.baseurl }}/2.0/collect-test-data/#jest)
 
@@ -413,6 +414,30 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 #### test2junit for Clojure Tests
 {:.no_toc}
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
+
+#### trx2junit for Visual Studio / .NET Core Tests
+{:.no_toc}
+Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format. 
+
+A working `.circleci/config.yml` section might look like this:
+
+```yaml
+    steps:
+      - checkout
+      - run: dotnet build
+      - run: dotnet test --no-build --logger "trx"
+      - run:
+          name: test results
+          command: |
+              dotnet tool install -g trx2junit
+              export PATH="$PATH:/root/.dotnet/tools"
+              trx2junit tests/**/TestResults/*.trx
+      - store_test_results:
+          path: tests/TestResults
+      - store_artifacts:
+          path: tests/TestResults
+          destination: TestResults
+```
 
 #### Karma
 {:.no_toc}
