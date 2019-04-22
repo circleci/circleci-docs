@@ -1,17 +1,17 @@
 ---
 layout: classic-docs
-title: "Build Configuration Cookbook Introduction"
-short-title: "Build Config Introduction"
-description: "Starting point for Build Configuration Cookbook"
+title: "CircleCI Pipeline Configuration Cookbook Introduction"
+short-title: "Pipeline Configuration Introduction"
+description: "Starting point for Pipeline Configuration Cookbook"
 categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Build Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various build configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable build tasks on the CircleCI platform.
+The *CircleCI Pipeline Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
 
 ## Introduction
 
-This page, and its associated "recipes," describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI build is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
+This page, and its associated "recipes," describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
 
 ### What Are CircleCI Orbs?
 
@@ -35,11 +35,11 @@ workflows:
 
 For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-### Build Configuration Recipes
+### Configuration Recipes
 
 The table below lists the different build configuration "recipes" you can perform using CircleCI Orbs.
 
-Build Configuration Recipe | Description 
+Configuration Recipe | Description 
 ------------|-----------
 Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
 Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
@@ -99,7 +99,7 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-Notice in this example that you need to instantiate two different AWS ECS orbs: `aws-ecs 0.0.3` and `aws-ecs 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb workflows in the orb first build, and then push the image, before deploying the service update to ECS.
+Notice in this example that you need to instantiate two different AWS ECS orbs: `aws-ecs 0.0.3` and `aws-ecs 0.0.4` to update the ECS service. Once you have instantiated these two orbs, the orb enables the configuration, and then pushes the image, before finally deploying the service update to ECS.
 
 #### Updating the Amazon Web Services CLI and Amazon ECS
 
@@ -168,7 +168,7 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to build and push an image to Amazon ECS.
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
 
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
@@ -448,7 +448,7 @@ For more detailed information about this orb and its functionality, refer to the
 
 ### Notifying a Slack Channel With Custom Messages
 
-Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project. You may also create a custom notification in a Slack channel to 
+Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project. 
 
 The example shown below details how you can create a custom message that will be delivered in a specific Slack channel for users.
 
