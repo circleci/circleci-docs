@@ -9,6 +9,9 @@ order: 1
 
 The *CircleCI Pipeline Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
 
+* TOC
+{:toc}
+
 ## Introduction
 
 This page, and its associated "recipes," describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
@@ -35,25 +38,6 @@ workflows:
 
 For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-### Configuration Recipes
-
-The table below lists the different build configuration "recipes" you can perform using CircleCI Orbs.
-
-Configuration Recipe | Description 
-------------|-----------
-Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
-Deploying Applications to Heroku | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
-Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customized Slack notifications in CircleCI jobs.
-
-## Deploying Software Changes to Amazon ECS
-
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
-
-### Prerequisites
-
-Before deploying any software changes to Amazon ECS on the CircleCI platform, you must first perform a series of configuration steps to ensure you have properly set up and configured your environment for the CircleCI platform. Also, because CircleCI has created an "orb" to simplify these steps, you will also need to ensure your CircleCI project has been configured to use CircleCI orbs.
-
 #### Configuring Your Environment for the CircleCI Platform and Orbs
 
 1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
@@ -68,7 +52,28 @@ Before deploying any software changes to Amazon ECS on the CircleCI platform, yo
 aws-ecs: circleci/aws-ecs@0.0.6
 ```
 
-3) Use `aws-ecs elements` in your existing workflows and jobs.
+3) Use the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
+
+### Configuration Recipes
+
+The table below lists the different build configuration "recipes" you can perform using CircleCI Orbs.
+
+Configuration Recipe | Description 
+------------|-----------
+Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
+Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+Deploying Applications to Heroku | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
+Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+
+## Deploying Software Changes to Amazon ECS
+
+{TOC}
+
+The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
+
+### Prerequisites
+
+Before deploying any software changes to Amazon ECS on the CircleCI platform, you must first perform a series of configuration steps to ensure you have properly set up and configured your environment for the CircleCI platform. Also, because CircleCI has created an "orb" to simplify these steps, you will also need to ensure your CircleCI project has been configured to use CircleCI orbs.
 
 ### Updating the Amazon ECS Service
 
@@ -174,6 +179,8 @@ For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to th
 
 ## Deploying Software Changes to Google Kubernetes Engine (GKE)
 
+{TOC}
+
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
 ### Prerequisites
@@ -188,20 +195,6 @@ The following environment variables need to be set in CircleCI either directly o
 - `GOOGLE_COMPUTE_ZONE`
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
-
-#### Configuring Your Environment for the CircleCI Platform and Orbs
-
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
-
-**Note:** If you do not already have pipelines enabled, go to **Project Settings -> Advanced Settings** and enable them.
-
-2) Add the orbs stanza below your version, invoking the following orbs:
-
-```orbs:
-    gcr: circleci/gcp-gke@0.0.2
-```
 
 ### Managing GKE Actions
 
@@ -338,30 +331,14 @@ The example below shows how you can use the CircleCI GKE orb to log into the Goo
 
 The Heroku platform is a cloud-based, fully-scalable platform that enables you to quickly and easily deliver and deploy applications. Using CircleCI builds and orbs, you can simplify the deployment process in a few simple steps by following the steps described in the sections below.
 
+{TOC}
+
 ### Prerequisites
 
 Before you can deploy an applications to the Heroku platform, make sure the following requirements are met:
 
 * Your environment is configured to use the CircleCI platform and CircleCI orbs.
 * The Heroku CLI is installed. 
-
-#### Configuring Your Environment To Use the CircleCI Platform and Orbs
-
-To configure your environment to use the CircleCI platform and associated orbs, perform the steps listed below.
-
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
-
-**Note:** If you do not already have pipelines enabled, go to **Project Settings -> Advanced Settings** to enable them.
-
-2) Add the orbs stanza below your version (`2.1`), thereby invoking the CircleCI Heroku orb:
-
-```orbs:
-  heroku: circleci/heroku@0.0.6
-```
-
-3) Use `heroku` elements in your existing workflows and jobs.
 
 #### Installing the Heroku CLI
 
@@ -402,29 +379,13 @@ For more detailed information about the CircleCI Heroku orb, refer to the [Circl
 
 ## Enabling Custom Slack Notifications in CircleCI Jobs
 
-Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements. 
+Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
+
+{TOC}
 
 ### Prerequisites
 
 Before enabling custom notifications in Slack while using the CircleCI platform, ensure your environment is properly configured and setup to leverage the CircleCI platform and orbs.
-
-### Configuring Your Environment To Use the CircleCI Platform and Orbs
-
-To configure your environment to use the CircleCI platform and associated orbs, perform the steps listed below.
-
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
-
-**Note:** If you do not already have pipelines enabled, go to **Project Settings -> Advanced Settings** and enable them.
-
-2) Add the orbs stanza below your version, invoking the orb:
-
-```orbs:
-  slack: circleci/slack@2.2.0
-```
-
-3) Use `slack` elements in your existing workflows and jobs.
 
 ### Notifying a Slack Channel of Pending Approval
 
