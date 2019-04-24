@@ -94,7 +94,7 @@ jobs:
     executor: my-executor
     steps:
       - run: echo outside the executor
- ```
+```
 
 Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
 
@@ -106,7 +106,7 @@ jobs:
       name: my-executor
     steps:
       - run: echo outside the executor
-   ```
+```
 
 ## Key Concepts
 
@@ -115,7 +115,7 @@ Before using orbs, you should first familiarize yourself with some basic core co
 ### Development vs. Production Orbs
 {:.no_toc}
 
-Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production orbs are immutable and durable.
+Orbs may be published either as `myorbnamespace/myorb@dev:foo` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production orbs are immutable and durable.
 
 ### Certified vs. 3rd-Party Orbs
 {:.no_toc}
@@ -131,7 +131,7 @@ All orbs are open, meaning that anyone can use them and see their source.
 Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
 
 * Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
-* Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
+* Metadata is available - Every key can include a `description` key and an orb may include a `description` at the top level.
 * Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
 * Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
 * One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.

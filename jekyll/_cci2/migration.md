@@ -79,16 +79,16 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 	- [CircleCI How to Handle OOM Errors blog](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala projects can have filenames that are too long, include the `-Xmax-classfile-name` flag.
 
-	```
-			    scalacOptions ++= Seq(
-			      `-encoding`, `utf-8`,
-			      `-target:jvm-1.8`,
-			      `-deprecation`,
-			      `-unchecked`,
-			      `-Xlint`,
-			      `-feature`,
-			      `-Xmax-classfile-name`, `242` <= add here
-			    ),
+```
+scalacOptions ++= Seq(
+  `-encoding`, `utf-8`,
+  `-target:jvm-1.8`,
+  `-deprecation`,
+  `-unchecked`,
+  `-Xlint`,
+  `-feature`,
+  `-Xmax-classfile-name`, `242` <= add here
+),
 ```
 
 
@@ -96,6 +96,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Tests can sometimes be flaky and may appear to fail for no reason. You can re-run your failing browser tests automatically, however, this will corrupt the timing data.
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. Run this from one of our browsers images:
+
 ```
 			ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
 			sudo apt install vnc4server metacity
@@ -139,6 +140,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - You are limited by your imagination in CircleCI 2.0
 - The shell can be set to Python to just execute arbitrary Python in the YAML
+
 ```
 			- run:
 				shell: /usr/bin/python3

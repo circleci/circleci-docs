@@ -620,9 +620,9 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
 
-    ```
-    //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
-    ```
+```
+//registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
+```
 
     In this case, the authToken is `00000000-0000-0000-0000-000000000000`.
 
@@ -653,15 +653,16 @@ workflows:
 
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
-    ```
-    npm version 10.0.1
-    ```
+```
+npm version 10.0.1
+```
 
     This will update the `package.json` file and creates a tagged Git commit. Next, push the commit with tags:
 
-    ```
-    git push --follow-tags
-    ```
+```
+git push --follow-tags
+```
+
 5.  If tests passed, CircleCI will publish the package to npm automatically.
 
 ## SSH

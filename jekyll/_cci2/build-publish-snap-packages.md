@@ -69,16 +69,16 @@ base64 snapcraft.login | xsel --clipboard
 
     *Note: The default expiration time for the Snapcraft login file is 1 year. If you want the auth file to be valid for longer, make sure to set an expiration date with the `--expires` flag.*
 
-    ```yaml
-    ...
-          - run:
-              name: "Publish to Store"
-              command: |
-                mkdir .snapcraft
-                echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-                snapcraft push *.snap --release stable
-    ...
-    ```
+```yaml
+...
+      - run:
+          name: "Publish to Store"
+          command: |
+            mkdir .snapcraft
+            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+            snapcraft push *.snap --release stable
+...
+```
 
 2. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
 

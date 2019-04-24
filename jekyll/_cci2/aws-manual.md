@@ -70,73 +70,77 @@ Have available the following information and policies before starting the Previe
 3. Go to the provided URL at the end of the previous step.
 4. Use a 2.0 license.
 5. Configure storage. It is best practice to use an instance profile for authentication. However, IAM authentication for the AWS administrator is supported. Use the following permissions for the IAM User:
-     ```JSON
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Effect": "Allow",
-                 "Action": [
-                     "ec2:RunInstances",
-                     "ec2:TerminateInstances",
-                     "ec2:Describe*",
-                     "ec2:CreateTags",
-                     "iam:GetUser",
-                     "cloudwatch:*",
-                     "sts:GetFederationToken"
-                 ],
-                 "Resource": [
-                     "*"
-                 ]
-             },
-             {
-                 "Effect": "Allow",
-                 "Action": [
-                     "s3:*"
-                 ],
-                 "Resource": [
-                     "arn:aws:s3:::YOUR-BUCKET-HERE",
-                     "arn:aws:s3:::YOUR-BUCKET-HERE/*"
-                 ]
-             }
-         ]
-     }
-     ```
+
+```JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances",
+                "ec2:TerminateInstances",
+                "ec2:Describe*",
+                "ec2:CreateTags",
+                "iam:GetUser",
+                "cloudwatch:*",
+                "sts:GetFederationToken"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::YOUR-BUCKET-HERE",
+                "arn:aws:s3:::YOUR-BUCKET-HERE/*"
+            ]
+        }
+    ]
+}
+```
+
 6. Configure the vm-service. The AWS user needs to have these permissions. It might be the same user as for S3, if so, it needs to have both sets of permissions.
-     ``` JSON
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Action": [
-                     "ec2:RunInstances",
-                     "ec2:CreateTags"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*"
-             },
-             {
-                 "Action": [
-                     "ec2:Describe*"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "*"
-             },
-             {
-                 "Action": [
-                     "ec2:TerminateInstances"
-                 ],
-                 "Effect": "Allow",
-                 "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*:instance/*",
-                 "Condition": {
-                     "StringEquals": {
-                         "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
-                     }
-                 }
-             }
-         ]
-     }
-     ```
+
+```JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ec2:RunInstances",
+                "ec2:CreateTags"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*"
+        },
+        {
+            "Action": [
+                "ec2:Describe*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "ec2:TerminateInstances"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:ec2:HERE-IS-REGION-OR-*:*:instance/*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+                }
+            }
+        }
+    ]
+}
+```
+
 7. Configure the EC2 security group to have the following rules:
 
      | Protocol | Port Range | Source  |

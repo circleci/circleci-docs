@@ -71,34 +71,40 @@ If you are brand new to MongoDB, see the [MongoDB on the AWS Cloud](https://docs
     * Comment out the SSL, auth, and replication sections in the configuration and restart.
     * Start the client by typing the mongo command followed by the use admin command.
 4. Create a siteUserAdmin account to manage users according to the following example:
-    ```
-    db.createUser({ user: "siteUserAdmin", pwd: '',
-                    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] })
-    ```
+
+```
+db.createUser({ user: "siteUserAdmin", pwd: '',
+                roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] })
+```
+
 5.	Create a circle-admin account to manage the databases as follows:
-    ```
-    db.createUser({ user: 'circle-admin', pwd: '',
-                    roles: [{ role: 'root', db: 'admin' }, { role: 'dbAdmin', db: 'admin' }] })
-    ```
+
+```
+db.createUser({ user: 'circle-admin', pwd: '',
+                roles: [{ role: 'root', db: 'admin' }, { role: 'dbAdmin', db: 'admin' }] })
+```
     * Exit the client, uncomment the configuration, and restart.
     * Reconnect to client as circle-admin and run the rs.initiate() command.
 
     **Note:** If you are using AWS and the first hostname resolves to something that is AWS-internal and your PRIMARY adopts that as its name, you must rename your host before extending the replica set by following the instructions [Change All Hostnames in a Replica Set](https://docs.mongodb.com/v3.2/tutorial/change-hostnames-in-a-replica-set/#change-all-hostnames-at-the-same-time) article.
 
 6. To add the remaining two hosts to the replica set, issue the following commands:
-    ```
-    rs.add('<second hostname>')
-    rs.add('<third hostname>')
-    ```
+
+```
+rs.add('<second hostname>')
+rs.add('<third hostname>')
+```
+
     The MongoDB replica set is ready for use with CircleCI.
 
 7. Create a CircleCI user for the actual application, which can be created with:
-    ```
-    db.createUser({ user: "circle", pwd: '',
-                    roles: [ { role: "readWrite", db: "circle_ghe" },
-                             { role: "readWrite", db: "build_state_dev_ghe" },
-                             { role: "readWrite", db: "containers_dev_ghe" } ] })
-    ```
+
+```
+db.createUser({ user: "circle", pwd: '',
+                roles: [ { role: "readWrite", db: "circle_ghe" },
+                         { role: "readWrite", db: "build_state_dev_ghe" },
+                         { role: "readWrite", db: "containers_dev_ghe" } ] })
+```
 
 ## Setting up PostgreSQL Hosts
 
@@ -125,11 +131,13 @@ Eight databases are required for 2.0 services:
 2. SSH in to the Services machine and switch to the `root` user with the `sudo su` command.
 3. Confirm that all MongoDB and PostgreSQL containers have stopped by listing all running containers with the `docker ps` command.
 4. Download and run the export script using the commands below. The duration of the export operation depends on the amount of stored data.
-     ```shell
-     wget https://s3.amazonaws.com/release-team/scripts/circle-database-export-2.0
-     chmod +x circle-database-export-2.0
-     ./circle-database-export-2.0
-     ```
+
+```shell
+wget https://s3.amazonaws.com/release-team/scripts/circle-database-export-2.0
+chmod +x circle-database-export-2.0
+./circle-database-export-2.0
+```
+
      Both the MongoDB and PostgreSQL databases are exported.
 
 5. After the backup process is complete, a `.tar` file appears in the directory where you ran the script.
@@ -142,22 +150,23 @@ Eight databases are required for 2.0 services:
 
 1. Untar the exported database files.
 
-     ```
-     tar xf $EXPORT_FILE
-     ```
+```
+tar xf $EXPORT_FILE
+```
 
 1. On the Services machine where you ran the export script, use the following `mongorestore` command to restore the database replacing the variables with the circle-admin user credentials and the location of the new MongoDB hosts.
-     ```
-     sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
-     ```
+
+```
+sudo mongorestore -u $USERNAME -p $PASSWORD /$PATH/$TO/$MONGO_DUMP
+```
 
 **Note:** You’ll have to do extra setup so that mongorestore can point to the URI of Mongo. If you’d like to use the uri flag, please see the following doc: https://docs.mongodb.com/manual/reference/program/mongorestore/#cmdoption-mongorestore-uri.
 
 1. On the Services machine where you ran the export script, use the following `psql` command to restore the databases, replacing the variables with the appropriate user credentials and the name of the PostgreSQL database.
 
-     ```
-     psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI_DBNAME.sql
-     ```
+```
+psql -U $USERNAME $DBNAME < $EXPORTED_CIRCLECI_DBNAME.sql
+```
 
 ## Configuring Automatic Recovery
 
