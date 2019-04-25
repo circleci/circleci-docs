@@ -18,6 +18,7 @@ This document describes how to update the server replicated version for your pri
   - replicated --version
 - Your installation is **not** airgapped and you can access the internet from it
 - All steps are completed on the Services machine
+- Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
   
 ## Preparations
 
