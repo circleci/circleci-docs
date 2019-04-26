@@ -7,7 +7,8 @@ description: "Connecting JIRA with CircleCI"
 
 This document describes how you can connect JIRA to your CircleCI builds. With
 the CircleCI JIRA plugin, you can create JIRA tickets directly from your Jobs
-page, allowing you to assign tasks and fixes based on the status of your job.
+page, allowing you to assign tasks and fixes based on the status of your job, as
+well as display your build statuses in Jira.
 
 **Note:** You have to be an JIRA admin to install this plugin.
 
@@ -42,3 +43,35 @@ Click on the JIRA icon and select the following:
 Note: The current JIRA plugin only supports default fields.
 
 You're all set to creating quick tickets from your job output page!
+
+# Viewing Build and Deploy Statuses in Jira 
+
+With CircleCI orbs it is also possible to display your build and deploy status
+in Jira. To do this, you will need to: 
+
+1. Make sure you followed the steps above to connect Jira with CircleCI.
+1. Make sure that you are using version `2.1` at the top of your `.circleci/config.yml` file.
+1. If you do not already have pipelines enabled, go to **Project Settings -> Advanced Settings** and enable them.
+1. Add the orb stanza, invoking the Jira orb.
+1. Use the Jira orb in a step.
+
+The example config below provides a bare `config.yml` illustrating the use of the Jira Orb.
+
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - run: echo "hello"
+orbs:
+  jira: circleci/jira@1.0.0
+version: 2.1
+workflows:
+  build:
+    jobs:
+      - build:
+          post-steps:
+            - jira/notify
+```
