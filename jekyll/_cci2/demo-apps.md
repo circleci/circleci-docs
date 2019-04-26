@@ -15,6 +15,7 @@ Language Guide | Framework | GitHub Repo Name
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Clojure]{:target="_blank"} | Luminus | [circleci-demo-clojure-luminus]{:target="_blank"}
  [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/CircleCI-Public/circleci-demo-crystal)
+ C | - | [parallel-compile-circleci](https://github.com/eddiewebb/parallel-compile-circleci/blob/master/.circleci/config.yml){:target="_blank"}
  [Elixir]{:target="_blank"} | Phoenix | [circleci-demo-elixir-phoenix]{:target="_blank"}
  [Go]{:target="_blank"} | Go | [circleci-demo-go]{:target="_blank"}
  [iOS]{:target="_blank"} | Xcode | [circleci-demo-ios]{:target="_blank"}

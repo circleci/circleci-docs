@@ -17,7 +17,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ## Overview
 {:.no_toc}
 
-Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization administrator to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
+Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization member to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
@@ -30,9 +30,9 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 ## Creating and Using a Context
 
-1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application. 
+1. As an organization member, Navigate to the Settings > Contexts page in the CircleCI application. **Note:** Any organization member can create a context only organization administrators can restrict it with a security group.
 
-2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your organization can access this context at runtime.
+2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this context at runtime.
 
 3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
 
@@ -59,7 +59,7 @@ The default security group is `All members` and enables any member of the organi
 
 ## Running Workflows with a Restricted Context
 
-To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the security groups, the workflow will fail as `Unauthorized`.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your job and you are **not** a member of any of the security groups, the workflow will fail as `Unauthorized`.
 
 **Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Restricted Contexts are also **not** yet supported in private installations of CircleCI.
 
