@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "CircleCI Pipeline Configuration Cookbook Introduction"
-short-title: "Pipeline Configuration Introduction"
-description: "Starting point for Pipeline Configuration Cookbook"
+title: "CircleCI Configuration Cookbook"
+short-title: "Configuration Cookbook"
+description: "Starting point for Configuration Cookbook"
 categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Pipeline Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
+The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
 
 * TOC
 {:toc}
