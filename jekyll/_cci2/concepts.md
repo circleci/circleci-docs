@@ -45,7 +45,7 @@ An image is a packaged system that has the instructions for creating a running c
  The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
 
  ```yaml
- version 2
+ version: 2
  jobs:
    build1: # job name
      docker: # Specifies the primary container image,

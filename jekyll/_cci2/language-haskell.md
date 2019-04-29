@@ -19,7 +19,7 @@ CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration 
 You can view an example Haskell project that build with CircleCI at the following link:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-haskell"
-target="_blank">Demo Haskell Project on Github</a>
+target="_blank">Demo Haskell Project on GitHub</a>
 
 In the project you will find a commented CircleCI configuration file <a
 href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
@@ -55,7 +55,7 @@ jobs:
           name: Cache Dependencies
           key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
           paths:
-            - ".stack"
+            - "/root/.stack"
             - ".stack-work"
       - store_artifacts:
           # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
@@ -156,6 +156,17 @@ Finally, we can take the built executable and store it as an artifact.
 ```
 
 Excellent! You are now setup on CircleCI with a Haskell app.
+
+## Common Trouble Shooting
+
+The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command 
+as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
+
+```yaml
+      - run:
+          name: Run tests
+          command: stack test -j1
+```
 
 ## See Also
 {:.no_toc}

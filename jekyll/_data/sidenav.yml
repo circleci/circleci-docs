@@ -131,13 +131,15 @@ en:
           link: 2.0/oss/
         - name: Using Notifications
           link: 2.0/notifications/
+        - name: Connecting JIRA with CircleCI
+          link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
         - name: Using Environment Variables
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
-        - name: Enabling Build Processing
+        - name: Enabling Pipelines
           link: 2.0/build-processing/
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
@@ -169,6 +171,8 @@ en:
           link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
+        - name: Generating Code Coverage Metrics
+          link: 2.0/code-coverage/
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers
@@ -218,9 +222,18 @@ en:
 - name: Administration
   icon: docs/admin.svg
   children:
-    - name: Overview
+    - name: CircleCI Server v2.16
+      link: 2.0/v.2.16-overview/  
+      children:
+        - name: v2.16 Installation Guide
+          link: 2.0/circleci-install-doc.pdf
+        - name: v2.16 Operations Guide
+          link: 2.0/circleci-ops-guide.pdf
+    - name: CircleCI Server v2.0
       link: 2.0/overview/
       children:
+        - name: Overview
+          link: 2.0/overview/
         - name: Trial
           link: 2.0/single-box/
         - name: Faq

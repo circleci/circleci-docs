@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container][primary-container] will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in
 which your primary executor _is_ a docker container. If your executor is
@@ -118,7 +118,30 @@ If your job requires a specific docker version, you can set it as a `version` at
           version: 18.06.0-ce
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `docker-17.09.0-ce`. Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`. Following are the supported stable and edge versions:
+
+- `17.03.0-ce`
+- `17.05.0-ce`
+- `17.06.0-ce`
+- `17.06.1-ce`
+- `17.07.0-ce`
+- `17.09.0-ce`
+- `17.10.0-ce`
+- `17.11.0-ce`
+- `17.12.0-ce`
+- `17.12.1-ce`
+- `18.01.0-ce`
+- `18.02.0-ce`
+- `18.03.0-ce`
+- `18.03.1-ce`
+- `18.04.0-ce`
+- `18.05.0-ce`
+- `18.06.0-ce`
+- `18.09.3`
+
+<!---
+Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
+--->
 
 **Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 

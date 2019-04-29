@@ -14,11 +14,7 @@ order: 1
 
 ### Does CircleCI look at my code?
 {:.no_toc}
-CircleCI employees never look at your code without permission.
-If you have requested support,
-a support engineer may ask permission
-to look at your code
-to help you debug the problem.
+CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
 
 See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
 
@@ -81,42 +77,23 @@ CircleCI is one product that can be accessed through our cloud service, installe
 
 ### Why aren't my jobs running when I push commits?
 {:.no_toc}
-In the CircleCI application,
-check the Workflows tab
-for error messages.
-More often than not,
-the error is because of formatting errors in your `config.yml` file.
+In the CircleCI application, check the Workflows tab for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
+
 See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
 
-After checking your `config.yml` for formatting errors,
-search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### What is the difference between a usage queue and a run queue?
 {:.no_toc}
-A **usage queue** forms
-when an organization lacks the containers
-to run a build.
-The number of available containers is determined
-by the plan chosen
-when setting up a project on CircleCI.
-If your builds are queuing often,
-you can add more containers
-by changing your plan.
+A **usage queue** forms when an organization lacks the containers to run a build. The number of available containers is determined by the plan chosen when setting up a project on CircleCI. If your builds are queuing often, you can add more containers by changing your plan.
 
-A **run queue** forms
-when CircleCI experiences high demand.
-Customer builds are placed in a run queue
-and processed as machines become available.
+A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
 
-In other words,
-you can reduce time spent in a **usage queue**
-by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing),
-but time spent in a **run queue** is unavoidable
-(though CircleCI aims to keep this as low as possible).
+In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
 ### Why can't I find my project on the Add Project page?
  {:.no_toc}
-If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you must change your org on the application Switch Organization menu to `myOrg`.
+If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
@@ -134,7 +111,7 @@ redis:3.0.7-jessie
 For public images on Docker Hub, you can pull the image by prefixing the account or team username:
 
 ```
-myUsername/couchdb:1.6.1
+my-user/couchdb:1.6.1
 ```
 
 ### What is the best practice for specifying image versions?
@@ -169,7 +146,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 ### Can I use the API with Workflows?
 {:.no_toc}
-Yes, see the [Enabling Build Processing]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
+Yes. Refer to the [Enabling Pipelines]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
  
 ### Can I use the Auto-cancel feature with Workflows?
 {:.no_toc}
@@ -230,23 +207,101 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 
 ## Billing
 
-### How do I upgrade my plan with more containers to prevent queuing?
+### Container Based Plans
+
+#### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
 
 * macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
-### Is there a way to share plans across organizations and have them billed centrally?
+#### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
 Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
 
-### Can I set up billing for an organization, without binding it to my personal account?
+#### Can I set up billing for an organization, without binding it to my personal account?
 {:.no_toc}
 Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
 
-### What is the definition of a container in the context of billing?
+#### What is the definition of a container in the context of billing?
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+---
+
+### Credit Usage Plans
+
+#### How do the new pricing plans affect me as a customer?
+{:.no_toc}
+For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider. 
+
+#### What are credits?
+{:.no_toc}
+Credits are used to pay for your usage based on machine type and size. Credits
+can also be used to pay for features, such as Docker Layer Caching.
+
+For example, the 25,000 credit package would provide 2,500 build minutes when
+using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+
+#### If a container is used for under one minute, do I have to pay for a full minute? 
+{:.no_toc}
+You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
+
+#### How do I buy credits? Can I buy in any increments?
+{:.no_toc}
+Every month, you are charged for your selected credit package at the beginning of the month.
+
+#### What do I pay for?
+{:.no_toc}
+You can choose to pay for premium features per active user, compute, and optionally, premium support.
+
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
+- Compute is paid for monthly in credits for the machine size and duration you use.
+- Docker Layer Caching (DLC) is paid for with credits per usage, similar to
+  compute credits.
+
+#### What constitutes an _Active User_?
+{:.no_toc}
+
+An `active user` is any user who triggers the use of compute resources on
+non-OSS projects. This includes activities such as:
+
+- Commits from users that trigger builds, including PR Merge commits.
+- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream
+  jobs).
+
+**Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
+
+
+#### What happens when I run out of credits?
+{:.no_toc}
+
+On the Performance plan, when you reach 5% of your remaining credits, you will
+be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+
+#### Do credits expire?
+{:.no_toc}
+**Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+
+#### How do I pay?
+{:.no_toc}
+You can pay from inside the CircleCI app for monthly pricing.
+
+#### When do I pay?
+{:.no_toc}
+
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling on reaching 5% of credits available) will be paid _at the time of the refill_.
+
+#### What are the other renewal dates?
+{:.no_toc}
+
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
 ## Architecture
 

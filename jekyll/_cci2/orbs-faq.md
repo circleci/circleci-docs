@@ -58,7 +58,7 @@ You attempted to run a local build with version 2.1 of configuration.
 only certified orbs are permitted in this project.
 ```
 
-* Answer: Try making a whitespace change or similar. Your config won't recompile until you've made a change. Config processing happens before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
+* Answer: Try making a whitespace change or similar. Your configuration will not recompile until you have made a change. Configuration processing occurs before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
 ### Environment Variables Not Being Passed at Runtime
 
@@ -77,9 +77,8 @@ file directlySuccess!
 ```
 Upon execution, you may see the following response:
 
-.circleci/echo.yml
-
-```version: 2
+```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -100,15 +99,12 @@ workflows:
   workflow:
     jobs:
     - build
-    - test```
-
-yourusername/circle-autoAdded by GitHub
+    - test
 ```
---->
 
 ### Logging Outputs
 
-* Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages.
+* Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages?
 
 * Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
 
@@ -120,7 +116,7 @@ yourusername/circle-autoAdded by GitHub
 
 ### Private Installation of CircleCI When Using Orbs
 
-* Question: Can I use a private installation of CircleCI Server when using working with orbs?
+* Question: May I use a private installation of CircleCI Server when using working with orbs?
 
 * Answer: No. CircleCI Server does not currently support private installations.
 
@@ -131,7 +127,8 @@ yourusername/circle-autoAdded by GitHub
 * Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
 
 {% raw %}
-```
+```yaml
+version: 2.1
 orbs:
   some-orb: some-ns/some-orb@volatile
 executors:
@@ -143,7 +140,7 @@ jobs:
   another-job:
     executor: my-executor
     steps:
-      - my-command
+      - my-command:
           param1: "hello"
 ```
 {% endraw %}
@@ -153,9 +150,11 @@ jobs:
 * Question: Why do I receive an error message when trying to use a 3rd party orb?
 
 * Answer: When using a 3rd party orb, you must first opt-in to using 3rd party orbs. If you use a 3rd party orb before opting in, you will receive the following error message:
+
 ```
 "Orb {orb@version} not loaded. To use this orb, an organization admin must opt-in to using third party orbs in Organization Security settings."
 ```
+
 Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
 
 To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.

@@ -8,7 +8,7 @@ sitemap: false
 ---
 
 ## Introduction
-Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs little introduction. If you still want one, you can read [this overview]({{ site.baseurl }}/1.0/google-cloud-platform/). In this guide, however, we'll show you how to continuously deploy a Rails application to [Google Container Engine](https://cloud.google.com/container-engine/) (GKE). You can find full example project on Github at [docker-hello-google](https://github.com/circleci/docker-hello-google).
+Google Cloud Platform (GCP) is a huge, scalable hosting platform that needs little introduction. If you still want one, you can read [this overview]({{ site.baseurl }}/1.0/google-cloud-platform/). In this guide, however, we'll show you how to continuously deploy a Rails application to [Google Container Engine](https://cloud.google.com/container-engine/) (GKE). You can find full example project on GitHub at [docker-hello-google](https://github.com/circleci/docker-hello-google).
 
 For general information on continuous deployment with CircleCI, see the [Introduction to Continuous Deployment]({{ site.baseurl }}/1.0/introduction-to-continuous-deployment/).
 

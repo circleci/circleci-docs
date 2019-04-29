@@ -18,7 +18,7 @@ Orbs are packages of config that you can use to quickly get started with the Cir
 
 To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) in the `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 
 orbs:
@@ -30,7 +30,7 @@ workflows:
           - hello/hello-build
 ```
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) to use the `orbs` key. 
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key. 
 
 Orbs consist of the following elements:
 
@@ -43,8 +43,9 @@ Orbs consist of the following elements:
 
 Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
-```
-jobs
+```yaml
+version: 2.1
+jobs:
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
@@ -59,7 +60,6 @@ jobs
 Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the `jobs` key in a configuration, or in an external orb's configuration.
 
 You must invoke jobs in the workflow stanza of `config.yml` file, making sure to pass any necessary parameters as subkeys to the job.
-
 
 ### Executors
 {:.no_toc}
@@ -82,7 +82,7 @@ An executor definition has the following keys available (some of which are also 
 
 The example below shows a simple example of using an executor:
 
-```
+```yaml
 version: 2.1
 executors:
   my-executor:
@@ -98,23 +98,24 @@ jobs:
 
 Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
 
-```
+```yaml
+version: 2.1
 jobs:
   my-job:
     executor:
       name: my-executor
     steps:
       - run: echo outside the executor
-```
+   ```
 
 ## Key Concepts
 
-Before using orbs, you should first familiarize yourself with some basic core concepts of Orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage Orbs and use them easily in your own environments.
+Before using orbs, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage orbs and use them easily in your own environments.
 
 ### Development vs. Production Orbs
 {:.no_toc}
 
-Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production Orbs are immutable and durable.
+Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production orbs are immutable and durable.
 
 ### Certified vs. 3rd-Party Orbs
 {:.no_toc}
@@ -127,12 +128,12 @@ All orbs are open, meaning that anyone can use them and see their source.
 
 ## Design Methodology
 
-Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these Orbs were designed. Orbs were designed with the following considerations:
+Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
 
 * Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
 * Metadata is available - Every key can include a ```description``` key and an orb may include a `description` at the top level.
 * Production orbs are always semantic versioned (semver'd) - CircleCI allows development orbs that have versions that start with `dev:`.
-* Production orbs are immutable - Once an Orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+* Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
 * One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
 * Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 

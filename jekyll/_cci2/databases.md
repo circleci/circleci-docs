@@ -66,7 +66,7 @@ jobs:
 
 The `steps` run `checkout` first, then install the Postgres client tools. The `postgres:9.6.5-alpine-ram` image doesn't install any client-specific database adapters. For example, for Python, you might install `psychopg2` so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#service-images) for the list of images and for a video of this build configuration.
 
-In this example, the config installs the PostgreSQL client tools to get access to `psql`.  **Note:** that `sudo` is run because the images do not run under the root account like most containers do by default. CircleCI has a circle account that runs commands by default, so if you want to do admin priviledges or root priviledges, you need to add `sudo` in front of your commands. 
+In this example, the config installs the PostgreSQL client tools to get access to `psql`.  **Note:** that `sudo` is run because the images do not run under the root account like most containers do by default. CircleCI has a circle account that runs commands by default, so if you want to do admin privileges or root privileges, you need to add `sudo` in front of your commands. 
 
 Three commands follow the `postgresql-client-9.6` installation that interact with the database service. These are SQL commands that create a table called test, insert a value into that table, and select from the table. After committing changes and pushing them to GitHub, the build is automatically triggered on CircleCI and spins up the primary container. 
 

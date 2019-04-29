@@ -192,13 +192,34 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-For more detailed information about the AWS ECS & AWS ECR orbs, refer to the following Orb registry pages:
+
+##### AWS CodeDeploy
+
+The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
+
+```yaml
+version: 2.1 # We must use 2.1 to make use of orbs.
+orbs: # specify all orbs you want to use.
+  aws-code-deploy: circleci/aws-code-deploy@1.0.0
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: myDeploymentGroup # The name of a new deployment group for the specified application.
+          service-role-arn: myDeploymentGroupRoleARN # The service role for a deployment group.
+          bundle-bucket: myApplicationS3Bucket # The s3 bucket where an application revision will be stored.
+          bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
+```
+
+For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
 
-To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the Github and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
+To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Capistrano
 
@@ -559,7 +580,7 @@ If you would like to simplify your Heroku configuration workflows, including dep
 
 #### Deploying Heroku
 
-```
+```yaml
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -571,7 +592,7 @@ workflows:
 
 #### Customizing Heroku Workflows
 
-```
+```yaml
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -581,12 +602,12 @@ workflows:
       - deploy
 jobs:
   deploy:
-    executor: heroku/default
+    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
     steps:
       - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          only-branch: master
+      - heroku/install # Runs the heroku install command, if necessary.
+      - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
+          only-branch: master # If you specify an only-branch, the deploy will not occur for any other branch.
 ```
 
 For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku) page in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).

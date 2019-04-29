@@ -291,7 +291,7 @@ If you are having difficulty adding a multiline environment variable,
 use `base64` to encode it.
 
 ```bash
-$ echo "foobar" | base64
+$ echo "foobar" | base64 --wrap=0
 Zm9vYmFyCg==
 ```
 

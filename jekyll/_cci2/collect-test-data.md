@@ -12,7 +12,22 @@ CircleCI collects test metadata from XML files and uses it to provide insights i
 * TOC 
 {:toc}
 
-To see test result as artifacts, upload them using the `store_artifacts` step.
+To see test results as artifacts, upload them using the `store_artifacts` step.
+
+The usage of the [`store_test_results`]({{
+site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your
+config looks like the following:
+
+```sh
+- store_test_results:
+    path: test-results
+```
+
+Where the `path` key is an absolute or relative path to your `working_directory`
+containing subdirectories of JUnit XML or Cucumber JSON test metadata files.
+Make sure that your `path` value is not a hidden folder (example:
+`.my_hidden_directory` would be an invalid format).
+
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the application to identify flaky tests and isolate recurring issues.
 
@@ -59,6 +74,7 @@ This section provides the following test runner examples:
 * [pytest]( {{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]( {{ site.baseurl }}/2.0/collect-test-data/#rspec)
 * [test2junit]( {{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
+* [trx2junit]( {{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
 * [Karma]( {{ site.baseurl }}/2.0/collect-test-data/#karma)
 * [Jest]( {{ site.baseurl }}/2.0/collect-test-data/#jest)
 
@@ -114,13 +130,13 @@ project.
       - run:
           name: Save test results
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: ~/test-results
       - store_artifacts:
-          path: ~/junit         
+          path: ~/test-results/junit         
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
@@ -136,13 +152,13 @@ project.
       - run:
           name: Save test results
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: ~/test-results
       - store_artifacts:
-          path: ~/junit         
+          path: ~/test-results/junit         
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
@@ -398,6 +414,30 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 #### test2junit for Clojure Tests
 {:.no_toc}
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
+
+#### trx2junit for Visual Studio / .NET Core Tests
+{:.no_toc}
+Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format. 
+
+A working `.circleci/config.yml` section might look like this:
+
+```yaml
+    steps:
+      - checkout
+      - run: dotnet build
+      - run: dotnet test --no-build --logger "trx"
+      - run:
+          name: test results
+          command: |
+              dotnet tool install -g trx2junit
+              export PATH="$PATH:/root/.dotnet/tools"
+              trx2junit tests/**/TestResults/*.trx
+      - store_test_results:
+          path: tests/TestResults
+      - store_artifacts:
+          path: tests/TestResults
+          destination: TestResults
+```
 
 #### Karma
 {:.no_toc}

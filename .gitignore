@@ -1,7 +1,6 @@
 .DS_Store
 .bundle/
 .jekyll-metadata
-.ruby-version
 .sass-cache/
 .vagrant/
 _site/
@@ -11,3 +10,5 @@ jekyll/_includes/app.html
 jekyll/assets/js/*.bundle.js
 run-results/
 node_modules/
+
+src-api/build/
