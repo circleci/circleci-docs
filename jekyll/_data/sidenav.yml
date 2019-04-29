@@ -86,6 +86,8 @@ en:
           link: 2.0/sample-config/
         - name: Tutorials
           link: 2.0/tutorials/
+        - name: Configuration Cookbook
+          link: 2.0/configuration-cookbook/
         - name: Database Config Examples
           link: 2.0/postgres-config/
         - name: Example Public Repos
