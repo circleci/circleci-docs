@@ -67,8 +67,6 @@ Enabling Custom Slack Notifications in CircleCI Jobs | This section describes ho
 
 ## Deploying Software Changes to Amazon ECS
 
-{TOC}
-
 The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
 
 ### Prerequisites
@@ -178,8 +176,6 @@ This example illustrates how you can use the orb to install and configure the AW
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
 ## Deploying Software Changes to Google Kubernetes Engine (GKE)
-
-{TOC}
 
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
@@ -331,8 +327,6 @@ The example below shows how you can use the CircleCI GKE orb to log into the Goo
 
 The Heroku platform is a cloud-based, fully-scalable platform that enables you to quickly and easily deliver and deploy applications. Using CircleCI builds and orbs, you can simplify the deployment process in a few simple steps by following the steps described in the sections below.
 
-{TOC}
-
 ### Prerequisites
 
 Before you can deploy an applications to the Heroku platform, make sure the following requirements are met:
@@ -380,8 +374,6 @@ For more detailed information about the CircleCI Heroku orb, refer to the [Circl
 ## Enabling Custom Slack Notifications in CircleCI Jobs
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
-
-{TOC}
 
 ### Prerequisites
 
