@@ -74,8 +74,11 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
     steps:
       - checkout
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm publish
+      - run: 
+          name: Publish to NPM
+          command: | 
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
 ```
 
 ## SSH
