@@ -58,7 +58,7 @@ and re-create the image.
 
 If you are not the image maintainer, congratulations:
 it's not your responsibility.
-Contact the imagine maintainer
+Contact the image maintainer
 and report the error.
 
 If you are the image maintainer,
