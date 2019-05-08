@@ -12,7 +12,7 @@ This document provides a summary of features and product notes for the release o
 ## What's New in Release 2.16
 
 * Workflows now has a Slack Integration! Users can choose to receive Slack notifications when their workflows complete.
-* Administrators can now restrict whichat organizations are allowed into their CircleCI installation. For more details on how to enable this feature, please see the User Management Section of the 2.17 Ops Manual.
+* Administrators can now restrict which organizations are allowed into their CircleCI installation. For more details on how to enable this feature, please see the User Management Section of the 2.17 Ops Manual.
 * We changed the renamed org flow so orgs that have been renamed will no longer result in errors going forward. Existing users who had applied workarounds for this use case will now no longer require said workarounds.
 * Workflows now take up less DB space and will be easier to maintain going forward.
 * Improved the cache in front of GraphQL API resulting in overall improved performance.
