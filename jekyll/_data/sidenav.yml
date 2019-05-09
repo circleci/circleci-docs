@@ -224,8 +224,15 @@ en:
 - name: Administration
   icon: docs/admin.svg
   children:
+    - name: CircleCI Server v2.17
+      link: 2.0/v.2.17-overview/
+      children:
+        - name: v2.17 Installation Guide
+          link: 2.0/circleci-install-doc.pdf
+        - name: v2.17 Operations Guide
+          link: 2.0/circleci-ops-guide.pdf
     - name: CircleCI Server v2.16
-      link: 2.0/v.2.16-overview/  
+      link: 2.0/v.2.16-overview/
       children:
         - name: v2.16 Installation Guide
           link: 2.0/circleci-install-doc.pdf

@@ -9,10 +9,10 @@ order: 1
 
 This document provides a summary of features and product notes for the release of CircleCI Server v2.17.
 
-## What's New in Release 2.16
+## What's New in Release 2.17
 
 * Workflows now has a Slack Integration! Users can choose to receive Slack notifications when their workflows complete.
-* Administrators can now restrict whichat organizations are allowed into their CircleCI installation. For more details on how to enable this feature, please see the User Management Section of the 2.17 Ops Manual.
+* Administrators can now restrict which organizations are allowed into their CircleCI installation. For more details on how to enable this feature, please see the User Management Section of the 2.17 Ops Manual.
 * We changed the renamed org flow so orgs that have been renamed will no longer result in errors going forward. Existing users who had applied workarounds for this use case will now no longer require said workarounds.
 * Workflows now take up less DB space and will be easier to maintain going forward.
 * Improved the cache in front of GraphQL API resulting in overall improved performance.
@@ -23,7 +23,7 @@ This document provides a summary of features and product notes for the release o
    - *CircleCI v2.17 Installation Guide*
    - *CircleCI v2.17 Operations Guide*
 
-## Fixed in Release 2.16
+## Fixed in Release 2.17
 
 * Fixed some bugs related to GitHub API response handling and webhook handling.
 * Fixed issue with Scheduled Workflows when the services machine is restarted.
@@ -40,7 +40,7 @@ This document provides a summary of features and product notes for the release o
 * Fixed issue where workflows were constrained from fanning out to large number of jobs.
 
 
-## Updated in Release 2.16
+## Updated in Release 2.17
 
 * New machine executor AMIs based on Ubuntu 16.04 for AWS.
   Ubuntu 16.04 with Docker 18.06.3 has apt-daily and apt-daily-upgrade services disabled.
@@ -97,7 +97,7 @@ Steps to update to CircleCI Server v2.17 are as follows:
 
 1. Check you are running Docker v17.12.1, and if not update (steps in section below)
 2. Update Replicated to v2.34.1 (steps in section below)
-3. Navigate to your Management Console, for example, `https://<your-circleci-hostname>.com:8800`, and you will be guided through the process of upgrading to v2.17
+3. Navigate to your Management Console dashboard, for example, `https://<your-circleci-hostname>.com:8800` and select the v2.17 upgrade.
 
 ### Prequisites for Updating Replicated
 
