@@ -97,7 +97,7 @@ Steps to update to CircleCI Server v2.17 are as follows:
 
 1. Check you are running Docker v17.12.1, and if not update (steps in section below)
 2. Update Replicated to v2.34.1 (steps in section below)
-3. Navigate to your Management Console dashboard, for example, `https://<your-circleci-hostname>.com:8800` and select the v2.17 upgrade.
+3. Navigate to your Management Console dashboard (e.g. `https://<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
 
 ### Prequisites for Updating Replicated
 
