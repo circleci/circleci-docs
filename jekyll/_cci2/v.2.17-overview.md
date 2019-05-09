@@ -21,7 +21,7 @@ This document provides a summary of features and product notes for the release o
 
 - PDF installation and operations documentation:
    - [*CircleCI v2.17 Installation Guide*](https://circleci.com/docs/2.0/circleci-2-17-install-doc.pdf)
-   - *CircleCI v2.17 Operations Guide*
+   - [*CircleCI v2.17 Operations Guide*](https://circleci.com/docs/2.0/circleci-2-17-ops-guide.pdf)
 
 ## Fixed in Release 2.16
 
