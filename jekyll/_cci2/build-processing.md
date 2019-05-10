@@ -10,11 +10,11 @@ order: 1
 This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
 ## Getting Started
-Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app.
+Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app. **Note:** Pipelines require v2.1 configuration and are not yet supported for private CircleCI Server installations.
 
-## Benefits of pipelines
+## Benefits of Pipelines
 
-The new pipelines feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#new-project-build) and the following use cases:
+The pipelines feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#new-project-build) and the following use cases:
 
 - New API endpoint to trigger builds, including running all workflows in the build.
 - Jobs named `build` will be wrapped in a workflows stanza by the processor.
@@ -27,8 +27,8 @@ The new pipelines feature enables use of the new [API endpoint to trigger builds
 
 Pipeline errors will appear on the Jobs page or the Workflows page.
 
-Please note that once pipelines are enabled for a project, they may not be
-turned off. See `limitations` below.
+Please note that once pipelines are enabled for a project on a usage plan, they may not be
+turned off without filing a ticket with CircleCI support. See `limitations` below.
 
 ## Limitations
 CircleCI is committed to achieving backwards compatibility in almost all cases,
