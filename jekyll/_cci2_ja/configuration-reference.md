@@ -389,7 +389,7 @@ jobs:
 
 #### **`resource_class`**
 
-**注 :** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、[サポートチケットを使って](https://support.circleci.com/hc/en-us/requests/new) CircleCI のセールスチームに問い合わせてください。
+**注 :** この機能を有効にするには、[サポートチケットを使って](https://support.circleci.com/hc/en-us/requests/new) CircleCI のセールスチームに問い合わせてください。
 
 お使いの有償プランにこの機能が追加されると、ジョブごとに CPUの数 とメモリ容量を設定できるようになります。利用可能なマシンリソースは下記の表の通りです。`resource_class` を指定しない場合、もしくは指定した class が正しくないときは、デフォルトの `resource_class: medium` が指定されたものとみなされます。`resource_class` キーは現在のところ `docker` Executor との組み合わせのみサポートしています。
 
