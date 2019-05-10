@@ -14,20 +14,14 @@ CircleCI collects test metadata from XML files and uses it to provide insights i
 
 To see test results as artifacts, upload them using the `store_artifacts` step.
 
-The usage of the [`store_test_results`]({{
-site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your
-config looks like the following:
+The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
 
 ```sh
 - store_test_results:
     path: test-results
 ```
 
-Where the `path` key is an absolute or relative path to your `working_directory`
-containing subdirectories of JUnit XML or Cucumber JSON test metadata files.
-Make sure that your `path` value is not a hidden folder (example:
-`.my_hidden_directory` would be an invalid format).
-
+Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
 After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the application to identify flaky tests and isolate recurring issues.
 
@@ -119,11 +113,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 #### Maven Surefire Plugin for Java JUnit Results
 {:.no_toc}
 
-If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the
-[Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
-to generate test reports in XML format. CircleCI makes it easy to collect these
-reports. Add the following to the `.circleci/config.yml` file in your
-project.
+If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
 ```yaml
     steps:
@@ -142,10 +132,7 @@ project.
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
 {:.no_toc}
 
-If you are building a Java or Groovy based project with [Gradle](https://gradle.org/),
-test reports are automatically generated in XML format. CircleCI makes it easy to collect these
-reports. Add the following to the `.circleci/config.yml` file in your
-project.
+If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
 ```yaml
     steps:
@@ -164,7 +151,7 @@ project.
 #### <a name="mochajs"></a>Mocha for Node.js
 {:.no_toc}
 
-To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
+To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
 A working `.circleci/config.yml` section for testing might look like this:
 
@@ -328,7 +315,7 @@ A working `.circleci/config.yml` test section might look like this:
 #### PHPUnit
 {:.no_toc}
 
-For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory.  Your `.circleci/config.yml` might be:
+For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
 ```
     steps:
@@ -413,6 +400,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 
 #### test2junit for Clojure Tests
 {:.no_toc}
+
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 #### trx2junit for Visual Studio / .NET Core Tests
@@ -481,8 +469,7 @@ A working `.circleci/config.yml` section might look like this:
 #### Jest
 {:.no_toc}
 
-To collect Jest data,
-first create a Jest config file called `jest.config.js` with the following:
+To collect Jest data, first create a Jest config file called `jest.config.js` with the following:
 
 ```javascript
 // jest.config.js
@@ -514,7 +501,7 @@ For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.gith
 
 ## API
 
-To access test metadata for a run from the API, refer to the [test-metadata API documentation]( {{ site.baseurl }}/api/v1-reference/#test-metadata).
+To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/#get-build-test-metadata).
 
 ## See Also
 {:.no_toc}
