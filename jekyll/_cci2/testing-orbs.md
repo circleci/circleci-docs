@@ -33,7 +33,7 @@ To test whether an orb is valid YAML and is well-formed according to the schema,
 
 Given an orb with source at `./src/orb.yml` you can run `circleci orb validate ./src/orb.yml` to receive feedback on whether the orb is valid and will pass through config processing. If there is an error, you will receive the first schema validation error encountered. Alternatively, you can pass STDIN rather than a file path. 
 
-For example, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate.` 
+For example, equivalent to the previous example you can run `cat ./src/orb.yml | circleci orb validate -` 
 
 **Note** Schema errors are often best read "inside out", where your coding error may be best described in one of the inner-most errors in a stack of errors.
 
@@ -187,3 +187,4 @@ For advanced testing, you may also want to use a shell unit testing framework su
 - Refer to the [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/), where you will find answers to common questions.
 - Refer to [Reusing Config]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
+- Refer to [Configuration Cookbook](({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
