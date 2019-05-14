@@ -13,11 +13,12 @@ This document describes how to update the server replicated version for your pri
 
 ## Assumptions
 
-- Your installation is Ubuntu 14.04-based
-- You are running replicated version 2.10.3 on your services machine
+- Your installation is Ubuntu 14.04 or 16.04 based.
+- You are running replicated version 2.10.3<= on your services machine
   - replicated --version
 - Your installation is **not** airgapped and you can access the internet from it
 - All steps are completed on the Services machine
+- Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
   
 ## Preparations
 
@@ -68,11 +69,12 @@ Example Output:
 Perform the Replicated update by executing the update script as follows:
 
 ```
-    curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
+    curl -sSL "https://get.replicated.com/docker?replicated_tag=<specific_replicated_version>" | sudo bash
 ```
 
 Double-check your replicated and docker versions:
 
+Example Output
 ```
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
