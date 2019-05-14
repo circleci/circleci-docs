@@ -399,8 +399,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 
 
 <aside class="notice">
-Prerequisite: You must go to your Project Settings in the CircleCI app to <a
-href="https://circleci.com/docs/2.0/build-processing/">Enable Build Processing </a>. This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.
+Prerequisite: You must go to your Project Settings in the CircleCI app enable pipelines. This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.
 </aside>
 
 **Parameter** | **Description**

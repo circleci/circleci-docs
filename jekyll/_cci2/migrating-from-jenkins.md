@@ -50,7 +50,7 @@ If you install CircleCI on your own hardware, the divide between the host OS (at
 ## Web UI
 {:.no_toc}
 
-CircleCI is a single-page web app that makes the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves it’s UI. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.
+CircleCI is a single-page web app that makes the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves its UI. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.
 
 ![](  {{ site.baseurl }}/assets/img/docs/circle-ui.png)
 
