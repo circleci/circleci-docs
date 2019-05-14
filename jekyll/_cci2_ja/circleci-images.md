@@ -123,7 +123,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 - `-node`：多言語対応の Node.js が含まれます。
 - `-browsers`：Chrome、Firefox、Java 8、および Geckodriver が含まれます。
 - `-browsers-legacy`：Chrome、Firefox、Java 8、および PhantomJS が含まれます。
-- `-node-browsers`：`-node` バリアントと `-browsers` バリアントの組み合わせです
+- `-node-browsers`：`-node` バリアントと `-browsers` バリアントの組み合わせです。
 - `-node-browsers-legacy`：`-node` バリアントと `-browsers-legacy` バリアントの組み合わせです。
 
 たとえば、`circleci/golang:1.9` イメージにブラウザーを追加する場合は、`circleci/golang:1.9-browsers` イメージを使用します。

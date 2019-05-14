@@ -132,7 +132,7 @@ jobs:
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - checkout
-      - save_cache: # キャッシュキーで依存関係をキャッシュします
+      - save_cache: # キャッシュキーで依存関係をキャッシュします。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       paths:
             - ~/circleci-demo-workflows
@@ -224,7 +224,7 @@ Workspaces | ワークフローの期間 | `attach_workspace:` ステップを�
 Caches | 数か月 | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。 | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と 適切な `key` を使用してキャッシュを復元します。
 {: class="table table-striped"}
 
-Workspace、Caches、Artifacts に関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (Workflows でデータを保持するには：Caches、Artifacts、Workspace 活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+Workspace、Caches、Artifacts に関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (Workflows でデータを保持するには：Caches、Artifacts、Workspaces 活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ## 関連項目
 {:.no_toc}
