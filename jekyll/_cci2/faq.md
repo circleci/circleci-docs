@@ -207,28 +207,6 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 
 ## Billing
 
-### Container Based Plans
-
-#### How do I upgrade my plan with more containers to prevent queuing?
-{:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
-
-* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
-
-#### Is there a way to share plans across organizations and have them billed centrally?
-{:.no_toc}
-Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
-
-#### Can I set up billing for an organization, without binding it to my personal account?
-{:.no_toc}
-Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
-
-#### What is the definition of a container in the context of billing?
-{:.no_toc}
-A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
-
----
-
 ### Credit Usage Plans
 
 #### How do the new pricing plans affect me as a customer?
@@ -259,6 +237,33 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Compute is paid for monthly in credits for the machine size and duration you use.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
+
+---
+
+### Container Based Plans
+
+Container based plans are a legacy plan. If you are already using a Container
+Based Plan you do not need to switch to a new plan. To switch to credit usage plan, check out the
+[credit plans page](https://circleci.com/pricing/usage/). 
+
+#### How do I upgrade my plan with more containers to prevent queuing?
+{:.no_toc}
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
+
+* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+
+#### Is there a way to share plans across organizations and have them billed centrally?
+{:.no_toc}
+Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
+
+#### Can I set up billing for an organization, without binding it to my personal account?
+{:.no_toc}
+Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+
+#### What is the definition of a container in the context of billing?
+{:.no_toc}
+A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
 
 #### What constitutes an _Active User_?
 {:.no_toc}
