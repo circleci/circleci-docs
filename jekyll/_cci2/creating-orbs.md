@@ -603,7 +603,7 @@ bar:
 #### An Example Packed Config.yml
 {:.no_toc}
 
-See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/v2.1/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
 
 ### Processing A Config
 
