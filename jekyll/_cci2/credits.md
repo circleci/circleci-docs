@@ -64,6 +64,11 @@ Upgrading to a performance plan offers several improvements over the free plan:
 - Access to Docker Layer Caching 
 - No queuing
 
+## Docker Layer Caching
+
+Docker Layer Caching (DLC) is available for 200 credits per job run. Read more
+about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching)
+
 ## Questions And Comments
 
 Consider reading our section on Billing in our
