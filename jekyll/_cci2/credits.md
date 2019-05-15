@@ -67,5 +67,5 @@ Upgrading to a performance plan offers several improvements over the free plan:
 ## Questions And Comments
 
 Consider reading our section on Billing in our
-[FAQ]({{site.baseurl}}/2.0/faq/https://circleci.com/docs/2.0/faq/#billing). For any
+[FAQ]({{site.baseurl}}/2.0/faq/#billing). For any
 further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new). 
