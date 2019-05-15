@@ -215,7 +215,7 @@ workflows:
 For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
-- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
+- [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
 

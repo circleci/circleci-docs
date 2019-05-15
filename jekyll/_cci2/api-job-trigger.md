@@ -8,21 +8,16 @@ order: 80
 ---
 
 
-This document describes
-how to trigger jobs using the CircleCI API.
+This document describes how to trigger jobs using the CircleCI API.
 
 * TOC
 {:toc}
 
 ## Overview
 
-Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
-to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview)
-that you have defined in `.circleci/config.yml`.
+Use the [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
-The following example shows
-how to trigger the `deploy_docker` job
-by using `curl`.
+The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
 ```bash
 curl -u ${CIRCLE_API_USER_TOKEN}: \
@@ -30,31 +25,23 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-Some notes on the variables
-used in this example:
+Some notes on the variables used in this example:
 - `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
-- `<vcs-type>` is a placeholder variable
-and refers to your chosen VCS (either `github` or `bitbucket`).
-- `<org>` is a placeholder variable
-and refers to the name of your CircleCI organization.
-- `<repo>` is a placeholder variable
-and refers to the name of your repository.
-- `<branch>` is a placeholder variable
-and refers to the name of your branch.
+- `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`).
+- `<org>` is a placeholder variable and refers to the name of your CircleCI organization.
+- `<repo>` is a placeholder variable and refers to the name of your repository.
+- `<branch>` is a placeholder variable and refers to the name of your branch.
 
-For a complete reference of the API,
-see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
+For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/#section=reference).
 
 **Important Considerations When Triggering A Job Via The API**
 
 - Jobs triggered with the API may contain a `workflows` section
 - Your workflow does **not** have to reference the job you triggered with the API
-- Jobs that are triggered via the API do **not** have access to environment
-  variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/)
-  - If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
+- Jobs that are triggered via the API do **not** have access to environment variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/)
+- If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
 - It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
-- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project]({{ site.baseurl}}/api/v1-reference/#new-project-build) endpoint
-
+- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) endpoint
 
 ## Conditionally Running Jobs With the API
 

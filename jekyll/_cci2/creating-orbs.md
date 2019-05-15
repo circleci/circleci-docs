@@ -64,7 +64,7 @@ Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://
 Once you have configured the CircleCI CLI, verify you installed the CLI correctly and the CLI is updated and configured properly before beginning to work with orbs.
 
 #### Step 3 - Bump Version Property to Orbs-Compatible 2.1
-After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs. More information on how to bump the version property can be found in the "Bump Version Property to Orbs-Compatible 2.1" section on this page.
+After validating your build configuration, bump the version property to 2.1 so it is compatible for use with orbs.
 
 #### Step 4 - Create a New Orb Using Inline Template
 Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
@@ -603,7 +603,7 @@ bar:
 #### An Example Packed Config.yml
 {:.no_toc}
 
-See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/master/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
+See the [example_config_pack folder](https://github.com/CircleCI-Public/config-preview-sdk/tree/v2.1/docs/example_config_pack) to see how `circleci config pack` could be used with git commit hooks to generate a single `config.yml` from multiple yaml sources.
 
 ### Processing A Config
 
@@ -772,3 +772,4 @@ In this example, the `btd` workflow runs the `orb-tools/validate` job first. If 
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
 - Refer to [Local CLI]({{site.baseurl}}/2.0/local-cli/#overview) for more information about how you can use the CircleCI CLI in your orbs deployments.
+- Refer to [Configuration Cookbook](({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
