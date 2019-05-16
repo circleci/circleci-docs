@@ -154,6 +154,11 @@ For example, you may want to clear the cache in the following scenarios by incre
   consider using keys within [a-z][A-Z] in your cache key prefix.
 </div>
 
+## Cache Size
+We recommend keeping cache sizes under 500Mb. This is our upper limit for corruption checks because above this limit check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
+Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download.
+To keep cache sizes down, consider splitting into multiple distinct caches.
+
 ## Basic Example of Dependency Caching
 
 The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
