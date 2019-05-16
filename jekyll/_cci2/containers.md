@@ -7,7 +7,7 @@ description: How to leverage CircleCI containers
 
 This document describes the basics of containers and how to leverage the containers in
 your plan to speed up your job and workflow runs. Container-based plans will soon become a
-legacy plan. Consider visiting our [pricing & usage page](https://circleci.com/pricing/usage/) to learn about CircleCI's credit-based usage plans.
+legacy plan. Consider reading the [credit usage document]({{ site.baseurl }}/2.0/credits/) to learn about CircleCI's credit-based usage plans.
 
 ## Overview
 
