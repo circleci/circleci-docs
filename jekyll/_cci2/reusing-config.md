@@ -898,6 +898,19 @@ workflows:
           preinstall-foo: true
 ```
 
-**Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters (first example), or by the result of a Bash function (second example). Also, please note that `when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
+**Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters as above, or by the result of a Bash function, for example:
+
+```  commands:
+     deploy_command:
+          steps:
+            - run:
+               name: Deploying master
+               command: |-
+                  if [ $CIRCLE_BRANCH == "master" ]; then
+                    ./deploy.sh
+                  fi
+```
+
+Also, please note that `when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
