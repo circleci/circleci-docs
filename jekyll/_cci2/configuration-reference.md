@@ -284,10 +284,6 @@ Example:
 
 ```yaml
 version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
 jobs:
   build:
     machine:
