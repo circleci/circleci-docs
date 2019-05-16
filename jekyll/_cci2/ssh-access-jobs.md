@@ -36,7 +36,7 @@ that you use for GitHub or Bitbucket) to perform whatever troubleshooting
 you need to.
 
 The build VM will remain available for an SSH connection for **10 minutes after the build
-finishes running** and then automatically shut down. (Or you can cancel it.) Once you SSH
+finishes running** and then automatically shut down. (Or you can cancel it.) After you SSH
 into the build, the connection will remain open for **two hours**.
 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM
