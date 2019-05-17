@@ -14,7 +14,7 @@ well as display your build statuses in Jira.
 
 # Installation Steps
 
-1. Navigate to project settings under `integrations` >  `JIRA integration`
+1. Navigate to project settings (from the project's jobs page, click the gear icon in the upper right). Under `Permissions`, click on `JIRA integration`
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
 2. Go to the Atlassian Marketplace to get the [CircleCI JIRA Plugin](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
