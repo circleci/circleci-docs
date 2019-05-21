@@ -20,7 +20,7 @@ description: CircleCI を使用した AWS ECR から ECS へのデプロイ方�
 
 **メモ：**このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。
 
-詳細については、「[カスタムイメージの手動作成]({{ site.baseurl }}/ja/2.0/custom-images/#creating-a-custom-image-manually)」を参照してください。
+詳細については、「[カスタムイメージの手動作成]({{ site.baseurl }}/ja/2.0/custom-images/#カスタムイメージの手動作成)」を参照してください。
 
 ## 前提条件
 
@@ -31,7 +31,7 @@ description: CircleCI を使用した AWS ECR から ECS へのデプロイ方�
 1. [AWS アカウントを作成します](https://aws.amazon.com/jp/premiumsupport/knowledge-center/create-and-activate-aws-account/)。
 2. [Terraform をインストールします](https://www.terraform.io/)。
 3. [サンプルプロジェクト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)のクローンを作成し、そのルートディレクトリに移動します。
-4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の「[CircleCI 環境変数を設定する](#configure-circleci-environment-variables)」セクションを参照してください。
+4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の「[CircleCI 環境変数を設定する](#circleci-環境変数を設定する)」セクションを参照してください。
 5. 以下のコマンドを実行して、AWS リソースを作成します。
 
 ```bash
