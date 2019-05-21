@@ -63,7 +63,7 @@ Partner Orb Registry Link | Orb Reference String
 [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0`
 [Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1`
 [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) | `ecr: circleci/aws-ecr@4.0.1`
-[AWS EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks) | `eks: circleci/aws-eks@0.1.0`
+[Amazon EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks) | `eks: circleci/aws-eks@0.1.0`
 [Azure ACR](https://circleci.com/orbs/registry/orb/circleci/azure-acr) | `acr: circleci/azure-acr@0.1.1`
 [Azure AKS](https://circleci.com/orbs/registry/orb/circleci/azure-aks) | `aks: circleci/azure-aks@0.1.0`
 [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`
