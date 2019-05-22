@@ -113,7 +113,7 @@ workflows:
           tunnel_identifier: safari
 ```
 
-For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry] (https://circleci.com/orbs/registry/).
+For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## BrowserStack and Appium
 
@@ -123,7 +123,7 @@ For mobile applications, it is possible to use Appium or an equivalent platform 
 
 ## Cypress
 
-Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress] (https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
+Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
 ```
 version: 2.1
