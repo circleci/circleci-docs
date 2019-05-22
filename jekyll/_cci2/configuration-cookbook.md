@@ -62,8 +62,12 @@ Configuration Recipe | Description
 ------------|-----------
 Deploying Software Changes to Amazon Elastic Container Service (ECS) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
 Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+Using Amazon Elastic Container Service for Kubernetes (Amazon EKS) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
 Deploying Applications to Heroku | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
 Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+Enabling Single-threading Builds on a Branch |
+Using GitHub Releases and Tagging Inside CircleCI Jobs | 
+Publishing to GitHub Pages from Inside a CircleCI Build | 
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -323,6 +327,492 @@ The example below shows how you can use the CircleCI GKE orb to log into the Goo
                 tag: "2"
 ```
 
+## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
+
+CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Container Service (ECS) to perform the following tasks:
+
+* Create an EKS cluster
+* Create a Kubernetes deployment
+* Install Helm charts
+* Update a container image
+
+### Prerequisites
+
+Before using the Amazon EKS service, make sure you meet the following requirements:
+
+* Your environment is configured to use the CircleCI platform and Orbs.
+* You have installed the `eksctl` tool.
+* You have installed `AWS-CLI` and `AWS-IAM Authenticator for Kubernetes`.
+
+#### Configuring Your Environment to Use the CircleCI Platform and Orbs
+
+To configure your environment to use CircleCI and Orbs, perform the following steps:
+
+1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+
+`version: 2.1`
+
+2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn enable pipelines.
+
+Add the orbs stanza below your version, invoking the orb:
+
+`orbs:
+  aws-eks: circleci/aws-eks@0.1.0`
+
+3) Use `aws-eks` elements in your existing workflows and jobs.
+
+#### Installing the Amazon `eksctl` tool
+
+If the Amazon `eksctl` tool is not already installed, install `eksctl` so you can use these tools to manage a cluster on EKS - Amazon's managed Kubernetes service for EC2.
+
+The code sample shown below illustrates how you can install the 'eksctl' tool in your environment using the CircleCI orb.
+
+```yaml
+version: 2.1
+description: |
+  Install the eksctl tool
+  Requirements: curl, amd64 architecture
+steps:
+  - run:
+      command: >
+        if which eksctl > /dev/null; then
+          echo "eksctl is already installed"
+          exit 0
+        fi
+
+        mkdir -p eksctl_download
+
+        curl --silent --location --retry 5
+        "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname
+        -s)_amd64.tar.gz" \
+          | tar xz -C eksctl_download
+        chmod +x eksctl_download/eksctl
+
+        SUDO=""
+
+        if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
+          SUDO="sudo"
+        fi
+
+        $SUDO mv eksctl_download/eksctl /usr/local/bin/
+
+        rmdir eksctl_download
+      name: Install the eksctl tool
+```
+
+#### Install AWS-CLI and AWS-IAM for Kubernetes
+
+CircleCI enables you to use the `AWS-CLI` and `AWS-IAM` authentication tool to run command-line tools in an AWS cluster. Where `AWS-CLI` allows you to run these command-line tools, `AWS-IAM` provides you with the capability to authenticate an existing Kubernetes cluster. By using the AWS IAM Authenticator for Kubernetes, you will not have to manage a separate credential for the Kubernetes access. If you would like more detailed information about how to install and use these tools, refer to the [AWS-IAM GitHub](https://github.com/kubernetes-sigs/aws-iam-authenticator) page.
+
+To install the AWS IAM Authenticator for Kubernetes, see the code sample shown below.
+
+```yaml
+Version: 2.1
+description: |
+  Install the AWS IAM Authenticator for Kubernetes
+  Requirements: curl, amd64 architecture
+parameters:
+  release-tag:
+    default: ''
+    description: >
+      Use this to specify a tag to select which published release of the AWS IAM
+      Authenticator,
+
+      as listed on
+      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases,
+
+      to install. If no value is specified, the latest release will be
+      installed.
+
+      Note: Release versions earlier than v0.3.0 cannot be specified. Also,
+
+      pre or alpha releases cannot be specified.
+    type: string
+steps:
+  - run:
+      command: >
+        if which aws-iam-authenticator > /dev/null; then
+          echo "AWS IAM Authenticator for Kubernetes is already installed"
+          exit 0
+        fi
+
+        PLATFORM="linux"
+
+        if [ -n "$(uname | grep "Darwin")" ]; then
+          PLATFORM="darwin"
+        fi
+
+        RELEASE_TAG="<< parameters.release-tag >>"
+
+        RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/latest"
+
+        if [ -n "${RELEASE_TAG}" ]; then
+          RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/tags/${RELEASE_TAG}"
+        fi
+
+        DOWNLOAD_URL=$(curl -s --retry 5 "${RELEASE_URL}" \
+            | grep "${PLATFORM}" | awk '/browser_download_url/ {print $2}' | sed 's/"//g')
+
+        curl -L -o aws-iam-authenticator "$DOWNLOAD_URL"
+
+        chmod +x ./aws-iam-authenticator
+
+        SUDO=""
+
+        if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
+          SUDO="sudo"
+        fi
+
+        $SUDO mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+      name: Install the AWS IAM Authenticator for Kubernetes
+```
+
+**Note:** Make sure curl in enabled, and you are using the amd64 architecture.
+
+### Create an EKS Cluster
+
+Once you meet the requirements for using the CircleCI AWS-EKS Orb, you may create an EKS cluster using the code sample shown below.
+
+```yaml
+Version: 2.1
+
+jobs:
+  test-cluster:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+    steps:
+      - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+      - run:
+          command: |
+            kubectl get services
+          name: Test cluster
+orbs:
+  aws-eks: circleci/aws-eks@0.1.0
+  kubernetes: circleci/kubernetes@0.3.0
+version: 2.1
+workflows:
+  deployment:
+    jobs:
+      - aws-eks/create-cluster:
+          cluster-name: my-eks-demo
+      - test-cluster:
+          cluster-name: my-eks-demo
+          requires:
+            - aws-eks/create-cluster
+      - aws-eks/delete-cluster:
+          cluster-name: my-eks-demo
+          requires:
+            - test-cluster
+```
+
+In this example, when you use the CircleCI AWS-EKS orb, you can install Kubernetes, update the Kubernetes configuration with the authenticator, and then retrieve Kubernetes services in one single job.
+
+### Create a Kubernetes Deployment
+
+After creating a Kubernetes cluster, you may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
+
+* update resources within the cluster
+* update the Kubernetes configuration with the authenticator
+* update the container image
+
+The code example below illustrates how you can create the Kubernetes deployment. 
+
+```yaml
+Version: 2.1
+
+jobs:
+  create-deployment:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+    steps:
+      - checkout
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: tests/nginx-deployment/deployment.yaml
+          resource-name: deployment/nginx-deployment
+orbs:
+  aws-eks: circleci/aws-eks@0.1.0
+  kubernetes: circleci/kubernetes@0.3.0
+version: 2.1
+workflows:
+  deployment:
+    jobs:
+      - aws-eks/create-cluster:
+          cluster-name: eks-demo-deployment
+      - create-deployment:
+          cluster-name: eks-demo-deployment
+          requires:
+            - aws-eks/create-cluster
+      - aws-eks/update-container-image:
+          cluster-name: eks-demo-deployment
+          container-image-updates: 'nginx=nginx:1.9.1'
+          post-steps:
+            - kubernetes/delete-resource:
+                resource-names: nginx-deployment
+                resource-types: deployment
+                wait: true
+          record: true
+          requires:
+            - create-deployment
+          resource-name: deployment/nginx-deployment
+      - aws-eks/delete-cluster:
+          cluster-name: eks-demo-deployment
+          requires:
+            - aws-eks/update-container-image
+```
+
+### Install Helm On Your Cluster
+
+To simplify the Helm installation on your cluster, 
+
+```yaml
+Version: 2.1
+
+description: |
+  Installs helm onto the EKS cluster.
+  Note: Parameters like tiller-tls need to be set to
+  apply security configurations to the tiller configuration.
+executor: << parameters.executor >>
+parameters:
+  aws-profile:
+    default: ''
+    description: |
+      The AWS profile to be used. If not specified, the configured default
+      profile for your AWS CLI installation will be used.
+    type: string
+  aws-region:
+    default: ''
+    description: |
+      AWS region that the EKS cluster is in.
+    type: string
+  cluster-name:
+    description: |
+      The name of the EKS cluster.
+    type: string
+  enable-cluster-wide-admin-access:
+    default: false
+    description: |
+      Allow tiller to have admin access to the entire EKS cluster
+      by creating a role binding with a cluster-admin role
+      and a service account with name as specified by the service-account
+      parameter or defaulting to "tiller".
+      Note: This is a convenience option but is typically not advisable
+      in a production cluster for security reasons.
+    type: boolean
+  executor:
+    default: python3
+    description: |
+      Executor to use for this job.
+    type: executor
+  service-account:
+    default: ''
+    description: |
+      Name of service account to Tiller to use.
+      Note: A role binding which specifies a role
+      and a service account with the specified name, must
+      be created in advance, unless
+      enable-cluster-wide-admin-access is set to true.
+    type: string
+  tiller-ca-cert:
+    default: ''
+    description: |
+      The path to CA root certificate
+    type: string
+  tiller-namespace:
+    default: ''
+    description: |
+      Specify the namespace of Tiller
+    type: string
+  tiller-tls:
+    default: false
+    description: |
+      Install Tiller with TLS enabled
+    type: boolean
+  tiller-tls-cert:
+    default: ''
+    description: |
+      The path to TLS certificate file to install with Tiller
+    type: string
+  tiller-tls-hostname:
+    default: ''
+    description: |
+      The server name used to verify the hostname on the returned
+      certificates from Tiller
+    type: string
+  tiller-tls-key:
+    default: ''
+    description: |
+      The path to TLS key file to install with Tiller
+    type: string
+  tiller-tls-verify:
+    default: false
+    description: |
+      Install Tiller with TLS enabled and to verify remote certificates
+    type: boolean
+  wait:
+    default: true
+    description: |
+      Block until Tiller is running and ready to receive requests
+    type: boolean
+steps:
+  - update-kubeconfig-with-authenticator:
+      aws-profile: << parameters.aws-profile >>
+      aws-region: << parameters.aws-region >>
+      cluster-name: << parameters.cluster-name >>
+      install-kubectl: true
+  - helm/install-helm-on-cluster:
+      enable-cluster-wide-admin-access: << parameters.enable-cluster-wide-admin-access >>
+      service-account: << parameters.service-account >>
+      tiller-ca-cert: << parameters.tiller-ca-cert >>
+      tiller-namespace: << parameters.tiller-namespace >>
+      tiller-tls: << parameters.tiller-tls >>
+      tiller-tls-cert: << parameters.tiller-tls-cert >>
+      tiller-tls-hostname: << parameters.tiller-tls-hostname >>
+      tiller-tls-key: << parameters.tiller-tls-key >>
+      tiller-tls-verify: << parameters.tiller-tls-verify >>
+      wait: << parameters.wait >>
+```
+
+#### Install a Helm Chart in Your Cluster
+
+Helm is an powerful application package manager that runs on top of a Kubernetes cluster that allows you to describe the application structure by using helm-charts and managing the structure using simple commands. Helm uses a packaging format called charts, which is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+
+Once Helm is installed in your Kubernetes cluster, you can then install Helm charts using the code example shown below.
+
+```yaml
+Version: 2.1
+
+description: |
+  Installs a helm chart into the EKS cluster.
+  Requirements: helm should be installed on the cluster.
+executor: << parameters.executor >>
+parameters:
+  aws-profile:
+    default: ''
+    description: |
+      The AWS profile to be used. If not specified, the configured default
+      profile for your AWS CLI installation will be used.
+    type: string
+  aws-region:
+    default: ''
+    description: |
+      AWS region that the EKS cluster is in.
+    type: string
+  chart:
+    description: |
+      Specify for installation a chart reference (e.g. stable/mariadb),
+      or a path to a packaged chart (e.g. ./nginx-1.2.3.tgz),
+      or a path to an unpacked chart directory (e.g. ./nginx)
+      or an absolute URL (e.g. https://example.com/charts/nginx-1.2.3.tgz)
+    type: string
+  cluster-name:
+    description: |
+      The name of the EKS cluster.
+    type: string
+  executor:
+    default: python3
+    description: |
+      Executor to use for this job.
+    type: executor
+  namespace:
+    default: ''
+    description: |
+      The kubernetes namespace that should be used.
+    type: string
+  release-name:
+    default: ''
+    description: |
+      Specify a name for the release.
+    type: string
+  tiller-namespace:
+    default: ''
+    description: |
+      Specify the namespace of Tiller
+    type: string
+  tls:
+    default: false
+    description: |
+      Enable TLS for the request
+    type: boolean
+  tls-ca-cert:
+    default: ''
+    description: |
+      Path to TLS CA certificate file
+    type: string
+  tls-cert:
+    default: ''
+    description: |
+      Path to TLS certificate file
+    type: string
+  tls-hostname:
+    default: ''
+    description: |
+      The server name used to verify the hostname on the returned
+      certificates from the server
+    type: string
+  tls-key:
+    default: ''
+    description: |
+      Path to TLS key file
+    type: string
+  tls-verify:
+    default: false
+    description: |
+      Enable TLS for request and verify remote
+    type: boolean
+  values-to-override:
+    default: ''
+    description: |
+      Override values in a chart using the --set flag of the helm install
+      command. Format: key1=val1,key2=val2
+    type: string
+  wait:
+    default: true
+    description: |
+      Whether to wait for the installation to be complete
+    type: boolean
+steps:
+  - update-kubeconfig-with-authenticator:
+      aws-profile: << parameters.aws-profile >>
+      aws-region: << parameters.aws-region >>
+      cluster-name: << parameters.cluster-name >>
+      install-kubectl: true
+  - helm/install-helm-chart:
+      chart: << parameters.chart >>
+      namespace: << parameters.namespace >>
+      release-name: << parameters.release-name >>
+      tiller-namespace: << parameters.tiller-namespace >>
+      tls: << parameters.tls >>
+      tls-ca-cert: << parameters.tls-ca-cert >>
+      tls-cert: << parameters.tls-cert >>
+      tls-hostname: << parameters.tls-hostname >>
+      tls-key: << parameters.tls-key >>
+      tls-verify: << parameters.tls-verify >>
+      values-to-override: << parameters.values-to-override >>
+      wait: << parameters.wait >>
+```
+
+### Update a Container Image
+
+
+
+
+
+
+
 ## Deploying Applications to Heroku
 
 The Heroku platform is a cloud-based, fully-scalable platform that enables you to quickly and easily deliver and deploy applications. Using CircleCI builds and orbs, you can simplify the deployment process in a few simple steps by following the steps described in the sections below.
@@ -332,7 +822,7 @@ The Heroku platform is a cloud-based, fully-scalable platform that enables you t
 Before you can deploy an applications to the Heroku platform, make sure the following requirements are met:
 
 * Your environment is configured to use the CircleCI platform and CircleCI orbs.
-* The Heroku CLI is installed. 
+* You have installed the Heroku CLI. 
 
 #### Installing the Heroku CLI
 
@@ -462,3 +952,34 @@ version: 2.1
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+
+## Dependency Caching Strategies in Yarn, Bundler, and Other Popular Package Managers
+
+
+
+### Prerequisites
+
+
+
+## Single-threading Builds on a Branch
+
+
+
+### Prerequisites
+
+
+## Using GitHub Releases and Tagging Inside CircleCI Jobs
+
+
+
+### Prerequisites
+
+
+
+## Publishing to GitHub Pages from Inside a CircleCI Build
+
+
+
+## Prerequisites
+
+
