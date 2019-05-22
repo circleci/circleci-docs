@@ -573,6 +573,7 @@ workflows:
             branches:
               only: master
 ```
+**Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
 ### Heroku Orb Examples
 
