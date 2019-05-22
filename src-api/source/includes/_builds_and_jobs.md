@@ -271,6 +271,9 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=
 }
 ```
 
+### See Also
+
+[Triggering Jobs with the API](https://circleci.com/docs/2.0/api-job-trigger/#section=jobs)
 
 **`POST` Request:** Triggers a new build and then returns a summary of the build.
 
