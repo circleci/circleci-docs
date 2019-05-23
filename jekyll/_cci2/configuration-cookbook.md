@@ -64,10 +64,7 @@ Deploying Software Changes to Amazon Elastic Container Service (ECS) | This sect
 Deploying Software Changes to Google Kubernetes Engine (GKE) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
 Using Amazon Elastic Container Service for Kubernetes (Amazon EKS) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
 Deploying Applications to Heroku | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
-Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customized Slack notifications in CircleCI jobs.
-Enabling Single-threading Builds on a Branch |
-Using GitHub Releases and Tagging Inside CircleCI Jobs | 
-Publishing to GitHub Pages from Inside a CircleCI Build | 
+Enabling Custom Slack Notifications in CircleCI Jobs | This section describes how you can enable customized Slack notifications in CircleCI jobs. 
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -952,34 +949,3 @@ version: 2.1
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
-
-## Dependency Caching Strategies in Yarn, Bundler, and Other Popular Package Managers
-
-
-
-### Prerequisites
-
-
-
-## Single-threading Builds on a Branch
-
-
-
-### Prerequisites
-
-
-## Using GitHub Releases and Tagging Inside CircleCI Jobs
-
-
-
-### Prerequisites
-
-
-
-## Publishing to GitHub Pages from Inside a CircleCI Build
-
-
-
-## Prerequisites
-
-
