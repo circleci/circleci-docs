@@ -215,7 +215,7 @@ workflows:
 For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
-- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
+- [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
 
@@ -573,6 +573,7 @@ workflows:
             branches:
               only: master
 ```
+**Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
 ### Heroku Orb Examples
 

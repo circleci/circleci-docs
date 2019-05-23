@@ -20,7 +20,7 @@ This document provides a step-by-step tutorial for getting your first successful
 
 ## Creating a Repository
 1. Navigate to your account on GitHub.com
-  * Go to the **Repositories** tab and then select **New** or navigate directly to [https://github.com/new](https://github.com/new){:target="_blank"}. ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * Go to the **Repositories** tab and then select **New** or navigate directly to [https://github.com/new](https://github.com/new). ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. Select Initialize this repository with a README and click the Create repository button. ![]( {{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
@@ -33,16 +33,16 @@ On CircleCI 2.0, this file must be called `config.yml` and must be in a hidden f
 
 2. To start out with a simple `config.yml`, copy the text below into the file editing window on GitHub:
 
-```yml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-```
+    ```yml
+    version: 2
+    jobs:
+      build:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+    ```
 
 3. Commit the file by entering comments and clicking the Commit New File button. ![]( {{ site.baseurl }}/assets/img/docs/commit-new-file.png)
 
@@ -50,11 +50,11 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 ## Setting up Your Build on CircleCI
 
-1. For this step, you will need a CircleCI account.  Visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account to run your builds. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard).
+1. For this step, you will need a CircleCI account. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard), or if you are using  CircleCI Server substitute your hostname: `https://<your-circleci-hostname>.com/dashboard`. If you don't have an account yet, visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account to run your builds.
 
 2. Next, you will be given the option of *following* any projects you have access to that are already building on CircleCI (this would typically apply to developers connected to a company or organization's GitHub account). On the next screen, you'll be able to add the repo you just created as a new project on CircleCI.
 
-3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, find the repository you just created below, and click the **Setup project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list, then click the **Set Up project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
 4. On the next screen, you're given some options for configuring your project on CircleCI. Leave everything as-is for now and just click the **Start building** button a bit down the page on the right. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
 
@@ -103,30 +103,30 @@ jobs:
 3. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
 
 
-```yml
-version: 2
-jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: sleep 25
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - run: sleep 15
-workflows:
-  version: 2
-  one_and_two:
+    ```yml
+    version: 2
     jobs:
-      - one
-      - two
-```
+      one:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+          - run: sleep 25
+      two:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A more familiar hi"
+          - run: sleep 15
+    workflows:
+      version: 2
+      one_and_two:
+        jobs:
+          - one
+          - two
+    ```
 
 4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 

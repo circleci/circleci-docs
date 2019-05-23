@@ -16,12 +16,12 @@ This document provides an overview of using GitHub or Bitbucket with CircleCI in
 
 When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket.
-- A **service hook** that is used to notify CircleCI when you push to GitHub or Bitbucket.
+- A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket.
 
 CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
 
 There are some additional, less common cases where CircleCI uses hooks, as follows:
-- CircleCI processes PR hooks to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
+- CircleCI processes PR hooks (Pull Request Hooks) to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
 It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.

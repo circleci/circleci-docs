@@ -55,7 +55,6 @@ Caching is a balance between reliability (not using an out-of-date or inappropri
 
 In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability.
 
-
 ## Cache Expiration
 
 The caches created via the `save_cache` step are stored for up to 30 days.
@@ -90,29 +89,19 @@ As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git r
 
 {% endraw %}
 
-In this example,
-`restore_cache` looks for a cache hit from the current git revision,
-then for a hit from the current branch,
-and finally for any cache hit,
-regardless of branch or revision.
-When CircleCI encounters a list of `keys`,
-the cache will be restored from the first match.
-If there are multiple matches,
-the most recently generated cache will be used.
+In this example, `restore_cache` looks for a cache hit from the current git revision, then for a hit from the current branch, and finally for any cache hit, regardless of branch or revision. When CircleCI encounters a list of `keys`, the cache will be restored from the first match. If there are multiple matches, the most recently generated cache will be used.
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1-reference/#new-build)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
+Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
 
 That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
 
-**NOTE**: The built-in `checkout` command disables git's automatic garbage
-collection. You might choose to manually run `git gc` in a `run` step prior to
-running `save_cache` to reduce the size of the saved cache.
+**NOTE**: The built-in `checkout` command disables git's automatic garbage collection. You might choose to manually run `git gc` in a `run` step prior to running `save_cache` to reduce the size of the saved cache.
 
 ## Writing to the Cache in Workflows
 
-Jobs in one workflow can share caches.  Note that this makes it possible to create race conditions in caching across different jobs in workflows.
+Jobs in one workflow can share caches. Note that this makes it possible to create race conditions in caching across different jobs in workflows.
 
 Cache is immutable on write: once a cache is written for a particular key like `node-cache-master`, it cannot be written to again. Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: {Job1, Job2} -> Job3.  They all read and write to the same cache key.
 
@@ -124,12 +113,8 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 
 ## Restoring Cache
 
-CircleCI restores caches in the order of keys listed in the `restore_cache` step.
-Each cache key is namespaced to the project,
-and retrieval is prefix-matched.
-The cache will be restored from the first matching key.
-If there are multiple matches,
-the most recently generated cache will be used.
+CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project,
+and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the most recently generated cache will be used.
 
 In the example below, two keys are provided:
 
@@ -146,11 +131,7 @@ In the example below, two keys are provided:
 ```
 {% endraw %}
 
-Because the second key is less specific than the first,
-it is more likely that there will be differences between the current state and the most recently generated cache.
-When a dependency tool runs,
-it would discover outdated dependencies and update them.
-This is referred to as a **partial cache restore**.
+Because the second key is less specific than the first, it is more likely that there will be differences between the current state and the most recently generated cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a **partial cache restore**.
 
 ### Clearing Cache
 {:.no_toc}
@@ -172,6 +153,11 @@ For example, you may want to clear the cache in the following scenarios by incre
   <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Generally,
   consider using keys within [a-z][A-Z] in your cache key prefix.
 </div>
+
+## Cache Size
+We recommend keeping cache sizes under 500Mb. This is our upper limit for corruption checks because above this limit check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
+Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download.
+To keep cache sizes down, consider splitting into multiple distinct caches.
 
 ## Basic Example of Dependency Caching
 
@@ -288,8 +274,7 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 ### Partial Dependency Caching Strategies
 {:.no_toc}
 
-Some dependency managers do not properly handle
-installing on top of partially restored dependency trees.
+Some dependency managers do not properly handle installing on top of partially restored dependency trees.
 
 {% raw %}
 
@@ -303,12 +288,9 @@ steps:
 ```
 {% endraw %}
 
-In the above example,
-if a dependency tree is partially restored by the second or third cache keys,
-some dependency managers will incorrectly install on top of the outdated dependency tree.
+In the above example, if a dependency tree is partially restored by the second or third cache keys, some dependency managers will incorrectly install on top of the outdated dependency tree.
 
-Instead of a cascading fallback,
-a more stable option is a single version-prefixed cache key.
+Instead of a cascading fallback, a more stable option is a single version-prefixed cache key.
 
 {% raw %}
 
@@ -321,20 +303,13 @@ steps:
 
 {% endraw %}
 
-Since caches are immutable,
-this strategy allows you
-to regenerate all of your caches
-by incrementing the version.
-This is useful in the following scenarios:
+Since caches are immutable, this strategy allows you to regenerate all of your caches by incrementing the version. This is useful in the following scenarios:
 
 - When you change the version of a dependency manager like `npm`.
 - When you change the version of a language like Ruby.
 - When you add or remove dependencies from your project.
 
-The stability of partial dependency caching is dependent on your dependency manager.
-Below is a list of common dependency managers,
-recommended partial caching strategies,
-and associated justifications.
+The stability of partial dependency caching is dependent on your dependency manager. Below is a list of common dependency managers, recommended partial caching strategies, and associated justifications.
 
 #### Bundler (Ruby)
 {:.no_toc}
@@ -342,15 +317,9 @@ and associated justifications.
 **Safe to Use Partial Cache Restoration?**
 Yes (with caution).
 
-Since Bundler uses system gems
-that are not explicitly specified,
-it is non-deterministic,
-and partial cache restoration can be unreliable.
+Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
-To prevent this behavior,
-add a step
-that cleans Bundler
-before restoring dependencies from cache.
+To prevent this behavior, add a step that cleans Bundler before restoring dependencies from cache.
 
 {% raw %}
 
@@ -377,11 +346,7 @@ steps:
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
-Gradle repositories are intended
-to be centralized, shared, and massive.
-Partial caches can be restored
-without impacting which libraries
-are actually added to classpaths of generated artifacts.
+Gradle repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are actually added to classpaths of generated artifacts.
 
 {% raw %}
 
@@ -407,14 +372,9 @@ steps:
 **Safe to Use Partial Cache Restoration?**
 Yes.
 
-Maven repositories are intended
-to be centralized, shared, and massive.
-Partial caches can be restored
-without impacting which libraries
-are actually added to classpaths of generated artifacts.
+Maven repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are actually added to classpaths of generated artifacts.
 
-Since Leiningen uses Maven under the hood,
-it has equivalent behavior.
+Since Leiningen uses Maven under the hood, it has equivalent behavior.
 
 {% raw %}
 
@@ -440,8 +400,7 @@ steps:
 **Safe to Use Partial Cache Restoration?**
 Yes (with NPM5+).
 
-With NPM5+ and a lock file,
-you can safely use partial cache restoration.
+With NPM5+ and a lock file, you can safely use partial cache restoration.
 
 {% raw %}
 
@@ -461,16 +420,13 @@ steps:
 
 {% endraw %}
 
-
 #### pip (Python)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
 Yes (with Pipenv).
 
-Pip can use files
-that are not explicitly specified in `requirements.txt`.
-Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
+Pip can use files that are not explicitly specified in `requirements.txt`. Using [Pipenv](https://docs.pipenv.org/) will include explicit versioning in a lock file.
 
 {% raw %}
 
@@ -518,73 +474,32 @@ steps:
 
 ## Caching Strategy Tradeoffs
 
-In cases where the build tools for your language include elegant handling of dependencies,
-partial cache restores may be preferable to zero cache restores for performance reasons.
-If you get a zero cache restore,
-you have to reinstall all of your dependencies, which can result in reduced performance.
-One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
+In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance. One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
 
-However,
-for other types of languages,
-partial caches carry the risk of creating code dependencies
-that are not aligned with your declared dependencies
-and do not break until you run a build without a cache.
-If the dependencies change infrequently,
-consider listing the zero cache restore key first.
-Then,
-track the costs over time.
-If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time,
-only then consider adding a partial cache restore key.
+However, for other types of languages, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. If the dependencies change infrequently, consider listing the zero cache restore key first.
 
-Listing multiple keys for restoring a cache increases the odds of a partial cache hit.
-However,
-broadening your `restore_cache` scope to a wider history increases the risk of confusing failures.
-For example,
-if you have dependencies for Node v6 on an upgrade branch,
-but your other branches are still on Node v5,
-a `restore_cache` step that searches other branches
-might restore incompatible dependencies.
+Then, track the costs over time. If the performance costs of zero cache restores (also referred to as a *cache miss*) prove to be significant over time, only then consider adding a partial cache restore key.
+
+Listing multiple keys for restoring a cache increases the odds of a partial cache hit. However, broadening your `restore_cache` scope to a wider history increases the risk of confusing failures. For example, if you have dependencies for Node v6 on an upgrade branch, but your other branches are still on Node v5, a `restore_cache` step that searches other branches might restore incompatible dependencies.
 
 ### Using a Lock File
 {:.no_toc}
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) checksums may be a useful cache key.
 
-An alternative is to do `ls -laR your-deps-dir > deps_checksum`
-and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}.
-For example,
-in Python,
-to get a more specific cache than the checksum of your `requirements.txt` file
-you could install the dependencies within a virtualenv in the project root `venv`
-and then do `ls -laR venv > python_deps_checksum`.
+An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
 
 ### Using Multiple Caches For Different Language
 {:.no_toc}
 
-It is also possible
-to lower the cost of a cache miss
-by splitting your job across multiple caches.
-By specifying multiple `restore_cache` steps with different keys,
-each cache is reduced in size
-thereby reducing the performance impact of a cache miss.
-Consider splitting caches by language type (npm, pip, or bundler)
-if you know how each dependency manager stores its files,
-how it upgrades,
-and how it checks dependencies.
+It is also possible to lower the cost of a cache miss by splitting your job across multiple caches. By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler) if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.
 
 ### Caching Expensive Steps
 {:.no_toc}
 
-Certain languages and frameworks have more expensive steps
-that can and should be cached.
-Scala and Elixir are two examples
-where caching the compilation steps
-will be especially effective.
-Rails developers, too, would notice a performance boost
-from caching frontend assets.
+Certain languages and frameworks have more expensive steps that can and should be cached. Scala and Elixir are two examples where caching the compilation steps will be especially effective. Rails developers, too, would notice a performance boost from caching frontend assets.
 
-Do not cache everything,
-but _do_ consider caching for costly steps like compilation.
+Do not cache everything, but _do_ consider caching for costly steps like compilation.
 
 ## See Also
 {:.no_toc}
