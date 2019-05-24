@@ -49,7 +49,7 @@ Identity and Access Management (IAM) の権限については、Cloud Storage �
 
 ### Google Container Registry への認証
 
-[選択する基本 Docker イメージ](#installing-the-google-cloud-sdk)によっては、Google Container Registry への認証が必要になる場合があります。
+[選択する基本 Docker イメージ](#google-cloud-sdk-のインストール)によっては、Google Container Registry への認証が必要になる場合があります。
 
 Google のパブリックイメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
 
