@@ -50,7 +50,7 @@ Make note of the use of a `checksum` in the cache `key`; this is used to
 calculate when a specific depenecy-management file (such as a `package.json` or
 `requirements.txt` in this case) _changes_ and so the cache will be updated. In
 the above example, the
-`[restore_cache]({{site.baseurl}/configuration-reference#restore_cache)` example
+`[restore_cache]({{site.baseurl}}/configuration-reference#restore_cache)` example
 uses interpolation to put dynamic values into the cache-key, allowing more
 control in what exactly constitutes the need to update a cache.
 
@@ -62,21 +62,31 @@ Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
 
-Class       | vCPUs       | RAM
-------------|-----------|------
-small       | 1 | 2GB
-medium (default) | 2 | 4GB
-medium+     | 3 | 6GB
-large       | 4 | 8GB
-xlarge      | 8 | 16GB
-{: class="table table-striped"}
+Below is an example use case of the `resource_class` feature.
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
+    parallelism: 3
+    resource_class: large # implements a machine with 4 vCPUS and 8gb of ram.
+    steps:
+      - run: make test
+      - run: make
+```
+
+## Workflows
+
 
 
 ## Parallelism
 
 Note: This feature is only available to certain paid plans.
 
-If your project has a large test suite, you can configure your build to use  `[parallelism]({{site.baseurl}/configuration-reference#parallelism)`
+If your project has a large test suite, you can configure your build to use  `[parallelism]({{site.baseurl}}/configuration-reference#parallelism)`
 to spread your tests across multiple machines. CircleCI supports automatic test
 allocation across machines on a file-basis, however, you can also manually
 customize how tests are allocated.
@@ -91,12 +101,20 @@ jobs:
     parallelism: 4
 ```
 
-Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl/2.0/parallelism-faster-jobs}}).
+Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).
 
 
 ## Docker Layer Caching
 
 **Note** DLC is a premium feature and you must open a support ticket to enable it on your account for an additional fee.
+
+DLC is a feature that can help to reduce the _build time_ of a Docker image in
+your build. Docker Layer Caching is useful if you find yourself frequently
+building Docker images as a regular part of your CI/CD process.
+
+DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the
+image layers that you build within your job, making them available on subsequent
+builds.
 
 ```
 version: 2
@@ -112,6 +130,8 @@ jobs:
       # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
+
+Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
 ## See Also
 
