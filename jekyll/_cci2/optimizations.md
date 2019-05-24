@@ -9,17 +9,18 @@ order: 1
 
 This document provides an overview of several methods for optimizing your CircleCI configuration. Each optimization method will be described briefly, will present possible use cases, and will provide an example optimization for speeding up your jobs.
 
+* TOC
+{:toc}
+
 **Note**: Some of the features discussed in this document may required a specific pricing plan. Visit our [pricing usage page](https://circleci.com/pricing/usage/) to get an overview of the plans CircleCI offers.
 
-If you still have questions optimizing your build configuration consider
-consulting our [FAQ]({{ site.baseurl }}/2.0/faq) or [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
 ## Caching Dependencies
 
 Caching should be one of the first things you consider when trying to optimize
 your jobs. If your job fetches data at any point, it's likely that you can make
 use of caching. A common example is the use of a package/dependency manager. If
-your project uses Yarn, Bundler, Pip, for example, the dependencies downloaded
+your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded
 during a job can be cached for later use rather than being re-downloaded on
 every build.
 
@@ -47,10 +48,10 @@ jobs:
 {% endraw %}
 
 Make note of the use of a `checksum` in the cache `key`; this is used to
-calculate when a specific depenecy-management file (such as a `package.json` or
-`requirements.txt` in this case) _changes_ and so the cache will be updated. In
+calculate when a specific dependency-management file (such as a `package.json` or
+`requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In
 the above example, the
-`[restore_cache]({{site.baseurl}}/configuration-reference#restore_cache)` example
+[`restore_cache`]({{site.baseurl}}/configuration-reference#restore_cache) example
 uses interpolation to put dynamic values into the cache-key, allowing more
 control in what exactly constitutes the need to update a cache.
 
@@ -80,7 +81,55 @@ jobs:
 
 ## Workflows
 
+Workflows provide a means to define a collection of jobs and their run order. If
+at any point in your build you could see a step where two jobs could happily run
+independent of one another, workflows could probably help. Similarly, workflows
+allow you to schedule jobs, run jobs in parallel, or simply allow you runs jobs
+independently, allowing for easier troubleshooting.
 
+**Note**: Workflows are available to all plans, but running parallel jobs assumes that
+your plan provides multiple machines to execute on.
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+
+You can view more examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
+
+Learn more about workflows in our [workflows document]({{site.baseurl}}/2.0/workflows).
+
+## Workspaces
+
+**Note**: Using workspaces presumes that you are also using [workflows](#workflows).
+
+Workspaces are used to pass along data that is _unique to a run_ and is needed
+for _downstream jobs_. So, if you are using workflows, a job run earlier in your
+build might fetch data and then make it _available later_ for jobs that run
+later in a build.
+
+To persist data from a job and make it available to other jobs, configure the job to use the persist_to_workspace key. Files and directories named in the paths: property of persist_to_workspace will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+
+Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ## Parallelism
 
@@ -134,6 +183,10 @@ jobs:
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
 ## See Also
+{:.no_toc}
+
+If you still have questions optimizing your build configuration consider
+consulting our [FAQ]({{ site.baseurl }}/2.0/faq) or [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
 For a complete list of customizations that can be made your build, consider
 reading our [configuration reference]({{ site.baseurl
