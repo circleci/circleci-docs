@@ -51,7 +51,7 @@ Make note of the use of a `checksum` in the cache `key`; this is used to
 calculate when a specific dependency-management file (such as a `package.json` or
 `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In
 the above example, the
-[`restore_cache`]({{site.baseurl}}/configuration-reference#restore_cache) example
+[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) example
 uses interpolation to put dynamic values into the cache-key, allowing more
 control in what exactly constitutes the need to update a cache.
 
