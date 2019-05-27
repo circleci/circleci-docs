@@ -169,6 +169,7 @@ DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the
 image layers that you build within your job, making them available on subsequent
 builds.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -183,6 +184,7 @@ jobs:
       # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
+{% endraw %}
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
