@@ -169,22 +169,18 @@ DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the
 image layers that you build within your job, making them available on subsequent
 builds.
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
  build:
-   docker:
-     # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: circleci/node:9.8.0-stretch-browsers
+    docker:
+      - image: circleci/node:9.8.0-stretch-browsers      # DLC does nothing here, its caching depends on commonality of the image layers.
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true
-      # DLC will explicitly cache layers here and try to avoid rebuilding.
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
-{% endraw %}
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
