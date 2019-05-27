@@ -110,7 +110,7 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 
 **Note**: This feature is only available on paid plans.
 
-If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/configuration-reference#parallelism)
+If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)
 to spread your tests across multiple machines. CircleCI supports automatic test
 allocation across machines on a file-basis, however, you can also manually
 customize how tests are allocated.
@@ -174,7 +174,7 @@ version: 2
 jobs:
  build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers      # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: circleci/node:9.8.0-stretch-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
     steps:
       - checkout
       - setup_remote_docker:
