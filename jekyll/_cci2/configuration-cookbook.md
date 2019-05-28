@@ -333,6 +333,8 @@ CircleCI has developed a Kubernetes orb you can use in coordination with the Ama
 * Install Helm charts
 * Update a container image
 
+Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
+
 ### Prerequisites
 
 Before using the Amazon EKS service, make sure you meet the following requirements:
