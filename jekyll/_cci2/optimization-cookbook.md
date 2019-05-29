@@ -14,57 +14,32 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
+When work with the CircleCI platform, one of the most critical tasks you will want to complete is to optimize your jobs, builds, workflows, and other tasks to prevent performance degradation, latency, and concurrency. Optimizing your tasks is not simply a function of lessening the workload or number of tasks, but rather, reviewing your optimization and caching strategies to ensure you are meeting your business and technical requirements while also maintaining stability and reliability.
 
-
-### What Is Optimization?
-
-
-
-### Configuring Your Environment To Use the CircleCI Platform and Orbs
-
-Before performing any optimization tasks or actions you must first ensure that your environment and setup is configured to use the CircleCI platform and its associated resources, including CircleCI orbs. Setup and configuration is quick easy, only requiring you to perform the following tasks listed below.
-
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
-
-2) If you do not already have Pipelines enabled, go to **Project Settings -> Advanced Settings** and enable pipelines.
-
-3) Add the orbs stanza below your version, invoking the orb:
-
-`orbs:
-  queue: circleci/<the orb you want to use>`
-
-4) Use the specific elements for the orb you are using in your existing workflows and jobs.
-
-5) Make sure to opt-in to use of third-party orbs on your organization’s **Security Settings** page.
+CircleCI has developed several methodologies that you can use to better optimize these tasks while also leveraging the power of the platform and its associated resources (e.g. orbs). The sections below describe various strategies and methodologies you can use to optimize your organization tasks.
 
 ### Optimization Recipes
 
 The table below lists the different optimization tasks that can be performed using the CircleCI platform.
 
-Optimization Recipe | Description 
+Recipe | Description 
 ------------|-----------
-Single-Threading Builds (Queueing) | This section describes how you can use a specific queueing orb to ensure proper job and build completion without concurrency (queueing subsequent builds or jobs).
+Single-Threading Builds (Queueing) | This section describes how you can use a specific single-threading (queueing) orb to ensure proper job and build completion without concurrency (queueing subsequent builds or jobs).
 Caching | 
 Fan-in / Fan-out | 
 Workspace Forwarding | 
 
 ## Single-Threading Builds (Queuing)
 
-One of the most common tasks you may encounter when using the CircleCI platform for builds and jobs is managing multiple jobs and builds simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed, and the system timeout is set too low. In this case, one job will be completed, and other jobs may fail due to this timeout setting.
+One of the most common tasks you may encounter when using the CircleCI platform for builds and jobs is managing multiple jobs and builds simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed before the new job can be initiated, and the system timeout is set too low. In this case, one job will be completed, and other jobs may fail due to this timeout setting.
 
-To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed an orb that specifically addresses these issues. By implementing this orb, you can greatly improve overall job and build performance and prevent job and build concurrency.
+To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
 
-### Prerequisites
+**Note**For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
+- Queueing and Single Threading Overview - https://github.com/eddiewebb/circleci-queue
+- CircleCI Queueing Orb - https://circleci.com/orbs/registry/orb/eddiewebb/queue#quick-start
 
-Before using the queueing orb, make sure you have met the following requirements:
-
-* Your environment has been setup and configured for the CircleCI platform and CircleCI orbs, including:
- - Pipelines are in **Project Settings -> Advanced Settings**.
- - You have opted-in to using 3rd party orbs in your organization's **Security Settings** page.
-
-#### Setting Up and Configuring Your Environment to use the CircleCI Platform and CircleCI Orbs
+### Setting Up and Configuring Your Environment to use the CircleCI Platform and CircleCI Orbs
 
 To configure your environment for the CircleCI platform and CircleCI orbs, follow the steps listed below.
 
@@ -83,3 +58,54 @@ To configure your environment for the CircleCI platform and CircleCI orbs, follo
 
 5) Opt-in to use of third-party orbs on your organization’s **Security Settings** page.
 
+### Blocking Workflows
+
+One of the easiest ways to prevent workflow concurrency using the CircleCI Single-Threading orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently, thereby limiting the number of workflows in the queue. In turn, this will also improve overall performance while making sure no workflows are discarded.
+
+
+```yaml
+Version: 2.1
+docker:
+  - image: 'circleci/node:10'
+parameters:
+  block-workflow:
+    default: true
+    description: >-
+      If true, this job will block until no other workflows with an earlier
+      timestamp are running. Typically used as first job.
+    type: boolean
+  consider-branch:
+    default: true
+    description: Should we only consider jobs running on the same branch?
+    type: boolean
+  consider-job:
+    default: false
+    description: Deprecated. Please see block-workflow.
+    type: boolean
+  dont-quit:
+    default: false
+    description: >-
+      Quitting is for losers. Force job through once time expires instead of
+      failing.
+    type: boolean
+  only-on-branch:
+    default: '*'
+    description: Only queue on specified branch
+    type: string
+  time:
+    default: '10'
+    description: How long to wait before giving up.
+    type: string
+  vcs-type:
+    default: github
+    description: Override VCS to 'bitbucket' if needed.
+    type: string
+steps:
+  - until_front_of_line:
+      consider-branch: <<parameters.consider-branch>>
+      consider-job: <<parameters.consider-job>>
+      dont-quit: <<parameters.dont-quit>>
+      only-on-branch: <<parameters.only-on-branch>>
+      time: <<parameters.time>>
+      vcs-type: <<parameters.vcs-type>>
+```
