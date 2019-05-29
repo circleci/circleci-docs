@@ -65,7 +65,7 @@ You can analyse detailed test reports of your automation scripts including netwo
 To integrate CircleCI with LambdaTest you need to make minor tweaks in the .circleci/config.yml which is the configuration file for your CircleCI instance. The changes you need to make will revolve around the environment variables such as access key, username, grid config and so on. 
 
 Below is a sample config file for integrating CircleCI with LambdaTest.
-
+{% raw %}
 ```
 # Javascript Node CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
