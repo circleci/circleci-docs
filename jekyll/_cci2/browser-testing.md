@@ -60,7 +60,7 @@ As an alternative to configuring your environment for Selenium, you could move t
 
 LambdaTest now integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest to ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest’s Selenium grid to drastically trim down your test cycles.
 
-You can analyse detailed test reports of your automation scripts including network logs, command logs, Selenium logs, step-by-step screenshots for every command, entire video of your test execution, metadata, and more.!
+You can analyse detailed test reports of your automation scripts including network logs, command logs, Selenium logs, step-by-step screenshots for every command, entire video of your test execution, metadata, and more.
 
 To integrate CircleCI with LambdaTest you need to make minor tweaks in the .circleci/config.yml which is the configuration file for your CircleCI instance. The changes you need to make will revolve around the environment variables such as access key, username, grid config and so on. 
 
