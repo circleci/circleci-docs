@@ -168,6 +168,7 @@ build:
     # run tests!
       - run: node_modules/.bin/nightwatch -e chrome
 ```
+{% endraw %}
 ### LambdaTest Browser Testing Orb Example
 LambdaTest has developed a CircleCI orb for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing. Also, to ease the process of integration between LambdaTest & CircleCI. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
 
