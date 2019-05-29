@@ -103,6 +103,7 @@ jobs:
       # run tests!
       - run: node_modules/.bin/nightwatch -e chrome // Executing test in bash.
  ```
+{% endraw %}
  ### Testing Locally Hosted or Privately Hosted Projects
  
  To help you perform cross browser testing of your locally stored web pages, LambdaTest provides an SSH(Secure Shell) tunnel connection with the name Lambda Tunnel. With Lambda Tunnel, you can execute a test server inside your CircleCI build container to perform automated cross browser testing on browsers offered by Selenium Grid on LambdaTest. That way, you could realize how fantastic your website would look in front of your audience, even before you make it live!
