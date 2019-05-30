@@ -212,35 +212,77 @@ jobs:
           path: /tmp/test-results
 ```
 
-## Example Ruby Project with MYSQL and Dockerize
+## Example MYSQL project.
 
-The following example uses MySQL and dockerize, see the [sample project on GitHub](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+The following example sets up MYSQL as a secondary container alongside a PHP container.
 
 ```yaml
 version: 2
 jobs:
   build:
-    working_directory: ~/test-circleci
     docker:
-      - image: circleci/ruby:2.4-node-jessie
-      - image: tkuchiki/delayed-mysql
+      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+      - image: circleci/mysql:8.3
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
-          MYSQL_DATABASE: circleci
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
     steps:
       - checkout
       - run:
-          name: Bundle install
-          command: bundle install
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
       - run:
-          name: Wait for DB
-          # preinstalled in circleci/* docker image
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      - run:
-          name: MySQL version
-          command: bundle exec ruby mysql_version.rb
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy: ord
+    jobs:
+      - build
 ```
+
+While it is possible to make MySQL as your primary and only container, this example
+does not. As a more practical use case, the example uses a PHP docker image as
+its primary container, and will wait until MySQL is up and running before performing any `run` commands
+involving the DB.
+
+Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
+
+```sql
+DROP TABLE IF EXISTS `Persons`;
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+INSERT INTO Persons
+VALUES (
+	1,
+	"Foo",
+	"Baz",
+	"123 Bar Street",
+	"FooBazBar City"
+);
+```
+
 
 ## See Also
 
