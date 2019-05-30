@@ -41,9 +41,9 @@ If the value is a multi-line string, use the `>` character, followed by any numb
 
 ```yaml
 haiku: >
-  Consider me
+  Please consider me
   As one who loved poetry
-  And persimmons.
+  Oh, and persimmons.
 ```
 
 **Note**: Quotes are not necessary when using multiline strings.

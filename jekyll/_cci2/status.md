@@ -11,19 +11,19 @@ order: 1
 
 Badges     | Debugging
 ----------------------------|----------------------
-Integrations enable you to [include status badges in other web pages]({{ site.baseurl }}/2.0/status-badges/)  |   If you need to troubleshoot your build, you can [debug failed builds using SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/).
+Integrations enable you to [include status badges in other web pages]({{ site.baseurl }}/2.0/status-badges/)  |   If you need to troubleshoot a job, you can [debug failed builds using SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
 <hr>
 
 Queuing |
 ------------------------|------------------
-If your builds are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |  
+If your jobs are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |  
 
 <hr>
 
-![workflow illustration]( {{ site.baseurl }}/assets/img/docs/walkthrough8.png)
+![workflow illustration]( {{ site.baseurl }}/assets/img/docs/job_status.png)
 
-CircleCI provides an integrated dashboard with the status of your build jobs:
+CircleCI provides an integrated dashboard showing job status:
 
 - SUCCESS: All jobs completed
 - FAILED: One or more jobs failed
