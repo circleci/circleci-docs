@@ -19,8 +19,6 @@ application, go to `Settings > Plan Settings` to make adjustments to your plan.
 
 ## Caching Dependencies
 
-**Goal: Reduce time for installing project dependencies**
-
 Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it's likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
 {% raw %}
@@ -52,8 +50,6 @@ Make note of the use of a `checksum` in the cache `key`; this is used to calcula
 Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## Workflows
-
-**Goal:** Run jobs in a specific order or in parallel to speed up your build.
 
 Workflows provide a means to define a collection of jobs and their run order. If
 at any point in your build you see a step where two jobs could happily run
@@ -94,8 +90,6 @@ Learn more about workflows in our [workflows document]({{site.baseurl}}/2.0/work
 
 ## Workspaces
 
-**Goal:** Make use of stored data from an earlier job in the same build.
-
 **Note**: Using workspaces presumes that you are also using [workflows](#workflows).
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
@@ -105,8 +99,6 @@ To persist data from a job and make it available to other jobs, configure the jo
 Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ## Parallelism
-
-**Goal:** Run tests in parallel across more than one machine.
 
 **Note**: This feature is only available on paid plans.
 
@@ -128,8 +120,6 @@ jobs:
 Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).
 
 ## Resource Class
-
-**Goal:** Customize how powerful a machine you need to best suit your project's build requirements.
 
 **Note:** A paid plan is required to use the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature.
@@ -154,8 +144,6 @@ jobs:
 ```
 
 ## Docker Layer Caching
-
-**Goal:** Make use of caching when building docker images to reduce build time.
 
 **Note**: If you are on the container-based plan you must open a support ticket to enable
 DLC for your account. If you are using CircleCI's credit-based plan, DLC can be used for
