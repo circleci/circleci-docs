@@ -115,13 +115,14 @@ compiler as specified in the `stack.yaml` config.
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - ~/.stack
             - ~/.stack-work
@@ -131,7 +132,9 @@ compiler as specified in the `stack.yaml` config.
 Note: It's also possible to use a `cabal` build file for caching dependencies.
 `stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this
 demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the
-cache key for our dependencies. You can read more about the differences between
+cache key for our dependencies. `package.yaml` is more often updated than `stack.yaml` so that two keys are
+used to restore cache.
+You can read more about the differences between
 `stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
 
 Finally, we can run our application build commands. We'll run our tests first
