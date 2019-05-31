@@ -133,7 +133,7 @@ Note: It's also possible to use a `cabal` build file for caching dependencies.
 `stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this
 demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the
 cache key for our dependencies. `package.yaml` is more often updated than `stack.yaml` so that two keys are
-used to restore cache.
+used to restore the cache.
 You can read more about the differences between
 `stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
 
