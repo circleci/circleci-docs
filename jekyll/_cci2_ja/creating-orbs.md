@@ -436,7 +436,7 @@ CircleCI では基本的に、グローバルに読み取り可能としてパ�
 
 ## CLI を使用した Orbs の作成とパブリッシュ
 
-`circleci` CLI には、Orb パブリッシュパイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI CLI の使用](#cli-の設定)」を参照してください。 以下に、Orbs のパブリッシュと特に関連性の高いコマンドをいくつか示します。
+`circleci` CLI には、Orb パブリッシュパイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI CLI の使用](#circleci-cli-の設定)」を参照してください。 以下に、Orbs のパブリッシュと特に関連性の高いコマンドをいくつか示します。
 
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 - `circleci orb create <namespace>/<orb> [flags]`
