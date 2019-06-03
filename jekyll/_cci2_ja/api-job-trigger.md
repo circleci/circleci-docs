@@ -14,7 +14,7 @@ order: 80
 
 ## 概要
 
-[CircleCI API]({{ site.baseurl }}/api/v1-reference/) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#jobs-overview)をトリガーします。
+[CircleCI API]({{ site.baseurl }}/api/v1-reference/) を使用して、`.circleci/config.yml` で定義した[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)をトリガーします。
 
 以下の例は、`curl` を使用して `deploy_docker` ジョブをトリガーする方法を示しています。
 
@@ -37,7 +37,7 @@ API の関連情報については、[CircleCI API ドキュメント]({{ site.b
 
 - API によってトリガーされるジョブに `workflows` セクションが含まれてもかまいません。
 - ワークフローが、API によってトリガーされるジョブを参照する必要は**ありません**。
-- API によってトリガーされたジョブは、特定の [CircleCI コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)用に作成された環境変数にアクセス**できません**。 
+- API によってトリガーされたジョブは、特定の [CircleCI コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)用に作成された環境変数にアクセス**できません**。
     - 環境変数を使用する場合は、それらの環境変数が[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)で定義されている必要があります。
 - 現在のところ、CircleCI 2.1 と Workflows を使用する場合には、単一のジョブをトリガーすることができません。
 - [プロジェクトのビルドをトリガーする]({{ site.baseurl}}/api/v1-reference/#new-project-build)エンドポイントを使用して、CircleCI API で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)をトリガーできます。
