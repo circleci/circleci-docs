@@ -144,7 +144,7 @@ For more detailed information about the AWS S3 orb, refer to the [CircleCI AWS S
 
 ##### AWS ECR
 
-This orb enables you to log into AWS, build, and then push image to Amazon ECS.
+This orb enables you to log into AWS, build, and then push image to Amazon ECR.
 
 ```
 orbs:
