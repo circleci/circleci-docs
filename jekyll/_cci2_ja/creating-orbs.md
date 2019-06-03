@@ -49,7 +49,7 @@ Orbs を使用する前に、Orbs パブリッシュプロセス全体につい�
 
 - [CircleCI CLI のダウンロードとインストール](https://circleci.com/docs/ja/2.0/creating-orbs/#installing-the-cli-for-the-first-time)
 - [CLI の更新](https://circleci.com/docs/ja/2.0/creating-orbs/#updating-the-circleci-cli-after-installation)
-- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs/#configuring-the-circleci-cli)
+- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs/#circleci-cli-の設定)
 
 #### ステップ 2 - CLI が正しくインストールされていることを検証する
 
@@ -436,7 +436,7 @@ CircleCI では基本的に、グローバルに読み取り可能としてパ�
 
 ## CLI を使用した Orbs の作成とパブリッシュ
 
-`circleci` CLI には、Orb パブリッシュパイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/#configuring-the-cli)」を参照してください。 以下に、Orbs のパブリッシュと特に関連性の高いコマンドをいくつか示します。
+`circleci` CLI には、Orb パブリッシュパイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI CLI の使用](#circleci-cli-の設定)」を参照してください。 以下に、Orbs のパブリッシュと特に関連性の高いコマンドをいくつか示します。
 
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 - `circleci orb create <namespace>/<orb> [flags]`
@@ -761,4 +761,4 @@ workflows:
 - 「[コンフィグの再利用]({{site.baseurl}}/ja/2.0/reusing-config/)」には、再利用可能な Orbs、コマンド、パラメーター、および Executors の詳細が記載されています。
 - 「[CircleCI Orbs のテスト]({{site.baseurl}}/ja/2.0/testing-orbs/)」には、作成した Orbs をテストする方法が記載されています。
 - 「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」には、Orbs を使用する際の法的条件の詳細が記載されています。
-- 「[CircleCI ローカル CLI の使用]({{site.baseurl}}/ja/2.0/local-cli/#overview)」には、Orbs デプロイで CircleCI CLI を使用する方法が記載されています。
+- 「[CircleCI ローカル CLI の使用]({{site.baseurl}}/ja/2.0/local-cli/#概要)」には、Orbs デプロイで CircleCI CLI を使用する方法が記載されています。
