@@ -49,7 +49,7 @@ Orbs を使用する前に、Orbs パブリッシュプロセス全体につい�
 
 - [CircleCI CLI のダウンロードとインストール](https://circleci.com/docs/ja/2.0/creating-orbs/#installing-the-cli-for-the-first-time)
 - [CLI の更新](https://circleci.com/docs/ja/2.0/creating-orbs/#updating-the-circleci-cli-after-installation)
-- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs/#configuring-the-circleci-cli)
+- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs/#cli-の設定)
 
 #### ステップ 2 - CLI が正しくインストールされていることを検証する
 
@@ -761,4 +761,4 @@ workflows:
 - 「[コンフィグの再利用]({{site.baseurl}}/ja/2.0/reusing-config/)」には、再利用可能な Orbs、コマンド、パラメーター、および Executors の詳細が記載されています。
 - 「[CircleCI Orbs のテスト]({{site.baseurl}}/ja/2.0/testing-orbs/)」には、作成した Orbs をテストする方法が記載されています。
 - 「[Orbs レジストリ](https://circleci.com/orbs/registry/licensing)」には、Orbs を使用する際の法的条件の詳細が記載されています。
-- 「[CircleCI ローカル CLI の使用]({{site.baseurl}}/ja/2.0/local-cli/#overview)」には、Orbs デプロイで CircleCI CLI を使用する方法が記載されています。
+- 「[CircleCI ローカル CLI の使用]({{site.baseurl}}/ja/2.0/local-cli/#概要)」には、Orbs デプロイで CircleCI CLI を使用する方法が記載されています。

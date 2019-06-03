@@ -17,9 +17,9 @@ order: 9
 
 {:.no_toc}
 
-このガイドでは、CircleCI での Android 開発について概要を説明します。 Android 用の `.circleci/config.yml` テンプレートをお探しの場合は、このページの「[設定例](#sample-configuration)」を参照してください。
+このガイドでは、CircleCI での Android 開発について概要を説明します。 Android 用の `.circleci/config.yml` テンプレートをお探しの場合は、このページの「[設定例](#設定例)」を参照してください。
 
-**メモ：**CircleCI が Linux 上で使用している仮想化のタイプでは、Android エミュレーターの実行がサポートされません。 ジョブからエミュレーターテストを実行するには、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してください。 詳細については、下記の「[Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)」セクションを参照してください。
+**メモ：**CircleCI が Linux 上で使用している仮想化のタイプでは、Android エミュレーターの実行がサポートされません。 ジョブからエミュレーターテストを実行するには、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してください。 詳細については、下記の「[Firebase Test Lab を使用したテスト](#firebase-test-lab-を使用したテスト)」セクションを参照してください。
 
 ## 前提条件
 
@@ -96,7 +96,7 @@ jobs:
       - image: circleci/android:api-25-alpha
 ```
 
-`api-25-alpha` タグを指定して CircleCI 提供の Android イメージを使用します。 使用可能なイメージの詳細については、以下の「[Docker イメージ](#docker-images)」を参照してください。
+`api-25-alpha` タグを指定して CircleCI 提供の Android イメージを使用します。 使用可能なイメージの詳細については、以下の「[Docker イメージ](#docker-イメージ)」を参照してください。
 
 この `build` ジョブ内にいくつかの `steps` を追加します。
 
@@ -154,7 +154,7 @@ CircleCI で Firebase Test Lab を使用するには、最初に以下の手順�
 
 `.circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
-1. **デバッグ APK とテスト APK をビルドする：**Gradle を使用して 2つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[プレデクシングの無効化](#disabling-pre-dexing-to-improve-build-performance)を検討してください。
+1. **デバッグ APK とテスト APK をビルドする：**Gradle を使用して 2つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[プレデクシングの無効化](#プレデクシングの無効化によるビルドパフォーマンスの向上disabling-pre-dexing-to-improve-build-performance)を検討してください。
 
 2. **サービスアカウントを保存する：**作成したサービスアカウントをローカルの JSON ファイルに保存します。
 
