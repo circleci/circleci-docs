@@ -6,7 +6,7 @@ description: "設定ファイルをローカルでテストする"
 
 <div class="alert alert-info" role="alert">
 <b>注:</b> このページはCircleCI API を使って設定ファイルのテストとバリデーションを行う方法について記載しています。
-<a href="{{ site.baseurl }}/ja/2.0/local-cli/#overview">CircleCI CLI</a>をインストールすることでもローカルで設定ファイルの<a href="{{ site.baseurl }}/ja/2.0/local-cli/#validate-a-circleci-config">バリデーション</a>を行うこともできます。
+<a href="{{ site.baseurl }}/ja/2.0/local-cli/#概要">CircleCI CLI</a>をインストールすることでもローカルで設定ファイルの<a href="{{ site.baseurl }}/ja/2.0/local-cli/#circleci-のコンフィグのバリデーション">バリデーション</a>を行うこともできます。
 </div>
 
 設定ファイルをローカルでテストするためのスクリプトを追加するには以下の手順を実施してください。
