@@ -12,6 +12,8 @@ This document describes how to set up and customize testing for an iOS applicati
 * TOC
 {:toc}
 
+**Note:** There is also documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
+
 ## Overview
 {:.no_toc}
 
