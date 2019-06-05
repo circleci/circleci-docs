@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and it associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
+The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources (including CircleCI and partner-certified Orbs). This guide, and its associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
 
 * TOC
 {:toc}
@@ -18,7 +18,7 @@ This page, and its associated "recipes," describes how you can perform specific 
 
 ### What Are CircleCI Orbs?
 
-CircleCI Orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
+CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
 
 Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
@@ -44,19 +44,21 @@ For more detailed information about CircleCI orbs, please refer to the [Orbs Int
 
 `version: 2.1`
 
-**Note:** If you do not already have pipelines enabled, go to **Project Settings**, select settings for the project you are currently working on by clicking on the gear icon, select **Advanced Settings** and scroll down to enable pipelines.
+**Note:** If you do not already have pipelines enabled, go to **Settings > Project**, select settings for the project you are currently working on by clicking its cog icon, select **Advanced Settings** and scroll down to use the radio button to enable pipelines.
 
-2) Add the orbs stanza below your version, which in turn invokes the orb:
+![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+
+2) Add the orbs stanza below your version, which in turn imports the orb:
 
 ```yaml
 aws-ecs: circleci/aws-ecs@0.0.6
 ```
 
-3) Use the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
+3) Invoke the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
 
 ### Configuration Recipes
 
-The table below lists the different build configuration "recipes" you can perform using CircleCI Orbs.
+The table below lists the different build configuration "recipes" you can perform using CircleCI orbs.
 
 Configuration Recipe | Description
 ------------|-----------
@@ -345,7 +347,7 @@ Before using the Amazon EKS service, make sure you meet the following requiremen
 
 #### Configuring Your Environment to Use the CircleCI Platform and Orbs
 
-To configure your environment to use CircleCI and Orbs, perform the following steps:
+To configure your environment to use CircleCI and orbs, perform the following steps:
 
 1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
 
@@ -470,7 +472,7 @@ steps:
 
 ### Create an EKS Cluster
 
-Once you meet the requirements for using the CircleCI AWS-EKS Orb, you may create an EKS cluster using the code sample shown below.
+Once you meet the requirements for using the CircleCI AWS-EKS orb, you may create an EKS cluster using the code sample shown below.
 
 ```yaml
 Version: 2.1
