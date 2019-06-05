@@ -62,23 +62,23 @@ your plan provides multiple machines to execute on.
 
 ```yaml
 version: 2.1
-jobs:
+jobs: # here we define two jobs: "build" and "test"
   build:
-    docker:
-      - image: circleci/<language>:<version TAG>
+    docker: # the docker executor is used
+      - image: circleci/<language>:<version TAG> # An example docker image
     steps:
-      - checkout
-      - run: <command>
+      - checkout # Pulls code down from your VCS
+      - run: <command> # An example command
   test:
-    docker:
+    docker: # same as previous docker key.
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
       - run: <command>
-workflows:
+workflows: # Here we can orchestrate our jobs into a workflow
   version: 2
-  build_and_test:
-    jobs:
+  build_and_test: # A single workflow named "build_and_test"
+    jobs: # we run our `build` job and `test` job in sequence.
       - build
       - test
 ```
@@ -100,7 +100,7 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 
 ## Parallelism
 
-**Note**: This feature is only available on paid plans.
+**Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
 If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)
 to spread your tests across multiple machines. CircleCI supports automatic test
@@ -145,9 +145,9 @@ jobs:
 
 ## Docker Layer Caching
 
-**Note**: If you are on the container-based plan you must open a support ticket to enable
+**Note**: If you are on the container-based plan you must open a [support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable
 DLC for your account. If you are using CircleCI's credit-based plan, DLC can be used for
-200 credits per build.
+200 credits per build on the Performance plan.
 
 DLC is a feature that can help to reduce the _build time_ of a Docker image in
 your build. Docker Layer Caching is useful if you find yourself frequently
@@ -174,8 +174,6 @@ Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-cachin
 
 ## See Also
 {:.no_toc}
-
-If you still have questions optimizing your build configuration consider consulting our [FAQ]({{ site.baseurl }}/2.0/faq) or [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
 For a complete list of customizations that can be made your build, consider
 reading our [configuration reference]({{ site.baseurl
