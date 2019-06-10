@@ -25,7 +25,7 @@ With workflows, you can:
 - Fan-out to run multiple jobs in parallel for efficient version testing.
 - Fan-in to quickly deploy to multiple platforms.
 
-For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and re-running the entire job set, you can rerun *just the failed job*.
+For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
 
 ### States
 {:.no_toc}
@@ -44,7 +44,7 @@ Workflows may appear with one of the following states:
 ### Limitations
 {:.no_toc}
 
-Projects that have pipelines enabled during pipeline processing may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Pipelines without workflows require a `build` job.
+Projects that have pipelines enabled may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
 
@@ -90,7 +90,6 @@ The following example shows a workflow with four sequential jobs. The jobs run a
 The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   build-test-and-deploy:
@@ -121,7 +120,6 @@ The illustrated example workflow runs a common build job, then fans-out to run a
 The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   build_accept_deploy:
@@ -152,11 +150,12 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 
 ## Holding a Workflow for a Manual Approval
 
-Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. To do this, add a job to the `jobs` list with the
+Workflows can be configured to wait for manual approval of a job before
+continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. 
+To do this, add a job to the `jobs` list with the
 key `type: approval`. Let's look at a commented config example. 
 
 ```yaml
-version: 2.1
 # ...
 # << Your config for the build, test1, test2, and deploy jobs >>
 # ...
@@ -188,7 +187,8 @@ The outcome of the above example is that the `deploy:` job will not run until yo
 Some things to keep in mind when using manual approval in a workflow:
 
 - `approval` is a special job type that is **only** available to jobs under the `workflow` key
-- The `hold` job must be a unique name not used by any other job; that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
+- The `hold` job must be a unique name not used by any other job.
+- that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
 - The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key in it.
 - All jobs that are to run after a manually approved job _must_ `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
@@ -218,7 +218,6 @@ By default, a workflow is triggered on every `git push`. To trigger a workflow o
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) for `cron` syntax basics. The workflow will be run on the `master` and `beta` branches.
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   commit:
@@ -268,7 +267,6 @@ The following example shows a workflow with four sequential jobs that use a cont
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   build-test-and-deploy:
@@ -299,7 +297,6 @@ The following example shows a workflow configured with jobs on three branches: D
 The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   dev_stage_pre-prod:
@@ -336,7 +333,6 @@ In the example below, two workflows are defined:
 - `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   untagged-build:
@@ -356,7 +352,6 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 - The `deploy` job runs for no branches and only for tags starting with 'v'.
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   build-n-deploy:
@@ -382,7 +377,6 @@ In the example below, three jobs are defined with the `build-test-deploy` workfl
 - The `deploy` job runs for no branches and only tags starting with 'config-test'.
 
 ```yaml
-version: 2.1
 workflows:
   version: 2
   build-test-deploy:
@@ -517,7 +511,7 @@ It has been observed that in some cases, a failure happens before the workflow r
 
 When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
 
-Sometimes, if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
+Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
 
 When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
 
