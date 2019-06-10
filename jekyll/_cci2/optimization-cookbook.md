@@ -25,9 +25,7 @@ The table below lists the different optimization tasks that can be performed usi
 Recipe | Description 
 ------------|-----------
 Single-Threading Builds (Queueing) | This section describes how you can use a specific single-threading (queueing) orb to ensure proper job and build completion without concurrency (queueing subsequent builds or jobs).
-Caching | 
-Fan-in / Fan-out | 
-Workspace Forwarding | 
+Caching |  
 
 ## Single-Threading Builds (Queuing)
 
