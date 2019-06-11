@@ -7,9 +7,9 @@ categories: [getting-started]
 order: 4
 ---
 
-This document describes how to get started with continuous integration on **macOS
-build environments** on CircleCI. If you still need to get acquainted with
-CircleCI, it is recommended to checkout the [getting started guide]({{ site.baseurl }}/2.0/getting-started).
+This document describes how to get started with continuous integration on **macOS build environments** on CircleCI. If you still need to get acquainted with CircleCI, it is recommended to checkout the [getting started guide]({{ site.baseurl }}/2.0/getting-started).
+
+Also, there is documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 ## Prerequisites
 

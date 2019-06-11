@@ -12,6 +12,8 @@ This document describes how to automate builds, testing, and deployment of an iO
 * TOC
 {:toc}
 
+**Note:** There is also documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
+
 ## Overview
 {:.no_toc}
 
