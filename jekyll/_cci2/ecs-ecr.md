@@ -63,8 +63,8 @@ AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should corres
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
 
 **Note**: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found here:
- - [AWS-ECR]https://circleci.com/orbs/registry/orb/circleci/aws-ecr
- - [AWS-ECS]https://circleci.com/orbs/registry/orb/circleci/aws-ecs
+ - [AWS-ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
+ - [AWS-ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 
 ### Build and Push the Docker image to AWS ECR
 
@@ -73,7 +73,7 @@ The `build_and_push_image` job builds a Docker image from a Dockerfile in the de
 ```yaml
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecr: circleci/aws-ecr@4.0.1
   aws-ecs: circleci/aws-ecs@0.0.8
 workflows:
   build-and-deploy:
@@ -94,7 +94,7 @@ The `deploy-service-update` job of the aws-ecs orb creates a new task definition
 ```yaml
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecr: circleci/aws-ecr@4.0.1
   aws-ecs: circleci/aws-ecs@0.0.8
 workflows:
   build-and-deploy:
@@ -142,7 +142,7 @@ See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) fo
 ```yaml
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecr: circleci/aws-ecr@4.0.1
   aws-ecs: circleci/aws-ecs@0.0.8
 workflows:
   build-and-deploy:
