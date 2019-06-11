@@ -37,7 +37,7 @@ jobs:
          name: 最初の一歩
          command: |
            echo 'Hello World!'
-           echo 'This is the delivery pipeline’
+           echo 'This is the delivery pipeline'
 ```
 
 コンフィグをチェックインし、実行を確認します。 ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -80,7 +80,7 @@ jobs:
          name: コードの取得
          command: |
            ls -al
-           echo '^^^That should look familiar^^^’
+           echo '^^^That should look familiar^^^'
 ```
 
 ### 学習ポイント
