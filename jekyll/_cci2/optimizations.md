@@ -47,6 +47,8 @@ jobs:
 Make note of the use of a `checksum` in the cache `key`; this is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In the above example, the
 [`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
+We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
+
 Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## Workflows
@@ -94,7 +96,7 @@ Learn more about workflows in our [workflows document]({{site.baseurl}}/2.0/work
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to other jobs, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`] key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
 Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
@@ -102,8 +104,8 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 
 **Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
-If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism)
-to spread your tests across multiple machines. CircleCI supports automatic test
+If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
+to split your tests across multiple machines. CircleCI supports automatic test
 allocation across machines on a file-basis, however, you can also manually
 customize how tests are allocated.
 
@@ -125,7 +127,7 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature.
 If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
 
 Below is an example use case of the `resource_class` feature.
 
