@@ -15,13 +15,13 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** tab and enable "pipelines" with the radio button.
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
 3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new pipelines before adding any new 2.1 keys to your config.
 
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new pipelines service. 
+4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo. The Jobs page displays runs using the new pipelines service.
 
 After your build is running successfully with pipelines enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
 
@@ -71,7 +71,7 @@ jobs:
 ### Invoking Other Commands in Your Command
 {:.no_toc}
 
-Commands can use other commands in the scope of execution. 
+Commands can use other commands in the scope of execution.
 
 For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 
@@ -150,21 +150,21 @@ jobs:
           arguments: --dryrun
 ```
 
-## Authoring Reusable Executors 
+## Authoring Reusable Executors
 
-Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc. 
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
 Executor declarations in config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
 An executor definition includes one or more of the following keys:
 
-- `docker` or `machine` or `macos` 
+- `docker` or `machine` or `macos`
 - `environment`
 - `working_directory`
 - `shell`
 - `resource_class`
 
-In the following example `my-executor` is passed as the single value of the key `executor`. 
+In the following example `my-executor` is passed as the single value of the key `executor`.
 
 ```yaml
 version: 2.1
@@ -201,7 +201,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 ### Example of Using an Executor Declared in config.yml in Multiple Jobs
 {:.no_toc}
 
-The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment. 
+The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment.
 
 ```yaml
 version: 2.1
@@ -734,7 +734,7 @@ jobs:
       myspecialvar: "myspecialvalue"  
 ```
 
-The above would resolve to the following: 
+The above would resolve to the following:
 
 ```yaml
 version: 2.1
@@ -816,7 +816,7 @@ workflows:
 Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
 are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution. 
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
 
 ### Defining Pre and Post Steps
 {:.no_toc}
@@ -851,18 +851,18 @@ workflows:
 
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a `condition` is met. 
+Conditional steps allow the definition of steps that only run if a `condition` is met.
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not
 `myorb/foo: { dostuff: false }`.
 
 These conditions are checked before a workflow is actually run. This means, for example, that you may not use a condition to check an environment variable.
 
-Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs. 
+Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
 For example, an orb author could define conditional steps in the `steps` key of a Job or a Command.
 
-A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run. 
+A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run.
 
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 

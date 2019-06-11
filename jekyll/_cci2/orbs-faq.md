@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 20
 ---
 
-This document describes various questions and technical issues that you may find helpful when working with Orbs.
+This document describes various questions and technical issues that you may find helpful when working with orbs.
 
 * TOC
 {:toc}
@@ -17,14 +17,14 @@ This document describes various questions and technical issues that you may find
 
 * Question: How do I download, integrate and test orbs?
 
-* Answer: You can invoke orbs using the `orbs` stanza in version 2.1 or higher of a CircleCI configuration. For example, if you want to publish an orb called  `hello-build` in the namespace `circleci` and have a published version `0.0.1`, invoke an orb like the example shown below:
+* Answer: You can import orbs using the `orbs` stanza in version 2.1 or higher of a CircleCI configuration. For example, if you want to publish an orb called  `hello-build` in the namespace `circleci` and have a published version `0.0.1`, import an orb like the example shown below:
 
 ```
 orbs:
-     hello: circleci/hello-build@0.0.5
+     hello: circleci/hello-build@0.0.1
 ```
 
-You may then use the elements of that orb in your configuration by referencing these elements under the key `hello`. For example, if an orb has a job called `hello-build`, you can invoke that job in a workflow like the example shown below.
+You may then invoke elements of the orb in your configuration by referencing elements under the key `hello`. For example, if an orb has a job called `hello-build`, you can invoke that job in a workflow like the example shown below.
 
 ```
 workflows:
@@ -33,7 +33,7 @@ workflows:
       - hello/hello-build
 ```
 
-CircleCI publishes a web-based registry viewer so orbs documentation can be auto-generated. You can always pull the source of Orbs directly as well. For example, you can run `circleci orb source circleci/hello-build@0.01`
+CircleCI publishes a web-based registry viewer so orbs documentation can be auto-generated. You can always pull the source of orbs directly as well. For example, you can run `circleci orb source circleci/hello-build@0.01`
 
 ### Build Error When Testing Locally
 
@@ -64,18 +64,13 @@ only certified orbs are permitted in this project.
 
 Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
 
-```export AUTO_FILE=/Users/yourusername/Desktop/apkpure_app_887.apk
+```
+export AUTO_FILE=/Users/yourusername/Desktop/apkpure_app_887.apk
 export AUTO_DIR=.
 circleci build -c .circleci/echo.yml --job test
 ```
 
 The config shows:
-
-```#!bin/bash -eo pipefail
-echo file $(AUTO_FILE) dir $(AUTO_DIR)
-file directlySuccess!
-```
-Upon execution, you may see the following response:
 
 ```yaml
 version: 2.1
@@ -102,9 +97,17 @@ workflows:
     - test
 ```
 
+Upon execution, you may see the following response:
+
+```
+#!bin/bash -eo pipefail
+echo file $(AUTO_FILE) dir $(AUTO_DIR)
+file directlySuccess!
+```
+
 ### Logging Outputs
 
-* Question: Is there a standard way to to log output? For example, Jenkins plugins provide console links to show the log output and provides hooks to log those messages. It is possible to log to `stdout`, but is there a better way to log those log messages?
+* Question: Is there a standard way to log output? For example, Jenkins plugins provide console links to show the log output and provide hooks to log those messages. It is possible to log `stdout`, but is there a better way to log those log messages?
 
 * Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
 
@@ -118,7 +121,7 @@ workflows:
 
 * Question: May I use a private installation of CircleCI Server when using working with orbs?
 
-* Answer: No. CircleCI Server does not currently support private installations.
+* Answer: No. CircleCI Server does not currently support the use of orbs.
 
 ### Using Orb Elements For Other Orbs
 
@@ -126,24 +129,22 @@ workflows:
 
 * Answer: Yes, orbs may be composed directly using elements of other orbs. For example:
 
-{% raw %}
-```yaml
-version: 2.1
-orbs:
-  some-orb: some-ns/some-orb@volatile
-executors:
-  my-executor: some-orb/their-executor
-commands:
-  my-command: some-orb/their-command
-jobs:
-  my-job: some-orb/their-job
-  another-job:
-    executor: my-executor
-    steps:
-      - my-command:
-          param1: "hello"
-```
-{% endraw %}
+  ```yaml
+  version: 2.1
+  orbs:
+    some-orb: some-ns/some-orb@volatile
+  executors:
+    my-executor: some-orb/their-executor
+  commands:
+    my-command: some-orb/their-command
+  jobs:
+    my-job: some-orb/their-job
+    another-job:
+      executor: my-executor
+      steps:
+        - my-command:
+            param1: "hello"
+  ```
 
 ### Using 3rd Party Orbs
 
@@ -158,6 +159,8 @@ jobs:
 Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
 
 To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.
+
+![Enable 3rd Party Orbs]( {{ site.baseurl }}/assets/img/docs/third-party-orbs.png)
 
 **Note:** CircleCI does not require this for certified orbs (orbs that have been reviewed and approved by CircleCI prior to publishing). At this time, the certification program for orbs authored by third parties is not yet available, though will be available in the near future.
 
