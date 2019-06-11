@@ -639,8 +639,11 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm publish
+      - run:
+          name: Publish to NPM
+          command: | 
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
 
 workflows:
   version: 2
