@@ -57,7 +57,6 @@ _For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.
 To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
 
 ```yaml
-version: 2.1
 jobs:
   build:
     docker:
