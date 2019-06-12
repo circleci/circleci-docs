@@ -199,7 +199,7 @@ orbs:
         executor: my_inline_executor
         steps:
           - my_inline_command:
-              name: <<parameters.greeting_name>>
+              greeting_name: <<parameters.greeting_name>>
     commands:
       my_inline_command:
         parameters:
