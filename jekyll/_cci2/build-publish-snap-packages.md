@@ -61,9 +61,10 @@ Publishing a snap is more or less a two-step process. Here's on this might look 
 ```Bash
 snapcraft login
 # follow prompts for logging in with an Ubuntu One account
-snapcraft export-login snapcraft.login
-base64 snapcraft.login | xsel --clipboard
+snapcraft export-login --snaps my-snap-name --channels edge - | xsel --clipboard
 ```
+
+> Note: the exported token can only upload this snap to the channel you specified above (in this example, edge).
 
 1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_LOGIN_FILE`.
 
@@ -74,9 +75,8 @@ base64 snapcraft.login | xsel --clipboard
           - run:
               name: "Publish to Store"
               command: |
-                mkdir .snapcraft
-                echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-                snapcraft push *.snap --release stable
+                echo $SNAPCRAFT_LOGIN_FILE | snapcraft login --with -
+                snapcraft push *.snap --release edge
     ...
     ```
 
@@ -144,9 +144,8 @@ jobs:
       - run:
           name: "Publish to Store"
           command: |
-            mkdir .snapcraft
-            echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-            snapcraft push *.snap --release stable
+            echo $SNAPCRAFT_LOGIN_FILE | snapcraft login --with -
+            snapcraft push *.snap --release edge
 
 
 workflows:
