@@ -30,15 +30,15 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 ```yaml
 version: 2.0
 jobs:
- build:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - run:
-         name: The First Step
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
 ```
 
 Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
@@ -66,21 +66,21 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 ```yaml
 version: 2.0
 jobs:
- build:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - checkout
-     - run:
-         name: The First Step
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
-     - run:
-         name: Code Has Arrived
-         command: |
-           ls -al
-           echo '^^^That should look familiar^^^'
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
 ```
 
 ### Learnings
@@ -100,26 +100,26 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 ```yaml
 version: 2.0
 jobs:
- build:
-   # pre-built images: https://circleci.com/docs/2.0/circleci-images/
-   docker:
-     - image: circleci/node:10-browsers
-   steps:
-     - checkout
-     - run:
-         name: The First Step
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
-     - run:
-         name: Code Has Arrived
-         command: |
-           ls -al
-           echo '^^^That should look familiar^^^'
-     - run:
-         name: Running in a Unique Container
-         command: |
-           node -v
+  build:
+    # pre-built images: https://circleci.com/docs/2.0/circleci-images/
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+      - run:
+          name: Running in a Unique Container
+          command: |
+            node -v
 ```
 
 We also added a small `run` block that demonstrates we are running in a node container.
@@ -144,41 +144,41 @@ All of the job names are arbitrary.  This allows you to create workflows as comp
 ```yaml
 version: 2.0
 jobs:
- Hello-World:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - run:
-         name: Hello World
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
- I-Have-Code:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - checkout
-     - run:
-         name: Code Has Arrived
-         command: |
-           ls -al
-           echo '^^^That should look familiar^^^'
- Run-With-Node:
-   docker:
-     - image: circleci/node:10-browsers
-   steps:
-     - run:
-         name: Running In A Container With Node
-         command: |
-           node -v
- Now-Complete:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - run:
-         name: Approval Complete
-         command: |
-           echo 'Do work once the approval has completed'
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - run:
+          name: Running In A Container With Node
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
 
 workflows:
  version: 2
