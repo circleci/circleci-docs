@@ -43,7 +43,7 @@ This document provides a summary of features and product notes for the release o
 ## Updated in Release 2.17
 
 * New machine executor AMIs based on Ubuntu 16.04 for AWS.
-  Ubuntu 16.04 with Docker 18.06.3 has apt-daily and apt-daily-upgrade services disabled.
+  Ubuntu 16.04 with Docker 18.09.3 has apt-daily and apt-daily-upgrade services disabled.
   It is highly recommended that customers try to experiment with the AMIs below before officially switching:
   The new images are as follows:
 
