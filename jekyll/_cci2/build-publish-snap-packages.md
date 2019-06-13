@@ -64,25 +64,23 @@ snapcraft login
 snapcraft export-login --snaps my-snap-name --channels edge - | xsel --clipboard
 ```
 
-> Note: the exported token can only upload this snap to the channel you specified above (in this example, edge).
+1. Create a Snapcraft token on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login --snaps my-snap-name --channels edge -` to generate a token that can only upload `my-snap-name` to the channel `edge`. As we don't want this token visible to the public or stored in the Git repository, we will store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_TOKEN`.
 
-1. Create a Snapcraft "login file" on your local machine that we upload to CircleCI. Assuming your local machine already has these tools installed and you are logged in to the Snapcraft Store (`snapcraft login`), we use the command `snapcraft export-login snapcraft.login` to generate a login file called `snapcraft.login`. As we don't want this file visible to the public or stored in the Git repository, we will base64 encode this file and store it in a [private environment variable](https://circleci.com/docs/2.0/env-vars/#adding-environment-variables-in-the-app) called `$SNAPCRAFT_LOGIN_FILE`.
-
-    *Note: The default expiration time for the Snapcraft login file is 1 year. If you want the auth file to be valid for longer, make sure to set an expiration date with the `--expires` flag.*
+    *Note: The default expiration time for the Snapcraft token is 1 year. If you want the token to be valid for longer, make sure to set an expiration date with the `--expires` flag.*
 
     ```yaml
     ...
           - run:
               name: "Publish to Store"
               command: |
-                echo $SNAPCRAFT_LOGIN_FILE | snapcraft login --with -
+                echo $SNAPCRAFT_TOKEN | snapcraft login --with -
                 snapcraft push *.snap --release edge
     ...
     ```
 
-2. Once the base64 encoded version of the file is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
+2. Once the token is stored on CircleCI as a private environment variable, we can then use it within a build to automatically publish to the store.
 
-In this example, Snapcraft automatically looks for login credentials in `.snapcraft/snapcraft.cfg` and the environment variable made previously is decoded into that location. The `snapcraft push` command is then used to upload the .snap file into the Snap Store.
+In this example, Snapcraft automatically looks for the token in the `$SNAPCRAFT_TOKEN` environment variable. The `snapcraft push` command is then used to upload the .snap file into the Snap Store.
 
 ### Uploading vs Releasing
 
@@ -144,7 +142,7 @@ jobs:
       - run:
           name: "Publish to Store"
           command: |
-            echo $SNAPCRAFT_LOGIN_FILE | snapcraft login --with -
+            echo $SNAPCRAFT_TOKEN | snapcraft login --with -
             snapcraft push *.snap --release edge
 
 
