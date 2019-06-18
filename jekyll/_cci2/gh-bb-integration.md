@@ -6,7 +6,7 @@ categories: [migration]
 Order: 60
 ---
 
-This document provides an overview of using GitHub or Bitbucket with CircleCI in the following sections:
+This document provides an overview of using GitHub, GitHub Enterprise, or Bitbucket Cloud with CircleCI in the following sections:
 
 * TOC
 {:toc}
@@ -14,9 +14,9 @@ This document provides an overview of using GitHub or Bitbucket with CircleCI in
 ## Overview
 {:.no_toc}
 
-When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
-- A **deploy key** that is used to check out your project from GitHub or Bitbucket.
-- A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket.
+When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+- A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
+- A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
 
 CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
 
@@ -24,14 +24,14 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 - CircleCI processes PR hooks (Pull Request Hooks) to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
+It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
 ### Add a .circleci/config.yml File
 {:.no_toc}
 
-After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -46,7 +46,7 @@ jobs:
           bundle exec cucumber
 ```
         
-CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
+CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket Cloud as shown in the following screenshot for a commit from user keybits:
 
 ![Status Badge After Commit]({{ site.baseurl }}/assets/img/docs/status_badge.png)
 
