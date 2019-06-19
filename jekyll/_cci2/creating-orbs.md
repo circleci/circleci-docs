@@ -772,4 +772,4 @@ In this example, the `btd` workflow runs the `orb-tools/validate` job first. If 
 - Refer to [Testing Orbs]({{site.baseurl}}/2.0/testing-orbs/) for information about how to test the orbs you have created.
 - Refer to [Orbs Registry](https://circleci.com/orbs/registry/licensing) for more detailed information about legal terms and conditions when using orbs.
 - Refer to [Local CLI]({{site.baseurl}}/2.0/local-cli/#overview) for more information about how you can use the CircleCI CLI in your orbs deployments.
-- Refer to [Configuration Cookbook](({{site.baseurl}}/2.0/configuration-cookbook/#section=configuration) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
