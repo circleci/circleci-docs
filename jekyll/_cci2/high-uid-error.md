@@ -97,3 +97,7 @@ In this case,
 you may have to modify the `RUN` step in the Dockerfile itself.
 Adding `&& chown -R root:root /root` to the problem step
 should fix the problem without creating a bad interim.
+
+## See Also
+
+Refer to the following [Microsoft forum post](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview) for additional links if you get more errors after performing this procedure.
