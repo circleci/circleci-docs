@@ -28,7 +28,7 @@ Following are the metrics that are enabled:
 
 #### Nomad Job Metrics
 
-In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics) are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
+In addition to the metrics above, [Nomad job metrics](https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics) are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
 
 `circle.nomad.server_agent.poll_failure`: Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
 `circle.nomad.server_agent.jobs.pending`: Returns the total number of pending jobs across the cluster.
