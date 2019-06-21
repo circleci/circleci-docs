@@ -341,7 +341,7 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 
 - **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows:** We do not yet support building and testing Windows applications.
+- **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
 
 ### Which CPU architectures does CircleCI support?
 {:.no_toc}
