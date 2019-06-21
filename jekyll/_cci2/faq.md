@@ -207,33 +207,11 @@ CircleCI provides no guarantees about precision. A scheduled workflow will be ru
 
 ## Billing
 
-### Container Based Plans
-
-#### How do I upgrade my plan with more containers to prevent queuing?
-{:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
-
-* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
-
-#### Is there a way to share plans across organizations and have them billed centrally?
-{:.no_toc}
-Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
-
-#### Can I set up billing for an organization, without binding it to my personal account?
-{:.no_toc}
-Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
-
-#### What is the definition of a container in the context of billing?
-{:.no_toc}
-A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
-
----
-
 ### Credit Usage Plans
 
 #### How do the new pricing plans affect me as a customer?
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider. 
+For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
 
 #### What are credits?
 {:.no_toc}
@@ -243,7 +221,7 @@ can also be used to pay for features, such as Docker Layer Caching.
 For example, the 25,000 credit package would provide 2,500 build minutes when
 using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
-#### If a container is used for under one minute, do I have to pay for a full minute? 
+#### If a container is used for under one minute, do I have to pay for a full minute?
 {:.no_toc}
 You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
@@ -255,7 +233,7 @@ Every month, you are charged for your selected credit package at the beginning o
 {:.no_toc}
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user.
 - Compute is paid for monthly in credits for the machine size and duration you use.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
@@ -263,16 +241,13 @@ You can choose to pay for premium features per active user, compute, and optiona
 #### What constitutes an _Active User_?
 {:.no_toc}
 
-An `active user` is any user who triggers the use of compute resources on
-non-OSS projects. This includes activities such as:
+An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits.
 - Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
-- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream
-  jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
 
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
-
 
 #### What happens when I run out of credits?
 {:.no_toc}
@@ -302,6 +277,30 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 - On the annual renewal date if your team is on the annual plan.
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+
+---
+
+### Container Based Plans
+
+#### How do I upgrade my plan with more containers to prevent queuing?
+{:.no_toc}
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
+
+* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+
+#### Is there a way to share plans across organizations and have them billed centrally?
+{:.no_toc}
+Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
+
+#### Can I set up billing for an organization, without binding it to my personal account?
+{:.no_toc}
+Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+
+#### What is the definition of a container in the context of billing?
+{:.no_toc}
+A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+---
 
 ## Architecture
 
