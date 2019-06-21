@@ -5,11 +5,7 @@ categories: [how-to]
 description: How to leverage CircleCI credits
 ---
 
-This document describes the basics of using credits with CircleCI. If you are on
-the legacy CircleCI container-based plan you may want to consider consulting the
-document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch
-from using containers to using credits, please [open a support
-ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
+This document describes the basics of using credits with CircleCI. If you are on the legacy CircleCI container-based plan you may want to consider consulting the document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
 
 ## Overview
 
@@ -29,12 +25,7 @@ Let's look at how a Performance plan might use credits. With the Performance pla
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
 
-In this example, your team is divided into several groups working on different projects; some
-projects are larger while others are smaller and need less resources from a CI
-configuration. With credits it's possible to specify exactly where and when you need to
-maximize machine resources. For example, your team might use a `large` `resource_class` (with 4 vCPUs
-and 8gb of memory at a rate of 20 credits/minute) to speed up a build for a bigger
-project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory, 5 credits/minute) for a smaller project that may not ship code as frequently, or where build time is inconsequential.
+In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits it's possible to specify exactly where and when you need to maximize machine resources. For example, your team might use a `large` `resource_class` (with 4 vCPUs and 8gb of memory at a rate of 20 credits/minute) to speed up a build for a bigger project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory, 5 credits/minute) for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
 Consider taking a moment to look at the CircleCI [Usage](https://circleci.com/pricing/usage/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
 
@@ -44,9 +35,7 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 
 ## Free Plan
 
-As with the CircleCI legacy container plan, CircleCI also supports a free-tier
-with the credit-based plan. You can still make use of many key features offered
-by CircleCI:
+As with the CircleCI legacy container plan, CircleCI also supports a free-tier with the credit-based plan. You can still make use of many key features offered by CircleCI:
 
 - Using Orbs
 - Workspaces
@@ -66,8 +55,7 @@ Upgrading to a performance plan offers several improvements over the free plan:
 
 ## Docker Layer Caching
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. Read more
-about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
 ## Questions And Comments
 
