@@ -16,7 +16,7 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 When work with the CircleCI platform, one of the most critical tasks you will want to complete is to optimize your jobs, builds, workflows, and other tasks to prevent performance degradation, latency, and concurrency. Optimizing your tasks is not simply a function of lessening the workload or number of tasks, but rather, reviewing your optimization and caching strategies to ensure you are meeting your business and technical requirements while also maintaining stability and reliability.
 
-CircleCI has developed several methodologies that you can use to better optimize these tasks while also leveraging the power of the platform and its associated resources (e.g. orbs). The sections below describe various strategies and methodologies you can use to optimize your organization tasks.
+CircleCI has developed several different approaches you may wish to use to better optimize these tasks while also leveraging the power of the CircleCI platform and its associated resources (e.g. orbs). The sections below describe various strategies and methodologies you can use to optimize your organization tasks.
 
 ### Optimization Recipes
 
@@ -25,7 +25,7 @@ The table below lists the different optimization tasks that can be performed usi
 Recipe | Description 
 ------------|-----------
 Single-Threading Builds (Queueing) | This section describes how you can use a specific single-threading (queueing) orb to ensure proper job and build completion without concurrency (queueing subsequent builds or jobs).
-Caching |  
+Caching |  This section describes how you can use different caching strategies in your implemenations to optimize your builds and workflows.
 
 ## Single-Threading Builds (Queuing)
 
@@ -107,3 +107,11 @@ steps:
       time: <<parameters.time>>
       vcs-type: <<parameters.vcs-type>>
 ```
+
+## Caching
+
+One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
+
+Because caching is a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be optimized:
+
+- Caching - https://circleci.com/docs/2.0/caching/
