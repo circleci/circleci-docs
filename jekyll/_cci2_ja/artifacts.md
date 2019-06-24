@@ -131,9 +131,11 @@ CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Ar
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
-
-<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
+   | grep -o 'https://[^"]*' \
+   | tr -d \" \
+   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
+   | wget -v -i -
 ```
 
 プレースホルダ | 意味 |
