@@ -15,7 +15,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png)
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
