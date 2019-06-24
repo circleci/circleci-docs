@@ -16,8 +16,6 @@ This document describes how to skip or cancel builds in the following sections.
 
 By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag anywhere in a commit's title or description. This not only skips the marked commit, but also **all other commits** in the push.
 
-If you later decide to build a skipped commit, you can override any skip tags by re-running the build. If you are using workflows, go to the Workflows page of the CircleCI application and rerun the entire Workflow or re-run it from failed jobs. Otherwise, click one of the Rebuild options on the **Job page** of the CircleCI application.
-
 **Note:**
 This feature is not supported for fork PRs.
 
