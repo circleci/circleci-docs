@@ -89,7 +89,7 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
-## Creating a Machine User
+## Controlling Access Via a Machine User
 
 For fine-grained access to multiple repositories,
 consider creating a machine user
