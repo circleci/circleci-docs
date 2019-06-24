@@ -53,7 +53,7 @@ Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## Workflows
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provider several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows).
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows/).
 
 **Note**: Workflows are available to all plans, but running parallel jobs assumes that your plan provides multiple machines to execute on.
 
