@@ -53,14 +53,9 @@ Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## Workflows
 
-Workflows provide a means to define a collection of jobs and their run order. If
-at any point in your build you see a step where two jobs could happily run
-independent of one another, workflows may be helpful. Further, workflows
-allow you to schedule jobs, run jobs in parallel, or simply allow you runs jobs
-independently with easier troubleshooting.
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provider several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows).
 
-**Note**: Workflows are available to all plans, but running parallel jobs assumes that
-your plan provides multiple machines to execute on.
+**Note**: Workflows are available to all plans, but running parallel jobs assumes that your plan provides multiple machines to execute on.
 
 ```yaml
 version: 2.1
@@ -87,8 +82,6 @@ workflows: # Here we can orchestrate our jobs into a workflow
 
 
 You can view more examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
-
-Learn more about workflows in our [workflows document]({{site.baseurl}}/2.0/workflows).
 
 ## Workspaces
 
@@ -123,11 +116,9 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 
 ## Resource Class
 
-**Note:** A paid plan is required to use the
-[`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature.
-If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
+**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account.
 
-After this feature is added to your paid plan, it is possible to configure CPU and RAM resources for each job as described in [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job as described in [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
 
 Below is an example use case of the `resource_class` feature.
 
@@ -147,17 +138,11 @@ jobs:
 
 ## Docker Layer Caching
 
-**Note**: If you are on the container-based plan you must open a [support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable
-DLC for your account. If you are using CircleCI's credit-based plan, DLC can be used for
-200 credits per build on the Performance plan.
+**Note**: An eligible plan is required to use Docker Layer Caching. If you are on the container-based plan you will need to open a [support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable DLC for your account.
 
-DLC is a feature that can help to reduce the _build time_ of a Docker image in
-your build. Docker Layer Caching is useful if you find yourself frequently
-building Docker images as a regular part of your CI/CD process.
+DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
-DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the
-image layers that you build within your job, making them available on subsequent
-builds.
+DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
 ```yaml
 version: 2
