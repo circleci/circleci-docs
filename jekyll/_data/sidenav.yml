@@ -17,8 +17,9 @@ en:
   icon: docs/start.svg
   children:
     - name: Introduction
-      link: 2.0/getting-started/
       children:
+        - name: Getting Started Introduction
+          link: 2.0/getting-started/
         - name: Sign Up & Try CircleCI
           link: 2.0/first-steps/
         - name: Hello World
@@ -28,8 +29,10 @@ en:
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
-      link: 2.0/concepts/
+      link: 
       children:
+        - name: Getting Started Concepts
+          link: 2.0/concepts/      
         - name: Projects and Builds
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
@@ -39,8 +42,10 @@ en:
         - name: Security
           link: 2.0/security/
     - name: Migration
-      link: 2.0/migration-intro/
+      link: 
       children:
+        - name: Migration Introduction
+          link: 2.0/migration-intro/      
         - name: Tips for Migrating to 2.0
           link: 2.0/migration/
         - name: Migrating a Linux Project
@@ -56,8 +61,10 @@ en:
   icon: docs/config.svg
   children:
     - name: Introduction
-      link: 2.0/config-intro/
+      link: 
       children:
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
         - name: Writing YAML
@@ -65,8 +72,10 @@ en:
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
     - name: Orbs
-      link: 2.0/orb-intro/
+      link: 
       children:
+        - name: Orb Introduction
+          link: 2.0/orb-intro/
         - name: Using Orbs
           link: 2.0/using-orbs/
         - name: Reusing Config
@@ -78,8 +87,10 @@ en:
         - name: Testing Orbs
           link: 2.0/testing-orbs/
     - name: Examples
-      link: 2.0/examples-intro/
+      link: 
       children:
+        - name: Examples Introduction
+          link: 2.0/examples-intro/
         - name: Sample config.yml Files
           link: 2.0/sample-config/
         - name: Tutorials
@@ -93,8 +104,10 @@ en:
         - name: Testing iOS Applications
           link: 2.0/testing-ios/
     - name: EXECUTORS & IMAGES
-      link: 2.0/executor-intro/
+      link: 
       children:
+        - name: Executor & Image Introduction
+          link: 2.0/executor-intro/
         - name: Choosing an Executor Type
           link: 2.0/executor-types/
         - name: CircleCI Docker Images
@@ -104,8 +117,10 @@ en:
         - name: Using Private Images
           link: 2.0/private-images/
     - name: ADVANCED CONFIG
-      link: 2.0/adv-config/
+      link: 
       children:
+        - name: Advanced Config Introduction
+          link: 2.0/adv-config/
         - name: Using Shell Scripts
           link: 2.0/using-shell-scripts/
         - name: Setting up Browser Testing
@@ -121,8 +136,10 @@ en:
   icon: docs/project.svg
   children:
     - name: settings
-      link: 2.0/settings/
+      link: 
       children:
+        - name: Settings Overview
+          link: 2.0/settings/
         - name: GitHub and Bitbucket
           link: 2.0/gh-bb-integration/
         - name: Enabling GitHub Checks
@@ -144,8 +161,10 @@ en:
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
-      link: 2.0/optimizations/
+      link: 
       children:
+        - name: Optimization Overview
+          link: 2.0/optimizations/
         - name: Caching Dependencies
           link: 2.0/caching/
         - name: Running Tests in Parallel
@@ -157,8 +176,10 @@ en:
   icon: docs/builds.svg
   children:
     - name: Status
-      link: 2.0/status/
+      link: 
       children:
+        - name: Status Overview
+          link: 2.0/status/
         - name: Using Containers
           link: 2.0/containers/
         - name: Adding Status Badges
@@ -176,8 +197,10 @@ en:
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers
-      link: 2.0/triggers/
+      link: 
       children:
+        - name: Introduction to Triggers
+          link: 2.0/triggers/
         - name: Skip and Cancel Builds
           link: 2.0/skip-build/
         - name: Using the API to Trigger Jobs
@@ -189,8 +212,10 @@ en:
   icon: docs/deploy.svg
   children:
     - name: Configuring Deploys
-      link: 2.0/deployment-integrations/
+      link: 
       children:
+        - name: Deployment Overview
+          link: 2.0/deployment-integrations/
         - name: Deploying to AWS ECR/ECS
           link: 2.0/ecs-ecr/
         - name: Using Yarn on CircleCI
@@ -216,7 +241,7 @@ en:
           link: 2.0/glossary/
         - name: Help and Support
           link: 2.0/help-and-support/
-        - name: Archive
+        - name: Archive of 1.0 Docs
           link: 2.0/archive/
 
 - name: Administration
