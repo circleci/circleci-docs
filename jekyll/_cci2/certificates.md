@@ -111,7 +111,7 @@ Because the ELB does not require a _current_ certificate, you may choose to gene
 3. Save the certificate.pem and key.pem file locally.
 
 
-### Adding the certificate to CircleCI Server
+### Adding the certificate to CircleCI Server using Replicated Console
 
 Once you have a valid certificate and key file in pem format, you must upload it to CircleCI Server.
 
@@ -124,6 +124,41 @@ Once you have a valid certificate and key file in pem format, you must upload it
 4. Click "Verify TLS Settings" to ensure everything is working.
 
 5. Click "Save" at the bottom of the settings page and restart when prompted.
+
+### Adding the certificate to CircleCI Server from the Services machine
+
+This method may be used as an alternative to adding the certificate to CircleCI Server using the Replicated Console.
+
+1. Make sure your certificate and private key are accessible from the Services machine.
+
+2. SSH into the Services machine.
+
+3. Install the certificates using the following commands:
+
+```
+CERTIFICATE=~/example_certificate.pem
+PRIVATE_KEY=~/example_private_key.pem
+HOSTNAME=circleci-server.example.com
+
+# Update Replicated Console certificate
+replicated console cert set ${HOSTNAME} ${PRIVATE_KEY} ${CERTIFICATE}
+
+# Update CircleCI Server certificate
+replicatedctl app-config set 'ssl_cert' --value 'cert.pem' --data "$(cat ${CERTIFICATE} | base64)"
+replicatedctl app-config set 'ssl_private_key' --value 'private_key.pem' --data "$(cat ${PRIVATE_KEY} | base64)"
+```
+
+4. Restart Replicated Console
+
+```
+service replicated-ui restart
+```
+
+5. Restart CircleCI Server
+
+```
+service replicated restart
+```
 
 ## References
 
