@@ -79,7 +79,7 @@ Partner Orb Registry Link | Orb Reference String
 [Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1`
 [Helm](https://circleci.com/orbs/registry/orb/circleci/helm) | `helm: circleci/helm@0.1.1`
 [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1`
-[Honeycomb](https://circleci.com/orbs/registry/orb/honeycombio/buildevents) | `honeycombio/buildevents@0.1.1`
+[Honeycomb](https://circleci.com/orbs/registry/orb/honeycombio/buildevents) | `buildevents: honeycombio/buildevents@0.1.1`
 [Kublr](https://circleci.com/orbs/registry/orb/kublr/kublr-api) | `kublr: kublr/kublr-api@0.0.1`
 [LogDNA](https://circleci.com/orbs/registry/orb/logdna/logdna) | `logdna: logdna/logdna@0.0.1`
 [Nirmata](https://circleci.com/orbs/registry/orb/nirmata/nirmata) | `nirmata: nirmata/nirmata@1.1.0`
