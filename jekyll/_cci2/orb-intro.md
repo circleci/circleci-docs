@@ -85,7 +85,7 @@ Partner Orb Registry Link | Orb Reference String
 [Nirmata](https://circleci.com/orbs/registry/orb/nirmata/nirmata) | `nirmata: nirmata/nirmata@1.1.0`
 [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`
 [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`
-[Pantheon](https://circleci.com/orbs/registry/orb/pantheon-systems/pantheon) | `pantheon-systems/pantheon@0.1.0`
+[Pantheon](https://circleci.com/orbs/registry/orb/pantheon-systems/pantheon) | `pantheon: pantheon-systems/pantheon@0.1.0`
 [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`
 [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`
 [Probely](https://circleci.com/orbs/registry/orb/probely/security-scan) | `probely: probely/security-scan@1.0.0`
