@@ -83,7 +83,7 @@ jobs:
   # build job omitted for brevity
   deploy:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/python:3.7-stretch
     working_directory: ~/circleci-docs
     steps:
       - run:
