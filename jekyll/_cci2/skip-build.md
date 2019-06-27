@@ -73,7 +73,7 @@ Your project's default branch will never auto-cancel builds. This feature only a
 
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
-3. In the **Enabling Pipelines (preview)** section, click the **On** button.
+3. In the **Enable Pipelines** section, click the **On** button.
 
 ### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
 {:.no_toc}
@@ -86,7 +86,7 @@ Projects for which auto-cancel is enabled in the Advanced Settings will have wor
 
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
-3. In the **Enabling Pipelines (preview)** section, click the **On** button.
+3. In the **Enable Pipelines** section, click the **On** button.
 
 4. Commit a change to trigger a build and ensure it runs successfully with the new pipelines.
 
