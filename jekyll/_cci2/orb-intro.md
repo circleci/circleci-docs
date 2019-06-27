@@ -67,6 +67,7 @@ Partner Orb Registry Link | Orb Reference String
 [Azure ACR](https://circleci.com/orbs/registry/orb/circleci/azure-acr) | `acr: circleci/azure-acr@0.1.1`
 [Azure AKS](https://circleci.com/orbs/registry/orb/circleci/azure-aks) | `aks: circleci/azure-aks@0.1.0`
 [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`
+[CodeScene](https://circleci.com/orbs/registry/orb/empear/codescene-ci-cd) | `codescene: empear/codescene-ci-cd@1.0.0`
 [Contrast Security](https://circleci.com/orbs/registry/orb/contrastsecurity/verify) | `contrastsecurity: contrastsecurity/verify@0.1.2`
 [CryptoMove](https://circleci.com/orbs/registry/orb/cryptomove/tholos) | `cryptomove: cryptomove/tholos@0.0.11`
 [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0`
@@ -89,6 +90,7 @@ Partner Orb Registry Link | Orb Reference String
 [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`
 [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`
 [Probely](https://circleci.com/orbs/registry/orb/probely/security-scan) | `probely: probely/security-scan@1.0.0`
+[Provar](https://circleci.com/orbs/registry/orb/provartesting/provar) | `provar: provartesting/provar@1.9.10`
 [Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0`
 [Red Hat OpenShift](https://circleci.com/orbs/registry/orb/circleci/redhat-openshift) | `redhat: circleci/redhat-openshift@0.1.0`
 [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0`
@@ -96,6 +98,7 @@ Partner Orb Registry Link | Orb Reference String
 [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2`
 [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1`
 [Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2`
+[Styra](https://circleci.com/orbs/registry/orb/styra/cli) | `styra: styra/cli@0.0.7`
 [Testim](https://circleci.com/orbs/registry/orb/testimio/runner) | `testim: testimio/runner@1.1.1`
 [Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4`
 [VMware Code Stream](https://circleci.com/orbs/registry/orb/vmware/codestream) | `vmware/codestream@1.0.0`
