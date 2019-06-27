@@ -901,3 +901,9 @@ workflows:
 **Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters as above. Also, `when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
+
+## See Also
+- Refer to [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) for detailed information about how you can work with your CircleCI configuration.
+- Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Database Examples]({{site.baseurl}}/2.0//postgres-config/) for database examples you can use in your CircleCI configuration.
