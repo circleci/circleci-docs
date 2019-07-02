@@ -55,6 +55,8 @@ If you move your repository to a new organization, you must also have the contex
 
 CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the restricted context. 
 
+Note: Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
+
 The default security group is `All members` and enables any member of the organization who uses CircleCI to use the context.
 
 ## Running Workflows with a Restricted Context
