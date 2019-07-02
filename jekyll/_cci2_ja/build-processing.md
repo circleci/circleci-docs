@@ -42,4 +42,4 @@ CircleCI では、ほとんどの場合に下位互換性が維持されてお�
 
 ## 関連項目
 
-詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/#auto-cancelling-a-redundant-build)のページを参照してください。
+詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/#冗長ビルドの自動キャンセル)のページを参照してください。
