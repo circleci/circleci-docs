@@ -61,7 +61,7 @@ commands は、ジョブ内で実行するステップシーケンスをマッ�
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。
-parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
+parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 description | - | String | コマンドの内容を説明する文章です。
 {: class="table table-striped"}
 
