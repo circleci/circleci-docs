@@ -337,7 +337,7 @@ CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実�
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
-xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」を参照してください。
+xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。
 {: class="table table-striped"}
 
 **例 :** macOS 仮想マシンを Xcode v`9.0` で使う場合
