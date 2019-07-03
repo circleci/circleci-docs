@@ -61,7 +61,7 @@ commands は、ジョブ内で実行するステップシーケンスをマッ�
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。
-parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
+parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 description | - | String | コマンドの内容を説明する文章です。
 {: class="table table-striped"}
 
@@ -590,7 +590,7 @@ steps:
 
 ##### **`when` ステップ**（version：2.1 が必須）
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。`when` キー配下ではサブキーとして `condition` と `steps` が使えます。`when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#defining-conditional-steps)を参照してください。
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。`when` キー配下ではサブキーとして `condition` と `steps` が使えます。`when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#条件付きステップの定義)を参照してください。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
