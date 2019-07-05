@@ -210,10 +210,7 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 
 ## Pre-installed Tools
 
-All convenience images have been extended with additional tools.
-
-With the exception of [Android images](https://hub.docker.com/r/circleci/android),
-all images include the following packages, installed via `apt-get`:
+All convenience images have been extended with additional tools, installed with `apt-get`
 
 - `bzip2`
 - `ca-certificates`
