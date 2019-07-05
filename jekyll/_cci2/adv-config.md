@@ -7,9 +7,7 @@ categories: [migration]
 order: 2
 ---
 
-CircleCI supports many advanced configuration options and features, check out
-the snippets below to get an idea of what is possible, as well as tips for
-optimizing advanced configurations.
+CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, as well as tips for optimizing advanced configurations.
 
 ## Check Your Scripts
 
