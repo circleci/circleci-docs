@@ -155,7 +155,7 @@ workflows:
     # Gemfile
     source "https://rubygems.org"
     gem 'fastlane'
-    
+
 
 `Gemfile` をローカルで作成したら、`bundle install` を実行し、`Gemfile` と `Gemfile.lock` の両方をリポジトリにチェックインする必要があります。
 
@@ -166,7 +166,7 @@ workflows:
 fastlane を CircleCI プロジェクトに使用する場合は、以下の行を `fastfile` に追加することをお勧めします。
 
     # fastlane/Fastfile
-    
+
     ...
     platform :ios do
       before_all do
@@ -174,7 +174,7 @@ fastlane を CircleCI プロジェクトに使用する場合は、以下の行�
       end
       ...
     end
-    
+
 
 以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
@@ -190,24 +190,24 @@ fastlane を CircleCI プロジェクトに使用する場合は、以下の行�
 
     # fastlane/Fastfile
     default_platform :ios
-    
+
     platform :ios do
       before_all do
         setup_circle_ci
       end
-    
+
       desc "すべてのテストを実行"
       lane :test do
         scan
       end
-    
+
       desc "アドホックビルド"
       lane :adhoc do
         match(type: "adhoc")
         gym(export_method: "ad-hoc")
       end
     end
-    
+
 
 上記の設定は、以下の CircleCI のコンフィグファイルと組み合わせて使用できます。
 
@@ -304,7 +304,7 @@ CircleCI 2.0 では、iOS のビルドやテストに関するほぼすべての
           - run:
               name: シミュレーターを事前に起動
               command: xcrun instruments -w "iPhone 7 (10.2) [" || true
-    
+
 
 **メモ：**iPhone と Apple Watch のシミュレーターもビルドイメージに含まれるので、iPhone 7 シミュレーターを一意に識別するために `[` が必要です。
 
@@ -330,7 +330,7 @@ CircleCI には [Homebrew](https://brew.sh/index_ja) がプリインストール
           - run:
               name: cowsay hi
               command: cowsay Hi!
-    
+
 
 必要な場合は、`sudo` コマンドを使用して、Homebrew 以外のカスタマイズも実行できます。
 
@@ -338,7 +338,7 @@ CircleCI には [Homebrew](https://brew.sh/index_ja) がプリインストール
 
 {:.no_toc}
 
-CircleCI の macOS コンテナには、複数のバージョンの Ruby が格納されています。 デフォルトのバージョンは、システムにインストールされている Ruby です。 コンテナには、動作が安定していて、そのコンテナがビルドされた時点で最新バージョンの Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェアマニフェスト](#supported-xcode-versions)に記載されています。
+CircleCI の macOS コンテナには、複数のバージョンの Ruby が格納されています。 デフォルトのバージョンは、システムにインストールされている Ruby です。 コンテナには、動作が安定していて、そのコンテナがビルドされた時点で最新バージョンの Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェアマニフェスト](#サポートされている-xcode-のバージョン)に記載されています。
 
 マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。 `chruby` をアクティブ化するには、`--login` を追加して、ジョブの `shell` パラメーターをログインシェルに変更する**必要があります**。
 
@@ -359,7 +359,7 @@ run:
   command:  echo "ruby-2.4" > ~/.ruby-version # 2.4 を特定の Ruby バージョンに置き換えます
 ```
 
-**メモ：**Ruby のバージョンは、[macOS コンテナのソフトウェアマニフェスト](#supported-xcode-versions)に記載されている中から選択する必要があります。
+**メモ：**Ruby のバージョンは、[macOS コンテナのソフトウェアマニフェスト](#サポートされている-xcode-のバージョン)に記載されている中から選択する必要があります。
 
 プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法で対象のバージョンを選択できるようになります。
 
@@ -370,26 +370,26 @@ run:
 ローカルで使用しているバージョンの CocoaPods を CircleCI のビルドでも使用するには、iOS プロジェクトで Gemfile を作成し、そこに CocoaPods バージョンを追加することをお勧めします。
 
     source 'https://rubygems.org'
-    
+
     gem 'cocoapods', '= 1.3.0'
-    
+
 
 次に、Bundler を使用してインストールします。
 
 {% raw %}
 
         steps:
-    
+
           - restore_cache:
               key: 1-gems-{{ checksum "Gemfile.lock" }}
-    
+
           - run: bundle check || bundle install --path vendor/bundle
-    
+
           - save_cache:
               key: 1-gems-{{ checksum "Gemfile.lock" }}
               paths:
                 - vendor/bundle
-    
+
 
 {% endraw %}
 
@@ -397,7 +397,7 @@ run:
 
         steps:
           - run: bundle exec pod install
-    
+
 
 ## デプロイの設定
 
