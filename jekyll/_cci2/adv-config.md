@@ -113,7 +113,7 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 - [Workspaces]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) can be used to copy external scripts between jobs if you don't
   want to do a full checkout.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some
-  preflight checks and popular a workspace for all the following jobs.
+  preflight checks and populate a workspace for all the following jobs.
 - Move the quickest jobs up to the start of your workflows. For example, lint or
   syntax checking should happen before longer-running, more computationally
   expensive jobs.
