@@ -115,7 +115,7 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some
   preflight checks and popular a workspace for all the following jobs.
 - Move the quickest jobs up to the start of your workflows. For example, lint or
-  syntax checking should happen before longer-running, more computational
+  syntax checking should happen before longer-running, more computationally
   expensive jobs.
 
 
