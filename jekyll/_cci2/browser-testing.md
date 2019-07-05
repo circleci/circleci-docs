@@ -129,7 +129,7 @@ build:
       - run:
        	name: "Downloading tunnel binary"
           command: |
-          wget https://s3.amazonaws.com/lambda-tunnel/LT_Linux.zip
+          wget http://downloads.lambdatest.com/tunnel/linux/64bit/LT_Linux.zip
       - run:
        	name: "Extracting tunnel binary"
           command: |
@@ -185,7 +185,7 @@ commands:
       - run: 
           name: "Downloading tunnel binary"
           command: |
-            wget https://s3.amazonaws.com/lambda-tunnel/LT_Linux.zip
+            wget http://downloads.lambdatest.com/tunnel/linux/64bit/LT_Linux.zip
       
       - run: 
           name: "Extracting tunnel binary"
