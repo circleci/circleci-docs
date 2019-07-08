@@ -74,7 +74,9 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.  
+There is no limit on the number of `store_artifacts` steps a job can run.  
+
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
