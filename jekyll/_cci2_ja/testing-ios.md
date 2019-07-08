@@ -14,6 +14,7 @@ order: 30
 {:toc}
 
 ## 概要
+
 {:.no_toc}
 
 CircleCI では、iOS プロジェクトと macOS プロジェクトをビルドしてテストすることができます。 CircleCI の macOS ビルドイメージにインストールされているソフトウェアのマニフェストについては、macOS ビルドイメージの使用に関するドキュメントを参照してください。
@@ -164,17 +165,16 @@ workflows:
 
 fastlane を CircleCI プロジェクトに使用する場合は、以下の行を `fastfile` に追加することをお勧めします。
 
-```
-# fastlane/Fastfile
+    # fastlane/Fastfile
 
-...
-platform :ios do
-  before_all do
-    setup_circle_ci
-  end
-  ...
-end
-```
+    ...
+    platform :ios do
+      before_all do
+        setup_circle_ci
+      end
+      ...
+    end
+
 
 以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
@@ -183,31 +183,31 @@ end
 - 収集しやすくなるように、ログやテスト結果のパスを設定する。
 
 ### CircleCI で fastlane を使用する場合の設定例
+
 {:.no_toc}
 
 以下に、CircleCI で使用できる fastlane の基本設定を示します。
 
-```
-# fastlane/Fastfile
-default_platform :ios
+    # fastlane/Fastfile
+    default_platform :ios
 
-platform :ios do
-  before_all do
-    setup_circle_ci
-  end
+    platform :ios do
+      before_all do
+        setup_circle_ci
+      end
 
-  desc "Runs all the tests"
-  lane :test do
-    scan
-  end
+      desc "すべてのテストを実行"
+      lane :test do
+        scan
+      end
 
-  desc "Ad-hoc build"
-  lane :adhoc do
-    match(type: "adhoc")
-    gym(export_method: "ad-hoc")
-  end
-end
-```
+      desc "アドホックビルド"
+      lane :adhoc do
+        match(type: "adhoc")
+        gym(export_method: "ad-hoc")
+      end
+    end
+
 
 上記の設定は、以下の CircleCI のコンフィグファイルと組み合わせて使用できます。
 
@@ -300,12 +300,11 @@ CircleCI 2.0 では、iOS のビルドやテストに関するほぼすべての
 
 シミュレーターを事前に起動するには、以下の行を `config.yml` ファイルに追加します。ここでは、iOS 10.2 を使用する iPhone 7 シミュレーターでテストを行うように指定しています。
 
-```
-    steps:
-      - run:
-          name: pre-start simulator
-          command: xcrun instruments -w "iPhone 7 (10.2) [" || true
-```
+        steps:
+          - run:
+              name: シミュレーターを事前に起動
+              command: xcrun instruments -w "iPhone 7 (10.2) [" || true
+
 
 **メモ：**iPhone と Apple Watch のシミュレーターもビルドイメージに含まれるので、iPhone 7 シミュレーターを一意に識別するために `[` が必要です。
 
@@ -324,15 +323,14 @@ CircleCI 2.0 では、iOS のビルドやテストに関するほぼすべての
 
 CircleCI には [Homebrew](https://brew.sh/index_ja) がプリインストールされているため、`brew install` を使用するだけで、ビルド VM に必要なほぼすべての依存関係を追加できます。 以下に例を示します。
 
-```
-    steps:
-      - run:
-          name: Install cowsay
-          command: brew install cowsay
-      - run:
-          name: cowsay hi
-          command: cowsay Hi!
-```
+        steps:
+          - run:
+              name: cowsay をインストール
+              command: brew install cowsay
+          - run:
+              name: cowsay hi
+              command: cowsay Hi!
+
 
 必要な場合は、`sudo` コマンドを使用して、Homebrew 以外のカスタマイズも実行できます。
 
@@ -371,35 +369,35 @@ run:
 
 ローカルで使用しているバージョンの CocoaPods を CircleCI のビルドでも使用するには、iOS プロジェクトで Gemfile を作成し、そこに CocoaPods バージョンを追加することをお勧めします。
 
-```
-source 'https://rubygems.org'
+    source 'https://rubygems.org'
 
-gem 'cocoapods', '= 1.3.0'
-```
+    gem 'cocoapods', '= 1.3.0'
+
 
 次に、Bundler を使用してインストールします。
 
 {% raw %}
-```
-    steps:
-      - restore_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
 
-      - run: bundle check || bundle install --path vendor/bundle
+        steps:
 
-      - save_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-```
+          - restore_cache:
+              key: 1-gems-{{ checksum "Gemfile.lock" }}
+
+          - run: bundle check || bundle install --path vendor/bundle
+
+          - save_cache:
+              key: 1-gems-{{ checksum "Gemfile.lock" }}
+              paths:
+                - vendor/bundle
+
+
 {% endraw %}
 
 また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 
-```
-    steps:
-      - run: bundle exec pod install
-```
+        steps:
+          - run: bundle exec pod install
+
 
 ## デプロイの設定
 
