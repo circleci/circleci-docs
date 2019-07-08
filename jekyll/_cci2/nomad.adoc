@@ -1,0 +1,128 @@
+= Introduction to Nomad Cluster Operation
+:relfileprefix: ../
+:outfilesuffix: /index.html
+:page-permalink: /nomad/
+:imagesdir: /docs/assets/img/docs
+:page-layout: classic-docs
+:source-highlighter: rouge
+:icons: font
+
+This section provides conceptual and procedural information for operating, backing up, monitoring, and configuring a CircleCI server installation.
+//not clear on what is meant by 'this section' - chapter is mentioned in the next para
+
+CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+
+== Basic Terminology and Architecture
+
+- **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
+
+- **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) in order to fully take the advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
+
+- **Nomad Jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. In CircleCI 2.0, a Nomad job corresponds to an execution of a CircleCI job. If the job uses parallelism, say 10 parallelism, then Nomad will run 10 jobs.
+
+- **Build Agent:** Build Agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build Agent is executed as the main process inside a Nomad Job.
+
+== Basic Operations
+
+The following section is a basic guide to operating a Nomad cluster in your installation.
+
+The `nomad` CLI is installed in the Service instance. It is pre-configured to talk to the Nomad cluster, so it is possible to use the `nomad` command to run the following commands in this section.
+
+=== Checking the Jobs Status
+
+The get a list of statuses for all jobs in your cluster, run:
+
+[source,shell]
+----
+nomad status
+----
+
+The `Status` is the most important field in the output, with the following status type definitions:
+
+- `running`: Nomad has started executing the job. This typically means your job in CircleCI is started.
+
+- `pending`: There are not enough resources available to execute the job inside the cluster.
+
+- `dead`: Nomad has finished executing the job. The status becomes `dead` regardless of whether the corresponding CircleCI job/build succeeds or fails.
+
+=== Checking the Cluster Status
+
+To get a list of your Nomad clients, run:
+
+[source,shell]
+----
+nomad node-status
+----
+
+NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
+
+To get more information about a specific client, run the following from that client:
+
+[source,shell]
+----
+nomad node-status -self
+----
+
+This will give information such as how many jobs are running on the client and the resource utilization of the client.
+
+=== Checking Logs
+
+As noted in the Nomad Jobs section above, a Nomad Job corresponds to an execution of a CircleCI job. Therefore, checking logs of Nomad Jobs sometimes helps you to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run:
+
+[source,shell]
+----
+nomad logs -job -stderr <nomad-job-id>
+----
+
+NOTE: Be sure to specify the `-stderr` flag as this is where most Build Agent logs appear.
+
+While the `nomad logs -job` command is useful, the command is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is out of scope for this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+
+Complete the following steps to get logs from the allocation of the specified job:
+
+1. Get the job ID with `nomad status` command.
+
+2. Get the allocation ID of the job with `nomad status <job-id>` command.
+
+3. Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
+
+// ## Scaling the Nomad Cluster
+// Nomad itself does not provide a scaling method for cluster, so you must implement one. This section provides basic operations regarding scaling a cluster.
+
+=== Scaling Up the Client Cluster
+
+Refer to the <<Scaling>> section of the Configuration chapter for details about adding Nomad Client instances to an AWS auto scaling group and using a scaling policy to scale up automatically according to your requirements.
+
+// commenting until we have non-aws installations?
+// Scaling up Nomad cluster is very straightforward. To scale up, you need to register new Nomad clients into the cluster. If a Nomad client knows the IP addresses of Nomad servers, then the client can register to the cluster automatically.
+// HashiCorp recommends using Consul or other service discovery mechanisms to make this more robust in production. For more information, see the following pages in the official documentation for [Clustering](https://www.nomadproject.io/intro/getting-started/cluster.html), [Service Discovery](https://www.nomadproject.io/docs/service-discovery/index.html), and [Consul Integration](https://www.nomadproject.io/docs/agent/configuration/consul.html).
+
+=== Shutting Down a Nomad Client
+
+When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
+
+1. To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
+
+[source,shell]
+----
+nomad node-drain -self -enable
+----
+
+2. Then, make sure the client is in drain mode using the `node-status` command:
+
+[source,shell]
+----
+nomad node-status -self
+----
+
+Alternatively, you can drain a remote node with `nomad node-drain -enable -yes <node-id>`.
+
+=== Scaling Down the Client Cluster
+
+To set up a mechanism for clients to shutdown, first entering `drain` mode, then waiting for all jobs to be finished before terminating the client, you can configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+
+The script should use the commands in the section above to do the following:
+
+1. Put the instance in drain mode
+2. Monitor running jobs on the instance and wait for them to finish
+3. Terminate the instance

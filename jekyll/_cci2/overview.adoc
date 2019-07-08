@@ -1,0 +1,141 @@
+= Overview
+:relfileprefix: ../
+:outfilesuffix: /index.html
+:page-permalink: /overview/
+:page-layout: classic-docs
+:imagesdir: /docs/assets/img/docs
+:source-highlighter: rouge
+:icons: font
+
+CircleCI Server is a modern continuous integration and continuous delivery (CI/CD) platform installable inside your private cloud or data center. Refer to the https://circleci.com/server/changelog[Changelog] for what's new in this CircleCI Server release.
+
+NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
+
+toc::[]
+
+== Build Environments
+
+CircleCI 2.0 uses Nomad as the primary job scheduler. Refer to the <<nomad#,Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
+
+By default, CircleCI 2.0 Nomad clients automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file.
+
+== Architecture
+
+Figure 1.1 illustrates CircleCI core components, build orchestration services, and executors. The CircleCI https://circleci.com/docs/api/#section=reference[API] is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI.
+
+image::cci-arch.png[CircleCI Services Architecture]
+
+Within the CircleCI UI is the Insights page, which acts as a dashboard showing the health of all repositories you are following including:
+// I feel like the insights page info needs to move somewhere else
+
+* median build time
+* median queue time
+* last build time
+* success rate
+* parallelism.
+
+// Add screenshot of insights page
+
+CircleCI consists of two primary components: Services and Nomad Clients. Any number of Nomad Clients execute your jobs and communicate back to the Services. All components must access GitHub or your hosted instance of GitHub Enterprise on the network, as illustrated in Figure 2.
+
+image::architecture-v1.png[A Diagram of the CircleCI Architecture]
+
+=== Services Machine
+
+The Services machine must must not be restarted and may be backed up using VM snapshotting. If you must restart the Services machine, do so only as a last resort, because a restart will result in downtime. Refer to the <<Disaster Recovery>> chapter for instructions.
+//I feel like this is going in to telling you stuff you shouldn't do too quickly - feels negative
+
+DNS resolution may point to the IP address of the Services machine. It is also possible to point to a load balancer, for example an ELB in AWS. The following table describes the ports used for traffic on the Service machine:
+
+[cols=3*, options="header", stripes=even]
+|===
+|Source
+|Ports
+|Use
+
+|End Users
+|80, 443, 4434
+|HTTP/HTTPS Traffic
+
+|Administrators
+|22
+|SSH
+
+|Administrators
+|8800
+|Admin Console
+
+|Builder Boxes
+|all traffic, all ports
+|Internal Communication
+
+|GitHub (Enterprise or .com)
+|80, 443
+|Incoming Webhooks
+|===
+
+==== Nomad Clients
+Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
+
+To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of Nomad Client machines as needed to balance the load. For more on tracking metrics see <<System Monitoring>>.
+
+Each machine reserves two vCPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination.
+
+NOTE: The maximum machine size for a Nomad client is 128GB RAM/ 64 CPUs, contact your CircleCI account representative to request use of larger machines for Nomad Clients.
+
+The following table describes the ports used on Nomad clients:
+
+[cols=3*, options="header", stripes=even]
+|===
+|Source
+|Ports
+|Use
+
+|End Users
+|64535-65535
+|SSH into builds
+
+|Administrators
+|80 or 443
+|CCI API Access
+
+|Administrators
+|22
+|SSH
+
+|Services Machine
+|all traffic, all ports
+|Internal Comms
+
+|Nomad Clients (including itself)
+|all traffic, all ports
+|Internal Comms
+|===
+
+=== GitHub
+CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, in turn, may use LDAP, SAML, or SSH for access. This means CircleCI will inherit the authentication supported by your central SSO infrastructure.
+
+NOTE: CircleCI does not support changing the URL or backend Github instance after it has been set up. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client instances.
+
+[cols=3*, options="header", stripes=even]
+|===
+|Source
+|Ports
+|Use
+
+|Services
+|22
+|Git Access
+
+|Services
+|80, 443
+|API Access
+
+|Nomad Client
+|22
+|Git Access
+
+|Nomad Client
+|80, 443
+|API Access
+|===
