@@ -12,6 +12,7 @@ gh_url: "https://github.com/circleci/circleci-docs"
 plugins:
   - jekyll-assets
   - jekyll-sitemap
+  - jekyll-asciidoc
 
 algolia:
   application_id: U0RXNGRK45
