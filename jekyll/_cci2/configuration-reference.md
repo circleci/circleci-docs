@@ -681,8 +681,7 @@ docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer 
 
 ###### **`version`**
 
-If your job requires a specific docker version, you can set it with the
-`version` attribute.
+If your job requires a specific docker version, you can set it with the `version` attribute.
 
 **Note**: The version key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -691,6 +690,8 @@ Key     | Required | Type   | Description
 --------|----------|--------|------------
 version | N        | String | Version string of docker you would like to use (default: `17.09.0-ce`).
 {: class="table table-striped"}
+
+View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 
 
 ##### **`save_cache`**
