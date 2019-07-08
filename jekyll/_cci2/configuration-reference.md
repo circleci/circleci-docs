@@ -690,6 +690,7 @@ If your job requires a specific docker version, you can set it with the
 Key     | Required | Type   | Description
 --------|----------|--------|------------
 version | N        | String | Version string of docker you would like to use (default: `17.09.0-ce`).
+{: class="table table-striped"}
 
 
 ##### **`save_cache`**
