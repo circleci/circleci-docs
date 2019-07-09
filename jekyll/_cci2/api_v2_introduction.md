@@ -28,7 +28,7 @@ CircleCI API v2 has significantly changed the current API v1.1 paradigm to incor
 
 The CircleCI API v2 enables users to be authenticated in much the same way as they would be authenticated in the previous API v1.1. A simple way to authenticate is to send your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the examnple shown below:
 
-curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me
+`curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
 For more detailed information on how to authenticate with a token, please refer to the [Authentication](https://circleci.com/docs/api/#authentication) section in the main CirlceCI API documentation.
 
@@ -104,3 +104,4 @@ Endpoint       | Description
 
 ## See Also
 {:.no_toc}
+
