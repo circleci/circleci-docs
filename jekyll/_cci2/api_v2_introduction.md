@@ -12,20 +12,57 @@ The CircleCI Application Programming Interface (API) version 2, referred to as A
 * TOC 
 {:toc}
 
-## Introduction
+## Introduction to API v2
 
+CircleCI API v2 has significantly changed the current API v1.1 paradigm to incorporate some important changes and shifts in the way that you can and will use the API for your jobs. Although changes were made to the available endpoints (discussed later on this page), two of the most important changes are the introduction of "pipelines" and "project slugs" as concepts in the API design and architecture, as well as a set of new endpoints that enable you to:
 
-When making a request, use the following URL in your request:
+- Retrieve a workflow by ID
+- Trigger pipelines with parameters
+- Trigger particular workflows within pipelines
+- Retrieve a pipeline by ID
+- Retrieve recent pipelines for an organization or for a project (ideally with branch filtering)
 
-`https://circleci.com/api/v2`
+**Note** In API v1.1, the term "build processing" was used to describe how projects were built and processed; however, with the API v2 release, "build processing" has been replaced by "pipelines." Not only has the terminology changed, but all projects have been moved over to this new setting by default.
 
-## What's New In API v2
+### Authentication
 
-The CircleCI API v2 
+The CircleCI API v2 enables users to be authenticated in much the same way as they would be authenticated in the previous API v1.1. A simple way to authenticate is to send your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the examnple shown below:
+
+curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me
+
+For more detailed information on how to authenticate with a token, please refer to the [Authentication](https://circleci.com/docs/api/#authentication) section in the main CirlceCI API documentation.
+
+### Pipelines
+
+#### What is a Pipeline?
+
+"Pipelines" are a CircleCI designation for the full set of configurations you run when triggering work on your projects on the CircleCI platform. Pipelines contain your workflows, which in turn coordinate your jobs. 
+
+#### What Are the Practical Implications of Pipelines?
+
+In this new paradigm, all jobs will run in a workflow, even if you do not specify one in your configuration. In the future, CircleCI will add a new pipeline-level parameters clause in `config.yml`, referenced in the `pipeline` scope, as well as launch a new version of the CircleCI API that has the ability to trigger pipelines with parameters and retrieve them and their workflows. In addition to these changes, CircleCI is also creating a new User Interface that will unify the experience of viewing your pipelines and their jobs coordinated in workflows.
+
+#### What Does This Change for Me? How Do I Turn On Pipelines?
+
+Whatever you are running today should continue working without any intervention. CircleCI has some features (such as 2.1 configuration and orbs) that require you to enable pipelines. In some rare cases, some users may need to make tweaks to their configuration when enabling pipelines.
+
+Many customers are already using an early version of pipelines, even before CircleCI exposed them through the CircleCI API and web UI. If you have already used the latest features in CircleCI version 2.1 configuration and/or orbs, then you already have pipelines enabled for your project (all projects added after September 1, 2018 already have pipelines enabled by default). If, however, your project does not yet have pipelines enabled, go to "Advanced Settings" in your project's settings page. If you do not see the "Enable Pipelines" option on your project's settings page, this means your project already has pipelines enabled.
+
+#### Is a Pipeline the Same Thing as a Build?
+
+In previous CircleCI release, the term "build" was used to describe a pipeline. Unfortunately, this terminology proved problematic because there was an incongruity between how "build" and "job" were defined in the API and UI, For example, what was referred to as a "build" in past releases is now referred to as a "job" in the current release. To address this ambiguity, CircleCI updated the UI to reflect this change in nomenclature, but there are still instances of "build" in our API.
+
+More importantly, CircleCI found that more teams are using CircleCI for a much broader array of automated processes than the word "build" implies. “Pipelines” more accurately reflects the broad applications of our platform, therefore, "pipelines" are seem more appropriate for the set of stages CircleCI performs in processing your automation instructions against changes in your code. 
+
+#### Will I Have to Use Pipelines?
+
+You are not required to use pipelines, but note that pipelines will eventually be enabled for all projects. This will allow CircleCI to provide more powerful configuration and automation, as well as better optimization of your resources and more reliable performance. The overarching goal of this approach is for the transition to pipelines to be seamless and have no disruptions on any of your existing workflows. 
 
 ### Project Slugs
 
-The CircleCI v2 API is backwards compatible with previous API versions in the way it identifies your projects using repository name. For example, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as gh/CircleCI-Public/circleci-cli, which is a "triplet" of the project type, the name of your "organization", and the name of the repository. 
+#### What is a Project Slug?
+
+The CircleCI v2 API is backwards compatible with previous API versions in the way it identifies your projects using repository name. For example, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository. 
 
 For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The `organization` is your username or organization name in your version control system.
 
@@ -33,7 +70,11 @@ With API v2, CircleCI has introduced a string representation of the triplet call
 
 `<project_type>/<org_name>/<repo_name>`
 
-The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It's possible in the future we could change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
+
+## Changes In Endpoints
+
+The CircleCI API v2 release includes several new endpoints that you can use in your jobs, as well as some endpoints that have been deprecated. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
 ### New Endpoints
 
@@ -61,67 +102,5 @@ Endpoint       | Description
 `DELETE /project/:vcs-type/:username/:project/build-cache` | This endpoint enabled users to clear the project cache for a specific project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
 
-## Authentication
-
-The CircleCI API v2 enables users to be authenticated in much the same way as they would be authenticated in the previous API v1.1. A simple way to authenticate is to send your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the examnple shown below:
-
-curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me
-
-For more detailed information on how to authenticate with a token, please refer to the [Authentication](https://circleci.com/docs/api/#authentication) section in the main CirlceCI API documentation.
-
-### Workspaces and Artifacts
-{:.no_toc}
-
-Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
-
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
-
-![workflow illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
-
-{% raw %}
-```yaml
-version: 2
-jobs:
-  build1:
-...   
-    steps:    
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace  for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-...
-    steps:
-      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-...
-```        
-{% endraw %}
-
-Note the following distinctions between Artifacts, Workspaces, and Caches:
-
-Type       | Lifetime             | Use                                | Example
------------|----------------------|------------------------------------|--------
-Artifacts  | Months               | Preserve long-term artifacts.      |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.
-Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.
-Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
-{: class="table table-striped"}
-
-Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
-
 ## See Also
 {:.no_toc}
-
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options. 
