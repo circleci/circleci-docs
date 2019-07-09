@@ -35,8 +35,8 @@ Workflows may appear with one of the following states:
 - RUNNING: Workflow is in progress
 - NOT RUN: Workflow was never started
 - CANCELLED: Workflow was cancelled before it finished
-- FAILING: A job in the workflow has failed
-- FAILED: One or more jobs in the workflow failed
+- FAILING: A job in the workflow has failed. Workflows go into Failing state when one of the jobs within the graph has failed while other jobs are still running. Failing state indicates that the workflow is eventually going to fail.
+- FAILED: One or more jobs in the workflow failed. Failed state is when one or more jobs in the workflow graph have failed. Failed is a terminal state.
 - SUCCESS: All jobs in the workflow completed successfully
 - ON HOLD: A job in the workflow is waiting for approval
 - NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
