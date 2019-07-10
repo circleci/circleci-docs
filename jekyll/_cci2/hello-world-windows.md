@@ -25,7 +25,7 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 
 A windows executor will have 4 vCPUs and 15GB of ram. Currently, there are no I/O optimizations.
 
-On the Windows executor, _Git_, the package manager _Chocolatey_, and _7zip_ will be installed. Powersell is the default shell (Bash and Command are available to be manually selected). Other dependencies may be installed later on.
+On the Windows executor, _Git_, the package manager _Chocolatey_, and _7zip_ will be installed. Powershell is the default shell (Bash and Command are available to be manually selected). Other dependencies may be installed later on.
 
 **Limitations**
 
