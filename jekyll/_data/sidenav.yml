@@ -29,10 +29,10 @@ en:
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
-      link: 
+      link:
       children:
         - name: Getting Started Concepts
-          link: 2.0/concepts/      
+          link: 2.0/concepts/
         - name: Projects and Builds
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
@@ -42,10 +42,10 @@ en:
         - name: Security
           link: 2.0/security/
     - name: Migration
-      link: 
+      link:
       children:
         - name: Migration Introduction
-          link: 2.0/migration-intro/      
+          link: 2.0/migration-intro/
         - name: Tips for Migrating to 2.0
           link: 2.0/migration/
         - name: Migrating a Linux Project
@@ -61,7 +61,7 @@ en:
   icon: docs/config.svg
   children:
     - name: Introduction
-      link: 
+      link:
       children:
         - name: Configuration Introduction
           link: 2.0/config-intro/
@@ -72,7 +72,7 @@ en:
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
     - name: Orbs
-      link: 
+      link:
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
@@ -87,7 +87,7 @@ en:
         - name: Testing Orbs
           link: 2.0/testing-orbs/
     - name: Examples
-      link: 
+      link:
       children:
         - name: Examples Introduction
           link: 2.0/examples-intro/
@@ -104,7 +104,7 @@ en:
         - name: Testing iOS Applications
           link: 2.0/testing-ios/
     - name: EXECUTORS & IMAGES
-      link: 
+      link:
       children:
         - name: Executor & Image Introduction
           link: 2.0/executor-intro/
@@ -117,7 +117,7 @@ en:
         - name: Using Private Images
           link: 2.0/private-images/
     - name: ADVANCED CONFIG
-      link: 
+      link:
       children:
         - name: Advanced Config Introduction
           link: 2.0/adv-config/
@@ -136,7 +136,7 @@ en:
   icon: docs/project.svg
   children:
     - name: settings
-      link: 
+      link:
       children:
         - name: Settings Overview
           link: 2.0/settings/
@@ -161,7 +161,7 @@ en:
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
-      link: 
+      link:
       children:
         - name: Optimization Overview
           link: 2.0/optimizations/
@@ -176,7 +176,7 @@ en:
   icon: docs/builds.svg
   children:
     - name: Status
-      link: 
+      link:
       children:
         - name: Status Overview
           link: 2.0/status/
@@ -197,7 +197,7 @@ en:
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers
-      link: 
+      link:
       children:
         - name: Introduction to Triggers
           link: 2.0/triggers/
@@ -212,7 +212,7 @@ en:
   icon: docs/deploy.svg
   children:
     - name: Configuring Deploys
-      link: 
+      link:
       children:
         - name: Deployment Overview
           link: 2.0/deployment-integrations/
@@ -247,22 +247,7 @@ en:
 - name: Administration
   icon: docs/admin.svg
   children:
-    - name: CircleCI Server v2.17
-      link: 2.0/v.2.17-overview/
-      children:
-        - name: v2.17 Installation Guide
-          link: 2.0/circleci-install-doc-v2-17.pdf
-        - name: v2.17 Operations Guide
-          link: 2.0/circleci-ops-guide-v2-17.pdf
-    - name: CircleCI Server v2.16
-      link: 2.0/v.2.16-overview/
-      children:
-        - name: v2.16 Installation Guide
-          link: 2.0/circleci-install-doc.pdf
-        - name: v2.16 Operations Guide
-          link: 2.0/circleci-ops-guide.pdf
-    - name: CircleCI Server v2.0
-      link: 2.0/overview/
+    - name: CircleCI Server
       children:
         - name: Overview
           link: 2.0/overview/
@@ -300,6 +285,20 @@ en:
           link: 2.0/vm-service/
         - name: Acknowledgments
           link: 2.0/open-source/
+    - name: CircleCI Server v2.17
+      link: 2.0/v.2.17-overview/
+      children:
+        - name: v2.17 Installation Guide
+          link: 2.0/circleci-install-doc-v2-17.pdf
+        - name: v2.17 Operations Guide
+          link: 2.0/circleci-ops-guide-v2-17.pdf
+    - name: CircleCI Server v2.16
+      link: 2.0/v.2.16-overview/
+      children:
+        - name: v2.16 Installation Guide
+          link: 2.0/circleci-install-doc.pdf
+        - name: v2.16 Operations Guide
+          link: 2.0/circleci-ops-guide.pdf
 
 ja:
 - name: Welcome

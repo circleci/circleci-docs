@@ -2,10 +2,13 @@
 Docs Team
 v2.17.2, July 2nd, 2019
 :title-page-background-image: image:pdf-header.png[]
-:imagesdir: ../assets/img/docs/
+:imagesdir: jekyll/assets/img/docs/
 :doctype: book
 :toc: macro
 :icons: font
+:source-highlighter: rouge
+:relfileprefix: jekyll/_cci2/
+:pagenums:
 
-include::overview.adoc[]
-include::nomad.adoc[]
+include::jekyll/_cci2/overview.adoc[]
+include::jekyll/_cci2/nomad.adoc[]

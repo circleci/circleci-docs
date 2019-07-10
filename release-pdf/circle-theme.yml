@@ -22,7 +22,7 @@ font:
 page:
   background_color: ffffff
   layout: portrait
-  margin: [0.5in, 0.67in, 0.67in, 0.67in]
+  margin: [1.0in, 0.67in, 0.67in, 0.67in]
   # margin_inner and margin_outer keys are used for recto/verso print margins when media=prepress
   margin_inner: 0.75in
   margin_outer: 0.59in
@@ -122,8 +122,8 @@ block:
   margin_top: 0
   margin_bottom: $vertical_rhythm
 caption:
-  align: left
-  font_size: $base_font_size * 0.95
+  align: center
+  font_size: $base_font_size
   font_style: italic
   # FIXME perhaps set line_height instead of / in addition to margins?
   margin_inside: $vertical_rhythm / 3
@@ -246,6 +246,40 @@ footnotes:
   font_size: round($base_font_size * 0.75)
   item_spacing: $outline_list_item_spacing / 2
 # NOTE in addition to footer, header is also supported
+header:
+  font_size: $base_font_size_small
+  # NOTE if background_color is set, background and border will span width of page
+  border_color: dddddd
+  border_width: 0.25
+  height: $base_line_height_length * 3.5
+  line_height: 1
+  padding: [$base_line_height_length / 2, 1, 0, 1]
+  vertical_align: top
+  #image_vertical_align: <alignment> or <number>
+  # additional attributes for content:
+  # * {page-count}
+  # * {page-number}
+  # * {document-title}
+  # * {document-subtitle}
+  # * {chapter-title}
+  # * {section-title}
+  # * {section-or-chapter-title}
+  recto:
+    #columns: "<50% =0% >50%"
+    right:
+      #content: '{page-number}'
+      content: '{section-or-chapter-title} | {page-number}'
+      #content: '{document-title} | {page-number}'
+    #center:
+    #  content: '{page-number}'
+  verso:
+    #columns: $footer_recto_columns
+    left:
+      content: $header_recto_right_content
+      #content: '{page-number} | {chapter-title}'
+    #center:
+    #  content: '{page-number}'
+
 footer:
   font_size: $base_font_size_small
   # NOTE if background_color is set, background and border will span width of page
@@ -267,8 +301,8 @@ footer:
   recto:
     #columns: "<50% =0% >50%"
     right:
-      content: '{page-number}'
-      #content: '{section-or-chapter-title} | {page-number}'
+      #content: '{page-number}'
+      content: '{section-or-chapter-title} | {page-number}'
       #content: '{document-title} | {page-number}'
     #center:
     #  content: '{page-number}'

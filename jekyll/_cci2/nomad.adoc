@@ -1,10 +1,5 @@
 = Introduction to Nomad Cluster Operation
-:relfileprefix: ../
-:outfilesuffix: /index.html
-:page-permalink: /nomad/
-:imagesdir: /docs/assets/img/docs
 :page-layout: classic-docs
-:source-highlighter: rouge
 :icons: font
 
 This section provides conceptual and procedural information for operating, backing up, monitoring, and configuring a CircleCI server installation.
@@ -101,14 +96,14 @@ Refer to the <<Scaling>> section of the Configuration chapter for details about 
 
 When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
 
-1. To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
+* To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
 
 [source,shell]
 ----
 nomad node-drain -self -enable
 ----
 
-2. Then, make sure the client is in drain mode using the `node-status` command:
+* Then, make sure the client is in drain mode using the `node-status` command:
 
 [source,shell]
 ----
