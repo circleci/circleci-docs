@@ -29,7 +29,7 @@ After configuring CircleCI to collect your test metadata, tests that fail most o
 
 ## Enabling Formatters
 
-Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to to enable the formatters:
+Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
 - RSpec requires the following be added to your gemfile:
 
