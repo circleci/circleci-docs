@@ -45,13 +45,13 @@ jobs:
             - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
-          command: stack setup
+          command: stack --no-terminal setup
       - run:
           name: Run tests
-          command: stack test
+          command: stack --no-terminal test
       - run:
           name: Install executable
-          command: stack install
+          command: stack --no-terminal install
       - save_cache:
           name: Cache Dependencies
           key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
@@ -108,6 +108,9 @@ Next we check if there are any dependencies that can be restored, enabling our
 build to speed up. Following that, we run `stack setup` to pull in the Haskell
 compiler as specified in the `stack.yaml` config.
 
+For all `stack` invocations, `--no-terminal` is used to avoid the "sticky output" feature
+(implemented using `\b` characters) to pollute the CircleCI log with undisplayable characters.
+
 {% raw %}
 ```yaml
     steps:
@@ -119,7 +122,7 @@ compiler as specified in the `stack.yaml` config.
             - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
-          command: stack setup
+          command: stack --no-terminal setup
       - save_cache:
           name: Cache Dependencies
           key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
@@ -144,10 +147,10 @@ a binary and move it to `~/.local/bin`.
 ```yaml
       - run:
           name: Run tests
-          command: stack test
+          command: stack --no-terminal test
       - run:
           name: Install executable
-          command: stack install
+          command: stack --no-terminal install
 ```
 
 Finally, we can take the built executable and store it as an artifact.
@@ -169,7 +172,7 @@ as seen below (Note: this will reduce test execution to one core, decreasing mem
 ```yaml
       - run:
           name: Run tests
-          command: stack test -j1
+          command: stack --no-terminal test -j1
 ```
 
 ## See Also
