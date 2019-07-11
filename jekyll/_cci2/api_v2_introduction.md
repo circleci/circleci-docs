@@ -50,7 +50,7 @@ Many customers are already using an early version of pipelines, even before Circ
 
 #### Is a Pipeline the Same Thing as a Build?
 
-In previous CircleCI release, the term "build" was used to describe a pipeline. Unfortunately, this terminology proved problematic because there was an incongruity between how "build" and "job" were defined in the API and UI, For example, what was referred to as a "build" in past releases is now referred to as a "job" in the current release. To address this ambiguity, CircleCI updated the UI to reflect this change in nomenclature, but there are still instances of "build" in our API.
+In previous CircleCI release, the term "build" was used to describe a pipeline. Unfortunately, this terminology proved problematic because there was an incongruity between how "build" and "job" were defined in the API and UI, for example, what was referred to as a "build" in past releases is now referred to as a "job" in the current release. To address this ambiguity, CircleCI updated the UI to reflect this change in nomenclature, but there are still instances of "build" in our API.
 
 More importantly, CircleCI found that more teams are using CircleCI for a much broader array of automated processes than the word "build" implies. “Pipelines” more accurately reflects the broad applications of our platform, therefore, "pipelines" are seem more appropriate for the set of stages CircleCI performs in processing your automation instructions against changes in your code. 
 
