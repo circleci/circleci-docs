@@ -76,9 +76,7 @@ While the `nomad logs -job` command is useful, the command is not always accurat
 Complete the following steps to get logs from the allocation of the specified job:
 
 1. Get the job ID with `nomad status` command.
-
 2. Get the allocation ID of the job with `nomad status <job-id>` command.
-
 3. Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
 // ## Scaling the Nomad Cluster

@@ -82,14 +82,15 @@ heading:
   align: left
   #font_color: 181818
   font_color: $base_font_color
-  font_family: RobotoSlab
+  font_family: Roboto
   font_style: bold
   # h1 is used for part titles (book doctype) or the doctitle (article doctype)
   h1_font_size: floor($base_font_size * 2.6)
   # h2 is used for chapter titles (book doctype only)
   h2_font_size: floor($base_font_size * 2.15)
-  h3_font_size: round($base_font_size * 1.7)
-  h4_font_color: dddddd
+  h2_font_style: normal
+  h3_font_size: round($base_font_size * 1.5)
+  h4_font_color: #06A951
   h4_font_size: $base_font_size_large
   h5_font_size: $base_font_size
   h6_font_size: $base_font_size_small
@@ -253,11 +254,12 @@ footnotes:
   item_spacing: $outline_list_item_spacing / 2
 # NOTE in addition to footer, header is also supported
 header:
+  background-color: #D8D8D8
   font_size: $base_font_size_small
   # NOTE if background_color is set, background and border will span width of page
   #border_color: dddddd
   #border_width: 0.25
-  height: $base_line_height_length * 3.5
+  height: $base_line_height_length * 2.1
   #line_height: 1
   padding: [$base_line_height_length / 2, 1, 0, 1]
   vertical_align: top
@@ -274,29 +276,29 @@ header:
     #columns: "<50% =0% >50%"
     right:
       #content: '{page-number}'
-      content: '{page-number}  |  {section-or-chapter-title}'
+      #content: '{page-number}  |  {section-or-chapter-title}'
       #content: '{document-title} | {page-number}'
     #center:
     #  content: '{page-number}'
   verso:
     #columns: $footer_recto_columns
     left:
-      content: $header_recto_right_content
+      #content: $header_recto_right_content
       #content: '{page-number} | {chapter-title}'
   center:
-    content: 'image:circle-logo.png[width=80]'
+    #content: 'image:circle-logo.png[width=80]'
 footer:
-  font_family: RobotoSlab
+  font_family: Roboto
   font_style: bold
   font_size: $base_font_size_small
-  font_color: 04AA51
+  font_color: d8d9d9
   # NOTE if background_color is set, background and border will span width of page
-  border_color: 04AA51
-  border_width: 1
+  #border_color: 04AA51
+  #border_width: 1
   height: $base_line_height_length * 3.75
   line_height: 1
-  padding: [$base_line_height_length / 2, 1, 0, 1]
-  vertical_align: top
+  #padding: [$base_line_height_length / 1, 1, 0, 1]
+  #vertical_align: top
   #image_vertical_align: <alignment> or <number>
   # additional attributes for content:
   # * {page-count}
@@ -309,16 +311,21 @@ footer:
   recto:
     #columns: "<50% =0% >50%"
     right:
-      content: '{page-number}'
+      content: 'CIRCLECI SERVER v2.17 OPERATIONS GUIDE | {page-number}'
       #content: 'image:circle-logo.png[width=80]'
 
       #content: '{document-title} | {page-number}'
     #center:
       #content:
+    left:
+      content: 'image:circle-logo-grey.png[width=100]'
+
   verso:
     #columns: $footer_recto_columns
     left:
-      content: '{page-number}  |  CircleCI Server v2.18 Operations Guide'
+      content: $footer_recto_left_content
       #content: '{page-number} | {chapter-title}'
+    right:
+      content: $footer_recto_right_content
     #center:
     #  content: '{page-number}'
