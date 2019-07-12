@@ -1,0 +1,624 @@
+= Monitoring Your Installation
+:page-layout: classic-docs
+:icons: font
+
+This section includes information for System Administrators on the following:
+
+* Scaling your cluster
+* Gathering metrics for monitoring your CircleCI installation
+
+== System Monitoring
+
+To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice. To get straight to this section use the following URL, substituting in your CircleCI URL: `https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics`.
+
+// insert screenshot of management console>settings
+
+=== VM Service and Docker Metrics
+
+VM Host and Docker services metrics are forwarded via https://github.com/influxdata/telegraf[Telegraf], a plugin-driven server agent for collecting and reporting metrics.
+
+Following are the enabled metrics:
+
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements[CPU]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics[Disk]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics[Memory]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields[Networking]
+* https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics[Docker]
+
+=== Nomad Job Metrics
+
+https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics[Nomad job metrics] are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Metric
+|Description
+
+|`circle.nomad.server_agent.poll_failure`
+|Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
+
+|`circle.nomad.server_agent.jobs.pending`
+|Returns the total number of pending jobs across the cluster.
+
+|`circle.nomad.server_agent.jobs.running`
+|Returns the total number of running jobs across the cluster.
+
+|`circle.nomad.server_agent.jobs.complete`
+|Returns the total number of complete jobs across the cluster.
+
+|`circle.nomad.server_agent.jobs.dead`
+|Returns the total number of dead jobs across the cluster.
+|===
+
+When the Nomad metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
+
+== Supported Platforms
+
+We have two built-in platforms for metrics and monitoring: AWS CloudWatch and DataDog. The sections below detail enabling and configuring each in turn.
+
+=== AWS CloudWatch
+
+To enable AWS CloudWatch complete the following:
+
+1. Navigate to the settings page within your Management Console. You can use the following URL, substituting your CircleCI URL:
+
+   `https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics`
+
+2. Check Enabled under AWS CloudWatch Metrics to begin configuration.
+
+   ![AWS CloudWatch](images/metrics_aws_cloudwatch1.png){ width=400px }
+
+==== AWS CloudWatch Configuration
+
+There are two options for configuration:
+
+* Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+
+    ![Configuration IAM](images/metrics_aws_cloudwatch2a.png){ width=400px }
+
+* Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+
+    ![Configuration Alt](images/metrics_aws_cloudwatch2b.png){ width=400px }
+
+After saving you can *verify* that metrics are forwarding by going to your AWS CloudWatch console.
+
+\pagebreak
+
+=== DataDog
+
+To enable Datadog complete the following:
+
+// 1. Disable Telegraf - at this time both Datadog and Telegraf require port 8125
+1. Navigate to the settings page within your Management Console. You can use the following URL, substituting your CircleCI URL:
+
+   `https://<your-circleci-hostname>.com:8800/settings#datadog_metrics`
+
+2. Check Enabled under Datadog Metrics to begin configuration
+
+   ![Enable DataDog](images/metrics_datadog1.png){ width=400px }
+
+3. Enter your DataDog API Key
+
+   ![DataDog API Key](images/metrics_datadog2.png){ width=400px }
+
+After saving you can *verify* that metrics are forwarding by going to the DataDog metrics summary.
+
+////
+### Datadog Dashboard Configuration
+
+This section shows you how to set up a Datadog dashboard for CircleCI metrics. We also provide descriptions of the metrics we currently support.
+
+**Note: CircleCI metrics are subject to change. The names of individual metrics may change, as well as their scope and monitoring options. Any changes will take place along with our usual release cycle and will be flagged up in our Changelog**
+
+\newpage
+
+#### The dashboard
+
+Below is an image of our Datadog dashboard showing graphs for Make Workflow, Run queue, Time to complete Workflow, Count of Workflows completed by Status, and Build Service Latency.
+
+![DataDog Dashboard](images/datadog-0.png)
+
+#### JSON dashboard creation
+
+The following JSON is for the dashboard shown above. You can use this to build the dashboard for your CircleCI Server installation:
+
+\pagebreak
+
+\tiny
+
+```
+{
+   "notify_list":null,
+   "description":"created by support@circleci.com",
+   "template_variables":[
+
+   ],
+   "is_read_only":false,
+   "id":"b44-4vy-w6r",
+   "title":"Critical Path: Jobs",
+   "url":"/dashboard/b44-4vy-w6r/critical-path-customer-builds",
+   "created_at":"2018-10-25T07:28:08.108516+00:00",
+   "modified_at":"2019-03-19T08:54:28.109067+00:00",
+   "author_handle":"paulrobinson@circleci.com",
+   "widgets":[
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:workflows_conductor.messaging.make_workflow.time_since_push.avg{*}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"warm",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               },
+               {
+                  "q":"max:workflows_conductor.messaging.make_workflow.time_since_push.median{*}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"cool",
+                     "line_type":"solid"
+                  },
+                  "display_type":"area"
+               }
+            ],
+            "type":"timeseries",
+            "title":"Make Workflow: Time since push (mean/median) (ms)"
+         },
+         "id":380774989
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:workflows_conductor.messaging.make_workflow.time_since_push.95percentile{*}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "type":"timeseries",
+            "title":"Make Workflow: Time since push (95th percentile - ms)"
+         },
+         "id":395803486
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"avg:circle.run_queue.latency.avg{platform:picard}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "type":"timeseries",
+            "title":"Run queue: Time to job started (avg) ms"
+         },
+         "id":381397080
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:workflows_conductor.execute_workflow.time_to_complete.avg{*} by {status}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"area"
+               },
+               {
+                  "q":"max:workflows_conductor.execute_workflow.time_to_complete.median{*} by {status}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "yaxis":{
+               "include_zero":false
+            },
+            "type":"timeseries",
+            "title":"Time to complete workflow Mean/Median in ms (Success/Failure/Error)"
+         },
+         "id":395476806
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:workflows_conductor.execute_workflow.time_to_complete.95percentile{*} by {status}",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "yaxis":{
+               "include_zero":false
+            },
+            "type":"timeseries",
+            "title":"Time to complete workflow 95th percentile ms (Success/Failure/Error)"
+         },
+         "id":395804031
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:workflows_conductor.execute_workflow.time_to_complete.count{*} by {status}.as_count()",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "type":"timeseries",
+            "title":"Count of workflows completed by Status"
+         },
+         "id":393871870
+      },
+      {
+         "definition":{
+            "requests":[
+               {
+                  "q":"max:builds_service.service.process_build.max{*}.rollup(max)",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               },
+               {
+                  "q":"avg:builds_service.service.process_build.median{*}.rollup(avg)",
+                  "style":{
+                     "line_width":"normal",
+                     "palette":"dog_classic",
+                     "line_type":"solid"
+                  },
+                  "display_type":"line"
+               }
+            ],
+            "type":"timeseries",
+            "title":"Build Service Latency (time to process a build)"
+         },
+         "id":3833057922780384
+      }
+   ],
+   "layout_type":"ordered"
+}
+```
+
+\normalsize
+
+#### The Metrics
+
+Following are descriptions of the specific metrics related to workflows, followed by dashboard screengrabs with those metrics highlighted:
+
+`workflows_conductor.messaging.make_workflow.time_since_push.avg` (gauge)
+
+* Average time from a trigger (GitHub hook) entering CircleCI and the workflow being created, shown in milliseconds.
+
+<!--- `workflows_conductor.execute_workflow.time_to_complete.median` (gauge): Median time to execute a workflow, shown in milliseconds.--->
+
+<!--`workflows_conductor.execute_workflow.time_to_complete.avg` (gauge)
+
+* Average time to execute a workflow, shown in milliseconds.
+
+![workflows_conductor.messaging.make_workflow.time_since_push.avg (gauge) Average time to make a workflow](images/datadog-1.png)
+
+<!---![workflows_conductor.execute_workflow.time_to_complete.median (gauge): Median time to execute a workflow, shown in milliseconds](images/datadog-2.png)--->
+
+<!---[workflows_conductor.messaging.make_workflow.time_since_push.median (gauge): Median time to make a workflow, shown as millisecond](images/datadog-3.png)--->
+
+<!--![workflows_conductor.execute_workflow.time_to_complete.avg (gauge): Average time to execute a workflow](images/datadog-4.png)
+
+\pagebreak
+
+## Monitoring Tasks
+
+The following section describes actions to take when a threshold is exceeded for a monitored metric, for the Workflows, API-service, Nomad, or VM service.
+
+### Workflows
+
+#### Workflow message timing outliers
+
+`workflows_conductor.engine_handler.messages.timing.95percentile`
+
+**Notes/Actions**: This metric is a good indicator that work is proceeding in a timely manner. If timing threshold is exceeded, complete the following steps:
+
+1. Check `workflows-conductor` logs. If logging isn't happening, restart.
+2. Check for exceptions from the workflows-conductor containers.
+
+#### Number of messages received
+
+`workflows_conductor.engine_handler.messages.timing.count`
+
+**Notes/Actions**: This metric is a good indicator that work is flowing through the system. If message count drops to zero, complete the following steps:
+
+1. Restart the `workflows-conductor` container
+2. Check `workflows-conductor` logs. If logging isn't happening, restart
+3. Check Github webhooks are being recieved to trigger jobs
+4. Check for exceptions from `workflows-conductor` or `frontend` containers
+
+#### Average time taken for Workflows to complete
+
+`workflows_conductor.execute_workflow.time_to_complete.avg`
+
+**Notes/Actions**: Some variation here is expected due to fluctuations in job and usage queue times. If threshold is exceeded, complete the following steps:
+
+1. Check `workflows-conductor` logs. If logging isn't happening, restart.
+2. Check `domain-service` logs. If logging isn't happening, restart.
+3. Check `contexts-service` logs. If logging isn't happening, restart.
+4. Check `permissions-service` logs. If logging isn't happening, restart.
+5. Check for exceptions from `workflows-conductor`, `domain-service`, `contexts-service` and `permissions-service` containers.
+
+<!--- `workflows_conductor.execute_workflow.time_to_complete.median`
+Indicates TBD, if threshold is exceeded, complete the following steps:
+1. TBD
+2. TBD
+3. TBD--->
+
+<!--#### Workflows conductor memory used
+
+`jvm.memory.total.used`
+
+**Tag filter**: `service:workflows-conductor`
+
+**Notes/Actions**: Indicates the amount of memory used by the Workflows Conductor service. If threshold is exceeded restart the `workflows-conductor`
+
+\pagebreak
+
+### API-service
+
+The following metrics can be inspected to get diagnostic information on how the API service is running.
+
+#### Average API response time
+
+`backplane.ring.http_request.avg`
+
+**Tag filter**: `service:api-service`
+
+**Notes/ Actions**: Indicates the average response time from the API is increasing.
+
+#### Number of API requests
+
+`backplane.ring.http_request.count`
+
+**Tag filter**: `service:api-service`
+
+**Notes/Actions**: Indicates a high number of API requests.
+
+#### Maximum time to return an API response
+
+`backplane.ring.http_request.max`
+
+**Tag filter**: `service:api-service`
+
+#### Slow API response speed
+
+`backplane.ring.http_request.95percentile`
+
+**Tag filter**: `service:api-service`
+
+#### Number of active threads in the JVM
+
+`jvm.thread.count`
+
+**Tag filter**: `service:api-service`
+
+**Notes/Actions**: If this count goes above 1000, set `DOMAIN_SERVICE_REFRESH_USERS` environment variable to `false`.
+
+#### GraphQL Resolver
+
+`circleci.api_service.graphql.resolver.avg`
+
+**Tag filter**: `service:api-service`
+
+**Notes/Actions**: This metric can be split up using `type` tags to determine downstream service issues. If the threshold is exceeded across types, complete the following steps:
+
+1. Take a thread dump of the api-service
+2. Restart
+3. Supply the thread dump with any tickets
+
+If the slowdown is only for a subset of types, then inspect metrics for the corresponding service.
+
+### Nomad
+
+#### Average latency of builds in queue
+
+`circle.run_queue.latency.avg`
+
+**Notes/Actions**: Captures backup between CircleCI and Nomad. If threshold is exceeded, add additional capacity to Nomad or your VM pool.
+
+## Monitor Settings
+
+This section describes threshold settings for the Nomad, Domain, Workflows and VM Service to monitor common failure conditions and checks or corrective actions for each condition.
+
+### Nomad
+
+#### More than 10 recent jobs failed on {host}
+
+`sum(last_10m):sum:build_agent.infra_failed{env:prod} by {host}.as_count() > 10`
+
+**Notes/Actions**: This may indicate a bad host.
+
+#### A number of builds are queued due to Nomad capacity
+
+```
+min(last_10m):avg:circle.run_queue.latency.avg /
+{env:production,platform:picard} > 65000
+```
+
+**Notes/Actions**: Scale up the number of Nomad clients.
+
+### Domain Service
+
+#### Error rate increased
+
+\footnotesize
+
+```
+avg(last_5m):default(sum:circle.domain_service.users.id.get.status{!status:200,!status:202}.as_count(), 0) /
+default(sum:circle.domain_service.users.id.get.status{*}.as_count(), 0) >= 0.5
+```
+\normalsize
+
+**Notes/Actions**: This might indicate problems with GitHub, check for exceptions in `domain-service` logs.
+
+### Permissions Service
+
+#### Error rate increased
+
+\footnotesize
+
+```
+avg(last_5m):( default(sum:circle.permissions_service.permissions.get.status{status:500}.as_count(), 0)
++ default(sum:circle.permissions_service.permissions.get.status{status:502}.as_count(), 0)
++ default(sum:circle.permissions_service.permissions.get.status{status:503}.as_count(), 0)
++ default(sum:circle.permissions_service.permissions.get.status{status:504}.as_count(), 0) ) /
+( default(sum:circle.permissions_service.permissions.get.status{status:200}.as_count(), 0)
++ default(sum:circle.permissions_service.permissions.get.status{status:202}.as_count(), 0) ) >= 0.2
+```
+
+\normalsize
+
+**Notes/Actions**: This might indicate problems with `domain-service`, check for exceptions in `permissions-service` and `domain-service` logs.
+
+### Workflows
+
+#### gRPC error rate is elevated
+
+```
+avg(last_10m):sum:grpc_response.count /
+{service:workflows-conductor,!status:ok}.as_count() /
+sum:grpc_response.count{service:workflows-conductor}.as_count() > 0.2
+```
+
+**Notes/Actions**: Check for exceptions from `workflows-conductor`, `domain-service`, `contexts-service` and `permissions-service`.
+
+#### No scheduled workflows have run in the last 5 minutes
+
+```
+sum(last_5m):sum:workflows_conductor.trigger.decision /
+{decision:success}.as_count() < 1
+```
+
+**Notes/Actions**: Perform the following corrective actions:
+
+1. Check `cron-service` logs. If logging isn't happening, restart.
+2. Check for exceptions from `cron-service` and `workflows-conductor`.
+
+### VM Service
+
+#### VM service is responding with 5x errors
+\footnotesize
+
+```
+sum(last_1m):sum:circle.vm_service.vms.get.status /
+{status:500}.as_count() + /
+sum:circle.vm_service.vms.get.status{status:503}.as_count() + /
+sum:circle.vm_service.vms.get.status{status:504}.as_count() + /
+sum:circle.vm_service.vms.post.status{status:500}.as_count() + /
+sum:circle.vm_service.vms.post.status{status:504}.as_count() + /
+sum:circle.vm_service.vms.delete.status{status:500}.as_count() + /
+sum:circle.vm_service.vms.delete.status{status:503}.as_count() + /
+sum:circle.vm_service.vms.delete.status{status:504}.as_count() > 3
+```
+\normalsize
+
+**Notes/Actions**: Check VM service metrics to identify root cause.
+
+#### Multiple VM service provisioning errors
+
+```
+sum(last_10m):sum:build_agent.machine.created.count /
+{result:error} by {resource_class_id}.as_count() > 50
+```
+
+**Notes/Actions**: This may be indicative of an issue like rate-limiting.
+
+#### VM machine provisioning taking too long
+\footnotesize
+
+```
+avg(last_5m):avg:build_agent.machine.created.avg /
+{result:succeeded,resource_class_id:l1.medium, /
+!docker_layer_caching:true} > 180000
+```
+
+\normalsize
+
+**Notes/Actions**: Check VM service metrics to look for potential problems (this monitor could also be related to disk IOPS contention).-->
+////
+== Custom Metrics
+
+Custom Metrics using a Telegraf configuration file may be configured in addition to the predefined CloudWatch and Datadog metrics described above. Telegraph can also be used instead of CloudWatch and Datadog for more fine grained control.
+
+image::metrics-custom.png[Custom]
+
+=== Configuring Custom Metrics
+
+Configuration options are based on Telegraf's documented output plugins. See their documentation https://github.com/influxdata/telegraf/tree/release-1.10#output-plugins[here].
+
+For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps:
+
+1. SSH into the Servics Machine
+2. cd `/etc/circleconfig/telegraf/influxdb.conf`
+3. Adding the desired outputs, for example:
++
+[source,yaml]
+----
+[[output.influxdb]]
+  url = "http://52.67.66.155:8086"
+  database = "testdb"
+----
+4. Run `docker restart telegraf` to restart the container to load or reload any changes.
+
+You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs.
+
+Additionally, if you would like to ensure that all metrics in an installation are tagged against an environment you could place the following code in your config:
+
+```
+[global_tags]
+Env="<staging-circleci>"
+```
+
+Please see the InfluxDB [documentation](https://github.com/influxdata/influxdb#installation) for default and advanced installation steps.
+
+Note: Any changes to the config will require a restart of the system. <!--what system? the whole CircleCI system? incurring downtime?-->>
+
+\label{sec:scaling}
+
+## Scheduled Scaling
+
+By default, an Auto Scaling Group (ASG) is created on your AWS account for your Nomad cluster. Go to your EC2 Dashboard and select Auto Scaling Groups from the left side menu. Then, in the Instances tab, set the Desired and Minimum number to define the number Nomad Clients to spin up and keep available. Use the Scaling Policy tab of the Auto Scaling page to scale up your group automatically only at certain times, see below for best practices for defining policies.
+
+Refer to our guide to \hyperref[sec:shut-down-nomad]{shutting down a nomad client} for instructions on draining and scaling down the Nomad Clients.
+
+### Auto Scaling Policy Best Practices
+
+There is a [blog post series](https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/) wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
+
+1. In general, size your cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
+
+2. Create an Auto Scaling Group with a Step Scaling policy that scales up during the normal working hours of the majority of developers and scales back down at night. Scaling up during the weekday normal working hours and back down at night is the best practice to keep queue times down during peak development, without over provisioning at night when traffic is low. Looking at millions of builds over time, a bell curve during normal working hour emerges for most data sets.
+
+This is in contrast to auto scaling throughout the day based on traffic fluctuations, because modelling revealed that boot times are actually too long to prevent queuing in real time. Use [Amazon's Step Policy](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scaling-simple-step.html) instructions to set this up along with Cloudwatch Alarms.

@@ -7,6 +7,9 @@ This section provides conceptual and procedural information for operating, backi
 
 CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 
+.Nomad Cluster Management
+image::nomad_cluster_mgmnt.png[Nomad Cluster]
+
 == Basic Terminology and Architecture
 
 - **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
@@ -94,14 +97,13 @@ Refer to the <<Scaling>> section of the Configuration chapter for details about 
 
 When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
 
-* To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
-
+1. To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
++
 [source,shell]
 ----
 nomad node-drain -self -enable
 ----
-
-* Then, make sure the client is in drain mode using the `node-status` command:
+2. Then, make sure the client is in drain mode using the `node-status` command:
 
 [source,shell]
 ----

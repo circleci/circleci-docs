@@ -12,3 +12,5 @@ v2.17.2, July 2nd, 2019
 
 include::jekyll/_cci2/overview.adoc[]
 include::jekyll/_cci2/nomad.adoc[]
+include::jekyll/_cci2/monitoring.adoc[]
+include::jekyll/_cci2/proxy.adoc[]
