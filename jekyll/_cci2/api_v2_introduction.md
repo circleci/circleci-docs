@@ -102,6 +102,12 @@ Endpoint       | Description
 `DELETE /project/:vcs-type/:username/:project/build-cache` | This endpoint enabled users to clear the project cache for a specific project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
 
+## API v1.1 Support and EOL
+
+With the release of API v2, there will be two different versions of the CircleCi API that you can use. Although CircleCI recommends you use API v2, you may still use API v1.1 if you wish; however, please note that API v2 includes several powerful features (e.g. pipeline support) that are unavailable in API v1.1.
+
+For a short period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated 
+
 ## See Also
 {:.no_toc}
 
