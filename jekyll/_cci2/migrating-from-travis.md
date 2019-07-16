@@ -36,7 +36,7 @@ root of your repository.
 | Travis CI         | Circle CI                   | Description                                                                                       |
 |-------------------|-----------------------------|---------------------------------------------------------------------------------------------------|
 | language:         | [docker.image](https://circleci.com/docs/2.0/configuration-reference/#docker)                | Use the Docker executor to specify an appropriate Docker image for the target language            |
-| dist:             | [docker, machine, macos](https://circleci.com/docs/2.0/executor-types/)      | If your build must run in a fully virtualized environment, or on a macOS builder                  |
+| dist:             | [docker, machine, windows, macos](https://circleci.com/docs/2.0/executor-types/)      | If your build must run in a fully virtualized environment, or on a macOS or Windows builder                  |
 | cache components: | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
 | before_cache      | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
 | before_install:   | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify pre install commands                                                 |

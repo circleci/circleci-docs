@@ -8,7 +8,7 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This document describes the `docker`, `machine`, and `macos` environments in the following sections:
+This document describes the `docker`, `machine`, `windows` and `macos` environments in the following sections:
 
 * TOC
 {:toc}
@@ -22,6 +22,7 @@ in one of three environments:
 - Within Docker images (`docker`)
 - Within a Linux virtual machine (VM) image (`machine`)
 - Within a macOS VM image (`macos`)
+- Within a windows VM image (`windows`)
 
 For building on Linux,
 there are tradeoffs to using `docker` versus `machine`, as follows:
@@ -162,6 +163,24 @@ jobs:
       # Commands will execute in macOS container
       # with Xcode 9.0 installed
       - run: xcodebuild -version
+```
+
+## Using Windows
+
+Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is on our [Performance Plan](https://circleci.com/pricing/usage/). The following is an example configuration that will run a simple windows job.
+
+```yaml
+version: 2.1
+
+orbs:
+  win: sandbox/windows-tools@dev:preview
+
+jobs:
+  build:
+    executor: win/preview-default
+    steps:
+      - checkout
+      - run: echo 'Hello, Windows'
 ```
 
 ## Using Multiple Docker Images

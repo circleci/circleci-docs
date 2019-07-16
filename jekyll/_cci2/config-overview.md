@@ -7,7 +7,7 @@ categories: [configuration]
 order: 2
 ---
 CircleCI [configuration syntax]({{ site.baseurl }}/2.0/configuration-reference/) is structured [YAML]({{ site.baseurl }}/2.0/writing-yaml/) and starts with the version, a named job, and
-an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either `docker`, `machine`, or `macos`. CircleCI provides prebuilt Docker images for your convenience as described in the following video.
+an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either `docker`, `machine`, `windows` or `macos`. CircleCI provides prebuilt Docker images for your convenience as described in the following video.
 
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
