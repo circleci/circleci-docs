@@ -1,16 +1,18 @@
-= CircleCI Server Documentation
+# CircleCI Server Documentation
 
 Server documentation is written in ASCIIDOC and built for the web and PDF using ASCIIDOCTOR + Jekyll and PDF plugins.
 
-== Document Structure
+## Document Structure
 Server documentation is provided in two formats - html on the main CircleCI docs site generated with Jekyll, showing the current docs, and also PDFs of our Operations and Installation guides are provided for each feature release.
 
 Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are maste `.adoc` files for the ops guide (`ops-guide.adoc`) and the installation guide (`install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` 
 
-== Some notes about formatting
+## Some notes about formatting
 
-=== Using code blocks in numbered steps
-In order to keep numbered steps flowing correctly when code blocks are used inside steps, use the `+` on the line before the block starts to indicate the block is part of the step above.
+### Using code blocks in numbered steps
+In order to keep numbered steps flowing correctly when code blocks are used inside steps, use the `+` on the line before the block starts to indicate the block is part of the step above:
+
+```
 1. Step one
 2. Step two involves some code
 +
@@ -19,10 +21,12 @@ In order to keep numbered steps flowing correctly when code blocks are used insi
 some code
 ----
 3. Step three is still in number order
+```
 
-=== Style tables correctly for the Jekyll site
+### Style tables correctly for the Jekyll site
 In order to make tables display correctly in the web version of Server docs, assign them with the `.table` and `.table-striped` classes:
 
+```
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -38,3 +42,4 @@ In order to make tables display correctly in the web version of Server docs, ass
 |column 2 row 2
 |column 3 row 2
 |===
+```
