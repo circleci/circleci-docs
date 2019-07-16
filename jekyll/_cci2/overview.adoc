@@ -1,10 +1,14 @@
 = Overview
 :page-layout: classic-docs
 :icons: font
+:toc: macro
+:toc-title:
 
 CircleCI Server is a modern continuous integration and continuous delivery (CI/CD) platform installable inside your private cloud or data center. Refer to the https://circleci.com/server/changelog[Changelog] for what's new in this CircleCI Server release.
 
 NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
+
+toc::[]
 
 .CircleCI Services Architecture
 image::cci-arch.png[CircleCI Services Architecture]
@@ -81,6 +85,7 @@ NOTE: The maximum machine size for a Nomad client is 128GB RAM/ 64 CPUs, contact
 
 The following table describes the ports used on Nomad clients:
 
+[.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 |Source
@@ -113,6 +118,7 @@ CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, 
 
 NOTE: CircleCI does not support changing the URL or backend Github instance after it has been set up. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client instances.
 
+[.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 |Source

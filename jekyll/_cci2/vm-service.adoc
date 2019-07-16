@@ -1,0 +1,116 @@
+= VM Service
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+This section outlines how to set up VM service for your CircleCI installation for `machine` executor and remote Docker jobs, as well as how to customize your own VM service images.
+
+NOTE: This configuration is only available for installations on AWS, please contact your CircleCI account representative to request this configuration for a static installation.
+
+toc::[]
+
+== Overview
+
+VM service enables users of CircleCI Server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
+
+=== Configuration
+
+image::vm-service.png[Configuring VM Service on CircleCI Server]
+
+To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings, which will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
+
+If you do not provide a custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMI) for VM service, `machine` executor and remote Docker jobs on CircleCI Server will run using the same machine image that we provide by default on Cloud: an Ubuntu 14.04 or 16.04 image with Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details.
+
+=== Customization
+
+It may be beneficial to customize the VM service image for your installation of CircleCI. This will allow you to specify other versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. Without doing so, you will likely need to run these additional install and update steps on every commit as part of your `config.yml` file.
+
+To build custom VM service images:
+
+1. Clone our image builder repo: https://github.com/circleci/image-builder/tree/picard-vm-image
+2. Open `aws-vm.json` in your editor and fill in the required groups. An access key and secret key are required to upload. Handle the key and secret process according to your requirements, but consider restricting the `ami_groups` to only within your organization
+3. Run `packer build aws-vm.json`
+
+Refer to https://packer.io/docs/builders/amazon-ebs.html#ami_groups for more information
+and see https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh for details about settings.
+
+You will need to associate the `circleci` user with the image you want to use as shown in https://github.com/circleci/image-builder/blob/picard-vm-image/aws_user_data[this] example.
+
+The following sections summarize the key files and variables that impact CircleCI Server behavior.
+
+==== Notable Files & Folders
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Need
+| Path
+| More info
+
+| General Config
+| `/etc/circle-installation-customizations`
+| See table below for values
+
+| JVM Heap Sizes
+| `/etc/circleconfig/XXXX/customizations`  Supports: frontend, test_results
+| Adjust heap size for individual containers with `JVM_HEAP_SIZE`
+
+| Custom CA Certs
+| `/usr/local/share/ca-certificates/`
+|
+
+| Container Customizations
+| `/etc/circleconfig/XXX/customizations`
+| Used lots of places in replicated
+
+| `/etc/hosts`
+| `/etc/hosts`
+| Respected by several containers including frontend, copied to container's /etc/hosts
+
+| `/etc/environment`
+| `/etc/environment`
+| Respected by all containers
+|===
+
+==== Properties of `/etc/circle-installation-customizations`
+
+NOTE: Every property should be in the format `export ENV_VAR="value"`
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Property
+| Impact
+| More info
+
+| CIRCLE_URL
+| Override the scheme and host that CircleCI uses
+|
+
+| JVM_HEAP_SIZE
+| Set JVM heap size for *all* containers reading this property
+| Use container specific settings when possible (see files above)
+|===
+
+==== Other Properties and Env Vars
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Property
+| Impact
+| More info
+
+| HTTP_PROXY, NO_PROXY
+| Proxy for replicated and other services outside CircleCI containers to use
+|
+|===
+
+=== Job and Instance Management
+
+Jobs run using the remote Docker environment, or the `machine` executor are scheduled and dispatched by Nomad, even though the jobs are not run on Nomad clients. See our <<nomad#,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
+
+// add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
+
+NOTE: A cron job in scheduled to cycle all default and preallocated instanced at least once per day to ensure instanced don't end up in a dead/bad state.

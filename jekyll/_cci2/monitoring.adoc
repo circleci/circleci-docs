@@ -1,15 +1,20 @@
 = Monitoring Your Installation
 :page-layout: classic-docs
 :icons: font
+:toc: macro
+:toc-title:
 
-This section includes information for System Administrators on the following:
+This section includes information on gathering metrics for monitoring your CircleCI installation and scaling your Nomad cluster to meet your needs.
 
-* Scaling your cluster
-* Gathering metrics for monitoring your CircleCI installation
+toc::[]
 
 == System Monitoring
 
-To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice. To get straight to this section use the following URL, substituting in your CircleCI URL: `https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics`.
+To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice. To get straight to this section use the following URL, substituting in your CircleCI URL:
+
+----
+https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics
+----
 
 // insert screenshot of management console>settings
 
