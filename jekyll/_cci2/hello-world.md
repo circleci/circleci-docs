@@ -51,7 +51,7 @@ jobs:
 
 CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
 
-**Note**: For `macos` and `windows` executors, some setup is different. Please refer to our [Hello World on Windows]({{site.baseurl/2.0/hello-world-windows}}) and [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) documents for more information.
+**Note**: For `macos` and `windows` executors, some setup is different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) and [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) documents for more information.
 
 Commit and push the changes to trigger a build. If this is your first project on
 CircleCI, go to the Projects page, click the **Add Projects** button, then click
