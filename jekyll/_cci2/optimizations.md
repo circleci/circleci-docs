@@ -19,7 +19,7 @@ application, go to `Settings > Plan Settings` to make adjustments to your plan.
 
 ## Caching Dependencies
 
-Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it's likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
+Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
 {% raw %}
 
