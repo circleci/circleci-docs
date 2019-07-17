@@ -162,6 +162,5 @@ Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-cachin
 ## See Also
 {:.no_toc}
 
-For a complete list of customizations that can be made your build, consider
-reading our [configuration reference]({{ site.baseurl
-}}/2.0/configuration-reference/).
+- For a complete list of customizations that can be made your build, consider reading our [configuration reference]({{ site.baseurl}}/2.0/configuration-reference/).
+- Coinbase published an article titled [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161)
