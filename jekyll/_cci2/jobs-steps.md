@@ -45,7 +45,7 @@ orbs:
 workflows:
   build-test-deploy:
     jobs:
-      - deploy2s3:
+      - deploy2s3: # a sample job that would be defined above.
           steps:
             - aws-s3/sync: #invokes the sync command declared in the s3 orb
                 from: .
