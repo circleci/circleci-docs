@@ -1172,6 +1172,8 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              only: /v.*/
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
