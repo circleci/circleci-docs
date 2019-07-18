@@ -183,6 +183,10 @@ jobs:
       - run: echo 'Hello, Windows'
 ```
 
+We recommend using the [windows-tools](https://circleci.com/orbs/registry/orb/circleci/windows-tools) for setting  the executor and shell in your build.
+
+Building on Windows is not available on installed versions of CircleCI.
+
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
