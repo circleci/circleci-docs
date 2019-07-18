@@ -2,13 +2,26 @@
 layout: classic-docs
 title: "Authoring an Orb - Setting Up the CircleCI CLI"
 short-title: "Setting up the CLI"
-description: "Setting Up the CircleCI Cli for Orb Authors"
+description: "Setting Up the CircleCI ClI for Orb Authors"
 categories: [getting-started]
 order: 1
 ---
 
 * TOC 
 {:toc}
+
+## Introduction to the CircleCI CLI
+
+The CircleCI CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run circleci help. Refer to Using the CircleCI CLI for details. Listed below are some of the most pertinent commands for creating, validating, and publishing orbs:
+
+- circleci namespace create <name> <vcs-type> <org-name> [flags]
+- circleci orb create <namespace>/<orb> [flags]
+- circleci orb validate <path> [flags]
+- circleci orb publish <path> <namespace>/<orb>@<version> [flags]
+- circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]
+- circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]
+
+For a full list of help commands inside the CircleCI CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
 ## Authoring an Orb - CircleCI CLI
 
