@@ -35,7 +35,7 @@ A reusable command may have the following immediate children keys as a map:
 
 ### The `commands` Key** 
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -198,11 +198,11 @@ Executors define the environment in which the steps of a job will be run, allowi
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
+docker | Y <sup>(1)</sup> | List | Options for `docker` executor.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
+machine | Y <sup>(1)</sup> | Map | Options for `machine` executor.
+macos | Y <sup>(1)</sup> | Map | Options for `macOS` executor.
+shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step.
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
