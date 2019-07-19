@@ -15,9 +15,9 @@ Platform Guide | Description
 <a href="{{ site.baseurl }}/2.0/language-android/">Android Project Tutorial</a> | Full example of setting up an Android project in CircleCI 2.0.
 {: class="table table-striped"}
 
-## Sample Apps with Companion Guides
+## Sample Projects with Companion Guides
 
-Refer to the Sample Apps to get help with building the language and framework in which your application is written.
+Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
 Language in which your App is written | Framework | GitHub Repo Name
  ---------|-----------|-----------------
