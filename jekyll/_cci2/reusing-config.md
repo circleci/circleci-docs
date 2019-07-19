@@ -15,7 +15,7 @@ This document describes how to version your [.circleci/config.yml]({{ site.baseu
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png)
+1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png) If this radio button is not available, your project is already using pipelines.
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 
@@ -32,6 +32,17 @@ A reusable command may have the following immediate children keys as a map:
 - **Description:** (optional) A string that describes the purpose of the command, used for generating documentation.
 - **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
 - **Steps:** (required) A sequence of steps run inside the calling job of the command.
+
+### The `commands` Key** 
+
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section for details.
+description | N | String | A string that describes the purpose of the command.
+{: class="table table-striped"}
 
 Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
 
@@ -75,15 +86,15 @@ Commands can use other commands in the scope of execution.
 
 For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 
-## Built-In Commands
+## Special Keys
 
-CircleCI has several built-in commands available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of built-in commands are:
+CircleCI has several special keys available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of these keys are:
 
   * `checkout`
   * `setup_remote_docker`
   * `persist_to_workspace`
 
-**Note:** It is possible to override the built-in commands with a custom command.
+**Note:** It is possible to override the special keys with a custom command.
 
 ## Examples
 
@@ -180,6 +191,37 @@ jobs:
 ```
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
+
+## **`executors`** 
+
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+
+Key | Required | Type | Description
+----|-----------|------|------------
+docker | Y <sup>(1)</sup> | List | Options for `docker` executor.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+machine | Y <sup>(1)</sup> | Map | Options for `machine` executor.
+macos | Y <sup>(1)</sup> | Map | Options for `macOS` executor.
+shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step.
+working_directory | N | String | In which directory to run the steps.
+environment | N | Map | A map of environment variable names and values.
+{: class="table table-striped"}
+
+Example:
+
+```yaml
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
 
 ## Invoking Reusable Executors
 {:.no_toc}
@@ -575,7 +617,9 @@ steps:
 
 #### Environment Variable Name
 
-The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
+The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (for example there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables additional checks to be performed, see [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) for details.
+
+The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a re-usable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a re-usable command that uses the needed authentication, but deploys to a custom bucket.
 
 {% raw %}
 ```yaml
@@ -597,7 +641,7 @@ workflows:
   version: 2
 ```
 
-Original config.yml file:
+Original `config.yml` file:
 
 ```yaml
 version: 2.1
@@ -901,6 +945,45 @@ workflows:
 **Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters as above. Also, `when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
+
+##### **The `when` Step** 
+
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. 
+
+Key | Required | Type | Description
+----|-----------|------|------------
+condition | Y | String | A parameter value
+steps |	Y |	Sequence |	A list of steps to execute when the condition is true
+{: class="table table-striped"}
+
+###### *Example*
+
+```
+version: 2.1
+
+jobs: # conditional steps may also be defined in `commands:`
+  job_with_optional_custom_checkout:
+    parameters:
+      custom_checkout:
+        type: string
+        default: ""
+    machine: true
+    steps:
+      - when:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - run: echo "my custom checkout"
+      - unless:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - checkout
+workflows:
+  build-test-deploy:
+    jobs:
+      - job_with_optional_custom_checkout:
+          custom_checkout: "any non-empty string is truthy"
+      - job_with_optional_custom_checkout
+```
 
 ## See Also
 - Refer to [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) for detailed information about how you can work with your CircleCI configuration.
