@@ -18,7 +18,11 @@ If you are using one of the other language images such as `circleci/python` or `
 These would be the `-node` and `-node-browsers` image variants.
 For example, using the Docker image `circleci/python:3-node` will give you a Python build environment with Yarn and NodeJS installed.
 
-If you're using your own Docker image base or the `macos` or `machine` executors, you can install Yarn by following the official instructions from [Yarn Docs](https://yarnpkg.com/lang/en/docs/install/).
+If you're using your own Docker image base or the `macos` or `machine` executors, you can install Yarn by following the official instructions from [Yarn Docs](https://yarnpkg.com/lang/en/docs/install/). The Yarn Docs provide several installation methods depending on what machine execturo you might be using. For example, you can install on a unix-like environment using the following script.
+
+```sh
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
 
 ## Caching
 
