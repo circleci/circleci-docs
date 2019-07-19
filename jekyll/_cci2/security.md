@@ -58,7 +58,7 @@ A few different external services and technology integration points touch Circle
 ```
 [
   {
-    "comment": "CIRCLE-16825 Allow create user namespaces",
+    "comment": "Allow create user namespaces",
     "names": [
       "clone",
       "setns",
