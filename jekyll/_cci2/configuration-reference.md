@@ -846,9 +846,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload and store test results for a build. Test results
-are visible on the CircleCI web application, under each build's "Test Summary"
-section. Storing test results is useful for timing analysis of your test suites. 
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites. 
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
