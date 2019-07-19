@@ -113,7 +113,9 @@ jobs:
       image: ubuntu-1604:201903-01    # pins image to specific version
 ```
 
-The default image for the machine executor is `circleci/classic:latest`.
+The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
+
+
 You can specify other images
 by using the `image` key.
 
