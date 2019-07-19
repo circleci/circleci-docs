@@ -826,7 +826,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 ##### **`store_artifacts`**
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the   [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -846,7 +846,11 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
+Special step used to upload and store test results for a build. Test results
+are visible on the CircleCI web application, under each build's "Test Summary"
+section. Storing test results is useful for timing analysis of your test suites. 
+
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
