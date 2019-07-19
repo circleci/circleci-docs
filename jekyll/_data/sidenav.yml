@@ -269,13 +269,19 @@ en:
           link: 2.0/aws/
         - name: Authentication
           link: 2.0/authentication/
+        - name: User Account Management
+          link: 2.0/user-accounts/
         - name: Monitoring
           link: 2.0/monitoring/
         - name: Configuring JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
         - name: Nomad
           link: 2.0/nomad/
-        - name: Backup
+        - name: Build Artifacts
+          link: 2.0/build-artifacts/
+        - name: Usage statistics
+          link: 2.0/usage-stats/
+        - name: Backup and Recovery
           link: 2.0/backup/
         - name: Troubleshooting
           link: 2.0/troubleshooting/

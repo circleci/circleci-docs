@@ -1,5 +1,6 @@
 = Setting Up HTTP Proxies
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:

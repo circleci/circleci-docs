@@ -1,10 +1,24 @@
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
 This section provides conceptual and procedural information for operating, backing up, monitoring, and configuring a CircleCI server installation.
+
+[source,go]
+----
+// You can edit this code!
+// Click here and start typing.
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("Hello, 世界")
+}
+----
 
 toc::[]
 
@@ -106,7 +120,7 @@ When you want to shutdown a Nomad client, you must first set the client to `drai
 nomad node-drain -self -enable
 ----
 2. Then, make sure the client is in drain mode using the `node-status` command:
-
++
 [source,shell]
 ----
 nomad node-status -self

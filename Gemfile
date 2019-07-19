@@ -7,6 +7,7 @@ gem 'html-proofer'
 gem "rack", ">= 2.0.6"
 gem 'asciidoctor'
 gem 'asciidoctor-pdf'
+gem 'pygments.rb', '~> 1.1.2'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'

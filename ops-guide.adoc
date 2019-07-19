@@ -4,7 +4,7 @@ v2.17.2, July 2nd, 2019
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: jekyll/assets/img/docs/
 :doctype: book
-:toc: macro
+:toc: 
 :icons: font
 :source-highlighter: rouge
 :relfileprefix: jekyll/_cci2/
@@ -17,3 +17,9 @@ include::jekyll/_cci2/proxy.adoc[]
 include::jekyll/_cci2/authentication.adoc[]
 include::jekyll/_cci2/vm-service.adoc[]
 include::jekyll/_cci2/certificates.adoc[]
+include::jekyll/_cci2/user-accounts.adoc[]
+include::jekyll/_cci2/build-artifacts.adoc[]
+include::jekyll/_cci2/usage-stats.adoc[]
+include::jekyll/_cci2/backup.adoc[]
+include::jekyll/_cci2/security.adoc[]
+include::jekyll/_cci2/troubleshooting.adoc[]

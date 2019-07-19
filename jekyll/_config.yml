@@ -41,13 +41,16 @@ kramdown:
 liquid:
   error_mode: strict
 
-asciidoc: {}
+asciidoc:
+  attributes:
+      source-highlighter: rouge
 
 asciidoctor:
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
+
 
 collections:
   # this is named with an underscore because it needs to be processed

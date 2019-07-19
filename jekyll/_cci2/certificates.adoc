@@ -1,5 +1,6 @@
 = Setting Up Certificates
 :page-layout: classic-docs
+:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
@@ -155,7 +156,7 @@ This section describes setting up TLS/HTTPS on your Server install using Certbot
 2. SSH into the Services machine.
 
 3. Install Certbot and generate certificates using the following commands:
-
++
 [source,shell]
 ----
 sudo apt-get update
@@ -190,4 +191,4 @@ More information is available https://letsencrypt.readthedocs.io/en/latest/using
 
 Ensure the hostname is properly configured from the Management Console (`http://<circleci-hostname>.com:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
-Make sure the Auth Callback URL in Github/Github Enterprise matches the domain name pointing to the Services machine, including the protocol used, for example **https**://info-tech.io/.
+Make sure the Auth Callback URL in Github/Github Enterprise matches the domain name pointing to the Services machine, including the protocol used, for example `**https**://info-tech.io/`.
