@@ -27,9 +27,9 @@ For a full list of help commands inside the CircleCI CLI, visit the [CircleCI CL
 
 As an orb author, one of the first steps you will need to take when creating a new orb is to install and configure the CircleCI CLI. Using the CircleCI CLI and its associated commands simplifies the orb authoring process so you can quickly and easily create new orbs. To set up the CircleCI CLI so you can author an orb, perform the following steps:
 
-- Install the CLI
-- Update the CLI
-- Configure the CLI
+1) Install the CLI
+2) Update the CLI
+3) Configure the CLI
 
 ### Install the CLI for the First Time
 
@@ -57,19 +57,16 @@ You may also use Snapcraft to install the CLI by running the following command:
 
 If you have used a previous version of the CircleCI and are currently running a version older than 0.1.6, run the following commands to update your CLI version to the latest version.
 
-```
-circleci update
-circleci switch
-```
+
+`circleci update`
+`circleci switch`
 
 **Note**: If you do not already have write permissions, make sure to use the `sudo` command. This installs the CLI to the `/usr/local/bin` directory.
 
 The CircleCI comes with a built-in version management system. After you have installed the CLI, check if there are any updates to the CLI that need to be installed by running the following commands:
 
-```
-circleci update check
-circleci update install
-```
+`circleci update check`
+`circleci update install`
 
 ### Configure the CircleCI CLI
 
