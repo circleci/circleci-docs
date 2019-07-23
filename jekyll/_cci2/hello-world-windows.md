@@ -42,14 +42,15 @@ The following code snippet is an absolute minimum to get started with Windows on
 version: 2.1
 
 orbs:
-  win: sandbox/windows-tools@dev:preview
+  win: circleci/windows-tools@0.0.4
 
 jobs:
   build:
     executor: win/preview-default
     steps:
       - checkout
-      - run: echo 'Hello, Windows'
+      - run: Write-Host 'Hello, Windows'
+
 ```
 
 # Example Application
@@ -66,7 +67,7 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: sandbox/windows-tools@dev:preview
+  win: circleci/windows-tools@0.0.4
 ```
 
 Next, we declare orbs that we will be using in our build. We will only use the [windows-tools orb](https://circleci.com/orbs/registry/orb/circleci/windows-tools) to help us get started.
@@ -79,14 +80,17 @@ jobs:
       shell: powershell.exe
 ```
 
-Under the `jobs` key, we set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration.
+Under the `jobs` key, we set the executor via the orb we are using. We can also declare the default shell to be applied across future steps in the configuration. The default shell is `Powershell.exe`
 
 ```yaml
     steps:
       - checkout
       - run:
-          name: "Install dotnet core" # https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script
-          command: .circleci/dotnet-install.ps1 -InstallDir C:\cli
+          name: "Install dotnet core"
+          command: |
+            choco install dotnetcore-sdk
+            refreshenv
+            dotnet.exe --info
 ```
 
 In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system. Next, we install .NET core via a powershell script included in the [.circleci folder](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/dotnet-install.ps1). As the comment in our config makes note, we have gotten the powershell script to install .NET core from Microsoft’s .NET documentation. While we could pull the script dynamically and run it using curl or powershell, we have vendored it into the project to have one less dependency in the tutorial.
@@ -96,7 +100,7 @@ In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-r
           keys:
       - run:
           name: "Install project dependencies"
-          command: C:\cli\dotnet.exe restore
+          command: dotnet.exe restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
@@ -107,7 +111,7 @@ Next in the config, we make use of caching to restore cached dependencies from p
 ```yaml
       - run:
           name: "Run Build step"
-          command: C:\cli\dotnet.exe publish -c Release -r win10-x64
+          command: dotnet.exe publish -c Release -r win10-x64
       - run:
           name: "Test the executable"
           command: .\bin\Release\netcoreapp2.1\win10-x64\publish\circleci-demo-windows.exe
