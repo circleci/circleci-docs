@@ -136,8 +136,6 @@ Examples of orb version declarations and their meaning:
 
 There are two main types of orbs that you can use in your workflows: Development & Production. Depending on your workflow needs, you may choose to use either of these orbs. The sections below describe the differences between these two types of orbs so you can make a more informed decision of how best to utilize these orb types in your workflows.
 
-### Development Orbs
-
 While all production orbs can be published securely by organization owners, development orbs provide non-owner members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable and expire after 90 days, so they are ideal for rapid iteration of an idea.
 
 A development version should be referenced by its complete, fully-qualified name, such as: mynamespace/myorb@dev:mybranch.; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
