@@ -139,8 +139,6 @@ Runtime testing involves running active builds with orbs. Because the jobs in a 
 
 One approach is to run jobs within your build's jobs by using the circleci CLI to run local builds using `circleci local execute` on a machine executor within your builds. This allows you to print the build output to `stdout` so you can make assertions about it. This approach can be limiting, however, because local builds do not support workflows and have other caveats. This is also powerful if you need to test the actual running output of a build using your orb elements. 
 
-For an example of using this technique see the [Artifactory Orb](https://github.com/CircleCI-Public/artifactory-orb) page in the CircleCI public GitHub page.
-
 The other main approach to runtime testing is to make the orb entities available to your job's configuration directly.
 
 One option is to make checks using post-steps for jobs that you run and test, or subsequent steps for commands that you run and test. These can check things like filesystem state, but cannot make assertions about the output of the jobs and commands 
@@ -163,15 +161,13 @@ Sometimes you will want to test how your orbs interact with external services. T
 
 The most significant issue when testing orbs is that it is not straightforward to push a new commit to a repository containing orb source code. This is because orbs are interpolated into an expanded `config.yml` at build inception and may not have the newest changes to the orb contained in that commit.
 
-There are several different approaches you can use to test your orbs (for example, using inline orbs or external repositories) to ensure orb compatibility with the CircleCI platform. CircleCI is also in the process of developing newer ways for you to test your orbs. For more detailed information about these testing examples, refer to the [Emerging Testing Best Practices for Orbs](https://discuss.circleci.com/t/emerging-testing-best-practices-for-orbs/27474) page in the CircleCI Discussion Forum.
+There are several different approaches you can use to test your orbs (for example, using inline orbs or external repositories) to ensure orb compatibility with the CircleCI platform. CircleCI is also in the process of developing newer ways for you to test your orbs.
 
 ## Orb Testing Methodologies
 
 ### Testing Orbs Locally
 
 One of the easiest ways to test your orbs locally is to create an inline orb. Creating an inline orb enables you to test your orb while in active development. Inline orbs can be useful when developing your orb, or as a convenience for name-spacing jobs and commands in lengthy configurations.
-
-For more detailed information on how to create an inline orb, refer to the [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/#creating-inline-orbs) page in the CircleCI technical documentation.
 
 ### Testing Orbs Automatically
 
