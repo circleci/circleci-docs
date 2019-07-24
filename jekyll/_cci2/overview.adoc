@@ -5,14 +5,14 @@
 :toc: macro
 :toc-title:
 
-CircleCI Server is a modern continuous integration and continuous delivery (CI/CD) platform installable inside your private cloud or data center. Refer to the https://circleci.com/server/changelog[Changelog] for what's new in this CircleCI Server release.
-
 NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
+
+CircleCI Server is a modern continuous integration and continuous delivery (CI/CD) platform installable inside your private cloud or data center. Refer to the https://circleci.com/server/changelog[Changelog] for what's new in this CircleCI Server release.
 
 toc::[]
 
 .CircleCI Services Architecture
-image::cci-arch.png[CircleCI Services Architecture]
+image::cci-arch.png[Services Architecture]
 
 == Build Environments
 
@@ -75,10 +75,10 @@ DNS resolution may point to the IP address of the Services machine. It is also p
 |Incoming Webhooks
 |===
 
-==== Nomad Clients
+=== Nomad Clients
 Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
 
-To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of Nomad Client machines as needed to balance the load. For more on tracking metrics see <<System Monitoring>>.
+To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of Nomad Client machines as needed to balance the load. For more on tracking metrics see <<monitoring#,Monitoring Your Installation>>.
 
 Each machine reserves two vCPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination.
 
@@ -114,7 +114,7 @@ The following table describes the ports used on Nomad clients:
 |Internal Comms
 |===
 
-==== GitHub
+=== GitHub
 CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, in turn, may use LDAP, SAML, or SSH for access. This means CircleCI will inherit the authentication supported by your central SSO infrastructure.
 
 NOTE: CircleCI does not support changing the URL or backend Github instance after it has been set up. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client instances.

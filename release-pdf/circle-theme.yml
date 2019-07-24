@@ -199,7 +199,7 @@ example:
   padding: [$vertical_rhythm, $horizontal_rhythm, 0, $horizontal_rhythm]
 image:
   align: center
-  width: 100%
+  width: 90%
 prose:
   margin_top: $block_margin_top
   margin_bottom: $block_margin_bottom
@@ -243,7 +243,7 @@ table:
   border_width: $base_border_width
   cell_padding: 3
 toc:
-  h1-font-size: $base_font_size * 1.5
+  h1-font-size: $base_font_size * 1.3
   h1-font-style: bold
   indent: $horizontal_rhythm
   line_height: 1.4

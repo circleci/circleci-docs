@@ -1,0 +1,93 @@
+= Installation Prerequisites
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+We use Terraform to automate parts of the infrastructure for your CircleCI Server install, so you will need to install this first:
+
+* Visit https://www.terraform.io/downloads.html[Download Terraform] and choose the correct package for your architecture.
+
+Ensure you have the following information available before beginning the installation procedure:
+
+* A CircleCI License file (`.rli`). Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license and request a cluster-enabled license to run jobs on dedicated instances for best performance.
+* Your AWS Access Key ID and Secret Access Key.
+* Name of your https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[AWS EC2 key pair].
+* https://docs.aws.amazon.com/general/latest/gr/rande.html[AWS Region], for example `us-west-2`.
+* AWS Virtual Private Cloud (VPC) ID and AWS Subnet ID. If your account is configured to use a default VPC, your default VPC ID is listed under Account Attributes, which you will find from the AWS management console on the EC2 dashboard page.
+* Set your VPC (`enableDnsSupport`) setting to `true` to ensure that queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC IPv4 network range plus two will succeed. See the https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating[Using DNS with Your VPC] Amazon Web Services documentation for additional details.
+
+== Private Subnet Requirements
+
+The following additional settings are required to support using private subnets on AWS with CircleCI:
+
+- The private subnet for builder boxes must be configured with a https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html[NAT gateway] or an https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html[internet gateway] configured for the outbound traffic to the internet via attached route tables.
++
+NOTE: The subnet should be large enough to *never* exhaust the addresses.
+
+- The https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/[VPC Endpoint for S3] should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
+- Adequately power the NAT instance for heavy network operations.  Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources.  A NAT that is inadequate could cause slowness in network and cache operations.
+- If you are integrating with https://github.com[github.com], ensure that your network access control list (ACL) whitelists ports 80 and 443 for GitHub webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
+- See the <<overview#services-machine,Services Machine>> section of our overview for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
+
+// Check whether the ACL needs to be more open so the services/build can download build images
+
+== Planning
+Have available the following information and policies before starting the installation:
+
+* If you use network proxies, contact your Account team before beginning your install.
+* Plan to provision at least two AWS instances, one for Services and one for your first set of Nomad Clients. Best practice is to use an `m4.2xlarge` instance with 8 vCPUs and 32GB RAM for both the Services and Nomad Clients instances.
+* AWS instances must have outbound access to pull Docker containers and to verify your license. If you don't want to give open outbound access, head https://help.replicated.com/community/t/customer-firewalls/55[here] for a list of ports that need whitelisting.
+* In order to provision required AWS entities with Terraform you need an IAM User with following permissions (for guidance on creating IAM users in your AWS account, head https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[here]):
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::circleci-*",
+                "arn:aws:s3:::circleci-*/*",
+                "arn:aws:s3:::*"
+            ]
+        },
+        {
+            "Action": [
+                "autoscaling:*",
+                "sqs:*",
+                "iam:*",
+                "ec2:StartInstances",
+                "ec2:RunInstances",
+                "ec2:TerminateInstances",
+                "ec2:Describe*",
+                "ec2:CreateTags",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkAcls",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "cloudwatch:*",
+                "autoscaling:DescribeAutoScalingGroups",
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+```

@@ -247,26 +247,36 @@ en:
 - name: Administration
   icon: docs/admin.svg
   children:
-    - name: CircleCI Server
+    - name: Server Install and Upgrade
       children:
-        - name: Overview
-          link: 2.0/overview/
-        - name: Trial
+        - name: Trial Single-box Install
           link: 2.0/single-box/
-        - name: Faq
-          link: 2.0/admin-faq/
+        - name: Overview
+          link: 2.0/install-overview/
+        - name: System Requirements
+          link: 2.0/server-ports/
+        - name: Prerequisites and Planning
+          link: 2.0/aws-prereq/
+        - name: Installation
+          link: 2.0/aws/
+        - name: System Requirements
+          link: 2.0/server-ports/
         - name: Upgrade
           link: 2.0/upgrading/
         - name: Updating Replicated
           link: 2.0/updating-server-replicated-version/
+    - name: Server Operations
+      children:
+        - name: Overview
+          link: 2.0/overview/
+        - name: Faq
+          link: 2.0/admin-faq/
         - name: Security
           link: 2.0/security/
         - name: Certificates
           link: 2.0/certificates/
         - name: Proxies
           link: 2.0/proxy/
-        - name: Installation
-          link: 2.0/aws/
         - name: Authentication
           link: 2.0/authentication/
         - name: User Account Management

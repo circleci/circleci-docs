@@ -1,0 +1,219 @@
+= Frequently Asked Questions
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This chapter answers frequently asked questions and provides installation troubleshooting tips.
+
+toc::[]
+
+=== Can I move or change my GitHub Enterprise URL without downtime?
+
+No, because of the nature of CircleCI integration with GitHub authentication, you should not change the domain of your GHE instance after CircleCI is in production. Redeploying GitHub without will result in a corrupted CircleCI instance. Contact support if you plan to move your GitHub instance.
+
+=== Can I monitor available build containers?
+
+Yes, refer to the <<nomad#,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+
+=== How do I provision admin users?
+
+The first user who logs in to the CircleCI application will automatically be designated an admin user. Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
+
+=== How can I gracefully shutdown Nomad Clients?
+
+Refer to the Introduction to Nomad Cluster Operation chapter for details.
+
+=== Why is Test GitHub Authentication failing?
+
+This means that the GitHub Enterprise server is not returning the intermediate SSL certificates. Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
+
+In some cases authentication fails when returning to the configuration page after it was successfully set up once. This is because the secret is encrypted, so when returning checking it will fail.
+
+=== How can I use HTTPS to access CircleCI?
+
+While CircleCI creates a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
+
+=== Why doesn't terraform destroy every resource?
+
+CircleCI sets the services box to have termination protection in AWS and also writes to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
+
+=== Do the Nomad Clients store any state?
+
+They can be torn down without worry as they don't persist any data.
+
+=== How do I verify TLS settings are failing?
+
+Make sure that your keys are in unencrypted PEM format, and that the certificate includes the entire chain of trust as follows:
+
+```yaml
+-----BEGIN CERTIFICATE-----
+your_domain_name.crt
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+intermediate 1
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+intermediate 2
+-----END CERTIFICATE-----
+...
+```
+
+=== How do I debug the Management Console (Replicated)?
+
+The CircleCI management console is powered by Replicated. If you are experiencing any issues with the Management Console, here are a few ways to debug it:
+
+==== 1. Check you have Replicated installed
+
+First, make sure you have the CLI tool for Replicated installed by running the following:
+
+```shell
+replicated -version
+```
+
+==== 2. Restart Replicated and the CircleCI app
+
+Try restarting Replicated services. You can do this by running the following commands on the service box, for Ubuntu 14.04:
+
+```shell
+sudo service replicated-ui restart
+sudo service replicated restart
+sudo service replicated-operator restart
+```
+
+For Ubuntu 16.04, run the following commands:
+
+```shell
+sudo systemctl restart replicated-ui
+sudo systemctl restart replicated
+sudo systemctl restart replicated-operator
+```
+
+Then try restarting the CircleCi app: go to your services box admin (for example, `https://<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
+
+// add screenshot showing StopNow and StartNow -->
+
+==== 3. Try to log into Replicated
+
+Try logging in to Replicated. You can do this by running the following command on the service box. You will be asked to enter your password - the same one used to unlock the Management Console (i.e. `https://<your-circleci-hostname>.com:8800`).
+
+```shell
+replicated login
+```
+
+If you could login, then run the following command and send the output to us at support@circleci.com so we can help diagnose what is causing the problem you are experiencing.
+
+```shell
+sudo replicated apps
+```
+
+If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
+
+==== 4. Check Replicated logs
+
+You can find Replicated logs on the Services machine under `/var/log/replicated`.
+
+==== 5. Check what Docker containers are currently running
+
+Replicated starts many Docker containers to run CircleCI Server, so it can be useful to check what containers are running.
+
+To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
+
+```shell
+$ sudo docker ps
+CONTAINER ID        IMAGE                                                                 COMMAND                  CREATED             STATUS              PORTS                                                                                                                                                    NAMES
+eb2970306859        172.31.72.162:9874/circleci-api-service:0.1.6910-8b54ef9              "circleci-service-run"   26 hours
+ago        Up 26 hours         0.0.0.0:32872->80/tcp, 0.0.0.0:32871->443/tcp, 0.0.0.0:8082->3000/tcp,
+0.0.0.0:32870->6010/tcp, 0.0.0.0:32869->8585/tcp                                  api-service
+
+01d26714f5f5        172.31.72.162:9874/circleci-workflows-conductor:0.1.38931-1a904bc8    "/service/docker-ent…"   26 hours
+ago        Up 26 hours         0.0.0.0:9998->9998/tcp, 0.0.0.0:32868->80/tcp, 0.0.0.0:32867->443/tcp,
+0.0.0.0:9999->3000/tcp, 0.0.0.0:32866->8585/tcp                                   workflows-conductor
+
+0cc6e4248cfb        172.31.72.162:9874/circleci-permissions-service:0.1.1195-b617002      "/service/docker-ent…"   26 hours
+ago        Up 26 hours         0.0.0.0:3013->3000/tcp
+permissions-service
+
+9e6efc98b7d6        172.31.72.162:9874/circleci-cron-service:0.1.680-1fcd8d2              "circleci-service-run"   26 hours
+ago        Up 26 hours         0.0.0.0:4261->4261/tcp                                                                                                                                   cron-service
+8c40bd1cecf6        172.31.72.162:9874/circleci-federations-service:0.1.1134-72edcbc      "/service/docker-ent…"   26 hours
+ago        Up 26 hours         0.0.0.0:3145->3145/tcp, 0.0.0.0:8010->8010/tcp, 0.0.0.0:8090->8090/tcp                                                                                   federations-service
+71c71941684f        172.31.72.162:9874/circleci-contexts-service:0.1.6073-5275cd5         "./docker-entrypoint…"   26 hours
+ago        Up 26 hours         0.0.0.0:2718->2718/tcp, 0.0.0.0:3011->3011/tcp, 0.0.0.0:8091->8091/tcp                                                                                   contexts-service
+71ffeb230a90        172.31.72.162:9874/circleci-domain-service:0.1.4040-eb63b67           "/service/docker-ent…"   26 hours
+ago        Up 26 hours         0.0.0.0:3014->3000/tcp                                                                                                                                   domain-service
+eb22d3c10dd8        172.31.72.162:9874/circleci-audit-log-service:0.1.587-fa47042         "circleci-service-run"   26 hours
+ago        Up 26 hours                                                                                                                                                                  audit-log-service
+243d9082e35c        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours
+ago        Up 26 hours         0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:4434->4434/tcp                                                                                         frontend
+af34ca3346a7        172.31.72.162:9874/circleci-picard-dispatcher:0.1.10401-aa50e85       "circleci-service-run"   26 hours
+ago        Up 26 hours                                                                                                                                                                  picard-dispatcher
+fb0ee1b02d48        172.31.72.162:9874/circleci-vm-service:0.1.1370-ad05648               "vm-service-service-…"   26 hours ago        Up 26 hours         0.0.0.0:3001->3000/tcp                                                                                                                                   vm-service
+3708dc80c63e        172.31.72.162:9874/circleci-vm-scaler:0.1.1370-ad05648                "/scaler-entrypoint.…"   26 hours
+ago        Up 26 hours         0.0.0.0:32865->5432/tcp                                                                                                                                  vm-scaler
+77bc9d0b4ac9        172.31.72.162:9874/circleci-vm-gc:0.1.1370-ad05648                    "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         0.0.0.0:32864->5432/tcp                                                                                                                                  vm-gc
+4b02f202a05d        172.31.72.162:9874/circleci-output-processing:0.1.10386-741e1d1       "output-processor-se…"   26 hours
+ago        Up 26 hours         0.0.0.0:8585->8585/tcp, 0.0.0.0:32863->80/tcp, 0.0.0.0:32862->443/tcp                                                                                    picard-output-processor
+b8f982d32989        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours ago        Up 26 hours         0.0.0.0:32861->80/tcp, 0.0.0.0:32860->443/tcp, 0.0.0.0:32859->4434/tcp                                                                                   dispatcher
+601c363a0c38        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours
+ago        Up 26 hours         0.0.0.0:32858->80/tcp, 0.0.0.0:32857->443/tcp, 0.0.0.0:32856->4434/tcp                                                                                   legacy-notifier
+f2190c5f3aa9        172.31.72.162:9874/mongo:3.6.6-jessie                                 "/entrypoint.sh"         26 hours
+ago        Up 26 hours         0.0.0.0:27017->27017/tcp                                                                                                                                 mongo
+3cbbd959f42e        172.31.72.162:9874/telegraf:1.6.4                                     "/telegraf-entrypoin…"   26 hours
+ago        Up 26 hours         0.0.0.0:8125->8125/udp, 0.0.0.0:32771->8092/udp, 0.0.0.0:32855->8094/tcp                                                                                 telegraf
+15b090e8cc02        172.31.72.162:9874/circleci-schedulerer:0.1.10388-741e1d1             "circleci-service-run"   26 hours
+ago        Up 26 hours                                                                                                                                                                  picard-scheduler
+fb967bd3bca0        172.31.72.162:9874/circleci-server-nomad:0.5.6-5.1                    "/nomad-entrypoint.sh"   26 hours
+ago        Up 26 hours         0.0.0.0:4646-4648->4646-4648/tcp                                                                                                                         nomad
+7e0743ee2bfc        172.31.72.162:9874/circleci-test-results:0.1.1136-b4d94f6             "circleci-service-run"   26 hours
+ago        Up 26 hours         0.0.0.0:2719->2719/tcp, 0.0.0.0:3012->3012/tcp                                                                                                           test-results
+0a95802c87dc        172.31.72.162:9874/circleci-slanger:0.4.117-42f7e6c                   "/docker-entrypoint.…"   26 hours
+ago        Up 26 hours         0.0.0.0:4567->4567/tcp, 0.0.0.0:8081->8080/tcp                                                                                                           slanger
+ca445870a057        172.31.72.162:9874/circleci-postgres-script-enhance:0.1.9-38edabf     "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         0.0.0.0:5432->5432/tcp                                                                                                                                   postgres
+a563a228a93a        172.31.72.162:9874/circleci-server-ready-agent:0.1.105-0193c73        "/server-ready-agent"    26 hours
+ago        Up 26 hours         0.0.0.0:8099->8000/tcp                                                                                                                                   ready-agent
+d6f9aaae5cf2        172.31.72.162:9874/circleci-server-usage-stats:0.1.122-70f28aa        "bash -c /src/entryp…"   26 hours
+ago        Up 26 hours                                                                                                                                                                  usage-stats
+086a53d9a1a5        registry.replicated.com/library/statsd-graphite:0.3.7                 "/usr/bin/supervisor…"   26 hours
+ago        Up 26 hours         0.0.0.0:32851->2443/tcp, 0.0.0.0:32770->8125/udp                                                                                                         replicated-statsd
+cc5e062844be        172.31.72.162:9874/circleci-shutdown-hook-poller:0.1.32-9c553b4       "/usr/local/bin/pyth…"   26 hours
+ago        Up 26 hours                                                                                                                                                                  musing_volhard
+9609f04c2203        172.31.72.162:9874/circleci-rabbitmq-delayed:3.6.6-management-12      "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:32850->4369/tcp, 0.0.0.0:32849->5671/tcp, 0.0.0.0:32848->15671/tcp, 0.0.0.0:32847->25672/tcp   rabbitmq
+2bc0cfe43639        172.31.72.162:9874/tutum-logrotate:latest                             "crond -f"               26 hours
+ago        Up 26 hours                                                                                                                                                                  hardcore_cray
+79aa857e23b4        172.31.72.162:9874/circleci-vault-cci:0.3.8-e2823f6                   "./docker-entrypoint…"   26 hours
+ago        Up 26 hours         0.0.0.0:8200-8201->8200-8201/tcp                                                                                                                         vault-cci
+b3e317c9d62f        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         0.0.0.0:6379->6379/tcp                                                                                                                                   redis
+f2d3f77891f0        172.31.72.162:9874/circleci-nomad-metrics:0.1.90-1448fa7              "/usr/local/bin/dock…"   26 hours
+ago        Up 26 hours                                                                                                                                                                  nomad-metrics
+1947a7038f24        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         0.0.0.0:32846->6379/tcp                                                                                                                                  slanger-redis
+3899237a5782        172.31.72.162:9874/circleci-exim:0.2.54-697cd08                       "/docker-entrypoint.…"   26 hours
+ago        Up 26 hours         0.0.0.0:2525->25/tcp                                                                                                                                     exim
+97ebdb831a7e        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…"   26 hours
+ago        Up 26 hours         3000/tcp                                                                                                                                                 retraced-processor
+a0b806f3fad2        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…"   26 hours
+ago        Up 26 hours         172.17.0.1:32771->3000/tcp                                                                                                                               retraced-api
+19dec5045f6e        registry.replicated.com/library/retraced:1.2.2                        "/bin/sh -c '/usr/lo…"   26 hours
+ago        Up 26 hours         3000/tcp                                                                                                                                                 retraced-cron
+7b83a3a193da        registry.replicated.com/library/retraced-postgres:10.5-20181009       "docker-entrypoint.s…"   26 hours
+ago        Up 26 hours         5432/tcp                                                                                                                                                 retraced-postgres
+029e8f454890        registry.replicated.com/library/retraced-nsq:v1.0.0-compat-20180619   "/bin/sh -c nsqd"        26 hours
+ago        Up 26 hours         4150-4151/tcp, 4160-4161/tcp, 4170-4171/tcp                                                                                                              retraced-nsqd
+500619f53e80        quay.io/replicated/replicated-operator:current                        "/usr/bin/replicated…"   26 hours
+ago        Up 26 hours                                                                                                                                                                  replicated-operator
+e1c752b4bd6c        quay.io/replicated/replicated:current                                 "entrypoint.sh -d"       26 hours
+ago        Up 26 hours         0.0.0.0:9874-9879->9874-9879/tcp                                                                                                                         replicated
+1668846c1c7a        quay.io/replicated/replicated-ui:current                              "/usr/bin/replicated…"   26 hours
+ago        Up 26 hours         0.0.0.0:8800->8800/tcp                                                                                                                                   replicated-ui
+f958cf3e8762        registry.replicated.com/library/premkit:1.2.0                         "/usr/bin/premkit da…"   3 weeks
+ago         Up 26 hours         80/tcp, 443/tcp, 2080/tcp, 0.0.0.0:9880->2443/tcp                                                                                                        replicated-premkit
+
+```
+
+Providing support@circleci.com with the output of `sudo docker ps` from the Services machine will help us diagnose the cause of your problem.

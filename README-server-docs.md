@@ -5,7 +5,7 @@ Server documentation is written in ASCIIDOC and built for the web and PDF using 
 ## Document Structure
 Server documentation is provided in two formats - html on the main CircleCI docs site generated with Jekyll, showing the current docs, and also PDFs of our Operations and Installation guides are provided for each feature release.
 
-Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are maste `.adoc` files for the ops guide (`ops-guide.adoc`) and the installation guide (`install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` 
+Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are maste `.adoc` files for the ops guide (`ops-guide.adoc`) and the installation guide (`install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]`
 
 ## Some notes about formatting
 
@@ -43,3 +43,6 @@ In order to make tables display correctly in the web version of Server docs, ass
 |column 3 row 2
 |===
 ```
+
+### Xrefs
+Cross references should be made in the form: `<<overview#services-machine,Services Machine>>` where `overview` is the name of the file the destination is in, `services-machine` is the anchor heading and `Services Machine` is what to display in the prose.
