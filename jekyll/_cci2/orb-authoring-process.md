@@ -9,7 +9,7 @@ order: 1
 
 ## Introduction
 
-Once you have configured your platform to work with CircleCI orbs, you are ready to begin authoring your own orb. CircleCI has attempted to make this process simple and easy, eliminating any potential confusion by enabling you to use inline templates and other pre-configured templates to quickly author a new orb. The sections below describe the process of writing your own orb.
+Once you have configured your platform to work with CircleCI orbs, you are ready to begin authoring your own orb. CircleCI has attempted to make this process simple and easy, eliminating any potential confusion by enabling you to use inline templates and other pre-configured templates to quickly author a new orb. The sections below describe the process of authoring your own orb.
 
 ## Orbs Quickstart
 
@@ -38,7 +38,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 `circleci orb create sandbox/hello-world`
 
-3. Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in /tmp/orb.yml could be made with a bare-bones orb like:
+3. Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
@@ -46,15 +46,15 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 `circleci orb validate /tmp/orb.yml`
 
-5. Publish a dev version of your orb. Assuming the above orb that would look like:
+5. Publish a dev version of your orb. Assuming the above orb, it would look like this:
 
 `circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
-6. Once you are ready to push your orb to production, you can publish it manually using circleci orb publish or promote it directly from the dev version. In the case of the above, assuming you wanted to increment the new dev version to become 0.0.1 you can use:
+6. Once you are ready to push your orb to production, you can publish it manually using `circleci orb publish` or promote it directly from the dev version. In the case where you want to publish the orb, assuming you wanted to increment the new dev version to become 0.0.1, you can use:
 
 `circleci orb publish promote sandbox/hello-world@dev:first patch`
 
-7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can pull the source of your orb using:
+7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can then pull the source of your orb using:
 
 `circleci orb source sandbox/hello-world@0.0.1`
 
@@ -73,7 +73,7 @@ Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details an
 
 When developing your own orb, you may find it useful to write an inline orb. The section below describes how you can write your own inline orb.
 
-## Creating Inline Orbs
+### Writing Inline Orbs
 
 Inline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.
 
