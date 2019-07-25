@@ -28,6 +28,8 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 - Has `Git`, `Chocolatey` and `7zip` pre-installed.
 - Powershell is the default shell (Bash and Command are available to be manually selected).
 
+The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching).
+
 # Example configuration file
 
 The following code snippet is an absolute minimum to get started with Windows on CircleCI:
