@@ -7,7 +7,7 @@ categories: [language-guides]
 order: 4
 ---
 
-This guide will help you get started with a Java application on CircleCI. 
+This guide will help you get started with a Java application building with Gradle on CircleCI. 
 
 * TOC
 {:toc}
