@@ -21,18 +21,12 @@ To follow along with this document you will need:
 
 # Overview of the Windows executor
 
-The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) The Windows executor uses the Server Core version of Windows Server 2019 DataCenter Edition.
+The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor: 
 
-A windows executor will have 4 vCPUs and 15GB of ram.
-
-On the Windows executor, _Git_, the package manager _Chocolatey_, and _7zip_ will be installed. Powershell is the default shell (Bash and Command are available to be manually selected). Other dependencies may be installed later on.
-
-**Limitations**
-
-As the Windows executor is still in a preview phase, there is some functionality that is not yet supported. Currently Windows on CircleCi does not support the following CircleCI features:
-
-*   [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
-*   Docker support
+- Uses the Server Core version of Windows Server 2019 DataCenter Edition (`windows-server-2019`.)
+- Has 4 vCPUS and 15 GB of ram.
+- Has `Git`, `Chocolatey` and `7zip` pre-installed.
+- Powershell is the default shell (Bash and Command are available to be manually selected).
 
 # Example configuration file
 
