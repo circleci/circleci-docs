@@ -8,11 +8,7 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-<<<<<<< HEAD
-This document describes the available executor types (`docker`, `machine`, and `macos`) in the following sections:
-=======
 This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
->>>>>>> 506dc2cce8463ff35011cceb44663bff42900196
 
 * TOC
 {:toc}
