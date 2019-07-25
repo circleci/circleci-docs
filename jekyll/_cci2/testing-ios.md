@@ -39,12 +39,6 @@ The currently available Xcode versions are:
 * `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
 
-## Deprecated versions — these will be removed in the next days
-
-* `10.2.0`: Xcode 10.2 (Build 10E125) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-534/index.html)
-* `9.1.0`: Xcode 9.1.0 (Build 9B55) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
-
-
 ## Getting Started
 
 Select a macOS project you would like to build on the Add
