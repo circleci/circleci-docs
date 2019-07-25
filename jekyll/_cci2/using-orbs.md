@@ -226,7 +226,6 @@ In general, CircleCI prefers to never delete production orbs that were published
 
 If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (Note: If you are deleting because of a security concern, you must practice responsible disclosure using the CircleCI Security web page.
 
-
 ## See Also
 {:.no_toc}
 
