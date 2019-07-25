@@ -31,15 +31,19 @@ The currently available Xcode versions are:
 
 * `11.0.0`: Xcode 11.0 (Beta 3) (Build 11M362v) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-811/index.html)
 * `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
-* `10.2.0`: Xcode 10.2 (Build 10E125) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-534/index.html)
 * `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 * `10.0.0`: Xcode 10.0 (Build 10A255) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 * `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
 * `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
 * `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
-* `9.1.0`: Xcode 9.1.0 (Build 9B55) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
 * `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+
+## Deprecated versions — these will be removed in the next days
+
+* `10.2.0`: Xcode 10.2 (Build 10E125) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-534/index.html)
+* `9.1.0`: Xcode 9.1.0 (Build 9B55) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
+
 
 ## Getting Started
 
