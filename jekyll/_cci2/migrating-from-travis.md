@@ -55,7 +55,7 @@ root of your repository.
 With CircleCI, the context in which your checked out code executes (builds,
 tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
 
-Rather than selecting a language and a distribution to run on, you can select a Docker image, a clean Linux VM, or a clean macOS VM as your execution environment. If you're coming from Travis CI, using a specific Docker image will be the closest means to running a build based on a language. While you can use any custom Docker image, CircleCI maintains several [Docker Images]({{ site.baseurl }}/2.0/circleci-images/) tailored for common `.config` scenarios.
+Rather than selecting a language and distribution to run on, you can select a Docker image, a clean Linux VM, or a clean macOS VM as your execution environment and write arbitrary run commands to install needed dependencies. However, using a specific Docker image (e.g., nodejs) will be the closest means to running a build based on a language. While you can use any custom Docker image, CircleCI maintains several [Docker Images]({{ site.baseurl }}/2.0/circleci-images/) tailored for common `.config` scenarios.
 
 ## Building on Pushing Code
 
