@@ -238,6 +238,12 @@ Not right now. If there are any specific optimizations in mind that would be use
 
 Yes. The win/preview-default executor includes Powershell as the default shell. So in this example, the steps are being run as Powershell commands.
 
+
+### Is Windows available on installed versions of CircleCI?
+{:.no_toc}
+
+Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+
 ## Billing
 
 ### Container Based Plans
