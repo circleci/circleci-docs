@@ -52,7 +52,7 @@ jobs: # a collection of steps
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests in parallel
+          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
@@ -175,7 +175,7 @@ Next we pull down the caches for the Gradle wrapper and dependencies, if present
 ...
     steps:
       - run:
-          name: Run tests in parallel # https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
