@@ -8,7 +8,7 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This document describes the `docker`, `machine`, `windows` and `macos` environments in the following sections:
+This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
 
 * TOC
 {:toc}
@@ -16,16 +16,21 @@ This document describes the `docker`, `machine`, `windows` and `macos` environme
 ## Overview
 {:.no_toc}
 
-CircleCI enables you to run jobs
-in one of three environments:
+An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of three environments:
 
 - Within Docker images (`docker`)
 - Within a Linux virtual machine (VM) image (`machine`)
 - Within a macOS VM image (`macos`)
 - Within a windows VM image (`windows`)
 
-For building on Linux,
-there are tradeoffs to using `docker` versus `machine`, as follows:
+It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
+
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient. 
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
+- Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
+
+For building software on Linux,
+there are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
 
 Virtual Environment | `docker` | `machine`
 ----------|----------|----------
@@ -105,24 +110,19 @@ set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine)
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-1604:201903-01    # pins image to specific version
 ```
 
-The default image for the machine executor is `circleci/classic:latest`.
+The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
+
+
 You can specify other images
 by using the `image` key.
 
 **Note:**
 The `image` key is not supported on private installations of CircleCI.
 See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
-
-```yaml
-version: 2
-jobs:
-  build:
-    machine:
-      image: circleci/classic:2017-01  # pins image to specific version using YYYY-MM format
-```
 
 The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
 
@@ -146,6 +146,7 @@ version: 2
 jobs:
   build:
     machine:
+      image: ubuntu-1604:201903-01
       docker_layer_caching: true    # default - false
 ```
 

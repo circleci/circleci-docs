@@ -330,7 +330,7 @@ Ruby イメージには git がプリインストールされているので、�
     # Postgres 9.5
     RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list \
           && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-          && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F76221572C52609D 749D6EEC0353B12C
+          && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C 
 
     # gem ドキュメントのインストールをスキップします
     RUN mkdir -p /usr/local/etc \
