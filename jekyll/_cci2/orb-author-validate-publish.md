@@ -9,7 +9,7 @@ order: 1
 
 ## Introduction
 
-When you have finished authoring your own orb, you may then validate your orb to ensure it will work in your configuration, and then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the 'orb-tools' orb, with its associated commands, that simplify the validation and publication process. 
+When you have finished authoring your own orb, you may then validate your orb to ensure it will work in your configuration, and then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the `orb-tools` orb, with its associated commands, that simplify the validation and publication process. 
 
 ## orb-tools
 
