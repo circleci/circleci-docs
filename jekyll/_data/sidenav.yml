@@ -71,21 +71,39 @@ en:
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
-    - name: Orbs
+    - name: Orbs Overview
       link: 
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
-        - name: Using Orbs
-          link: 2.0/using-orbs/
-        - name: Reusing Config
-          link: 2.0/reusing-config/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
-        - name: Creating Orbs
-          link: 2.0/creating-orbs/
-        - name: Testing Orbs
+        - name: Orbs Concepts
+          link: 2.0/using-orbs/
+        - name: Orbs Reference
+          link: 2.0/reusing-config/
+        - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
+    - name: Authoring Orbs
+      link:      
+      children:
+        - name: Introduction to Authoring an Orb
+          link: 2.0/orb-author-intro/
+        - name: Set up the CircleCI CLI
+          link: 2.0/orb-author-cli/
+        - name: Author an Orb
+          link: 2.0/orb-author/
+        - name: Test and Publish Your Orb
+          link: 2.0/orb-author-validate-publish/
+    - name: Using Orbs
+      link:      
+      children:
+        - name: Configure Your Platform to Work With Orbs
+          link: 2.0/orb-user-config/
+        - name: Selecting and Using an Orb
+          link: 2.0/orbs-user-select-orb/        
     - name: Examples
       link: 
       children:
