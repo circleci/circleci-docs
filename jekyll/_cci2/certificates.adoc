@@ -21,13 +21,12 @@ CA Certificates must be in a format understood by Java Keystore, and include the
 
 The following script provides the necessary steps:
 
-[source,shell]
-----
+```
 GHE_DOMAIN=github.example.com
 
 # Grab the CA chain from your GitHub Enterprise deployment.
 openssl s_client -connect ${GHE_DOMAIN}:443 -showcerts < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/ghe.crt
-----
+```
 
 Then, navigate to the system console at port 8800 and change the protocol to upgraded. You can change the protocol to HTTPS (TLS/SSLEnabled) setting and restart the services.  When trying Test GitHub Authentication you should get Success now rather than x509 related error.
 
@@ -150,22 +149,20 @@ You may use various solutions to generate valid SSL certificate and key file. Tw
 
 This section describes setting up TLS/HTTPS on your Server install using Certbot by manually adding a DNS record set to the Services machine. Certbot generally relies on verifying the DNS record via either port 80 or 443, however this is not supported on CircleCI Server installations as of 2.2.0 because of port conflicts.
 
+. Stop the Service CircleCI Server Management Console (`http://<circleci-hostname>.com:8800`).
 
-1. Stop the Service CircleCI Server Management Console (`http://<circleci-hostname>.com:8800`).
+. SSH into the Services machine.
 
-2. SSH into the Services machine.
-
-3. Install Certbot and generate certificates using the following commands:
+. Install Certbot and generate certificates using the following commands:
 +
-[source,shell]
-----
+```shell
 sudo apt-get update
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install certbot
 certbot certonly --manual --preferred-challenges dns
-----
+```
 
 4. You will be instructed to add a DNS TXT record.
 

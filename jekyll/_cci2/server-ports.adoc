@@ -261,7 +261,7 @@ Bellow all ports required by a CircleCI 2.0 installation are listed for each mac
 | Metrics
 | Only if using AWS CloudWatch
 |===
-
+<<<
 === Nomad Clients
 
 [.table.table-striped]
@@ -351,7 +351,7 @@ Bellow all ports required by a CircleCI 2.0 installation are listed for each mac
 | DNS resolution
 | This is to make sure that your jobs can resolve all DNS names that are needed for their correct operation.
 |===
-
+<<<
 === GitHub Enterprise / GitHub.com
 
 [.table.table-striped]
@@ -445,7 +445,7 @@ Bellow all ports required by a CircleCI 2.0 installation are listed for each mac
 | MongoDB replication
 | Only if using externalized databases. Port is user-defined, assuming the default MongoDB port.
 |===
-
+<<<
 === RabbitMQ Servers
 
 [.table.table-striped]

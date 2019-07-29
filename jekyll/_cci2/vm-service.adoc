@@ -5,9 +5,9 @@
 :toc: macro
 :toc-title:
 
-This section outlines how to set up VM service for your CircleCI installation for `machine` executor and remote Docker jobs, as well as how to customize your own VM service images.
+This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor and remote Docker jobs.
 
-NOTE: This configuration is only available for installations on AWS, please contact your CircleCI account representative to request this configuration for a static installation.
+NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
 
 toc::[]
 
@@ -15,15 +15,32 @@ toc::[]
 
 VM service enables users of CircleCI Server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
-=== Configuration
+== Configuration
 
 image::vm-service.png[Configuring VM Service on CircleCI Server]
 
 To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings, which will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
 
-If you do not provide a custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMI) for VM service, `machine` executor and remote Docker jobs on CircleCI Server will run using the same machine image that we provide by default on Cloud: an Ubuntu 14.04 or 16.04 image with Docker version `17.03.0-ce` and docker-compose version `1.9.0`, along with a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details.
+You can provide a custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMI) for VM service, as described in the sections below. If you do not provide a custom image, all `machine` executor and remote Docker jobs will be run on instances built with one of our default AMIs, which have Ubuntu 16.04, Docker version 18.06.3 and a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details.
 
-=== Customization
+=== Default VM service AMIs
+
+* Ap-northeast-1:ami-0e49af0659db9fc5d
+* Ap-northeast-2:ami-03e485694bc2da249
+* Ap-south-1:ami-050370e57dfc6574a
+* Ap-southeast-1:ami-0a75ff7b28897268c
+* Ap-southeast-2:ami-072b1b45245549586
+* Ca-central-1:ami-0e44086f0f518ad2d
+* Eu-central-1:ami-09cbcfe446101b4ea
+* Eu-west-1:ami-0d1cbc2cc3075510a
+* Eu-west-2:ami-0bd22dcdc30fa260b
+* Sa-east-1:ami-038596d5a4fc9893b
+* Us-east-1:ami-0843ca047684abe87
+* Us-east-2:ami-03d60a35576647f63
+* Us-west-1:ami-06f6efb13d9ccf93d
+* Us-west-2:ami-0b5b8ad02f405a909
+
+== Customization
 
 It may be beneficial to customize the VM service image for your installation of CircleCI. This will allow you to specify other versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. Without doing so, you will likely need to run these additional install and update steps on every commit as part of your `config.yml` file.
 
@@ -40,7 +57,7 @@ You will need to associate the `circleci` user with the image you want to use as
 
 The following sections summarize the key files and variables that impact CircleCI Server behavior.
 
-==== Notable Files & Folders
+=== Notable Files & Folders
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -108,10 +125,23 @@ NOTE: Every property should be in the format `export ENV_VAR="value"`
 |
 |===
 
-=== Job and Instance Management
+== On Demand and Preallocated Instances
+Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 9).
 
-Jobs run using the remote Docker environment, or the `machine` executor are scheduled and dispatched by Nomad, even though the jobs are not run on Nomad clients. See our <<nomad#,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances must be on-demand so both remote Docker and `machine` preallocated instance fields must be set to `0`.
+
+NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
+
+== Job and Instance Management
+
+Jobs run using the remote Docker Environment, or the `machine` executor are scheduled and dispatched by the Nomad server to your Nomad clients and passed on to remote Docker or `machine` from there. This means jobs run on remote Docker and the `machine` executor can be monitored in the usual way, using the Nomad CLI. See our <<nomad#nomadintro,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 
 NOTE: A cron job in scheduled to cycle all default and preallocated instanced at least once per day to ensure instanced don't end up in a dead/bad state.
+
+== Accessing Remote Docker and `machine` instances
+By default, private IP addresses are used to communicate with VM service instances. If you need to grant wider access, for example, to allow developers SSH access, this can be set using the checkbox in the VM Provider Advanced Settings.
+
+.Allowing Access to VM Service Instances
+image::vmprovider_advanced.png[VM Provider Advanced Settings]

@@ -101,7 +101,7 @@ heading:
   margin_bottom: $vertical_rhythm * 0.9
 title_page:
   background:
-    image:
+    image: pdf-header.png[]
   align: left
   logo:
     align: center
@@ -199,7 +199,7 @@ example:
   padding: [$vertical_rhythm, $horizontal_rhythm, 0, $horizontal_rhythm]
 image:
   align: center
-  width: 80%
+  width: 90%
 prose:
   margin_top: $block_margin_top
   margin_bottom: $block_margin_bottom
@@ -243,11 +243,8 @@ table:
   border_width: $base_border_width
   cell_padding: 3
 toc:
-  h1-font-size: $base_font_size * 1.5
+  h1-font-size: $base_font_size * 1.3
   h1-font-style: bold
-  h2-font-size: $base_font_size * 1.1
-  h2-font-style: bold
-  h3-font-style: bold
   indent: $horizontal_rhythm
   line_height: 1.4
   dot_leader:

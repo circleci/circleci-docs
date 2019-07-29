@@ -17,31 +17,30 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-proxy.html#cli-co
 
 Avoid proxying internal requests, especially for the Services machine. To add these to the `NO_PROXY` rules, run:
 
-[source,shell]
-----
+```shell
 export NO_PROXY=<services_box_ip>
-----
+```
 
 In an ideal case, traffic to S3 will not be proxied, and will instead be bypassed by adding `s3.amazonaws.com,*.s3.amazonaws.com` to the `NO_PROXY` rule.
 
 These instructions assume an unauthenticated HTTP proxy at `10.0.0.33:3128`, a Services machine at `10.0.1.238` and use of `ghe.example.com` as the GitHub Enterprise host.
 
-NOTE: The following proxy instructions must be completed **before** installing CircleCI on fresh VMs or instances. You must also configure JVM OPTs again as well as described below.
+CAUTION: The following proxy instructions must be completed **before** installing CircleCI on fresh VMs or instances. You must also configure JVM OPTs again as described below.
 
 == Service Machine Proxy Configuration
-//I'm confused, the section above says no proxy for the Services machine?
+
 The Service machine has many components that need to make network calls, as follows:
 
 * **External Network Calls** - Replicated is a vendor service that we use for the Management Console of CircleCI. CircleCI requires Replicated to make an outside call to validate the license, check for updates, and download upgrades. Replicated also downloads docker, installs it on the local machine, and uses a Docker container to create and configure S3 buckets. GitHub Enterprise may or may not be behind the proxy, but github.com will need to go through the proxy.
 * **Internal Network Calls**
-  * If S3 traffic requires going through an HTTP proxy, CircleCI must pass proxy settings into the container.
-  * The CircleCI instance on the Services machine runs in a Docker container, so it must to pass the proxy settings to the container to maintain full functionality.
+** If S3 traffic requires going through an HTTP proxy, CircleCI must pass proxy settings into the container.
+** The CircleCI instance on the Services machine runs in a Docker container, so it must to pass the proxy settings to the container to maintain full functionality.
 
 === Set up Service Machine Proxy Support
 
-For a static installation not on AWS, SSH into the Services machine and run the following code snippet with your proxy address:
+For a static installation, not on AWS, SSH into the Services machine and run the following code snippet with your proxy address:
 
-----
+```
 echo '{"HttpProxy": "http://<proxy-ip:port>"}' |
 sudo tee  /etc/replicated.conf
 (cat <<'EOF'
@@ -53,11 +52,11 @@ EOF
  sudo service replicated-ui stop; sudo service replicated stop;
  sudo service replicated-operator stop; sudo service replicated-ui start;
   sudo service replicated-operator start; sudo service replicated start
-----
+```
 
 If you run in Amazon's EC2 service then you'll need to include `169.254.169.254` EC2 services as shown below:
 
-----
+```
 echo '{"HttpProxy": "http://<proxy-ip:port>"}' |
 sudo tee  /etc/replicated.conf
 (cat <<'EOF'
@@ -74,13 +73,15 @@ EOF
  sudo service replicated-ui stop; sudo service replicated stop;
  sudo service replicated-operator stop; sudo service replicated-ui start;
   sudo service replicated-operator start; sudo service replicated start
-----
+```
 
-NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services machine startup or done manually.
+NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
+
+// not quite clear what is meant by this note... what's user data in this context?
 
 === Corporate Proxies
 
-Also note that when the instructions ask you if you use a proxy, they will also prompt you for the address. It is **very important** that you input the proxy in the following format `<protocol>://<ip>:<port>`. If you are missing any part of that, then `apt-get` won't work correctly and the packages won't download.
+WARNING: When our instructions ask if you use a proxy, you will also be prompted to input the address. It is **very important** that you input the proxy in the following format: `<protocol>://<ip>:<port>`. If you miss any part, then `apt-get` won't work correctly and the packages won't download.
 
 === Nomad Client Configuration
 
@@ -91,22 +92,21 @@ CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, a
 ==== Internal Network Calls
 
 * CircleCI JVM:
-  * Any connections to other Nomad Clients or the Services machine should be excluded from HTTP proxy
-  * Connections to GitHub Enterprise should be excluded from HTTP proxy
+** Any connections to other Nomad Clients or the Services machine should be excluded from HTTP proxy
+** Connections to GitHub Enterprise should be excluded from HTTP proxy
 
 * The following contains parts that may be impacted due to a proxy configuration:
-  * http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html[Amazon EC2 metadata]. This **should not** be proxied.  If it is, then the machine will be misconfigured.
-  * Amazon S3 traffic — note S3 discussion above
-  * Amazon EC2 API - EC2 API traffic may need to be proxied.  You would note lots of failures (timeout failures) in logs if the proxy setting is misconfigured, but it will not block CircleCI from functioning.
+** http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html[Amazon EC2 metadata]. This **should not** be proxied.  If it is, then the machine will be misconfigured.
+** Amazon S3 traffic — note S3 discussion above
+** Amazon EC2 API - EC2 API traffic may need to be proxied.  You would note lots of failures (timeout failures) in logs if the proxy setting is misconfigured, but it will not block CircleCI from functioning.
 
 === Nomad Client Proxy Setup
 
 * If you are installing CircleCI Server on AWS using Terraform, you should add the below to your Nomad client launch configuration – these instructions should be added to `/etc/environment`.
-// * If you are using Docker <!--is this an install method we no longer support?-->, refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
-* If you are running a static installation, add to the server before installation.
-
-[source,bash]
-----
+* If you are using Docker refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
+* If you are running a static installation, add the following to the server before installation:
++
+```bash
 #!/bin/bash
 
 (cat <<'EOF'
@@ -122,18 +122,17 @@ EOF
 
 set -a
 . /etc/environment
-----
-
-You will also need to follow https://docs.docker.com/network/proxy/[these instructions] to make sure your containers have outbound/proxy access.
+```
++
+You will also need to follow https://docs.docker.com/network/proxy/[the Docker instructions] to make sure your containers have outbound/proxy access.
 
 === Troubleshooting
 
 If you cannot access the CircleCI Management Console, but the Services machine seems to be running, try to SSH tunnel into the machine by running the following, substituting your proxy address and the IP address of your Services machine:
 
-[source,shell]
-----
+```shell
 ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_machine>
-----
+```
 
 == Data Persistence
 Contact support@circleci.com to discuss externalizing services for data persistence.

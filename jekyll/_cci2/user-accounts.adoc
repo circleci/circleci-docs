@@ -17,10 +17,10 @@ image::admin_settings.png[Accounts Overview]
 
 When an account is no longer required, you can suspend the account so it will no longer be active and will not count against your license quota. To suspend an account:
 
-1. Navigate to your CircleCI Admin Settings
-2. Select Users from the Admin Settings menu
-3. Scroll to locate the account in either the Active or Inactive window
-4. Click `Suspend` next to the account name and the account will appear in the Suspended window
+. Navigate to your CircleCI Admin Settings
+. Select Users from the Admin Settings menu
+. Scroll to locate the account in either the Active or Inactive window
+. Click `Suspend` next to the account name and the account will appear in the Suspended window
 
 .Suspending an Account
 image::suspend_account.png[Suspend a User Account]
@@ -78,7 +78,7 @@ NOTE: Any form of organization membership is within the scope of this approval f
 
 To view a full list of users for your CircleCI Server installation, first SSH into your Services machine, and then run:
 
-```shell
+```
 circleci dev-console
 (circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
 ```

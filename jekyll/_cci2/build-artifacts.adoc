@@ -100,9 +100,9 @@ If you would like to allow content types that are not included in the whitelist 
 1. Navigate to the CircleCI Management Console (e.g. `https://<your-circleci-hostname>:8800/settings`) and select Settings from the menu bar
 2. Scroll down to find the Artifacts section
 3. Select Serve Artifacts with Unsafe Content-Types
-4. Click Save at the bottom of the page and Restart Now in the pop-up to save your changes and restart the console.
-
++
 .Allow Unsafe Content Types
 image::UnsafeContentTypes.png[Build Artifacts]
+4. Click Save at the bottom of the page and Restart Now in the pop-up to save your changes and restart the console.
 
-NOTE: Any change to the settings within the Management Console will incur downtime as the console will need to be restarted.
+WARNING: Any change to the settings within the Management Console will incur downtime as the console will need to be restarted.

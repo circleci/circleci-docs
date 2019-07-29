@@ -44,8 +44,6 @@ A user who logs in will be redirected to the Accounts page of the CircleCI appli
 
 NOTE: A user who has authenticated with LDAP and is then removed from LDAP/AD will be able to access CircleCI as long as they stay logged in (because of cookies). As soon as the user logs out or the cookie expires, they will not be able to log back in. A users' ability to see projects or to run builds is defined by their GitHub permissions. Therefore, if GitHub permissions are synced with LDAP/AD permissions, a removed LDAP/AD user will automatically lose authorization to view or access CircleCI as well.
 
-[%hardbreaks]
-
 == Troubleshooting
 
 Troubleshoot LDAP server settings with LDAP search as follows:

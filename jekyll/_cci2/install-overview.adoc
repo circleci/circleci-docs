@@ -7,13 +7,13 @@
 
 NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
 
-This document provides step-by-step instructions for installing CircleCI Server v2.17 on Amazon Web Services (AWS) with Terraform. Refer to the https://circleci.com/server/changelog[changelog] for what's new and fixed in this release.
+The following sectionsprovide step-by-step instructions for installing CircleCI Server v2.17 on Amazon Web Services (AWS) with Terraform. Refer to the https://circleci.com/server/changelog[changelog] for what's new and fixed in this release.
 
 toc::[]
 
 == Support Packages
 
-CircleCI 2.0 may be installed, without a support package, on AWS using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below.
+CircleCI 2.0 may be installed without a support package, on AWS, using the examples and instructions in this document. Alternatively, if you do decide to go ahead with a support package, there are a number of benefits, as detailed below:
 
 === Non-AWS Platform Support
 
@@ -21,7 +21,7 @@ With a Platinum CircleCI support package it is possible to install and configure
 
 === Externalization
 
-With a Platinum support agreement, it is possible to improve performance by configuring the following services to run externally to the Services machine:
+With a Platinum support agreement, it is possible to improve performance and resilience by configuring the following services to run externally to the Services machine:
 
 - PostgreSQL
 - MongoDB

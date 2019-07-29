@@ -259,12 +259,11 @@ en:
           link: 2.0/aws-prereq/
         - name: Installation
           link: 2.0/aws/
-        - name: System Requirements
-          link: 2.0/server-ports/
-        - name: Upgrade
-          link: 2.0/upgrading/
-        - name: Updating Replicated
+        - name: Updating
           link: 2.0/updating-server-replicated-version/
+        - name: Upgrades from 1.0 to 2.0
+          link: 2.0/upgrading/
+
     - name: Server Operations
       children:
         - name: Overview
@@ -283,6 +282,8 @@ en:
           link: 2.0/user-accounts/
         - name: Monitoring
           link: 2.0/monitoring/
+        - name: Architechture
+          link: 2.0/architecture/
         - name: Configuring JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
         - name: Nomad
