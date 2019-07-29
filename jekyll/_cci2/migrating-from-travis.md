@@ -33,21 +33,22 @@ configuration will live in a `.travis.yml` file in the root of your repository.
 With CircleCI, your configuration will live in `.circleci/config.yml` at the
 root of your repository.
 
-| Travis CI         | Circle CI                   | Description                                                                                       |
-|-------------------|-----------------------------|---------------------------------------------------------------------------------------------------|
-| language:         | [docker.image](https://circleci.com/docs/2.0/configuration-reference/#docker)                | Use the Docker executor to specify an appropriate Docker image for the target language            |
-| dist:             | [docker, machine, windows, macos](https://circleci.com/docs/2.0/executor-types/)      | If your build must run in a fully virtualized environment, or on a macOS or Windows builder                  |
-| cache components: | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
-| before_cache      | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                          |
-| before_install:   | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify pre install commands                                                 |
-| install:          | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify install commands                                                     |
-| before_script     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify pre-execution commands                                               |
-| script:           | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify execution commands                                                   |
-| after_script:     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                        | Use the run: step to specify post-execution commands                                              |
-| deploy:           | [deploy:](https://circleci.com/docs/2.0/configuration-reference/#deploy)                     | Use the deploy: step to deploy build artifacts                                                    |
-| env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment)                | Use the environment: element to specify environment variables                                     |
-| matrix:           | [workflows:](https://circleci.com/docs/2.0/configuration-reference/#workflows)                  | Workflows are used on CircleCI to orchestrate multiple jobs                                       |
-| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                   | Use the requires: element to explicitly require any job dependencies and control parallel builds. |
+| Travis CI         | Circle CI                                                                          | Description                                                                                          |
+|-------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| language:         | [docker.image](https://circleci.com/docs/2.0/configuration-reference/#docker)      | Use the Docker executor to specify an appropriate Docker image for the target language               |
+| dist:             | [machine](https://circleci.com/docs/2.0/configuration-reference/#machine)          | Our Linux VM executor is a Ubuntu VM. You can specify [versions](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images) in the config |
+| os:               | [docker, machine, macos](https://circleci.com/docs/2.0/executor-types/)            | Rather than an os, we offer Docker, Linux VM, and MacOS execution environments.                      |
+| cache components: | [restore_cache:,](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) [save_cache:](https://circleci.com/docs/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds |
+| before_cache      | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | If you want to run any commands before you cache, simply place a run: step before your cache step(s) |
+| before_install:   | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | CircleCI doesn't separate commands into stages or types. Use run: steps to specify any arbitrary commands and order them per your needs. See [documentation](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) for usage of conditional steps |
+| install:          | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | " (see above)                                                                                        |
+| before_script     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | " (see above)                                                                                        |
+| script:           | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | " (see above)                                                                                        |
+| after_script:     | [run:](https://circleci.com/docs/2.0/configuration-reference/#run)                 | " (see above)                                                                                        |
+| deploy:           | [deploy:](https://circleci.com/docs/2.0/configuration-reference/#deploy)           | Use the deploy: step to deploy build artifacts                                                       |
+| env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
+| matrix:           | [workflows:](https://circleci.com/docs/2.0/configuration-reference/#workflows)     | Workflows are used on CircleCI to orchestrate multiple jobs                                          |
+| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control parallel builds in workflows        |
 {: class="table table-striped"}
 
 ### On Using Containers
@@ -55,9 +56,7 @@ root of your repository.
 With CircleCI, the context in which your checked out code executes (builds,
 tests, etc) is known as an [Executor]({{ site.baseurl }}/2.0/executor-intro/). 
 
-If you're coming from Travis CI, using Docker will be the closest means to running
-a build based on a language. While you can use any custom Docker Images, CircleCI maintains several [Docker Images]({{ site.baseurl
-}}/2.0/circleci-images/) tailored for common `.config` scenarios.
+Rather than selecting a language and distribution to run on, you can select a Docker image, a clean Linux VM, or a clean macOS VM as your execution environment and write arbitrary run commands to install needed dependencies. However, using a specific Docker image (e.g., nodejs) will be the closest means to running a build based on a language. While you can use any custom Docker image, CircleCI maintains several [Docker Images]({{ site.baseurl }}/2.0/circleci-images/) tailored for common `.config` scenarios.
 
 ## Building on Pushing Code
 
