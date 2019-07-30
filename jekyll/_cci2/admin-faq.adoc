@@ -15,7 +15,7 @@ No, because of the nature of CircleCI integration with GitHub authentication, yo
 
 === Can I monitor available build containers?
 
-Yes, refer to the <<nomad#introduction-to-nomad-cluster-operation,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+Yes, refer to the <<nomad#nomadintro,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 === How do I provision admin users?
 
@@ -47,7 +47,7 @@ They can be torn down without worry as they don't persist any data.
 
 Make sure that your keys are in unencrypted PEM format, and that the certificate includes the entire chain of trust as follows:
 
-```yaml
+```
 -----BEGIN CERTIFICATE-----
 your_domain_name.crt
 -----END CERTIFICATE-----

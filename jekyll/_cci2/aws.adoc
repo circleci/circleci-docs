@@ -30,7 +30,7 @@ image::tfvars.png[terraform.tfvars]
 
 . If you plan to use 1.0 builders, specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters, if not, leave it as is. 1.0 builders are disabled by default in section 3.
 
-. Specify the instance type to use for your Nomad clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m4.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types) guide for details.
+. Specify the instance type to use for your Nomad clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m4.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] guide for details.
 +
 NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled by default in section 3.
 
