@@ -193,61 +193,93 @@ WARNING: if migrator services are down at startup connected services will fail
 | icon:check-circle[]
 | None
 
-| `nomad_server` / `server-nomad` *                 | Nomad primary service.                      \                           | No 2.0 build jobs will run.   \                                          | ![Severe](images/circle-failure.png){ width=20px}   | None \                                                      |
-|                                                   |                                                                         |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `ready-agent` / `server-ready-agent`              | Called by Replicated to check whether other                             | Only required on startup. If unavailable on                              | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   | containers are ready. \                                                 | startup the whole system will fail. \                                    |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `server-usage-stats`                              | Sends the user count to the internal CircleCI “phone home”              | CircleCI will not receive usage stats for your                           | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   | endpoint. \                                                             | install but no affect on operation.                                      |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `shutdown-hook-poller`                            | Checks the `frontend` container for 1.0 Builder                         | 1.0 Builder lifecycles will not be properly                              | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   | shutdown requests. If a request is found, the 1.0                       | managed, but jobs will continue to run.       \                          |                                                     |                                                             |
-|                                                   | Builder is shut down. \                                                 |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `slanger`                                         | Provides real-time events to the CircleCI app. \                        | Live UI updates will stop but hard refreshes will                        | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   |                                                                         | still work. \                                                            |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `telegraf`                                        | This is the statsd forwarding agent that our                            | Metics will stop working but jobs will continue                          | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   | local services write to and can be configured                           | to run.  \                                                               |                                                     |                                                             |
-|                                                   | to forward to an external metrics service. \                            |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `tutum/logrotate`                                 | Used to manage log rotations for all containers                         | If this stays down for a long period the Services                        | ![Moderate](images/circle-warning.png){ width=20px} | None \                                                      |
-|                                                   | on the services machine. \                                              | machine disk will eventually run out of space and                        |                                                     |                                                             |
-|                                                   |                                                                         | other services will fail. \                                              |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `test-results`                                    | Parses test result files and stores data. \                             | There will be no test failure or timing data for                         | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   |                                                                         | jobs, but this will be back-filled once the                              |                                                     |                                                             |
-|                                                   |                                                                         | service is restarted. \                                                  |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `contexts-vault` / `vault-cci` *                  | Instance of Hashicorp’s Vault – an encryption                           | `contexts-service` will stop working, and all                            | ![Moderate](images/circle-warning.png){ width=20px} | None \                                                      |
-|                                                   | service that provides key-management, secure                            | jobs that use `contexts-service` will fail. \                            |                                                     |                                                             |
-|                                                   | storage, and other encryption related services.                         |                                                                          |                                                     |                                                             |
-|                                                   | Used to handle the encryption and key store for                         |                                                                          |                                                     |                                                             |
-|                                                   | the `contexts-service`. \                                               |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `vm-gc`                                           | Periodically check for stale `machine` and remote Docker instances      | Old vm-service instances might not be destroyed                          | ![Mild](images/circle-success.png){ width=20px}     | `vm-service-db-migrator`    \                               |
-|                                                   | and request that `vm-service` remove                                    | until this service is restarted. \                                       |                                                     |                                                             |
-|                                                   | them. \                                                                 |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `vm-scaler`                                       | Periodically requests that `vm-service` provision                       | VM instances for `machine` and Remote Docker                             | ![Moderate](images/circle-warning.png){ width=20px} | `vm-service-db-migrator` \                                  |
-|                                                   | more instances for running `machine` and remote Docker jobs. \          | might not be provisioned causing you to run out                          |                                                     |                                                             |
-|                                                   |                                                                         | of capacity to run jobs with these executors.  \                         |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `vm-service`                                      | Inventory of available `vm-service` instances, and                      | Jobs that use `machine` or remote Docker will                            | ![Moderate](images/circle-warning.png){ width=20px} | `vm-service-db-migrator` \                                  |
-|                                                   | provisioning of new instances. \                                        | fail. \                                                                  |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `vm-service-db-migrator`                          | Used to run database migrations for `vm-service`. \                     | Only runs at startup. \                                                  | ![Mild](images/circle-success.png){ width=20px}     | None \                                                      |
-|                                                   |                                                                         |                                                                          |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `workflows-conductor`                             | Coordinates and provides information about                              | No new workflows will start, currently running                           | ![Severe](images/circle-failure.png){ width=20px}   | `postgres` \                                                |
-|                                                   | workflows. \                                                            | workflows might end up in an inconsistent state,                         |                                                     | `frontend` \                                                |
-|                                                   |                                                                         | and some REST and GraphQL API requests will                              |                                                     | `workflows-conductor-migrator` \                            |
-|                                                   |                                                                         | fail. \                                                                  |                                                     |                                                             |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
-| `workflows-conductor-migrator`                    | Runs postgreSQL migrations for the                                      | Only runs on startup. \                                                  | ![Mild](images/circle-success.png){ width=20px}     | `postgres` \                                                |
-|                                                   | `workflows-conductor`. \                                                |                                                                          |                                                     | `frontend` \                                                |
-+---------------------------------------------------+-------------------------------------------------------------------------+--------------------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------------------------+
+| `nomad_server` / `server-nomad` *
+| Nomad primary service.
+| No 2.0 build jobs will run.
+| icon:fire-extinguisher[]
+| None
 
-Does adding text here fix the PDF???
+| `ready-agent` / `server-ready-agent`
+| Called by Replicated to check whether other containers are ready.
+| Only required on startup. If unavailable on startup the whole system will fail.
+| icon:check-circle[]
+| None
+
+| `server-usage-stats`
+| Sends the user count to the internal CircleCI “phone home” endpoint.
+| CircleCI will not receive usage stats for your install but no affect on operation.
+| icon:check-circle[]
+| None
+
+| `shutdown-hook-poller`
+| Checks the `frontend` container for 1.0 Builder shutdown requests. If a request is found, the 1.0 Builder is shut down.
+| 1.0 Builder lifecycles will not be properly managed, but jobs will continue to run.
+| icon:check-circle[]
+| None
+
+| `slanger`
+| Provides real-time events to the CircleCI app.
+| Live UI updates will stop but hard refreshes will still work.
+| icon:check-circle[]
+| None
+
+| `telegraf`
+| This is the statsd forwarding agent that our local services write to and can be configured to forward to an external metrics service.
+| Metics will stop working but jobs will continue to run.
+| icon:check-circle[]
+| None
+
+| `tutum/logrotate`
+| Used to manage log rotations for all containers on the services machine.
+| If this stays down for a long period the Services machine disk will eventually run out of space and other services will fail.
+| icon:exclamation-triangle[]
+| None
+
+| `test-results`
+| Parses test result files and stores data.
+| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
+| icon:check-circle[]
+| None
+
+| `contexts-vault` / `vault-cci` *
+| Instance of Hashicorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
+| `contexts-service` will stop working, and all jobs that use `contexts-service` will fail.
+| icon:exclamation-triangle[]
+| None
+
+| `vm-gc`
+| Periodically check for stale `machine` and remote Docker instances and request that `vm-service` remove them.
+| Old vm-service instances might not be destroyed until this service is restarted.
+| icon:check-circle[]
+| `vm-service-db-migrator`
+
+| `vm-scaler`
+| Periodically requests that `vm-service` provision more instances for running `machine` and remote Docker jobs.
+| VM instances for `machine` and Remote Docker might not be provisioned causing you to run out of capacity to run jobs with these executors.
+| icon:exclamation-triangle[]
+| `vm-service-db-migrator`
+
+| `vm-service`
+| Inventory of available `vm-service` instances, and provisioning of new instances.
+| Jobs that use `machine` or remote Docker will fail.
+| icon:exclamation-triangle[]
+| `vm-service-db-migrator`
+
+| `vm-service-db-migrator`
+| Used to run database migrations for `vm-service`.
+| Only runs at startup.
+| icon:check-circle[]
+| None
+
+| `workflows-conductor`
+| Coordinates and provides information about workflows.
+| No new workflows will start, currently running workflows might end up in an inconsistent state, and some REST and GraphQL API requests will fail.
+| icon:fire-extinguisher[]
+| `postgres`, `frontend`, `workflows-conductor-migrator`
+
+| `workflows-conductor-migrator`
+| Runs postgreSQL migrations for the `workflows-conductor`.
+| Only runs on startup.
+| icon:check-circle[]
+| `postgres`, `frontend`
+|===

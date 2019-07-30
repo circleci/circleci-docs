@@ -17,8 +17,6 @@ v2.17.2
 
 include::overview.adoc[]
 
-include::architecture.adoc[]
-
 include::nomad.adoc[]
 
 include::monitoring.adoc[]
@@ -44,5 +42,9 @@ include::security.adoc[]
 include::troubleshooting.adoc[]
 
 include::admin-faq.adoc[]
+
+include::customizations.adoc[]
+
+include::architecture.adoc[]
 
 :leveloffset: -1

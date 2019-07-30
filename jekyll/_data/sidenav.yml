@@ -282,8 +282,6 @@ en:
           link: 2.0/user-accounts/
         - name: Monitoring
           link: 2.0/monitoring/
-        - name: Architechture
-          link: 2.0/architecture/
         - name: Configuring JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
         - name: Nomad
@@ -296,6 +294,10 @@ en:
           link: 2.0/backup/
         - name: Troubleshooting
           link: 2.0/troubleshooting/
+        - name: Customizations
+          link: 2.0/customizations/
+        - name: Architechture
+          link: 2.0/architecture/
         - name: GPU Builders
           link: 2.0/gpu/
         - name: Configuring VM Service
