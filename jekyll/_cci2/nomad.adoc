@@ -94,7 +94,7 @@ By default, your Nomad Client is set up within an Auto Scaling Group (ASG) withi
 
 ==== Auto Scaling Policy Best Practices
 
-There is a https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/)[blog post series] wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
+There is a https://circleci.com/blog/mathematical-justification-for-not-letting-builds-queue/[blog post series] wherein CircleCI engineering spent time running simulations of cost savings for the purpose of developing a general set of best practices for Auto Scaling. Consider the following best practices when setting up AWS Auto Scaling:
 
 . In general, size your cluster large enough to avoid queueing builds. That is, less than one second of queuing for most workloads and less than 10 seconds for workloads run on expensive hardware or at highest parallellism. Sizing to reduce queuing to zero is best practice because of the high cost of developer time. It is difficult to create a model in which developer time is cheap enough for under-provisioning to be cost-effective.
 

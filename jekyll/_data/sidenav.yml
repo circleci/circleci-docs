@@ -290,11 +290,13 @@ en:
           link: 2.0/build-artifacts/
         - name: Usage statistics
           link: 2.0/usage-stats/
+        - name: maintenance
+          link: 2.0/ops/
         - name: Backup and Recovery
           link: 2.0/backup/
         - name: Troubleshooting
           link: 2.0/troubleshooting/
-        - name: Customizations
+        - name: Customization and Configuration
           link: 2.0/customizations/
         - name: Architechture
           link: 2.0/architecture/

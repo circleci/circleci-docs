@@ -35,6 +35,8 @@ include::build-artifacts.adoc[]
 
 include::usage-stats.adoc[]
 
+include::ops.adoc[]
+
 include::backup.adoc[]
 
 include::security.adoc[]
