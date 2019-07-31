@@ -27,6 +27,8 @@ include::authentication.adoc[]
 
 include::vm-service.adoc[]
 
+include::gpu.adoc[]
+
 include::certificates.adoc[]
 
 include::user-accounts.adoc[]

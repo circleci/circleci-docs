@@ -1,3 +1,4 @@
+[#vmservice]
 = VM Service
 :page-layout: classic-docs
 :page-liquid:
