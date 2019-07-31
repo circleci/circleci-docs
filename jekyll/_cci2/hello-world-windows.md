@@ -9,6 +9,10 @@ order: 4
 
 This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide.]({{ site.baseurl}}/2.0/getting-started/) Please note, Windows access is currently in a **preview phase** and is **not** production ready.
 
+* TOC
+{:toc}
+
+
 # Prerequisites
 
 To follow along with this document you will need:
@@ -17,7 +21,6 @@ To follow along with this document you will need:
 * A [performance plan](https://circleci.com/pricing/usage/) subscription
 * Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) (to enable Orbs and a 2.1 config).
 * To request access to Windows Preview using [this form](https://docs.google.com/forms/d/e/1FAIpQLSfspug2MP0eTK8eRC1_FpiDQzNHkk8a36fflN_za29CwGzGoQ/viewform).
-
 
 # Overview of the Windows executor
 
@@ -28,9 +31,7 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 - Has `Git`, `Chocolatey` and `7zip` pre-installed.
 - Powershell is the default shell (Bash and Command are available to be manually selected).
 
-The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching). Further, The Windows executor is only available on the [CircleCI Performance Plan](https://circleci.com/pricing/usage/) at a cost of **40 credits/minute**
-
-
+The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching). Further, The Windows executor is only available on the [CircleCI Performance Plan](https://circleci.com/pricing/usage/) at a cost of **40 credits/minute**.  
 
 # Example configuration file
 
@@ -59,9 +60,7 @@ There are three shells that you can use to run job steps on Windows:
 * Bash
 * Command
 
-You can configure the shell at the job level or at the step level. So you can mix Bash and Powershell in the same job.
-
-If you’d like to use Bash or Command instead of Powershell, add a `shell:` argument in the `executor:` section at the job level or in the step declaration:
+You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, Powershell, and Command by adding a `shell:` argument to our `job` and `step` declarations:
 
 ```YAML
 version: 2.1
