@@ -28,7 +28,9 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 - Has `Git`, `Chocolatey` and `7zip` pre-installed.
 - Powershell is the default shell (Bash and Command are available to be manually selected).
 
-The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching).
+The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching). Further, The Windows executor is only available on the [CircleCI Performance Plan](https://circleci.com/pricing/usage/) at a cost of **40 credits/minute**
+
+
 
 # Example configuration file
 
@@ -47,6 +49,40 @@ jobs:
       - checkout
       - run: Write-Host 'Hello, Windows'
 
+```
+
+# Specifying a Shell with the Windows Executor
+
+There are three shells that you can use to run job steps on Windows:
+
+* PowerShell (default in the Windows Orb)
+* Bash
+* Command
+
+You can configure the shell at the job level or at the step level. So you can mix Bash and Powershell in the same job.
+
+If you’d like to use Bash or Command instead of Powershell, add a `shell:` argument in the `executor:` section at the job level or in the step declaration:
+
+```YAML
+version: 2.1
+
+orbs:
+  win: circleci/windows-tools@0.0.4
+
+jobs:
+  build:
+    executor:
+      name: win/preview-default
+      shell: bash.exe
+    steps:
+      - checkout
+      - run: ls -lah
+      - run:
+          command: ping circleci.com
+          shell: cmd.exe
+      - run:
+          command: echo 'This is powershell'
+          shell: powershell.exe
 ```
 
 # Example Application
