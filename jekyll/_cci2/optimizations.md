@@ -12,6 +12,8 @@ This document provides an overview of several methods for optimizing your Circle
 * TOC
 {:toc}
 
+**Note**: If you are interested in reading about configuration optimizations at a large scale, consider reviewing Coinbase's article [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161).
+
 **Note**: Some of the features discussed in this document may require a specific pricing
 plan. Visit our [pricing usage page](https://circleci.com/pricing/usage/) to get an
 overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web
@@ -136,6 +138,8 @@ jobs:
       - run: make
 ```
 
+"For more details on how to best use resource classes to speed up build times, consider reading the [Credit Usage Examples & Best Practices](https://circleci.showpad.com/share/fwxM6b3HTPEHUG4AvnTCI) document.
+
 ## Docker Layer Caching
 
 **Note**: An eligible plan is required to use Docker Layer Caching. If you are on the container-based plan you will need to open a [support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable DLC for your account.
@@ -163,4 +167,4 @@ Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-cachin
 {:.no_toc}
 
 - For a complete list of customizations that can be made your build, consider reading our [configuration reference]({{ site.baseurl}}/2.0/configuration-reference/).
-- Coinbase published an article titled [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161)
+
