@@ -51,7 +51,7 @@ asciidoctor:
     relfileprefix: ../
     outfilesuffix: /index.html
 
-exclude: [/_cci2/ops-guide.adoc, /_cci2/aws-install.adoc]  
+exclude: [_cci2/ops-guide.adoc, _cci2/aws-install.adoc]  
 
 collections:
   # this is named with an underscore because it needs to be processed
