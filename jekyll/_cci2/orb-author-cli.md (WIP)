@@ -57,7 +57,6 @@ You may also use Snapcraft to install the CLI by running the following command:
 
 If you have used a previous version of the CircleCI and are currently running a version older than 0.1.6, run the following commands to update your CLI version to the latest version.
 
-
 `circleci update`
 `circleci switch`
 
