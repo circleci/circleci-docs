@@ -579,9 +579,7 @@ image::metrics-custom.png[Custom]
 
 === Configuring Custom Metrics
 
-Configuration options are based on Telegraf's documented output plugins. See their documentation https://github.com/influxdata/telegraf/tree/release-1.10#output-plugins[here].
-
-For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps:
+Configuration options are based on Telegraf's documented output plugins. See their documentation https://github.com/influxdata/telegraf/tree/release-1.10#output-plugins[here]. For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps:
 
 . SSH into the Servics Machine
 . cd `/etc/circleconfig/telegraf/influxdb.conf`
@@ -594,9 +592,7 @@ For example, if you would like to use the InfluxDB Output Plugin you would need 
 ```
 . Run `docker restart telegraf` to restart the container to load or reload any changes.
 
-You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs.
-
-Additionally, if you would like to ensure that all metrics in an installation are tagged against an environment you could place the following code in your config:
+You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs. Additionally, if you would like to ensure that all metrics in an installation are tagged against an environment you could place the following code in your config:
 
 ```yaml
 [global_tags]
