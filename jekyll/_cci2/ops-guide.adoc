@@ -3,7 +3,6 @@ Docs Team
 v2.17.2
 //:media: print
 :title-page-background-image: image:pdf-header.png[]
-:published: false
 :imagesdir: ../assets/img/docs/
 :doctype: book
 :toc:
