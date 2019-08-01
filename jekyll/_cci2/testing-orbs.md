@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Testing CircleCI Orbs"
-short-title: "Testing Orbs"
+title: "Orb Testing Methodologies"
+short-title: "Testing Methodologies"
 description: "Starting point for Testing CircleCI Orbs"
 categories: [getting-started]
 order: 1
