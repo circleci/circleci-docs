@@ -9,10 +9,12 @@ This document describes an initial set of troubleshooting steps to take if you a
 
 toc::[]
 
+[discrete]
 === Debugging Queuing Builds
 
 If your Services component is fine, but builds are not running, or all builds are queueing, follow the steps below.
 
+[discrete]
 ==== 1. Check Dispatcher Logs for Errors
 
 Run `sudo docker logs dispatcher`, if you see log output that is free of errors you may continue on the next step.
@@ -39,6 +41,7 @@ If you see errors or do not see the above output, investigate the stack traces b
 
 If you can run 1.0 builds, but not 2.0 builds, or if you can only run 2.0 builds and the log dispatcher is up and running, continue on to the next steps.
 
+[discrete]
 ==== 2. Check Picard-Dispatcher Logs for Errors
 
 Run the `sudo docker logs picard-dispatcher` command. A healthy `picard-dispatcher` should output the following:
@@ -74,10 +77,12 @@ If you run a 2.0 build and do not see a message in the picard-dispatcher log out
 
 Stop and restart the CircleCI app in the Management Console at port 8800 to re-establish the connection between the two containers.
 
+[discrete]
 ==== 3. Check Picard-Scheduler Logs for Errors
 
 Run `sudo docker logs picard-scheduler` . The `picard-scheduler` schedules jobs and sends them to nomad through a direct connection. It does not actually handle queuing of the jobs in CircleCI.
 
+[discrete]
 ==== 4. Check Nomad Node Status
 
 Check to see if there are any nomad nodes by running the `nomad node-status -allocs` command and viewing the following output:
@@ -99,6 +104,7 @@ NOTE: DC in the output stands for datacenter and will always print us-east-1 and
 
 If you see output like the above, but your builds are still queued, then continue to the next step.
 
+[discrete]
 ==== 5. Check Job Processing Status
 
 Run the `sudo docker exec -it nomad nomad status` command to view the jobs that are currently being processed. It should list the status of each job as well as the ID of the job, as follows:
@@ -119,6 +125,7 @@ After a job has completed, the Status shows `dead`. This is a regular state for 
 
 NOTE: The use of `--stderr` is to print the specific error if one exists.
 
+[discrete]
 === Jobs stay in `queued` status until they fail and never successfully run
 
 If the nomad client logs contain the following error message typw, check port 8585:
@@ -128,10 +135,12 @@ If the nomad client logs contain the following error message typw, check port 85
 unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
 ```
 
+[discrete]
 === Why is the cache failing to unpack?
 
 If a `restore_cache` step is failing for one of your jobs, it is worth checking the size of the cache - you can view the cache size from the CircleCI Jobs page within the `restore_cache` step. We recommend keeping cache sizes under 500MB – this is our upper limit for corruption checks because above this limit check times would be excessively long. Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting into multiple distinct caches.
 
+[discrete]
 === How do I get round the API service being impacted by a high thread count
 
 Disable cache warming by completing the following steps:

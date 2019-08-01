@@ -14,7 +14,7 @@ toc::[]
 
 .CircleCI Services Architecture
 image::cci-arch.png[Services Architecture]
-
+<<<
 == Build Environments
 
 CircleCI 2.0 uses Nomad as the primary job scheduler. Refer to our <<nomad#nomadintro,Nomad Introduction>> to learn more about the job scheduler and how to perform basic client and cluster operations.

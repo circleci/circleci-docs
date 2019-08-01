@@ -12,10 +12,8 @@ toc::[]
 
 == System Monitoring
 
-To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice. To get straight to this section use the following URL, substituting in your CircleCI hostname:
-```
-https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics
-```
+To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice (your-circleci-hostname.com:8800/settings#cloudwatch_metrics).
+
 
 === VM Service and Docker Metrics
 
@@ -35,6 +33,7 @@ https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics[Nomad job metr
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
+[cols="6,5"]
 |===
 |Metric
 |Description
@@ -57,6 +56,8 @@ https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics[Nomad job metr
 
 When the Nomad metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
 
+<<<
+
 == Supported Platforms
 
 We have two built-in platforms for metrics and monitoring: AWS CloudWatch and DataDog. The sections below detail enabling and configuring each in turn.
@@ -65,11 +66,7 @@ We have two built-in platforms for metrics and monitoring: AWS CloudWatch and Da
 
 To enable AWS CloudWatch complete the following:
 
-1. Navigate to the settings page within your Management Console. You can use the following URL, substituting your CircleCI URL:
-+
-```
-https://<your-circleci-hostname>.com:8800/settings#cloudwatch_metrics
-```
+1. Navigate to the settings page within your Management Console. You can use the following URL, substituting your CircleCI URL: your-circleci-hostname.com:8800/settings#cloudwatch_metrics.
 
 2. Check Enabled under AWS CloudWatch Metrics to begin configuration.
 +
@@ -97,19 +94,17 @@ After saving you can *verify* that metrics are forwarding by going to your AWS C
 To enable Datadog complete the following:
 
 // 1. Disable Telegraf - at this time both Datadog and Telegraf require port 8125
-. Navigate your Management Console Settings. You can use the following URL, substituting your CircleCI hostname: `https://<your-circleci-hostname>.com:8800/settings#datadog_metrics`
+. Navigate your Management Console Settings. You can use the following URL, substituting your CircleCI hostname: your-circleci-hostname.com:8800/settings#datadog_metrics
 
 . Check Enabled under Datadog Metrics to begin configuration.
 +
 .Enable Datadog Metrics
 image::metrics_datadog1.png[Enable DataDog]
 
-. Enter your DataDog API Key.
+. Enter your DataDog API Key. You can verify that metrics are forwarding by going to your DataDog metrics summary.
 +
 .Enter Datadog API key
 image::metrics_datadog2.png[DataDog API Key]
-
-After saving you can *verify* that metrics are forwarding by going to the DataDog metrics summary.
 
 ////
 ### Datadog Dashboard Configuration

@@ -5,11 +5,15 @@ v2.17.2
 :imagesdir: ../assets/img/docs/
 :doctype: book
 :toc:
+:toc-title: Contents
 :icons: font
 :source-highlighter: rouge
 :pagenums:
 :idprefix:
 :idseparator: -
+:revremark: DRAFT
+
+:leveloffset: +1
 
 include::install-overview.adoc[]
 
@@ -18,3 +22,5 @@ include::server-ports.adoc[]
 include::aws-prereq.adoc[]
 
 include::aws.adoc[]
+
+:leveloffset: -1

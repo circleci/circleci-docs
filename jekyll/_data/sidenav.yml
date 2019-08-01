@@ -248,6 +248,7 @@ en:
   icon: docs/admin.svg
   children:
     - name: Server Install and Upgrade
+      link: 2.0/install-overview/
       children:
         - name: Trial Single-box Install
           link: 2.0/single-box/
@@ -265,6 +266,7 @@ en:
           link: 2.0/upgrading/
 
     - name: Server Operations
+      link: 2.0/overview/
       children:
         - name: Overview
           link: 2.0/overview/

@@ -9,40 +9,49 @@ This chapter answers frequently asked questions and provides installation troubl
 
 toc::[]
 
+[discrete]
 === Can I move or change my GitHub Enterprise URL without downtime?
 
 No, because of the nature of CircleCI integration with GitHub authentication, you should not change the domain of your GHE instance after CircleCI is in production. Redeploying GitHub without will result in a corrupted CircleCI instance. Contact support if you plan to move your GitHub instance.
 
+[discrete]
 === Can I monitor available build containers?
 
 Yes, refer to the <<nomad#nomadintro,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#monitoring,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
+[discrete]
 === How do I provision admin users?
 
 The first user who logs in to the CircleCI application will automatically be designated an admin user. Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
 
+[discrete]
 === How can I gracefully shutdown Nomad Clients?
 
 Refer to the Introduction to Nomad Cluster Operation chapter for details.
 
+[discrete]
 === Why is Test GitHub Authentication failing?
 
 This means that the GitHub Enterprise server is not returning the intermediate SSL certificates. Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
 
 In some cases authentication fails when returning to the configuration page after it was successfully set up once. This is because the secret is encrypted, so when returning checking it will fail.
 
+[discrete]
 === How can I use HTTPS to access CircleCI?
 
 While CircleCI creates a self-signed cert when starting up, that certificate only applies to the management console and not the CircleCI product itself. If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
 
+[discrete]
 === Why doesn't terraform destroy every resource?
 
 CircleCI sets the services box to have termination protection in AWS and also writes to an s3 bucket. If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
 
+[discrete]
 === Do the Nomad Clients store any state?
 
 They can be torn down without worry as they don't persist any data.
 
+[discrete]
 === How do I verify TLS settings are failing?
 
 Make sure that your keys are in unencrypted PEM format, and that the certificate includes the entire chain of trust as follows:
@@ -60,10 +69,12 @@ intermediate 2
 ...
 ```
 
+[discrete]
 === How do I debug the Management Console (Replicated)?
 
 The CircleCI management console is powered by Replicated. If you are experiencing any issues with the Management Console, here are a few ways to debug it:
 
+[discrete]
 ==== 1. Check you have Replicated installed
 
 First, make sure you have the CLI tool for Replicated installed by running the following:
@@ -72,6 +83,7 @@ First, make sure you have the CLI tool for Replicated installed by running the f
 replicated -version
 ```
 
+[discrete]
 ==== 2. Restart Replicated and the CircleCI app
 
 Try restarting Replicated services. You can do this by running the following commands on the service box, for Ubuntu 14.04:
@@ -94,6 +106,7 @@ Then try restarting the CircleCi app: go to your services box admin (for example
 
 // add screenshot showing StopNow and StartNow -->
 
+[discrete]
 ==== 3. Try to log into Replicated
 
 Try logging in to Replicated. You can do this by running the following command on the service box. You will be asked to enter your password - the same one used to unlock the Management Console (i.e. `https://<your-circleci-hostname>.com:8800`).
@@ -110,10 +123,12 @@ sudo replicated apps
 
 If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
 
+[discrete]
 ==== 4. Check Replicated logs
 
 You can find Replicated logs on the Services machine under `/var/log/replicated`.
 
+[discrete]
 ==== 5. Check what Docker containers are currently running
 
 Replicated starts many Docker containers to run CircleCI Server, so it can be useful to check what containers are running.

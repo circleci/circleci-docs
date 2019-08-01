@@ -17,11 +17,11 @@ GEM
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     asciidoctor (2.0.10)
-    asciidoctor-pdf (1.5.0.beta.1)
+    asciidoctor-pdf (1.5.0.beta.2)
       asciidoctor (>= 1.5.3, < 3.0.0)
       concurrent-ruby (~> 1.1.0)
       prawn (~> 2.2.0)
-      prawn-icon (~> 2.3.0)
+      prawn-icon (~> 2.4.0)
       prawn-svg (~> 0.29.0)
       prawn-table (~> 0.2.0)
       prawn-templates (~> 0.1.0)
@@ -124,7 +124,7 @@ GEM
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     pdf-core (0.7.0)
-    pdf-reader (2.2.0)
+    pdf-reader (2.2.1)
       Ascii85 (~> 1.0.0)
       afm (~> 0.2.1)
       hashery (~> 2.0)
@@ -134,7 +134,7 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    prawn-icon (2.3.0)
+    prawn-icon (2.4.0)
       prawn (>= 1.1.0, < 3.0.0)
     prawn-svg (0.29.1)
       css_parser (~> 1.6)
@@ -180,7 +180,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
-  asciidoctor-pdf
+  asciidoctor-pdf (~> 1.5.0.beta.2)
   html-proofer
   jekyll (= 3.8.5)
   jekyll-algolia (~> 1.0)

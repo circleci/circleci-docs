@@ -6,16 +6,15 @@
 :toc: macro
 :toc-title:
 
-This section provides conceptual and procedural information for operating, backing up, monitoring, and configuring a CircleCI server installation.
+CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 
 toc::[]
 
 == Basic Terminology and Architecture
-CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 
 .Nomad Cluster Management
 image::nomad_cluster_mgmnt.png[Nomad Cluster]
-
+<<<
 - **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
 
 - **Nomad Client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) in order to fully take the advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
