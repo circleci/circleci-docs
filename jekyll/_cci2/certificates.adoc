@@ -36,7 +36,7 @@ CircleCI requires the following steps to get ELB (Elastic Load Balancing) certif
 
 NOTE: Opening the port for HTTP requests will allow CircleCI to return a HTTPS redirect.
 
-1. Open the following ports on your ELB:
+. Open the following ports on your ELB:
 +
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -91,7 +91,7 @@ NOTE: Opening the port for HTTP requests will allow CircleCI to return a HTTPS r
 | your-cert
 |===
 
-2. Add the following security group on your ELB:
+. Add the following security group on your ELB:
 +
 NOTE: The sources below are left open so that anybody can access the instance over these port ranges. If that is not what you want, then feel free to restrict them. Users will experience reduced functionality if your stakeholders are using IP addresses outside of the Source Range.
 
@@ -125,21 +125,21 @@ NOTE: The sources below are left open so that anybody can access the instance ov
 | 0.0.0.0
 |===
 
-3. Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
+. Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
 
-4. It is now possible to set your Github Authorization Callback to `https` rather than `http`.
+. It is now possible to set your Github Authorization Callback to `https` rather than `http`.
 
 === Using Self-Signed Certificates
 
 Because the ELB does not require a _current_ certificate, you may choose to generate a self-signed certificate with an arbitrary duration.
 
-1. Generate the certificate and key using openssl command `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 1 -out certificate.pem`
+. Generate the certificate and key using openssl command `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 1 -out certificate.pem`
 
-2. Provide the appropriate information to the prompts.
+. Provide the appropriate information to the prompts.
 +
 NOTE: The Common Name provided must match the host configured in CircleCI.
 
-3. Save the certificate.pem and key.pem file locally.
+. Save the certificate.pem and key.pem file locally.
 
 == Setting up TLS/HTTPS on CircleCI Server
 
@@ -164,9 +164,9 @@ sudo apt-get install certbot
 certbot certonly --manual --preferred-challenges dns
 ```
 
-4. You will be instructed to add a DNS TXT record.
+. You will be instructed to add a DNS TXT record.
 
-5. After the record is successfully generated, save `fullchain.pem` and `privkey.pem` locally.
+. After the record is successfully generated, save `fullchain.pem` and `privkey.pem` locally.
 
 If you are using Route 53 for your DNS records, adding a TXT record is straightforward. When you're creating a new record set, be sure to select type -> TXT and provide the appropriate value enclosed in quotes.
 
@@ -174,15 +174,15 @@ If you are using Route 53 for your DNS records, adding a TXT record is straightf
 
 Once you have a valid certificate and key file in `.pem` format, you must upload it to CircleCI Server.
 
-1. To do so, navigate to `hostname:8800/console/settings`
+. To do so, navigate to `hostname:8800/console/settings`
 
-2. Under "Privacy" section, check the box for "SSL only (Recommened)"
+. Under "Privacy" section, check the box for "SSL only (Recommened)"
 
-3. Upload your newly generated certificate and key
+. Upload your newly generated certificate and key
 
-4. Click "Verify TLS Settings" to ensure everything is working
+. Click "Verify TLS Settings" to ensure everything is working
 
-5. Click "Save" at the bottom of the settings page and restart when prompted
+. Click "Save" at the bottom of the settings page and restart when prompted
 
 More information is available https://letsencrypt.readthedocs.io/en/latest/using.html#manual[here].
 

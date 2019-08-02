@@ -52,8 +52,8 @@ asciidoctor:
     outfilesuffix: /index.html
 
 exclude:
-  - ops-guide.*
-  - aws-install.*
+  - ops-guide
+  - aws-install
 
 collections:
   # this is named with an underscore because it needs to be processed
