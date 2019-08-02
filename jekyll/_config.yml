@@ -49,11 +49,7 @@ asciidoctor:
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
-    outfilesuffix: /index.html
-
-exclude:
-  - ops-guide.*
-  - aws-install.*
+    outfilesuffix: /index.html 
 
 collections:
   # this is named with an underscore because it needs to be processed
