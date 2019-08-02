@@ -47,11 +47,11 @@ AWS CloudWatch の下で [Enable (有効にする)] をクリックして設定�
 設定には、2つのオプションがあります。
 
 * Services box の [IAM Instance Profile (IAM インスタンスプロファイル)] を使用し、カスタムの領域と名前空間を設定する方法
-    
+
     ![IAM による設定方法]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2a.png)
 
 * カスタムの領域と名前空間と共に、AWS のアクセスキーとシークレットキーを使用する方法
-    
+
     ![その他の設定方法]({{ site.baseurl }}/assets/img/docs/metrics_aws_cloudwatch2b.png)
 
 設定の保存後、AWS CloudWatch コンソールに移動すると、メトリクスが転送されていることを*確認*できます。
@@ -89,7 +89,7 @@ Datadog API キーを入力します。
     [[output.influxdb]]
       url = "http://52.67.66.155:8086"
       database = "testdb"
-    
+
 
 4. `docker restart telegraf` を実行してコンテナを再起動し、変更をロードまたはリロードします。
 
@@ -99,7 +99,7 @@ Datadog API キーを入力します。
 
     [global_tags]
     Env="<staging-circleci>"
-    
+
 
 デフォルトの高度なインストール手順については、[InfluxDB のドキュメント](https://github.com/influxdata/influxdb#installation)を参照してください。
 
@@ -109,7 +109,7 @@ Datadog API キーを入力します。
 
 AWS アカウントにはデフォルトで Auto Scaling グループ (ASG) が作成されます。 EC2 ダッシュボードに移動し、左側のメニューから [Auto Scaling Groups (Auto Scaling グループ)] を選択します。 次に、[Instances (インスタンス)] タブで、[Desired (必要)] と [Minimum (最小)] の値を設定し、スピンアップして利用可能な状態を維持する Nomad クライアントの数を定義します。 [Auto Scaling] ページの [Scaling Policy (スケーリングポリシー)] タブを使用すると、特定の時刻にのみグループを自動的にスケールアップするように設定できます。ポリシーの定義に関するベストプラクティスについては、以下のセクションを参照してください。
 
-Nomad クライアントのドレインおよびスケールダウンの手順については、Nomad に関するドキュメントの「[Nomad クライアントのシャットダウン]({{ site.baseurl }}/ja/2.0/nomad/#shutting-down-a-nomad-client)」セクションを参照してください。
+Nomad クライアントのドレインおよびスケールダウンの手順については、Nomad に関するドキュメントの「[Nomad クライアントのシャットダウン]({{ site.baseurl }}/ja/2.0/nomad/#nomad-クライアントのシャットダウン)」セクションを参照してください。
 
 ### Auto Scaling ポリシーのベストプラクティス
 
@@ -148,18 +148,18 @@ CircleCI 1.0 Builders では、ログが `/var/log/**/*.log` に格納されま�
 CircleCI の Terraform テンプレートや CloudFormation テンプレートを使用している場合は、以下のように起動設定を変更して、エージェントをインストールおよび実行するためのフックを追加します。
 
     #!/usr/bin/bash
-    
-    
+
+
     #### ログ設定 - この例では Amazon CloudWatch を使用します
-    
+
     # エージェントのインストール - この例では Amazon CloudWatch を使用します
     wget https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py
-    
+
     # エージェントを設定します
     cat <<EOF >/root/awslogs.conf
     [general]
     state_file = /var/awslogs/state/agent-state
-    
+
     [/var/log/circle-builder/circle.log]
     datetime_format = %Y/%m/%d %H:%M:%S
     file = /var/log/circle-builder/circle.log
@@ -168,18 +168,18 @@ CircleCI の Terraform テンプレートや CloudFormation テンプレート�
     initial_position = end_of_file
     log_group_name = /var/log/circle-builder/circle.log
     EOF
-    
-    
+
+
     ## エージェントを実行します
     python ./awslogs-agent-setup.py --region us-west-2 --non-interactive --configfile=/root/awslogs.conf
-    
+
     #### 通常どおり CircleCI Builder を実行します
-    
+
     curl https://s3.amazonaws.com/circleci-enterprise/init-builder-0.2.sh | \
         SERVICES_PRIVATE_IP=<private ip address of services box> \
         CIRCLE_SECRET_PASSPHRASE=<passphrase entered on system console (services box port 8800) settings> \
         bash
-    
+
 
 Chef、Puppet、SaltStack などのオーケストレーションツールを使用している場合は、Builder インスタンスに適したレシピやサンプルを使用できます。
 
@@ -193,7 +193,7 @@ CircleCI 1.0 Builders は `syslog` の機能と統合されています。 `sysl
         SERVICES_PRIVATE_IP=<private ip address of services box> \
         CIRCLE_SECRET_PASSPHRASE=<passphrase entered on system console (services box port 8800) settings> \
         bash
-    
+
 
 次に、`syslog` から一元管理されている `rsyslog` サーバーにログを転送するように設定します。または、ローカルログエージェントによってファイルではなく `syslog` がモニタリングされるように設定します。
 

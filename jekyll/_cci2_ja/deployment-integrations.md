@@ -12,7 +12,7 @@ CircleCI は、ほぼすべてのサービスにデプロイできるように�
 ## 概要
 {:.no_toc}
 
-アプリケーションをデプロイするには、[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#jobs-overview)を `.circleci/config.yml` ファイルに追加します。 また、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)と [SSH 鍵]({{ site.baseurl }}/ja/2.0/add-ssh-key/)を追加する必要があります。
+アプリケーションをデプロイするには、[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)を `.circleci/config.yml` ファイルに追加します。 また、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)と [SSH 鍵]({{ site.baseurl }}/ja/2.0/add-ssh-key/)を追加する必要があります。
 
 以下に、Rails アプリケーションを Heroku にデプロイする場合の簡単な例を示します。 アプリケーション全体は、[CircleCI デモワークフローリポジトリの連続ジョブのブランチ](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter)で確認できます。
 
@@ -134,7 +134,7 @@ CircleCI はパートナーと協力して、AWS アプリケーションを迅�
               from: bucket/build_asset.txt
               to: 's3://my-s3-bucket-name'
               arguments: '--dryrun’
-    
+
 
 AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](https://circleci.com/orbs/registry/orb/circleci/aws-s3)ページを参照してください。
 
@@ -162,7 +162,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
               region: AWS_REGION_ENV_VAR_NAME
               repo: myECRRepository
               tag: myECRRepoTag
-    
+
 
 ##### AWS ECS
 
@@ -187,7 +187,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
               family: '${MY_APP_PREFIX}-service'
               cluster-name: '${MY_APP_PREFIX}-cluster'
               container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
-    
+
 
 AWS ECS と AWS ECR の Orbs の詳細については、以下の Orb レジストリページを参照してください。 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 
@@ -242,7 +242,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
           cf api https://api.run.pivotal.io  # または、プライベート Cloud Foundry デプロイをターゲットにします
           cf auth "$CF_USER" "$CF_PASSWORD"
           cf target -o "$CF_ORG" -s "$CF_SPACE"
-    
+
 
 ### dark デプロイ
 {:.no_toc}
@@ -264,7 +264,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
           cf start app-name-dark
           # dark ルートを dark アプリケーション専用にします
           cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
-    
+
 
 ### live デプロイ
 {:.no_toc}
@@ -284,7 +284,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
           cf delete app-name -f
           # "dark" バージョンの名前を正しい名前に切り替えます
           cf rename app-name-dark app-name
-    
+
 
 ### 手動による承認
 {:.no_toc}
@@ -315,23 +315,23 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
               filters:
                 branches:
                   only: master
-    
+
 
 ### Orb デプロイのサンプル
 
 CircleCI は、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)には、Cloud Foundry で実行できる特定のタスクのサンプルがいくつか含まれています。この中には、単一のジョブで Cloud Foundry アプリケーションをビルドしてデプロイする方法を示した以下のサンプルも含まれています。
 
     version: 2.1
-    
+
     build_and_push:
         description: |
           単一ジョブでアプリケーションをビルドしてデプロイします。
         usage:
           version: 2.1
-    
+
           orbs:
             cloudfoundry: circleci/cloudfoundry@1.0
-    
+
           workflows:
             version: 2
             build-deploy:
@@ -345,7 +345,7 @@ CircleCI は、設定ワークフローを簡略化するために Cloud Foundry
                       - run: # さらに追加できます
                     manifest: # manifest.yml ファイルへのパス
                     package: # アプリケーションパッケージへのパス
-    
+
 
 設定ワークフローで使用できるさまざまな Cloud Foundry Orb のサンプルについては、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)の [Cloud Foundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) に関するページで詳細を確認できます。
 
@@ -354,12 +354,12 @@ CircleCI は、設定ワークフローを簡略化するために Cloud Foundry
 CircleCI で firebase-tools をグローバルにインストールすることはできません。このため、firebase-tools はプロジェクトの devDependencies に追加します。
 
     npm install --save-dev firebase-tools
-    
+
 
 以下のコマンドを使用して、Firebase CLI トークンを生成します。
 
     firebase login:ci
-    
+
 
 生成されたトークンを CircleCI プロジェクトの環境変数に $FIREBASE_DEPLOY_TOKEN として追加します。
 
@@ -373,10 +373,10 @@ CircleCI で firebase-tools をグローバルにインストールすること�
              - run:
                  name: Firebase に Master をデプロイ
                  command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-    
+
         workflows:
           version: 2
-    
+
           -deploy:
             jobs:
               - build-job
@@ -386,13 +386,13 @@ CircleCI で firebase-tools をグローバルにインストールすること�
                   filters:
                     branches:
                       only: master
-    
-    
+
+
 
 Firebase で Google Cloud Functions を使用する場合は、以下の行を `config.yml` に追加し、Google Cloud Functions が保存されているフォルダー (この場合は 'functions') に移動して、npm インストールを実行するように CircleCI に指示します。
 
        - run: cd functions && npm install
-    
+
 
 ### Firebase Orb のサンプル
 
@@ -414,7 +414,7 @@ Firebase の設定ワークフローを簡略化するには、必要な設定�
           - run:
               name: Firebase にデプロイ
               command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
-    
+
 
 Firebase Orb を使用してアプリケーションをデプロイする方法については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)の [Firebase Orb のデプロイ](https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy)に関するページを参照してください。
 
@@ -427,12 +427,12 @@ Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認�
     <br />     deploy-job:
            docker:
              - image: my-image-version-tag
-           working_directory: /tmp/my-project  
+           working_directory: /tmp/my-project
            steps:
              - run:
                  name: GKE に Master をデプロイ
                  command: ./deploy.sh
-    
+
         workflows:
           version: 2
           build-deploy:
@@ -444,23 +444,23 @@ Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認�
                   filters:
                     branches:
                       only: master
-    
-    
+
+
 
 デプロイスクリプトを実行すると、新しく作成された Docker イメージがレジストリにプッシュされ、K8s デプロイがアップデートされます。これにより、`gcloud` コマンドでは新しいイメージが使用されて、承認の処理とイメージのプッシュが一度に実行されます。
 
     sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
-    
+
 
 これで、新しいイメージが GCR で使用可能になり、GCP インフラストラクチャからアクセスできるようになります。 次に、権限を変更します。
 
     sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-    
+
 
 最後に、`kubectl` の patch サブコマンドを使用して、コンテナで使用するイメージを指定する行を検索し、ビルドしたイメージのイメージタグを置き換えます。 これで、K8s デプロイによって以前のコンテナがシャットダウンされ、最新のコンテナの使用が開始されて、クラスタがアップグレードされます。
 
     kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
-    
+
 
 `deploy.sh` ファイル全体は [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh) のページで確認できます。 また、CircleCI 2.0 Google Cloud デプロイサンプルプロジェクトは[こちら](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app)で確認できます。
 
@@ -480,7 +480,7 @@ CircleCI Orb (ジョブ、コマンド、Executors を含む設定パッケー�
                     context: myContext # コンテキストまたはプロジェクトレベルの環境変数を介して gCloud サービスキーを保存します
                     google-project-id: myGoogleProjectId
                     google-compute-zone: myGoogleComputeZone
-    
+
 
 この Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)の [CircleCI Google Cloud Orb](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) に関するページを参照してください。
 
@@ -539,7 +539,7 @@ Heroku をデプロイする場合や、Heroku ワークフローをカスタマ
       heroku_deploy:
         jobs:
           - heroku/deploy-via-git
-    
+
 
 #### Heroku ワークフローのカスタマイズ
 
@@ -558,7 +558,7 @@ Heroku をデプロイする場合や、Heroku ワークフローをカスタマ
           - heroku/install
           - heroku/deploy-via-git:
               only-branch: master
-    
+
 
 これらの Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)の [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku) に関するページを参照してください。
 
@@ -573,9 +573,9 @@ Heroku をデプロイする場合や、Heroku ワークフローをカスタマ
     ```
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
-    
+
     この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
-    
+
 
 1. [プロジェクト設定]({{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
@@ -603,14 +603,14 @@ workflows:
 ```
 
 1. 新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
-    
+
         npm version 10.0.1
-        
-    
+
+
     これで、`package.json` ファイルがアップデートされ、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
-    
+
         git push --follow-tags
-        
+
 
 2. テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
 
