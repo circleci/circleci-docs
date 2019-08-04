@@ -9,7 +9,7 @@ order: 1
 
 ## Introduction
 
-When you have finished authoring your own orb, you may then validate your orb to ensure it will work in your configuration, and then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the `orb-tools` orb, with its associated commands, that simplify the validation and publication process. 
+When you have finished authoring your orb, you may then test your orb to ensure it will work in your configuration. After testing has been completed, you may then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the `orb-tools` orb, with its associated commands, that simplify the validation and publication process. 
 
 ## orb-tools
 
@@ -96,4 +96,4 @@ workflows:
           validate: true
 ```
 
-Notice in this example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/validate` job first. If the orb is valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+In the above example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
