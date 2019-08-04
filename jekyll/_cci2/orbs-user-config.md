@@ -15,9 +15,11 @@ Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for t
 
 ## Configure Your Platform to Work With Orbs
 
-Configuring your platform to work with orbs is a very simple and easy process, only requiring you to invoke the orb you have chosen to use from the CircleCI Orbs Registry. 
+Configuring your platform to work with orbs is a very simple process, requiring you to invoke the orb you have chosen to use from the CircleCI Orbs Registry. 
 
-To use an existing orb from the CircleCI Orbs Registry in your 2.1 `circleci/config.yml` file, invoke the orb with the `orbs` key. The example shown below demonstrates how you can invoke the `hello-build` orb in the `circleci` namespace.
+To use an existing orb from the CircleCI Orbs Registry in your 2.1 `circleci/config.yml` file, invoke the orb with the `orbs` key. 
+
+The example below demonstrates how you can invoke the `hello-build` orb in the `circleci` namespace.
 
 ``
 version: 2.1
