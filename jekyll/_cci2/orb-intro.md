@@ -38,7 +38,6 @@ In the above example, the following two orbs are imported into your config:
 - [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) 
 - [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku)
 
-
 ### Importing a Partner Orb
 
 To import a partner orb, perform the steps listed below.
