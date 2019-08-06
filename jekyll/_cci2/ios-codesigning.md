@@ -21,8 +21,10 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
 **Note:** Setting up code signing on
-CircleCI 2.0 using Fastlane Match requires *adding a User key* to your
+CircleCI 2.0 using Fastlane Match requires *adding a User key** to your
 CircleCI project. Setting up code signing is quite different than it was in CircleCI 1.0. The 2.0 documentation has been updated to reflect that the CircleCI app is not used, only the config instructions below are used for code signing in 2.0.
+
+**Note**: If you would like to proceed without using Fastlane Match, [this blog post](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2) provides an overview of how you can do this with CircleCI.
 
 If you have not yet configured your iOS or Mac project on CircleCI 2.0,
 you can find the configuration instructions in the [Testing iOS Applications on macOS document]({{ site.baseurl }}/2.0/testing-ios/).

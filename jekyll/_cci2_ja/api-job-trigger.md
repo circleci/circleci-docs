@@ -26,7 +26,7 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
 
 この例には以下の変数が使用されています。
 
-- `CIRCLE_API_USER_TOKEN`：[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)
+- `CIRCLE_API_USER_TOKEN`：[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)
 - `<vcs-type>`：選択された VCS (`github` または `bitbucket`) を示すプレースホルダ変数
 - `<org>`：CircleCI 組織の名前を示すプレースホルダ変数
 - `<repo>`：リポジトリの名前を示すプレースホルダ変数 - `<branch>`：ブランチの名前を示すプレースホルダ変数

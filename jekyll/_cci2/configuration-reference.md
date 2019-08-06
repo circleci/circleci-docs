@@ -671,12 +671,16 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`) 
+version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version). 
 {: class="table table-striped"}
 
-***Notes***:
+**Notes**:
+
 - A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
+- The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+
 
 ##### **`save_cache`**
 
@@ -822,7 +826,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 ##### **`store_artifacts`**
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the   [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -842,7 +846,9 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites. 
+
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1090,7 +1096,7 @@ Jobs may be configured to use global environment variables set for an organizati
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String | The name of the context. The initial default name was `org-global`. With the ability to use multiple contexts, each context name must be unique.
+context | N | String | The name of the context. The initial default name was `org-global`. Each context name must be unique.
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1168,6 +1174,8 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              only: /v.*/
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.

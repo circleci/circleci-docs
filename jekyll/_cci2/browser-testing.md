@@ -349,7 +349,7 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:8080` to port `3000` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080.
+2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
