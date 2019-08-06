@@ -60,33 +60,49 @@ The table below lists some of the many orbs you may select from the CircleCI Orb
 Partner Orb Registry Link | Orb Reference String
 ------------|-----------
 [Anchore](https://circleci.com/orbs/registry/orb/anchore/anchore-engine) | `anchore: anchore/anchore-engine@1.0.0`
+[Aqua Security](https://circleci.com/orbs/registry/orb/aquasecurity/microscanner) | `aqua: aquasecurity/microscanner@0.0.1`
 [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) | `ecr: circleci/aws-ecr@4.0.1`
 [Amazon EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks) | `eks: circleci/aws-eks@0.1.0`
 [Azure ACR](https://circleci.com/orbs/registry/orb/circleci/azure-acr) | `acr: circleci/azure-acr@0.1.1`
 [Azure AKS](https://circleci.com/orbs/registry/orb/circleci/azure-aks) | `aks: circleci/azure-aks@0.1.0`
 [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`
+[CodeScene](https://circleci.com/orbs/registry/orb/empear/codescene-ci-cd) | `codescene: empear/codescene-ci-cd@1.0.0`
 [Contrast Security](https://circleci.com/orbs/registry/orb/contrastsecurity/verify) | `contrastsecurity: contrastsecurity/verify@0.1.2`
+[CryptoMove](https://circleci.com/orbs/registry/orb/cryptomove/tholos) | `cryptomove: cryptomove/tholos@0.0.11`
 [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0`
 [Datree](https://circleci.com/orbs/registry/orb/datree/policy) | `datree: datree/policy@1.0.6`
 [DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0`
 [Docker Hub](https://circleci.com/orbs/registry/orb/circleci/docker) | `dockerhub: circleci/docker@0.1.0`
+[Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0`
 [Google Container Registry](https://circleci.com/orbs/registry/orb/circleci/gcp-gcr) | `gcr: circleci/gcp-gcr@0.0.7`
 [Google Kubernetes Engine](https://circleci.com/orbs/registry/orb/circleci/gcp-gke) | `gke: circleci/gcp-gke@0.1.0`
+[Happo](https://circleci.com/orbs/registry/orb/happo/happo) | `happo: happo/happo@1.0.1`
+[Helm](https://circleci.com/orbs/registry/orb/circleci/helm) | `helm: circleci/helm@0.1.1`
 [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1`
 [Honeycomb](https://circleci.com/orbs/registry/orb/honeycombio/buildevents) | `buildevents: honeycombio/buildevents@0.1.1`
 [Kublr](https://circleci.com/orbs/registry/orb/kublr/kublr-api) | `kublr: kublr/kublr-api@0.0.1`
-[LogDNA](https://circleci.com/orbs/registry/orb/logdna/logdna) | `logdna: logdna/logdna@0.0.1`
-[Nirmata](https://circleci.com/orbs/registry/orb/nirmata/nirmata) | `nirmata: nirmata/nirmata@1.1.0`
-[Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`
-[Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`
+@@ -89,25 +82,36 @@ Partner Orb Registry Link | Orb Reference String
 [Pantheon](https://circleci.com/orbs/registry/orb/pantheon-systems/pantheon) | `pantheon: pantheon-systems/pantheon@0.1.0`
 [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`
 [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`
+[Probely](https://circleci.com/orbs/registry/orb/probely/security-scan) | `probely: probely/security-scan@1.0.0`
+[Provar](https://circleci.com/orbs/registry/orb/provartesting/provar) | `provar: provartesting/provar@1.9.10`
+[Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0`
 [Red Hat OpenShift](https://circleci.com/orbs/registry/orb/circleci/redhat-openshift) | `redhat: circleci/redhat-openshift@0.1.0`
 [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0`
 [Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.0`
 [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2`
 [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1`
+[Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2`
+[Styra](https://circleci.com/orbs/registry/orb/styra/cli) | `styra: styra/cli@0.0.7`
+[Testim](https://circleci.com/orbs/registry/orb/testimio/runner) | `testim: testimio/runner@1.1.1`
+[Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4`
+[VMware Code Stream](https://circleci.com/orbs/registry/orb/vmware/codestream) | `vmware/codestream@1.0.0`
+[WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
+[xMatters](https://circleci.com/orbs/registry/orb/xmatters/xmatters-orb) | `xmatters: xmatters/xmatters-orb@0.0.1`
+{: class="table table-striped"}
+
+
 
 **Note:**  As a prerequisite, you must enable use of 3rd-party orbs on the Settings > Security page for your org.
 
