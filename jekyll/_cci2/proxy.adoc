@@ -3,6 +3,7 @@
 :page-liquid:
 :icons: font
 :toc: macro
+:toc-title:
 
 This section describes how to configure CircleCI to use an HTTP proxy.
 

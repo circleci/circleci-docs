@@ -11,19 +11,19 @@ toc::[]
 
 == System Checks
 
-==== When are executor instances created and destroyed?
+=== When are executor instances created and destroyed?
 
 **Answer:**
 CircleCI creates a new instance for each job.  The instance will be destroyed at the end of the job.
 However, given that cloud instance creation may take significant time (~1 to 3 minutes), CircleCI offers a pre-scale option, where a set number of instances will be created in anticipation of demand.  These will be killed at the end of the job.  The number of pre-scaled instances is configured in the settings section of the Management Console.
 At any given time, CircleCI expects to have a base of pre-scaled instances and the required instances to service current job load.
 
-==== When are executor instances reused?
+=== When are executor instances reused?
 
 **Answer:**
 Machine executor VMs never get reused for multiple jobs.  EBS Volumes are reused for multiple jobs, but only get shared among jobs within the same project.
 
-==== How are EBS volumes managed?
+=== How are EBS volumes managed?
 
 **Answer:**
 Since docker layers can be large (GBs), CircleCI prefers caching by using attached EBS volumes to using an object storage (for example, S3).  Volumes are created when a job is configured to use docker layer caching (for example, set  `docker_layer_caching: true` in config). **Note:** For docker layer caching to work, you **cannot** use preallocated instances.  You must set the remote docker and/or machine executor (depending on which one you want to use DLC, or both) to 0 in the replicated settings for "on-demand" instances.  Otherwise, DLC will not work.
@@ -32,26 +32,26 @@ CircleCI reuses any existing available volume for that job project.
 If there is none (or all existing volumes are busy), CircleCI creates a new volume for the project.  Volumes are associated with a project.  No two project jobs can share an EBS volume for security reasons.
 CircleCI deletes EBS volumes in few circumstances (for example, when there is a risk of running out of disk space).
 
-==== Can the amount of EBS volumes and EC2 instances be bounded?
+=== Can the amount of EBS volumes and EC2 instances be bounded?
 
 **Answer:**
 Not at this time.  
 You may utilize the metrics provided to alert when reaching a specific threshold.
 
-==== How do you prevent executors from existing indefinitely?
+=== How do you prevent executors from existing indefinitely?
 
 **Answer:**
 A process runs that periodically detects and stops any leaked VMs (for example, a task completed but it’s VM is running for over N hours).
 You may also manually inspect instances that have been running for over 24 hours (CircleCI currently does this as well).
 You may also utilize the metrics provided to alert when stale VMs are detected.
 
-==== Where can I find the audit log(s)?
+=== Where can I find the audit log(s)?
 
 **Answer:**
 The Audit logs are found at the root of your object storage installation under `/audit-logs/audit_log/v1`.
 Audit Log Service (as of CircleCI v2.13) handles the storage of audit log events.  Services running within a cluster may fire audit events that are then captured by this service and persisted to the provisioned Storage mechanism for AWS S3 and On-Host.
 
-==== What do the audit log files contain?
+=== What do the audit log files contain?
 
 **Answer:**
 A JSON representation of event(s) for the period of time since the last file created (each file starts with a timestamp and is generally an hourly period).
@@ -95,7 +95,7 @@ For example;
 
 <<<
 
-==== What action types are there?
+=== What action types are there?
 
 **Answer:**
 ```
@@ -121,7 +121,7 @@ workflow.retry
 workflow.start
 ```
 
-==== How can I access the files and do something with them?
+=== How can I access the files and do something with them?
 
 **Answer:**
 
@@ -137,7 +137,7 @@ aws s3 cp --quiet s3://BUCKET/$key - | grep  workflow.job.start;
 done
 ```
 
-==== How do I ensure proper injection of Internal CA Certificate?
+=== How do I ensure proper injection of Internal CA Certificate?
 
 **Answer:**
 If using an internal CA, or self-signed certificate, you must ensure the signing certificate is trusted by the domain service to properly connect to GitHub Enterprise.
@@ -150,17 +150,12 @@ If using an internal CA, or self-signed certificate, you must ensure the signing
 
 CircleCI conducts ongoing security checks, for example, CircleCI containers are scanned by TwistLock prior to being published. CircleCI does **not** conduct ongoing security checks of your environment.
 
-
-=== Password and PII Security
-
-==== What kind of security is in place for passwords and Personally Identifiable Information (PII)? Are the passwords hashed with a strong hash function and salted?
+=== What kind of security is in place for passwords and Personally Identifiable Information (PII)? Are the passwords hashed with a strong hash function and salted?
 
 **Answer:**
 Passwords are hashed with a 10-character salt and SHA265, refer to the Security chapter for more details.
 
-=== Ongoing Security Checks
-
-==== How will the Host and Nomad clients be monitored for security issues?  
+=== How will the Host and Nomad clients be monitored for security issues?  
 
 **Answer:**
 Your internal security teams are responsible for monitoring the Host and Nomad clients installed in your private datacenter or cloud.
@@ -168,24 +163,24 @@ CircleCI containers are scanned by TwistLock prior to being published.
 
 == System Configuration
 
-==== How is configuration managed for the system?
+=== How is configuration managed for the system?
 
 **Answer:**
 Replicated Management Console handles all of the post-installation configuration. Installation-specific configuration is managed by Terraform or Shell scripts.
 
-==== How are configuration secrets managed?
+=== How are configuration secrets managed?
 
 **Answer:**
 Configuration secrets are stored in plain-text on the host.
 
 == Metrics
 
-==== What significant metrics will be generated?
+=== What significant metrics will be generated?
 
 **Answer:**
-Refer to the Configuration Chapter for details about monitoring and metrics.
+Refer to the <<monitoring#monitoring,Monitoring>> section for details about monitoring and metrics.
 
-==== How do I find out how many builds per day are running?
+=== How do I find out how many builds per day are running?
 
 **Answer:**
 
@@ -203,7 +198,7 @@ items.count()
 
 == Usage Statistics
 
-==== How do I find the usage statistics?
+=== How do I find the usage statistics?
 
 **Answer:**
 
@@ -213,7 +208,7 @@ docker exec server-usage-stats /src/builds/extract
 
 == Health Checks
 
-==== How is the health of dependencies (components and systems) assessed? How does the system report its own health?
+=== How is the health of dependencies (components and systems) assessed? How does the system report its own health?
 
 **Answer:**
 Ready Agent can be used to determine the health of the system.  Replicated looks to the server-ready-agent API for a 200 response. `server-ready-agent` waits to receive a 200 from all listed services, reporting a 5XX until all services come online and then it reports a 200.
@@ -223,7 +218,7 @@ You can tail the logs to determine current and final state as follows:
 docker logs -f ready-agent
 ```
 
-== Health of Service
+=== Health of Service
 Each documented service provides `/health-check`, `/healthcheck`, `/status` HTTP endpoint: 200 indicates basic health, 500 indicates bad configuration.
 To determine the health of individual services you must ssh into your Services VM (where all the containers are running) and make the request.
 The current list of services that expose a check are listed below:
@@ -255,7 +250,7 @@ localhost:4261/status
 - VM Service*
 localhost:3001/status
 
-*\ if enabled
+pass:[*] if enabled
 
 As an example, following is how you would determine if the frontend is healthy:
 
@@ -263,35 +258,29 @@ As an example, following is how you would determine if the frontend is healthy:
 curl -s -o /dev/null -I -w "%{http_code}\n"  0.0.0.0:80/health-check
 ```
 
-== Health of Dependencies
+=== Health of Dependencies
 Use `/health` HTTP endpoint for internal components that expose it. Other systems and external endpoints: typically use HTTP 200 except some synthetic checks for some services.
 
 == Operational Tasks
 
-=== Deployment
-
-==== How is the software deployed? How does rollback happen?
+=== How is the software deployed? How does rollback happen?
 
 **Answer:**
 CircleCI uses Enterprise-Setup Terraform or Static bash scripts for deployments, Replicated is installed and orchestrates pulling all containers into your VPC. Rollbacks can only occur by reloading a previous backup and are not possible through Replicated.
 
-=== Scaling Events
-
-==== What kind of scaling events take place?
+=== What kind of scaling events take place?
 
 **Answer:**
 Vertically scaling Service and Nomad clients is possible with downtime, Horizontally scaling Nomad Clients is possible without downtime. Refer to the Monitoring section of the Configuration chapter for details.
 
-=== Routine and sanity checks
-
-==== What kind of checks need to happen on a regular basis?
+=== What kind of checks need to happen on a regular basis?
 
 **Answer:**
 All `/health` endpoints should be checked every 60 seconds including the Replicated endpoint.
 
-=== Troubleshooting
+== Troubleshooting
 
-==== How should troubleshooting happen? What tools are available?
+=== How should troubleshooting happen? What tools are available?
 
 **Answer:**
 
@@ -309,42 +298,40 @@ If the above does not bring you into a REPL that mentions it is the CircleCI Dev
 
 Once you are in the repl, you can copy and paste any of the commands below, and making the necessary substitutions in order to make the command work.
 
-=== User/Admin Problems:
-
-==== How do I view all users?
+=== How do I view all users?
 
 **Answer:**
 ```
 (circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
 ```
 
-==== How do I delete a user?
+=== How do I delete a user?
 
 **Answer:**
 ```
 (circle.http.api.admin-commands.user/delete-by-login-vcs-type! "Sirparthington" :github)
 ```
 
-==== How do I make a user an admin?
+=== How do I make a user an admin?
 
 **Answer:**
 ```
 (circle.model.user/set-fields! (circle.model.user/find-one-by-github-login "your-github-username-here") {:admin "all"})
 ```
 
-==== How do I get user statistics?
+=== How do I get user statistics?
 
 **Answer:**
 If a if you need some basic statistics (name, email, sign in history) for your users, run the following REPL commands:
 
-*All Time*
+* *All Time*
 
 ```shell
 circleci dev-console
 (circle.model.user/where {} :only [:name :login :emails :admin :dev_admin :activated :sign_in_count :current_sign_in_at :current_sign_in_ip :last_sign_in_at :last_sign_in_ip])
 ```
 
-*Last Month*
+* *Last Month*
 
 ```shell
 (circle.model.user/where
@@ -353,7 +340,7 @@ circleci dev-console
   [:name :login :emails :admin :dev_admin :activated :sign_in_count :current_sign_in_at :current_sign_in_ip :last_sign_in_at :last_sign_in_ip])
 ```
 
-==== How do I create a new admin?
+=== How do I create a new admin?
 
 **Answer:**
 By default, the first user to access the CCIE instance after it is started becomes the admin.
@@ -370,7 +357,7 @@ In the event the admin is unknown, or has left the company without creating a ne
 (-> (circle.model.user/find-one-by-login "<username>") (circle.model.user/set-fields!  {:admin "write-settings"}))
 ```
 
-==== How do I reset the Management Console password?
+=== How do I reset the Management Console password?
 
 **Answer:**
 https://www.replicated.com/docs/kb/supporting-your-customers/resetting-console-password/
@@ -379,9 +366,7 @@ https://www.replicated.com/docs/kb/supporting-your-customers/resetting-console-p
 . Use the following command: `replicated auth reset` to remove the password
 . Visit `https://<server>:8800/create-password` to create a new password or connect LDAP.
 
-=== Leftover VMs in Your AWS Account
-
-==== How do I resolve the case of VM spin-up / spin-down issues?
+=== How do I resolve the case of VM spin-up / spin-down issues?
 
 **Answer:**
 Make sure no builds are running that require the remote Docker environment or the machine executor, and make sure to terminate any running preallocated/remote VM EC2 instances first. Then, complete the following:
@@ -394,12 +379,10 @@ Make sure no builds are running that require the remote Docker environment or th
 . Run `circleci dev-console` to REPL in. You should now be able to run the below commands to check queues.
 . After checking queues with the commands below, change the setting back to their original values.
 
-<<<
-
-=== Queues
+== Queues
 Queues may become an issues for you if you are running version 2.10 or earlier. As 1.0 builds pile up and block any builds from running, run the commands below to get a feeling for how long the queues are. Then, you can promote builds from the usage-queue to the run-queue or just cancel them from the run queue.
 
-==== Checking Usage Queue
+=== Checking Usage Queue
 
 ```
 (in-ns 'circle.backend.build.usage-queue)
@@ -423,7 +406,7 @@ Its safe to do this by the 100's, but do not put the entire queue in.
 
 <<<
 
-==== Checking Run Queue
+=== Checking Run Queue
 
 ```
 (circle.backend.build.run-queue/queue-depths) # returns how many are in the queue
@@ -435,37 +418,37 @@ Its safe to do this by the 100's, but do not put the entire queue in.
 
 NOTE: Remember to set values back to original in your settings after checking queues.
 
-=== Daylight-saving time changes
+== Daylight-saving time changes
 
-==== Is the software affected by daylight-saving time changes (both client and server)?
+=== Is the software affected by daylight-saving time changes (both client and server)?
 
 **Answer:**
 No.  All date/time data converted to UTC with offset before processing.
 
-=== Data cleardown
+== Data cleardown
 
-==== Which data needs to be cleared down? How often? Which tools or scripts control cleardown?
+=== Which data needs to be cleared down? How often? Which tools or scripts control cleardown?
 
 **Answer:**
 If using On-Host storage and Static, all storage should be mounted.
 
-=== Log rotation
+== Log rotation
 
-==== Is log rotation needed? How is it controlled?
+=== Is log rotation needed? How is it controlled?
 
 **Answer:**
 Docker automatically rotates logs.
 
-=== Replicated Failover and Recovery procedures
+== Replicated Failover and Recovery procedures
 
-==== What needs to happen when parts of the system are failed over to standby systems? What needs to happen during recovery?
+=== What needs to happen when parts of the system are failed over to standby systems? What needs to happen during recovery?
 
 **Answer:**
 Refer to the Backup and Troubleshooting sections of this document for details.
 
 == User Management
 
-==== How do I provision admin users?
+=== How do I provision admin users?
 
 **Answer:**
 The first user who logs in to the CircleCI application will automatically be designated an admin user. Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.

@@ -1,6 +1,6 @@
 = OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations on AWS and private infrastructure.
 Docs Team
-v2.17.2
+//v2.17.3
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
@@ -12,7 +12,6 @@ v2.17.2
 :pagenums:
 :idprefix:
 :idseparator: -
-:revremark: DRAFT
 
 :leveloffset: +1
 
@@ -37,6 +36,8 @@ include::user-accounts.adoc[]
 include::build-artifacts.adoc[]
 
 include::usage-stats.adoc[]
+
+include::jvm-heap-size-configuration.adoc[]
 
 include::ops.adoc[]
 
