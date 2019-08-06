@@ -63,7 +63,7 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  circleci/windows@1.0.0
+  win: circleci/windows@1.0.0
 ```
 
 Next, we declare orbs that we will be using in our build. We will only use the [windows-tools orb](https://circleci.com/orbs/registry/orb/circleci/windows-tools) to help us get started.
