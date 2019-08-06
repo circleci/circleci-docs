@@ -5,6 +5,7 @@
 :icons: font
 :toc: macro
 :toc-title:
+:sectanchors:
 
 This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor and remote Docker jobs.
 

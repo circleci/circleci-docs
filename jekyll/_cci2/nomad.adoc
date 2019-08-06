@@ -1,10 +1,11 @@
-[#nomadintro]
+//[#nomadintro]
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
+:sectanchors:
 
 CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 

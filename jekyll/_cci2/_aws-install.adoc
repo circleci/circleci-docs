@@ -11,6 +11,7 @@ Docs Team
 :pagenums:
 :idprefix:
 :idseparator: -
+:sectanchors:
 
 :leveloffset: +1
 

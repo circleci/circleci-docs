@@ -4,6 +4,7 @@
 :icons: font
 :toc: macro
 :toc-title:
+:sectanchors:
 
 NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
 
