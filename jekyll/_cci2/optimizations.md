@@ -138,7 +138,7 @@ jobs:
       - run: make
 ```
 
-"For more details on how to best use resource classes to speed up build times, consider reading the [Credit Usage Examples & Best Practices](https://circleci.showpad.com/share/fwxM6b3HTPEHUG4AvnTCI) document.
+For more details on how to best use resource classes to speed up build times, consider reading the [Credit Usage Examples & Best Practices](https://circleci.showpad.com/share/fwxM6b3HTPEHUG4AvnTCI) document.
 
 ## Docker Layer Caching
 
