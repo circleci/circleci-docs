@@ -108,20 +108,11 @@ jobs:
       - run:
           name: Build API 2.x documentation with Widdershins and Slate
           command: |
-            mkdir -p /tmp/api2x
             cd src-api; rm -r build; rm source/index.html.md
-            echo "source folder has --------------->"; ls -la source
-            curl https://circleci.com/api/v2/openapi.json > /tmp/api2x/openapi.json
-            echo "looking for api2x curl result ----------------------------------- \n\n\n"
-            ls -la /tmp/api2x
-            node node_modules/widdershins --search false --language_tabs 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' --summary /tmp/api2x/openapi.json -o source/index.html.md
-            echo "ran widdershins, results should be in source folder ------------------------------- \n\n\n"
-            ls -la source
+            curl https://circleci.com/api/v2/openapi.json > openapi.json
+            node node_modules/widdershins/widdershins.js --search false --language_tabs 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' --summary openapi.json -o source/index.html.md
             bundle exec middleman build --clean
-            ls -la
             cp -R build/* ../jekyll/_api/v2
-            ls -la
-            ls ../jekyll/_api/v2
 
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
