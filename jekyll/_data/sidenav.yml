@@ -100,7 +100,7 @@ en:
     - name: Using Orbs
       link:      
       children:
-        - name: Configure Your Platform to Work With Orbs
+        - name: Set Your Version to Work With Orbs
           link: 2.0/orb-user-config/
         - name: Selecting and Using an Orb
           link: 2.0/orbs-user-select-orb/        
