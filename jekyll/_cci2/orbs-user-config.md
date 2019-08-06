@@ -33,3 +33,9 @@ workflows:
 ```
 
 **Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key.
+
+## See Also
+{:.no_toc}
+
+- Refer to Orb Introduction ({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
+- Refer to Selecting and Using an Orb ({{site.baseurl}}/2.0/orbs-user-select-orb/), for steps on how to select, and then use, an orb from the CircleCI Orbs Registry. 
