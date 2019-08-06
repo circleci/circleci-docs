@@ -102,7 +102,7 @@ jobs:
       - run:
           name: Build API 1.x documentation with Slate
           command: |
-            cd src-api; bundle install;
+            cd src-api; bundle install; npm install
             bundle exec middleman build --clean
             cp -R build/* ../jekyll/_api
       - run:
