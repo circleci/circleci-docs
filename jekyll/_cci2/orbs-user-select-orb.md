@@ -39,8 +39,7 @@ To use the CircleCI Orbs Registry, follow the steps below.
 
 5) Follow the instructions in the **Orbs Quick Start Guide** section to add the orb to your configuration. Notice that there is a **copy code** box that you can select to copy the code to your clipboard.
 
-## See Also
+## Next Steps
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
-- Refer to [Configure Your Platform to Work With Orbs]({{site.baseurl}}/2.0/orbs-user-config/), for information on how to configure your platform to work with CircleCI orbs.
+- Refer to Set Your Version to Work With Orbs.
