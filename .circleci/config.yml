@@ -115,7 +115,7 @@ jobs:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
       - run:
-          name: "Build PDFs for Server"
+          name: Build PDFs for Server
           command: ./scripts/build_pdfs.sh
       - store_artifacts:
           path: release/tmp/
