@@ -24,6 +24,8 @@ follow the steps below to add an SSH key to your project.
 
 ## Steps
 
+1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
+
 1. In the CircleCI application,
 go to your project's settings
 by clicking the gear icon next to your project.
