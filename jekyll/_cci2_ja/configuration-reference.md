@@ -272,7 +272,7 @@ jobs:
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。他に値の指定がないときは必須です。
-image | – | String | 使用するイメージを指定します（デフォルト：`circleci/classic:latest`）。**注 :** プライベート環境の CircleCI はこのキーをサポートして **いません**。プライベート環境における `michine` Executor のイメージカスタマイズに関する詳細は、「[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)」を参照してください。
+image | – | String | 使用するイメージを指定します（デフォルト：`circleci/classic:latest`）。**注 :** プライベート環境の CircleCI はこのキーをサポートして **いません**。プライベート環境における `machine` Executor のイメージカスタマイズに関する詳細は、「[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)」を参照してください。
 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)を有効にするには `true` とします。**注 :** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
 {: class="table table-striped"}
 

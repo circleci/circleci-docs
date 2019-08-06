@@ -92,14 +92,30 @@ This document provides a summary of features and product notes for the release o
 
 * We are removing the 1.0 Single-Box options from CircleCI 2.0. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. If this is absolutely critical to your workflow please reach out to us. This does not impact people who are running 1.0 in clustered mode.
 
-## Updating
+## Steps to Update to CircleCI Server v2.17
 Steps to update to CircleCI Server v2.17 are as follows:
 
-1. Check you are running Docker v17.12.1, and if not update (steps in section below)
-2. Update Replicated to v2.34.1 (steps in section below)
-3. Navigate to your Management Console dashboard (e.g. `https://<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
+1. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+2. Check you are running Docker v17.12.1 and update if necessary
+3. Update Replicated to v2.34.1 (steps in section below)
+4. Navigate to your Management Console dashboard (e.g. `https://<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
 
-### Prequisites for Updating Replicated
+### Snapshot for Rollback
+
+To take a snapshot of your installation:
+
+1. Go to the Management Console (`http://<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
+2. Ensure no jobs are running on the nomad clients – check by running `nomad status`
+3. Navigate to the AWS EC2 management console and select your Services machine instance
+4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.
+**Note:** It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
+Once you have the snapshot you are free to make changes on the Services machine.
+
+If you do need to rollback at any point, see our (restore from backup)[http://localhost:4000/docs/2.0/backup/#restoring-from-backup] guide.
+
+### Update Replicated
+
+**Perquisites**
 
 - Your installation is Ubuntu 14.04 or 16.04 based.
 - You are running replicated version 2.10.3<= on your services machine
@@ -108,7 +124,7 @@ Steps to update to CircleCI Server v2.17 are as follows:
 - All steps are completed on the Services machine
 - Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
 
-### Preparations
+#### Preparations for Updating Replicated
 
 Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
 
@@ -152,7 +168,7 @@ Example Output:
     sudo apt-mark hold docker-ce
 ```
 
-### Update
+#### Update Replicated
 
 Perform the Replicated update by executing the update script as follows:
 
