@@ -4,9 +4,9 @@
 :icons: font
 :toc: macro
 :toc-title:
-:circle-success: image:circle-success.png[]
-:circle-warning: image:circle-warning.png[]
-:circle-failure: image:circle-failure.png[]
+//:circle-success: image:circle-success.png[]
+//:circle-warning: image:circle-warning.png[]
+//:circle-failure: image:circle-failure.png[]
 
 This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
@@ -40,10 +40,13 @@ WARNING: if migrator services are down at startup connected services will fail
 | Failure can cause loss of data, corruption of jobs/workflows, major loss of functionality.
 |===
 
+<<<
+
 == Containers, Roles, Failure Modes and Startup Dependencies
 
 [.table.table-striped]
 [cols=5*,^,*, options="header", stripes=even]
+[cols="3,3,3,2,3"]
 |===
 | **Container / Image**
 | **Role**

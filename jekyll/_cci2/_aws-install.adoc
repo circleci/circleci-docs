@@ -17,10 +17,14 @@ v2.17.2
 
 include::install-overview.adoc[]
 
-include::server-ports.adoc[]
-
 include::aws-prereq.adoc[]
 
 include::aws.adoc[]
+
+include::aws-teardown.adoc[]
+
+include::updating-server.adoc[]
+
+include::server-ports.adoc[]
 
 :leveloffset: -1

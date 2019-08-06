@@ -9,8 +9,9 @@ This chapter is for System Administrators who want to automatically send some ag
 
 toc::[]
 
-To opt-in to this feature, navigate to your Management Console settings (e.g. `http://<circleci-hostname>.com:8800/settings`) and scroll down to Usage Statistics. Enable the radio button labeled Automatically send some usage statistics to CircleCI, as shown below.
+To opt-in to this feature, navigate to your Management Console settings (e.g. circleci-hostname.com:8800/settings) and scroll down to Usage Statistics. Enable the radio button labeled Automatically send some usage statistics to CircleCI, as shown below.
 
+.Usage Statistics Settings
 image::usage-statistics-setting.png[Send Usage Statistics]
 
 == Detailed Usage Statistics
@@ -51,6 +52,7 @@ The following sections provide information about the usage statistics CircleCI w
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
+[cols="4,2,2"]
 |===
 | **Name**
 | **Type**

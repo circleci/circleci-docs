@@ -5,7 +5,6 @@
 :toc: macro
 :toc-title:
 
-
 NOTE: CircleCI Server v2.17 uses the CircleCI 2.0 architecture.
 
 CircleCI Server is a modern continuous integration and continuous delivery (CI/CD) platform installable inside your private cloud or data center. Refer to the https://circleci.com/server/changelog[Changelog] for what's new in this CircleCI Server release.

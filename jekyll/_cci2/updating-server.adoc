@@ -1,0 +1,134 @@
+= Updating a Server Installation
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This section describes the Server update process.
+
+toc::[]
+
+== Update Steps
+
+. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+. Check you are running Docker v17.12.1 and update if necessary
+. Update Replicated to v2.34.1 (steps in section below)
+. Navigate to your Management Console dashboard (e.g. your-circleci-hostname.com:8800 and select the v2.17 upgrade
+
+== Snapshot for Rollback
+
+To take a snapshot of your installation:
+
+. Go to the Management Console (e.g. your-circleci-hostname.com:8800) and click Stop Now to stop the CircleCI Services machine from running
+. Ensure no jobs are running on the nomad clients – check by running `nomad status`
+. Navigate to the AWS EC2 management console and select your Services machine instance
+. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.
+
+NOTE: It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
+Once you have the snapshot you are free to make changes on the Services machine.
+
+If you do need to rollback at any point, see our <<backup#restoring-from-backup,Restore from Backup>> guide.
+
+== Updating Replicated
+
+**Perquisites**
+
+- Your installation is Ubuntu 14.04 or 16.04 based.
+- You are running replicated version 2.10.3<= on your services machine
+  - replicated --version
+- Your installation is **not** airgapped and you can access the internet from it
+- All steps are completed on the Services machine
+- Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
+
+=== Preparations
+
+Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
+
+- Stop the CircleCI application with
+
+```
+    replicatedctl app stop
+```
+
+Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+
+```
+    replicatedctl app status inspect
+```
+
+Example Output:
+```
+[
+    {
+        "AppID": "edd9471be0bc4ea04dfca94718ddf621",
+        "Sequence": 2439,
+        "State": "stopped",
+        "DesiredState": "stopped",
+        "Error": "",
+        "IsCancellable": false,
+        "IsTransitioning": false,
+        "LastModifiedAt": "2018-10-23T22:00:21.314987894Z"
+    }
+]
+```
+
+- For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
+
+```
+    sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
+```
+
+- Pin the Docker version using the following command:
+
+```
+    sudo apt-mark hold docker-ce
+```
+
+=== Perform Update
+
+Perform the Replicated update by executing the update script as follows:
+
+```
+    curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
+```
+
+Double-check your replicated and docker versions:
+
+Example Output
+```
+    replicatedctl version    # 2.34.1
+    docker -v                # 17.12.1
+```
+
+Restart the app with
+
+```
+    replicatedctl app start
+```
+
+The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
+
+```
+    replicatedctl app status inspect
+```
+
+Example output:
+```
+[
+    {
+        "AppID": "edd9471be0bc4ea04dfca94718ddf621",
+        "Sequence": 2439,
+        "State": "started",
+        "DesiredState": "started",
+        "Error": "",
+        "IsCancellable": true,
+        "IsTransitioning": true,
+        "LastModifiedAt": "2018-10-23T22:04:05.00374451Z"
+    }
+]
+```
+
+== Update Server Version
+
+TBD

@@ -36,6 +36,8 @@ CircleCI requires the following steps to get ELB (Elastic Load Balancing) certif
 
 NOTE: Opening the port for HTTP requests will allow CircleCI to return a HTTPS redirect.
 
+<<<
+
 . Open the following ports on your ELB:
 +
 [.table.table-striped]

@@ -93,6 +93,8 @@ For example;
 }
 ```
 
+<<<
+
 ==== What action types are there?
 
 **Answer:**
@@ -253,7 +255,7 @@ localhost:4261/status
 - VM Service*
 localhost:3001/status
 
-\* if enabled
+*\ if enabled
 
 As an example, following is how you would determine if the frontend is healthy:
 
@@ -392,6 +394,8 @@ Make sure no builds are running that require the remote Docker environment or th
 . Run `circleci dev-console` to REPL in. You should now be able to run the below commands to check queues.
 . After checking queues with the commands below, change the setting back to their original values.
 
+<<<
+
 === Queues
 Queues may become an issues for you if you are running version 2.10 or earlier. As 1.0 builds pile up and block any builds from running, run the commands below to get a feeling for how long the queues are. Then, you can promote builds from the usage-queue to the run-queue or just cancel them from the run queue.
 
@@ -416,6 +420,9 @@ Queues may become an issues for you if you are running version 2.10 or earlier. 
 
 Its safe to do this by the 100's, but do not put the entire queue in.
 ```
+
+<<<
+
 ==== Checking Run Queue
 
 ```

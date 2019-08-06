@@ -115,7 +115,7 @@ jobs:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
       - run:
-          name: Generate Operations Guide PDF
+          name: "Generate Operations Guide PDF"
           command: asciidoctor-pdf -a pdf-style=jekyll/_cci2/release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/release-pdf/fonts -a revdate=07-24-19 jekyll/_cci2/_ops-guide.adoc
       - store_artifacts:
           path: jekyll/_cci2/_ops-guide.pdf

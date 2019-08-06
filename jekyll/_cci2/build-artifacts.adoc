@@ -5,12 +5,12 @@
 :toc: macro
 :toc-title:
 
-Build artifacts persist data after a job is completed and may be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
+Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
 
 toc::[]
 
 == Safe and Unsafe Content Types
-By default, CircleCI Server only allows whitelisted artifact types to be served. This is to protect users from uploading, and potentially executing malicious content. The whitelist is as follows:
+By default, only pre-defined artifact types are allowed. This protects users from uploading, and potentially executing malicious content. The 'allowed-list' is as follows:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -63,6 +63,7 @@ By default, CircleCI Server only allows whitelisted artifact types to be served.
 | Audio
 | wav
 |===
+<<<
 
 Also, by default, the following types will be rendered as plain text:
 

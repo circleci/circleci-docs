@@ -44,6 +44,7 @@ Optional vars:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
+[cols="3,3,2"]
 |===
 | Var
 | Description
@@ -94,7 +95,7 @@ Optional vars:
 | true
 |===
 
-=== Provision Instances
+== Provision Instances
 . Save your changes and run:
 +
 ```shell
@@ -111,7 +112,7 @@ You will be asked to confirm if you wish to go ahead by typing `yes`.
 . An IP address will be provided at the end of the Terraform output. Visit this IP to carry on the install process.
 // explain what to do if this step fails
 
-=== Access Your Installation
+== Access Your Installation
 . You will see a browser-specific SSL/TLS info box. This is just to inform you that on the next screen your browser might tell you the connection to the admin console is unsafe, but you can be confident it is secure. Click Continue to Setup and proceed to your installation IP.
 +
 .SSL Security
@@ -129,14 +130,16 @@ image::secure-management-console.png[Hostname]
 .. Set a password that can be used to securely access the Management Console (recommended)
 .. Use your existing directory-based authentication system (e.g. LDPA)
 +
+.Admin Password
 image::admin-password.png[Secure the Management Console]
 
 . Your CircleCI installation will be put through a set of preflight checks, once they have completed, scroll down and click Continue.
 //what should admins do if not all these checks pass
 +
+.Preflight Checks
 image::preflight.png[Preflight Checks]
 
-=== Setup Your Installation
+== Installation Setup
 You should now be on the Management Console settings page (your-circleci-hostname.com:8800).
 
 WARNING: You can make changes to the settings on this page at any time but changes here will require *downtime* while the service is restarted. Some settings are covered in more detail in out Operations Guide.
@@ -194,9 +197,9 @@ You can preallocate instances to always be up and running, reducing the time tak
 image:vmprovider.png[]
 
 . If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here:
-
++
 .Metrics
-image:metrics_setup.png[]]
+image:metrics_setup.png[]
 
 . Artifacts persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows whitelisted artifact types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting here allows you to override this protection. For more information on safe/unsafe types see the Build Artifacts chapter in the https://circleci.com/docs/2.0/build-artifacts/[CircleCI Server Operations Guide]
 
@@ -206,7 +209,7 @@ image:metrics_setup.png[]]
 
 . When the application is started, select Open to launch CircleCI in your browser, and sign up/log in to your CircleCI installation and start running 2.0 builds! You will become the Administrator at this point as you are the first person to sign in. Have a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
-
++
 .Start CircleCI from your Dashboard
 image:dashboard.png[]
 
@@ -216,15 +219,3 @@ image:dashboard.png[]
 //<!--Is this what we hope they will do? Could use stronger language. Also would be good to have some help for what to do if jobs fail, or do we just want people to tell us so we can help?-->
 
 . If you're unable to run your first builds successfully please start with our https://circleci.com/docs/2.0/troubleshooting[Troubleshooting] guide for general troubleshooting topics, and our https://circleci.com/docs/2.0/nomad[Introduction to Nomad Cluster Operation] for information about how to check the status of Builders in your installation.
-
-== Teardown
-If your wish to destroy you installation of CircleCI Server, please let us know first in case there are any specific, supplementary steps required for your installation. Below is our basic step by step guide to tearing down an installation of CircleCI Server that was made with Terraform:
-
-. First you need to manually disable the termination protection on the Services machine from the AWS Management Console (If you set `services_disable_api_termination = "false"` in your `terraform.tfvars` file, skip this step). To do this:
-.. Navigate to the EC2 Dashboard and locate the Services machine instance
-.. Click to select it
-. Click Actions > Instance Settings > Change Termination Protection
-
-. Navigate to the S3 dashboard, locate the S3 bucket associated with your CircleCI cluster and delete it/its contents (If you set `force_destroy_s3_bucket = "true"` in your `terraform.tfvars` file, skip this step).
-
-. From a terminal, navigate to your clone of our `enterprise-setup` repo and run `terraform destroy` to destroy all EC2 instances, IAM roles, ASGs and Launch configurations created by `terraform apply`.

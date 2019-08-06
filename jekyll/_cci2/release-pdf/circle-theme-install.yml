@@ -318,7 +318,7 @@ footer:
   recto:
     #columns: "<50% =0% >50%"
     right:
-      content: '{section-or-chapter-title} | OPERATIONS GUIDE | {page-number}'
+      content: '{section-or-chapter-title} | INSTALLATION GUIDE | {page-number}'
       #content: 'image:circle-logo.png[width=80]'
 
       #content: '{document-title} | {page-number}'

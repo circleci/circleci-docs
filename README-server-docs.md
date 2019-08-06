@@ -5,7 +5,13 @@ Server documentation is written in ASCIIDOC and built for the web and PDF using 
 ## Document Structure
 Server documentation is provided in two formats - html on the main CircleCI docs site generated with Jekyll, showing the current docs, and also PDFs of our Operations and Installation guides are provided for each feature release.
 
-Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are maste `.adoc` files for the ops guide (`ops-guide.adoc`) and the installation guide (`install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]`
+Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for the ops guide (`_ops-guide.adoc`) and the installation guide (`_install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` etc.
+
+There are also separate front page files: `_ops-guide-front.adoc` and `_aws-install-front.adoc`, these are used to provide an easy way to have the version info on the front pages. The asciidoc book doctype only allows a cover page **image** - which can be a PDF, there is no way to apply text directly to the cover page from the main asciidoc file. Hopefully this will change in future so the two files can be merged.
+
+So, the process for creating a new version is to make the required changes to the individual topics, and then change the version in the front cover asciidoc file, generate the PDF for the front cover first, place in the assets>img>docs directory and then generate the new PDF content from the `_ops-guide.adoc` or `_aws-install.adoc` file, which will incorporate the new front cover. **This process will be run with a script.**
+
+Master asciidoc files that are only used for creating PDFs have an `_` at the start of the filenames to prevent Jekyll from converting them to HTML for the main site.
 
 ## Some notes about formatting
 

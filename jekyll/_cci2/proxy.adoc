@@ -3,7 +3,6 @@
 :page-liquid:
 :icons: font
 :toc: macro
-:toc-title:
 
 This section describes how to configure CircleCI to use an HTTP proxy.
 
@@ -78,7 +77,7 @@ EOF
 NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
 
 // not quite clear what is meant by this note... what's user data in this context?
-
+<<<
 === Corporate Proxies
 
 WARNING: When our instructions ask if you use a proxy, you will also be prompted to input the address. It is **very important** that you input the proxy in the following format: `<protocol>://<ip>:<port>`. If you miss any part, then `apt-get` won't work correctly and the packages won't download.
@@ -103,7 +102,7 @@ CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, a
 === Nomad Client Proxy Setup
 
 * If you are installing CircleCI Server on AWS using Terraform, you should add the below to your Nomad client launch configuration – these instructions should be added to `/etc/environment`.
-* If you are using Docker refer to the [Docker HTTP Proxy Instructions](https://docs.docker.com/engine/admin/systemd/#/http-proxy) documentation.
+* If you are using Docker refer to the https://docs.docker.com/engine/admin/systemd/#/http-proxy[Docker HTTP Proxy Instructions] documentation.
 * If you are running a static installation, add the following to the server before installation:
 +
 ```bash

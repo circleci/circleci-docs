@@ -77,6 +77,8 @@ NOTE: Every property should be in the format `export ENV_VAR="value"`
 |
 |===
 
+<<<
+
 == Service Configuration Overrides
 This section describes the configuration interface for overriding services in CircleCI Server.
 

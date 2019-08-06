@@ -16,9 +16,10 @@ toc::[]
 
 VM service enables users of CircleCI Server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
-== Configuration
-
+.VM Service Settings
 image::vm-service.png[Configuring VM Service on CircleCI Server]
+
+== Configuration
 
 To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings, which will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
 
