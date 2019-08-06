@@ -81,10 +81,7 @@ If you are a user of a privately installed CircleCI deployment, change the defau
 
 **Note**: CircleCI installed on a private cloud or datacenter does not yet support config processing and orbs; therefore, you may only use `circleci local execute` (this was previously `circleci build`).
 
-## See Also
+## Next Steps
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}})/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
-- Refer to [Introduction to Authoring an Orb]({{site.baseurl}}/2.0/orb-author-intro/), for an introduction on how to author an orb.
-- Refer to [Author Your Orb]({{site.baseurl}}/2.0/orb-author/) for more detailed information on how to author your orb.
-- Refer to [Test and Publish Your Orb]({{site.baseurl}}/2.0/author-validate-publish/) for more information on how to test and publish your orb.
+- Refer to the Author Your Orb document for next steps.
