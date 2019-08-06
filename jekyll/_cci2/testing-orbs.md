@@ -171,6 +171,9 @@ There are several different approaches you can use to test your orbs (for exampl
 
 One of the easiest ways to test your orbs locally is to create an inline orb. Creating an inline orb enables you to test your orb while in active development. Inline orbs can be useful when developing your orb, or as a convenience for name-spacing jobs and commands in lengthy configurations.
 
+
+For more detailed information on how to create an inline orb, refer to the [Creating Orbs]({{site.baseurl}}/2.0/creating-orbs/) page in the CircleCI technical documentation.
+
 ### Testing Orbs Automatically
 
 Testing orbs can be done at a few different levels. Choosing how much testing you want to do will depend on the complexity and scope of the audience for your orb.
