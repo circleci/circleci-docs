@@ -9,47 +9,42 @@ order: 1
 
 CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of certified orbs.
 
-## Importing an Existing Orb
+## Using CircleCI Orbs
 
-To import an existing orb, add a single line to to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
+If you have chosen to use CircleCI orbs in your workflows and jobs, there are several different ways that you use orbs. You may choose to either import an existing orb (CircleCI and partner-certified orbs) from the CircleCI Orb Registry, or author your own orb for your specific workflow. Each of these approaches is described below.
+
+### Importing an Existing Orb
+
+To import an existing orb, perform the steps listed below.
+
+1) Add a single line to to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
 
 ```yaml
 version: 2.1
+```
 
+**Note:** If your project was added to CircleCI prior to 2.1, you must enable "pipelines" to use the `orbs` key.
+
+2) Add the `orbs` stanza below your version, invoking the orb. For example:
+
+```
 orbs:
   slack: circleci/slack@0.1.0
   heroku: circleci/heroku@0.0.1
 ```
 
-In the above example, two orbs are imported into your config, the [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) and the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
+In the above example, the following two orbs are imported into your config:
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable "pipelines" to use the `orbs` key.
+- [Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) 
+- [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku)
 
-## Authoring Your Own Orb
+### Importing a Partner Orb
 
-If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/#overview) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration. See [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) for more information.
+To import a partner orb, perform the steps listed below.
 
-```
-$ circleci orb help
-Operate on orbs
+1) Import the `orbs` key in your `.circleci.yml/config.yml` file in your configuration. 
 
-Usage:
-  circleci orb [command]
-
-Available Commands:
-  create      Create an orb in the specified namespace
-  list        List orbs
-  process     Validate an orb and print its form after all pre-registration processing
-  publish     Publish an orb to the registry
-  source      Show the source of an orb
-  validate    Validate an orb.yml
-```
-
-**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
-
-## Importing Partner Orbs
-
-Import the following Partner Orbs by using the `orbs` key in your `.circleci.yml/config.yml` file and replacing `<orb reference string>` with one from the table.
+2) Replace the `<orb reference string>` value in the example shown below with the orb you wish to import from the [CircleCI Orbs Registry] (https://circleci.com/orbs/registry/). There are a large number of CircleCI-certified and Partner-certified orbs that you may choose from.
 
 ```yaml
 version: 2.1
@@ -57,6 +52,10 @@ version: 2.1
 orbs:
   <orb reference string>
 ```
+
+#### Example Partner Orbs from CircleCI Orbs Registry
+
+The table below lists some of the many orbs you may select from the CircleCI Orbs Registry.
 
 Partner Orb Registry Link | Orb Reference String
 ------------|-----------
@@ -106,7 +105,31 @@ Partner Orb Registry Link | Orb Reference String
 [xMatters](https://circleci.com/orbs/registry/orb/xmatters/xmatters-orb) | `xmatters: xmatters/xmatters-orb@0.0.1`
 {: class="table table-striped"}
 
+
+
 **Note:**  As a prerequisite, you must enable use of 3rd-party orbs on the Settings > Security page for your org.
+
+## Authoring Your Own Orb
+
+If you find that there are no existing orbs that meet your needs, you may author your own orb to meet your specific environment or configuration requirements by using the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/#overview) as shown in the `circleci orb help` output below. Although this is more time-consuming than using the import feature, authoring your own orb enables you to create a world-readable orb for sharing your configuration. See [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) for more information.
+
+```
+$ circleci orb help
+Operate on orbs
+
+Usage:
+  circleci orb [command]
+
+Available Commands:
+  create      Create an orb in the specified namespace
+  list        List orbs
+  process     Validate an orb and print its form after all pre-registration processing
+  publish     Publish an orb to the registry
+  source      Show the source of an orb
+  validate    Validate an orb.yml
+```
+
+**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
 
 ## See Also
 - Refer to [Using Orbs]({{site.baseurl}}/2.0/using-orbs/), for more about how to use existing orbs.

@@ -358,7 +358,7 @@ To configure your environment to use CircleCI and orbs, perform the following st
 Add the orbs stanza below your version, invoking the orb:
 
 `orbs:
-  aws-eks: circleci/aws-eks@0.1.0`
+  aws-eks: circleci/aws-eks@0.2.1`
 
 3) Use `aws-eks` elements in your existing workflows and jobs.
 
