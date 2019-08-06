@@ -101,7 +101,7 @@ en:
       link:      
       children:
         - name: Set Your Version to Work With Orbs
-          link: 2.0/orb-user-config/
+          link: 2.0/orbs-user-config/
         - name: Selecting and Using an Orb
           link: 2.0/orbs-user-select-orb/        
     - name: Examples
