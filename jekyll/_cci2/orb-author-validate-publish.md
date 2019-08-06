@@ -101,7 +101,7 @@ In the above example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/v
 ## See Also
 {:.no_toc}
 
-- Refer to Orb Introduction ({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
-- Refer to Introduction to Authoring an Orb ({{site.baseurl}}/2.0/orb-author-intro/), for an introduction on how to author an orb.
-- Refer to Set Up The CircleCI CLI ({{site.baseurl}}/2.0/orb-author-cli/) for steps on how to set up the CircleCI CLI.
-- Refer to Authoring an Orb ({{site.baseurl}}/2.0/orb-author/) for more detailed information on how to author an orb.
+- Refer to [Orb Introduction] ({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
+- Refer to [Introduction to Authoring an Orb] ({{site.baseurl}}/2.0/orb-author-intro/), for an introduction on how to author an orb.
+- Refer to [Set Up The CircleCI CLI] ({{site.baseurl}}/2.0/orb-author-cli/) for steps on how to set up the CircleCI CLI.
+- Refer to [Authoring an Orb] ({{site.baseurl}}/2.0/orb-author/) for more detailed information on how to author an orb.
