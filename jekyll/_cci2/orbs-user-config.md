@@ -21,7 +21,7 @@ To use an existing orb from the CircleCI Orbs Registry in your 2.1 `circleci/con
 
 The example below demonstrates how you can invoke the `hello-build` orb in the `circleci` namespace.
 
-``
+```
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
