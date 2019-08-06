@@ -63,7 +63,6 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  
   circleci/windows@1.0.0
 ```
 
