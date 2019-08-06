@@ -81,7 +81,10 @@ Partner Orb Registry Link | Orb Reference String
 [Honeybadger-io](https://circleci.com/orbs/registry/orb/honeybadger-io/deploy) | `honeybadger-io: honeybadger-io/deploy@1.1.1`
 [Honeycomb](https://circleci.com/orbs/registry/orb/honeycombio/buildevents) | `buildevents: honeycombio/buildevents@0.1.1`
 [Kublr](https://circleci.com/orbs/registry/orb/kublr/kublr-api) | `kublr: kublr/kublr-api@0.0.1`
-@@ -89,25 +82,36 @@ Partner Orb Registry Link | Orb Reference String
+[LogDNA](https://circleci.com/orbs/registry/orb/logdna/logdna) | `logdna: logdna/logdna@0.0.1`
+[Nirmata](https://circleci.com/orbs/registry/orb/nirmata/nirmata) | `nirmata: nirmata/nirmata@1.1.0`
+[Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`
+[Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`
 [Pantheon](https://circleci.com/orbs/registry/orb/pantheon-systems/pantheon) | `pantheon: pantheon-systems/pantheon@0.1.0`
 [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`
 [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`
