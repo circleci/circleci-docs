@@ -295,7 +295,7 @@ jobs:
 
 When CircleCI builds your project, the private key is installed into the `.ssh`
 directory and SSH is subsequently configured to communicate with your version
-control provider. Therefore, the private key gets gets used for:
+control provider. Therefore, the private key is used for:
 
 - checking out the main project
 - checking out any GitHub-hosted submodules
