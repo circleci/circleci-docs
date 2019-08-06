@@ -109,7 +109,7 @@ jobs:
           name: Build API 2.x documentation with Widdershins and Slate
           command: |
             curl https://circleci.com/api/v2/openapi.json > src-api/openapi.json
-            node node_modules/widdershins --search false \
+            node src-api/node_modules/widdershins --search false \
             --language_tabs 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' \
             --summary openapi.json  -o source/index.html.md \
             bundle exec middleman build --clean
