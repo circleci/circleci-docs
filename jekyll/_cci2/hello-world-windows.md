@@ -202,8 +202,6 @@ Also, consider reading documentation on some of CircleCI’s features:
     * Runtime 6.4.617.9590
 * OpenJDK 12.0.2
 * node.js v12.8.0
-* Python 3.7.4
-* pyenv
 * Ruby 2.6.3
 * Go 1.12.7
 * Text editors
