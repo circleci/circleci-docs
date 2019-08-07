@@ -1,23 +1,38 @@
 ---
 layout: classic-docs
-title: "Orb User - Configuration"
-short-title: "Orb Platform Configuration"
-description: "Configuring your platform to use orbs"
+title: "Setting Your Platform Version to Work With Orbs"
+short-title: "Setting Your Platform Version for Orbs"
+description: "How to set your platform version so you can work with CircleCI and Partner orbs"
 categories: [getting-started]
 order: 1
 ---
 
 ## Introduction
 
-Orbs are packages of configuration that you can use to quickly get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects without much customization and work. You may also want to use orbs as a refererence for configuration best practices. 
+Before you can work with CircleCI and Partner-certified orbs, you must first ensure that your platform version is set to `2.1` in your `config.yml`. Previous versions do not currently support working with orbs.
 
-Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
+The section below describes how you can set your platform version to 2.1 so you can work with orbs.
 
-## Configure Your Platform to Work With Orbs
+## Setting Your Platform to Work With Orbs
 
-Configuring your platform to work with orbs is a very simple process, requiring you to invoke the orb you have chosen to use from the CircleCI Orbs Registry. 
+Setting your platform version to work with orbs is a very simple process, requiring you to perform the following steps:
 
-To use an existing orb from the CircleCI Orbs Registry in your 2.1 `circleci/config.yml` file, invoke the orb with the `orbs` key. 
+1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+
+`version: 2.1`
+
+**Note** If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn it on.
+
+2) Add the `orbs` stanza below your version, thereby invoking the orb. The example below shows how you can invoke the `aws-cli` orb.
+
+```
+orbs:
+  aws-cli: circleci/aws-cli@0.1.13
+```
+
+3) Use the elements specific to your selected orb in your existing workflows and jobs.
+
+### Hello World Example
 
 The example below demonstrates how you can invoke the `hello-build` orb in the `circleci` namespace.
 
