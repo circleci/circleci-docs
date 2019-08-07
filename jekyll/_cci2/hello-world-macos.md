@@ -79,7 +79,7 @@ provide a more in-depth overview of how a `config.yml` works.
 
 Since this is a general introduction to building on MacOs, the `config.yml` above example covers the following:
 
-- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor) to use 
+- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor) to use 
 - Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
 - Running tests with Xcode
 - Building our application

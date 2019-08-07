@@ -14,12 +14,12 @@ order: 1
 
 The CircleCI CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run circleci help. Refer to Using the CircleCI CLI for details. Listed below are some of the most pertinent commands for creating, validating, and publishing orbs:
 
-- circleci namespace create <name> <vcs-type> <org-name> [flags]
-- circleci orb create <namespace>/<orb> [flags]
-- circleci orb validate <path> [flags]
-- circleci orb publish <path> <namespace>/<orb>@<version> [flags]
-- circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]
-- circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]
+- `circleci namespace create <name> <vcs-type> <org-name> [flags]`
+- `circleci orb create <namespace>/<orb> [flags]`
+- `circleci orb validate <path> [flags]`
+- `circleci orb publish <path> <namespace>/<orb>@<version> [flags]`
+- `circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]`
+- `circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]`
 
 For a full list of help commands inside the CircleCI CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
@@ -27,13 +27,13 @@ For a full list of help commands inside the CircleCI CLI, visit the [CircleCI CL
 
 As an orb author, one of the first steps you will need to take when creating a new orb is to install and configure the CircleCI CLI. Using the CircleCI CLI and its associated commands simplifies the orb authoring process so you can quickly and easily create new orbs. To set up the CircleCI CLI so you can author an orb, perform the following steps:
 
-1) Install the CLI
-2) Update the CLI
-3) Configure the CLI
+- Install the CLI for the first time
+- Update the CLI
+- Configure the CLI
 
 ### Install the CLI for the First Time
 
-If you are installing the new circleci CLI for the first time, run the following command:
+If you are installing the new CircleCI CLI for the first time, run the following command:
 
 `curl -fLSs https://circle.ci/cli | bash`
 
@@ -53,9 +53,9 @@ You may also use Snapcraft to install the CLI by running the following command:
 
 `sudo snap install circleci`
 
-### Update the CircleCI CLI
+### Update the CLI
 
-If you have used a previous version of the CircleCI and are currently running a version older than 0.1.6, run the following commands to update your CLI version to the latest version.
+If you have used a previous version of the CircleCI and are currently running a version older than `0.1.6`, run the following commands to update your CLI version to the latest version.
 
 `circleci update`
 `circleci switch`
@@ -84,4 +84,4 @@ If you are a user of a privately installed CircleCI deployment, change the defau
 ## Next Steps
 {:.no_toc}
 
-- Refer to the Author Your Orb document for next steps.
+- Refer to [Author Your Orb]({{site.baseurl}}/2.0/orb-author/) for next steps.

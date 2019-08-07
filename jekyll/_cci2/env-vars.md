@@ -182,7 +182,7 @@ jobs:
 
 ## Setting an Environment Variable in a Container
 
-To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
+To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
 
 ```yaml
 version: 2

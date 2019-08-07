@@ -35,7 +35,9 @@ A reusable command may have the following immediate children keys as a map:
 
 Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
 
-### The `commands` Key** 
+
+### **The `commands` Key** 
+
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
@@ -988,7 +990,7 @@ workflows:
 ```
 
 ## See Also
-- Refer to [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) for detailed information about how you can work with your CircleCI configuration.
+
 - Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
 - Refer to [Database Examples]({{site.baseurl}}/2.0//postgres-config/) for database examples you can use in your CircleCI configuration.

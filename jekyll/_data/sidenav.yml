@@ -26,6 +26,8 @@ en:
           link: 2.0/hello-world/
         - name: Hello World MacOS
           link: 2.0/hello-world-macos/
+        - name: Hello World Windows
+          link: 2.0/hello-world-windows/
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts

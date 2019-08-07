@@ -61,7 +61,7 @@ You must invoke jobs in the workflow stanza of config.yml file, making sure to p
 
 #### Executors
 
-Executors define the environment in which the steps of a job will be run. When you declare a job in CircleCI configuration, you define the type of environment (e.g. docker, machine, macos, etc.) to run in, in addition to any other parameters of that environment, such as:
+Executors define the environment in which the steps of a job will be run. When you declare a job in CircleCI configuration, you define the type of environment (e.g. docker, machine, macos, windows etc.) to run in, in addition to any other parameters of that environment, such as:
 
 - environment variables to populate
 - which shell to use
@@ -71,11 +71,12 @@ When you declare an executor in a configuration outside of jobs, you can use the
 
 An executor definition has the following keys available (some of which are also available when using the job declaration):
 
-- docker, machine, or macos
-- environment
-- working_directory
-- shell
-- resource_class
+* docker, machine, windows, or macos
+* environment
+* working_directory
+* shell
+* resource_class
+
 
 The example below shows a simple example of using an executor:
 
@@ -230,6 +231,5 @@ If the case arises where you need to delete an orb for emergency reasons, please
 {:.no_toc}
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of using and authoring orbs.
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/creating-orbs/), for a detailed conceptual overview of CircleCI orbs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
