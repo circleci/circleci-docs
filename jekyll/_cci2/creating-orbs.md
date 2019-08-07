@@ -40,8 +40,8 @@ When you have finished authoring your orb, simply run the `validate` command fro
 ### Step 7 - Publish Your Orb
 The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable).
 
-For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
-=======
+**Note** For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
+
 [Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
 ## Orb Publishing Process
@@ -75,11 +75,6 @@ This section describes each step of the orb publishing process so you will have 
 
 The following sections describe each step in the orb authoring and publishing process:
 
-2. Author your own orb.
-3. Validate and publish your orb.
-
-
-
 ### CircleCI Settings
 
 In the CircleCI app Settings page for your project, pipelines must be enabled (default is to be ON for all new projects). The organization owner must also opt-in to use of uncertified orbs in your organization under the Settings tab on the Security page of the CircleCI app.
@@ -87,7 +82,6 @@ In the CircleCI app Settings page for your project, pipelines must be enabled (d
 ### Get the new CircleCI CLI
 
 The CircleCI platform enables you to write orbs using the CircleCI CLI. If you choose to work with the CLI, the process of writing orbs will be more efficient because you will be able to use existing CircleCI CLI tools and commands.
-
 
 ### Packing A Config
 
@@ -235,16 +229,10 @@ You should see a response similar to the following:
 Config file at .circleci/config.yml is valid
 ```
 
-
-### Authoring Your Orb
-
-For examples of orb source, please refer to the [Public CircleCI Repo](https://github.com/CircleCI-Public/), where you will find source code for several certified orbs.
-
-
-
-
-
-
-
 ## See Also
 
+- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/) for an introduction to working with orbs.
+- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level conceptual information about orbs.
+- Refer to [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/) for information on known issues and questions that have been addressed when using orbs.
+- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for information about how you can use CircleCI orb recipes in your configurations.
