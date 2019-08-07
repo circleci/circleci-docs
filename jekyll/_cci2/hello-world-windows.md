@@ -27,9 +27,11 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.
 - Has 4 vCPUS and 15 GB of RAM.
-- Powershell is the default shell (Bash and Command are available to be manually selected).
+- Powershell is the default shell (Bash and cmd are available to be manually selected).
 
-The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching). Further, The Windows executor is only available on the [CircleCI Performance Plan](https://circleci.com/pricing/usage/) at a cost of **40 credits/minute**.  
+Note: the Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching).
+
+The Windows executor is only available on the CircleCI Performance Plan. Please see the [CircleCI Plans page](https://circleci.com/pricing/usage/) for more details on the cost of Windows compute.
 
 # Example configuration file
 
