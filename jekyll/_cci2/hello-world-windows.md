@@ -177,7 +177,7 @@ Also, consider reading documentation on some of CircleCI’s features:
     * Visual Studio 2019 Build Tools
 * Shells:
     * Powershell 5
-    * Bash
+    * GNU bash 4.4.231 (x86_64-pc-msys)
     * cmd
 * .NET Framework 4.8
 * .NET Core
@@ -193,7 +193,7 @@ Also, consider reading documentation on some of CircleCI’s features:
     * 10.1.18362.1
 * Docker Engine - Enterprise version 18.09.7 
 * NuGet CLI 5.2.0.6090
-* Chocolatey
+* Chocolatey v0.10.15
 * Azure Service Fabric
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
