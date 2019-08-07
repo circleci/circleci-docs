@@ -41,6 +41,12 @@ The Windows executor is only available on the CircleCI Performance Plan. Please 
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document.
 
+## Known issues
+
+These are the issues with the Windows executor that we are aware of and will address as soon as we can:
+
+* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
+
 # Example configuration file
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
