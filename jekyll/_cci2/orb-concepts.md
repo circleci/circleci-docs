@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
 title: "Orbs Concepts"
-short-title: "Concepts"
-description: "Starting point for conceptual overview of Orbs"
+short-title: "Orbs Concepts"
+description: "Conceptual Overview for Orbs"
 categories: [getting-started]
 order: 1
 ---
@@ -23,12 +23,12 @@ All orbs are open, meaning that anyone can use them and see their source.
 
 Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
 
-- Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
-- Metadata is available - Every key can include a description key and an orb may include a description at the top level.
-- Production orbs are always semantic versioned (semver’d) - CircleCI allows development orbs that have versions that start with dev:.
-- Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
-- One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
-- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+* Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
+* Metadata is available - Every key can include a description key and an orb may include a description at the top level.
+* Production orbs are always semantic versioned (semver’d) - CircleCI allows development orbs that have versions that start with dev:.
+* Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+* One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
+* Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
 ### Orb Structure
 
@@ -229,6 +229,6 @@ If the case arises where you need to delete an orb for emergency reasons, please
 ## See Also
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of using and authoring orbs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Orb Introduction] ({{site.baseurl}}/2.0/orb-intro/) for a high-level overview of CircleCI orbs.
+- Refer to [Orbs Reference] ({{site.baseurl}}/2.0/reusing-config/) for a detailed reference information about Orbs, including descriptions of commands, jobs and executors.
+- Refer to [Orbs FAQs] ({{site.baseurl}}/2.0/orb-intro/) for information on frequent issues encountered when using orbs.

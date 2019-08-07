@@ -76,16 +76,34 @@ en:
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
-        - name: Using Orbs
-          link: 2.0/using-orbs/
-        - name: Reusing Config
-          link: 2.0/reusing-config/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
-        - name: Creating Orbs
-          link: 2.0/creating-orbs/
-        - name: Testing Orbs
+        - name: Orbs Concepts
+          link: 2.0/using-orbs/
+        - name: Orbs Reference
+          link: 2.0/reusing-config/
+        - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
+    - name: Authoring Orbs
+      link:      
+      children:
+        - name: Introduction to Authoring an Orb
+          link: 2.0/orb-author-intro/
+        - name: Set up the CircleCI CLI
+          link: 2.0/orb-author-cli/
+        - name: Author an Orb
+          link: 2.0/orb-author/
+        - name: Test and Publish Your Orb
+          link: 2.0/orb-author-validate-publish/
+    - name: Using Orbs
+      link:      
+      children:
+        - name: Set Your Version to Work With Orbs
+          link: 2.0/orbs-user-config/
+        - name: Selecting and Using an Orb
+          link: 2.0/orbs-user-select-orb/        
     - name: Examples
       link:
       children:
@@ -266,7 +284,6 @@ en:
           link: 2.0/upgrading/
         - name: System Requirements
           link: 2.0/server-ports/
-
     - name: Server v2.17.3 Operations
       link: 2.0/overview/
       children:
@@ -311,15 +328,19 @@ en:
         - name: Acknowledgments
           link: 2.0/open-source/
     - name: CircleCI Server v2.17 PDFs
-      link: 2.0/v.2.17-overview/
-      children:
+       link:
+       children:
+        - name: What's New in v2.17
+          link: 2.0/v.2.17-overview/
         - name: v2.17 Installation Guide
           link: 2.0/circleci-install-doc-v2-17.pdf
         - name: v2.17 Operations Guide
           link: 2.0/circleci-ops-guide-v2-17.pdf
     - name: CircleCI Server v2.16 PDFs
-      link: 2.0/v.2.16-overview/
+      link:
       children:
+        - name: What's New in v2.16
+          link: 2.0/v.2.16-overview/
         - name: v2.16 Installation Guide
           link: 2.0/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
