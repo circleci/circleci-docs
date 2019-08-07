@@ -61,7 +61,7 @@ Currently CircleCI supports a single Windows image: Windows Server 2019 with Vis
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise 
+* Docker Engine - Enterprise version 18.09.7 
 * NuGet CLI 5.2.0.6090
 * Chocolatey
 * Azure Service Fabric
