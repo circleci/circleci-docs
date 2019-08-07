@@ -21,7 +21,7 @@ To use an existing orb from the CircleCI Orbs Registry in your 2.1 `circleci/con
 
 The example below demonstrates how you can invoke the `hello-build` orb in the `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -34,8 +34,7 @@ workflows:
 
 **Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key.
 
-## See Also
+## Next Steps
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of CircleCI orbs.
-- Refer to Selecting and Using an Orb, for steps on how to select, and then use, an orb from the CircleCI Orbs Registry. 
+- Refer to [Selecting and Using an Orb]({{site.baseurl}}/2.0/orbs-user-select-orb/) for next steps.
