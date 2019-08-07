@@ -17,7 +17,7 @@ The `orb-tools` orb provides a simple and easy way for you to structure and vali
 
 Command/Job | Description
 ------------|-----------
-`orb-tools-pack` | This command enables you to use the CircleCI CLI to pack an orb file structure into a single orb yml.
+`orb-tools/pack` | This command enables you to use the CircleCI CLI to pack an orb file structure into a single orb yml.
 `orb-tools/validate` | This command enables you to use the CircleCI CLI to validate a given orb yml.
 `orb-tools/increment` | This command enables you to use the CircleCI CLI to increment the version of an orb in the registry. If the orb does not have a version yet, it starts at 0.0.0.
 `orb-tools/publish` | This command uses the CLI to publish an orb to the registry.
@@ -35,7 +35,7 @@ Parameter | Description
 `workspace-path` | Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided, then this job will not persist to a workspace.
 `artifact-path` | Path to the directory that should be saved as a job artifact. If the default value of blank is provided, then this job will not save any artifacts.
 
-### orb-tools-validate
+### orb-tools/validate
 
 This CLI command enables you to validate a given orb to ensure that the orb can be published to the CircleCI Orb Registry. When using this command, you may pass the following parameters with this command:
 
@@ -63,7 +63,7 @@ publish-token-variable | The env var containing your token. Pass this as a liter
 `attach-workspace` | Boolean for whether or not to attach to an existing workspace. Default is false.
 `workspace-root` | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)
 
-### `orb-tools/publish`
+### orb-tools/publish
 
 This command is used to publish an orb. The following parameters may be passed with this command:
 
@@ -81,7 +81,7 @@ Parameter | Description
 
 Below is an example of how to use the `orb-tools` orb to validate and publish an orb.
 
-```
+```yaml
 version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@2.0.0
@@ -97,4 +97,3 @@ workflows:
 ```
 
 In the above example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
-
