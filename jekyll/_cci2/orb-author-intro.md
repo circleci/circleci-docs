@@ -91,4 +91,4 @@ In the above example, `hello` is considered the orbs reference; whereas `circlec
 
 ## Next Step
 
-[Set Up the CircleCI CLI]({{site.baseurl}}/2.0/orb-author-cli/)
+Refer to [Set Up the CircleCI CLI]({{site.baseurl}}/2.0/orb-author-cli/) for next steps.
