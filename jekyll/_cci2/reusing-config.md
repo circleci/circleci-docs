@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Reusing Config"
-short-title: "Reusing Config"
-description: "Reusing configuration in CircleCI 2.1"
+title: "Orbs Reference Guide"
+short-title: "Orbs Reference"
+description: "Reference guide for CircleCI 2.1 orbs"
 categories: [configuration]
 order: 1
 ---
 
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
+This Orbs Reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
 * TOC
 {:toc}
@@ -986,7 +986,7 @@ workflows:
 ```
 
 ## See Also
-- Refer to [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) for detailed information about how you can work with your CircleCI configuration.
+
 - Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
 - Refer to [Database Examples]({{site.baseurl}}/2.0//postgres-config/) for database examples you can use in your CircleCI configuration.

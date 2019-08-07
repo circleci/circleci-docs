@@ -282,6 +282,10 @@ can also be used to pay for features, such as Docker Layer Caching.
 For example, the 25,000 credit package would provide 2,500 build minutes when
 using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
+#### Is there a way to share plans across organizations and have them billed centrally?
+{:.no_toc}
+Yes, similarly with container-based plans, you can go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan. The child organizations will bill all credits and other usage to the parent org.
+
 #### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
 You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.

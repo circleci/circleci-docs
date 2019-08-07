@@ -35,7 +35,7 @@ order: 60
 
     `https://circleci.com/api/v1.1/project/github/bar/foo/config-translation`
 
-3. `bar` という GitHub 組織の `foo` というリポジトリに対して、`circleci.com` で認証されて**いない**場合、ブラウザーから `config-translation` を使用するには、以下の URL をリクエストし、クエリ文字列に `circle-token` を直接渡します。 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。また、[CircleCI API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
+3. `bar` という GitHub 組織の `foo` というリポジトリに対して、`circleci.com` で認証されて**いない**場合、ブラウザーから `config-translation` を使用するには、以下の URL をリクエストし、クエリ文字列に `circle-token` を直接渡します。 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。また、[CircleCI API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
 
         Shell
          curl "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop" デフォルトでは、VCS で設定されているデフォルトのブランチ (通常は
