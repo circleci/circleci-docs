@@ -78,7 +78,7 @@ commands | N | Map | A map of command names to command definitions.
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
