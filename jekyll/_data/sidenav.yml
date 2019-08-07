@@ -87,7 +87,7 @@ en:
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
     - name: Authoring Orbs
-      link:      
+      link:
       children:
         - name: Introduction to Authoring an Orb
           link: 2.0/orb-author-intro/
@@ -98,12 +98,12 @@ en:
         - name: Test and Publish Your Orb
           link: 2.0/orb-author-validate-publish/
     - name: Using Orbs
-      link:      
+      link:
       children:
         - name: Set Your Version to Work With Orbs
           link: 2.0/orbs-user-config/
         - name: Selecting and Using an Orb
-          link: 2.0/orbs-user-select-orb/        
+          link: 2.0/orbs-user-select-orb/
     - name: Examples
       link:
       children:
@@ -272,6 +272,8 @@ en:
           link: 2.0/single-box/
         - name: Overview
           link: 2.0/install-overview/
+        - name: System Requirements
+          link: 2.0/server-ports/
         - name: Prerequisites and Planning
           link: 2.0/aws-prereq/
         - name: Installation
@@ -282,8 +284,6 @@ en:
           link: 2.0/updating-server/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
-        - name: System Requirements
-          link: 2.0/server-ports/
     - name: Server v2.17.3 Operations
       link: 2.0/overview/
       children:

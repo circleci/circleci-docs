@@ -11,10 +11,9 @@ toc::[]
 
 == Update Steps
 
-. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended) - steps below
 . Check you are running Docker v17.12.1 and update if necessary
-. Update Replicated to v2.34.1 (steps in section below)
-. Navigate to your Management Console dashboard (e.g. your-circleci-hostname.com:8800 and select the v2.17 upgrade
+. Update Replicated to install the new version of CircleCI Server - steps below
 
 == Snapshot for Rollback
 
@@ -32,32 +31,35 @@ If you do need to rollback at any point, see our <<backup#restoring-from-backup,
 
 == Updating Replicated
 
-**Perquisites**
+=== Perquisites
 
-- Your installation is Ubuntu 14.04 or 16.04 based.
-- You are running replicated version 2.10.3<= on your services machine
-  - replicated --version
-- Your installation is **not** airgapped and you can access the internet from it
-- All steps are completed on the Services machine
-- Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
+* Your installation is Ubuntu 14.04 or 16.04 based.
+* You are running replicated version 2.10.3<= on your services machine. Check by running the following:
++
+```
+replicated --version
+```
+* Your installation is **not** airgapped and you can access the internet from it
+* All steps are completed on the Services machine
 
 === Preparations
 
-Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
+CAUTION: Remember to take a snapshot (described above) before starting the Replicated update process
 
-- Stop the CircleCI application with
-
+. Stop the CircleCI application:
++
 ```
     replicatedctl app stop
 ```
-
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
-
++
+Application shutdown takes a few minutes. Please check the administration dashboard and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
++
 ```
     replicatedctl app status inspect
 ```
-
++
 Example Output:
++
 ```
 [
     {
@@ -73,47 +75,47 @@ Example Output:
 ]
 ```
 
-- For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
-
+. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1:
++
 ```
     sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
-- Pin the Docker version using the following command:
-
+. Pin the Docker version using the following command:
++
 ```
     sudo apt-mark hold docker-ce
 ```
 
 === Perform Update
 
-Perform the Replicated update by executing the update script as follows:
-
+. Perform the Replicated update by executing the update script as follows:
++
 ```
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
 ```
-
++
 Double-check your replicated and docker versions:
-
-Example Output
++
 ```
     replicatedctl version    # 2.34.1
     docker -v                # 17.12.1
 ```
 
-Restart the app with
-
+. Restart the app with
++
 ```
     replicatedctl app start
 ```
-
++
 The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
-
++
 ```
     replicatedctl app status inspect
 ```
-
++
 Example output:
++
 ```
 [
     {
@@ -128,7 +130,5 @@ Example output:
     }
 ]
 ```
-
-== Update Server Version
-
-TBD
++
+You will now be running the latest version of CircleCI Server.

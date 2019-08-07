@@ -11,7 +11,7 @@ span.icon>.fa {
   cursor: default;
 }
 .admonitionblock td.icon .icon-note:before {
-  content: "\f05a";
+  content: "\f0eb";
   color: #19407c;
 }
 .admonitionblock td.icon .icon-tip:before {

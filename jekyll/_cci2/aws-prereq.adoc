@@ -38,8 +38,8 @@ Have available the following information and policies before starting the instal
 
 * If you use network proxies, contact your Account team before beginning your install.
 * Plan to provision at least two AWS instances, one for Services and one for your first set of Nomad Clients. Best practice is to use an `m4.2xlarge` instance with 8 vCPUs and 32GB RAM for both the Services and Nomad Clients instances.
-* AWS instances must have outbound access to pull Docker containers and to verify your license. If you don't want to give open outbound access, head https://help.replicated.com/community/t/customer-firewalls/55[here] for a list of ports that need whitelisting.
-* In order to provision required AWS entities with Terraform you will require an IAM User with the following permissions (for guidance on creating IAM users in your AWS account, head https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[here]):
+* AWS instances must have outbound access to pull Docker containers and to verify your license. If you don't want to give open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
+* In order to provision required AWS entities with Terraform you will require an IAM User with the following permissions (See the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[AWS guidance] on creating IAM users):
 +
 ```json
 {

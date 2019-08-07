@@ -24,9 +24,6 @@ git checkout master && git pull
 . Run `make init` to initialize a `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
 
 . Open `terraform.tfvars` in an editor and fill in appropriate AWS values for section 1.
-+
-.Example tfvars
-image::tfvars.png[terraform.tfvars]
 
 . If you plan to use 1.0 builders, specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters, if not, leave it as is. 1.0 builders are disabled by default in section 3.
 
@@ -38,7 +35,10 @@ NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled 
 .. choose to use 1.0 Builders if your project requires it (by changing the count to `1`)
 .. enter proxy details, and enter a prefix if there will be multiple installations within your AWS region – the Services and Nomad client instances will be displayed with this prefix in the AWS console.
 
-Figure 3 shows an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory.
+.Example tfvars
+image::tfvars.png[terraform.tfvars]
+
+Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory.
 
 Optional vars:
 
@@ -96,13 +96,13 @@ Optional vars:
 |===
 
 == Provision Instances
-. Save your changes and run:
+. Save your changes to the `tfvars` file and run the following:
 +
 ```shell
 terraform plan
 ```
 
-. Next, to provision your instances, run:
+. To provision your instances, run the following:
 +
 ```shell
 terraform apply
@@ -148,12 +148,14 @@ WARNING: You can make changes to the settings on this page at any time but chang
 
 . The Services section is only used when externalizing services. Externalization is available with a Platinum service contract. Contact support@circleci.com if you would like to find out more.
 +
+.External Services
 image::hostname-services.png[Hostname and Services Settings]
 
 . Under Execution Engines, only select 1.0 Builders if you require them for a legacy project – most users will leave this unchecked.
 
 . Select Cluster in the 2.0 Builders Configuration section. The Single box option will run jobs on the Services machine, rather than a dedicated instance, so is only suitable for trialling the system, or for some small teams.
 +
+.1.0 and 2.0 Builders
 image::builders.png[Execution Engine]
 
 . Register CircleCI as a new OAuth application in GitHub.com or GitHub Enterprise by following the instructions provided onscreen.
@@ -167,43 +169,52 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 .. Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
 .. Copy the new token and paste it into the GitHub Enterprise Default API Token field.
 +
+.Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. LDAP TBD
+. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section.
 //<!--insert LDAP instrucitons once I have more detail from Anton-->
 
 . We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
-
++
 .Privacy Settings
-image:privacy.png[]
+image::privacy.png[]
 
 . We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
-
++
 .Storage Options
-image:storage.png[]
+image::storage.png[]
 
 . Enhanced AWS Integration TBD
 // explain enhanced AWS integration 1.0 or just say ignore
 
-. Email TBD
+. Complete the Email section if you wish to configure your own email server for sending build update emails. Leave this section is you wish to use our default email server.
++
+NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
+
 // explain email server options, test button doesnt work etc
 
-. Configure VM service if you plan to use [Remote Docker](https://circleci.com/docs/2.0/building-docker-images/) or `machine` executor features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor.
+. Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor.
++
+.Configure VM Service
+image::vmprovider.png[]
 
-You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state. **Note**: If Docker Layer Caching (DLC) is to be used VM preallocation must be set to `0` – on-demand – for both Remote Docker and `machine` executor.
+You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
+
+CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must be set to `0` – on-demand – for both Remote Docker and `machine` executor.
+
 //<!--Advanced settings to cover here too - make a section in ops guide for this and list of OK instance types for VM provider-->
 
-.Configure VM Service
-image:vmprovider.png[]
-
-. If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here:
+. If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more infomration see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
 .Metrics
-image:metrics_setup.png[]
+image::metrics_setup.png[]
 
-. Artifacts persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows whitelisted artifact types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting here allows you to override this protection. For more information on safe/unsafe types see the Build Artifacts chapter in the https://circleci.com/docs/2.0/build-artifacts/[CircleCI Server Operations Guide]
+. Artifacts persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types see our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
 
-. After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers. If the Management Console reports `Failure reported from operator: no such image` click Start again and it should continue.
+. After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers.
+
+NOTE: If the Management Console reports `Failure reported from operator: no such image` click Start again and it should continue.
 
 == Validate Your Installation
 
@@ -211,7 +222,7 @@ image:metrics_setup.png[]
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .Start CircleCI from your Dashboard
-image:dashboard.png[]
+image::dashboard.png[]
 
 . After build containers have started and images have been downloaded, the first build should begin immediately. If there are no updates after around **15 minutes**, and you have clicked the Refresh button, contact https://support.circleci.com/hc/en-us[CircleCI support] for assistance.
 
