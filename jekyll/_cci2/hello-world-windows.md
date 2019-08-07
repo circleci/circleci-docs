@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 4
 ---
 
-This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide.]({{ site.baseurl}}/2.0/getting-started/) Please note, Windows access is currently in a **preview phase** and is **not** production ready.
+This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide.]({{ site.baseurl}}/2.0/getting-started/).
 
 * TOC
 {:toc}
@@ -36,47 +36,7 @@ The Windows executor is only available on the CircleCI Performance Plan. Please 
 
 ## Windows executor images
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. The contents of the image are:
-
-**Windows Server 2019 with Visual Studio 2019**
-
-* Windows Server 2019 Core Datacenter Edition
-* Visual Studio 2019 Community Edition
-    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/vs/community/#usage) before using this Visual Studio version in your Windows jobs.
-    * Azure SDK for Visual Studio 2019
-    * Visual Studio 2019 Build Tools
-* Shells:
-    * Powershell 5
-    * Bash
-    * cmd
-* .NET Framework 4.8
-* .NET Core
-    * SDK 3.0.100-preview7-012821
-    * Runtime 3.0.0-preview6-27804-01
-    * SDK 2.2.401 
-    * Runtime 2.2.6
-    * SDK 2.1.801
-* Git 2.22.0
-* Git LFS 2.7.2
-* Windows 10 SDK
-    * 10.0.26624
-    * 10.1.18362.1
-* Docker Engine - Enterprise version 18.09.7 
-* NuGet CLI 5.2.0.6090
-* Chocolatey
-* Azure Service Fabric
-    * SDK 3.3.617.9590
-    * Runtime 6.4.617.9590
-* OpenJDK 12.0.2
-* node.js v12.8.0
-* Python 3.7.4
-* pyenv
-* Ruby 2.6.3
-* Go 1.12.7
-* Text editors
-    * nano 2.5.3
-    * vim 8.0.604
-* jq 1.5
+Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of dependencies](#full-list-of-dependencies-in-the-windows-images) further along in this document.
 
 # Example configuration file
 
@@ -110,12 +70,12 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows-tools@0.0.4
+  win: circleci/windows@1.0.0
 
 jobs:
   build:
     executor:
-      name: win/preview-default
+      name: win/vs2019
       shell: bash.exe
     steps:
       - checkout
@@ -151,7 +111,7 @@ Next, we declare orbs that we will be using in our build. We will only use the [
 jobs:
   build:
     executor:
-      name: win/preview-default
+      name: win/vs2019
       shell: powershell.exe
 ```
 
@@ -211,3 +171,42 @@ Also, consider reading documentation on some of CircleCI’s features:
 
 # Full list of dependencies in the Windows images
 
+**Windows Server 2019 with Visual Studio 2019**
+
+* Windows Server 2019 Core Datacenter Edition
+* Visual Studio 2019 Community Edition
+    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/vs/community/#usage) before using this Visual Studio version in your Windows jobs.
+    * Azure SDK for Visual Studio 2019
+    * Visual Studio 2019 Build Tools
+* Shells:
+    * Powershell 5
+    * Bash
+    * cmd
+* .NET Framework 4.8
+* .NET Core
+    * SDK 3.0.100-preview7-012821
+    * Runtime 3.0.0-preview6-27804-01
+    * SDK 2.2.401 
+    * Runtime 2.2.6
+    * SDK 2.1.801
+* Git 2.22.0
+* Git LFS 2.7.2
+* Windows 10 SDK
+    * 10.0.26624
+    * 10.1.18362.1
+* Docker Engine - Enterprise version 18.09.7 
+* NuGet CLI 5.2.0.6090
+* Chocolatey
+* Azure Service Fabric
+    * SDK 3.3.617.9590
+    * Runtime 6.4.617.9590
+* OpenJDK 12.0.2
+* node.js v12.8.0
+* Python 3.7.4
+* pyenv
+* Ruby 2.6.3
+* Go 1.12.7
+* Text editors
+    * nano 2.5.3
+    * vim 8.0.604
+* jq 1.5
