@@ -26,7 +26,7 @@ Before you create your first orb, please see the following notes:
 
 The following high-level steps will enable you to publish your first orb:
 
-1. Claim a namespace (assuming you don't yet have one). For example:
+1) Claim a namespace (assuming you don't yet have one). For example:
 
 `circleci namespace create sandbox github CircleCI-Public`
 
@@ -34,27 +34,27 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
-2. Create the orb inside your namespace. For example:
+2) Create the orb inside your namespace. For example:
 
 `circleci orb create sandbox/hello-world`
 
-3. Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
+3) Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
 `echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
 
-4. Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
+4) Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
 `circleci orb validate /tmp/orb.yml`
 
-5. Publish a dev version of your orb. Assuming the above orb, it would look like this:
+5) Publish a dev version of your orb. Assuming the above orb, it would look like this:
 
 `circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
-6. Once you are ready to push your orb to production, you can publish it manually using `circleci orb publish` or promote it directly from the dev version. In the case where you want to publish the orb, assuming you wanted to increment the new dev version to become 0.0.1, you can use:
+6) Once you are ready to push your orb to production, you can publish it manually using `circleci orb publish` or promote it directly from the dev version. In the case where you want to publish the orb, assuming you wanted to increment the new dev version to become 0.0.1, you can use:
 
 `circleci orb publish promote sandbox/hello-world@dev:first patch`
 
-7. Your orb is now published in an immutable form as a production version and can be used safely in builds. You can then pull the source of your orb using:
+7) Your orb is now published in an immutable form as a production version and can be used safely in builds. You can then pull the source of your orb using:
 
 `circleci orb source sandbox/hello-world@0.0.1`
 
@@ -260,7 +260,7 @@ The top level `examples` key is optional. Usage example maps nested below it can
 - **usage:** (required) A full, valid config map that includes an example of using the orb.
 - **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
 
-## See Also
+## Next Steps
 {:.no_toc}
 
-- Refer to Test and Publish Your Orb for next steps.
+- Refer to [Test and Publish Your Orb]({{site.baseurl}}/2.0/orb-author-validate-publish/) for next steps.
