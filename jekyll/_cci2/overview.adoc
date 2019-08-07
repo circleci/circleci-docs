@@ -13,7 +13,7 @@ CircleCI Server is a modern continuous integration and continuous delivery (CI/C
 toc::[]
 
 .CircleCI Services Architecture
-image::cci-arch.png[Services Architecture]
+image::arch_server.png[Services Architecture]
 <<<
 == Build Environments
 
@@ -36,9 +36,9 @@ Within the CircleCI UI is the Insights page, which acts as a dashboard showing t
 
 // Add screenshot of insights page
 
-CircleCI consists of two primary components: Services and Nomad Clients. Any number of Nomad Clients execute your jobs and communicate back to the Services. All components must access GitHub or your hosted instance of GitHub Enterprise on the network, as illustrated in Figure 2.
+CircleCI consists of two primary components: Services and Nomad Clients. Any number of Nomad Clients execute your jobs and communicate back to the Services. All components must access GitHub or your hosted instance of GitHub Enterprise on the network, as illustrated below.
 
-image::architecture-v1.png[A Diagram of the CircleCI Architecture]
+image::arch_components.png[CircleCI Core Components]
 
 === Services Machine
 

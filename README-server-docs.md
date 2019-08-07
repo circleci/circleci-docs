@@ -13,6 +13,18 @@ So, the process for creating a new version is to make the required changes to th
 
 Master asciidoc files that are only used for creating PDFs have an `_` at the start of the filenames to prevent Jekyll from converting them to HTML for the main site.
 
+## Build PDFs locally
+
+To be able to build the PDFs locally you will need to install Asciidoctor-PDF - Instructions [here](https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem)
+
+Then, from the top of the circleci-docs directory, run:
+
+```
+./scripts/build_pdfs.sh
+```
+
+You will then find the PDFs in: `releases/tmp`
+
 ## Some notes about formatting
 
 ### Using code blocks in numbered steps
