@@ -38,8 +38,3 @@ To use the CircleCI Orbs Registry, follow the steps below.
 * Releases - a drop-down menu that enables you to select the specific version of the orb you wish to use.
 
 5) Follow the instructions in the **Orbs Quick Start Guide** section to add the orb to your configuration. Notice that there is a **copy code** box that you can select to copy the code to your clipboard.
-
-## Next Steps
-{:.no_toc}
-
-- Refer to Set Your Version to Work With Orbs.
