@@ -17,18 +17,16 @@ This document describes how to get started with continuous integration on **Wind
 
 To follow along with this document you will need:
 
-* An [account](https://circleci.com/signup/) on CircleCI
-* A [performance plan](https://circleci.com/pricing/usage/) subscription
-* Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) (to enable Orbs and a 2.1 config).
-* To request access to Windows Preview using [this form](https://docs.google.com/forms/d/e/1FAIpQLSfspug2MP0eTK8eRC1_FpiDQzNHkk8a36fflN_za29CwGzGoQ/viewform).
+* An [account](https://circleci.com/signup/) on CircleCI.
+* A [performance plan](https://circleci.com/pricing/usage/) subscription.
+* Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
 
 # Overview of the Windows executor
 
 The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor: 
 
-- Uses the Server Core version of Windows Server 2019 DataCenter Edition (`windows-server-2019`.)
-- Has 4 vCPUS and 15 GB of ram.
-- Has `Git`, `Chocolatey` and `7zip` pre-installed.
+- Uses the Server Core version of Windows Server 2019 Datacenter Edition.
+- Has 4 vCPUS and 15 GB of RAM.
 - Powershell is the default shell (Bash and Command are available to be manually selected).
 
 The Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching). Further, The Windows executor is only available on the [CircleCI Performance Plan](https://circleci.com/pricing/usage/) at a cost of **40 credits/minute**.  
