@@ -36,7 +36,7 @@ The Windows executor is only available on the CircleCI Performance Plan. Please 
 
 ## Windows executor images
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of dependencies](#full-list-of-dependencies-in-the-windows-images) further along in this document.
+Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document.
 
 # Example configuration file
 
@@ -169,7 +169,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
-# Full list of dependencies in the Windows images
+# Software pre-installed in the Windows image
 
 **Windows Server 2019 with Visual Studio 2019**
 
@@ -202,8 +202,6 @@ Also, consider reading documentation on some of CircleCI’s features:
     * Runtime 6.4.617.9590
 * OpenJDK 12.0.2
 * node.js v12.8.0
-* Python 3.7.4
-* pyenv
 * Ruby 2.6.3
 * Go 1.12.7
 * Text editors
