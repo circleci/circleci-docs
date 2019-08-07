@@ -33,6 +33,8 @@ A reusable command may have the following immediate children keys as a map:
 - **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
 - **Steps:** (required) A sequence of steps run inside the calling job of the command.
 
+Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
 ### The `commands` Key** 
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
@@ -794,7 +796,7 @@ jobs:
 ### The Scope of Parameters
 {:.no_toc}
 
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly.
 
 ```yaml
 version: 2.1
