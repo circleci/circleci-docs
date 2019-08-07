@@ -84,4 +84,4 @@ If you are a user of a privately installed CircleCI deployment, change the defau
 ## Next Steps
 {:.no_toc}
 
-[Author Your Orb](({{site.baseurl}}/2.0/orb-author)
+- Refer to [Author Your Orb]({{site.baseurl}}/2.0/orb-author/) for next steps.
