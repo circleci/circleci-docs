@@ -28,7 +28,7 @@ Orbs consist of the following three elements:
 
 Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
-```
+```yaml
 version: 2.1
 jobs:
   myjob:
@@ -58,9 +58,9 @@ An executor definition has the following keys available (some of which are also 
 
 - docker, machine, or macos
 - environment
-- `working_directory`
+- working_directory
 - shell
-- `resource_class`
+- resource_class
 
 ## Orbs Configuration
 
@@ -78,7 +78,7 @@ commands | N | Map | A map of command names to command definitions.
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -89,6 +89,6 @@ workflows:
 ```
 In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
 
-## Next Step
+## Next Steps
 
 Refer to [Set Up the CircleCI CLI]({{site.baseurl}}/2.0/orb-author-cli/) for next steps.
