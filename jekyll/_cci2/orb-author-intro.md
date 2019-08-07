@@ -28,6 +28,7 @@ Orbs consist of the following three elements:
 
 Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
+```
 version: 2.1
 jobs:
   myjob:
@@ -36,6 +37,7 @@ jobs:
     steps:
       - myorb/sayhello:
           to: "Lev"
+```
 ### Jobs
 
 Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the jobs key in a configuration, or in an external orb’s configuration.
@@ -48,7 +50,7 @@ Executors define the environment in which the steps of a job will be run. When y
 
 - environment variables to populate
 - which shell to use
-- what size resource_class to use
+- what size `resource_class` to use
 
 When you declare an executor in a configuration outside of jobs, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
 
@@ -56,9 +58,9 @@ An executor definition has the following keys available (some of which are also 
 
 - docker, machine, or macos
 - environment
-- working_directory
+- `working_directory`
 - shell
-- resource_class
+- `resource_class`
 
 ## Orbs Configuration
 
@@ -87,10 +89,6 @@ workflows:
 ```
 In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
 
-## See Also
-{:.no_toc}
+## Next Step
 
-- Refer to Orb Introduction (link needed here), for a high-level overview of CircleCI orbs.
-- Refer to Set Up The CircleCI CLI (link needed here) for steps on how to set up the CircleCI CLI.
-- Refer to Author Your Orb (link needed here) for more detailed information on how to author an orb.
-- Refer to Test and Publish Your Orb (link needed here) for more information on how to test and publish your orb.
+[Set Up the CircleCI CLI]({{site.baseurl}}/2.0/orb-author-cli/)
