@@ -33,7 +33,7 @@ A reusable command may have the following immediate children keys as a map:
 - **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
 - **Steps:** (required) A sequence of steps run inside the calling job of the command.
 
-### The `commands` Key** 
+### **The `commands` Key** 
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
