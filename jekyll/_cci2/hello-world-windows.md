@@ -25,6 +25,7 @@ To follow along with this document you will need:
 
 The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor: 
 
+- Is VM-based to guarantee full job isolation.
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.
 - Has 4 vCPUS and 15 GB of RAM.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
@@ -33,23 +34,66 @@ Note: the Windows executor does not have have support for [Docker Layer Caching]
 
 The Windows executor is only available on the CircleCI Performance Plan. Please see the [CircleCI Plans page](https://circleci.com/pricing/usage/) for more details on the cost of Windows compute.
 
+## Windows executor images
+
+Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. The contents of the image are:
+
+**Windows Server 2019 with Visual Studio 2019**
+
+* Windows Server 2019 Core Datacenter Edition
+* Visual Studio 2019 Community Edition
+    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/vs/community/#usage) before using this Visual Studio version in your Windows jobs.
+    * Azure SDK for Visual Studio 2019
+    * Visual Studio 2019 Build Tools
+* Shells:
+    * Powershell 5
+    * Bash
+    * cmd
+* .NET Framework 4.8
+* .NET Core
+    * SDK 3.0.100-preview7-012821
+    * Runtime 3.0.0-preview6-27804-01
+    * SDK 2.2.401 
+    * Runtime 2.2.6
+    * SDK 2.1.801
+* Git 2.22.0
+* Git LFS 2.7.2
+* Windows 10 SDK
+    * 10.0.26624
+    * 10.1.18362.1
+* Docker Engine - Enterprise 
+* NuGet CLI 5.2.0.6090
+* Chocolatey
+* Azure Service Fabric
+    * SDK 3.3.617.9590
+    * Runtime 6.4.617.9590
+* OpenJDK 12.0.2
+* node.js v12.8.0
+* Python 3.7.4
+* pyenv
+* Ruby 2.6.3
+* Go 1.12.7
+* Text editors
+    * nano 2.5.3
+    * vim 8.0.604
+* jq 1.5
+
 # Example configuration file
 
-The following code snippet is an absolute minimum to get started with Windows on CircleCI:
+Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
 ```yaml
 version: 2.1
 
 orbs:
-  win: circleci/windows-tools@0.0.4
+  win: circleci/windows@1.0.0
 
 jobs:
   build:
-    executor: win/preview-default
+    executor: win/vs2019
     steps:
       - checkout
       - run: Write-Host 'Hello, Windows'
-
 ```
 
 # Specifying a Shell with the Windows Executor
@@ -164,3 +208,6 @@ Also, consider reading documentation on some of CircleCI’s features:
 * See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
+
+# Full list of dependencies in the Windows images
+
