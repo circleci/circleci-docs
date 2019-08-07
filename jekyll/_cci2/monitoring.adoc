@@ -30,7 +30,7 @@ Following are the enabled metrics:
 
 === Nomad Job Metrics
 
-https://www.nomadproject.io/docs/agent/telemetry.html#job-metrics[Nomad job metrics] are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
+https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad job metrics] are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
