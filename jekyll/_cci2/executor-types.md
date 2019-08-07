@@ -174,17 +174,19 @@ Using the `windows` executor allows you to run your job in a Windows environment
 version: 2.1
 
 orbs:
-  win: sandbox/windows-tools@dev:preview
+  win: circleci/windows@1.0.0
 
 jobs:
   build:
-    executor: win/preview-default
+    executor:
+      name: win/vs2019
+      shell: bash.exe
     steps:
       - checkout
       - run: echo 'Hello, Windows'
 ```
 
-We recommend using the [windows-tools](https://circleci.com/orbs/registry/orb/circleci/windows-tools) for setting  the executor and shell in your build.
+We recommend using the [windows](https://circleci.com/orbs/registry/orb/circleci/windows) orb for setting  the executor and shell in your build.
 
 Building on Windows is not available on installed versions of CircleCI.
 

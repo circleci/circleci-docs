@@ -354,11 +354,11 @@ CircleCI supports running jobs on Windows. To run a job on a Windows machine, yo
 version: 2.1
 
 orbs:
-  win: sandbox/windows-tools@dev:preview
+  win: circleci/windows@1.0.0
 
 jobs:
   build:
-    executor: win/preview-default
+    executor: win/vs2019
     steps:
       - checkout
       - run: echo 'Hello, Windows'

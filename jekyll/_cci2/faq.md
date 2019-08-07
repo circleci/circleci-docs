@@ -219,25 +219,13 @@ We use Windows Server 2019 Datacenter Edition, the Server Core option.
 ### What is installed on the machine?
 {:.no_toc}
 
-We install Git, Chocolatey, and 7zip. We don’t install any other dependencies at the moment.
-
-If you need other software installed on the Windows machines, please open a GitHub issue and explain what software you need, which versions of it you use, and why it is important to you to have this software pre-installed in the machines.
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our "[Hello World On
+Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
 
 ### What is the machine size?
 {:.no_toc}
 
 The Windows machines have 4 vCPUs and 15GB RAM.
-
-### Did you implement any I/O optimizations?
-{:.no_toc}
-
-Not right now. If there are any specific optimizations in mind that would be useful, please let us know in the GitHub issues.
-
-### Can I use Powershell in my CircleCI config?
-{:.no_toc}
-
-Yes. The win/preview-default executor includes Powershell as the default shell. So in this example, the steps are being run as Powershell commands.
-
 
 ### Is Windows available on installed versions of CircleCI?
 {:.no_toc}
