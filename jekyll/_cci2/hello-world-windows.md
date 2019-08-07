@@ -29,8 +29,11 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.
 - Has 4 vCPUS and 15 GB of RAM.
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
+- Docker Engine - Enterprise is available for running Windows containers.
 
 Note: the Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching).
+
+Note: the Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
 
 The Windows executor is only available on the CircleCI Performance Plan. Please see the [CircleCI Plans page](https://circleci.com/pricing/usage/) for more details on the cost of Windows compute.
 
@@ -120,15 +123,9 @@ Under the `jobs` key, we set the executor via the orb we are using. We can also 
 ```yaml
     steps:
       - checkout
-      - run:
-          name: "Install dotnet core"
-          command: |
-            choco install dotnetcore-sdk
-            refreshenv
-            dotnet.exe --info
 ```
 
-In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system. Next, we install .NET core via a powershell script included in the [.circleci folder](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/dotnet-install.ps1). As the comment in our config makes note, we have gotten the powershell script to install .NET core from Microsoft’s .NET documentation. While we could pull the script dynamically and run it using curl or powershell, we have vendored it into the project to have one less dependency in the tutorial.
+In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:
