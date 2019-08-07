@@ -78,7 +78,7 @@ An image is a packaged system that has the instructions for creating a running c
 
 ## Jobs
 
-Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
+Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 

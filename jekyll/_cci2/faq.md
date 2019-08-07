@@ -205,6 +205,33 @@ Yes, every workflow with a `schedule` listed in the `trigger:` key will be run o
 {:.no_toc}
 CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
+## Windows
+
+### What do I need to get started building on Windows?
+{:.no_toc}
+You will need a [Performance Plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows jobs are charged at 40 credits/minute.
+
+### What exact version of Windows are you using?
+{:.no_toc}
+
+We use Windows Server 2019 Datacenter Edition, the Server Core option.
+
+### What is installed on the machine?
+{:.no_toc}
+
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our "[Hello World On
+Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
+
+### What is the machine size?
+{:.no_toc}
+
+The Windows machines have 4 vCPUs and 15GB RAM.
+
+### Is Windows available on installed versions of CircleCI?
+{:.no_toc}
+
+Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+
 ## Billing
 
 ### Container Based Plans

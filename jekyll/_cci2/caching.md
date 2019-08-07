@@ -19,7 +19,7 @@ After an initial job run, future instances of the job will run faster by not red
 A good example is package dependency managers such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload everything on every build.
 
 <div class="alert alert-warning" role="alert">
-<b>Warning:</b> Caching files between different executors, for example, between Docker and Machine, Linux and MacOS, or  CircleCI Image and Non-CircleCI Image, can result in file permissions and path errors. These errors are often caused by  missing users, users with different UIDs, and missing paths. Please use extra care when caching files in these cases.
+<b>Warning:</b> Caching files between different executors, for example, between Docker and Machine, Linux, Windows or MacOS, or CircleCI Image and Non-CircleCI Image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Please use extra care when caching files in these cases.
 </div>
 
 ## Example Caching Configuration
