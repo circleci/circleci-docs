@@ -115,14 +115,10 @@ jobs:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
-          name: Install Asciidoctor-PDF
-          command: |
-            gem install asciidoctor-pdf --pre
-            gem install rouge
-            asciidoctor-pdf -v
-      - run:
           name: Build PDFs for Server
-          command: ./scripts/build_pdfs.sh
+          command: |
+            bundle exec asciidoctor-pdf -v
+            ./scripts/build_pdfs.sh
       - run:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
