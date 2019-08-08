@@ -33,6 +33,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [macOS](https://github.com/CircleCI-Public/circleci-demo-macos) | MacOS | [circleci-demo-macos](https://github.com/CircleCI-Public/circleci-demo-macos)
  [Java] | Spring | [circleci-demo-java-spring]
+  [Java]({{ site.baseurl }}/2.0/language-java-maven/){:target="_blank"} | Maven | [circleci-demo-java-spring-tree-maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven){:target="_blank"}
  [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [NodeJS - JavaScript] | React | [circleci-demo-javascript-express]
  [PHP] | Laravel | [circleci-demo-php-laravel]
