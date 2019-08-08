@@ -328,8 +328,8 @@ en:
         - name: Acknowledgments
           link: 2.0/open-source/
     - name: CircleCI Server v2.17 PDFs
-       link: 2.0/v.2.17-overview/
-       children:
+      link: 2.0/v.2.17-overview/
+      children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
         - name: v2.17 Installation Guide
