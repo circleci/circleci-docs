@@ -293,6 +293,8 @@ en:
           link: 2.0/nomad/
         - name: Monitoring
           link: 2.0/monitoring/
+        - name: Nomad Metrics
+          link: 2.0/nomad-metrics/
         - name: Proxies
           link: 2.0/proxy/
         - name: Authentication

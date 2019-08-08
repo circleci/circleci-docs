@@ -15,7 +15,6 @@ toc::[]
 
 To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice (your-circleci-hostname.com:8800/settings#cloudwatch_metrics).
 
-
 === VM Service and Docker Metrics
 
 VM Host and Docker services metrics are forwarded via https://github.com/influxdata/telegraf[Telegraf], a plugin-driven server agent for collecting and reporting metrics.

@@ -5,13 +5,9 @@ Server documentation is written in ASCIIDOC and built for the web and PDF using 
 ## Document Structure
 Server documentation is provided in two formats - html on the main CircleCI docs site generated with Jekyll, showing the current docs, and also PDFs of our Operations and Installation guides are provided for each feature release.
 
-Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for the ops guide (`_ops-guide.adoc`) and the installation guide (`_install-aws.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` etc.
+Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for the ops guide (`_ops-guide.adoc`) and the installation guide (`_aws-install.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` etc.
 
-There are also separate front page files: `_ops-guide-front.adoc` and `_aws-install-front.adoc`, these are used to provide an easy way to have the version info on the front pages. The asciidoc book doctype only allows a cover page **image** - which can be a PDF, there is no way to apply text directly to the cover page from the main asciidoc file. Hopefully this will change in future so the two files can be merged.
-
-So, the process for creating a new version is to make the required changes to the individual topics, and then change the version in the front cover asciidoc file, generate the PDF for the front cover first, place in the assets>img>docs directory and then generate the new PDF content from the `_ops-guide.adoc` or `_aws-install.adoc` file, which will incorporate the new front cover. **This process will be run with a script.**
-
-Master asciidoc files that are only used for creating PDFs have an `_` at the start of the filenames to prevent Jekyll from converting them to HTML for the main site.
+Master asciidoc files that are **only** used for creating PDFs have an `_` at the start of the filenames to prevent Jekyll from converting them to HTML for the main site.
 
 ## Build PDFs locally
 
@@ -24,6 +20,8 @@ Then, from the top of the circleci-docs directory, run:
 ```
 
 You will then find the PDFs in: `releases/tmp`
+
+This script is run as part of the CCI build everytime you push a commit, then the PDFs can be found in the build artifacts, accessible from the CircleCI UI.
 
 ## Some notes about formatting
 
@@ -62,7 +60,7 @@ In order to make tables display correctly in the web version of Server docs, ass
 |===
 ```
 
-### Xrefs
+### Inter-document cross refs
 Cross references should be made in the form: `<<overview#services-machine,Services Machine>>` where `overview` is the name of the file the destination is in, `services-machine` is the anchor heading, and `Services Machine` is what to display in the prose.
 
 This is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, where they are two separate docs as well as the Jekyll site where you will be dealing with two regular pages as with any xref. So in this instance reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal link URL[text to display].

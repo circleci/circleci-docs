@@ -22,6 +22,8 @@ include::nomad.adoc[]
 
 include::monitoring.adoc[]
 
+include::nomad-metrics.adoc[]
+
 include::proxy.adoc[]
 
 include::authentication.adoc[]

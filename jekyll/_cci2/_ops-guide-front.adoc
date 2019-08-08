@@ -1,9 +1,0 @@
-= OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations on AWS and private infrastructure.
-Docs Team
-v2.17.2
-:media: print
-:title-page-background-image: image:pdf-header.png[]
-:imagesdir: ../assets/img/docs/
-:doctype: book
-:idprefix:
-:idseparator: -
