@@ -6,7 +6,7 @@
 :toc-title:
 :sectanchors:
 
-Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-rchitecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
+Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 
 == Nomad Metrics Server
 

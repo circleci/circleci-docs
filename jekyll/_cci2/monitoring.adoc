@@ -1,4 +1,3 @@
-[#monitoring]
 = Monitoring Your Installation
 :page-layout: classic-docs
 :page-liquid:

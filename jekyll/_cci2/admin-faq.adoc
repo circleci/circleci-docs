@@ -17,7 +17,7 @@ No, because of the nature of CircleCI integration with GitHub authentication, yo
 [discrete]
 === Can I monitor available build containers?
 
-Yes, refer to the <<nomad#nomadintro,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#monitoring,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
 === How do I provision admin users?

@@ -178,7 +178,7 @@ Configuration secrets are stored in plain-text on the host.
 === What significant metrics will be generated?
 
 **Answer:**
-Refer to the <<monitoring#monitoring,Monitoring>> section for details about monitoring and metrics.
+Refer to the <<monitoring#system-monitoring,Monitoring>> section for details about monitoring and metrics.
 
 === How do I find out how many builds per day are running?
 

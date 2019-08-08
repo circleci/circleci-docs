@@ -31,4 +31,4 @@ nvidia-smi
 
 == Adding GPU Steps to an AMI
 
-To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#vmservice,Configuring VM Service>> documentation.
+To avoid start up time associated with the above steps, they may be included in an AMI by following the instructions in the <<vm-service#overview,Configuring VM Service>> documentation.

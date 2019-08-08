@@ -1,4 +1,3 @@
-[#nomadintro]
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
 :page-liquid:

@@ -1,4 +1,3 @@
-[#vmservice]
 = VM Service
 :page-layout: classic-docs
 :page-liquid:
@@ -67,7 +66,7 @@ NOTE: When using preallocated instances be aware that a cron job is scheduled to
 
 == Job and Instance Management
 
-Jobs run using the remote Docker Environment, or the `machine` executor are scheduled and dispatched by the Nomad server to your Nomad clients and passed on to remote Docker or `machine` from there. This means jobs run on remote Docker and the `machine` executor can be monitored in the usual way, using the Nomad CLI. See our <<nomad#nomadintro,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
+Jobs run using the remote Docker Environment, or the `machine` executor are scheduled and dispatched by the Nomad server to your Nomad clients and passed on to remote Docker or `machine` from there. This means jobs run on remote Docker and the `machine` executor can be monitored in the usual way, using the Nomad CLI. See our <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> for more about Nomad commands and terminology.
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 
