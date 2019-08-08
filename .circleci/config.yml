@@ -109,9 +109,6 @@ jobs:
           paths:
             - "src-api/vendor/bundle"
       - run:
-          name: Install Jekyll asciidoc plugin
-          command: gem install jekyll-asciidoc
-      - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
       - run:
