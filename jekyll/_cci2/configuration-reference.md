@@ -89,6 +89,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
+windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
@@ -173,7 +174,7 @@ jobs:
       - run: make
 ```
 
-#### **`docker`** / **`machine`** / **`macos`**(_executor_)
+#### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
@@ -340,6 +341,27 @@ jobs:
   build:
     macos:
       xcode: "9.0"
+```
+
+#### **`windows`**
+{:.no_toc}
+
+CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `widows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]() document.
+
+**Example:** Use a windows executor to run a simple job.
+
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor: win/vs2019
+    steps:
+      - checkout
+      - run: echo 'Hello, Windows'
 ```
 
 #### **`branches`**
@@ -826,7 +848,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 ##### **`store_artifacts`**
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the   [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -846,7 +868,9 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use [the **store_artifacts** step](#store_artifacts).
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites. 
+
+It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1094,7 +1118,7 @@ Jobs may be configured to use global environment variables set for an organizati
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String | The name of the context. The initial default name was `org-global`. With the ability to use multiple contexts, each context name must be unique.
+context | N | String | The name of the context. The initial default name was `org-global`. Each context name must be unique.
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1172,6 +1196,8 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              only: /v.*/
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.

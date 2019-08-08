@@ -58,8 +58,8 @@ steps:
   - run:
       name: 環境変数の設定
       command: |
-        echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+        echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+        echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 ```
 
 CircleCI は `bash` コマンドを用いて、ステップごとにその都度 `BASH_ENV` の内容を読み込みます。 これはつまり、`BASH_ENV` の読み込みと実行が自動的に行われ、インターポレーションを可能にし、`run` ステップ間で環境変数を共有できるということです。
@@ -261,7 +261,7 @@ curl \
   https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
 ```
 
-ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
+ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)です。
 
 ビルド時には下記のような環境変数となります。
 

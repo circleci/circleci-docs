@@ -25,6 +25,10 @@ Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the Circle
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
 
+### Examples
+
+Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
+
 ## Best Practices
 
 Convenience images are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
@@ -210,10 +214,7 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 
 ## Pre-installed Tools
 
-All convenience images have been extended with additional tools.
-
-With the exception of [Android images](https://hub.docker.com/r/circleci/android),
-all images include the following packages, installed via `apt-get`:
+All convenience images have been extended with additional tools, installed with `apt-get`:
 
 - `bzip2`
 - `ca-certificates`
@@ -304,4 +305,6 @@ Note: Any variants available for this image can be used by appending the variant
 ## See Also
 {:.no_toc}
 
-See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/). 
+- See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.
