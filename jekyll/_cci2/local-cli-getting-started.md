@@ -13,12 +13,12 @@ For those who prefer to spend most of their development time in the terminal, co
 
 # Prerequisites
 
-- You are using a unix-machine (Mac or linux): the CircleCI CLI tool is installable on Windows but is in beta and not as fully featured as unix installations. 
+- You are using a unix-machine (Mac or Linux): the CircleCI CLI tool is installable on Windows but is in beta and not as fully featured as unix installations. 
 - You have a basic knowledge of CI/CD and the features and concepts of CircleCI's offerings.
 - You have a GitHub account
 - You have a CircleCI account.
 - You have your terminal open and ready to go.
-- Optional: An installation of Github's `[Hub](https://hub.github.com/)` command line tool (allowing us to interface with Github from the command line rather than the web UI). Learn [how to install Hub](https://github.com/github/hub#installation).
+- Optional: An installation of Github's [`Hub`](https://hub.github.com/) command line tool (allowing us to interface with Github from the command line rather than the web UI). Learn [how to install Hub](https://github.com/github/hub#installation).
 
 If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [getting started concepts document](https://circleci.com/docs/2.0/concepts/#section=getting-started) before proceeding.
 
@@ -29,14 +29,14 @@ If some of these prerequisites sound unfamiliar, or you are new to the CircleCI 
 Let's start from the very basics: create a project and initialize a git repository. Refer to the below code block for a list of steps.
 
 ```sh
-cd ~ # navigate to our home directory.
-mkdir foo_ci # create our project in a folder called "foo_ci"
+cd ~ # navigate to your home directory.
+mkdir foo_ci # create your project in a folder called "foo_ci"
 cd foo_ci # change directories into the new foo_ci folder.
 git init # create a git repository
-touch README.md # Create a file to put in our repository
+touch README.md # Create a file to put in your repository
 echo 'Hello World!' >> README.md
 git add . # Stage every file to commit
-git commit -m "Initial commit" # create our first commit.
+git commit -m "Initial commit" # create your first commit.
 ```
 
 ## Connect Your Git Repo to a VCS
@@ -59,7 +59,6 @@ git push --set-upstream origin master
 ```
 
 You now have a git repo that is connected to a VCS. The remote on your VCS ("origin") now matches your local work.
-
 
 ## Download and Setup the CircleCI CLI
 
@@ -129,25 +128,38 @@ circleci local execute
 ```
 
 This will pull down the docker image you have specified, in this case `circleci/ruby::2.4.2-jessie-node` and run the job. This may take a bit of time depending on the size of the docker image you are using.
+
+You should see an output in your terminal that looks similar to this:
+
+```sh
+====>> Checkout code
+  #!/bin/bash -eo pipefail
+mkdir -p /home/circleci/project && cp -r /tmp/_circleci_local_build_repo/. /home/circleci/project
+====>> echo "Hello World"
+  #!/bin/bash -eo pipefail
+echo "Hello World"
+Hello World
+Success!
+```
 	
 ## Connect Your Repo to CircleCI
 
 We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://circleci.com/add-projects). It's time to set up your project to run CI whenever you push code.
 
-Find your project in the list of projects and click "Set Up Project". On the next page, 
+Find your project in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 
-[todo] - setup
+```sh
+git add .
+git commit -m "add config.yml file"
+git push
+```
 
-[todo] - grab your api code
+Returning to CircleCI in your browser, you can now click "start building" to run your build. 
 
-## Connect Your API Token to the CLI
+There are several more complex features that the CircleCI CLI offers:
 
-## 
+- Creating, viewing, validating and publishing [orbs](https://circleci.com/orbs/)
+- Querying the CircleCI GraphQL api
+- Packing and Processing complex configuration files.
 
-## Create a Simple CircleCI Configuration
-Look for an Orb.
-
-## Validate Your Config Before Pushing
-
-
-
+Consider reading our [document covering]({{site.baseurl}}/2.0/local-cli) the CLI for more details.
