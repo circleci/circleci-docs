@@ -8,6 +8,12 @@ VERSION="2.17.3"
 
 COMMENT="DRAFT"
 
+echo "Installing asciidoctor-PDF"
+
+bundle exec asciidoctor-pdf -v
+
+echo "done"
+
 echo "Building Ops Guide"
 
 ### -- Build the Ops Guide --
