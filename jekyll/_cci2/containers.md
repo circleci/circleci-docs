@@ -5,7 +5,7 @@ categories: [how-to]
 description: How to leverage CircleCI containers
 ---
 
-This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs.
+This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. For more information on what containers are and why they are useful, see this [Docker overview](https://www.docker.com/resources/what-container).
 
 ## Overview
 
