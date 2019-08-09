@@ -27,7 +27,7 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
-```yaml
+{% highlight yaml linenos %}
 version: 2.0
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-```
+{% endhighlight %}
 
 Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
 
