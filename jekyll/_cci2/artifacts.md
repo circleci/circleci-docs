@@ -163,7 +163,6 @@ export CIRCLE_TOKEN=':your_token'
 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
    | grep -o 'https://[^"]*' \
-   | tr -d \" \
    | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
    | wget -v -i -
 ```
@@ -180,23 +179,11 @@ Placeholder   | Meaning                                                         
 ### Description of Commands
 {:.no_toc}
 
-First,
-the CIRCLE_TOKEN environment variable is created.
-Then,
-the `curl` command fetches all artifact details for a build
-and pipes them to `grep`
-to extract the URLs.
-These URLs are saved to the `artifacts.txt` file.
-Finally,
-`xargs` reads the text file,
-downloading artifacts using `wget`.
-All artifacts are downloaded to the current directory.
-
-**Note:**
-In the above example,
-`xargs` runs four processes
-to download artifacts in parallel.
-Adjust the number given to the `-P` flag as needed.
+First, the CIRCLE_TOKEN environment variable is created. Then, the `curl`
+command fetches all artifact details for a build and pipes them to `grep` to
+extract the URLs. Using `sed` your circle token is appended to the file to
+create a unique file name. Finally, `wget` is used to download the artifacts to
+the current directory in your terminal.
 
 
 ## See Also
