@@ -14,20 +14,22 @@ CircleCI provides a number of different options for code coverage reporting,
 using built-in CircleCI features combined with open source libraries,
 or using partners.
 
-* TOC 
+* TOC
 {:toc}
 
 
-# Viewing Coverage on CircleCI
+# Viewing Coverage on CircleCI 
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage
-report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). CircleCI will upload coverage results and make them visible as part of your build.
+report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/2.0/artifacts/) guide for more on accessing coverage reports.
+
+![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
 Here are a few examples to demonstrate configuring coverage libraries for
 different languages.
 
-## Ruby 
+## Ruby
 
 [Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
 coverage library. To get started, add the `simplecov` gem to your `Gemfile`
@@ -305,7 +307,7 @@ report which can be converted to html via `go tool`.
 
 ```sh
 go test -cover -coverprofile=c.out
-go tool cover -html=c.out -o coverage.html 
+go tool cover -html=c.out -o coverage.html
 ```
 
 An example `.circleci/config.yml`:
@@ -323,7 +325,7 @@ jobs:
           name: "Create a temp directory for artifacts"
           command: |
             mkdir -p /tmp/artifacts
-      - run: 
+      - run:
           command: |
             go test -coverprofile=c.out
             go tool cover -html=c.out -o coverage.html
