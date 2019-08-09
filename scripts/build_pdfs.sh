@@ -8,22 +8,16 @@ VERSION="2.17.3"
 
 COMMENT="DRAFT"
 
-echo "Installing asciidoctor-PDF"
-
-bundle exec asciidoctor-pdf -v
-
-echo "done"
-
 echo "Building Ops Guide"
 
 ### -- Build the Ops Guide --
-asciidoctor-pdf -a pdf-style=jekyll/_cci2/release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=Draft -D ${OUT_DIR} -o CircleCI-Server-Operations-Guide.pdf jekyll/_cci2/_ops-guide.adoc
+bundle exec asciidoctor-pdf -a pdf-style=jekyll/_cci2/release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=Draft -D ${OUT_DIR} -o CircleCI-Server-Operations-Guide.pdf jekyll/_cci2/_ops-guide.adoc
 
 echo "Done!"
 
 echo "Building AWS Install Guide"
 
 ### -- Build the AWS Install Guide --
-asciidoctor-pdf -a pdf-style=jekyll/_cci2/release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=${COMMENT} -D ${OUT_DIR} -o CircleCI-Server-AWS-Installation-Guide.pdf jekyll/_cci2/_aws-install.adoc
+bundle exec asciidoctor-pdf -a pdf-style=jekyll/_cci2/release-pdf/circle-theme-install.yml -a pdf-fontsdir=jekyll/_cci2/release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=${COMMENT} -D ${OUT_DIR} -o CircleCI-Server-AWS-Installation-Guide.pdf jekyll/_cci2/_aws-install.adoc
 
 echo "Done!"
