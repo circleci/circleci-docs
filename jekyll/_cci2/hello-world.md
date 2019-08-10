@@ -54,7 +54,7 @@ jobs:
       - image: circleci/android:api-25-alpha
 ```
 
-See the [Android Language Guide]({{site.baseurl}}/2.0/https://circleci.com/docs/2.0/language-android/) for details and a sample project.
+See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.
 
 ## Hello World for macOS
 
