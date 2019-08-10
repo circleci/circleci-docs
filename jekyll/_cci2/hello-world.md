@@ -11,17 +11,17 @@ This document describes how to get started with a basic build of your Linux, And
 
 ## Echo Hello World on Linux 
 
-This example adds a job called `build` that spins up a container running a the [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
+This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
 1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines: 
 
      ```yaml
-     version: 2
+     version: 2.1
      jobs:
-       build-linux:
-         docker: # use the docker executor type; machine and macos executors are also supported
+       build:
+         docker: 
            - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
          steps:
            - checkout # check out the code in the project directory
@@ -61,10 +61,10 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
 ```
-jobs: # a basic unit of work in a run
-  build-macos: # runs not using `Workflows` must have a `build` job as entry point
-    macos:  # indicate that we are using the macOS executor
-      xcode: "10.0.0" # indicate our selected version of Xcode
+jobs: 
+  build-macos: 
+    macos:  
+      xcode: "10.0.0" 
 ```      
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
@@ -78,7 +78,7 @@ orbs:
   win: circleci/windows@1.0.0
 
 jobs:
-  build:
+  build-windows:
     executor: win/vs2019
     steps:
       - checkout
