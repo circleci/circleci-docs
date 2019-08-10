@@ -17,16 +17,16 @@ This example adds a job called `build` that spins up a container running a the [
 
 1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines: 
 
-```yaml
-version: 2
-jobs:
-  build-linux:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-```
+     ```yaml
+     version: 2
+     jobs:
+       build-linux:
+         docker: # use the docker executor type; machine and macos executors are also supported
+           - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+         steps:
+           - checkout # check out the code in the project directory
+           - run: echo "hello world" # run the `echo` command
+     ```
 
 1. Commit and push the changes. 
 
