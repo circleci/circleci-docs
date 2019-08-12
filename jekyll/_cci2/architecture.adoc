@@ -170,7 +170,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `postgres` / `postgres-script-enhance` *
 | Basic `postgresql` with enhancements for creating required databases when containers are launched.
-| Potential total data loss. All running builds will fail and the UI will not work
+| Potential total data loss. All running builds will fail and the UI will not work.
 | icon:fire-extinguisher[]
 | None
 
