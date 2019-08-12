@@ -26,7 +26,7 @@ To be able to configure the JVM_HEAP_SIZE value for each container, you will fir
 export JVM_HEAP_SIZE=2g
 ```
 
-3. Stop and restart CircleCI application from the Management Console dashboard (e.g. your-circleci-hostname.com:8800)
+3. Stop and restart CircleCI application from the Management Console dashboard (for example, your-circleci-hostname.com:8800)
 
 
 == Verify customization is applied
