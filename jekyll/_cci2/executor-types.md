@@ -16,7 +16,7 @@ This document describes the available executor types (`docker`, `machine`, `wind
 ## Overview
 {:.no_toc}
 
-An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of three environments:
+An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
 
 - Within Docker images (`docker`)
 - Within a Linux virtual machine (VM) image (`machine`)
