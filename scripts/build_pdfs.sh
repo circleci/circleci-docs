@@ -8,6 +8,8 @@ VERSION="2.17.3"
 
 COMMENT="DRAFT"
 
+bundle install
+
 echo "Building Ops Guide"
 
 ### -- Build the Ops Guide --

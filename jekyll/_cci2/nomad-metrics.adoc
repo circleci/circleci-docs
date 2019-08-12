@@ -183,6 +183,7 @@ docker run -d --name $CONTAINER_NAME \
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
+[cols="3,2,2"]
 |===
 | Name
 | Type
