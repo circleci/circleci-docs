@@ -73,7 +73,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 | `postgres`, `frontend`, `contexts-service-migrator`, `vault-cci`
 
 | `contexts-service-migrator`
-| Runs postgresql migrations for the `contexts-service`
+| Runs postgresql migrations for the `contexts-service`.
 | Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
