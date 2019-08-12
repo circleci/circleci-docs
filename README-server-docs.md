@@ -16,7 +16,7 @@ To be able to build the PDFs locally you will need to install Asciidoctor-PDF - 
 Then, from the top of the circleci-docs directory, run:
 
 ```
-./scripts/build_pdfs.sh
+./scripts/build_pdfs_local.sh
 ```
 
 You will then find the PDFs in: `releases/tmp`
