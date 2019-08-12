@@ -128,7 +128,7 @@ image::secure-management-console.png[Hostname]
 . Decide how to secure the Management Console. You have three options:
 .. Anonymous admin access to the console, anyone on port 8800 can access (not recommended)
 .. Set a password that can be used to securely access the Management Console (recommended)
-.. Use your existing directory-based authentication system (e.g. LDPA)
+.. Use your existing directory-based authentication system (for example, LDAP)
 +
 .Admin Password
 image::admin-password.png[Secure the Management Console]
