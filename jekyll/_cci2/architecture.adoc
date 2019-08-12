@@ -109,7 +109,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 | None
 
 | `federation-service`
-| Stores user identities (LDAP)
+| Stores user identities (LDAP).
 | If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
 | icon:fire-extinguisher[] only if LDAP in use
 | `postgres`, `frontend`, `federations-service-migrator`
