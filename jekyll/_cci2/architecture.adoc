@@ -17,7 +17,7 @@ toc::[]
 
 * Database migrator services are listed here with a low failure severity as they only run at startup, however:
 +
-WARNING: if migrator services are down at startup connected services will fail
+WARNING: If migrator services are down at startup connected services will fail.
 
 * With a platinum support contract some services can be externalized (marked with * here) and managed to suit your requirements. Externalization provides higher data security and allows for redundancy to be built into your system.
 
