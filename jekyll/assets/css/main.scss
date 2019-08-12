@@ -329,3 +329,12 @@ code {
 body > img:last-of-type{
 	display: none;
 }
+
+/* These two classes control code block rendering when line numbers are enabled, they are formatted as tables, so without the following you see the table borders in the Jekyll output which looks bad*/
+.lineno{
+	border-color: #f5f5f5
+}
+
+pre {
+	border-color: #f5f5f5
+}

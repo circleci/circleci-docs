@@ -63,7 +63,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
-```yaml
+{% highlight yaml linenos %}
 version: 2.0
 jobs:
   build:
@@ -81,7 +81,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-```
+{% endhighlight %}
 
 ### Learnings
 {:.no_toc}
