@@ -99,7 +99,7 @@ Also, by default, the following types will be rendered as plain text:
 If you would like to allow content types that are not included in the whitelist above, follow these steps:
 
 1. Navigate to the CircleCI Management Console (e.g. `https://<your-circleci-hostname>:8800/settings`) and select Settings from the menu bar
-2. Scroll down to find the Artifacts section
+2. Scroll down to find the Artifacts section.
 3. Select Serve Artifacts with Unsafe Content-Types
 +
 .Allow Unsafe Content Types
