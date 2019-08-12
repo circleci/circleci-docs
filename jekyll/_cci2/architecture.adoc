@@ -194,7 +194,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `mongodb-upgrader` / `server-mongo-upgrader`
 | Used to run any mongo conversion/upgrade scripts during mongo version upgrade.
-| Not required to run all the time \
+| Not required to run all the time. \
 | icon:check-circle[]
 | None
 
