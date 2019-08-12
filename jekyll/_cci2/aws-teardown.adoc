@@ -12,6 +12,6 @@ If your wish to destroy you installation of CircleCI Server, please let us know 
 .. Click to select it
 . Click Actions > Instance Settings > Change Termination Protection
 
-. Navigate to the S3 dashboard, locate the S3 bucket associated with your CircleCI cluster and delete it/its contents (If you set `force_destroy_s3_bucket = "true"` in your `terraform.tfvars` file, skip this step).
+. Navigate to the S3 dashboard, locate the S3 bucket associated with your CircleCI cluster and delete the bucket and its contents (If you set `force_destroy_s3_bucket = "true"` in your `terraform.tfvars` file, skip this step).
 
 . From a terminal, navigate to your clone of our `enterprise-setup` repo and run `terraform destroy` to destroy all EC2 instances, IAM roles, ASGs and Launch configurations created by `terraform apply`.
