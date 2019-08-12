@@ -34,7 +34,7 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/cci-demo-clojure # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/clojure:lein-2.7.1 # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
     environment: # environment variables for primary container
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
@@ -91,7 +91,7 @@ Directly beneath `working_directory`, we can specify container images under a `d
 version: 2
 ...
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.9.1
 ```
 
 We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
@@ -148,4 +148,3 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 The app described in this guide illustrates the simplest possible setup for a Clojure web app. Real-world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:
 
 * [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml), a site which configures disposable virtual machines for remote collaboration (uses PostgreSQL, continuously deployed to Heroku)
-

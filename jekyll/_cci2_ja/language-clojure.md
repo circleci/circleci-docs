@@ -36,7 +36,7 @@ jobs: # 1回の実行の基本作業単位
   build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     working_directory: ~/cci-demo-clojure # ステップが実行されるディレクトリ
     docker: # Docker でステップを実行します
-      - image: circleci/clojure:lein-2.7.1 # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
+      - image: circleci/clojure:lein-2.9.1 # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
     environment: # プライマリコンテナの環境変数
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープサイズを制限します
@@ -93,7 +93,7 @@ jobs:
 version: 2
 ...
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.9.1
 ```
 
 `lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/docs/ja/2.0/circleci-images/#clojure)を使用します。
