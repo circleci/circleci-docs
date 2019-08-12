@@ -15,7 +15,7 @@ This document provides a summary of continuous integration and how CircleCI enab
 We want to make engineering teams more productive through intelligent automation.
 
 CircleCI provides enterprise-class support and services, with the flexibility of a startup.  
-We work where you work: Linux, macOS, Android - SaaS or behind your firewall.  
+We work where you work: Linux, macOS, Android, and Windows - SaaS or behind your firewall.  
 
 ![CircleCI about image]( {{ site.baseurl }}/assets/img/docs/arch.png)
 
@@ -31,7 +31,7 @@ As an operator or administrator of CircleCI installed on your own servers, Circl
 
 After a software repository on GitHub or Bitbucket is authorized and added as a project to [circleci.com](https://circleci.com), every code change triggers automated tests in a clean container or VM. CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs CircleCI spins up a container or VM to run the job in.
 
-CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated Slack, and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
+CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated Slack and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Kubernetes Engine (GKE), Microsoft Azure, and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 

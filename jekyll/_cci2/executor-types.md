@@ -8,7 +8,7 @@ order: 10
 ---
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
 
-This document describes the available executor types (`docker`, `machine`, and `macos`) in the following sections:
+This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
 
 * TOC
 {:toc}
@@ -16,11 +16,12 @@ This document describes the available executor types (`docker`, `machine`, and `
 ## Overview
 {:.no_toc}
 
-An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of three environments:
+An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
 
 - Within Docker images (`docker`)
 - Within a Linux virtual machine (VM) image (`machine`)
 - Within a macOS VM image (`macos`)
+- Within a windows VM image (`windows`)
 
 It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
@@ -164,6 +165,30 @@ jobs:
       # with Xcode 9.0 installed
       - run: xcodebuild -version
 ```
+
+## Using Windows
+
+Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is on our [Performance Plan](https://circleci.com/pricing/usage/). The following is an example configuration that will run a simple windows job.
+
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor:
+      name: win/vs2019
+      shell: bash.exe
+    steps:
+      - checkout
+      - run: echo 'Hello, Windows'
+```
+
+We recommend using the [windows](https://circleci.com/orbs/registry/orb/circleci/windows) orb for setting  the executor and shell in your build.
+
+Building on Windows is not available on installed versions of CircleCI.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).

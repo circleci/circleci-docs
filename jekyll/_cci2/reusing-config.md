@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Reusing Config"
-short-title: "Reusing Config"
-description: "Reusing configuration in CircleCI 2.1"
+title: "Orbs Reference Guide"
+short-title: "Orbs Reference"
+description: "Reference guide for CircleCI 2.1 orbs"
 categories: [configuration]
 order: 1
 ---
 
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
+This Orbs Reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
 * TOC
 {:toc}
@@ -33,7 +33,11 @@ A reusable command may have the following immediate children keys as a map:
 - **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
 - **Steps:** (required) A sequence of steps run inside the calling job of the command.
 
-### The `commands` Key** 
+Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
+
+### **The `commands` Key** 
+
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
@@ -794,7 +798,7 @@ jobs:
 ### The Scope of Parameters
 {:.no_toc}
 
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly.
 
 ```yaml
 version: 2.1
@@ -986,7 +990,7 @@ workflows:
 ```
 
 ## See Also
-- Refer to [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) for detailed information about how you can work with your CircleCI configuration.
+
 - Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
 - Refer to [Database Examples]({{site.baseurl}}/2.0//postgres-config/) for database examples you can use in your CircleCI configuration.

@@ -7,7 +7,7 @@ categories: [configuration]
 order: 1
 ---
 
-Set up your build environment to run with the `docker`, `machine`, or `macos` executor and specify an image with only the tools and packages you need.
+Set up your build environment to run with the `docker`, `machine`, `windows`, or `macos` executor and specify an image with only the tools and packages you need.
 
 ## Docker
 
@@ -41,6 +41,27 @@ jobs:
       - run: xcodebuild -version
 ```
 
+
+## Windows
+
+Note: The Windows executor requires a 2.1 version configuration as well as having Pipelines enabled. Go to "Project" > "Settings" > "Advanced Settings" to enable Pipelines.
+
+```
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
+orbs:
+  win: circleci/windows@1.0.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build:
+    executor: win/vs2019
+    steps:
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
 ## See Also
 
-Learn more about the [pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
+* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos).
+* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows).
