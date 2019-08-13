@@ -130,7 +130,7 @@ circleci local execute
 
 This will pull down the docker image you have specified, in this case `circleci/ruby::2.4.2-jessie-node` and run the job. This may take a bit of time depending on the size of the docker image you are using.
 
-You should quite a bit of a text in your terminal. The last few lines of output should look similar to this:
+You should see quite a bit of a text in your terminal. The last few lines of output should look similar to this:
 
 ```sh
 ====>> Checkout code
