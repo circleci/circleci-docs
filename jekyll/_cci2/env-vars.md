@@ -108,8 +108,8 @@ steps:
   - run:
       name: Setup Environment Variables
       command: |
-        echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+        echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+        echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 ```
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run,
@@ -182,7 +182,7 @@ jobs:
 
 ## Setting an Environment Variable in a Container
 
-To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
+To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
 
 ```yaml
 version: 2

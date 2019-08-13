@@ -117,7 +117,7 @@ CircleCI and its partners have developed several different AWS orbs that enable 
 ```
 version: 2.1
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
     docker:
