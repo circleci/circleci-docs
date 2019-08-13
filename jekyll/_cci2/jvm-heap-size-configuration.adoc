@@ -9,7 +9,7 @@ The JVM heap size is configurable for the following containers: `frontend`, `tes
 
 == Setting up
 
-To be able to configure the JVM_HEAP_SIZE value for each container, you will first need to create sp,e customizations files on your services machine.
+To be able to configure the JVM_HEAP_SIZE value for each container, you will first need to create customizations files on your services machine.
 
 1. Create customizations files:
 +
@@ -26,7 +26,7 @@ To be able to configure the JVM_HEAP_SIZE value for each container, you will fir
 export JVM_HEAP_SIZE=2g
 ```
 
-3. Stop and restart CircleCI application from the Management Console dashboard (e.g. your-circleci-hostname.com:8800)
+3. Stop and restart CircleCI application from the Management Console dashboard (for example, your-circleci-hostname.com:8800)
 
 
 == Verify customization is applied

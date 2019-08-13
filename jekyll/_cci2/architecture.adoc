@@ -17,7 +17,7 @@ toc::[]
 
 * Database migrator services are listed here with a low failure severity as they only run at startup, however:
 +
-WARNING: if migrator services are down at startup connected services will fail
+WARNING: If migrator services are down at startup connected services will fail.
 
 * With a platinum support contract some services can be externalized (marked with * here) and managed to suit your requirements. Externalization provides higher data security and allows for redundancy to be built into your system.
 
@@ -73,7 +73,7 @@ WARNING: if migrator services are down at startup connected services will fail
 | `postgres`, `frontend`, `contexts-service-migrator`, `vault-cci`
 
 | `contexts-service-migrator`
-| Runs postgresql migrations for the `contexts-service`
+| Runs postgresql migrations for the `contexts-service`.
 | Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
@@ -109,7 +109,7 @@ WARNING: if migrator services are down at startup connected services will fail
 | None
 
 | `federation-service`
-| Stores user identities (LDAP)
+| Stores user identities (LDAP).
 | If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
 | icon:fire-extinguisher[] only if LDAP in use
 | `postgres`, `frontend`, `federations-service-migrator`
@@ -170,7 +170,7 @@ WARNING: if migrator services are down at startup connected services will fail
 
 | `postgres` / `postgres-script-enhance` *
 | Basic `postgresql` with enhancements for creating required databases when containers are launched.
-| Potential total data loss. All running builds will fail and the UI will not work
+| Potential total data loss. All running builds will fail and the UI will not work.
 | icon:fire-extinguisher[]
 | None
 
@@ -194,7 +194,7 @@ WARNING: if migrator services are down at startup connected services will fail
 
 | `mongodb-upgrader` / `server-mongo-upgrader`
 | Used to run any mongo conversion/upgrade scripts during mongo version upgrade.
-| Not required to run all the time \
+| Not required to run all the time. \
 | icon:check-circle[]
 | None
 
