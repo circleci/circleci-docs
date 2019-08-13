@@ -97,7 +97,7 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
 
-```yaml
+{% highlight yaml linenos %}
 version: 2.0
 jobs:
   build:
@@ -120,7 +120,7 @@ jobs:
           name: Running in a Unique Container
           command: |
             node -v
-```
+{% endhighlight %}
 
 We also added a small `run` block that demonstrates we are running in a node container.
 
@@ -141,7 +141,7 @@ In the example below, an event triggering a build will cause `Hello-World` to st
 
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
 
-```yaml
+{% highlight yaml linenos %}
 version: 2.0
 jobs:
   Hello-World:
@@ -200,7 +200,7 @@ workflows:
          requires:
            - Hold-For-Approval
 
-```
+{% endhighlight %}
 
 ### Learnings
 {:.no_toc}
