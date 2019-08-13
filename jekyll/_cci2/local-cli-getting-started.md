@@ -1,26 +1,26 @@
 ---
 layout: classic-docs
-title: "Getting Started with the Local CLI "
-short-title: "Getting Started with the Local CLI"
-description: "An introduction to interfacing with CircleCI from the commandline"
+title: "Getting Started with the CircleCI CLI"
+short-title: "Getting Started with the CircleCI CLI"
+description: "An introduction to interfacing with CircleCI from the command line"
 categories: [getting-started]
 order: 50
 ---
 
 # Overview
 
-For those who prefer to spend most of their development time in the terminal, consider installing the [CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) to interact with your projects on CircleCI. This document provides a step-by-step guide on intializing and working with a CircleCI project primarily in the terminal. 
+For those who prefer to spend most of their development time in the terminal, consider installing the [CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) to interact with your projects on CircleCI. This document provides a step-by-step guide on intializing and working with a CircleCI project primarily from within the terminal. 
 
 # Prerequisites
 
-- You are using a unix-machine (Mac or Linux): the CircleCI CLI tool is installable on Windows but is in beta and not as fully featured as unix installations. 
+- You are using a unix-machine (Mac or Linux): the CircleCI CLI tool _is_ installable on Windows but is currently in beta and not as fully featured as unix installations. 
 - You have a basic knowledge of CI/CD and the features and concepts of CircleCI's offerings.
 - You have a GitHub account
 - You have a CircleCI account.
 - You have your terminal open and ready to go.
 - Optional: An installation of Github's [`Hub`](https://hub.github.com/) command line tool (allowing us to interface with Github from the command line rather than the web UI). Learn [how to install Hub](https://github.com/github/hub#installation).
 
-If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [getting started concepts document](https://circleci.com/docs/2.0/concepts/#section=getting-started) before proceeding.
+If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [concepts document](https://circleci.com/docs/2.0/concepts/#section=getting-started) before proceeding.
 
 # Steps
 
@@ -49,7 +49,7 @@ If you have installed and setup the Hub CLI, you can simply run:
 hub create
 ```
 
-And follow any prompts regarding logins / authorizing the HUB cli.
+Then follow any prompts regarding logins / authorizing the HUB CLI.
 
 If you aren't using Hub, head over to GitHub, login, and [create a new respository](https://github.com/new). Follow the instructions to commit and push to the remote. These instructions generally looks like this:
 
@@ -62,13 +62,13 @@ You now have a git repo that is connected to a VCS. The remote on your VCS ("ori
 
 ## Download and Setup the CircleCI CLI
 
-Next, we will install the CircleCI CLI and try out some of it's features. To install the CLI on a unix machine run the following command in your terminal:
+Next, we will install the CircleCI CLI and try out some of its features. To install the CLI on a unix machine run the following command in your terminal:
 
 ```sh
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-There are multiple installation methods for the CLI, read more about them [here]({{site.baseurl}}/2.0/local-cli) if you need to use an alternative method.
+There are multiple installation methods for the CLI, you can read more about them [here]({{site.baseurl}}/2.0/local-cli) if you need to use an alternative method.
 
 Now run the setup step after the installation:
 
@@ -76,7 +76,7 @@ Now run the setup step after the installation:
 circleci setup
 ```
 
-You'll be asked for your API token. Go to the the [Account Settings](https://circleci.com/account/api) page and click `Create a New Token`. Name your token and copy the resulting token string and keep it somewhere safe!
+You'll be asked for your API token. Go to the [Account Settings](https://circleci.com/account/api) page and click `Create a New Token`. Name your token and copy the resulting token string and keep it somewhere safe!
 
 Return to the CLI and paste in your API token to complete your setup.
 
@@ -85,14 +85,15 @@ Return to the CLI and paste in your API token to complete your setup.
 Now it's time to create a configuration file in our project directory. 
 
 ```sh
-cd ~/foo_ci
-mkdir .circleci
-touch .circleci/config.yml
+cd ~/foo_ci # Make sure you are still in the foo_ci folder
+mkdir .circleci # create a directory called ".circleci"
+cd .circleci # change directories to the new directory
+touch config.yml # create an YAML file called "config.yml"
 ```
 
-The above commands create a .circleci folder where we will store our config file.
+The above commands create a `.circleci` folder where we will store our config file.
 
-Open the newly created `config.yaml` file and paste the following contents into it.
+Open the newly created `config.yml` file and paste the following contents into it.
 
 ```yaml
 version: 2.0
@@ -129,7 +130,7 @@ circleci local execute
 
 This will pull down the docker image you have specified, in this case `circleci/ruby::2.4.2-jessie-node` and run the job. This may take a bit of time depending on the size of the docker image you are using.
 
-You should see an output in your terminal that looks similar to this:
+You should quite a bit of a text in your terminal. The last few lines of output should look similar to this:
 
 ```sh
 ====>> Checkout code
@@ -146,7 +147,7 @@ Success!
 
 We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://circleci.com/add-projects). It's time to set up your project to run CI whenever you push code.
 
-Find your project in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
+Find your project ("foo_ci", or whatever you named it on GitHub) in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 
 ```sh
 git add .
@@ -156,7 +157,9 @@ git push
 
 Returning to CircleCI in your browser, you can now click "start building" to run your build. 
 
-There are several more complex features that the CircleCI CLI offers:
+# Next Steps
+
+This document provides a small overview to getting started with the CircleCI CLI tool. There are several more complex features that the CircleCI CLI offers:
 
 - Creating, viewing, validating and publishing [orbs](https://circleci.com/orbs/)
 - Querying the CircleCI GraphQL api
