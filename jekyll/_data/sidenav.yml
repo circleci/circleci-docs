@@ -262,7 +262,7 @@ en:
         - name: Archive of 1.0 Docs
           link: 2.0/archive/
 
-- name: Administration
+- name: CircleCi Server Administration
   icon: docs/admin.svg
   children:
     - name: Server v2.17.3 Install and Upgrade
