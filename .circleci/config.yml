@@ -121,7 +121,7 @@ jobs:
             ./scripts/build_pdfs.sh
       - run:
           name: Test with HTMLproofer
-          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --url-ignore "/circleci.com/docs/ja/2.0/aws-prereq/index.html/,/circleci.com/docs/ja/2.0/ops/index.html/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --url-ignore "/docs/ja/2.0/aws-prereq/index.html/,/docs/ja/2.0/ops/index.html/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
       - store_artifacts:
           path: release/tmp/
       - store_artifacts:
