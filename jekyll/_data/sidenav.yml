@@ -28,6 +28,8 @@ en:
           link: 2.0/hello-world-macos/
         - name: Hello World Windows
           link: 2.0/hello-world-windows/
+        - name: Getting Started with the CircleCI CLI
+          link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
