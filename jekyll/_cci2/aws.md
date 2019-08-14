@@ -6,7 +6,7 @@ order: 10
 description: "How to install CircleCI on Amazon Web Services (AWS)."
 ---
 
-This document provides requirements and step-by-step instructions for installing CircleCI v2.16 on Amazon Web Services (AWS) with Terraform in the following sections. 
+This document provides requirements and step-by-step instructions for installing CircleCI v2.16 on Amazon Web Services (AWS) with Terraform in the following sections.
 
 * TOC
 {:toc}
@@ -47,7 +47,7 @@ With a Platinum support agreement, it is possible to configure the following ser
 - Vault
 - Rabbitmq
 - Redis
-- Nomad 
+- Nomad
 - Slanger
 
 Contact support to evaluate your installation against the current requirements for running external services.
@@ -95,7 +95,7 @@ The following additional settings are required to support using private subnets 
 - The private subnet for builder boxes must be configured with a [NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) or an [internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) configured for the outbound traffic to the internet via attached route tables. **Note:** The subnet should be large enough to *never* exhaust the addresses.
 - The [VPC Endpoint for S3](https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/) should be enabled. Enabling the VPC endpoint for S3 should significantly improve S3 operations for CircleCI and other nodes within your subnet.
 - Adequately power the NAT instance for heavy network operations.  Depending on the specifics of your deployment, it is possible for NAT instances to become constrained by highly parallel builds using Docker and external network resources.  A NAT that is inadequate could cause slowness in network and cache operations.
-- If you are integrating with [github.com](https://github.com), ensure that your network access control list (ACL) whitelists ports 80 and 443 for GitHub webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
+- If you are integrating with [github.com](https://github.com), ensure that your network access control list (ACL) allows ports 80 and 443 for GitHub webhooks. When integrating with GitHub, either set up CircleCI in a public subnet, or set up a public load balancer to forward github.com traffic.
 - See the Services section of the [Administrator's Overview]({{site.baseurl}}/2.0/overview#services) for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
@@ -162,9 +162,9 @@ Have available the following information and policies before starting the Previe
 
 1. Clone the [Setup](https://github.com/circleci/enterprise-setup) repository (if you already have it cloned, make sure it is up-to-date and you are on the `master` branch: `git checkout master && git pull`).
 2. Run `make init` to init `terraform.tfvars` file (your previous `terraform.tfvars` if any, will be backed up in the same directory).
-3. Fill `terraform.tfvars` with appropriate AWS values for section 1. 
+3. Fill `terraform.tfvars` with appropriate AWS values for section 1.
 4. Specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters. Passphrase cannot be empty.
-5. Specify the instance type for your Nomad Clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m4.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types) guide for details. **Note:** The `builder_instance_type` is only used for 1.0 and is disabled by default in section 3. 
+5. Specify the instance type for your Nomad Clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m4.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types) guide for details. **Note:** The `builder_instance_type` is only used for 1.0 and is disabled by default in section 3.
 4. Run `terraform apply` to provision.
 5. Go to the provided URL at the end of Terraform output and follow the instructions.
 6. Enter your license.

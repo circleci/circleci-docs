@@ -13,7 +13,7 @@ This document describes how to configure CircleCI to use an HTTP proxy in the fo
 
 ## Overview
 
-If you are setting up your proxy through Amazon, read this before proceeding: 
+If you are setting up your proxy through Amazon, read this before proceeding:
 
 [Using an HTTP Proxy - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html)
 
@@ -28,7 +28,7 @@ These instructions assume an unauthenticated HTTP proxy at `10.0.0.33:3128`, a S
 The Service machine has many components that need to make network calls, as follows:
 
 - **External Network Calls** - Replicated is a vendor service that we use for the Management Console of CircleCI. CircleCI  requires Replicated to make an outside call to validate the license, check for updates, and download upgrades. Replicated also downloads docker, installs it on the local machine, and uses a Docker container to create and configure S3 buckets.
-   
+
 - **Internal Network calls**  
   - If S3 traffic requires going through an HTTP proxy, CircleCI must pass proxy settings into the container.
   - The CircleCI instance on the Services machine runs in a Docker container, so it must to pass the proxy settings to the container to maintain full functionality.
@@ -53,22 +53,22 @@ EOF
 sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui start; sudo service replicated-operator start; sudo service replicated start
 ```
 
-**Note:** The above is not handled by by our enterprise-setup script and will need to be added to the user data for the services box startup or done manually. 
+**Note:** The above is not handled by by our enterprise-setup script and will need to be added to the user data for the services box startup or done manually.
 
 ### Corporate Proxies
 In some environments you may not have access to a `NO_PROXY` equivalent outside your network. In that case, put all relevant outbound addresses into the `HTTP_PROXY` or `HTTPS_PROXY` and only add machines on the internal network to `NO_PROXY` such as the Services and Builders.  
 
 
-Also note that when the instructions ask you if you use a proxy, they will also prompt you for the address. It is **very important** that you input the proxy in the following format `<protocol>://<ip>:<port>`. If you are missing any part of that, then `apt-get` won't work correctly and the packages won't download. 
+Also note that when the instructions ask you if you use a proxy, they will also prompt you for the address. It is **very important** that you input the proxy in the following format `<protocol>://<ip>:<port>`. If you are missing any part of that, then `apt-get` won't work correctly and the packages won't download.
 
-If you cannot access the page of the CircleCI Replicated management console, but the services machine seems to be running, try to SSH tunnel into the machine doing the following: `ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_box>`. 
+If you cannot access the page of the CircleCI Replicated management console, but the services machine seems to be running, try to SSH tunnel into the machine doing the following: `ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_box>`.
 
 
 ### Nomad Client Configuration
 
-- **External Network Calls** - CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, along with jars from Amazon S3. Both `curl` and `awscli` respect environment settings, but if you have whitelisted traffic from Amazon S3 you should not have any problems.
-  
-- **Internal Network Calls** 
+- **External Network Calls** - CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, along with jars from Amazon S3. Both `curl` and `awscli` respect environment settings, but if you have allowed traffic from Amazon S3 you should not have any problems.
+
+- **Internal Network Calls**
   - CircleCI JVM:  
     - Any connections to other Nomad Clients or the Services machine should be excluded from HTTP proxy
     - Connections to GitHub Enterprise should be excluded from HTTP proxy
@@ -100,4 +100,4 @@ set -a
 
 ```
 
-You'll also need to follow these instructions: https://docs.docker.com/network/proxy/ for making sure that your containers have outbound/proxy access. 
+You'll also need to follow these instructions: https://docs.docker.com/network/proxy/ for making sure that your containers have outbound/proxy access.
