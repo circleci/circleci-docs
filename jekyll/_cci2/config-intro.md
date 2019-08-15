@@ -28,7 +28,7 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 5. Add the following contents to your `config.yml` file.
 
 ```yaml
-version: 2.0
+version: 2.1
 jobs:
   build:
     docker:
@@ -48,7 +48,7 @@ Check-in the config and see it run.  You can see the output of the job in the Ci
 
 The CircleCI config syntax is very straight forward.  The trickiest part is typically indentation.  Make sure your indentation is consistent.  This is the single most common error in config.  Let’s go over the nine lines in details
 
-- Line 1: This indicates the version of the CircleCI platform you are using.  2.0 is the most recent version.
+- Line 1: This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
 - Line 2-3: The `jobs` level contains a collection of arbitrarily named children.  `build` is the first named child in the `jobs` collection.  In this case `build` is also the only job.
 - Line 6-7: The `steps` collection is an ordered list of `run` directives.  Each `run` directive is executed in the order in which it was declared.
 - Line 8: The `name` attribute provides useful organizational information when returning warnings, errors, and output.  The `name` should be meaningful to you as an action within your build process
@@ -64,7 +64,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
 ```yaml
-version: 2.0
+version: 2.1
 jobs:
   build:
     docker:
@@ -98,7 +98,7 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
 
 ```yaml
-version: 2.0
+version: 2.1
 jobs:
   build:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
@@ -142,7 +142,7 @@ In the example below, an event triggering a build will cause `Hello-World` to st
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
 
 ```yaml
-version: 2.0
+version: 2.1
 jobs:
   Hello-World:
     docker:
