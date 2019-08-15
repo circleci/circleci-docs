@@ -27,6 +27,8 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 4. Add a `config.yml` file inside the .circleci folder.
 5. Add the following contents to your `config.yml` file.
 
+{% highlight yaml linenos %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -39,7 +41,7 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
-```
+{% endhighlight %}
 
 Check-in the config and see it run.  You can see the output of the job in the CircleCI app.
 
@@ -63,6 +65,9 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 
 3. Now, add a second `run` step and do an `ls -al` to see that all of your code is available.
 
+
+{% highlight yaml linenos %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -81,7 +86,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-```
+{% endhighlight %}
 
 ### Learnings
 {:.no_toc}
@@ -96,6 +101,9 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 1. This section expands on Part One and Two.  If you haven’t already, go through at least Part One to ensure you have a working `config.yml` file in your branch.
 
 2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
+
+
+{% highlight yaml linenos %}
 
 ```yaml
 version: 2.1
@@ -120,7 +128,7 @@ jobs:
           name: Running in a Unique Container
           command: |
             node -v
-```
+{% endhighlight %}
 
 We also added a small `run` block that demonstrates we are running in a node container.
 
@@ -140,6 +148,9 @@ The CircleCI workflow model is based on the orchestration of predecessor jobs.  
 In the example below, an event triggering a build will cause `Hello-World` to start immediately.  The remainder of the jobs will wait.  When `Hello-World` completes, both `I-Have-Code` and `Run-With-Node` will start.  That is because both `I-Have-Code` and `Run-With-Node` require `Hello-World` to complete successfully before they can start.  Next, the approval job called `Hold-For-Approval` will become available when both `I-Have-Code` and `Run-With-Node` complete.  The `Hold-For-Approval` job is slightly different from the others.  It represents a manual intervention to allow the workflow to continue.  While the workflow is waiting for a user (through the CircleCI UI or API) to approve the job, all state is preserved based on the original triggering event.  CircleCI understands that Approval jobs may take hours or even days before completing - although we suggest hours over days. Once `Hold-For-Approval` completes through a manual intervention, the final job `Now-Complete` will run.
 
 All of the job names are arbitrary.  This allows you to create workflows as complex as you need while staying meaningful and clear to the next developer that reads the `config.yml`.
+
+
+{% highlight yaml linenos %}
 
 ```yaml
 version: 2.1
@@ -200,7 +211,7 @@ workflows:
          requires:
            - Hold-For-Approval
 
-```
+{% endhighlight %}
 
 ### Learnings
 {:.no_toc}
