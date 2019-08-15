@@ -81,6 +81,49 @@ function getUrlVars(url) {
   return myJson;
 };
 
+function renderTabbedCodeFences(){
+
+	var tabGroupIndex = 0;
+
+	while( true ){
+
+		tabGroupIndex++;
+
+		if( $( "div.highlighter-rouge.codetab." + tabGroupIndex ).length == 0 ){
+			break;
+		}
+
+		var tabs = "";
+
+		$( "div.highlighter-rouge.codetab." + tabGroupIndex ).each( function( index ){
+
+			tabName = $( this )[0].classList.item(3);
+			tabNameFixed = tabName.replace( /_/g, "." );
+			tabNameFixed = tabNameFixed.replace( /-/g, " " );
+
+			if( index != 0 ){
+				$( this ).hide();
+				$( this ).appendTo( "div.codetab-parent." + tabGroupIndex );
+				tabs += "<li>" + tabNameFixed  + "</li>";
+			}else{
+				$( this ).wrap( '<div class="codetab-parent ' + tabGroupIndex + '"></div>' );
+				tabs += '<li class="active">' + tabNameFixed  + '</li>';
+			}
+		});
+
+		$( "div.codetab-parent." + tabGroupIndex ).prepend( "<ul>" + tabs  + "</ul>" );
+		$( "div.codetab-parent." + tabGroupIndex + " li" ).click(function(){
+
+			curIndex = $( this ).parent().parent()[0].classList.item(1);
+			which = $( "div.codetab-parent." + curIndex + " li" ).index( $( this ) );
+			$( "div.codetab-parent." + curIndex + " li" ).removeClass( "active" );
+			$( this ).addClass( "active" );
+			$( "div.highlighter-rouge.codetab." + curIndex ).hide();
+			$( "div.highlighter-rouge.codetab." + curIndex ).eq( which ).show();
+		});
+	}
+}
+
 $( document ).ready(function() {
 
 	// Allow navigation to slide open and close on small devices
@@ -98,6 +141,8 @@ $( document ).ready(function() {
 	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
 		$(this).find("i").toggle();
 	});
+
+	renderTabbedCodeFences();
 
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);

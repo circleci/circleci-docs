@@ -17,6 +17,7 @@ en:
   icon: docs/start.svg
   children:
     - name: Introduction
+      link: 2.0/getting-started/
       children:
         - name: Getting Started Introduction
           link: 2.0/getting-started/
@@ -28,10 +29,12 @@ en:
           link: 2.0/hello-world-macos/
         - name: Hello World Windows
           link: 2.0/hello-world-windows/
+        - name: Getting Started with the CircleCI CLI
+          link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
-      link:
+      link: 2.0/concepts/
       children:
         - name: Getting Started Concepts
           link: 2.0/concepts/
@@ -44,7 +47,7 @@ en:
         - name: Security
           link: 2.0/security/
     - name: Migration
-      link:
+      link: 2.0/migration-intro/
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
@@ -63,7 +66,7 @@ en:
   icon: docs/config.svg
   children:
     - name: Introduction
-      link:
+      link: 2.0/config-intro/
       children:
         - name: Configuration Introduction
           link: 2.0/config-intro/
@@ -74,7 +77,7 @@ en:
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
     - name: Orbs
-      link:
+      link: 2.0/orb-intro/
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
@@ -89,7 +92,7 @@ en:
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
     - name: Authoring Orbs
-      link:      
+      link: 2.0/orb-author-intro/
       children:
         - name: Introduction to Authoring an Orb
           link: 2.0/orb-author-intro/
@@ -100,14 +103,14 @@ en:
         - name: Test and Publish Your Orb
           link: 2.0/orb-author-validate-publish/
     - name: Using Orbs
-      link:      
+      link: 2.0/orbs-user-config/
       children:
         - name: Set Your Version to Work With Orbs
           link: 2.0/orbs-user-config/
         - name: Selecting and Using an Orb
-          link: 2.0/orbs-user-select-orb/        
+          link: 2.0/orbs-user-select-orb/
     - name: Examples
-      link:
+      link: 2.0/examples-intro/
       children:
         - name: Examples Introduction
           link: 2.0/examples-intro/
@@ -124,7 +127,7 @@ en:
         - name: Testing iOS Applications
           link: 2.0/testing-ios/
     - name: EXECUTORS & IMAGES
-      link:
+      link: 2.0/executor-intro/
       children:
         - name: Executor & Image Introduction
           link: 2.0/executor-intro/
@@ -137,7 +140,7 @@ en:
         - name: Using Private Images
           link: 2.0/private-images/
     - name: ADVANCED CONFIG
-      link:
+      link: 2.0/adv-config/
       children:
         - name: Advanced Config Introduction
           link: 2.0/adv-config/
@@ -156,7 +159,7 @@ en:
   icon: docs/project.svg
   children:
     - name: settings
-      link:
+      link: 2.0/settings/
       children:
         - name: Settings Overview
           link: 2.0/settings/
@@ -181,7 +184,7 @@ en:
         - name: Setting Up iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
-      link:
+      link: 2.0/optimizations/
       children:
         - name: Optimization Overview
           link: 2.0/optimizations/
@@ -196,7 +199,7 @@ en:
   icon: docs/builds.svg
   children:
     - name: Status
-      link:
+      link: 2.0/status/
       children:
         - name: Status Overview
           link: 2.0/status/
@@ -217,7 +220,7 @@ en:
         - name: Using Insights
           link: 2.0/insights/
     - name: Triggers
-      link:
+      link: 2.0/triggers/
       children:
         - name: Introduction to Triggers
           link: 2.0/triggers/
@@ -232,14 +235,12 @@ en:
   icon: docs/deploy.svg
   children:
     - name: Configuring Deploys
-      link:
+      link: 2.0/deployment-integrations/
       children:
         - name: Deployment Overview
           link: 2.0/deployment-integrations/
         - name: Deploying to AWS ECR/ECS
           link: 2.0/ecs-ecr/
-        - name: Using Yarn on CircleCI
-          link: 2.0/yarn/
         - name: Publishing Snap Packages
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
@@ -268,7 +269,7 @@ en:
   icon: docs/admin.svg
   children:
     - name: CircleCI Server v2.17
-      link:
+      link: 2.0/v.2.17-overview/
       children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
@@ -277,7 +278,7 @@ en:
         - name: v2.17 Operations Guide
           link: 2.0/circleci-ops-guide-v2-17.pdf
     - name: CircleCI Server v2.16
-      link:
+      link: 2.0/v.2.16-overview/
       children:
         - name: What's New in v2.16
           link: 2.0/v.2.16-overview/
@@ -286,7 +287,7 @@ en:
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
     - name: CircleCI Server v2.0
-      link: 
+      link: 2.0/overview/
       children:
         - name: Overview
           link: 2.0/overview/
