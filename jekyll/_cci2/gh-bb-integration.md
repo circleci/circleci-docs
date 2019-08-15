@@ -58,11 +58,11 @@ Integrated status also appears on the pull request screen, to show that all test
 
 - Use Deploy Keys whenever possible.
 - When Deploy Keys cannot be used, Machine User Keys must be used, and have their access restricted to the most limited set of repos and permissions necessary.
-- Never use non-Machine user keys.
+- Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
 - You must rotate the Deploy or User key as part of revoking user access to that repo.
-    1. After revoking the user’s access in github, delete deployment key in GitHub.
-    2. Delete the deployment key in the CircleCI project.
-    3. Regenerate the deployment key in CircleCI project.
+    1. After revoking the user’s access in github, delete keys in GitHub.
+    2. Delete the keys in the CircleCI project.
+    3. Regenerate the keys in CircleCI project.
 - Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
 
 
@@ -318,7 +318,7 @@ For this reason, a deploy key isn't sufficiently powerful for projects with addi
 
 ### What about security?
 
-The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since they are installed into your build containers, any code that you run in CircleCI can read them and developers that can SSH in will have direct access to this key.
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
 
 **Isn't there a difference between deploy keys and user keys?**
 
