@@ -114,7 +114,7 @@ orbs:
   win: circleci/windows@1.0.0
 ```
 
-Next, we declare orbs that we will be using in our build. We will only use the [windows-tools orb](https://circleci.com/orbs/registry/orb/circleci/windows-tools) to help us get started.
+Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to help us get started.
 
 ```yaml
 jobs:
