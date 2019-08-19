@@ -104,9 +104,10 @@ jobs:
       - run: node_modules/.bin/nightwatch -e chrome // Executing test in bash.
  ```
 {% endraw %}
- ### Testing Locally Hosted or Privately Hosted Projects
+
+### Testing Locally Hosted or Privately Hosted Projects
  
- To help you perform cross browser testing of your locally stored web pages, LambdaTest provides an SSH(Secure Shell) tunnel connection with the name Lambda Tunnel. With Lambda Tunnel, you can execute a test server inside your CircleCI build container to perform automated cross browser testing on browsers offered by Selenium Grid on LambdaTest. That way, you could realize how fantastic your website would look in front of your audience, even before you make it live!
+To help you perform cross browser testing of your locally stored web pages, LambdaTest provides an SSH(Secure Shell) tunnel connection with the name Lambda Tunnel. With Lambda Tunnel, you can execute a test server inside your CircleCI build container to perform automated cross browser testing on browsers offered by Selenium Grid on LambdaTest. That way, you could realize how fantastic your website would look in front of your audience, even before you make it live!
 
 The below example of config.yml file would demonstrate you on how to leverage LambdaTest’s Selenium Grid by performing a browser test through your testing server contained in your CircleCI build.
 {% raw %}
@@ -169,7 +170,9 @@ build:
       - run: node_modules/.bin/nightwatch -e chrome
 ```
 {% endraw %}
+
 ### LambdaTest Browser Testing Orb Example
+
 LambdaTest has developed a CircleCI orb for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing. Also, to ease the process of integration between LambdaTest & CircleCI. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
 {% raw %}
 ```
@@ -244,6 +247,7 @@ jobs:
       - close_tunnel
 ```
 {% endraw %}
+
 ## Sauce Labs
 
 Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To allow the browsers access
