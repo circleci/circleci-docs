@@ -28,8 +28,6 @@ Let’s get started.  CircleCI provides a powerful experience because we provide
 5. Add the following contents to your `config.yml` file.
 
 {% highlight yaml linenos %}
-
-```yaml
 version: 2.1
 jobs:
   build:
@@ -67,8 +65,6 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 
 
 {% highlight yaml linenos %}
-
-```yaml
 version: 2.1
 jobs:
   build:
@@ -104,8 +100,6 @@ Every code base and project is different.  That’s okay.  We like diversity.  T
 
 
 {% highlight yaml linenos %}
-
-```yaml
 version: 2.1
 jobs:
   build:
@@ -151,8 +145,6 @@ All of the job names are arbitrary.  This allows you to create workflows as comp
 
 
 {% highlight yaml linenos %}
-
-```yaml
 version: 2.1
 jobs:
   Hello-World:
