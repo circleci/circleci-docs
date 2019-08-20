@@ -180,6 +180,12 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 Ensure that you are passing the name of the shell you want to run when you ssh
 in. To run  `cmd.exe` in the build above you would run: `ssh -p <remote_ip> -- powershell.exe`
 
+The available options are:
+
+- powershell.exe
+- bash.exe
+- cmd.exe
+
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
 # Next Steps
