@@ -164,6 +164,30 @@ Next, we run two steps: one to build the executable for Windows 10, and another 
 
 In our last step, we store the build executable as an artifact, making it accessible with the CircleCI web application or API.
 
+# SSH Into Your Build
+
+It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
+
+## Steps
+
+1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
+
+2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
+
+3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect:
+![SSH connection details]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
+
+Ensure that you are passing the name of the shell you want to run when you ssh
+in. To run  `cmd.exe` in the build above you would run: `ssh -p <remote_ip> -- cmd.exe`
+
+The available options are:
+
+- powershell.exe
+- bash.exe
+- cmd.exe
+
+You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
+
 # Next Steps
 
 Also, consider reading documentation on some of CircleCI’s features:
