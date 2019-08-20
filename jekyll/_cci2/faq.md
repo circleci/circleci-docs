@@ -187,7 +187,7 @@ Yes!
 
 ### Can workflows be scheduled to run at a specific time of day?
 {:.no_toc}
-Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an installable CircleCI release.
+Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone.
 
 ### What time zone is used for schedules?
 {:.no_toc}
