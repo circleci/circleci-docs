@@ -31,6 +31,12 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 4. SSH to the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
+If you are using the Windows executor you will need to pass in the shell you
+want to use when using SSH. For example, To run  `powershell` in your build you
+would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello
+World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
+
+
 The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down. (Or you can cancel it.) After you SSH into the build, the connection will remain open for **two hours**.
 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM to perform them. Thus, you'll see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
