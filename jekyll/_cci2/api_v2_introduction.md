@@ -9,9 +9,6 @@ order: 1
 
 The CircleCI API v2 is a significant update to the existing CircleCI API v1.1 that is currently being used by internal and external audiences.
 
-* TOC 
-{:toc}
-
 ## Introduction to API v2
 
 CircleCI API v2 has significantly changed the current API v1.1 paradigm to incorporate some important changes and shifts in the way that you can and will use the API for your jobs. Although changes were made to the available endpoints (discussed later on this page), two of the most important changes are the introduction of "Pipelines" and "Project Slugs" as concepts in the API design and architecture, as well as a set of new endpoints that enable you to:
