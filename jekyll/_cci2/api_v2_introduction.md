@@ -191,7 +191,7 @@ The `when` key actually accepts any boolean value, not just pipeline parameters.
 
 The CircleCI API v2 release includes several new endpoints that you can use in your jobs, as well as some endpoints that have been deprecated. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 enpoints, please refer to the [API v2 Reference Guide] (link needed here), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 enpoints, please refer to the *API v2 Reference Guide*, which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 ### New Endpoints
 
