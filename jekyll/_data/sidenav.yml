@@ -338,7 +338,7 @@ en:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
         - name: v2.17.3 Installation Guide
-          link: 2.0/CircleCI-Server-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.17.3 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: CircleCI Server v2.16 PDFs
