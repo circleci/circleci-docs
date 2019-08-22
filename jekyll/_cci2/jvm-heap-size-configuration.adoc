@@ -1,0 +1,59 @@
+= Configuring the JVM Heap Size
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+The JVM heap size is configurable for the following containers: `frontend`, `test-results`, `output-processing` and `contexts-service`. You might want to consider increasing the heap size if you see "out of memory" errors, such as: `Terminating due to java.lang.OutOfMemoryError: Java heap space`.
+
+== Setting up
+
+To be able to configure the JVM_HEAP_SIZE value for each container, you will first need to create customizations files on your services machine.
+
+1. Create customizations files:
++
+```sh
+/etc/circleconfig/frontend/customizations
+/etc/circleconfig/test-results/customizations
+/etc/circleconfig/output-processor/customizations
+/etc/circleconfig/contexts-service/customizations
+```
+
+2. In each customization file add the line below to export your desired JVM heap size:
++
+```sh
+export JVM_HEAP_SIZE=2g
+```
+
+3. Stop and restart CircleCI application from the Management Console dashboard (for example, your-circleci-hostname.com:8800)
+
+
+== Verify customization is applied
+Once your installation has successfully restarted, you can confirm the configured value was applied correctly by running the following REPL commands per container:
+
+
+* `frontend`
++
+```sh
+sudo docker exec -it frontend lein repl :connect 6005
+```
+* `test-results`
++
+```sh
+sudo docker exec -it test-results lein repl :connect 2719
+```
+* `output-processing`
++
+```sh
+sudo docker exec -it picard-output-processor lein repl :connect 6007
+```
+
+And following are the outputs you should see:
+
+```clojure
+(System/getenv "JVM_HEAP_SIZE") ;; should return what you have set above
+```
+```clojure
+(-> (java.lang.Runtime/getRuntime) (.totalMemory)) ;; return value should match with JVM_HEAP_SIZE
+```

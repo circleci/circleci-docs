@@ -8,6 +8,8 @@ For larger edits or new articles, you'll want to set up a local environment for 
 
 If you have a question or need help debugging, please head to [CircleCI Discuss](https://discuss.circleci.com/) where our support team will help you out.
 
+Docs for CircleCI Server Administration are built in a slightly different way so there is a [separate README](README-server-docs.md) for this section.
+
 ## License Information
 Documentation (guides, references, and associated images) is licensed as Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full license can be found [here](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the human-readable summary [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 

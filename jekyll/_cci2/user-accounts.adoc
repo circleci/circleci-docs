@@ -1,0 +1,93 @@
+= Managing User Accounts
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:source-highlighter: pygments.rb
+:toc: macro
+:toc-title:
+
+This section provides information to help system administrators manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
+
+toc::[]
+
+.Admin Settings – Account Overview
+image::admin_settings.png[Accounts Overview]
+
+== Suspending Accounts
+
+When an account is no longer required, you can suspend the account so it will no longer be active and will not count against your license quota. To suspend an account:
+
+. Navigate to your CircleCI Admin Settings
+. Select Users from the Admin Settings menu
+. Scroll to locate the account in either the Active or Inactive window
+. Click `Suspend` next to the account name and the account will appear in the Suspended window
+
+.Suspending an Account
+image::suspend_account.png[Suspend a User Account]
+
+== Reactivating a Suspended User Account
+
+To reactivate an account that has been suspended:
+
+1. Navigate to your CircleCI Admin Settings
+2. Select Users from the Admin Settings menu
+3. View the Suspended window
+4. Click on `Activate` next to the User you wish to grant access and the account will appear in the Active window
+
+.Rectivate Existing Users
+image::activate_user.png[Reactivate existing users]
+
+== Controlling Account Access
+
+Any user associated with your GitHub.com or Github Enterprise organization can create a user account for your CircleCI installation. In order to control who has access, you can automatically suspend **all** new users, requiring an administrator to activate them before they can log in. To access this feature:
+
+1. Navigate to your CircleCI Admin Settings
+2. Select System Settings from the Admin Settings menu
+3. Set Suspend New Users to `True`
+
+.Auto Suspend New Users
+image::suspend-new-users.png[Suspend New Users]
+
+=== Activating a Suspended New User Account
+
+To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI Server:
+
+1. Navigate to your CircleCI Admin Settings
+2. Select Users from the Admin Settings menu
+3. View the Suspended New Users window
+4. Click on `Activate` next to the User you wish to grant access and the account will appear in the Active window
+
+.Activate a Suspended New User
+image::unsuspend.png[Activate New Users]
+
+=== Limit User Registrations by Github Organization
+
+When using Github.com, you can limit who can register with your CircleCI install to people with *some* connection to your approved organizations list. To access this feature:
+
+1. Navigate to your CircleCI Admin Settings page
+2. Select System Settings from the Admin Setting menu
+3. Scroll down to Required Org Membership List
+4. Enter the organization(s) you wish to approve. If entering more than one organization, use a comma delimited string
+
+.Organization Membership
+image::org-membership.png[Org Membership]
+
+NOTE: Any form of organization membership is within the scope of this approval feature, and it does not stop users from running builds associated with other organizations they may belong to.
+
+=== Full User List
+
+To view a full list of users for your CircleCI Server installation, first SSH into your Services machine, and then run:
+
+```
+circleci dev-console
+(circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
+```
+
+=== Deleting a User
+
+If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's github username:
+
+```shell
+circleci dev-console
+(circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)
+```

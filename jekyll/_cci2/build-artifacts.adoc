@@ -1,0 +1,109 @@
+= Build Artifacts
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
+
+toc::[]
+
+== Safe and Unsafe Content Types
+By default, only pre-defined artifact types are allowed. This protects users from uploading, and potentially executing malicious content. The 'allowed-list' is as follows:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Category
+| Safe Type
+
+| Text
+| Plain
+
+| Application
+| json
+
+| Image
+| png
+
+| Image
+| jpg
+
+| Image
+| gif
+
+| Image
+| bmp
+
+| Video
+| webm
+
+| Video
+| ogg
+
+| Video
+| mp4
+
+| Audio
+| webm
+
+| Audio
+| aac
+
+| Audio
+| mp4
+
+| Audio
+| mpeg
+
+| Audio
+| ogg
+
+| Audio
+| wav
+|===
+<<<
+
+Also, by default, the following types will be rendered as plain text:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Category
+| Type
+
+| Text
+| html
+
+| Text
+| css
+
+| Text
+| javascript
+
+| Text
+| ecmascript
+
+| Application
+| javascript
+
+| Application
+| ecmascript
+
+| Text
+| xml
+|===
+
+== Allow Unsafe Content types
+If you would like to allow content types that are not included in the whitelist above, follow these steps:
+
+1. Navigate to the CircleCI Management Console (for example, `https://<your-circleci-hostname>:8800/settings`) and select Settings from the menu bar.
+2. Scroll down to find the Artifacts section.
+3. Select Serve Artifacts with Unsafe Content-Types.
++
+.Allow Unsafe Content Types
+image::UnsafeContentTypes.png[Build Artifacts]
+4. Click Save at the bottom of the page and Restart Now in the pop-up to save your changes and restart the console.
+
+WARNING: Any change to the settings within the Management Console will incur downtime as the console will need to be restarted.

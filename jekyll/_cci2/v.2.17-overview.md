@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI Server v2.17.
+This document provides a summary of features and product notes for the release of CircleCI Server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
 
 ## What's New in Release 2.17
 
@@ -17,11 +17,6 @@ This document provides a summary of features and product notes for the release o
 * Workflows now take up less DB space and will be easier to maintain going forward.
 * Improved the cache in front of GraphQL API resulting in overall improved performance.
 * Added backpressure to avoid overwhelming nomad with requests, this will result in increased performance from existing nomad clusters.
-
-
-- PDF installation and operations documentation:
-   - [*CircleCI v2.17 Installation Guide*](https://circleci.com/docs/2.0/circleci-install-doc-v2-17.pdf)
-   - [*CircleCI v2.17 Operations Guide*](https://circleci.com/docs/2.0/circleci-ops-guide-v2-17.pdf)
 
 ## Fixed in Release 2.17
 

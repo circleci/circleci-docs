@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Orb Publishing Process"
+title: "Publishing Orbs"
 short-title: "Publishing Orbs"
 description: "Starting point for publishing CircleCI orbs"
 categories: [getting-started]
@@ -69,7 +69,7 @@ The `circleci` CLI has several commands for managing your orb publishing pipelin
 
 For a full list of help commands inside the CLI, visit the [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
-## Creating a CircleCI Orb 
+## Creating a CircleCI Orb
 
 This section describes each step of the orb publishing process so you will have a better understanding of how to publish your own orb. These examples enables you to follow the process step-by-step to ensure you write an orb that both adheres to CircleCI requirements while also meeting your own needs.
 
@@ -141,7 +141,7 @@ $ cat foo/bar/@baz.yml
 Is mapped to:
 
 ```yaml
-bar: 
+bar:
   baz: qux
 ```
 
@@ -204,10 +204,10 @@ workflows:
 
  Original config.yml file:
  version: 2.1
- 
+
  orbs:
      hello: circleci/hello-build@0.0.5
- 
+
  workflows:
      \"Hello Workflow\":
          jobs:
