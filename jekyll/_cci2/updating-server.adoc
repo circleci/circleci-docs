@@ -27,16 +27,16 @@ To take a snapshot of your installation:
 NOTE: It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
-If you do need to rollback at any point, see our <<backup#restoring-from-backup,Restore from Backup>> guide.
+If you do need to rollback at any point, see our https://circleci.com/docs/2.0/backup/#restoring-from-backup[guide to restoring from a backup].
 
 == Updating Replicated
 
-=== Perquisites
+=== Prerequisites
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * You are running replicated version 2.10.3<= on your services machine. Check by running the following:
 +
-```
+```shell
 replicated --version
 ```
 * Your installation is **not** airgapped and you can access the internet from it
@@ -48,19 +48,19 @@ CAUTION: Remember to take a snapshot (described above) before starting the Repli
 
 . Stop the CircleCI application:
 +
-```
-    replicatedctl app stop
+```shell
+replicatedctl app stop
 ```
 +
 Application shutdown takes a few minutes. Please check the administration dashboard and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
 +
-```
-    replicatedctl app status inspect
+```shell
+replicatedctl app status inspect
 ```
 +
 Example Output:
 +
-```
+```shell
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",
@@ -77,46 +77,46 @@ Example Output:
 
 . For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1:
 +
-```
-    sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
+```shell
+sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
 . Pin the Docker version using the following command:
 +
-```
-    sudo apt-mark hold docker-ce
+```shell
+sudo apt-mark hold docker-ce
 ```
 
 === Perform Update
 
 . Perform the Replicated update by executing the update script as follows:
 +
-```
-    curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
+```shell
+curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
 ```
 +
 Double-check your replicated and docker versions:
 +
-```
-    replicatedctl version    # 2.34.1
-    docker -v                # 17.12.1
+```shell
+replicatedctl version    # 2.34.1
+docker -v                # 17.12.1
 ```
 
 . Restart the app with
 +
-```
-    replicatedctl app start
+```shell
+replicatedctl app start
 ```
 +
 The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
 +
-```
-    replicatedctl app status inspect
+```shell
+replicatedctl app status inspect
 ```
 +
 Example output:
 +
-```
+```shell
 [
     {
         "AppID": "edd9471be0bc4ea04dfca94718ddf621",

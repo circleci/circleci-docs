@@ -17,7 +17,7 @@ image::arch_server.png[Services Architecture]
 <<<
 == Build Environments
 
-CircleCI 2.0 uses Nomad as the primary job scheduler. Refer to our <<nomad#basic-terminology-and-architecture,Nomad Introduction>> to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI 2.0 uses Nomad as the primary job scheduler. Refer to our <<nomad#introduction-to-nomad-cluster-operation,Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 By default, CircleCI 2.0 Nomad clients automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file.
 
@@ -42,7 +42,7 @@ image::arch_components.png[CircleCI Core Components]
 
 === Services Machine
 
-The Services machine must must not be restarted and may be backed up using VM snapshotting. If you must restart the Services machine, do so only as a last resort, because a restart will result in downtime. Refer to the <<backup#disaster-recovery,Disaster Recovery>> chapter for instructions.
+The Services machine must must not be restarted and may be backed up using VM snapshotting. If you must restart the Services machine, do so only as a last resort, because a restart will result in downtime. Refer to the <<backup#backup-and-recovery,Backup and Recovery>> chapter for instructions.
 //I feel like this is going in to telling you stuff you shouldn't do too quickly - feels negative
 
 DNS resolution may point to the IP address of the Services machine. It is also possible to point to a load balancer, for example an ELB in AWS. The following table describes the ports used for traffic on the Service machine:

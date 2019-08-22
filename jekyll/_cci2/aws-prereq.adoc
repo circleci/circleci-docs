@@ -43,7 +43,7 @@ Have available the following information and policies before starting the instal
 * AWS instances must have outbound access to pull Docker containers and to verify your license. If you don't want to give open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * In order to provision required AWS entities with Terraform you will require an IAM User with the following permissions (See the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[AWS guidance] on creating IAM users):
 +
-[source,json,linenums]
+[source,json]
 ----
 {
     "Version": "2012-10-17",

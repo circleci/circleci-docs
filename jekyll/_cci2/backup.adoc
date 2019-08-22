@@ -59,7 +59,7 @@ While filesystem-level data integrity issues are rare and preventable, there wil
 If you want to clean up any abnormal build records in your database after a recovery, you can delete them by running the following commands on the Services machine replacing the example build URL with an actual URL from your CircleCI application:
 
 ```shell
-$ circleci dev-console
+circleci dev-console
 # Wait for console to load
 user=> (admin/delete-build "https://my-circleci-hostname.com/gh/my-org/my-project/1234")
 ```

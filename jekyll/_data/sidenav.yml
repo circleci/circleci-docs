@@ -268,11 +268,9 @@ en:
 - name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: Server v2.17.3 Install and Upgrade
+    - name: Server v2.17.x Install
       link: 2.0/install-overview/
       children:
-        - name: Trial Single-box Install
-          link: 2.0/single-box/
         - name: Overview
           link: 2.0/install-overview/
         - name: System Requirements
@@ -287,7 +285,9 @@ en:
           link: 2.0/updating-server/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
-    - name: Server v2.17.3 Operations
+        - name: Trial Single-box Install
+          link: 2.0/single-box/
+    - name: Server v2.17.x Operations
       link: 2.0/overview/
       children:
         - name: Overview
@@ -332,15 +332,15 @@ en:
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
-    - name: CircleCI Server v2.17 PDFs
+    - name: CircleCI Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
-        - name: v2.17 Installation Guide
-          link: 2.0/circleci-install-doc-v2-17.pdf
-        - name: v2.17 Operations Guide
-          link: 2.0/circleci-ops-guide-v2-17.pdf
+        - name: v2.17.3 Installation Guide
+          link: 2.0/CircleCI-Server-Installation-Guide.pdf
+        - name: v2.17.3 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: CircleCI Server v2.16 PDFs
       link: 2.0/v.2.16-overview/
       children:

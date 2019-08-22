@@ -185,25 +185,21 @@ image::privacy.png[]
 .Storage Options
 image::storage.png[]
 
-. Enhanced AWS Integration TBD
+. Complete enhanced AWS Integration options.
 // explain enhanced AWS integration 1.0 or just say ignore
 
 . Complete the Email section if you wish to configure your own email server for sending build update emails. Leave this section is you wish to use our default email server.
 +
 NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
 
-// explain email server options, test button doesnt work etc
-
 . Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor.
 +
 .Configure VM Service
 image::vmprovider.png[]
-
++
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
-
++
 CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must be set to `0` – on-demand – for both Remote Docker and `machine` executor.
-
-//<!--Advanced settings to cover here too - make a section in ops guide for this and list of OK instance types for VM provider-->
 
 . If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more infomration see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +

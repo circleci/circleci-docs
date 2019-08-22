@@ -63,4 +63,4 @@ In order to make tables display correctly in the web version of Server docs, ass
 ### Inter-document cross refs
 Cross references should be made in the form: `<<overview#services-machine,Services Machine>>` where `overview` is the name of the file the destination is in, `services-machine` is the anchor heading, and `Services Machine` is what to display in the prose.
 
-This is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, where they are two separate docs as well as the Jekyll site where you will be dealing with two regular pages as with any xref. So in this instance reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal link URL[text to display].
+This is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, across two separate docs, as well as the Jekyll site where you will be dealing with two regular pages as with any xref. In this instance, reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal link `URL[text to display]`.
