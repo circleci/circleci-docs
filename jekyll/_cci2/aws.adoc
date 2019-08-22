@@ -222,7 +222,6 @@ image::dashboard.png[]
 
 . After build containers have started and images have been downloaded, the first build should begin immediately. If there are no updates after around **15 minutes**, and you have clicked the Refresh button, contact https://support.circleci.com/hc/en-us[CircleCI support] for assistance.
 
-. You can use https://github.com/circleci/realitycheck[our realitycheck repo] to check basic CircleCI functionality.
-//<!--Is this what we hope they will do? Could use stronger language. Also would be good to have some help for what to do if jobs fail, or do we just want people to tell us so we can help?-->
+. Next, use https://github.com/circleci/realitycheck[our realitycheck repo] to check basic CircleCI functionality.
 
 . If you're unable to run your first builds successfully please start with our https://circleci.com/docs/2.0/troubleshooting[Troubleshooting] guide for general troubleshooting topics, and our https://circleci.com/docs/2.0/nomad[Introduction to Nomad Cluster Operation] for information about how to check the status of Builders in your installation.
