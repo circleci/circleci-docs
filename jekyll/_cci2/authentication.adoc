@@ -17,6 +17,7 @@ toc::[]
 * GitHub Enterprise must be configured and is the source of organizations and projects to which users have access.
 * Install a new instance of CircleCI 2.0 with no existing users.
 * Contact https://support.circleci.com[CircleCI support] and file a feature request for CircleCI Server.
+// still required?
 
 NOTE: After completing this configuration, all users must log in to CircleCI with their LDAP credentials. After logging in to CircleCI, each user will then click the Connect button on the Accounts page to connect and authenticate their GitHub account.
 
