@@ -40,21 +40,15 @@ In the above example the `project_slug` would take the form :vcs/:org/:project. 
 
 ### Authentication
 
-The CircleCI API v2 enables users to be authenticated in much the same way as they would be authenticated in the previous v1.1 API. A simple way to authenticate is to send your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the example shown below:
+The CircleCI API v2 enables users to be authenticated by simply sending your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the example shown below:
 
-`curl -u ${CIRCLECI_TOKEN} https://circleci.com/api/v2/me`
-
-For more detailed information on how to authenticate with a token, please refer to the [Authentication](https://circleci.com/docs/api/#authentication) section in the main CirlceCI API documentation.
+`curl -user ${CIRCLECI_TOKEN} https://circleci.com/api/v2/me`
 
 ### Pipelines
 
 #### What is a Pipeline?
 
 Pipelines are a CircleCI designation for the full set of configurations you run when triggering work on your projects on the CircleCI platform. Pipelines contain your workflows, which in turn coordinate your jobs. 
-
-#### What Are the Practical Implications of Pipelines?
-
-In this new approach, jobs running a configuration prior to 2.1 will run in a workflow. Jobs running a 2.1 configuration will require workflows to be defined before the job may be run. In the future, CircleCI will add a new pipeline-level parameters clause in `config.yml`, referenced in the `pipeline` scope, as well as launch a new version of the CircleCI API that has the ability to trigger pipelines with parameters and retrieve them and their workflows. In addition to these changes, CircleCI is also creating a new UI that will unify the experience of viewing your pipelines and their jobs coordinated in workflows.
 
 #### What Does This Change for Me? How Do I Turn On Pipelines?
 
@@ -78,7 +72,7 @@ Pipeline parameters are new with API v2. To use pipeline parameters you must use
 
 #### Declaring and Using Pipeline Parameters in a Configuration
 
-Pipeline parameters are declared using a parameters stanza in the top level keys of your `.circleci/config.yml` file. You may then reference the value of the parameter as a config variable in the scope `pipeline.parameters`.
+Pipeline parameters are declared using a `parameters` stanza in the top level keys of your `.circleci/config.yml` file. You may then reference the value of the parameter as a config variable in the scope `pipeline.parameters`.
 
 The example belows shows a configuration with two pipeline parameters, `image-tag` and `workingdir` both used on the subsequent config stanzas:
 
@@ -98,7 +92,7 @@ jobs:
     docker:
       - image: circleci/node:<< pipeline.parameters.image-tag >>
     environment:
-      IMAGETAG: << pipeline.parameters.image-tag >>
+      IMAGETAG: << pipeline.parameters.workingdir >>
     working_directory: << pipeline.parameters.workingdir >>
     steps:
       - run: echo "Image tag used was ${IMAGETAG}"
@@ -117,7 +111,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
   }
-}' https://circleci.com/api/v2/project/:vcs-type/:username/:project/pipeline
+}' https://circleci.com/api/v2/project/:vcs-type/:project_slug/:project/pipeline
 ```
 
 #### Scope of Pipeline Parameters
@@ -136,11 +130,11 @@ With API v2, CircleCI has introduced a string representation of the triplet call
 
 `<project_type>/<org_name>/<repo_name>`
 
-The `project_slug` is included in the payload when pulling information about a Project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. It is important to note that the `project_slug` is just a new name for the existing format, and not a new shape of the URLS that can then be used to retrieve information about a project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
 
 ## Using 'when' in Workflows
 
-With this new version of the API, you may use a `when` clause (the inverse clause is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow.
+With this version of the API, you may use a `when` clause (the inverse clause is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow.
 
 The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
@@ -182,11 +176,9 @@ This example prevents the workflow integration_tests from being triggered unless
 }
 ```
 
-The `when` key actually accepts any boolean value, not just pipeline parameters. Although pipeline parameters will be the primary use of this feature until CircleCI implements other uses, `when` also has an inverse clause called `unless`, which inverts truthiness of the condition.
-
 ## Changes In Endpoints
 
-The CircleCI API v2 release includes several new endpoints that you can use in your jobs, as well as some endpoints that have been deprecated. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
+The CircleCI API v2 release includes several new endpoints, as well as some other endpoints that have been deprecated. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
 For a complete list of all API v2 enpoints, please refer to the *API v2 Reference Guide*, which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
