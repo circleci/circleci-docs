@@ -96,7 +96,7 @@ AWS でのプライベートサブネットの使用を CircleCI でサポート
 - Builder box 用の非公開サブネットは、[NAT ゲートウェイ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-nat-gateway.html)または[インターネットゲートウェイ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_Internet_Gateway.html)で、添付のルートテーブルにより、インターネットへのアウトバウンドトラフィック用に構成する必要があります。 **メモ：** サブネットは、アドレスが枯渇することが*決してない*よう、十分な大きさが確保されている必要があります。
 - [S3 用 VPC エンドポイント](https://aws.amazon.com/jp/blogs/aws/new-vpc-endpoint-for-amazon-s3/)を有効にする必要があります。 S3 用 VPC エンドポイントを有効にすると、CircleCI およびサブネット内の他のノードに対する S3 操作が大幅に改善します。
 - 高負荷のネットワーク操作に対しては NAT インスタンスを適切に強化します。 デプロイの仕様によっては、Docker および外部ネットワークリソースを使用した高度並列ビルドによって NAT インスタンスが制約を受ける可能性があります。 不適切な NAT によってネットワーク操作やキャッシュ操作が低速化するおそれがあります。
-- <a href=」https://github.com">github.com</a> と連携する場合、ネットワークのアクセス制御リスト (ACL) のホワイトリストに GitHub Webhook のポート 80 および 443 が含まれていることを確認します。 GitHub と連携する場合は、CircleCI をパブリックサブネット内に準備するか、パブリックロードバランサーを使用して github.com トラフィックを転送するように設定します。
+- [github.com](https://github.com) と連携する場合、ネットワークのアクセス制御リスト (ACL) のホワイトリストに GitHub Webhook のポート 80 および 443 が含まれていることを確認します。 GitHub と連携する場合は、CircleCI をパブリックサブネット内に準備するか、パブリックロードバランサーを使用して github.com トラフィックを転送するように設定します。
 - CircleCI インストールのインスタンスにアクセスできる必要のあるポートの詳細については、「[管理者向け概要]({{site.baseurl}}/ja/2.0/overview#services)」の「Services」セクションを参照してください。
 
 <!--- Check whether the ACL needs to be more open so the services/build can download build images -->
