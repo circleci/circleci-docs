@@ -36,7 +36,6 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
-      autofocus: false,
       queryHook: debounce(function (query, searchFunction) { searchFunction(query); setTimeout(renderResults, 100); }, 500, { 'leading': true, 'trailing': true, 'maxWait': 1000 }) // method to throttle search requests
     })
   );
