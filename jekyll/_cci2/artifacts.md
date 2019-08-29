@@ -167,6 +167,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_n
    | wget -v -i -
 ```
 
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+
+```bash
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token
+```
+
+You can read more about using CircleCI's api to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/#artifacts)
+
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|
 `:your_token` | The personal API token you created above.
