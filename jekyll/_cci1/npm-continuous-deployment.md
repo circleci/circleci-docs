@@ -31,11 +31,11 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 4.  Configure CircleCI to run `npm publish` on tagged commits:
 
-    ```yaml
+    ```js
     deployment:
       npm:
         tag: /v[0-9]+(\.[0-9]+)*/
-        commands:
+        commands:
           - npm publish
     ```
 
