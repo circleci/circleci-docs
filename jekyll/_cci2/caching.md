@@ -195,7 +195,7 @@ A cache-key is a _user-defined_ string that corresponds to a data cache. A cache
 {% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
 ```
 
-will output a unique string to represent this key. Here, the example is using a [checksum](https://en.wikipedia.org/wiki/Checksum) to create a unique string that represents the contents of a `package-lock.json` file.
+The above example will output a unique string to represent this key. Here, the example is using a [checksum](https://en.wikipedia.org/wiki/Checksum) to create a unique string that represents the contents of a `package-lock.json` file.
 
 So, for the sake of demonstration, the above example might put out a string that looks like so:
 
