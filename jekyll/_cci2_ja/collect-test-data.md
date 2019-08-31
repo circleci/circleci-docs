@@ -14,7 +14,7 @@ CircleCI は、XML ファイルからテストメタデータを収集し、そ�
 
 テスト結果をアーティファクトとして表示するには、`store_artifacts` ステップを使用してテスト結果をアップロードします。
 
-コンフィグでは、以下のように `[store_test_results]({{site.baseurl}}/ja/2.0/configuration-reference/#store_test_results)` キーが使用されます。
+コンフィグでは、以下のように [store_test_results]({{site.baseurl}}/ja/2.0/configuration-reference/#store_test_results) キーが使用されます。
 
 ```sh
 - store_test_results:
