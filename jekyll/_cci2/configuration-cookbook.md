@@ -307,9 +307,112 @@ jobs:
 The example below shows how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and then roll the image out to the GKE cluster.
 
 ```yaml
+      version: 2.1
+
+# Orb Dependencies
+orbs:
+  gcloud: circleci/gcp-cli@1.0.6
+  gcr: circleci/gcp-gcr@0.0.2
+  k8s: circleci/kubernetes@0.1.0
+
+commands:
+  install:
+    description: "Install `gcloud` and `kubectl` if not already installed."
+    steps:
+      - gcloud/install
+      - k8s/install
+  init:
+    description: "Initialize the `gcloud` CLI."
+    steps:
+      - gcloud/initialize
+  rollout-image:
+    description: "Update a deployment's Docker image."
+    parameters:
+      cluster:
+        description: "The Kubernetes cluster name."
+        type: string
+      deployment:
+        description: "The Kubernetes deployment name."
+        type: string
+      container:
+        description: "The Kubernetes container name."
+        type: string
+      image:
+        description: A name for your docker image
+        type: string
+    steps:
+      - run: |
+          gcloud container clusters get-credentials <<parameters.cluster>>
+          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
+
+jobs:
+  publish-and-rollout-image:
+    description: "Update cluster with new Docker image."
+    machine: true
+    parameters:
+      cluster:
+        description: "The Kubernetes cluster name."
+        type: string
+      deployment:
+        description: "The Kubernetes deployment name."
+        type: string
+      container:
+        description: "The Kubernetes container name."
+        type: string
+      gcloud-service-key:
+        description: The gcloud service key
+        type: env_var_name
+        default: GCLOUD_SERVICE_KEY
+      google-project-id:
+        description: The Google project ID to connect with via the gcloud CLI
+        type: env_var_name
+        default: GOOGLE_PROJECT_ID
+      google-compute-zone:
+        description: The Google compute zone to connect with via the gcloud CLI
+        type: env_var_name
+        default: GOOGLE_COMPUTE_ZONE
+      registry-url:
+        description: The GCR registry URL from ['', us, eu, asia].gcr.io
+        type: string
+        default: gcr.io
+      image:
+        description: A name for your docker image
+        type: string
+      tag:
+        description: A docker image tag
+        type: string
+        default: "latest"
+      path-to-dockerfile:
+        description: The relative path to the Dockerfile to use when building image
+        type: string
+        default: "."
+    steps:
+      - checkout
+      - gcr/gcr-auth:
+          google-project-id: <<parameters.google-project-id>>
+          google-compute-zone: <<parameters.google-compute-zone>>
+      - install
+      - gcr/build-image:
+          registry-url: <<parameters.registry-url>>
+          google-project-id: <<parameters.google-project-id>>
+          image: <<parameters.image>>
+          tag: << parameters.tag >>
+          path-to-dockerfile: <<parameters.path-to-dockerfile>>
+      - gcr/push-image:
+          registry-url: <<parameters.registry-url>>
+          google-project-id: <<parameters.google-project-id>>
+          image: <<parameters.image>>
+          tag: <<parameters.tag>>
+      - rollout-image:
+          cluster: "<<parameters.cluster>>"
+          deployment: "<<parameters.deployment>>"
+          container: "<<parameters.container>>"
+          image: "<<parameters.image>>"
+
+example:
   publish-and-rollout-image:
     description: |
-      "The simplest example of using this Orb. Logs into GCP, builds and
+      "The simplest example of using this Orb. Logs into GCP, builds and 
       publishes a Docker image, and then rolls the image out to a GKE cluster."
     usage:
       version: 2.1
