@@ -307,7 +307,7 @@ jobs:
 The example below shows how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and then roll the image out to the GKE cluster.
 
 ```yaml
-      version: 2.1
+version: 2.1
 
 # Orb Dependencies
 orbs:
@@ -473,7 +473,7 @@ The code sample shown below illustrates how you can install the 'eksctl' tool in
 
 ```yaml
 version: 2.1
-description: |
+description:
   Install the eksctl tool
   Requirements: curl, amd64 architecture
 steps:
@@ -511,8 +511,8 @@ CircleCI enables you to use the `AWS-CLI` and `AWS-IAM` authentication tool to r
 To install the AWS IAM Authenticator for Kubernetes, see the code sample shown below.
 
 ```yaml
-Version: 2.1
-description: |
+version: 2.1
+description:
   Install the AWS IAM Authenticator for Kubernetes
   Requirements: curl, amd64 architecture
 parameters:
@@ -578,7 +578,7 @@ steps:
 Once you meet the requirements for using the CircleCI AWS-EKS orb, you may create an EKS cluster using the code sample shown below.
 
 ```yaml
-Version: 2.1
+version: 2.1
 
 jobs:
   test-cluster:
@@ -628,7 +628,7 @@ After creating a Kubernetes cluster, you may wish to create a Kubernetes deploym
 The code example below illustrates how you can create the Kubernetes deployment.
 
 ```yaml
-Version: 2.1
+version: 2.1
 
 jobs:
   create-deployment:
@@ -683,7 +683,7 @@ workflows:
 To simplify the Helm installation on your cluster,
 
 ```yaml
-Version: 2.1
+version: 2.1
 
 description: |
   Installs helm onto the EKS cluster.
@@ -797,7 +797,7 @@ Helm is a powerful application package manager that runs on top of a Kubernetes 
 Once Helm is installed in your Kubernetes cluster, you can then install Helm charts using the code example shown below.
 
 ```yaml
-Version: 2.1
+version: 2.1
 
 description: |
   Installs a helm chart into the EKS cluster.
@@ -916,7 +916,7 @@ Occasionally, you may find it necessary to update the container image of a resou
 The code example below illustrates how this orb updates an existing container image in the Kubernetes cluster.
 
 ```yaml
-Version: 2.1
+version: 2.1
 
 description: |
   Updates the container image(s) of a resource on EKS.
