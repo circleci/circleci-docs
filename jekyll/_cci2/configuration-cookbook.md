@@ -474,7 +474,6 @@ The code sample shown below illustrates how you can install the 'eksctl' tool in
 ```yaml
 version: 2.1
 description:
-  Install the eksctl tool
   Requirements: curl, amd64 architecture
 steps:
   - run:
@@ -512,8 +511,6 @@ To install the AWS IAM Authenticator for Kubernetes, see the code sample shown b
 
 ```yaml
 version: 2.1
-description:
-  Install the AWS IAM Authenticator for Kubernetes
   Requirements: curl, amd64 architecture
 parameters:
   release-tag:
@@ -579,7 +576,6 @@ Once you meet the requirements for using the CircleCI AWS-EKS orb, you may creat
 
 ```yaml
 version: 2.1
-
 jobs:
   test-cluster:
     executor: aws-eks/python3
@@ -629,7 +625,6 @@ The code example below illustrates how you can create the Kubernetes deployment.
 
 ```yaml
 version: 2.1
-
 jobs:
   create-deployment:
     executor: aws-eks/python3
@@ -684,7 +679,6 @@ To simplify the Helm installation on your cluster,
 
 ```yaml
 version: 2.1
-
 description: |
   Installs helm onto the EKS cluster.
   Note: Parameters like tiller-tls need to be set to
@@ -798,7 +792,6 @@ Once Helm is installed in your Kubernetes cluster, you can then install Helm cha
 
 ```yaml
 version: 2.1
-
 description: |
   Installs a helm chart into the EKS cluster.
   Requirements: helm should be installed on the cluster.
@@ -917,7 +910,6 @@ The code example below illustrates how this orb updates an existing container im
 
 ```yaml
 version: 2.1
-
 description: |
   Updates the container image(s) of a resource on EKS.
 executor: << parameters.executor >>
@@ -1136,8 +1128,7 @@ You may also send a status alert at the end of a job to your recipients. Note th
 
 The example below shows how you can send a status alert at the end of a job.
 
-```
-yaml
+```yaml
 version: 2.1
 jobs:
   build:
