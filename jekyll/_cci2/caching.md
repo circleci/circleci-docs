@@ -228,11 +228,12 @@ Template | Description
 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}
 
-**Note:** When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. But, there are tradeoffs as described in the following section.
+### Further Notes on Using Keys and Templates
+{:.no_toc}
 
-**Note:** Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
-
-**Note:** You do not have to use dynamic templates for your cache-key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
+- When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. 
+- Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
+- You do not have to use dynamic templates for your cache-key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 ### Full Example of Saving and Restoring Cache
 {:.no_toc}
