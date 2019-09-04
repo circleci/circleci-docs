@@ -189,6 +189,22 @@ neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 ## Using Keys and Templates
 
+A cache-key is a _user-defined_ string that corresponds to a data cache. A cache-key can be created by interpolating **dynamic values** — these are called **templates**. Anything you see in a cache-key between curly braces is a template. Consider the following example:
+
+```sh
+{% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
+```
+
+The above example will output a unique string to represent this key. Here, the example is using a [checksum](https://en.wikipedia.org/wiki/Checksum) to create a unique string that represents the contents of a `package-lock.json` file.
+
+The example may output a string that looks like the following:
+
+```sh
+{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ<etc>{% endraw %}
+```
+
+If the contents of the `package-lock` file were to change, the `checksum` function would return a different, unique string, indicating the need to invalidate the cache.
+
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, it will take some time to upload the cache to CircleCI storage. To avoid generating a new cache every build, have a `key` that generates a new cache only if something actually changes.
 
 The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
@@ -212,7 +228,12 @@ Template | Description
 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}
 
-**Note:** When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. But, there are tradeoffs as described in the following section.
+### Further Notes on Using Keys and Templates
+{:.no_toc}
+
+- When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. 
+- Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
+- You do not have to use dynamic templates for your cache-key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 ### Full Example of Saving and Restoring Cache
 {:.no_toc}
