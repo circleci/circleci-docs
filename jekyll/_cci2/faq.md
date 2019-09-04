@@ -95,6 +95,10 @@ In other words, you can reduce time spent in a **usage queue** by [purchasing mo
  {:.no_toc}
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
+### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period." 
+{:.no_toc}
+Configure your plan and add user seats to ensure your organization has enough seats for future billing periods. If you have questions or need assistance, please reach out to billing@circleci.com.
+
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
 There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
