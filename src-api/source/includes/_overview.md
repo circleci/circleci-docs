@@ -150,7 +150,7 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 
 **API** | **Description**
 ------- | -------------
-/project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI..
+/project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI.
 /project/:vcs-type/:username/:project/:build\_num/retry | Retries the build, returns a summary of the new build.
 /project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the build, returns a summary of the build.
 /project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the build's SSH permissions.
