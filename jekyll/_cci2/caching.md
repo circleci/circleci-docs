@@ -200,7 +200,7 @@ The above example will output a unique string to represent this key. Here, the e
 The example may output a string that looks like the following:
 
 ```sh
-{% raw %}myapp-dlkj3oadlkfgjadflkje3ijaoi43oi49odlkja$lakdjfg#lakdj4Djlae<etc>{% endraw %}
+{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ<etc>{% endraw %}
 ```
 
 If the contents of the `package-lock` file were to change, the `checksum` function would return a different, unique string, indicating the need to invalidate the cache.
