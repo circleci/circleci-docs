@@ -76,7 +76,7 @@ jobs: # a collection of steps
 
       - run: # Install Ruby dependencies
           name: Bundle Install
-          command: bundle check || bundle install
+          command: bundle check --path vendor/bundle || bundle install --deployment
 
       # Store bundle cache for Ruby dependencies
       - save_cache:
@@ -203,7 +203,7 @@ steps:
 
 This step tells CircleCI to checkout the project code into the working directory.
 
-Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.
+Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.  Using the `--deployment` flag for `bundle install` installs into `./vendor/bundle` rather than a system location. 
 
 {% raw %}
 ```yaml
@@ -218,7 +218,7 @@ steps:
 
   - run:
       name: Bundle Install
-      command: bundle check || bundle install
+      command: bundle check --path vendor/bundle || bundle install --deployment
 
   # Store bundle cache
   - save_cache:

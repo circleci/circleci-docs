@@ -9,8 +9,6 @@ hide: true
 sitemap: false
 ---
 
-## Using Docker with CircleCI Enterprise
-
 CircleCI supports using Docker containers in your build. For details see our main [Docker documentation](https://circleci.com/docs/docker).
 
 

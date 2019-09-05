@@ -15,7 +15,7 @@ Document | Description
 [Using GitHub or Bitbucket]({{ site.baseurl }}/2.0/gh-bb-integration/) | An overview of using GitHub and Bitbucket with CircleCI.
 [Concepts]({{ site.baseurl }}/2.0/concepts/) | A high-level overview of CircleCI 2.0 Steps, Image, Jobs, and Workflows concepts and the configuration hierarchy.
 [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) | How Jobs and Steps are used in a CircleCI 2.0 configuration.
-[Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) | Each job may use a different executor and image. Comparison of `docker`, `machine`, and `macos` executors for your jobs.
+[Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) | Each job may use a different executor and image. Comparison of `docker`, `machine` `windows`, and `macos` executors for your jobs.
 [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) | Best practices for building open source projects.
 {: class="table table-striped"}
 

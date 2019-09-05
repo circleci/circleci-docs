@@ -108,15 +108,32 @@ steps:
   - run:
       name: Setup Environment Variables
       command: |
-        echo 'export PATH="$GOPATH/bin:$PATH"' >> $BASH_ENV
-        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+        echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+        echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 ```
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run,
 allowing you to use interpolation and share environment variables across `run` steps.
 
 **Note:**
-The `BASH_ENV` workaround only works with `bash`. Other implementations like `sh` will not work. This limitation affects your image options. For example, because [Alpine images](https://alpinelinux.org/) do not include `bash` by default, the `BASH_ENV` workaround will not work without first installing `bash`.
+The `$BASH_ENV` workaround only works with `bash`. 
+Other shells probably won't work.
+
+### Alpine Linux
+
+An image that's based on [Alpine Linux](https://alpinelinux.org/) (like [docker](https://hub.docker.com/_/docker)), uses the `ash` shell. 
+
+To use environment variables with `ash`, just add these 2 parameters to your job.
+
+```yaml
+jobs:
+  build:    
+
+    shell: /bin/sh -leo pipefail
+    environment:
+      - BASH_ENV: /etc/profile
+```
+
 
 ## Setting an Environment Variable in a Shell Command
 
@@ -182,7 +199,7 @@ jobs:
 
 ## Setting an Environment Variable in a Container
 
-To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macosexecutor).
+To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
 
 ```yaml
 version: 2

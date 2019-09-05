@@ -55,7 +55,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:3.6.0-jessie
+      - image: python:3.6.3-jessie
 
     working_directory: /tmp
     steps:
@@ -74,7 +74,9 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.  
+There is no limit on the number of `store_artifacts` steps a job can run.  
+
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
@@ -159,10 +161,19 @@ for all variables that start with `:`.
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
-
-<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
+   | grep -o 'https://[^"]*' \
+   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
+   | wget -v -i -
 ```
+
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+
+```bash
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token
+```
+
+You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/#artifacts).
 
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|
@@ -176,23 +187,11 @@ Placeholder   | Meaning                                                         
 ### Description of Commands
 {:.no_toc}
 
-First,
-the CIRCLE_TOKEN environment variable is created.
-Then,
-the `curl` command fetches all artifact details for a build
-and pipes them to `grep`
-to extract the URLs.
-These URLs are saved to the `artifacts.txt` file.
-Finally,
-`xargs` reads the text file,
-downloading artifacts using `wget`.
-All artifacts are downloaded to the current directory.
-
-**Note:**
-In the above example,
-`xargs` runs four processes
-to download artifacts in parallel.
-Adjust the number given to the `-P` flag as needed.
+First, the CIRCLE_TOKEN environment variable is created. Then, the `curl`
+command fetches all artifact details for a build and pipes them to `grep` to
+extract the URLs. Using `sed` your circle token is appended to the file to
+create a unique file name. Finally, `wget` is used to download the artifacts to
+the current directory in your terminal.
 
 
 ## See Also

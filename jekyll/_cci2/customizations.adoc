@@ -1,0 +1,136 @@
+= Customization and Configuration
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+The following sections summarize the key files and variables that impact CircleCI Server behavior, and configuration options for your Server installation.
+
+toc::[]
+
+== Notable Files & Folders
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Need
+| Path
+| More info
+
+| General Config
+| `/etc/circle-installation-customizations`
+| See table below for values
+
+| JVM Heap Sizes
+| `/etc/circleconfig/XXXX/customizations`  Supports: frontend, test_results
+| Adjust heap size for individual containers with `JVM_HEAP_SIZE`
+
+| Custom CA Certs
+| `/usr/local/share/ca-certificates/`
+|
+
+| Container Customizations
+| `/etc/circleconfig/XXX/customizations`
+| Used lots of places in replicated
+
+| `/etc/hosts`
+| `/etc/hosts`
+| Respected by several containers including frontend, copied to container's /etc/hosts
+
+| `/etc/environment`
+| `/etc/environment`
+| Respected by all containers
+|===
+
+=== Properties of `/etc/circle-installation-customizations`
+
+NOTE: Every property should be in the format `export ENV_VAR="value"`
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Property
+| Impact
+| More info
+
+| CIRCLE_URL
+| Override the scheme and host that CircleCI uses
+|
+
+| JVM_HEAP_SIZE
+| Set JVM heap size for *all* containers reading this property
+| Use container specific settings when possible (see files above)
+|===
+
+=== Other Properties and Env Vars
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Property
+| Impact
+| More info
+
+| HTTP_PROXY, NO_PROXY
+| Proxy for replicated and other services outside CircleCI containers to use
+|
+|===
+
+<<<
+
+== Service Configuration Overrides
+This section describes the configuration interface for overriding services in CircleCI Server.
+
+WARNING: Customizing your configuration can have potentially damaging consequences, so we recommend contacting support@circleci.com for guidance before making any changes.
+
+Configuration is done by exporting environment variables in files located on the Services machine.
+
+Consider the file “customizations” created at the following path /etc/circleconfig/workflows-conductor:
+
+```shell
+export FOO="bar"
+```
+
+The value of FOO will take precedence over the default values set in the default container mapping in the CircleCI Server configuration.
+
+=== Available Overrides
+
+```
+/etc/circleconfig/api-service/customizations
+/etc/circleconfig/audit-log-service/customizations
+/etc/circleconfig/contexts-service-db-migrator/customizations
+/etc/circleconfig/contexts-service/customizations
+/etc/circleconfig/cron-service-db-migrator/customizations
+/etc/circleconfig/cron-service/customizations
+/etc/circleconfig/domain-service-migrator/customizations
+/etc/circleconfig/domain-service/customizations
+/etc/circleconfig/federations-service-db-migrator/customizations
+/etc/circleconfig/federations-service-migrator/customizations
+/etc/circleconfig/frontend/customizations
+/etc/circleconfig/output-processor/customizations
+/etc/circleconfig/permissions-service-migrator/customizations
+/etc/circleconfig/permissions-service/customizations
+/etc/circleconfig/picard-dispatcher/customizations
+/etc/circleconfig/schedulerer/customizations
+/etc/circleconfig/test-results/customizations
+/etc/circleconfig/vm-gc/customizations
+/etc/circleconfig/vm-scaler/customizations
+/etc/circleconfig/vm-service-db-migrator/customizations
+/etc/circleconfig/vm-service/customizations
+/etc/circleconfig/workflows-conductor/customizations
+```
+
+=== Login Screen
+You can add a banner to your login screen as follows:
+
+. Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
+. Add the following line, substituting the text you wish to display in the banner:
++
+```
+export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
+```
+. Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)
+
+.Login Screen Banner Example
+image::banner.png[]

@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Supported Languages"
+title: "Supported Languages Guide"
 short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"
 categories: [language-guides]
@@ -11,7 +11,7 @@ Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve c
 
 Language Guide | Framework | GitHub Repo Name
  ---------|-----------|-----------------
- [Android]({{ site.baseurl }}/2.0/language-android/){:target="_blank"} | Gradle | 
+ [Android]({{ site.baseurl }}/2.0/language-android/){:target="_blank"} | Gradle |
  [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Clojure]{:target="_blank"} | Luminus | [circleci-demo-clojure-luminus]{:target="_blank"}
  [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/CircleCI-Public/circleci-demo-crystal)
@@ -22,6 +22,7 @@ Language Guide | Framework | GitHub Repo Name
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [macOS]({{ site.baseurl }}/2.0/hello-world-macos){:target="_blank_"} | MacOS | [circleci-demo-macos]{:target="_blank"}
  [Java]{:target="_blank"} | Spring | [circleci-demo-java-spring]{:target="_blank"}
+ [Java]({{ site.baseurl }}/2.0/language-java-maven/){:target="_blank"} | Maven | [circleci-demo-java-spring-tree-maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven){:target="_blank"}
  [JavaScript]{:target="_blank"} | React | [circleci-demo-javascript-express]{:target="_blank"}
  [PHP]{:target="_blank"} | Laravel | [circleci-demo-php-laravel]{:target="_blank"}
  [Python]{:target="_blank"} | Django | [circleci-demo-python-django]{:target="_blank"}
@@ -29,6 +30,7 @@ Language Guide | Framework | GitHub Repo Name
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md){:target="_blank"} | React Native | [circleci-demo-react-native]{:target="_blank"}
  [Ruby and Rails]{:target="_blank"} | Rails | [circleci-demo-ruby-rails]{:target="_blank"}
  [Scala]({{ site.baseurl }}/2.0/language-scala/){:target="_blank"} | sbt | [samplescala](https://github.com/ariv3ra/samplescala){:target="_blank"}
+ [Windows]({{ site.baseurl }}/2.0/hello-world-windows/){:target="_blank"} | .NET | [circleci-demo-windows](https://github.com/CircleCI-Public/circleci-demo-windows/){:target="_blank"}
 {: class="table"}
 
 ## Supported Languages

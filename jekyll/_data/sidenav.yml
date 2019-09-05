@@ -19,17 +19,25 @@ en:
     - name: Introduction
       link: 2.0/getting-started/
       children:
+        - name: Getting Started Introduction
+          link: 2.0/getting-started/
         - name: Sign Up & Try CircleCI
           link: 2.0/first-steps/
         - name: Hello World
           link: 2.0/hello-world/
         - name: Hello World MacOS
           link: 2.0/hello-world-macos/
+        - name: Hello World Windows
+          link: 2.0/hello-world-windows/
+        - name: Getting Started with the CircleCI CLI
+          link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
     - name: Concepts
       link: 2.0/concepts/
       children:
+        - name: Getting Started Concepts
+          link: 2.0/concepts/
         - name: Projects and Builds
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
@@ -41,6 +49,8 @@ en:
     - name: Migration
       link: 2.0/migration-intro/
       children:
+        - name: Migration Introduction
+          link: 2.0/migration-intro/
         - name: Tips for Migrating to 2.0
           link: 2.0/migration/
         - name: Migrating a Linux Project
@@ -58,6 +68,8 @@ en:
     - name: Introduction
       link: 2.0/config-intro/
       children:
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
         - name: Writing YAML
@@ -67,19 +79,41 @@ en:
     - name: Orbs
       link: 2.0/orb-intro/
       children:
-        - name: Using Orbs
-          link: 2.0/using-orbs/
-        - name: Reusing Config
-          link: 2.0/reusing-config/
+        - name: Orb Introduction
+          link: 2.0/orb-intro/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
-        - name: Creating Orbs
-          link: 2.0/creating-orbs/
-        - name: Testing Orbs
+        - name: Orbs Concepts
+          link: 2.0/using-orbs/
+        - name: Orbs Reference
+          link: 2.0/reusing-config/
+        - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
+    - name: Authoring Orbs
+      link: 2.0/orb-author-intro/
+      children:
+        - name: Introduction to Authoring an Orb
+          link: 2.0/orb-author-intro/
+        - name: Set up the CircleCI CLI
+          link: 2.0/orb-author-cli/
+        - name: Author an Orb
+          link: 2.0/orb-author/
+        - name: Test and Publish Your Orb
+          link: 2.0/orb-author-validate-publish/
+    - name: Using Orbs
+      link: 2.0/orbs-user-config/
+      children:
+        - name: Set Your Version to Work With Orbs
+          link: 2.0/orbs-user-config/
+        - name: Selecting and Using an Orb
+          link: 2.0/orbs-user-select-orb/
     - name: Examples
       link: 2.0/examples-intro/
       children:
+        - name: Examples Introduction
+          link: 2.0/examples-intro/
         - name: Sample config.yml Files
           link: 2.0/sample-config/
         - name: Tutorials
@@ -95,6 +129,8 @@ en:
     - name: EXECUTORS & IMAGES
       link: 2.0/executor-intro/
       children:
+        - name: Executor & Image Introduction
+          link: 2.0/executor-intro/
         - name: Choosing an Executor Type
           link: 2.0/executor-types/
         - name: CircleCI Docker Images
@@ -106,6 +142,8 @@ en:
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
+        - name: Advanced Config Introduction
+          link: 2.0/adv-config/
         - name: Using Shell Scripts
           link: 2.0/using-shell-scripts/
         - name: Setting up Browser Testing
@@ -123,6 +161,8 @@ en:
     - name: settings
       link: 2.0/settings/
       children:
+        - name: Settings Overview
+          link: 2.0/settings/
         - name: GitHub and Bitbucket
           link: 2.0/gh-bb-integration/
         - name: Enabling GitHub Checks
@@ -146,6 +186,8 @@ en:
     - name: Optimizations
       link: 2.0/optimizations/
       children:
+        - name: Optimization Overview
+          link: 2.0/optimizations/
         - name: Caching Dependencies
           link: 2.0/caching/
         - name: Running Tests in Parallel
@@ -159,6 +201,8 @@ en:
     - name: Status
       link: 2.0/status/
       children:
+        - name: Status Overview
+          link: 2.0/status/
         - name: Using Containers
           link: 2.0/containers/
         - name: Adding Status Badges
@@ -178,6 +222,8 @@ en:
     - name: Triggers
       link: 2.0/triggers/
       children:
+        - name: Introduction to Triggers
+          link: 2.0/triggers/
         - name: Skip and Cancel Builds
           link: 2.0/skip-build/
         - name: Using the API to Trigger Jobs
@@ -191,10 +237,10 @@ en:
     - name: Configuring Deploys
       link: 2.0/deployment-integrations/
       children:
+        - name: Deployment Overview
+          link: 2.0/deployment-integrations/
         - name: Deploying to AWS ECR/ECS
           link: 2.0/ecs-ecr/
-        - name: Using Yarn on CircleCI
-          link: 2.0/yarn/
         - name: Publishing Snap Packages
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
@@ -216,65 +262,94 @@ en:
           link: 2.0/glossary/
         - name: Help and Support
           link: 2.0/help-and-support/
-        - name: Archive
+        - name: Archive of 1.0 Docs
           link: 2.0/archive/
 
-- name: Administration
+- name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: CircleCI Server v2.17
-      link: 2.0/v.2.17-overview/
+    - name: Server v2.17.x Install
+      link: 2.0/install-overview/
       children:
-        - name: v2.17 Installation Guide
-          link: 2.0/circleci-install-doc-v2-17.pdf
-        - name: v2.17 Operations Guide
-          link: 2.0/circleci-ops-guide-v2-17.pdf
-    - name: CircleCI Server v2.16
-      link: 2.0/v.2.16-overview/
-      children:
-        - name: v2.16 Installation Guide
-          link: 2.0/circleci-install-doc.pdf
-        - name: v2.16 Operations Guide
-          link: 2.0/circleci-ops-guide.pdf
-    - name: CircleCI Server v2.0
+        - name: Overview
+          link: 2.0/install-overview/
+        - name: System Requirements
+          link: 2.0/server-ports/
+        - name: Prerequisites and Planning
+          link: 2.0/aws-prereq/
+        - name: Installation
+          link: 2.0/aws/
+        - name: Teardown
+          link: 2.0/aws-teardown/
+        - name: Updating
+          link: 2.0/updating-server/
+        - name: Upgrades from 1.0 to 2.0
+          link: 2.0/upgrading/
+        - name: Trial Single-box Install
+          link: 2.0/single-box/
+    - name: Server v2.17.x Operations
       link: 2.0/overview/
       children:
         - name: Overview
           link: 2.0/overview/
-        - name: Trial
-          link: 2.0/single-box/
-        - name: Faq
-          link: 2.0/admin-faq/
-        - name: Upgrade
-          link: 2.0/upgrading/
-        - name: Updating Replicated
-          link: 2.0/updating-server-replicated-version/
-        - name: Security
-          link: 2.0/security/
-        - name: Certificates
-          link: 2.0/certificates/
-        - name: Proxies
-          link: 2.0/proxy/
-        - name: Installation
-          link: 2.0/aws/
-        - name: Authentication
-          link: 2.0/authentication/
-        - name: Monitoring
-          link: 2.0/monitoring/
-        - name: Configuring JVM Heap Size
-          link: 2.0/jvm-heap-size-configuration/
         - name: Nomad
           link: 2.0/nomad/
-        - name: Backup
-          link: 2.0/backup/
-        - name: Troubleshooting
-          link: 2.0/troubleshooting/
+        - name: Monitoring
+          link: 2.0/monitoring/
+        - name: Nomad Metrics
+          link: 2.0/nomad-metrics/
+        - name: Proxies
+          link: 2.0/proxy/
+        - name: Authentication
+          link: 2.0/authentication/
+        - name: VM Service
+          link: 2.0/vm-service/
         - name: GPU Builders
           link: 2.0/gpu/
-        - name: Configuring VM Service
-          link: 2.0/vm-service/
+        - name: Certificates
+          link: 2.0/certificates/
+        - name: User Accounts
+          link: 2.0/user-accounts/
+        - name: Build Artifacts
+          link: 2.0/build-artifacts/
+        - name: Usage statistics
+          link: 2.0/usage-stats/
+        - name: JVM Heap Size
+          link: 2.0/jvm-heap-size-configuration/
+        - name: Maintenance
+          link: 2.0/ops/
+        - name: Backup and Recovery
+          link: 2.0/backup/
+        - name: Security
+          link: 2.0/security/
+        - name: Troubleshooting
+          link: 2.0/troubleshooting/
+        - name: Faq
+          link: 2.0/admin-faq/
+        - name: Customization & Config
+          link: 2.0/customizations/
+        - name: Architechture
+          link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
+    - name: CircleCI Server v2.17 PDFs
+      link: 2.0/v.2.17-overview/
+      children:
+        - name: What's New in v2.17
+          link: 2.0/v.2.17-overview/
+        - name: v2.17.3 Installation Guide
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+        - name: v2.17.3 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
+    - name: CircleCI Server v2.16 PDFs
+      link: 2.0/v.2.16-overview/
+      children:
+        - name: What's New in v2.16
+          link: 2.0/v.2.16-overview/
+        - name: v2.16 Installation Guide
+          link: 2.0/circleci-install-doc.pdf
+        - name: v2.16 Operations Guide
+          link: 2.0/circleci-ops-guide.pdf
 
 ja:
 - name: Welcome

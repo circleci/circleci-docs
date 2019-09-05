@@ -95,6 +95,10 @@ In other words, you can reduce time spent in a **usage queue** by [purchasing mo
  {:.no_toc}
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
+### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period." 
+{:.no_toc}
+Configure your plan and add user seats to ensure your organization has enough seats for future billing periods. If you have questions or need assistance, please reach out to billing@circleci.com.
+
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
 There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
@@ -187,7 +191,7 @@ Yes!
 
 ### Can workflows be scheduled to run at a specific time of day?
 {:.no_toc}
-Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone. Next on the roadmap is to enable scheduled workflows in an installable CircleCI release.
+Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone.
 
 ### What time zone is used for schedules?
 {:.no_toc}
@@ -205,6 +209,33 @@ Yes, every workflow with a `schedule` listed in the `trigger:` key will be run o
 {:.no_toc}
 CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
 
+## Windows
+
+### What do I need to get started building on Windows?
+{:.no_toc}
+You will need a [Performance Plan](https://circleci.com/pricing/usage/) as well as having [Pipelines enabled]({{site.baseurl}}/2.0/build-processing/) for your project. Windows jobs are charged at 40 credits/minute.
+
+### What exact version of Windows are you using?
+{:.no_toc}
+
+We use Windows Server 2019 Datacenter Edition, the Server Core option.
+
+### What is installed on the machine?
+{:.no_toc}
+
+The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our "[Hello World On
+Windows]({{site.baseurl}}/2.0/hello-world-windows/)" document.
+
+### What is the machine size?
+{:.no_toc}
+
+The Windows machines have 4 vCPUs and 15GB RAM.
+
+### Is Windows available on installed versions of CircleCI?
+{:.no_toc}
+
+Unfortunately, Windows is not available on server installed versions of CircleCI at this time.
+
 ## Billing
 
 ### Credit Usage Plans
@@ -221,7 +252,11 @@ can also be used to pay for features, such as Docker Layer Caching.
 For example, the 25,000 credit package would provide 2,500 build minutes when
 using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
-#### If a container is used for under one minute, do I have to pay for a full minute?
+#### Is there a way to share plans across organizations and have them billed centrally?
+{:.no_toc}
+Yes, similarly with container-based plans, you can go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan. The child organizations will bill all credits and other usage to the parent org.
+
+#### If a container is used for under one minute, do I have to pay for a full minute? 
 {:.no_toc}
 You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
@@ -246,6 +281,9 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 - Commits from users that trigger builds, including PR Merge commits.
 - Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
 - Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
+- Using scheduled workflows
+- Machine users
+
 
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
@@ -340,7 +378,7 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 
 - **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows:** We do not yet support building and testing Windows applications.
+- **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
 
 ### Which CPU architectures does CircleCI support?
 {:.no_toc}

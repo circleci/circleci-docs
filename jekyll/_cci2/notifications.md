@@ -7,6 +7,10 @@ order: 100
 published: true
 ---
 
+* TOC
+{:toc}
+
+
 CircleCI has integrated chat notifications, automated email notifications, and
 web notifications. Slack and Email notifications are delivered on the success or failure of a
 [workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are
@@ -80,3 +84,66 @@ request permission in this case. Use your browser settings to control notificati
 
 While the process is similar for other browsers, please refer to their individual
 documentation for handling web notifications.
+
+## Notifications with Orbs
+
+You can use Orbs to integrate various kinds of notifications into your configuration; currently, CircleCI offers a Slack orb and an IRC orb, but several third-party orbs also exist. Consider searching the [orb registry](https://circleci.com/orbs/registry/?query=notification&filterBy=all) for _notifications_ to see what is available.
+
+### Prerequisites
+
+Before integrating an orb into your configuration, you will need to perform two steps: increment the `version` key in your config to `2.1` and enable `pipelines` under `Project Settings` > `Advanced Settings` in the CircleCI web application.
+
+### Using the Slack Orb
+
+Using the [CircleCI Slack Orb](https://circleci.com/orbs/registry/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: <docker image>
+    steps:
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'USERID1,USERID2,'
+          message: This is a custom message notification
+          webhook: webhook
+orbs:
+  slack: circleci/slack@x.y.z
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - build
+```
+
+It is also possible to use the Slack Orb to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. To view such usage examples, consult the [CircleCI Slack Orb page](https://circleci.com/orbs/registry/orb/circleci/slack).
+
+### Using the IRC Orb
+
+The [IRC orb](https://circleci.com/orbs/registry/orb/circleci/irc) is similar to the Slack orb, but only has one main feature: sending custom IRC notifications from CircleCI. Consider this example configuration:
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: <docker image>
+    steps:
+      - irc/notify:
+          server: 'IRC-server-to-connect-to' # default: IRC_SERVER environment varible.
+          port: '6667' # default: 6667 if left blank.
+          channel: 'the irc server to post in' # required parmater
+          nick: 'Your IRC nick name' # default: `circleci-bot`
+          message: webhook # default: "Your CircleCI Job has completed."
+orbs:
+  slack: circleci/irc@x.y.z
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - build
+```
+
+

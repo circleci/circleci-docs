@@ -61,7 +61,7 @@ commands は、ジョブ内で実行するステップシーケンスをマッ�
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 steps | ○ | Sequence | コマンド呼び出し元のジョブ内で実行するステップシーケンスです。
-parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#parameter-syntax)」を参照してください。
+parameters | - | Map | パラメーターキーのマップです。詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 description | - | String | コマンドの内容を説明する文章です。
 {: class="table table-striped"}
 
@@ -272,7 +272,7 @@ jobs:
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
 enabled | - | Boolean | `machine` Executor 使用時は必ず true とします。他に値の指定がないときは必須です。
-image | – | String | 使用するイメージを指定します（デフォルト：`circleci/classic:latest`）。**注 :** プライベート環境の CircleCI はこのキーをサポートして **いません**。プライベート環境における `michine` Executor のイメージカスタマイズに関する詳細は、「[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)」を参照してください。
+image | – | String | 使用するイメージを指定します（デフォルト：`circleci/classic:latest`）。**注 :** プライベート環境の CircleCI はこのキーをサポートして **いません**。プライベート環境における `machine` Executor のイメージカスタマイズに関する詳細は、「[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)」を参照してください。
 docker_layer_caching | - | Boolean | [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)を有効にするには `true` とします。**注 :** Docker レイヤーキャッシュの利用には追加の料金がかかります。この機能を有効にするには、サポートチケットを使って CircleCI のセールスチームに問い合わせてください。
 {: class="table table-striped"}
 
@@ -337,7 +337,7 @@ CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実�
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------
-xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions)」を参照してください。
+xcode | ○ | String | 仮想マシンにインストールしている Xcode のバージョンを指定します。利用可能なバージョンについては「iOS アプリをテストする」の「[サポートしている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。
 {: class="table table-striped"}
 
 **例 :** macOS 仮想マシンを Xcode v`9.0` で使う場合
@@ -590,7 +590,7 @@ steps:
 
 ##### **`when` ステップ**（version：2.1 が必須）
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。`when` キー配下ではサブキーとして `condition` と `steps` が使えます。`when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#defining-conditional-steps)を参照してください。
+`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。`when` キー配下ではサブキーとして `condition` と `steps` が使えます。`when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#条件付きステップの定義)を参照してください。
 
 キー | 必須 | 型 | 説明
 ----|-----------|------|------------

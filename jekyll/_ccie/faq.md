@@ -54,7 +54,3 @@ New builder boxes joining the fleet will use the new passphrase. Existing builde
 ```
 curl -k -X POST "https://<builder ip>/api/v1/admin/system/shutdown?circle-token=$TOKEN&unstoppable=true"
 ```
-
-#### Is it possible to run iOS/macOS builds on CircleCI Enterprise?
-
-We currently provide limited, early access for iOS builds on CircleCI Enterprise that run on our own cloud of macOS machines. Contact us at <https://support.circleci.com/hc/en-us> to make a request for this fleet.

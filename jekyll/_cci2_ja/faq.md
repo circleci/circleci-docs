@@ -177,7 +177,7 @@ jobs:
 
 ### テスト結果を保存する `store_test_results` を Workflows 内で使えますか？
 {:.no_toc}
-テスト結果のデータを [Test Summary] というセクションに記録するのに、`store_test_results` が使えます。また、データを[時系列順に分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-by-timings-data)する際にも使えます。時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
+テスト結果のデータを [Test Summary] というセクションに記録するのに、`store_test_results` が使えます。また、データを[時系列順に分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#タイミングデータに基づいた分割)する際にも使えます。時系列のテストデータは CircleCI 2.0 の Workflows より利用できるようになったもので、同一名称のジョブで使っているデータは 50 ビルド分さかのぼることができます。
 
 ### CircleCI 1.0 で Workflows を使うことはできますか？
  {:.no_toc}

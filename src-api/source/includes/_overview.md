@@ -33,6 +33,8 @@ Where:
 
 The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
 
+**Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
+
 ## Add an API Token
 
 ```sh
@@ -115,6 +117,8 @@ curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: applicatio
 
 If no accept header is specified, CircleCI will return human-readable JSON with comments. If you prefer to receive compact JSON with no whitespace or comments, add the `application/json` Accept header.
 
+**Note:** If you do not provide an `ACCEPT` header, the API will return response information in Extensibe Data Notation (EDN) format.
+
 ## Getting Started
 
 CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the following sections:
@@ -146,12 +150,12 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 
 **API** | **Description**
 ------- | -------------
-/project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI..
+/project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI.
 /project/:vcs-type/:username/:project/:build\_num/retry | Retries the build, returns a summary of the new build.
 /project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the build, returns a summary of the build.
 /project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the build's SSH permissions.
 /project/:vcs-type/:username/:project/tree/:branch | Triggers a new build, returns a summary of the build. Optional 1.0 [build parameters](https://circleci.com/docs/2.0/parallelism-faster-jobs/) can be set as well and Optional 2.0 [build parameters](https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api).
-/project/:vcs-type/:username/:project/ssh-key | Creates an ssh key used to access external systems that require SSH key-based authentication
+/project/:vcs-type/:username/:project/ssh-key | Creates an ssh key used to access external systems that require SSH key-based authentication.
 /project/:vcs-type/:username/:project/checkout-key | Creates a new checkout key.
 
 ### DELETE Requests

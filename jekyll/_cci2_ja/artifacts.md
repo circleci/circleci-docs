@@ -70,7 +70,7 @@ jobs:
 このセクションでは、[コアダンプ](http://man7.org/linux/man-pages/man5/core.5.html)を取得し、検査やデバッグで使用するためにアーティファクトとしてプッシュする方法について説明します。 以下の例では、[`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) を実行してプログラムをクラッシュさせる短い C プログラムを作成します。
 
 1. 以下の行を含む `Makefile` を作成します。
-  ```  
+  ```
         all:
            gcc -o dump main.c
   ```
@@ -122,7 +122,7 @@ CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Ar
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)し、クリップボードにコピーします。
+1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
 
 2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
@@ -131,9 +131,11 @@ CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Ar
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=$CIRCLE_TOKEN | grep -o 'https://[^"]*' > artifacts.txt
-
-<artifacts.txt xargs -P4 -I % wget %?circle-token=$CIRCLE_TOKEN
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
+   | grep -o 'https://[^"]*' \
+   | tr -d \" \
+   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
+   | wget -v -i -
 ```
 
 プレースホルダ | 意味 |

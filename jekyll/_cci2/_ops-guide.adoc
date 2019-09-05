@@ -1,0 +1,58 @@
+= OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations on AWS and private infrastructure.
+Docs Team
+:media: screen
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: Contents
+:icons: font
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+
+:leveloffset: +1
+
+include::overview.adoc[]
+
+include::nomad.adoc[]
+
+include::monitoring.adoc[]
+
+include::nomad-metrics.adoc[]
+
+include::proxy.adoc[]
+
+include::authentication.adoc[]
+
+include::vm-service.adoc[]
+
+include::gpu.adoc[]
+
+include::certificates.adoc[]
+
+include::user-accounts.adoc[]
+
+include::build-artifacts.adoc[]
+
+include::usage-stats.adoc[]
+
+include::jvm-heap-size-configuration.adoc[]
+
+include::ops.adoc[]
+
+include::backup.adoc[]
+
+include::security.adoc[]
+
+include::troubleshooting.adoc[]
+
+include::admin-faq.adoc[]
+
+include::customizations.adoc[]
+
+include::architecture.adoc[]
+
+:leveloffset: -1

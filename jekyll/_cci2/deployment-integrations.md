@@ -83,7 +83,7 @@ jobs:
   # build job omitted for brevity
   deploy:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/python:3.7-stretch
     working_directory: ~/circleci-docs
     steps:
       - run:
@@ -117,7 +117,7 @@ CircleCI and its partners have developed several different AWS orbs that enable 
 ```
 version: 2.1
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
     docker:

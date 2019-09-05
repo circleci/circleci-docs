@@ -98,7 +98,7 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
 
-### Authorizing the Google Cloud SDK
+### Authorization
 
 Use `gcloud` to authorize the Google Cloud SDK
 and set several default settings.

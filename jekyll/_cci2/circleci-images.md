@@ -19,11 +19,15 @@ For convenience,
 CircleCI maintains several Docker images.
 These images are typically extensions of official Docker images
 and include tools especially useful for CI/CD.
-All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/).
+All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/circleci/circleci-images).
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
+
+### Examples
+
+Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## Best Practices
 
@@ -210,10 +214,7 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 
 ## Pre-installed Tools
 
-All convenience images have been extended with additional tools.
-
-With the exception of [Android images](https://hub.docker.com/r/circleci/android),
-all images include the following packages, installed via `apt-get`:
+All convenience images have been extended with additional tools, installed with `apt-get`:
 
 - `bzip2`
 - `ca-certificates`
@@ -304,4 +305,6 @@ Note: Any variants available for this image can be used by appending the variant
 ## See Also
 {:.no_toc}
 
-See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/). 
+- See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.

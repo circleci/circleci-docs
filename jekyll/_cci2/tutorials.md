@@ -6,18 +6,17 @@ description: "Tutorials and 2.0 Sample Apps with Guides"
 
 Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
 
-## Tutorials 
-
 Platform Guide | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux Project Tutorial</a> | Complete walkthrough of setting up a Python project with Flask to build with CircleCI 2.0.
 <a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS Project Tutorial</a> | Full example of setting up an iOS project in CircleCI 2.0.
 <a href="{{ site.baseurl }}/2.0/language-android/">Android Project Tutorial</a> | Full example of setting up an Android project in CircleCI 2.0.
+[Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI 2.0.
 {: class="table table-striped"}
 
-## Sample Apps with Companion Guides
+## Sample Projects with Companion Guides
 
-Refer to the Sample Apps to get help with building the language and framework in which your application is written.
+Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
 Language in which your App is written | Framework | GitHub Repo Name
  ---------|-----------|-----------------
@@ -32,6 +31,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [macOS](https://github.com/CircleCI-Public/circleci-demo-macos) | MacOS | [circleci-demo-macos](https://github.com/CircleCI-Public/circleci-demo-macos)
  [Java] | Spring | [circleci-demo-java-spring]
+  [Java]({{ site.baseurl }}/2.0/language-java-maven/){:target="_blank"} | Maven | [circleci-demo-java-spring-tree-maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven){:target="_blank"}
  [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [NodeJS - JavaScript] | React | [circleci-demo-javascript-express]
  [PHP] | Laravel | [circleci-demo-php-laravel]
@@ -40,6 +40,7 @@ Language in which your App is written | Framework | GitHub Repo Name
  [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
  [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
  [Scala] | sbt | [sample-scala]
+ [Windows]({{ site.baseurl }}/2.0/hello-world-windows/){:target="_blank"} | .NET | [circleci-demo-windows](https://github.com/CircleCI-Public/circleci-demo-windows/){:target="_blank"}
 {: class="table table-striped"}
 
 ## Sample Workflows
