@@ -237,13 +237,13 @@ sudo apt-mark hold docker-ce
 . Perform the Replicated update by executing the update script as follows:
 +
 ```shell
-curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
+curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.0" | sudo bash
 ```
 +
 Double-check your replicated and docker versions:
 +
 ```shell
-replicatedctl version    # 2.34.1
+replicatedctl version    # 2.38.0
 docker -v                # 17.12.1
 ```
 
