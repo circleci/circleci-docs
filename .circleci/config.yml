@@ -98,12 +98,22 @@ jobs:
 
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+
       - run:
-          name: Build API documentation with Slate
+          name: Build API 1.x documentation with Slate
           command: |
-            cd src-api; bundle install;
+            cd src-api; bundle install; npm install
             bundle exec middleman build --clean
             cp -R build/* ../jekyll/_api
+      - run:
+          name: Build API 2.x documentation with Widdershins and Slate
+          command: |
+            cd src-api; rm -r build; rm source/index.html.md
+            curl https://circleci.com/api/v2/openapi.json > openapi.json
+            node node_modules/widdershins/widdershins.js --search false --language_tabs 'shell:Curl' 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' --summary openapi.json -o source/index.html.md
+            bundle exec middleman build --clean
+            cp -R build/* ../jekyll/_api/v2
+
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
           paths:

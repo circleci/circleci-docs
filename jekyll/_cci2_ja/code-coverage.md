@@ -253,7 +253,7 @@ jobs:
 
 ## PHP
 
-PHPUnit は、よく使用される PHP のテストフレームワークです。 PHP 5.6 よりも前のバージョンを使用している場合、コードカバレッジレポートを生成するには、<a href=」https://xdebug.org/">PHP Xdebug</a> のインストールが必要になります。PHP 5.6 以降では、phpdbg ツールにアクセスでき、`phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report` コマンドを使用してレポートを生成できます。
+PHPUnit は、よく使用される PHP のテストフレームワークです。 PHP 5.6 よりも前のバージョンを使用している場合、コードカバレッジレポートを生成するには、[PHP Xdebug](https://xdebug.org) のインストールが必要になります。PHP 5.6 以降では、phpdbg ツールにアクセスでき、`phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report` コマンドを使用してレポートを生成できます。
 
 以下に示した基本の `.circleci/config.yml` では、コンフィグの最後にある `store_artifacts` ステップでカバレッジレポートをアップロードしています。
 
