@@ -29,7 +29,7 @@ We announce the availability of new macOS containers in the [annoucements sectio
 
 The currently available Xcode versions are:
 
-* `11.0.0`: Xcode 11.0 (Beta 6) (Build 11M392q) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-999/index.html)
+* `11.0.0`: Xcode 11.0 (Beta 7) (Build 11M392r) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-1013/index.html)
 * `10.3.0`: Xcode 10.3 (Build 10G8) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
 * `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
 * `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
@@ -282,6 +282,10 @@ workflows:
 ```
 
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan. 
+
+### Reducing Testing Time
+
+By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
 
 ### Using CocoaPods
 {:.no_toc}

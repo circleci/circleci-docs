@@ -14,7 +14,7 @@ CircleCI は、XML ファイルからテストメタデータを収集し、そ�
 
 テスト結果をアーティファクトとして表示するには、`store_artifacts` ステップを使用してテスト結果をアップロードします。
 
-コンフィグでは、以下のように `[store_test_results]({{site.baseurl}}/ja/2.0/configuration-reference/#store_test_results)` キーが使用されます。
+コンフィグでは、以下のように [`store_test_results`]({{site.baseurl}}/ja/2.0/configuration-reference/#store_test_results) キーが使用されます。
 
 ```sh
 - store_test_results:
@@ -23,7 +23,7 @@ CircleCI は、XML ファイルからテストメタデータを収集し、そ�
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テストメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パスです。 この `path` 値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
 
-テストメタデータを収集するように CircleCI を設定すると、最も頻繁に失敗するテストがアプリケーション内の <a href=」https://circleci.com/build-insights">[Insights (インサイト)]</a>{:rel="nofollow"} の詳細ページにリストされるので、不安定なテストを特定して、繰り返し発生している問題を分離できます。
+テストメタデータを収集するように CircleCI を設定すると、最も頻繁に失敗するテストがアプリケーション内の [Insights (インサイト)](https://circleci.com/build-insights){:rel="nofollow"} の詳細ページにリストされるので、不安定なテストを特定して、繰り返し発生している問題を分離できます。
 
 ![失敗するテストに関するインサイト]({{ site.baseurl }}/assets/img/docs/insights.png)
 
@@ -268,7 +268,7 @@ version: 2
 #### <a name="ava"></a>Node.js 用の Ava
 {:.no_toc}
 
-<a href=https://github.com/avajs/ava">Ava</a> テストランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
+[Ava](https://github.com/avajs/ava) テストランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
 
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
@@ -288,7 +288,7 @@ version: 2
 #### ESLint
 {:.no_toc}
 
-<a href=」http://eslint.org/">ESLint</a> から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
+[ESLint](http://eslint.org/) から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
 
 `.circleci/config.yml` の作業テストセクションは、以下のようになります。
 

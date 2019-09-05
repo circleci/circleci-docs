@@ -251,7 +251,7 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 make test | go-junit-report > ${TEST_RESULTS}/go-test-report.xml
 ```
 
-この場合、`make test` からの出力は、`stdout` に表示されることなく、すべて `go-junit-report` に直接渡されます。 その問題を解決するには、`tee` と `trap` という、2つの Unix 標準コマンドを使用します。 最初のコマンドを使用すると、出力を `stdout` または別の場所に複製することができます (詳細については[こちらのページ](http://man7.org/linux/man-pages/man1/tee.1.html)を参照)。 2つめのコマンドを使用すると、スクリプトの終了時に実行するコマンドを指定できます (詳細については<a href=」http://man7.org/linux/man-pages/man1/trap.1p.html">こちらのページ</a>を参照)。 つまり、以下のように記述できます。
+この場合、`make test` からの出力は、`stdout` に表示されることなく、すべて `go-junit-report` に直接渡されます。 その問題を解決するには、`tee` と `trap` という、2つの Unix 標準コマンドを使用します。 最初のコマンドを使用すると、出力を `stdout` または別の場所に複製することができます (詳細については[こちらのページ](http://man7.org/linux/man-pages/man1/tee.1.html)を参照)。 2つめのコマンドを使用すると、スクリプトの終了時に実行するコマンドを指定できます (詳細については[こちらのページ](http://man7.org/linux/man-pages/man1/trap.1p.html)を参照)。 つまり、以下のように記述できます。
 
 ```bash
 trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT

@@ -55,7 +55,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:3.6.0-jessie
+      - image: python:3.6.3-jessie
 
     working_directory: /tmp
     steps:
@@ -166,6 +166,14 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_n
    | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
    | wget -v -i -
 ```
+
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
+
+```bash
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token
+```
+
+You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/#artifacts).
 
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|
