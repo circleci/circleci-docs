@@ -9,7 +9,7 @@ This document describes the basics of using credits with CircleCI. If you are on
 
 ## Overview
 
-The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI solution. Credits are used by the minute at varying rates according to what build configuration you use.
+The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI solution. Credits are consumed by the second at varying rates according to what build configuration you use.
 
 The right plan for you and your team will depend on several factors:
 
@@ -20,8 +20,8 @@ The right plan for you and your team will depend on several factors:
 
 Let's look at how a Performance plan might use credits. With the Performance plan you have:
 
-- At least 25,000 credits
-- An unlimited number of user seats (at $15 a user)
+- At least one credit block (25,000 credits)
+- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user.)
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
 
@@ -31,17 +31,18 @@ Consider taking a moment to look at the CircleCI [Usage](https://circleci.com/pr
 
 ## Configuring Your Credit Plan
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs. You may find the [plan chart](https://circleci.com/pricing/usage/) on the Usage page helpful in determining what plan fits best.
+To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs. 
 
 ## Free Plan
 
-As with the CircleCI legacy container plan, CircleCI also supports a free-tier with the credit-based plan. You can still make use of many key features offered by CircleCI:
+As with the CircleCI legacy container plan, CircleCI also supports a free-tier with the usage-based plan. You can still make use of many key features offered by CircleCI:
 
 - Using Orbs
 - Workspaces
 - Dependency Caching
+- Windows/Linux builds
 
-The free credit-based plan offers 2,500 build credits across medium-type machines (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute. On the free plan, you are also given a maximum of 3 user seats and a build history of 3 days.
+The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute. On the free plan, you are given a maximum of 3 user seats.
 
 ## Performance Plan
 
@@ -52,6 +53,7 @@ Upgrading to a performance plan offers several improvements over the free plan:
 - Unlimited user seat count (at $15/seat)
 - Access to Docker Layer Caching
 - No queuing
+- Support
 
 ## Docker Layer Caching
 
