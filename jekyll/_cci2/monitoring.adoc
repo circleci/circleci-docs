@@ -576,6 +576,95 @@ Custom Metrics using a Telegraf configuration file may be configured in addition
 .Custom Metrics
 image::metrics-custom.png[Custom]
 
+=== Available Metrics
+
+[.table.table-striped]
+[cols=2*, stripes=even]
+[cols="5,6"]
+|===
+| `Circle.backend.action.upload-artifact-error`
+| Tracks how many times an artifact has failed to upload.
+
+| `Circle.build-queue.runnable.builds`
+| Tracks how many builds flowing through the system are considered runnable.
+
+| `Circle.dispatcher.find-containers-failed`
+| Tracks how many 1.0 builds
+
+| `Circle.github.api_call`
+| Tracks how many api calls CircleCI is making to github
+
+| `Circle.http.request`
+| Tracks the response codes to CircleCi requests
+
+| `circle.nomad.client_agent.*``
+| Tracks nomad client metrics
+
+| `circle.nomad.server_agent.*`
+| Tracks how many nomad servers there are.
+
+| `Circle.run-queue.latency`
+| Tracks how long it takes for a runnable build to be accepted.
+
+| `Circle.state.container-builder-ratio`
+| Keeps track of how many containers exist per builder ( 1.0 only ).
+
+| `Circle.state.lxc-available`
+| Tracks how many containers are available ( 1.0 only )
+
+| `Circle.state.lxc-reserved`
+| Tracks how many containers are reserved/in use ( 1.0 only ).
+
+| `Circle.vm-service.vm.assigned-vm`
+| Tracks how many vm’s are in use.
+
+| `Circle.vm-service.vms.delete.status`
+| Tracks how many vm’s we’re deleting at a given moment.
+
+| `Circle.vm-service.vms.get.status`
+| TBD (Tracks how many vm’s we have?)
+
+| `Circle.vm-service.vms.post.status`
+| TBD
+
+| `Circleci.cron-service.messaging.handle-message`
+| TBD
+
+| `Circleci.grpc-response`
+| Tracks latency over the system grpc system calls.
+|===
+
+Following are the steps required to customize which of these metrics you wish to receive:
+
+. Check to enable Use Custom Telegraf Metrics from the Management Console settings
+// Insert screenshot when I have it
+. SSH into the Services machine
+. Add the following to `/etc/circleconfig/telegraf/statsd.conf`
++
+```
+[[inputs.statsd]]
+        service_address = ":8125"
+        parse_data_dog_tags = true
+        metric_separator = "."
+        namepass = []
+```
+. Under `namepass` add any metrics you wish to receive, for example, if you are only interested in metics for VM service, your cofnfig should resemble:
++
+```
+[[inputs.statsd]]
+        service_address = ":8125"
+        parse_data_dog_tags = true
+        metric_separator = "."
+        namepass = [
+          "circle.vm-service.vm.assigned-vm",
+            "circle.vm-service.vms.delete.status",
+            "circle.vm-service.vms.get.status",
+            "circle.vm-service.vms.post.status"
+          ]
+```
+. Restart the telegraf container by running: `sudo docker restart telegraf`
+. Head back to the managmenet console settings, scroll down to save and restart your installation.
+
 === Configuring Custom Metrics
 
 Configuration options are based on Telegraf's documented output plugins. See their documentation https://github.com/influxdata/telegraf/tree/release-1.10#output-plugins[here]. For example, if you would like to use the InfluxDB Output Plugin you would need to follow these steps:
