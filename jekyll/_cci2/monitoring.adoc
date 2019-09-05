@@ -634,10 +634,14 @@ image::metrics-custom.png[Custom]
 | Tracks latency over the system grpc system calls.
 |===
 
+=== Customizing Metrics
+
 Following are the steps required to customize which of these metrics you wish to receive:
 
 . Check to enable Use Custom Telegraf Metrics from the Management Console settings
-// Insert screenshot when I have it
++
+.Custom Metrics
+image::custom_metrics.png[Custom Metrics]
 . SSH into the Services machine
 . Add the following to `/etc/circleconfig/telegraf/statsd.conf`
 +
