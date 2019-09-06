@@ -281,6 +281,8 @@ en:
       children:
         - name: Overview
           link: 2.0/install-overview/
+        - name: Upgrade to v2.18.x
+          link: 2.0/updating-server/
         - name: System Requirements
           link: 2.0/server-ports/
         - name: Prerequisites and Planning
@@ -289,8 +291,6 @@ en:
           link: 2.0/aws/
         - name: Teardown
           link: 2.0/aws-teardown/
-        - name: Updating
-          link: 2.0/updating-server/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
         - name: Trial Single-box Install
