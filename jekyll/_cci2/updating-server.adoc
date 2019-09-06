@@ -1,17 +1,17 @@
-= Updating a Server Installation
+= Upgrading a Server Installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This section describes the process for updating your CircleCI Server installation from v2.17 to v2.18.
+This section describes the process for upgrading your CircleCI Server installation from v2.17 to v2.18.
 
 toc::[]
 
 == Org Rename Script
 
-WARNING: Before updating please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
+WARNING: Before upgrading please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
 or you suspect that an **organization rename might have happened at any point**.
 
 . SSH into your Services machine
@@ -144,9 +144,9 @@ or you suspect that an **organization rename might have happened at any point**.
 
 . If any `ERROR` messages are present in the output please report back to your CSM or reach out to support.
 
-== Update Steps Overview
+== Upgrade Steps Overview
 
-Following is an overview of the CircleCI Server update steps. Each stage is described in detail below.
+Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
 
 * Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
 * Update Replicated and check you are running Docker v17.12.1, update if necessary
@@ -176,27 +176,32 @@ If you do need to rollback at any point, see our https://circleci.com/docs/2.0/b
 
 ==== Prerequisites
 
-* Your installation is Ubuntu 14.04 or 16.04 based
-* You are running replicated version >=2.10.3 on your services machine. Check by running the following:
+* Your installation is Ubuntu 14.04 or 16.04 based.
+* Your installation is **not** airgapped and you can access the internet from it.
+* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
 ```
-// do they need to SSH into the services machine and run this? Actually we need to point them to what to do if their version of Replicated is pre 2.10.3 here
-* Your installation is **not** airgapped and you can access the internet from it
++
+If you are running a version of Replicated pre 2.10.3 please reach out to support@circleci.com.
 
 ==== Preparations
 
 CAUTION: Remember to take a snapshot (described above) before starting the Replicated update process
 
-. Stop the CircleCI application:
+. Stop the CircleCI application by clicking the Stop Now button on the Dashboard. Application shutdown takes a few minutes. Wait for the status to become “Stopped” before continuing.
++
+.Stop the CircleCI Application
+image::stop_replicated.png[Stop the CircleCI Application]
++
+Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
 +
 ```shell
 replicatedctl app stop
 ```
 +
-Application shutdown takes a few minutes. Please check the administration dashboard and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
-// is this what we want them to do generally? In the step above we're saying to stop replicated from the dashboard
+You can check the status using the followng:
 +
 ```shell
 replicatedctl app status inspect
@@ -219,7 +224,7 @@ Example Output:
 ]
 ```
 
-. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1:
+. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1. Check which version you are running with `docker version` and if you need to update, follow these steps:
 // should there be a step to check Docker version first?
 +
 ```shell
@@ -276,12 +281,14 @@ Example output:
 ]
 ```
 
-=== 3. Update CircleCI Server Version
+=== 3. Upgrade CircleCI Server Version
 
 . Once you are running the latest version of Replicated, click the View Update button in the Management Console dashboard.
 // insert image when I have it
 . Click Install next to the version you wish to install.
 // insert image when I have it
 +
-The install process may take several minutes, and the install status will be displayed both on the Releases page and the main Dashboard.
+The install process may take several minutes and the install status will be displayed both on the Releases page and the main Dashboard.
++
+TIP: Please refresh your screen intermittently during the install process to avoid unnecessary waiting.
 . Once the installation is finished, navigate to the Dashboard to start your installation - Note the middle box on the Dashboard will read "CircleCI is up to date" when you are running the latest version.
