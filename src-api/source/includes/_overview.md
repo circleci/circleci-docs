@@ -117,8 +117,6 @@ curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: applicatio
 
 If no accept header is specified, CircleCI will return human-readable JSON with comments. If you prefer to receive compact JSON with no whitespace or comments, add the `application/json` Accept header.
 
-**Note:** If you do not provide an `ACCEPT` header, the API will return response information in Extensibe Data Notation (EDN) format.
-
 ## Getting Started
 
 CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the following sections:
