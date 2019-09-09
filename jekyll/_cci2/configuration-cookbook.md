@@ -307,9 +307,112 @@ jobs:
 The example below shows how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and then roll the image out to the GKE cluster.
 
 ```yaml
+version: 2.1
+
+# Orb Dependencies
+orbs:
+  gcloud: circleci/gcp-cli@1.0.6
+  gcr: circleci/gcp-gcr@0.0.2
+  k8s: circleci/kubernetes@0.1.0
+
+commands:
+  install:
+    description: "Install `gcloud` and `kubectl` if not already installed."
+    steps:
+      - gcloud/install
+      - k8s/install
+  init:
+    description: "Initialize the `gcloud` CLI."
+    steps:
+      - gcloud/initialize
+  rollout-image:
+    description: "Update a deployment's Docker image."
+    parameters:
+      cluster:
+        description: "The Kubernetes cluster name."
+        type: string
+      deployment:
+        description: "The Kubernetes deployment name."
+        type: string
+      container:
+        description: "The Kubernetes container name."
+        type: string
+      image:
+        description: A name for your docker image
+        type: string
+    steps:
+      - run: |
+          gcloud container clusters get-credentials <<parameters.cluster>>
+          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
+
+jobs:
+  publish-and-rollout-image:
+    description: "Update cluster with new Docker image."
+    machine: true
+    parameters:
+      cluster:
+        description: "The Kubernetes cluster name."
+        type: string
+      deployment:
+        description: "The Kubernetes deployment name."
+        type: string
+      container:
+        description: "The Kubernetes container name."
+        type: string
+      gcloud-service-key:
+        description: The gcloud service key
+        type: env_var_name
+        default: GCLOUD_SERVICE_KEY
+      google-project-id:
+        description: The Google project ID to connect with via the gcloud CLI
+        type: env_var_name
+        default: GOOGLE_PROJECT_ID
+      google-compute-zone:
+        description: The Google compute zone to connect with via the gcloud CLI
+        type: env_var_name
+        default: GOOGLE_COMPUTE_ZONE
+      registry-url:
+        description: The GCR registry URL from ['', us, eu, asia].gcr.io
+        type: string
+        default: gcr.io
+      image:
+        description: A name for your docker image
+        type: string
+      tag:
+        description: A docker image tag
+        type: string
+        default: "latest"
+      path-to-dockerfile:
+        description: The relative path to the Dockerfile to use when building image
+        type: string
+        default: "."
+    steps:
+      - checkout
+      - gcr/gcr-auth:
+          google-project-id: <<parameters.google-project-id>>
+          google-compute-zone: <<parameters.google-compute-zone>>
+      - install
+      - gcr/build-image:
+          registry-url: <<parameters.registry-url>>
+          google-project-id: <<parameters.google-project-id>>
+          image: <<parameters.image>>
+          tag: << parameters.tag >>
+          path-to-dockerfile: <<parameters.path-to-dockerfile>>
+      - gcr/push-image:
+          registry-url: <<parameters.registry-url>>
+          google-project-id: <<parameters.google-project-id>>
+          image: <<parameters.image>>
+          tag: <<parameters.tag>>
+      - rollout-image:
+          cluster: "<<parameters.cluster>>"
+          deployment: "<<parameters.deployment>>"
+          container: "<<parameters.container>>"
+          image: "<<parameters.image>>"
+
+example:
   publish-and-rollout-image:
     description: |
-      "The simplest example of using this Orb. Logs into GCP, builds and
+      "The simplest example of using this Orb. Logs into GCP, builds and 
       publishes a Docker image, and then rolls the image out to a GKE cluster."
     usage:
       version: 2.1
@@ -370,9 +473,8 @@ The code sample shown below illustrates how you can install the 'eksctl' tool in
 
 ```yaml
 version: 2.1
-description: |
-  Install the eksctl tool
-  Requirements: curl, amd64 architecture
+description:
+Requirements: curl, amd64 architecture
 steps:
   - run:
       command: >
@@ -408,26 +510,17 @@ CircleCI enables you to use the `AWS-CLI` and `AWS-IAM` authentication tool to r
 To install the AWS IAM Authenticator for Kubernetes, see the code sample shown below.
 
 ```yaml
-Version: 2.1
-description: |
-  Install the AWS IAM Authenticator for Kubernetes
-  Requirements: curl, amd64 architecture
+version: 2.1
+Requirements: curl, amd64 architecture
 parameters:
   release-tag:
     default: ''
     description: >
-      Use this to specify a tag to select which published release of the AWS IAM
-      Authenticator,
+      Use this to specify a tag to select which published release of the AWS IAM Authenticator, as listed on 
+      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases, to install. If no value is specified, the latest
+      release will be installed.
 
-      as listed on
-      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases,
-
-      to install. If no value is specified, the latest release will be
-      installed.
-
-      Note: Release versions earlier than v0.3.0 cannot be specified. Also,
-
-      pre or alpha releases cannot be specified.
+      Note: Release versions earlier than v0.3.0 cannot be specified. Also, pre or alpha releases cannot be specified.
     type: string
 steps:
   - run:
@@ -436,34 +529,23 @@ steps:
           echo "AWS IAM Authenticator for Kubernetes is already installed"
           exit 0
         fi
-
         PLATFORM="linux"
-
         if [ -n "$(uname | grep "Darwin")" ]; then
           PLATFORM="darwin"
         fi
-
-        RELEASE_TAG="<< parameters.release-tag >>"
-
+        RELEASE_TAG="<< parameters.release-tag >>
         RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/latest"
-
         if [ -n "${RELEASE_TAG}" ]; then
           RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/tags/${RELEASE_TAG}"
         fi
-
         DOWNLOAD_URL=$(curl -s --retry 5 "${RELEASE_URL}" \
             | grep "${PLATFORM}" | awk '/browser_download_url/ {print $2}' | sed 's/"//g')
-
         curl -L -o aws-iam-authenticator "$DOWNLOAD_URL"
-
         chmod +x ./aws-iam-authenticator
-
         SUDO=""
-
         if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
           SUDO="sudo"
         fi
-
         $SUDO mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
       name: Install the AWS IAM Authenticator for Kubernetes
 ```
@@ -475,8 +557,7 @@ steps:
 Once you meet the requirements for using the CircleCI AWS-EKS orb, you may create an EKS cluster using the code sample shown below.
 
 ```yaml
-Version: 2.1
-
+version: 2.1
 jobs:
   test-cluster:
     executor: aws-eks/python3
@@ -494,11 +575,11 @@ jobs:
             kubectl get services
           name: Test cluster
 orbs:
-  aws-eks: circleci/aws-eks@0.1.0
-  kubernetes: circleci/kubernetes@0.3.0
+aws-eks: circleci/aws-eks@0.1.0
+kubernetes: circleci/kubernetes@0.3.0
 version: 2.1
 workflows:
-  deployment:
+deployment:
     jobs:
       - aws-eks/create-cluster:
           cluster-name: my-eks-demo
@@ -525,8 +606,7 @@ After creating a Kubernetes cluster, you may wish to create a Kubernetes deploym
 The code example below illustrates how you can create the Kubernetes deployment.
 
 ```yaml
-Version: 2.1
-
+version: 2.1
 jobs:
   create-deployment:
     executor: aws-eks/python3
@@ -580,8 +660,7 @@ workflows:
 To simplify the Helm installation on your cluster,
 
 ```yaml
-Version: 2.1
-
+version: 2.1
 description: |
   Installs helm onto the EKS cluster.
   Note: Parameters like tiller-tls need to be set to
@@ -694,8 +773,7 @@ Helm is a powerful application package manager that runs on top of a Kubernetes 
 Once Helm is installed in your Kubernetes cluster, you can then install Helm charts using the code example shown below.
 
 ```yaml
-Version: 2.1
-
+version: 2.1
 description: |
   Installs a helm chart into the EKS cluster.
   Requirements: helm should be installed on the cluster.
@@ -813,8 +891,7 @@ Occasionally, you may find it necessary to update the container image of a resou
 The code example below illustrates how this orb updates an existing container image in the Kubernetes cluster.
 
 ```yaml
-Version: 2.1
-
+version: 2.1
 description: |
   Updates the container image(s) of a resource on EKS.
 executor: << parameters.executor >>
@@ -1033,8 +1110,7 @@ You may also send a status alert at the end of a job to your recipients. Note th
 
 The example below shows how you can send a status alert at the end of a job.
 
-```
-yaml
+```yaml
 version: 2.1
 jobs:
   build:
