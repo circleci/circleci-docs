@@ -44,7 +44,7 @@ To import a partner orb, perform the steps listed below.
 
 1) Import the `orbs` key in your `.circleci.yml/config.yml` file in your configuration. 
 
-2) Replace the `<orb reference string>` value in the example shown below with the orb you wish to import from the [CircleCI Orbs Registry] (https://circleci.com/orbs/registry/). There are a large number of CircleCI-certified and Partner-certified orbs that you may choose from.
+2) Replace the `<orb reference string>` value in the example shown below with the orb you wish to import from the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/). There are a large number of CircleCI-certified and Partner-certified orbs that you may choose from.
 
 ```yaml
 version: 2.1
