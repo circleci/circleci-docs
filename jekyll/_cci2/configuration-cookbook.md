@@ -474,7 +474,7 @@ The code sample shown below illustrates how you can install the 'eksctl' tool in
 ```yaml
 version: 2.1
 description:
-  Requirements: curl, amd64 architecture
+Requirements: curl, amd64 architecture
 steps:
   - run:
       command: >
@@ -511,23 +511,16 @@ To install the AWS IAM Authenticator for Kubernetes, see the code sample shown b
 
 ```yaml
 version: 2.1
-  Requirements: curl, amd64 architecture
+Requirements: curl, amd64 architecture
 parameters:
   release-tag:
     default: ''
     description: >
-      Use this to specify a tag to select which published release of the AWS IAM
-      Authenticator,
+      Use this to specify a tag to select which published release of the AWS IAM Authenticator, as listed on 
+      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases, to install. If no value is specified, the latest
+      release will be installed.
 
-      as listed on
-      https://github.com/kubernetes-sigs/aws-iam-authenticator/releases,
-
-      to install. If no value is specified, the latest release will be
-      installed.
-
-      Note: Release versions earlier than v0.3.0 cannot be specified. Also,
-
-      pre or alpha releases cannot be specified.
+      Note: Release versions earlier than v0.3.0 cannot be specified. Also, pre or alpha releases cannot be specified.
     type: string
 steps:
   - run:
@@ -536,34 +529,23 @@ steps:
           echo "AWS IAM Authenticator for Kubernetes is already installed"
           exit 0
         fi
-
         PLATFORM="linux"
-
         if [ -n "$(uname | grep "Darwin")" ]; then
           PLATFORM="darwin"
         fi
-
-        RELEASE_TAG="<< parameters.release-tag >>"
-
+        RELEASE_TAG="<< parameters.release-tag >>
         RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/latest"
-
         if [ -n "${RELEASE_TAG}" ]; then
           RELEASE_URL="https://api.github.com/repos/kubernetes-sigs/aws-iam-authenticator/releases/tags/${RELEASE_TAG}"
         fi
-
         DOWNLOAD_URL=$(curl -s --retry 5 "${RELEASE_URL}" \
             | grep "${PLATFORM}" | awk '/browser_download_url/ {print $2}' | sed 's/"//g')
-
         curl -L -o aws-iam-authenticator "$DOWNLOAD_URL"
-
         chmod +x ./aws-iam-authenticator
-
         SUDO=""
-
         if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
           SUDO="sudo"
         fi
-
         $SUDO mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
       name: Install the AWS IAM Authenticator for Kubernetes
 ```
@@ -593,11 +575,11 @@ jobs:
             kubectl get services
           name: Test cluster
 orbs:
-  aws-eks: circleci/aws-eks@0.1.0
-  kubernetes: circleci/kubernetes@0.3.0
+aws-eks: circleci/aws-eks@0.1.0
+kubernetes: circleci/kubernetes@0.3.0
 version: 2.1
 workflows:
-  deployment:
+deployment:
     jobs:
       - aws-eks/create-cluster:
           cluster-name: my-eks-demo
