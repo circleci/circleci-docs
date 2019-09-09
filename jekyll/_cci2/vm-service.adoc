@@ -44,7 +44,7 @@ You can provide a custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMI
 
 == Customization
 
-It may be beneficial to customize the VM service image for your installation of CircleCI. This will allow you to specify other versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. Without doing so, you will likely need to run these additional install and update steps on every commit as part of your `config.yml` file.
+It may be beneficial to customize the VM service images for your installation of CircleCI. This will allow you to specify other versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker and  the `machine` executor. If you chose not to use custom images, you will likely need to run these additional install and update steps on every commit as part of your `config.yml` file.
 
 To build custom VM service images:
 
@@ -56,6 +56,14 @@ Refer to https://packer.io/docs/builders/amazon-ebs.html#ami_groups for more inf
 and see https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh for details about settings.
 
 You will need to associate the `circleci` user with the image you want to use as shown in https://github.com/circleci/image-builder/blob/picard-vm-image/aws_user_data[this] example.
+
+To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings accessible from the Management console (for example, `<your-circleci-id>.com:8800`). Once you have provided the IDs, save your settings and restart the CircleCI application.
+
+// add screenshpt when available
+// .Custom VM Service Images
+// image::vm-service-custom.png[Custom VM Service Images]
+
+CAUTION: Any changes to management console settings requires downtime while the CircleCI application is restarted.
 
 == On Demand and Preallocated Instances
 Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 9).
