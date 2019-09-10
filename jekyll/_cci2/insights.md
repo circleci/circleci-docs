@@ -69,7 +69,7 @@ You can install the CircleCI dashboard via the App Catalog from the dashboard ho
 
 ![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
-This dashboard receives data via the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
+This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 ### The Sumo Logic Orb
 
