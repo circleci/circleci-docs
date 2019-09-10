@@ -46,7 +46,7 @@ Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data
 
 ## Sumo Logic Integration
 
-Sumo Logic users may now track and visualize analytical data  across all of their jobs on CircleCI by utilizing the new Sumo Logic Orb and CircleCI App for Sumo Logic app integration on Sumo Logic's partner integrations site.
+Sumo Logic users may track and visualize analytical data across all of their jobs on CircleCI. To do so, use the  Sumo Logic Orb and Sumo Logic app integration from the Sumo Logic partner integrations site.
 
 
 ### The CircleCI Dashboard for Sumo Logic
