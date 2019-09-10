@@ -124,7 +124,7 @@ Env vars:
 
 This will link the orb with your Sumo Logic dashboard.
 
-That's all! Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
+Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
 ## See Also
 Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
