@@ -120,7 +120,7 @@ Env vars:
 - `JOB_HTTP_SOURCE`
 - `WORKFLOW_HTTP_SOURCE`
 
-**[How to add an environment variable to your project.]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project)**
+**[How to add an environment variable to your project.]({{ site.baseurl }}2.0/env-vars/#setting-an-environment-variable-in-a-project)**
 
 This will link the orb with your Sumo Logic dashboard.
 
