@@ -65,7 +65,7 @@ Included panels:
 - Top 10 Slowest Failed Jobs In Seconds
 - Top 10 Slowest Successful Jobs In Seconds
 
-You can install the CircleCI dashboard via the App Catalog from the dashboard home page.
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
 ![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
