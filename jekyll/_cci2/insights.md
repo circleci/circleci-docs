@@ -76,7 +76,7 @@ This dashboard receives data through the CircleCI Sumo Logic orb which must be i
 Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/sumologic).
 
 #### 1. Import the Sumo Logic orb.
-Add the Sumo Logic orb to your project by including the top-level "orbs" key and import `circleci/sumologic@x.y.z` as `sumologic`.
+Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
 
 ```yaml
 orbs:
