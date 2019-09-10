@@ -114,7 +114,7 @@ To create the two source collectors:
 6. Save the resulting URL.
 
 #### 4. Add environment variables.
-For each of the URLs produce in the previous step, create the corrisponding environment variable.
+For each of the URLs produce in the previous step, create the corresponding environment variable.
 
 Env vars:
 - `JOB_HTTP_SOURCE`
