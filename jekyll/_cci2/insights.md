@@ -103,7 +103,7 @@ workflows:
 #### 3. Create two source collectors.
 You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
 
-You will need to create one called `circleci/job-collector` and another called `circleciworkflow-collector`.
+You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
 
 To create the two source collectors:
 1. From the dashboard select the **Setup Wizard**.
