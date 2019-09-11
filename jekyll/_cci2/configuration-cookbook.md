@@ -51,7 +51,7 @@ For more detailed information about CircleCI orbs, please refer to the [Orbs Int
 2) Add the orbs stanza below your version, which in turn imports the orb:
 
 ```yaml
-aws-ecs: circleci/aws-ecs@0.0.6
+aws-ecs: circleci/aws-ecs@0.0.10
 ```
 
 3) Invoke the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
