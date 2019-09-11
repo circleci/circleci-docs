@@ -159,7 +159,7 @@ To take a snapshot of your installation:
 . Go to the Management Console (e.g. `your-circleci-hostname.com:8800`) and click Stop Now to stop the CircleCI service.
 +
 .Stop CircleCI
-image::stop_replicated.png[Stop CircleCI]
+image::stop_replicated_update_available.png[Stop CircleCI]
 . Ensure no jobs are running on the nomad clients – you can check this by running `nomad status`
 . Navigate to the AWS EC2 management console and select your Services machine instance
 . Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.
@@ -193,7 +193,7 @@ CAUTION: Remember to take a snapshot (described above) before starting the Repli
 . Stop the CircleCI application by clicking the Stop Now button on the Dashboard. Application shutdown takes a few minutes. Wait for the status to become “Stopped” before continuing.
 +
 .Stop the CircleCI Application
-image::stop_replicated.png[Stop the CircleCI Application]
+image::stop_replicated_update_available.png[Stop the CircleCI Application]
 +
 Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
 +
@@ -284,11 +284,15 @@ Example output:
 === 3. Upgrade CircleCI Server Version
 
 . Once you are running the latest version of Replicated, click the View Update button in the Management Console dashboard.
-// insert image when I have it
-. Click Install next to the version you wish to install.
-// insert image when I have it
 +
-The install process may take several minutes and the install status will be displayed both on the Releases page and the main Dashboard.
+.View Available Updates
+image::view_update.png[View Available Updates]
+. Click Install next to the version you wish to install.
 +
 TIP: Please refresh your screen intermittently during the install process to avoid unnecessary waiting.
++
+.View Available Releases
+image::release_history.png[View Available Releases]
++
+The install process may take several minutes and the install status will be displayed both on the Releases page and the main Dashboard.
 . Once the installation is finished, navigate to the Dashboard to start your installation - Note the middle box on the Dashboard will read "CircleCI is up to date" when you are running the latest version.
