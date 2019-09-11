@@ -74,18 +74,22 @@
               <li><a href="https://circleci.com/privacy/" data-analytics-child='{ "menu": "privacy-policy" }'>Privacy Policy</a></li>
               <li><a href="https://circleci.com/legal/cookie-policy/" data-analytics-child='{ "menu": "cookie-policy" }'>Cookie Policy</a></li>
               <li><a href="https://circleci.com/security/" data-analytics-child='{ "menu": "security" }'>Security</a></li>
-              {% if site.lang == 'en' %}
                 <li class="language-select">
-                  <div class="dropup show">
-                    <a class="dropdown-toggle" role="button" id="languageSelectDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/docs/ic-globe.svg" alt="globe" width="20"> English (US) <i class="fa fa-angle-up"></i></a>
-
+                  <div id="dropUp" class="dropup show">
+                    <a class="dropdown-toggle"
+                       role="button"
+                       id="languageSelectDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false"
+                    >
+                      <img src="{{site.baseurl}}/assets/img/docs/ic-globe.svg" alt="globe" width="20"> English (US) <i class="fa fa-angle-up"></i></a>
                     <div class="dropdown-menu"  aria-labelledby="languageSelectDropdown">
                       <a class="dropdown-item active" href="#">English (US)</a>
                       <a class="dropdown-item" href="https://circleci.jp" data-analytics-child='{ "menu": "japan" }'>日本語</a>
                     </div>
                   </div>
                 </li>
-              {% endif %}
             </ul>
           </nav>
         </div>
