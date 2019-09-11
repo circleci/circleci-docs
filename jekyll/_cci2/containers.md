@@ -5,7 +5,7 @@ categories: [how-to]
 description: How to leverage CircleCI containers
 ---
 
-This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. Please note: container-based plans will soon be deprecated in favor of using CircleCI's new [usage plans](https://circleci.com/pricing/usage/). If your builds are queuing with a Container-based plan, consider signing up for a CircleCI usage-based plan to mitigate queing and to enjoy other benefits.
+This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. Please note: container-based plans will soon be deprecated in favor of using CircleCI's new [usage plans](https://circleci.com/pricing/usage/). If your builds are queuing with a Container-based plan, consider signing up for a CircleCI usage-based plan to mitigate queuing and to enjoy other benefits.
 
 You can read about the new usage-based plans in detail [in this document]({{ site.baseurl }}/2.0/credits/).
 
