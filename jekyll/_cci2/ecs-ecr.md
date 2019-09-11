@@ -74,7 +74,7 @@ The `build_and_push_image` job builds a Docker image from a Dockerfile in the de
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.2
-  aws-ecs: circleci/aws-ecs@0.0.8
+  aws-ecs: circleci/aws-ecs@0.0.10
 workflows:
   build-and-deploy:
     jobs:
