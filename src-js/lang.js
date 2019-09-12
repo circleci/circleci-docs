@@ -9,8 +9,9 @@ function getElById(id) {
 export function init() {
   let switcherToggleEl = getElById("languageSelectDropdown");
   let dropUpEl = getElById("dropUp")
+  let langItems = getElById("languageMenuItems");
 
   switcherToggleEl.addEventListener("click", function(_) {
-    dropUpEl.classList.toggle("open");
+    langItems.classList.toggle("hidden");
   })
 }

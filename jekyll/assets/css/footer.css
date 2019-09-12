@@ -103,3 +103,13 @@
   background: #36D4ED;
   color: #FFFFFF;
 }
+
+
+.footer .language-select .hidden {
+  display: none;
+}
+
+.footer .language-select .dropdown-menu {
+  display: block;
+  position: absolute;
+}
