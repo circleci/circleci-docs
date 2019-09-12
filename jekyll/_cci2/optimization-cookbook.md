@@ -61,7 +61,7 @@ To configure your environment for the CircleCI platform and CircleCI orbs, follo
 
 One of the easiest ways to prevent workflow concurrency using the CircleCI Single-Threading orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently, thereby limiting the number of workflows in the queue. In turn, this will also improve overall performance while making sure no workflows are discarded.
 
-{raw}
+{% raw %}
 
 ```yaml
 Version: 2.1
@@ -109,7 +109,7 @@ steps:
       time: <<parameters.time>>
       vcs-type: <<parameters.vcs-type>>
 ```
-{endraw}
+{% endraw %}
 
 ## Caching
 
@@ -117,7 +117,7 @@ One of the quickest and easiest ways to optimize your builds and workflows is to
 
 If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build. The example below shows how you can use a package manager for caching.
 
-{raw}
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -136,7 +136,7 @@ jobs:
           paths:
             - "venv"
 ```
-{endraw}
+{% endraw %}
 
 Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes and so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
