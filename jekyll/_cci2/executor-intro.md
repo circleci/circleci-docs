@@ -7,7 +7,7 @@ categories: [configuration]
 order: 1
 ---
 
-An **executor** defines the underlying technology or environment in which to run a job. Set up your build environment to run with the `docker`, `machine`, `windows`, or `macos` executor and specify an image with the tools and packages you need.
+An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
 ![Executor Overview](  {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -23,6 +23,8 @@ jobs:
         # Commands run in the primary container
 ```
 
+Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-docker).
+
 ## Machine
 
 ```
@@ -34,6 +36,8 @@ jobs:
       steps:
         # Commands run in a Linux virtual machine environment
 ```
+
+Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
 ## macOS
 
@@ -48,6 +52,7 @@ jobs:
       # with Xcode 9.0 installed
 ```
 
+Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
 
 ## Windows
 
@@ -68,6 +73,8 @@ jobs:
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
+
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows).
 
 ## See Also
 
