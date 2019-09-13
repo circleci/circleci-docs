@@ -27,10 +27,13 @@ function handleSetLanguageOnLoad() {
   }
 }
 
+/**
+ * Function to run when the sidebar language <select> is changed.
+ * It checks the newly selected language code and reloads the page in that language.
+ */
 function handleChangeLanguageSidebar() {
   var langSelect = getElById("sidebarLangSelect");
   langSelect.addEventListener("change", function(e) {
-    console.log("new value is ", e.target.value);
     switch(e.target.value) {
       case "ja":
         reloadWithNewLocale("ja")
@@ -44,16 +47,8 @@ function handleChangeLanguageSidebar() {
   })
 }
 
-function handleChangeLanguageFooter() {
-  var switcherToggleEl = getElById("languageSelectDropdown");
-  var dropUpEl = getElById("dropUp")
-  switcherToggleEl.addEventListener("click", function(_) {
-    dropUpEl.classList.toggle("open");
-  })
-}
 
 export function init() {
-  handleChangeLanguageFooter();
   handleChangeLanguageSidebar();
   handleSetLanguageOnLoad();
 }
