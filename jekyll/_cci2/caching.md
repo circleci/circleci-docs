@@ -232,7 +232,7 @@ Template | Description
 {:.no_toc}
 
 - When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. 
-- Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
+- Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors) if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
 - You do not have to use dynamic templates for your cache-key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 ### Full Example of Saving and Restoring Cache
