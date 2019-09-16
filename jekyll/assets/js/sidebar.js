@@ -19,9 +19,9 @@
       // fullscreen sidenav expansion
       function sidenavAutoExpand (parent) {
         var element = parent.querySelector('[data-section=' + localStorage.sidenavActive + ']');
-        if (element.classList.contains('closed')) {
+        if (element && element.classList.contains('closed')) {
           element.classList.remove('closed');
-        }  
+        }
       };
 
       sidenavAutoExpand(sidebar);
@@ -29,7 +29,7 @@
 
       // for mobile sidebar, if sidebar is set, display proper item
       var mobileCurrentElement = mobileSidebar.querySelector('[data-id=' + localStorage.sidenavActive + ']');
-      if (mobileCurrentElement.classList.contains('hidden')) {
+      if (mobileCurrentElement && mobileCurrentElement.classList.contains('hidden')) {
         mobileCurrentElement.classList.remove('hidden');
         mobileSidebarDefault.classList.add('hidden');
       }
