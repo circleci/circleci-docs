@@ -38,7 +38,7 @@ Orbs consist of the following elements:
 
 #### Commands
 
-Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter to as follows:
+Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
 
 ```
 version: 2.1
