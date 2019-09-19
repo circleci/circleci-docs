@@ -136,7 +136,9 @@ export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 image::banner.png[]
 
 === Resource Classes
-You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] per Job.
+You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
+
+TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
 
 Following are the steps required to customize resource classes for the Docker and `machine` executors:
 
@@ -153,7 +155,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 +
-WARNING: It is imortant to use the IDs from the example below for the `machine` resources classes. IDs can, however, be changed for Docker resource classes.
+WARNING: It is important to use the IDs listen in the example below for the `machine` resources classes. IDs can, however, be changed for Docker resource classes.
 . Run:
 +
 ```shell
@@ -191,4 +193,21 @@ Let's take a look at one of the options in more detail
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. This this should be kept in parity with :outer - see below.
 * `:outer {:cpu 4.0 :ram 8192}` - This defines the CPU and RAM for the resource class.
 
-NOTE: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued.
+CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued. See our <<nomad-metrics#configuring-nomad-client-metrics,Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster.
+
+==== Enable the Large Resource Class for Machine Executor
+A second machine type (`large` in the example above) was introduced in CircleCI v2.18. A further step is required to enable this for your organization. Following are the required steps:
+
+. SSH into the Services .achine
+. Run the following:
+```
+circleci dev-console
+```
+. Run the following (substituting your organization name):
+```
+(admin/set-org-feature-unsafe "<org_name>" :picard-allowed-resource-classes :val #{"l1.large"})
+```
+.. Alternatively, if you only want to enable only a single project to use the `large` machine resource class you can run the following (substituting your project URL):
+```
+(admin/set-project-feature-by-url "<github_url_of_project>" :picard-allowed-resource-classes #{"l1.large"})
+```
