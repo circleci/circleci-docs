@@ -17,22 +17,7 @@ Security is our top priority at CircleCI, we are proactive and we act on securit
 ## Encryption
 CircleCI uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
 
-The nature of CircleCI is
-that our software has access to your code
-and whatever data that code interacts with.
-All jobs on CircleCI run in a sandbox
-(specifically, a Docker container or an ephemeral VM)
-that stands alone from all other builds
-and is not accessible from the Internet or from your own network.
-The build agent pulls code via git over SSH.
-Your particular test suite or job configurations may call out to external services or integration points within your network,
-and the response from such calls will be pulled into your jobs
-and used by your code at your discretion.
-After a job is complete,
-the container that ran the job is destroyed and rebuilt.
-All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/).
-Environment variables are encrypted using AES256-GCM96
-and are unavailable to CircleCI employees.
+The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/). Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
 
 ## Sandboxing
 With CircleCI you control the resources allocated to run the builds of your code. This will be done through instances of our builder boxes that set up the containers in which your builds will run. By their nature, build containers will pull down source code and run whatever test and deployment scripts are part of the code base or your configuration. The containers are sandboxed, each created and destroyed for one build only (or one slice of a parallel build), and they are not available from outside themselves. The CircleCI service provides the ability to SSH directly to a particular build container. When doing this a user will have complete access to any files or processes being run inside that build container, so provide access to CircleCI only to those also trusted with your source code.
@@ -118,6 +103,19 @@ Following are the system events that are logged. See `action` in the Field secti
 - **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 - **success:** A flag to indicate if the action was successful.
 - **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
+
+## Checklist To Using CircleCI Securely as a Customer
+
+If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
+
+- Minimise the number of secrets (private keys / environment variables) your build needs.
+- Ensure the secrets you _do_ use are of limited scope in their purpose for your build.
+- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). 
+- Use Restricted Contexts with Github Teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
+- Ensure you audit who has access to SSH keys in your organization.
+- Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)).
+- If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default.
+
 
 ## See Also
 {:.no_toc}
