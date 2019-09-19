@@ -225,7 +225,6 @@ Example Output:
 ```
 
 . For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1. Check which version you are running with `docker version` and if you need to update, follow these steps:
-// should there be a step to check Docker version first?
 +
 ```shell
 sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
