@@ -454,7 +454,7 @@ Class            | vCPUs | RAM
 4GPU*            | 64    | 488GiB
 {: class="table table-striped"}
 
-\*_Access to these resources must be reviewed by the CircleCI support team regardless of your current pricing plan. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
+\*_Access to these resources must be reviewed by the CircleCI support team. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
 
 Below is an example of specifying a `large` `resource_class` for Docker.
 
