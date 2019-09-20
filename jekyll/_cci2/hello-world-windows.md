@@ -228,7 +228,8 @@ Also, consider reading documentation on some of CircleCI’s features:
     * SDK 3.3.617.9590
     * Runtime 6.4.617.9590
 * OpenJDK 12.0.2
-* node.js v12.8.0
+* Node.js v12.8.0
+* NVM (Node Version Manager)
 * Ruby 2.6.3
 * Go 1.12.7
 * Text editors
