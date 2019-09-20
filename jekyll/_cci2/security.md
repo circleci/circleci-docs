@@ -109,7 +109,7 @@ Following are the system events that are logged. See `action` in the Field secti
 If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
 
 - Minimise the number of secrets (private keys / environment variables) your build needs.
-- Ensure the secrets you _do_ use are of limited scope in their purpose for your build.
+- Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build.
 - Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). 
 - Use Restricted Contexts with Github Teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
 - Ensure you audit who has access to SSH keys in your organization.
