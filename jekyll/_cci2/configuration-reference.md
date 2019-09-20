@@ -406,25 +406,57 @@ A job that was not executed due to configured rules will show up in the list of 
 
 **Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+It is possible to configure CPU and RAM resources for each job. If `resource_class` is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below. 
 
-Class       | vCPUs       | RAM
-------------|-----------|------
-small       | 1 | 2GB
-medium (default) | 2 | 4GB
-medium+     | 3 | 6GB
-large       | 4 | 8GB
-xlarge      | 8 | 16GB
-2XL         | 16 | 32GB
-2XL+        | 20 | 40GB
-1GPU        | 16 | 122GiB
-2GPU        | 32 | 244GiB
-4GPU        | 64 | 488GiB
+##### Docker Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+small            | 1     | 2GB
+medium (default) | 2     | 4GB
+medium+          | 3     | 6GB
+large            | 4     | 8GB
+xlarge\*         | 8     | 16GB
+2XL\*            | 16    | 32GB
+2XL+\*           | 20    | 40GB
 {: class="table table-striped"}
 
-**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.
+##### Machine Executor (Linux)
 
-Below is an example of specifying the `large` `resource_class`.
+Class            | vCPUs | RAM
+-----------------|-------|-----
+medium (default) | 2     | 7.5GB
+large*           | 4     | 15GB
+{: class="table table-striped"}
+
+##### MacOS Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+small            | 2     | 4GB
+medium (default) | 4     | 8GB
+large*           | 8     | 16GB
+{: class="table table-striped"}
+
+##### Windows Executor
+
+Class             | vCPUs | RAM
+------------------|-------|-----
+medium (default)* | 4     | 15GB
+
+
+##### GPU (Linux) Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+1GPU*            | 16    | 122GiB
+2GPU*            | 32    | 244GiB
+4GPU*            | 64    | 488GiB
+{: class="table table-striped"}
+
+\*_Access to these resources must be reviewed by the CircleCI support team regardless of your current pricing plan. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
+
+Below is an example of specifying a `large` `resource_class` for Docker.
 
 ```yaml
 jobs:
