@@ -1201,6 +1201,50 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
+##### **`when` in Workflows**
+
+## Using 'when' in Workflows
+
+When using CircleCI API v2, you may use a `when` clause (the inverse clause is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
+
+The example below shows an example configuration using two different pipeline parameters. You may use one of the parameters to drive whether a particular workflow, while you may use the other parameter determines whether a particular step will run.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+  deploy:
+    type: boolean
+    default: false
+
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+      - when:
+          condition: << pipeline.parameters.deploy >>
+          steps:
+            - deploy
+
+jobs:
+...
+```
+ 
+This example prevents the workflow `integration_tests` from being triggered unless the tests were invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+```
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
+```
+
 ###### *Example*
 
 ```
