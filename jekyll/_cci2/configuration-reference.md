@@ -417,8 +417,6 @@ medium (default) | 2     | 4GB
 medium+          | 3     | 6GB
 large            | 4     | 8GB
 xlarge           | 8     | 16GB
-2xlarge\*        | 16    | 32GB
-2xlarge+\*       | 20    | 40GB
 {: class="table table-striped"}
 
 ##### Machine Executor (Linux)
@@ -429,7 +427,7 @@ medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
 {: class="table table-striped"}
 
-##### MacOS Executor
+##### macOS Executor
 
 Class            | vCPUs | RAM
 -----------------|-------|-----
@@ -442,16 +440,6 @@ large*           | 8     | 16GB
 Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
-
-
-##### GPU (Linux) Executor
-
-Class            | vCPUs | RAM
------------------|-------|-------
-1GPU*            | 16    | 122GiB
-2GPU*            | 32    | 244GiB
-4GPU*            | 64    | 488GiB
-{: class="table table-striped"}
 
 \*_Requires review. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
 
