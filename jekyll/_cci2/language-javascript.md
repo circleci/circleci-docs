@@ -14,12 +14,12 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 
 ## Quickstart: Demo JavaScript Node.js Reference Project
 
-We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.0:
+We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.1:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - [Demo JavaScript Node Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
-In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Node projects.
+In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.1 with Node projects.
 
 ## Pre-Built CircleCI Docker Images
 
@@ -42,13 +42,13 @@ Following is the `.circleci/config.yml` file in the demo project with comments.
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
-      - image: mongo:3.4.4 # and this image as the secondary service container
+      - image: circleci/node:10.16.3 # ...with this image as the primary container; this is where all `steps` will run
+      - image: mongo:4.2.0 # and this image as the secondary service container
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
@@ -56,12 +56,12 @@ jobs: # a collection of steps
           command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm-wee
           command: npm install
       - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run: # run tests
@@ -92,7 +92,7 @@ This key is used
 to issue warnings about breaking changes.
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
 A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
@@ -171,7 +171,7 @@ and upload the test results as an artifact (made available on the CircleCI web a
           path: test-results.xml
 ```
 
-Success! You just set up CircleCI 2.0 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.1 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See Also
 {:.no_toc}
