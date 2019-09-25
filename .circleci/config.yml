@@ -110,7 +110,7 @@ jobs:
           command: |
             cd src-api; rm -r build; rm source/index.html.md
             curl https://circleci.com/api/v2/openapi.json > openapi.json
-            node node_modules/widdershins/widdershins.js --search false --language_tabs 'shell:Curl' 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' --summary openapi.json -o source/index.html.md
+            node node_modules/widdershins/widdershins.js --environment ../widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
             bundle exec middleman build --clean
             cp -R build/* ../jekyll/_api/v2
 
