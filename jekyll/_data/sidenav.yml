@@ -83,6 +83,8 @@ en:
           link: 2.0/orb-intro/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
+        - name: Orbs Best Practices
+          link: 2.0/orbs-best-practices/
         - name: Orbs Concepts
           link: 2.0/using-orbs/
         - name: Orbs Reference
