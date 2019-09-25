@@ -7,17 +7,7 @@ categories: [optimization]
 order: 60
 ---
 
-If your project has a large number of tests,
-it will need more time to run them on one machine.
-To reduce this time,
-you can run tests in parallel
-by spreading them across multiple machines.
-This requires specifying a parallelism level.
-You can use either the CircleCI CLI
-to split test files,
-or use environment variables
-to configure each parallel machine
-individually.
+If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can run tests in parallel by spreading them across multiple machines. This requires specifying a parallelism level. You can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
 
 * TOC
 {:toc}
@@ -25,12 +15,9 @@ individually.
 ## Specifying a Job's Parallelism Level
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file.
-The `parallelism` key specifies
-how many independent executors will be set up
-to run the steps of a job.
+The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
-To run a job's steps in parallel,
-set the `parallelism` key to a value greater than 1.
+To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -41,6 +28,8 @@ jobs:
       - image: circleci/<language>:<version TAG>
     parallelism: 4
 ```
+
+![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
 For more information,
 see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
@@ -177,7 +166,7 @@ by using the `--timings-type` flag.
 If you need to manually store and retrieve timing data,
 use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
 
-## Using Environment Variables to Split Tests 
+## Using Environment Variables to Split Tests
 
 For full control over parallelism,
 CircleCI provides two environment variables
