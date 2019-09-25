@@ -4,4 +4,20 @@ language_tabs:
   - python: Python
   - javascript: JavaScript
   - go: Go
+tagGroups:
+- title: User
+  tags:
+  - User
+- title: Project
+  tags:
+  - Project
+- title: Pipeline
+  tags:
+  - Pipeline
+- title: Job
+  tags:
+  - Job
+- title: Workflow
+  tags:
+  - Workflow
 search: false
