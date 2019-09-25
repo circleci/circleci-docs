@@ -1,0 +1,7 @@
+language_tabs:
+  - shell: Curl
+  - ruby: Ruby
+  - python: Python
+  - javascript: Javascript
+  - go: Go
+search: false
