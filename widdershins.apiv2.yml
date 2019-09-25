@@ -1,5 +1,5 @@
 language_tabs:
-  - shell: Curl
+  - shell: cURL
   - ruby: Ruby
   - python: Python
   - javascript: Javascript
