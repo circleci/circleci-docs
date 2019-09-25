@@ -415,14 +415,15 @@ medium (default) | 2 | 4GB
 medium+     | 3 | 6GB
 large       | 4 | 8GB
 xlarge      | 8 | 16GB
-2XL         | 16 | 32GB
-2XL+        | 20 | 40GB
-1GPU        | 16 | 122GiB
-2GPU        | 32 | 244GiB
-4GPU        | 64 | 488GiB
 {: class="table table-striped"}
 
-**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.
+<!--2XL         | 16 | 32GB-->
+<!--2XL+        | 20 | 40GB-->
+<!--1GPU        | 16 | 122GiB-->
+<!--2GPU        | 32 | 244GiB-->
+<!--4GPU        | 64 | 488GiB-->
+
+<!--**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.-->
 
 Below is an example of specifying the `large` `resource_class`.
 
@@ -603,7 +604,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ###### Ending a Job from within a `step`
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
+A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
