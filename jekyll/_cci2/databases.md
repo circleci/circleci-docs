@@ -21,7 +21,13 @@ The following example shows a 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.
 
 ## PostgreSQL Database Testing Example
 
-In the primary image the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built circleci image includes a database and a user already. The username is `root` and database is `circletest`. So, you can begin with using that user and database without having to set it up yourself. 
+In the primary image the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built circleci image includes a database and a user already. The username is `postgres` and database is `circletest`. So, you can begin with using that user and database without having to set it up yourself. 
+
+Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
+
+          - image: circleci/postgres:9.6-alpine
+            environment:
+              POSTGRES_USER: postgres
 
 This Postgres image in the example is slightly modified already with `-ram` at the end. It runs in-memory so it does not  hit the disk and that will significantly improve the testing performance on this PostgreSQL database by using this image.
 
