@@ -417,13 +417,13 @@ large       | 4 | 8GB
 xlarge      | 8 | 16GB
 {: class="table table-striped"}
 
-<!--2XL         | 16 | 32GB-->
-<!--2XL+        | 20 | 40GB-->
+<!--2xlarge     | 16 | 32GB-->
+<!--2xlarge+    | 20 | 40GB-->
 <!--1GPU        | 16 | 122GiB-->
 <!--2GPU        | 32 | 244GiB-->
 <!--4GPU        | 64 | 488GiB-->
 
-<!--**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.-->
+<!--**Note:** Approval from the CircleCI support team is required to gain access to the 2xlarge, 2xlarge+, and GPU resource classes.-->
 
 Below is an example of specifying the `large` `resource_class`.
 
