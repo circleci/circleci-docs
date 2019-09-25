@@ -417,23 +417,60 @@ medium (default) | 2     | 4GB
 medium+          | 3     | 6GB
 large            | 4     | 8GB
 xlarge           | 8     | 16GB
+2xlarge\*        | 16    | 32GB
+2xlarge+\*       | 20    | 40GB
 {: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    resource_class: xlarge
+    steps:
+      ... // other config
+```
 
 ##### Machine Executor (Linux)
 
 Class            | vCPUs | RAM
------------------|-------|------
+-----------------|-------|-------
 medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
+1GPU\*           | 16    | 122GiB
+2GPU\*           | 32    | 244GiB
+4GPU\*           | 64    | 488GiB
 {: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: 1GPU
+    steps:
+      ... // other config
+```
 
 ##### macOS Executor
 
 Class            | vCPUs | RAM
 -----------------|-------|-----
 medium (default) | 4     | 8GB
-large*           | 8     | 16GB
+large\*          | 8     | 16GB
 {: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    macos:
+      xcode: "11.0.0"
+    resource_class: large
+    steps:
+      ... // other config
+```
 
 ##### Windows Executor
 
@@ -441,23 +478,18 @@ Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
 
-\*_Requires review. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
-
-Below is an example of specifying a `large` `resource_class` for Docker.
-
+###### Example Usage
 ```yaml
 jobs:
   build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
+    macos:
+      xcode: "11.0.0"
     resource_class: large
     steps:
-      - run: make test
-      - run: make
+      ... // other config
 ```
+
+\*_Requires review. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
