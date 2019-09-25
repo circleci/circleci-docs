@@ -128,7 +128,6 @@ Partner Orb Registry Link | Orb Reference String
 
 **Note:**  As a prerequisite, you must enable use of 3rd-party orbs on the Settings > Security page for your org.
 
-**Note:** To unlist your published orbs from the registry, use the new circleci orb unlist CLI command. For details, refer to the [help page](https://circleci-public.github.io/circleci-cli/circleci_orb_unlist.html). Unlisted orbs remain world-readable when referenced by name but will not appear in the search results of the orb registry. Unlisted orbs can be listed again using the circleci orb unlist <namespace/orb> false command.
 
 ## Authoring Your Own Orb
 
