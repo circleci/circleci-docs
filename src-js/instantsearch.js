@@ -1,6 +1,10 @@
 import * as debounce from 'lodash.debounce';
 import * as get from 'lodash.get';
 
+const ALGOLIA_APP_ID     = window.circleJsConfig.algolia.appId;
+const ALGOLIA_API_KEY    = window.circleJsConfig.algolia.apiKey;
+const ALGOLIA_INDEX_NAME = window.circleJsConfig.algolia.indexName;
+
 const formatResultSnippet = (snippet) => {
   const title = get(snippet, ['title', 'value'], '(untitled)');
   const content = get(snippet, ['content', 'value'], '');
@@ -14,9 +18,9 @@ const formatResultSnippet = (snippet) => {
 // Instant search initialization
 export function init () {
   var search = instantsearch({
-    appId: 'U0RXNGRK45',
-    apiKey: 'dd49f5b81d238d474b49645a4daed322', // search-only API Key; safe for front-end code
-    indexName: 'documentation',
+    appId:     ALGOLIA_APP_ID,
+    apiKey:    ALGOLIA_API_KEY,
+    indexName: ALGOLIA_INDEX_NAME,
     routing: true,
     searchParameters: { hitsPerPage: 25 }
   });

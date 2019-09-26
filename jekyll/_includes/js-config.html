@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  window.circleJsConfig = {
+    algolia: {
+      appId:     {{ site.algolia.application_id | jsonify }},
+      apiKey:    {{ site.algolia.api_key | jsonify }},
+      indexName: {{ site.algolia.index_name | jsonify }}
+    }
+  }
+</script>
