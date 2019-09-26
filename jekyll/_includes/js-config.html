@@ -4,6 +4,9 @@
       appId:     {{ site.algolia.application_id | jsonify }},
       apiKey:    {{ site.algolia.api_key | jsonify }},
       indexName: {{ site.algolia.index_name | jsonify }}
+    },
+    page: {
+      lang: {{ page.lang | jsonify }}
     }
   }
 </script>
