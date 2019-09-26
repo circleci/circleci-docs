@@ -482,9 +482,10 @@ medium (default)  | 4     | 15GB
 ```yaml
 jobs:
   build:
-    macos:
-      xcode: "11.0.0"
-    resource_class: large
+    machine:
+      image: windows-server-2019-vs2019:201908-06
+    resource_class: windows.medium
+    shell: powershell.exe -ExecutionPolicy Bypass
     steps:
       ... // other config
 ```
