@@ -232,7 +232,7 @@ Orb のオーサーとして、CircleCI コンフィグファイルで Orb を�
 
 Orb のオーサリングを完了し、パブリッシュすると、その Orb は [Orb レジストリ](https://circleci.com/orbs/registry/)にパブリッシュされます。 以下のように、新しく作成された Orb が Orb レジストリに表示されます。
 
-![Orbs レジストリの画像]({{ site.baseurl }}/assets/img/docs/Orbs-Registry.png)
+![Orbs レジストリの画像]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
 
 ### 単純な例
 

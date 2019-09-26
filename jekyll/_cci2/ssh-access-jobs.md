@@ -23,9 +23,7 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
 
-3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect:
-![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/57f50e26ec245d0373c4265ec4375641553bdbdb_1_690x295.png)
-![SSH connection details](https://circleci-discourse.s3.amazonaws.com/optimized/2X/5/514e8aec3e8017dac8e8d401d22432026b473161_1_690x281.png)
+3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect.
 
      The details are displayed again in the 'Wait for SSH' section at the end of the job.
 

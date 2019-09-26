@@ -13,11 +13,11 @@ Before working with orbs, you may find it helpful to gain a high-level understan
 
 ### Step 1 - Set Up the CircleCI CLI
 
-Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Detailed instructions can be found in the [Get the new CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#get-the-new-circleci-cli) section on this page.
+Although it is possible to CI/CD orb publishing using the [`orbs-tool`](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) orb, the most direct and iterable way to build, publish, and test orbs is by using our CLI. Follow the steps below to install and then configure the CircleCI CLI.
 
-* [Download and Install the CircleCI CLI](https://circleci.com/docs/2.0/creating-orbs/#installing-the-cli-for-the-first-time).
-* [Update the CLI](https://circleci.com/docs/2.0/creating-orbs/#updating-the-circleci-cli-after-installation).
-* [Configure the CLI](https://circleci.com/docs/2.0/creating-orbs/#configuring-the-circleci-cli).
+* [Install the CircleCI CLI](https://circleci.com/docs/2.0/orb-author-cli/#install-the-cli-for-the-first-time).
+* [Update the CLI](https://circleci.com/docs/2.0/orb-author-cli/#update-the-cli).
+* [Configure the CLI](https://circleci.com/docs/2.0/orb-author-cli/#configure-the-circleci-cli).
 
 ### Step 2 - Verify You Installed the CLI Correctly
 

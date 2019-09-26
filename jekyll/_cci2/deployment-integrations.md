@@ -148,7 +148,7 @@ This orb enables you to log into AWS, build, and then push image to Amazon ECR.
 
 ```
 orbs:
-  aws-ecr: circleci/aws-ecr@1.0.0
+  aws-ecr: circleci/aws-ecr@0.0.10
 version: 2.1
 workflows:
   build_and_push_image:

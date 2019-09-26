@@ -284,7 +284,6 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 - Using scheduled workflows
 - Machine users
 
-
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
 #### What happens when I run out of credits?
@@ -337,6 +336,10 @@ Yes, the billing is associated with the organization. You can buy while within t
 #### What is the definition of a container in the context of billing?
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+#### Why am I being charged for remote Docker spin up time? 
+{:.no_toc}
+When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
 
 ---
 

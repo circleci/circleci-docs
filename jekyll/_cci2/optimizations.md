@@ -75,7 +75,7 @@ jobs: # here we define two jobs: "build" and "test"
 workflows: # Here we can orchestrate our jobs into a workflow
   version: 2
   build_and_test: # A single workflow named "build_and_test"
-    jobs: # we run our `build` job and `test` job in sequence.
+    jobs: # we run our `build` job and `test` job in parallel.
       - build
       - test
 ```
