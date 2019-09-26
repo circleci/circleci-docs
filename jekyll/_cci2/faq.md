@@ -315,6 +315,11 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
 
+#### Are there credit plans for open source projects?
+{:.no_toc}
+
+Open source organizations receive 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of 4 concurrent jobs running.
+
 ---
 
 ### Container Based Plans
