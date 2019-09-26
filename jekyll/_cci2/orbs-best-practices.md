@@ -85,7 +85,7 @@ When possible, use defaults for parameters unless a user input is essential. Uti
 - Minor: Add new features (backwards compatible)
 - Patch: Minor bug fixes, metadata updates, or other safe actions.
 
-View our Orb Deployment best practices here: [https://docs.google.com/document/d/1MqQCo8aeYjvGJAa0v60L2FJelLFjWP1IgkWuBfMiC3c](https://docs.google.com/document/d/1MqQCo8aeYjvGJAa0v60L2FJelLFjWP1IgkWuBfMiC3c) [NOT COMPLETE]
+View our Orb Deployment best practices here: [coming soon]
 
 This section is handled automatically via the Orb Starter Kit.
 
