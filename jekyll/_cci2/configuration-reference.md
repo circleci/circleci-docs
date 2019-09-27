@@ -404,9 +404,11 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-**Note:** The `resource_class` feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to speak with a CircleCI Sales representative about enabling this feature on your account.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below. 
 
-It is possible to configure CPU and RAM resources for each job. If `resource_class` is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below. 
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
+
+**Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
 
 ##### Docker Executor
 
@@ -490,7 +492,7 @@ jobs:
       ... // other config
 ```
 
-\*_Requires review. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
+\*_Requires review by support team. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
