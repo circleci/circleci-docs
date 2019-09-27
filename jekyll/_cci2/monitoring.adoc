@@ -12,15 +12,11 @@ toc::[]
 
 == System Monitoring
 
-To enable system and Docker metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice (your-circleci-hostname.com:8800/settings#cloudwatch_metrics).
-
-// Can this just say 'metrics' rather than system and Docker metrics?
+To enable metrics forwarding to either AWS Cloudwatch or Datadog, navigate to your CircleCI Management Console, select Settings from the menu bar and scroll down to enable the provider of your choice (your-circleci-hostname.com:8800/settings#cloudwatch_metrics).
 
 === VM Service and Docker Metrics
 
-VM Host and Docker services metrics are forwarded via https://github.com/influxdata/telegraf[Telegraf], a plugin-driven server agent for collecting and reporting metrics.
-
-// what is meant by VM Host here? Does this actually mean metics for the Services Machine?
+VM Service and Docker services metrics are forwarded via https://github.com/influxdata/telegraf[Telegraf], a plugin-driven server agent for collecting and reporting metrics.
 
 Following are the enabled metrics:
 
@@ -33,8 +29,6 @@ Following are the enabled metrics:
 === Nomad Job Metrics
 
 https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad job metrics] are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
-
-// Do customers get these metics in Cloudwatch/Datadog too?
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -60,10 +54,8 @@ https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad job me
 |===
 
 When the Nomad metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
-// What is meant by Standard Output and Standard Error?
 
 === CircleCI Metrics
-// This title isn't write I don't think, but not sure what to call them?
 
 [.table.table-striped]
 [cols=2*, stripes=even]
@@ -241,9 +233,7 @@ Env="<staging-circleci>"
 
 Please see the InfluxDB https://github.com/influxdata/influxdb#installation[documentation] for default and advanced installation steps.
 
-NOTE: Any changes to the config will require a restart of the system.
-
-//what system? the whole CircleCI system? incurring downtime?
+CAUTION: Any changes to the config will require a restart of the CircleCI application which will require downtime.
 
 // Extra Metics info not currently included
 ////
