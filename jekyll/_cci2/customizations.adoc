@@ -155,7 +155,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 +
-WARNING: It is important to use the IDs listen in the example below for the `machine` resources classes. IDs can, however, be changed for Docker resource classes.
+WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resources classes. 
 . Run:
 +
 ```shell

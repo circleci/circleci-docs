@@ -67,12 +67,12 @@ You will need to associate the `circleci` user with the image you want to use as
 To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings accessible from the Management console (for example, `<your-circleci-id>.com:8800`).
 
 == Defining Instance Types
-// Here I need to tell people to enable the new machine large resource, and then enter instance types to use for default and large - but how does instance type correspond to the CPU/RAM stuff we have defined in picard-dispatcher for this release? Are "Instance type" and "CPU/RAM requirements" totally separate in this context?
+There are two fields for defining the instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.
 
 == On Demand and Preallocated Instances
 Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 9).
 
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances must be spun up on-demand. To ensure this can happen, either you need to ensure any preallocated instances are in use, or you should set both remote Docker and `machine` preallocated instance fields to `0`.
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 
 NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
 
