@@ -440,9 +440,6 @@ Class            | vCPUs | RAM
 -----------------|-------|-------
 medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
-1GPU\*           | 16    | 122GiB
-2GPU\*           | 32    | 244GiB
-4GPU\*           | 64    | 488GiB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -450,7 +447,7 @@ large            | 4     | 15GB
 jobs:
   build:
     machine: true
-    resource_class: 1GPU
+    resource_class: large
     steps:
       ... // other config
 ```
@@ -488,6 +485,25 @@ jobs:
       image: windows-server-2019-vs2019:201908-06
     resource_class: windows.medium
     shell: powershell.exe -ExecutionPolicy Bypass
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Linux)
+
+Class            | vCPUs | RAM
+-----------------|-------|-------
+1GPU\*           | 16    | 122GiB
+2GPU\*           | 32    | 244GiB
+4GPU\*           | 64    | 488GiB
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: 1GPU
     steps:
       ... // other config
 ```
