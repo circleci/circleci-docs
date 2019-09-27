@@ -21,7 +21,7 @@ image::vm-service.png[Configuring VM Service on CircleCI Server]
 
 == Configuration
 
-CAUTION: Any changes to management console settings requires downtime while the CircleCI application restarts.
+CAUTION: Any changes to management console settings require downtime while the CircleCI application restarts.
 
 To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings. This will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
 
