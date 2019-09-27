@@ -491,11 +491,11 @@ jobs:
 
 ##### GPU Executor (Linux)
 
-Class            | vCPUs | RAM
------------------|-------|-------
-1GPU\*           | 16    | 122GiB
-2GPU\*           | 32    | 244GiB
-4GPU\*           | 64    | 488GiB
+Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
+-----------------|-------|--------------|------|-----------------
+gpu.small\*      | 16    | 122GiB        | 1    | 8
+gpu.medium\*     | 32    | 244GiB       | 2    | 16
+gpu.large\*      | 64    | 488GiB       | 4    | 32
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -503,7 +503,7 @@ Class            | vCPUs | RAM
 jobs:
   build:
     machine: true
-    resource_class: 1GPU
+    resource_class: gpu.small
     steps:
       ... // other config
 ```
