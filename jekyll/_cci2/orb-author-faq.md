@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orb Author FAQ"
 short-title: "Orb Author FAQ"
-description: "FAQs for Orb authors"
+description: "Frequently asked questions from orb authors."
 categories: [configuring-jobs]
 order: 20
 ---
@@ -14,7 +14,7 @@ This document describes various questions and technical issues that you may find
 
 
 
-### Errors Claiming Namespace Or Publishing Orbs
+## Errors Claiming Namespace Or Publishing Orbs
 
 * Question: I recieve an error when attempting to claim a namespace or publish a production orb.
 
@@ -31,26 +31,26 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickstart).
 
 
-### Secure API Tokens
+## Secure API Tokens
 
 * Question: How do I protect user's API tokens from being commited to their config?
 
-* Answer: Utilize the "env_var_name" parameter type for the API key parameter. This parameter type will only accept PSIX valid environment variable name strings as valid. In the parameter description it is best to mention to the user to add this environment variable. 
+* Answer: Utilize the "env_var_name" parameter type for the API key parameter. This parameter type will only accept POSIX valid environment variable name strings as valid. In the parameter description it is best to mention to the user to add this environment variable. 
 
 Read more:
 * [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-### Environment Variables
+## Environment Variables
 
-* Question: How can I require a user to add an environment variables?
+* Question: How can I require a user to add an environment variable?
 * Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change, and assign it the correct default value. In the parameter description let the user know if this value should not be changed. In either event instruct the user where they can obtain their API key. 
 
 Read more:
 * [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-### Supported Programming Languages
+## Supported Programming Languages
 
 * Question: What programming language can I write my orb in?
 * Answer: Orbs are packages of [CircleCI YAML config]({{site.baseurl}}/2.0/configuration-reference/) language. CircleCI config may contain commands that are issued against a given [Executor]({{site.baseurl}}/2.0/executor-intro/).
@@ -59,7 +59,7 @@ CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-co
 
 **Bash**
 
-Bash is the preferred language as it is most commonly available among all available executors. Bash can be (and should) easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell MacOS and Linx will be Bash.
+Bash is the preferred language as it is most commonly available among all available executors. Bash can be (and should) easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell MacOS and Linux will be Bash.
 
 **Interactive Interpreter (Ex: Python)**
 
