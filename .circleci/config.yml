@@ -14,7 +14,7 @@ references:
 
 
 commands:
-  ruby_deps:
+  ruby-deps:
     description: "Runs specialized Ruby cache steps."
     steps:
       - restore_cache:
@@ -63,7 +63,7 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
-      - ruby_deps
+      - ruby-deps
       # - restore_cache:
       #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       # - run:
@@ -84,11 +84,10 @@ jobs:
           paths:
             - pdfs
 
-
-  build_api_v2:
-    executor:
-      name: ruby/default
-      tag: '2.6.3-node-browsers'
+  # build_api_v2:
+  #   executor:
+  #     name: ruby/default
+  #     tag: '2.6.3-node-browsers'
   # implement: static-documentation job: "build_api_docs"
 
   build: # better name?
@@ -108,7 +107,7 @@ jobs:
       - run:
           name: "Test Markdown Files"
           command: ./scripts/test-markdown.sh
-      - ruby_deps
+      - ruby-deps
       # - restore_cache:
       #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       # - run:
