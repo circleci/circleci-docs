@@ -1,72 +1,75 @@
 ---
 layout: classic-docs
-title: "Language Guide: Crystal"
+title: "言語ガイド：Crystal"
 short-title: "Crystal"
-description: "Building and Testing with Crystal on CircleCI 2.0"
+description: "CircleCI 2.0 での Crystal を使用したビルドとテスト"
 categories:
   - language-guides
 order: 9
 ---
-*[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Crystal*
 
-This guide will help you get started with a minimal Crystal application on CircleCI.
+*[チュートリアル & 2.0 サンプルアプリケーション]({{ site.baseurl }}/ja/2.0/tutorials/) > 言語ガイド：Crystal*
+
+このガイドでは、CircleCI で最小限の Crystal アプリケーションを作成する方法について説明します。
 
 ## 概要
 
-If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
+お急ぎの場合は、以下の設定例をプロジェクトの root ディレクトリにある `.circleci/config.yml` にコピーし、ビルドを開始してください。
 
-You can view an example Crystal project at the following link:
+Crystal プロジェクトのサンプルは以下のリンクで確認できます。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
-target="_blank">Demo Crystal Project on GitHub</a>
+target="_blank">GitHub 上の Crystal デモプロジェクト</a>
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
-The application uses Crystal 0.27 and Kemal 0.25. Both Crystal and Kemal are developing quickly. Altering the Docker image to the `:latest` version may cause breaking changes.
+このアプリケーションでは Crystal 0.27 と Kemal 0.25 を使用しています。 Crystal と Kemal は速いペースで開発が進められています。 Docker イメージを `:latest` バージョンに変更すると、互換性を損なう変更が発生する可能性があります。
 
-## Sample Configuration
+## 設定例
 
 {% raw %}
+
 ```yaml
-version: 2 # use CircleCI 2.0
-jobs: # a collection of jobs
+version: 2 # CircleCI 2.0 を使用します
+jobs: # ジョブの集合
   build: 
     working_directory: ~/demo_app
-    docker: # run build steps with docker
+    docker: # Docker でビルドステップを実行します
 
-      - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
-    steps: # a collection of executable steps
-      - checkout # checks out source code to working directory
-      - restore_cache: # Restore dependency cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - image: crystallang/crystal:0.27.0 # すべての `steps` が実行されるプライマリ Docker コンテナ
+    steps: # 実行可能ステップの集合
+      - checkout # ソースコードを作業ディレクトリにチェックアウトします
+      - restore_cache: # 依存関係キャッシュを復元します
+      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: Install dependencies.
+          name: 依存関係をインストール
           command: shards install
-      - save_cache: # Step to save dependency cache
+      - save_cache: # 依存関係キャッシュを保存するステップ
           key: dependency-cache-{{ checksum "shard.lock" }}
           paths:
             - ./lib
       - run:
-          name: test
+          name: テスト
           command: crystal spec
-# See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
+# デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください    
 ```
+
 {% endraw %}
 
-## Config Walkthrough
+## 設定の詳細
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2
 ```
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-The steps of a job occur in a virtual environment called an \[executor\]({{ site.baseurl }}/2.0/executor-types/). In this example, we use the [official Crystal Docker image](https://hub.docker.com/r/crystallang/crystal/) as our primary container. All commands for a job execute in this container.
+ジョブのステップは \[Executor\]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。 この例では、[公式 Crystal Docker イメージ](https://hub.docker.com/r/crystallang/crystal/)がプライマリコンテナとして使用されています。 ジョブのすべてのコマンドは、このコンテナで実行されます。
 
 ```yaml
 jobs:
@@ -76,17 +79,18 @@ jobs:
       - image: crystallang/crystal:0.27.0
 ```
 
-After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソースコードがチェックアウトされます。
 
-To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
+実行の間隔を短縮するには、[依存関係またはソースコードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the installed packages ("Shards") are cached.
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、インストールされたパッケージ ("Shards") がキャッシュされます。
 
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories. In this example, we use a checksum of the `shard.lock` file to determine if the dependency cache has changed.
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。 この例では、`shard.lock` ファイルのチェックサムを使用して、依存関係キャッシュが変更されているかどうかを判断します。
 
 {% raw %}
+
 ```yaml
     steps: #
 
@@ -94,25 +98,26 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
       - restore_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: Install dependencies.
+          name: 依存関係をインストール
           command: shards install
       - save_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
           paths:
             - ./lib
 ```
+
 {% endraw %}
 
-Finally, we run `crystal spec` to run the project's test suite.
+最後に `crystal spec` を実行して、プロジェクトのテストスイートを実行します。
 
 ```yaml
       - run:
-          name: test
+          name: テスト
           command: crystal spec
 ```
 
-Great! You've set up CircleCI 2.0 for a basic Crystal application.
+完了です。 これで基本的な Crystal アプリケーション用に CircleCI 2.0 を設定できました。
 
 ## デプロイ
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
