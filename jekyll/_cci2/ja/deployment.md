@@ -1,18 +1,19 @@
 ---
 layout: classic-docs
-title: "Deployment"
-short-title: "Deployment"
+title: "デプロイ"
+short-title: "デプロイ"
 ---
-CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integrations/) to virtually any service.
+
+CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)するように設定できます。
 
 ## Amazon Web Services
 
         steps:
           - run:
-              name: Install awscli
+              name: awscli をインストール
               command: sudo pip install awscli
           - run:
-              name: Deploy to S3
+              name: S3 にデプロイ
               command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
     
 
@@ -20,26 +21,26 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
         steps:
           - run:
-              name: Setup CF CLI
+              name: CF CLI をセットアップ
               command: |
                 curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
                 sudo dpkg -i cf-cli_amd64.deb
                 cf -v
-                cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
+                cf api https://api.run.pivotal.io  # または、プライベート Cloud Foundry デプロイをターゲットにします
                 cf auth "$CF_USER" "$CF_PASSWORD"
                 cf target -o "$CF_ORG" -s "$CF_SPACE"
           - run:
-              name: Re-route live Domain to latest
+              name: live ドメインを最新に再ルーティングする
               command: |
-                # Send "real" url to new version
+                # "実際の" URL を新バージョンに送信します
                 cf map-route app-name-dark example.com -n www
-                # Stop sending traffic to previous version
+                # 以前のバージョンへのトラフィックを停止します
                 cf unmap-route app-name example.com -n www
-                # stop previous version
+                # 以前のバージョンを停止します
                 cf stop app-name
-                # delete previous version
+                # 以前のバージョンを削除します
                 cf delete app-name -f
-                # Switch name of "dark" version to claim correct name
+                # "dark" バージョンの名前を正しい名前に切り替えます
                 cf rename app-name-dark app-name      
     
 
@@ -47,7 +48,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
         steps:
           - run:
-              name: Deploy Master to Firebase
+              name: Master を Firebase にデプロイ
               command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
     
 
@@ -56,7 +57,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
         steps:
           - checkout
           - run:
-              name: Deploy Master to Heroku
+              name: Master を Heroku にデプロイ
               command: |
                 git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
     
@@ -65,15 +66,18 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
         steps:
           - checkout
-          - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          - run: npm publish
+          - run: 
+              name: Publish to NPM
+              command: | 
+                npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+                npm publish
     
 
 ## SSH
 
         steps:
           - run:
-              name: Deploy Over SSH
+              name: SSH を介してデプロイ
               command: |
                 ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
     
@@ -82,7 +86,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
         steps:
           - run:
-              name: "Publish to Store"
+              name: "ストアにパブリッシュ"
               command: |
                 mkdir .snapcraft
                 echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
@@ -93,12 +97,12 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
         steps:
           - run:
-              name: Push to Artifactory
+              name: Artifactory にプッシュ
               command: |
                 ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
                 ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
-                ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
-                ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
+                ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # エージェント上のすべての環境変数を収集します
+                ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # artifactory 内のビルドに ^^ を付加します
     
 
-Use the above examples to get started with automating deployment of green builds to your desired targets.
+これらの例を使用して、目的のターゲットに対してグリーンビルドを自動的にデプロイしてみましょう。
