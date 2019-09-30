@@ -1,20 +1,24 @@
 ---
 layout: classic-docs
-title: "Using the API to Trigger Jobs"
-short-title: "Using the API to Trigger Jobs"
-description: "ビルド以外のジョブの定義およびトリガー方法"
+title: "API を使用したジョブのトリガー"
+short-title: "API を使用したジョブのトリガー"
+description: "ビルド以外のジョブを定義およびトリガーする方法"
 categories:
   - configuring-jobs
 order: 80
 ---
+
+
 This document describes how to trigger jobs using the CircleCI API.
 
-- TOC
+**Note:** Triggering jobs from the API is **not** supported with v2.1.
+
+- 目次
 {:toc}
 
-## Overview
+## 概要
 
-Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
+Use the [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
 The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
@@ -24,20 +28,26 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-Some notes on the variables used in this example: - `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token). - `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`). - `<org>` is a placeholder variable and refers to the name of your CircleCI organization. - `<repo>` is a placeholder variable and refers to the name of your repository. - `<branch>` is a placeholder variable and refers to the name of your branch.
+Some notes on the variables used in this example:
 
-For a complete reference of the API, see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
+- ここで使われている `` は [パーソナル API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)です。
+- `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`).
+- `<org>` is a placeholder variable and refers to the name of your CircleCI organization.
+- `<repo>` is a placeholder variable and refers to the name of your repository.
+- `<branch>` is a placeholder variable and refers to the name of your branch.
+
+For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/#section=reference).
 
 **Important Considerations When Triggering A Job Via The API**
 
-- Jobs triggered with the API may contain a `workflows` section
-- Your workflow does **not** have to reference the job you triggered with the API
-- Jobs that are triggered via the API do **not** have access to environment variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/) 
-    - If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
+- API によってトリガーされるジョブに `workflows` セクションが含まれてもかまいません。
+- ワークフローが、API によってトリガーされるジョブを参照する必要は**ありません**。
+- Jobs that are triggered via the API do **not** have access to environment variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/)
+- If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
 - It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
-- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project]({{ site.baseurl}}/api/v1-reference/#new-project-build) endpoint
+- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) endpoint
 
-## Conditionally Running Jobs With the API
+## API を使用したジョブの条件付き実行
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
@@ -69,6 +79,7 @@ jobs:
 
   deploy_docker:
     docker:
+
       - image: ruby:2.4.0-jessie
     working_directory: /
     steps:
@@ -78,9 +89,9 @@ jobs:
 
 Notes on the above example:
 
-- ビルドジョブの `deploy` ステップを必ず使用してください。これを使用しないと、並列処理の値が N の場合に、N 回のビルドがトリガーされることがあります。
-- API 呼び出しを `build_parameters[CIRCLE_JOB]=deploy_docker` で使用し、`deploy_docker` ジョブのみが実行されるようにします。
+- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
+- We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
 
-## See Also
+## 関連項目
 
 [Triggers]({{ site.baseurl }}/2.0/triggers/)
