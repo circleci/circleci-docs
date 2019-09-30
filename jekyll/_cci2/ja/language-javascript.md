@@ -1,54 +1,55 @@
 ---
 layout: classic-docs
-title: "Node.js - JavaScript Tutorial"
+title: "Node.js - JavaScript チュートリアル"
 short-title: "JavaScript"
-description: "Building and Testing with JavaScript and Node.js on CircleCI 2.0"
+description: "CircleCI 2.0 での JavaScript および Node.js を使用したビルドとテスト"
 categories:
   - language-guides
 order: 5
 ---
-This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.
 
-- TOC
+ここでは、Node.js サンプルアプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
+
+- 目次
 {:toc}
 
-## Quickstart: Demo JavaScript Node.js Reference Project
+## クイックスタート：デモ用の JavaScript Node.js リファレンスプロジェクト
 
-We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.0:
+We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.1:
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
-- [Demo JavaScript Node Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
+- <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">GitHub 上の JavaScript Node デモプロジェクト</a>
+- [CircleCI でビルドされた JavaScript Node デモプロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
-In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with Node projects.
+このプロジェクトには、CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 This file shows best practice for using CircleCI 2.1 with Node projects.
 
-## Pre-Built CircleCI Docker Images
+## CircleCI のビルド済み Docker イメージ
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Node version you need from Docker Hub: <https://hub.docker.com/r/circleci/node/>. The demo project uses an official CircleCI image.
+CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/node/>) から必要な Node バージョンを選択できます。 デモプロジェクトでは、公式 CircleCI イメージを使用しています。
 
-Database images for use as a secondary 'service' container are also available.
+セカンダリ「サービス」コンテナとして使用するデータベースイメージも提供されています。
 
-## Build the Demo JavaScript Node Project Yourself
+## JavaScript Node のデモプロジェクトのビルド
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモプロジェクトをビルドする方法を示します。
 
-1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
-3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
+1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
+2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-## Sample Configuration
+## 設定例
 
-Following is the `.circleci/config.yml` file in the demo project with comments.
+以下に、デモプロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 {% raw %}
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
 
-      - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
-      - image: mongo:3.4.4 # and this image as the secondary service container
+      - image: circleci/node:10.16.3 # ...with this image as the primary container; this is where all `steps` will run
+      - image: mongo:4.2.0 # and this image as the secondary service container
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
@@ -56,12 +57,12 @@ jobs: # a collection of steps
           command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm-wee
           command: npm install
       - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run: # run tests
@@ -84,21 +85,21 @@ jobs: # a collection of steps
 
 ##
 {% endraw %}
-## Config Walkthrough
+## 設定の詳細
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container). All commands for a job execute in this container.
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 リストの先頭にあるイメージがジョブの[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドは、このコンテナで実行されます。
 
 ```yaml
 jobs:
@@ -109,15 +110,15 @@ jobs:
       - image: mongo:3.4.4
 ```
 
-After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソースコードがチェックアウトされます。
 
-To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
+実行の間隔を短縮するには、[依存関係またはソースコードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, we cache `node_modules` using a checksum of the `package.json` as the cache-key.
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、`package.json` のチェックサムをキャッシュキーとして使用して、`node_modules` をキャッシュします。
 
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
 ```yaml
@@ -139,7 +140,7 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
 ```
 {% endraw %}
 
-Now that dependencies are installed we can run the test suite and upload the test results as an artifact (made available on the CircleCI web app).
+依存関係がインストールされたので、テストスイートを実行し、テスト結果をアーティファクトとしてアップロードできます (CircleCI Web アプリで使用できるようになります)。
 
 ```yaml
       - run:
@@ -158,11 +159,11 @@ Now that dependencies are installed we can run the test suite and upload the tes
           path: test-results.xml
 ```
 
-Success! You just set up CircleCI 2.0 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
+完了です。 You just set up CircleCI 2.1 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
-## See Also
+## 関連項目
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public JavaScript projects.
-- If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+- その他のパブリック JavaScript プロジェクトの設定例については、「[設定ファイルをローカルでテストする]({{ site.baseurl }}/ja/2.0/examples/)」を参照してください。
+- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
