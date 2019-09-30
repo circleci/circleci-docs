@@ -7,6 +7,7 @@ categories:
   - getting-started
 order: 41
 ---
+
 This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI 2.0.
 
 * 目次
@@ -22,7 +23,7 @@ This document provides a step-by-step tutorial for getting your first successful
 
 1. Navigate to your account on GitHub.com
   
-  * **[Repositories]** タブに移動し、 **[New]** を選択するか、<https://github.com/new> に直接移動します。 ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+  * Go to the **Repositories** tab and then select **New** or navigate directly to <https://github.com/new>. ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. [Initialize this repository with a README] にチェックを入れて、[Create repository] ボタンをクリックします。![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
 
@@ -34,28 +35,28 @@ CircleCI uses a [YAML](https://en.wikipedia.org/wiki/YAML) file to identify how 
 
 2. 単純な `config.yml` から始めたいときは、下記の内容を GitHub の編集画面にコピーしてください。
 
-```yml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-```
+    ```yml
+    version: 2
+    jobs:
+      build:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+    ```
 
-1. Commit the file by entering comments and clicking the Commit New File button. ![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
+3. Commit the file by entering comments and clicking the Commit New File button. ![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
 
 `- image: circleci/ruby:2.4.1` という部分は、プロジェクトをビルドする際にどの Docker イメージを使うか指定しているものです。 CircleCI は、イメージを使用して「コンテナ」を立ち上げます。コンテナとは、プロジェクトの実行に必要な言語、システムユーティリティ、依存関係、Web ブラウザー、ツールなどがインストールされる仮想コンピューティング環境です。
 
 ## Setting up Your Build on CircleCI
 
-1. For this step, you will need a CircleCI account. CircleCI の[ユーザー登録ページ](https://circleci.jp/signup)を開き、[GitHub でログイン] をクリックします。 You will need to give CircleCI access to your GitHub account to run your builds. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard).
+1. For this step, you will need a CircleCI account. If you already have a CircleCI account then you can navigate to your [dashboard](https://circleci.com/dashboard), or if you are using CircleCI Server substitute your hostname: `https://<your-circleci-hostname>.com/dashboard`. If you don't have an account yet, visit the CircleCI [signup page](https://circleci.com/signup) and click "Start with GitHub". You will need to give CircleCI access to your GitHub account to run your builds.
 
 2. 次に、CricleCI で既に構築され、自分がアクセス可能なプロジェクトを*フォローする*かどうかのオプションが表示されます (これは通常、会社や組織の GitHub アカウントを使用している開発者に表示されます)。 次の画面では、作成したリポジトリを、新しいプロジェクトとして CircleCI に追加できます。
 
-3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, find the repository you just created below, and click the **Setup project** button next to it. ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list, then click the **Set Up project** button next to it. ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
 4. さらに次の画面ではプロジェクトに関する設定が可能です。 Leave everything as-is for now and just click the **Start building** button a bit down the page on the right. ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
 
@@ -81,55 +82,55 @@ You should see your build start to run automatically—and pass! So, what just h
 
 1. Workflows の動作を見るには、`.circleci/config.yml` ファイルを編集します。 ブラウザーのウィンドウでファイルを編集モードにしてから、ファイル内で `build` とそれ以後のテキストを選択し、コピー＆ペーストし、そのセクションを複製します。 That should look similar to the code block below:
 
-```yml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"      
-```
+    ```yml
+    version: 2
+    jobs:
+      build:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+      build:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+    ```
 
-1. Next, rename your two jobs so that they have different names. この例では、`one` と `two` という名前にします。 echo コマンドの部分も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
+2. Next, rename your two jobs so that they have different names. この例では、`one` と `two` という名前にします。 echo コマンドの部分も別のものに変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの実行に必要な時間をあえて長くするため、システムの `sleep` コマンドを追加します。
 
-2. `config.yml` ファイルに `workflows` セクションを追加します。 The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
+3. `config.yml` ファイルに `workflows` セクションを追加します。 The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
 
-```yml
-version: 2
-jobs:
-one:
-docker:
-- image: circleci/ruby:2.4.1
-steps:
-- checkout
-- run: echo "A first hello"
-- run: sleep 25
-two:
-docker:
-- image: circleci/ruby:2.4.1
-steps:
-- checkout
-- run: echo "A more familiar hi"
-- run: sleep 15
-workflows:
-version: 2
-one_and_two:
-jobs:
-- one
-- two
-```
+    ```yml
+    version: 2
+    jobs:
+      one:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A first hello"
+          - run: sleep 25
+      two:
+        docker:
+          - image: circleci/ruby:2.4.1
+        steps:
+          - checkout
+          - run: echo "A more familiar hi"
+          - run: sleep 15
+    workflows:
+      version: 2
+      one_and_two:
+        jobs:
+          - one
+          - two
+    ```
 
-1. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
+4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
-2. Click on the link for your workflow to see that these two jobs run in parallel. ![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
+5. Click on the link for your workflow to see that these two jobs run in parallel. ![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
 Workflows の詳細については「[Workflows の制御](https://circleci.com/docs/ja/2.0/workflows/#overview)」ドキュメントを参照してください。
 
