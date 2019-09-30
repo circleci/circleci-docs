@@ -16,11 +16,11 @@ This document describes various questions and technical issues that you may find
 
 ## Errors Claiming Namespace Or Publishing Orbs
 
-* Question: I recieve an error when attempting to claim a namespace or publish a production orb.
+* Question: I receive an error when attempting to claim a namespace or publish a production orb.
 
 * Answer: You may not be an organization owner/admin.
 
-Organizations may only claim a single namespace. In order to claim a namespace for an organization the authenticating user must possess owner/admin privledges over the organization. 
+Organizations may only claim a single namespace. In order to claim a namespace for an organization the authenticating user must possess owner/admin privileges over the organization. 
 
 If you do not have the proper permissions you may see an error similar to below:
 
@@ -33,7 +33,7 @@ Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickst
 
 ## Secure API Tokens
 
-* Question: How do I protect user's API tokens from being commited to their config?
+* Question: How do I protect user's API tokens from being committed to their config?
 
 * Answer: Utilize the "env_var_name" parameter type for the API key parameter. This parameter type will only accept POSIX valid environment variable name strings as valid. In the parameter description it is best to mention to the user to add this environment variable. 
 
@@ -55,7 +55,7 @@ Read more:
 * Question: What programming language can I write my orb in?
 * Answer: Orbs are packages of [CircleCI YAML config]({{site.baseurl}}/2.0/configuration-reference/) language. CircleCI config may contain commands that are issued against a given [Executor]({{site.baseurl}}/2.0/executor-intro/).
 
-CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a command within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-author-intro/#jobs). The environment within which your logic is running may influence your language descisions.
+CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a command within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-author-intro/#jobs). The environment within which your logic is running may influence your language decisions.
 
 **Bash**
 
@@ -63,7 +63,7 @@ Bash is the preferred language as it is most commonly available among all availa
 
 **Interactive Interpreter (Ex: Python)**
 
-In some use-cases an Orb may only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependancy of your orb. We can utilize the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
+In some use-cases an Orb may only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. We can utilize the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
 
 ```yaml
   - run:
