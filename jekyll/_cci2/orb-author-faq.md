@@ -52,10 +52,13 @@ Read more:
 
 ## Supported Programming Languages
 
-* Question: What programming language can I write my orb in?
+* Question: What language do I use to write an orb?
 * Answer: Orbs are packages of [CircleCI YAML config]({{site.baseurl}}/2.0/configuration-reference/) language. CircleCI config may contain commands that are issued against a given [Executor]({{site.baseurl}}/2.0/executor-intro/).
 
-CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a command within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-author-intro/#jobs). The environment within which your logic is running may influence your language decisions.
+CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a _command_ within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-author-intro/#jobs). The environment within which your logic is running may influence your language decisions.
+
+* Question: What programming languages can I write my Command logic in?
+* Answer: POSIX compliant Bash is the most portable and universal language. This is the recommended option  when you intend to share your orb. Orbs do however come with the flexibility and freedom to run other programming languages or tools.
 
 **Bash**
 
