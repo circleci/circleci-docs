@@ -33,7 +33,7 @@ Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickst
 
 ## Secure API Tokens
 
-* Question: How do I protect user's API tokens from being committed to their config?
+* Question: How do I protect a user's API tokens and other sensitive information?
 
 * Answer: Utilize the "env_var_name" parameter type for the API key parameter. This parameter type will only accept POSIX valid environment variable name strings as valid. In the parameter description it is best to mention to the user to add this environment variable. 
 
