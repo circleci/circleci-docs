@@ -755,7 +755,7 @@ Template | Description
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 {: class="table table-striped"}
@@ -763,8 +763,8 @@ Template | Description
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
 
 Template examples:
- * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
@@ -825,7 +825,7 @@ In this case cache `v1-myapp-cache-new` will be restored because it's the most r
 
 For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
 
-When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 

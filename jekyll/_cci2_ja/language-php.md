@@ -68,14 +68,14 @@ jobs: # ステップの集合
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache: # `package.json` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
+      - restore_cache: # `package-lock.json` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
           keys:
-            - node-v1-{{ checksum "package.json" }}
+            - node-v1-{{ checksum "package-lock.json" }}
             # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/docs/ja/2.0/caching/ を参照)
             - node-v1-
       - run: yarn install
-      - save_cache: # `package.json` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
-          key: node-v1-{{ checksum "package.json" }}
+      - save_cache: # `package-lock.json` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run: touch storage/testing.sqlite
@@ -147,11 +147,11 @@ jobs:
             - vendor
       - restore_cache:
           keys:
-            - node-v1-{{ checksum "package.json" }}
+            - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
       - save_cache:
-          key: node-v1-{{ checksum "package.json" }}
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 ```
