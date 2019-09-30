@@ -1,43 +1,56 @@
 ---
 layout: classic-docs
-title: "Reusing Config"
-short-title: "Reusing Config"
-description: "Reusing configuration in CircleCI 2.1"
+title: "Orbs Reference Guide"
+short-title: "Orbs Reference"
+description: "Reference guide for CircleCI 2.1 orbs"
 categories:
   - configuration
 order: 1
 ---
-This document describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
 
-* TOC
+This Orbs Reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
+
+- 目次
 {:toc}
 
-## Getting Started with Config Reuse
+## コンフィグ再利用の基本作業
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, go to the **Project Settings** and enable [Build Processing]({{ site.baseurl }}/2.0/build-processing/) with the radio button.
+1. 新規のプロジェクトの場合は、**[Add Projects (プロジェクトの追加)]** ページでプロジェクトを追加します。 For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]({{ site.baseurl }}/assets/img/docs/enable_pipelines.png) If this radio button is not available, your project is already using pipelines.
 
-2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
+2. (オプション) 「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)」の説明に従って、CircleCI-Public CLI をインストールします。 再利用可能なコンフィグを確認するときには、`circleci config process` コマンドを使用すると便利です。
 
-3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new pipelines before adding any new 2.1 keys to your config.
+3. `.circleci/config.yml` ファイルで `version` キーを 2.1 に変更し、変更をコミットしてビルドをテストします。 新しいパイプラインを使用したプロジェクトのビルドが成功したことを確認してから、新しい 2.1 キーをコンフィグに追加してください。
 
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo that has been added in a project in CircleCI. The Jobs page displays runs using the new pipelines service.
+4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo. 新しいパイプラインサービスを使用した実行が、ジョブページに表示されます。
 
-After your build is running successfully with pipelines enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
+パイプラインを有効にし、`.circleci/config.yml` ファイルでバージョン 2.1 を使用して、ビルドが正常に実行されれば、新しいキーを追加してコンフィグを再利用したり、同じジョブを異なるパラメーターで何度も実行したり (ジョブを再利用したり) することができます。
 
-## Authoring Reusable Commands
+## 再利用可能なコマンドのオーサリング
 
-A reusable command may have the following immediate children keys as a map:
+再利用可能なコマンドは、直下に置かれた以下の子キーをマップとして持つことができます。
 
-* **Description:** (optional) A string that describes the purpose of the command, used for generating documentation.
-* **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
-* **Steps:** (required) A sequence of steps run inside the calling job of the command.
+- **description：**コマンドの目的を説明する文字列 (オプション)。ドキュメントの生成に使用されます。
+- **parameters：**パラメーターキーのマップ (オプション)。それぞれのキーは `parameter` の仕様に準拠します。
+- **steps：**コマンドの呼び出し元のジョブ内で実行される一連のステップ (必須)。
+
+Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+
+### **The `commands` Key**
+
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+
+| Key         | Required | Type     | Description                                                                                                                       |
+| ----------- | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| steps       | Y        | Sequence | A sequence of steps run inside the calling job of the command.                                                                    |
+| parameters  | N        | Map      | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section for details. |
+| description | N        | String   | A string that describes the purpose of the command.                                                                               |
+{: class="table table-striped"}
 
 Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
 
 ```yaml
 version: 2.1
-
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -51,7 +64,7 @@ commands:
 
 **Note:** The `commands` stanza is available in configuration version 2.1 and later.
 
-## Invoking Reusable Commands
+## 再利用可能なコマンドの呼び出し
 {:.no_toc}
 
 Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted in the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
@@ -60,7 +73,6 @@ The following example invokes the command `sayhello` and passes it a parameter `
 
 ```yaml
 version: 2.1
-
 jobs:
   myjob:
     docker:
@@ -77,24 +89,23 @@ Commands can use other commands in the scope of execution.
 
 For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 
-## Built-In Commands
+## Special Keys
 
-CircleCI has several built-in commands available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of built-in commands are:
+CircleCI has several special keys available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of these keys are:
 
-* `checkout`
-* `setup_remote_docker`
-* `persist_to_workspace`
+- `checkout`
+- `setup_remote_docker`
+- `persist_to_workspace`
 
-**Note:** It is possible to override the built-in commands with a custom command.
+**Note:** It is possible to override the special keys with a custom command.
 
-## Examples
+## 例
 
 The following is an example of part of an `aws-s3` orb defining a command called `sync`:
 
 ```yaml
 version: 2.1
 # aws-s3 orb
-
 commands:
   sync:
     description: "A simple encapsulation of doing an s3 sync"
@@ -116,14 +127,14 @@ Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file
 
 ```yaml
 version: 2.1
-
 orbs:
   aws-s3: circleci/aws-s3@1.0.0
 
 workflows:
   build-test-deploy:
     jobs:
-      - deploy2s3:
+
+      - deploy2s3: # a sample job that would be defined above.
         steps:
           - aws-s3/sync:
               from: .
@@ -135,7 +146,6 @@ Defining a `build` job:
 
 ```yaml
 version: 2.1
-
 orbs:
   aws-cli: circleci/aws-cli@0.1.2
   aws-s3: circleci/aws-s3@1.0.0
@@ -155,7 +165,7 @@ jobs:
           arguments: --dryrun
 ```
 
-## Authoring Reusable Executors
+## 再利用可能な Executors のオーサリング
 
 Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
@@ -163,13 +173,45 @@ Executor declarations in config outside of `jobs` can be used by all jobs in the
 
 An executor definition includes one or more of the following keys:
 
-* `docker` or `machine` or `macos` 
-* `environment`
-* `working_directory`
-* `shell`
-* `resource_class`
+- `docker`、`machine`、`macos` のいずれか
+- `environment:`
+- `working_directory`
+- `shell`
+- `resource_class`
 
 In the following example `my-executor` is passed as the single value of the key `executor`.
+
+```yaml
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+jobs:
+  my-job:
+    executor: my-executor
+    steps:
+      - run: echo outside the executor
+```
+
+**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
+
+## **`executors`**
+
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+
+| Key               | Required         | Type   | Description                                                                                                                                                                                                                                                                                                        |
+| ----------------- | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| docker            | Y <sup>(1)</sup> | List   | Options for `docker` executor.                                                                                                                                                                                                                                                                                     |
+| resource_class    | N                | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). |
+| machine           | Y <sup>(1)</sup> | Map    | Options for `machine` executor.                                                                                                                                                                                                                                                                                    |
+| macos             | Y <sup>(1)</sup> | Map    | Options for `macOS` executor.                                                                                                                                                                                                                                                                                      |
+| shell             | N                | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step.                                                                                                                                                                                                                        |
+| working_directory | N                | String | In which directory to run the steps.                                                                                                                                                                                                                                                                               |
+| environment       | N                | Map    | A map of environment variable names and values.                                                                                                                                                                                                                                                                    |
+{: class="table table-striped"}
+
+Example:
 
 ```yaml
 version: 2.1
@@ -182,10 +224,9 @@ jobs:
   my-job:
     executor: my-executor
     steps:
+
       - run: echo outside the executor
 ```
-
-**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
 ## Invoking Reusable Executors
 {:.no_toc}
@@ -194,7 +235,6 @@ The following example passes `my-executor` as the value of a `name` key under `e
 
 ```yaml
 version: 2.1
-
 jobs:
   my-job:
     executor:
@@ -212,7 +252,6 @@ The following example declares and invokes an executor in two jobs that need to 
 
 ```yaml
 version: 2.1
-
 executors:
   lein_exec: # declares a reusable executor
     docker:
@@ -221,14 +260,12 @@ executors:
     environment:
       MYSPECIALVAR: "my-special-value"
       MYOTHERVAR: "my-other-value"
-
 jobs:
   build:
     executor: lein_exec
     steps:
       - checkout
-      - run: echo "hello world"
-
+      - run: echo "hello world"  
   test:
     executor: lein_exec
     environment:
@@ -243,7 +280,6 @@ You can also refer to executors from other orbs. Users of an orb can invoke its 
 ```yaml
 version: 2.1
 # yaml from foo-orb
-
 executors:
   bar:
     machine: true
@@ -256,7 +292,6 @@ executors:
 ```yaml
 version: 2.1
 # yaml from baz-orb
-
 executors:
   bar:
     docker:
@@ -268,7 +303,6 @@ You may use either executor from your configuration file with:
 ```yaml
 version: 2.1
 # config.yml
-
 orbs:
   foo-orb: somenamespace/foo@1
   baz-orb: someothernamespace/baz@3.3.1
@@ -290,7 +324,6 @@ When invoking an executor in a `job` any keys in the job itself will override th
 
 ```yaml
 version: 2.1
-
 executors:
   python:
     docker:
@@ -301,7 +334,6 @@ executors:
       TESTS: all
     shell: /bin/bash    
     working_directory: ~/project
-
 jobs:
   build:
     docker:
@@ -317,7 +349,6 @@ The above config would resolve to the following:
 
 ```yaml
 version: 2.1
-
 jobs:
  build:
    steps: []
@@ -340,7 +371,6 @@ The following example defines a command called `sync`:
 ```yaml
 version: 2.1
 commands: # a reusable command with parameters
-
   sync:
     parameters:
       from:
@@ -375,22 +405,33 @@ jobs: # a job that invokes the `aws` executor and the `sync` command
 
 A parameter can have the following keys as immediate children:
 
-| Key Name | Description | Default value | |\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\---\-----|\---\---\---\---\---| | description | Optional. Used to generate documentation for your orb. | N/A | | type | Required. See **Parameter Types** in the section below for details. | N/A | | default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A |
+| Key Name    | Description                                                                                   | Default value |
+| ----------- | --------------------------------------------------------------------------------------------- | ------------- |
+| description | Optional. Used to generate documentation for your orb.                                        | N/A           |
+| type        | Required. See **Parameter Types** in the section below for details.                           | N/A           |
+| default     | The default value for the parameter. If not present, the parameter is implied to be required. | N/A           |
 {: class="table table-striped"}
 
 ### Parameter Types
 {:.no_toc}
 
-This section describes the types of parameters and their usage. The parameter types supported are: * string * boolean * integer * enum * executor * steps * environment variable name
+This section describes the types of parameters and their usage. The parameter types supported are:
 
-#### String
+- 文字列
+- ブール値
+- 整数
+- 列挙
+- Executor
+- ステップ
+- 環境変数名
+
+#### 文字列
 {:.no_toc}
 
 Basic string parameters are described below:
 
 ```yaml
 version: 2.1
-
 commands:
   copy-markdown:
     parameters:
@@ -399,19 +440,18 @@ commands:
         type: string
         default: docs
     steps:
-      - cp *.md << parameters.destination >>
+      - run: cp *.md << parameters.destination >>
 ```
 
 Strings should be quoted if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
-#### Boolean
+#### ブール値
 {:.no_toc}
 
 Boolean parameters are useful for conditionals:
 
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -420,24 +460,23 @@ commands:
         type: boolean
         default: false
     steps:
-      - ls <<# parameters.all >> -a <</ parameters.all >>
+      - run: ls <<# parameters.all >> -a <</ parameters.all >>
 ```
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
 
-* True: `y` `yes` `true` `on`
-* False: `n` `no` `false` `off`
+- True：`y`、`yes`、`true`、`on`
+- False：`n`、`no`、`false`、`off`
 
 Capitalized and uppercase versions of the above values are also valid.
 
-#### Integer
+#### 整数
 {:.no_toc}
 
 Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
 version: 2.1
-
 jobs:
   build:
     parameters:
@@ -448,7 +487,6 @@ jobs:
     machine: true
     steps:
       - checkout
-
 workflows:
   workflow:
     jobs:
@@ -456,14 +494,13 @@ workflows:
           p: 2
 ```
 
-#### Enum
+#### 列挙
 {:.no_toc}
 
 The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -479,7 +516,6 @@ The following `enum` type declaration is invalid because the default is not decl
 {% raw %}
 ```yaml
 version: 2.1
-
 commands:
   list-files:
     parameters:
@@ -498,7 +534,6 @@ Use an `executor` parameter type to allow the invoker of a job to decide what ex
 {% raw %}
 ```yaml
 version: 2.1
-
 executors:
   xenial:
     parameters:
@@ -508,6 +543,7 @@ executors:
     environment:
       SOME_VAR: << parameters.some-value >>
     docker:
+
       - image: ubuntu:xenial
   bionic:
     docker:
@@ -520,11 +556,13 @@ jobs:
         type: executor
     executor: << parameters.e >>
     steps:
+
       - run: some-tests
 
 workflows:
   workflow:
     jobs:
+
       - test:
           e: bionic
       - test:
@@ -534,7 +572,7 @@ workflows:
 ```
 {% endraw %}
 
-#### Steps
+#### ステップ
 {:.no_toc}
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
@@ -542,7 +580,6 @@ Steps are used when you have a job or command that needs to mix predefined and u
 {% raw %}
 ```yaml
 version: 2.1
-
 commands:
   run-tests:
     parameters:
@@ -551,6 +588,7 @@ commands:
         type: steps
         default: []
     steps:
+
     - run: make deps
     - steps: << parameters.after-deps >>
     - run: make test
@@ -562,11 +600,11 @@ The following example demonstrates that steps passed as parameters are given as 
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   build:
     machine: true
     steps:
+
     - run-tests:
         after-deps:
           - run: echo "The dependencies are installed"
@@ -579,8 +617,8 @@ The above will resolve to the following:
 {% raw %}
 ```yaml
 version: 2.1
-
 steps:
+
   - run: make deps
   - run: echo "The dependencies are installed"
   - run: echo "And now I'm going to run the tests"
@@ -588,17 +626,19 @@ steps:
 ```
 {% endraw %}
 
-#### Environment Variable Name
+#### 環境変数名
 
-The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. An example of this parameter is shown below.
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables additional checks to be performed, see [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) for details.
+
+The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a re-usable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a re-usable command that uses the needed authentication, but deploys to a custom bucket.
 
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   build:
     docker:
+
     - image: ubuntu:latest
     steps:
     - run:
@@ -613,11 +653,10 @@ workflows:
   version: 2
 ```
 
-Original config.yml file:
+Original `config.yml` file:
 
 ```yaml
 version: 2.1
-
 jobs:
    build:
      parameters:
@@ -655,7 +694,6 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 {% raw %}
 ```yaml
 version: 2.1
-
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -666,8 +704,8 @@ jobs:
         type: string
     machine: true
     steps:
-      - run: echo "Hello << parameters.saywhat >>"
 
+      - run: echo "Hello << parameters.saywhat >>"
 workflows:
   build:
     jobs:
@@ -687,7 +725,6 @@ If a job is declared inside an orb it can use commands in that orb or the global
 ```yaml
 version: 2.1
 # partial yaml from hello-orb
-
 jobs:
   sayhello:
     parameters:
@@ -713,7 +750,6 @@ commands:
 ```yaml
 # config.yml
 version: 2.1
-
 orbs:
   hello-orb: somenamespace/hello-orb@volatile
 workflows:
@@ -730,12 +766,11 @@ To use parameters in executors, define the parameters under the given executor. 
 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
-#### Example Build Configuration Using a Parameterized Executor
+#### パラメーター化された Executor を使用したビルドの設定例
 {:.no_toc}
 
 ```yaml
 version: 2.1
-
 executors:
   python:
     parameters:
@@ -748,7 +783,6 @@ executors:
       - image: circleci/python:<< parameters.tag >>
     environment:
       MYPRECIOUS: << parameters.myspecialvar >>
-
 jobs:
   build:
     executor:
@@ -761,7 +795,6 @@ The above would resolve to the following:
 
 ```yaml
 version: 2.1
-
 jobs:
   build:
     steps: []
@@ -774,11 +807,10 @@ jobs:
 ### The Scope of Parameters
 {:.no_toc}
 
-Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly. Command, job, executor, and parameter names can only contain lowercase letters a-z, digits, and _ and -, and must start with a letter.
+Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly.
 
 ```yaml
 version: 2.1
-
 jobs:
   sayhello:
     parameters:
@@ -793,7 +825,6 @@ jobs:
           # value for the "saywhat" parameter, it must be
           # passed in manually
           saywhat: << parameters.saywhat >>
-
 commands:
   say:
     parameters:
@@ -801,7 +832,6 @@ commands:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-
 workflows:
   build:
     jobs:
@@ -818,7 +848,6 @@ A single configuration may invoke a job multiple times. At configuration process
 
 ```yaml
 version: 2.1
-
 workflows:
   build:
     jobs:
@@ -853,7 +882,6 @@ The following example defines pre-steps and post-steps in the `bar` job of the `
 ```yaml
 # config.yml
 version: 2.1
-
 jobs:
   bar:
     machine: true
@@ -879,17 +907,17 @@ workflows:
 
 ## Defining Conditional Steps
 
-Conditional steps allow the definition of steps that only run if a condition is met.
+Conditional steps allow the definition of steps that only run if a `condition` is met.
 
 For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
 
-These conditions are checked before a workflow is actually run. That means, for example, that you cannot use a condition to check an environment variable.
+These conditions are checked before a workflow is actually run. This means, for example, that you may not use a condition to check an environment variable.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
 For example, an orb author could define conditional steps in the `steps` key of a Job or a Command.
 
-`when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run.
+A conditional step consists of a step with the key `when` or `unless`. Under this conditional key are the subkeys `steps` and `condition`. If `condition` is met (using when/unless logic), the subkey `steps` are run.
 
 A `condition` is a single value that evaluates to `true` or `false` at the time the config is processed, so you cannot use environment variables as conditions, as those are not injected until your steps are running in the shell of your execution environment. You may use parameters as your conditions. The empty string will resolve as falsey in `when` conditions.
 
@@ -899,7 +927,6 @@ A `condition` is a single value that evaluates to `true` or `false` at the time 
 ```yaml
 # inside config.yml
 version: 2.1
-
 jobs:
   myjob:
     parameters:
@@ -917,7 +944,6 @@ jobs:
           condition: << parameters.preinstall-foo >>
           steps:
             - run: echo "don't preinstall"
-
 workflows:
   workflow:
     jobs:
@@ -927,4 +953,51 @@ workflows:
           preinstall-foo: true
 ```
 
+**Note** Both `condition` and `unless` accept the values `true` or `false`. The value is provided by the value `true` or `false` using parameters as above. Also, `when` only runs when its value is `true`, whereas `unless` only runs when it's value is `false`.
+
 **Note:** Conditional steps are available in configuration version 2.1 and later.
+
+##### **The `when` Step**
+
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs.
+
+| Key       | Required | Type     | Description                                           |
+| --------- | -------- | -------- | ----------------------------------------------------- |
+| condition | Y        | String   | A parameter value                                     |
+| steps     | Y        | Sequence | A list of steps to execute when the condition is true |
+{: class="table table-striped"}
+
+###### *Example*
+
+    version: 2.1
+    
+    jobs: # conditional steps may also be defined in `commands:`
+      job_with_optional_custom_checkout:
+        parameters:
+          custom_checkout:
+            type: string
+            default: ""
+        machine: true
+        steps:
+    
+          - when:
+              condition: <<parameters.custom_checkout>>
+              steps:
+                - run: echo "my custom checkout"
+          - unless:
+              condition: <<parameters.custom_checkout>>
+              steps:
+                - checkout
+    workflows:
+      build-test-deploy:
+        jobs:
+          - job_with_optional_custom_checkout:
+              custom_checkout: "any non-empty string is truthy"
+          - job_with_optional_custom_checkout
+    
+
+## See Also
+
+- Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Database Examples]({{site.baseurl}}/2.0//postgres-config/) for database examples you can use in your CircleCI configuration.
