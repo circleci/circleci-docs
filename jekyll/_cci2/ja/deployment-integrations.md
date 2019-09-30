@@ -1,19 +1,20 @@
 ---
 layout: classic-docs
-title: "Configuring Deploys"
-short-title: "Configuring Deploys"
+title: "デプロイの設定"
+short-title: "デプロイの設定"
 ---
-CircleCI can be configured to deploy to virtually any service. This document provides instructions and examples for the following platforms:
 
-- TOC
+CircleCI は、ほぼすべてのサービスにデプロイできるように設定できます。 ここでは、以下のプラットフォームでのデプロイ方法とその例を示しています。
+
+- 目次
 {:toc}
 
 ## 概要
 {:.no_toc}
 
-To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file. You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
+アプリケーションをデプロイするには、[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#jobs-overview)を `.circleci/config.yml` ファイルに追加します。 また、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)と [SSH 鍵]({{ site.baseurl }}/ja/2.0/add-ssh-key/)を追加する必要があります。
 
-Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
+以下に、Rails アプリケーションを Heroku にデプロイする場合の簡単な例を示します。 アプリケーション全体は、[CircleCI デモワークフローリポジトリの連続ジョブのブランチ](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter)で確認できます。
 
 ```yaml
 version: 2
@@ -38,6 +39,7 @@ jobs:
     environment:
       HEROKU_APP: "sleepy-refuge-55486"
     steps:
+
       - checkout
       - run:
           name: Deploy Master to Heroku
@@ -48,6 +50,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - build
       - deploy:
           requires:
@@ -57,23 +60,23 @@ workflows:
               only: sequential-branch-filter
 ```
 
-The configuration uses [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs). For more information on conditional deploys, see [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows).
+設定では、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるように、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使用しています。 デプロイジョブで前のジョブからの出力を使用する場合は、[ワークスペースを使用する]({{ site.baseurl }}/ja/2.0/workflows/#ジョブ間のデータ共有を可能にする-workspaces-を使う)ことでそのデータを共有できます。 条件付きデプロイについては、「[Workflows におけるコンテキストとフィルターの使い方]({{ site.baseurl }}/ja/2.0/workflows/#workflows-におけるコンテキストとフィルターの使い方)」を参照してください。
 
 ## AWS
 
-To deploy to AWS S3, follow the steps below.
+AWS S3 にデプロイするには、以下の手順に従います。
 
-To deploy to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
+ECR から AWS ECS にデプロイする方法については、「[AWS ECR/ECS へのデプロイ]({{ site.baseurl }}/ja/2.0/ecs-ecr/)」を参照してください。
 
-1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+1. セキュリティ上のベストプラクティスとして、CircleCI 専用の新しい [IAM ユーザー](https://aws.amazon.com/jp/iam/details/manage-users/)を作成します。
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+2. [AWS アクセスキー](https://docs.aws.amazon.com/ja_jp/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)を[プロジェクト環境変数](https://circleci.com/docs/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)または[コンテキスト環境変数](https://circleci.com/docs/ja/2.0/env-vars/#context内で環境変数を設定する)として CircleCI に追加します。 アクセスキー ID を `AWS_ACCESS_KEY_ID` という変数に、またシークレットアクセスキーを `AWS_SECRET_ACCESS_KEY` という変数に格納します。
 
-3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
+3. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリコンテナに `awscli` をインストールするステップを追加します。
 
-4. Install `awscli` in your primary container by following the [AWS CLI documentation](http://docs.aws.amazon.com/cli/latest/userguide/installing.html).
+4. [AWS CLI に関するドキュメント](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-install.html)に従って、プライマリコンテナに `awscli` をインストールします。
 
-5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. The example below shows how CircleCI deploys [this documentation site](https://github.com/circleci/circleci-docs) to S3. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
+5. [AWS CLI を使用](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-using.html)して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 以下の例は、CircleCI で[このドキュメントサイト](https://github.com/circleci/circleci-docs)を S3 にデプロイする方法を示しています。 ビルドジョブが終了し、現在のブランチが `master` である場合にのみ、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使用してデプロイしてください。
 
 ```yaml
 version: 2
@@ -81,7 +84,7 @@ jobs:
   # build job omitted for brevity
   deploy:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: circleci/python:3.7-stretch
     working_directory: ~/circleci-docs
     steps:
       - run:
@@ -95,6 +98,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:
+
       - build
       - deploy:
           requires:
@@ -104,17 +108,17 @@ workflows:
               only: master
 ```
 
-For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
+AWS CLI のコマンドとオプションの一覧は、「[AWS CLI コマンドリファレンス](https://docs.aws.amazon.com/cli/latest/reference/)」で参照できます。
 
-### AWS Orb Examples
+### AWS Orb のサンプル
 
-CircleCI and its partners have developed several different AWS orbs that enable you to quickly deploy AWS applications that can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/). The examples below illustrate how you can use the AWS S3 and AWS ECR/ECS orbs.
+CircleCI はパートナーと協力して、AWS アプリケーションを迅速にデプロイするための AWS Orb をいくつか開発しています。これらの Orb は [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)で確認できます。 以下に AWS S3、AWS ECR、AWS ECS の各 Orb の使用方法を説明します。
 
 #### AWS S3 Orb
 
     version: 2.1
     orbs:
-      aws-s3: circleci/aws-s3@1.0.0
+      aws-s3: circleci/aws-s3@1.0.11
     jobs:
       build:
         docker:
@@ -135,16 +139,16 @@ CircleCI and its partners have developed several different AWS orbs that enable 
               arguments: '--dryrun'
     
 
-For more detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page.
+AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](https://circleci.com/orbs/registry/orb/circleci/aws-s3)ページを参照してください。
 
-#### AWS ECR & AWS ECS Orb Examples
+#### AWS ECR と AWS ECS の Orb のサンプル
 
 ##### AWS ECR
 
-This orb enables you to log into AWS, build, and then push image to Amazon ECS.
+This orb enables you to log into AWS, build, and then push image to Amazon ECR.
 
     orbs:
-      aws-ecr: circleci/aws-ecr@1.0.0
+      aws-ecr: circleci/aws-ecr@0.0.10
     version: 2.1
     workflows:
       build_and_push_image:
@@ -165,7 +169,7 @@ This orb enables you to log into AWS, build, and then push image to Amazon ECS.
 
 ##### AWS ECS
 
-This orb enables you to update an existing AWS ECS instance.
+この Orb では、既存の AWS ECS インスタンスをアップデートできます。
 
     version: 2.1
     orbs:
@@ -188,7 +192,30 @@ This orb enables you to update an existing AWS ECS instance.
               container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
     
 
-For more detailed information about the AWS ECS & AWS ECR orbs, refer to the following Orb registry pages: - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+##### AWS CodeDeploy
+
+The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
+
+```yaml
+version: 2.1 # We must use 2.1 to make use of orbs.
+orbs: # specify all orbs you want to use.
+  aws-code-deploy: circleci/aws-code-deploy@1.0.0
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: myDeploymentGroup # The name of a new deployment group for the specified application.
+          service-role-arn: myDeploymentGroupRoleARN # The service role for a deployment group.
+          bundle-bucket: myApplicationS3Bucket # The s3 bucket where an application revision will be stored.
+          bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
+```
+
+For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
+
+- [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
+- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+- [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
 
@@ -229,7 +256,7 @@ workflows:
 
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
-### Install the CLI
+### CLI のインストール
 {:.no_toc}
 
 - run:
@@ -243,7 +270,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
           cf target -o "$CF_ORG" -s "$CF_SPACE"
     
 
-### Dark Deployment
+### dark デプロイ
 {:.no_toc}
 
 This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
@@ -265,7 +292,7 @@ This is the first step in a Blue-Green deployment, pushing the application to no
           cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
     
 
-### Live Deployment
+### live デプロイ
 {:.no_toc}
 
 Until now, the previously pushed "app-name" has not changed. The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
@@ -285,7 +312,7 @@ Until now, the previously pushed "app-name" has not changed. The final step is t
           cf rename app-name-dark app-name
     
 
-### Manual Approval
+### 手動による承認
 {:.no_toc}
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
@@ -316,7 +343,7 @@ For additional control or validation, you can add a manual "hold" step between t
                   only: master
     
 
-### Orb Deployment Example
+### Orb デプロイのサンプル
 
 CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
 
@@ -335,6 +362,7 @@ CircleCI has developed a CloudFoundry Orb that you can use to simplify your conf
             version: 2
             build-deploy:
               jobs:
+    
                 - cloudfoundry/push:
                     appname: your-app
                     org: your-org
@@ -366,6 +394,7 @@ Add the below to the project's `config.yml` file
 
     <br />     deploy-job:
            docker:
+    
              - image: my-image-version-tag
            working_directory: /tmp/my-project
            steps:
@@ -378,6 +407,7 @@ Add the below to the project's `config.yml` file
     
           -deploy:
             jobs:
+    
               - build-job
               - deploy-job:
                   requires:
@@ -393,7 +423,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
        - run: cd functions && npm install
     
 
-### Firebase Orb Example
+### Firebase Orb のサンプル
 
 If you would like to simplify your Firebase configuration workflow, you may use a pre-configured package of configurations (referred to as an "orb") to deploy your application to Firebase. The example below shows this Firebase orb.
 
@@ -425,6 +455,7 @@ In the following example, if `build-job` passes and the current branch was the m
 
     <br />     deploy-job:
            docker:
+    
              - image: my-image-version-tag
            working_directory: /tmp/my-project  
            steps:
@@ -436,6 +467,7 @@ In the following example, if `build-job` passes and the current branch was the m
           version: 2
           build-deploy:
             jobs:
+    
               - build-job
               - deploy-job:
                   requires:
@@ -463,7 +495,7 @@ Finally, utilize the patch subcommand of `kubectl` to find the line that specifi
 
 The full `deploy.sh` file is available on [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh). A CircleCI 2.0 Google Cloud deployment example project is also available [here](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app).
 
-### Google Cloud Orb Example
+### Google Cloud Orb のサンプル
 
 If you would like to simplify your configuration workflows using a CircleCI orb (a package of configurations that you can use that includes job, commands and executors), the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different orb examples for Google Cloud, including the example shown below.
 
@@ -487,15 +519,15 @@ For more detailed information about this orb, refer to the [CircleCI Google Clou
 
 [Heroku](https://www.heroku.com/) is a popular platform for hosting applications in the cloud. To configure CircleCI to deploy your application to Heroku, follow the steps below.
 
-1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation to set up a project in your chosen language.
+1. Heroku アカウントを作成し、[Heroku の Web ページ](https://devcenter.heroku.com/start)に記載された手順に従って、選択した言語でプロジェクトを設定します。
 
-2. Add the name of your Heroku application and your Heroku API key as environment variables. See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) for instructions. In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+2. Heroku アプリケーションの名前と Heroku API キーを環境変数として追加します。 手順については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)」を参照してください。 以下の例では、これらの変数はそれぞれ `HEROKU_APP_NAME` および `HEROKU_API_KEY` として定義されています。
 
-3. In your `.circleci/config.yml`, create a `deploy` job and add an executor type.
+3. `.circleci/config.yml` で、`deploy` ジョブを作成し、Executor タイプを追加します。
 
 See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) for instructions.
 
-1. Checkout your code and add a command to deploy the master branch to Heroku using git.
+5. コードをチェックアウトし、git を使用して master ブランチを Heroku にデプロイするコマンドを追加します。
 
 ```yaml
 version: 2
@@ -516,6 +548,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:
+
       - build
       - deploy:
           requires:
@@ -525,39 +558,43 @@ workflows:
               only: master
 ```
 
-### Heroku Orb Examples
+**Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
+
+### Heroku Orb のサンプル
 
 If you would like to simplify your Heroku configuration workflows, including deploying Heroku, or customizing your Heroku workflow, you can use the Heroku orb, which is shown below.
 
-#### Deploying Heroku
+#### Heroku のデプロイ
 
-    version: 2.1
-    orbs:
-      heroku: circleci/heroku@1.0.0
-    workflows:
-      heroku_deploy:
-        jobs:
-          - heroku/deploy-via-git
-    
-
-#### Customizing Heroku Workflows
-
-    version: 2.1
-    orbs:
-      heroku: circleci/heroku@1.0.0
-    workflows:
-      heroku_deploy:
-        jobs:
-          - deploy
+```yaml
+version: 2.1
+orbs:
+  heroku: circleci/heroku@1.0.0
+workflows:
+  heroku_deploy:
     jobs:
-      deploy:
-        executor: heroku/default
-        steps:
-          - checkout
-          - heroku/install
-          - heroku/deploy-via-git:
-              only-branch: master
-    
+      - heroku/deploy-via-git
+```
+
+#### Heroku ワークフローのカスタマイズ
+
+```yaml
+version: 2.1
+orbs:
+  heroku: circleci/heroku@1.0.0
+workflows:
+  heroku_deploy:
+    jobs:
+      - deploy
+jobs:
+  deploy:
+    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
+    steps:
+      - checkout
+      - heroku/install # Runs the heroku install command, if necessary.
+      - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
+          only-branch: master # If you specify an only-branch, the deploy will not occur for any other branch.
+```
 
 For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku) page in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
 
@@ -565,20 +602,20 @@ For more detailed information about these Heroku orbs, refer to the [CircleCI He
 
 Setting up CircleCI to publish packages to the npm registry makes it easy for project collaborators to release new package versions in a consistent and predictable way.
 
-1. Obtain the npm authToken for the account that you wish to use to publish the package.
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。
 
 You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
 
     ```
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
-    
+
     In this case, the authToken is `00000000-0000-0000-0000-000000000000`.
     
 
-1. Go to your [project settings]({{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git), and set the `NPM_TOKEN` variable to the obtained authToken.
+2. [プロジェクト設定]({{ site.baseurl }}/1.0/environment-variables/#setting-environment-variables-for-all-commands-without-adding-them-to-git)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
-2. Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
+3. authToken を `~/.npmrc` に追加するように CircleCI を設定し、バージョンが指定されたタグにのみ `npm publish` を実行します。
 
 ```yaml
 version: 2
@@ -588,40 +625,47 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm publish
+      - run:
+          name: Publish to NPM
+          command: | 
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
 
 workflows:
   version: 2
   tagged-build:
     jobs:
+
       - publish:
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
 ```
 
-1. When you want to publish a new version to npm, run `npm version` to create a new version:
-    
-        npm version 10.0.1
-        
-    
+4. 新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
+
+    ```
+    npm version 10.0.1
+    ```
+
     This will update the `package.json` file and creates a tagged Git commit. Next, push the commit with tags:
     
-        git push --follow-tags
-        
 
-2. If tests passed, CircleCI will publish the package to npm automatically.
+    ```
+    git push --follow-tags
+    ```
+
+5. テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
 
 ## SSH
 
 To configure CircleCI to deploy your application over SSH, follow the steps below.
 
-1. Add the SSH key for the server to which you're deploying. For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key/) document.
+1. デプロイ先のサーバー用の SSH 鍵を追加します。 手順については、「[CircleCI に SSH 鍵を登録する]({{ site.baseurl }}/ja/2.0/add-ssh-key/)」を参照してください。
 
-2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 
-3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
+3. `.circleci/config.yml` で、`deploy` ジョブを作成し、master ブランチをデプロイするコマンドを追加します。
 
 ```yaml
 version: 2
@@ -641,6 +685,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - build
       - deploy:
           requires:
