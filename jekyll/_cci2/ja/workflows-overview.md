@@ -1,45 +1,46 @@
 ---
 layout: classic-docs
-title: "Workflows"
-short-title: "Workflows"
-description: "Description of workflows"
+title: "ワークフロー"
+short-title: "ワークフロー"
+description: "ワークフローの説明"
 categories:
   - workflows
 order: 2
 ---
-CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to sequence and parallelize your job runs with great flexibility for faster feedback when jobs fail.
+
+CircleCI の [Workflows]({{ site.baseurl }}/ja/2.0/workflows/) は、ジョブを順次実行または並列実行するための機能です。ジョブが失敗したときにすばやくフィードバックできる高い柔軟性を備えています。
 
 <hr />
 
-| Holding a Workflow for Manual Approval                                                                                                              | Using Filters                                                                                                                                                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Add an [approval job]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) to set up a manual gate. &nbsp;&nbsp;&nbsp;&nbsp; | Use [regex]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches) to [filter on branches]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) or [filter on tags]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag). |
+| 手動で承認されるまでワークフローを保留する                                                                                           | フィルターを使用する                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [承認ジョブ]({{ site.baseurl }}/ja/2.0/workflows/#承認後に処理を続行する-workflow-の例)を追加して手動ゲートを設定します。 &nbsp;&nbsp;&nbsp;&nbsp; | [正規表現]({{ site.baseurl }}/ja/2.0/workflows/#正規表現でタグとブランチをフィルターする方法)を使用して、[ブランチでフィルタリング]({{ site.baseurl }}/ja/2.0/workflows/#ブランチレベルブランチの配下でジョブを実行する)または[タグでフィルタリング]({{ site.baseurl }}/ja/2.0/workflows/#git-タグに対応可能な-workflows-を実行する)します。 |
 
 <hr />
 
-| Scheduling a Workflow                                                                                                                | Using Workspaces                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| [Trigger]({{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow) a workflow on a set schedule with `cron`.&nbsp;&nbsp;&nbsp;&nbsp; | Use [workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) to share data among jobs. |
+| ワークフローをスケジュール実行する                                                                                                            | ワークスペースを使用する                                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `cron` で設定されたスケジュールに基づいてワークフローを[トリガー]({{ site.baseurl }}/ja/2.0/workflows/#workflow-をスケジュール実行する)します。&nbsp;&nbsp;&nbsp;&nbsp; | [ワークスペース]({{ site.baseurl }}/ja/2.0/workflows/#ジョブ間のデータ共有を可能にする-workspaces-を使う)を使用して、ジョブ間でデータを共有します。 |
 
 <hr />
 
-## Video: Configure Multiple Jobs with Workflows
+## ビデオ：ワークフローに複数のジョブを設定する
 
-The following video shows you how to configure workflows in your `.circleci/config.yml` file.
+以下のビデオでは、`.circleci/config.yml` ファイルでワークフローを設定する方法を説明しています。
 
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 </div>
 
-## Possible Workflow Statuses
+## ワークフローのステータス
 
-Workflows may appear with one of the following states:
+ワークフローは、以下のいずれかの状態になります。
 
-- RUNNING: Workflow is in progress
-- NOT RUN: Workflow was never started
-- CANCELLED: Workflow was cancelled before it finished
-- FAILING: A Job in the workflow has failed
-- FAILED: One or more jobs in the workflow failed
-- SUCCESS: All jobs in the workflow completed successfully
-- ON HOLD: A job in the workflow is waiting for approval
-- NEEDS SETUP: A workflow stanza is not included or is incorrect in the `config.yml` file for this project
+- RUNNING：ワークフローが実行中
+- NOT RUN：ワークフローが起動されていない
+- CANCELLED：ワークフローが終了前にキャンセルされた
+- FAILING: A job in the workflow has failed
+- FAILED：ワークフロー内の 1つ以上のジョブが失敗
+- SUCCESS：ワークフロー内のすべてのジョブが正常に完了
+- ON HOLD：ワークフロー内のジョブが承認を待機中
+- NEEDS SETUP：このプロジェクトの `config.yml` ファイル内に workflow スタンザが含まれていない、または正しくない
