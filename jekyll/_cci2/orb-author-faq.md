@@ -24,9 +24,9 @@ Organizations may only claim a single namespace. In order to claim a namespace f
 
 If you do not have the proper permissions you may see an error similar to below:
 
-```
-Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
-```
+
+> Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
+
 
 Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickstart).
 
