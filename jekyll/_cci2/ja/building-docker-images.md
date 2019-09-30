@@ -1,12 +1,13 @@
 ---
 layout: classic-docs
 title: "Docker コマンドの実行手順"
-short-title: "Running Docker Commands"
+short-title: "Docker コマンドの実行手順"
 description: "Docker イメージのビルド方法とリモート環境へのアクセス方法"
 categories:
   - configuring-jobs
 order: 55
 ---
+
 ここでは、デプロイや詳細テストを行う際の Docker イメージのビルド方法と、リモートの Docker コンテナ内のサービスを実行する方法について解説しています。
 
 - TOC
@@ -34,7 +35,9 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 
 リモート Docker 環境のハードウェアスペックは下記の通りです。
 
-CPU数 | プロセッサー | RAM | ストレージ \-----|\---\---\---\---\---\---\---\---\---|\-----|\---\--- 2 | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+| CPUs | Processor                 | RAM | HD    |
+| ---- | ------------------------- | --- | ----- |
+| 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB |
 {: class="table table-striped"}
 
 ### Example
@@ -49,16 +52,18 @@ jobs:
    machine: true
    steps:
      - checkout
-     # UI に保管されている ID・パスワードを使い
-     # プライベート Docker イメージによる専用 DB を稼働させる
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
      - run: |
-         docker login -u $DOCKER_USER -p $DOCKER_PASS
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # アプリケーションイメージをビルド
+     # build the application image
+
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # イメージのデプロイ
+     # deploy the image
+
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
@@ -73,13 +78,14 @@ jobs:
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
       - checkout
-      # ... steps for building/testing app ...
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
-      # Docker がすでに動いているプライマリイメージを使う (推奨) か
-      # もしくは以下にある通りビルド中にインストールしてください
+      # use a primary image that already has Docker (recommended)
+      # or install it during a build like we do here
+
       - run:
           name: Install Docker client
           command: |
@@ -89,7 +95,8 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
 
-      # Docker イメージのビルドとプッシュ
+      # build and push Docker image
+
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
@@ -216,14 +223,15 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 
 {% raw %}
 ```yaml
-# CircleCI キャッシュから bundler-data コンテナを格納する
+# Populate bundler-data container from circleci cache
+
 - restore_cache:
     keys:
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}
       - v4-bundler-cache-{{ arch }}      
 - run:
-    name: bundler cache を Docker ボリュームにリストア
+    name: Restoring bundler cache into docker volumes
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
@@ -234,9 +242,10 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
 
-# 同じボリュームを CircleCI キャッシュにバックアップする
+# Back up the same volume to circle cache
+
 - run:
-    name: bundler cache を Docker ボリュームから バックアップ
+    name: Backing up bundler cache from docker volumes
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
