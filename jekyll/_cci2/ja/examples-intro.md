@@ -1,15 +1,17 @@
 ---
 layout: classic-docs
-title: "Examples"
-short-title: "Examples"
-description: "CircleCI 2.0 Examples Introduction"
+title: "サンプル"
+short-title: "サンプル"
+description: "CircleCI 2.0 サンプルの紹介"
 categories:
   - migration
 order: 1
 ---
-It is possible to build, test, and deploy applications that run on Linux, Android, and iOS with CircleCI. See the following snippets for a peak into how you can customize the configuration of a job for any platform. You may also configure jobs to run on multiple platforms in a single [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
-## Linux with Docker
+
+CircleCI を使用して、Linux、Android、iOS 上で動作するアプリケーションをビルド、テスト、およびデプロイすることができます。 以下のスニペットでは、各プラットフォーム用にジョブの設定をカスタマイズする方法に重点を置いて解説しています。 1つの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを設定することも可能です。
+
+## Linux と Docker
 
 {% raw %}
 
@@ -18,20 +20,20 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # 最初の1行目に指定されたイメージがプライマリコンテナのインスタンスとなります。 ジョブのコマンドはこのコンテナ内で実行されます。
+    # プライマリコンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
-    # 2 番目に指定されたイメージがセカンダリコンテナのインスタンスとなります。このインスタンスは、ローカルホスト上のプライマリコンテナのポートを通じて共通ネットワークで動作します。
+    # セカンダリコンテナは、2番目にリストしたイメージのインスタンスです。プライマリコンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
       - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
-          name: Update npm
+          name: npm を更新
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Install npm wee
+          name: npm wee をインストール
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -41,11 +43,11 @@ jobs:
 
 {% endraw %}
 
-## Linux with Machine
+## Linux と Machine
 
-**Note**: Use of machine may require additional fees in a future pricing update.
+**メモ：**将来の料金改定では、Machine の使用に追加料金が必要になる可能性があります。
 
-To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
+デフォルトのマシンイメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
 
 ```yaml
 version: 2
@@ -72,14 +74,14 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します。
 #         command: sudo chmod +x ./gradlew
       - run:
-          name: Download Dependencies
+          name: 依存関係をダウンロード
           command: ./gradlew androidDependencies
 ```
 
-{% endraw %}          
+{% endraw %}
 
 ## iOS
 
@@ -90,7 +92,7 @@ jobs:
         steps:
           ...
           - run:
-              name: Run tests
+              name: テストを実行
               command: fastlane scan
               environment:
                 SCAN_DEVICE: iPhone 6
@@ -98,6 +100,6 @@ jobs:
     
     
 
-## See Also
+## 関連項目
 
-Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
+上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
