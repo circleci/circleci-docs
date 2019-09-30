@@ -1,62 +1,63 @@
 ---
 layout: classic-docs
-title: "Orbs, Jobs, Steps, and Workflows"
-short-title: "Orbs, Jobs, Steps, and Workflows"
-description: "Description of Jobs and Steps"
+title: "Orbs、ジョブ、ステップ、ワークフロー"
+short-title: "Orbs、ジョブ、ステップ、ワークフロー"
+description: "ジョブとステップの説明"
 categories:
   - migration
 order: 2
 ---
-The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) keys for Orbs.
 
-- TOC
+ここでは、ジョブ、ステップ、ワークフローに加え、Orbs に使用される新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーの概要について説明します。
+
+- 目次
 {:toc}
 
-## Orbs Overview
+## Orbs の概要
 
-Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design.
+Orbs は、名前に基づいてインポートするか、インラインで設定するコンフィグのパッケージです。コンフィグを簡略化し、プロジェクト内またはプロジェクト間でコンフィグを共有および再利用するために使用されます。 コンフィグで Orbs を使用する方法と Orb 設計の概要については、「[Orbs を使う]({{ site.baseurl }}/ja/2.0/using-orbs/)」を参照してください。
 
-## Jobs Overview
+## ジョブの概要
 
-Jobs are a collection of Steps. All of the steps in the job are executed in a single unit which consumes a CircleCI container from your plan while it's running.
+ジョブはステップの集まりです。 ジョブ内のステップはすべて 1単位として実行され、その際にプランから CircleCI コンテナが 1つ消費されます。
 
-Jobs and Steps enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
+ジョブとステップはきめ細かく制御できます。ワークフローのフレームワークが提供され、各フェーズでのステータスを確認できるため、高頻度のフィードバックが可能になります。 下図はジョブ間のデータフローを表したものです。 ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。 キャッシュは、異なるワークフロービルドにある同じジョブ間でデータを維持します。 アーティファクトは、ワークフローの終了後にデータを維持します。
 
-![header]({{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
 
-In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases, or the `macos` executor.
+2.0 のジョブは、最近使用された `machine` Executor の実行を再利用できる `machine` Executor、テストや必要なサービス (データベースなど) を実行するように Docker コンテナを構成できる `docker` Executor、または `macos` Executor を使用して実行できます。
 
-When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start. Any public Docker images can be used with the `docker` executor.
+`docker` Executor を使用する場合、起動するコンテナは、`docker:` キーの下にリストされるコンテナイメージで指定されます。 `docker` Executor と共に任意のパブリック Docker イメージも使用できます。
 
-See the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about `docker` versus `machine` use cases and comparisons.
+`docker` Executor と `machine` Executor の用途と違いについては、[コンテナイメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
-## Steps Overview
+## ステップの概要
 
-Steps are a collection of executable commands which are run during a job, the `checkout:` key is required to checkout your code and a key for `run:` enables addition of arbitrary, multi-line shell command scripting. In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `deploy:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps.
+ステップは、ジョブ中に実行される実行可能なコマンドの集まりです。コードをチェックアウトするには `checkout:` キーを指定する必要があります。また、`run:` キーを使用すると、複数行にわたる任意のシェルコマンドスクリプトを追加できます。 `run:` キーに加えて、`save_cache:`、`restore_cache:`、`deploy:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` などのキーがステップの下にネストされます。
 
-## Sample Configuration with Imported Orb
+## インポートした Orb を使用した設定例
 
 ```yaml
- version: 2.1
+version: 2.1
 
- orbs:
-   aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
+orbs:
+  aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
 
- workflows:
-   build-test-deploy:
-     jobs:
+workflows:
+  build-test-deploy:
+    jobs:
 
-       - deploy2s3:
-         steps:
-           - aws-s3/sync: #invokes the sync command declared in the s3 orb
-               from: .
-              to: "s3://mybucket_uri"
-              overwrite: true
+      - deploy2s3: # a sample job that would be defined above.
+          steps:
+            - aws-s3/sync: #invokes the sync command declared in the s3 orb
+                from: .
+                to: "s3://mybucket_uri"
+                overwrite: true
 ```
 
-## Sample Configuration with Parallel Jobs
+## 並列ジョブの設定例
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
 {% raw %}
 version: 2
@@ -80,10 +81,11 @@ version: 2
         jobs:
           - build
           - test
-{% endraw %}
-This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+    
 
-## See Also
+{% endraw %} 上記は並列ジョブワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については「[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
 
-- [Configuration Reference Jobs Key]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+## 関連項目
+
+- [設定リファレンス：jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
+- [設定リファレンス：steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)
