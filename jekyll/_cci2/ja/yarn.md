@@ -1,22 +1,27 @@
 ---
 layout: classic-docs
-title: "Using Yarn (the npm replacement) on CircleCI"
-short-title: "Yarn Package Manager"
+title: "Using Yarn (an NPM alternative) on CircleCI"
+short-title: "Yarn パッケージマネージャー"
 categories:
   - how-to
-description: "How to use the Yarn package manager on CircleCI."
+description: "CircleCI での Yarn パッケージマネージャーの使用方法"
 ---
-[Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript. The packages it installs can be cached. This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
 
-## Using Yarn in CircleCI
+[Yarn](https://yarnpkg.com/) は、JavaScript 用のオープンソースパッケージマネージャーです。 Yarn によってインストールされるパッケージは、キャッシュすることができます。 これによってビルドを高速化できますが、さらに重要なメリットとして、ネットワーク接続に関するエラーも低減できます。
 
-Yarn might already be installed in your build environment if you are using the [`docker` executor](https://circleci.com/docs/2.0/executor-types/#using-docker). With [Pre-built CircleCI Docker Images](https://circleci.com/docs/2.0/circleci-images/), the NodeJS image (`circleci/node`) already has Yarn preinstalled. If you are using one of the other language images such as `circleci/python` or `circleci/ruby`, there are two [image variants](https://circleci.com/docs/2.0/circleci-images/#image-variants) that will include Yarn as well as NodeJS. These would be the `-node` and `-node-browsers` image variants. For example, using the Docker image `circleci/python:3-node` will give you a Python build environment with Yarn and NodeJS installed.
+## CircleCI での Yarn の使用方法
 
-If you're using your own Docker image base or the `macos` or `machine` executors, you can install Yarn by following the official instructions from [Yarn Docs](https://yarnpkg.com/lang/en/docs/install/).
+[`docker` Executor](https://circleci.com/docs/ja/2.0/executor-types/#docker-を使用する) を使用している場合は、ビルド環境に既に Yarn がインストールされている可能性があります。 [CircleCI が提供しているビルド済み Docker イメージ](https://circleci.com/docs/ja/2.0/circleci-images/)では、Node.js イメージ (`circleci/node`) に Yarn がプリインストールされています。 `circleci/python`、`circleci/ruby` などの他の言語イメージを使用している場合は、Yarn と Node.js を含む 2つの[イメージバリアント](https://circleci.com/docs/ja/2.0/circleci-images/#言語イメージ)があります。 `-node` と `-node-browsers` のイメージバリアントです。 たとえば、Docker イメージ `circleci/python:3-node` を使用すると、Yarn と Node.js がインストールされた Python ビルド環境が提供されます。
 
-## Caching
+If you're using your own Docker image base or the `macos`, `windows` or `machine` executors, you can install Yarn by following the official instructions from [Yarn Docs](https://yarnpkg.com/lang/en/docs/install/). The Yarn Docs provide several installation methods depending on what machine execturo you might be using. For example, you can install on any unix-like environment using the following curl command.
 
-Yarn packages can be cached to improve CI build times. Here's an example:
+```sh
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
+
+## キャッシュ
+
+Yarn パッケージをキャッシュして、CI ビルド時間を短縮できます。 以下に例を示します。
 
 {% raw %}
 ```yaml
@@ -38,6 +43,6 @@ Yarn packages can be cached to improve CI build times. Here's an example:
 ```
 {% endraw %}
 
-## See Also
+## 関連項目
 
-[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
